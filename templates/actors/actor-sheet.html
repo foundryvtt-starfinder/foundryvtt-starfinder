@@ -1,0 +1,41 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <section class="sheet-upper">
+        <header class="sheet-header">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name" />
+            </h1>
+
+            <div class="charlevel">
+                <div class="level {{#if disableExperience}}noxp{{/if}}">
+                    <label>Level </label>
+                    <input name="data.details.level.value" type="text" value="{{data.details.level.value}}" data-dtype="Number" placeholder="1" />
+                </div>
+                {{#unless disableExperience}}
+                <div class="xpbar">
+                    <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
+                </div>
+                <div class="experience">
+                    <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}" data-dtype="Number" placeholder="0" />
+                    <span class="max" data-wpad="14"> / {{data.details.xp.max}}</span>
+                </div>
+                {{/unless}}
+            </div>
+        </header>
+
+        <img class="sheet-profile sidebar" src="{{actor.img}}" title="{{actor.name}}" height="220" width="220" data-edit="img" />
+
+        <section class="sheet-showcase content">
+            <ul class="details">
+                <li class="character-detail">
+                    <input name="data.details.race.value" type="text" value="{{data.details.race.value}}" placeholder="Race"/>
+                </li>
+                <li class="character-detail">
+                    <input name="data.details.background.value" type="text" value="{{data.details.background.value}}" placeholder="Background"/>
+                </li>
+                <li class="character-detail">
+                    <input name="data.details.alignment.value" type="text" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
+                </li>
+            </ul>
+        </section>
+    </section>
+</form>
