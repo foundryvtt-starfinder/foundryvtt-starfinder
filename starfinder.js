@@ -275,7 +275,7 @@ Hooks.on("canvasInit", () => {
     };
 });
 /**
- * Extend the base Actor class to implement additional logic specialized for Starfinder
+ * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
  */
 class ActorStarfinder extends Actor {
     /**
@@ -297,9 +297,23 @@ class ActorStarfinder extends Actor {
             abl.mod = Math.floor((abl.value - 10) / 2);
         }
 
+        const init = data.attributes.init;
+        init.mod = data.abilities.dex.mod;
+        init.bonus = init.value + (getProperty(flags, "starfinder.improvedInititive") ? 4 : 0);
+        init.total = init.mod + init.bonus;
+
+        data.attributes.eac.min = 10 + data.abilities.dex.mod;
+        data.attributes.kac.min = 10 + data.abilities.dex.mod;
+        
         return actorData;
     }
 
+    /**
+     * Prepare the character's data.
+     * 
+     * @param {Object} data The data to prepare
+     * @private
+     */
     _prepareCharacterData(data) {
         data.details.level.value = parseInt(data.details.level.value);
         data.details.xp.max = this.getLevelExp(data.details.level.value || 1);
@@ -308,6 +322,12 @@ class ActorStarfinder extends Actor {
         data.details.xp.pct = Math.min(Math.round((data.details.xp.value - prior) * 100 / req), 99.5);
     }
 
+    /**
+     * Prepare the NPC's data.
+     * 
+     * @param {Object} data The NPC's data to prepare
+     * @private
+     */
     _prepareNPCData(data) {
         data.details.cr.value = parseFloat(data.details.cr.value || 0);
         data.details.xp.value = this.getCRExp(data.details.cr.value);
