@@ -24,7 +24,13 @@ Hooks.once("init", () => {
 
     // Preload templates
     loadTemplates([
-        "public/systems/starfinder/templates/actors/actor-sheet.html"
+        "public/systems/starfinder/templates/actors/actor-sheet.html",
+        "public/systems/starfinder/templates/actors/actor-attributes.html",
+        "public/systems/starfinder/templates/actors/actor-abilities.html",
+        "public/systems/starfinder/templates/actors/actor-biography.html",
+        "public/systems/starfinder/templates/actors/actor-skills.html",
+        "public/systems/starfinder/templates/actors/actor-traits.html",
+        "public/systems/starfinder/templates/actors/actor-classes.html"
     ]);
 });
 

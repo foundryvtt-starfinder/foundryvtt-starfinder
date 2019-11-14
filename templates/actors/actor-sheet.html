@@ -36,6 +36,37 @@
                     <input name="data.details.alignment.value" type="text" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
                 </li>
             </ul>
+
+            {{> public/systems/starfinder/templates/actors/actor-attributes.html}}
+
+            <div class="statuses">PLACEHOLDER</div>
+
+        </section>
+    </section>
+
+    <nav class="sheet-navigation">
+        <nav class="sheet-tabs tabs sidebar" data-group="sidebar">
+            <a class="item active" data-tab="abilities">Abilities</a>
+            <a class="item" data-tab="skills">Skills</a>
+            <a class="item" data-tab="traits">Traits</a>
+        </nav>
+        <nav class="sheet-tabs tabs content" data-group="primary">
+            <a class="item" data-tab="inventory">Inventory</a>
+            <a class="item" data-tab="spellbook">Spellbook</a>
+            <a class="item" data-tab="feats">Features</a>
+            <a class="item active" data-tab="biography">Biography</a>
+        </nav>
+    </nav>
+
+    <section class="sheet-lower">
+        <section class="sheet-sidebar sidebar">
+            <div class="tab abilities" data-group="sidebar" data-tab="abilities">
+                {{> public/systems/starfinder/templates/actors/actor-abilities.html}}
+                {{> public/systems/starfinder/templates/actors/actor-classes.html}}
+            </div>
+            <div class="tab skills" data-group="sidebar" data-tab="skills">
+                {{> public/systems/starfinder/templates/actors/actor-skills.html}}
+            </div>
         </section>
     </section>
 </form>

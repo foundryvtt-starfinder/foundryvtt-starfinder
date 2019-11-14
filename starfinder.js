@@ -248,7 +248,13 @@ Hooks.once("init", () => {
 
     // Preload templates
     loadTemplates([
-        "public/systems/starfinder/templates/actors/actor-sheet.html"
+        "public/systems/starfinder/templates/actors/actor-sheet.html",
+        "public/systems/starfinder/templates/actors/actor-attributes.html",
+        "public/systems/starfinder/templates/actors/actor-abilities.html",
+        "public/systems/starfinder/templates/actors/actor-biography.html",
+        "public/systems/starfinder/templates/actors/actor-skills.html",
+        "public/systems/starfinder/templates/actors/actor-traits.html",
+        "public/systems/starfinder/templates/actors/actor-classes.html"
     ]);
 });
 
@@ -295,6 +301,11 @@ class ActorStarfinder extends Actor {
         // Ability modifiers and saves
         for (let abl of Object.values(data.abilities)) {
             abl.mod = Math.floor((abl.value - 10) / 2);
+        }
+
+        for (let skl of Object.values(data.skills)) {
+            skl.value = parseFloat(skl.value || 0);
+            skl.mod = data.abilities[skl.ability].mod;
         }
 
         const init = data.attributes.init;
@@ -366,7 +377,43 @@ class ActorSheetStarfinder extends ActorSheet {
     getData() {
         const sheetData = super.getData();
 
+        for (let skl of Object.values(sheetData.data.skills)) {
+            skl.ability = sheetData.data.abilities[skl.ability].label.substring(0, 3);
+            //skl.icon = this._getClassSkillIcon(skl.value);
+            
+        }
+
+        sheetData["actorSizes"] = CONFIG.actorSizes;
+
         return sheetData;
+    }
+
+    /**
+     * Activate event listeners using the prepared sheet HTML
+     * 
+     * @param {HTML} html The prepared HTML object ready to be rendered into the DOM
+     */
+    activateListeners(html) {
+        super.activateListeners(html);
+
+        html.find('[data-wpad]').each((i, e) => {
+            let text = e.tagName === "INPUT" ? e.value : e.innerText,
+                w = text.length * parseInt(e.getAttribute("data-wpad")) / 2;
+            e.setAttribute("style", "flex: 0 0 " + w + "px;");
+        });
+
+        html.find('.tabs').each((_, el) => {
+            let tabs = $(el),
+                group = el.getAttribute("data-group"),
+                initial = this.actor.data.flags[`_sheetTab-${group}`];
+            new Tabs(tabs, {
+                initial: initial,
+                callback: clicked => this.actor.data.flags[`_sheetTab-${group}`] = clicked.attr("data-tab")
+            });
+        });
+        
+        if (!this.options.editable) return;
+        
     }
 }
 class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
@@ -390,7 +437,26 @@ class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     getData() {
         const sheetData = super.getData();
 
+        let res = sheetData.data.resources;
+        if (res.primary && res.primary.value === 0) delete res.primary.value;
+        if (res.primary && res.primary.max === 0) delete res.primary.max;
+        if (res.secondary && res.secondary.value === 0) delete res.secondary.value;
+        if (res.secondary && res.secondary.max === 0) delete res.secondary.max;
+
+        sheetData["disableExperience"] = game.settings.get("starfinder", "disableExperienceTracking");
+
         return sheetData;
+    }
+
+    /**
+     * Activate event listeners using the prepared sheet HTML
+     * 
+     * @param {HTML} html The prepared HTML object ready to be rendered into the DOM
+     */
+    activateListeners(html) {
+        super.activateListeners(html);
+
+        if (!this.options.editable) return;
     }
 }
 

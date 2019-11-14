@@ -21,6 +21,11 @@ class ActorStarfinder extends Actor {
             abl.mod = Math.floor((abl.value - 10) / 2);
         }
 
+        for (let skl of Object.values(data.skills)) {
+            skl.value = parseFloat(skl.value || 0);
+            skl.mod = data.abilities[skl.ability].mod;
+        }
+
         const init = data.attributes.init;
         init.mod = data.abilities.dex.mod;
         init.bonus = init.value + (getProperty(flags, "starfinder.improvedInititive") ? 4 : 0);

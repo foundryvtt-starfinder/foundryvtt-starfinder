@@ -1,0 +1,158 @@
+<div class="primary-attributes">
+    <div class="attribute">
+        <h4 class="attribute-name">Hit Points</h4>
+        <div class="attribute-value flexrow">
+            <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
+                   data-dtype="{{data.attributes.hp.type}}" placeholder="10"/>
+            <span class="flex0"> / </span>
+            <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
+                   data-dtype="{{data.attributes.hp.type}}" placeholder="10"/>
+        </div>
+        {{!-- <footer class="attribute-footer">
+            <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+Temp"
+                   value="{{data.attributes.hp.temp}}" data-dtype="{{data.attributes.hp.type}}"/>
+            <input name="data.attributes.hp.tempmax" type="text" class="temphp" placeholder="+Max"
+                   value="{{data.attributes.hp.tempmax}}" data-dtype="{{data.attributes.hp.type}}"/>
+        </footer> --}}
+    </div>
+
+    <div class="attribute">
+        <h4 class="attribute-name">Stamina Points</h4>
+        <div class="attribute-value flexrow">
+            <input name="data.attributes.sp.value" type="text" value="{{data.attributes.sp.value}}"
+                   data-dtype="{{data.attributes.sp.type}}" placeholder="10" />
+            <span class="flex0"> / </span>
+            <input name="data.attributes.sp.max" type="text" value="{{data.attributes.sp.max}}"
+                   data-dtype="{{data.attributes.sp.type}}" placeholder="10" />
+        </div>
+    </div>
+
+    <div class="attribute">
+        <h4 class="attribute-name">Resolve Points</h4>
+        <div class="attribute-value flexrow">
+            <input name="data.attributes.rp.value" type="text" value="{{data.attributes.rp.value}}"
+                   data-dtype="{{data.attributes.rp.type}}" placeholder="10" />
+            <span class="flex0"> / </span>
+            <input name="data.attributes.rp.max" type="text" value="{{data.attributes.rp.max}}"
+                   data-dtype="{{data.attributes.rp.type}}" placeholder="10" />
+        </div>
+    </div>
+
+    {{!-- <div class="attribute">
+        <h4 class="attribute-name">Proficiency</h4>
+        <div class="attribute-value flexrow">
+            <span>{{numberFormat data.attributes.prof.value decimals=0 sign=true}}</span>
+        </div>
+        <footer class="attribute-footer">
+            <span>Spell DC {{data.attributes.spelldc.value}}</span>
+        </footer>
+    </div> --}}
+
+    <div class="attribute">
+        <h4 class="attribute-name">Initiative</h4>
+        <div class="attribute-value flexrow">
+            <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
+        </div>
+        <footer class="attribute-footer">
+            <span>Modifier</span>
+            <input name="data.attributes.init.value" type="text" placeholder="0"
+                   data-dtype="{{data.attributes.init.type}}"
+                   value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
+        </footer>
+    </div>
+</div>
+
+<div class="primary-attributes">
+    {{!-- <div class="attribute">
+        <h4 class="attribute-name">Hit Dice</h4>
+        <div class="attribute-value flexrow">
+            <input name="data.attributes.hd.value" type="text" placeholder="1"
+                   value="{{data.attributes.hd.value}}" data-dtype="{{data.attributes.hd.type}}"/>
+            <span class="flex0"> / </span>
+            <span>{{data.details.level.value}}</span>
+        </div>
+        <footer class="attribute-footer">
+            <a class="rest short-rest">S. Rest</a>
+            <a class="rest long-rest">L. Rest</a>
+        </footer>
+    </div> --}}
+
+    <div class="attribute">
+        <h4 class="attribute-name">Energy AC</h4>
+        <div class="attribute-value flexrow">
+            <input name="data.attributes.eac.value" type="text" value="{{data.attributes.eac.value}}"
+                   data-dtype="{{data.attributes.eac.type}}" placeholder="10"/>
+        </div>
+        <footer class="attribute-footer">
+            <span>Base AC {{data.attributes.eac.min}}</span>
+        </footer>
+    </div>
+
+    <div class="attribute">
+        <h4 class="attribute-name">Kinetic AC</h4>
+        <div class="attribute-value flexrow">
+            <input name="data.attributes.kac.value" type="text" value="{{data.attributes.kac.value}}"
+                   data-dtype="{{data.attributes.kac.type}}" placeholder="10"/>
+        </div>
+        <footer class="attribute-footer">
+            <span>Base AC {{data.attributes.kac.min}}</span>
+        </footer>
+    </div>
+
+    <div class="attribute">
+        <h4 class="attribute-name">
+            <input name="data.resources.primary.label" type="text" class="resource-label" placeholder="Primary"
+                   value="{{data.resources.primary.label}}" data-dtype="String" />
+        </h4>
+       <div class="attribute-value flexrow">
+           <input name="data.resources.primary.value" type="text" value="{{data.resources.primary.value}}"
+                  data-dtype="Number" placeholder="0"/>
+           <span class="flex0"> / </span>
+           <input name="data.resources.primary.max" type="text" value="{{data.resources.primary.max}}"
+                  data-dtype="Number" placeholder="0"/>
+       </div>
+        <footer class="attribute-footer flexrow recharge">
+            <span>SR</span>
+            <input name="data.resources.primary.sr" type="checkbox" data-dtype="Boolean"
+                   {{checked data.resources.primary.sr}}/>
+            <span>LR</span>
+            <input name="data.resources.primary.lr" type="checkbox" data-dtype="Boolean"
+                   {{checked data.resources.primary.lr}}/>
+        </footer>
+    </div>
+
+    {{!-- <div class="attribute">
+        <h4 class="attribute-name">
+            <input name="data.resources.secondary.label" type="text" class="resource-label"
+                   placeholder="Secondary" value="{{data.resources.secondary.label}}" data-dtype="String"/>
+        </h4>
+       <div class="attribute-value flexrow">
+           <input name="data.resources.secondary.value" type="text" value="{{data.resources.secondary.value}}"
+                  data-dtype="Number" placeholder="0"/>
+           <span class="flex0"> / </span>
+           <input name="data.resources.secondary.max" type="text" value="{{data.resources.secondary.max}}"
+                  data-dtype="Number" placeholder="0"/>
+       </div>
+        <footer class="attribute-footer flexrow recharge">
+            <span>SR</span>
+            <input name="data.resources.secondary.sr" type="checkbox" data-dtype="Boolean"
+                   {{checked data.resources.secondary.sr}}/>
+            <span>LR</span>
+            <input name="data.resources.secondary.lr" type="checkbox" data-dtype="Boolean"
+                   {{checked data.resources.secondary.lr}}/>
+        </footer>
+    </div> --}}
+
+    <div class="attribute">
+        <h4 class="attribute-name">Speed</h4>
+        <div class="attribute-value flexrow">
+            <span class="flex0">  </span>
+            <input name="data.attributes.speed.value" type="text" value="{{data.attributes.speed.value}}"
+                   data-dtype="{{data.attributes.speed.type}}" placeholder="0"/>
+        </div>
+        <footer class="attribute-footer">
+            <input type="text" class="speed" name="data.attributes.speed.special" placeholder="Swim / Fly"
+                   data-dtype="{{data.attributes.speed.type}}" value="{{data.attributes.speed.special}}"/>
+        </footer>
+    </div>
+</div>
