@@ -4,7 +4,8 @@
         <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>
         <a class="skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
         <h4 class="skill-name rollable">{{skill.label}}</h4>
-        <span class="skill-ability">{{skill.ability}}</span>
+        <input class="skill-ranks" type="text" name="data.skills.{{s}}.ranks" value="{{skill.ranks}}" data-dtype="Number" />
+        <span class="skill-ability">{{skill.ability}}</span>        
         <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
     </li>
 {{/each}}

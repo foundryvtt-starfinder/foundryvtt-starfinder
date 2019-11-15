@@ -305,7 +305,9 @@ class ActorStarfinder extends Actor {
 
         for (let skl of Object.values(data.skills)) {
             skl.value = parseFloat(skl.value || 0);
-            skl.mod = data.abilities[skl.ability].mod;
+            let classSkill = skl.value;
+            let hasRanks = skl.ranks > 0;
+            skl.mod = data.abilities[skl.ability].mod + skl.ranks + (hasRanks ? classSkill : 0);
         }
 
         const init = data.attributes.init;
@@ -315,6 +317,22 @@ class ActorStarfinder extends Actor {
 
         data.attributes.eac.min = 10 + data.abilities.dex.mod;
         data.attributes.kac.min = 10 + data.abilities.dex.mod;
+
+        const map = {
+            "dr": CONFIG.damageTypes,
+            "di": CONFIG.damageTypes,
+            "dv": CONFIG.damageTypes,
+            "ci": CONFIG.damageTypes,
+            "languages": CONFIG.languages
+        };
+
+        for (let [t, choices] of Object.entries(map)) {
+            let trait = data.traits[t];
+
+            if (!(trait.value instanceof Array)) {
+                trait.value = TraitSelectorStarfinder._backCompat(trait.value, choices);
+            }
+        }
         
         return actorData;
     }
@@ -369,6 +387,95 @@ class ActorStarfinder extends Actor {
 
 CONFIG.Actor.entityClass = ActorStarfinder;
 
+/**
+ * A specialized form used to select damage or condition types which appl to an Actor
+ * 
+ * @type {FormApplication}
+ */
+class TraitSelectorStarfinder extends FormApplication {
+    static get defaultOptions() {
+        const options = super.defaultOptions;
+
+        options.id = "trait-selector";
+        options.classes = ["starfinder"];
+        options.title = "Actor Trait Selection";
+        options.template = "public/systems/starfinder/templates/actors/trait-selector.html";
+        options.width = 200;
+
+        return options;
+    }
+
+    /**
+     * Return a reference to the target attribute
+     * 
+     * @type {String}
+     */
+    get attribute() {
+        return this.options.name;
+    }
+
+    /**
+     * Provide data to the HTML template for rendering
+     * 
+     * @returns {Object}
+     */
+    getData() {
+        let attr = getProperty(this.object.data, this.attribute);
+        if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
+
+        const choices = duplicate(this.options.choices);
+        for (let [k, v] of Object.entries(choices)) {
+            choices[k] = {
+                label: v,
+                chosen: attr.value.includes(k)
+            };
+        }
+
+        return {
+            choices: choices,
+            custom: attr.custom
+        };
+    }
+
+    /**
+     * Support backwards compatability for old-style string separated traits
+     * 
+     * @param {String} current The current value
+     * @param {Array} choices The choices
+     * @returns {Array}
+     * @private
+     */
+    static _backCompat(current, choices) {
+        if (!current || current.length === 0) return [];
+        current = current.split(/[\s,]/).filter(t => !!t);
+        return current.map(val => {
+            for (let [k,v] of Object.entries(choices)) {
+                if (val === v) return k;
+            }
+            return null;
+        }).filter(val => !!val);
+    }
+
+    /**
+     * Update the Actor object with new trait data processed from the form
+     * 
+     * @param {Event} event The event that triggers the update
+     * @param {Object} formData The data from the form
+     * @private
+     */
+    _updateObject(event, formData) {
+        const choices = [];
+
+        for (let [k, v] of Object.entries(formData)) {
+            if (v) choices.push(k);
+        }
+
+        this.object.update({
+            [`${this.attribute}.value`]: choices,
+            [`${this.attribute}.custom`]: formData.custom
+        });
+    }
+}
 class ActorSheetStarfinder extends ActorSheet {
     get actorType() {
         return this.actor.data.type;
@@ -379,11 +486,12 @@ class ActorSheetStarfinder extends ActorSheet {
 
         for (let skl of Object.values(sheetData.data.skills)) {
             skl.ability = sheetData.data.abilities[skl.ability].label.substring(0, 3);
-            //skl.icon = this._getClassSkillIcon(skl.value);
+            skl.icon = this._getClassSkillIcon(skl.value);
             
         }
 
         sheetData["actorSizes"] = CONFIG.actorSizes;
+        this._prepareTraits(sheetData.data["traits"]);
 
         return sheetData;
     }
@@ -414,6 +522,68 @@ class ActorSheetStarfinder extends ActorSheet {
         
         if (!this.options.editable) return;
         
+        html.find('.skill-proficiency').on("click contextmenu", this._onCycleClassSkill.bind(this));
+    }
+
+    _prepareTraits(traits) {
+        const map = {
+            "dr": CONFIG.damageTypes,
+            "di": CONFIG.damageTypes,
+            "dv": CONFIG.damageTypes,
+            "ci": CONFIG.damageTypes,
+            "languages": CONFIG.languages
+        };
+
+        for (let [t, choices] of Object.entries(map)) {
+            const trait = traits[t];
+            trait.selected = trait.value.reduce((obj, t) => {
+                obj[t] = choices[t];
+                return obj;
+            }, {});
+
+            if (traits.custom) trait.selected["custom"] = trait.custom;
+        }
+    }
+
+    /**
+     * handle cycling whether a skill is a class skill or not
+     * 
+     * @param {Event} event A click or contextmenu event which triggered the handler
+     * @private
+     */
+    _onCycleClassSkill(event) {
+        event.preventDefault();
+
+        const field = $(event.currentTarget).siblings('input[type="hidden"]');
+
+        const level = parseFloat(field.val());
+        const levels = [0, 3];
+
+        let idx = levels.indexOf(level);
+
+        if (event.type === "click") {
+            field.val(levels[(idx === levels.length - 1) ? 0 : idx + 1]);
+        } else if (event.type === "contextmenu") {
+            field.val(levels[(idx === 0) ? levels.length - 1: idx - 1]);
+        }
+
+        this._onSubmit(event);
+    }
+
+    /**
+     * Get The font-awesome icon used to display if a skill is a class skill or not
+     * 
+     * @param {Number} level Flag that determines if a skill is a class skill or not
+     * @returns {String}
+     * @private
+     */
+    _getClassSkillIcon(level) {
+        const icons = {
+            0: '<i class="far fa-circle"></i>',
+            3: '<i class="fas fa-check"></i>'
+        };
+
+        return icons[level];
     }
 }
 class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {

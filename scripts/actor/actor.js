@@ -23,7 +23,9 @@ class ActorStarfinder extends Actor {
 
         for (let skl of Object.values(data.skills)) {
             skl.value = parseFloat(skl.value || 0);
-            skl.mod = data.abilities[skl.ability].mod;
+            let classSkill = skl.value;
+            let hasRanks = skl.ranks > 0;
+            skl.mod = data.abilities[skl.ability].mod + skl.ranks + (hasRanks ? classSkill : 0);
         }
 
         const init = data.attributes.init;
@@ -33,6 +35,22 @@ class ActorStarfinder extends Actor {
 
         data.attributes.eac.min = 10 + data.abilities.dex.mod;
         data.attributes.kac.min = 10 + data.abilities.dex.mod;
+
+        const map = {
+            "dr": CONFIG.damageTypes,
+            "di": CONFIG.damageTypes,
+            "dv": CONFIG.damageTypes,
+            "ci": CONFIG.damageTypes,
+            "languages": CONFIG.languages
+        };
+
+        for (let [t, choices] of Object.entries(map)) {
+            let trait = data.traits[t];
+
+            if (!(trait.value instanceof Array)) {
+                trait.value = TraitSelectorStarfinder._backCompat(trait.value, choices);
+            }
+        }
         
         return actorData;
     }
