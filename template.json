@@ -104,9 +104,9 @@
                     "value": "30 ft",
                     "special": ""
                 },
-                "spellcasting": {
+                "keyability": {
                     "type": "String",
-                    "label": "Spellcasting Ability"
+                    "label": "Key Ability Score"
                 }
             },
             "details": {
@@ -269,7 +269,8 @@
             "traits": {
                 "size": {
                     "type": "String",
-                    "label": "Size"
+                    "label": "Size",
+                    "value": "med"
                 },
                 "senses": {
                     "type": "String",
@@ -277,23 +278,28 @@
                 },
                 "languages": {
                     "type": "Array",
-                    "label": "Known Languages"
+                    "label": "Known Languages",
+                    "value": []
                 },
                 "di": {
                     "type": "Array",
-                    "label": "Damage Immunities"
+                    "label": "Damage Immunities",
+                    "value": []
                 },
                 "dr": {
                     "type": "Array",
-                    "label": "Damage Resistances"
+                    "label": "Damage Resistances",
+                    "value": []
                 },
                 "dv": {
                     "type": "Array",
-                    "label": "Damage Vulnerabilities"
+                    "label": "Damage Vulnerabilities",
+                    "value": []
                 },
                 "ci": {
                     "type": "Array",
-                    "label": "Condition Immunities"
+                    "label": "Condition Immunities",
+                    "value": []
                 }
             },
             "currency": {
@@ -363,6 +369,18 @@
                     "max": 1300
                 }
             },
+            "traits": {
+                "weaponProf": {
+                    "type": "Array",
+                    "value": [],
+                    "custom": ""
+                },
+                "armorProf": {
+                    "type": "Array",
+                    "value": [],
+                    "custom": ""
+                }
+            },
             "resources": {
                 "primary": {
                     "type": "String",
@@ -397,6 +415,61 @@
                 "source": {
                     "type": "String",
                     "label": "Source Location"
+                }
+            }
+        },
+        "starship": {
+            "details": {
+                "tier": {
+                    "type": "Number",
+                    "value": 1,
+                    "min": 1
+                },
+                "model": {
+                    "type": "String",
+                    "value": ""
+                },
+                "frame": {
+                    "type": "String",
+                    "value": ""
+                }
+            },
+            "attributes": {
+                "maneuverability": {
+                    "type": "String",
+                    "value": "average"
+                },
+                "drift": {
+                    "type": "Number",
+                    "value": 0
+                },
+                "ac": {
+                    "type": "Number",
+                    "label": "Armor Class",
+                    "value": 10,
+                    "min": 3
+                },
+                "tl": {
+                    "type": "Number",
+                    "label": "Target Lock",
+                    "value": 10,
+                    "min": 3
+                },
+                "hp": {
+                    "type": "Number",
+                    "label": "Hull Points",
+                    "value": 1
+                },
+                "dt": {
+                    "type": "Number",
+                    "value": 0,
+                    "label": "Damage Threshold"
+                },
+                "ct": {
+                    "type": "Number",
+                    "label": "Critical Threshold",
+                    "value": 10,
+                    "min":3
                 }
             }
         }
