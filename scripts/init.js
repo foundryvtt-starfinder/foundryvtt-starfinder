@@ -30,7 +30,20 @@ Hooks.once("init", () => {
         "public/systems/starfinder/templates/actors/actor-biography.html",
         "public/systems/starfinder/templates/actors/actor-skills.html",
         "public/systems/starfinder/templates/actors/actor-traits.html",
-        "public/systems/starfinder/templates/actors/actor-classes.html"
+        "public/systems/starfinder/templates/actors/actor-classes.html",
+
+        "public/systems/starfinder/templates/items/class-sidebar.html",
+        "public/systems/starfinder/templates/items/consumable-details.html",
+        "public/systems/starfinder/templates/items/consumable-sidebar.html",
+        "public/systems/starfinder/templates/items/equipment-details.html",
+        "public/systems/starfinder/templates/items/equipment-sidebar.html",
+        "public/systems/starfinder/templates/items/feat-details.html",
+        "public/systems/starfinder/templates/items/feat-sidebar.html",
+        "public/systems/starfinder/templates/items/spell-details.html",
+        "public/systems/starfinder/templates/items/spell-sidebar.html",
+        "public/systems/starfinder/templates/items/tool-sidebar.html",
+        "public/systems/starfinder/templates/items/weapon-details.html",
+        "public/systems/starfinder/templates/items/weapon-sidebar.html"
     ]);
 });
 
@@ -45,7 +58,7 @@ Hooks.on("canvasInit", () => {
 
         let nDiagonal = Math.min(nx, ny),
             nStraight = Math.abs(ny - nx);
-        
+
         if (this.parent.diagonalRule === "555") {
             return (nStraight + nDiagonal) * canvas.scene.data.gridDistance;
         } else {

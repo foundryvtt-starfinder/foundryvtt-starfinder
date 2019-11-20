@@ -41,7 +41,9 @@ class ActorStarfinder extends Actor {
             "di": CONFIG.damageTypes,
             "dv": CONFIG.damageTypes,
             "ci": CONFIG.damageTypes,
-            "languages": CONFIG.languages
+            "languages": CONFIG.languages,
+            "weaponProf": CONFIG.weaponTypes,
+            "armorProf": CONFIG.armorTypes
         };
 
         for (let [t, choices] of Object.entries(map)) {

@@ -254,7 +254,20 @@ Hooks.once("init", () => {
         "public/systems/starfinder/templates/actors/actor-biography.html",
         "public/systems/starfinder/templates/actors/actor-skills.html",
         "public/systems/starfinder/templates/actors/actor-traits.html",
-        "public/systems/starfinder/templates/actors/actor-classes.html"
+        "public/systems/starfinder/templates/actors/actor-classes.html",
+
+        "public/systems/starfinder/templates/items/class-sidebar.html",
+        "public/systems/starfinder/templates/items/consumable-details.html",
+        "public/systems/starfinder/templates/items/consumable-sidebar.html",
+        "public/systems/starfinder/templates/items/equipment-details.html",
+        "public/systems/starfinder/templates/items/equipment-sidebar.html",
+        "public/systems/starfinder/templates/items/feat-details.html",
+        "public/systems/starfinder/templates/items/feat-sidebar.html",
+        "public/systems/starfinder/templates/items/spell-details.html",
+        "public/systems/starfinder/templates/items/spell-sidebar.html",
+        "public/systems/starfinder/templates/items/tool-sidebar.html",
+        "public/systems/starfinder/templates/items/weapon-details.html",
+        "public/systems/starfinder/templates/items/weapon-sidebar.html"
     ]);
 });
 
@@ -269,7 +282,7 @@ Hooks.on("canvasInit", () => {
 
         let nDiagonal = Math.min(nx, ny),
             nStraight = Math.abs(ny - nx);
-        
+
         if (this.parent.diagonalRule === "555") {
             return (nStraight + nDiagonal) * canvas.scene.data.gridDistance;
         } else {
@@ -280,6 +293,199 @@ Hooks.on("canvasInit", () => {
         }
     };
 });
+class ItemStarfinder extends Item {
+
+    /**
+     * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
+     * 
+     * @return {Promise}
+     */
+    async roll() {
+        const template = `public/systems/starfinder/templates/chat/${this.data.type}-card.html`;
+        const token = this.actor.token;
+        const templateData = {
+            actor: this.actor,
+            tokenId: token ? `${token.scene._id}.${token.id}` : null,
+            item: this.data,
+            data: this.getChatData()
+        };
+
+        const chatData = {
+            user: game.user._id,
+            type: CHAT_MESSAGE_TYPES.OTHER,
+            speaker: {
+                actor: this.actor._id,
+                token: this.actor.token,
+                alias: this.actor.name
+            }
+        };
+
+        let rollMode = game.settings.get('core', 'rollMode');
+        if (['gmroll', 'blindroll'].includes(rollMode)) chatData['whisper'] = ChatMessage.getWhisperIDs('GM');
+        if (rollMode === 'blindroll') chatData['blind'] = true;
+
+        chatData['content'] = await renderTemplate(template, templateData);
+
+        return ChatMessage.create(chatData, { dispalySheet: false });
+    }
+
+    /**
+     * Get the data object used by the chat dialog.
+     * 
+     * @param {Object} htmlOptions Optional html options
+     * @returns {Object}
+     */
+    getChatData(htmlOptions) {
+        console.log(this);
+        const data = this[`_${this.data.type}ChatData`]();
+        data.description.value = enrichHTML(data.description.value, htmlOptions);
+
+        return data;
+    }
+
+    static chatListeners(html) {
+        html.on('click', '.card-buttons button', ev => {
+            ev.preventDefault();
+
+            const button = $(ev.currentTarget),
+                  messageId = button.parents('.message').data('messageId'),
+                  senderId = game.messages.get(messageId).user._id,
+                  card = button.parents('.chat-card');
+
+            if (!game.user.isGM && game.user._id !== senderId) return;
+
+            let actor;
+            const tokenKey = card.data('tokenId');
+            if (tokenKey) {
+                const [sceneId, tokenId] = tokenKey.split('.');
+                let token;
+                if (sceneId === CanvasGradient.scene._id) token = canvas.tokens.get(tokenId);
+                else {
+                    const scene = game.scenes.get(sceneId);
+                    if (!scene) return;
+                    let tokenData = scene.data.tokens.find(t => t.id === Number(tokenId));
+                    if (tokenData) token = new Token(tokenData);
+                }
+                if (!token) return;
+                actor = Actor.fromToken(token);
+            } else actor = game.actors.get(card.data('actorId'));
+
+            if (!actor) return;
+            const itemId = Number(card.data('itemId'));
+            const item = actor.getOwnedItem(itemId);
+
+            //const action = button.data('action');
+        })
+    }
+
+    _weaponChatData() {
+        const data = duplicate(this.data.data);
+        const properties = [
+            data.range.value,
+            CONFIG.weaponTypes[data.weaponType.value],
+            data.proficient.value ? "" : "Not Proficient"
+        ];
+        data.properties = properties.filter(p => !!p);
+
+        return data;
+    }
+}
+
+CONFIG.Item.entityClass = ItemStarfinder;
+
+// Hooks.on("getChatLogEntryContext", (html, options) => {
+//     let canApply = li => canvas.tokens.controlledTokens.length && li.find('.dice-roll').length;
+//     options.push(
+//         {
+//             name: "Apply Damage",
+//             icon: '<i class="fas fa-user-minus"></i>',
+//             condition: canApply,
+//             callback: li => ActorStarfinder.apply()
+//         }
+//     );
+
+//     return options;
+// });
+
+class ItemSheetStarfinder extends ItemSheet {
+    static get defaultOptions() {
+        const options = super.defaultOptions;
+        options.width = 620;
+        options.height = 460;
+        options.classes = options.classes.concat(['starfinder', 'item']);
+        options.template = `public/systems/starfinder/templates/items/item-sheet.html`;
+        options.resizable = true;
+
+        return options;
+    }
+
+    getData() {
+        const data = super.getData();
+        data['abilities'] = game.system.template.actor.data.abilities;
+
+        const type = this.item.type;
+        mergeObject(data, {
+            type: type,
+            hasSidebar: true,
+            sidebarTemplate: () => `public/systems/starfinder/templates/items/${type}-sidebar.html`,
+            hasDetails: ["consumable", "equipment", "feat", "spell", "weapon"].includes(type),
+            detailsTemplate: () => `public/systems/starfinder/templates/items/${type}-details.html`
+        });
+
+        let dt = duplicate(CONFIG.damageTypes);
+        if (["spell", "feat"].includes(type)) mergeObject(dt, CONFIG.healingTypes);
+        data['damageTypes'] = dt;
+
+        if (type === 'consumable') {
+            data.consumableTypes = CONFIG.consumableTypes;
+        }
+        else if (type === 'spell') {
+            mergeObject(data, {
+                spellTypes: CONFIG.spellTypes,
+                spellSchools: CONFIG.spellSchools,
+                spellLevels: CONFIG.spellLevels
+            });
+        }
+        else if (this.item.type === 'weapon') {
+            data.weaponTypes = CONFIG.weaponTypes;
+            data.weaponProperties = this._formatWeaponProperties(data.data);
+        }
+        else if (type === 'feat') {
+            data.featTypes = CONFIG.featTypes;
+            data.featTags = [
+                data.data.target.value,
+                data.data.time.value
+            ].filter(t => !!t);
+        }
+        else if (type === "equipment") {
+            data.armorTypes = CONFIG.armorTypes;
+        }
+
+        return data;
+    }
+
+    _formatWeaponProperties(data) {
+        if (!data.properties.value) return [];
+        return data.properties.value.split(',').map(p => p.trim());
+    }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+
+        new Tabs(html.find('.tabs'), {
+            initial: this.item.data.flags["_sheetTab"],
+            callback: clicked => this.item.data.flags["_sheetTab"] = clicked.attr('data-tab')
+        });
+
+        html.find('input[type="checkbox"]').change(event => this._onSubmit(event));
+    }
+}
+
+Hooks.on('renderChatLog', (log, html, data) => ItemStarfinder.chatListeners(html));
+
+Items.unregisterSheet('core', ItemSheet);
+Items.registerSheet("starfinder", ItemSheetStarfinder, { makeDefault: true });
+
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
  */
@@ -323,7 +529,9 @@ class ActorStarfinder extends Actor {
             "di": CONFIG.damageTypes,
             "dv": CONFIG.damageTypes,
             "ci": CONFIG.damageTypes,
-            "languages": CONFIG.languages
+            "languages": CONFIG.languages,
+            "weaponProf": CONFIG.weaponTypes,
+            "armorProf": CONFIG.armorTypes
         };
 
         for (let [t, choices] of Object.entries(map)) {
@@ -487,11 +695,13 @@ class ActorSheetStarfinder extends ActorSheet {
         for (let skl of Object.values(sheetData.data.skills)) {
             skl.ability = sheetData.data.abilities[skl.ability].label.substring(0, 3);
             skl.icon = this._getClassSkillIcon(skl.value);
-            
+
         }
 
         sheetData["actorSizes"] = CONFIG.actorSizes;
         this._prepareTraits(sheetData.data["traits"]);
+
+        this._prepareItems(sheetData);
 
         return sheetData;
     }
@@ -519,10 +729,13 @@ class ActorSheetStarfinder extends ActorSheet {
                 callback: clicked => this.actor.data.flags[`_sheetTab-${group}`] = clicked.attr("data-tab")
             });
         });
-        
+
+        html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+
         if (!this.options.editable) return;
-        
+
         html.find('.skill-proficiency').on("click contextmenu", this._onCycleClassSkill.bind(this));
+        html.find('.trait-selector').click(ev => this._onTraitSelector(ev));
     }
 
     _prepareTraits(traits) {
@@ -531,7 +744,9 @@ class ActorSheetStarfinder extends ActorSheet {
             "di": CONFIG.damageTypes,
             "dv": CONFIG.damageTypes,
             "ci": CONFIG.damageTypes,
-            "languages": CONFIG.languages
+            "languages": CONFIG.languages,
+            "weaponProf": CONFIG.weaponTypes,
+            "armorProf": CONFIG.armorTypes
         };
 
         for (let [t, choices] of Object.entries(map)) {
@@ -541,7 +756,7 @@ class ActorSheetStarfinder extends ActorSheet {
                 return obj;
             }, {});
 
-            if (traits.custom) trait.selected["custom"] = trait.custom;
+            if (trait.custom) trait.selected["custom"] = trait.custom;
         }
     }
 
@@ -564,7 +779,7 @@ class ActorSheetStarfinder extends ActorSheet {
         if (event.type === "click") {
             field.val(levels[(idx === levels.length - 1) ? 0 : idx + 1]);
         } else if (event.type === "contextmenu") {
-            field.val(levels[(idx === 0) ? levels.length - 1: idx - 1]);
+            field.val(levels[(idx === 0) ? levels.length - 1 : idx - 1]);
         }
 
         this._onSubmit(event);
@@ -584,6 +799,49 @@ class ActorSheetStarfinder extends ActorSheet {
         };
 
         return icons[level];
+    }
+
+    /**
+     * Handle rolling of an item form the Actor sheet, obtaining the item instance an dispatching to it's roll method.
+     * 
+     * @param {Event} event The html event
+     */
+    _onItemSummary(event) {
+        event.preventDefault();
+        let li = $(event.currentTarget).parents('.item'),
+            item = this.actor.getOwnedItem(Number(li.attr('data-item-id'))),
+            chatData = item.getChatData({ secrets: this.actor.owner });
+
+        if (li.hasClass('expanded')) {
+            let summary = li.children('.item-summary');
+            summary.slideUp(200, () => summary.remove());
+        } else {
+            let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
+            let props = $(`<div class="item-properties"></div>`);
+            chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
+            div.append(props);
+            li.append(div.hide());
+            div.slideDown(200);
+        }
+        li.toggleClass('expanded');
+    }
+
+    /**
+     * Creates an TraitSelectorStarfinder dialog
+     * 
+     * @param {Event} event HTML Event
+     * @private
+     */
+    _onTraitSelector(event) {
+        event.preventDefault();
+        let a = $(event.currentTarget);
+        const options = {
+            name: a.parents('label').attr('for'),
+            title: a.parent().text().trim(),
+            choices: CONFIG[a.attr('data-options')]
+        };
+
+        new TraitSelectorStarfinder(this.actor, options).render(true);
     }
 }
 class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
@@ -616,6 +874,43 @@ class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         sheetData["disableExperience"] = game.settings.get("starfinder", "disableExperienceTracking");
 
         return sheetData;
+    }
+
+    /**
+     * Organize and classify items for character sheets.
+     * 
+     * @param {Object} sheetData Data for the sheet
+     * @private
+     */
+    _prepareItems(sheetData) {
+        const actorData = sheetData.actor;
+
+        const inventory = {
+            weapon: { label: "Weapons", items: [] },
+            equipment: { label: "Equipment", items: [] },
+            consumable: { label: "Consumables", items: [] },
+            goods: { label: "Goods", items: [] }
+        };
+
+        const spellbook = [];
+        const feats = [];
+        const classes = [];
+
+        let totalWeight = 0;
+        for (let i of sheetData.items) {
+            i.img = i.img || DEFAULT_TOKEN;
+
+            if (Object.keys(inventory).includes(i.type)) {
+                i.data.quantity.value = i.data.quantity.value || 0;
+                i.data.weight.value = i.data.weight.value || 0;
+                i.totalWeight = Math.round(i.data.quantity.value * i.data.weight.value * 10) / 10;
+                i.hasCharges = i.type === "consumable" && i.data.charges.max > 0;
+                inventory[i.type].items.push(i);
+                totalWeight += i.totalWeight;
+            }
+        }
+
+        actorData.inventory = inventory;
     }
 
     /**

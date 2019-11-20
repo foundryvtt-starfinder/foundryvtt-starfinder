@@ -9,11 +9,13 @@ class ActorSheetStarfinder extends ActorSheet {
         for (let skl of Object.values(sheetData.data.skills)) {
             skl.ability = sheetData.data.abilities[skl.ability].label.substring(0, 3);
             skl.icon = this._getClassSkillIcon(skl.value);
-            
+
         }
 
         sheetData["actorSizes"] = CONFIG.actorSizes;
         this._prepareTraits(sheetData.data["traits"]);
+
+        this._prepareItems(sheetData);
 
         return sheetData;
     }
@@ -41,10 +43,13 @@ class ActorSheetStarfinder extends ActorSheet {
                 callback: clicked => this.actor.data.flags[`_sheetTab-${group}`] = clicked.attr("data-tab")
             });
         });
-        
+
+        html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+
         if (!this.options.editable) return;
-        
+
         html.find('.skill-proficiency').on("click contextmenu", this._onCycleClassSkill.bind(this));
+        html.find('.trait-selector').click(ev => this._onTraitSelector(ev));
     }
 
     _prepareTraits(traits) {
@@ -53,7 +58,9 @@ class ActorSheetStarfinder extends ActorSheet {
             "di": CONFIG.damageTypes,
             "dv": CONFIG.damageTypes,
             "ci": CONFIG.damageTypes,
-            "languages": CONFIG.languages
+            "languages": CONFIG.languages,
+            "weaponProf": CONFIG.weaponTypes,
+            "armorProf": CONFIG.armorTypes
         };
 
         for (let [t, choices] of Object.entries(map)) {
@@ -63,7 +70,7 @@ class ActorSheetStarfinder extends ActorSheet {
                 return obj;
             }, {});
 
-            if (traits.custom) trait.selected["custom"] = trait.custom;
+            if (trait.custom) trait.selected["custom"] = trait.custom;
         }
     }
 
@@ -86,7 +93,7 @@ class ActorSheetStarfinder extends ActorSheet {
         if (event.type === "click") {
             field.val(levels[(idx === levels.length - 1) ? 0 : idx + 1]);
         } else if (event.type === "contextmenu") {
-            field.val(levels[(idx === 0) ? levels.length - 1: idx - 1]);
+            field.val(levels[(idx === 0) ? levels.length - 1 : idx - 1]);
         }
 
         this._onSubmit(event);
@@ -106,5 +113,48 @@ class ActorSheetStarfinder extends ActorSheet {
         };
 
         return icons[level];
+    }
+
+    /**
+     * Handle rolling of an item form the Actor sheet, obtaining the item instance an dispatching to it's roll method.
+     * 
+     * @param {Event} event The html event
+     */
+    _onItemSummary(event) {
+        event.preventDefault();
+        let li = $(event.currentTarget).parents('.item'),
+            item = this.actor.getOwnedItem(Number(li.attr('data-item-id'))),
+            chatData = item.getChatData({ secrets: this.actor.owner });
+
+        if (li.hasClass('expanded')) {
+            let summary = li.children('.item-summary');
+            summary.slideUp(200, () => summary.remove());
+        } else {
+            let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
+            let props = $(`<div class="item-properties"></div>`);
+            chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
+            div.append(props);
+            li.append(div.hide());
+            div.slideDown(200);
+        }
+        li.toggleClass('expanded');
+    }
+
+    /**
+     * Creates an TraitSelectorStarfinder dialog
+     * 
+     * @param {Event} event HTML Event
+     * @private
+     */
+    _onTraitSelector(event) {
+        event.preventDefault();
+        let a = $(event.currentTarget);
+        const options = {
+            name: a.parents('label').attr('for'),
+            title: a.parent().text().trim(),
+            choices: CONFIG[a.attr('data-options')]
+        };
+
+        new TraitSelectorStarfinder(this.actor, options).render(true);
     }
 }
