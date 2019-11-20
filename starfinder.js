@@ -293,6 +293,204 @@ Hooks.on("canvasInit", () => {
         }
     };
 });
+/**
+ * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
+ */
+class ActorStarfinder extends Actor {
+    /**
+     * Augment the basic actor data with additional dynamic data.
+     * 
+     * @param {Object} actorData The data for the actor
+     * @returns {Object} The actors data
+     */
+    prepareData(actorData) {
+        actorData = super.prepareData(actorData);
+        const data = actorData.data;
+        const flags = actorData.flags;
+
+        if (actorData.type === "character") this._prepareCharacterData(data);
+        else if (actorData.type === "npc") this._prepareNPCData(data);
+
+        // Ability modifiers and saves
+        for (let abl of Object.values(data.abilities)) {
+            abl.mod = Math.floor((abl.value - 10) / 2);
+        }
+
+        for (let skl of Object.values(data.skills)) {
+            skl.value = parseFloat(skl.value || 0);
+            let classSkill = skl.value;
+            let hasRanks = skl.ranks > 0;
+            skl.mod = data.abilities[skl.ability].mod + skl.ranks + (hasRanks ? classSkill : 0);
+        }
+
+        const init = data.attributes.init;
+        init.mod = data.abilities.dex.mod;
+        init.bonus = init.value + (getProperty(flags, "starfinder.improvedInititive") ? 4 : 0);
+        init.total = init.mod + init.bonus;
+
+        data.attributes.eac.min = 10 + data.abilities.dex.mod;
+        data.attributes.kac.min = 10 + data.abilities.dex.mod;
+
+        const map = {
+            "dr": CONFIG.damageTypes,
+            "di": CONFIG.damageTypes,
+            "dv": CONFIG.damageTypes,
+            "ci": CONFIG.damageTypes,
+            "languages": CONFIG.languages,
+            "weaponProf": CONFIG.weaponTypes,
+            "armorProf": CONFIG.armorTypes
+        };
+
+        for (let [t, choices] of Object.entries(map)) {
+            let trait = data.traits[t];
+            if (!trait) continue;
+            if (!(trait.value instanceof Array)) {
+                trait.value = TraitSelectorStarfinder._backCompat(trait.value, choices);
+            }
+        }
+        
+        return actorData;
+    }
+
+    /**
+     * Prepare the character's data.
+     * 
+     * @param {Object} data The data to prepare
+     * @private
+     */
+    _prepareCharacterData(data) {
+        data.details.level.value = parseInt(data.details.level.value);
+        data.details.xp.max = this.getLevelExp(data.details.level.value || 1);
+        let prior = this.getLevelExp(data.details.level.value - 1 || 0),
+            req = data.details.xp.max - prior;
+        data.details.xp.pct = Math.min(Math.round((data.details.xp.value - prior) * 100 / req), 99.5);
+    }
+
+    /**
+     * Prepare the NPC's data.
+     * 
+     * @param {Object} data The NPC's data to prepare
+     * @private
+     */
+    _prepareNPCData(data) {
+        data.details.cr.value = parseFloat(data.details.cr.value || 0);
+        data.details.xp.value = this.getCRExp(data.details.cr.value);
+    }
+
+    /**
+     * Return the amount of experience required to gain a certain character level.
+     * 
+     * @param {Number} level The desired level
+     * @returns {Number} The XP required for the next level
+     */
+    getLevelExp(level) {
+        const levels = CONFIG.STARFINDER.CHARACTER_EXP_LEVELS;
+        return levels[Math.min(level, levels.length - 1)];
+    }
+
+    /**
+     * Return the amount of experience granted by killing a creature of a certain CR.
+     * 
+     * @param {Number} cr The creature's challenge rating
+     * @returns {Number} The amount of experience granted per kill
+     */
+    getCRExp(cr) {
+        if (cr < 1.0) return Math.max(400 * cr, 50);
+        return CONFIG.STARFINDER.CR_EXP_LEVELS[cr];
+    }
+}
+
+CONFIG.Actor.entityClass = ActorStarfinder;
+
+/**
+ * A specialized form used to select damage or condition types which appl to an Actor
+ * 
+ * @type {FormApplication}
+ */
+class TraitSelectorStarfinder extends FormApplication {
+    static get defaultOptions() {
+        const options = super.defaultOptions;
+
+        options.id = "trait-selector";
+        options.classes = ["starfinder"];
+        options.title = "Actor Trait Selection";
+        options.template = "public/systems/starfinder/templates/actors/trait-selector.html";
+        options.width = 200;
+
+        return options;
+    }
+
+    /**
+     * Return a reference to the target attribute
+     * 
+     * @type {String}
+     */
+    get attribute() {
+        return this.options.name;
+    }
+
+    /**
+     * Provide data to the HTML template for rendering
+     * 
+     * @returns {Object}
+     */
+    getData() {
+        let attr = getProperty(this.object.data, this.attribute);
+        if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
+
+        const choices = duplicate(this.options.choices);
+        for (let [k, v] of Object.entries(choices)) {
+            choices[k] = {
+                label: v,
+                chosen: attr.value.includes(k)
+            };
+        }
+
+        return {
+            choices: choices,
+            custom: attr.custom
+        };
+    }
+
+    /**
+     * Support backwards compatability for old-style string separated traits
+     * 
+     * @param {String} current The current value
+     * @param {Array} choices The choices
+     * @returns {Array}
+     * @private
+     */
+    static _backCompat(current, choices) {
+        if (!current || current.length === 0) return [];
+        current = current.split(/[\s,]/).filter(t => !!t);
+        return current.map(val => {
+            for (let [k,v] of Object.entries(choices)) {
+                if (val === v) return k;
+            }
+            return null;
+        }).filter(val => !!val);
+    }
+
+    /**
+     * Update the Actor object with new trait data processed from the form
+     * 
+     * @param {Event} event The event that triggers the update
+     * @param {Object} formData The data from the form
+     * @private
+     */
+    _updateObject(event, formData) {
+        const choices = [];
+
+        for (let [k, v] of Object.entries(formData)) {
+            if (v) choices.push(k);
+        }
+
+        this.object.update({
+            [`${this.attribute}.value`]: choices,
+            [`${this.attribute}.custom`]: formData.custom
+        });
+    }
+}
 class ItemStarfinder extends Item {
 
     /**
@@ -486,204 +684,6 @@ Hooks.on('renderChatLog', (log, html, data) => ItemStarfinder.chatListeners(html
 Items.unregisterSheet('core', ItemSheet);
 Items.registerSheet("starfinder", ItemSheetStarfinder, { makeDefault: true });
 
-/**
- * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
- */
-class ActorStarfinder extends Actor {
-    /**
-     * Augment the basic actor data with additional dynamic data.
-     * 
-     * @param {Object} actorData The data for the actor
-     * @returns {Object} The actors data
-     */
-    prepareData(actorData) {
-        actorData = super.prepareData(actorData);
-        const data = actorData.data;
-        const flags = actorData.flags;
-
-        if (actorData.type === "character") this._prepareCharacterData(data);
-        else if (actorData.type === "npc") this._prepareNPCData(data);
-
-        // Ability modifiers and saves
-        for (let abl of Object.values(data.abilities)) {
-            abl.mod = Math.floor((abl.value - 10) / 2);
-        }
-
-        for (let skl of Object.values(data.skills)) {
-            skl.value = parseFloat(skl.value || 0);
-            let classSkill = skl.value;
-            let hasRanks = skl.ranks > 0;
-            skl.mod = data.abilities[skl.ability].mod + skl.ranks + (hasRanks ? classSkill : 0);
-        }
-
-        const init = data.attributes.init;
-        init.mod = data.abilities.dex.mod;
-        init.bonus = init.value + (getProperty(flags, "starfinder.improvedInititive") ? 4 : 0);
-        init.total = init.mod + init.bonus;
-
-        data.attributes.eac.min = 10 + data.abilities.dex.mod;
-        data.attributes.kac.min = 10 + data.abilities.dex.mod;
-
-        const map = {
-            "dr": CONFIG.damageTypes,
-            "di": CONFIG.damageTypes,
-            "dv": CONFIG.damageTypes,
-            "ci": CONFIG.damageTypes,
-            "languages": CONFIG.languages,
-            "weaponProf": CONFIG.weaponTypes,
-            "armorProf": CONFIG.armorTypes
-        };
-
-        for (let [t, choices] of Object.entries(map)) {
-            let trait = data.traits[t];
-
-            if (!(trait.value instanceof Array)) {
-                trait.value = TraitSelectorStarfinder._backCompat(trait.value, choices);
-            }
-        }
-        
-        return actorData;
-    }
-
-    /**
-     * Prepare the character's data.
-     * 
-     * @param {Object} data The data to prepare
-     * @private
-     */
-    _prepareCharacterData(data) {
-        data.details.level.value = parseInt(data.details.level.value);
-        data.details.xp.max = this.getLevelExp(data.details.level.value || 1);
-        let prior = this.getLevelExp(data.details.level.value - 1 || 0),
-            req = data.details.xp.max - prior;
-        data.details.xp.pct = Math.min(Math.round((data.details.xp.value - prior) * 100 / req), 99.5);
-    }
-
-    /**
-     * Prepare the NPC's data.
-     * 
-     * @param {Object} data The NPC's data to prepare
-     * @private
-     */
-    _prepareNPCData(data) {
-        data.details.cr.value = parseFloat(data.details.cr.value || 0);
-        data.details.xp.value = this.getCRExp(data.details.cr.value);
-    }
-
-    /**
-     * Return the amount of experience required to gain a certain character level.
-     * 
-     * @param {Number} level The desired level
-     * @returns {Number} The XP required for the next level
-     */
-    getLevelExp(level) {
-        const levels = CONFIG.STARFINDER.CHARACTER_EXP_LEVELS;
-        return levels[Math.min(level, levels.length - 1)];
-    }
-
-    /**
-     * Return the amount of experience granted by killing a creature of a certain CR.
-     * 
-     * @param {Number} cr The creature's challenge rating
-     * @returns {Number} The amount of experience granted per kill
-     */
-    getCRExp(cr) {
-        if (cr < 1.0) return Math.max(400 * cr, 50);
-        return CONFIG.STARFINDER.CR_EXP_LEVELS[cr];
-    }
-}
-
-CONFIG.Actor.entityClass = ActorStarfinder;
-
-/**
- * A specialized form used to select damage or condition types which appl to an Actor
- * 
- * @type {FormApplication}
- */
-class TraitSelectorStarfinder extends FormApplication {
-    static get defaultOptions() {
-        const options = super.defaultOptions;
-
-        options.id = "trait-selector";
-        options.classes = ["starfinder"];
-        options.title = "Actor Trait Selection";
-        options.template = "public/systems/starfinder/templates/actors/trait-selector.html";
-        options.width = 200;
-
-        return options;
-    }
-
-    /**
-     * Return a reference to the target attribute
-     * 
-     * @type {String}
-     */
-    get attribute() {
-        return this.options.name;
-    }
-
-    /**
-     * Provide data to the HTML template for rendering
-     * 
-     * @returns {Object}
-     */
-    getData() {
-        let attr = getProperty(this.object.data, this.attribute);
-        if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
-
-        const choices = duplicate(this.options.choices);
-        for (let [k, v] of Object.entries(choices)) {
-            choices[k] = {
-                label: v,
-                chosen: attr.value.includes(k)
-            };
-        }
-
-        return {
-            choices: choices,
-            custom: attr.custom
-        };
-    }
-
-    /**
-     * Support backwards compatability for old-style string separated traits
-     * 
-     * @param {String} current The current value
-     * @param {Array} choices The choices
-     * @returns {Array}
-     * @private
-     */
-    static _backCompat(current, choices) {
-        if (!current || current.length === 0) return [];
-        current = current.split(/[\s,]/).filter(t => !!t);
-        return current.map(val => {
-            for (let [k,v] of Object.entries(choices)) {
-                if (val === v) return k;
-            }
-            return null;
-        }).filter(val => !!val);
-    }
-
-    /**
-     * Update the Actor object with new trait data processed from the form
-     * 
-     * @param {Event} event The event that triggers the update
-     * @param {Object} formData The data from the form
-     * @private
-     */
-    _updateObject(event, formData) {
-        const choices = [];
-
-        for (let [k, v] of Object.entries(formData)) {
-            if (v) choices.push(k);
-        }
-
-        this.object.update({
-            [`${this.attribute}.value`]: choices,
-            [`${this.attribute}.custom`]: formData.custom
-        });
-    }
-}
 class ActorSheetStarfinder extends ActorSheet {
     get actorType() {
         return this.actor.data.type;
@@ -751,6 +751,7 @@ class ActorSheetStarfinder extends ActorSheet {
 
         for (let [t, choices] of Object.entries(map)) {
             const trait = traits[t];
+            if (!trait) continue;
             trait.selected = trait.value.reduce((obj, t) => {
                 obj[t] = choices[t];
                 return obj;
@@ -824,6 +825,10 @@ class ActorSheetStarfinder extends ActorSheet {
             div.slideDown(200);
         }
         li.toggleClass('expanded');
+    }
+
+    _prepareSpell(actorData, spellbook, spell) {
+
     }
 
     /**
@@ -927,5 +932,81 @@ class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
 
 Actors.registerSheet("starfinder", ActorSheetStarfinderCharacter, {
     types: ["character"],
+    makeDefault: true
+});
+
+class ActorSheetStarfinderNPC extends ActorSheetStarfinder {
+    static get defaultOptions() {
+        const options = super.defaultOptions;
+        mergeObject(options, {
+            classes: options.classes.concat(['starfinder', 'actor', 'npc-sheet']),
+            width: 650,
+            height: 680,
+            showUnpreparedSpells: true
+        });
+
+        return options;
+    }
+
+    get template() {
+        const path = "public/systems/starfinder/templates/actors/";
+        if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
+        return path + "npc-sheet.html";
+    }
+
+    getData() {
+        const sheetData = super.getData();
+
+        let cr = sheetData.data.details.cr;
+        let crs = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
+        cr["str"] = cr.value >= 1 ? String(cr.value) : crs[cr.value] || 0;
+
+        return sheetData;
+    }
+    
+    _prepareItems(sheetData) {
+        const actorData = sheetData.actor;
+
+        const features = {
+            weapons: { label: "Weapons", items: [], type: "weapon" },
+            actions: { label: "Actions", items: [], type: "feat" },
+            passive: { label: "Features", items: [], type: "feat" },
+            equipment: { label: "Equipment", items: [], type: "equipment" }
+        };
+
+        const spellbook = {};
+
+        for (let i of sheetData.items) {
+            i.img = i.img || DEFAULT_TOKEN;
+
+            if (i.type === "spell") this._prepareSpell(actorData, spellbook, i);
+
+            else if (i.type === "weapon") features.weapons.items.push(i);
+            else if (i.type === "feat") {
+                if (i.data.featType.value === "passive") features.passive.items.push(i);
+                else features.actions.items.push(i);
+            }
+            else if (["equipment", "consumable", "goods"].includes(i.type)) features.equipment.items.push(i);
+        }
+
+        actorData.features = features;
+        actorData.spellbook = spellbook;
+    }
+
+    _updateObject(event, formData) {
+        if (this.actor.data.type === "npc") {
+            let cr = formData["data.details.cr.value"];
+            if (cr) {
+                let crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
+                formData['data.details.cr.value'] = crs[cr] || parseInt(cr);
+            }
+        }
+
+        super._updateObject(event, formData);
+    }
+}
+
+Actors.registerSheet("starfinder", ActorSheetStarfinderNPC, {
+    types: ["npc"],
     makeDefault: true
 });

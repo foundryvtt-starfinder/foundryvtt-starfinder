@@ -65,6 +65,7 @@ class ActorSheetStarfinder extends ActorSheet {
 
         for (let [t, choices] of Object.entries(map)) {
             const trait = traits[t];
+            if (!trait) continue;
             trait.selected = trait.value.reduce((obj, t) => {
                 obj[t] = choices[t];
                 return obj;
@@ -138,6 +139,10 @@ class ActorSheetStarfinder extends ActorSheet {
             div.slideDown(200);
         }
         li.toggleClass('expanded');
+    }
+
+    _prepareSpell(actorData, spellbook, spell) {
+
     }
 
     /**

@@ -48,7 +48,7 @@ class ActorStarfinder extends Actor {
 
         for (let [t, choices] of Object.entries(map)) {
             let trait = data.traits[t];
-
+            if (!trait) continue;
             if (!(trait.value instanceof Array)) {
                 trait.value = TraitSelectorStarfinder._backCompat(trait.value, choices);
             }
