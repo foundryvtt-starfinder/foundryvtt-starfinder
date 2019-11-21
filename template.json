@@ -1,820 +1,526 @@
 {
-    "actor": {
-        "data": {
-            "abilities": {
-                "str": {
-                    "type": "Number",
-                    "label": "Strength",
-                    "value": 10,
-                    "min": 3
+    "Actor": {
+        "types": [
+            "character",
+            "npc",
+            "starship"
+        ],
+        "templates": {
+            "common": {
+                "abilities": {
+                    "str": {
+                        "value": 10,
+                        "min": 3,
+                        "misc": 0
+                    },
+                    "dex": {
+                        "value": 10,
+                        "min": 3,
+                        "misc": 0
+                    },
+                    "con": {
+                        "value": 10,
+                        "min": 3,
+                        "misc": 0
+                    },
+                    "int": {
+                        "value": 10,
+                        "min": 3,
+                        "misc": 0
+                    },
+                    "wis": {
+                        "value": 10,
+                        "min": 3,
+                        "misc": 0
+                    },
+                    "cha": {
+                        "value": 10,
+                        "min": 3,
+                        "misc": 0
+                    }
                 },
-                "dex": {
-                    "type": "Number",
-                    "label": "Dexterity",
-                    "value": 10,
-                    "min": 3
+                "attributes": {
+                    "eac": {
+                        "min": 0,
+                        "value": 10
+                    },
+                    "kac": {
+                        "min": 0,
+                        "value": 10
+                    },
+                    "cmd": {
+                        "min": 0,
+                        "value": 10
+                    },
+                    "hp": {
+                        "min": 0,
+                        "max": 10,
+                        "value": 0,
+                        "temp": 0,
+                        "tempmax": 10
+                    },
+                    "sp": {
+                        "min": 0,
+                        "max": 10,
+                        "value": 0
+                    },
+                    "rp": {
+                        "min": 0,
+                        "max": 10,
+                        "value": 0
+                    },
+                    "init": {
+                        "value": 0,
+                        "bonus": 0
+                    },
+                    "fort": {
+                        "value": 0,
+                        "bonus": 0
+                    },
+                    "reflex": {
+                        "value": 0,
+                        "bonus": 0
+                    },
+                    "will": {
+                        "value": 0,
+                        "bonus": 0
+                    },
+                    "bab": 0,
+                    "speed": {
+                        "value": "30 ft",
+                        "special": ""
+                    },
+                    "keyability": ""
                 },
-                "con": {
-                    "type": "Number",
-                    "label": "Constitution",
-                    "value": 10,
-                    "min": 3
+                "details": {
+                    "alignment": "",
+                    "race": "",
+                    "class": "",
+                    "biography": {
+                        "value": "",
+                        "public": ""
+                    }
                 },
-                "int": {
-                    "type": "Number",
-                    "label": "Intelligence",
-                    "value": 10,
-                    "min": 3
+                "skills": {
+                    "acr": {
+                        "ability": "dex",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "ath": {
+                        "ability": "str",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "blu": {
+                        "ability": "cha",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "com": {
+                        "ability": "int",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "cul": {
+                        "ability": "int",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "dip": {
+                        "ability": "cha",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "dis": {
+                        "ability": "cha",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "eng": {
+                        "ability": "int",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "int": {
+                        "ability": "cha",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "lsc": {
+                        "ability": "int",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "med": {
+                        "ability": "int",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "mys": {
+                        "ability": "wis",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "per": {
+                        "ability": "wis",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "psc": {
+                        "ability": "int",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "pil": {
+                        "ability": "dex",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "sen": {
+                        "ability": "wis",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "sle": {
+                        "ability": "dex",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "ste": {
+                        "ability": "dex",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    },
+                    "sur": {
+                        "ability": "wis",
+                        "ranks": 0,
+                        "value": 0,
+                        "misc": 0
+                    }
                 },
-                "wis": {
-                    "type": "Number",
-                    "label": "Wisdom",
-                    "value": 10,
-                    "min": 3
+                "traits": {
+                    "size": "med",
+                    "senses": "",
+                    "languages": {
+                        "value": [],
+                        "custom": ""
+                    },
+                    "di": {
+                        "value": [],
+                        "custom": ""
+                    },
+                    "dr": {
+                        "value": [],
+                        "custom": ""
+                    },
+                    "dv": {
+                        "value": [],
+                        "custom": ""
+                    },
+                    "ci": {
+                        "value": [],
+                        "custom": ""
+                    }
                 },
-                "cha": {
-                    "type": "Number",
-                    "label": "Charisma",
-                    "value": 10,
-                    "min": 3
-                }
-            },
-            "attributes": {
-                "eac": {
-                    "type": "Number",
-                    "label": "Energy Armor Class",
-                    "min": 0
+                "currency": {
+                    "credit": 0,
+                    "upb": 0
                 },
-                "kac": {
-                    "type": "Number",
-                    "label": "Kinetic Armor Class",
-                    "min": 0
-                },
-                "cmd": {
-                    "type": "Number",
-                    "label": "AC vs. Combat Maneuvers",
-                    "min": 0
-                },
-                "hp": {
-                    "type": "Number",
-                    "label": "Hit points",
-                    "min": 0,
-                    "max": 10
-                },
-                "sp": {
-                    "type": "Number",
-                    "label": "Stamina Points",
-                    "min": 0,
-                    "max": 10
-                },
-                "rp": {
-                    "type": "Number",
-                    "label": "Resolve Points",
-                    "min": 0,
-                    "max": 10
-                },
-                "init": {
-                    "type": "Number",
-                    "label": "Initiative Modifier",
-                    "value": 0
-                },
-                "fort": {
-                    "type": "Number",
-                    "label": "Fortitude",
-                    "value": 0
-                },
-                "reflex": {
-                    "type": "Number",
-                    "label": "Reflex",
-                    "value": 0
-                },
-                "will": {
-                    "type": "Number",
-                    "label": "Will",
-                    "value": 0
-                },
-                "bab": {
-                    "type": "Number",
-                    "label": "Base Attack Bounus",
-                    "value": 0
-                },
-                "speed": {
-                    "type": "String",
-                    "label": "Movement Speed",
-                    "value": "30 ft",
-                    "special": ""
-                },
-                "keyability": {
-                    "type": "String",
-                    "label": "Key Ability Score"
-                }
-            },
-            "details": {
-                "alignment": {
-                    "type": "String",
-                    "label": "Alignment"
-                },
-                "race": {
-                    "type": "String",
-                    "label": "Race"
-                },
-                "class": {
-                    "type": "String",
-                    "label": "Class"
-                },
-                "theme": {
-                    "type": "String",
-                    "label": "Theme"
-                },
-                "biography": {
-                    "type": "String",
-                    "label": "Biography"
-                }
-            },
-            "skills": {
-                "acr": {
-                    "type": "Number",
-                    "label": "Acrobatics",
-                    "ability": "dex",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "ath": {
-                    "type": "Number",
-                    "label": "Athletics",
-                    "ability": "str",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "blu": {
-                    "type": "Number",
-                    "label": "Bluff",
-                    "ability": "cha",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "com": {
-                    "type": "Number",
-                    "label": "Computers",
-                    "ability": "int",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "cul": {
-                    "type": "Number",
-                    "label": "Culture",
-                    "ability": "int",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "dip": {
-                    "type": "Number",
-                    "label": "Diplomacy",
-                    "ability": "cha",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "dis": {
-                    "type": "Number",
-                    "label": "Disguise",
-                    "ability": "cha",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "eng": {
-                    "type": "Number",
-                    "label": "Engineering",
-                    "ability": "int",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "int": {
-                    "type": "Number",
-                    "label": "Intimidate",
-                    "ability": "cha",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "lsc": {
-                    "type": "Number",
-                    "label": "Life Science",
-                    "ability": "int",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "med": {
-                    "type": "Number",
-                    "label": "Medicine",
-                    "ability": "int",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "mys": {
-                    "type": "Number",
-                    "label": "Mysticism",
-                    "ability": "wis",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "per": {
-                    "type": "Number",
-                    "label": "Perception",
-                    "ability": "wis",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "psc": {
-                    "type": "Number",
-                    "label": "Physical Science",
-                    "ability": "int",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "pil": {
-                    "type": "Number",
-                    "label": "Piloting",
-                    "ability": "dex",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "sen": {
-                    "type": "Number",
-                    "label": "Sense Motive",
-                    "ability": "wis",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "sle": {
-                    "type": "Number",
-                    "label": "Sleight of Hand",
-                    "ability": "dex",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "ste": {
-                    "type": "Number",
-                    "label": "Stealth",
-                    "ability": "dex",
-                    "ranks": 0,
-                    "value": 0
-                },
-                "sur": {
-                    "type": "Number",
-                    "label": "Survival",
-                    "ability": "wis",
-                    "ranks": 0,
-                    "value": 0
-                }
-            },
-            "traits": {
-                "size": {
-                    "type": "String",
-                    "label": "Size",
-                    "value": "med"
-                },
-                "senses": {
-                    "type": "String",
-                    "label": "Senses"
-                },
-                "languages": {
-                    "type": "Array",
-                    "label": "Known Languages",
-                    "value": []
-                },
-                "di": {
-                    "type": "Array",
-                    "label": "Damage Immunities",
-                    "value": []
-                },
-                "dr": {
-                    "type": "Array",
-                    "label": "Damage Resistances",
-                    "value": []
-                },
-                "dv": {
-                    "type": "Array",
-                    "label": "Damage Vulnerabilities",
-                    "value": []
-                },
-                "ci": {
-                    "type": "Array",
-                    "label": "Condition Immunities",
-                    "value": []
-                }
-            },
-            "currency": {
-                "credit": {
-                    "type": "Number",
-                    "label": "Credits",
-                    "value": 0
-                },
-                "upb": {
-                    "type": "Number",
-                    "label": "UPB's",
-                    "value": 0
-                }
-            },
-            "spells": {
-                "spell0": {
-                    "type": "Number",
-                    "label": "0 Level"
-                },
-                "spell1": {
-                    "type": "Number",
-                    "label": "1st Level"
-                },
-                "spell2": {
-                    "type": "Number",
-                    "label": "2nd Level"
-                },
-                "spell3": {
-                    "type": "Number",
-                    "label": "3rd Level"
-                },
-                "spell4": {
-                    "type": "Number",
-                    "label": "4th Level"
-                },
-                "spell5": {
-                    "type": "Number",
-                    "label": "5th Level"
-                },
-                "spell6": {
-                    "type": "Number",
-                    "label": "6th Level"
+                "spells": {
+                    "spell0": {
+                        "value": 0,
+                        "max": 0
+                    },
+                    "spell1": {
+                        "value": 0,
+                        "max": 0
+                    },
+                    "spell2": {
+                        "value": 0,
+                        "max": 0
+                    },
+                    "spell3": {
+                        "value": 0,
+                        "max": 0
+                    },
+                    "spell4": {
+                        "value": 0,
+                        "max": 0
+                    },
+                    "spell5": {
+                        "value": 0,
+                        "max": 0
+                    },
+                    "spell6": {
+                        "value": 0,
+                        "max": 0
+                    }
                 }
             }
         },
         "character": {
+            "templates": [
+                "common"
+            ],
             "details": {
-                "alignment": {
-                    "type": "String",
-                    "label": "Alignment"
-                },
-                "deity": {
-                    "type": "String",
-                    "label": "Deity"
-                },
+                "deity": "",
                 "level": {
-                    "type": "Number",
-                    "label": "Character Level",
                     "value": 1,
-                    "min": 1
+                    "min": 1,
+                    "max": 20
                 },
                 "xp": {
-                    "type": "Number",
-                    "label": "Experience Points",
                     "value": 0,
                     "min": 0,
                     "max": 1300
-                }
+                },
+                "theme": ""
             },
             "traits": {
                 "weaponProf": {
-                    "type": "Array",
                     "value": [],
-                    "custom": "",
-                    "label": "Weapon Proficiencies"
+                    "custom": ""
                 },
                 "armorProf": {
-                    "type": "Array",
                     "value": [],
-                    "custom": "",
-                    "label": "Armor Proficiencies"
+                    "custom": ""
                 }
             },
             "resources": {
                 "primary": {
-                    "type": "String",
-                    "label": "Resource Name"
+                    "value": 0,
+                    "max": 0
                 },
                 "secondary": {
-                    "type": "String",
-                    "label": "Secondary Resource"
+                    "value": 0,
+                    "max": 0
                 }
             }
         },
         "npc": {
+            "templates": [
+                "common"
+            ],
             "details": {
-                "type": {
-                    "type": "String",
-                    "label": "Creature Type"
-                },
-                "environment": {
-                    "type": "String",
-                    "label": "Environment"
-                },
-                "cr": {
-                    "type": "Number",
-                    "label": "Challenge Rating",
-                    "value": 1,
-                    "min": 0
-                },
+                "type": "",
+                "environment": "",
+                "cr": 1,
                 "xp": {
-                    "type": "Number",
-                    "label": "Kill Experience"
+                    "value": 10
                 },
-                "source": {
-                    "type": "String",
-                    "label": "Source Location"
-                }
+                "source": ""
             }
         },
         "starship": {
             "details": {
-                "tier": {
-                    "type": "Number",
-                    "value": 1,
-                    "min": 1
-                },
-                "model": {
-                    "type": "String",
-                    "value": ""
-                },
-                "frame": {
-                    "type": "String",
-                    "value": ""
-                }
+                "tier": 1,
+                "model": "",
+                "frame": ""
             },
             "attributes": {
-                "maneuverability": {
-                    "type": "String",
-                    "value": "average"
-                },
-                "drift": {
-                    "type": "Number",
-                    "value": 0
-                },
+                "maneuverability": "average",
+                "drift": 0,
                 "ac": {
-                    "type": "Number",
-                    "label": "Armor Class",
                     "value": 10,
                     "min": 3
                 },
                 "tl": {
-                    "type": "Number",
-                    "label": "Target Lock",
                     "value": 10,
                     "min": 3
                 },
                 "hp": {
-                    "type": "Number",
-                    "label": "Hull Points",
-                    "value": 1
+                    "value": 1,
+                    "min": 0,
+                    "max": 0
                 },
-                "dt": {
-                    "type": "Number",
-                    "value": 0,
-                    "label": "Damage Threshold"
-                },
+                "dt": 0,
                 "ct": {
-                    "type": "Number",
-                    "label": "Critical Threshold",
                     "value": 10,
-                    "min":3
+                    "min": 3
                 }
             }
         }
     },
-    "item": {
-        "data": {
-            "description": {
-                "type": "String",
-                "label": "Description"
+    "Item": {
+        "types": [
+            "weapon",
+            "equipment",
+            "consumable",
+            "goods",
+            "class",
+            "spell",
+            "feat",
+            "race",
+            "theme"
+        ],
+        "templates": {
+            "itemDescription": {
+                "description": {
+                    "value": "",
+                    "chat": "",
+                    "unidentified": ""
+                },
+                "source": ""
             },
-            "source": {
-                "type": "String",
-                "label": "Source"
+            "physicalItem": {
+                "quantity": 1,
+                "bulk": "L",
+                "price": 0,
+                "level": 1,
+                "attuned": false,
+                "equipped": false,
+                "identified": true
+            },
+            "activatedEffect": {
+                "activation": {
+                    "type": "",
+                    "cost": 0,
+                    "condition": ""
+                },
+                "duration": {
+                    "value": null,
+                    "units": ""
+                },
+                "target": {
+                    "value": null,
+                    "units": "",
+                    "type": ""
+                },
+                "range": {
+                    "value": null,
+                    "units": ""
+                },
+                "uses": {
+                    "value": 0,
+                    "max": 0,
+                    "per": null
+                }
+            },
+            "action": {
+                "ability": null,
+                "actionType": null,
+                "attackBonus": 0,
+                "chatFlavor": "",
+                "critical": null,
+                "damage": {
+                    "parts": []
+                },
+                "formula": "",
+                "save": {
+                    "type": "",
+                    "dc": null
+                }
             }
         },
         "weapon": {
-            "level": {
-                "type": "Number",
-                "label": "Item Level",
-                "min": 1
-            },
-            "price": {
-                "type": "String",
-                "label": "Price"
-            },
-            "quantity": {
-                "type": "Number",
-                "label": "Quantity",
-                "value": 1
-            },
-            "weight": {
-                "type": "String",
-                "label": "Bulk"
-            },
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
             "weaponType": {
-                "type": "String",
-                "label": "Weapon Type"
+                "value": "basicM"
             },
-            "damage": {
-                "type": "String",
-                "label": "Damage Formula"
-            },
-            "damageType": {
-                "type": "String",
-                "label": "Damage Type"
-            },
-            "damage2": {
-                "type": "String",
-                "label": "Alternate Damage"
-            },
-            "damage2Type": {
-                "type": "String",
-                "label": "Alternate Damage Type"
-            },
-            "range": {
-                "type": "String",
-                "label": "Weapon Range Increment"
-            },
-            "critical": {
-                "type": "String",
-                "label": "Critical Hit Effects",
-                "formula": {
-                    "type": "String",
-                    "label": "Damage Formula"
-                }
-            },
-            "capacity": {
-                "type": "String",
-                "label": "Capacity"
-            },
-            "usage": {
-                "type": "Number",
-                "label": "Usage",
-                "value": 1
-            },
-            "special": {
-                "type": "String",
-                "label": "Special"
-            },
-            "equipped": {
-                "type": "Boolean",
-                "label": "Equipped"
-            },
-            "ability": {
-                "type": "String",
-                "label": "Offensive Ability"
-            },
-            "properties": {
-                "type": "String",
-                "label": "Weapon Properties"
-            },
-            "proficient": {
-                "type": "Boolean",
-                "label": "Proficient"
-            }
+            "capacity": "",
+            "usage": 1,
+            "special": "",
+            "ability": "str",
+            "properties": {},
+            "proficient": true
         },
         "equipment": {
-            "quantity": {
-                "type": "Number",
-                "label": "Quantity",
-                "value": 1
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
+            "armor": {
+                "type": "light",
+                "eac": 0,
+                "kac": 0,
+                "dex": null,
+                "acp": 0,
+                "speedAdjust": 0
             },
-            "weight": {
-                "type": "String",
-                "label": "Bulk"
-            },
-            "price": {
-                "type": "String",
-                "label": "Price"
-            },
-            "armor_eac": {
-                "type": "Number",
-                "label": "EAC Bonus"
-            },
-            "armor_kac": {
-                "type": "Number",
-                "label": "KAC Bonus"
-            },
-            "armorType": {
-                "type": "String",
-                "label": "Armor Type"
-            },
-            "equipped": {
-                "type": "Boolean",
-                "label": "Equipped"
-            },
-            "upgradeSlots": {
-                "type": "Number",
-                "label": "Upgrade Slots"
-            },
-            "proficient": {
-                "type": "Boolean",
-                "label": "Proficient"
-            }
+            "upgradeSlots": 0,
+            "proficient": true
         },
         "consumable": {
-            "quantity": {
-                "type": "Number",
-                "label": "Quantity",
-                "value": 1
-            },
-            "weight": {
-                "type": "String",
-                "label": "Bulk"
-            },
-            "price": {
-                "type": "String",
-                "label": "Price"
-            },
-            "consumableType": {
-                "type": "String",
-                "label": "Consumable Type"
-            },
-            "charges": {
-                "type": "Number",
-                "label": "Charges"
-            },
-            "autoUse": {
-                "type": "Boolean",
-                "label": "Consume on use"
-            },
-            "autoDestroy": {
-                "type": "Boolean",
-                "label": "Destroy on empty"
-            },
-            "consume": {
-                "type": "String",
-                "label": "Roll on Consume"
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
+            "consumableType": "serum",
+            "uses": {
+                "value": 0,
+                "max": 0,
+                "per": null,
+                "autoUse": true,
+                "autoDestroy": true
             }
         },
         "goods": {
-            "quantity": {
-                "type": "Number",
-                "label": "Quantity",
-                "value": 1
-            },
-            "weight": {
-                "type": "Number",
-                "label": "Bulk"
-            },
-            "price": {
-                "type": "String",
-                "label": "Price"
-            }
+            "templates": ["itemDescription", "physicalItem"]
         },
         "class": {
-            "levels": {
-                "type": "Number",
-                "label": "Class Levels",
-                "value": 1
-            },
+            "templates": ["itemDescription"],
+            "levels": 1,
             "hp": {
-                "type": "Number",
-                "label": "Hit points",
                 "value": 1,
                 "min": 1
             },
             "sp": {
-                "type": "Number",
-                "label": "Stamina Points",
                 "value": 1,
                 "min": 1
             },
-            "kas": {
-                "type": "String",
-                "label": "Key Ability Score"
-            },
-            "csk": {
-                "type": "Array",
-                "label": "Class Skill's"
-            },
+            "kas": "",
+            "csk": [],
             "skillRanks": {
-                "type": "Number",
-                "label": "Skill Ranks per Level",
                 "value": 4,
                 "min": 4
             },
-            "proficiencies": {
-                "type": "Array",
-                "label": "Proficiencies"
-            }
+            "proficiencies": []
         },
         "spell": {
-            "spellType": {
-                "type": "String",
-                "label": "Spell Type"
-            },
-            "level": {
-                "type": "Number",
-                "label": "Spell Level"
-            },
-            "school": {
-                "type": "String",
-                "label": "Spell School"
-            },
-            "target": {
-                "type": "String",
-                "label": "Target"
-            },
-            "range": {
-                "type": "String",
-                "label": "Range"
-            },
-            "effect": {
-                "type": "String",
-                "label": "Effect"
-            },
-            "area": {
-                "type": "String",
-                "label": "Area"
-            },
-            "time": {
-                "type": "String",
-                "label": "Casting Time"
-            },
-            "duration": {
-                "type": "String",
-                "label": "Duration"
-            },
-            "damage": {
-                "type": "String",
-                "label": "Spell Damage"
-            },
-            "damageType": {
-                "type": "String",
-                "label": "Damage Type"
-            },
-            "save": {
-                "type": "String",
-                "label": "Saving Throw"
-            },
-            "ability": {
-                "type": "String",
-                "label": "Spellcasting Ability"
-            },
-            "sr": {
-                "type": "Boolean",
-                "label": "Spell Resistance"
-            },
-            "dismissible": {
-                "type": "Boolean",
-                "label": "Dismissible"
-            }
+            "templates": ["itemDescription", "activatedEffect", "action"],
+            "level": 1,
+            "school": "",
+            "sr": false,
+            "dismissible": false,
+            "concentration": false
         },
         "feat": {
-            "featType": {
-                "type": "String",
-                "label": "Feat Type"
-            },
-            "requirements": {
-                "type": "String",
-                "label": "Requirements"
-            },
-            "target": {
-                "type": "String",
-                "label": "Target"
-            },
-            "range": {
-                "type": "String",
-                "label": "Range"
-            },
-            "time": {
-                "type": "String",
-                "label": "Casting Time"
-            },
-            "duration": {
-                "type": "String",
-                "label": "Duration"
-            },
-            "damage": {
-                "type": "String",
-                "label": "Ability Damage"
-            },
-            "damageType": {
-                "type": "String",
-                "label": "Damage Type"
-            },
-            "save": {
-                "type": "String",
-                "label": "Saving Throw"
+            "templates": ["itemDescription", "activatedEffect", "action"],
+            "requirements": "",
+            "recharge": {
+                "value": null,
+                "charged": false
             }
         },
         "race": {
+            "templates": ["itemDescription"],
             "hp": {
-                "type": "Number",
-                "label": "Hit points",
                 "value": 1,
                 "min": 1
             },
-            "abilityMods": {
-                "type": "Array",
-                "label": "Ability Adjustments"
-            },
-            "size": {
-                "type": "String",
-                "label": "Size"
-            }
+            "abilityMods": [],
+            "size": "med"
         },
         "theme": {
+            "templates": ["itemDescription"],
             "abilityMod": {
-                "type": "String",
-                "label": "Ability Adjustment"
-            }
+                "ability": "cha",
+                "mod": 1
+            },
+            "skill": ""
         }
     }
 }
