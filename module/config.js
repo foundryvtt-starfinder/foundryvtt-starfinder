@@ -1,8 +1,89 @@
 // Namespace Starfinder Configuration Values
-CONFIG.STARFINDER = {};
+export const STARFINDER = {};
+
+/**
+ * The set of ability scores used with the system
+ * @type {Object}
+ */
+STARFINDER.abilities = {
+    "str": "STARFINDER.AbilityStr",
+    "dex": "STARFINDER.AbilityDex",
+    "con": "STARFINDER.AbilityCon",
+    "int": "STARFINDER.AbilityInt",
+    "wis": "STARFINDER.AbilityWis",
+    "cha": "STARFINDER.AbilityCha"
+};
+
+/**
+ * Character alignment options
+ * @type {Object}
+ */
+STARFINDER.alignments = {
+    "lg": "STARFINDER.AlignmentLG",
+    "ng": "STARFINDER.AlignmentNG",
+    "cg": "STARFINDER.AlignmentCG",
+    "ln": "STARFINDER.AlignmentLN",
+    "tn": "STARFINDER.AlignmentTN",
+    "cn": "STARFINDER.AlignmentCN",
+    "le": "STARFINDER.AlignmentLE",
+    "ne": "STARFINDER.AlignmentNE",
+    "ce": "STARFINDER.AlignmentCE"
+};
+
+/**
+ * The set of armor proficiencies which a character may have
+ * @type {Object}
+ */
+STARFINDER.armorProficiencies = {
+    "lgt": "Light Armor",
+    "hvy": "Heavy Armor",
+    "pwr": "Power Armor",
+    "shl": "Shields"
+};
+
+/**
+ * The set of weapons proficiencies which a character may have
+ * @type {Object}
+ */
+STARFINDER.weaponProficienies = {
+    "bmelee": "Basic Melee",
+    "amelee": "Advanced Melee",
+    "sarms": "Small Arms",
+    "larms": "Long Arms",
+    "hweap": "Heavy Weapons",
+    "snipe": "Sniper Weapons",
+    "gren": "Grenades",
+    "spec": "Special Weapons"
+};
+
+/**
+ * This describes the ways that an ability can be cativated
+ * @type {Object}
+ */
+STARFINDER.abilityActivationTypes = {
+    "none": "None",
+    "action": "Standard Action",
+    "move": "Move Action",
+    "swift": "Swift Action",
+    "full": "Full Action",
+    "reaction": "Reaction",
+    "other": "Other Actions",
+    "day": "Day",
+    "hour": "Hour",
+    "min": "Minute"
+}
+
+/**
+ * The valid currency types in Starfinder
+ * @type {Object}
+ */
+STARFINDER.currencies = {
+    "credit": "Credits",
+    "upb": "UPB's"
+};
 
 // Damage Types
-CONFIG.damageTypes = {
+STARFINDER.damageTypes = {
     "acid": "Acid",
     "cold": "Cold",
     "electricity": "Electricity",
@@ -13,13 +94,60 @@ CONFIG.damageTypes = {
     "slashing": "Slashing"
 };
 
+STARFINDER.distanceUnits = {
+    "personal": "STARFINDER.Personal",
+    "touch": "STARFINDER.Touch",
+    "close": "STARFINDER.Close",
+    "medium": "STARFINDER.Medium",
+    "long": "STARFINDER.Long",
+    "planetary": "STARFINDER.Planetary",
+    "system": "STARFINDER.SystemWide",
+    "plane": "STARFINDER.Plane",
+    "unlimited": "STARFINDER.Unlimited",
+    "ft": "STARFINDER.Ft",
+    "mi": "STARFINDER.Mi",
+    "spec": "STARFINDER.Special",
+    "any": "STARFINDER.DistAny"
+};
+
 // Healing types
-CONFIG.healingTypes = {
+STARFINDER.healingTypes = {
     "healing": "Healing"
 };
 
+STARFINDER.senses = {
+    "bs": "STARFINDER.SenesBS",
+    "bl": "STARFINDER.SenesBL",
+    "dark": "STARFINDER.SenesDark",
+    "llv": "STARFINDER.SenesLLV",
+    "st": "STARFINDER.SensesST"
+};
+
+STARFINDER.skills = {
+    "acr": "STARFINDER.SkillAcr",
+    "ath": "STARFINDER.SkillAth",
+    "blu": "STARFINDER.SkillBlu",
+    "com": "STARFINDER.SkillCom",
+    "cul": "STARFINDER.SkillCul",
+    "dip": "STARFINDER.SkillDip",
+    "dis": "STARFINDER.SkillDis",
+    "eng": "STARFINDER.SkillEng",
+    "int": "STARFINDER.SkillInt",
+    "lsc": "STARFINDER.SkillLsc",
+    "med": "STARFINDER.SkillMed",
+    "mys": "STARFINDER.SkillMys",
+    "per": "STARFINDER.SkillPer",
+    "pro": "STARFINDER.SkillPro",
+    "psc": "STARFINDER.SkillPsc",
+    "pil": "STARFINDER.SkillPil",
+    "sen": "STARFINDER.SkillSen",
+    "sle": "STARFINDER.SkillSle",
+    "ste": "STARFINDER.SkillSte",
+    "sur": "STARFINDER.SkillSur"
+};
+
 // Weapon Types
-CONFIG.weaponTypes = {
+STARFINDER.weaponTypes = {
     "basicM": "Basic Melee",
     "advancedM": "Advanced Melee",
     "smallA": "Small Arms",
@@ -32,7 +160,7 @@ CONFIG.weaponTypes = {
 };
 
 // Weapons sub categories
-CONFIG.weaponCategories = {
+STARFINDER.weaponCategories = {
     "cryo": "Cryo weapons",
     "flame": "Flame weapons",
     "laser": "Laser weapons",
@@ -44,13 +172,13 @@ CONFIG.weaponCategories = {
 };
 
 // Weapon Properties
-CONFIG.weaponProperties = {
+STARFINDER.weaponProperties = {
     "two": "Two-Handed",
     "amm": "Ammunition"
 };
 
 // Weapon special abilities
-CONFIG.weaponSpecial = {
+STARFINDER.weaponSpecial = {
     "analog": "Analog",
     "archaic": "Archaic",
     "auto": "Automatic",
@@ -77,7 +205,7 @@ CONFIG.weaponSpecial = {
 };
 
 // Weapon critical hit effects
-CONFIG.weaponCriticalHitEffects = {
+STARFINDER.weaponCriticalHitEffects = {
     "arc": "Arc",
     "bleed": "Bleed",
     "burn": "Burn",
@@ -92,13 +220,15 @@ CONFIG.weaponCriticalHitEffects = {
 };
 
 // Equipment types
-CONFIG.armorTypes = {
+STARFINDER.armorTypes = {
     "light": "Light Armor",
-    "heavy": "Heavy Armor"
+    "heavy": "Heavy Armor",
+    "power": "Power Armor",
+    "shield": "Shields"
 };
 
 // Spell Schools
-CONFIG.spellSchools = {
+STARFINDER.spellSchools = {
     "abj": "Abjuration",
     "con": "Conjuration",
     "div": "Divination",
@@ -110,7 +240,7 @@ CONFIG.spellSchools = {
   };
 
 // Spell Levels
-CONFIG.spellLevels = {
+STARFINDER.spellLevels = {
     0: "0 Level",
     1: "1st Level",
     2: "2nd Level",
@@ -121,12 +251,16 @@ CONFIG.spellLevels = {
   };
 
   // Feat types
-  CONFIG.featTypes = {
+  STARFINDER.featTypes = {
       "general": "General Feats",
       "combat": "Combat Feats"
   };
 
-  CONFIG.actorSizes = {
+  /**
+   * The avaialbe sizes for an Actor
+   * @type {Object}
+   */
+  STARFINDER.actorSizes = {
       "fine": "Fine",
       "diminutive": "Diminutive",
       "tiny": "Tiny",
@@ -138,7 +272,24 @@ CONFIG.spellLevels = {
       "colossal": "Colossal"
   };
 
-  CONFIG.conditionTypes = {
+  /**
+   * The amount of space on a 5ft grid square that a 
+   * token of a specific size takes.
+   * @type {Object}
+   */
+  STARFINDER.tokenSizes = {
+      "fine": 1,
+      "diminutive": 1,
+      "tiny": 1,
+      "small": 1,
+      "medium": 1,
+      "large": 2,
+      "huge": 3,
+      "gargantuan": 4,
+      "colossal": 6
+  };
+
+  STARFINDER.conditionTypes = {
       "asleep": "Asleep",
       "bleeding": "Bleeding",
       "blinded": "Blinded",
@@ -174,7 +325,7 @@ CONFIG.spellLevels = {
       "unconscious": "Unconscious"
   };
 
-  CONFIG.languages = {
+  STARFINDER.languages = {
       "common": "Common",
       "akiton": "Akitonian",
       "aklo": "Aklo",
@@ -210,13 +361,13 @@ CONFIG.spellLevels = {
       "terran": "Terran"
   };
 
-  CONFIG.STARFINDER.CHARACTER_EXP_LEVELS = [
+  STARFINDER.CHARACTER_EXP_LEVELS = [
       0,1300, 3300,6000,10000,15000,23000,34000,50000,71000,
       105000,145000,210000,295000,425000,600000,850000,1200000,
       1700000,2400000
   ];
 
-  CONFIG.STARFINDER.CR_EXP_LEVELS = [
+  STARFINDER.CR_EXP_LEVELS = [
       50,400,600,800,1200,1600,2400,3200,4800,
       6400,9600,12800,19200,25600,38400,51200,76800,102400,
       153600,204800,307200,409600,614400,819200,1228800,1638400
