@@ -1,4 +1,6 @@
-class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
+import { ActorSheetStarfinder } from "./base.js"
+
+export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {
@@ -11,7 +13,7 @@ class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     }
 
     get template() {
-        const path = "public/systems/starfinder/templates/actors/";
+        const path = "systems/starfinder/templates/actors/";
         if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
         return path + "actor-sheet.html";
     }
@@ -33,17 +35,18 @@ class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     /**
      * Organize and classify items for character sheets.
      * 
-     * @param {Object} sheetData Data for the sheet
+     * @param {Object} data Data for the sheet
      * @private
      */
-    _prepareItems(sheetData) {
-        const actorData = sheetData.actor;
+    _prepareItems(data) {
+        
+        const actorData = data.actor;
 
         const inventory = {
-            weapon: { label: "Weapons", items: [] },
-            equipment: { label: "Equipment", items: [] },
-            consumable: { label: "Consumables", items: [] },
-            goods: { label: "Goods", items: [] }
+            weapon: { label: "Weapons", items: [], dataset: { type: "weapon" } },
+            equipment: { label: "Equipment", items: [], dataset: { type: "equipment" } },
+            consumable: { label: "Consumables", items: [], dataset: { type: "consumable" } },
+            goods: { label: "Goods", items: [], dataset: { type: "goods" } }
         };
 
         const spellbook = [];
@@ -51,7 +54,7 @@ class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         const classes = [];
 
         let totalWeight = 0;
-        for (let i of sheetData.items) {
+        for (let i of data.items) {
             i.img = i.img || DEFAULT_TOKEN;
 
             if (Object.keys(inventory).includes(i.type)) {
@@ -64,7 +67,7 @@ class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
             }
         }
 
-        actorData.inventory = inventory;
+        data.inventory = inventory;
     }
 
     /**

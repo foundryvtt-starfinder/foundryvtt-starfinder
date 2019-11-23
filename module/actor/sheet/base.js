@@ -1,23 +1,65 @@
-class ActorSheetStarfinder extends ActorSheet {
-    get actorType() {
-        return this.actor.data.type;
+import { TraitSelectorStarfinder } from "../../apps/trait-selector.js";
+import { ActorSheetFlags } from "../../apps/actor-flags.js";
+
+/**
+ * Extend the basic ActorSheet class to do all the Starfinder things!
+ * This sheet is an Abstract layer which is not used.
+ * 
+ * @type {ActorSheet}
+ */
+export class ActorSheetStarfinder extends ActorSheet {
+    constructor(...args) {
+        super(...args);
+
+        this._filters = {
+            inventory: new Set(),
+            spellbook: new Set(),
+            features: new Set()
+        };
     }
 
+    /**
+     * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
+     */
     getData() {
-        const sheetData = super.getData();
+        let isOwner = this.entity.owner;
+        const data = {
+            owner: isOwner,
+            limited: this.entity.limited,
+            options: this.options,
+            editable: this.isEditable,
+            cssClass: isOwner ? "editable" : "locked",
+            isCharacter: this.entity.data.type === "character",
+            config: CONFIG.STARFINDER
+        };
 
-        for (let skl of Object.values(sheetData.data.skills)) {
-            skl.ability = sheetData.data.abilities[skl.ability].label.substring(0, 3);
-            skl.icon = this._getClassSkillIcon(skl.value);
-
+        data.actor = duplicate(this.actor.data);
+        data.items = this.actor.items.map(i => {
+            i.data.labels = i.lables;
+            return i.data;
+        });
+        data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+        data.data = data.actor.data;
+        data.labels = this.actor.labels || {};
+        data.filters = this._filters;
+        
+        // Ability Scores
+        for (let [a, abl] of Object.entries(data.actor.data.abilities)) {
+            abl.label = CONFIG.STARFINDER.abilities[a];
         }
 
-        sheetData["actorSizes"] = CONFIG.actorSizes;
-        this._prepareTraits(sheetData.data["traits"]);
+        // Update skill labels
+        for (let [s, skl] of Object.entries(data.actor.data.skills)) {
+            skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
+            skl.icon = this._getClassSkillIcon(skl.value);
+            skl.label = CONFIG.STARFINDER.skills[s];
+        }
+        
+        this._prepareTraits(data.actor.data.traits);
 
-        this._prepareItems(sheetData);
+        this._prepareItems(data);
 
-        return sheetData;
+        return data;
     }
 
     /**
@@ -54,24 +96,31 @@ class ActorSheetStarfinder extends ActorSheet {
 
     _prepareTraits(traits) {
         const map = {
-            "dr": CONFIG.damageTypes,
-            "di": CONFIG.damageTypes,
-            "dv": CONFIG.damageTypes,
-            "ci": CONFIG.damageTypes,
-            "languages": CONFIG.languages,
-            "weaponProf": CONFIG.weaponTypes,
-            "armorProf": CONFIG.armorTypes
+            "dr": CONFIG.STARFINDER.damageTypes,
+            "di": CONFIG.STARFINDER.damageTypes,
+            "dv": CONFIG.STARFINDER.damageTypes,
+            "ci": CONFIG.STARFINDER.damageTypes,
+            "languages": CONFIG.STARFINDER.languages,
+            "weaponProf": CONFIG.STARFINDER.weaponProficiencies,
+            "armorProf": CONFIG.STARFINDER.armorProficiencies
         };
 
         for (let [t, choices] of Object.entries(map)) {
             const trait = traits[t];
             if (!trait) continue;
-            trait.selected = trait.value.reduce((obj, t) => {
+            let values = [];
+            if (trait.value) {
+                values = trait.value instanceof Array ? trait.value : [trait.value];
+            }
+            trait.selected = values.reduce((obj, t) => {
                 obj[t] = choices[t];
                 return obj;
             }, {});
 
-            if (trait.custom) trait.selected["custom"] = trait.custom;
+            if (trait.custom) {
+                trait.custom.split(';').forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
+            }
+            trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
         }
     }
 
@@ -141,7 +190,7 @@ class ActorSheetStarfinder extends ActorSheet {
         li.toggleClass('expanded');
     }
 
-    _prepareSpell(actorData, spellbook, spell) {
+    _prepareSpellbook(data, spells) {
 
     }
 

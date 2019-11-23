@@ -372,3 +372,12 @@ STARFINDER.spellLevels = {
       6400,9600,12800,19200,25600,38400,51200,76800,102400,
       153600,204800,307200,409600,614400,819200,1228800,1638400
   ];
+
+  STARFINDER.characterFlags = {
+      "improvedInititive": {
+          name: "Improved Inititive",
+          hint: "Character feat that adds 4 to thier initiive roll",
+          section: "Feats",
+          type: Boolean
+      }
+  };

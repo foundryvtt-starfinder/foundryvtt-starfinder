@@ -1,7 +1,7 @@
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
  */
-class ActorStarfinder extends Actor {
+export class ActorStarfinder extends Actor {
     /**
      * Augment the basic actor data with additional dynamic data.
      * 
@@ -25,7 +25,7 @@ class ActorStarfinder extends Actor {
             skl.value = parseFloat(skl.value || 0);
             let classSkill = skl.value;
             let hasRanks = skl.ranks > 0;
-            skl.mod = data.abilities[skl.ability].mod + skl.ranks + (hasRanks ? classSkill : 0);
+            skl.mod = data.abilities[skl.ability].mod + skl.ranks + (hasRanks ? classSkill : 0) + skl.misc;
         }
 
         const init = data.attributes.init;
@@ -36,23 +36,23 @@ class ActorStarfinder extends Actor {
         data.attributes.eac.min = 10 + data.abilities.dex.mod;
         data.attributes.kac.min = 10 + data.abilities.dex.mod;
 
-        const map = {
-            "dr": CONFIG.damageTypes,
-            "di": CONFIG.damageTypes,
-            "dv": CONFIG.damageTypes,
-            "ci": CONFIG.damageTypes,
-            "languages": CONFIG.languages,
-            "weaponProf": CONFIG.weaponTypes,
-            "armorProf": CONFIG.armorTypes
-        };
+        // const map = {
+        //     "dr": CONFIG.STARFINDER.damageTypes,
+        //     "di": CONFIG.STARFINDER.damageTypes,
+        //     "dv": CONFIG.STARFINDER.damageTypes,
+        //     "ci": CONFIG.STARFINDER.damageTypes,
+        //     "languages": CONFIG.STARFINDER.languages,
+        //     "weaponProf": CONFIG.weaponProfien,
+        //     "armorProf": CONFIG.armorTypes
+        // };
 
-        for (let [t, choices] of Object.entries(map)) {
-            let trait = data.traits[t];
-            if (!trait) continue;
-            if (!(trait.value instanceof Array)) {
-                trait.value = TraitSelectorStarfinder._backCompat(trait.value, choices);
-            }
-        }
+        // for (let [t, choices] of Object.entries(map)) {
+        //     let trait = data.traits[t];
+        //     if (!trait) continue;
+        //     if (!(trait.value instanceof Array)) {
+        //         trait.value = TraitSelectorStarfinder._backCompat(trait.value, choices);
+        //     }
+        // }
         
         return actorData;
     }
@@ -103,6 +103,46 @@ class ActorStarfinder extends Actor {
         if (cr < 1.0) return Math.max(400 * cr, 50);
         return CONFIG.STARFINDER.CR_EXP_LEVELS[cr];
     }
-}
 
-CONFIG.Actor.entityClass = ActorStarfinder;
+    /**
+     * Extend the default update method to enhance data before submission.
+     * See the parent Entity.update method for full details.
+     *
+     * @param {Object} data     The data with which to update the Actor
+     * @param {Object} options  Additional options which customize the update workflow
+     * @return {Promise}        A Promise which resolves to the updated Entity
+     */
+    async update(data, options = {}) {
+        if (data['data.traits.size']) {
+            let size = CONFIG.STARFINDER.tokenSizes[data['data.traits.size']];
+            if (this.isToken) this.token.update(this.token.scene._id, { height: size, width: size });
+            else {
+                setProperty(data, 'token.height', size);
+                setProperty(data, 'token.width', size);
+            }
+        }
+
+        return super.update(data, options);
+    }
+
+    /**
+     * Extend OwnedItem creation logic for the 5e system to make weapons proficient by default when dropped on a NPC sheet
+     * See the base Actor class for API documentation of this method
+     * 
+     * @param {Object} itemData The data object of the item
+     * @param {Object} options Any options passed in
+     * @returns {Promise}
+     */
+    async createOwnedItem(itemData, options) {
+        if (!this.isPC) {
+            let t = itemData.type;
+            let initial = {};
+            if (t === "weapon") initial['data.proficient'] = true;
+            if (["weapon", "equipment"].includes(t)) initial['data.equipped'] = true;
+            if (t === "spell") initial['data.prepared'] = true;
+            mergeObject(itemData, initial);
+        }
+
+        return super.createOwnedItem(itemData, options);
+    }
+}

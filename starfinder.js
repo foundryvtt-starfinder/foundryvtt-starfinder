@@ -7,10 +7,12 @@
  * Issue Tracker: https://github.com/wildj79/foundryvtt-starfinder/issues
  */
 
- import { STARFINDER } from "./module/config";
- import { preloadHandlebarsTemplates } from "./module/templates";
- import { registerSystemSettings } from "./module/settings";
- import { measureDistance, getBarAttribute } from "./module/canvas";
+ import { STARFINDER } from "./module/config.js";
+ import { preloadHandlebarsTemplates } from "./module/templates.js";
+ import { registerSystemSettings } from "./module/settings.js";
+ import { measureDistance, getBarAttribute } from "./module/canvas.js";
+ import { ActorStarfinder } from "./module/actor/actor.js";
+ import { ActorSheetStarfinderCharacter } from "./module/actor/sheet/character.js";
 
  Hooks.once('init', async function () {
      console.log(`Starfinder | Initializeing Starfinder System`);
@@ -19,17 +21,19 @@
 
      CONFIG.STARFINDER = STARFINDER;
      CONFIG.Actor.entityClass = ActorStarfinder;
-     CONFIG.Item.entityClass = ItemStarfinder;
+     //CONFIG.Item.entityClass = ItemStarfinder;
 
      registerSystemSettings();
 
      await preloadHandlebarsTemplates();
+
+     Actors.unregisterSheet("core", ActorSheet);
+     Actors.registerSheet("starfinder", ActorSheetStarfinderCharacter, { types: ["character"], makeDefault: true });     
  });
 
  Hooks.once("setup", function() {
      const toLocalize = [
-         "abilities", "alignments", "currencies", "distanceUnits", "itemActionTypes", "senses", "skills", "targetTypes",
-         "timePeriods"
+         "abilities", "alignments", "distanceUnits", "senses", "skills"
      ];
 
      for (let o of toLocalize) {

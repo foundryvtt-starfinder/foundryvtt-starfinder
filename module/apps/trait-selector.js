@@ -3,15 +3,16 @@
  * 
  * @type {FormApplication}
  */
-class TraitSelectorStarfinder extends FormApplication {
+export class TraitSelectorStarfinder extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
 
         options.id = "trait-selector";
         options.classes = ["starfinder"];
         options.title = "Actor Trait Selection";
-        options.template = "public/systems/starfinder/templates/actors/trait-selector.html";
-        options.width = 200;
+        options.template = "systems/starfinder/templates/actors/trait-selector.html";
+        options.width = 320;
+        options.height = "auto";
 
         return options;
     }
