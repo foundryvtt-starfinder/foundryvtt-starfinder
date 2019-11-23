@@ -78,8 +78,8 @@ STARFINDER.abilityActivationTypes = {
  * @type {Object}
  */
 STARFINDER.currencies = {
-    "credit": "Credits",
-    "upb": "UPB's"
+    "credit": "STARFINDER.Credits",
+    "upb": "STARFINDER.UPBs"
 };
 
 // Damage Types

@@ -7,26 +7,16 @@
  */
 export const preloadHandlebarsTemplates = async function () {
     const templatePaths = [
-        "systems/starfinder/templates/actors/actor-sheet.html",
-        "systems/starfinder/templates/actors/actor-attributes.html",
-        "systems/starfinder/templates/actors/actor-abilities.html",
-        "systems/starfinder/templates/actors/actor-biography.html",
-        "systems/starfinder/templates/actors/actor-skills.html",
-        "systems/starfinder/templates/actors/actor-traits.html",
-        "systems/starfinder/templates/actors/actor-classes.html",
+        // Actor Sheet Partials
+    "systems/starfinder/templates/actors/parts/actor-traits.html",
+    "systems/starfinder/templates/actors/parts/actor-inventory.html",
+    "systems/starfinder/templates/actors/parts/actor-features.html",
+    "systems/starfinder/templates/actors/parts/actor-spellbook.html",
 
-        "systems/starfinder/templates/items/class-sidebar.html",
-        "systems/starfinder/templates/items/consumable-details.html",
-        "systems/starfinder/templates/items/consumable-sidebar.html",
-        "systems/starfinder/templates/items/equipment-details.html",
-        "systems/starfinder/templates/items/equipment-sidebar.html",
-        "systems/starfinder/templates/items/feat-details.html",
-        "systems/starfinder/templates/items/feat-sidebar.html",
-        "systems/starfinder/templates/items/spell-details.html",
-        "systems/starfinder/templates/items/spell-sidebar.html",
-        "systems/starfinder/templates/items/tool-sidebar.html",
-        "systems/starfinder/templates/items/weapon-details.html",
-        "systems/starfinder/templates/items/weapon-sidebar.html"
+    // Item Sheet Partials
+    "systems/starfinder/templates/items/parts/item-action.html",
+    "systems/starfinder/templates/items/parts/item-activation.html",
+    "systems/starfinder/templates/items/parts/item-description.html"
     ];
 
     return loadTemplates(templatePaths);

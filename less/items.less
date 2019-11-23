@@ -1,0 +1,218 @@
+@import "./variables.less";
+.starfinder.sheet.item {
+  min-height: 420px;
+
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+
+  .sheet-header {
+    img.profile {
+      border: 2px solid #000;
+    }
+
+    .item-subtitle {
+      flex: 0 0 80px;
+      height: 60px;
+      margin: 0;
+      padding: 5px;
+      text-align: right;
+      color: @colorTan;
+
+      .item-type {
+        font-size: 24px;
+        line-height: 26px;
+        margin: 0;
+      }
+
+      .item-status {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+
+  .sheet-navigation {
+    margin-bottom: 5px;
+    .item {
+      font-size: 18px;
+    }
+  }
+
+  .sheet-body {
+    overflow: hidden scroll;
+
+    .tab {
+      padding: 0 5px;
+      overflow: hidden;
+    }
+
+    .item-properties {
+      flex: 0 0 120px;
+      margin: 5px 5px 5px 0;
+      padding-right: 5px;
+      border-right: @borderGroove;
+
+      .form-group {
+        margin: 0;
+        label {
+          line-height: 20px;
+        }
+        input {
+          text-align: right;
+        }
+      }
+
+      .properties-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          margin: 3px 0;
+          padding: 0 2px;
+          background: rgba(0, 0, 0, 0.05);
+          border: @borderGroove;
+          text-align: center;
+          font-size: 12px;
+          line-height: 18px;
+        }
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Item Details Form                        */
+  /* ----------------------------------------- */
+
+  .details {
+
+    // Item Sheet form fields
+    input[type="text"], select {
+      border: 1px solid @colorTan;
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group.input-select {
+      select {
+        flex: 1.8;
+      }
+    }
+
+    .form-group.input-select-select {
+      select {
+        flex: 1.5;
+      }
+    }
+
+    .form-group.uses-per {
+      input {
+        flex: 1;
+      }
+      span {
+        text-align: center;
+        flex: 0 0 16px;
+        line-height: 24px;
+      }
+      select {
+        flex: 3;
+      }
+    }
+
+    span.sep {
+      flex: 0 0 8px;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    .prepared {
+      flex: 1.3 !important;
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    // Spell Materials
+    .spell-materials {
+      flex: 0 0 100%;
+      margin: 0.25em 0;
+      justify-content: flex-end;
+      label {
+        flex: 0 0 64px;
+        text-align: right;
+        margin-right: 5px;
+        font-size: 12px;
+        line-height: 24px;
+      }
+      input[type="text"] {
+        flex: 0 0 48px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+
+  h4.damage-header {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    line-height: 24px;
+    color: @colorOlive;
+  }
+
+  .damage-parts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .damage-part {
+      flex: 0 0 100%;
+      padding: 0;
+      input {
+        flex: 3;
+      }
+      select {
+        margin-left: 5px;
+        flex: 1;
+      }
+    }
+  }
+
+  .damage-control {
+    width: 18px;
+    flex: 0 0 18px;
+    line-height: 24px;
+    float: right;
+    text-align: right;
+    color: @colorTan;
+  }
+
+  .recharge {
+    span {
+      line-height: 24px;
+      flex: 0 0 80px;
+    }
+    label.checkbox {
+      flex: 0 0 80px;
+      text-align: right;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+
+  .weapon-properties label.checkbox {
+    flex: 0 0 98px;
+  }
+
+  /* ----------------------------------------- */
+  /*  Loot Sheet (No Tabs)                     */
+  /* ----------------------------------------- */
+
+  .loot-header {
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,324 @@
+@import "./variables.less";
+
+@navHeight: 30px;
+@headerHeight: 100px;
+@detailsHeight: 40px;
+
+/* ----------------------------------------- */
+/*  All D&D5e Apps                           */
+/* ----------------------------------------- */
+
+.starfinder {
+  .window-content {
+    background: @sheetBackground;
+    font-size: 13px;
+    color: @colorDark
+  }
+
+  /* ----------------------------------------- */
+  /*  Element Styles                           */
+  /* ----------------------------------------- */
+
+  // Item Sheet form fields
+  input[type="text"], select {
+    height: calc(100% - 2px);
+    border: 1px solid @colorTan;
+    background: rgba(0, 0, 0, 0.05);
+    color: @colorDark;
+  }
+
+  // Hovered Fields
+  input[type="text"] {
+    &:hover,
+    &:focus {
+      border: 1px solid #111;
+      box-shadow: 0 0 8px red;
+    }
+  }
+
+  // Disabled Fields
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    color: @colorOlive;
+    &:hover,
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  // Buttons
+  button {
+    background: rgba(0, 0, 0, 0.10);
+    border: @borderGroove;
+  }
+
+  // Checkbox Labels
+  label.checkbox {
+    flex: auto;
+    margin: 0;
+    line-height: 20px;
+    font-size: 11px;
+    text-align: right;
+    input[type="checkbox"] {
+      height: auto;
+      margin: 0 5px 0;
+      position: relative;
+      top: 3px;
+    }
+  }
+
+  /* Form Groups */
+  .form-group {
+    label {
+      flex: 2;
+      color: @colorOlive;
+      font-weight: bold;
+    }
+    .form-fields {
+      .flexrow();
+      > * {
+        margin: 0 3px 0 0;
+        &:last-child { margin-right: 0; }
+      }
+    }
+  }
+
+  // Stacked Groups
+  .form-group.stacked {
+    label {
+      flex: 0 0 100%;
+    }
+    label.checkbox {
+      flex: auto;
+      text-align: left;
+    }
+  }
+
+  // Form Headers
+  .form-header {
+    margin: 0 0 0.25em 0;
+    padding: 0 2px;
+    .nodesto();
+    font-size: 24px;
+    border-top: @borderGroove;
+    border-bottom: @borderGroove;
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    margin: 0 2px 0 0;
+    padding: 0 3px;
+    font-size: 10px;
+    line-height: 16px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+
+/* ----------------------------------------- */
+/*  Entity Sheets Specifically               */
+/* ----------------------------------------- */
+
+.starfinder.sheet {
+  .window-content {
+    overflow-y: hidden;
+    padding: 5px;
+    background: @sheetBackground;
+    font-size: 13px;
+    color: @colorDark;
+
+    form {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .tab {
+      height: 100%;
+      overflow-y: auto;
+      align-content: flex-start;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Element Styles                           */
+  /* ----------------------------------------- */
+
+  // Input Fields
+  input[type="text"] {
+    background: none;
+    border: 1px solid transparent;
+    &:hover,
+    &:focus {
+      border: 1px solid #111;
+    }
+  }
+
+  // Select Fields
+  select {
+    flex: 1;
+    font-size: 12px;
+    height: 22px;
+    background: transparent;
+  }
+
+  // Rollable Links
+  .editable .rollable:hover {
+    color: #000;
+    text-shadow: 0 0 10px red;
+    cursor: pointer;
+  }
+
+  /* ----------------------------------------- */
+  /*  TinyMCE                                  */
+  /* ----------------------------------------- */
+
+  .editor {
+    height: 100%;
+    .tox-toolbar-overlord,
+    .tox-toolbar__primary {
+      background: none;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  .sheet-header {
+    flex: 0 0 @headerHeight;
+    border-bottom: @borderGroove;
+    .nodesto();
+
+    /* Character Name */
+    h1 {
+      flex: 1;
+      border-bottom: none;
+      height: 60px;
+      margin: 0;
+      padding: 5px;
+
+      input {
+        height: 50px;
+        font-size: 36px;
+      }
+    }
+
+    /* Profile Image */
+    img.profile {
+      flex: 0 0 @headerHeight;
+      height: @headerHeight;
+      object-fit: cover;
+      border: none;
+      border-right: @borderGroove;
+    }
+
+    /* Header Summary Details */
+    .summary {
+      flex: 0 0 100%;
+      height: @detailsHeight;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: @borderGroove;
+      border-bottom: none;
+
+      li {
+        width: 33.33%;
+        float: left;
+        height: @detailsHeight - 6px;
+        margin: 2px 0;
+        padding: 0 3px;
+        border-right: @borderGroove;
+        line-height: 34px;
+        color: @colorOlive;
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Navigation                         */
+  /* ----------------------------------------- */
+
+  .sheet-navigation {
+    flex: 0 0 @navHeight;
+    margin-bottom: 5px;
+    .nodesto();
+
+    .item {
+      height: 30px;
+      line-height: 32px;
+      margin: 0 24px;
+      border-bottom: 3px solid @colorBeige;
+
+      &.active {
+        border-bottom: 3px solid @colorCrimson;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Body                               */
+  /* ----------------------------------------- */
+
+  .sheet-body {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ----------------------------------------- */
+  /*  List Filters                             */
+  /* ----------------------------------------- */
+
+  .filter-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 16px;
+
+    .filter-title {
+      flex: 3;
+    }
+
+    .filter-item {
+      text-align: center;
+      font-size: 12px;
+      margin: 0 6px;
+      border-bottom: 3px solid @colorBeige;
+      white-space: nowrap;
+
+      &:hover {
+        text-shadow: 0 0 4px red;
+        border-bottom: 3px solid @colorTan;
+      }
+
+      &.active {
+        border-bottom: 3px solid @colorCrimson;
+      }
+    }
+  }
+}
+
+
+/* ----------------------------------------- */
+/* Trait Selector
+/* ----------------------------------------- */
+
+#trait-selector {
+  .trait-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  input[type="text"] {
+    height: 24px;
+    margin: 2px;
+  }
+}

@@ -15,7 +15,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     get template() {
         const path = "systems/starfinder/templates/actors/";
         if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
-        return path + "actor-sheet.html";
+        return path + "character-sheet.html";
     }
 
     getData() {
@@ -67,7 +67,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
             }
         }
 
-        data.inventory = inventory;
+        data.inventory = Object.values(inventory);
     }
 
     /**
@@ -81,8 +81,3 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         if (!this.options.editable) return;
     }
 }
-
-Actors.registerSheet("starfinder", ActorSheetStarfinderCharacter, {
-    types: ["character"],
-    makeDefault: true
-});

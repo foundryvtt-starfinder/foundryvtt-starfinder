@@ -1,0 +1,104 @@
+<div class="traits">
+    <div class="form-group">
+        <label>{{localize "STARFINDER.Size"}}</label>
+        <select class="actor-size" name="data.traits.size">
+            {{#select data.traits.size}}
+            {{#each config.actorSizes as |label size|}}
+                <option value="{{size}}">{{label}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+
+    <div class="form-group {{#unless data.traits.senses}}inactive{{/unless}}">
+        <label>{{localize "STARFINDER.Senses"}}</label>
+        <input type="text" name="data.traits.senses" value="{{data.traits.senses}}" placeholder="None"/>
+    </div>
+
+    <div class="form-group {{data.traits.languages.cssClass}}">
+        <label for="data.traits.languages">{{localize "STARFINDER.Languages"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.languages.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="languages"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.di.cssClass}}">
+        <label for="data.traits.di">{{localize "STARFINDER.DamImm"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.di.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.dr.cssClass}}">
+        <label for="data.traits.dr">{{localize "STARFINDER.DamRes"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.dr.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.dv.cssClass}}">
+        <label for="data.traits.dv">{{localize "STARFINDER.DamVuln"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.dv.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.ci.cssClass}}">
+        <label for="data.traits.ci">{{localize "STARFINDER.ConImm"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.ci.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="conditionTypes"><i class="fas fa-edit"></i></a>
+    </div>
+
+    {{#if isCharacter}}
+    <div class="form-group {{data.traits.weaponProf.cssClass}}">
+        <label for="data.traits.weaponProf">{{localize "STARFINDER.TraitWeaponProf"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.weaponProf.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="weaponProficiencies"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.armorProf.cssClass}}">
+        <label for="data.traits.armorProf">{{localize "STARFINDER.TraitArmorProf"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.armorProf.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="armorProficiencies"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.toolProf.cssClass}}">
+        <label for="data.traits.toolProf">{{localize "STARFINDER.TraitToolProf"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.toolProf.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="toolProficiencies"><i class="fas fa-edit"></i></a>
+    </div>
+    {{/if}}
+
+    <div class="form-group ">
+        <label>{{localize "STARFINDER.SpecialTraits"}}</label>
+        <a class="configure-flags"><i class="fas fa-cog"></i></a>
+    </div>
+</div>

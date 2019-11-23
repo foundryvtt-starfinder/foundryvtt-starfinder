@@ -50,6 +50,7 @@ export class ActorSheetStarfinder extends ActorSheet {
 
         // Update skill labels
         for (let [s, skl] of Object.entries(data.actor.data.skills)) {
+            if (s === "pro") continue; // TODO: make the profession skill work ;)
             skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
             skl.icon = this._getClassSkillIcon(skl.value);
             skl.label = CONFIG.STARFINDER.skills[s];
