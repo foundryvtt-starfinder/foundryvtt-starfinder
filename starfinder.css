@@ -70,7 +70,7 @@
   padding: 5px;
 }
 /* ----------------------------------------- */
-/*  All D&D5e Apps                           */
+/*  All Starfinder Apps                           */
 /* ----------------------------------------- */
 .starfinder {
   /* ----------------------------------------- */
@@ -274,7 +274,7 @@
 .starfinder.sheet .sheet-header img.profile {
   flex: 0 0 100px;
   height: 100px;
-  object-fit: cover;
+  object-fit: contain;
   border: none;
   border-right: 2px groove #eeede0;
 }
@@ -301,6 +301,7 @@
   border-right: none;
 }
 .starfinder.sheet .sheet-navigation {
+  background: linear-gradient(130deg, #0c2d4a 0%, #235683 40%, #235683 60%, #1d7dd1 100%);
   flex: 0 0 30px;
   margin-bottom: 5px;
   font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
@@ -310,11 +311,10 @@
 .starfinder.sheet .sheet-navigation .item {
   height: 30px;
   line-height: 32px;
-  margin: 0 24px;
-  border-bottom: 3px solid #b5b3a4;
+  color: #fff;
 }
 .starfinder.sheet .sheet-navigation .item.active {
-  border-bottom: 3px solid #44191A;
+  background: #c41e1e;
 }
 .starfinder.sheet .sheet-body {
   flex: 1;
@@ -388,47 +388,59 @@
   /*  TinyMCE                                  */
   /* ----------------------------------------- */
 }
-.starfinder.sheet.actor .sheet-header .charlevel {
+.starfinder.sheet.actor .sheet-header .header-background {
+  background: #235683;
+  background: linear-gradient(130deg, #0c2d4a 0%, #235683 40%, #235683 60%, #1d7dd1 100%);
+}
+.starfinder.sheet.actor .sheet-header .header-background .charname > input {
+  color: #fff;
+}
+.starfinder.sheet.actor .sheet-header .header-background .charlevel {
   flex: 0 0 160px;
   height: 60px;
   margin: 0;
   padding: 5px;
   text-align: right;
 }
-.starfinder.sheet.actor .sheet-header .charlevel .level {
+.starfinder.sheet.actor .sheet-header .header-background .charlevel .level {
   width: 100%;
   height: 30px;
   font-size: 20px;
   line-height: 30px;
 }
-.starfinder.sheet.actor .sheet-header .charlevel .level label {
+.starfinder.sheet.actor .sheet-header .header-background .charlevel .level label {
   display: inline;
   font-size: 24px;
   text-align: right;
+  color: #fff;
 }
-.starfinder.sheet.actor .sheet-header .charlevel .level input {
+.starfinder.sheet.actor .sheet-header .header-background .charlevel .level input {
   display: inline;
   width: 36px;
   font-size: 24px;
   text-align: center;
+  color: #fff;
 }
-.starfinder.sheet.actor .sheet-header .charlevel .level.noxp {
+.starfinder.sheet.actor .sheet-header .header-background .charlevel .level.noxp {
   margin-top: 10px;
 }
-.starfinder.sheet.actor .sheet-header .charlevel .level.noxp > label {
+.starfinder.sheet.actor .sheet-header .header-background .charlevel .level.noxp > label {
   font-size: 32px;
 }
-.starfinder.sheet.actor .sheet-header .charlevel .level.noxp > input {
+.starfinder.sheet.actor .sheet-header .header-background .charlevel .level.noxp > input {
   font-size: 32px;
   flex: 0 0 40px;
   height: 44px;
 }
-.starfinder.sheet.actor .sheet-header .charlevel .experience {
+.starfinder.sheet.actor .sheet-header .header-background .charlevel .experience {
   width: 100%;
   height: 20px;
   padding-right: 5px;
   font-size: 16px;
-  color: #4b4a44;
+  color: #fff;
+}
+.starfinder.sheet.actor .sheet-header .header-background .charlevel .experience > input {
+  color: #fff;
 }
 .starfinder.sheet.actor .attributes input.temphp {
   width: 48%;
@@ -570,6 +582,12 @@
 }
 .starfinder.sheet.actor ul.skills-list li.skill .skill-mod {
   flex: 0 0 20px;
+}
+.starfinder.sheet.actor ul.skills-list li.skill .skill-ranks,
+.starfinder.sheet.actor ul.skills-list li.skill .skill-misc {
+  flex: 0 0 20px;
+  text-align: center;
+  height: 18px;
 }
 .starfinder.sheet.actor ul.skills-list li.skill .skill-passive {
   flex: 0 0 26px;
@@ -1134,7 +1152,7 @@
   height: 4px;
   margin: 1px;
   display: block;
-  background: #afebff;
+  background: #c41e1e;
   border: 1px solid #000;
   border-radius: 2px;
 }
@@ -1187,7 +1205,8 @@
 .starfinder.sheet.actor.character .attributes .resource label.checkbox input[type="checkbox"] {
   transform: scale(1.2);
 }
-.starfinder.sheet.actor.character .attributes .initiative .attribute-footer input {
+.starfinder.sheet.actor.character .attributes .initiative .attribute-footer input,
+.starfinder.sheet.actor.character .attributes .save .attribute-footer input {
   width: 32px;
 }
 .starfinder.sheet.actor.character ul.skills-list {

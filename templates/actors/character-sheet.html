@@ -2,29 +2,31 @@
 
     {{!-- Sheet Header --}}
     <header class="sheet-header flexrow">
-        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="220" width="220" />
 
         <div class="header-details flexrow">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
-            </h1>
+            <div class="header-background flexrow">
+                <h1 class="charname">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
+                </h1>
 
-            <div class="charlevel">
-                <div class="level {{#if disableExperience}}noxp{{/if}}">
-                    <label>Level </label>
-                    <input name="data.details.level.value" type="text" value="{{data.details.level.value}}"
-                           data-dtype="Number" placeholder="1"/>
+                <div class="charlevel">
+                    <div class="level {{#if disableExperience}}noxp{{/if}}">
+                        <label>Level </label>
+                        <input name="data.details.level.value" type="text" value="{{data.details.level.value}}"
+                            data-dtype="Number" placeholder="1"/>
+                    </div>
+                    {{#unless disableExperience}}
+                        <div class="experience">
+                            <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}"
+                                data-dtype="Number" placeholder="0"/>
+                            <span class="max"> / {{data.details.xp.max}}</span>
+                        </div>
+                        <div class="xpbar">
+                            <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
+                        </div>
+                    {{/unless}}
                 </div>
-                {{#unless disableExperience}}
-                    <div class="experience">
-                        <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}"
-                               data-dtype="Number" placeholder="0"/>
-                        <span class="max"> / {{data.details.xp.max}}</span>
-                    </div>
-                    <div class="xpbar">
-                        <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
-                    </div>
-                {{/unless}}
             </div>
 
             {{!-- Character Summary --}}
@@ -33,7 +35,7 @@
                     <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="Race"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="Background"/>
+                    <input type="text" name="data.details.theme" value="{{data.details.theme}}" placeholder="Theme"/>
                 </li>
                 <li>
                     <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="Alignment"/>
@@ -59,16 +61,31 @@
                     </footer>
                 </li>
 
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "STARFINDER.ArmorClass" }}</h4>
-                    <div class="attribute-value">
-                        <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
+                <li class="attribute health">
+                    <h4 class="attribute-name box-title">{{ localize "STARFINDER.Stamina" }}</h4>
+                    <div class="attribute-value multiple">
+                        <input name="data.attributes.sp.value" type="text" value="{{data.attributes.sp.value}}"
+                               data-dtype="Number" placeholder="10"/>
+                        <span class="sep"> / </span>
+                        <input name="data.attributes.sp.max" type="text" value="{{data.attributes.sp.max}}"
                                data-dtype="Number" placeholder="10"/>
                     </div>
-                    <footer class="attribute-footer">
-                        <span>{{ localize "STARFINDER.Proficiency" }}</span>
-                        <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
-                    </footer>
+                </li>
+
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{ localize "STARFINDER.EnergyArmorClass" }}</h4>
+                    <div class="attribute-value">
+                        <input name="data.attributes.eac.value" type="text" value="{{data.attributes.eac.value}}"
+                               data-dtype="Number" placeholder="10"/>
+                    </div>
+                </li>
+
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{ localize "STARFINDER.KineticArmorClass" }}</h4>
+                    <div class="attribute-value">
+                        <input name="data.attributes.kac.value" type="text" value="{{data.attributes.kac.value}}"
+                               data-dtype="Number" placeholder="10"/>
+                    </div>
                 </li>
 
                 <li class="attribute">
@@ -80,20 +97,6 @@
                     <footer class="attribute-footer">
                         <input type="text" class="speed" name="data.attributes.speed.special"
                                value="{{data.attributes.speed.special}}" placeholder="{{ localize 'STARFINDER.SpeedSpecial' }}"/>
-                    </footer>
-                </li>
-
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "STARFINDER.HitDice" }}</h4>
-                    <div class="attribute-value multiple">
-                        <input name="data.attributes.hd.value" type="text" value="{{data.attributes.hd.value}}"
-                               placeholder="1" data-dtype="Number"/>
-                        <span class="sep"> / </span>
-                        <input type="text" value="{{data.details.level.value}}" disabled/>
-                    </div>
-                    <footer class="attribute-footer">
-                        <a class="rest short-rest">{{ localize "STARFINDER.RestS" }}</a>
-                        <a class="rest long-rest">{{ localize "STARFINDER.RestL" }}</a>
                     </footer>
                 </li>
             </ul>
@@ -123,8 +126,8 @@
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                         <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
-                        <a class="proficiency-toggle ability-proficiency" title="Proficiency">{{{ability.icon}}}</a>
-                        <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
+                        {{!-- <a class="proficiency-toggle ability-proficiency" title="Proficiency">{{{ability.icon}}}</a> --}}
+                        {{!-- <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span> --}}
                     </div>
                 </li>
             {{/each}}
@@ -138,8 +141,9 @@
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <h4 class="skill-name rollable">{{skill.label}}</h4>
                     <span class="skill-ability">{{skill.ability}}</span>
+                    <input type="text" class="skill-ranks" name="data.skills.{{s}}.ranks" value="{{skill.ranks}}" data-dtype="Number" />
+                    <input type="text" class="skill-misc" name="data.skills.{{s}}.misc" value="{{skill.misc}}" data-dtype="Number" />
                     <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
-                    <span class="skill-passive">({{skill.passive}})</span>
                 </li>
             {{/each}}
             </ul>
@@ -148,7 +152,7 @@
 
                 {{!-- Body Attributes --}}
                 <ul class="attributes flexrow">
-                    {{#each resources as |res|}}
+                    {{!-- {{#each resources as |res|}}
                     <li class="attribute resource">
                         <h4 class="attribute-name box-title">
                             <input name="data.resources.{{res.name}}.label" type="text" value="{{res.label}}"
@@ -170,7 +174,43 @@
                             </label>
                         </footer>
                     </li>
-                    {{/each}}
+                    {{/each}} --}}
+                    
+                    <li class="attribute save">
+                        <h4 class="attribute-name box-title">Fortitude</h4>
+                        <div class="attribute-value">
+                            <span>{{numberFormat data.attributes.fort.bonus decimals=0 sign=true}}</span>
+                        </div>
+                        <footer class="attribute-footer">
+                            <span>Base</span>
+                            <input name="data.attributes.fort.value" type="text" placeholder="0" data-dtype="Number"
+                                   value="{{numberFormat data.attributes.fort.value decimals=0 sign=true}}"/>
+                        </footer>
+                    </li>
+
+                    <li class="attribute save">
+                        <h4 class="attribute-name box-title">Reflex</h4>
+                        <div class="attribute-value">
+                            <span>{{numberFormat data.attributes.reflex.bonus decimals=0 sign=true}}</span>
+                        </div>
+                        <footer class="attribute-footer">
+                            <span>Base</span>
+                            <input name="data.attributes.reflex.value" type="text" placeholder="0" data-dtype="Number"
+                                   value="{{numberFormat data.attributes.reflex.value decimals=0 sign=true}}"/>
+                        </footer>
+                    </li>
+
+                    <li class="attribute save">
+                        <h4 class="attribute-name box-title">Will</h4>
+                        <div class="attribute-value">
+                            <span>{{numberFormat data.attributes.will.bonus decimals=0 sign=true}}</span>
+                        </div>
+                        <footer class="attribute-footer">
+                            <span>Base</span>
+                            <input name="data.attributes.will.value" type="text" placeholder="0" data-dtype="Number"
+                                   value="{{numberFormat data.attributes.will.value decimals=0 sign=true}}"/>
+                        </footer>
+                    </li>
 
                     <li class="attribute initiative">
                         <h4 class="attribute-name box-title">Initiative</h4>
@@ -186,7 +226,7 @@
                 </ul>
 
                 {{!-- Counters --}}
-                <div class="counters flexrow">
+                {{!-- <div class="counters flexrow">
                     <div class="counter flexrow death-saves">
                         <h4>{{ localize "STARFINDER.DeathSave" }}</h4>
                         <div class="counter-value">
@@ -212,7 +252,7 @@
                                    {{checked data.attributes.inspiration}}/>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 {{!-- Traits --}}
                 {{> "systems/starfinder/templates/actors/parts/actor-traits.html"}}

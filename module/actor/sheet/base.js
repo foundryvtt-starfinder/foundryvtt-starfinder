@@ -77,14 +77,11 @@ export class ActorSheetStarfinder extends ActorSheet {
             e.setAttribute("style", "flex: 0 0 " + w + "px;");
         });
 
-        html.find('.tabs').each((_, el) => {
-            let tabs = $(el),
-                group = el.getAttribute("data-group"),
-                initial = this.actor.data.flags[`_sheetTab-${group}`];
-            new Tabs(tabs, {
-                initial: initial,
-                callback: clicked => this.actor.data.flags[`_sheetTab-${group}`] = clicked.attr("data-tab")
-            });
+        new Tabs(html.find(".tabs"), {
+            initial: this["_sheetTab"],
+            callback: clicked => {
+                this["_sheetTab"] = clicked.data("tab");
+            }
         });
 
         html.find('.item .item-name h4').click(event => this._onItemSummary(event));
@@ -92,7 +89,7 @@ export class ActorSheetStarfinder extends ActorSheet {
         if (!this.options.editable) return;
 
         html.find('.skill-proficiency').on("click contextmenu", this._onCycleClassSkill.bind(this));
-        html.find('.trait-selector').click(ev => this._onTraitSelector(ev));
+        html.find('.trait-selector').click(this._onTraitSelector.bind(this));
     }
 
     _prepareTraits(traits) {
@@ -203,11 +200,12 @@ export class ActorSheetStarfinder extends ActorSheet {
      */
     _onTraitSelector(event) {
         event.preventDefault();
-        let a = $(event.currentTarget);
+        const a = event.currentTarget;
+        const label = a.parentElement.querySelector('label');
         const options = {
-            name: a.parents('label').attr('for'),
-            title: a.parent().text().trim(),
-            choices: CONFIG[a.attr('data-options')]
+            name: label.getAttribute("for"),
+            title: label.innerText,
+            choices: CONFIG.STARFINDER[a.dataset.options]
         };
 
         new TraitSelectorStarfinder(this.actor, options).render(true);

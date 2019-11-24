@@ -10,7 +10,7 @@ export class TraitSelectorStarfinder extends FormApplication {
         options.id = "trait-selector";
         options.classes = ["starfinder"];
         options.title = "Actor Trait Selection";
-        options.template = "systems/starfinder/templates/actors/trait-selector.html";
+        options.template = "systems/starfinder/templates/apps/trait-selector.html";
         options.width = 320;
         options.height = "auto";
 

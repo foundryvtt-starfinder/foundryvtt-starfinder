@@ -45,7 +45,7 @@ STARFINDER.armorProficiencies = {
  * The set of weapons proficiencies which a character may have
  * @type {Object}
  */
-STARFINDER.weaponProficienies = {
+STARFINDER.weaponProficiencies = {
     "bmelee": "Basic Melee",
     "amelee": "Advanced Melee",
     "sarms": "Small Arms",

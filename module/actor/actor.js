@@ -16,17 +16,33 @@ export class ActorStarfinder extends Actor {
         if (actorData.type === "character") this._prepareCharacterData(data);
         else if (actorData.type === "npc") this._prepareNPCData(data);
 
-        // Ability modifiers and saves
+        // Ability modifiers
         for (let abl of Object.values(data.abilities)) {
             abl.mod = Math.floor((abl.value - 10) / 2);
         }
 
+        // Skills
         for (let skl of Object.values(data.skills)) {
+            if (skl.values && skl.values instanceof Array) continue;
             skl.value = parseFloat(skl.value || 0);
             let classSkill = skl.value;
             let hasRanks = skl.ranks > 0;
             skl.mod = data.abilities[skl.ability].mod + skl.ranks + (hasRanks ? classSkill : 0) + skl.misc;
         }
+
+        // Saves
+        const fort = data.attributes.fort;
+        const reflex = data.attributes.reflex;
+        const will = data.attributes.will;
+
+        fort.bonus = fort.value + data.abilities.con.mod + fort.misc;
+        reflex.bonus = reflex.value + data.abilities.dex.mod + reflex.misc;
+        will.bonus = will.value + data.abilities.wis.mod + will.misc;
+
+        console.log(fort, reflex, will);
+        console.log(data.abilities.con.mod);
+        console.log(data.abilities.dex.mod);
+        console.log(data.abilities.wis.mod);
 
         const init = data.attributes.init;
         init.mod = data.abilities.dex.mod;

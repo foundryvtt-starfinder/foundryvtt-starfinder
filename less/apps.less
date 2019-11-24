@@ -5,7 +5,7 @@
 @detailsHeight: 40px;
 
 /* ----------------------------------------- */
-/*  All D&D5e Apps                           */
+/*  All Starfinder Apps                           */
 /* ----------------------------------------- */
 
 .starfinder {
@@ -210,7 +210,7 @@
     img.profile {
       flex: 0 0 @headerHeight;
       height: @headerHeight;
-      object-fit: cover;
+      object-fit: contain;
       border: none;
       border-right: @borderGroove;
     }
@@ -247,6 +247,7 @@
   /* ----------------------------------------- */
 
   .sheet-navigation {
+    background: @blueGradientBackground;
     flex: 0 0 @navHeight;
     margin-bottom: 5px;
     .nodesto();
@@ -254,11 +255,13 @@
     .item {
       height: 30px;
       line-height: 32px;
-      margin: 0 24px;
-      border-bottom: 3px solid @colorBeige;
+      // margin: 0 24px;
+      color: #fff;
+      // border-bottom: 3px solid @colorBeige;
 
       &.active {
-        border-bottom: 3px solid @colorCrimson;
+        // border-bottom: 3px solid @colorCrimson;
+        background: @starfinderRed;
       }
     }
   }

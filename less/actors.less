@@ -6,55 +6,72 @@
   /* ----------------------------------------- */
 
   .sheet-header {
-    .charlevel {
-      flex: 0 0 160px;
-      height: 60px;
-      margin: 0;
-      padding: 5px;
-      text-align: right;
+    .header-background {
+      background: #235683;
+      background: @blueGradientBackground;
 
-      .level {
-        width: 100%;
-        height: 30px;
-        font-size: 20px;
-        line-height: 30px;
-
-        label {
-          display: inline;
-          font-size: 24px;
-          text-align: right;
+      .charname {
+        > input {
+          color: #fff;
         }
+      }
 
-        input {
-          display: inline;
-          width: 36px;
-          font-size: 24px;
-          text-align: center;
-        }
-
-        // If the Experience Bar is disabled
-        &.noxp {
-          margin-top: 10px;
-          > label {
-            font-size: 32px;
+      .charlevel {
+        flex: 0 0 160px;
+        height: 60px;
+        margin: 0;
+        padding: 5px;
+        text-align: right;
+  
+        .level {
+          width: 100%;
+          height: 30px;
+          font-size: 20px;
+          line-height: 30px;
+  
+          label {
+            display: inline;
+            font-size: 24px;
+            text-align: right;
+            color: #fff;
           }
+  
+          input {
+            display: inline;
+            width: 36px;
+            font-size: 24px;
+            text-align: center;
+            color: #fff;
+          }
+  
+          // If the Experience Bar is disabled
+          &.noxp {
+            margin-top: 10px;
+            > label {
+              font-size: 32px;
+            }
+            > input {
+              font-size: 32px;
+              flex: 0 0 40px;
+              height: 44px;
+            }
+          }
+  
+        }
+  
+        .experience {
+          width: 100%;
+          height: 20px;
+          padding-right: 5px;
+          font-size: 16px;
+          color: #fff;
+
           > input {
-            font-size: 32px;
-            flex: 0 0 40px;
-            height: 44px;
+            color: #fff;
           }
         }
-
       }
-
-      .experience {
-        width: 100%;
-        height: 20px;
-        padding-right: 5px;
-        font-size: 16px;
-        color: @colorOlive;
-      }
-    }
+    }    
   }
 
   .attributes {
@@ -238,6 +255,13 @@
 
       .skill-mod {
         flex: 0 0 20px;
+      }
+
+      .skill-ranks,
+      .skill-misc {
+        flex: 0 0 20px;
+        text-align: center;
+        height: 18px;
       }
 
       .skill-passive {

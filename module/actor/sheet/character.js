@@ -4,9 +4,9 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {
-            classes: options.classes.concat(['starfinder', 'actor', 'character-sheet']),
-            width: 650,
-            height: 720
+            classes: ['starfinder', 'sheet', 'actor', 'character'],
+            width: 690,
+            height: 765
         });
 
         return options;
@@ -20,12 +20,10 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
 
     getData() {
         const sheetData = super.getData();
-
-        let res = sheetData.data.resources;
-        if (res.primary && res.primary.value === 0) delete res.primary.value;
-        if (res.primary && res.primary.max === 0) delete res.primary.max;
-        if (res.secondary && res.secondary.value === 0) delete res.secondary.value;
-        if (res.secondary && res.secondary.max === 0) delete res.secondary.max;
+        
+        let hp = sheetData.data.attributes.hp;
+        if (hp.temp === 0) delete hp.temp;
+        if (hp.tempmax === 0) delete hp.tempmax;
 
         sheetData["disableExperience"] = game.settings.get("starfinder", "disableExperienceTracking");
 
