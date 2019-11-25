@@ -39,11 +39,6 @@ export class ActorStarfinder extends Actor {
         reflex.bonus = reflex.value + data.abilities.dex.mod + reflex.misc;
         will.bonus = will.value + data.abilities.wis.mod + will.misc;
 
-        console.log(fort, reflex, will);
-        console.log(data.abilities.con.mod);
-        console.log(data.abilities.dex.mod);
-        console.log(data.abilities.wis.mod);
-
         const init = data.attributes.init;
         init.mod = data.abilities.dex.mod;
         init.bonus = init.value + (getProperty(flags, "starfinder.improvedInititive") ? 4 : 0);
@@ -51,6 +46,9 @@ export class ActorStarfinder extends Actor {
 
         data.attributes.eac.min = 10 + data.abilities.dex.mod;
         data.attributes.kac.min = 10 + data.abilities.dex.mod;
+
+        // CMD or AC Vs Combat Maneuvers as it's called in starfinder
+        data.attributes.cmd.value = 8 + data.attributes.kac.value;
 
         // const map = {
         //     "dr": CONFIG.STARFINDER.damageTypes,

@@ -125,7 +125,7 @@
                     <input class="ability-score" name="data.abilities.{{id}}.value" type="text" value="{{ability.value}}" data-dtype="Number" placeholder="10"/>
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
+                        {{!-- <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/> --}}
                         {{!-- <a class="proficiency-toggle ability-proficiency" title="Proficiency">{{{ability.icon}}}</a> --}}
                         {{!-- <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span> --}}
                     </div>
@@ -139,13 +139,20 @@
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
                     <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
-                    <h4 class="skill-name rollable">{{skill.label}}</h4>
+                    <h4 class="skill-name rollable">
+                        {{skill.label}}
+                        {{#if skill.isTrainedOnly}}<span>&dagger;</span>{{/if}}
+                        {{#if skill.hasArmorCheckPenalty}}<span>*</span>{{/if}}
+                    </h4>
                     <span class="skill-ability">{{skill.ability}}</span>
                     <input type="text" class="skill-ranks" name="data.skills.{{s}}.ranks" value="{{skill.ranks}}" data-dtype="Number" />
                     <input type="text" class="skill-misc" name="data.skills.{{s}}.misc" value="{{skill.misc}}" data-dtype="Number" />
                     <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
                 </li>
             {{/each}}
+                <li class="flexrow">
+                    <small>* = Armor Check Penatly, &dagger; = Trained Only</small>
+                </li>
             </ul>
 
             <section class="center-pane">
@@ -177,7 +184,7 @@
                     {{/each}} --}}
                     
                     <li class="attribute save">
-                        <h4 class="attribute-name box-title">Fortitude</h4>
+                        <h4 class="attribute-name box-title rollable">Fortitude</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.fort.bonus decimals=0 sign=true}}</span>
                         </div>
@@ -189,7 +196,7 @@
                     </li>
 
                     <li class="attribute save">
-                        <h4 class="attribute-name box-title">Reflex</h4>
+                        <h4 class="attribute-name box-title rollable">Reflex</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.reflex.bonus decimals=0 sign=true}}</span>
                         </div>
@@ -201,7 +208,7 @@
                     </li>
 
                     <li class="attribute save">
-                        <h4 class="attribute-name box-title">Will</h4>
+                        <h4 class="attribute-name box-title rollable">Will</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.will.bonus decimals=0 sign=true}}</span>
                         </div>
@@ -213,7 +220,7 @@
                     </li>
 
                     <li class="attribute initiative">
-                        <h4 class="attribute-name box-title">Initiative</h4>
+                        <h4 class="attribute-name box-title rollable">Initiative</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
                         </div>
@@ -222,6 +229,22 @@
                             <input name="data.attributes.init.value" type="text" placeholder="0" data-dtype="Number"
                                    value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
                         </footer>
+                    </li>
+                </ul>
+
+                <ul class="attributes flexrow">
+                    <li class="attribute cmd">
+                        <h4 class="attribute-name box-title">CMD</h4>
+                        <div class="attribute-value">
+                            <span>{{numberFormat data.attributes.cmd.value decimal=0 sign=true}}</span>
+                        </div>
+                    </li>
+                    <li class="attribute bab">
+                        <h4 class="attribute-name box-title">Base Attack Bonus</h4>
+                        <div class="attribute-value">
+                            <input type="text" name="data.attributes.bab" value="{{numberFormat data.attributes.bab decimal=0 sign=true}}"
+                                   placeholder="0" data-dtype="Number" />
+                        </div>
                     </li>
                 </ul>
 
