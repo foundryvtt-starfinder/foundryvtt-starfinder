@@ -1,75 +1,98 @@
-class ActorSheetStarfinderNPC extends ActorSheetStarfinder {
+import { ActorSheetStarfinder } from "../sheet/base.js";
+
+/**
+ * An Actor sheet for NPC type characters in the Starfinder system.
+ * 
+ * Extends the base ActorSheetStarfinder class.
+ * @type {ActorSheetStarfinder}
+ */
+export class ActorSheetStarfinderNPC extends ActorSheetStarfinder {
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {
-            classes: options.classes.concat(['starfinder', 'actor', 'npc-sheet']),
+            classes: options.classes.concat(['starfinder', 'actor', 'sheet', 'npc']),
             width: 650,
-            height: 680,
-            showUnpreparedSpells: true
+            height: 680
         });
 
         return options;
     }
 
     get template() {
-        const path = "public/systems/starfinder/templates/actors/";
+        const path = "systems/starfinder/templates/actors/";
         if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
         return path + "npc-sheet.html";
     }
 
     getData() {
-        const sheetData = super.getData();
+        const data = super.getData();
 
-        let cr = sheetData.data.details.cr;
-        let crs = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-        cr["str"] = cr.value >= 1 ? String(cr.value) : crs[cr.value] || 0;
+        let cr = parseFloat(data.data.details.cr || 0);
+        let crs = { 0: "0", 0.125: "1/8", [1/6]: "1/6", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
+        data.labels["cr"] = cr >= 1 ? String(cr) : crs[cr] || 1;
 
-        return sheetData;
+        return data;
     }
-    
-    _prepareItems(sheetData) {
-        const actorData = sheetData.actor;
 
+    _prepareItems(data) {
         const features = {
-            weapons: { label: "Weapons", items: [], type: "weapon" },
-            actions: { label: "Actions", items: [], type: "feat" },
-            passive: { label: "Features", items: [], type: "feat" },
-            equipment: { label: "Equipment", items: [], type: "equipment" }
+            weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon", "weapon-type": "natural" } },
+            actions: { label: "Actions", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
+            passive: { label: "Features", items: [], dataset: { type: "feat" } },
+            equipment: { label: "Inventory", items: [], dataset: { type: "goods" } }
         };
 
-        const spellbook = {};
+        let [spells, other] = data.items.reduce((arr, item) => {
+            item.img = item.img || DEFAULT_TOKEN;
+            item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
+            item.hasUses = item.data.uses && (item.data.uses.max > 0);
+            item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
+            const unusable = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
+            item.isCharged = !unusable;
+            if (item.type === "spell") arr[0].push(item);
+            else arr[1].push(item);
+            return arr;
+        }, [[], []]);
 
-        for (let i of sheetData.items) {
-            i.img = i.img || DEFAULT_TOKEN;
+        // Apply item filters
+        spells = this._filterItems(spells, this._filters.spellbook);
+        other = this._filterItems(other, this._filters.features);
 
-            if (i.type === "spell") this._prepareSpell(actorData, spellbook, i);
+        // Organize Spellbook
+        const spellbook = this._prepareSpellbook(data, spells);
 
-            else if (i.type === "weapon") features.weapons.items.push(i);
-            else if (i.type === "feat") {
-                if (i.data.featType.value === "passive") features.passive.items.push(i);
-                else features.actions.items.push(i);
+        // Organize Features
+        for (let item of other) {
+            if (item.type === "weapon") features.weapons.items.push(item);
+            else if (item.type === "feat") {
+                if (item.data.activation.type) features.actions.items.push(item);
+                else features.passive.items.push(item);
             }
-            else if (["equipment", "consumable", "goods"].includes(i.type)) features.equipment.items.push(i);
+            else if (["equipment", "consumable", "tool", "loot"].includes(item.type)) {
+                features.equipment.items.push(item);
+            }
         }
 
-        actorData.features = features;
-        actorData.spellbook = spellbook;
+        // Assign and return
+        data.features = Object.values(features);
+        data.spellbook = spellbook;
     }
 
+    /**
+     * This method is called upon form submission after form data is validated
+     * 
+     * @param {Event} event The initial triggering submission event
+     * @param {Object} formData The object of validated form data with which to update the object
+     * @private
+     */
     _updateObject(event, formData) {
-        if (this.actor.data.type === "npc") {
-            let cr = formData["data.details.cr.value"];
-            if (cr) {
-                let crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
-                formData['data.details.cr.value'] = crs[cr] || parseInt(cr);
-            }
-        }
+        const crs = { "1/8": 0.125, "1/6": 1/6, "1/4": 0.25, "1/3": 1/3, "1/2": 0.5 };
+        let crv = "data.details.cr";
+        let cr = formData[crv];
+        cr = crs[cr] || parseFloat(cr);
+        if (cr) formData[crv] = cr < 1 ? cr : parseInt(cr);
 
+        // Parent ActorSheet update steps
         super._updateObject(event, formData);
     }
 }
-
-Actors.registerSheet("starfinder", ActorSheetStarfinderNPC, {
-    types: ["npc"],
-    makeDefault: true
-});

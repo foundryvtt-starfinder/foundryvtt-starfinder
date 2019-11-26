@@ -3,7 +3,8 @@
         "types": [
             "character",
             "npc",
-            "starship"
+            "starship",
+            "vehicle"
         ],
         "templates": {
             "common": {
@@ -378,7 +379,10 @@
             "details": {
                 "tier": 1,
                 "model": "",
-                "frame": ""
+                "frame": "",
+                "driftEngine": "",
+                "systems": [],
+                "modifiers": []
             },
             "attributes": {
                 "maneuverability": "average",
@@ -394,13 +398,72 @@
                 "hp": {
                     "value": 1,
                     "min": 0,
-                    "max": 0
+                    "max": 0,
+                    "increment": 10
                 },
                 "dt": 0,
                 "ct": {
                     "value": 10,
                     "min": 3
+                },
+                "shields": {
+                    "type": "",
+                    "forward": 0,
+                    "aft": 0,
+                    "starboard": 0,
+                    "port": 0
+                },
+                "speed": 5,
+                "pwr": {
+                    "pcu": 0,
+                    "type": ""
+                },
+                "crew": {
+                    "min": 0,
+                    "max": 1
+                },
+                "expansionBays": 0,
+                "mounts": {
+                    "forward": [],
+                    "aft": [],
+                    "starboard": [],
+                    "port": [],
+                    "turret": []
                 }
+            }
+        },
+        "vehicle": {
+            "details": {
+                "level": 1,
+                "price": 0,
+                "description": {
+                    "value": "",
+                    "chat": "",
+                    "unidentified": ""
+                }
+            },
+            "attributes": {
+                "size": "large",
+                "type": "land",
+                "speed": {
+                    "drive": "15 ft",
+                    "full": "350 ft",
+                    "mph": "40 mph",
+                    "type": ""
+                },
+                "eac": 10,
+                "kac": 10,
+                "cover": "partial",
+                "hp": {
+                    "value": 10,
+                    "threshold": 7
+                },
+                "hardness": 5,
+                "attacks": [],
+                "modifiers": [],
+                "systems": [],
+                "passengers": 0,
+                "special": []
             }
         }
     },
@@ -414,7 +477,11 @@
             "spell",
             "feat",
             "race",
-            "theme"
+            "theme",
+            "technological",
+            "fusion",
+            "upgrade",
+            "augmentation"
         ],
         "templates": {
             "itemDescription": {
@@ -423,7 +490,8 @@
                     "chat": "",
                     "unidentified": ""
                 },
-                "source": ""
+                "source": "",
+                "type": ""
             },
             "physicalItem": {
                 "quantity": 1,
@@ -473,19 +541,25 @@
                     "type": "",
                     "dc": null
                 }
+            },
+            "itemUsage": {
+                "capacity": 0,
+                "usage": {
+                    "value": 1,
+                    "per": "round"
+                }
             }
         },
         "weapon": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage"],
             "weaponType": {
                 "value": "basicM"
             },
-            "capacity": "",
-            "usage": 1,
             "special": "",
             "ability": "str",
             "properties": {},
-            "proficient": true
+            "proficient": true,
+            "fusions": []
         },
         "equipment": {
             "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
@@ -495,9 +569,10 @@
                 "kac": 0,
                 "dex": null,
                 "acp": 0,
-                "speedAdjust": 0
+                "speedAdjust": 0,
+                "upgradeSlots": 0,
+                "upgrades": []
             },
-            "upgradeSlots": 0,
             "proficient": true
         },
         "consumable": {
@@ -565,6 +640,24 @@
                 "mod": 1
             },
             "skill": ""
+        },
+        "technological": {
+            "templates": ["itemDescription", "physicalItem", "itemUsage"],
+            "hands": 0
+        },
+        "fusion": {
+            "templates": ["itemDescription"],
+            "level": 1
+        },
+        "upgrade": {
+            "templates": ["itemDescription", "physicalItem", "itemUsage"],
+            "slots": 1,
+            "armorType": "any"
+        },
+        "augmentation": {
+            "templates": ["itemDescription", "physicalItem"],
+            "system": "",
+            "type": "cybernetic"
         }
     }
 }

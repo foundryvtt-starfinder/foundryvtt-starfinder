@@ -13,6 +13,13 @@
  import { measureDistance, getBarAttribute } from "./module/canvas.js";
  import { ActorStarfinder } from "./module/actor/actor.js";
  import { ActorSheetStarfinderCharacter } from "./module/actor/sheet/character.js";
+ import { ActorSheetStarfinderNPC } from "./module/actor/sheet/npc.js";
+ import { ActorSheetStarfinderStarship } from "./module/actor/sheet/starship.js";
+ import { ActorSheetStarfinderVehicle } from "./module/actor/sheet/vehicle.js";
+ import { ItemStarfinder } from "./module/item/item.js";
+ import { ItemSheetStarfinder } from "./module/item/sheet.js";
+ import { highlightCriticalSuccessFailure } from "./module/dice.js";
+ import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/combat.js";
 
  Hooks.once('init', async function () {
      console.log(`Starfinder | Initializeing Starfinder System`);
@@ -21,14 +28,22 @@
 
      CONFIG.STARFINDER = STARFINDER;
      CONFIG.Actor.entityClass = ActorStarfinder;
-     //CONFIG.Item.entityClass = ItemStarfinder;
+     CONFIG.Item.entityClass = ItemStarfinder;
 
      registerSystemSettings();
 
      await preloadHandlebarsTemplates();
 
+     Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
+
      Actors.unregisterSheet("core", ActorSheet);
-     Actors.registerSheet("starfinder", ActorSheetStarfinderCharacter, { types: ["character"], makeDefault: true });     
+     Actors.registerSheet("starfinder", ActorSheetStarfinderCharacter, { types: ["character"], makeDefault: true });
+     Actors.registerSheet("starfinder", ActorSheetStarfinderNPC, { types: ["npc"], makeDefault: true });
+     Actors.registerSheet("starfinder", ActorSheetStarfinderStarship, { types: ["starship"], makeDefault: true });
+     Actors.registerSheet("starfinder", ActorSheetStarfinderVehicle, { types: ["vehicle"], makeDefault: true });
+
+     Items.unregisterSheet("core", ItemSheet);
+     Items.registerSheet("starfinder", ItemSheetStarfinder, { makeDefault: true });
  });
 
  Hooks.once("setup", function() {
@@ -50,3 +65,7 @@
      SquareGrid.prototype.measureDistance = measureDistance;
      Token.prototype.getBarAttribute = getBarAttribute;
  });
+
+ Hooks.on("renderChatMessage", highlightCriticalSuccessFailure);
+ Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
+ Hooks.on("renderChatLog", (app, html, data) => ItemStarfinder.chatListeners(html));

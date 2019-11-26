@@ -15,6 +15,11 @@ export class ActorStarfinder extends Actor {
 
         if (actorData.type === "character") this._prepareCharacterData(data);
         else if (actorData.type === "npc") this._prepareNPCData(data);
+        else if (actorData.type === "starship") {
+            return actorData;
+        } else if (actorData.type === "vehicle") {
+            return actorData;
+        }
 
         // Ability modifiers
         for (let abl of Object.values(data.abilities)) {
@@ -92,8 +97,7 @@ export class ActorStarfinder extends Actor {
      * @private
      */
     _prepareNPCData(data) {
-        data.details.cr.value = parseFloat(data.details.cr.value || 0);
-        data.details.xp.value = this.getCRExp(data.details.cr.value);
+        data.details.xp.value = this.getCRExp(data.details.cr);
     }
 
     /**
@@ -114,7 +118,15 @@ export class ActorStarfinder extends Actor {
      * @returns {Number} The amount of experience granted per kill
      */
     getCRExp(cr) {
-        if (cr < 1.0) return Math.max(400 * cr, 50);
+        if (cr < 1.0) {
+            if (cr === (1/3)) {
+                return 135;
+            } else if (cr === (1/6)) {
+                return 65;
+            }
+            
+            return Math.max(400 * cr, 50);
+        }
         return CONFIG.STARFINDER.CR_EXP_LEVELS[cr];
     }
 

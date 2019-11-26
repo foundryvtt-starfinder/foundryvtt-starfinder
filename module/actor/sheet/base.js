@@ -42,23 +42,25 @@ export class ActorSheetStarfinder extends ActorSheet {
         data.data = data.actor.data;
         data.labels = this.actor.labels || {};
         data.filters = this._filters;
-        
-        // Ability Scores
-        for (let [a, abl] of Object.entries(data.actor.data.abilities)) {
-            abl.label = CONFIG.STARFINDER.abilities[a];
-        }
 
-        // Update skill labels
-        for (let [s, skl] of Object.entries(data.actor.data.skills)) {
-            if (s === "pro") continue; // TODO: make the profession skill work ;)
-            skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
-            skl.icon = this._getClassSkillIcon(skl.value);
-            skl.label = CONFIG.STARFINDER.skills[s];
-        }
-        
-        this._prepareTraits(data.actor.data.traits);
+        if (data.actor.type !== "starship" && data.actor.type !== "vehicle") {
+            // Ability Scores
+            for (let [a, abl] of Object.entries(data.actor.data.abilities)) {
+                abl.label = CONFIG.STARFINDER.abilities[a];
+            }
 
-        this._prepareItems(data);
+            // Update skill labels
+            for (let [s, skl] of Object.entries(data.actor.data.skills)) {
+                if (s === "pro") continue; // TODO: make the profession skill work ;)
+                skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
+                skl.icon = this._getClassSkillIcon(skl.value);
+                skl.label = CONFIG.STARFINDER.skills[s];
+            }
+
+            this._prepareTraits(data.actor.data.traits);
+
+            this._prepareItems(data);
+        }
 
         return data;
     }
@@ -84,12 +86,60 @@ export class ActorSheetStarfinder extends ActorSheet {
             }
         });
 
+        const filterLists = html.find(".filter-list");
+        filterLists.each(this._initializeFilterItemList.bind(this));
+        filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
+
         html.find('.item .item-name h4').click(event => this._onItemSummary(event));
 
         if (!this.options.editable) return;
 
         html.find('.skill-proficiency').on("click contextmenu", this._onCycleClassSkill.bind(this));
         html.find('.trait-selector').click(this._onTraitSelector.bind(this));
+
+        // Ability Checks
+        // html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
+
+        // Roll Skill Checks
+        // html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
+
+        // Configure Special Flags
+        html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
+
+        /* -------------------------------------------- */
+        /*  Inventory
+        /* -------------------------------------------- */
+
+        // Create New Item
+        // html.find('.item-create').click(ev => this._onItemCreate(ev));
+
+        // Update Inventory Item
+        html.find('.item-edit').click(ev => {
+            let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id"));
+            const item = this.actor.getOwnedItem(itemId);
+            item.sheet.render(true);
+        });
+
+        // Delete Inventory Item
+        html.find('.item-delete').click(ev => {
+            let li = $(ev.currentTarget).parents(".item"),
+                itemId = Number(li.attr("data-item-id"));
+            this.actor.deleteOwnedItem(itemId);
+            li.slideUp(200, () => this.render(false));
+        });
+
+        // Item Dragging
+        // let handler = ev => this._onDragItemStart(ev);
+        // html.find('li.item').each((i, li) => {
+        //     li.setAttribute("draggable", true);
+        //     li.addEventListener("dragstart", handler, false);
+        // });
+
+        // Item Rolling
+        // html.find('.item .item-image').click(event => this._onItemRoll(event));
+
+        // Item Recharging
+        // html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
     }
 
     _prepareTraits(traits) {
@@ -116,7 +166,7 @@ export class ActorSheetStarfinder extends ActorSheet {
             }, {});
 
             if (trait.custom) {
-                trait.custom.split(';').forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
+                trait.custom.split(';').forEach((c, i) => trait.selected[`custom${i + 1}`] = c.trim());
             }
             trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
         }
@@ -209,5 +259,68 @@ export class ActorSheetStarfinder extends ActorSheet {
         };
 
         new TraitSelectorStarfinder(this.actor, options).render(true);
+    }
+
+    /**
+     * Handle toggling of filters to display a different set of owned items
+     * @param {Event} event     The click event which triggered the toggle
+     * @private
+     */
+    _onToggleFilter(event) {
+        event.preventDefault();
+        const li = event.currentTarget;
+        const set = this._filters[li.parentElement.dataset.filter];
+        const filter = li.dataset.filter;
+        if (set.has(filter)) set.delete(filter);
+        else set.add(filter);
+        this.render();
+    }
+
+    /**
+     * Iinitialize Item list filters by activating the set of filters which are currently applied
+     * @private
+     */
+    _initializeFilterItemList(i, ul) {
+        const set = this._filters[ul.dataset.filter];
+        const filters = ul.querySelectorAll(".filter-item");
+        for (let li of filters) {
+            if (set.has(li.dataset.filter)) li.classList.add("active");
+        }
+    }
+
+    /**
+     * Determine whether an Owned Item will be shown based on the current set of filters
+     * 
+     * @return {Boolean}
+     * @private
+     */
+    _filterItems(items, filters) {
+        return items.filter(item => {
+            const data = item.data;
+
+            // Action usage
+            for (let f of ["action", "move", "swift", "full", "reaction"]) {
+                if (filters.has(f)) {
+                    if ((data.activation && (data.activation.type !== f))) return false;
+                }
+            }
+            if (filters.has("concentration")) {
+                if (data.components.concentration !== true) return false;
+            }
+
+            // Equipment-specific filters
+            if (filters.has("equipped")) {
+                if (data.equipped && data.equipped !== true) return false;
+            }
+            return true;
+        });
+    }
+
+    /**
+     * Handle click events for the Traits tab button to configure special Character Flags
+     */
+    _onConfigureFlags(event) {
+        event.preventDefault();
+        new ActorSheetFlags(this.actor).render(true);
     }
 }

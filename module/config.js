@@ -110,6 +110,10 @@ STARFINDER.distanceUnits = {
     "any": "STARFINDER.DistAny"
 };
 
+STARFINDER.targetTypes = {};
+
+STARFINDER.timePeriods = {};
+
 // Healing types
 STARFINDER.healingTypes = {
     "healing": "Healing"
