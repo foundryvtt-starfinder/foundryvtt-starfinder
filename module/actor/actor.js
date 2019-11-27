@@ -1,3 +1,5 @@
+import { DiceStarfinder } from "../dice.js";
+
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
  */
@@ -16,8 +18,10 @@ export class ActorStarfinder extends Actor {
         if (actorData.type === "character") this._prepareCharacterData(data);
         else if (actorData.type === "npc") this._prepareNPCData(data);
         else if (actorData.type === "starship") {
+            this._prepareStarshipData(data);
             return actorData;
         } else if (actorData.type === "vehicle") {
+            this._prepareVehicleData(data);
             return actorData;
         }
 
@@ -55,25 +59,27 @@ export class ActorStarfinder extends Actor {
         // CMD or AC Vs Combat Maneuvers as it's called in starfinder
         data.attributes.cmd.value = 8 + data.attributes.kac.value;
 
-        // const map = {
-        //     "dr": CONFIG.STARFINDER.damageTypes,
-        //     "di": CONFIG.STARFINDER.damageTypes,
-        //     "dv": CONFIG.STARFINDER.damageTypes,
-        //     "ci": CONFIG.STARFINDER.damageTypes,
-        //     "languages": CONFIG.STARFINDER.languages,
-        //     "weaponProf": CONFIG.weaponProfien,
-        //     "armorProf": CONFIG.armorTypes
-        // };
-
-        // for (let [t, choices] of Object.entries(map)) {
-        //     let trait = data.traits[t];
-        //     if (!trait) continue;
-        //     if (!(trait.value instanceof Array)) {
-        //         trait.value = TraitSelectorStarfinder._backCompat(trait.value, choices);
-        //     }
-        // }
-        
         return actorData;
+    }
+
+    /**
+     * Prepare a starship's data
+     * 
+     * @param {Object} data The data to prepare
+     * @private
+     */
+    _prepareStarshipData(data) {
+
+    }
+
+    /**
+     * Prepare a vechile's data
+     * 
+     * @param {Object} data The data to prepare
+     * @private
+     */
+    _prepareVehicleData(data) {
+
     }
 
     /**
@@ -119,12 +125,12 @@ export class ActorStarfinder extends Actor {
      */
     getCRExp(cr) {
         if (cr < 1.0) {
-            if (cr === (1/3)) {
+            if (cr === (1 / 3)) {
                 return 135;
-            } else if (cr === (1/6)) {
+            } else if (cr === (1 / 6)) {
                 return 65;
             }
-            
+
             return Math.max(400 * cr, 50);
         }
         return CONFIG.STARFINDER.CR_EXP_LEVELS[cr];
@@ -170,5 +176,48 @@ export class ActorStarfinder extends Actor {
         }
 
         return super.createOwnedItem(itemData, options);
+    }
+
+    async useSpell(item, { configureDialog = true } = {}) {
+        if (item.data.type !== "spell") throw new Error("Wrong item type");
+
+        let lvl = item.data.data.level;
+
+        return item.roll();
+    }
+
+    /**
+     * Roll a Skill Check
+     * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+     * @param {string} skillId      The skill id (e.g. "ins")
+     * @param {Object} options      Options which configure how the skill check is rolled
+     */
+    rollSkill(skillId, options = {}) {
+        const skl = this.data.data.skills[skillId];
+        return DiceStarfinder.d20Roll({
+            event: options.event,
+            parts: ["@mod"],
+            data: { mode: skl.mod },
+            title: `${CONFIG.STARFINDER.skills[skillId]} Skill Check`,
+            speaker: ChatMessage.getSpeaker({ actor: this })
+        });
+    }
+
+    static async applyDamage(roll, multiplier) {
+        let value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
+        const promises = [];
+        for (let t of canvas.tokens.controlled) {
+            let a = t.actor,
+                hp = a.data.data.attributes.hp,
+                tmp = parseInt(hp.temp) | 0,
+                dt = value > 0 ? Math.min(tmp, value) : 0;
+            
+            promises.push(t.actor.update({
+                "data.attributes.hp.temp": tmp - dt,
+                "data.attributes.hp.value": Math.clamped(hp.value - (value - dt), 0, hp.max)
+            }));
+        }
+
+        return Promise.all(promises);
     }
 }

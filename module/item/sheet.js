@@ -114,7 +114,7 @@ export class ItemSheetStarfinder extends ItemSheet {
       }
   
       else if ( item.type === "equipment" ) {
-        props.push(CONFIG.STARFINDER.equipmentTypes[item.data.armor.type]);
+        props.push(CONFIG.STARFINDER.armorTypes[item.data.armor.type]);
         props.push(labels.armor);
       }
   

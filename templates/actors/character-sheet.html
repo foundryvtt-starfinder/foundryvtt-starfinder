@@ -236,7 +236,7 @@
                     <li class="attribute cmd">
                         <h4 class="attribute-name box-title">CMD</h4>
                         <div class="attribute-value">
-                            <span>{{numberFormat data.attributes.cmd.value decimal=0 sign=true}}</span>
+                            <span>{{numberFormat data.attributes.cmd.value decimal=0 sign=false}}</span>
                         </div>
                     </li>
                     <li class="attribute bab">
@@ -244,6 +244,16 @@
                         <div class="attribute-value">
                             <input type="text" name="data.attributes.bab" value="{{numberFormat data.attributes.bab decimal=0 sign=true}}"
                                    placeholder="0" data-dtype="Number" />
+                        </div>
+                    </li>
+                    <li class="attribute resolve">
+                        <h4 class="attribute-name box-title">{{ localize "STARFINDER.Resolve" }}</h4>
+                        <div class="attribute-value multiple">
+                            <input name="data.attributes.rp.value" type="text" value="{{data.attributes.rp.value}}"
+                                data-dtype="Number" placeholder="10"/>
+                            <span class="sep"> / </span>
+                            <input name="data.attributes.rp.max" type="text" value="{{data.attributes.rp.max}}"
+                                data-dtype="Number" placeholder="10"/>
                         </div>
                     </li>
                 </ul>
