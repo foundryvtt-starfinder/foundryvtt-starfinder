@@ -239,7 +239,45 @@ export class ActorSheetStarfinder extends ActorSheet {
     }
 
     _prepareSpellbook(data, spells) {
+        const owner = this.actor.owner;
 
+        const levels = {
+            "always": -30,
+            "innate": -20
+        };
+
+        const useLabels = {
+            "-30": "-",
+            "-20": "-",
+            "-10": "-",
+            "0": "&infin;"
+        };
+
+        let spellbook = spells.reduce((sb, spell) => {
+            const lvl = spell.data.level || 0;
+
+            if (!sb[lvl]) {
+                sb[lvl] = {
+                    level: lvl,
+                    usesSlots: lvl > 0,
+                    canCreate: owner && (lvl >= 0),
+                    canPrepare: (data.actor.type === 'character') && (lvl > 0),
+                    label: lvl >= 0 ? CONFIG.STARFINDER.spellLevels[lvl] : "",
+                    spells: [],
+                    uses: useLabels[lvl] || data.data.spells["spell"+lvl].value || 0,
+                    slots: useLabels[lvl] || data.data.spells["spell"+lvl].max || 0,
+                    dataset: {"type": "spell", "level": lvl}
+                };
+            }
+
+            sb[lvl].spells.push(spell);
+            return sb;
+        }, {});
+
+        spellbook = Object.values(spellbook);
+        spellbook.sort((a, b) => a.level - b.level);
+
+        return spellbook;
     }
 
     /**

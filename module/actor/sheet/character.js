@@ -114,6 +114,14 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         data.features = Object.values(features);
     }
 
+    /**
+     * Compute the level and percentage of encumbrance for an Actor.
+     * 
+     * @param {Number} totalWeight The cumulative item weight from inventory items
+     * @param {Ojbect} actorData The data object for the Actor being rendered
+     * @returns {Object} An object describing the character's encumbrance level
+     * @private
+     */
     _computeEncumbrance(totalWeight, actorData) {
         const enc = {
             max: actorData.data.abilities.str.value,
@@ -134,5 +142,48 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         super.activateListeners(html);
 
         if (!this.options.editable) return;
+
+        //html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
+
+        html.find('.short-rest').click(this._onShortRest.bind(this));
+        html.find('.long-rest').click(this._onLongRest.bind(this));
+    }
+
+    /**
+     * Handle toggling the prepared status of an Owned Itme within the Actor
+     * 
+     * @param {Event} event The triggering click event
+     */
+    _onPrepareItem(event) {
+        event.preventDefault();
+
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        return item.update({'data.preparation.prepared': !item.data.data.preparation.prepared});
+    }
+
+    /**
+     * Take a short 10 minute rest, calling the relevant function on the Actor instance
+     * @param {Event} event The triggering click event
+     * @returns {Promise}
+     * @private
+     */
+    async _onShortRest(event) {
+        event.preventDefault();
+        await this._onSubmit(event);
+        return this.actor.shortRest();
+    }
+
+    /**
+     * Take a long rest, calling the relevant function on the Actor instance
+     * @param {Event} event   The triggering click event
+     * @returns {Promise}
+     * @private
+     */
+    async _onLongRest(event) {
+        event.preventDefault();
+        await this._onSubmit(event);
+        return this.actor.longRest();
     }
 }

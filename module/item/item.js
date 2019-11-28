@@ -60,9 +60,9 @@ export class ItemStarfinder extends Item {
     if ( item.type === "spell" ) {
       labels.level = C.spellLevels[item.data.level];
       labels.school = C.spellSchools[item.data.school];
-      labels.components = Object.entries(item.data.components).map(c => {
-        c[1] === true ? c[0].titleCase().slice(0,1) : null
-      }).filterJoin(",");
+      // labels.components = Object.entries(item.data.components).map(c => {
+      //   c[1] === true ? c[0].titleCase().slice(0,1) : null
+      // }).filterJoin(",");
     }
 
     // Feat Items

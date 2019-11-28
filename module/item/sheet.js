@@ -82,7 +82,7 @@ export class ItemSheetStarfinder extends ItemSheet {
      * @private
      */
     _getItemStatus(item) {
-      if ( item.type === "spell" ) return item.data.preparation.prepared ? "Prepared" : "Unprepared";
+      if ( item.type === "spell" ) return ""; //item.data.preparation.prepared ? "Prepared" : "Unprepared";
       else if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped ? "Equipped" : "Unequipped";
       else if ( item.type === "tool" ) return item.data.proficient ? "Proficient" : "Not Proficient";
     }
@@ -108,8 +108,8 @@ export class ItemSheetStarfinder extends ItemSheet {
         props.push(
           labels.components,
           labels.materials,
-          item.data.components.concentration ? "Concentration" : null,
-          item.data.components.ritual ? "Ritual" : null
+          /*item.data.components.concentration ? "Concentration" :*/ null,
+          /*item.data.components.ritual ? "Ritual" :*/ null
         )
       }
   
