@@ -145,8 +145,8 @@
                         {{#if skill.hasArmorCheckPenalty}}<span>*</span>{{/if}}
                     </h4>
                     <span class="skill-ability">{{skill.ability}}</span>
-                    <input type="text" class="skill-ranks" name="data.skills.{{s}}.ranks" value="{{skill.ranks}}" data-dtype="Number" />
-                    <input type="text" class="skill-misc" name="data.skills.{{s}}.misc" value="{{skill.misc}}" data-dtype="Number" />
+                    <input type="text" class="skill-ranks" title="Skill Ranks" name="data.skills.{{s}}.ranks" value="{{skill.ranks}}" data-dtype="Number" />
+                    <input type="text" class="skill-misc" title="Misc Modifiers" name="data.skills.{{s}}.misc" value="{{skill.misc}}" data-dtype="Number" />
                     <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
                 </li>
             {{/each}}
@@ -189,9 +189,16 @@
                             <span>{{numberFormat data.attributes.fort.bonus decimals=0 sign=true}}</span>
                         </div>
                         <footer class="attribute-footer">
-                            <span>Base</span>
-                            <input name="data.attributes.fort.value" type="text" placeholder="0" data-dtype="Number"
-                                   value="{{numberFormat data.attributes.fort.value decimals=0 sign=true}}"/>
+                            <div>
+                                <span>Base</span>
+                                <input name="data.attributes.fort.value" type="text" placeholder="0" data-dtype="Number"
+                                    value="{{numberFormat data.attributes.fort.value decimals=0 sign=true}}"/>
+                            </div>
+                            <div>
+                                <span>Misc</span>
+                                <input name="data.attributes.fort.misc" type="text" placeholder="0" data-dtype="Number"
+                                    value="{{numberFormat data.attributes.fort.misc decimals=0 sign=true}}" />
+                            </div>
                         </footer>
                     </li>
 
@@ -201,9 +208,16 @@
                             <span>{{numberFormat data.attributes.reflex.bonus decimals=0 sign=true}}</span>
                         </div>
                         <footer class="attribute-footer">
-                            <span>Base</span>
-                            <input name="data.attributes.reflex.value" type="text" placeholder="0" data-dtype="Number"
-                                   value="{{numberFormat data.attributes.reflex.value decimals=0 sign=true}}"/>
+                            <div>
+                                <span>Base</span>
+                                <input name="data.attributes.reflex.value" type="text" placeholder="0" data-dtype="Number"
+                                    value="{{numberFormat data.attributes.reflex.value decimals=0 sign=true}}"/>
+                            </div>
+                            <div>
+                                <span>Misc</span>
+                                <input name="data.attributes.reflex.misc" type="text" placeholder="0" data-dtype="Number"
+                                    value="{{numberFormat data.attributes.reflex.misc decimals=0 sign=true}}" />
+                            </div>
                         </footer>
                     </li>
 
@@ -213,12 +227,22 @@
                             <span>{{numberFormat data.attributes.will.bonus decimals=0 sign=true}}</span>
                         </div>
                         <footer class="attribute-footer">
+                            <div>
                             <span>Base</span>
                             <input name="data.attributes.will.value" type="text" placeholder="0" data-dtype="Number"
                                    value="{{numberFormat data.attributes.will.value decimals=0 sign=true}}"/>
+                            </div>
+                            <div>
+                                <span>Misc</span>
+                                <input name="data.attributes.will.misc" type="text" placeholder="0" data-dtype="Number"
+                                    value="{{numberFormat data.attributes.will.misc decimals=0 sign=true}}" />
+                            </div>
                         </footer>
                     </li>
+                    
+                </ul>
 
+                <ul class="attributes flexrow last">
                     <li class="attribute initiative">
                         <h4 class="attribute-name box-title rollable">Initiative</h4>
                         <div class="attribute-value">
@@ -230,17 +254,14 @@
                                    value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
                         </footer>
                     </li>
-                </ul>
-
-                <ul class="attributes flexrow">
                     <li class="attribute cmd">
-                        <h4 class="attribute-name box-title">CMD</h4>
+                        <h4 class="attribute-name box-title" title="AC vs Combat Maneuvers">CMD</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.cmd.value decimal=0 sign=false}}</span>
                         </div>
                     </li>
                     <li class="attribute bab">
-                        <h4 class="attribute-name box-title">Base Attack Bonus</h4>
+                        <h4 class="attribute-name box-title" title="Base Attack Bonus">BAB</h4>
                         <div class="attribute-value">
                             <input type="text" name="data.attributes.bab" value="{{numberFormat data.attributes.bab decimal=0 sign=true}}"
                                    placeholder="0" data-dtype="Number" />
@@ -257,35 +278,6 @@
                         </div>
                     </li>
                 </ul>
-
-                {{!-- Counters --}}
-                {{!-- <div class="counters flexrow">
-                    <div class="counter flexrow death-saves">
-                        <h4>{{ localize "STARFINDER.DeathSave" }}</h4>
-                        <div class="counter-value">
-                            <i class="fas fa-check"></i>
-                            <input type="text" name="data.attributes.death.success" data-dtype="Number" placeholder="0"
-                                   value="{{data.attributes.death.success}}"/>
-                            <i class="fas fa-times"></i>
-                            <input type="text" name="data.attributes.death.failure" data-dtype="Number" placeholder="0"
-                                   value="{{data.attributes.death.failure}}"/>
-                        </div>
-                    </div>
-                    <div class="counter flexrow">
-                        <h4>{{ localize "STARFINDER.Exhaustion" }}</h4>
-                        <div class="counter-value">
-                            <input type="text" name="data.attributes.exhaustion" data-dtype="Number" placeholder="0"
-                                   value="{{data.attributes.exhaustion}}" />
-                        </div>
-                    </div>
-                    <div class="counter flexrow">
-                        <h4>{{ localize "STARFINDER.Inspiration" }}</h4>
-                        <div class="counter-value">
-                            <input type="checkbox" name="data.attributes.inspiration" data-dtype="Boolean"
-                                   {{checked data.attributes.inspiration}}/>
-                        </div>
-                    </div>
-                </div> --}}
 
                 {{!-- Traits --}}
                 {{> "systems/starfinder/templates/actors/parts/actor-traits.html"}}

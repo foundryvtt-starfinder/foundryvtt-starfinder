@@ -10,6 +10,18 @@
         </select>
     </div>
 
+    <div class="form-group">
+        <label>{{localize "STARFINDER.KeyAbility"}}</label>
+        <select class="actor-keyability" name="data.traits.keyability">
+            {{#select data.traits.keyability}}
+            <option value="">Choose One</option>
+            {{#each config.abilities as |label abl|}}
+                <option value="{{abl}}">{{label}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+
     <div class="form-group {{#unless data.traits.senses}}inactive{{/unless}}">
         <label>{{localize "STARFINDER.Senses"}}</label>
         <input type="text" name="data.traits.senses" value="{{data.traits.senses}}" placeholder="None"/>

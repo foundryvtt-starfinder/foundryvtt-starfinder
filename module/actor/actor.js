@@ -32,7 +32,7 @@ export class ActorStarfinder extends Actor {
 
         // Skills
         for (let skl of Object.values(data.skills)) {
-            if (skl.values && skl.values instanceof Array) continue;
+            if (skl.values && skl.values instanceof Array) continue; //TODO: Make profession skill work ;)
             skl.value = parseFloat(skl.value || 0);
             let classSkill = skl.value;
             let hasRanks = skl.ranks > 0;

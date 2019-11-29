@@ -210,7 +210,6 @@
 }
 .starfinder.sheet .window-content {
   overflow-y: hidden;
-  padding: 5px;
   background: linear-gradient(150deg, #c2c2c2 0%, #d2d2d2 10%, #eeeeee 25%, #ffffff 100%);
   font-size: 13px;
   color: #191813;
@@ -476,7 +475,6 @@
 .starfinder.sheet.actor ul.attributes li.attribute .attribute-value input {
   display: inline;
   max-width: 80%;
-  height: 28px;
   margin: 0;
   font-size: 24px;
 }
@@ -496,6 +494,14 @@
   line-height: 18px;
   font-family: "Signika", "Palatino Linotype", serif;
   font-size: 12px;
+}
+.starfinder.sheet.actor ul.attributes li.save {
+  height: 95px;
+}
+.starfinder.sheet.actor ul.attributes.last {
+  border-bottom: 2px groove #eeede0;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
 }
 .starfinder.sheet.actor .ability-scores {
   flex: 0 0 100%;
@@ -660,7 +666,8 @@
   padding: 0;
   text-align: right;
 }
-.starfinder.sheet.actor .traits .actor-size {
+.starfinder.sheet.actor .traits .actor-size,
+.starfinder.sheet.actor .traits .actor-keyability {
   flex: 0 0 150px;
 }
 .starfinder.sheet.actor .traits label {
@@ -1234,7 +1241,7 @@
 .starfinder.sheet.actor.character .encumbrance {
   flex: 0 0 12px;
   background: #7a7971;
-  margin: 1px 15px 0 1px;
+  margin: 1px 15px 5px 15px;
   border: 1px solid #191813;
   border-radius: 3px;
   position: relative;

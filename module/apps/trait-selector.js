@@ -79,7 +79,7 @@ export class TraitSelectorStarfinder extends FormApplication {
         const choices = [];
 
         for (let [k, v] of Object.entries(formData)) {
-            if (v) choices.push(k);
+            if ((k !== 'custom') && v) choices.push(k);
         }
 
         this.object.update({
