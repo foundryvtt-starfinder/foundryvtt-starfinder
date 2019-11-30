@@ -60,7 +60,7 @@
      }
  });
 
- Hooks.on("canvasInti", function () {
+ Hooks.on("canvasInit", function () {
      canvas.grid.diagonalRule = game.settings.get("starfinder", "diagonalMovement");
      SquareGrid.prototype.measureDistance = measureDistance;
      Token.prototype.getBarAttribute = getBarAttribute;

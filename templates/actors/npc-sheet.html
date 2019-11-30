@@ -2,32 +2,35 @@
 
     {{!-- NPC Sheet Header --}}
     <header class="sheet-header flexrow">
-        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
 
         <div class="header-details flexrow">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
-            </h1>
+            <div class="header-background flexrow">
+                <h1 class="charname">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name" />
+                </h1>
 
-            <div class="charlevel">
-                <div class="level">
-                    <label>CR</label>
-                    <input name="data.details.cr" type="text" value="{{labels.cr}}" placeholder="1"/>
-                </div>
-                <div class="experience">
-                    <span>{{data.details.xp.value}} XP</span>
+                <div class="charlevel">
+                    <div class="level">
+                        <label>CR</label>
+                        <input name="data.details.cr" type="text" value="{{labels.cr}}" placeholder="1" />
+                    </div>
+                    <div class="experience">
+                        <span>{{data.details.xp.value}} XP</span>
+                    </div>
                 </div>
             </div>
-
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="Type"/>
+                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="Type" />
                 </li>
                 <li>
-                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="Alignment"/>
+                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}"
+                        placeholder="Alignment" />
                 </li>
                 <li>
-                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="Source"/>
+                    <input type="text" name="data.details.source" value="{{data.details.source}}"
+                        placeholder="Source" />
                 </li>
             </ul>
         </div>
@@ -47,32 +50,36 @@
 
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
-            {{#each data.abilities as |ability id|}}
+                {{#each data.abilities as |ability id|}}
                 <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
-                    <input class="ability-score" name="data.abilities.{{id}}.value" type="text" value="{{ability.value}}" data-dtype="Number" placeholder="10"/>
+                    <input class="ability-score" name="data.abilities.{{id}}.value" type="text"
+                        value="{{ability.value}}" data-dtype="Number" placeholder="10" />
                     <div class="ability-modifiers flexrow">
-                        <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
+                        <span class="ability-mod"
+                            title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}"
+                            data-dtype="Number" />
                         <a class="proficiency-toggle ability-proficiency" title="Proficiency">{{{ability.icon}}}</a>
-                        <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
+                        <span class="ability-save"
+                            title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
                     </div>
                 </li>
-            {{/each}}
+                {{/each}}
             </ul>
 
             {{!-- Skills --}}
             <ul class="skills-list">
-            {{#each data.skills as |skill s|}}
+                {{#each data.skills as |skill s|}}
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
-                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>
+                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <h4 class="skill-name rollable">{{skill.label}}</h4>
                     <span class="skill-ability">{{skill.ability}}</span>
                     <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
                     <span class="skill-passive">({{skill.passive}})</span>
                 </li>
-            {{/each}}
+                {{/each}}
             </ul>
 
             <section class="center-pane">
@@ -83,14 +90,15 @@
                         <h4 class="attribute-name box-title rollable">{{ localize "STARFINDER.Health" }}</h4>
                         <div class="attribute-value multiple">
                             <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
-                                   data-dtype="Number" placeholder="10"/>
+                                data-dtype="Number" placeholder="10" />
                             <span class="sep"> / </span>
                             <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
-                                   data-dtype="Number" placeholder="10"/>
+                                data-dtype="Number" placeholder="10" />
                         </div>
                         <footer class="attribute-footer">
-                            <input name="data.attributes.hp.formula" class="hpformula" type="text" placeholder="{{ localize 'STARFINDER.HealthFormula' }}"
-                                   value="{{data.attributes.hp.formula}}"/>
+                            <input name="data.attributes.hp.formula" class="hpformula" type="text"
+                                placeholder="{{ localize 'STARFINDER.HealthFormula' }}"
+                                value="{{data.attributes.hp.formula}}" />
                         </footer>
                     </li>
 
@@ -98,7 +106,7 @@
                         <h4 class="attribute-name box-title">{{ localize "STARFINDER.ArmorClass" }}</h4>
                         <div class="attribute-value">
                             <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
-                                   data-dtype="Number" placeholder="10"/>
+                                data-dtype="Number" placeholder="10" />
                         </div>
                         <footer class="attribute-footer">
                             <span>{{ localize "STARFINDER.Proficiency" }}</span>
@@ -110,11 +118,12 @@
                         <h4 class="attribute-name box-title">{{ localize "STARFINDER.Speed" }}</h4>
                         <div class="attribute-value">
                             <input name="data.attributes.speed.value" type="text"
-                                   value="{{data.attributes.speed.value}}" placeholder="0"/>
+                                value="{{data.attributes.speed.value}}" placeholder="0" />
                         </div>
                         <footer class="attribute-footer">
                             <input type="text" class="speed" name="data.attributes.speed.special"
-                                   value="{{data.attributes.speed.special}}" placeholder="{{ localize 'STARFINDER.SpeedSpecial' }}"/>
+                                value="{{data.attributes.speed.special}}"
+                                placeholder="{{ localize 'STARFINDER.SpeedSpecial' }}" />
                         </footer>
                     </li>
                 </ul>
@@ -125,29 +134,30 @@
                         <h4>{{ localize "STARFINDER.LegAct" }}</h4>
                         <div class="counter-value">
                             <input type="text" name="data.resources.legact.value" data-dtype="Number" placeholder="0"
-                                   value="{{data.resources.legact.value}}"/>
+                                value="{{data.resources.legact.value}}" />
                             <span class="sep">/</span>
                             <input type="text" name="data.resources.legact.max" data-dtype="Number" placeholder="0"
-                                   value="{{data.resources.legact.max}}"/>
+                                value="{{data.resources.legact.max}}" />
                         </div>
                     </div>
                     <div class="counter flexrow legendary">
                         <h4>{{ localize "STARFINDER.LegRes" }}</h4>
                         <div class="counter-value">
                             <input type="text" name="data.resources.legres.value" data-dtype="Number" placeholder="0"
-                                   value="{{data.resources.legres.value}}"/>
+                                value="{{data.resources.legres.value}}" />
                             <span class="sep">/</span>
                             <input type="text" name="data.resources.legres.max" data-dtype="Number" placeholder="0"
-                                   value="{{data.resources.legres.max}}"/>
+                                value="{{data.resources.legres.max}}" />
                         </div>
                     </div>
                     <div class="counter flexrow lair">
                         <h4>{{ localize "STARFINDER.LairAct" }}</h4>
                         <div class="counter-value">
-                            <input name="data.resources.lair.value" type="checkbox" value="{{data.resources.lair.value}}"
-                                   data-dtype="Boolean" {{checked data.resources.lair.value}}/>
-                            <input name="data.resources.lair.initiative" type="text" value="{{data.resources.lair.initiative}}"
-                                   data-dtype="Number" placeholder="Init."/>
+                            <input name="data.resources.lair.value" type="checkbox"
+                                value="{{data.resources.lair.value}}" data-dtype="Boolean"
+                                {{checked data.resources.lair.value}} />
+                            <input name="data.resources.lair.initiative" type="text"
+                                value="{{data.resources.lair.initiative}}" data-dtype="Number" placeholder="Init." />
                         </div>
                     </div>
                 </div>
