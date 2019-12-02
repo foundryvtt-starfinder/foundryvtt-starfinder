@@ -15,6 +15,16 @@ STARFINDER.abilities = {
 };
 
 /**
+ * The set of saves used with the system
+ * @type {Object}
+ */
+STARFINDER.saves = {
+    "fort": "STARFINDER.FortitudeSave",
+    "reflex": "STARFINDER.ReflexSave",
+    "will": "STARFINDER.WillSave"
+};
+
+/**
  * Character alignment options
  * @type {Object}
  */
@@ -72,6 +82,11 @@ STARFINDER.abilityActivationTypes = {
     "hour": "Hour",
     "min": "Minute"
 }
+
+STARFINDER.skillProficiencyLevels = {
+    0: "",
+    3: "Class Skill"
+};
 
 /**
  * The valid currency types in Starfinder

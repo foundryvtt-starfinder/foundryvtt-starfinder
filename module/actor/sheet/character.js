@@ -6,7 +6,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         mergeObject(options, {
             classes: ['starfinder', 'sheet', 'actor', 'character'],
             width: 690,
-            height: 800
+            height: 830
         });
 
         return options;

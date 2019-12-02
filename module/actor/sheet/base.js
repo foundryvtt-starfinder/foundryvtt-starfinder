@@ -51,10 +51,16 @@ export class ActorSheetStarfinder extends ActorSheet {
 
             // Update skill labels
             for (let [s, skl] of Object.entries(data.actor.data.skills)) {
-                if (s === "pro") continue; // TODO: make the profession skill work ;)
+                if (s === "pro") {
+                    if (skl.values && skl.values.length < 1) {
+                        skl.skip = true;
+                        continue;
+                    }
+                }
                 skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
                 skl.icon = this._getClassSkillIcon(skl.value);
                 skl.label = CONFIG.STARFINDER.skills[s];
+                skl.hover = CONFIG.STARFINDER.skillProficiencyLevels[skl.value];
             }
 
             this._prepareTraits(data.actor.data.traits);
@@ -98,13 +104,16 @@ export class ActorSheetStarfinder extends ActorSheet {
         html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
         // Ability Checks
-        // html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
+        html.find('.ability-name').click(this._onRollAbilityCheck.bind(this));
 
         // Roll Skill Checks
-        // html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
+        html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
 
         // Configure Special Flags
         html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
+
+        // Saves
+        html.find('.save-name').click(this._onRollSave.bind(this));
 
         /* -------------------------------------------- */
         /*  Inventory
@@ -195,6 +204,39 @@ export class ActorSheetStarfinder extends ActorSheet {
         }
 
         this._onSubmit(event);
+    }
+
+    /**
+     * Handle rolling a Save
+     * @param {Event} event   The originating click event
+     * @private
+     */
+    _onRollSave(event) {
+        event.preventDefault();
+        const save = event.currentTarget.parentElement.dataset.save;
+        this.actor.rollSave(save, {event: event});
+    }
+
+    /**
+     * Handle rolling a Skill check
+     * @param {Event} event   The originating click event
+     * @private
+     */
+    _onRollSkillCheck(event) {
+        event.preventDefault();
+        const skill = event.currentTarget.parentElement.dataset.skill;
+        this.actor.rollSkill(skill, {event: event});
+    }
+
+    /**
+     * Handle rolling an Ability check
+     * @param {Event} event   The originating click event
+     * @private
+     */
+    _onRollAbilityCheck(event) {
+        event.preventDefault();
+        let ability = event.currentTarget.parentElement.dataset.ability;
+        this.actor.rollAbility(ability, {event: event});
     }
 
     /**

@@ -64,7 +64,7 @@ export class DiceStarfinder {
         else parts = parts.concat(["@bonus"]);
 
         // Render modal dialog
-        template = template || "systems/dnd5e/templates/chat/roll-dialog.html";
+        template = template || "systems/starfinder/templates/chat/roll-dialog.html";
         let dialogData = {
             formula: parts.join(" + "),
             data: data,

@@ -48,7 +48,7 @@
 
  Hooks.once("setup", function() {
      const toLocalize = [
-         "abilities", "alignments", "distanceUnits", "senses", "skills", "currencies"
+         "abilities", "alignments", "distanceUnits", "senses", "skills", "currencies", "saves"
      ];
 
      for (let o of toLocalize) {
