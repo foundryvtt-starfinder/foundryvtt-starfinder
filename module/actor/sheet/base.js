@@ -120,7 +120,7 @@ export class ActorSheetStarfinder extends ActorSheet {
         /* -------------------------------------------- */
 
         // Create New Item
-        // html.find('.item-create').click(ev => this._onItemCreate(ev));
+        html.find('.item-create').click(ev => this._onItemCreate(ev));
 
         // Update Inventory Item
         html.find('.item-edit').click(ev => {
@@ -138,17 +138,17 @@ export class ActorSheetStarfinder extends ActorSheet {
         });
 
         // Item Dragging
-        // let handler = ev => this._onDragItemStart(ev);
-        // html.find('li.item').each((i, li) => {
-        //     li.setAttribute("draggable", true);
-        //     li.addEventListener("dragstart", handler, false);
-        // });
+        let handler = ev => this._onDragItemStart(ev);
+        html.find('li.item').each((i, li) => {
+            li.setAttribute("draggable", true);
+            li.addEventListener("dragstart", handler, false);
+        });
 
         // Item Rolling
-        // html.find('.item .item-image').click(event => this._onItemRoll(event));
+        html.find('.item .item-image').click(event => this._onItemRoll(event));
 
         // Item Recharging
-        // html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
+        html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
     }
 
     _prepareTraits(traits) {
@@ -204,6 +204,50 @@ export class ActorSheetStarfinder extends ActorSheet {
         }
 
         this._onSubmit(event);
+    }
+
+    /**
+     * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
+     * @param {Event} event The originating click event
+     */
+    _onItemCreate(event) {
+        event.preventDefault();
+        const header = event.currentTarget;
+        const type = header.dataset.type;
+        const itemData = {
+            name: `New ${type.capitalize()}`,
+            type: type,
+            data: duplicate(header.dataset)
+        };
+        delete itemData.data['type'];
+        return this.actor.createOwnedItem(itemData);
+    }
+
+    /**
+     * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+     * @param {Event} event The triggering event
+     */
+    _onItemRoll(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        if (item.data.type === "spell") {
+            return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
+        }
+
+        else return item.roll();
+    }
+
+    /**
+     * Handle attempting to recharge an item usage by rolling a recharge check
+     * @param {Event} event The originating click event
+     */
+    _ontItemRecharge(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+        return item.rollRecharge();
     }
 
     /**

@@ -1,0 +1,69 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source" />
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "STARFINDER.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Description Tab --}}
+        <div class="tab flexrow active" data-group="primary" data-tab="description">
+            {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <h3 class="form-header">Theme Details</h3>
+
+            <div class="form-group">
+                <label>Ability Adjustment</label>
+                <div class="form-fields">
+                    <select name="data.abilityMod.ability">
+                        {{#select data.abilityMod.ability}}
+                        {{#each config.abilities as |ability key|}}
+                        <option value="{{key}}">{{ability}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    <input type="text" name="data.abilityMod.mod" value="{{data.abilityMod.mod}}" data-dtype="Number" />                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Skill</label>
+                <select name="data.skill">
+                    {{#select data.skill}}
+                    {{#each config.skills as |skill skl|}}
+                    <option value="{{skl}}">{{skill}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+    </section>
+</form>

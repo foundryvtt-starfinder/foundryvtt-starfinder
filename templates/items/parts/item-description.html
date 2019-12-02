@@ -18,6 +18,13 @@
         </div>
         {{/if}}
 
+        {{#if hasLevel}}
+        <div class="form-group">
+            <label>Level</label>
+            <input type="text" name="data.level" value="{{data.level}}" data-dtype="Number" />
+        </div>
+        {{/if}}
+
         <ol class="properties-list">
             {{#each itemProperties}}
             <li>{{this}}</li>

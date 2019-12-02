@@ -95,7 +95,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
 
         const features = {
             classes: { label: "Class Levels", items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
-            race: { label: "Race", item: {}, hasActions: false, dataset: { type: "race" } },
+            race: { label: "Race", items: [], hasActions: false, dataset: { type: "race" }, isRace: true },
             active: { label: "Active", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
             passive: { label: "Passive", items: [], hasActions: false, dataset: { type: "feat" } }
         };
@@ -107,7 +107,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
 
         classes.sort((a, b) => b.levels - a.levels);
         features.classes.items = classes;
-        features.race.item = races[0];
+        features.race.items = races;
 
         data.inventory = Object.values(inventory);
         data.spellbook = spellbook;

@@ -59,6 +59,10 @@
             <div class="item-detail">
                 Level {{item.data.levels}}
             </div>
+            {{else if section.isRace}}
+            <div class="item-detail player-race">
+                {{item.data.type}}
+            </div>
             {{/if}}
 
             {{#if ../../owner}}

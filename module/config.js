@@ -380,6 +380,33 @@ STARFINDER.spellLevels = {
       "terran": "Terran"
   };
 
+  STARFINDER.augmentationTypes = {
+      "cybernetic": "STARFINDER.Cybernetic",
+      "biotech": "STARFINDER.Biotech",
+      "magitech": "STARFINDER.Magitech",
+      "necrograft": "STARFINDER.Necrograft",
+      "personal": "STARFINDER.PersonalUpgrade"
+  };
+
+  STARFINDER.augmentationSytems = {
+      "arm": "STARFINDER.AugArm",
+      "allArms": "STARFINDER.AugAllArms",
+      "brain": "STARFINDER.AugBrain",
+      "ears": "STARFINDER.AugEars",
+      "eyes": "STARFINDER.AugEyes",
+      "foot": "STARFINDER.AugFoot",
+      "allFeet": "STARFINDER.AugAllFeet",
+      "hand": "STARFINDER.AugHand",
+      "allHands": "STARFINDER.AugAllHands",
+      "heart": "STARFINDER.AugHeart",
+      "leg": "STARFINDER.AugLeg",
+      "allLegs": "STARFINDER.AugAllLegs",
+      "lungs": "STARFINDER.AugLungs",
+      "spinal": "STARFINDER.AugSpinalColumn",
+      "skin": "STARFINDER.AugSkin",
+      "throat": "STARFINDER.AugThroat"
+  };
+
   STARFINDER.CHARACTER_EXP_LEVELS = [
       0,1300, 3300,6000,10000,15000,23000,34000,50000,71000,
       105000,145000,210000,295000,425000,600000,850000,1200000,

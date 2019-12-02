@@ -37,7 +37,7 @@ export class ItemSheetStarfinder extends ItemSheet {
      * @return {string}
      */
     get template() {
-      const path = "systems/starfinder/templates/items/";
+      const path = "systems/starfinder/templates/items";
       return `${path}/${this.item.data.type}.html`;
     }
   
@@ -59,6 +59,7 @@ export class ItemSheetStarfinder extends ItemSheet {
       data.itemStatus = this._getItemStatus(data.item);
       data.itemProperties = this._getItemProperties(data.item);
       data.isPhysical = data.item.data.hasOwnProperty("quantity");
+      data.hasLevel = data.item.data.hasOwnProperty("level");
   
       // Action Details
       data.hasAttackRoll = this.item.hasAttack;
@@ -84,7 +85,7 @@ export class ItemSheetStarfinder extends ItemSheet {
     _getItemStatus(item) {
       if ( item.type === "spell" ) return ""; //item.data.preparation.prepared ? "Prepared" : "Unprepared";
       else if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped ? "Equipped" : "Unequipped";
-      else if ( item.type === "tool" ) return item.data.proficient ? "Proficient" : "Not Proficient";
+      else if ( item.type === "augmentation" ) return `${item.data.type} (${item.data.system})`;
     }
   
     /* -------------------------------------------- */
