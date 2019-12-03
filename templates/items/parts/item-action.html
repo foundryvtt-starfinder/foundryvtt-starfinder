@@ -60,16 +60,6 @@
     {{/each}}
 </ol>
 
-{{!-- Versatile Damage --}}
-{{#if data.damage.parts.length }}
-<div class="form-group">
-    <label>Versatile Damage</label>
-    <div class="form-fields">
-        <input type="text" name="data.damage.versatile" value="{{data.damage.versatile}}" placeholder="Formula"/>
-    </div>
-</div>
-{{/if}}
-
 {{!-- Other Formula --}}
 <div class="form-group">
     <label>Other Formula</label>
@@ -83,11 +73,11 @@
     <label>Saving Throw</label>
     <div class="form-fields">
         <input type="text" name="data.save.dc" value="{{data.save.dc}}" data-dtype="Number" placeholder="DC"/>
-        <select name="data.save.ability">
-            {{#select data.save.ability}}
+        <select name="data.save.type">
+            {{#select data.save.type}}
             <option value=""></option>
-            {{#each config.abilities as |ability a|}}
-            <option value="{{a}}">{{ability}}</option>
+            {{#each config.saves as |save s|}}
+            <option value="{{s}}">{{save}}</option>
             {{/each}}
             {{/select}}
         </select>

@@ -80,8 +80,9 @@ STARFINDER.abilityActivationTypes = {
     "other": "Other Actions",
     "day": "Day",
     "hour": "Hour",
-    "min": "Minute"
-}
+    "min": "Minute",
+    "special": "Special"
+};
 
 STARFINDER.skillProficiencyLevels = {
     0: "",
@@ -132,6 +133,18 @@ STARFINDER.timePeriods = {};
 // Healing types
 STARFINDER.healingTypes = {
     "healing": "Healing"
+};
+
+STARFINDER.spellPreparationModes = {
+    "always": "Always Available",
+    "innate": "Innate Spellcasting"
+};
+
+STARFINDER.limitedUsePeriods = {
+    "sr": "Short Rest",
+    "lr": "Long Rest",
+    "day": "Day",
+    "charges": "Charges"
 };
 
 STARFINDER.senses = {
@@ -306,6 +319,18 @@ STARFINDER.spellLevels = {
       "huge": 3,
       "gargantuan": 4,
       "colossal": 6
+  };
+
+  STARFINDER.itemActionTypes = {
+      "mwak": "STARFINDER.ActionMWAK",
+      "rwak": "STARFINDER.ActionRWAK",
+      "msak": "STARFINDER.ActionMSAK",
+      "rsak": "STARFINDER.ActionRSAK",
+      "save": "STARFINDER.ActionSave",
+      "heal": "STARFINDER.ActionHeal",
+      "abil": "STARFINDER.ActionAbil",
+      "util": "STARFINDER.ActionUtil",
+      "other": "STARFINDER.ActionOther"
   };
 
   STARFINDER.conditionTypes = {

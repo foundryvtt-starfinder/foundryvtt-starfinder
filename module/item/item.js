@@ -27,21 +27,11 @@ export class ItemStarfinder extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement a versatile damage roll as part of its usage
-   * @type {boolean}
-   */
-  get isVersatile() {
-    return !!(this.hasDamage && this.data.data.damage.versatile);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Does the Item implement a saving throw as part of its usage
    * @type {boolean}
    */
   get hasSave() {
-    return !!(this.data.data.save && this.data.data.save.ability);
+    return !!(this.data.data.save && this.data.data.save.type);
   }
 
   /* -------------------------------------------- */
@@ -60,9 +50,6 @@ export class ItemStarfinder extends Item {
     if ( item.type === "spell" ) {
       labels.level = C.spellLevels[item.data.level];
       labels.school = C.spellSchools[item.data.school];
-      // labels.components = Object.entries(item.data.components).map(c => {
-      //   c[1] === true ? c[0].titleCase().slice(0,1) : null
-      // }).filterJoin(",");
     }
 
     // Feat Items
@@ -87,19 +74,18 @@ export class ItemStarfinder extends Item {
       if ( act ) labels.activation = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
 
       // Target Label
-      let tgt = item.data.target || {};
-      if (["none", "touch", "self"].includes(tgt.units)) tgt.value = null;
-      if (["none", "self"].includes(tgt.type)) {
-        tgt.value = null;
-        tgt.units = null;
-      }
-      labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
+      // let tgt = item.data.target || {};
+      // if (["none", "touch", "self"].includes(tgt.units)) tgt.value = null;
+      // if (["none", "self"].includes(tgt.type)) {
+      //   tgt.value = null;
+      //   tgt.units = null;
+      // }
+      // labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
 
       // Range Label
       let rng = item.data.range || {};
       if (["none", "touch", "self"].includes(rng.units) || (rng.value === 0)) {
         rng.value = null;
-        rng.long = null;
       }
       labels.range = [rng.value, C.distanceUnits[rng.units]].filterJoin(" ");
 
@@ -118,8 +104,8 @@ export class ItemStarfinder extends Item {
 
       // Save DC
       let save = item.data.save || {};
-      if ( !save.ability ) save.dc = null;
-      labels.save = save.ability ? `DC ${save.dc || ""} ${C.abilities[save.ability]}` : "";
+      if ( !save.type ) save.dc = null;
+      labels.save = save.type ? `DC ${save.dc || ""} ${C.saves[save.type]}` : "";
 
       // Damage
       let dam = item.data.damage || {};
@@ -196,7 +182,7 @@ export class ItemStarfinder extends Item {
     if ( fn ) fn.bind(this)(data, labels, props);
 
     // General equipment properties
-    if ( data.hasOwnProperty("equipped") && !["loot", "tool"].includes(this.data.type) ) {
+    if ( data.hasOwnProperty("equipped") && !["goods", "augmentation"].includes(this.data.type) ) {
       props.push(
         data.equipped ? "Equipped" : "Not Equipped",
         data.proficient ? "Proficient": "Not Proficient",
@@ -227,8 +213,7 @@ export class ItemStarfinder extends Item {
   _equipmentChatData(data, labels, props) {
     props.push(
       CONFIG.STARFINDER.armorTypes[data.armor.type],
-      labels.armor || null,
-      data.stealth.value ? "Stealth Disadvantage" : null,
+      labels.armor || null
     );
   }
 
@@ -295,14 +280,14 @@ export class ItemStarfinder extends Item {
     const ad = this.actor.data.data;
 
     // Spell saving throw text
-    const abl = data.ability || ad.attributes.spellcasting || "int";
-    if ( this.hasSave && !data.save.dc ) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof;
-    labels.save = `DC ${data.save.dc} ${CONFIG.STARFINDER.abilities[data.save.ability]}`;
+    const abl = ad.attributes.keyability || "int";
+    console.log(abl, ad.abilities[abl].mod);
+    if ( this.hasSave && !data.save.dc ) data.save.dc = 10 + data.level + ad.abilities[abl].mod;
+    labels.save = `DC ${data.save.dc} ${CONFIG.STARFINDER.saves[data.save.type]}`;
 
     // Spell properties
     props.push(
-      labels.level,
-      labels.components,
+      labels.level
     );
   }
 
@@ -633,7 +618,7 @@ export class ItemStarfinder extends Item {
     else if ( action === "formula" ) await item.rollFormula({event});
 
     // Saving Throw
-    else if ( action === "save" ) await target.rollAbilitySave(button.dataset.ability, {event});
+    else if ( action === "save" ) await target.rollSave(button.dataset.type, {event});
 
     // Consumable usage
     else if ( action === "consume" ) await item.rollConsumable({event});

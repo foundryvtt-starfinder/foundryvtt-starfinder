@@ -58,11 +58,6 @@
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod"
                             title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}"
-                            data-dtype="Number" />
-                        <a class="proficiency-toggle ability-proficiency" title="Proficiency">{{{ability.icon}}}</a>
-                        <span class="ability-save"
-                            title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
                     </div>
                 </li>
                 {{/each}}
@@ -71,15 +66,32 @@
             {{!-- Skills --}}
             <ul class="skills-list">
                 {{#each data.skills as |skill s|}}
+                {{#unless skill.skip}}
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
                     <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
-                    <h4 class="skill-name rollable">{{skill.label}}</h4>
+                    <h4 class="skill-name rollable">
+                        {{skill.label}}
+                        {{#if skill.isTrainedOnly}}<span>&dagger;</span>{{/if}}
+                        {{#if skill.hasArmorCheckPenalty}}<span>*</span>{{/if}}
+                    </h4>
                     <span class="skill-ability">{{skill.ability}}</span>
+                    <input type="text" class="skill-ranks" title="Skill Ranks" name="data.skills.{{s}}.ranks"
+                        value="{{skill.ranks}}" data-dtype="Number" />
+                    <input type="text" class="skill-misc" title="Misc Modifiers" name="data.skills.{{s}}.misc"
+                        value="{{skill.misc}}" data-dtype="Number" />
                     <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
-                    <span class="skill-passive">({{skill.passive}})</span>
                 </li>
+                {{/unless}}
                 {{/each}}
+                <li class="flexrow">
+                    <div class="form-group">
+                        <button id="add-profession"><i class="fas fa-plus"></i> Add Profession</button>
+                    </div>
+                </li>
+                <li class="flexrow">
+                    <small>* = Armor Check Penatly, &dagger; = Trained Only</small>
+                </li>
             </ul>
 
             <section class="center-pane">
@@ -95,23 +107,22 @@
                             <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
                                 data-dtype="Number" placeholder="10" />
                         </div>
-                        <footer class="attribute-footer">
-                            <input name="data.attributes.hp.formula" class="hpformula" type="text"
-                                placeholder="{{ localize 'STARFINDER.HealthFormula' }}"
-                                value="{{data.attributes.hp.formula}}" />
-                        </footer>
                     </li>
 
                     <li class="attribute">
-                        <h4 class="attribute-name box-title">{{ localize "STARFINDER.ArmorClass" }}</h4>
+                        <h4 class="attribute-name box-title">{{ localize "STARFINDER.EnergyArmorClass" }}</h4>
                         <div class="attribute-value">
-                            <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
+                            <input name="data.attributes.eac.value" type="text" value="{{data.attributes.eac.value}}"
                                 data-dtype="Number" placeholder="10" />
                         </div>
-                        <footer class="attribute-footer">
-                            <span>{{ localize "STARFINDER.Proficiency" }}</span>
-                            <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
-                        </footer>
+                    </li>
+
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">{{ localize "STARFINDER.KineticArmorClass" }}</h4>
+                        <div class="attribute-value">
+                            <input name="data.attributes.kac.value" type="text" value="{{data.attributes.kac.value}}"
+                                data-dtype="Number" placeholder="10" />
+                        </div>
                     </li>
 
                     <li class="attribute">
@@ -128,38 +139,69 @@
                     </li>
                 </ul>
 
+                <ul class="attributes flexrow">
+                    <li class="attribute save" data-save="fort">
+                        <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.FortitudeSave"}}</h4>
+                        <div class="attribute-value">
+                            <span>{{numberFormat data.attributes.fort.bonus decimals=0 sign=true}}</span>
+                        </div>
+                        <footer class="attribute-footer">
+                            <div>
+                                <span>Base</span>
+                                <input name="data.attributes.fort.value" type="text" placeholder="0" data-dtype="Number"
+                                    value="{{numberFormat data.attributes.fort.value decimals=0 sign=true}}" />
+                            </div>
+                            <div>
+                                <span>Misc</span>
+                                <input name="data.attributes.fort.misc" type="text" placeholder="0" data-dtype="Number"
+                                    value="{{numberFormat data.attributes.fort.misc decimals=0 sign=true}}" />
+                            </div>
+                        </footer>
+                    </li>
+
+                    <li class="attribute save" data-save="reflex">
+                        <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.ReflexSave"}}</h4>
+                        <div class="attribute-value">
+                            <span>{{numberFormat data.attributes.reflex.bonus decimals=0 sign=true}}</span>
+                        </div>
+                        <footer class="attribute-footer">
+                            <div>
+                                <span>Base</span>
+                                <input name="data.attributes.reflex.value" type="text" placeholder="0"
+                                    data-dtype="Number"
+                                    value="{{numberFormat data.attributes.reflex.value decimals=0 sign=true}}" />
+                            </div>
+                            <div>
+                                <span>Misc</span>
+                                <input name="data.attributes.reflex.misc" type="text" placeholder="0"
+                                    data-dtype="Number"
+                                    value="{{numberFormat data.attributes.reflex.misc decimals=0 sign=true}}" />
+                            </div>
+                        </footer>
+                    </li>
+
+                    <li class="attribute save" data-save="will">
+                        <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.WillSave"}}</h4>
+                        <div class="attribute-value">
+                            <span>{{numberFormat data.attributes.will.bonus decimals=0 sign=true}}</span>
+                        </div>
+                        <footer class="attribute-footer">
+                            <div>
+                                <span>Base</span>
+                                <input name="data.attributes.will.value" type="text" placeholder="0" data-dtype="Number"
+                                    value="{{numberFormat data.attributes.will.value decimals=0 sign=true}}" />
+                            </div>
+                            <div>
+                                <span>Misc</span>
+                                <input name="data.attributes.will.misc" type="text" placeholder="0" data-dtype="Number"
+                                    value="{{numberFormat data.attributes.will.misc decimals=0 sign=true}}" />
+                            </div>
+                        </footer>
+                    </li>
+                </ul>
+
                 {{!-- Legendary Actions --}}
                 <div class="counters flexrow">
-                    <div class="counter flexrow legendary">
-                        <h4>{{ localize "STARFINDER.LegAct" }}</h4>
-                        <div class="counter-value">
-                            <input type="text" name="data.resources.legact.value" data-dtype="Number" placeholder="0"
-                                value="{{data.resources.legact.value}}" />
-                            <span class="sep">/</span>
-                            <input type="text" name="data.resources.legact.max" data-dtype="Number" placeholder="0"
-                                value="{{data.resources.legact.max}}" />
-                        </div>
-                    </div>
-                    <div class="counter flexrow legendary">
-                        <h4>{{ localize "STARFINDER.LegRes" }}</h4>
-                        <div class="counter-value">
-                            <input type="text" name="data.resources.legres.value" data-dtype="Number" placeholder="0"
-                                value="{{data.resources.legres.value}}" />
-                            <span class="sep">/</span>
-                            <input type="text" name="data.resources.legres.max" data-dtype="Number" placeholder="0"
-                                value="{{data.resources.legres.max}}" />
-                        </div>
-                    </div>
-                    <div class="counter flexrow lair">
-                        <h4>{{ localize "STARFINDER.LairAct" }}</h4>
-                        <div class="counter-value">
-                            <input name="data.resources.lair.value" type="checkbox"
-                                value="{{data.resources.lair.value}}" data-dtype="Boolean"
-                                {{checked data.resources.lair.value}} />
-                            <input name="data.resources.lair.initiative" type="text"
-                                value="{{data.resources.lair.initiative}}" data-dtype="Number" placeholder="Init." />
-                        </div>
-                    </div>
                 </div>
 
                 {{!-- Traits --}}

@@ -70,21 +70,15 @@
 
             {{!-- Spell Components --}}
             <div class="spell-components form-group stacked">
-                <label>Spell Components</label>
+                <label>Spell Properties</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.components.vocal" {{checked data.components.vocal}}/> Vocal
+                    <input type="checkbox" name="data.sr" {{checked data.sr}}/> Spell Resistance
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.components.somatic" {{checked data.components.somatic}}/> Somatic
+                    <input type="checkbox" name="data.dismissible" {{checked data.dismissible}}/> Dismissible
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.components.material" {{checked data.components.material}}/> Material
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.components.concentration" {{checked data.components.concentration}}/> Concentration
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.components.ritual" {{checked data.components.ritual}}/> Ritual
+                    <input type="checkbox" name="data.concentration" {{checked data.concentration}}/> Concentration
                 </label>
             </div>
 
@@ -96,7 +90,7 @@
                 <div class="spell-materials flexrow">
                     <label>Supply</label>
                     <input type="text" name="data.materials.supply" value="{{data.materials.supply}}" data-dtype="Number" Placeholder="0"/>
-                    <label>Cost (GP)</label>
+                    <label>Cost (Cr)</label>
                     <input type="text" name="data.materials.cost" value="{{data.materials.cost}}" data-dtype="Number" Placeholder="-"/>
                     <label>Consumed</label>
                     <input type="checkbox" name="data.materials.consumed" {{checked data.materials.consumed}}/>
@@ -131,21 +125,6 @@
 
             {{!-- Item Action Template --}}
             {{> "systems/starfinder/templates/items/parts/item-action.html"}}
-
-            {{!-- Spell Level Scaling --}}
-            <div class="form-group">
-                <label>Level Scaling</label>
-                <div class="form-fields">
-                    <select name="data.scaling.mode">
-                        {{#select data.scaling.mode}}
-                        {{#each config.spellScalingModes as |name key|}}
-                        <option value="{{key}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                    <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="Scaling Formula"/>
-                </div>
-            </div>
         </div>
     </section>
 </form>

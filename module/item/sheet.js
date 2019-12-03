@@ -59,7 +59,7 @@ export class ItemSheetStarfinder extends ItemSheet {
       data.itemStatus = this._getItemStatus(data.item);
       data.itemProperties = this._getItemProperties(data.item);
       data.isPhysical = data.item.data.hasOwnProperty("quantity");
-      data.hasLevel = data.item.data.hasOwnProperty("level");
+      data.hasLevel = data.item.data.hasOwnProperty("level") && data.item.type !== "spell";
   
       // Action Details
       data.hasAttackRoll = this.item.hasAttack;
@@ -68,10 +68,13 @@ export class ItemSheetStarfinder extends ItemSheet {
       // Spell-specific data
       if ( data.item.type === "spell" ) {
         let save = data.item.data.save;
-        if ( this.item.isOwned && (save.ability && !save.dc) ) {
-          save.dc = this.item.actor.data.data.attributes.spelldc;
+        if ( this.item.isOwned && (save.type && !save.dc) ) {
+          let actor = this.item.actor;
+          let abl = actor.data.data.attributes.keyability || "int";
+          save.dc = 10 + data.item.data.level + this.item.actor.data.data.abilities[abl].mod;
         }
       }
+      
       return data;
     }
   

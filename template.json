@@ -524,12 +524,13 @@
                 },
                 "target": {
                     "value": null,
-                    "units": "",
                     "type": ""
                 },
                 "range": {
                     "value": null,
-                    "units": ""
+                    "units": "",
+                    "additional": "",
+                    "per": ""
                 },
                 "uses": {
                     "value": 0,
@@ -554,7 +555,10 @@
                 "descriptors": []
             },
             "itemUsage": {
-                "capacity": 0,
+                "capacity": {
+                    "value": 0,
+                    "max": 20
+                },
                 "usage": {
                     "value": 1,
                     "per": "round"
@@ -584,6 +588,13 @@
                 "upgradeSlots": 0,
                 "upgrades": []
             },
+            "strength": 0,
+            "speed": "",
+            "damage": {
+                "parts": []
+            },
+            "size": "",
+            "reach": "",
             "proficient": true
         },
         "consumable": {
@@ -625,7 +636,17 @@
             "school": "",
             "sr": false,
             "dismissible": false,
-            "concentration": false
+            "concentration": false,
+            "materials": {
+                "value": "",
+                "consumed": false,
+                "cost": 0,
+                "supply": 0
+            },
+            "preperation": {
+                "mode": null,
+                "prepared": false
+            }
         },
         "feat": {
             "templates": ["itemDescription", "activatedEffect", "action"],

@@ -1,5 +1,6 @@
 import { DiceStarfinder } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
+import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
@@ -183,6 +184,22 @@ export class ActorStarfinder extends Actor {
         if (item.data.type !== "spell") throw new Error("Wrong item type");
 
         let lvl = item.data.data.level;
+        
+        let consume = true;
+        if (configureDialog) {
+            const spellFormData = await SpellCastDialog.create(this, item);
+            lvl = parseInt(spellFormData.get("level"));
+            consume = Boolean(spellFormData.get("consume"));
+            if (lvl !== item.data.data.level) {
+                item = item.constructor.createOwned(mergeObject(item.data, {"data.level": lvl}, {inplace: false}), this);
+            }
+        }
+
+        if (consume && (lvl > 0)) {
+            await this.update({
+                [`data.spells.spell${lvl}.value`]: Math.max(parseInt(this.data.data.spells[`spell${lvl}`].value) - 1, 0)
+            });
+        }
 
         return item.roll();
     }
