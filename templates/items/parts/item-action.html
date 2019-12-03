@@ -81,6 +81,13 @@
             {{/each}}
             {{/select}}
         </select>
+        <select name="data.save.descriptor">
+            {{#select data.save.descriptor}}
+            {{#each config.saveDescriptors as |descriptor k|}}
+            <option value="{{k}}">{{descriptor}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
     </div>
 </div>
 

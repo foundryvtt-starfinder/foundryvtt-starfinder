@@ -182,7 +182,7 @@ export class ItemStarfinder extends Item {
     if ( fn ) fn.bind(this)(data, labels, props);
 
     // General equipment properties
-    if ( data.hasOwnProperty("equipped") && !["goods", "augmentation"].includes(this.data.type) ) {
+    if ( data.hasOwnProperty("equipped") && !["goods", "augmentation", "technological", "upgrade"].includes(this.data.type) ) {
       props.push(
         data.equipped ? "Equipped" : "Not Equipped",
         data.proficient ? "Proficient": "Not Proficient",
@@ -259,13 +259,70 @@ export class ItemStarfinder extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for tool type items
+   * Prepare chat card data for goods type items
    * @private
    */
-  _lootChatData(data, labels, props) {
+  _goodsChatData(data, labels, props) {
     props.push(
-      "Loot",
-      data.weight ? data.weight + " lbs." : null
+      "Goods",
+      data.bulk ? `Bulk ${data.bulk}` : null
+    );
+  }
+
+  /**
+   * Prepare chat card data for technological type items
+   * @param {Object} data The items data
+   * @param {Object} labels Any labels for the item
+   * @param {Object} props The items properties
+   */
+  _technologicalChatData(data, labels, props) {
+    props.push(
+      "Technological",
+      data.bulk ? `Bulk ${data.bulk}`: null,
+      data.hands ? `Hands ${data.hands}` : null
+    );
+  }
+
+  /**
+   * Prepare chat card data for armor upgrades
+   * @param {Object} data The items data
+   * @param {Object} labels Any labels for the item
+   * @param {Object} props The items properties
+   */
+  _upgradeChatData(data, labels, props) {
+    let armorType = "";
+
+    if (data.armorType === 'any') {
+      armorType = "Any"
+    } else {
+      armorType = CONFIG.STARFINDER.armorTypes[data.armorType];
+    }
+
+    props.push(
+      "Armor Upgrade",
+      data.slots ? `Slots ${data.slots}` : null,
+      `Allowed armor ${armorType}`
+    );
+  }
+
+  _augmentationChatData(data, labels, props) {
+    props.push(
+      "Augmentation",
+      data.type ? CONFIG.STARFINDER.augmentationTypes[data.type] : null,
+      data.system ? CONFIG.STARFINDER.augmentationSytems[data.system] : null
+    );
+  }
+
+  /**
+   * Prepare chat card data for weapon fusions
+   * @param {Object} data The items data
+   * @param {Object} labels Any labels for the item
+   * @param {Object} props The items properties
+   */
+  _fusionChatData(data, labels, props) {
+    props.push(
+      "Weapon Fusion",
+      data.level ? `Level ${data.level}` : null
     );
   }
 
@@ -331,8 +388,8 @@ export class ItemStarfinder extends Item {
     else if ( !abl ) abl = "str";
 
     // Define Roll parts
-    const parts = ["@item.attackBonus", `@abilities.${abl}.mod`, "@attributes.prof"];
-    if ( (this.data.type === "weapon") && !itemData.proficient ) parts.pop();
+    const parts = ["@item.attackBonus", `@abilities.${abl}.mod`, "@attributes.bab"];
+    if ( (this.data.type === "weapon") && !itemData.proficient ) parts.push("-4");
 
     // Define Critical threshold
     let crit = 20;
@@ -380,17 +437,18 @@ export class ItemStarfinder extends Item {
 
     // Define Roll parts
     const parts = itemData.damage.parts.map(d => d[0]);
-    if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
-    if ( (this.data.type === "spell") && (itemData.scaling.mode === "cantrip") ) {
-      const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
-      this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
-    }
+    //if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
+
+    // Cantrips in Starfinder don't scale :(
+    // if ( (this.data.type === "spell") && (itemData.scaling.mode === "cantrip") ) {
+    //   const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
+    //   this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
+    // }
 
     // Define Roll Data
     const rollData = mergeObject(duplicate(actorData), {
       item: itemData,
-      mod: actorData.abilities[abl].mod,
-      prof: actorData.attributes.prof
+      mod: actorData.abilities[abl].mod
     });
     const title = `${this.name} - Damage Roll`;
 

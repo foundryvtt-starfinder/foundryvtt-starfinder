@@ -24,6 +24,15 @@ STARFINDER.saves = {
     "will": "STARFINDER.WillSave"
 };
 
+STARFINDER.saveDescriptors = {
+    "negate": "negates",
+    "partial": "partial",
+    "half": "half",
+    "disbelieve": "disbelieve",
+    "harmless": "harmless",
+    "object": "object"
+};
+
 /**
  * Character alignment options
  * @type {Object}
@@ -411,6 +420,15 @@ STARFINDER.spellLevels = {
       "magitech": "STARFINDER.Magitech",
       "necrograft": "STARFINDER.Necrograft",
       "personal": "STARFINDER.PersonalUpgrade"
+  };
+
+  STARFINDER.consumableTypes = {
+      "serum": "Serums",
+      "ampoule": "Spell Ampoules",
+      "spellGem": "Spell Gems",
+      "drugs": "Drugs",
+      "medicne": "Medicinals",
+      "poison": "Poisons"
   };
 
   STARFINDER.augmentationSytems = {

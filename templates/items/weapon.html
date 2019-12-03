@@ -32,6 +32,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "STARFINDER.Description" }}</a>
         <a class="item" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+        <a class="item" data-tab="item-capacity">{{ localize "STARFINDER.CapacityUsage" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -93,5 +94,6 @@
             {{!-- Item Action Template --}}
             {{> "systems/starfinder/templates/items/parts/item-action.html"}}
         </div>
+        {{> "systems/starfinder/templates/items/parts/item-capacity.html"}}
     </section>
 </form>

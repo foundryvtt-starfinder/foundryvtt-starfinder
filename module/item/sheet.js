@@ -60,6 +60,8 @@ export class ItemSheetStarfinder extends ItemSheet {
       data.itemProperties = this._getItemProperties(data.item);
       data.isPhysical = data.item.data.hasOwnProperty("quantity");
       data.hasLevel = data.item.data.hasOwnProperty("level") && data.item.type !== "spell";
+      data.hasHands = data.item.data.hasOwnProperty("hands");
+      data.hasCapacity = data.item.data.hasOwnProperty("capacity");
   
       // Action Details
       data.hasAttackRoll = this.item.hasAttack;

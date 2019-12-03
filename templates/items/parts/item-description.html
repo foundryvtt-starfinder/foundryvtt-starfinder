@@ -25,6 +25,13 @@
         </div>
         {{/if}}
 
+        {{#if hasHands}}
+        <div class="form-group">
+            <label>Hands</label>
+            <input type="text" name="data.hands" value="{{data.hands}}" data-dtype="Number" />
+        </div>
+        {{/if}}
+
         <ol class="properties-list">
             {{#each itemProperties}}
             <li>{{this}}</li>

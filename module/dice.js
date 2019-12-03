@@ -24,17 +24,17 @@ export class DiceStarfinder {
     static d20Roll({ event, parts, data, template, title, speaker, flavor, advantage = true, situational = true,
         fastForward = true, critical = 20, fumble = 1, onClose, dialogOptions, }) {
 
+        flavor = flavor || title;
         // Inner roll function
         let rollMode = game.settings.get("core", "rollMode");
         let roll = (parts, adv) => {
-            let flav = (flavor instanceof Function) ? flavor(parts, data) : title;
             if (adv === 1) {
                 parts[0] = ["2d20kh"];
-                flav = `${title} (Advantage)`;
+                flavor = `${title} (Advantage)`;
             }
             else if (adv === -1) {
                 parts[0] = ["2d20kl"];
-                flav = `${title} (Disadvantage)`;
+                flavor = `${title} (Disadvantage)`;
             }
 
             // Don't include situational bonus unless it is defined
@@ -51,7 +51,7 @@ export class DiceStarfinder {
             // Convert the roll to a chat message
             roll.toMessage({
                 speaker: speaker,
-                flavor: flav,
+                flavor: flavor,
                 rollMode: rollMode
             });
         };
@@ -121,23 +121,23 @@ export class DiceStarfinder {
     * @param {Object} dialogOptions  Modal dialog options
     */
     static damageRoll({ event = {}, parts, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
+        flavor = flavor || title;
 
         // Inner roll function
         let rollMode = game.settings.get("core", "rollMode");
         let roll = crit => {
-            let roll = new Roll(parts.join("+"), data),
-                flav = (flavor instanceof Function) ? flavor(parts, data) : title;
+            let roll = new Roll(parts.join("+"), data);
             if (crit === true) {
-                let add = (actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 : 0;
+                let add = /*(actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 :*/ 0;
                 let mult = 2;
                 roll.alter(add, mult);
-                flav = `${title} (Critical)`;
+                flavor = `${title} (Critical)`;
             }
 
             // Execute the roll and send it to chat
             roll.toMessage({
                 speaker: speaker,
-                flavor: flav,
+                flavor: flavor,
                 rollMode: rollMode
             });
 
@@ -150,7 +150,7 @@ export class DiceStarfinder {
         else parts = parts.concat(["@bonus"]);
 
         // Construct dialog data
-        template = template || "systems/dnd5e/templates/chat/roll-dialog.html";
+        template = template || "systems/starfinder/templates/chat/roll-dialog.html";
         let dialogData = {
             formula: parts.join(" + "),
             data: data,
@@ -169,7 +169,10 @@ export class DiceStarfinder {
                         critical: {
                             condition: critical,
                             label: "Critical Hit",
-                            callback: () => crit = true
+                            callback: () => {
+                                crit = true;
+                                this._updateModifiersForCrit(data, parts.join('+'), 2);
+                            }
                         },
                         normal: {
                             label: critical ? "Normal" : "Roll",
@@ -186,6 +189,24 @@ export class DiceStarfinder {
                 }, dialogOptions).render(true);
             });
         });
+    }
+
+    /**
+     * Take a roll formula and multiply any modifiers by a given multiplier
+     * 
+     * @param {object} data The data model to extract from
+     * @param {String} formula The formula sent to the Roll class
+     * @param {Number} multiplier The number to multiply the modifier by
+     */
+    static _updateModifiersForCrit(data, formula, multiplier) {
+        let matches = formula.match(new RegExp(/@[a-z.0-9]+/gi)).map(x => x.replace('@', ''));
+
+        for (let match of matches) {
+            let value = getProperty(data, match);
+            if (!value) continue;
+            value *= multiplier;
+            setProperty(data, match, value);
+        }
     }
 }
 

@@ -16,7 +16,8 @@ export const preloadHandlebarsTemplates = async function () {
     // Item Sheet Partials
     "systems/starfinder/templates/items/parts/item-action.html",
     "systems/starfinder/templates/items/parts/item-activation.html",
-    "systems/starfinder/templates/items/parts/item-description.html"
+    "systems/starfinder/templates/items/parts/item-description.html",
+    "systems/starfinder/templates/items/parts/item-capacity.html"
     ];
 
     return loadTemplates(templatePaths);

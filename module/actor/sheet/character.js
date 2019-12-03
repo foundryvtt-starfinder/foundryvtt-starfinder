@@ -46,7 +46,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
             consumable: { label: "Consumables", items: [], dataset: { type: "consumable" } },
             goods: { label: "Goods", items: [], dataset: { type: "goods" } },
             technological: { label: "Technological", items: [], dataset: { type: "technological" } },
-            fusion: { label: "Weapon Fustions", items: [], dataset: { type: "fusion" } },
+            fusion: { label: "Weapon Fusions", items: [], dataset: { type: "fusion" } },
             upgrade: { label: "Armor Upgrades", items: [], dataset: { type: "upgrade" } },
             augmentation: { label: "Augmentations", items: [], dataset: { type: "augmentation" } }
         };
@@ -129,7 +129,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         };
 
         enc.pct = Math.min(enc.value * 100 / enc.max, 99);
-        enc.encumbered = enc.pct > (actorData.data.abilities.str.value / 2);
+        enc.encumbered = enc.pct > 50;
         return enc;
     }
 
