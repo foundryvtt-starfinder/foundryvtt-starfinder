@@ -35,7 +35,7 @@ export class ActorSheetStarfinder extends ActorSheet {
 
         data.actor = duplicate(this.actor.data);
         data.items = this.actor.items.map(i => {
-            i.data.labels = i.lables;
+            i.data.labels = i.labels;
             return i.data;
         });
         data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
@@ -51,15 +51,15 @@ export class ActorSheetStarfinder extends ActorSheet {
 
             // Update skill labels
             for (let [s, skl] of Object.entries(data.actor.data.skills)) {
-                if (s === "pro") {
-                    if (skl.values && skl.values.length < 1) {
-                        skl.skip = true;
-                        continue;
-                    }
-                }
                 skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
                 skl.icon = this._getClassSkillIcon(skl.value);
-                skl.label = CONFIG.STARFINDER.skills[s];
+
+                let skillLabel = CONFIG.STARFINDER.skills[s];
+                if (typeof skl.subname !== "undefined" && skl.subname) {
+                    skillLabel += ` (${skl.subname})`;
+                }
+
+                skl.label = skillLabel;
                 skl.hover = CONFIG.STARFINDER.skillProficiencyLevels[skl.value];
             }
 
@@ -108,6 +108,12 @@ export class ActorSheetStarfinder extends ActorSheet {
 
         // Roll Skill Checks
         html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
+
+        // Edit Skill
+        html.find('h4.skill-name').contextmenu(this._onEditSkill.bind(this));
+
+        // Add skill
+        html.find('#add-profession').click(this._onAddSkill.bind(this));
 
         // Configure Special Flags
         html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
@@ -204,6 +210,27 @@ export class ActorSheetStarfinder extends ActorSheet {
         }
 
         this._onSubmit(event);
+    }
+
+    /**
+     * Handle editing a skill
+     * @param {Event} event The originating contextmenu event
+     */
+    _onEditSkill(event) {
+        event.preventDefault();
+        let skillId = event.currentTarget.parentElement.dataset.skill;
+
+        return this.actor.editSkill(skillId, {event: event});
+    }
+
+    /**
+     * Handle adding a skill
+     * @param {Event} event The originating contextmenu event
+     */
+    _onAddSkill(event) {
+        event.preventDefault();
+
+        return this.actor.addSkill({event: event});
     }
 
     /**
@@ -340,7 +367,8 @@ export class ActorSheetStarfinder extends ActorSheet {
         };
 
         let spellbook = spells.reduce((sb, spell) => {
-            const lvl = spell.data.level || 0;
+            const mode = spell.data.preparation.mode || "";
+            const lvl = levels[mode] || spell.data.level || 0;
 
             if (!sb[lvl]) {
                 sb[lvl] = {
@@ -348,7 +376,7 @@ export class ActorSheetStarfinder extends ActorSheet {
                     usesSlots: lvl > 0,
                     canCreate: owner && (lvl >= 0),
                     canPrepare: (data.actor.type === 'character') && (lvl > 0),
-                    label: lvl >= 0 ? CONFIG.STARFINDER.spellLevels[lvl] : "",
+                    label: lvl >= 0 ? CONFIG.STARFINDER.spellLevels[lvl] : CONFIG.STARFINDER.spellPreparationModes[mode],
                     spells: [],
                     uses: useLabels[lvl] || data.data.spells["spell"+lvl].value || 0,
                     slots: useLabels[lvl] || data.data.spells["spell"+lvl].max || 0,

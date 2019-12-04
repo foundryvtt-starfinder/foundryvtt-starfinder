@@ -4,7 +4,7 @@
     <ol class="currency flexrow">
         <h3>
             Currency
-            <a class="currency-convert" title="Convert Currency"><i class="fas fa-coins"></i></a>
+            <i class="fas fa-coins"></i>
         </h3>
         {{#each data.currency as |v k|}}
         <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>
@@ -12,14 +12,6 @@
         {{/each}}
     </ol>
     {{/if}}
-
-    <ul class="filter-list flexrow" data-filter="features">
-        <li class="filter-title">Filter</li>
-        <li class="filter-item" data-filter="action">Action</li>
-        <li class="filter-item" data-filter="bonus">Bonus</li>
-        <li class="filter-item" data-filter="reaction">Reaction</li>
-        <li class="filter-item" data-filter="equipped">Equipped</li>
-    </ul>
 </div>
 
 <ol class="inventory-list">

@@ -120,6 +120,7 @@ STARFINDER.damageTypes = {
 };
 
 STARFINDER.distanceUnits = {
+    "none": "STARFINDER.None",
     "personal": "STARFINDER.Personal",
     "touch": "STARFINDER.Touch",
     "close": "STARFINDER.Close",
@@ -267,6 +268,8 @@ STARFINDER.armorTypes = {
     "power": "Power Armor",
     "shield": "Shields"
 };
+
+STARFINDER.equipmentTypes = STARFINDER.armorTypes;
 
 // Spell Schools
 STARFINDER.spellSchools = {

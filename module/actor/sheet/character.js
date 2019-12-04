@@ -51,7 +51,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
             augmentation: { label: "Augmentations", items: [], dataset: { type: "augmentation" } }
         };
 
-        let [items, spells, feats, classes, races] = data.items.reduce((arr, item) => {
+        let [items, spells, feats, classes, races, themes] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
@@ -62,9 +62,10 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
             else if (item.type === "feat") arr[2].push(item);
             else if (item.type === "class") arr[3].push(item);
             else if (item.type === "race") arr[4].push(item);
+            else if (item.type === "theme") arr[5].push(item);
             else if (Object.keys(inventory).includes(item.type)) arr[0].push(item);
             return arr;
-        }, [[], [], [], [], []]);
+        }, [[], [], [], [], [], []]);
         
         const spellbook = this._prepareSpellbook(data, spells);
 
@@ -96,6 +97,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         const features = {
             classes: { label: "Class Levels", items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
             race: { label: "Race", items: [], hasActions: false, dataset: { type: "race" }, isRace: true },
+            theme: { label: "Theme", items: [], hasActions: false, dataset: { type: "theme" }, isTheme: true },
             active: { label: "Active", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
             passive: { label: "Passive", items: [], hasActions: false, dataset: { type: "feat" } }
         };
@@ -108,6 +110,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         classes.sort((a, b) => b.levels - a.levels);
         features.classes.items = classes;
         features.race.items = races;
+        features.theme.items = themes;
 
         data.inventory = Object.values(inventory);
         data.spellbook = spellbook;

@@ -19,9 +19,6 @@
                     {{lookup config.equipmentTypes data.armor.type }}
                 </li>
                 <li>
-                    <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="Rarity"/>
-                </li>
-                <li>
                     <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
                 </li>
             </ul>
@@ -76,9 +73,16 @@
 
             {{!-- Armor Class --}}
             <div class="form-group">
-                <label>Armor Class</label>
+                <label>Energy Armor Class</label>
                 <div class="form-fields">
-                   <input type="text" name="data.armor.value" value="{{data.armor.value}}" data-dtype="Number"/>
+                   <input type="text" name="data.armor.eac" value="{{data.armor.eac}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Kinetic Armor Class</label>
+                <div class="form-fields">
+                   <input type="text" name="data.armor.kac" value="{{data.armor.kac}}" data-dtype="Number"/>
                 </div>
             </div>
 
@@ -90,19 +94,69 @@
                 </div>
             </div>
 
+            {{!-- Armor Check Penalty --}}
+            <div class="form-group">
+                <label>Armor Check Penalty</label>
+                <div class="form-fields">
+                    <input type="text" name="data.armor.acp" value="{{data.armor.acp}}" data-dtype="Number" placeholder="0" />
+                </div>
+            </div>
+
+            {{!-- Updgrade Slots --}}
+            <div class="form-group">
+                <label>Updgrade Slots</label>
+                <div class="form-fields">
+                    <input type="text" name="data.armor.upgradeSlots" value="{{data.armor.upgradeSlots}}" data-dtype="Number" placeholder="0" />
+                </div>
+            </div>
+
+            {{!-- Power Armor Specific --}}
+            {{#if isPowerArmor}}
+            <h3 class="form-header">Power Armror Details</h3>
+
             {{!-- Required Strength --}}
             <div class="form-group">
-                <label>Required Strength</label>
+                <label>Strength</label>
                 <div class="form-fields">
                    <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" placeholder="None"/>
                 </div>
             </div>
 
-            {{!-- Stealth Disadvantage --}}
             <div class="form-group">
-                <label>Imposes Stealth Disadvantage</label>
-                <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>
+                <label>{{ localize "STARFINDER.Speed" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.speed" value="{{data.speed}}" placeholder="30 ft" />
+                </div>
             </div>
+
+            <div class="form-group">
+                <label>{{ localize "STARFINDER.Size" }}</label>
+                <div class="form-fields">
+                    <select name="data.size">
+                        {{#select data.size}}
+                        {{#each config.actorSizes as |size s|}}
+                        <option value="{{s}}">{{size}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Reach</label>
+                <div class="form-fields">
+                    <input type="text" name="data.reach" value="{{data.reach}}" placeholder="5 ft." />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Weapon Slots</label>
+                <div class="form-fields">
+                    <input type="text" name="data.weaponSlots" value="{{data.weaponSlots}}" data-dtype="Number" placeholder="-" />
+                </div>
+            </div>
+
+            {{/if}}
 
             <h3 class="form-header">Equipment Usage</h3>
 

@@ -55,15 +55,14 @@ export class ItemStarfinder extends Item {
     // Feat Items
     else if ( item.type === "feat" ) {
       const act = item.data.activation;
-      if ( act && (act.type === C.abilityActivationTypes.legendary) ) labels.featType = "Legendary Action";
-      else if ( act && (act.type === C.abilityActivationTypes.lair) ) labels.featType = "Lair Action";
-      else if ( act && act.type ) labels.featType = item.data.damage.length ? "Attack" : "Action";
+      if ( act && act.type ) labels.featType = item.data.damage.length ? "Attack" : "Action";
       else labels.featType = "Passive";
     }
 
     // Equipment Items
     else if ( item.type === "equipment" ) {
-      labels.armor = item.data.armor.value ? `${item.data.armor.value} AC` : "";
+      labels.eac = item.data.armor.eac ? `${item.data.armor.eac} EAC`: "";
+      labels.kac = item.data.armor.kac ? `${item.data.armor.kac} KAC` : "";
     }
 
     // Activated Items
@@ -84,7 +83,7 @@ export class ItemStarfinder extends Item {
 
       // Range Label
       let rng = item.data.range || {};
-      if (["none", "touch", "self"].includes(rng.units) || (rng.value === 0)) {
+      if (["none", "touch", "personal"].includes(rng.units) || (rng.value === 0)) {
         rng.value = null;
       }
       labels.range = [rng.value, C.distanceUnits[rng.units]].filterJoin(" ");
@@ -213,7 +212,8 @@ export class ItemStarfinder extends Item {
   _equipmentChatData(data, labels, props) {
     props.push(
       CONFIG.STARFINDER.armorTypes[data.armor.type],
-      labels.armor || null
+      labels.eac || null,
+      labels.kac || null
     );
   }
 
@@ -338,7 +338,6 @@ export class ItemStarfinder extends Item {
 
     // Spell saving throw text
     const abl = ad.attributes.keyability || "int";
-    console.log(abl, ad.abilities[abl].mod);
     if ( this.hasSave && !data.save.dc ) data.save.dc = 10 + data.level + ad.abilities[abl].mod;
     labels.save = `DC ${data.save.dc} ${CONFIG.STARFINDER.saves[data.save.type]}`;
 
@@ -364,6 +363,22 @@ export class ItemStarfinder extends Item {
     // Feat properties
     props.push(
       data.requirements
+    );
+  }
+
+  _themeChatData(data, labels, props) {
+    props.push(
+      "Theme",
+      data.abilityMod.ability ? `Ability ${CONFIG.STARFINDER.abilities[data.abilityMod.ability]}` : null,
+      data.skill ? `Skill ${CONFIG.STARFINDER.skills[data.skill]}` : null
+    );
+  }
+
+  _raceChatData(data, labels, props) {
+    props.push(
+      "Race",
+      data.type ? data.type : null,
+      data.subtype ? data.subtype : null
     );
   }
 

@@ -62,6 +62,9 @@ export class ItemSheetStarfinder extends ItemSheet {
       data.hasLevel = data.item.data.hasOwnProperty("level") && data.item.type !== "spell";
       data.hasHands = data.item.data.hasOwnProperty("hands");
       data.hasCapacity = data.item.data.hasOwnProperty("capacity");
+
+      // Armor specific details
+      data.isPowerArmor = data.item.data.hasOwnProperty("armor") && data.item.data.armor.type === 'power';
   
       // Action Details
       data.hasAttackRoll = this.item.hasAttack;
@@ -73,7 +76,7 @@ export class ItemSheetStarfinder extends ItemSheet {
         if ( this.item.isOwned && (save.type && !save.dc) ) {
           let actor = this.item.actor;
           let abl = actor.data.data.attributes.keyability || "int";
-          save.dc = 10 + data.item.data.level + this.item.actor.data.data.abilities[abl].mod;
+          save.dc = 10 + data.item.data.level + actor.data.data.abilities[abl].mod;
         }
       }
       
@@ -88,8 +91,7 @@ export class ItemSheetStarfinder extends ItemSheet {
      * @private
      */
     _getItemStatus(item) {
-      if ( item.type === "spell" ) return ""; //item.data.preparation.prepared ? "Prepared" : "Unprepared";
-      else if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped ? "Equipped" : "Unequipped";
+      if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped ? "Equipped" : "Unequipped";
       else if ( item.type === "augmentation" ) return `${item.data.type} (${item.data.system})`;
     }
   
@@ -114,8 +116,9 @@ export class ItemSheetStarfinder extends ItemSheet {
         props.push(
           labels.components,
           labels.materials,
-          /*item.data.components.concentration ? "Concentration" :*/ null,
-          /*item.data.components.ritual ? "Ritual" :*/ null
+          item.data.concentration ? "Concentration" : null,
+          item.data.sr ? "Spell Resistence" : null,
+          item.data.dismissible ? "Dismissible" : null
         )
       }
   

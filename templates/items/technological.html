@@ -25,12 +25,17 @@
      {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "STARFINDER.Description" }}</a>
-        <a class="item" data-tab="item-capacity">Capacity &amp; Usage</a>
+        <a class="item" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">
         {{> "systems/starfinder/templates/items/parts/item-description.html"}}
-        {{> "systems/starfinder/templates/items/parts/item-capacity.html"}}
+
+        <div class="tab details" data-tab="details" data-group="primary">
+            <h3 class="form-header">{{ localize "STARFINDER.CapacityUsage" }}</h3>
+            {{> "systems/starfinder/templates/items/parts/item-capacity.html"}}
+        </div>
+
     </section>
 </form>

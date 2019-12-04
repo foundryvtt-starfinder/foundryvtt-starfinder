@@ -1,18 +1,18 @@
-<div class="tab details active" data-group="primary" data-tab="item-capacity">
-    <div class="form-group">
-        <label>Capacity</label>
-        <div class="form-fields">
-            <input type="text" name="data.capacity.value" value="{{data.capacity.value}}" data-dtype="Number" />
-            <span class="sep"> / </span>
-            <input type="text" name="data.capacity.max" value="{{data.capacity.max}}" data-dtype="Number" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Usage</label>
-        <div class="form-fields">
-            <input type="text" name="data.usage.value" value="{{data.usage.value}}" data-dtype="Number" />
-            <span class="sep"> / </span>
-            <input type="text" name="data.usage.per" value="{{data.usage.per}}" />
-        </div>
+{{#if hasCapacity}}
+<div class="form-group">
+    <label>Capacity</label>
+    <div class="form-fields">
+        <input type="text" name="data.capacity.value" value="{{data.capacity.value}}" data-dtype="Number" />
+        <span class="sep"> / </span>
+        <input type="text" name="data.capacity.max" value="{{data.capacity.max}}" data-dtype="Number" />
     </div>
 </div>
+<div class="form-group">
+    <label>Usage</label>
+    <div class="form-fields">
+        <input type="text" name="data.usage.value" value="{{data.usage.value}}" data-dtype="Number" />
+        <span class="sep"> / </span>
+        <input type="text" name="data.usage.per" value="{{data.usage.per}}" />
+    </div>
+</div>
+{{/if}}

@@ -1,6 +1,7 @@
 import { DiceStarfinder } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
+import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
@@ -34,7 +35,6 @@ export class ActorStarfinder extends Actor {
 
         // Skills
         for (let skl of Object.values(data.skills)) {
-            if (skl.values && skl.values instanceof Array) continue; //TODO: Make profession skill work ;)
             skl.value = parseFloat(skl.value || 0);
             let classSkill = skl.value;
             let hasRanks = skl.ranks > 0;
@@ -184,6 +184,8 @@ export class ActorStarfinder extends Actor {
         if (item.data.type !== "spell") throw new Error("Wrong item type");
 
         let lvl = item.data.data.level;
+        const usesSlots = (lvl > 0) && item.data.data.preparation.mode === "";
+        if (!usesSlots) return item.roll();
         
         let consume = true;
         if (configureDialog) {
@@ -202,6 +204,44 @@ export class ActorStarfinder extends Actor {
         }
 
         return item.roll();
+    }
+
+    /**
+     * Edit a skill's fields
+     * @param {string} skillId The skill id (e.g. "ins")
+     * @param {Object} options Options which configure how the skill is edited
+     */
+    async editSkill(skillId, options = {}) {
+        const skill = this.data.data.skills[skillId];
+        const formData = await AddEditSkillDialog.create(skillId, skill);
+
+        let skillData = {};
+        for (let data of formData.entries()) {
+            skillData[data[0]] = data[1];
+        }
+
+        if (skillData['skill.isTrainedOnly'] && skillData['skill.isTrainedOnly'] === 'on') {
+            skillData['skill.isTrainedOnly'] = true;
+        } 
+
+        if (skillData['skill.hasArmorCheckPenalty'] && skillData['skill.hasArmorCheckPenalty'] === 'on') {
+            skillData['skill.hasArmorCheckPenalty'] = true;
+        } 
+        
+        if (skillData['skill.value'] && skillData['skill.value'] === 'on') {
+            skillData['skill.value'] = 3;
+        }
+
+        console.log(skillData);
+        // TODO: Finish this.
+    }
+
+    /**
+     * Add a new skill
+     * @param {Object} options Options which configure how the skill is added
+     */
+    async addSkill(options={}) {
+        console.log("Starfinder | In StarfinderActor.addSkill(options)");
     }
 
     /**
@@ -378,7 +418,8 @@ export class ActorStarfinder extends Actor {
         }
 
         // Recover HP, SP, and RP
-        let dhp = data.details.level.value > data.attributes.hp.max ?
+        let dhp = data.attributes.hp.max === data.attributes.hp.value ? 0 : 
+            data.details.level.value > data.attributes.hp.max ?
             data.attributes.hp.max - data.attributes.hp.value : data.details.level.value;
         let dsp = data.attributes.sp.max - data.attributes.sp.value;
         let drp = data.attributes.rp.max - data.attributes.rp.value;
@@ -397,7 +438,7 @@ export class ActorStarfinder extends Actor {
             updateData[`data.spells.${k}.value`] = v.max;
         }
 
-        const items = this.items.filter(i => i.data.data.uses && ["sr", "lr"].includes(i.data.data.uses.per));
+        const items = this.items.filter(i => i.data.data.uses && ["sr", "lr", "day"].includes(i.data.data.uses.per));
         const updateItems = items.map(item => {
             return {
                 "id": item.data.id,

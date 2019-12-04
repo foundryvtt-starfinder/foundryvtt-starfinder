@@ -37,8 +37,15 @@
     <label>Range</label>
     <div class="form-fields">
         <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="Range"/>
+        <select name="data.range.units">
+            {{#select data.range.units}}
+            {{#each config.distanceUnits as |unit key|}}
+            <option value="{{key}}">{{unit}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
         <span class="sep"> + </span>
-        <input type="text" name="data.range.additional" value="{{data.range.additional}}" data-dtype="Number" placeholder="5 ft." />
+        <input type="text" name="data.range.additional" value="{{data.range.additional}}" data-dtype="String" placeholder="5 ft." />
         <span class="sep"> / </span>
         <input type="text" name="data.range.per" value="{{data.range.per}}" placeholder="level" />
     </div>
