@@ -212,28 +212,44 @@ export class ActorStarfinder extends Actor {
      * @param {Object} options Options which configure how the skill is edited
      */
     async editSkill(skillId, options = {}) {
-        const skill = this.data.data.skills[skillId];
-        const formData = await AddEditSkillDialog.create(skillId, skill);
+        // Keeping this here for later
+        // this.update({"data.skills.-=skillId": null});
+        // use this to delete any unwanted skills.
 
-        let skillData = {};
-        for (let data of formData.entries()) {
-            skillData[data[0]] = data[1];
-        }
+        const skill = duplicate(this.data.data.skills[skillId]);
+        const formData = await AddEditSkillDialog.create(skillId, skill),
+              isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
+              hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
+              value = Boolean(formData.get('value')) ? 3 : 0,
+              misc = Number(formData.get('misc')),
+              ranks = Number(formData.get('ranks')),
+              ability = formData.get('ability');
 
-        if (skillData['skill.isTrainedOnly'] && skillData['skill.isTrainedOnly'] === 'on') {
-            skillData['skill.isTrainedOnly'] = true;
-        } 
-
-        if (skillData['skill.hasArmorCheckPenalty'] && skillData['skill.hasArmorCheckPenalty'] === 'on') {
-            skillData['skill.hasArmorCheckPenalty'] = true;
-        } 
         
-        if (skillData['skill.value'] && skillData['skill.value'] === 'on') {
-            skillData['skill.value'] = 3;
+
+        let skillData = {
+            ability: ability,
+            ranks: ranks,
+            value: value,
+            misc: misc,
+            isTrainedOnly: isTrainedOnly,
+            hasArmorCheckPenalty: hasArmorCheckPenalty,
+        };
+
+        let updateObject = {
+            [`data.skills.${skillId}.ability`]: skillData.ability,
+            [`data.skills.${skillId}.ranks`]: skillData.ranks,
+            [`data.skills.${skillId}.value`]: skillData.value,
+            [`data.skills.${skillId}.misc`]: skillData.misc,
+            [`data.skills.${skillId}.isTrainedOnly`]: skillData.isTrainedOnly,
+            [`data.skills.${skillId}.hasArmorCheckPenalty`]: skillData.hasArmorCheckPenalty
+        };
+
+        if ("subname" in skill) {
+            updateObject[`data.skills.${skillId}.subname`] = formData.get('subname');
         }
 
-        console.log(skillData);
-        // TODO: Finish this.
+        return this.update(updateObject);
     }
 
     /**
@@ -241,7 +257,42 @@ export class ActorStarfinder extends Actor {
      * @param {Object} options Options which configure how the skill is added
      */
     async addSkill(options={}) {
-        console.log("Starfinder | In StarfinderActor.addSkill(options)");
+        const skill = {
+            ability: "int",
+            ranks: 0,
+            value: 0,
+            misc: 0,
+            isTrainedOnly: false,
+            hasArmorCheckPenalty: false,
+            subname: ""
+        };
+
+        let skillId = "pro";
+        let counter = 0;
+
+        while (this.data.data.skills[skillId]) {
+            skillId = `pro${++counter}`;
+        }
+
+        const formData = await AddEditSkillDialog.create(skillId, skill, false),
+              isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
+              hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
+              value = Boolean(formData.get('value')) ? 3 : 0,
+              misc = Number(formData.get('misc')),
+              ranks = Number(formData.get('ranks')),
+              ability = formData.get('ability'),
+              subname = formData.get('subname');
+        
+        return this.update({
+            [`data.skills.${skillId}`]: {},
+            [`data.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
+            [`data.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty,
+            [`data.skills.${skillId}.value`]: value,
+            [`data.skills.${skillId}.misc`]: misc,
+            [`data.skills.${skillId}.ranks`]: ranks,
+            [`data.skills.${skillId}.ability`]: ability,
+            [`data.skills.${skillId}.subname`]: subname
+        });
     }
 
     /**
@@ -253,11 +304,11 @@ export class ActorStarfinder extends Actor {
     rollSkill(skillId, options = {}) {
         const skl = this.data.data.skills[skillId];
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
-            let content = `${CONFIG.STARFINDER.skills[skillId]} is a trained only skill, but ${this.name} is not trained in that skill.
+            let content = `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]} is a trained only skill, but ${this.name} is not trained in that skill.
                 Would you like to roll anyway?`;
 
             new Dialog({
-                title: `${CONFIG.STARFINDER.skills[skillId]} is trained only`,
+                title: `${CONFIG.STARFINDER.skills[skillId.substring()]} is trained only`,
                 content: content,
                 buttons: {
                     yes: {
@@ -318,7 +369,7 @@ export class ActorStarfinder extends Actor {
             event: options.event,
             parts: ["@mod"],
             data: { mod: skill.mod },
-            title: `${CONFIG.STARFINDER.skills[skillId]} Skill Check`,
+            title: `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]} Skill Check`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }

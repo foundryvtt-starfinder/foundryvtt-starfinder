@@ -28,7 +28,7 @@ export class AddEditSkillDialog extends Dialog {
      * @returns {Promise}
      */
     static async create(skillId, skill, isEdit = true) {
-        let hasSubName = typeof skill.subname !== "undefined";
+        let hasSubName = typeof skill.subname !== "undefined" || !isEdit;
         const html = await renderTemplate("systems/starfinder/templates/apps/add-edit-skill.html", {
             skill: skill,
             hasSubName,
@@ -37,7 +37,7 @@ export class AddEditSkillDialog extends Dialog {
 
         return new Promise((resolve, reject) => {
             const dlg = new this(skill, {
-                title: `${CONFIG.STARFINDER.skills[skillId]}: ${(isEdit ? "Edit Skill" : "Add Skill")}`,
+                title: `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]}: ${(isEdit ? "Edit Skill" : "Add Skill")}`,
                 content: html,
                 buttons: {
                     submit: {
@@ -47,7 +47,7 @@ export class AddEditSkillDialog extends Dialog {
                     cancel: {
                         icon: '<i class="fas fa-times"></i>',
                         label: "Cancel",
-                        callback: () => resolve(false)
+                        callback: () => reject
                     }
                 },
                 default: "submit"

@@ -2,7 +2,7 @@
     <div class="form-group">
         <label>Ability</label>
         <div class="form-fields">
-            <select name="skill.ability">
+            <select name="ability">
                 {{#select skill.ability}}
                 {{#each config.abilities as |ability a|}}
                 <option value="{{a}}">{{ability}}</option>
@@ -14,33 +14,33 @@
     <div class="form-group">
         <label>Ranks</label>
         <div class="form-fields">
-            <input type="text" name="skill.ranks" value="{{skill.ranks}}" data-dtype="Number" placeholder="0" />
+            <input type="text" name="ranks" value="{{skill.ranks}}" data-dtype="Number" placeholder="0" />
         </div>
     </div>
     <div class="form-group">
         <label>Misc. Modifiers</label>
         <div class="form-fields">
-            <input type="text" name="skill.misc" value="{{skill.misc}}" data-dtype="Number" placeholder="0" />
+            <input type="text" name="misc" value="{{skill.misc}}" data-dtype="Number" placeholder="0" />
         </div>
     </div>
     {{#if hasSubName}}
     <div class="form-group">
         <label>Profession Name</label>
         <div class="form-fields">
-            <input type="text" name="skill.subname" value="{{skill.subname}}" placeholder="-" />
+            <input type="text" name="subname" value="{{skill.subname}}" placeholder="-" />
         </div>
     </div>
     {{/if}}
     <div class="form-group stacked">
         <label>Skill Properties</label>
         <label class="checkbox">
-            <input type="checkbox" name="skill.value" {{checked skill.value}}/> Class Skill
+            <input type="checkbox" name="value" {{checked skill.value}}/> Class Skill
         </label>
         <label class="checkbox">
-            <input type="checkbox" name="skill.isTrainedOnly" {{checked skill.isTrainedOnly}}/> Trained Only
+            <input type="checkbox" name="isTrainedOnly" {{checked skill.isTrainedOnly}}/> Trained Only
         </label>
         <label class="checkbox">
-            <input type="checkbox" name="skill.hasArmorCheckPenalty" {{checked skill.hasArmorCheckPenalty}}/> Armor Check Penalty
+            <input type="checkbox" name="hasArmorCheckPenalty" {{checked skill.hasArmorCheckPenalty}}/> Armor Check Penalty
         </label>
     </div>
 </form>

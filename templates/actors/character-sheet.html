@@ -146,7 +146,6 @@
             {{!-- Skills --}}
             <ul class="skills-list">
                 {{#each data.skills as |skill s|}}
-                {{#unless skill.skip}}
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
                     <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
@@ -156,13 +155,12 @@
                         {{#if skill.hasArmorCheckPenalty}}<span>*</span>{{/if}}
                     </h4>
                     <span class="skill-ability">{{skill.ability}}</span>
-                    <input type="text" class="skill-ranks" title="Skill Ranks" name="data.skills.{{s}}.ranks"
+                    {{!-- <input type="text" class="skill-ranks" title="Skill Ranks" name="data.skills.{{s}}.ranks"
                         value="{{skill.ranks}}" data-dtype="Number" />
                     <input type="text" class="skill-misc" title="Misc Modifiers" name="data.skills.{{s}}.misc"
-                        value="{{skill.misc}}" data-dtype="Number" />
+                        value="{{skill.misc}}" data-dtype="Number" /> --}}
                     <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
                 </li>
-                {{/unless}}
                 {{/each}}
                 <li class="flexrow">
                     <div class="form-group">

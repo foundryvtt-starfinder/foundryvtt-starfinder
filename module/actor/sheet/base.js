@@ -50,12 +50,12 @@ export class ActorSheetStarfinder extends ActorSheet {
             }
 
             // Update skill labels
-            for (let [s, skl] of Object.entries(data.actor.data.skills)) {
+            for (let [s, skl] of Object.entries(data.actor.data.skills)) {                
                 skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
                 skl.icon = this._getClassSkillIcon(skl.value);
 
-                let skillLabel = CONFIG.STARFINDER.skills[s];
-                if (typeof skl.subname !== "undefined" && skl.subname) {
+                let skillLabel = CONFIG.STARFINDER.skills[s.substring(0, 3)];
+                if (skl.subname) {
                     skillLabel += ` (${skl.subname})`;
                 }
 
