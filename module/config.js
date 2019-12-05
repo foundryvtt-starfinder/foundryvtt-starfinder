@@ -81,8 +81,8 @@ STARFINDER.weaponProficiencies = {
  */
 STARFINDER.abilityActivationTypes = {
     "none": "None",
-    "action": "Standard Action",
-    "move": "Move Action",
+    "action": "S. Action",
+    "move": "M. Action",
     "swift": "Swift Action",
     "full": "Full Action",
     "reaction": "Reaction",
