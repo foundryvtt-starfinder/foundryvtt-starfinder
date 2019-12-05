@@ -42,5 +42,10 @@
         <label class="checkbox">
             <input type="checkbox" name="hasArmorCheckPenalty" {{checked skill.hasArmorCheckPenalty}}/> Armor Check Penalty
         </label>
+        {{#if isGM }}
+        <label>
+            <input type="checkbox" name="remove" /> Delete?
+        </label>
+        {{/if}}
     </div>
 </form>

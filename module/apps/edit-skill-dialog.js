@@ -32,7 +32,9 @@ export class AddEditSkillDialog extends Dialog {
         const html = await renderTemplate("systems/starfinder/templates/apps/add-edit-skill.html", {
             skill: skill,
             hasSubName,
-            config: CONFIG.STARFINDER
+            config: CONFIG.STARFINDER,
+            isGM: game.user.isGM,
+            isEdit
         });
 
         return new Promise((resolve, reject) => {

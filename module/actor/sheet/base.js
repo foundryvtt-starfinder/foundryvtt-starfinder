@@ -63,6 +63,12 @@ export class ActorSheetStarfinder extends ActorSheet {
                 skl.hover = CONFIG.STARFINDER.skillProficiencyLevels[skl.value];
             }
 
+            data.data.skills = Object.keys(data.data.skills).sort().reduce((skills, key) => {
+                skills[key] = data.data.skills[key];
+
+                return skills;
+            }, {});
+
             this._prepareTraits(data.actor.data.traits);
 
             this._prepareItems(data);

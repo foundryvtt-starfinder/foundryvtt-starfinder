@@ -180,7 +180,7 @@ STARFINDER.skills = {
     "mys": "STARFINDER.SkillMys",
     "per": "STARFINDER.SkillPer",
     "pro": "STARFINDER.SkillPro",
-    "psc": "STARFINDER.SkillPsc",
+    "phs": "STARFINDER.SkillPsc",
     "pil": "STARFINDER.SkillPil",
     "sen": "STARFINDER.SkillSen",
     "sle": "STARFINDER.SkillSle",

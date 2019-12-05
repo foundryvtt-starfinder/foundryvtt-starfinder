@@ -223,26 +223,18 @@ export class ActorStarfinder extends Actor {
               value = Boolean(formData.get('value')) ? 3 : 0,
               misc = Number(formData.get('misc')),
               ranks = Number(formData.get('ranks')),
-              ability = formData.get('ability');
+              ability = formData.get('ability'),
+              remove = Boolean(formData.get('remove'));
 
-        
-
-        let skillData = {
-            ability: ability,
-            ranks: ranks,
-            value: value,
-            misc: misc,
-            isTrainedOnly: isTrainedOnly,
-            hasArmorCheckPenalty: hasArmorCheckPenalty,
-        };
+        if (remove) return this.update({[`data.skills.-=${skillId}`]: null});
 
         let updateObject = {
-            [`data.skills.${skillId}.ability`]: skillData.ability,
-            [`data.skills.${skillId}.ranks`]: skillData.ranks,
-            [`data.skills.${skillId}.value`]: skillData.value,
-            [`data.skills.${skillId}.misc`]: skillData.misc,
-            [`data.skills.${skillId}.isTrainedOnly`]: skillData.isTrainedOnly,
-            [`data.skills.${skillId}.hasArmorCheckPenalty`]: skillData.hasArmorCheckPenalty
+            [`data.skills.${skillId}.ability`]: ability,
+            [`data.skills.${skillId}.ranks`]: ranks,
+            [`data.skills.${skillId}.value`]: value,
+            [`data.skills.${skillId}.misc`]: misc,
+            [`data.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
+            [`data.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty
         };
 
         if ("subname" in skill) {
