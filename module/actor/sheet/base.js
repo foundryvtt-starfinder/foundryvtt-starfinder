@@ -30,6 +30,8 @@ export class ActorSheetStarfinder extends ActorSheet {
             editable: this.isEditable,
             cssClass: isOwner ? "editable" : "locked",
             isCharacter: this.entity.data.type === "character",
+            isShip: this.entity.data.type === 'starship',
+            isVehicle: this.entity.data.type === 'vehicle',
             config: CONFIG.STARFINDER
         };
 

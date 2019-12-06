@@ -316,6 +316,16 @@ STARFINDER.spellLevels = {
       "colossal": "Colossal"
   };
 
+  STARFINDER.starshipSizes = {
+      "tiny": "Tiny",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large",
+      "huge": "Huge",
+      "gargantuan": "Gargantuan",
+      "colossal": "Colossal"
+  };
+
   /**
    * The amount of space on a 5ft grid square that a 
    * token of a specific size takes.
@@ -451,6 +461,228 @@ STARFINDER.spellLevels = {
       "spinal": "STARFINDER.AugSpinalColumn",
       "skin": "STARFINDER.AugSkin",
       "throat": "STARFINDER.AugThroat"
+  };
+
+  STARFINDER.maneuverability = {
+      "clumsy": "Clumsy",
+      "poor": "Poor",
+      "average": "Average",
+      "good": "Good",
+      "perfect": "Perfect"
+  };
+
+  STARFINDER.powerCoreSystems = {
+      // Power cores
+      "micronL": "Micron Light",
+      "micronH": "Micron Heavy",
+      "micronU": "Micron Ultra",
+      "arcusL": "Arcus Light",
+      "pulseBr": "Pulse Brown",
+      "pulseBl": "Pulse Black",
+      "pulseWh": "Pulse White",
+      "pulseGy": "Pulse Gray",
+      "arcusH": "Arcus Heavy",
+      "puslseGr": "Pulse Green",
+      "pulseRe": "Pulse Red",
+      "pulseBu": "Pulse Blue",
+      "arcusUl": "Arcus Ultra",
+      "arcusMax": "Arcus Maximum",
+      "pulseOr": "Pulse Orange",
+      "pulsePr": "Pulse Prismatic",
+      "novaL": "Nova Light",
+      "novaH": "Nova Heavy",
+      "novaU": "Nova Ultra",
+      "gateL": "Gateway Light",
+      "gateH": "Gateway Heavy",
+      "gateU": "Gateway Ultra"
+  }
+
+  STARFINDER.thrusterSystems = {
+      // Thrusters
+      // Tiny
+      "t6": "T6 Thrusters",
+      "t8": "T8 Thrusters",
+      "t10": "T10 Thrusters",
+      "t12": "T12 Thrusters",
+      "t14": "T14 Thrusters",
+      // Small
+      "s6": "S6 Thrusters",
+      "s8": "S8 Thrusters",
+      "s10": "S10 Thrusters",
+      "s12": "S12 Thrusters",
+      // Medium
+      "m4": "M4 Thrusters",
+      "m6": "M6 Thrusters",
+      "m8": "M8 Thrusters",
+      "m10": "M10 Thrusters",
+      "m12": "M12 Thrusters",
+      // Large
+      "l4": "L4 Thrusters",
+      "l6": "L6 Thrusters",
+      "l8": "L8 Thrusters",
+      "l10": "L10 Thrusters",
+      // Huge
+      "h4": "H4 Thrusters",
+      "h6": "H6 Thrusters",
+      "h8": "H8 Thrusters",
+      "h10": "H10 Thrusters",
+      // Gargantuan
+      "g4": "G4 Thrusters",
+      "g6": "G6 Thrusters",
+      "g8": "G8 Thrusters",
+      // Colossal
+      "c4": "C4 Thrusters",
+      "c6": "C6 Thrusters",
+      "c8": "C8 Thrusters"
+  };
+
+  STARFINDER.armorSystems = {
+      "mk1": "Mk 1 armor",
+      "mk2": "Mk 2 armor",
+      "mk3": "Mk 3 armor",
+      "mk4": "Mk 4 armor",
+      "mk5": "Mk 5 armor",
+      "mk6": "Mk 6 armor",
+      "mk7": "Mk 7 armor",
+      "mk8": "Mk 8 armor",
+      "mk9": "Mk 9 armor",
+      "mk10": "Mk 10 armor",
+      "mk11": "Mk 11 armor",
+      "mk12": "Mk 12 armor",
+      "mk13": "Mk 13 armor",
+      "mk14": "Mk 14 armor",
+      "mk15": "Mk 15 armor"
+  };
+
+  STARFINDER.computerSystems = {
+      "basic": "Basic Computer",
+      "mk1m": "Mk 1 mononode",
+      "mk1d": "Mk 1 duonode",
+      "mk1tr": "Mk 1 trinode",
+      "mk1te": "Mk 1 tetranode",
+      "mk2m": "Mk 2 mononode",
+      "mk2d": "Mk 2 duonode",
+      "mk2tr": "Mk 2 trinode",
+      "mk2te": "Mk 2 tetranode",
+      "mk3m": "Mk 3 mononode",
+      "mk3d": "Mk 3 duonode",
+      "mk3tr": "Mk 3 trinode",
+      "mk3te": "Mk 3 tetranode",
+      "mk4m": "Mk 4 mononode",
+      "mk4d": "Mk 4 duonode",
+      "mk4tr": "Mk 4 trinode",
+      "mk5m": "Mk 5 mononode",
+      "mk5d": "Mk 5 duonode",
+      "mk5tr": "Mk 5 trinode",
+      "mk6m": "Mk 6 mononode",
+      "mk6d": "Mk 6 duonode",
+      "mk7m": "Mk 7 mononode",
+      "mk7d": "Mk 7 duonode",
+      "mk8m": "Mk 8 mononode",
+      "mk8d": "Mk 8 duonode",
+      "mk9m": "Mk 9 mononode",
+      "mk9d": "Mk 9 duonode",
+      "mk10m": "Mk 10 mononode",
+      "mk10d": "Mk 10 duonode"
+  };
+
+  STARFINDER.crewQuarterSystems = {
+      "common": "Common",
+      "good": "Good",
+      "luxurious": "Luxurious"
+  };
+
+  STARFINDER.defenseSystems = {
+    "mk1": "Mk 1 defenses",
+    "mk2": "Mk 2 defenses",
+    "mk3": "Mk 3 defenses",
+    "mk4": "Mk 4 defenses",
+    "mk5": "Mk 5 defenses",
+    "mk6": "Mk 6 defenses",
+    "mk7": "Mk 7 defenses",
+    "mk8": "Mk 8 defenses",
+    "mk9": "Mk 9 defenses",
+    "mk10": "Mk 10 defenses",
+    "mk11": "Mk 11 defenses",
+    "mk12": "Mk 12 defenses",
+    "mk13": "Mk 13 defenses",
+    "mk14": "Mk 14 defenses",
+    "mk15": "Mk 15 defenses"
+  };
+
+  STARFINDER.driftEngineSystems = {
+      "basic": "Signal Basic",
+      "booster": "Signal Booster",
+      "major": "Signal Major",
+      "superior": "Signal Superior",
+      "ultra": "Signal Ultra"
+  };
+
+  STARFINDER.sensorSystems = {
+      "cut": "Cut-rate",
+      "bushort": "Budget short-range",
+      "bashort": "Basic short-range",
+      "ashort": "Advanced short-range",
+      "bumed": "Budget medium-range",
+      "bamed": "Basic medium-range",
+      "amed": "Advanced medium-range",
+      "bulong": "Budget long-range",
+      "balong": "Basic long-range",
+      "along": "Advanced long-range"
+  };
+
+  STARFINDER.shieldSystems = {
+      "10": "Basic Shields 10",
+      "20": "Basic Shields 20",
+      "30": "Basic Shields 30",
+      "40": "Basic Shields 40",
+      "50": "Light Shields 50",
+      "60": "Light Shields 60",
+      "70": "Light Shields 70",
+      "80": "Light Shields 80",
+      "90": "Medium Shields 90",
+      "100": "Medium Shields 100",
+      "120": "Medium Shields 120",
+      "140": "Medium Shields 140",
+      "160": "Medium Shields 160",
+      "200": "Medium Shields 200",
+      "240": "Heavy Shields 240",
+      "280": "Heavy Shields 280",
+      "320": "Heavy Shields 320",
+      "360": "Heavy Shields 360",
+      "420": "Heavy Shields 420",
+      "480": "Heavy Shields 480",
+      "540": "Superior Shields 540",
+      "600": "Superior Shields 600"
+  };
+
+  STARFINDER.expansionBaySystems = {
+      "arclab": "Arcane laboratory",
+      "cargo": "Cargo hold",
+      "escape": "Escape pods",
+      "guest": "Guest quarters",
+      "hangar": "Hangar bay",
+      "life": "Life boats",
+      "med": "Medical bay",
+      "pass": "Passenger seating",
+      "pwrHouse": "Power core housing",
+      "recg": "Recreation suite (gym)",
+      "rect": "Recreation suite (trivid den)",
+      "hac": "Recreation suite (HAC)",
+      "science": "Science lab",
+      "senv": "Sealed environment chamber",
+      "shuttle": "Shuttle bay",
+      "smuggler": "Smuggler compartment",
+      "syth": "Synthesis bay",
+      "tech": "Tech workshop"
+  };
+
+  STARFINDER.securitySystems = {
+      "antiHack": "Anti-Hacking Sytems",
+      "antiPer": "Antipersonnel Weapon",
+      "bio": "Biometric Locks",
+      "compCounter": "Computer Countermeasures",
+      "selfDestruct": "Self-Destruct System"
   };
 
   STARFINDER.CHARACTER_EXP_LEVELS = [

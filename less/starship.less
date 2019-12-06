@@ -1,0 +1,80 @@
+@import './variables.less';
+
+.starfinder.sheet.actor.starship {
+    img.profile {
+        flex: 0 0 33%;
+        height: auto;
+        width: auto;
+    }
+
+    .form-header {
+        margin-top: 5px;
+        padding: 0 5px;
+    }
+
+    .form-group {
+        padding: 0 5px;
+
+        .form-fields input[type="text"], 
+        .form-fields select {
+            border: 1px solid @colorTan;
+            background: rgba(0, 0, 0, 0.05);
+          }
+    }
+
+    .sheet-header {
+        .header-details {
+            .header-background {
+                .charname {
+                    flex: 1;
+                }
+
+                .charlevel {
+                    .level.noxp {
+                        margin-top: 0 !important;
+                    }
+                }
+            }
+        }
+
+        .summary {
+            border-bottom: @borderGroove;
+
+            li:last-child {
+                padding-top: 5px;
+            }
+        }
+
+        // Primary Attributes
+        .attributes {
+            height: 80px;
+            margin: 0;
+
+            .attribute {
+                height: 80px;
+                margin: 0;
+                border: none;
+                border-right: @borderGroove;
+                border-radius: 0;
+
+                &:last-child {
+                    border-right: none;
+                }
+
+                .attribute-value {
+                    margin: 5px 0 0;
+                    height: 32px;
+                    line-height: 32px;
+                }
+
+                .attribute-name {
+                    margin-top: 6px;
+                }
+
+                .attribute-footer {
+                    margin-bottom: 2px;
+                }
+            }
+        }
+    }
+}

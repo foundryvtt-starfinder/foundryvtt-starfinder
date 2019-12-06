@@ -17,4 +17,10 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         if (!game.user.isGM && this.actor.limited) return "systems/starfinder/templates/actors/limited-starship-sheet.html";
         return "systems/starfinder/templates/actors/starship-sheet.html";
     }
+
+    getData() {
+        const data = super.getData();
+
+        return data;
+    }
 }

@@ -1,1 +1,328 @@
-<h1>Hello, this is a starship</h1>
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <div class="header-background flexrow">
+                <h1 class="charname">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="Ship Name" title="Ship Name" />
+                </h1>
+
+                <div class="charlevel">
+                    <div class="level noxp">
+                        <label>Tier </label>
+                        <input name="data.details.tier" type="text" value="{{data.details.tier}}" data-dtype="Number"
+                            placeholder="1" />
+                    </div>
+                </div>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    <input type="text" name="data.details.model" value="{{data.details.model}}" placeholder="Model"
+                        title="Model" />
+                </li>
+                <li>
+                    <input type="text" name="data.details.frame" value="{{data.details.frame}}" placeholder="Frame"
+                        title="Frame" />
+                </li>
+                <li class="flexrow">
+                    <select name="data.details.size" title="{{ localize "STARFINDER.Speed"}}">
+                        {{#select data.details.size}}
+                        {{#each config.starshipSizes as |size s|}}
+                        <option value="{{s}}">{{size}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </li>
+            </ul>
+
+            <ul class="attributes flexrow">
+                <li class="attribute health">
+                    <h4 class="attribute-name box-title">{{ localize "STARFINDER.HullPoints" }}</h4>
+                    <div class="attribute-value multiple">
+                        <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
+                            data-dtype="Number" placeholder="10" />
+                        <span class="sep"> / </span>
+                        <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
+                            data-dtype="Number" placeholder="10" />
+                    </div>
+                    <footer class="attribute-footer">
+                        <input name="data.attributes.hp.increment" type="text" placeholder="Increment"
+                            value="{{data.attributes.hp.increment}}" data-dtype="Number"
+                            title="This is the number of hull points that are added when the ship reaches tier 4 (and every 4 tiers after)" />
+                    </footer>
+                </li>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">Armor Class</h4>
+                    <div class="attribute-value">
+                        <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
+                            data-dtype="Number" placeholder="10" />
+                    </div>
+                    <footer class="attribute-footer">
+                        <input type="text" name="data.attributes.ac.misc"
+                            value="{{numberFormat data.attributes.ac.misc decimals=0 sign=true}}" data-dtype="Number"
+                            placeholder="+Misc" />
+                    </footer>
+                </li>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">Target Lock</h4>
+                    <div class="attribute-value">
+                        <input name="data.attributes.tl.value" type="text" value="{{data.attributes.tl.value}}"
+                            data-dtype="Number" placeholder="10" />
+                    </div>
+                    <footer class="attribute-footer">
+                        <input type="text" name="data.attributes.tl.misc"
+                            value="{{numberFormat data.attributes.tl.misc decimals=0 sign=true}}" data-dtype="Number"
+                            placeholder="+Misc" />
+                    </footer>
+                </li>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{ localize "STARFINDER.Speed" }}</h4>
+                    <div class="attribute-value">
+                        <input name="data.attributes.speed" type="text" value="{{data.attributes.speed}}"
+                            data-dtype="Number" placeholder="10" />
+                    </div>
+                    <footer class="attribute-footer select">
+                        <select name="data.attributes.maneuverability" title="Maneuverability">
+                            {{#select data.attributes.maneuverability}}
+                            {{#each config.maneuverability as |man k|}}
+                            <option value="{{k}}">{{man}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </footer>
+                </li>
+            </ul>
+
+        </div>
+    </header>
+
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+        <a class="item" data-tab="notes">{{ localize "STARFINDER.Notes" }}</a>
+    </nav>
+
+    <section class="sheet-body">
+        <div class="tab details" data-group="primary" data-tab="details">
+            <div class="flexcol">
+                <h3 class="form-header">{{ localize "STARFINDER.Attributes"}}</h3>
+                <ul class="attributes flexrow">
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">Critical Threshold</h4>
+                        <div class="attribute-value">
+                            <input type="text" name="data.attributes.ct.value" value="{{data.attributes.ct.value}}"
+                                data-dtype="Number" placeholder="10" />
+                        </div>
+                    </li>
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">Damage Threshold</h4>
+                        <div class="attribute-value">
+                            <input type="text" name="data.attributes.dt" value="{{data.attributes.dt}}"
+                                data-dtype="Number" placeholder="-" />
+                        </div>
+                    </li>
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">Power Core</h4>
+                        <div class="attribute-value">
+                            <input type="text" name="data.attributes.pwr.pcu" value="{{data.attributes.pwr.pcu}}"
+                                data-dtype="Number" title="PCU's" />
+                        </div>
+                    </li>
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">Complement</h4>
+                        <div class="attribute-value multiple">
+                            <input type="text" name="data.attributes.complement.min"
+                                value="{{data.attributes.complement.min}}" data-dtype="Number"
+                                title="Minimum crew needed to run the ship" />
+                            <span class="sep"> / </span>
+                            <input type="text" name="data.attributes.complement.max"
+                                value="{{data.attributes.complement.max}}" data-dtype="Number"
+                                title="Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard)" />
+                        </div>
+                    </li>
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">Expansion Bays</h4>
+                        <div class="attribute-value">
+                            <input type="text" name="data.attributes.expansionBays"
+                                value="{{data.attributes.expansionBays}}" data-dtype="Number"
+                                title="Max number of expansion bays allowed" />
+                        </div>
+                    </li>
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">Drift Rating</h4>
+                        <div class="attribute-value">
+                            <input type="text" name="data.attributes.drift" value="{{data.attributes.drift}}"
+                                data-dtype="Number" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="flexcol">
+                <h3 class="form-header">Shields</h3>
+                <div class="form-group flexrow">
+                    <label>Total</label>
+                    <div class="form-fields">
+                        <input type="text" name="data.attributes.shields.value"
+                            value="{{data.attributes.shields.value}}" />
+                    </div>
+                </div>
+                <ul class="attributes flexrow">
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">Forward</h4>
+                        <div class="attribute-value">
+                            <input type="text" name="data.attributes.shields.forward"
+                                value="{{data.attributes.shields.forward}}" data-dtype="Number"
+                                title="Forward Shields" />
+                        </div>
+                    </li>
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">Starboard</h4>
+                        <div class="attribute-value">
+                            <input type="text" name="data.attributes.shields.starboard"
+                                value="{{data.attributes.shields.starboard}}" data-dtype="Number"
+                                title="Forward Shields" />
+                        </div>
+                    </li>
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">Aft</h4>
+                        <div class="attribute-value">
+                            <input type="text" name="data.attributes.shields.aft"
+                                value="{{data.attributes.shields.aft}}" data-dtype="Number" title="Forward Shields" />
+                        </div>
+                    </li>
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">Port</h4>
+                        <div class="attribute-value">
+                            <input type="text" name="data.attributes.shields.port"
+                                value="{{data.attributes.shields.port}}" data-dtype="Number" title="Forward Shields" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="flexcol traits">
+                <h3 class="form-header">Systems</h3>
+                <div class="flexrow">
+                    <div class="flexcol">
+                        <div class="form-group">
+                            <label for="data.details.systems.powercore">Power Core</label>
+                            <select name="data.details.systems.powercore">
+                                {{#select data.details.systems.powercore}}
+                                {{#each config.powerCoreSystems as |system s|}}
+                                <option value="{{s}}">{{system}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.details.systems.thrusters">Thrusters</label>
+                            <select name="data.details.systems.thrusters">
+                                {{#select data.details.systems.thrusters}}
+                                {{#each config.thrusterSystems as |system s|}}
+                                <option value="{{s}}">{{system}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.details.systems.armor">Armor</label>
+                            <select name="data.details.systems.armor">
+                                {{#select data.details.systems.armor}}
+                                {{#each config.armorSystems as |system s|}}
+                                <option value="{{s}}">{{system}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.details.systems.computer">Computer</label>
+                            <select name="data.details.systems.computer">
+                                {{#select data.details.systems.computer}}
+                                {{#each config.computerSystems as |system s|}}
+                                <option value="{{s}}">{{system}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.details.systems.quarters">Crew Quarters</label>
+                            <select name="data.details.systems.quarters">
+                                {{#select data.details.systems.quarters}}
+                                {{#each config.crewQuarterSystems as |system s|}}
+                                <option value="{{s}}">{{system}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.details.systems.defense">Defensive Countermeasures</label>
+                            <select name="data.details.systems.defense">
+                                {{#select data.details.systems.defense}}
+                                {{#each config.defenseSystems as |system s|}}
+                                <option value="{{s}}">{{system}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flexcol">                        
+                        <div class="form-group">
+                            <label for="data.details.systems.driftEngine">Drift Engine</label>
+                            <select name="data.details.systems.driftEngine">
+                                {{#select data.details.systems.driftEngine}}
+                                <option value="">None</option>
+                                {{#each config.driftEngineSystems as |system s|}}
+                                <option value="{{s}}">{{system}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.details.systems.sensors">Sensors</label>
+                            <select name="data.details.systems.sensors">
+                                {{#select data.details.systems.sensors}}
+                                {{#each config.sensorSystems as |system s|}}
+                                <option value="{{s}}">{{system}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.details.systems.shields">Shields</label>
+                            <select name="data.details.systems.shields">
+                                {{#select data.details.systems.shields}}
+                                {{#each config.shieldSystems as |system s|}}
+                                <option value="{{s}}">{{system}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.details.systems.bays">Expansion Bays</label>
+                            <ul class="traits-list">
+                                {{#each data.details.systems.bays.selected as |v k|}}
+                                <li class="tag {{k}}">{{v}}</li>
+                                {{/each}}
+                            </ul>
+                            <a class="trait-selector" data-options="expansionBaySystems"><i class="fas fa-edit"></i></a>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.details.systems.security">Security</label>
+                            <ul class="traits-list">
+                                {{#each data.details.systems.security.selected as |v k|}}
+                                <li class="tag {{k}}">{{v}}</li>
+                                {{/each}}
+                            </ul>
+                            <a class="trait-selector" data-options="securitySystems"><i class="fas fa-edit"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab biography flexcol" data-group="primary" data-tab="notes">
+            {{editor content=data.details.notes target="data.details.notes" button=true owner=owner editable=editable}}
+        </div>
+    </section>
+
+</form>
