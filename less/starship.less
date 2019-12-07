@@ -2,7 +2,7 @@
 
 .starfinder.sheet.actor.starship {
     img.profile {
-        flex: 0 0 33%;
+        flex: 0 0 180px;
         height: auto;
         width: auto;
     }
@@ -20,6 +20,10 @@
             border: 1px solid @colorTan;
             background: rgba(0, 0, 0, 0.05);
           }
+    }
+
+    .traits {
+        margin: 0;
     }
 
     .sheet-header {
@@ -65,6 +69,11 @@
                     margin: 5px 0 0;
                     height: 32px;
                     line-height: 32px;
+
+                    span {
+                        flex: 0 0 80px;
+                        font-size: 24px;
+                    }
                 }
 
                 .attribute-name {
@@ -73,6 +82,16 @@
 
                 .attribute-footer {
                     margin-bottom: 2px;
+                }
+            }
+        }
+    }
+
+    .sheet-body {
+        .attributes {
+            .attribute {
+                .attribute-value span {
+                    font-size: 24px;
                 }
             }
         }

@@ -684,6 +684,25 @@ STARFINDER.spellLevels = {
       "compCounter": "Computer Countermeasures",
       "selfDestruct": "Self-Destruct System"
   };
+  
+  // TODO: Not currently used, but keeping it here
+  // for future use
+  STARFINDER.baseFrames = {
+      "race": "Racer",
+      "inter": "Interceptor",
+      "fight": "Fighter",
+      "shuttle": "Shuttle",
+      "lfreight": "Light Freighter",
+      "expl": "Explorer",
+      "trans": "Transport",
+      "dest": "Destroyer",
+      "hfreight": "Heavy Freighter",
+      "bfreight": "Bulk Freighter",
+      "cruiser": "Cruiser",
+      "carr": "Carrier",
+      "battle": "Battleship",
+      "dread": "Dreadnought"
+  };
 
   STARFINDER.CHARACTER_EXP_LEVELS = [
       0,1300, 3300,6000,10000,15000,23000,34000,50000,71000,

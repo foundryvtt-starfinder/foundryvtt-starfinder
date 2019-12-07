@@ -56,8 +56,7 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">Armor Class</h4>
                     <div class="attribute-value">
-                        <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
-                            data-dtype="Number" placeholder="10" />
+                       <span>{{data.attributes.ac.value}}</span>
                     </div>
                     <footer class="attribute-footer">
                         <input type="text" name="data.attributes.ac.misc"
@@ -68,8 +67,7 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">Target Lock</h4>
                     <div class="attribute-value">
-                        <input name="data.attributes.tl.value" type="text" value="{{data.attributes.tl.value}}"
-                            data-dtype="Number" placeholder="10" />
+                        <span>{{data.attributes.tl.value}}</span>
                     </div>
                     <footer class="attribute-footer">
                         <input type="text" name="data.attributes.tl.misc"
@@ -80,8 +78,7 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "STARFINDER.Speed" }}</h4>
                     <div class="attribute-value">
-                        <input name="data.attributes.speed" type="text" value="{{data.attributes.speed}}"
-                            data-dtype="Number" placeholder="10" />
+                        <span>{{data.attributes.speed}}</span>
                     </div>
                     <footer class="attribute-footer select">
                         <select name="data.attributes.maneuverability" title="Maneuverability">
@@ -100,6 +97,7 @@
 
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+        <a class="item" data-tab="weapons">Weapons</a>
         <a class="item" data-tab="notes">{{ localize "STARFINDER.Notes" }}</a>
     </nav>
 
@@ -111,8 +109,8 @@
                     <li class="attribute">
                         <h4 class="attribute-name box-title">Critical Threshold</h4>
                         <div class="attribute-value">
-                            <input type="text" name="data.attributes.ct.value" value="{{data.attributes.ct.value}}"
-                                data-dtype="Number" placeholder="10" />
+                            <span>{{data.attributes.ct.value}}</span>
+                                
                         </div>
                     </li>
                     <li class="attribute">
@@ -125,8 +123,7 @@
                     <li class="attribute">
                         <h4 class="attribute-name box-title">Power Core</h4>
                         <div class="attribute-value">
-                            <input type="text" name="data.attributes.pwr.pcu" value="{{data.attributes.pwr.pcu}}"
-                                data-dtype="Number" title="PCU's" />
+                            <span>{{data.attributes.pwr.pcu}}</span>
                         </div>
                     </li>
                     <li class="attribute">
@@ -152,8 +149,7 @@
                     <li class="attribute">
                         <h4 class="attribute-name box-title">Drift Rating</h4>
                         <div class="attribute-value">
-                            <input type="text" name="data.attributes.drift" value="{{data.attributes.drift}}"
-                                data-dtype="Number" />
+                            <span class="ability-mod">{{data.attributes.drift}}</span>
                         </div>
                     </li>
                 </ul>
@@ -162,40 +158,50 @@
                 <h3 class="form-header">Shields</h3>
                 <div class="form-group flexrow">
                     <label>Total</label>
-                    <div class="form-fields">
+                    <div class="form-fields multiple">
                         <input type="text" name="data.attributes.shields.value"
-                            value="{{data.attributes.shields.value}}" />
+                            value="{{data.attributes.shields.value}}" data-dtype="Number" />
+                        <span class="sep"> / </span>
+                        <span>{{data.attributes.shields.max}}</span>
                     </div>
                 </div>
                 <ul class="attributes flexrow">
                     <li class="attribute">
                         <h4 class="attribute-name box-title">Forward</h4>
-                        <div class="attribute-value">
-                            <input type="text" name="data.attributes.shields.forward"
-                                value="{{data.attributes.shields.forward}}" data-dtype="Number"
+                        <div class="attribute-value multiple">
+                            <input type="text" name="data.attributes.shields.forward.value"
+                                value="{{data.attributes.shields.forward.value}}" data-dtype="Number"
                                 title="Forward Shields" />
+                            <span class="sep"> / </span>
+                            <span>{{data.attributes.shields.forward.max}}</span>
                         </div>
                     </li>
                     <li class="attribute">
                         <h4 class="attribute-name box-title">Starboard</h4>
-                        <div class="attribute-value">
-                            <input type="text" name="data.attributes.shields.starboard"
-                                value="{{data.attributes.shields.starboard}}" data-dtype="Number"
+                        <div class="attribute-value multiple">
+                            <input type="text" name="data.attributes.shields.starboard.value"
+                                value="{{data.attributes.shields.starboard.value}}" data-dtype="Number"
                                 title="Forward Shields" />
+                            <span class="sep"> / </span>
+                            <span>{{data.attributes.shields.starboard.max}}</span>
                         </div>
                     </li>
                     <li class="attribute">
                         <h4 class="attribute-name box-title">Aft</h4>
-                        <div class="attribute-value">
-                            <input type="text" name="data.attributes.shields.aft"
-                                value="{{data.attributes.shields.aft}}" data-dtype="Number" title="Forward Shields" />
+                        <div class="attribute-value multiple">
+                            <input type="text" name="data.attributes.shields.aft.value"
+                                value="{{data.attributes.shields.aft.value}}" data-dtype="Number" title="Forward Shields" />
+                            <span class="sep"> / </span>
+                            <span>{{data.attributes.shields.aft.max}}</span>
                         </div>
                     </li>
                     <li class="attribute">
                         <h4 class="attribute-name box-title">Port</h4>
-                        <div class="attribute-value">
-                            <input type="text" name="data.attributes.shields.port"
-                                value="{{data.attributes.shields.port}}" data-dtype="Number" title="Forward Shields" />
+                        <div class="attribute-value multiple">
+                            <input type="text" name="data.attributes.shields.port.value"
+                                value="{{data.attributes.shields.port.value}}" data-dtype="Number" title="Forward Shields" />
+                            <span class="sep"> / </span>
+                            <span>{{data.attributes.shields.port.max}}</span>
                         </div>
                     </li>
                 </ul>
@@ -208,6 +214,7 @@
                             <label for="data.details.systems.powercore">Power Core</label>
                             <select name="data.details.systems.powercore">
                                 {{#select data.details.systems.powercore}}
+                                <option value="">None</option>
                                 {{#each config.powerCoreSystems as |system s|}}
                                 <option value="{{s}}">{{system}}</option>
                                 {{/each}}
@@ -218,6 +225,7 @@
                             <label for="data.details.systems.thrusters">Thrusters</label>
                             <select name="data.details.systems.thrusters">
                                 {{#select data.details.systems.thrusters}}
+                                <option value="">None</option>
                                 {{#each config.thrusterSystems as |system s|}}
                                 <option value="{{s}}">{{system}}</option>
                                 {{/each}}
@@ -228,6 +236,7 @@
                             <label for="data.details.systems.armor">Armor</label>
                             <select name="data.details.systems.armor">
                                 {{#select data.details.systems.armor}}
+                                <option value="">None</option>
                                 {{#each config.armorSystems as |system s|}}
                                 <option value="{{s}}">{{system}}</option>
                                 {{/each}}
@@ -238,6 +247,7 @@
                             <label for="data.details.systems.computer">Computer</label>
                             <select name="data.details.systems.computer">
                                 {{#select data.details.systems.computer}}
+                                <option value="">None</option>
                                 {{#each config.computerSystems as |system s|}}
                                 <option value="{{s}}">{{system}}</option>
                                 {{/each}}
@@ -248,6 +258,7 @@
                             <label for="data.details.systems.quarters">Crew Quarters</label>
                             <select name="data.details.systems.quarters">
                                 {{#select data.details.systems.quarters}}
+                                <option value="">None</option>
                                 {{#each config.crewQuarterSystems as |system s|}}
                                 <option value="{{s}}">{{system}}</option>
                                 {{/each}}
@@ -258,6 +269,7 @@
                             <label for="data.details.systems.defense">Defensive Countermeasures</label>
                             <select name="data.details.systems.defense">
                                 {{#select data.details.systems.defense}}
+                                <option value="">None</option>
                                 {{#each config.defenseSystems as |system s|}}
                                 <option value="{{s}}">{{system}}</option>
                                 {{/each}}
@@ -281,6 +293,7 @@
                             <label for="data.details.systems.sensors">Sensors</label>
                             <select name="data.details.systems.sensors">
                                 {{#select data.details.systems.sensors}}
+                                <option value="">None</option>
                                 {{#each config.sensorSystems as |system s|}}
                                 <option value="{{s}}">{{system}}</option>
                                 {{/each}}
@@ -291,6 +304,7 @@
                             <label for="data.details.systems.shields">Shields</label>
                             <select name="data.details.systems.shields">
                                 {{#select data.details.systems.shields}}
+                                <option value="">None</option>
                                 {{#each config.shieldSystems as |system s|}}
                                 <option value="{{s}}">{{system}}</option>
                                 {{/each}}
@@ -318,6 +332,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="tab weapons flexcol" data-group="primary" data-tab="weapons">
+            All the weapons!
         </div>
 
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
