@@ -82,6 +82,10 @@ export class ItemStarfinder extends Item {
       // }
       // labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
 
+      let area = item.data.area || {};
+      if (["none", "touch", "personal"].includes(area.units)) area.value = null;
+      labels.area = [area.value, C.distanceUnits[area.units], C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]];      
+
       // Range Label
       let rng = item.data.range || {};
       if (["none", "touch", "personal"].includes(rng.units) || (rng.value === 0)) {
@@ -193,6 +197,7 @@ export class ItemStarfinder extends Item {
     if ( data.hasOwnProperty("activation") ) {
       props.push(
         labels.target,
+        labels.area,
         labels.activation,
         labels.range,
         labels.duration

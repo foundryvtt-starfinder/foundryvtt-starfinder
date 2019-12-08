@@ -32,6 +32,34 @@
     </div>
 </div>
 
+<div class="form-group input-select-select-select">
+    <label>Area</label>
+    <div class="form-fields">
+        <input type="text" name="data.area.value" value="{{data.area.value}}" data-dtype="Number" placeholder="Area" />
+        <select name="data.area.units">
+            {{#select data.area.units}}
+            {{#each config.distanceUnits as |unit key|}}
+            <option value="{{key}}">{{unit}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <select name="data.area.shape">
+            {{#select data.area.shape}}
+            {{#each config.spellAreaShapes as |shape s|}}
+            <option value="{{s}}">{{shape}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <select name="data.area.effect">
+            {{#select data.area.effect}}
+            {{#each config.spellAreaEffects as |effect e|}}
+            <option value="{{e}}">{{effect}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+
 {{!-- Ability Range --}}
 <div class="form-group input-select">
     <label>Range</label>

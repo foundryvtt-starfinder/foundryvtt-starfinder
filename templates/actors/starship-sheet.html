@@ -11,8 +11,7 @@
                 <div class="charlevel">
                     <div class="level noxp">
                         <label>Tier </label>
-                        <input name="data.details.tier" type="text" value="{{data.details.tier}}" data-dtype="Number"
-                            placeholder="1" />
+                        <input name="data.details.tier" type="text" value="{{labels.tier}}" placeholder="1" />
                     </div>
                 </div>
             </div>
@@ -98,6 +97,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
         <a class="item" data-tab="weapons">Weapons</a>
+        <a class="item" data-tab="crew">Crew</a>
         <a class="item" data-tab="notes">{{ localize "STARFINDER.Notes" }}</a>
     </nav>
 
@@ -362,6 +362,11 @@
                 </ol>
                 {{/each}}
             </ol>
+        </div>
+
+        <div class="tab crew" data-group="primary" data-tab="crew">
+            <h3 class="form-header">Ship's Crew</h3>
+            <p class="notification warning">This is still to-do</p>
         </div>
 
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">

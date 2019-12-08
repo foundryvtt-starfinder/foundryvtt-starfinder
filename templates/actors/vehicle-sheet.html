@@ -1,1 +1,40 @@
-<h1>This is a vehicle</h1>
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <div class="header-background flexrow">
+                <h1 class="charname">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="Vehicle Name" title="Vehicle Name" />
+                </h1>
+
+                <div class="charlevel">
+                    <div class="level noxp">
+                        <label>level</label>
+                        <input name="data.details.level" type="text" value="{{labels.level}}" placeholder="Level" />
+                    </div>
+                </div>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    <input type="text" name="data.details.price" value="{{data.details.price}}" data-dtype="Number" placeholder="Price" title="Price" />
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+        <a class="item" data-tab="notes">{{ localize "STARFINDER.Notes" }}</a>
+    </nav>
+
+    <section class="sheet-body">
+        <div class="tab details" data-group="primary" data-tab="details">
+            <p class="notification warning">This is still to-do</p>
+        </div>
+        <div class="tab biography flexcol" data-group="primary" data-tab="notes">
+            {{editor content=data.details.description.value target="data.details.description.value" button=true owner=owner editable=editable}}
+        </div>
+    </section>
+</form>

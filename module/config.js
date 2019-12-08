@@ -215,9 +215,48 @@ STARFINDER.weaponCategories = {
 
 // Weapon Properties
 STARFINDER.weaponProperties = {
+    "one": "One-handed",
     "two": "Two-Handed",
-    "amm": "Ammunition"
+    "amm": "Ammunition",
+    "analog": "Analog",
+    "archaic": "Archaic",
+    "automatic": "Automatic",
+    "blast": "Blast",
+    "block": "Block",
+    "boost": "Boost",
+    "bright": "Bright",
+    "disarm": "Disarm",
+    "entangle": "Entangle",
+    "explode": "Explode",
+    "injection": "Injection",
+    "line": "Line",
+    "nonlethal": "Nonlethal",
+    "operative": "Operative",
+    "penetrating": "Penetrating",
+    "powered": "Powered",
+    "qreload": "Quick Reload",
+    "reach": "Reach",
+    "sniper": "Sniper",
+    "stun": "Stun",
+    "thrown": "Thrown",
+    "trip": "Trip",
+    "unwieldy": "Unwieldy"
 };
+
+STARFINDER.spellAreaShapes = {
+    "cone": "Cone",
+    "cylinder": "Cylinder",
+    "line": "Line",
+    "sphere": "Sphere",
+    "shapable": "Shapable",
+    "other": "Other"
+};
+
+STARFINDER.spellAreaEffects = {
+    "burst": "Burst",
+    "emanation": "Emanation",
+    "spread": "Spread"
+}
 
 // Weapon special abilities
 STARFINDER.weaponSpecial = {
@@ -762,6 +801,24 @@ STARFINDER.spellLevels = {
       "improvedInititive": {
           name: "Improved Inititive",
           hint: "Character feat that adds 4 to thier initiive roll",
+          section: "Feats",
+          type: Boolean
+      },
+      "greatFortitude": {
+          name: "Great Fortitude",
+          hint: "Character feat that adds 2 to fortitude saving throws",
+          section: "Feats",
+          type: Boolean
+      },
+      "ironWill": {
+          name: "Iron Will",
+          hint: "Character feat that adds 2 to will saving throws",
+          section: "Feats",
+          type: Boolean
+      },
+      "lightningReflexes": {
+          name: "Lightning Reflexes",
+          hint: "Character feat that adds 2 to reflex saving thorws",
           section: "Feats",
           type: Boolean
       }

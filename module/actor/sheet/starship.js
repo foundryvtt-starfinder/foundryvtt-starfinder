@@ -22,6 +22,10 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
     getData() {
         const data = super.getData();
 
+        let tier = parseFloat(data.data.details.tier || 0);
+        let tiers = { 0: "0", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
+        data.labels["tier"] = tier >= 1 ? String(tier) : tiers[tier] || 1;
+
         this._prepareStarshipSystems(data.actor.data.details.systems);
 
         return data;
@@ -65,8 +69,6 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
      * @private
      */
     _prepareItems(data) {
-        console.log("Starfinder | In ActorSheetStarfinderStarshp._prepareItems", data);
-
         const arcs = {
             foward: { label: "Foward", items: [], dataset: { type: "starshipWeapon" }},
             starboard: { label: "Starboard", items: [], dataset: { type: "starshipWeapon" }},
@@ -110,5 +112,22 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         if (!this.options.editable) return;
         
 
+    }
+
+    /**
+     * This method is called upon form submission after form data is validated
+     * 
+     * @param {Event} event The initial triggering submission event
+     * @param {Object} formData The object of validated form data with which to update the object
+     * @private
+     */
+    _updateObject(event, formData) {
+        const tiers = { "1/4": 0.25, "1/3": 1/3, "1/2": 0.5 };
+        let v = "data.details.tier";
+        let tier = formData[v];
+        tier = tiers[tier] || parseFloat(tier);
+        if (tier) formData[v] = tier < 1 ? tier : parseInt(tier);
+
+        super._updateObject(event, formData);
     }
 }

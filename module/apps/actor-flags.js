@@ -38,14 +38,14 @@ export class ActorSheetFlags extends BaseEntitySheet {
 
     _updateObject(event, formData) {
         const actor = this.object;
-        const flags = duplicate(actor.data.flags.starfinder || {});
 
+        const updateData = {};
         for (let [k, v] of Object.entries(CONFIG.STARFINDER.characterFlags)) {
-            if ([undefined, null, "", false].includes(formData[k])) delete flags[k];
-            else if ((v.type === Number) && (formData[k] === 0)) delete flags[k];
-            else flags[k] = formData[k];
+            if ([undefined, null, "", false].includes(formData[k])) updateData[`-=${k}`] = null;
+            else if ((v.type === Number) && (formData[k] === 0)) updateData[`-=${k}`] = null;
+            else updateData[k] = formData[k];
         }
 
-        actor.update({'flags.starfinder': flags});
+        actor.update({'flags.starfinder': updateData});
     }
 }
