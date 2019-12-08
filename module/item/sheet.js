@@ -92,6 +92,7 @@ export class ItemSheetStarfinder extends ItemSheet {
      */
     _getItemStatus(item) {
       if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped ? "Equipped" : "Unequipped";
+      else if (item.type === "starshipWeapon") return item.data.mount.mounted ? "Mounted" : "Not Mounted";
       else if ( item.type === "augmentation" ) return `${item.data.type} (${item.data.system})`;
     }
   
@@ -129,6 +130,11 @@ export class ItemSheetStarfinder extends ItemSheet {
   
       else if ( item.type === "feat" ) {
         props.push(labels.featType);
+      }
+
+      else if (item.type === "starshipWeapon") {
+        props.push(CONFIG.STARFINDER.starshipWeaponTypes[item.data.weaponType]);
+        props.push(CONFIG.STARFINDER.starshipWeaponClass[item.data.class]);
       }
   
       // Action type

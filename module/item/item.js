@@ -11,6 +11,7 @@ export class ItemStarfinder extends Item {
    * @type {boolean}
    */
   get hasAttack() {
+    if (this.data.type === "starshipWeapon") return true;
     return ["mwak", "rwak", "msak", "rsak"].includes(this.data.data.actionType);
   }
 
@@ -326,6 +327,17 @@ export class ItemStarfinder extends Item {
     );
   }
 
+  _starshipWeaponChatData(data, labels, props) {
+    props.push(
+      "Starship Weapon",
+      data.weaponType ? CONFIG.STARFINDER.starshipWeaponTypes[data.weaponType] : null,
+      data.class ? CONFIG.STARFINDER.starshipWeaponClass[data.class] : null,
+      data.range ? CONFIG.STARFINDER.starshipWeaponRanges[data.range] : null,
+      data.mount.mounted ? "Mounted" : "Not Mounted",
+      data.mount.activated ? "Activated" : "Not Activated"
+    );
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -397,6 +409,8 @@ export class ItemStarfinder extends Item {
       throw new Error("You may not place an Attack Roll with this Item.");
     }
 
+    if (this.data.type === "starshipWeapon") return this._rollStarshipAttack(options);
+
     // Determine ability score modifier
     let abl = itemData.ability;
     if ( !abl && (this.data.type === "spell") ) abl = actorData.attributes.spellcasting || "int";
@@ -432,6 +446,36 @@ export class ItemStarfinder extends Item {
     });
   }
 
+  /**
+   * Place an attack roll for a starship using an item.
+   * @param {Object} options Options to pass to the attack roll
+   */
+  _rollStarshipAttack(options={}) {
+    const itemData = this.data.data;
+    const actorData = this.actor.data.data;
+
+    const parts = ["@item.attackBonus"];
+
+    const rollData = duplicate(actorData);
+    rollData.item = itemData;
+    const title = `${this.name} - Attack Roll`;
+
+    DiceStarfinder.d20Roll({
+      event: options.event,
+      parts: parts,
+      actor: this.actor,
+      data: rollData,
+      title: title,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      critical: 20,
+      dialogOptions: {
+        width: 400,
+        top: options.event ? options.event.clientY - 80 : null,
+        left: window.innerWidth - 710
+      }
+    });
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -444,6 +488,8 @@ export class ItemStarfinder extends Item {
     if ( !this.hasDamage ) {
       throw new Error("You may not make a Damage Roll with this Item.");
     }
+
+    if (this.data.type === "starshipWeapon") return this._rollStarshipDamage({event: event});
 
     // Determine ability score modifier
     let abl = itemData.ability;
@@ -468,6 +514,37 @@ export class ItemStarfinder extends Item {
     const title = `${this.name} - Damage Roll`;
 
     // Call the roll helper utility
+    DiceStarfinder.damageRoll({
+      event: event,
+      parts: parts,
+      actor: this.actor,
+      data: rollData,
+      title: title,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      dialogOptions: {
+        width: 400,
+        top: event ? event.clientY - 80 : null,
+        left: window.innerWidth - 710
+      }
+    });
+  }
+
+  _rollStarshipDamage({event}={}) {
+    const itemData = this.data.data;
+    const actorData = this.actor.data.data;
+
+    if (!this.hasDamage) {
+      throw new Error("you may not make a Damage Roll with this item");
+    }
+
+    const parts = itemData.damage.parts.map(d => d[0]);
+
+    const rollData = mergeObject(duplicate(actorData), {
+      item: itemData
+    });
+
+    const title = `${this.name} - Damage Roll`;
+
     DiceStarfinder.damageRoll({
       event: event,
       parts: parts,

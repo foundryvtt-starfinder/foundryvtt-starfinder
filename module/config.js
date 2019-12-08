@@ -704,6 +704,48 @@ STARFINDER.spellLevels = {
       "dread": "Dreadnought"
   };
 
+  // Starship Weapons
+  STARFINDER.starshipWeaponTypes = {
+      "direct": "Direct-fire",
+      "tracking": "Tracking"
+  };
+
+  STARFINDER.starshipWeaponClass = {
+      "light": "Light",
+      "heavy": "Heavy",
+      "capital": "Capital"
+  };
+
+  STARFINDER.starshipWeaponProperties = {
+      "array": "Array",
+      "broad": "Broad Arc",
+      "emp": "EMP",
+      "irradiateL": "Irradiate (low)",
+      "irradiateM": "Irradiate (medium)",
+      "irradiateH": "Irradiate (high)",
+      "limited": "Limited Fire",
+      "line": "Line",
+      "point": "Point",
+      "quantum": "Quantum",
+      "ripper": "Ripper",
+      "tractor": "Tractor Beam",
+      "vortex": "Vortex"
+  };
+
+  STARFINDER.starshipArcs = {
+      "forward": "Forward",
+      "starboard": "Starboard",
+      "aft": "Aft",
+      "port": "Port",
+      "turret": "Turret"
+  };
+
+  STARFINDER.starshipWeaponRanges = {
+      "short": "Short",
+      "medium": "Medium",
+      "long": "Long"
+  };
+
   STARFINDER.CHARACTER_EXP_LEVELS = [
       0,1300, 3300,6000,10000,15000,23000,34000,50000,71000,
       105000,145000,210000,295000,425000,600000,850000,1200000,

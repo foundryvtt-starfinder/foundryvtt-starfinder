@@ -534,7 +534,8 @@
             "technological",
             "fusion",
             "upgrade",
-            "augmentation"
+            "augmentation",
+            "starshipWeapon"
         ],
         "templates": {
             "itemDescription": {
@@ -586,7 +587,10 @@
                 "actionType": null,
                 "attackBonus": 0,
                 "chatFlavor": "",
-                "critical": null,
+                "critical": {
+                    "parts": [],
+                    "effect": ""
+                },
                 "damage": {
                     "parts": []
                 },
@@ -737,6 +741,25 @@
             "templates": ["itemDescription", "physicalItem"],
             "system": "",
             "type": "cybernetic"
+        },
+        "starshipWeapon": {
+            "templates": ["itemDescription"],
+            "range": "short",
+            "class": "light",
+            "weaponType": "direct",
+            "speed": 0,
+            "attackBonus": 0,
+            "damage": {
+                "parts": []
+            },
+            "pcu": 0,
+            "cost": 0,
+            "special": {},
+            "mount": {
+                "mounted": false,
+                "arc": "",
+                "activated": false
+            }
         }
     }
 }

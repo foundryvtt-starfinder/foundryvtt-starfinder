@@ -72,9 +72,9 @@ export class ActorSheetStarfinder extends ActorSheet {
             }, {});
 
             this._prepareTraits(data.actor.data.traits);
-
-            this._prepareItems(data);
         }
+
+        this._prepareItems(data);
 
         return data;
     }

@@ -13,4 +13,8 @@ export class ActorSheetStarfinderVehicle extends ActorSheetStarfinder {
         if (!game.user.isGM && this.actor.limited) return "systems/starfinder/templates/actors/limited-vehicle-sheet.html";
         return "systems/starfinder/templates/actors/vehicle-sheet.html";
     }
+
+    _prepareItems(data) {
+        console.log("Starfinder | In ActorSheetStarfinderVehicle._prepareItems(data)", data);
+    }
 }
