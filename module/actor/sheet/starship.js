@@ -27,6 +27,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         data.labels["tier"] = tier >= 1 ? String(tier) : tiers[tier] || 1;
 
         this._prepareStarshipSystems(data.actor.data.details.systems);
+        this._processFlags(data, data.actor.flags);
 
         return data;
     }
@@ -60,6 +61,60 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
             }
             detail.cssClass = !isObjectEmpty(detail.selected) ? "" : "inactive";
         }
+    }
+
+    /**
+     * Process any flags that the actor might have that would affect the sheet .
+     * 
+     * @param {Obejct} data The data object to update with any flag data.
+     * @param {Object} flags The set of flags for the Actor
+     */
+    _processFlags(data, flags) {
+        const starfinder = flags["starfinder"];
+
+        if (!starfinder) return;
+
+        console.log(starfinder);
+        
+        // TODO: There are two more roles added in the Character Operations Manual that need to be added.
+        const crew = {
+            captain: { label: "Captain", actors: [], dataset: { type: "shipsCrew" }},
+            engineers: { label: "Engineers", actors: [], dataset: { type: "shipsCrew" }},
+            gunners: { label: "Gunners", actors: [], dataset: { type: "shipsCrew" }},
+            pilot: { label: "Pilot", actors: [], dataset: { type: "shipsCrew" }},
+            scienceOfficers: { label: "Science Officers", actors: [], dataset: { type: "shipsCrew" }},
+            passengers: { label: "Passengers", actors: [], dataset: { type: "shipsCrew" }}
+        }
+
+        let [captian, engineers, gunners, pilot, scienceOfficers, passengers] = starfinder.shipsCrew.members.reduce((arr, id) => {
+            let actor = game.actors.get(id);
+            
+            if (!actor) return arr;
+
+            let crewMember = actor.getFlag("starfinder", "crewMember") || null;
+            if (!crewMember) return arr;
+
+            actor.data.img = actor.data.img || DEFAULT_TOKEN;
+
+            if (crewMember.role === "captain") arr[0].push(actor);
+            else if (crewMember.role === "engineers") arr[1].puhs(actor);
+            else if (crewMember.role === "gunners") arr[2].push(actor);
+            else if (crewMember.role === "pilot") arr[3].push(actor);
+            else if (crewMember.role === "scienceOfficers") arr[4].push(actor);
+            else if (crewMember.role === "passengers") arr[5].push(actor);
+
+            return arr;
+
+        }, [[],[],[],[],[],[]]);
+
+        crew.captain.actors = captian;
+        crew.engineers.actors = engineers;
+        crew.gunners.actors = gunners;
+        crew.pilot.actors = pilot;
+        crew.scienceOfficers.actors = scienceOfficers;
+        crew.passengers.actors = passengers;
+
+        data.crew = Object.values(crew);
     }
 
     /**
@@ -110,8 +165,6 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         super.activateListeners(html);
 
         if (!this.options.editable) return;
-        
-
     }
 
     /**
@@ -129,5 +182,53 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         if (tier) formData[v] = tier < 1 ? tier : parseInt(tier);
 
         super._updateObject(event, formData);
+    }
+
+    /**
+     * Handle dropped data on the Actor sheet
+     * @param {Event} event The drop event
+     */
+    async _onDrop(event) {
+        // Process an Item being dropped on the sheet first
+        super._onDrop(event);
+
+        let data;
+        try {
+            data = JSON.parse(event.dataTransfer.getData('text/plain'));
+            // Item's should have already been handled by the base class. 
+            // We only want to continue if there is an Actor being dropped
+            // on the sheet.
+            if (data.type !== "Actor") return;
+        } catch (err) {
+            return false;
+        }
+
+        if (!data.id) return false;
+
+        let crew = this.actor.getFlag("starfinder", "shipsCrew") || {};
+
+        if (!crew.members) {
+            crew.members = [data.id];
+            crew.roles = {
+                captain: "",
+                engineers: [],
+                gunners: [],
+                pilot: "",
+                scienceOfficers: [],
+                passengers: []
+            }            
+        } else {
+            crew.members.push(data.id);
+        }
+
+        await this.actor.setFlag("starfinder", "shipsCrew", crew);
+
+        let actor = game.actors.get(data.id);
+
+        if (!actor) return false;
+
+        await actor.setFlag("starfinder", "crewMember", { shipId: this.actor.id, role: "passengers"});
+
+        return false;
     }
 }

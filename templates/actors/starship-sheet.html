@@ -55,7 +55,7 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">Armor Class</h4>
                     <div class="attribute-value">
-                       <span>{{data.attributes.ac.value}}</span>
+                        <span>{{data.attributes.ac.value}}</span>
                     </div>
                     <footer class="attribute-footer">
                         <input type="text" name="data.attributes.ac.misc"
@@ -110,7 +110,7 @@
                         <h4 class="attribute-name box-title">Critical Threshold</h4>
                         <div class="attribute-value">
                             <span>{{data.attributes.ct.value}}</span>
-                                
+
                         </div>
                     </li>
                     <li class="attribute">
@@ -190,7 +190,8 @@
                         <h4 class="attribute-name box-title">Aft</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.aft.value"
-                                value="{{data.attributes.shields.aft.value}}" data-dtype="Number" title="Forward Shields" />
+                                value="{{data.attributes.shields.aft.value}}" data-dtype="Number"
+                                title="Forward Shields" />
                             <span class="sep"> / </span>
                             <span>{{data.attributes.shields.aft.max}}</span>
                         </div>
@@ -199,7 +200,8 @@
                         <h4 class="attribute-name box-title">Port</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.port.value"
-                                value="{{data.attributes.shields.port.value}}" data-dtype="Number" title="Forward Shields" />
+                                value="{{data.attributes.shields.port.value}}" data-dtype="Number"
+                                title="Forward Shields" />
                             <span class="sep"> / </span>
                             <span>{{data.attributes.shields.port.max}}</span>
                         </div>
@@ -277,7 +279,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="flexcol">                        
+                    <div class="flexcol">
                         <div class="form-group">
                             <label for="data.details.systems.driftEngine">Drift Engine</label>
                             <select name="data.details.systems.driftEngine">
@@ -367,6 +369,21 @@
         <div class="tab crew" data-group="primary" data-tab="crew">
             <h3 class="form-header">Ship's Crew</h3>
             <p class="notification warning">This is still to-do</p>
+            <ol class="inventory-list">
+                {{#each crew as |role|}}
+                <li class="item flexrow inventory-header">{{role.label}}</li>
+                <ol class="item-list">
+                    {{#each role.actors as |actor a|}}
+                    <li class="item flexrow" data-actor-id="{{actor.id}}">
+                        <div class="item-name flexrow">
+                            <div class="item-image" style="background-image: url({{actor.data.img}}"></div>
+                            <h4>{{actor.name}}</h4>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+                {{/each}}
+            </ol>
         </div>
 
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
