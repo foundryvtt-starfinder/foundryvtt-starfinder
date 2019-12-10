@@ -369,14 +369,14 @@
         <div class="tab crew" data-group="primary" data-tab="crew">
             <h3 class="form-header">Ship's Crew</h3>
             <p class="notification warning">This is still to-do</p>
-            <ol class="inventory-list">
+            <ol class="crew-list">
                 {{#each crew as |role|}}
-                <li class="item flexrow inventory-header">{{role.label}}</li>
-                <ol class="item-list">
+                <li class="crew flexrow crew-header">{{role.label}}</li>
+                <ol class="crew-item-list">
                     {{#each role.actors as |actor a|}}
-                    <li class="item flexrow" data-actor-id="{{actor.id}}">
-                        <div class="item-name flexrow">
-                            <div class="item-image" style="background-image: url({{actor.data.img}}"></div>
+                    <li class="crew flexrow" data-actor-id="{{actor.id}}">
+                        <div class="crew-name flexrow">
+                            <div class="crew-image" style="background-image: url({{actor.data.img}}"></div>
                             <h4>{{actor.name}}</h4>
                         </div>
                     </li>

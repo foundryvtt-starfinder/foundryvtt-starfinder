@@ -726,47 +726,110 @@
   margin-left: 8px;
   border-bottom: 2px groove #eeede0;
 }
-.starfinder.sheet.actor .inventory-list {
+.starfinder.sheet.actor .inventory-list,
+.starfinder.sheet.actor .crew-list {
   list-style: none;
   margin: 0;
   padding: 0 5px;
   overflow-y: auto;
 }
-.starfinder.sheet.actor .inventory-list .item {
+.starfinder.sheet.actor .inventory-list .item,
+.starfinder.sheet.actor .crew-list .item,
+.starfinder.sheet.actor .inventory-list .crew,
+.starfinder.sheet.actor .crew-list .crew {
   line-height: 30px;
   padding: 0 2px;
   border-bottom: 1px solid #c9c7b8;
 }
-.starfinder.sheet.actor .inventory-list .item:last-child {
+.starfinder.sheet.actor .inventory-list .item:last-child,
+.starfinder.sheet.actor .crew-list .item:last-child,
+.starfinder.sheet.actor .inventory-list .crew:last-child,
+.starfinder.sheet.actor .crew-list .crew:last-child {
   border-bottom: none;
 }
-.starfinder.sheet.actor .inventory-list .item .item-name {
+.starfinder.sheet.actor .inventory-list .item .item-name,
+.starfinder.sheet.actor .crew-list .item .item-name,
+.starfinder.sheet.actor .inventory-list .crew .item-name,
+.starfinder.sheet.actor .crew-list .crew .item-name,
+.starfinder.sheet.actor .inventory-list .item .crew-name,
+.starfinder.sheet.actor .crew-list .item .crew-name,
+.starfinder.sheet.actor .inventory-list .crew .crew-name,
+.starfinder.sheet.actor .crew-list .crew .crew-name {
   cursor: pointer;
 }
-.starfinder.sheet.actor .inventory-list .item .item-name .item-image {
+.starfinder.sheet.actor .inventory-list .item .item-name .item-image,
+.starfinder.sheet.actor .crew-list .item .item-name .item-image,
+.starfinder.sheet.actor .inventory-list .crew .item-name .item-image,
+.starfinder.sheet.actor .crew-list .crew .item-name .item-image,
+.starfinder.sheet.actor .inventory-list .item .crew-name .item-image,
+.starfinder.sheet.actor .crew-list .item .crew-name .item-image,
+.starfinder.sheet.actor .inventory-list .crew .crew-name .item-image,
+.starfinder.sheet.actor .crew-list .crew .crew-name .item-image,
+.starfinder.sheet.actor .inventory-list .item .item-name .crew-image,
+.starfinder.sheet.actor .crew-list .item .item-name .crew-image,
+.starfinder.sheet.actor .inventory-list .crew .item-name .crew-image,
+.starfinder.sheet.actor .crew-list .crew .item-name .crew-image,
+.starfinder.sheet.actor .inventory-list .item .crew-name .crew-image,
+.starfinder.sheet.actor .crew-list .item .crew-name .crew-image,
+.starfinder.sheet.actor .inventory-list .crew .crew-name .crew-image,
+.starfinder.sheet.actor .crew-list .crew .crew-name .crew-image {
   flex: 0 0 30px;
   background-size: 30px;
   margin-right: 5px;
 }
-.starfinder.sheet.actor .inventory-list .item .item-name h4 {
+.starfinder.sheet.actor .inventory-list .item .item-name h4,
+.starfinder.sheet.actor .crew-list .item .item-name h4,
+.starfinder.sheet.actor .inventory-list .crew .item-name h4,
+.starfinder.sheet.actor .crew-list .crew .item-name h4,
+.starfinder.sheet.actor .inventory-list .item .crew-name h4,
+.starfinder.sheet.actor .crew-list .item .crew-name h4,
+.starfinder.sheet.actor .inventory-list .crew .crew-name h4,
+.starfinder.sheet.actor .crew-list .crew .crew-name h4 {
   margin: 0;
 }
-.starfinder.sheet.actor .inventory-list .item .item-name:hover .item-image {
+.starfinder.sheet.actor .inventory-list .item .item-name:hover .item-image,
+.starfinder.sheet.actor .crew-list .item .item-name:hover .item-image,
+.starfinder.sheet.actor .inventory-list .crew .item-name:hover .item-image,
+.starfinder.sheet.actor .crew-list .crew .item-name:hover .item-image,
+.starfinder.sheet.actor .inventory-list .item .crew-name:hover .item-image,
+.starfinder.sheet.actor .crew-list .item .crew-name:hover .item-image,
+.starfinder.sheet.actor .inventory-list .crew .crew-name:hover .item-image,
+.starfinder.sheet.actor .crew-list .crew .crew-name:hover .item-image {
   background-image: url("/icons/svg/d20-grey.svg") !important;
 }
-.starfinder.sheet.actor .inventory-list .item .item-name .item-image:hover {
+.starfinder.sheet.actor .inventory-list .item .item-name .item-image:hover,
+.starfinder.sheet.actor .crew-list .item .item-name .item-image:hover,
+.starfinder.sheet.actor .inventory-list .crew .item-name .item-image:hover,
+.starfinder.sheet.actor .crew-list .crew .item-name .item-image:hover,
+.starfinder.sheet.actor .inventory-list .item .crew-name .item-image:hover,
+.starfinder.sheet.actor .crew-list .item .crew-name .item-image:hover,
+.starfinder.sheet.actor .inventory-list .crew .crew-name .item-image:hover,
+.starfinder.sheet.actor .crew-list .crew .crew-name .item-image:hover {
   background-image: url("/icons/svg/d20-black.svg") !important;
 }
-.starfinder.sheet.actor .inventory-list .item .item-properties {
+.starfinder.sheet.actor .inventory-list .item .item-properties,
+.starfinder.sheet.actor .crew-list .item .item-properties,
+.starfinder.sheet.actor .inventory-list .crew .item-properties,
+.starfinder.sheet.actor .crew-list .crew .item-properties,
+.starfinder.sheet.actor .inventory-list .item .crew-properties,
+.starfinder.sheet.actor .crew-list .item .crew-properties,
+.starfinder.sheet.actor .inventory-list .crew .crew-properties,
+.starfinder.sheet.actor .crew-list .crew .crew-properties {
   margin-top: 3px;
 }
-.starfinder.sheet.actor .inventory-list .item .item-recharge {
+.starfinder.sheet.actor .inventory-list .item .item-recharge,
+.starfinder.sheet.actor .crew-list .item .item-recharge,
+.starfinder.sheet.actor .inventory-list .crew .item-recharge,
+.starfinder.sheet.actor .crew-list .crew .item-recharge {
   flex: 0 0 80px;
   text-align: right;
   font-size: 11px;
   color: #7a7971;
 }
-.starfinder.sheet.actor .inventory-list .inventory-header {
+.starfinder.sheet.actor .inventory-list .inventory-header,
+.starfinder.sheet.actor .crew-list .inventory-header,
+.starfinder.sheet.actor .inventory-list .crew-header,
+.starfinder.sheet.actor .crew-list .crew-header {
   margin: 2px 0;
   padding: 0;
   background: rgba(0, 0, 0, 0.05);
@@ -774,36 +837,59 @@
   font-weight: bold;
   line-height: 24px;
 }
-.starfinder.sheet.actor .inventory-list .inventory-header h3 {
+.starfinder.sheet.actor .inventory-list .inventory-header h3,
+.starfinder.sheet.actor .crew-list .inventory-header h3,
+.starfinder.sheet.actor .inventory-list .crew-header h3,
+.starfinder.sheet.actor .crew-list .crew-header h3 {
   margin: 0 -5px 0 0;
   padding-left: 5px;
   font-size: 13px;
   font-weight: bold;
 }
-.starfinder.sheet.actor .inventory-list .inventory-header .item-controls a.item-create {
+.starfinder.sheet.actor .inventory-list .inventory-header .item-controls a.item-create,
+.starfinder.sheet.actor .crew-list .inventory-header .item-controls a.item-create,
+.starfinder.sheet.actor .inventory-list .crew-header .item-controls a.item-create,
+.starfinder.sheet.actor .crew-list .crew-header .item-controls a.item-create,
+.starfinder.sheet.actor .inventory-list .inventory-header .crew-controls a.crew-create,
+.starfinder.sheet.actor .crew-list .inventory-header .crew-controls a.crew-create,
+.starfinder.sheet.actor .inventory-list .crew-header .crew-controls a.crew-create,
+.starfinder.sheet.actor .crew-list .crew-header .crew-controls a.crew-create {
   flex: 0 0 100%;
 }
-.starfinder.sheet.actor .inventory-list .item-detail {
+.starfinder.sheet.actor .inventory-list .item-detail,
+.starfinder.sheet.actor .crew-list .item-detail,
+.starfinder.sheet.actor .inventory-list .crew-detial,
+.starfinder.sheet.actor .crew-list .crew-detial {
   flex: 0 0 80px;
   font-size: 12px;
   color: #7a7971;
   text-align: center;
   border-right: 1px solid #c9c7b8;
 }
-.starfinder.sheet.actor .inventory-list .item-detail:last-child {
+.starfinder.sheet.actor .inventory-list .item-detail:last-child,
+.starfinder.sheet.actor .crew-list .item-detail:last-child,
+.starfinder.sheet.actor .inventory-list .crew-detial:last-child,
+.starfinder.sheet.actor .crew-list .crew-detial:last-child {
   border-right: none;
 }
-.starfinder.sheet.actor .inventory-list .item-weight {
+.starfinder.sheet.actor .inventory-list .item-weight,
+.starfinder.sheet.actor .crew-list .item-weight {
   flex: 0 0 60px;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;
 }
-.starfinder.sheet.actor .inventory-list .item-list {
+.starfinder.sheet.actor .inventory-list .item-list,
+.starfinder.sheet.actor .crew-list .item-list,
+.starfinder.sheet.actor .inventory-list .crew-item-list,
+.starfinder.sheet.actor .crew-list .crew-item-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.starfinder.sheet.actor .inventory-list .item-controls {
+.starfinder.sheet.actor .inventory-list .item-controls,
+.starfinder.sheet.actor .crew-list .item-controls,
+.starfinder.sheet.actor .inventory-list .crew-controls,
+.starfinder.sheet.actor .crew-list .crew-controls {
   flex: 0 0 44px;
   display: flex;
   flex-direction: row;
@@ -811,28 +897,49 @@
   justify-content: flex-start;
   justify-content: flex-end;
 }
-.starfinder.sheet.actor .inventory-list .item-controls > * {
+.starfinder.sheet.actor .inventory-list .item-controls > *,
+.starfinder.sheet.actor .crew-list .item-controls > *,
+.starfinder.sheet.actor .inventory-list .crew-controls > *,
+.starfinder.sheet.actor .crew-list .crew-controls > * {
   flex: 1;
 }
-.starfinder.sheet.actor .inventory-list .item-controls .flex1 {
+.starfinder.sheet.actor .inventory-list .item-controls .flex1,
+.starfinder.sheet.actor .crew-list .item-controls .flex1,
+.starfinder.sheet.actor .inventory-list .crew-controls .flex1,
+.starfinder.sheet.actor .crew-list .crew-controls .flex1 {
   flex: 1;
 }
-.starfinder.sheet.actor .inventory-list .item-controls .flex2 {
+.starfinder.sheet.actor .inventory-list .item-controls .flex2,
+.starfinder.sheet.actor .crew-list .item-controls .flex2,
+.starfinder.sheet.actor .inventory-list .crew-controls .flex2,
+.starfinder.sheet.actor .crew-list .crew-controls .flex2 {
   flex: 2;
 }
-.starfinder.sheet.actor .inventory-list .item-controls .flex3 {
+.starfinder.sheet.actor .inventory-list .item-controls .flex3,
+.starfinder.sheet.actor .crew-list .item-controls .flex3,
+.starfinder.sheet.actor .inventory-list .crew-controls .flex3,
+.starfinder.sheet.actor .crew-list .crew-controls .flex3 {
   flex: 3;
 }
-.starfinder.sheet.actor .inventory-list .item-controls .flex4 {
+.starfinder.sheet.actor .inventory-list .item-controls .flex4,
+.starfinder.sheet.actor .crew-list .item-controls .flex4,
+.starfinder.sheet.actor .inventory-list .crew-controls .flex4,
+.starfinder.sheet.actor .crew-list .crew-controls .flex4 {
   flex: 4;
 }
-.starfinder.sheet.actor .inventory-list .item-controls a {
+.starfinder.sheet.actor .inventory-list .item-controls a,
+.starfinder.sheet.actor .crew-list .item-controls a,
+.starfinder.sheet.actor .inventory-list .crew-controls a,
+.starfinder.sheet.actor .crew-list .crew-controls a {
   flex: 0 0 22px;
   font-size: 10px;
   text-align: center;
   color: #666;
 }
-.starfinder.sheet.actor .inventory-list .item-summary {
+.starfinder.sheet.actor .inventory-list .item-summary,
+.starfinder.sheet.actor .crew-list .item-summary,
+.starfinder.sheet.actor .inventory-list .crew-summary,
+.starfinder.sheet.actor .crew-list .crew-summary {
   flex: 0 0 100%;
   font-size: 12px;
   line-height: 16px;

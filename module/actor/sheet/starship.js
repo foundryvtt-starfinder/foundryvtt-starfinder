@@ -9,8 +9,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         return mergeObject(super.defaultOptions, {
             classes: ["starfinder", "sheet", "actor", "starship"],
             witdh: 600,
-            height: 800,
-            title: "This is only a test"
+            height: 800
         });
     }
 
@@ -72,16 +71,16 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
     _processFlags(data, flags) {
         const starfinder = flags["starfinder"];
 
-        if (!starfinder) return;
-
-        console.log(starfinder);
+        if (!starfinder) starfinder = {};
+        if (!starfinder.shipsCrew) starfinder.shipsCrew = {};
+        if (!starfinder.shipsCrew.members) starfinder.shipsCrew.members = [];
         
         // TODO: There are two more roles added in the Character Operations Manual that need to be added.
         const crew = {
+            pilot: { label: "Pilot", actors: [], dataset: { type: "shipsCrew" }},
             captain: { label: "Captain", actors: [], dataset: { type: "shipsCrew" }},
             engineers: { label: "Engineers", actors: [], dataset: { type: "shipsCrew" }},
-            gunners: { label: "Gunners", actors: [], dataset: { type: "shipsCrew" }},
-            pilot: { label: "Pilot", actors: [], dataset: { type: "shipsCrew" }},
+            gunners: { label: "Gunners", actors: [], dataset: { type: "shipsCrew" }},            
             scienceOfficers: { label: "Science Officers", actors: [], dataset: { type: "shipsCrew" }},
             passengers: { label: "Passengers", actors: [], dataset: { type: "shipsCrew" }}
         }
@@ -165,6 +164,22 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         super.activateListeners(html);
 
         if (!this.options.editable) return;
+
+        html.find('.crew-name').click(this._onChangeCrewRole.bind(this));
+    }
+
+    /**
+     * Handles updating this crew's role on the ship.
+     * 
+     * @param {Event} event The originating click event
+     */
+    _onChangeCrewRole(event) {
+        event.preventDefault();
+
+        const actorId = event.currentTarget.parentElement.dataset.actorId;
+        const actor = game.actors.get(actorId);
+
+        console.log(actor);
     }
 
     /**
@@ -198,6 +213,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
             // Item's should have already been handled by the base class. 
             // We only want to continue if there is an Actor being dropped
             // on the sheet.
+            
             if (data.type !== "Actor") return;
         } catch (err) {
             return false;
@@ -205,18 +221,14 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
 
         if (!data.id) return false;
 
-        let crew = this.actor.getFlag("starfinder", "shipsCrew") || {};
+        let c = this.actor.getFlag("starfinder","shipsCrew");
+        let crew;
+
+        if (c) crew = duplicate(c);
+        else crew = {};
 
         if (!crew.members) {
             crew.members = [data.id];
-            crew.roles = {
-                captain: "",
-                engineers: [],
-                gunners: [],
-                pilot: "",
-                scienceOfficers: [],
-                passengers: []
-            }            
         } else {
             crew.members.push(data.id);
         }
