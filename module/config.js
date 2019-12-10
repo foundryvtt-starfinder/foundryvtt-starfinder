@@ -785,6 +785,15 @@ STARFINDER.spellLevels = {
       "long": "Long"
   };
 
+  STARFINDER.starshipRoles = {
+      "pilot": "Pilot",
+      "captain": "Captain",
+      "engineers": "Engineers",
+      "gunners": "Gunners",
+      "scenceOfficers": "Science Officers",
+      "passengers": "Passengers"
+  };
+
   STARFINDER.CHARACTER_EXP_LEVELS = [
       0,1300, 3300,6000,10000,15000,23000,34000,50000,71000,
       105000,145000,210000,295000,425000,600000,850000,1200000,

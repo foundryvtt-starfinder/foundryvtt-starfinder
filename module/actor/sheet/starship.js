@@ -69,7 +69,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
      * @param {Object} flags The set of flags for the Actor
      */
     _processFlags(data, flags) {
-        const starfinder = flags["starfinder"];
+        let starfinder = flags["starfinder"];
 
         if (!starfinder) starfinder = {};
         if (!starfinder.shipsCrew) starfinder.shipsCrew = {};
@@ -173,13 +173,38 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
      * 
      * @param {Event} event The originating click event
      */
-    _onChangeCrewRole(event) {
+    async _onChangeCrewRole(event) {
         event.preventDefault();
 
         const actorId = event.currentTarget.parentElement.dataset.actorId;
         const actor = game.actors.get(actorId);
 
         console.log(actor);
+
+        const flags = actor.getFlag("starfinder", "crewMember") || {shipId: this.actor.id, role: ""};
+        let data = {
+            actor: actor.data,
+            config: CONFIG.STARFINDER,
+            flags: flags
+        }
+
+        let html = await renderTemplate("systems/starfinder/templates/apps/starship-roles.html", data);
+        
+        new Dialog({
+            title: `${data.actor.name}: Assign Role`,
+            content: html,
+            buttons: {
+                submit: {
+                    label: "Submit",
+                    callback: html => actor.setFlag('starfinder', 'crewMember', {"role": $(html.find('#roles')).val()})
+                },
+                cancel: {
+                    icon: '<i class="fas fa-times"></i>',
+                    label: "Cancel"
+                }
+            },
+            default: "submit"
+        }, {classes: ['starfinder', 'dialog']}).render(true);
     }
 
     /**
