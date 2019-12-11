@@ -367,8 +367,6 @@
         </div>
 
         <div class="tab crew" data-group="primary" data-tab="crew">
-            <h3 class="form-header">Ship's Crew</h3>
-            <p class="notification warning">This is still to-do</p>
             <ol class="crew-list">
                 {{#each crew as |role|}}
                 <li class="crew flexrow crew-header">{{role.label}}</li>
@@ -378,6 +376,9 @@
                         <div class="crew-name flexrow">
                             <div class="crew-image" style="background-image: url({{actor.data.img}}"></div>
                             <h4>{{actor.name}}</h4>
+                        </div>
+                        <div class="crew-controls">
+                            <a class="crew-control crew-delete" title="Remove Crew Member"><i class="fas fa-trash"></i></a>
                         </div>
                     </li>
                     {{/each}}

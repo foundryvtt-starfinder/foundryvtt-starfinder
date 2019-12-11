@@ -96,7 +96,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
             actor.data.img = actor.data.img || DEFAULT_TOKEN;
 
             if (crewMember.role === "captain") arr[0].push(actor);
-            else if (crewMember.role === "engineers") arr[1].puhs(actor);
+            else if (crewMember.role === "engineers") arr[1].push(actor);
             else if (crewMember.role === "gunners") arr[2].push(actor);
             else if (crewMember.role === "pilot") arr[3].push(actor);
             else if (crewMember.role === "scienceOfficers") arr[4].push(actor);
@@ -166,6 +166,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         if (!this.options.editable) return;
 
         html.find('.crew-name').click(this._onChangeCrewRole.bind(this));
+        html.find('.crew-delete').click(this._onRemoveFromCrew.bind(this));
     }
 
     /**
@@ -175,36 +176,36 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
      */
     async _onChangeCrewRole(event) {
         event.preventDefault();
-
+        
         const actorId = event.currentTarget.parentElement.dataset.actorId;
         const actor = game.actors.get(actorId);
 
-        console.log(actor);
-
-        const flags = actor.getFlag("starfinder", "crewMember") || {shipId: this.actor.id, role: ""};
-        let data = {
-            actor: actor.data,
-            config: CONFIG.STARFINDER,
-            flags: flags
-        }
-
-        let html = await renderTemplate("systems/starfinder/templates/apps/starship-roles.html", data);
+        let role = await actor.setCrewMemberRole(this.actor.id);
         
-        new Dialog({
-            title: `${data.actor.name}: Assign Role`,
-            content: html,
-            buttons: {
-                submit: {
-                    label: "Submit",
-                    callback: html => actor.setFlag('starfinder', 'crewMember', {"role": $(html.find('#roles')).val()})
-                },
-                cancel: {
-                    icon: '<i class="fas fa-times"></i>',
-                    label: "Cancel"
-                }
-            },
-            default: "submit"
-        }, {classes: ['starfinder', 'dialog']}).render(true);
+    }
+
+    /**
+     * Remove an actor from the crew.
+     * 
+     * @param {Event} event The originating click event
+     */
+    async _onRemoveFromCrew(event) {
+        event.preventDefault();
+
+        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const actor = game.actors.get(actorId);
+
+        console.log(actorId, actor);
+
+        await actor.removeFromCrew();
+        
+        let shipsCrew = this.actor.getFlag('starfinder', 'shipsCrew');
+
+        if (!shipsCrew) return;
+        
+        let updateData = shipsCrew.members.filter((val) => val !== actor.id);
+
+        await this.actor.update({'flags.starfinder.shipsCrew.members': updateData});
     }
 
     /**

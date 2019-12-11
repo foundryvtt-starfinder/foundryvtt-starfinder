@@ -118,60 +118,60 @@ export class ActorStarfinder extends Actor {
         const tl = armorDefenseMap[data.details.systems.defense] || 0;
 
         const thrusters = {
-            "t6": {speed: 6, mod: 1},
-            "t8": {speed: 8, mod: 0},
-            "t10": {speed: 10, mod: 0},
-            "t12": {speed: 12, mod: -1},
-            "t14": {speed: 14, mod: -2},
-            "s6": {speed: 6, mod: 1},
-            "s8": {speed: 8, mod: 0},
-            "s10": {speed: 10, mod: 0},
-            "s12": {speed: 12, mod: -1},
-            "m4": {speed: 4, mod: 2},
-            "m6": {speed: 6, mod: 1},
-            "m8": {speed: 8, mod: 0},
-            "m10": {speed: 10, mod: 0},
-            "m12": {speed: 12, mod: -1},
-            "l4": {speed: 4, mod: 2},
-            "l6": {speed: 6, mod: 1},
-            "l8": {speed: 8, mod: 0},
-            "l10": {speed: 10, mod: 0},
-            "h4": {speed: 4, mod: 2},
-            "h6": {speed: 6, mod: 1},
-            "h8": {speed: 8, mod: 0},
-            "h10": {speed: 10, mod: 0},
-            "g4": {speed: 4, mod: 2},
-            "g6": {speed: 6, mod: 1},
-            "g8": {speed: 8, mod: 0},
-            "c4": {speed: 4, mod: 2},
-            "c6": {speed: 6, mod: 1},
-            "c8": {speed: 8, mod: 0}
-        }[data.details.systems.thrusters] || {speed: 8, mode: 0};
+            "t6": { speed: 6, mod: 1 },
+            "t8": { speed: 8, mod: 0 },
+            "t10": { speed: 10, mod: 0 },
+            "t12": { speed: 12, mod: -1 },
+            "t14": { speed: 14, mod: -2 },
+            "s6": { speed: 6, mod: 1 },
+            "s8": { speed: 8, mod: 0 },
+            "s10": { speed: 10, mod: 0 },
+            "s12": { speed: 12, mod: -1 },
+            "m4": { speed: 4, mod: 2 },
+            "m6": { speed: 6, mod: 1 },
+            "m8": { speed: 8, mod: 0 },
+            "m10": { speed: 10, mod: 0 },
+            "m12": { speed: 12, mod: -1 },
+            "l4": { speed: 4, mod: 2 },
+            "l6": { speed: 6, mod: 1 },
+            "l8": { speed: 8, mod: 0 },
+            "l10": { speed: 10, mod: 0 },
+            "h4": { speed: 4, mod: 2 },
+            "h6": { speed: 6, mod: 1 },
+            "h8": { speed: 8, mod: 0 },
+            "h10": { speed: 10, mod: 0 },
+            "g4": { speed: 4, mod: 2 },
+            "g6": { speed: 6, mod: 1 },
+            "g8": { speed: 8, mod: 0 },
+            "c4": { speed: 4, mod: 2 },
+            "c6": { speed: 6, mod: 1 },
+            "c8": { speed: 8, mod: 0 }
+        }[data.details.systems.thrusters] || { speed: 8, mode: 0 };
 
         const powercore = {
-            "micronL": {size: ["tiny"], pcu: 50},
-            "micronH": {size: ["tiny"], pcu: 70},
-            "micronU": {size: ["tiny"], pcu: 80},
-            "arcusL": {size: ["tiny", "small"], pcu: 75},
-            "pulseBr": {size: ["tiny", "small"], pcu: 90},
-            "pulseBl": {size: ["tiny", "small"], pcu: 120},
-            "pulseWh": {size: ["tiny", "small"], pcu: 140},
-            "pulseGy": {size: ["tiny", "small", "medium"], pcu: 100},
-            "arcusH": {size: ["tiny", "small", "medium"], pcu: 130},
-            "puslseGr": {size: ["tiny", "small", "medium"], pcu: 150},
-            "pulseRe": {size: ["tiny", "small", "medium"], pcu: 175},
-            "pulseBu": {size: ["tiny", "small", "medium"], pcu: 200},
-            "arcusUl": {size: ["small", "medium", "large"], pcu: 150},
-            "arcusMax": {size: ["small", "medium", "large"], pcu: 200},
-            "pulseOr": {size: ["small", "medium", "large"], pcu: 250},
-            "pulsePr": {size: ["small", "medium", "large"], pcu: 300},
-            "novaL": {size: ["medium", "large", "huge"], pcu: 150},
-            "novaH": {size: ["medium", "large", "huge"], pcu: 200},
-            "novaU": {size: ["medium", "large", "huge"], pcu: 300},
-            "gateL": {size: ["large", "huge", "gargantuan"], pcu: 300},
-            "gateH": {size: ["large", "huge", "gargantuan"], pcu: 400},
-            "gateU": {size: ["huge", "gargantuan", "colossal"], pcu: 500}
-        }[data.details.systems.powercore] || {size: ["tiny"], pcu: 0};
+            "micronL": { size: ["tiny"], pcu: 50 },
+            "micronH": { size: ["tiny"], pcu: 70 },
+            "micronU": { size: ["tiny"], pcu: 80 },
+            "arcusL": { size: ["tiny", "small"], pcu: 75 },
+            "pulseBr": { size: ["tiny", "small"], pcu: 90 },
+            "pulseBl": { size: ["tiny", "small"], pcu: 120 },
+            "pulseWh": { size: ["tiny", "small"], pcu: 140 },
+            "pulseGy": { size: ["tiny", "small", "medium"], pcu: 100 },
+            "arcusH": { size: ["tiny", "small", "medium"], pcu: 130 },
+            "puslseGr": { size: ["tiny", "small", "medium"], pcu: 150 },
+            "pulseRe": { size: ["tiny", "small", "medium"], pcu: 175 },
+            "pulseBu": { size: ["tiny", "small", "medium"], pcu: 200 },
+            "arcusUl": { size: ["small", "medium", "large"], pcu: 150 },
+            "arcusMax": { size: ["small", "medium", "large"], pcu: 200 },
+            "pulseOr": { size: ["small", "medium", "large"], pcu: 250 },
+            "pulsePr": { size: ["small", "medium", "large"], pcu: 300 },
+            "novaL": { size: ["medium", "large", "huge"], pcu: 150 },
+            "novaH": { size: ["medium", "large", "huge"], pcu: 200 },
+            "novaU": { size: ["medium", "large", "huge"], pcu: 300 },
+            "gateL": { size: ["large", "huge", "gargantuan"], pcu: 300 },
+            "gateH": { size: ["large", "huge", "gargantuan"], pcu: 400 },
+            "gateU": { size: ["huge", "gargantuan", "colossal"], pcu: 500 }
+        }[data.details.systems.powercore] || { size: ["tiny"], pcu: 0 };
 
         const driftEngine = {
             "basic": 1,
@@ -318,14 +318,14 @@ export class ActorStarfinder extends Actor {
         let lvl = item.data.data.level;
         const usesSlots = (lvl > 0) && item.data.data.preparation.mode === "";
         if (!usesSlots) return item.roll();
-        
+
         let consume = true;
         if (configureDialog) {
             const spellFormData = await SpellCastDialog.create(this, item);
             lvl = parseInt(spellFormData.get("level"));
             consume = Boolean(spellFormData.get("consume"));
             if (lvl !== item.data.data.level) {
-                item = item.constructor.createOwned(mergeObject(item.data, {"data.level": lvl}, {inplace: false}), this);
+                item = item.constructor.createOwned(mergeObject(item.data, { "data.level": lvl }, { inplace: false }), this);
             }
         }
 
@@ -350,15 +350,15 @@ export class ActorStarfinder extends Actor {
 
         const skill = duplicate(this.data.data.skills[skillId]);
         const formData = await AddEditSkillDialog.create(skillId, skill),
-              isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
-              hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
-              value = Boolean(formData.get('value')) ? 3 : 0,
-              misc = Number(formData.get('misc')),
-              ranks = Number(formData.get('ranks')),
-              ability = formData.get('ability'),
-              remove = Boolean(formData.get('remove'));
+            isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
+            hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
+            value = Boolean(formData.get('value')) ? 3 : 0,
+            misc = Number(formData.get('misc')),
+            ranks = Number(formData.get('ranks')),
+            ability = formData.get('ability'),
+            remove = Boolean(formData.get('remove'));
 
-        if (remove) return this.update({[`data.skills.-=${skillId}`]: null});
+        if (remove) return this.update({ [`data.skills.-=${skillId}`]: null });
 
         let updateObject = {
             [`data.skills.${skillId}.ability`]: ability,
@@ -380,7 +380,7 @@ export class ActorStarfinder extends Actor {
      * Add a new skill
      * @param {Object} options Options which configure how the skill is added
      */
-    async addSkill(options={}) {
+    async addSkill(options = {}) {
         const skill = {
             ability: "int",
             ranks: 0,
@@ -399,14 +399,14 @@ export class ActorStarfinder extends Actor {
         }
 
         const formData = await AddEditSkillDialog.create(skillId, skill, false),
-              isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
-              hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
-              value = Boolean(formData.get('value')) ? 3 : 0,
-              misc = Number(formData.get('misc')),
-              ranks = Number(formData.get('ranks')),
-              ability = formData.get('ability'),
-              subname = formData.get('subname');
-        
+            isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
+            hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
+            value = Boolean(formData.get('value')) ? 3 : 0,
+            misc = Number(formData.get('misc')),
+            ranks = Number(formData.get('ranks')),
+            ability = formData.get('ability'),
+            subname = formData.get('subname');
+
         return this.update({
             [`data.skills.${skillId}`]: {},
             [`data.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
@@ -446,7 +446,7 @@ export class ActorStarfinder extends Actor {
                 default: "cancel"
             }).render(true);
         } else {
-            this.rollSkillCheck(skillId, skl, options);            
+            this.rollSkillCheck(skillId, skl, options);
         }
     }
 
@@ -456,7 +456,7 @@ export class ActorStarfinder extends Actor {
      * @param {String} abilityId The ability id (e.g. "str")
      * @param {Object} options Options which configure how ability tests are rolled
      */
-    rollAbility(abilityId, options={}) {
+    rollAbility(abilityId, options = {}) {
         const label = CONFIG.STARFINDER.abilities[abilityId];
         const abl = this.data.data.abilities[abilityId];
 
@@ -465,7 +465,7 @@ export class ActorStarfinder extends Actor {
             parts: ["@mod"],
             data: { mod: abl.mod },
             title: `${label} Ability Check`,
-            speaker: ChatMessage.getSpeaker({actor: this})
+            speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
 
@@ -484,7 +484,7 @@ export class ActorStarfinder extends Actor {
             parts: ["@mod"],
             data: { mod: save.bonus },
             title: `${label} Save`,
-            speaker: ChatMessage.getSpeaker({actor: this})
+            speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
 
@@ -574,6 +574,43 @@ export class ActorStarfinder extends Actor {
         }
     }
 
+    async removeFromCrew() {
+        await this.unsetFlag('starfinder', 'crewMember');
+    }
+
+    async setCrewMemberRole(shipId) {
+        const flags = this.getFlag("starfinder", "crewMember") || { shipId: shipId, role: "" };
+        let data = {
+            actor: this,
+            config: CONFIG.STARFINDER,
+            flags: flags
+        }
+
+        let html = await renderTemplate("systems/starfinder/templates/apps/starship-roles.html", data);
+
+        return new Promise(resolve => {
+            new Dialog({
+                title: `${data.actor.name}: Assign Role`,
+                content: html,
+                buttons: {
+                    submit: {
+                        label: "Submit",
+                        callback: html => {
+                            let role = $(html.find('#roles')).val();
+                            this.setFlag('starfinder', 'crewMember', { "role": role });
+                            resolve(role);
+                        }
+                    },
+                    cancel: {
+                        icon: '<i class="fas fa-times"></i>',
+                        label: "Cancel"
+                    }
+                },
+                default: "submit"
+            }, { classes: ['starfinder', 'dialog'] }).render(true);
+        });
+    }
+
     /**
      * Take a long nights rest, recovering HP, SP, RP, resources, and spell slots
      * @param {boolean} dialog  Present a confirmation dialog window whether or not to take a long rest
@@ -593,9 +630,9 @@ export class ActorStarfinder extends Actor {
         }
 
         // Recover HP, SP, and RP
-        let dhp = data.attributes.hp.max === data.attributes.hp.value ? 0 : 
+        let dhp = data.attributes.hp.max === data.attributes.hp.value ? 0 :
             data.details.level.value > data.attributes.hp.max ?
-            data.attributes.hp.max - data.attributes.hp.value : data.details.level.value;
+                data.attributes.hp.max - data.attributes.hp.value : data.details.level.value;
         let dsp = data.attributes.sp.max - data.attributes.sp.value;
         let drp = data.attributes.rp.max - data.attributes.rp.value;
         updateData['data.attributes.hp.value'] = Math.min(data.attributes.hp.value + data.details.level.value, data.attributes.hp.max);

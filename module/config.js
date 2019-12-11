@@ -790,7 +790,7 @@ STARFINDER.spellLevels = {
       "captain": "Captain",
       "engineers": "Engineers",
       "gunners": "Gunners",
-      "scenceOfficers": "Science Officers",
+      "scienceOfficers": "Science Officers",
       "passengers": "Passengers"
   };
 
