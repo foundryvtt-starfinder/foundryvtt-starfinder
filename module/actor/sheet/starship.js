@@ -77,12 +77,12 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         
         // TODO: There are two more roles added in the Character Operations Manual that need to be added.
         const crew = {
-            pilot: { label: "Pilot", actors: [], dataset: { type: "shipsCrew" }},
-            captain: { label: "Captain", actors: [], dataset: { type: "shipsCrew" }},
-            engineers: { label: "Engineers", actors: [], dataset: { type: "shipsCrew" }},
-            gunners: { label: "Gunners", actors: [], dataset: { type: "shipsCrew" }},            
-            scienceOfficers: { label: "Science Officers", actors: [], dataset: { type: "shipsCrew" }},
-            passengers: { label: "Passengers", actors: [], dataset: { type: "shipsCrew" }}
+            pilot: { label: "Pilot", actors: [], dataset: { type: "shipsCrew", role: "pilot" }},
+            captain: { label: "Captain", actors: [], dataset: { type: "shipsCrew", role: "captain" }},
+            gunners: { label: "Gunners", actors: [], dataset: { type: "shipsCrew", role: "gunners" }},
+            engineers: { label: "Engineers", actors: [], dataset: { type: "shipsCrew", role: "engineers" }},
+            scienceOfficers: { label: "Science Officers", actors: [], dataset: { type: "shipsCrew", role: "scienceOfficers" }},
+            passengers: { label: "Passengers", actors: [], dataset: { type: "shipsCrew", role: "passengers" }}
         }
 
         let [captian, engineers, gunners, pilot, scienceOfficers, passengers] = starfinder.shipsCrew.members.reduce((arr, id) => {
@@ -165,8 +165,121 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
 
         if (!this.options.editable) return;
 
-        html.find('.crew-name').click(this._onChangeCrewRole.bind(this));
+        //html.find('.crew-name').click(this._onChangeCrewRole.bind(this));
         html.find('.crew-delete').click(this._onRemoveFromCrew.bind(this));
+
+        let handler = ev => this._onDragCrewStart(ev);
+        html.find('li.crew').each((i, li) => {
+            li.setAttribute("draggable", true);
+            li.addEventListener("dragstart", handler, false);
+        });
+        
+        html.find('.crew-list').each((i, li) => {
+            li.addEventListener("dragover", this._onCrewDragOver.bind(this), false);
+            li.addEventListener("drop", this._onCrewDrop.bind(this), false);
+        });
+
+        html.find('li.crew-header').each((i, li) => {
+            li.addEventListener("dragenter", this._onCrewDragEnter, false);
+            li.addEventListener("dragleave", this._onCrewDragLeave, false);
+        });
+    }
+
+    /**
+     * Handles drop events for the Crew list
+     * 
+     * @param {Event} event The originating drop event
+     */
+    async _onCrewDrop(event) {
+        event.preventDefault();
+
+        $(event.target).css('background', '');
+
+        let data;
+        try {
+            data = JSON.parse(event.dataTransfer.getData('text/plain'));
+            // Item's should have already been handled by the base class. 
+            // We only want to continue if there is an Actor being dropped
+            // on the sheet.
+            
+            if (data.type !== "Actor") return;
+        } catch (err) {
+            return false;
+        }
+
+        if (!data.id) return false;
+
+        let c = this.actor.getFlag("starfinder","shipsCrew");
+        let crew;
+
+        if (c) crew = duplicate(c);
+        else crew = {
+            members: []
+        };
+
+        if (!crew.members) {
+            crew.members = [data.id];
+        } else if (!crew.members.includes(data.id)) {
+            crew.members.push(data.id);
+        }
+        
+        let actor = game.actors.get(data.id);
+
+        if (!actor) return false;
+
+        let role = event.target.dataset.role;
+
+        await actor.setCrewMemberRole(this.actor.id, role);
+        this.actor.update({
+            "flags.starfinder.shipsCrew": crew
+        }).then(this.render(false));
+
+        return false;
+    }
+
+    /**
+     * Handles dragenter for the crews tab
+     * @param {Event} event The originating dragenter event
+     */
+    _onCrewDragEnter(event) {
+        $(event.target).css('background', "rgba(0,0,0,0.3)");
+    }
+
+    /**
+     * Handles dragleave for the crews tab
+     * @param {Event} event The originating dragleave event
+     */
+    _onCrewDragLeave(event) {
+        $(event.target).css('background', '');
+    }
+
+    /**
+     * Handle dragging crew members on the sheet.
+     * 
+     * @param {Event} event Originating dragstart event
+     */
+    _onDragCrewStart(event) {
+        const actorId = event.currentTarget.dataset.actorId;
+        const actor = game.actors.get(actorId);
+
+        const dragData = {
+            type: "Actor",
+            id: actor.id,
+            data: actor.data
+        };
+
+        if (this.actor.isToken) dragData.tokenId = actor.token.id;
+        event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+    }
+
+    /**
+     * Handles ondragover for crew drag-n-drop
+     * 
+     * @param {Event} event Orgininating ondragover event
+     */
+    _onCrewDragOver(event) {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = "move";
     }
 
     /**
@@ -180,8 +293,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         const actorId = event.currentTarget.parentElement.dataset.actorId;
         const actor = game.actors.get(actorId);
 
-        let role = await actor.setCrewMemberRole(this.actor.id);
-        
+        await actor.setCrewMemberRole(this.actor.id);        
     }
 
     /**
@@ -194,8 +306,6 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
         const actor = game.actors.get(actorId);
-
-        console.log(actorId, actor);
 
         await actor.removeFromCrew();
         
@@ -223,50 +333,5 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         if (tier) formData[v] = tier < 1 ? tier : parseInt(tier);
 
         super._updateObject(event, formData);
-    }
-
-    /**
-     * Handle dropped data on the Actor sheet
-     * @param {Event} event The drop event
-     */
-    async _onDrop(event) {
-        // Process an Item being dropped on the sheet first
-        super._onDrop(event);
-
-        let data;
-        try {
-            data = JSON.parse(event.dataTransfer.getData('text/plain'));
-            // Item's should have already been handled by the base class. 
-            // We only want to continue if there is an Actor being dropped
-            // on the sheet.
-            
-            if (data.type !== "Actor") return;
-        } catch (err) {
-            return false;
-        }
-
-        if (!data.id) return false;
-
-        let c = this.actor.getFlag("starfinder","shipsCrew");
-        let crew;
-
-        if (c) crew = duplicate(c);
-        else crew = {};
-
-        if (!crew.members) {
-            crew.members = [data.id];
-        } else {
-            crew.members.push(data.id);
-        }
-
-        await this.actor.setFlag("starfinder", "shipsCrew", crew);
-
-        let actor = game.actors.get(data.id);
-
-        if (!actor) return false;
-
-        await actor.setFlag("starfinder", "crewMember", { shipId: this.actor.id, role: "passengers"});
-
-        return false;
     }
 }

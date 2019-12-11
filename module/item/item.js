@@ -84,6 +84,8 @@ export class ItemStarfinder extends Item {
 
       let area = item.data.area || {};
       if (["none", "touch", "personal"].includes(area.units)) area.value = null;
+      if (typeof area.value === 'number' && area.value === 0) area.value = null;
+
       labels.area = [area.value, C.distanceUnits[area.units], C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]];      
 
       // Range Label

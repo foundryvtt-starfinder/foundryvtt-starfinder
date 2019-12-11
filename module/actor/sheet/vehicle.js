@@ -5,7 +5,7 @@ export class ActorSheetStarfinderVehicle extends ActorSheetStarfinder {
         return mergeObject(super.defaultOptions, {
             classes: ["starfinder", "sheet", "actor", "vehicle"],
             width: 600,
-            height: 660
+            height: 685
         });
     }
 
@@ -20,8 +20,6 @@ export class ActorSheetStarfinderVehicle extends ActorSheetStarfinder {
         let lvl = parseFloat(data.data.details.level || 0);
         let levels = { 0: "0", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
         data.labels["level"] = lvl >= 1 ? String(lvl) : levels[lvl] || 1;
-
-        console.log(data);
 
         return data;
     }

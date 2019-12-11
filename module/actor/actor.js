@@ -578,36 +578,10 @@ export class ActorStarfinder extends Actor {
         await this.unsetFlag('starfinder', 'crewMember');
     }
 
-    async setCrewMemberRole(shipId) {
-        const flags = this.getFlag("starfinder", "crewMember") || { shipId: shipId, role: "" };
-        let data = {
-            actor: this,
-            config: CONFIG.STARFINDER,
-            flags: flags
-        }
-
-        let html = await renderTemplate("systems/starfinder/templates/apps/starship-roles.html", data);
-
-        return new Promise(resolve => {
-            new Dialog({
-                title: `${data.actor.name}: Assign Role`,
-                content: html,
-                buttons: {
-                    submit: {
-                        label: "Submit",
-                        callback: html => {
-                            let role = $(html.find('#roles')).val();
-                            this.setFlag('starfinder', 'crewMember', { "role": role });
-                            resolve(role);
-                        }
-                    },
-                    cancel: {
-                        icon: '<i class="fas fa-times"></i>',
-                        label: "Cancel"
-                    }
-                },
-                default: "submit"
-            }, { classes: ['starfinder', 'dialog'] }).render(true);
+    async setCrewMemberRole(shipId, role) {
+        return this.setFlag('starfinder', 'crewMember', {
+            shipId: shipId,
+            role: role
         });
     }
 

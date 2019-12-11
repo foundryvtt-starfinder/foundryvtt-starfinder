@@ -369,10 +369,10 @@
         <div class="tab crew" data-group="primary" data-tab="crew">
             <ol class="crew-list">
                 {{#each crew as |role|}}
-                <li class="crew flexrow crew-header">{{role.label}}</li>
+                <li class="flexrow crew-header {{role.cssClass}}" {{#each role.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>{{role.label}}</li>
                 <ol class="crew-item-list">
                     {{#each role.actors as |actor a|}}
-                    <li class="crew flexrow" data-actor-id="{{actor.id}}">
+                    <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
                         <div class="crew-name flexrow">
                             <div class="crew-image" style="background-image: url({{actor.data.img}}"></div>
                             <h4>{{actor.name}}</h4>

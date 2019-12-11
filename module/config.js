@@ -244,6 +244,7 @@ STARFINDER.weaponProperties = {
 };
 
 STARFINDER.spellAreaShapes = {
+    "": "",
     "cone": "Cone",
     "cylinder": "Cylinder",
     "line": "Line",
@@ -253,6 +254,7 @@ STARFINDER.spellAreaShapes = {
 };
 
 STARFINDER.spellAreaEffects = {
+    "": "",
     "burst": "Burst",
     "emanation": "Emanation",
     "spread": "Spread"
@@ -344,25 +346,25 @@ STARFINDER.spellLevels = {
    * @type {Object}
    */
   STARFINDER.actorSizes = {
-      "fine": "Fine",
-      "diminutive": "Diminutive",
-      "tiny": "Tiny",
-      "small": "Small",
-      "medium": "Medium",
-      "large": "Large",
-      "huge": "Huge",
-      "gargantuan": "Gargantuan",
-      "colossal": "Colossal"
+      "fine": "STARFINDER.SizeFine",
+      "diminutive": "STARFINDER.SizeDim",
+      "tiny": "STARFINDER.SizeTiny",
+      "small": "STARFINDER.SizeSmall",
+      "medium": "STARFINDER.SizeMedium",
+      "large": "STARFINDER.SizeLarge",
+      "huge": "STARFINDER.SizeHuge",
+      "gargantuan": "STARFINDER.SizeGargantuan",
+      "colossal": "STARFINDER.SizeColossal"
   };
 
   STARFINDER.starshipSizes = {
-      "tiny": "Tiny",
-      "small": "Small",
-      "medium": "Medium",
-      "large": "Large",
-      "huge": "Huge",
-      "gargantuan": "Gargantuan",
-      "colossal": "Colossal"
+      "tiny": "STARFINDER.SizeTiny",
+      "small": "STARFINDER.SizeSmall",
+      "medium": "STARFINDER.SizeMedium",
+      "large": "STARFINDER.SizeLarge",
+      "huge": "STARFINDER.SizeHuge",
+      "gargantuan": "STARFINDER.SizeGargantuan",
+      "colossal": "STARFINDER.SizeColossal"
   };
 
   /**
@@ -792,6 +794,34 @@ STARFINDER.spellLevels = {
       "gunners": "Gunners",
       "scienceOfficers": "Science Officers",
       "passengers": "Passengers"
+  };
+
+  STARFINDER.vehicleSizes = {
+      "diminutive": "STARFINDER.SizeDim",
+      "tiny": "STARFINDER.SizeTiny",
+      "small": "STARFINDER.SizeSmall",
+      "medium": "STARFINDER.SizeMedium",
+      "large": "STARFINDER.SizeLarge",
+      "huge": "STARFINDER.SizeHuge",
+      "gargantuan": "STARFINDER.SizeGargantuan",
+      "colossal": "STARFINDER.SizeColossal"
+  };
+
+  STARFINDER.vehicleTypes = {
+      "land": "Land",
+      "water": "Water",
+      "hover": "Hover",
+      "landW": "Land and water",
+      "air": "Air",
+      "landA": "Land and air"
+  };
+
+  STARFINDER.vehicleCoverTypes = {
+      "none": "None",
+      "cover": "Cover",
+      "soft": "Soft cover",
+      "partial": "Partial cover",
+      "total": "Total cover"
   };
 
   STARFINDER.CHARACTER_EXP_LEVELS = [
