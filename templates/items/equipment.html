@@ -110,6 +110,17 @@
                 </div>
             </div>
 
+            {{#unless isPowerArmor}}
+            {{!-- Speed Adjustment --}}
+            <div class="form-group">
+                <label>Speed Adjustment</label>
+                <div class="form-fields">
+                    <input type="text" name="data.armor.speedAdjust" value="{{data.armor.speedAdjust}}" data-dtype="Number" placeholder="0" />
+                    <span>Feet</span>
+                </div>
+            </div>
+            {{/unless}}
+
             {{!-- Power Armor Specific --}}
             {{#if isPowerArmor}}
             <h3 class="form-header">Power Armror Details</h3>

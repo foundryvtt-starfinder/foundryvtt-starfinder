@@ -29,6 +29,7 @@
 
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+        <a class="item" data-tab="attacks">Attacks</a>
         <a class="item" data-tab="notes">{{ localize "STARFINDER.Notes" }}</a>
     </nav>
 
@@ -181,6 +182,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="tab attacks" data-group="primary" data-tab="attacks">
+            <h3 class="form-header">Attacks and Modifiers</h3>
+            <p class="notification warning">This is still to-do</p>
         </div>
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
             {{editor content=data.details.description.value target="data.details.description.value" button=true owner=owner editable=editable}}
