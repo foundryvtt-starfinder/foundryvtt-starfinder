@@ -1,0 +1,41 @@
+@import './variables.less';
+
+.starfinder.sheet.actor.vehicle {
+    min-width: 600px;
+    min-height: 685px;
+
+    .summary li input[type="text"] {
+        width: 66%;
+    }
+
+    .form-group {
+        padding: 0 5px;
+
+        .form-fields input[type="text"], 
+        .form-fields select {
+            border: 1px solid @colorTan;
+            background: rgba(0, 0, 0, 0.05);
+          }
+    }
+
+    .traits {
+        margin: 0;
+    }
+
+    .sheet-body {
+        ul.attributes {
+            overflow: hidden;
+            li.attribute {
+                height: 95px;
+
+                .attribute-value span {
+                    font-size: 24px;
+                }
+
+                .attribute-footer input {
+                    max-width: 33%;
+                }
+            }
+        }
+    }
+}

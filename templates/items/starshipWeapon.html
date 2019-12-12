@@ -1,0 +1,152 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    {{lookup config.starshipWeaponTypes data.weaponType }}
+                </li>
+                <li>
+                    {{lookup config.starshipWeaponClass data.class }}
+                </li>
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source" />
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "STARFINDER.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/starfinder/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">Weapon Details</h3>
+
+            {{!-- Weapon Type --}}
+            <div class="form-group">
+                <label>Weapon Type</label>
+                <select name="data.weaponType">
+                    {{#select data.weaponType}}
+                    {{#each config.starshipWeaponTypes as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Weapon Class --}}
+            <div class="form-group">
+                <label>Weapon Class</label>
+                <select name="data.class">
+                    {{#select data.class}}
+                    {{#each config.starshipWeaponClass as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Equipment Status --}}
+            <div class="form-group stacked">
+                <label>Weapon Status</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.mount.mounted" {{checked data.mount.mounted}} /> Mounted
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.mount.activated" {{checked data.equipped}} /> Activated
+                </label>
+                <label>Weapon Arc</label>
+                <select name="data.mount.arc">
+                    {{#select data.mount.arc}}
+                    <option value=""></option>
+                    {{#each config.starshipArcs as |arc a|}}
+                    <option value="{{a}}">{{arc}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Weapon Properties --}}
+            <div class="form-group stacked weapon-properties">
+                <label>Weapon Properties</label>
+                {{#each config.starshipWeaponProperties as |name prop|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.special.{{prop}}" {{checked (lookup ../data.special prop)}} />
+                    {{ name }}
+                </label>
+                {{/each}}
+            </div>
+
+            {{!-- Weapon Costs --}}
+            <div class="form-group">
+                <label>Power Cost</label>
+                <input type="text" value="{{data.pcu}}" name="data.pcu" data-dtype="Number" />
+            </div>
+            <div class="form-group">
+                <label>Cost (in BP)</label>
+                <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number" />
+            </div>
+
+            {{!-- Weapon speed (only applies to tracking weapons) --}}
+            <div class="form-group">
+                <label>Speed</label>
+                <input type="text" name="data.speed" value="{{data.speed}}" data-dtype="Number" />
+            </div>
+
+            <h3 class="form-header">Weapon Attack</h3>
+
+            <div class="form-group">
+                <label>Range</label>
+                <select name="data.range">
+                    {{#select data.range}}
+                    {{#each config.starshipWeaponRanges as |range r|}}
+                    <option value="{{r}}">{{range}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Attack Bonus</label>
+                <input type="text" name="data.attackBonus" value="{{data.attackBonus}}" />
+            </div>
+
+            {{!-- Damage Formula --}}
+            <h4 class="damage-header">
+                Damage Formula
+                <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
+            </h4>
+            <ol class="damage-parts form-group">
+                {{#each data.damage.parts as |part i| }}
+                <li class="damage-part flexrow" data-damage-part="{{i}}">
+                    <input type="text" name="data.damage.parts.{{i}}.0" value="{{lookup this "0"}}" />
+                    <a class="damage-control delete-damage"><i class="fas fa-minus"></i></a>
+                </li>
+                {{/each}}
+            </ol>
+        </div>
+
+    </section>
+</form>

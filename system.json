@@ -4,16 +4,25 @@
     "description": "A game system for running Starfinder in the Foundry VTT environment.",
     "version": "0.1.0",
     "author": "wildj79",
-    "scripts": ["starfinder.js"],
+    "templateVersion": 2,
+    "scripts": [],
+    "esmodules": ["starfinder.js"],
     "styles": ["starfinder.css"],
     "packs": [],
-    "languages": [],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
     "socket": true,
     "initiative": "1d20 + @abilities.dex.mod + @attributes.init.value",
     "gridDistance": 5,
     "gridUnits": "ft",
-    "primaryTokenAttribute": null,
-    "minimumCoreVersion": "0.3.9",
+    "primaryTokenAttribute": "attributes.hp",
+    "secondaryTokenAttribute": "attributes.sp",
+    "minimumCoreVersion": "0.4.1",
     "url": "https://github.com/wildj79/foundryvtt-starfinder",
     "manifest": "https://raw.githubusercontent.com/wildj79/foundryvtt-starfinder/master/system.json",
     "download": ""

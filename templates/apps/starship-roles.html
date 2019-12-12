@@ -1,0 +1,14 @@
+<form id="starship-roles" autocomplete="off">
+    <div class="form-group">
+        <label>Ship's Role</label>
+        <div class="form-fields">
+            <select id="roles">
+                {{#select flags.role}}
+                {{#each config.starshipRoles as |role r|}}
+                <option value="{{r}}">{{role}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+</form>
