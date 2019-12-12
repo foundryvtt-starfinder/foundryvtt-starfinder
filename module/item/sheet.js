@@ -1,0 +1,240 @@
+/**
+ * Override and extend the core ItemSheet implementation to handle Starfinder specific item types
+ * @type {ItemSheet}
+ */
+export class ItemSheetStarfinder extends ItemSheet {
+    constructor(...args) {
+      super(...args);
+  
+      /**
+       * The tab being browsed
+       * @type {string}
+       */
+      this._sheetTab = null;
+  
+      /**
+       * The scroll position on the active tab
+       * @type {number}
+       */
+      this._scrollTab = 100;
+    }
+  
+    /* -------------------------------------------- */
+  
+      static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+        width: 560,
+        height: 420,
+        classes: ["starfinder", "sheet", "item"],
+        resizable: false
+      });
+    }
+  
+    /* -------------------------------------------- */
+  
+    /**
+     * Return a dynamic reference to the HTML template path used to render this Item Sheet
+     * @return {string}
+     */
+    get template() {
+      const path = "systems/starfinder/templates/items";
+      return `${path}/${this.item.data.type}.html`;
+    }
+  
+    /* -------------------------------------------- */
+  
+    /**
+     * Prepare item sheet data
+     * Start with the base item data and extending with additional properties for rendering.
+     */
+    getData() {
+      const data = super.getData();
+      data.labels = this.item.labels;
+  
+      // Include CONFIG values
+      data.config = CONFIG.STARFINDER;
+  
+      // Item Type, Status, and Details
+      data.itemType = data.item.type.titleCase();
+      data.itemStatus = this._getItemStatus(data.item);
+      data.itemProperties = this._getItemProperties(data.item);
+      data.isPhysical = data.item.data.hasOwnProperty("quantity");
+      data.hasLevel = data.item.data.hasOwnProperty("level") && data.item.type !== "spell";
+      data.hasHands = data.item.data.hasOwnProperty("hands");
+      data.hasCapacity = data.item.data.hasOwnProperty("capacity");
+
+      // Armor specific details
+      data.isPowerArmor = data.item.data.hasOwnProperty("armor") && data.item.data.armor.type === 'power';
+  
+      // Action Details
+      data.hasAttackRoll = this.item.hasAttack;
+      data.isHealing = data.item.data.actionType === "heal";
+  
+      // Spell-specific data
+      if ( data.item.type === "spell" ) {
+        let save = data.item.data.save;
+        if ( this.item.isOwned && (save.type && !save.dc) ) {
+          let actor = this.item.actor;
+          let abl = actor.data.data.attributes.keyability || "int";
+          save.dc = 10 + data.item.data.level + actor.data.data.abilities[abl].mod;
+        }
+      }
+      
+      return data;
+    }
+  
+    /* -------------------------------------------- */
+  
+    /**
+     * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet
+     * @return {string}
+     * @private
+     */
+    _getItemStatus(item) {
+      if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped ? "Equipped" : "Unequipped";
+      else if (item.type === "starshipWeapon") return item.data.mount.mounted ? "Mounted" : "Not Mounted";
+      else if ( item.type === "augmentation" ) return `${item.data.type} (${item.data.system})`;
+    }
+  
+    /* -------------------------------------------- */
+  
+    /**
+     * Get the Array of item properties which are used in the small sidebar of the description tab
+     * @return {Array}
+     * @private
+     */
+    _getItemProperties(item) {
+      const props = [];
+      const labels = this.item.labels;
+  
+      if ( item.type === "weapon" ) {
+        props.push(...Object.entries(item.data.properties)
+          .filter(e => e[1] === true)
+          .map(e => CONFIG.STARFINDER.weaponProperties[e[0]]));
+      }
+  
+      else if ( item.type === "spell" ) {
+        props.push(
+          labels.components,
+          labels.materials,
+          item.data.concentration ? "Concentration" : null,
+          item.data.sr ? "Spell Resistence" : null,
+          item.data.dismissible ? "Dismissible" : null
+        )
+      }
+  
+      else if ( item.type === "equipment" ) {
+        props.push(CONFIG.STARFINDER.armorTypes[item.data.armor.type]);
+        props.push(labels.armor);
+      }
+  
+      else if ( item.type === "feat" ) {
+        props.push(labels.featType);
+      }
+
+      else if (item.type === "starshipWeapon") {
+        props.push(CONFIG.STARFINDER.starshipWeaponTypes[item.data.weaponType]);
+        props.push(CONFIG.STARFINDER.starshipWeaponClass[item.data.class]);
+      }
+  
+      // Action type
+      if ( item.data.actionType ) {
+        props.push(CONFIG.STARFINDER.itemActionTypes[item.data.actionType]);
+      }
+  
+      // Action usage
+      if ( (item.type !== "weapon") && item.data.activation && !isObjectEmpty(item.data.activation) ) {
+        props.push(
+          labels.activation,
+          labels.range,
+          labels.target,
+          labels.duration
+        )
+      }
+      return props.filter(p => !!p);
+    }
+  
+    /* -------------------------------------------- */
+  
+    setPosition(position={}) {
+      if ( this._sheetTab === "details" ) position.height = "auto";
+      return super.setPosition(position);
+    }
+  
+    /* -------------------------------------------- */
+    /*  Form Submission                             */
+      /* -------------------------------------------- */
+  
+    /**
+     * Extend the parent class _updateObject method to ensure that damage ends up in an Array
+     * @private
+     */
+    _updateObject(event, formData) {
+  
+      // Handle Damage Array
+      let damage = Object.entries(formData).filter(e => e[0].startsWith("data.damage.parts"));
+      formData["data.damage.parts"] = damage.reduce((arr, entry) => {
+        let [i, j] = entry[0].split(".").slice(3);
+        if ( !arr[i] ) arr[i] = [];
+        arr[i][j] = entry[1];
+        return arr;
+      }, []);
+  
+      // Update the Item
+      super._updateObject(event, formData);
+    }
+  
+    /* -------------------------------------------- */
+  
+    /**
+     * Activate listeners for interactive item sheet events
+     */
+    activateListeners(html) {
+      super.activateListeners(html);
+  
+      // Activate tabs
+      new Tabs(html.find(".tabs"), {
+        initial: this["_sheetTab"],
+        callback: clicked => {
+          this["_sheetTab"] = clicked.data("tab");
+          this.setPosition();
+        }
+      });
+  
+      // Save scroll position
+      html.find(".tab.active")[0].scrollTop = this._scrollTab;
+      html.find(".tab").scroll(ev => this._scrollTab = ev.currentTarget.scrollTop);
+  
+      // Modify damage formula
+      html.find(".damage-control").click(this._onDamageControl.bind(this));
+    }
+  
+    /* -------------------------------------------- */
+  
+    /**
+     * Add or remove a damage part from the damage formula
+     * @param {Event} event     The original click event
+     * @return {Promise}
+     * @private
+     */
+    async _onDamageControl(event) {
+      event.preventDefault();
+      const a = event.currentTarget;
+  
+      // Add new damage component
+      if ( a.classList.contains("add-damage") ) {
+        await this._onSubmit(event);  // Submit any unsaved changes
+        const damage = this.item.data.data.damage;
+        return this.item.update({"data.damage.parts": damage.parts.concat([["", ""]])});
+      }
+  
+      // Remove a damage component
+      if ( a.classList.contains("delete-damage") ) {
+        await this._onSubmit(event);  // Submit any unsaved changes
+        const li = a.closest(".damage-part");
+        const damage = duplicate(this.item.data.data.damage);
+        damage.parts.splice(Number(li.dataset.damagePart), 1);
+        return this.item.update({"data.damage.parts": damage.parts});
+      }
+    }
+  }

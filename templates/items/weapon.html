@@ -1,0 +1,98 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    {{lookup config.weaponTypes data.weaponType }}
+                </li>
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "STARFINDER.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/starfinder/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">Weapon Details</h3>
+
+            {{!-- Weapon Type --}}
+            <div class="form-group">
+                <label>Weapon Type</label>
+                <select name="data.weaponType">
+                    {{#select data.weaponType}}
+                    {{#each config.weaponTypes as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Equipment Status --}}
+            <div class="form-group stacked">
+                <label>Equipment Status</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> Proficient
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> Equipped
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> Identified
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> Attuned
+                </label>
+            </div>
+
+            {{!-- Weapon Properties --}}
+            <div class="form-group stacked weapon-properties">
+                <label>Weapon Properties</label>
+                {{#each config.weaponProperties as |name prop|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../data.properties prop)}}/> {{ name }}
+                </label>
+                {{/each}}
+            </div>
+
+            <h3 class="form-header">Weapon Usage</h3>
+
+            {{!-- Item Activation Template --}}
+            {{> "systems/starfinder/templates/items/parts/item-activation.html"}}
+
+            <h3 class="form-header">Weapon Attack</h3>
+
+            {{!-- Item Action Template --}}
+            {{> "systems/starfinder/templates/items/parts/item-action.html"}}
+
+            <h3 class="form-header">{{ localize "STARFINDER.CapacityUsage" }}</h3>
+            {{> "systems/starfinder/templates/items/parts/item-capacity.html"}}
+        </div>
+        
+    </section>
+</form>

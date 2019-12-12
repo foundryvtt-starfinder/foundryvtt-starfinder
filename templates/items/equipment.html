@@ -1,0 +1,183 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    {{lookup config.equipmentTypes data.armor.type }}
+                </li>
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "STARFINDER.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/starfinder/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">Equipment Details</h3>
+
+            {{!-- Equipment Type --}}
+            <div class="form-group">
+                <label>Equipment Type</label>
+                <select name="data.armor.type">
+                    {{#select data.armor.type}}
+                    <option value=""></option>
+                    {{#each config.armorTypes as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Equipment Status --}}
+            <div class="form-group stacked">
+                <label>Equipment Status</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> Proficient
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> Equipped
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> Identified
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> Attuned
+                </label>
+            </div>
+
+            {{!-- Armor Class --}}
+            <div class="form-group">
+                <label>Energy Armor Class</label>
+                <div class="form-fields">
+                   <input type="text" name="data.armor.eac" value="{{data.armor.eac}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Kinetic Armor Class</label>
+                <div class="form-fields">
+                   <input type="text" name="data.armor.kac" value="{{data.armor.kac}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            {{!-- Dexterity Modifier --}}
+            <div class="form-group">
+                <label>Max. Dexterity Modifier</label>
+                <div class="form-fields">
+                   <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="Unlimited"/>
+                </div>
+            </div>
+
+            {{!-- Armor Check Penalty --}}
+            <div class="form-group">
+                <label>Armor Check Penalty</label>
+                <div class="form-fields">
+                    <input type="text" name="data.armor.acp" value="{{data.armor.acp}}" data-dtype="Number" placeholder="0" />
+                </div>
+            </div>
+
+            {{!-- Updgrade Slots --}}
+            <div class="form-group">
+                <label>Updgrade Slots</label>
+                <div class="form-fields">
+                    <input type="text" name="data.armor.upgradeSlots" value="{{data.armor.upgradeSlots}}" data-dtype="Number" placeholder="0" />
+                </div>
+            </div>
+
+            {{#unless isPowerArmor}}
+            {{!-- Speed Adjustment --}}
+            <div class="form-group">
+                <label>Speed Adjustment</label>
+                <div class="form-fields">
+                    <input type="text" name="data.armor.speedAdjust" value="{{data.armor.speedAdjust}}" data-dtype="Number" placeholder="0" />
+                    <span>Feet</span>
+                </div>
+            </div>
+            {{/unless}}
+
+            {{!-- Power Armor Specific --}}
+            {{#if isPowerArmor}}
+            <h3 class="form-header">Power Armror Details</h3>
+
+            {{!-- Required Strength --}}
+            <div class="form-group">
+                <label>Strength</label>
+                <div class="form-fields">
+                   <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" placeholder="None"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{ localize "STARFINDER.Speed" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.speed" value="{{data.speed}}" placeholder="30 ft" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{ localize "STARFINDER.Size" }}</label>
+                <div class="form-fields">
+                    <select name="data.size">
+                        {{#select data.size}}
+                        {{#each config.actorSizes as |size s|}}
+                        <option value="{{s}}">{{size}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Reach</label>
+                <div class="form-fields">
+                    <input type="text" name="data.reach" value="{{data.reach}}" placeholder="5 ft." />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Weapon Slots</label>
+                <div class="form-fields">
+                    <input type="text" name="data.weaponSlots" value="{{data.weaponSlots}}" data-dtype="Number" placeholder="-" />
+                </div>
+            </div>
+
+            {{/if}}
+
+            <h3 class="form-header">Equipment Usage</h3>
+
+            {{!-- Item Activation Template --}}
+            {{> "systems/starfinder/templates/items/parts/item-activation.html"}}
+
+            <h3 class="form-header">Equipment Action</h3>
+
+            {{!-- Item Action Template --}}
+            {{> "systems/starfinder/templates/items/parts/item-action.html"}}
+        </div>
+    </section>
+</form>
