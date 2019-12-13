@@ -502,14 +502,32 @@ export class ActorStarfinder extends Actor {
         let value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
         const promises = [];
         for (let t of canvas.tokens.controlled) {
+            if (t.actor.data.type === "starship") {
+                ui.notifications.warn("Cannot currently apply damage to starships using the context menu");
+                continue;
+            } else if (t.actor.data.type === "vehicle") {
+                ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
+                continue;
+            }
+
             let a = t.actor,
                 hp = a.data.data.attributes.hp,
+                sp = a.data.data.attributes.sp,
                 tmp = parseInt(hp.temp) | 0,
-                dt = value > 0 ? Math.min(tmp, value) : 0;
+                dt = value > 0 ? Math.min(tmp, value) : 0,
+                tmpd = tmp - dt,
+                // stamina doesn't get healed like hit points do, so skip it if we're appling 
+                // healing instead of damage.
+                spd = value > 0 ? Math.clamped(sp.value - (value - dt), 0, sp.max) : sp.value;
+
+            dt = value > 0 ? value - Math.clamped((value - dt) - sp.value, 0, value) : 0;
+
+            let hpd = Math.clamped(hp.value - (value - dt), 0, hp.max);
 
             promises.push(t.actor.update({
-                "data.attributes.hp.temp": tmp - dt,
-                "data.attributes.hp.value": Math.clamped(hp.value - (value - dt), 0, hp.max)
+                "data.attributes.hp.temp": tmpd,
+                "data.attributes.sp.value": spd,
+                "data.attributes.hp.value": hpd
             }));
         }
 
