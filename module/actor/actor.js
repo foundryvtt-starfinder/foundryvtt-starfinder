@@ -13,8 +13,9 @@ export class ActorStarfinder extends Actor {
      * @param {Object} actorData The data for the actor
      * @returns {Object} The actors data
      */
-    prepareData(actorData) {
-        actorData = super.prepareData(actorData);
+    prepareData() {
+        super.prepareData();
+        const actorData = this.data;
         const data = actorData.data;
         const flags = actorData.flags;
 
@@ -60,8 +61,6 @@ export class ActorStarfinder extends Actor {
 
         // CMD or AC Vs Combat Maneuvers as it's called in starfinder
         data.attributes.cmd.value = 8 + data.attributes.kac.value;
-
-        return actorData;
     }
 
     /**

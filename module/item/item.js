@@ -42,35 +42,38 @@ export class ItemStarfinder extends Item {
   /**
    * Augment the basic Item data model with additional dynamic data.
    */
-  prepareData(item) {
-    super.prepareData(item);
+  prepareData() {
+    super.prepareData();
     const C = CONFIG.STARFINDER;
     const labels = {};
+    const itemData = this.data;
+    const actorData = this.actor ? this.actor.data : {};
+    const data = itemData.data;
 
     // Spell Level,  School, and Components
-    if ( item.type === "spell" ) {
-      labels.level = C.spellLevels[item.data.level];
-      labels.school = C.spellSchools[item.data.school];
+    if ( itemData.type === "spell" ) {
+      labels.level = C.spellLevels[data.level];
+      labels.school = C.spellSchools[data.school];
     }
 
     // Feat Items
-    else if ( item.type === "feat" ) {
-      const act = item.data.activation;
-      if ( act && act.type ) labels.featType = item.data.damage.length ? "Attack" : "Action";
+    else if ( itemData.type === "feat" ) {
+      const act = data.activation;
+      if ( act && act.type ) labels.featType = data.damage.length ? "Attack" : "Action";
       else labels.featType = "Passive";
     }
 
     // Equipment Items
-    else if ( item.type === "equipment" ) {
-      labels.eac = item.data.armor.eac ? `${item.data.armor.eac} EAC`: "";
-      labels.kac = item.data.armor.kac ? `${item.data.armor.kac} KAC` : "";
+    else if ( itemData.type === "equipment" ) {
+      labels.eac = data.armor.eac ? `${data.armor.eac} EAC`: "";
+      labels.kac = data.armor.kac ? `${data.armor.kac} KAC` : "";
     }
 
     // Activated Items
-    if ( item.data.hasOwnProperty("activation") ) {
+    if ( data.hasOwnProperty("activation") ) {
 
       // Ability Activation Label
-      let act = item.data.activation || {};
+      let act = data.activation || {};
       if ( act ) labels.activation = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
 
       // Target Label
@@ -82,45 +85,44 @@ export class ItemStarfinder extends Item {
       // }
       // labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
 
-      let area = item.data.area || {};
+      let area = data.area || {};
       if (["none", "touch", "personal"].includes(area.units)) area.value = null;
       if (typeof area.value === 'number' && area.value === 0) area.value = null;
 
-      labels.area = [area.value, C.distanceUnits[area.units], C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]];      
+      labels.area = [area.value, C.distanceUnits[area.units], C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" ");      
 
       // Range Label
-      let rng = item.data.range || {};
+      let rng = data.range || {};
       if (["none", "touch", "personal"].includes(rng.units) || (rng.value === 0)) {
         rng.value = null;
       }
       labels.range = [rng.value, C.distanceUnits[rng.units]].filterJoin(" ");
 
       // Duration Label
-      let dur = item.data.duration || {};
+      let dur = data.duration || {};
       if (["inst", "perm"].includes(dur.units)) dur.value = null;
       labels.duration = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
 
       // Recharge Label
-      let chg = item.data.recharge || {};
+      let chg = data.recharge || {};
       labels.recharge = chg.value ? (parseInt(chg.value) === 6 ? `Recharge [6]` : `Recharge [${chg.value}-6]`) : "";
     }
 
     // Item Actions
-    if ( item.data.hasOwnProperty("actionType") ) {
+    if ( data.hasOwnProperty("actionType") ) {
 
       // Save DC
-      let save = item.data.save || {};
+      let save = data.save || {};
       if ( !save.type ) save.dc = null;
       labels.save = save.type ? `DC ${save.dc || ""} ${C.saves[save.type]}` : "";
 
       // Damage
-      let dam = item.data.damage || {};
+      let dam = data.damage || {};
       if ( dam.parts ) labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
     }
 
     // Assign labels and return the Item
     this.labels = labels;
-    return item;
   }
 
   /* -------------------------------------------- */
@@ -180,7 +182,7 @@ export class ItemStarfinder extends Item {
     const labels = this.labels;
 
     // Rich text description
-    data.description.value = enrichHTML(data.description.value, htmlOptions);
+    data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
 
     // Item type specific properties
     const props = [];
