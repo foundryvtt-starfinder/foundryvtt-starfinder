@@ -431,7 +431,7 @@ export class ActorStarfinder extends Actor {
                 Would you like to roll anyway?`;
 
             new Dialog({
-                title: `${CONFIG.STARFINDER.skills[skillId.substring()]} is trained only`,
+                title: `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]} is trained only`,
                 content: content,
                 buttons: {
                     yes: {
