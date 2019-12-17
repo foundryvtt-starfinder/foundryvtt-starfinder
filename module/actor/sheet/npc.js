@@ -46,6 +46,7 @@ export class ActorSheetStarfinderNPC extends ActorSheetStarfinder {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
+            item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
             const unusable = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
             item.isCharged = !unusable;
@@ -68,7 +69,7 @@ export class ActorSheetStarfinderNPC extends ActorSheetStarfinder {
                 if (item.data.activation.type) features.actions.items.push(item);
                 else features.passive.items.push(item);
             }
-            else if (["equipment", "consumable", "tool", "loot"].includes(item.type)) {
+            else if (["equipment", "consumable", "technological", "goods", "fusion", "upgrade", "augmentation"].includes(item.type)) {
                 features.equipment.items.push(item);
             }
         }

@@ -5,7 +5,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         const options = super.defaultOptions;
         mergeObject(options, {
             classes: ['starfinder', 'sheet', 'actor', 'character'],
-            width: 690,
+            width: 715,
             height: 830
         });
 
@@ -55,6 +55,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
+            item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
             const unusalbe = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
             item.isCharged = !unusalbe;
@@ -147,9 +148,24 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         if (!this.options.editable) return;
 
         //html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
+        html.find('.reload').click(this._onReloadWeapon.bind(this));
 
         html.find('.short-rest').click(this._onShortRest.bind(this));
         html.find('.long-rest').click(this._onLongRest.bind(this));
+    }
+
+    /**
+     * Handles reloading / replacing ammo or batteries in a weapon.
+     * 
+     * @param {Event} event The originating click event
+     */
+    _onReloadWeapon(event) {
+        event.preventDefault();
+
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        return item.update({'data.capacity.value': item.data.data.capacity.max});
     }
 
     /**
