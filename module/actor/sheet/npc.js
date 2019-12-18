@@ -11,8 +11,8 @@ export class ActorSheetStarfinderNPC extends ActorSheetStarfinder {
         const options = super.defaultOptions;
         mergeObject(options, {
             classes: options.classes.concat(['starfinder', 'actor', 'sheet', 'npc']),
-            width: 615,
-            height: 760
+            width: 720,
+            height: 765
         });
 
         return options;
