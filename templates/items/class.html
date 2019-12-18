@@ -2,11 +2,11 @@
 
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
-        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name" />
             </h1>
 
             <div class="item-subtitle">
@@ -16,7 +16,7 @@
 
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source" />
                 </li>
             </ul>
         </div>
@@ -43,7 +43,20 @@
             <div class="form-group">
                 <label>Class Levels</label>
                 <div class="form-fields">
-                    <input type="text" name="data.levels" value="{{data.levels}}" data-dtype="Number"/>
+                    <input type="text" name="data.levels" value="{{data.levels}}" data-dtype="Number" />
+                </div>
+            </div>
+
+            <div class="form-group input-select">
+                <label>Class Skills</label>
+                <div class="form-fields">
+                    <select name="data.csk" multiple>
+                        {{#multiselect data.csk}}
+                        {{#each config.skills as |skill s|}}
+                        <option value="{{s}}">{{skill}}</option>
+                        {{/each}}
+                        {{/multiselect}}
+                    </select>
                 </div>
             </div>
 

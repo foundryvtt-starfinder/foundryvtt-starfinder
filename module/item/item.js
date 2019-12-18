@@ -69,6 +69,9 @@ export class ItemStarfinder extends Item {
       labels.kac = data.armor.kac ? `${data.armor.kac} KAC` : "";
     }
 
+    else if (itemData.type === "class") {
+    }
+
     // Activated Items
     if (data.hasOwnProperty("activation")) {
 
@@ -379,9 +382,9 @@ export class ItemStarfinder extends Item {
     const ad = this.actor.data.data;
 
     // Spell saving throw text
-    const abl = data.ability || ad.attributes.spellcasting || "str";
-    if (this.hasSave && !data.save.dc) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof;
-    labels.save = `DC ${data.save.dc} ${CONFIG.STARFINDER.abilities[data.save.ability]}`;
+    const abl = data.ability || ad.attributes.keyability || "str";
+    if (this.hasSave && !data.save.dc) data.save.dc = 10 + ad.details.level + ad.abilities[abl].mod;
+    labels.save = `DC ${data.save.dc} ${CONFIG.STARFINDER.saves[data.save.type]}`;
 
     // Feat properties
     props.push(

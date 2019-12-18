@@ -159,7 +159,6 @@ export class ActorStarfinder extends Actor {
             let hasRanks = skill.ranks > 0;
             let acp = armor && armor.data.armor.acp < 0 && skill.hasArmorCheckPenalty ? armor.data.armor.acp : 0;
             if (acp < 0 && armorSavant > 0) acp = Math.min(acp + armorSavant, 0);
-            console.log(skl, acp);
             skill.mod = data.abilities[skill.ability].mod + acp + skill.ranks + (hasRanks ? classSkill : 0) + skill.misc;
         }
     }
