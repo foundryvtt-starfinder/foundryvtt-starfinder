@@ -90,7 +90,8 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
             //i.hasCharges = i.type === "consumable" && i.data.charges.max > 0;
             inventory[i.type].items.push(i);
             totalWeight += i.totalWeight;
-            i.totalWeight = i.totalWeight === 0.1 ? "L" : i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
+            i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
+                            i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
         }
         totalWeight = Math.floor(totalWeight);
         data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
