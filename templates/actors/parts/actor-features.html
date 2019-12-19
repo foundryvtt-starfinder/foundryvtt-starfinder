@@ -44,11 +44,16 @@
                 {{else}}
                 {{localize "STARFINDERE.Charged"}}
                 {{/if}}
+                {{else if item.hasCapacity}}
+                {{item.data.capacity.value}} / {{item.data.capacity.max}}
                 {{/if}}
             </div>
             <div class="item-detail item-action">
                 {{#if item.data.activation.type }}
                 {{item.labels.activation}}
+                {{/if}}
+                {{#if item.hasCapacity}}
+                {{item.data.usage.value}} / {{item.data.usage.per}}
                 {{/if}}
             </div>
 

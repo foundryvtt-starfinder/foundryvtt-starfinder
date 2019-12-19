@@ -169,11 +169,11 @@ export class ItemSheetStarfinder extends ItemSheet {
      * Extend the parent class _updateObject method to ensure that damage ends up in an Array
      * @private
      */
-    _updateObject(event, formData) {
-  
+    _updateObject(event, formData) {  
       // Handle Damage Array
       let damage = Object.entries(formData).filter(e => e[0].startsWith("data.damage.parts"));
       formData["data.damage.parts"] = damage.reduce((arr, entry) => {
+        console.log(entry);
         let [i, j] = entry[0].split(".").slice(3);
         if ( !arr[i] ) arr[i] = [];
         arr[i][j] = entry[1];

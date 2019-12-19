@@ -18,8 +18,10 @@ There are several things that I would like to add to the system, but wanted to g
 
 * Vehicle attacks, modifiers, and systems. This still needs to be implemented.
 * Starship systems and critical damage.
-* Auto calculate EAC and KAC based on equiped armor.
+* ~~Auto calculate EAC and KAC based on equiped armor.~~
 * Containers. e.g. Backbacks and Null-space chambers
 * Compendium content. I definetly want to include content from the Core Rulebook, but I'm still on the fence whether I should include content from other books in the core system, or save those for other modules.
+
+   _partialy done. I've added all of the Basic melee weapons, and most of the Advanced melee. Working on the rest._
 
 If you have any issues or concerns, please don't hesitate to open an issue on the tracker [https://github.com/wildj79/foundryvtt-starfinder/issues](https://github.com/wildj79/foundryvtt-starfinder/issues) or reach out to me on the Foundry discord server: `wildj79#0980`.

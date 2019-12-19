@@ -170,7 +170,7 @@ export class ActorSheetStarfinder extends ActorSheet {
             "dr": CONFIG.STARFINDER.damageTypes,
             "di": CONFIG.STARFINDER.damageTypes,
             "dv": CONFIG.STARFINDER.damageTypes,
-            "ci": CONFIG.STARFINDER.damageTypes,
+            "ci": CONFIG.STARFINDER.conditionTypes,
             "languages": CONFIG.STARFINDER.languages,
             "weaponProf": CONFIG.STARFINDER.weaponProficiencies,
             "armorProf": CONFIG.STARFINDER.armorProficiencies

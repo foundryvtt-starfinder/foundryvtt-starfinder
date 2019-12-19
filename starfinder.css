@@ -354,6 +354,12 @@
   height: 24px;
   margin: 2px;
 }
+/* ------------------------------------------- */
+/* Actor Flags                                 */
+/* ------------------------------------------- */
+#actor-flags {
+  max-height: 600px;
+}
 .starfinder.sheet.actor {
   /* ----------------------------------------- */
   /*  Sheet Header                             */
@@ -1069,6 +1075,9 @@
 .starfinder.sheet.item .details .form-group.input-select select {
   flex: 1.8;
 }
+.starfinder.sheet.item .details .form-group.input-select select[multiple] {
+  height: 200px;
+}
 .starfinder.sheet.item .details .form-group.input-select-select select {
   flex: 1.5;
 }
@@ -1225,8 +1234,8 @@
 /*  Basic Structure                          */
 /* ----------------------------------------- */
 .starfinder.sheet.actor.character {
-  min-width: 672px;
-  min-height: 736px;
+  min-width: 715px;
+  min-height: 830px;
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
@@ -1291,6 +1300,9 @@
   margin: 5px 0 0;
   height: 32px;
   line-height: 32px;
+}
+.starfinder.sheet.actor.character .sheet-header .attributes .attribute .attribute-value span {
+  font-size: 25px;
 }
 .starfinder.sheet.actor.character .sheet-header .attributes .attribute .attribute-name {
   margin-top: 6px;
@@ -1407,6 +1419,9 @@
 .starfinder.sheet.actor.character .encumbrance.encumbered .arrow-down {
   border-top: 4px solid #c41e1e;
 }
+.starfinder.sheet.actor.character .item-controls {
+  flex: 0 0 68px;
+}
 .starfinder.sheet.actor.character .spellbook .item-controls {
   flex: 0 0 68px;
 }
@@ -1420,9 +1435,10 @@
 /*  Basic Structure                          */
 /* ----------------------------------------- */
 .starfinder.sheet.actor.npc {
-  min-width: 600px;
-  min-height: 658px;
+  min-width: 720px;
+  min-height: 765px;
 }
+.starfinder.sheet.actor.npc .initiative .attribute-footer input,
 .starfinder.sheet.actor.npc .save .attribute-footer input {
   width: 32px;
 }

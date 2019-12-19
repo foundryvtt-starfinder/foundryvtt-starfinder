@@ -20,27 +20,39 @@ export class ActorStarfinder extends Actor {
         const flags = actorData.flags;
 
         if (actorData.type === "character") this._prepareCharacterData(data);
-        else if (actorData.type === "npc") this._prepareNPCData(data);
+        else if (actorData.type === "npc") {
+            this._prepareNPCData(data);
+            return;
+        }
         else if (actorData.type === "starship") {
             this._prepareStarshipData(data);
-            return actorData;
+            return;
         } else if (actorData.type === "vehicle") {
             this._prepareVehicleData(data);
-            return actorData;
-        }
+            return;
+        }        
 
-        // Ability modifiers
-        for (let abl of Object.values(data.abilities)) {
-            abl.mod = Math.floor((abl.value - 10) / 2);
-        }
+        const items = actorData.items;
+        const armor = items.find(item => item.type === "equipment" && item.data.equipped);
+        
+        if (armor) {
+            let armorSavant = getProperty(flags, "starfinder.armorSavant") ? 1 : 0;
+            let eacMod = armor.data.armor.eac + Math.min(data.abilities.dex.mod, armor.data.armor.dex || Number.MAX_SAFE_INTEGER);
+            let kacMod = armor.data.armor.kac + Math.min(data.abilities.dex.mod, armor.data.armor.dex || Number.MAX_SAFE_INTEGER);
 
-        // Skills
-        for (let skl of Object.values(data.skills)) {
-            skl.value = parseFloat(skl.value || 0);
-            let classSkill = skl.value;
-            let hasRanks = skl.ranks > 0;
-            skl.mod = data.abilities[skl.ability].mod + skl.ranks + (hasRanks ? classSkill : 0) + skl.misc;
+            if (!armor.data.proficient) {
+                eacMod -= 4;
+                kacMod -= 4;
+            }
+
+            data.attributes.eac.value = 10 + eacMod + armorSavant;
+            data.attributes.kac.value = 10 + kacMod + armorSavant;
+        } else {
+            data.attributes.eac.value = 10 + data.abilities.dex.mod;
+            data.attributes.kac.value = 10 + data.abilities.dex.mod;
         }
+        
+        this._preparePCSkills(data);
 
         // Saves
         const fort = data.attributes.fort;
@@ -50,17 +62,105 @@ export class ActorStarfinder extends Actor {
         fort.bonus = fort.value + data.abilities.con.mod + fort.misc + (getProperty(flags, "starfinder.greatFortitude") ? 2 : 0);
         reflex.bonus = reflex.value + data.abilities.dex.mod + reflex.misc + (getProperty(flags, "starfinder.lightningReflexes") ? 2 : 0);
         will.bonus = will.value + data.abilities.wis.mod + will.misc + (getProperty(flags, "starfinder.ironWill") ? 2 : 0);
-
+        
         const init = data.attributes.init;
         init.mod = data.abilities.dex.mod;
-        init.bonus = init.value + (getProperty(flags, "starfinder.improvedInititive") ? 4 : 0);
-        init.total = init.mod + init.bonus;
-
-        data.attributes.eac.min = 10 + data.abilities.dex.mod;
-        data.attributes.kac.min = 10 + data.abilities.dex.mod;
+        init.bonus = init.value + (getProperty(flags, "starfinder.improvedInititive") ? 4 : 0) + (getProperty(flags, "starfinder.rapidResponse") ? 4 : 0);
+        init.total = init.mod + init.bonus;        
 
         // CMD or AC Vs Combat Maneuvers as it's called in starfinder
         data.attributes.cmd.value = 8 + data.attributes.kac.value;
+    }
+
+    /**
+     * Calculate the ability modifer for each ability.
+     * @param {Object} data The Actor's data
+     */
+    _prepareAbilities(data) {
+        // Ability modifiers
+        for (let abl of Object.values(data.abilities)) {
+            abl.mod = Math.floor((abl.value - 10) / 2);
+        }
+    }
+
+    /**
+     * Process skills for player character's.
+     * 
+     * @param {Object} data The actor's data
+     */
+    _preparePCSkills(data) {
+        const actorData = this.data;
+        const flags = actorData.flags;
+        const items = actorData.items;
+        const armor = items.find(item => item.type === "equipment" && item.data.equipped);
+
+        // All of the relevent flags that modify skill bonuses
+        let flatAffect = getProperty(flags, "starfinder.flatAffect") ? -2 : 0;
+        let historian = getProperty(flags, "starfinder.historian") ? 2 : 0;
+        let naturalGrace = getProperty(flags, "starfinder.naturalGrace") ? 2 : 0;
+        let cultrualFascination = getProperty(flags, "starfinder.culturalFascination") ? 2 : 0;
+        let armorSavant = getProperty(flags, "starfinder.armorSavant") ? 1 : 0;
+        let scrounger = getProperty(flags, "starfinder.scrounger") ? 2 : 0;
+        let elvenMagic = getProperty(flags, "starfinder.elvenMagic") ? 2 : 0;
+        let keenSenses = getProperty(flags, "starfinder.keenSenses") ? 2 : 0;
+        let curious = getProperty(flags, "starfinder.curious") ? 2 : 0;
+        let intimidating = getProperty(flags, "starfinder.intimidating") ? 2 : 0;
+        let selfSufficient = getProperty(flags, "starfinder.selfSufficient") ? 2 : 0;
+        let sneaky = getProperty(flags, "starfinder.sneaky") ? 2 : 0;
+        let sureFooted = getProperty(flags, "starfinder.sureFooted") ? 2 : 0;
+
+        // Skills
+        for (let [skl, skill] of Object.entries(data.skills)) {
+             // Specific skill modifiers
+             switch (skl) {
+                case "acr":
+                    skill.misc += naturalGrace;
+                    skill.misc += sureFooted;
+                    break;
+                case "ath":
+                    skill.misc += naturalGrace;
+                    skill.misc += sureFooted;
+                    break;
+                case "cul":
+                    skill.misc += historian;
+                    skill.misc += cultrualFascination;
+                    skill.misc += curious;
+                    break;
+                case "dip":
+                    skill.misc += cultrualFascination;
+                    break;
+                case "eng":
+                    skill.misc += scrounger;
+                    break;
+                case "int":
+                    skill.misc += intimidating;
+                    break;
+                case "mys":
+                    skill.misc += elvenMagic;
+                    break;
+                case "per":
+                    skill.misc += keenSenses;
+                    break;
+                case "sen":
+                    skill.misc += flatAffect;
+                    break;
+                case "ste":
+                    skill.misc += scrounger;
+                    skill.misc += sneaky;
+                    break;
+                case "sur":
+                    skill.misc += scrounger;
+                    skill.misc += selfSufficient;
+                    break;
+            }
+
+            skill.value = parseFloat(skill.value || 0);
+            let classSkill = skill.value;
+            let hasRanks = skill.ranks > 0;
+            let acp = armor && armor.data.armor.acp < 0 && skill.hasArmorCheckPenalty ? armor.data.armor.acp : 0;
+            if (acp < 0 && armorSavant > 0) acp = Math.min(acp + armorSavant, 0);
+            skill.mod = data.abilities[skill.ability].mod + acp + skill.ranks + (hasRanks ? classSkill : 0) + skill.misc;
+        }
     }
 
     /**
@@ -227,16 +327,48 @@ export class ActorStarfinder extends Actor {
         let prior = this.getLevelExp(data.details.level.value - 1 || 0),
             req = data.details.xp.max - prior;
         data.details.xp.pct = Math.min(Math.round((data.details.xp.value - prior) * 100 / req), 99.5);
+
+        this._prepareAbilities(data);
     }
 
     /**
      * Prepare the NPC's data.
+     * 
+     * NPC's are a little more free form in their data. They generaly don't follow the
+     * same character creation rules that PC's do, so there stats don't need as much 
+     * automation.
      * 
      * @param {Object} data The NPC's data to prepare
      * @private
      */
     _prepareNPCData(data) {
         data.details.xp.value = this.getCRExp(data.details.cr);
+
+        this._prepareAbilities(data);
+
+        // Skills
+        // NPC's handle skills differently. They don't have "class" skills nor do they have skill "ranks".
+        for (let skl of Object.values(data.skills)) {
+            skl.value = parseFloat(skl.value || 0);
+            skl.mod = data.abilities[skl.ability].mod + skl.misc;
+        }
+
+        // Saves
+        const fort = data.attributes.fort;
+        const reflex = data.attributes.reflex;
+        const will = data.attributes.will;
+
+        fort.bonus = fort.value + data.abilities.con.mod + fort.misc;
+        reflex.bonus = reflex.value + data.abilities.dex.mod + reflex.misc;
+        will.bonus = will.value + data.abilities.wis.mod + will.misc;
+
+        const init = data.attributes.init;
+        init.mod = data.abilities.dex.mod;
+        init.bonus = init.value;
+        init.total = init.mod + init.bonus;        
+
+        // CMD or AC Vs Combat Maneuvers as it's called in starfinder
+        data.attributes.cmd.value = 8 + data.attributes.kac.value;
     }
 
     /**
@@ -426,12 +558,18 @@ export class ActorStarfinder extends Actor {
      */
     rollSkill(skillId, options = {}) {
         const skl = this.data.data.skills[skillId];
+
+        if (!this.isPC) {
+            this.rollSkillCheck(skillId, skl, options);
+            return;
+        }
+
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
             let content = `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]} is a trained only skill, but ${this.name} is not trained in that skill.
                 Would you like to roll anyway?`;
 
             new Dialog({
-                title: `${CONFIG.STARFINDER.skills[skillId.substring()]} is trained only`,
+                title: `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]} is trained only`,
                 content: content,
                 buttons: {
                     yes: {
