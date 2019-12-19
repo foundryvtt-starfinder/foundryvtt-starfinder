@@ -179,7 +179,6 @@ export class ItemSheetStarfinder extends ItemSheet {
         arr[i][j] = entry[1];
         return arr;
       }, []);
-      console.log(damage);
   
       // Update the Item
       super._updateObject(event, formData);

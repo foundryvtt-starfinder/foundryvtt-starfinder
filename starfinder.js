@@ -71,20 +71,3 @@ Hooks.on("canvasInit", function () {
 Hooks.on("renderChatMessage", highlightCriticalSuccessFailure);
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => ItemStarfinder.chatListeners(html));
-
-Handlebars.registerHelper('multiselect', function (items, options) {
-    let html = options.fn(this);
-
-    if (items) {
-        let selected = items.split(',');
-
-        selected.forEach(value => {
-            const escapedValue = escapeStringForRegexp(Handlebars.escapeExpression(value));
-            const rgx = new RegExp(' value=\"' + escapedValue + '\"');
-
-            html = html.replace(rgx, "$& selected");
-        });
-    }
-
-    return html;
-});
