@@ -1,7 +1,7 @@
-
 const gulp = require('gulp');
 const less = require('gulp-less');
 const zip = require('gulp-zip');
+const del = require('del');
 
 const STARFINDER_LESS = ["less/*.less"];
 
@@ -17,16 +17,26 @@ function watchUpdates() {
     gulp.watch(STARFINDER_LESS, css);
 }
 
-function move() {
+function cleanBuild() {
+    return del(['build/**']);
 }
 
-function build() {
+function cleanDist() {
+    return del(['dist/*.zip']);
+}
+
+const clean = gulp.series(cleanBuild, cleanDist);
+
+function move() {
     return gulp.src([
         '**/*.otf',
         '**/*.json',
         '**/*.js',
         '**/*.db',
         '**/*.html',
+        '**/*.png',
+        '**/*.jpg',
+        '**/*.svg',
         'LICENSE',
         'OGL',
         'README.md',
@@ -35,10 +45,14 @@ function build() {
         '!gulpfile.js',
         '!package.json',
         '!package-lock.json'
-    ]).pipe(zip('starfinder.zip'))
-    .pipe(gulp.dest('build/'));
+    ]).pipe(gulp.dest('build/starfinder/'));
+}
+
+function build() {
+    return gulp.src(['build/**']).pipe(zip("starfinder.zip")).pipe(gulp.dest('dist/'));
 }
 
 exports.default = gulp.series(css, watchUpdates);
 exports.css = css;
-exports.build = gulp.series(css, build);
+exports.build = gulp.series(clean, css, move, build, cleanBuild);
+exports.clean = clean;
