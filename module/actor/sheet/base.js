@@ -138,16 +138,18 @@ export class ActorSheetStarfinder extends ActorSheet {
 
         // Update Inventory Item
         html.find('.item-edit').click(ev => {
-            let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id"));
-            const item = this.actor.getOwnedItem(itemId);
+            let itemId = $(ev.currentTarget).parents(".item").attr("data-item-id");
+            // const item = this.actor.getOwnedItem(itemId);
+            const item = this.actor.getEmbeddedEntity("OwnedItem", itemId);
             item.sheet.render(true);
         });
 
         // Delete Inventory Item
         html.find('.item-delete').click(ev => {
             let li = $(ev.currentTarget).parents(".item"),
-                itemId = Number(li.attr("data-item-id"));
-            this.actor.deleteOwnedItem(itemId);
+                itemId = li.attr("data-item-id");
+            // this.actor.deleteOwnedItem(itemId);
+            this.actor.deleteEmbeddedEntity("OwnedItem", itemId)
             li.slideUp(200, () => this.render(false));
         });
 
@@ -342,7 +344,7 @@ export class ActorSheetStarfinder extends ActorSheet {
     _onItemSummary(event) {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item'),
-            item = this.actor.getOwnedItem(Number(li.attr('data-item-id'))),
+            item = this.actor.getOwnedItem(li.data('item-id')),
             chatData = item.getChatData({ secrets: this.actor.owner });
 
         if (li.hasClass('expanded')) {

@@ -136,7 +136,7 @@ export class ItemStarfinder extends Item {
     const token = this.actor.token;
     const templateData = {
       actor: this.actor,
-      tokenId: token ? `${token.scene._id}.${token.id}` : null,
+      tokenId: token ? `${token.scene._id}.${token._id}` : null,
       item: this.data,
       data: this.getChatData(),
       labels: this.labels,
@@ -489,10 +489,14 @@ export class ItemStarfinder extends Item {
         }
       }
       
-      this.actor.updateOwnedItem({
-        id: this.data.id,
+      this.actor.updateEmbeddedEntity("OwnedItem", {
+        _id: this.data._id,
         'data.capacity.value': capacity.value
       });
+      // this.actor.updateOwnedItem({
+      //   id: this.data.id,
+      //   'data.capacity.value': capacity.value
+      // });
     }
   }
 
@@ -683,11 +687,16 @@ export class ItemStarfinder extends Item {
 
       // Deduct an item quantity
       if (c <= 1 && q > 1) {
-        this.actor.updateOwnedItem({
-          id: this.data.id,
+        this.actor.updateEmbeddedEntity("OwnedItem", {
+          _id: this.data._id,
           'data.quantity': Math.max(q - 1, 0),
           'data.uses.value': itemData.uses.max
-        }, true);
+        });
+        // this.actor.updateOwnedItem({
+        //   id: this.data.id,
+        //   'data.quantity': Math.max(q - 1, 0),
+        //   'data.uses.value': itemData.uses.max
+        // }, true);
       }
 
       // Optionally destroy the item
@@ -697,7 +706,8 @@ export class ItemStarfinder extends Item {
 
       // Deduct the remaining charges
       else {
-        this.actor.updateOwnedItem({ id: this.data.id, 'data.uses.value': Math.max(c - 1, 0) });
+        this.actor.updateEmbeddedEntity("OwnedItem", { _id: this.data._id, 'data.uses.value': Math.max(c - 1, 0) });
+        // this.actor.updateOwnedItem({ id: this.data.id, 'data.uses.value': Math.max(c - 1, 0) });
       }
     }
   }
