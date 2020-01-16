@@ -2,7 +2,7 @@
 
 This is a game system definition of the Starfinder RPG for the awesome [Foundry Virtual Tabletop](http://foundryvtt.com/).
 
-_This version is only compatible with Foundry VTT version of 0.4.2 or greater. You can directly download v0.1.3 of this sytem to use it on versions 0.4.0 and 0.4.1. This sytem will not work on any of the 0.3.x versions of the software._
+_This version is only compatible with Foundry VTT version of 0.4.4 or greater. You can directly download v0.1.3 of this sytem to use it on versions 0.4.0 and 0.4.1, or v0.1.6 for versions 0.4.2 and 0.4.3. This sytem will not work on any of the 0.3.x versions of the software._
 
 ## Installation
 1. Download the current release that is compatible with your version of Foundry VTT from the [releases tab](https://github.com/wildj79/foundryvtt-starfinder/releases). Unzip the files and place them in the data folder for your installation. See [http://foundryvtt.com/pages/hosting.html#where-do-i-put-my-data](http://foundryvtt.com/pages/hosting.html#where-do-i-put-my-data) for more details about where your data is stored for Foundry. Make sure to put the files in a folder named `starfinder` in the `modules` directory.
