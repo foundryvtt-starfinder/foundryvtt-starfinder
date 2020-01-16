@@ -131,12 +131,11 @@ export class ItemStarfinder extends Item {
    * @return {Promise}
    */
   async roll() {
-
     // Basic template rendering data
     const token = this.actor.token;
     const templateData = {
       actor: this.actor,
-      tokenId: token ? `${token.scene._id}.${token._id}` : null,
+      tokenId: token ? `${token.scene.data._id}.${token.data._id}` : null,
       item: this.data,
       data: this.getChatData(),
       labels: this.labels,
@@ -469,7 +468,7 @@ export class ItemStarfinder extends Item {
    * @param {Object} data The data
    */
   _onAttackRollClose(html, parts, data) {
-    const itemData = this.data.data;
+    const itemData = duplicate(this.data.data);
 
     if (itemData.hasOwnProperty("capacity")) {
       const capacity = itemData.capacity;
@@ -491,8 +490,8 @@ export class ItemStarfinder extends Item {
       
       this.actor.updateEmbeddedEntity("OwnedItem", {
         _id: this.data._id,
-        'data.capacity.value': capacity.value
-      });
+        "data.capacity.value": capacity.value
+      }, {});
       // this.actor.updateOwnedItem({
       //   id: this.data.id,
       //   'data.capacity.value': capacity.value
@@ -856,7 +855,7 @@ export class ItemStarfinder extends Item {
       const [sceneId, tokenId] = tokenKey.split(".");
       const scene = game.scenes.get(sceneId);
       if (!scene) return null;
-      const tokenData = scene.getEmbeddedEntity("tokens", tokenId);
+      const tokenData = scene.getEmbeddedEntity("Token", tokenId);
       if (!tokenData) return null;
       const token = new Token(tokenData);
       return token.actor;
