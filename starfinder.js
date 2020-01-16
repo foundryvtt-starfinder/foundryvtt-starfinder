@@ -24,7 +24,9 @@ import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/co
 Hooks.once('init', async function () {
     console.log(`Starfinder | Initializeing Starfinder System`);
 
-    game.starfinder = {};
+    game.starfinder = {
+        rollItemMacro
+    };
 
     CONFIG.STARFINDER = STARFINDER;
     CONFIG.Actor.entityClass = ActorStarfinder;
@@ -71,3 +73,46 @@ Hooks.on("canvasInit", function () {
 Hooks.on("renderChatMessage", highlightCriticalSuccessFailure);
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => ItemStarfinder.chatListeners(html));
+
+Hooks.on("hotbarDrop", (bar, data, slot) => {
+    if (data.type !== "Item") return;
+    createItemMacro(data.data, slot);
+    return false;
+});
+
+/**
+ * Create a Macro form an Item drop.
+ * Get an existing item macro if one exists, otherwise create a new one.
+ * 
+ * @param {Object} item The item data
+ * @param {number} slot The hotbar slot to use
+ * @returns {Promise}
+ */
+async function createItemMacro(item, slot) {
+    const command = `game.starfinder.rollItemMacro("${item.name}");`;
+    let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+    if (!macro) {
+        macro = await Macro.create({
+            name: item.name,
+            type: "script",
+            img: item.img,
+            command: command,
+            flags: {"starfinder.itemMacro": true}
+        }, {displaySheet: false});
+    }
+
+    game.user.assignHotbarMacro(macro, slot);
+}
+
+function rollItemMacro(itemName) {
+    const speaker = ChatMessage.getSpeaker();
+    let actor;
+
+    if (speaker.token) actor = game.actors.tokens[speaker.token];
+    if (!actor) actor = game.actors.get(speaker.actor);
+    const item = actor ? actor.items.find(i => i.name === itemName) : null;
+    if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
+
+    if (item.data.type === 'spell') return actor.useSpell(item);
+    return item.roll();
+}

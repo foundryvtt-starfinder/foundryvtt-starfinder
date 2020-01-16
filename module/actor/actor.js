@@ -423,14 +423,15 @@ export class ActorStarfinder extends Actor {
     }
 
     /**
-     * Extend OwnedItem creation logic for the 5e system to make weapons proficient by default when dropped on a NPC sheet
+     * Extend OwnedItem creation logic for the Starfinder system to make weapons proficient by default when dropped on a NPC sheet
      * See the base Actor class for API documentation of this method
      * 
+     * @param {String} embeddedName The type of Entity being embedded.
      * @param {Object} itemData The data object of the item
      * @param {Object} options Any options passed in
      * @returns {Promise}
      */
-    async createOwnedItem(itemData, options) {
+    async createEmbeddedEntity(embeddedName, itemData, options) {
         if (!this.isPC) {
             let t = itemData.type;
             let initial = {};
@@ -440,7 +441,7 @@ export class ActorStarfinder extends Actor {
             mergeObject(itemData, initial);
         }
 
-        return super.createOwnedItem(itemData, options);
+        return super.createEmbeddedEntity(embeddedName, itemData, options);
     }
 
     async useSpell(item, { configureDialog = true } = {}) {
