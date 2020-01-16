@@ -139,8 +139,8 @@ export class ActorSheetStarfinder extends ActorSheet {
         // Update Inventory Item
         html.find('.item-edit').click(ev => {
             let itemId = $(ev.currentTarget).parents(".item").attr("data-item-id");
-            // const item = this.actor.getOwnedItem(itemId);
-            const item = this.actor.getEmbeddedEntity("OwnedItem", itemId);
+            const item = this.actor.getOwnedItem(itemId);
+            // const item = this.actor.getEmbeddedEntity("OwnedItem", itemId);
             item.sheet.render(true);
         });
 
