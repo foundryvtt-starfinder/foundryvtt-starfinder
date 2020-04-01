@@ -30,6 +30,7 @@ const clean = gulp.series(cleanBuild, cleanDist);
 function move() {
     return gulp.src([
         '**/*.otf',
+        '**/*.ttf',
         '**/*.json',
         '**/*.js',
         '**/*.db',

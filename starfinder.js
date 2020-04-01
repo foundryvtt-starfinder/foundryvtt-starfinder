@@ -41,6 +41,21 @@ Hooks.once('init', async function () {
     CONFIG.Actor.entityClass = ActorStarfinder;
     CONFIG.Item.entityClass = ItemStarfinder;
 
+    CONFIG.canvasTextStyle = new PIXI.TextStyle({
+        fontFamily: "Exo 2",
+        fontSize: 36,
+        fill: "#FFFFFF",
+        stroke: "#111111",
+        strokeTickness: 1,
+        dropShadow: true,
+        dropShadowColor: "#000000",
+        dropShadowBlur: 4,
+        dropShadowAngle: 0,
+        dropShadowDistance: 0,
+        align: "center",
+        wordWrap: false
+    });
+
     registerSystemSettings();
 
     await preloadHandlebarsTemplates();

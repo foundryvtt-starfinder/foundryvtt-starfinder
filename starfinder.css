@@ -22,8 +22,6 @@
 }
 .exo2 {
   font-family: "Exo 2", sans-serif;
-  font-size: 18px;
-  color: #444;
 }
 /* ----------------------------------------- */
 /*  Sheet Styles                             */
@@ -72,20 +70,33 @@
 .flexcol .flex4 {
   flex: 4;
 }
-.starfinder.sheet .window-content {
-  border: 5px solid #235683;
-  border-top: none;
-  background: linear-gradient(150deg, #c2c2c2 0%, #d2d2d2 10%, #eeeeee 25%, #ffffff 100%);
-  padding: 0;
+body {
+  font-family: "Exo 2", sans-serif;
 }
-.starfinder.sheet .window-header {
+.window-app .window-header {
   background: linear-gradient(25deg, #671818 0%, #c41e1e 40%, #c01c1c 60%, #8a0303 100%);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-bottom: none;
 }
+.starfinder.sheet .window-content {
+  border: 5px solid #235683;
+  border-top: none;
+  background: #f2f2f2 url("./images/hexellence.png") repeat;
+  padding: 0;
+}
 .starfinder.sheet .sheet-lower {
   padding: 5px;
+}
+button {
+  font-family: "Exo 2", sans-serif;
+  font-size: 13px;
+}
+.window-app {
+  font-family: "Exo 2", sans-serif;
+}
+.window-app .window-content {
+  background: #f2f2f2 url("./images/hexellence.png") repeat;
 }
 /* ----------------------------------------- */
 /*  All Starfinder Apps                           */
@@ -98,12 +109,9 @@
   /* Tags */
 }
 .starfinder .window-content {
-  background: linear-gradient(150deg, #c2c2c2 0%, #d2d2d2 10%, #eeeeee 25%, #ffffff 100%);
   font-size: 13px;
   color: #191813;
   font-family: "Exo 2", sans-serif;
-  font-size: 18px;
-  color: #444;
 }
 .starfinder input[type="text"],
 .starfinder select {
@@ -115,7 +123,7 @@
 .starfinder input[type="text"]:hover,
 .starfinder input[type="text"]:focus {
   border: 1px solid #111;
-  box-shadow: 0 0 8px red;
+  box-shadow: 0 0 8px #c41e1e;
 }
 .starfinder input:disabled,
 .starfinder select:disabled,
@@ -190,8 +198,6 @@
   margin: 0 0 0.25em 0;
   padding: 0 2px;
   font-family: "Exo 2", sans-serif;
-  font-size: 18px;
-  color: #444;
   font-size: 24px;
   border-top: 2px groove #eeede0;
   border-bottom: 2px groove #eeede0;
@@ -231,7 +237,7 @@
 }
 .starfinder.sheet .window-content {
   overflow-y: hidden;
-  background: linear-gradient(150deg, #c2c2c2 0%, #d2d2d2 10%, #eeeeee 25%, #ffffff 100%);
+  background: #f2f2f2 url("./images/hexellence.png") repeat;
   font-size: 13px;
   color: #191813;
 }
@@ -289,7 +295,8 @@
 }
 .starfinder.sheet .sheet-header h1 input {
   height: 50px;
-  font-size: 36px;
+  font-size: 26px;
+  margin: 0 2%;
 }
 .starfinder.sheet .sheet-header img {
   margin-right: 0;
@@ -309,6 +316,7 @@
   list-style: none;
   border-top: 2px groove #eeede0;
   border-bottom: none;
+  font-size: 16px;
 }
 .starfinder.sheet .sheet-header .summary li {
   width: 33.33%;
@@ -328,8 +336,6 @@
   flex: 0 0 30px;
   margin-bottom: 5px;
   font-family: "Exo 2", sans-serif;
-  font-size: 18px;
-  color: #444;
 }
 .starfinder.sheet .sheet-navigation .item {
   height: 30px;
@@ -423,6 +429,7 @@
 }
 .starfinder.sheet.actor .sheet-header .header-background .charname > input {
   color: #fff;
+  margin: 0 2%;
 }
 .starfinder.sheet.actor .sheet-header .header-background .charlevel {
   flex: 0 0 160px;
@@ -444,9 +451,8 @@
   color: #fff;
 }
 .starfinder.sheet.actor .sheet-header .header-background .charlevel .level input {
-  display: inline;
   width: 45px;
-  font-size: 24px;
+  font-size: 20px;
   text-align: center;
   color: #fff;
 }
@@ -491,8 +497,6 @@
   border: 2px groove #eeede0;
   border-radius: 4px;
   font-family: "Exo 2", sans-serif;
-  font-size: 18px;
-  color: #444;
   text-align: center;
 }
 .starfinder.sheet.actor ul.attributes li.attribute .attribute-name {
@@ -539,8 +543,6 @@
   margin: 0;
   padding: 0;
   font-family: "Exo 2", sans-serif;
-  font-size: 18px;
-  color: #444;
 }
 .starfinder.sheet.actor .ability-scores .ability {
   height: 70px;
@@ -643,8 +645,6 @@
   flex: auto;
   margin: 0;
   font-family: "Exo 2", sans-serif;
-  font-size: 18px;
-  color: #444;
   font-size: 14px;
 }
 .starfinder.sheet.actor .counters .counter .counter-value {
@@ -729,7 +729,6 @@
 .starfinder.sheet.actor .inventory-filters h3,
 .starfinder.sheet.actor .inventory-filters .filter-title {
   font-family: "Exo 2", sans-serif;
-  color: #444;
   color: #4b4a44;
   font-size: 18px;
   margin: 0;
@@ -1182,7 +1181,7 @@
   text-align: right;
 }
 .starfinder.sheet.item .weapon-properties label.checkbox {
-  flex: 0 0 98px;
+  flex: 0 0 130px;
 }
 .starfinder.sheet.item .loot-header {
   margin-bottom: 10px;
@@ -1190,6 +1189,16 @@
 /* ----------------------------------------- */
 /*  Chat Cards
 /* ----------------------------------------- */
+#chat-log .message {
+  background: #f2f2f2 url("./images/hexellence.png") repeat;
+  font-size: 13px;
+}
+#chat-form textarea {
+  background: #f2f2f2 url("./images/hexellence.png") repeat;
+}
+.dice-tooltip .dice-rolls .roll {
+  font-size: 13px;
+}
 .starfinder.chat-card {
   font-style: normal;
   font-size: 12px;
@@ -1208,8 +1217,6 @@
   margin: 0;
   line-height: 36px;
   font-family: "Exo 2", sans-serif;
-  font-size: 18px;
-  color: #444;
   color: #4b4a44;
 }
 .starfinder.chat-card .card-content {
@@ -1240,6 +1247,7 @@
   height: 24px;
   line-height: 20px;
   margin: 2px 0;
+  font-family: "Exo 2", sans-serif;
 }
 .starfinder.chat-card .card-footer {
   padding: 3px 0 0;
