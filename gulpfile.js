@@ -38,6 +38,7 @@ function move() {
         '**/*.png',
         '**/*.jpg',
         '**/*.svg',
+        '**/*.txt',
         'LICENSE',
         'OGL',
         'README.md',
