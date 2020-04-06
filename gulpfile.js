@@ -45,7 +45,8 @@ function move() {
         '!node_modules/**',
         '!gulpfile.js',
         '!package.json',
-        '!package-lock.json'
+        '!package-lock.json',
+        '!jsconfig.json'
     ]).pipe(gulp.dest('build/starfinder/'));
 }
 
