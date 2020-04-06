@@ -4,15 +4,29 @@
 @headerHeight: 100px;
 @detailsHeight: 40px;
 
+// Global background style
+button {
+  .exo2();
+  font-size: 13px;
+}
+
+.window-app {
+  .exo2();
+
+  .window-content {
+    background: @sheetBackground;
+  }
+}
+
 /* ----------------------------------------- */
 /*  All Starfinder Apps                           */
 /* ----------------------------------------- */
 
 .starfinder {
   .window-content {
-    background: @sheetBackground;
     font-size: 13px;
-    color: @colorDark
+    color: @colorDark;
+    .exo2();
   }
 
   /* ----------------------------------------- */
@@ -32,7 +46,7 @@
     &:hover,
     &:focus {
       border: 1px solid #111;
-      box-shadow: 0 0 8px red;
+      box-shadow: 0 0 8px @starfinderRed;
     }
   }
 
@@ -99,7 +113,8 @@
   .form-header {
     margin: 0 0 0.25em 0;
     padding: 0 2px;
-    .nodesto();
+    // .nodesto();
+    .exo2();
     font-size: 24px;
     border-top: @borderGroove;
     border-bottom: @borderGroove;
@@ -189,7 +204,7 @@
   .sheet-header {
     flex: 0 0 @headerHeight;
     border-bottom: @borderGroove;
-    .nodesto();
+    .orbitron();
 
     /* Character Name */
     h1 {
@@ -201,7 +216,8 @@
 
       input {
         height: 50px;
-        font-size: 36px;
+        font-size: 26px;
+        margin: 0 2%;
       }
     }
 
@@ -227,6 +243,7 @@
       list-style: none;
       border-top: @borderGroove;
       border-bottom: none;
+      font-size: 16px;
 
       li {
         width: 33.33%;
@@ -253,7 +270,8 @@
     background: @blueGradientBackground;
     flex: 0 0 @navHeight;
     margin-bottom: 5px;
-    .nodesto();
+    // .nodesto();
+    .exo2();
 
     .item {
       height: 30px;

@@ -30,6 +30,7 @@ const clean = gulp.series(cleanBuild, cleanDist);
 function move() {
     return gulp.src([
         '**/*.otf',
+        '**/*.ttf',
         '**/*.json',
         '**/*.js',
         '**/*.db',
@@ -37,6 +38,7 @@ function move() {
         '**/*.png',
         '**/*.jpg',
         '**/*.svg',
+        '**/*.txt',
         'LICENSE',
         'OGL',
         'README.md',
@@ -44,7 +46,8 @@ function move() {
         '!node_modules/**',
         '!gulpfile.js',
         '!package.json',
-        '!package-lock.json'
+        '!package-lock.json',
+        '!jsconfig.json'
     ]).pipe(gulp.dest('build/starfinder/'));
 }
 

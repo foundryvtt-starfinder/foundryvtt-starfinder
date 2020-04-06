@@ -23,6 +23,15 @@ import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/co
 
 Hooks.once('init', async function () {
     console.log(`Starfinder | Initializeing Starfinder System`);
+    console.log(
+`__________________________________________________
+ ____  _              __ _           _
+/ ___|| |_ __ _ _ __ / _(_)_ __   __| | ___ _ __
+\\___ \\| __/ _\` | '__| |_| | '_ \\ / _\` |/ _ \\ '__|
+ ___) | || (_| | |  |  _| | | | | (_| |  __/ |
+|____/ \\__\\__,_|_|  |_| |_|_| |_|\\__,_|\\___|_|
+==================================================`
+    );
 
     game.starfinder = {
         rollItemMacro
@@ -31,6 +40,21 @@ Hooks.once('init', async function () {
     CONFIG.STARFINDER = STARFINDER;
     CONFIG.Actor.entityClass = ActorStarfinder;
     CONFIG.Item.entityClass = ItemStarfinder;
+
+    CONFIG.canvasTextStyle = new PIXI.TextStyle({
+        fontFamily: "Exo 2",
+        fontSize: 36,
+        fill: "#FFFFFF",
+        stroke: "#111111",
+        strokeTickness: 1,
+        dropShadow: true,
+        dropShadowColor: "#000000",
+        dropShadowBlur: 4,
+        dropShadowAngle: 0,
+        dropShadowDistance: 0,
+        align: "center",
+        wordWrap: false
+    });
 
     registerSystemSettings();
 
