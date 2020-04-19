@@ -1,4 +1,4 @@
-import { ActorSheetStarfinder } from "../sheet/base.js";
+import { ActorSheetStarfinder } from "./base.js";
 
 /**
  * An Actor sheet for a starship in the Starfinder system.

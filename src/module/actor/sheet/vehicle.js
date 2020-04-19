@@ -1,4 +1,4 @@
-import { ActorSheetStarfinder } from "../sheet/base.js";
+import { ActorSheetStarfinder } from "./base.js";
 
 export class ActorSheetStarfinderVehicle extends ActorSheetStarfinder {
     static get defaultOptions() {

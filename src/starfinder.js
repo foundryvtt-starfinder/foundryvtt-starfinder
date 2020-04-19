@@ -39,22 +39,7 @@ Hooks.once('init', async function () {
 
     CONFIG.STARFINDER = STARFINDER;
     CONFIG.Actor.entityClass = ActorStarfinder;
-    CONFIG.Item.entityClass = ItemStarfinder;
-
-    CONFIG.canvasTextStyle = new PIXI.TextStyle({
-        fontFamily: "Exo 2",
-        fontSize: 36,
-        fill: "#FFFFFF",
-        stroke: "#111111",
-        strokeTickness: 1,
-        dropShadow: true,
-        dropShadowColor: "#000000",
-        dropShadowBlur: 4,
-        dropShadowAngle: 0,
-        dropShadowDistance: 0,
-        align: "center",
-        wordWrap: false
-    });
+    CONFIG.Item.entityClass = ItemStarfinder;    
 
     registerSystemSettings();
 
@@ -86,6 +71,23 @@ Hooks.once("setup", function () {
             return obj;
         }, {});
     }
+});
+
+Hooks.on("ready", () => {
+    CONFIG.canvasTextStyle = new PIXI.TextStyle({
+        fontFamily: "Exo 2",
+        fontSize: 36,
+        fill: "#FFFFFF",
+        stroke: "#111111",
+        strokeTickness: 1,
+        dropShadow: true,
+        dropShadowColor: "#000000",
+        dropShadowBlur: 4,
+        dropShadowAngle: 0,
+        dropShadowDistance: 0,
+        align: "center",
+        wordWrap: false
+    });
 });
 
 Hooks.on("canvasInit", function () {
