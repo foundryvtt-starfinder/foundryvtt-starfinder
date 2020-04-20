@@ -93,6 +93,27 @@ async function copyFiles() {
 }
 
 /**
+ * Does the same as copyFiles, except it only moves the 
+ * README, OGL, and LICENSE files. These aren't needed for
+ * development, but they should be in the package.
+ */
+async function copyReadmeAndLicenses() {
+	const statics = ["README.md", "OGL", "LICENSE"];
+
+	try {
+		for (const file of statics) {
+			if (fs.existsSync(file)) {
+				await fs.copy(file, path.join('dist', file));
+			}
+		}
+
+		return Promise.resolve();
+	} catch (err) {
+		Promise.reject(err);
+	}
+}
+
+/**
  * Watch for changes for each build step
  */
 function buildWatch() {
@@ -127,7 +148,10 @@ async function clean() {
 		`${name}.css`,
 		'module.json',
 		'system.json',
-		'template.json'
+		'template.json',
+		'README.md',
+		'OGL',
+		'LICENSE'
 	);
 
 	console.log(' ', chalk.yellow('Files to clean:'));
@@ -355,11 +379,12 @@ exports.build = gulp.series(clean, execBuild);
 exports.watch = buildWatch;
 exports.clean = clean;
 exports.link = linkUserData;
-exports.package = packageBuild;
+exports.package = gulp.series(copyReadmeAndLicenses, packageBuild);
 exports.publish = gulp.series(
 	clean,
 	updateManifest,
 	execBuild,
+	copyReadmeAndLicenses,
 	packageBuild
 );
 exports.default = gulp.series(clean, execBuild);
