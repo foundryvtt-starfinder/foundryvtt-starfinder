@@ -21,4 +21,13 @@ export const registerSystemSettings = function () {
         default: false,
         type: Boolean
     });
+
+    game.settings.register("starfinder", "useAdvantageDisadvantage", {
+        name: "STARFINDER.StarfinderUseAdvantageDisadvantage",
+        hint: "STARFINDER.StarfinderUseAdvantageDisadvantageHint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
 };

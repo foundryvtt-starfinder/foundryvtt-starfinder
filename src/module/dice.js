@@ -56,6 +56,14 @@ export class DiceStarfinder {
             });
         };
 
+        let dialogCallback = html => {
+            if (onClose) onClose(html, parts, data);
+            rollMode = html.find('[name="rollMode"]').val();
+            data['bonus'] = html.find('[name="bonus"]').val();
+            if (data['bonus'].trim() === "") delete data['bonus'];
+            roll(parts, adv);
+        };
+
         // Modify the roll and handle fast-forwarding
         parts = ["1d20"].concat(parts);
         if (event.shiftKey) return roll(parts, 0);
@@ -65,36 +73,45 @@ export class DiceStarfinder {
 
         // Render modal dialog
         template = template || "systems/starfinder/templates/chat/roll-dialog.html";
-        let dialogData = {
+        const useAdvantage = game.settings.get("starfinder", "useAdvantageDisadvantage");
+        let templateData = {
             formula: parts.join(" + "),
             data: data,
             rollMode: rollMode,
             rollModes: CONFIG.rollModes
-        };
+        };        
+
         let adv = 0;
-        renderTemplate(template, dialogData).then(dlg => {
+        renderTemplate(template, templateData).then(dlg => {
             new Dialog({
                 title: title,
                 content: dlg,
                 buttons: {
                     advantage: {
                         label: "Advantage",
-                        callback: () => adv = 1
+                        condition: useAdvantage,
+                        callback: html => {
+                            adv = 1;
+                            dialogCallback(html);
+                        }
                     },
                     normal: {
                         label: "Normal",
+                        callback: html => {
+                            dialogCallback(html);
+                        }
                     },
                     disadvantage: {
                         label: "Disadvantage",
-                        callback: () => adv = -1
+                        condition: useAdvantage,
+                        callback: html => {
+                            adv = -1; dialogCallback(html);
+                        }
                     }
                 },
                 default: "normal",
-                close: html => {
-                    if (onClose) onClose(html, parts, data);
-                    rollMode = html.find('[name="rollMode"]').val();
-                    data['bonus'] = html.find('[name="bonus"]').val();
-                    roll(parts, adv);
+                close: () => {
+                    // noop
                 }
             }, dialogOptions).render(true);
         });
