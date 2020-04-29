@@ -19,8 +19,7 @@ export class ActorStarfinder extends Actor {
         const data = actorData.data;
         const flags = actorData.flags;
 
-        if (actorData.type === "character") this._prepareCharacterData(data);
-        else if (actorData.type === "npc") {
+        if (actorData.type === "npc") {
             this._prepareNPCData(data);
             return;
         }
@@ -30,7 +29,9 @@ export class ActorStarfinder extends Actor {
         } else if (actorData.type === "vehicle") {
             this._prepareVehicleData(data);
             return;
-        }        
+        }
+
+        this._prepareAbilities(data);
 
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
@@ -54,14 +55,38 @@ export class ActorStarfinder extends Actor {
         
         this._preparePCSkills(data);
 
+        const classes = items.filter(item => item.type === "class");
+        let bab = 0;
+        let fortSave = 0;
+        let refSave = 0;
+        let willSave = 0;
+        let level = 0;
+
         // Saves
         const fort = data.attributes.fort;
         const reflex = data.attributes.reflex;
         const will = data.attributes.will;
+        
+        for (const cls of classes) {
+            bab += cls.data.bab === "bad" ? Math.floor(cls.data.levels * 0.75) : cls.data.levels;
 
-        fort.bonus = fort.value + data.abilities.con.mod + fort.misc + (getProperty(flags, "starfinder.greatFortitude") ? 2 : 0);
-        reflex.bonus = reflex.value + data.abilities.dex.mod + reflex.misc + (getProperty(flags, "starfinder.lightningReflexes") ? 2 : 0);
-        will.bonus = will.value + data.abilities.wis.mod + will.misc + (getProperty(flags, "starfinder.ironWill") ? 2 : 0);
+            let badSave = Math.floor(cls.data.levels * (1/3));
+            let goodSave = Math.floor(cls.data.levels * 0.5) + 2;
+
+            fortSave += cls.data.fort === "bad" ? badSave : goodSave;
+            refSave += cls.data.ref === "bad" ? badSave : goodSave;
+            willSave += cls.data.will === "bad" ? badSave : goodSave;
+
+            level += cls.data.levels;
+        }
+        
+        data.attributes.bab = bab;
+        fort.bonus = fortSave + data.abilities.con.mod + fort.misc + (getProperty(flags, "starfinder.greatFortitude") ? 2 : 0);
+        reflex.bonus = refSave + data.abilities.dex.mod + reflex.misc + (getProperty(flags, "starfinder.lightningReflexes") ? 2 : 0);
+        will.bonus = willSave + data.abilities.wis.mod + will.misc + (getProperty(flags, "starfinder.ironWill") ? 2 : 0);
+        data.details.level.value = level;
+
+        this._prepareCharacterData(data);
         
         const init = data.attributes.init;
         init.mod = data.abilities.dex.mod;
@@ -327,8 +352,6 @@ export class ActorStarfinder extends Actor {
         let prior = this.getLevelExp(data.details.level.value - 1 || 0),
             req = data.details.xp.max - prior;
         data.details.xp.pct = Math.min(Math.round((data.details.xp.value - prior) * 100 / req), 99.5);
-
-        this._prepareAbilities(data);
     }
 
     /**

@@ -824,6 +824,22 @@ STARFINDER.spellLevels = {
       "total": "Total cover"
   };
 
+  /**
+   * Base Attack Bonus Progression
+   */
+  STARFINDER.babProgression = {
+      "bad": "STARFINDER.BABProgressionBad",
+      "good": "STARFINDER.BABProgressionGood"
+  };
+
+  /**
+   * Saving throw modifier progression
+   */
+  STARFINDER.saveProgression = {
+      "bad": "STARFINDER.SaveProgressionBad",
+      "good": "STARFINDER.SaveProgressionGood"
+  };
+
   STARFINDER.CHARACTER_EXP_LEVELS = [
       0,1300, 3300,6000,10000,15000,23000,34000,50000,71000,
       105000,145000,210000,295000,425000,600000,850000,1200000,

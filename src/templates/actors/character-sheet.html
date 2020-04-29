@@ -13,8 +13,7 @@
                 <div class="charlevel">
                     <div class="level {{#if disableExperience}}noxp{{/if}}">
                         <label>Level </label>
-                        <input name="data.details.level.value" type="text" value="{{data.details.level.value}}"
-                            data-dtype="Number" placeholder="1" />
+                        <span>{{data.details.level.value}}</span>
                     </div>
                     {{#unless disableExperience}}
                     <div class="experience">
@@ -205,11 +204,6 @@
                         </div>
                         <footer class="attribute-footer">
                             <div>
-                                <span>Base</span>
-                                <input name="data.attributes.fort.value" type="text" placeholder="0" data-dtype="Number"
-                                    value="{{numberFormat data.attributes.fort.value decimals=0 sign=true}}" />
-                            </div>
-                            <div>
                                 <span>Misc</span>
                                 <input name="data.attributes.fort.misc" type="text" placeholder="0" data-dtype="Number"
                                     value="{{numberFormat data.attributes.fort.misc decimals=0 sign=true}}" />
@@ -223,12 +217,6 @@
                             <span>{{numberFormat data.attributes.reflex.bonus decimals=0 sign=true}}</span>
                         </div>
                         <footer class="attribute-footer">
-                            <div>
-                                <span>Base</span>
-                                <input name="data.attributes.reflex.value" type="text" placeholder="0"
-                                    data-dtype="Number"
-                                    value="{{numberFormat data.attributes.reflex.value decimals=0 sign=true}}" />
-                            </div>
                             <div>
                                 <span>Misc</span>
                                 <input name="data.attributes.reflex.misc" type="text" placeholder="0"
@@ -244,11 +232,6 @@
                             <span>{{numberFormat data.attributes.will.bonus decimals=0 sign=true}}</span>
                         </div>
                         <footer class="attribute-footer">
-                            <div>
-                                <span>Base</span>
-                                <input name="data.attributes.will.value" type="text" placeholder="0" data-dtype="Number"
-                                    value="{{numberFormat data.attributes.will.value decimals=0 sign=true}}" />
-                            </div>
                             <div>
                                 <span>Misc</span>
                                 <input name="data.attributes.will.misc" type="text" placeholder="0" data-dtype="Number"
@@ -280,9 +263,7 @@
                     <li class="attribute bab">
                         <h4 class="attribute-name box-title" title="Base Attack Bonus">BAB</h4>
                         <div class="attribute-value">
-                            <input type="text" name="data.attributes.bab"
-                                value="{{numberFormat data.attributes.bab decimal=0 sign=true}}" placeholder="0"
-                                data-dtype="Number" />
+                            <span>{{numberFormat data.attributes.bab decimal=0 sign=true}}</span>
                         </div>
                     </li>
                     <li class="attribute resolve">
