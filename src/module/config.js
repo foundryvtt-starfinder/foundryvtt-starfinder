@@ -828,16 +828,16 @@ STARFINDER.spellLevels = {
    * Base Attack Bonus Progression
    */
   STARFINDER.babProgression = {
-      "bad": "STARFINDER.BABProgressionBad",
-      "good": "STARFINDER.BABProgressionGood"
+      "moderate": "STARFINDER.BABProgressionModerate",
+      "full": "STARFINDER.BABProgressionFull"
   };
 
   /**
    * Saving throw modifier progression
    */
   STARFINDER.saveProgression = {
-      "bad": "STARFINDER.SaveProgressionBad",
-      "good": "STARFINDER.SaveProgressionGood"
+      "slow": "STARFINDER.SaveProgressionSlow",
+      "fast": "STARFINDER.SaveProgressionFast"
   };
 
   STARFINDER.CHARACTER_EXP_LEVELS = [
@@ -854,117 +854,117 @@ STARFINDER.spellLevels = {
 
   STARFINDER.characterFlags = {
       "improvedInititive": {
-          name: "Improved Inititive",
-          hint: "Character feat that adds 4 to thier initiive roll",
-          section: "Feats",
+          name: "STARFINDER.ImprovedInitiativeLabel",
+          hint: "STARFINDER.ImprovedInitiativeHint",
+          section: "STARFINDER.CharacterFlagsSectionFeats",
           type: Boolean
       },
       "greatFortitude": {
-          name: "Great Fortitude",
-          hint: "Character feat that adds 2 to fortitude saving throws",
-          section: "Feats",
+          name: "STARFINDER.GreatFortitudeLabel",
+          hint: "STARFINDER.GreatFortitudeHint",
+          section: "STARFINDER.CharacterFlagsSectionFeats",
           type: Boolean
       },
       "ironWill": {
-          name: "Iron Will",
-          hint: "Character feat that adds 2 to will saving throws",
-          section: "Feats",
+          name: "STARFINDER.IronWillLabel",
+          hint: "STARFINDER.IronWillHint",
+          section: "STARFINDER.CharacterFlagsSectionFeats",
           type: Boolean
       },
       "lightningReflexes": {
-          name: "Lightning Reflexes",
-          hint: "Character feat that adds 2 to reflex saving thorws",
-          section: "Feats",
+          name: "STARFINDER.LightningReflexesLabel",
+          hint: "STARFINDER.LightningReflexesHint",
+          section: "STARFINDER.CharacterFlagsSectionFeats",
           type: Boolean
       },
       "flatAffect": {
           name: "Flat Affect",
           hint: "You take a -2 penalty to Sense Motive checks, but the DCs of Sense Motive checks attempted against you increase by 2.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "historian": {
           name: "Historian",
           hint: "Due to your in-depth historical training and the wide-ranging academic background knowledge you possess, you receive a +2 racial bonus to Culture checks.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "naturalGrace": {
           name: "Natural Grace",
           hint: "You recieve a +2 racial bonus to Acrobatics and Athletics checks",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "culturalFascination": {
           name: "Cultural Fascination",
           hint: "You recieve a +2 racial bonus to Culture and Diplomacy checks.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "armorSavant": {
           name: "Armor Savant",
           hint: "When wearing armor, you gain a +1 racial bonus to AC. When you're wearing heavy armor, your armor check penalty is 1 less severe than normal.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "scrounger": {
           name: "Scrounger",
           hint: "You receive a +2 racial bonus to Engineering, Stealth, and Survival checks.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "elvenMagic": {
           name: "Elven Magic",
           hint: "You receive a +2 racial bonus to caster level checks to overcome spell resistance. In addition, you receive a +2 racial bonus to Mysticism skill checks.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "keenSenses": {
           name: "Keen Senses",
           hint: "You receive a +2 racial bonus to Perception skill checks.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "curious": {
           name: "Curious",
           hint: "You receive a +2 racial bonus to Culture checks.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "intimidating": {
           name: "Intimidating",
           hint: "You receive a +2 racial bonus to Intimidate skill checks.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "selfSufficient": {
           name: "Self-Sufficient",
           hint: "You receive a +2 racial bonus to Survival skill checks.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "halflingLuck": {
           name: "Halfling Luck",
           hint: "Halflings receive a +1 racial bonus to all saving throws.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "sneaky": {
           name: "Sneaky",
           hint: "You receive a +2 racial bonus to Stealth checks",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "sureFooted": {
           name: "Sure-Footed",
           hint: "You receive a +2 racial bonus to Acrobatics and Athletics skill checks.",
-          section: "Racial Traits",
+          section: "STARFINDER.CharacterFlagsSectionRacialTraits",
           type: Boolean
       },
       "rapidResponse": {
           name: "Rapid Response",
           hint: "You gain +4 bonus to initiative checks and increase your land speed by 10 feet.",
-          section: "Class Features",
+          section: "STARFINDER.CharacterFlagsSectionClassFeatures",
           type: Boolean
       }
   };

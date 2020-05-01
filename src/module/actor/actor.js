@@ -68,14 +68,18 @@ export class ActorStarfinder extends Actor {
         const will = data.attributes.will;
         
         for (const cls of classes) {
-            bab += cls.data.bab === "bad" ? Math.floor(cls.data.levels * 0.75) : cls.data.levels;
+            switch (cls.data.bab) {
+                case "slow": bab += Math.floor(cls.data.levels * 0.5); break;
+                case "moderate": bab += Math.floor(cls.data.levels * 0.75); break;
+                case "full": bab += cls.data.levels; break;
+            }
 
-            let badSave = Math.floor(cls.data.levels * (1/3));
-            let goodSave = Math.floor(cls.data.levels * 0.5) + 2;
+            let slowSave = Math.floor(cls.data.levels * (1/3));
+            let fastSave = Math.floor(cls.data.levels * 0.5) + 2;
 
-            fortSave += cls.data.fort === "bad" ? badSave : goodSave;
-            refSave += cls.data.ref === "bad" ? badSave : goodSave;
-            willSave += cls.data.will === "bad" ? badSave : goodSave;
+            fortSave += cls.data.fort === "slow" ? slowSave : fastSave;
+            refSave += cls.data.ref === "slow" ? slowSave : fastSave;
+            willSave += cls.data.will === "slow" ? slowSave : fastSave;
 
             level += cls.data.levels;
         }
