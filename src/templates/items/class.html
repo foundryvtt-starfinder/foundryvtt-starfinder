@@ -1,0 +1,106 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source" />
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "STARFINDER.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab flexrow active" data-group="primary" data-tab="description">
+            {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Class Levels --}}
+            <div class="form-group">
+                <label>Class Levels</label>
+                <div class="form-fields">
+                    <input type="text" name="data.levels" value="{{data.levels}}" data-dtype="Number" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>BAB Progression</label>
+                <div class="form-fields">
+                    <select name="data.bab">
+                        {{#select data.bab}}
+                        {{#each config.babProgression as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Fortitude Save Progression</label>
+                <div class="form-fields">
+                    <select name="data.fort">
+                        {{#select data.fort}}
+                        {{#each config.saveProgression as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Reflex Save Progression</label>
+                <div class="form-fields">
+                    <select name="data.ref">
+                        {{#select data.ref}}
+                        {{#each config.saveProgression as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Will Save Progression</label>
+                <div class="form-fields">
+                    <select name="data.will">
+                        {{#select data.will}}
+                        {{#each config.saveProgression as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <h3 class="form-header">Granted Abilities</h3>
+            <p class="notification warning">This is still to-do</p>
+        </div>
+    </section>
+</form>

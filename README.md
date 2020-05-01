@@ -6,7 +6,7 @@ _This version is only compatible with Foundry VTT version of 0.4.4 or greater. Y
 
 ## Installation
 1. Download the current release that is compatible with your version of Foundry VTT from the [releases tab](https://github.com/wildj79/foundryvtt-starfinder/releases). Unzip the files and place them in the data folder for your installation. See [http://foundryvtt.com/pages/hosting.html#where-do-i-put-my-data](http://foundryvtt.com/pages/hosting.html#where-do-i-put-my-data) for more details about where your data is stored for Foundry. Make sure to put the files in a folder named `starfinder` in the `modules` directory.
-2. Copy this link and use Foundry's Module manager to install it: `https://raw.githubusercontent.com/wildj79/foundryvtt-starfinder/master/system.json`
+2. Copy this link and use Foundry's Module manager to install it: `https://raw.githubusercontent.com/wildj79/foundryvtt-starfinder/master/src/system.json`
 
 ## Use
 
