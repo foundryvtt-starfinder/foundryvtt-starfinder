@@ -138,14 +138,53 @@
   }
 
   ul.skills-list {
-    flex: 0 0 225px;
+    flex: 0 0 49%;
+
+    li.skills-header {
+      background: rgba(0, 0 ,0, 0.05);
+      border: @borderGroove;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 15px;
+      padding: 3px;
+
+      h3 {
+        flex: 0 0 50%;
+        font-size: 12px;
+        font-weight: bold;
+        margin: 0;
+      }
+      div.skill-header-prof,
+      div.skill-header-mod {
+        flex: 0 0 10%;
+      }
+      div.skill-header-rank,
+      div.skill-header-ability {
+        flex: 0 0 15%;
+      }
+
+      div.skill-header-rank {
+        text-align: center;
+      }
+    }
 
     li.skill {
       padding: 3px;
       h4 {
-        flex: 1px;
+        flex: 0 0 50%;
         margin: 0;
         font-size: 13px;
+      }
+      .skill-proficiency {
+        flex: 0 0 10%;
+        text-align: center;
+      }
+      .skill-ranks,
+      .skill-ability {
+        flex: 0 0 15%;
+      }
+      .skill-mod {
+        flex: 0 0 10%;
       }
     }
   }
@@ -212,7 +251,7 @@
       height: 0;
       border-left: 4px solid transparent;
       border-right: 4px solid transparent;
-      border-bottom: 4px solid #666;
+      border-bottom: 4px solid #000;
     }
 
     .arrow-down {
@@ -221,7 +260,7 @@
       height: 0;
       border-left: 4px solid transparent;
       border-right: 4px solid transparent;
-      border-top: 4px solid #666;
+      border-top: 4px solid #000;
     }
 
     &.encumbered {

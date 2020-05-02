@@ -61,7 +61,7 @@ Hooks.once("setup", function () {
     const toLocalize = [
         "abilities", "alignments", "distanceUnits", "senses", "skills", "currencies", "saves",
         "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes",
-        "vehicleSizes"
+        "vehicleSizes", "babProgression", "saveProgression"
     ];
 
     for (let o of toLocalize) {

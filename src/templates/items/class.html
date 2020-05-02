@@ -47,6 +47,58 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label>BAB Progression</label>
+                <div class="form-fields">
+                    <select name="data.bab">
+                        {{#select data.bab}}
+                        {{#each config.babProgression as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Fortitude Save Progression</label>
+                <div class="form-fields">
+                    <select name="data.fort">
+                        {{#select data.fort}}
+                        {{#each config.saveProgression as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Reflex Save Progression</label>
+                <div class="form-fields">
+                    <select name="data.ref">
+                        {{#select data.ref}}
+                        {{#each config.saveProgression as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Will Save Progression</label>
+                <div class="form-fields">
+                    <select name="data.will">
+                        {{#select data.will}}
+                        {{#each config.saveProgression as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
             <h3 class="form-header">Granted Abilities</h3>
             <p class="notification warning">This is still to-do</p>
         </div>
