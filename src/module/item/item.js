@@ -240,6 +240,8 @@ export class ItemStarfinder extends Item {
   _weaponChatData(data, labels, props) {
     props.push(
       CONFIG.STARFINDER.weaponTypes[data.weaponType],
+      ...Object.entries(data.properties).filter(e => e[1] === true)
+        .map(e => CONFIG.STARFINDER.weaponProperties[e[0]])
     );
   }
 
