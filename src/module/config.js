@@ -25,12 +25,12 @@ STARFINDER.saves = {
 };
 
 STARFINDER.saveDescriptors = {
-    "negate": "negates",
-    "partial": "partial",
-    "half": "half",
-    "disbelieve": "disbelieve",
-    "harmless": "harmless",
-    "object": "object"
+    "negate": "STARFINDER.SaveDescriptorNegates",
+    "partial": "STARFINDER.SaveDescriptorPartial",
+    "half": "STARFINDER.SaveDescriptorHalf",
+    "disbelieve": "STARFINDER.SaveDescriptorDisbelieve",
+    "harmless": "STARFINDER.SaveDescriptorHarmless",
+    "object": "STARFINDER.SaveDescriptorObject"
 };
 
 /**
@@ -54,10 +54,10 @@ STARFINDER.alignments = {
  * @type {Object}
  */
 STARFINDER.armorProficiencies = {
-    "lgt": "Light Armor",
-    "hvy": "Heavy Armor",
-    "pwr": "Power Armor",
-    "shl": "Shields"
+    "lgt": "STARFINDER.ArmorProficiencyLight",
+    "hvy": "STARFINDER.ArmorProficiencyHeavy",
+    "pwr": "STARFINDER.ArmorProficiencyPower",
+    "shl": "STARFINDER.ArmorProficiencyShields"
 };
 
 /**
@@ -65,14 +65,14 @@ STARFINDER.armorProficiencies = {
  * @type {Object}
  */
 STARFINDER.weaponProficiencies = {
-    "bmelee": "Basic Melee",
-    "amelee": "Advanced Melee",
-    "sarms": "Small Arms",
-    "larms": "Long Arms",
-    "hweap": "Heavy Weapons",
-    "snipe": "Sniper Weapons",
-    "gren": "Grenades",
-    "spec": "Special Weapons"
+    "bmelee": "STARFINDER.WeaponProficiencyBasicMelee",
+    "amelee": "STARFINDER.WeaponProficiencyAdvMelee",
+    "sarms": "STARFINDER.WeaponProficiencySmallArms",
+    "larms": "STARFINDER.WeaponProficiencyLongArms",
+    "hweap": "STARFINDER.WeaponProficiencyHeavy",
+    "snipe": "STARFINDER.WeaponProficiencySniper",
+    "gren": "STARFINDER.WeaponProficiencyGrenades",
+    "spec": "STARFINDER.WeaponProficiencySpecial"
 };
 
 /**
@@ -80,22 +80,22 @@ STARFINDER.weaponProficiencies = {
  * @type {Object}
  */
 STARFINDER.abilityActivationTypes = {
-    "none": "None",
-    "action": "S. Action",
-    "move": "M. Action",
-    "swift": "Swift Action",
-    "full": "Full Action",
-    "reaction": "Reaction",
-    "other": "Other Actions",
-    "day": "Day",
-    "hour": "Hour",
-    "min": "Minute",
-    "special": "Special"
+    "none": "STARFINDER.AbilityActivationTypesNone",
+    "action": "STARFINDER.AbilityActivationTypesStandard",
+    "move": "STARFINDER.AbilityActivationTypesMove",
+    "swift": "STARFINDER.AbilityActivationTypesSwift",
+    "full": "STARFINDER.AbilityActivationTypesFull",
+    "reaction": "STARFINDER.AbilityActivationTypesReaction",
+    "other": "STARFINDER.AbilityActivationTypesOther",
+    "day": "STARFINDER.AbilityActivationTypesDay",
+    "hour": "STARFINDER.AbilityActivationTypesHour",
+    "min": "STARFINDER.AbilityActivationTypesMinute",
+    "special": "STARFINDER.AbilityActivationTypesSpecial"
 };
 
 STARFINDER.skillProficiencyLevels = {
     0: "",
-    3: "Class Skill"
+    3: "STARFINDER.SkillProficiencyLevelClassSkill"
 };
 
 /**
@@ -109,14 +109,14 @@ STARFINDER.currencies = {
 
 // Damage Types
 STARFINDER.damageTypes = {
-    "acid": "Acid",
-    "cold": "Cold",
-    "electricity": "Electricity",
-    "fire": "Fire",
-    "sonic": "Sonic",
-    "bludgeoning": "Bludgeoning",
-    "piercing": "Piercing",
-    "slashing": "Slashing"
+    "acid": "STARFINDER.DamageTypesAcid",
+    "cold": "STARFINDER.DamageTypesCold",
+    "electricity": "STARFINDER.DamageTypesElectricity",
+    "fire": "STARFINDER.DamageTypesFire",
+    "sonic": "STARFINDER.DamageTypesSonic",
+    "bludgeoning": "STARFINDER.DamageTypesBludgeoning",
+    "piercing": "STARFINDER.DamageTypesPiercing",
+    "slashing": "STARFINDER.DamageTypesSlashing"
 };
 
 STARFINDER.distanceUnits = {
@@ -142,19 +142,19 @@ STARFINDER.timePeriods = {};
 
 // Healing types
 STARFINDER.healingTypes = {
-    "healing": "Healing"
+    "healing": "STARFINDER.HealingTypesHealing"
 };
 
 STARFINDER.spellPreparationModes = {
-    "always": "Always Available",
-    "innate": "Innate Spellcasting"
+    "always": "STARFINDER.SpellPreparationModesAlways",
+    "innate": "STARFINDER.SpellPreparationModesInnate"
 };
 
 STARFINDER.limitedUsePeriods = {
-    "sr": "Short Rest",
-    "lr": "Long Rest",
-    "day": "Day",
-    "charges": "Charges"
+    "sr": "STARFINDER.LimitedUsePeriodsShort",
+    "lr": "STARFINDER.LimitedUsePeriodsLong",
+    "day": "STARFINDER.LimitedUsePeriodsDay",
+    "charges": "STARFINDER.LimitedUsePeriodsCharges"
 };
 
 STARFINDER.senses = {
@@ -190,71 +190,71 @@ STARFINDER.skills = {
 
 // Weapon Types
 STARFINDER.weaponTypes = {
-    "basicM": "Basic Melee",
-    "advancedM": "Advanced Melee",
-    "smallA": "Small Arms",
-    "longA": "Long Arms",
-    "heavy": "Heavy Weapons",
-    "sniper": "Sniper Weapons",
-    "grenade": "Grenades",
-    "special": "Special Weapons",
-    "solarian": "Solarian Weapon Crystals"
+    "basicM": "STARFINDER.WeaponTypesBasicMelee",
+    "advancedM": "STARFINDER.WeaponTypesAdvMelee",
+    "smallA": "STARFINDER.WeaponTypesSmallArms",
+    "longA": "STARFINDER.WeaponTypesLongArms",
+    "heavy": "STARFINDER.WeaponTypesHeavy",
+    "sniper": "STARFINDER.WeaponTypesSniper",
+    "grenade": "STARFINDER.WeaponTypesGrenades",
+    "special": "STARFINDER.WeaponTypesSpecial",
+    "solarian": "STARFINDER.WeaponTypesSolarian"
 };
 
 // Weapons sub categories
 STARFINDER.weaponCategories = {
-    "cryo": "Cryo weapons",
-    "flame": "Flame weapons",
-    "laser": "Laser weapons",
-    "plasma": "Plasma weapons",
-    "projectile": "Projectile Weapons",
-    "shock": "Shock weapons",
-    "sonic": "Sonic weapons",
-    "uncategorized": "Uncategorized weapons"
+    "cryo": "STARFINDER.WeaponCategoriesCryo",
+    "flame": "STARFINDER.WeaponCategoriesFlame",
+    "laser": "STARFINDER.WeaponCategoriesLaser",
+    "plasma": "STARFINDER.WeaponCategoriesPlasma",
+    "projectile": "STARFINDER.WeaponCategoriesProjectile",
+    "shock": "STARFINDER.WeaponCategoriesShock",
+    "sonic": "STARFINDER.WeaponCategoriesSonic",
+    "uncategorized": "STARFINDER.WeaponCategoriesUncategorized"
 };
 
 // Weapon Properties
 STARFINDER.weaponProperties = {
-    "one": "One-handed",
-    "two": "Two-Handed",
-    "amm": "Ammunition",
-    "analog": "Analog",
-    "archaic": "Archaic",
-    "automatic": "Automatic",
-    "blast": "Blast",
-    "block": "Block",
-    "boost": "Boost",
-    "bright": "Bright",
-    "disarm": "Disarm",
-    "entangle": "Entangle",
-    "explode": "Explode",
-    "injection": "Injection",
-    "line": "Line",
-    "living": "Living",
-    "mind-affecting": "Mind-Affecting",
-    "nonlethal": "Nonlethal",
-    "operative": "Operative",
-    "penetrating": "Penetrating",
-    "powered": "Powered",
-    "qreload": "Quick Reload",
-    "radioactive": "Radioactive",
-    "reach": "Reach",
-    "sniper": "Sniper",
-    "stun": "Stun",
-    "subtle": "Subtle",
-    "thrown": "Thrown",
-    "trip": "Trip",
-    "unwieldy": "Unwieldy"
+    "one": "STARFINDER.WeaponPropertiesOneHanded",
+    "two": "STARFINDER.WeaponPropertiesTwoHanded",
+    "amm": "STARFINDER.WeaponPropertiesAmmunition",
+    "analog": "STARFINDER.WeaponPropertiesAnalog",
+    "archaic": "STARFINDER.WeaponPropertiesArchaic",
+    "automatic": "STARFINDER.WeaponPropertiesAutomatic",
+    "blast": "STARFINDER.WeaponPropertiesBlast",
+    "block": "STARFINDER.WeaponPropertiesBlock",
+    "boost": "STARFINDER.WeaponPropertiesBoost",
+    "bright": "STARFINDER.WeaponPropertiesBright",
+    "disarm": "STARFINDER.WeaponPropertiesDisarm",
+    "entangle": "STARFINDER.WeaponPropertiesEntangle",
+    "explode": "STARFINDER.WeaponPropertiesExplode",
+    "injection": "STARFINDER.WeaponPropertiesInjection",
+    "line": "STARFINDER.WeaponPropertiesLine",
+    "living": "STARFINDER.WeaponPropertiesLiving",
+    "mind-affecting": "STARFINDER.WeaponPropertiesMindAffecting",
+    "nonlethal": "STARFINDER.WeaponPropertiesNonlethal",
+    "operative": "STARFINDER.WeaponPropertiesOperative",
+    "penetrating": "STARFINDER.WeaponPropertiesPenetrating",
+    "powered": "STARFINDER.WeaponPropertiesPowered",
+    "qreload": "STARFINDER.WeaponPropertiesQuickReload",
+    "radioactive": "STARFINDER.WeaponPropertiesRadioactive",
+    "reach": "STARFINDER.WeaponPropertiesReach",
+    "sniper": "STARFINDER.WeaponPropertiesSniper",
+    "stun": "STARFINDER.WeaponPropertiesStun",
+    "subtle": "STARFINDER.WeaponPropertiesSubtle",
+    "thrown": "STARFINDER.WeaponPropertiesThrown",
+    "trip": "STARFINDER.WeaponPropertiesTrip",
+    "unwieldy": "STARFINDER.WeaponPropertiesUnwieldy"
 };
 
 STARFINDER.spellAreaShapes = {
     "": "",
-    "cone": "Cone",
-    "cylinder": "Cylinder",
-    "line": "Line",
-    "sphere": "Sphere",
-    "shapable": "Shapable",
-    "other": "Other"
+    "cone": "STARFINDER.SpellAreaShapesCone",
+    "cylinder": "STARFINDER.SpellAreaShapesCylinder",
+    "line": "STARFINDER.SpellAreaShapesLine",
+    "sphere": "STARFINDER.SpellAreaShapesSphere",
+    "shapable": "STARFINDER.SpellAreaShapesShapable",
+    "other": "STARFINDER.SpellAreaShapesOther"
 };
 
 STARFINDER.spellAreaEffects = {
