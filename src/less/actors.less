@@ -459,7 +459,7 @@
     // Inventory Item
     .item,
     .crew {
-      line-height: 30px;
+      line-height: 45px;
       padding: 0 2px; // to align with the header border
       border-bottom: 1px solid @colorFaint;
       &:last-child { border-bottom: none; }
@@ -471,8 +471,8 @@
 
         .item-image,
         .crew-image {
-          flex: 0 0 30px;
-          background-size: 30px;
+          flex: 0 0 45px;
+          background-size: 45px;
           margin-right: 5px;
         }
 
@@ -487,8 +487,26 @@
         .item-image:hover {
           background-image: url("/icons/svg/d20-black.svg") !important;
         }
-      }
 
+        .item-action {
+          flex: 0 0 15%;
+  
+          .attack {
+            width: auto;
+            background: @starfinderBlue;
+            color: #fff;
+            cursor: pointer;
+          }
+  
+          .damage {
+            width: auto;
+            background: @starfinderRed;
+            color: #fff;
+            cursor: pointer;
+          }
+        }
+      }
+      
       // Item Dropdown Properties
       .item-properties,
       .crew-properties {

@@ -45,8 +45,14 @@
                     {{~#if item.isStack}}({{item.data.quantity}}) {{/if}}
                     {{item.name~}}
                 </h4>
+                {{#if item.hasAttack}}
+                <div class="item-action flexcol">
+                    <button class="tag attack">{{localize "STARFINDER.Attack"}}</button>
+                    <button class="tag damage">{{localize "STARFINDER.Damage"}}</button>
+                </div>
+                {{/if}}
             </div>
-
+            
             {{#if ../../isCharacter}}
             <div class="item-detail item-weight">
                 {{#if item.totalWeight}}

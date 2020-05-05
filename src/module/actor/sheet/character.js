@@ -57,6 +57,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
+            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType);
             const unusalbe = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
             item.isCharged = !unusalbe;
             if (item.type === "spell") arr[1].push(item);
