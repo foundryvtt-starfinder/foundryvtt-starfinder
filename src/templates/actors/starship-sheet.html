@@ -343,6 +343,13 @@
                     <div class="item-name flexrow">
                         <h3>{{section.label}}</h3>
                     </div>
+                    {{#if ../owner}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="Create Items" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                            <i class="fas fa-plus"></i> Add
+                        </a>
+                    </div>
+                    {{/if}}
                 </li>
 
                 <ol class="item-list">
