@@ -135,7 +135,7 @@ export class ItemStarfinder extends Item {
     const token = this.actor.token;
     const templateData = {
       actor: this.actor,
-      tokenId: token ? `${token.scene.data._id}.${token.data._id}` : null,
+      tokenId: token ? `${token.scene._id}.${token.id}` : null,
       item: this.data,
       data: this.getChatData(),
       labels: this.labels,
@@ -662,7 +662,7 @@ export class ItemStarfinder extends Item {
   /**
    * Use a consumable item
    */
-  rollConsumable(options = {}) {
+  async rollConsumable(options = {}) {
     let itemData = this.data.data;
     const labels = this.labels;
     const formula = itemData.damage ? labels.damage : itemData.formula;
@@ -688,27 +688,20 @@ export class ItemStarfinder extends Item {
 
       // Deduct an item quantity
       if (c <= 1 && q > 1) {
-        this.actor.updateEmbeddedEntity("OwnedItem", {
-          _id: this.data._id,
+        await this.update({
           'data.quantity': Math.max(q - 1, 0),
           'data.uses.value': itemData.uses.max
         });
-        // this.actor.updateOwnedItem({
-        //   id: this.data.id,
-        //   'data.quantity': Math.max(q - 1, 0),
-        //   'data.uses.value': itemData.uses.max
-        // }, true);
       }
 
       // Optionally destroy the item
       else if (c <= 1 && q <= 1 && itemData.uses.autoDestroy) {
-        this.actor.deleteOwnedItem(this.data.id);
+        await this.actor.deleteOwnedItem(this.id);
       }
 
       // Deduct the remaining charges
       else {
-        this.actor.updateEmbeddedEntity("OwnedItem", { _id: this.data._id, 'data.uses.value': Math.max(c - 1, 0) });
-        // this.actor.updateOwnedItem({ id: this.data.id, 'data.uses.value': Math.max(c - 1, 0) });
+        await this.update({'data.uses.value': Math.max(c - 1, 0) });
       }
     }
   }
