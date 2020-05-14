@@ -61,7 +61,10 @@ Hooks.once("setup", function () {
     const toLocalize = [
         "abilities", "alignments", "distanceUnits", "senses", "skills", "currencies", "saves",
         "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes",
-        "vehicleSizes", "babProgression", "saveProgression"
+        "vehicleSizes", "babProgression", "saveProgression", "saveDescriptors", "armorProficiencies",
+        "weaponProficiencies", "abilityActivationTypes", "skillProficiencyLevels", "damageTypes",
+        "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
+        "weaponProperties", "spellAreaShapes"
     ];
 
     for (let o of toLocalize) {

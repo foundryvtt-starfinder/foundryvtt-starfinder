@@ -96,7 +96,7 @@ export class DiceStarfinder {
                         }
                     },
                     normal: {
-                        label: "Normal",
+                        label: useAdvantage ? "Normal" : "Roll",
                         callback: html => {
                             dialogCallback(html);
                         }

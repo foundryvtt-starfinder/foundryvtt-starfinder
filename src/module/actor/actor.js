@@ -199,125 +199,13 @@ export class ActorStarfinder extends Actor {
      * @private
      */
     _prepareStarshipData(data) {
-        const shields = {
-            "10": 10,
-            "20": 20,
-            "30": 30,
-            "40": 40,
-            "50": 50,
-            "60": 60,
-            "70": 70,
-            "80": 80,
-            "90": 90,
-            "100": 100,
-            "120": 120,
-            "140": 140,
-            "160": 160,
-            "200": 200,
-            "240": 240,
-            "280": 280,
-            "320": 320,
-            "360": 360,
-            "420": 420,
-            "480": 480,
-            "540": 540,
-            "600": 600
-        }[data.details.systems.shields] || 0;
-
-
-        const armorDefenseMap = {
-            "mk1": 1,
-            "mk2": 2,
-            "mk3": 3,
-            "mk4": 4,
-            "mk5": 5,
-            "mk6": 6,
-            "mk7": 7,
-            "mk8": 8,
-            "mk9": 9,
-            "mk10": 10,
-            "mk11": 11,
-            "mk12": 12,
-            "mk13": 13,
-            "mk14": 14,
-            "mk15": 15
-        };
-        const ac = armorDefenseMap[data.details.systems.armor] || 0;
-        const tl = armorDefenseMap[data.details.systems.defense] || 0;
-
-        const thrusters = {
-            "t6": { speed: 6, mod: 1 },
-            "t8": { speed: 8, mod: 0 },
-            "t10": { speed: 10, mod: 0 },
-            "t12": { speed: 12, mod: -1 },
-            "t14": { speed: 14, mod: -2 },
-            "s6": { speed: 6, mod: 1 },
-            "s8": { speed: 8, mod: 0 },
-            "s10": { speed: 10, mod: 0 },
-            "s12": { speed: 12, mod: -1 },
-            "m4": { speed: 4, mod: 2 },
-            "m6": { speed: 6, mod: 1 },
-            "m8": { speed: 8, mod: 0 },
-            "m10": { speed: 10, mod: 0 },
-            "m12": { speed: 12, mod: -1 },
-            "l4": { speed: 4, mod: 2 },
-            "l6": { speed: 6, mod: 1 },
-            "l8": { speed: 8, mod: 0 },
-            "l10": { speed: 10, mod: 0 },
-            "h4": { speed: 4, mod: 2 },
-            "h6": { speed: 6, mod: 1 },
-            "h8": { speed: 8, mod: 0 },
-            "h10": { speed: 10, mod: 0 },
-            "g4": { speed: 4, mod: 2 },
-            "g6": { speed: 6, mod: 1 },
-            "g8": { speed: 8, mod: 0 },
-            "c4": { speed: 4, mod: 2 },
-            "c6": { speed: 6, mod: 1 },
-            "c8": { speed: 8, mod: 0 }
-        }[data.details.systems.thrusters] || { speed: 8, mode: 0 };
-
-        const powercore = {
-            "micronL": { size: ["tiny"], pcu: 50 },
-            "micronH": { size: ["tiny"], pcu: 70 },
-            "micronU": { size: ["tiny"], pcu: 80 },
-            "arcusL": { size: ["tiny", "small"], pcu: 75 },
-            "pulseBr": { size: ["tiny", "small"], pcu: 90 },
-            "pulseBl": { size: ["tiny", "small"], pcu: 120 },
-            "pulseWh": { size: ["tiny", "small"], pcu: 140 },
-            "pulseGy": { size: ["tiny", "small", "medium"], pcu: 100 },
-            "arcusH": { size: ["tiny", "small", "medium"], pcu: 130 },
-            "puslseGr": { size: ["tiny", "small", "medium"], pcu: 150 },
-            "pulseRe": { size: ["tiny", "small", "medium"], pcu: 175 },
-            "pulseBu": { size: ["tiny", "small", "medium"], pcu: 200 },
-            "arcusUl": { size: ["small", "medium", "large"], pcu: 150 },
-            "arcusMax": { size: ["small", "medium", "large"], pcu: 200 },
-            "pulseOr": { size: ["small", "medium", "large"], pcu: 250 },
-            "pulsePr": { size: ["small", "medium", "large"], pcu: 300 },
-            "novaL": { size: ["medium", "large", "huge"], pcu: 150 },
-            "novaH": { size: ["medium", "large", "huge"], pcu: 200 },
-            "novaU": { size: ["medium", "large", "huge"], pcu: 300 },
-            "gateL": { size: ["large", "huge", "gargantuan"], pcu: 300 },
-            "gateH": { size: ["large", "huge", "gargantuan"], pcu: 400 },
-            "gateU": { size: ["huge", "gargantuan", "colossal"], pcu: 500 }
-        }[data.details.systems.powercore] || { size: ["tiny"], pcu: 0 };
-
-        const driftEngine = {
-            "basic": 1,
-            "booster": 2,
-            "major": 3,
-            "superior": 4,
-            "ultra": 5
-        }[data.details.systems.driftEngine] || 0;
-
-        const sizeMod = {
-            "tiny": 2,
-            "small": 1,
-            "medium": 0,
-            "large": -1,
-            "huge": -2,
-            "gargantuan": -4,
-            "colossal": -8
-        }[data.details.size] || 0;
+        const shields = CONFIG.STARFINDER.shieldsMap[data.details.systems.shields] || 0;
+        const ac = CONFIG.STARFINDER.armorDefenseMap[data.details.systems.armor] || 0;
+        const tl = CONFIG.STARFINDER.armorDefenseMap[data.details.systems.defense] || 0;
+        const thrusters = CONFIG.STARFINDER.thrustersMap[data.details.systems.thrusters] || { speed: 8, mode: 0 };
+        const powercore = CONFIG.STARFINDER.powercoreMap[data.details.systems.powercore] || { size: ["tiny"], pcu: 0 };
+        const driftEngine = CONFIG.STARFINDER.driftEngineMap[data.details.systems.driftEngine] || 0;
+        const sizeMod = CONFIG.STARFINDER.starshipSizeMod[data.details.size] || 0;
 
         data.attributes.drift = driftEngine;
         data.attributes.ac.value = 10 + ac + data.attributes.ac.misc + sizeMod;

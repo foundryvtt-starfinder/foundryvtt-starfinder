@@ -163,6 +163,12 @@ export class ActorSheetStarfinder extends ActorSheet {
         // Item Rolling
         html.find('.item .item-image').click(event => this._onItemRoll(event));
 
+        // Roll attack from item 
+        html.find('.item-action .attack').click(event => this._onItemRollAttack(event));
+
+        // Roll damage for item
+        html.find('.item-action .damage').click(event => this._onItemRollDamage(event));
+
         // Item Recharging
         html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
     }
@@ -258,6 +264,22 @@ export class ActorSheetStarfinder extends ActorSheet {
         };
         delete itemData.data['type'];
         return this.actor.createOwnedItem(itemData);
+    }
+
+    _onItemRollAttack(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        return item.rollAttack({event: event});
+    }
+
+    _onItemRollDamage(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        return item.rollDamage({event: event});
     }
 
     /**
