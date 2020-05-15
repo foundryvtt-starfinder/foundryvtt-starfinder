@@ -26,7 +26,9 @@ export class ItemSheetStarfinder extends ItemSheet {
         width: 560,
         height: 420,
         classes: ["starfinder", "sheet", "item"],
-        resizable: false
+        resizable: false,
+        scrollY: [".tab.details"],
+        tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
       });
     }
   

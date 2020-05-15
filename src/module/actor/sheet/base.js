@@ -18,6 +18,18 @@ export class ActorSheetStarfinder extends ActorSheet {
         };
     }
 
+    static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+            scrollY: [
+                ".tab.attributes",
+                ".inventory .inventory-list",
+                ".features .inventory-list",
+                ".spellbook .inventory-list"
+            ],
+            tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes"}]
+        });
+    }
+
     /**
      * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
      */
@@ -91,13 +103,6 @@ export class ActorSheetStarfinder extends ActorSheet {
             let text = e.tagName === "INPUT" ? e.value : e.innerText,
                 w = text.length * parseInt(e.getAttribute("data-wpad")) / 2;
             e.setAttribute("style", "flex: 0 0 " + w + "px;");
-        });
-
-        new Tabs(html.find(".tabs"), {
-            initial: this["_sheetTab"],
-            callback: clicked => {
-                this["_sheetTab"] = clicked.data("tab");
-            }
         });
 
         const filterLists = html.find(".filter-list");
