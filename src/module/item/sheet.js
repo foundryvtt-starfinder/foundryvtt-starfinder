@@ -24,9 +24,9 @@ export class ItemSheetStarfinder extends ItemSheet {
       static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
         width: 560,
-        height: 420,
+        height: 600,
         classes: ["starfinder", "sheet", "item"],
-        resizable: false,
+        resizable: true,
         scrollY: [".tab.details"],
         tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
       });
@@ -192,15 +192,6 @@ export class ItemSheetStarfinder extends ItemSheet {
      */
     activateListeners(html) {
       super.activateListeners(html);
-  
-      // Activate tabs
-      new Tabs(html.find(".tabs"), {
-        initial: this["_sheetTab"],
-        callback: clicked => {
-          this["_sheetTab"] = clicked.data("tab");
-          this.setPosition();
-        }
-      });
   
       // Save scroll position
       html.find(".tab.active")[0].scrollTop = this._scrollTab;
