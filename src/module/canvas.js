@@ -2,27 +2,35 @@
  * Override the default Grid measurement function to add additional distance for subsequent diagonal moves
  * See BaseGrid.measureDistance for more details.
  * 
- * @param {Object} p0 The starting position
- * @param {Object} p1 The ending position
- * @returns {Number} The traveled distance for the move
+ * @param {Object[]} segments The starting position
+ * @param {Object} options The ending position
+ * @returns {Number[]} An Array of distance measurmements for each segment
  */
-export const measureDistance = function(p0, p1) {
-    let gs = canvas.dimensions.size,
-        ray = new Ray(p0, p1),
-        nx = Math.abs(Math.ceil(ray.dx / gs)),
-        ny = Math.abs(Math.ceil(ray.dy / gs));
+export const measureDistances = function(segments, options={}) {
+    if (!options.gridSpaces) return BaseGrid.prototype.measureDistance.call(this, segments, options);
 
-    let nDiagonal = Math.min(nx, ny),
-        nStraight = Math.abs(ny - nx);
+    let nDiagonal = 0;
+    const rule = this.parent.diagonalRule;
+    const d = canvas.dimensions;
+    
+    return segments.map(s => {
+        let r = s.ray;
 
-    if (this.parent.diagonalRule === "5105") {
-        let nd10 = Math.floor(nDiagonal / 2);
-        let spaces = nd10 * 2 + (nDiagonal - nd10) + nStraight;
+        let nx = Math.abs(Math.ceil(r.dx / d.size));
+        let ny = Math.abs(Math.ceil(r.dy / d.size));
 
-        return spaces * canvas.dimensions.distance;
-    }
+        let nd = Math.min(nx, ny);
+        let ns = Math.abs(ny - nx);
+        nDiagonal += nd;
 
-    else return (nStraight + nDiagonal) * canvas.scene.data.gridDistance;
+        if (rule === "5105") {
+            let nd10 = Math.floor(nDiagonal / 2) - Math.floor((nDiagonal - nd) / 2);
+            let spaces = (nd10 * 2) + (nd - nd10) + ns;
+            return spaces * canvas.dimensions.distance;
+        }
+
+        else return (ns + nd) * canvas.scene.data.gridDistance;
+    });
 };
 
 /**
