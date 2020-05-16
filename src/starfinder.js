@@ -10,7 +10,7 @@
 import { STARFINDER } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { measureDistance, getBarAttribute } from "./module/canvas.js";
+import { measureDistances, getBarAttribute } from "./module/canvas.js";
 import { ActorStarfinder } from "./module/actor/actor.js";
 import { ActorSheetStarfinderCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetStarfinderNPC } from "./module/actor/sheet/npc.js";
@@ -95,7 +95,7 @@ Hooks.on("ready", () => {
 
 Hooks.on("canvasInit", function () {
     canvas.grid.diagonalRule = game.settings.get("starfinder", "diagonalMovement");
-    SquareGrid.prototype.measureDistance = measureDistance;
+    SquareGrid.prototype.measureDistances = measureDistances;
     Token.prototype.getBarAttribute = getBarAttribute;
 });
 
