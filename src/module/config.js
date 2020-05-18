@@ -110,13 +110,35 @@ STARFINDER.currencies = {
 // Damage Types
 STARFINDER.damageTypes = {
     "acid": "STARFINDER.DamageTypesAcid",
+    "acid+bludgeoning": "STARFINDER.DamageTypesAcidAndBludgeoning",
+    "acid+fire": "STARFINDER.DamageTypesAcidAndFire",
+    "acid+piercing": "STARFINDER.DamageTypesAcidAndPiercing",
+    "acid+slashing": "STARFINDER.DamageTypesAcidAndSlashing",
+    "acid|fire": "STARFINDER.DamageTypesAcidOrFire",
+    "acid|slashing": "STARFINDER.DamageTypesAcidOrSlashing",    
     "cold": "STARFINDER.DamageTypesCold",
+    "cold+piercing": "STARFINDER.DamageTypesColdAndPiercing",
+    "cold|fire": "STARFINDER.DamageTypesColdOrFire",
     "electricity": "STARFINDER.DamageTypesElectricity",
+    "electricity+fire": "STARFINDER.DamageTypesElectricityAndFire",
+    "electricity+piercing": "STARFINDER.DamageTypesElectricityAndPiercing",
+    "electricity+slashing": "STARFINDER.DamageTypesElectricityAndSlashing",
     "fire": "STARFINDER.DamageTypesFire",
+    "fire+piercing": "STARFINDER.DamageTypesFireAndPiercing",
+    "fire+slashing": "STARFINDER.DamageTypesFireAndSlashing",
+    "fire|slashing": "STARFINDER.DamageTypesFireOrSlashing",
+    "fire|sonic": "STARFINDER.DamageTypesFireOrSonic",
     "sonic": "STARFINDER.DamageTypesSonic",
     "bludgeoning": "STARFINDER.DamageTypesBludgeoning",
+    "bludgeoning+cold": "STARFINDER.DamageTypesBludgeoningAndCold",
+    "bludgeoning+electricity": "STARFINDER.DamageTypesBludgeoningAndElectricity",
+    "bludgeoning+fire": "STARFINDER.DamageTypesBludgeoningAndFire",
+    "bludgeoning+sonic": "STARFINDER.DamageTypesBludgeoningAndSonic",
     "piercing": "STARFINDER.DamageTypesPiercing",
-    "slashing": "STARFINDER.DamageTypesSlashing"
+    "piercing+sonic": "STARFINDER.DamageTypesPiercingAndSonic",
+    "slashing": "STARFINDER.DamageTypesSlashing",
+    "slashing+piercing": "STARFINDER.DamageTypesSlashingAndPiercing",
+    "slashing+sonic": "STARFINDER.DamageTypesSlashingAndSonic",
 };
 
 STARFINDER.distanceUnits = {
