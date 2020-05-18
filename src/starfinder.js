@@ -99,7 +99,11 @@ Hooks.on("canvasInit", function () {
     Token.prototype.getBarAttribute = getBarAttribute;
 });
 
-Hooks.on("renderChatMessage", highlightCriticalSuccessFailure);
+Hooks.on("renderChatMessage", (app, html, data) => {
+    highlightCriticalSuccessFailure(app, html, data);
+
+    if (game.settings.get("starfinder", "autoCollapseItemCards")) html.find('.card-content').hide();
+});
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => ItemStarfinder.chatListeners(html));
 

@@ -835,12 +835,17 @@ export class ItemStarfinder extends Item {
     button.disabled = false;
   }
 
+  /**
+   * Handle toggling the visibility of chat card content when the name is clicked.
+   * @param {Event} event The originating click event
+   */
   static _onChatCardToggleContent(event) {
     event.preventDefault();
     const header = event.currentTarget;
     const card = header.closest('.chat-card');
     const content = card.querySelector('.card-content');
-    content.style.display = content.style.display === 'none' ? 'block' : 'none';
+    // content.style.display = content.style.display === 'none' ? 'block' : 'none';
+    $(content).slideToggle();
   }
 
   /* -------------------------------------------- */
