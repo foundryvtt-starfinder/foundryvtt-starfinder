@@ -227,10 +227,12 @@ export class DiceStarfinder {
     }
 }
 
-export const highlightCriticalSuccessFailure = function (message, html, data) { 
-    if (!message.isRoll || !message.isRollVisible || !message.roll.parts.length) return;
+export const highlightCriticalSuccessFailure = function (message, html, data) {
+    console.log(message);
+    if (!message.isRoll || !message.isContentVisible || !message.roll.parts.length) return;
 
-    let d=  message.roll.parts[0];
+    let d = message.roll.parts[0];
+    console.log(d);
     if (d instanceof Die && (d.faces === 20) && (d.results.length === 1)) {
         if (d.total >= (d.options.critical || 20)) html.find('.dice-total').addClass('success');
         else if (d.total <= (d.options.fumble || 1)) html.find('.dice-total').addClass('failure');
