@@ -20,6 +20,8 @@ import { ItemStarfinder } from "./module/item/item.js";
 import { ItemSheetStarfinder } from "./module/item/sheet.js";
 import { highlightCriticalSuccessFailure } from "./module/dice.js";
 import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/combat.js";
+import Engine from "./module/engine/engine.js";
+import registerSystemRules from "./module/rules.js";
 
 Hooks.once('init', async function () {
     console.log(`Starfinder | Initializeing Starfinder System`);
@@ -33,8 +35,12 @@ Hooks.once('init', async function () {
 ==================================================`
     );
 
+    console.log("Starfinder | Initializeing the rules engine");
+    const engine = new Engine();
+
     game.starfinder = {
-        rollItemMacro
+        rollItemMacro,
+        engine
     };
 
     CONFIG.STARFINDER = STARFINDER;
@@ -74,6 +80,9 @@ Hooks.once("setup", function () {
             return obj;
         }, {});
     }
+
+    console.log("Starfinder | Configuring rules engine");
+    registerSystemRules(game.starfinder.engine);
 });
 
 Hooks.on("ready", () => {

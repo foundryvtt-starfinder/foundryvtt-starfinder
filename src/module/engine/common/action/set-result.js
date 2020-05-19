@@ -1,4 +1,4 @@
-import { nowOrThen } from '../../util';
+import { nowOrThen } from '../../util.js';
 
 export default function (engine) {
     const fn = (fact, context) => {

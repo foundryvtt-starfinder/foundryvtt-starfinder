@@ -1,4 +1,4 @@
-import { Closure } from "../../closure/closure";
+import { Closure } from "../../closure/closure.js";
 import moment from 'moment';
 
 class DateRange extends Closure {

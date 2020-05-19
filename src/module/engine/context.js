@@ -1,12 +1,16 @@
 export class Context {
+    /**
+     * The context for the rule.
+     * 
+     * @param {Engine} engine The rules engine instance
+     * @param {Object} parameters The parameters passed into this context
+     * @param {Array} rulesFired An array of rules that have already been processed
+     * @param {Boolean} currentRuleFlowActivated Is this rule flow activated
+     */
     constructor(engine, parameters, rulesFired, currentRuleFlowActivated) {
-        /** @type Engine */
         this.engine = engine;
-        /** @type object */
         this.parameters = parameters || {};
-        /** @type Array */
         this.rulesFired = rulesFired || [];
-        /** @type Boolean */
         this._currentRuleFlowActivated = !!currentRuleFlowActivated;
     }
 
@@ -25,7 +29,7 @@ export class Context {
         return this._currentRuleFlowActivated;
     }
 
-    ruleFind(rule) {
+    ruleFired(rule) {
         this.rulesFired.push(rule);
         this._currentRuleFlowActivated = true;
     }

@@ -43,10 +43,12 @@ export class Closure {
      * @returns {Closure}         A new bounded closure
      */
     bind(name, parameters, engine) {
+        // No need to perfom any binding, there is nothing to bind
         if (!Object.keys(parameters).length) {
             return this;
         }
 
+        // Replaces parameters that are set as closureParameters with actual closures!
         if (this.options.closureParameters) {
             this.options.closureParameters.forEach(parameter => {
                 parameters[parameter] = engine.closures.parseOrValue(parameters[parameter]);
@@ -57,6 +59,15 @@ export class Closure {
     }
 }
 
+/**
+ * A closure bound to a certain set of parameters
+ * 
+ * @param {String}  name       The name of the closure
+ * @param {Closure} closure    The bounded closure
+ * @param {Object}  parameters The parameters for the closure
+ * 
+ * @type {BoundClosure}
+ */
 class BoundClosure extends Closure {
     constructor(name, closure, parameters) {
         super(name);

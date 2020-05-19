@@ -1,8 +1,8 @@
 
-import { Context } from './context';
-import { ClosureRegistry } from './closure/closure-registry';
+import { Context } from './context.js';
+import { ClosureRegistry } from './closure/closure-registry.js';
 
-export class Engine {
+export default class Engine {
     constructor() {
         this.services = {};
         this.closures = new ClosureRegistry(this);
@@ -31,8 +31,8 @@ export class Engine {
 
         const context = new Context(this);
         try {
-            const fact = await Promise.resolve(closure.process(fact, context));
-            context.fact = fact;
+            const res = await Promise.resolve(closure.process(fact, context));
+            context.fact = res;
             return context;
         } catch (error) {
             return Promise.reject(error);

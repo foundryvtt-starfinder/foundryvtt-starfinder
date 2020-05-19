@@ -1,8 +1,12 @@
-import { Closure } from './closure';
+import { Closure } from './closure.js';
 
 /**
  * A simple closure that's implemented through a function that is defined
  * in beforehand.
+ * 
+ * @param {String}   name    The name of the closure.
+ * @param {Function} fn      A function providing an implementation for this closure.
+ * @param {Object}   options Any options for the closure.
  *
  * @type {FunctionalClosure}
  */
