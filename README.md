@@ -24,3 +24,8 @@ There are several things that I would like to add to the system, but wanted to g
    _partialy done. I've added all of the Basic melee weapons, and most of the Advanced melee. Working on the rest._
 
 If you have any issues or concerns, please don't hesitate to open an issue on the tracker [https://github.com/wildj79/foundryvtt-starfinder/issues](https://github.com/wildj79/foundryvtt-starfinder/issues) or reach out to me on the Foundry discord server: `wildj79#0980`.
+
+## Legal
+
+_This game system definition for the Foundry Virtual Tabletop uses trademarks and/or copyrights owned by Paizo Inc., which are used under Paizo's Community Use Policy. We are expressly prohibited from charging you to use or access this content. This game system definition for the Foundry Virtual Tabletop is not published, endorsed, or specifically approved by Paizo Inc. For more information about Paizo's Community Use Policy, please visit [paizo.com/communityuse](paizo.com/communityuse). For more information about Paizo Inc. and Paizo products, please visit [paizo.com](paizo.com)._
+_Starfinder game system definition, Copyright 2020, James Allred_
