@@ -41,7 +41,7 @@ export class ActorStarfinder extends Actor {
         this._prepareBaseAttackBonus(data, classes);
         this._prepareSaves(data, flags, classes);
         this._prepareCharacterLevel(data, classes);
-        this._prepareCharacterData(data);
+        this._prepareCharacterXP(data);
         this._prepareInitiative(data, flags);
         this._prepareCMD(data);
     }
@@ -51,7 +51,7 @@ export class ActorStarfinder extends Actor {
      * @param {Object} data The Actor's data
      */
     _prepareAbilities(data) {
-        game.starfinder.engine.process("process-base-ability-modifiers", data);
+        game.starfinder.engine.process("process-base-ability-modifiers", {data});
     }
 
     /**
@@ -224,12 +224,8 @@ export class ActorStarfinder extends Actor {
      * @param {Object} data The data to prepare
      * @private
      */
-    _prepareCharacterData(data) {
-        data.details.level.value = parseInt(data.details.level.value);
-        data.details.xp.max = this.getLevelExp(data.details.level.value || 1);
-        let prior = this.getLevelExp(data.details.level.value - 1 || 0),
-            req = data.details.xp.max - prior;
-        data.details.xp.pct = Math.min(Math.round((data.details.xp.value - prior) * 100 / req), 99.5);
+    _prepareCharacterXP(data) {
+        game.starfinder.engine.process("process-player-xp", {data});
     }
 
     /**
@@ -270,17 +266,6 @@ export class ActorStarfinder extends Actor {
 
         // CMD or AC Vs Combat Maneuvers as it's called in starfinder
         data.attributes.cmd.value = 8 + data.attributes.kac.value;
-    }
-
-    /**
-     * Return the amount of experience required to gain a certain character level.
-     * 
-     * @param {Number} level The desired level
-     * @returns {Number} The XP required for the next level
-     */
-    getLevelExp(level) {
-        const levels = CONFIG.STARFINDER.CHARACTER_EXP_LEVELS;
-        return levels[Math.min(level, levels.length - 1)];
     }
 
     /**
@@ -611,7 +596,7 @@ export class ActorStarfinder extends Actor {
             }
         });
 
-        await this.updateManyOwnedItem(updateItems);
+        await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
         if (chat) {
             let msg = `${this.name} takes a short 10 minute rest spending ${-drp} Resolve Point to recover ${dsp} Stamina Points.`;
@@ -662,7 +647,7 @@ export class ActorStarfinder extends Actor {
 
         // Recover HP, SP, and RP
         let dhp = data.attributes.hp.max === data.attributes.hp.value ? 0 :
-            data.details.level.value > data.attributes.hp.max ?
+            data.details.level.value > (data.attributes.hp.max - data.attributes.hp.value) ?
                 data.attributes.hp.max - data.attributes.hp.value : data.details.level.value;
         let dsp = data.attributes.sp.max - data.attributes.sp.value;
         let drp = data.attributes.rp.max - data.attributes.rp.value;
@@ -690,7 +675,7 @@ export class ActorStarfinder extends Actor {
         });
 
         await this.update(updateData);
-        await this.updateManyOwnedItem(updateItems);
+        await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
         if (chat) {
             ChatMessage.create({

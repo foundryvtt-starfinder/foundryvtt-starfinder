@@ -29,6 +29,7 @@ import calculateCharacterLevel from './rules/actions/actor/calculate-character-l
 import calculateInitiative from './rules/actions/actor/calculate-initiative.js';
 import calculateInitiativeModifiers from './rules/actions/actor/calculate-initiative-modifiers.js';
 import calculateCmd from './rules/actions/actor/calculate-cmd.js';
+import calculatePlayerXp from './rules/actions/actor/calculate-xp.js';
 import calculateShipArmorClass from './rules/actions/starship/calculate-ac.js';
 import calculateShipCritThreshold from './rules/actions/starship/calculate-ct.js';
 import calculateDrift from './rules/actions/starship/calculate-drift.js';
@@ -46,6 +47,7 @@ export default function (engine) {
     identity(engine);
     setResult(engine);
     undefined(engine);
+    // Actor actions
     calculateBaseAbilityModifier(engine);
     calculateBaseArmorClass(engine);
     calculateArmorModifiers(engine);
@@ -56,6 +58,8 @@ export default function (engine) {
     calculateInitiative(engine);
     calculateInitiativeModifiers(engine);
     calculateCmd(engine);
+    calculatePlayerXp(engine);
+    // Starship actions
     calculateShipArmorClass(engine);
     calculateShipCritThreshold(engine);
     calculateDrift(engine);
@@ -64,6 +68,7 @@ export default function (engine) {
     calculateShipShields(engine);
     calculateShipSpeed(engine);
     calculateShipTargetLock(engine);
+    
 
     // Conditions
     always(engine);
@@ -88,6 +93,7 @@ export default function (engine) {
     engine.add({name: "process-character-level", closure: "calculateCharacterLevel"});
     engine.add({name: "process-initiative", when: "always", then: ["calculateInitiativeModifiers", "calculateInitiative"]});
     engine.add({name: "process-cmd", closure: "calculateCMD"});
+    engine.add({name: "process-player-xp", closure: "calculateXP"});
     engine.add({
         name: "process-starship",
         when: "always",

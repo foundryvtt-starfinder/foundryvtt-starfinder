@@ -1,6 +1,8 @@
 export default function (engine) {
     engine.closures.add("calculateBaseAbilityModifier", (fact, context) => {
-        for (let abl of Object.values(fact.abilities)) {
+        const data = fact.data;
+
+        for (let abl of Object.values(data.abilities)) {
             abl.mod = Math.floor((abl.value - 10) / 2);
         }
 
