@@ -19,6 +19,16 @@ import get from './engine/common/transformer/get.js';
 import isCircumstanceBonus from './rules/conditions/is-circumstance.js';
 import isUntypedBonus from './rules/conditions/is-untyped.js';
 import logToConsole from './rules/actions/log.js';
+import calculateBaseAbilityModifier from './rules/actions/calculate-base-ability-modifier.js';
+import calculateBaseArmorClass from './rules/actions/calculate-base-armor-class.js';
+import calculateArmorModifiers from './rules/actions/calculate-armor-modifiers.js';
+import calculateBab from './rules/actions/calculate-bab.js';
+import calculateBaseSaves from './rules/actions/calculate-base-saves.js';
+import calculateSaveModifiers from './rules/actions/calculate-save-modifiers.js';
+import calculateCharacterLevel from './rules/actions/calculate-character-level.js';
+import calculateInitiative from './rules/actions/calculate-initiative.js';
+import calculateInitiativeModifiers from './rules/actions/calculate-initiative-modifiers.js';
+import calculateCmd from './rules/actions/calculate-cmd.js';
 
 export default function (engine) {
     console.log("Starfinder | Registering rules");
@@ -28,6 +38,16 @@ export default function (engine) {
     identity(engine);
     setResult(engine);
     undefined(engine);
+    calculateBaseAbilityModifier(engine);
+    calculateBaseArmorClass(engine);
+    calculateArmorModifiers(engine);
+    calculateBab(engine);
+    calculateBaseSaves(engine);
+    calculateSaveModifiers(engine);
+    calculateCharacterLevel(engine);
+    calculateInitiative(engine);
+    calculateInitiativeModifiers(engine);
+    calculateCmd(engine);
 
     // Conditions
     always(engine);
@@ -43,7 +63,17 @@ export default function (engine) {
     // Custom rules
     isCircumstanceBonus(engine);
     isUntypedBonus(engine);
-    logToConsole(engine);
+    logToConsole(engine);    
+
+    engine.add({name: "process-base-ability-modifiers", closure: "calculateBaseAbilityModifier"});
+    engine.add({name: "process-armor-class", when: "always", then: ["calculateBaseArmorClass", "calculateArmorModifiers"]});
+    engine.add({name: "process-bab", closure: "calculateBaseAttackBonus"});
+    engine.add({name: "process-saves", when: "always", then: ["calculateBaseSaves", "calculateSaveModifiers"]});
+    engine.add({name: "process-character-level", closure: "calculateCharacterLevel"});
+    engine.add({name: "process-initiative", when: "always", then: ["calculateInitiativeModifiers", "calculateInitiative"]});
+    engine.add({name: "process-cmd", closure: "calculateCMD"});
+
+    Hooks.callAll('starfinder.registerRules', engine);
 
     console.log("Starfinder | Done registering rules");
 }

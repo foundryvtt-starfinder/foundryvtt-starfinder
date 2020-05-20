@@ -31,74 +31,19 @@ export class ActorStarfinder extends Actor {
             return;
         }
 
-        this._prepareAbilities(data);
-
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
-        
-        if (armor) {
-            let armorSavant = getProperty(flags, "starfinder.armorSavant") ? 1 : 0;
-            let eacMod = armor.data.armor.eac + Math.min(data.abilities.dex.mod, armor.data.armor.dex || Number.MAX_SAFE_INTEGER);
-            let kacMod = armor.data.armor.kac + Math.min(data.abilities.dex.mod, armor.data.armor.dex || Number.MAX_SAFE_INTEGER);
-
-            if (!armor.data.proficient) {
-                eacMod -= 4;
-                kacMod -= 4;
-            }
-
-            data.attributes.eac.value = 10 + eacMod + armorSavant;
-            data.attributes.kac.value = 10 + kacMod + armorSavant;
-        } else {
-            data.attributes.eac.value = 10 + data.abilities.dex.mod;
-            data.attributes.kac.value = 10 + data.abilities.dex.mod;
-        }
-        
-        this._preparePCSkills(data);
-
         const classes = items.filter(item => item.type === "class");
-        let bab = 0;
-        let fortSave = 0;
-        let refSave = 0;
-        let willSave = 0;
-        let level = 0;
 
-        // Saves
-        const fort = data.attributes.fort;
-        const reflex = data.attributes.reflex;
-        const will = data.attributes.will;
-        
-        for (const cls of classes) {
-            switch (cls.data.bab) {
-                case "slow": bab += Math.floor(cls.data.levels * 0.5); break;
-                case "moderate": bab += Math.floor(cls.data.levels * 0.75); break;
-                case "full": bab += cls.data.levels; break;
-            }
-
-            let slowSave = Math.floor(cls.data.levels * (1/3));
-            let fastSave = Math.floor(cls.data.levels * 0.5) + 2;
-
-            fortSave += cls.data.fort === "slow" ? slowSave : fastSave;
-            refSave += cls.data.ref === "slow" ? slowSave : fastSave;
-            willSave += cls.data.will === "slow" ? slowSave : fastSave;
-
-            level += cls.data.levels;
-        }
-        
-        data.attributes.bab = bab;
-        fort.bonus = fortSave + data.abilities.con.mod + fort.misc + (getProperty(flags, "starfinder.greatFortitude") ? 2 : 0);
-        reflex.bonus = refSave + data.abilities.dex.mod + reflex.misc + (getProperty(flags, "starfinder.lightningReflexes") ? 2 : 0);
-        will.bonus = willSave + data.abilities.wis.mod + will.misc + (getProperty(flags, "starfinder.ironWill") ? 2 : 0);
-        data.details.level.value = level;
-
+        this._prepareAbilities(data);
+        this._prepareArmorClass(data, flags, armor);
+        this._preparePCSkills(data);
+        this._prepareBaseAttackBonus(data, classes);
+        this._prepareSaves(data, flags, classes);
+        this._prepareCharacterLevel(data, classes);
         this._prepareCharacterData(data);
-        
-        const init = data.attributes.init;
-        init.mod = data.abilities.dex.mod;
-        init.bonus = init.value + (getProperty(flags, "starfinder.improvedInititive") ? 4 : 0) + (getProperty(flags, "starfinder.rapidResponse") ? 4 : 0);
-        init.total = init.mod + init.bonus;        
-
-        // CMD or AC Vs Combat Maneuvers as it's called in starfinder
-        data.attributes.cmd.value = 8 + data.attributes.kac.value;
+        this._prepareInitiative(data, flags);
+        this._prepareCMD(data);
     }
 
     /**
@@ -106,10 +51,61 @@ export class ActorStarfinder extends Actor {
      * @param {Object} data The Actor's data
      */
     _prepareAbilities(data) {
-        // Ability modifiers
-        for (let abl of Object.values(data.abilities)) {
-            abl.mod = Math.floor((abl.value - 10) / 2);
-        }
+        game.starfinder.engine.process("process-base-ability-modifiers", data);
+    }
+
+    /**
+     * Prepares the armor class values for an actor.
+     * 
+     * @param {Object} data The inner actor data to update
+     * @param {Object} flags Actor flags
+     * @param {Object} armor An item that provides armor to the actor
+     */
+    _prepareArmorClass(data, flags, armor) {
+        let fact = {
+            data,
+            armor,
+            flags
+        };
+        
+        game.starfinder.engine.process("process-armor-class", fact);
+    }
+
+    /**
+     * Calculate the actors base attack bonus.
+     * 
+     * @param {Object} data The inner actor data to update
+     * @param {Object} classes A collection of class data used in the calculation
+     */
+    _prepareBaseAttackBonus(data, classes) {
+        let fact = {
+            data,
+            classes
+        };
+
+        game.starfinder.engine.process("process-bab", fact);
+    }
+
+    _prepareCharacterLevel(data, classes) {
+        let fact = {
+            data,
+            classes
+        };
+
+        game.starfinder.engine.process("process-character-level", fact);
+    }
+
+    _prepareCMD(data) {
+        game.starfinder.engine.process("process-cmd", {data});
+    }
+
+    _prepareInitiative(data, flags) {
+        let fact = {
+            data,
+            flags
+        };
+
+        game.starfinder.engine.process("process-initiative", fact);
     }
 
     /**
@@ -190,6 +186,16 @@ export class ActorStarfinder extends Actor {
             if (acp < 0 && armorSavant > 0) acp = Math.min(acp + armorSavant, 0);
             skill.mod = data.abilities[skill.ability].mod + acp + skill.ranks + (hasRanks ? classSkill : 0) + skill.misc;
         }
+    }
+
+    _prepareSaves(data, flags, classes) {
+        let fact = {
+            data,
+            classes,
+            flags
+        };
+        
+        game.starfinder.engine.process("process-saves", fact);
     }
 
     /**
