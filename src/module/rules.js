@@ -29,6 +29,14 @@ import calculateCharacterLevel from './rules/actions/calculate-character-level.j
 import calculateInitiative from './rules/actions/calculate-initiative.js';
 import calculateInitiativeModifiers from './rules/actions/calculate-initiative-modifiers.js';
 import calculateCmd from './rules/actions/calculate-cmd.js';
+import calculateShipArmorClass from './rules/actions/starship/calculate-ac.js';
+import calculateShipCritThreshold from './rules/actions/starship/calculate-ct.js';
+import calculateDrift from './rules/actions/starship/calculate-drift.js';
+import calculateMaxShields from './rules/actions/starship/calculate-max-shields.js';
+import calculatePower from './rules/actions/starship/calculate-power.js';
+import calculateShipShields from './rules/actions/starship/calculate-shields.js';
+import calculateShipSpeed from './rules/actions/starship/calculate-speed.js';
+import calculateShipTargetLock from './rules/actions/starship/calculate-tl.js';
 
 export default function (engine) {
     console.log("Starfinder | Registering rules");
@@ -48,6 +56,14 @@ export default function (engine) {
     calculateInitiative(engine);
     calculateInitiativeModifiers(engine);
     calculateCmd(engine);
+    calculateShipArmorClass(engine);
+    calculateShipCritThreshold(engine);
+    calculateDrift(engine);
+    calculateMaxShields(engine);
+    calculatePower(engine);
+    calculateShipShields(engine);
+    calculateShipSpeed(engine);
+    calculateShipTargetLock(engine);
 
     // Conditions
     always(engine);
@@ -72,6 +88,20 @@ export default function (engine) {
     engine.add({name: "process-character-level", closure: "calculateCharacterLevel"});
     engine.add({name: "process-initiative", when: "always", then: ["calculateInitiativeModifiers", "calculateInitiative"]});
     engine.add({name: "process-cmd", closure: "calculateCMD"});
+    engine.add({
+        name: "process-starship",
+        when: "always",
+        then: [
+            "calculateShipArmorClass",
+            "calculateShipCritThreshold",
+            "calculateDrift",
+            "calculateShields",
+            "calculateShipMaxShields",
+            "calculateShipPower",
+            "calculateShipSpeed",
+            "calculateShipTargetLock"
+        ]
+    });
 
     Hooks.callAll('starfinder.registerRules', engine);
 

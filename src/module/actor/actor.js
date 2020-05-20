@@ -205,27 +205,7 @@ export class ActorStarfinder extends Actor {
      * @private
      */
     _prepareStarshipData(data) {
-        const shields = CONFIG.STARFINDER.shieldsMap[data.details.systems.shields] || 0;
-        const ac = CONFIG.STARFINDER.armorDefenseMap[data.details.systems.armor] || 0;
-        const tl = CONFIG.STARFINDER.armorDefenseMap[data.details.systems.defense] || 0;
-        const thrusters = CONFIG.STARFINDER.thrustersMap[data.details.systems.thrusters] || { speed: 8, mode: 0 };
-        const powercore = CONFIG.STARFINDER.powercoreMap[data.details.systems.powercore] || { size: ["tiny"], pcu: 0 };
-        const driftEngine = CONFIG.STARFINDER.driftEngineMap[data.details.systems.driftEngine] || 0;
-        const sizeMod = CONFIG.STARFINDER.starshipSizeMod[data.details.size] || 0;
-
-        data.attributes.drift = driftEngine;
-        data.attributes.ac.value = 10 + ac + data.attributes.ac.misc + sizeMod;
-        data.attributes.tl.value = 10 + tl + data.attributes.tl.misc + sizeMod;
-        data.attributes.ct.value = Math.max(Math.floor(data.attributes.hp.value * 0.2), 1);
-        data.attributes.shields.max = shields;
-        data.attributes.speed = thrusters.speed;
-        data.attributes.pwr.pcu = powercore.pcu;
-
-        let shieldMax = Math.max(Math.floor(data.attributes.shields.max * 0.7), 1);
-        data.attributes.shields.forward.max = shieldMax;
-        data.attributes.shields.starboard.max = shieldMax;
-        data.attributes.shields.aft.max = shieldMax;
-        data.attributes.shields.port.max = shieldMax;
+        game.starfinder.engine.process("process-starship", {data});
     }
 
     /**
