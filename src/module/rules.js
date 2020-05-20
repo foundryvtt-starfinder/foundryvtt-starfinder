@@ -87,13 +87,43 @@ export default function (engine) {
     logToConsole(engine);    
 
     engine.add({name: "process-base-ability-modifiers", closure: "calculateBaseAbilityModifier"});
-    engine.add({name: "process-armor-class", when: "always", then: ["calculateBaseArmorClass", "calculateArmorModifiers"]});
-    engine.add({name: "process-bab", closure: "calculateBaseAttackBonus"});
-    engine.add({name: "process-saves", when: "always", then: ["calculateBaseSaves", "calculateSaveModifiers"]});
-    engine.add({name: "process-character-level", closure: "calculateCharacterLevel"});
-    engine.add({name: "process-initiative", when: "always", then: ["calculateInitiativeModifiers", "calculateInitiative"]});
-    engine.add({name: "process-cmd", closure: "calculateCMD"});
-    engine.add({name: "process-player-xp", closure: "calculateXP"});
+    engine.add({
+        name: "process-pc",
+        rules: [
+            {
+                when: "always",
+                then: "calculateBaseAbilityModifier"
+            },
+            {
+                when: "always", 
+                then: ["calculateBaseArmorClass", "calculateArmorModifiers"]
+            },
+            {
+                when: "always",
+                then: "calculateBaseAttackBonus"
+            },
+            {
+                when: "always",
+                then: ["calculateBaseSaves", "calculateSaveModifiers"]
+            },
+            {
+                when: "always",
+                then: "calculateCharacterLevel"
+            },
+            {
+                when: "always",
+                then: ["calculateInitiativeModifiers", "calculateInitiative"]
+            },
+            {
+                when: "always",
+                then: "calculateCMD"
+            },
+            {
+                when: "always",
+                then: "calculateXP"
+            }
+        ]
+    });
     engine.add({
         name: "process-starship",
         when: "always",

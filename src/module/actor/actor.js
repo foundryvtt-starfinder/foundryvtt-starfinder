@@ -35,15 +35,14 @@ export class ActorStarfinder extends Actor {
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
         const classes = items.filter(item => item.type === "class");
 
-        this._prepareAbilities(data);
-        this._prepareArmorClass(data, flags, armor);
+        game.starfinder.engine.process("process-pc", {
+            data,
+            armor,
+            classes,
+            flags
+        });
+
         this._preparePCSkills(data);
-        this._prepareBaseAttackBonus(data, classes);
-        this._prepareSaves(data, flags, classes);
-        this._prepareCharacterLevel(data, classes);
-        this._prepareCharacterXP(data);
-        this._prepareInitiative(data, flags);
-        this._prepareCMD(data);
     }
 
     /**
@@ -55,65 +54,13 @@ export class ActorStarfinder extends Actor {
     }
 
     /**
-     * Prepares the armor class values for an actor.
-     * 
-     * @param {Object} data The inner actor data to update
-     * @param {Object} flags Actor flags
-     * @param {Object} armor An item that provides armor to the actor
-     */
-    _prepareArmorClass(data, flags, armor) {
-        let fact = {
-            data,
-            armor,
-            flags
-        };
-        
-        game.starfinder.engine.process("process-armor-class", fact);
-    }
-
-    /**
-     * Calculate the actors base attack bonus.
-     * 
-     * @param {Object} data The inner actor data to update
-     * @param {Object} classes A collection of class data used in the calculation
-     */
-    _prepareBaseAttackBonus(data, classes) {
-        let fact = {
-            data,
-            classes
-        };
-
-        game.starfinder.engine.process("process-bab", fact);
-    }
-
-    _prepareCharacterLevel(data, classes) {
-        let fact = {
-            data,
-            classes
-        };
-
-        game.starfinder.engine.process("process-character-level", fact);
-    }
-
-    _prepareCMD(data) {
-        game.starfinder.engine.process("process-cmd", {data});
-    }
-
-    _prepareInitiative(data, flags) {
-        let fact = {
-            data,
-            flags
-        };
-
-        game.starfinder.engine.process("process-initiative", fact);
-    }
-
-    /**
      * Process skills for player character's.
      * 
      * @param {Object} data The actor's data
      */
     _preparePCSkills(data) {
+        // TODO: Transition this over to the new rules engine
+        // once the modifier system is in place.
         const actorData = this.data;
         const flags = actorData.flags;
         const items = actorData.items;
@@ -188,16 +135,6 @@ export class ActorStarfinder extends Actor {
         }
     }
 
-    _prepareSaves(data, flags, classes) {
-        let fact = {
-            data,
-            classes,
-            flags
-        };
-        
-        game.starfinder.engine.process("process-saves", fact);
-    }
-
     /**
      * Prepare a starship's data
      * 
@@ -215,17 +152,7 @@ export class ActorStarfinder extends Actor {
      * @private
      */
     _prepareVehicleData(data) {
-
-    }
-
-    /**
-     * Prepare the character's data.
-     * 
-     * @param {Object} data The data to prepare
-     * @private
-     */
-    _prepareCharacterXP(data) {
-        game.starfinder.engine.process("process-player-xp", {data});
+        // TODO: Actually do stuff here.
     }
 
     /**
@@ -239,6 +166,13 @@ export class ActorStarfinder extends Actor {
      * @private
      */
     _prepareNPCData(data) {
+        // TODO: I need to redo this when I redo the NPC sheet.
+        // The basic idea is that most, if not all, of the fields
+        // on the NPC sheet will be modifiable and not be pre calculated.
+        // This should make it easier to create NPC's, because their creation
+        // rules are much more free form anyway. The only calculation
+        // that should be occuring here is the CR and Experience 
+        // calculations.
         data.details.xp.value = this.getCRExp(data.details.cr);
 
         this._prepareAbilities(data);
