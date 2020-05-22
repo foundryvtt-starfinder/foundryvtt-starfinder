@@ -7,6 +7,20 @@ import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
  * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
  */
 export class ActorStarfinder extends Actor {
+
+    /** @override */
+    getRollData() {
+        const data = super.getRollData();
+        data.classes = this.data.items.reduce((obj, i) => {
+            if (i.type === "class") {
+                obj[i.name.slugify({replacement: "_", strict: true})] = i.data;
+            }
+            return obj;
+        }, {});
+
+        return data;
+    }
+
     /**
      * Augment the basic actor data with additional dynamic data.
      * 
