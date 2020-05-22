@@ -5,12 +5,12 @@ export const _getInitiativeFormula = function (combatant) {
     if (!actor) return "1d20";
     const init = actor.data.data.attributes.init;
     const parts = ["1d20", init.mod, (init.bonus != 0) ? init.bonus : null];
-    if (CONFIG.initiative.tiebreaker) parts.push(actor.data.data.abilities.dex.value / 100);
+    if (CONFIG.Combat.initiative.tiebreaker) parts.push(actor.data.data.abilities.dex.value / 100);
     return parts.filter(p => p !== null).join(" + ");
 };
 
 export const addChatMessageContextOptions = function (html, options) {
-    let canApply = li => canvas.tokens.controlledTokens.length && li.find(".dice-roll").length;
+    let canApply = li => canvas.tokens.controlled.length && li.find(".dice-roll").length;
     options.push(
         {
             name: "Apply Damage",
