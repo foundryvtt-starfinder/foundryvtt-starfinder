@@ -33,8 +33,6 @@ export class ActorStarfinder extends Actor {
         const data = actorData.data;
         const flags = actorData.flags;
 
-        this._ensureHasModifiersFlag(flags);
-
         if (actorData.type === "npc") {
             this._prepareNPCData(data);
             return;
@@ -68,9 +66,14 @@ export class ActorStarfinder extends Actor {
      * @param {Object} flags The actor flags to check against.
      */
     _ensureHasModifiersFlag(flags) {
-        console.log("in _ensureHasModifiersFlag", flags);
-        // if (flags && !hasProperty(flags, 'starfinder.modifiers')) {
-        //     this.setFlag('starfinder', 'modifiers', {});
+        // if (!hasProperty(flags, "starfinder")) {
+        //     console.log(`Starfinder | ${this.name} does not have any starfinder flags, attempting to create them...`);
+        //     const updateData = duplicate(flags);
+        //     console.log(updateData);
+        //     this.update({'flags.starfinder': {}});
+        // }
+        // if (hasProperty(flags, 'starfinder') && !hasProperty(flags, "starfinder.modifiers")) {
+        //     // this.setFlag('starfinder', 'modifiers', []).then(entity => console.log(entity));
         // }
     }
 
