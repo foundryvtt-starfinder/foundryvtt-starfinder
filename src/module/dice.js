@@ -78,7 +78,7 @@ export class DiceStarfinder {
             formula: parts.join(" + "),
             data: data,
             rollMode: rollMode,
-            rollModes: CONFIG.rollModes
+            rollModes: CONFIG.Dice.rollModes
         };        
 
         let adv = 0;
@@ -172,7 +172,7 @@ export class DiceStarfinder {
             formula: parts.join(" + "),
             data: data,
             rollMode: rollMode,
-            rollModes: CONFIG.rollModes
+            rollModes: CONFIG.Dice.rollModes
         };
 
         // Render modal dialog

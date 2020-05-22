@@ -164,7 +164,7 @@ export class ItemStarfinder extends Item {
 
     // Toggle default roll mode
     let rollMode = game.settings.get("core", "rollMode");
-    if (["gmroll", "blindroll"].includes(rollMode)) chatData["whisper"] = ChatMessage.getWhisperIDs("GM");
+    if (["gmroll", "blindroll"].includes(rollMode)) chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
     if (rollMode === "blindroll") chatData["blind"] = true;
 
     // Create the chat message
@@ -726,7 +726,7 @@ export class ItemStarfinder extends Item {
       user: game.user._id,
       type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
-      whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperIDs("GM") : null,
+      whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
       blind: rollMode === "blindroll",
       roll: roll,
       speaker: {

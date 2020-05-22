@@ -625,7 +625,7 @@ export class ActorStarfinder extends Actor {
             }
         });
 
-        await this.updateManyOwnedItem(updateItems);
+        await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
         if (chat) {
             let msg = `${this.name} takes a short 10 minute rest spending ${-drp} Resolve Point to recover ${dsp} Stamina Points.`;
@@ -704,7 +704,7 @@ export class ActorStarfinder extends Actor {
         });
 
         await this.update(updateData);
-        await this.updateManyOwnedItem(updateItems);
+        await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
         if (chat) {
             ChatMessage.create({
