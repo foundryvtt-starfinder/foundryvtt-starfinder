@@ -114,7 +114,8 @@
         <a class="item" data-tab="inventory">{{ localize "STARFINDER.Inventory" }}</a>
         <a class="item" data-tab="features">{{ localize "STARFINDER.Features" }}</a>
         <a class="item" data-tab="spellbook">{{ localize "STARFINDER.Spellbook" }}</a>
-        <a class="item" data-tab="biography">{{ localize "STARFINDER.Biography" }}</a>
+        {{!-- <a class="item" data-tab="modifiers">Modifiers</a> --}}
+        <a class="item" data-tab="biography">{{ localize "STARFINDER.Biography" }}</a>        
     </nav>
 
     {{!-- NPC Sheet Body --}}
@@ -303,6 +304,11 @@
         <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
             {{> "systems/starfinder/templates/actors/parts/actor-spellbook.html"}}
         </div>
+
+        {{!-- Modifiers Tab --}}
+        {{!-- <div class="tab modifers flexcol" data-group="primary" data-tab="modifiers">
+            {{> "systems/starfinder/templates/actors/parts/actor-modifiers.html"}}
+        </div> --}}
 
         {{!-- Biography Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="biography">

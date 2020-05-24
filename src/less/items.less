@@ -159,7 +159,8 @@
   /*  Item Actions                             */
   /* ----------------------------------------- */
 
-  h4.damage-header {
+  h4.damage-header,
+  h4.ability-adjustments-header {
     margin: 0;
     padding: 0;
     font-weight: bold;
@@ -167,12 +168,14 @@
     color: @colorOlive;
   }
 
-  .damage-parts {
+  .damage-parts,
+  .ability-adjustment-parts {
     list-style: none;
     margin: 0;
     padding: 0;
 
-    .damage-part {
+    .damage-part,
+    .ability-adjustment-part {
       flex: 0 0 100%;
       padding: 0;
       input {
@@ -185,13 +188,22 @@
     }
   }
 
+  .damage-control,
+  .ability-adjustments-control {
+    line-height: 24px;
+    color: @colorTan;
+    text-align: right;
+  }
+
   .damage-control {
     width: 18px;
     flex: 0 0 18px;
-    line-height: 24px;
-    float: right;
-    text-align: right;
-    color: @colorTan;
+    float: right;    
+  }
+
+  .ability-adjustments-control {
+    width: 110px;
+    flex: 0 0 20px;
   }
 
   .recharge {

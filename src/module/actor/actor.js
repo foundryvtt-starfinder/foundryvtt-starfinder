@@ -7,6 +7,20 @@ import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
  * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
  */
 export class ActorStarfinder extends Actor {
+
+    /** @override */
+    getRollData() {
+        const data = super.getRollData();
+        data.classes = this.data.items.reduce((obj, i) => {
+            if (i.type === "class") {
+                obj[i.name.slugify({replacement: "_", strict: true})] = i.data;
+            }
+            return obj;
+        }, {});
+
+        return data;
+    }
+
     /**
      * Augment the basic actor data with additional dynamic data.
      * 
@@ -31,74 +45,36 @@ export class ActorStarfinder extends Actor {
             return;
         }
 
-        this._prepareAbilities(data);
-
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
-        
-        if (armor) {
-            let armorSavant = getProperty(flags, "starfinder.armorSavant") ? 1 : 0;
-            let eacMod = armor.data.armor.eac + Math.min(data.abilities.dex.mod, armor.data.armor.dex || Number.MAX_SAFE_INTEGER);
-            let kacMod = armor.data.armor.kac + Math.min(data.abilities.dex.mod, armor.data.armor.dex || Number.MAX_SAFE_INTEGER);
-
-            if (!armor.data.proficient) {
-                eacMod -= 4;
-                kacMod -= 4;
-            }
-
-            data.attributes.eac.value = 10 + eacMod + armorSavant;
-            data.attributes.kac.value = 10 + kacMod + armorSavant;
-        } else {
-            data.attributes.eac.value = 10 + data.abilities.dex.mod;
-            data.attributes.kac.value = 10 + data.abilities.dex.mod;
-        }
-        
-        this._preparePCSkills(data);
-
         const classes = items.filter(item => item.type === "class");
-        let bab = 0;
-        let fortSave = 0;
-        let refSave = 0;
-        let willSave = 0;
-        let level = 0;
 
-        // Saves
-        const fort = data.attributes.fort;
-        const reflex = data.attributes.reflex;
-        const will = data.attributes.will;
-        
-        for (const cls of classes) {
-            switch (cls.data.bab) {
-                case "slow": bab += Math.floor(cls.data.levels * 0.5); break;
-                case "moderate": bab += Math.floor(cls.data.levels * 0.75); break;
-                case "full": bab += cls.data.levels; break;
-            }
+        game.starfinder.engine.process("process-pc", {
+            data,
+            armor,
+            classes,
+            flags
+        });
 
-            let slowSave = Math.floor(cls.data.levels * (1/3));
-            let fastSave = Math.floor(cls.data.levels * 0.5) + 2;
+        this._preparePCSkills(data);
+    }
 
-            fortSave += cls.data.fort === "slow" ? slowSave : fastSave;
-            refSave += cls.data.ref === "slow" ? slowSave : fastSave;
-            willSave += cls.data.will === "slow" ? slowSave : fastSave;
-
-            level += cls.data.levels;
-        }
-        
-        data.attributes.bab = bab;
-        fort.bonus = fortSave + data.abilities.con.mod + fort.misc + (getProperty(flags, "starfinder.greatFortitude") ? 2 : 0);
-        reflex.bonus = refSave + data.abilities.dex.mod + reflex.misc + (getProperty(flags, "starfinder.lightningReflexes") ? 2 : 0);
-        will.bonus = willSave + data.abilities.wis.mod + will.misc + (getProperty(flags, "starfinder.ironWill") ? 2 : 0);
-        data.details.level.value = level;
-
-        this._prepareCharacterData(data);
-        
-        const init = data.attributes.init;
-        init.mod = data.abilities.dex.mod;
-        init.bonus = init.value + (getProperty(flags, "starfinder.improvedInititive") ? 4 : 0) + (getProperty(flags, "starfinder.rapidResponse") ? 4 : 0);
-        init.total = init.mod + init.bonus;        
-
-        // CMD or AC Vs Combat Maneuvers as it's called in starfinder
-        data.attributes.cmd.value = 8 + data.attributes.kac.value;
+    /**
+     * Check to ensure that this actor has the modifiers flag set, if not then set it. 
+     * These will always be needed from hence forth, so we'll just make sure that they always exist.
+     * 
+     * @param {Object} flags The actor flags to check against.
+     */
+    _ensureHasModifiersFlag(flags) {
+        // if (!hasProperty(flags, "starfinder")) {
+        //     console.log(`Starfinder | ${this.name} does not have any starfinder flags, attempting to create them...`);
+        //     const updateData = duplicate(flags);
+        //     console.log(updateData);
+        //     this.update({'flags.starfinder': {}});
+        // }
+        // if (hasProperty(flags, 'starfinder') && !hasProperty(flags, "starfinder.modifiers")) {
+        //     // this.setFlag('starfinder', 'modifiers', []).then(entity => console.log(entity));
+        // }
     }
 
     /**
@@ -106,10 +82,7 @@ export class ActorStarfinder extends Actor {
      * @param {Object} data The Actor's data
      */
     _prepareAbilities(data) {
-        // Ability modifiers
-        for (let abl of Object.values(data.abilities)) {
-            abl.mod = Math.floor((abl.value - 10) / 2);
-        }
+        game.starfinder.engine.process("process-base-ability-modifiers", {data});
     }
 
     /**
@@ -118,6 +91,8 @@ export class ActorStarfinder extends Actor {
      * @param {Object} data The actor's data
      */
     _preparePCSkills(data) {
+        // TODO: Transition this over to the new rules engine
+        // once the modifier system is in place.
         const actorData = this.data;
         const flags = actorData.flags;
         const items = actorData.items;
@@ -199,27 +174,7 @@ export class ActorStarfinder extends Actor {
      * @private
      */
     _prepareStarshipData(data) {
-        const shields = CONFIG.STARFINDER.shieldsMap[data.details.systems.shields] || 0;
-        const ac = CONFIG.STARFINDER.armorDefenseMap[data.details.systems.armor] || 0;
-        const tl = CONFIG.STARFINDER.armorDefenseMap[data.details.systems.defense] || 0;
-        const thrusters = CONFIG.STARFINDER.thrustersMap[data.details.systems.thrusters] || { speed: 8, mode: 0 };
-        const powercore = CONFIG.STARFINDER.powercoreMap[data.details.systems.powercore] || { size: ["tiny"], pcu: 0 };
-        const driftEngine = CONFIG.STARFINDER.driftEngineMap[data.details.systems.driftEngine] || 0;
-        const sizeMod = CONFIG.STARFINDER.starshipSizeMod[data.details.size] || 0;
-
-        data.attributes.drift = driftEngine;
-        data.attributes.ac.value = 10 + ac + data.attributes.ac.misc + sizeMod;
-        data.attributes.tl.value = 10 + tl + data.attributes.tl.misc + sizeMod;
-        data.attributes.ct.value = Math.max(Math.floor(data.attributes.hp.value * 0.2), 1);
-        data.attributes.shields.max = shields;
-        data.attributes.speed = thrusters.speed;
-        data.attributes.pwr.pcu = powercore.pcu;
-
-        let shieldMax = Math.max(Math.floor(data.attributes.shields.max * 0.7), 1);
-        data.attributes.shields.forward.max = shieldMax;
-        data.attributes.shields.starboard.max = shieldMax;
-        data.attributes.shields.aft.max = shieldMax;
-        data.attributes.shields.port.max = shieldMax;
+        game.starfinder.engine.process("process-starship", {data});
     }
 
     /**
@@ -229,21 +184,7 @@ export class ActorStarfinder extends Actor {
      * @private
      */
     _prepareVehicleData(data) {
-
-    }
-
-    /**
-     * Prepare the character's data.
-     * 
-     * @param {Object} data The data to prepare
-     * @private
-     */
-    _prepareCharacterData(data) {
-        data.details.level.value = parseInt(data.details.level.value);
-        data.details.xp.max = this.getLevelExp(data.details.level.value || 1);
-        let prior = this.getLevelExp(data.details.level.value - 1 || 0),
-            req = data.details.xp.max - prior;
-        data.details.xp.pct = Math.min(Math.round((data.details.xp.value - prior) * 100 / req), 99.5);
+        // TODO: Actually do stuff here.
     }
 
     /**
@@ -257,6 +198,13 @@ export class ActorStarfinder extends Actor {
      * @private
      */
     _prepareNPCData(data) {
+        // TODO: I need to redo this when I redo the NPC sheet.
+        // The basic idea is that most, if not all, of the fields
+        // on the NPC sheet will be modifiable and not be pre calculated.
+        // This should make it easier to create NPC's, because their creation
+        // rules are much more free form anyway. The only calculation
+        // that should be occuring here is the CR and Experience 
+        // calculations.
         data.details.xp.value = this.getCRExp(data.details.cr);
 
         this._prepareAbilities(data);
@@ -287,17 +235,6 @@ export class ActorStarfinder extends Actor {
     }
 
     /**
-     * Return the amount of experience required to gain a certain character level.
-     * 
-     * @param {Number} level The desired level
-     * @returns {Number} The XP required for the next level
-     */
-    getLevelExp(level) {
-        const levels = CONFIG.STARFINDER.CHARACTER_EXP_LEVELS;
-        return levels[Math.min(level, levels.length - 1)];
-    }
-
-    /**
      * Return the amount of experience granted by killing a creature of a certain CR.
      * 
      * @param {Number} cr The creature's challenge rating
@@ -325,10 +262,11 @@ export class ActorStarfinder extends Actor {
      * @return {Promise}        A Promise which resolves to the updated Entity
      */
     async update(data, options = {}) {
-        if (data['data.traits.size']) {
+        const newSize = data['data.traits.size'];
+        if (newSize && (newSize !== getProperty(this.data, "data.traits.size"))) {
             let size = CONFIG.STARFINDER.tokenSizes[data['data.traits.size']];
-            if (this.isToken) this.token.update(this.token.scene._id, { height: size, width: size });
-            else {
+            if (this.isToken) this.token.update({ height: size, width: size });
+            else if (!data["token.width"] && !hasProperty(data, "token.width")) {
                 setProperty(data, 'token.height', size);
                 setProperty(data, 'token.width', size);
             }
@@ -676,7 +614,7 @@ export class ActorStarfinder extends Actor {
 
         // Recover HP, SP, and RP
         let dhp = data.attributes.hp.max === data.attributes.hp.value ? 0 :
-            data.details.level.value > data.attributes.hp.max ?
+            data.details.level.value > (data.attributes.hp.max - data.attributes.hp.value) ?
                 data.attributes.hp.max - data.attributes.hp.value : data.details.level.value;
         let dsp = data.attributes.sp.max - data.attributes.sp.value;
         let drp = data.attributes.rp.max - data.attributes.rp.value;

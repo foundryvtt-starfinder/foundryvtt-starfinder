@@ -180,6 +180,15 @@ export class ItemSheetStarfinder extends ItemSheet {
         arr[i][j] = entry[1];
         return arr;
       }, []);
+
+      // Handle Ability Adjustments array
+      let abilityMods = Object.entries(formData).filter(e => e[0].startsWith("data.abilityMods.parts"));
+      formData["data.abilityMods.parts"] = abilityMods.reduce((arr, entry) => {
+        let [i, j] = entry[0].split(".").slice(3);
+        if ( !arr[i] ) arr[i] = [];
+        arr[i][j] = entry[1];
+        return arr;
+      }, []);
   
       // Update the Item
       super._updateObject(event, formData);
@@ -199,9 +208,31 @@ export class ItemSheetStarfinder extends ItemSheet {
   
       // Modify damage formula
       html.find(".damage-control").click(this._onDamageControl.bind(this));
+      html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
     }
   
     /* -------------------------------------------- */
+
+    async _onAbilityAdjustmentsControl(event) {
+      event.preventDefault();
+      const a = event.currentTarget;
+
+      // Add new ability adjustment component
+      if (a.classList.contains("add-ability-adjustment")) {
+        await this._onSubmit(event);
+        const abilityMods = this.item.data.data.abilityMods;
+        return this.item.update({"data.abilityMods.parts": abilityMods.parts.concat([[0, ""]])});
+      }
+
+      // Remove an ability adjustment component
+      if (a.classList.contains("delete-ability-adjustment")) {
+        await this._onSubmit(event);
+        const li = a.closest(".ability-adjustment-part");
+        const abilityMods = duplicate(this.item.data.data.abilityMods);
+        abilityMods.parts.splice(Number(li.dataset.abilityAdjustment), 1);
+        return this.item.update({"data.abilityMods.parts": abilityMods.parts});
+      }
+    }
   
     /**
      * Add or remove a damage part from the damage formula

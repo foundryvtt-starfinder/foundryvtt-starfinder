@@ -30,4 +30,16 @@ export const registerSystemSettings = function () {
         default: false,
         type: Boolean
     });
+
+    game.settings.register("starfinder", "autoCollapseItemCards", {
+        name: "STARFINDER.SettingsAutoCollapseCardName",
+        hint: "STARFINDER.SettingsAutoCollapseCardHint",
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: s => {
+            ui.chat.render();
+        }
+    });
 };

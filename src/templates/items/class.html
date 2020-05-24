@@ -41,14 +41,14 @@
 
             {{!-- Class Levels --}}
             <div class="form-group">
-                <label>Class Levels</label>
+                <label>{{localize "STARFINDER.ClassLevelLabel"}}</label>
                 <div class="form-fields">
                     <input type="text" name="data.levels" value="{{data.levels}}" data-dtype="Number" />
                 </div>
             </div>
 
             <div class="form-group">
-                <label>BAB Progression</label>
+                <label>{{localize "STARFINDER.ClassBABProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.bab">
                         {{#select data.bab}}
@@ -61,7 +61,7 @@
             </div>
 
             <div class="form-group">
-                <label>Fortitude Save Progression</label>
+                <label>{{localize "STARFINDER.ClassFortSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.fort">
                         {{#select data.fort}}
@@ -74,7 +74,7 @@
             </div>
 
             <div class="form-group">
-                <label>Reflex Save Progression</label>
+                <label>{{localize "STARFINDER.ClassReflexSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.ref">
                         {{#select data.ref}}
@@ -87,7 +87,7 @@
             </div>
 
             <div class="form-group">
-                <label>Will Save Progression</label>
+                <label>{{localize "STARFINDER.ClassWillSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.will">
                         {{#select data.will}}
@@ -99,8 +99,71 @@
                 </div>
             </div>
 
-            <h3 class="form-header">Granted Abilities</h3>
-            <p class="notification warning">This is still to-do</p>
+            <div class="form-group">
+                <label>{{localize "STARFINDER.ClassKeyAbilityScore"}}</label>
+                <div class="form-fields">
+                    <select name="data.kas">
+                        {{#select data.kas}}
+                        {{#each config.abilities as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            {{!-- Hit Points per level --}}
+            <div class="form-group">
+                <label>{{localize "STARFINDER.ClassHPPerLevel"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.hp.value" value="{{data.hp.value}}" data-dtype="Number" />
+                </div>
+            </div>
+
+            {{!-- Stamina points per level --}}
+            <div class="form-group">
+                <label>{{localize "STARFINDER.ClassSPPerlevel"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.sp.value" value="{{data.sp.value}}" data-dtype="Number" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{localize "STARFINDER.ClassSkillRanksPerlevel"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.skillRanks.value" value="{{data.skillRanks.value}}" data-dtype="Number" />
+                </div>
+            </div>
+
+            {{!-- Class skills --}}
+            <div class="form-group stacked weapon-properties">
+                <label>{{localize "STARFINDER.ClassSkills"}}</label>
+                {{#each config.skills as |name val|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.csk.{{val}}" {{checked (lookup ../data.csk val)}}/> {{ name }}
+                </label>
+                {{/each}}
+            </div>
+
+             {{!-- Weapon proficiencies --}}
+            <div class="form-group stacked weapon-properties">
+                <label>{{localize "STARFINDER.ClassWeaponProf"}}</label>
+                {{#each config.weaponProficiencies as |name val|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.proficiencies.weapon.{{val}}" {{checked (lookup ../data.proficiencies.weapon val)}}/> {{ name }}
+                </label>
+                {{/each}}
+            </div>
+
+             {{!-- Weapon proficiencies --}}
+            <div class="form-group stacked weapon-properties">
+                <label>{{localize "STARFINDER.ClassArmorProf"}}</label>
+                {{#each config.armorProficiencies as |name val|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.proficiencies.armor.{{val}}" {{checked (lookup ../data.proficiencies.armor val)}}/> {{ name }}
+                </label>
+                {{/each}}
+            </div>
         </div>
     </section>
 </form>
