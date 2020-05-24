@@ -262,10 +262,11 @@ export class ActorStarfinder extends Actor {
      * @return {Promise}        A Promise which resolves to the updated Entity
      */
     async update(data, options = {}) {
-        if (data['data.traits.size']) {
+        const newSize = data['data.traits.size'];
+        if (newSize && (newSize !== getProperty(this.data, "data.traits.size"))) {
             let size = CONFIG.STARFINDER.tokenSizes[data['data.traits.size']];
-            if (this.isToken) this.token.update(this.token.scene._id, { height: size, width: size });
-            else {
+            if (this.isToken) this.token.update({ height: size, width: size });
+            else if (!data["token.width"] && !hasProperty(data, "token.width")) {
                 setProperty(data, 'token.height', size);
                 setProperty(data, 'token.width', size);
             }
