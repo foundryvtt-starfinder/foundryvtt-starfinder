@@ -221,7 +221,7 @@ export class ItemSheetStarfinder extends ItemSheet {
       if (a.classList.contains("add-ability-adjustment")) {
         await this._onSubmit(event);
         const abilityMods = this.item.data.data.abilityMods;
-        return this.item.update({"data.abilityMods.parts": abilityMods.parts.concat([["", ""]])});
+        return this.item.update({"data.abilityMods.parts": abilityMods.parts.concat([[0, ""]])});
       }
 
       // Remove an ability adjustment component
