@@ -180,7 +180,7 @@ export class ActorSheetStarfinder extends ActorSheet {
 
     _prepareTraits(traits) {
         const map = {
-            "dr": CONFIG.STARFINDER.damageTypes,
+            "dr": CONFIG.STARFINDER.energyDamageTypes,
             "di": CONFIG.STARFINDER.damageTypes,
             "dv": CONFIG.STARFINDER.damageTypes,
             "ci": CONFIG.STARFINDER.conditionTypes,
@@ -197,7 +197,12 @@ export class ActorSheetStarfinder extends ActorSheet {
                 values = trait.value instanceof Array ? trait.value : [trait.value];
             }
             trait.selected = values.reduce((obj, t) => {
-                obj[t] = choices[t];
+                if (typeof t !== "object") obj[t] = choices[t];
+                else {
+                    for (const [key, value] of Object.entries(t))
+                        obj[key] = `${choices[key]} ${value}`;
+                }
+
                 return obj;
             }, {});
 

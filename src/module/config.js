@@ -108,7 +108,26 @@ STARFINDER.currencies = {
 };
 
 // Damage Types
+STARFINDER.energyDamageTypes = {
+    "acid": "STARFINDER.DamageTypesAcid",
+    "cold": "STARFINDER.DamageTypesCold",
+    "electricity": "STARFINDER.DamageTypesElectricity",
+    "fire": "STARFINDER.DamageTypesFire",
+    "sonic": "STARFINDER.DamageTypesSonic"
+};
+
+STARFINDER.kineticDamageTypes = {
+    "bludgeoning": "STARFINDER.DamageTypesBludgeoning",
+    "piercing": "STARFINDER.DamageTypesPiercing",
+    "slashing": "STARFINDER.DamageTypesSlashing"
+};
+
 STARFINDER.damageTypes = {
+    ...STARFINDER.energyDamageTypes,
+    ...STARFINDER.kineticDamageTypes
+};
+
+STARFINDER.weaponDamageTypes = {
     "acid": "STARFINDER.DamageTypesAcid",
     "acid+bludgeoning": "STARFINDER.DamageTypesAcidAndBludgeoning",
     "acid+fire": "STARFINDER.DamageTypesAcidAndFire",

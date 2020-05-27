@@ -1,5 +1,6 @@
 <form autocomplete="off" onsubmit="event.preventDefault();">
     <ol class="trait-list">
+    {{#unless isEnergyResistance}}
         {{#each choices as |choice key|}}
         <li>
             <label class="checkbox">
@@ -8,6 +9,18 @@
             </label>
         </li>
         {{/each}}
+    {{else}}
+        {{#each choices as |choice key|}}
+        <li class="flexrow energy-resistance">
+            <label class="checkbox">
+                <input type="checkbox" name="er.{{key}}.0" data-dtype="Boolean" {{checked choice.chosen}}>
+                {{choice.label}}
+            </label>
+
+            <input type="text" name="er.{{key}}.1" data-dtype="Number" value="{{choice.resistanceValue}}" />
+        </li>
+        {{/each}}
+    {{/unless}}
     </ol>
     <div class="form-group stacked">
         <label>Special</label>

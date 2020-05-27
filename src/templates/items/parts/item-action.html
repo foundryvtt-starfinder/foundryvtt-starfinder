@@ -47,7 +47,7 @@
         <select name="data.damage.parts.{{i}}.1">
             {{#select (lookup this "1") }}
             <option value="">None</option>
-            {{#each ../config.damageTypes as |name type|}}
+            {{#each ../config.weaponDamageTypes as |name type|}}
             <option value="{{type}}">{{name}}</option>
             {{/each}}
             {{#each ../config.healingTypes as |name type|}}

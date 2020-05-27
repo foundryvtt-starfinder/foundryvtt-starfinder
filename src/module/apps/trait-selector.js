@@ -36,16 +36,35 @@ export class TraitSelectorStarfinder extends FormApplication {
         if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
 
         const choices = duplicate(this.options.choices);
-        for (let [k, v] of Object.entries(choices)) {
-            choices[k] = {
-                label: v,
-                chosen: attr.value.includes(k)
-            };
+        const isEnergyResistance = this.attribute === "data.traits.dr";
+        if (!isEnergyResistance) {
+            for (let [k, v] of Object.entries(choices)) {
+                choices[k] = {
+                    label: v,
+                    chosen: attr.value.includes(k)
+                };
+            }
+        } else {
+            for (let [k, v] of Object.entries(choices)) {
+                choices[k] = {
+                    label: v,
+                    chosen: false,
+                    resistanceValue: 0
+                };
+            }
+
+            for (const value of attr.value) {
+                for (const [type, resistance] of Object.entries(value)) {
+                    choices[type].chosen = true;
+                    choices[type].resistanceValue = resistance;
+                }
+            }
         }
 
         return {
             choices: choices,
-            custom: attr.custom
+            custom: attr.custom,
+            isEnergyResistance
         };
     }
 
@@ -76,10 +95,28 @@ export class TraitSelectorStarfinder extends FormApplication {
      * @private
      */
     _updateObject(event, formData) {
-        const choices = [];
+        let choices = [];
 
-        for (let [k, v] of Object.entries(formData)) {
-            if ((k !== 'custom') && v) choices.push(k);
+        if (this.attribute !== "data.traits.dr") {
+            for (let [k, v] of Object.entries(formData)) {
+                if ((k !== 'custom') && v) choices.push(k);
+            }
+        } else {
+            let resistances = Object.entries(formData).filter(e => e[0].startsWith("er"));
+            resistances = resistances.reduce((obj, entry) => {
+                let [type, i] = entry[0].split('.').slice(1);
+
+                if (!obj[type]) obj[type] = {};
+                obj[type][i] = entry[1];
+
+                return obj;
+            }, {});
+
+            choices = Object.entries(resistances).filter(e => e[1][0]).reduce((arr, resistance) => {
+                arr.push({[resistance[0]]: resistance[1][1]});
+
+                return arr;
+            }, []);
         }
 
         this.object.update({
