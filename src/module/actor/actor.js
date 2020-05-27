@@ -198,37 +198,9 @@ export class ActorStarfinder extends Actor {
      * @private
      */
     _prepareNPCData(data) {
-        // TODO: I need to redo this when I redo the NPC sheet.
-        // The basic idea is that most, if not all, of the fields
-        // on the NPC sheet will be modifiable and not be pre calculated.
-        // This should make it easier to create NPC's, because their creation
-        // rules are much more free form anyway. The only calculation
-        // that should be occuring here is the CR and Experience 
-        // calculations.
+        // NOTE: I've pretty much removed all of the automated 
+        // calculations from NPC's.
         data.details.xp.value = this.getCRExp(data.details.cr);
-
-        this._prepareAbilities(data);
-
-        // Skills
-        // NPC's handle skills differently. They don't have "class" skills nor do they have skill "ranks".
-        for (let skl of Object.values(data.skills)) {
-            skl.value = parseFloat(skl.value || 0);
-            skl.mod = data.abilities[skl.ability].mod + skl.misc;
-        }
-
-        // Saves
-        const fort = data.attributes.fort;
-        const reflex = data.attributes.reflex;
-        const will = data.attributes.will;
-
-        fort.bonus = fort.value + data.abilities.con.mod + fort.misc;
-        reflex.bonus = reflex.value + data.abilities.dex.mod + reflex.misc;
-        will.bonus = will.value + data.abilities.wis.mod + will.misc;
-
-        const init = data.attributes.init;
-        init.mod = data.abilities.dex.mod;
-        init.bonus = init.value;
-        init.total = init.mod + init.bonus;        
 
         // CMD or AC Vs Combat Maneuvers as it's called in starfinder
         data.attributes.cmd.value = 8 + data.attributes.kac.value;
@@ -334,7 +306,8 @@ export class ActorStarfinder extends Actor {
         // use this to delete any unwanted skills.
 
         const skill = duplicate(this.data.data.skills[skillId]);
-        const formData = await AddEditSkillDialog.create(skillId, skill),
+        const isNpc = this.data.type === "npc";
+        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
@@ -353,6 +326,8 @@ export class ActorStarfinder extends Actor {
             [`data.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
             [`data.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty
         };
+
+        if (isNpc) updateObject[`data.skills.${skillId}.enabled`] = Boolean(formData.get('enabled'));
 
         if ("subname" in skill) {
             updateObject[`data.skills.${skillId}.subname`] = formData.get('subname');
