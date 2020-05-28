@@ -2,6 +2,7 @@ import { DiceStarfinder } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
+import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
@@ -115,46 +116,47 @@ export class ActorStarfinder extends Actor {
 
         // Skills
         for (let [skl, skill] of Object.entries(data.skills)) {
+            let accumulator = 0;
              // Specific skill modifiers
              switch (skl) {
                 case "acr":
-                    skill.misc += naturalGrace;
-                    skill.misc += sureFooted;
+                    accumulator += naturalGrace;
+                    accumulator += sureFooted;
                     break;
                 case "ath":
-                    skill.misc += naturalGrace;
-                    skill.misc += sureFooted;
+                    accumulator += naturalGrace;
+                    accumulator += sureFooted;
                     break;
                 case "cul":
-                    skill.misc += historian;
-                    skill.misc += cultrualFascination;
-                    skill.misc += curious;
+                    accumulator += historian;
+                    accumulator += cultrualFascination;
+                    accumulator += curious;
                     break;
                 case "dip":
-                    skill.misc += cultrualFascination;
+                    accumulator += cultrualFascination;
                     break;
                 case "eng":
-                    skill.misc += scrounger;
+                    accumulator += scrounger;
                     break;
                 case "int":
-                    skill.misc += intimidating;
+                    accumulator += intimidating;
                     break;
                 case "mys":
-                    skill.misc += elvenMagic;
+                    accumulator += elvenMagic;
                     break;
                 case "per":
-                    skill.misc += keenSenses;
+                    accumulator += keenSenses;
                     break;
                 case "sen":
-                    skill.misc += flatAffect;
+                    accumulator += flatAffect;
                     break;
                 case "ste":
-                    skill.misc += scrounger;
-                    skill.misc += sneaky;
+                    accumulator += scrounger;
+                    accumulator += sneaky;
                     break;
                 case "sur":
-                    skill.misc += scrounger;
-                    skill.misc += selfSufficient;
+                    accumulator += scrounger;
+                    accumulator += selfSufficient;
                     break;
             }
 
@@ -163,7 +165,7 @@ export class ActorStarfinder extends Actor {
             let hasRanks = skill.ranks > 0;
             let acp = armor && armor.data.armor.acp < 0 && skill.hasArmorCheckPenalty ? armor.data.armor.acp : 0;
             if (acp < 0 && armorSavant > 0) acp = Math.min(acp + armorSavant, 0);
-            skill.mod = data.abilities[skill.ability].mod + acp + skill.ranks + (hasRanks ? classSkill : 0) + skill.misc;
+            skill.mod = data.abilities[skill.ability].mod + acp + skill.ranks + (hasRanks ? classSkill : 0) + skill.misc + accumulator;
         }
     }
 
@@ -334,6 +336,27 @@ export class ActorStarfinder extends Actor {
         }
 
         return this.update(updateObject);
+    }
+
+    /**
+     * Toggles what NPC skills are shown on the sheet.
+     */
+    async toggleNpcSkills() {
+        const skills = duplicate(this.data.data.skills);
+        const formData = await NpcSkillToggleDialog.create(skills);
+        let enabledSkills = {};
+        const delta = Object.entries(skills).reduce((obj, curr) => {
+            if (curr[1].enabled) obj[`data.skills.${curr[0]}.enabled`] = !curr[1].enabled;
+            return obj;
+        }, {});
+
+        for (let [key, value] of formData.entries()) {
+            enabledSkills[`data.${key}`] = Boolean(value);
+        }
+        
+        enabledSkills = mergeObject(enabledSkills, delta, {overwrite: false, inplace: false});
+
+        return await this.update(enabledSkills);
     }
 
     /**

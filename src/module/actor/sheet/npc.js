@@ -48,8 +48,8 @@ export class ActorSheetStarfinderNPC extends ActorSheetStarfinder {
      */
     _toggleSkills(event) {
         event.preventDefault();
-
-        console.log("Toggle skill button was pressed");
+        
+        this.actor.toggleNpcSkills();
     }
 
     _prepareItems(data) {
