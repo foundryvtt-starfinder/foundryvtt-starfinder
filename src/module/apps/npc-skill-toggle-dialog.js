@@ -24,7 +24,7 @@ export class NpcSkillToggleDialog extends Dialog {
             skills
         });
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             const dlg = new this({
                 title: game.i18n.localize("STARFINDER.NpcToggleSkillsDialogTitle"),
                 content: html,
@@ -35,8 +35,7 @@ export class NpcSkillToggleDialog extends Dialog {
                     },
                     cancel: {
                         icon: "<i class=\"fas fa-times\"></i>",
-                        label: game.i18n.localize("STARFINDER.CancelButtonLabel"),
-                        callback: () => reject("Form closed")
+                        label: game.i18n.localize("STARFINDER.CancelButtonLabel")
                     }
                 },
                 default: "submit"
