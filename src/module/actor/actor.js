@@ -3,6 +3,8 @@ import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
 import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
+import { StarfinderModifierType, StarfinderModifierTypes, StarfinderEffectType } from "../modifiers/types.js";
+import StarfinderModifier from "../modifiers/modifier.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
@@ -66,16 +68,18 @@ export class ActorStarfinder extends Actor {
      * 
      * @param {Object} flags The actor flags to check against.
      */
-    _ensureHasModifiersFlag(flags) {
-        // if (!hasProperty(flags, "starfinder")) {
-        //     console.log(`Starfinder | ${this.name} does not have any starfinder flags, attempting to create them...`);
-        //     const updateData = duplicate(flags);
-        //     console.log(updateData);
-        //     this.update({'flags.starfinder': {}});
-        // }
-        // if (hasProperty(flags, 'starfinder') && !hasProperty(flags, "starfinder.modifiers")) {
-        //     // this.setFlag('starfinder', 'modifiers', []).then(entity => console.log(entity));
-        // }
+    async _ensureHasModifiersFlag(flags) {
+        if (!hasProperty(flags, "starfinder")) {
+            console.log(`Starfinder | ${this.name} does not have any starfinder flags, attempting to create them...`);
+            await this.update({'flags.starfinder': {}});
+        }
+
+        if (hasProperty(flags, 'starfinder') && !hasProperty(flags, "starfinder.modifiers")) {
+            console.log(`Starfinder | ${this.name} does not have a modifiers flag set, attempting to create it now...`);
+            return await (await this.setFlag('starfinder', 'modifiers', [])).data.flags;
+        }
+
+        return flags;
     }
 
     /**
@@ -336,6 +340,48 @@ export class ActorStarfinder extends Actor {
         }
 
         return this.update(updateObject);
+    }
+    
+    /**
+     * Add a modifier to this actor.
+     * 
+     * @param {Object}        data               The data needed to create the modifier
+     * @param {String}        data.name          The name of this modifier. Used to identify the modfier.
+     * @param {Number|String} data.modifier      The modifier value.
+     * @param {String}        data.type          The modifiers type. Used to determine stacking.
+     * @param {String}        data.modifierType  Used to determine if this modifier is a constant value (+2) or a Roll formula (1d4).
+     * @param {string}        data.effectType    The category of things that might be effected by this modifier.
+     * @param {String}        data.valueAffected The specific value being modified.
+     * @param {Boolean}       data.enabled       Is this modifier activated or not.
+     * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
+     * @param {String}        data.notes         Any notes or comments about the modifier.
+     */
+    async addModifier({
+        name = "", 
+        modifier = "0", 
+        type = StarfinderModifierTypes.UNTYPED, 
+        modifierType = StarfinderModifierType.CONSTANT, 
+        effectType = StarfinderEffectType.SKILL, 
+        valueAffected = "", 
+        enabled = true, 
+        source = "", 
+        notes = ""
+    } = {}) {
+        const flags = await this._ensureHasModifiersFlag(duplicate(this.data.flags));
+
+        flags.starfinder.modifiers.push(new StarfinderModifier({
+            name,
+            modifier,
+            type,
+            modifierType,
+            effectType,
+            valueAffected,
+            enabled,
+            source,
+            notes
+        }));
+
+        await this.update({["flags.starfinder.modifiers"]: flags.starfinder.modifiers});
     }
 
     /**

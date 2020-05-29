@@ -22,6 +22,8 @@ import { highlightCriticalSuccessFailure } from "./module/dice.js";
 import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/combat.js";
 import Engine from "./module/engine/engine.js";
 import registerSystemRules from "./module/rules.js";
+import { StarfinderModifierTypes, StarfinderModifierType, StarfinderEffectType } from "./module/modifiers/types.js";
+import StarfinderModifier from "./module/modifiers/modifier.js";
 
 Hooks.once('init', async function () {
     console.log(`Starfinder | Initializeing Starfinder System`);
@@ -40,7 +42,11 @@ Hooks.once('init', async function () {
 
     game.starfinder = {
         rollItemMacro,
-        engine
+        engine,
+        StarfinderModifierType,
+        StarfinderEffectType,
+        StarfinderModifierTypes,
+        StarfinderModifier
     };
 
     CONFIG.STARFINDER = STARFINDER;

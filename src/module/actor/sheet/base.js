@@ -24,9 +24,13 @@ export class ActorSheetStarfinder extends ActorSheet {
                 ".tab.attributes",
                 ".inventory .inventory-list",
                 ".features .inventory-list",
-                ".spellbook .inventory-list"
+                ".spellbook .inventory-list",
+                ".modifiers .inventory-list"
             ],
-            tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes"}]
+            tabs: [
+                {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes"}, 
+                {navSelector: ".subtabs", contentSelector: ".modifiers-body", initial: "permanent"}
+            ]
         });
     }
 
@@ -176,6 +180,15 @@ export class ActorSheetStarfinder extends ActorSheet {
 
         // Item Recharging
         html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
+    }
+
+    /** @override */
+    _onChangeTab(event, tabs, active) {
+        if (active === "modifiers") {
+            this._tabs[1].activate("permanent");
+        }
+
+        super._onChangeTab();
     }
 
     _prepareTraits(traits) {

@@ -20,6 +20,7 @@ export const StarfinderEffectType = Object.freeze({
     EAC: "eac",
     KAC: "kac",
     CMD: "cmd",
+    ACP: "acp",
     INITIATIVE: "initiative",
     ABILITY_SKILLS: "ability-skills",
     SKILL: "skill",
@@ -27,5 +28,15 @@ export const StarfinderEffectType = Object.freeze({
     SPEED: "speed",
     DAMAGE: "damage",
     ABILITY_CHECKS: "ability-checks",
-    ABILITY_SCORE: "ability-score"
+    ABILITY_SCORE: "ability-score",
+    HIT_POINTS: "hit-points",
+    STAMINA_POINTS: "stamina-points",
+    RESOLVE_POINTS: "resolve-points",
+    SPELL_RESISTANCE: "spell-resistance",
+    DAMAGE_REDUCTION: "damage-reduction"
+});
+
+export const StarfinderModifierType = Object.freeze({
+    CONSTANT: "constant",
+    FORMULA: "formula"
 });

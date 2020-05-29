@@ -18,6 +18,21 @@ button {
   }
 }
 
+.subtabs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .item {
+    text-align: center;
+  }
+}
+
+.subtabs > * {
+  flex: 1;
+}
+
 /* ----------------------------------------- */
 /*  All Starfinder Apps                           */
 /* ----------------------------------------- */
@@ -296,6 +311,24 @@ button {
       &.active {
         // border-bottom: 3px solid @colorCrimson;
         background: @starfinderRed;
+      }
+    }
+  }
+
+  .sheet-subnavigation {
+    flex: 0 0 @navHeight;
+    margin-bottom: 5px;
+    .exo2();
+    
+    .item {
+      height: 30px;
+      line-height: 32px;
+      // color: #111;
+      margin: 0 5px;
+      font-size: 15px;
+
+      &.active {
+        border-bottom: 3px solid @starfinderRed;
       }
     }
   }
