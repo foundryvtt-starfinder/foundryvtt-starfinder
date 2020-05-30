@@ -16,6 +16,7 @@ export class ActorStarfinder extends Actor {
         const data = super.getRollData();
         data.classes = this.data.items.reduce((obj, i) => {
             if (i.type === "class") {
+                i.data.keyAbilityMod = this.data.data.abilities[i.data.kas].mod;
                 obj[i.name.slugify({replacement: "_", strict: true})] = i.data;
             }
             return obj;
