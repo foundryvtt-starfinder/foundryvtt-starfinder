@@ -76,7 +76,8 @@ Hooks.once("setup", function () {
         "vehicleSizes", "babProgression", "saveProgression", "saveDescriptors", "armorProficiencies",
         "weaponProficiencies", "abilityActivationTypes", "skillProficiencyLevels", "damageTypes",
         "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
-        "weaponProperties", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes"
+        "weaponProperties", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
+        "languages"
     ];
 
     for (let o of toLocalize) {
