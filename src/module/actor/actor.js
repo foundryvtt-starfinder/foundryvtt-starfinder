@@ -42,6 +42,8 @@ export class ActorStarfinder extends Actor {
         const data = actorData.data;
         const flags = actorData.flags;
 
+        this._ensureHasModifiers(data);
+
         if (actorData.type === "npc") {
             this._prepareNPCData(data);
             return;
@@ -69,23 +71,31 @@ export class ActorStarfinder extends Actor {
     }
 
     /**
-     * Check to ensure that this actor has the modifiers flag set, if not then set it. 
+     * Check to ensure that this actor has a modifiers data object set, if not then set it. 
      * These will always be needed from hence forth, so we'll just make sure that they always exist.
      * 
-     * @param {Object} flags The actor flags to check against.
+     * @param {Object}      data The actor data to check against.
+     * @param {String|Null} prop A specific property name to check.
+     * 
+     * @returns {Object}         The modified data object with the modifiers data object added.
      */
-    async _ensureHasModifiersFlag(flags) {
-        if (!hasProperty(flags, "starfinder")) {
-            console.log(`Starfinder | ${this.name} does not have any starfinder flags, attempting to create them...`);
-            await this.update({'flags.starfinder': {}});
+    _ensureHasModifiers(data, prop = null) {
+        if (!hasProperty(data, "modifiers")) {
+            console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
+            data.modifiers = {
+                permanent: [],
+                temporary: [],
+                conditions: [],
+                item: [],
+                misc: []
+            };
+        }
+        
+        if (prop && !hasProperty(data, `modifiers.${prop}`)) {
+            data.modifiers[prop] = [];
         }
 
-        if (hasProperty(flags, 'starfinder') && !hasProperty(flags, "starfinder.modifiers")) {
-            console.log(`Starfinder | ${this.name} does not have a modifiers flag set, attempting to create it now...`);
-            return await (await this.setFlag('starfinder', 'modifiers', [])).data.flags;
-        }
-
-        return flags;
+        return data;
     }
 
     /**
@@ -356,7 +366,8 @@ export class ActorStarfinder extends Actor {
      * @param {Number|String} data.modifier      The modifier value.
      * @param {String}        data.type          The modifiers type. Used to determine stacking.
      * @param {String}        data.modifierType  Used to determine if this modifier is a constant value (+2) or a Roll formula (1d4).
-     * @param {string}        data.effectType    The category of things that might be effected by this modifier.
+     * @param {String}        data.effectType    The category of things that might be effected by this modifier.
+     * @param {String}        data.section       What subtab should this modifier show under on the character sheet.
      * @param {String}        data.valueAffected The specific value being modified.
      * @param {Boolean}       data.enabled       Is this modifier activated or not.
      * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
@@ -367,15 +378,17 @@ export class ActorStarfinder extends Actor {
         modifier = "0", 
         type = StarfinderModifierTypes.UNTYPED, 
         modifierType = StarfinderModifierType.CONSTANT, 
-        effectType = StarfinderEffectType.SKILL, 
+        effectType = StarfinderEffectType.SKILL,
+        section = "misc",
         valueAffected = "", 
         enabled = true, 
         source = "", 
         notes = ""
     } = {}) {
-        const flags = await this._ensureHasModifiersFlag(duplicate(this.data.flags));
+        const data = this._ensureHasModifiers(duplicate(this.data.data), section);
+        const modifiers = data.modifiers;
 
-        flags.starfinder.modifiers.push(new StarfinderModifier({
+        modifiers[section].push(new StarfinderModifier({
             name,
             modifier,
             type,
@@ -387,7 +400,7 @@ export class ActorStarfinder extends Actor {
             notes
         }));
 
-        await this.update({["flags.starfinder.modifiers"]: flags.starfinder.modifiers});
+        await this.update({["data.modifiers"]: modifiers});
     }
 
     /**

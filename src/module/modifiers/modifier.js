@@ -24,12 +24,7 @@ export default class StarfinderModifier {
         enabled = true, 
         source = "", 
         notes = ""
-    } = {}) {
-        if (type !== StarfinderModifierTypes.UNTYPED && modifier < 0) {
-            ui.notification.error("Only untyped penalties are allowed");
-            throw new RangeError("only untyped penalties are allowed.");
-        }
-        
+    } = {}) {        
         this.name = name;
         this.modifier = modifier;
         this.type = type;

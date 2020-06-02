@@ -379,11 +379,21 @@
                         "max": 0
                     }
                 }
+            },
+            "modifiers": {
+                "modifiers": {
+                    "permanent": [],
+                    "temporary": [],
+                    "conditions": [],
+                    "item": [],
+                    "misc": []
+                }
             }
         },
         "character": {
             "templates": [
-                "common"
+                "common",
+                "modifiers"
             ],
             "details": {
                 "deity": "",
@@ -432,7 +442,8 @@
         },
         "npc": {
             "templates": [
-                "common"
+                "common",
+                "modifiers"
             ],
             "details": {
                 "type": "",
@@ -445,6 +456,7 @@
             }
         },
         "starship": {
+            "templates": ["modifiers"],
             "details": {
                 "tier": 1,
                 "model": "",
@@ -539,6 +551,7 @@
             }
         },
         "vehicle": {
+            "templates": ["modifiers"],
             "details": {
                 "level": 1,
                 "price": 0,
@@ -677,10 +690,13 @@
                     "value": 0,
                     "per": ""
                 }
+            },
+            "modifiers": {
+                "modifiers": []
             }
         },
         "weapon": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers"],
             "weaponType": {
                 "value": "basicM"
             },
@@ -691,7 +707,7 @@
             "fusions": []
         },
         "equipment": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers"],
             "armor": {
                 "type": "light",
                 "eac": 0,
@@ -713,7 +729,7 @@
             "proficient": true
         },
         "consumable": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers"],
             "consumableType": "serum",
             "uses": {
                 "value": 0,
@@ -724,10 +740,10 @@
             }
         },
         "goods": {
-            "templates": ["itemDescription", "physicalItem"]
+            "templates": ["itemDescription", "physicalItem", "modifiers"]
         },
         "class": {
-            "templates": ["itemDescription"],
+            "templates": ["itemDescription", "modifiers"],
             "levels": 1,
             "hp": {
                 "value": 1,
@@ -753,7 +769,7 @@
             "will": "bad"
         },
         "spell": {
-            "templates": ["itemDescription", "activatedEffect", "action"],
+            "templates": ["itemDescription", "activatedEffect", "action", "modifiers"],
             "level": 1,
             "school": "",
             "sr": false,
@@ -771,7 +787,7 @@
             }
         },
         "feat": {
-            "templates": ["itemDescription", "activatedEffect", "action"],
+            "templates": ["itemDescription", "activatedEffect", "action", "modifiers"],
             "requirements": "",
             "recharge": {
                 "value": null,
@@ -779,7 +795,7 @@
             }
         },
         "race": {
-            "templates": ["itemDescription"],
+            "templates": ["itemDescription", "modifiers"],
             "hp": {
                 "value": 1,
                 "min": 1
@@ -792,7 +808,7 @@
             "subtype": ""
         },
         "theme": {
-            "templates": ["itemDescription"],
+            "templates": ["itemDescription", "modifiers"],
             "abilityMod": {
                 "ability": "cha",
                 "mod": 1
@@ -800,31 +816,31 @@
             "skill": ""
         },
         "archetypes": {
-            "templates": ["itemDescription"],
+            "templates": ["itemDescription", "modifiers"],
             "grants": {
                 "levels": []
             }
         },
         "technological": {
-            "templates": ["itemDescription", "physicalItem", "itemUsage"],
+            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers"],
             "hands": 0
         },
         "fusion": {
-            "templates": ["itemDescription"],
+            "templates": ["itemDescription", "modifiers"],
             "level": 1
         },
         "upgrade": {
-            "templates": ["itemDescription", "physicalItem", "itemUsage"],
+            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers"],
             "slots": 1,
             "armorType": "any"
         },
         "augmentation": {
-            "templates": ["itemDescription", "physicalItem"],
+            "templates": ["itemDescription", "physicalItem", "modifiers"],
             "system": "",
             "type": "cybernetic"
         },
         "starshipWeapon": {
-            "templates": ["itemDescription"],
+            "templates": ["itemDescription", "modifiers"],
             "range": "short",
             "class": "light",
             "weaponType": "direct",

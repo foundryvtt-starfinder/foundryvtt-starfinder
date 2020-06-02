@@ -33,7 +33,8 @@ export const StarfinderEffectType = Object.freeze({
     STAMINA_POINTS: "stamina-points",
     RESOLVE_POINTS: "resolve-points",
     SPELL_RESISTANCE: "spell-resistance",
-    DAMAGE_REDUCTION: "damage-reduction"
+    DAMAGE_REDUCTION: "damage-reduction",
+    STRENGTH_FOR_BULK: "strength-for-bulk"
 });
 
 export const StarfinderModifierType = Object.freeze({
