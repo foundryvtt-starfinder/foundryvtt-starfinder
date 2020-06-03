@@ -82,17 +82,7 @@ export class ActorStarfinder extends Actor {
     _ensureHasModifiers(data, prop = null) {
         if (!hasProperty(data, "modifiers")) {
             console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
-            data.modifiers = {
-                permanent: [],
-                temporary: [],
-                conditions: [],
-                item: [],
-                misc: []
-            };
-        }
-        
-        if (prop && !hasProperty(data, `modifiers.${prop}`)) {
-            data.modifiers[prop] = [];
+            data.modifiers = [];
         }
 
         return data;
@@ -367,7 +357,7 @@ export class ActorStarfinder extends Actor {
      * @param {String}        data.type          The modifiers type. Used to determine stacking.
      * @param {String}        data.modifierType  Used to determine if this modifier is a constant value (+2) or a Roll formula (1d4).
      * @param {String}        data.effectType    The category of things that might be effected by this modifier.
-     * @param {String}        data.section       What subtab should this modifier show under on the character sheet.
+     * @param {String}        data.subtab        What subtab should this modifier show under on the character sheet.
      * @param {String}        data.valueAffected The specific value being modified.
      * @param {Boolean}       data.enabled       Is this modifier activated or not.
      * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
@@ -379,16 +369,16 @@ export class ActorStarfinder extends Actor {
         type = StarfinderModifierTypes.UNTYPED, 
         modifierType = StarfinderModifierType.CONSTANT, 
         effectType = StarfinderEffectType.SKILL,
-        section = "misc",
+        subtab = "misc",
         valueAffected = "", 
         enabled = true, 
         source = "", 
         notes = ""
     } = {}) {
-        const data = this._ensureHasModifiers(duplicate(this.data.data), section);
+        const data = this._ensureHasModifiers(duplicate(this.data.data));
         const modifiers = data.modifiers;
 
-        modifiers[section].push(new StarfinderModifier({
+        modifiers.push(new StarfinderModifier({
             name,
             modifier,
             type,
@@ -397,7 +387,8 @@ export class ActorStarfinder extends Actor {
             valueAffected,
             enabled,
             source,
-            notes
+            notes,
+            subtab
         }));
 
         await this.update({["data.modifiers"]: modifiers});

@@ -121,6 +121,33 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         data.inventory = Object.values(inventory);
         data.spellbook = spellbook;
         data.features = Object.values(features);
+
+        const modifiers = {
+            permanent: { label: "STARFINDER.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
+            temporary: { label: "STARFINDER.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } },
+            item: { label: "STARFINDER.ModifiersItemTabLabel", modifiers: [], dataset: { subtab: "item" } },
+            misc: { label: "STARFINDER.ModifiersMiscTabLabel", modifiers: [], dataset: { subtab: "misc" } }
+        };
+
+        let [permanent, temporary, itemModifiers, misc] = data.data.modifiers.reduce((arr, modifier) => {
+            if (modifier.subtab === "permanent") arr[0].push(modifier);
+            else if (modifier.subtab === "temporary") arr[1].push(modifier);
+            else if (modifier.subtab === "item") arr[2].push(modifier);
+            // The miscellaneous group is kind of a catchall category. If a modifer isn't explicitly
+            // marked as belonging to a subtab, we'll just shove it in here.
+            else arr[3].push(modifier);
+
+            return arr;
+        }, [[], [], [], []]);
+
+        modifiers.permanent.modifiers = permanent;
+        modifiers.temporary.modifiers = temporary;
+        modifiers.item.modifiers = itemModifiers;
+        modifiers.misc.modifiers = misc;
+
+        data.modifiers = Object.values(modifiers);
+
+        console.log(data);
     }
 
     /**

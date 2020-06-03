@@ -1,22 +1,53 @@
 <nav class="sheet-subnavigation subtabs" data-group="modifiers">
-    <a class="item active" data-tab="permanent">Permanent</a>
-    <a class="item" data-tab="test">Test</a>
-    <a class="item" data-tab="test2">Test 2</a>
-    <a class="item" data-tab="test3">Test 3</a>
-    <a class="item" data-tab="test4">Test 4</a>
-    <a class="item" data-tab="test5">Test 5</a>
+    {{#each sections as |section sid|}}
+    <a class="item" data-tab="{{section.dataset.subtab}}">{{localize section.label}}</a>
+    {{/each}}
+    {{!-- <a class="item" data-tab="permanent">Permanent</a>
+    <a class="item" data-tab="temporary">Temporary</a>
+    <a class="item" data-tab="item">Item</a>
+    <a class="item" data-tab="misc">Miscellaneous</a> --}}
 </nav>
 <section class="modifiers-body">
-    
-    <div class="tab permanent flexrow" data-group="modifiers" data-tab="permanent">
+    {{#each sections as |section sid|}}
+    <div class="tab {{section.dataset.subtab}} flexrow" data-group="modifiers" data-tab="{{section.dataset.subtab}}">
         <ol class="inventory-list">
             <li class="item flexrow inventory-header modifiers-header">
                 <div class="item-name flexrow">
-                    <h3>Permanent</h3>
+                    <h3>Name</h3>
                 </div>
 
-                <div class="modifier-modifer">Modifier</div>
-                <div class="type">Type</div>
+                <div class="modifier">Modifier</div>
+                <div class="modifier-type">Type</div>
+                {{#if ../owner}}
+                <div class="item-controls">
+                    <a class="item-control item-create" title="Add Modifier">
+                        <i class="fas fa-plus"></i> Add
+                    </a>
+                </div>
+                {{/if}}
+            </li>
+
+            <ol class="modifier-list item-list">
+                {{#each section.modifiers as |modifier mid|}}
+                <li class="item modifier flexrow" data-modifier-id="{{mid}}">
+                    <div class="item-name modifier-name flexrow">
+                        <h4>{{~modifier.name~}}</h4>
+                    </div>
+                </li>
+                {{/each}}
+            </ol>
+        </ol>
+    </div>
+    {{/each}}
+    {{!-- <div class="tab test flexrow" data-group="modifiers" data-tab="temporary">
+        <ol class="inventory-list">
+            <li class="item flexrow inventory-header modifiers-header">
+                <div class="item-name flexrow">
+                    <h3>Name</h3>
+                </div>
+
+                <div class="modifier">Modifier</div>
+                <div class="modifier-type">Type</div>
                 {{#if owner}}
                 <div class="item-controls">
                     <a class="item-control item-create" title="Add Modifier">
@@ -26,20 +57,43 @@
                 {{/if}}
             </li>
         </ol>
-    </div> 
-    <div class="tab test flexrow" data-group="modifiers" data-tab="test">
-        <p class="notification warning">Placeholder</p>
     </div>
-    <div class="tab test flexrow" data-group="modifiers" data-tab="test2">
-        <p class="notification warning">Placeholder</p>
+    <div class="tab test flexrow" data-group="modifiers" data-tab="item">
+        <ol class="inventory-list">
+            <li class="item flexrow inventory-header modifiers-header">
+                <div class="item-name flexrow">
+                    <h3>Name</h3>
+                </div>
+
+                <div class="modifier">Modifier</div>
+                <div class="modifier-type">Type</div>
+                {{#if owner}}
+                <div class="item-controls">
+                    <a class="item-control item-create" title="Add Modifier">
+                        <i class="fas fa-plus"></i> Add
+                    </a>
+                </div>
+                {{/if}}
+            </li>
+        </ol>
     </div>
-    <div class="tab test flexrow" data-group="modifiers" data-tab="test3">
-        <p class="notification warning">Placeholder</p>
-    </div>
-    <div class="tab test flexrow" data-group="modifiers" data-tab="test4">
-        <p class="notification warning">Placeholder</p>
-    </div>
-    <div class="tab test flexrow" data-group="modifiers" data-tab="test5">
-        <p class="notification warning">Placeholder</p>
-    </div>
+    <div class="tab test flexrow" data-group="modifiers" data-tab="misc">
+        <ol class="inventory-list">
+            <li class="item flexrow inventory-header modifiers-header">
+                <div class="item-name flexrow">
+                    <h3>Name</h3>
+                </div>
+
+                <div class="modifier">Modifier</div>
+                <div class="modifier-type">Type</div>
+                {{#if owner}}
+                <div class="item-controls">
+                    <a class="item-control item-create" title="Add Modifier">
+                        <i class="fas fa-plus"></i> Add
+                    </a>
+                </div>
+                {{/if}}
+            </li>
+        </ol>
+    </div> --}}
 </section>
