@@ -185,7 +185,7 @@ export class ActorSheetStarfinder extends ActorSheet {
     /** @override */
     _onChangeTab(event, tabs, active) {
         if (active === "modifiers") {
-            this._tabs[1].activate("permanent");
+            this._tabs[1].activate("conditions");
         }
 
         super._onChangeTab();

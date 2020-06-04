@@ -2,13 +2,10 @@
     {{#each sections as |section sid|}}
     <a class="item" data-tab="{{section.dataset.subtab}}">{{localize section.label}}</a>
     {{/each}}
-    {{!-- <a class="item" data-tab="permanent">Permanent</a>
-    <a class="item" data-tab="temporary">Temporary</a>
-    <a class="item" data-tab="item">Item</a>
-    <a class="item" data-tab="misc">Miscellaneous</a> --}}
 </nav>
 <section class="modifiers-body">
     {{#each sections as |section sid|}}
+    {{#unless section.isConditions}}
     <div class="tab {{section.dataset.subtab}} flexrow" data-group="modifiers" data-tab="{{section.dataset.subtab}}">
         <ol class="inventory-list">
             <li class="item flexrow inventory-header modifiers-header">
@@ -38,62 +35,16 @@
             </ol>
         </ol>
     </div>
+    {{else}}
+    <div class="tab {{section.dataset.subtab}} flexrow" data-group="modifiers" data-tab="{{section.dataset.subtab}}">
+        <div class="form-group stacked conditions">
+            {{#each ../config.conditionTypes as |condition name|}}
+            <label class="checkbox">
+                <input type="checkbox" name="data.conditions.{{name}}" {{checked (lookup ../../data.conditions name)}} /> {{condition}}
+            </label>
+            {{/each}}
+        </div>
+    </div>
+    {{/unless}}
     {{/each}}
-    {{!-- <div class="tab test flexrow" data-group="modifiers" data-tab="temporary">
-        <ol class="inventory-list">
-            <li class="item flexrow inventory-header modifiers-header">
-                <div class="item-name flexrow">
-                    <h3>Name</h3>
-                </div>
-
-                <div class="modifier">Modifier</div>
-                <div class="modifier-type">Type</div>
-                {{#if owner}}
-                <div class="item-controls">
-                    <a class="item-control item-create" title="Add Modifier">
-                        <i class="fas fa-plus"></i> Add
-                    </a>
-                </div>
-                {{/if}}
-            </li>
-        </ol>
-    </div>
-    <div class="tab test flexrow" data-group="modifiers" data-tab="item">
-        <ol class="inventory-list">
-            <li class="item flexrow inventory-header modifiers-header">
-                <div class="item-name flexrow">
-                    <h3>Name</h3>
-                </div>
-
-                <div class="modifier">Modifier</div>
-                <div class="modifier-type">Type</div>
-                {{#if owner}}
-                <div class="item-controls">
-                    <a class="item-control item-create" title="Add Modifier">
-                        <i class="fas fa-plus"></i> Add
-                    </a>
-                </div>
-                {{/if}}
-            </li>
-        </ol>
-    </div>
-    <div class="tab test flexrow" data-group="modifiers" data-tab="misc">
-        <ol class="inventory-list">
-            <li class="item flexrow inventory-header modifiers-header">
-                <div class="item-name flexrow">
-                    <h3>Name</h3>
-                </div>
-
-                <div class="modifier">Modifier</div>
-                <div class="modifier-type">Type</div>
-                {{#if owner}}
-                <div class="item-controls">
-                    <a class="item-control item-create" title="Add Modifier">
-                        <i class="fas fa-plus"></i> Add
-                    </a>
-                </div>
-                {{/if}}
-            </li>
-        </ol>
-    </div> --}}
 </section>

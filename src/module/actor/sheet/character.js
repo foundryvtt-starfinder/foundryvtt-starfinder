@@ -123,6 +123,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         data.features = Object.values(features);
 
         const modifiers = {
+            conditions: { label: "STARFINDER.ModifiersConditionsTabLabel", dataset: { subtab: "conditions" }, isConditions: true },
             permanent: { label: "STARFINDER.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
             temporary: { label: "STARFINDER.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } },
             item: { label: "STARFINDER.ModifiersItemTabLabel", modifiers: [], dataset: { subtab: "item" } },
@@ -146,8 +147,6 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         modifiers.misc.modifiers = misc;
 
         data.modifiers = Object.values(modifiers);
-
-        console.log(data);
     }
 
     /**
