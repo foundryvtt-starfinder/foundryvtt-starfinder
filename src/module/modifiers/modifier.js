@@ -38,5 +38,7 @@ export default class StarfinderModifier {
         this.notes = notes;
         this.modifierType = modifierType;
         this.subtab = subtab;
+
+        this._id = `modifier.${randomID(15)}`;
     }
 }
