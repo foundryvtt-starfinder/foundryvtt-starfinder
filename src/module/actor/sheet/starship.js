@@ -124,7 +124,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
      */
     _prepareItems(data) {
         const arcs = {
-            foward: { label: "Foward", items: [], dataset: { type: "starshipWeapon" }},
+            foward: { label: "Forward", items: [], dataset: { type: "starshipWeapon" }},
             starboard: { label: "Starboard", items: [], dataset: { type: "starshipWeapon" }},
             aft: { label: "Aft", items: [], dataset: { type: "starshipWeapon" }},
             port: { label: "Port", items: [], dataset: { type: "starshipWeapon" }},
