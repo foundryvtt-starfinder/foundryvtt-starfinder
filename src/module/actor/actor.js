@@ -41,33 +41,23 @@ export class ActorStarfinder extends Actor {
         const actorData = this.data;
         const data = actorData.data;
         const flags = actorData.flags;
+        const actorType = actorData.type;
 
         this._ensureHasModifiers(data);
-
-        if (actorData.type === "npc") {
-            this._prepareNPCData(data);
-            return;
-        }
-        else if (actorData.type === "starship") {
-            this._prepareStarshipData(data);
-            return;
-        } else if (actorData.type === "vehicle") {
-            this._prepareVehicleData(data);
-            return;
-        }
+        const modifiers = data.modifiers;
 
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
         const classes = items.filter(item => item.type === "class");
 
-        game.starfinder.engine.process("process-pc", {
+        game.starfinder.engine.process("process-actors", {
             data,
             armor,
             classes,
-            flags
+            flags,
+            type: actorType,
+            modifiers
         });
-
-        this._preparePCSkills(data);
     }
 
     /**
@@ -87,156 +77,7 @@ export class ActorStarfinder extends Actor {
 
         return data;
     }
-
-    /**
-     * Calculate the ability modifer for each ability.
-     * @param {Object} data The Actor's data
-     */
-    _prepareAbilities(data) {
-        game.starfinder.engine.process("process-base-ability-modifiers", {data});
-    }
-
-    /**
-     * Process skills for player character's.
-     * 
-     * @param {Object} data The actor's data
-     */
-    _preparePCSkills(data) {
-        // TODO: Transition this over to the new rules engine
-        // once the modifier system is in place.
-        const actorData = this.data;
-        const flags = actorData.flags;
-        const items = actorData.items;
-        const armor = items.find(item => item.type === "equipment" && item.data.equipped);
-
-        // All of the relevent flags that modify skill bonuses
-        let flatAffect = getProperty(flags, "starfinder.flatAffect") ? -2 : 0;
-        let historian = getProperty(flags, "starfinder.historian") ? 2 : 0;
-        let naturalGrace = getProperty(flags, "starfinder.naturalGrace") ? 2 : 0;
-        let cultrualFascination = getProperty(flags, "starfinder.culturalFascination") ? 2 : 0;
-        let armorSavant = getProperty(flags, "starfinder.armorSavant") ? 1 : 0;
-        let scrounger = getProperty(flags, "starfinder.scrounger") ? 2 : 0;
-        let elvenMagic = getProperty(flags, "starfinder.elvenMagic") ? 2 : 0;
-        let keenSenses = getProperty(flags, "starfinder.keenSenses") ? 2 : 0;
-        let curious = getProperty(flags, "starfinder.curious") ? 2 : 0;
-        let intimidating = getProperty(flags, "starfinder.intimidating") ? 2 : 0;
-        let selfSufficient = getProperty(flags, "starfinder.selfSufficient") ? 2 : 0;
-        let sneaky = getProperty(flags, "starfinder.sneaky") ? 2 : 0;
-        let sureFooted = getProperty(flags, "starfinder.sureFooted") ? 2 : 0;
-
-        // Skills
-        for (let [skl, skill] of Object.entries(data.skills)) {
-            let accumulator = 0;
-             // Specific skill modifiers
-             switch (skl) {
-                case "acr":
-                    accumulator += naturalGrace;
-                    accumulator += sureFooted;
-                    break;
-                case "ath":
-                    accumulator += naturalGrace;
-                    accumulator += sureFooted;
-                    break;
-                case "cul":
-                    accumulator += historian;
-                    accumulator += cultrualFascination;
-                    accumulator += curious;
-                    break;
-                case "dip":
-                    accumulator += cultrualFascination;
-                    break;
-                case "eng":
-                    accumulator += scrounger;
-                    break;
-                case "int":
-                    accumulator += intimidating;
-                    break;
-                case "mys":
-                    accumulator += elvenMagic;
-                    break;
-                case "per":
-                    accumulator += keenSenses;
-                    break;
-                case "sen":
-                    accumulator += flatAffect;
-                    break;
-                case "ste":
-                    accumulator += scrounger;
-                    accumulator += sneaky;
-                    break;
-                case "sur":
-                    accumulator += scrounger;
-                    accumulator += selfSufficient;
-                    break;
-            }
-
-            skill.value = parseFloat(skill.value || 0);
-            let classSkill = skill.value;
-            let hasRanks = skill.ranks > 0;
-            let acp = armor && armor.data.armor.acp < 0 && skill.hasArmorCheckPenalty ? armor.data.armor.acp : 0;
-            if (acp < 0 && armorSavant > 0) acp = Math.min(acp + armorSavant, 0);
-            skill.mod = data.abilities[skill.ability].mod + acp + skill.ranks + (hasRanks ? classSkill : 0) + skill.misc + accumulator;
-        }
-    }
-
-    /**
-     * Prepare a starship's data
-     * 
-     * @param {Object} data The data to prepare
-     * @private
-     */
-    _prepareStarshipData(data) {
-        game.starfinder.engine.process("process-starship", {data});
-    }
-
-    /**
-     * Prepare a vechile's data
-     * 
-     * @param {Object} data The data to prepare
-     * @private
-     */
-    _prepareVehicleData(data) {
-        // TODO: Actually do stuff here.
-    }
-
-    /**
-     * Prepare the NPC's data.
-     * 
-     * NPC's are a little more free form in their data. They generaly don't follow the
-     * same character creation rules that PC's do, so there stats don't need as much 
-     * automation.
-     * 
-     * @param {Object} data The NPC's data to prepare
-     * @private
-     */
-    _prepareNPCData(data) {
-        // NOTE: I've pretty much removed all of the automated 
-        // calculations from NPC's.
-        data.details.xp.value = this.getCRExp(data.details.cr);
-
-        // CMD or AC Vs Combat Maneuvers as it's called in starfinder
-        data.attributes.cmd.value = 8 + data.attributes.kac.value;
-    }
-
-    /**
-     * Return the amount of experience granted by killing a creature of a certain CR.
-     * 
-     * @param {Number} cr The creature's challenge rating
-     * @returns {Number} The amount of experience granted per kill
-     */
-    getCRExp(cr) {
-        if (cr < 1.0) {
-            if (cr === (1 / 3)) {
-                return 135;
-            } else if (cr === (1 / 6)) {
-                return 65;
-            }
-
-            return Math.max(400 * cr, 50);
-        }
-        return CONFIG.STARFINDER.CR_EXP_LEVELS[cr];
-    }
-
+    
     /**
      * Extend the default update method to enhance data before submission.
      * See the parent Entity.update method for full details.
