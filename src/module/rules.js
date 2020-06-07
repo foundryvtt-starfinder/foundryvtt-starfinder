@@ -40,7 +40,6 @@ import calculateShipSpeed from './rules/actions/starship/calculate-speed.js';
 import calculateShipTargetLock from './rules/actions/starship/calculate-tl.js';
 import calculateBaseSkills from './rules/actions/actor/calculate-base-skills.js';
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
-import noop from './rules/actions/noop.js';
 
 export default function (engine) {
     console.log("Starfinder | Registering rules");
@@ -85,9 +84,6 @@ export default function (engine) {
     // Transformations
     fixedValue(engine);
     get(engine);
-
-    // No Operation
-    noop(engine);
 
     // Custom rules
     logToConsole(engine);
@@ -134,7 +130,7 @@ export default function (engine) {
             },
             {
                 when: { closure: "isActorType", type: "vehicle" },
-                then: "noop"
+                then: "identity"
             }
         ]
     });
