@@ -21,6 +21,8 @@ export const StarfinderEffectType = Object.freeze({
     KAC: "kac",
     CMD: "cmd",
     ACP: "acp",
+    ACP_HEAVY: "acp-heavy",
+    ACP_LIGHT: "acp-light",
     INITIATIVE: "initiative",
     ABILITY_SKILLS: "ability-skills",
     SKILL: "skill",
