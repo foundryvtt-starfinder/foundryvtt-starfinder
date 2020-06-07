@@ -16,12 +16,8 @@ import fixedValue from './engine/common/transformer/fixed-value.js';
 import get from './engine/common/transformer/get.js';
 
 // Custom rules
-import isCircumstanceBonus from './rules/conditions/is-circumstance.js';
-import isUntypedBonus from './rules/conditions/is-untyped.js';
-import isCharacter from './rules/conditions/is-character.js';
-import isNpc from './rules/conditions/is-npc.js';
-import isStarship from './rules/conditions/is-starship.js';
-import isVehicle from './rules/conditions/is-vehicle.js';
+import isModifierType from './rules/conditions/is-modifier-type.js';
+import isActorType from './rules/conditions/is-actor-type.js';
 import logToConsole from './rules/actions/log.js';
 import calculateBaseAbilityModifier from './rules/actions/actor/calculate-base-ability-modifier.js';
 import calculateBaseArmorClass from './rules/actions/actor/calculate-base-armor-class.js';
@@ -94,20 +90,16 @@ export default function (engine) {
     noop(engine);
 
     // Custom rules
-    isCircumstanceBonus(engine);
-    isUntypedBonus(engine);
     logToConsole(engine);
-    isCharacter(engine);
-    isNpc(engine);
-    isStarship(engine);
-    isVehicle(engine);
+    isActorType(engine);
+    isModifierType(engine);
     
     engine.add({
         name: "process-actors",
         description: "Take all of the actor data and process it by actor type.",
         rules: [
             {
-                when: { closure: "isCharacter", type: "character" },
+                when: { closure: "isActorType", type: "character" },
                 then: [
                     "calculateBaseAbilityModifier",
                     "calculateBaseArmorClass",
@@ -124,7 +116,7 @@ export default function (engine) {
                 ]
             },
             {
-                when: { closure: "isStarship", type: "starship" },
+                when: { closure: "isActorType", type: "starship" },
                 then: [
                     "calculateShipArmorClass",
                     "calculateShipCritThreshold",
@@ -137,11 +129,11 @@ export default function (engine) {
                 ]
             },
             {
-                when: { closure: "isNpc", type: "npc" },
+                when: { closure: "isActorType", type: "npc" },
                 then: "calculateNpcXp"
             },
             {
-                when: { closure: "isVehicle", type: "vehicle" },
+                when: { closure: "isActorType", type: "vehicle" },
                 then: "noop"
             }
         ]
