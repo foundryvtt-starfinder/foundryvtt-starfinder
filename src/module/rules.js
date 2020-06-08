@@ -40,6 +40,7 @@ import calculateShipShields from './rules/actions/starship/calculate-shields.js'
 import calculateShipSpeed from './rules/actions/starship/calculate-speed.js';
 import calculateShipTargetLock from './rules/actions/starship/calculate-tl.js';
 import calculateBaseSkills from './rules/actions/actor/calculate-base-skills.js';
+import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modifiers.js';
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
 
@@ -64,6 +65,7 @@ export default function (engine) {
     calculateCmd(engine);
     calculatePlayerXp(engine);
     calculateBaseSkills(engine);
+    calculateSkillModifiers(engine);
     calculateSkillArmorCheckPenalty(engine);
     calculateNpcXp(engine);
     // Starship actions
@@ -106,14 +108,15 @@ export default function (engine) {
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     "calculateBaseAttackBonus",
                     "calculateBaseSaves",
-                    "calculateSaveModifiers",
+                    { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     "calculateCharacterLevel",
-                    "calculateInitiativeModifiers",
                     "calculateInitiative",
+                    {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
                     "calculateCMD",
                     "calculateXP",
                     "calculateBaseSkills",
-                    { closure: "calculateSkillArmorCheckPenalty", stackModifiers: "stackModifiers" }
+                    { closure: "calculateSkillArmorCheckPenalty", stackModifiers: "stackModifiers" },
+                    { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" }
                 ]
             },
             {

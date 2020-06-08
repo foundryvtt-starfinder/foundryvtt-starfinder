@@ -4,7 +4,11 @@ export default function (engine) {
         const init = data.attributes.init;
 
         init.mod = data.abilities.dex.mod;
-        init.total = init.mod + init.bonus;
+        init.total = init.mod;
+
+        init.tooltip = [
+            game.i18n.format("STARFINDER.InitiativeDexModTooltip", { mod: data.abilities.dex.mod.signedString() })
+        ];
 
         return fact;
     });

@@ -1,4 +1,5 @@
 import { StarfinderModifierTypes, StarfinderModifierType, StarfinderEffectType } from "./types.js";
+import { generateUUID } from '../utilities.js';
 
 /**
  * A data object that hold information about a specific modifier.
@@ -39,6 +40,6 @@ export default class StarfinderModifier {
         this.modifierType = modifierType;
         this.subtab = subtab;
 
-        this._id = `modifier.${randomID(15)}`;
+        this._id = generateUUID();
     }
 }

@@ -49,6 +49,7 @@ export class ActorStarfinder extends Actor {
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
         const classes = items.filter(item => item.type === "class");
+        const theme = items.find(item => item.type === "theme");
 
         game.starfinder.engine.process("process-actors", {
             data,
@@ -56,7 +57,8 @@ export class ActorStarfinder extends Actor {
             classes,
             flags,
             type: actorType,
-            modifiers
+            modifiers,
+            theme
         });
     }
 
@@ -233,6 +235,12 @@ export class ActorStarfinder extends Actor {
         }));
 
         await this.update({["data.modifiers"]: modifiers});
+    }
+
+    async deleteModifier(id) {
+        const modifiers = this.data.data.modifiers.filter(mod => mod._id !== id);
+        
+        await this.update({"data.modifiers": modifiers});
     }
 
     /**
