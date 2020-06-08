@@ -18,6 +18,7 @@ import get from './engine/common/transformer/get.js';
 // Custom rules
 import isModifierType from './rules/conditions/is-modifier-type.js';
 import isActorType from './rules/conditions/is-actor-type.js';
+import stackModifiers from './rules/actions/modifiers/stack-modifiers.js';
 import logToConsole from './rules/actions/log.js';
 import calculateBaseAbilityModifier from './rules/actions/actor/calculate-base-ability-modifier.js';
 import calculateBaseArmorClass from './rules/actions/actor/calculate-base-armor-class.js';
@@ -40,6 +41,7 @@ import calculateShipSpeed from './rules/actions/starship/calculate-speed.js';
 import calculateShipTargetLock from './rules/actions/starship/calculate-tl.js';
 import calculateBaseSkills from './rules/actions/actor/calculate-base-skills.js';
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
+import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
 
 export default function (engine) {
     console.log("Starfinder | Registering rules");
@@ -62,6 +64,7 @@ export default function (engine) {
     calculateCmd(engine);
     calculatePlayerXp(engine);
     calculateBaseSkills(engine);
+    calculateSkillArmorCheckPenalty(engine);
     calculateNpcXp(engine);
     // Starship actions
     calculateShipArmorClass(engine);
@@ -89,6 +92,7 @@ export default function (engine) {
     logToConsole(engine);
     isActorType(engine);
     isModifierType(engine);
+    stackModifiers(engine);
     
     engine.add({
         name: "process-actors",
@@ -99,7 +103,7 @@ export default function (engine) {
                 then: [
                     "calculateBaseAbilityModifier",
                     "calculateBaseArmorClass",
-                    "calculateArmorModifiers",
+                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     "calculateBaseAttackBonus",
                     "calculateBaseSaves",
                     "calculateSaveModifiers",
@@ -108,7 +112,8 @@ export default function (engine) {
                     "calculateInitiative",
                     "calculateCMD",
                     "calculateXP",
-                    "calculateBaseSkills"
+                    "calculateBaseSkills",
+                    { closure: "calculateSkillArmorCheckPenalty", stackModifiers: "stackModifiers" }
                 ]
             },
             {
