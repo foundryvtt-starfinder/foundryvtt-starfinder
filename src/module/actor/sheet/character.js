@@ -149,6 +149,18 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         data.modifiers = Object.values(modifiers);
     }
 
+    async _render(...args) {
+        await super._render(...args);
+
+        tippy('[data-tippy-content]', {
+            allowHTML: true,
+            arrow: false,
+            placement: 'top-start',
+            duration: [500, null],
+            delay: [800, null]
+        });
+    }
+
     /**
      * Compute the level and percentage of encumbrance for an Actor.
      * 

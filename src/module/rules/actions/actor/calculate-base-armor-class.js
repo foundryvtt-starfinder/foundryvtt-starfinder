@@ -12,7 +12,11 @@ export default function (engine) {
 
         if (armor) {
             const maxDex = Math.min(data.abilities.dex.mod, armor.data.armor.dex || Number.MAX_SAFE_INTEGER);
-            const maxDexTooltip = game.i18n.format("STARFINDER.ACTooltipMaxDex", { maxDex: maxDex.signedString() });
+            const maxDexTooltip = game.i18n.format("STARFINDER.ACTooltipMaxDex", { 
+                maxDex: maxDex.signedString(), 
+                armorMax: armor.data.armor.dex.signedString() 
+            });
+            
             let eacMod = armor.data.armor.eac + maxDex;
             let kacMod = armor.data.armor.kac + maxDex;
             

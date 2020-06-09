@@ -226,6 +226,18 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         return this.actor.createEmbeddedEntity("OwnedItem", itemData);
     }
 
+    async _render(...args) {
+        await super._render(...args);
+
+        tippy('[data-tippy-content]', {
+            allowHTML: true,
+            arrow: false,
+            placement: 'top-start',
+            duration: [500, null],
+            delay: [800, null]
+        });
+    }
+
     // TODO: Remove this once https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
     // has been implemented
     /**

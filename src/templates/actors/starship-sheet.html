@@ -4,29 +4,27 @@
 
         <div class="header-details flexrow">
             <div class="header-background flexrow">
-                <h1 class="charname">
-                    <input name="name" type="text" value="{{actor.name}}" placeholder="Ship Name" title="Ship Name" />
+                <h1 class="charname" data-tippy-content="{{localize "STARFINDER.ShipNameLabel"}}">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "STARFINDER.ShipNameLabel"}}" />
                 </h1>
 
-                <div class="charlevel">
+                <div class="charlevel"  data-tippy-content="{{localize "STARFINDER.ShipTierLabel"}}<br>@details.tier" >
                     <div class="level noxp">
-                        <label>Tier </label>
+                        <label>{{localize "STARFINDER.ShipTierLabel"}} </label>
                         <input name="data.details.tier" type="text" value="{{labels.tier}}" placeholder="1" />
                     </div>
                 </div>
             </div>
 
             <ul class="summary">
-                <li>
-                    <input type="text" name="data.details.model" value="{{data.details.model}}" placeholder="Model"
-                        title="Model" />
+                <li data-tippy-content="{{localize "STARFINDER.ShipModelLabel"}}<br>@details.model">
+                    <input type="text" name="data.details.model" value="{{data.details.model}}" placeholder="{{localize "STARFINDER.ShipModelLabel"}}" />
                 </li>
-                <li>
-                    <input type="text" name="data.details.frame" value="{{data.details.frame}}" placeholder="Frame"
-                        title="Frame" />
+                <li data-tippy-content="{{localize "STARFINDER.ShipFrameLabel"}}<br>@details.frame">
+                    <input type="text" name="data.details.frame" value="{{data.details.frame}}" placeholder="{{localize "STARFINDER.ShipFrameLabel"}}" />
                 </li>
-                <li class="flexrow">
-                    <select name="data.details.size" title="{{ localize "STARFINDER.Speed"}}">
+                <li class="flexrow" data-tippy-content="{{ localize "STARFINDER.Speed"}}<br>@details.size">
+                    <select name="data.details.size">
                         {{#select data.details.size}}
                         {{#each config.starshipSizes as |size s|}}
                         <option value="{{s}}">{{size}}</option>
@@ -37,7 +35,7 @@
             </ul>
 
             <ul class="attributes flexrow">
-                <li class="attribute health">
+                <li class="attribute health" data-tippy-content="{{ localize "STARFINDER.HullPoints" }}<br>@attributes.hp.value<br>@attributes.hp.max">
                     <h4 class="attribute-name box-title">{{ localize "STARFINDER.HullPoints" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
@@ -52,8 +50,8 @@
                             title="This is the number of hull points that are added when the ship reaches tier 4 (and every 4 tiers after)" />
                     </footer>
                 </li>
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">Armor Class</h4>
+                <li class="attribute" data-tippy-content="Armor Class<br>@attributes.ac.value">
+                    <h4 class="attribute-name box-title">AC</h4>
                     <div class="attribute-value">
                         <span>{{data.attributes.ac.value}}</span>
                     </div>
@@ -63,8 +61,8 @@
                             placeholder="+Misc" />
                     </footer>
                 </li>
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">Target Lock</h4>
+                <li class="attribute" data-tippy-content="Target Lock<br>@attributes.tl.value">
+                    <h4 class="attribute-name box-title">TL</h4>
                     <div class="attribute-value">
                         <span>{{data.attributes.tl.value}}</span>
                     </div>

@@ -251,12 +251,6 @@ export class ActorSheetStarfinder extends ActorSheet {
         this._onSubmit(event);
     }
 
-    /** @override */
-    async _onSubmit(event) {
-        console.log("In _onSubmit");
-        return await super._onSubmit(event);
-    }
-
     /**
      * Handle editing a skill
      * @param {Event} event The originating contextmenu event
