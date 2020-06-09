@@ -33,7 +33,7 @@ export default function (engine) {
         const mod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;
 
-            if (curr[1].type === StarfinderModifierTypes.CIRCUMSTANCE || curr[1].type === StarfinderModifierTypes.UNTYPED) {
+            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
                     prev += addModifer(bonus);
                 }

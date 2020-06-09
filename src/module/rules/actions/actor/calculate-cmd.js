@@ -1,6 +1,13 @@
 export default function (engine) {
     engine.closures.add("calculateCMD", (fact, context) => {
-        fact.data.attributes.cmd.value = 8 + fact.data.attributes.kac.value;
+        const cmd = fact.data.attributes.cmd;
+        const kac = fact.data.attributes.kac;
+
+        cmd.value = 8 + kac.value;
+        cmd.tooltip = [
+            game.i18n.localize("STARFINDER.CMDBaseTooltip"),
+            game.i18n.format("STARFINDER.CMDKACModTooltip", { kac: kac.value.signedString() })
+        ];
 
         return fact;
     });

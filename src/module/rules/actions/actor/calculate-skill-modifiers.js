@@ -77,7 +77,7 @@ export default function (engine) {
         const skillMods = Object.entries(mods).reduce((prev, modifier) => {
             if (modifier[1] === null || modifier[1].length < 1) return prev;
 
-            if (modifier[0] === StarfinderModifierTypes.CIRCUMSTANCE || modifier[0] === StarfinderModifierTypes.UNTYPED) {
+            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(modifier[0])) {
                 for (const bonus of modifier[1]) {
                     processModifiers(bonus, prev);
                 }
