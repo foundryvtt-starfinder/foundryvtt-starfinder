@@ -53,7 +53,7 @@ export default function (engine) {
         const saveMods = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;
 
-            if (curr[0] === StarfinderModifierTypes.CIRCUMSTANCE || curr[0] === StarfinderModifierTypes.UNTYPED) {
+            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
                     processModifier(bonus, prev);
                 }

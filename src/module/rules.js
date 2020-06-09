@@ -30,6 +30,7 @@ import calculateCharacterLevel from './rules/actions/actor/calculate-character-l
 import calculateInitiative from './rules/actions/actor/calculate-initiative.js';
 import calculateInitiativeModifiers from './rules/actions/actor/calculate-initiative-modifiers.js';
 import calculateCmd from './rules/actions/actor/calculate-cmd.js';
+import calculateCmdModifiers from './rules/actions/actor/calculate-cmd-modifiers.js';
 import calculatePlayerXp from './rules/actions/actor/calculate-xp.js';
 import calculateShipArmorClass from './rules/actions/starship/calculate-ac.js';
 import calculateShipCritThreshold from './rules/actions/starship/calculate-ct.js';
@@ -63,6 +64,7 @@ export default function (engine) {
     calculateInitiative(engine);
     calculateInitiativeModifiers(engine);
     calculateCmd(engine);
+    calculateCmdModifiers(engine);
     calculatePlayerXp(engine);
     calculateBaseSkills(engine);
     calculateSkillModifiers(engine);
@@ -113,6 +115,7 @@ export default function (engine) {
                     "calculateInitiative",
                     {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
                     "calculateCMD",
+                    { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
                     "calculateXP",
                     "calculateBaseSkills",
                     { closure: "calculateSkillArmorCheckPenalty", stackModifiers: "stackModifiers" },

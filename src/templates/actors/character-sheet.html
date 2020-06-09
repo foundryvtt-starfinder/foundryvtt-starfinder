@@ -148,7 +148,7 @@
                     <div class="skill-header-mod">{{localize "STARFINDER.SkillsHeaderModifier"}}</div>
                 </li>
                 {{#each data.skills as |skill s|}}
-                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
+                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-tippy-content="@skills.{{s}}.mod<br><br>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
                     <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <h4 class="skill-name rollable">
@@ -200,7 +200,7 @@
                     </li>
                     {{/each}} --}}
 
-                    <li class="attribute save" data-save="fort">
+                    <li class="attribute save" data-tippy-content="@attributes.fort.bonus<br><br>{{#each data.attributes.fort.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-save="fort">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.FortitudeSave"}}</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.fort.bonus decimals=0 sign=true}}</span>
@@ -214,7 +214,7 @@
                         </footer>
                     </li>
 
-                    <li class="attribute save" data-save="reflex">
+                    <li class="attribute save" data-tippy-content="@attributes.reflex.bonus<br><br>{{#each data.attributes.reflex.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-save="reflex">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.ReflexSave"}}</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.reflex.bonus decimals=0 sign=true}}</span>
@@ -229,7 +229,7 @@
                         </footer>
                     </li>
 
-                    <li class="attribute save" data-save="will">
+                    <li class="attribute save" data-tippy-content="@attributes.will.bonus<br><br>{{#each data.attributes.will.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-save="will">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.WillSave"}}</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.will.bonus decimals=0 sign=true}}</span>
@@ -246,7 +246,7 @@
                 </ul>
 
                 <ul class="attributes flexrow last">
-                    <li class="attribute initiative">
+                    <li class="attribute initiative" data-tippy-content="@attributes.init.total<br><br>{{#each data.attributes.init.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                         <h4 class="attribute-name box-title">{{localize "STARFINDER.InitiativeLabel"}}</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
@@ -257,7 +257,7 @@
                                 value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}" />
                         </footer>
                     </li>
-                    <li class="attribute cmd">
+                    <li class="attribute cmd" data-tippy-content="@attributes.cmd.value<br><br>{{#each data.attributes.cmd.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                         <h4 class="attribute-name box-title" title="{{localize "STARFINDER.ACvsCombatManeuversTitle"}}">
                             {{localize "STARFINDER.ACvsCombatManeuversLabel"}}
                         </h4>
