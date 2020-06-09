@@ -823,7 +823,7 @@ export class ItemStarfinder extends Item {
     else if (action === "formula") await item.rollFormula({ event });
 
     // Saving Throw
-    else if (action === "save") await target.rollSave(button.dataset.type, { event });
+    else if (action === "save" && target) await target.rollSave(button.dataset.type, { event });
 
     // Consumable usage
     else if (action === "consume") await item.rollConsumable({ event });
