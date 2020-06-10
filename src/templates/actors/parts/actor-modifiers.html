@@ -17,7 +17,7 @@
                 <div class="modifier-type">Type</div>
                 {{#if ../owner}}
                 <div class="item-controls">
-                    <a class="item-control item-create" title="Add Modifier">
+                    <a class="item-control modifier-create" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}} title="Add Modifier">
                         <i class="fas fa-plus"></i> Add
                     </a>
                 </div>
@@ -30,6 +30,23 @@
                     <div class="item-name modifier-name flexrow">
                         <h4>{{~modifier.name~}}</h4>
                     </div>
+
+                    <div class="item-detail modifier-mod">
+                        {{~modifier.modifier~}}
+                    </div>
+                    <div class="item-detail modifier-type">
+                        {{~modifier.type~}}
+                    </div>
+                    <div class="item-detail modifier-effect-type">
+                        {{~modifier.effectType~}}
+                    </div>
+                    {{#if ../../owner}}
+                    <div class="item-controls">
+                        <a class="item-control modifier-toggle" data-tippy-content="Toggle Modifier">{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
+                        <a class="item-control modifier-edit" data-tippy-content="Edit Modifier"><i class="fas fa-edit"></i></a>
+                        <a class="item-control modifier-delete" data-tippy-content="Delete Modifier"><i class="fas fa-trash"></i></a>
+                    </div>
+                    {{/if}}
                 </li>
                 {{/each}}
             </ol>

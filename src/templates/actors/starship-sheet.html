@@ -23,7 +23,7 @@
                 <li data-tippy-content="{{localize "STARFINDER.ShipFrameLabel"}}<br>@details.frame">
                     <input type="text" name="data.details.frame" value="{{data.details.frame}}" placeholder="{{localize "STARFINDER.ShipFrameLabel"}}" />
                 </li>
-                <li class="flexrow" data-tippy-content="{{ localize "STARFINDER.Speed"}}<br>@details.size">
+                <li class="flexrow" data-tippy-content="{{ localize "STARFINDER.Size"}}<br>@details.size">
                     <select name="data.details.size">
                         {{#select data.details.size}}
                         {{#each config.starshipSizes as |size s|}}
@@ -72,13 +72,13 @@
                             placeholder="+Misc" />
                     </footer>
                 </li>
-                <li class="attribute">
+                <li class="attribute" data-tippy-content="{{localize "STARFINDER.Speed"}}<br>@attributes.speed">
                     <h4 class="attribute-name box-title">{{ localize "STARFINDER.Speed" }}</h4>
                     <div class="attribute-value">
                         <span>{{data.attributes.speed}}</span>
                     </div>
-                    <footer class="attribute-footer select">
-                        <select name="data.attributes.maneuverability" title="Maneuverability">
+                    <footer class="attribute-footer select" data-tippy-content="Maneuverability<br>@attributes.maneuverability">
+                        <select name="data.attributes.maneuverability">
                             {{#select data.attributes.maneuverability}}
                             {{#each config.maneuverability as |man k|}}
                             <option value="{{k}}">{{man}}</option>
@@ -104,27 +104,27 @@
             <div class="flexcol">
                 <h3 class="form-header">{{ localize "STARFINDER.Attributes"}}</h3>
                 <ul class="attributes flexrow">
-                    <li class="attribute">
-                        <h4 class="attribute-name box-title">Critical Threshold</h4>
+                    <li class="attribute" data-tippy-content="Critical Threshold<br>@attributes.ct.value">
+                        <h4 class="attribute-name box-title">CT</h4>
                         <div class="attribute-value">
                             <span>{{data.attributes.ct.value}}</span>
 
                         </div>
                     </li>
-                    <li class="attribute">
-                        <h4 class="attribute-name box-title">Damage Threshold</h4>
+                    <li class="attribute" data-tippy-content="Damage Threshold<br>@attributes.dt">
+                        <h4 class="attribute-name box-title">DT</h4>
                         <div class="attribute-value">
                             <input type="text" name="data.attributes.dt" value="{{data.attributes.dt}}"
                                 data-dtype="Number" placeholder="-" />
                         </div>
                     </li>
-                    <li class="attribute">
+                    <li class="attribute" data-tippy-content="Power Core<br>@attributes.pwr.pcu">
                         <h4 class="attribute-name box-title">Power Core</h4>
                         <div class="attribute-value">
                             <span>{{data.attributes.pwr.pcu}}</span>
                         </div>
                     </li>
-                    <li class="attribute">
+                    <li class="attribute" data-tippy-content="Complement<br>@attributes.complement.min<br>@attributes.complement.max">
                         <h4 class="attribute-name box-title">Complement</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.complement.min"
@@ -136,7 +136,7 @@
                                 title="Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard)" />
                         </div>
                     </li>
-                    <li class="attribute">
+                    <li class="attribute" data-tippy-content="Expansion Bays<br>@attributes.expansionBays">
                         <h4 class="attribute-name box-title">Expansion Bays</h4>
                         <div class="attribute-value">
                             <input type="text" name="data.attributes.expansionBays"
@@ -144,7 +144,7 @@
                                 title="Max number of expansion bays allowed" />
                         </div>
                     </li>
-                    <li class="attribute">
+                    <li class="attribute" data-tippy-content="Drift Rating<br>@attributes.drift">
                         <h4 class="attribute-name box-title">Drift Rating</h4>
                         <div class="attribute-value">
                             <span class="ability-mod">{{data.attributes.drift}}</span>
@@ -156,7 +156,7 @@
                 <h3 class="form-header">Shields</h3>
                 <div class="form-group flexrow">
                     <label>Total</label>
-                    <div class="form-fields multiple">
+                    <div class="form-fields multiple" data-tippy-content="Shields<br>@attributes.shields.value<br>@attributes.shields.max">
                         <input type="text" name="data.attributes.shields.value"
                             value="{{data.attributes.shields.value}}" data-dtype="Number" />
                         <span class="sep"> / </span>
@@ -164,42 +164,38 @@
                     </div>
                 </div>
                 <ul class="attributes flexrow">
-                    <li class="attribute">
+                    <li class="attribute" data-tippy-content="Forward Shields<br>@attributes.shields.forward.value<br>@attributes.shields.forward.max">
                         <h4 class="attribute-name box-title">Forward</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.forward.value"
-                                value="{{data.attributes.shields.forward.value}}" data-dtype="Number"
-                                title="Forward Shields" />
+                                value="{{data.attributes.shields.forward.value}}" data-dtype="Number" />
                             <span class="sep"> / </span>
                             <span>{{data.attributes.shields.forward.max}}</span>
                         </div>
                     </li>
-                    <li class="attribute">
+                    <li class="attribute" data-tippy-content="Starboard Shields<br>@attributes.shields.starboard.value<br>@attributes.shields.starboard.max">
                         <h4 class="attribute-name box-title">Starboard</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.starboard.value"
-                                value="{{data.attributes.shields.starboard.value}}" data-dtype="Number"
-                                title="Forward Shields" />
+                                value="{{data.attributes.shields.starboard.value}}" data-dtype="Number" />
                             <span class="sep"> / </span>
                             <span>{{data.attributes.shields.starboard.max}}</span>
                         </div>
                     </li>
-                    <li class="attribute">
+                    <li class="attribute" data-tippy-content="Aft Shields<br>@attributes.shields.aft.value<br>@attributes.shields.aft.max">
                         <h4 class="attribute-name box-title">Aft</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.aft.value"
-                                value="{{data.attributes.shields.aft.value}}" data-dtype="Number"
-                                title="Forward Shields" />
+                                value="{{data.attributes.shields.aft.value}}" data-dtype="Number" />
                             <span class="sep"> / </span>
                             <span>{{data.attributes.shields.aft.max}}</span>
                         </div>
                     </li>
-                    <li class="attribute">
+                    <li class="attribute" data-tippy-content="Port Shields<br>@attributes.shields.port.value<br>@attributes.shields.port.max">
                         <h4 class="attribute-name box-title">Port</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.port.value"
-                                value="{{data.attributes.shields.port.value}}" data-dtype="Number"
-                                title="Forward Shields" />
+                                value="{{data.attributes.shields.port.value}}" data-dtype="Number" />
                             <span class="sep"> / </span>
                             <span>{{data.attributes.shields.port.max}}</span>
                         </div>

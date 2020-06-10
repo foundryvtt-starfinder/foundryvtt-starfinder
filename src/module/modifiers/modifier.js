@@ -19,7 +19,7 @@ import { generateUUID } from '../utilities.js';
 export default class StarfinderModifier {
     constructor({
         name = "", 
-        modifier = "0", 
+        modifier = 0, 
         type = StarfinderModifierTypes.UNTYPED, 
         modifierType = StarfinderModifierType.CONSTANT, 
         effectType = StarfinderEffectType.SKILL, 

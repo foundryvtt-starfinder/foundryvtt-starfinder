@@ -1,4 +1,5 @@
 import { ActorSheetStarfinder } from "./base.js"
+import { StarfinderModifierTypes, StarfinderEffectType } from "../../modifiers/types.js";
 
 export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     static get defaultOptions() {
@@ -195,6 +196,74 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
 
         html.find('.short-rest').click(this._onShortRest.bind(this));
         html.find('.long-rest').click(this._onLongRest.bind(this));
+        html.find('.modifier-create').click(this._onModifierCreate.bind(this));
+        html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
+        html.find('.modifier-delete').click(this._onModifierDelete.bind(this));
+        html.find('.modifier-toggle').click(this._onToggleModifierEnabled.bind(this));
+    }
+
+    /**
+     * Add a modifer to this actor.
+     * 
+     * @param {Event} event The originating click event
+     */
+    _onModifierCreate(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+
+        this.actor.addModifier({
+            name: "New Modifier",
+            subtab: target.data('subtab')
+        });
+    }
+
+    /**
+     * Delete a modifier from the actor.
+     * 
+     * @param {Event} event The originating click event
+     */
+    async _onModifierDelete(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const modifierId = target.closest('.item.modifier').data('modifierId');
+
+        const modifiers = this.actor.data.data.modifiers.filter(mod => mod._id !== modifierId);
+        
+        await this.actor.update({'data.modifiers': modifiers});
+    }
+
+    /**
+     * Edit a modifier for an actor.
+     * 
+     * @param {Event} event The orginating click event
+     */
+    _onModifierEdit(event) {
+        event.preventDefault();
+
+        const target = $(event.currentTarget);
+        const modifierId = target.closest('.item.modifier').data('modifierId');
+
+        const modifiers = duplicate(this.actor.data.data.modifiers);
+        const modifier = modifiers.find(mod => mod._id === modifierId);
+
+        console.log(modifier);
+    }
+
+    /**
+     * Toggle a modifier to be enabled or disabled.
+     * 
+     * @param {Event} event The originating click event
+     */
+    async _onToggleModifierEnabled(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const modifierId = target.closest('.item.modifier').data('modifierId');
+
+        const modifiers = duplicate(this.actor.data.data.modifiers);
+        const modifier = modifiers.find(mod => mod._id === modifierId);
+        modifier.enabled = !modifier.enabled;
+
+        await this.actor.update({'data.modifiers': modifiers});
     }
 
     /**
