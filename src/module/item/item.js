@@ -444,6 +444,10 @@ export class ItemStarfinder extends Item {
     rollData.item = itemData;
     const title = `${this.name} - Attack Roll`;
 
+    //Warn the user if there is no ammo left
+
+    if(itemData.capacity && itemData.capacity.value === 0)  ui.notifications.warn(game.i18n.format("STARFINDER.ItemNoUses", {name: this.data.name}));
+
     // Call the roll helper utility
     DiceStarfinder.d20Roll({
       event: options.event,
@@ -489,7 +493,7 @@ export class ItemStarfinder extends Item {
           ui.notifications.info("Currently cannot deduct usage from powered melee weapons outside of combat.");
         }
       }
-      
+
       this.actor.updateEmbeddedEntity("OwnedItem", {
         _id: this.data._id,
         "data.capacity.value": capacity.value
@@ -823,7 +827,7 @@ export class ItemStarfinder extends Item {
     else if (action === "formula") await item.rollFormula({ event });
 
     // Saving Throw
-    else if (action === "save") await target.rollSave(button.dataset.type, { event });
+    else if (action === "save" && target) await target.rollSave(button.dataset.type, { event });
 
     // Consumable usage
     else if (action === "consume") await item.rollConsumable({ event });
