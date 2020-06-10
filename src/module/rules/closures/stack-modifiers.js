@@ -17,7 +17,7 @@ export default class StackModifiers extends Closure {
      *                            based on the stacking rules.
      */
     process(modifiers, context) {
-        let [ability, armor, base, circumstance, divine, enhancement, insight, luck, morale, racial, untyped] = modifiers.reduce((prev, curr) => {
+        let [abilityMods, armorMods, baseMods, circumstanceMods, divineMods, enhancementMods, insightMods, luckMods, moraleMods, racialMods, untypedMods] = modifiers.reduce((prev, curr) => {
             switch (curr.type) {
                 case StarfinderModifierTypes.ABILITY:
                     prev[0].push(curr);
@@ -58,30 +58,30 @@ export default class StackModifiers extends Closure {
             return prev;
         }, [[], [], [], [], [], [], [], [], [], [], []]);
 
-        const abilityMod = ability?.filter(mod => mod.modifier > 0)?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const armorMod = armor?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const baseMod = base?.sort((a, b) => b.modifier - a.modifer)?.shift() ?? null;
-        const circumstanceMods = circumstance?.sort((a, b) => b.modifier - a.modifier);
-        const divineMod = divine?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const enhancementMod = enhancement?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const insightMod = insight?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const luckMod = luck?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const moraleMod = morale?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const racialMod = racial?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const untypedMods = untyped?.sort((a, b) => b.modifer - a.modifier);
+        const ability = abilityMods?.filter(mod => mod.modifier > 0)?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
+        const armor = armorMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
+        const base = baseMods?.sort((a, b) => b.modifier - a.modifer)?.shift() ?? null;
+        const circumstance = circumstanceMods?.sort((a, b) => b.modifier - a.modifier);
+        const divine = divineMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
+        const enhancement = enhancementMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
+        const insight = insightMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
+        const luck = luckMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
+        const morale = moraleMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
+        const racial = racialMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
+        const untyped = untypedMods?.sort((a, b) => b.modifer - a.modifier);
 
         return {
-            abilityMod,
-            armorMod,
-            baseMod,
-            circumstanceMods,
-            divineMod,
-            enhancementMod,
-            insightMod,
-            luckMod,
-            moraleMod,
-            racialMod,
-            untypedMods
+            ability,
+            armor,
+            base,
+            circumstance,
+            divine,
+            enhancement,
+            insight,
+            luck,
+            morale,
+            racial,
+            untyped
         };
     }
 }

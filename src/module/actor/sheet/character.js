@@ -1,5 +1,6 @@
 import { ActorSheetStarfinder } from "./base.js"
 import { StarfinderModifierTypes, StarfinderEffectType } from "../../modifiers/types.js";
+import StarfinderModifierApplication from "../../apps/modifier-app.js";
 
 export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     static get defaultOptions() {
@@ -247,6 +248,8 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
         console.log(modifier);
+
+        new StarfinderModifierApplication(modifier, this.actor).render(true);
     }
 
     /**
