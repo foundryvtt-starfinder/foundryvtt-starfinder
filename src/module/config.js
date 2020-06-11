@@ -14,6 +14,13 @@ STARFINDER.abilities = {
     "cha": "STARFINDER.AbilityCha"
 };
 
+STARFINDER.acpEffectingArmorType = {
+    "acp-all": "STARFINDER.ModifierACPEffectingArmorTypeAll",
+    "acp-light": "STARFINDER.ModifierACPEffectingArmorTypeLight",
+    "acp-heavy": "STARFINDER.ModifierACPEffectingArmorTypeHeavy",
+    "acp-power": "STARFINDER.ModifierACPEffectingArmorTypePower"
+};
+
 /**
  * The set of saves used with the system
  * @type {Object}
@@ -1091,7 +1098,13 @@ STARFINDER.modifierEffectTypes = {
 STARFINDER.modifierType = {
     "constant": "STARFINDER.ModifierTypeConstant",
     "formula": "STARFINDER.ModifierTypeFormula"
-}
+};
+
+STARFINDER.modifierArmorClassAffectedValues = {
+    "both": "STARFINDER.ModifierArmorClassBoth",
+    "eac": "STARFINDER.EnergyArmorClass",
+    "kac": "STARFINDER.KineticArmorClass"
+};
 
 STARFINDER.CHARACTER_EXP_LEVELS = [
     0, 1300, 3300, 6000, 10000, 15000, 23000, 34000, 50000, 71000,

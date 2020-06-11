@@ -247,8 +247,6 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         const modifiers = duplicate(this.actor.data.data.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
-        console.log(modifier);
-
         new StarfinderModifierApplication(modifier, this.actor).render(true);
     }
 
