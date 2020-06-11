@@ -352,7 +352,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
             data: actor.data
         };
 
-        if (this.actor.isToken) dragData.tokenId = actor.token.id;
+        if (this.actor.isToken) dragData.tokenId = actorId;
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
     }
 
