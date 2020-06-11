@@ -1062,6 +1062,37 @@ STARFINDER.saveProgression = {
     "fast": "STARFINDER.SaveProgressionFast"
 };
 
+STARFINDER.modifierTypes = {
+    "ability": "STARFINDER.ModifierTypeAbility",
+    "armor": "STARFINDER.ModifierTypeArmor",
+    "base": "STARFINDER.ModifierTypeBase",
+    "circumstance": "STARFINDER.ModifierTypeCircumstance",
+    "divine": "STARFINDER.ModifierTypeDivine",
+    "enhancement": "STARFINDER.ModifierTypeEnhancement",
+    "insight": "STARFINDER.ModifierTypeInsight",
+    "luck": "STARFINDER.ModifierTypeLuck",
+    "morale": "STARFINDER.ModifierTypeMorale",
+    "racial": "STARFINDER.ModifierTypeRacial",
+    "untyped": "STARFINDER.ModifierTypeUntyped"
+};
+
+STARFINDER.modifierEffectTypes = {
+    "ac": "STARFINDER.ModifierEffectTypeAC",
+    "cmd": "STARFINDER.ModifierEffectTypeCMD",
+    "acp": "STARFINDER.ModifierEffectTypeACP",
+    "initiative": "STARFINDER.ModifierEffectTypeInit",
+    "ability-skills": "STARFINDER.ModifierEffectTypeAbilitySkills",
+    "skill": "STARFINDER.ModifierEffectTypeSkill",
+    "all-skills": "STARFINDER.ModifierEffectTypeAllSkills",
+    "saves": "STARFINDER.ModifierEffectTypeSaves",
+    "save": "STARFINDER.ModifierEffectTypeSave"
+};
+
+STARFINDER.modifierType = {
+    "constant": "STARFINDER.ModifierTypeConstant",
+    "formula": "STARFINDER.ModifierTypeFormula"
+}
+
 STARFINDER.CHARACTER_EXP_LEVELS = [
     0, 1300, 3300, 6000, 10000, 15000, 23000, 34000, 50000, 71000,
     105000, 145000, 210000, 295000, 425000, 600000, 850000, 1200000,

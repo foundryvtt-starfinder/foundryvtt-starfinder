@@ -1,0 +1,67 @@
+<form autocomplete="off" class="{{cssClass}}" data-modifier-id="{{modifier._id}}">
+    <div class="form-group">
+        <label for="name">{{localize "STARFINDER.ModifierNameLabel"}}</label>
+        <input name="name" type="text" value="{{modifier.name}}">
+    </div>
+    <div class="form-group">
+        <label for="modifier">{{localize "STARFINDER.ModifierModifierLabel"}}</label>
+        <input type="text" name="modifier" value="{{modifier.modifier}}">
+    </div>
+    <div class="form-group">
+        <label for="type">{{localize "STARFINDER.ModifierTypeLabel"}}</label>
+        <select name="type">
+            {{#select modifier.type}}
+            {{#each config.modifierTypes as |type key|}}
+            <option value="{{key}}">{{type}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="effectType">{{localize "STARFINDER.ModifierEffectTypeLabel"}}</label>
+        <select name="effectType">
+            {{#select modifier.effectType}}
+            {{#each config.modifierEffectTypes as |effect key|}}
+            <option value="{{key}}">{{effect}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>    
+    <div class="form-group">
+        <label for="valueAffected">{{localize "STARFINDER.ModifierValueAffectedLabel"}}</label>
+        <select name="valueAffected">
+            {{#select modifier.valueAffected}}
+            <option value="">None</option>
+            {{#eq modifier.effectType "ac"}}
+            {{log modifier.effectType}}
+            {{/eq}}
+            {{/select}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="modifierType">{{localize "STARFINDER.ModifierModifierTypeLabel"}}</label>
+        <select name="modifierType">
+            {{#select modifier.modifierType}}
+            {{#each config.modifierType as |type key|}}
+            <option value="{{key}}">{{type}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="checkbox">
+            <input type="checkbox" name="enabled" {{checked modifier.enabled}}> {{localize "STARFINDER.ModifierEnabledLabel"}}
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="source">{{localize "STARFINDER.ModifierSourceLabel"}}</label>
+        <input type="text" name="source" value="{{modifier.source}}">
+    </div>
+    <div class="form-group">
+        <label for="notes">{{localize "STARFINDER.ModifierNotesLabel"}}</label>
+        <textarea name="notes">{{modifier.notes}}</textarea>
+    </div>
+    <input type="hidden" name="_id" value="{{modifier._id}}">
+    <input type="hidden" name="subtab" value="{{modifier.subtab}}">
+    <button type="submit" id="btn-submit">{{localize "STARFINDER.SubmitButtonLabel"}}</button>
+</form>
