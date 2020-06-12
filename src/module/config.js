@@ -1,3 +1,6 @@
+import StarfinderModifier from "./modifiers/modifier.js";
+import { StarfinderModifierType, StarfinderEffectType, StarfinderModifierTypes } from "./modifiers/types.js";
+
 // Namespace Starfinder Configuration Values
 export const STARFINDER = {};
 
@@ -12,6 +15,13 @@ STARFINDER.abilities = {
     "int": "STARFINDER.AbilityInt",
     "wis": "STARFINDER.AbilityWis",
     "cha": "STARFINDER.AbilityCha"
+};
+
+STARFINDER.acpEffectingArmorType = {
+    "acp-all": "STARFINDER.ModifierACPEffectingArmorTypeAll",
+    "acp-light": "STARFINDER.ModifierACPEffectingArmorTypeLight",
+    "acp-heavy": "STARFINDER.ModifierACPEffectingArmorTypeHeavy",
+    "acp-power": "STARFINDER.ModifierACPEffectingArmorTypePower"
 };
 
 /**
@@ -1091,7 +1101,13 @@ STARFINDER.modifierEffectTypes = {
 STARFINDER.modifierType = {
     "constant": "STARFINDER.ModifierTypeConstant",
     "formula": "STARFINDER.ModifierTypeFormula"
-}
+};
+
+STARFINDER.modifierArmorClassAffectedValues = {
+    "both": "STARFINDER.ModifierArmorClassBoth",
+    "eac": "STARFINDER.EnergyArmorClass",
+    "kac": "STARFINDER.KineticArmorClass"
+};
 
 STARFINDER.CHARACTER_EXP_LEVELS = [
     0, 1300, 3300, 6000, 10000, 15000, 23000, 34000, 50000, 71000,
@@ -1104,6 +1120,331 @@ STARFINDER.CR_EXP_LEVELS = [
     6400, 9600, 12800, 19200, 25600, 38400, 51200, 76800, 102400,
     153600, 204800, 307200, 409600, 614400, 819200, 1228800, 1638400
 ];
+
+STARFINDER.statusEffectIcons = [
+    "systems/starfinder/icons/conditions/asleep.png",
+    "systems/starfinder/icons/conditions/bleeding.png",
+    "systems/starfinder/icons/conditions/blinded.png",
+    "systems/starfinder/icons/conditions/broken.png",
+    "systems/starfinder/icons/conditions/burning.png",
+    "systems/starfinder/icons/conditions/confused.png",
+    "systems/starfinder/icons/conditions/cowering.png",
+    "systems/starfinder/icons/conditions/dazed.png",
+    "systems/starfinder/icons/conditions/dazzled.png",
+    "systems/starfinder/icons/conditions/dead.png",
+    "systems/starfinder/icons/conditions/deafened.png",
+    "systems/starfinder/icons/conditions/dying.png",
+    "systems/starfinder/icons/conditions/encumbered.png",
+    "systems/starfinder/icons/conditions/entangled.png",
+    "systems/starfinder/icons/conditions/exhausted.png",
+    "systems/starfinder/icons/conditions/fascinated.png",
+    "systems/starfinder/icons/conditions/fatigued.png",
+    "systems/starfinder/icons/conditions/flatfooted.png",
+    "systems/starfinder/icons/conditions/frightened.png",
+    "systems/starfinder/icons/conditions/helpless.png",
+    "systems/starfinder/icons/conditions/nauseated.png",
+    "systems/starfinder/icons/conditions/offkilter.png",
+    "systems/starfinder/icons/conditions/offtarget.png",
+    "systems/starfinder/icons/conditions/overburdened.png",
+    "systems/starfinder/icons/conditions/staggered.png",
+    "systems/starfinder/icons/conditions/stunned.png",
+    "systems/starfinder/icons/conditions/unconscious.png"
+];
+
+STARFINDER.statusEffectIconMapping = {
+    "asleep": "systems/starfinder/icons/conditions/asleep.png",
+    "bleeding": "systems/starfinder/icons/conditions/bleeding.png",
+    "blinded": "systems/starfinder/icons/conditions/blinded.png",
+    "broken": "systems/starfinder/icons/conditions/broken.png",
+    "burning": "systems/starfinder/icons/conditions/burning.png",
+    "confused": "systems/starfinder/icons/conditions/confused.png",
+    "cowering": "systems/starfinder/icons/conditions/cowering.png",
+    "dazed": "systems/starfinder/icons/conditions/dazed.png",
+    "dazzled": "systems/starfinder/icons/conditions/dazzled.png",
+    "dead": "systems/starfinder/icons/conditions/dead.png",
+    "deafened": "systems/starfinder/icons/conditions/deafened.png",
+    "dyning": "systems/starfinder/icons/conditions/dying.png",
+    "encumbered": "systems/starfinder/icons/conditions/encumbered.png",
+    "entangled": "systems/starfinder/icons/conditions/entangled.png",
+    "exhausted": "systems/starfinder/icons/conditions/exhausted.png",
+    "fascinated": "systems/starfinder/icons/conditions/fascinated.png",
+    "fatigued": "systems/starfinder/icons/conditions/fatigued.png",
+    "flatfooted": "systems/starfinder/icons/conditions/flatfooted.png",
+    "frightened": "systems/starfinder/icons/conditions/frightened.png",
+    "grappled": "systems/starfinder/icons/conditions/",
+    "helpless": "systems/starfinder/icons/conditions/helpless.png",
+    "nauseated": "systems/starfinder/icons/conditions/nauseated.png",
+    "offkilter": "systems/starfinder/icons/conditions/offkilter.png",
+    "offtarget": "systems/starfinder/icons/conditions/offtarget.png",
+    "overburdened": "systems/starfinder/icons/conditions/overburdened.png",
+    "panicked": "systems/starfinder/icons/conditions/",
+    "paralyzed": "systems/starfinder/icons/conditions/",
+    "pinned": "systems/starfinder/icons/conditions/",
+    "prone": "systems/starfinder/icons/conditions/",
+    "shaken": "systems/starfinder/icons/conditions/",
+    "sickened": "systems/starfinder/icons/conditions/",
+    "stable": "systems/starfinder/icons/conditions/",
+    "staggered": "systems/starfinder/icons/conditions/staggered.png",
+    "stunned": "systems/starfinder/icons/conditions/stunned.png",
+    "unconscious": "systems/starfinder/icons/conditions/unconscious.png"
+};
+
+STARFINDER.conditions = {
+    "asleep": {
+        modifiers: [new StarfinderModifier({
+            name: "Asleep",
+            modifier: -10,
+            modifierType: StarfinderModifierType.CONSTANT,
+            effectType: StarfinderEffectType.SKILL,
+            valueAffected: "per",
+            enabled: true,
+            subtab: "conditions",
+            type: StarfinderModifierTypes.UNTYPED,
+            source: "Asleep Condition",
+            notes: "While asleep, you take a -10 penalty to Perception checks to notice anything.",
+            id: "12704233-7c66-44a8-bac7-2ab142981272",
+            condition: "asleep"
+        })]
+    },
+    "bleeding": {
+        modifiers: []
+    },
+    "blinded": {
+        modifiers: [new StarfinderModifier({
+            name: "Flat-Footed via Blinded",
+            effectType: StarfinderEffectType.AC,
+            valueAffected: "both",
+            enabled: true,
+            id: "f8eff2d1-47ae-43d8-9d56-fe9d9837f7d2",
+            modifier: -2,
+            modifierType: StarfinderModifierType.CONSTANT,
+            type: StarfinderModifierTypes.UNTYPED,
+            subtab: "conditions",
+            notes: "You take a -2 penalty to your AC and cannot take reactions while flat-footed",
+            source: "Blinded Condition",
+            condition: "blinded"
+        }),
+        new StarfinderModifier({
+            name: "Blinded",
+            modifier: -4,
+            modifierType: StarfinderModifierType.CONSTANT,
+            type: StarfinderModifierTypes.UNTYPED,
+            effectType: StarfinderEffectType.ABILITY_SKILLS,
+            valueAffected: "str",
+            condition: "blinded",
+            enabled: true,
+            id: "6c50c385-6735-4442-a3e1-dce20389e989",
+            notes: "",
+            source: "Blinded Condition",
+            subtab: "conditions"
+        }),
+        new StarfinderModifier({
+            name: "Blinded",
+            modifier: -4,
+            modifierType: StarfinderModifierType.CONSTANT,
+            type: StarfinderModifierTypes.UNTYPED,
+            effectType: StarfinderEffectType.ABILITY_SKILLS,
+            valueAffected: "dex",
+            condition: "blinded",
+            enabled: true,
+            id: "ebbff8e7-c7e3-4b02-acaf-0c648aa5135b",
+            notes: "",
+            source: "Blinded Condition",
+            subtab: "conditions"
+        }),
+        new StarfinderModifier({
+            name: "Blinded",
+            modifier: -4,
+            modifierType: StarfinderModifierType.CONSTANT,
+            type: StarfinderModifierTypes.UNTYPED,
+            effectType: StarfinderEffectType.SKILL,
+            valueAffected: "per",
+            condition: "blinded",
+            enabled: true,
+            id: "c4271e7c-bf39-4039-bf2d-e5dd71ae18c9",
+            notes: "",
+            source: "Blinded Condition",
+            subtab: "conditions"
+        })
+        ]
+    },
+    "broken": {
+        modifiers: []
+    },
+    "burning": {
+        modifiers: []
+    },
+    "confused": {
+        modifiers: []
+    },
+    "cowering": {
+        modifiers: [new StarfinderModifier({
+            name: "Flat-Footed via Cowering",
+            effectType: StarfinderEffectType.AC,
+            valueAffected: "both",
+            enabled: true,
+            id: "f8eff2d1-47ae-43d8-9d56-fe9d9837f7d2",
+            modifier: -2,
+            modifierType: StarfinderModifierType.CONSTANT,
+            type: StarfinderModifierTypes.UNTYPED,
+            subtab: "conditions",
+            notes: "You take a -2 penalty to your AC and cannot take reactions while flat-footed",
+            source: "Cowering Condition",
+            condition: "cowering"
+        })]
+    },
+    "dazed": {
+        modifiers: []
+    },
+    "dazzled": {
+        modifiers: [new StarfinderModifier({
+            name: "Dazzled",
+            effectType: StarfinderEffectType.SKILL,
+            valueAffected: "per",
+            enabled: true,
+            id: "816a4718-0a66-4314-8572-6b16b41fee9b",
+            modifier: -1,
+            modifierType: StarfinderModifierType.CONSTANT,
+            type: StarfinderModifierTypes.UNTYPED,
+            subtab: "conditions",
+            notes: "You take a -1 penalty to attack rolls and sight-based Perception checks.",
+            source: "Dazzled Condition",
+            condition: "dazzled"
+        }),
+        new StarfinderModifier({
+            name: "Dazzled",
+            effectType: StarfinderEffectType.ALL_ATTACKS,
+            valueAffected: "",
+            enabled: true,
+            id: "fe2017ba-d895-45d4-a185-67cdf0f3aba6",
+            modifier: -1,
+            modifierType: StarfinderModifierType.CONSTANT,
+            type: StarfinderModifierTypes.UNTYPED,
+            subtab: "conditions",
+            notes: "You take a -1 penalty to attack rolls and sight-based Perception checks.",
+            source: "Dazzled Condition",
+            condition: "dazzled"
+        })]
+    },
+    "dead": {
+        modifiers: []
+    },
+    "deafened": {
+        modifiers: [new StarfinderModifier({
+            name: "Deafened",
+            effectType: StarfinderEffectType.SKILL,
+            valueAffected: "per",
+            enabled: true,
+            id: "94f1cecc-c35e-4026-9f07-7309f4dbafc3",
+            modifier: -4,
+            modifierType: StarfinderModifierType.CONSTANT,
+            type: StarfinderModifierTypes.UNTYPED,
+            subtab: "conditions",
+            notes: "You take a -4 penalty to opposed Perception checks, and you automatically fail Perception checks based on sound.",
+            source: "Deafened Condition",
+            condition: "deafened"
+        }),
+        new StarfinderModifier({
+            name: "Deafened",
+            effectType: StarfinderEffectType.INITIATIVE,
+            valueAffected: "",
+            enabled: true,
+            id: "b20a8ce6-0d76-40e1-9fa4-1832535e70e4",
+            modifier: -4,
+            modifierType: StarfinderModifierType.CONSTANT,
+            type: StarfinderModifierTypes.UNTYPED,
+            subtab: "conditions",
+            notes: "You take a -4 penalty to initiative checks.",
+            source: "Deafened Condition",
+            condition: "deafened"
+        })]
+    },
+    "dyning": {
+        modifiers: []
+    },
+    "encumbered": {
+        modifiers: []
+    },
+    "entangled": {
+        modifiers: []
+    },
+    "exhausted": {
+        modifiers: []
+    },
+    "fascinated": {
+        modifiers: []
+    },
+    "fatigued": {
+        modifiers: []
+    },
+    "flatfooted": {
+        modifiers: [new StarfinderModifier({
+            name: "Flat-Footed",
+            effectType: StarfinderEffectType.AC,
+            valueAffected: "both",
+            enabled: true,
+            id: "f8eff2d1-47ae-43d8-9d56-fe9d9837f7d2",
+            modifier: -2,
+            modifierType: StarfinderModifierType.CONSTANT,
+            type: StarfinderModifierTypes.UNTYPED,
+            subtab: "conditions",
+            notes: "You take a -2 penalty to your AC and cannot take reactions while flat-footed",
+            source: "Flat-Footed Condition",
+            condition: "flatfooted"
+        })]
+    },
+    "frightened": {
+        modifiers: []
+    },
+    "grappled": {
+        modifiers: []
+    },
+    "helpless": {
+        modifiers: []
+    },
+    "nauseated": {
+        modifiers: []
+    },
+    "offkilter": {
+        modifiers: []
+    },
+    "offtarget": {
+        modifiers: []
+    },
+    "overburdened": {
+        modifiers: []
+    },
+    "panicked": {
+        modifiers: []
+    },
+    "paralyzed": {
+        modifiers: []
+    },
+    "pinned": {
+        modifiers: []
+    },
+    "prone": {
+        modifiers: []
+    },
+    "shaken": {
+        modifiers: []
+    },
+    "sickened": {
+        modifiers: []
+    },
+    "stable": {
+        modifiers: []
+    },
+    "staggered": {
+        modifiers: []
+    },
+    "stunned": {
+        modifiers: []
+    },
+    "unconscious": {
+        modifiers: []
+    }
+};
 
 STARFINDER.characterFlags = {
     "improvedInititive": {

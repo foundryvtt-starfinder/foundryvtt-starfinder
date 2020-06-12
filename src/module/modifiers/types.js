@@ -16,6 +16,7 @@ export const StarfinderEffectType = Object.freeze({
     RANGED_ATTACKS: "ranged-attacks",
     MELEE_ATTACKS: "melee-attacks",
     SPELL_ATTACKS: "spell-attacks",
+    ALL_ATTACKS: "all-attacks",
     AC: "ac",
     CMD: "cmd",
     ACP: "acp",

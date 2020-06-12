@@ -8,35 +8,30 @@ export default function (engine) {
         const reflex = data.attributes.reflex;
         const will = data.attributes.will;
         const modifiers = fact.modifiers;
+        const highest = Object.values({fort, reflex, will}).sort((a, b) => b.bonus - a.bonus).shift();
+        const lowest = Object.values({fort, reflex, will}).sort((a, b) => a.bonus - b.bonus).shift();
 
-        const processModifier = (bonus, obj) => {
-            switch (bonus.effectType) {
-                case StarfinderEffectType.SAVES:
-                    if (!obj["all"]) obj["all"] = [bonus];
-                    else obj["all"].push(bonus);
+        const addModifier = (bonus, save) => {
+            let saveMod = 0;
+            
+            switch (bonus.valueAffected) {
+                case "highest":
+                    if (save.bonus === highest.bonus) saveMod += bonus.modifier;
                     break;
-                case StarfinderEffectType.SAVE:
-                    if (!obj[bonus.valueAffected]) obj[bonus.valueAffected] = [bonus];
-                    else obj[bonus.valueAffected].push(bonus);
+                case "lowest":
+                    if (save.bonus === lowest.bonus) saveMod += bonus.modifier;
+                    break;
+                default:
+                    saveMod += bonus.modifier;
                     break;
             }
-        };
 
-        const addModifier = (bonuses, save) => {
-            if (!bonuses) return 0;
-
-            let saveMod = 0;
-
-            for (const bonus of bonuses) {
-                saveMod += bonus.modifier;
-
-                if (bonus.modifier !== 0) {
-                    save.tooltip.push(game.i18n.format("STARFINDER.SaveModifiersTooltip", {
-                        type: bonus.type.capitalize(),
-                        mod: bonus.modifier.signedString(),
-                        source: bonus.name
-                    }));
-                }
+            if (saveMod !== 0) {
+                save.tooltip.push(game.i18n.format("STARFINDER.SaveModifiersTooltip", {
+                    type: bonus.type.capitalize(),
+                    mod: bonus.modifier.signedString(),
+                    source: bonus.name
+                }));
             }
             
             return saveMod;
@@ -46,42 +41,70 @@ export default function (engine) {
             return mod.enabled && 
                 [StarfinderEffectType.SAVE, StarfinderEffectType.SAVES].includes(mod.effectType) &&
                 mod.modifierType === StarfinderModifierType.CONSTANT;
-        });
+        });        
 
-        const mods = context.parameters.stackModifiers.process(filteredMods, context);
+        const fortMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
+            "highest",
+            "lowest",
+            "fort"
+        ].includes(mod.valueAffected) || mod.effectType === StarfinderEffectType.SAVES), context);
+        const reflexMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
+            "highest",
+            "lowest",
+            "reflex"
+        ].includes(mod.valueAffected) || mod.effectType === StarfinderEffectType.SAVES), context);
+        const willMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
+            "highest",
+            "lowest",
+            "will"
+        ].includes(mod.valueAffected) || mod.effectType === StarfinderEffectType.SAVES), context);
 
-        const saveMods = Object.entries(mods).reduce((prev, curr) => {
-            if (curr[1] === null || curr[1].length < 1) return prev;
+        let fortMod = Object.entries(fortMods).reduce((sum, mod) => {
+            if (mod[1] === null || mod[1].length < 1) return sum;
 
-            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(curr[0])) {
-                for (const bonus of curr[1]) {
-                    processModifier(bonus, prev);
+            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(mod[0])) {
+                for (const bonus of mod[1]) {
+                    sum += addModifier(bonus, fort);
                 }
             } else {
-                processModifier(curr[1], prev);
+                sum += addModifier(mod[1], fort);
             }
 
-            return prev;
-        }, {});
+            return sum;
+        }, 0);
+
+        let reflexMod = Object.entries(reflexMods).reduce((sum, mod) => {
+            if (mod[1] === null || mod[1].length < 1) return sum;
+
+            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(mod[0])) {
+                for (const bonus of mod[1]) {
+                    sum += addModifier(bonus, reflex);
+                }
+            } else {
+                sum += addModifier(mod[1], reflex);
+            }
+
+            return sum;
+        }, 0);
+
+        let willMod = Object.entries(willMods).reduce((sum, mod) => {
+            if (mod[1] === null || mod[1].length < 1) return sum;
+
+            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(mod[0])) {
+                for (const bonus of mod[1]) {
+                    sum += addModifier(bonus, will);
+                }
+            } else {
+                sum += addModifier(mod[1], will);
+            }
+
+            return sum;
+        }, 0);
 
         /** @deprecated Will be removed in v0.4.0 */
         const greatFortitude = getProperty(flags, "starfinder.greatFortitude") ? 2 : 0;
         const lightningReflexes = getProperty(flags, "starfinder.lightningReflexes") ? 2 : 0;
         const ironWill = getProperty(flags, "starfinder.ironWill") ? 2 : 0;
-
-        let fortMod = 0;
-        let reflexMod = 0;
-        let willMod = 0;
-
-        if (saveMods["all"]) {
-            fortMod += addModifier(saveMods["all"], fort);
-            reflexMod += addModifier(saveMods["all"], reflex);
-            willMod += addModifier(saveMods["all"], will);
-        }
-
-        fortMod += addModifier(saveMods["fort"], fort);
-        reflexMod += addModifier(saveMods["reflex"], reflex);
-        willMod += addModifier(saveMods["will"], will);
 
         fort.bonus += fort.misc + greatFortitude + fortMod;
         reflex.bonus += reflex.misc + lightningReflexes + reflexMod;

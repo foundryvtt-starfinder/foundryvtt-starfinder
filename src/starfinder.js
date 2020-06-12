@@ -24,6 +24,7 @@ import Engine from "./module/engine/engine.js";
 import registerSystemRules from "./module/rules.js";
 import { StarfinderModifierTypes, StarfinderModifierType, StarfinderEffectType } from "./module/modifiers/types.js";
 import StarfinderModifier from "./module/modifiers/modifier.js";
+import { generateUUID } from "./module/utilities.js";
 
 Hooks.once('init', async function () {
     console.log(`Starfinder | Initializeing Starfinder System`);
@@ -46,12 +47,18 @@ Hooks.once('init', async function () {
         StarfinderModifierType,
         StarfinderEffectType,
         StarfinderModifierTypes,
-        StarfinderModifier
+        StarfinderModifier,
+        generateUUID
     };
 
     CONFIG.STARFINDER = STARFINDER;
     CONFIG.Actor.entityClass = ActorStarfinder;
-    CONFIG.Item.entityClass = ItemStarfinder;    
+    CONFIG.Item.entityClass = ItemStarfinder;
+
+    CONFIG.statusEffects = CONFIG.STARFINDER.statusEffectIcons;
+
+    CONFIG.fontFamilies.push("Exo 2");
+    CONFIG.defaultFontFamily = "Exo 2";
 
     registerSystemSettings();
 
@@ -77,7 +84,8 @@ Hooks.once("setup", function () {
         "weaponProficiencies", "abilityActivationTypes", "skillProficiencyLevels", "damageTypes",
         "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
         "weaponProperties", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
-        "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType"
+        "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
+        "modifierArmorClassAffectedValues"
     ];
 
     for (let o of toLocalize) {

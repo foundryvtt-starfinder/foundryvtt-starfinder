@@ -11,7 +11,7 @@
                 </h1>
 
                 <div class="charlevel">
-                    <div class="level {{#if disableExperience}}noxp{{/if}}" data-tippy-content="{{localize "STARFINDER.LevelLabelText"}}<br>@details.level.value">
+                    <div class="level {{#if disableExperience}}noxp{{/if}}" data-tippy-content="{{localize "STARFINDER.LevelLabelText"}}<br>@details.level.value<br><br>{{#each data.details.level.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                         <label>{{localize "STARFINDER.LevelLabelText"}} </label>
                         <span>{{data.details.level.value}}</span>
                     </div>

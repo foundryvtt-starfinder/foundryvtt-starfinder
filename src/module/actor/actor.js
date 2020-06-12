@@ -5,6 +5,7 @@ import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
 import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
 import { StarfinderModifierType, StarfinderModifierTypes, StarfinderEffectType } from "../modifiers/types.js";
 import StarfinderModifier from "../modifiers/modifier.js";
+import StarfinderModifierApplication from "../apps/modifier-app.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
@@ -205,10 +206,12 @@ export class ActorStarfinder extends Actor {
      * @param {Boolean}       data.enabled       Is this modifier activated or not.
      * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
      * @param {String}        data.notes         Any notes or comments about the modifier.
+     * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
+     * @param {String|null}   data.id            Override the randomly generated id with this.
      */
     async addModifier({
         name = "", 
-        modifier = "0", 
+        modifier = 0, 
         type = StarfinderModifierTypes.UNTYPED, 
         modifierType = StarfinderModifierType.CONSTANT, 
         effectType = StarfinderEffectType.SKILL,
@@ -216,7 +219,9 @@ export class ActorStarfinder extends Actor {
         valueAffected = "", 
         enabled = true, 
         source = "", 
-        notes = ""
+        notes = "",
+        condition = "",
+        id = null
     } = {}) {
         const data = this._ensureHasModifiers(duplicate(this.data.data));
         const modifiers = data.modifiers;
@@ -231,16 +236,35 @@ export class ActorStarfinder extends Actor {
             enabled,
             source,
             notes,
-            subtab
+            subtab,
+            condition,
+            id
         }));
 
         await this.update({["data.modifiers"]: modifiers});
     }
 
+    /**
+     * Delete a modifier for this Actor.
+     * 
+     * @param {String} id The id for the modifier to delete
+     */
     async deleteModifier(id) {
         const modifiers = this.data.data.modifiers.filter(mod => mod._id !== id);
         
         await this.update({"data.modifiers": modifiers});
+    }
+
+    /**
+     * Edit a modifier for an Actor.
+     * 
+     * @param {String} id The id for the modifier to edit
+     */
+    editModifier(id) {
+        const modifiers = duplicate(this.data.data.modifiers);
+        const modifier = modifiers.find(mod => mod._id === id);
+
+        new StarfinderModifierApplication(modifier, this).render(true);
     }
 
     /**

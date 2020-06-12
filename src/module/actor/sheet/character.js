@@ -1,6 +1,4 @@
 import { ActorSheetStarfinder } from "./base.js"
-import { StarfinderModifierTypes, StarfinderEffectType } from "../../modifiers/types.js";
-import StarfinderModifierApplication from "../../apps/modifier-app.js";
 
 export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     static get defaultOptions() {
@@ -125,24 +123,26 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         data.features = Object.values(features);
 
         const modifiers = {
-            conditions: { label: "STARFINDER.ModifiersConditionsTabLabel", dataset: { subtab: "conditions" }, isConditions: true },
+            conditions: { label: "STARFINDER.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },
             permanent: { label: "STARFINDER.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
             temporary: { label: "STARFINDER.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } },
             item: { label: "STARFINDER.ModifiersItemTabLabel", modifiers: [], dataset: { subtab: "item" } },
             misc: { label: "STARFINDER.ModifiersMiscTabLabel", modifiers: [], dataset: { subtab: "misc" } }
         };
 
-        let [permanent, temporary, itemModifiers, misc] = data.data.modifiers.reduce((arr, modifier) => {
+        let [permanent, temporary, itemModifiers, conditions, misc] = data.data.modifiers.reduce((arr, modifier) => {
             if (modifier.subtab === "permanent") arr[0].push(modifier);
             else if (modifier.subtab === "temporary") arr[1].push(modifier);
             else if (modifier.subtab === "item") arr[2].push(modifier);
+            else if (modifier.subtab === "conditions") arr[3].push(modifier);
             // The miscellaneous group is kind of a catchall category. If a modifer isn't explicitly
             // marked as belonging to a subtab, we'll just shove it in here.
-            else arr[3].push(modifier);
+            else arr[4].push(modifier);
 
             return arr;
-        }, [[], [], [], []]);
+        }, [[], [], [], [], []]);
 
+        modifiers.conditions.modifiers = conditions;
         modifiers.permanent.modifiers = permanent;
         modifiers.temporary.modifiers = temporary;
         modifiers.item.modifiers = itemModifiers;
@@ -185,7 +185,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     /**
      * Activate event listeners using the prepared sheet HTML
      * 
-     * @param {HTML} html The prepared HTML object ready to be rendered into the DOM
+     * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
      */
     activateListeners(html) {
         super.activateListeners(html);
@@ -201,6 +201,35 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
         html.find('.modifier-delete').click(this._onModifierDelete.bind(this));
         html.find('.modifier-toggle').click(this._onToggleModifierEnabled.bind(this));
+        html.find('.conditions input[type="checkbox"]').change(this._onToggleConditions.bind(this));
+    }
+
+    /**
+     * Toggles condition modifiers on or off.
+     * 
+     * @param {Event} event The triggering event.
+     */
+    async _onToggleConditions(event) {
+        event.preventDefault();
+
+        const target = $(event.currentTarget);
+        const condition = target.data('condition');
+        const isChecked = target.is(":checked");
+
+        if (isChecked) {
+            for (const modifier of CONFIG.STARFINDER.conditions[condition].modifiers) {
+                await this.actor.addModifier(modifier);
+            }
+        } else {
+            const modifiers = this.actor.data.data.modifiers.filter(mod => mod.condition !== condition);
+            
+            await this.actor.update({"data.modifiers": modifiers});
+        }
+        
+        const tokens = this.actor.getActiveTokens(true);
+        for (const token of tokens) {
+            token.toggleEffect(CONFIG.STARFINDER.statusEffectIconMapping[condition]);
+        }
     }
 
     /**
@@ -227,10 +256,8 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         event.preventDefault();
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
-
-        const modifiers = this.actor.data.data.modifiers.filter(mod => mod._id !== modifierId);
         
-        await this.actor.update({'data.modifiers': modifiers});
+        await this.actor.deleteModifier(modifierId);
     }
 
     /**
@@ -244,12 +271,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = duplicate(this.actor.data.data.modifiers);
-        const modifier = modifiers.find(mod => mod._id === modifierId);
-
-        console.log(modifier);
-
-        new StarfinderModifierApplication(modifier, this.actor).render(true);
+        this.actor.editModifier(modifierId);
     }
 
     /**

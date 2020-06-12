@@ -6,36 +6,17 @@ export default function (engine) {
         const flags = fact.flags;
         const modifiers = fact.modifiers;
 
-        const processModifiers = (bonus, obj) => {
-            switch (bonus.effectType) {
-                case StarfinderEffectType.ALL_SKILLS:
-                    if (!obj["all"]) obj["all"] = [bonus];
-                    else obj["all"].push(bonus);
-                    break;
-                case StarfinderEffectType.SKILL:
-                case StarfinderEffectType.ABILITY_SKILLS:
-                default:
-                    if (!obj[bonus.valueAffected]) obj[bonus.valueAffected] = [bonus];
-                    else obj[bonus.valueAffected].push(bonus);
-                    break;
-            }
-        };
-
-        const addModifier = (bonuses, skill) => {
-            if (!bonuses) return 0;
-
+        const addModifier = (bonus, skill) => {
             let skillMod = 0;
+            
+            skillMod += bonus.modifier;
 
-            for (const bonus of bonuses) {
-                skillMod += bonus.modifier;
-
-                if (bonus.modifier !== 0) {
-                    skill.tooltip.push(game.i18n.format("STARFINDER.SkillModifierTooltip", {
-                        type: bonus.type.capitalize(),
-                        mod: bonus.modifier.signedString(),
-                        source: bonus.name
-                    }));
-                }
+            if (skillMod !== 0) {
+                skill.tooltip.push(game.i18n.format("STARFINDER.SkillModifierTooltip", {
+                    type: bonus.type.capitalize(),
+                    mod: bonus.modifier.signedString(),
+                    source: bonus.name
+                }));
             }
             
             return skillMod;
@@ -73,30 +54,29 @@ export default function (engine) {
                 mod.modifierType === StarfinderModifierType.CONSTANT;
         });
 
-        const mods = context.parameters.stackModifiers.process(filteredMods, context);
-        const skillMods = Object.entries(mods).reduce((prev, modifier) => {
-            if (modifier[1] === null || modifier[1].length < 1) return prev;
-
-            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(modifier[0])) {
-                for (const bonus of modifier[1]) {
-                    processModifiers(bonus, prev);
-                }
-            } else {
-                processModifiers(modifier[1], prev);
-            }
-
-            return prev;
-        }, {});
-
         // Skills
         for (let [skl, skill] of Object.entries(skills)) {
             skill.tooltip = skill.tooltip ?? [];
 
-            let accumulator = 0;
+            const mods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
+                skl,
+                skill.ability
+            ].includes(mod.valueAffected) || mod.effectType === StarfinderEffectType.ALL_SKILLS), context);
 
-            accumulator += addModifier(skillMods[skl], skill);
-            accumulator += addModifier(skillMods["all"], skill);
-            accumulator += addModifier(skillMods[skill.ability], skill);
+
+            let accumulator = Object.entries(mods).reduce((sum, mod) => {
+                if (mod[1] === null || mod[1].length < 1) return sum;
+
+                if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(mod[0])) {
+                    for (const bonus of mod[1]) {
+                        sum += addModifier(bonus, skill);
+                    }
+                } else {
+                    sum += addModifier(mod[1], skill);
+                }
+
+                return sum;
+            }, 0);
             
             // Specific skill modifiers
             switch (skl) {

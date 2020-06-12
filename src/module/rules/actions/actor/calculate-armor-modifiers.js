@@ -3,20 +3,18 @@ import { StarfinderEffectType, StarfinderModifierType, StarfinderModifierTypes }
 export default function (engine) {
     engine.closures.add("calculateArmorModifiers", (fact, context) => {
 
-        const addModifiers = (bonus) => {
-            let eacMod = 0;
-            let kacMod = 0;
+        const addModifiers = (bonus, armorClass) => {
+            let mod = 0;
+            
+            mod += bonus.modifier;
+            if (mod !== 0)
+                armorClass.tooltip.push(game.i18n.format("STARFINDER.ACTooltipBonus", { 
+                    mod: mod.signedString(), 
+                    source: bonus.name, 
+                    type: bonus.type.capitalize() 
+                }));
 
-            if (bonus.valueAffected === "eac")
-                eacMod += bonus.modifier;
-            else if (bonus.valueAffected === "kac")
-                kacMod += bonus.modifier;
-            else {
-                eacMod += bonus.modifier;
-                kacMod += bonus.modifier;
-            }
-
-            return [eacMod, kacMod];
+            return mod;
         }
         
         const data = fact.data;
@@ -41,31 +39,39 @@ export default function (engine) {
                 [StarfinderEffectType.AC].includes(mod.effectType) &&
                 mod.modifierType === StarfinderModifierType.CONSTANT;
         });
+        
+        let eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context);
+        let kacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["kac", "both"].includes(mod.valueAffected)), context);
 
-        let mods = context.parameters.stackModifiers.process(armorMods, context);
-        let [eacMod, kacMod] = Object.entries(mods).reduce((sums, curr) => {
-
-            if (curr[1] === null || curr[1].length < 1) return sums;
+        let eacMod = Object.entries(eacMods).reduce((sum, curr) => {
+            if (curr[1] === null || curr[1].length < 1) return sum;
 
             if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
-                    let [eacMod, kacMod] = addModifiers(bonus);
-                    sums[0] += eacMod;
-                    eac.tooltip.push(game.i18n.format("STARFINDER.ACTooltipBonus", { mod: eacMod.signedString(), source: bonus.name, type: bonus.type.capitalize() }));
-                    sums[1] += kacMod;
-                    kac.tooltip.push(game.i18n.format("STARFINDER.ACTooltipBonus", { mod: kacMod.signedString(), source: bonus.name, type: bonus.type.capitalize() }));
+                    sum += addModifiers(bonus, eac);
                 }
             }
             else {
-                let [eacMod, kacMod] = addModifiers(curr[1]);
-                sums[0] += eacMod;
-                eac.tooltip.push(game.i18n.format("STARFINDER.ACTooltipBonus", { mod: eacMod.signedString(), source: curr[1].name, type: curr[1].type.capitalize() }));
-                sums[1] += kacMod;
-                kac.tooltip.push(game.i18n.format("STARFINDER.ACTooltipBonus", { mod: kacMod.signedString(), source: curr[1].name, type: curr[1].type.capitalize() }));
+                sum += addModifiers(curr[1], eac);
             }
 
-            return sums;
-        }, [0, 0]);
+            return sum;
+        }, 0);
+
+        let kacMod = Object.entries(kacMods).reduce((sum, curr) => {
+            if (curr[1] === null || curr[1].length < 1) return sum;
+
+            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(curr[0])) {
+                for (const bonus of curr[1]) {
+                    sum += addModifiers(bonus, kac);
+                }
+            }
+            else {
+                sum += addModifiers(curr[1], kac);
+            }
+
+            return sum;
+        }, 0);
 
         eac.value += armorSavant + eacMod;
         kac.value += armorSavant + kacMod;
