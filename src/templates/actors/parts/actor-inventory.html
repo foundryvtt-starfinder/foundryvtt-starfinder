@@ -3,7 +3,7 @@
     {{#if isCharacter}}
     <ol class="currency flexrow">
         <h3>
-            Currency
+            {{localize "STARFINDER.InventoryCurrency"}}
             <i class="fas fa-coins"></i>
         </h3>
         {{#each data.currency as |v k|}}
@@ -20,17 +20,17 @@
         <h3 class="item-name flexrow">{{section.label}}</h3>
 
         {{#if ../isCharacter}}
-        <div class="item-detail item-weight">Bulk</div>
-        <div class="item-detail item-equipped">Equipped</div>
+        <div class="item-detail item-weight">{{localize "STARFINDER.InventoryBulk"}}</div>
+        <div class="item-detail item-equipped">{{localize "STARFINDER.InventoryEquipped"}}</div>
         {{/if}}
 
-        <div class="item-detail item-uses">Capacity</div>
-        <div class="item-detail item-action">Usage</div>
+        <div class="item-detail item-uses">{{localize "STARFINDER.InventoryCapacity"}}</div>
+        <div class="item-detail item-action">{{localize "STARFINDER.InventoryUsage"}}</div>
 
         {{#if ../owner}}
         <div class="item-controls">
             <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> Add
+                <i class="fas fa-plus"></i> {{localize "STARFINDER.InventoryAdd"}}
             </a>
         </div>
         {{/if}}
@@ -63,7 +63,7 @@
             </div>
 
             <div class="item-detail item-equipped">
-            {{#if item.data.equipped }} Equipped
+            {{#if item.data.equipped }} {{localize "STARFINDER.InventoryEquipped"}}
             {{/if}}
             </div>
             {{/if}}
