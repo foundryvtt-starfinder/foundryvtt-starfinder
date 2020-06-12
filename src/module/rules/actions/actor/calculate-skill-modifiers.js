@@ -6,21 +6,6 @@ export default function (engine) {
         const flags = fact.flags;
         const modifiers = fact.modifiers;
 
-        const processModifiers = (bonus, obj) => {
-            switch (bonus.effectType) {
-                case StarfinderEffectType.ALL_SKILLS:
-                    if (!obj["all"]) obj["all"] = [bonus];
-                    else obj["all"].push(bonus);
-                    break;
-                case StarfinderEffectType.SKILL:
-                case StarfinderEffectType.ABILITY_SKILLS:
-                default:
-                    if (!obj[bonus.valueAffected]) obj[bonus.valueAffected] = [bonus];
-                    else obj[bonus.valueAffected].push(bonus);
-                    break;
-            }
-        };
-
         const addModifier = (bonus, skill) => {
             let skillMod = 0;
             
@@ -69,21 +54,6 @@ export default function (engine) {
                 mod.modifierType === StarfinderModifierType.CONSTANT;
         });
 
-        // const mods = context.parameters.stackModifiers.process(filteredMods, context);
-        // const skillMods = Object.entries(mods).reduce((prev, modifier) => {
-        //     if (modifier[1] === null || modifier[1].length < 1) return prev;
-
-        //     if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(modifier[0])) {
-        //         for (const bonus of modifier[1]) {
-        //             processModifiers(bonus, prev);
-        //         }
-        //     } else {
-        //         processModifiers(modifier[1], prev);
-        //     }
-
-        //     return prev;
-        // }, {});
-
         // Skills
         for (let [skl, skill] of Object.entries(skills)) {
             skill.tooltip = skill.tooltip ?? [];
@@ -107,10 +77,6 @@ export default function (engine) {
 
                 return sum;
             }, 0);
-
-            // accumulator += addModifier(skillMods[skl], skill);
-            // accumulator += addModifier(skillMods["all"], skill);
-            // accumulator += addModifier(skillMods[skill.ability], skill);
             
             // Specific skill modifiers
             switch (skl) {

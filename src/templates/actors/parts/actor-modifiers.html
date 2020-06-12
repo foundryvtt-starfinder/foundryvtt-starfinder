@@ -10,15 +10,17 @@
         <ol class="inventory-list">
             <li class="item flexrow inventory-header modifiers-header">
                 <div class="item-name flexrow">
-                    <h3>Name</h3>
+                    <h3>{{localize "STARFINDER.ModifierNameLabel"}}</h3>
                 </div>
 
-                <div class="modifier">Modifier</div>
-                <div class="modifier-type">Type</div>
+                <div class="item-detail modifier">{{localize "STARFINDER.ModifierTitle"}}</div>
+                <div class="item-detail modifier-type">{{localize "STARFINDER.ModifierTypeLabel"}}</div>
+                <div class="item-detail modifier-effect-type">{{localize "STARFINDER.ModifierEffectTypeHeaderLabel"}}</div>
+                <div class="item-detail modifier-value-affected">{{localize "STARFINDER.ModifierValueAffectedHeaderLabel"}}</div>
                 {{#if ../owner}}
                 <div class="item-controls">
                     <a class="item-control modifier-create" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}} title="Add Modifier">
-                        <i class="fas fa-plus"></i> Add
+                        <i class="fas fa-plus"></i> {{localize "STARFINDER.AddLabel"}}
                     </a>
                 </div>
                 {{/if}}
@@ -32,13 +34,38 @@
                     </div>
 
                     <div class="item-detail modifier-mod">
+                        {{#if (eq modifier.modifierType "constant")}}
+                        {{numberFormat modifier.modifier decimals=0 sign=true}}
+                        {{else}}
                         {{~modifier.modifier~}}
+                        {{/if}}
                     </div>
                     <div class="item-detail modifier-type">
-                        {{~modifier.type~}}
+                        {{lookup ../../config.modifierTypes modifier.type}}
                     </div>
                     <div class="item-detail modifier-effect-type">
-                        {{~modifier.effectType~}}
+                        {{lookup ../../config.modifierEffectTypes modifier.effectType}}
+                    </div>
+                    <div class="item-detail modifier-value-affected">
+                    {{#if (eq modifier.effectType "ac")}}
+                        {{lookup ../../config.modifierArmorClassAffectedValues modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "acp")}}
+                        {{lookup ../../config.acpEffectingArmorType modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "ability-skills")}}
+                        {{lookup ../../config.abilities modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "skill")}}
+                        {{lookup ../../config.skills modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "save")}}
+                        {{#if (eq modifier.valueAffected "highest")}}
+                            {{localize "STARFINDER.ModifierSaveHighest"}}
+                        {{else if (eq modifier.valueAffected "lowest")}}
+                            {{localize "STARFINDER.ModifierSaveLowest"}}
+                        {{else}}
+                            {{lookup ../../config.saves modifier.valueAffected}}
+                        {{/if}}                        
+                    {{else}}
+                    {{!-- Nothing --}}
+                    {{/if}}
                     </div>
                     {{#if ../../owner}}
                     <div class="item-controls">
@@ -57,7 +84,7 @@
         <div class="form-group stacked conditions">
             {{#each ../config.conditionTypes as |condition name|}}
             <label class="checkbox">
-                <input type="checkbox" name="data.conditions.{{name}}" {{checked (lookup ../../data.conditions name)}} /> {{condition}}
+                <input type="checkbox" data-condition="{{name}}" name="data.conditions.{{name}}" {{checked (lookup ../../data.conditions name)}} /> {{condition}}
             </label>
             {{/each}}
         </div>
