@@ -98,6 +98,10 @@ Hooks.once("setup", function () {
 
     console.log("Starfinder | Configuring rules engine");
     registerSystemRules(game.starfinder.engine);
+
+    Handlebars.registerHelper("not", function (value) {
+        return !Boolean(value);
+    });
 });
 
 Hooks.on("ready", () => {

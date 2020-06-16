@@ -70,6 +70,7 @@ export default class StarfinderModifierApplication extends FormApplication {
 
             switch (effectType) {
                 case StarfinderEffectType.ABILITY_SKILLS:
+                case StarfinderEffectType.ABILITY_CHECK:
                     target.prop('disabled', false);
                     target.find('option').remove();
                     for (const ability of Object.entries(CONFIG.STARFINDER.abilities)) {
@@ -125,6 +126,7 @@ export default class StarfinderModifierApplication extends FormApplication {
         
         switch (effectType) {
             case StarfinderEffectType.ABILITY_SKILLS:
+            case StarfinderEffectType.ABILITY_CHECK:
                 valueAffectedElement.prop('disabled', false);
                 break;
             case StarfinderEffectType.AC:

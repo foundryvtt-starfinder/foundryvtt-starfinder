@@ -105,7 +105,7 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "character" },
                 then: [
-                    "calculateBaseAbilityModifier",
+                    { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseArmorClass",
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     "calculateBaseAttackBonus",
