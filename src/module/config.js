@@ -1091,8 +1091,6 @@ STARFINDER.modifierEffectTypes = {
     "cmd": "STARFINDER.ModifierEffectTypeCMD",
     "acp": "STARFINDER.ModifierEffectTypeACP",
     "initiative": "STARFINDER.ModifierEffectTypeInit",
-    "ability-check": "STARFINDER.ModifierEffectTypeAbilityCheck",
-    "ability-checks": "STARFINDER.ModifierEffectTypeAbilityChecks",
     "ability-skills": "STARFINDER.ModifierEffectTypeAbilitySkills",
     "skill": "STARFINDER.ModifierEffectTypeSkill",
     "all-skills": "STARFINDER.ModifierEffectTypeAllSkills",
@@ -1143,12 +1141,20 @@ STARFINDER.statusEffectIcons = [
     "systems/starfinder/icons/conditions/fatigued.png",
     "systems/starfinder/icons/conditions/flatfooted.png",
     "systems/starfinder/icons/conditions/frightened.png",
+    "systems/starfinder/icons/conditions/grappled.png",
     "systems/starfinder/icons/conditions/helpless.png",
     "systems/starfinder/icons/conditions/nauseated.png",
     "systems/starfinder/icons/conditions/offkilter.png",
     "systems/starfinder/icons/conditions/offtarget.png",
     "systems/starfinder/icons/conditions/overburdened.png",
+    "systems/starfinder/icons/conditions/panicked.png",
+    "systems/starfinder/icons/conditions/paralyzed.png",
+    "systems/starfinder/icons/conditions/pinned.png",
+    "systems/starfinder/icons/conditions/prone.png",
+    "systems/starfinder/icons/conditions/shaken.png",
+    "systems/starfinder/icons/conditions/sickened.png",
     "systems/starfinder/icons/conditions/staggered.png",
+    "systems/starfinder/icons/conditions/stable.png",
     "systems/starfinder/icons/conditions/stunned.png",
     "systems/starfinder/icons/conditions/unconscious.png"
 ];
@@ -1173,19 +1179,19 @@ STARFINDER.statusEffectIconMapping = {
     "fatigued": "systems/starfinder/icons/conditions/fatigued.png",
     "flatfooted": "systems/starfinder/icons/conditions/flatfooted.png",
     "frightened": "systems/starfinder/icons/conditions/frightened.png",
-    "grappled": "systems/starfinder/icons/conditions/",
+    "grappled": "systems/starfinder/icons/conditions/grappled.png",
     "helpless": "systems/starfinder/icons/conditions/helpless.png",
     "nauseated": "systems/starfinder/icons/conditions/nauseated.png",
     "offkilter": "systems/starfinder/icons/conditions/offkilter.png",
     "offtarget": "systems/starfinder/icons/conditions/offtarget.png",
     "overburdened": "systems/starfinder/icons/conditions/overburdened.png",
-    "panicked": "systems/starfinder/icons/conditions/",
-    "paralyzed": "systems/starfinder/icons/conditions/",
-    "pinned": "systems/starfinder/icons/conditions/",
-    "prone": "systems/starfinder/icons/conditions/",
-    "shaken": "systems/starfinder/icons/conditions/",
-    "sickened": "systems/starfinder/icons/conditions/",
-    "stable": "systems/starfinder/icons/conditions/",
+    "panicked": "systems/starfinder/icons/conditions/panicked.png",
+    "paralyzed": "systems/starfinder/icons/conditions/paralyzed.png",
+    "pinned": "systems/starfinder/icons/conditions/pinned.png",
+    "prone": "systems/starfinder/icons/conditions/prone.png",
+    "shaken": "systems/starfinder/icons/conditions/shaken.png",
+    "sickened": "systems/starfinder/icons/conditions/sickened.png",
+    "stable": "systems/starfinder/icons/conditions/stable.png",
     "staggered": "systems/starfinder/icons/conditions/staggered.png",
     "stunned": "systems/starfinder/icons/conditions/stunned.png",
     "unconscious": "systems/starfinder/icons/conditions/unconscious.png"
@@ -1193,421 +1199,144 @@ STARFINDER.statusEffectIconMapping = {
 
 STARFINDER.conditions = {
     "asleep": {
-        modifiers: [new StarfinderModifier({
-            name: "Asleep",
-            modifier: -10,
-            modifierType: StarfinderModifierType.CONSTANT,
-            effectType: StarfinderEffectType.SKILL,
-            valueAffected: "per",
-            enabled: true,
-            subtab: "conditions",
-            type: StarfinderModifierTypes.UNTYPED,
-            source: "Asleep Condition",
-            notes: "While asleep, you take a -10 penalty to Perception checks to notice anything.",
-            condition: "asleep"
-        })]
+        modifiers: [],
+        tooltip: "<strong>Asleep</strong><br><br>You take a -10 penalty to Perception checks to notice things."
     },
     "bleeding": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Bleeding</strong><br><br>You take the listed damage at the beginning of your turn."
     },
     "blinded": {
-        modifiers: [
-        new StarfinderModifier({
-            name: "Blinded",
-            modifier: -4,
-            modifierType: StarfinderModifierType.CONSTANT,
-            type: StarfinderModifierTypes.UNTYPED,
-            effectType: StarfinderEffectType.ABILITY_SKILLS,
-            valueAffected: "str",
-            condition: "blinded",
-            enabled: true,
-            notes: "-4 penalty to Strength-based skill checks",
-            source: "Blinded Condition",
-            subtab: "conditions"
-        }),
-        new StarfinderModifier({
-            name: "Blinded",
-            modifier: -4,
-            modifierType: StarfinderModifierType.CONSTANT,
-            type: StarfinderModifierTypes.UNTYPED,
-            effectType: StarfinderEffectType.ABILITY_SKILLS,
-            valueAffected: "dex",
-            condition: "blinded",
-            enabled: true,
-            notes: "-4 penalty to Dexterity-based skill checks",
-            source: "Blinded Condition",
-            subtab: "conditions"
-        }),
-        new StarfinderModifier({
-            name: "Blinded",
-            modifier: -4,
-            modifierType: StarfinderModifierType.CONSTANT,
-            type: StarfinderModifierTypes.UNTYPED,
-            effectType: StarfinderEffectType.SKILL,
-            valueAffected: "per",
-            condition: "blinded",
-            enabled: false,
-            notes: "-4 penalty to opposed Perception skill checks.",
-            source: "Blinded Condition",
-            subtab: "conditions"
-        })
-        ]
+        modifiers: [],
+        tooltip: "<strong>Blinded</strong><br><br>You're flat-footed, you take a -4 penalty to most Str- and Dex-based skill checks and opposed Perception checks, you automatically fail Perception checks based on sight, opponents have total concealment against you, and you must succeed at a DC 10 Acrobatics check to move faster than half speed or else fall prone."
     },
     "broken": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Broken</strong><br><br><strong>Weapon:</strong> attack and damage rolls take a -2 penalty and can't deal extra effects on a critical hit;<br> <strong>Armor:</strong> AC bonuses are halved and the armor check penalty is doubled;<br> <strong>Vehicle:</strong> -2 penalty to AC, collision DC, and Piloting modifier, and it halves its full speed and MPH;<br> <strong>Tool or tech that provides bonuses:</strong> bonuses are halved."
     },
     "burning": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Burning</strong><br><br>You take the listed fire damage each round, and you must be extinguished to end the condition."
     },
     "confused": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Confused</strong><br><br>You treat all creatures as enemies, and you must roll on the table to determine your actions."
     },
     "cowering": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Cowering</strong><br><br>You're flat-footed and can take no actions."
     },
     "dazed": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Dazed</strong><br><br>You can take no actions."
     },
     "dazzled": {
-        modifiers: [new StarfinderModifier({
-            name: "Dazzled",
-            effectType: StarfinderEffectType.SKILL,
-            valueAffected: "per",
-            enabled: true,
-            modifier: -1,
-            modifierType: StarfinderModifierType.CONSTANT,
-            type: StarfinderModifierTypes.UNTYPED,
-            subtab: "conditions",
-            notes: "You take a -1 penalty to attack rolls and sight-based Perception checks.",
-            source: "Dazzled Condition",
-            condition: "dazzled"
-        }),
-        new StarfinderModifier({
-            name: "Dazzled",
-            effectType: StarfinderEffectType.ALL_ATTACKS,
-            valueAffected: "",
-            enabled: true,
-            modifier: -1,
-            modifierType: StarfinderModifierType.CONSTANT,
-            type: StarfinderModifierTypes.UNTYPED,
-            subtab: "conditions",
-            notes: "You take a -1 penalty to attack rolls and sight-based Perception checks.",
-            source: "Dazzled Condition",
-            condition: "dazzled"
-        })]
+        modifiers: [],
+        tooltip: "<strong>Dazzled</strong><br><br>You take a -1 penalty to attack rolls and sight-based Perception checks."
     },
     "dead": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Dead</strong><br><br>Your soul leaves your body, you can't act in any way, and you can't benefit from normal or magical healing."
     },
     "deafened": {
-        modifiers: [new StarfinderModifier({
-            name: "Deafened",
-            effectType: StarfinderEffectType.SKILL,
-            valueAffected: "per",
-            enabled: false,
-            modifier: -4,
-            modifierType: StarfinderModifierType.CONSTANT,
-            type: StarfinderModifierTypes.UNTYPED,
-            subtab: "conditions",
-            notes: "You take a -4 penalty to opposed Perception checks, and you automatically fail Perception checks based on sound.",
-            source: "Deafened Condition",
-            condition: "deafened"
-        }),
-        new StarfinderModifier({
-            name: "Deafened",
-            effectType: StarfinderEffectType.INITIATIVE,
-            valueAffected: "",
-            enabled: true,
-            modifier: -4,
-            modifierType: StarfinderModifierType.CONSTANT,
-            type: StarfinderModifierTypes.UNTYPED,
-            subtab: "conditions",
-            notes: "You take a -4 penalty to initiative checks.",
-            source: "Deafened Condition",
-            condition: "deafened"
-        })]
+        modifiers: [],
+        tooltip: "<strong>Deafened</strong><br><br>You take a -4 penalty to initiative checks and opposed Perception checks, and you automatically fail sound-based Perception checks."
     },
     "dyning": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Dying</strong><br><br>You're unconscious, you can take no actions, and you must stabilize or lose Resolve Points and potentially die."
     },
     "encumbered": {
-        modifiers: [
-            new StarfinderModifier({
-                name: "Encumbered",
-                effectType: StarfinderEffectType.ABILITY_CHECK,
-                valueAffected: "str",
-                enabled: true,
-                modifier: -5,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -5 pentalty to Strength-based checks (or you take your armor's armor check penalty, whichever is worse).",
-                source: "Encumbered Condition",
-                condition: "encumbered"
-            }),
-            new StarfinderModifier({
-                name: "Encumbered",
-                effectType: StarfinderEffectType.ABILITY_CHECK,
-                valueAffected: "dex",
-                enabled: true,
-                modifier: -5,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -5 pentalty to Dexterity-based checks (or you take your armor's armor check penalty, whichever is worse).",
-                source: "Encumbered Condition",
-                condition: "encumbered"
-            }),
-            new StarfinderModifier({
-                name: "Encumbered",
-                effectType: StarfinderEffectType.SPEED,
-                valueAffected: "",
-                enabled: true,
-                modifier: -10,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "All your speeds are reduced by 10 feet",
-                source: "Encumbered Condition",
-                condition: "encumbered"
-            })
-        ]
+        modifiers: [],
+        tooltip: "<strong>Encumbered</strong><br><br>Speeds are reduced by 10 feet, maximum Dex bonus to AC is reduced to +2, and you take a -5 penalty to Str- and Dex-based checks."
     },
     "entangled": {
-        modifiers: [
-            new StarfinderModifier({
-                name: "Entangled",
-                effectType: StarfinderEffectType.AC,
-                valueAffected: "both",
-                enabled: true,
-                modifier: -2,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -2 penalty to your AC",
-                source: "Entangled Condition",
-                condition: "entangled"
-            }),
-            new StarfinderModifier({
-                name: "Entangled",
-                effectType: StarfinderEffectType.SAVE,
-                valueAffected: "reflex",
-                enabled: true,
-                modifier: -2,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -2 penalty to Reflex saving throws",
-                source: "Entangled Condition",
-                condition: "entangled"
-            }),
-            new StarfinderModifier({
-                name: "Entangled",
-                effectType: StarfinderEffectType.INITIATIVE,
-                valueAffected: "",
-                enabled: true,
-                modifier: -2,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -2 penalty to initiative checks",
-                source: "Entangled Condition",
-                condition: "entangled"
-            }),
-            new StarfinderModifier({
-                name: "Entangled",
-                effectType: StarfinderEffectType.ABILITY_SKILLS,
-                valueAffected: "dex",
-                enabled: true,
-                modifier: -2,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -2 penalty to Dexterity-based ability checks",
-                source: "Entangled Condition",
-                condition: "entangled"
-            })
-        ]
+        modifiers: [],
+        tooltip: "<strong>Entangled</strong><br><br>You move at half speed; you cannot run or charge; and you take a -2 penalty to AC, attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks."
     },
     "exhausted": {
-        modifiers: [
-            new StarfinderModifier({
-                name: "Exhausted",
-                effectType: StarfinderEffectType.AC,
-                valueAffected: "both",
-                enabled: true,
-                modifier: -3,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -3 penalty to your AC",
-                source: "Exhausted Condition",
-                condition: "exhausted"
-            }),
-            new StarfinderModifier({
-                name: "Exhausted",
-                effectType: StarfinderEffectType.ALL_ATTACKS,
-                valueAffected: "",
-                enabled: true,
-                modifier: -3,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -3 penalty to your attack rolls",
-                source: "Exhausted Condition",
-                condition: "exhausted"
-            }),
-            new StarfinderModifier({
-                name: "Exhausted",
-                effectType: StarfinderEffectType.DAMAGE,
-                valueAffected: "melee",
-                enabled: true,
-                modifier: -3,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -3 penalty to your melee damage rolls",
-                source: "Exhausted Condition",
-                condition: "exhausted"
-            }),
-            new StarfinderModifier({
-                name: "Exhausted",
-                effectType: StarfinderEffectType.DAMAGE,
-                valueAffected: "thrown",
-                enabled: true,
-                modifier: -3,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -3 penalty to your thrown weapon damage rolls",
-                source: "Exhausted Condition",
-                condition: "exhausted"
-            }),
-            new StarfinderModifier({
-                name: "Exhausted",
-                effectType: StarfinderEffectType.SAVE,
-                valueAffected: "reflex",
-                enabled: true,
-                modifier: -3,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -3 penalty to Reflex saving throws",
-                source: "Exhausted Condition",
-                condition: "exhausted"
-            }),
-            new StarfinderModifier({
-                name: "Exhausted",
-                effectType: StarfinderEffectType.INITIATIVE,
-                valueAffected: "",
-                enabled: true,
-                modifier: -3,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -3 penalty to initiative checks",
-                source: "Exhausted Condition",
-                condition: "exhausted"
-            }),
-            new StarfinderModifier({
-                name: "Exhausted",
-                effectType: StarfinderEffectType.ABILITY_SKILLS,
-                valueAffected: "dex",
-                enabled: true,
-                modifier: -3,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -3 penalty to Dexterity-based skill checks",
-                source: "Exhausted Condition",
-                condition: "exhausted"
-            }),
-            new StarfinderModifier({
-                name: "Exhausted",
-                effectType: StarfinderEffectType.ABILITY_SKILLS,
-                valueAffected: "str",
-                enabled: true,
-                modifier: -3,
-                modifierType: StarfinderModifierType.CONSTANT,
-                type: StarfinderModifierTypes.UNTYPED,
-                subtab: "conditions",
-                notes: "You take a -3 penalty to Strength-based skill checks",
-                source: "Exhausted Condition",
-                condition: "exhausted"
-            })
-        ]
+        modifiers: [],
+        tooltip: "<strong>Exhausted</strong><br><br>You move at half speed; you cannot run or charge; you take a -3 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 3 bulk."
     },
     "fascinated": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Fascinated</strong><br><br>You must pay attention to the fascinating effect and take a -4 penalty to skill checks made as reactions."
     },
     "fatigued": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Fatigued</strong><br><br>You cannot run or charge; you take a -1 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 1 bulk."
     },
     "flatfooted": {
-        modifiers: [new StarfinderModifier({
-            name: "Flat-Footed",
-            effectType: StarfinderEffectType.AC,
-            valueAffected: "both",
-            enabled: true,
-            modifier: -2,
-            modifierType: StarfinderModifierType.CONSTANT,
-            type: StarfinderModifierTypes.UNTYPED,
-            subtab: "conditions",
-            notes: "You take a -2 penalty to your AC and cannot take reactions while flat-footed",
-            source: "Flat-Footed Condition",
-            condition: "flatfooted"
-        })]
+        modifiers: [],
+        tooltip: "<strong>Flat-Footed</strong><br><br>You take a -2 penalty to AC, and you cannot take reactions or make attacks of opportunity."
     },
     "frightened": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Frightened</strong><br><br>You must flee or fight, and you take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks."
     },
     "grappled": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Grappled</strong><br><br>You cannot move or take two-handed actions; you take a -2 penalty to AC, most attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks; and you cannot make attacks of opportunity."
     },
     "helpless": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Helpless</strong><br><br>Your Dex modifier is -5, and melee attacks against you gain a +4 bonus."
     },
     "nauseated": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Nauseated</strong><br><br>You're unable to attack, cast spells, or concentrate on spells, and the only action you can take is a single move action per turn."
     },
     "offkilter": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Off-kilter</strong><br><br>You can't take move actions except to right yourself, you take a -2 penalty to attacks, and you're flat-footed."
     },
     "offtarget": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Off-target</strong><br><br>You take a -2 penalty to attack rolls."
     },
     "overburdened": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Overburdened</strong><br><br>Speeds are reduced to 5 feet; maximum Dex bonus to AC is reduced to +0; and you take a -5 penalty to Str- and Dex-based checks."
     },
     "panicked": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Panicked</strong><br><br><ul><li>You drop all held items</li><li>You flee at top speed</li><li>You cannot take other actions</li><li>You take a -2 penalty to ability checks, saving throws, and skill checks</li><li>And you cower if cornered</li></ul>"
     },
     "paralyzed": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Paralyzed</strong><br><br>Your Dex modifier is -5, and you cannot move but can take mental actions."
     },
     "pinned": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Pinned</strong><br><br>You cannot move, you're flat-footed, and you take penalties to the same attributes as for grappled but the penalty is -4."
     },
     "prone": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Prone</strong><br><br>You take a -4 penalty to melee attacks, a +4 bonus to AC against ranged attacks, and a -4 penalty to AC against melee attacks."
     },
     "shaken": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Skaken</strong><br><br>You take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks."
     },
     "sickened": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Sickened</strong><br><br>You take a -2 penalty to ability checks, attack rolls, weapon damage rolls, saving throws, and skill checks."
     },
     "stable": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Stable</strong><br><br>You're no longer dying, but you are still unconscious."
     },
     "staggered": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Staggered</strong><br><br>You can take only a single move or standard action each round and can't take reactions, but you can take swift actions as normal."
     },
     "stunned": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Stunned</strong><br><br>You drop everything held, you can't take actions, and you're flat-footed."
     },
     "unconscious": {
-        modifiers: []
+        modifiers: [],
+        tooltip: "<strong>Unconscious</strong><br><br>You're knocked out and helpless."
     }
 };
 

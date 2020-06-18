@@ -7,11 +7,11 @@
         <div class="header-details flexrow">
             <div class="header-background flexrow">
                 <h1 class="charname">
-                    <input name="name" type="text" value="{{actor.name}}" data-tippy-content="{{localize "STARFINDER.CharacterNamePlaceHolderText"}}" placeholder="{{localize "STARFINDER.CharacterNamePlaceHolderText"}}" />
+                    <input name="name" type="text" value="{{actor.name}}" data-tippy-content="<strong>{{localize "STARFINDER.CharacterNamePlaceHolderText"}}</strong>" placeholder="{{localize "STARFINDER.CharacterNamePlaceHolderText"}}" />
                 </h1>
 
                 <div class="charlevel">
-                    <div class="level {{#if disableExperience}}noxp{{/if}}" data-tippy-content="{{localize "STARFINDER.LevelLabelText"}}<br>@details.level.value<br><br>{{#each data.details.level.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <div class="level {{#if disableExperience}}noxp{{/if}}" data-tippy-content="<strong>{{localize "STARFINDER.LevelLabelText"}}</strong><br>@details.level.value<br><br>{{#each data.details.level.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                         <label>{{localize "STARFINDER.LevelLabelText"}} </label>
                         <span>{{data.details.level.value}}</span>
                     </div>
@@ -31,20 +31,20 @@
             {{!-- Character Summary --}}
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.details.race" value="{{data.details.race}}" data-tippy-content="{{localize "STARFINDER.RacePlaceHolderText"}}<br>@details.race" placeholder="{{localize "STARFINDER.RacePlaceHolderText"}}" />
+                    <input type="text" name="data.details.race" value="{{data.details.race}}" data-tippy-content="<strong>{{localize "STARFINDER.RacePlaceHolderText"}}</strong><br>@details.race" placeholder="{{localize "STARFINDER.RacePlaceHolderText"}}" />
                 </li>
                 <li>
-                    <input type="text" name="data.details.theme" value="{{data.details.theme}}" data-tippy-content="{{localize "STARFINDER.ThemePlaceHolderText"}}<br>@details.theme" placeholder="{{localize "STARFINDER.ThemePlaceHolderText"}}" />
+                    <input type="text" name="data.details.theme" value="{{data.details.theme}}" data-tippy-content="<strong>{{localize "STARFINDER.ThemePlaceHolderText"}}</strong><br>@details.theme" placeholder="{{localize "STARFINDER.ThemePlaceHolderText"}}" />
                 </li>
                 <li>
-                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" data-tippy-content="{{localize "STARFINDER.AlignmentPlaceHolderText"}}<br>@details.alignment"
+                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" data-tippy-content="<strong>{{localize "STARFINDER.AlignmentPlaceHolderText"}}</strong><br>@details.alignment"
                         placeholder="{{localize "STARFINDER.AlignmentPlaceHolderText"}}" />
                 </li>
             </ul>
 
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
-                <li class="attribute health" data-tippy-content="{{ localize "STARFINDER.Health" }}<br>@attributes.hp.value<br>@attributes.hp.max">
+                <li class="attribute health" data-tippy-content="<strong>{{ localize "STARFINDER.Health" }}</strong><br>@attributes.hp.value<br>@attributes.hp.max">
                     <h4 class="attribute-name box-title">{{ localize "STARFINDER.Health" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
@@ -61,7 +61,7 @@
                     </footer>
                 </li>
 
-                <li class="attribute health" data-tippy-content="{{ localize "STARFINDER.Stamina" }}<br>@attributes.sp.value<br>@attributes.sp.max">
+                <li class="attribute health" data-tippy-content="<strong>{{ localize "STARFINDER.Stamina" }}</strong><br>@attributes.sp.value<br>@attributes.sp.max">
                     <h4 class="attribute-name box-title">{{ localize "STARFINDER.Stamina" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.sp.value" type="text" value="{{data.attributes.sp.value}}"
@@ -72,7 +72,7 @@
                     </div>                    
                 </li>
 
-                <li class="attribute" data-tippy-content="{{ localize "STARFINDER.EnergyArmorClass" }}<br>@attributes.eac.value<br><br>{{#each data.attributes.eac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                <li class="attribute" data-tippy-content="<strong>{{ localize "STARFINDER.EnergyArmorClass" }}</strong><br>@attributes.eac.value<br><br>{{#each data.attributes.eac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                     <h4 class="attribute-name box-title">{{ localize "STARFINDER.EnergyArmorClass" }}</h4>
                     <div class="attribute-value">
                         <span>{{data.attributes.eac.value}}</span>
@@ -82,7 +82,7 @@
                     </footer>
                 </li>
 
-                <li class="attribute" data-tippy-content="{{ localize "STARFINDER.KineticArmorClass" }}<br>@attributes.kac.value<br><br>{{#each data.attributes.kac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                <li class="attribute" data-tippy-content="<strong>{{ localize "STARFINDER.KineticArmorClass" }}</strong><br>@attributes.kac.value<br><br>{{#each data.attributes.kac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                     <h4 class="attribute-name box-title">{{ localize "STARFINDER.KineticArmorClass" }}</h4>
                     <div class="attribute-value">
                         <span>{{data.attributes.kac.value}}</span>
@@ -92,7 +92,7 @@
                     </footer>
                 </li>
 
-                <li class="attribute" data-tippy-content="{{ localize "STARFINDER.Speed" }}<br>@attributes.speed.value<br>@attributes.speed.special">
+                <li class="attribute" data-tippy-content="<strong>{{ localize "STARFINDER.Speed" }}</strong><br>@attributes.speed.value<br>@attributes.speed.special">
                     <h4 class="attribute-name box-title">{{ localize "STARFINDER.Speed" }}</h4>
                     <div class="attribute-value">
                         <input name="data.attributes.speed.value" type="text" value="{{data.attributes.speed.value}}"
@@ -126,7 +126,7 @@
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
                 {{#each data.abilities as |ability id|}}
-                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-tippy-content="{{ability.label}}<br>@abilities.{{id}}.value<br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-ability="{{id}}">
+                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.value<br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     <input class="ability-score" name="data.abilities.{{id}}.value" type="text"
                         value="{{ability.value}}" data-dtype="Number" placeholder="10" />
@@ -148,7 +148,7 @@
                     <div class="skill-header-mod">{{localize "STARFINDER.SkillsHeaderModifier"}}</div>
                 </li>
                 {{#each data.skills as |skill s|}}
-                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-tippy-content="{{skill.label}}<br>@skills.{{s}}.mod<br><br>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
+                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-tippy-content="<strong>{{skill.label}}</strong>{{#if (or skill.isTrainedOnly skill.hasArmorCheckPenalty)}}<br>(<em>{{#if skill.hasArmorCheckPenalty}}Armor Check Penalty{{/if}}{{#if (and skill.isTrainedOnly skill.hasArmorCheckPenalty)}}; {{/if}}{{#if skill.isTrainedOnly}}Trained Only{{/if}}</em>){{/if}}<br>@skills.{{s}}.mod<br><br>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
                     <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <h4 class="skill-name rollable">
@@ -200,7 +200,7 @@
                     </li>
                     {{/each}} --}}
 
-                    <li class="attribute save" data-tippy-content="{{localize "STARFINDER.FortitudeSave"}}<br>@attributes.fort.bonus<br><br>{{#each data.attributes.fort.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-save="fort">
+                    <li class="attribute save" data-tippy-content="<strong>{{localize "STARFINDER.FortitudeSave"}}</strong><br>@attributes.fort.bonus<br><br>{{#each data.attributes.fort.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-save="fort">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.FortitudeSave"}}</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.fort.bonus decimals=0 sign=true}}</span>
@@ -214,7 +214,7 @@
                         </footer>
                     </li>
 
-                    <li class="attribute save" data-tippy-content="{{localize "STARFINDER.ReflexSave"}}<br>@attributes.reflex.bonus<br><br>{{#each data.attributes.reflex.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-save="reflex">
+                    <li class="attribute save" data-tippy-content="<strong>{{localize "STARFINDER.ReflexSave"}}</strong><br>@attributes.reflex.bonus<br><br>{{#each data.attributes.reflex.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-save="reflex">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.ReflexSave"}}</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.reflex.bonus decimals=0 sign=true}}</span>
@@ -229,7 +229,7 @@
                         </footer>
                     </li>
 
-                    <li class="attribute save" data-tippy-content="{{localize "STARFINDER.WillSave"}}<br>@attributes.will.bonus<br><br>{{#each data.attributes.will.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-save="will">
+                    <li class="attribute save" data-tippy-content="<strong>{{localize "STARFINDER.WillSave"}}</strong><br>@attributes.will.bonus<br><br>{{#each data.attributes.will.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-save="will">
                         <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.WillSave"}}</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.will.bonus decimals=0 sign=true}}</span>
@@ -246,7 +246,7 @@
                 </ul>
 
                 <ul class="attributes flexrow last">
-                    <li class="attribute initiative" data-tippy-content="{{localize "STARFINDER.InitiativeLabel"}}<br>@attributes.init.total<br><br>{{#each data.attributes.init.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <li class="attribute initiative" data-tippy-content="<strong>{{localize "STARFINDER.InitiativeLabel"}}</strong><br>@attributes.init.total<br><br>{{#each data.attributes.init.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                         <h4 class="attribute-name box-title">{{localize "STARFINDER.InitiativeLabel"}}</h4>
                         <div class="attribute-value">
                             <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
@@ -257,7 +257,7 @@
                                 value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}" />
                         </footer>
                     </li>
-                    <li class="attribute cmd" data-tippy-content="<p>{{localize "STARFINDER.ACvsCombatManeuversTitle"}}<br>@attributes.cmd.value</p><br>{{#each data.attributes.cmd.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <li class="attribute cmd" data-tippy-content="<strong>{{localize "STARFINDER.ACvsCombatManeuversTitle"}}</strong><br>@attributes.cmd.value<br><br>{{#each data.attributes.cmd.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                         <h4 class="attribute-name box-title">
                             {{localize "STARFINDER.ACvsCombatManeuversLabel"}}
                         </h4>
@@ -265,7 +265,7 @@
                             <span>{{numberFormat data.attributes.cmd.value decimal=0 sign=false}}</span>
                         </div>
                     </li>
-                    <li class="attribute bab" data-tippy-content="{{localize "STARFINDER.BaseAttackBonusTitle"}}<br>@attributes.bab<br><br>{{#each data.attributes.babtooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <li class="attribute bab" data-tippy-content="<strong>{{localize "STARFINDER.BaseAttackBonusTitle"}}</strong><br>@attributes.bab<br><br>{{#each data.attributes.babtooltip as |tip|}}{{tip}}<br>{{/each}}">
                         <h4 class="attribute-name box-title">
                             {{localize "STARFINDER.BaseAttackBonusLabel"}}
                         </h4>
@@ -273,7 +273,7 @@
                             <span>{{numberFormat data.attributes.bab decimal=0 sign=true}}</span>
                         </div>
                     </li>
-                    <li class="attribute resolve" data-tippy-content="{{localize "STARFINDER.Resolve"}}<br>@attributes.rp.value<br>@attributes.rp.max">
+                    <li class="attribute resolve" data-tippy-content="<strong>{{localize "STARFINDER.Resolve"}}</strong><br>@attributes.rp.value<br>@attributes.rp.max">
                         <h4 class="attribute-name box-title">{{ localize "STARFINDER.Resolve" }}</h4>
                         <div class="attribute-value multiple">
                             <input name="data.attributes.rp.value" type="text" value="{{data.attributes.rp.value}}"
