@@ -44,6 +44,16 @@
         <div class="tab details" data-group="primary" data-tab="details">
             <h3 class="form-header">Spell Details</h3>
 
+            {{!-- Allowed Classes --}}
+            <div class="form-group stacked">
+                <label>Allowed Classes</label>
+                {{#each config.allowedClasses as |name key|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.allowedClasses.{{key}}" {{checked (lookup ../data.allowedClasses key)}} /> {{name}}
+                </label>
+                {{/each}}
+            </div>
+
             {{!-- Spell Level --}}
             <div class="form-group">
                 <label>Spell Level</label>

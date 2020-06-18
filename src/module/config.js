@@ -1611,6 +1611,12 @@ STARFINDER.conditions = {
     }
 };
 
+STARFINDER.allowedClasses = {
+    "myst": "Mystic",
+    "tech": "Technomancer",
+    "wysh": "Witchwarper"
+};
+
 STARFINDER.characterFlags = {
     "improvedInititive": {
         name: "STARFINDER.ImprovedInitiativeLabel",
