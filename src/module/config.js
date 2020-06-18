@@ -1091,6 +1091,8 @@ STARFINDER.modifierEffectTypes = {
     "cmd": "STARFINDER.ModifierEffectTypeCMD",
     "acp": "STARFINDER.ModifierEffectTypeACP",
     "initiative": "STARFINDER.ModifierEffectTypeInit",
+    "ability-check": "STARFINDER.ModifierEffectTypeAbilityCheck",
+    "ability-checks": "STARFINDER.ModifierEffectTypeAbilityChecks",
     "ability-skills": "STARFINDER.ModifierEffectTypeAbilitySkills",
     "skill": "STARFINDER.ModifierEffectTypeSkill",
     "all-skills": "STARFINDER.ModifierEffectTypeAllSkills",
@@ -1202,7 +1204,6 @@ STARFINDER.conditions = {
             type: StarfinderModifierTypes.UNTYPED,
             source: "Asleep Condition",
             notes: "While asleep, you take a -10 penalty to Perception checks to notice anything.",
-            id: "12704233-7c66-44a8-bac7-2ab142981272",
             condition: "asleep"
         })]
     },
@@ -1210,20 +1211,7 @@ STARFINDER.conditions = {
         modifiers: []
     },
     "blinded": {
-        modifiers: [new StarfinderModifier({
-            name: "Flat-Footed via Blinded",
-            effectType: StarfinderEffectType.AC,
-            valueAffected: "both",
-            enabled: true,
-            id: "f8eff2d1-47ae-43d8-9d56-fe9d9837f7d2",
-            modifier: -2,
-            modifierType: StarfinderModifierType.CONSTANT,
-            type: StarfinderModifierTypes.UNTYPED,
-            subtab: "conditions",
-            notes: "You take a -2 penalty to your AC and cannot take reactions while flat-footed",
-            source: "Blinded Condition",
-            condition: "blinded"
-        }),
+        modifiers: [
         new StarfinderModifier({
             name: "Blinded",
             modifier: -4,
@@ -1233,8 +1221,7 @@ STARFINDER.conditions = {
             valueAffected: "str",
             condition: "blinded",
             enabled: true,
-            id: "6c50c385-6735-4442-a3e1-dce20389e989",
-            notes: "",
+            notes: "-4 penalty to Strength-based skill checks",
             source: "Blinded Condition",
             subtab: "conditions"
         }),
@@ -1247,8 +1234,7 @@ STARFINDER.conditions = {
             valueAffected: "dex",
             condition: "blinded",
             enabled: true,
-            id: "ebbff8e7-c7e3-4b02-acaf-0c648aa5135b",
-            notes: "",
+            notes: "-4 penalty to Dexterity-based skill checks",
             source: "Blinded Condition",
             subtab: "conditions"
         }),
@@ -1260,9 +1246,8 @@ STARFINDER.conditions = {
             effectType: StarfinderEffectType.SKILL,
             valueAffected: "per",
             condition: "blinded",
-            enabled: true,
-            id: "c4271e7c-bf39-4039-bf2d-e5dd71ae18c9",
-            notes: "",
+            enabled: false,
+            notes: "-4 penalty to opposed Perception skill checks.",
             source: "Blinded Condition",
             subtab: "conditions"
         })
@@ -1278,20 +1263,7 @@ STARFINDER.conditions = {
         modifiers: []
     },
     "cowering": {
-        modifiers: [new StarfinderModifier({
-            name: "Flat-Footed via Cowering",
-            effectType: StarfinderEffectType.AC,
-            valueAffected: "both",
-            enabled: true,
-            id: "f8eff2d1-47ae-43d8-9d56-fe9d9837f7d2",
-            modifier: -2,
-            modifierType: StarfinderModifierType.CONSTANT,
-            type: StarfinderModifierTypes.UNTYPED,
-            subtab: "conditions",
-            notes: "You take a -2 penalty to your AC and cannot take reactions while flat-footed",
-            source: "Cowering Condition",
-            condition: "cowering"
-        })]
+        modifiers: []
     },
     "dazed": {
         modifiers: []
@@ -1302,7 +1274,6 @@ STARFINDER.conditions = {
             effectType: StarfinderEffectType.SKILL,
             valueAffected: "per",
             enabled: true,
-            id: "816a4718-0a66-4314-8572-6b16b41fee9b",
             modifier: -1,
             modifierType: StarfinderModifierType.CONSTANT,
             type: StarfinderModifierTypes.UNTYPED,
@@ -1316,7 +1287,6 @@ STARFINDER.conditions = {
             effectType: StarfinderEffectType.ALL_ATTACKS,
             valueAffected: "",
             enabled: true,
-            id: "fe2017ba-d895-45d4-a185-67cdf0f3aba6",
             modifier: -1,
             modifierType: StarfinderModifierType.CONSTANT,
             type: StarfinderModifierTypes.UNTYPED,
@@ -1334,8 +1304,7 @@ STARFINDER.conditions = {
             name: "Deafened",
             effectType: StarfinderEffectType.SKILL,
             valueAffected: "per",
-            enabled: true,
-            id: "94f1cecc-c35e-4026-9f07-7309f4dbafc3",
+            enabled: false,
             modifier: -4,
             modifierType: StarfinderModifierType.CONSTANT,
             type: StarfinderModifierTypes.UNTYPED,
@@ -1349,7 +1318,6 @@ STARFINDER.conditions = {
             effectType: StarfinderEffectType.INITIATIVE,
             valueAffected: "",
             enabled: true,
-            id: "b20a8ce6-0d76-40e1-9fa4-1832535e70e4",
             modifier: -4,
             modifierType: StarfinderModifierType.CONSTANT,
             type: StarfinderModifierTypes.UNTYPED,
@@ -1363,13 +1331,211 @@ STARFINDER.conditions = {
         modifiers: []
     },
     "encumbered": {
-        modifiers: []
+        modifiers: [
+            new StarfinderModifier({
+                name: "Encumbered",
+                effectType: StarfinderEffectType.ABILITY_CHECK,
+                valueAffected: "str",
+                enabled: true,
+                modifier: -5,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -5 pentalty to Strength-based checks (or you take your armor's armor check penalty, whichever is worse).",
+                source: "Encumbered Condition",
+                condition: "encumbered"
+            }),
+            new StarfinderModifier({
+                name: "Encumbered",
+                effectType: StarfinderEffectType.ABILITY_CHECK,
+                valueAffected: "dex",
+                enabled: true,
+                modifier: -5,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -5 pentalty to Dexterity-based checks (or you take your armor's armor check penalty, whichever is worse).",
+                source: "Encumbered Condition",
+                condition: "encumbered"
+            }),
+            new StarfinderModifier({
+                name: "Encumbered",
+                effectType: StarfinderEffectType.SPEED,
+                valueAffected: "",
+                enabled: true,
+                modifier: -10,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "All your speeds are reduced by 10 feet",
+                source: "Encumbered Condition",
+                condition: "encumbered"
+            })
+        ]
     },
     "entangled": {
-        modifiers: []
+        modifiers: [
+            new StarfinderModifier({
+                name: "Entangled",
+                effectType: StarfinderEffectType.AC,
+                valueAffected: "both",
+                enabled: true,
+                modifier: -2,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -2 penalty to your AC",
+                source: "Entangled Condition",
+                condition: "entangled"
+            }),
+            new StarfinderModifier({
+                name: "Entangled",
+                effectType: StarfinderEffectType.SAVE,
+                valueAffected: "reflex",
+                enabled: true,
+                modifier: -2,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -2 penalty to Reflex saving throws",
+                source: "Entangled Condition",
+                condition: "entangled"
+            }),
+            new StarfinderModifier({
+                name: "Entangled",
+                effectType: StarfinderEffectType.INITIATIVE,
+                valueAffected: "",
+                enabled: true,
+                modifier: -2,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -2 penalty to initiative checks",
+                source: "Entangled Condition",
+                condition: "entangled"
+            }),
+            new StarfinderModifier({
+                name: "Entangled",
+                effectType: StarfinderEffectType.ABILITY_SKILLS,
+                valueAffected: "dex",
+                enabled: true,
+                modifier: -2,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -2 penalty to Dexterity-based ability checks",
+                source: "Entangled Condition",
+                condition: "entangled"
+            })
+        ]
     },
     "exhausted": {
-        modifiers: []
+        modifiers: [
+            new StarfinderModifier({
+                name: "Exhausted",
+                effectType: StarfinderEffectType.AC,
+                valueAffected: "both",
+                enabled: true,
+                modifier: -3,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -3 penalty to your AC",
+                source: "Exhausted Condition",
+                condition: "exhausted"
+            }),
+            new StarfinderModifier({
+                name: "Exhausted",
+                effectType: StarfinderEffectType.ALL_ATTACKS,
+                valueAffected: "",
+                enabled: true,
+                modifier: -3,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -3 penalty to your attack rolls",
+                source: "Exhausted Condition",
+                condition: "exhausted"
+            }),
+            new StarfinderModifier({
+                name: "Exhausted",
+                effectType: StarfinderEffectType.DAMAGE,
+                valueAffected: "melee",
+                enabled: true,
+                modifier: -3,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -3 penalty to your melee damage rolls",
+                source: "Exhausted Condition",
+                condition: "exhausted"
+            }),
+            new StarfinderModifier({
+                name: "Exhausted",
+                effectType: StarfinderEffectType.DAMAGE,
+                valueAffected: "thrown",
+                enabled: true,
+                modifier: -3,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -3 penalty to your thrown weapon damage rolls",
+                source: "Exhausted Condition",
+                condition: "exhausted"
+            }),
+            new StarfinderModifier({
+                name: "Exhausted",
+                effectType: StarfinderEffectType.SAVE,
+                valueAffected: "reflex",
+                enabled: true,
+                modifier: -3,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -3 penalty to Reflex saving throws",
+                source: "Exhausted Condition",
+                condition: "exhausted"
+            }),
+            new StarfinderModifier({
+                name: "Exhausted",
+                effectType: StarfinderEffectType.INITIATIVE,
+                valueAffected: "",
+                enabled: true,
+                modifier: -3,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -3 penalty to initiative checks",
+                source: "Exhausted Condition",
+                condition: "exhausted"
+            }),
+            new StarfinderModifier({
+                name: "Exhausted",
+                effectType: StarfinderEffectType.ABILITY_SKILLS,
+                valueAffected: "dex",
+                enabled: true,
+                modifier: -3,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -3 penalty to Dexterity-based skill checks",
+                source: "Exhausted Condition",
+                condition: "exhausted"
+            }),
+            new StarfinderModifier({
+                name: "Exhausted",
+                effectType: StarfinderEffectType.ABILITY_SKILLS,
+                valueAffected: "str",
+                enabled: true,
+                modifier: -3,
+                modifierType: StarfinderModifierType.CONSTANT,
+                type: StarfinderModifierTypes.UNTYPED,
+                subtab: "conditions",
+                notes: "You take a -3 penalty to Strength-based skill checks",
+                source: "Exhausted Condition",
+                condition: "exhausted"
+            })
+        ]
     },
     "fascinated": {
         modifiers: []
@@ -1383,7 +1549,6 @@ STARFINDER.conditions = {
             effectType: StarfinderEffectType.AC,
             valueAffected: "both",
             enabled: true,
-            id: "f8eff2d1-47ae-43d8-9d56-fe9d9837f7d2",
             modifier: -2,
             modifierType: StarfinderModifierType.CONSTANT,
             type: StarfinderModifierTypes.UNTYPED,
