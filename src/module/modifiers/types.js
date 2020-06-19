@@ -31,6 +31,8 @@ export const StarfinderEffectType = Object.freeze({
     ABILITY_CHECKS: "ability-checks",
     ABILITY_CHECK: "ability-check",
     ABILITY_SCORE: "ability-score",
+    ABILITY_MODIFIER: "ability-modifier",
+    ABILITY_MODIFIERS: "ability-modifiers",
     HIT_POINTS: "hit-points",
     STAMINA_POINTS: "stamina-points",
     RESOLVE_POINTS: "resolve-points",

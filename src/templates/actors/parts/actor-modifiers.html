@@ -9,8 +9,12 @@
         {{#if section.isConditions}}
         <div class="form-group stacked conditions">
             {{#each ../config.conditionTypes as |condition name|}}
-            <label class="checkbox">
-                <input type="checkbox" class="condition {{name}}" data-condition="{{name}}" name="data.conditions.{{name}}" {{checked (lookup ../../data.conditions name)}} /> {{condition}}
+            <label class="checkbox" data-tippy-content="{{lookup (lookup ../../config.conditions name) "tooltip"}}">
+                <input type="checkbox" 
+                       class="condition {{name}}" 
+                       data-condition="{{name}}" 
+                       name="data.conditions.{{name}}" 
+                       {{checked (lookup ../../data.conditions name)}} /> {{condition}}
             </label>
             {{/each}}
         </div>
@@ -25,7 +29,7 @@
                 <div class="item-detail modifier-type">{{localize "STARFINDER.ModifierTypeLabel"}}</div>
                 <div class="item-detail modifier-effect-type">{{localize "STARFINDER.ModifierEffectTypeHeaderLabel"}}</div>
                 <div class="item-detail modifier-value-affected">{{localize "STARFINDER.ModifierValueAffectedHeaderLabel"}}</div>
-                {{#if (and ../owner (not section.isConditions))}}
+                {{#if ../owner}}
                 <div class="item-controls">
                     <a class="item-control modifier-create" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}} title="Add Modifier">
                         <i class="fas fa-plus"></i> {{localize "STARFINDER.AddLabel"}}
@@ -36,7 +40,7 @@
 
             <ol class="modifier-list item-list">
                 {{#each section.modifiers as |modifier mid|}}
-                <li class="item modifier flexrow" data-tippy-content="{{modifier.name}}<br><br>Notes<hr>{{modifier.notes}}" data-modifier-id="{{modifier._id}}">
+                <li class="item modifier flexrow" data-tippy-content="<strong>{{modifier.name}}</strong><br>{{#if modifier.enabled}}Enabled{{else}}Disabled{{/if}}{{#if modifier.notes}}<br><br>Notes<hr>{{modifier.notes}}{{/if}}" data-modifier-id="{{modifier._id}}">
                     <div class="item-name modifier-name flexrow">
                         <h4>{{~modifier.name~}}</h4>
                     </div>

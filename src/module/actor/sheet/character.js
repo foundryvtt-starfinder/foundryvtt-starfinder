@@ -214,37 +214,16 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
 
         const target = $(event.currentTarget);
         const condition = target.data('condition');
-        const isChecked = target.is(":checked");
-
-        console.log(condition);
 
         if (["blinded", "cowering", "offkilter", "pinned", "stunned"].includes(condition)) {
             const flatfooted = $('.condition.flatfooted');
             const ffIsChecked = flatfooted.is(':checked');
             flatfooted.prop("checked", !ffIsChecked).change();
-
-            if (!ffIsChecked)
-                await this.actor.addModifier(CONFIG.STARFINDER.conditions['flatfooted'].modifiers[0]);
-            else {
-                const modifiers = this.actor.data.data.modifiers.filter(mod => mod.condition !== "flatfooted");
-            
-                await this.actor.update({"data.modifiers": modifiers});
-            }
-        }
-
-        if (isChecked) {
-            for (const modifier of CONFIG.STARFINDER.conditions[condition].modifiers) {
-                await this.actor.addModifier(modifier);
-            }
-        } else {
-            const modifiers = this.actor.data.data.modifiers.filter(mod => mod.condition !== condition);
-            
-            await this.actor.update({"data.modifiers": modifiers});
         }
         
         const tokens = this.actor.getActiveTokens(true);
         for (const token of tokens) {
-            token.toggleEffect(CONFIG.STARFINDER.statusEffectIconMapping[condition]);
+            await token.toggleEffect(CONFIG.STARFINDER.statusEffectIconMapping[condition]);
         }
     }
 

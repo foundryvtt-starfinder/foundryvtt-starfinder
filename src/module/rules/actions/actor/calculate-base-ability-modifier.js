@@ -23,22 +23,19 @@ export default function (engine) {
 
         const filteredMods = modifiers.filter(mod => {
             return mod.enabled && 
-                [StarfinderEffectType.ABILITY_CHECK, StarfinderEffectType.ABILITY_CHECKS].includes(mod.effectType) && 
+                [StarfinderEffectType.ABILITY_MODIFIER, StarfinderEffectType.ABILITY_MODIFIERS].includes(mod.effectType) && 
                 [StarfinderModifierType.CONSTANT].includes(mod.modifierType);
         })
 
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
             const abilityMods = context.parameters.stackModifiers.process(
-                filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === StarfinderEffectType.ABILITY_CHECKS), 
+                filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === StarfinderEffectType.ABILITY_MODIFIERS), 
                 context
             );
 
             const base = Math.floor((ability.value - 10) / 2);
-            ability.tooltip = [game.i18n.format("STARFINDER.AbilityModifierBase", {
-                mod: base.signedString(),
-                ability: CONFIG.STARFINDER.abilities[abl]
-            })];
+            ability.tooltip = [game.i18n.format("STARFINDER.AbilityModifierBase", { mod: base.signedString() })];
 
             let mod = Object.entries(abilityMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
