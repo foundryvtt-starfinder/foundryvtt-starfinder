@@ -43,6 +43,7 @@ import calculateShipTargetLock from './rules/actions/starship/calculate-tl.js';
 import calculateBaseSkills from './rules/actions/actor/calculate-base-skills.js';
 import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modifiers.js';
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
+import calculateNpcAbilityValue from './rules/actions/actor/calculate-npc-ability-value.js';
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
 
 export default function (engine) {
@@ -70,6 +71,7 @@ export default function (engine) {
     calculateSkillModifiers(engine);
     calculateSkillArmorCheckPenalty(engine);
     calculateNpcXp(engine);
+    calculateNpcAbilityValue(engine);
     // Starship actions
     calculateShipArmorClass(engine);
     calculateShipCritThreshold(engine);
@@ -137,7 +139,7 @@ export default function (engine) {
             },
             {
                 when: { closure: "isActorType", type: "npc" },
-                then: "calculateNpcXp"
+                then: ["calculateNpcXp", "calculateNpcAbilityValue"]
             },
             {
                 when: { closure: "isActorType", type: "vehicle" },
