@@ -18,6 +18,21 @@ button {
   }
 }
 
+.subtabs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .item {
+    text-align: center;
+  }
+}
+
+.subtabs > * {
+  flex: 1;
+}
+
 /* ----------------------------------------- */
 /*  All Starfinder Apps                           */
 /* ----------------------------------------- */
@@ -130,6 +145,19 @@ button {
     border: 1px solid #999;
     border-radius: 3px;
     background: rgba(0, 0, 0, 0.05);
+  }
+
+  &.app {
+    .trait-list {
+      li input[type="text"] {
+        flex: 0 0 65%;
+        text-align: center;
+      }
+      .energy-resistance .checkbox {
+        flex: 0 0 33%;
+        text-align: left;
+      }
+    }
   }
 }
 
@@ -287,6 +315,30 @@ button {
     }
   }
 
+  .sheet-subnavigation {
+    flex: 0 0 @navHeight;
+    margin-bottom: 5px;
+    .exo2();
+    
+    .item {
+      height: 30px;
+      line-height: 32px;
+      // color: #111;
+      margin: 0 5px;
+      font-size: 15px;
+      border-bottom: 3px solid @colorBeige;
+
+      &:hover {
+        text-shadow: 0 0 4px @starfinderRed;
+        border-bottom: 3px solid @starfinderBlue;
+      }
+
+      &.active {
+        border-bottom: 3px solid @starfinderRed;
+      }
+    }
+  }
+
   /* ----------------------------------------- */
   /*  Sheet Body                               */
   /* ----------------------------------------- */
@@ -325,6 +377,14 @@ button {
       &.active {
         border-bottom: 3px solid @colorCrimson;
       }
+    }
+  }
+}
+
+.starfinder.dialog {
+  .toggle-skills {
+    label.checkbox {
+      flex: 0 0 120px;
     }
   }
 }

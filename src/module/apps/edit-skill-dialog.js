@@ -22,19 +22,21 @@ export class AddEditSkillDialog extends Dialog {
      * A factory method which displays the Edit Skill dialog for a given skill.
      * 
      * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
-     * @param {String} skillId The internal ID for the skill
-     * @param {Object} skill The skill being updated
-     * @param {Boolean} isEdit Flag to let the method know if a skill is being added or being edited
+     * @param {String}  skillId The internal ID for the skill
+     * @param {Object}  skill   The skill being updated
+     * @param {Boolean} isEdit  Flag to let the method know if a skill is being added or being edited
+     * @param {Boolean} isNpc   Is this a skill on an NPC sheet?
      * @returns {Promise}
      */
-    static async create(skillId, skill, isEdit = true) {
+    static async create(skillId, skill, isEdit = true, isNpc = false) {
         let hasSubName = typeof skill.subname !== "undefined" || !isEdit;
         const html = await renderTemplate("systems/starfinder/templates/apps/add-edit-skill.html", {
             skill: skill,
             hasSubName,
             config: CONFIG.STARFINDER,
             isGM: game.user.isGM,
-            isEdit
+            isEdit,
+            isNpc
         });
 
         return new Promise((resolve, reject) => {

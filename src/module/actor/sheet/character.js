@@ -51,7 +51,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
             augmentation: { label: "Augmentations", items: [], dataset: { type: "augmentation" } }
         };
 
-        let [items, spells, feats, classes, races, themes] = data.items.reduce((arr, item) => {
+        let [items, spells, feats, classes, races, themes, archetypes] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
@@ -65,9 +65,10 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
             else if (item.type === "class") arr[3].push(item);
             else if (item.type === "race") arr[4].push(item);
             else if (item.type === "theme") arr[5].push(item);
+            else if (item.type === "archetypes") arr[6].push(item);
             else if (Object.keys(inventory).includes(item.type)) arr[0].push(item);
             return arr;
-        }, [[], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], []]);
         
         const spellbook = this._prepareSpellbook(data, spells);
 
@@ -101,6 +102,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
             classes: { label: "Class Levels", items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
             race: { label: "Race", items: [], hasActions: false, dataset: { type: "race" }, isRace: true },
             theme: { label: "Theme", items: [], hasActions: false, dataset: { type: "theme" }, isTheme: true },
+            archetypes: { label: "Archetypes", items: [], dataset: { type: "archetypes" }, isArchetype: true },
             active: { label: "Active", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
             passive: { label: "Passive", items: [], hasActions: false, dataset: { type: "feat" } }
         };
@@ -114,10 +116,51 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         features.classes.items = classes;
         features.race.items = races;
         features.theme.items = themes;
+        features.archetypes.items = archetypes;
 
         data.inventory = Object.values(inventory);
         data.spellbook = spellbook;
         data.features = Object.values(features);
+
+        const modifiers = {
+            conditions: { label: "STARFINDER.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },
+            permanent: { label: "STARFINDER.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
+            temporary: { label: "STARFINDER.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } },
+            item: { label: "STARFINDER.ModifiersItemTabLabel", modifiers: [], dataset: { subtab: "item" } },
+            misc: { label: "STARFINDER.ModifiersMiscTabLabel", modifiers: [], dataset: { subtab: "misc" } }
+        };
+
+        let [permanent, temporary, itemModifiers, conditions, misc] = data.data.modifiers.reduce((arr, modifier) => {
+            if (modifier.subtab === "permanent") arr[0].push(modifier);
+            else if (modifier.subtab === "temporary") arr[1].push(modifier);
+            else if (modifier.subtab === "item") arr[2].push(modifier);
+            else if (modifier.subtab === "conditions") arr[3].push(modifier);
+            // The miscellaneous group is kind of a catchall category. If a modifer isn't explicitly
+            // marked as belonging to a subtab, we'll just shove it in here.
+            else arr[4].push(modifier);
+
+            return arr;
+        }, [[], [], [], [], []]);
+
+        modifiers.conditions.modifiers = conditions;
+        modifiers.permanent.modifiers = permanent;
+        modifiers.temporary.modifiers = temporary;
+        modifiers.item.modifiers = itemModifiers;
+        modifiers.misc.modifiers = misc;
+
+        data.modifiers = Object.values(modifiers);
+    }
+
+    async _render(...args) {
+        await super._render(...args);
+
+        tippy('[data-tippy-content]', {
+            allowHTML: true,
+            arrow: false,
+            placement: 'top-start',
+            duration: [500, null],
+            delay: [800, null]
+        });
     }
 
     /**
@@ -142,7 +185,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     /**
      * Activate event listeners using the prepared sheet HTML
      * 
-     * @param {HTML} html The prepared HTML object ready to be rendered into the DOM
+     * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
      */
     activateListeners(html) {
         super.activateListeners(html);
@@ -154,6 +197,93 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
 
         html.find('.short-rest').click(this._onShortRest.bind(this));
         html.find('.long-rest').click(this._onLongRest.bind(this));
+        html.find('.modifier-create').click(this._onModifierCreate.bind(this));
+        html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
+        html.find('.modifier-delete').click(this._onModifierDelete.bind(this));
+        html.find('.modifier-toggle').click(this._onToggleModifierEnabled.bind(this));
+        html.find('.conditions input[type="checkbox"]').change(this._onToggleConditions.bind(this));
+    }
+
+    /**
+     * Toggles condition modifiers on or off.
+     * 
+     * @param {Event} event The triggering event.
+     */
+    async _onToggleConditions(event) {
+        event.preventDefault();
+
+        const target = $(event.currentTarget);
+        const condition = target.data('condition');
+
+        if (["blinded", "cowering", "offkilter", "pinned", "stunned"].includes(condition)) {
+            const flatfooted = $('.condition.flatfooted');
+            const ffIsChecked = flatfooted.is(':checked');
+            flatfooted.prop("checked", !ffIsChecked).change();
+        }
+        
+        const tokens = this.actor.getActiveTokens(true);
+        for (const token of tokens) {
+            await token.toggleEffect(CONFIG.STARFINDER.statusEffectIconMapping[condition]);
+        }
+    }
+
+    /**
+     * Add a modifer to this actor.
+     * 
+     * @param {Event} event The originating click event
+     */
+    _onModifierCreate(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+
+        this.actor.addModifier({
+            name: "New Modifier",
+            subtab: target.data('subtab')
+        });
+    }
+
+    /**
+     * Delete a modifier from the actor.
+     * 
+     * @param {Event} event The originating click event
+     */
+    async _onModifierDelete(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const modifierId = target.closest('.item.modifier').data('modifierId');
+        
+        await this.actor.deleteModifier(modifierId);
+    }
+
+    /**
+     * Edit a modifier for an actor.
+     * 
+     * @param {Event} event The orginating click event
+     */
+    _onModifierEdit(event) {
+        event.preventDefault();
+
+        const target = $(event.currentTarget);
+        const modifierId = target.closest('.item.modifier').data('modifierId');
+
+        this.actor.editModifier(modifierId);
+    }
+
+    /**
+     * Toggle a modifier to be enabled or disabled.
+     * 
+     * @param {Event} event The originating click event
+     */
+    async _onToggleModifierEnabled(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const modifierId = target.closest('.item.modifier').data('modifierId');
+
+        const modifiers = duplicate(this.actor.data.data.modifiers);
+        const modifier = modifiers.find(mod => mod._id === modifierId);
+        modifier.enabled = !modifier.enabled;
+
+        await this.actor.update({'data.modifiers': modifiers});
     }
 
     /**

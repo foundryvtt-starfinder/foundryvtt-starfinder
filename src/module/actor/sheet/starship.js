@@ -124,7 +124,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
      */
     _prepareItems(data) {
         const arcs = {
-            foward: { label: "Foward", items: [], dataset: { type: "starshipWeapon" }},
+            foward: { label: "Forward", items: [], dataset: { type: "starshipWeapon" }},
             starboard: { label: "Starboard", items: [], dataset: { type: "starshipWeapon" }},
             aft: { label: "Aft", items: [], dataset: { type: "starshipWeapon" }},
             port: { label: "Port", items: [], dataset: { type: "starshipWeapon" }},
@@ -224,6 +224,18 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         }
 
         return this.actor.createEmbeddedEntity("OwnedItem", itemData);
+    }
+
+    async _render(...args) {
+        await super._render(...args);
+
+        tippy('[data-tippy-content]', {
+            allowHTML: true,
+            arrow: false,
+            placement: 'top-start',
+            duration: [500, null],
+            delay: [800, null]
+        });
     }
 
     // TODO: Remove this once https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
@@ -340,7 +352,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
             data: actor.data
         };
 
-        if (this.actor.isToken) dragData.tokenId = actor.token.id;
+        if (this.actor.isToken) dragData.tokenId = actorId;
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
     }
 

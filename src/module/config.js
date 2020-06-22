@@ -1,3 +1,6 @@
+import StarfinderModifier from "./modifiers/modifier.js";
+import { StarfinderModifierType, StarfinderEffectType, StarfinderModifierTypes } from "./modifiers/types.js";
+
 // Namespace Starfinder Configuration Values
 export const STARFINDER = {};
 
@@ -12,6 +15,13 @@ STARFINDER.abilities = {
     "int": "STARFINDER.AbilityInt",
     "wis": "STARFINDER.AbilityWis",
     "cha": "STARFINDER.AbilityCha"
+};
+
+STARFINDER.acpEffectingArmorType = {
+    "acp-all": "STARFINDER.ModifierACPEffectingArmorTypeAll",
+    "acp-light": "STARFINDER.ModifierACPEffectingArmorTypeLight",
+    "acp-heavy": "STARFINDER.ModifierACPEffectingArmorTypeHeavy",
+    "acp-power": "STARFINDER.ModifierACPEffectingArmorTypePower"
 };
 
 /**
@@ -108,7 +118,26 @@ STARFINDER.currencies = {
 };
 
 // Damage Types
+STARFINDER.energyDamageTypes = {
+    "acid": "STARFINDER.DamageTypesAcid",
+    "cold": "STARFINDER.DamageTypesCold",
+    "electricity": "STARFINDER.DamageTypesElectricity",
+    "fire": "STARFINDER.DamageTypesFire",
+    "sonic": "STARFINDER.DamageTypesSonic"
+};
+
+STARFINDER.kineticDamageTypes = {
+    "bludgeoning": "STARFINDER.DamageTypesBludgeoning",
+    "piercing": "STARFINDER.DamageTypesPiercing",
+    "slashing": "STARFINDER.DamageTypesSlashing"
+};
+
 STARFINDER.damageTypes = {
+    ...STARFINDER.energyDamageTypes,
+    ...STARFINDER.kineticDamageTypes
+};
+
+STARFINDER.weaponDamageTypes = {
     "acid": "STARFINDER.DamageTypesAcid",
     "acid+bludgeoning": "STARFINDER.DamageTypesAcidAndBludgeoning",
     "acid+fire": "STARFINDER.DamageTypesAcidAndFire",
@@ -240,33 +269,85 @@ STARFINDER.weaponProperties = {
     "one": "STARFINDER.WeaponPropertiesOneHanded",
     "two": "STARFINDER.WeaponPropertiesTwoHanded",
     "amm": "STARFINDER.WeaponPropertiesAmmunition",
+    "aeon": "STARFINDER.WeaponPropertiesAeon",
     "analog": "STARFINDER.WeaponPropertiesAnalog",
+    "antibiological": "STARFINDER.WeaponPropertiesAntibiological",
     "archaic": "STARFINDER.WeaponPropertiesArchaic",
+    "aurora": "STARFINDER.WeaponPropertiesAurora",
     "automatic": "STARFINDER.WeaponPropertiesAutomatic",
     "blast": "STARFINDER.WeaponPropertiesBlast",
     "block": "STARFINDER.WeaponPropertiesBlock",
     "boost": "STARFINDER.WeaponPropertiesBoost",
+    "breach": "STARFINDER.WeaponPropertiesBreach",
+    "breakdown": "STARFINDER.WeaponPropertiesBreakdown",
     "bright": "STARFINDER.WeaponPropertiesBright",
+    "cluster": "STARFINDER.WeaponPropertiesCluster",
+    "conceal": "STARFINDER.WeaponsPropertiesConceal",
+    "deconstruct": "STARFINDER.WeaponPropertiesDeconstruct",
+    "deflect": "STARFINDER.WeaponPropertiesDeflect",
     "disarm": "STARFINDER.WeaponPropertiesDisarm",
+    "double": "STARFINDER.WeaponPropertiesDouble",
+    "drainCharge": "STARFINDER.WeaponPropertiesDrainCharge",
+    "echo": "STARFINDER.WeaponPropertiesEcho",
     "entangle": "STARFINDER.WeaponPropertiesEntangle",
     "explode": "STARFINDER.WeaponPropertiesExplode",
+    "extinguish": "STARFINDER.WeaponPropertiesExtinguish",
+    "feint": "STARFINDER.WeaponPropertiesFeint",
+    "fiery": "STARFINDER.WeaponPropertiesFiery",
+    "firstArc": "STARFINDER.WeaponPropertiesFirstArc",
+    "flexibleLine": "STARFINDER.WeaponPropertiesFlexibleLine",
+    "force": "STARFINDER.WeaponPropertiesForce",
+    "freeHands": "STARFINDER.WeaponPropertiesFreeHands",
+    "fueled": "STARFINDER.WeaponPropertiesFueled",
+    "grapple": "STARFINDER.WeaponPropertiesGrapple",
+    "gravitation": "STARFINDER.WeaponPropertiesGravitation",
+    "guided": "STARFINDER.WeaponPropertiesGuided",
+    "harrying": "STARFINDER.WeaponPropertiesHarrying",
+    "holyWater": "STARFINDER.WeaponPropertiesHolyWater",
+    "ignite": "STARFINDER.WeaponPropertiesIgnite",
+    "indirect": "STARFINDER.WeaponPropertiesIndirect",
     "injection": "STARFINDER.WeaponPropertiesInjection",
+    "integrated": "STARFINDER.WeaponPropertiesIntegrated",
     "line": "STARFINDER.WeaponPropertiesLine",
     "living": "STARFINDER.WeaponPropertiesLiving",
+    "lockdown": "STARFINDER.WeaponPropertiesLockdown",
     "mind-affecting": "STARFINDER.WeaponPropertiesMindAffecting",
+    "mine": "STARFINDER.WeaponPropertiesMine",
+    "mire": "STARFINDER.WeaponPropertiesMire",
+    "modal": "STARFINDER.WeaponPropertiesModal",
+    "necrotic": "STARFINDER.WeaponPropertiesNecrotic",
     "nonlethal": "STARFINDER.WeaponPropertiesNonlethal",
     "operative": "STARFINDER.WeaponPropertiesOperative",
     "penetrating": "STARFINDER.WeaponPropertiesPenetrating",
+    "polarize": "STARFINDER.WeaponPropertiesPolarize",
+    "polymorphic": "STARFINDER.WeaponPropertiesPolymorphic",
     "powered": "STARFINDER.WeaponPropertiesPowered",
+    "professional": "STARFINDER.WeaponPropertiesProfessional",
+    "punchGun": "STARFINDER.WeaponPropertiesPunchGun",
     "qreload": "STARFINDER.WeaponPropertiesQuickReload",
     "radioactive": "STARFINDER.WeaponPropertiesRadioactive",
     "reach": "STARFINDER.WeaponPropertiesReach",
+    "recall": "STARFINDER.WeaponPropertiesRecall",
+    "relic": "STARFINDER.WeaponPropertiesRelic",
+    "reposition": "STARFINDER.WeaponPropertiesReposition",
+    "shape": "STARFINDER.WeaponPropertiesShape",
+    "shells": "STARFINDER.WeaponPropertiesShells",
+    "shield": "STARFINDER.WeaponPropertiesShield",
     "sniper": "STARFINDER.WeaponPropertiesSniper",
     "stun": "STARFINDER.WeaponPropertiesStun",
     "subtle": "STARFINDER.WeaponPropertiesSubtle",
+    "sunder": "STARFINDER.WeaponPropertiesSunder",
+    "swarm": "STARFINDER.WeaponPropertiesSwarm",
+    "tail": "STARFINDER.WeaponPropertiesTail",
+    "teleportive": "STARFINDER.WeaponPropertiesTeleportive",
+    "thought": "STARFINDER.WeaponPropertiesThought",
+    "throttle": "STARFINDER.WeaponPropertiesThrottle",
     "thrown": "STARFINDER.WeaponPropertiesThrown",
     "trip": "STARFINDER.WeaponPropertiesTrip",
-    "unwieldy": "STARFINDER.WeaponPropertiesUnwieldy"
+    "underwater": "STARFINDER.WeaponPropertiesUnderwater",
+    "unwieldy": "STARFINDER.WeaponPropertiesUnwieldy",
+    "variantBoost": "STARFINDER.WeaponPropertiesVariantBoost",
+    "wideLine": "STARFINDER.WeaponPropertiesWideLine"
 };
 
 STARFINDER.spellAreaShapes = {
@@ -423,75 +504,77 @@ STARFINDER.itemActionTypes = {
 };
 
 STARFINDER.conditionTypes = {
-    "asleep": "Asleep",
-    "bleeding": "Bleeding",
-    "blinded": "Blinded",
-    "broken": "Broken (item only)",
-    "confused": "Confused",
-    "cowering": "Cowering",
-    "dazed": "Dazed",
-    "dazzled": "Dazzled",
-    "dead": "Dead",
-    "deafened": "Deafened",
-    "dyning": "Dying",
-    "encumbered": "Encumbered",
-    "entangled": "Entangled",
-    "exhausted": "Exhausted",
-    "fascinated": "Fascinated",
-    "fatigued": "Fatigued",
-    "flatfooted": "Flat-footed",
-    "frightened": "Frightened",
-    "grappled": "Grappled",
-    "helpless": "Helpless",
-    "nauseated": "Nauseated",
-    "offkilter": "Off-kilter",
-    "offtarget": "Off-Target",
-    "panicked": "Panicked",
-    "paralyzed": "Paralyzed",
-    "pinned": "Pinned",
-    "prone": "Prone",
-    "shaken": "Shaken",
-    "sickened": "Sickened",
-    "stable": "Stable",
-    "staggered": "Staggered",
-    "stunned": "Stunned",
-    "unconscious": "Unconscious"
+    "asleep": "STARFINDER.ConditionsAsleep",
+    "bleeding": "STARFINDER.ConditionsBleeding",
+    "blinded": "STARFINDER.ConditionsBlinded",
+    "broken": "STARFINDER.ConditionsBroken",
+    "burning": "STARFINDER.ConditionsBurning",
+    "confused": "STARFINDER.ConditionsConfused",
+    "cowering": "STARFINDER.ConditionsCowering",
+    "dazed": "STARFINDER.ConditionsDazed",
+    "dazzled": "STARFINDER.ConditionsDazzled",
+    "dead": "STARFINDER.ConditionsDead",
+    "deafened": "STARFINDER.ConditionsDeafened",
+    "dyning": "STARFINDER.ConditionsDying",
+    "encumbered": "STARFINDER.ConditionsEncumbered",
+    "entangled": "STARFINDER.ConditionsEntangled",
+    "exhausted": "STARFINDER.ConditionsExhausted",
+    "fascinated": "STARFINDER.ConditionsFascinated",
+    "fatigued": "STARFINDER.ConditionsFatigued",
+    "flatfooted": "STARFINDER.ConditionsFlatFooted",
+    "frightened": "STARFINDER.ConditionsFrightened",
+    "grappled": "STARFINDER.ConditionsGrappled",
+    "helpless": "STARFINDER.ConditionsHelpless",
+    "nauseated": "STARFINDER.ConditionsNauseated",
+    "offkilter": "STARFINDER.ConditionsOffKilter",
+    "offtarget": "STARFINDER.ConditionsOffTarget",
+    "overburdened": "STARFINDER.ConditionsOverburdened",
+    "panicked": "STARFINDER.ConditionsPanicked",
+    "paralyzed": "STARFINDER.ConditionsParalyzed",
+    "pinned": "STARFINDER.ConditionsPinned",
+    "prone": "STARFINDER.ConditionsProne",
+    "shaken": "STARFINDER.ConditionsShaken",
+    "sickened": "STARFINDER.ConditionsSickened",
+    "stable": "STARFINDER.ConditionsStable",
+    "staggered": "STARFINDER.ConditionsStaggered",
+    "stunned": "STARFINDER.ConditionsStunned",
+    "unconscious": "STARFINDER.ConditionsUnconscious"
 };
 
 STARFINDER.languages = {
-    "common": "Common",
-    "akiton": "Akitonian",
-    "aklo": "Aklo",
-    "brethedan": "Brethedan",
-    "castrovelian": "Castrovelian",
-    "eoxian": "Eoxian",
-    "kasatha": "Kasatha",
-    "shirren": "Shirren",
-    "triaxian": "Triaxian",
-    "vercite": "Vercite",
-    "vesk": "Vesk",
-    "ysoki": "Yosoki",
-    "abyssal": "Abyssal",
-    "aquan": "Aquan",
-    "arkanen": "Arkanen",
-    "auran": "Auran",
-    "azlanti": "Azlanti",
-    "celestial": "Celestial",
-    "draconic": "Draconic",
-    "drow": "Drow",
-    "dwarven": "Dwarven",
-    "elven": "Elven",
-    "gnome": "Gnome",
-    "goblin": "Goblin",
-    "halfling": "Halfling",
-    "ignan": "Ignan",
-    "infernal": "Infernal",
-    "kalo": "Kalo",
-    "Nchaki": "Nchaki",
-    "orc": "Orc",
-    "sarcesian": "Sarcesian",
-    "shobhad": "Shobhad",
-    "terran": "Terran"
+    "abyssal": "STARFINDER.LanguagesAbyssal",
+	"akiton": "STARFINDER.LanguagesAkitonian",
+	"aklo": "STARFINDER.LanguagesAklo",	
+	"aquan": "STARFINDER.LanguagesAquan",
+	"arkanen": "STARFINDER.LanguagesArkanen",
+	"auran": "STARFINDER.LanguagesAuran",
+	"azlanti": "STARFINDER.LanguagesAzlanti",	
+	"brethedan": "STARFINDER.LanguagesBrethedan",
+	"castrovelian": "STARFINDER.LanguagesCastrovelian",
+	"celestial": "STARFINDER.LanguagesCelestial",
+	"common": "STARFINDER.LanguagesCommon",
+	"draconic": "STARFINDER.LanguagesDraconic",
+	"drow": "STARFINDER.LanguagesDrow",
+	"dwarven": "STARFINDER.LanguagesDwarven",
+	"elven": "STARFINDER.LanguagesElven",	
+	"eoxian": "STARFINDER.LanguagesEoxian",
+	"gnome": "STARFINDER.LanguagesGnome",
+	"goblin": "STARFINDER.LanguagesGoblin",
+	"halfling": "STARFINDER.LanguagesHalfling",
+	"ignan": "STARFINDER.LanguagesIgnan",
+	"infernal": "STARFINDER.LanguagesInfernal",
+	"kalo": "STARFINDER.LanguagesKalo",	
+	"kasatha": "STARFINDER.LanguagesKasatha",
+	"Nchaki": "STARFINDER.LanguagesNchaki",
+	"orc": "STARFINDER.LanguagesOrc",
+	"sarcesian": "STARFINDER.LanguagesSarcesian",
+	"shirren": "STARFINDER.LanguagesShirren",
+	"shobhad": "STARFINDER.LanguagesShobhad",	
+	"terran": "STARFINDER.LanguagesTerran",
+	"triaxian": "STARFINDER.LanguagesTriaxian",
+	"vercite": "STARFINDER.LanguagesVercite",
+	"vesk": "STARFINDER.LanguagesVesk",
+	"ysoki": "STARFINDER.LanguagesYosoki"
 };
 
 STARFINDER.augmentationTypes = {
@@ -989,6 +1072,43 @@ STARFINDER.saveProgression = {
     "fast": "STARFINDER.SaveProgressionFast"
 };
 
+STARFINDER.modifierTypes = {
+    "ability": "STARFINDER.ModifierTypeAbility",
+    "armor": "STARFINDER.ModifierTypeArmor",
+    "base": "STARFINDER.ModifierTypeBase",
+    "circumstance": "STARFINDER.ModifierTypeCircumstance",
+    "divine": "STARFINDER.ModifierTypeDivine",
+    "enhancement": "STARFINDER.ModifierTypeEnhancement",
+    "insight": "STARFINDER.ModifierTypeInsight",
+    "luck": "STARFINDER.ModifierTypeLuck",
+    "morale": "STARFINDER.ModifierTypeMorale",
+    "racial": "STARFINDER.ModifierTypeRacial",
+    "untyped": "STARFINDER.ModifierTypeUntyped"
+};
+
+STARFINDER.modifierEffectTypes = {
+    "ac": "STARFINDER.ModifierEffectTypeAC",
+    "cmd": "STARFINDER.ModifierEffectTypeCMD",
+    "acp": "STARFINDER.ModifierEffectTypeACP",
+    "initiative": "STARFINDER.ModifierEffectTypeInit",
+    "ability-skills": "STARFINDER.ModifierEffectTypeAbilitySkills",
+    "skill": "STARFINDER.ModifierEffectTypeSkill",
+    "all-skills": "STARFINDER.ModifierEffectTypeAllSkills",
+    "saves": "STARFINDER.ModifierEffectTypeSaves",
+    "save": "STARFINDER.ModifierEffectTypeSave"
+};
+
+STARFINDER.modifierType = {
+    "constant": "STARFINDER.ModifierTypeConstant",
+    "formula": "STARFINDER.ModifierTypeFormula"
+};
+
+STARFINDER.modifierArmorClassAffectedValues = {
+    "both": "STARFINDER.ModifierArmorClassBoth",
+    "eac": "STARFINDER.EnergyArmorClass",
+    "kac": "STARFINDER.KineticArmorClass"
+};
+
 STARFINDER.CHARACTER_EXP_LEVELS = [
     0, 1300, 3300, 6000, 10000, 15000, 23000, 34000, 50000, 71000,
     105000, 145000, 210000, 295000, 425000, 600000, 850000, 1200000,
@@ -1000,6 +1120,225 @@ STARFINDER.CR_EXP_LEVELS = [
     6400, 9600, 12800, 19200, 25600, 38400, 51200, 76800, 102400,
     153600, 204800, 307200, 409600, 614400, 819200, 1228800, 1638400
 ];
+
+STARFINDER.statusEffectIcons = [
+    "systems/starfinder/icons/conditions/asleep.png",
+    "systems/starfinder/icons/conditions/bleeding.png",
+    "systems/starfinder/icons/conditions/blinded.png",
+    "systems/starfinder/icons/conditions/broken.png",
+    "systems/starfinder/icons/conditions/burning.png",
+    "systems/starfinder/icons/conditions/confused.png",
+    "systems/starfinder/icons/conditions/cowering.png",
+    "systems/starfinder/icons/conditions/dazed.png",
+    "systems/starfinder/icons/conditions/dazzled.png",
+    "systems/starfinder/icons/conditions/dead.png",
+    "systems/starfinder/icons/conditions/deafened.png",
+    "systems/starfinder/icons/conditions/dying.png",
+    "systems/starfinder/icons/conditions/encumbered.png",
+    "systems/starfinder/icons/conditions/entangled.png",
+    "systems/starfinder/icons/conditions/exhausted.png",
+    "systems/starfinder/icons/conditions/fascinated.png",
+    "systems/starfinder/icons/conditions/fatigued.png",
+    "systems/starfinder/icons/conditions/flatfooted.png",
+    "systems/starfinder/icons/conditions/frightened.png",
+    "systems/starfinder/icons/conditions/grappled.png",
+    "systems/starfinder/icons/conditions/helpless.png",
+    "systems/starfinder/icons/conditions/nauseated.png",
+    "systems/starfinder/icons/conditions/offkilter.png",
+    "systems/starfinder/icons/conditions/offtarget.png",
+    "systems/starfinder/icons/conditions/overburdened.png",
+    "systems/starfinder/icons/conditions/panicked.png",
+    "systems/starfinder/icons/conditions/paralyzed.png",
+    "systems/starfinder/icons/conditions/pinned.png",
+    "systems/starfinder/icons/conditions/prone.png",
+    "systems/starfinder/icons/conditions/shaken.png",
+    "systems/starfinder/icons/conditions/sickened.png",
+    "systems/starfinder/icons/conditions/staggered.png",
+    "systems/starfinder/icons/conditions/stable.png",
+    "systems/starfinder/icons/conditions/stunned.png",
+    "systems/starfinder/icons/conditions/unconscious.png"
+];
+
+STARFINDER.statusEffectIconMapping = {
+    "asleep": "systems/starfinder/icons/conditions/asleep.png",
+    "bleeding": "systems/starfinder/icons/conditions/bleeding.png",
+    "blinded": "systems/starfinder/icons/conditions/blinded.png",
+    "broken": "systems/starfinder/icons/conditions/broken.png",
+    "burning": "systems/starfinder/icons/conditions/burning.png",
+    "confused": "systems/starfinder/icons/conditions/confused.png",
+    "cowering": "systems/starfinder/icons/conditions/cowering.png",
+    "dazed": "systems/starfinder/icons/conditions/dazed.png",
+    "dazzled": "systems/starfinder/icons/conditions/dazzled.png",
+    "dead": "systems/starfinder/icons/conditions/dead.png",
+    "deafened": "systems/starfinder/icons/conditions/deafened.png",
+    "dyning": "systems/starfinder/icons/conditions/dying.png",
+    "encumbered": "systems/starfinder/icons/conditions/encumbered.png",
+    "entangled": "systems/starfinder/icons/conditions/entangled.png",
+    "exhausted": "systems/starfinder/icons/conditions/exhausted.png",
+    "fascinated": "systems/starfinder/icons/conditions/fascinated.png",
+    "fatigued": "systems/starfinder/icons/conditions/fatigued.png",
+    "flatfooted": "systems/starfinder/icons/conditions/flatfooted.png",
+    "frightened": "systems/starfinder/icons/conditions/frightened.png",
+    "grappled": "systems/starfinder/icons/conditions/grappled.png",
+    "helpless": "systems/starfinder/icons/conditions/helpless.png",
+    "nauseated": "systems/starfinder/icons/conditions/nauseated.png",
+    "offkilter": "systems/starfinder/icons/conditions/offkilter.png",
+    "offtarget": "systems/starfinder/icons/conditions/offtarget.png",
+    "overburdened": "systems/starfinder/icons/conditions/overburdened.png",
+    "panicked": "systems/starfinder/icons/conditions/panicked.png",
+    "paralyzed": "systems/starfinder/icons/conditions/paralyzed.png",
+    "pinned": "systems/starfinder/icons/conditions/pinned.png",
+    "prone": "systems/starfinder/icons/conditions/prone.png",
+    "shaken": "systems/starfinder/icons/conditions/shaken.png",
+    "sickened": "systems/starfinder/icons/conditions/sickened.png",
+    "stable": "systems/starfinder/icons/conditions/stable.png",
+    "staggered": "systems/starfinder/icons/conditions/staggered.png",
+    "stunned": "systems/starfinder/icons/conditions/stunned.png",
+    "unconscious": "systems/starfinder/icons/conditions/unconscious.png"
+};
+
+STARFINDER.conditions = {
+    "asleep": {
+        modifiers: [],
+        tooltip: "<strong>Asleep</strong><br><br>You take a -10 penalty to Perception checks to notice things."
+    },
+    "bleeding": {
+        modifiers: [],
+        tooltip: "<strong>Bleeding</strong><br><br>You take the listed damage at the beginning of your turn."
+    },
+    "blinded": {
+        modifiers: [],
+        tooltip: "<strong>Blinded</strong><br><br>You're flat-footed, you take a -4 penalty to most Str- and Dex-based skill checks and opposed Perception checks, you automatically fail Perception checks based on sight, opponents have total concealment against you, and you must succeed at a DC 10 Acrobatics check to move faster than half speed or else fall prone."
+    },
+    "broken": {
+        modifiers: [],
+        tooltip: "<strong>Broken</strong><br><br><strong>Weapon:</strong> attack and damage rolls take a -2 penalty and can't deal extra effects on a critical hit;<br> <strong>Armor:</strong> AC bonuses are halved and the armor check penalty is doubled;<br> <strong>Vehicle:</strong> -2 penalty to AC, collision DC, and Piloting modifier, and it halves its full speed and MPH;<br> <strong>Tool or tech that provides bonuses:</strong> bonuses are halved."
+    },
+    "burning": {
+        modifiers: [],
+        tooltip: "<strong>Burning</strong><br><br>You take the listed fire damage each round, and you must be extinguished to end the condition."
+    },
+    "confused": {
+        modifiers: [],
+        tooltip: "<strong>Confused</strong><br><br>You treat all creatures as enemies, and you must roll on the table to determine your actions."
+    },
+    "cowering": {
+        modifiers: [],
+        tooltip: "<strong>Cowering</strong><br><br>You're flat-footed and can take no actions."
+    },
+    "dazed": {
+        modifiers: [],
+        tooltip: "<strong>Dazed</strong><br><br>You can take no actions."
+    },
+    "dazzled": {
+        modifiers: [],
+        tooltip: "<strong>Dazzled</strong><br><br>You take a -1 penalty to attack rolls and sight-based Perception checks."
+    },
+    "dead": {
+        modifiers: [],
+        tooltip: "<strong>Dead</strong><br><br>Your soul leaves your body, you can't act in any way, and you can't benefit from normal or magical healing."
+    },
+    "deafened": {
+        modifiers: [],
+        tooltip: "<strong>Deafened</strong><br><br>You take a -4 penalty to initiative checks and opposed Perception checks, and you automatically fail sound-based Perception checks."
+    },
+    "dyning": {
+        modifiers: [],
+        tooltip: "<strong>Dying</strong><br><br>You're unconscious, you can take no actions, and you must stabilize or lose Resolve Points and potentially die."
+    },
+    "encumbered": {
+        modifiers: [],
+        tooltip: "<strong>Encumbered</strong><br><br>Speeds are reduced by 10 feet, maximum Dex bonus to AC is reduced to +2, and you take a -5 penalty to Str- and Dex-based checks."
+    },
+    "entangled": {
+        modifiers: [],
+        tooltip: "<strong>Entangled</strong><br><br>You move at half speed; you cannot run or charge; and you take a -2 penalty to AC, attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks."
+    },
+    "exhausted": {
+        modifiers: [],
+        tooltip: "<strong>Exhausted</strong><br><br>You move at half speed; you cannot run or charge; you take a -3 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 3 bulk."
+    },
+    "fascinated": {
+        modifiers: [],
+        tooltip: "<strong>Fascinated</strong><br><br>You must pay attention to the fascinating effect and take a -4 penalty to skill checks made as reactions."
+    },
+    "fatigued": {
+        modifiers: [],
+        tooltip: "<strong>Fatigued</strong><br><br>You cannot run or charge; you take a -1 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 1 bulk."
+    },
+    "flatfooted": {
+        modifiers: [],
+        tooltip: "<strong>Flat-Footed</strong><br><br>You take a -2 penalty to AC, and you cannot take reactions or make attacks of opportunity."
+    },
+    "frightened": {
+        modifiers: [],
+        tooltip: "<strong>Frightened</strong><br><br>You must flee or fight, and you take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks."
+    },
+    "grappled": {
+        modifiers: [],
+        tooltip: "<strong>Grappled</strong><br><br>You cannot move or take two-handed actions; you take a -2 penalty to AC, most attack rolls, Reflex saves, initiative checks, and Dex-based skill and ability checks; and you cannot make attacks of opportunity."
+    },
+    "helpless": {
+        modifiers: [],
+        tooltip: "<strong>Helpless</strong><br><br>Your Dex modifier is -5, and melee attacks against you gain a +4 bonus."
+    },
+    "nauseated": {
+        modifiers: [],
+        tooltip: "<strong>Nauseated</strong><br><br>You're unable to attack, cast spells, or concentrate on spells, and the only action you can take is a single move action per turn."
+    },
+    "offkilter": {
+        modifiers: [],
+        tooltip: "<strong>Off-kilter</strong><br><br>You can't take move actions except to right yourself, you take a -2 penalty to attacks, and you're flat-footed."
+    },
+    "offtarget": {
+        modifiers: [],
+        tooltip: "<strong>Off-target</strong><br><br>You take a -2 penalty to attack rolls."
+    },
+    "overburdened": {
+        modifiers: [],
+        tooltip: "<strong>Overburdened</strong><br><br>Speeds are reduced to 5 feet; maximum Dex bonus to AC is reduced to +0; and you take a -5 penalty to Str- and Dex-based checks."
+    },
+    "panicked": {
+        modifiers: [],
+        tooltip: "<strong>Panicked</strong><br><br><ul><li>You drop all held items</li><li>You flee at top speed</li><li>You cannot take other actions</li><li>You take a -2 penalty to ability checks, saving throws, and skill checks</li><li>And you cower if cornered</li></ul>"
+    },
+    "paralyzed": {
+        modifiers: [],
+        tooltip: "<strong>Paralyzed</strong><br><br>Your Dex modifier is -5, and you cannot move but can take mental actions."
+    },
+    "pinned": {
+        modifiers: [],
+        tooltip: "<strong>Pinned</strong><br><br>You cannot move, you're flat-footed, and you take penalties to the same attributes as for grappled but the penalty is -4."
+    },
+    "prone": {
+        modifiers: [],
+        tooltip: "<strong>Prone</strong><br><br>You take a -4 penalty to melee attacks, a +4 bonus to AC against ranged attacks, and a -4 penalty to AC against melee attacks."
+    },
+    "shaken": {
+        modifiers: [],
+        tooltip: "<strong>Skaken</strong><br><br>You take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks."
+    },
+    "sickened": {
+        modifiers: [],
+        tooltip: "<strong>Sickened</strong><br><br>You take a -2 penalty to ability checks, attack rolls, weapon damage rolls, saving throws, and skill checks."
+    },
+    "stable": {
+        modifiers: [],
+        tooltip: "<strong>Stable</strong><br><br>You're no longer dying, but you are still unconscious."
+    },
+    "staggered": {
+        modifiers: [],
+        tooltip: "<strong>Staggered</strong><br><br>You can take only a single move or standard action each round and can't take reactions, but you can take swift actions as normal."
+    },
+    "stunned": {
+        modifiers: [],
+        tooltip: "<strong>Stunned</strong><br><br>You drop everything held, you can't take actions, and you're flat-footed."
+    },
+    "unconscious": {
+        modifiers: [],
+        tooltip: "<strong>Unconscious</strong><br><br>You're knocked out and helpless."
+    }
+};
 
 STARFINDER.characterFlags = {
     "improvedInititive": {

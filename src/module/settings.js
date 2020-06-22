@@ -42,4 +42,13 @@ export const registerSystemSettings = function () {
             ui.chat.render();
         }
     });
+
+    game.settings.register("starfinder", "worldSchemaVersion", {
+        name: "STARFINDER.SettingsWorldSchemaVersionName",
+        hint: "STARFINDER.SettingsWorldSchemaVersionHint",
+        scope: "world",
+        config: false,
+        default: 0,
+        type: Number
+    });
 };

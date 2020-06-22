@@ -1,21 +1,97 @@
-<div>
-    <p class="notification warning">Placeholder</p>
-</div>
-
-<ol class="inventory-list">
-    <li class="item flexrow inventory-header modifiers-header">
-        <div class="item-name flexrow">
-            <h3>Permanent</h3>
-        </div>
-
-        <div class="modifier-modifer">Modifier</div>
-        <div class="type">Type</div>
-        {{#if owner}}
-        <div class="item-controls">
-            <a class="item-control item-create" title="Add Modifier">
-                <i class="fas fa-plus"></i> Add
-            </a>
+<nav class="sheet-subnavigation subtabs" data-group="modifiers">
+    {{#each sections as |section sid|}}
+    <a class="item" data-tab="{{section.dataset.subtab}}">{{localize section.label}}</a>
+    {{/each}}
+</nav>
+<section class="modifiers-body">
+    {{#each sections as |section sid|}}
+    <div class="tab {{section.dataset.subtab}} {{#unless section.isConditions}}flexrow{{else}}flexcol{{/unless}}" data-group="modifiers" data-tab="{{section.dataset.subtab}}">
+        {{#if section.isConditions}}
+        <div class="form-group stacked conditions">
+            {{#each ../config.conditionTypes as |condition name|}}
+            <label class="checkbox" data-tippy-content="{{lookup (lookup ../../config.conditions name) "tooltip"}}">
+                <input type="checkbox" 
+                       class="condition {{name}}" 
+                       data-condition="{{name}}" 
+                       name="data.conditions.{{name}}" 
+                       {{checked (lookup ../../data.conditions name)}} /> {{condition}}
+            </label>
+            {{/each}}
         </div>
         {{/if}}
-    </li>
-</ol>
+        <ol class="inventory-list">
+            <li class="item flexrow inventory-header modifiers-header">
+                <div class="item-name modifier-name flexrow">
+                    <h3>{{localize "STARFINDER.ModifierNameLabel"}}</h3>
+                </div>
+
+                <div class="item-detail modifier-mod">{{localize "STARFINDER.ModifierTitle"}}</div>
+                <div class="item-detail modifier-type">{{localize "STARFINDER.ModifierTypeLabel"}}</div>
+                <div class="item-detail modifier-effect-type">{{localize "STARFINDER.ModifierEffectTypeHeaderLabel"}}</div>
+                <div class="item-detail modifier-value-affected">{{localize "STARFINDER.ModifierValueAffectedHeaderLabel"}}</div>
+                {{#if ../owner}}
+                <div class="item-controls">
+                    <a class="item-control modifier-create" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}} title="Add Modifier">
+                        <i class="fas fa-plus"></i> {{localize "STARFINDER.AddLabel"}}
+                    </a>
+                </div>
+                {{/if}}
+            </li>
+
+            <ol class="modifier-list item-list">
+                {{#each section.modifiers as |modifier mid|}}
+                <li class="item modifier flexrow" data-tippy-content="<strong>{{modifier.name}}</strong><br>{{#if modifier.enabled}}Enabled{{else}}Disabled{{/if}}{{#if modifier.notes}}<br><br>Notes<hr>{{modifier.notes}}{{/if}}" data-modifier-id="{{modifier._id}}">
+                    <div class="item-name modifier-name flexrow">
+                        <h4>{{~modifier.name~}}</h4>
+                    </div>
+
+                    <div class="item-detail modifier-mod">
+                        {{#if (eq modifier.modifierType "constant")}}
+                        {{numberFormat modifier.modifier decimals=0 sign=true}}
+                        {{else}}
+                        {{~modifier.modifier~}}
+                        {{/if}}
+                    </div>
+                    <div class="item-detail modifier-type">
+                        {{lookup ../../config.modifierTypes modifier.type}}
+                    </div>
+                    <div class="item-detail modifier-effect-type">
+                        {{lookup ../../config.modifierEffectTypes modifier.effectType}}
+                    </div>
+                    <div class="item-detail modifier-value-affected">
+                    {{#if (eq modifier.effectType "ac")}}
+                        {{lookup ../../config.modifierArmorClassAffectedValues modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "acp")}}
+                        {{lookup ../../config.acpEffectingArmorType modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "ability-skills")}}
+                        {{lookup ../../config.abilities modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "ability-check")}}
+                        {{lookup ../../config.abilities modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "skill")}}
+                        {{lookup ../../config.skills modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "save")}}
+                        {{#if (eq modifier.valueAffected "highest")}}
+                            {{localize "STARFINDER.ModifierSaveHighest"}}
+                        {{else if (eq modifier.valueAffected "lowest")}}
+                            {{localize "STARFINDER.ModifierSaveLowest"}}
+                        {{else}}
+                            {{lookup ../../config.saves modifier.valueAffected}}
+                        {{/if}}                        
+                    {{else}}
+                    {{!-- Nothing --}}
+                    {{/if}}
+                    </div>
+                    {{#if ../../owner}}
+                    <div class="item-controls">
+                        <a class="item-control modifier-toggle" data-tippy-content="Toggle Modifier">{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
+                        <a class="item-control modifier-edit" data-tippy-content="Edit Modifier"><i class="fas fa-edit"></i></a>
+                        <a class="item-control modifier-delete" data-tippy-content="Delete Modifier"><i class="fas fa-trash"></i></a>
+                    </div>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ol>
+        </ol>
+    </div>
+    {{/each}}
+</section>

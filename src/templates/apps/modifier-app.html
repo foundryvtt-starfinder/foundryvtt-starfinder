@@ -1,0 +1,92 @@
+<form autocomplete="off" class="{{cssClass}}" data-modifier-id="{{modifier._id}}">
+    <div class="form-group modifier-name">
+        <label for="name">{{localize "STARFINDER.ModifierNameLabel"}}</label>
+        <input name="name" type="text" value="{{modifier.name}}" data-tippy-content="{{localize "STARFINDER.ModifierNameTooltip"}}">
+    </div>
+    <div class="form-group modifier-modifier">
+        <label for="modifier">{{localize "STARFINDER.ModifierModifierLabel"}}</label>
+        <input type="text" name="modifier" value="{{modifier.modifier}}" data-tippy-content="{{localize "STARFINDER.ModifierModifierTooltip"}}">
+    </div>
+    <div class="form-group modifier-type">
+        <label for="type">{{localize "STARFINDER.ModifierTypeLabel"}}</label>
+        <select name="type" data-tippy-content="{{localize "STARFINDER.ModifierTypeTooltip"}}">
+            {{#select modifier.type}}
+            {{#each config.modifierTypes as |type key|}}
+            <option value="{{key}}">{{type}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+    <div class="form-group modifier-effect-type">
+        <label for="effectType">{{localize "STARFINDER.ModifierEffectTypeLabel"}}</label>
+        <select name="effectType" data-tippy-content="{{localize "STARFINDER.ModifierEffectTypeTooltip"}}">
+            {{#select modifier.effectType}}
+            {{#each config.modifierEffectTypes as |effect key|}}
+            <option value="{{key}}">{{effect}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>    
+    <div class="form-group modifier-value-affected">
+        <label for="valueAffected">{{localize "STARFINDER.ModifierValueAffectedLabel"}}</label>
+        <select name="valueAffected" data-tippy-content="{{localize "STARFINDER.ModifierValueAffectedTooltip"}}">
+            {{#select modifier.valueAffected}}
+            {{#if (eq modifier.effectType "ac")}}
+            {{#each config.modifierArmorClassAffectedValues as |armorClass key|}}
+            <option value="{{key}}">{{armorClass}}</option>
+            {{/each}}
+            {{else if (eq modifier.effectType "ability-skills")}}
+            {{#each config.abilities as |ability abl|}}
+            <option value="{{abl}}">{{ability}}</option>
+            {{/each}}
+            {{else if (eq modifier.effectType "acp")}}
+            {{#each config.acpEffectingArmorType as |armorType key|}}
+            <option value="{{key}}">{{armorType}}</option>
+            {{/each}}
+            {{else if (eq modifier.effectType "save")}}
+            <option value="highest">{{localize "STARFINDER.ModifierSaveHighest"}}</option>
+            <option value="lowest">{{localize "STARFINDER.ModifierSaveLowest"}}</option>
+            {{#each config.saves as |save key|}}
+            <option value="{{key}}">{{save}}</option>
+            {{/each}}
+            {{else if (eq modifier.effectType "skill")}}
+            {{#each config.skills as |skill key|}}
+            <option value="{{key}}">{{skill}}</option>
+            {{/each}}
+            {{else if (eq modifier.effectType "ability-check")}}
+            {{#each config.abilities as |ability abl|}}
+            <option value="{{abl}}">{{ability}}</option>
+            {{/each}}
+            {{else}}
+            <option value=""></option>
+            {{/if}}
+            {{/select}}
+        </select>
+    </div>
+    <div class="form-group modifier-modifier-type">
+        <label for="modifierType">{{localize "STARFINDER.ModifierModifierTypeLabel"}}</label>
+        <select name="modifierType" data-tippy-content="{{localize "STARFINDER.ModifierModifierTypeTooltip"}}">
+            {{#select modifier.modifierType}}
+            {{#each config.modifierType as |type key|}}
+            <option value="{{key}}">{{type}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>    
+    <div class="form-group modifier-source">
+        <label for="source">{{localize "STARFINDER.ModifierSourceLabel"}}</label>
+        <input type="text" name="source" value="{{modifier.source}}" data-tippy-content="{{localize "STARFINDER.ModifierSourceTooltip"}}">
+    </div>
+    <div class="form-group modifier-notes">
+        <label for="notes">{{localize "STARFINDER.ModifierNotesLabel"}}</label>
+        <textarea name="notes" data-tippy-content="{{localize "STARFINDER.ModifierNotesTooltip"}}">{{modifier.notes}}</textarea>
+    </div>
+    <div class="form-group modifier-enabled" data-tippy-content="{{localize "STARFINDER.ModifierEnabledTooltip"}}">
+        <label class="checkbox">
+            <input type="checkbox" name="enabled" {{checked modifier.enabled}}> {{localize "STARFINDER.ModifierEnabledLabel"}}
+        </label>
+    </div>
+    <input type="hidden" name="_id" value="{{modifier._id}}">
+    <input type="hidden" name="subtab" value="{{modifier.subtab}}">
+    <button type="submit" id="btn-submit"><i class="far fa-save"></i>{{localize "STARFINDER.Save"}}</button>
+</form>

@@ -24,9 +24,13 @@ export class ActorSheetStarfinder extends ActorSheet {
                 ".tab.attributes",
                 ".inventory .inventory-list",
                 ".features .inventory-list",
-                ".spellbook .inventory-list"
+                ".spellbook .inventory-list",
+                ".modifiers .inventory-list"
             ],
-            tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes"}]
+            tabs: [
+                {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes"}, 
+                {navSelector: ".subtabs", contentSelector: ".modifiers-body", initial: "permanent"}
+            ]
         });
     }
 
@@ -178,9 +182,18 @@ export class ActorSheetStarfinder extends ActorSheet {
         html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
     }
 
+    /** @override */
+    _onChangeTab(event, tabs, active) {
+        if (active === "modifiers") {
+            this._tabs[1].activate("conditions");
+        }
+
+        super._onChangeTab();
+    }
+
     _prepareTraits(traits) {
         const map = {
-            "dr": CONFIG.STARFINDER.damageTypes,
+            "dr": CONFIG.STARFINDER.energyDamageTypes,
             "di": CONFIG.STARFINDER.damageTypes,
             "dv": CONFIG.STARFINDER.damageTypes,
             "ci": CONFIG.STARFINDER.conditionTypes,
@@ -197,7 +210,12 @@ export class ActorSheetStarfinder extends ActorSheet {
                 values = trait.value instanceof Array ? trait.value : [trait.value];
             }
             trait.selected = values.reduce((obj, t) => {
-                obj[t] = choices[t];
+                if (typeof t !== "object") obj[t] = choices[t];
+                else {
+                    for (const [key, value] of Object.entries(t))
+                        obj[key] = `${choices[key]} ${value}`;
+                }
+
                 return obj;
             }, {});
 

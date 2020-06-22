@@ -16,8 +16,9 @@ import fixedValue from './engine/common/transformer/fixed-value.js';
 import get from './engine/common/transformer/get.js';
 
 // Custom rules
-import isCircumstanceBonus from './rules/conditions/is-circumstance.js';
-import isUntypedBonus from './rules/conditions/is-untyped.js';
+import isModifierType from './rules/conditions/is-modifier-type.js';
+import isActorType from './rules/conditions/is-actor-type.js';
+import stackModifiers from './rules/actions/modifiers/stack-modifiers.js';
 import logToConsole from './rules/actions/log.js';
 import calculateBaseAbilityModifier from './rules/actions/actor/calculate-base-ability-modifier.js';
 import calculateBaseArmorClass from './rules/actions/actor/calculate-base-armor-class.js';
@@ -29,6 +30,7 @@ import calculateCharacterLevel from './rules/actions/actor/calculate-character-l
 import calculateInitiative from './rules/actions/actor/calculate-initiative.js';
 import calculateInitiativeModifiers from './rules/actions/actor/calculate-initiative-modifiers.js';
 import calculateCmd from './rules/actions/actor/calculate-cmd.js';
+import calculateCmdModifiers from './rules/actions/actor/calculate-cmd-modifiers.js';
 import calculatePlayerXp from './rules/actions/actor/calculate-xp.js';
 import calculateShipArmorClass from './rules/actions/starship/calculate-ac.js';
 import calculateShipCritThreshold from './rules/actions/starship/calculate-ct.js';
@@ -38,6 +40,11 @@ import calculatePower from './rules/actions/starship/calculate-power.js';
 import calculateShipShields from './rules/actions/starship/calculate-shields.js';
 import calculateShipSpeed from './rules/actions/starship/calculate-speed.js';
 import calculateShipTargetLock from './rules/actions/starship/calculate-tl.js';
+import calculateBaseSkills from './rules/actions/actor/calculate-base-skills.js';
+import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modifiers.js';
+import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
+import calculateNpcAbilityValue from './rules/actions/actor/calculate-npc-ability-value.js';
+import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
 
 export default function (engine) {
     console.log("Starfinder | Registering rules");
@@ -58,7 +65,13 @@ export default function (engine) {
     calculateInitiative(engine);
     calculateInitiativeModifiers(engine);
     calculateCmd(engine);
+    calculateCmdModifiers(engine);
     calculatePlayerXp(engine);
+    calculateBaseSkills(engine);
+    calculateSkillModifiers(engine);
+    calculateSkillArmorCheckPenalty(engine);
+    calculateNpcXp(engine);
+    calculateNpcAbilityValue(engine);
     // Starship actions
     calculateShipArmorClass(engine);
     calculateShipCritThreshold(engine);
@@ -82,60 +95,56 @@ export default function (engine) {
     get(engine);
 
     // Custom rules
-    isCircumstanceBonus(engine);
-    isUntypedBonus(engine);
-    logToConsole(engine);    
-
-    engine.add({name: "process-base-ability-modifiers", closure: "calculateBaseAbilityModifier"});
+    logToConsole(engine);
+    isActorType(engine);
+    isModifierType(engine);
+    stackModifiers(engine);
+    
     engine.add({
-        name: "process-pc",
+        name: "process-actors",
+        description: "Take all of the actor data and process it by actor type.",
         rules: [
             {
-                when: "always",
-                then: "calculateBaseAbilityModifier"
+                when: { closure: "isActorType", type: "character" },
+                then: [
+                    { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
+                    "calculateBaseArmorClass",
+                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
+                    "calculateBaseAttackBonus",
+                    "calculateBaseSaves",
+                    { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
+                    "calculateCharacterLevel",
+                    "calculateInitiative",
+                    {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
+                    "calculateCMD",
+                    { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
+                    "calculateXP",
+                    "calculateBaseSkills",
+                    { closure: "calculateSkillArmorCheckPenalty", stackModifiers: "stackModifiers" },
+                    { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" }
+                ]
             },
             {
-                when: "always", 
-                then: ["calculateBaseArmorClass", "calculateArmorModifiers"]
+                when: { closure: "isActorType", type: "starship" },
+                then: [
+                    "calculateShipArmorClass",
+                    "calculateShipCritThreshold",
+                    "calculateDrift",
+                    "calculateShields",
+                    "calculateShipMaxShields",
+                    "calculateShipPower",
+                    "calculateShipSpeed",
+                    "calculateShipTargetLock"
+                ]
             },
             {
-                when: "always",
-                then: "calculateBaseAttackBonus"
+                when: { closure: "isActorType", type: "npc" },
+                then: ["calculateNpcXp", "calculateNpcAbilityValue"]
             },
             {
-                when: "always",
-                then: ["calculateBaseSaves", "calculateSaveModifiers"]
-            },
-            {
-                when: "always",
-                then: "calculateCharacterLevel"
-            },
-            {
-                when: "always",
-                then: ["calculateInitiativeModifiers", "calculateInitiative"]
-            },
-            {
-                when: "always",
-                then: "calculateCMD"
-            },
-            {
-                when: "always",
-                then: "calculateXP"
+                when: { closure: "isActorType", type: "vehicle" },
+                then: "identity"
             }
-        ]
-    });
-    engine.add({
-        name: "process-starship",
-        when: "always",
-        then: [
-            "calculateShipArmorClass",
-            "calculateShipCritThreshold",
-            "calculateDrift",
-            "calculateShields",
-            "calculateShipMaxShields",
-            "calculateShipPower",
-            "calculateShipSpeed",
-            "calculateShipTargetLock"
         ]
     });
 

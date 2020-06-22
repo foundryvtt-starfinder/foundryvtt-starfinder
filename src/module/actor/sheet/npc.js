@@ -24,6 +24,13 @@ export class ActorSheetStarfinderNPC extends ActorSheetStarfinder {
         return path + "npc-sheet.html";
     }
 
+    /** @override */
+    activateListeners(html) {
+        super.activateListeners(html);
+
+        html.find('#add-skills').click(this._toggleSkills.bind(this));
+    }
+
     getData() {
         const data = super.getData();
 
@@ -32,6 +39,17 @@ export class ActorSheetStarfinderNPC extends ActorSheetStarfinder {
         data.labels["cr"] = cr >= 1 ? String(cr) : crs[cr] || 1;
 
         return data;
+    }
+
+    /**
+     * Toggle the visibility of skills on the NPC sheet.
+     * 
+     * @param {Event} event The originating click event
+     */
+    _toggleSkills(event) {
+        event.preventDefault();
+        
+        this.actor.toggleNpcSkills();
     }
 
     _prepareItems(data) {

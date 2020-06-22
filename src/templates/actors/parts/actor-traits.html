@@ -31,6 +31,18 @@
         <label>{{localize "STARFINDER.NumberOfArms"}}</label>
         <input type="text" name="data.attributes.arms" value="{{data.attributes.arms}}" />
     </div>
+    
+    <div class="form-group">
+        <label>{{localize "STARFINDER.SpellResistance"}}</label>
+        <input type="text" name="data.traits.sr" value="{{data.traits.sr}}" data-dtype="Number" />
+    </div>
+    
+    <div class="form-group damage-reduction">
+        <label>{{localize "STARFINDER.DamageReduction"}}</label>
+        <input type="text" name="data.traits.damageReduction.value" value="{{data.traits.damageReduction.value}}" data-dtype="Number" />
+        <span class="sep">/</span>
+        <input type="text" name="data.traits.damageReduction.negatedBy" value="{{data.traits.damageReduction.negatedBy}}" />
+    </div>
 
     <div class="form-group {{data.traits.languages.cssClass}}">
         <label for="data.traits.languages">{{localize "STARFINDER.Languages"}}</label>
@@ -42,16 +54,6 @@
         <a class="trait-selector" data-options="languages"><i class="fas fa-edit"></i></a>
     </div>
 
-    <div class="form-group {{data.traits.di.cssClass}}">
-        <label for="data.traits.di">{{localize "STARFINDER.DamImm"}}</label>
-        <ul class="traits-list">
-        {{#each data.traits.di.selected as |v k|}}
-            <li class="tag {{k}}">{{v}}</li>
-        {{/each}}
-        </ul>
-        <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
-    </div>
-
     <div class="form-group {{data.traits.dr.cssClass}}">
         <label for="data.traits.dr">{{localize "STARFINDER.DamRes"}}</label>
         <ul class="traits-list">
@@ -59,13 +61,23 @@
             <li class="tag {{k}}">{{v}}</li>
         {{/each}}
         </ul>
-        <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
+        <a class="trait-selector" data-options="energyDamageTypes"><i class="fas fa-edit"></i></a>
     </div>
 
     <div class="form-group {{data.traits.dv.cssClass}}">
         <label for="data.traits.dv">{{localize "STARFINDER.DamVuln"}}</label>
         <ul class="traits-list">
         {{#each data.traits.dv.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.di.cssClass}}">
+        <label for="data.traits.di">{{localize "STARFINDER.DamImm"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.di.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
         {{/each}}
         </ul>

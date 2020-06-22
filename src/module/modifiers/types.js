@@ -16,16 +16,33 @@ export const StarfinderEffectType = Object.freeze({
     RANGED_ATTACKS: "ranged-attacks",
     MELEE_ATTACKS: "melee-attacks",
     SPELL_ATTACKS: "spell-attacks",
+    ALL_ATTACKS: "all-attacks",
     AC: "ac",
-    EAC: "eac",
-    KAC: "kac",
     CMD: "cmd",
+    ACP: "acp",
     INITIATIVE: "initiative",
     ABILITY_SKILLS: "ability-skills",
     SKILL: "skill",
+    ALL_SKILLS: "all-skills",
     SAVES: "saves",
+    SAVE: "save",
     SPEED: "speed",
     DAMAGE: "damage",
     ABILITY_CHECKS: "ability-checks",
-    ABILITY_SCORE: "ability-score"
+    ABILITY_CHECK: "ability-check",
+    ABILITY_SCORE: "ability-score",
+    ABILITY_MODIFIER: "ability-modifier",
+    ABILITY_MODIFIERS: "ability-modifiers",
+    HIT_POINTS: "hit-points",
+    STAMINA_POINTS: "stamina-points",
+    RESOLVE_POINTS: "resolve-points",
+    SPELL_RESISTANCE: "spell-resistance",
+    DAMAGE_REDUCTION: "damage-reduction",
+    BULK: "bulk",
+    BULK_CALCULATION: "bulk-calculation"
+});
+
+export const StarfinderModifierType = Object.freeze({
+    CONSTANT: "constant",
+    FORMULA: "formula"
 });

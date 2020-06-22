@@ -114,6 +114,26 @@ async function copyReadmeAndLicenses() {
 	}
 }
 
+async function copyLibs() {
+	const tippyLib = "tippy.js/dist/tippy.umd.min.js";
+	const tippyMap = "tippy.js/dist/tippy.umd.min.js.map";
+	const popperLib = "@popperjs/core/dist/umd";
+
+	const cssFile = "tippy.js/dist/tippy.css";
+	const nodeModulesPath = "node_modules";
+
+	try {
+		await fs.copy(path.join(nodeModulesPath, tippyLib), "dist/lib/tippy/tippy.min.js");
+		await fs.copy(path.join(nodeModulesPath, tippyMap), "dist/lib/tippy/tippy.umd.min.js.map");
+		await fs.copy(path.join(nodeModulesPath, popperLib), "dist/lib/popperjs/core");
+		await fs.copy(path.join(nodeModulesPath, cssFile), "dist/styles/tippy.css");
+
+		return Promise.resolve();
+	} catch (err) {
+		Promise.reject(err);
+	}
+}
+
 /**
  * Watch for changes for each build step
  */
@@ -146,6 +166,7 @@ async function clean() {
 		'icons',
 		'images',
 		'packs',
+		'lib',
 		`${name}.js`,
 		`${name}.css`,
 		'module.json',
@@ -375,12 +396,13 @@ function updateManifest(cb) {
 	}
 }
 
-const execBuild = gulp.parallel(buildLess, copyFiles);
+const execBuild = gulp.parallel(buildLess, copyFiles, copyLibs);
 
 exports.build = gulp.series(clean, execBuild);
 exports.watch = buildWatch;
 exports.clean = clean;
 exports.link = linkUserData;
+exports.libs = copyLibs;
 exports.package = gulp.series(copyReadmeAndLicenses, packageBuild);
 exports.publish = gulp.series(
 	clean,

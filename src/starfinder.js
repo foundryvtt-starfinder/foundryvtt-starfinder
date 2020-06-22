@@ -22,6 +22,10 @@ import { highlightCriticalSuccessFailure } from "./module/dice.js";
 import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/combat.js";
 import Engine from "./module/engine/engine.js";
 import registerSystemRules from "./module/rules.js";
+import { StarfinderModifierTypes, StarfinderModifierType, StarfinderEffectType } from "./module/modifiers/types.js";
+import StarfinderModifier from "./module/modifiers/modifier.js";
+import { generateUUID } from "./module/utilities.js";
+import migrateWorld from './module/migration.js';
 
 Hooks.once('init', async function () {
     console.log(`Starfinder | Initializeing Starfinder System`);
@@ -40,12 +44,22 @@ Hooks.once('init', async function () {
 
     game.starfinder = {
         rollItemMacro,
-        engine
+        engine,
+        StarfinderModifierType,
+        StarfinderEffectType,
+        StarfinderModifierTypes,
+        StarfinderModifier,
+        generateUUID
     };
 
     CONFIG.STARFINDER = STARFINDER;
     CONFIG.Actor.entityClass = ActorStarfinder;
-    CONFIG.Item.entityClass = ItemStarfinder;    
+    CONFIG.Item.entityClass = ItemStarfinder;
+
+    CONFIG.statusEffects = CONFIG.STARFINDER.statusEffectIcons;
+
+    CONFIG.fontFamilies.push("Exo 2");
+    CONFIG.defaultFontFamily = "Exo 2";
 
     registerSystemSettings();
 
@@ -70,7 +84,9 @@ Hooks.once("setup", function () {
         "vehicleSizes", "babProgression", "saveProgression", "saveDescriptors", "armorProficiencies",
         "weaponProficiencies", "abilityActivationTypes", "skillProficiencyLevels", "damageTypes",
         "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
-        "weaponProperties", "spellAreaShapes"
+        "weaponProperties", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
+        "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
+        "modifierArmorClassAffectedValues"
     ];
 
     for (let o of toLocalize) {
@@ -83,6 +99,22 @@ Hooks.once("setup", function () {
 
     console.log("Starfinder | Configuring rules engine");
     registerSystemRules(game.starfinder.engine);
+
+    Handlebars.registerHelper("not", function (value) {
+        return !Boolean(value);
+    });
+});
+
+Hooks.once("ready", () => {
+    const currentSchema = game.settings.get('starfinder', 'worldSchemaVersion') ?? 0;
+    const systemSchema = Number(game.system.data.schema);
+    const needsMigration = currentSchema < systemSchema || currentSchema === 0;
+
+    if (needsMigration && game.user.isGM) {
+        migrateWorld()
+            .then(_ => ui.notifications.info(game.i18n.localize("STARFINDER.MigrationSuccessfulMessage")))
+            .catch(_ => ui.notifications.error(game.i18n.localize("STARFINDER.MigrationErrorMessage")));
+    }
 });
 
 Hooks.on("ready", () => {

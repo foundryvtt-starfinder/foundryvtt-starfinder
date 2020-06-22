@@ -2,6 +2,10 @@ import { DiceStarfinder } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
+import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
+import { StarfinderModifierType, StarfinderModifierTypes, StarfinderEffectType } from "../modifiers/types.js";
+import StarfinderModifier from "../modifiers/modifier.js";
+import StarfinderModifierApplication from "../apps/modifier-app.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
@@ -13,7 +17,13 @@ export class ActorStarfinder extends Actor {
         const data = super.getRollData();
         data.classes = this.data.items.reduce((obj, i) => {
             if (i.type === "class") {
-                obj[i.name.slugify({replacement: "_", strict: true})] = i.data;
+                const classData = {
+                    keyAbilityMod: this.data.data.abilities[i.data.kas].mod,
+                    levels: i.data.levels,
+                    keyAbilityScore: i.data.kas
+                };
+
+                obj[i.name.slugify({replacement: "_", strict: true})] = classData;
             }
             return obj;
         }, {});
@@ -32,227 +42,45 @@ export class ActorStarfinder extends Actor {
         const actorData = this.data;
         const data = actorData.data;
         const flags = actorData.flags;
+        const actorType = actorData.type;
 
-        if (actorData.type === "npc") {
-            this._prepareNPCData(data);
-            return;
-        }
-        else if (actorData.type === "starship") {
-            this._prepareStarshipData(data);
-            return;
-        } else if (actorData.type === "vehicle") {
-            this._prepareVehicleData(data);
-            return;
-        }
+        this._ensureHasModifiers(data);
+        const modifiers = data.modifiers;
 
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
         const classes = items.filter(item => item.type === "class");
+        const theme = items.find(item => item.type === "theme");
 
-        game.starfinder.engine.process("process-pc", {
+        game.starfinder.engine.process("process-actors", {
             data,
             armor,
             classes,
-            flags
+            flags,
+            type: actorType,
+            modifiers,
+            theme
         });
-
-        this._preparePCSkills(data);
     }
 
     /**
-     * Check to ensure that this actor has the modifiers flag set, if not then set it. 
+     * Check to ensure that this actor has a modifiers data object set, if not then set it. 
      * These will always be needed from hence forth, so we'll just make sure that they always exist.
      * 
-     * @param {Object} flags The actor flags to check against.
-     */
-    _ensureHasModifiersFlag(flags) {
-        // if (!hasProperty(flags, "starfinder")) {
-        //     console.log(`Starfinder | ${this.name} does not have any starfinder flags, attempting to create them...`);
-        //     const updateData = duplicate(flags);
-        //     console.log(updateData);
-        //     this.update({'flags.starfinder': {}});
-        // }
-        // if (hasProperty(flags, 'starfinder') && !hasProperty(flags, "starfinder.modifiers")) {
-        //     // this.setFlag('starfinder', 'modifiers', []).then(entity => console.log(entity));
-        // }
-    }
-
-    /**
-     * Calculate the ability modifer for each ability.
-     * @param {Object} data The Actor's data
-     */
-    _prepareAbilities(data) {
-        game.starfinder.engine.process("process-base-ability-modifiers", {data});
-    }
-
-    /**
-     * Process skills for player character's.
+     * @param {Object}      data The actor data to check against.
+     * @param {String|Null} prop A specific property name to check.
      * 
-     * @param {Object} data The actor's data
+     * @returns {Object}         The modified data object with the modifiers data object added.
      */
-    _preparePCSkills(data) {
-        // TODO: Transition this over to the new rules engine
-        // once the modifier system is in place.
-        const actorData = this.data;
-        const flags = actorData.flags;
-        const items = actorData.items;
-        const armor = items.find(item => item.type === "equipment" && item.data.equipped);
-
-        // All of the relevent flags that modify skill bonuses
-        let flatAffect = getProperty(flags, "starfinder.flatAffect") ? -2 : 0;
-        let historian = getProperty(flags, "starfinder.historian") ? 2 : 0;
-        let naturalGrace = getProperty(flags, "starfinder.naturalGrace") ? 2 : 0;
-        let cultrualFascination = getProperty(flags, "starfinder.culturalFascination") ? 2 : 0;
-        let armorSavant = getProperty(flags, "starfinder.armorSavant") ? 1 : 0;
-        let scrounger = getProperty(flags, "starfinder.scrounger") ? 2 : 0;
-        let elvenMagic = getProperty(flags, "starfinder.elvenMagic") ? 2 : 0;
-        let keenSenses = getProperty(flags, "starfinder.keenSenses") ? 2 : 0;
-        let curious = getProperty(flags, "starfinder.curious") ? 2 : 0;
-        let intimidating = getProperty(flags, "starfinder.intimidating") ? 2 : 0;
-        let selfSufficient = getProperty(flags, "starfinder.selfSufficient") ? 2 : 0;
-        let sneaky = getProperty(flags, "starfinder.sneaky") ? 2 : 0;
-        let sureFooted = getProperty(flags, "starfinder.sureFooted") ? 2 : 0;
-
-        // Skills
-        for (let [skl, skill] of Object.entries(data.skills)) {
-             // Specific skill modifiers
-             switch (skl) {
-                case "acr":
-                    skill.misc += naturalGrace;
-                    skill.misc += sureFooted;
-                    break;
-                case "ath":
-                    skill.misc += naturalGrace;
-                    skill.misc += sureFooted;
-                    break;
-                case "cul":
-                    skill.misc += historian;
-                    skill.misc += cultrualFascination;
-                    skill.misc += curious;
-                    break;
-                case "dip":
-                    skill.misc += cultrualFascination;
-                    break;
-                case "eng":
-                    skill.misc += scrounger;
-                    break;
-                case "int":
-                    skill.misc += intimidating;
-                    break;
-                case "mys":
-                    skill.misc += elvenMagic;
-                    break;
-                case "per":
-                    skill.misc += keenSenses;
-                    break;
-                case "sen":
-                    skill.misc += flatAffect;
-                    break;
-                case "ste":
-                    skill.misc += scrounger;
-                    skill.misc += sneaky;
-                    break;
-                case "sur":
-                    skill.misc += scrounger;
-                    skill.misc += selfSufficient;
-                    break;
-            }
-
-            skill.value = parseFloat(skill.value || 0);
-            let classSkill = skill.value;
-            let hasRanks = skill.ranks > 0;
-            let acp = armor && armor.data.armor.acp < 0 && skill.hasArmorCheckPenalty ? armor.data.armor.acp : 0;
-            if (acp < 0 && armorSavant > 0) acp = Math.min(acp + armorSavant, 0);
-            skill.mod = data.abilities[skill.ability].mod + acp + skill.ranks + (hasRanks ? classSkill : 0) + skill.misc;
-        }
-    }
-
-    /**
-     * Prepare a starship's data
-     * 
-     * @param {Object} data The data to prepare
-     * @private
-     */
-    _prepareStarshipData(data) {
-        game.starfinder.engine.process("process-starship", {data});
-    }
-
-    /**
-     * Prepare a vechile's data
-     * 
-     * @param {Object} data The data to prepare
-     * @private
-     */
-    _prepareVehicleData(data) {
-        // TODO: Actually do stuff here.
-    }
-
-    /**
-     * Prepare the NPC's data.
-     * 
-     * NPC's are a little more free form in their data. They generaly don't follow the
-     * same character creation rules that PC's do, so there stats don't need as much 
-     * automation.
-     * 
-     * @param {Object} data The NPC's data to prepare
-     * @private
-     */
-    _prepareNPCData(data) {
-        // TODO: I need to redo this when I redo the NPC sheet.
-        // The basic idea is that most, if not all, of the fields
-        // on the NPC sheet will be modifiable and not be pre calculated.
-        // This should make it easier to create NPC's, because their creation
-        // rules are much more free form anyway. The only calculation
-        // that should be occuring here is the CR and Experience 
-        // calculations.
-        data.details.xp.value = this.getCRExp(data.details.cr);
-
-        this._prepareAbilities(data);
-
-        // Skills
-        // NPC's handle skills differently. They don't have "class" skills nor do they have skill "ranks".
-        for (let skl of Object.values(data.skills)) {
-            skl.value = parseFloat(skl.value || 0);
-            skl.mod = data.abilities[skl.ability].mod + skl.misc;
+    _ensureHasModifiers(data, prop = null) {
+        if (!hasProperty(data, "modifiers")) {
+            console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
+            data.modifiers = [];
         }
 
-        // Saves
-        const fort = data.attributes.fort;
-        const reflex = data.attributes.reflex;
-        const will = data.attributes.will;
-
-        fort.bonus = fort.value + data.abilities.con.mod + fort.misc;
-        reflex.bonus = reflex.value + data.abilities.dex.mod + reflex.misc;
-        will.bonus = will.value + data.abilities.wis.mod + will.misc;
-
-        const init = data.attributes.init;
-        init.mod = data.abilities.dex.mod;
-        init.bonus = init.value;
-        init.total = init.mod + init.bonus;        
-
-        // CMD or AC Vs Combat Maneuvers as it's called in starfinder
-        data.attributes.cmd.value = 8 + data.attributes.kac.value;
+        return data;
     }
-
-    /**
-     * Return the amount of experience granted by killing a creature of a certain CR.
-     * 
-     * @param {Number} cr The creature's challenge rating
-     * @returns {Number} The amount of experience granted per kill
-     */
-    getCRExp(cr) {
-        if (cr < 1.0) {
-            if (cr === (1 / 3)) {
-                return 135;
-            } else if (cr === (1 / 6)) {
-                return 65;
-            }
-
-            return Math.max(400 * cr, 50);
-        }
-        return CONFIG.STARFINDER.CR_EXP_LEVELS[cr];
-    }
-
+    
     /**
      * Extend the default update method to enhance data before submission.
      * See the parent Entity.update method for full details.
@@ -334,7 +162,8 @@ export class ActorStarfinder extends Actor {
         // use this to delete any unwanted skills.
 
         const skill = duplicate(this.data.data.skills[skillId]);
-        const formData = await AddEditSkillDialog.create(skillId, skill),
+        const isNpc = this.data.type === "npc";
+        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
@@ -354,11 +183,109 @@ export class ActorStarfinder extends Actor {
             [`data.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty
         };
 
+        if (isNpc) updateObject[`data.skills.${skillId}.enabled`] = Boolean(formData.get('enabled'));
+
         if ("subname" in skill) {
             updateObject[`data.skills.${skillId}.subname`] = formData.get('subname');
         }
 
         return this.update(updateObject);
+    }
+    
+    /**
+     * Add a modifier to this actor.
+     * 
+     * @param {Object}        data               The data needed to create the modifier
+     * @param {String}        data.name          The name of this modifier. Used to identify the modfier.
+     * @param {Number|String} data.modifier      The modifier value.
+     * @param {String}        data.type          The modifiers type. Used to determine stacking.
+     * @param {String}        data.modifierType  Used to determine if this modifier is a constant value (+2) or a Roll formula (1d4).
+     * @param {String}        data.effectType    The category of things that might be effected by this modifier.
+     * @param {String}        data.subtab        What subtab should this modifier show under on the character sheet.
+     * @param {String}        data.valueAffected The specific value being modified.
+     * @param {Boolean}       data.enabled       Is this modifier activated or not.
+     * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
+     * @param {String}        data.notes         Any notes or comments about the modifier.
+     * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
+     * @param {String|null}   data.id            Override the randomly generated id with this.
+     */
+    async addModifier({
+        name = "", 
+        modifier = 0, 
+        type = StarfinderModifierTypes.UNTYPED, 
+        modifierType = StarfinderModifierType.CONSTANT, 
+        effectType = StarfinderEffectType.SKILL,
+        subtab = "misc",
+        valueAffected = "", 
+        enabled = true, 
+        source = "", 
+        notes = "",
+        condition = "",
+        id = null
+    } = {}) {
+        const data = this._ensureHasModifiers(duplicate(this.data.data));
+        const modifiers = data.modifiers;
+
+        modifiers.push(new StarfinderModifier({
+            name,
+            modifier,
+            type,
+            modifierType,
+            effectType,
+            valueAffected,
+            enabled,
+            source,
+            notes,
+            subtab,
+            condition,
+            id
+        }));
+
+        await this.update({["data.modifiers"]: modifiers});
+    }
+
+    /**
+     * Delete a modifier for this Actor.
+     * 
+     * @param {String} id The id for the modifier to delete
+     */
+    async deleteModifier(id) {
+        const modifiers = this.data.data.modifiers.filter(mod => mod._id !== id);
+        
+        await this.update({"data.modifiers": modifiers});
+    }
+
+    /**
+     * Edit a modifier for an Actor.
+     * 
+     * @param {String} id The id for the modifier to edit
+     */
+    editModifier(id) {
+        const modifiers = duplicate(this.data.data.modifiers);
+        const modifier = modifiers.find(mod => mod._id === id);
+
+        new StarfinderModifierApplication(modifier, this).render(true);
+    }
+
+    /**
+     * Toggles what NPC skills are shown on the sheet.
+     */
+    async toggleNpcSkills() {
+        const skills = duplicate(this.data.data.skills);
+        const formData = await NpcSkillToggleDialog.create(skills);
+        let enabledSkills = {};
+        const delta = Object.entries(skills).reduce((obj, curr) => {
+            if (curr[1].enabled) obj[`data.skills.${curr[0]}.enabled`] = !curr[1].enabled;
+            return obj;
+        }, {});
+
+        for (let [key, value] of formData.entries()) {
+            enabledSkills[`data.${key}`] = Boolean(value);
+        }
+        
+        enabledSkills = mergeObject(enabledSkills, delta, {overwrite: false, inplace: false});
+
+        return await this.update(enabledSkills);
     }
 
     /**

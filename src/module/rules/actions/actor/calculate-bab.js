@@ -4,16 +4,26 @@ export default function (engine) {
         const classes = fact.classes;
         let bab = 0;
 
+        data.attributes.babtooltip = [];
+
         for (const cls of classes) {
+            let mod = 0;
             switch (cls.data.bab) {
-                case "slow": bab += Math.floor(cls.data.levels * 0.5); break;
-                case "moderate": bab += Math.floor(cls.data.levels * 0.75); break;
-                case "full": bab += cls.data.levels; break;
+                case "slow": mod += Math.floor(cls.data.levels * 0.5); break;
+                case "moderate": mod += Math.floor(cls.data.levels * 0.75); break;
+                case "full": mod += cls.data.levels; break;
             }
+
+            data.attributes.babtooltip.push(game.i18n.format("STARFINDER.BABTooltip", {
+                class: cls.name,
+                bonus: mod.signedString()
+            }));
+
+            bab += mod;
         }
 
         data.attributes.bab = bab;
-
+        
         return fact;
     });
 }
