@@ -25,6 +25,7 @@ import registerSystemRules from "./module/rules.js";
 import { StarfinderModifierTypes, StarfinderModifierType, StarfinderEffectType } from "./module/modifiers/types.js";
 import StarfinderModifier from "./module/modifiers/modifier.js";
 import { generateUUID } from "./module/utilities.js";
+import migrateWorld from './module/migration.js';
 
 Hooks.once('init', async function () {
     console.log(`Starfinder | Initializeing Starfinder System`);
@@ -102,6 +103,18 @@ Hooks.once("setup", function () {
     Handlebars.registerHelper("not", function (value) {
         return !Boolean(value);
     });
+});
+
+Hooks.once("ready", () => {
+    const currentSchema = game.settings.get('starfinder', 'worldSchemaVersion') ?? 0;
+    const systemSchema = Number(game.system.data.schema);
+    const needsMigration = currentSchema < systemSchema || currentSchema === 0;
+
+    if (needsMigration && game.user.isGM) {
+        migrateWorld()
+            .then(_ => ui.notifications.info(game.i18n.localize("STARFINDER.MigrationSuccessfulMessage")))
+            .catch(_ => ui.notifications.error(game.i18n.localize("STARFINDER.MigrationErrorMessage")));
+    }
 });
 
 Hooks.on("ready", () => {
