@@ -26,6 +26,7 @@ import { StarfinderModifierTypes, StarfinderModifierType, StarfinderEffectType }
 import StarfinderModifier from "./module/modifiers/modifier.js";
 import { generateUUID } from "./module/utilities.js";
 import migrateWorld from './module/migration.js';
+import { CounterManagement } from "./module/classes/counter-management.js";
 
 Hooks.once('init', async function () {
     console.log(`Starfinder | Initializeing Starfinder System`);
@@ -75,6 +76,13 @@ Hooks.once('init', async function () {
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("starfinder", ItemSheetStarfinder, { makeDefault: true });
+
+    /**
+     * Manage counter classe feature from combat tracker
+     * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
+    **/
+    let counterManagement = new CounterManagement();
+    counterManagement.startup();
 });
 
 Hooks.once("setup", function () {
