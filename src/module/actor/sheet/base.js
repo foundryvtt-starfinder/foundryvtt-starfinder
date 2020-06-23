@@ -1,5 +1,6 @@
 import { TraitSelectorStarfinder } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
+import { spellBrowser } from "../../packs/spell-browser.js";
 
 /**
  * Extend the basic ActorSheet class to do all the Starfinder things!
@@ -137,6 +138,11 @@ export class ActorSheetStarfinder extends ActorSheet {
 
         // Saves
         html.find('.save-name').click(this._onRollSave.bind(this));
+
+        /* -------------------------------------------- */
+        /*  Spellbook
+        /* -------------------------------------------- */
+        html.find('.spell-browse').click(ev => spellBrowser.render(true)); // Inventory Browser
 
         /* -------------------------------------------- */
         /*  Inventory

@@ -491,6 +491,12 @@ STARFINDER.tokenSizes = {
     "colossal": 6
 };
 
+STARFINDER.allowedClasses = {
+    "myst": "Mystic",
+    "tech": "Technomancer",
+    "wysh": "Witchwarper"
+};
+
 STARFINDER.itemActionTypes = {
     "mwak": "STARFINDER.ActionMWAK",
     "rwak": "STARFINDER.ActionRWAK",
@@ -1340,6 +1346,12 @@ STARFINDER.conditions = {
     }
 };
 
+STARFINDER.allowedClasses = {
+    "myst": "Mystic",
+    "tech": "Technomancer",
+    "wysh": "Witchwarper"
+};
+
 STARFINDER.characterFlags = {
     "improvedInititive": {
         name: "STARFINDER.ImprovedInitiativeLabel",
@@ -1454,5 +1466,32 @@ STARFINDER.characterFlags = {
         hint: "You gain +4 bonus to initiative checks and increase your land speed by 10 feet.",
         section: "STARFINDER.CharacterFlagsSectionClassFeatures",
         type: Boolean
+    },
+    "solarianAttunement": {
+        name: "Solarian Attunement",
+        hint: "You can enabled the management of attenument inside the combat tracker.",
+        section: "STARFINDER.CharacterFlagsSectionClassFeatures",
+        type: Boolean
+    },
+    "vanguardEntropy": {
+        name: "Vanguard's Entropy Points",
+        hint: "You can enabled the management of Entropy Points inside the combat tracker.",
+        section: "STARFINDER.CharacterFlagsSectionClassFeatures",
+        type: Boolean
+    },
+    "soldierKi": {
+        name: "Soldier Ki Points",
+        hint: "You can enabled the management of Solider Ki Point inside the combat tracker.",
+        section: "STARFINDER.CharacterFlagsSectionClassFeatures",
+        type: Boolean
     }
+};
+
+/**
+ * Saving throw modifier progression
+ */
+STARFINDER.counterClassesLabel = {
+    "soldierKi": "STARFINDER.CounterClassesKiSoldier",
+    "vanguardEntropy": "STARFINDER.CounterClassesVanguard",
+    "solarianAttunement": "STARFINDER.CounterClassesSolarian"
 };
