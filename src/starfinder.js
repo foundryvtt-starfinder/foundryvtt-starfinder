@@ -140,10 +140,6 @@ Hooks.once("ready", () => {
     }
 });
 
-Hooks.on("ready", () => {
-    
-});
-
 Hooks.on("canvasInit", function () {
     canvas.grid.diagonalRule = game.settings.get("starfinder", "diagonalMovement");
     SquareGrid.prototype.measureDistances = measureDistances;
