@@ -8,7 +8,7 @@ import Progress from '../progress.js';
 class ItemBrowserStarfinder extends Application {
   static get defaultOptions() {
     const options = super.defaultOptions;
-    options.classes = options.classes.concat('spell-browser-window'); // options.template = "systems/pf2e/templates/packs/spell-browser.html";
+    options.classes = options.classes.concat('spell-browser-window');
     options.title = 'Add an Item';
     options.width = 800;
     options.height = 700;
@@ -364,7 +364,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
 
       if (settings == '') {
         // if settings are empty create the settings data
-        console.log('PF2e System | Spell Browser | Creating settings');
+        console.log('Starfinder | Spell Browser | Creating settings');
         settings = {};
 
         for (const compendium of game.packs) {
@@ -379,7 +379,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
         game.settings.set('SpellBrowser', 'settings', JSON.stringify(settings));
       } else {
         // if settings do exist, reload and apply them to make sure they conform with current compendium
-        console.log('PF2e System | Spell Browser | Loading settings');
+        console.log('Starfinder | Spell Browser | Loading settings');
         const loadedSettings = JSON.parse(settings);
         settings = {};
 
@@ -468,7 +468,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
   }
 
   async loadSpells() {
-    console.log('PF2e System | Spell Browser | Started loading spells');
+    console.log('Starfinder | Spell Browser | Started loading spells');
     const foundSpells = '';
     const unfoundSpells = '';
     const spells = {};
@@ -481,7 +481,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
       pack,
       content
     } of packLoader.loadPacks('Item', this._loadedPacks)) {
-      console.log(`PF2e System | Spell Browser | ${pack.metadata.label} - ${content.length} entries found`);
+      console.log(`Starfinder | Spell Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
       for (let spell of content) {
         spell = spell.data;
@@ -528,7 +528,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
     }
 
     if (unfoundSpells !== '') {
-      console.log('PF2e System | Spell Browser | List of Spells that don\'t have a class assosiated to them:');
+      console.log('Starfinder | Spell Browser | List of Spells that don\'t have a class assosiated to them:');
       console.log(unfoundSpells);
     } //  sorting and assigning better class names
 
@@ -553,7 +553,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
     this.schools = schoolsObj;
 
 
-    console.log('PF2e System | Spell Browser | Finished loading spells');
+    console.log('Starfinder | Spell Browser | Finished loading spells');
     return spells;
   }
 
