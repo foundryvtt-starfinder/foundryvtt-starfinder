@@ -462,11 +462,12 @@ export class ActorStarfinder extends Actor {
     async shortRest({ dialog = true, chat = true } = {}) {
         const data = this.data.data;
 
+        // Ask user to confirm if they want to rest, and if they want to restore stamina points
         let sp = data.attributes.sp;
         let rp = data.attributes.rp;
+        let canRestoreStaminaPoints = rp.value > 0 && sp.value < sp.max;
 
         let restoreStaminaPoints = false;
-        let canRestoreStaminaPoints = rp.value > 0 && sp.value < sp.max;
 
         if (dialog) {
             const restingResults = await ShortRestDialog.shortRestDialog({ actor: this, canRestoreStaminaPoints: canRestoreStaminaPoints });
@@ -484,6 +485,7 @@ export class ActorStarfinder extends Actor {
             this.update({ "data.attributes.sp.value": sp.max, "data.attributes.rp.value": updatedRP });
         }
 
+        // Restore resources that reset on short rests
         const updateData = {};
         for (let [k, r] of Object.entries(data.resources)) {
             if (r.max && r.sr) {
@@ -493,6 +495,7 @@ export class ActorStarfinder extends Actor {
 
         await this.update(updateData);
 
+        // Reset items that restore their uses on a short rest
         const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
         const updateItems = items.map(item => {
             return {
@@ -503,6 +506,7 @@ export class ActorStarfinder extends Actor {
 
         await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
+        // Notify chat what happened
         if (chat) {
             let msg = game.i18n.format("STARFINDER.RestSChatMessage", { name: this.name });
             if (drp > 0) {
