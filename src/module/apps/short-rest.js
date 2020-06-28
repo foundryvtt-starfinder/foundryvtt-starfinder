@@ -16,7 +16,7 @@ export class ShortRestDialog extends Dialog {
 
     activateListeners(html) {
         let btn = html.find('#spend-rp');
-        if (this.data.canSpendRp) btn.click(this._onSpendRp.bind(this));
+        if (this.data.canSpendRp) btn.click(this._onPerformShortRest.bind(this));
         else btn[0].disabled = true;
         super.activateListeners(html);
     }
@@ -26,10 +26,10 @@ export class ShortRestDialog extends Dialog {
      * @param {Event} event The triggering click event
      * @private
      */
-    async _onSpendRp(event) {
+    async _onPerformShortRest(event) {
         event.preventDefault();
         const btn = event.currentTarget;
-        await this.actor.spendRp();
+        await this.actor.performShortRest();
         if (this.actor.data.data.attributes.rp.value === 0) btn.disabled = true;
     }
 

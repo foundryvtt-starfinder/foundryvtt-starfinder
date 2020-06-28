@@ -589,9 +589,9 @@ export class ActorStarfinder extends Actor {
     }
 
     /**
-     * Spend the resiquite number of resolve points to regain all stamina points
+     * Performs a short rest. A short rest allows the actor to spend 1 Resolve Point to regain all stamina points.
      */
-    spendRp() {
+    performShortRest() {
         if (this.data.data.attributes.rp.value === 0) throw new Error(`${this.name} has no Resolve Points remaining!`);
 
         let sp = this.data.data.attributes.sp,
