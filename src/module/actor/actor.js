@@ -474,14 +474,14 @@ export class ActorStarfinder extends Actor {
             restoreStaminaPoints = restingResults.restoreStaminaPoints;
         }
         
-        let spentRP = 0;
-        let regainedSP = 0;
+        let drp = 0;
+        let dsp = 0;
         if (restoreStaminaPoints && canRestoreStaminaPoints) {
-            spentRP = 1;
-            let reducedRp = Math.max(rp.value - spentRP, 0);
-            regainedSP = Math.min(sp.max - sp.value, sp.max);
+            drp = 1;
+            let updatedRP = Math.max(rp.value - drp, 0);
+            dsp = Math.min(sp.max - sp.value, sp.max);
             
-            this.update({ "data.attributes.sp.value": sp.max, "data.attributes.rp.value": reducedRp });
+            this.update({ "data.attributes.sp.value": sp.max, "data.attributes.rp.value": updatedRP });
         }
 
         const updateData = {};
@@ -505,8 +505,8 @@ export class ActorStarfinder extends Actor {
 
         if (chat) {
             let msg = game.i18n.format("STARFINDER.RestSChatMessage", { name: this.name });
-            if (spentRP > 0) {
-                msg = game.i18n.format("STARFINDER.RestSChatMessageRestored", { name: this.name, spentRP: spentRP, regainedSP: regainedSP });
+            if (drp > 0) {
+                msg = game.i18n.format("STARFINDER.RestSChatMessageRestored", { name: this.name, spentRP: drp, regainedSP: dsp });
             }
             
             ChatMessage.create({
@@ -518,8 +518,8 @@ export class ActorStarfinder extends Actor {
         }
 
         return {
-            drp: spentRP,
-            dsp: regainedSP,
+            drp: drp,
+            dsp: dsp,
             updateData: updateData,
             updateItems: updateItems
         }
