@@ -462,16 +462,27 @@ export class ActorStarfinder extends Actor {
     async shortRest({ dialog = true, chat = true } = {}) {
         const data = this.data.data;
 
-        const rp0 = data.attributes.rp.value;
-        const sp0 = data.attributes.sp.value;
+        let sp = data.attributes.sp;
+        let rp = data.attributes.rp;
+
+        let restoreStaminaPoints = false;
+        let canRestoreStaminaPoints = rp.value > 0 && sp.value < sp.max;
 
         if (dialog) {
-            const rested = await ShortRestDialog.shortRestDialog({ actor: this, canSpendRp: rp0 > 0 });
-            if (!rested) return;
+            const restingResults = await ShortRestDialog.shortRestDialog({ actor: this, canRestoreStaminaPoints: canRestoreStaminaPoints });
+            if (!restingResults.resting) return;
+            restoreStaminaPoints = restingResults.restoreStaminaPoints;
         }
-
-        const drp = data.attributes.rp.value - rp0;
-        const dsp = data.attributes.sp.value - sp0;
+        
+        let spentRP = 0;
+        let regainedSP = 0;
+        if (restoreStaminaPoints && canRestoreStaminaPoints) {
+            spentRP = 1;
+            let reducedRp = Math.max(rp.value - spentRP, 0);
+            regainedSP = Math.min(sp.max - sp.value, sp.max);
+            
+            this.update({ "data.attributes.sp.value": sp.max, "data.attributes.rp.value": reducedRp });
+        }
 
         const updateData = {};
         for (let [k, r] of Object.entries(data.resources)) {
@@ -493,7 +504,11 @@ export class ActorStarfinder extends Actor {
         await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
         if (chat) {
-            let msg = game.i18n.format("STARFINDER.RestSChatMessage", { name: this.name, drp: -drp, dsp: dsp });
+            let msg = game.i18n.format("STARFINDER.RestSChatMessage", { name: this.name });
+            if (spentRP > 0) {
+                msg = game.i18n.format("STARFINDER.RestSChatMessageRestored", { name: this.name, spentRP: spentRP, regainedSP: regainedSP });
+            }
+            
             ChatMessage.create({
                 user: game.user._id,
                 speaker: { actor: this, alias: this.name },
@@ -503,8 +518,8 @@ export class ActorStarfinder extends Actor {
         }
 
         return {
-            drp: drp,
-            dsp: dsp,
+            drp: spentRP,
+            dsp: regainedSP,
             updateData: updateData,
             updateItems: updateItems
         }
@@ -586,17 +601,5 @@ export class ActorStarfinder extends Actor {
             updateData: updateData,
             updateItems: updateItems
         }
-    }
-
-    /**
-     * Performs a short rest. A short rest allows the actor to spend 1 Resolve Point to regain all stamina points.
-     */
-    performShortRest() {
-        if (this.data.data.attributes.rp.value === 0) throw new Error(`${this.name} has no Resolve Points remaining!`);
-
-        let sp = this.data.data.attributes.sp,
-            dsp = Math.min(sp.max - sp.value, sp.max),
-            rp = Math.max(this.data.data.attributes.rp.value - 1, 0);
-        this.update({ "data.attributes.sp.value": sp.value + dsp, "data.attributes.rp.value": rp });
     }
 }
