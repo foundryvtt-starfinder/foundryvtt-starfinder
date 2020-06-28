@@ -493,7 +493,7 @@ export class ActorStarfinder extends Actor {
         await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
         if (chat) {
-            let msg = `${this.name} takes a short 10 minute rest spending ${-drp} Resolve Point to recover ${dsp} Stamina Points.`;
+            let msg = game.i18n.format("STARFINDER.RestSChatMessage", { name: this.name, drp: -drp, dsp: dsp });
             ChatMessage.create({
                 user: game.user._id,
                 speaker: { actor: this, alias: this.name },
