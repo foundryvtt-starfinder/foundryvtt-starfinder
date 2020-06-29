@@ -2,12 +2,10 @@
  * Class to open the right windows to manage all counter classes
  */
 export class CounterManagementWindows extends Dialog {
-
-    windows;
-
     constructor(dialogData={}, options={}) {
         super(dialogData, options);
         this.options.classes = ["starfinder", "dialog"];
+        this.windows = null;
     }
 
     /**
