@@ -557,6 +557,7 @@ export class ItemStarfinder extends Item {
 
     // Define Roll parts
     const parts = itemData.damage.parts.map(d => d[0]);
+    const damageTypes = itemData.damage.parts.map(d => d[1]);
     //if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
 
     // Cantrips in Starfinder don't scale :(
@@ -570,7 +571,20 @@ export class ItemStarfinder extends Item {
       item: itemData,
       mod: actorData.abilities[abl].mod
     });
-    const title = `${this.name} - Damage Roll`;
+    
+    let damageTypeTexts = '';
+    damageTypes.forEach(function(element, index, array) {
+      if (damageTypeTexts.length > 0) {
+        if (index === array.length - 1) {
+          damageTypeTexts += ', and ';
+        }
+        else {
+          damageTypeTexts += ', ';
+        }
+      }
+      damageTypeTexts += element.charAt(0).toUpperCase() + element.slice(1);
+    });
+    const title = `${this.name} - ${damageTypeTexts} Damage`;
 
     // Call the roll helper utility
     DiceStarfinder.damageRoll({
