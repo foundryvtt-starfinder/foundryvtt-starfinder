@@ -75,7 +75,7 @@ export default class CounterManagement {
                     }else if(featureCounterActivated.count > 1) {
                         //Todo need to change the design part with a rollover windows with multiple counter
                         //Todo Need to merge this part with the if == 1
-                        console.log("TODO - Counter Management Classes - More than one classe with counter tracker");
+                        //TODO - Counter Management Classes - More than one classe with counter tracker"
                     }
                 });
 

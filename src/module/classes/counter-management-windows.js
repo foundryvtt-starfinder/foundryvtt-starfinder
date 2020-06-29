@@ -104,8 +104,8 @@ export class CounterManagementWindows extends Dialog {
             const Actor = game.actors.get(dataset.actorId);
             const classesToUpdate = {};
 
-            console.log("REMOVE BUTTON");
-            console.log(Actor.data.data.counterClasses);
+            // console.log("REMOVE BUTTON");
+            // console.log(Actor.data.data.counterClasses);
             if(Actor.data.data.counterClasses.values[dataset.managementClasses].count > 0) {
                  classesToUpdate[dataset.managementClasses] = {
                     'count': Actor.data.data.counterClasses.values[dataset.managementClasses].count - 1,
