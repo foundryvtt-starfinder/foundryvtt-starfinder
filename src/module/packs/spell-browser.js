@@ -8,7 +8,7 @@ import Progress from '../progress.js';
 class ItemBrowserStarfinder extends Application {
   static get defaultOptions() {
     const options = super.defaultOptions;
-    options.classes = options.classes.concat('spell-browser-window');
+    options.classes = options.classes.concat(['starfinder', 'spell-browser-window']);
     options.title = 'Add an Item';
     options.width = 800;
     options.height = 700;
@@ -332,7 +332,7 @@ class ItemBrowserStarfinder extends Application {
 
         console.log('Starfinder System | Compendium Browser | Saving new Settings'); // write Spell Browser settings
 
-        game.settings.set('SpellBrowser', 'settings', JSON.stringify(spellBrowser.settings)); // write Feat Browser settings
+        game.settings.set('starfinder', 'spellBrowser', JSON.stringify(spellBrowser.settings)); // write Feat Browser settings
         this.settingsChanged = true;
       }
     }, {
@@ -349,7 +349,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
 
     Hooks.on('ready', e => {
       // creating game setting container
-      game.settings.register('SpellBrowser', 'settings', {
+      game.settings.register('starfinder', 'spellBrowser', {
         name: 'Spell Browser Settings',
         hint: 'Settings to exclude packs from loading',
         default: '',
@@ -360,7 +360,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
         }
       }); // load settings from container
 
-      let settings = game.settings.get('SpellBrowser', 'settings');
+      let settings = game.settings.get('starfinder', 'spellBrowser');
 
       if (settings == '') {
         // if settings are empty create the settings data
@@ -376,7 +376,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
           }
         }
 
-        game.settings.set('SpellBrowser', 'settings', JSON.stringify(settings));
+        game.settings.set('starfinder', 'spellBrowser', JSON.stringify(settings));
       } else {
         // if settings do exist, reload and apply them to make sure they conform with current compendium
         console.log('Starfinder | Spell Browser | Loading settings');
@@ -405,7 +405,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
 
   static get defaultOptions() {
     const options = super.defaultOptions;
-    options.classes = options.classes.concat('spell-browser-window');
+    options.classes = options.classes.concat(['starfinder', 'spell-browser-window']);
     options.template = 'systems/starfinder/templates/packs/spell-browser.html'; // options.template = "systems/pf2e/templates/packs/feat-browser.html";
 
     options.title = 'Add a Spell';
@@ -461,9 +461,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
     const data = {};
     data.spells = this.spells;
     data.classes = this.classes;
-    //data.times = this.times;
     data.schools = this.schools;
-    //data.traditions = CONFIG.PF2E.spellTraditions;
     return data;
   }
 
