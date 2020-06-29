@@ -26,7 +26,7 @@ import { StarfinderModifierTypes, StarfinderModifierType, StarfinderEffectType }
 import StarfinderModifier from "./module/modifiers/modifier.js";
 import { generateUUID } from "./module/utilities.js";
 import migrateWorld from './module/migration.js';
-import { CounterManagement } from "./module/classes/counter-management.js";
+import CounterManagement from "./module/classes/counter-management.js";
 
 Hooks.once('init', async function () {
     console.log(`Starfinder | Initializeing Starfinder System`);
