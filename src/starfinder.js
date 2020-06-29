@@ -62,6 +62,21 @@ Hooks.once('init', async function () {
     CONFIG.fontFamilies.push("Exo 2");
     CONFIG.defaultFontFamily = "Exo 2";
 
+    CONFIG.canvasTextStyle = new PIXI.TextStyle({
+        fontFamily: "Exo 2",
+        fontSize: 36,
+        fill: "#FFFFFF",
+        stroke: "#111111",
+        strokeTickness: 1,
+        dropShadow: true,
+        dropShadowColor: "#000000",
+        dropShadowBlur: 4,
+        dropShadowAngle: 0,
+        dropShadowDistance: 0,
+        align: "center",
+        wordWrap: false
+    });
+
     registerSystemSettings();
 
     await preloadHandlebarsTemplates();
@@ -123,23 +138,6 @@ Hooks.once("ready", () => {
             .then(_ => ui.notifications.info(game.i18n.localize("STARFINDER.MigrationSuccessfulMessage")))
             .catch(_ => ui.notifications.error(game.i18n.localize("STARFINDER.MigrationErrorMessage")));
     }
-});
-
-Hooks.on("ready", () => {
-    CONFIG.canvasTextStyle = new PIXI.TextStyle({
-        fontFamily: "Exo 2",
-        fontSize: 36,
-        fill: "#FFFFFF",
-        stroke: "#111111",
-        strokeTickness: 1,
-        dropShadow: true,
-        dropShadowColor: "#000000",
-        dropShadowBlur: 4,
-        dropShadowAngle: 0,
-        dropShadowDistance: 0,
-        align: "center",
-        wordWrap: false
-    });
 });
 
 Hooks.on("canvasInit", function () {
