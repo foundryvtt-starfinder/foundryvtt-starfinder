@@ -1472,7 +1472,7 @@ STARFINDER.characterFlags = {
         hint: "You can enabled the management of attenument inside the combat tracker.",
         section: "STARFINDER.CharacterFlagsSectionClassFeatures",
         type: Boolean
-    },
+    }/*, //Disable temporary the time than Vanguard and Qi Soldier mechanical system be ready
     "vanguardEntropy": {
         name: "Vanguard's Entropy Points",
         hint: "You can enabled the management of Entropy Points inside the combat tracker.",
@@ -1484,7 +1484,7 @@ STARFINDER.characterFlags = {
         hint: "You can enabled the management of Solider Ki Point inside the combat tracker.",
         section: "STARFINDER.CharacterFlagsSectionClassFeatures",
         type: Boolean
-    }
+    }*/
 };
 
 /**

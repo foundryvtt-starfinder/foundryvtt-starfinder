@@ -13,12 +13,13 @@ export class ShortRestDialog extends Dialog {
          */
         this.actor = actor;
     }
-
+    
     activateListeners(html) {
-        let btn = html.find('#spend-rp');
-        if (this.data.canSpendRp) btn.click(this._onSpendRp.bind(this));
-        else btn[0].disabled = true;
         super.activateListeners(html);
+
+        let restoreStaminaCheckbox = html.find('#restoreStaminaCheckbox');
+        restoreStaminaCheckbox.disabled = this.data.canRestoreStaminaPoints;
+        restoreStaminaCheckbox.click(this._onRestoreStaminaPoints.bind(this));
     }
 
     /**
@@ -26,32 +27,31 @@ export class ShortRestDialog extends Dialog {
      * @param {Event} event The triggering click event
      * @private
      */
-    async _onSpendRp(event) {
-        event.preventDefault();
-        const btn = event.currentTarget;
-        await this.actor.spendRp();
-        if (this.actor.data.data.attributes.rp.value === 0) btn.disabled = true;
+    async _onRestoreStaminaPoints(event) {
+        const restoreStaminaCheckbox = event.currentTarget;
+        ShortRestDialog.restoreStaminaPoints = restoreStaminaCheckbox.checked;
     }
 
-    static async shortRestDialog({actor, canSpendRp=true}={}) {
+    static async shortRestDialog({actor, canRestoreStaminaPoints=true}={}) {
+        ShortRestDialog.restoreStaminaPoints = false;
         const html = await renderTemplate("systems/starfinder/templates/apps/short-rest.html");
         return new Promise(resolve => {
             const dlg = new this(actor, {
-                title: "Short 10 minute Rest",
+                title: game.i18n.format("STARFINDER.RestSTitle"),
                 content: html,
                 buttons: {
                     rest: {
                         icon: '<i class="fas fa-bed"></i>',
-                        label: "Rest",
-                        callback: () => resolve(true)
+                        label: game.i18n.format("STARFINDER.RestButton"),
+                        callback: () => resolve({resting: true, restoreStaminaPoints: this.restoreStaminaPoints})
                     },
                     cancel: {
                         icon: '<i class="fas fa-times"></i>',
-                        label: "Cancel",
-                        callback: () => resolve(false)
+                        label: game.i18n.format("STARFINDER.RestCancel"),
+                        callback: () => resolve({resting: false, restoreStaminaPoints: false})
                     }
                 },
-                canSpendRp: canSpendRp
+                canRestoreStaminaPoints: canRestoreStaminaPoints
             });
             dlg.render(true);
         });
