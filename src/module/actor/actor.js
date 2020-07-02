@@ -380,9 +380,11 @@ export class ActorSFRPG extends Actor {
 
         return DiceSFRPG.d20Roll({
             event: options.event,
+            actor: this,
             parts: ["@mod"],
             data: { mod: abl.mod },
-            title: `${label} Ability Check`,
+            flavor: `${label}`,
+            title: `Ability Check`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
@@ -399,19 +401,23 @@ export class ActorSFRPG extends Actor {
 
         return DiceSFRPG.d20Roll({
             event: options.event,
+            actor: this,
             parts: ["@mod"],
             data: { mod: save.bonus },
-            title: `${label} Save`,
+            title: `Save`,
+            flavor: `${label}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
 
     rollSkillCheck(skillId, skill, options = {}) {
         return DiceSFRPG.d20Roll({
+            actor: this,
             event: options.event,
             parts: ["@mod"],
             data: { mod: skill.mod },
-            title: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} Skill Check`,
+            title: 'Skill Check',
+            flavor: `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
