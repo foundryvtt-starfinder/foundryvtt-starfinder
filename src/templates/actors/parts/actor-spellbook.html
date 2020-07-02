@@ -1,9 +1,9 @@
 <div class="inventory-filters spellbook-filters">
     <div class="form-group spellcasting-ability">
-        <label><h3>{{localize "STARFINDER.SpellBookSpellCastingAbility"}} <a class="item-control spell-browse" title="Spellbook browse" data-type="spell" data-level="0" data-location="{{entry._id}}"> - <i class="fas fa-search"></i>Search Spell</a></h3></label>
+        <label><h3>{{localize "SFRPG.SpellBookSpellCastingAbility"}} <a class="item-control spell-browse" title="Spellbook browse" data-type="spell" data-level="0" data-location="{{entry._id}}"> - <i class="fas fa-search"></i>Search Spell</a></h3></label>
         <select name="data.attributes.spellcasting" data-type="String">
             {{#select data.attributes.spellcasting}}
-            <option value="">{{localize "STARFINDER.SpellBookAttributesNone"}}</option>
+            <option value="">{{localize "SFRPG.SpellBookAttributesNone"}}</option>
             {{#each data.abilities as |abl a|}}
             <option value="{{a}}">{{abl.label}}</option>
             {{/each}}
@@ -70,12 +70,12 @@
 {{else}}
     {{#if owner}}
     {{#if filters.spellbook.size}}
-    <li class="item flexrow"><p class="notes">{{localize "STARFINDER.SpellBookNoSpells"}}</p></li>
+    <li class="item flexrow"><p class="notes">{{localize "SFRPG.SpellBookNoSpells"}}</p></li>
     {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty">
         <div class="item-controls">
             <a class="item-control item-create" title="Create Spell" data-type="spell"
-               data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "STARFINDER.SpellBookAddSpells"}}</a>
+               data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "SFRPG.SpellBookAddSpells"}}</a>
         </div>
     {{/if}}
     {{/if}}

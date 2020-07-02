@@ -4,26 +4,26 @@
 
         <div class="header-details flexrow">
             <div class="header-background flexrow">
-                <h1 class="charname" data-tippy-content="{{localize "STARFINDER.ShipNameLabel"}}">
-                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "STARFINDER.ShipNameLabel"}}" />
+                <h1 class="charname" data-tippy-content="{{localize "SFRPG.ShipNameLabel"}}">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SFRPG.ShipNameLabel"}}" />
                 </h1>
 
-                <div class="charlevel"  data-tippy-content="{{localize "STARFINDER.ShipTierLabel"}}<br>@details.tier" >
+                <div class="charlevel"  data-tippy-content="{{localize "SFRPG.ShipTierLabel"}}<br>@details.tier" >
                     <div class="level noxp">
-                        <label>{{localize "STARFINDER.ShipTierLabel"}} </label>
+                        <label>{{localize "SFRPG.ShipTierLabel"}} </label>
                         <input name="data.details.tier" type="text" value="{{labels.tier}}" placeholder="1" />
                     </div>
                 </div>
             </div>
 
             <ul class="summary">
-                <li data-tippy-content="{{localize "STARFINDER.ShipModelLabel"}}<br>@details.model">
-                    <input type="text" name="data.details.model" value="{{data.details.model}}" placeholder="{{localize "STARFINDER.ShipModelLabel"}}" />
+                <li data-tippy-content="{{localize "SFRPG.ShipModelLabel"}}<br>@details.model">
+                    <input type="text" name="data.details.model" value="{{data.details.model}}" placeholder="{{localize "SFRPG.ShipModelLabel"}}" />
                 </li>
-                <li data-tippy-content="{{localize "STARFINDER.ShipFrameLabel"}}<br>@details.frame">
-                    <input type="text" name="data.details.frame" value="{{data.details.frame}}" placeholder="{{localize "STARFINDER.ShipFrameLabel"}}" />
+                <li data-tippy-content="{{localize "SFRPG.ShipFrameLabel"}}<br>@details.frame">
+                    <input type="text" name="data.details.frame" value="{{data.details.frame}}" placeholder="{{localize "SFRPG.ShipFrameLabel"}}" />
                 </li>
-                <li class="flexrow" data-tippy-content="{{ localize "STARFINDER.Size"}}<br>@details.size">
+                <li class="flexrow" data-tippy-content="{{ localize "SFRPG.Size"}}<br>@details.size">
                     <select name="data.details.size">
                         {{#select data.details.size}}
                         {{#each config.starshipSizes as |size s|}}
@@ -35,8 +35,8 @@
             </ul>
 
             <ul class="attributes flexrow">
-                <li class="attribute health" data-tippy-content="{{ localize "STARFINDER.HullPoints" }}<br>@attributes.hp.value<br>@attributes.hp.max">
-                    <h4 class="attribute-name box-title">{{ localize "STARFINDER.HullPoints" }}</h4>
+                <li class="attribute health" data-tippy-content="{{ localize "SFRPG.HullPoints" }}<br>@attributes.hp.value<br>@attributes.hp.max">
+                    <h4 class="attribute-name box-title">{{ localize "SFRPG.HullPoints" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
                             data-dtype="Number" placeholder="10" />
@@ -72,8 +72,8 @@
                             placeholder="+Misc" />
                     </footer>
                 </li>
-                <li class="attribute" data-tippy-content="{{localize "STARFINDER.Speed"}}<br>@attributes.speed">
-                    <h4 class="attribute-name box-title">{{ localize "STARFINDER.Speed" }}</h4>
+                <li class="attribute" data-tippy-content="{{localize "SFRPG.Speed"}}<br>@attributes.speed">
+                    <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
                     <div class="attribute-value">
                         <span>{{data.attributes.speed}}</span>
                     </div>
@@ -93,16 +93,16 @@
     </header>
 
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+        <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
         <a class="item" data-tab="weapons">Weapons</a>
         <a class="item" data-tab="crew">Crew</a>
-        <a class="item" data-tab="notes">{{ localize "STARFINDER.Notes" }}</a>
+        <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
     </nav>
 
     <section class="sheet-body">
         <div class="tab details" data-group="primary" data-tab="details">
             <div class="flexcol">
-                <h3 class="form-header">{{ localize "STARFINDER.Attributes"}}</h3>
+                <h3 class="form-header">{{ localize "SFRPG.Attributes"}}</h3>
                 <ul class="attributes flexrow">
                     <li class="attribute" data-tippy-content="Critical Threshold<br>@attributes.ct.value">
                         <h4 class="attribute-name box-title">CT</h4>

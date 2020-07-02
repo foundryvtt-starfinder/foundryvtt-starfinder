@@ -1,39 +1,39 @@
 export const registerSystemSettings = function () {
-    game.settings.register("starfinder", "diagonalMovement", {
-        name: "STARFINDER.StarfinderDiagN",
-        hint: "STARFINDER.StarfinderDiagL",
+    game.settings.register("sfrpg", "diagonalMovement", {
+        name: "SFRPG.SFRPGDiagN",
+        hint: "SFRPG.SFRPGDiagL",
         scope: "world",
         config: true,
         default: "5105",
         type: String,
         choices: {
-            "5105": "STARFINDER.StarfinderDiagCore",
-            "555": "STARFINDER.StarfinderOptional"
+            "5105": "SFRPG.SFRPGDiagCore",
+            "555": "SFRPG.SFRPGOptional"
         },
         onChange: rule => canvas.grid.diagonalRule = rule
     });
 
-    game.settings.register("starfinder", "disableExperienceTracking", {
-        name: "STARFINDER.StarfinderNoExpN",
-        hint: "STARFINDER.StarfinderNoExpL",
+    game.settings.register("sfrpg", "disableExperienceTracking", {
+        name: "SFRPG.SFRPGNoExpN",
+        hint: "SFRPG.SFRPGNoExpL",
         scope: "world",
         config: true,
         default: false,
         type: Boolean
     });
 
-    game.settings.register("starfinder", "useAdvantageDisadvantage", {
-        name: "STARFINDER.StarfinderUseAdvantageDisadvantage",
-        hint: "STARFINDER.StarfinderUseAdvantageDisadvantageHint",
+    game.settings.register("sfrpg", "useAdvantageDisadvantage", {
+        name: "SFRPG.SFRPGUseAdvantageDisadvantage",
+        hint: "SFRPG.SFRPGUseAdvantageDisadvantageHint",
         scope: "world",
         config: true,
         default: false,
         type: Boolean
     });
 
-    game.settings.register("starfinder", "autoCollapseItemCards", {
-        name: "STARFINDER.SettingsAutoCollapseCardName",
-        hint: "STARFINDER.SettingsAutoCollapseCardHint",
+    game.settings.register("sfrpg", "autoCollapseItemCards", {
+        name: "SFRPG.SettingsAutoCollapseCardName",
+        hint: "SFRPG.SettingsAutoCollapseCardHint",
         scope: "client",
         config: true,
         default: false,
@@ -43,9 +43,9 @@ export const registerSystemSettings = function () {
         }
     });
 
-    game.settings.register("starfinder", "worldSchemaVersion", {
-        name: "STARFINDER.SettingsWorldSchemaVersionName",
-        hint: "STARFINDER.SettingsWorldSchemaVersionHint",
+    game.settings.register("sfrpg", "worldSchemaVersion", {
+        name: "SFRPG.SettingsWorldSchemaVersionName",
+        hint: "SFRPG.SettingsWorldSchemaVersionHint",
         scope: "world",
         config: false,
         default: 0,

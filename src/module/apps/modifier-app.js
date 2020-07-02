@@ -1,4 +1,4 @@
-import { StarfinderModifierTypes, StarfinderModifierType, StarfinderEffectType } from "../modifiers/types.js";
+import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "../modifiers/types.js";
 
 /**
  * Application that is used to edit a dynamic modifier.
@@ -7,7 +7,7 @@ import { StarfinderModifierTypes, StarfinderModifierType, StarfinderEffectType }
  * @param {Object} acotr    The actor that the modifier belongs to.
  * @param {Object} options  Any options that modify the rendering of the sheet.
  */
-export default class StarfinderModifierApplication extends FormApplication {
+export default class SFRPGModifierApplication extends FormApplication {
     constructor(modifier, actor, options={}) {
         super(modifier, options);
 
@@ -19,8 +19,8 @@ export default class StarfinderModifierApplication extends FormApplication {
 
         return mergeObject(options, {
             id: 'modifier-app',
-            classes: ['starfinder', 'modifier-app'],
-            template: "systems/starfinder/templates/apps/modifier-app.html",
+            classes: ['sfrpg', 'modifier-app'],
+            template: "systems/sfrpg/templates/apps/modifier-app.html",
             width: 400,
             height: 'auto',
             closeOnSubmit: true
@@ -29,7 +29,7 @@ export default class StarfinderModifierApplication extends FormApplication {
 
     /** @override */
     get title() {
-        return game.i18n.format("STARFINDER.ModifierAppTitle", {name: this.modifier.name});
+        return game.i18n.format("SFRPG.ModifierAppTitle", {name: this.modifier.name});
     }
 
     /**
@@ -50,7 +50,7 @@ export default class StarfinderModifierApplication extends FormApplication {
             options: this.options,
             editable: this.isEditable,
             cssClass: this.actor.owner ? "editable": "locked",
-            config: CONFIG.STARFINDER
+            config: CONFIG.SFRPG
         };
 
         return data;
@@ -69,41 +69,41 @@ export default class StarfinderModifierApplication extends FormApplication {
             const effectType = current.val();
 
             switch (effectType) {
-                case StarfinderEffectType.ABILITY_SKILLS:
+                case SFRPGEffectType.ABILITY_SKILLS:
                     target.prop('disabled', false);
                     target.find('option').remove();
-                    for (const ability of Object.entries(CONFIG.STARFINDER.abilities)) {
+                    for (const ability of Object.entries(CONFIG.SFRPG.abilities)) {
                         target.append(`<option value="${ability[0]}">${ability[1]}</option>`);
                     }
                     break;
-                case StarfinderEffectType.AC:
+                case SFRPGEffectType.AC:
                     target.prop('disabled', false);
                     target.find('option').remove();
-                    for (const armorClass of Object.entries(CONFIG.STARFINDER.modifierArmorClassAffectedValues)) {
+                    for (const armorClass of Object.entries(CONFIG.SFRPG.modifierArmorClassAffectedValues)) {
                         target.append(`<option value="${armorClass[0]}">${armorClass[1]}</option>`)
                     }
                     break;
-                case StarfinderEffectType.ACP:
+                case SFRPGEffectType.ACP:
                     target.prop('disabled', false);
                     target.find('option').remove();
-                    for (const acp of Object.entries(CONFIG.STARFINDER.acpEffectingArmorType)) {
+                    for (const acp of Object.entries(CONFIG.SFRPG.acpEffectingArmorType)) {
                         target.append(`<option value="${acp[0]}">${acp[1]}</option>`);
                     }
                     break;
-                case StarfinderEffectType.SAVE:
+                case SFRPGEffectType.SAVE:
                     target.prop('disabled', false);
                     target.find('option').remove();
 
-                    target.append(`<option value="highest">${game.i18n.localize("STARFINDER.ModifierSaveHighest")}</option>`);
-                    target.append(`<option value="lowest">${game.i18n.localize("STARFINDER.ModifierSaveLowest")}</option>`);
-                    for (const saves of Object.entries(CONFIG.STARFINDER.saves)) {
+                    target.append(`<option value="highest">${game.i18n.localize("SFRPG.ModifierSaveHighest")}</option>`);
+                    target.append(`<option value="lowest">${game.i18n.localize("SFRPG.ModifierSaveLowest")}</option>`);
+                    for (const saves of Object.entries(CONFIG.SFRPG.saves)) {
                         target.append(`<option value="${saves[0]}">${saves[1]}</option>`);
                     }
                     break;
-                case StarfinderEffectType.SKILL:
+                case SFRPGEffectType.SKILL:
                     target.prop('disabled', false);
                     target.find('option').remove();
-                    for (const skills of Object.entries(CONFIG.STARFINDER.skills)) {
+                    for (const skills of Object.entries(CONFIG.SFRPG.skills)) {
                         target.append(`<option value="${skills[0]}">${skills[1]}</option>`);
                     }
                     break;
@@ -124,19 +124,19 @@ export default class StarfinderModifierApplication extends FormApplication {
         const valueAffectedElement = this.element.find('.modifier-value-affected select');
         
         switch (effectType) {
-            case StarfinderEffectType.ABILITY_SKILLS:
+            case SFRPGEffectType.ABILITY_SKILLS:
                 valueAffectedElement.prop('disabled', false);
                 break;
-            case StarfinderEffectType.AC:
+            case SFRPGEffectType.AC:
                 valueAffectedElement.prop('disabled', false);
                 break;
-            case StarfinderEffectType.ACP:
+            case SFRPGEffectType.ACP:
                 valueAffectedElement.prop('disabled', false);
                 break;
-            case StarfinderEffectType.SAVE:
+            case SFRPGEffectType.SAVE:
                 valueAffectedElement.prop('disabled', false);
                 break;
-            case StarfinderEffectType.SKILL:
+            case SFRPGEffectType.SKILL:
                 valueAffectedElement.prop('disabled', false);
                 break;
             default:
@@ -163,7 +163,7 @@ export default class StarfinderModifierApplication extends FormApplication {
         const modifiers = duplicate(this.actor.data.data.modifiers);
         const modifier = modifiers.find(mod => mod._id === this.modifier._id);
 
-        if (formData['modifierType'] === StarfinderModifierType.CONSTANT) {
+        if (formData['modifierType'] === SFRPGModifierType.CONSTANT) {
             formData['modifier'] = parseInt(formData['modifier']);
 
             if (isNaN(formData['modifier'])) formData['modifier'] = 0;

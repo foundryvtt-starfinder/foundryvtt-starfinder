@@ -1,366 +1,363 @@
-import StarfinderModifier from "./modifiers/modifier.js";
-import { StarfinderModifierType, StarfinderEffectType, StarfinderModifierTypes } from "./modifiers/types.js";
-
-// Namespace Starfinder Configuration Values
-export const STARFINDER = {};
+// Namespace SFRPG Configuration Values
+export const SFRPG = {};
 
 /**
  * The set of ability scores used with the system
  * @type {Object}
  */
-STARFINDER.abilities = {
-    "str": "STARFINDER.AbilityStr",
-    "dex": "STARFINDER.AbilityDex",
-    "con": "STARFINDER.AbilityCon",
-    "int": "STARFINDER.AbilityInt",
-    "wis": "STARFINDER.AbilityWis",
-    "cha": "STARFINDER.AbilityCha"
+SFRPG.abilities = {
+    "str": "SFRPG.AbilityStr",
+    "dex": "SFRPG.AbilityDex",
+    "con": "SFRPG.AbilityCon",
+    "int": "SFRPG.AbilityInt",
+    "wis": "SFRPG.AbilityWis",
+    "cha": "SFRPG.AbilityCha"
 };
 
-STARFINDER.acpEffectingArmorType = {
-    "acp-all": "STARFINDER.ModifierACPEffectingArmorTypeAll",
-    "acp-light": "STARFINDER.ModifierACPEffectingArmorTypeLight",
-    "acp-heavy": "STARFINDER.ModifierACPEffectingArmorTypeHeavy",
-    "acp-power": "STARFINDER.ModifierACPEffectingArmorTypePower"
+SFRPG.acpEffectingArmorType = {
+    "acp-all": "SFRPG.ModifierACPEffectingArmorTypeAll",
+    "acp-light": "SFRPG.ModifierACPEffectingArmorTypeLight",
+    "acp-heavy": "SFRPG.ModifierACPEffectingArmorTypeHeavy",
+    "acp-power": "SFRPG.ModifierACPEffectingArmorTypePower"
 };
 
 /**
  * The set of saves used with the system
  * @type {Object}
  */
-STARFINDER.saves = {
-    "fort": "STARFINDER.FortitudeSave",
-    "reflex": "STARFINDER.ReflexSave",
-    "will": "STARFINDER.WillSave"
+SFRPG.saves = {
+    "fort": "SFRPG.FortitudeSave",
+    "reflex": "SFRPG.ReflexSave",
+    "will": "SFRPG.WillSave"
 };
 
-STARFINDER.saveDescriptors = {
-    "negate": "STARFINDER.SaveDescriptorNegates",
-    "partial": "STARFINDER.SaveDescriptorPartial",
-    "half": "STARFINDER.SaveDescriptorHalf",
-    "disbelieve": "STARFINDER.SaveDescriptorDisbelieve",
-    "harmless": "STARFINDER.SaveDescriptorHarmless",
-    "object": "STARFINDER.SaveDescriptorObject"
+SFRPG.saveDescriptors = {
+    "negate": "SFRPG.SaveDescriptorNegates",
+    "partial": "SFRPG.SaveDescriptorPartial",
+    "half": "SFRPG.SaveDescriptorHalf",
+    "disbelieve": "SFRPG.SaveDescriptorDisbelieve",
+    "harmless": "SFRPG.SaveDescriptorHarmless",
+    "object": "SFRPG.SaveDescriptorObject"
 };
 
 /**
  * Character alignment options
  * @type {Object}
  */
-STARFINDER.alignments = {
-    "lg": "STARFINDER.AlignmentLG",
-    "ng": "STARFINDER.AlignmentNG",
-    "cg": "STARFINDER.AlignmentCG",
-    "ln": "STARFINDER.AlignmentLN",
-    "tn": "STARFINDER.AlignmentTN",
-    "cn": "STARFINDER.AlignmentCN",
-    "le": "STARFINDER.AlignmentLE",
-    "ne": "STARFINDER.AlignmentNE",
-    "ce": "STARFINDER.AlignmentCE"
+SFRPG.alignments = {
+    "lg": "SFRPG.AlignmentLG",
+    "ng": "SFRPG.AlignmentNG",
+    "cg": "SFRPG.AlignmentCG",
+    "ln": "SFRPG.AlignmentLN",
+    "tn": "SFRPG.AlignmentTN",
+    "cn": "SFRPG.AlignmentCN",
+    "le": "SFRPG.AlignmentLE",
+    "ne": "SFRPG.AlignmentNE",
+    "ce": "SFRPG.AlignmentCE"
 };
 
 /**
  * The set of armor proficiencies which a character may have
  * @type {Object}
  */
-STARFINDER.armorProficiencies = {
-    "lgt": "STARFINDER.ArmorProficiencyLight",
-    "hvy": "STARFINDER.ArmorProficiencyHeavy",
-    "pwr": "STARFINDER.ArmorProficiencyPower",
-    "shl": "STARFINDER.ArmorProficiencyShields"
+SFRPG.armorProficiencies = {
+    "lgt": "SFRPG.ArmorProficiencyLight",
+    "hvy": "SFRPG.ArmorProficiencyHeavy",
+    "pwr": "SFRPG.ArmorProficiencyPower",
+    "shl": "SFRPG.ArmorProficiencyShields"
 };
 
 /**
  * The set of weapons proficiencies which a character may have
  * @type {Object}
  */
-STARFINDER.weaponProficiencies = {
-    "bmelee": "STARFINDER.WeaponProficiencyBasicMelee",
-    "amelee": "STARFINDER.WeaponProficiencyAdvMelee",
-    "sarms": "STARFINDER.WeaponProficiencySmallArms",
-    "larms": "STARFINDER.WeaponProficiencyLongArms",
-    "hweap": "STARFINDER.WeaponProficiencyHeavy",
-    "snipe": "STARFINDER.WeaponProficiencySniper",
-    "gren": "STARFINDER.WeaponProficiencyGrenades",
-    "spec": "STARFINDER.WeaponProficiencySpecial"
+SFRPG.weaponProficiencies = {
+    "bmelee": "SFRPG.WeaponProficiencyBasicMelee",
+    "amelee": "SFRPG.WeaponProficiencyAdvMelee",
+    "sarms": "SFRPG.WeaponProficiencySmallArms",
+    "larms": "SFRPG.WeaponProficiencyLongArms",
+    "hweap": "SFRPG.WeaponProficiencyHeavy",
+    "snipe": "SFRPG.WeaponProficiencySniper",
+    "gren": "SFRPG.WeaponProficiencyGrenades",
+    "spec": "SFRPG.WeaponProficiencySpecial"
 };
 
 /**
  * This describes the ways that an ability can be cativated
  * @type {Object}
  */
-STARFINDER.abilityActivationTypes = {
-    "none": "STARFINDER.AbilityActivationTypesNone",
-    "action": "STARFINDER.AbilityActivationTypesStandard",
-    "move": "STARFINDER.AbilityActivationTypesMove",
-    "swift": "STARFINDER.AbilityActivationTypesSwift",
-    "full": "STARFINDER.AbilityActivationTypesFull",
-    "reaction": "STARFINDER.AbilityActivationTypesReaction",
-    "other": "STARFINDER.AbilityActivationTypesOther",
-    "day": "STARFINDER.AbilityActivationTypesDay",
-    "hour": "STARFINDER.AbilityActivationTypesHour",
-    "min": "STARFINDER.AbilityActivationTypesMinute",
-    "special": "STARFINDER.AbilityActivationTypesSpecial"
+SFRPG.abilityActivationTypes = {
+    "none": "SFRPG.AbilityActivationTypesNone",
+    "action": "SFRPG.AbilityActivationTypesStandard",
+    "move": "SFRPG.AbilityActivationTypesMove",
+    "swift": "SFRPG.AbilityActivationTypesSwift",
+    "full": "SFRPG.AbilityActivationTypesFull",
+    "reaction": "SFRPG.AbilityActivationTypesReaction",
+    "other": "SFRPG.AbilityActivationTypesOther",
+    "day": "SFRPG.AbilityActivationTypesDay",
+    "hour": "SFRPG.AbilityActivationTypesHour",
+    "min": "SFRPG.AbilityActivationTypesMinute",
+    "special": "SFRPG.AbilityActivationTypesSpecial"
 };
 
-STARFINDER.skillProficiencyLevels = {
+SFRPG.skillProficiencyLevels = {
     0: "",
-    3: "STARFINDER.SkillProficiencyLevelClassSkill"
+    3: "SFRPG.SkillProficiencyLevelClassSkill"
 };
 
 /**
- * The valid currency types in Starfinder
+ * The valid currency types in SFRPG
  * @type {Object}
  */
-STARFINDER.currencies = {
-    "credit": "STARFINDER.Credits",
-    "upb": "STARFINDER.UPBs"
+SFRPG.currencies = {
+    "credit": "SFRPG.Credits",
+    "upb": "SFRPG.UPBs"
 };
 
 // Damage Types
-STARFINDER.energyDamageTypes = {
-    "acid": "STARFINDER.DamageTypesAcid",
-    "cold": "STARFINDER.DamageTypesCold",
-    "electricity": "STARFINDER.DamageTypesElectricity",
-    "fire": "STARFINDER.DamageTypesFire",
-    "sonic": "STARFINDER.DamageTypesSonic"
+SFRPG.energyDamageTypes = {
+    "acid": "SFRPG.DamageTypesAcid",
+    "cold": "SFRPG.DamageTypesCold",
+    "electricity": "SFRPG.DamageTypesElectricity",
+    "fire": "SFRPG.DamageTypesFire",
+    "sonic": "SFRPG.DamageTypesSonic"
 };
 
-STARFINDER.kineticDamageTypes = {
-    "bludgeoning": "STARFINDER.DamageTypesBludgeoning",
-    "piercing": "STARFINDER.DamageTypesPiercing",
-    "slashing": "STARFINDER.DamageTypesSlashing"
+SFRPG.kineticDamageTypes = {
+    "bludgeoning": "SFRPG.DamageTypesBludgeoning",
+    "piercing": "SFRPG.DamageTypesPiercing",
+    "slashing": "SFRPG.DamageTypesSlashing"
 };
 
-STARFINDER.damageTypes = {
-    ...STARFINDER.energyDamageTypes,
-    ...STARFINDER.kineticDamageTypes
+SFRPG.damageTypes = {
+    ...SFRPG.energyDamageTypes,
+    ...SFRPG.kineticDamageTypes
 };
 
-STARFINDER.weaponDamageTypes = {
-    "acid": "STARFINDER.DamageTypesAcid",
-    "acid+bludgeoning": "STARFINDER.DamageTypesAcidAndBludgeoning",
-    "acid+fire": "STARFINDER.DamageTypesAcidAndFire",
-    "acid+piercing": "STARFINDER.DamageTypesAcidAndPiercing",
-    "acid+slashing": "STARFINDER.DamageTypesAcidAndSlashing",
-    "acid|fire": "STARFINDER.DamageTypesAcidOrFire",
-    "acid|slashing": "STARFINDER.DamageTypesAcidOrSlashing",    
-    "cold": "STARFINDER.DamageTypesCold",
-    "cold+piercing": "STARFINDER.DamageTypesColdAndPiercing",
-    "cold|fire": "STARFINDER.DamageTypesColdOrFire",
-    "electricity": "STARFINDER.DamageTypesElectricity",
-    "electricity+fire": "STARFINDER.DamageTypesElectricityAndFire",
-    "electricity+piercing": "STARFINDER.DamageTypesElectricityAndPiercing",
-    "electricity+slashing": "STARFINDER.DamageTypesElectricityAndSlashing",
-    "fire": "STARFINDER.DamageTypesFire",
-    "fire+piercing": "STARFINDER.DamageTypesFireAndPiercing",
-    "fire+slashing": "STARFINDER.DamageTypesFireAndSlashing",
-    "fire|slashing": "STARFINDER.DamageTypesFireOrSlashing",
-    "fire|sonic": "STARFINDER.DamageTypesFireOrSonic",
-    "sonic": "STARFINDER.DamageTypesSonic",
-    "bludgeoning": "STARFINDER.DamageTypesBludgeoning",
-    "bludgeoning+cold": "STARFINDER.DamageTypesBludgeoningAndCold",
-    "bludgeoning+electricity": "STARFINDER.DamageTypesBludgeoningAndElectricity",
-    "bludgeoning+fire": "STARFINDER.DamageTypesBludgeoningAndFire",
-    "bludgeoning+sonic": "STARFINDER.DamageTypesBludgeoningAndSonic",
-    "piercing": "STARFINDER.DamageTypesPiercing",
-    "piercing+sonic": "STARFINDER.DamageTypesPiercingAndSonic",
-    "slashing": "STARFINDER.DamageTypesSlashing",
-    "slashing+piercing": "STARFINDER.DamageTypesSlashingAndPiercing",
-    "slashing+sonic": "STARFINDER.DamageTypesSlashingAndSonic",
+SFRPG.weaponDamageTypes = {
+    "acid": "SFRPG.DamageTypesAcid",
+    "acid+bludgeoning": "SFRPG.DamageTypesAcidAndBludgeoning",
+    "acid+fire": "SFRPG.DamageTypesAcidAndFire",
+    "acid+piercing": "SFRPG.DamageTypesAcidAndPiercing",
+    "acid+slashing": "SFRPG.DamageTypesAcidAndSlashing",
+    "acid|fire": "SFRPG.DamageTypesAcidOrFire",
+    "acid|slashing": "SFRPG.DamageTypesAcidOrSlashing",    
+    "cold": "SFRPG.DamageTypesCold",
+    "cold+piercing": "SFRPG.DamageTypesColdAndPiercing",
+    "cold|fire": "SFRPG.DamageTypesColdOrFire",
+    "electricity": "SFRPG.DamageTypesElectricity",
+    "electricity+fire": "SFRPG.DamageTypesElectricityAndFire",
+    "electricity+piercing": "SFRPG.DamageTypesElectricityAndPiercing",
+    "electricity+slashing": "SFRPG.DamageTypesElectricityAndSlashing",
+    "fire": "SFRPG.DamageTypesFire",
+    "fire+piercing": "SFRPG.DamageTypesFireAndPiercing",
+    "fire+slashing": "SFRPG.DamageTypesFireAndSlashing",
+    "fire|slashing": "SFRPG.DamageTypesFireOrSlashing",
+    "fire|sonic": "SFRPG.DamageTypesFireOrSonic",
+    "sonic": "SFRPG.DamageTypesSonic",
+    "bludgeoning": "SFRPG.DamageTypesBludgeoning",
+    "bludgeoning+cold": "SFRPG.DamageTypesBludgeoningAndCold",
+    "bludgeoning+electricity": "SFRPG.DamageTypesBludgeoningAndElectricity",
+    "bludgeoning+fire": "SFRPG.DamageTypesBludgeoningAndFire",
+    "bludgeoning+sonic": "SFRPG.DamageTypesBludgeoningAndSonic",
+    "piercing": "SFRPG.DamageTypesPiercing",
+    "piercing+sonic": "SFRPG.DamageTypesPiercingAndSonic",
+    "slashing": "SFRPG.DamageTypesSlashing",
+    "slashing+piercing": "SFRPG.DamageTypesSlashingAndPiercing",
+    "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic",
 };
 
-STARFINDER.distanceUnits = {
-    "none": "STARFINDER.None",
-    "personal": "STARFINDER.Personal",
-    "touch": "STARFINDER.Touch",
-    "close": "STARFINDER.Close",
-    "medium": "STARFINDER.Medium",
-    "long": "STARFINDER.Long",
-    "planetary": "STARFINDER.Planetary",
-    "system": "STARFINDER.SystemWide",
-    "plane": "STARFINDER.Plane",
-    "unlimited": "STARFINDER.Unlimited",
-    "ft": "STARFINDER.Ft",
-    "mi": "STARFINDER.Mi",
-    "spec": "STARFINDER.Special",
-    "any": "STARFINDER.DistAny"
+SFRPG.distanceUnits = {
+    "none": "SFRPG.None",
+    "personal": "SFRPG.Personal",
+    "touch": "SFRPG.Touch",
+    "close": "SFRPG.Close",
+    "medium": "SFRPG.Medium",
+    "long": "SFRPG.Long",
+    "planetary": "SFRPG.Planetary",
+    "system": "SFRPG.SystemWide",
+    "plane": "SFRPG.Plane",
+    "unlimited": "SFRPG.Unlimited",
+    "ft": "SFRPG.Ft",
+    "mi": "SFRPG.Mi",
+    "spec": "SFRPG.Special",
+    "any": "SFRPG.DistAny"
 };
 
-STARFINDER.targetTypes = {};
+SFRPG.targetTypes = {};
 
-STARFINDER.timePeriods = {};
+SFRPG.timePeriods = {};
 
 // Healing types
-STARFINDER.healingTypes = {
-    "healing": "STARFINDER.HealingTypesHealing"
+SFRPG.healingTypes = {
+    "healing": "SFRPG.HealingTypesHealing"
 };
 
-STARFINDER.spellPreparationModes = {
-    "always": "STARFINDER.SpellPreparationModesAlways",
-    "innate": "STARFINDER.SpellPreparationModesInnate"
+SFRPG.spellPreparationModes = {
+    "always": "SFRPG.SpellPreparationModesAlways",
+    "innate": "SFRPG.SpellPreparationModesInnate"
 };
 
-STARFINDER.limitedUsePeriods = {
-    "sr": "STARFINDER.LimitedUsePeriodsShort",
-    "lr": "STARFINDER.LimitedUsePeriodsLong",
-    "day": "STARFINDER.LimitedUsePeriodsDay",
-    "charges": "STARFINDER.LimitedUsePeriodsCharges"
+SFRPG.limitedUsePeriods = {
+    "sr": "SFRPG.LimitedUsePeriodsShort",
+    "lr": "SFRPG.LimitedUsePeriodsLong",
+    "day": "SFRPG.LimitedUsePeriodsDay",
+    "charges": "SFRPG.LimitedUsePeriodsCharges"
 };
 
-STARFINDER.senses = {
-    "bs": "STARFINDER.SenesBS",
-    "bl": "STARFINDER.SenesBL",
-    "dark": "STARFINDER.SenesDark",
-    "llv": "STARFINDER.SenesLLV",
-    "st": "STARFINDER.SensesST"
+SFRPG.senses = {
+    "bs": "SFRPG.SenesBS",
+    "bl": "SFRPG.SenesBL",
+    "dark": "SFRPG.SenesDark",
+    "llv": "SFRPG.SenesLLV",
+    "st": "SFRPG.SensesST"
 };
 
-STARFINDER.skills = {
-    "acr": "STARFINDER.SkillAcr",
-    "ath": "STARFINDER.SkillAth",
-    "blu": "STARFINDER.SkillBlu",
-    "com": "STARFINDER.SkillCom",
-    "cul": "STARFINDER.SkillCul",
-    "dip": "STARFINDER.SkillDip",
-    "dis": "STARFINDER.SkillDis",
-    "eng": "STARFINDER.SkillEng",
-    "int": "STARFINDER.SkillInt",
-    "lsc": "STARFINDER.SkillLsc",
-    "med": "STARFINDER.SkillMed",
-    "mys": "STARFINDER.SkillMys",
-    "per": "STARFINDER.SkillPer",
-    "pro": "STARFINDER.SkillPro",
-    "phs": "STARFINDER.SkillPsc",
-    "pil": "STARFINDER.SkillPil",
-    "sen": "STARFINDER.SkillSen",
-    "sle": "STARFINDER.SkillSle",
-    "ste": "STARFINDER.SkillSte",
-    "sur": "STARFINDER.SkillSur"
+SFRPG.skills = {
+    "acr": "SFRPG.SkillAcr",
+    "ath": "SFRPG.SkillAth",
+    "blu": "SFRPG.SkillBlu",
+    "com": "SFRPG.SkillCom",
+    "cul": "SFRPG.SkillCul",
+    "dip": "SFRPG.SkillDip",
+    "dis": "SFRPG.SkillDis",
+    "eng": "SFRPG.SkillEng",
+    "int": "SFRPG.SkillInt",
+    "lsc": "SFRPG.SkillLsc",
+    "med": "SFRPG.SkillMed",
+    "mys": "SFRPG.SkillMys",
+    "per": "SFRPG.SkillPer",
+    "pro": "SFRPG.SkillPro",
+    "phs": "SFRPG.SkillPsc",
+    "pil": "SFRPG.SkillPil",
+    "sen": "SFRPG.SkillSen",
+    "sle": "SFRPG.SkillSle",
+    "ste": "SFRPG.SkillSte",
+    "sur": "SFRPG.SkillSur"
 };
 
 // Weapon Types
-STARFINDER.weaponTypes = {
-    "basicM": "STARFINDER.WeaponTypesBasicMelee",
-    "advancedM": "STARFINDER.WeaponTypesAdvMelee",
-    "smallA": "STARFINDER.WeaponTypesSmallArms",
-    "longA": "STARFINDER.WeaponTypesLongArms",
-    "heavy": "STARFINDER.WeaponTypesHeavy",
-    "sniper": "STARFINDER.WeaponTypesSniper",
-    "grenade": "STARFINDER.WeaponTypesGrenades",
-    "special": "STARFINDER.WeaponTypesSpecial",
-    "solarian": "STARFINDER.WeaponTypesSolarian"
+SFRPG.weaponTypes = {
+    "basicM": "SFRPG.WeaponTypesBasicMelee",
+    "advancedM": "SFRPG.WeaponTypesAdvMelee",
+    "smallA": "SFRPG.WeaponTypesSmallArms",
+    "longA": "SFRPG.WeaponTypesLongArms",
+    "heavy": "SFRPG.WeaponTypesHeavy",
+    "sniper": "SFRPG.WeaponTypesSniper",
+    "grenade": "SFRPG.WeaponTypesGrenades",
+    "special": "SFRPG.WeaponTypesSpecial",
+    "solarian": "SFRPG.WeaponTypesSolarian"
 };
 
 // Weapons sub categories
-STARFINDER.weaponCategories = {
-    "cryo": "STARFINDER.WeaponCategoriesCryo",
-    "flame": "STARFINDER.WeaponCategoriesFlame",
-    "laser": "STARFINDER.WeaponCategoriesLaser",
-    "plasma": "STARFINDER.WeaponCategoriesPlasma",
-    "projectile": "STARFINDER.WeaponCategoriesProjectile",
-    "shock": "STARFINDER.WeaponCategoriesShock",
-    "sonic": "STARFINDER.WeaponCategoriesSonic",
-    "uncategorized": "STARFINDER.WeaponCategoriesUncategorized"
+SFRPG.weaponCategories = {
+    "cryo": "SFRPG.WeaponCategoriesCryo",
+    "flame": "SFRPG.WeaponCategoriesFlame",
+    "laser": "SFRPG.WeaponCategoriesLaser",
+    "plasma": "SFRPG.WeaponCategoriesPlasma",
+    "projectile": "SFRPG.WeaponCategoriesProjectile",
+    "shock": "SFRPG.WeaponCategoriesShock",
+    "sonic": "SFRPG.WeaponCategoriesSonic",
+    "uncategorized": "SFRPG.WeaponCategoriesUncategorized"
 };
 
 // Weapon Properties
-STARFINDER.weaponProperties = {
-    "one": "STARFINDER.WeaponPropertiesOneHanded",
-    "two": "STARFINDER.WeaponPropertiesTwoHanded",
-    "amm": "STARFINDER.WeaponPropertiesAmmunition",
-    "aeon": "STARFINDER.WeaponPropertiesAeon",
-    "analog": "STARFINDER.WeaponPropertiesAnalog",
-    "antibiological": "STARFINDER.WeaponPropertiesAntibiological",
-    "archaic": "STARFINDER.WeaponPropertiesArchaic",
-    "aurora": "STARFINDER.WeaponPropertiesAurora",
-    "automatic": "STARFINDER.WeaponPropertiesAutomatic",
-    "blast": "STARFINDER.WeaponPropertiesBlast",
-    "block": "STARFINDER.WeaponPropertiesBlock",
-    "boost": "STARFINDER.WeaponPropertiesBoost",
-    "breach": "STARFINDER.WeaponPropertiesBreach",
-    "breakdown": "STARFINDER.WeaponPropertiesBreakdown",
-    "bright": "STARFINDER.WeaponPropertiesBright",
-    "cluster": "STARFINDER.WeaponPropertiesCluster",
-    "conceal": "STARFINDER.WeaponsPropertiesConceal",
-    "deconstruct": "STARFINDER.WeaponPropertiesDeconstruct",
-    "deflect": "STARFINDER.WeaponPropertiesDeflect",
-    "disarm": "STARFINDER.WeaponPropertiesDisarm",
-    "double": "STARFINDER.WeaponPropertiesDouble",
-    "drainCharge": "STARFINDER.WeaponPropertiesDrainCharge",
-    "echo": "STARFINDER.WeaponPropertiesEcho",
-    "entangle": "STARFINDER.WeaponPropertiesEntangle",
-    "explode": "STARFINDER.WeaponPropertiesExplode",
-    "extinguish": "STARFINDER.WeaponPropertiesExtinguish",
-    "feint": "STARFINDER.WeaponPropertiesFeint",
-    "fiery": "STARFINDER.WeaponPropertiesFiery",
-    "firstArc": "STARFINDER.WeaponPropertiesFirstArc",
-    "flexibleLine": "STARFINDER.WeaponPropertiesFlexibleLine",
-    "force": "STARFINDER.WeaponPropertiesForce",
-    "freeHands": "STARFINDER.WeaponPropertiesFreeHands",
-    "fueled": "STARFINDER.WeaponPropertiesFueled",
-    "grapple": "STARFINDER.WeaponPropertiesGrapple",
-    "gravitation": "STARFINDER.WeaponPropertiesGravitation",
-    "guided": "STARFINDER.WeaponPropertiesGuided",
-    "harrying": "STARFINDER.WeaponPropertiesHarrying",
-    "holyWater": "STARFINDER.WeaponPropertiesHolyWater",
-    "ignite": "STARFINDER.WeaponPropertiesIgnite",
-    "indirect": "STARFINDER.WeaponPropertiesIndirect",
-    "injection": "STARFINDER.WeaponPropertiesInjection",
-    "integrated": "STARFINDER.WeaponPropertiesIntegrated",
-    "line": "STARFINDER.WeaponPropertiesLine",
-    "living": "STARFINDER.WeaponPropertiesLiving",
-    "lockdown": "STARFINDER.WeaponPropertiesLockdown",
-    "mind-affecting": "STARFINDER.WeaponPropertiesMindAffecting",
-    "mine": "STARFINDER.WeaponPropertiesMine",
-    "mire": "STARFINDER.WeaponPropertiesMire",
-    "modal": "STARFINDER.WeaponPropertiesModal",
-    "necrotic": "STARFINDER.WeaponPropertiesNecrotic",
-    "nonlethal": "STARFINDER.WeaponPropertiesNonlethal",
-    "operative": "STARFINDER.WeaponPropertiesOperative",
-    "penetrating": "STARFINDER.WeaponPropertiesPenetrating",
-    "polarize": "STARFINDER.WeaponPropertiesPolarize",
-    "polymorphic": "STARFINDER.WeaponPropertiesPolymorphic",
-    "powered": "STARFINDER.WeaponPropertiesPowered",
-    "professional": "STARFINDER.WeaponPropertiesProfessional",
-    "punchGun": "STARFINDER.WeaponPropertiesPunchGun",
-    "qreload": "STARFINDER.WeaponPropertiesQuickReload",
-    "radioactive": "STARFINDER.WeaponPropertiesRadioactive",
-    "reach": "STARFINDER.WeaponPropertiesReach",
-    "recall": "STARFINDER.WeaponPropertiesRecall",
-    "relic": "STARFINDER.WeaponPropertiesRelic",
-    "reposition": "STARFINDER.WeaponPropertiesReposition",
-    "shape": "STARFINDER.WeaponPropertiesShape",
-    "shells": "STARFINDER.WeaponPropertiesShells",
-    "shield": "STARFINDER.WeaponPropertiesShield",
-    "sniper": "STARFINDER.WeaponPropertiesSniper",
-    "stun": "STARFINDER.WeaponPropertiesStun",
-    "subtle": "STARFINDER.WeaponPropertiesSubtle",
-    "sunder": "STARFINDER.WeaponPropertiesSunder",
-    "swarm": "STARFINDER.WeaponPropertiesSwarm",
-    "tail": "STARFINDER.WeaponPropertiesTail",
-    "teleportive": "STARFINDER.WeaponPropertiesTeleportive",
-    "thought": "STARFINDER.WeaponPropertiesThought",
-    "throttle": "STARFINDER.WeaponPropertiesThrottle",
-    "thrown": "STARFINDER.WeaponPropertiesThrown",
-    "trip": "STARFINDER.WeaponPropertiesTrip",
-    "underwater": "STARFINDER.WeaponPropertiesUnderwater",
-    "unwieldy": "STARFINDER.WeaponPropertiesUnwieldy",
-    "variantBoost": "STARFINDER.WeaponPropertiesVariantBoost",
-    "wideLine": "STARFINDER.WeaponPropertiesWideLine"
+SFRPG.weaponProperties = {
+    "one": "SFRPG.WeaponPropertiesOneHanded",
+    "two": "SFRPG.WeaponPropertiesTwoHanded",
+    "amm": "SFRPG.WeaponPropertiesAmmunition",
+    "aeon": "SFRPG.WeaponPropertiesAeon",
+    "analog": "SFRPG.WeaponPropertiesAnalog",
+    "antibiological": "SFRPG.WeaponPropertiesAntibiological",
+    "archaic": "SFRPG.WeaponPropertiesArchaic",
+    "aurora": "SFRPG.WeaponPropertiesAurora",
+    "automatic": "SFRPG.WeaponPropertiesAutomatic",
+    "blast": "SFRPG.WeaponPropertiesBlast",
+    "block": "SFRPG.WeaponPropertiesBlock",
+    "boost": "SFRPG.WeaponPropertiesBoost",
+    "breach": "SFRPG.WeaponPropertiesBreach",
+    "breakdown": "SFRPG.WeaponPropertiesBreakdown",
+    "bright": "SFRPG.WeaponPropertiesBright",
+    "cluster": "SFRPG.WeaponPropertiesCluster",
+    "conceal": "SFRPG.WeaponsPropertiesConceal",
+    "deconstruct": "SFRPG.WeaponPropertiesDeconstruct",
+    "deflect": "SFRPG.WeaponPropertiesDeflect",
+    "disarm": "SFRPG.WeaponPropertiesDisarm",
+    "double": "SFRPG.WeaponPropertiesDouble",
+    "drainCharge": "SFRPG.WeaponPropertiesDrainCharge",
+    "echo": "SFRPG.WeaponPropertiesEcho",
+    "entangle": "SFRPG.WeaponPropertiesEntangle",
+    "explode": "SFRPG.WeaponPropertiesExplode",
+    "extinguish": "SFRPG.WeaponPropertiesExtinguish",
+    "feint": "SFRPG.WeaponPropertiesFeint",
+    "fiery": "SFRPG.WeaponPropertiesFiery",
+    "firstArc": "SFRPG.WeaponPropertiesFirstArc",
+    "flexibleLine": "SFRPG.WeaponPropertiesFlexibleLine",
+    "force": "SFRPG.WeaponPropertiesForce",
+    "freeHands": "SFRPG.WeaponPropertiesFreeHands",
+    "fueled": "SFRPG.WeaponPropertiesFueled",
+    "grapple": "SFRPG.WeaponPropertiesGrapple",
+    "gravitation": "SFRPG.WeaponPropertiesGravitation",
+    "guided": "SFRPG.WeaponPropertiesGuided",
+    "harrying": "SFRPG.WeaponPropertiesHarrying",
+    "holyWater": "SFRPG.WeaponPropertiesHolyWater",
+    "ignite": "SFRPG.WeaponPropertiesIgnite",
+    "indirect": "SFRPG.WeaponPropertiesIndirect",
+    "injection": "SFRPG.WeaponPropertiesInjection",
+    "integrated": "SFRPG.WeaponPropertiesIntegrated",
+    "line": "SFRPG.WeaponPropertiesLine",
+    "living": "SFRPG.WeaponPropertiesLiving",
+    "lockdown": "SFRPG.WeaponPropertiesLockdown",
+    "mind-affecting": "SFRPG.WeaponPropertiesMindAffecting",
+    "mine": "SFRPG.WeaponPropertiesMine",
+    "mire": "SFRPG.WeaponPropertiesMire",
+    "modal": "SFRPG.WeaponPropertiesModal",
+    "necrotic": "SFRPG.WeaponPropertiesNecrotic",
+    "nonlethal": "SFRPG.WeaponPropertiesNonlethal",
+    "operative": "SFRPG.WeaponPropertiesOperative",
+    "penetrating": "SFRPG.WeaponPropertiesPenetrating",
+    "polarize": "SFRPG.WeaponPropertiesPolarize",
+    "polymorphic": "SFRPG.WeaponPropertiesPolymorphic",
+    "powered": "SFRPG.WeaponPropertiesPowered",
+    "professional": "SFRPG.WeaponPropertiesProfessional",
+    "punchGun": "SFRPG.WeaponPropertiesPunchGun",
+    "qreload": "SFRPG.WeaponPropertiesQuickReload",
+    "radioactive": "SFRPG.WeaponPropertiesRadioactive",
+    "reach": "SFRPG.WeaponPropertiesReach",
+    "recall": "SFRPG.WeaponPropertiesRecall",
+    "relic": "SFRPG.WeaponPropertiesRelic",
+    "reposition": "SFRPG.WeaponPropertiesReposition",
+    "shape": "SFRPG.WeaponPropertiesShape",
+    "shells": "SFRPG.WeaponPropertiesShells",
+    "shield": "SFRPG.WeaponPropertiesShield",
+    "sniper": "SFRPG.WeaponPropertiesSniper",
+    "stun": "SFRPG.WeaponPropertiesStun",
+    "subtle": "SFRPG.WeaponPropertiesSubtle",
+    "sunder": "SFRPG.WeaponPropertiesSunder",
+    "swarm": "SFRPG.WeaponPropertiesSwarm",
+    "tail": "SFRPG.WeaponPropertiesTail",
+    "teleportive": "SFRPG.WeaponPropertiesTeleportive",
+    "thought": "SFRPG.WeaponPropertiesThought",
+    "throttle": "SFRPG.WeaponPropertiesThrottle",
+    "thrown": "SFRPG.WeaponPropertiesThrown",
+    "trip": "SFRPG.WeaponPropertiesTrip",
+    "underwater": "SFRPG.WeaponPropertiesUnderwater",
+    "unwieldy": "SFRPG.WeaponPropertiesUnwieldy",
+    "variantBoost": "SFRPG.WeaponPropertiesVariantBoost",
+    "wideLine": "SFRPG.WeaponPropertiesWideLine"
 };
 
-STARFINDER.spellAreaShapes = {
+SFRPG.spellAreaShapes = {
     "": "",
-    "cone": "STARFINDER.SpellAreaShapesCone",
-    "cylinder": "STARFINDER.SpellAreaShapesCylinder",
-    "line": "STARFINDER.SpellAreaShapesLine",
-    "sphere": "STARFINDER.SpellAreaShapesSphere",
-    "shapable": "STARFINDER.SpellAreaShapesShapable",
-    "other": "STARFINDER.SpellAreaShapesOther"
+    "cone": "SFRPG.SpellAreaShapesCone",
+    "cylinder": "SFRPG.SpellAreaShapesCylinder",
+    "line": "SFRPG.SpellAreaShapesLine",
+    "sphere": "SFRPG.SpellAreaShapesSphere",
+    "shapable": "SFRPG.SpellAreaShapesShapable",
+    "other": "SFRPG.SpellAreaShapesOther"
 };
 
-STARFINDER.spellAreaEffects = {
+SFRPG.spellAreaEffects = {
     "": "",
     "burst": "Burst",
     "emanation": "Emanation",
@@ -368,7 +365,7 @@ STARFINDER.spellAreaEffects = {
 }
 
 // Weapon special abilities
-STARFINDER.weaponSpecial = {
+SFRPG.weaponSpecial = {
     "analog": "Analog",
     "archaic": "Archaic",
     "auto": "Automatic",
@@ -395,7 +392,7 @@ STARFINDER.weaponSpecial = {
 };
 
 // Weapon critical hit effects
-STARFINDER.weaponCriticalHitEffects = {
+SFRPG.weaponCriticalHitEffects = {
     "arc": "Arc",
     "bleed": "Bleed",
     "burn": "Burn",
@@ -410,17 +407,17 @@ STARFINDER.weaponCriticalHitEffects = {
 };
 
 // Equipment types
-STARFINDER.armorTypes = {
+SFRPG.armorTypes = {
     "light": "Light Armor",
     "heavy": "Heavy Armor",
     "power": "Power Armor",
     "shield": "Shields"
 };
 
-STARFINDER.equipmentTypes = STARFINDER.armorTypes;
+SFRPG.equipmentTypes = SFRPG.armorTypes;
 
 // Spell Schools
-STARFINDER.spellSchools = {
+SFRPG.spellSchools = {
     "abj": "Abjuration",
     "con": "Conjuration",
     "div": "Divination",
@@ -432,7 +429,7 @@ STARFINDER.spellSchools = {
 };
 
 // Spell Levels
-STARFINDER.spellLevels = {
+SFRPG.spellLevels = {
     0: "0 Level",
     1: "1st Level",
     2: "2nd Level",
@@ -443,7 +440,7 @@ STARFINDER.spellLevels = {
 };
 
 // Feat types
-STARFINDER.featTypes = {
+SFRPG.featTypes = {
     "general": "General Feats",
     "combat": "Combat Feats"
 };
@@ -452,26 +449,26 @@ STARFINDER.featTypes = {
  * The avaialbe sizes for an Actor
  * @type {Object}
  */
-STARFINDER.actorSizes = {
-    "fine": "STARFINDER.SizeFine",
-    "diminutive": "STARFINDER.SizeDim",
-    "tiny": "STARFINDER.SizeTiny",
-    "small": "STARFINDER.SizeSmall",
-    "medium": "STARFINDER.SizeMedium",
-    "large": "STARFINDER.SizeLarge",
-    "huge": "STARFINDER.SizeHuge",
-    "gargantuan": "STARFINDER.SizeGargantuan",
-    "colossal": "STARFINDER.SizeColossal"
+SFRPG.actorSizes = {
+    "fine": "SFRPG.SizeFine",
+    "diminutive": "SFRPG.SizeDim",
+    "tiny": "SFRPG.SizeTiny",
+    "small": "SFRPG.SizeSmall",
+    "medium": "SFRPG.SizeMedium",
+    "large": "SFRPG.SizeLarge",
+    "huge": "SFRPG.SizeHuge",
+    "gargantuan": "SFRPG.SizeGargantuan",
+    "colossal": "SFRPG.SizeColossal"
 };
 
-STARFINDER.starshipSizes = {
-    "tiny": "STARFINDER.SizeTiny",
-    "small": "STARFINDER.SizeSmall",
-    "medium": "STARFINDER.SizeMedium",
-    "large": "STARFINDER.SizeLarge",
-    "huge": "STARFINDER.SizeHuge",
-    "gargantuan": "STARFINDER.SizeGargantuan",
-    "colossal": "STARFINDER.SizeColossal"
+SFRPG.starshipSizes = {
+    "tiny": "SFRPG.SizeTiny",
+    "small": "SFRPG.SizeSmall",
+    "medium": "SFRPG.SizeMedium",
+    "large": "SFRPG.SizeLarge",
+    "huge": "SFRPG.SizeHuge",
+    "gargantuan": "SFRPG.SizeGargantuan",
+    "colossal": "SFRPG.SizeColossal"
 };
 
 /**
@@ -479,7 +476,7 @@ STARFINDER.starshipSizes = {
  * token of a specific size takes.
  * @type {Object}
  */
-STARFINDER.tokenSizes = {
+SFRPG.tokenSizes = {
     "fine": 1,
     "diminutive": 1,
     "tiny": 1,
@@ -491,107 +488,107 @@ STARFINDER.tokenSizes = {
     "colossal": 6
 };
 
-STARFINDER.allowedClasses = {
+SFRPG.allowedClasses = {
     "myst": "Mystic",
     "tech": "Technomancer",
     "wysh": "Witchwarper"
 };
 
-STARFINDER.itemActionTypes = {
-    "mwak": "STARFINDER.ActionMWAK",
-    "rwak": "STARFINDER.ActionRWAK",
-    "msak": "STARFINDER.ActionMSAK",
-    "rsak": "STARFINDER.ActionRSAK",
-    "save": "STARFINDER.ActionSave",
-    "heal": "STARFINDER.ActionHeal",
-    "abil": "STARFINDER.ActionAbil",
-    "util": "STARFINDER.ActionUtil",
-    "other": "STARFINDER.ActionOther"
+SFRPG.itemActionTypes = {
+    "mwak": "SFRPG.ActionMWAK",
+    "rwak": "SFRPG.ActionRWAK",
+    "msak": "SFRPG.ActionMSAK",
+    "rsak": "SFRPG.ActionRSAK",
+    "save": "SFRPG.ActionSave",
+    "heal": "SFRPG.ActionHeal",
+    "abil": "SFRPG.ActionAbil",
+    "util": "SFRPG.ActionUtil",
+    "other": "SFRPG.ActionOther"
 };
 
-STARFINDER.conditionTypes = {
-    "asleep": "STARFINDER.ConditionsAsleep",
-    "bleeding": "STARFINDER.ConditionsBleeding",
-    "blinded": "STARFINDER.ConditionsBlinded",
-    "broken": "STARFINDER.ConditionsBroken",
-    "burning": "STARFINDER.ConditionsBurning",
-    "confused": "STARFINDER.ConditionsConfused",
-    "cowering": "STARFINDER.ConditionsCowering",
-    "dazed": "STARFINDER.ConditionsDazed",
-    "dazzled": "STARFINDER.ConditionsDazzled",
-    "dead": "STARFINDER.ConditionsDead",
-    "deafened": "STARFINDER.ConditionsDeafened",
-    "dyning": "STARFINDER.ConditionsDying",
-    "encumbered": "STARFINDER.ConditionsEncumbered",
-    "entangled": "STARFINDER.ConditionsEntangled",
-    "exhausted": "STARFINDER.ConditionsExhausted",
-    "fascinated": "STARFINDER.ConditionsFascinated",
-    "fatigued": "STARFINDER.ConditionsFatigued",
-    "flatfooted": "STARFINDER.ConditionsFlatFooted",
-    "frightened": "STARFINDER.ConditionsFrightened",
-    "grappled": "STARFINDER.ConditionsGrappled",
-    "helpless": "STARFINDER.ConditionsHelpless",
-    "nauseated": "STARFINDER.ConditionsNauseated",
-    "offkilter": "STARFINDER.ConditionsOffKilter",
-    "offtarget": "STARFINDER.ConditionsOffTarget",
-    "overburdened": "STARFINDER.ConditionsOverburdened",
-    "panicked": "STARFINDER.ConditionsPanicked",
-    "paralyzed": "STARFINDER.ConditionsParalyzed",
-    "pinned": "STARFINDER.ConditionsPinned",
-    "prone": "STARFINDER.ConditionsProne",
-    "shaken": "STARFINDER.ConditionsShaken",
-    "sickened": "STARFINDER.ConditionsSickened",
-    "stable": "STARFINDER.ConditionsStable",
-    "staggered": "STARFINDER.ConditionsStaggered",
-    "stunned": "STARFINDER.ConditionsStunned",
-    "unconscious": "STARFINDER.ConditionsUnconscious"
+SFRPG.conditionTypes = {
+    "asleep": "SFRPG.ConditionsAsleep",
+    "bleeding": "SFRPG.ConditionsBleeding",
+    "blinded": "SFRPG.ConditionsBlinded",
+    "broken": "SFRPG.ConditionsBroken",
+    "burning": "SFRPG.ConditionsBurning",
+    "confused": "SFRPG.ConditionsConfused",
+    "cowering": "SFRPG.ConditionsCowering",
+    "dazed": "SFRPG.ConditionsDazed",
+    "dazzled": "SFRPG.ConditionsDazzled",
+    "dead": "SFRPG.ConditionsDead",
+    "deafened": "SFRPG.ConditionsDeafened",
+    "dyning": "SFRPG.ConditionsDying",
+    "encumbered": "SFRPG.ConditionsEncumbered",
+    "entangled": "SFRPG.ConditionsEntangled",
+    "exhausted": "SFRPG.ConditionsExhausted",
+    "fascinated": "SFRPG.ConditionsFascinated",
+    "fatigued": "SFRPG.ConditionsFatigued",
+    "flatfooted": "SFRPG.ConditionsFlatFooted",
+    "frightened": "SFRPG.ConditionsFrightened",
+    "grappled": "SFRPG.ConditionsGrappled",
+    "helpless": "SFRPG.ConditionsHelpless",
+    "nauseated": "SFRPG.ConditionsNauseated",
+    "offkilter": "SFRPG.ConditionsOffKilter",
+    "offtarget": "SFRPG.ConditionsOffTarget",
+    "overburdened": "SFRPG.ConditionsOverburdened",
+    "panicked": "SFRPG.ConditionsPanicked",
+    "paralyzed": "SFRPG.ConditionsParalyzed",
+    "pinned": "SFRPG.ConditionsPinned",
+    "prone": "SFRPG.ConditionsProne",
+    "shaken": "SFRPG.ConditionsShaken",
+    "sickened": "SFRPG.ConditionsSickened",
+    "stable": "SFRPG.ConditionsStable",
+    "staggered": "SFRPG.ConditionsStaggered",
+    "stunned": "SFRPG.ConditionsStunned",
+    "unconscious": "SFRPG.ConditionsUnconscious"
 };
 
-STARFINDER.languages = {
-    "abyssal": "STARFINDER.LanguagesAbyssal",
-	"akiton": "STARFINDER.LanguagesAkitonian",
-	"aklo": "STARFINDER.LanguagesAklo",	
-	"aquan": "STARFINDER.LanguagesAquan",
-	"arkanen": "STARFINDER.LanguagesArkanen",
-	"auran": "STARFINDER.LanguagesAuran",
-	"azlanti": "STARFINDER.LanguagesAzlanti",	
-	"brethedan": "STARFINDER.LanguagesBrethedan",
-	"castrovelian": "STARFINDER.LanguagesCastrovelian",
-	"celestial": "STARFINDER.LanguagesCelestial",
-	"common": "STARFINDER.LanguagesCommon",
-	"draconic": "STARFINDER.LanguagesDraconic",
-	"drow": "STARFINDER.LanguagesDrow",
-	"dwarven": "STARFINDER.LanguagesDwarven",
-	"elven": "STARFINDER.LanguagesElven",	
-	"eoxian": "STARFINDER.LanguagesEoxian",
-	"gnome": "STARFINDER.LanguagesGnome",
-	"goblin": "STARFINDER.LanguagesGoblin",
-	"halfling": "STARFINDER.LanguagesHalfling",
-	"ignan": "STARFINDER.LanguagesIgnan",
-	"infernal": "STARFINDER.LanguagesInfernal",
-	"kalo": "STARFINDER.LanguagesKalo",	
-	"kasatha": "STARFINDER.LanguagesKasatha",
-	"Nchaki": "STARFINDER.LanguagesNchaki",
-	"orc": "STARFINDER.LanguagesOrc",
-	"sarcesian": "STARFINDER.LanguagesSarcesian",
-	"shirren": "STARFINDER.LanguagesShirren",
-	"shobhad": "STARFINDER.LanguagesShobhad",	
-	"terran": "STARFINDER.LanguagesTerran",
-	"triaxian": "STARFINDER.LanguagesTriaxian",
-	"vercite": "STARFINDER.LanguagesVercite",
-	"vesk": "STARFINDER.LanguagesVesk",
-	"ysoki": "STARFINDER.LanguagesYosoki"
+SFRPG.languages = {
+    "abyssal": "SFRPG.LanguagesAbyssal",
+	"akiton": "SFRPG.LanguagesAkitonian",
+	"aklo": "SFRPG.LanguagesAklo",	
+	"aquan": "SFRPG.LanguagesAquan",
+	"arkanen": "SFRPG.LanguagesArkanen",
+	"auran": "SFRPG.LanguagesAuran",
+	"azlanti": "SFRPG.LanguagesAzlanti",	
+	"brethedan": "SFRPG.LanguagesBrethedan",
+	"castrovelian": "SFRPG.LanguagesCastrovelian",
+	"celestial": "SFRPG.LanguagesCelestial",
+	"common": "SFRPG.LanguagesCommon",
+	"draconic": "SFRPG.LanguagesDraconic",
+	"drow": "SFRPG.LanguagesDrow",
+	"dwarven": "SFRPG.LanguagesDwarven",
+	"elven": "SFRPG.LanguagesElven",	
+	"eoxian": "SFRPG.LanguagesEoxian",
+	"gnome": "SFRPG.LanguagesGnome",
+	"goblin": "SFRPG.LanguagesGoblin",
+	"halfling": "SFRPG.LanguagesHalfling",
+	"ignan": "SFRPG.LanguagesIgnan",
+	"infernal": "SFRPG.LanguagesInfernal",
+	"kalo": "SFRPG.LanguagesKalo",	
+	"kasatha": "SFRPG.LanguagesKasatha",
+	"Nchaki": "SFRPG.LanguagesNchaki",
+	"orc": "SFRPG.LanguagesOrc",
+	"sarcesian": "SFRPG.LanguagesSarcesian",
+	"shirren": "SFRPG.LanguagesShirren",
+	"shobhad": "SFRPG.LanguagesShobhad",	
+	"terran": "SFRPG.LanguagesTerran",
+	"triaxian": "SFRPG.LanguagesTriaxian",
+	"vercite": "SFRPG.LanguagesVercite",
+	"vesk": "SFRPG.LanguagesVesk",
+	"ysoki": "SFRPG.LanguagesYosoki"
 };
 
-STARFINDER.augmentationTypes = {
-    "cybernetic": "STARFINDER.Cybernetic",
-    "biotech": "STARFINDER.Biotech",
-    "magitech": "STARFINDER.Magitech",
-    "necrograft": "STARFINDER.Necrograft",
-    "personal": "STARFINDER.PersonalUpgrade"
+SFRPG.augmentationTypes = {
+    "cybernetic": "SFRPG.Cybernetic",
+    "biotech": "SFRPG.Biotech",
+    "magitech": "SFRPG.Magitech",
+    "necrograft": "SFRPG.Necrograft",
+    "personal": "SFRPG.PersonalUpgrade"
 };
 
-STARFINDER.consumableTypes = {
+SFRPG.consumableTypes = {
     "serum": "Serums",
     "ampoule": "Spell Ampoules",
     "spellGem": "Spell Gems",
@@ -600,29 +597,29 @@ STARFINDER.consumableTypes = {
     "poison": "Poisons"
 };
 
-STARFINDER.augmentationSytems = {
-    "arm": "STARFINDER.AugArm",
-    "allArms": "STARFINDER.AugAllArms",
-    "brain": "STARFINDER.AugBrain",
-    "ears": "STARFINDER.AugEars",
-    "eyes": "STARFINDER.AugEyes",
-    "foot": "STARFINDER.AugFoot",
-    "allFeet": "STARFINDER.AugAllFeet",
-    "hand": "STARFINDER.AugHand",
-    "allHands": "STARFINDER.AugAllHands",
-    "heart": "STARFINDER.AugHeart",
-    "leg": "STARFINDER.AugLeg",
-    "allLegs": "STARFINDER.AugAllLegs",
-    "lungs": "STARFINDER.AugLungs",
-    "spinal": "STARFINDER.AugSpinalColumn",
-    "skin": "STARFINDER.AugSkin",
-    "throat": "STARFINDER.AugThroat"
+SFRPG.augmentationSytems = {
+    "arm": "SFRPG.AugArm",
+    "allArms": "SFRPG.AugAllArms",
+    "brain": "SFRPG.AugBrain",
+    "ears": "SFRPG.AugEars",
+    "eyes": "SFRPG.AugEyes",
+    "foot": "SFRPG.AugFoot",
+    "allFeet": "SFRPG.AugAllFeet",
+    "hand": "SFRPG.AugHand",
+    "allHands": "SFRPG.AugAllHands",
+    "heart": "SFRPG.AugHeart",
+    "leg": "SFRPG.AugLeg",
+    "allLegs": "SFRPG.AugAllLegs",
+    "lungs": "SFRPG.AugLungs",
+    "spinal": "SFRPG.AugSpinalColumn",
+    "skin": "SFRPG.AugSkin",
+    "throat": "SFRPG.AugThroat"
 };
 
 /*--------------------------------*
  * Starship properties and values *
  *--------------------------------*/
-STARFINDER.maneuverability = {
+SFRPG.maneuverability = {
     "clumsy": "Clumsy",
     "poor": "Poor",
     "average": "Average",
@@ -630,7 +627,7 @@ STARFINDER.maneuverability = {
     "perfect": "Perfect"
 };
 
-STARFINDER.powerCoreSystems = {
+SFRPG.powerCoreSystems = {
     // Power cores
     "micronL": "Micron Light",
     "micronH": "Micron Heavy",
@@ -656,7 +653,7 @@ STARFINDER.powerCoreSystems = {
     "gateU": "Gateway Ultra"
 }
 
-STARFINDER.thrusterSystems = {
+SFRPG.thrusterSystems = {
     // Thrusters
     // Tiny
     "t6": "T6 Thrusters",
@@ -695,7 +692,7 @@ STARFINDER.thrusterSystems = {
     "c8": "C8 Thrusters"
 };
 
-STARFINDER.armorSystems = {
+SFRPG.armorSystems = {
     "mk1": "Mk 1 armor",
     "mk2": "Mk 2 armor",
     "mk3": "Mk 3 armor",
@@ -713,7 +710,7 @@ STARFINDER.armorSystems = {
     "mk15": "Mk 15 armor"
 };
 
-STARFINDER.computerSystems = {
+SFRPG.computerSystems = {
     "basic": "Basic Computer",
     "mk1m": "Mk 1 mononode",
     "mk1d": "Mk 1 duonode",
@@ -745,13 +742,13 @@ STARFINDER.computerSystems = {
     "mk10d": "Mk 10 duonode"
 };
 
-STARFINDER.crewQuarterSystems = {
+SFRPG.crewQuarterSystems = {
     "common": "Common",
     "good": "Good",
     "luxurious": "Luxurious"
 };
 
-STARFINDER.defenseSystems = {
+SFRPG.defenseSystems = {
     "mk1": "Mk 1 defenses",
     "mk2": "Mk 2 defenses",
     "mk3": "Mk 3 defenses",
@@ -769,7 +766,7 @@ STARFINDER.defenseSystems = {
     "mk15": "Mk 15 defenses"
 };
 
-STARFINDER.driftEngineSystems = {
+SFRPG.driftEngineSystems = {
     "basic": "Signal Basic",
     "booster": "Signal Booster",
     "major": "Signal Major",
@@ -777,7 +774,7 @@ STARFINDER.driftEngineSystems = {
     "ultra": "Signal Ultra"
 };
 
-STARFINDER.sensorSystems = {
+SFRPG.sensorSystems = {
     "cut": "Cut-rate",
     "bushort": "Budget short-range",
     "bashort": "Basic short-range",
@@ -790,7 +787,7 @@ STARFINDER.sensorSystems = {
     "along": "Advanced long-range"
 };
 
-STARFINDER.shieldSystems = {
+SFRPG.shieldSystems = {
     "10": "Basic Shields 10",
     "20": "Basic Shields 20",
     "30": "Basic Shields 30",
@@ -815,7 +812,7 @@ STARFINDER.shieldSystems = {
     "600": "Superior Shields 600"
 };
 
-STARFINDER.expansionBaySystems = {
+SFRPG.expansionBaySystems = {
     "arclab": "Arcane laboratory",
     "cargo": "Cargo hold",
     "escape": "Escape pods",
@@ -836,7 +833,7 @@ STARFINDER.expansionBaySystems = {
     "tech": "Tech workshop"
 };
 
-STARFINDER.securitySystems = {
+SFRPG.securitySystems = {
     "antiHack": "Anti-Hacking Sytems",
     "antiPer": "Antipersonnel Weapon",
     "bio": "Biometric Locks",
@@ -846,7 +843,7 @@ STARFINDER.securitySystems = {
 
 // TODO: Not currently used, but keeping it here
 // for future use
-STARFINDER.baseFrames = {
+SFRPG.baseFrames = {
     "race": "Racer",
     "inter": "Interceptor",
     "fight": "Fighter",
@@ -864,18 +861,18 @@ STARFINDER.baseFrames = {
 };
 
 // Starship Weapons
-STARFINDER.starshipWeaponTypes = {
+SFRPG.starshipWeaponTypes = {
     "direct": "Direct-fire",
     "tracking": "Tracking"
 };
 
-STARFINDER.starshipWeaponClass = {
+SFRPG.starshipWeaponClass = {
     "light": "Light",
     "heavy": "Heavy",
     "capital": "Capital"
 };
 
-STARFINDER.starshipWeaponProperties = {
+SFRPG.starshipWeaponProperties = {
     "array": "Array",
     "broad": "Broad Arc",
     "emp": "EMP",
@@ -891,7 +888,7 @@ STARFINDER.starshipWeaponProperties = {
     "vortex": "Vortex"
 };
 
-STARFINDER.starshipArcs = {
+SFRPG.starshipArcs = {
     "forward": "Forward",
     "starboard": "Starboard",
     "aft": "Aft",
@@ -899,13 +896,13 @@ STARFINDER.starshipArcs = {
     "turret": "Turret"
 };
 
-STARFINDER.starshipWeaponRanges = {
+SFRPG.starshipWeaponRanges = {
     "short": "Short",
     "medium": "Medium",
     "long": "Long"
 };
 
-STARFINDER.starshipRoles = {
+SFRPG.starshipRoles = {
     "pilot": "Pilot",
     "captain": "Captain",
     "engineers": "Engineers",
@@ -915,7 +912,7 @@ STARFINDER.starshipRoles = {
 };
 
 // starship value maps
-STARFINDER.shieldsMap = {
+SFRPG.shieldsMap = {
     "10": 10,
     "20": 20,
     "30": 30,
@@ -940,7 +937,7 @@ STARFINDER.shieldsMap = {
     "600": 600
 };
 
-STARFINDER.armorDefenseMap = {
+SFRPG.armorDefenseMap = {
     "mk1": 1,
     "mk2": 2,
     "mk3": 3,
@@ -958,7 +955,7 @@ STARFINDER.armorDefenseMap = {
     "mk15": 15
 };
 
-STARFINDER.thrustersMap = {
+SFRPG.thrustersMap = {
     "t6": { speed: 6, mod: 1 },
     "t8": { speed: 8, mod: 0 },
     "t10": { speed: 10, mod: 0 },
@@ -989,7 +986,7 @@ STARFINDER.thrustersMap = {
     "c8": { speed: 8, mod: 0 }
 };
 
-STARFINDER.powercoreMap = {
+SFRPG.powercoreMap = {
     "micronL": { size: ["tiny"], pcu: 50 },
     "micronH": { size: ["tiny"], pcu: 70 },
     "micronU": { size: ["tiny"], pcu: 80 },
@@ -1014,7 +1011,7 @@ STARFINDER.powercoreMap = {
     "gateU": { size: ["huge", "gargantuan", "colossal"], pcu: 500 }
 };
 
-STARFINDER.driftEngineMap = {
+SFRPG.driftEngineMap = {
     "basic": 1,
     "booster": 2,
     "major": 3,
@@ -1022,7 +1019,7 @@ STARFINDER.driftEngineMap = {
     "ultra": 5
 };
 
-STARFINDER.starshipSizeMod = {
+SFRPG.starshipSizeMod = {
     "tiny": 2,
     "small": 1,
     "medium": 0,
@@ -1034,18 +1031,18 @@ STARFINDER.starshipSizeMod = {
 
 // End starship stuff
 
-STARFINDER.vehicleSizes = {
-    "diminutive": "STARFINDER.SizeDim",
-    "tiny": "STARFINDER.SizeTiny",
-    "small": "STARFINDER.SizeSmall",
-    "medium": "STARFINDER.SizeMedium",
-    "large": "STARFINDER.SizeLarge",
-    "huge": "STARFINDER.SizeHuge",
-    "gargantuan": "STARFINDER.SizeGargantuan",
-    "colossal": "STARFINDER.SizeColossal"
+SFRPG.vehicleSizes = {
+    "diminutive": "SFRPG.SizeDim",
+    "tiny": "SFRPG.SizeTiny",
+    "small": "SFRPG.SizeSmall",
+    "medium": "SFRPG.SizeMedium",
+    "large": "SFRPG.SizeLarge",
+    "huge": "SFRPG.SizeHuge",
+    "gargantuan": "SFRPG.SizeGargantuan",
+    "colossal": "SFRPG.SizeColossal"
 };
 
-STARFINDER.vehicleTypes = {
+SFRPG.vehicleTypes = {
     "land": "Land",
     "water": "Water",
     "hover": "Hover",
@@ -1054,7 +1051,7 @@ STARFINDER.vehicleTypes = {
     "landA": "Land and air"
 };
 
-STARFINDER.vehicleCoverTypes = {
+SFRPG.vehicleCoverTypes = {
     "none": "None",
     "cover": "Cover",
     "soft": "Soft cover",
@@ -1065,145 +1062,145 @@ STARFINDER.vehicleCoverTypes = {
 /**
  * Base Attack Bonus Progression
  */
-STARFINDER.babProgression = {
-    "moderate": "STARFINDER.BABProgressionModerate",
-    "full": "STARFINDER.BABProgressionFull"
+SFRPG.babProgression = {
+    "moderate": "SFRPG.BABProgressionModerate",
+    "full": "SFRPG.BABProgressionFull"
 };
 
 /**
  * Saving throw modifier progression
  */
-STARFINDER.saveProgression = {
-    "slow": "STARFINDER.SaveProgressionSlow",
-    "fast": "STARFINDER.SaveProgressionFast"
+SFRPG.saveProgression = {
+    "slow": "SFRPG.SaveProgressionSlow",
+    "fast": "SFRPG.SaveProgressionFast"
 };
 
-STARFINDER.modifierTypes = {
-    "ability": "STARFINDER.ModifierTypeAbility",
-    "armor": "STARFINDER.ModifierTypeArmor",
-    "base": "STARFINDER.ModifierTypeBase",
-    "circumstance": "STARFINDER.ModifierTypeCircumstance",
-    "divine": "STARFINDER.ModifierTypeDivine",
-    "enhancement": "STARFINDER.ModifierTypeEnhancement",
-    "insight": "STARFINDER.ModifierTypeInsight",
-    "luck": "STARFINDER.ModifierTypeLuck",
-    "morale": "STARFINDER.ModifierTypeMorale",
-    "racial": "STARFINDER.ModifierTypeRacial",
-    "untyped": "STARFINDER.ModifierTypeUntyped"
+SFRPG.modifierTypes = {
+    "ability": "SFRPG.ModifierTypeAbility",
+    "armor": "SFRPG.ModifierTypeArmor",
+    "base": "SFRPG.ModifierTypeBase",
+    "circumstance": "SFRPG.ModifierTypeCircumstance",
+    "divine": "SFRPG.ModifierTypeDivine",
+    "enhancement": "SFRPG.ModifierTypeEnhancement",
+    "insight": "SFRPG.ModifierTypeInsight",
+    "luck": "SFRPG.ModifierTypeLuck",
+    "morale": "SFRPG.ModifierTypeMorale",
+    "racial": "SFRPG.ModifierTypeRacial",
+    "untyped": "SFRPG.ModifierTypeUntyped"
 };
 
-STARFINDER.modifierEffectTypes = {
-    "ac": "STARFINDER.ModifierEffectTypeAC",
-    "cmd": "STARFINDER.ModifierEffectTypeCMD",
-    "acp": "STARFINDER.ModifierEffectTypeACP",
-    "initiative": "STARFINDER.ModifierEffectTypeInit",
-    "ability-skills": "STARFINDER.ModifierEffectTypeAbilitySkills",
-    "skill": "STARFINDER.ModifierEffectTypeSkill",
-    "all-skills": "STARFINDER.ModifierEffectTypeAllSkills",
-    "saves": "STARFINDER.ModifierEffectTypeSaves",
-    "save": "STARFINDER.ModifierEffectTypeSave"
+SFRPG.modifierEffectTypes = {
+    "ac": "SFRPG.ModifierEffectTypeAC",
+    "cmd": "SFRPG.ModifierEffectTypeCMD",
+    "acp": "SFRPG.ModifierEffectTypeACP",
+    "initiative": "SFRPG.ModifierEffectTypeInit",
+    "ability-skills": "SFRPG.ModifierEffectTypeAbilitySkills",
+    "skill": "SFRPG.ModifierEffectTypeSkill",
+    "all-skills": "SFRPG.ModifierEffectTypeAllSkills",
+    "saves": "SFRPG.ModifierEffectTypeSaves",
+    "save": "SFRPG.ModifierEffectTypeSave"
 };
 
-STARFINDER.modifierType = {
-    "constant": "STARFINDER.ModifierTypeConstant",
-    "formula": "STARFINDER.ModifierTypeFormula"
+SFRPG.modifierType = {
+    "constant": "SFRPG.ModifierTypeConstant",
+    "formula": "SFRPG.ModifierTypeFormula"
 };
 
-STARFINDER.modifierArmorClassAffectedValues = {
-    "both": "STARFINDER.ModifierArmorClassBoth",
-    "eac": "STARFINDER.EnergyArmorClass",
-    "kac": "STARFINDER.KineticArmorClass"
+SFRPG.modifierArmorClassAffectedValues = {
+    "both": "SFRPG.ModifierArmorClassBoth",
+    "eac": "SFRPG.EnergyArmorClass",
+    "kac": "SFRPG.KineticArmorClass"
 };
 
-STARFINDER.CHARACTER_EXP_LEVELS = [
+SFRPG.CHARACTER_EXP_LEVELS = [
     0, 1300, 3300, 6000, 10000, 15000, 23000, 34000, 50000, 71000,
     105000, 145000, 210000, 295000, 425000, 600000, 850000, 1200000,
     1700000, 2400000
 ];
 
-STARFINDER.CR_EXP_LEVELS = [
+SFRPG.CR_EXP_LEVELS = [
     50, 400, 600, 800, 1200, 1600, 2400, 3200, 4800,
     6400, 9600, 12800, 19200, 25600, 38400, 51200, 76800, 102400,
     153600, 204800, 307200, 409600, 614400, 819200, 1228800, 1638400
 ];
 
-STARFINDER.statusEffectIcons = [
-    "systems/starfinder/icons/conditions/asleep.png",
-    "systems/starfinder/icons/conditions/bleeding.png",
-    "systems/starfinder/icons/conditions/blinded.png",
-    "systems/starfinder/icons/conditions/broken.png",
-    "systems/starfinder/icons/conditions/burning.png",
-    "systems/starfinder/icons/conditions/confused.png",
-    "systems/starfinder/icons/conditions/cowering.png",
-    "systems/starfinder/icons/conditions/dazed.png",
-    "systems/starfinder/icons/conditions/dazzled.png",
-    "systems/starfinder/icons/conditions/dead.png",
-    "systems/starfinder/icons/conditions/deafened.png",
-    "systems/starfinder/icons/conditions/dying.png",
-    "systems/starfinder/icons/conditions/encumbered.png",
-    "systems/starfinder/icons/conditions/entangled.png",
-    "systems/starfinder/icons/conditions/exhausted.png",
-    "systems/starfinder/icons/conditions/fascinated.png",
-    "systems/starfinder/icons/conditions/fatigued.png",
-    "systems/starfinder/icons/conditions/flatfooted.png",
-    "systems/starfinder/icons/conditions/frightened.png",
-    "systems/starfinder/icons/conditions/grappled.png",
-    "systems/starfinder/icons/conditions/helpless.png",
-    "systems/starfinder/icons/conditions/nauseated.png",
-    "systems/starfinder/icons/conditions/offkilter.png",
-    "systems/starfinder/icons/conditions/offtarget.png",
-    "systems/starfinder/icons/conditions/overburdened.png",
-    "systems/starfinder/icons/conditions/panicked.png",
-    "systems/starfinder/icons/conditions/paralyzed.png",
-    "systems/starfinder/icons/conditions/pinned.png",
-    "systems/starfinder/icons/conditions/prone.png",
-    "systems/starfinder/icons/conditions/shaken.png",
-    "systems/starfinder/icons/conditions/sickened.png",
-    "systems/starfinder/icons/conditions/staggered.png",
-    "systems/starfinder/icons/conditions/stable.png",
-    "systems/starfinder/icons/conditions/stunned.png",
-    "systems/starfinder/icons/conditions/unconscious.png"
+SFRPG.statusEffectIcons = [
+    "systems/sfrpg/icons/conditions/asleep.png",
+    "systems/sfrpg/icons/conditions/bleeding.png",
+    "systems/sfrpg/icons/conditions/blinded.png",
+    "systems/sfrpg/icons/conditions/broken.png",
+    "systems/sfrpg/icons/conditions/burning.png",
+    "systems/sfrpg/icons/conditions/confused.png",
+    "systems/sfrpg/icons/conditions/cowering.png",
+    "systems/sfrpg/icons/conditions/dazed.png",
+    "systems/sfrpg/icons/conditions/dazzled.png",
+    "systems/sfrpg/icons/conditions/dead.png",
+    "systems/sfrpg/icons/conditions/deafened.png",
+    "systems/sfrpg/icons/conditions/dying.png",
+    "systems/sfrpg/icons/conditions/encumbered.png",
+    "systems/sfrpg/icons/conditions/entangled.png",
+    "systems/sfrpg/icons/conditions/exhausted.png",
+    "systems/sfrpg/icons/conditions/fascinated.png",
+    "systems/sfrpg/icons/conditions/fatigued.png",
+    "systems/sfrpg/icons/conditions/flatfooted.png",
+    "systems/sfrpg/icons/conditions/frightened.png",
+    "systems/sfrpg/icons/conditions/grappled.png",
+    "systems/sfrpg/icons/conditions/helpless.png",
+    "systems/sfrpg/icons/conditions/nauseated.png",
+    "systems/sfrpg/icons/conditions/offkilter.png",
+    "systems/sfrpg/icons/conditions/offtarget.png",
+    "systems/sfrpg/icons/conditions/overburdened.png",
+    "systems/sfrpg/icons/conditions/panicked.png",
+    "systems/sfrpg/icons/conditions/paralyzed.png",
+    "systems/sfrpg/icons/conditions/pinned.png",
+    "systems/sfrpg/icons/conditions/prone.png",
+    "systems/sfrpg/icons/conditions/shaken.png",
+    "systems/sfrpg/icons/conditions/sickened.png",
+    "systems/sfrpg/icons/conditions/staggered.png",
+    "systems/sfrpg/icons/conditions/stable.png",
+    "systems/sfrpg/icons/conditions/stunned.png",
+    "systems/sfrpg/icons/conditions/unconscious.png"
 ];
 
-STARFINDER.statusEffectIconMapping = {
-    "asleep": "systems/starfinder/icons/conditions/asleep.png",
-    "bleeding": "systems/starfinder/icons/conditions/bleeding.png",
-    "blinded": "systems/starfinder/icons/conditions/blinded.png",
-    "broken": "systems/starfinder/icons/conditions/broken.png",
-    "burning": "systems/starfinder/icons/conditions/burning.png",
-    "confused": "systems/starfinder/icons/conditions/confused.png",
-    "cowering": "systems/starfinder/icons/conditions/cowering.png",
-    "dazed": "systems/starfinder/icons/conditions/dazed.png",
-    "dazzled": "systems/starfinder/icons/conditions/dazzled.png",
-    "dead": "systems/starfinder/icons/conditions/dead.png",
-    "deafened": "systems/starfinder/icons/conditions/deafened.png",
-    "dyning": "systems/starfinder/icons/conditions/dying.png",
-    "encumbered": "systems/starfinder/icons/conditions/encumbered.png",
-    "entangled": "systems/starfinder/icons/conditions/entangled.png",
-    "exhausted": "systems/starfinder/icons/conditions/exhausted.png",
-    "fascinated": "systems/starfinder/icons/conditions/fascinated.png",
-    "fatigued": "systems/starfinder/icons/conditions/fatigued.png",
-    "flatfooted": "systems/starfinder/icons/conditions/flatfooted.png",
-    "frightened": "systems/starfinder/icons/conditions/frightened.png",
-    "grappled": "systems/starfinder/icons/conditions/grappled.png",
-    "helpless": "systems/starfinder/icons/conditions/helpless.png",
-    "nauseated": "systems/starfinder/icons/conditions/nauseated.png",
-    "offkilter": "systems/starfinder/icons/conditions/offkilter.png",
-    "offtarget": "systems/starfinder/icons/conditions/offtarget.png",
-    "overburdened": "systems/starfinder/icons/conditions/overburdened.png",
-    "panicked": "systems/starfinder/icons/conditions/panicked.png",
-    "paralyzed": "systems/starfinder/icons/conditions/paralyzed.png",
-    "pinned": "systems/starfinder/icons/conditions/pinned.png",
-    "prone": "systems/starfinder/icons/conditions/prone.png",
-    "shaken": "systems/starfinder/icons/conditions/shaken.png",
-    "sickened": "systems/starfinder/icons/conditions/sickened.png",
-    "stable": "systems/starfinder/icons/conditions/stable.png",
-    "staggered": "systems/starfinder/icons/conditions/staggered.png",
-    "stunned": "systems/starfinder/icons/conditions/stunned.png",
-    "unconscious": "systems/starfinder/icons/conditions/unconscious.png"
+SFRPG.statusEffectIconMapping = {
+    "asleep": "systems/sfrpg/icons/conditions/asleep.png",
+    "bleeding": "systems/sfrpg/icons/conditions/bleeding.png",
+    "blinded": "systems/sfrpg/icons/conditions/blinded.png",
+    "broken": "systems/sfrpg/icons/conditions/broken.png",
+    "burning": "systems/sfrpg/icons/conditions/burning.png",
+    "confused": "systems/sfrpg/icons/conditions/confused.png",
+    "cowering": "systems/sfrpg/icons/conditions/cowering.png",
+    "dazed": "systems/sfrpg/icons/conditions/dazed.png",
+    "dazzled": "systems/sfrpg/icons/conditions/dazzled.png",
+    "dead": "systems/sfrpg/icons/conditions/dead.png",
+    "deafened": "systems/sfrpg/icons/conditions/deafened.png",
+    "dyning": "systems/sfrpg/icons/conditions/dying.png",
+    "encumbered": "systems/sfrpg/icons/conditions/encumbered.png",
+    "entangled": "systems/sfrpg/icons/conditions/entangled.png",
+    "exhausted": "systems/sfrpg/icons/conditions/exhausted.png",
+    "fascinated": "systems/sfrpg/icons/conditions/fascinated.png",
+    "fatigued": "systems/sfrpg/icons/conditions/fatigued.png",
+    "flatfooted": "systems/sfrpg/icons/conditions/flatfooted.png",
+    "frightened": "systems/sfrpg/icons/conditions/frightened.png",
+    "grappled": "systems/sfrpg/icons/conditions/grappled.png",
+    "helpless": "systems/sfrpg/icons/conditions/helpless.png",
+    "nauseated": "systems/sfrpg/icons/conditions/nauseated.png",
+    "offkilter": "systems/sfrpg/icons/conditions/offkilter.png",
+    "offtarget": "systems/sfrpg/icons/conditions/offtarget.png",
+    "overburdened": "systems/sfrpg/icons/conditions/overburdened.png",
+    "panicked": "systems/sfrpg/icons/conditions/panicked.png",
+    "paralyzed": "systems/sfrpg/icons/conditions/paralyzed.png",
+    "pinned": "systems/sfrpg/icons/conditions/pinned.png",
+    "prone": "systems/sfrpg/icons/conditions/prone.png",
+    "shaken": "systems/sfrpg/icons/conditions/shaken.png",
+    "sickened": "systems/sfrpg/icons/conditions/sickened.png",
+    "stable": "systems/sfrpg/icons/conditions/stable.png",
+    "staggered": "systems/sfrpg/icons/conditions/staggered.png",
+    "stunned": "systems/sfrpg/icons/conditions/stunned.png",
+    "unconscious": "systems/sfrpg/icons/conditions/unconscious.png"
 };
 
-STARFINDER.conditions = {
+SFRPG.conditions = {
     "asleep": {
         modifiers: [],
         tooltip: "<strong>Asleep</strong><br><br>You take a -10 penalty to Perception checks to notice things."
@@ -1346,143 +1343,143 @@ STARFINDER.conditions = {
     }
 };
 
-STARFINDER.allowedClasses = {
+SFRPG.allowedClasses = {
     "myst": "Mystic",
     "tech": "Technomancer",
     "wysh": "Witchwarper"
 };
 
-STARFINDER.characterFlags = {
+SFRPG.characterFlags = {
     "improvedInititive": {
-        name: "STARFINDER.ImprovedInitiativeLabel",
-        hint: "STARFINDER.ImprovedInitiativeHint",
-        section: "STARFINDER.CharacterFlagsSectionFeats",
+        name: "SFRPG.ImprovedInitiativeLabel",
+        hint: "SFRPG.ImprovedInitiativeHint",
+        section: "SFRPG.CharacterFlagsSectionFeats",
         type: Boolean
     },
     "greatFortitude": {
-        name: "STARFINDER.GreatFortitudeLabel",
-        hint: "STARFINDER.GreatFortitudeHint",
-        section: "STARFINDER.CharacterFlagsSectionFeats",
+        name: "SFRPG.GreatFortitudeLabel",
+        hint: "SFRPG.GreatFortitudeHint",
+        section: "SFRPG.CharacterFlagsSectionFeats",
         type: Boolean
     },
     "ironWill": {
-        name: "STARFINDER.IronWillLabel",
-        hint: "STARFINDER.IronWillHint",
-        section: "STARFINDER.CharacterFlagsSectionFeats",
+        name: "SFRPG.IronWillLabel",
+        hint: "SFRPG.IronWillHint",
+        section: "SFRPG.CharacterFlagsSectionFeats",
         type: Boolean
     },
     "lightningReflexes": {
-        name: "STARFINDER.LightningReflexesLabel",
-        hint: "STARFINDER.LightningReflexesHint",
-        section: "STARFINDER.CharacterFlagsSectionFeats",
+        name: "SFRPG.LightningReflexesLabel",
+        hint: "SFRPG.LightningReflexesHint",
+        section: "SFRPG.CharacterFlagsSectionFeats",
         type: Boolean
     },
     "flatAffect": {
         name: "Flat Affect",
         hint: "You take a -2 penalty to Sense Motive checks, but the DCs of Sense Motive checks attempted against you increase by 2.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "historian": {
         name: "Historian",
         hint: "Due to your in-depth historical training and the wide-ranging academic background knowledge you possess, you receive a +2 racial bonus to Culture checks.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "naturalGrace": {
         name: "Natural Grace",
         hint: "You recieve a +2 racial bonus to Acrobatics and Athletics checks",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "culturalFascination": {
         name: "Cultural Fascination",
         hint: "You recieve a +2 racial bonus to Culture and Diplomacy checks.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "armorSavant": {
         name: "Armor Savant",
         hint: "When wearing armor, you gain a +1 racial bonus to AC. When you're wearing heavy armor, your armor check penalty is 1 less severe than normal.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "scrounger": {
         name: "Scrounger",
         hint: "You receive a +2 racial bonus to Engineering, Stealth, and Survival checks.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "elvenMagic": {
         name: "Elven Magic",
         hint: "You receive a +2 racial bonus to caster level checks to overcome spell resistance. In addition, you receive a +2 racial bonus to Mysticism skill checks.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "keenSenses": {
         name: "Keen Senses",
         hint: "You receive a +2 racial bonus to Perception skill checks.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "curious": {
         name: "Curious",
         hint: "You receive a +2 racial bonus to Culture checks.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "intimidating": {
         name: "Intimidating",
         hint: "You receive a +2 racial bonus to Intimidate skill checks.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "selfSufficient": {
         name: "Self-Sufficient",
         hint: "You receive a +2 racial bonus to Survival skill checks.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "halflingLuck": {
         name: "Halfling Luck",
         hint: "Halflings receive a +1 racial bonus to all saving throws.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "sneaky": {
         name: "Sneaky",
         hint: "You receive a +2 racial bonus to Stealth checks",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "sureFooted": {
         name: "Sure-Footed",
         hint: "You receive a +2 racial bonus to Acrobatics and Athletics skill checks.",
-        section: "STARFINDER.CharacterFlagsSectionRacialTraits",
+        section: "SFRPG.CharacterFlagsSectionRacialTraits",
         type: Boolean
     },
     "rapidResponse": {
         name: "Rapid Response",
         hint: "You gain +4 bonus to initiative checks and increase your land speed by 10 feet.",
-        section: "STARFINDER.CharacterFlagsSectionClassFeatures",
+        section: "SFRPG.CharacterFlagsSectionClassFeatures",
         type: Boolean
     },
     "solarianAttunement": {
         name: "Solarian Attunement",
         hint: "You can enabled the management of attenument inside the combat tracker.",
-        section: "STARFINDER.CharacterFlagsSectionClassFeatures",
+        section: "SFRPG.CharacterFlagsSectionClassFeatures",
         type: Boolean
     }/*, //Disable temporary the time than Vanguard and Qi Soldier mechanical system be ready
     "vanguardEntropy": {
         name: "Vanguard's Entropy Points",
         hint: "You can enabled the management of Entropy Points inside the combat tracker.",
-        section: "STARFINDER.CharacterFlagsSectionClassFeatures",
+        section: "SFRPG.CharacterFlagsSectionClassFeatures",
         type: Boolean
     },
     "soldierKi": {
         name: "Soldier Ki Points",
         hint: "You can enabled the management of Solider Ki Point inside the combat tracker.",
-        section: "STARFINDER.CharacterFlagsSectionClassFeatures",
+        section: "SFRPG.CharacterFlagsSectionClassFeatures",
         type: Boolean
     }*/
 };
@@ -1490,8 +1487,8 @@ STARFINDER.characterFlags = {
 /**
  * Saving throw modifier progression
  */
-STARFINDER.counterClassesLabel = {
-    "soldierKi": "STARFINDER.CounterClassesKiSoldier",
-    "vanguardEntropy": "STARFINDER.CounterClassesVanguard",
-    "solarianAttunement": "STARFINDER.CounterClassesSolarian"
+SFRPG.counterClassesLabel = {
+    "soldierKi": "SFRPG.CounterClassesKiSoldier",
+    "vanguardEntropy": "SFRPG.CounterClassesVanguard",
+    "solarianAttunement": "SFRPG.CounterClassesSolarian"
 };

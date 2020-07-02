@@ -30,15 +30,15 @@
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{ localize "STARFINDER.Description" }}</a>
-        <a class="item" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "systems/starfinder/templates/items/parts/item-description.html"}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.html"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
@@ -46,7 +46,7 @@
             <h3 class="form-header">Feature Usage</h3>
 
             {{!-- Item Activation Template --}}
-            {{> "systems/starfinder/templates/items/parts/item-activation.html"}}
+            {{> "systems/sfrpg/templates/items/parts/item-activation.html"}}
 
             {{!-- Recharge Requirement --}}
             {{#if data.activation.type}}
@@ -67,7 +67,7 @@
             <h3 class="form-header">Feature Attack</h3>
 
             {{!-- Item Action Template --}}
-            {{> "systems/starfinder/templates/items/parts/item-action.html"}}
+            {{> "systems/sfrpg/templates/items/parts/item-action.html"}}
         </div>
     </section>
 </form>

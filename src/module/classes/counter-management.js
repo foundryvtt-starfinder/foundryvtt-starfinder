@@ -65,7 +65,7 @@ export default class CounterManagement {
                         if(game.combat.data.round > this.currentRound) {
                             this.addOneToCounterForActiveActor(c, currentClasses);
                         }
-                        $combatant.find('.token-image').after("<div class='counter-token-management'><div class='counter-token'><p>"+this.getCurrentCounter(currentClasses)+"</p><img class='counter-token-image' data-actor-id='"+c.actor._id+"' data-actor-classe='"+currentClasses+"' src='systems/starfinder/icons/classes/"+this.getCurrentClassesOrPosition(currentClasses)+".png' /></div></div>");
+                        $combatant.find('.token-image').after("<div class='counter-token-management'><div class='counter-token'><p>"+this.getCurrentCounter(currentClasses)+"</p><img class='counter-token-image' data-actor-id='"+c.actor._id+"' data-actor-classe='"+currentClasses+"' src='systems/sfrpg/icons/classes/"+this.getCurrentClassesOrPosition(currentClasses)+".png' /></div></div>");
 
                         //Display the dialogue box to manage the right class
                         html.find('.counter-token-image').click(event => {
@@ -218,8 +218,8 @@ export default class CounterManagement {
             'classesToManage':[]
         };
 
-        if(typeof c.actor.data.flags.starfinder != "undefined") {
-            let activeFeature = c.actor.data.flags.starfinder;
+        if(typeof c.actor.data.flags.sfrpg != "undefined") {
+            let activeFeature = c.actor.data.flags.sfrpg;
 
             for (let [key, name] of Object.entries(this.existingFeature)) {
                 if (activeFeature.hasOwnProperty(name)){

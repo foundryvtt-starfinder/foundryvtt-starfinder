@@ -9,7 +9,7 @@ export default function (engine) {
 
         for (const cls of classes) {
             level += cls.data.levels;
-            data.details.level.tooltip.push(game.i18n.format("STARFINDER.CharacterLevelsTooltip", {
+            data.details.level.tooltip.push(game.i18n.format("SFRPG.CharacterLevelsTooltip", {
                 class: cls.name,
                 levels: cls.data.levels
             }));

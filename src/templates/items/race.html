@@ -30,8 +30,8 @@
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{ localize "STARFINDER.Description" }}</a>
-        <a class="item" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -44,10 +44,10 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">{{localize "STARFINDER.RacialTraits"}}</h3>
+            <h3 class="form-header">{{localize "SFRPG.RacialTraits"}}</h3>
             {{!-- Hit points --}}
             <div class="form-group">
-                <label>{{localize "STARFINDER.RaceHitPoints"}}</label>
+                <label>{{localize "SFRPG.RaceHitPoints"}}</label>
                 <div class="form-fields">
                     <input type="text" name="data.hp.value" value="{{data.hp.value}}" data-dtype="Number" />
                 </div>
@@ -55,7 +55,7 @@
 
             {{!-- Size --}}
             <div class="form-group">
-                <label>{{localize "STARFINDER.RaceSize"}}</label>
+                <label>{{localize "SFRPG.RaceSize"}}</label>
                 <div class="form-fields">
                     <select name="data.size">
                         {{#select data.size}}
@@ -67,10 +67,10 @@
                 </div>
             </div>
 
-            <h3 class="form-header">{{localize "STARFINDER.RaceAbilityAdjustments"}}</h3>
+            <h3 class="form-header">{{localize "SFRPG.RaceAbilityAdjustments"}}</h3>
             {{!-- Ability Adjustments Formula --}}
             <h4 class="ability-adjustments-header">
-                <a class="ability-adjustments-control add-ability-adjustment"><i class="fas fa-plus"></i> {{localize "STARFINDER.RaceAddAbilityAdjustment"}}</a>
+                <a class="ability-adjustments-control add-ability-adjustment"><i class="fas fa-plus"></i> {{localize "SFRPG.RaceAddAbilityAdjustment"}}</a>
             </h4>
             <ol class="ability-adjustment-parts form-group">
                 {{#each data.abilityMods.parts as |part i| }}
@@ -82,7 +82,7 @@
                         {{#each ../config.abilities as |name val|}}
                         <option value="{{val}}">{{name}}</option>
                         {{/each}}
-                        <option value="any">{{localize "STARFINDER.RaceAbilityAdjustmentAny"}}</option>
+                        <option value="any">{{localize "SFRPG.RaceAbilityAdjustmentAny"}}</option>
                         {{/select}}
                     </select>
                     <a class="ability-adjustments-control delete-ability-adjustment"><i class="fas fa-minus"></i></a>

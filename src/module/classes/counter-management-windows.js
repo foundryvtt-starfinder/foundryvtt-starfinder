@@ -4,7 +4,7 @@
 export class CounterManagementWindows extends Dialog {
     constructor(dialogData={}, options={}) {
         super(dialogData, options);
-        this.options.classes = ["starfinder", "dialog"];
+        this.options.classes = ["sfrpg", "dialog"];
         this.windows = null;
     }
 
@@ -14,27 +14,27 @@ export class CounterManagementWindows extends Dialog {
      */
     static async create(actorId, targetClasses,combatantId) {
 
-        let counterClassesLabel = CONFIG.STARFINDER.counterClassesLabel;
+        let counterClassesLabel = CONFIG.SFRPG.counterClassesLabel;
 
         const Actor = game.actors.get(actorId);
-        const htmlContent = await renderTemplate("systems/starfinder/templates/classes/counter-management.html", {
+        const htmlContent = await renderTemplate("systems/sfrpg/templates/classes/counter-management.html", {
             counter: Actor.data.data.counterClasses.values[targetClasses].count,
             labelClasses: game.i18n.localize(counterClassesLabel[targetClasses]),
             currentPosition: Actor.data.data.counterClasses.values[targetClasses].position,
             classes: targetClasses,
             actorId:actorId,
             combatantId:combatantId,
-            config: CONFIG.STARFINDER,
+            config: CONFIG.SFRPG,
         });
 
         return new Promise((resolve, reject) => {
             this.windows = new this({
-                    title: game.i18n.localize('STARFINDER.CounterClassesManagementWindowsTitles'),
+                    title: game.i18n.localize('SFRPG.CounterClassesManagementWindowsTitles'),
                     content: htmlContent,
                     buttons: {},
                     default: 'save'
                 }, {
-                    title:game.i18n.localize('STARFINDER.CounterClassesManagementWindowsTitles'),
+                    title:game.i18n.localize('SFRPG.CounterClassesManagementWindowsTitles'),
                     width:496
             });
             this.windows.render(true);

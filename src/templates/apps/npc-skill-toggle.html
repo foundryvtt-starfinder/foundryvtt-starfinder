@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" id="npc-toggle-skills-form" autocomplete="off">
     <div class="form-group stacked toggle-skills">
-        <h3>{{localize "STARFINDER.SkillsToggleHeader"}}</h3>
+        <h3>{{localize "SFRPG.SkillsToggleHeader"}}</h3>
         {{#each config.skills as |skill s|}}
         <label class="checkbox">
             <input type="checkbox" name="skills.{{s}}.enabled" {{checked (lookup (lookup ../skills s) 'enabled')}} /> {{~skill~}}

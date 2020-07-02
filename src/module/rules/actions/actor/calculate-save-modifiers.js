@@ -1,4 +1,4 @@
-import { StarfinderEffectType, StarfinderModifierType, StarfinderModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function (engine) {
     engine.closures.add("calculateSaveModifiers", (fact, context) => {
@@ -27,7 +27,7 @@ export default function (engine) {
             }
 
             if (saveMod !== 0) {
-                save.tooltip.push(game.i18n.format("STARFINDER.SaveModifiersTooltip", {
+                save.tooltip.push(game.i18n.format("SFRPG.SaveModifiersTooltip", {
                     type: bonus.type.capitalize(),
                     mod: bonus.modifier.signedString(),
                     source: bonus.name
@@ -39,30 +39,30 @@ export default function (engine) {
 
         const filteredMods = modifiers.filter(mod => {
             return mod.enabled && 
-                [StarfinderEffectType.SAVE, StarfinderEffectType.SAVES].includes(mod.effectType) &&
-                mod.modifierType === StarfinderModifierType.CONSTANT;
+                [SFRPGEffectType.SAVE, SFRPGEffectType.SAVES].includes(mod.effectType) &&
+                mod.modifierType === SFRPGModifierType.CONSTANT;
         });        
 
         const fortMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
             "highest",
             "lowest",
             "fort"
-        ].includes(mod.valueAffected) || mod.effectType === StarfinderEffectType.SAVES), context);
+        ].includes(mod.valueAffected) || mod.effectType === SFRPGEffectType.SAVES), context);
         const reflexMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
             "highest",
             "lowest",
             "reflex"
-        ].includes(mod.valueAffected) || mod.effectType === StarfinderEffectType.SAVES), context);
+        ].includes(mod.valueAffected) || mod.effectType === SFRPGEffectType.SAVES), context);
         const willMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
             "highest",
             "lowest",
             "will"
-        ].includes(mod.valueAffected) || mod.effectType === StarfinderEffectType.SAVES), context);
+        ].includes(mod.valueAffected) || mod.effectType === SFRPGEffectType.SAVES), context);
 
         let fortMod = Object.entries(fortMods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
-            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(mod[0])) {
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
                     sum += addModifier(bonus, fort);
                 }
@@ -76,7 +76,7 @@ export default function (engine) {
         let reflexMod = Object.entries(reflexMods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
-            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(mod[0])) {
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
                     sum += addModifier(bonus, reflex);
                 }
@@ -90,7 +90,7 @@ export default function (engine) {
         let willMod = Object.entries(willMods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
-            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(mod[0])) {
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
                     sum += addModifier(bonus, will);
                 }
@@ -102,28 +102,28 @@ export default function (engine) {
         }, 0);
 
         /** @deprecated Will be removed in v0.4.0 */
-        const greatFortitude = getProperty(flags, "starfinder.greatFortitude") ? 2 : 0;
-        const lightningReflexes = getProperty(flags, "starfinder.lightningReflexes") ? 2 : 0;
-        const ironWill = getProperty(flags, "starfinder.ironWill") ? 2 : 0;
+        const greatFortitude = getProperty(flags, "sfrpg.greatFortitude") ? 2 : 0;
+        const lightningReflexes = getProperty(flags, "sfrpg.lightningReflexes") ? 2 : 0;
+        const ironWill = getProperty(flags, "sfrpg.ironWill") ? 2 : 0;
 
         fort.bonus += fort.misc + greatFortitude + fortMod;
         reflex.bonus += reflex.misc + lightningReflexes + reflexMod;
         will.bonus += will.misc + ironWill + willMod;
 
-        if (greatFortitude !== 0) fort.tooltip.push(game.i18n.format("STARFINDER.SaveModifiersTooltip", {
-            type: StarfinderModifierTypes.UNTYPED.capitalize(),
+        if (greatFortitude !== 0) fort.tooltip.push(game.i18n.format("SFRPG.SaveModifiersTooltip", {
+            type: SFRPGModifierTypes.UNTYPED.capitalize(),
             source: "Great Fortitude",
             mod: greatFortitude.signedString()
         }));
 
-        if (lightningReflexes !== 0) fort.tooltip.push(game.i18n.format("STARFINDER.SaveModifiersTooltip", {
-            type: StarfinderModifierTypes.UNTYPED.capitalize(),
+        if (lightningReflexes !== 0) fort.tooltip.push(game.i18n.format("SFRPG.SaveModifiersTooltip", {
+            type: SFRPGModifierTypes.UNTYPED.capitalize(),
             source: "Lightning Reflexes",
             mod: lightningReflexes.signedString()
         }));
 
-        if (ironWill !== 0) fort.tooltip.push(game.i18n.format("STARFINDER.SaveModifiersTooltip", {
-            type: StarfinderModifierTypes.UNTYPED.capitalize(),
+        if (ironWill !== 0) fort.tooltip.push(game.i18n.format("SFRPG.SaveModifiersTooltip", {
+            type: SFRPGModifierTypes.UNTYPED.capitalize(),
             source: "Iron Will",
             mod: ironWill.signedString()
         }));
