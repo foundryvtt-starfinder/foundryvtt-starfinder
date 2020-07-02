@@ -1,4 +1,4 @@
-import { StarfinderEffectType, StarfinderModifierType, StarfinderModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function (engine) {
     engine.closures.add("calculateBaseAbilityModifier", (fact, context) => {
@@ -11,7 +11,7 @@ export default function (engine) {
             abilityMod += bonus.modifier;
 
             if (abilityMod !== 0) {
-                ability.tooltip.push(game.i18n.format("STARFINDER.AbilityModifiersTooltip", {
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityModifiersTooltip", {
                     type: bonus.type.capitalize(),
                     mod: bonus.modifier.signedString(),
                     source: bonus.name
@@ -23,24 +23,24 @@ export default function (engine) {
 
         const filteredMods = modifiers.filter(mod => {
             return mod.enabled && 
-                [StarfinderEffectType.ABILITY_MODIFIER, StarfinderEffectType.ABILITY_MODIFIERS].includes(mod.effectType) && 
-                [StarfinderModifierType.CONSTANT].includes(mod.modifierType);
+                [SFRPGEffectType.ABILITY_MODIFIER, SFRPGEffectType.ABILITY_MODIFIERS].includes(mod.effectType) && 
+                [SFRPGModifierType.CONSTANT].includes(mod.modifierType);
         })
 
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
             const abilityMods = context.parameters.stackModifiers.process(
-                filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === StarfinderEffectType.ABILITY_MODIFIERS), 
+                filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_MODIFIERS), 
                 context
             );
 
             const base = Math.floor((ability.value - 10) / 2);
-            ability.tooltip = [game.i18n.format("STARFINDER.AbilityModifierBase", { mod: base.signedString() })];
+            ability.tooltip = [game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() })];
 
             let mod = Object.entries(abilityMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
 
-                if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(mod[0])) {
+                if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                     for (const bonus of mod[1]) {
                         sum += addModifier(bonus, ability);
                     }

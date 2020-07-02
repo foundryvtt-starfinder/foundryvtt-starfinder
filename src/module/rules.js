@@ -47,7 +47,7 @@ import calculateNpcAbilityValue from './rules/actions/actor/calculate-npc-abilit
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
 
 export default function (engine) {
-    console.log("Starfinder | Registering rules");
+    console.log("SFRPG | Registering rules");
 
     // Actions
     error(engine);
@@ -148,7 +148,7 @@ export default function (engine) {
         ]
     });
 
-    Hooks.callAll('starfinder.registerRules', engine);
+    Hooks.callAll('sfrpg.registerRules', engine);
 
-    console.log("Starfinder | Done registering rules");
+    console.log("SFRPG | Done registering rules");
 }

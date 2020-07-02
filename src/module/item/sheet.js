@@ -1,8 +1,8 @@
 /**
- * Override and extend the core ItemSheet implementation to handle Starfinder specific item types
+ * Override and extend the core ItemSheet implementation to handle SFRPG specific item types
  * @type {ItemSheet}
  */
-export class ItemSheetStarfinder extends ItemSheet {
+export class ItemSheetSFRPG extends ItemSheet {
     constructor(...args) {
       super(...args);
   
@@ -25,7 +25,7 @@ export class ItemSheetStarfinder extends ItemSheet {
         return mergeObject(super.defaultOptions, {
         width: 560,
         height: 600,
-        classes: ["starfinder", "sheet", "item"],
+        classes: ["sfrpg", "sheet", "item"],
         resizable: true,
         scrollY: [".tab.details"],
         tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
@@ -39,7 +39,7 @@ export class ItemSheetStarfinder extends ItemSheet {
      * @return {string}
      */
     get template() {
-      const path = "systems/starfinder/templates/items";
+      const path = "systems/sfrpg/templates/items";
       return `${path}/${this.item.data.type}.html`;
     }
   
@@ -54,7 +54,7 @@ export class ItemSheetStarfinder extends ItemSheet {
       data.labels = this.item.labels;
   
       // Include CONFIG values
-      data.config = CONFIG.STARFINDER;
+      data.config = CONFIG.SFRPG;
   
       // Item Type, Status, and Details
       data.itemType = data.item.type.titleCase();
@@ -112,7 +112,7 @@ export class ItemSheetStarfinder extends ItemSheet {
       if ( item.type === "weapon" ) {
         props.push(...Object.entries(item.data.properties)
           .filter(e => e[1] === true)
-          .map(e => CONFIG.STARFINDER.weaponProperties[e[0]]));
+          .map(e => CONFIG.SFRPG.weaponProperties[e[0]]));
       }
   
       else if ( item.type === "spell" ) {
@@ -126,7 +126,7 @@ export class ItemSheetStarfinder extends ItemSheet {
       }
   
       else if ( item.type === "equipment" ) {
-        props.push(CONFIG.STARFINDER.armorTypes[item.data.armor.type]);
+        props.push(CONFIG.SFRPG.armorTypes[item.data.armor.type]);
         props.push(labels.armor);
       }
   
@@ -135,13 +135,13 @@ export class ItemSheetStarfinder extends ItemSheet {
       }
 
       else if (item.type === "starshipWeapon") {
-        props.push(CONFIG.STARFINDER.starshipWeaponTypes[item.data.weaponType]);
-        props.push(CONFIG.STARFINDER.starshipWeaponClass[item.data.class]);
+        props.push(CONFIG.SFRPG.starshipWeaponTypes[item.data.weaponType]);
+        props.push(CONFIG.SFRPG.starshipWeaponClass[item.data.class]);
       }
   
       // Action type
       if ( item.data.actionType ) {
-        props.push(CONFIG.STARFINDER.itemActionTypes[item.data.actionType]);
+        props.push(CONFIG.SFRPG.itemActionTypes[item.data.actionType]);
       }
   
       // Action usage

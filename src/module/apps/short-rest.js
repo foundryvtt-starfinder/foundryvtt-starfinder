@@ -5,7 +5,7 @@
 export class ShortRestDialog extends Dialog {
     constructor(actor, dialogData={}, options={}) {
         super(dialogData, options);
-        this.options.classes = ["starfinder", "dialog"];
+        this.options.classes = ["sfrpg", "dialog"];
 
         /**
          * Store a reference to the Actor entity which is resting
@@ -34,20 +34,20 @@ export class ShortRestDialog extends Dialog {
 
     static async shortRestDialog({actor, canRestoreStaminaPoints=true}={}) {
         ShortRestDialog.restoreStaminaPoints = false;
-        const html = await renderTemplate("systems/starfinder/templates/apps/short-rest.html");
+        const html = await renderTemplate("systems/sfrpg/templates/apps/short-rest.html");
         return new Promise(resolve => {
             const dlg = new this(actor, {
-                title: game.i18n.format("STARFINDER.RestSTitle"),
+                title: game.i18n.format("SFRPG.RestSTitle"),
                 content: html,
                 buttons: {
                     rest: {
                         icon: '<i class="fas fa-bed"></i>',
-                        label: game.i18n.format("STARFINDER.RestButton"),
+                        label: game.i18n.format("SFRPG.RestButton"),
                         callback: () => resolve({resting: true, restoreStaminaPoints: this.restoreStaminaPoints})
                     },
                     cancel: {
                         icon: '<i class="fas fa-times"></i>',
-                        label: game.i18n.format("STARFINDER.RestCancel"),
+                        label: game.i18n.format("SFRPG.RestCancel"),
                         callback: () => resolve({resting: false, restoreStaminaPoints: false})
                     }
                 },
@@ -60,7 +60,7 @@ export class ShortRestDialog extends Dialog {
     /**
    * A helper constructor function which displays the Long Rest confirmation dialog and returns a Promise once it's
    * workflow has been resolved.
-   * @param {ActorStarfinder} actor
+   * @param {ActorSFRPG} actor
    * @return {Promise}
    */
     static async longRestDialog({actor}={}) {
@@ -85,7 +85,7 @@ export class ShortRestDialog extends Dialog {
                 },
                 default: 'rest',
                 close: reject
-            }, {classes: ["starfinder", "dialog"]}).render(true);
+            }, {classes: ["sfrpg", "dialog"]}).render(true);
         });
     }
 }

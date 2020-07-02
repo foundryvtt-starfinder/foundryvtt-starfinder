@@ -1,14 +1,14 @@
 /**
- * ItemBrowserStarfinder forked from ItemBrowserPF2e by Felix Miller aka syl3r86
+ * ItemBrowserSFRPG forked from ItemBrowserPF2e by Felix Miller aka syl3r86
  * @author Fabien Dey
  * @version 0.1
  */
 import Progress from '../progress.js';
 
-class ItemBrowserStarfinder extends Application {
+class ItemBrowserSFRPG extends Application {
   static get defaultOptions() {
     const options = super.defaultOptions;
-    options.classes = options.classes.concat(['starfinder', 'spell-browser-window']);
+    options.classes = options.classes.concat(['sfrpg', 'spell-browser-window']);
     options.title = 'Add an Item';
     options.width = 800;
     options.height = 700;
@@ -307,9 +307,9 @@ class ItemBrowserStarfinder extends Application {
           if (browserType === 'spell') spellBrowser.settings[input.name].load = input.checked;
         }
 
-        console.log('Starfinder System | Compendium Browser | Saving new Settings'); // write Spell Browser settings
+        console.log('SFRPG System | Compendium Browser | Saving new Settings'); // write Spell Browser settings
 
-        game.settings.set('starfinder', 'spellBrowser', JSON.stringify(spellBrowser.settings)); // write Feat Browser settings
+        game.settings.set('sfrpg', 'spellBrowser', JSON.stringify(spellBrowser.settings)); // write Feat Browser settings
         this.settingsChanged = true;
       }
     }, {
@@ -320,13 +320,13 @@ class ItemBrowserStarfinder extends Application {
 
 }
 
-class SpellBrowserStarfinder extends ItemBrowserStarfinder {
+class SpellBrowserSFRPG extends ItemBrowserSFRPG {
   constructor(app) {
     super(app); // load settings
 
     Hooks.on('ready', e => {
       // creating game setting container
-      game.settings.register('starfinder', 'spellBrowser', {
+      game.settings.register('sfrpg', 'spellBrowser', {
         name: 'Spell Browser Settings',
         hint: 'Settings to exclude packs from loading',
         default: '',
@@ -337,11 +337,11 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
         }
       }); // load settings from container
 
-      let settings = game.settings.get('starfinder', 'spellBrowser');
+      let settings = game.settings.get('sfrpg', 'spellBrowser');
 
       if (settings == '') {
         // if settings are empty create the settings data
-        console.log('Starfinder | Spell Browser | Creating settings');
+        console.log('SFRPG | Spell Browser | Creating settings');
         settings = {};
 
         for (const compendium of game.packs) {
@@ -353,10 +353,10 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
           }
         }
 
-        game.settings.set('starfinder', 'spellBrowser', JSON.stringify(settings));
+        game.settings.set('sfrpg', 'spellBrowser', JSON.stringify(settings));
       } else {
         // if settings do exist, reload and apply them to make sure they conform with current compendium
-        console.log('Starfinder | Spell Browser | Loading settings');
+        console.log('SFRPG | Spell Browser | Loading settings');
         const loadedSettings = JSON.parse(settings);
         settings = {};
 
@@ -379,7 +379,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
 
   static get defaultOptions() {
     const options = super.defaultOptions;
-    options.template = 'systems/starfinder/templates/packs/spell-browser.html';
+    options.template = 'systems/sfrpg/templates/packs/spell-browser.html';
 
     options.title = 'Add a Spell';
     options.width = 800;
@@ -439,7 +439,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
   }
 
   async loadSpells() {
-    console.log('Starfinder | Spell Browser | Started loading spells');
+    console.log('SFRPG | Spell Browser | Started loading spells');
     const foundSpells = '';
     const unfoundSpells = '';
     const spells = {};
@@ -452,7 +452,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
       pack,
       content
     } of packLoader.loadPacks('Item', this._loadedPacks)) {
-      console.log(`Starfinder | Spell Browser | ${pack.metadata.label} - ${content.length} entries found`);
+      console.log(`SFRPG | Spell Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
       for (let spell of content) {
         spell = spell.data;
@@ -462,7 +462,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
           spell.compendium = pack.collection; // format spell level for display
 
           if (spell.data.allowedClasses !== undefined) {
-              const classList = Object.keys(CONFIG.STARFINDER.allowedClasses);
+              const classList = Object.keys(CONFIG.SFRPG.allowedClasses);
               const classIntersection = classList.filter(x => Object.keys(spell.data.allowedClasses).filter(x => spell.data.allowedClasses[x]).includes(x));
 
               if (classIntersection.length !== 0) {
@@ -486,7 +486,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
     }
 
     if (unfoundSpells !== '') {
-      console.log('Starfinder | Spell Browser | List of Spells that don\'t have a class assosiated to them:');
+      console.log('SFRPG | Spell Browser | List of Spells that don\'t have a class assosiated to them:');
       console.log(unfoundSpells);
     } //  sorting and assigning better class names
 
@@ -496,21 +496,21 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
 
     for (const classStr of classesArr) {
       // let fixedClassName = classStr.replace('revisited', ' revisited').toLowerCase().replace(/(^|\s)([a-z])/g, function (m, p1, p2) { return p1 + p2.toUpperCase(); });
-      classesObj[classStr] = CONFIG.STARFINDER.allowedClasses[classStr];
+      classesObj[classStr] = CONFIG.SFRPG.allowedClasses[classStr];
     } // sorting and assigning proper school names
 
     const schoolsObj = {};
     schoolsArr = schoolsArr.sort();
 
     for (const school of schoolsArr) {
-      schoolsObj[school] = CONFIG.STARFINDER.spellSchools[school];
+      schoolsObj[school] = CONFIG.SFRPG.spellSchools[school];
     }
 
     this.classes = classesObj;
     this.schools = schoolsObj;
 
 
-    console.log('Starfinder | Spell Browser | Finished loading spells');
+    console.log('SFRPG | Spell Browser | Finished loading spells');
     return spells;
   }
 
@@ -566,4 +566,4 @@ class PackLoader {
 }
 
 const packLoader = new PackLoader();
-export const spellBrowser = new SpellBrowserStarfinder();
+export const spellBrowser = new SpellBrowserSFRPG();

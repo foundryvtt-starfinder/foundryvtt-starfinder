@@ -1,21 +1,21 @@
-import { ActorSheetStarfinder } from "./base.js";
+import { ActorSheetSFRPG } from "./base.js";
 
 /**
- * An Actor sheet for a starship in the Starfinder system.
- * @type {ActorSheetStarfinder}
+ * An Actor sheet for a starship in the SFRPG system.
+ * @type {ActorSheetSFRPG}
  */
-export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
+export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            classes: ["starfinder", "sheet", "actor", "starship"],
+            classes: ["sfrpg", "sheet", "actor", "starship"],
             witdh: 600,
             height: 800
         });
     }
 
     get template() {
-        if (!game.user.isGM && this.actor.limited) return "systems/starfinder/templates/actors/limited-starship-sheet.html";
-        return "systems/starfinder/templates/actors/starship-sheet.html";
+        if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/limited-starship-sheet.html";
+        return "systems/sfrpg/templates/actors/starship-sheet.html";
     }
 
     getData() {
@@ -39,8 +39,8 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
         
 
         const systemsMap = {
-            "bays": CONFIG.STARFINDER.expansionBaySystems,
-            "security": CONFIG.STARFINDER.securitySystems
+            "bays": CONFIG.SFRPG.expansionBaySystems,
+            "security": CONFIG.SFRPG.securitySystems
         };
 
         for (let [t, choices] of Object.entries(systemsMap)) {
@@ -69,11 +69,11 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
      * @param {Object} flags The set of flags for the Actor
      */
     _processFlags(data, flags) {
-        let starfinder = flags["starfinder"];
+        let sfrpg = flags["sfrpg"];
 
-        if (!starfinder) starfinder = {};
-        if (!starfinder.shipsCrew) starfinder.shipsCrew = {};
-        if (!starfinder.shipsCrew.members) starfinder.shipsCrew.members = [];
+        if (!sfrpg) sfrpg = {};
+        if (!sfrpg.shipsCrew) sfrpg.shipsCrew = {};
+        if (!sfrpg.shipsCrew.members) sfrpg.shipsCrew.members = [];
         
         // TODO: There are two more roles added in the Character Operations Manual that need to be added.
         const crew = {
@@ -85,12 +85,12 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
             passengers: { label: "Passengers", actors: [], dataset: { type: "shipsCrew", role: "passengers" }}
         }
 
-        let [captian, engineers, gunners, pilot, scienceOfficers, passengers] = starfinder.shipsCrew.members.reduce((arr, id) => {
+        let [captian, engineers, gunners, pilot, scienceOfficers, passengers] = sfrpg.shipsCrew.members.reduce((arr, id) => {
             let actor = game.actors.get(id);
             
             if (!actor) return arr;
 
-            let crewMember = actor.getFlag("starfinder", "crewMember") || null;
+            let crewMember = actor.getFlag("sfrpg", "crewMember") || null;
             if (!crewMember) return arr;
 
             actor.data.img = actor.data.img || DEFAULT_TOKEN;
@@ -219,7 +219,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
 
         if (itemData.type !== "starshipWeapon") {
             let name = itemData.name;
-            ui.notifications.error(game.i18n.format("STARFINDER.InvalidStarshipItem", { name }));
+            ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name }));
             return false;
         }
 
@@ -293,7 +293,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
 
         if (!data.id) return false;
 
-        let c = this.actor.getFlag("starfinder","shipsCrew");
+        let c = this.actor.getFlag("sfrpg","shipsCrew");
         let crew;
 
         if (c) crew = duplicate(c);
@@ -315,7 +315,7 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
 
         await actor.setCrewMemberRole(this.actor.id, role);
         this.actor.update({
-            "flags.starfinder.shipsCrew": crew
+            "flags.sfrpg.shipsCrew": crew
         }).then(this.render(false));
 
         return false;
@@ -393,13 +393,13 @@ export class ActorSheetStarfinderStarship extends ActorSheetStarfinder {
 
         await actor.removeFromCrew();
         
-        let shipsCrew = this.actor.getFlag('starfinder', 'shipsCrew');
+        let shipsCrew = this.actor.getFlag('sfrpg', 'shipsCrew');
 
         if (!shipsCrew) return;
         
         let updateData = shipsCrew.members.filter((val) => val !== actor.id);
 
-        await this.actor.update({'flags.starfinder.shipsCrew.members': updateData});
+        await this.actor.update({'flags.sfrpg.shipsCrew.members': updateData});
     }
 
     /**

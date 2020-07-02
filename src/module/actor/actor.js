@@ -1,16 +1,16 @@
-import { DiceStarfinder } from "../dice.js";
+import { DiceSFRPG } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
 import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
-import { StarfinderModifierType, StarfinderModifierTypes, StarfinderEffectType } from "../modifiers/types.js";
-import StarfinderModifier from "../modifiers/modifier.js";
-import StarfinderModifierApplication from "../apps/modifier-app.js";
+import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
+import SFRPGModifier from "../modifiers/modifier.js";
+import SFRPGModifierApplication from "../apps/modifier-app.js";
 
 /**
- * Extend the base :class:`Actor` to implement additional logic specialized for Starfinder
+ * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
  */
-export class ActorStarfinder extends Actor {
+export class ActorSFRPG extends Actor {
 
     /** @override */
     getRollData() {
@@ -52,7 +52,7 @@ export class ActorStarfinder extends Actor {
         const classes = items.filter(item => item.type === "class");
         const theme = items.find(item => item.type === "theme");
 
-        game.starfinder.engine.process("process-actors", {
+        game.sfrpg.engine.process("process-actors", {
             data,
             armor,
             classes,
@@ -74,7 +74,7 @@ export class ActorStarfinder extends Actor {
      */
     _ensureHasModifiers(data, prop = null) {
         if (!hasProperty(data, "modifiers")) {
-            console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
+            console.log(`SFRPG | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
         }
 
@@ -92,7 +92,7 @@ export class ActorStarfinder extends Actor {
     async update(data, options = {}) {
         const newSize = data['data.traits.size'];
         if (newSize && (newSize !== getProperty(this.data, "data.traits.size"))) {
-            let size = CONFIG.STARFINDER.tokenSizes[data['data.traits.size']];
+            let size = CONFIG.SFRPG.tokenSizes[data['data.traits.size']];
             if (this.isToken) this.token.update({ height: size, width: size });
             else if (!data["token.width"] && !hasProperty(data, "token.width")) {
                 setProperty(data, 'token.height', size);
@@ -104,7 +104,7 @@ export class ActorStarfinder extends Actor {
     }
 
     /**
-     * Extend OwnedItem creation logic for the Starfinder system to make weapons proficient by default when dropped on a NPC sheet
+     * Extend OwnedItem creation logic for the SFRPG system to make weapons proficient by default when dropped on a NPC sheet
      * See the base Actor class for API documentation of this method
      * 
      * @param {String} embeddedName The type of Entity being embedded.
@@ -212,9 +212,9 @@ export class ActorStarfinder extends Actor {
     async addModifier({
         name = "", 
         modifier = 0, 
-        type = StarfinderModifierTypes.UNTYPED, 
-        modifierType = StarfinderModifierType.CONSTANT, 
-        effectType = StarfinderEffectType.SKILL,
+        type = SFRPGModifierTypes.UNTYPED, 
+        modifierType = SFRPGModifierType.CONSTANT, 
+        effectType = SFRPGEffectType.SKILL,
         subtab = "misc",
         valueAffected = "", 
         enabled = true, 
@@ -226,7 +226,7 @@ export class ActorStarfinder extends Actor {
         const data = this._ensureHasModifiers(duplicate(this.data.data));
         const modifiers = data.modifiers;
 
-        modifiers.push(new StarfinderModifier({
+        modifiers.push(new SFRPGModifier({
             name,
             modifier,
             type,
@@ -264,7 +264,7 @@ export class ActorStarfinder extends Actor {
         const modifiers = duplicate(this.data.data.modifiers);
         const modifier = modifiers.find(mod => mod._id === id);
 
-        new StarfinderModifierApplication(modifier, this).render(true);
+        new SFRPGModifierApplication(modifier, this).render(true);
     }
 
     /**
@@ -346,11 +346,11 @@ export class ActorStarfinder extends Actor {
         }
 
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
-            let content = `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]} is a trained only skill, but ${this.name} is not trained in that skill.
+            let content = `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} is a trained only skill, but ${this.name} is not trained in that skill.
                 Would you like to roll anyway?`;
 
             new Dialog({
-                title: `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]} is trained only`,
+                title: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} is trained only`,
                 content: content,
                 buttons: {
                     yes: {
@@ -375,10 +375,10 @@ export class ActorStarfinder extends Actor {
      * @param {Object} options Options which configure how ability tests are rolled
      */
     rollAbility(abilityId, options = {}) {
-        const label = CONFIG.STARFINDER.abilities[abilityId];
+        const label = CONFIG.SFRPG.abilities[abilityId];
         const abl = this.data.data.abilities[abilityId];
 
-        return DiceStarfinder.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: ["@mod"],
             data: { mod: abl.mod },
@@ -394,10 +394,10 @@ export class ActorStarfinder extends Actor {
      * @param {Object} options Options which configure how saves are rolled
      */
     rollSave(saveId, options = {}) {
-        const label = CONFIG.STARFINDER.saves[saveId];
+        const label = CONFIG.SFRPG.saves[saveId];
         const save = this.data.data.attributes[saveId];
 
-        return DiceStarfinder.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: ["@mod"],
             data: { mod: save.bonus },
@@ -407,11 +407,11 @@ export class ActorStarfinder extends Actor {
     }
 
     rollSkillCheck(skillId, skill, options = {}) {
-        return DiceStarfinder.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: ["@mod"],
             data: { mod: skill.mod },
-            title: `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]} Skill Check`,
+            title: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]} Skill Check`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
@@ -508,9 +508,9 @@ export class ActorStarfinder extends Actor {
 
         // Notify chat what happened
         if (chat) {
-            let msg = game.i18n.format("STARFINDER.RestSChatMessage", { name: this.name });
+            let msg = game.i18n.format("SFRPG.RestSChatMessage", { name: this.name });
             if (drp > 0) {
-                msg = game.i18n.format("STARFINDER.RestSChatMessageRestored", { name: this.name, spentRP: drp, regainedSP: dsp });
+                msg = game.i18n.format("SFRPG.RestSChatMessageRestored", { name: this.name, spentRP: drp, regainedSP: dsp });
             }
             
             ChatMessage.create({
@@ -530,11 +530,11 @@ export class ActorStarfinder extends Actor {
     }
 
     async removeFromCrew() {
-        await this.unsetFlag('starfinder', 'crewMember');
+        await this.unsetFlag('sfrpg', 'crewMember');
     }
 
     async setCrewMemberRole(shipId, role) {
-        return this.setFlag('starfinder', 'crewMember', {
+        return this.setFlag('sfrpg', 'crewMember', {
             shipId: shipId,
             role: role
         });
