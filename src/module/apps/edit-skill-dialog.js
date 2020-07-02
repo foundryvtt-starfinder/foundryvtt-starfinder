@@ -5,7 +5,7 @@
 export class AddEditSkillDialog extends Dialog {
     constructor(skill, dialogData={}, options={}) {
         super(dialogData, options);
-        this.options.classes = ["starfinder", "dialog"];
+        this.options.classes = ["sfrpg", "dialog"];
 
         /**
          * Store a reference to the skill being edited
@@ -30,10 +30,10 @@ export class AddEditSkillDialog extends Dialog {
      */
     static async create(skillId, skill, isEdit = true, isNpc = false) {
         let hasSubName = typeof skill.subname !== "undefined" || !isEdit;
-        const html = await renderTemplate("systems/starfinder/templates/apps/add-edit-skill.html", {
+        const html = await renderTemplate("systems/sfrpg/templates/apps/add-edit-skill.html", {
             skill: skill,
             hasSubName,
-            config: CONFIG.STARFINDER,
+            config: CONFIG.SFRPG,
             isGM: game.user.isGM,
             isEdit,
             isNpc
@@ -41,7 +41,7 @@ export class AddEditSkillDialog extends Dialog {
 
         return new Promise((resolve, reject) => {
             const dlg = new this(skill, {
-                title: `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]}: ${(isEdit ? "Edit Skill" : "Add Skill")}`,
+                title: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}: ${(isEdit ? "Edit Skill" : "Add Skill")}`,
                 content: html,
                 buttons: {
                     submit: {

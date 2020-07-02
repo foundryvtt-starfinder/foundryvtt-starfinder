@@ -1,33 +1,33 @@
 <div class="spell-browser">
     <div class="control-area">
         <div class="sortcontainer" id="tagfilter">
-            <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "STARFINDER.BrowserSearchPlaceholder"}}" title="{{localize "STARFINDER.BrowserSearchTitle"}}"/>
+            <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.BrowserSearchPlaceholder"}}" title="{{localize "SFRPG.BrowserSearchTitle"}}"/>
             <div class="hint" style="display:none;">
-                {{{localize "STARFINDER.SpellBrowserSearchHint"}}}
+                {{{localize "SFRPG.SpellBrowserSearchHint"}}}
             </div>
             <dl id="sorter">
-                <dt>{{localize "STARFINDER.BrowserSortyByLabel"}}:</dt>
+                <dt>{{localize "SFRPG.BrowserSortyByLabel"}}:</dt>
                 <dd><select class="null" name="sortorder">
-                    <option value="true" selected>{{localize "STARFINDER.SortByFilterName"}}</option>
-                    <option value="false">{{localize "STARFINDER.SortByFilterLevel"}}</option>
+                    <option value="true" selected>{{localize "SFRPG.SortByFilterName"}}</option>
+                    <option value="false">{{localize "SFRPG.SortByFilterLevel"}}</option>
                 </select></dd>
             </dl>
         </div>
-        <button class="clear-filters">{{localize "STARFINDER.BrowserClearFilters"}}</button>
+        <button class="clear-filters">{{localize "SFRPG.BrowserClearFilters"}}</button>
         <div class="filtercontainer" id="levelfilter">
-            <h3>{{localize "STARFINDER.LevelLabel"}}</h3>
+            <h3>{{localize "SFRPG.LevelLabel"}}</h3>
             <dl>
-                <dt><input type="checkbox" name="level-0"></dt><dd>{{localize "STARFINDER.SpellCantripLabel"}}</dd>
-                <dt><input type="checkbox" name="level-1"></dt><dd>{{localize "STARFINDER.LevelLabel"}} 1</dd>
-                <dt><input type="checkbox" name="level-2"></dt><dd>{{localize "STARFINDER.LevelLabel"}} 2</dd>
-                <dt><input type="checkbox" name="level-3"></dt><dd>{{localize "STARFINDER.LevelLabel"}} 3</dd>
-                <dt><input type="checkbox" name="level-4"></dt><dd>{{localize "STARFINDER.LevelLabel"}} 4</dd>
-                <dt><input type="checkbox" name="level-5"></dt><dd>{{localize "STARFINDER.LevelLabel"}} 5</dd>
-                <dt><input type="checkbox" name="level-6"></dt><dd>{{localize "STARFINDER.LevelLabel"}} 6</dd>
+                <dt><input type="checkbox" name="level-0"></dt><dd>{{localize "SFRPG.SpellCantripLabel"}}</dd>
+                <dt><input type="checkbox" name="level-1"></dt><dd>{{localize "SFRPG.LevelLabel"}} 1</dd>
+                <dt><input type="checkbox" name="level-2"></dt><dd>{{localize "SFRPG.LevelLabel"}} 2</dd>
+                <dt><input type="checkbox" name="level-3"></dt><dd>{{localize "SFRPG.LevelLabel"}} 3</dd>
+                <dt><input type="checkbox" name="level-4"></dt><dd>{{localize "SFRPG.LevelLabel"}} 4</dd>
+                <dt><input type="checkbox" name="level-5"></dt><dd>{{localize "SFRPG.LevelLabel"}} 5</dd>
+                <dt><input type="checkbox" name="level-6"></dt><dd>{{localize "SFRPG.LevelLabel"}} 6</dd>
             </dl>
         </div>
         <div class="filtercontainer" id="classfilter">
-            <h3>{{localize "STARFINDER.BrowserFilterClass"}}</h3>
+            <h3>{{localize "SFRPG.BrowserFilterClass"}}</h3>
             <dl>
                 {{#each classes as |class key|}}
                 <dt><input type="checkbox" name="allowedClasses-{{key}}"></dt><dd>{{class}}</dd>
@@ -35,7 +35,7 @@
             </dl>
         </div>
         <div class="filtercontainer" id="schoolfilter">
-            <h3>{{localize "STARFINDER.BrowserFilterSchool"}}</h3>
+            <h3>{{localize "SFRPG.BrowserFilterSchool"}}</h3>
             <dl>
                 {{#each schools as |school key|}}
                 <dt><input type="checkbox" name="school-{{key}}"></dt><dd>{{school}}</dd>

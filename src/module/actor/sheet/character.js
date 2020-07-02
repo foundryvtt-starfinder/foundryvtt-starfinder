@@ -1,10 +1,10 @@
-import { ActorSheetStarfinder } from "./base.js"
+import { ActorSheetSFRPG } from "./base.js"
 
-export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
+export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {
-            classes: ['starfinder', 'sheet', 'actor', 'character'],
+            classes: ['sfrpg', 'sheet', 'actor', 'character'],
             width: 715,
             //height: 830
         });
@@ -13,7 +13,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
     }
 
     get template() {
-        const path = "systems/starfinder/templates/actors/";
+        const path = "systems/sfrpg/templates/actors/";
         if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
         return path + "character-sheet.html";
     }
@@ -25,7 +25,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         if (hp.temp === 0) delete hp.temp;
         if (hp.tempmax === 0) delete hp.tempmax;
 
-        sheetData["disableExperience"] = game.settings.get("starfinder", "disableExperienceTracking");
+        sheetData["disableExperience"] = game.settings.get("sfrpg", "disableExperienceTracking");
 
         return sheetData;
     }
@@ -123,11 +123,11 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         data.features = Object.values(features);
 
         const modifiers = {
-            conditions: { label: "STARFINDER.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },
-            permanent: { label: "STARFINDER.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
-            temporary: { label: "STARFINDER.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } },
-            item: { label: "STARFINDER.ModifiersItemTabLabel", modifiers: [], dataset: { subtab: "item" } },
-            misc: { label: "STARFINDER.ModifiersMiscTabLabel", modifiers: [], dataset: { subtab: "misc" } }
+            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },
+            permanent: { label: "SFRPG.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
+            temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } },
+            item: { label: "SFRPG.ModifiersItemTabLabel", modifiers: [], dataset: { subtab: "item" } },
+            misc: { label: "SFRPG.ModifiersMiscTabLabel", modifiers: [], dataset: { subtab: "misc" } }
         };
 
         let [permanent, temporary, itemModifiers, conditions, misc] = data.data.modifiers.reduce((arr, modifier) => {
@@ -223,7 +223,7 @@ export class ActorSheetStarfinderCharacter extends ActorSheetStarfinder {
         
         const tokens = this.actor.getActiveTokens(true);
         for (const token of tokens) {
-            await token.toggleEffect(CONFIG.STARFINDER.statusEffectIconMapping[condition]);
+            await token.toggleEffect(CONFIG.SFRPG.statusEffectIconMapping[condition]);
         }
     }
 

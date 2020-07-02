@@ -3,7 +3,7 @@
     {{#if isCharacter}}
     <ol class="currency flexrow">
         <h3>
-            {{localize "STARFINDER.InventoryCurrency"}}
+            {{localize "SFRPG.InventoryCurrency"}}
             <i class="fas fa-coins"></i>
         </h3>
         {{#each data.currency as |v k|}}
@@ -20,17 +20,17 @@
         <h3 class="item-name flexrow">{{section.label}}</h3>
 
         {{#if ../isCharacter}}
-        <div class="item-detail item-weight">{{localize "STARFINDER.InventoryBulk"}}</div>
-        <div class="item-detail item-equipped">{{localize "STARFINDER.InventoryEquipped"}}</div>
+        <div class="item-detail item-weight">{{localize "SFRPG.InventoryBulk"}}</div>
+        <div class="item-detail item-equipped">{{localize "SFRPG.InventoryEquipped"}}</div>
         {{/if}}
 
-        <div class="item-detail item-uses">{{localize "STARFINDER.InventoryCapacity"}}</div>
-        <div class="item-detail item-action">{{localize "STARFINDER.InventoryUsage"}}</div>
+        <div class="item-detail item-uses">{{localize "SFRPG.InventoryCapacity"}}</div>
+        <div class="item-detail item-action">{{localize "SFRPG.InventoryUsage"}}</div>
 
         {{#if ../owner}}
         <div class="item-controls">
             <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> {{localize "STARFINDER.InventoryAdd"}}
+                <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
             </a>
         </div>
         {{/if}}
@@ -47,8 +47,8 @@
                 </h4>
                 {{#if item.hasAttack}}
                 <div class="item-action flexcol">
-                    <button class="tag attack">{{localize "STARFINDER.Attack"}}</button>
-                    <button class="tag damage">{{localize "STARFINDER.Damage"}}</button>
+                    <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
+                    <button class="tag damage">{{localize "SFRPG.Damage"}}</button>
                 </div>
                 {{/if}}
             </div>
@@ -63,7 +63,7 @@
             </div>
 
             <div class="item-detail item-equipped">
-            {{#if item.data.equipped }} {{localize "STARFINDER.InventoryEquipped"}}
+            {{#if item.data.equipped }} {{localize "SFRPG.InventoryEquipped"}}
             {{/if}}
             </div>
             {{/if}}

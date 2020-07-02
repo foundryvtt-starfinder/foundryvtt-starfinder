@@ -10,7 +10,7 @@ export default function (engine) {
             return Math.max(400 * cr, 50);
         }
 
-        return CONFIG.STARFINDER.CR_EXP_LEVELS[cr];
+        return CONFIG.SFRPG.CR_EXP_LEVELS[cr];
     };
 
     engine.closures.add("calculateNpcXp", (fact, context) => {

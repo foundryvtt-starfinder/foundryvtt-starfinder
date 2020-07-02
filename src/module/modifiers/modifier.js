@@ -1,4 +1,4 @@
-import { StarfinderModifierTypes, StarfinderModifierType, StarfinderEffectType } from "./types.js";
+import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "./types.js";
 import { generateUUID } from '../utilities.js';
 
 /**
@@ -18,13 +18,13 @@ import { generateUUID } from '../utilities.js';
  * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
  * @param {String|null}   data.id            Override a random id with a specific one.
  */
-export default class StarfinderModifier {
+export default class SFRPGModifier {
     constructor({
         name = "", 
         modifier = 0, 
-        type = StarfinderModifierTypes.UNTYPED, 
-        modifierType = StarfinderModifierType.CONSTANT, 
-        effectType = StarfinderEffectType.SKILL, 
+        type = SFRPGModifierTypes.UNTYPED, 
+        modifierType = SFRPGModifierType.CONSTANT, 
+        effectType = SFRPGEffectType.SKILL, 
         valueAffected = "", 
         enabled = true, 
         source = "", 

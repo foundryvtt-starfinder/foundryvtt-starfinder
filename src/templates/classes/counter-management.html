@@ -1,23 +1,23 @@
 <div id="counter-management-position">
-<h2>{{localize "STARFINDER.CounterClassesManagementTitle"}} {{labelClasses}}</h2>
+<h2>{{localize "SFRPG.CounterClassesManagementTitle"}} {{labelClasses}}</h2>
     {{#if (eq classes "solarianAttunement")}}
     <ul class="counter-management-position counter-management-position-solarian">
         <li>
             <div>
                 <h3>Graviton</h3>
-                <img data-actor-id="{{actorId}}" data-management-position="graviton" src="systems/starfinder/icons/classes/graviton.png" >
+                <img data-actor-id="{{actorId}}" data-management-position="graviton" src="systems/sfrpg/icons/classes/graviton.png" >
             </div>
         </li>
         <li>
             <div>
                 <h3>Photon</h3>
-                <img data-actor-id="{{actorId}}" data-management-position="photon" src="systems/starfinder/icons/classes/photon.png" >
+                <img data-actor-id="{{actorId}}" data-management-position="photon" src="systems/sfrpg/icons/classes/photon.png" >
             </div>
         </li>
         <li>
             <div>
-                <h3>{{localize "STARFINDER.CounterClassesSolarianUnaligned"}}</h3>
-                <img data-actor-id="{{actorId}}" data-management-position="solarianAttunement" src="systems/starfinder/icons/classes/solarianAttunement.png" >
+                <h3>{{localize "SFRPG.CounterClassesSolarianUnaligned"}}</h3>
+                <img data-actor-id="{{actorId}}" data-management-position="solarianAttunement" src="systems/sfrpg/icons/classes/solarianAttunement.png" >
             </div>
         </li>
 
@@ -27,17 +27,17 @@
         <li>
             <div>
                 <h3>{{labelClasses}}</h3>
-                <img src="systems/starfinder/icons/classes/{{classes}}.png" >
+                <img src="systems/sfrpg/icons/classes/{{classes}}.png" >
             </div>
         </li>
     </ul>
     {{/if}}
     <div class="counter-management-info">
-        <label>{{localize "STARFINDER.CounterClassesCurrentPositionLabel"}}</label><input class="counter-management-position-input" value="{{currentPosition}}" name="position" readonly><br />
-        <label>{{localize "STARFINDER.CounterClassesCurrentCount"}}</label><input class="counter-management-counter-input" value="{{counter}}" name="count" readonly>
+        <label>{{localize "SFRPG.CounterClassesCurrentPositionLabel"}}</label><input class="counter-management-position-input" value="{{currentPosition}}" name="position" readonly><br />
+        <label>{{localize "SFRPG.CounterClassesCurrentCount"}}</label><input class="counter-management-counter-input" value="{{counter}}" name="count" readonly>
     </div>
     <hr>
     <div class="counter-management-button">
-        <button data-actor-id="{{actorId}}" data-management-classes="{{classes}}" data-management-position="{{currentPosition}}" name="counter-management-button-add">{{localize "STARFINDER.CounterClassesAddButton"}}</button>/<button data-management-classes="{{classes}}" data-actor-id="{{actorId}}" data-management-position="{{currentPosition}}" name="counter-management-button-remove">{{localize "STARFINDER.CounterClassesRemoveButton"}}</button>
+        <button data-actor-id="{{actorId}}" data-management-classes="{{classes}}" data-management-position="{{currentPosition}}" name="counter-management-button-add">{{localize "SFRPG.CounterClassesAddButton"}}</button>/<button data-management-classes="{{classes}}" data-actor-id="{{actorId}}" data-management-position="{{currentPosition}}" name="counter-management-button-remove">{{localize "SFRPG.CounterClassesRemoveButton"}}</button>
     </div>
 </div>

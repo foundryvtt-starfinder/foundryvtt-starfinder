@@ -3,19 +3,20 @@ import { CounterManagementWindows } from "./counter-management-windows.js";
 /**
  * Helper class to handle rendering the custom combat tracker.
  */
-export class CounterManagement {
-
-    existingFeature = ['solarianAttunement', 'vanguardEntropy', 'soldierKi'];
-    currentActor;
-    counterClasses = {};
-    counter = {
-        'solarianAttunement': 0,
-        'vanguardEntropy': 0,
-        'soldierKi': 0,
-    };
-    initDone = false;
-    currentRound = -1;
-    windowsBox;
+export default class CounterManagement {
+    constructor() {
+        this.existingFeature = ['solarianAttunement', 'vanguardEntropy', 'soldierKi'];
+        this.currentActor = null;
+        this.counterClasses = {};
+        this.counter = {
+            'solarianAttunement': 0,
+            'vanguardEntropy': 0,
+            'soldierKi': 0,
+        };
+        this.initDone = false;
+        this.currentRound = -1;
+        this.windowsBox = null;
+    }
 
     // This must be called in the `init` hook in order for the other hooks to
     // fire correctly.
@@ -64,7 +65,7 @@ export class CounterManagement {
                         if(game.combat.data.round > this.currentRound) {
                             this.addOneToCounterForActiveActor(c, currentClasses);
                         }
-                        $combatant.find('.token-image').after("<div class='counter-token-management'><div class='counter-token'><p>"+this.getCurrentCounter(currentClasses)+"</p><img class='counter-token-image' data-actor-id='"+c.actor._id+"' data-actor-classe='"+currentClasses+"' src='systems/starfinder/icons/classes/"+this.getCurrentClassesOrPosition(currentClasses)+".png' /></div></div>");
+                        $combatant.find('.token-image').after("<div class='counter-token-management'><div class='counter-token'><p>"+this.getCurrentCounter(currentClasses)+"</p><img class='counter-token-image' data-actor-id='"+c.actor._id+"' data-actor-classe='"+currentClasses+"' src='systems/sfrpg/icons/classes/"+this.getCurrentClassesOrPosition(currentClasses)+".png' /></div></div>");
 
                         //Display the dialogue box to manage the right class
                         html.find('.counter-token-image').click(event => {
@@ -74,7 +75,7 @@ export class CounterManagement {
                     }else if(featureCounterActivated.count > 1) {
                         //Todo need to change the design part with a rollover windows with multiple counter
                         //Todo Need to merge this part with the if == 1
-                        console.log("TODO - Counter Management Classes - More than one classe with counter tracker");
+                        //TODO - Counter Management Classes - More than one classe with counter tracker"
                     }
                 });
 
@@ -217,8 +218,8 @@ export class CounterManagement {
             'classesToManage':[]
         };
 
-        if(typeof c.actor.data.flags.starfinder != "undefined") {
-            let activeFeature = c.actor.data.flags.starfinder;
+        if(typeof c.actor.data.flags.sfrpg != "undefined") {
+            let activeFeature = c.actor.data.flags.sfrpg;
 
             for (let [key, name] of Object.entries(this.existingFeature)) {
                 if (activeFeature.hasOwnProperty(name)){

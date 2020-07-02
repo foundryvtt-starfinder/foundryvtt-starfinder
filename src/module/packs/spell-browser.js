@@ -1,14 +1,14 @@
 /**
- * ItemBrowserStarfinder forked from ItemBrowserPF2e by Felix Miller aka syl3r86
+ * ItemBrowserSFRPG forked from ItemBrowserPF2e by Felix Miller aka syl3r86
  * @author Fabien Dey
  * @version 0.1
  */
 import Progress from '../progress.js';
 
-class ItemBrowserStarfinder extends Application {
+class ItemBrowserSFRPG extends Application {
   static get defaultOptions() {
     const options = super.defaultOptions;
-    options.classes = options.classes.concat('spell-browser-window'); // options.template = "systems/pf2e/templates/packs/spell-browser.html";
+    options.classes = options.classes.concat(['sfrpg', 'spell-browser-window']);
     options.title = 'Add an Item';
     options.width = 800;
     options.height = 700;
@@ -64,14 +64,12 @@ class ItemBrowserStarfinder extends Application {
     }); // toggle visibility of filter containers
 
     html.on('click', '.filtercontainer h3', ev => {
-      $(ev.target.nextElementSibling).toggle(100, e => {// $(html).css('min-height', $(html.find('.control-area')).height() + 'px');
-      });
+      $(ev.target.nextElementSibling).toggle(100);
     }); // toggle hints
 
     html.on('mousedown', 'input[name=textFilter]', ev => {
       if (event.which == 3) {
-        $(html.find('.hint')).toggle(100, e => {// $(html).css('min-height', $(html.find('.control-area')).height() + 'px');
-        });
+        $(html.find('.hint')).toggle(100);
       }
     }); // sort spell list
 
@@ -114,7 +112,7 @@ class ItemBrowserStarfinder extends Application {
     if (byName) {
       list.sort((a, b) => {
         const aName = $(a).find('.spell-name a')[0].innerHTML;
-        const bName = $(b).find('.spell-name a')[0].innerHTML; // console.log(`${aName} vs ${bName}`);
+        const bName = $(b).find('.spell-name a')[0].innerHTML;
 
         if (aName < bName) return -1;
         if (aName > bName) return 1;
@@ -189,7 +187,7 @@ class ItemBrowserStarfinder extends Application {
       if (Object.keys(this.filters[filter]).length > 0) {
           let hide = true;
         /*
-        * Filter for allowedClasses for spell item
+         * Filter for allowedClasses for spell item
          */
         if(filter == 'allowedClasses'){
             let current = this.filters[filter];
@@ -222,7 +220,6 @@ class ItemBrowserStarfinder extends Application {
 
             if (hide) return false;
         }else{
-            console.log(filter);
             const filteredElements = $(element).find(`input[name=${filter}]`).val();
             let hide = true;
 
@@ -240,7 +237,6 @@ class ItemBrowserStarfinder extends Application {
       }
     }
 
-    console.log("Display Spell");
     return true;
   }
 
@@ -274,25 +270,6 @@ class ItemBrowserStarfinder extends Application {
   }
   /* -------------------------------------------- */
 
-  /**
-     * Get the action image to use for a particular action type.
-     * @private
-     */
-
-
-  _getActionImg(action) {
-    const img = {
-      0: 'icons/svg/mystery-man.svg',
-      1: 'systems/pf2e/icons/actions/OneAction.png',
-      2: 'systems/pf2e/icons/actions/TwoActions.png',
-      3: 'systems/pf2e/icons/actions/ThreeActions.png',
-      free: 'systems/pf2e/icons/actions/FreeAction.png',
-      reaction: 'systems/pf2e/icons/actions/Reaction.png',
-      passive: 'systems/pf2e/icons/actions/Passive.png'
-    };
-    return img[action];
-  }
-
   get _loadedPacks() {
     return Object.entries(this.settings).flatMap(([collection, {
       load
@@ -304,8 +281,8 @@ class ItemBrowserStarfinder extends Application {
   openSettings() {
     // Generate HTML for settings menu
     // Spell Browser
-    let content = '<h2> Spell Browser</h2>';
-    content += '<p> Which compendium should be loaded? Uncheck each compendium that contains no spells.</p>';
+    let content = '<h2>Spell Browser</h2>';
+    content += '<p>Which compendium should be loaded? Uncheck each compendium that contains no spells.</p>';
 
     for (const key in this.settings) {
       content += `<div><input type=checkbox data-browser-type="spell" name="${key}" ${spellBrowser.settings[key].load ? 'checked=true' : ''}><label>${spellBrowser.settings[key].name}</label></div>`;
@@ -330,9 +307,9 @@ class ItemBrowserStarfinder extends Application {
           if (browserType === 'spell') spellBrowser.settings[input.name].load = input.checked;
         }
 
-        console.log('Starfinder System | Compendium Browser | Saving new Settings'); // write Spell Browser settings
+        console.log('SFRPG System | Compendium Browser | Saving new Settings'); // write Spell Browser settings
 
-        game.settings.set('SpellBrowser', 'settings', JSON.stringify(spellBrowser.settings)); // write Feat Browser settings
+        game.settings.set('sfrpg', 'spellBrowser', JSON.stringify(spellBrowser.settings)); // write Feat Browser settings
         this.settingsChanged = true;
       }
     }, {
@@ -343,13 +320,13 @@ class ItemBrowserStarfinder extends Application {
 
 }
 
-class SpellBrowserStarfinder extends ItemBrowserStarfinder {
+class SpellBrowserSFRPG extends ItemBrowserSFRPG {
   constructor(app) {
     super(app); // load settings
 
     Hooks.on('ready', e => {
       // creating game setting container
-      game.settings.register('SpellBrowser', 'settings', {
+      game.settings.register('sfrpg', 'spellBrowser', {
         name: 'Spell Browser Settings',
         hint: 'Settings to exclude packs from loading',
         default: '',
@@ -360,11 +337,11 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
         }
       }); // load settings from container
 
-      let settings = game.settings.get('SpellBrowser', 'settings');
+      let settings = game.settings.get('sfrpg', 'spellBrowser');
 
       if (settings == '') {
         // if settings are empty create the settings data
-        console.log('PF2e System | Spell Browser | Creating settings');
+        console.log('SFRPG | Spell Browser | Creating settings');
         settings = {};
 
         for (const compendium of game.packs) {
@@ -376,10 +353,10 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
           }
         }
 
-        game.settings.set('SpellBrowser', 'settings', JSON.stringify(settings));
+        game.settings.set('sfrpg', 'spellBrowser', JSON.stringify(settings));
       } else {
         // if settings do exist, reload and apply them to make sure they conform with current compendium
-        console.log('PF2e System | Spell Browser | Loading settings');
+        console.log('SFRPG | Spell Browser | Loading settings');
         const loadedSettings = JSON.parse(settings);
         settings = {};
 
@@ -396,17 +373,13 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
 
       this.settings = settings;
       this.settingsChanged = false;
-      /* this.loadSpells().then((obj) => {
-        this.spells = obj;
-      }); */
     });
     this.hookCompendiumList();
   }
 
   static get defaultOptions() {
     const options = super.defaultOptions;
-    options.classes = options.classes.concat('spell-browser-window');
-    options.template = 'systems/starfinder/templates/packs/spell-browser.html'; // options.template = "systems/pf2e/templates/packs/feat-browser.html";
+    options.template = 'systems/sfrpg/templates/packs/spell-browser.html';
 
     options.title = 'Add a Spell';
     options.width = 800;
@@ -417,9 +390,9 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
   hookCompendiumList() {
     Hooks.on('renderCompendiumDirectory', (app, html, data) => {
       // Spell Browser Buttons
-      const grouping = $('<div class="browser-group" style="width:100%"></div>');
-      const importButton = $(`<button class="spell-browser-btn" style="max-width: ${game.user.isGM ? '84' : '96'}%;"><i class="fas fa-fire"></i> Spell Browser</button>`);
-      const settingsButton = $('<button class="spell-browser-settings-btn" style="max-width: 10%;"><i class="fas fa-cog" title="Right click to reset settings."></i></button>');
+      const grouping = $('<div class="flexcol browser-group"></div>');
+      const importButton = $(`<button class="spell-browser-btn"><i class="fas fa-fire"></i> Spell Browser</button>`);
+      const settingsButton = $('<button class="spell-browser-settings-btn"><i class="fas fa-cog" title="Right click to reset settings."></i></button>');
 
       if (game.user.isGM) {
         html.find('.directory-footer').append(grouping);
@@ -461,14 +434,12 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
     const data = {};
     data.spells = this.spells;
     data.classes = this.classes;
-    //data.times = this.times;
     data.schools = this.schools;
-    //data.traditions = CONFIG.PF2E.spellTraditions;
     return data;
   }
 
   async loadSpells() {
-    console.log('PF2e System | Spell Browser | Started loading spells');
+    console.log('SFRPG | Spell Browser | Started loading spells');
     const foundSpells = '';
     const unfoundSpells = '';
     const spells = {};
@@ -481,7 +452,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
       pack,
       content
     } of packLoader.loadPacks('Item', this._loadedPacks)) {
-      console.log(`PF2e System | Spell Browser | ${pack.metadata.label} - ${content.length} entries found`);
+      console.log(`SFRPG | Spell Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
       for (let spell of content) {
         spell = spell.data;
@@ -491,7 +462,7 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
           spell.compendium = pack.collection; // format spell level for display
 
           if (spell.data.allowedClasses !== undefined) {
-              const classList = Object.keys(CONFIG.STARFINDER.allowedClasses);
+              const classList = Object.keys(CONFIG.SFRPG.allowedClasses);
               const classIntersection = classList.filter(x => Object.keys(spell.data.allowedClasses).filter(x => spell.data.allowedClasses[x]).includes(x));
 
               if (classIntersection.length !== 0) {
@@ -502,33 +473,20 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
                   }
               } // recording casting times
           }
-          /* if (spell.data.time.value !== undefined) {
-            let time = spell.data.time.value.toLowerCase();
-            if (time.indexOf('reaction') != -1) time = 'reaction';
 
-            if (time != '' && timeArr.includes(time) === false) {
-              timeArr.push(time);
-            }
-          } */ // format spell level for display
+          if (spell.data.school !== undefined) {
+              if (schoolsArr.includes(spell.data.school) === false) {
+                  schoolsArr.push(spell.data.school);
+              }
+          }
 
-
-          // if (spell.data.time.value === 'reaction') spell.data.time.img = this._getActionImg('reaction');else if (spell.data.time.value === 'free') spell.data.time.img = this._getActionImg('free');else if (parseInt(spell.data.time.value)) spell.data.time.img = this._getActionImg(parseInt(spell.data.time.value)); // add spell to spells array
-
-            //spells[spell._id] = spell; // recording schools
-
-            if (spell.data.school !== undefined) {
-                if (schoolsArr.includes(spell.data.school) === false) {
-                    schoolsArr.push(spell.data.school);
-                }
-            }
-
-            spells[spell._id] = spell;
+          spells[spell._id] = spell;
         }
       }
     }
 
     if (unfoundSpells !== '') {
-      console.log('PF2e System | Spell Browser | List of Spells that don\'t have a class assosiated to them:');
+      console.log('SFRPG | Spell Browser | List of Spells that don\'t have a class assosiated to them:');
       console.log(unfoundSpells);
     } //  sorting and assigning better class names
 
@@ -538,22 +496,21 @@ class SpellBrowserStarfinder extends ItemBrowserStarfinder {
 
     for (const classStr of classesArr) {
       // let fixedClassName = classStr.replace('revisited', ' revisited').toLowerCase().replace(/(^|\s)([a-z])/g, function (m, p1, p2) { return p1 + p2.toUpperCase(); });
-      classesObj[classStr] = CONFIG.STARFINDER.allowedClasses[classStr];
+      classesObj[classStr] = CONFIG.SFRPG.allowedClasses[classStr];
     } // sorting and assigning proper school names
 
     const schoolsObj = {};
     schoolsArr = schoolsArr.sort();
 
     for (const school of schoolsArr) {
-      schoolsObj[school] = CONFIG.STARFINDER.spellSchools[school];
+      schoolsObj[school] = CONFIG.SFRPG.spellSchools[school];
     }
 
     this.classes = classesObj;
-    //this.times = timeArr.sort();
     this.schools = schoolsObj;
 
 
-    console.log('PF2e System | Spell Browser | Finished loading spells');
+    console.log('SFRPG | Spell Browser | Finished loading spells');
     return spells;
   }
 
@@ -609,4 +566,4 @@ class PackLoader {
 }
 
 const packLoader = new PackLoader();
-export const spellBrowser = new SpellBrowserStarfinder();
+export const spellBrowser = new SpellBrowserSFRPG();

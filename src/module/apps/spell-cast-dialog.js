@@ -1,3 +1,6 @@
+import { ActorSFRPG } from "../actor/actor.js";
+import { ItemSFRPG } from "../item/item.js";
+
 /**
  * A specialized Dialog subclass for casting a spell item at a certain level
  * @type {Dialog}
@@ -5,17 +8,17 @@
 export class SpellCastDialog extends Dialog {
     constructor(actor, item, dialogData={}, options={}) {
       super(dialogData, options);
-      this.options.classes = ["starfinder", "dialog"];
+      this.options.classes = ["sfrpg", "dialog"];
   
       /**
        * Store a reference to the Actor entity which is casting the spell
-       * @type {ActorStarfinder}
+       * @type {ActorSFRPG}
        */
       this.actor = actor;
   
       /**
        * Store a reference to the Item entity which is the spell being cast
-       * @type {ItemStarfinder}
+       * @type {ItemSFRPG}
        */
       this.item = item;
     }
@@ -33,8 +36,8 @@ export class SpellCastDialog extends Dialog {
     /**
      * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
      * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
-     * @param {ActorStarfinder} actor
-     * @param {ItemStarfinder} item
+     * @param {ActorSFRPG} actor
+     * @param {ItemSFRPG} item
      * @return {Promise}
      */
     static async create(actor, item) {
@@ -48,7 +51,7 @@ export class SpellCastDialog extends Dialog {
       // Determine the levels which are feasible
       const spellLevels = Object.values(ad.spells).map((l, i) => {
         if ( !canUpcast ) return { canCast: false }
-        const label = (lvl > 0) ? `${CONFIG.STARFINDER.spellLevels[i]} (${l.value} Slots)` : CONFIG.STARFINDER.spellLevels[i];
+        const label = (lvl > 0) ? `${CONFIG.SFRPG.spellLevels[i]} (${l.value} Slots)` : CONFIG.SFRPG.spellLevels[i];
         return {
           level: i,
           label: label,
@@ -61,7 +64,7 @@ export class SpellCastDialog extends Dialog {
       const canCast = spellLevels.some(l => l.hasSlots);
   
       // Render the Spell casting template
-      const html = await renderTemplate("systems/starfinder/templates/apps/spell-cast.html", {
+      const html = await renderTemplate("systems/sfrpg/templates/apps/spell-cast.html", {
         item: item.data,
         canCast,
         canUpcast,

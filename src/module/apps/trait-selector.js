@@ -3,14 +3,14 @@
  * 
  * @type {FormApplication}
  */
-export class TraitSelectorStarfinder extends FormApplication {
+export class TraitSelectorSFRPG extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
 
         options.id = "trait-selector";
-        options.classes = ["starfinder"];
+        options.classes = ["sfrpg"];
         options.title = "Actor Trait Selection";
-        options.template = "systems/starfinder/templates/apps/trait-selector.html";
+        options.template = "systems/sfrpg/templates/apps/trait-selector.html";
         options.width = 320;
         options.height = "auto";
 

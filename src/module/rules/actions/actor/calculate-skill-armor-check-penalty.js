@@ -1,4 +1,4 @@
-import { StarfinderEffectType, StarfinderModifierType, StarfinderModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function (engine) {
     engine.closures.add("calculateSkillArmorCheckPenalty", (fact, context) => {
@@ -23,19 +23,19 @@ export default function (engine) {
         };
 
         /** @deprecated Will be removed in 0.4.0 */
-        const armorSavant = getProperty(flags, 'starfinder.armorSavant') ? 1 : 0;
+        const armorSavant = getProperty(flags, 'sfrpg.armorSavant') ? 1 : 0;
 
         const acpMods = modifiers.filter(mod => {
             return mod.enabled && 
-                [StarfinderEffectType.ACP].includes(mod.effectType) &&
-                mod.modifierType === StarfinderModifierType.CONSTANT;
+                [SFRPGEffectType.ACP].includes(mod.effectType) &&
+                mod.modifierType === SFRPGModifierType.CONSTANT;
         });
 
         const mods = context.parameters.stackModifiers.process(acpMods, context);
         let mod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;
 
-            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(curr[1].type)) {
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[1].type)) {
                 for (const bonus of curr[1]) {
                     prev += addModifier(bonus);
                 }
@@ -56,7 +56,7 @@ export default function (engine) {
             skill.mod += acp;
 
             if (acp >= 0) continue;
-            const tooltip = game.i18n.format("STARFINDER.ACPTooltip", {acp: acp.signedString()});
+            const tooltip = game.i18n.format("SFRPG.ACPTooltip", {acp: acp.signedString()});
             if (!skill.tooltip) skill.tooltip = [tooltip];
             else skill.tooltip.push(tooltip);
         }

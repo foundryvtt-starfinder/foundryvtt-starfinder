@@ -1,6 +1,6 @@
 <div class="traits">
     <div class="form-group">
-        <label>{{localize "STARFINDER.Size"}}</label>
+        <label>{{localize "SFRPG.Size"}}</label>
         <select class="actor-size" name="data.traits.size">
             {{#select data.traits.size}}
             {{#each config.actorSizes as |label size|}}
@@ -11,7 +11,7 @@
     </div>
 
     <div class="form-group">
-        <label>{{localize "STARFINDER.KeyAbility"}}</label>
+        <label>{{localize "SFRPG.KeyAbility"}}</label>
         <select class="actor-keyability" name="data.attributes.keyability">
             {{#select data.attributes.keyability}}
             <option value="">Choose One</option>
@@ -23,29 +23,29 @@
     </div>
 
     <div class="form-group {{#unless data.traits.senses}}inactive{{/unless}}">
-        <label>{{localize "STARFINDER.Senses"}}</label>
+        <label>{{localize "SFRPG.Senses"}}</label>
         <input type="text" name="data.traits.senses" value="{{data.traits.senses}}" placeholder="None"/>
     </div>
 
     <div class="form-group">
-        <label>{{localize "STARFINDER.NumberOfArms"}}</label>
+        <label>{{localize "SFRPG.NumberOfArms"}}</label>
         <input type="text" name="data.attributes.arms" value="{{data.attributes.arms}}" />
     </div>
     
     <div class="form-group">
-        <label>{{localize "STARFINDER.SpellResistance"}}</label>
+        <label>{{localize "SFRPG.SpellResistance"}}</label>
         <input type="text" name="data.traits.sr" value="{{data.traits.sr}}" data-dtype="Number" />
     </div>
     
     <div class="form-group damage-reduction">
-        <label>{{localize "STARFINDER.DamageReduction"}}</label>
+        <label>{{localize "SFRPG.DamageReduction"}}</label>
         <input type="text" name="data.traits.damageReduction.value" value="{{data.traits.damageReduction.value}}" data-dtype="Number" />
         <span class="sep">/</span>
         <input type="text" name="data.traits.damageReduction.negatedBy" value="{{data.traits.damageReduction.negatedBy}}" />
     </div>
 
     <div class="form-group {{data.traits.languages.cssClass}}">
-        <label for="data.traits.languages">{{localize "STARFINDER.Languages"}}</label>
+        <label for="data.traits.languages">{{localize "SFRPG.Languages"}}</label>
         <ul class="traits-list">
         {{#each data.traits.languages.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
@@ -55,7 +55,7 @@
     </div>
 
     <div class="form-group {{data.traits.dr.cssClass}}">
-        <label for="data.traits.dr">{{localize "STARFINDER.DamRes"}}</label>
+        <label for="data.traits.dr">{{localize "SFRPG.DamRes"}}</label>
         <ul class="traits-list">
         {{#each data.traits.dr.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
@@ -65,7 +65,7 @@
     </div>
 
     <div class="form-group {{data.traits.dv.cssClass}}">
-        <label for="data.traits.dv">{{localize "STARFINDER.DamVuln"}}</label>
+        <label for="data.traits.dv">{{localize "SFRPG.DamVuln"}}</label>
         <ul class="traits-list">
         {{#each data.traits.dv.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
@@ -75,7 +75,7 @@
     </div>
 
     <div class="form-group {{data.traits.di.cssClass}}">
-        <label for="data.traits.di">{{localize "STARFINDER.DamImm"}}</label>
+        <label for="data.traits.di">{{localize "SFRPG.DamImm"}}</label>
         <ul class="traits-list">
         {{#each data.traits.di.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
@@ -85,7 +85,7 @@
     </div>
 
     <div class="form-group {{data.traits.ci.cssClass}}">
-        <label for="data.traits.ci">{{localize "STARFINDER.ConImm"}}</label>
+        <label for="data.traits.ci">{{localize "SFRPG.ConImm"}}</label>
         <ul class="traits-list">
         {{#each data.traits.ci.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
@@ -96,7 +96,7 @@
 
     {{#if isCharacter}}
     <div class="form-group {{data.traits.weaponProf.cssClass}}">
-        <label for="data.traits.weaponProf">{{localize "STARFINDER.TraitWeaponProf"}}</label>
+        <label for="data.traits.weaponProf">{{localize "SFRPG.TraitWeaponProf"}}</label>
         <ul class="traits-list">
         {{#each data.traits.weaponProf.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
@@ -106,7 +106,7 @@
     </div>
 
     <div class="form-group {{data.traits.armorProf.cssClass}}">
-        <label for="data.traits.armorProf">{{localize "STARFINDER.TraitArmorProf"}}</label>
+        <label for="data.traits.armorProf">{{localize "SFRPG.TraitArmorProf"}}</label>
         <ul class="traits-list">
         {{#each data.traits.armorProf.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
@@ -117,7 +117,7 @@
     {{/if}}
 
     <div class="form-group ">
-        <label>{{localize "STARFINDER.SpecialTraits"}}</label>
+        <label>{{localize "SFRPG.SpecialTraits"}}</label>
         <a class="configure-flags"><i class="fas fa-cog"></i></a>
     </div>
 </div>

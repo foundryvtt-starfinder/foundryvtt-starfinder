@@ -14,7 +14,7 @@ export default function (engine) {
                 case "full": mod += cls.data.levels; break;
             }
 
-            data.attributes.babtooltip.push(game.i18n.format("STARFINDER.BABTooltip", {
+            data.attributes.babtooltip.push(game.i18n.format("SFRPG.BABTooltip", {
                 class: cls.name,
                 bonus: mod.signedString()
             }));
