@@ -38,10 +38,10 @@
 
     {{!-- NPC Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="attributes">{{ localize "STARFINDER.Attributes" }}</a>
-        <a class="item" data-tab="features">{{ localize "STARFINDER.Features" }}</a>
-        <a class="item" data-tab="spellbook">{{ localize "STARFINDER.Spellbook" }}</a>
-        <a class="item" data-tab="biography">{{ localize "STARFINDER.Biography" }}</a>
+        <a class="item active" data-tab="attributes">{{ localize "SFRPG.Attributes" }}</a>
+        <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
+        <a class="item" data-tab="spellbook">{{ localize "SFRPG.Spellbook" }}</a>
+        <a class="item" data-tab="biography">{{ localize "SFRPG.Biography" }}</a>
     </nav>
 
     {{!-- NPC Sheet Body --}}
@@ -74,7 +74,7 @@
                 {{/each}}
                 <li class="flexrow">
                     <div class="form-group">
-                        <button id="add-skills"><i class="fas fa-plus"></i> {{localize "STARFINDER.ToggleSkillsButtonLabel"}}</button>
+                        <button id="add-skills"><i class="fas fa-plus"></i> {{localize "SFRPG.ToggleSkillsButtonLabel"}}</button>
                     </div>
                 </li>
             </ul>
@@ -84,7 +84,7 @@
                 {{!-- Attributes --}}
                 <ul class="attributes flexrow">
                     <li class="attribute health">
-                        <h4 class="attribute-name box-title rollable">{{ localize "STARFINDER.Health" }}</h4>
+                        <h4 class="attribute-name box-title rollable">{{ localize "SFRPG.Health" }}</h4>
                         <div class="attribute-value multiple">
                             <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
                                 data-dtype="Number" placeholder="10" />
@@ -95,7 +95,7 @@
                     </li>
 
                     <li class="attribute health">
-                        <h4 class="attribute-name box-title">{{ localize "STARFINDER.Stamina"}}</h4>
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.Stamina"}}</h4>
                         <div class="attribute-value multiple">
                             <input name="data.attributes.sp.value" type="text" value="{{data.attributes.sp.value}}"
                                 data-dtype="Number" placeholder="10" />
@@ -106,7 +106,7 @@
                     </li>
 
                     <li class="attribute">
-                        <h4 class="attribute-name box-title">{{ localize "STARFINDER.EnergyArmorClass" }}</h4>
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
                         <div class="attribute-value">
                             <input name="data.attributes.eac.value" type="text" value="{{data.attributes.eac.value}}"
                                 data-dtype="Number" placeholder="10" />
@@ -114,7 +114,7 @@
                     </li>
 
                     <li class="attribute">
-                        <h4 class="attribute-name box-title">{{ localize "STARFINDER.KineticArmorClass" }}</h4>
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.KineticArmorClass" }}</h4>
                         <div class="attribute-value">
                             <input name="data.attributes.kac.value" type="text" value="{{data.attributes.kac.value}}"
                                 data-dtype="Number" placeholder="10" />
@@ -125,7 +125,7 @@
 
                 <ul class="attributes flexrow">                    
                     <li class="attribute">
-                        <h4 class="attribute-name box-title">{{ localize "STARFINDER.Resolve"}}</h4>
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.Resolve"}}</h4>
                         <div class="attribute-value multiple">
                             <input name="data.attributes.rp.value" type="text" value="{{data.attributes.rp.value}}"
                                 data-dtype="Number" placeholder="10" />
@@ -141,7 +141,7 @@
                         </div>
                     </li>
                     <li class="attribute">
-                        <h4 class="attribute-name box-title">{{ localize "STARFINDER.Speed" }}</h4>
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
                         <div class="attribute-value">
                             <input name="data.attributes.speed.value" type="text"
                                 value="{{data.attributes.speed.value}}" placeholder="0" />
@@ -149,28 +149,28 @@
                         <footer class="attribute-footer">
                             <input type="text" class="speed" name="data.attributes.speed.special"
                                 value="{{data.attributes.speed.special}}"
-                                placeholder="{{ localize 'STARFINDER.SpeedSpecial' }}" />
+                                placeholder="{{ localize 'SFRPG.SpeedSpecial' }}" />
                         </footer>
                     </li>
                 </ul>
 
                 <ul class="attributes flexrow">
                     <li class="attribute save" data-save="fort">
-                        <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.FortitudeSave"}}</h4>
+                        <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.FortitudeSave"}}</h4>
                         <div class="attribute-value">
                             <input type="text" data-dtype="Number" name="data.attributes.fort.bonus" value="{{numberFormat data.attributes.fort.bonus decimals=0 sign=true}}" />
                         </div>
                     </li>
 
                     <li class="attribute save" data-save="reflex">
-                        <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.ReflexSave"}}</h4>
+                        <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.ReflexSave"}}</h4>
                         <div class="attribute-value">
                             <input type="text" data-dtype="Number" name="data.attributes.reflex.bonus" value="{{numberFormat data.attributes.reflex.bonus decimals=0 sign=true}}" />
                         </div>
                     </li>
 
                     <li class="attribute save" data-save="will">
-                        <h4 class="attribute-name save-name box-title rollable">{{localize "STARFINDER.WillSave"}}</h4>
+                        <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.WillSave"}}</h4>
                         <div class="attribute-value">
                             <input type="text" data-dtype="Number" name="data.attributes.will.bonus" value="{{numberFormat data.attributes.will.bonus decimals=0 sign=true}}" />
                         </div>
@@ -182,18 +182,18 @@
                 </div>
 
                 {{!-- Traits --}}
-                {{> "systems/starfinder/templates/actors/parts/actor-traits.html"}}
+                {{> "systems/sfrpg/templates/actors/parts/actor-traits.html"}}
             </section>
         </div>
 
         {{!-- Features Tab --}}
         <div class="tab features flexcol" data-group="primary" data-tab="features">
-            {{> "systems/starfinder/templates/actors/parts/actor-features.html" sections=features}}
+            {{> "systems/sfrpg/templates/actors/parts/actor-features.html" sections=features}}
         </div>
 
         {{!-- Spellbook Tab --}}
         <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
-            {{> "systems/starfinder/templates/actors/parts/actor-spellbook.html"}}
+            {{> "systems/sfrpg/templates/actors/parts/actor-spellbook.html"}}
         </div>
 
         {{!-- Biography Tab --}}

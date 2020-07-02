@@ -1,6 +1,6 @@
-import { DiceStarfinder } from "../dice.js";
+import { DiceSFRPG } from "../dice.js";
 
-export class ItemStarfinder extends Item {
+export class ItemSFRPG extends Item {
 
   /* -------------------------------------------- */
   /*  Item Properties                             */
@@ -44,7 +44,7 @@ export class ItemStarfinder extends Item {
    */
   prepareData() {
     super.prepareData();
-    const C = CONFIG.STARFINDER;
+    const C = CONFIG.SFRPG;
     const labels = {};
     const itemData = this.data;
     const actorData = this.actor ? this.actor.data : {};
@@ -147,7 +147,7 @@ export class ItemStarfinder extends Item {
 
     // Render the chat card template
     const templateType = ["tool", "consumable"].includes(this.data.type) ? this.data.type : "item";
-    const template = `systems/starfinder/templates/chat/${templateType}-card.html`;
+    const template = `systems/sfrpg/templates/chat/${templateType}-card.html`;
     const html = await renderTemplate(template, templateData);
 
     // Basic chat message data
@@ -225,7 +225,7 @@ export class ItemStarfinder extends Item {
    */
   _equipmentChatData(data, labels, props) {
     props.push(
-      CONFIG.STARFINDER.armorTypes[data.armor.type],
+      CONFIG.SFRPG.armorTypes[data.armor.type],
       labels.eac || null,
       labels.kac || null
     );
@@ -239,9 +239,9 @@ export class ItemStarfinder extends Item {
    */
   _weaponChatData(data, labels, props) {
     props.push(
-      CONFIG.STARFINDER.weaponTypes[data.weaponType],
+      CONFIG.SFRPG.weaponTypes[data.weaponType],
       ...Object.entries(data.properties).filter(e => e[1] === true)
-        .map(e => CONFIG.STARFINDER.weaponProperties[e[0]])
+        .map(e => CONFIG.SFRPG.weaponProperties[e[0]])
     );
   }
 
@@ -253,7 +253,7 @@ export class ItemStarfinder extends Item {
    */
   _consumableChatData(data, labels, props) {
     props.push(
-      CONFIG.STARFINDER.consumableTypes[data.consumableType],
+      CONFIG.SFRPG.consumableTypes[data.consumableType],
       data.uses.value + "/" + data.uses.max + " Charges"
     );
     data.hasCharges = data.uses.value >= 0;
@@ -267,8 +267,8 @@ export class ItemStarfinder extends Item {
    */
   _toolChatData(data, labels, props) {
     props.push(
-      CONFIG.STARFINDER.abilities[data.ability] || null,
-      CONFIG.STARFINDER.proficiencyLevels[data.proficient || 0]
+      CONFIG.SFRPG.abilities[data.ability] || null,
+      CONFIG.SFRPG.proficiencyLevels[data.proficient || 0]
     );
   }
 
@@ -311,7 +311,7 @@ export class ItemStarfinder extends Item {
     if (data.armorType === 'any') {
       armorType = "Any"
     } else {
-      armorType = CONFIG.STARFINDER.armorTypes[data.armorType];
+      armorType = CONFIG.SFRPG.armorTypes[data.armorType];
     }
 
     props.push(
@@ -324,8 +324,8 @@ export class ItemStarfinder extends Item {
   _augmentationChatData(data, labels, props) {
     props.push(
       "Augmentation",
-      data.type ? CONFIG.STARFINDER.augmentationTypes[data.type] : null,
-      data.system ? CONFIG.STARFINDER.augmentationSytems[data.system] : null
+      data.type ? CONFIG.SFRPG.augmentationTypes[data.type] : null,
+      data.system ? CONFIG.SFRPG.augmentationSytems[data.system] : null
     );
   }
 
@@ -345,9 +345,9 @@ export class ItemStarfinder extends Item {
   _starshipWeaponChatData(data, labels, props) {
     props.push(
       "Starship Weapon",
-      data.weaponType ? CONFIG.STARFINDER.starshipWeaponTypes[data.weaponType] : null,
-      data.class ? CONFIG.STARFINDER.starshipWeaponClass[data.class] : null,
-      data.range ? CONFIG.STARFINDER.starshipWeaponRanges[data.range] : null,
+      data.weaponType ? CONFIG.SFRPG.starshipWeaponTypes[data.weaponType] : null,
+      data.class ? CONFIG.SFRPG.starshipWeaponClass[data.class] : null,
+      data.range ? CONFIG.SFRPG.starshipWeaponRanges[data.range] : null,
       data.mount.mounted ? "Mounted" : "Not Mounted",
       data.mount.activated ? "Activated" : "Not Activated"
     );
@@ -366,7 +366,7 @@ export class ItemStarfinder extends Item {
     // Spell saving throw text
     const abl = ad.attributes.keyability || "int";
     if (this.hasSave && !data.save.dc) data.save.dc = 10 + data.level + ad.abilities[abl].mod;
-    labels.save = `DC ${data.save.dc} ${CONFIG.STARFINDER.saves[data.save.type]}`;
+    labels.save = `DC ${data.save.dc} ${CONFIG.SFRPG.saves[data.save.type]}`;
 
     // Spell properties
     props.push(
@@ -385,7 +385,7 @@ export class ItemStarfinder extends Item {
     // Spell saving throw text
     const abl = data.ability || ad.attributes.keyability || "str";
     if (this.hasSave && !data.save.dc) data.save.dc = 10 + ad.details.level + ad.abilities[abl].mod;
-    labels.save = `DC ${data.save.dc} ${CONFIG.STARFINDER.saves[data.save.type]}`;
+    labels.save = `DC ${data.save.dc} ${CONFIG.SFRPG.saves[data.save.type]}`;
 
     // Feat properties
     props.push(
@@ -396,8 +396,8 @@ export class ItemStarfinder extends Item {
   _themeChatData(data, labels, props) {
     props.push(
       "Theme",
-      data.abilityMod.ability ? `Ability ${CONFIG.STARFINDER.abilities[data.abilityMod.ability]}` : null,
-      data.skill ? `Skill ${CONFIG.STARFINDER.skills[data.skill]}` : null
+      data.abilityMod.ability ? `Ability ${CONFIG.SFRPG.abilities[data.abilityMod.ability]}` : null,
+      data.skill ? `Skill ${CONFIG.SFRPG.skills[data.skill]}` : null
     );
   }
 
@@ -415,7 +415,7 @@ export class ItemStarfinder extends Item {
 
   /**
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the DiceStarfinder.d20Roll logic for the core implementation
+   * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
    */
   rollAttack(options = {}) {
     const itemData = this.data.data;
@@ -437,7 +437,7 @@ export class ItemStarfinder extends Item {
 
     // Define Critical threshold
     let crit = 20;
-    //if ( this.data.type === "weapon" ) crit = this.actor.getFlag("starfinder", "weaponCriticalThreshold") || 20;
+    //if ( this.data.type === "weapon" ) crit = this.actor.getFlag("sfrpg", "weaponCriticalThreshold") || 20;
 
     // Define Roll Data
     const rollData = duplicate(actorData);
@@ -446,10 +446,10 @@ export class ItemStarfinder extends Item {
 
     //Warn the user if there is no ammo left
 
-    if(itemData.capacity && itemData.capacity.value === 0)  ui.notifications.warn(game.i18n.format("STARFINDER.ItemNoUses", {name: this.data.name}));
+    if(itemData.capacity && itemData.capacity.value === 0)  ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
 
     // Call the roll helper utility
-    DiceStarfinder.d20Roll({
+    DiceSFRPG.d20Roll({
       event: options.event,
       parts: parts,
       actor: this.actor,
@@ -519,7 +519,7 @@ export class ItemStarfinder extends Item {
     rollData.item = itemData;
     const title = `${this.name} - Attack Roll`;
 
-    DiceStarfinder.d20Roll({
+    DiceSFRPG.d20Roll({
       event: options.event,
       parts: parts,
       actor: this.actor,
@@ -539,7 +539,7 @@ export class ItemStarfinder extends Item {
 
   /**
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the DiceStarfinder.damageRoll logic for the core implementation
+   * Rely upon the DiceSFRPG.damageRoll logic for the core implementation
    */
   rollDamage({ event, versatile = false } = {}) {
     const itemData = this.data.data;
@@ -559,7 +559,7 @@ export class ItemStarfinder extends Item {
     const parts = itemData.damage.parts.map(d => d[0]);
     //if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
 
-    // Cantrips in Starfinder don't scale :(
+    // Cantrips in SFRPG don't scale :(
     // if ( (this.data.type === "spell") && (itemData.scaling.mode === "cantrip") ) {
     //   const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
     //   this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
@@ -573,7 +573,7 @@ export class ItemStarfinder extends Item {
     const title = `${this.name} - Damage Roll`;
 
     // Call the roll helper utility
-    DiceStarfinder.damageRoll({
+    DiceSFRPG.damageRoll({
       event: event,
       parts: parts,
       actor: this.actor,
@@ -604,7 +604,7 @@ export class ItemStarfinder extends Item {
 
     const title = `${this.name} - Damage Roll`;
 
-    DiceStarfinder.damageRoll({
+    DiceSFRPG.damageRoll({
       event: event,
       parts: parts,
       actor: this.actor,
@@ -639,7 +639,7 @@ export class ItemStarfinder extends Item {
 
   /**
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the DiceStarfinder.d20Roll logic for the core implementation
+   * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
    */
   async rollFormula(options = {}) {
     const itemData = this.data.data;
@@ -750,7 +750,7 @@ export class ItemStarfinder extends Item {
 
   /**
    * Roll a Tool Check
-   * Rely upon the DiceStarfinder.d20Roll logic for the core implementation
+   * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
    */
   rollToolCheck(options = {}) {
     if (this.type !== "tool") throw "Wrong item type!";
@@ -765,14 +765,14 @@ export class ItemStarfinder extends Item {
     rollData["proficiency"] = Math.floor((itemData.proficient || 0) * rollData.attributes.prof);
 
     // Call the roll helper utility
-    DiceStarfinder.d20Roll({
+    DiceSFRPG.d20Roll({
       event: options.event,
       parts: parts,
       data: rollData,
-      template: "systems/starfinder/templates/chat/tool-roll-dialog.html",
+      template: "systems/sfrpg/templates/chat/tool-roll-dialog.html",
       title: title,
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      flavor: (parts, data) => `${this.name} - ${CONFIG.STARFINDER.abilities[abl]} Check`,
+      flavor: (parts, data) => `${this.name} - ${CONFIG.SFRPG.abilities[abl]} Check`,
       dialogOptions: {
         width: 400,
         top: options.event ? event.clientY - 80 : null,

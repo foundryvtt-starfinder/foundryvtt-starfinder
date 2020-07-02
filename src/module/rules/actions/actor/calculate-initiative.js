@@ -7,7 +7,7 @@ export default function (engine) {
         init.total = init.mod;
 
         init.tooltip = [
-            game.i18n.format("STARFINDER.InitiativeDexModTooltip", { mod: data.abilities.dex.mod.signedString() })
+            game.i18n.format("SFRPG.InitiativeDexModTooltip", { mod: data.abilities.dex.mod.signedString() })
         ];
 
         return fact;

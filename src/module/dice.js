@@ -1,4 +1,4 @@
-export class DiceStarfinder {
+export class DiceSFRPG {
     /**
    * A standardized helper function for managing core 5e "d20 rolls"
    *
@@ -72,8 +72,8 @@ export class DiceStarfinder {
         else parts = parts.concat(["@bonus"]);
 
         // Render modal dialog
-        template = template || "systems/starfinder/templates/chat/roll-dialog.html";
-        const useAdvantage = game.settings.get("starfinder", "useAdvantageDisadvantage");
+        template = template || "systems/sfrpg/templates/chat/roll-dialog.html";
+        const useAdvantage = game.settings.get("sfrpg", "useAdvantageDisadvantage");
         let templateData = {
             formula: parts.join(" + "),
             data: data,
@@ -167,7 +167,7 @@ export class DiceStarfinder {
         else parts = parts.concat(["@bonus"]);
 
         // Construct dialog data
-        template = template || "systems/starfinder/templates/chat/roll-dialog.html";
+        template = template || "systems/sfrpg/templates/chat/roll-dialog.html";
         let dialogData = {
             formula: parts.join(" + "),
             data: data,

@@ -1,6 +1,6 @@
 <div class="inventory-filters">
     <ul class="filter-list flexrow" data-filter="features">
-        <li class="filter-title">{{localize "STARFINDER.FeaturesFilter"}}</li>
+        <li class="filter-title">{{localize "SFRPG.FeaturesFilter"}}</li>
         <li class="filter-item" data-filter="action">Action</li>
         <li class="filter-item" data-filter="bonus">Bonus</li>
         <li class="filter-item" data-filter="reaction">Reaction</li>
@@ -14,13 +14,13 @@
 
         {{#if section.hasActions}}
         <div class="item-detail item-uses">Charges</div>
-        <div class="item-detail item-action">{{localize "STARFINDER.FeaturesUsage"}}</div>
+        <div class="item-detail item-action">{{localize "SFRPG.FeaturesUsage"}}</div>
         {{/if}}
 
         {{#if ../owner}}
         <div class="item-controls">
             <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> {{localize "STARFINDER.FeaturesAdd"}}
+                <i class="fas fa-plus"></i> {{localize "SFRPG.FeaturesAdd"}}
             </a>
         </div>
         {{/if}}
@@ -34,8 +34,8 @@
                 <h4>{{item.name}}</h4>
                 {{#if item.hasAttack}}
                 <div class="item-action flexcol">
-                    <button class="tag attack">{{localize "STARFINDER.Attack"}}</button>
-                    <button class="tag damage">{{localize "STARFINDER.Damage"}}</button>
+                    <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
+                    <button class="tag damage">{{localize "SFRPG.Damage"}}</button>
                 </div>
                 {{/if}}
             </div>
@@ -48,7 +48,7 @@
                 {{#if item.isOnCooldown}}
                 <a class="item-recharge rollable">{{item.labels.recharge}}</a>
                 {{else}}
-                {{localize "STARFINDERE.Charged"}}
+                {{localize "SFRPGE.Charged"}}
                 {{/if}}
                 {{else if item.hasCapacity}}
                 {{item.data.capacity.value}} / {{item.data.capacity.max}}

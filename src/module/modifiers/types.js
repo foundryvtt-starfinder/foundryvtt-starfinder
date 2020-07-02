@@ -1,4 +1,4 @@
-export const StarfinderModifierTypes = Object.freeze({
+export const SFRPGModifierTypes = Object.freeze({
     ABILITY: "ability",
     ARMOR: "armor",
     BASE: "base",
@@ -12,7 +12,7 @@ export const StarfinderModifierTypes = Object.freeze({
     UNTYPED: "untyped"
 });
 
-export const StarfinderEffectType = Object.freeze({
+export const SFRPGEffectType = Object.freeze({
     RANGED_ATTACKS: "ranged-attacks",
     MELEE_ATTACKS: "melee-attacks",
     SPELL_ATTACKS: "spell-attacks",
@@ -42,7 +42,7 @@ export const StarfinderEffectType = Object.freeze({
     BULK_CALCULATION: "bulk-calculation"
 });
 
-export const StarfinderModifierType = Object.freeze({
+export const SFRPGModifierType = Object.freeze({
     CONSTANT: "constant",
     FORMULA: "formula"
 });

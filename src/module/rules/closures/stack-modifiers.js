@@ -1,10 +1,8 @@
 import { Closure } from "../../engine/closure/closure.js";
-import { StarfinderModifierTypes } from "../../modifiers/types.js";
+import { SFRPGModifierTypes } from "../../modifiers/types.js";
 
 /**
- * Takes an array of modifiers and "stacks" them according to
- * the rules outlined in the Starfinder Core Rulebook, 
- * p. 266 - 267.
+ * Takes an array of modifiers and "stacks" them.
  */
 export default class StackModifiers extends Closure {
     /** 
@@ -19,37 +17,37 @@ export default class StackModifiers extends Closure {
     process(modifiers, context) {
         let [abilityMods, armorMods, baseMods, circumstanceMods, divineMods, enhancementMods, insightMods, luckMods, moraleMods, racialMods, untypedMods] = modifiers.reduce((prev, curr) => {
             switch (curr.type) {
-                case StarfinderModifierTypes.ABILITY:
+                case SFRPGModifierTypes.ABILITY:
                     prev[0].push(curr);
                     break;
-                case StarfinderModifierTypes.ARMOR:
+                case SFRPGModifierTypes.ARMOR:
                     prev[1].push(curr);
                     break;
-                case StarfinderModifierTypes.BASE:
+                case SFRPGModifierTypes.BASE:
                     prev[2].push(curr);
                     break;
-                case StarfinderModifierTypes.CIRCUMSTANCE:
+                case SFRPGModifierTypes.CIRCUMSTANCE:
                     prev[3].push(curr);
                     break;
-                case StarfinderModifierTypes.DIVINE:
+                case SFRPGModifierTypes.DIVINE:
                     prev[4].push(curr);
                     break;
-                case StarfinderModifierTypes.ENHANCEMENT:
+                case SFRPGModifierTypes.ENHANCEMENT:
                     prev[5].push(curr);
                     break;
-                case StarfinderModifierTypes.INSIGHT:
+                case SFRPGModifierTypes.INSIGHT:
                     prev[6].push(curr);
                     break;
-                case StarfinderModifierTypes.LUCK:
+                case SFRPGModifierTypes.LUCK:
                     prev[7].push(curr);
                     break;
-                case StarfinderModifierTypes.MORALE:
+                case SFRPGModifierTypes.MORALE:
                     prev[8].push(curr);
                     break;
-                case StarfinderModifierTypes.RACIAL:
+                case SFRPGModifierTypes.RACIAL:
                     prev[9].push(curr);
                     break;
-                case StarfinderModifierTypes.UNTYPED:
+                case SFRPGModifierTypes.UNTYPED:
                 default:
                     prev[10].push(curr);
                     break;

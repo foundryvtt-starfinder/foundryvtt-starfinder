@@ -1,15 +1,15 @@
 <form autocomplete="off" class="{{cssClass}}" data-modifier-id="{{modifier._id}}">
     <div class="form-group modifier-name">
-        <label for="name">{{localize "STARFINDER.ModifierNameLabel"}}</label>
-        <input name="name" type="text" value="{{modifier.name}}" data-tippy-content="{{localize "STARFINDER.ModifierNameTooltip"}}">
+        <label for="name">{{localize "SFRPG.ModifierNameLabel"}}</label>
+        <input name="name" type="text" value="{{modifier.name}}" data-tippy-content="{{localize "SFRPG.ModifierNameTooltip"}}">
     </div>
     <div class="form-group modifier-modifier">
-        <label for="modifier">{{localize "STARFINDER.ModifierModifierLabel"}}</label>
-        <input type="text" name="modifier" value="{{modifier.modifier}}" data-tippy-content="{{localize "STARFINDER.ModifierModifierTooltip"}}">
+        <label for="modifier">{{localize "SFRPG.ModifierModifierLabel"}}</label>
+        <input type="text" name="modifier" value="{{modifier.modifier}}" data-tippy-content="{{localize "SFRPG.ModifierModifierTooltip"}}">
     </div>
     <div class="form-group modifier-type">
-        <label for="type">{{localize "STARFINDER.ModifierTypeLabel"}}</label>
-        <select name="type" data-tippy-content="{{localize "STARFINDER.ModifierTypeTooltip"}}">
+        <label for="type">{{localize "SFRPG.ModifierTypeLabel"}}</label>
+        <select name="type" data-tippy-content="{{localize "SFRPG.ModifierTypeTooltip"}}">
             {{#select modifier.type}}
             {{#each config.modifierTypes as |type key|}}
             <option value="{{key}}">{{type}}</option>
@@ -18,8 +18,8 @@
         </select>
     </div>
     <div class="form-group modifier-effect-type">
-        <label for="effectType">{{localize "STARFINDER.ModifierEffectTypeLabel"}}</label>
-        <select name="effectType" data-tippy-content="{{localize "STARFINDER.ModifierEffectTypeTooltip"}}">
+        <label for="effectType">{{localize "SFRPG.ModifierEffectTypeLabel"}}</label>
+        <select name="effectType" data-tippy-content="{{localize "SFRPG.ModifierEffectTypeTooltip"}}">
             {{#select modifier.effectType}}
             {{#each config.modifierEffectTypes as |effect key|}}
             <option value="{{key}}">{{effect}}</option>
@@ -28,8 +28,8 @@
         </select>
     </div>    
     <div class="form-group modifier-value-affected">
-        <label for="valueAffected">{{localize "STARFINDER.ModifierValueAffectedLabel"}}</label>
-        <select name="valueAffected" data-tippy-content="{{localize "STARFINDER.ModifierValueAffectedTooltip"}}">
+        <label for="valueAffected">{{localize "SFRPG.ModifierValueAffectedLabel"}}</label>
+        <select name="valueAffected" data-tippy-content="{{localize "SFRPG.ModifierValueAffectedTooltip"}}">
             {{#select modifier.valueAffected}}
             {{#if (eq modifier.effectType "ac")}}
             {{#each config.modifierArmorClassAffectedValues as |armorClass key|}}
@@ -44,8 +44,8 @@
             <option value="{{key}}">{{armorType}}</option>
             {{/each}}
             {{else if (eq modifier.effectType "save")}}
-            <option value="highest">{{localize "STARFINDER.ModifierSaveHighest"}}</option>
-            <option value="lowest">{{localize "STARFINDER.ModifierSaveLowest"}}</option>
+            <option value="highest">{{localize "SFRPG.ModifierSaveHighest"}}</option>
+            <option value="lowest">{{localize "SFRPG.ModifierSaveLowest"}}</option>
             {{#each config.saves as |save key|}}
             <option value="{{key}}">{{save}}</option>
             {{/each}}
@@ -64,8 +64,8 @@
         </select>
     </div>
     <div class="form-group modifier-modifier-type">
-        <label for="modifierType">{{localize "STARFINDER.ModifierModifierTypeLabel"}}</label>
-        <select name="modifierType" data-tippy-content="{{localize "STARFINDER.ModifierModifierTypeTooltip"}}">
+        <label for="modifierType">{{localize "SFRPG.ModifierModifierTypeLabel"}}</label>
+        <select name="modifierType" data-tippy-content="{{localize "SFRPG.ModifierModifierTypeTooltip"}}">
             {{#select modifier.modifierType}}
             {{#each config.modifierType as |type key|}}
             <option value="{{key}}">{{type}}</option>
@@ -74,19 +74,19 @@
         </select>
     </div>    
     <div class="form-group modifier-source">
-        <label for="source">{{localize "STARFINDER.ModifierSourceLabel"}}</label>
-        <input type="text" name="source" value="{{modifier.source}}" data-tippy-content="{{localize "STARFINDER.ModifierSourceTooltip"}}">
+        <label for="source">{{localize "SFRPG.ModifierSourceLabel"}}</label>
+        <input type="text" name="source" value="{{modifier.source}}" data-tippy-content="{{localize "SFRPG.ModifierSourceTooltip"}}">
     </div>
     <div class="form-group modifier-notes">
-        <label for="notes">{{localize "STARFINDER.ModifierNotesLabel"}}</label>
-        <textarea name="notes" data-tippy-content="{{localize "STARFINDER.ModifierNotesTooltip"}}">{{modifier.notes}}</textarea>
+        <label for="notes">{{localize "SFRPG.ModifierNotesLabel"}}</label>
+        <textarea name="notes" data-tippy-content="{{localize "SFRPG.ModifierNotesTooltip"}}">{{modifier.notes}}</textarea>
     </div>
-    <div class="form-group modifier-enabled" data-tippy-content="{{localize "STARFINDER.ModifierEnabledTooltip"}}">
+    <div class="form-group modifier-enabled" data-tippy-content="{{localize "SFRPG.ModifierEnabledTooltip"}}">
         <label class="checkbox">
-            <input type="checkbox" name="enabled" {{checked modifier.enabled}}> {{localize "STARFINDER.ModifierEnabledLabel"}}
+            <input type="checkbox" name="enabled" {{checked modifier.enabled}}> {{localize "SFRPG.ModifierEnabledLabel"}}
         </label>
     </div>
     <input type="hidden" name="_id" value="{{modifier._id}}">
     <input type="hidden" name="subtab" value="{{modifier.subtab}}">
-    <button type="submit" id="btn-submit"><i class="far fa-save"></i>{{localize "STARFINDER.Save"}}</button>
+    <button type="submit" id="btn-submit"><i class="far fa-save"></i>{{localize "SFRPG.Save"}}</button>
 </form>

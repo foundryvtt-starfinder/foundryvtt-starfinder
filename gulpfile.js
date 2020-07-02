@@ -6,7 +6,7 @@ const archiver = require('archiver');
 const stringify = require('json-stringify-pretty-compact');
 const less = require('gulp-less');
 
-const STARFINDER_LESS = ["src/less/*.less"];
+const SFRPG_LESS = ["src/less/*.less"];
 const argv = require('yargs').argv;
 
 function getConfig() {
@@ -54,7 +54,7 @@ function getManifest() {
  * Build Less
  */
 function buildLess() {
-	const name = path.basename(path.resolve('.'));
+	const name = 'sfrpg';
 
 	return gulp
 		.src(`src/less/${name}.less`)
@@ -66,7 +66,7 @@ function buildLess() {
  * Copy static files
  */
 async function copyFiles() {
-	const name = path.basename(path.resolve('.'));
+	const name = 'sfrpg';
 
 	const statics = [
 		'lang',
@@ -155,7 +155,7 @@ function buildWatch() {
  * while ignoring source files
  */
 async function clean() {
-	const name = path.basename(path.resolve('.'));
+	const name = 'sfrpg';
 	const files = [];
 
 	files.push(
@@ -167,6 +167,7 @@ async function clean() {
 		'images',
 		'packs',
 		'lib',
+		'styles',
 		`${name}.js`,
 		`${name}.css`,
 		'module.json',
@@ -199,7 +200,7 @@ async function clean() {
  * Link build to User Data folder
  */
 async function linkUserData() {
-	const name = path.basename(path.resolve('.'));
+	const name = 'sfrpg';
 	const config = fs.readJSONSync('foundryconfig.json');
 
 	let destDir;

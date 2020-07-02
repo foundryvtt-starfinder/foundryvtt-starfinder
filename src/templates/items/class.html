@@ -24,8 +24,8 @@
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{ localize "STARFINDER.Description" }}</a>
-        <a class="item" data-tab="details">{{ localize "STARFINDER.Details" }}</a>
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -41,14 +41,14 @@
 
             {{!-- Class Levels --}}
             <div class="form-group">
-                <label>{{localize "STARFINDER.ClassLevelLabel"}}</label>
+                <label>{{localize "SFRPG.ClassLevelLabel"}}</label>
                 <div class="form-fields">
                     <input type="text" name="data.levels" value="{{data.levels}}" data-dtype="Number" />
                 </div>
             </div>
 
             <div class="form-group">
-                <label>{{localize "STARFINDER.ClassBABProgression"}}</label>
+                <label>{{localize "SFRPG.ClassBABProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.bab">
                         {{#select data.bab}}
@@ -61,7 +61,7 @@
             </div>
 
             <div class="form-group">
-                <label>{{localize "STARFINDER.ClassFortSaveProgression"}}</label>
+                <label>{{localize "SFRPG.ClassFortSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.fort">
                         {{#select data.fort}}
@@ -74,7 +74,7 @@
             </div>
 
             <div class="form-group">
-                <label>{{localize "STARFINDER.ClassReflexSaveProgression"}}</label>
+                <label>{{localize "SFRPG.ClassReflexSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.ref">
                         {{#select data.ref}}
@@ -87,7 +87,7 @@
             </div>
 
             <div class="form-group">
-                <label>{{localize "STARFINDER.ClassWillSaveProgression"}}</label>
+                <label>{{localize "SFRPG.ClassWillSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.will">
                         {{#select data.will}}
@@ -100,7 +100,7 @@
             </div>
 
             <div class="form-group">
-                <label>{{localize "STARFINDER.ClassKeyAbilityScore"}}</label>
+                <label>{{localize "SFRPG.ClassKeyAbilityScore"}}</label>
                 <div class="form-fields">
                     <select name="data.kas">
                         {{#select data.kas}}
@@ -114,7 +114,7 @@
 
             {{!-- Hit Points per level --}}
             <div class="form-group">
-                <label>{{localize "STARFINDER.ClassHPPerLevel"}}</label>
+                <label>{{localize "SFRPG.ClassHPPerLevel"}}</label>
                 <div class="form-fields">
                     <input type="text" name="data.hp.value" value="{{data.hp.value}}" data-dtype="Number" />
                 </div>
@@ -122,14 +122,14 @@
 
             {{!-- Stamina points per level --}}
             <div class="form-group">
-                <label>{{localize "STARFINDER.ClassSPPerlevel"}}</label>
+                <label>{{localize "SFRPG.ClassSPPerlevel"}}</label>
                 <div class="form-fields">
                     <input type="text" name="data.sp.value" value="{{data.sp.value}}" data-dtype="Number" />
                 </div>
             </div>
 
             <div class="form-group">
-                <label>{{localize "STARFINDER.ClassSkillRanksPerlevel"}}</label>
+                <label>{{localize "SFRPG.ClassSkillRanksPerlevel"}}</label>
                 <div class="form-fields">
                     <input type="text" name="data.skillRanks.value" value="{{data.skillRanks.value}}" data-dtype="Number" />
                 </div>
@@ -137,7 +137,7 @@
 
             {{!-- Class skills --}}
             <div class="form-group stacked weapon-properties">
-                <label>{{localize "STARFINDER.ClassSkills"}}</label>
+                <label>{{localize "SFRPG.ClassSkills"}}</label>
                 {{#each config.skills as |name val|}}
                 <label class="checkbox">
                     <input type="checkbox" name="data.csk.{{val}}" {{checked (lookup ../data.csk val)}}/> {{ name }}
@@ -147,7 +147,7 @@
 
              {{!-- Weapon proficiencies --}}
             <div class="form-group stacked weapon-properties">
-                <label>{{localize "STARFINDER.ClassWeaponProf"}}</label>
+                <label>{{localize "SFRPG.ClassWeaponProf"}}</label>
                 {{#each config.weaponProficiencies as |name val|}}
                 <label class="checkbox">
                     <input type="checkbox" name="data.proficiencies.weapon.{{val}}" {{checked (lookup ../data.proficiencies.weapon val)}}/> {{ name }}
@@ -157,7 +157,7 @@
 
              {{!-- Weapon proficiencies --}}
             <div class="form-group stacked weapon-properties">
-                <label>{{localize "STARFINDER.ClassArmorProf"}}</label>
+                <label>{{localize "SFRPG.ClassArmorProf"}}</label>
                 {{#each config.armorProficiencies as |name val|}}
                 <label class="checkbox">
                     <input type="checkbox" name="data.proficiencies.armor.{{val}}" {{checked (lookup ../data.proficiencies.armor val)}}/> {{ name }}

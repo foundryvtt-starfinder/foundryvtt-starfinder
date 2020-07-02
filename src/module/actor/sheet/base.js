@@ -1,14 +1,14 @@
-import { TraitSelectorStarfinder } from "../../apps/trait-selector.js";
+import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { spellBrowser } from "../../packs/spell-browser.js";
 
 /**
- * Extend the basic ActorSheet class to do all the Starfinder things!
+ * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
  * 
  * @type {ActorSheet}
  */
-export class ActorSheetStarfinder extends ActorSheet {
+export class ActorSheetSFRPG extends ActorSheet {
     constructor(...args) {
         super(...args);
 
@@ -49,7 +49,7 @@ export class ActorSheetStarfinder extends ActorSheet {
             isCharacter: this.entity.data.type === "character",
             isShip: this.entity.data.type === 'starship',
             isVehicle: this.entity.data.type === 'vehicle',
-            config: CONFIG.STARFINDER
+            config: CONFIG.SFRPG
         };
 
         data.actor = duplicate(this.actor.data);
@@ -65,7 +65,7 @@ export class ActorSheetStarfinder extends ActorSheet {
         if (data.actor.type !== "starship" && data.actor.type !== "vehicle") {
             // Ability Scores
             for (let [a, abl] of Object.entries(data.actor.data.abilities)) {
-                abl.label = CONFIG.STARFINDER.abilities[a];
+                abl.label = CONFIG.SFRPG.abilities[a];
             }
 
             // Update skill labels
@@ -73,13 +73,13 @@ export class ActorSheetStarfinder extends ActorSheet {
                 skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
                 skl.icon = this._getClassSkillIcon(skl.value);
 
-                let skillLabel = CONFIG.STARFINDER.skills[s.substring(0, 3)];
+                let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
                 if (skl.subname) {
                     skillLabel += ` (${skl.subname})`;
                 }
 
                 skl.label = skillLabel;
-                skl.hover = CONFIG.STARFINDER.skillProficiencyLevels[skl.value];
+                skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
             }
 
             data.data.skills = Object.keys(data.data.skills).sort().reduce((skills, key) => {
@@ -199,13 +199,13 @@ export class ActorSheetStarfinder extends ActorSheet {
 
     _prepareTraits(traits) {
         const map = {
-            "dr": CONFIG.STARFINDER.energyDamageTypes,
-            "di": CONFIG.STARFINDER.damageTypes,
-            "dv": CONFIG.STARFINDER.damageTypes,
-            "ci": CONFIG.STARFINDER.conditionTypes,
-            "languages": CONFIG.STARFINDER.languages,
-            "weaponProf": CONFIG.STARFINDER.weaponProficiencies,
-            "armorProf": CONFIG.STARFINDER.armorProficiencies
+            "dr": CONFIG.SFRPG.energyDamageTypes,
+            "di": CONFIG.SFRPG.damageTypes,
+            "dv": CONFIG.SFRPG.damageTypes,
+            "ci": CONFIG.SFRPG.conditionTypes,
+            "languages": CONFIG.SFRPG.languages,
+            "weaponProf": CONFIG.SFRPG.weaponProficiencies,
+            "armorProf": CONFIG.SFRPG.armorProficiencies
         };
 
         for (let [t, choices] of Object.entries(map)) {
@@ -437,7 +437,7 @@ export class ActorSheetStarfinder extends ActorSheet {
                     usesSlots: lvl > 0,
                     canCreate: owner && (lvl >= 0),
                     canPrepare: (data.actor.type === 'character') && (lvl > 0),
-                    label: lvl >= 0 ? CONFIG.STARFINDER.spellLevels[lvl] : CONFIG.STARFINDER.spellPreparationModes[mode],
+                    label: lvl >= 0 ? CONFIG.SFRPG.spellLevels[lvl] : CONFIG.SFRPG.spellPreparationModes[mode],
                     spells: [],
                     uses: useLabels[lvl] || data.data.spells["spell"+lvl].value || 0,
                     slots: useLabels[lvl] || data.data.spells["spell"+lvl].max || 0,
@@ -456,7 +456,7 @@ export class ActorSheetStarfinder extends ActorSheet {
     }
 
     /**
-     * Creates an TraitSelectorStarfinder dialog
+     * Creates an TraitSelectorSFRPG dialog
      * 
      * @param {Event} event HTML Event
      * @private
@@ -468,10 +468,10 @@ export class ActorSheetStarfinder extends ActorSheet {
         const options = {
             name: label.getAttribute("for"),
             title: label.innerText,
-            choices: CONFIG.STARFINDER[a.dataset.options]
+            choices: CONFIG.SFRPG[a.dataset.options]
         };
 
-        new TraitSelectorStarfinder(this.actor, options).render(true);
+        new TraitSelectorSFRPG(this.actor, options).render(true);
     }
 
     /**
