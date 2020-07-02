@@ -34,21 +34,21 @@ export default function (engine) {
 
             skill.tooltip = [];
             
-            skill.tooltip.push(game.i18n.format("STARFINDER.SkillTooltipAbilityMod", {abilityMod: abilityMod.signedString(), abilityAbbr: skill.ability.capitalize()}));
+            skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipAbilityMod", {abilityMod: abilityMod.signedString(), abilityAbbr: skill.ability.capitalize()}));
             if (hasRanks) {
-                skill.tooltip.push(game.i18n.format("STARFINDER.SkillTooltipSkillRanks", {ranks: skill.ranks.signedString()}));
+                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipSkillRanks", {ranks: skill.ranks.signedString()}));
                 
                 if (classSkill === 3) {
-                    skill.tooltip.push(game.i18n.format("STARFINDER.SkillTooltipTrainedClassSkill", {mod: classSkill.signedString()}));
+                    skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipTrainedClassSkill", {mod: classSkill.signedString()}));
                 }
             }
 
             if (modFromTheme !== 0) {
-                skill.tooltip.push(game.i18n.format("STARFINDER.SkillTooltipThemeMod", {mod: modFromTheme.signedString()}));
+                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipThemeMod", {mod: modFromTheme.signedString()}));
             }
 
             if (skill.misc !== 0) {
-                skill.tooltip.push(game.i18n.format("STARFINDER.SkillTooltipMiscMod", {mod: skill.misc.signedString()}));
+                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipMiscMod", {mod: skill.misc.signedString()}));
             }
         }
 

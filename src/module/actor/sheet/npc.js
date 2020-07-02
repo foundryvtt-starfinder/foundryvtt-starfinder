@@ -1,16 +1,16 @@
-import { ActorSheetStarfinder } from "./base.js";
+import { ActorSheetSFRPG } from "./base.js";
 
 /**
- * An Actor sheet for NPC type characters in the Starfinder system.
+ * An Actor sheet for NPC type characters in the SFRPG system.
  * 
- * Extends the base ActorSheetStarfinder class.
- * @type {ActorSheetStarfinder}
+ * Extends the base ActorSheetSFRPG class.
+ * @type {ActorSheetSFRPG}
  */
-export class ActorSheetStarfinderNPC extends ActorSheetStarfinder {
+export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {
-            classes: options.classes.concat(['starfinder', 'actor', 'sheet', 'npc']),
+            classes: options.classes.concat(['sfrpg', 'actor', 'sheet', 'npc']),
             width: 720,
             height: 765
         });
@@ -19,7 +19,7 @@ export class ActorSheetStarfinderNPC extends ActorSheetStarfinder {
     }
 
     get template() {
-        const path = "systems/starfinder/templates/actors/";
+        const path = "systems/sfrpg/templates/actors/";
         if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
         return path + "npc-sheet.html";
     }

@@ -1,4 +1,4 @@
-import { StarfinderModifierType, StarfinderEffectType, StarfinderModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGModifierType, SFRPGEffectType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function (engine) {
     engine.closures.add("calculateInitiativeModifiers", (fact, context) => {
@@ -12,7 +12,7 @@ export default function (engine) {
         const addModifer = (bonus) => {
             let mod = bonus.modifier;
             if (mod !== 0) {
-                init.tooltip.push(game.i18n.format("STARFINDER.InitiativeModiferTooltip", {
+                init.tooltip.push(game.i18n.format("SFRPG.InitiativeModiferTooltip", {
                     type: bonus.type.capitalize(),
                     source: bonus.name,
                     mod: mod.signedString()
@@ -24,8 +24,8 @@ export default function (engine) {
 
         const filteredMods = modifiers.filter(mod => {
             return mod.enabled && 
-                [StarfinderEffectType.INITIATIVE].includes(mod.effectType) &&
-                mod.modifierType === StarfinderModifierType.CONSTANT;
+                [SFRPGEffectType.INITIATIVE].includes(mod.effectType) &&
+                mod.modifierType === SFRPGModifierType.CONSTANT;
         });
 
         const mods = context.parameters.stackModifiers.process(filteredMods, context);
@@ -33,7 +33,7 @@ export default function (engine) {
         const mod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;
 
-            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(curr[0])) {
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
                     prev += addModifer(bonus);
                 }
@@ -45,21 +45,21 @@ export default function (engine) {
         }, 0);
 
         /** @deprecated will be removed in v0.4.0 */
-        const improvedInitiative = getProperty(flags, "starfinder.improvedInititive") ? 4 : 0;
-        const rapidResponse = getProperty(flags, "starfinder.rapidResponse") ? 4 : 0;
+        const improvedInitiative = getProperty(flags, "sfrpg.improvedInititive") ? 4 : 0;
+        const rapidResponse = getProperty(flags, "sfrpg.rapidResponse") ? 4 : 0;
 
         init.bonus = init.value + improvedInitiative + rapidResponse + mod;
 
         init.total += init.bonus;
 
-        if (improvedInitiative !== 0) init.tooltip.push(game.i18n.format("STARFINDER.InitiativeModiferTooltip", {
-            type: StarfinderModifierTypes.UNTYPED.capitalize(),
+        if (improvedInitiative !== 0) init.tooltip.push(game.i18n.format("SFRPG.InitiativeModiferTooltip", {
+            type: SFRPGModifierTypes.UNTYPED.capitalize(),
             source: "Improved Initiative",
             mod: improvedInitiative.signedString()
         }));
 
-        if (rapidResponse !== 0) init.tooltip.push(game.i18n.format("STARFINDER.InitiativeModiferTooltip", {
-            type: StarfinderModifierTypes.UNTYPED.capitalize(),
+        if (rapidResponse !== 0) init.tooltip.push(game.i18n.format("SFRPG.InitiativeModiferTooltip", {
+            type: SFRPGModifierTypes.UNTYPED.capitalize(),
             source: "Rapid Response",
             mod: rapidResponse.signedString()
         }));

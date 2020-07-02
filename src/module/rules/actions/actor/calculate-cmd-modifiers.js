@@ -1,4 +1,4 @@
-import { StarfinderEffectType, StarfinderModifierType, StarfinderModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function (engine) {
     engine.closures.add("calculateCMDModifiers", (fact, context) => {
@@ -9,7 +9,7 @@ export default function (engine) {
             let mod = bonus.modifier;
 
             if (mod !== 0) {
-                cmd.tooltip.push(game.i18n.format("STARFINDER.CMDModiferTooltip", {
+                cmd.tooltip.push(game.i18n.format("SFRPG.CMDModiferTooltip", {
                     type: bonus.type.capitalize(),
                     mod: bonus.modifier.signedString(),
                     source: bonus.name
@@ -21,8 +21,8 @@ export default function (engine) {
 
         const filteredMods = modifiers.filter(mod => {
             return mod.enabled && 
-                [StarfinderEffectType.CMD].includes(mod.effectType) &&
-                mod.modifierType === StarfinderModifierType.CONSTANT;
+                [SFRPGEffectType.CMD].includes(mod.effectType) &&
+                mod.modifierType === SFRPGModifierType.CONSTANT;
         });
 
         const mods = context.parameters.stackModifiers.process(filteredMods, context);
@@ -30,7 +30,7 @@ export default function (engine) {
         const cmdMod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;
 
-            if ([StarfinderModifierTypes.CIRCUMSTANCE, StarfinderModifierTypes.UNTYPED].includes(curr[0])) {
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
                     prev += addModifier(bonus);
                 }

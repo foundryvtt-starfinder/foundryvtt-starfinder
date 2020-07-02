@@ -34,10 +34,10 @@ button {
 }
 
 /* ----------------------------------------- */
-/*  All Starfinder Apps                           */
+/*  All SFRPG Apps                           */
 /* ----------------------------------------- */
 
-.starfinder {
+.sfrpg {
   .window-content {
     font-size: 13px;
     color: @colorDark;
@@ -61,7 +61,7 @@ button {
     &:hover,
     &:focus {
       border: 1px solid #111;
-      box-shadow: 0 0 8px @starfinderRed;
+      box-shadow: 0 0 8px @sfrpgRed;
     }
   }
 
@@ -134,6 +134,10 @@ button {
     border-top: @borderGroove;
     border-bottom: @borderGroove;
   }
+  
+  .form-rest {
+    margin-bottom: 7px
+  }
 
   /* Tags */
   .tag {
@@ -166,7 +170,7 @@ button {
 /*  Entity Sheets Specifically               */
 /* ----------------------------------------- */
 
-.starfinder.sheet {
+.sfrpg.sheet {
   .window-content {
     overflow-y: hidden;
     background: @sheetBackground;
@@ -310,7 +314,7 @@ button {
 
       &.active {
         // border-bottom: 3px solid @colorCrimson;
-        background: @starfinderRed;
+        background: @sfrpgRed;
       }
     }
   }
@@ -329,12 +333,12 @@ button {
       border-bottom: 3px solid @colorBeige;
 
       &:hover {
-        text-shadow: 0 0 4px @starfinderRed;
-        border-bottom: 3px solid @starfinderBlue;
+        text-shadow: 0 0 4px @sfrpgRed;
+        border-bottom: 3px solid @sfrpgBlue;
       }
 
       &.active {
-        border-bottom: 3px solid @starfinderRed;
+        border-bottom: 3px solid @sfrpgRed;
       }
     }
   }
@@ -381,7 +385,7 @@ button {
   }
 }
 
-.starfinder.dialog {
+.sfrpg.dialog {
   .toggle-skills {
     label.checkbox {
       flex: 0 0 120px;
@@ -412,4 +416,100 @@ button {
 /* ------------------------------------------- */
 #actor-flags {
   max-height: 600px;
+}
+
+/* ------------------------------------------- */
+/* Counter Classes Management                  */
+/* ------------------------------------------- */
+#combat-tracker {
+  .counter-image-relative {
+    position: relative;
+  }
+}
+
+.counter-token-management{
+  position:absolute;
+  bottom: -2px;
+  left:10px;
+  height:25px;
+  vertical-align: middle;
+  z-index: 200 !important;
+
+  div.counter-token{
+    background-color:rgba(0,0,0,0.5);
+    text-align: center;
+    vertical-align: middle;
+    line-height: normal;
+    border-radius: 5px;
+  }
+}
+
+.counter-token{
+  > img {
+    display: inline-block;
+    width: 20px !important;
+    height: 20px !important;
+    margin:0 !important;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  p {
+    display: inline-block;
+    width: 15px !important;
+    height: 20px !important;
+    margin:0 !important;
+    vertical-align: middle;
+  }
+}
+
+#counter-management-position {
+  ul {
+    width: 100%;
+    text-align: center;
+    padding-inline-start: 0px !important;
+    margin: 15px 0px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  ul li {
+    text-decoration: none;
+    display:inline-block;
+    width:30%;
+    text-align: center;
+    padding:15px;
+  }
+
+  ul li:hover {
+    background-color: #999999;
+    border-radius: 5px;
+  }
+
+  ul li.active {
+    background-color: #6c8aa5;
+    border-radius: 5px;
+  }
+
+  ul li img {
+    border:none;
+  }
+
+  h3{
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #8a0303;
+  }
+
+  .counter-management-button button{
+    width:20%;
+    margin:10px;
+  }
+
+  .counter-management-info label{
+    display: inline-block;
+    width: 120px;
+    font-weight: bold;
+  }
 }

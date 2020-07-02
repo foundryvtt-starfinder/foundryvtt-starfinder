@@ -22,17 +22,17 @@
         <ol class="inventory-list">
             <li class="item flexrow inventory-header modifiers-header">
                 <div class="item-name modifier-name flexrow">
-                    <h3>{{localize "STARFINDER.ModifierNameLabel"}}</h3>
+                    <h3>{{localize "SFRPG.ModifierNameLabel"}}</h3>
                 </div>
 
-                <div class="item-detail modifier-mod">{{localize "STARFINDER.ModifierTitle"}}</div>
-                <div class="item-detail modifier-type">{{localize "STARFINDER.ModifierTypeLabel"}}</div>
-                <div class="item-detail modifier-effect-type">{{localize "STARFINDER.ModifierEffectTypeHeaderLabel"}}</div>
-                <div class="item-detail modifier-value-affected">{{localize "STARFINDER.ModifierValueAffectedHeaderLabel"}}</div>
+                <div class="item-detail modifier-mod">{{localize "SFRPG.ModifierTitle"}}</div>
+                <div class="item-detail modifier-type">{{localize "SFRPG.ModifierTypeLabel"}}</div>
+                <div class="item-detail modifier-effect-type">{{localize "SFRPG.ModifierEffectTypeHeaderLabel"}}</div>
+                <div class="item-detail modifier-value-affected">{{localize "SFRPG.ModifierValueAffectedHeaderLabel"}}</div>
                 {{#if ../owner}}
                 <div class="item-controls">
                     <a class="item-control modifier-create" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}} title="Add Modifier">
-                        <i class="fas fa-plus"></i> {{localize "STARFINDER.AddLabel"}}
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.AddLabel"}}
                     </a>
                 </div>
                 {{/if}}
@@ -71,9 +71,9 @@
                         {{lookup ../../config.skills modifier.valueAffected}}
                     {{else if (eq modifier.effectType "save")}}
                         {{#if (eq modifier.valueAffected "highest")}}
-                            {{localize "STARFINDER.ModifierSaveHighest"}}
+                            {{localize "SFRPG.ModifierSaveHighest"}}
                         {{else if (eq modifier.valueAffected "lowest")}}
-                            {{localize "STARFINDER.ModifierSaveLowest"}}
+                            {{localize "SFRPG.ModifierSaveLowest"}}
                         {{else}}
                             {{lookup ../../config.saves modifier.valueAffected}}
                         {{/if}}                        

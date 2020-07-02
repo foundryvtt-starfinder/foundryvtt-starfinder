@@ -1,4 +1,4 @@
-import { ActorStarfinder } from "./actor/actor.js";
+import { ActorSFRPG } from "./actor/actor.js";
 
 export const _getInitiativeFormula = function (combatant) {
     const actor = combatant.actor;
@@ -16,25 +16,25 @@ export const addChatMessageContextOptions = function (html, options) {
             name: "Apply Damage",
             icon: "<i class='fas fa-user-minus'></i>",
             condition: canApply,
-            callback: li => ActorStarfinder.applyDamage(li, 1)
+            callback: li => ActorSFRPG.applyDamage(li, 1)
         },
         {
             name: "Apply Healing",
             icon: '<i class="fas fa-user-plus"></i>',
             condition: canApply,
-            callback: li => ActorStarfinder.applyDamage(li, -1)
+            callback: li => ActorSFRPG.applyDamage(li, -1)
         },
         {
             name: "Double Damage",
             icon: '<i class="fas fa-user-injured"></i>',
             condition: canApply,
-            callback: li => ActorStarfinder.applyDamage(li, 2)
+            callback: li => ActorSFRPG.applyDamage(li, 2)
         },
         {
             name: "Half Damage",
             icon: '<i class="fas fa-user-shield"></i>',
             condition: canApply,
-            callback: li => ActorStarfinder.applyDamage(li, 0.5)
+            callback: li => ActorSFRPG.applyDamage(li, 0.5)
         }
     );
 
