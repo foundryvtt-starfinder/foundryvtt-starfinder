@@ -6,7 +6,6 @@
  * Repository: https://github.com/wildj79/foundryvtt-starfinder
  * Issue Tracker: https://github.com/wildj79/foundryvtt-starfinder/issues
  */
-
 import { SFRPG } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
@@ -41,7 +40,8 @@ Hooks.once('init', async function () {
         SFRPGEffectType: SFRPGEffectType,
         SFRPGModifierTypes: SFRPGModifierTypes,
         SFRPGModifier: SFRPGModifier,
-        generateUUID
+        generateUUID,
+        migrateWorld
     };
 
     CONFIG.SFRPG = SFRPG;

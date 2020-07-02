@@ -167,6 +167,7 @@ async function clean() {
 		'images',
 		'packs',
 		'lib',
+		'styles',
 		`${name}.js`,
 		`${name}.css`,
 		'module.json',
