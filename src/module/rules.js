@@ -34,7 +34,7 @@ import calculateCmdModifiers from './rules/actions/actor/calculate-cmd-modifiers
 import calculatePlayerXp from './rules/actions/actor/calculate-xp.js';
 import calculateShipArmorClass from './rules/actions/starship/calculate-ac.js';
 import calculateShipCritThreshold from './rules/actions/starship/calculate-ct.js';
-import calculateDrift from './rules/actions/starship/calculate-drift.js';
+import calculateHyperspace from './rules/actions/starship/calculate-hyperspace.js';
 import calculateMaxShields from './rules/actions/starship/calculate-max-shields.js';
 import calculatePower from './rules/actions/starship/calculate-power.js';
 import calculateShipShields from './rules/actions/starship/calculate-shields.js';
@@ -75,7 +75,7 @@ export default function (engine) {
     // Starship actions
     calculateShipArmorClass(engine);
     calculateShipCritThreshold(engine);
-    calculateDrift(engine);
+    calculateHyperspace(engine);
     calculateMaxShields(engine);
     calculatePower(engine);
     calculateShipShields(engine);
@@ -129,7 +129,7 @@ export default function (engine) {
                 then: [
                     "calculateShipArmorClass",
                     "calculateShipCritThreshold",
-                    "calculateDrift",
+                    "calculateHyperspace",
                     "calculateShields",
                     "calculateShipMaxShields",
                     "calculateShipPower",

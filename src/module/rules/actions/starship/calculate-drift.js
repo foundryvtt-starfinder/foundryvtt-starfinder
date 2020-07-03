@@ -1,8 +1,8 @@
 export default function (engine) {
-    engine.closures.add("calculateDrift", (fact, context) => {
+    engine.closures.add("calculateHyperspace", (fact, context) => {
         const data = fact.data;
 
-        data.attributes.drift = CONFIG.SFRPG.driftEngineMap[data.details.systems.driftEngine] || 0;
+        data.attributes.hyperspace = CONFIG.SFRPG.hyperspaceEngineMap[data.details.systems.hyperspaceEngine] || 0;
 
         return fact;
     });
