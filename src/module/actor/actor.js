@@ -417,7 +417,7 @@ export class ActorSFRPG extends Actor {
             parts: ["@mod"],
             data: { mod: skill.mod },
             title: 'Skill Check',
-            flavor: `${CONFIG.STARFINDER.skills[skillId.substring(0, 3)]}`,
+            flavor: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }

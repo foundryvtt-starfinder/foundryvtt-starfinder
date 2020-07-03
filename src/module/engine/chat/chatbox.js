@@ -1,7 +1,7 @@
 /**
  * Helper class to handle the display of chatBox
  */
-export class StarfinderCustomChatMessage {
+export class SFRPGCustomChatMessage {
 
     static getAmmoLeft(itemData){
         if(itemData.capacity.value > 0) {
@@ -12,7 +12,7 @@ export class StarfinderCustomChatMessage {
     }
 
     static hasCapacity(itemData){
-        return (itemData.capacity) ? true : false;
+        return itemData.capacity > 0 ? itemData.capacity : 0;
     }
 
     static createToken(actor){
@@ -27,7 +27,7 @@ export class StarfinderCustomChatMessage {
 
     static rollToRender(roll, data, action){
         //Get the template
-        const temmplateName = "systems/starfinder/templates/chat/chat-message-attack-roll.html";
+        const temmplateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
         //get Actor
         const actor = (data.actor) ? data.actor : {};
         const item = (data.data.item) ? data.data.item : {};
@@ -43,7 +43,7 @@ export class StarfinderCustomChatMessage {
                     title: (data.title) ? data.title : 'Roll',
                     rawTitle: (data.speaker.alias),
                     item: (item) ? item : {},
-                    ammoLeft: this.hasCapacity(item.data) ? this.getAmmoLeft(item.data) : null,
+                    ammoLeft: item.hasCapacity ? this.getAmmoLeft(item.data) : null,
                     flavor: (data.flavor) ? data.flavor : '',
                     dataRoll: roll,
                     type: CHAT_MESSAGE_TYPES.ROLL,

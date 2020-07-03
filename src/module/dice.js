@@ -57,7 +57,7 @@ export class DiceSFRPG {
             }
 
             //Push the roll to the ChatBox
-            StarfinderCustomChatMessage.rollToRender(roll, myData, action);
+            SFRPGCustomChatMessage.rollToRender(roll, myData, action);
 
             // Flag critical thresholds
             let d20 = roll.parts[0];
