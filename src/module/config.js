@@ -545,7 +545,7 @@ SFRPG.conditionTypes = {
 };
 
 SFRPG.languages = {
-  "abyssal": "SFRPG.LanguagesAbyssal",
+	"abyssal": "SFRPG.LanguagesAbyssal",
 	"akiton": "SFRPG.LanguagesAkitonian",
 	"aklo": "SFRPG.LanguagesAklo",	
 	"aquan": "SFRPG.LanguagesAquan",
