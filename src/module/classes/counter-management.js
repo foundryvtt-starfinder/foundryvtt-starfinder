@@ -14,7 +14,7 @@ export default class CounterManagement {
             'soldierKi': 0,
         };
         this.initDone = false;
-        this.currentRound = -1;
+        this.currentRound = [];
         this.windowsBox = null;
     }
 
@@ -50,45 +50,42 @@ export default class CounterManagement {
                  */
                  combatants.forEach(c => {
                     // Add class to trigger drag events.
-                    this.currentActor = game.actors.get(c.actor._id);
+                    this.currentActor = game.actors.get(c.actor.data._id);
 
                     let $combatant = html.find(`.combatant[data-combatant-id="${c._id}"]`);
                     let featureCounterActivated = this.howManyClassesWithCounterHaveTheActor(c);
 
-                    //We manage today only actor with
-                    if(featureCounterActivated.count == 1 ) {
+                    //We manage today only actor with feature activated, and if is active on the combat tracker
+                    if(featureCounterActivated.count == 1) {
                         const currentClasses = featureCounterActivated.classesToManage[0];
                         //Init counter if neeeded
                         this.initCounterClasses(this.currentActor,currentClasses);
                         $combatant.addClass('counter-image-relative');
                         //Must be done only one time for each combattant
-                        if(game.combat.data.round > this.currentRound) {
+                        if(game.combat.data.round > this.currentRound[c._id] || !this.currentRound[c._id]) {
                             this.addOneToCounterForActiveActor(c, currentClasses);
                         }
-                        $combatant.find('.token-image').after("<div class='counter-token-management'><div class='counter-token'><p>"+this.getCurrentCounter(currentClasses)+"</p><img class='counter-token-image' data-actor-id='"+c.actor._id+"' data-actor-classe='"+currentClasses+"' src='systems/sfrpg/icons/classes/"+this.getCurrentClassesOrPosition(currentClasses)+".png' /></div></div>");
+                        $combatant.find('.token-image').after("<div class='counter-token-management'><div class='counter-token'><p>"+this.getCurrentCounter(currentClasses)+"</p><img id='counter-token-image-"+c._id+"' class='counter-token-image' data-actor-id='"+c.actor._id+"' data-actor-classe='"+currentClasses+"' src='systems/sfrpg/icons/classes/"+this.getCurrentClassesOrPosition(currentClasses)+".png' /></div></div>");
 
                         //Display the dialogue box to manage the right class
-                        html.find('.counter-token-image').click(event => {
+                        let solarianPosition = html.find('#counter-token-image-'+c._id);
+                        solarianPosition.click(event => {
+                            event.preventDefault();
                             this.displayDialogBoxCounterManagement(c.actor._id, currentClasses, c._id);
                         });
-
                     }else if(featureCounterActivated.count > 1) {
                         //Todo need to change the design part with a rollover windows with multiple counter
                         //Todo Need to merge this part with the if == 1
                         //TODO - Counter Management Classes - More than one classe with counter tracker"
                     }
                 });
-
-                 //get the last round
-                this.currentRound = game.combat.data.round;
-
             }else if(!this.initDone){
                 //Reset all counter if the combat is not started
                 combatants.forEach(c => {
                     this.resetCounterManagement(c.actor._id);
+                    this.currentRound[c._id] = -1;
                 });
                 this.initDone = true;
-                this.currentRound = -1;
             }
 
             let nextTurn = html.find('.combat-control[data-control=endCombat]');
@@ -98,9 +95,9 @@ export default class CounterManagement {
                     if(featureCounterActivated.count >= 1 ) {
                         this.resetCounterManagement(c.actor._id);
                     }
+                    this.currentRound[c._id] = -1;
                 });
                 this.initDone = false;
-                this.currentRound = -1;
             })
         });
 
@@ -186,6 +183,9 @@ export default class CounterManagement {
             } else if (this.isSolarian(targetClasses)){
                 this.activePixiEffect(combatant._id);
             }
+
+            //get the last round
+            this.currentRound[combatant._id] = game.combat.data.round;
         }
     }
 
@@ -218,16 +218,18 @@ export default class CounterManagement {
             'classesToManage':[]
         };
 
-        if(typeof c.actor.data.flags.sfrpg != "undefined") {
-            let activeFeature = c.actor.data.flags.sfrpg;
+        if(typeof c.actor.data.flags.sfrpg !== "undefined") {
+            //Only check for actor with the activated feature
+            if(c.actor.data.flags.sfrpg){
+                let activeFeature = c.actor.data.flags.sfrpg;
 
-            for (let [key, name] of Object.entries(this.existingFeature)) {
-                if (activeFeature.hasOwnProperty(name)){
-                    classesTracker.count++;
-                    classesTracker['classesToManage'].push(name);
+                for (let [key, name] of Object.entries(this.existingFeature)) {
+                    if (activeFeature.hasOwnProperty(name)){
+                        classesTracker.count++;
+                        classesTracker['classesToManage'].push(name);
+                    }
                 }
             }
-
             return classesTracker;
         }
 
@@ -253,7 +255,7 @@ export default class CounterManagement {
      * updateInitiative argument to true to reassign init numbers.
      * @param {Boolean} updateInitiative
      */
-    getCombatantsData(updateInitiative = false) {
+    getCombatantsData() {
         // If there isn't a combat, exit and return an empty array.
         if (!game.combat || !game.combat.data) {
             return [];
@@ -265,8 +267,6 @@ export default class CounterManagement {
             if (!combatant.actor) {
                 game.combat.deleteCombatant(combatant._id);
             }
-
-            // Return the updated group.
             return combatant;
         });
 
