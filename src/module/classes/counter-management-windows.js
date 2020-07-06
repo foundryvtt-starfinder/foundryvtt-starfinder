@@ -50,25 +50,24 @@ export class CounterManagementWindows extends Dialog {
 
         let solarianPosition = html.find('.counter-management-position-solarian li div img');
         solarianPosition.click(event => {
-                event.preventDefault();
-                const dataset = event.currentTarget.dataset;
-                const classesToUpdate = {};
-                const Actor = game.actors.get(dataset.actorId);
-                const targetClasses = dataset.managementPosition;
+            event.preventDefault();
+            const dataset = event.currentTarget.dataset;
+            const classesToUpdate = {};
+            const Actor = game.actors.get(dataset.actorId);
+            const targetClasses = dataset.managementPosition;
 
-                classesToUpdate['solarianAttunement'] = {
-                    'count': 0,
-                    'position': targetClasses,
-                };
+            classesToUpdate['solarianAttunement'] = {
+                'count': 0,
+                'position': targetClasses,
+            };
 
-                Actor.update({
-                    "data.counterClasses.values": classesToUpdate
-                });
+            Actor.update({
+                "data.counterClasses.values": classesToUpdate
+            });
 
-                $(".counter-management-position-input").val(targetClasses);
-                $(".counter-management-counter-input").attr('value', 0);
-            }
-        );
+            $(".counter-management-position-input").val(targetClasses);
+            $(".counter-management-counter-input").attr('value', 0);
+        });
 
         //Button to add 1 to counter
         let addButton = html.find('.counter-management-button button[name=counter-management-button-add]');
@@ -102,8 +101,6 @@ export class CounterManagementWindows extends Dialog {
             const Actor = game.actors.get(dataset.actorId);
             const classesToUpdate = {};
 
-            // console.log("REMOVE BUTTON");
-            // console.log(Actor.data.data.counterClasses);
             if(Actor.data.data.counterClasses.values[dataset.managementClasses].count > 0) {
                  classesToUpdate[dataset.managementClasses] = {
                     'count': Actor.data.data.counterClasses.values[dataset.managementClasses].count - 1,

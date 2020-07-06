@@ -766,7 +766,7 @@ SFRPG.defenseSystems = {
     "mk15": "Mk 15 defenses"
 };
 
-SFRPG.driftEngineSystems = {
+SFRPG.hyperspaceEngineSystems = {
     "basic": "Signal Basic",
     "booster": "Signal Booster",
     "major": "Signal Major",
@@ -1011,7 +1011,7 @@ SFRPG.powercoreMap = {
     "gateU": { size: ["huge", "gargantuan", "colossal"], pcu: 500 }
 };
 
-SFRPG.driftEngineMap = {
+SFRPG.hyperspaceEngineMap = {
     "basic": 1,
     "booster": 2,
     "major": 3,
