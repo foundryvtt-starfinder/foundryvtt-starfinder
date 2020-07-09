@@ -1,5 +1,5 @@
 /**
- * The SFRPG game system for Foundry Virtual Tabletop
+ * The Starfinder game system for Foundry Virtual Tabletop
  * Author: wildj79
  * Software License: MIT
  * Content License: OGL v1.0a

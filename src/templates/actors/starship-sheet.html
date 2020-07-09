@@ -144,10 +144,10 @@
                                 title="Max number of expansion bays allowed" />
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="Hyperspace Rating<br>@attributes.hyperspace">
-                        <h4 class="attribute-name box-title">Hyperspace Rating</h4>
+                    <li class="attribute" data-tippy-content="Drift Rating<br>@attributes.drift">
+                        <h4 class="attribute-name box-title">Drift Rating</h4>
                         <div class="attribute-value">
-                            <span class="ability-mod">{{data.attributes.hyperspace}}</span>
+                            <span class="ability-mod">{{data.attributes.drift}}</span>
                         </div>
                     </li>
                 </ul>
@@ -275,11 +275,11 @@
                     </div>
                     <div class="flexcol">
                         <div class="form-group">
-                            <label for="data.details.systems.hyperspaceEngine">Hyperspace Engine</label>
-                            <select name="data.details.systems.hyperspaceEngine">
-                                {{#select data.details.systems.hyperspaceEngine}}
+                            <label for="data.details.systems.driftEngine">Drift Engine</label>
+                            <select name="data.details.systems.driftEngine">
+                                {{#select data.details.systems.driftEngine}}
                                 <option value="">None</option>
-                                {{#each config.hyperspaceEngineSystems as |system s|}}
+                                {{#each config.driftEngineSystems as |system s|}}
                                 <option value="{{s}}">{{system}}</option>
                                 {{/each}}
                                 {{/select}}
