@@ -151,7 +151,7 @@ export class DiceSFRPG {
                 roll.alter(add, mult);
                 flavor = `${title} (Critical)`;
 
-                if (criticalData != undefined) {
+                if (criticalData !== undefined) {
                     flavor = `${title} (Critical; ${criticalData.effect})`;
 
                     let critRoll = criticalData.parts.filter(x => x[0].length > 0).map(x => x[0]).join("+");
