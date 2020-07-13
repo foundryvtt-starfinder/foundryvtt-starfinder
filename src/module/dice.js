@@ -127,6 +127,7 @@ export class DiceSFRPG {
     *
     * @param {Event} event           The triggering event which initiated the roll
     * @param {Array} parts           The dice roll component parts, excluding the initial d20
+    * @param {Object} criticalData   Critical damage information, in case of a critical hit
     * @param {Actor} actor           The Actor making the damage roll
     * @param {Object} data           Actor or item data against which to parse the roll
     * @param {String} template       The HTML template used to render the roll dialog
@@ -137,7 +138,7 @@ export class DiceSFRPG {
     * @param {Function} onClose      Callback for actions to take when the dialog form is closed
     * @param {Object} dialogOptions  Modal dialog options
     */
-    static damageRoll({ event = {}, parts, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
+    static damageRoll({ event = {}, parts, criticalData, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
         flavor = flavor || title;
 
         // Inner roll function
@@ -149,6 +150,17 @@ export class DiceSFRPG {
                 let mult = 2;
                 roll.alter(add, mult);
                 flavor = `${title} (Critical)`;
+
+                if (criticalData !== undefined) {
+                    flavor = `${title} (Critical; ${criticalData.effect})`;
+
+                    let critRoll = criticalData.parts.filter(x => x[0].length > 0).map(x => x[0]).join("+");
+                    if (critRoll.length > 0) {
+                        let finalRoll = Roll.cleanFormula(roll.formula + " + " + critRoll);
+
+                        roll = new Roll(finalRoll, data);
+                    }
+                }
             }
 
             // Execute the roll and send it to chat

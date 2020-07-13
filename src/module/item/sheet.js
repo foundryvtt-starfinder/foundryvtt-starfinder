@@ -180,6 +180,15 @@ export class ItemSheetSFRPG extends ItemSheet {
         arr[i][j] = entry[1];
         return arr;
       }, []);
+      
+      // Handle Critical Damage Array
+      let criticalDamage = Object.entries(formData).filter(e => e[0].startsWith("data.critical.parts"));
+      formData["data.critical.parts"] = criticalDamage.reduce((arr, entry) => {
+        let [i, j] = entry[0].split(".").slice(3);
+        if ( !arr[i] ) arr[i] = [];
+        arr[i][j] = entry[1];
+        return arr;
+      }, []);
 
       // Handle Ability Adjustments array
       let abilityMods = Object.entries(formData).filter(e => e[0].startsWith("data.abilityMods.parts"));
@@ -258,6 +267,22 @@ export class ItemSheetSFRPG extends ItemSheet {
         const damage = duplicate(this.item.data.data.damage);
         damage.parts.splice(Number(li.dataset.damagePart), 1);
         return this.item.update({"data.damage.parts": damage.parts});
+      }
+  
+      // Add new critical damage component
+      if (a.classList.contains("add-critical-damage")) {
+        await this._onSubmit(event);  // Submit any unsaved changes
+        const criticalDamage = this.item.data.data.critical;
+        return this.item.update({"data.critical.parts": criticalDamage.parts.concat([["", ""]])});
+      }
+  
+      // Remove a critical damage component
+      if (a.classList.contains("delete-critical-damage")) {
+        await this._onSubmit(event);  // Submit any unsaved changes
+        const li = a.closest(".damage-part");
+        const criticalDamage = duplicate(this.item.data.data.critical);
+        criticalDamage.parts.splice(Number(li.dataset.criticalPart), 1);
+        return this.item.update({"data.critical.parts": criticalDamage.parts});
       }
     }
   }
