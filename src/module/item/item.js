@@ -137,7 +137,7 @@ export class ItemSFRPG extends Item {
       actor: this.actor,
       tokenId: token ? `${token.scene._id}.${token.id}` : null,
       item: this.data,
-      data: this.getChatData(),
+      data: this.getChatData({rollData: this.actor.data.data}),
       labels: this.labels,
       hasAttack: this.hasAttack,
       hasDamage: this.hasDamage,
@@ -557,6 +557,7 @@ export class ItemSFRPG extends Item {
 
     // Define Roll parts
     const parts = itemData.damage.parts.map(d => d[0]);
+    const criticalData = itemData.critical;
     //if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
 
     // Cantrips in SFRPG don't scale :(
@@ -576,6 +577,7 @@ export class ItemSFRPG extends Item {
     DiceSFRPG.damageRoll({
       event: event,
       parts: parts,
+      criticalData: criticalData,
       actor: this.actor,
       data: rollData,
       title: title,
@@ -597,6 +599,7 @@ export class ItemSFRPG extends Item {
     }
 
     const parts = itemData.damage.parts.map(d => d[0]);
+    const criticalData = itemData.critical;
 
     const rollData = mergeObject(duplicate(actorData), {
       item: itemData
@@ -607,6 +610,7 @@ export class ItemSFRPG extends Item {
     DiceSFRPG.damageRoll({
       event: event,
       parts: parts,
+      criticalData: criticalData,
       actor: this.actor,
       data: rollData,
       title: title,

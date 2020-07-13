@@ -59,6 +59,35 @@
     </li>
     {{/each}}
 </ol>
+<div class="form-group">
+    <label>Critical Effect</label>
+    <div class="form-fields">
+        <input type="text" name="data.critical.effect" value="{{data.critical.effect}}"/>
+    </div>
+</div>
+<h4 class="damage-header">
+    Critical {{#unless isHealing }}Damage{{ else }}Healing{{/unless}} Formula
+    <a class="damage-control add-critical-damage"><i class="fas fa-plus"></i></a>
+</h4>
+<ol class="damage-parts form-group">
+    {{#each data.critical.parts as |part i| }}
+    <li class="damage-part flexrow" data-critical-part="{{i}}">
+        <input type="text" name="data.critical.parts.{{i}}.0" value="{{lookup this "0"}}"/>
+        <select name="data.critical.parts.{{i}}.1">
+            {{#select (lookup this "1") }}
+            <option value="">None</option>
+            {{#each ../config.weaponDamageTypes as |name type|}}
+            <option value="{{type}}">{{name}}</option>
+            {{/each}}
+            {{#each ../config.healingTypes as |name type|}}
+            <option value="{{type}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <a class="damage-control delete-critical-damage"><i class="fas fa-minus"></i></a>
+    </li>
+    {{/each}}
+</ol>
 
 {{!-- Other Formula --}}
 <div class="form-group">
