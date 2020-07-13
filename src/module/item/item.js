@@ -137,7 +137,7 @@ export class ItemSFRPG extends Item {
       actor: this.actor,
       tokenId: token ? `${token.scene._id}.${token.id}` : null,
       item: this.data,
-      data: this.getChatData(),
+      data: this.getChatData({rollData: this.actor.data.data}),
       labels: this.labels,
       hasAttack: this.hasAttack,
       hasDamage: this.hasDamage,
