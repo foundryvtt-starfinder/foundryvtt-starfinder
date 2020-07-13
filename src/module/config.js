@@ -545,7 +545,7 @@ SFRPG.conditionTypes = {
 };
 
 SFRPG.languages = {
-    "abyssal": "SFRPG.LanguagesAbyssal",
+	"abyssal": "SFRPG.LanguagesAbyssal",
 	"akiton": "SFRPG.LanguagesAkitonian",
 	"aklo": "SFRPG.LanguagesAklo",	
 	"aquan": "SFRPG.LanguagesAquan",
@@ -577,7 +577,7 @@ SFRPG.languages = {
 	"triaxian": "SFRPG.LanguagesTriaxian",
 	"vercite": "SFRPG.LanguagesVercite",
 	"vesk": "SFRPG.LanguagesVesk",
-	"ysoki": "SFRPG.LanguagesYosoki"
+	"ysoki": "SFRPG.LanguagesYsoki"
 };
 
 SFRPG.augmentationTypes = {
