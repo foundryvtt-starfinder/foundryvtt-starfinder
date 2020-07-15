@@ -12,7 +12,7 @@ export class CounterManagementWindows extends Dialog {
      * Create the windows to manage all counter classes
      * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
      */
-    static async create(actorId, targetClasses,combatantId) {
+    static async create(actorId, targetClasses, combatantId) {
 
         let counterClassesLabel = CONFIG.SFRPG.counterClassesLabel;
 
@@ -77,7 +77,7 @@ export class CounterManagementWindows extends Dialog {
             const Actor = game.actors.get(dataset.actorId);
             const classesToUpdate = {};
 
-            if(Actor.data.data.counterClasses.values[dataset.managementClasses].count < 3 || !(dataset.managementClasses == 'solarianAttunement')) {
+            if (Actor.data.data.counterClasses.values[dataset.managementClasses].count < 3 || !(dataset.managementClasses == 'solarianAttunement')) {
                 const newCounter = Actor.data.data.counterClasses.values[dataset.managementClasses].count +1;
                 classesToUpdate[dataset.managementClasses] = {
                     'count': newCounter,
@@ -101,7 +101,7 @@ export class CounterManagementWindows extends Dialog {
             const Actor = game.actors.get(dataset.actorId);
             const classesToUpdate = {};
 
-            if(Actor.data.data.counterClasses.values[dataset.managementClasses].count > 0) {
+            if (Actor.data.data.counterClasses.values[dataset.managementClasses].count > 0) {
                  classesToUpdate[dataset.managementClasses] = {
                     'count': Actor.data.data.counterClasses.values[dataset.managementClasses].count - 1,
                     'position': Actor.data.data.counterClasses.values[dataset.managementClasses].position

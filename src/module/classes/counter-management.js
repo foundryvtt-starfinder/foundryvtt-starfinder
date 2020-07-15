@@ -56,13 +56,13 @@ export default class CounterManagement {
                     let featureCounterActivated = this.howManyClassesWithCounterHaveTheActor(c);
 
                     //We manage today only actor with feature activated, and if is active on the combat tracker
-                    if(featureCounterActivated.count == 1) {
+                    if (featureCounterActivated.count == 1) {
                         const currentClasses = featureCounterActivated.classesToManage[0];
                         //Init counter if neeeded
-                        this.initCounterClasses(this.currentActor,currentClasses);
+                        this.initCounterClasses(this.currentActor, currentClasses);
                         $combatant.addClass('counter-image-relative');
                         //Must be done only one time for each combattant
-                        if(game.combat.data.round > this.currentRound[c._id] || !this.currentRound[c._id]) {
+                        if (game.combat.data.round > this.currentRound[c._id] || !this.currentRound[c._id]) {
                             this.addOneToCounterForActiveActor(c, currentClasses);
                         }
                         $combatant.find('.token-image').after("<div class='counter-token-management'><div class='counter-token'><p>"+this.getCurrentCounter(currentClasses)+"</p><img id='counter-token-image-"+c._id+"' class='counter-token-image' data-actor-id='"+c.actor._id+"' data-actor-classe='"+currentClasses+"' src='systems/sfrpg/icons/classes/"+this.getCurrentClassesOrPosition(currentClasses)+".png' /></div></div>");
@@ -73,13 +73,13 @@ export default class CounterManagement {
                             event.preventDefault();
                             this.displayDialogBoxCounterManagement(c.actor._id, currentClasses, c._id);
                         });
-                    }else if(featureCounterActivated.count > 1) {
+                    } else if (featureCounterActivated.count > 1) {
                         //Todo need to change the design part with a rollover windows with multiple counter
                         //Todo Need to merge this part with the if == 1
                         //TODO - Counter Management Classes - More than one classe with counter tracker"
                     }
                 });
-            }else if(!this.initDone){
+            } else if (!this.initDone){
                 //Reset all counter if the combat is not started
                 combatants.forEach(c => {
                     this.resetCounterManagement(c.actor._id);
@@ -92,7 +92,7 @@ export default class CounterManagement {
             nextTurn.click(event => {
                 combatants.forEach(c => {
                     let featureCounterActivated = this.howManyClassesWithCounterHaveTheActor(c);
-                    if(featureCounterActivated.count >= 1 ) {
+                    if (featureCounterActivated.count >= 1 ) {
                         this.resetCounterManagement(c.actor._id);
                     }
                     this.currentRound[c._id] = -1;
@@ -107,7 +107,7 @@ export default class CounterManagement {
      * Reset the all counter for all classes for the current ActorId
      * @param actorId
      */
-    resetCounterManagement(actorId){
+    resetCounterManagement(actorId) {
         let currentActor = game.actors.get(actorId);
         currentActor.update({
             "data.counterClasses.values": []
@@ -119,8 +119,8 @@ export default class CounterManagement {
      * @param classesToManage
      * @returns {*}
      */
-    getCurrentCounter(classesToManage){
-        return (this.currentActor.data.data.counterClasses.values[classesToManage])
+    getCurrentCounter(classesToManage) {
+        return this.currentActor.data.data.counterClasses.values[classesToManage]
             ?  this.currentActor.data.data.counterClasses.values[classesToManage].count
             : 0;
     }
@@ -130,8 +130,8 @@ export default class CounterManagement {
      * @param classesToManage
      * @returns {*}
      */
-    getCurrentClassesOrPosition(classesToManage){
-        return (this.currentActor.data.data.counterClasses.values[classesToManage])
+    getCurrentClassesOrPosition(classesToManage) {
+        return this.currentActor.data.data.counterClasses.values[classesToManage]
             ?  this.currentActor.data.data.counterClasses.values[classesToManage].position
             : classesToManage;
     }
@@ -140,8 +140,8 @@ export default class CounterManagement {
      * Add one to the counter of the choosen classes
      * @param classesToManage
      */
-    addOneToCurrentCounter(classesToManage){
-        if(this.currentActor.data.data.counterClasses.values[classesToManage]) {
+    addOneToCurrentCounter(classesToManage) {
+        if (this.currentActor.data.data.counterClasses.values[classesToManage]) {
             let classesToUpdate = {};
             classesToUpdate[classesToManage] = {
                 'count': this.currentActor.data.data.counterClasses.values[classesToManage].count + 1,
@@ -174,13 +174,13 @@ export default class CounterManagement {
      * @param combatant
      * @param targetClasses
      */
-    addOneToCounterForActiveActor(combatant, targetClasses){
+    addOneToCounterForActiveActor(combatant, targetClasses) {
         //If the actor is the active actor inside the combat we add one to the counter one time.
-        if(combatant.active && game.combat && game.combat.data.round > 0){
+        if (combatant.active && game.combat && game.combat.data.round > 0) {
             //limit to tree for solarian
-            if(!this.isSolarian(targetClasses) || this.getCurrentCounter(targetClasses) < 3) {
+            if (!this.isSolarian(targetClasses) || this.getCurrentCounter(targetClasses) < 3) {
                 this.addOneToCurrentCounter(targetClasses);
-            } else if (this.isSolarian(targetClasses)){
+            } else if (this.isSolarian(targetClasses)) {
                 this.activePixiEffect(combatant._id);
             }
 
@@ -193,7 +193,7 @@ export default class CounterManagement {
      * Active visual effect for the solarian, when i can activated a final power
      * @param combattantId
      */
-    activePixiEffect(combattantId){
+    activePixiEffect(combattantId) {
         //Todo active PixiEffect
     }
 
@@ -202,7 +202,7 @@ export default class CounterManagement {
      * @param targetClasses
      * @returns {boolean}
      */
-    isSolarian(targetClasses){
+    isSolarian(targetClasses) {
         return (targetClasses == "solarianAttunement");
     }
 
@@ -211,20 +211,20 @@ export default class CounterManagement {
      * @param c
      * @returns {{count: number, classesToManage: Array}}
      */
-    howManyClassesWithCounterHaveTheActor(c){
+    howManyClassesWithCounterHaveTheActor(c) {
 
         let classesTracker = {
             'count': 0,
             'classesToManage':[]
         };
 
-        if(typeof c.actor.data.flags.sfrpg !== "undefined") {
+        if (typeof c.actor.data.flags.sfrpg !== "undefined") {
             //Only check for actor with the activated feature
-            if(c.actor.data.flags.sfrpg){
+            if (c.actor.data.flags.sfrpg) {
                 let activeFeature = c.actor.data.flags.sfrpg;
 
                 for (let [key, name] of Object.entries(this.existingFeature)) {
-                    if (activeFeature.hasOwnProperty(name)){
+                    if (activeFeature.hasOwnProperty(name)) {
                         classesTracker.count++;
                         classesTracker['classesToManage'].push(name);
                     }
@@ -244,7 +244,7 @@ export default class CounterManagement {
      * @param combatantId
      * @returns {Promise<void>}
      */
-    async displayDialogBoxCounterManagement(actorId, targetClasses, combatantId){
+    async displayDialogBoxCounterManagement(actorId, targetClasses, combatantId) {
         this.windowsBox = await CounterManagementWindows.create(actorId, targetClasses, combatantId);
     }
 
