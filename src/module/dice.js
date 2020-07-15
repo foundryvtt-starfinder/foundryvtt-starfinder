@@ -1,3 +1,6 @@
+
+import {SFRPGCustomChatMessage} from "./engine/chat/chatbox.js";
+
 export class DiceSFRPG {
     /**
    * A standardized helper function for managing core 5e "d20 rolls"
@@ -21,8 +24,8 @@ export class DiceSFRPG {
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-    static d20Roll({ event, parts, data, template, title, speaker, flavor, advantage = true, situational = true,
-        fastForward = true, critical = 20, fumble = 1, onClose, dialogOptions, }) {
+    static d20Roll({ event, parts, data, actor, template, title, speaker, flavor, advantage = true, situational = true,
+        fastForward = true, critical = 20, fumble = 1, onClose, dialogOptions }) {
 
         flavor = flavor || title;
         // Inner roll function
@@ -42,18 +45,26 @@ export class DiceSFRPG {
 
             // Execute the roll
             let roll = new Roll(parts.join(" + "), data).roll();
+            const action = title.replace(/\s/g, '-').toLowerCase();
+
+             //My data to display
+            let myData = {
+                'title': title,
+                'data':  data,
+                'actor': actor,
+                'flavor': flavor,
+                'speaker': speaker,
+            }
+
+            //Push the roll to the ChatBox
+            SFRPGCustomChatMessage.rollToRender(roll, myData, action);
 
             // Flag critical thresholds
             let d20 = roll.parts[0];
             d20.options.critical = critical;
             d20.options.fumble = fumble;
 
-            // Convert the roll to a chat message
-            roll.toMessage({
-                speaker: speaker,
-                flavor: flavor,
-                rollMode: rollMode
-            });
+
         };
 
         let dialogCallback = html => {
