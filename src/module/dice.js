@@ -1,5 +1,5 @@
 
-import {SFRPGCustomChatMessage} from "./engine/chat/chatbox.js";
+import { SFRPGCustomChatMessage } from "./engine/chat/chatbox.js";
 
 export class DiceSFRPG {
     /**
@@ -56,15 +56,13 @@ export class DiceSFRPG {
                 'speaker': speaker,
             }
 
-            //Push the roll to the ChatBox
-            SFRPGCustomChatMessage.rollToRender(roll, myData, action);
-
             // Flag critical thresholds
             let d20 = roll.parts[0];
             d20.options.critical = critical;
             d20.options.fumble = fumble;
 
-
+            //Push the roll to the ChatBox
+            SFRPGCustomChatMessage.rollToRender(roll, myData, action);
         };
 
         let dialogCallback = html => {

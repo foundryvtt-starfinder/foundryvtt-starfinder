@@ -66,7 +66,8 @@ export class SFRPGCustomChatMessage {
                         content:content + diceRoll, //push the diceRoll at the end of the template
                         rollMode: game.settings.get("core", "rollMode"),
                         rollModes: CONFIG.Dice.rollModes,
-                        _roll: roll,
+                        roll: roll,
+                        type: CONST.CHAT_MESSAGE_TYPES.ROLL
                     });
                 });
         });
