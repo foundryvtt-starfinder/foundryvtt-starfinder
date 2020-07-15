@@ -451,7 +451,7 @@ export class ItemSFRPG extends Item {
         const title = `Attack Roll`;
 
         //Warn the user if there is no ammo left
-        if(itemData.data.capacity && itemData.data.capacity.value === 0)  ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
+        if (itemData.data.capacity && itemData.data.capacity.value === 0)  ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
 
         // Call the roll helper utility
         DiceSFRPG.d20Roll({
