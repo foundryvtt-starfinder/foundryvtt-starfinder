@@ -7,6 +7,7 @@
 #chat-log .message {
   background: @sheetBackground;
   font-size: 13px;
+  position: relative;
 }
 
 #chat-form {
@@ -20,6 +21,119 @@
     .roll {
       font-size: 13px;
     }
+  }
+}
+
+.chat-card-custom {
+  .chat-card-custom-item {
+    img {
+      margin: 5px;
+      float: left;
+      border: none;
+      border-radius: 10px;
+      width: 30px;
+    }
+
+    p span {
+      display: block;
+      color: black;
+      font-weight: bold;
+    }
+
+    p button {
+      margin: 5px 0px;
+      background-color: @sfrpgRed;
+      border-color: #000000;
+      color: #FFFFFF;
+      font-size: 12px;
+      height: 20px;
+      width: 60px;
+      line-height: inherit;
+    }
+
+    p button.chat-button-save {
+      margin: 5px 0px;
+      background-color: grey;
+      border-color: black;
+      color: #FFFFFF;
+      font-size: 12px;
+      height: 20px;
+      width: 90px;
+      line-height: inherit;
+    }
+
+    h2 {
+      position: initial;
+    }
+  }
+
+  div.chard-card-custom-token {
+    img {
+      float: left;
+      border: none;
+      width: 60px;
+    }
+  }
+}
+
+.chard-card-custom-details {
+  margin-top: 3px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 2px 0 0;
+    padding: 0 3px;
+    font-size: 10px;
+    line-height: 16px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.message-content {
+  h2 {
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    width: 96%;
+    top: 5px;
+  }
+
+  div.chat-card-custom-container {
+    padding: 3px;
+    background-color: rgba(0,0,0,0.05);
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+
+  div.dice-roll {
+    .dice-formula {
+      font-weight: bold;
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+    }
+  }
+
+  div.flexrow div h2 {
+    position: initial;
+  }
+}
+
+.message-header {
+  background-color: rgba(150,200,255,0.4);
+  padding: 2px;
+  z-index: 5;
+
+  h4.message-sender {
+    z-index: 1;
+    color: #671818;
+    font-weight: bold;
   }
 }
 
