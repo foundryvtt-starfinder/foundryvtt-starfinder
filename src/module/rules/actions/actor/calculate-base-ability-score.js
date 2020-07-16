@@ -1,7 +1,7 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function (engine) {
-    engine.closures.add("calculateBaseAbilityModifier", (fact, context) => {
+    engine.closures.add("calculateBaseAbilityScore", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
 
@@ -11,7 +11,7 @@ export default function (engine) {
             abilityMod += bonus.modifier;
 
             if (abilityMod !== 0) {
-                ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifiersTooltip", {
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreBonusTooltip", {
                     type: bonus.type.capitalize(),
                     mod: bonus.modifier.signedString(),
                     source: bonus.name
@@ -23,21 +23,39 @@ export default function (engine) {
 
         const filteredMods = modifiers.filter(mod => {
             return mod.enabled && 
-                [SFRPGEffectType.ABILITY_MODIFIER, SFRPGEffectType.ABILITY_MODIFIERS].includes(mod.effectType) && 
+                [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType) && 
                 [SFRPGModifierType.CONSTANT].includes(mod.modifierType);
         })
 
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
             const abilityMods = context.parameters.stackModifiers.process(
-                filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_MODIFIERS), 
+                filteredMods.filter(mod => mod.valueAffected === abl), 
                 context
             );
 
-            const base = Math.floor((ability.value - 10) / 2);
-            ability.modifierTooltip = [game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() })];
+            let score = ability.base ? ability.base : 10;
+            ability.tooltip = [game.i18n.format("SFRPG.AbilityScoreBaseTooltip", { mod: score.signedString() })];
 
-            let mod = Object.entries(abilityMods).reduce((sum, mod) => {
+            if (ability.damage) {
+                let damage = -Math.abs(ability.damage);
+                score += damage;
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityDamageTooltip", { mod: damage.signedString() }));
+            }
+
+            if (ability.userPenalty) {
+                let userPenalty = -Math.abs(ability.userPenalty);
+                score += userPenalty;
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityPenaltyTooltip", { mod: userPenalty.signedString() }));
+            }
+
+            if (ability.drain) {
+                let drain = -Math.abs(ability.drain);
+                score += drain;
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityDrainTooltip", { mod: drain.signedString() }));
+            }
+
+            let bonus = Object.entries(abilityMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -51,7 +69,7 @@ export default function (engine) {
                 return sum;
             }, 0);
 
-            ability.mod = base + mod;
+            ability.value = score + bonus;
         }
 
         return fact;
