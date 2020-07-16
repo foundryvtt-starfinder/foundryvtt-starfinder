@@ -18,7 +18,7 @@ export class SFRPGCustomChatMessage {
     static createToken(actor){
         if(actor.token){
             return actor.token.scene.data._id + '.' +actor.token.data._id;
-        }else if(canvas.tokens.controlled[0].id){
+        }else if(canvas.tokens.controlled[0]?.id){
             return game.scenes.active._id + '.' + canvas.tokens.controlled[0].id;
         }else {
             return {}
