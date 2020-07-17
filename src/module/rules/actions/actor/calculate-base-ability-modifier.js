@@ -11,7 +11,7 @@ export default function (engine) {
             abilityMod += bonus.modifier;
 
             if (abilityMod !== 0) {
-                ability.tooltip.push(game.i18n.format("SFRPG.AbilityModifiersTooltip", {
+                ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifiersTooltip", {
                     type: bonus.type.capitalize(),
                     mod: bonus.modifier.signedString(),
                     source: bonus.name
@@ -35,7 +35,7 @@ export default function (engine) {
             );
 
             const base = Math.floor((ability.value - 10) / 2);
-            ability.tooltip = [game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() })];
+            ability.modifierTooltip = [game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() })];
 
             let mod = Object.entries(abilityMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
@@ -51,7 +51,15 @@ export default function (engine) {
                 return sum;
             }, 0);
 
-            ability.mod = base + mod;
+            let abilityModifier = base + mod;
+
+            if (ability.damage) {
+                let damage = -Math.floor(Math.abs(ability.damage) / 2);
+                abilityModifier += damage;
+                ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityDamageTooltip", { mod: damage.signedString() }));
+            }
+
+            ability.mod = abilityModifier;
         }
 
         return fact;

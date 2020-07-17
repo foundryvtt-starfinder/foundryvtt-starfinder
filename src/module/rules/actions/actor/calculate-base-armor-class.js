@@ -14,7 +14,7 @@ export default function (engine) {
             const maxDex = Math.min(data.abilities.dex.mod, armor.data.armor.dex || Number.MAX_SAFE_INTEGER);
             const maxDexTooltip = game.i18n.format("SFRPG.ACTooltipMaxDex", { 
                 maxDex: maxDex.signedString(), 
-                armorMax: armor.data.armor.dex.signedString() 
+                armorMax: armor.data.armor.dex ? armor.data.armor.dex.signedString() : "unlimited"
             });
             
             let eacMod = armor.data.armor.eac + maxDex;

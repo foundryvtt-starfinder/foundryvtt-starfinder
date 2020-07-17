@@ -137,6 +137,87 @@
     }
   }
 
+  .ability-scores {
+    flex: 0 0 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+    .ability {
+      height: 94px;
+      margin: 0 2px;
+      text-align: center;
+      border: @borderGroove;
+      border-radius: 3px;
+
+      .ability-header {
+        height: 24px;
+        margin: 0;
+
+        input[type="text"].ability-damage {
+          flex: 1;
+          height: 24px;
+          border-bottom: @borderGroove;
+          border-right: @borderGroove;
+        }
+
+        input[type="text"].ability-penalty {
+          flex: 1;
+          height: 24px;
+          border-bottom: @borderGroove;
+        }
+
+        input[type="text"].ability-drain {
+          flex: 1;
+          height: 24px;
+          border-bottom: @borderGroove;
+          border-left: @borderGroove;
+        }
+      }
+
+      // Box Headers
+      h4.box-title {
+        line-height: 16px;
+        margin: 4px 8px 25px;
+        font-size: 18px;
+        border-bottom: 1px solid @colorBeige;
+      }
+
+      .ability-modifiers {
+        height: 24px;
+        margin: -12px 0 0;
+
+        span.ability-mod,
+        input[type="text"].ability-base {
+          flex: 0 0 32px;
+          height: 32px;
+          border-top: @borderGroove;
+        }
+
+        span.ability-mod {
+          border-right: @borderGroove;
+          padding: 7px 0 0;
+        }
+
+        div.ability-center {
+          height: 0;
+          margin: -10px 0 0;
+          font-size: 24px;
+        }
+
+        input[type="text"].ability-base {
+          border-left: @borderGroove;
+          border-bottom: 0;
+          border-right: 0;
+          border-radius: 0;
+          margin-right: 0;
+          margin-bottom: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+
   ul.skills-list {
     flex: 0 0 49%;
 

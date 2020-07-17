@@ -487,7 +487,6 @@ class SpellBrowserSFRPG extends ItemBrowserSFRPG {
 
     if (unfoundSpells !== '') {
       console.log('SFRPG | Spell Browser | List of Spells that don\'t have a class assosiated to them:');
-      console.log(unfoundSpells);
     } //  sorting and assigning better class names
 
 

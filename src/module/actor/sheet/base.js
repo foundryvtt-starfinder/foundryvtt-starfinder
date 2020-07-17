@@ -396,7 +396,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item'),
             item = this.actor.getOwnedItem(li.data('item-id')),
-            chatData = item.getChatData({ secrets: this.actor.owner });
+            chatData = item.getChatData({ secrets: this.actor.owner, rollData: this.actor.data.data });
 
         if (li.hasClass('expanded')) {
             let summary = li.children('.item-summary');
