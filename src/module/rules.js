@@ -21,6 +21,7 @@ import isActorType from './rules/conditions/is-actor-type.js';
 import stackModifiers from './rules/actions/modifiers/stack-modifiers.js';
 import logToConsole from './rules/actions/log.js';
 import calculateBaseAbilityModifier from './rules/actions/actor/calculate-base-ability-modifier.js';
+import calculateBaseAbilityScore from './rules/actions/actor/calculate-base-ability-score.js';
 import calculateBaseArmorClass from './rules/actions/actor/calculate-base-armor-class.js';
 import calculateArmorModifiers from './rules/actions/actor/calculate-armor-modifiers.js';
 import calculateBab from './rules/actions/actor/calculate-bab.js';
@@ -55,6 +56,7 @@ export default function (engine) {
     setResult(engine);
     undefined(engine);
     // Actor actions
+    calculateBaseAbilityScore(engine);
     calculateBaseAbilityModifier(engine);
     calculateBaseArmorClass(engine);
     calculateArmorModifiers(engine);
@@ -107,6 +109,7 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "character" },
                 then: [
+                    { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseArmorClass",
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },

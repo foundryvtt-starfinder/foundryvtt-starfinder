@@ -57,6 +57,10 @@
             {{#each config.abilities as |ability abl|}}
             <option value="{{abl}}">{{ability}}</option>
             {{/each}}
+            {{else if (eq modifier.effectType "ability-score")}}
+            {{#each config.abilities as |ability abl|}}
+            <option value="{{abl}}">{{ability}}</option>
+            {{/each}}
             {{else}}
             <option value=""></option>
             {{/if}}
