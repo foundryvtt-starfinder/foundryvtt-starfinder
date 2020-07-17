@@ -37,10 +37,8 @@ const migrateActorData = function (actor, schema) {
     const updateData = {};
 
     if (schema < SFRPGMigrationSchemas.NPC_DATA_UPATE && actor.type === 'npc') _migrateNPCData(actor, updateData);
-
-    if (schema < SFRPGMigrationSchemas.THE_PAINFUL_UPDATE) {
-        _resetActorFlags(actor, updateData);
-    }
+    if (schema < SFRPGMigrationSchemas.THE_PAINFUL_UPDATE) _resetActorFlags(actor, updateData);
+    if (schema < SFRPGMigrationSchemas.THE_HAPPY_UPDATE && actor.type === 'character') _migrateActorAbilityScores(actor, updateData);
 
     return updateData;
 };
@@ -49,6 +47,19 @@ const migrateItemData = function (item, schema) {
     const updateData = {};
     
     return updateData;
+};
+
+const _migrateActorAbilityScores = function (actor, data) {
+    const actorData = duplicate(actor.data);
+    const abilities = actorData.abilities;
+
+    for (const ability of Object.values(abilities)) {
+        ability.base = ability.value || 10;
+    }
+
+    data["data.abilities"] = abilities;
+
+    return data;
 };
 
 const _resetActorFlags = function (actor, data) {
@@ -90,5 +101,6 @@ const _migrateNPCData = function (actor, data) {
 
 const SFRPGMigrationSchemas = Object.freeze({
     NPC_DATA_UPATE: 0.001,
-    THE_PAINFUL_UPDATE: 0.002
+    THE_PAINFUL_UPDATE: 0.002,
+    THE_HAPPY_UPDATE: 0.003
 });
