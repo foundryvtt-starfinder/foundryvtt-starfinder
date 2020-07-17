@@ -433,7 +433,7 @@ export class ItemSFRPG extends Item {
         else if (!abl) abl = "str";
 
         // Define Roll parts
-        const parts = ["@item.attackBonus", `@abilities.${abl}.mod`, "@attributes.bab"];
+        const parts = ["@item.data.attackBonus", `@abilities.${abl}.mod`, "@attributes.bab"];
         if ((this.data.type === "weapon") && !itemData.data.proficient) parts.push("-4");
 
         // Define Critical threshold
@@ -518,11 +518,11 @@ export class ItemSFRPG extends Item {
         const itemData = this.data.data;
         const actorData = this.actor.data.data;
 
-        const parts = ["@item.attackBonus"];
+        const parts = ["@item.data.attackBonus"];
 
         const rollData = duplicate(actorData);
         rollData.item = itemData;
-        const title = `${this.name} - Attack Roll`;
+        const title = `Attack Roll`;
 
         DiceSFRPG.d20Roll({
             event: options.event,
