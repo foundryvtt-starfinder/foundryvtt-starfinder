@@ -51,7 +51,15 @@ export default function (engine) {
                 return sum;
             }, 0);
 
-            ability.mod = base + mod;
+            let abilityModifier = base + mod;
+
+            if (ability.damage) {
+                let damage = -Math.floor(Math.abs(ability.damage) / 2);
+                abilityModifier += damage;
+                ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityDamageTooltip", { mod: damage.signedString() }));
+            }
+
+            ability.mod = abilityModifier;
         }
 
         return fact;

@@ -37,12 +37,6 @@ export default function (engine) {
             let score = ability.base ? ability.base : 10;
             ability.tooltip = [game.i18n.format("SFRPG.AbilityScoreBaseTooltip", { mod: score.signedString() })];
 
-            if (ability.damage) {
-                let damage = Math.floor(-Math.abs(ability.damage) / 2);
-                score += damage;
-                ability.tooltip.push(game.i18n.format("SFRPG.AbilityDamageTooltip", { mod: damage.signedString() }));
-            }
-
             if (ability.userPenalty) {
                 let userPenalty = -Math.abs(ability.userPenalty);
                 score += userPenalty;
