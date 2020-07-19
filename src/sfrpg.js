@@ -28,9 +28,18 @@ import migrateWorld from './module/migration.js';
 import CounterManagement from "./module/classes/counter-management.js";
 
 Hooks.once('init', async function () {
-    console.log(`SFRPG | Initializeing SFRPG System`);
+    console.log(`SFRPG | Initializing the Starfinder System`);
+    console.log(
+`__________________________________________________
+ ____  _              __ _           _
+/ ___|| |_ __ _ _ __ / _(_)_ __   __| | ___ _ __
+\\___ \\| __/ _\` | '__| |_| | '_ \\ / _\` |/ _ \\ '__|
+ ___) | || (_| | |  |  _| | | | | (_| |  __/ |
+|____/ \\__\\__,_|_|  |_| |_|_| |_|\\__,_|\\___|_|
+==================================================`
+    );
 
-    console.log("SFRPG | Initializeing the rules engine");
+    console.log("SFRPG | Initializing the rules engine");
     const engine = new Engine();
 
     game.sfrpg = {

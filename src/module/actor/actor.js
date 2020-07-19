@@ -20,7 +20,8 @@ export class ActorSFRPG extends Actor {
                 const classData = {
                     keyAbilityMod: this.data.data.abilities[i.data.kas].mod,
                     levels: i.data.levels,
-                    keyAbilityScore: i.data.kas
+                    keyAbilityScore: i.data.kas,
+                    skillRanksPerLevel: i.data.skillRanks.value
                 };
 
                 obj[i.name.slugify({replacement: "_", strict: true})] = classData;

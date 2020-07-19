@@ -1095,6 +1095,7 @@ SFRPG.modifierEffectTypes = {
     "acp": "SFRPG.ModifierEffectTypeACP",
     "initiative": "SFRPG.ModifierEffectTypeInit",
     "ability-skills": "SFRPG.ModifierEffectTypeAbilitySkills",
+    "ability-score": "SFRPG.ModifierEffectTypeAbilityScore",
     "skill": "SFRPG.ModifierEffectTypeSkill",
     "all-skills": "SFRPG.ModifierEffectTypeAllSkills",
     "saves": "SFRPG.ModifierEffectTypeSaves",
