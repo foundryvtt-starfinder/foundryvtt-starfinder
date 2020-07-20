@@ -125,19 +125,13 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         const modifiers = {
             conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },
             permanent: { label: "SFRPG.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
-            temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } },
-            item: { label: "SFRPG.ModifiersItemTabLabel", modifiers: [], dataset: { subtab: "item" } },
-            misc: { label: "SFRPG.ModifiersMiscTabLabel", modifiers: [], dataset: { subtab: "misc" } }
+            temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } }
         };
 
         let [permanent, temporary, itemModifiers, conditions, misc] = data.data.modifiers.reduce((arr, modifier) => {
             if (modifier.subtab === "permanent") arr[0].push(modifier);
-            else if (modifier.subtab === "temporary") arr[1].push(modifier);
-            else if (modifier.subtab === "item") arr[2].push(modifier);
             else if (modifier.subtab === "conditions") arr[3].push(modifier);
-            // The miscellaneous group is kind of a catchall category. If a modifer isn't explicitly
-            // marked as belonging to a subtab, we'll just shove it in here.
-            else arr[4].push(modifier);
+            else arr[1].push(modifier); // Any unspecific categories go into temporary.
 
             return arr;
         }, [[], [], [], [], []]);
@@ -145,8 +139,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         modifiers.conditions.modifiers = conditions;
         modifiers.permanent.modifiers = permanent;
         modifiers.temporary.modifiers = temporary;
-        modifiers.item.modifiers = itemModifiers;
-        modifiers.misc.modifiers = misc;
 
         data.modifiers = Object.values(modifiers);
     }

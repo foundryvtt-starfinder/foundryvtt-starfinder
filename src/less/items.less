@@ -232,4 +232,154 @@
   .loot-header {
     margin-bottom: 10px;
   }
+
+  .inventory-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 5px;
+    overflow-y: auto;
+
+    // Inventory Item
+    .item {
+      line-height: 45px;
+      padding: 0 2px; // to align with the header border
+      border-bottom: 1px solid @colorFaint;
+      &:last-child { border-bottom: none; }
+
+      // Item Header Name
+      .item-name {
+        cursor: pointer;
+
+        &.modifier-name {
+          cursor: default;
+        }
+
+        .item-image {
+          flex: 0 0 45px;
+          background-size: 45px;
+          margin-right: 5px;
+        }
+
+        h4 {
+          margin: 0;
+        }
+
+        &:hover .item-image {
+          background-image: url("/icons/svg/d20-grey.svg") !important;
+        }
+
+        .item-image:hover {
+          background-image: url("/icons/svg/d20-black.svg") !important;
+        }
+
+        .item-action {
+          flex: 0 0 15%;
+  
+          .attack {
+            width: auto;
+            background: @sfrpgBlue;
+            color: #fff;
+            cursor: pointer;
+          }
+  
+          .damage {
+            width: auto;
+            background: @sfrpgRed;
+            color: #fff;
+            cursor: pointer;
+          }
+        }
+      }
+      
+      // Item Dropdown Properties
+      .item-properties {
+        margin-top: 3px;
+      }
+
+      // Charged
+      .item-recharge {
+        flex: 0 0 80px;
+        text-align: right;
+        font-size: 11px;
+        color: @colorTan;
+      }
+    }
+
+    // Inventory Header
+    .inventory-header {
+      margin: 2px 0;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.05);
+      border: @borderGroove;
+      font-weight: bold;
+      line-height: 24px;
+
+      h3 {
+        margin: 0 -5px 0 0;
+        padding-left: 5px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .item-controls a.modifier-create {
+        flex: 0 0 100%;
+      }
+    }
+
+    // Item Detail Sections
+    .item-detail {
+      &.modifier-effect-type { flex: 0 0 160px; }
+      &.modifier-value-affected { flex: 0 0 120px; }
+      &.modifier-type { flex: 0 0 95px; }
+
+      flex: 0 0 80px;
+      font-size: 12px;
+      color: @colorTan;
+      text-align: center;
+      border-right: 1px solid @colorFaint;
+      &:last-child { border-right: none; }      
+    }
+
+    .item-weight {
+      flex: 0 0 60px;
+      border-left: 1px solid @colorFaint;
+      border-right: 1px solid @colorFaint;
+    }
+
+    .item-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    // Item Control Buttons
+    .item-controls {
+      flex: 0 0 68px;
+      
+      .flexrow();
+      justify-content: flex-end;
+
+      a {
+        flex: 0 0 22px;
+        font-size: 10px;
+        text-align: center;
+        color: #666;
+
+        .item-create,
+        .modifier-create {
+          flex: 0 0 100%;
+        }
+      }
+    }
+
+    // Item Dropdown Summary
+    .item-summary {
+      flex: 0 0 100%;
+      font-size: 12px;
+      line-height: 16px;
+      padding: 0.25em 0.5em;
+      border-top: 1px solid @colorFaint;
+    }
+  }
+
 }

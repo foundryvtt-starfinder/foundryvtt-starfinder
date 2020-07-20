@@ -46,7 +46,7 @@ export class ActorSFRPG extends Actor {
         const actorType = actorData.type;
 
         this._ensureHasModifiers(data);
-        const modifiers = data.modifiers;
+        const modifiers = this.getAllModifiers();
 
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
@@ -266,6 +266,41 @@ export class ActorSFRPG extends Actor {
         const modifier = modifiers.find(mod => mod._id === id);
 
         new SFRPGModifierApplication(modifier, this).render(true);
+    }
+
+    /**
+     * Returns an array of all modifiers on this actor. This will include items such as equipment, feat, classes, race, theme, etc.
+     * 
+     * @param {Boolean} ignoreTemporary Should we ignore temporary modifiers? Defaults to false.
+     * @param {Boolean} ignoreEquipment Should we ignore equipment modifiers? Defaults to false.
+     */
+    getAllModifiers(ignoreTemporary = false, ignoreEquipment = false) {
+        let allModifiers = this.data.data.modifiers.filter(mod => {
+            return (!ignoreTemporary || mod.subtab == "permanent");
+        });
+
+        for(let item of this.data.items) {
+            let modifiersToConcat = [];
+            switch (item.type) {
+                default:
+                    modifiersToConcat = item.data.modifiers;
+                    break;
+                case "feat":
+                    if (item.data.labels && item.data.labels.featType === "Passive") {
+                        modifiersToConcat = item.data.modifiers;
+                    }
+                    break;
+                case "equipment":
+                    if (!ignoreEquipment && item.data.equipped) {
+                        modifiersToConcat = item.data.modifiers;
+                    }
+                    break;
+            }
+            if (modifiersToConcat && modifiersToConcat.length > 0) {
+                allModifiers = allModifiers.concat(modifiersToConcat);
+            }
+        }
+        return allModifiers;
     }
 
     /**
