@@ -554,7 +554,7 @@ export class ActorSFRPG extends Actor {
      * @return {Promise}        A Promise which resolves once the long rest workflow has completed
      */
     async longRest({ dialog = true, chat = true } = {}) {
-        const data = this.data.data;
+        const data = duplicate(this.data.data);
         const updateData = {};
 
         if (dialog) {
@@ -575,6 +575,13 @@ export class ActorSFRPG extends Actor {
         updateData['data.attributes.sp.value'] = data.attributes.sp.max;
         updateData['data.attributes.rp.value'] = data.attributes.rp.max;
 
+        // Heal Ability damage
+        for (let [abl, ability] of Object.entries(data.abilities)) {
+            if (ability.damage && ability.damage > 0) {
+                updateData[`data.abilities.${abl}.damage`] = --ability.damage;
+            } 
+        }
+
         for (let [k, r] of Object.entries(data.resources)) {
             if (r.max && (r.sr || r.lr)) {
                 updateData[`data.resources.${k}.value`] = r.max;
@@ -589,10 +596,12 @@ export class ActorSFRPG extends Actor {
         const items = this.items.filter(i => i.data.data.uses && ["sr", "lr", "day"].includes(i.data.data.uses.per));
         const updateItems = items.map(item => {
             return {
-                "id": item.data.id,
+                "_id": item.data._id,
                 "data.uses.value": item.data.data.uses.max
             }
         });
+
+        console.log(updateData);
 
         await this.update(updateData);
         await this.updateEmbeddedEntity("OwnedItem", updateItems);
