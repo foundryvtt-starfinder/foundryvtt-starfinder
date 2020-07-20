@@ -63,8 +63,13 @@
             </div>
 
             <div class="item-detail item-equipped">
-            {{#if item.data.equipped }} {{localize "SFRPG.InventoryEquipped"}}
-            {{/if}}
+                {{#if (or (eq item.type "weapon") (eq item.type "equipment"))}}
+                <label class="checkbox">
+                    <input type="checkbox" class="item-equip" name="item.data.equipped" {{checked item.data.equipped}}/>{{localize "SFRPG.InventoryEquipped"}}
+                </label>
+                {{else}}
+                N/A
+                {{/if}}
             </div>
             {{/if}}
 
