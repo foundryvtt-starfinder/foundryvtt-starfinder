@@ -448,7 +448,7 @@ export class ItemSFRPG extends Item {
         itemData.hasCapacity = this.data.hasCapacity;
 
         rollData.item = itemData;
-        const title = `Attack Roll`;
+        const title = game.settings.get('sfrpg', 'useCustomChatCard') ? `Attack Roll` : `Attack Roll - ${itemData.name}`;
 
         //Warn the user if there is no ammo left
         if (itemData.data.capacity && itemData.data.capacity.value === 0)  ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
@@ -575,7 +575,7 @@ export class ItemSFRPG extends Item {
             item: itemData,
             mod: actorData.abilities[abl].mod
         });
-        const title = `Damage Roll`;
+        const title = game.settings.get('sfrpg', 'useCustomChatCard') ? `Damage Roll` : `Damage Roll - ${this.data.name}`;
 
         // Call the roll helper utility
         DiceSFRPG.damageRoll({

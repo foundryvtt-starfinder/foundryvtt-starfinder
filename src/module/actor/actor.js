@@ -384,8 +384,8 @@ export class ActorSFRPG extends Actor {
             actor: this,
             parts: ["@mod"],
             data: { mod: abl.mod },
-            flavor: `${label}`,
-            title: `Ability Check`,
+            flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Ability Check - ${label}`,
+            title:  `Ability Check`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
@@ -406,7 +406,7 @@ export class ActorSFRPG extends Actor {
             parts: ["@mod"],
             data: { mod: save.bonus },
             title: `Save`,
-            flavor: `${label}`,
+            flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Save - ${label}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
@@ -418,7 +418,7 @@ export class ActorSFRPG extends Actor {
             parts: ["@mod"],
             data: { mod: skill.mod },
             title: 'Skill Check',
-            flavor: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
+            flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
