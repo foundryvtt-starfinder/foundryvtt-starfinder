@@ -291,7 +291,8 @@ export class ActorSFRPG extends Actor {
                     }
                     break;
                 case "equipment":
-                    if (!ignoreEquipment && item.data.equipped) {
+                case "weapon":
+                        if (!ignoreEquipment && item.data.equipped) {
                         modifiersToConcat = item.data.modifiers;
                     }
                     break;
