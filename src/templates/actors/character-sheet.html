@@ -126,20 +126,20 @@
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
                 {{#each data.abilities as |ability id|}}
-                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-tippy-content="<strong>{{ability.label}}</strong><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-ability="{{id}}">
+                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
                   <div class="ability-header flexrow">
-                    <input class="ability-damage" name="data.abilities.{{id}}.damage" type="text" title="{{localize "SFRPG.AbilityDamageTitle"}}"
+                    <input class="ability-damage" name="data.abilities.{{id}}.damage" type="text" data-tippy-content="{{localize "SFRPG.AbilityDamageTitle"}}"
                     value="{{#if ability.damage}}{{ability.damage}}{{/if}}" data-dtype="Number" placeholder="{{localize "SFRPG.AbilityDamagePlaceholder"}}"/>
-                    <input class="ability-penalty" name="data.abilities.{{id}}.userPenalty" type="text" title="{{localize "SFRPG.AbilityPenaltyTitle"}}"
+                    <input class="ability-penalty" name="data.abilities.{{id}}.userPenalty" type="text" data-tippy-content="{{localize "SFRPG.AbilityPenaltyTitle"}}"
                     value="{{#if ability.userPenalty}}{{ability.userPenalty}}{{/if}}" data-dtype="Number" placeholder="{{localize "SFRPG.AbilityPenaltyPlaceholder"}}"/>
-                    <input class="ability-drain" name="data.abilities.{{id}}.drain" type="text" title="{{localize "SFRPG.AbilityDrainTitle"}}"
+                    <input class="ability-drain" name="data.abilities.{{id}}.drain" type="text" data-tippy-content="{{localize "SFRPG.AbilityDrainTitle"}}"
                     value="{{#if ability.drain}}{{ability.drain}}{{/if}}" data-dtype="Number" placeholder="{{localize "SFRPG.AbilityDrainPlaceholder"}}"/>
                   </div>
-                  <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
+                  <h4 class="ability-name box-title rollable" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.value<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.label}}</h4>
                   <div class="ability-modifiers flexrow">
-                    <span class="ability-mod" data-tippy-content="<strong>{{ability.label}}</strong><br>{{#each ability.modifierTooltip as |tip|}}{{tip}}<br>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                    <div class="ability-center">{{ability.value}}</div>
-                    <input class="ability-base" data-tippy-content="{{localize "SFRPG.AbilityScoreBase"}}" name="data.abilities.{{id}}.base" type="text" value="{{ability.base}}" data-dtype="Number" placeholder="10"/>
+                    <span class="ability-mod" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.modifierTooltip as |tip|}}{{tip}}<br>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                    <div class="ability-center" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.value<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.value}}</div>
+                    <input class="ability-base" data-tippy-content="<strong>{{localize "SFRPG.AbilityScoreBase"}}</strong><br>@abilities.{{id}}.base" name="data.abilities.{{id}}.base" type="text" value="{{ability.base}}" data-dtype="Number" placeholder="10"/>
                   </div>
                 </li>
                 {{/each}}
@@ -169,14 +169,17 @@
                     <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
                 </li>
                 {{/each}}
-                <li class="flexrow">
+                <li class="flexcol skills-footer">
                     <div class="form-group">
                         <button id="add-profession"><i class="fas fa-plus"></i> {{localize "SFRPG.AddProfessionButtonText"}}</button>
                     </div>
+                    <div class="form-group">
+                        <small>* = {{localize "SFRPG.ArmorCheckPenalty"}}, &dagger; = {{localize "SFRPG.SkillTrainedOnly"}}</small>
+                    </div>
                 </li>
-                <li class="flexrow">
-                    <small>* = {{localize "SFRPG.ArmorCheckPenalty"}}, &dagger; = {{localize "SFRPG.SkillTrainedOnly"}}</small>
-                </li>
+                {{!-- <li class="flexrow">
+                    
+                </li> --}}
             </ul>
 
             <section class="center-pane">
