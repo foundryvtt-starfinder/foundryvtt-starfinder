@@ -601,8 +601,6 @@ export class ActorSFRPG extends Actor {
             }
         });
 
-        console.log(updateData);
-
         await this.update(updateData);
         await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
