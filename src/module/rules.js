@@ -147,6 +147,10 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "vehicle" },
                 then: "identity"
+            },
+            {
+                when: { closure: "isActorType", type: "drone" },
+                then: "identity"
             }
         ]
     });

@@ -49,6 +49,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             isCharacter: this.entity.data.type === "character",
             isShip: this.entity.data.type === 'starship',
             isVehicle: this.entity.data.type === 'vehicle',
+            isDrone: this.entity.data.type === 'drone',
             config: CONFIG.SFRPG
         };
 
