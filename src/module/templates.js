@@ -18,7 +18,8 @@ export const preloadHandlebarsTemplates = async function () {
         "systems/sfrpg/templates/items/parts/item-action.html",
         "systems/sfrpg/templates/items/parts/item-activation.html",
         "systems/sfrpg/templates/items/parts/item-description.html",
-        "systems/sfrpg/templates/items/parts/item-capacity.html"
+        "systems/sfrpg/templates/items/parts/item-capacity.html",
+        "systems/sfrpg/templates/items/parts/item-modifiers.html"
     ];
 
     return loadTemplates(templatePaths);
