@@ -55,24 +55,24 @@
                     </div>
                 </li>
 
-                <li class="attribute" data-tippy-content="<strong>{{ localize "SFRPG.EnergyArmorClass" }}</strong><br>@attributes.eac.value<br><br>{{#each data.attributes.eac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
-                    <h4 class="attribute-name box-title">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
-                    <div class="attribute-value">
-                        <span>{{data.attributes.eac.value}}</span>
-                    </div>
-                </li>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">Defense</h4>
+                    <ul class="attributes flexcol">
+                        <li class="attribute-row flexrow">
+                            <h4 class="defense-name">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
+                            <span>{{numberFormat data.attributes.eac.value decimals=0 sign=true}}</span>
+                        </li>
 
-                <li class="attribute" data-tippy-content="<strong>{{ localize "SFRPG.KineticArmorClass" }}</strong><br>@attributes.kac.value<br><br>{{#each data.attributes.kac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
-                    <h4 class="attribute-name box-title">{{ localize "SFRPG.KineticArmorClass" }}</h4>
-                    <div class="attribute-value">
-                        <span>{{data.attributes.kac.value}}</span>
-                    </div>
-                    <footer class="attribute-footer">
-                        <div>
-                            <span>CMD</span>
-                            <span>{{data.attributes.cmd.value}}</span>
-                        </div>
-                    </footer>
+                        <li class="attribute-row flexrow">
+                            <h4 class="defense-name">{{ localize "SFRPG.KineticArmorClass" }}</h4>
+                            <span>{{numberFormat data.attributes.kac.value decimals=0 sign=true}}</span>
+                        </li>
+
+                        <li class="attribute-row flexrow">
+                            <h4 class="defense-name">CMD</h4>
+                            <span>{{numberFormat data.attributes.cmd.value decimals=0 sign=true}}</span>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="attribute">

@@ -50,7 +50,7 @@ export class ActorSFRPG extends Actor {
 
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
-        const classes = items.filter(item => item.type === "class");
+        const classes = items.filter(item => item.type === "class" || item.type === "chassis");
         const theme = items.find(item => item.type === "theme");
 
         game.sfrpg.engine.process("process-actors", {

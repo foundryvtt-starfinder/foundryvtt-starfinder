@@ -46,6 +46,8 @@ import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modif
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
 import calculateNpcAbilityValue from './rules/actions/actor/calculate-npc-ability-value.js';
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
+// Drone rules
+import calculateChassis from './rules/actions/drone/calculate-chassis.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -83,6 +85,8 @@ export default function (engine) {
     calculateShipShields(engine);
     calculateShipSpeed(engine);
     calculateShipTargetLock(engine);
+    // Drone actions
+    calculateChassis(engine);
     
 
     // Conditions
@@ -150,7 +154,9 @@ export default function (engine) {
             },
             {
                 when: { closure: "isActorType", type: "drone" },
-                then: "identity"
+                then: [
+                    "calculateChassis"
+                ]
             }
         ]
     });
