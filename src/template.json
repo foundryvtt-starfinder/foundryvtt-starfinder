@@ -684,7 +684,9 @@
             "upgrade",
             "augmentation",
             "starshipWeapon",
-            "archetypes"
+            "archetypes",
+            "chassis",
+            "mod"
         ],
         "templates": {
             "itemDescription": {
@@ -938,6 +940,36 @@
                 "arc": "",
                 "activated": false
             }
+        },
+        "chassis": {
+            "templates": ["itemDescription", "modifiers"],
+            "levels": 1,
+            "size": "",
+            "speed": {
+                "value": "30 ft.",
+                "special": ""
+            },
+            "fort": "slow",
+            "ref": "fast",
+            "will": "slow",
+            "eac": 10,
+            "kac": 10,
+            "abilityScores": {
+                "str": 10,
+                "dex": 10,
+                "con": "-",
+                "int": 6,
+                "wis": 10,
+                "cha": 6
+            },
+            "abilityIncreaseStats": {
+                "first": "str",
+                "second": "dex"
+            },
+            "initialMods": []
+        },
+        "mod": {
+            "templates": ["itemDescription", "modifiers"]
         }
     }
 }

@@ -37,7 +37,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         const inventory = {
             weapon: { label: "Weapons", items: [], dataset: { type: "weapon" } },
             equipment: { label: "Equipment", items: [], dataset: { type: "equipment" } },
-            consumable: { label: "Consumables", items: [], dataset: { type: "consumable" } },
             goods: { label: "Goods", items: [], dataset: { type: "goods" } }
         };
 
@@ -48,8 +47,8 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
             item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType);
-            const unusalbe = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
-            item.isCharged = !unusalbe;
+            const unusable = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
+            item.isCharged = !unusable;
             if (item.type === "feat") arr[1].push(item);
             else if (item.type === "chassis") arr[2].push(item);
             else if (item.type === "mod") arr[3].push(item);
@@ -84,9 +83,9 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         const features = {
             chassis: { label: "Chassis", items: [], hasActions: false, dataset: { type: "chassis" }, isChassis: true },
+            mods: { label: "Mods", items: [], hasActions: false, dataset: { type: "mods" } },
             active: { label: "Active", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: "Passive", items: [], hasActions: false, dataset: { type: "feat" } },
-            mods: { label: "Mods", items: [], hasActions: false, dataset: { type: "mods" } }
+            passive: { label: "Passive", items: [], hasActions: false, dataset: { type: "feat" } }
         };
 
         for (let f of feats) {
