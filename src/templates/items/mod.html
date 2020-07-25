@@ -1,0 +1,100 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary source-wide">
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+        <a class="item" data-tab="modifiers">{{ localize "SFRPG.Modifiers" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <h4 class="section-header first">Base statistics</h4>
+
+            <div class="form-group">
+                <label>Max installs</label>
+                <div class="form-fields">
+                    <input type="text" name="data.maxInstalls" value="{{data.maxInstalls}}" data-dtype="Number"/>
+                 </div>
+             </div>
+
+            <h4 class="section-header">Non-modifier effects</h4>
+
+            <div class="form-group">
+               <label>Special movement</label>
+               <div class="form-fields">
+                   <input type="text" name="data.additionalMovement" value="{{data.additionalMovement}}" data-dtype="Text"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+               <label>Additional sense</label>
+               <div class="form-fields">
+                   <input type="text" name="data.additionalSenses" value="{{data.additionalSenses}}" data-dtype="Text"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+               <label>Is weapon mount</label>
+               <label class="checkbox">
+                   <input type="checkbox" name="data.isWeaponMount" {{checked data.isWeaponMount}}/>
+               </label>
+            </div>
+
+            <div class="form-group">
+               <label>Is armor slot</label>
+               <label class="checkbox">
+                   <input type="checkbox" name="data.isArmorSlot" {{checked data.isArmorSlot}}/>
+               </label>
+            </div>
+
+            <div class="form-group">
+                <label>Weapon proficiency</label>
+                <div class="form-fields">
+                    <select name="data.weaponProficiency">
+                        <option value="">None</option>
+                        {{#select data.weaponProficiency}}
+                        {{#each config.weaponProficiencies as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        {{!-- Modifiers Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-modifiers.html"}}
+
+    </section>
+</form>

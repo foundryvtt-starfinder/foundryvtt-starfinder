@@ -36,7 +36,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         const inventory = {
             weapon: { label: "Weapons", items: [], dataset: { type: "weapon" } },
-            equipment: { label: "Equipment", items: [], dataset: { type: "equipment" } },
+            equipment: { label: "Armor Upgrades", items: [], dataset: { type: "upgrade" } },
             goods: { label: "Goods", items: [], dataset: { type: "goods" } }
         };
 
@@ -83,7 +83,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         const features = {
             chassis: { label: "Chassis", items: [], hasActions: false, dataset: { type: "chassis" }, isChassis: true },
-            mods: { label: "Mods", items: [], hasActions: false, dataset: { type: "mods" } },
+            mods: { label: "Mods", items: [], hasActions: false, dataset: { type: "mod" } },
             active: { label: "Active", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
             passive: { label: "Passive", items: [], hasActions: false, dataset: { type: "feat" } }
         };
