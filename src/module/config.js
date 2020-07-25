@@ -149,6 +149,7 @@ SFRPG.weaponDamageTypes = {
     "electricity+fire": "SFRPG.DamageTypesElectricityAndFire",
     "electricity+piercing": "SFRPG.DamageTypesElectricityAndPiercing",
     "electricity+slashing": "SFRPG.DamageTypesElectricityAndSlashing",
+    "force": "SFRPG.DamageTypesForce",
     "fire": "SFRPG.DamageTypesFire",
     "fire+piercing": "SFRPG.DamageTypesFireAndPiercing",
     "fire+slashing": "SFRPG.DamageTypesFireAndSlashing",

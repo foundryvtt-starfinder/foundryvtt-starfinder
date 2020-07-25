@@ -51,4 +51,13 @@ export const registerSystemSettings = function () {
         default: 0,
         type: Number
     });
+
+    game.settings.register("sfrpg", "useCustomChatCard", {
+        name: "SFRPG.SettingsUseCustomChatCard",
+        hint: "SFRPG.SettingsUseCustomChatCardHint",
+        scope: "client",
+        config: true,
+        default: true,
+        type: Boolean
+    });
 };

@@ -187,6 +187,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Item Recharging
         html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
+
+        // Item Equipping
+        html.find('.item .item-equip').click(event => this._onItemEquippedChange(event));
     }
 
     /** @override */
@@ -337,6 +340,20 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.getOwnedItem(itemId);
         return item.rollRecharge();
+    }
+
+    /**
+     * Handle toggling the equipped state of an item.
+     * @param {Event} event The originating click event
+     */
+    _onItemEquippedChange(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        item.update({
+            ["data.equipped"]: !item.data.data.equipped
+        });
     }
 
     /**

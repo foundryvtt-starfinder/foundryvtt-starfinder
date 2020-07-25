@@ -1,4 +1,7 @@
 import { DiceSFRPG } from "../dice.js";
+import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
+import SFRPGModifier from "../modifiers/modifier.js";
+import SFRPGModifierApplication from "../apps/modifier-app.js";
 
 export class ItemSFRPG extends Item {
 
@@ -122,6 +125,24 @@ export class ItemSFRPG extends Item {
 
         // Assign labels and return the Item
         this.labels = labels;
+    }
+
+    /**
+     * Check to ensure that this item has a modifiers data object set, if not then set it. 
+     * These will always be needed from hence forth, so we'll just make sure that they always exist.
+     * 
+     * @param {Object}      data The item data to check against.
+     * @param {String|Null} prop A specific property name to check.
+     * 
+     * @returns {Object}         The modified data object with the modifiers data object added.
+     */
+    _ensureHasModifiers(data, prop = null) {
+        if (!hasProperty(data, "modifiers")) {
+            console.log(`SFRPG | ${this.name} does not have the modifiers data object, attempting to create them...`);
+            data.modifiers = [];
+        }
+
+        return data;
     }
 
     /* -------------------------------------------- */
@@ -448,7 +469,7 @@ export class ItemSFRPG extends Item {
         itemData.hasCapacity = this.data.hasCapacity;
 
         rollData.item = itemData;
-        const title = `Attack Roll`;
+        const title = game.settings.get('sfrpg', 'useCustomChatCard') ? `Attack Roll` : `Attack Roll - ${itemData.name}`;
 
         //Warn the user if there is no ammo left
         if (itemData.data.capacity && itemData.data.capacity.value === 0)  ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
@@ -575,7 +596,7 @@ export class ItemSFRPG extends Item {
             item: itemData,
             mod: actorData.abilities[abl].mod
         });
-        const title = `Damage Roll`;
+        const title = game.settings.get('sfrpg', 'useCustomChatCard') ? `Damage Roll` : `Damage Roll - ${this.data.name}`;
 
         // Call the roll helper utility
         DiceSFRPG.damageRoll({
@@ -903,5 +924,82 @@ export class ItemSFRPG extends Item {
         if (controlled.length === 0) return character || null;
         if (controlled.length === 1) return controlled[0].actor;
         else throw new Error(`You must designate a specific Token as the roll target`);
+    }
+    
+    /**
+     * Add a modifier to this actor.
+     * 
+     * @param {Object}        data               The data needed to create the modifier
+     * @param {String}        data.name          The name of this modifier. Used to identify the modfier.
+     * @param {Number|String} data.modifier      The modifier value.
+     * @param {String}        data.type          The modifiers type. Used to determine stacking.
+     * @param {String}        data.modifierType  Used to determine if this modifier is a constant value (+2) or a Roll formula (1d4).
+     * @param {String}        data.effectType    The category of things that might be effected by this modifier.
+     * @param {String}        data.subtab        What subtab should this modifier show under on the character sheet.
+     * @param {String}        data.valueAffected The specific value being modified.
+     * @param {Boolean}       data.enabled       Is this modifier activated or not.
+     * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
+     * @param {String}        data.notes         Any notes or comments about the modifier.
+     * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
+     * @param {String|null}   data.id            Override the randomly generated id with this.
+     */
+    async addModifier({
+        name = "", 
+        modifier = 0, 
+        type = SFRPGModifierTypes.UNTYPED, 
+        modifierType = SFRPGModifierType.CONSTANT, 
+        effectType = SFRPGEffectType.SKILL,
+        subtab = "misc",
+        valueAffected = "", 
+        enabled = true, 
+        source = "", 
+        notes = "",
+        condition = "",
+        id = null
+    } = {}) {
+        const data = this._ensureHasModifiers(duplicate(this.data.data));
+        const modifiers = data.modifiers;
+
+        modifiers.push(new SFRPGModifier({
+            name,
+            modifier,
+            type,
+            modifierType,
+            effectType,
+            valueAffected,
+            enabled,
+            source,
+            notes,
+            subtab,
+            condition,
+            id
+        }));
+
+        console.log("Adding a modifier to the item");
+
+        await this.update({["data.modifiers"]: modifiers});
+    }
+
+    /**
+     * Delete a modifier for this Actor.
+     * 
+     * @param {String} id The id for the modifier to delete
+     */
+    async deleteModifier(id) {
+        const modifiers = this.data.data.modifiers.filter(mod => mod._id !== id);
+        
+        await this.update({"data.modifiers": modifiers});
+    }
+
+    /**
+     * Edit a modifier for an Actor.
+     * 
+     * @param {String} id The id for the modifier to edit
+     */
+    editModifier(id) {
+        const modifiers = duplicate(this.data.data.modifiers);
+        const modifier = modifiers.find(mod => mod._id === id);
+
+        new SFRPGModifierApplication(modifier, this).render(true);
     }
 }
