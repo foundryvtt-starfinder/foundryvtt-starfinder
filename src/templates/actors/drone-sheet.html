@@ -122,14 +122,14 @@
                     <li class="attribute speed">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
                         <div class="attribute-value multiple">
-                            <input type="text" class="speed" name="data.attributes.speed.value"
-                                value="{{data.attributes.speed.value}}"
-                                placeholder="30 ft." />
+                            <span>{{data.attributes.speed.value}} ft.</span>
                         </div>
                         <footer class="attribute-footer">
-                            <input type="text" class="speed" name="data.attributes.speed.special"
-                                value="{{data.attributes.speed.special}}"
-                                placeholder="{{ localize 'SFRPG.SpeedSpecial' }}" />
+                            {{#if data.attributes.speed.special}}
+                            <span>{{data.attributes.speed.special}}</span>
+                            {{else}}
+                            <span>No special movement</span>
+                            {{/if}}
                         </footer>    
                     </li>
                 </ul>
