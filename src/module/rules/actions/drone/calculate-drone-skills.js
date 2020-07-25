@@ -8,7 +8,7 @@ export default function (engine) {
 
         let skillkeys = Object.keys(data.skills);
         for (let skill of skillkeys) {
-            if (skill.enabled) {
+            if (data.skills[skill].enabled) {
                 data.skills[skill].mod = data.skills[skill].value + data.skills[skill].ranks;
             } else {
                 data.skills[skill].mod = 0;
