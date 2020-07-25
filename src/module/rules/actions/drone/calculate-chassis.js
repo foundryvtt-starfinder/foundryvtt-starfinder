@@ -62,6 +62,18 @@ export default function (engine) {
         data.abilities.cha.value = activeChassis.data.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
         data.abilities.cha.mod = Math.floor((data.abilities.cha.value - 10) / 2);
 
+        // Clear out skills, this and future closures will enable them again
+        let skillkeys = Object.keys(data.skills);
+        for (let skill of skillkeys) {
+            data.skills[skill].value = 0;
+            data.skills[skill].ranks = 0;
+        }
+
+        if (activeChassis.data.bonusSkillUnit) {
+            data.skills[activeChassis.data.bonusSkillUnit].value = 3;
+            data.skills[activeChassis.data.bonusSkillUnit].ranks = droneLevel;
+        }
+
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

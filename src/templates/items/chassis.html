@@ -186,6 +186,23 @@
              </div>
 
              <div class="form-group">
+                <label>Bonus Skill Unit</label>
+                <div class="form-fields">
+                    <select name="data.bonusSkillUnit">
+                        {{#select data.bonusSkillUnit}}
+                        <option value="">None</option>
+                        <option value="arc">Acrobatics</option>
+                        <option value="ath">Athletics</option>
+                        <option value="com">Computers</option>
+                        <option value="eng">Engineering</option>
+                        <option value="per">Perception</option>
+                        <option value="ste">Stealth</option>
+                        {{/select}}
+                    </select>
+                </div>
+             </div>
+
+             <div class="form-group">
                 <label>Initial Mods</label>
                 <div class="form-fields">
                     <input type="text" name="data.initialMods" value="{{data.initialMods}}" data-dtype="Text"/>
