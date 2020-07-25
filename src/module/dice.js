@@ -61,8 +61,16 @@ export class DiceSFRPG {
             d20.options.critical = critical;
             d20.options.fumble = fumble;
 
-            //Push the roll to the ChatBox
-            SFRPGCustomChatMessage.renderStandardRoll(roll, myData, action);
+            if (game.settings.get("sfrpg", "useCustomChatCard")) {
+                //Push the roll to the ChatBox
+                SFRPGCustomChatMessage.renderStandardRoll(roll, myData, action);
+            } else {
+                roll.toMessage({
+                    speaker: speaker,
+                    flavor: flavor,
+                    rollMode: rollMode
+                });
+            }
         };
 
         let dialogCallback = html => {
