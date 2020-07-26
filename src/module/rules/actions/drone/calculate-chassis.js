@@ -4,17 +4,6 @@ export default function (engine) {
     engine.closures.add("calculateChassis", (fact, context) => {
         const data = fact.data;
 
-        const droneTable = {
-            hitpoints: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 190, 210, 230],
-            acBonus: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
-            babBonus: [1, 2, 3, 3, 4, 5, 6, 6, 7, 8, 9, 9, 10, 11, 12, 12, 13, 14, 15, 15],
-            goodSaveBonus: [2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8, 8, 8, 9, 9, 9],
-            badSaveBonus: [0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5],
-            feats: [1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8, 8],
-            mods: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10],
-            abilityIncreaseLevels: [4, 7, 10, 13, 16, 19]
-        };
-
         // We only care about the first chassis
         let activeChassis = null;
         for (const chassis of fact.classes) {
@@ -30,19 +19,20 @@ export default function (engine) {
         droneLevel = Math.max(1, Math.min(droneLevel, 20));
 
         data.details.level.value = droneLevel;
-        data.attributes.hp.max = droneTable.hitpoints[droneLevel - 1];
-        data.attributes.bab = droneTable.babBonus[droneLevel - 1];
+        data.attributes.hp.max = SFRPG.droneHitpointsPerLevel[droneLevel - 1];
+        data.attributes.rp.max = SFRPG.droneResolveMethod(droneLevel); // Upgraded Power Core (Ex)
+        data.attributes.bab = SFRPG.droneBABBonusPerLevel[droneLevel - 1];
         
         let abilityIncreaseStats = [activeChassis.data.abilityIncreaseStats.first, activeChassis.data.abilityIncreaseStats.second];
-        let abilityIncreases = droneTable.abilityIncreaseLevels.filter(x => x <= droneLevel).length;
+        let abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
 
-        data.attributes.eac.value = activeChassis.data.eac + droneTable.acBonus[droneLevel - 1];
-        data.attributes.kac.value = activeChassis.data.kac + droneTable.acBonus[droneLevel - 1];
+        data.attributes.eac.value = activeChassis.data.eac + SFRPG.droneACBonusPerLevel[droneLevel - 1];
+        data.attributes.kac.value = activeChassis.data.kac + SFRPG.droneACBonusPerLevel[droneLevel - 1];
         data.attributes.cmd.value = data.attributes.kac.value + 8;
 
-        data.attributes.fort.bonus = activeChassis.data.fort == "slow" ? droneTable.badSaveBonus[droneLevel - 1] : droneTable.goodSaveBonus[droneLevel - 1];
-        data.attributes.reflex.bonus = activeChassis.data.ref == "slow" ? droneTable.badSaveBonus[droneLevel - 1] : droneTable.goodSaveBonus[droneLevel - 1];
-        data.attributes.will.bonus = activeChassis.data.will == "slow" ? droneTable.badSaveBonus[droneLevel - 1] : droneTable.goodSaveBonus[droneLevel - 1];
+        data.attributes.fort.bonus = activeChassis.data.fort == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
+        data.attributes.reflex.bonus = activeChassis.data.ref == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
+        data.attributes.will.bonus = activeChassis.data.will == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
 
         data.abilities.str.base = activeChassis.data.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
 

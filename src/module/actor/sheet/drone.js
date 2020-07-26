@@ -1,4 +1,5 @@
 import { ActorSheetSFRPG } from "./base.js"
+import { SFRPG } from "../../config.js";
 
 export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
     static get defaultOptions() {
@@ -111,20 +112,29 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         totalWeight = Math.floor(totalWeight);
         data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
 
-        const features = {
-            chassis: { label: "Chassis", items: [], hasActions: false, dataset: { type: "chassis" }, isChassis: true },
-            mods: { label: "Mods", items: [], hasActions: false, dataset: { type: "mod" } },
-            active: { label: "Active", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: "Passive", items: [], hasActions: false, dataset: { type: "feat" } }
-        };
+        let droneLevelIndex = data.data.details.level.value - 1;
+        let maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];
 
+        let modsLabel = `Mods (Amount: ${mods.length} of ${maxMods})`;
+
+        let activeFeats = [];
+        let passiveFeats = [];
         for (let f of feats) {
-            if (f.data.activation.type) features.active.items.push(f);
-            else features.passive.items.push(f);
+            if (f.data.activation.type) activeFeats.push(f);
+            else passiveFeats.push(f);
         }
 
-        features.chassis.items = chassis;
-        features.mods.items = mods;
+        let maxFeats = SFRPG.droneFeatsPerLevel[droneLevelIndex];
+
+        let featsLabel = `Feats (Amount: ${activeFeats.length + passiveFeats.length} of ${maxFeats})`;
+
+        const features = {
+            chassis: { label: "Chassis", items: chassis, hasActions: false, dataset: { type: "chassis" }, isChassis: true },
+            mods: { label: modsLabel, items: mods, hasActions: false, dataset: { type: "mod" } },
+            _featsHeader: { label: featsLabel, items: [], hasActions: false, dataset: { } },
+            active: { label: "Active Feats", items: activeFeats, hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
+            passive: { label: "Passive Feats", items: passiveFeats, hasActions: false, dataset: { type: "feat" } }
+        };
 
         data.inventory = Object.values(inventory);
         data.features = Object.values(features);
