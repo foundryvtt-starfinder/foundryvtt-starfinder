@@ -204,7 +204,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         //html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
         html.find('.reload').click(this._onReloadWeapon.bind(this));
 
-        html.find('.short-rest').click(this._onShortRest.bind(this));
+        html.find('.repair').click(this._onRepair.bind(this));
         html.find('.modifier-create').click(this._onModifierCreate.bind(this));
         html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
         html.find('.modifier-delete').click(this._onModifierDelete.bind(this));
@@ -323,14 +323,14 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
     }
 
     /**
-     * Take a short 10 minute rest, calling the relevant function on the Actor instance
+     * Repair the drone, calling the relevant repair method on the actor.
      * @param {Event} event The triggering click event
      * @returns {Promise}
      * @private
      */
-    async _onShortRest(event) {
+    async _onRepair(event) {
         event.preventDefault();
         await this._onSubmit(event);
-        return this.actor.shortRest();
+        return this.actor.repairDrone();
     }
 }
