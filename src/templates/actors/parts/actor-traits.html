@@ -44,22 +44,22 @@
     </div>
     {{else}}
     <div class="form-group">
-        <label>General Purpose Arms</label>
+        <label>{{localize "SFRPG.DroneSheet.Traits.GeneralPurposeArms"}}</label>
         <span class="value">{{data.attributes.arms}}</span>
     </div>
     <div class="form-group">
-        <label>Melee Weapon Mounts</label>
+        <label>{{localize "SFRPG.DroneSheet.Traits.MeleeWeaponMounts"}}</label>
         <span class="value">{{data.attributes.weaponMounts.melee.max}}</span>
     </div>
     <div class="form-group">
-        <label>Ranged Weapon Mounts</label>
+        <label>{{localize "SFRPG.DroneSheet.Traits.RangedWeaponMounts"}}</label>
         <span class="value">{{data.attributes.weaponMounts.ranged.max}}</span>
     </div>
     {{/if}}
     
     {{#if isDrone}}
     <div class="form-group">
-        <label>Armor slots:</label>
+        <label>{{localize "SFRPG.DroneSheet.Traits.ArmorSlots"}}</label>
         <span class="value">{{data.attributes.armorSlots.current}}</span>
         <span class="sep">/</span>
         <span class="value">{{data.attributes.armorSlots.max}}</span>
