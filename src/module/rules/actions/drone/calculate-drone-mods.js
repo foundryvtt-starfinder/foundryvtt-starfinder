@@ -6,8 +6,8 @@ export default function (engine) {
         const mods = fact.mods;
 
         data.attributes.arms = 0;
-        data.attributes.weaponMounts.melee = 0;
-        data.attributes.weaponMounts.ranged = 0;
+        data.attributes.weaponMounts.melee.max = 0;
+        data.attributes.weaponMounts.ranged.max = 0;
         data.attributes.armorSlots.current = 0;
         data.attributes.armorSlots.max = 0;
         data.traits.senses = "";
@@ -19,10 +19,10 @@ export default function (engine) {
                     data.attributes.arms += mod.data.arms.number;
                 }
                 if (mod.data.arms.armType === "melee") {
-                    data.attributes.weaponMounts.melee = mod.data.arms.number;
+                    data.attributes.weaponMounts.melee.max = mod.data.arms.number;
                 }
                 if (mod.data.arms.armType === "ranged") {
-                    data.attributes.weaponMounts.ranged = mod.data.arms.number;
+                    data.attributes.weaponMounts.ranged.max = mod.data.arms.number;
                 }
             }
 
@@ -73,12 +73,6 @@ export default function (engine) {
     
                 skill.tooltip.push(tooltip);
             }
-        }
-
-        // Count armor upgrades
-        data.attributes.armorSlots.current = 0;
-        if (fact.armorUpgrades) {
-            data.attributes.armorSlots.current = fact.armorUpgrades.length;
         }
 
         return fact;

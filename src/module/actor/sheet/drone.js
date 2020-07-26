@@ -34,9 +34,27 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         const actorData = data.actor;
 
+        let weaponLabel = "Weapons";
+        if (data.data.attributes.weaponMounts.melee.max > 0 || data.data.attributes.weaponMounts.ranged.max > 0) {
+            let equipString = "";
+
+            if (data.data.attributes.weaponMounts.melee.max > 0) {
+                equipString += `Melee ${data.data.attributes.weaponMounts.melee.current} of ${data.data.attributes.weaponMounts.melee.max}`;
+            }
+            
+            if (data.data.attributes.weaponMounts.ranged.max > 0) {
+                if (equipString !== "") {
+                    equipString += ", ";
+                }
+                equipString += `Ranged ${data.data.attributes.weaponMounts.ranged.current} of ${data.data.attributes.weaponMounts.ranged.max}`;
+            }
+            
+            weaponLabel += ` (Equipped weapon mounts: ${equipString})`;
+        }
+
         const inventory = {
-            weapon: { label: "Weapons", items: [], dataset: { type: "weapon" } },
-            upgrade: { label: "Armor Upgrades", items: [], dataset: { type: "upgrade" } },
+            weapon: { label: weaponLabel, items: [], dataset: { type: "weapon" } },
+            upgrade: { label: `Armor Upgrades (Equipped ${data.data.attributes.armorSlots.current} of ${data.data.attributes.armorSlots.max} armor slots)`, items: [], dataset: { type: "upgrade" } },
             cargo: { label: "Cargo", items: [], dataset: { type: "goods" } }
         };
 
@@ -74,10 +92,16 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
             i.totalWeight = i.data.quantity * weight;
 
-            if (i.type !== "weapon" && i.type !== "upgrade") {
-                inventory["cargo"].items.push(i);
-            } else {
+            if (i.type === "weapon") {
+                if (i.data.equipped) {
+                    inventory[i.type].items.push(i);
+                } else {
+                    inventory["cargo"].items.push(i);    
+                }
+            } else if (i.type === "upgrade") {
                 inventory[i.type].items.push(i);
+            } else {
+                inventory["cargo"].items.push(i);
             }
 
             totalWeight += i.totalWeight;
