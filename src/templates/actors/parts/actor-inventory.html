@@ -101,7 +101,7 @@
 </ol>
 
 
-{{#if isCharacter }}
+{{#if (or isCharacter isDrone) }}
 {{#with data.attributes.encumbrance}}
 <div class="encumbrance {{#if encumbered}}encumbered{{/if}}">
     <span class="encumbrance-bar" style="width:{{pct}}%"></span>
