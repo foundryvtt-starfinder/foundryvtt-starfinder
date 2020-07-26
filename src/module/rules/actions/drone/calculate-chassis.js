@@ -57,29 +57,6 @@ export default function (engine) {
             data.skills[skill].tooltip = [];
         }
 
-        if (activeChassis.data.bonusSkillUnit) {
-            let skill = data.skills[activeChassis.data.bonusSkillUnit];
-            skill.enabled = true;
-            skill.value = 3;
-            skill.ranks = droneLevel;
-
-            let tooltip = game.i18n.format("SFRPG.SkillModifierTooltip", {
-                type: "Class Skill",
-                mod: skill.value.signedString(),
-                source: activeChassis.name
-            });
-
-            skill.tooltip.push(tooltip);
-
-            tooltip = game.i18n.format("SFRPG.SkillModifierTooltip", {
-                type: "Mechanic Level",
-                mod: skill.ranks.signedString(),
-                source: activeChassis.name
-            });
-
-            skill.tooltip.push(tooltip);
-        }
-
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }
