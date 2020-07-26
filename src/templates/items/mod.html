@@ -64,13 +64,6 @@
             </div>
 
             <div class="form-group">
-               <label>Is weapon mount</label>
-               <label class="checkbox">
-                   <input type="checkbox" name="data.isWeaponMount" {{checked data.isWeaponMount}}/>
-               </label>
-            </div>
-
-            <div class="form-group">
                <label>Is armor slot</label>
                <label class="checkbox">
                    <input type="checkbox" name="data.isArmorSlot" {{checked data.isArmorSlot}}/>
@@ -90,6 +83,28 @@
                     </select>
                 </div>
             </div>
+
+            <h4 class="section-header">Arms</h4>
+
+            <div class="form-group">
+                <label>Number of arms</label>
+                <div class="form-fields">
+                    <input type="text" name="data.arms.number" value="{{data.arms.number}}" data-dtype="Number"/>
+                 </div>
+             </div>
+
+             <div class="form-group">
+                 <label>Arm type</label>
+                 <div class="form-fields">
+                     <select name="data.arms.armType">
+                         {{#select data.arms.armType}}
+                         <option value="general">General purpose</option>
+                         <option value="melee">Melee weapon mount</option>
+                         <option value="ranged">Ranged weapon mount</option>
+                         {{/select}}
+                     </select>
+                 </div>
+              </div>
 
         </div>
 

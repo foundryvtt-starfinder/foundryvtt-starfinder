@@ -49,6 +49,7 @@ import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-ski
 // Drone rules
 import calculateChassis from './rules/actions/drone/calculate-chassis.js';
 import calculateDroneSkills from './rules/actions/drone/calculate-drone-skills.js';
+import calculateDroneMods from './rules/actions/drone/calculate-drone-mods.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -89,6 +90,7 @@ export default function (engine) {
     // Drone actions
     calculateChassis(engine);
     calculateDroneSkills(engine);
+    calculateDroneMods(engine);
 
     // Conditions
     always(engine);
@@ -157,7 +159,8 @@ export default function (engine) {
                 when: { closure: "isActorType", type: "drone" },
                 then: [
                     "calculateChassis",
-                    "calculateDroneSkills"
+                    "calculateDroneSkills",
+                    "calculateDroneMods"
                 ]
             }
         ]
