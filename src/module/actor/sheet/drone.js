@@ -37,7 +37,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         const inventory = {
             weapon: { label: "Weapons", items: [], dataset: { type: "weapon" } },
             upgrade: { label: "Armor Upgrades", items: [], dataset: { type: "upgrade" } },
-            goods: { label: "Goods", items: [], dataset: { type: "goods" } }
+            cargo: { label: "Cargo", items: [], dataset: { type: "goods" } }
         };
 
         let [items, feats, chassis, mods] = data.items.reduce((arr, item) => {
@@ -52,7 +52,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             if (item.type === "feat") arr[1].push(item);
             else if (item.type === "chassis") arr[2].push(item);
             else if (item.type === "mod") arr[3].push(item);
-            else if (Object.keys(inventory).includes(item.type)) arr[0].push(item);
+            else arr[0].push(item);
             return arr;
         }, [[], [], [], []]);
         
@@ -73,7 +73,13 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             }
 
             i.totalWeight = i.data.quantity * weight;
-            inventory[i.type].items.push(i);
+
+            if (i.type !== "weapon" && i.type !== "upgrade") {
+                inventory["cargo"].items.push(i);
+            } else {
+                inventory[i.type].items.push(i);
+            }
+
             totalWeight += i.totalWeight;
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
