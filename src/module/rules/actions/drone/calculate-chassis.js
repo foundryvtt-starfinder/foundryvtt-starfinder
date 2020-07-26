@@ -44,34 +44,50 @@ export default function (engine) {
         data.attributes.reflex.bonus = activeChassis.data.ref == "slow" ? droneTable.badSaveBonus[droneLevel - 1] : droneTable.goodSaveBonus[droneLevel - 1];
         data.attributes.will.bonus = activeChassis.data.will == "slow" ? droneTable.badSaveBonus[droneLevel - 1] : droneTable.goodSaveBonus[droneLevel - 1];
 
-        data.abilities.str.value = activeChassis.data.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
-        data.abilities.str.mod = Math.floor((data.abilities.str.value - 10) / 2);
+        data.abilities.str.base = activeChassis.data.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
 
-        data.abilities.dex.value = activeChassis.data.abilityScores.dex + (abilityIncreaseStats.includes("dex") ? abilityIncreases : 0);
-        data.abilities.dex.mod = Math.floor((data.abilities.dex.value - 10) / 2);
+        data.abilities.dex.base = activeChassis.data.abilityScores.dex + (abilityIncreaseStats.includes("dex") ? abilityIncreases : 0);
 
         data.abilities.con.value = activeChassis.data.abilityScores.con;
         data.abilities.con.mod = 0;
 
-        data.abilities.int.value = activeChassis.data.abilityScores.int + (abilityIncreaseStats.includes("int") ? abilityIncreases : 0);
-        data.abilities.int.mod = Math.floor((data.abilities.int.value - 10) / 2);
+        data.abilities.int.base = activeChassis.data.abilityScores.int + (abilityIncreaseStats.includes("int") ? abilityIncreases : 0);
 
-        data.abilities.wis.value = activeChassis.data.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
-        data.abilities.wis.mod = Math.floor((data.abilities.wis.value - 10) / 2);
+        data.abilities.wis.base = activeChassis.data.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
         
-        data.abilities.cha.value = activeChassis.data.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
-        data.abilities.cha.mod = Math.floor((data.abilities.cha.value - 10) / 2);
+        data.abilities.cha.base = activeChassis.data.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
 
         // Clear out skills, this and future closures will enable them again
-        let skillkeys = Object.keys(data.skills);
+        let skillkeys = Object.keys(SFRPG.skills);
         for (let skill of skillkeys) {
+            data.skills[skill].enabled = false;
             data.skills[skill].value = 0;
             data.skills[skill].ranks = 0;
+            data.skills[skill].mod = 0;
+            data.skills[skill].tooltip = [];
         }
 
         if (activeChassis.data.bonusSkillUnit) {
-            data.skills[activeChassis.data.bonusSkillUnit].value = 3;
-            data.skills[activeChassis.data.bonusSkillUnit].ranks = droneLevel;
+            let skill = data.skills[activeChassis.data.bonusSkillUnit];
+            skill.enabled = true;
+            skill.value = 3;
+            skill.ranks = droneLevel;
+
+            let tooltip = game.i18n.format("SFRPG.SkillModifierTooltip", {
+                type: "Class Skill",
+                mod: skill.value.signedString(),
+                source: activeChassis.name
+            });
+
+            skill.tooltip.push(tooltip);
+
+            tooltip = game.i18n.format("SFRPG.SkillModifierTooltip", {
+                type: "Mechanic Level",
+                mod: skill.ranks.signedString(),
+                source: activeChassis.name
+            });
+
+            skill.tooltip.push(tooltip);
         }
 
         return fact;

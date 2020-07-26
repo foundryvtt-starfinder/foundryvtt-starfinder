@@ -159,8 +159,15 @@ export default function (engine) {
                 when: { closure: "isActorType", type: "drone" },
                 then: [
                     "calculateChassis",
+                    "calculateDroneMods",
+                    { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
+                    { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateDroneSkills",
-                    "calculateDroneMods"
+                    { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
+                    { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
+                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
+                    "calculateCMD",
+                    { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" }
                 ]
             }
         ]

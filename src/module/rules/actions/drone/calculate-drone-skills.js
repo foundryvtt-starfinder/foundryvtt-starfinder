@@ -4,14 +4,25 @@ export default function (engine) {
     engine.closures.add("calculateDroneSkills", (fact, context) => {
         const data = fact.data;
 
-        // TODO: Implement enabling skills from skill unit drone mods.
+        let skillkeys = Object.keys(SFRPG.skills);
+        for (let skillKey of skillkeys) {
+            let skill = data.skills[skillKey];
+            if (!skill.enabled) {
+                continue;
+            }
 
-        let skillkeys = Object.keys(data.skills);
-        for (let skill of skillkeys) {
-            if (data.skills[skill].enabled) {
-                data.skills[skill].mod = data.skills[skill].value + data.skills[skill].ranks;
-            } else {
-                data.skills[skill].mod = 0;
+            let abilityMod = data.abilities[skill.ability].mod;
+
+            skill.mod = skill.value + skill.ranks + abilityMod;
+
+            if (abilityMod !== 0) {
+                let tooltip = game.i18n.format("SFRPG.SkillModifierTooltip", {
+                    type: "Ability Score",
+                    mod: abilityMod.signedString(),
+                    source: SFRPG.abilities[skill.ability]
+                });
+
+                skill.tooltip.push(tooltip);
             }
         }
 
