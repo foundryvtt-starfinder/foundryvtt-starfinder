@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name" />
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.DroneSheet.Chassis.Name.Placeholder" }}" />
             </h1>
 
             <div class="item-subtitle">
@@ -16,7 +16,7 @@
 
             <ul class="summary source-wide">
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source" />
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize "SFRPG.DroneSheet.Chassis.Source" }}" />
                 </li>
             </ul>
         </div>
@@ -38,17 +38,17 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h4 class="section-header first">Base statistics</h4>
+            <h4 class="section-header first">{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.Header" }}</h4>
 
             <div class="form-group">
-                <label>Mechanic Level</label>
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.MechanicLevel" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.levels" value="{{data.levels}}" data-dtype="Number" />
                 </div>
             </div>
 
             <div class="form-group">
-                <label>Size</label>
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.Size" }}</label>
                 <div class="form-fields">
                     <select class="actor-size" name="data.size">
                         {{#select data.size}}
@@ -61,39 +61,39 @@
             </div>
 
             <div class="form-group">
-                <label>Speed, Base (Numeric, in feet)</label>
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.SpeedBase" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.speed.value" value="{{data.speed.value}}" data-dtype="Number"/>
                  </div>
              </div>
 
              <div class="form-group">
-                <label>Speed, Special</label>
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.SpeedSpecial" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.speed.special" value="{{data.speed.special}}" data-dtype="Text"/>
                  </div>
              </div>
 
-             <h4 class="section-header">Defense</h4>
+             <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Chassis.Details.Defense.Header" }}</h4>
 
              <div class="form-group">
-                <label>Base EAC</label>
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.Defense.EAC" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.eac" value="{{data.eac}}" data-dtype="Number"/>
                  </div>
              </div>
 
              <div class="form-group">
-                <label>Base KAC</label>
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.Defense.KAC" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.kac" value="{{data.kac}}" data-dtype="Number"/>
                  </div>
              </div>
 
-             <h4 class="section-header">Saves</h4>
+             <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Chassis.Details.Saves.Header" }}</h4>
 
              <div class="form-group">
-                 <label>{{localize "SFRPG.ClassFortSaveProgression"}}</label>
+                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Fortitude"}}</label>
                  <div class="form-fields">
                      <select name="data.fort">
                          {{#select data.fort}}
@@ -106,7 +106,7 @@
              </div>
  
              <div class="form-group">
-                 <label>{{localize "SFRPG.ClassReflexSaveProgression"}}</label>
+                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Reflex"}}</label>
                  <div class="form-fields">
                      <select name="data.ref">
                          {{#select data.ref}}
@@ -119,7 +119,7 @@
              </div>
  
              <div class="form-group">
-                 <label>{{localize "SFRPG.ClassWillSaveProgression"}}</label>
+                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Will"}}</label>
                  <div class="form-fields">
                      <select name="data.will">
                          {{#select data.will}}
@@ -131,31 +131,31 @@
                  </div>
              </div>
 
-             <h4 class="section-header">Ability Scores</h4>
+             <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Chassis.Details.AbilityScores.Header" }}</h4>
 
              <div class="form-group">
-                <label>Base Strength</label>
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.AbilityScores.Strength" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.abilityScores.str" value="{{data.abilityScores.str}}" data-dtype="Number"/>
                  </div>
              </div>
 
              <div class="form-group">
-                <label>Base Dexterity</label>
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.AbilityScores.Dexterity" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.abilityScores.dex" value="{{data.abilityScores.dex}}" data-dtype="Number"/>
                  </div>
              </div>
 
              <div class="form-group">
-                <label>Base Wisdom</label>
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.AbilityScores.Wisdom" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.abilityScores.wis" value="{{data.abilityScores.wis}}" data-dtype="Number"/>
                  </div>
              </div>
 
              <div class="form-group">
-                <label>Ability Increases</label>
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.AbilityScores.Increases" }}</label>
                 <div class="form-fields">
                     <select name="data.abilityIncreaseStats.first">
                         {{#select data.abilityIncreaseStats.first}}

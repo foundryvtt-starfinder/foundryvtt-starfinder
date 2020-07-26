@@ -35,28 +35,34 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         const actorData = data.actor;
 
-        let weaponLabel = "Weapons";
-        if (data.data.attributes.weaponMounts.melee.max > 0 || data.data.attributes.weaponMounts.ranged.max > 0) {
-            let equipString = "";
-
-            if (data.data.attributes.weaponMounts.melee.max > 0) {
-                equipString += `Melee ${data.data.attributes.weaponMounts.melee.current} of ${data.data.attributes.weaponMounts.melee.max}`;
-            }
-            
-            if (data.data.attributes.weaponMounts.ranged.max > 0) {
-                if (equipString !== "") {
-                    equipString += ", ";
-                }
-                equipString += `Ranged ${data.data.attributes.weaponMounts.ranged.current} of ${data.data.attributes.weaponMounts.ranged.max}`;
-            }
-            
-            weaponLabel += ` (Equipped weapon mounts: ${equipString})`;
+        let weaponLabel = "";
+        if (data.data.attributes.weaponMounts.melee.max > 0 && data.data.attributes.weaponMounts.ranged.max > 0) {
+            weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.Both", {
+                meleeCurrent: data.data.attributes.weaponMounts.melee.current, meleeMax: data.data.attributes.weaponMounts.melee.max,
+                rangedCurrent: data.data.attributes.weaponMounts.ranged.current, rangedMax: data.data.attributes.weaponMounts.ranged.max
+            });
+        } else if (data.data.attributes.weaponMounts.melee.max > 0) {
+            weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.MeleeOnly", {
+                meleeCurrent: data.data.attributes.weaponMounts.melee.current, meleeMax: data.data.attributes.weaponMounts.melee.max
+            });
+        } else if (data.data.attributes.weaponMounts.ranged.max > 0) {
+            weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.RangedOnly", {
+                rangedCurrent: data.data.attributes.weaponMounts.ranged.current, rangedMax: data.data.attributes.weaponMounts.ranged.max
+            });
+        } else {
+            weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.None");
         }
+
+        let armorUpgradesLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.ArmorUpgrades",
+            { current: data.data.attributes.armorSlots.current, max: data.data.attributes.armorSlots.max }
+        );
+
+        let cargoLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.CarriedItems");
 
         const inventory = {
             weapon: { label: weaponLabel, items: [], dataset: { type: "weapon" } },
-            upgrade: { label: `Armor Upgrades (Equipped ${data.data.attributes.armorSlots.current} of ${data.data.attributes.armorSlots.max} armor slots)`, items: [], dataset: { type: "upgrade" } },
-            cargo: { label: "Cargo", items: [], dataset: { type: "goods" } }
+            upgrade: { label: armorUpgradesLabel, items: [], dataset: { type: "upgrade" } },
+            cargo: { label: cargoLabel, items: [], dataset: { type: "goods" } }
         };
 
         let [items, feats, chassis, mods] = data.items.reduce((arr, item) => {
@@ -115,8 +121,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         let droneLevelIndex = data.data.details.level.value - 1;
         let maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];
 
-        let modsLabel = `Mods (Amount: ${mods.length} of ${maxMods})`;
-
         let activeFeats = [];
         let passiveFeats = [];
         for (let f of feats) {
@@ -126,14 +130,18 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         let maxFeats = SFRPG.droneFeatsPerLevel[droneLevelIndex];
 
-        let featsLabel = `Feats (Amount: ${activeFeats.length + passiveFeats.length} of ${maxFeats})`;
+        let chassisLabel = game.i18n.format("SFRPG.DroneSheet.Features.Chassis");
+        let modsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Mods", {current: mods.length, max: maxMods});
+        let featsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Header", {current: (activeFeats.length + passiveFeats.length), max: maxFeats});
+        let activeFeatsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Active");
+        let passiveFeatsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Passive");
 
         const features = {
-            chassis: { label: "Chassis", items: chassis, hasActions: false, dataset: { type: "chassis" }, isChassis: true },
+            chassis: { label: chassisLabel, items: chassis, hasActions: false, dataset: { type: "chassis" }, isChassis: true },
             mods: { label: modsLabel, items: mods, hasActions: false, dataset: { type: "mod" } },
             _featsHeader: { label: featsLabel, items: [], hasActions: false, dataset: { } },
-            active: { label: "Active Feats", items: activeFeats, hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: "Passive Feats", items: passiveFeats, hasActions: false, dataset: { type: "feat" } }
+            active: { label: activeFeatsLabel, items: activeFeats, hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
+            passive: { label: passiveFeatsLabel, items: passiveFeats, hasActions: false, dataset: { type: "feat" } }
         };
 
         data.inventory = Object.values(inventory);

@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.DroneSheet.Mod.Name.Placeholder" }}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -16,7 +16,7 @@
 
             <ul class="summary source-wide">
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize "SFRPG.DroneSheet.Mod.Source" }}"/>
                 </li>
             </ul>
         </div>
@@ -38,43 +38,65 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h4 class="section-header first">Base statistics</h4>
+            <h4 class="section-header first">{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.Header" }}</h4>
 
             <div class="form-group">
-                <label>Max installs</label>
+                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.MaxInstalls" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.maxInstalls" value="{{data.maxInstalls}}" data-dtype="Number"/>
                  </div>
              </div>
 
-            <h4 class="section-header">Non-modifier effects</h4>
+             <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.Header" }}</h4>
+ 
+             <div class="form-group">
+                 <label>{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.Amount" }}</label>
+                 <div class="form-fields">
+                     <input type="text" name="data.arms.number" value="{{data.arms.number}}" data-dtype="Number"/>
+                  </div>
+              </div>
+ 
+              <div class="form-group">
+                  <label>{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Label" }}</label>
+                  <div class="form-fields">
+                      <select name="data.arms.armType">
+                          {{#select data.arms.armType}}
+                          <option value="general">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.General" }}</option>
+                          <option value="melee">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Melee" }}</option>
+                          <option value="ranged">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Ranged" }}</option>
+                          {{/select}}
+                      </select>
+                  </div>
+               </div>
+
+            <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.Header" }}</h4>
 
             <div class="form-group">
-               <label>Special movement</label>
+               <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.SpeedSpecial" }}</label>
                <div class="form-fields">
                    <input type="text" name="data.additionalMovement" value="{{data.additionalMovement}}" data-dtype="Text"/>
                 </div>
             </div>
 
             <div class="form-group">
-               <label>Additional sense</label>
+               <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.AdditionalSenses" }}</label>
                <div class="form-fields">
                    <input type="text" name="data.additionalSenses" value="{{data.additionalSenses}}" data-dtype="Text"/>
                 </div>
             </div>
 
             <div class="form-group">
-               <label>Is armor slot</label>
+               <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.ArmorSlot" }}</label>
                <label class="checkbox">
                    <input type="checkbox" name="data.isArmorSlot" {{checked data.isArmorSlot}}/>
                </label>
             </div>
 
             <div class="form-group">
-                <label>Weapon proficiency</label>
+                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.WeaponProficiency" }}</label>
                 <div class="form-fields">
                     <select name="data.weaponProficiency">
-                        <option value="">None</option>
+                        <option value="">{{ localize "SFRPG.None" }}</option>
                         {{#select data.weaponProficiency}}
                         {{#each config.weaponProficiencies as |name val|}}
                         <option value="{{val}}">{{name}}</option>
@@ -85,10 +107,10 @@
             </div>
 
             <div class="form-group">
-                <label>Bonus skill</label>
+                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.BonusSkill" }}</label>
                 <div class="form-fields">
                     <select name="data.bonusSkill">
-                        <option value="">None</option>
+                        <option value="">{{ localize "SFRPG.None" }}</option>
                         {{#select data.bonusSkill}}
                         {{#each config.skills as |name val|}}
                         <option value="{{val}}">{{name}}</option>
@@ -97,28 +119,6 @@
                     </select>
                 </div>
             </div>
-
-            <h4 class="section-header">Arms</h4>
-
-            <div class="form-group">
-                <label>Number of arms</label>
-                <div class="form-fields">
-                    <input type="text" name="data.arms.number" value="{{data.arms.number}}" data-dtype="Number"/>
-                 </div>
-             </div>
-
-             <div class="form-group">
-                 <label>Arm type</label>
-                 <div class="form-fields">
-                     <select name="data.arms.armType">
-                         {{#select data.arms.armType}}
-                         <option value="general">General purpose</option>
-                         <option value="melee">Melee weapon mount</option>
-                         <option value="ranged">Ranged weapon mount</option>
-                         {{/select}}
-                     </select>
-                 </div>
-              </div>
 
         </div>
 
