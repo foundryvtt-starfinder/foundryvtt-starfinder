@@ -75,6 +75,13 @@ export default function (engine) {
             }
         }
 
+        // Count armor upgrades
+        data.attributes.armorSlots.current = 0;
+        if (fact.armorUpgrades) {
+            console.log(JSON.stringify(fact.armorUpgrades));
+            data.attributes.armorSlots.current = fact.armorUpgrades.length;
+        }
+
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

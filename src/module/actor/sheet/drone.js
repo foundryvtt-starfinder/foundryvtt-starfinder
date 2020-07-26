@@ -36,7 +36,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         const inventory = {
             weapon: { label: "Weapons", items: [], dataset: { type: "weapon" } },
-            equipment: { label: "Armor Upgrades", items: [], dataset: { type: "upgrade" } },
+            upgrade: { label: "Armor Upgrades", items: [], dataset: { type: "upgrade" } },
             goods: { label: "Goods", items: [], dataset: { type: "goods" } }
         };
 
