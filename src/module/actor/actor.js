@@ -285,7 +285,7 @@ export class ActorSFRPG extends Actor {
             return (!ignoreTemporary || mod.subtab == "permanent");
         });
 
-        for(let item of this.data.items) {
+        for (let item of this.data.items) {
             let modifiersToConcat = [];
             switch (item.type) {
                 default:
