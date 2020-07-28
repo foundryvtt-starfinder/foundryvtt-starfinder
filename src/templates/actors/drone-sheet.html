@@ -151,6 +151,11 @@
                     </li>
                     {{/if}}
                     {{/each}}
+                    {{#if (not data.hasSkills)}}
+                    <li class="flexcol skills-footer">
+                        {{localize "SFRPG.DroneSheet.Skills.NoSkillsAvailable"}}
+                    </li>
+                    {{/if}}
                 </ul>
             </ul>
 
