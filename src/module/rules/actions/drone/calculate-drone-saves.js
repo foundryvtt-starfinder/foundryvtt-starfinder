@@ -26,7 +26,7 @@ export default function (engine) {
 
         data.attributes.fort.bonus += data.abilities.con.mod;
         data.attributes.reflex.bonus += data.abilities.dex.mod;
-        data.attributes.will.bonus += data.attributes.wis.value;
+        data.attributes.will.bonus += data.attributes.wis.mod;
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
