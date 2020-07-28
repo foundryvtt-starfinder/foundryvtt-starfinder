@@ -27,10 +27,6 @@ export default function (engine) {
             let abilityIncreaseStats = [activeChassis.data.abilityIncreaseStats.first, activeChassis.data.abilityIncreaseStats.second];
             let abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
 
-            data.attributes.fort.bonus = activeChassis.data.fort == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
-            data.attributes.reflex.bonus = activeChassis.data.ref == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
-            data.attributes.will.bonus = activeChassis.data.will == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
-
             data.abilities.str.base = activeChassis.data.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
 
             data.abilities.dex.base = activeChassis.data.abilityScores.dex + (abilityIncreaseStats.includes("dex") ? abilityIncreases : 0);
