@@ -51,6 +51,7 @@ import calculateChassis from './rules/actions/drone/calculate-chassis.js';
 import calculateDroneSkills from './rules/actions/drone/calculate-drone-skills.js';
 import calculateDroneMods from './rules/actions/drone/calculate-drone-mods.js';
 import calculateDroneEquipment from './rules/actions/drone/calculate-drone-equipment.js';
+import calculateDroneDefense from './rules/actions/drone/calculate-drone-defense.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -93,6 +94,7 @@ export default function (engine) {
     calculateDroneSkills(engine);
     calculateDroneMods(engine);
     calculateDroneEquipment(engine);
+    calculateDroneDefense(engine);
 
     // Conditions
     always(engine);
@@ -169,6 +171,7 @@ export default function (engine) {
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
+                    "calculateDroneDefense",
                     "calculateCMD",
                     { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" }
                 ]
