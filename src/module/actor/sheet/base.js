@@ -49,6 +49,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             isCharacter: this.entity.data.type === "character",
             isShip: this.entity.data.type === 'starship',
             isVehicle: this.entity.data.type === 'vehicle',
+            isDrone: this.entity.data.type === 'drone',
             config: CONFIG.SFRPG
         };
 
@@ -87,6 +88,8 @@ export class ActorSheetSFRPG extends ActorSheet {
 
                 return skills;
             }, {});
+
+            data.data.hasSkills = Object.values(this.entity.data.data.skills).filter(x => x.enabled).length > 0;
 
             this._prepareTraits(data.actor.data.traits);
         }

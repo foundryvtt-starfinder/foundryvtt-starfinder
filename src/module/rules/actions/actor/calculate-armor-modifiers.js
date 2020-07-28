@@ -28,7 +28,7 @@ export default function (engine) {
         kac.tooltip = kac.tooltip ?? [];
 
         if (!flags) return fact;
-        if (!wornArmor) return fact;
+        if (!wornArmor && fact.type !== "drone") return fact;
         if (!modifiers) return fact;
 
         /** @deprecated Will be removed in 0.4.0 */
