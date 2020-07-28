@@ -82,7 +82,7 @@ export default class CounterManagement {
             } else if (!this.initDone){
                 //Reset all counter if the combat is not started
                 combatants.forEach(c => {
-                    this.resetCounterManagement(c.actor._id);
+                    this.resetCounterManagement(c.actor?._id);
                     this.currentRound[c._id] = -1;
                 });
                 this.initDone = true;
@@ -109,7 +109,7 @@ export default class CounterManagement {
      */
     resetCounterManagement(actorId) {
         let currentActor = game.actors.get(actorId);
-        currentActor.update({
+        currentActor?.update({
             "data.counterClasses.values": []
         });
     }
