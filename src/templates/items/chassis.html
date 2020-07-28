@@ -1,0 +1,179 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.DroneSheet.Chassis.Name.Placeholder" }}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary source-wide">
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize "SFRPG.DroneSheet.Chassis.Source" }}" />
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Description Tab --}}
+        <div class="tab flexrow active" data-group="primary" data-tab="description">
+            {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <h4 class="section-header first">{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.Header" }}</h4>
+
+            <div class="form-group">
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.MechanicLevel" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.levels" value="{{data.levels}}" data-dtype="Number" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.Size" }}</label>
+                <div class="form-fields">
+                    <select class="actor-size" name="data.size">
+                        {{#select data.size}}
+                        {{#each config.actorSizes as |label size|}}
+                            <option value="{{size}}">{{label}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.SpeedBase" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.speed.value" value="{{data.speed.value}}" data-dtype="Number"/>
+                 </div>
+             </div>
+
+             <div class="form-group">
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.SpeedSpecial" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.speed.special" value="{{data.speed.special}}" data-dtype="Text"/>
+                 </div>
+             </div>
+
+             <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Chassis.Details.Defense.Header" }}</h4>
+
+             <div class="form-group">
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.Defense.EAC" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.eac" value="{{data.eac}}" data-dtype="Number"/>
+                 </div>
+             </div>
+
+             <div class="form-group">
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.Defense.KAC" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.kac" value="{{data.kac}}" data-dtype="Number"/>
+                 </div>
+             </div>
+
+             <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Chassis.Details.Saves.Header" }}</h4>
+
+             <div class="form-group">
+                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Fortitude"}}</label>
+                 <div class="form-fields">
+                     <select name="data.fort">
+                         {{#select data.fort}}
+                         {{#each config.saveProgression as |name val|}}
+                         <option value="{{val}}">{{name}}</option>
+                         {{/each}}
+                         {{/select}}
+                     </select>
+                 </div>
+             </div>
+ 
+             <div class="form-group">
+                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Reflex"}}</label>
+                 <div class="form-fields">
+                     <select name="data.ref">
+                         {{#select data.ref}}
+                         {{#each config.saveProgression as |name val|}}
+                         <option value="{{val}}">{{name}}</option>
+                         {{/each}}
+                         {{/select}}
+                     </select>
+                 </div>
+             </div>
+ 
+             <div class="form-group">
+                 <label>{{localize "SFRPG.DroneSheet.Chassis.Details.Saves.Will"}}</label>
+                 <div class="form-fields">
+                     <select name="data.will">
+                         {{#select data.will}}
+                         {{#each config.saveProgression as |name val|}}
+                         <option value="{{val}}">{{name}}</option>
+                         {{/each}}
+                         {{/select}}
+                     </select>
+                 </div>
+             </div>
+
+             <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Chassis.Details.AbilityScores.Header" }}</h4>
+
+             <div class="form-group">
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.AbilityScores.Strength" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.abilityScores.str" value="{{data.abilityScores.str}}" data-dtype="Number"/>
+                 </div>
+             </div>
+
+             <div class="form-group">
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.AbilityScores.Dexterity" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.abilityScores.dex" value="{{data.abilityScores.dex}}" data-dtype="Number"/>
+                 </div>
+             </div>
+
+             <div class="form-group">
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.AbilityScores.Wisdom" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.abilityScores.wis" value="{{data.abilityScores.wis}}" data-dtype="Number"/>
+                 </div>
+             </div>
+
+             <div class="form-group">
+                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.AbilityScores.Increases" }}</label>
+                <div class="form-fields">
+                    <select name="data.abilityIncreaseStats.first">
+                        {{#select data.abilityIncreaseStats.first}}
+                        {{#each config.abilities as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    
+                    <select name="data.abilityIncreaseStats.second">
+                        {{#select data.abilityIncreaseStats.second}}
+                        {{#each config.abilities as |name val|}}
+                        <option value="{{val}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                 </div>
+             </div>
+        </div>
+    </section>
+</form>

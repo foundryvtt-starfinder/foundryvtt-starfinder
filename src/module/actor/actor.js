@@ -6,6 +6,7 @@ import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
+import { DroneRepairDialog } from "../apps/drone-repair-dialog.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
@@ -50,17 +51,22 @@ export class ActorSFRPG extends Actor {
 
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
-        const classes = items.filter(item => item.type === "class");
+        const weapons = items.filter(item => item.type === "weapon" && item.data.equipped);
+        const classes = items.filter(item => item.type === "class" || item.type === "chassis");
         const theme = items.find(item => item.type === "theme");
-
+        const mods = items.filter(item => item.type === "mod");
+        const armorUpgrades = items.filter(item => item.type === "upgrade");
         game.sfrpg.engine.process("process-actors", {
             data,
             armor,
+            weapons,
             classes,
             flags,
             type: actorType,
             modifiers,
-            theme
+            theme,
+            mods,
+            armorUpgrades
         });
     }
 
@@ -570,6 +576,57 @@ export class ActorSFRPG extends Actor {
             updateData: updateData,
             updateItems: updateItems
         }
+    }
+
+    /**
+     * Cause this Actor to repair itself following drone repairing rules
+     * During a drone repair, some amount of drone HP may be recovered.
+     * @param {boolean} dialog  Present a dialog window which allows for utilizing the Repair Drone (Ex) feat while repairing.
+     * @param {boolean} chat    Summarize the results of the repair workflow as a chat message
+     * @return {Promise}        A Promise which resolves once the repair workflow has completed
+     */
+    async repairDrone({ dialog = true, chat = true } = {}) {
+        const data = this.data.data;
+
+        let hp = data.attributes.hp;
+        if (hp.value >= hp.max) {
+            let message = game.i18n.format("SFRPG.RepairDroneUnnecessary", { name: this.name });
+            ui.notifications.info(message);
+            return;
+        }
+
+        let improvedRepairFeat = false;
+        if (dialog) {
+            const dialogResults = await DroneRepairDialog.droneRepairDialog({ actor: this, improvedRepairFeat: improvedRepairFeat });
+            if (!dialogResults.repairing) return;
+            improvedRepairFeat = dialogResults.improvedRepairFeat;
+        }
+        
+        let oldHP = hp.value;
+        let maxRepairAmount = Math.floor(improvedRepairFeat ? hp.max * 0.25 : hp.max * 0.1);
+        let newHP = Math.min(hp.max, hp.value + maxRepairAmount);
+        let dhp = newHP - oldHP;
+
+        const updateData = {};
+        updateData["data.attributes.hp.value"] = newHP;
+        await this.update(updateData);
+
+        // Notify chat what happened
+        if (chat) {
+            let msg = game.i18n.format("SFRPG.RepairDroneChatMessage", { name: this.name, regainedHP: dhp });
+            
+            ChatMessage.create({
+                user: game.user._id,
+                speaker: { actor: this, alias: this.name },
+                content: msg,
+                type: CONST.CHAT_MESSAGE_TYPES.OTHER
+            });
+        }
+
+        return {
+            dhp: dhp,
+            updateData: updateData
+        };
     }
 
     async removeFromCrew() {

@@ -46,6 +46,11 @@ import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modif
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
 import calculateNpcAbilityValue from './rules/actions/actor/calculate-npc-ability-value.js';
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
+// Drone rules
+import calculateChassis from './rules/actions/drone/calculate-chassis.js';
+import calculateDroneSkills from './rules/actions/drone/calculate-drone-skills.js';
+import calculateDroneMods from './rules/actions/drone/calculate-drone-mods.js';
+import calculateDroneEquipment from './rules/actions/drone/calculate-drone-equipment.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -83,7 +88,11 @@ export default function (engine) {
     calculateShipShields(engine);
     calculateShipSpeed(engine);
     calculateShipTargetLock(engine);
-    
+    // Drone actions
+    calculateChassis(engine);
+    calculateDroneSkills(engine);
+    calculateDroneMods(engine);
+    calculateDroneEquipment(engine);
 
     // Conditions
     always(engine);
@@ -147,6 +156,22 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "vehicle" },
                 then: "identity"
+            },
+            {
+                when: { closure: "isActorType", type: "drone" },
+                then: [
+                    "calculateChassis",
+                    "calculateDroneMods",
+                    "calculateDroneEquipment",
+                    { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
+                    { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
+                    "calculateDroneSkills",
+                    { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
+                    { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
+                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
+                    "calculateCMD",
+                    { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" }
+                ]
             }
         ]
     });
