@@ -89,6 +89,8 @@ export class ActorSheetSFRPG extends ActorSheet {
                 return skills;
             }, {});
 
+            data.data.hasSkills = Object.values(this.entity.data.data.skills).filter(x => x.enabled).length > 0;
+
             this._prepareTraits(data.actor.data.traits);
         }
 
