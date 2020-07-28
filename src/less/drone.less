@@ -3,7 +3,7 @@
 /* ----------------------------------------- */
 /*  Basic Structure                          */
 /* ----------------------------------------- */
-.sfrpg.sheet.actor.character {
+.sfrpg.sheet.actor.drone {
   min-width: 715px;
   //min-height: 830px;
 
@@ -27,34 +27,14 @@
       .level {
         height: 28px;
       }
-
-      .experience {
-        input[type="text"] {
-          width: 100px;
-        }
-      }
-
-      .xpbar {
-        width: 100%;
-        flex: 0 0 8px;
-        background: #666;
-        border: 1px solid #000;
-        border-radius: 3px;
-
-        .bar {
-          height: 4px;
-          margin: 1px;
-          display: block;
-          background: @sfrpgRed;
-          border: 1px solid #000;
-          border-radius: 2px;
-        }
-      }
     }
 
     // Character Summary
     .summary {
       border-bottom: @borderGroove;
+      li {
+        width: 100%;;
+      }
     }
 
     // Primary Attributes
@@ -72,6 +52,17 @@
         &:last-child {
           border-right: none;
         }
+        
+        .attribute-row {
+          height: 18px;
+          flex: 0;
+          font-size: 12px;
+
+          .defense-name {
+            padding: 0 0 0 10px;
+            text-align: left;
+          }
+        }
 
         .attribute-value {
           margin: 5px 0 0;
@@ -80,6 +71,14 @@
           
           span {
             font-size: 25px;
+
+            &.attribute-max {
+              font-size: 16px;
+            }
+          }
+          
+          a {
+            font-size: 14px;
           }
         }
 
@@ -105,6 +104,16 @@
   /* ----------------------------------------- */
   /*  Sheet Body                               */
   /* ----------------------------------------- */
+    
+  ul.left-side {
+    margin-top: 0px;
+    margin-left: -19px;
+    flex: 2.5;
+  }
+  
+  section.center-pane {
+    flex: 3.5;
+  }
 
   .attributes {
     .resource {
@@ -135,6 +144,10 @@
       padding: 1px 3px;
       margin: 0 6px;
     }
+
+    li.speed {
+      height: 75px;
+    }
   }
 
   .ability-scores {
@@ -144,7 +157,7 @@
     padding: 0;
     
     .ability {
-      height: 94px;
+      height: 70px;
       margin: 0 2px;
       text-align: center;
       border: @borderGroove;
@@ -214,7 +227,7 @@
   }
 
   ul.skills-list {
-    flex: 0 0 49%;
+    flex: 0 0 31.6%;
 
     li.skills-header {
       background: rgba(0, 0 ,0, 0.05);
@@ -262,6 +275,12 @@
       .skill-mod {
         flex: 0 0 10%;
       }
+    }
+
+    .skills-footer {
+      text-align: center;
+      padding-top: 2px;
+      padding-bottom: 3px;
     }
   }
 
@@ -347,23 +366,6 @@
   
   .item-controls {
     flex: 0 0 68px;
-  }
-
-  /* ----------------------------------------- */
-  /*  Spellbook                                */
-  /* ----------------------------------------- */
-
-  .spellbook {
-    .item-controls {
-      flex: 0 0 68px;
-
-      .toggle-prepared {
-        color: @colorBeige;
-        &.prepared {
-          color: @colorOlive;
-        }
-      }
-    }
   }
 
   /* ----------------------------------------- */

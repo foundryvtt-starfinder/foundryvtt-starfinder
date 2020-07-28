@@ -6,6 +6,7 @@ import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
+import { DroneRepairDialog } from "../apps/drone-repair-dialog.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
@@ -46,21 +47,26 @@ export class ActorSFRPG extends Actor {
         const actorType = actorData.type;
 
         this._ensureHasModifiers(data);
-        const modifiers = data.modifiers;
+        const modifiers = this.getAllModifiers();
 
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
-        const classes = items.filter(item => item.type === "class");
+        const weapons = items.filter(item => item.type === "weapon" && item.data.equipped);
+        const classes = items.filter(item => item.type === "class" || item.type === "chassis");
         const theme = items.find(item => item.type === "theme");
-
+        const mods = items.filter(item => item.type === "mod");
+        const armorUpgrades = items.filter(item => item.type === "upgrade");
         game.sfrpg.engine.process("process-actors", {
             data,
             armor,
+            weapons,
             classes,
             flags,
             type: actorType,
             modifiers,
-            theme
+            theme,
+            mods,
+            armorUpgrades
         });
     }
 
@@ -269,6 +275,42 @@ export class ActorSFRPG extends Actor {
     }
 
     /**
+     * Returns an array of all modifiers on this actor. This will include items such as equipment, feat, classes, race, theme, etc.
+     * 
+     * @param {Boolean} ignoreTemporary Should we ignore temporary modifiers? Defaults to false.
+     * @param {Boolean} ignoreEquipment Should we ignore equipment modifiers? Defaults to false.
+     */
+    getAllModifiers(ignoreTemporary = false, ignoreEquipment = false) {
+        let allModifiers = this.data.data.modifiers.filter(mod => {
+            return (!ignoreTemporary || mod.subtab == "permanent");
+        });
+
+        for (let item of this.data.items) {
+            let modifiersToConcat = [];
+            switch (item.type) {
+                default:
+                    modifiersToConcat = item.data.modifiers;
+                    break;
+                case "feat":
+                    if (item.data.activation?.type === "") {
+                        modifiersToConcat = item.data.modifiers;
+                    }
+                    break;
+                case "equipment":
+                case "weapon":
+                    if (!ignoreEquipment && item.data.equipped) {
+                        modifiersToConcat = item.data.modifiers;
+                    }
+                    break;
+            }
+            if (modifiersToConcat && modifiersToConcat.length > 0) {
+                allModifiers = allModifiers.concat(modifiersToConcat);
+            }
+        }
+        return allModifiers;
+    }
+
+    /**
      * Toggles what NPC skills are shown on the sheet.
      */
     async toggleNpcSkills() {
@@ -384,8 +426,8 @@ export class ActorSFRPG extends Actor {
             actor: this,
             parts: ["@mod"],
             data: { mod: abl.mod },
-            flavor: `${label}`,
-            title: `Ability Check`,
+            flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Ability Check - ${label}`,
+            title:  `Ability Check`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
@@ -406,7 +448,7 @@ export class ActorSFRPG extends Actor {
             parts: ["@mod"],
             data: { mod: save.bonus },
             title: `Save`,
-            flavor: `${label}`,
+            flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Save - ${label}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
@@ -418,7 +460,7 @@ export class ActorSFRPG extends Actor {
             parts: ["@mod"],
             data: { mod: skill.mod },
             title: 'Skill Check',
-            flavor: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
+            flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
@@ -536,6 +578,57 @@ export class ActorSFRPG extends Actor {
         }
     }
 
+    /**
+     * Cause this Actor to repair itself following drone repairing rules
+     * During a drone repair, some amount of drone HP may be recovered.
+     * @param {boolean} dialog  Present a dialog window which allows for utilizing the Repair Drone (Ex) feat while repairing.
+     * @param {boolean} chat    Summarize the results of the repair workflow as a chat message
+     * @return {Promise}        A Promise which resolves once the repair workflow has completed
+     */
+    async repairDrone({ dialog = true, chat = true } = {}) {
+        const data = this.data.data;
+
+        let hp = data.attributes.hp;
+        if (hp.value >= hp.max) {
+            let message = game.i18n.format("SFRPG.RepairDroneUnnecessary", { name: this.name });
+            ui.notifications.info(message);
+            return;
+        }
+
+        let improvedRepairFeat = false;
+        if (dialog) {
+            const dialogResults = await DroneRepairDialog.droneRepairDialog({ actor: this, improvedRepairFeat: improvedRepairFeat });
+            if (!dialogResults.repairing) return;
+            improvedRepairFeat = dialogResults.improvedRepairFeat;
+        }
+        
+        let oldHP = hp.value;
+        let maxRepairAmount = Math.floor(improvedRepairFeat ? hp.max * 0.25 : hp.max * 0.1);
+        let newHP = Math.min(hp.max, hp.value + maxRepairAmount);
+        let dhp = newHP - oldHP;
+
+        const updateData = {};
+        updateData["data.attributes.hp.value"] = newHP;
+        await this.update(updateData);
+
+        // Notify chat what happened
+        if (chat) {
+            let msg = game.i18n.format("SFRPG.RepairDroneChatMessage", { name: this.name, regainedHP: dhp });
+            
+            ChatMessage.create({
+                user: game.user._id,
+                speaker: { actor: this, alias: this.name },
+                content: msg,
+                type: CONST.CHAT_MESSAGE_TYPES.OTHER
+            });
+        }
+
+        return {
+            dhp: dhp,
+            updateData: updateData
+        };
+    }
+
     async removeFromCrew() {
         await this.unsetFlag('sfrpg', 'crewMember');
     }
@@ -554,7 +647,7 @@ export class ActorSFRPG extends Actor {
      * @return {Promise}        A Promise which resolves once the long rest workflow has completed
      */
     async longRest({ dialog = true, chat = true } = {}) {
-        const data = this.data.data;
+        const data = duplicate(this.data.data);
         const updateData = {};
 
         if (dialog) {
@@ -575,6 +668,13 @@ export class ActorSFRPG extends Actor {
         updateData['data.attributes.sp.value'] = data.attributes.sp.max;
         updateData['data.attributes.rp.value'] = data.attributes.rp.max;
 
+        // Heal Ability damage
+        for (let [abl, ability] of Object.entries(data.abilities)) {
+            if (ability.damage && ability.damage > 0) {
+                updateData[`data.abilities.${abl}.damage`] = --ability.damage;
+            } 
+        }
+
         for (let [k, r] of Object.entries(data.resources)) {
             if (r.max && (r.sr || r.lr)) {
                 updateData[`data.resources.${k}.value`] = r.max;
@@ -589,7 +689,7 @@ export class ActorSFRPG extends Actor {
         const items = this.items.filter(i => i.data.data.uses && ["sr", "lr", "day"].includes(i.data.data.uses.per));
         const updateItems = items.map(item => {
             return {
-                "id": item.data.id,
+                "_id": item.data._id,
                 "data.uses.value": item.data.data.uses.max
             }
         });

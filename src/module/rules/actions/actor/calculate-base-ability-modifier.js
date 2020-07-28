@@ -34,7 +34,12 @@ export default function (engine) {
                 context
             );
 
-            const base = Math.floor((ability.value - 10) / 2);
+            let abilityValue = ability.value;
+            if (Number.isNaN(Number.parseInt(abilityValue))) {
+                abilityValue = 10;
+            }
+
+            const base = Math.floor((abilityValue - 10) / 2);
             ability.modifierTooltip = [game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() })];
 
             let mod = Object.entries(abilityMods).reduce((sum, mod) => {

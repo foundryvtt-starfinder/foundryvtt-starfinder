@@ -23,7 +23,7 @@ export class ItemSheetSFRPG extends ItemSheet {
   
       static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-        width: 560,
+        width: 715,
         height: 600,
         classes: ["sfrpg", "sheet", "item"],
         resizable: true,
@@ -81,6 +81,8 @@ export class ItemSheetSFRPG extends ItemSheet {
           save.dc = 10 + data.item.data.level + actor.data.data.abilities[abl].mod;
         }
       }
+
+      data.modifiers = this.item.data.data.modifiers;
       
       return data;
     }
@@ -218,6 +220,11 @@ export class ItemSheetSFRPG extends ItemSheet {
       // Modify damage formula
       html.find(".damage-control").click(this._onDamageControl.bind(this));
       html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
+
+      html.find('.modifier-create').click(this._onModifierCreate.bind(this));
+      html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
+      html.find('.modifier-delete').click(this._onModifierDelete.bind(this));
+      html.find('.modifier-toggle').click(this._onToggleModifierEnabled.bind(this));
     }
   
     /* -------------------------------------------- */
@@ -285,4 +292,62 @@ export class ItemSheetSFRPG extends ItemSheet {
         return this.item.update({"data.critical.parts": criticalDamage.parts});
       }
     }
+    
+    /**
+    * Add a modifer to this item.
+    * 
+    * @param {Event} event The originating click event
+    */
+   _onModifierCreate(event) {
+       event.preventDefault();
+       const target = $(event.currentTarget);
+
+       this.item.addModifier({
+           name: "New Modifier"
+       });
+   }
+
+   /**
+    * Delete a modifier from the item.
+    * 
+    * @param {Event} event The originating click event
+    */
+   async _onModifierDelete(event) {
+       event.preventDefault();
+       const target = $(event.currentTarget);
+       const modifierId = target.closest('.item.modifier').data('modifierId');
+       
+       await this.item.deleteModifier(modifierId);
+   }
+
+   /**
+    * Edit a modifier for an item.
+    * 
+    * @param {Event} event The orginating click event
+    */
+   _onModifierEdit(event) {
+       event.preventDefault();
+
+       const target = $(event.currentTarget);
+       const modifierId = target.closest('.item.modifier').data('modifierId');
+
+       this.item.editModifier(modifierId);
+   }
+
+   /**
+    * Toggle a modifier to be enabled or disabled.
+    * 
+    * @param {Event} event The originating click event
+    */
+   async _onToggleModifierEnabled(event) {
+       event.preventDefault();
+       const target = $(event.currentTarget);
+       const modifierId = target.closest('.item.modifier').data('modifierId');
+
+       const modifiers = duplicate(this.item.data.data.modifiers);
+       const modifier = modifiers.find(mod => mod._id === modifierId);
+       modifier.enabled = !modifier.enabled;
+
+       await this.item.update({'data.modifiers': modifiers});
+   }
   }

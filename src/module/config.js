@@ -149,6 +149,7 @@ SFRPG.weaponDamageTypes = {
     "electricity+fire": "SFRPG.DamageTypesElectricityAndFire",
     "electricity+piercing": "SFRPG.DamageTypesElectricityAndPiercing",
     "electricity+slashing": "SFRPG.DamageTypesElectricityAndSlashing",
+    "force": "SFRPG.DamageTypesForce",
     "fire": "SFRPG.DamageTypesFire",
     "fire+piercing": "SFRPG.DamageTypesFireAndPiercing",
     "fire+slashing": "SFRPG.DamageTypesFireAndSlashing",
@@ -1493,3 +1494,13 @@ SFRPG.counterClassesLabel = {
     "vanguardEntropy": "SFRPG.CounterClassesVanguard",
     "solarianAttunement": "SFRPG.CounterClassesSolarian"
 };
+
+SFRPG.droneHitpointsPerLevel = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 190, 210, 230];
+SFRPG.droneResolveMethod = (droneLevel) => { return (droneLevel >= 10 ? Math.floor(droneLevel / 2) : 0); }
+SFRPG.droneACBonusPerLevel = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+SFRPG.droneBABBonusPerLevel = [1, 2, 3, 3, 4, 5, 6, 6, 7, 8, 9, 9, 10, 11, 12, 12, 13, 14, 15, 15];
+SFRPG.droneGoodSaveBonusPerLevel = [2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8, 8, 8, 9, 9, 9];
+SFRPG.droneBadSaveBonusPerLevel = [0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5];
+SFRPG.droneFeatsPerLevel = [1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8, 8];
+SFRPG.droneModsPerLevel = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];
+SFRPG.droneAbilityScoreIncreaseLevels = [4, 7, 10, 13, 16, 19];
