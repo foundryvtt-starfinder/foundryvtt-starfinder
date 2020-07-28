@@ -55,7 +55,7 @@ export const registerSystemSettings = function () {
     game.settings.register("sfrpg", "useCustomChatCard", {
         name: "SFRPG.SettingsUseCustomChatCard",
         hint: "SFRPG.SettingsUseCustomChatCardHint",
-        scope: "client",
+        scope: "world",
         config: true,
         default: true,
         type: Boolean

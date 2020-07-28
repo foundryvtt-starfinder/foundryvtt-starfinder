@@ -292,7 +292,7 @@ export class ActorSFRPG extends Actor {
                     modifiersToConcat = item.data.modifiers;
                     break;
                 case "feat":
-                    if (item.data.activation.type === "") {
+                    if (item.data.activation?.type === "") {
                         modifiersToConcat = item.data.modifiers;
                     }
                     break;
