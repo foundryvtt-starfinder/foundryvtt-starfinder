@@ -180,6 +180,7 @@ SFRPG.distanceUnits = {
     "plane": "SFRPG.Plane",
     "unlimited": "SFRPG.Unlimited",
     "ft": "SFRPG.Ft",
+    "meter": "SFRPG.Meter",
     "mi": "SFRPG.Mi",
     "spec": "SFRPG.Special",
     "any": "SFRPG.DistAny"
