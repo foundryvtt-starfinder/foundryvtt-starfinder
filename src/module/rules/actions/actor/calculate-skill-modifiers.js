@@ -58,10 +58,13 @@ export default function (engine) {
         for (let [skl, skill] of Object.entries(skills)) {
             skill.tooltip = skill.tooltip ?? [];
 
-            const mods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
-                skl,
-                skill.ability
-            ].includes(mod.valueAffected) || mod.effectType === SFRPGEffectType.ALL_SKILLS), context);
+            const mods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
+                if (mod.effectType === SFRPGEffectType.ALL_SKILLS) return true;
+                else if (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected) return true;
+                else if (mod.effectType === SFRPGEffectType.ABILITY_SKILLS && skill.ability === mod.valueAffected) return true;
+                
+                return false;
+            }), context);
 
 
             let accumulator = Object.entries(mods).reduce((sum, mod) => {
