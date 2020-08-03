@@ -13,6 +13,12 @@
 
   .sheet-header {
 
+    .header-background {
+      .charname {
+        flex: 0 0 calc(100% - 250px);
+      }
+    }
+
     // Character Profile image (larger than usual)
     img.profile {
       flex: 0 0 180px;
@@ -21,11 +27,16 @@
 
     // Character level and experience bar
     .charlevel {
-      flex: 0 0 180px;
+      flex: 0 0 240px;
       padding: 0 5px 2px;
 
       .level {
         height: 28px;
+
+        .no-chassis {
+          color: #E00;
+          text-shadow: -1px -1px 0 #444, 1px -1px 0 #444, -1px 1px 0 #444, 1px 1px 0 #444;
+        }
       }
     }
 

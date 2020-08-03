@@ -33,7 +33,10 @@
         <li class="item flexrow {{#unless isCharged}}uncharged{{/unless}}" data-item-id="{{item._id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
-                <h4>{{item.name}}</h4>
+                <h4>
+                    {{#if item.data.isFree}}[{{localize "SFRPG.DroneSheet.Features.ModsFree"}}] {{/if}}
+                    {{item.name}}
+                </h4>
                 {{#if item.hasAttack}}
                 <div class="item-action flexcol">
                     <button class="tag attack">{{localize "SFRPG.Attack"}}</button>

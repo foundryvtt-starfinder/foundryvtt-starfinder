@@ -15,6 +15,9 @@
                         <label>{{localize "SFRPG.LevelLabelText"}} </label>
                         <span>{{data.details.level.value}}</span>
                     </div>
+                    <div class="level">
+                        {{#if activeChassis}}<span>{{activeChassis.name}}</span>{{else}}<span class="no-chassis">Missing Chassis</span>{{/if}}
+                    </div>
                 </div>
             </div>
 
@@ -100,14 +103,14 @@
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
                 {{#each data.abilities as |ability id|}}
-                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-tippy-content="<strong>{{ability.label}}</strong><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-ability="{{id}}">
-                  <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
+                <li class="ability {{#if ability.proficient}}proficient{{/if}}">
+                  <h4 class="ability-name box-title rollable" data-tippy-content="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.value<br/><br/>{{#each ability.tooltip as |tip|}}{{tip}}<br/>{{/each}}">{{ability.label}}</h4>
                   <div class="ability-modifiers flexrow">
-                    <span class="ability-mod" data-tippy-content="<strong>{{ability.label}}</strong><br>{{#each ability.modifierTooltip as |tip|}}{{tip}}<br>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                    <span class="ability-mod" data-tippy-content="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.mod<br/><br/>{{#each ability.modifierTooltip as |tip|}}{{tip}}<br/>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                     {{#if (eq id "con")}}
-                    <div class="ability-center">-</div>
+                    <div class="ability-center" data-tippy-content="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.value<br/><br/>{{#each ability.tooltip as |tip|}}{{tip}}<br/>{{/each}}">-</div>
                     {{else}}
-                    <div class="ability-center">{{ability.value}}</div>
+                    <div class="ability-center" data-tippy-content="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.value<br/><br/>{{#each ability.tooltip as |tip|}}{{tip}}<br/>{{/each}}">{{ability.value}}</div>
                     {{/if}}
                   </div>
                 </li>
