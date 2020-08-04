@@ -113,7 +113,7 @@ Hooks.once("setup", function () {
         "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
         "weaponProperties", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
         "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
-        "modifierArmorClassAffectedValues"
+        "modifierArmorClassAffectedValues", "capacityUsagePer"
     ];
 
     for (let o of toLocalize) {
