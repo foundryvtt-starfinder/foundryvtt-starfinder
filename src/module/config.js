@@ -180,6 +180,7 @@ SFRPG.distanceUnits = {
     "plane": "SFRPG.Plane",
     "unlimited": "SFRPG.Unlimited",
     "ft": "SFRPG.Ft",
+    "meter": "SFRPG.Meter",
     "mi": "SFRPG.Mi",
     "spec": "SFRPG.Special",
     "any": "SFRPG.DistAny"
@@ -1504,3 +1505,11 @@ SFRPG.droneBadSaveBonusPerLevel = [0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 
 SFRPG.droneFeatsPerLevel = [1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8, 8];
 SFRPG.droneModsPerLevel = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];
 SFRPG.droneAbilityScoreIncreaseLevels = [4, 7, 10, 13, 16, 19];
+
+SFRPG.capacityUsagePer = {
+    "shot": "SFRPG.Capacity.UsagePerShot",
+    "round": "SFRPG.Capacity.UsagePerRound",
+    "minute": "SRRPG.Capactiy.UsagePerMinute",
+    "hour": "SFRPG.Capacity.UsagePerHour",
+    "day": "SFRPG.Capacity.UsagePerDay"
+};
