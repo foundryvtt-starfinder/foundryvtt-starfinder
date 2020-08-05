@@ -350,4 +350,17 @@ export class ItemSheetSFRPG extends ItemSheet {
 
        await this.item.update({'data.modifiers': modifiers});
    }
-  }
+
+   /** @override */
+   async _render(...args) {
+      await super._render(...args);
+
+      tippy('[data-tippy-content]', {
+        allowHTML: true,
+        arrow: false,
+        placement: 'top-start',
+        duration: [500, null],
+        delay: [800, null]
+      });
+   }
+}

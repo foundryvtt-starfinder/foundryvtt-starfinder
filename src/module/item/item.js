@@ -451,10 +451,15 @@ export class ItemSFRPG extends Item {
         // Determine ability score modifier
         let abl = itemData.data.ability;
         if (!abl && (this.data.type === "spell")) abl = actorData.attributes.spellcasting || "int";
-        else if (!abl) abl = "str";
+        else if (!abl && this.actor.data.type === "npc") abl = "";
+        else if (!abl) abl = "str";        
 
         // Define Roll parts
-        const parts = ["@item.data.attackBonus", `@abilities.${abl}.mod`, "@attributes.bab"];
+        const parts = [];
+        
+        if (itemData.data.attackBonus !== 0) parts.push("@item.data.attackBonus");
+        if (abl) parts.push(`@abilities.${abl}.mod`);
+        if (["character", "drone"].includes(this.actor.data.type)) parts.push("@attributes.bab");
         if ((this.data.type === "weapon") && !itemData.data.proficient) parts.push("-4");
 
         // Define Critical threshold

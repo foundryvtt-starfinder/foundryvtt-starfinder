@@ -27,6 +27,7 @@ import SFRPGModifier from "./module/modifiers/modifier.js";
 import { generateUUID } from "./module/utilities.js";
 import migrateWorld from './module/migration.js';
 import CounterManagement from "./module/classes/counter-management.js";
+import templateOverrides from "./module/template-overrides.js";
 
 Hooks.once('init', async function () {
     console.log(`SFRPG | Initializing the Starfinder System`);
@@ -83,6 +84,7 @@ Hooks.once('init', async function () {
     await preloadHandlebarsTemplates();
 
     Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
+    templateOverrides();
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("sfrpg", ActorSheetSFRPGCharacter, { types: ["character"], makeDefault: true });
@@ -111,7 +113,7 @@ Hooks.once("setup", function () {
         "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
         "weaponProperties", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
         "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
-        "modifierArmorClassAffectedValues"
+        "modifierArmorClassAffectedValues", "capacityUsagePer"
     ];
 
     for (let o of toLocalize) {
