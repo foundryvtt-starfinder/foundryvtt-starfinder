@@ -62,8 +62,8 @@ export const registerSystemSettings = function () {
     });
 
     game.settings.register("sfrpg", "useStarfinderAOETemplates", {
-        name: "SRRPG.SettingsUseStarfinderAOETemplates",
-        hint: "SRRPG.SettingsUseStarfinderAOETemplatesHint",
+        name: "SFRPG.SettingsUseStarfinderAOETemplates",
+        hint: "SFRPG.SettingsUseStarfinderAOETemplatesHint",
         scope: "world",
         config: true,
         default: true,

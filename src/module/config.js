@@ -1507,9 +1507,9 @@ SFRPG.droneModsPerLevel = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9,
 SFRPG.droneAbilityScoreIncreaseLevels = [4, 7, 10, 13, 16, 19];
 
 SFRPG.capacityUsagePer = {
-    "shot": "SFRPG.Capacity.UsagePerShot",
-    "round": "SFRPG.Capacity.UsagePerRound",
-    "minute": "SRRPG.Capactiy.UsagePerMinute",
-    "hour": "SFRPG.Capacity.UsagePerHour",
-    "day": "SFRPG.Capacity.UsagePerDay"
+    "shot": "SFRPG.Capacity.UsagePer.Shot",
+    "round": "SFRPG.Capacity.UsagePer.Round",
+    "minute": "SFRPG.Capacity.UsagePer.Minute",
+    "hour": "SFRPG.Capacity.UsagePer.Hour",
+    "day": "SFRPG.Capacity.UsagePer.Day"
 };
