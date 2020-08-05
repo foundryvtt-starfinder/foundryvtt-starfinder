@@ -82,10 +82,12 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         }, [[], [], [], []]);
         
         let totalWeight = 0;
+        let totalValue = 0;
         for (let i of items) {
             i.img = i.img || DEFAULT_TOKEN;
 
             i.data.quantity = i.data.quantity || 0;
+            i.data.price = i.data.price || 0;
             i.data.bulk = i.data.bulk || "-";
 
             let weight = 0;
@@ -114,9 +116,12 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             totalWeight += i.totalWeight;
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
+
+            totalValue += (i.data.price * i.data.quantity);
         }
         totalWeight = Math.floor(totalWeight);
         data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
+        data.inventoryValue = Math.floor(totalValue);
 
         let droneLevelIndex = data.data.details.level.value - 1;
         let maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];
