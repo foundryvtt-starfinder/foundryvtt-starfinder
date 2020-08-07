@@ -137,7 +137,7 @@ export default function (engine) {
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseArmorClass",
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
-                    "calculateBaseAttackBonus",
+                    { closure: "calculateBaseAttackBonus", stackModifiers: "stackModifiers" },
                     "calculateBaseSaves",
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     "calculateCharacterLevel",
@@ -149,9 +149,9 @@ export default function (engine) {
                     "calculateBaseSkills",
                     { closure: "calculateSkillArmorCheckPenalty", stackModifiers: "stackModifiers" },
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
-                    "calculateHitpoints",
-                    "calculateStamina",
-                    "calculateResolve"
+                    { closure: "calculateHitpoints", stackModifiers: "stackModifiers" },
+                    { closure: "calculateStamina", stackModifiers: "stackModifiers" },
+                    { closure: "calculateResolve", stackModifiers: "stackModifiers" }
                 ]
             },
             {

@@ -6,20 +6,22 @@ export default function (engine) {
         const flags = fact.flags;
         const modifiers = fact.modifiers;
 
-        const addModifier = (bonus, skill) => {
-            let skillMod = 0;
-            
-            skillMod += bonus.modifier;
+        const addModifier = (bonus, data, skill) => {
+            let computedBonus = bonus.modifier;
+            if (bonus.modifierType == "formula") {
+                let r = new Roll(bonus.modifier, data).roll();
+                computedBonus = r.total;
+            }
 
-            if (skillMod !== 0) {
+            if (computedBonus !== 0) {
                 skill.tooltip.push(game.i18n.format("SFRPG.SkillModifierTooltip", {
                     type: bonus.type.capitalize(),
-                    mod: bonus.modifier.signedString(),
+                    mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
             }
             
-            return skillMod;
+            return computedBonus;
         };
 
         const addLegacyModifierTooltip = (modifier, name, type, skill) => {
@@ -49,9 +51,7 @@ export default function (engine) {
         let sureFooted = getProperty(flags, "sfrpg.sureFooted") ? 2 : 0;
 
         const filteredMods = modifiers.filter(mod => {
-            return mod.enabled && 
-                [SFRPGEffectType.ABILITY_SKILLS, SFRPGEffectType.SKILL, SFRPGEffectType.ALL_SKILLS].includes(mod.effectType) &&
-                mod.modifierType === SFRPGModifierType.CONSTANT;
+            return mod.enabled && [SFRPGEffectType.ABILITY_SKILLS, SFRPGEffectType.SKILL, SFRPGEffectType.ALL_SKILLS].includes(mod.effectType);
         });
 
         // Skills
@@ -70,10 +70,10 @@ export default function (engine) {
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                     for (const bonus of mod[1]) {
-                        sum += addModifier(bonus, skill);
+                        sum += addModifier(bonus, data, skill);
                     }
                 } else {
-                    sum += addModifier(mod[1], skill);
+                    sum += addModifier(mod[1], data, skill);
                 }
 
                 return sum;
