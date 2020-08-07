@@ -39,6 +39,13 @@ export default function (engine) {
             data.abilities.wis.base = activeChassis.data.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
             
             data.abilities.cha.base = activeChassis.data.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
+        } else {
+            data.abilities.str.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
+            data.abilities.dex.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
+            data.abilities.con.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
+            data.abilities.int.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
+            data.abilities.wis.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
+            data.abilities.cha.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
         }
 
         // Clear out skills, this and future closures will enable them again
