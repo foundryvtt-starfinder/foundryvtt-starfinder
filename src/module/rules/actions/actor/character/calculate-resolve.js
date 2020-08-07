@@ -6,7 +6,7 @@ export default function (engine) {
 
         let rpMax = 0; // Max(1, Max(1, Floor(Character Level / 2)) + Key Ability Score Modifier)
 
-        // Constitution bonus
+        // Level bonus
         let levelBonus = Math.max(1, Math.floor(data.details.level.value / 2));
         rpMax += levelBonus;
 
@@ -23,7 +23,7 @@ export default function (engine) {
         // to class, such as determining your maximum Resolve Points, use whichever key ability
         // score has the highest value (and therefore the highest modifier).
 
-        if (fact.classes) {
+        if (fact.classes && fact.classes.length > 0) {
             let keyAbilityScore = fact.classes[0].data.kas;
             let highestKeyAbilityScoreModifier = fact.data.abilities[keyAbilityScore].mod;
             let className = fact.classes[0].name;

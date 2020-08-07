@@ -7,7 +7,7 @@ export default function (engine) {
         let hpMax = 0; // Race HP + (Class HP per level * Class Level) + Modifiers
 
         // Race bonus
-        if (fact.races) {
+        if (fact.races && fact.races.length > 0) {
             for (const race of fact.races) {
                 hpMax += race.data.hp.value;
 
@@ -19,7 +19,7 @@ export default function (engine) {
         }
 
         // Class bonus
-        if (fact.classes) {
+        if (fact.classes && fact.classes.length > 0) {
             for (const cls of fact.classes) {
                 let classBonus = Math.floor(cls.data.levels * cls.data.hp.value);
                 hpMax += classBonus;
