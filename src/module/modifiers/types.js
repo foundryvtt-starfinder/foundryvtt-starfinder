@@ -17,6 +17,7 @@ export const SFRPGEffectType = Object.freeze({
     MELEE_ATTACKS: "melee-attacks",
     SPELL_ATTACKS: "spell-attacks",
     ALL_ATTACKS: "all-attacks",
+    BASE_ATTACK_BONUS: "base-attack-bonus",
     AC: "ac",
     CMD: "cmd",
     ACP: "acp",

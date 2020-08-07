@@ -1097,6 +1097,7 @@ SFRPG.modifierEffectTypes = {
     "hit-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Hitpoints",
     "stamina-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Stamina",
     "resolve-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Resolve",
+    "base-attack-bonus": "SFRPG.ActorSheet.Modifiers.EffectTypes.BaseAttackBonus",
     "cmd": "SFRPG.ModifierEffectTypeCMD",
     "acp": "SFRPG.ModifierEffectTypeACP",
     "initiative": "SFRPG.ModifierEffectTypeInit",
