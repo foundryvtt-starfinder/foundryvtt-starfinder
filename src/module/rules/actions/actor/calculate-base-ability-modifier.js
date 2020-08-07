@@ -6,10 +6,7 @@ export default function (engine) {
         const modifiers = fact.modifiers;
 
         const addModifier = (bonus, ability) => {
-            let abilityMod = 0;
-
-            abilityMod += bonus.modifier;
-
+            let abilityMod = bonus.modifier;
             if (abilityMod !== 0) {
                 ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifiersTooltip", {
                     type: bonus.type.capitalize(),

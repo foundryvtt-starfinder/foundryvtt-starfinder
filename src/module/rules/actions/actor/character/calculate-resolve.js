@@ -1,4 +1,4 @@
-import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../../../modifiers/types.js";
+import { SFRPGEffectType } from "../../../../modifiers/types.js";
 
 export default function (engine) {
     engine.closures.add("calculateResolve", (fact, context) => {
@@ -24,11 +24,12 @@ export default function (engine) {
         // score has the highest value (and therefore the highest modifier).
 
         if (fact.classes && fact.classes.length > 0) {
-            let keyAbilityScore = fact.classes[0].data.kas;
-            let highestKeyAbilityScoreModifier = fact.data.abilities[keyAbilityScore].mod;
-            let className = fact.classes[0].name;
+            let keyAbilityScore = "";
+            let highestKeyAbilityScoreModifier = -100;
+            let className = "";
 
             for (const cls of fact.classes) {
+                if (!cls.data.kas) continue;
                 let classScore = fact.data.abilities[cls.data.kas].mod;
                 if (classScore > highestKeyAbilityScoreModifier) {
                     keyAbilityScore = cls.data.kas;
@@ -37,13 +38,15 @@ export default function (engine) {
                 }
             }
 
-            rpMax += highestKeyAbilityScoreModifier;
+            if (className) {
+                rpMax += highestKeyAbilityScoreModifier;
 
-            data.attributes.rp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Resolve.KeyAbilityTooltip", {
-                mod: highestKeyAbilityScoreModifier,
-                kas: keyAbilityScore.capitalize(),
-                source: className
-            }));
+                data.attributes.rp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Resolve.KeyAbilityTooltip", {
+                    mod: highestKeyAbilityScoreModifier,
+                    kas: keyAbilityScore.capitalize(),
+                    source: className
+                }));
+            }
         }
 
         rpMax = Math.max(1, rpMax);

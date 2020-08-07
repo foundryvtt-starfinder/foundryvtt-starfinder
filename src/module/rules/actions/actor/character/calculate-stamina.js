@@ -1,4 +1,4 @@
-import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../../../modifiers/types.js";
+import { SFRPGEffectType } from "../../../../modifiers/types.js";
 
 export default function (engine) {
     engine.closures.add("calculateStamina", (fact, context) => {
