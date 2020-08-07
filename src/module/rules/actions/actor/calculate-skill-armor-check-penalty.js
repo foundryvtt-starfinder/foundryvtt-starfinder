@@ -56,9 +56,7 @@ export default function (engine) {
             skill.mod += acp;
 
             if (acp >= 0) continue;
-            const tooltip = game.i18n.format("SFRPG.ACPTooltip", {acp: acp.signedString()});
-            if (!skill.tooltip) skill.tooltip = [tooltip];
-            else skill.tooltip.push(tooltip);
+            skill.tooltip.push(game.i18n.format("SFRPG.ACPTooltip", {acp: acp.signedString()}));
         }
 
         return fact;

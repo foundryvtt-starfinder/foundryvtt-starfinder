@@ -4,8 +4,6 @@ export default function (engine) {
         const classes = fact.classes;
         let bab = 0;
 
-        data.attributes.babtooltip = [];
-
         for (const cls of classes) {
             let mod = 0;
             switch (cls.data.bab) {

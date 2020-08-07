@@ -20,8 +20,9 @@ import isModifierType from './rules/conditions/is-modifier-type.js';
 import isActorType from './rules/conditions/is-actor-type.js';
 import stackModifiers from './rules/actions/modifiers/stack-modifiers.js';
 import logToConsole from './rules/actions/log.js';
-import calculateBaseAbilityModifier from './rules/actions/actor/calculate-base-ability-modifier.js';
+import clearTooltips from './rules/actions/actor/clear-tooltips.js';
 import calculateBaseAbilityScore from './rules/actions/actor/calculate-base-ability-score.js';
+import calculateBaseAbilityModifier from './rules/actions/actor/calculate-base-ability-modifier.js';
 import calculateBaseArmorClass from './rules/actions/actor/calculate-base-armor-class.js';
 import calculateArmorModifiers from './rules/actions/actor/calculate-armor-modifiers.js';
 import calculateBab from './rules/actions/actor/calculate-bab.js';
@@ -63,6 +64,7 @@ export default function (engine) {
     setResult(engine);
     undefined(engine);
     // Actor actions
+    clearTooltips(engine);
     calculateBaseAbilityScore(engine);
     calculateBaseAbilityModifier(engine);
     calculateBaseArmorClass(engine);
@@ -122,6 +124,7 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "character" },
                 then: [
+                    "clearTooltips",
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseArmorClass",
@@ -164,6 +167,7 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "drone" },
                 then: [
+                    "clearTooltips",
                     "calculateChassis",
                     "calculateDroneMods",
                     "calculateDroneEquipment",

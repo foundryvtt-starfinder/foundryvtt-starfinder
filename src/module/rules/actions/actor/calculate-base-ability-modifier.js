@@ -40,7 +40,7 @@ export default function (engine) {
             }
 
             const base = Math.floor((abilityValue - 10) / 2);
-            ability.modifierTooltip = [game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() })];
+            ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() }));
 
             let mod = Object.entries(abilityMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;

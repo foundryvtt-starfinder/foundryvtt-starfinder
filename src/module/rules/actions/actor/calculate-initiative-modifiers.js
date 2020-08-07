@@ -7,9 +7,7 @@ export default function (engine) {
         const init = data.attributes.init;
         const modifiers = fact.modifiers;
 
-        init.tooltip = init.tooltip ?? [];
-
-        const addModifer = (bonus) => {
+        const addModifier = (bonus) => {
             let mod = bonus.modifier;
             if (mod !== 0) {
                 init.tooltip.push(game.i18n.format("SFRPG.InitiativeModiferTooltip", {
@@ -35,10 +33,10 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
-                    prev += addModifer(bonus);
+                    prev += addModifier(bonus);
                 }
             } else {
-                prev += addModifer(curr[1]);
+                prev += addModifier(curr[1]);
             }
 
             return prev;
