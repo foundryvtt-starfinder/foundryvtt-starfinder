@@ -47,6 +47,8 @@ import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modif
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
 import calculateNpcAbilityValue from './rules/actions/actor/calculate-npc-ability-value.js';
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
+// Character rules
+import calculateHitpoints from './rules/actions/actor/character/calculate-hitpoints.js';
 // Drone rules
 import calculateDroneChassis from './rules/actions/actor/drone/calculate-drone-chassis.js';
 import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
@@ -83,6 +85,8 @@ export default function (engine) {
     calculateSkillArmorCheckPenalty(engine);
     calculateNpcXp(engine);
     calculateNpcAbilityValue(engine);
+    // Character actions
+    calculateHitpoints(engine);
     // Starship actions
     calculateShipArmorClass(engine);
     calculateShipCritThreshold(engine);
@@ -140,7 +144,8 @@ export default function (engine) {
                     "calculateXP",
                     "calculateBaseSkills",
                     { closure: "calculateSkillArmorCheckPenalty", stackModifiers: "stackModifiers" },
-                    { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" }
+                    { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
+                    "calculateHitpoints"
                 ]
             },
             {

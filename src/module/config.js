@@ -1091,8 +1091,10 @@ SFRPG.modifierTypes = {
     "untyped": "SFRPG.ModifierTypeUntyped"
 };
 
+// See modules/modifiers/types.js, SFRPGEffectType
 SFRPG.modifierEffectTypes = {
     "ac": "SFRPG.ModifierEffectTypeAC",
+    "hit-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Hitpoints",
     "cmd": "SFRPG.ModifierEffectTypeCMD",
     "acp": "SFRPG.ModifierEffectTypeACP",
     "initiative": "SFRPG.ModifierEffectTypeInit",
