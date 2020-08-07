@@ -48,12 +48,12 @@ import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
 import calculateNpcAbilityValue from './rules/actions/actor/calculate-npc-ability-value.js';
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
 // Drone rules
-import calculateChassis from './rules/actions/drone/calculate-chassis.js';
-import calculateDroneSkills from './rules/actions/drone/calculate-drone-skills.js';
-import calculateDroneMods from './rules/actions/drone/calculate-drone-mods.js';
-import calculateDroneEquipment from './rules/actions/drone/calculate-drone-equipment.js';
-import calculateDroneDefense from './rules/actions/drone/calculate-drone-defense.js';
-import calculateDroneSaves from './rules/actions/drone/calculate-drone-saves.js';
+import calculateDroneChassis from './rules/actions/actor/drone/calculate-drone-chassis.js';
+import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
+import calculateDroneMods from './rules/actions/actor/drone/calculate-drone-mods.js';
+import calculateDroneEquipment from './rules/actions/actor/drone/calculate-drone-equipment.js';
+import calculateDroneDefense from './rules/actions/actor/drone/calculate-drone-defense.js';
+import calculateDroneSaves from './rules/actions/actor/drone/calculate-drone-saves.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -93,7 +93,7 @@ export default function (engine) {
     calculateShipSpeed(engine);
     calculateShipTargetLock(engine);
     // Drone actions
-    calculateChassis(engine);
+    calculateDroneChassis(engine);
     calculateDroneSkills(engine);
     calculateDroneMods(engine);
     calculateDroneEquipment(engine);
@@ -168,7 +168,7 @@ export default function (engine) {
                 when: { closure: "isActorType", type: "drone" },
                 then: [
                     "clearTooltips",
-                    "calculateChassis",
+                    "calculateDroneChassis",
                     "calculateDroneMods",
                     "calculateDroneEquipment",
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
