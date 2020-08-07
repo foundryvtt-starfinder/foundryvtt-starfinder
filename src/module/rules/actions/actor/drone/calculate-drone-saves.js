@@ -1,4 +1,4 @@
-import { SFRPG } from "../../../config.js";
+import { SFRPG } from "../../../../config.js";
 
 export default function (engine) {
     engine.closures.add("calculateDroneSaves", (fact, context) => {
