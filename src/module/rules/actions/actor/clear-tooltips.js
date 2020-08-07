@@ -12,6 +12,10 @@ export default function (engine) {
             data.attributes.hp.tooltip = [];
         }
 
+        if (data.attributes.sp) {
+            data.attributes.sp.tooltip = [];
+        }
+
         if (data.abilities) {
             for (let [abl, ability] of Object.entries(data.abilities)) {
                 ability.tooltip = [];

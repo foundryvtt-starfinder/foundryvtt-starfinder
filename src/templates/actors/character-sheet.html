@@ -61,7 +61,7 @@
                     </footer>
                 </li>
 
-                <li class="attribute health" data-tippy-content="<strong>{{ localize "SFRPG.Stamina" }}</strong><br>@attributes.sp.value<br>@attributes.sp.max">
+                <li class="attribute health" data-tippy-content="<strong>{{ localize "SFRPG.Stamina" }}</strong><br/>@attributes.sp.value<br/>@attributes.sp.max<br/><br/>{{#each data.attributes.sp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.Stamina" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.sp.value" type="text" value="{{data.attributes.sp.value}}"
