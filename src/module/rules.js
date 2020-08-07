@@ -50,6 +50,7 @@ import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-ski
 // Character rules
 import calculateHitpoints from './rules/actions/actor/character/calculate-hitpoints.js';
 import calculateStamina from './rules/actions/actor/character/calculate-stamina.js';
+import calculateResolve from './rules/actions/actor/character/calculate-resolve.js';
 // Drone rules
 import calculateDroneChassis from './rules/actions/actor/drone/calculate-drone-chassis.js';
 import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
@@ -89,6 +90,7 @@ export default function (engine) {
     // Character actions
     calculateHitpoints(engine);
     calculateStamina(engine);
+    calculateResolve(engine);
     // Starship actions
     calculateShipArmorClass(engine);
     calculateShipCritThreshold(engine);
@@ -148,7 +150,8 @@ export default function (engine) {
                     { closure: "calculateSkillArmorCheckPenalty", stackModifiers: "stackModifiers" },
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
                     "calculateHitpoints",
-                    "calculateStamina"
+                    "calculateStamina",
+                    "calculateResolve"
                 ]
             },
             {
