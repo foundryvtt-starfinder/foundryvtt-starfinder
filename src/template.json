@@ -700,6 +700,7 @@
             "equipment",
             "consumable",
             "goods",
+            "container",
             "class",
             "spell",
             "feat",
@@ -715,6 +716,11 @@
             "mod"
         ],
         "templates": {
+            "container": {
+                "storageCapacity": 0,
+                "contentBulkTransferred": false,
+                "acceptedItemTypes": null
+            },
             "itemDescription": {
                 "description": {
                     "value": "",
@@ -725,6 +731,7 @@
                 "type": ""
             },
             "physicalItem": {
+                "containerId": "",
                 "quantity": 1,
                 "bulk": "L",
                 "price": 0,
@@ -845,6 +852,9 @@
         },
         "goods": {
             "templates": ["itemDescription", "physicalItem", "modifiers"]
+        },
+        "container": {
+            "templates": ["itemDescription", "physicalItem", "modifiers", "container"]
         },
         "class": {
             "templates": ["itemDescription", "modifiers"],

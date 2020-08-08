@@ -45,6 +45,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             equipment: { label: "Equipment", items: [], dataset: { type: "equipment" } },
             consumable: { label: "Consumables", items: [], dataset: { type: "consumable" } },
             goods: { label: "Goods", items: [], dataset: { type: "goods" } },
+            container: { label: "Containers", items: [], dataset: { type: "container" } },
             technological: { label: "Technological", items: [], dataset: { type: "technological" } },
             fusion: { label: "Weapon Fusions", items: [], dataset: { type: "fusion" } },
             upgrade: { label: "Armor Upgrades", items: [], dataset: { type: "upgrade" } },
@@ -66,6 +67,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             else if (item.type === "race") arr[4].push(item);
             else if (item.type === "theme") arr[5].push(item);
             else if (item.type === "archetypes") arr[6].push(item);
+            else if (item.type === "container") arr[0].push(item);
             else if (Object.keys(inventory).includes(item.type)) arr[0].push(item);
             return arr;
         }, [[], [], [], [], [], [], []]);
@@ -74,6 +76,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
         let totalWeight = 0;
         let totalValue = 0;
+        let containedItems = [];
         for (let i of items) {
             i.img = i.img || DEFAULT_TOKEN;
 
@@ -91,14 +94,30 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
 
             i.totalWeight = i.data.quantity * weight;
-            //i.hasCharges = i.type === "consumable" && i.data.charges.max > 0;
-            inventory[i.type].items.push(i);
             totalWeight += i.totalWeight;
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
 
             totalValue += (i.data.price * i.data.quantity);
+
+            i.contents = [];
+            
+            if (!i.data.containerId) {
+                inventory[i.type].items.push(i);
+            } else {
+                containedItems.push(i);
+            }
         }
+        for (let i of containedItems) {
+            for (let section of Object.entries(inventory)) {
+                let item = section[1].items.find(x => x._id === i.data.containerId);
+                if (item) {
+                    item.contents = item.contents ?? [];
+                    item.contents.push(i);
+                }
+            }
+        }
+
         totalWeight = Math.floor(totalWeight);
         data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
         data.inventoryValue = Math.floor(totalValue);

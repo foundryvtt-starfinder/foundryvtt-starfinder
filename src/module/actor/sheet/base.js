@@ -556,4 +556,240 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
         new ActorSheetFlags(this.actor).render(true);
     }
+
+    getParent(itemId, context, items) {
+        if (!itemId) {
+            console.log("No itemId specified");
+            return null;
+        }
+
+        if (!context || !items) {
+            console.log(`No context or no items`);
+            return null;
+        }
+
+        for (let item of items) {
+            if (item._id === itemId) {
+                return context;
+            }
+
+            if (item.data.items) {
+                let parent = this.getParent(itemId, item, item.data.items);
+                if (parent !== null) {
+                    return parent;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    async _onDrop(event) {
+        const dragData = event.dataTransfer.getData('text/plain');
+
+        const parsedDragData = JSON.parse(dragData);
+        if (!parsedDragData) {
+            console.log("Unknown item data");
+            return;
+        }
+
+        const actor = this.actor;
+        
+        if (parsedDragData.pack) {
+            const pack = game.packs.get(parsedDragData.pack);
+            return await this.stashOrUnstash(event, actor, async () => {
+                const itemData = await pack.getEntry(parsedDragData.id);
+                const item = await actor.createOwnedItem(itemData);
+                return actor.getOwnedItem(item._id);
+            });
+        } else if (parsedDragData.data) {
+            return await this.moveItemBetweenActors(event, parsedDragData.actorId, actor._id, parsedDragData.data._id);
+        } else {
+            let item = game.items.get(parsedDragData.id);
+            if (!item) {
+                console.log("Unknown item source: " + JSON.stringify(parsedDragData));
+                return;
+            }
+
+            return this.stashOrUnstash(event, actor, () => {
+                return actor.createEmbeddedEntity("OwnedItem", duplicate(item.data));
+            });
+        }
+    }
+
+    async removeItemFromActor(sourceActor, item, quantity) {
+        const sourceItemQuantity = Math.min(item.data.data.quantity, quantity);
+        const newItemQuantity = sourceItemQuantity - quantity;
+        console.log(`Removing ${quantity}, clamped ${sourceItemQuantity}, final: ${newItemQuantity}`);
+
+        if (newItemQuantity < 1) {
+          await sourceActor.deleteEmbeddedEntity('OwnedItem', item._id);
+        } else {
+          const update = { '_id': item._id, 'data.quantity': newItemQuantity };
+          await sourceActor.updateEmbeddedEntity('OwnedItem', update);
+        }
+    }
+
+    async addItemToActor(targetActor, item, quantity) {
+        let itemInTargetActor = targetActor.items.find(i => i.name === item.name);
+        if (itemInTargetActor !== null)
+        {
+            const targetItemNewQuantity = Number(itemInTargetActor.data.data.quantity) + quantity;
+            const update = { '_id': itemInTargetActor._id, 'data.quantity': targetItemNewQuantity};
+            await targetActor.updateEmbeddedEntity('OwnedItem', update);
+        }
+        else
+        {
+          let newItemData = duplicate(item);
+          newItemData.data.quantity = quantity;
+  
+          const result = await targetActor.createOwnedItem(newItemData);
+          itemInTargetActor = targetActor.items.get(result._id);
+        }
+  
+        return this.stashOrUnstash(event, targetActor, () => { return itemInTargetActor; });
+    }
+
+    async moveItemBetweenActors(event, sourceActorId, targetActorId, itemId) {
+        const sourceActor = game.actors.get(sourceActorId);
+        const targetActor = game.actors.get(targetActorId);
+        const item = sourceActor.getOwnedItem(itemId);
+
+        let isSameActor = sourceActorId === targetActorId;
+
+        if (isSameActor) {
+            //const oldContainerId = item.data.containerId;
+            await this.stashOrUnstash(event, targetActor, () => { return item; });
+            //if (oldContainerId === item.data.containerId) {
+                // Nothing happened, allow for re-ordering:
+                //return await super._onDrop(event);
+            //}
+            return this._onSortItem(event, item.data);
+        } else {
+            const sourceItemQuantity = item.data.data.quantity;
+
+            // If more than one item can be moved, show a popup to ask how many to move
+            /*if (sourceItemQuantity > 1)
+            {
+                const popup = new MoveLootPopup(sourceActor, {}, (quantity) => {
+                    console.log(`Accepted moving ${quantity} items`);
+                    await this.removeItemFromActor(sourceActor, item, quantity);
+                    await this.addItemToActor(targetActor, item, quantity);
+                });
+
+                popup.render(true);
+            }
+            else
+            {*/
+                await this.removeItemFromActor(sourceActor, item, sourceItemQuantity);
+                await this.addItemToActor(targetActor, item, sourceItemQuantity);
+            //}
+        }
+    }
+
+    acceptsItem(containerItem, itemToAdd, quantity) {
+        if (!containerItem || !itemToAdd) {
+            //console.log("Rejected because container or item is null");
+            return false;
+        }
+
+        if (!["weapon", "equipment", "goods", "consumable", "container"].includes(itemToAdd.type)) {
+            //console.log("Rejected because item is not an item: " + itemToAdd.type);
+            return false;
+        }
+
+        const storageCapacity = containerItem.data.data.storageCapacity;
+        if (!storageCapacity || storageCapacity === 0) {
+            //console.log("Rejected because target storageCapacity is 0");
+            return false;
+        }
+
+        const acceptedItemTypes = containerItem.data.data.acceptedItemTypes;
+        if (acceptedItemTypes && !acceptedItemTypes.includes(itemToAdd.type)) {
+            //console.log("Rejected because item is not accepted by container mask");
+            return false;
+        }
+
+        /*let totalBulk = 0;
+        let containedItems = this.actor.items.filter(x => x.data.containerId === containerItem._id);
+        for (let childItem of containedItems) {
+            let bulk = 0;
+            if (childItem.data.bulk === "L") {
+                bulk = 0.1;
+            } else if (!Number.isNaN(childItem.data.bulk)) {
+                bulk = childItem.data.bulk;
+            }
+            totalBulk += bulk * childItem.data.quantity;
+        }
+
+        let itemBulk = 0;
+        if (itemToAdd.data.bulk === "L") {
+            itemBulk = 0.1;
+        } else if (!Number.isNaN(itemToAdd.data.bulk)) {
+            itemBulk = itemToAdd.data.bulk;
+        }
+
+        if (totalBulk + itemBulk * quantity > containerItem.data.storageCapacity) {
+            return false;
+        }*/
+
+        if (this.isCycle(itemToAdd._id, containerItem._id, this.actor.items)) {
+            console.log("Rejected because adding this item would create a cycle");
+            return false;
+        }
+
+        return true;
+    }
+
+    getTargetItemFromEvent(event) {
+        const targetId = $(event.target).parents('.item').attr('data-item-id')
+        const targetItem = this.actor.items.find(x => x._id === targetId);
+        return targetItem;
+    }
+  
+    async stashOrUnstash(event, actor, getItem) {
+        const targetItem = this.getTargetItemFromEvent(event);
+
+        const item = await getItem();
+        if (targetItem && this.acceptsItem(targetItem, item)) {
+            const targetItemId = targetItem._id;
+            const result = await item.update({
+                'data.containerId': targetItemId,
+                'data.equipped.value': false,
+            });
+            
+            return result;
+        }
+
+        const oldContainerId = item.data.data.containerId;
+        const result = await item.update({'data.containerId': ''});
+
+        if (oldContainerId) {
+            const oldParent = this.actor.items.find(x => x._id === oldContainerId);
+            await oldParent.update({});
+        }
+
+        return result;
+    }
+
+    /** Checks if assigning the containerId to the item would create a cycle */
+    isCycle(itemId, containerId, items = []) {
+        const idIndexedItems = new Map();
+        for (const item of items) {
+            idIndexedItems.set(item._id, item);
+        }
+        return this.detectCycle(itemId, containerId, idIndexedItems);
+    }
+
+    detectCycle(itemId, containerId, idIndexedItems) {
+        if (idIndexedItems.has(containerId)) {
+            const currentItem = idIndexedItems.get(containerId);
+            if (itemId === currentItem._id) {
+                return true;
+            }
+            return this.detectCycle(itemId, currentItem.data.containerId, idIndexedItems);
+    
+        }
+        return false;
+    }
 }
