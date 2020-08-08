@@ -654,12 +654,17 @@ export class ItemSFRPG extends Item {
 
         if (this.data.type === "weapon") {
             acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
         }
 
         let modifiers = this.actor.getAllModifiers();
         modifiers = modifiers.filter(mod => {
             if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
                 if (mod.valueAffected !== this.data.data.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
+                if (!this.data.data.properties[mod.valueAffected]) {
                     return false;
                 }
             }

@@ -69,6 +69,10 @@
             {{#each config.weaponTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
+            {{else if (eq modifier.effectType "weapon-property-damage")}}
+            {{#each config.weaponProperties as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
             {{else}}
             <option value=""></option>
             {{/if}}

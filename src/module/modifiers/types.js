@@ -23,6 +23,7 @@ export const SFRPGEffectType = Object.freeze({
     SPELL_DAMAGE: "spell-damage",
     WEAPON_DAMAGE: "weapon-damage",
     ALL_DAMAGE: "all-damage",
+    WEAPON_PROPERTY_DAMAGE: "weapon-property-damage",
     BASE_ATTACK_BONUS: "base-attack-bonus",
     AC: "ac",
     CMD: "cmd",
