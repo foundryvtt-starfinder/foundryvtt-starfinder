@@ -115,6 +115,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                     }
                     break;
                 case SFRPGEffectType.WEAPON_ATTACKS:
+                case SFRPGEffectType.WEAPON_DAMAGE:
                     target.prop('disabled', false);
                     target.find('option').remove();
                     for (const weapons of Object.entries(CONFIG.SFRPG.weaponTypes)) {
@@ -157,6 +158,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                 valueAffectedElement.prop('disabled', false);
                 break;
             case SFRPGEffectType.WEAPON_ATTACKS:
+            case SFRPGEffectType.WEAPON_DAMAGE:
                 valueAffectedElement.prop('disabled', false);
                 break;
             default:

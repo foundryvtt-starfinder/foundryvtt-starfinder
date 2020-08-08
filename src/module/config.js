@@ -1111,7 +1111,12 @@ SFRPG.modifierEffectTypes = {
     "melee-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackRolls",
     "spell-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackRolls",
     "weapon-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackRolls",
-    "all-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackRolls"
+    "all-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackRolls",
+    "ranged-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackDamage",
+    "melee-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackDamage",
+    "spell-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackDamage",
+    "weapon-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackDamage",
+    "all-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackDamage"
 };
 
 SFRPG.modifierType = {

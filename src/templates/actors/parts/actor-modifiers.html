@@ -81,6 +81,8 @@
                         {{/if}}
                     {{else if (eq modifier.effectType "weapon-attacks")}}
                         {{lookup ../../config.weaponTypes modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "weapon-damage")}}
+                        {{lookup ../../config.weaponTypes modifier.valueAffected}}
                     {{else}}
                     {{!-- Nothing --}}
                     {{/if}}

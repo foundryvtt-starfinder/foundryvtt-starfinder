@@ -489,7 +489,7 @@ export class ItemSFRPG extends Item {
         let stackModifiers = new StackModifiers();
         modifiers = stackModifiers.process(modifiers, null);
 
-        const addModifier = (bonus, data, parts) => {
+        const addModifier = (bonus, parts) => {
             let computedBonus = bonus.modifier;
             parts.push(computedBonus);
             return computedBonus;
@@ -500,10 +500,10 @@ export class ItemSFRPG extends Item {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
-                    addModifier(bonus, this.actor.data, parts);
+                    addModifier(bonus, parts);
                 }
             } else {
-                addModifier(mod[1], this.actor.data, parts);
+                addModifier(mod[1], parts);
             }
 
             return 0;
@@ -634,7 +634,7 @@ export class ItemSFRPG extends Item {
         else if (!abl) abl = "str";
 
         // Define Roll parts
-        const parts = itemData.damage.parts.map(d => d[0]);
+        let parts = itemData.damage.parts.map(d => d[0]);
         //if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
 
         // Cantrips in Starfinder don't scale :(
@@ -642,6 +642,53 @@ export class ItemSFRPG extends Item {
         //   const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
         //   this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
         // }
+        
+        let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
+        if (["msak", "rsak"].includes(this.data.data.actionType)) {
+            acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
+        } else if (this.data.data.actionType === "rwak") {
+            acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
+        } else if (this.data.data.actionType === "mwak") {
+            acceptedModifiers.push(SFRPGEffectType.MELEE_DAMAGE);
+        }
+
+        if (this.data.type === "weapon") {
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
+        }
+
+        let modifiers = this.actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
+                if (mod.valueAffected !== this.data.data.weaponType) {
+                    return false;
+                }
+            }
+            return mod.enabled && acceptedModifiers.includes(mod.effectType);
+        });
+
+        let stackModifiers = new StackModifiers();
+        modifiers = stackModifiers.process(modifiers, null);
+
+        const addModifier = (bonus, parts) => {
+            console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
+            let computedBonus = bonus.modifier;
+            parts.push(computedBonus);
+            return computedBonus;
+        };
+
+        Object.entries(modifiers).reduce((sum, mod) => {
+            if (mod[1] === null || mod[1].length < 1) return 0;
+
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
+                for (const bonus of mod[1]) {
+                    addModifier(bonus, parts);
+                }
+            } else {
+                addModifier(mod[1], parts);
+            }
+
+            return 0;
+        }, 0);
 
         // Define Roll Data
         const rollData = mergeObject(duplicate(actorData), {
