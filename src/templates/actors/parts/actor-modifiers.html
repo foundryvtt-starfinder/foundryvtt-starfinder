@@ -78,7 +78,9 @@
                             {{localize "SFRPG.ModifierSaveLowest"}}
                         {{else}}
                             {{lookup ../../config.saves modifier.valueAffected}}
-                        {{/if}}                        
+                        {{/if}}
+                    {{else if (eq modifier.effectType "weapon-attacks")}}
+                        {{lookup ../../config.weaponTypes modifier.valueAffected}}
                     {{else}}
                     {{!-- Nothing --}}
                     {{/if}}

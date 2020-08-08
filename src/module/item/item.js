@@ -2,6 +2,7 @@ import { DiceSFRPG } from "../dice.js";
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
+import StackModifiers from "../rules/closures/stack-modifiers.js";
 
 export class ItemSFRPG extends Item {
 
@@ -461,6 +462,52 @@ export class ItemSFRPG extends Item {
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.data.type)) parts.push("@attributes.bab");
         if ((this.data.type === "weapon") && !itemData.data.proficient) parts.push("-4");
+
+        let acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
+        if (["msak", "rsak"].includes(this.data.data.actionType)) {
+            acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
+        } else if (this.data.data.actionType === "rwak") {
+            acceptedModifiers.push(SFRPGEffectType.RANGED_ATTACKS);
+        } else if (this.data.data.actionType === "mwak") {
+            acceptedModifiers.push(SFRPGEffectType.MELEE_ATTACKS);
+        }
+
+        if (this.data.type === "weapon") {
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
+        }
+
+        let modifiers = this.actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
+                if (mod.valueAffected !== this.data.data.weaponType) {
+                    return false;
+                }
+            }
+            return mod.enabled && acceptedModifiers.includes(mod.effectType);
+        });
+
+        let stackModifiers = new StackModifiers();
+        modifiers = stackModifiers.process(modifiers, null);
+
+        const addModifier = (bonus, data, parts) => {
+            let computedBonus = bonus.modifier;
+            parts.push(computedBonus);
+            return computedBonus;
+        };
+
+        Object.entries(modifiers).reduce((sum, mod) => {
+            if (mod[1] === null || mod[1].length < 1) return 0;
+
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
+                for (const bonus of mod[1]) {
+                    addModifier(bonus, this.actor.data, parts);
+                }
+            } else {
+                addModifier(mod[1], this.actor.data, parts);
+            }
+
+            return 0;
+        }, 0);
 
         // Define Critical threshold
         let crit = 20;
