@@ -32,8 +32,6 @@ export default function (engine) {
             const modFromTheme = themeMod[skl] ?? 0;
             skill.mod = abilityMod + skill.ranks + (hasRanks ? classSkill : 0) + skill.misc + modFromTheme;
 
-            skill.tooltip = [];
-            
             skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipAbilityMod", {abilityMod: abilityMod.signedString(), abilityAbbr: skill.ability.capitalize()}));
             if (hasRanks) {
                 skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipSkillRanks", {ranks: skill.ranks.signedString()}));

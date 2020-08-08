@@ -180,6 +180,7 @@ SFRPG.distanceUnits = {
     "plane": "SFRPG.Plane",
     "unlimited": "SFRPG.Unlimited",
     "ft": "SFRPG.Ft",
+    "meter": "SFRPG.Meter",
     "mi": "SFRPG.Mi",
     "spec": "SFRPG.Special",
     "any": "SFRPG.DistAny"
@@ -1090,8 +1091,13 @@ SFRPG.modifierTypes = {
     "untyped": "SFRPG.ModifierTypeUntyped"
 };
 
+// See modules/modifiers/types.js, SFRPGEffectType
 SFRPG.modifierEffectTypes = {
     "ac": "SFRPG.ModifierEffectTypeAC",
+    "hit-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Hitpoints",
+    "stamina-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Stamina",
+    "resolve-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Resolve",
+    "base-attack-bonus": "SFRPG.ActorSheet.Modifiers.EffectTypes.BaseAttackBonus",
     "cmd": "SFRPG.ModifierEffectTypeCMD",
     "acp": "SFRPG.ModifierEffectTypeACP",
     "initiative": "SFRPG.ModifierEffectTypeInit",
@@ -1100,7 +1106,18 @@ SFRPG.modifierEffectTypes = {
     "skill": "SFRPG.ModifierEffectTypeSkill",
     "all-skills": "SFRPG.ModifierEffectTypeAllSkills",
     "saves": "SFRPG.ModifierEffectTypeSaves",
-    "save": "SFRPG.ModifierEffectTypeSave"
+    "save": "SFRPG.ModifierEffectTypeSave",
+    "ranged-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackRolls",
+    "melee-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackRolls",
+    "spell-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackRolls",
+    "weapon-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackRolls",
+    "all-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackRolls",
+    "ranged-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackDamage",
+    "melee-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackDamage",
+    "spell-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackDamage",
+    "weapon-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackDamage",
+    "all-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackDamage",
+    "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage"
 };
 
 SFRPG.modifierType = {
@@ -1504,3 +1521,11 @@ SFRPG.droneBadSaveBonusPerLevel = [0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 
 SFRPG.droneFeatsPerLevel = [1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8, 8];
 SFRPG.droneModsPerLevel = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];
 SFRPG.droneAbilityScoreIncreaseLevels = [4, 7, 10, 13, 16, 19];
+
+SFRPG.capacityUsagePer = {
+    "shot": "SFRPG.Capacity.UsagePer.Shot",
+    "round": "SFRPG.Capacity.UsagePer.Round",
+    "minute": "SFRPG.Capacity.UsagePer.Minute",
+    "hour": "SFRPG.Capacity.UsagePer.Hour",
+    "day": "SFRPG.Capacity.UsagePer.Day"
+};

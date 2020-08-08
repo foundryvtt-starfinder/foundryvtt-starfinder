@@ -7,8 +7,8 @@ export default function (engine) {
         const baseTooltip = game.i18n.format("SFRPG.ACTooltipBase", { base: "10" });
         const notProfTooltip = game.i18n.format("SFRPG.ACTooltipNotProficientMod", { profMod: "-4" });
 
-        eac.tooltip = [baseTooltip];
-        kac.tooltip = [baseTooltip];
+        eac.tooltip.push(baseTooltip);
+        kac.tooltip.push(baseTooltip);
 
         if (armor) {
             const maxDex = Math.min(data.abilities.dex.mod, armor.data.armor.dex || Number.MAX_SAFE_INTEGER);

@@ -44,7 +44,7 @@
 
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
-                <li class="attribute health" data-tippy-content="<strong>{{ localize "SFRPG.Health" }}</strong><br>@attributes.hp.value<br>@attributes.hp.max">
+                <li class="attribute health" data-tippy-content="<strong>{{ localize "SFRPG.Health" }}</strong><br/>@attributes.hp.value<br/>@attributes.hp.max<br/><br/>{{#each data.attributes.hp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.Health" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
@@ -61,7 +61,7 @@
                     </footer>
                 </li>
 
-                <li class="attribute health" data-tippy-content="<strong>{{ localize "SFRPG.Stamina" }}</strong><br>@attributes.sp.value<br>@attributes.sp.max">
+                <li class="attribute health" data-tippy-content="<strong>{{ localize "SFRPG.Stamina" }}</strong><br/>@attributes.sp.value<br/>@attributes.sp.max<br/><br/>{{#each data.attributes.sp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.Stamina" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.sp.value" type="text" value="{{data.attributes.sp.value}}"
@@ -283,7 +283,7 @@
                             <span>{{numberFormat data.attributes.bab decimal=0 sign=true}}</span>
                         </div>
                     </li>
-                    <li class="attribute resolve" data-tippy-content="<strong>{{localize "SFRPG.Resolve"}}</strong><br>@attributes.rp.value<br>@attributes.rp.max">
+                    <li class="attribute resolve" data-tippy-content="<strong>{{localize "SFRPG.Resolve"}}</strong><br/>@attributes.rp.value<br/>@attributes.rp.max<br/><br/>{{#each data.attributes.rp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.Resolve" }}</h4>
                         <div class="attribute-value multiple">
                             <input name="data.attributes.rp.value" type="text" value="{{data.attributes.rp.value}}"

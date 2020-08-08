@@ -60,4 +60,13 @@ export const registerSystemSettings = function () {
         default: true,
         type: Boolean
     });
+
+    game.settings.register("sfrpg", "useStarfinderAOETemplates", {
+        name: "SFRPG.SettingsUseStarfinderAOETemplates",
+        hint: "SFRPG.SettingsUseStarfinderAOETemplatesHint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
 };

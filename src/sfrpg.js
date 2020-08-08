@@ -27,6 +27,7 @@ import SFRPGModifier from "./module/modifiers/modifier.js";
 import { generateUUID } from "./module/utilities.js";
 import migrateWorld from './module/migration.js';
 import CounterManagement from "./module/classes/counter-management.js";
+import templateOverrides from "./module/template-overrides.js";
 
 Hooks.once('init', async function () {
     console.log(`SFRPG | Initializing the Starfinder System`);
@@ -83,6 +84,7 @@ Hooks.once('init', async function () {
     await preloadHandlebarsTemplates();
 
     Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
+    templateOverrides();
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("sfrpg", ActorSheetSFRPGCharacter, { types: ["character"], makeDefault: true });
@@ -111,7 +113,7 @@ Hooks.once("setup", function () {
         "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
         "weaponProperties", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
         "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
-        "modifierArmorClassAffectedValues"
+        "modifierArmorClassAffectedValues", "capacityUsagePer"
     ];
 
     for (let o of toLocalize) {
@@ -127,6 +129,22 @@ Hooks.once("setup", function () {
 
     Handlebars.registerHelper("not", function (value) {
         return !Boolean(value);
+    });
+
+    Handlebars.registerHelper('greaterThan', function (v1, v2, options) {
+        'use strict';
+        if (v1 > v2) {
+            return options.fn(this);
+        }
+        return options.inverse(this);
+    });
+
+    Handlebars.registerHelper('ellipsis', function (displayedValue, limit) {
+        let str = displayedValue.toString();
+        if (str.length <= limit) {
+            return str;
+        }
+        return str.substring(0, limit) + '…';
     });
 });
 

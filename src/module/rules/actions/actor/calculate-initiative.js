@@ -6,9 +6,7 @@ export default function (engine) {
         init.mod = data.abilities.dex.mod;
         init.total = init.mod;
 
-        init.tooltip = [
-            game.i18n.format("SFRPG.InitiativeDexModTooltip", { mod: data.abilities.dex.mod.signedString() })
-        ];
+        init.tooltip.push(game.i18n.format("SFRPG.InitiativeDexModTooltip", { mod: data.abilities.dex.mod.signedString() }));
 
         return fact;
     });

@@ -1,5 +1,3 @@
-import { SFRPG } from "../../../config.js";
-
 export default function (engine) {
     engine.closures.add("calculateDroneMods", (fact, context) => {
         const data = fact.data;

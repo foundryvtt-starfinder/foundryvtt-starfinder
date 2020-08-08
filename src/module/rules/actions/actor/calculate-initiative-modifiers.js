@@ -7,25 +7,26 @@ export default function (engine) {
         const init = data.attributes.init;
         const modifiers = fact.modifiers;
 
-        init.tooltip = init.tooltip ?? [];
+        const addModifier = (bonus, data, tooltip) => {
+            let computedBonus = bonus.modifier;
+            if (bonus.modifierType == "formula") {
+                let r = new Roll(bonus.modifier, data).roll();
+                computedBonus = r.total;
+            }
 
-        const addModifer = (bonus) => {
-            let mod = bonus.modifier;
-            if (mod !== 0) {
-                init.tooltip.push(game.i18n.format("SFRPG.InitiativeModiferTooltip", {
+            if (computedBonus !== 0) {
+                tooltip.push(game.i18n.format("SFRPG.InitiativeModiferTooltip", {
                     type: bonus.type.capitalize(),
                     source: bonus.name,
-                    mod: mod.signedString()
+                    mod: computedBonus.signedString()
                 }));
             }
 
-            return mod;
+            return computedBonus;
         };
 
         const filteredMods = modifiers.filter(mod => {
-            return mod.enabled && 
-                [SFRPGEffectType.INITIATIVE].includes(mod.effectType) &&
-                mod.modifierType === SFRPGModifierType.CONSTANT;
+            return mod.enabled && [SFRPGEffectType.INITIATIVE].includes(mod.effectType);
         });
 
         const mods = context.parameters.stackModifiers.process(filteredMods, context);
@@ -35,10 +36,10 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
-                    prev += addModifer(bonus);
+                    prev += addModifier(bonus, data, init.tooltip);
                 }
             } else {
-                prev += addModifer(curr[1]);
+                prev += addModifier(curr[1], data, init.tooltip);
             }
 
             return prev;

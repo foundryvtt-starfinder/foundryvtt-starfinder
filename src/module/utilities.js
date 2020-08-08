@@ -3,3 +3,11 @@ export function generateUUID() {
         c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
 }
+
+export function degtorad(degrees) {
+    return degrees * Math.PI / 180;
+}
+
+export function radtodeg(radians) {
+    return radians / 180 * Math.PI;
+}

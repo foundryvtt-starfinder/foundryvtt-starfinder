@@ -11,25 +11,31 @@ export default function (engine) {
         const highest = Object.values({fort, reflex, will}).sort((a, b) => b.bonus - a.bonus).shift();
         const lowest = Object.values({fort, reflex, will}).sort((a, b) => a.bonus - b.bonus).shift();
 
-        const addModifier = (bonus, save) => {
+        const addModifier = (bonus, data, save) => {
+            let computedBonus = bonus.modifier;
+            if (bonus.modifierType == "formula") {
+                let r = new Roll(bonus.modifier, data).roll();
+                computedBonus = r.total;
+            }
+
             let saveMod = 0;
             
             switch (bonus.valueAffected) {
                 case "highest":
-                    if (save.bonus === highest.bonus) saveMod += bonus.modifier;
+                    if (save.bonus === highest.bonus) saveMod = computedBonus;
                     break;
                 case "lowest":
-                    if (save.bonus === lowest.bonus) saveMod += bonus.modifier;
+                    if (save.bonus === lowest.bonus) saveMod = computedBonus;
                     break;
                 default:
-                    saveMod += bonus.modifier;
+                    saveMod = computedBonus;
                     break;
             }
 
             if (saveMod !== 0) {
                 save.tooltip.push(game.i18n.format("SFRPG.SaveModifiersTooltip", {
                     type: bonus.type.capitalize(),
-                    mod: bonus.modifier.signedString(),
+                    mod: saveMod.signedString(),
                     source: bonus.name
                 }));
             }
@@ -38,9 +44,7 @@ export default function (engine) {
         };
 
         const filteredMods = modifiers.filter(mod => {
-            return mod.enabled && 
-                [SFRPGEffectType.SAVE, SFRPGEffectType.SAVES].includes(mod.effectType) &&
-                mod.modifierType === SFRPGModifierType.CONSTANT;
+            return mod.enabled && [SFRPGEffectType.SAVE, SFRPGEffectType.SAVES].includes(mod.effectType);
         });        
 
         const fortMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [
@@ -64,10 +68,10 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, fort);
+                    sum += addModifier(bonus, data, fort);
                 }
             } else {
-                sum += addModifier(mod[1], fort);
+                sum += addModifier(mod[1], data, fort);
             }
 
             return sum;
@@ -78,10 +82,10 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, reflex);
+                    sum += addModifier(bonus, data, reflex);
                 }
             } else {
-                sum += addModifier(mod[1], reflex);
+                sum += addModifier(mod[1], data, reflex);
             }
 
             return sum;
@@ -92,10 +96,10 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, will);
+                    sum += addModifier(bonus, data, will);
                 }
             } else {
-                sum += addModifier(mod[1], will);
+                sum += addModifier(mod[1], data, will);
             }
 
             return sum;

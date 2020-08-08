@@ -3,8 +3,6 @@ export default function (engine) {
         const data = fact.data;
         const classes = fact.classes;
 
-        data.details.level.tooltip = [];
-
         let level = 0;
 
         for (const cls of classes) {
