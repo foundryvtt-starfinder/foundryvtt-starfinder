@@ -138,6 +138,14 @@ Hooks.once("setup", function () {
         }
         return options.inverse(this);
     });
+
+    Handlebars.registerHelper('ellipsis', function (displayedValue, limit) {
+        let str = displayedValue.toString();
+        if (str.length <= limit) {
+            return str;
+        }
+        return str.substring(0, limit) + '…';
+    });
 });
 
 Hooks.once("ready", () => {

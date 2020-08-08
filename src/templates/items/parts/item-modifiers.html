@@ -28,9 +28,9 @@
 
                 <div class="item-detail modifier-mod">
                     {{#if (eq modifier.modifierType "constant")}}
-                    {{numberFormat modifier.modifier decimals=0 sign=true}}
+                    {{ellipsis (numberFormat modifier.modifier decimals=0 sign=true) 10}}
                     {{else}}
-                    {{~modifier.modifier~}}
+                    {{ellipsis modifier.modifier 12}}
                     {{/if}}
                 </div>
                 <div class="item-detail modifier-type">

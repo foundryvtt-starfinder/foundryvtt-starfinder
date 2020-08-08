@@ -47,13 +47,9 @@
 
                     <div class="item-detail modifier-mod">
                         {{#if (eq modifier.modifierType "constant")}}
-                        {{numberFormat modifier.modifier decimals=0 sign=true}}
+                        {{ellipsis (numberFormat modifier.modifier decimals=0 sign=true) 10}}
                         {{else}}
-                        {{#greaterThan modifier.modifier.length 12}}
-                        {{localize "SFRPG.ActorSheet.Modifiers.UI.LongFormula"}}
-                        {{else}}
-                        {{~modifier.modifier~}}
-                        {{/greaterThan}}
+                        {{ellipsis modifier.modifier 12}}
                         {{/if}}
                     </div>
                     <div class="item-detail modifier-type">
