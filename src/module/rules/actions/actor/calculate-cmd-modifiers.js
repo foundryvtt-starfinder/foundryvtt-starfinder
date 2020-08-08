@@ -34,11 +34,11 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
-                    prev += addModifier(bonus, data, cmd.tooltip);
+                    prev += addModifier(bonus, fact.data, cmd.tooltip);
                 }
             }
             else {
-                prev += addModifier(curr[1], data, cmd.tooltip);
+                prev += addModifier(curr[1], fact.data, cmd.tooltip);
             }
 
             return prev;

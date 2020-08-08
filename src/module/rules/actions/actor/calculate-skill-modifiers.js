@@ -70,10 +70,10 @@ export default function (engine) {
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                     for (const bonus of mod[1]) {
-                        sum += addModifier(bonus, data, skill);
+                        sum += addModifier(bonus, fact.data, skill);
                     }
                 } else {
-                    sum += addModifier(mod[1], data, skill);
+                    sum += addModifier(mod[1], fact.data, skill);
                 }
 
                 return sum;
