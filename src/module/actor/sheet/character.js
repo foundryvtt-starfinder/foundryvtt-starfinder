@@ -74,8 +74,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         
         const spellbook = this._prepareSpellbook(data, spells);
 
-        let totalWeight = 0;
         let totalValue = 0;
+        let preprocessedItems = [];
         let containedItems = [];
         for (let i of items) {
             i.img = i.img || DEFAULT_TOKEN;
@@ -94,31 +94,66 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
 
             i.totalWeight = i.data.quantity * weight;
-            totalWeight += i.totalWeight;
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
 
             totalValue += (i.data.price * i.data.quantity);
 
-            i.contents = [];
+            let itemData = {item: i, contents: []};
+            preprocessedItems.push(itemData);
             
             if (!i.data.containerId) {
-                inventory[i.type].items.push(i);
+                inventory[i.type].items.push(itemData);
             } else {
-                containedItems.push(i);
-            }
-        }
-        for (let i of containedItems) {
-            for (let section of Object.entries(inventory)) {
-                let item = section[1].items.find(x => x._id === i.data.containerId);
-                if (item) {
-                    item.contents = item.contents ?? [];
-                    item.contents.push(i);
-                }
+                containedItems.push(itemData);
             }
         }
 
-        totalWeight = Math.floor(totalWeight);
+        function findById(data, id) {
+            let arrayToSearch = data;
+            for (let i = 0; i<arrayToSearch.length; i++) {
+                let element = arrayToSearch[i];
+                if (element.item._id === id) {
+                    return element;
+                } else if (element.contents && element.contents.length > 0) {
+                    arrayToSearch = arrayToSearch.concat(element.contents);
+                }
+            }
+            return null;
+        }
+
+        for (let item of containedItems) {
+            let parent = null;
+            const containerId = item.item.data.containerId;
+            for (let section of Object.entries(inventory)) {
+                parent = findById(section[1].items, containerId);
+                if (parent) {
+                    parent.contents.push(item);
+                    break;
+                }
+            }
+
+            if (!parent) {
+                parent = containedItems.find(x => x.item._id === containerId);
+                if (parent) {
+                    parent.contents.push(item);
+                    continue;
+                }
+            }
+
+            if (!parent) {
+                console.log(`Could not find parent ${item.item.data.containerId} for ${item.item.name}`);
+            }
+        }
+
+        let totalWeight = 0;
+        for (let section of Object.entries(inventory)) {
+            for (let i of section[1].items) {
+                let itemBulk = this._computeCompoundBulkForItem(i.item, i.contents);
+                totalWeight += itemBulk;
+            }
+        }
+        totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
         data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
         data.inventoryValue = Math.floor(totalValue);
 
@@ -183,7 +218,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
      * Compute the level and percentage of encumbrance for an Actor.
      * 
      * @param {Number} totalWeight The cumulative item weight from inventory items
-     * @param {Ojbect} actorData The data object for the Actor being rendered
+     * @param {Object} actorData The data object for the Actor being rendered
      * @returns {Object} An object describing the character's encumbrance level
      * @private
      */
@@ -196,6 +231,51 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         enc.pct = Math.min(enc.value * 100 / enc.max, 99);
         enc.encumbered = enc.pct > 50;
         return enc;
+    }
+
+    /**
+     * Returns the bulk of the item, along with its contents.
+     * To prevent rounding errors, all calculations are done in integer space by multiplying bulk by 10.
+     * A bulk of L is considered as 1, while a bulk of 1 would be 10. Any other non-number bulk is considered 0 bulk.
+     * 
+     * Item container properties such as equipped bulk and content bulk multipliers are taken into account here.
+     * 
+     * @param {Object} item The item whose bulk is to be calculated.
+     * @param {Array} contents An array of items who are considered children of the item.
+     * @returns {Number} A multiplied-by-10 value of the total bulk.
+     */
+    _computeCompoundBulkForItem(item, contents) {
+        let contentBulk = 0;
+        if (contents && contents.length > 0) {
+            for (let child of contents) {
+                let childBulk = this._computeCompoundBulkForItem(child.item, child.contents);
+                contentBulk += childBulk;
+            }
+
+            if (item.data.contentBulkMultiplier !== undefined) {
+                contentBulk *= item.data.contentBulkMultiplier;
+            }
+        }
+
+        let personalBulk = 0;
+        if (item.data.bulk.toUpperCase() === "L") {
+            personalBulk = 1;
+        } else if (!Number.isNaN(item.data.bulk)) {
+            personalBulk = item.data.bulk * 10;
+        }
+
+        if (item.data.quantity && !Number.isNaN(item.data.quantity)) {
+            personalBulk *= item.data.quantity;
+        }
+
+        if (item.data.equipped) {
+            if (item.data.equippedBulkMultiplier !== undefined) {
+                personalBulk *= item.data.equippedBulkMultiplier;
+            }
+        }
+
+        //console.log(`${item.name} has a content bulk of ${contentBulk}, and personal bulk of ${personalBulk}`);
+        return personalBulk + contentBulk;
     }
 
     /**

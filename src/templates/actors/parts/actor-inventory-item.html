@@ -5,7 +5,7 @@
                     {{~#if item.isStack}}({{item.data.quantity}}) {{/if}}
                     {{item.name~}}
                 </h4>
-                {{#if item.hasAttack}}
+                {{#if (and item.hasAttack item.data.equipped)}}
                 <div class="item-action flexcol">
                     <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
                     <button class="tag damage">{{localize "SFRPG.Damage"}}</button>
@@ -52,10 +52,10 @@
             {{/if}}
         </li>
 
-        {{#if item.contents}}
-        <ol class="item-list">
-        {{#each item.contents as |item iid|}}
-            {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" item=item isCharacter=../../isCharacter}}
+        {{#if children}}
+        <ol class="item-list-child">
+        {{#each children as |childItem iid|}}
+            {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../this item=childItem.item children=childItem.contents}}
         {{/each}}
         </ol>
         {{/if}}

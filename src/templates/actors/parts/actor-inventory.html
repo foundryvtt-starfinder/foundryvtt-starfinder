@@ -39,7 +39,7 @@
 
     <ol class="item-list">
     {{#each section.items as |item iid|}}
-        {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" item=item isCharacter=../../isCharacter owner=../../owner}}
+        {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../../this item=item.item children=item.contents}}
     {{/each}}
     </ol>
 {{/each}}
