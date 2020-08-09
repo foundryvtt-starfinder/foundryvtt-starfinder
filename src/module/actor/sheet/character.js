@@ -144,10 +144,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                     continue;
                 }
             }
-
-            if (!parent) {
-                console.log(`Could not find parent ${item.item.data.containerId} for ${item.item.name}`);
-            }
         }
 
         let totalWeight = 0;

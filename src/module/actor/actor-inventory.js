@@ -81,6 +81,16 @@ export async function addItemToActorAsync(targetActor, item, quantity) {
     }
 }
 
+export function getChildItems(containerId, actor) {
+    let childItems = [];
+    for (let item of actor.items) {
+        if (item.data.data.containerId === containerId) {
+            childItems.push(item);
+        }
+    }
+    return childItems;
+}
+
 /**
  * Moves an item from one actor to another, adjusting its container settings appropriately.
  * 
@@ -111,7 +121,29 @@ export async function moveItemBetweenActorsAsync(event, sourceActorId, targetAct
         await removeItemFromActorAsync(sourceActor, item, sourceItemQuantity);
         let itemInTargetActor = await addItemToActorAsync(targetActor, item, sourceItemQuantity);
         await tryAddItemToContainerAsync(targetItem, targetActor, () => { return itemInTargetActor; });
+
+        let children = getChildItems(item._id, sourceActor);
+        if (children) {
+            for (let child of children) {
+                await recursiveChildMoveAsync(sourceActor, targetActor, child, itemInTargetActor);
+            }
+        }
+
         return false;
+    }
+}
+
+async function recursiveChildMoveAsync(sourceActor, targetActor, sourceItem, targetContainer) {
+    const itemQuantity = sourceItem.data.data.quantity;
+    await removeItemFromActorAsync(sourceActor, sourceItem, itemQuantity);
+    let itemInTargetActor = await addItemToActorAsync(targetActor, sourceItem, itemQuantity);
+    await tryAddItemToContainerAsync(targetContainer, targetActor, () => { return itemInTargetActor; });
+
+    let children = getChildItems(sourceItem._id, sourceActor);
+    if (children) {
+        for (let child of children) {
+            await recursiveChildMoveAsync(sourceActor, targetActor, child, itemInTargetActor);
+        }
     }
 }
 
