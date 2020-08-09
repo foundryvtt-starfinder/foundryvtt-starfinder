@@ -113,7 +113,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
         }
 
-        function findById(data, id) {
+        function findTupleById(data, id) {
             let arrayToSearch = data;
             for (let i = 0; i<arrayToSearch.length; i++) {
                 let element = arrayToSearch[i];
@@ -130,7 +130,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             let parent = null;
             const containerId = item.item.data.containerId;
             for (let section of Object.entries(inventory)) {
-                parent = findById(section[1].items, containerId);
+                parent = findTupleById(section[1].items, containerId);
                 if (parent) {
                     parent.contents.push(item);
                     break;

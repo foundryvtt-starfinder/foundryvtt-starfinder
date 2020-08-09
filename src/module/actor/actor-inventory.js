@@ -1,3 +1,5 @@
+import { SFRPG } from "../config.js";
+
 /**
  * Updates the item provided by the getItem function's parent to the DragDropEvent's target.
  * If the target item is a container, the item will be added to that container.
@@ -166,7 +168,7 @@ export function computeCompoundBulkForItem(item, contents) {
             contentBulk += childBulk;
         }
 
-        if (item && item.data.contentBulkMultiplier !== undefined) {
+        if (item && item.data.contentBulkMultiplier !== undefined && !Number.isNaN(Number.parseInt(item.data.contentBulkMultiplier))) {
             contentBulk *= item.data.contentBulkMultiplier;
         }
     }
@@ -175,16 +177,16 @@ export function computeCompoundBulkForItem(item, contents) {
     if (item) {
         if (item.data.bulk.toUpperCase() === "L") {
             personalBulk = 1;
-        } else if (!Number.isNaN(item.data.bulk)) {
+        } else if (!Number.isNaN(Number.parseInt(item.data.bulk))) {
             personalBulk = item.data.bulk * 10;
         }
 
-        if (item.data.quantity && !Number.isNaN(item.data.quantity)) {
+        if (item.data.quantity && !Number.isNaN(Number.parseInt(item.data.quantity))) {
             personalBulk *= item.data.quantity;
         }
 
         if (item.data.equipped) {
-            if (item.data.equippedBulkMultiplier !== undefined) {
+            if (item.data.equippedBulkMultiplier !== undefined && !Number.isNaN(Number.parseInt(item.data.equippedBulkMultiplier))) {
                 personalBulk *= item.data.equippedBulkMultiplier;
             }
         }
@@ -200,7 +202,7 @@ function acceptsItem(containerItem, itemToAdd, actor) {
         return false;
     }
 
-    if (!["weapon", "equipment", "goods", "consumable", "container"].includes(itemToAdd.type)) {
+    if (!(itemToAdd.type in SFRPG.itemTypes)) {
         //console.log("Rejected because item is not an item: " + itemToAdd.type);
         return false;
     }
@@ -212,7 +214,7 @@ function acceptsItem(containerItem, itemToAdd, actor) {
     }
 
     const acceptedItemTypes = containerItem.data.data.acceptedItemTypes;
-    if (acceptedItemTypes && !acceptedItemTypes.includes(itemToAdd.type)) {
+    if (acceptedItemTypes && (!(itemToAdd.type in acceptedItemTypes) || !acceptedItemTypes[itemToAdd.type])) {
         //console.log("Rejected because item is not accepted by container mask");
         return false;
     }

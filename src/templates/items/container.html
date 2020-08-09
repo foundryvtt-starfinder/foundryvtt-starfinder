@@ -40,6 +40,8 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            <h4 class="section-header first">{{ localize "SFRPG.ActorSheet.Inventory.Equipment.DetailsHeader" }}</h4>
+
             {{!-- Equipment Status --}}
             <div class="form-group stacked">
                 <label>Equipment Status</label>
@@ -53,6 +55,8 @@
                     <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> Attuned
                 </label>
             </div>
+
+            <h4 class="section-header first">{{ localize "SFRPG.ActorSheet.Inventory.Container.DetailsHeader" }}</h4>
 
             {{!-- Storage capacity --}}
             <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacity" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacityTooltip" }}">
@@ -79,11 +83,13 @@
             </div>
 
             {{!-- Accepted item types --}}
-            <div class="form-group">
+            <div class="form-group stacked weapon-properties" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypesTooltip" }}">
                 <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="data.acceptedItemTypes" value="{{data.acceptedItemTypes}}" data-dtype="Text" placeholder="" />
-                </div>
+                {{#each config.itemTypes as |name prop|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.acceptedItemTypes.{{prop}}" {{checked (lookup ../data.acceptedItemTypes prop)}}/> {{ name }}
+                </label>
+                {{/each}}
             </div>
         </div>
 

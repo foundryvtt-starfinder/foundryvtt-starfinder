@@ -1529,3 +1529,15 @@ SFRPG.capacityUsagePer = {
     "hour": "SFRPG.Capacity.UsagePer.Hour",
     "day": "SFRPG.Capacity.UsagePer.Day"
 };
+
+SFRPG.itemTypes = {
+    "weapon": "Weapons",
+    "equipment": "Equipment",
+    "consumable": "Consumables",
+    "goods": "Goods",
+    "container": "Containers",
+    "technological": "Tech",
+    "fusion": "Fusions",
+    "upgrade": "Armor Upgrades",
+    "augmentation": "Augmentations"
+};

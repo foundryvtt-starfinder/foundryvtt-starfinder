@@ -29,7 +29,11 @@
                 &nbsp;
                 <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
                 {{else if children}}
-                {{getChildBulk children}} / {{item.data.storageCapacity}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabel"}}
+                    {{#if (eq item.type "container")}}
+                        {{getChildBulk children}} / {{item.data.storageCapacity}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelBulk"}}
+                    {{else}}
+                        {{children.length}} / {{item.data.storageCapacity}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelItems"}}
+                    {{/if}}
                 {{/if}}
             </div>
 
