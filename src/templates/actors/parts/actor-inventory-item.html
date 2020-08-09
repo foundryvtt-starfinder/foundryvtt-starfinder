@@ -1,11 +1,11 @@
-        <li class="item flexrow" data-item-id="{{item._id}}">
+        <li class="item {{#if (not bigItem)}}small{{/if}} {{#if (eq item.type "container")}}container{{/if}} flexrow" data-item-id="{{item._id}}">
             <div class="item-name flexrow rollable">
-                <div class="item-image" style="background-image: url({{item.img}})"></div>
+                <div class="item-image {{#if (not bigItem)}}small{{/if}}" style="background-image: url({{item.img}})"></div>
                 <h4>
                     {{~#if item.isStack}}({{item.data.quantity}}) {{/if}}
                     {{item.name~}}
                 </h4>
-                {{#if (and item.hasAttack item.data.equipped)}}
+                {{#if (and (and item.hasAttack item.data.equipped) bigItem)}}
                 <div class="item-action flexcol">
                     <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
                     <button class="tag damage">{{localize "SFRPG.Damage"}}</button>
@@ -28,6 +28,8 @@
                 {{item.data.capacity.value}} / {{item.data.capacity.max}}
                 &nbsp;
                 <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
+                {{else if children}}
+                {{getChildBulk children}} / {{item.data.storageCapacity}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabel"}}
                 {{/if}}
             </div>
 
@@ -39,7 +41,7 @@
 
             {{#if owner}}
             <div class="item-controls">
-                {{#if (or (or (eq item.type "weapon") (eq item.type "equipment")) (eq item.type "container"))}}
+                {{#if (and (or (or (eq item.type "weapon") (eq item.type "equipment")) (eq item.type "container")) bigItem)}}
                 {{#if item.data.equipped}}
                 <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Equip"}}"><i class="fas fa-check"></i></a>
                 {{else}}
@@ -55,7 +57,7 @@
         {{#if children}}
         <ol class="item-list-child">
         {{#each children as |childItem iid|}}
-            {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../this item=childItem.item children=childItem.contents}}
+            {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../this bigItem=false item=childItem.item children=childItem.contents}}
         {{/each}}
         </ol>
         {{/if}}

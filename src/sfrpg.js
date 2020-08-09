@@ -28,6 +28,7 @@ import { generateUUID } from "./module/utilities.js";
 import migrateWorld from './module/migration.js';
 import CounterManagement from "./module/classes/counter-management.js";
 import templateOverrides from "./module/template-overrides.js";
+import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
 
 Hooks.once('init', async function () {
     console.log(`SFRPG | Initializing the Starfinder System`);
@@ -145,6 +146,16 @@ Hooks.once("setup", function () {
             return str;
         }
         return str.substring(0, limit) + '…';
+    });
+
+    Handlebars.registerHelper('getChildBulk', function (children) {
+        const bulk = computeCompoundBulkForItem(null, children);
+        const reduced = bulk / 10;
+        if (reduced < 0.1) {
+            return "-";
+        } else if (reduced < 1) {
+            return "L";
+        } else return Math.floor(reduced);
     });
 });
 

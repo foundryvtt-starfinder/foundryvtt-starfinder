@@ -1,4 +1,5 @@
 import { ActorSheetSFRPG } from "./base.js"
+import { computeCompoundBulkForItem } from "../actor-inventory.js"
 
 export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     static get defaultOptions() {
@@ -94,6 +95,9 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
 
             i.totalWeight = i.data.quantity * weight;
+            if (i.data.equippedBulkMultiplier !== undefined && i.data.equipped) {
+                i.totalWeight *= i.data.equippedBulkMultiplier;
+            }
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
 
@@ -149,7 +153,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         let totalWeight = 0;
         for (let section of Object.entries(inventory)) {
             for (let i of section[1].items) {
-                let itemBulk = this._computeCompoundBulkForItem(i.item, i.contents);
+                let itemBulk = computeCompoundBulkForItem(i.item, i.contents);
                 totalWeight += itemBulk;
             }
         }
@@ -231,51 +235,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         enc.pct = Math.min(enc.value * 100 / enc.max, 99);
         enc.encumbered = enc.pct > 50;
         return enc;
-    }
-
-    /**
-     * Returns the bulk of the item, along with its contents.
-     * To prevent rounding errors, all calculations are done in integer space by multiplying bulk by 10.
-     * A bulk of L is considered as 1, while a bulk of 1 would be 10. Any other non-number bulk is considered 0 bulk.
-     * 
-     * Item container properties such as equipped bulk and content bulk multipliers are taken into account here.
-     * 
-     * @param {Object} item The item whose bulk is to be calculated.
-     * @param {Array} contents An array of items who are considered children of the item.
-     * @returns {Number} A multiplied-by-10 value of the total bulk.
-     */
-    _computeCompoundBulkForItem(item, contents) {
-        let contentBulk = 0;
-        if (contents && contents.length > 0) {
-            for (let child of contents) {
-                let childBulk = this._computeCompoundBulkForItem(child.item, child.contents);
-                contentBulk += childBulk;
-            }
-
-            if (item.data.contentBulkMultiplier !== undefined) {
-                contentBulk *= item.data.contentBulkMultiplier;
-            }
-        }
-
-        let personalBulk = 0;
-        if (item.data.bulk.toUpperCase() === "L") {
-            personalBulk = 1;
-        } else if (!Number.isNaN(item.data.bulk)) {
-            personalBulk = item.data.bulk * 10;
-        }
-
-        if (item.data.quantity && !Number.isNaN(item.data.quantity)) {
-            personalBulk *= item.data.quantity;
-        }
-
-        if (item.data.equipped) {
-            if (item.data.equippedBulkMultiplier !== undefined) {
-                personalBulk *= item.data.equippedBulkMultiplier;
-            }
-        }
-
-        //console.log(`${item.name} has a content bulk of ${contentBulk}, and personal bulk of ${personalBulk}`);
-        return personalBulk + contentBulk;
     }
 
     /**

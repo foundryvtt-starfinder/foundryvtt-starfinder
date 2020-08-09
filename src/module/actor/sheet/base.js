@@ -2,7 +2,7 @@ import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { spellBrowser } from "../../packs/spell-browser.js";
 
-import { adjustItemContainer, moveItemBetweenActors } from "../actor-inventory.js";
+import { tryAddItemToContainerAsync, moveItemBetweenActorsAsync } from "../actor-inventory.js";
 
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
@@ -569,16 +569,22 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
 
         const actor = this.actor;
+
+        let targetContainer = null;
+        if (event) {
+            const targetId = $(event.target).parents('.item').attr('data-item-id')
+            targetContainer = actor.items.find(x => x._id === parsedDragData.id);
+        }
         
         if (parsedDragData.pack) {
             const pack = game.packs.get(parsedDragData.pack);
-            return await adjustItemContainer(event, actor, async () => {
+            return await tryAddItemToContainerAsync(targetContainer, actor, async () => {
                 const itemData = await pack.getEntry(parsedDragData.id);
                 const item = await actor.createOwnedItem(itemData);
                 return actor.getOwnedItem(item._id);
             });
         } else if (parsedDragData.data) {
-            let shouldSort = await moveItemBetweenActors(event, parsedDragData.actorId, actor._id, parsedDragData.data._id);
+            let shouldSort = await moveItemBetweenActorsAsync(event, parsedDragData.actorId, actor._id, parsedDragData.data._id);
             if (shouldSort) {
                 let item = await actor.getOwnedItem(parsedDragData.data._id);
                 return this._onSortItem(event, item.data);
@@ -590,7 +596,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 return;
             }
 
-            return adjustItemContainer(event, actor, () => {
+            return await tryAddItemToContainerAsync(targetContainer, actor, () => {
                 return actor.createEmbeddedEntity("OwnedItem", duplicate(item.data));
             });
         }
