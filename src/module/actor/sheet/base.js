@@ -591,15 +591,14 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
         } else {
             let sidebarItem = game.items.get(parsedDragData.id);
-            if (!sidebarItem) {
-                console.log("Unknown item source: " + JSON.stringify(parsedDragData));
-                return;
+            if (sidebarItem) {
+                return await tryAddItemToContainerAsync(targetContainer, actor, async () => {
+                    const createdItem = await actor.createEmbeddedEntity("OwnedItem", duplicate(sidebarItem.data));
+                    return actor.getOwnedItem(createdItem._id);
+                });
             }
-
-            return await tryAddItemToContainerAsync(targetContainer, actor, async () => {
-                const createdItem = await actor.createEmbeddedEntity("OwnedItem", duplicate(sidebarItem.data));
-                return actor.getOwnedItem(createdItem._id);
-            });
+            
+            console.log("Unknown item source: " + JSON.stringify(parsedDragData));
         }
     }
 }
