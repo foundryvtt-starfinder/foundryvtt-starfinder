@@ -53,11 +53,13 @@ import calculateStamina from './rules/actions/actor/character/calculate-stamina.
 import calculateResolve from './rules/actions/actor/character/calculate-resolve.js';
 // Drone rules
 import calculateDroneChassis from './rules/actions/actor/drone/calculate-drone-chassis.js';
-import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
-import calculateDroneMods from './rules/actions/actor/drone/calculate-drone-mods.js';
-import calculateDroneEquipment from './rules/actions/actor/drone/calculate-drone-equipment.js';
 import calculateDroneDefense from './rules/actions/actor/drone/calculate-drone-defense.js';
+import calculateDroneEquipment from './rules/actions/actor/drone/calculate-drone-equipment.js';
+import calculateDroneHitpoints from './rules/actions/actor/drone/calculate-drone-hitpoints.js';
+import calculateDroneMods from './rules/actions/actor/drone/calculate-drone-mods.js';
+import calculateDroneResolve from './rules/actions/actor/drone/calculate-drone-resolve.js';
 import calculateDroneSaves from './rules/actions/actor/drone/calculate-drone-saves.js';
+import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -102,11 +104,13 @@ export default function (engine) {
     calculateShipTargetLock(engine);
     // Drone actions
     calculateDroneChassis(engine);
-    calculateDroneSkills(engine);
-    calculateDroneMods(engine);
-    calculateDroneEquipment(engine);
     calculateDroneDefense(engine);
+    calculateDroneEquipment(engine);
+    calculateDroneHitpoints(engine);
+    calculateDroneMods(engine);
+    calculateDroneResolve(engine);
     calculateDroneSaves(engine);
+    calculateDroneSkills(engine);
 
     // Conditions
     always(engine);
@@ -188,10 +192,12 @@ export default function (engine) {
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
                     "calculateDroneSaves",
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
-                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     "calculateDroneDefense",
+                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     "calculateCMD",
-                    { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" }
+                    { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
+                    { closure: "calculateDroneHitpoints", stackModifiers: "stackModifiers" },
+                    { closure: "calculateDroneResolve", stackModifiers: "stackModifiers" }
                 ]
             }
         ]
