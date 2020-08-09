@@ -573,7 +573,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         let targetContainer = null;
         if (event) {
             const targetId = $(event.target).parents('.item').attr('data-item-id')
-            targetContainer = actor.items.find(x => x._id === parsedDragData.id);
+            targetContainer = actor.items.find(x => x._id === targetId);
         }
         
         if (parsedDragData.pack) {
@@ -590,14 +590,15 @@ export class ActorSheetSFRPG extends ActorSheet {
                 return this._onSortItem(event, item.data);
             }
         } else {
-            let item = game.items.get(parsedDragData.id);
-            if (!item) {
+            let sidebarItem = game.items.get(parsedDragData.id);
+            if (!sidebarItem) {
                 console.log("Unknown item source: " + JSON.stringify(parsedDragData));
                 return;
             }
 
-            return await tryAddItemToContainerAsync(targetContainer, actor, () => {
-                return actor.createEmbeddedEntity("OwnedItem", duplicate(item.data));
+            return await tryAddItemToContainerAsync(targetContainer, actor, async () => {
+                const createdItem = await actor.createEmbeddedEntity("OwnedItem", duplicate(sidebarItem.data));
+                return actor.getOwnedItem(createdItem._id);
             });
         }
     }
