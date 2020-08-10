@@ -586,7 +586,12 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         let targetActor = this.actor;
         if (this.token) {
-            targetActor = this.token.actor;
+            targetActor = canvas.tokens.get(this.token.data._id);
+            if (!targetActor) {
+                console.log(`Cannot drag items to token actors not on the active canvas.`);
+                return;
+            }
+            targetActor = targetActor.actor;
         }
 
         let targetContainer = null;
@@ -605,14 +610,18 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else if (parsedDragData.data) {
             let sourceActor = game.actors.get(parsedDragData.actorId);
             if ('tokenId' in parsedDragData) {
-                sourceActor = game.actors.tokens[parsedDragData.tokenId];
+                sourceActor = canvas.tokens.get(parsedDragData.tokenId);
+                if (!sourceActor) {
+                    console.log(`Cannot drag items from token actors not on the active canvas.`);
+                    return;
+                }
+                sourceActor = sourceActor.actor;
             }
             let itemToMove = await sourceActor.getOwnedItem(parsedDragData.data._id);
 
             let itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
             if (itemInTargetActor === itemToMove) {
-                let item = await targetActor.getOwnedItem(parsedDragData.data._id);
-                return this._onSortItem(event, item.data);
+                return this._onSortItem(event, itemInTargetActor.data);
             }
         } else {
             let sidebarItem = game.items.get(parsedDragData.id);
