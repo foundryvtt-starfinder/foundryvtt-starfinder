@@ -103,7 +103,7 @@
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
                 {{#each data.abilities as |ability id|}}
-                <li class="ability {{#if ability.proficient}}proficient{{/if}}">
+                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
                   <h4 class="ability-name box-title rollable" data-tippy-content="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.value<br/><br/>{{#each ability.tooltip as |tip|}}{{tip}}<br/>{{/each}}">{{ability.label}}</h4>
                   <div class="ability-modifiers flexrow">
                     <span class="ability-mod" data-tippy-content="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.mod<br/><br/>{{#each ability.modifierTooltip as |tip|}}{{tip}}<br/>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
