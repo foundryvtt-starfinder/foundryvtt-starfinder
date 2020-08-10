@@ -165,13 +165,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         });
 
         // Delete Inventory Item
-        html.find('.item-delete').click(ev => {
-            let li = $(ev.currentTarget).parents(".item"),
-                itemId = li.attr("data-item-id");
-            // this.actor.deleteOwnedItem(itemId);
-            this.actor.deleteEmbeddedEntity("OwnedItem", itemId)
-            li.slideUp(200, () => this.render(false));
-        });
+        html.find('.item-delete').click(ev => this._onItemDelete(ev));
 
         // Item Dragging
         let handler = ev => this._onDragItemStart(ev);
@@ -301,6 +295,29 @@ export class ActorSheetSFRPG extends ActorSheet {
         };
         delete itemData.data['type'];
         return this.actor.createOwnedItem(itemData);
+    }
+
+    /**
+     * Handle deleting an Owned Item for the actor
+     * @param {Event} event The originating click event
+     */
+    _onItemDelete(event) {
+        event.preventDefault();
+
+        // TODO: Confirm dialog, and ask to recursively delete nested items
+
+        let li = $(event.currentTarget).parents(".item"), 
+            itemId = li.attr("data-item-id");
+
+        this.actor.deleteEmbeddedEntity("OwnedItem", itemId);
+
+        for (let item of this.actor.items) {
+            if (item.data.data.containerId === itemId) {
+                item.update({"data.containerId": ""});
+            }
+        }
+
+        li.slideUp(200, () => this.render(false));
     }
 
     _onItemRollAttack(event) {
