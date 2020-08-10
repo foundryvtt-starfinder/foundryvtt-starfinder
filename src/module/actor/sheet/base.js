@@ -578,40 +578,48 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     async _onDrop(event) {
         const dragData = event.dataTransfer.getData('text/plain');
-
         const parsedDragData = JSON.parse(dragData);
         if (!parsedDragData) {
             console.log("Unknown item data");
             return;
         }
 
-        const actor = this.actor;
+        let targetActor = this.actor;
+        if (this.token) {
+            targetActor = this.token.actor;
+        }
 
         let targetContainer = null;
         if (event) {
             const targetId = $(event.target).parents('.item').attr('data-item-id')
-            targetContainer = actor.items.find(x => x._id === targetId);
+            targetContainer = targetActor.items.find(x => x._id === targetId);
         }
         
         if (parsedDragData.pack) {
             const pack = game.packs.get(parsedDragData.pack);
-            return await tryAddItemToContainerAsync(targetContainer, actor, async () => {
+            return await tryAddItemToContainerAsync(targetContainer, targetActor, async () => {
                 const itemData = await pack.getEntry(parsedDragData.id);
-                const item = await actor.createOwnedItem(itemData);
-                return actor.getOwnedItem(item._id);
+                const item = await targetActor.createOwnedItem(itemData);
+                return targetActor.getOwnedItem(item._id);
             });
         } else if (parsedDragData.data) {
-            let shouldSort = await moveItemBetweenActorsAsync(event, parsedDragData.actorId, actor._id, parsedDragData.data._id);
-            if (shouldSort) {
-                let item = await actor.getOwnedItem(parsedDragData.data._id);
+            let sourceActor = game.actors.get(parsedDragData.actorId);
+            if ('tokenId' in parsedDragData) {
+                sourceActor = game.actors.tokens[parsedDragData.tokenId];
+            }
+            let itemToMove = await sourceActor.getOwnedItem(parsedDragData.data._id);
+
+            let itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
+            if (itemInTargetActor === itemToMove) {
+                let item = await targetActor.getOwnedItem(parsedDragData.data._id);
                 return this._onSortItem(event, item.data);
             }
         } else {
             let sidebarItem = game.items.get(parsedDragData.id);
             if (sidebarItem) {
-                return await tryAddItemToContainerAsync(targetContainer, actor, async () => {
-                    const createdItem = await actor.createEmbeddedEntity("OwnedItem", duplicate(sidebarItem.data));
-                    return actor.getOwnedItem(createdItem._id);
+                return await tryAddItemToContainerAsync(targetContainer, targetActor, async () => {
+                    const createdItem = await targetActor.createEmbeddedEntity("OwnedItem", duplicate(sidebarItem.data));
+                    return targetActor.getOwnedItem(createdItem._id);
                 });
             }
             

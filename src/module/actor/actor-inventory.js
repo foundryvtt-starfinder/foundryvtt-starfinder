@@ -96,28 +96,16 @@ export function getChildItems(containerId, actor) {
 /**
  * Moves an item from one actor to another, adjusting its container settings appropriately.
  * 
- * @param {DragDropEvent} event Associated DragDropEvent, can be null.
- * @param {String} sourceActorId Unique ID of the source actor.
- * @param {String} targetActorId Unique ID of the target actor.
- * @param {String} itemId Unique ID of the item to be moved.
- * @returns {Boolean} Returns true if sorting is to be done after execution, false otherwise.
+ * @param {Actor} sourceActor The source actor.
+ * @param {Item} item Item to be moved.
+ * @param {Actor} targetActor The target actor.
+ * @param {Item} targetItem (Optional) Associated DragDropEvent, can be null.
+ * @returns {Item} Returns the target actor item.
  */
-export async function moveItemBetweenActorsAsync(event, sourceActorId, targetActorId, itemId) {
-    const sourceActor = game.actors.get(sourceActorId);
-    const targetActor = game.actors.get(targetActorId);
-    const item = sourceActor.getOwnedItem(itemId);
-
-    let isSameActor = sourceActorId === targetActorId;
-
-    let targetItem = null;
-    if (event) {
-        const targetId = $(event.target).parents('.item').attr('data-item-id')
-        targetItem = targetActor.items.find(x => x._id === targetId);
-    }
-
-    if (isSameActor) {
+export async function moveItemBetweenActorsAsync(sourceActor, item, targetActor, targetItem = null) {
+    if (sourceActor === targetActor) {
         await tryAddItemToContainerAsync(targetItem, targetActor, () => { return item; });
-        return true;
+        return item;
     } else {
         const sourceItemQuantity = item.data.data.quantity;
         await removeItemFromActorAsync(sourceActor, item, sourceItemQuantity);
@@ -131,7 +119,7 @@ export async function moveItemBetweenActorsAsync(event, sourceActorId, targetAct
             }
         }
 
-        return false;
+        return itemInTargetActor;
     }
 }
 
