@@ -84,12 +84,7 @@ export async function addItemToActorAsync(targetActor, item, quantity) {
 }
 
 export function getChildItems(containerId, actor) {
-    let childItems = [];
-    for (let item of actor.items) {
-        if (item.data.data.containerId === containerId) {
-            childItems.push(item);
-        }
-    }
+    let childItems = actor.items.filter(x => x.data.data.containerId === containerId);
     return childItems;
 }
 
@@ -107,33 +102,38 @@ export async function moveItemBetweenActorsAsync(sourceActor, item, targetActor,
         await tryAddItemToContainerAsync(targetItem, targetActor, () => { return item; });
         return item;
     } else {
-        const sourceItemQuantity = item.data.data.quantity;
-        await removeItemFromActorAsync(sourceActor, item, sourceItemQuantity);
-        let itemInTargetActor = await addItemToActorAsync(targetActor, item, sourceItemQuantity);
-        await tryAddItemToContainerAsync(targetItem, targetActor, () => { return itemInTargetActor; });
+        let itemsToMove = [{container: targetItem, items: [item]}];
+        let firstMovedItem = null;
+        do {
+            let pair = itemsToMove.shift();
+            let bulkAdd = [];
+            for (let itemToMove of pair.items) {
+                let children = getChildItems(itemToMove._id, sourceActor);
+                if (children) {
+                    const sourceItemQuantity = itemToMove.data.data.quantity;
+                    let itemInTargetActor = await addItemToActorAsync(targetActor, itemToMove, sourceItemQuantity);
+                    await tryAddItemToContainerAsync(pair.container, targetActor, () => { return itemInTargetActor; });
 
-        let children = getChildItems(item._id, sourceActor);
-        if (children) {
-            for (let child of children) {
-                await recursiveChildMoveAsync(sourceActor, targetActor, child, itemInTargetActor);
+                    await removeItemFromActorAsync(sourceActor, itemToMove, sourceItemQuantity);
+    
+                    itemsToMove.push({container: itemInTargetActor, items: children});
+    
+                    firstMovedItem = firstMovedItem || itemInTargetActor;
+                } else {
+                    bulkAdd.push(itemToMove);
+                }
             }
-        }
 
-        return itemInTargetActor;
-    }
-}
+            if (bulkAdd.length > 0) {
+                let result = await targetActor.createOwnedItem(bulkAdd);
+                if (result && result.length > 0) {
+                    firstMovedItem = firstMovedItem || result[0];
+                }
+                await sourceActor.deleteOwnedItem(bulkAdd);
+            }
+        } while (itemsToMove.length > 0);
 
-async function recursiveChildMoveAsync(sourceActor, targetActor, sourceItem, targetContainer) {
-    const itemQuantity = sourceItem.data.data.quantity;
-    await removeItemFromActorAsync(sourceActor, sourceItem, itemQuantity);
-    let itemInTargetActor = await addItemToActorAsync(targetActor, sourceItem, itemQuantity);
-    await tryAddItemToContainerAsync(targetContainer, targetActor, () => { return itemInTargetActor; });
-
-    let children = getChildItems(sourceItem._id, sourceActor);
-    if (children) {
-        for (let child of children) {
-            await recursiveChildMoveAsync(sourceActor, targetActor, child, itemInTargetActor);
-        }
+        return firstMovedItem;
     }
 }
 
