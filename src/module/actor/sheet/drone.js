@@ -101,18 +101,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
             i.totalWeight = i.data.quantity * weight;
 
-            if (i.type === "weapon") {
-                if (i.data.equipped) {
-                    inventory[i.type].items.push(i);
-                } else {
-                    inventory["cargo"].items.push(i);    
-                }
-            } else if (i.type === "upgrade") {
-                inventory[i.type].items.push(i);
-            } else {
-                inventory["cargo"].items.push(i);
-            }
-
             totalWeight += i.totalWeight;
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
@@ -122,6 +110,20 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         totalWeight = Math.floor(totalWeight);
         data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
         data.inventoryValue = Math.floor(totalValue);
+
+        this.processItemContainment(items, function (itemType, itemData) {
+            if (itemType === "weapon") {
+                if (itemData.item.data.equipped) {
+                    inventory[itemType].items.push(itemData);
+                } else {
+                    inventory["cargo"].items.push(itemData);    
+                }
+            } else if (itemType === "upgrade") {
+                inventory[itemType].items.push(itemData);
+            } else {
+                inventory["cargo"].items.push(itemData);
+            }
+        });
 
         let droneLevelIndex = data.data.details.level.value - 1;
         let maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];

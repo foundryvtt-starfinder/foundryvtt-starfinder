@@ -5,7 +5,7 @@
                     {{~#if item.isStack}}({{item.data.quantity}}) {{/if}}
                     {{item.name~}}
                 </h4>
-                {{#if (and (and item.hasAttack item.data.equipped) bigItem)}}
+                {{#if (and owner (and (and item.hasAttack item.data.equipped) bigItem))}}
                 <div class="item-action flexcol">
                     <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
                     <button class="tag damage">{{localize "SFRPG.Damage"}}</button>

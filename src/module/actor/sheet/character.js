@@ -76,8 +76,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         const spellbook = this._prepareSpellbook(data, spells);
 
         let totalValue = 0;
-        let preprocessedItems = [];
-        let containedItems = [];
         for (let i of items) {
             i.img = i.img || DEFAULT_TOKEN;
 
@@ -102,49 +100,11 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
 
             totalValue += (i.data.price * i.data.quantity);
-
-            let itemData = {item: i, contents: []};
-            preprocessedItems.push(itemData);
-            
-            if (!i.data.containerId) {
-                inventory[i.type].items.push(itemData);
-            } else {
-                containedItems.push(itemData);
-            }
         }
 
-        function findTupleById(data, id) {
-            let arrayToSearch = data;
-            for (let i = 0; i<arrayToSearch.length; i++) {
-                let element = arrayToSearch[i];
-                if (element.item._id === id) {
-                    return element;
-                } else if (element.contents && element.contents.length > 0) {
-                    arrayToSearch = arrayToSearch.concat(element.contents);
-                }
-            }
-            return null;
-        }
-
-        for (let item of containedItems) {
-            let parent = null;
-            const containerId = item.item.data.containerId;
-            for (let section of Object.entries(inventory)) {
-                parent = findTupleById(section[1].items, containerId);
-                if (parent) {
-                    parent.contents.push(item);
-                    break;
-                }
-            }
-
-            if (!parent) {
-                parent = containedItems.find(x => x.item._id === containerId);
-                if (parent) {
-                    parent.contents.push(item);
-                    continue;
-                }
-            }
-        }
+        this.processItemContainment(items, function (itemType, itemData) {
+            inventory[itemType].items.push(itemData);
+        });
 
         let totalWeight = 0;
         for (let section of Object.entries(inventory)) {

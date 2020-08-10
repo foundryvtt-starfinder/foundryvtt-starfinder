@@ -1,6 +1,5 @@
+{{#if (or isCharacter isDrone)}}
 <div class="inventory-filters">
-
-    {{#if (or isCharacter isDrone)}}
     <ol class="currency flexrow">
         <h3>
             {{localize "SFRPG.InventoryCurrency"}}
@@ -13,8 +12,8 @@
         <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
         {{/each}}
     </ol>
-    {{/if}}
 </div>
+{{/if}}
 
 <ol class="inventory-list">
 {{#each sections as |section sid|}}

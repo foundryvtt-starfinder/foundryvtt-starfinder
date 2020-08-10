@@ -601,4 +601,28 @@ export class ActorSheetSFRPG extends ActorSheet {
             console.log("Unknown item source: " + JSON.stringify(parsedDragData));
         }
     }
+
+    processItemContainment(items, pushItemFn) {
+        let preprocessedItems = [];
+        let containedItems = [];
+        for (let i of items) {
+            let itemData = {item: i, contents: []};
+            preprocessedItems.push(itemData);
+            
+            if (!i.data.containerId) {
+                pushItemFn(i.type, itemData);
+            } else {
+                containedItems.push(itemData);
+            }
+        }
+
+        for (let item of containedItems) {
+            const containerId = item.item.data.containerId;
+            let parent = preprocessedItems.find(x => x.item._id === containerId);
+            if (parent) {
+                parent.contents.push(item);
+            }
+        }
+
+    }
 }

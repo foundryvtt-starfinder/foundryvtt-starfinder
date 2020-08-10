@@ -39,6 +39,7 @@
     {{!-- NPC Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="attributes">{{ localize "SFRPG.Attributes" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "SFRPG.Inventory" }}</a>
         <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
         <a class="item" data-tab="spellbook">{{ localize "SFRPG.Spellbook" }}</a>
         <a class="item" data-tab="biography">{{ localize "SFRPG.Biography" }}</a>
@@ -184,6 +185,11 @@
                 {{!-- Traits --}}
                 {{> "systems/sfrpg/templates/actors/parts/actor-traits.html"}}
             </section>
+        </div>
+
+        {{!-- Inventory Tab --}}
+        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+            {{> "systems/sfrpg/templates/actors/parts/actor-inventory.html" sections=inventory}}
         </div>
 
         {{!-- Features Tab --}}
