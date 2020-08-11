@@ -610,12 +610,12 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else if (parsedDragData.data) {
             let sourceActor = game.actors.get(parsedDragData.actorId);
             if ('tokenId' in parsedDragData) {
-                sourceActor = canvas.tokens.get(parsedDragData.tokenId);
-                if (!sourceActor) {
+                let sourceToken = canvas.tokens.get(parsedDragData.tokenId);
+                if (!sourceToken) {
                     ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
                     return;
                 }
-                sourceActor = sourceActor.actor;
+                sourceActor = sourceToken.actor;
             }
             let itemToMove = await sourceActor.getOwnedItem(parsedDragData.data._id);
 

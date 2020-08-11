@@ -41,8 +41,11 @@ export async function tryAddItemToContainerAsync(targetContainer, actor, getItem
  * @param {*} sourceActor Actor that owns the item.
  * @param {*} item Item to remove.
  * @param {*} quantity Number of items to remove, if quantity is greater than or equal to the item quantity, the item will be removed from the actor.
+ * @returns {Boolean} Returns whether or not an update or removal took place.
  */
 export async function removeItemFromActorAsync(sourceActor, item, quantity) {
+    if (!sourceActor) return false;
+
     const sourceItemQuantity = Math.min(item.data.data.quantity, quantity);
     const newItemQuantity = sourceItemQuantity - quantity;
 
@@ -52,6 +55,7 @@ export async function removeItemFromActorAsync(sourceActor, item, quantity) {
         const update = { '_id': item._id, 'data.quantity': newItemQuantity };
         await sourceActor.updateEmbeddedEntity('OwnedItem', update);
     }
+    return true;
 }
 
 
@@ -64,6 +68,8 @@ export async function removeItemFromActorAsync(sourceActor, item, quantity) {
  * @returns {Item} The (possibly newly created) item in target actor.
  */
 export async function addItemToActorAsync(targetActor, item, quantity) {
+    if (!targetActor) return null;
+
     let itemInTargetActor = targetActor.items.find(i => i.name === item.name);
     if (itemInTargetActor !== null && itemInTargetActor.type !== "container")
     {
@@ -84,6 +90,7 @@ export async function addItemToActorAsync(targetActor, item, quantity) {
 }
 
 export function getChildItems(containerId, actor) {
+    if (!actor) return null;
     let childItems = actor.items.filter(x => x.data.data.containerId === containerId);
     return childItems;
 }
@@ -91,13 +98,17 @@ export function getChildItems(containerId, actor) {
 /**
  * Moves an item from one actor to another, adjusting its container settings appropriately.
  * 
- * @param {Actor} sourceActor The source actor.
+ * @param {Actor} sourceActor (Optional) The source actor. If left null, no item will be removed, and any children will not be copied.
  * @param {Item} item Item to be moved.
  * @param {Actor} targetActor The target actor.
  * @param {Item} targetItem (Optional) Associated DragDropEvent, can be null.
  * @returns {Item} Returns the target actor item.
  */
 export async function moveItemBetweenActorsAsync(sourceActor, item, targetActor, targetItem = null) {
+    if (targetActor === null) {
+        return null;
+    }
+
     if (sourceActor === targetActor) {
         await tryAddItemToContainerAsync(targetItem, targetActor, () => { return item; });
         return item;
@@ -114,7 +125,9 @@ export async function moveItemBetweenActorsAsync(sourceActor, item, targetActor,
                     let itemInTargetActor = await addItemToActorAsync(targetActor, itemToMove, sourceItemQuantity);
                     await tryAddItemToContainerAsync(pair.container, targetActor, () => { return itemInTargetActor; });
 
-                    await removeItemFromActorAsync(sourceActor, itemToMove, sourceItemQuantity);
+                    if (sourceActor) {
+                        await removeItemFromActorAsync(sourceActor, itemToMove, sourceItemQuantity);
+                    }
     
                     itemsToMove.push({container: itemInTargetActor, items: children});
     
@@ -129,7 +142,10 @@ export async function moveItemBetweenActorsAsync(sourceActor, item, targetActor,
                 if (result && result.length > 0) {
                     firstMovedItem = firstMovedItem || result[0];
                 }
-                await sourceActor.deleteOwnedItem(bulkAdd);
+
+                if (sourceActor) {
+                    await sourceActor.deleteOwnedItem(bulkAdd);
+                }
             }
         } while (itemsToMove.length > 0);
 

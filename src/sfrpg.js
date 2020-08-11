@@ -9,7 +9,7 @@
 import { SFRPG } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, getBarAttribute } from "./module/canvas.js";
+import { measureDistances, getBarAttribute, handleItemDrop } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
@@ -29,6 +29,8 @@ import migrateWorld from './module/migration.js';
 import CounterManagement from "./module/classes/counter-management.js";
 import templateOverrides from "./module/template-overrides.js";
 import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
+
+let defaultDropHandler = null;
 
 Hooks.once('init', async function () {
     console.log(`SFRPG | Initializing the Starfinder System`);
@@ -169,7 +171,35 @@ Hooks.once("ready", () => {
             .then(_ => ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage")))
             .catch(_ => ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage")));
     }
+
+    defaultDropHandler = canvas._dragDrop.callbacks.drop;
+    canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
 });
+
+export async function handleOnDrop(event) {
+    event.preventDefault();
+
+	let data = null;
+	try {
+		data = JSON.parse(event.dataTransfer.getData('text/plain'));
+	} catch (err) {
+        defaultDropHandler(event);
+		return false;
+    }
+
+    // We're only interested in overriding item drops.
+    if (!data || data.type !== "Item") {
+        return await defaultDropHandler(event);
+    }
+
+    // Transform the cursor position to canvas space
+	const [x, y] = [event.clientX, event.clientY];
+	const t = this.stage.worldTransform;
+	data.x = (x - t.tx) / canvas.stage.scale.x;
+    data.y = (y - t.ty) / canvas.stage.scale.y;
+
+    return await handleItemDrop(data);
+}
 
 Hooks.on("canvasInit", function () {
     canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");

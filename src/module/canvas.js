@@ -1,3 +1,5 @@
+import { moveItemBetweenActorsAsync } from "./actor/actor-inventory.js";
+
 /**
  * Override the default Grid measurement function to add additional distance for subsequent diagonal moves
  * See BaseGrid.measureDistance for more details.
@@ -46,4 +48,71 @@ export const getBarAttribute = function (...args) {
     }
 
     return data;
+}
+
+export async function handleItemDrop(data) {
+    console.log("Canvas::handleItemDrop()");
+    
+    // Potential sources:
+    // Actor sheet, Token Actor sheet (May be linked to an Actor), Sidebar Item, Compendium
+    let sourceActor = null;
+    let sourceItem = null;
+    let sourceItemData = null;
+    if ("pack" in data) {
+        // Source is compendium
+        console.log("> Dragged item from compendium: " + data.pack);
+        const pack = game.packs.get(data.pack);
+        sourceItemData = await pack.getEntry(data.id);
+    } else if ("tokenId" in data) {
+        // Source is token sheet
+        console.log("> Dragged item from token: " + data.tokenId);
+        let sourceToken = canvas.tokens.get(data.tokenId);
+        if (!sourceToken) {
+            ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
+            return;
+        }
+        sourceActor = sourceToken.actor;
+        sourceItemData = data.data;
+        sourceItem = sourceActor.items.get(sourceItemData._id);
+    } else if ("actorId" in data) {
+        // Source is actor sheet
+        console.log("> Dragged item from actor: " + data.actorId);
+        sourceActor = game.actors.get(data.actorId);
+        sourceItemData = data.data;
+        sourceItem = sourceActor.items.get(sourceItemData._id);
+    } else if ("id" in data) {
+        // Source is sidebar
+        console.log("> Dragged item from sidebar: " + data.id);
+        sourceItem = game.items.get(data.id);
+        sourceItemData = sourceItem.data;
+    } else {
+        // Source is anywhere else
+        // TODO: Check what dragging from placable menu will look like
+        console.log("> Dragged item from unknown source!");
+        console.log(event);
+        console.log(data);
+        return;
+    }
+
+    // Potential targets:
+    // Canvas (floor), Token Actor (may be linked)
+    let targetActor = null;
+	for (let p of canvas.tokens.placeables) {
+		if (data.x < p.x + p.width && data.x > p.x && data.y < p.y + p.height && data.y > p.y && p instanceof Token) {
+			targetActor = p.actor;
+			break;
+		}
+    }
+
+    // Create a placeable instead and do item transferral there.
+    if (targetActor === null) {
+        ui.notifications.info(game.i18n.format("SFRPG.Canvas.Interface.NoTargetTokenForItemDrop"));
+        return;
+    }
+
+    if (sourceItem) {
+        await moveItemBetweenActorsAsync(sourceActor, sourceItem, targetActor);
+    } else {
+        await targetActor.createOwnedItem(sourceItemData);
+    }
 }
