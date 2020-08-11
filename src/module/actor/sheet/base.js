@@ -588,7 +588,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         if (this.token) {
             targetActor = canvas.tokens.get(this.token.data._id);
             if (!targetActor) {
-                console.log(`Cannot drag items to token actors not on the active canvas.`);
+                ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
                 return;
             }
             targetActor = targetActor.actor;
@@ -612,7 +612,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             if ('tokenId' in parsedDragData) {
                 sourceActor = canvas.tokens.get(parsedDragData.tokenId);
                 if (!sourceActor) {
-                    console.log(`Cannot drag items from token actors not on the active canvas.`);
+                    ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
                     return;
                 }
                 sourceActor = sourceActor.actor;
