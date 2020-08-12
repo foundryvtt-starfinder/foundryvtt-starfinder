@@ -1,156 +1,185 @@
 import { SFRPG } from "../config.js";
 
 /**
- * Updates the item provided by the getItem function's parent to the DragDropEvent's target.
- * If the target item is a container, the item will be added to that container.
- * If the target item is an item, the item will be added to the target item's parent.
+ * Adds the specified quantity of a given item to an actor. Returns the (possibly newly created) item on the target actor.
+ * Will not add child items, those will have to be added manually at a later iteration.
  * 
- * @param {Item} targetContainer Optional container item to add the item to.
- * @param {Actor} actor Actor that owns the item.
- * @param {Function} getItem Function that returns an Item object.
- * @returns {Promise} Returns null when no update is done, promise otherwise.
+ * @param {Actor} targetActor Actor to add the item to.
+ * @param {Item} item Item to add.
+ * @param {Number} quantity Quantity of the item to add.
+ * @param {Item} targetItem (Optional) Item to either merge with, or add as a child to, or find its parent and set as a sibling.
+ * @returns {Item} Returns the (possibly newly created) item on the target actor.
  */
-export async function tryAddItemToContainerAsync(targetContainer, actor, getItem) {
-    const item = await getItem();
-    if (!item || item === targetContainer) {
-        return null;
+export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targetItem = null) {
+    if (!targetActor) return null;
+
+    if (targetItem && targetItem === itemToAdd) {
+        return itemToAdd;
     }
-    
-    let desiredContainerId = "";
-    if (targetContainer) {
-        if (acceptsItem(targetContainer, item, actor)) {
-            desiredContainerId = targetContainer._id;
+
+    let newItemData = duplicate(itemToAdd);
+    newItemData.data.quantity = quantity;
+    newItemData.data.contents = itemToAdd.data.contents ? [] : null;
+
+    let desiredParent = null;
+    if (targetItem) {
+        if (acceptsItem(targetItem, itemToAdd, targetActor)) {
+            desiredParent = targetItem;
+        } else if (targetItem.name === itemToAdd.name && !containsItems(targetItem) && !containsItems(itemToAdd)) {
+            const targetItemNewQuantity = Number(targetItem.data.data.quantity) + quantity;
+            await targetActor.updateOwnedItem({ _id: targetItem._id, 'data.quantity': targetItemNewQuantity});
+            return targetItem;
         } else {
-            desiredContainerId = targetContainer.data.data.containerId || "";
+            desiredParent = targetActor.items.find(x => x.data.contents && x.data.contents.includes(targetItem._id));
         }
     }
-
-    if (desiredContainerId !== item.data.data.containerId) {
-        return await item.update({
-            'data.containerId': desiredContainerId,
-            'data.equipped': false,
-        });
+    
+    let addedItem = null;
+    if (targetActor.isToken) {
+        const  created = await Entity.prototype.createEmbeddedEntity.call(targetActor, "OwnedItem", newItemData, {temporary: true});
+        const items = duplicate(targetActor.data.items).concat(created instanceof Array ? created : [created]);
+        await targetActor.token.update({"actorData.items": items}, {});
+        addedItem = targetActor.getOwnedItem(created._id);
+    } else {
+        const result = await targetActor.createOwnedItem(newItemData);
+        addedItem = targetActor.getOwnedItem(result._id);
     }
 
-    return null;
+    if (desiredParent) {
+        let newContents = duplicate(desiredParent.data.data.contents || []);
+        newContents.push(addedItem._id);
+        await targetActor.updateOwnedItem({"_id": desiredParent._id, "data.contents": newContents});
+    }
+
+    return addedItem;
 }
 
 /**
  * Removes the specified quantity of a given item from an actor.
  * 
- * @param {*} sourceActor Actor that owns the item.
- * @param {*} item Item to remove.
- * @param {*} quantity Number of items to remove, if quantity is greater than or equal to the item quantity, the item will be removed from the actor.
+ * @param {Actor} sourceActor Actor that owns the item.
+ * @param {Item} item Item to remove.
+ * @param {Number} quantity Number of items to remove, if quantity is greater than or equal to the item quantity, the item will be removed from the actor.
+ * @param {Boolean} recursive (Optional) Recursively remove child items too? Setting this to false puts all items into the deleted item's root. Defaults to false.
  * @returns {Boolean} Returns whether or not an update or removal took place.
  */
-export async function removeItemFromActorAsync(sourceActor, item, quantity) {
-    if (!sourceActor) return false;
+export async function removeItemFromActorAsync(sourceActor, itemToRemove, quantity, recursive = false) {
+    if (!sourceActor || !itemToRemove) return false;
 
-    const sourceItemQuantity = Math.min(item.data.data.quantity, quantity);
+    const sourceItemQuantity = Math.min(itemToRemove.data.data.quantity, quantity);
     const newItemQuantity = sourceItemQuantity - quantity;
 
     if (newItemQuantity < 1) {
-        await sourceActor.deleteEmbeddedEntity('OwnedItem', item._id);
+        await sourceActor.deleteEmbeddedEntity('OwnedItem', itemToRemove._id);
+        if (recursive && containsItems(itemToRemove)) {
+            for (let childId of itemToRemove.data.data.contents) {
+                let child = sourceActor.getOwnedItem(childId);
+                if (child) {
+                    await removeItemFromActorAsync(sourceActor, child, child.data.data.quantity, recursive);
+                }
+            }
+        }
     } else {
-        const update = { '_id': item._id, 'data.quantity': newItemQuantity };
+        const update = { '_id': itemToRemove._id, 'data.quantity': newItemQuantity };
         await sourceActor.updateEmbeddedEntity('OwnedItem', update);
     }
     return true;
 }
 
-
-/**
- * Adds the specified quantity of a given item to an actor. Returns the (possibly newly created) item on the target actor.
- * 
- * @param {*} targetActor Actor that owns the item.
- * @param {*} item Item to add.
- * @param {*} quantity Number of items to add.
- * @returns {Item} The (possibly newly created) item in target actor.
- */
-export async function addItemToActorAsync(targetActor, item, quantity) {
-    if (!targetActor) return null;
-
-    let itemInTargetActor = targetActor.items.find(i => i.name === item.name);
-    if (itemInTargetActor !== null && itemInTargetActor.type !== "container")
-    {
-        const targetItemNewQuantity = Number(itemInTargetActor.data.data.quantity) + quantity;
-        const update = { '_id': itemInTargetActor._id, 'data.quantity': targetItemNewQuantity};
-        await targetActor.updateEmbeddedEntity('OwnedItem', update);
-        return itemInTargetActor;
-    }
-    else
-    {
-        let newItemData = duplicate(item);
-        newItemData.data.quantity = quantity;
-
-        const result = await targetActor.createOwnedItem(newItemData);
-        itemInTargetActor = targetActor.items.get(result._id);
-        return itemInTargetActor;
-    }
-}
-
-export function getChildItems(containerId, actor) {
-    if (!actor) return null;
-    let childItems = actor.items.filter(x => x.data.data.containerId === containerId);
-    return childItems;
-}
-
 /**
  * Moves an item from one actor to another, adjusting its container settings appropriately.
  * 
- * @param {Actor} sourceActor (Optional) The source actor. If left null, no item will be removed, and any children will not be copied.
- * @param {Item} item Item to be moved.
+ * @param {Actor} sourceActor The source actor.
+ * @param {Item} itemToMove Item to be moved.
  * @param {Actor} targetActor The target actor.
- * @param {Item} targetItem (Optional) Associated DragDropEvent, can be null.
- * @returns {Item} Returns the target actor item.
+ * @param {Item} targetItem (Optional) Item to add the item to, merge with, or make sibling for.
+ * @returns {Item} Returns the item on the targetActor.
  */
-export async function moveItemBetweenActorsAsync(sourceActor, item, targetActor, targetItem = null) {
-    if (targetActor === null) {
+export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetItem = null) {
+    if (!targetActor || !itemToMove) {
+        console.log("Invenory::moveItemBetweenActorsAsync: No targetActor or itemToMove.")
         return null;
     }
 
-    if (sourceActor === targetActor) {
-        await tryAddItemToContainerAsync(targetItem, targetActor, () => { return item; });
-        return item;
-    } else {
-        let itemsToMove = [{container: targetItem, items: [item]}];
-        let firstMovedItem = null;
-        do {
-            let pair = itemsToMove.shift();
-            let bulkAdd = [];
-            for (let itemToMove of pair.items) {
-                let children = getChildItems(itemToMove._id, sourceActor);
-                if (children) {
-                    const sourceItemQuantity = itemToMove.data.data.quantity;
-                    let itemInTargetActor = await addItemToActorAsync(targetActor, itemToMove, sourceItemQuantity);
-                    await tryAddItemToContainerAsync(pair.container, targetActor, () => { return itemInTargetActor; });
-
-                    if (sourceActor) {
-                        await removeItemFromActorAsync(sourceActor, itemToMove, sourceItemQuantity);
-                    }
-    
-                    itemsToMove.push({container: itemInTargetActor, items: children});
-    
-                    firstMovedItem = firstMovedItem || itemInTargetActor;
-                } else {
-                    bulkAdd.push(itemToMove);
-                }
-            }
-
-            if (bulkAdd.length > 0) {
-                let result = await targetActor.createOwnedItem(bulkAdd);
-                if (result && result.length > 0) {
-                    firstMovedItem = firstMovedItem || result[0];
-                }
-
-                if (sourceActor) {
-                    await sourceActor.deleteOwnedItem(bulkAdd);
-                }
-            }
-        } while (itemsToMove.length > 0);
-
-        return firstMovedItem;
+    if (!sourceActor) {
+        console.log("Invenory::moveItemBetweenActorsAsync: No source actor specified, switching to addItemToActorAsync.")
+        return await addItemToActorAsync(targetActor, itemToMove, itemToMove.data.data.quantity, targetItem);
     }
+
+    if (sourceActor === targetActor) {
+        let desiredParent = null;
+        if (targetItem) {
+            if (acceptsItem(targetItem, itemToMove, targetActor)) {
+                desiredParent = targetItem;
+            } else if (targetItem.name === itemToMove.name && !containsItems(targetItem) && !containsItems(itemToMove)) {
+                // Merging will destroy the old item, so we return the targetItem here.
+                const targetItemNewQuantity = Number(targetItem.data.data.quantity) + itemToMove.data.data.quantity;
+                const update = { '_id': targetItem._id, 'data.quantity': targetItemNewQuantity};
+                await targetActor.updateEmbeddedEntity('OwnedItem', update);
+
+                await sourceActor.deleteEmbeddedEntity('OwnedItem', itemToMove._id);
+
+                return targetItem;
+            } else {
+                let targetsParent = targetActor.items.find(x => x.data.data.contents && x.data.data.contents.includes(targetItem._id));
+                if (targetsParent) {
+                    if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
+                        desiredParent = targetsParent;
+                    } else {
+                        return itemToMove;
+                    }
+                }
+            }
+        }
+
+        let currentParent = targetActor.items.find(x => x.data.data.contents && x.data.data.contents.includes(itemToMove._id));
+
+        if (desiredParent !== currentParent) {
+            let bulkUpdates = [];
+            if (currentParent) {
+                let newContents = currentParent.data.data.contents.filter(x => x !== itemToMove._id);
+                bulkUpdates.push({_id: currentParent._id, "data.contents": newContents});
+            }
+
+            if (desiredParent) {
+                let newContents = duplicate(desiredParent.data.data.contents || []);
+                newContents.push(itemToMove._id);
+                bulkUpdates.push({_id: desiredParent._id, "data.contents": newContents});
+            }
+
+            if (itemToMove.data.data.equipped) {
+                bulkUpdates.push({_id: itemToMove._id, "data.equipped": false});
+            }
+
+            await targetActor.updateOwnedItem(bulkUpdates);
+        }
+
+        return itemToMove;
+    } else {
+        let movedItem = await addItemToActorAsync(targetActor, itemToMove, itemToMove.data.data.quantity, targetItem);
+
+        if (containsItems(itemToMove)) {
+            for (let childId of itemToMove.data.data.contents) {
+                let child = sourceActor.getOwnedItem(childId);
+                await moveItemBetweenActorsAsync(sourceActor, child, targetActor, movedItem);
+            }
+        }
+
+        await removeItemFromActorAsync(sourceActor, itemToMove, itemToMove.data.data.quantity, true);
+
+        return movedItem;
+    }
+}
+
+/**
+ * Changes the item's container on an actor.
+ * 
+ * @param {Actor} actor 
+ * @param {Item} item 
+ * @param {Item} container 
+ */
+export async function setItemContainer(actor, item, container) {
+    return await moveItemBetweenActorsAsync(actor, item, actor, container);
 }
 
 /**
@@ -200,6 +229,19 @@ export function computeCompoundBulkForItem(item, contents) {
     return personalBulk + contentBulk;
 }
 
+/**
+ * Returns an array of child items for a given item on an actor.
+ * 
+ * @param {Actor} actor Actor for whom's items to test.
+ * @param {Item} item Item to get the children of.
+ * @returns {Array} An array of child items.
+ */
+export function getChildItems(actor, item) {
+    if (!actor) return [];
+    if (!containsItems(item)) return [];
+    return actor.items.filter(x => item.data.data.contents.includes(x._id));
+}
+
 function acceptsItem(containerItem, itemToAdd, actor) {
     if (!containerItem || !itemToAdd) {
         //console.log("Rejected because container or item is null");
@@ -223,7 +265,7 @@ function acceptsItem(containerItem, itemToAdd, actor) {
         return false;
     }
 
-    if (wouldCreateParentCycle(itemToAdd._id, containerItem._id, actor.data.items)) {
+    if (wouldCreateParentCycle(itemToAdd, containerItem, actor)) {
         //console.log("Rejected because adding this item would create a cycle");
         return false;
     }
@@ -231,15 +273,40 @@ function acceptsItem(containerItem, itemToAdd, actor) {
     return true;
 }
 
-/** Checks if assigning the containerId to the item would create a cycle */
-function wouldCreateParentCycle(itemId, containerId, items = []) {
-    let currentContainerId = containerId;
-    do {
-        let container = items.find(x => x._id === currentContainerId);
-        if (container.data.containerId === itemId) {
-            return true;
-        }
-        currentContainerId = container.data.containerId;
-    } while (currentContainerId);
+/**
+ * Checks if assigning the itemId as a child to the container would create a cycle.
+ * This can happen if the container is contained within item.
+ */
+function wouldCreateParentCycle(item, container, actor) {
+    if (!item) throw "Inventory::wouldCreateParentCycle: No item specified.";
+    if (!container) throw "Inventory::wouldCreateParentCycle: No container specified.";
+    if (!actor) throw "Inventory::wouldCreateParentCycle: No actor specified.";
+    if (item === container) return true;
+
+    // If the item has no children it cannot create cycles.
+    if (!containsItems(item)) return false;
+
+    if (item.data.data.contents.includes(container._id)) return true;
+
+    let itemsToTest = duplicate(item.data.data.contents || []);
+    while (itemsToTest.length > 0) {
+        let childId = itemsToTest.shift();
+        let child = actor.getOwnedItem(childId);
+        if (!child) continue;
+
+        if (!containsItems(child)) continue;
+        if (child.data.data.contents.includes(container._id)) return true;
+        itemsToTest = itemsToTest.concat(child.data.data.contents);
+    }
     return false;
+}
+
+/**
+ * Tests if a given item contains any items.
+ * 
+ * @param {Item} item Item to test.
+ * @returns {Boolean} Boolean whether or not this item contains anything.
+ */
+export function containsItems(item) {
+    return item && item.data.data.contents && item.data.data.contents.length > 0;
 }

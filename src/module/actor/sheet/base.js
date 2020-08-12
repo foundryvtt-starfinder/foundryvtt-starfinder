@@ -2,7 +2,7 @@ import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { spellBrowser } from "../../packs/spell-browser.js";
 
-import { tryAddItemToContainerAsync, moveItemBetweenActorsAsync } from "../actor-inventory.js";
+import { moveItemBetweenActorsAsync } from "../actor-inventory.js";
 
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
@@ -577,6 +577,8 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     async _onDrop(event) {
+        event.preventDefault();
+
         const dragData = event.dataTransfer.getData('text/plain');
         const parsedDragData = JSON.parse(dragData);
         if (!parsedDragData) {
@@ -586,12 +588,12 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         let targetActor = this.actor;
         if (this.token) {
-            targetActor = canvas.tokens.get(this.token.data._id);
-            if (!targetActor) {
+            let targetToken = canvas.tokens.get(this.token.data._id);
+            if (!targetToken) {
                 ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
                 return;
             }
-            targetActor = targetActor.actor;
+            targetActor = targetToken.actor;
         }
 
         let targetContainer = null;
@@ -602,11 +604,10 @@ export class ActorSheetSFRPG extends ActorSheet {
         
         if (parsedDragData.pack) {
             const pack = game.packs.get(parsedDragData.pack);
-            return await tryAddItemToContainerAsync(targetContainer, targetActor, async () => {
-                const itemData = await pack.getEntry(parsedDragData.id);
-                const item = await targetActor.createOwnedItem(itemData);
-                return targetActor.getOwnedItem(item._id);
-            });
+            const itemData = await pack.getEntry(parsedDragData.id);
+            const itemCreateResult = await targetActor.createOwnedItem(itemData);
+            const addedItem = targetActor.getOwnedItem(itemCreateResult._id);
+            return await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
         } else if (parsedDragData.data) {
             let sourceActor = game.actors.get(parsedDragData.actorId);
             if ('tokenId' in parsedDragData) {
@@ -617,19 +618,18 @@ export class ActorSheetSFRPG extends ActorSheet {
                 }
                 sourceActor = sourceToken.actor;
             }
-            let itemToMove = await sourceActor.getOwnedItem(parsedDragData.data._id);
 
-            let itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
+            const itemToMove = await sourceActor.getOwnedItem(parsedDragData.data._id);
+            const itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
             if (itemInTargetActor === itemToMove) {
-                return this._onSortItem(event, itemInTargetActor.data);
+                return await this._onSortItem(event, itemInTargetActor.data);
             }
         } else {
             let sidebarItem = game.items.get(parsedDragData.id);
             if (sidebarItem) {
-                return await tryAddItemToContainerAsync(targetContainer, targetActor, async () => {
-                    const createdItem = await targetActor.createEmbeddedEntity("OwnedItem", duplicate(sidebarItem.data));
-                    return targetActor.getOwnedItem(createdItem._id);
-                });
+                const createdItem = await targetActor.createEmbeddedEntity("OwnedItem", duplicate(sidebarItem.data));
+                const addeditem = await targetActor.getOwnedItem(createdItem._id);
+                return await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
             }
             
             console.log("Unknown item source: " + JSON.stringify(parsedDragData));
@@ -639,24 +639,26 @@ export class ActorSheetSFRPG extends ActorSheet {
     processItemContainment(items, pushItemFn) {
         let preprocessedItems = [];
         let containedItems = [];
-        for (let i of items) {
-            let itemData = {item: i, contents: []};
+        for (let item of items) {
+            let itemData = {
+                item: item,
+                parent: items.find(x => x.data.contents && x.data.contents.includes(item._id)),
+                contents: []
+            };
             preprocessedItems.push(itemData);
-            
-            if (!i.data.containerId) {
-                pushItemFn(i.type, itemData);
+
+            if (!itemData.parent) {
+                pushItemFn(item.type, itemData);
             } else {
                 containedItems.push(itemData);
             }
         }
 
         for (let item of containedItems) {
-            const containerId = item.item.data.containerId;
-            let parent = preprocessedItems.find(x => x.item._id === containerId);
+            let parent = preprocessedItems.find(x => x.item._id === item.parent._id);
             if (parent) {
                 parent.contents.push(item);
             }
         }
-
     }
 }
