@@ -158,7 +158,7 @@ async function unpack(sourceDatabase, outputDirectory) {
     let items = await db.asyncFind({});
     
     for (let item of items) {
-        let jsonOutput = JSON.stringify(item, null, 4);
+        let jsonOutput = JSON.stringify(item, null, 2);
         let filename = sanitize(item.name);
         filename = filename.replace(/[\s]/g,"_");
         filename = filename.replace(/[,;]/g,"");
