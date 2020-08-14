@@ -1,4 +1,5 @@
 import { SFRPG } from "../config.js";
+import { RPC } from "../rpc.js";
 
 /**
  * Adds the specified quantity of a given item to an actor. Returns the (possibly newly created) item on the target actor.
@@ -309,4 +310,110 @@ function wouldCreateParentCycle(item, container, actor) {
  */
 export function containsItems(item) {
     return item && item.data.data.contents && item.data.data.contents.length > 0;
+}
+
+export function initializeRemoteInventory() {
+    RPC.registerCallback("dragItemFromCollectionToPlayer", "gm", onItemCollectionItemDraggedToPlayer);
+    RPC.registerCallback("raiseInventoryWarning", "local", onInventoryWarningReceived);
+}
+
+export async function onItemCollectionItemDraggedToPlayer(message) {
+    const data = message.payload;
+
+    // Unpack data
+    const source = getActor(data.source.actorId, data.source.tokenId, data.source.sceneId);
+    const target = getActor(data.target.actorId, data.target.tokenId, data.target.sceneId);
+
+    if (!source.token) {
+        RPC.sendMessageTo(message.sender, "raiseInventoryWarning", "SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError");
+        return;
+    }
+
+    if (!target.actor) {
+        RPC.sendMessageTo(message.sender, "raiseInventoryWarning", "SFRPG.ActorSheet.Inventory.Interface.NoTarget");
+        return;
+    }
+
+    let targetContainer = null;
+    if (target.actor && data.containerId) {
+        targetContainer = target.actor.getOwnedItem(data.containerId);
+    }
+
+    // Add items to target
+    let uncontainedItemIds = [];
+    let copiedItemIds = [];
+    let itemToItemMapping = {};
+    for (let originalItem of data.draggedItems) {
+        const itemData = duplicate(originalItem);
+        delete itemData._id;
+
+        let newItem = null;
+        if (target.actor.isToken) {
+            const  created = await Entity.prototype.createEmbeddedEntity.call(target.actor, "OwnedItem", itemData, {temporary: true});
+            const items = duplicate(target.actor.data.items).concat(created instanceof Array ? created : [created]);
+            await target.actor.token.update({"actorData.items": items}, {});
+            newItem = target.actor.getOwnedItem(created._id);
+        } else {
+            const createItemResult = await target.actor.createOwnedItem(itemData);
+            newItem = await target.actor.getOwnedItem(createItemResult._id);
+        }
+
+        if (newItem) {
+            itemToItemMapping[originalItem._id] = newItem;
+            copiedItemIds.push(originalItem._id);
+            uncontainedItemIds.push(newItem._id);
+        }
+    }
+
+    for (let originalItem of data.draggedItems) {
+        let newItem = itemToItemMapping[originalItem._id];
+        if (originalItem.data.contents) {
+            let newContents = [];
+            for (let originalContentId of originalItem.data.contents) {
+                let originalContentItem = data.draggedItems.find(x => x._id === originalContentId);
+                let newContentItem = itemToItemMapping[originalContentItem._id];
+                newContents.push(newContentItem._id);
+                uncontainedItemIds = uncontainedItemIds.filter(x => x !== newContentItem._id);
+            }
+
+            const update = {_id: newItem._id, "data.contents": newContents};
+            await target.actor.updateOwnedItem(update);
+        }
+    }
+
+    // Remove items from source token
+    let sourceItems = duplicate(source.token.data.flags.sfrpg.itemCollection.items);
+    sourceItems = sourceItems.filter(x => !copiedItemIds.includes(x._id));
+    await source.token.update({"flags.sfrpg.itemCollection.items": sourceItems});
+
+    // Add any uncontained items into targetItem, if applicable
+    if (targetContainer) {
+        let combinedContents = targetContainer.data.data.contents.concat(uncontainedItemIds);
+        const update = {_id: targetContainer._id, "data.contents": combinedContents};
+        await target.actor.updateOwnedItem(update);
+    }
+}
+
+async function onInventoryWarningReceived(data) {
+    ui.notifications.info(game.i18n.format(data.data));
+}
+
+function getActor(actorId, tokenId, sceneId) {
+    let result = {
+        actor: null,
+        token: null
+    }
+    if (tokenId) {
+        result.token = canvas.tokens.placeables.find(x => x.id === tokenId);
+        if (!result.token) {
+            result.token = game.scenes.get(sceneId).data.tokens.find(x => x._id === tokenId);
+        }
+
+        if (result.token) {
+            result.actor = result.token.actor;
+        }
+    } else {
+        result.actor = game.actors.get(actorId);
+    }
+    return result;
 }

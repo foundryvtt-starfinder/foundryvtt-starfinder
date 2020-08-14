@@ -2,7 +2,8 @@ import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { spellBrowser } from "../../packs/spell-browser.js";
 
-import { moveItemBetweenActorsAsync } from "../actor-inventory.js";
+import { moveItemBetweenActorsAsync, onItemCollectionItemDraggedToPlayer } from "../actor-inventory.js";
+import { RPC } from "../../rpc.js"
 
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
@@ -602,7 +603,25 @@ export class ActorSheetSFRPG extends ActorSheet {
             targetContainer = targetActor.items.find(x => x._id === targetId);
         }
         
-        if (parsedDragData.pack) {
+        if (parsedDragData.type === "ItemCollection") {
+            const msg = {
+                target: {
+                    actorId: targetActor._id,
+                    tokenId: this.token ? this.token.id : null,
+                    sceneId: this.token ? this.token.scene._id : null
+                },
+                source: {
+                    actorId: null,
+                    tokenId: parsedDragData.tokenId,
+                    sceneId: parsedDragData.sceneId
+                },
+                draggedItems: parsedDragData.items,
+                containerId: targetContainer ? targetContainer._id : null
+            }
+
+            RPC.sendMessageTo("gm", "dragItemFromCollectionToPlayer", msg);
+            return;
+        } else if (parsedDragData.pack) {
             const pack = game.packs.get(parsedDragData.pack);
             const itemData = await pack.getEntry(parsedDragData.id);
             const itemCreateResult = await targetActor.createOwnedItem(itemData);

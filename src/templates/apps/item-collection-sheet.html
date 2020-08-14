@@ -1,0 +1,36 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{entity.img}}" title="{{entity.name}}" data-edit="img" height="220" width="220" />
+
+        <div class="header-details flexrow">
+            <div class="header-background flexrow">
+                <h1 class="charname">
+                    <input name="name" type="text" value="{{entity.name}}" />
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        <ol class="inventory-list">
+            <li class="inventory-header flexrow">
+                <h3 class="item-name flexrow">Items</h3>
+        
+                <div class="item-detail item-weight">{{localize "SFRPG.InventoryBulk"}}</div>
+        
+                <div class="item-detail item-uses">{{localize "SFRPG.InventoryCapacity"}}</div>
+                <div class="item-detail item-action">{{localize "SFRPG.InventoryUsage"}}</div>
+            </li>
+        
+            <ol class="item-list">
+            {{#each items as |item iid|}}
+                {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../this bigItem=true item=item.item children=item.contents}}
+            {{/each}}
+            </ol>
+        </ol>
+    </section>
+</form>

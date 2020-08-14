@@ -9,8 +9,9 @@
 import { SFRPG } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, getBarAttribute, handleItemDrop } from "./module/canvas.js";
+import { measureDistances, getBarAttribute, handleItemDrop, onCanvasReady, onTokenUpdated } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
+import { initializeRemoteInventory } from "./module/actor/actor-inventory.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
@@ -29,6 +30,7 @@ import migrateWorld from './module/migration.js';
 import CounterManagement from "./module/classes/counter-management.js";
 import templateOverrides from "./module/template-overrides.js";
 import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
+import { RPC } from "./module/rpc.js"
 
 let defaultDropHandler = null;
 
@@ -176,6 +178,12 @@ Hooks.once("ready", () => {
     canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
 });
 
+Hooks.on('ready', () => {
+    RPC.initialize();
+
+    initializeRemoteInventory();
+});
+
 export async function handleOnDrop(event) {
     event.preventDefault();
 
@@ -187,8 +195,9 @@ export async function handleOnDrop(event) {
 		return false;
     }
 
+    console.log(data);
     // We're only interested in overriding item drops.
-    if (!data || data.type !== "Item") {
+    if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
         return await defaultDropHandler(event);
     }
 
@@ -198,7 +207,10 @@ export async function handleOnDrop(event) {
 	data.x = (x - t.tx) / canvas.stage.scale.x;
     data.y = (y - t.ty) / canvas.stage.scale.y;
 
-    return await handleItemDrop(data);
+    if (data.type === "Item") {
+        return await handleItemDrop(data);
+    }
+    return false;
 }
 
 Hooks.on("canvasInit", function () {
@@ -206,6 +218,10 @@ Hooks.on("canvasInit", function () {
     SquareGrid.prototype.measureDistances = measureDistances;
     Token.prototype.getBarAttribute = getBarAttribute;
 });
+
+Hooks.on('canvasReady', onCanvasReady);
+
+Hooks.on('updateToken', onTokenUpdated);
 
 Hooks.on("renderChatMessage", (app, html, data) => {
     highlightCriticalSuccessFailure(app, html, data);
