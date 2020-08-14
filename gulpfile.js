@@ -179,13 +179,20 @@ async function unpackPacks() {
             let fileWithoutExt = file.substr(0, file.length - 3);
             let unpackDir = `./src/items/${fileWithoutExt}`;
             let sourceFile = `${sourceDir}/${file}`;
+            
+            console.log(`Processing ${fileWithoutExt}`);
+
+            console.log(`> Cleaning up ${unpackDir}`);
+            await fs.rmdirSync(unpackDir, {recursive: true});
 
             console.log(`> Unpacking ${sourceFile} into ${unpackDir}`);
             await unpack(sourceFile, unpackDir);
 
-            console.log(`>> Done.`);
+            console.log(`> Done.`);
         }
     }
+
+    console.log(`\nUnpack finished.\n`);
     
     return 0;
 }
@@ -219,6 +226,8 @@ async function cookPacks() {
             await db.asyncInsert(jsonInput);
         }
     }
+    
+    console.log(`\nCook finished.\n`);
     
     await unpackPacks();
     
