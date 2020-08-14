@@ -225,6 +225,11 @@ async function cookPacks() {
     return 0;
 }
 
+async function postCook() {
+    console.log(`\nCompendiums cooked!\nDon't forget to restart Foundry to refresh compendium data!\n`);
+    return 0;
+}
+
 /********************/
 /*		CLEAN		*/
 /********************/
@@ -491,6 +496,6 @@ exports.publish = gulp.series(
 	copyReadmeAndLicenses,
 	packageBuild
 );
-exports.cook = cookPacks;
+exports.cook = gulp.series(cookPacks, clean, execBuild, postCook);
 exports.unpack = unpackPacks;
 exports.default = gulp.series(clean, execBuild);

@@ -33,10 +33,14 @@ The easiest workflow is to work through Foundry, and follow the following steps:
 2. Fill out the details, modifiers, etc.
 3. Right-clicking the item in the Items sidebar tab and select Export Data.
 4. Save the JSON file into the appropriate compendium subfolder.
-5. Open the exported JSON file in a text editor of your choice, and remove the ID field.
+5. Open the exported JSON file in a text editor of your choice, and do some clean-up.
+    1. Remove the ID field.
+    2. Remove the permission field, if it is there.
+    3. Remove the sort field, if it is there.
+    4. Remove the exportSource section from the flags field, if it is there.
 6. Save and close the JSON file.
 7. Update the compendium pack files, by running the following command: `npm run cook`
-8. Run `npm run build` or `npm run build:watch` as usual to compile and copy the files so you can test it in Foundry.
+8. Restart Foundry.
 9. Check in Foundry if the compendium is updated properly.
 10. Submit pull request if everything's great. :-)
 
@@ -51,10 +55,15 @@ The easiest workflow is to work through Foundry, and follow the following steps:
 4. Make the changes you want to make, details, modifiers, etc.
 5. Right-clicking the item in the Items sidebar tab and select Export Data.
 6. Save the JSON file into the appropriate compendium subfolder.
-7. Update the compendium pack files, by running the following command: `npm run cook`
-8. Run `npm run build` or `npm run build:watch` as usual to compile and copy the files so you can test it in Foundry.
-9. Check in Foundry if the compendium is updated properly.
-10. Submit pull request if everything's great. :-)
+7. Open the exported JSON file in a text editor of your choice, and do some clean-up.
+    1. Revert the ID field, set it to the old value.
+    2. Remove the permission field, if it is there.
+    3. Remove the sort field, if it is there.
+    4. Remove the exportSource section from the flags field, if it is there.
+8. Update the compendium pack files, by running the following command: `npm run cook`
+8. Restart Foundry.
+10. Check in Foundry if the compendium is updated properly.
+11. Submit pull request if everything's great. :-)
 
 Alternatively, you can make edits directly to the json files and save the file, and then continue the workflow from step 7.
 
@@ -73,6 +82,6 @@ There is no Foundry workflow for this, and this is going to get a little more te
     1. If no results are found, no-one was referencing this item directly, and you can safely delete the JSON file.
     2. If results are found, you will have to remove all references to the item from the referencing items.
 4. Update the compendium pack files, by running the following command: `npm run cook`
-5. Run `npm run build` or `npm run build:watch` as usual to compile and copy the files so you can test it in Foundry.
+8. Restart Foundry.
 6. Check in Foundry if the compendium is updated properly.
 7. Submit pull request if everything's great. :-)
