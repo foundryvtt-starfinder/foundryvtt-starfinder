@@ -1,13 +1,15 @@
-const gulp = require('gulp');
-const fs = require('fs-extra');
-const path = require('path');
-const chalk = require('chalk');
+const { AsyncNedb } = require('nedb-async');
 const archiver = require('archiver');
-const stringify = require('json-stringify-pretty-compact');
+const argv = require('yargs').argv;
+const chalk = require('chalk');
+const fs = require('fs-extra');
+const gulp = require('gulp');
 const less = require('gulp-less');
+const path = require('path');
+const sanitize = require("sanitize-filename");
+const stringify = require('json-stringify-pretty-compact');
 
 const SFRPG_LESS = ["src/less/*.less"];
-const argv = require('yargs').argv;
 
 function getConfig() {
 	const configPath = path.resolve(process.cwd(), 'foundryconfig.json');
@@ -144,6 +146,97 @@ function buildWatch() {
 		{ ignoreInitial: false },
 		copyFiles
 	);
+}
+
+/**
+ * Unpack existing db files into json files.
+ */
+async function unpack(sourceDatabase, outputDirectory) {
+    await fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => { if (err) throw err; });
+    
+    let db = new AsyncNedb({ filename: sourceDatabase, autoload: true });
+    let items = await db.asyncFind({});
+    
+    for (let item of items) {
+        let jsonOutput = JSON.stringify(item, null, 2);
+        let filename = sanitize(item.name);
+        filename = filename.replace(/[\s]/g,"_");
+        filename = filename.replace(/[,;]/g,"");
+        filename = filename.toLowerCase();
+        
+        let targetFile = `${outputDirectory}/${filename}.json`;
+        await fs.writeFileSync(targetFile, jsonOutput, {"flag": "w"});
+    }
+}
+ 
+async function unpackPacks() {
+    console.log(`Unpacking all packs`);
+    
+    let sourceDir = "./src/packs";
+    let files = await fs.readdirSync(sourceDir);
+    for (let file of files) {
+        if (file.endsWith(".db")) {
+            let fileWithoutExt = file.substr(0, file.length - 3);
+            let unpackDir = `./src/items/${fileWithoutExt}`;
+            let sourceFile = `${sourceDir}/${file}`;
+            
+            console.log(`Processing ${fileWithoutExt}`);
+
+            console.log(`> Cleaning up ${unpackDir}`);
+            await fs.rmdirSync(unpackDir, {recursive: true});
+
+            console.log(`> Unpacking ${sourceFile} into ${unpackDir}`);
+            await unpack(sourceFile, unpackDir);
+
+            console.log(`> Done.`);
+        }
+    }
+
+    console.log(`\nUnpack finished.\n`);
+    
+    return 0;
+}
+
+/**
+ * Cook db source json files into .db files with nedb
+ */
+async function cookPacks() {
+    console.log(`Cooking db files`);
+    
+    let sourceDir = "./src/items";
+    let directories = await fs.readdirSync(sourceDir);
+    for (let directory of directories) {
+        let itemSourceDir = `${sourceDir}/${directory}`;
+        let outputFile = `./src/packs/${directory}.db`;
+        
+        console.log(`Processing ${directory}`);
+        
+        console.log(`> Removing ${outputFile}`);
+        await fs.unlinkSync(outputFile);
+        
+        let db = new AsyncNedb({ filename: outputFile, autoload: true });
+        
+        console.log(`Opening files in ${itemSourceDir}`);
+        let files = await fs.readdirSync(itemSourceDir);
+        for (let file of files) {
+            let filePath = `${itemSourceDir}/${file}`;
+            let jsonInput = await fs.readFileSync(filePath);
+            jsonInput = JSON.parse(jsonInput);
+            
+            await db.asyncInsert(jsonInput);
+        }
+    }
+    
+    console.log(`\nCook finished.\n`);
+    
+    await unpackPacks();
+    
+    return 0;
+}
+
+async function postCook() {
+    console.log(`\nCompendiums cooked!\nDon't forget to restart Foundry to refresh compendium data!\n`);
+    return 0;
 }
 
 /********************/
@@ -412,4 +505,6 @@ exports.publish = gulp.series(
 	copyReadmeAndLicenses,
 	packageBuild
 );
+exports.cook = gulp.series(cookPacks, clean, execBuild, postCook);
+exports.unpack = unpackPacks;
 exports.default = gulp.series(clean, execBuild);

@@ -16,7 +16,7 @@
                         <span>{{data.details.level.value}}</span>
                     </div>
                     <div class="level">
-                        {{#if activeChassis}}<span>{{activeChassis.name}}</span>{{else}}<span class="no-chassis">Missing Chassis</span>{{/if}}
+                        {{#if activeChassis}}<span>{{activeChassis.name}}</span>{{else}}<span class="no-chassis">{{localize "SFRPG.DroneSheet.Chassis.Missing"}}</span>{{/if}}
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
                 {{#each data.abilities as |ability id|}}
-                <li class="ability {{#if ability.proficient}}proficient{{/if}}">
+                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
                   <h4 class="ability-name box-title rollable" data-tippy-content="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.value<br/><br/>{{#each ability.tooltip as |tip|}}{{tip}}<br/>{{/each}}">{{ability.label}}</h4>
                   <div class="ability-modifiers flexrow">
                     <span class="ability-mod" data-tippy-content="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.mod<br/><br/>{{#each ability.modifierTooltip as |tip|}}{{tip}}<br/>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
@@ -123,7 +123,7 @@
                     <li class="attribute speed">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
                         <div class="attribute-value multiple">
-                            <span>{{data.attributes.speed.value}} ft.</span>
+                            <span>{{data.attributes.speed.value}} {{ localize "SFRPG.Units.Speed" }}</span>
                         </div>
                         <footer class="attribute-footer">
                             {{#if data.attributes.speed.special}}
