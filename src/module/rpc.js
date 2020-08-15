@@ -56,8 +56,15 @@ export class RPC {
             payload: payload
         }
 
+        //console.log(`Sending message:\n${JSON.stringify(messageData)}`);
+
         if (recipient === "gm" && game.user.isGM) {
             this._handleMessage(messageData);
+        }
+
+        if (recipient === game.user.id) {
+            this._handleMessage(messageData);
+            return;
         }
 
         if (this.initialized) {

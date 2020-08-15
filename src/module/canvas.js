@@ -149,7 +149,7 @@ export async function handleItemDrop(data) {
             }
         }
 
-        await placeItemCollectionOnCanvas(data.x, data.y, itemData);
+        await placeItemCollectionOnCanvas(data.x, data.y, itemData, true);
 
         // Now remove old items
         if (sourceActor) {
@@ -175,9 +175,10 @@ export async function handleItemDrop(data) {
  * 
  * @param {Integer} x X Coordinate to place the item at.
  * @param {Integer} y Y Coordinate to place the item at.
+ * @param {Boolean} deleteIfEmpty Should this Token be deleted when its last item is removed?
  * @param {Object} itemData Either a single item data, or an array of item data, that are to be placed on the currently active canvas.
  */
-async function placeItemCollectionOnCanvas(x, y, itemData) {
+async function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
     if (!itemData) {
         return;
     }
@@ -198,19 +199,19 @@ async function placeItemCollectionOnCanvas(x, y, itemData) {
             "sfrpg": {
                 "itemCollection": {
                     items: itemData,
-                    locked: false
+                    locked: false,
+                    deleteIfEmpty: deleteIfEmpty
                 }
             }
         }
     });
 
+    // Wait for a moment, Token.create's token needs a second to setup and draw once, so the mouseInteractionManager is initalized.
     await new Promise(resolve => setTimeout(resolve, 25));
     
     setupLootCollectionTokenInteraction(placeable);
 
     return placeable;
-    
-    //ui.notifications.info(game.i18n.format("SFRPG.Canvas.Interface.NoTargetTokenForItemDrop"));
 }
 
 function setupLootCollectionTokenInteraction(lootCollectionToken) {
@@ -220,6 +221,11 @@ function setupLootCollectionTokenInteraction(lootCollectionToken) {
 
 function openLootCollectionSheet(event) {
     const relevantToken = this;
+    if (relevantToken.data.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
+        ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.ItemCollectionLocked"));
+        return;
+    }
+
     if (!relevantToken.apps) {
         relevantToken.apps = {};
     }

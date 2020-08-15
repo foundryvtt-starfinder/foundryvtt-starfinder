@@ -321,8 +321,8 @@ export async function onItemCollectionItemDraggedToPlayer(message) {
     const data = message.payload;
 
     // Unpack data
-    const source = getActor(data.source.actorId, data.source.tokenId, data.source.sceneId);
-    const target = getActor(data.target.actorId, data.target.tokenId, data.target.sceneId);
+    const source = ActorHelper.FromObject(data.source);
+    const target = ActorHelper.FromObject(data.target);
 
     if (!source.token) {
         RPC.sendMessageTo(message.sender, "raiseInventoryWarning", "SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError");
@@ -335,8 +335,8 @@ export async function onItemCollectionItemDraggedToPlayer(message) {
     }
 
     let targetContainer = null;
-    if (target.actor && data.containerId) {
-        targetContainer = target.actor.getOwnedItem(data.containerId);
+    if (data.containerId) {
+        targetContainer = target.getOwnedItem(data.containerId);
     }
 
     // Add items to target
@@ -347,17 +347,7 @@ export async function onItemCollectionItemDraggedToPlayer(message) {
         const itemData = duplicate(originalItem);
         delete itemData._id;
 
-        let newItem = null;
-        if (target.actor.isToken) {
-            const  created = await Entity.prototype.createEmbeddedEntity.call(target.actor, "OwnedItem", itemData, {temporary: true});
-            const items = duplicate(target.actor.data.items).concat(created instanceof Array ? created : [created]);
-            await target.actor.token.update({"actorData.items": items}, {});
-            newItem = target.actor.getOwnedItem(created._id);
-        } else {
-            const createItemResult = await target.actor.createOwnedItem(itemData);
-            newItem = await target.actor.getOwnedItem(createItemResult._id);
-        }
-
+        let newItem = await target.createOwnedItem(itemData);
         if (newItem) {
             itemToItemMapping[originalItem._id] = newItem;
             copiedItemIds.push(originalItem._id);
@@ -377,7 +367,7 @@ export async function onItemCollectionItemDraggedToPlayer(message) {
             }
 
             const update = {_id: newItem._id, "data.contents": newContents};
-            await target.actor.updateOwnedItem(update);
+            await target.updateOwnedItem(update);
         }
     }
 
@@ -386,16 +376,20 @@ export async function onItemCollectionItemDraggedToPlayer(message) {
     sourceItems = sourceItems.filter(x => !copiedItemIds.includes(x._id));
     await source.token.update({"flags.sfrpg.itemCollection.items": sourceItems});
 
+    if (sourceItems.length === 0 && source.token.data.flags.sfrpg.itemCollection.deleteIfEmpty) {
+        await source.token.delete();
+    }
+
     // Add any uncontained items into targetItem, if applicable
     if (targetContainer) {
         let combinedContents = targetContainer.data.data.contents.concat(uncontainedItemIds);
         const update = {_id: targetContainer._id, "data.contents": combinedContents};
-        await target.actor.updateOwnedItem(update);
+        await target.updateOwnedItem(update);
     }
 }
 
-async function onInventoryWarningReceived(data) {
-    ui.notifications.info(game.i18n.format(data.data));
+async function onInventoryWarningReceived(message) {
+    ui.notifications.info(game.i18n.format(message.payload));
 }
 
 function getActor(actorId, tokenId, sceneId) {
@@ -416,4 +410,78 @@ function getActor(actorId, tokenId, sceneId) {
         result.actor = game.actors.get(actorId);
     }
     return result;
+}
+
+class ActorHelper {
+    constructor(actorId, tokenId, sceneId) {
+        this.actorId = actorId;
+        this.tokenId = tokenId;
+        this.sceneId = sceneId;
+
+        if (tokenId) {
+            this.token = canvas.tokens.placeables.find(x => x.id === tokenId);
+            if (!this.token) {
+                this.token = game.scenes.get(sceneId).data.tokens.find(x => x._id === tokenId);
+            }
+    
+            if (this.token) {
+                this.actor = this.token.actor;
+            }
+        } else {
+            this.actor = game.actors.get(actorId);
+        }
+    }
+
+    static FromObject(actorReferenceObject) {
+        return new ActorHelper(actorReferenceObject.actorId, actorReferenceObject.tokenId, actorReferenceObject.sceneId);
+    }
+
+    /**
+     * Wrapper around actor.getOwnedItem.
+     * @param {String} itemId ID of item to get.
+     */
+    getOwnedItem(itemId) {
+        if (!this.actor) return null;
+        return this.actor.getOwnedItem(itemId);
+    }
+
+    /**
+     * Wrapper around actor.createOwnedItem.
+     * @param {Object} itemData Data for item to create.
+     * @returns The newly created item.
+     */
+    async createOwnedItem(itemData) {
+        if (!this.actor) return null;
+
+        let newItem = null;
+        if (this.actor.isToken) {
+            const  created = await Entity.prototype.createEmbeddedEntity.call(this.actor, "OwnedItem", itemData, {temporary: true});
+            const items = duplicate(this.actor.data.items).concat(created instanceof Array ? created : [created]);
+            await this.actor.token.update({"actorData.items": items}, {});
+            newItem = this.getOwnedItem(created._id);
+        } else {
+            const createItemResult = await this.actor.createOwnedItem(itemData);
+            newItem = this.getOwnedItem(createItemResult._id);
+        }
+
+        return newItem;
+    }
+
+    /**
+     * Wrapper around actor.updateOwnedItem.
+     * @param {Object} update Data to update with. Must have an _id field.
+     */
+    async updateOwnedItem(update) {
+        if (!this.actor) return null;
+        return this.actor.updateOwnedItem(update);
+    }
+
+    /**
+     * Wrapper around actor.deleteOwnedItem.
+     * @param {String} itemId ID of item to delete.
+     */
+    async deleteOwnedItem(itemId) {
+        if (!this.actor) return null;
+        return this.actor.deleteOwnedItem(itemId);
+    }
 }

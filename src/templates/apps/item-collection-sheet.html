@@ -15,6 +15,18 @@
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
+        {{#if isGM}}
+        <div class="inventory-filters">
+            <label>Settings:</label>
+            <label class="checkbox">
+                <input id="toggle-locked" type="checkbox" name="itemCollection.locked" {{checked itemCollection.locked}}/> Is this container locked?
+            </label>
+            <label>&nbsp;</label>
+            <label class="checkbox">
+                <input id="toggle-delete-if-empty" type="checkbox" name="itemCollection.deleteIfEmpty" {{checked itemCollection.deleteIfEmpty}}/> Should this container token disappear when emptied?
+            </label>
+        </div>
+        {{/if}}
 
         <ol class="inventory-list">
             <li class="inventory-header flexrow">

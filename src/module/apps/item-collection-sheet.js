@@ -2,9 +2,10 @@ export class ItemCollectionSheet extends BaseEntitySheet {
     constructor(itemCollection) {
         super(itemCollection, {});
         this.itemCollection = itemCollection;
+
+        Hooks.on("deleteToken", (scene, token, options, userId) => this._handleTokenDelete(scene, token, options, userId));
     }
 
-    
     static get defaultOptions() {
         const defaultOptions = super.defaultOptions;
         return mergeObject(defaultOptions, {
@@ -22,7 +23,21 @@ export class ItemCollectionSheet extends BaseEntitySheet {
 
     async close(options={}) {
         delete this.entity.apps[this.appId];
+        Hooks.off("deleteToken", this._handleTokenDelete);
         super.close(options);
+    }
+
+    _handleTokenDelete(scene, token, options, userId) {
+        if (token._id === this.itemCollection.id) {
+            this.close();
+        }
+    }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+
+        html.find('#toggle-locked').click(this._toggleLocked.bind(this));
+        html.find('#toggle-delete-if-empty').click(this._toggleDeleteIfEmpty.bind(this));
     }
 
     /**
@@ -67,8 +82,9 @@ export class ItemCollectionSheet extends BaseEntitySheet {
             data.items.push(itemData);
         });
 
+        data.itemCollection = this.entity.data.flags.sfrpg.itemCollection;
         data.locked = this.entity.data.flags.sfrpg.itemCollection.locked;
-        data.deleteWhenEmpty = this.entity.data.flags.sfrpg.itemCollection.deleteWhenEmpty;
+        data.deleteIfEmpty = this.entity.data.flags.sfrpg.itemCollection.deleteIfEmpty;
 
         return data;
     }
@@ -97,6 +113,22 @@ export class ItemCollectionSheet extends BaseEntitySheet {
                 parent.contents.push(item);
             }
         }
+    }
+
+    async _toggleLocked(event) {
+        event.preventDefault();
+
+        await this.itemCollection.update({
+            "flags.sfrpg.itemCollection.locked": !this.entity.data.flags.sfrpg.itemCollection.locked
+        });
+    }
+
+    async _toggleDeleteIfEmpty(event) {
+        event.preventDefault();
+
+        await this.itemCollection.update({
+            "flags.sfrpg.itemCollection.deleteIfEmpty": !this.entity.data.flags.sfrpg.itemCollection.deleteIfEmpty
+        });
     }
 
     /* -------------------------------------------- */
