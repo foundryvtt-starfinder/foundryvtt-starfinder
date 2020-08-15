@@ -98,16 +98,20 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
  */
 export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetItem = null) {
     if (!targetActor || !itemToMove) {
-        console.log("Invenory::moveItemBetweenActorsAsync: No targetActor or itemToMove.")
+        console.log("Inventory::moveItemBetweenActorsAsync: No targetActor or itemToMove.")
         return null;
     }
 
     if (!sourceActor) {
-        console.log("Invenory::moveItemBetweenActorsAsync: No source actor specified, switching to addItemToActorAsync.")
+        console.log("Inventory::moveItemBetweenActorsAsync: No source actor specified, switching to addItemToActorAsync.")
         return await addItemToActorAsync(targetActor, itemToMove, itemToMove.data.data.quantity, targetItem);
     }
 
     if (sourceActor === targetActor) {
+        if (itemToMove === targetItem) {
+            return itemToMove;
+        }
+        
         let desiredParent = null;
         if (targetItem) {
             if (acceptsItem(targetItem, itemToMove, targetActor)) {
@@ -313,6 +317,7 @@ export function containsItems(item) {
 }
 
 export function initializeRemoteInventory() {
+    RPC.registerCallback("dragItemToCollection", "gm", onItemDraggedToCollection);
     RPC.registerCallback("dragItemFromCollectionToPlayer", "gm", onItemCollectionItemDraggedToPlayer);
     RPC.registerCallback("raiseInventoryWarning", "local", onInventoryWarningReceived);
 }
@@ -382,9 +387,68 @@ export async function onItemCollectionItemDraggedToPlayer(message) {
 
     // Add any uncontained items into targetItem, if applicable
     if (targetContainer) {
-        let combinedContents = targetContainer.data.data.contents.concat(uncontainedItemIds);
-        const update = {_id: targetContainer._id, "data.contents": combinedContents};
-        await target.updateOwnedItem(update);
+        let acceptableItemIds = [];
+        for (let uncontainedItemId of uncontainedItemIds) {
+            let uncontainedItem = target.getOwnedItem(uncontainedItemId);
+            if (acceptsItem(targetContainer, uncontainedItem, target.actor)) {
+                acceptableItemIds.push(uncontainedItemId);
+            }
+        }
+
+        if (acceptableItemIds.length > 0) {
+            let combinedContents = targetContainer.data.data.contents.concat(acceptableItemIds);
+            const update = {_id: targetContainer._id, "data.contents": combinedContents};
+            await target.updateOwnedItem(update);
+        }
+    }
+}
+
+async function onItemDraggedToCollection(message) {
+    let data = message.payload;
+
+    let target = ActorHelper.FromObject(data.target);
+    let items = target.token.data.flags.sfrpg.itemCollection.items;
+
+    let targetContainer = null;
+    if (data.containerId) {
+        targetContainer = items.find(x => x._id === data.containerId);
+    }
+
+    let newItems = [];
+    if (data.pack) {
+        const pack = game.packs.get(data.pack);
+        const itemData = await pack.getEntry(data.draggedItemId);
+        itemData._id = randomID(16);
+        newItems.push(duplicate(itemData));
+    } else if (data.source.tokenId || data.source.actorId) {
+        // from another token
+        let source = ActorHelper.FromObject(data.source);
+        if (!source.isValid) {
+            return;
+        }
+
+        newItems.push(data.draggedItemData);
+        await source.deleteOwnedItem(data.draggedItemData._id);
+    } else {
+        let sidebarItem = game.items.get(data.draggedItemId);
+        if (sidebarItem) {
+            let itemData = duplicate(sidebarItem.data);
+            itemData._id = randomID(16);
+            newItems.push(duplicate(itemData));
+        }
+    }
+
+    if (newItems.length > 0) {
+        if (targetContainer) {
+            for (let newItem of newItems) {
+                targetContainer.data.contents.push(newItem._id);
+            }
+        }
+        newItems = items.concat(newItems);
+        const update = {
+            "flags.sfrpg.itemCollection.items": newItems
+        }
+        await target.token.update(update);
     }
 }
 
@@ -412,7 +476,7 @@ function getActor(actorId, tokenId, sceneId) {
     return result;
 }
 
-class ActorHelper {
+export class ActorHelper {
     constructor(actorId, tokenId, sceneId) {
         this.actorId = actorId;
         this.tokenId = tokenId;
@@ -434,6 +498,10 @@ class ActorHelper {
 
     static FromObject(actorReferenceObject) {
         return new ActorHelper(actorReferenceObject.actorId, actorReferenceObject.tokenId, actorReferenceObject.sceneId);
+    }
+
+    get isValid() {
+        return (this.actor);
     }
 
     /**

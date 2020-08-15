@@ -1,4 +1,5 @@
 import { ItemSheetSFRPG } from "../item/sheet.js"
+import { RPC } from "../rpc.js"
 
 export class ItemCollectionSheet extends BaseEntitySheet {
     constructor(itemCollection) {
@@ -48,14 +49,14 @@ export class ItemCollectionSheet extends BaseEntitySheet {
     activateListeners(html) {
         super.activateListeners(html);
 
-        html.find('.item').click(ev => this._onItemEdit(ev));
+        html.find('.item .item-name h4').click(event => this._onItemSummary(event));
 
         if (game.user.isGM) {
             html.find('img[data-edit]').click(ev => this._onEditImage(ev));
             html.find('#toggle-locked').click(this._toggleLocked.bind(this));
             html.find('#toggle-delete-if-empty').click(this._toggleDeleteIfEmpty.bind(this));
 
-            // Delete Inventory Item
+            html.find('.item-edit').click(ev => this._onItemEdit(ev));
             html.find('.item-delete').click(ev => this._onItemDelete(ev));
         }
     }
@@ -165,8 +166,34 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         });
     }
 
+    /**
+     * Handle rolling of an item form the Actor sheet, obtaining the item instance an dispatching to it's roll method.
+     * 
+     * @param {Event} event The html event
+     */
+    _onItemSummary(event) {
+        event.preventDefault();
+        let li = $(event.currentTarget).parents('.item');
+        let itemId = li.attr("data-item-id");
+        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        let chatData = this.getChatData(item, { secrets: true, rollData: item.data.data });
+
+        if (li.hasClass('expanded')) {
+            let summary = li.children('.item-summary');
+            summary.slideUp(200, () => summary.remove());
+        } else {
+            let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
+            let props = $(`<div class="item-properties"></div>`);
+            chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
+            div.append(props);
+            li.append(div.hide());
+            div.slideDown(200);
+        }
+        li.toggleClass('expanded');
+    }
+
     _onItemEdit(event) {
-        let itemId = $(event.currentTarget).attr("data-item-id");
+        let itemId = $(event.currentTarget).parents('.item').attr("data-item-id");
         const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
         const itemData = {
             data: duplicate(item),
@@ -187,9 +214,6 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         // TODO: Confirm dialog, and ask to recursively delete nested items, if it is the last item and deleteIfEmpty is enabled, also ask
 
         let li = $(event.currentTarget).parents(".item");
-        if (!li) {
-            li = $(event.currentTarget);
-        }
         let itemId = li.attr("data-item-id");
 
         const newItems = this.itemCollection.data.flags.sfrpg.itemCollection.items.filter(x => x._id !== itemId);
@@ -204,6 +228,56 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         }
 
         li.slideUp(200, () => this.render(false));
+    }
+
+    findItem(itemId) {
+        return this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+    }
+
+    getItems() {
+        return this.itemCollection.data.flags.sfrpg.itemCollection.items;
+    }
+    
+    getChatData(itemData, htmlOptions) {
+        const data = duplicate(itemData.data);
+        const labels = itemData.labels || {};
+
+        // Rich text description
+        data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
+
+        // Item type specific properties
+        const props = [];
+        const fn = itemData[`_${itemData.data.type}ChatData`];
+        if (fn) fn.bind(itemData)(data, labels, props);
+
+        // General equipment properties
+        if (data.hasOwnProperty("equipped") && !["goods", "augmentation", "technological", "upgrade"].includes(itemData.data.type)) {
+            props.push(
+                data.equipped ? "Equipped" : "Not Equipped",
+                data.proficient ? "Proficient" : "Not Proficient",
+            );
+        }
+
+        // Ability activation properties
+        if (data.hasOwnProperty("activation")) {
+            props.push(
+                labels.target,
+                labels.area,
+                labels.activation,
+                labels.range,
+                labels.duration
+            );
+        }
+
+        if (data.hasOwnProperty("capacity")) {
+            props.push(
+                labels.capacity
+            );
+        }
+
+        // Filter properties and return
+        data.properties = props.filter(p => !!p);
+        return data;
     }
 
     /* -------------------------------------------- */
@@ -292,37 +366,37 @@ export class ItemCollectionSheet extends BaseEntitySheet {
   
     /** @override */
     async _onDrop(event) {
+        let data;
+        try {
+            data = JSON.parse(event.dataTransfer.getData('text/plain'));
+            if (data.type !== "Item") return;
+        } catch (err) {
+            return false;
+        }
 
-        return false;
-  
-      // Try to extract the data
-      let data;
-      try {
-        data = JSON.parse(event.dataTransfer.getData('text/plain'));
-        if (data.type !== "Item") return;
-      } catch (err) {
-        return false;
-      }
-  
-      // Case 1 - Import from a Compendium pack
-      const actor = this.actor;
-      if (data.pack) {
-        return actor.importItemFromCollection(data.pack, data.id);
-      }
-  
-      // Case 2 - Data explicitly provided
-      else if (data.data) {
-        let sameActor = data.actorId === actor._id;
-        if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
-        if (sameActor) return this._onSortItem(event, data.data); // Sort existing items
-        else return actor.createEmbeddedEntity("OwnedItem", duplicate(data.data));  // Create a new Item
-      }
-  
-      // Case 3 - Import from World entity
-      else {
-        let item = game.items.get(data.id);
-        if (!item) return;
-        return actor.createEmbeddedEntity("OwnedItem", duplicate(item.data));
-      }
+        let targetContainer = null;
+        if (event) {
+            const targetId = $(event.target).parents('.item').attr('data-item-id')
+            targetContainer = this.findItem(targetId);
+        }
+
+        const msg = {
+            target: {
+                actorId: null,
+                tokenId: this.itemCollection.id,
+                sceneId: this.itemCollection.scene._id
+            },
+            source: {
+                actorId: data.actorId,
+                tokenId: data.tokenId,
+                sceneId: data.sceneId,
+            },
+            draggedItemId: data.id,
+            draggedItemData: data.data,
+            pack: data.pack,
+            containerId: targetContainer ? targetContainer._id : null
+        }
+
+        RPC.sendMessageTo("gm", "dragItemToCollection", msg);
     }
 }

@@ -60,6 +60,7 @@ export class RPC {
 
         if (recipient === "gm" && game.user.isGM) {
             this._handleMessage(messageData);
+            return;
         }
 
         if (recipient === game.user.id) {
