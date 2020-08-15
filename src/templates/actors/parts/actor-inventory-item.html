@@ -1,5 +1,5 @@
         <li class="item {{#if (not bigItem)}}small{{/if}} {{#if (eq item.type "container")}}container{{/if}} flexrow" data-item-id="{{item._id}}">
-            <div class="item-name flexrow rollable">
+            <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
                 <div class="item-image {{#if (not bigItem)}}small{{/if}}" style="background-image: url({{item.img}})"></div>
                 <h4>
                     {{~#if item.isStack}}({{item.data.quantity}}) {{/if}}
@@ -47,11 +47,13 @@
 
             {{#if owner}}
             <div class="item-controls">
+                {{#if (not disableEquipping)}}
                 {{#if (and (or (or (eq item.type "weapon") (eq item.type "equipment")) (eq item.type "container")) bigItem)}}
                 {{#if item.data.equipped}}
                 <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Equip"}}"><i class="fas fa-check"></i></a>
                 {{else}}
                 <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Unequip"}}"><i class="far fa-square"></i></a>
+                {{/if}}
                 {{/if}}
                 {{/if}}
                 <a class="item-control item-edit" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Edit"}}"><i class="fas fa-edit"></i></a>

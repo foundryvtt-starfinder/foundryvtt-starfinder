@@ -312,12 +312,6 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         this.actor.deleteEmbeddedEntity("OwnedItem", itemId);
 
-        for (let item of this.actor.items) {
-            if (item.data.data.containerId === itemId) {
-                item.update({"data.containerId": ""});
-            }
-        }
-
         li.slideUp(200, () => this.render(false));
     }
 

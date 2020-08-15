@@ -1,9 +1,14 @@
+import { ItemSheetSFRPG } from "../item/sheet.js"
+
 export class ItemCollectionSheet extends BaseEntitySheet {
     constructor(itemCollection) {
         super(itemCollection, {});
         this.itemCollection = itemCollection;
 
-        Hooks.on("deleteToken", (scene, token, options, userId) => this._handleTokenDelete(scene, token, options, userId));
+        this.updateCallback = (scene, token, options, userId) => this._handleTokenUpdated(scene, token, options, userId);
+        Hooks.on("updateToken", this.updateCallback);
+        this.deleteCallback = (scene, token, options, userId) => this._handleTokenDelete(scene, token, options, userId);
+        Hooks.on("deleteToken", this.deleteCallback);
     }
 
     static get defaultOptions() {
@@ -23,8 +28,15 @@ export class ItemCollectionSheet extends BaseEntitySheet {
 
     async close(options={}) {
         delete this.entity.apps[this.appId];
-        Hooks.off("deleteToken", this._handleTokenDelete);
+        Hooks.off("updateToken", this.updateCallback);
+        Hooks.off("deleteToken", this.deleteCallback);
         super.close(options);
+    }
+
+    _handleTokenUpdated(scene, token, options, userId) {
+        if (token._id === this.itemCollection.id && token.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
+            this.close();
+        }
     }
 
     _handleTokenDelete(scene, token, options, userId) {
@@ -36,8 +48,16 @@ export class ItemCollectionSheet extends BaseEntitySheet {
     activateListeners(html) {
         super.activateListeners(html);
 
-        html.find('#toggle-locked').click(this._toggleLocked.bind(this));
-        html.find('#toggle-delete-if-empty').click(this._toggleDeleteIfEmpty.bind(this));
+        html.find('.item').click(ev => this._onItemEdit(ev));
+
+        if (game.user.isGM) {
+            html.find('img[data-edit]').click(ev => this._onEditImage(ev));
+            html.find('#toggle-locked').click(this._toggleLocked.bind(this));
+            html.find('#toggle-delete-if-empty').click(this._toggleDeleteIfEmpty.bind(this));
+
+            // Delete Inventory Item
+            html.find('.item-delete').click(ev => this._onItemDelete(ev));
+        }
     }
 
     /**
@@ -47,7 +67,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         const data = super.getData();
         data.config = CONFIG.SFRPG;
         data.isCharacter = true;
-        data.owner = false;
+        data.owner = game.user.isGM;
         data.isGM = game.user.isGM;
 
         const tokenData = this.entity.getFlag("sfrpg", "itemCollection");
@@ -83,10 +103,24 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         });
 
         data.itemCollection = this.entity.data.flags.sfrpg.itemCollection;
-        data.locked = this.entity.data.flags.sfrpg.itemCollection.locked;
-        data.deleteIfEmpty = this.entity.data.flags.sfrpg.itemCollection.deleteIfEmpty;
+
+        if (data.itemCollection.locked && !game.user.isGM) {
+            this.close();
+        }
 
         return data;
+    }
+
+    async _render(...args) {
+        await super._render(...args);
+
+        tippy('[data-tippy-content]', {
+            allowHTML: true,
+            arrow: false,
+            placement: 'top-start',
+            duration: [500, null],
+            delay: [800, null]
+        });
     }
 
     processItemContainment(items, pushItemFn) {
@@ -129,6 +163,68 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         await this.itemCollection.update({
             "flags.sfrpg.itemCollection.deleteIfEmpty": !this.entity.data.flags.sfrpg.itemCollection.deleteIfEmpty
         });
+    }
+
+    _onItemEdit(event) {
+        let itemId = $(event.currentTarget).attr("data-item-id");
+        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        const itemData = {
+            data: duplicate(item),
+            labels: {},
+            apps: {}
+        };
+        let sheet = new ItemSheetSFRPG(itemData, {submitOnChange: false, submitOnClose: false, editable: false});
+        sheet.render(true);
+    }
+
+    /**
+     * Handle deleting an Owned Item for the actor
+     * @param {Event} event The originating click event
+     */
+    _onItemDelete(event) {
+        event.preventDefault();
+
+        // TODO: Confirm dialog, and ask to recursively delete nested items, if it is the last item and deleteIfEmpty is enabled, also ask
+
+        let li = $(event.currentTarget).parents(".item");
+        if (!li) {
+            li = $(event.currentTarget);
+        }
+        let itemId = li.attr("data-item-id");
+
+        const newItems = this.itemCollection.data.flags.sfrpg.itemCollection.items.filter(x => x._id !== itemId);
+        const update = {
+            "flags.sfrpg.itemCollection.items": newItems
+        }
+
+        if (newItems.length === 0 && this.itemCollection.data.flags.sfrpg.itemCollection.deleteIfEmpty) {
+            this.itemCollection.delete();
+        } else {
+            this.itemCollection.update(update);
+        }
+
+        li.slideUp(200, () => this.render(false));
+    }
+
+    /* -------------------------------------------- */
+  
+    /**
+     * Handle changing the actor profile image by opening a FilePicker
+     * @private
+     */
+    _onEditImage(event) {
+      const attr = event.currentTarget.dataset.edit;
+      const current = getProperty(this.entity.data, attr);
+      new FilePicker({
+        type: "image",
+        current: current,
+        callback: path => {
+          event.currentTarget.src = path;
+          this._onSubmit(event);
+        },
+        top: this.position.top + 40,
+        left: this.position.left + 10
+      }).browse(current);
     }
 
     /* -------------------------------------------- */

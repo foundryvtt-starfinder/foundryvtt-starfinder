@@ -222,7 +222,7 @@ function setupLootCollectionTokenInteraction(lootCollectionToken) {
 function openLootCollectionSheet(event) {
     const relevantToken = this;
     if (relevantToken.data.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
-        ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.ItemCollectionLocked"));
+        ui.notifications.info(game.i18n.format("SFRPG.ItemCollectionSheet.ItemCollectionLocked"));
         return;
     }
 
