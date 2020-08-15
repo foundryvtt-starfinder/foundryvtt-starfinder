@@ -111,7 +111,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         if (itemToMove === targetItem) {
             return itemToMove;
         }
-        
+
         let desiredParent = null;
         if (targetItem) {
             if (acceptsItem(targetItem, itemToMove, targetActor)) {
@@ -439,7 +439,7 @@ async function onItemDraggedToCollection(message) {
     }
 
     if (newItems.length > 0) {
-        if (targetContainer) {
+        if (targetContainer && targetContainer.data.contents) {
             for (let newItem of newItems) {
                 targetContainer.data.contents.push(newItem._id);
             }
