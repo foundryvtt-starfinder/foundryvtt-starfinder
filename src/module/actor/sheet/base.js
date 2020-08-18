@@ -2,7 +2,7 @@ import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { spellBrowser } from "../../packs/spell-browser.js";
 
-import { moveItemBetweenActorsAsync, onItemCollectionItemDraggedToPlayer } from "../actor-inventory.js";
+import { moveItemBetweenActorsAsync, ActorItemHelper } from "../actor-inventory.js";
 import { RPC } from "../../rpc.js"
 
 /**
@@ -581,29 +581,21 @@ export class ActorSheetSFRPG extends ActorSheet {
             return;
         }
 
-        let targetActor = this.actor;
-        if (this.token) {
-            let targetToken = canvas.tokens.get(this.token.data._id);
-            if (!targetToken) {
-                ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
-                return;
-            }
-            targetActor = targetToken.actor;
+        const targetActor = new ActorItemHelper(this.actor._id, this.token ? this.token.id : null, this.token ? this.token.scene.id : null);
+        if (!ActorItemHelper.IsValidHelper(targetActor)) {
+            ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
+            return;
         }
 
         let targetContainer = null;
         if (event) {
             const targetId = $(event.target).parents('.item').attr('data-item-id')
-            targetContainer = targetActor.items.find(x => x._id === targetId);
+            targetContainer = await targetActor.getOwnedItem(targetId);
         }
         
         if (parsedDragData.type === "ItemCollection") {
             const msg = {
-                target: {
-                    actorId: targetActor._id,
-                    tokenId: this.token ? this.token.id : null,
-                    sceneId: this.token ? this.token.scene._id : null
-                },
+                target: targetActor.toObject(),
                 source: {
                     actorId: null,
                     tokenId: parsedDragData.tokenId,
@@ -618,18 +610,25 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else if (parsedDragData.pack) {
             const pack = game.packs.get(parsedDragData.pack);
             const itemData = await pack.getEntry(parsedDragData.id);
-            const itemCreateResult = await targetActor.createOwnedItem(itemData);
-            const addedItem = targetActor.getOwnedItem(itemCreateResult._id);
-            return await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
-        } else if (parsedDragData.data) {
-            let sourceActor = game.actors.get(parsedDragData.actorId);
-            if ('tokenId' in parsedDragData) {
-                let sourceToken = canvas.tokens.get(parsedDragData.tokenId);
-                if (!sourceToken) {
-                    ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
-                    return;
+
+            const addedItem = await targetActor.createOwnedItem(itemData);
+
+            if (targetContainer) {
+                let newContents = [];
+                if (targetContainer.data.data.contents) {
+                    newContents = duplicate(targetContainer.data.data.contents);
                 }
-                sourceActor = sourceToken.actor;
+                newContents.push(addedItem._id);
+                let update = { _id: targetContainer._id, "data.contents": newContents };
+                await targetActor.updateOwnedItem(update);
+            }
+
+            return addedItem;
+        } else if (parsedDragData.data) {
+            let sourceActor = new ActorItemHelper(parsedDragData.actorId, parsedDragData.tokenId, null);
+            if (!ActorItemHelper.IsValidHelper(sourceActor)) {
+                ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
+                return;
             }
 
             const itemToMove = await sourceActor.getOwnedItem(parsedDragData.data._id);
@@ -640,9 +639,19 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else {
             let sidebarItem = game.items.get(parsedDragData.id);
             if (sidebarItem) {
-                const createdItem = await targetActor.createEmbeddedEntity("OwnedItem", duplicate(sidebarItem.data));
-                const addeditem = await targetActor.getOwnedItem(createdItem._id);
-                return await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
+                const addedItem = await targetActor.createOwnedItem(duplicate(sidebarItem.data));
+                
+                if (targetContainer) {
+                    let newContents = [];
+                    if (targetContainer.data.data.contents) {
+                        newContents = duplicate(targetContainer.data.data.contents);
+                    }
+                    newContents.push(addedItem._id);
+                    let update = { _id: targetContainer._id, "data.contents": newContents };
+                    await targetActor.updateOwnedItem(update);
+                }
+
+                return addedItem;
             }
             
             console.log("Unknown item source: " + JSON.stringify(parsedDragData));

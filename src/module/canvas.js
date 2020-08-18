@@ -1,4 +1,4 @@
-import { moveItemBetweenActorsAsync, containsItems } from "./actor/actor-inventory.js";
+import { moveItemBetweenActorsAsync, ActorItemHelper } from "./actor/actor-inventory.js";
 import { ItemCollectionSheet } from "./apps/item-collection-sheet.js";
 
 export function onCanvasReady(...args) {
@@ -95,13 +95,13 @@ export async function handleItemDrop(data) {
             ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
             return;
         }
-        sourceActor = sourceToken.actor;
+        sourceActor = new ActorItemHelper(sourceToken.actor._id, sourceToken.id, sourceToken.scene.id);
         sourceItemData = duplicate(data.data);
         sourceItem = sourceActor.getOwnedItem(sourceItemData._id);
     } else if ("actorId" in data) {
         // Source is actor sheet
         //console.log("> Dragged item from actor: " + data.actorId);
-        sourceActor = game.actors.get(data.actorId);
+        sourceActor = new ActorItemHelper(data.actorId, null, null);
         sourceItemData = duplicate(data.data);
         sourceItem = sourceActor.getOwnedItem(sourceItemData._id);
     } else if ("id" in data) {
@@ -163,8 +163,10 @@ export async function handleItemDrop(data) {
         return true;
     }
 
+    let target = new ActorItemHelper(targetActor._id, targetActor.token.id, targetActor.token.scene.id)
+
     if (sourceItem) {
-        await moveItemBetweenActorsAsync(sourceActor, sourceItem, targetActor);
+        await moveItemBetweenActorsAsync(sourceActor, sourceItem, target);
     } else {
         await targetActor.createOwnedItem(sourceItemData);
     }
@@ -185,6 +187,12 @@ async function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
 
     if (!(itemData instanceof Array)) {
         itemData = [itemData];
+    }
+
+    for (let item of itemData) {
+        if (item.data.equipped) {
+            item.data.equipped = false;
+        }
     }
 
     let placeable = await Token.create({

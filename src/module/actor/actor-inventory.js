@@ -5,14 +5,14 @@ import { RPC } from "../rpc.js";
  * Adds the specified quantity of a given item to an actor. Returns the (possibly newly created) item on the target actor.
  * Will not add child items, those will have to be added manually at a later iteration.
  * 
- * @param {Actor} targetActor Actor to add the item to.
+ * @param {ActorItemHelper} targetActor Actor to add the item to.
  * @param {Item} item Item to add.
  * @param {Number} quantity Quantity of the item to add.
  * @param {Item} targetItem (Optional) Item to either merge with, or add as a child to, or find its parent and set as a sibling.
  * @returns {Item} Returns the (possibly newly created) item on the target actor.
  */
 export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targetItem = null) {
-    if (!targetActor) return null;
+    if (!ActorItemHelper.IsValidHelper(targetActor)) return null;
 
     if (targetItem && targetItem === itemToAdd) {
         return itemToAdd;
@@ -24,21 +24,21 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
 
     let desiredParent = null;
     if (targetItem) {
-        if (acceptsItem(targetItem, itemToAdd, targetActor)) {
+        if (acceptsItem(targetItem, itemToAdd, targetActor.actor)) {
             desiredParent = targetItem;
         } else if (targetItem.name === itemToAdd.name && !containsItems(targetItem) && !containsItems(itemToAdd)) {
             const targetItemNewQuantity = Number(targetItem.data.data.quantity) + quantity;
             await targetActor.updateOwnedItem({ _id: targetItem._id, 'data.quantity': targetItemNewQuantity});
             return targetItem;
         } else {
-            desiredParent = targetActor.items.find(x => x.data.contents && x.data.contents.includes(targetItem._id));
+            desiredParent = targetActor.findItem(x => x.data.contents && x.data.contents.includes(targetItem._id));
         }
     }
     
     let addedItem = null;
     if (targetActor.isToken) {
-        const  created = await Entity.prototype.createEmbeddedEntity.call(targetActor, "OwnedItem", newItemData, {temporary: true});
-        const items = duplicate(targetActor.data.items).concat(created instanceof Array ? created : [created]);
+        const created = await Entity.prototype.createEmbeddedEntity.call(targetActor.actor, "OwnedItem", newItemData, {temporary: true});
+        const items = duplicate(targetActor.actor.data.items).concat(created instanceof Array ? created : [created]);
         await targetActor.token.update({"actorData.items": items}, {});
         addedItem = targetActor.getOwnedItem(created._id);
     } else {
@@ -58,20 +58,20 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
 /**
  * Removes the specified quantity of a given item from an actor.
  * 
- * @param {Actor} sourceActor Actor that owns the item.
+ * @param {ActorItemHelper} sourceActor Actor that owns the item.
  * @param {Item} item Item to remove.
  * @param {Number} quantity Number of items to remove, if quantity is greater than or equal to the item quantity, the item will be removed from the actor.
  * @param {Boolean} recursive (Optional) Recursively remove child items too? Setting this to false puts all items into the deleted item's root. Defaults to false.
  * @returns {Boolean} Returns whether or not an update or removal took place.
  */
 export async function removeItemFromActorAsync(sourceActor, itemToRemove, quantity, recursive = false) {
-    if (!sourceActor || !itemToRemove) return false;
+    if (!ActorItemHelper.IsValidHelper(sourceActor) || !itemToRemove) return false;
 
     const sourceItemQuantity = Math.min(itemToRemove.data.data.quantity, quantity);
     const newItemQuantity = sourceItemQuantity - quantity;
 
     if (newItemQuantity < 1) {
-        await sourceActor.deleteEmbeddedEntity('OwnedItem', itemToRemove._id);
+        await sourceActor.deleteOwnedItem(itemToRemove._id);
         if (recursive && containsItems(itemToRemove)) {
             for (let childId of itemToRemove.data.data.contents) {
                 let child = sourceActor.getOwnedItem(childId);
@@ -82,7 +82,7 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
         }
     } else {
         const update = { '_id': itemToRemove._id, 'data.quantity': newItemQuantity };
-        await sourceActor.updateEmbeddedEntity('OwnedItem', update);
+        await sourceActor.updateOwnedItem(update);
     }
     return true;
 }
@@ -90,24 +90,29 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
 /**
  * Moves an item from one actor to another, adjusting its container settings appropriately.
  * 
- * @param {Actor} sourceActor The source actor.
+ * @param {ActorItemHelper} sourceActor The source actor.
  * @param {Item} itemToMove Item to be moved.
- * @param {Actor} targetActor The target actor.
+ * @param {ActorItemHelper} targetActor The target actor.
  * @param {Item} targetItem (Optional) Item to add the item to, merge with, or make sibling for.
  * @returns {Item} Returns the item on the targetActor.
  */
 export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetItem = null) {
-    if (!targetActor || !itemToMove) {
-        console.log("Inventory::moveItemBetweenActorsAsync: No targetActor or itemToMove.")
+    if (!ActorItemHelper.IsValidHelper(targetActor)) {
+        console.log("Inventory::moveItemBetweenActorsAsync: targetActor is not a valid ActorItemHelper instance.")
         return null;
     }
 
-    if (!sourceActor) {
-        console.log("Inventory::moveItemBetweenActorsAsync: No source actor specified, switching to addItemToActorAsync.")
+    if (!itemToMove) {
+        console.log("Inventory::moveItemBetweenActorsAsync: itemToMove is not valid.")
+        return null;
+    }
+
+    if (!ActorItemHelper.IsValidHelper(sourceActor)) {
+        console.log("Inventory::moveItemBetweenActorsAsync: sourceActor is not a valid ActorItemHelper, switching to addItemToActorAsync.")
         return await addItemToActorAsync(targetActor, itemToMove, itemToMove.data.data.quantity, targetItem);
     }
 
-    if (sourceActor === targetActor) {
+    if (sourceActor.actor === targetActor.actor) {
         if (itemToMove === targetItem) {
             return itemToMove;
         }
@@ -120,13 +125,13 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 // Merging will destroy the old item, so we return the targetItem here.
                 const targetItemNewQuantity = Number(targetItem.data.data.quantity) + itemToMove.data.data.quantity;
                 const update = { '_id': targetItem._id, 'data.quantity': targetItemNewQuantity};
-                await targetActor.updateEmbeddedEntity('OwnedItem', update);
+                await targetActor.updateOwnedItem(update);
 
-                await sourceActor.deleteEmbeddedEntity('OwnedItem', itemToMove._id);
+                await sourceActor.deleteOwnedItem(itemToMove._id);
 
                 return targetItem;
             } else {
-                let targetsParent = targetActor.items.find(x => x.data.data.contents && x.data.data.contents.includes(targetItem._id));
+                let targetsParent = targetActor.findItem(x => x.data.data.contents && x.data.data.contents.includes(targetItem._id));
                 if (targetsParent) {
                     if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
                         desiredParent = targetsParent;
@@ -137,7 +142,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
         }
 
-        let currentParent = targetActor.items.find(x => x.data.data.contents && x.data.data.contents.includes(itemToMove._id));
+        let currentParent = targetActor.findItem(x => x.data.data.contents && x.data.data.contents.includes(itemToMove._id));
 
         if (desiredParent !== currentParent) {
             let bulkUpdates = [];
@@ -179,7 +184,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 /**
  * Changes the item's container on an actor.
  * 
- * @param {Actor} actor 
+ * @param {ActorItemHelper} actor 
  * @param {Item} item 
  * @param {Item} container 
  */
@@ -322,12 +327,15 @@ export function initializeRemoteInventory() {
     RPC.registerCallback("raiseInventoryWarning", "local", onInventoryWarningReceived);
 }
 
-export async function onItemCollectionItemDraggedToPlayer(message) {
+/******************************************************************************
+ * RPC handlers
+ ******************************************************************************/
+async function onItemCollectionItemDraggedToPlayer(message) {
     const data = message.payload;
 
     // Unpack data
-    const source = ActorHelper.FromObject(data.source);
-    const target = ActorHelper.FromObject(data.target);
+    const source = ActorItemHelper.FromObject(data.source);
+    const target = ActorItemHelper.FromObject(data.target);
 
     if (!source.token) {
         RPC.sendMessageTo(message.sender, "raiseInventoryWarning", "SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError");
@@ -406,7 +414,7 @@ export async function onItemCollectionItemDraggedToPlayer(message) {
 async function onItemDraggedToCollection(message) {
     let data = message.payload;
 
-    let target = ActorHelper.FromObject(data.target);
+    let target = ActorItemHelper.FromObject(data.target);
     let items = target.token.data.flags.sfrpg.itemCollection.items;
 
     let targetContainer = null;
@@ -422,8 +430,8 @@ async function onItemDraggedToCollection(message) {
         newItems.push(duplicate(itemData));
     } else if (data.source.tokenId || data.source.actorId) {
         // from another token
-        let source = ActorHelper.FromObject(data.source);
-        if (!source.isValid) {
+        let source = ActorItemHelper.FromObject(data.source);
+        if (!source.isValid()) {
             return;
         }
 
@@ -456,27 +464,17 @@ async function onInventoryWarningReceived(message) {
     ui.notifications.info(game.i18n.format(message.payload));
 }
 
-function getActor(actorId, tokenId, sceneId) {
-    let result = {
-        actor: null,
-        token: null
-    }
-    if (tokenId) {
-        result.token = canvas.tokens.placeables.find(x => x.id === tokenId);
-        if (!result.token) {
-            result.token = game.scenes.get(sceneId).data.tokens.find(x => x._id === tokenId);
-        }
+/******************************************************************************
+ * Helper classes
+ ******************************************************************************/
 
-        if (result.token) {
-            result.actor = result.token.actor;
-        }
-    } else {
-        result.actor = game.actors.get(actorId);
-    }
-    return result;
-}
-
-export class ActorHelper {
+ /**
+  * A helper class that takes an actor, token, and scene id and neatly wraps the
+  * item interfaces so that they go to the right actor data. Unlinked tokens thus
+  * remain unlinked from the parent actor, while linked tokens will share with
+  * their parent.
+  */
+export class ActorItemHelper {
     constructor(actorId, tokenId, sceneId) {
         this.actorId = actorId;
         this.tokenId = tokenId;
@@ -487,20 +485,38 @@ export class ActorHelper {
             if (!this.token) {
                 this.token = game.scenes.get(sceneId).data.tokens.find(x => x._id === tokenId);
             }
-    
+
             if (this.token) {
+                this.scene = this.token.scene;
                 this.actor = this.token.actor;
             }
-        } else {
+        }
+        
+        if (!this.actor && actorId) {
             this.actor = game.actors.get(actorId);
         }
+
+        //console.log([actorId, tokenId, sceneId]);
+        //console.log([this.actor, this.token, this.scene]);
     }
 
+    /**
+     * Parses a new ActorItemHelper out of an object containing actorId, tokenId, and sceneId.
+     * @param {Object} actorReferenceObject 
+     */
     static FromObject(actorReferenceObject) {
-        return new ActorHelper(actorReferenceObject.actorId, actorReferenceObject.tokenId, actorReferenceObject.sceneId);
+        return new ActorItemHelper(actorReferenceObject.actorId, actorReferenceObject.tokenId, actorReferenceObject.sceneId);
     }
 
-    get isValid() {
+    toObject() {
+        return {actorId: this.actorId, tokenId: this.tokenId, sceneId: this.sceneId};
+    }
+
+    static IsValidHelper(object) {
+        return (object && object instanceof ActorItemHelper && object.isValid());
+    }
+
+    isValid() {
         return (this.actor);
     }
 
@@ -551,5 +567,17 @@ export class ActorHelper {
     async deleteOwnedItem(itemId) {
         if (!this.actor) return null;
         return this.actor.deleteOwnedItem(itemId);
+    }
+
+    /**
+     * Wrapper around actor.items.find().
+     * @param {Function} fn Method used to search the item.
+     * @returns The first item matching fn. Null if nothing is found or invalid helper.
+     */
+    findItem(fn) {
+        if (!ActorItemHelper.IsValidHelper(this)) {
+            return null;
+        }
+        return this.actor.items.find(fn);
     }
 }
