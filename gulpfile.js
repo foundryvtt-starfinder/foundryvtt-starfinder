@@ -179,13 +179,20 @@ async function unpackPacks() {
             let fileWithoutExt = file.substr(0, file.length - 3);
             let unpackDir = `./src/items/${fileWithoutExt}`;
             let sourceFile = `${sourceDir}/${file}`;
+            
+            console.log(`Processing ${fileWithoutExt}`);
+
+            console.log(`> Cleaning up ${unpackDir}`);
+            await fs.rmdirSync(unpackDir, {recursive: true});
 
             console.log(`> Unpacking ${sourceFile} into ${unpackDir}`);
             await unpack(sourceFile, unpackDir);
 
-            console.log(`>> Done.`);
+            console.log(`> Done.`);
         }
     }
+
+    console.log(`\nUnpack finished.\n`);
     
     return 0;
 }
@@ -193,8 +200,12 @@ async function unpackPacks() {
 /**
  * Cook db source json files into .db files with nedb
  */
+var cookErrorCount = 0;
 async function cookPacks() {
     console.log(`Cooking db files`);
+    
+    let compendiumMap = {};
+    let allItems = [];
     
     let sourceDir = "./src/items";
     let directories = await fs.readdirSync(sourceDir);
@@ -207,6 +218,8 @@ async function cookPacks() {
         console.log(`> Removing ${outputFile}`);
         await fs.unlinkSync(outputFile);
         
+        compendiumMap[directory] = {};
+        
         let db = new AsyncNedb({ filename: outputFile, autoload: true });
         
         console.log(`Opening files in ${itemSourceDir}`);
@@ -216,17 +229,72 @@ async function cookPacks() {
             let jsonInput = await fs.readFileSync(filePath);
             jsonInput = JSON.parse(jsonInput);
             
+            compendiumMap[directory][jsonInput._id] = jsonInput;
+            allItems.push({pack: directory, data: jsonInput});
+            
             await db.asyncInsert(jsonInput);
         }
     }
     
+    console.log(`\nStarting consistency check.`);
+    
+    for (let item of allItems) {
+        let data = item.data;
+        if (!data || !data.data || !data.data.description) continue;
+        
+        let desc = data.data.description.value;
+        if (!desc) continue;
+        
+        let pack = item.pack;
+        
+        let errors = [];
+        let itemMatch = [...desc.matchAll(/@Item\[([^\]]*)\]{([^}]*)}/gm)];
+        if (itemMatch && itemMatch.length > 0) {
+            for (let localItem of itemMatch) {
+                let localItemId = localItem[1];
+                let localItemName = localItem[2];
+                if (!(pack in compendiumMap)) {
+                    errors.push(`Referencing non-existing compendium! '${localItemName} (${localItemId})' cannot find pack '${pack}'.`);
+                } else if (!(localItemId in compendiumMap[pack])) {
+                    errors.push(`Referencing non-existing item id! '${localItemName} (${localItemId})' not found in pack '${pack}'.`);
+                }
+            }
+        }
+        
+        let compendiumMatch = [...desc.matchAll(/@Compendium\[sfrpg\.([^\.]*)\.([^\]]*)\]{([^}]*)}/gm)];
+        if (compendiumMatch && compendiumMatch.length > 0) {
+            for (let otherItem of compendiumMatch) {
+                let otherPack = otherItem[1];
+                let otherItemId = otherItem[2];
+                let otherItemName = otherItem[3];
+                if (!(otherPack in compendiumMap)) {
+                    errors.push(`Referencing non-existing compendium! '${otherItemName} (${otherItemId})' cannot find '${pack}'`);
+                } else if (!(otherItemId in compendiumMap[otherPack])) {
+                    errors.push(`Referencing non-existing item id! '${otherItemName} (${otherItemId})' not found in pack '${otherPack}'.`);
+                }
+            }
+        }
+        
+        if (errors.length > 0) {
+            console.log(`\n> ${data.name} errors:`);
+            for (let error of errors) {
+                console.log(error);
+                cookErrorCount++;
+            }
+        }
+    }
+
+    console.log(`\nUpdating items with updated IDs.\n`);
+    
     await unpackPacks();
     
+    console.log(`\nCook finished with ${cookErrorCount} errors.\n`);
+
     return 0;
 }
 
 async function postCook() {
-    console.log(`\nCompendiums cooked!\nDon't forget to restart Foundry to refresh compendium data!\n`);
+    console.log(`\nCompendiums cooked with ${cookErrorCount} errors!\nDon't forget to restart Foundry to refresh compendium data!\n`);
     return 0;
 }
 

@@ -11,10 +11,10 @@ export default function (engine) {
         kac.tooltip.push(baseTooltip);
 
         if (armor) {
-            const maxDex = Math.min(data.abilities.dex.mod, armor.data.armor.dex || Number.MAX_SAFE_INTEGER);
+            const maxDex = Math.min(data.abilities.dex.mod, armor.data.armor.dex ?? Number.MAX_SAFE_INTEGER);
             const maxDexTooltip = game.i18n.format("SFRPG.ACTooltipMaxDex", { 
                 maxDex: maxDex.signedString(), 
-                armorMax: armor.data.armor.dex ? armor.data.armor.dex.signedString() : "unlimited"
+                armorMax: armor.data.armor.dex?.signedString() ?? "unlimited"
             });
             
             let eacMod = armor.data.armor.eac + maxDex;
