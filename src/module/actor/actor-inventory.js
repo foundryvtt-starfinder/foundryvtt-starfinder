@@ -1,6 +1,12 @@
 import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
+export function initializeRemoteInventory() {
+    RPC.registerCallback("dragItemToCollection", "gm", onItemDraggedToCollection);
+    RPC.registerCallback("dragItemFromCollectionToPlayer", "gm", onItemCollectionItemDraggedToPlayer);
+    RPC.registerCallback("raiseInventoryWarning", "local", onInventoryWarningReceived);
+}
+
 /**
  * Adds the specified quantity of a given item to an actor. Returns the (possibly newly created) item on the target actor.
  * Will not add child items, those will have to be added manually at a later iteration.
@@ -319,12 +325,6 @@ function wouldCreateParentCycle(item, container, actor) {
  */
 export function containsItems(item) {
     return item && item.data.data.contents && item.data.data.contents.length > 0;
-}
-
-export function initializeRemoteInventory() {
-    RPC.registerCallback("dragItemToCollection", "gm", onItemDraggedToCollection);
-    RPC.registerCallback("dragItemFromCollectionToPlayer", "gm", onItemCollectionItemDraggedToPlayer);
-    RPC.registerCallback("raiseInventoryWarning", "local", onInventoryWarningReceived);
 }
 
 /******************************************************************************
