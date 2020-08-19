@@ -121,6 +121,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
         html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+        html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
         if (!this.options.editable) return;
 
@@ -444,6 +445,39 @@ export class ActorSheetSFRPG extends ActorSheet {
             div.slideDown(200);
         }
         li.toggleClass('expanded');
+    }
+
+    async _onItemSplit(event) {
+        event.preventDefault();
+        let li = $(event.currentTarget).parents('.item'),
+            item = this.actor.getOwnedItem(li.data('item-id'));
+
+        let itemQuantity = item.data.data.quantity;
+        if (itemQuantity <= 1) {
+            return;
+        }
+
+        let bigStack = Math.ceil(itemQuantity / 2.0);
+        let smallStack = Math.floor(itemQuantity / 2.0);
+
+        let actorHelper = new ActorItemHelper(this.actor._id, this.token ? this.token.id : null, this.token ? this.token.scene.id : null);
+
+        let update = { _id: item._id, "data.quantity": bigStack };
+        await actorHelper.updateOwnedItem(update);
+
+        let itemData = duplicate(item.data);
+        itemData._id = null;
+        itemData.data.quantity = smallStack;
+        let newItem = await actorHelper.createOwnedItem(itemData);
+
+        let containerItem = actorHelper.findItem(x => x.data.data.contents && x.data.data.contents.includes(item._id));
+        if (containerItem) {
+            let newContents = duplicate(containerItem.data.data.contents);
+            newContents.push(newItem._id);
+
+            update = { _id: containerItem._id, "data.contents": newContents };
+            await actorHelper.updateOwnedItem(update);
+        }
     }
 
     _prepareSpellbook(data, spells) {
