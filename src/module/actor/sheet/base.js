@@ -314,8 +314,8 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         if (!item.data.data.contents || item.data.data.contents.length == 0) {
             Dialog.confirm({
-                title: `Delete ${item.name}?`,
-                content: `<p>Are you sure you wish to delete '${item.name}'?</p><br/>`,
+                title: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationTitle", { itemName: item.name }),
+                content: `<p>${game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationSingularMessage", { itemName: item.name })}</p><br/>`,
                 yes: () => {
                     actorHelper.deleteOwnedItem(itemId);
                     li.slideUp(200, () => this.render(false));
@@ -324,8 +324,8 @@ export class ActorSheetSFRPG extends ActorSheet {
             });
         } else {
             Dialog.confirm({
-                title: `Delete ${item.name}?`,
-                content: `<p>Are you sure you wish to delete '${item.name}'?<br/><br/><strong>Warning</strong><br/>This item contains multiple items. Deleting this will also delete the contents!</p><br/>`,
+                title: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationTitle", { itemName: item.name }),
+                content: `<p>${game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationPluralMessage", { itemName: item.name })}</p><br/>`,
                 yes: () => {
                     actorHelper.deleteOwnedItem(itemId, true);
                     li.slideUp(200, () => this.render(false));
