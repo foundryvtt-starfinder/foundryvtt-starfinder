@@ -136,7 +136,7 @@ export async function handleItemDrop(data) {
             while (containersToTest.length > 0)
             {
                 let container = containersToTest.shift();
-                let children = sourceActor.items.filter(x => container.data.contents.includes(x._id));
+                let children = sourceActor.filterItems(x => container.data.contents.includes(x._id));
                 if (children) {
                     for (let child of children) {
                         itemData.push(child.data);

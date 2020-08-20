@@ -303,17 +303,36 @@ export class ActorSheetSFRPG extends ActorSheet {
      * Handle deleting an Owned Item for the actor
      * @param {Event} event The originating click event
      */
-    _onItemDelete(event) {
+    async _onItemDelete(event) {
         event.preventDefault();
-
-        // TODO: Confirm dialog, and ask to recursively delete nested items
 
         let li = $(event.currentTarget).parents(".item"), 
             itemId = li.attr("data-item-id");
 
-        this.actor.deleteEmbeddedEntity("OwnedItem", itemId);
+        let actorHelper = new ActorItemHelper(this.actor._id, this.token ? this.token.id : null, this.token ? this.token.scene.id : null);
+        let item = actorHelper.getOwnedItem(itemId);
 
-        li.slideUp(200, () => this.render(false));
+        if (!item.data.data.contents || item.data.data.contents.length == 0) {
+            Dialog.confirm({
+                title: `Delete ${item.name}?`,
+                content: `<p>Are you sure you wish to delete '${item.name}'?</p><br/>`,
+                yes: () => {
+                    actorHelper.deleteOwnedItem(itemId);
+                    li.slideUp(200, () => this.render(false));
+                },
+                defaultYes: false
+            });
+        } else {
+            Dialog.confirm({
+                title: `Delete ${item.name}?`,
+                content: `<p>Are you sure you wish to delete '${item.name}'?<br/><br/><strong>Warning</strong><br/>This item contains multiple items. Deleting this will also delete the contents!</p><br/>`,
+                yes: () => {
+                    actorHelper.deleteOwnedItem(itemId, true);
+                    li.slideUp(200, () => this.render(false));
+                },
+                defaultYes: false
+            });
+        }
     }
 
     _onItemRollAttack(event) {

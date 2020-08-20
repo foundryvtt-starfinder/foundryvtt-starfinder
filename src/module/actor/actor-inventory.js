@@ -563,10 +563,28 @@ export class ActorItemHelper {
     /**
      * Wrapper around actor.deleteOwnedItem.
      * @param {String} itemId ID of item to delete.
+     * @param {Boolean} recursive (Optional) Set to true to also delete contained items. Defaults to false.
      */
-    async deleteOwnedItem(itemId) {
+    async deleteOwnedItem(itemId, recursive = false) {
         if (!this.actor) return null;
-        return this.actor.deleteOwnedItem(itemId);
+
+        let itemsToDelete = (itemId instanceof Array) ? itemId : [itemId];
+
+        if (recursive) {
+            let idsToTest = [itemId];
+            while (idsToTest.length > 0) {
+                let idToTest = idsToTest.shift();
+                let item = this.getOwnedItem(idToTest);
+                if (item && item.data.data.contents) {
+                    for (let containedItemId of item.data.data.contents) {
+                        itemsToDelete.push(containedItemId);
+                        idsToTest.push(containedItemId);
+                    }
+                }
+            }
+        }
+
+        return this.actor.deleteOwnedItem(itemsToDelete);
     }
 
     /**
@@ -579,5 +597,17 @@ export class ActorItemHelper {
             return null;
         }
         return this.actor.items.find(fn);
+    }
+
+    /**
+     * Wrapper around actor.items.filter().
+     * @param {*} fn Method used to filter the items.
+     * @returns Array of items matching fn. Null if invalid helper.
+     */
+    filterItems(fn) {
+        if (!ActorItemHelper.IsValidHelper(this)) {
+            return null;
+        }
+        return this.actor.items.filter(fn);
     }
 }

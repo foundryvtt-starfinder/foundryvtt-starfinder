@@ -216,7 +216,48 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         let li = $(event.currentTarget).parents(".item");
         let itemId = li.attr("data-item-id");
 
-        const newItems = this.itemCollection.data.flags.sfrpg.itemCollection.items.filter(x => x._id !== itemId);
+        const itemToDelete = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        if (!itemToDelete.data.contents || itemToDelete.data.contents.length == 0) {
+            Dialog.confirm({
+                title: `Delete ${itemToDelete.name}?`,
+                content: `<p>Are you sure you wish to delete '${itemToDelete.name}'?</p><br/>`,
+                yes: () => {
+                    this._deleteItemById(itemId);
+                    li.slideUp(200, () => this.render(false));
+                },
+                defaultYes: false
+            });
+        } else {
+            Dialog.confirm({
+                title: `Delete ${itemToDelete.name}?`,
+                content: `<p>Are you sure you wish to delete '${itemToDelete.name}'?<br/><br/><strong>Warning</strong><br/>This item contains multiple items. Deleting this will also delete the contents!</p><br/>`,
+                yes: () => {
+                    this._deleteItemById(itemId, true);
+                    li.slideUp(200, () => this.render(false));
+                },
+                defaultYes: false
+            });
+        }        
+    }
+
+    _deleteItemById(itemId, recursive = false) {
+        let itemsToDelete = [itemId];
+
+        if (recursive) {
+            let itemsToTest = [itemId];
+            while (itemsToTest.length > 0) {
+                let itemIdToTest = itemsToTest.shift();
+                let itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemIdToTest);
+                if (itemData.data.contents) {
+                    for (let containedId of itemData.data.contents) {
+                        itemsToDelete.push(containedId);
+                        itemsToTest.push(containedId);
+                    }
+                }
+            }
+        }
+
+        const newItems = this.itemCollection.data.flags.sfrpg.itemCollection.items.filter(x => !itemsToDelete.includes(x._id));
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
         }
@@ -226,8 +267,6 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         } else {
             this.itemCollection.update(update);
         }
-
-        li.slideUp(200, () => this.render(false));
     }
 
     findItem(itemId) {

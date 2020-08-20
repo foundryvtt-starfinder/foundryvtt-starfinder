@@ -195,7 +195,6 @@ export async function handleOnDrop(event) {
 		return false;
     }
 
-    console.log(data);
     // We're only interested in overriding item drops.
     if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
         return await defaultDropHandler(event);
