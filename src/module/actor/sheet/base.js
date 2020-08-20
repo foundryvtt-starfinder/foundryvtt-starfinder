@@ -5,6 +5,8 @@ import { spellBrowser } from "../../packs/spell-browser.js";
 import { moveItemBetweenActorsAsync, ActorItemHelper } from "../actor-inventory.js";
 import { RPC } from "../../rpc.js"
 
+import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js"
+
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -312,27 +314,11 @@ export class ActorSheetSFRPG extends ActorSheet {
         let actorHelper = new ActorItemHelper(this.actor._id, this.token ? this.token.id : null, this.token ? this.token.scene.id : null);
         let item = actorHelper.getOwnedItem(itemId);
 
-        if (!item.data.data.contents || item.data.data.contents.length == 0) {
-            Dialog.confirm({
-                title: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationTitle", { itemName: item.name }),
-                content: `<p>${game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationSingularMessage", { itemName: item.name })}</p><br/>`,
-                yes: () => {
-                    actorHelper.deleteOwnedItem(itemId);
-                    li.slideUp(200, () => this.render(false));
-                },
-                defaultYes: false
-            });
-        } else {
-            Dialog.confirm({
-                title: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationTitle", { itemName: item.name }),
-                content: `<p>${game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationPluralMessage", { itemName: item.name })}</p><br/>`,
-                yes: () => {
-                    actorHelper.deleteOwnedItem(itemId, true);
-                    li.slideUp(200, () => this.render(false));
-                },
-                defaultYes: false
-            });
-        }
+        let containsItems = (item.data.data.contents && item.data.data.contents.length > 0);
+        ItemDeletionDialog.show(item.name, containsItems, (recursive) => {
+            actorHelper.deleteOwnedItem(itemId, recursive);
+            li.slideUp(200, () => this.render(false));
+        });
     }
 
     _onItemRollAttack(event) {

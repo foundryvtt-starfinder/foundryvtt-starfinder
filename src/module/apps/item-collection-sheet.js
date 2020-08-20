@@ -1,3 +1,4 @@
+import { ItemDeletionDialog } from "./item-deletion-dialog.js"
 import { ItemSheetSFRPG } from "../item/sheet.js"
 import { RPC } from "../rpc.js"
 
@@ -217,27 +218,11 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         let itemId = li.attr("data-item-id");
 
         const itemToDelete = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
-        if (!itemToDelete.data.contents || itemToDelete.data.contents.length == 0) {
-            Dialog.confirm({
-                title: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationTitle", { itemName: itemToDelete.name }),
-                content: `<p>${game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationSingularMessage", { itemName: itemToDelete.name })}</p><br/>`,
-                yes: () => {
-                    this._deleteItemById(itemId);
-                    li.slideUp(200, () => this.render(false));
-                },
-                defaultYes: false
-            });
-        } else {
-            Dialog.confirm({
-                title: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationTitle", { itemName: itemToDelete.name }),
-                content: `<p>${game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationPluralMessage", { itemName: itemToDelete.name })}</p><br/>`,
-                yes: () => {
-                    this._deleteItemById(itemId, true);
-                    li.slideUp(200, () => this.render(false));
-                },
-                defaultYes: false
-            });
-        }        
+        let containsItems = (itemToDelete.data.contents && itemToDelete.data.contents.length > 0);
+        ItemDeletionDialog.show(itemToDelete.name, containsItems, (recursive) => {
+            this._deleteItemById(itemId, recursive);
+            li.slideUp(200, () => this.render(false));
+        });
     }
 
     _deleteItemById(itemId, recursive = false) {
