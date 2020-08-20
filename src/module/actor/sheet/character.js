@@ -114,7 +114,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
         }
         totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
-        data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
+        data.encumbrance = this._computeEncumbrance(totalWeight, data);
         data.inventoryValue = Math.floor(totalValue);
 
         const features = {
@@ -184,7 +184,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
      */
     _computeEncumbrance(totalWeight, actorData) {
         const enc = {
-            max: actorData.data.abilities.str.value,
+            max: actorData.data.attributes.encumbrance.max,
+            tooltip: actorData.data.attributes.encumbrance.tooltip,
             value: totalWeight
         };
 
