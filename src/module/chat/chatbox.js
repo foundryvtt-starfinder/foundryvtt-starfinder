@@ -51,6 +51,7 @@ export default class SFRPGCustomChatMessage {
         const item = data.data.item ? data.data.item : {};
         //Render the roll
         const customRoll = await roll.render();
+        const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
 
         if (data.speaker.alias) {
             data.speaker.alias = data.speaker.alias.length >= 13 ? data.speaker.alias.substr(0, 11) + '...' : data.speaker.alias
@@ -74,13 +75,13 @@ export default class SFRPGCustomChatMessage {
             tokenImg: actor.data.token.img,
             actorId: actor._id,
             tokenId: this.createToken(actor),
-        }); 
+        });
         
         ChatMessage.create({
             //flavor: flavor,
             speaker: data.speaker,
             content: content + customRoll, //push the diceRoll at the end of the template
-            rollMode: game.settings.get("core", "rollMode"),
+            rollMode: rollMode,
             rollModes: CONFIG.Dice.rollModes,
             roll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL
