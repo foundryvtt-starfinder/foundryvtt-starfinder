@@ -215,8 +215,10 @@ async function cookPacks() {
         
         console.log(`Processing ${directory}`);
         
-        console.log(`> Removing ${outputFile}`);
-        await fs.unlinkSync(outputFile);
+        if (fs.existsSync(outputFile)) {
+            console.log(`> Removing ${outputFile}`);
+            await fs.unlinkSync(outputFile);
+        }
         
         compendiumMap[directory] = {};
         
