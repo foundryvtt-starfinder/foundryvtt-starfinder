@@ -31,7 +31,7 @@
     <div class="form-group {{#unless data.traits.senses}}inactive{{/unless}}">
         <label>{{localize "SFRPG.Senses"}}</label>
         {{#if (not isDrone)}}
-        <input type="text" name="data.traits.senses" value="{{data.traits.senses}}" placeholder="None"/>
+        <input type="text" name="data.traits.senses" value="{{data.traits.senses}}" placeholder="{{localize "SFRPG.None"}}"/>
         {{else}}
         <span class="value">{{data.traits.senses}}</span>
         {{/if}}
