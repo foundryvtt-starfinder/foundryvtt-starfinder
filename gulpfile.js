@@ -201,6 +201,7 @@ async function unpackPacks() {
  * Cook db source json files into .db files with nedb
  */
 var cookErrorCount = 0;
+var packErrors = {};
 async function cookPacks() {
     console.log(`Cooking db files`);
     
@@ -232,13 +233,16 @@ async function cookPacks() {
             jsonInput = JSON.parse(jsonInput);
             
             compendiumMap[directory][jsonInput._id] = jsonInput;
-            allItems.push({pack: directory, data: jsonInput});
+            allItems.push({pack: directory, data: jsonInput, file: file});
             
             await db.asyncInsert(jsonInput);
         }
     }
     
     console.log(`\nStarting consistency check.`);
+    
+    cookErrorCount = 0;
+    packErrors = {};
     
     for (let item of allItems) {
         let data = item.data;
@@ -256,9 +260,17 @@ async function cookPacks() {
                 let localItemId = localItem[1];
                 let localItemName = localItem[2];
                 if (!(pack in compendiumMap)) {
-                    errors.push(`Referencing non-existing compendium! '${localItemName} (${localItemId})' cannot find pack '${pack}'.`);
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: '${localItemName}' (with id: ${localItemId}) cannot find its own pack '${pack}'.`);
+                    cookErrorCount++;
                 } else if (!(localItemId in compendiumMap[pack])) {
-                    errors.push(`Referencing non-existing item id! '${localItemName} (${localItemId})' not found in pack '${pack}'.`);
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: '${localItemName}' (with id: ${localItemId}) not found in '${pack}'.`);
+                    cookErrorCount++;
                 }
             }
         }
@@ -270,18 +282,18 @@ async function cookPacks() {
                 let otherItemId = otherItem[2];
                 let otherItemName = otherItem[3];
                 if (!(otherPack in compendiumMap)) {
-                    errors.push(`Referencing non-existing compendium! '${otherItemName} (${otherItemId})' cannot find '${pack}'`);
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) cannot find '${pack}', is there an error in the compendium name?`);
+                    cookErrorCount++;
                 } else if (!(otherItemId in compendiumMap[otherPack])) {
-                    errors.push(`Referencing non-existing item id! '${otherItemName} (${otherItemId})' not found in pack '${otherPack}'.`);
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) not found in '${otherPack}'.`);
+                    cookErrorCount++;
                 }
-            }
-        }
-        
-        if (errors.length > 0) {
-            console.log(`\n> ${data.name} errors:`);
-            for (let error of errors) {
-                console.log(error);
-                cookErrorCount++;
             }
         }
     }
@@ -296,6 +308,16 @@ async function cookPacks() {
 }
 
 async function postCook() {
+    
+    if (Object.keys(packErrors).length > 0) {
+        for (let pack of Object.keys(packErrors)) {
+            console.log(`\n${packErrors[pack].length} Errors cooking ${pack}.db:`);
+            for (let error of packErrors[pack]) {
+                console.log(`> ${error}`);
+            }
+        }
+    }
+    
     console.log(`\nCompendiums cooked with ${cookErrorCount} errors!\nDon't forget to restart Foundry to refresh compendium data!\n`);
     return 0;
 }
