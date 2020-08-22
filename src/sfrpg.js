@@ -161,6 +161,10 @@ Hooks.once("setup", function () {
             return "L";
         } else return Math.floor(reduced);
     });
+
+    Handlebars.registerHelper('capitalize', function (value) {
+        return value.capitalize();
+    });
 });
 
 Hooks.once("ready", () => {
