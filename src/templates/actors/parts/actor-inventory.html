@@ -29,9 +29,11 @@
 
         {{#if ../owner}}
         <div class="item-controls">
+            {{#if section.allowAdd}}
             <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
             </a>
+            {{/if}}
         </div>
         {{/if}}
     </li>

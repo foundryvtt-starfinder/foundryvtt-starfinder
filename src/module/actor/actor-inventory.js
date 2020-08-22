@@ -264,8 +264,8 @@ function acceptsItem(containerItem, itemToAdd, actor) {
         return false;
     }
 
-    if (!(itemToAdd.type in SFRPG.itemTypes)) {
-        //console.log("Rejected because item is not an item: " + itemToAdd.type);
+    if (!(itemToAdd.type in SFRPG.containableTypes)) {
+        //console.log("Rejected because item is not a containable item: " + itemToAdd.type);
         return false;
     }
 

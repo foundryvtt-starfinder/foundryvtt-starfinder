@@ -58,10 +58,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             inventory: { label: "Inventory", items: [], dataset: { } }
         };
         const features = {
-            weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon", "weapon-type": "natural" } },
-            actions: { label: "Actions", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: "Features", items: [], dataset: { type: "feat" } },
-            activeItems: { label: "Active Items", items: [], dataset: { } }
+            weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon", "weapon-type": "natural" }, allowAdd: true },
+            actions: { label: "Actions", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" }, allowAdd: true },
+            passive: { label: "Features", items: [], dataset: { type: "feat" }, allowAdd: true },
+            activeItems: { label: "Active Items", items: [], dataset: { }, allowAdd: false }
         };
 
         let [spells, other] = data.items.reduce((arr, item) => {
@@ -103,6 +103,15 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     features.activeItems.items.push(item);
                 }
                 itemsToProcess.push(item);
+            } else if (["archetype", "class", "race", "theme"].includes(item.type)) {
+                if (!(item.type in features)) {
+                    let label = "SFRPG.Items.Categories.MiscellaneousItems";
+                    if (item.type in SFRPG.itemTypes) {
+                        label = SFRPG.itemTypes[item.type];
+                    }
+                    features[item.type] = { label: game.i18n.format(label), items: [], dataset: { }, allowAdd: false };
+                }
+                features[item.type].items.push(item);
             } else if (item.type in SFRPG.itemTypes) {
                 itemsToProcess.push(item);
             }

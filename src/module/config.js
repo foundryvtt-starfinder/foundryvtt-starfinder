@@ -1532,6 +1532,29 @@ SFRPG.capacityUsagePer = {
 };
 
 SFRPG.itemTypes = {
+    "archetype": "SFRPG.Items.Categories.Archetypes",
+    "augmentation": "SFRPG.Items.Categories.Augmentations",
+    "chassis": "SFRPG.Items.Categories.DroneChassis",
+    "class": "SFRPG.Items.Categories.Classes",
+    "consumable": "SFRPG.Items.Categories.Consumables",
+    "container": "SFRPG.Items.Categories.Containers",
+    "equipment": "SFRPG.Items.Categories.Equipment",
+    "feat": "SFRPG.Items.Categories.Feats",
+    "fusion": "SFRPG.Items.Categories.WeaponFusions",
+    "goods": "SFRPG.Items.Categories.Goods",
+    "hybrid": "SFRPG.Items.Categories.HybridItems",
+    "magic": "SFRPG.Items.Categories.MagicItems",
+    "mod": "SFRPG.Items.Categories.DroneMods",
+    "race": "SFRPG.Items.Categories.Races",
+    "spell": "SFRPG.Items.Categories.Spells",
+    "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
+    "technological": "SFRPG.Items.Categories.TechnologicalItems",
+    "theme": "SFRPG.Items.Categories.Themes",
+    "upgrade": "SFRPG.Items.Categories.ArmorUpgrades",
+    "weapon": "SFRPG.Items.Categories.Weapons"
+};
+
+SFRPG.containableTypes = {
     "weapon": "Weapons",
     "equipment": "Equipment",
     "consumable": "Consumables",

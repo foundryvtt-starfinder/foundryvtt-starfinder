@@ -1,3 +1,4 @@
+import { SFRPG } from "../../config.js"
 import { ActorSheetSFRPG } from "./base.js"
 import { computeCompoundBulkForItem } from "../actor-inventory.js"
 
@@ -42,15 +43,15 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         const actorData = data.actor;
 
         const inventory = {
-            weapon: { label: "Weapons", items: [], dataset: { type: "weapon" } },
-            equipment: { label: "Equipment", items: [], dataset: { type: "equipment" } },
-            consumable: { label: "Consumables", items: [], dataset: { type: "consumable" } },
-            goods: { label: "Goods", items: [], dataset: { type: "goods" } },
-            container: { label: "Containers", items: [], dataset: { type: "container" } },
-            technological: { label: "Technological", items: [], dataset: { type: "technological" } },
-            fusion: { label: "Weapon Fusions", items: [], dataset: { type: "fusion" } },
-            upgrade: { label: "Armor Upgrades", items: [], dataset: { type: "upgrade" } },
-            augmentation: { label: "Augmentations", items: [], dataset: { type: "augmentation" } }
+            weapon: { label: game.i18n.format(SFRPG.itemTypes["weapon"]), items: [], dataset: { type: "weapon" }, allowAdd: true },
+            equipment: { label: game.i18n.format(SFRPG.itemTypes["equipment"]), items: [], dataset: { type: "equipment" }, allowAdd: true },
+            consumable: { label: game.i18n.format(SFRPG.itemTypes["consumable"]), items: [], dataset: { type: "consumable" }, allowAdd: true },
+            goods: { label: game.i18n.format(SFRPG.itemTypes["goods"]), items: [], dataset: { type: "goods" }, allowAdd: true },
+            container: { label: game.i18n.format(SFRPG.itemTypes["container"]), items: [], dataset: { type: "container" }, allowAdd: true },
+            technological: { label: game.i18n.format(SFRPG.itemTypes["technological"]), items: [], dataset: { type: "technological" }, allowAdd: true },
+            fusion: { label: game.i18n.format(SFRPG.itemTypes["fusion"]), items: [], dataset: { type: "fusion" }, allowAdd: true },
+            upgrade: { label: game.i18n.format(SFRPG.itemTypes["upgrade"]), items: [], dataset: { type: "upgrade" }, allowAdd: true },
+            augmentation: { label: game.i18n.format(SFRPG.itemTypes["augmentation"]), items: [], dataset: { type: "augmentation" }, allowAdd: true }
         };
 
         let [items, spells, feats, classes, races, themes, archetypes] = data.items.reduce((arr, item) => {
@@ -68,8 +69,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             else if (item.type === "race") arr[4].push(item);
             else if (item.type === "theme") arr[5].push(item);
             else if (item.type === "archetypes") arr[6].push(item);
-            else if (item.type === "container") arr[0].push(item);
             else if (Object.keys(inventory).includes(item.type)) arr[0].push(item);
+            else arr[0].push(item);
             return arr;
         }, [[], [], [], [], [], [], []]);
         
@@ -78,6 +79,10 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         let totalValue = 0;
         for (let i of items) {
             i.img = i.img || DEFAULT_TOKEN;
+
+            if (!(i.type in inventory)) {
+                continue;
+            }
 
             i.data.quantity = i.data.quantity || 0;
             i.data.price = i.data.price || 0;
@@ -103,12 +108,25 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         }
 
         this.processItemContainment(items, function (itemType, itemData) {
+            if (!(itemType in inventory)) {
+                let label = "SFRPG.Items.Categories.MiscellaneousItems";
+                if (itemType in SFRPG.itemTypes) {
+                    label = SFRPG.itemTypes[itemType];
+                } else {
+                    console.log(`Item '${itemData.item.name}' with type '${itemType}' is not a registered item type!`);
+                }
+                inventory[itemType] = { label: game.i18n.format(label), items: [], dataset: { }, allowAdd: false };
+            }
             inventory[itemType].items.push(itemData);
         });
 
         let totalWeight = 0;
         for (let section of Object.entries(inventory)) {
             for (let i of section[1].items) {
+                if (!(i.type in inventory)) {
+                    continue;
+                }
+
                 let itemBulk = computeCompoundBulkForItem(i.item, i.contents);
                 totalWeight += itemBulk;
             }

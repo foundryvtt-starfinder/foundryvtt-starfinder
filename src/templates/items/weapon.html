@@ -123,7 +123,7 @@
             {{!-- Accepted item types --}}
             <div class="form-group stacked weapon-properties" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypesTooltip" }}">
                 <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</label>
-                {{#each config.itemTypes as |name prop|}}
+                {{#each config.containableTypes as |name prop|}}
                 <label class="checkbox">
                     <input type="checkbox" name="data.acceptedItemTypes.{{prop}}" {{checked (lookup ../data.acceptedItemTypes prop)}}/> {{ name }}
                 </label>
