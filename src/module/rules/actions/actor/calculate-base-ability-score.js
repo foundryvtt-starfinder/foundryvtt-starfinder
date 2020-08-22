@@ -28,12 +28,12 @@ export default function (engine) {
             return mod.enabled && [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType);
         })
 
-        const themeMod = {};
+        let themeMod = {};
         if(theme && theme.data.abilityMod) {
             themeMod[theme.data.abilityMod.ability] = theme.data.abilityMod.mod;
         }
 
-        const racesMod = {};
+        let racesMod = {};
         for (let race of races) {
             for(let raceMod of race.data.abilityMods.parts) {
                 racesMod[raceMod[1]] = racesMod[raceMod[1]] !== undefined ? racesMod[raceMod[1]] + raceMod[0] : raceMod[0];
