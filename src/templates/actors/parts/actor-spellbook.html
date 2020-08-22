@@ -1,9 +1,9 @@
 <div class="inventory-filters spellbook-filters">
     <div class="form-group spellcasting-ability">
-        <label><h3>{{localize "SFRPG.SpellBookSpellCastingAbility"}} <a class="item-control spell-browse" title="Spellbook browse" data-type="spell" data-level="0" data-location="{{entry._id}}"> - <i class="fas fa-search"></i>Search Spell</a></h3></label>
+        <label><h3>{{localize "SFRPG.SpellBook.SpellCastingAbility"}} <a class="item-control spell-browse" title="{{localize "SFRPG.SpellBook.Browse"}}" data-type="spell" data-level="0" data-location="{{entry._id}}"> - <i class="fas fa-search"></i>{{localize "SFRPG.SpellBook.SearchSpell"}}</a></h3></label>
         <select name="data.attributes.spellcasting" data-type="String">
             {{#select data.attributes.spellcasting}}
-            <option value="">{{localize "SFRPG.SpellBookAttributesNone"}}</option>
+            <option value="">{{localize "SFRPG.SpellBook.AttributesNone"}}</option>
             {{#each data.abilities as |abl a|}}
             <option value="{{a}}">{{abl.label}}</option>
             {{/each}}
@@ -31,13 +31,13 @@
             {{/if}}
         </div>
 
-        <div class="spell-school">Spell School</div>
-        <div class="spell-action">Spell Usage</div>
+        <div class="spell-school">{{localize "SFRPG.SpellBook.SpellSchool"}}</div>
+        <div class="spell-action">{{localize "SFRPG.SpellBook.SpellUsage"}}</div>
 
         <div class="item-controls">
             {{#if section.canCreate}}
-            <a class="item-control item-create" title="Create Spell" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> Add
+            <a class="item-control item-create" title="{{localize "SFRPG.SpellBook.CreateSpell"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <i class="fas fa-plus"></i> {{localize "SFRPG.SpellBook.Add"}}
             </a>
             {{/if}}
         </div>
@@ -50,7 +50,7 @@
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>{{item.name}}</h4>
                 {{#if item.data.uses.value }}
-                <div class="item-detail spell-uses">Uses {{item.data.uses.value}} / {{item.data.uses.max}}</div>
+                <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.data.uses.value}} / {{item.data.uses.max}}</div>
                 {{/if}}
             </div>
 
@@ -60,8 +60,8 @@
 
             {{#if ../../owner}}
             <div class="item-controls">
-                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                <a class="item-control item-edit" title="{{localize "SFRPG.SpellBook.EditItem"}}"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="{{localize "SFRPG.SpellBook.DeleteItem"}}"><i class="fas fa-trash"></i></a>
             </div>
             {{/if}}
         </li>
@@ -70,12 +70,12 @@
 {{else}}
     {{#if owner}}
     {{#if filters.spellbook.size}}
-    <li class="item flexrow"><p class="notes">{{localize "SFRPG.SpellBookNoSpells"}}</p></li>
+    <li class="item flexrow"><p class="notes">{{localize "SFRPG.SpellBook.NoSpells"}}</p></li>
     {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty">
         <div class="item-controls">
-            <a class="item-control item-create" title="Create Spell" data-type="spell"
-               data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "SFRPG.SpellBookAddSpells"}}</a>
+            <a class="item-control item-create" title="{{localize "SFRPG.SpellBook.CreateSpell"}}" data-type="spell"
+               data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "SFRPG.SpellBook.AddSpells"}}</a>
         </div>
     {{/if}}
     {{/if}}
