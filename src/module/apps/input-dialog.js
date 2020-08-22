@@ -6,11 +6,13 @@
  * Usage example:
  * InputDialog.show("Enter a value", "Please enter values", {
             cookies: {
+                name: "Cookies",
                 label: "Name of the cookies you want.",
                 placeholder: "Chocolate Chip",
                 validator: (v) => true
             },
             amount: {
+                name: "Amount",
                 label: "How many cookies you want.",
                 placeholder: "10",
                 validator: (v) => !Number.isNaN(Number(v))
@@ -47,7 +49,7 @@ export class InputDialog extends Dialog {
         if (inputValue.validator) {
             let isValid = inputValue.validator(inputValue.value)
             if (!isValid) {
-                let message = game.i18n.format("SFRPG.Dialogs.InputDialog.SingleFieldInvalid", { fieldName: key.capitalize() });
+                let message = game.i18n.format("SFRPG.Dialogs.InputDialog.SingleFieldInvalid", { fieldName: inputValue.name });
                 ui.notifications.error(message);
                 if (!inputElement.classList.contains("error")) {
                     inputElement.classList.add("error");
@@ -93,7 +95,7 @@ export class InputDialog extends Dialog {
                                 const value = InputDialog.values[key];
                                 returnValues[key] = value.value;
                                 if (value.validator && !value.validator(value.value)) {
-                                    invalidFields.push(key.capitalize());
+                                    invalidFields.push(value.name);
                                 }
                             }
 
