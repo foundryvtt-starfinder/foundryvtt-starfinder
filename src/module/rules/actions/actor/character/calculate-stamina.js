@@ -21,10 +21,10 @@ export default function (engine) {
             return computedBonus;
         };
 
-        let spMax = 0; // Max(Constitution Modifier, 0) * Character level + Class' SP per level * Class Level
+        let spMax = 0; // Max(Constitution Modifier * Character level + Class' SP per level * Class Level, 0)
 
         // Constitution bonus
-        let constitutionBonus = Math.max(data.abilities.con.mod, 0) * data.details.level.value;
+        let constitutionBonus = data.abilities.con.mod * data.details.level.value;
         spMax += constitutionBonus;
 
         data.attributes.sp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Stamina.ConstitutionTooltip", {
@@ -43,6 +43,8 @@ export default function (engine) {
                 }));
             }
         }
+
+        spMax = Math.max(spMax, 0);
         
         // Iterate through any modifiers that affect SP
         let filteredModifiers = fact.modifiers.filter(mod => {
@@ -65,7 +67,7 @@ export default function (engine) {
         }, 0);
         
         spMax += bonus;
-
+        
         data.attributes.sp.max = spMax;
 
         return fact;
