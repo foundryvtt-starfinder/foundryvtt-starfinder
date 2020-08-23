@@ -7,16 +7,22 @@ export default function (engine) {
         const modifiers = fact.modifiers;
         const flags = fact.flags;
 
-        const addModifier = (bonus) => {
+        const addModifier = (bonus, data) => {
+            let computedBonus = bonus.modifier;
+            if (bonus.modifierType == "formula") {
+                let r = new Roll(bonus.modifier, data).roll();
+                computedBonus = r.total;
+            }
+
             let mod = 0;
             if (bonus.valueAffected === "acp-light" && armor.data.armor.type === "light") {
-                mod += bonus.modifier;
+                mod = computedBonus;
             }
             else if (bonus.valueAffected === "acp-heavy" && armor.data.armor.type === "heavy") {
-                mod += bonus.modifier;
+                mod = computedBonus;
             }
             else {
-                mod += bonus.modifier;
+                mod = computedBonus;
             }
 
             return mod;
@@ -26,9 +32,7 @@ export default function (engine) {
         const armorSavant = getProperty(flags, 'sfrpg.armorSavant') ? 1 : 0;
 
         const acpMods = modifiers.filter(mod => {
-            return mod.enabled && 
-                [SFRPGEffectType.ACP].includes(mod.effectType) &&
-                mod.modifierType === SFRPGModifierType.CONSTANT;
+            return mod.enabled && [SFRPGEffectType.ACP].includes(mod.effectType);
         });
 
         const mods = context.parameters.stackModifiers.process(acpMods, context);
@@ -37,11 +41,11 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[1].type)) {
                 for (const bonus of curr[1]) {
-                    prev += addModifier(bonus);
+                    prev += addModifier(bonus, fact.data);
                 }
             }
             else {
-                prev += addModifier(curr[1]);
+                prev += addModifier(curr[1], fact.data);
             }
 
             return prev;
@@ -56,9 +60,7 @@ export default function (engine) {
             skill.mod += acp;
 
             if (acp >= 0) continue;
-            const tooltip = game.i18n.format("SFRPG.ACPTooltip", {acp: acp.signedString()});
-            if (!skill.tooltip) skill.tooltip = [tooltip];
-            else skill.tooltip.push(tooltip);
+            skill.tooltip.push(game.i18n.format("SFRPG.ACPTooltip", {acp: acp.signedString()}));
         }
 
         return fact;

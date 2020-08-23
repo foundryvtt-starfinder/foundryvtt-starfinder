@@ -44,14 +44,13 @@
 
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
-                <li class="attribute health" data-tippy-content="<strong>{{ localize "SFRPG.Health" }}</strong><br>@attributes.hp.value<br>@attributes.hp.max">
+                <li class="attribute health" data-tippy-content="<strong>{{ localize "SFRPG.Health" }}</strong><br/>@attributes.hp.value<br/>@attributes.hp.max<br/><br/>{{#each data.attributes.hp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.Health" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
                             data-dtype="Number" placeholder="10" />
                         <span class="sep"> / </span>
-                        <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
-                            data-dtype="Number" placeholder="10" />
+                        <div class="attribute-value-max">{{data.attributes.hp.max}}</div>
                     </div>
                     <footer class="attribute-footer">
                         <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="{{localize "SFRPG.TempHPPlaceHolderText"}}"
@@ -61,14 +60,13 @@
                     </footer>
                 </li>
 
-                <li class="attribute health" data-tippy-content="<strong>{{ localize "SFRPG.Stamina" }}</strong><br>@attributes.sp.value<br>@attributes.sp.max">
+                <li class="attribute health" data-tippy-content="<strong>{{ localize "SFRPG.Stamina" }}</strong><br/>@attributes.sp.value<br/>@attributes.sp.max<br/><br/>{{#each data.attributes.sp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.Stamina" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.sp.value" type="text" value="{{data.attributes.sp.value}}"
                             data-dtype="Number" placeholder="10" />
                         <span class="sep"> / </span>
-                        <input name="data.attributes.sp.max" type="text" value="{{data.attributes.sp.max}}"
-                            data-dtype="Number" placeholder="10" />
+                        <div class="attribute-value-max">{{data.attributes.sp.max}}</div>
                     </div>                    
                 </li>
 
@@ -113,7 +111,7 @@
         <a class="item active" data-tab="attributes">{{ localize "SFRPG.Attributes" }}</a>
         <a class="item" data-tab="inventory">{{ localize "SFRPG.Inventory" }}</a>
         <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
-        <a class="item" data-tab="spellbook">{{ localize "SFRPG.Spellbook" }}</a>
+        <a class="item" data-tab="spellbook">{{ localize "SFRPG.SpellBook.Spellbook" }}</a>
         <a class="item" data-tab="modifiers">{{localize "SFRPG.Modifiers"}}</a>
         <a class="item" data-tab="biography">{{ localize "SFRPG.Biography" }}</a>        
     </nav>
@@ -283,14 +281,13 @@
                             <span>{{numberFormat data.attributes.bab decimal=0 sign=true}}</span>
                         </div>
                     </li>
-                    <li class="attribute resolve" data-tippy-content="<strong>{{localize "SFRPG.Resolve"}}</strong><br>@attributes.rp.value<br>@attributes.rp.max">
+                    <li class="attribute resolve" data-tippy-content="<strong>{{localize "SFRPG.Resolve"}}</strong><br/>@attributes.rp.value<br/>@attributes.rp.max<br/><br/>{{#each data.attributes.rp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.Resolve" }}</h4>
                         <div class="attribute-value multiple">
                             <input name="data.attributes.rp.value" type="text" value="{{data.attributes.rp.value}}"
                                 data-dtype="Number" placeholder="10" />
                             <span class="sep"> / </span>
-                            <input name="data.attributes.rp.max" type="text" value="{{data.attributes.rp.max}}"
-                                data-dtype="Number" placeholder="10" />
+                            <div class="attribute-value-max">{{data.attributes.rp.max}}</div>
                         </div>
                     </li>
                 </ul>

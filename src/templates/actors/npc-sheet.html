@@ -7,7 +7,7 @@
         <div class="header-details flexrow">
             <div class="header-background flexrow">
                 <h1 class="charname">
-                    <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name" />
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SFRPG.NPCSheet.Header.NamePlaceHolderText"}}" />
                 </h1>
 
                 <div class="charlevel">
@@ -20,17 +20,23 @@
                     </div>
                 </div>
             </div>
-            <ul class="summary">
+            <ul class="summary-row1">
                 <li>
-                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="Type" />
+                    <input type="text" name="data.details.raceAndGrafts" value="{{data.details.raceAndGrafts}}" placeholder="{{localize "SFRPG.NPCSheet.Header.RaceAndGraftsPlaceHolderText"}}" />
                 </li>
                 <li>
-                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}"
-                        placeholder="Alignment" />
+                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="{{localize "SFRPG.NPCSheet.Header.SourcePlaceHolderText"}}" />
+                </li>
+            </ul>
+            <ul class="summary-row2">
+                <li>
+                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{localize "SFRPG.NPCSheet.Header.AlignmentPlaceHolderText"}}" />
                 </li>
                 <li>
-                    <input type="text" name="data.details.source" value="{{data.details.source}}"
-                        placeholder="Source" />
+                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{localize "SFRPG.NPCSheet.Header.TypePlaceHolderText"}}" />
+                </li>
+                <li>
+                    <input type="text" name="data.details.aura" value="{{data.details.aura}}" placeholder="{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}" />
                 </li>
             </ul>
         </div>
@@ -40,7 +46,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="attributes">{{ localize "SFRPG.Attributes" }}</a>
         <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
-        <a class="item" data-tab="spellbook">{{ localize "SFRPG.Spellbook" }}</a>
+        <a class="item" data-tab="spellbook">{{ localize "SFRPG.SpellBook.Spellbook" }}</a>
         <a class="item" data-tab="biography">{{ localize "SFRPG.Biography" }}</a>
     </nav>
 
@@ -135,7 +141,7 @@
                         </div>
                     </li>
                     <li class="attribute initiative">
-                        <h4 class="attribute-name box-title">Initiative</h4>
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.InitiativeLabel" }}</h4>
                         <div class="attribute-value">
                             <input type="text" data-dtype="Number" name="data.attributes.init.total" value="{{numberFormat data.attributes.init.total decimals=0 sign=true}}" />
                         </div>

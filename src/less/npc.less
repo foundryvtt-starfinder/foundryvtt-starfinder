@@ -43,3 +43,83 @@
     }
   }
 }
+
+@headerHeight: 140px;
+
+.sfrpg.sheet {
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  .sheet-header {
+    
+    /* Profile Image */
+    img.profile {
+      flex: 0 0 @headerHeight;
+      height: @headerHeight;
+      object-fit: contain;
+      border: none;
+      border-right: @borderGroove;
+    }
+
+    /* Header Summary Details */
+    .summary-row1 {
+      flex: 0 0 100%;
+      height: @detailsHeight;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: @borderGroove;
+      border-bottom: none;
+      font-size: 16px;
+
+      li {
+        width: 45%;
+        float: left;
+        height: @detailsHeight - 6px;
+        margin: 2px 0;
+        padding: 0 3px;
+        border-right: @borderGroove;
+        line-height: 34px;
+        color: @colorOlive;
+
+        &:first-child {
+          width: 55%
+        }
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+
+    .summary-row2 {
+      flex: 0 0 100%;
+      height: @detailsHeight;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: @borderGroove;
+      border-bottom: none;
+      font-size: 16px;
+
+      li {
+        width: 45%;
+        float: left;
+        height: @detailsHeight - 6px;
+        margin: 2px 0;
+        padding: 0 3px;
+        border-right: @borderGroove;
+        line-height: 34px;
+        color: @colorOlive;
+
+        &:first-child {
+          width: 10%
+        }
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+}

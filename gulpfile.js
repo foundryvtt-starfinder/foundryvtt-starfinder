@@ -1,13 +1,15 @@
-const gulp = require('gulp');
-const fs = require('fs-extra');
-const path = require('path');
-const chalk = require('chalk');
+const { AsyncNedb } = require('nedb-async');
 const archiver = require('archiver');
-const stringify = require('json-stringify-pretty-compact');
+const argv = require('yargs').argv;
+const chalk = require('chalk');
+const fs = require('fs-extra');
+const gulp = require('gulp');
 const less = require('gulp-less');
+const path = require('path');
+const sanitize = require("sanitize-filename");
+const stringify = require('json-stringify-pretty-compact');
 
 const SFRPG_LESS = ["src/less/*.less"];
-const argv = require('yargs').argv;
 
 function getConfig() {
 	const configPath = path.resolve(process.cwd(), 'foundryconfig.json');
@@ -144,6 +146,211 @@ function buildWatch() {
 		{ ignoreInitial: false },
 		copyFiles
 	);
+}
+
+/**
+ * Unpack existing db files into json files.
+ */
+async function unpack(sourceDatabase, outputDirectory) {
+    await fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => { if (err) throw err; });
+    
+    let db = new AsyncNedb({ filename: sourceDatabase, autoload: true });
+    let items = await db.asyncFind({});
+    
+    for (let item of items) {
+        let jsonOutput = JSON.stringify(item, null, 2);
+        let filename = sanitize(item.name);
+        filename = filename.replace(/[\s]/g,"_");
+        filename = filename.replace(/[,;]/g,"");
+        filename = filename.toLowerCase();
+        
+        let targetFile = `${outputDirectory}/${filename}.json`;
+        await fs.writeFileSync(targetFile, jsonOutput, {"flag": "w"});
+    }
+}
+ 
+async function unpackPacks() {
+    console.log(`Unpacking all packs`);
+    
+    let sourceDir = "./src/packs";
+    let files = await fs.readdirSync(sourceDir);
+    for (let file of files) {
+        if (file.endsWith(".db")) {
+            let fileWithoutExt = file.substr(0, file.length - 3);
+            let unpackDir = `./src/items/${fileWithoutExt}`;
+            let sourceFile = `${sourceDir}/${file}`;
+            
+            console.log(`Processing ${fileWithoutExt}`);
+
+            console.log(`> Cleaning up ${unpackDir}`);
+            await fs.rmdirSync(unpackDir, {recursive: true});
+
+            console.log(`> Unpacking ${sourceFile} into ${unpackDir}`);
+            await unpack(sourceFile, unpackDir);
+
+            console.log(`> Done.`);
+        }
+    }
+
+    console.log(`\nUnpack finished.\n`);
+    
+    return 0;
+}
+
+/**
+ * Cook db source json files into .db files with nedb
+ */
+var cookErrorCount = 0;
+var packErrors = {};
+async function cookPacks() {
+    console.log(`Cooking db files`);
+    
+    let compendiumMap = {};
+    let allItems = [];
+    
+    let sourceDir = "./src/items";
+    let directories = await fs.readdirSync(sourceDir);
+    for (let directory of directories) {
+        let itemSourceDir = `${sourceDir}/${directory}`;
+        let outputFile = `./src/packs/${directory}.db`;
+        
+        console.log(`Processing ${directory}`);
+        
+        if (fs.existsSync(outputFile)) {
+            console.log(`> Removing ${outputFile}`);
+            await fs.unlinkSync(outputFile);
+        }
+        
+        compendiumMap[directory] = {};
+        
+        let db = new AsyncNedb({ filename: outputFile, autoload: true });
+        
+        console.log(`Opening files in ${itemSourceDir}`);
+        let files = await fs.readdirSync(itemSourceDir);
+        for (let file of files) {
+            let filePath = `${itemSourceDir}/${file}`;
+            let jsonInput = await fs.readFileSync(filePath);
+            jsonInput = JSON.parse(jsonInput);
+            
+            compendiumMap[directory][jsonInput._id] = jsonInput;
+            allItems.push({pack: directory, data: jsonInput, file: file});
+            
+            await db.asyncInsert(jsonInput);
+        }
+    }
+    
+    console.log(`\nStarting consistency check.`);
+    
+    cookErrorCount = 0;
+    packErrors = {};
+    
+    for (let item of allItems) {
+        let data = item.data;
+        if (!data || !data.data || !data.data.description) continue;
+        
+        let desc = data.data.description.value;
+        if (!desc) continue;
+        
+        let pack = item.pack;
+        
+        let errors = [];
+        let itemMatch = [...desc.matchAll(/@Item\[([^\]]*)\]{([^}]*)}/gm)];
+        if (itemMatch && itemMatch.length > 0) {
+            for (let localItem of itemMatch) {
+                let localItemId = localItem[1];
+                let localItemName = localItem[2];
+
+                // The current pack must be a valid pack from the compendium map.
+                if (!(pack in compendiumMap)) {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: '${localItemName}' (with id: ${localItemId}) cannot find its own pack '${pack}'.`);
+                    cookErrorCount++;
+                    continue;
+                }
+                
+                // @Item links must link to a valid item ID.
+                if (!(localItemId in compendiumMap[pack])) {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: '${localItemName}' (with id: ${localItemId}) not found in '${pack}'.`);
+                    cookErrorCount++;
+                }
+            }
+        }
+        
+        let compendiumMatch = [...desc.matchAll(/@Compendium\[([^\.]*)\.([^\.]*)\.([^\]]*)\]{([^}]*)}/gm)];
+        if (compendiumMatch && compendiumMatch.length > 0) {
+            for (let otherItem of compendiumMatch) {
+                let system = otherItem[1];
+                let otherPack = otherItem[2];
+                let otherItemId = otherItem[3];
+                let otherItemName = otherItem[4];
+
+                // @Compendium links must link to sfrpg compendiums.
+                if (system !== "sfrpg") {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is not referencing the sfrpg system, but instead using '${system}'.`);
+                    cookErrorCount++;
+                }
+                
+                // @Compendium links to the same compendium could be @Item links instead.
+                /*if (otherPack === pack) {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is referencing the same compendium, consider using @Item[${otherItemId}] instead.`);
+                    cookErrorCount++;
+                }*/
+                
+                // @Compendium links must link to a valid compendium.
+                if (!(otherPack in compendiumMap)) {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) cannot find '${pack}', is there an error in the compendium name?`);
+                    cookErrorCount++;
+                    continue;
+                }
+                
+                // @Compendium links must link to a valid item ID.
+                if (!(otherItemId in compendiumMap[otherPack])) {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) not found in '${otherPack}'.`);
+                    cookErrorCount++;
+                }
+            }
+        }
+    }
+
+    console.log(`\nUpdating items with updated IDs.\n`);
+    
+    await unpackPacks();
+    
+    console.log(`\nCook finished with ${cookErrorCount} errors.\n`);
+
+    return 0;
+}
+
+async function postCook() {
+    
+    if (Object.keys(packErrors).length > 0) {
+        for (let pack of Object.keys(packErrors)) {
+            console.log(`\n${packErrors[pack].length} Errors cooking ${pack}.db:`);
+            for (let error of packErrors[pack]) {
+                console.log(`> ${error}`);
+            }
+        }
+    }
+    
+    console.log(`\nCompendiums cooked with ${cookErrorCount} errors!\nDon't forget to restart Foundry to refresh compendium data!\n`);
+    return 0;
 }
 
 /********************/
@@ -412,4 +619,6 @@ exports.publish = gulp.series(
 	copyReadmeAndLicenses,
 	packageBuild
 );
+exports.cook = gulp.series(cookPacks, clean, execBuild, postCook);
+exports.unpack = unpackPacks;
 exports.default = gulp.series(clean, execBuild);

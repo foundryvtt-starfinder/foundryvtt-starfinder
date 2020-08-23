@@ -5,26 +5,25 @@ export default function (engine) {
         const data = fact.data;
         const modifiers = fact.modifiers;
 
-        const addModifier = (bonus, ability) => {
-            let abilityMod = 0;
-
-            abilityMod += bonus.modifier;
-
-            if (abilityMod !== 0) {
+        const addModifier = (bonus, data, ability) => {
+            let computedBonus = bonus.modifier;
+            if (bonus.modifierType !== "constant") {
+                let r = new Roll(bonus.modifier, data).roll();
+                computedBonus = r.total;
+            }
+            if (computedBonus !== 0) {
                 ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreBonusTooltip", {
                     type: bonus.type.capitalize(),
-                    mod: bonus.modifier.signedString(),
+                    mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
             }
 
-            return abilityMod;
+            return computedBonus;
         };
 
         const filteredMods = modifiers.filter(mod => {
-            return mod.enabled && 
-                [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType) && 
-                [SFRPGModifierType.CONSTANT].includes(mod.modifierType);
+            return mod.enabled && [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType);
         })
 
         for (let [abl, ability] of Object.entries(data.abilities)) {
@@ -35,7 +34,7 @@ export default function (engine) {
             );
 
             let score = ability.base ? ability.base : 10;
-            ability.tooltip = [game.i18n.format("SFRPG.AbilityScoreBaseTooltip", { mod: score.signedString() })];
+            ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreBaseTooltip", { mod: score.signedString() }));
 
             if (ability.userPenalty) {
                 let userPenalty = -Math.abs(ability.userPenalty);
@@ -54,10 +53,10 @@ export default function (engine) {
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                     for (const bonus of mod[1]) {
-                        sum += addModifier(bonus, ability);
+                        sum += addModifier(bonus, data, ability);
                     }
                 } else {
-                    sum += addModifier(mod[1], ability);
+                    sum += addModifier(mod[1], data, ability);
                 }
 
                 return sum;

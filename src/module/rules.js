@@ -20,8 +20,9 @@ import isModifierType from './rules/conditions/is-modifier-type.js';
 import isActorType from './rules/conditions/is-actor-type.js';
 import stackModifiers from './rules/actions/modifiers/stack-modifiers.js';
 import logToConsole from './rules/actions/log.js';
-import calculateBaseAbilityModifier from './rules/actions/actor/calculate-base-ability-modifier.js';
+import clearTooltips from './rules/actions/actor/clear-tooltips.js';
 import calculateBaseAbilityScore from './rules/actions/actor/calculate-base-ability-score.js';
+import calculateBaseAbilityModifier from './rules/actions/actor/calculate-base-ability-modifier.js';
 import calculateBaseArmorClass from './rules/actions/actor/calculate-base-armor-class.js';
 import calculateArmorModifiers from './rules/actions/actor/calculate-armor-modifiers.js';
 import calculateBab from './rules/actions/actor/calculate-bab.js';
@@ -46,13 +47,19 @@ import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modif
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
 import calculateNpcAbilityValue from './rules/actions/actor/calculate-npc-ability-value.js';
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
+// Character rules
+import calculateHitpoints from './rules/actions/actor/character/calculate-hitpoints.js';
+import calculateStamina from './rules/actions/actor/character/calculate-stamina.js';
+import calculateResolve from './rules/actions/actor/character/calculate-resolve.js';
 // Drone rules
-import calculateChassis from './rules/actions/drone/calculate-chassis.js';
-import calculateDroneSkills from './rules/actions/drone/calculate-drone-skills.js';
-import calculateDroneMods from './rules/actions/drone/calculate-drone-mods.js';
-import calculateDroneEquipment from './rules/actions/drone/calculate-drone-equipment.js';
-import calculateDroneDefense from './rules/actions/drone/calculate-drone-defense.js';
-import calculateDroneSaves from './rules/actions/drone/calculate-drone-saves.js';
+import calculateDroneChassis from './rules/actions/actor/drone/calculate-drone-chassis.js';
+import calculateDroneDefense from './rules/actions/actor/drone/calculate-drone-defense.js';
+import calculateDroneEquipment from './rules/actions/actor/drone/calculate-drone-equipment.js';
+import calculateDroneHitpoints from './rules/actions/actor/drone/calculate-drone-hitpoints.js';
+import calculateDroneMods from './rules/actions/actor/drone/calculate-drone-mods.js';
+import calculateDroneResolve from './rules/actions/actor/drone/calculate-drone-resolve.js';
+import calculateDroneSaves from './rules/actions/actor/drone/calculate-drone-saves.js';
+import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -63,6 +70,7 @@ export default function (engine) {
     setResult(engine);
     undefined(engine);
     // Actor actions
+    clearTooltips(engine);
     calculateBaseAbilityScore(engine);
     calculateBaseAbilityModifier(engine);
     calculateBaseArmorClass(engine);
@@ -81,6 +89,10 @@ export default function (engine) {
     calculateSkillArmorCheckPenalty(engine);
     calculateNpcXp(engine);
     calculateNpcAbilityValue(engine);
+    // Character actions
+    calculateHitpoints(engine);
+    calculateStamina(engine);
+    calculateResolve(engine);
     // Starship actions
     calculateShipArmorClass(engine);
     calculateShipCritThreshold(engine);
@@ -91,12 +103,14 @@ export default function (engine) {
     calculateShipSpeed(engine);
     calculateShipTargetLock(engine);
     // Drone actions
-    calculateChassis(engine);
-    calculateDroneSkills(engine);
-    calculateDroneMods(engine);
-    calculateDroneEquipment(engine);
+    calculateDroneChassis(engine);
     calculateDroneDefense(engine);
+    calculateDroneEquipment(engine);
+    calculateDroneHitpoints(engine);
+    calculateDroneMods(engine);
+    calculateDroneResolve(engine);
     calculateDroneSaves(engine);
+    calculateDroneSkills(engine);
 
     // Conditions
     always(engine);
@@ -122,11 +136,12 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "character" },
                 then: [
+                    "clearTooltips",
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseArmorClass",
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
-                    "calculateBaseAttackBonus",
+                    { closure: "calculateBaseAttackBonus", stackModifiers: "stackModifiers" },
                     "calculateBaseSaves",
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     "calculateCharacterLevel",
@@ -137,7 +152,10 @@ export default function (engine) {
                     "calculateXP",
                     "calculateBaseSkills",
                     { closure: "calculateSkillArmorCheckPenalty", stackModifiers: "stackModifiers" },
-                    { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" }
+                    { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
+                    { closure: "calculateHitpoints", stackModifiers: "stackModifiers" },
+                    { closure: "calculateStamina", stackModifiers: "stackModifiers" },
+                    { closure: "calculateResolve", stackModifiers: "stackModifiers" }
                 ]
             },
             {
@@ -164,7 +182,8 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "drone" },
                 then: [
-                    "calculateChassis",
+                    "clearTooltips",
+                    "calculateDroneChassis",
                     "calculateDroneMods",
                     "calculateDroneEquipment",
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
@@ -173,10 +192,12 @@ export default function (engine) {
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
                     "calculateDroneSaves",
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
-                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     "calculateDroneDefense",
+                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     "calculateCMD",
-                    { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" }
+                    { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
+                    { closure: "calculateDroneHitpoints", stackModifiers: "stackModifiers" },
+                    { closure: "calculateDroneResolve", stackModifiers: "stackModifiers" }
                 ]
             }
         ]

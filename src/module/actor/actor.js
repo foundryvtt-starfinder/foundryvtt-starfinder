@@ -52,6 +52,7 @@ export class ActorSFRPG extends Actor {
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
         const weapons = items.filter(item => item.type === "weapon" && item.data.equipped);
+        const races = items.filter(item => item.type === "race");
         const classes = items.filter(item => item.type === "class" || item.type === "chassis");
         const theme = items.find(item => item.type === "theme");
         const mods = items.filter(item => item.type === "mod");
@@ -60,6 +61,7 @@ export class ActorSFRPG extends Actor {
             data,
             armor,
             weapons,
+            races,
             classes,
             flags,
             type: actorType,

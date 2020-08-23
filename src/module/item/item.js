@@ -2,6 +2,7 @@ import { DiceSFRPG } from "../dice.js";
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
+import StackModifiers from "../rules/closures/stack-modifiers.js";
 
 export class ItemSFRPG extends Item {
 
@@ -451,11 +452,62 @@ export class ItemSFRPG extends Item {
         // Determine ability score modifier
         let abl = itemData.data.ability;
         if (!abl && (this.data.type === "spell")) abl = actorData.attributes.spellcasting || "int";
-        else if (!abl) abl = "str";
+        else if (!abl && this.actor.data.type === "npc") abl = "";
+        else if (!abl) abl = "str";        
 
         // Define Roll parts
-        const parts = ["@item.data.attackBonus", `@abilities.${abl}.mod`, "@attributes.bab"];
+        const parts = [];
+        
+        if (itemData.data.attackBonus !== 0) parts.push("@item.data.attackBonus");
+        if (abl) parts.push(`@abilities.${abl}.mod`);
+        if (["character", "drone"].includes(this.actor.data.type)) parts.push("@attributes.bab");
         if ((this.data.type === "weapon") && !itemData.data.proficient) parts.push("-4");
+
+        let acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
+        if (["msak", "rsak"].includes(this.data.data.actionType)) {
+            acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
+        } else if (this.data.data.actionType === "rwak") {
+            acceptedModifiers.push(SFRPGEffectType.RANGED_ATTACKS);
+        } else if (this.data.data.actionType === "mwak") {
+            acceptedModifiers.push(SFRPGEffectType.MELEE_ATTACKS);
+        }
+
+        if (this.data.type === "weapon") {
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
+        }
+
+        let modifiers = this.actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
+                if (mod.valueAffected !== this.data.data.weaponType) {
+                    return false;
+                }
+            }
+            return mod.enabled && acceptedModifiers.includes(mod.effectType);
+        });
+
+        let stackModifiers = new StackModifiers();
+        modifiers = stackModifiers.process(modifiers, null);
+
+        const addModifier = (bonus, parts) => {
+            let computedBonus = bonus.modifier;
+            parts.push(computedBonus);
+            return computedBonus;
+        };
+
+        Object.entries(modifiers).reduce((sum, mod) => {
+            if (mod[1] === null || mod[1].length < 1) return 0;
+
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
+                for (const bonus of mod[1]) {
+                    addModifier(bonus, parts);
+                }
+            } else {
+                addModifier(mod[1], parts);
+            }
+
+            return 0;
+        }, 0);
 
         // Define Critical threshold
         let crit = 20;
@@ -582,7 +634,7 @@ export class ItemSFRPG extends Item {
         else if (!abl) abl = "str";
 
         // Define Roll parts
-        const parts = itemData.damage.parts.map(d => d[0]);
+        let parts = itemData.damage.parts.map(d => d[0]);
         //if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
 
         // Cantrips in Starfinder don't scale :(
@@ -590,6 +642,58 @@ export class ItemSFRPG extends Item {
         //   const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
         //   this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
         // }
+        
+        let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
+        if (["msak", "rsak"].includes(this.data.data.actionType)) {
+            acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
+        } else if (this.data.data.actionType === "rwak") {
+            acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
+        } else if (this.data.data.actionType === "mwak") {
+            acceptedModifiers.push(SFRPGEffectType.MELEE_DAMAGE);
+        }
+
+        if (this.data.type === "weapon") {
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
+        }
+
+        let modifiers = this.actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
+                if (mod.valueAffected !== this.data.data.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
+                if (!this.data.data.properties[mod.valueAffected]) {
+                    return false;
+                }
+            }
+            return mod.enabled && acceptedModifiers.includes(mod.effectType);
+        });
+
+        let stackModifiers = new StackModifiers();
+        modifiers = stackModifiers.process(modifiers, null);
+
+        const addModifier = (bonus, parts) => {
+            console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
+            let computedBonus = bonus.modifier;
+            parts.push(computedBonus);
+            return computedBonus;
+        };
+
+        Object.entries(modifiers).reduce((sum, mod) => {
+            if (mod[1] === null || mod[1].length < 1) return 0;
+
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
+                for (const bonus of mod[1]) {
+                    addModifier(bonus, parts);
+                }
+            } else {
+                addModifier(mod[1], parts);
+            }
+
+            return 0;
+        }, 0);
 
         // Define Roll Data
         const rollData = mergeObject(duplicate(actorData), {

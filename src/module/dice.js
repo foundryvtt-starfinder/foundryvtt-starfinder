@@ -54,7 +54,8 @@ export class DiceSFRPG {
                 'actor': actor,
                 'flavor': flavor,
                 'speaker': speaker,
-            }
+                'rollMode': rollMode
+            };
 
             // Flag critical thresholds
             let d20 = roll.parts[0];

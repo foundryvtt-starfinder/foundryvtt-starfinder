@@ -3,18 +3,21 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function (engine) {
     engine.closures.add("calculateArmorModifiers", (fact, context) => {
 
-        const addModifiers = (bonus, armorClass) => {
-            let mod = 0;
-            
-            mod += bonus.modifier;
-            if (mod !== 0)
+        const addModifiers = (bonus, data, armorClass) => {
+            let computedBonus = bonus.modifier;
+            if (bonus.modifierType == "formula") {
+                let r = new Roll(bonus.modifier, data).roll();
+                computedBonus = r.total;
+            }
+
+            if (computedBonus !== 0)
                 armorClass.tooltip.push(game.i18n.format("SFRPG.ACTooltipBonus", { 
-                    mod: mod.signedString(), 
+                    mod: computedBonus.signedString(), 
                     source: bonus.name, 
                     type: bonus.type.capitalize() 
                 }));
 
-            return mod;
+            return computedBonus;
         }
         
         const data = fact.data;
@@ -35,9 +38,7 @@ export default function (engine) {
         const armorSavant = getProperty(flags, "sfrpg.armorSavant") ? 1 : 0;
         
         let armorMods = modifiers.filter(mod => {
-            return mod.enabled && 
-                [SFRPGEffectType.AC].includes(mod.effectType) &&
-                mod.modifierType === SFRPGModifierType.CONSTANT;
+            return mod.enabled && [SFRPGEffectType.AC].includes(mod.effectType);
         });
         
         let eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context);
@@ -48,11 +49,11 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
-                    sum += addModifiers(bonus, eac);
+                    sum += addModifiers(bonus, data, eac);
                 }
             }
             else {
-                sum += addModifiers(curr[1], eac);
+                sum += addModifiers(curr[1], data, eac);
             }
 
             return sum;
@@ -63,11 +64,11 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
-                    sum += addModifiers(bonus, kac);
+                    sum += addModifiers(bonus, data, kac);
                 }
             }
             else {
-                sum += addModifiers(curr[1], kac);
+                sum += addModifiers(curr[1], data, kac);
             }
 
             return sum;

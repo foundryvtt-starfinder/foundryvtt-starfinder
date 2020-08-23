@@ -6,19 +6,19 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+                <input name="name" type="text" value="{{item.name}}" data-tippy-content="<strong>Item Name</strong>" placeholder="Item Name"/>
             </h1>
 
             <div class="item-subtitle">
-                <h4 class="item-type">{{itemType}}</h4>
-                <span class="item-status">{{itemStatus}}</span>
+                <h4 data-tippy-content="Item Type" class="item-type">{{itemType}}</h4>
+                <span data-tippy-content="Item Status" class="item-status">{{itemStatus}}</span>
             </div>
 
             <ul class="summary">
-                <li>
+                <li data-tippy-content="Weapon Type">
                     {{lookup config.weaponTypes data.weaponType }}
                 </li>
-                <li>
+                <li data-tippy-content="Source<br><br><em>Used primarily to denote what rules document this item came from</em>">
                     <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
                 </li>
             </ul>

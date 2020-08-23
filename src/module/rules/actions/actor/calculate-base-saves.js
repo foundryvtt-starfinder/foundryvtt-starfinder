@@ -11,10 +11,6 @@ export default function (engine) {
         const reflex = data.attributes.reflex;
         const will = data.attributes.will;
 
-        fort.tooltip = [];
-        reflex.tooltip = [];
-        will.tooltip = [];
-
         for (const cls of classes) {
             let slowSave = Math.floor(cls.data.levels * (1/3));
             let fastSave = Math.floor(cls.data.levels * 0.5) + 2;

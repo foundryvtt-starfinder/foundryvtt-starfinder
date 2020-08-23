@@ -28,9 +28,9 @@
 
                 <div class="item-detail modifier-mod">
                     {{#if (eq modifier.modifierType "constant")}}
-                    {{numberFormat modifier.modifier decimals=0 sign=true}}
+                    {{ellipsis (numberFormat modifier.modifier decimals=0 sign=true) 10}}
                     {{else}}
-                    {{~modifier.modifier~}}
+                    {{ellipsis modifier.modifier 12}}
                     {{/if}}
                 </div>
                 <div class="item-detail modifier-type">
@@ -40,29 +40,35 @@
                     {{lookup ../config.modifierEffectTypes modifier.effectType}}
                 </div>
                 <div class="item-detail modifier-value-affected">
-                {{#if (eq modifier.effectType "ac")}}
-                    {{lookup ../config.modifierArmorClassAffectedValues modifier.valueAffected}}
-                {{else if (eq modifier.effectType "acp")}}
-                    {{lookup ../config.acpEffectingArmorType modifier.valueAffected}}
-                {{else if (eq modifier.effectType "ability-skills")}}
-                    {{lookup ../config.abilities modifier.valueAffected}}
-                {{else if (eq modifier.effectType "ability-check")}}
-                    {{lookup ../config.abilities modifier.valueAffected}}
-                {{else if (eq modifier.effectType "ability-score")}}
-                    {{lookup ../config.abilities modifier.valueAffected}}
-                {{else if (eq modifier.effectType "skill")}}
-                    {{lookup ../config.skills modifier.valueAffected}}
-                {{else if (eq modifier.effectType "save")}}
-                    {{#if (eq modifier.valueAffected "highest")}}
-                        {{localize "SFRPG.ModifierSaveHighest"}}
-                    {{else if (eq modifier.valueAffected "lowest")}}
-                        {{localize "SFRPG.ModifierSaveLowest"}}
+                    {{#if (eq modifier.effectType "ac")}}
+                        {{lookup ../config.modifierArmorClassAffectedValues modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "acp")}}
+                        {{lookup ../config.acpEffectingArmorType modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "ability-skills")}}
+                        {{lookup ../config.abilities modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "ability-check")}}
+                        {{lookup ../config.abilities modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "ability-score")}}
+                        {{lookup ../config.abilities modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "skill")}}
+                        {{lookup ../config.skills modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "save")}}
+                        {{#if (eq modifier.valueAffected "highest")}}
+                            {{localize "SFRPG.ModifierSaveHighest"}}
+                        {{else if (eq modifier.valueAffected "lowest")}}
+                            {{localize "SFRPG.ModifierSaveLowest"}}
+                        {{else}}
+                            {{lookup ../config.saves modifier.valueAffected}}
+                        {{/if}}
+                    {{else if (eq modifier.effectType "weapon-attacks")}}
+                        {{lookup ../config.weaponTypes modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "weapon-damage")}}
+                        {{lookup ../config.weaponTypes modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "weapon-property-damage")}}
+                        {{lookup ../config.weaponProperties modifier.valueAffected}}
                     {{else}}
-                        {{lookup ../config.saves modifier.valueAffected}}
-                    {{/if}}                        
-                {{else}}
-                {{!-- Nothing --}}
-                {{/if}}
+                    {{!-- Nothing --}}
+                    {{/if}}
                 </div>
                 {{#if ../owner}}
                 <div class="item-controls">
