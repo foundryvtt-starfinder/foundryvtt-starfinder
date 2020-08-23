@@ -40,13 +40,29 @@
     {{#if (not isDrone)}}
     <div class="form-group">
         <label>{{localize "SFRPG.NumberOfArms"}}</label>
-        <input type="text" name="data.attributes.arms" value="{{data.attributes.arms}}" />
+        <input type="text" name="data.attributes.arms" value="{{data.attributes.arms}}" placeholder="2" />
+    </div>
+    <div class="form-group">
+        <label>{{localize "SFRPG.Space"}}</label>
+        <input type="text" name="data.attributes.space" value="{{data.attributes.space}}" placeholder="5" />
+    </div>
+    <div class="form-group">
+        <label>{{localize "SFRPG.Reach"}}</label>
+        <input type="text" name="data.attributes.reach" value="{{data.attributes.reach}}" placeholder="0" />
     </div>
     {{else}}
     <div class="form-group">
         <label>{{localize "SFRPG.DroneSheet.Traits.GeneralPurposeArms"}}</label>
         <span class="value">{{data.attributes.arms}}</span>
     </div>
+    <!-- <div class="form-group">
+        <label>{{localize "SFRPG.Space"}}</label>
+        <span class="value">{{data.attributes.space}}</span>
+    </div>
+    <div class="form-group">
+        <label>{{localize "SFRPG.Reach"}}</label>
+        <span class="value">{{data.attributes.reach}}</span>
+    </div> -->
     <div class="form-group">
         <label>{{localize "SFRPG.DroneSheet.Traits.MeleeWeaponMounts"}}</label>
         <span class="value">{{data.attributes.weaponMounts.melee.max}}</span>
