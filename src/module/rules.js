@@ -47,6 +47,7 @@ import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modif
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
 import calculateNpcAbilityValue from './rules/actions/actor/calculate-npc-ability-value.js';
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
+import calculateAbilityCheckModifiers from './rules/actions/actor/calculate-ability-check-modifiers.js';
 // Character rules
 import calculateHitpoints from './rules/actions/actor/character/calculate-hitpoints.js';
 import calculateStamina from './rules/actions/actor/character/calculate-stamina.js';
@@ -89,6 +90,7 @@ export default function (engine) {
     calculateSkillArmorCheckPenalty(engine);
     calculateNpcXp(engine);
     calculateNpcAbilityValue(engine);
+    calculateAbilityCheckModifiers(engine);
     // Character actions
     calculateHitpoints(engine);
     calculateStamina(engine);
@@ -155,7 +157,8 @@ export default function (engine) {
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateHitpoints", stackModifiers: "stackModifiers" },
                     { closure: "calculateStamina", stackModifiers: "stackModifiers" },
-                    { closure: "calculateResolve", stackModifiers: "stackModifiers" }
+                    { closure: "calculateResolve", stackModifiers: "stackModifiers" },
+                    { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"}
                 ]
             },
             {
@@ -197,7 +200,8 @@ export default function (engine) {
                     "calculateCMD",
                     { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateDroneHitpoints", stackModifiers: "stackModifiers" },
-                    { closure: "calculateDroneResolve", stackModifiers: "stackModifiers" }
+                    { closure: "calculateDroneResolve", stackModifiers: "stackModifiers" },
+                    { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"}
                 ]
             }
         ]
