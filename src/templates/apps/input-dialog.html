@@ -1,0 +1,6 @@
+<form id="input-dialog-form" class="form-rest">
+    <p>{{message}}</p>
+    {{#each inputs as |input id|}}
+    {{capitalize input.name}}: {{input.label}} <input type="text" id="{{id}}" placeholder="{{input.placeholder}}" /><br /><br />
+    {{/each}}
+</form>

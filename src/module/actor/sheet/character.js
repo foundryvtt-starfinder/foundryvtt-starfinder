@@ -1,4 +1,6 @@
+import { SFRPG } from "../../config.js"
 import { ActorSheetSFRPG } from "./base.js"
+import { computeCompoundBulkForItem } from "../actor-inventory.js"
 
 export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     static get defaultOptions() {
@@ -41,14 +43,15 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         const actorData = data.actor;
 
         const inventory = {
-            weapon: { label: "Weapons", items: [], dataset: { type: "weapon" } },
-            equipment: { label: "Equipment", items: [], dataset: { type: "equipment" } },
-            consumable: { label: "Consumables", items: [], dataset: { type: "consumable" } },
-            goods: { label: "Goods", items: [], dataset: { type: "goods" } },
-            technological: { label: "Technological", items: [], dataset: { type: "technological" } },
-            fusion: { label: "Weapon Fusions", items: [], dataset: { type: "fusion" } },
-            upgrade: { label: "Armor Upgrades", items: [], dataset: { type: "upgrade" } },
-            augmentation: { label: "Augmentations", items: [], dataset: { type: "augmentation" } }
+            weapon: { label: game.i18n.format(SFRPG.itemTypes["weapon"]), items: [], dataset: { type: "weapon" }, allowAdd: true },
+            equipment: { label: game.i18n.format(SFRPG.itemTypes["equipment"]), items: [], dataset: { type: "equipment" }, allowAdd: true },
+            consumable: { label: game.i18n.format(SFRPG.itemTypes["consumable"]), items: [], dataset: { type: "consumable" }, allowAdd: true },
+            goods: { label: game.i18n.format(SFRPG.itemTypes["goods"]), items: [], dataset: { type: "goods" }, allowAdd: true },
+            container: { label: game.i18n.format(SFRPG.itemTypes["container"]), items: [], dataset: { type: "container" }, allowAdd: true },
+            technological: { label: game.i18n.format(SFRPG.itemTypes["technological"]), items: [], dataset: { type: "technological" }, allowAdd: true },
+            fusion: { label: game.i18n.format(SFRPG.itemTypes["fusion"]), items: [], dataset: { type: "fusion" }, allowAdd: true },
+            upgrade: { label: game.i18n.format(SFRPG.itemTypes["upgrade"]), items: [], dataset: { type: "upgrade" }, allowAdd: true },
+            augmentation: { label: game.i18n.format(SFRPG.itemTypes["augmentation"]), items: [], dataset: { type: "augmentation" }, allowAdd: true }
         };
 
         let [items, spells, feats, classes, races, themes, archetypes] = data.items.reduce((arr, item) => {
@@ -67,15 +70,19 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             else if (item.type === "theme") arr[5].push(item);
             else if (item.type === "archetypes") arr[6].push(item);
             else if (Object.keys(inventory).includes(item.type)) arr[0].push(item);
+            else arr[0].push(item);
             return arr;
         }, [[], [], [], [], [], [], []]);
         
         const spellbook = this._prepareSpellbook(data, spells);
 
-        let totalWeight = 0;
         let totalValue = 0;
         for (let i of items) {
             i.img = i.img || DEFAULT_TOKEN;
+
+            if (!(i.type in inventory)) {
+                continue;
+            }
 
             i.data.quantity = i.data.quantity || 0;
             i.data.price = i.data.price || 0;
@@ -91,16 +98,41 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
 
             i.totalWeight = i.data.quantity * weight;
-            //i.hasCharges = i.type === "consumable" && i.data.charges.max > 0;
-            inventory[i.type].items.push(i);
-            totalWeight += i.totalWeight;
+            if (i.data.equippedBulkMultiplier !== undefined && i.data.equipped) {
+                i.totalWeight *= i.data.equippedBulkMultiplier;
+            }
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
 
             totalValue += (i.data.price * i.data.quantity);
         }
-        totalWeight = Math.floor(totalWeight);
-        data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
+
+        this.processItemContainment(items, function (itemType, itemData) {
+            if (!(itemType in inventory)) {
+                let label = "SFRPG.Items.Categories.MiscellaneousItems";
+                if (itemType in SFRPG.itemTypes) {
+                    label = SFRPG.itemTypes[itemType];
+                } else {
+                    console.log(`Item '${itemData.item.name}' with type '${itemType}' is not a registered item type!`);
+                }
+                inventory[itemType] = { label: game.i18n.format(label), items: [], dataset: { }, allowAdd: false };
+            }
+            inventory[itemType].items.push(itemData);
+        });
+
+        let totalWeight = 0;
+        for (let section of Object.entries(inventory)) {
+            for (let i of section[1].items) {
+                if (!(i.type in inventory)) {
+                    continue;
+                }
+
+                let itemBulk = computeCompoundBulkForItem(i.item, i.contents);
+                totalWeight += itemBulk;
+            }
+        }
+        totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
+        data.encumbrance = this._computeEncumbrance(totalWeight, data);
         data.inventoryValue = Math.floor(totalValue);
 
         const features = {
@@ -164,13 +196,14 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
      * Compute the level and percentage of encumbrance for an Actor.
      * 
      * @param {Number} totalWeight The cumulative item weight from inventory items
-     * @param {Ojbect} actorData The data object for the Actor being rendered
+     * @param {Object} actorData The data object for the Actor being rendered
      * @returns {Object} An object describing the character's encumbrance level
      * @private
      */
     _computeEncumbrance(totalWeight, actorData) {
         const enc = {
-            max: actorData.data.abilities.str.value,
+            max: actorData.data.attributes.encumbrance.max,
+            tooltip: actorData.data.attributes.encumbrance.tooltip,
             value: totalWeight
         };
 
