@@ -357,7 +357,7 @@ export class ActorSFRPG extends Actor {
             skillId = `pro${++counter}`;
         }
 
-        const formData = await AddEditSkillDialog.create(skillId, skill, false),
+        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.isPC, this.owner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
@@ -366,7 +366,7 @@ export class ActorSFRPG extends Actor {
             ability = formData.get('ability'),
             subname = formData.get('subname');
 
-        return this.update({
+        let newSkillData = {
             [`data.skills.${skillId}`]: {},
             [`data.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
             [`data.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty,
@@ -374,8 +374,12 @@ export class ActorSFRPG extends Actor {
             [`data.skills.${skillId}.misc`]: misc,
             [`data.skills.${skillId}.ranks`]: ranks,
             [`data.skills.${skillId}.ability`]: ability,
-            [`data.skills.${skillId}.subname`]: subname
-        });
+            [`data.skills.${skillId}.subname`]: subname,
+            [`data.skills.${skillId}.mod`]: value + misc + ranks,
+            [`data.skills.${skillId}.enabled`]: true
+        };
+
+        return this.update(newSkillData);
     }
 
     /**
