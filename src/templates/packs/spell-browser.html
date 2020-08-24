@@ -1,4 +1,4 @@
-<div class="spell-browser">
+<div class="item-browser">
     <div class="control-area">
         <div class="sortcontainer" id="tagfilter">
             <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.BrowserSearchPlaceholder"}}" title="{{localize "SFRPG.BrowserSearchTitle"}}"/>
@@ -43,25 +43,25 @@
             </dl>
         </div>
     </div>
-    <ul class="spell-list">
-        {{#each spells as |spell id|}}
-        <li class="spell flexrow draggable" data-entry-compendium="{{spell.compendium}}" data-entry-id="{{spell._id}}" data-item-category="spells">
-            <div class="spell-image">
-                <img class="" src="{{spell.img}}" title="{{spell.name}}" width="32" height="32"/>
+    <ul class="item-list">
+        {{#each items as |item id|}}
+        <li class="item flexrow draggable" data-entry-compendium="{{item.compendium}}" data-entry-id="{{item._id}}" data-item-category="items">
+            <div class="item-image">
+                <img class="" src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
             </div>
 
-            <div class="spell-name">
-                <span class="item-edit" ><a>{{spell.name}}</a></span>
+            <div class="item-name">
+                <span class="item-edit" ><a>{{item.name}}</a></span>
             </div>
-            <div class="spell-tags">
-                <span title="Spell level">{{spell.data.level}}</span>
+            <div class="item-tags">
+                <span title="item level">{{item.data.level}}</span>
             </div>
-            {{#each spell.data as |attrib id|}}
+            {{#each item.data as |attrib id|}}
             <input type="hidden" name="{{id}}" value="{{attrib}}">
             {{/each}}
-            <input type="hidden" name="allowedClasses.myst" value="{{spell.data.allowedClasses.myst}}">
-            <input type="hidden" name="allowedClasses.tech" value="{{spell.data.allowedClasses.tech}}">
-            <input type="hidden" name="allowedClasses.wysh" value="{{spell.data.allowedClasses.wysh}}">
+            <input type="hidden" name="allowedClasses.myst" value="{{item.data.allowedClasses.myst}}">
+            <input type="hidden" name="allowedClasses.tech" value="{{item.data.allowedClasses.tech}}">
+            <input type="hidden" name="allowedClasses.wysh" value="{{item.data.allowedClasses.wysh}}">
         </li>
         {{/each}}
     </ul>
