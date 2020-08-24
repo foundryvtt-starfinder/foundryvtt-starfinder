@@ -73,7 +73,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
 export async function removeItemFromActorAsync(sourceActor, itemToRemove, quantity, recursive = false) {
     if (!ActorItemHelper.IsValidHelper(sourceActor) || !itemToRemove) return false;
 
-    const sourceItemQuantity = Math.min(itemToRemove.data.data.quantity, quantity);
+    const sourceItemQuantity = itemToRemove.data.data.quantity;
     const newItemQuantity = sourceItemQuantity - quantity;
 
     if (newItemQuantity < 1) {
@@ -100,9 +100,10 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
  * @param {Item} itemToMove Item to be moved.
  * @param {ActorItemHelper} targetActor The target actor.
  * @param {Item} targetItem (Optional) Item to add the item to, merge with, or make sibling for.
+ * @param {Number} quantity (Optional) Amount of item to move, if null will move everything.
  * @returns {Item} Returns the item on the targetActor.
  */
-export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetItem = null) {
+export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetItem = null, quantity = null) {
     if (!ActorItemHelper.IsValidHelper(targetActor)) {
         console.log("Inventory::moveItemBetweenActorsAsync: targetActor is not a valid ActorItemHelper instance.")
         return null;
@@ -118,7 +119,23 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         return await addItemToActorAsync(targetActor, itemToMove, itemToMove.data.data.quantity, targetItem);
     }
 
+    if (!quantity) {
+        quantity = itemToMove.data.data.quantity;
+    }
+
     if (sourceActor.actor === targetActor.actor) {
+        let newItem = null;
+        if (quantity < itemToMove.data.data.quantity) {
+            let updateOld = { _id: itemToMove._id, "data.quantity": itemToMove.data.data.quantity - quantity };
+            await sourceActor.updateOwnedItem(updateOld);
+
+            let newItemData = duplicate(itemToMove.data);
+            delete newItemData._id;
+            newItemData.data.quantity = quantity;
+            
+            itemToMove = await targetActor.createOwnedItem(newItemData);
+        }
+
         if (itemToMove === targetItem) {
             return itemToMove;
         }
@@ -127,13 +144,18 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         if (targetItem) {
             if (acceptsItem(targetItem, itemToMove, targetActor)) {
                 desiredParent = targetItem;
-            } else if (targetItem.name === itemToMove.name && !containsItems(targetItem) && !containsItems(itemToMove)) {
+            } else if (canMerge(targetItem, itemToMove)) {
                 // Merging will destroy the old item, so we return the targetItem here.
-                const targetItemNewQuantity = Number(targetItem.data.data.quantity) + itemToMove.data.data.quantity;
+                const targetItemNewQuantity = Number(targetItem.data.data.quantity) + Number(quantity);
                 const update = { '_id': targetItem._id, 'data.quantity': targetItemNewQuantity};
                 await targetActor.updateOwnedItem(update);
 
-                await sourceActor.deleteOwnedItem(itemToMove._id);
+                if (quantity >= itemToMove.data.data.quantity) {
+                    await sourceActor.deleteOwnedItem(itemToMove._id);
+                } else {
+                    const updateOld = { '_id': itemToMove._id, 'data.quantity': itemToMove.data.data.quantity - quantity};
+                    await sourceActor.updateOwnedItem(updateOld);
+                }
 
                 return targetItem;
             } else {
@@ -172,7 +194,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
         return itemToMove;
     } else {
-        let movedItem = await addItemToActorAsync(targetActor, itemToMove, itemToMove.data.data.quantity, targetItem);
+        let movedItem = await addItemToActorAsync(targetActor, itemToMove, quantity, targetItem);
 
         if (containsItems(itemToMove)) {
             for (let childId of itemToMove.data.data.contents) {
@@ -181,7 +203,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
         }
 
-        await removeItemFromActorAsync(sourceActor, itemToMove, itemToMove.data.data.quantity, true);
+        await removeItemFromActorAsync(sourceActor, itemToMove, quantity, true);
 
         return movedItem;
     }
@@ -246,6 +268,16 @@ export function computeCompoundBulkForItem(item, contents) {
 }
 
 /**
+ * Tests if a given item contains any items.
+ * 
+ * @param {Item} item Item to test.
+ * @returns {Boolean} Boolean whether or not this item contains anything.
+ */
+export function containsItems(item) {
+    return item && item.data.data.contents && item.data.data.contents.length > 0;
+}
+
+/**
  * Returns an array of child items for a given item on an actor.
  * 
  * @param {Actor} actor Actor for whom's items to test.
@@ -256,6 +288,26 @@ export function getChildItems(actor, item) {
     if (!actor) return [];
     if (!containsItems(item)) return [];
     return actor.items.filter(x => item.data.data.contents.includes(x._id));
+}
+
+/**
+ * Checks if two given items can be merged.
+ * @param {Item} itemA 
+ * @param {Item} itemB 
+ */
+function canMerge(itemA, itemB) {
+    if (!itemA || !itemB) return false;
+
+    // If the names are different, they cannot merge.
+    if (itemA.name !== itemB.name) return false;
+
+    // If items contain other items, they cannot merge.
+    if (containsItems(itemA) || containsItems(itemB)) return false;
+
+    // Containers cannot merge.
+    if (itemA.type === "container" || itemB.type === "container") return false;
+
+    return true;
 }
 
 function acceptsItem(containerItem, itemToAdd, actor) {
@@ -315,16 +367,6 @@ function wouldCreateParentCycle(item, container, actor) {
         itemsToTest = itemsToTest.concat(child.data.data.contents);
     }
     return false;
-}
-
-/**
- * Tests if a given item contains any items.
- * 
- * @param {Item} item Item to test.
- * @returns {Boolean} Boolean whether or not this item contains anything.
- */
-export function containsItems(item) {
-    return item && item.data.data.contents && item.data.data.contents.length > 0;
 }
 
 /******************************************************************************

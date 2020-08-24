@@ -6,6 +6,7 @@ import { moveItemBetweenActorsAsync, ActorItemHelper } from "../actor-inventory.
 import { RPC } from "../../rpc.js"
 
 import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js"
+import { InputDialog } from "../../apps/input-dialog.js"
 
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
@@ -671,9 +672,42 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
 
             const itemToMove = await sourceActor.getOwnedItem(parsedDragData.data._id);
-            const itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
-            if (itemInTargetActor === itemToMove) {
-                return await this._onSortItem(event, itemInTargetActor.data);
+
+            if (event.shiftKey) {
+                InputDialog.show(
+                    game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferTitle"),
+                    game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferMessage"), {
+                    amount: {
+                        name: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferLabel"),
+                        label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferInfo", { max: itemToMove.data.data.quantity }),
+                        placeholder: itemToMove.data.data.quantity,
+                        validator: (v) => {
+                            let number = Number(v);
+                            if (Number.isNaN(number)) {
+                                return false;
+                            }
+
+                            if (number < 1) {
+                                return false;
+                            }
+
+                            if (number > itemToMove.data.data.quantity) {
+                                return false;
+                            }
+                            return true;
+                        }
+                    }
+                }, (values) => {
+                    const itemInTargetActor = moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer, values.amount);
+                    if (itemInTargetActor === itemToMove) {
+                        this._onSortItem(event, itemInTargetActor.data);
+                    }
+                });
+            } else {
+                const itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
+                if (itemInTargetActor === itemToMove) {
+                    return await this._onSortItem(event, itemInTargetActor.data);
+                }
             }
         } else {
             let sidebarItem = game.items.get(parsedDragData.id);

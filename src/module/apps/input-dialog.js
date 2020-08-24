@@ -35,9 +35,15 @@ export class InputDialog extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);
 
+        let focused = false;
         for (let input of Object.keys(this.inputData)) {
             let inputElement = html.find(`#${input}`);
             inputElement.change(this._onValueChanged.bind(this));
+
+            if (!focused) {
+                focused = true;
+                inputElement.focus();
+            }
         }
     }
 
