@@ -1103,6 +1103,8 @@ SFRPG.modifierEffectTypes = {
     "initiative": "SFRPG.ModifierEffectTypeInit",
     "ability-skills": "SFRPG.ModifierEffectTypeAbilitySkills",
     "ability-score": "SFRPG.ModifierEffectTypeAbilityScore",
+    "ability-check": "SFRPG.ModifierEffectTypeAbilityCheck",
+    "ability-checks": "SFRPG.ModifierEffectTypeAbilityChecks",
     "skill": "SFRPG.ModifierEffectTypeSkill",
     "all-skills": "SFRPG.ModifierEffectTypeAllSkills",
     "saves": "SFRPG.ModifierEffectTypeSaves",
@@ -1361,12 +1363,6 @@ SFRPG.conditions = {
         modifiers: [],
         tooltip: "<strong>Unconscious</strong><br><br>You're knocked out and helpless."
     }
-};
-
-SFRPG.allowedClasses = {
-    "myst": "Mystic",
-    "tech": "Technomancer",
-    "wysh": "Witchwarper"
 };
 
 SFRPG.characterFlags = {

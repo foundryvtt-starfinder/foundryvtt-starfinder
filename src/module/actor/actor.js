@@ -424,12 +424,19 @@ export class ActorSFRPG extends Actor {
     rollAbility(abilityId, options = {}) {
         const label = CONFIG.SFRPG.abilities[abilityId];
         const abl = this.data.data.abilities[abilityId];
+        let parts = ['@mod'];
+        let data = { mod: abl.mod };
+        //Include ability check bonus only if it's not 0
+        if(abl.abilityCheckBonus) {
+            parts.push('@abilityCheckBonus');
+            data.abilityCheckBonus = abl.abilityCheckBonus;
+        }
 
         return DiceSFRPG.d20Roll({
             event: options.event,
             actor: this,
-            parts: ["@mod"],
-            data: { mod: abl.mod },
+            parts: parts,
+            data: data,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Ability Check - ${label}`,
             title:  `Ability Check`,
             speaker: ChatMessage.getSpeaker({ actor: this })

@@ -47,6 +47,7 @@ import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modif
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
 import calculateNpcAbilityValue from './rules/actions/actor/calculate-npc-ability-value.js';
 import calculateSkillArmorCheckPenalty from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
+import calculateAbilityCheckModifiers from './rules/actions/actor/calculate-ability-check-modifiers.js';
 import calculateEncumbrance from './rules/actions/actor/calculate-encumbrance.js';
 // Character rules
 import calculateHitpoints from './rules/actions/actor/character/calculate-hitpoints.js';
@@ -90,6 +91,7 @@ export default function (engine) {
     calculateSkillArmorCheckPenalty(engine);
     calculateNpcXp(engine);
     calculateNpcAbilityValue(engine);
+    calculateAbilityCheckModifiers(engine);
     calculateEncumbrance(engine);
     // Character actions
     calculateHitpoints(engine);
@@ -158,6 +160,7 @@ export default function (engine) {
                     { closure: "calculateHitpoints", stackModifiers: "stackModifiers" },
                     { closure: "calculateStamina", stackModifiers: "stackModifiers" },
                     { closure: "calculateResolve", stackModifiers: "stackModifiers" },
+                    { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" }
                 ]
             },
@@ -201,6 +204,7 @@ export default function (engine) {
                     { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateDroneHitpoints", stackModifiers: "stackModifiers" },
                     { closure: "calculateDroneResolve", stackModifiers: "stackModifiers" },
+                    { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" }
                 ]
             }
