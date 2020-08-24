@@ -1,6 +1,5 @@
+{{#if (or isCharacter isDrone)}}
 <div class="inventory-filters">
-
-    {{#if (or isCharacter isDrone)}}
     <ol class="currency flexrow">
         <h3>
             {{localize "SFRPG.InventoryCurrency"}}
@@ -13,8 +12,8 @@
         <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
         {{/each}}
     </ol>
-    {{/if}}
 </div>
+{{/if}}
 
 <ol class="inventory-list">
 {{#each sections as |section sid|}}
@@ -30,68 +29,18 @@
 
         {{#if ../owner}}
         <div class="item-controls">
+            {{#if section.allowAdd}}
             <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
             </a>
+            {{/if}}
         </div>
         {{/if}}
     </li>
 
     <ol class="item-list">
     {{#each section.items as |item iid|}}
-        <li class="item flexrow" data-item-id="{{item._id}}">
-            <div class="item-name flexrow rollable">
-                <div class="item-image" style="background-image: url({{item.img}})"></div>
-                <h4>
-                    {{~#if item.isStack}}({{item.data.quantity}}) {{/if}}
-                    {{item.name~}}
-                </h4>
-                {{#if item.hasAttack}}
-                <div class="item-action flexcol">
-                    <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
-                    <button class="tag damage">{{localize "SFRPG.Damage"}}</button>
-                </div>
-                {{/if}}
-            </div>
-            
-            {{#if ../../isCharacter}}
-            <div class="item-detail item-weight">
-                {{#if item.totalWeight}}
-                <div class="item-detail">
-                    {{ item.totalWeight }}
-                </div>
-                {{/if}}
-            </div>
-            {{/if}}
-
-            <div class="item-detail item-uses">
-                {{#if item.hasCapacity}}
-                {{item.data.capacity.value}} / {{item.data.capacity.max}}
-                &nbsp;
-                <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
-                {{/if}}
-            </div>
-
-            <div class="item-detail item-action">
-                {{#if item.hasCapacity }}
-                {{item.data.usage.value}} / {{item.data.usage.per}}
-                {{/if}}
-            </div>
-
-            {{#if ../../owner}}
-            <div class="item-controls">
-                {{#if (or (eq item.type "weapon") (eq item.type "equipment"))}}
-                {{#if item.data.equipped}}
-                <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Equip"}}"><i class="fas fa-check"></i></a>
-                {{else}}
-                <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Unequip"}}"><i class="far fa-square"></i></a>
-                {{/if}}
-                {{/if}}
-                <a class="item-control item-edit" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Edit"}}"><i class="fas fa-edit"></i></a>
-                <a class="item-control item-delete" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Delete"}}"><i class="fas fa-trash"></i></a>
-            </div>
-            {{/if}}
-        </li>
+        {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../../this bigItem=true item=item.item children=item.contents}}
     {{/each}}
     </ol>
 {{/each}}
@@ -99,8 +48,8 @@
 
 
 {{#if (or isCharacter isDrone) }}
-{{#with data.attributes.encumbrance}}
-<div class="encumbrance {{#if encumbered}}encumbered{{/if}}">
+{{#with encumbrance}}
+<div class="encumbrance {{#if encumbered}}encumbered{{/if}}" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Encumbrance.Encumbrance" }}</strong><br/>@attributes.encumbrance.max<br/><br/>{{#each tooltip as |tip|}}{{tip}}<br/>{{/each}}">
     <span class="encumbrance-bar" style="width:{{pct}}%"></span>
     <span class="encumbrance-label">{{value}} / {{max}}</span>
     <div class="encumbrance-breakpoint arrow-up"></div>

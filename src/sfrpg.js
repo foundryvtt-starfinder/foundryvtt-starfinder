@@ -9,8 +9,9 @@
 import { SFRPG } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, getBarAttribute } from "./module/canvas.js";
+import { measureDistances, getBarAttribute, handleItemDrop, onCanvasReady, onTokenUpdated } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
+import { initializeRemoteInventory } from "./module/actor/actor-inventory.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
@@ -28,6 +29,10 @@ import { generateUUID } from "./module/utilities.js";
 import migrateWorld from './module/migration.js';
 import CounterManagement from "./module/classes/counter-management.js";
 import templateOverrides from "./module/template-overrides.js";
+import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
+import { RPC } from "./module/rpc.js"
+
+let defaultDropHandler = null;
 
 Hooks.once('init', async function () {
     console.log(`SFRPG | Initializing the Starfinder System`);
@@ -146,6 +151,20 @@ Hooks.once("setup", function () {
         }
         return str.substring(0, limit) + '…';
     });
+
+    Handlebars.registerHelper('getChildBulk', function (children) {
+        const bulk = computeCompoundBulkForItem(null, children);
+        const reduced = bulk / 10;
+        if (reduced < 0.1) {
+            return "-";
+        } else if (reduced < 1) {
+            return "L";
+        } else return Math.floor(reduced);
+    });
+
+    Handlebars.registerHelper('capitalize', function (value) {
+        return value.capitalize();
+    });
 });
 
 Hooks.once("ready", () => {
@@ -158,13 +177,54 @@ Hooks.once("ready", () => {
             .then(_ => ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage")))
             .catch(_ => ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage")));
     }
+
+    defaultDropHandler = canvas._dragDrop.callbacks.drop;
+    canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
 });
+
+Hooks.on('ready', () => {
+    RPC.initialize();
+
+    initializeRemoteInventory();
+});
+
+export async function handleOnDrop(event) {
+    event.preventDefault();
+
+	let data = null;
+	try {
+		data = JSON.parse(event.dataTransfer.getData('text/plain'));
+	} catch (err) {
+        defaultDropHandler(event);
+		return false;
+    }
+
+    // We're only interested in overriding item drops.
+    if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
+        return await defaultDropHandler(event);
+    }
+
+    // Transform the cursor position to canvas space
+	const [x, y] = [event.clientX, event.clientY];
+	const t = this.stage.worldTransform;
+	data.x = (x - t.tx) / canvas.stage.scale.x;
+    data.y = (y - t.ty) / canvas.stage.scale.y;
+
+    if (data.type === "Item") {
+        return await handleItemDrop(data);
+    }
+    return false;
+}
 
 Hooks.on("canvasInit", function () {
     canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
     SquareGrid.prototype.measureDistances = measureDistances;
     Token.prototype.getBarAttribute = getBarAttribute;
 });
+
+Hooks.on('canvasReady', onCanvasReady);
+
+Hooks.on('updateToken', onTokenUpdated);
 
 Hooks.on("renderChatMessage", (app, html, data) => {
     highlightCriticalSuccessFailure(app, html, data);

@@ -26,15 +26,16 @@ export class AddEditSkillDialog extends Dialog {
      * @param {Object}  skill   The skill being updated
      * @param {Boolean} isEdit  Flag to let the method know if a skill is being added or being edited
      * @param {Boolean} isNpc   Is this a skill on an NPC sheet?
+     * @param {Boolean} isOwner Does the current user own this actor?
      * @returns {Promise}
      */
-    static async create(skillId, skill, isEdit = true, isNpc = false) {
+    static async create(skillId, skill, isEdit = true, isNpc = false, isOwner = false) {
         let hasSubName = typeof skill.subname !== "undefined" || !isEdit;
         const html = await renderTemplate("systems/sfrpg/templates/apps/add-edit-skill.html", {
             skill: skill,
             hasSubName,
             config: CONFIG.SFRPG,
-            isGM: game.user.isGM,
+            canDelete: (skillId.startsWith("pro") && skillId !== "pro") && (game.user.isGM || isOwner) && isEdit,
             isEdit,
             isNpc
         });

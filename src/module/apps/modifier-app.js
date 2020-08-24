@@ -70,13 +70,8 @@ export default class SFRPGModifierApplication extends FormApplication {
 
             switch (effectType) {
                 case SFRPGEffectType.ABILITY_SKILLS:
-                    target.prop('disabled', false);
-                    target.find('option').remove();
-                    for (const ability of Object.entries(CONFIG.SFRPG.abilities)) {
-                        target.append(`<option value="${ability[0]}">${ability[1]}</option>`);
-                    }
-                    break;
                 case SFRPGEffectType.ABILITY_SCORE:
+                case SFRPGEffectType.ABILITY_CHECK:
                     target.prop('disabled', false);
                     target.find('option').remove();
                     for (const ability of Object.entries(CONFIG.SFRPG.abilities)) {

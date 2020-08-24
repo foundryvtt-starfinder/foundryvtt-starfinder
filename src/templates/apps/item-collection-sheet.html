@@ -1,0 +1,52 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{entity.img}}" title="{{entity.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <div class="header-background flexrow">
+                <h1 class="charname">
+                    <input name="name" type="text" value="{{entity.name}}" />
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{#if isGM}}
+        <div class="inventory-filters">
+            <label>{{localize "SFRPG.ItemCollectionSheet.Settings.Header"}}</label>
+            <span data-tippy-content="{{localize "SFRPG.ItemCollectionSheet.Settings.LockedTooltip"}}">
+                <label class="checkbox">
+                    <input id="toggle-locked" type="checkbox" name="itemCollection.locked" {{checked itemCollection.locked}} />{{localize "SFRPG.ItemCollectionSheet.Settings.Locked"}}
+                </label>
+            </span>
+            <label>&nbsp;&nbsp;</label>
+            <span data-tippy-content="{{localize "SFRPG.ItemCollectionSheet.Settings.DeleteIfEmptyTooltip"}}">
+                <label class="checkbox">
+                    <input id="toggle-delete-if-empty" type="checkbox" name="itemCollection.deleteIfEmpty" {{checked itemCollection.deleteIfEmpty}} />{{localize "SFRPG.ItemCollectionSheet.Settings.DeleteIfEmpty"}}
+                </label>
+            </span>
+        </div>
+        {{/if}}
+
+        <ol class="inventory-list">
+            <li class="inventory-header flexrow">
+                <h3 class="item-name flexrow">Items</h3>
+        
+                <div class="item-detail item-weight">{{localize "SFRPG.InventoryBulk"}}</div>
+        
+                <div class="item-detail item-uses">{{localize "SFRPG.InventoryCapacity"}}</div>
+                <div class="item-detail item-action">{{localize "SFRPG.InventoryUsage"}}</div>
+            </li>
+        
+            <ol class="item-list">
+            {{#each items as |item iid|}}
+                {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../this bigItem=true item=item.item children=item.contents disableRolling=true disableEquipping=true}}
+            {{/each}}
+            </ol>
+        </ol>
+    </section>
+</form>

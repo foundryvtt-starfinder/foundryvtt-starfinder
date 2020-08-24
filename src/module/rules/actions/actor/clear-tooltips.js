@@ -63,6 +63,10 @@ export default function (engine) {
             data.attributes.init.tooltip = [];
         }
 
+        if (data.attributes.encumbrance) {
+            data.attributes.encumbrance.tooltip = [];
+        }
+
         return fact;
     });
 }

@@ -1,0 +1,9 @@
+<form id="item-deletion-form" class="form-rest">
+    <p>{{message}}</p>
+    {{#if containsItems}}
+    <label class="checkbox">
+        <input type="checkbox" id="recursiveDeleteCheckbox" {{checked recursiveDelete}}> {{localize "SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationDeleteChildren"}}
+    </label>
+    {{/if}}
+    <br />
+</form>
