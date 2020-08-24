@@ -1362,12 +1362,6 @@ SFRPG.conditions = {
     }
 };
 
-SFRPG.allowedClasses = {
-    "myst": "Mystic",
-    "tech": "Technomancer",
-    "wysh": "Witchwarper"
-};
-
 SFRPG.characterFlags = {
     "improvedInititive": {
         name: "SFRPG.ImprovedInitiativeLabel",
