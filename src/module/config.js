@@ -1103,6 +1103,8 @@ SFRPG.modifierEffectTypes = {
     "initiative": "SFRPG.ModifierEffectTypeInit",
     "ability-skills": "SFRPG.ModifierEffectTypeAbilitySkills",
     "ability-score": "SFRPG.ModifierEffectTypeAbilityScore",
+    "ability-check": "SFRPG.ModifierEffectTypeAbilityCheck",
+    "ability-checks": "SFRPG.ModifierEffectTypeAbilityChecks",
     "skill": "SFRPG.ModifierEffectTypeSkill",
     "all-skills": "SFRPG.ModifierEffectTypeAllSkills",
     "saves": "SFRPG.ModifierEffectTypeSaves",
@@ -1117,7 +1119,8 @@ SFRPG.modifierEffectTypes = {
     "spell-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackDamage",
     "weapon-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackDamage",
     "all-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackDamage",
-    "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage"
+    "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage",
+    "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance"
 };
 
 SFRPG.modifierType = {
@@ -1362,12 +1365,6 @@ SFRPG.conditions = {
     }
 };
 
-SFRPG.allowedClasses = {
-    "myst": "Mystic",
-    "tech": "Technomancer",
-    "wysh": "Witchwarper"
-};
-
 SFRPG.characterFlags = {
     "improvedInititive": {
         name: "SFRPG.ImprovedInitiativeLabel",
@@ -1528,4 +1525,39 @@ SFRPG.capacityUsagePer = {
     "minute": "SFRPG.Capacity.UsagePer.Minute",
     "hour": "SFRPG.Capacity.UsagePer.Hour",
     "day": "SFRPG.Capacity.UsagePer.Day"
+};
+
+SFRPG.itemTypes = {
+    "archetype": "SFRPG.Items.Categories.Archetypes",
+    "augmentation": "SFRPG.Items.Categories.Augmentations",
+    "chassis": "SFRPG.Items.Categories.DroneChassis",
+    "class": "SFRPG.Items.Categories.Classes",
+    "consumable": "SFRPG.Items.Categories.Consumables",
+    "container": "SFRPG.Items.Categories.Containers",
+    "equipment": "SFRPG.Items.Categories.Equipment",
+    "feat": "SFRPG.Items.Categories.Feats",
+    "fusion": "SFRPG.Items.Categories.WeaponFusions",
+    "goods": "SFRPG.Items.Categories.Goods",
+    "hybrid": "SFRPG.Items.Categories.HybridItems",
+    "magic": "SFRPG.Items.Categories.MagicItems",
+    "mod": "SFRPG.Items.Categories.DroneMods",
+    "race": "SFRPG.Items.Categories.Races",
+    "spell": "SFRPG.Items.Categories.Spells",
+    "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
+    "technological": "SFRPG.Items.Categories.TechnologicalItems",
+    "theme": "SFRPG.Items.Categories.Themes",
+    "upgrade": "SFRPG.Items.Categories.ArmorUpgrades",
+    "weapon": "SFRPG.Items.Categories.Weapons"
+};
+
+SFRPG.containableTypes = {
+    "weapon": "Weapons",
+    "equipment": "Equipment",
+    "consumable": "Consumables",
+    "goods": "Goods",
+    "container": "Containers",
+    "technological": "Tech",
+    "fusion": "Fusions",
+    "upgrade": "Armor Upgrades",
+    "augmentation": "Augmentations"
 };

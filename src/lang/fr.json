@@ -62,6 +62,40 @@
                 }
             },
             "Inventory": {
+                "Container": {
+                    "AcceptedItemTypes": "Accepted item types",
+                    "AcceptedItemTypesTooltip": "This section allows you to specify which item types are accepted by the container.",
+                    "CapacityLabelBulk": "Bulk",
+                    "CapacityLabelItems": "Item(s)",
+                    "ContentBulkMultiplier": "Bulk multiplier",
+                    "ContentBulkMultiplierTooltip": "This multiplier is used for altering the bulk of the contained items.<br/>Setting this to 0 will make the contained items' bulk not count towards the actor's encumbrance.",
+                    "EquippedBulkMultiplier": "Equipped bulk multiplier",
+                    "EquippedBulkMultiplierTooltip": "This multiplier is used for altering the bulk of the current item when it is equipped.<br/>Setting this to 0 will make the current item not count its own bulk towards the actor's encumbrance when equipped.",
+                    "DetailsHeader": "Container details",
+                    "StorageCapacity": "Storage capacity",
+                    "StorageCapacityTooltip": "How much bulk can be contained within this container."
+                },
+                "Encumbrance": {
+                    "Encumbrance": "Encumbrance",
+                    "EncumbranceBaseTooltip": "Encumbrance Base: {base} (Strength)",
+                    "EncumbranceModifierTooltip": "{type} Bonus: {mod} ({source})"
+                },
+                "Equipment": {
+                    "DetailsHeader": "Equipment details"
+                },
+                "Interface": {
+                    "DragFromExternalTokenError": "Cannot drag items from token actors not on the active scene.",
+                    "DragToExternalTokenError": "Cannot drag items to token actors not on the active scene.",
+                    "ItemCollectionLocked": "This container is locked and will not open.",
+                    "NoTarget": "No target actor or token specified.",
+                    "DeleteConfirmationTitle": "Delete '{itemName}'?",
+                    "DeleteConfirmationMessage": "Are you sure you wish to delete '{itemName}'?",
+                    "DeleteConfirmationDeleteChildren": "Also delete contained items.",
+                    "AmountToTransferTitle": "Transfer Items",
+                    "AmountToTransferMessage": "Please enter the amount of items you want to transfer.",
+                    "AmountToTransferLabel": "Amount",
+                    "AmountToTransferInfo": "Minimum 1, maximum {max}"
+                },
                 "Item": {
                     "Create": "Créer un objet",
                     "Delete": "Supprimer l'objet",
@@ -101,7 +135,8 @@
                     "SpellAttackDamage": "Dégats de sort",
                     "SpecificWeaponAttackDamage": "Dégâts d'arme spécifiques",
                     "WeaponPropertyDamage": "Dégats des armes",
-                    "AllAttackDamage": "Tous les dégâts d'attaque"
+                    "AllAttackDamage": "Tous les dégâts d'attaque",
+                    "Encumbrance": "Encumbrance"
                 },
                 "UI": {
                     "LongFormula": "Longue formule"
@@ -160,6 +195,11 @@
         "BrowserSearchTitle": "Rechercher",
         "BrowserSortyByLabel": "Trier par nom",
         "CancelButtonLabel": "Annuler",
+        "Canvas": {
+            "Interface": {
+                "NoTargetTokenForItemDrop": "No target token, cannot drop item!"
+            }
+        },
         "Capacity": {
             "UsagePer": {
                 "Day": "Day",
@@ -279,6 +319,12 @@
         "DamVuln": "Vulnérabilités",
         "Description": "Description",
         "Details": "Détails",
+        "Dialogs": {
+            "InputDialog": {
+                "SingleFieldInvalid": "Invalid input for {fieldName}.",
+                "MultipleFieldsInvalid": "Invalid input for the following fields:<br/>{fieldNames}"
+            }
+        },
         "DistAny": "Tout",
         "DroneSheet": {
             "Chassis": {
@@ -319,7 +365,7 @@
             },
             "Details": {
                 "Speed": {
-                    "SpecialPlaceholder": "Pas de mouvement spéciaux",
+                    "SpecialPlaceholder": "Pas de mouvement spéciaux"
                 }
             },
             "Features": {
@@ -425,7 +471,42 @@
         "InventoryUsage": "Usage",
         "IronWillHint": "Ajoute 2 au jet de sauvegarde de volonté",
         "IronWillLabel": "Volonté de fer",
+        "ItemCollectionSheet": {
+            "ItemCollectionLocked": "This container is locked and will not open.",
+            "Settings": {
+                "Header": "GM Settings:",
+                "Locked": "Locked",
+                "LockedTooltip": "<strong>Locked</strong><br/>A locked container prevents player access.",
+                "DeleteIfEmpty": "Delete when emptied",
+                "DeleteIfEmptyTooltip": "<strong>Delete when Emptied</strong><br/>Should this container token automatically be removed when the last item is removed from it?"
+            }
+        },
         "ItemNoUses": "{name} n'a plus de munitions !",
+        "Items": {
+            "Categories": {
+                "Archetypes": "Archetypes",
+                "ArmorUpgrades": "Armor Upgrades",
+                "Augmentations": "Augmentations",
+                "DroneChassis": "Drone Chassis",
+                "DroneMods": "Drone Mods",
+                "Classes": "Classes",
+                "Consumables": "Consumables",
+                "Containers": "Containers",
+                "Equipment": "Equipment",
+                "Feats": "Feats",
+                "Goods": "Goods",
+                "HybridItems": "Hybrid Items",
+                "MagicItems": "Magic Items",
+                "MiscellaneousItems": "Miscellaneous Items",
+                "Races": "Races",
+                "Spells": "Spells",
+                "StarshipWeapons": "Starship Weapons",
+                "TechnologicalItems": "Technological Items",
+                "Themes": "Themes",
+                "Weapons": "Weapons",
+                "WeaponFusions": "Weapon Fusions"
+            }
+        },
         "KeyAbility": "Caractérisques clés",
         "KineticArmorClass": "CAC",
         "Languages": "Langues",

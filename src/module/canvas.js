@@ -1,3 +1,29 @@
+import { moveItemBetweenActorsAsync, ActorItemHelper } from "./actor/actor-inventory.js";
+import { ItemCollectionSheet } from "./apps/item-collection-sheet.js";
+
+export function onCanvasReady(...args) {
+    for (let placeable of canvas.tokens.placeables) {
+		if (placeable.getFlag("sfrpg", "itemCollection")) {
+            setupLootCollectionTokenInteraction(placeable);
+        }
+    }
+}
+
+export async function onTokenUpdated(scene, tokenData, tokenFlags, userId) {
+    if (getProperty(tokenData, "flags.sfrpg.itemCollection")) {
+        const token = canvas.tokens.placeables.find(x => x.id === tokenData._id);
+
+        await new Promise(resolve => setTimeout(resolve, 25));
+
+        setupLootCollectionTokenInteraction(token);
+        
+        for (let appId in token.apps) {
+            let app = token.apps[appId];
+            app.render(true);
+        }
+    }
+}
+
 /**
  * Override the default Grid measurement function to add additional distance for subsequent diagonal moves
  * See BaseGrid.measureDistance for more details.
@@ -46,4 +72,172 @@ export const getBarAttribute = function (...args) {
     }
 
     return data;
+}
+
+export async function handleItemDrop(data) {
+    //console.log("Canvas::handleItemDrop()");
+    
+    // Potential sources:
+    // Actor sheet, Token Actor sheet (May be linked to an Actor), Sidebar Item, Compendium
+    let sourceActor = null;
+    let sourceItem = null;
+    let sourceItemData = null;
+    if ("pack" in data) {
+        // Source is compendium
+        //console.log("> Dragged item from compendium: " + data.pack);
+        const pack = game.packs.get(data.pack);
+        sourceItemData = duplicate(await pack.getEntry(data.id));
+    } else if ("tokenId" in data) {
+        // Source is token sheet
+        //console.log("> Dragged item from token: " + data.tokenId);
+        let sourceToken = canvas.tokens.get(data.tokenId);
+        if (!sourceToken) {
+            ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
+            return;
+        }
+        sourceActor = new ActorItemHelper(sourceToken.actor._id, sourceToken.id, sourceToken.scene.id);
+        sourceItemData = duplicate(data.data);
+        sourceItem = sourceActor.getOwnedItem(sourceItemData._id);
+    } else if ("actorId" in data) {
+        // Source is actor sheet
+        //console.log("> Dragged item from actor: " + data.actorId);
+        sourceActor = new ActorItemHelper(data.actorId, null, null);
+        sourceItemData = duplicate(data.data);
+        sourceItem = sourceActor.getOwnedItem(sourceItemData._id);
+    } else if ("id" in data) {
+        // Source is sidebar
+        //console.log("> Dragged item from sidebar: " + data.id);
+        sourceItem = game.items.get(data.id);
+        sourceItemData = duplicate(sourceItem.data);
+    } else {
+        // Source is anywhere else
+        // TODO: Check what dragging from placable menu will look like
+        console.log("> Dragged item from unknown source!");
+        console.log(event);
+        console.log(data);
+        return;
+    }
+
+    // Potential targets:
+    // Canvas (floor), Token Actor (may be linked)
+    let targetActor = null;
+	for (let placeable of canvas.tokens.placeables) {
+		if (data.x < placeable.x + placeable.width && data.x > placeable.x && data.y < placeable.y + placeable.height && data.y > placeable.y && placeable instanceof Token) {
+			targetActor = placeable.actor;
+			break;
+		}
+    }
+
+    // Create a placeable instead and do item transferral there.
+    if (targetActor === null) {
+        let itemData = [sourceItemData];
+        if (sourceActor !== null && sourceItemData.data.contents && sourceItemData.data.contents.length > 0) {
+            let containersToTest = [sourceItemData];
+            while (containersToTest.length > 0)
+            {
+                let container = containersToTest.shift();
+                let children = sourceActor.filterItems(x => container.data.contents.includes(x._id));
+                if (children) {
+                    for (let child of children) {
+                        itemData.push(child.data);
+
+                        if (child.data.data.contents && child.data.data.contents.length > 0) {
+                            containersToTest.push(child.data);
+                        }
+                    }
+                }
+            }
+        }
+
+        await placeItemCollectionOnCanvas(data.x, data.y, itemData, true);
+
+        // Now remove old items
+        if (sourceActor) {
+            let idsToDrop = [];
+            for (let droppedItem of itemData) {
+                idsToDrop.push(droppedItem._id);
+            }
+            await sourceActor.deleteOwnedItem(idsToDrop);
+        }
+
+        return true;
+    }
+
+    let target = new ActorItemHelper(targetActor._id, targetActor.token.id, targetActor.token.scene.id)
+
+    if (sourceItem) {
+        await moveItemBetweenActorsAsync(sourceActor, sourceItem, target);
+    } else {
+        await targetActor.createOwnedItem(sourceItemData);
+    }
+}
+
+/**
+ * Places an item collection on the canvas as a token for players to interact with.
+ * 
+ * @param {Integer} x X Coordinate to place the item at.
+ * @param {Integer} y Y Coordinate to place the item at.
+ * @param {Boolean} deleteIfEmpty Should this Token be deleted when its last item is removed?
+ * @param {Object} itemData Either a single item data, or an array of item data, that are to be placed on the currently active canvas.
+ */
+async function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
+    if (!itemData) {
+        return;
+    }
+
+    if (!(itemData instanceof Array)) {
+        itemData = [itemData];
+    }
+
+    for (let item of itemData) {
+        if (item.data.equipped) {
+            item.data.equipped = false;
+        }
+    }
+
+    let placeable = await Token.create({
+        name: itemData[0].name,
+        x: x,
+        y: y,
+        img: itemData[0].img,
+        hidden: false,
+        locked: true,
+        disposition: 0,
+        flags: {
+            "sfrpg": {
+                "itemCollection": {
+                    items: itemData,
+                    locked: false,
+                    deleteIfEmpty: deleteIfEmpty
+                }
+            }
+        }
+    });
+
+    // Wait for a moment, Token.create's token needs a second to setup and draw once, so the mouseInteractionManager is initalized.
+    await new Promise(resolve => setTimeout(resolve, 25));
+    
+    setupLootCollectionTokenInteraction(placeable);
+
+    return placeable;
+}
+
+function setupLootCollectionTokenInteraction(lootCollectionToken) {
+    lootCollectionToken.mouseInteractionManager.callbacks.clickLeft2 = openLootCollectionSheet.bind(lootCollectionToken);
+    lootCollectionToken.mouseInteractionManager.permissions.clickLeft2 = () => true;
+}
+
+function openLootCollectionSheet(event) {
+    const relevantToken = this;
+    if (relevantToken.data.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
+        ui.notifications.info(game.i18n.format("SFRPG.ItemCollectionSheet.ItemCollectionLocked"));
+        return;
+    }
+
+    if (!relevantToken.apps) {
+        relevantToken.apps = {};
+    }
+    
+    const lootCollectionSheet = new ItemCollectionSheet(relevantToken);
+    lootCollectionSheet.render(true);
 }
