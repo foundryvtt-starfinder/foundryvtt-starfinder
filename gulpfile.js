@@ -259,13 +259,19 @@ async function cookPacks() {
             for (let localItem of itemMatch) {
                 let localItemId = localItem[1];
                 let localItemName = localItem[2];
+
+                // The current pack must be a valid pack from the compendium map.
                 if (!(pack in compendiumMap)) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
                     }
                     packErrors[pack].push(`${item.file}: '${localItemName}' (with id: ${localItemId}) cannot find its own pack '${pack}'.`);
                     cookErrorCount++;
-                } else if (!(localItemId in compendiumMap[pack])) {
+                    continue;
+                }
+                
+                // @Item links must link to a valid item ID.
+                if (!(localItemId in compendiumMap[pack])) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
                     }
@@ -275,19 +281,44 @@ async function cookPacks() {
             }
         }
         
-        let compendiumMatch = [...desc.matchAll(/@Compendium\[sfrpg\.([^\.]*)\.([^\]]*)\]{([^}]*)}/gm)];
+        let compendiumMatch = [...desc.matchAll(/@Compendium\[([^\.]*)\.([^\.]*)\.([^\]]*)\]{([^}]*)}/gm)];
         if (compendiumMatch && compendiumMatch.length > 0) {
             for (let otherItem of compendiumMatch) {
-                let otherPack = otherItem[1];
-                let otherItemId = otherItem[2];
-                let otherItemName = otherItem[3];
+                let system = otherItem[1];
+                let otherPack = otherItem[2];
+                let otherItemId = otherItem[3];
+                let otherItemName = otherItem[4];
+
+                // @Compendium links must link to sfrpg compendiums.
+                if (system !== "sfrpg") {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is not referencing the sfrpg system, but instead using '${system}'.`);
+                    cookErrorCount++;
+                }
+                
+                // @Compendium links to the same compendium could be @Item links instead.
+                /*if (otherPack === pack) {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is referencing the same compendium, consider using @Item[${otherItemId}] instead.`);
+                    cookErrorCount++;
+                }*/
+                
+                // @Compendium links must link to a valid compendium.
                 if (!(otherPack in compendiumMap)) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
                     }
                     packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) cannot find '${pack}', is there an error in the compendium name?`);
                     cookErrorCount++;
-                } else if (!(otherItemId in compendiumMap[otherPack])) {
+                    continue;
+                }
+                
+                // @Compendium links must link to a valid item ID.
+                if (!(otherItemId in compendiumMap[otherPack])) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
                     }

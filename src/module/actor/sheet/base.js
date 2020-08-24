@@ -2,6 +2,11 @@ import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { spellBrowser } from "../../packs/spell-browser.js";
 
+import { moveItemBetweenActorsAsync, ActorItemHelper } from "../actor-inventory.js";
+import { RPC } from "../../rpc.js"
+
+import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js"
+
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -118,6 +123,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
         html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+        html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
         if (!this.options.editable) return;
 
@@ -163,13 +169,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         });
 
         // Delete Inventory Item
-        html.find('.item-delete').click(ev => {
-            let li = $(ev.currentTarget).parents(".item"),
-                itemId = li.attr("data-item-id");
-            // this.actor.deleteOwnedItem(itemId);
-            this.actor.deleteEmbeddedEntity("OwnedItem", itemId)
-            li.slideUp(200, () => this.render(false));
-        });
+        html.find('.item-delete').click(ev => this._onItemDelete(ev));
 
         // Item Dragging
         let handler = ev => this._onDragItemStart(ev);
@@ -299,6 +299,26 @@ export class ActorSheetSFRPG extends ActorSheet {
         };
         delete itemData.data['type'];
         return this.actor.createOwnedItem(itemData);
+    }
+
+    /**
+     * Handle deleting an Owned Item for the actor
+     * @param {Event} event The originating click event
+     */
+    async _onItemDelete(event) {
+        event.preventDefault();
+
+        let li = $(event.currentTarget).parents(".item"), 
+            itemId = li.attr("data-item-id");
+
+        let actorHelper = new ActorItemHelper(this.actor._id, this.token ? this.token.id : null, this.token ? this.token.scene.id : null);
+        let item = actorHelper.getOwnedItem(itemId);
+
+        let containsItems = (item.data.data.contents && item.data.data.contents.length > 0);
+        ItemDeletionDialog.show(item.name, containsItems, (recursive) => {
+            actorHelper.deleteOwnedItem(itemId, recursive);
+            li.slideUp(200, () => this.render(false));
+        });
     }
 
     _onItemRollAttack(event) {
@@ -432,6 +452,39 @@ export class ActorSheetSFRPG extends ActorSheet {
         li.toggleClass('expanded');
     }
 
+    async _onItemSplit(event) {
+        event.preventDefault();
+        let li = $(event.currentTarget).parents('.item'),
+            item = this.actor.getOwnedItem(li.data('item-id'));
+
+        let itemQuantity = item.data.data.quantity;
+        if (!itemQuantity || itemQuantity <= 1) {
+            return;
+        }
+
+        let bigStack = Math.ceil(itemQuantity / 2.0);
+        let smallStack = Math.floor(itemQuantity / 2.0);
+
+        let actorHelper = new ActorItemHelper(this.actor._id, this.token ? this.token.id : null, this.token ? this.token.scene.id : null);
+
+        let update = { _id: item._id, "data.quantity": bigStack };
+        await actorHelper.updateOwnedItem(update);
+
+        let itemData = duplicate(item.data);
+        itemData._id = null;
+        itemData.data.quantity = smallStack;
+        let newItem = await actorHelper.createOwnedItem(itemData);
+
+        let containerItem = actorHelper.findItem(x => x.data.data.contents && x.data.data.contents.includes(item._id));
+        if (containerItem) {
+            let newContents = duplicate(containerItem.data.data.contents);
+            newContents.push(newItem._id);
+
+            update = { _id: containerItem._id, "data.contents": newContents };
+            await actorHelper.updateOwnedItem(update);
+        }
+    }
+
     _prepareSpellbook(data, spells) {
         const owner = this.actor.owner;
 
@@ -555,5 +608,118 @@ export class ActorSheetSFRPG extends ActorSheet {
     _onConfigureFlags(event) {
         event.preventDefault();
         new ActorSheetFlags(this.actor).render(true);
+    }
+
+    async _onDrop(event) {
+        event.preventDefault();
+
+        const dragData = event.dataTransfer.getData('text/plain');
+        const parsedDragData = JSON.parse(dragData);
+        if (!parsedDragData) {
+            console.log("Unknown item data");
+            return;
+        }
+
+        const targetActor = new ActorItemHelper(this.actor._id, this.token ? this.token.id : null, this.token ? this.token.scene.id : null);
+        if (!ActorItemHelper.IsValidHelper(targetActor)) {
+            ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
+            return;
+        }
+
+        let targetContainer = null;
+        if (event) {
+            const targetId = $(event.target).parents('.item').attr('data-item-id')
+            targetContainer = await targetActor.getOwnedItem(targetId);
+        }
+        
+        if (parsedDragData.type === "ItemCollection") {
+            const msg = {
+                target: targetActor.toObject(),
+                source: {
+                    actorId: null,
+                    tokenId: parsedDragData.tokenId,
+                    sceneId: parsedDragData.sceneId
+                },
+                draggedItems: parsedDragData.items,
+                containerId: targetContainer ? targetContainer._id : null
+            }
+
+            RPC.sendMessageTo("gm", "dragItemFromCollectionToPlayer", msg);
+            return;
+        } else if (parsedDragData.pack) {
+            const pack = game.packs.get(parsedDragData.pack);
+            const itemData = await pack.getEntry(parsedDragData.id);
+
+            const addedItem = await targetActor.createOwnedItem(itemData);
+
+            if (targetContainer) {
+                let newContents = [];
+                if (targetContainer.data.data.contents) {
+                    newContents = duplicate(targetContainer.data.data.contents);
+                }
+                newContents.push(addedItem._id);
+                let update = { _id: targetContainer._id, "data.contents": newContents };
+                await targetActor.updateOwnedItem(update);
+            }
+
+            return addedItem;
+        } else if (parsedDragData.data) {
+            let sourceActor = new ActorItemHelper(parsedDragData.actorId, parsedDragData.tokenId, null);
+            if (!ActorItemHelper.IsValidHelper(sourceActor)) {
+                ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
+                return;
+            }
+
+            const itemToMove = await sourceActor.getOwnedItem(parsedDragData.data._id);
+            const itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
+            if (itemInTargetActor === itemToMove) {
+                return await this._onSortItem(event, itemInTargetActor.data);
+            }
+        } else {
+            let sidebarItem = game.items.get(parsedDragData.id);
+            if (sidebarItem) {
+                const addedItem = await targetActor.createOwnedItem(duplicate(sidebarItem.data));
+                
+                if (targetContainer) {
+                    let newContents = [];
+                    if (targetContainer.data.data.contents) {
+                        newContents = duplicate(targetContainer.data.data.contents);
+                    }
+                    newContents.push(addedItem._id);
+                    let update = { _id: targetContainer._id, "data.contents": newContents };
+                    await targetActor.updateOwnedItem(update);
+                }
+
+                return addedItem;
+            }
+            
+            console.log("Unknown item source: " + JSON.stringify(parsedDragData));
+        }
+    }
+
+    processItemContainment(items, pushItemFn) {
+        let preprocessedItems = [];
+        let containedItems = [];
+        for (let item of items) {
+            let itemData = {
+                item: item,
+                parent: items.find(x => x.data.contents && x.data.contents.includes(item._id)),
+                contents: []
+            };
+            preprocessedItems.push(itemData);
+
+            if (!itemData.parent) {
+                pushItemFn(item.type, itemData);
+            } else {
+                containedItems.push(itemData);
+            }
+        }
+
+        for (let item of containedItems) {
+            let parent = preprocessedItems.find(x => x.item._id === item.parent._id);
+            if (parent) {
+                parent.contents.push(item);
+            }
+        }
     }
 }

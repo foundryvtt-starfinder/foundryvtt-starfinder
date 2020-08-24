@@ -1,4 +1,5 @@
 import { ActorSheetSFRPG } from "./base.js";
+import { SFRPG } from "../../config.js";
 
 /**
  * An Actor sheet for NPC type characters in the SFRPG system.
@@ -53,11 +54,14 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     }
 
     _prepareItems(data) {
+        const inventory = {
+            inventory: { label: "Inventory", items: [], dataset: { } }
+        };
         const features = {
-            weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon", "weapon-type": "natural" } },
-            actions: { label: "Actions", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: "Features", items: [], dataset: { type: "feat" } },
-            equipment: { label: "Inventory", items: [], dataset: { type: "goods" } }
+            weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon", "weapon-type": "natural" }, allowAdd: true },
+            actions: { label: "Actions", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" }, allowAdd: true },
+            passive: { label: "Features", items: [], dataset: { type: "feat" }, allowAdd: true },
+            activeItems: { label: "Active Items", items: [], dataset: { }, allowAdd: false }
         };
 
         let [spells, other] = data.items.reduce((arr, item) => {
@@ -82,18 +86,43 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         const spellbook = this._prepareSpellbook(data, spells);
 
         // Organize Features
+        let itemsToProcess = [];
         for (let item of other) {
-            if (item.type === "weapon") features.weapons.items.push(item);
+            if (item.type === "weapon") {
+                if (!item.data.containerId) {
+                    features.weapons.items.push(item);
+                }
+                itemsToProcess.push(item);
+            }
             else if (item.type === "feat") {
                 if (item.data.activation.type) features.actions.items.push(item);
                 else features.passive.items.push(item);
             }
-            else if (["equipment", "consumable", "technological", "goods", "fusion", "upgrade", "augmentation"].includes(item.type)) {
-                features.equipment.items.push(item);
+            else if (["consumable", "technological"].includes(item.type)) {
+                if (!item.data.containerId) {
+                    features.activeItems.items.push(item);
+                }
+                itemsToProcess.push(item);
+            } else if (["archetype", "class", "race", "theme"].includes(item.type)) {
+                if (!(item.type in features)) {
+                    let label = "SFRPG.Items.Categories.MiscellaneousItems";
+                    if (item.type in SFRPG.itemTypes) {
+                        label = SFRPG.itemTypes[item.type];
+                    }
+                    features[item.type] = { label: game.i18n.format(label), items: [], dataset: { }, allowAdd: false };
+                }
+                features[item.type].items.push(item);
+            } else if (item.type in SFRPG.itemTypes) {
+                itemsToProcess.push(item);
             }
         }
 
+        this.processItemContainment(itemsToProcess, function (itemType, itemData) {
+            inventory.inventory.items.push(itemData);
+        });
+
         // Assign and return
+        data.inventory = inventory;
         data.features = Object.values(features);
         data.spellbook = spellbook;
     }
