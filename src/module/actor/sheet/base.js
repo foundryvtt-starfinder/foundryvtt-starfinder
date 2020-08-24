@@ -458,7 +458,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             item = this.actor.getOwnedItem(li.data('item-id'));
 
         let itemQuantity = item.data.data.quantity;
-        if (itemQuantity <= 1) {
+        if (!itemQuantity || itemQuantity <= 1) {
             return;
         }
 
