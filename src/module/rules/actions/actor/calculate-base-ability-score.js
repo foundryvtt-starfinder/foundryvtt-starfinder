@@ -4,6 +4,8 @@ export default function (engine) {
     engine.closures.add("calculateBaseAbilityScore", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
+        const races = fact.races;
+        const theme = fact.theme;
 
         const addModifier = (bonus, data, ability) => {
             let computedBonus = bonus.modifier;
@@ -25,6 +27,18 @@ export default function (engine) {
         const filteredMods = modifiers.filter(mod => {
             return mod.enabled && [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType);
         })
+
+        let themeMod = {};
+        if(theme && theme.data.abilityMod) {
+            themeMod[theme.data.abilityMod.ability] = theme.data.abilityMod.mod;
+        }
+
+        let racesMod = {};
+        for (let race of races) {
+            for(let raceMod of race.data.abilityMods.parts) {
+                racesMod[raceMod[1]] = racesMod[raceMod[1]] !== undefined ? racesMod[raceMod[1]] + raceMod[0] : raceMod[0];
+            }
+        }
 
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
@@ -62,7 +76,17 @@ export default function (engine) {
                 return sum;
             }, 0);
 
-            ability.value = score + bonus;
+            const modFromTheme = themeMod[abl] ?? 0;
+            if(modFromTheme) {
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreThemeTooltip", { mod: modFromTheme.signedString() }));
+            }
+
+            const modFromRace = racesMod[abl] ?? 0;
+            if(modFromRace) {
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreRaceTooltip", { mod: modFromRace.signedString() }));
+            }
+
+            ability.value = score + bonus + modFromTheme + modFromRace;
         }
 
         return fact;
