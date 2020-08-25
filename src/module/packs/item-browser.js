@@ -3,11 +3,14 @@
  * @author Fabien Dey
  * @version 0.1
  */
+import { packLoader } from './pack-loader.js';
+
 export class ItemBrowserSFRPG extends Application {
   static get defaultOptions() {
     const options = super.defaultOptions;
+    options.template = 'systems/sfrpg/templates/packs/item-browser.html';
     options.classes = options.classes.concat(['sfrpg', 'item-browser-window']);
-    options.title = 'Add an Item';
+    options.title = game.i18n.format("SFRPG.Browsers.ItemBrowser.Title");
     options.width = 800;
     options.height = 700;
     return options;
@@ -24,7 +27,7 @@ export class ItemBrowserSFRPG extends Application {
       const itemId = $(ev.currentTarget).parents('.item').attr('data-entry-id');
       const itemCategory = $(ev.currentTarget).parents('.item').attr('data-item-category');
       const items = this[itemCategory];
-      let item = items[itemId];
+      let item = items.find(x => x._id === itemId);
       const pack = game.packs.find(p => p.collection === item.compendium);
       item = pack.getEntity(itemId).then(item => {
         item.sheet.render(true);
@@ -73,11 +76,10 @@ export class ItemBrowserSFRPG extends Application {
 
     html.on('change', 'select[name=sortorder]', ev => {
       const itemList = html.find('li');
-      const byName = ev.target.value == 'true';
-      const sortedList = this.sortItems(itemList, byName);
+      const sortedList = this.sortItems(itemList, ev.target.value);
+
       const ol = $(html.find('ul'));
       ol[0].innerHTML = [];
-
       for (const element of sortedList) {
         ol[0].append(element);
       }
@@ -90,49 +92,94 @@ export class ItemBrowserSFRPG extends Application {
     html.on('change', '#timefilter select', ev => {
       this.sorters.castingtime = ev.target.value;
       this.filterItems(html.find('li'));
-    }); // filters for level, class and school
+    });
 
     html.on('click', 'input[type=checkbox]', ev => {
-      const filterType = ev.target.name.split(/-(.+)/)[0];
-      const filterTarget = ev.target.name.split(/-(.+)/)[1];
+      const filterSplit = ev.target.name.split(/-/);
+      const filterType = filterSplit[0];
+      const filterTarget = filterSplit[1];
       const filterValue = ev.target.checked;
 
-      if (Object.keys(this.filters).includes(filterType)) {
-        this.filters[filterType][filterTarget] = filterValue;
-        this.filters[filterType] = this.clearObject(this.filters[filterType]);
+      this.filters[filterType].activeFilters = this.filters[filterType].activeFilters || [];
+      if (filterValue) {
+        if (!this.filters[filterType].activeFilters.find(x => x === filterTarget)) {
+          this.filters[filterType].activeFilters.push(filterTarget);
+        }
+      } else {
+        this.filters[filterType].activeFilters = this.filters[filterType].activeFilters.filter(x => x !== filterTarget);
       }
 
       this.filterItems(html.find('li'));
     });
   }
 
-  sortItems(list, byName) {
-    if (byName) {
-      list.sort((a, b) => {
-        const aName = $(a).find('.item-name a')[0].innerHTML;
-        const bName = $(b).find('.item-name a')[0].innerHTML;
-
-        if (aName < bName) return -1;
-        if (aName > bName) return 1;
-        return 0;
-      });
-    } else {
-      list.sort((a, b) => {
-        const aVal = parseInt($(a).find('input[name=level]').val());
-        const bVal = parseInt($(b).find('input[name=level]').val());
-        if (aVal < bVal) return -1;
-        if (aVal > bVal) return 1;
-
-        if (aVal == bVal) {
-          const aName = $(a).find('.item-name a')[0].innerHTML;
-          const bName = $(b).find('.item-name a')[0].innerHTML;
-          if (aName < bName) return -1;
-          if (aName > bName) return 1;
-          return 0;
-        }
-      });
+  async getData() {
+    if (this.items == undefined || this.forceReload == true) {
+      // spells will be stored locally to not require full loading each time the browser is opened
+      this.items = await this.loadItems();
+      this.forceReload = false;
+      this.sortingMethods = this.getSortingMethods();
+      this.filters = this.getFilters();
     }
 
+    const data = {};
+    data.items = this.items;
+    data.sortingMethods = this.sortingMethods;
+    data.filters = this.filters;
+    return data;
+  }
+
+  getSortingMethods() {
+      let sortingMethods = {
+        name: {
+          name: game.i18n.format("SFRPG.Browsers.ItemBrowser.BrowserSortMethodName"),
+          selected: true,
+          method: this._sortByName
+        }
+      };
+      return sortingMethods;
+  }
+
+  _sortByName(elementA, elementB) {
+    const aName = $(elementA).find('.item-name a')[0].innerHTML;
+    const bName = $(elementB).find('.item-name a')[0].innerHTML;
+
+    if (aName < bName) return -1;
+    if (aName > bName) return 1;
+    return 0;
+  }
+
+  getFilters() {
+    return {};
+  }
+
+  allowedItem(item) {
+    return true;
+  }
+
+  async loadItems() {
+    console.log('SFRPG | Compendium Browser | Started loading items');
+    const items = [];
+
+    for await (const {pack, content} of packLoader.loadPacks('Item', this._loadedPacks)) {
+      console.log(`SFRPG | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
+
+      for (let item of content) {
+        item = item.data;
+        item.compendium = pack.collection;
+
+        if (this.allowedItem(item)) {
+          items.push(item);
+        }
+      }
+    }
+
+    console.log('SFRPG | Compendium Browser | Finished loading items');
+    return items;
+  }
+
+  sortItems(list, sortType) {
+    list.sort(this.sortingMethods[sortType].method);
     return list;
   }
 
@@ -180,58 +227,11 @@ export class ItemBrowserSFRPG extends Application {
       }
     }
 
-    for (let filter of Object.keys(this.filters)) {
-
-      if (Object.keys(this.filters[filter]).length > 0) {
-          let hide = true;
-        /*
-         * Filter for allowedClasses for item item
-         */
-        if(filter == 'allowedClasses'){
-            let current = this.filters[filter];
-
-            //Todo make more dynamic
-            let filterMystString = "allowedClasses.myst";
-            let filterTechString = "allowedClasses.tech";
-            let filterWyshString = "allowedClasses.wysh";
-            let filteredMystElements = $(element).find(`input[name="${filterMystString}"]`).val();
-            let filteredTechElements = $(element).find(`input[name="${filterTechString}"]`).val();
-            let filteredWyshElements = $(element).find(`input[name="${filterWyshString}"]`).val();
-
-           //Check for mystic class
-            if(current.myst && filteredMystElements === 'true'){
-               hide = false;
-               continue;
-            }
-
-            //Check for technomancer class
-            if(current.tech && filteredTechElements === 'true'){
-                hide = false;
-                continue;
-            }
-
-            //Check for wyshmaster class
-            if(current.wysh && filteredWyshElements === 'true'){
-                hide = false;
-                continue;
-            }
-
-            if (hide) return false;
-        }else{
-            const filteredElements = $(element).find(`input[name=${filter}]`).val();
-            let hide = true;
-
-            if (filteredElements != undefined) {
-                for (const e of filteredElements.split(',')) {
-                    if (this.filters[filter][e.trim()] == true) {
-                        hide = false;
-                        break;
-                    }
-                }
-            }
-            if (hide) return false;
+    for (let availableFilter of Object.values(this.filters)) {
+      if (availableFilter.activeFilters && availableFilter.activeFilters.length > 0) {
+        if (!availableFilter.filter(element, availableFilter.activeFilters)) {
+          return false;
         }
-
       }
     }
 
@@ -255,64 +255,23 @@ export class ItemBrowserSFRPG extends Application {
       text: '',
       castingtime: 'null'
     };
-    this.filters = {
-      level: {},
-      allowedClasses: {},
-      school: {},
-      group: {},
-      source: {},
-    };
+    for (let filterKey of Object.keys(this.filters)) {
+      this.filters[filterKey].activeFilters = [];
+    }
     html.find('input[name=textFilter]').val('');
     html.find('input[name=timefilter]').val('null');
     html.find('input[type=checkbox]').prop('checked', false);
   }
   /* -------------------------------------------- */
+  getPacksToLoad() {
+    return [];
+  }
 
   get _loadedPacks() {
-    return Object.entries(this.settings).flatMap(([collection, {
+    return this.getPacksToLoad().flatMap(([collection, {
       load
     }]) => {
       return load ? [collection] : [];
     });
-  }
-
-  openSettings(saveName) {
-    // Generate HTML for settings menu
-    // Item Browser
-    let content = '<h2>Item Browser</h2>';
-    content += '<p>Which compendium should be loaded? Uncheck each compendium that contains no items.</p>';
-
-    for (const key in this.settings) {
-      content += `<div><input type=checkbox data-browser-type="item" name="${key}" ${this.settings[key].load ? 'checked=true' : ''}><label>${this.settings[key].name}</label></div>`;
-    }
-
-    const d = new Dialog({
-      title: 'Compendium Browser settings',
-      content: `${content}<br>`,
-      buttons: {
-        save: {
-          icon: '<i class="fas fa-check"></i>',
-          label: 'Save',
-          callback: html => {}
-        }
-      },
-      default: 'save',
-      close: html => {
-        const inputs = html.find('input');
-
-        for (const input of inputs) {
-          const browserType = $(input).attr('data-browser-type');
-          if (browserType === 'item') this.settings[input.name].load = input.checked;
-        }
-
-        console.log('SFRPG System | Compendium Browser | Saving new Settings'); // write Item Browser settings
-
-        game.settings.set('sfrpg', saveName, JSON.stringify(this.settings)); // write Item Browser settings
-        this.settingsChanged = true;
-      }
-    }, {
-      width: '300px'
-    });
-    d.render(true);
   }
 }

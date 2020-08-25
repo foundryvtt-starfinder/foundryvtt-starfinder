@@ -16,7 +16,7 @@
 {{#each spellbook as |section|}}
     <li class="item flexrow inventory-header spellbook-header">
         <div class="item-name flexrow">
-            <h3>{{section.label}}</h3>
+            <h3>{{localize section.label}}</h3>
         </div>
 
         <div class="spell-slots">
@@ -55,7 +55,7 @@
             </div>
 
             <div class="spell-comps">{{labels.components}}</div>
-            <div class="spell-school">{{labels.school}}</div>
+            <div class="spell-school">{{localize labels.school}}</div>
             <div class="spell-action">{{labels.activation}}</div>
 
             {{#if ../../owner}}

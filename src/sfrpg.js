@@ -32,6 +32,8 @@ import templateOverrides from "./module/template-overrides.js";
 import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
 import { RPC } from "./module/rpc.js"
 
+import { } from "./module/packs/browsers.js"
+
 let defaultDropHandler = null;
 
 Hooks.once('init', async function () {
