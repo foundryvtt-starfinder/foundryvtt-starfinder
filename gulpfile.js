@@ -260,24 +260,12 @@ async function cookPacks() {
                 let localItemId = localItem[1];
                 let localItemName = localItem[2];
 
-                // The current pack must be a valid pack from the compendium map.
-                if (!(pack in compendiumMap)) {
-                    if (!(pack in packErrors)) {
-                        packErrors[pack] = [];
-                    }
-                    packErrors[pack].push(`${item.file}: '${localItemName}' (with id: ${localItemId}) cannot find its own pack '${pack}'.`);
-                    cookErrorCount++;
-                    continue;
+                // @Item links cannot exist in compendiums.
+                if (!(pack in packErrors)) {
+                    packErrors[pack] = [];
                 }
-                
-                // @Item links must link to a valid item ID.
-                if (!(localItemId in compendiumMap[pack])) {
-                    if (!(pack in packErrors)) {
-                        packErrors[pack] = [];
-                    }
-                    packErrors[pack].push(`${item.file}: '${localItemName}' (with id: ${localItemId}) not found in '${pack}'.`);
-                    cookErrorCount++;
-                }
+                packErrors[pack].push(`${item.file}: Using @Item to reference to '${localItemName}' (with id: ${localItemId}), @Item is not allowed in compendiums. Please use '@Compendium[sfrpg.${pack}.${localItemId}]' instead.`);
+                cookErrorCount++;
             }
         }
         
@@ -312,7 +300,7 @@ async function cookPacks() {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
                     }
-                    packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) cannot find '${pack}', is there an error in the compendium name?`);
+                    packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) cannot find '${otherPack}', is there an error in the compendium name?`);
                     cookErrorCount++;
                     continue;
                 }
