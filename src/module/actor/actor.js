@@ -476,6 +476,18 @@ export class ActorSFRPG extends Actor {
     }
 
     rollSkillCheck(skillId, skill, options = {}) {
+        let parts = ["@mod"];
+        let data = { mod: skill.mod };
+        const acceptedMods = [
+            SFRPGEffectType.ABILITY_SKILLS,
+            SFRPGEffectType.ALL_SKILLS,
+            SFRPGEffectType.SKILL
+        ];
+
+        let mods = this.getAllModifiers().filter(mod => {
+            return true; // placeholder for now.
+        });
+        
         return DiceSFRPG.d20Roll({
             actor: this,
             event: options.event,
