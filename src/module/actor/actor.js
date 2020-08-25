@@ -16,6 +16,7 @@ export class ActorSFRPG extends Actor {
     /** @override */
     getRollData() {
         const data = super.getRollData();
+        let casterLevel = 0;
         data.classes = this.data.items.reduce((obj, i) => {
             if (i.type === "class") {
                 const classData = {
@@ -25,10 +26,16 @@ export class ActorSFRPG extends Actor {
                     skillRanksPerLevel: i.data.skillRanks.value
                 };
 
+                if (i.data.isCaster) {
+                    casterLevel += i.data.levels
+                }
+
                 obj[i.name.slugify({replacement: "_", strict: true})] = classData;
             }
             return obj;
         }, {});
+
+        data.cl = casterLevel;
 
         return data;
     }
