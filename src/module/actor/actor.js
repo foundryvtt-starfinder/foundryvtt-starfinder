@@ -131,7 +131,7 @@ export class ActorSFRPG extends Actor {
     async createEmbeddedEntity(embeddedName, itemData, options) {
         if (!this.isPC) {
             let t = itemData.type;
-            let initial = {};
+            let initial = {};           
             if (t === "weapon") initial['data.proficient'] = true;
             if (["weapon", "equipment"].includes(t)) initial['data.equipped'] = true;
             if (t === "spell") initial['data.prepared'] = true;
