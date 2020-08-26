@@ -420,25 +420,26 @@ SFRPG.equipmentTypes = SFRPG.armorTypes;
 
 // Spell Schools
 SFRPG.spellSchools = {
-    "abj": "Abjuration",
-    "con": "Conjuration",
-    "div": "Divination",
-    "enc": "Enchantment",
-    "evo": "Evocation",
-    "ill": "Illusion",
-    "nec": "Necromancy",
-    "trs": "Transmutation"
+    "abj": "SFRPG.Magic.Schools.Abjuration",
+    "con": "SFRPG.Magic.Schools.Conjuration",
+    "div": "SFRPG.Magic.Schools.Divination",
+    "enc": "SFRPG.Magic.Schools.Enchantment",
+    "evo": "SFRPG.Magic.Schools.Evocation",
+    "ill": "SFRPG.Magic.Schools.Illusion",
+    "nec": "SFRPG.Magic.Schools.Necromancy",
+    "trs": "SFRPG.Magic.Schools.Transmutation",
+    "uni": "SFRPG.Magic.Schools.Universal"
 };
 
 // Spell Levels
 SFRPG.spellLevels = {
-    0: "0 Level",
-    1: "1st Level",
-    2: "2nd Level",
-    3: "3rd Level",
-    4: "4th Level",
-    5: "5th Level",
-    6: "6th Level"
+    0: "SFRPG.Magic.Levels.0",
+    1: "SFRPG.Magic.Levels.1",
+    2: "SFRPG.Magic.Levels.2",
+    3: "SFRPG.Magic.Levels.3",
+    4: "SFRPG.Magic.Levels.4",
+    5: "SFRPG.Magic.Levels.5",
+    6: "SFRPG.Magic.Levels.6"
 };
 
 // Feat types

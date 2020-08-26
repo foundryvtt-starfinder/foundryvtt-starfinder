@@ -1,6 +1,6 @@
 import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
-import { spellBrowser } from "../../packs/spell-browser.js";
+import { getSpellBrowser } from "../../packs/spell-browser.js";
 
 import { moveItemBetweenActorsAsync, ActorItemHelper } from "../actor-inventory.js";
 import { RPC } from "../../rpc.js"
@@ -152,7 +152,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         /* -------------------------------------------- */
         /*  Spellbook
         /* -------------------------------------------- */
-        html.find('.spell-browse').click(ev => spellBrowser.render(true)); // Inventory Browser
+        html.find('.spell-browse').click(ev => getSpellBrowser().render(true)); // Inventory Browser
 
         /* -------------------------------------------- */
         /*  Inventory

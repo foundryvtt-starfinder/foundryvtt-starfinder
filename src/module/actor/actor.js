@@ -131,7 +131,7 @@ export class ActorSFRPG extends Actor {
     async createEmbeddedEntity(embeddedName, itemData, options) {
         if (!this.isPC) {
             let t = itemData.type;
-            let initial = {};
+            let initial = {};           
             if (t === "weapon") initial['data.proficient'] = true;
             if (["weapon", "equipment"].includes(t)) initial['data.equipped'] = true;
             if (t === "spell") initial['data.prepared'] = true;
@@ -475,12 +475,22 @@ export class ActorSFRPG extends Actor {
         });
     }
 
-    rollSkillCheck(skillId, skill, options = {}) {
+    async rollSkillCheck(skillId, skill, options = {}) {
+        let parts = [];
+        let data = this.getRollData();
+
+        if (skill.rolledMods) {
+            parts.push(...skill.rolledMods);
+        }
+
+        parts.push('@mod');
+        mergeObject(data, { mod: skill.mod });
+        
         return DiceSFRPG.d20Roll({
             actor: this,
             event: options.event,
-            parts: ["@mod"],
-            data: { mod: skill.mod },
+            parts: parts,
+            data: data,
             title: 'Skill Check',
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             speaker: ChatMessage.getSpeaker({ actor: this })

@@ -45,6 +45,12 @@ export default class SFRPGModifier {
         this.condition = condition;
         this.subtab = subtab;
 
+        if (modifierType === SFRPGModifierType.FORMULA) {
+            this.max = Roll.maximize(modifier).total;
+        } else {
+            this.max = modifier;
+        }
+
         this._id = id ?? generateUUID();
     }
 }

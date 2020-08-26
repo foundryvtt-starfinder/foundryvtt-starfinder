@@ -16,10 +16,10 @@
 
             <ul class="summary">
                 <li>
-                    {{labels.level}}
+                    {{localize labels.level}}
                 </li>
                 <li>
-                    {{labels.school}}
+                    {{localize labels.school}}
                 </li>
                 <li>
                     <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
@@ -60,7 +60,7 @@
                 <select name="data.level" data-dtype="Number">
                     {{#select data.level}}
                     {{#each config.spellLevels as |name lvl|}}
-                    <option value="{{lvl}}">{{name}}</option>
+                    <option value="{{lvl}}">{{localize name}}</option>
                     {{/each}}
                     {{/select}}
                 </select>
@@ -72,7 +72,7 @@
                 <select name="data.school">
                     {{#select data.school}}
                     {{#each config.spellSchools as |name sch|}}
-                    <option value="{{sch}}">{{name}}</option>
+                    <option value="{{sch}}">{{localize name}}</option>
                     {{/each}}
                     {{/select}}
                 </select>

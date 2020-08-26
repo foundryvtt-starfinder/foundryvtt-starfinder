@@ -8,9 +8,20 @@ export default function (engine) {
 
         const addModifier = (bonus, data, skill) => {
             let computedBonus = bonus.modifier;
-            if (bonus.modifierType == "formula") {
-                let r = new Roll(bonus.modifier, data).roll();
-                computedBonus = r.total;
+            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
+                skill.tooltip.push(game.i18n.format("SFRPG.SkillModifierTooltip", {
+                    type: bonus.type.capitalize(),
+                    mod: bonus.modifier,
+                    source: bonus.name
+                }));
+                
+                if (skill.rolledMods) {
+                    skill.rolledMods.push(bonus.modifier);
+                } else {
+                    skill.rolledMods = [bonus.modifier];
+                }
+
+                return 0;
             }
 
             if (computedBonus !== 0) {
@@ -56,6 +67,7 @@ export default function (engine) {
 
         // Skills
         for (let [skl, skill] of Object.entries(skills)) {
+            skill.rolledMods = null;
             const mods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
                 if (mod.effectType === SFRPGEffectType.ALL_SKILLS) return true;
                 else if (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected) return true;

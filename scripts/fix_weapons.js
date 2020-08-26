@@ -15,8 +15,14 @@ try {
 
             if (!["weapon"].includes(equipment?.type ?? "")) continue;
 
+            // Weapons that have their activation type set to something
+            // other than none are causing display issues on an actor's 
+            // inventory tab.
             equipment.data.activation.type = "none";
             equipment.data.activation.cost = null;
+
+            // Weapon proficiency should be handled by the actor.
+            equipment.data.proficient = false;
 
             json = JSON.stringify(equipment, null, 2);
 
