@@ -14,6 +14,12 @@ export default function (engine) {
                     mod: bonus.modifier,
                     source: bonus.name
                 }));
+                
+                if (skill.rolledMods) {
+                    skill.rolledMods.push(bonus.modifier);
+                } else {
+                    skill.rolledMods = [bonus.modifier];
+                }
 
                 return 0;
             }
@@ -61,6 +67,7 @@ export default function (engine) {
 
         // Skills
         for (let [skl, skill] of Object.entries(skills)) {
+            skill.rolledMods = null;
             const mods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
                 if (mod.effectType === SFRPGEffectType.ALL_SKILLS) return true;
                 else if (mod.effectType === SFRPGEffectType.SKILL && skl === mod.valueAffected) return true;

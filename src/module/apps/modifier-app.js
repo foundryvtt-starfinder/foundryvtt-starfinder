@@ -188,10 +188,16 @@ export default class SFRPGModifierApplication extends FormApplication {
         const modifiers = duplicate(this.actor.data.data.modifiers);
         const modifier = modifiers.find(mod => mod._id === this.modifier._id);
 
-        if (formData['modifierType'] === SFRPGModifierType.CONSTANT) {
-            formData['modifier'] = parseInt(formData['modifier']);
+        switch (formData['modifierType']) {
+            case SFRPGModifierType.CONSTANT:
+                formData['modifier'] = parseInt(formData['modifier']);
 
-            if (isNaN(formData['modifier'])) formData['modifier'] = 0;
+                if (isNaN(formData['modifier'])) formData['modifier'] = 0;
+                modifier.max = formData['modifier'];
+                break;
+            case SFRPGModifierType.FORMULA:
+                modifier.max = Roll.maximize(formData['modifier']).total;
+                break;
         }
 
         mergeObject(modifier, formData);

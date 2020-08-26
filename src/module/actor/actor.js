@@ -475,24 +475,22 @@ export class ActorSFRPG extends Actor {
         });
     }
 
-    rollSkillCheck(skillId, skill, options = {}) {
-        let parts = ["@mod"];
-        let data = { mod: skill.mod };
-        const acceptedMods = [
-            SFRPGEffectType.ABILITY_SKILLS,
-            SFRPGEffectType.ALL_SKILLS,
-            SFRPGEffectType.SKILL
-        ];
+    async rollSkillCheck(skillId, skill, options = {}) {
+        let parts = [];
+        let data = this.getRollData();
 
-        let mods = this.getAllModifiers().filter(mod => {
-            return true; // placeholder for now.
-        });
+        if (skill.rolledMods) {
+            parts.push(...skill.rolledMods);
+        }
+
+        parts.push('@mod');
+        mergeObject(data, { mod: skill.mod });
         
         return DiceSFRPG.d20Roll({
             actor: this,
             event: options.event,
-            parts: ["@mod"],
-            data: { mod: skill.mod },
+            parts: parts,
+            data: data,
             title: 'Skill Check',
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
