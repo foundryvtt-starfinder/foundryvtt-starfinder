@@ -1,7 +1,13 @@
 import { moveItemBetweenActorsAsync, ActorItemHelper } from "./actor/actor-inventory.js";
 import { ItemCollectionSheet } from "./apps/item-collection-sheet.js";
 
-export function onCanvasReady(...args) {
+import { RPC } from "./rpc.js"
+
+Hooks.on('canvasReady', onCanvasReady);
+Hooks.on('createToken', onTokenCreated);
+Hooks.on('updateToken', onTokenUpdated);
+
+function onCanvasReady(...args) {
     for (let placeable of canvas.tokens.placeables) {
 		if (placeable.getFlag("sfrpg", "itemCollection")) {
             setupLootCollectionTokenInteraction(placeable);
@@ -9,7 +15,22 @@ export function onCanvasReady(...args) {
     }
 }
 
-export async function onTokenUpdated(scene, tokenData, tokenFlags, userId) {
+async function onTokenCreated(scene, tokenData, tokenFlags, userId) {
+    if (getProperty(tokenData, "flags.sfrpg.itemCollection")) {
+        const token = canvas.tokens.placeables.find(x => x.id === tokenData._id);
+
+        await new Promise(resolve => setTimeout(resolve, 25));
+
+        setupLootCollectionTokenInteraction(token);
+        
+        for (let appId in token.apps) {
+            let app = token.apps[appId];
+            app.render(true);
+        }
+    }
+}
+
+async function onTokenUpdated(scene, tokenData, tokenFlags, userId) {
     if (getProperty(tokenData, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === tokenData._id);
 
@@ -74,7 +95,7 @@ export const getBarAttribute = function (...args) {
     return data;
 }
 
-export async function handleItemDrop(data) {
+export async function handleItemDropCanvas(data) {
     //console.log("Canvas::handleItemDrop()");
     
     // Potential sources:
@@ -195,31 +216,16 @@ async function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
         }
     }
 
-    let placeable = await Token.create({
-        name: itemData[0].name,
-        x: x,
-        y: y,
-        img: itemData[0].img,
-        hidden: false,
-        locked: true,
-        disposition: 0,
-        flags: {
-            "sfrpg": {
-                "itemCollection": {
-                    items: itemData,
-                    locked: false,
-                    deleteIfEmpty: deleteIfEmpty
-                }
-            }
+    const msg = {
+        itemData: itemData,
+        position: {x: x, y: y},
+        settings: {
+            deleteIfEmpty: deleteIfEmpty,
+            locked: false
         }
-    });
+    }
 
-    // Wait for a moment, Token.create's token needs a second to setup and draw once, so the mouseInteractionManager is initalized.
-    await new Promise(resolve => setTimeout(resolve, 25));
-    
-    setupLootCollectionTokenInteraction(placeable);
-
-    return placeable;
+    RPC.sendMessageTo("gm", "createItemCollection", msg);
 }
 
 function setupLootCollectionTokenInteraction(lootCollectionToken) {

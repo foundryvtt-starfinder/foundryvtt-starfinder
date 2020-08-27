@@ -135,6 +135,7 @@ export class RPC {
         }
 
         //console.log(`> Handling it.`);
+        let wasHandled = false;
         let handlers = this.callbacks[data.eventName];
         if (handlers) {
             for (let callback of handlers) {
@@ -143,8 +144,13 @@ export class RPC {
                     || (callback.target === "local" && data.recipient === game.user.id)
                     || callback.target === "any") {
                     await callback.callback(data);
+                    wasHandled = true;
                 }
             }
+        }
+
+        if (!wasHandled) {
+            console.log(`> Failed to handle RPC call for '${data.eventName}'`);
         }
     }
 }

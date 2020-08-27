@@ -9,7 +9,7 @@
 import { SFRPG } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, getBarAttribute, handleItemDrop, onCanvasReady, onTokenUpdated } from "./module/canvas.js";
+import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
 import { initializeRemoteInventory } from "./module/actor/actor-inventory.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
@@ -120,7 +120,7 @@ Hooks.once("setup", function () {
         "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
         "weaponProperties", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
         "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
-        "modifierArmorClassAffectedValues", "capacityUsagePer"
+        "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels"
     ];
 
     for (let o of toLocalize) {
@@ -213,7 +213,7 @@ export async function handleOnDrop(event) {
     data.y = (y - t.ty) / canvas.stage.scale.y;
 
     if (data.type === "Item") {
-        return await handleItemDrop(data);
+        return await handleItemDropCanvas(data);
     }
     return false;
 }
@@ -223,10 +223,6 @@ Hooks.on("canvasInit", function () {
     SquareGrid.prototype.measureDistances = measureDistances;
     Token.prototype.getBarAttribute = getBarAttribute;
 });
-
-Hooks.on('canvasReady', onCanvasReady);
-
-Hooks.on('updateToken', onTokenUpdated);
 
 Hooks.on("renderChatMessage", (app, html, data) => {
     highlightCriticalSuccessFailure(app, html, data);
