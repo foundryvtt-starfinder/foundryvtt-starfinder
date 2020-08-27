@@ -2,6 +2,7 @@ import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
 export function initializeRemoteInventory() {
+    RPC.registerCallback("createItemCollection", "gm", onCreateItemCollection);
     RPC.registerCallback("dragItemToCollection", "gm", onItemDraggedToCollection);
     RPC.registerCallback("dragItemFromCollectionToPlayer", "gm", onItemCollectionItemDraggedToPlayer);
     RPC.registerCallback("raiseInventoryWarning", "local", onInventoryWarningReceived);
@@ -372,6 +373,81 @@ function wouldCreateParentCycle(item, container, actor) {
 /******************************************************************************
  * RPC handlers
  ******************************************************************************/
+async function onCreateItemCollection(message) {
+    let payload = message.payload;
+    if (!payload.itemData) {
+        return;
+    }
+
+    await Token.create({
+        name: payload.itemData[0].name,
+        x: payload.position.x,
+        y: payload.position.y,
+        img: payload.itemData[0].img,
+        hidden: false,
+        locked: true,
+        disposition: 0,
+        flags: {
+            "sfrpg": {
+                "itemCollection": {
+                    items: payload.itemData,
+                    locked: payload.settings.locked,
+                    deleteIfEmpty: payload.settings.deleteIfEmpty
+                }
+            }
+        }
+    });
+}
+
+async function onItemDraggedToCollection(message) {
+    let data = message.payload;
+
+    let target = ActorItemHelper.FromObject(data.target);
+    let items = target.token.data.flags.sfrpg.itemCollection.items;
+
+    let targetContainer = null;
+    if (data.containerId) {
+        targetContainer = items.find(x => x._id === data.containerId);
+    }
+
+    let newItems = [];
+    if (data.pack) {
+        const pack = game.packs.get(data.pack);
+        const itemData = await pack.getEntry(data.draggedItemId);
+        itemData._id = randomID(16);
+        newItems.push(duplicate(itemData));
+    } else if (data.source.tokenId || data.source.actorId) {
+        // from another token
+        let source = ActorItemHelper.FromObject(data.source);
+        if (!source.isValid()) {
+            return;
+        }
+
+        newItems.push(data.draggedItemData);
+        await source.deleteOwnedItem(data.draggedItemData._id);
+    } else {
+        let sidebarItem = game.items.get(data.draggedItemId);
+        if (sidebarItem) {
+            let itemData = duplicate(sidebarItem.data);
+            itemData._id = randomID(16);
+            newItems.push(duplicate(itemData));
+        }
+    }
+
+    if (newItems.length > 0) {
+        if (targetContainer && targetContainer.data.contents) {
+            for (let newItem of newItems) {
+                targetContainer.data.contents.push(newItem._id);
+            }
+        }
+        newItems = items.concat(newItems);
+        const update = {
+            "flags.sfrpg.itemCollection.items": newItems
+        }
+        await target.token.update(update);
+    }
+}
+
 async function onItemCollectionItemDraggedToPlayer(message) {
     const data = message.payload;
 
@@ -450,55 +526,6 @@ async function onItemCollectionItemDraggedToPlayer(message) {
             const update = {_id: targetContainer._id, "data.contents": combinedContents};
             await target.updateOwnedItem(update);
         }
-    }
-}
-
-async function onItemDraggedToCollection(message) {
-    let data = message.payload;
-
-    let target = ActorItemHelper.FromObject(data.target);
-    let items = target.token.data.flags.sfrpg.itemCollection.items;
-
-    let targetContainer = null;
-    if (data.containerId) {
-        targetContainer = items.find(x => x._id === data.containerId);
-    }
-
-    let newItems = [];
-    if (data.pack) {
-        const pack = game.packs.get(data.pack);
-        const itemData = await pack.getEntry(data.draggedItemId);
-        itemData._id = randomID(16);
-        newItems.push(duplicate(itemData));
-    } else if (data.source.tokenId || data.source.actorId) {
-        // from another token
-        let source = ActorItemHelper.FromObject(data.source);
-        if (!source.isValid()) {
-            return;
-        }
-
-        newItems.push(data.draggedItemData);
-        await source.deleteOwnedItem(data.draggedItemData._id);
-    } else {
-        let sidebarItem = game.items.get(data.draggedItemId);
-        if (sidebarItem) {
-            let itemData = duplicate(sidebarItem.data);
-            itemData._id = randomID(16);
-            newItems.push(duplicate(itemData));
-        }
-    }
-
-    if (newItems.length > 0) {
-        if (targetContainer && targetContainer.data.contents) {
-            for (let newItem of newItems) {
-                targetContainer.data.contents.push(newItem._id);
-            }
-        }
-        newItems = items.concat(newItems);
-        const update = {
-            "flags.sfrpg.itemCollection.items": newItems
-        }
-        await target.token.update(update);
     }
 }
 
