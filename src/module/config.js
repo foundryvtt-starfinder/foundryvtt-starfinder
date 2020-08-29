@@ -474,6 +474,18 @@ SFRPG.starshipSizes = {
     "colossal": "SFRPG.SizeColossal"
 };
 
+SFRPG.itemSizes = {
+    "fine": "SFRPG.SizeFine",
+    "diminutive": "SFRPG.SizeDim",
+    "tiny": "SFRPG.SizeTiny",
+    "small": "SFRPG.SizeSmall",
+    "medium": "SFRPG.SizeMedium",
+    "large": "SFRPG.SizeLarge",
+    "huge": "SFRPG.SizeHuge",
+    "gargantuan": "SFRPG.SizeGargantuan",
+    "colossal": "SFRPG.SizeColossal"
+};
+
 /**
  * The amount of space on a 5ft grid square that a 
  * token of a specific size takes.

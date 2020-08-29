@@ -1,29 +1,7 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
 
     {{!-- Item Sheet Header --}}
-    <header class="sheet-header flexrow">
-        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
-
-        <div class="header-details flexrow">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" data-tippy-content="<strong>Item Name</strong>" placeholder="Item Name"/>
-            </h1>
-
-            <div class="item-subtitle">
-                <h4 data-tippy-content="Item Type" class="item-type">{{itemType}}</h4>
-                <span data-tippy-content="Item Status" class="item-status">{{itemStatus}}</span>
-            </div>
-
-            <ul class="summary">
-                <li data-tippy-content="Weapon Type">
-                    {{lookup config.weaponTypes data.weaponType }}
-                </li>
-                <li data-tippy-content="Source<br><br><em>Used primarily to denote what rules document this item came from</em>">
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
-                </li>
-            </ul>
-        </div>
-    </header>
+    {{> "systems/sfrpg/templates/items/parts/item-header.html"}}
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
@@ -81,54 +59,33 @@
                 {{/each}}
             </div>
 
+            <br />
+
             <h3 class="form-header">Weapon Usage</h3>
 
             {{!-- Item Activation Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-activation.html"}}
+
+            <br />
 
             <h3 class="form-header">Weapon Attack</h3>
 
             {{!-- Item Action Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-action.html"}}
 
+            <br />
+
             <h3 class="form-header">{{ localize "SFRPG.CapacityUsage" }}</h3>
             {{> "systems/sfrpg/templates/items/parts/item-capacity.html"}}
 
-            <h4 class="section-header first">{{ localize "SFRPG.ActorSheet.Inventory.Container.DetailsHeader" }}</h4>
+            <br />
 
-            {{!-- Storage capacity --}}
-            <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacity" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacityTooltip" }}">
-                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacity" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="data.storageCapacity" value="{{data.storageCapacity}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
+            {{> "systems/sfrpg/templates/items/parts/physical-item-details.html"}}
 
-            {{!-- Equipped bulk multiplier --}}
-            <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.EquippedBulkMultiplier" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.EquippedBulkMultiplierTooltip" }}">
-                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.EquippedBulkMultiplier" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="data.equippedBulkMultiplier" value="{{data.equippedBulkMultiplier}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
+            <br />
 
-            {{!-- Equipped bulk multiplier --}}
-            <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.ContentBulkMultiplier" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.ContentBulkMultiplierTooltip" }}">
-                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.ContentBulkMultiplier" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="data.contentBulkMultiplier" value="{{data.contentBulkMultiplier}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
+            {{> "systems/sfrpg/templates/items/parts/container-details.html" message="SFRPG.ItemSheet.Weapons.ContainerTooltip"}}
 
-            {{!-- Accepted item types --}}
-            <div class="form-group stacked weapon-properties" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypesTooltip" }}">
-                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</label>
-                {{#each config.containableTypes as |name prop|}}
-                <label class="checkbox">
-                    <input type="checkbox" name="data.acceptedItemTypes.{{prop}}" {{checked (lookup ../data.acceptedItemTypes prop)}}/> {{ name }}
-                </label>
-                {{/each}}
-            </div>
         </div>
 
         {{!-- Modifiers Tab --}}

@@ -1,6 +1,8 @@
 import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
+import { value_equals } from "../utils/value_equals.js";
+
 export function initializeRemoteInventory() {
     RPC.registerCallback("createItemCollection", "gm", onCreateItemCollection);
     RPC.registerCallback("dragItemToCollection", "gm", onItemDraggedToCollection);
@@ -299,8 +301,8 @@ export function getChildItems(actor, item) {
 function canMerge(itemA, itemB) {
     if (!itemA || !itemB) return false;
 
-    // If the names are different, they cannot merge.
-    if (itemA.name !== itemB.name) return false;
+    // If the names or types are different, they cannot merge.
+    if (itemA.name !== itemB.name || itemA.type !== itemB.type) return false;
 
     // If items contain other items, they cannot merge.
     if (containsItems(itemA) || containsItems(itemB)) return false;
@@ -308,7 +310,7 @@ function canMerge(itemA, itemB) {
     // Containers cannot merge.
     if (itemA.type === "container" || itemB.type === "container") return false;
 
-    return true;
+    return value_equals(itemA.data.data, itemB.data.data, false, true);
 }
 
 function acceptsItem(containerItem, itemToAdd, actor) {

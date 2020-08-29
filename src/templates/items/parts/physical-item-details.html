@@ -1,0 +1,58 @@
+<h3 class="form-header">{{ localize "SFRPG.ItemSheet.PhysicalProperties.Header" }}</h4>
+
+    <div class="form-group">
+        <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.ItemDescriptor" }}</label>
+        <div class="form-fields">
+            <label class="checkbox" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SturdyTooltip" }}">
+                <input type="checkbox" name="data.attributes.sturdy" {{checked data.attributes.sturdy}}/> {{ localize "SFRPG.ItemSheet.PhysicalProperties.Sturdy" }}
+            </label>
+            <label class="checkbox" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.CustomBuiltTooltip" }}">
+                <input type="checkbox" name="data.attributes.customBuilt" {{checked data.attributes.customBuilt}}/> {{ localize "SFRPG.ItemSheet.PhysicalProperties.CustomBuilt" }}
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
+        <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.Size" }}</label>
+        <div class="form-fields">
+            <select class="actor-size" name="data.attributes.size">
+                {{#select selectedSize}}
+                {{#each config.actorSizes as |label size|}}
+                    <option value="{{size}}">{{label}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.DexterityModifierTooltip" }}">
+        <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.DexterityModifier" }}</label>
+        <div class="form-fields">
+            <input type="text" name="data.attributes.dex.mod" value="{{data.attributes.dex.mod}}" data-dtype="String" placeholder="{{placeholders.dexterityModifier}}"/>
+         </div>
+    </div>
+
+    <!--
+    <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hitpoints.HeaderTooltip" }}">
+        <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hitpoints.Header" }}</label>
+        <div class="form-fields">
+            <input type="text" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hitpoints.CurrentTooltip" }}" name="data.attributes.hp.value" value="{{data.attributes.hp.value}}" data-dtype="Number" placeholder="{{placeholders.maxHitpoints}}" />
+            <span class="sep"> / </span>
+            <input type="text" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hitpoints.MaxTooltip" }}" name="data.attributes.hp.max" value="{{data.attributes.hp.max}}" data-dtype="String" placeholder="{{placeholders.maxHitpoints}}" />
+        </div>
+    </div>
+
+    <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.ArmorClassTooltip" }}">
+        <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.ArmorClass" }}</label>
+        <div class="form-fields">
+            <input type="text" name="data.attributes.ac.value" value="{{data.attributes.ac.value}}" data-dtype="String" placeholder="{{placeholders.armorClass}}"/>
+         </div>
+    </div>
+
+    <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.HardnessTooltip" }}">
+        <label>{{ localize "SFRPG.ItemSheet.PhysicalProperties.Hardness" }}</label>
+        <div class="form-fields">
+            <input type="text" name="data.attributes.hardness.value" value="{{data.attributes.hardness.value}}" data-dtype="String" placeholder="{{placeholders.hardness}}"/>
+         </div>
+    </div>
+    -->
