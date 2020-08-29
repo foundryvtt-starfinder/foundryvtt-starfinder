@@ -119,6 +119,10 @@ export class ItemBrowserSFRPG extends Application {
       this.items = await this.loadItems();
       this.forceReload = false;
       this.sortingMethods = this.getSortingMethods();
+    }
+
+    if (!this.filters || this.refreshFilters) {
+      this.refreshFilters = false;
       this.filters = this.getFilters();
     }
 

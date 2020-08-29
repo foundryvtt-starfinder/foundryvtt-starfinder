@@ -1,4 +1,5 @@
 import { getSpellBrowser } from './spell-browser.js';
+import { getEquipmentBrowser } from './equipment-browser.js';
 
 Hooks.on('renderCompendiumDirectory', (app, html, data) => {
     // Spell Browser Buttons
@@ -18,7 +19,7 @@ Hooks.on('renderCompendiumDirectory', (app, html, data) => {
 
     importButton.click(ev => {
         ev.preventDefault();
-        getSpellBrowser().render(true);
+        getEquipmentBrowser().render(true);
     });
 
     if (game.user.isGM) {

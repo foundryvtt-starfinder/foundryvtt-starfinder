@@ -167,6 +167,10 @@ Hooks.once("setup", function () {
     Handlebars.registerHelper('capitalize', function (value) {
         return value.capitalize();
     });
+
+    Handlebars.registerHelper('contains', function (entries, value) {
+        return (entries instanceof Array && entries.includes(value));
+    });
 });
 
 Hooks.once("ready", () => {
