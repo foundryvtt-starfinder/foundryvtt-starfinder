@@ -90,7 +90,7 @@ export class ItemSheetSFRPG extends ItemSheet {
       data.hasCapacity = data.item.data.hasOwnProperty("capacity");
 
       // Physical items
-      const physicalItems = ["weapons", "equipment", "consumable", "goods", "container", "technological", "upgrade", "augmentation"];
+      const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "upgrade", "augmentation"];
       data.isPhysicalItem = physicalItems.includes(data.item.type);
 
       // Item attributes
@@ -99,10 +99,10 @@ export class ItemSheetSFRPG extends ItemSheet {
       if (itemData.attributes) {
         let itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
         let sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
-        let dexterityModifier = this.parseNumber(itemData.attributes.dex.mod, -5);
+        let dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
 
         data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, 5 + itemData.attributes.sturdy ? 2 * itemLevel : itemLevel);
-        data.placeholders.maxHitpoints = this.parseNumber(itemData.attributes.hp.max, (itemData.attributes.sturdy ? 15 + 3 * itemLevel : 5 + itemLevel) + (itemLevel >= 15 ? 30 : 0));
+        data.placeholders.maxHitpoints = this.parseNumber(itemData.attributes.hp?.max, (itemData.attributes.sturdy ? 15 + 3 * itemLevel : 5 + itemLevel) + (itemLevel >= 15 ? 30 : 0));
         data.placeholders.armorClass = this.parseNumber(itemData.attributes.ac, 10 + sizeModifier + dexterityModifier);
         data.placeholders.dexterityModifier = dexterityModifier;
         data.placeholders.sizeModifier = sizeModifier;
