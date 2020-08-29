@@ -300,16 +300,15 @@ export function getChildItems(actor, item) {
  */
 function canMerge(itemA, itemB) {
     if (!itemA || !itemB) return false;
-
-    // If the names or types are different, they cannot merge.
     if (itemA.name !== itemB.name || itemA.type !== itemB.type) return false;
 
-    // If items contain other items, they cannot merge.
-    if (containsItems(itemA) || containsItems(itemB)) return false;
-
-    // Containers cannot merge.
+    // Containers cannot merge, otherwise you can have multiple containers containing the same items multiple times, etc.
     if (itemA.type === "container" || itemB.type === "container") return false;
 
+    // If items contain other items, they cannot merge. This can be the case for non-containers like armors with armor upgrades, etc.
+    if (containsItems(itemA) || containsItems(itemB)) return false;
+
+    // Perform deep comparison on item data.
     return value_equals(itemA.data.data, itemB.data.data, false, true);
 }
 
