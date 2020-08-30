@@ -12,6 +12,7 @@
         {{else}}
         <button disabled>No Charges</button>
         {{/if}}
+        {{#if hasSave}}<button data-action="save" data-type="{{data.save.type}}" disabled>{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">

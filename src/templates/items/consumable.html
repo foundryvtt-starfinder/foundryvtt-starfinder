@@ -1,29 +1,7 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
 
     {{!-- Item Sheet Header --}}
-    <header class="sheet-header flexrow">
-        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
-
-        <div class="header-details flexrow">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
-            </h1>
-
-            <div class="item-subtitle">
-                <h4 class="item-type">{{itemType}}</h4>
-                <span class="item-status">{{itemStatus}}</span>
-            </div>
-
-            <ul class="summary">
-                <li>
-                    {{lookup config.consumableTypes data.consumableType }}
-                </li>
-                <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
-                </li>
-            </ul>
-        </div>
-    </header>
+    {{> "systems/sfrpg/templates/items/parts/item-header.html"}}
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
@@ -53,6 +31,8 @@
                 </select>
             </div>
 
+            <br />
+
             <h3 class="form-header">Consumable Usage</h3>
 
             {{!-- Item Activation Template --}}
@@ -71,10 +51,16 @@
             </div>
             {{/if}}
 
+            <br />
+
             <h3 class="form-header">Consumable Action</h3>
 
             {{!-- Item Action Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-action.html"}}
+
+            <br />
+
+            {{> "systems/sfrpg/templates/items/parts/physical-item-details.html"}}
         </div>
     </section>
 </form>
