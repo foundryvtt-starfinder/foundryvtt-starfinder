@@ -120,6 +120,7 @@ SFRPG.energyDamageTypes = {
     "cold": "SFRPG.DamageTypesCold",
     "electricity": "SFRPG.DamageTypesElectricity",
     "fire": "SFRPG.DamageTypesFire",
+    "radiation": "SFRPG.DamageTypesRadiation",
     "sonic": "SFRPG.DamageTypesSonic"
 };
 
@@ -465,6 +466,18 @@ SFRPG.actorSizes = {
 };
 
 SFRPG.starshipSizes = {
+    "tiny": "SFRPG.SizeTiny",
+    "small": "SFRPG.SizeSmall",
+    "medium": "SFRPG.SizeMedium",
+    "large": "SFRPG.SizeLarge",
+    "huge": "SFRPG.SizeHuge",
+    "gargantuan": "SFRPG.SizeGargantuan",
+    "colossal": "SFRPG.SizeColossal"
+};
+
+SFRPG.itemSizes = {
+    "fine": "SFRPG.SizeFine",
+    "diminutive": "SFRPG.SizeDim",
     "tiny": "SFRPG.SizeTiny",
     "small": "SFRPG.SizeSmall",
     "medium": "SFRPG.SizeMedium",

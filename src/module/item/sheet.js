@@ -1,3 +1,17 @@
+import { SFRPG } from "../config.js"
+
+const itemSizeArmorClassModifier = {
+  "fine": 8,
+  "diminutive": 4,
+  "tiny": 2,
+  "small": 1,
+  "medium": 0,
+  "large": 1,
+  "huge": 2,
+  "gargantuan": 4,
+  "colossal": 8
+};
+
 /**
  * Override and extend the core ItemSheet implementation to handle SFRPG specific item types
  * @type {ItemSheet}
@@ -44,7 +58,17 @@ export class ItemSheetSFRPG extends ItemSheet {
     }
   
     /* -------------------------------------------- */
-  
+    parseNumber(value, defaultValue) {
+      if (value === 0 || value instanceof Number) return value;
+      else if (!value) return defaultValue;
+      
+      let numericValue = Number(value);
+      if (Number.isNaN(numericValue)) {
+          return defaultValue;
+      }
+      return numericValue;
+    }
+
     /**
      * Prepare item sheet data
      * Start with the base item data and extending with additional properties for rendering.
@@ -64,6 +88,52 @@ export class ItemSheetSFRPG extends ItemSheet {
       data.hasLevel = data.item.data.hasOwnProperty("level") && data.item.type !== "spell";
       data.hasHands = data.item.data.hasOwnProperty("hands");
       data.hasCapacity = data.item.data.hasOwnProperty("capacity");
+
+      // Physical items
+      const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "upgrade", "augmentation"];
+      data.isPhysicalItem = physicalItems.includes(data.item.type);
+
+      // Item attributes
+      let itemData = this.item.data.data;
+      data.placeholders = {};
+      if (itemData.attributes) {
+        let itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
+        let sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
+        let dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
+
+        data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, 5 + itemData.attributes.sturdy ? 2 * itemLevel : itemLevel);
+        data.placeholders.maxHitpoints = this.parseNumber(itemData.attributes.hp?.max, (itemData.attributes.sturdy ? 15 + 3 * itemLevel : 5 + itemLevel) + (itemLevel >= 15 ? 30 : 0));
+        data.placeholders.armorClass = this.parseNumber(itemData.attributes.ac, 10 + sizeModifier + dexterityModifier);
+        data.placeholders.dexterityModifier = dexterityModifier;
+        data.placeholders.sizeModifier = sizeModifier;
+
+        if (itemData.save) {
+          data.placeholders.saveDC = {};
+          data.placeholders.saveDC.formula = itemData.save?.dc || `10 + @itemLevel + @abilities.dex.mod`;
+          data.placeholders.saveDC.value = this._computeSaveDCValue(Math.floor(itemLevel / 2), data.placeholders.saveDC.formula);
+        }
+      } else {
+        let itemLevel = this.parseNumber(itemData.level, 1);
+        let sizeModifier = 0;
+        let dexterityModifier = -5;
+
+        data.placeholders.hardness = 5 + itemLevel;
+        data.placeholders.maxHitpoints = (5 + itemLevel) + (itemLevel >= 15 ? 30 : 0);
+        data.placeholders.armorClass = 10 + sizeModifier + dexterityModifier;
+        data.placeholders.dexterityModifier = dexterityModifier;
+        data.placeholders.sizeModifier = sizeModifier;
+
+        if (itemData.save) {
+          data.placeholders.saveDC = {};
+          data.placeholders.saveDC.formula = itemData.save?.dc ||`10 + @itemLevel + @abilities.dex.mod`;
+          data.placeholders.saveDC.value = this._computeSaveDCValue(Math.floor(itemLevel / 2), data.placeholders.saveDC.formula);
+        }
+      }
+
+      data.selectedSize = (itemData.attributes && itemData.attributes.size) ? itemData.attributes.size : "medium";
+
+      // Category
+      data.category = this._getItemCategory(data.item);
 
       // Armor specific details
       data.isPowerArmor = data.item.data.hasOwnProperty("armor") && data.item.data.armor.type === 'power';
@@ -88,6 +158,24 @@ export class ItemSheetSFRPG extends ItemSheet {
     }
   
     /* -------------------------------------------- */
+
+    _computeSaveDCValue(itemLevel, formula) {
+      try {
+        let rollData = {
+          item: this.item.data.data,
+          itemLevel: itemLevel
+        };
+        if (this.item.actor) {
+          rollData = duplicate(this.item.actor.data.data);
+          rollData.item = this.item.data.data;
+          rollData.itemLevel = itemLevel;
+        }
+        let saveRoll = new Roll(formula, rollData).roll();
+        return saveRoll.total;
+      } catch (err) {
+        return 10;
+      }
+    }
   
     /**
      * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet
@@ -156,6 +244,34 @@ export class ItemSheetSFRPG extends ItemSheet {
         )
       }
       return props.filter(p => !!p);
+    }
+
+    _getItemCategory(item) {
+      let category = {
+        enabled: false,
+        value: "",
+        tooltip: ""
+      };
+
+      if (item.type === "weapon") {
+        category.enabled = true;
+        category.value = SFRPG.weaponTypes[item.data.weaponType];
+        category.tooltip = "SFRPG.ItemSheet.Weapons.Category";
+      }
+
+      else if (item.type === "equipment") {
+        category.enabled = true;
+        category.value = SFRPG.equipmentTypes[item.data.armor.type];
+        category.tooltip = "SFRPG.ItemSheet.Equipment.Category";
+      }
+
+      else if (item.type === "consumable") {
+        category.enabled = true;
+        category.value = SFRPG.consumableTypes[item.data.consumableType];
+        category.tooltip = "SFRPG.ItemSheet.Consumables.Category";
+      }
+
+      return category;
     }
   
     /* -------------------------------------------- */

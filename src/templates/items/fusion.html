@@ -1,26 +1,7 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
 
     {{!-- Item Sheet Header --}}
-    <header class="sheet-header loot-header flexrow">
-        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
-
-        <div class="header-details flexrow">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
-            </h1>
-
-            <div class="item-subtitle">
-                <h4 class="item-type">{{itemType}}</h4>
-                <span class="item-status">{{itemStatus}}</span>
-            </div>
-
-            <ul class="summary">
-                <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
-                </li>
-            </ul>
-        </div>
-    </header>
+    {{> "systems/sfrpg/templates/items/parts/item-header.html"}}
 
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">

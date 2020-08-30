@@ -1,6 +1,8 @@
 import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
+import { value_equals } from "../utils/value_equals.js";
+
 export function initializeRemoteInventory() {
     RPC.registerCallback("createItemCollection", "gm", onCreateItemCollection);
     RPC.registerCallback("dragItemToCollection", "gm", onItemDraggedToCollection);
@@ -298,17 +300,16 @@ export function getChildItems(actor, item) {
  */
 function canMerge(itemA, itemB) {
     if (!itemA || !itemB) return false;
+    if (itemA.name !== itemB.name || itemA.type !== itemB.type) return false;
 
-    // If the names are different, they cannot merge.
-    if (itemA.name !== itemB.name) return false;
-
-    // If items contain other items, they cannot merge.
-    if (containsItems(itemA) || containsItems(itemB)) return false;
-
-    // Containers cannot merge.
+    // Containers cannot merge, otherwise you can have multiple containers containing the same items multiple times, etc.
     if (itemA.type === "container" || itemB.type === "container") return false;
 
-    return true;
+    // If items contain other items, they cannot merge. This can be the case for non-containers like armors with armor upgrades, etc.
+    if (containsItems(itemA) || containsItems(itemB)) return false;
+
+    // Perform deep comparison on item data.
+    return value_equals(itemA.data.data, itemB.data.data, false, true);
 }
 
 function acceptsItem(containerItem, itemToAdd, actor) {

@@ -15,10 +15,7 @@
         {{#if hasAttack}}<button data-action="attack">{{ localize "SFRPG.Attack" }}</button>{{/if}}
         {{#if hasDamage}}<button data-action="damage">{{ localize "SFRPG.Damage" }}</button>{{/if}}
         {{!-- {{#if isVersatile}}<button data-action="versatile">{{ localize "SFRPG.Versatile" }}</button>{{/if}} --}}
-        {{#if hasSave}}
-        <button data-action="save" data-type="{{data.save.type}}" disabled>
-            {{ localize "SFRPG.Save" }} {{labels.save}}
-        </button>{{/if}}
+        {{#if hasSave}}<button data-action="save" data-type="{{data.save.type}}" disabled>{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">
