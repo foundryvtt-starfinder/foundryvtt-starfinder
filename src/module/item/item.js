@@ -129,14 +129,17 @@ export class ItemSFRPG extends Item {
     }
 
     _getSaveLabel(save, actorData, itemData) {
-        if (save.dc && Number.isNaN(Number(save.dc))) {
+        if (!save.type) return "";
+        
+        let dcFormula = save.dc || `10 + ${Math.floor((itemData.data.attributes?.sturdy ? itemData.data.level + 2 : itemData.data.level) / 2)} + ${this.actor.data.data.abilities.dex.mod}`;
+        if (dcFormula && Number.isNaN(Number(dcFormula))) {
             const rollData = duplicate(actorData.data);
             rollData.item = itemData;
 
-            let saveRoll = new Roll(save.dc, rollData).roll();
-            return save.type ? `DC ${saveRoll.total || ""} ${CONFIG.SFRPG.saves[save.type]}` : "";
+            let saveRoll = new Roll(dcFormula, rollData).roll();
+            return save.type ? `DC ${saveRoll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}` : "";
         } else {
-            return save.type ? `DC ${save.dc || ""} ${CONFIG.SFRPG.saves[save.type]}` : "";
+            return save.type ? `DC ${save.dc || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}` : "";
         }
     }
 
