@@ -168,13 +168,16 @@ export class ItemSFRPG extends Item {
      * @return {Promise}
      */
     async roll() {
+        let htmlOptions = { secrets: this.actor?.owner || true, rollData: this.data };
+        htmlOptions.rollData.owner = this.actor?.data?.data;
+
         // Basic template rendering data
         const token = this.actor.token;
         const templateData = {
             actor: this.actor,
             tokenId: token ? `${token.scene._id}.${token.id}` : null,
             item: this.data,
-            data: this.getChatData(),
+            data: this.getChatData(htmlOptions),
             labels: this.labels,
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,

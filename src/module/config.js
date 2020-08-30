@@ -120,6 +120,7 @@ SFRPG.energyDamageTypes = {
     "cold": "SFRPG.DamageTypesCold",
     "electricity": "SFRPG.DamageTypesElectricity",
     "fire": "SFRPG.DamageTypesFire",
+    "radiation": "SFRPG.DamageTypesRadiation",
     "sonic": "SFRPG.DamageTypesSonic"
 };
 
