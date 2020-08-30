@@ -117,7 +117,7 @@ export class ItemSFRPG extends Item {
             // Save DC
             let save = data.save || {};
             if (!save.type) save.dc = null;
-            labels.save = save.type ? `DC ${save.dc || ""} ${C.saves[save.type]}` : "";
+            labels.save = this._getSaveLabel(save, actorData, itemData);
 
             // Damage
             let dam = data.damage || {};
@@ -126,6 +126,18 @@ export class ItemSFRPG extends Item {
 
         // Assign labels and return the Item
         this.labels = labels;
+    }
+
+    _getSaveLabel(save, actorData, itemData) {
+        if (save.dc && Number.isNaN(Number(save.dc))) {
+            const rollData = duplicate(actorData.data);
+            rollData.item = itemData;
+
+            let saveRoll = new Roll(save.dc, rollData).roll();
+            return save.type ? `DC ${saveRoll.total || ""} ${CONFIG.SFRPG.saves[save.type]}` : "";
+        } else {
+            return save.type ? `DC ${save.dc || ""} ${CONFIG.SFRPG.saves[save.type]}` : "";
+        }
     }
 
     /**
@@ -388,7 +400,7 @@ export class ItemSFRPG extends Item {
         // Spell saving throw text
         const abl = ad.attributes.keyability || "int";
         if (this.hasSave && !data.save.dc) data.save.dc = 10 + data.level + ad.abilities[abl].mod;
-        labels.save = `DC ${data.save.dc} ${CONFIG.SFRPG.saves[data.save.type]}`;
+        labels.save = this._getSaveLabel(save, ad, data);
 
         // Spell properties
         props.push(
@@ -407,7 +419,7 @@ export class ItemSFRPG extends Item {
         // Spell saving throw text
         const abl = data.ability || ad.attributes.keyability || "str";
         if (this.hasSave && !data.save.dc) data.save.dc = 10 + ad.details.level + ad.abilities[abl].mod;
-        labels.save = `DC ${data.save.dc} ${CONFIG.SFRPG.saves[data.save.type]}`;
+        labels.save = this._getSaveLabel(save, ad, data);
 
         // Feat properties
         props.push(

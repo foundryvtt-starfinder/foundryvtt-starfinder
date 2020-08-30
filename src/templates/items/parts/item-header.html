@@ -53,6 +53,15 @@
                         data-dtype="String" placeholder="{{placeholders.hardness}}" />
                 </div>
             </li>
+
+            {{#if data.save.type}}
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SaveTooltip" formula=placeholders.saveDC.formula saveDescriptor=data.save.descriptor}}">
+                <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Save" }}</h4>
+                <div class="attribute-value">
+                    <label>{{placeholders.saveDC.value}}</label>
+                </div>
+            </li>
+            {{/if}}
             {{else}}
             &nbsp;
             {{/if}}

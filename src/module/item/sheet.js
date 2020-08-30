@@ -106,6 +106,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.placeholders.armorClass = this.parseNumber(itemData.attributes.ac, 10 + sizeModifier + dexterityModifier);
         data.placeholders.dexterityModifier = dexterityModifier;
         data.placeholders.sizeModifier = sizeModifier;
+
+        data.placeholders.saveDC = {};
+        data.placeholders.saveDC.formula = itemData.save.dc || `10 + @itemLevel + @abilities.dex.mod`;
+        data.placeholders.saveDC.value = this._computeSaveDCValue(Math.floor(itemLevel / 2), data.placeholders.saveDC.formula);
       } else {
         let itemLevel = this.parseNumber(itemData.level, 1);
         let sizeModifier = 0;
@@ -116,6 +120,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.placeholders.armorClass = 10 + sizeModifier + dexterityModifier;
         data.placeholders.dexterityModifier = dexterityModifier;
         data.placeholders.sizeModifier = sizeModifier;
+
+        data.placeholders.saveDC = {};
+        data.placeholders.saveDC.formula = itemData.save.dc ||`10 + @itemLevel + @abilities.dex.mod`;
+        data.placeholders.saveDC.value = this._computeSaveDCValue(Math.floor(itemLevel / 2), data.placeholders.saveDC.formula);
       }
 
       data.selectedSize = (itemData.attributes && itemData.attributes.size) ? itemData.attributes.size : "medium";
@@ -146,6 +154,24 @@ export class ItemSheetSFRPG extends ItemSheet {
     }
   
     /* -------------------------------------------- */
+
+    _computeSaveDCValue(itemLevel, formula) {
+      try {
+        let rollData = {
+          item: this.item.data.data,
+          itemLevel: itemLevel
+        };
+        if (this.item.actor) {
+          rollData = duplicate(this.item.actor.data.data);
+          rollData.item = this.item.data.data;
+          rollData.itemLevel = itemLevel;
+        }
+        let saveRoll = new Roll(formula, rollData).roll();
+        return saveRoll.total;
+      } catch (err) {
+        return 10;
+      }
+    }
   
     /**
      * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet
