@@ -131,9 +131,9 @@ export class ItemSFRPG extends Item {
     _getSaveLabel(save, actorData, itemData) {
         if (!save.type) return "";
         
-        let dcFormula = save.dc || `10 + ${Math.floor((itemData.data.attributes?.sturdy ? itemData.data.level + 2 : itemData.data.level) / 2)} + ${this.actor.data.data.abilities.dex.mod}`;
+        let dcFormula = save.dc || `10 + ${Math.floor((itemData.data.attributes?.sturdy ? itemData.data.level + 2 : itemData.data.level) / 2)} + ${this.actor?.data?.data?.abilities?.dex ? this.actor.data.data.abilities.dex.mod : 0}`;
         if (dcFormula && Number.isNaN(Number(dcFormula))) {
-            const rollData = duplicate(actorData.data);
+            const rollData = duplicate(actorData?.data || {});
             rollData.item = itemData;
 
             let saveRoll = new Roll(dcFormula, rollData).roll();

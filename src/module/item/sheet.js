@@ -107,9 +107,11 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.placeholders.dexterityModifier = dexterityModifier;
         data.placeholders.sizeModifier = sizeModifier;
 
-        data.placeholders.saveDC = {};
-        data.placeholders.saveDC.formula = itemData.save.dc || `10 + @itemLevel + @abilities.dex.mod`;
-        data.placeholders.saveDC.value = this._computeSaveDCValue(Math.floor(itemLevel / 2), data.placeholders.saveDC.formula);
+        if (itemData.save) {
+          data.placeholders.saveDC = {};
+          data.placeholders.saveDC.formula = itemData.save?.dc || `10 + @itemLevel + @abilities.dex.mod`;
+          data.placeholders.saveDC.value = this._computeSaveDCValue(Math.floor(itemLevel / 2), data.placeholders.saveDC.formula);
+        }
       } else {
         let itemLevel = this.parseNumber(itemData.level, 1);
         let sizeModifier = 0;
@@ -121,9 +123,11 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.placeholders.dexterityModifier = dexterityModifier;
         data.placeholders.sizeModifier = sizeModifier;
 
-        data.placeholders.saveDC = {};
-        data.placeholders.saveDC.formula = itemData.save.dc ||`10 + @itemLevel + @abilities.dex.mod`;
-        data.placeholders.saveDC.value = this._computeSaveDCValue(Math.floor(itemLevel / 2), data.placeholders.saveDC.formula);
+        if (itemData.save) {
+          data.placeholders.saveDC = {};
+          data.placeholders.saveDC.formula = itemData.save?.dc ||`10 + @itemLevel + @abilities.dex.mod`;
+          data.placeholders.saveDC.value = this._computeSaveDCValue(Math.floor(itemLevel / 2), data.placeholders.saveDC.formula);
+        }
       }
 
       data.selectedSize = (itemData.attributes && itemData.attributes.size) ? itemData.attributes.size : "medium";
