@@ -20,7 +20,10 @@ export const preloadHandlebarsTemplates = async function () {
         "systems/sfrpg/templates/items/parts/item-activation.html",
         "systems/sfrpg/templates/items/parts/item-description.html",
         "systems/sfrpg/templates/items/parts/item-capacity.html",
-        "systems/sfrpg/templates/items/parts/item-modifiers.html"
+        "systems/sfrpg/templates/items/parts/item-modifiers.html",
+        "systems/sfrpg/templates/items/parts/item-header.html",
+        "systems/sfrpg/templates/items/parts/physical-item-details.html",
+        "systems/sfrpg/templates/items/parts/container-details.html"
     ];
 
     return loadTemplates(templatePaths);

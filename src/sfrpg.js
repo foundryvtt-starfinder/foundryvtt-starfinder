@@ -141,9 +141,9 @@ Hooks.once("setup", function () {
     Handlebars.registerHelper('greaterThan', function (v1, v2, options) {
         'use strict';
         if (v1 > v2) {
-            return options.fn(this);
+            return true;
         }
-        return options.inverse(this);
+        return false;
     });
 
     Handlebars.registerHelper('ellipsis', function (displayedValue, limit) {
@@ -166,6 +166,10 @@ Hooks.once("setup", function () {
 
     Handlebars.registerHelper('capitalize', function (value) {
         return value.capitalize();
+    });
+
+    Handlebars.registerHelper('contains', function (entries, value) {
+        return (entries instanceof Array && entries.includes(value));
     });
 });
 

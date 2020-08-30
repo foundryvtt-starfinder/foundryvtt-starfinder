@@ -16,8 +16,23 @@ export class ItemBrowserSFRPG extends Application {
     return options;
   }
 
+  _getHeaderButtons() {
+    let buttons = super._getHeaderButtons();
+    if (game.user.isGM) {
+      buttons = [
+        {
+          label: "Settings",
+          class: "configure-sheet",
+          icon: "fas fa-cog",
+          onclick: ev => this.openSettings()
+        }
+      ].concat(buttons);
+    }
+    return buttons
+  }
+
   activateListeners(html) {
-    this.resetFilters(html);
+    this.resetFilters(html, !!this.filters);
     html.on('click', '.clear-filters', ev => {
       this.resetFilters(html);
       this.filterItems(html.find('li'));
@@ -110,6 +125,8 @@ export class ItemBrowserSFRPG extends Application {
       }
 
       this.filterItems(html.find('li'));
+
+      this.onFiltersUpdated(html);
     });
   }
 
@@ -119,6 +136,10 @@ export class ItemBrowserSFRPG extends Application {
       this.items = await this.loadItems();
       this.forceReload = false;
       this.sortingMethods = this.getSortingMethods();
+    }
+
+    if (!this.filters || this.refreshFilters) {
+      this.refreshFilters = false;
       this.filters = this.getFilters();
     }
 
@@ -250,7 +271,7 @@ export class ItemBrowserSFRPG extends Application {
     return newObj;
   }
 
-  resetFilters(html) {
+  resetFilters(html, updateFilters=true) {
     this.sorters = {
       text: '',
       castingtime: 'null'
@@ -261,8 +282,150 @@ export class ItemBrowserSFRPG extends Application {
     html.find('input[name=textFilter]').val('');
     html.find('input[name=timefilter]').val('null');
     html.find('input[type=checkbox]').prop('checked', false);
+
+    if (updateFilters) {
+      this.onFiltersUpdated(html);
+    }
   }
+
+  onFiltersUpdated(html) {
+    if (this.refreshFilters) {
+      let filterContainers = html.find('.filtercontainer');
+      let filterParent = filterContainers[0]?.parentElement;
+
+      for (let filterContainer of filterContainers) {
+        filterContainer.remove();
+      }
+
+      this.filters = this.getFilters();
+      for (let filterKey of Object.keys(this.filters)) {
+        let filter = this.filters[filterKey];
+        let generatedHTML = this.generateFilterHTML(filterKey, filter);
+        filterParent.insertAdjacentHTML('beforeend', generatedHTML);
+      }
+
+      this.filterItems(html.find('li'));
+    }
+  }
+
+  generateFilterHTML(filterKey, filter) {
+    let header = `<div class="filtercontainer" id="classfilter">\n
+      <h3>${filter.label}</h3>\n
+      <dl>\n`;
+
+    let body = "";
+    for (let settingKey of Object.keys(filter.content)) {
+      let checked = filter.activeFilters ? filter.activeFilters.includes(settingKey) : false;
+      body += `<dt><input type="checkbox" name="${filterKey}-${settingKey}" ${checked ? "checked": ""} /></dt><dd>${game.i18n.format(filter.content[settingKey])}</dd>\n`;
+    }
+    
+    let footer = `</dl>\n
+    </div>\n`;
+
+    return header + body + footer;
+  }
+
   /* -------------------------------------------- */
+  getConfigurationProperties() {
+    return {
+      label: "Compendium Browser",
+      settings: "itemBrowser"
+    };
+  }
+
+  initializeSettings() {
+    let configuration = this.getConfigurationProperties();
+
+    game.settings.register('sfrpg', configuration.settings, {
+        name: `${configuration.label} Settings`,
+        hint: 'Settings to exclude packs from loading',
+        default: '',
+        type: String,
+        scope: 'world',
+        onChange: settings => {
+          this.settings = JSON.parse(settings);
+        }
+    }); // load settings from container
+
+    let settings = game.settings.get('sfrpg', configuration.settings);
+    if (settings == '') {
+        // if settings are empty create the settings data
+        console.log(`SFRPG | ${configuration.label} | Creating settings`);
+        settings = {};
+
+        for (const compendium of game.packs) {
+            if (compendium.metadata.entity == 'Item') {
+                settings[compendium.collection] = {
+                    load: true,
+                    name: `${compendium.metadata.label} (${compendium.collection})`
+                };
+            }
+        }
+
+        game.settings.set('sfrpg', configuration.settings, JSON.stringify(settings));
+    } else {
+        // if settings do exist, reload and apply them to make sure they conform with current compendium
+        console.log(`SFRPG | ${configuration.label} | Loading settings`);
+        const loadedSettings = JSON.parse(settings);
+        settings = {};
+
+        for (const compendium of game.packs) {
+            if (compendium.metadata.entity == 'Item') {
+                settings[compendium.collection] = {
+                    // add entry for each item compendium, that is turned on if no settings for it exist already
+                    load: loadedSettings[compendium.collection] == undefined ? true : loadedSettings[compendium.collection].load,
+                    name: compendium.metadata.label
+                };
+            }
+        }
+    }
+
+    this.settings = settings;
+    this.forceReload = false;
+  }
+
+  openSettings() {
+    let configuration = this.getConfigurationProperties();
+
+    // Generate HTML for settings menu
+    // Item Browser
+    let content = `<h2>${configuration.label}</h2>`;
+    content += '<p>Which compendium should be loaded? Uncheck each compendium that contains no items.</p>';
+
+    for (const key in this.settings) {
+        content += `<div><input type=checkbox data-browser-type="item" name="${key}" ${this.settings[key].load ? 'checked=true' : ''}><label>${this.settings[key].name}</label></div>`;
+    }
+
+    const d = new Dialog({
+        title: `${configuration.label} settings`,
+        content: `${content}<br>`,
+        buttons: {
+            save: {
+                icon: '<i class="fas fa-check"></i>',
+                label: 'Save',
+                callback: html => {}
+            }
+        },
+        default: 'save',
+        close: html => {
+            const inputs = html.find('input');
+    
+            for (const input of inputs) {
+                const browserType = $(input).attr('data-browser-type');
+                if (browserType === 'item') this.settings[input.name].load = input.checked;
+            }
+    
+            console.log(`SFRPG System | ${configuration.label} | Saving new Settings`); // write Item Browser settings
+    
+            game.settings.set('sfrpg', configuration.settings, JSON.stringify(this.settings)); // write Item Browser settings
+            this.forceReload = true;
+        }
+    }, {
+        width: '300px'
+    });
+    d.render(true);
+  }
+
   getPacksToLoad() {
     return [];
   }
