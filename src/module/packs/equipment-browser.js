@@ -22,6 +22,13 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
         return options;
     }
 
+    getConfigurationProperties() {
+        return {
+          label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.Title"),
+          settings: "equipmentBrowser"
+        };
+    }
+
     getPacksToLoad() {
         return Object.entries(this.settings);
     }
@@ -176,53 +183,6 @@ export function getEquipmentBrowser() {
 }
 
 Hooks.on('ready', e => {
-    // creating game setting container
-    let equipmentBrowser = getEquipmentBrowser();
-
-    game.settings.register('sfrpg', 'equipmentBrowser', {
-        name: 'Equipment Browser Settings',
-        hint: 'Settings to exclude packs from loading',
-        default: '',
-        type: String,
-        scope: 'world',
-        onChange: settings => {
-            equipmentBrowser.settings = JSON.parse(settings);
-        }
-    }); // load settings from container
-
-    let settings = game.settings.get('sfrpg', 'equipmentBrowser');
-    if (settings == '') {
-        // if settings are empty create the settings data
-        console.log('SFRPG | Equipment Browser | Creating settings');
-        settings = {};
-
-        for (const compendium of game.packs) {
-            if (compendium.metadata.entity == 'Item') {
-                settings[compendium.collection] = {
-                    load: true,
-                    name: `${compendium.metadata.label} (${compendium.collection})`
-                };
-            }
-        }
-
-        game.settings.set('sfrpg', 'equipmentBrowser', JSON.stringify(settings));
-    } else {
-        // if settings do exist, reload and apply them to make sure they conform with current compendium
-        console.log('SFRPG | Equipment Browser | Loading settings');
-        const loadedSettings = JSON.parse(settings);
-        settings = {};
-
-        for (const compendium of game.packs) {
-            if (compendium.metadata.entity == 'Item') {
-                settings[compendium.collection] = {
-                    // add entry for each item compendium, that is turned on if no settings for it exist already
-                    load: loadedSettings[compendium.collection] == undefined ? true : loadedSettings[compendium.collection].load,
-                    name: compendium.metadata.label
-                };
-            }
-        }
-    }
-
-    equipmentBrowser.settings = settings;
-    equipmentBrowser.forceReload = false;
+    let browser = getEquipmentBrowser();
+    browser.initializeSettings();
 });
