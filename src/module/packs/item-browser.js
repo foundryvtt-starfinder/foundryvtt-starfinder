@@ -17,7 +17,7 @@ export class ItemBrowserSFRPG extends Application {
   }
 
   activateListeners(html) {
-    this.resetFilters(html);
+    this.resetFilters(html, !!this.filters);
     html.on('click', '.clear-filters', ev => {
       this.resetFilters(html);
       this.filterItems(html.find('li'));
@@ -110,6 +110,8 @@ export class ItemBrowserSFRPG extends Application {
       }
 
       this.filterItems(html.find('li'));
+
+      this.onFiltersUpdated(html);
     });
   }
 
@@ -254,7 +256,7 @@ export class ItemBrowserSFRPG extends Application {
     return newObj;
   }
 
-  resetFilters(html) {
+  resetFilters(html, updateFilters=true) {
     this.sorters = {
       text: '',
       castingtime: 'null'
@@ -265,7 +267,49 @@ export class ItemBrowserSFRPG extends Application {
     html.find('input[name=textFilter]').val('');
     html.find('input[name=timefilter]').val('null');
     html.find('input[type=checkbox]').prop('checked', false);
+
+    if (updateFilters) {
+      this.onFiltersUpdated(html);
+    }
   }
+
+  onFiltersUpdated(html) {
+    if (this.refreshFilters) {
+      let filterContainers = html.find('.filtercontainer');
+      let filterParent = filterContainers[0]?.parentElement;
+
+      for (let filterContainer of filterContainers) {
+        filterContainer.remove();
+      }
+
+      this.filters = this.getFilters();
+      for (let filterKey of Object.keys(this.filters)) {
+        let filter = this.filters[filterKey];
+        let generatedHTML = this.generateFilterHTML(filterKey, filter);
+        filterParent.insertAdjacentHTML('beforeend', generatedHTML);
+      }
+
+      this.filterItems(html.find('li'));
+    }
+  }
+
+  generateFilterHTML(filterKey, filter) {
+    let header = `<div class="filtercontainer" id="classfilter">\n
+      <h3>${filter.label}</h3>\n
+      <dl>\n`;
+
+    let body = "";
+    for (let settingKey of Object.keys(filter.content)) {
+      let checked = filter.activeFilters ? filter.activeFilters.includes(settingKey) : false;
+      body += `<dt><input type="checkbox" name="${filterKey}-${settingKey}" ${checked ? "checked": ""} /></dt><dd>${game.i18n.format(filter.content[settingKey])}</dd>\n`;
+    }
+    
+    let footer = `</dl>\n
+    </div>\n`;
+
+    return header + body + footer;
+  }
+
   /* -------------------------------------------- */
   getPacksToLoad() {
     return [];

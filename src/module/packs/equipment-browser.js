@@ -56,26 +56,46 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
     }
 
     getFilters() {
-        let activeEquipmentTypesFilter = [];
-        if (this.filters && this.filters.equipmentTypes) {
-            activeEquipmentTypesFilter = this.filters.equipmentTypes.activeFilters;
-        }
-
         let filters = {
             equipmentTypes: {
-                label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.Type"),
+                label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.ItemType"),
                 content: equipmentTypes,
                 filter: (element, filters) => { return this._filterItemType(element, filters); },
-                activeFilters: activeEquipmentTypesFilter
+                activeFilters: this.filters?.equipmentTypes?.activeFilters || []
             }
         };
 
-        
-        if (activeEquipmentTypesFilter.includes("weapon")) {
-            console.log("Yolo");
+        if ((this.filters?.equipmentTypes?.activeFilters || []).includes("weapon")) {
+            filters.weaponTypes = {
+                label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.WeaponType"),
+                content: CONFIG.SFRPG.weaponTypes,
+                filter: (element, filters) => { return this._filterWeaponType(element, filters); },
+                activeFilters: this.filters.weaponTypes?.activeFilters || []
+            }
+
+            filters.weaponCategories = {
+                label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.WeaponCategories"),
+                content: CONFIG.SFRPG.weaponCategories,
+                filter: (element, filters) => { return this._filterWeaponCategory(element, filters); },
+                activeFilters: this.filters.weaponCategories?.activeFilters || []
+            }
+        }
+
+        if ((this.filters?.equipmentTypes?.activeFilters || []).includes("equipment")) {
+            filters.armorTypes = {
+                label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.EquipmentType"),
+                content: CONFIG.SFRPG.armorTypes,
+                filter: (element, filters) => { return this._filterArmorType(element, filters); },
+                activeFilters: this.filters.armorTypes?.activeFilters || []
+            }
         }
 
         return filters;
+    }
+
+    onFiltersUpdated(html) {
+        this.refreshFilters = true;
+        super.onFiltersUpdated(html);
     }
 
     _filterItemType(element, filters) {
@@ -85,9 +105,25 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
         return item && filters.includes(item.type);
     }
 
-    filterItems(element) {
-        super.filterItems(element);
-        this.refreshFilters = true;
+    _filterWeaponType(element, filters) {
+        let compendium = element.dataset.entryCompendium;
+        let itemId = element.dataset.entryId;
+        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        return item && (item.type !== "weapon" || filters.includes(item.data.weaponType));
+    }
+
+    _filterWeaponCategory(element, filters) {
+        let compendium = element.dataset.entryCompendium;
+        let itemId = element.dataset.entryId;
+        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        return item && (item.type !== "weapon" || filters.includes(item.data.weaponCategory || "uncategorized"));
+    }
+
+    _filterArmorType(element, filters) {
+        let compendium = element.dataset.entryCompendium;
+        let itemId = element.dataset.entryId;
+        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        return item && (item.type !== "equipment" || filters.includes(item.data.armor?.type));
     }
 
     openSettings() {

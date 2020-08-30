@@ -19,7 +19,8 @@ Hooks.on('renderCompendiumDirectory', (app, html, data) => {
 
     importButton.click(ev => {
         ev.preventDefault();
-        getEquipmentBrowser().render(true);
+        let browser = getEquipmentBrowser();
+        browser.render(true);
     });
 
     if (game.user.isGM) {

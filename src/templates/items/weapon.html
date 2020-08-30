@@ -54,6 +54,19 @@
                 </select>
             </div>
 
+            {{!-- Weapon Category --}}
+            <div class="form-group">
+                <label>Weapon Category</label>
+                <select name="data.weaponCategory">
+                    {{#select data.weaponCategory}}
+                    <option value="">Unspecified</option>
+                    {{#each config.weaponCategories as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
             {{!-- Equipment Status --}}
             <div class="form-group stacked">
                 <label>Equipment Status</label>
