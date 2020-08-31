@@ -1,0 +1,16 @@
+<form id="entity-create" autocomplete="off" onsubmit="event.preventDefault();">
+    <div class="form-group">
+        <label>{{localize "Name"}}</label>
+        <input type="text" name="name" placeholder="{{localize "SFRPG.NPCSheet.Interface.CreateItem.Name"}}"/>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "Type"}}</label>
+        <select name="type">
+        {{#each types as |typeName key|}}
+            <option value="{{key}}">{{localize typeName}}</option>
+        {{/each}}
+        </select>
+        <p class="notes">{{localize "SFRPG.NPCSheet.Interface.CreateItem.Note"}}</p>
+    </div>
+</form>

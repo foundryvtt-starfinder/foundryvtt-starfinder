@@ -7,6 +7,7 @@ import { RPC } from "../../rpc.js"
 
 import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js"
 import { InputDialog } from "../../apps/input-dialog.js"
+import { SFRPG } from "../../config.js";
 
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
@@ -289,10 +290,51 @@ export class ActorSheetSFRPG extends ActorSheet {
      * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
      * @param {Event} event The originating click event
      */
-    _onItemCreate(event) {
+    async _onItemCreate(event) {
         event.preventDefault();
         const header = event.currentTarget;
-        const type = header.dataset.type;
+        let type = header.dataset.type;
+        if (!type || type.includes(",")) {
+            let types = SFRPG.itemTypes;
+            if (type) {
+                let supportedTypes = type.split(',');
+                for (let key of Object.keys(types)) {
+                    if (!supportedTypes.includes(key)) {
+                        delete types[key];
+                    }
+                }
+            }
+
+            let createData = {
+                name: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name"),
+                type: type
+            };
+
+            let templateData = {upper: "Item", lower: "item", types: types},
+            dlg = await renderTemplate(`systems/sfrpg/templates/apps/localized-entity-create.html`, templateData);
+
+            new Dialog({
+                title: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Title"),
+                content: dlg,
+                buttons: {
+                    create: {
+                        icon: '<i class="fas fa-check"></i>',
+                        label: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Button"),
+                        callback: html => {
+                            const form = html[0].querySelector("form");
+                            mergeObject(createData, validateForm(form));
+                            if (!createData.name) {
+                                createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
+                            }
+                            this.actor.createOwnedItem(createData);
+                        }
+                    }
+                },
+                default: "create"
+            }).render(true);
+            return null;
+        }
+
         const itemData = {
             name: `New ${type.capitalize()}`,
             type: type,
