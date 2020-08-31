@@ -413,6 +413,20 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     /**
+     * Handles reloading / replacing ammo or batteries in a weapon.
+     * 
+     * @param {Event} event The originating click event
+     */
+    _onReloadWeapon(event) {
+        event.preventDefault();
+
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        return item.update({'data.capacity.value': item.data.data.capacity.max});
+    }
+
+    /**
      * Get The font-awesome icon used to display if a skill is a class skill or not
      * 
      * @param {Number} level Flag that determines if a skill is a class skill or not

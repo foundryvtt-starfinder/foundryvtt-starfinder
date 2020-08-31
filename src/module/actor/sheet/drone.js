@@ -316,20 +316,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
     }
 
     /**
-     * Handles reloading / replacing ammo or batteries in a weapon.
-     * 
-     * @param {Event} event The originating click event
-     */
-    _onReloadWeapon(event) {
-        event.preventDefault();
-
-        const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
-
-        return item.update({'data.capacity.value': item.data.data.capacity.max});
-    }
-
-    /**
      * Handle toggling the prepared status of an Owned Itme within the Actor
      * 
      * @param {Event} event The triggering click event

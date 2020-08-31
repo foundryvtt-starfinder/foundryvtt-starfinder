@@ -28,7 +28,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     /** @override */
     activateListeners(html) {
         super.activateListeners(html);
-
+        
+        html.find('.reload').click(this._onReloadWeapon.bind(this));
         html.find('#add-skills').click(this._toggleSkills.bind(this));
     }
 
