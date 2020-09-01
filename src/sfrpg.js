@@ -9,7 +9,7 @@
 import { SFRPG } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, getBarAttribute, handleItemDrop, onCanvasReady, onTokenUpdated } from "./module/canvas.js";
+import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
 import { initializeRemoteInventory } from "./module/actor/actor-inventory.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
@@ -31,6 +31,8 @@ import CounterManagement from "./module/classes/counter-management.js";
 import templateOverrides from "./module/template-overrides.js";
 import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
 import { RPC } from "./module/rpc.js"
+
+import { } from "./module/packs/browsers.js"
 
 let defaultDropHandler = null;
 
@@ -118,7 +120,7 @@ Hooks.once("setup", function () {
         "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
         "weaponProperties", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
         "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
-        "modifierArmorClassAffectedValues", "capacityUsagePer"
+        "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels"
     ];
 
     for (let o of toLocalize) {
@@ -139,9 +141,9 @@ Hooks.once("setup", function () {
     Handlebars.registerHelper('greaterThan', function (v1, v2, options) {
         'use strict';
         if (v1 > v2) {
-            return options.fn(this);
+            return true;
         }
-        return options.inverse(this);
+        return false;
     });
 
     Handlebars.registerHelper('ellipsis', function (displayedValue, limit) {
@@ -164,6 +166,10 @@ Hooks.once("setup", function () {
 
     Handlebars.registerHelper('capitalize', function (value) {
         return value.capitalize();
+    });
+
+    Handlebars.registerHelper('contains', function (entries, value) {
+        return (entries instanceof Array && entries.includes(value));
     });
 });
 
@@ -211,7 +217,7 @@ export async function handleOnDrop(event) {
     data.y = (y - t.ty) / canvas.stage.scale.y;
 
     if (data.type === "Item") {
-        return await handleItemDrop(data);
+        return await handleItemDropCanvas(data);
     }
     return false;
 }
@@ -221,10 +227,6 @@ Hooks.on("canvasInit", function () {
     SquareGrid.prototype.measureDistances = measureDistances;
     Token.prototype.getBarAttribute = getBarAttribute;
 });
-
-Hooks.on('canvasReady', onCanvasReady);
-
-Hooks.on('updateToken', onTokenUpdated);
 
 Hooks.on("renderChatMessage", (app, html, data) => {
     highlightCriticalSuccessFailure(app, html, data);

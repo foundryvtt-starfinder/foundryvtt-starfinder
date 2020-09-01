@@ -24,6 +24,8 @@
         "AbilityModifierBase": "能力修正値: {mod}",
         "AbilityModifiersTooltip": "{type} ボーナス: {mod} ({source})",
         "AbilityPenaltyPlaceholder": "PNL",
+        "AbilityScoreRaceTooltip": "Race: {mod}",
+        "AbilityScoreThemeTooltip": "Theme: {mod}",
         "AbilityPenaltyTitle": "能力ペナルティ",
         "AbilityPenaltyTooltip": "能力ペナルティ: {mod}",
         "AbilityScoreBase": "基本能力値",
@@ -135,7 +137,7 @@
                     "SpellAttackDamage": "呪文ダメージ",
                     "SpecificWeaponAttackDamage": "特殊武器ダメージ",
                     "WeaponPropertyDamage": "武器属性ダメージ",
-                    "AllAttackDamage": "全ての攻撃ダメージ"
+                    "AllAttackDamage": "全ての攻撃ダメージ",
                     "Encumbrance": "Encumbrance"
                 },
                 "UI": {
@@ -188,12 +190,33 @@
         "BaseAttackBonusTitle": "基本攻撃ﾎﾞｰﾅｽ",
         "Biography": "経歴",
         "Biotech": "バイオテック",
-        "BrowserClearFilters": "フィルタクリア",
-        "BrowserFilterClass": "クラスでフィルタ",
-        "BrowserFilterSchool": "系統でフィルタ",
-        "BrowserSearchPlaceholder": "検索",
-        "BrowserSearchTitle": "右クリックでガイド",
-        "BrowserSortyByLabel": "並替",
+        "Browsers": {
+            "EquipmentBrowser": {
+                "Button": "Equipment",
+                "EquipmentType": "Equipment Type",
+                "ItemType": "Item Type",
+                "Title": "Browse Equipment",
+                "WeaponCategories": "Weapon Categories",
+                "WeaponType": "Weapon Type"
+            },
+            "ItemBrowser": {
+                "BrowserClearFilters": "フィルタクリア",
+                "BrowserSearchPlaceholder": "検索",
+                "BrowserSearchTitle": "右クリックでガイド",
+                "BrowserSortyByLabel": "並替",
+                "BrowserSortMethodName": "Name",
+                "SearchHint": "You can type the name of the item you are searching for.",
+                "Title": "Browse Items"
+            },
+            "SpellBrowser": {
+                "BrowserFilterClass": "クラスでフィルタ",
+                "BrowserFilterLevel": "Filter by Level",
+                "BrowserFilterSchool": "系統でフィルタ",
+                "BrowserSortMethodLevel": "Level",
+                "Button": "Spells",
+                "Title": "Browse Spells"
+            }
+        },
         "CancelButtonLabel": "キャンセル",
         "Canvas": {
             "Interface": {
@@ -310,6 +333,7 @@
         "DamageTypesForce": "[力場]",
         "DamageTypesPiercing": "[刺突]",
         "DamageTypesPiercingAndSonic": "[刺突] & [音波]",
+        "DamageTypesRadiation": "Radiation",
         "DamageTypesSlashing": "[斬撃]",
         "DamageTypesSlashingAndPiercing": "[刺突] & [音波]",
         "DamageTypesSlashingAndSonic": "[斬撃] & [音波]",
@@ -507,6 +531,58 @@
                 "WeaponFusions": "Weapon Fusions"
             }
         },
+        "ItemSheet": {
+            "Consumables": {
+                "Category": "Consumable Type"
+            },
+            "Containers": {
+                "ContainerTooltip": "Containers can contain just about any item. Increase the storage capacity to allow adding content."
+            },
+            "Equipment": {
+                "Category": "Equipment Type",
+                "ContainerTooltip": "Equipment typically can contain armor upgrades, or other items. Increase the storage capacity to allow adding content."
+            },
+            "Header": {
+                "ArmorClass": "Armor Class",
+                "ArmorClassTooltip": "<strong>Armor Class</strong><br/>The armor class of this item, if left unattended. Otherwise, the attendee's armor class should be used instead.<br/>An item is considered unattended if it is not currently under any influence of a character.",
+                "Hardness": "Hardness",
+                "HardnessTooltip": "<strong>Hardness</strong><br/>When taking damage, subtract the item's hardness from the incoming damage before applying.",
+                "Hitpoints": "Hitpoints",
+                "HitpointsTooltip": "<strong>Hitpoints</strong><br/>The amount of hitpoints available for this item.<br/>An item is considered 'broken' if it has damage.<br/>An item is considered 'destroyed' when its hitpoints are reduced to 0.",
+                "ItemName": "Item Name",
+                "ItemNameTooltip": "<strong>Item Name</strong><br/>The name given to this item.",
+                "Save": "Save DC",
+                "SaveTooltip": "<strong>Save DC</strong><br/>Formula: {formula}<br/>A succesful saving throw will {saveDescriptor} the effect.",
+                "Source": "Source",
+                "SourceTooltip": "<strong>Source</strong><br/><em>Used primarily to denote what rules document this item came from</em>"
+            },
+            "PhysicalProperties": {
+                "ArmorClass": "Armor Class",
+                "ArmorClassTooltip": "<strong>Armor Class</strong><br/>The armor class of this item, if left unattended. Otherwise, the attendee's armor class should be used instead.<br/>An item is considered unattended if it is not currently under any influence of a character.",
+                "CustomBuilt": "Custom Built",
+                "CustomBuiltTooltip": "Was this item crafted by a character, or mass-produced?",
+                "DexterityModifier": "Dexterity Modifier",
+                "DexterityModifierTooltip": "If inanimate, an item's dexterity modifier is -5.",
+                "Hardness": "Hardness",
+                "HardnessTooltip": "<strong>Hardness</strong><br/>When taking damage, subtract the item's hardness from the incoming damage before applying.",
+                "Header": "Physical Properties",
+                "Hitpoints": {
+                    "CurrentTooltip": "The amount of hitpoints this item has.",
+                    "Header": "Hitpoints",
+                    "HeaderTooltip": "<strong>Hitpoints</strong><br/>The amount of hitpoints available for this item.<br/>An item is considered 'broken' if it has damage.<br/>An item is considered 'destroyed' when its hitpoints are reduced to 0.",
+                    "MaxTooltip": "The maximum amount of hitpoints this item can have. Leave blank for automatic calculation."
+                },
+                "ItemDescriptor": "Physical Settings",
+                "Size": "Size",
+                "SizeTooltip": "By default, an item's size is medium. Item sizes affect the item armor class, alter as needed.",
+                "Sturdy": "Sturdy",
+                "SturdyTooltip": "Equipment, such as weapons and armors, are considered sturdy."
+            },
+            "Weapons": {
+                "Category": "Weapon Type",
+                "ContainerTooltip": "Weapons typically can contain weapon fusions and weapon upgrades. Increase the storage capacity to allow adding upgrades and fusions."
+            }
+        },
         "KeyAbility": "主要能力値",
         "KineticArmorClass": "ｷﾈﾃｨｯｸAC",
         "Languages": "言語",
@@ -552,6 +628,28 @@
         "LimitedUsePeriodsLong": "大休憩",
         "LimitedUsePeriodsShort": "小休憩",
         "Long": "長距離",
+        "Magic": {
+            "Levels": {
+                "0": "0 Level",
+                "1": "1st Level",
+                "2": "2nd Level",
+                "3": "3rd Level",
+                "4": "4th Level",
+                "5": "5th Level",
+                "6": "6th Level"
+            },
+            "Schools": {
+                "Abjuration": "Abjuration",
+                "Conjuration": "Conjuration",
+                "Divination": "Divination",
+                "Enchantment": "Enchantment",
+                "Evocation": "Evocation",
+                "Illusion": "Illusion",
+                "Necromancy": "Necromancy",
+                "Transmutation": "Transmutation",
+                "Universal": "Universal"
+            }
+        },
         "Magitech": "マギテック",
         "Medium": "中距離",
         "Meter": "ﾒｰﾀｰ",
@@ -631,6 +729,14 @@
                 "AlignmentPlaceHolderText": "NG",
                 "TypePlaceHolderText": "タイプ (サブタイプ)",
                 "AuraPlaceHolderText": "オーラ"
+            },
+            "Interface": {
+                "CreateItem": {
+                    "Button": "Create Item",
+                    "Name": "New Item",
+                    "Note": "Select the type of item you would like to create.",
+                    "Title": "Create New Item"
+                }
             }
         },
         "NpcToggleSkillsDialogTitle": "NPC技能切替",
@@ -903,6 +1009,9 @@
         "WillSave": "意志",
         "Units": {
             "Speed": "ft."
+        },
+        "Classes": {
+            "IsCasterClass": "Is this a spell casting class?"
         },
 
         "LocalizationTerminator": ""

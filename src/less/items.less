@@ -8,8 +8,10 @@
   /* ----------------------------------------- */
 
   .sheet-header {
+
     img.profile {
-      border: 2px solid #000;
+      flex: 0 0 150px;
+      height: 150px;
     }
 
     .item-subtitle {
@@ -35,10 +37,71 @@
     .source-wide {
       border-bottom: @borderGroove;
       li {
-        width: 100%;;
+        width: 100%;
+      }
+    }
+
+    // Item Summary
+    .summary {
+      border-bottom: @borderGroove;
+      
+      li.short {
+        flex: 1;
+        padding-left: 5px;
+      }
+      li.wide {
+        flex: 2 3;
+        margin-left: 8px;
+        padding-right: 8px;
+      }
+    }
+
+    ul.attributes {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      height: 49px;
+
+      li.attribute {
+        margin: 0;
+        border: none;
+        border-right: @borderGroove;
+        border-radius: 0;
+        .exo2();
+        text-align: center;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        .attribute-value {
+          margin-top: -5px;
+
+          input {
+            display: inline;
+            max-width: 80%;
+            font-size: 16px;
+          }
+          
+          span {
+            font-size: 20px;
+          }
+  
+          span.sep {
+            display: inline;
+            position: relative;
+            font-size: 16px;
+            color: @colorTan;
+          }
+  
+          &.multiple {
+            input { max-width: 33%; }
+          }
+        }
       }
     }
   }
+
 
   .sheet-navigation {
     margin-bottom: 5px;

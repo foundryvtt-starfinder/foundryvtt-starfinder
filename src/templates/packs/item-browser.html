@@ -1,0 +1,48 @@
+<div class="item-browser">
+    <div class="control-area">
+        <div class="sortcontainer" id="tagfilter">
+            <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchPlaceholder"}}" title="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchTitle"}}"/>
+            <div class="hint" style="display:none;">
+                {{{localize "SFRPG.Browsers.ItemBrowser.SearchHint"}}}
+            </div>
+            <dl id="sorter">
+                <dt>{{localize "SFRPG.Browsers.ItemBrowser.BrowserSortByLabel"}}:</dt>
+                <dd><select class="null" name="sortorder">
+                    {{#each sortingMethods as |method id|}}
+                    <option value="{{id}}" {{#if method.selected}}selected{{/if}}>{{method.name}}</option>
+                    {{/each}}
+                </select></dd>
+            </dl>
+        </div>
+        <button class="clear-filters">{{localize "SFRPG.Browsers.ItemBrowser.BrowserClearFilters"}}</button>
+        {{#each filters as |filter filterKey|}}
+        <div class="filtercontainer" id="classfilter">
+            <h3>{{filter.label}}</h3>
+            <dl>
+                {{#each filter.content as |content key|}}
+                <dt><input type="checkbox" name="{{filterKey}}-{{key}}" /></dt><dd>{{localize content}}</dd>
+                {{/each}}
+            </dl>
+        </div>
+        {{/each}}
+    </div>
+    <ul class="item-list">
+        {{#each items as |item|}}
+        <li class="item flexrow draggable" data-entry-compendium="{{item.compendium}}" data-entry-id="{{item._id}}" data-item-category="items">
+            <div class="item-image">
+                <img class="" src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
+            </div>
+
+            <div class="item-name">
+                <span class="item-edit" ><a>{{item.name}}</a></span>
+            </div>
+            <div class="item-tags">
+                <span title="item level">{{item.data.level}}</span>
+            </div>
+            {{#each item.data as |attrib id|}}
+            <input type="hidden" name="{{id}}" value="{{attrib}}">
+            {{/each}}
+        </li>
+        {{/each}}
+    </ul>
+</div>
