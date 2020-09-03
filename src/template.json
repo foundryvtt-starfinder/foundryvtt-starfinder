@@ -719,21 +719,14 @@
         ],
         "templates": {
             "container": {
-                "storageCapacity": 0,
-                "equippedBulkMultiplier": 1,
-                "contentBulkMultiplier": 1,
-                "acceptedItemTypes": {
-                    "weapon": true,
-                    "equipment": true,
-                    "goods": true,
-                    "consumable": true,
-                    "container": true,
-                    "technological": true,
-                    "fusion": true,
-                    "upgrade": true,
-                    "augmentation": true
-                },
-                "containedItemIds": []
+                "container": {
+                    "contents": [],
+                    "itemWeightMultiplier": {
+                        "property": null,
+                        "defaultValue": 1
+                    },
+                    "storage": []
+                }
             },
             "itemDescription": {
                 "description": {
@@ -845,17 +838,18 @@
             "ability": "str",
             "properties": {},
             "proficient": true,
-            "fusions": [],
-            "acceptedItemTypes": {
-                "weapon": false,
-                "equipment": false,
-                "goods": false,
-                "consumable": false,
-                "container": false,
-                "technological": false,
-                "fusion": true,
-                "upgrade": false,
-                "augmentation": false
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "slot",
+                        "subtype": "fusion",
+                        "amount": 0,
+                        "acceptsType": ["fusion"],
+                        "weightMultiplier": 1,
+                        "weightProperty": "level"
+                    }
+                ]
             }
         },
         "equipment": {
@@ -866,9 +860,7 @@
                 "kac": 0,
                 "dex": null,
                 "acp": 0,
-                "speedAdjust": 0,
-                "upgradeSlots": 0,
-                "upgrades": []
+                "speedAdjust": 0
             },
             "strength": 0,
             "speed": "",
@@ -877,18 +869,27 @@
             },
             "size": "",
             "reach": "",
-            "weaponSlots": 0,
             "proficient": true,
-            "acceptedItemTypes": {
-                "weapon": false,
-                "equipment": false,
-                "goods": false,
-                "consumable": false,
-                "container": false,
-                "technological": false,
-                "fusion": false,
-                "upgrade": true,
-                "augmentation": false
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "slot",
+                        "subtype": "armorUpgrade",
+                        "amount": 0,
+                        "acceptsType": ["upgrade", "weapon"],
+                        "weightMultiplier": 1,
+                        "weightProperty": "slots"
+                    },
+                    {
+                        "type": "slot",
+                        "subtype": "weaponSlot",
+                        "amount": 0,
+                        "acceptsType": ["weapon"],
+                        "weightMultiplier": 1,
+                        "weightProperty": ""
+                    }
+                ]
             }
         },
         "consumable": {
@@ -906,7 +907,21 @@
             "templates": ["itemDescription", "physicalItem", "modifiers"]
         },
         "container": {
-            "templates": ["itemDescription", "physicalItem", "modifiers", "container"]
+            "templates": ["itemDescription", "physicalItem", "modifiers", "container"],
+            "equippedBulkMultiplier": 1,
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "bulk",
+                        "subtype": "",
+                        "amount": 0,
+                        "acceptsType": ["weapon", "equipment", "goods", "consumable", "container", "technological", "fusion", "upgrade", "augmentation", "magic"],
+                        "weightMultiplier": 1,
+                        "weightProperty": "bulk"
+                    }
+                ]
+            }
         },
         "class": {
             "templates": ["itemDescription", "modifiers"],
