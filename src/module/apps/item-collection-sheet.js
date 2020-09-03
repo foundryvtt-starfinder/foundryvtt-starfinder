@@ -131,7 +131,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         for (let item of items) {
             let itemData = {
                 item: item,
-                parent: items.find(x => x.data.contents && x.data.contents.includes(item._id)),
+                parent: items.find(x => x.data.container?.contents && x.data.container.contents.includes(item._id)),
                 contents: []
             };
             preprocessedItems.push(itemData);
@@ -218,7 +218,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         let itemId = li.attr("data-item-id");
 
         const itemToDelete = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
-        let containsItems = (itemToDelete.data.contents && itemToDelete.data.contents.length > 0);
+        let containsItems = (itemToDelete.data.container?.contents && itemToDelete.data.container.contents.length > 0);
         ItemDeletionDialog.show(itemToDelete.name, containsItems, (recursive) => {
             this._deleteItemById(itemId, recursive);
             li.slideUp(200, () => this.render(false));
@@ -233,8 +233,8 @@ export class ItemCollectionSheet extends BaseEntitySheet {
             while (itemsToTest.length > 0) {
                 let itemIdToTest = itemsToTest.shift();
                 let itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemIdToTest);
-                if (itemData.data.contents) {
-                    for (let containedId of itemData.data.contents) {
+                if (itemData.data.container?.contents) {
+                    for (let containedId of itemData.data.container.contents) {
                         itemsToDelete.push(containedId);
                         itemsToTest.push(containedId);
                     }
@@ -355,16 +355,16 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         const item = tokenData.items.find(x => x._id === li.dataset.itemId);
         let draggedItems = [item];
         for (let i = 0; i<draggedItems.length; i++) {
-            if (draggedItems[i].data.contents) {
+            if (draggedItems[i].data.container?.contents) {
                 let newContents = [];
-                for (let contentId of draggedItems[i].data.contents) {
+                for (let contentId of draggedItems[i].data.container.contents) {
                     let contentItem = tokenData.items.find(x => x._id === contentId);
                     if (contentItem) {
                         draggedItems.push(contentItem);
                         newContents.push(contentItem._id);
                     }
                 }
-                draggedItems[i].data.contents = newContents;
+                draggedItems[i].data.container.contents = newContents;
             }
         }
 

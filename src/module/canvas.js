@@ -152,17 +152,17 @@ export async function handleItemDropCanvas(data) {
     // Create a placeable instead and do item transferral there.
     if (targetActor === null) {
         let itemData = [sourceItemData];
-        if (sourceActor !== null && sourceItemData.data.contents && sourceItemData.data.contents.length > 0) {
+        if (sourceActor !== null && sourceItemData.data.container?.contents && sourceItemData.data.container.contents.length > 0) {
             let containersToTest = [sourceItemData];
             while (containersToTest.length > 0)
             {
                 let container = containersToTest.shift();
-                let children = sourceActor.filterItems(x => container.data.contents.includes(x._id));
+                let children = sourceActor.filterItems(x => container.data.container.contents.includes(x._id));
                 if (children) {
                     for (let child of children) {
                         itemData.push(child.data);
 
-                        if (child.data.data.contents && child.data.data.contents.length > 0) {
+                        if (child.data.data.container?.contents && child.data.data.container.contents.length > 0) {
                             containersToTest.push(child.data);
                         }
                     }

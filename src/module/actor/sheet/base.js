@@ -357,7 +357,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         let actorHelper = new ActorItemHelper(this.actor._id, this.token ? this.token.id : null, this.token ? this.token.scene.id : null);
         let item = actorHelper.getOwnedItem(itemId);
 
-        let containsItems = (item.data.data.contents && item.data.data.contents.length > 0);
+        let containsItems = (item.data.data.container?.contents && item.data.data.container.contents.length > 0);
         ItemDeletionDialog.show(item.name, containsItems, (recursive) => {
             actorHelper.deleteOwnedItem(itemId, recursive);
             li.slideUp(200, () => this.render(false));
@@ -532,12 +532,12 @@ export class ActorSheetSFRPG extends ActorSheet {
         itemData.data.quantity = smallStack;
         let newItem = await actorHelper.createOwnedItem(itemData);
 
-        let containerItem = actorHelper.findItem(x => x.data.data.contents && x.data.data.contents.includes(item._id));
+        let containerItem = actorHelper.findItem(x => x.data.data.container?.contents && x.data.data.container.contents.includes(item._id));
         if (containerItem) {
-            let newContents = duplicate(containerItem.data.data.contents);
+            let newContents = duplicate(containerItem.data.data.container?.contents || []);
             newContents.push(newItem._id);
 
-            update = { _id: containerItem._id, "data.contents": newContents };
+            update = { _id: containerItem._id, "data.container.contents": newContents };
             await actorHelper.updateOwnedItem(update);
         }
     }
@@ -711,11 +711,11 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             if (targetContainer) {
                 let newContents = [];
-                if (targetContainer.data.data.contents) {
-                    newContents = duplicate(targetContainer.data.data.contents);
+                if (targetContainer.data.data.container?.contents) {
+                    newContents = duplicate(targetContainer.data.data.container?.contents || []);
                 }
                 newContents.push(addedItem._id);
-                let update = { _id: targetContainer._id, "data.contents": newContents };
+                let update = { _id: targetContainer._id, "data.container.contents": newContents };
                 await targetActor.updateOwnedItem(update);
             }
 
@@ -772,11 +772,11 @@ export class ActorSheetSFRPG extends ActorSheet {
                 
                 if (targetContainer) {
                     let newContents = [];
-                    if (targetContainer.data.data.contents) {
-                        newContents = duplicate(targetContainer.data.data.contents);
+                    if (targetContainer.data.data.container?.contents) {
+                        newContents = duplicate(targetContainer.data.data.container?.contents || []);
                     }
                     newContents.push(addedItem._id);
-                    let update = { _id: targetContainer._id, "data.contents": newContents };
+                    let update = { _id: targetContainer._id, "data.container.contents": newContents };
                     await targetActor.updateOwnedItem(update);
                 }
 
@@ -793,7 +793,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         for (let item of items) {
             let itemData = {
                 item: item,
-                parent: items.find(x => x.data.contents && x.data.contents.includes(item._id)),
+                parent: items.find(x => x.data.container?.contents && x.data.container.contents.includes(item._id)),
                 contents: []
             };
             preprocessedItems.push(itemData);
