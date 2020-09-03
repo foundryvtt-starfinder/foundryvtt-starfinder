@@ -11,7 +11,7 @@ import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
-import { initializeRemoteInventory } from "./module/actor/actor-inventory.js";
+import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
@@ -192,7 +192,25 @@ Hooks.on('ready', () => {
     RPC.initialize();
 
     initializeRemoteInventory();
+
+    if (game.user.isGM) {
+        migrateOldContainers();
+    }
 });
+
+async function migrateOldContainers() {
+    for (let actor of game.actors.entries) {
+        let sheetActorHelper = new ActorItemHelper(actor._id, null, null);
+        await sheetActorHelper.migrateItems();
+    }
+
+    for (let scene of game.scenes.entries) {
+        for (let token of scene.data.tokens) {
+            let sheetActorHelper = new ActorItemHelper(token.actorId, token._id, scene._id);
+            await sheetActorHelper.migrateItems();
+        }
+    }
+}
 
 export async function handleOnDrop(event) {
     event.preventDefault();

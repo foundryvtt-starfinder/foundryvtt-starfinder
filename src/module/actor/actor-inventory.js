@@ -557,7 +557,7 @@ export class ActorItemHelper {
             }
 
             if (this.token) {
-                this.scene = this.token.scene;
+                this.scene = this.token.scene || game.scenes.get(sceneId);
                 this.actor = this.token.actor;
             }
         }
@@ -679,5 +679,84 @@ export class ActorItemHelper {
             return null;
         }
         return this.actor.items.filter(fn);
+    }
+
+    /**
+     * Function that migrates actor items to the new data format, using some rough guesstimations.
+     */
+    async migrateItems() {
+        if (!this.isValid()) return;
+
+        console.log("Checking migration");
+
+        const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
+
+        for (let item of this.actor.items) {
+            let itemData = item.data.data;
+            let migrate = propertiesToTest.filter(x => itemData.hasOwnProperty(x));
+
+            if (migrate.length > 0) {
+                console.log("> Migrating " + item.name);
+                console.log(migrate);
+
+                let container = {
+                    contents: duplicate(itemData.contents || []),
+                    storage: []
+                };
+
+                if (item.type === "container") {
+                    container.storage.push({
+                        type: "bulk",
+                        subtype: "",
+                        amount: itemData.storageCapacity || 0,
+                        acceptsType: itemData.acceptedItemTypes ? Object.keys(itemData.acceptedItemTypes) : [],
+                        weightMultiplier: itemData.contentBulkMultiplier || 1,
+                        weightProperty: "bulk"
+                    });
+                } else if (item.type === "weapon") {
+                    container.storage.push({
+                        type: "slot",
+                        subtype: "fusion",
+                        amount: itemData.level,
+                        acceptsType: ["fusion"],
+                        weightMultiplier: 1,
+                        weightProperty: "level"
+                    });
+                } else if (item.type === "equipment") {
+                    container.storage.push({
+                        type: "slot",
+                        subtype: "armorUpgrade",
+                        amount: itemData.armor?.upgradeSlots || 0,
+                        acceptsType: ["upgrade", "weapon"],
+                        weightMultiplier: 1,
+                        weightProperty: "slots"
+                    });
+                    container.storage.push({
+                        type: "slot",
+                        subtype: "weaponSlot",
+                        amount: itemData.weaponSlots || 0,
+                        acceptsType: ["weapon"],
+                        weightMultiplier: 1,
+                        weightProperty: "slots"
+                    });
+                }
+
+                itemData["container"] = container;
+
+                delete itemData.contents;
+                delete itemData.storageCapacity;
+                delete itemData.acceptedItemTypes;
+                delete itemData.contentBulkMultiplier;
+
+                delete itemData.containedItemIds;
+                delete itemData.fusions;
+                if (itemData.armor) {
+                    delete itemData.armor.upgradeSlots;
+                    delete itemData.armor.upgrades;
+                }
+
+                await this.actor.updateOwnedItem({ _id: item._id, data: itemData});
+            }
+        }
     }
 }

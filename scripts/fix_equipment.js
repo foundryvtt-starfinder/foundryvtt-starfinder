@@ -22,7 +22,7 @@ try {
             
             if (equipment?.type === "equipment") {
                 // Armor slots are now to be removed and replaced with container settings.
-                if (equipment.data?.armor && "upgradeSlots" in equipment.data?.armor) {
+                if (equipment.data?.armor && equipment.data?.armor.hasOwnProperty("upgradeSlots")) {
                     let numberArmorSlots = equipment.data.armor.upgradeSlots;
                     delete equipment.data.armor.upgradeSlots;
                     isDirty = true;
@@ -38,7 +38,7 @@ try {
                 }
                 
                 // Weapon slots are now to be removed and replaced with container settings.
-                if ("weaponSlots" in equipment.data) {
+                if (equipment.data.hasOwnProperty("weaponSlots")) {
                     let numberWeaponSlots = equipment.data.weaponSlots;
                     delete equipment.data.weaponSlots;
                     isDirty = true;
@@ -53,7 +53,7 @@ try {
                     });
                 }
                                 
-                isDirty = !("container" in equipment.data);
+                isDirty = !equipment.data.hasOwnProperty("container");
             }
             
             if (equipment?.type === "weapon") {
@@ -68,7 +68,7 @@ try {
                     weightProperty: "level"
                 });
                 
-                isDirty = !("container" in equipment.data);
+                isDirty = !equipment.data.hasOwnProperty("container");
             }
             
             if (equipment?.type === "container") {
@@ -81,15 +81,15 @@ try {
                     weightProperty: "bulk"
                 });
                 
-                isDirty = !("container" in equipment.data);
+                isDirty = !equipment.data.hasOwnProperty("container");
             }
 
-            if ("storageCapacity" in equipment.data) {
+            if (equipment.data.hasOwnProperty("storageCapacity")) {
                 delete equipment.data.storageCapacity;
                 isDirty = true;
             }
 
-            if ("contentBulkMultiplier" in equipment.data) {
+            if (equipment.data.hasOwnProperty("contentBulkMultiplier")) {
                 delete equipment.data.contentBulkMultiplier;
                 isDirty = true;
             }
