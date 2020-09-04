@@ -323,15 +323,28 @@ function acceptsItem(containerItem, itemToAdd, actor) {
         return false;
     }
 
-    const storageCapacity = containerItem.data.data.storageCapacity;
-    if (!storageCapacity || storageCapacity === 0) {
-        //console.log("Rejected because target storageCapacity is 0");
+    if (!containerItem.data.data.container) {
+        console.log("Rejected because target is not a container");
         return false;
     }
 
-    const acceptedItemTypes = containerItem.data.data.acceptedItemTypes;
-    if (acceptedItemTypes && (!(itemToAdd.type in acceptedItemTypes) || !acceptedItemTypes[itemToAdd.type])) {
-        //console.log("Rejected because item is not accepted by container mask");
+    let storageFound = false;
+    for (let storageOption of containerItem.data.data.container.storage) {
+        if (storageOption.amount == 0) {
+            continue;
+        }
+
+        if (!storageOption.acceptsType.includes(itemToAdd.type)) {
+            continue;
+        }
+
+        if (storageOption.weightProperty && !itemToAdd.data[weightProperty]) {
+            continue;
+        }
+    }
+
+    if (!storageFound) {
+        console.log("Rejected because no suitable storage found");
         return false;
     }
 
@@ -687,8 +700,6 @@ export class ActorItemHelper {
     async migrateItems() {
         if (!this.isValid()) return;
 
-        console.log("Checking migration");
-
         const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
 
         for (let item of this.actor.items) {
@@ -697,10 +708,9 @@ export class ActorItemHelper {
 
             if (migrate.length > 0) {
                 console.log("> Migrating " + item.name);
-                console.log(migrate);
+                //console.log(migrate);
 
                 let container = {
-                    contents: duplicate(itemData.contents || []),
                     storage: []
                 };
 
@@ -709,6 +719,7 @@ export class ActorItemHelper {
                         type: "bulk",
                         subtype: "",
                         amount: itemData.storageCapacity || 0,
+                        contents: duplicate(itemData.contents || []),
                         acceptsType: itemData.acceptedItemTypes ? Object.keys(itemData.acceptedItemTypes) : [],
                         weightMultiplier: itemData.contentBulkMultiplier || 1,
                         weightProperty: "bulk"
@@ -718,6 +729,7 @@ export class ActorItemHelper {
                         type: "slot",
                         subtype: "fusion",
                         amount: itemData.level,
+                        contents: duplicate(itemData.contents || []),
                         acceptsType: ["fusion"],
                         weightMultiplier: 1,
                         weightProperty: "level"
@@ -727,6 +739,7 @@ export class ActorItemHelper {
                         type: "slot",
                         subtype: "armorUpgrade",
                         amount: itemData.armor?.upgradeSlots || 0,
+                        contents: duplicate(itemData.contents || []),
                         acceptsType: ["upgrade", "weapon"],
                         weightMultiplier: 1,
                         weightProperty: "slots"
