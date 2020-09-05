@@ -20,7 +20,7 @@ export function initializeRemoteInventory() {
  * @param {Item} targetItem (Optional) Item to either merge with, or add as a child to, or find its parent and set as a sibling.
  * @returns {Item} Returns the (possibly newly created) item on the target actor.
  */
-export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targetItem = null) {
+export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targetItem = null, targetItemStorageIndex = null) {
     if (!ActorItemHelper.IsValidHelper(targetActor)) return null;
 
     if (targetItem && targetItem === itemToAdd) {
@@ -29,7 +29,6 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
 
     let newItemData = duplicate(itemToAdd);
     newItemData.data.quantity = quantity;
-    newItemData.data.container.contents = itemToAdd.data.container.contents ? [] : null;
 
     let desiredParent = null;
     if (targetItem) {
@@ -40,7 +39,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
             await targetActor.updateOwnedItem({ _id: targetItem._id, 'data.quantity': targetItemNewQuantity});
             return targetItem;
         } else {
-            desiredParent = targetActor.findItem(x => x.data.container?.contents && x.data.container.contents.includes(targetItem._id));
+            desiredParent = targetActor.findItem(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === targetItem._id));
         }
     }
     
@@ -57,7 +56,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
 
     if (desiredParent) {
         let newContents = duplicate(desiredParent.data.data.container.contents || []);
-        newContents.push(addedItem._id);
+        newContents.push({id: addedItem._id, index: targetItemStorageIndex || 0});
         await targetActor.updateOwnedItem({"_id": desiredParent._id, "data.container.contents": newContents});
     }
 
@@ -82,8 +81,8 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
     if (newItemQuantity < 1) {
         await sourceActor.deleteOwnedItem(itemToRemove._id);
         if (recursive && containsItems(itemToRemove)) {
-            for (let childId of itemToRemove.data.data.container.contents) {
-                let child = sourceActor.getOwnedItem(childId);
+            for (let content of itemToRemove.data.data.container.contents) {
+                let child = sourceActor.getOwnedItem(content.id);
                 if (child) {
                     await removeItemFromActorAsync(sourceActor, child, child.data.data.quantity, recursive);
                 }
@@ -106,20 +105,20 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
  * @param {Number} quantity (Optional) Amount of item to move, if null will move everything.
  * @returns {Item} Returns the item on the targetActor.
  */
-export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetItem = null, quantity = null) {
+export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetItem = null, quantity = null, targetItemStorageIndex = null) {
     if (!ActorItemHelper.IsValidHelper(targetActor)) {
-        console.log("Inventory::moveItemBetweenActorsAsync: targetActor is not a valid ActorItemHelper instance.")
+        console.log("Inventory::moveItemBetweenActorsAsync: targetActor is not a valid ActorItemHelper instance.");
         return null;
     }
 
     if (!itemToMove) {
-        console.log("Inventory::moveItemBetweenActorsAsync: itemToMove is not valid.")
+        console.log("Inventory::moveItemBetweenActorsAsync: itemToMove is not valid.");
         return null;
     }
 
     if (!ActorItemHelper.IsValidHelper(sourceActor)) {
-        console.log("Inventory::moveItemBetweenActorsAsync: sourceActor is not a valid ActorItemHelper, switching to addItemToActorAsync.")
-        return await addItemToActorAsync(targetActor, itemToMove, itemToMove.data.data.quantity, targetItem);
+        console.log("Inventory::moveItemBetweenActorsAsync: sourceActor is not a valid ActorItemHelper, switching to addItemToActorAsync.");
+        return await addItemToActorAsync(targetActor, itemToMove, itemToMove.data.data.quantity, targetItem, targetItemStorageIndex);
     }
 
     if (!quantity) {
@@ -127,7 +126,6 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
     }
 
     if (sourceActor.actor === targetActor.actor) {
-        let newItem = null;
         if (quantity < itemToMove.data.data.quantity) {
             let updateOld = { _id: itemToMove._id, "data.quantity": itemToMove.data.data.quantity - quantity };
             await sourceActor.updateOwnedItem(updateOld);
@@ -144,9 +142,11 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         }
 
         let desiredParent = null;
+        let desiredStorageIndex = null;
         if (targetItem) {
             if (acceptsItem(targetItem, itemToMove, targetActor)) {
                 desiredParent = targetItem;
+                desiredStorageIndex = targetItemStorageIndex;
             } else if (canMerge(targetItem, itemToMove)) {
                 // Merging will destroy the old item, so we return the targetItem here.
                 const targetItemNewQuantity = Number(targetItem.data.data.quantity) + Number(quantity);
@@ -162,10 +162,11 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
                 return targetItem;
             } else {
-                let targetsParent = targetActor.findItem(x => x.data.data.container?.contents && x.data.data.container.contents.includes(targetItem._id));
+                let targetsParent = targetActor.findItem(x => x.data.data.container?.contents && x.data.data.container.contents.find( y => y.id === targetItem._id));
                 if (targetsParent) {
                     if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
                         desiredParent = targetsParent;
+                        desiredTargetIndex = getFirstAcceptableStorageIndex(desiredParent);
                     } else {
                         return itemToMove;
                     }
@@ -173,18 +174,18 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
         }
 
-        let currentParent = targetActor.findItem(x => x.data.data.container?.contents && x.data.data.container.contents.includes(itemToMove._id));
+        let currentParent = targetActor.findItem(x => x.data.data.container?.contents && x.data.data.container.contents.find(y => y.id === itemToMove._id));
 
         if (desiredParent !== currentParent) {
             let bulkUpdates = [];
             if (currentParent) {
-                let newContents = currentParent.data.data.container.contents.filter(x => x !== itemToMove._id);
+                let newContents = currentParent.data.data.container.contents.filter(x => x.id !== itemToMove._id);
                 bulkUpdates.push({_id: currentParent._id, "data.container.contents": newContents});
             }
 
             if (desiredParent) {
                 let newContents = duplicate(desiredParent.data.data.container?.contents || []);
-                newContents.push(itemToMove._id);
+                newContents.push({id: itemToMove._id, index: desiredStorageIndex || 0});
                 bulkUpdates.push({_id: desiredParent._id, "data.container.contents": newContents});
             }
 
@@ -197,11 +198,11 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
         return itemToMove;
     } else {
-        let movedItem = await addItemToActorAsync(targetActor, itemToMove, quantity, targetItem);
+        let movedItem = await addItemToActorAsync(targetActor, itemToMove, quantity, targetItem, targetItemStorageIndex);
 
         if (containsItems(itemToMove)) {
-            for (let childId of itemToMove.data.data.container.contents) {
-                let child = sourceActor.getOwnedItem(childId);
+            for (let content of itemToMove.data.data.container.contents) {
+                let child = sourceActor.getOwnedItem(content.id);
                 await moveItemBetweenActorsAsync(sourceActor, child, targetActor, movedItem);
             }
         }
@@ -290,7 +291,7 @@ export function containsItems(item) {
 export function getChildItems(actor, item) {
     if (!actor) return [];
     if (!containsItems(item)) return [];
-    return actor.items.filter(x => item.data.data.container.contents.includes(x._id));
+    return actor.items.filter(x => item.data.data.container.contents.find(y => y.id === x._id));
 }
 
 /**
@@ -309,7 +310,45 @@ function canMerge(itemA, itemB) {
     if (containsItems(itemA) || containsItems(itemB)) return false;
 
     // Perform deep comparison on item data.
-    return value_equals(itemA.data.data, itemB.data.data, false, true);
+    let itemDataA = duplicate(itemA.data.data);
+    delete itemDataA.quantity;
+
+    let itemDataB = duplicate(itemB.data.data);
+    delete itemDataB.quantity;
+
+    // TODO: Remove all keys that are not template appropriate given the item type, remove all keys that are not shared?
+
+    const deepEqual = value_equals(itemDataA, itemDataB, false, true);
+    return deepEqual;
+}
+
+export function getFirstAcceptableStorageIndex(container, itemToAdd) {
+    let index = -1;
+    for (let storageOption of container.data.data.container.storage) {
+        index += 1;
+        if (storageOption.amount == 0) {
+            continue;
+        }
+
+        if (!storageOption.acceptsType.includes(itemToAdd.type)) {
+            continue;
+        }
+
+        if (storageOption.weightProperty && !itemToAdd.data.data[storageOption.weightProperty]) {
+            continue;
+        }
+
+        if (storageOption.type === "slot") {
+            let numItemsInStorage = container.data.data.container.contents.filter(x => x.index === index).length();
+            if (numItemsInStorage >= storageOption.amount) {
+                continue;
+            }
+        }
+
+        return index;
+    }
+
+    return null;
 }
 
 function acceptsItem(containerItem, itemToAdd, actor) {
@@ -328,22 +367,13 @@ function acceptsItem(containerItem, itemToAdd, actor) {
         return false;
     }
 
-    let storageFound = false;
-    for (let storageOption of containerItem.data.data.container.storage) {
-        if (storageOption.amount == 0) {
-            continue;
-        }
-
-        if (!storageOption.acceptsType.includes(itemToAdd.type)) {
-            continue;
-        }
-
-        if (storageOption.weightProperty && !itemToAdd.data[weightProperty]) {
-            continue;
-        }
+    if (containerItem.data.data.quantity > 1) {
+        console.log("Rejected because only items with a quantity of 1 can contain items.");
+        return false;
     }
 
-    if (!storageFound) {
+    let storageFound = getFirstAcceptableStorageIndex(containerItem, itemToAdd);
+    if (storageFound === null) {
         console.log("Rejected because no suitable storage found");
         return false;
     }
@@ -369,16 +399,16 @@ function wouldCreateParentCycle(item, container, actor) {
     // If the item has no children it cannot create cycles.
     if (!containsItems(item)) return false;
 
-    if (item.data.data.container.contents.includes(container._id)) return true;
+    if (item.data.data.container.contents.find(y => y.id === container._id)) return true;
 
     let itemsToTest = duplicate(item.data.data.container.contents || []);
     while (itemsToTest.length > 0) {
-        let childId = itemsToTest.shift();
-        let child = actor.getOwnedItem(childId);
+        let content = itemsToTest.shift();
+        let child = actor.getOwnedItem(content.id);
         if (!child) continue;
 
         if (!containsItems(child)) continue;
-        if (child.data.data.container.contents.includes(container._id)) return true;
+        if (child.data.data.container.contents.find(y => y.id === container._id)) return true;
         itemsToTest = itemsToTest.concat(child.data.data.container.contents);
     }
     return false;
@@ -451,7 +481,8 @@ async function onItemDraggedToCollection(message) {
     if (newItems.length > 0) {
         if (targetContainer && targetContainer.data.container?.contents) {
             for (let newItem of newItems) {
-                targetContainer.data.container.contents.push(newItem._id);
+                let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, newItem) || 0;
+                targetContainer.data.container.contents.push({id: newItem._id, index: preferredStorageIndex});
             }
         }
         newItems = items.concat(newItems);
@@ -504,10 +535,10 @@ async function onItemCollectionItemDraggedToPlayer(message) {
         let newItem = itemToItemMapping[originalItem._id];
         if (originalItem.data.container?.contents) {
             let newContents = [];
-            for (let originalContentId of originalItem.data.container.contents) {
-                let originalContentItem = data.draggedItems.find(x => x._id === originalContentId);
+            for (let originalContent of originalItem.data.container.contents) {
+                let originalContentItem = data.draggedItems.find(x => x._id === originalContent.id);
                 let newContentItem = itemToItemMapping[originalContentItem._id];
-                newContents.push(newContentItem._id);
+                newContents.push({id: newContentItem._id, index: originalContent.index});
                 uncontainedItemIds = uncontainedItemIds.filter(x => x !== newContentItem._id);
             }
 
@@ -531,7 +562,8 @@ async function onItemCollectionItemDraggedToPlayer(message) {
         for (let uncontainedItemId of uncontainedItemIds) {
             let uncontainedItem = target.getOwnedItem(uncontainedItemId);
             if (acceptsItem(targetContainer, uncontainedItem, target.actor)) {
-                acceptableItemIds.push(uncontainedItemId);
+                let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, uncontainedItem) || 0;
+                acceptableItemIds.push({id: uncontainedItemId, index: preferredStorageIndex});
             }
         }
 
@@ -659,9 +691,9 @@ export class ActorItemHelper {
                 let idToTest = idsToTest.shift();
                 let item = this.getOwnedItem(idToTest);
                 if (item && item.data.data.container?.contents) {
-                    for (let containedItemId of item.data.data.container.contents) {
-                        itemsToDelete.push(containedItemId);
-                        idsToTest.push(containedItemId);
+                    for (let containedItem of item.data.data.container.contents) {
+                        itemsToDelete.push(containedItem.id);
+                        idsToTest.push(containedItem.id);
                     }
                 }
             }
@@ -700,8 +732,8 @@ export class ActorItemHelper {
     async migrateItems() {
         if (!this.isValid()) return;
 
+        // Migrate original format
         const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
-
         for (let item of this.actor.items) {
             let itemData = item.data.data;
             let migrate = propertiesToTest.filter(x => itemData.hasOwnProperty(x));
@@ -711,6 +743,7 @@ export class ActorItemHelper {
                 //console.log(migrate);
 
                 let container = {
+                    contents: (itemData.contents || []).map(x => { return { id: x, index: 0 }; }),
                     storage: []
                 };
 
@@ -719,7 +752,6 @@ export class ActorItemHelper {
                         type: "bulk",
                         subtype: "",
                         amount: itemData.storageCapacity || 0,
-                        contents: duplicate(itemData.contents || []),
                         acceptsType: itemData.acceptedItemTypes ? Object.keys(itemData.acceptedItemTypes) : [],
                         weightMultiplier: itemData.contentBulkMultiplier || 1,
                         weightProperty: "bulk"
@@ -729,7 +761,6 @@ export class ActorItemHelper {
                         type: "slot",
                         subtype: "fusion",
                         amount: itemData.level,
-                        contents: duplicate(itemData.contents || []),
                         acceptsType: ["fusion"],
                         weightMultiplier: 1,
                         weightProperty: "level"
@@ -739,7 +770,6 @@ export class ActorItemHelper {
                         type: "slot",
                         subtype: "armorUpgrade",
                         amount: itemData.armor?.upgradeSlots || 0,
-                        contents: duplicate(itemData.contents || []),
                         acceptsType: ["upgrade", "weapon"],
                         weightMultiplier: 1,
                         weightProperty: "slots"
@@ -769,6 +799,28 @@ export class ActorItemHelper {
                 }
 
                 await this.actor.updateOwnedItem({ _id: item._id, data: itemData});
+            }
+
+            // Migrate intermediate format
+            if (item.data.container?.contents?.length > 0) {
+                let itemData = item.data.data;
+                let isDirty = false;
+                if (item.data.container.contents[0] instanceof String) {
+                    for (let i = 0; i<item.data.container.contents.length; i++) {
+                        item.data.container.contents[i] = {id: item.data.container.contents[0], index: 0};
+                    }
+
+                    isDirty = true;
+                }
+
+                if (item.data.container.itemWeightMultiplier) {
+                    delete item.data.container.itemWeightMultiplier;
+                    isDirty = true;
+                }
+
+                if (isDirty) {
+                    await this.actor.updateOwnedItem({ _id: item._id, data: itemData});
+                }
             }
         }
     }

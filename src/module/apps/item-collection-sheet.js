@@ -131,7 +131,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         for (let item of items) {
             let itemData = {
                 item: item,
-                parent: items.find(x => x.data.container?.contents && x.data.container.contents.includes(item._id)),
+                parent: items.find(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === item._id)),
                 contents: []
             };
             preprocessedItems.push(itemData);
@@ -234,9 +234,9 @@ export class ItemCollectionSheet extends BaseEntitySheet {
                 let itemIdToTest = itemsToTest.shift();
                 let itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemIdToTest);
                 if (itemData.data.container?.contents) {
-                    for (let containedId of itemData.data.container.contents) {
-                        itemsToDelete.push(containedId);
-                        itemsToTest.push(containedId);
+                    for (let content of itemData.data.container.contents) {
+                        itemsToDelete.push(content.id);
+                        itemsToTest.push(content.id);
                     }
                 }
             }
@@ -357,11 +357,11 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         for (let i = 0; i<draggedItems.length; i++) {
             if (draggedItems[i].data.container?.contents) {
                 let newContents = [];
-                for (let contentId of draggedItems[i].data.container.contents) {
-                    let contentItem = tokenData.items.find(x => x._id === contentId);
+                for (let content of draggedItems[i].data.container.contents) {
+                    let contentItem = tokenData.items.find(x => x._id === content.id);
                     if (contentItem) {
                         draggedItems.push(contentItem);
-                        newContents.push(contentItem._id);
+                        newContents.push({id: contentItem._id, index: content.index});
                     }
                 }
                 draggedItems[i].data.container.contents = newContents;

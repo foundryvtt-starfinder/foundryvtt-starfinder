@@ -157,7 +157,7 @@ export async function handleItemDropCanvas(data) {
             while (containersToTest.length > 0)
             {
                 let container = containersToTest.shift();
-                let children = sourceActor.filterItems(x => container.data.container.contents.includes(x._id));
+                let children = sourceActor.filterItems(x => container.data.container.contents.find(y => y.id === x._id));
                 if (children) {
                     for (let child of children) {
                         itemData.push(child.data);
