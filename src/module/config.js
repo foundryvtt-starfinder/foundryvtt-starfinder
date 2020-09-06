@@ -1570,8 +1570,11 @@ SFRPG.containableTypes = {
     "consumable": "Consumables",
     "goods": "Goods",
     "container": "Containers",
+    "hybrid": "SFRPG.Items.Categories.HybridItems",
+    "magic": "SFRPG.Items.Categories.MagicItems",
     "technological": "Tech",
     "fusion": "Fusions",
     "upgrade": "Armor Upgrades",
+    "spell": "SFRPG.Items.Categories.Spells",
     "augmentation": "Augmentations"
 };

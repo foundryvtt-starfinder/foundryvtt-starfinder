@@ -164,12 +164,37 @@ Hooks.once("setup", function () {
         } else return Math.floor(reduced);
     });
 
+    Handlebars.registerHelper('getTotalStorageCapacity', function (item) {
+        let totalCapacity = 0;
+        if (item?.data?.container?.storage && item.data.container.storage.length > 0) {
+            for (let storage of item.data.container.storage) {
+                totalCapacity += storage.amount;
+            }
+        }
+        return totalCapacity;
+    });
+
     Handlebars.registerHelper('capitalize', function (value) {
         return value.capitalize();
     });
 
     Handlebars.registerHelper('contains', function (entries, value) {
         return (entries instanceof Array && entries.includes(value));
+    });
+
+    Handlebars.registerHelper('console', function (value) {
+        console.log(value);
+    });
+
+    Handlebars.registerHelper('indexOf', function (array, value, oneBased = false) {
+        const index = array.indexOf(value);
+        if (index < 0) return index;
+        return index + (oneBased ? 1 : 0);
+    });
+
+    /** Returns a text based on whether left is null or not. */
+    Handlebars.registerHelper('leftOrRight', function (left, right) {
+        return left || right;
     });
 });
 

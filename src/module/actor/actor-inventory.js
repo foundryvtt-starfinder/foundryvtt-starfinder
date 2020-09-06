@@ -237,14 +237,27 @@ export async function setItemContainer(actor, item, container) {
  */
 export function computeCompoundBulkForItem(item, contents) {
     let contentBulk = 0;
-    if (contents && contents.length > 0) {
+    //console.log(["computeCompoundBulk", item?.name, contents]);
+    if (item?.data?.container?.storage && item.data.container.storage.length > 0) {
+        for (let storage of item.data.container.storage) {
+            let storageIndex = item.data.container.storage.indexOf(storage);
+            let storageBulk = 0;
+
+            let storedItems = contents.filter(x => item.data.container.contents.find(y => y.id === x.item._id && y.index === storageIndex));
+            if (storage.affectsEncumbrance || true) {
+                for (let child of storedItems) {
+                    let childBulk = computeCompoundBulkForItem(child.item, child.contents);
+                    storageBulk += childBulk;
+                }
+            }
+
+            contentBulk += storageBulk;
+            //console.log(`${item.name}, storage ${storageIndex}, contentBulk: ${contentBulk}`);
+        }
+    } else if (contents?.length > 0) {
         for (let child of contents) {
             let childBulk = computeCompoundBulkForItem(child.item, child.contents);
             contentBulk += childBulk;
-        }
-
-        if (item && item.data.contentBulkMultiplier !== undefined && !Number.isNaN(Number.parseInt(item.data.contentBulkMultiplier))) {
-            contentBulk *= item.data.contentBulkMultiplier;
         }
     }
 
@@ -732,12 +745,13 @@ export class ActorItemHelper {
     async migrateItems() {
         if (!this.isValid()) return;
 
-        // Migrate original format
         const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
         for (let item of this.actor.items) {
             let itemData = item.data.data;
-            let migrate = propertiesToTest.filter(x => itemData.hasOwnProperty(x));
+            let isDirty = false;
 
+            // Migrate original format
+            let migrate = propertiesToTest.filter(x => itemData.hasOwnProperty(x));
             if (migrate.length > 0) {
                 console.log("> Migrating " + item.name);
                 //console.log(migrate);
@@ -753,7 +767,7 @@ export class ActorItemHelper {
                         subtype: "",
                         amount: itemData.storageCapacity || 0,
                         acceptsType: itemData.acceptedItemTypes ? Object.keys(itemData.acceptedItemTypes) : [],
-                        weightMultiplier: itemData.contentBulkMultiplier || 1,
+                        affectsEncumbrance: itemData.contentBulkMultiplier === 0 ? false : true,
                         weightProperty: "bulk"
                     });
                 } else if (item.type === "weapon") {
@@ -762,7 +776,7 @@ export class ActorItemHelper {
                         subtype: "fusion",
                         amount: itemData.level,
                         acceptsType: ["fusion"],
-                        weightMultiplier: 1,
+                        affectsEncumbrance: false,
                         weightProperty: "level"
                     });
                 } else if (item.type === "equipment") {
@@ -771,7 +785,7 @@ export class ActorItemHelper {
                         subtype: "armorUpgrade",
                         amount: itemData.armor?.upgradeSlots || 0,
                         acceptsType: ["upgrade", "weapon"],
-                        weightMultiplier: 1,
+                        affectsEncumbrance: true,
                         weightProperty: "slots"
                     });
                     container.storage.push({
@@ -779,7 +793,7 @@ export class ActorItemHelper {
                         subtype: "weaponSlot",
                         amount: itemData.weaponSlots || 0,
                         acceptsType: ["weapon"],
-                        weightMultiplier: 1,
+                        affectsEncumbrance: true,
                         weightProperty: "slots"
                     });
                 }
@@ -797,30 +811,37 @@ export class ActorItemHelper {
                     delete itemData.armor.upgradeSlots;
                     delete itemData.armor.upgrades;
                 }
-
-                await this.actor.updateOwnedItem({ _id: item._id, data: itemData});
             }
 
             // Migrate intermediate format
-            if (item.data.container?.contents?.length > 0) {
-                let itemData = item.data.data;
+            if (itemData.container?.contents?.length > 0) {
                 let isDirty = false;
-                if (item.data.container.contents[0] instanceof String) {
-                    for (let i = 0; i<item.data.container.contents.length; i++) {
-                        item.data.container.contents[i] = {id: item.data.container.contents[0], index: 0};
+                if (itemData.container.contents[0] instanceof String) {
+                    for (let i = 0; i<itemData.container.contents.length; i++) {
+                        itemData.container.contents[i] = {id: itemData.container.contents[0], index: 0};
                     }
 
                     isDirty = true;
                 }
 
-                if (item.data.container.itemWeightMultiplier) {
-                    delete item.data.container.itemWeightMultiplier;
+                if (itemData.container.itemWeightMultiplier) {
+                    delete itemData.container.itemWeightMultiplier;
                     isDirty = true;
                 }
+            }
 
-                if (isDirty) {
-                    await this.actor.updateOwnedItem({ _id: item._id, data: itemData});
+            if (itemData.container?.storage && itemData.container.storage.length > 0) {
+                for (let storage of itemData.container.storage) {
+                    if (storage.hasOwnProperty("weightMultiplier")) {
+                        storage["affectsEncumbrance"] = storage.weightMultiplier === 0 ? false : true;
+                        delete storage.weightMultiplier;
+                        isDirty = true;
+                    }
                 }
+            }
+
+            if (isDirty) {
+                await this.actor.updateOwnedItem({ _id: item._id, data: itemData});
             }
         }
     }

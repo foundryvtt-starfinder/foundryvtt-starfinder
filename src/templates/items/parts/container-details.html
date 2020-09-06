@@ -4,37 +4,87 @@
             {{/if}}
 
             {{!-- Storage capacity --}}
+            <div class="form-group">
+                <label>Add another storage slot</label>
+                <div class="form-fields">
+                    <a class="item-control add-storage">
+                        <i class="fas fa-plus"></i> Add new Storage
+                    </a>
+                </div>
+            </div>
+
+            {{#each data.container.storage as |storage|}}
+            {{console storage}}
+            <hr/>
+            <div class="form-group">
+                <label>Storage Slot {{indexOf ../data.container.storage storage true}}</label>
+                <div class="form-fields">
+                    <a class="item-control remove-storage">
+                        <i class="fas fa-minus"></i> Delete Storage
+                    </a>
+                </div>
+            </div>
+            <div class="form-group" data-tippy-content="">
+                <label>Storage Type</label>
+                <div class="form-fields">
+                    <select name="storage.type">
+                        {{#select storage.type}}
+                        <option value="slot">Slot</option>
+                        <option value="bulk">Bulk</option>
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+            {{#if (eq storage.type "slot")}}
+            <div class="form-group" data-tippy-content="">
+                <label>Slot Identifier</label>
+                <div class="form-fields">
+                    <select name="storage.subtype">
+                        {{#select storage.subtype}}
+                        <option value="">Item Slot</option>
+                        <option value="armorUpgrade">Armor Upgrade Slot</option>
+                        <option value="weaponSlot">Weapon Slot</option>
+                        <option value="fusion">Fusion Slot</option>
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+            {{/if}}
+            {{#if (eq storage.type "slot")}}
             <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacity" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacityTooltip" }}">
-                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacity" }}</label>
+                <label>Capacity</label>
                 <div class="form-fields">
-                    <input type="text" name="data.storageCapacity" value="{{data.storageCapacity}}" data-dtype="Number" placeholder="0" />
+                    <input type="text" name="storage.amount" value="{{storage.amount}}" data-dtype="Number" placeholder="0" />
+                    <select name="storage.weightProperty">
+                        {{#select storage.weightProperty}}
+                        <option value="">Items</option>
+                        <option value="slots">Slots</option>
+                        {{/select}}
+                    </select>
                 </div>
             </div>
-
-            {{#if (greaterThan data.storageCapacity 0)}}
-            {{!-- Equipped bulk multiplier --}}
-            <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.EquippedBulkMultiplier" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.EquippedBulkMultiplierTooltip" }}">
-                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.EquippedBulkMultiplier" }}</label>
+            {{else}}
+            <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacity" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacityTooltip" }}">
+                <label>Capacity (Bulk)</label>
                 <div class="form-fields">
-                    <input type="text" name="data.equippedBulkMultiplier" value="{{data.equippedBulkMultiplier}}" data-dtype="Number" placeholder="0" />
+                    <input type="text" name="storage.amount" value="{{storage.amount}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
-
-            {{!-- Equipped bulk multiplier --}}
-            <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.ContentBulkMultiplier" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.ContentBulkMultiplierTooltip" }}">
-                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.ContentBulkMultiplier" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="data.contentBulkMultiplier" value="{{data.contentBulkMultiplier}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-
-            {{!-- Accepted item types --}}
-            <div class="form-group stacked weapon-properties" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypesTooltip" }}">
+            {{/if}}
+            <div class="form-group stacked weapon-properties">
                 <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</label>
-                {{#each config.containableTypes as |name prop|}}
+                {{#each ../config.containableTypes as |typeName typeKey|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="data.acceptedItemTypes.{{prop}}" {{checked (lookup ../data.acceptedItemTypes prop)}}/> {{ name }}
+                    <input type="checkbox" name="storage.acceptsType" {{checked (contains storage.acceptsType typeKey)}}/>{{localize typeName}}
                 </label>
                 {{/each}}
             </div>
-            {{/if}}
+            <div class="form-group">
+                <label>Contents affect encumbrance</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="storage.affectsEncumbrance" {{checked storage.affectsEncumbrance}}/>Contained items count towards encumbrance.
+                    </label>
+                </div>
+            </div>
+            {{/each}}

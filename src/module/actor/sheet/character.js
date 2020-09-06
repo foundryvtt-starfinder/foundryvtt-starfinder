@@ -123,7 +123,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         let totalWeight = 0;
         for (let section of Object.entries(inventory)) {
             for (let i of section[1].items) {
-                if (!(i.type in inventory)) {
+                if (!(i.item.type in inventory)) {
                     continue;
                 }
 
