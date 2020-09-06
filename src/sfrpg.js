@@ -178,21 +178,31 @@ Hooks.once("setup", function () {
         return value.capitalize();
     });
 
-    Handlebars.registerHelper('contains', function (entries, value) {
-        return (entries instanceof Array && entries.includes(value));
+    Handlebars.registerHelper('contains', function (container, value) {
+        if (!container || !value) return false;
+
+        if (container instanceof Array) {
+            return container.includes(value);
+        }
+
+        if (container instanceof Object) {
+            return container.hasOwnProperty(value);
+        }
+
+        return false;
     });
 
     Handlebars.registerHelper('console', function (value) {
         console.log(value);
     });
 
-    Handlebars.registerHelper('indexOf', function (array, value, oneBased = false) {
+    Handlebars.registerHelper('indexOf', function (array, value, zeroBased = true) {
         const index = array.indexOf(value);
         if (index < 0) return index;
-        return index + (oneBased ? 1 : 0);
+        return index + (zeroBased ? 0 : 1);
     });
 
-    /** Returns a text based on whether left is null or not. */
+    /** Returns the value based on whether left is null or not. */
     Handlebars.registerHelper('leftOrRight', function (left, right) {
         return left || right;
     });
