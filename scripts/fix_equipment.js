@@ -25,6 +25,7 @@ try {
                 if (equipment.data?.armor && equipment.data?.armor.hasOwnProperty("upgradeSlots")) {
                     let numberArmorSlots = equipment.data.armor.upgradeSlots;
                     delete equipment.data.armor.upgradeSlots;
+                    delete equipment.data.armor.upgrades;
                     isDirty = true;
                     
                     container.storage.push({
@@ -32,7 +33,7 @@ try {
                         subtype: "armorUpgrade",
                         amount: numberArmorSlots,
                         acceptsType: ["upgrade", "weapon"],
-                        weightMultiplier: 1,
+                        affectsEncumbrance: true,
                         weightProperty: "slots"
                     });
                 }
@@ -48,7 +49,7 @@ try {
                         subtype: "weaponSlot",
                         amount: numberWeaponSlots,
                         acceptsType: ["weapon"],
-                        weightMultiplier: 1,
+                        affectsEncumbrance: true,
                         weightProperty: ""
                     });
                 }
@@ -64,7 +65,7 @@ try {
                     subtype: "fusion",
                     amount: equipment.data.level,
                     acceptsType: ["fusion"],
-                    weightMultiplier: 1,
+                    affectsEncumbrance: true,
                     weightProperty: "level"
                 });
                 
@@ -77,7 +78,7 @@ try {
                     subtype: "",
                     amount: equipment.data.storageCapacity || 0,
                     acceptsType: ["weapon", "equipment", "goods", "consumable", "container", "technological", "fusion", "upgrade", "augmentation", "magic"],
-                    weightMultiplier: equipment.data.contentBulkMultiplier || 1,
+                    affectsEncumbrance: equipment.data.contentBulkMultiplier === 0 ? false : true,
                     weightProperty: "bulk"
                 });
                 
