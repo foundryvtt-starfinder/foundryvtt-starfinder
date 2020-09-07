@@ -352,7 +352,7 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
         }
 
         if (storageOption.type === "slot") {
-            let numItemsInStorage = container.data.data.container.contents.filter(x => x.index === index).length();
+            let numItemsInStorage = container.data.data.container.contents.filter(x => x.index === index).length;
             if (numItemsInStorage >= storageOption.amount) {
                 continue;
             }
