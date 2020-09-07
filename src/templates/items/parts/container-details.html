@@ -5,10 +5,10 @@
 
             {{!-- Storage capacity --}}
             <div class="form-group">
-                <label>Add another storage section</label>
+                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSections" }}</label>
                 <div class="form-fields">
                     <a class="item-control add-storage">
-                        <i class="fas fa-plus"></i> Add new Storage Section
+                        <i class="fas fa-plus"></i> {{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSectionsAdd" }}
                     </a>
                 </div>
             </div>
@@ -18,61 +18,61 @@
                 <hr/>
                 <li class="storage-slot" data-slot-index="{{indexOf ../data.container.storage storage}}">
                     <div class="form-group">
-                        <label>Storage Section {{indexOf ../data.container.storage storage false}}</label>
+                        <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSection" index=(indexOf ../data.container.storage storage false) }}</label>
                         <div class="form-fields">
                             <a class="item-control remove-storage">
-                                <i class="fas fa-minus"></i> Delete Storage Section
+                                <i class="fas fa-minus"></i> {{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSectionsRemove" }}
                             </a>
                         </div>
                     </div>
-                    <div class="form-group" data-tippy-content="">
-                        <label>Storage Type</label>
+                    <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageType" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageTypeTooltip" }}">
+                        <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageType" }}</label>
                         <div class="form-fields">
                             <select name="storage.type">
                                 {{#select storage.type}}
-                                <option value="slot">Slot</option>
-                                <option value="bulk">Bulk</option>
+                                <option value="slot">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageTypeSlot" }}</option>
+                                <option value="bulk">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageTypeBulk" }}</option>
                                 {{/select}}
                             </select>
                         </div>
                     </div>
                     {{#if (eq storage.type "slot")}}
-                    <div class="form-group" data-tippy-content="">
-                        <label>Slot Identifier</label>
+                    <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifier" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierTooltip" }}">
+                        <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifier" }}</label>
                         <div class="form-fields">
                             <select name="storage.subtype">
                                 {{#select storage.subtype}}
-                                <option value="">Item Slot</option>
-                                <option value="armorUpgrade">Armor Upgrade Slot</option>
-                                <option value="weaponSlot">Weapon Slot</option>
-                                <option value="fusion">Fusion Slot</option>
-                                <option value="spellSlot">Spell Slot</option>
+                                <option value="">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierItem" }}</option>
+                                <option value="armorUpgrade">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierArmorUpgrade" }}</option>
+                                <option value="weaponSlot">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierWeaponSlot" }}</option>
+                                <option value="fusion">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierFusion" }}</option>
+                                <option value="spellSlot">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierSpellSlot" }}</option>
                                 {{/select}}
                             </select>
                         </div>
                     </div>
-                    <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacity" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacityTooltip" }}">
-                        <label>Capacity</label>
+                    <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.Capacity" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityTooltip" }}">
+                        <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.Capacity" }}</label>
                         <div class="form-fields">
                             <input type="text" name="storage.amount" value="{{storage.amount}}" data-dtype="Number" placeholder="0" />
                             <select name="storage.weightProperty">
                                 {{#select storage.weightProperty}}
-                                <option value="">Items</option>
-                                <option value="slots">Slots</option>
-                                <option value="level">Level</option>
+                                <option value="">{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItems" }}</option>
+                                <option value="slots">{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlots" }}</option>
+                                <option value="level">{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevel" }}</option>
                                 {{/select}}
                             </select>
                         </div>
                     </div>
                     {{else}}
-                    <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacity" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacityTooltip" }}">
-                        <label>Capacity (Bulk)</label>
+                    <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityBulk" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityBulkTooltip" }}">
+                        <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityBulk" }}</label>
                         <div class="form-fields">
                             <input type="text" name="storage.amount" value="{{storage.amount}}" data-dtype="Number" placeholder="0" />
                         </div>
                     </div>
                     {{/if}}
-                    <div class="form-group stacked weapon-properties">
+                    <div class="form-group stacked weapon-properties" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypesTooltip" }}">
                         <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</label>
                         {{#each ../config.containableTypes as |typeName typeKey|}}
                         <label class="checkbox">
@@ -80,11 +80,11 @@
                         </label>
                         {{/each}}
                     </div>
-                    <div class="form-group">
-                        <label>Contents affect encumbrance</label>
+                    <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.AffectsEncumbrance" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.AffectsEncumbranceTooltip" }}">
+                        <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.AffectsEncumbrance" }}</label>
                         <div class="form-fields">
                             <label class="checkbox">
-                                <input type="checkbox" name="storage.affectsEncumbrance" {{checked storage.affectsEncumbrance}}/>Contained items count towards encumbrance.
+                                <input type="checkbox" name="storage.affectsEncumbrance" {{checked storage.affectsEncumbrance}}/>{{ localize "SFRPG.ActorSheet.Inventory.Container.AffectsEncumbranceCheckbox" }}
                             </label>
                         </div>
                     </div>
