@@ -5,24 +5,23 @@
 
             {{!-- Storage capacity --}}
             <div class="form-group">
-                <label>Add another storage slot</label>
+                <label>Add another storage section</label>
                 <div class="form-fields">
                     <a class="item-control add-storage">
-                        <i class="fas fa-plus"></i> Add new Storage
+                        <i class="fas fa-plus"></i> Add new Storage Section
                     </a>
                 </div>
             </div>
 
             <ul>
                 {{#each data.container.storage as |storage|}}
-                {{console storage}}
                 <hr/>
-                <li name="storage-slot-{{indexOf ../data.container.storage storage}}">
+                <li class="storage-slot" data-slot-index="{{indexOf ../data.container.storage storage}}">
                     <div class="form-group">
-                        <label>Storage Slot {{indexOf ../data.container.storage storage false}}</label>
+                        <label>Storage Section {{indexOf ../data.container.storage storage false}}</label>
                         <div class="form-fields">
                             <a class="item-control remove-storage">
-                                <i class="fas fa-minus"></i> Delete Storage
+                                <i class="fas fa-minus"></i> Delete Storage Section
                             </a>
                         </div>
                     </div>
@@ -52,8 +51,6 @@
                             </select>
                         </div>
                     </div>
-                    {{/if}}
-                    {{#if (eq storage.type "slot")}}
                     <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacity" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageCapacityTooltip" }}">
                         <label>Capacity</label>
                         <div class="form-fields">
@@ -78,7 +75,7 @@
                         <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.AcceptedItemTypes" }}</label>
                         {{#each ../config.containableTypes as |typeName typeKey|}}
                         <label class="checkbox">
-                            <input type="checkbox" name="storage.acceptsType" {{checked (contains storage.acceptsType typeKey)}}/>{{localize typeName}}
+                            <input type="checkbox" class="storage.acceptsType" name="{{typeKey}}" {{checked (contains storage.acceptsType typeKey)}}/>{{localize typeName}}
                         </label>
                         {{/each}}
                     </div>
