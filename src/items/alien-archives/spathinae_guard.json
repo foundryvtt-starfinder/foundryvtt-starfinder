@@ -615,9 +615,7 @@
           "per": ""
         },
         "modifiers": [],
-        "storageCapacity": 0,
         "equippedBulkMultiplier": 1,
-        "contentBulkMultiplier": 1,
         "acceptedItemTypes": {
           "weapon": false,
           "equipment": false,
@@ -717,9 +715,23 @@
           "wideLine": false
         },
         "proficient": true,
-        "fusions": [],
         "abilityMods": {
           "parts": []
+        },
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 1,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            }
+          ]
         }
       },
       "labels": {
@@ -825,9 +837,7 @@
           "per": "shot"
         },
         "modifiers": [],
-        "storageCapacity": 0,
         "equippedBulkMultiplier": 1,
-        "contentBulkMultiplier": 1,
         "acceptedItemTypes": {
           "weapon": false,
           "equipment": false,
@@ -927,9 +937,23 @@
           "wideLine": false
         },
         "proficient": true,
-        "fusions": [],
         "abilityMods": {
           "parts": []
+        },
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 1,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            }
+          ]
         }
       },
       "labels": {
@@ -1455,9 +1479,7 @@
         },
         "descriptors": [],
         "modifiers": [],
-        "storageCapacity": 0,
         "equippedBulkMultiplier": 1,
-        "contentBulkMultiplier": 1,
         "acceptedItemTypes": {
           "weapon": false,
           "equipment": false,
@@ -1476,16 +1498,39 @@
           "kac": 2,
           "dex": 5,
           "acp": 0,
-          "speedAdjust": 0,
-          "upgradeSlots": 1,
-          "upgrades": []
+          "speedAdjust": 0
         },
         "strength": 0,
         "speed": "",
         "size": "",
         "reach": "",
-        "weaponSlots": 0,
-        "proficient": true
+        "proficient": true,
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "armorUpgrade",
+              "amount": 1,
+              "acceptsType": [
+                "upgrade",
+                "weapon"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "slots"
+            },
+            {
+              "type": "slot",
+              "subtype": "weaponSlot",
+              "amount": 0,
+              "acceptsType": [
+                "weapon"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": ""
+            }
+          ]
+        }
       },
       "labels": {
         "eac": "1 EAC",
