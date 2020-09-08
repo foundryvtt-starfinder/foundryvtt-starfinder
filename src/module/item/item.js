@@ -542,7 +542,11 @@ export class ItemSFRPG extends Item {
         const title = game.settings.get('sfrpg', 'useCustomChatCard') ? `Attack Roll` : `Attack Roll - ${itemData.name}`;
 
         //Warn the user if there is no ammo left
-        if (itemData.data.capacity && itemData.data.capacity.value === 0)  ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
+        const usage = itemData.data.usage?.value || 0;
+        const availableCapacity = itemData.data.capacity?.value || 0;
+        if (availableCapacity < usage) {
+            ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
+        }
 
         // Call the roll helper utility
         DiceSFRPG.d20Roll({
@@ -572,11 +576,12 @@ export class ItemSFRPG extends Item {
     _onAttackRollClose(html, parts, data) {
         const itemData = duplicate(this.data.data);
 
-        if (itemData.hasOwnProperty("capacity")) {
-            const capacity = itemData.capacity;
+        if (itemData.hasOwnProperty("usage")) {
             const usage = itemData.usage;
 
-            if (!capacity || capacity.max && capacity.max === 0) return;
+            const capacity = itemData.capacity;
+            if (!capacity?.value || capacity.value <= 0) return;
+
             if (usage.per && ["round", "shot"].includes(usage.per)) {
                 capacity.value = Math.max(capacity.value - usage.value, 0);
             } else if (usage.per && ['minute'].includes(usage.per)) {
@@ -586,7 +591,7 @@ export class ItemSFRPG extends Item {
                         capacity.value = Math.max(capacity.value - usage.value, 0);
                     }
                 } else {
-                    ui.notifications.info("Currently cannot deduct usage from powered melee weapons outside of combat.");
+                    ui.notifications.info("Currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
                 }
             }
 
