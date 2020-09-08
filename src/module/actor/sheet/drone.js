@@ -68,12 +68,12 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         let [items, feats, chassis, mods] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
-            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType);
-            const unusable = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
-            item.isCharged = !unusable;
+            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (item.type !== "weapon" || item.data.equipped);
+            item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (item.type !== "weapon" || item.data.equipped);
+            item.hasUses = item.data.uses && (item.data.uses.max > 0);
+            item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
             if (item.type === "feat") arr[1].push(item);
             else if (item.type === "chassis") arr[2].push(item);
             else if (item.type === "mod") arr[3].push(item);
