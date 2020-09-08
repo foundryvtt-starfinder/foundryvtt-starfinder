@@ -322,7 +322,8 @@ export class ActorSheetSFRPG extends ActorSheet {
                         label: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Button"),
                         callback: html => {
                             const form = html[0].querySelector("form");
-                            mergeObject(createData, validateForm(form));
+                            let formDataExtended = new FormDataExtended(form);
+                            mergeObject(createData, formDataExtended.toObject());
                             if (!createData.name) {
                                 createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
                             }
