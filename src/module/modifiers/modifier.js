@@ -23,7 +23,7 @@ export default class SFRPGModifier {
         name = "", 
         modifier = 0, 
         type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.CONSTANT, 
+        modifierType = SFRPGModifierType.FORMULA, 
         effectType = SFRPGEffectType.SKILL, 
         valueAffected = "", 
         enabled = true, 
