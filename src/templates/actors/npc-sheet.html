@@ -48,6 +48,7 @@
         <a class="item" data-tab="inventory">{{ localize "SFRPG.Inventory" }}</a>
         <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
         <a class="item" data-tab="spellbook">{{ localize "SFRPG.SpellBook.Spellbook" }}</a>
+        <a class="item" data-tab="modifiers">{{localize "SFRPG.NPCSheet.Interface.Navigation.Conditions"}}</a>
         <a class="item" data-tab="biography">{{ localize "SFRPG.Biography" }}</a>
     </nav>
 
@@ -211,6 +212,11 @@
         {{!-- Spellbook Tab --}}
         <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
             {{> "systems/sfrpg/templates/actors/parts/actor-spellbook.html"}}
+        </div>
+
+        {{!-- Conditions Tab --}}
+        <div class="tab modifers flexcol" data-group="primary" data-tab="modifiers">
+            {{> "systems/sfrpg/templates/actors/parts/actor-modifiers.html" sections=modifiers}}
         </div>
 
         {{!-- Biography Tab --}}

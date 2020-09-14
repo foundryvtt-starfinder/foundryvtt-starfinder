@@ -54,7 +54,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             augmentation: { label: game.i18n.format(SFRPG.itemTypes["augmentation"]), items: [], dataset: { type: "augmentation" }, allowAdd: true }
         };
 
-        let [items, spells, feats, classes, races, themes, archetypes] = data.items.reduce((arr, item) => {
+        let [items, spells, feats, classes, races, themes, archetypes, conditionItems] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
@@ -64,7 +64,13 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
             if (item.type === "spell") arr[1].push(item);
-            else if (item.type === "feat") arr[2].push(item);
+            else if (item.type === "feat") {
+                if ((item.data.requirements?.toLowerCase() || "") === "condition") {
+                    arr[7].push(item);
+                } else {
+                    arr[2].push(item);
+                }
+            }
             else if (item.type === "class") arr[3].push(item);
             else if (item.type === "race") arr[4].push(item);
             else if (item.type === "theme") arr[5].push(item);
@@ -72,7 +78,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             else if (Object.keys(inventory).includes(item.type)) arr[0].push(item);
             else arr[0].push(item);
             return arr;
-        }, [[], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], []]);
         
         const spellbook = this._prepareSpellbook(data, spells);
 
@@ -173,9 +179,9 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             return arr;
         }, [[], [], [], [], []]);
 
-        modifiers.conditions.modifiers = conditions;
+        modifiers.conditions.items = conditionItems;
         modifiers.permanent.modifiers = permanent;
-        modifiers.temporary.modifiers = temporary;
+        modifiers.temporary.modifiers = temporary.concat(conditions);
 
         data.modifiers = Object.values(modifiers);
     }
@@ -231,30 +237,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
         html.find('.modifier-delete').click(this._onModifierDelete.bind(this));
         html.find('.modifier-toggle').click(this._onToggleModifierEnabled.bind(this));
-        html.find('.conditions input[type="checkbox"]').change(this._onToggleConditions.bind(this));
-    }
-
-    /**
-     * Toggles condition modifiers on or off.
-     * 
-     * @param {Event} event The triggering event.
-     */
-    async _onToggleConditions(event) {
-        event.preventDefault();
-
-        const target = $(event.currentTarget);
-        const condition = target.data('condition');
-
-        if (["blinded", "cowering", "offkilter", "pinned", "stunned"].includes(condition)) {
-            const flatfooted = $('.condition.flatfooted');
-            const ffIsChecked = flatfooted.is(':checked');
-            flatfooted.prop("checked", !ffIsChecked).change();
-        }
-        
-        const tokens = this.actor.getActiveTokens(true);
-        for (const token of tokens) {
-            await token.toggleEffect(CONFIG.SFRPG.statusEffectIconMapping[condition]);
-        }
     }
 
     /**

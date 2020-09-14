@@ -17,6 +17,7 @@
                 {{/if}}
             </div>
             
+            {{#unless onlyControls}}
             {{#if isCharacter}}
             <div class="item-detail item-weight">
                 {{#if item.totalWeight}}
@@ -48,6 +49,7 @@
                 {{item.data.usage.value}} / {{item.data.usage.per}}
                 {{/if}}
             </div>
+            {{/unless}}
 
             {{#if owner}}
             <div class="item-controls">

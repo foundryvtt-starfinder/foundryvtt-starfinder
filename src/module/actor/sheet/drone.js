@@ -65,7 +65,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             cargo: { label: cargoLabel, items: [], dataset: { type: "goods" } }
         };
 
-        let [items, feats, chassis, mods] = data.items.reduce((arr, item) => {
+        let [items, feats, chassis, mods, conditionItems] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
@@ -74,12 +74,18 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (item.type !== "weapon" || item.data.equipped);
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
-            if (item.type === "feat") arr[1].push(item);
+            if (item.type === "feat") {
+                if ((item.data.requirements?.toLowerCase() || "") === "condition") {
+                    arr[4].push(item);
+                } else {
+                    arr[1].push(item);
+                }
+            }
             else if (item.type === "chassis") arr[2].push(item);
             else if (item.type === "mod") arr[3].push(item);
             else arr[0].push(item);
             return arr;
-        }, [[], [], [], []]);
+        }, [[], [], [], [], []]);
         
         let totalWeight = 0;
         let totalValue = 0;
@@ -168,9 +174,9 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             return arr;
         }, [[], [], []]);
 
-        modifiers.conditions.modifiers = conditions;
+        modifiers.conditions.items = conditionItems;
         modifiers.permanent.modifiers = permanent;
-        modifiers.temporary.modifiers = temporary;
+        modifiers.temporary.modifiers = temporary.concat(conditions);
 
         data.modifiers = Object.values(modifiers);
 
@@ -230,30 +236,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
         html.find('.modifier-delete').click(this._onModifierDelete.bind(this));
         html.find('.modifier-toggle').click(this._onToggleModifierEnabled.bind(this));
-        html.find('.conditions input[type="checkbox"]').change(this._onToggleConditions.bind(this));
-    }
-
-    /**
-     * Toggles condition modifiers on or off.
-     * 
-     * @param {Event} event The triggering event.
-     */
-    async _onToggleConditions(event) {
-        event.preventDefault();
-
-        const target = $(event.currentTarget);
-        const condition = target.data('condition');
-
-        if (["blinded", "cowering", "offkilter", "pinned", "stunned"].includes(condition)) {
-            const flatfooted = $('.condition.flatfooted');
-            const ffIsChecked = flatfooted.is(':checked');
-            flatfooted.prop("checked", !ffIsChecked).change();
-        }
-        
-        const tokens = this.actor.getActiveTokens(true);
-        for (const token of tokens) {
-            await token.toggleEffect(CONFIG.SFRPG.statusEffectIconMapping[condition]);
-        }
     }
 
     /**
