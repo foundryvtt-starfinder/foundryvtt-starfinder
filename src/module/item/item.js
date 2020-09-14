@@ -644,7 +644,7 @@ export class ItemSFRPG extends Item {
      */
     rollDamage({ event, versatile = false } = {}) {
         const itemData = this.data.data;
-        const actorData = this.actor.data.data;
+        const actorData = this.actor.getRollData(); //this.actor.data.data;
         if (!this.hasDamage) {
             throw new Error("You may not make a Damage Roll with this Item.");
         }
