@@ -132,7 +132,8 @@ SFRPG.kineticDamageTypes = {
 
 SFRPG.damageTypes = {
     ...SFRPG.energyDamageTypes,
-    ...SFRPG.kineticDamageTypes
+    ...SFRPG.kineticDamageTypes,
+    "nonlethal": "SFRPG.DamageTypesNonlethal"
 };
 
 SFRPG.weaponDamageTypes = {
