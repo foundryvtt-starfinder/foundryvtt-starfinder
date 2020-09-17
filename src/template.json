@@ -715,7 +715,8 @@
             "starshipWeapon",
             "archetypes",
             "chassis",
-            "mod"
+            "mod",
+            "shield"
         ],
         "templates": {
             "container": {
@@ -1093,6 +1094,42 @@
             "weaponProficiency": "",
             "additionalSenses": "",
             "bonusSkill": ""
+        },
+        "shield": {
+            "templates": [
+                "itemDescription",
+                "physicalItem",
+                "activatedEffect",
+                "action",
+                "modifiers",
+                "container"
+            ],
+            "dex": null,
+            "acp": null,
+            "bonus": {
+                "wielded": 0,
+                "aligned": 0
+            },
+            "damage": {
+                "parts": []
+            },
+            "proficient": true,
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "slot",
+                        "subtype": "armorUpgrade",
+                        "amount": 0,
+                        "acceptsType": [
+                            "upgrade",
+                            "fusion"
+                        ],
+                        "affectsEncumbrance": true,
+                        "weightProperty": "slots"
+                    }
+                ]
+            }
         }
     }
 }

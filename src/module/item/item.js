@@ -393,6 +393,22 @@ export class ItemSFRPG extends Item {
         );
     }
 
+    /**
+     * Prepare chat card data for shield type items
+     * @param {Object} data The items data
+     * @param {Object} labels Any labels for the item
+     * @param {Object} props The items properties
+     */
+    _shieldChatData(data, labels, props) {
+        props.push(
+            "Shield",
+            "Max dex bonus : " + data.dex.toString(),
+            "Armor check penalty: " + data.acp.toString(),
+            "Wielded bonus: " + data.bonus.wielded.toString() + " / Aligned bonus: " + data.bonus.aligned.toString(),
+            data.proficient ? "Proficient" : "Not Proficient"
+        );
+    }
+
     /* -------------------------------------------- */
 
     /**

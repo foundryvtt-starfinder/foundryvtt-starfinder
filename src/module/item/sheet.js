@@ -94,7 +94,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasCapacity = data.item.data.hasOwnProperty("capacity");
 
         // Physical items
-        const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "upgrade", "augmentation"];
+        const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "upgrade", "augmentation", "shield"];
         data.isPhysicalItem = physicalItems.includes(data.item.type);
 
         // Item attributes
@@ -219,6 +219,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         } else if (item.type === "starshipWeapon") {
             props.push(CONFIG.SFRPG.starshipWeaponTypes[item.data.weaponType]);
             props.push(CONFIG.SFRPG.starshipWeaponClass[item.data.class]);
+        } else if (item.type === "shield") {
+            if (item.data.dex) props.push(`Dex: ${item.data.dex}`);
+            if (item.data.acp) props.push(`ACP: ${item.data.acp}`);
+            props.push(`Shield: ${item.data.bonus.wielded}/${item.data.bonus.aligned}`);
         }
 
         // Action type
