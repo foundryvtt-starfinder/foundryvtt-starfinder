@@ -1561,7 +1561,10 @@ SFRPG.itemTypes = {
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
     "theme": "SFRPG.Items.Categories.Themes",
     "upgrade": "SFRPG.Items.Categories.ArmorUpgrades",
-    "weapon": "SFRPG.Items.Categories.Weapons"
+    "weapon": "SFRPG.Items.Categories.Weapons",
+    "shield": "SFRPG.Items.Categories.Shields",
+    "ammunition": "SFRPG.Items.Categories.Ammunition",
+    "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories"
 };
 
 SFRPG.containableTypes = {
