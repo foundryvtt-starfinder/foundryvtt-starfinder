@@ -18,40 +18,40 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">Shield Details</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.Shield.Details" }}</h3>
 
             {{!-- Equipment Status --}}
             <div class="form-group stacked">
-                <label>Equipment Status</label>
+                <label>{{ localize "SFRPG.Items.EquipementStatus" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> Proficient
+                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SFRPG.Items.Proficient" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> Equipped
+                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> Identified
+                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SFRPG.Items.Identified" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> Attuned
+                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> {{ localize "SFRPG.Items.Attuned" }}
                 </label>
             </div>
 
             {{!-- Shield Bonus --}}
             <div class="form-group">
-                <label>Shield Bonus</label>
+                <label>{{ localize "SFRPG.Items.Shield.Bonus" }}</label>
                 <div class="form-fields">
-                    <span class="sep">Wielded </span>
+                    <span class="sep">{{ localize "SFRPG.Items.Shield.Wielded" }} </span>
                     <input type="text" name="data.bonus.wielded" value="{{data.bonus.wielded}}" data-dtype="Number"/>
                     <span class="sep"> / </span>
-                    <span class="sep">Aligned </span>
+                    <span class="sep">{{ localize "SFRPG.Items.Shield.Aligned" }} </span>
                     <input type="text" name="data.bonus.aligned" value="{{data.bonus.aligned}}" data-dtype="Number"/>
                 </div>
             </div>
 
             {{!-- Dexterity Modifier --}}
             <div class="form-group">
-                <label>Max. Dexterity Modifier</label>
+                <label>{{ localize "SFRPG.Items.MaxDex" }}</label>
                 <div class="form-fields">
                    <input type="text" name="data.dex" value="{{data.dex}}" data-dtype="Number" placeholder="Unlimited"/>
                 </div>
@@ -59,18 +59,18 @@
 
             {{!-- Armor Check Penalty --}}
             <div class="form-group">
-                <label>Armor Check Penalty</label>
+                <label>{{ localize "SFRPG.Items.ACP" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.acp" value="{{data.acp}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
 
-            <h3 class="form-header">Equipment Usage</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.EquipmentUsage" }}</h3>
 
             {{!-- Item Activation Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-activation.html"}}
 
-            <h3 class="form-header">Shield Action</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.Shield.Action" }}</h3>
 
             {{!-- Item Action Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-action.html"}}
