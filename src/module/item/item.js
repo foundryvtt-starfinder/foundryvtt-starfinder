@@ -475,6 +475,7 @@ export class ItemSFRPG extends Item {
      */
     rollAttack(options = {}) {
         const itemData = this.data;
+        const isWeapon = ["weapon", "shield"].includes(this.data.type);
 
         const actorData = this.actor.data.data;
         if (!this.hasAttack) {
@@ -495,7 +496,7 @@ export class ItemSFRPG extends Item {
         if (itemData.data.attackBonus !== 0) parts.push("@item.data.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.data.type)) parts.push("@attributes.bab");
-        if ((this.data.type === "weapon") && !itemData.data.proficient) parts.push("-4");
+        if (isWeapon && !itemData.data.proficient) parts.push("-4");
 
         let acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
@@ -506,9 +507,7 @@ export class ItemSFRPG extends Item {
             acceptedModifiers.push(SFRPGEffectType.MELEE_ATTACKS);
         }
 
-        if (this.data.type === "weapon") {
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
-        }
+        if (isWeapon) acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
 
         let modifiers = this.actor.getAllModifiers();
         modifiers = modifiers.filter(mod => {
@@ -661,6 +660,8 @@ export class ItemSFRPG extends Item {
     rollDamage({ event, versatile = false } = {}) {
         const itemData = this.data.data;
         const actorData = this.actor.getRollData(); //this.actor.data.data;
+        const isWeapon = ["weapon", "shield"].includes(this.data.type);
+
         if (!this.hasDamage) {
             throw new Error("You may not make a Damage Roll with this Item.");
         }
@@ -691,7 +692,7 @@ export class ItemSFRPG extends Item {
             acceptedModifiers.push(SFRPGEffectType.MELEE_DAMAGE);
         }
 
-        if (this.data.type === "weapon") {
+        if (isWeapon) {
             acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
             acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
         }
