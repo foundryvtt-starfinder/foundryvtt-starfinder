@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -16,13 +16,13 @@
 
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.type" value="{{data.type}}" placeholder="Type" />
+                    <input type="text" name="data.type" value="{{data.type}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Type" }}" />
                 </li>
                 <li>
-                    <input type="text" name="data.subtype" value="{{data.subtype}}" placeholder="Subtype" />
+                    <input type="text" name="data.subtype" value="{{data.subtype}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Subtype" }}" />
                 </li>
             </ul>
         </div>
@@ -79,7 +79,7 @@
                     <input type="text" name="data.abilityMods.parts.{{i}}.0" data-dtype="Number" value="{{numberFormat (lookup this "0") decimals=0 sign=true}}"/>
                     <select name="data.abilityMods.parts.{{i}}.1">
                         {{#select (lookup this "1") }}
-                        <option value="">None</option>
+                        <option value="">{{ localize "SFRPG.None" }}</option>
                         {{#each ../config.abilities as |name val|}}
                         <option value="{{val}}">{{name}}</option>
                         {{/each}}

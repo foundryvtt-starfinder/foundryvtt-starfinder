@@ -1,6 +1,6 @@
 {{!-- Action Type --}}
 <div class="form-group select">
-    <label>Action Type</label>
+    <label>{{ localize "SFRPG.Items.Action.ActionType" }}</label>
     <select name="data.actionType">
         {{#select data.actionType}}
         <option value=""></option>
@@ -14,7 +14,7 @@
 
 {{!-- Ability Modifier --}}
 <div class="form-group select">
-    <label>Ability Modifier</label>
+    <label>{{ localize "SFRPG.Items.Action.AbilityModifier" }}</label>
     <select name="data.ability">
         {{#select data.ability}}
         <option value=""></option>
@@ -28,7 +28,7 @@
 {{!-- Attack Roll Bonus --}}
 {{#if hasAttackRoll }}
 <div class="form-group">
-    <label>Attack Roll Bonus</label>
+    <label>{{ localize "SFRPG.Items.Action.AttackRollBonus" }}</label>
     <div class="form-fields">
         <input type="text" name="data.attackBonus" value="{{data.attackBonus}}" data-dtype="Number"/>
     </div>
@@ -37,7 +37,7 @@
 
 {{!-- Damage Formula --}}
 <h4 class="damage-header">
-    {{#unless isHealing }}Damage{{ else }}Healing{{/unless}} Formula
+    {{#unless isHealing }}{{ localize "SFRPG.Items.Action.DamageFormula" }}{{ else }}{{ localize "SFRPG.Items.Action.HealingFormula" }}{{/unless}}
     <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
 </h4>
 <ol class="damage-parts form-group">
@@ -60,13 +60,13 @@
     {{/each}}
 </ol>
 <div class="form-group">
-    <label>Critical Effect</label>
+    <label>{{ localize "SFRPG.Items.Action.CriticalEffect" }}</label>
     <div class="form-fields">
         <input type="text" name="data.critical.effect" value="{{data.critical.effect}}"/>
     </div>
 </div>
 <h4 class="damage-header">
-    Critical {{#unless isHealing }}Damage{{ else }}Healing{{/unless}} Formula
+    {{#unless isHealing }}{{ localize "SFRPG.Items.Action.CriticalDamageFormula" }}{{ else }}{{ localize "SFRPG.Items.Action.CriticalHealingFormula" }}{{/unless}}
     <a class="damage-control add-critical-damage"><i class="fas fa-plus"></i></a>
 </h4>
 <ol class="damage-parts form-group">
@@ -91,7 +91,7 @@
 
 {{!-- Other Formula --}}
 <div class="form-group">
-    <label>Other Formula</label>
+    <label>{{ localize "SFRPG.Items.Action.OtherFormula" }}</label>
     <div class="form-fields">
         <input type="text" name="data.formula" value="{{data.formula}}" placeholder="Formula"/>
     </div>
@@ -99,7 +99,7 @@
 
 {{!-- Saving Throw --}}
 <div class="form-group input-select">
-    <label>Saving Throw</label>
+    <label>{{ localize "SFRPG.Items.Action.SavingThrow" }}</label>
     <div class="form-fields">
         <input type="text" name="data.save.dc" value="{{data.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
         <select name="data.save.type">
@@ -122,7 +122,7 @@
 
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">
-    <label>Chat Message Flavor</label>
+    <label>{{ localize "SFRPG.Items.Action.ChatMessageFlavor" }}</label>
     <input type="text" name="data.chatFlavor" value="{{data.chatFlavor}}"/>
 </div>
 {{/if}}

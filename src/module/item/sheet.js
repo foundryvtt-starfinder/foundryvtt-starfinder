@@ -256,7 +256,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         } else if (item.type === "equipment") {
             category.enabled = true;
             category.value = SFRPG.equipmentTypes[item.data.armor.type];
-            category.tooltip = "SFRPG.ItemSheet.Equipment.Category";
+            category.tooltip = "SFRPG.Items.Equipment.Category";
         } else if (item.type === "consumable") {
             category.enabled = true;
             category.value = SFRPG.consumableTypes[item.data.consumableType];
