@@ -440,6 +440,10 @@
                 "armorProf": {
                     "value": [],
                     "custom": ""
+                },
+                "shieldProf": {
+                    "value": [],
+                    "custom": ""
                 }
             },
             "resources": {
@@ -926,7 +930,7 @@
                         "type": "bulk",
                         "subtype": "",
                         "amount": 0,
-                        "acceptsType": ["weapon", "equipment", "goods", "consumable", "container", "technological", "fusion", "upgrade", "augmentation", "magic", "hybrid"],
+                        "acceptsType": ["weapon", "shield", "equipment", "goods", "consumable", "container", "technological", "fusion", "upgrade", "augmentation", "magic", "hybrid"],
                         "affectsEncumbrance": true,
                         "weightProperty": "bulk"
                     }
@@ -952,7 +956,8 @@
             },
             "proficiencies": {
                 "weapon": {},
-                "armor": {}
+                "armor": {},
+                "shield": {}
             },
             "bab": "moderate",
             "fort": "slow",
@@ -1092,18 +1097,12 @@
             },
             "isArmorSlot": false,
             "weaponProficiency": "",
+            "shieldProficiency": "",
             "additionalSenses": "",
             "bonusSkill": ""
         },
         "shield": {
-            "templates": [
-                "itemDescription",
-                "physicalItem",
-                "activatedEffect",
-                "action",
-                "modifiers",
-                "container"
-            ],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
             "dex": null,
             "acp": null,
             "bonus": {
@@ -1121,12 +1120,17 @@
                         "type": "slot",
                         "subtype": "armorUpgrade",
                         "amount": 0,
-                        "acceptsType": [
-                            "upgrade",
-                            "fusion"
-                        ],
+                        "acceptsType": ["upgrade"],
                         "affectsEncumbrance": true,
                         "weightProperty": "slots"
+                    },
+                    {
+                        "type": "slot",
+                        "subtype": "fusion",
+                        "amount": 0,
+                        "acceptsType": ["fusion"],
+                        "affectsEncumbrance": true,
+                        "weightProperty": "level"
                     }
                 ]
             }

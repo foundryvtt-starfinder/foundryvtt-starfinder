@@ -1574,9 +1574,10 @@ SFRPG.containableTypes = {
     "container"    : "SFRPG.Items.Categories.Containers",
     "hybrid"       : "SFRPG.Items.Categories.HybridItems",
     "magic"        : "SFRPG.Items.Categories.MagicItems",
-    "technological": "SFRPG.Items.Categories.Tech",
-    "fusion"       : "SFRPG.Items.Categories.Fusions",
-    "upgrade"      : "SFRPG.Items.Categories.Armor Upgrades",
+    "technological": "SFRPG.Items.Categories.TechnologicalItems",
+    "fusion"       : "SFRPG.Items.Categories.WeaponFusions",
+    "upgrade"      : "SFRPG.Items.Categories.ArmorUpgrades",
     "spell"        : "SFRPG.Items.Categories.Spells",
-    "augmentation" : "SFRPG.Items.Categories.Augmentations"
+    "augmentation" : "SFRPG.Items.Categories.Augmentations",
+    "shield"       : "SFRPG.Items.Categories.Shields"
 };

@@ -44,6 +44,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
         const inventory = {
             weapon: { label: game.i18n.format(SFRPG.itemTypes["weapon"]), items: [], dataset: { type: "weapon" }, allowAdd: true },
+            shield: { label: game.i18n.format(SFRPG.itemTypes["shield"]), items: [], dataset: { type: "shield" }, allowAdd: true },
             equipment: { label: game.i18n.format(SFRPG.itemTypes["equipment"]), items: [], dataset: { type: "equipment" }, allowAdd: true },
             consumable: { label: game.i18n.format(SFRPG.itemTypes["consumable"]), items: [], dataset: { type: "consumable" }, allowAdd: true },
             goods: { label: game.i18n.format(SFRPG.itemTypes["goods"]), items: [], dataset: { type: "goods" }, allowAdd: true },
@@ -59,8 +60,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
-            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (item.type !== "weapon" || item.data.equipped);
-            item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (item.type !== "weapon" || item.data.equipped);
+            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
+            item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
             if (item.type === "spell") arr[1].push(item);
