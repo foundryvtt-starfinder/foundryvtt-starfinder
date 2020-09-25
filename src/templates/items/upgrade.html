@@ -21,11 +21,11 @@
             </div>
             <div class="form-group">
                 <label>Allowed Armor Type</label>
-                <select name="data.armorType">
-                    {{#select data.armorType}}
+                <select name="data.allowedArmorType">
+                    {{#select data.allowedArmorType}}
                     <option value="any">Any</option>
-                    {{#each config.armorTypes as |armorType k|}}
-                    <option value="{{k}}">{{armorType}}</option>
+                    {{#each config.allowedArmorTypes as |allowedArmorType k|}}
+                    <option value="{{k}}">{{allowedArmorType}}</option>
                     {{/each}}
                     {{/select}}
                 </select>

@@ -138,6 +138,7 @@ SFRPG.damageTypes = {
 SFRPG.weaponDamageTypes = {
     "acid": "SFRPG.DamageTypesAcid",
     "acid+bludgeoning": "SFRPG.DamageTypesAcidAndBludgeoning",
+    "acid+electricity": "SFRPG.DamageTypesAcidAndElectricity",
     "acid+fire": "SFRPG.DamageTypesAcidAndFire",
     "acid+piercing": "SFRPG.DamageTypesAcidAndPiercing",
     "acid+slashing": "SFRPG.DamageTypesAcidAndSlashing",
@@ -255,6 +256,7 @@ SFRPG.weaponTypes = {
 // Weapons sub categories
 SFRPG.weaponCategories = {
     "cryo": "SFRPG.WeaponCategoriesCryo",
+    "disruption" : "SFRPG.WeaponCategoriesDisruption",
     "flame": "SFRPG.WeaponCategoriesFlame",
     "laser": "SFRPG.WeaponCategoriesLaser",
     "plasma": "SFRPG.WeaponCategoriesPlasma",
@@ -304,6 +306,7 @@ SFRPG.weaponProperties = {
     "guided": "SFRPG.WeaponPropertiesGuided",
     "harrying": "SFRPG.WeaponPropertiesHarrying",
     "holyWater": "SFRPG.WeaponPropertiesHolyWater",
+    "hybrid": "SFRPG.WeaponPropertiesHybrid",
     "ignite": "SFRPG.WeaponPropertiesIgnite",
     "indirect": "SFRPG.WeaponPropertiesIndirect",
     "injection": "SFRPG.WeaponPropertiesInjection",
@@ -328,6 +331,7 @@ SFRPG.weaponProperties = {
     "radioactive": "SFRPG.WeaponPropertiesRadioactive",
     "reach": "SFRPG.WeaponPropertiesReach",
     "recall": "SFRPG.WeaponPropertiesRecall",
+    "regrowth": "SFRPG.WeaponPropertiesRegrowth",
     "relic": "SFRPG.WeaponPropertiesRelic",
     "reposition": "SFRPG.WeaponPropertiesReposition",
     "shape": "SFRPG.WeaponPropertiesShape",
@@ -344,6 +348,7 @@ SFRPG.weaponProperties = {
     "throttle": "SFRPG.WeaponPropertiesThrottle",
     "thrown": "SFRPG.WeaponPropertiesThrown",
     "trip": "SFRPG.WeaponPropertiesTrip",
+    "unbalancing": "SFRPG.WeaponPropertiesUnbalancing",
     "underwater": "SFRPG.WeaponPropertiesUnderwater",
     "unwieldy": "SFRPG.WeaponPropertiesUnwieldy",
     "variantBoost": "SFRPG.WeaponPropertiesVariantBoost",
@@ -407,6 +412,16 @@ SFRPG.weaponCriticalHitEffects = {
     "staggered": "Staggered",
     "stunned": "Stunned",
     "wound": "Wound"
+};
+
+// Allowed armor types for upgrades
+SFRPG.allowedArmorTypes = {
+    "light": "Light Armor",
+    "heavy": "Heavy Armor",
+    "power": "Power Armor",
+    "lightAndHeavy": "Light and Heavy Armor",
+    "heavyAndPower": "Heavy and Power Armor",
+    "shield": "Shields"
 };
 
 // Equipment types
@@ -614,10 +629,17 @@ SFRPG.consumableTypes = {
 };
 
 SFRPG.augmentationSytems = {
+    "none": "SFRPG.None",
     "arm": "SFRPG.AugArm",
+    "armAndHand" : "SFRPG.AugArmAndHand",
     "allArms": "SFRPG.AugAllArms",
     "brain": "SFRPG.AugBrain",
+    "brainHeartLungs": "SFRPG.AugBrainHeartLungs",
+    "brainAndEyes": "SFRPG.AugBrainAndEyes",
     "ears": "SFRPG.AugEars",
+    "earsAndThroat": "SFRPG.AugEarsAndThroat",
+    "endocrine": "SFRPG.AugEndocrine",
+    "eye": "SFRPG.AugEye",
     "eyes": "SFRPG.AugEyes",
     "foot": "SFRPG.AugFoot",
     "allFeet": "SFRPG.AugAllFeet",
@@ -625,10 +647,14 @@ SFRPG.augmentationSytems = {
     "allHands": "SFRPG.AugAllHands",
     "heart": "SFRPG.AugHeart",
     "leg": "SFRPG.AugLeg",
+    "legAndFoot": "SFRPG.AugLegAndFoot",
     "allLegs": "SFRPG.AugAllLegs",
+    "allLegsAndFeet": "SFRPG.AugAllLegsAndFeet",
     "lungs": "SFRPG.AugLungs",
+    "lungsAndThroat": "SFRPG.AugLungsAndThroat",
     "spinal": "SFRPG.AugSpinalColumn",
     "skin": "SFRPG.AugSkin",
+    "skinAndThroat": "SFRPG.AugSkinAndThroat",
     "throat": "SFRPG.AugThroat"
 };
 
@@ -1534,6 +1560,7 @@ SFRPG.droneModsPerLevel = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9,
 SFRPG.droneAbilityScoreIncreaseLevels = [4, 7, 10, 13, 16, 19];
 
 SFRPG.capacityUsagePer = {
+    "action": "SFRPG.Capacity.UsagePer.Action",
     "shot": "SFRPG.Capacity.UsagePer.Shot",
     "round": "SFRPG.Capacity.UsagePer.Round",
     "minute": "SFRPG.Capacity.UsagePer.Minute",
