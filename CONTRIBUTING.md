@@ -33,11 +33,23 @@ The easiest workflow is to work through Foundry, and follow the following steps:
 2. Fill out the details, modifiers, etc.
 3. Right-clicking the item in the Items sidebar tab and select Export Data.
 4. Save the JSON file into the appropriate compendium subfolder.
+    * Make sure the name of the JSON follows these simple rules
+        1. All words of the item are present
+        2. All letters must be lower-case
+        3. All commas `,` are removed
+        4. All spaces ` ` are replaced with an underscore `_`
+        
+    Example: `Big Guy's rifle, Mk 1 Version IV (Hybrid)` should be named `big_guy's_rifle_mk_1_vesion_iv_(hybrid).json`
 5. Open the exported JSON file in a text editor of your choice, and do some clean-up.
     1. Remove the ID field.
     2. Remove the permission field, if it is there.
     3. Remove the sort field, if it is there.
     4. Remove the exportSource section from the flags field, if it is there.
+    
+    Listed below is a list of regexp to help you edit .json files quickly:
+    * `"_id":.*`
+    * `"sort":.*`
+    * `"exportSource": \{.*\s.*\s.*\s.*\s.*\s.*\}$`
 6. Save and close the JSON file.
 7. Update the compendium pack files, by running the following command: `npm run cook`
 8. Restart Foundry.
