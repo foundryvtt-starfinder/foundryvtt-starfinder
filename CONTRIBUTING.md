@@ -30,16 +30,9 @@ Inside the `src/items` folder, you will find a subfolder for each compendium we 
 
 The easiest workflow is to work through Foundry, and follow the following steps:
 1. Create a new item in the Items sidebar tab.
-2. Fill out the details, modifiers, etc.
+2. Fill out the details, modifiers, etc. Make sure the name closely matches the original name from the SRD.
 3. Right-clicking the item in the Items sidebar tab and select Export Data.
 4. Save the JSON file into the appropriate compendium subfolder.
-    * Make sure the name of the JSON follows these simple rules
-        1. All words of the item are present
-        2. All letters must be lower-case
-        3. All commas `,` are removed
-        4. All spaces ` ` are replaced with an underscore `_`
-        
-    Example: `Big Guy's rifle, Mk 1 Version IV (Hybrid)` should be named `big_guy's_rifle_mk_1_vesion_iv_(hybrid).json`
 5. Open the exported JSON file in a text editor of your choice, and do some clean-up.
     1. Remove the ID field.
     2. Remove the permission field, if it is there.
