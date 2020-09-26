@@ -345,7 +345,14 @@ export class ActorSheetSFRPG extends ActorSheet {
             data: duplicate(header.dataset)
         };
         delete itemData.data['type'];
+
+        this.onBeforeCreateNewItem(itemData);
+
         return this.actor.createOwnedItem(itemData);
+    }
+
+    onBeforeCreateNewItem(itemData) {
+
     }
 
     /**

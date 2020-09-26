@@ -1542,6 +1542,7 @@ SFRPG.capacityUsagePer = {
 };
 
 SFRPG.itemTypes = {
+    "asi": "SFRPG.Items.Categories.AbilityScoreIncrease",
     "archetype": "SFRPG.Items.Categories.Archetypes",
     "augmentation": "SFRPG.Items.Categories.Augmentations",
     "chassis": "SFRPG.Items.Categories.DroneChassis",
