@@ -702,6 +702,7 @@
     },
     "Item": {
         "types": [
+            "asi",
             "weapon",
             "equipment",
             "consumable",
@@ -831,6 +832,9 @@
                 "modifiers": []
             }
         },
+        "asi": {
+            "abilities": {}
+        },
         "weapon": {
             "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
             "weaponType": "basicM",
@@ -854,7 +858,7 @@
             }
         },
         "equipment": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers", "container"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
             "armor": {
                 "type": "light",
                 "eac": 0,
@@ -1028,7 +1032,7 @@
             "hands": 0
         },
         "fusion": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": ["itemDescription", "physicalItem", "modifiers"],
             "level": 1
         },
         "upgrade": {
