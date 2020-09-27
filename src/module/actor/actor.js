@@ -131,7 +131,7 @@ export class ActorSFRPG extends Actor {
      * @returns {Promise}
      */
     async createEmbeddedEntity(embeddedName, itemData, options) {
-        if (!this.isPC) {
+        if (!this.hasPlayerOwner) {
             let t = itemData.type;
             let initial = {};           
             if (t === "weapon") initial['data.proficient'] = true;
@@ -366,7 +366,7 @@ export class ActorSFRPG extends Actor {
             skillId = `pro${++counter}`;
         }
 
-        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.isPC, this.owner),
+        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.hasPlayerOwner, this.owner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
@@ -400,7 +400,7 @@ export class ActorSFRPG extends Actor {
     rollSkill(skillId, options = {}) {
         const skl = this.data.data.skills[skillId];
 
-        if (!this.isPC) {
+        if (!this.hasPlayerOwner) {
             this.rollSkillCheck(skillId, skl, options);
             return;
         }
