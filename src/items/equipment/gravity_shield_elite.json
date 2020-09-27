@@ -1,6 +1,6 @@
 {
   "name": "Gravity Shield, Elite",
-  "type": "equipment",
+  "type": "shield",
   "data": {
     "description": {
       "value": "<p>As they were invented by the copaxi of Tabrid Minor (page 106), most gravity shields appear to be crafted of large pieces of coral. A gravity shield is a hybrid item that can mimic the gravity-manipulating powers of copi. You can use a gravity shield to make a special unarmed attack that does not count as archaic and can deal your choice of either bludgeoning or piercing damage.<br />In addition, three times per day as a standard action, you can increase the relative gravity of the shield and attempt a disarm combat maneuver against an adjacent opponent. If you are successful, the disarmed item sticks to your shield for 1 round before it falls to the ground, during which time you can use a swift action to retrieve the item with a free hand. The basic and field gravity shields grant a +1 circumstance bonus to the disarm attack roll and the advanced and elite gravity shields grant a +2 circumstance bonus to the disarm attack roll.</p>",
@@ -65,7 +65,7 @@
       "per": null
     },
     "ability": null,
-    "actionType": "",
+    "actionType": "mwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -99,39 +99,35 @@
           "subtype": "armorUpgrade",
           "amount": 2,
           "acceptsType": [
-            "upgrade",
-            "weapon"
+            "upgrade"
           ],
           "affectsEncumbrance": true,
           "weightProperty": "slots"
         },
         {
           "type": "slot",
-          "subtype": "weaponSlot",
+          "subtype": "fusion",
           "amount": 0,
           "acceptsType": [
-            "weapon"
+            "fusion"
           ],
           "affectsEncumbrance": true,
-          "weightProperty": ""
+          "weightProperty": "level"
         }
       ]
     },
-    "armor": {
-      "type": "shield",
-      "eac": 1,
-      "kac": 3,
-      "dex": 5,
-      "acp": -1,
-      "speedAdjust": 0
+    "dex": 5,
+    "acp": -1,
+    "bonus": {
+      "wielded": 1,
+      "aligned": 3
     },
-    "strength": 0,
-    "speed": "",
-    "size": "",
-    "reach": "",
-    "proficient": true,
+    "proficient": false,
     "abilityMods": {
       "parts": []
+    },
+    "properties": {
+      "nonlethal": true
     }
   },
   "flags": {},
