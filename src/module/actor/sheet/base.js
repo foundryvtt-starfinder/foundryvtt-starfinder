@@ -769,19 +769,13 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (!(addedItem.type in SFRPG.containableTypes)) {
                 targetContainer = null;
             }
-    
-            if (targetContainer) {
-                let newContents = [];
-                if (targetContainer.data.data.container?.contents) {
-                    newContents = duplicate(targetContainer.data.data.container?.contents || []);
-                }
-                let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
-                newContents.push({id: addedItem._id, index: preferredStorageIndex});
-                let update = { _id: targetContainer._id, "data.container.contents": newContents };
-                await targetActor.updateOwnedItem(update);
+            
+            const itemInTargetActor = await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
+            if (itemInTargetActor === itemToMove) {
+                return await this._onSortItem(event, itemInTargetActor.data);
             }
 
-            return addedItem;
+            return itemInTargetActor;
         } else if (parsedDragData.data) {
             let sourceActor = new ActorItemHelper(parsedDragData.actorId, parsedDragData.tokenId, null);
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {
