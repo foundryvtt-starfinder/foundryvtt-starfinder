@@ -244,6 +244,7 @@ function openLootCollectionSheet(event) {
         relevantToken.apps = {};
     }
     
+    relevantToken.hasPerm = () => true;
     const lootCollectionSheet = new ItemCollectionSheet(relevantToken);
     lootCollectionSheet.render(true);
 }
