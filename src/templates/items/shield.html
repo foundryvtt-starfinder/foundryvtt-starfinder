@@ -37,6 +37,18 @@
                 </label>
             </div>
 
+            {{!-- Weapon Properties --}}
+            <div class="form-group stacked weapon-properties">
+                <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
+                {{#each config.weaponProperties as |name prop|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../data.properties prop)}}/> {{ name }}
+                </label>
+                {{/each}}
+            </div>
+
+            <br />
+
             {{!-- Shield Bonus --}}
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Shield.Bonus" }}</label>
