@@ -2,17 +2,18 @@ import { ItemBrowserSFRPG } from './item-browser.js';
 import { SFRPG } from "../config.js"
 
 const equipmentTypes = {
-    "augmentation": "SFRPG.Items.Categories.Augmentations",
-    "consumable": "SFRPG.Items.Categories.Consumables",
-    "container": "SFRPG.Items.Categories.Containers",
-    "equipment": "SFRPG.Items.Categories.Equipment",
-    "fusion": "SFRPG.Items.Categories.WeaponFusions",
-    "goods": "SFRPG.Items.Categories.Goods",
-    "hybrid": "SFRPG.Items.Categories.HybridItems",
-    "magic": "SFRPG.Items.Categories.MagicItems",
+    "augmentation" : "SFRPG.Items.Categories.Augmentations",
+    "consumable"   : "SFRPG.Items.Categories.Consumables",
+    "container"    : "SFRPG.Items.Categories.Containers",
+    "equipment"    : "SFRPG.Items.Categories.Equipment",
+    "fusion"       : "SFRPG.Items.Categories.WeaponFusions",
+    "goods"        : "SFRPG.Items.Categories.Goods",
+    "hybrid"       : "SFRPG.Items.Categories.HybridItems",
+    "magic"        : "SFRPG.Items.Categories.MagicItems",
+    "shield"       : "SFRPG.Items.Categories.Shields",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
-    "upgrade": "SFRPG.Items.Categories.ArmorUpgrades",
-    "weapon": "SFRPG.Items.Categories.Weapons"
+    "upgrade"      : "SFRPG.Items.Categories.ArmorUpgrades",
+    "weapon"       : "SFRPG.Items.Categories.Weapons"
 };
 
 class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
