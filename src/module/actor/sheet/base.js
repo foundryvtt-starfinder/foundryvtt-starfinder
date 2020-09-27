@@ -299,7 +299,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const header = event.currentTarget;
         let type = header.dataset.type;
         if (!type || type.includes(",")) {
-            let types = SFRPG.itemTypes;
+            let types = duplicate(SFRPG.itemTypes);
             if (type) {
                 let supportedTypes = type.split(',');
                 for (let key of Object.keys(types)) {
@@ -330,6 +330,9 @@ export class ActorSheetSFRPG extends ActorSheet {
                             if (!createData.name) {
                                 createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
                             }
+
+                            this.onBeforeCreateNewItem(createData);
+
                             this.actor.createOwnedItem(createData);
                         }
                     }
