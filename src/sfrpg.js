@@ -33,6 +33,7 @@ import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
 import { RPC } from "./module/rpc.js"
 
 import { } from "./module/packs/browsers.js"
+import { } from "./module/combat/combat.js"
 
 let defaultDropHandler = null;
 
