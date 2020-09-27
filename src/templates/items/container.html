@@ -18,19 +18,19 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h4 class="section-header first">{{ localize "SFRPG.ActorSheet.Inventory.Equipment.DetailsHeader" }}</h4>
+            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.Header.DetailsHeader" }}</h4>
 
             {{!-- Equipment Status --}}
             <div class="form-group stacked">
-                <label>Equipment Status</label>
+                <label>{{ localize "SFRPG.Items.EquipmentStatus" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> Equipped
+                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> Identified
+                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SFRPG.Items.Identified" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> Attuned
+                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> {{ localize "SFRPG.Items.Attuned" }}
                 </label>
             </div>
 
