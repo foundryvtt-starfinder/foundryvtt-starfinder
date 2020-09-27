@@ -175,7 +175,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item-delete').click(ev => this._onItemDelete(ev));
 
         // Item Dragging
-        let handler = ev => this._onDragItemStart(ev);
+        let handler = ev => this._onDragStart(ev);
         html.find('li.item').each((i, li) => {
             li.setAttribute("draggable", true);
             li.addEventListener("dragstart", handler, false);
