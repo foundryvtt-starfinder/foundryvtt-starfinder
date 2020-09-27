@@ -58,7 +58,7 @@ export class DiceSFRPG {
             };
 
             // Flag critical thresholds
-            let d20 = roll.parts[0];
+            let d20 = roll.terms[0];
             d20.options.critical = critical;
             d20.options.fumble = fumble;
 
