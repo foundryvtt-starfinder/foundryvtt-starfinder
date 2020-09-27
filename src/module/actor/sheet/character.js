@@ -245,7 +245,9 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         super.onBeforeCreateNewItem(itemData);
 
         if (itemData["type"] === "asi") {
-            itemData.name = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: (this.actor?.data?.data?.details?.level?.value || "n/a")});
+            const numASI = this.actor.items.filter(x => x.type === "asi").length;
+            const level = 5 + numASI * 5;
+            itemData.name = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: level});
         }
     }
 
