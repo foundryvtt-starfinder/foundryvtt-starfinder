@@ -18,6 +18,7 @@ import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
 import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
 import { ItemSFRPG } from "./module/item/item.js";
+import { CombatSFRPG } from "./module/combat/combat.js";
 import { ItemSheetSFRPG } from "./module/item/sheet.js";
 import { highlightCriticalSuccessFailure } from "./module/dice.js";
 import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/combat.js";
@@ -66,6 +67,7 @@ Hooks.once('init', async function () {
     CONFIG.SFRPG = SFRPG;
     CONFIG.Actor.entityClass = ActorSFRPG;
     CONFIG.Item.entityClass = ItemSFRPG;
+    CONFIG.Combat.entityClass = CombatSFRPG;
 
     CONFIG.statusEffects = CONFIG.SFRPG.statusEffectIcons;
 
