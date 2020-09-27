@@ -219,6 +219,7 @@ export class DiceSFRPG {
                             callback: () => {
                                 crit = true;
                                 this._updateModifiersForCrit(data, parts.join('+'), 2);
+                                parts = this._updateScalarModifiersForCrit(parts.join('+'), 2);
                             }
                         },
                         normal: {
@@ -254,6 +255,17 @@ export class DiceSFRPG {
             value *= multiplier;
             setProperty(data, match, value);
         }
+    }
+
+    static _updateScalarModifiersForCrit(formula, multiplier) {
+        const parts = formula.split('+');
+        for (let i = 0; i < parts.length; i++) {
+            if (Number.isNumeric(parts[i])) {
+                parts[i] *= multiplier;
+            }
+        }
+
+        return parts.map(x => x.toString());
     }
 }
 

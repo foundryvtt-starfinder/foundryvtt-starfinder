@@ -111,11 +111,9 @@ export class ItemSheetSFRPG extends ItemSheet {
             data.placeholders.dexterityModifier = dexterityModifier;
             data.placeholders.sizeModifier = sizeModifier;
 
-            if (itemData.save) {
-                data.placeholders.saveDC = {};
-                data.placeholders.saveDC.formula = itemData.save?.dc || `10 + @itemLevel + @abilities.dex.mod`;
-                data.placeholders.saveDC.value = this._computeSaveDCValue(Math.floor(itemLevel / 2), data.placeholders.saveDC.formula);
-            }
+            data.placeholders.savingThrow = {};
+            data.placeholders.savingThrow.formula = `@itemLevel + @abilities.dex.mod`;
+            data.placeholders.savingThrow.value = this._computeSavingThrowValue(Math.floor(itemLevel / 2), data.placeholders.savingThrow.formula);
         } else {
             let itemLevel = this.parseNumber(itemData.level, 1);
             let sizeModifier = 0;
@@ -127,11 +125,9 @@ export class ItemSheetSFRPG extends ItemSheet {
             data.placeholders.dexterityModifier = dexterityModifier;
             data.placeholders.sizeModifier = sizeModifier;
 
-            if (itemData.save) {
-                data.placeholders.saveDC = {};
-                data.placeholders.saveDC.formula = itemData.save?.dc || `10 + @itemLevel + @abilities.dex.mod`;
-                data.placeholders.saveDC.value = this._computeSaveDCValue(Math.floor(itemLevel / 2), data.placeholders.saveDC.formula);
-            }
+            data.placeholders.savingThrow = {};
+            data.placeholders.savingThrow.formula = `@itemLevel + @abilities.dex.mod`;
+            data.placeholders.savingThrow.value = this._computeSavingThrowValue(Math.floor(itemLevel / 2), data.placeholders.savingThrow.formula);
         }
 
         data.selectedSize = (itemData.attributes && itemData.attributes.size) ? itemData.attributes.size : "medium";
@@ -163,7 +159,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     /* -------------------------------------------- */
 
-    _computeSaveDCValue(itemLevel, formula) {
+    _computeSavingThrowValue(itemLevel, formula) {
         try {
             let rollData = {
                 item: this.item.data.data,

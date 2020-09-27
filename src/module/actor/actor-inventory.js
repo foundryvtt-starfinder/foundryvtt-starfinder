@@ -337,6 +337,10 @@ function canMerge(itemA, itemB) {
 
 export function getFirstAcceptableStorageIndex(container, itemToAdd) {
     let index = -1;
+    if (!(container.type in SFRPG.containableTypes)) {
+        return null;
+    }
+
     for (let storageOption of container.data.data.container.storage) {
         index += 1;
         if (storageOption.amount == 0) {

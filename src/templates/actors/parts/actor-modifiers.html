@@ -18,7 +18,29 @@
             </label>
             {{/each}}
         </div>
-        {{/if}}
+
+        <ol class="inventory-list">
+            <li class="inventory-header flexrow">
+                <h3 class="item-name flexrow">Conditions</h3>
+        
+                {{#if ../owner}}
+                <div class="item-controls">
+                    {{#if section.allowAdd}}
+                    <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                    </a>
+                    {{/if}}
+                </div>
+                {{/if}}
+            </li>
+        
+            <ol class="item-list">
+            {{#each section.items as |item iid|}}
+                {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../../this bigItem=true item=item onlyControls=true}}
+            {{/each}}
+            </ol>
+        </ol>
+        {{else}}
         <ol class="inventory-list">
             <li class="item flexrow inventory-header modifiers-header">
                 <div class="item-name modifier-name flexrow">
@@ -100,6 +122,13 @@
                 {{/each}}
             </ol>
         </ol>
+        {{/if}}
     </div>
     {{/each}}
 </section>
+
+{{#if isNPC}}
+<div class="warningFooter">
+    <label>{{localize "SFRPG.NPCSheet.Interface.Conditions.Warning"}}</label>
+</div>
+{{/if}}

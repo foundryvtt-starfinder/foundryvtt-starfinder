@@ -65,19 +65,26 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             activeItems: { label: "Active Items", items: [], dataset: { }, allowAdd: false }
         };
 
-        let [spells, other] = data.items.reduce((arr, item) => {
+        let [spells, other, conditionItems] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
-            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType);
-            const unusable = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
-            item.isCharged = !unusable;
+            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (item.type !== "weapon" || item.data.equipped);
+            item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (item.type !== "weapon" || item.data.equipped);
+            item.hasUses = item.data.uses && (item.data.uses.max > 0);
+            item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
             if (item.type === "spell") arr[0].push(item);
+            if (item.type === "feat") {
+                if ((item.data.requirements?.toLowerCase() || "") === "condition") {
+                    arr[2].push(item);
+                } else {
+                    arr[1].push(item);
+                }
+            }
             else arr[1].push(item);
             return arr;
-        }, [[], []]);
+        }, [[], [], []]);
 
         // Apply item filters
         spells = this._filterItems(spells, this._filters.spellbook);
@@ -122,10 +129,16 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             inventory.inventory.items.push(itemData);
         });
 
+        const modifiers = {
+            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true }
+        };
+        modifiers.conditions.items = conditionItems;
+
         // Assign and return
         data.inventory = inventory;
         data.features = Object.values(features);
         data.spellbook = spellbook;
+        data.modifiers = Object.values(modifiers);
     }
 
     /**

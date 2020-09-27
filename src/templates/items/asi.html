@@ -1,0 +1,49 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source" />
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <h4 class="section-header first">{{localize "SFRPG.ItemSheet.AbilityScoreIncrease.Header"}}</h4>
+
+            <div class="form-group stacked weapon-properties">
+                <label>{{localize "SFRPG.ItemSheet.AbilityScoreIncrease.Label"}}</label>
+                {{#each config.abilities as |ability name|}}
+                <label class="checkbox" data-tippy-content="{{lookup (lookup ../config.abilities name) "tooltip"}}">
+                    <input type="checkbox" name="data.abilities.{{name}}" {{checked (lookup ../data.abilities name)}} /> {{ability}}
+                </label>
+                {{/each}}
+            </div>
+            <label>{{localize "SFRPG.ItemSheet.AbilityScoreIncrease.Instruction"}}</label>
+
+    </section>
+</form>

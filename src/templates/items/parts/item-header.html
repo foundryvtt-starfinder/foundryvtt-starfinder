@@ -54,14 +54,12 @@
                 </div>
             </li>
 
-            {{#if data.save.type}}
-            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SaveTooltip" formula=placeholders.saveDC.formula saveDescriptor=data.save.descriptor}}">
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SaveTooltip" formula=placeholders.savingThrow.formula}}">
                 <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Save" }}</h4>
                 <div class="attribute-value">
-                    <label>{{placeholders.saveDC.value}}</label>
+                    <label>{{placeholders.savingThrow.value}}</label>
                 </div>
             </li>
-            {{/if}}
             {{else}}
             &nbsp;
             {{/if}}

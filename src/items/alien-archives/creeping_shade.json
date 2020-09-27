@@ -1,0 +1,974 @@
+{
+  "name": "Creeping Shade",
+  "type": "npc",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 0,
+        "base": 10
+      },
+      "dex": {
+        "value": 22,
+        "min": 3,
+        "misc": 0,
+        "mod": 6,
+        "base": 10
+      },
+      "con": {
+        "value": 16,
+        "min": 3,
+        "misc": 0,
+        "mod": 3,
+        "base": 10
+      },
+      "int": {
+        "value": 4,
+        "min": 3,
+        "misc": 0,
+        "mod": -3,
+        "base": 10
+      },
+      "wis": {
+        "value": 14,
+        "min": 3,
+        "misc": 0,
+        "mod": 2,
+        "base": 10
+      },
+      "cha": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 0,
+        "base": 10
+      }
+    },
+    "attributes": {
+      "eac": {
+        "min": 0,
+        "value": 20,
+        "tooltip": []
+      },
+      "kac": {
+        "min": 0,
+        "value": 21,
+        "tooltip": []
+      },
+      "cmd": {
+        "min": 0,
+        "value": 10,
+        "tooltip": []
+      },
+      "hp": {
+        "min": 0,
+        "max": 112,
+        "value": 112,
+        "temp": 0,
+        "tempmax": 10,
+        "tooltip": []
+      },
+      "sp": {
+        "min": 0,
+        "max": 0,
+        "value": 0,
+        "tooltip": []
+      },
+      "rp": {
+        "min": 0,
+        "max": 0,
+        "value": 0,
+        "tooltip": []
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "total": 6,
+        "tooltip": []
+      },
+      "fort": {
+        "value": 0,
+        "bonus": 9,
+        "misc": 0,
+        "tooltip": []
+      },
+      "reflex": {
+        "value": 0,
+        "bonus": 7,
+        "misc": 0,
+        "tooltip": []
+      },
+      "will": {
+        "value": 0,
+        "bonus": 11,
+        "misc": 0,
+        "tooltip": []
+      },
+      "bab": 0,
+      "arms": "2",
+      "space": "0",
+      "reach": "0",
+      "speed": {
+        "value": "15 ft.",
+        "special": " climb 15 ft."
+      },
+      "keyability": "",
+      "spellcasting": ""
+    },
+    "details": {
+      "alignment": "NE",
+      "race": "",
+      "class": "",
+      "biography": {
+        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>Creeping shades are incorporeal, plantlike creatures originating on the Shadow Plane. A creeping shade lies in wait to strike at passing prey with its incorporeal touch, attempting to inhabit the creature and infect it with gloom spores. The victim usually falls comatose a few minutes later, after which it is killed by nearby predators, leaving the corpse behind to fertilize nearby plant life, including the creeping shade.</p>\n<p>&nbsp;</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Shadow Plane)</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary or garden (2-7)</p>\n<p>&nbsp;</p>\n",
+        "public": ""
+      },
+      "type": "Outsider",
+      "environment": "",
+      "cr": 8,
+      "xp": {
+        "value": 4800
+      },
+      "source": "Starfinder #11: The Penumbra Protocol pg. 55",
+      "subtype": "Incorporeal",
+      "raceAndGrafts": "",
+      "aura": ""
+    },
+    "skills": {
+      "acr": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "ath": {
+        "ability": "str",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 16,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "blu": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "com": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "cul": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "dip": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "dis": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "eng": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "int": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "lsc": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "med": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "mys": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "per": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 16,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "phs": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "pil": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "pro": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 3,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false,
+        "subname": ""
+      },
+      "sen": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "sle": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": true
+      },
+      "ste": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 21,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "sur": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 16,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      }
+    },
+    "traits": {
+      "size": "medium",
+      "senses": "darkvision 60 ft.",
+      "languages": {
+        "value": [],
+        "custom": ""
+      },
+      "di": {
+        "value": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "damageReduction": {
+        "value": 0,
+        "negatedBy": ""
+      },
+      "sr": 0
+    },
+    "currency": {
+      "credit": 0,
+      "upb": 0
+    },
+    "spells": {
+      "spell0": {
+        "value": 0,
+        "max": 0
+      },
+      "spell1": {
+        "value": 0,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "modifiers": [],
+    "conditions": {},
+    "counterClasses": {
+      "values": {}
+    }
+  },
+  "flags": {},
+  "token": {
+    "flags": {},
+    "name": "Creeping Shade",
+    "displayName": 0,
+    "img": "icons/svg/mystery-man.svg",
+    "tint": null,
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 360,
+    "lightAngle": 360,
+    "lightAlpha": 1,
+    "actorId": "c7bUj3XyAB28cckB",
+    "actorLink": false,
+    "actorData": {},
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {},
+    "bar2": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "flags": {},
+      "name": "Incorporeal",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Incorporeal Touch",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "value": "",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "quantity": 1,
+        "bulk": "L",
+        "price": 0,
+        "level": 1,
+        "attuned": false,
+        "equipped": false,
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": 18,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [
+            [
+              "",
+              "cold"
+            ]
+          ],
+          "effect": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d12+8",
+              "cold"
+            ]
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "capacity": {
+          "value": null,
+          "max": null
+        },
+        "usage": {
+          "value": null,
+          "per": ""
+        },
+        "modifiers": [],
+        "weaponType": "basicM",
+        "special": "",
+        "properties": {
+          "one": false,
+          "two": false,
+          "amm": false,
+          "aeon": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "proficient": true,
+        "fusions": [],
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "labels": {
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "",
+        "damage": "1d12+8"
+      },
+      "isStack": false,
+      "hasUses": false,
+      "hasCapacity": false,
+      "hasAttack": true,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Gloom Spores (Su)",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "A creature affected by a creeping shade’s inhabit ability risks being poisoned by gloom spores when the creeping shade leaves its body. For every round past the first that a creeping shade has inhabited a creature’s body, the creature takes a cumulative -1 penalty to the saving throw to resist the poison.",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Inhabit (Su)",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "When a creeping shade scores a critical hit on a living creature, it enters that creature’s space (this doesn’t provoke an attack of opportunity) and merges with the creature’s body for 1d6+1 rounds. The creeping shade doesn’t control the creature it inhabits, but does make the creature feel an overwhelming sense of melancholy. An inhabited creature can’t benefit from morale bonuses. Every round after the first, an inhabited creature can attempt a DC 18 Fortitude save to eject the creeping shade from its body. In addition, a creeping shade can inhabit an adjacent, unconscious living creature as a full action if that creature fails a DC 18 Fortitude save. When a creeping shade leaves an inhabited creature’s body (either if it is ejected or if the duration of the ability ends), it appears in an adjacent square of its choosing and regains 5d8 Hit Points, and the affected creature is subjected to gloom spores. Gloom Spores Type poison (contact); Save Fortitude DC 18 Track Wisdom (special); Frequency 1/minute for 6 minutes Effect progression track is Healthy-Weakened-Impaired-Confused-Comatose-Comatose. The second comatose functions as an end state. Cure 1 save",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Spring Attack (Combat)",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/feats/spring_attack.png",
+      "data": {
+        "description": {
+          "value": "<p>You can deftly move up to a foe, strike, and withdraw before it can react.<br><strong>Prerequisites</strong>: Dex 15, Mobility, base attack bonus +4.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: As a full action, you can move up to your speed and make a single melee attack or combat maneuver without provoking any attacks of opportunity from the target of your attack. You can move both before and after the attack, but you must move at least 10 feet before the attack, and the total distance that you move cannot be greater than your speed. You cannot use this ability to attack a foe that is adjacent to you at the start of your turn. If you have the trick attack class feature, you can take your movement from trick attack at any time during a trick attack with a melee weapon (instead of only before), without provoking any attacks of opportunity from the target of your attack.<br></span></p>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Normal</strong>: You can move only before or after an attack, not both.</span></p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "Core Rulebook",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    }
+  ],
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "B9TU0yfWWlbKcg95"
+}
