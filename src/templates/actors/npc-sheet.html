@@ -45,8 +45,10 @@
     {{!-- NPC Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="attributes">{{ localize "SFRPG.Attributes" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "SFRPG.Inventory" }}</a>
         <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
         <a class="item" data-tab="spellbook">{{ localize "SFRPG.SpellBook.Spellbook" }}</a>
+        <a class="item" data-tab="modifiers">{{localize "SFRPG.NPCSheet.Interface.Navigation.Conditions"}}</a>
         <a class="item" data-tab="biography">{{ localize "SFRPG.Biography" }}</a>
     </nav>
 
@@ -81,6 +83,11 @@
                 <li class="flexrow">
                     <div class="form-group">
                         <button id="add-skills"><i class="fas fa-plus"></i> {{localize "SFRPG.ToggleSkillsButtonLabel"}}</button>
+                    </div>
+                </li>
+                <li class="flexrow">
+                    <div class="form-group">
+                        <button id="add-profession"><i class="fas fa-plus"></i> {{localize "SFRPG.AddProfessionButtonText"}}</button>
                     </div>
                 </li>
             </ul>
@@ -192,6 +199,11 @@
             </section>
         </div>
 
+        {{!-- Inventory Tab --}}
+        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+            {{> "systems/sfrpg/templates/actors/parts/actor-inventory.html" sections=inventory}}
+        </div>
+
         {{!-- Features Tab --}}
         <div class="tab features flexcol" data-group="primary" data-tab="features">
             {{> "systems/sfrpg/templates/actors/parts/actor-features.html" sections=features}}
@@ -200,6 +212,11 @@
         {{!-- Spellbook Tab --}}
         <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
             {{> "systems/sfrpg/templates/actors/parts/actor-spellbook.html"}}
+        </div>
+
+        {{!-- Conditions Tab --}}
+        <div class="tab modifers flexcol" data-group="primary" data-tab="modifiers">
+            {{> "systems/sfrpg/templates/actors/parts/actor-modifiers.html" sections=modifiers}}
         </div>
 
         {{!-- Biography Tab --}}

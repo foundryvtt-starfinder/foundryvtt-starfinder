@@ -1,0 +1,980 @@
+{
+  "name": "Statikete",
+  "type": "npc",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 20,
+        "min": 3,
+        "misc": 0,
+        "mod": 5,
+        "base": 10
+      },
+      "dex": {
+        "value": 28,
+        "min": 3,
+        "misc": 0,
+        "mod": 9,
+        "base": 10
+      },
+      "con": {
+        "value": 24,
+        "min": 3,
+        "misc": 0,
+        "mod": 7,
+        "base": 10
+      },
+      "int": {
+        "value": 4,
+        "min": 3,
+        "misc": 0,
+        "mod": -3,
+        "base": 10
+      },
+      "wis": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 0,
+        "base": 10
+      },
+      "cha": {
+        "value": 6,
+        "min": 3,
+        "misc": 0,
+        "mod": -2,
+        "base": 10
+      }
+    },
+    "attributes": {
+      "eac": {
+        "min": 0,
+        "value": 29,
+        "tooltip": []
+      },
+      "kac": {
+        "min": 0,
+        "value": 31,
+        "tooltip": []
+      },
+      "cmd": {
+        "min": 0,
+        "value": 10,
+        "tooltip": []
+      },
+      "hp": {
+        "min": 0,
+        "max": 275,
+        "value": 275,
+        "temp": 0,
+        "tempmax": 10,
+        "tooltip": []
+      },
+      "sp": {
+        "min": 0,
+        "max": 0,
+        "value": 0,
+        "tooltip": []
+      },
+      "rp": {
+        "min": 0,
+        "max": 6,
+        "value": 6,
+        "tooltip": []
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "total": 9,
+        "tooltip": []
+      },
+      "fort": {
+        "value": 0,
+        "bonus": 17,
+        "misc": 0,
+        "tooltip": []
+      },
+      "reflex": {
+        "value": 0,
+        "bonus": 19,
+        "misc": 0,
+        "tooltip": []
+      },
+      "will": {
+        "value": 0,
+        "bonus": 15,
+        "misc": 0,
+        "tooltip": []
+      },
+      "bab": 0,
+      "arms": "2",
+      "space": "20 ft.",
+      "reach": "15 ft.",
+      "speed": {
+        "value": "40 ft.",
+        "special": " fly 120 ft. (Su"
+      },
+      "keyability": "",
+      "spellcasting": ""
+    },
+    "details": {
+      "alignment": "N",
+      "race": "",
+      "class": "",
+      "biography": {
+        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Lurking in the shadows of space, especially among debris such as the asteroids of the Diaspora, statiketes are lamprey-like creatures that drain electricity and use it to fire powerful shock blasts at foes. They can attach to passing starships, and they pose a grave danger to crews.<br><br>A typical statikete is about 20 feet long. Its body, which has heavy crystalline and metallic elements, weighs about 15 tons.<br><br>Although a statikete doesn’t function as a starship, its body and skeleton can be fitted to serve as a starship frame.</span></p>\n<p>&nbsp;</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n<p>&nbsp;</p>\n</section>",
+        "public": ""
+      },
+      "type": "Magical Beast",
+      "environment": "",
+      "cr": 15,
+      "xp": {
+        "value": 51200
+      },
+      "source": "A!01 pg. 57",
+      "raceAndGrafts": "",
+      "aura": ""
+    },
+    "skills": {
+      "acr": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 31,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "ath": {
+        "ability": "str",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 26,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "blu": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "com": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "cul": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "dip": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "dis": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "eng": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "int": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "lsc": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "med": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "mys": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "per": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 26,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "phs": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "pil": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "pro": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 3,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false,
+        "subname": ""
+      },
+      "sen": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "sle": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": true
+      },
+      "ste": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "sur": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      }
+    },
+    "traits": {
+      "size": "gargantuan",
+      "senses": "blindsense (electromagnetism) 60 ft., darkvision 60 ft., low-light vision",
+      "languages": {
+        "value": [],
+        "custom": ""
+      },
+      "di": {
+        "value": [
+          "electricity"
+        ],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": "Electrical Feeder"
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "damageReduction": {
+        "value": 0,
+        "negatedBy": ""
+      },
+      "sr": 0
+    },
+    "currency": {
+      "credit": 0,
+      "upb": 0
+    },
+    "spells": {
+      "spell0": {
+        "value": 0,
+        "max": 0
+      },
+      "spell1": {
+        "value": 0,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "modifiers": [],
+    "conditions": {},
+    "counterClasses": {
+      "values": {}
+    }
+  },
+  "flags": {},
+  "token": {
+    "flags": {},
+    "name": "Statikete",
+    "displayName": 40,
+    "img": "icons/svg/mystery-man.svg",
+    "tint": "",
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 360,
+    "lightAngle": 360,
+    "lightAlpha": 1,
+    "actorId": "5b38tTibWfw3Dtti",
+    "actorLink": false,
+    "actorData": {},
+    "disposition": -1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": "attributes.rp"
+    },
+    "randomImg": false,
+    "lightColor": "",
+    "mirrorX": false,
+    "mirrorY": false
+  },
+  "items": [
+    {
+      "flags": {},
+      "name": "Electricity Absorption (Ex)",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "Whenever a statikete's electricity immunity prevents it from taking damage, it regains 1 Resolve Point.",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Void Adaptation",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "data": {
+        "description": {
+          "value": "<h3>(EX OR SU)</h3>\n<h3>Numerous creatures are inured to the void of outer space. A creature with void adaptation has the following abilities.</h3>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath (see page 152).</li>\n</ul>\n<hr>\n<h3>&nbsp;</h3>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Bite",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "value": "",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "quantity": 1,
+        "bulk": "L",
+        "price": 0,
+        "level": 1,
+        "attuned": false,
+        "equipped": false,
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": 26,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [
+            [
+              "discharge",
+              "electricity+piercing"
+            ]
+          ],
+          "effect": "Energy"
+        },
+        "damage": {
+          "parts": [
+            [
+              "8d6+20",
+              "electricity+piercing"
+            ]
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "capacity": {
+          "value": 0,
+          "max": 0
+        },
+        "usage": {
+          "value": 0,
+          "per": ""
+        },
+        "modifiers": [],
+        "equippedBulkMultiplier": 1,
+        "acceptedItemTypes": {
+          "weapon": false,
+          "equipment": false,
+          "goods": false,
+          "consumable": false,
+          "container": false,
+          "technological": false,
+          "fusion": true,
+          "upgrade": false,
+          "augmentation": false
+        },
+        "containedItemIds": [],
+        "weaponType": "basicM",
+        "special": "",
+        "properties": {},
+        "proficient": true,
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 1,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            }
+          ]
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "labels": {
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "",
+        "damage": "8d6+20"
+      },
+      "isStack": false,
+      "hasUses": false,
+      "hasCapacity": false,
+      "hasAttack": true,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Shock Blast (Ex)",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "value": "A statikete can spend 1 Resolve Point to fire its shock blast as an attack with a range increment of 120 feet.",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "quantity": 1,
+        "bulk": "L",
+        "price": 0,
+        "level": 1,
+        "attuned": false,
+        "equipped": false,
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": "",
+        "actionType": "rwak",
+        "attackBonus": 29,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [
+            [
+              null,
+              "electricity"
+            ]
+          ],
+          "effect": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "5d8+15",
+              "electricity"
+            ]
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "capacity": {
+          "value": 0,
+          "max": 0
+        },
+        "usage": {
+          "value": 0,
+          "per": ""
+        },
+        "modifiers": [],
+        "equippedBulkMultiplier": 1,
+        "acceptedItemTypes": {
+          "weapon": false,
+          "equipment": false,
+          "goods": false,
+          "consumable": false,
+          "container": false,
+          "technological": false,
+          "fusion": true,
+          "upgrade": false,
+          "augmentation": false
+        },
+        "containedItemIds": [],
+        "weaponType": "smallA",
+        "special": "",
+        "properties": {},
+        "proficient": true,
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 1,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            }
+          ]
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "labels": {
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "",
+        "damage": "5d8+15"
+      },
+      "isStack": false,
+      "hasUses": false,
+      "hasCapacity": false,
+      "hasAttack": true,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Spaceflight",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "data": {
+        "description": {
+          "value": "<h3>(SU)</h3>\n<h3>The creature can fly through space at standard navigation and astrogation speeds (Core Rulebook 290) using Piloting to navigate. If it uses a skill other than Piloting for skill checks to astrogate, that skill is listed in parentheses.</h3>\n<h3>Guidelines: Most creatures with spaceflight also have @Compendium[sfrpg.universal-creature-rules.Zo5poFuFlNvLYMwh]{Void Adaptation}.</h3>\n<hr>\n<h3>&nbsp;</h3>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    }
+  ],
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "38bP1x6XCYgaLDQ1"
+}

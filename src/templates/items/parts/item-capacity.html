@@ -1,22 +1,22 @@
 {{#if hasCapacity}}
 <div class="form-group">
-    <label data-tippy-content="The number of rounds, charges, etc... that can be held by this item (eg, the number of charges a battery can hold)">
-        Capacity
+    <label data-tippy-content="{{ localize "SFRPG.Items.Capacity.HeaderTooltip" }}">
+        {{ localize "SFRPG.Items.Capacity.Capacity" }}
     </label>
     <div class="form-fields">
-        <input type="text" data-tippy-content="The current number of charges" name="data.capacity.value" value="{{data.capacity.value}}" data-dtype="Number" />
+        <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.CapacityValueTooltip" }}" name="data.capacity.value" value="{{data.capacity.value}}" data-dtype="Number" />
         <span class="sep"> / </span>
-        <input type="text" data-tippy-content="The max number of charges this item can hold" name="data.capacity.max" value="{{data.capacity.max}}" data-dtype="Number" />
+        <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.CapacityMaxTooltip" }}" name="data.capacity.max" value="{{data.capacity.max}}" data-dtype="Number" />
     </div>
 </div>
 <div class="form-group">
-    <label data-tippy-content="The amount of charges, peices of ammuntition, etc.. that are consummed when this item is used.">
-        Usage
+    <label data-tippy-content="{{ localize "SFRPG.Items.Capacity.UsageTooltip" }}">
+        {{ localize "SFRPG.Items.Capacity.Usage" }}
     </label>
     <div class="form-fields">
-        <input type="text" data-tippy-content="The amount of charges, peices of ammuntition, etc.. that are consummed when this item is used." name="data.usage.value" value="{{data.usage.value}}" data-dtype="Number" />
+        <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.UsageTooltip" }}" name="data.usage.value" value="{{data.usage.value}}" data-dtype="Number" />
         <span class="sep"> / </span>
-        <select data-tippy-content="The time unit used to determine when the item's capacitiy is consumed." name="data.usage.per">
+        <select data-tippy-content="{{ localize "SFRPG.Items.Capacity.UsageValueTooltip" }}">
         {{#select data.usage.per}}
             <option value=""></option>
             {{#each config.capacityUsagePer as |usage u|}}

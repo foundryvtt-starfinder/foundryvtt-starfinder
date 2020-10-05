@@ -1,0 +1,970 @@
+{
+  "name": "Spookfish Swarm",
+  "type": "npc",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 8,
+        "min": 3,
+        "misc": 0,
+        "mod": -1,
+        "base": 10
+      },
+      "dex": {
+        "value": 30,
+        "min": 3,
+        "misc": 0,
+        "mod": 10,
+        "base": 10
+      },
+      "con": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 0,
+        "base": 10
+      },
+      "int": {
+        "value": 2,
+        "min": 3,
+        "misc": 0,
+        "mod": -4,
+        "base": 10
+      },
+      "wis": {
+        "value": 24,
+        "min": 3,
+        "misc": 0,
+        "mod": 7,
+        "base": 10
+      },
+      "cha": {
+        "value": 6,
+        "min": 3,
+        "misc": 0,
+        "mod": -2,
+        "base": 10
+      }
+    },
+    "attributes": {
+      "eac": {
+        "min": 0,
+        "value": 30,
+        "tooltip": []
+      },
+      "kac": {
+        "min": 0,
+        "value": 32,
+        "tooltip": []
+      },
+      "cmd": {
+        "min": 0,
+        "value": 10,
+        "tooltip": []
+      },
+      "hp": {
+        "min": 0,
+        "max": 275,
+        "value": 275,
+        "temp": 0,
+        "tempmax": 10,
+        "tooltip": []
+      },
+      "sp": {
+        "min": 0,
+        "max": 0,
+        "value": 0,
+        "tooltip": []
+      },
+      "rp": {
+        "min": 0,
+        "max": 0,
+        "value": 0,
+        "tooltip": []
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "total": 10,
+        "tooltip": []
+      },
+      "fort": {
+        "value": 0,
+        "bonus": 18,
+        "misc": 0,
+        "tooltip": []
+      },
+      "reflex": {
+        "value": 0,
+        "bonus": 18,
+        "misc": 0,
+        "tooltip": []
+      },
+      "will": {
+        "value": 0,
+        "bonus": 16,
+        "misc": 0,
+        "tooltip": []
+      },
+      "bab": 0,
+      "arms": "2",
+      "space": "20 ft.",
+      "reach": "0 ft.",
+      "speed": {
+        "value": "fly 40 ft. (Su",
+        "special": " average)"
+      },
+      "keyability": "",
+      "spellcasting": ""
+    },
+    "details": {
+      "alignment": "NE",
+      "race": "",
+      "class": "",
+      "biography": {
+        "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Explorers and wanderers sometimes return from their ventures in the galaxy’s wild and lonely places with chilling ghost stories or wondrous “big fish” tales. Prospectors and outlaws brave enough to travel the ancient seabed of Akiton’s arid Irkonian Sea sometimes come back with a bit of both. They speak of dreamlike beings that haunt the barren gorges and desert flats, apparitions from the bottom of a prehistoric ocean who drift and swim through the air. The most terrifying of these marine phantasms is known simply as the spookfish; though individually tiny, they rise from the sand in bloodthirsty swarms of flashing scales and serrated teeth. Each spectral fish is dotted with false eyespots along its flanks; this defensive camouflage has proven utterly disorienting to those hapless souls caught in a spookfish swarm.<br>Akitonian archaeologists have unearthed fossils of creatures with a physiology that matches the spookfish, and some speculate that the impact of a meteor evaporated the Irkonian Sea and obliterated the entire species in one fateful instant. Some victims relate a strange curse inflicted by these swarming aquatic ghosts. Innocent travelers report feeling slowly engulfed by steadily rising (though unseen) water—as though an entire spectral ocean was rising up in retribution.</span></p>\n<p>&nbsp;</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>warm land (Akiton)</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary or school (2-4)</p>\n<p>&nbsp;</p>\n</section>",
+        "public": ""
+      },
+      "type": "Undead",
+      "environment": "",
+      "cr": 16,
+      "xp": {
+        "value": 76800
+      },
+      "source": "3C06 pg. 61",
+      "subtype": "Incorporeal, Swarm",
+      "raceAndGrafts": "",
+      "aura": ""
+    },
+    "skills": {
+      "acr": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 28,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "ath": {
+        "ability": "str",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "blu": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "com": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "cul": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "dip": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "dis": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "eng": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "int": {
+        "ability": "cha",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "lsc": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "med": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "mys": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "per": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 28,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "phs": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "pil": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "pro": {
+        "ability": "int",
+        "ranks": 0,
+        "value": 3,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false,
+        "subname": ""
+      },
+      "sen": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "sle": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": true
+      },
+      "ste": {
+        "ability": "dex",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 28,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "sur": {
+        "ability": "wis",
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 28,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      }
+    },
+    "traits": {
+      "size": "tiny",
+      "senses": "blindsense (scent) 60 ft., darkvision 60 ft.",
+      "languages": {
+        "value": [],
+        "custom": ""
+      },
+      "di": {
+        "value": [],
+        "custom": "Undead Immunities"
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": "Undead Immunities"
+      },
+      "damageReduction": {
+        "value": 0,
+        "negatedBy": ""
+      },
+      "sr": 0
+    },
+    "currency": {
+      "credit": 0,
+      "upb": 0
+    },
+    "spells": {
+      "spell0": {
+        "value": 0,
+        "max": 0
+      },
+      "spell1": {
+        "value": 0,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "modifiers": [],
+    "conditions": {},
+    "counterClasses": {
+      "values": {}
+    }
+  },
+  "flags": {},
+  "token": {
+    "flags": {},
+    "name": "Spookfish Swarm",
+    "displayName": 40,
+    "img": "icons/svg/mystery-man.svg",
+    "tint": "",
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 360,
+    "lightAngle": 360,
+    "lightAlpha": 1,
+    "actorId": "ieN6MraSRmo8iRI3",
+    "actorLink": false,
+    "actorData": {},
+    "disposition": -1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "randomImg": false,
+    "lightColor": "",
+    "mirrorX": false,
+    "mirrorY": false
+  },
+  "items": [
+    {
+      "flags": {},
+      "name": "Incorporeal",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Swarm Defenses",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "data": {
+        "description": {
+          "value": "<h3>(EX)</h3>\n<h3>Swarms take damage from weapons differently depending on how the weapon targets them.</h3>\n<h3>A swarm is immune to attacks and effects that targets a single creature (including single-target spells), with the exception of mind-affecting effects if the swarm has an Intelligence score and an ability similar to the formian’s hive mind (see page 50).</h3>\n<h3>A swarm takes half again as much damage (+50%) from effects that affect all targets in an area, such as grenades, blast and explode weapons, and many evocation spells. A swarm takes normal damage from an attack or effect that affects multiple targets (including lines and fully automatic mode attacks). For the purpose of automatic fire, the swarm counts as five targets. For example, if an automatic attack is made using 12 rounds of ammunition, it can attack a maximum of six targets, so it can damage a swarm normally. However, if two other targets are closer to the attacker than the swarm, they must be attacked first, leaving only four attacks to target the swarm, so it takes no damage.</h3>\n<hr>\n<h3>&nbsp;</h3>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Distraction (DC 22)",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "data": {
+        "description": {
+          "value": "<h3>(EX)</h3>\n<h3>The creature can nauseate targets that it damages. A living creature that takes damage from a creature with the distraction ability is @Compendium[sfrpg.conditions.LoRydw1D4bqlbkA2]{Nauseated} for 1 round; the target can negate the effect with a successful Fortitude save at the listed DC.</h3>\n<hr>\n<h3>&nbsp;</h3>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Whelming Curse (Su) (DC 22)",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "As a standard action, the spookfish swarm lashes out into a disorienting frenzy of flashing fins and ghostly currents around a creature within its space. That creature must succeed at a DC 22 Will save or be afflicted by the curse of the depths (see below). A creature that has a swim speed or that doesn’t need to breathe gains a +2 circumstance bonus on this save.",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Unliving",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "data": {
+        "description": {
+          "value": "<h3>(EX)</h3>\n<h3>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</h3>\n<hr>\n<h3>&nbsp;</h3>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    },
+    {
+      "flags": {},
+      "name": "Curse of the depths",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"><strong>Type</strong> curse; <strong>Save</strong> Will DC 22<br /><strong>Effect</strong> The victim feels as though they are standing in chest-high water, no matter their current environment. The victim counts all terrain as difficult terrain and must spend 20 feet of movement to move 5 feet (and the victim can&rsquo;t attempt to swim through this illusory water). When the victim rolls a natural 1 on an attack roll, they feel as though they have been fully submerged in water and must hold their breath or begin drowning (regardless of the availability of breathable air or any equipment that would normally allow them to breathe underwater); creatures that don&rsquo;t need to breathe are immune to this effect. At the start of each subsequent round, the victim can attempt a Will saving throw to end the drowning effect of this curse.<br /><strong>Cure</strong> The victim must spend 1 week fully submerged underwater; they can use equipment to breathe, but spending time in a submersible vehicle or domed underwater facility or settlement does not meet this requirement.</span></p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "img": "icons/svg/mystery-man.svg",
+      "labels": {
+        "featType": "Passive",
+        "activation": "",
+        "target": "",
+        "area": "",
+        "range": "",
+        "duration": "",
+        "save": "DC null undefined",
+        "damage": ""
+      },
+      "isStack": false,
+      "hasUses": false,
+      "isOnCooldown": false,
+      "hasAttack": false,
+      "isCharged": true
+    }
+  ],
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "bNTVGv5ImBgrqDa1"
+}

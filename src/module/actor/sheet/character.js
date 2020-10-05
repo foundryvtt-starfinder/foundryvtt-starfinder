@@ -1,4 +1,6 @@
+import { SFRPG } from "../../config.js"
 import { ActorSheetSFRPG } from "./base.js"
+import { computeCompoundBulkForItem } from "../actor-inventory.js"
 
 export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     static get defaultOptions() {
@@ -41,41 +43,54 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         const actorData = data.actor;
 
         const inventory = {
-            weapon: { label: "Weapons", items: [], dataset: { type: "weapon" } },
-            equipment: { label: "Equipment", items: [], dataset: { type: "equipment" } },
-            consumable: { label: "Consumables", items: [], dataset: { type: "consumable" } },
-            goods: { label: "Goods", items: [], dataset: { type: "goods" } },
-            technological: { label: "Technological", items: [], dataset: { type: "technological" } },
-            fusion: { label: "Weapon Fusions", items: [], dataset: { type: "fusion" } },
-            upgrade: { label: "Armor Upgrades", items: [], dataset: { type: "upgrade" } },
-            augmentation: { label: "Augmentations", items: [], dataset: { type: "augmentation" } }
+            weapon: { label: game.i18n.format(SFRPG.itemTypes["weapon"]), items: [], dataset: { type: "weapon" }, allowAdd: true },
+            shield: { label: game.i18n.format(SFRPG.itemTypes["shield"]), items: [], dataset: { type: "shield" }, allowAdd: true },
+            equipment: { label: game.i18n.format(SFRPG.itemTypes["equipment"]), items: [], dataset: { type: "equipment" }, allowAdd: true },
+            consumable: { label: game.i18n.format(SFRPG.itemTypes["consumable"]), items: [], dataset: { type: "consumable" }, allowAdd: true },
+            goods: { label: game.i18n.format(SFRPG.itemTypes["goods"]), items: [], dataset: { type: "goods" }, allowAdd: true },
+            container: { label: game.i18n.format(SFRPG.itemTypes["container"]), items: [], dataset: { type: "container" }, allowAdd: true },
+            technological: { label: game.i18n.format(SFRPG.itemTypes["technological"]), items: [], dataset: { type: "technological" }, allowAdd: true },
+            fusion: { label: game.i18n.format(SFRPG.itemTypes["fusion"]), items: [], dataset: { type: "fusion" }, allowAdd: true },
+            upgrade: { label: game.i18n.format(SFRPG.itemTypes["upgrade"]), items: [], dataset: { type: "upgrade" }, allowAdd: true },
+            augmentation: { label: game.i18n.format(SFRPG.itemTypes["augmentation"]), items: [], dataset: { type: "augmentation" }, allowAdd: true }
         };
 
-        let [items, spells, feats, classes, races, themes, archetypes] = data.items.reduce((arr, item) => {
+        let [items, spells, feats, classes, races, themes, archetypes, conditionItems, asis] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
-            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType);
-            const unusalbe = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
-            item.isCharged = !unusalbe;
+            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
+            item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
+            item.hasUses = item.data.uses && (item.data.uses.max > 0);
+            item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
             if (item.type === "spell") arr[1].push(item);
-            else if (item.type === "feat") arr[2].push(item);
+            else if (item.type === "feat") {
+                if ((item.data.requirements?.toLowerCase() || "") === "condition") {
+                    arr[7].push(item);
+                } else {
+                    arr[2].push(item);
+                }
+            }
             else if (item.type === "class") arr[3].push(item);
             else if (item.type === "race") arr[4].push(item);
             else if (item.type === "theme") arr[5].push(item);
             else if (item.type === "archetypes") arr[6].push(item);
+            else if (item.type === "asi") arr[8].push(item);
             else if (Object.keys(inventory).includes(item.type)) arr[0].push(item);
+            else arr[0].push(item);
             return arr;
-        }, [[], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], [], []]);
         
         const spellbook = this._prepareSpellbook(data, spells);
 
-        let totalWeight = 0;
         let totalValue = 0;
         for (let i of items) {
             i.img = i.img || DEFAULT_TOKEN;
+
+            if (!(i.type in inventory)) {
+                continue;
+            }
 
             i.data.quantity = i.data.quantity || 0;
             i.data.price = i.data.price || 0;
@@ -91,22 +106,48 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
 
             i.totalWeight = i.data.quantity * weight;
-            //i.hasCharges = i.type === "consumable" && i.data.charges.max > 0;
-            inventory[i.type].items.push(i);
-            totalWeight += i.totalWeight;
+            if (i.data.equippedBulkMultiplier !== undefined && i.data.equipped) {
+                i.totalWeight *= i.data.equippedBulkMultiplier;
+            }
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
 
             totalValue += (i.data.price * i.data.quantity);
         }
-        totalWeight = Math.floor(totalWeight);
-        data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
+
+        this.processItemContainment(items, function (itemType, itemData) {
+            if (!(itemType in inventory)) {
+                let label = "SFRPG.Items.Categories.MiscellaneousItems";
+                if (itemType in SFRPG.itemTypes) {
+                    label = SFRPG.itemTypes[itemType];
+                } else {
+                    console.log(`Item '${itemData.item.name}' with type '${itemType}' is not a registered item type!`);
+                }
+                inventory[itemType] = { label: game.i18n.format(label), items: [], dataset: { }, allowAdd: false };
+            }
+            inventory[itemType].items.push(itemData);
+        });
+
+        let totalWeight = 0;
+        for (let section of Object.entries(inventory)) {
+            for (let i of section[1].items) {
+                if (!(i.item.type in inventory)) {
+                    continue;
+                }
+
+                let itemBulk = computeCompoundBulkForItem(i.item, i.contents);
+                totalWeight += itemBulk;
+            }
+        }
+        totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
+        data.encumbrance = this._computeEncumbrance(totalWeight, data);
         data.inventoryValue = Math.floor(totalValue);
 
         const features = {
             classes: { label: "Class Levels", items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
             race: { label: "Race", items: [], hasActions: false, dataset: { type: "race" }, isRace: true },
             theme: { label: "Theme", items: [], hasActions: false, dataset: { type: "theme" }, isTheme: true },
+            asi: { label: game.i18n.format("SFRPG.Items.Categories.AbilityScoreIncrease"), items: asis, hasActions: false, dataset: { type: "asi" }, isASI: true },
             archetypes: { label: "Archetypes", items: [], dataset: { type: "archetypes" }, isArchetype: true },
             active: { label: "Active", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
             passive: { label: "Passive", items: [], hasActions: false, dataset: { type: "feat" } }
@@ -141,9 +182,9 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             return arr;
         }, [[], [], [], [], []]);
 
-        modifiers.conditions.modifiers = conditions;
+        modifiers.conditions.items = conditionItems;
         modifiers.permanent.modifiers = permanent;
-        modifiers.temporary.modifiers = temporary;
+        modifiers.temporary.modifiers = temporary.concat(conditions);
 
         data.modifiers = Object.values(modifiers);
     }
@@ -164,13 +205,14 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
      * Compute the level and percentage of encumbrance for an Actor.
      * 
      * @param {Number} totalWeight The cumulative item weight from inventory items
-     * @param {Ojbect} actorData The data object for the Actor being rendered
+     * @param {Object} actorData The data object for the Actor being rendered
      * @returns {Object} An object describing the character's encumbrance level
      * @private
      */
     _computeEncumbrance(totalWeight, actorData) {
         const enc = {
-            max: actorData.data.abilities.str.value,
+            max: actorData.data.attributes.encumbrance.max,
+            tooltip: actorData.data.attributes.encumbrance.tooltip,
             value: totalWeight
         };
 
@@ -198,29 +240,15 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
         html.find('.modifier-delete').click(this._onModifierDelete.bind(this));
         html.find('.modifier-toggle').click(this._onToggleModifierEnabled.bind(this));
-        html.find('.conditions input[type="checkbox"]').change(this._onToggleConditions.bind(this));
     }
 
-    /**
-     * Toggles condition modifiers on or off.
-     * 
-     * @param {Event} event The triggering event.
-     */
-    async _onToggleConditions(event) {
-        event.preventDefault();
+    onBeforeCreateNewItem(itemData) {
+        super.onBeforeCreateNewItem(itemData);
 
-        const target = $(event.currentTarget);
-        const condition = target.data('condition');
-
-        if (["blinded", "cowering", "offkilter", "pinned", "stunned"].includes(condition)) {
-            const flatfooted = $('.condition.flatfooted');
-            const ffIsChecked = flatfooted.is(':checked');
-            flatfooted.prop("checked", !ffIsChecked).change();
-        }
-        
-        const tokens = this.actor.getActiveTokens(true);
-        for (const token of tokens) {
-            await token.toggleEffect(CONFIG.SFRPG.statusEffectIconMapping[condition]);
+        if (itemData["type"] === "asi") {
+            const numASI = this.actor.items.filter(x => x.type === "asi").length;
+            const level = 5 + numASI * 5;
+            itemData.name = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: level});
         }
     }
 
@@ -281,20 +309,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         modifier.enabled = !modifier.enabled;
 
         await this.actor.update({'data.modifiers': modifiers});
-    }
-
-    /**
-     * Handles reloading / replacing ammo or batteries in a weapon.
-     * 
-     * @param {Event} event The originating click event
-     */
-    _onReloadWeapon(event) {
-        event.preventDefault();
-
-        const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
-
-        return item.update({'data.capacity.value': item.data.data.capacity.max});
     }
 
     /**

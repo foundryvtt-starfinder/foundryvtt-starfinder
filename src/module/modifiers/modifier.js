@@ -23,7 +23,7 @@ export default class SFRPGModifier {
         name = "", 
         modifier = 0, 
         type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.CONSTANT, 
+        modifierType = SFRPGModifierType.FORMULA, 
         effectType = SFRPGEffectType.SKILL, 
         valueAffected = "", 
         enabled = true, 
@@ -44,6 +44,12 @@ export default class SFRPGModifier {
         this.modifierType = modifierType;
         this.condition = condition;
         this.subtab = subtab;
+
+        if (modifierType === SFRPGModifierType.FORMULA) {
+            this.max = Roll.maximize(modifier.toString()).total;
+        } else {
+            this.max = modifier;
+        }
 
         this._id = id ?? generateUUID();
     }

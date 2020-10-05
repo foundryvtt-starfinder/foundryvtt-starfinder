@@ -1,9 +1,12 @@
+import { SFRPG } from "../../../config.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function (engine) {
     engine.closures.add("calculateBaseAbilityScore", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
+        const races = fact.races;
+        const theme = fact.theme;
 
         const addModifier = (bonus, data, ability) => {
             let computedBonus = bonus.modifier;
@@ -26,6 +29,32 @@ export default function (engine) {
             return mod.enabled && [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType);
         })
 
+        let themeMod = {};
+        if(theme && theme.data.abilityMod) {
+            themeMod[theme.data.abilityMod.ability] = theme.data.abilityMod.mod;
+        }
+
+        let racesMod = {};
+        for (let race of races) {
+            for(let raceMod of race.data.abilityMods.parts) {
+                racesMod[raceMod[1]] = racesMod[raceMod[1]] !== undefined ? racesMod[raceMod[1]] + raceMod[0] : raceMod[0];
+            }
+        }
+
+        let abilityScoreIncreasesMod = {};
+        const asis = fact.asis?.filter(x => x.type === "asi") || [];
+        for (let asi of asis) {
+            for (let ability of Object.keys(SFRPG.abilities)) {
+                if (asi.data.abilities[ability]) {
+                    if (!(ability in abilityScoreIncreasesMod)) {
+                        abilityScoreIncreasesMod[ability] = 1;
+                    } else {
+                        abilityScoreIncreasesMod[ability] += 1;
+                    }
+                }
+            }
+        }
+
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
             const abilityMods = context.parameters.stackModifiers.process(
@@ -35,6 +64,32 @@ export default function (engine) {
 
             let score = ability.base ? ability.base : 10;
             ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreBaseTooltip", { mod: score.signedString() }));
+
+            const modFromTheme = themeMod[abl] ?? 0;
+            if(modFromTheme) {
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreThemeTooltip", { mod: modFromTheme.signedString() }));
+            }
+
+            const modFromRace = racesMod[abl] ?? 0;
+            if(modFromRace) {
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreRaceTooltip", { mod: modFromRace.signedString() }));
+            }
+
+            let intermediateScore = score + modFromTheme + modFromRace;
+            if (abl in abilityScoreIncreasesMod) {
+                for (let i = 0; i<abilityScoreIncreasesMod[abl]; i++) {
+                    if (intermediateScore <= 16) {
+                        intermediateScore += 2;
+                    } else {
+                        intermediateScore += 1;
+                    }
+                }
+            }
+
+            const raisedByASI = intermediateScore - (score + modFromTheme + modFromRace);
+            if(raisedByASI) {
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreIncreaseTooltip", { mod: raisedByASI.signedString() }));
+            }
 
             if (ability.userPenalty) {
                 let userPenalty = -Math.abs(ability.userPenalty);
@@ -62,7 +117,7 @@ export default function (engine) {
                 return sum;
             }, 0);
 
-            ability.value = score + bonus;
+            ability.value = score + modFromRace + modFromTheme + raisedByASI + bonus;
         }
 
         return fact;

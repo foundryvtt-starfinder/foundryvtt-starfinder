@@ -120,6 +120,7 @@ SFRPG.energyDamageTypes = {
     "cold": "SFRPG.DamageTypesCold",
     "electricity": "SFRPG.DamageTypesElectricity",
     "fire": "SFRPG.DamageTypesFire",
+    "radiation": "SFRPG.DamageTypesRadiation",
     "sonic": "SFRPG.DamageTypesSonic"
 };
 
@@ -131,12 +132,14 @@ SFRPG.kineticDamageTypes = {
 
 SFRPG.damageTypes = {
     ...SFRPG.energyDamageTypes,
-    ...SFRPG.kineticDamageTypes
+    ...SFRPG.kineticDamageTypes,
+    "nonlethal": "SFRPG.DamageTypesNonlethal"
 };
 
 SFRPG.weaponDamageTypes = {
     "acid": "SFRPG.DamageTypesAcid",
     "acid+bludgeoning": "SFRPG.DamageTypesAcidAndBludgeoning",
+    "acid+electricity": "SFRPG.DamageTypesAcidAndElectricity",
     "acid+fire": "SFRPG.DamageTypesAcidAndFire",
     "acid+piercing": "SFRPG.DamageTypesAcidAndPiercing",
     "acid+slashing": "SFRPG.DamageTypesAcidAndSlashing",
@@ -254,6 +257,7 @@ SFRPG.weaponTypes = {
 // Weapons sub categories
 SFRPG.weaponCategories = {
     "cryo": "SFRPG.WeaponCategoriesCryo",
+    "disruption" : "SFRPG.WeaponCategoriesDisruption",
     "flame": "SFRPG.WeaponCategoriesFlame",
     "laser": "SFRPG.WeaponCategoriesLaser",
     "plasma": "SFRPG.WeaponCategoriesPlasma",
@@ -303,6 +307,7 @@ SFRPG.weaponProperties = {
     "guided": "SFRPG.WeaponPropertiesGuided",
     "harrying": "SFRPG.WeaponPropertiesHarrying",
     "holyWater": "SFRPG.WeaponPropertiesHolyWater",
+    "hybrid": "SFRPG.WeaponPropertiesHybrid",
     "ignite": "SFRPG.WeaponPropertiesIgnite",
     "indirect": "SFRPG.WeaponPropertiesIndirect",
     "injection": "SFRPG.WeaponPropertiesInjection",
@@ -327,6 +332,7 @@ SFRPG.weaponProperties = {
     "radioactive": "SFRPG.WeaponPropertiesRadioactive",
     "reach": "SFRPG.WeaponPropertiesReach",
     "recall": "SFRPG.WeaponPropertiesRecall",
+    "regrowth": "SFRPG.WeaponPropertiesRegrowth",
     "relic": "SFRPG.WeaponPropertiesRelic",
     "reposition": "SFRPG.WeaponPropertiesReposition",
     "shape": "SFRPG.WeaponPropertiesShape",
@@ -343,6 +349,7 @@ SFRPG.weaponProperties = {
     "throttle": "SFRPG.WeaponPropertiesThrottle",
     "thrown": "SFRPG.WeaponPropertiesThrown",
     "trip": "SFRPG.WeaponPropertiesTrip",
+    "unbalancing": "SFRPG.WeaponPropertiesUnbalancing",
     "underwater": "SFRPG.WeaponPropertiesUnderwater",
     "unwieldy": "SFRPG.WeaponPropertiesUnwieldy",
     "variantBoost": "SFRPG.WeaponPropertiesVariantBoost",
@@ -361,90 +368,100 @@ SFRPG.spellAreaShapes = {
 
 SFRPG.spellAreaEffects = {
     "": "",
-    "burst": "Burst",
-    "emanation": "Emanation",
-    "spread": "Spread"
+    "burst"    : "SFRPG.SpellAreaEffects.Burst",
+    "emanation": "SFRPG.SpellAreaEffects.Emanation",
+    "spread"   : "SFRPG.SpellAreaEffects.Spread"
 }
 
 // Weapon special abilities
 SFRPG.weaponSpecial = {
-    "analog": "Analog",
-    "archaic": "Archaic",
-    "auto": "Automatic",
-    "blast": "Blast",
-    "block": "Block",
-    "boost": "Boost",
-    "bright": "Bright",
-    "disarm": "Disarm",
-    "entangle": "Entangle",
-    "exploade": "Explode",
-    "injection": "Injection",
-    "line": "Line",
-    "nonlethal": "Nonlethal",
-    "operative": "Operative",
-    "penetrating": "Penetrating",
-    "powered": "Powered",
-    "quickReload": "Quick Reload",
-    "reach": "Reach",
-    "sniper": "Sniper",
-    "stun": "Stun",
-    "thrown": "Thrown",
-    "trip": "Trip",
-    "unwieldy": "Unwieldy"
+    "analog"     : "SFRPG.WeaponSpecial.Analog",
+    "archaic"    : "SFRPG.WeaponSpecial.Archaic",
+    "auto"       : "SFRPG.WeaponSpecial.Automatic",
+    "blast"      : "SFRPG.WeaponSpecial.Blast",
+    "block"      : "SFRPG.WeaponSpecial.Block",
+    "boost"      : "SFRPG.WeaponSpecial.Boost",
+    "bright"     : "SFRPG.WeaponSpecial.Bright",
+    "disarm"     : "SFRPG.WeaponSpecial.Disarm",
+    "entangle"   : "SFRPG.WeaponSpecial.Entangle",
+    "exploade"   : "SFRPG.WeaponSpecial.Explode",
+    "injection"  : "SFRPG.WeaponSpecial.Injection",
+    "line"       : "SFRPG.WeaponSpecial.Line",
+    "nonlethal"  : "SFRPG.WeaponSpecial.Nonlethal",
+    "operative"  : "SFRPG.WeaponSpecial.Operative",
+    "penetrating": "SFRPG.WeaponSpecial.Penetrating",
+    "powered"    : "SFRPG.WeaponSpecial.Powered",
+    "quickReload": "SFRPG.WeaponSpecial.Quick Reload",
+    "reach"      : "SFRPG.WeaponSpecial.Reach",
+    "sniper"     : "SFRPG.WeaponSpecial.Sniper",
+    "stun"       : "SFRPG.WeaponSpecial.Stun",
+    "thrown"     : "SFRPG.WeaponSpecial.Thrown",
+    "trip"       : "SFRPG.WeaponSpecial.Trip",
+    "unwieldy"   : "SFRPG.WeaponSpecial.Unwieldy"
 };
 
 // Weapon critical hit effects
 SFRPG.weaponCriticalHitEffects = {
-    "arc": "Arc",
-    "bleed": "Bleed",
-    "burn": "Burn",
-    "corrode": "Corrode",
-    "deafen": "Deafen",
-    "injection": "Injection DC + 2",
-    "knockdown": "Knockdown",
-    "severeWound": "Severe Wound",
-    "staggered": "Staggered",
-    "stunned": "Stunned",
-    "wound": "Wound"
+    "arc"        : "SFRPG.WeaponCriticalHitEffects.Arc",
+    "bleed"      : "SFRPG.WeaponCriticalHitEffects.Bleed",
+    "burn"       : "SFRPG.WeaponCriticalHitEffects.Burn",
+    "corrode"    : "SFRPG.WeaponCriticalHitEffects.Corrode",
+    "deafen"     : "SFRPG.WeaponCriticalHitEffects.Deafen",
+    "injection"  : "SFRPG.WeaponCriticalHitEffects.Injection",
+    "knockdown"  : "SFRPG.WeaponCriticalHitEffects.Knockdown",
+    "severeWound": "SFRPG.WeaponCriticalHitEffects.SevereWound",
+    "staggered"  : "SFRPG.WeaponCriticalHitEffects.Staggered",
+    "stunned"    : "SFRPG.WeaponCriticalHitEffects.Stunned",
+    "wound"      : "SFRPG.WeaponCriticalHitEffects.Wound"
+};
+
+// Allowed armor types for upgrades
+SFRPG.allowedArmorTypes = {
+    "light": "Light Armor",
+    "heavy": "Heavy Armor",
+    "power": "Power Armor",
+    "lightAndHeavy": "Light and Heavy Armor",
+    "heavyAndPower": "Heavy and Power Armor",
+    "shield": "Shields"
 };
 
 // Equipment types
 SFRPG.armorTypes = {
-    "light": "Light Armor",
-    "heavy": "Heavy Armor",
-    "power": "Power Armor",
-    "shield": "Shields"
+    "light": "SFRPG.ArmorTypes.Light",
+    "heavy": "SFRPG.ArmorTypes.Heavy",
+    "power": "SFRPG.ArmorTypes.Power"
 };
 
 SFRPG.equipmentTypes = SFRPG.armorTypes;
 
 // Spell Schools
 SFRPG.spellSchools = {
-    "abj": "Abjuration",
-    "con": "Conjuration",
-    "div": "Divination",
-    "enc": "Enchantment",
-    "evo": "Evocation",
-    "ill": "Illusion",
-    "nec": "Necromancy",
-    "trs": "Transmutation"
+    "abj": "SFRPG.Magic.Schools.Abjuration",
+    "con": "SFRPG.Magic.Schools.Conjuration",
+    "div": "SFRPG.Magic.Schools.Divination",
+    "enc": "SFRPG.Magic.Schools.Enchantment",
+    "evo": "SFRPG.Magic.Schools.Evocation",
+    "ill": "SFRPG.Magic.Schools.Illusion",
+    "nec": "SFRPG.Magic.Schools.Necromancy",
+    "trs": "SFRPG.Magic.Schools.Transmutation",
+    "uni": "SFRPG.Magic.Schools.Universal"
 };
 
 // Spell Levels
 SFRPG.spellLevels = {
-    0: "0 Level",
-    1: "1st Level",
-    2: "2nd Level",
-    3: "3rd Level",
-    4: "4th Level",
-    5: "5th Level",
-    6: "6th Level"
+    0: "SFRPG.Magic.Levels.0",
+    1: "SFRPG.Magic.Levels.1",
+    2: "SFRPG.Magic.Levels.2",
+    3: "SFRPG.Magic.Levels.3",
+    4: "SFRPG.Magic.Levels.4",
+    5: "SFRPG.Magic.Levels.5",
+    6: "SFRPG.Magic.Levels.6"
 };
 
 // Feat types
 SFRPG.featTypes = {
-    "general": "General Feats",
-    "combat": "Combat Feats"
+    "general": "SFRPG.FeatTypes.General",
+    "combat" : "SFRPG.FeatTypes.Combat"
 };
 
 /**
@@ -473,6 +490,18 @@ SFRPG.starshipSizes = {
     "colossal": "SFRPG.SizeColossal"
 };
 
+SFRPG.itemSizes = {
+    "fine": "SFRPG.SizeFine",
+    "diminutive": "SFRPG.SizeDim",
+    "tiny": "SFRPG.SizeTiny",
+    "small": "SFRPG.SizeSmall",
+    "medium": "SFRPG.SizeMedium",
+    "large": "SFRPG.SizeLarge",
+    "huge": "SFRPG.SizeHuge",
+    "gargantuan": "SFRPG.SizeGargantuan",
+    "colossal": "SFRPG.SizeColossal"
+};
+
 /**
  * The amount of space on a 5ft grid square that a 
  * token of a specific size takes.
@@ -491,9 +520,9 @@ SFRPG.tokenSizes = {
 };
 
 SFRPG.allowedClasses = {
-    "myst": "Mystic",
-    "tech": "Technomancer",
-    "wysh": "Witchwarper"
+    "myst": "SFRPG.AllowedClasses.Myst",
+    "tech": "SFRPG.AllowedClasses.Tech",
+    "wysh": "SFRPG.AllowedClasses.Wysh"
 };
 
 SFRPG.itemActionTypes = {
@@ -520,19 +549,19 @@ SFRPG.conditionTypes = {
     "dazzled": "SFRPG.ConditionsDazzled",
     "dead": "SFRPG.ConditionsDead",
     "deafened": "SFRPG.ConditionsDeafened",
-    "dyning": "SFRPG.ConditionsDying",
+    "dying": "SFRPG.ConditionsDying",
     "encumbered": "SFRPG.ConditionsEncumbered",
     "entangled": "SFRPG.ConditionsEntangled",
     "exhausted": "SFRPG.ConditionsExhausted",
     "fascinated": "SFRPG.ConditionsFascinated",
     "fatigued": "SFRPG.ConditionsFatigued",
-    "flatfooted": "SFRPG.ConditionsFlatFooted",
+    "flat-footed": "SFRPG.ConditionsFlatFooted",
     "frightened": "SFRPG.ConditionsFrightened",
     "grappled": "SFRPG.ConditionsGrappled",
     "helpless": "SFRPG.ConditionsHelpless",
     "nauseated": "SFRPG.ConditionsNauseated",
-    "offkilter": "SFRPG.ConditionsOffKilter",
-    "offtarget": "SFRPG.ConditionsOffTarget",
+    "off-kilter": "SFRPG.ConditionsOffKilter",
+    "off-target": "SFRPG.ConditionsOffTarget",
     "overburdened": "SFRPG.ConditionsOverburdened",
     "panicked": "SFRPG.ConditionsPanicked",
     "paralyzed": "SFRPG.ConditionsParalyzed",
@@ -591,19 +620,26 @@ SFRPG.augmentationTypes = {
 };
 
 SFRPG.consumableTypes = {
-    "serum": "Serums",
-    "ampoule": "Spell Ampoules",
-    "spellGem": "Spell Gems",
-    "drugs": "Drugs",
-    "medicne": "Medicinals",
-    "poison": "Poisons"
+    "serum"   : "SFRPG.ConsumableTypes.Serum",
+    "ampoule" : "SFRPG.ConsumableTypes.Ampoule",
+    "spellGem": "SFRPG.ConsumableTypes.SpellGem",
+    "drugs"   : "SFRPG.ConsumableTypes.Drugs",
+    "medicne" : "SFRPG.ConsumableTypes.Medicine",
+    "poison"  : "SFRPG.ConsumableTypes.Poison"
 };
 
 SFRPG.augmentationSytems = {
+    "none": "SFRPG.None",
     "arm": "SFRPG.AugArm",
+    "armAndHand" : "SFRPG.AugArmAndHand",
     "allArms": "SFRPG.AugAllArms",
     "brain": "SFRPG.AugBrain",
+    "brainHeartLungs": "SFRPG.AugBrainHeartLungs",
+    "brainAndEyes": "SFRPG.AugBrainAndEyes",
     "ears": "SFRPG.AugEars",
+    "earsAndThroat": "SFRPG.AugEarsAndThroat",
+    "endocrine": "SFRPG.AugEndocrine",
+    "eye": "SFRPG.AugEye",
     "eyes": "SFRPG.AugEyes",
     "foot": "SFRPG.AugFoot",
     "allFeet": "SFRPG.AugAllFeet",
@@ -611,10 +647,14 @@ SFRPG.augmentationSytems = {
     "allHands": "SFRPG.AugAllHands",
     "heart": "SFRPG.AugHeart",
     "leg": "SFRPG.AugLeg",
+    "legAndFoot": "SFRPG.AugLegAndFoot",
     "allLegs": "SFRPG.AugAllLegs",
+    "allLegsAndFeet": "SFRPG.AugAllLegsAndFeet",
     "lungs": "SFRPG.AugLungs",
+    "lungsAndThroat": "SFRPG.AugLungsAndThroat",
     "spinal": "SFRPG.AugSpinalColumn",
     "skin": "SFRPG.AugSkin",
+    "skinAndThroat": "SFRPG.AugSkinAndThroat",
     "throat": "SFRPG.AugThroat"
 };
 
@@ -622,295 +662,293 @@ SFRPG.augmentationSytems = {
  * Starship properties and values *
  *--------------------------------*/
 SFRPG.maneuverability = {
-    "clumsy": "Clumsy",
-    "poor": "Poor",
-    "average": "Average",
-    "good": "Good",
-    "perfect": "Perfect"
+    "clumsy" : "SFRPG.ShipSystems.Maneuverability.Clumsy",
+    "poor"   : "SFRPG.ShipSystems.Maneuverability.Poor",
+    "average": "SFRPG.ShipSystems.Maneuverability.Average",
+    "good"   : "SFRPG.ShipSystems.Maneuverability.Good",
+    "perfect": "SFRPG.ShipSystems.Maneuverability.Perfect"
 };
 
 SFRPG.powerCoreSystems = {
-    // Power cores
-    "micronL": "Micron Light",
-    "micronH": "Micron Heavy",
-    "micronU": "Micron Ultra",
-    "arcusL": "Arcus Light",
-    "pulseBr": "Pulse Brown",
-    "pulseBl": "Pulse Black",
-    "pulseWh": "Pulse White",
-    "pulseGy": "Pulse Gray",
-    "arcusH": "Arcus Heavy",
-    "puslseGr": "Pulse Green",
-    "pulseRe": "Pulse Red",
-    "pulseBu": "Pulse Blue",
-    "arcusUl": "Arcus Ultra",
-    "arcusMax": "Arcus Maximum",
-    "pulseOr": "Pulse Orange",
-    "pulsePr": "Pulse Prismatic",
-    "novaL": "Nova Light",
-    "novaH": "Nova Heavy",
-    "novaU": "Nova Ultra",
-    "gateL": "Gateway Light",
-    "gateH": "Gateway Heavy",
-    "gateU": "Gateway Ultra"
+    "micronL" : "SFRPG.ShipSystems.PowerCoreSystems.MicronLight",
+    "micronH" : "SFRPG.ShipSystems.PowerCoreSystems.MicronHeavy",
+    "micronU" : "SFRPG.ShipSystems.PowerCoreSystems.MicronUltra",
+    "arcusL"  : "SFRPG.ShipSystems.PowerCoreSystems.ArcusLight",
+    "pulseBr" : "SFRPG.ShipSystems.PowerCoreSystems.PulseBrown",
+    "pulseBl" : "SFRPG.ShipSystems.PowerCoreSystems.PulseBlack",
+    "pulseWh" : "SFRPG.ShipSystems.PowerCoreSystems.PulseWhite",
+    "pulseGy" : "SFRPG.ShipSystems.PowerCoreSystems.PulseGray",
+    "arcusH"  : "SFRPG.ShipSystems.PowerCoreSystems.ArcusHeavy",
+    "puslseGr": "SFRPG.ShipSystems.PowerCoreSystems.PulseGreen",
+    "pulseRe" : "SFRPG.ShipSystems.PowerCoreSystems.PulseRed",
+    "pulseBu" : "SFRPG.ShipSystems.PowerCoreSystems.PulseBlue",
+    "arcusUl" : "SFRPG.ShipSystems.PowerCoreSystems.ArcusUltra",
+    "arcusMax": "SFRPG.ShipSystems.PowerCoreSystems.ArcusMaximum",
+    "pulseOr" : "SFRPG.ShipSystems.PowerCoreSystems.PulseOrange",
+    "pulsePr" : "SFRPG.ShipSystems.PowerCoreSystems.PulsePrismatic",
+    "novaL"   : "SFRPG.ShipSystems.PowerCoreSystems.NovaLight",
+    "novaH"   : "SFRPG.ShipSystems.PowerCoreSystems.NovaHeavy",
+    "novaU"   : "SFRPG.ShipSystems.PowerCoreSystems.NovaUltra",
+    "gateL"   : "SFRPG.ShipSystems.PowerCoreSystems.GatewayLight",
+    "gateH"   : "SFRPG.ShipSystems.PowerCoreSystems.GatewayHeavy",
+    "gateU"   : "SFRPG.ShipSystems.PowerCoreSystems.GatewayUltra"
 }
 
 SFRPG.thrusterSystems = {
-    // Thrusters
     // Tiny
-    "t6": "T6 Thrusters",
-    "t8": "T8 Thrusters",
-    "t10": "T10 Thrusters",
-    "t12": "T12 Thrusters",
-    "t14": "T14 Thrusters",
+    "t6" : "SFRPG.ShipSystems.ThrusterSystems.T6",
+    "t8" : "SFRPG.ShipSystems.ThrusterSystems.T8",
+    "t10": "SFRPG.ShipSystems.ThrusterSystems.T10",
+    "t12": "SFRPG.ShipSystems.ThrusterSystems.T12",
+    "t14": "SFRPG.ShipSystems.ThrusterSystems.T14",
     // Small
-    "s6": "S6 Thrusters",
-    "s8": "S8 Thrusters",
-    "s10": "S10 Thrusters",
-    "s12": "S12 Thrusters",
+    "s6" : "SFRPG.ShipSystems.ThrusterSystems.S6",
+    "s8" : "SFRPG.ShipSystems.ThrusterSystems.S8",
+    "s10": "SFRPG.ShipSystems.ThrusterSystems.S10",
+    "s12": "SFRPG.ShipSystems.ThrusterSystems.S12",
     // Medium
-    "m4": "M4 Thrusters",
-    "m6": "M6 Thrusters",
-    "m8": "M8 Thrusters",
-    "m10": "M10 Thrusters",
-    "m12": "M12 Thrusters",
+    "m4" : "SFRPG.ShipSystems.ThrusterSystems.M4",
+    "m6" : "SFRPG.ShipSystems.ThrusterSystems.M6",
+    "m8" : "SFRPG.ShipSystems.ThrusterSystems.M8",
+    "m10": "SFRPG.ShipSystems.ThrusterSystems.M10",
+    "m12": "SFRPG.ShipSystems.ThrusterSystems.M12",
     // Large
-    "l4": "L4 Thrusters",
-    "l6": "L6 Thrusters",
-    "l8": "L8 Thrusters",
-    "l10": "L10 Thrusters",
+    "l4" : "SFRPG.ShipSystems.ThrusterSystems.L4",
+    "l6" : "SFRPG.ShipSystems.ThrusterSystems.L6",
+    "l8" : "SFRPG.ShipSystems.ThrusterSystems.L8",
+    "l10": "SFRPG.ShipSystems.ThrusterSystems.L10",
     // Huge
-    "h4": "H4 Thrusters",
-    "h6": "H6 Thrusters",
-    "h8": "H8 Thrusters",
-    "h10": "H10 Thrusters",
+    "h4" : "SFRPG.ShipSystems.ThrusterSystems.H4",
+    "h6" : "SFRPG.ShipSystems.ThrusterSystems.H6",
+    "h8" : "SFRPG.ShipSystems.ThrusterSystems.H8",
+    "h10": "SFRPG.ShipSystems.ThrusterSystems.H10",
     // Gargantuan
-    "g4": "G4 Thrusters",
-    "g6": "G6 Thrusters",
-    "g8": "G8 Thrusters",
+    "g4" : "SFRPG.ShipSystems.ThrusterSystems.G4",
+    "g6" : "SFRPG.ShipSystems.ThrusterSystems.G6",
+    "g8" : "SFRPG.ShipSystems.ThrusterSystems.G8",
     // Colossal
-    "c4": "C4 Thrusters",
-    "c6": "C6 Thrusters",
-    "c8": "C8 Thrusters"
+    "c4" : "SFRPG.ShipSystems.ThrusterSystems.C4",
+    "c6" : "SFRPG.ShipSystems.ThrusterSystems.C6",
+    "c8" : "SFRPG.ShipSystems.ThrusterSystems.C8"
 };
 
 SFRPG.armorSystems = {
-    "mk1": "Mk 1 armor",
-    "mk2": "Mk 2 armor",
-    "mk3": "Mk 3 armor",
-    "mk4": "Mk 4 armor",
-    "mk5": "Mk 5 armor",
-    "mk6": "Mk 6 armor",
-    "mk7": "Mk 7 armor",
-    "mk8": "Mk 8 armor",
-    "mk9": "Mk 9 armor",
-    "mk10": "Mk 10 armor",
-    "mk11": "Mk 11 armor",
-    "mk12": "Mk 12 armor",
-    "mk13": "Mk 13 armor",
-    "mk14": "Mk 14 armor",
-    "mk15": "Mk 15 armor"
+    "mk1" : "SFRPG.ShipSystems.ArmorSystems.Mk01",
+    "mk2" : "SFRPG.ShipSystems.ArmorSystems.Mk02",
+    "mk3" : "SFRPG.ShipSystems.ArmorSystems.Mk03",
+    "mk4" : "SFRPG.ShipSystems.ArmorSystems.Mk04",
+    "mk5" : "SFRPG.ShipSystems.ArmorSystems.Mk05",
+    "mk6" : "SFRPG.ShipSystems.ArmorSystems.Mk06",
+    "mk7" : "SFRPG.ShipSystems.ArmorSystems.Mk07",
+    "mk8" : "SFRPG.ShipSystems.ArmorSystems.Mk08",
+    "mk9" : "SFRPG.ShipSystems.ArmorSystems.Mk09",
+    "mk10": "SFRPG.ShipSystems.ArmorSystems.Mk10",
+    "mk11": "SFRPG.ShipSystems.ArmorSystems.Mk11",
+    "mk12": "SFRPG.ShipSystems.ArmorSystems.Mk12",
+    "mk13": "SFRPG.ShipSystems.ArmorSystems.Mk13",
+    "mk14": "SFRPG.ShipSystems.ArmorSystems.Mk14",
+    "mk15": "SFRPG.ShipSystems.ArmorSystems.Mk15"
 };
 
 SFRPG.computerSystems = {
-    "basic": "Basic Computer",
-    "mk1m": "Mk 1 mononode",
-    "mk1d": "Mk 1 duonode",
-    "mk1tr": "Mk 1 trinode",
-    "mk1te": "Mk 1 tetranode",
-    "mk2m": "Mk 2 mononode",
-    "mk2d": "Mk 2 duonode",
-    "mk2tr": "Mk 2 trinode",
-    "mk2te": "Mk 2 tetranode",
-    "mk3m": "Mk 3 mononode",
-    "mk3d": "Mk 3 duonode",
-    "mk3tr": "Mk 3 trinode",
-    "mk3te": "Mk 3 tetranode",
-    "mk4m": "Mk 4 mononode",
-    "mk4d": "Mk 4 duonode",
-    "mk4tr": "Mk 4 trinode",
-    "mk5m": "Mk 5 mononode",
-    "mk5d": "Mk 5 duonode",
-    "mk5tr": "Mk 5 trinode",
-    "mk6m": "Mk 6 mononode",
-    "mk6d": "Mk 6 duonode",
-    "mk7m": "Mk 7 mononode",
-    "mk7d": "Mk 7 duonode",
-    "mk8m": "Mk 8 mononode",
-    "mk8d": "Mk 8 duonode",
-    "mk9m": "Mk 9 mononode",
-    "mk9d": "Mk 9 duonode",
-    "mk10m": "Mk 10 mononode",
-    "mk10d": "Mk 10 duonode"
+    "basic": "SFRPG.ShipSystems.ComputerSystems.Basic",
+    "mk1m" : "SFRPG.ShipSystems.ComputerSystems.Mk01m",
+    "mk1d" : "SFRPG.ShipSystems.ComputerSystems.Mk01d",
+    "mk1tr": "SFRPG.ShipSystems.ComputerSystems.Mk01tr",
+    "mk1te": "SFRPG.ShipSystems.ComputerSystems.Mk01te",
+    "mk2m" : "SFRPG.ShipSystems.ComputerSystems.Mk02m",
+    "mk2d" : "SFRPG.ShipSystems.ComputerSystems.Mk02d",
+    "mk2tr": "SFRPG.ShipSystems.ComputerSystems.Mk02tr",
+    "mk2te": "SFRPG.ShipSystems.ComputerSystems.Mk02te",
+    "mk3m" : "SFRPG.ShipSystems.ComputerSystems.Mk03m",
+    "mk3d" : "SFRPG.ShipSystems.ComputerSystems.Mk03d",
+    "mk3tr": "SFRPG.ShipSystems.ComputerSystems.Mk03tr",
+    "mk3te": "SFRPG.ShipSystems.ComputerSystems.Mk03te",
+    "mk4m" : "SFRPG.ShipSystems.ComputerSystems.Mk04m",
+    "mk4d" : "SFRPG.ShipSystems.ComputerSystems.Mk04d",
+    "mk4tr": "SFRPG.ShipSystems.ComputerSystems.Mk04tr",
+    "mk5m" : "SFRPG.ShipSystems.ComputerSystems.Mk05m",
+    "mk5d" : "SFRPG.ShipSystems.ComputerSystems.Mk05d",
+    "mk5tr": "SFRPG.ShipSystems.ComputerSystems.Mk05tr",
+    "mk6m" : "SFRPG.ShipSystems.ComputerSystems.Mk06m",
+    "mk6d" : "SFRPG.ShipSystems.ComputerSystems.Mk06d",
+    "mk7m" : "SFRPG.ShipSystems.ComputerSystems.Mk07m",
+    "mk7d" : "SFRPG.ShipSystems.ComputerSystems.Mk07d",
+    "mk8m" : "SFRPG.ShipSystems.ComputerSystems.Mk08m",
+    "mk8d" : "SFRPG.ShipSystems.ComputerSystems.Mk08d",
+    "mk9m" : "SFRPG.ShipSystems.ComputerSystems.Mk09m",
+    "mk9d" : "SFRPG.ShipSystems.ComputerSystems.Mk09d",
+    "mk10m": "SFRPG.ShipSystems.ComputerSystems.Mk10m",
+    "mk10d": "SFRPG.ShipSystems.ComputerSystems.Mk10d"
 };
 
 SFRPG.crewQuarterSystems = {
-    "common": "Common",
-    "good": "Good",
-    "luxurious": "Luxurious"
+    "common"   : "SFRPG.ShipSystems.CrewQuarterSystems.Common",
+    "good"     : "SFRPG.ShipSystems.CrewQuarterSystems.Good",
+    "luxurious": "SFRPG.ShipSystems.CrewQuarterSystems.Luxurious"
 };
 
 SFRPG.defenseSystems = {
-    "mk1": "Mk 1 defenses",
-    "mk2": "Mk 2 defenses",
-    "mk3": "Mk 3 defenses",
-    "mk4": "Mk 4 defenses",
-    "mk5": "Mk 5 defenses",
-    "mk6": "Mk 6 defenses",
-    "mk7": "Mk 7 defenses",
-    "mk8": "Mk 8 defenses",
-    "mk9": "Mk 9 defenses",
-    "mk10": "Mk 10 defenses",
-    "mk11": "Mk 11 defenses",
-    "mk12": "Mk 12 defenses",
-    "mk13": "Mk 13 defenses",
-    "mk14": "Mk 14 defenses",
-    "mk15": "Mk 15 defenses"
+    "mk1" : "SFRPG.ShipSystems.DefenseSystems.Mk01",
+    "mk2" : "SFRPG.ShipSystems.DefenseSystems.Mk02",
+    "mk3" : "SFRPG.ShipSystems.DefenseSystems.Mk03",
+    "mk4" : "SFRPG.ShipSystems.DefenseSystems.Mk04",
+    "mk5" : "SFRPG.ShipSystems.DefenseSystems.Mk05",
+    "mk6" : "SFRPG.ShipSystems.DefenseSystems.Mk06",
+    "mk7" : "SFRPG.ShipSystems.DefenseSystems.Mk07",
+    "mk8" : "SFRPG.ShipSystems.DefenseSystems.Mk08",
+    "mk9" : "SFRPG.ShipSystems.DefenseSystems.Mk09",
+    "mk10": "SFRPG.ShipSystems.DefenseSystems.Mk10",
+    "mk11": "SFRPG.ShipSystems.DefenseSystems.Mk11",
+    "mk12": "SFRPG.ShipSystems.DefenseSystems.Mk12",
+    "mk13": "SFRPG.ShipSystems.DefenseSystems.Mk13",
+    "mk14": "SFRPG.ShipSystems.DefenseSystems.Mk14",
+    "mk15": "SFRPG.ShipSystems.DefenseSystems.Mk15"
 };
 
 SFRPG.driftEngineSystems = {
-    "basic": "Signal Basic",
-    "booster": "Signal Booster",
-    "major": "Signal Major",
-    "superior": "Signal Superior",
-    "ultra": "Signal Ultra"
+    "basic"   : "SFRPG.ShipSystems.DriftEngineSystems.Basic",
+    "booster" : "SFRPG.ShipSystems.DriftEngineSystems.Booster",
+    "major"   : "SFRPG.ShipSystems.DriftEngineSystems.Major",
+    "superior": "SFRPG.ShipSystems.DriftEngineSystems.Superior",
+    "ultra"   : "SFRPG.ShipSystems.DriftEngineSystems.Ultra"
 };
 
 SFRPG.sensorSystems = {
-    "cut": "Cut-rate",
-    "bushort": "Budget short-range",
-    "bashort": "Basic short-range",
-    "ashort": "Advanced short-range",
-    "bumed": "Budget medium-range",
-    "bamed": "Basic medium-range",
-    "amed": "Advanced medium-range",
-    "bulong": "Budget long-range",
-    "balong": "Basic long-range",
-    "along": "Advanced long-range"
+    "cut"    : "SFRPG.ShipSystems.SensorSystems.Cut",
+    "bushort": "SFRPG.ShipSystems.SensorSystems.Bushort",
+    "bashort": "SFRPG.ShipSystems.SensorSystems.Bashort",
+    "ashort" : "SFRPG.ShipSystems.SensorSystems.Ashort",
+    "bumed"  : "SFRPG.ShipSystems.SensorSystems.Bumed",
+    "bamed"  : "SFRPG.ShipSystems.SensorSystems.Bamed",
+    "amed"   : "SFRPG.ShipSystems.SensorSystems.Amed",
+    "bulong" : "SFRPG.ShipSystems.SensorSystems.Bulong",
+    "balong" : "SFRPG.ShipSystems.SensorSystems.Balong",
+    "along"  : "SFRPG.ShipSystems.SensorSystems.Along"
 };
 
 SFRPG.shieldSystems = {
-    "10": "Basic Shields 10",
-    "20": "Basic Shields 20",
-    "30": "Basic Shields 30",
-    "40": "Basic Shields 40",
-    "50": "Light Shields 50",
-    "60": "Light Shields 60",
-    "70": "Light Shields 70",
-    "80": "Light Shields 80",
-    "90": "Medium Shields 90",
-    "100": "Medium Shields 100",
-    "120": "Medium Shields 120",
-    "140": "Medium Shields 140",
-    "160": "Medium Shields 160",
-    "200": "Medium Shields 200",
-    "240": "Heavy Shields 240",
-    "280": "Heavy Shields 280",
-    "320": "Heavy Shields 320",
-    "360": "Heavy Shields 360",
-    "420": "Heavy Shields 420",
-    "480": "Heavy Shields 480",
-    "540": "Superior Shields 540",
-    "600": "Superior Shields 600"
+    "10" : "SFRPG.ShipSystems.ShieldSystems.010",
+    "20" : "SFRPG.ShipSystems.ShieldSystems.020",
+    "30" : "SFRPG.ShipSystems.ShieldSystems.030",
+    "40" : "SFRPG.ShipSystems.ShieldSystems.040",
+    "50" : "SFRPG.ShipSystems.ShieldSystems.050",
+    "60" : "SFRPG.ShipSystems.ShieldSystems.060",
+    "70" : "SFRPG.ShipSystems.ShieldSystems.070",
+    "80" : "SFRPG.ShipSystems.ShieldSystems.080",
+    "90" : "SFRPG.ShipSystems.ShieldSystems.090",
+    "100": "SFRPG.ShipSystems.ShieldSystems.100",
+    "120": "SFRPG.ShipSystems.ShieldSystems.120",
+    "140": "SFRPG.ShipSystems.ShieldSystems.140",
+    "160": "SFRPG.ShipSystems.ShieldSystems.160",
+    "200": "SFRPG.ShipSystems.ShieldSystems.200",
+    "240": "SFRPG.ShipSystems.ShieldSystems.240",
+    "280": "SFRPG.ShipSystems.ShieldSystems.280",
+    "320": "SFRPG.ShipSystems.ShieldSystems.320",
+    "360": "SFRPG.ShipSystems.ShieldSystems.360",
+    "420": "SFRPG.ShipSystems.ShieldSystems.420",
+    "480": "SFRPG.ShipSystems.ShieldSystems.480",
+    "540": "SFRPG.ShipSystems.ShieldSystems.540",
+    "600": "SFRPG.ShipSystems.ShieldSystems.600"
 };
 
 SFRPG.expansionBaySystems = {
-    "arclab": "Arcane laboratory",
-    "cargo": "Cargo hold",
-    "escape": "Escape pods",
-    "guest": "Guest quarters",
-    "hangar": "Hangar bay",
-    "life": "Life boats",
-    "med": "Medical bay",
-    "pass": "Passenger seating",
-    "pwrHouse": "Power core housing",
-    "recg": "Recreation suite (gym)",
-    "rect": "Recreation suite (trivid den)",
-    "hac": "Recreation suite (HAC)",
-    "science": "Science lab",
-    "senv": "Sealed environment chamber",
-    "shuttle": "Shuttle bay",
-    "smuggler": "Smuggler compartment",
-    "syth": "Synthesis bay",
-    "tech": "Tech workshop"
+    "arclab"  : "SFRPG.ShipSystems.ExpansionBaySystems.Arclab",
+    "cargo"   : "SFRPG.ShipSystems.ExpansionBaySystems.Cargo",
+    "escape"  : "SFRPG.ShipSystems.ExpansionBaySystems.Escape",
+    "guest"   : "SFRPG.ShipSystems.ExpansionBaySystems.Guest",
+    "hangar"  : "SFRPG.ShipSystems.ExpansionBaySystems.Hangar",
+    "life"    : "SFRPG.ShipSystems.ExpansionBaySystems.Life",
+    "med"     : "SFRPG.ShipSystems.ExpansionBaySystems.Med",
+    "pass"    : "SFRPG.ShipSystems.ExpansionBaySystems.Pass",
+    "pwrHouse": "SFRPG.ShipSystems.ExpansionBaySystems.Pwrhouse",
+    "recg"    : "SFRPG.ShipSystems.ExpansionBaySystems.Recg",
+    "rect"    : "SFRPG.ShipSystems.ExpansionBaySystems.Rect",
+    "hac"     : "SFRPG.ShipSystems.ExpansionBaySystems.Hac",
+    "science" : "SFRPG.ShipSystems.ExpansionBaySystems.Science",
+    "senv"    : "SFRPG.ShipSystems.ExpansionBaySystems.Senv",
+    "shuttle" : "SFRPG.ShipSystems.ExpansionBaySystems.Shuttle",
+    "smuggler": "SFRPG.ShipSystems.ExpansionBaySystems.Smuggler",
+    "syth"    : "SFRPG.ShipSystems.ExpansionBaySystems.Syth",
+    "tech"    : "SFRPG.ShipSystems.ExpansionBaySystems.Tech"
 };
 
 SFRPG.securitySystems = {
-    "antiHack": "Anti-Hacking Sytems",
-    "antiPer": "Antipersonnel Weapon",
-    "bio": "Biometric Locks",
-    "compCounter": "Computer Countermeasures",
-    "selfDestruct": "Self-Destruct System"
+    "antiHack"    : "SFRPG.ShipSystems.SecuritySystems.Antihack",
+    "antiPer"     : "SFRPG.ShipSystems.SecuritySystems.Antiper",
+    "bio"         : "SFRPG.ShipSystems.SecuritySystems.Bio",
+    "compCounter" : "SFRPG.ShipSystems.SecuritySystems.Compcounter",
+    "selfDestruct": "SFRPG.ShipSystems.SecuritySystems.Selfdestruct"
 };
 
 // TODO: Not currently used, but keeping it here
 // for future use
 SFRPG.baseFrames = {
-    "race": "Racer",
-    "inter": "Interceptor",
-    "fight": "Fighter",
-    "shuttle": "Shuttle",
-    "lfreight": "Light Freighter",
-    "expl": "Explorer",
-    "trans": "Transport",
-    "dest": "Destroyer",
-    "hfreight": "Heavy Freighter",
-    "bfreight": "Bulk Freighter",
-    "cruiser": "Cruiser",
-    "carr": "Carrier",
-    "battle": "Battleship",
-    "dread": "Dreadnought"
+    "race"    : "SFRPG.ShipSystems.BaseFrames.Race",
+    "inter"   : "SFRPG.ShipSystems.BaseFrames.Inter",
+    "fight"   : "SFRPG.ShipSystems.BaseFrames.Fight",
+    "shuttle" : "SFRPG.ShipSystems.BaseFrames.Shuttle",
+    "lfreight": "SFRPG.ShipSystems.BaseFrames.Lfreight",
+    "expl"    : "SFRPG.ShipSystems.BaseFrames.Expl",
+    "trans"   : "SFRPG.ShipSystems.BaseFrames.Trans",
+    "dest"    : "SFRPG.ShipSystems.BaseFrames.Dest",
+    "hfreight": "SFRPG.ShipSystems.BaseFrames.Hfreight",
+    "bfreight": "SFRPG.ShipSystems.BaseFrames.Bfreight",
+    "cruiser" : "SFRPG.ShipSystems.BaseFrames.Cruiser",
+    "carr"    : "SFRPG.ShipSystems.BaseFrames.Carr",
+    "battle"  : "SFRPG.ShipSystems.BaseFrames.Battle",
+    "dread"   : "SFRPG.ShipSystems.BaseFrames.Dread"
 };
 
 // Starship Weapons
 SFRPG.starshipWeaponTypes = {
-    "direct": "Direct-fire",
-    "tracking": "Tracking"
+    "direct"  : "SFRPG.ShipSystems.StarshipWeaponTypes.Direct",
+    "tracking": "SFRPG.ShipSystems.StarshipWeaponTypes.Tracking"
 };
 
 SFRPG.starshipWeaponClass = {
-    "light": "Light",
-    "heavy": "Heavy",
-    "capital": "Capital"
+    "light"  : "SFRPG.ShipSystems.StarshipWeaponClass.Light",
+    "heavy"  : "SFRPG.ShipSystems.StarshipWeaponClass.Heavy",
+    "capital": "SFRPG.ShipSystems.StarshipWeaponClass.Capital"
 };
 
 SFRPG.starshipWeaponProperties = {
-    "array": "Array",
-    "broad": "Broad Arc",
-    "emp": "EMP",
-    "irradiateL": "Irradiate (low)",
-    "irradiateM": "Irradiate (medium)",
-    "irradiateH": "Irradiate (high)",
-    "limited": "Limited Fire",
-    "line": "Line",
-    "point": "Point",
-    "quantum": "Quantum",
-    "ripper": "Ripper",
-    "tractor": "Tractor Beam",
-    "vortex": "Vortex"
+    "array"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Array",
+    "broad"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Broad",
+    "emp"       : "SFRPG.ShipSystems.StarshipWeaponProperties.Emp",
+    "irradiateL": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateL",
+    "irradiateM": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateM",
+    "irradiateH": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateH",
+    "limited"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Limited",
+    "line"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Line",
+    "point"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Point",
+    "quantum"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Quantum",
+    "ripper"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Ripper",
+    "tractor"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Tractor",
+    "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex"
 };
 
 SFRPG.starshipArcs = {
-    "forward": "Forward",
-    "starboard": "Starboard",
-    "aft": "Aft",
-    "port": "Port",
-    "turret": "Turret"
+    "forward"  : "SFRPG.ShipSystems.StarshipArcs.Forward",
+    "starboard": "SFRPG.ShipSystems.StarshipArcs.Starboard",
+    "aft"      : "SFRPG.ShipSystems.StarshipArcs.Aft",
+    "port"     : "SFRPG.ShipSystems.StarshipArcs.Port",
+    "turret"   : "SFRPG.ShipSystems.StarshipArcs.Turret"
 };
 
 SFRPG.starshipWeaponRanges = {
-    "short": "Short",
-    "medium": "Medium",
-    "long": "Long"
+    "short" : "SFRPG.ShipSystems.StarshipWeaponRanges.Short",
+    "medium": "SFRPG.ShipSystems.StarshipWeaponRanges.Medium",
+    "long"  : "SFRPG.ShipSystems.StarshipWeaponRanges.Long"
 };
 
 SFRPG.starshipRoles = {
-    "pilot": "Pilot",
-    "captain": "Captain",
-    "engineers": "Engineers",
-    "gunners": "Gunners",
-    "scienceOfficers": "Science Officers",
-    "passengers": "Passengers"
+    "pilot"          : "SFRPG.ShipSystems.StarshipRoles.Pilot",
+    "captain"        : "SFRPG.ShipSystems.StarshipRoles.Captain",
+    "engineers"      : "SFRPG.ShipSystems.StarshipRoles.Engineers",
+    "gunners"        : "SFRPG.ShipSystems.StarshipRoles.Gunners",
+    "scienceOfficers": "SFRPG.ShipSystems.StarshipRoles.ScienceOfficers",
+    "passengers"     : "SFRPG.ShipSystems.StarshipRoles.Passengers"
 };
 
 // starship value maps
@@ -1045,20 +1083,20 @@ SFRPG.vehicleSizes = {
 };
 
 SFRPG.vehicleTypes = {
-    "land": "Land",
-    "water": "Water",
-    "hover": "Hover",
-    "landW": "Land and water",
-    "air": "Air",
-    "landA": "Land and air"
+    "land" : "SFRPG.Vehicles.VehicleTypes.Land",
+    "water": "SFRPG.Vehicles.VehicleTypes.Water",
+    "hover": "SFRPG.Vehicles.VehicleTypes.Hover",
+    "landW": "SFRPG.Vehicles.VehicleTypes.Landw",
+    "air"  : "SFRPG.Vehicles.VehicleTypes.Air",
+    "landA": "SFRPG.Vehicles.VehicleTypes.Landa"
 };
 
 SFRPG.vehicleCoverTypes = {
-    "none": "None",
-    "cover": "Cover",
-    "soft": "Soft cover",
-    "partial": "Partial cover",
-    "total": "Total cover"
+    "none"   : "SFRPG.Vehicles.VehicleCoverTypes.None",
+    "cover"  : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
+    "soft"   : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
+    "partial": "SFRPG.Vehicles.VehicleCoverTypes.Partial",
+    "total"  : "SFRPG.Vehicles.VehicleCoverTypes.Total"
 };
 
 /**
@@ -1103,6 +1141,8 @@ SFRPG.modifierEffectTypes = {
     "initiative": "SFRPG.ModifierEffectTypeInit",
     "ability-skills": "SFRPG.ModifierEffectTypeAbilitySkills",
     "ability-score": "SFRPG.ModifierEffectTypeAbilityScore",
+    "ability-check": "SFRPG.ModifierEffectTypeAbilityCheck",
+    "ability-checks": "SFRPG.ModifierEffectTypeAbilityChecks",
     "skill": "SFRPG.ModifierEffectTypeSkill",
     "all-skills": "SFRPG.ModifierEffectTypeAllSkills",
     "saves": "SFRPG.ModifierEffectTypeSaves",
@@ -1117,7 +1157,8 @@ SFRPG.modifierEffectTypes = {
     "spell-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackDamage",
     "weapon-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackDamage",
     "all-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackDamage",
-    "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage"
+    "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage",
+    "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance"
 };
 
 SFRPG.modifierType = {
@@ -1219,6 +1260,7 @@ SFRPG.statusEffectIconMapping = {
     "unconscious": "systems/sfrpg/icons/conditions/unconscious.png"
 };
 
+// TODO localize
 SFRPG.conditions = {
     "asleep": {
         modifiers: [],
@@ -1362,12 +1404,7 @@ SFRPG.conditions = {
     }
 };
 
-SFRPG.allowedClasses = {
-    "myst": "Mystic",
-    "tech": "Technomancer",
-    "wysh": "Witchwarper"
-};
-
+// TODO localize
 SFRPG.characterFlags = {
     "improvedInititive": {
         name: "SFRPG.ImprovedInitiativeLabel",
@@ -1523,9 +1560,53 @@ SFRPG.droneModsPerLevel = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9,
 SFRPG.droneAbilityScoreIncreaseLevels = [4, 7, 10, 13, 16, 19];
 
 SFRPG.capacityUsagePer = {
+    "action": "SFRPG.Capacity.UsagePer.Action",
     "shot": "SFRPG.Capacity.UsagePer.Shot",
     "round": "SFRPG.Capacity.UsagePer.Round",
     "minute": "SFRPG.Capacity.UsagePer.Minute",
     "hour": "SFRPG.Capacity.UsagePer.Hour",
     "day": "SFRPG.Capacity.UsagePer.Day"
+};
+
+SFRPG.itemTypes = {
+    "asi": "SFRPG.Items.Categories.AbilityScoreIncrease",
+    "archetypes": "SFRPG.Items.Categories.Archetypes",
+    "augmentation": "SFRPG.Items.Categories.Augmentations",
+    "chassis": "SFRPG.Items.Categories.DroneChassis",
+    "class": "SFRPG.Items.Categories.Classes",
+    "consumable": "SFRPG.Items.Categories.Consumables",
+    "container": "SFRPG.Items.Categories.Containers",
+    "equipment": "SFRPG.Items.Categories.Equipment",
+    "feat": "SFRPG.Items.Categories.Feats",
+    "fusion": "SFRPG.Items.Categories.WeaponFusions",
+    "goods": "SFRPG.Items.Categories.Goods",
+    "hybrid": "SFRPG.Items.Categories.HybridItems",
+    "magic": "SFRPG.Items.Categories.MagicItems",
+    "mod": "SFRPG.Items.Categories.DroneMods",
+    "race": "SFRPG.Items.Categories.Races",
+    "spell": "SFRPG.Items.Categories.Spells",
+    "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
+    "technological": "SFRPG.Items.Categories.TechnologicalItems",
+    "theme": "SFRPG.Items.Categories.Themes",
+    "upgrade": "SFRPG.Items.Categories.ArmorUpgrades",
+    "weapon": "SFRPG.Items.Categories.Weapons",
+    "shield": "SFRPG.Items.Categories.Shields",
+    "ammunition": "SFRPG.Items.Categories.Ammunition",
+    "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories"
+};
+
+SFRPG.containableTypes = {
+    "weapon"       : "SFRPG.Items.Categories.Weapons",
+    "equipment"    : "SFRPG.Items.Categories.Equipment",
+    "consumable"   : "SFRPG.Items.Categories.Consumables",
+    "goods"        : "SFRPG.Items.Categories.Goods",
+    "container"    : "SFRPG.Items.Categories.Containers",
+    "hybrid"       : "SFRPG.Items.Categories.HybridItems",
+    "magic"        : "SFRPG.Items.Categories.MagicItems",
+    "technological": "SFRPG.Items.Categories.TechnologicalItems",
+    "fusion"       : "SFRPG.Items.Categories.WeaponFusions",
+    "upgrade"      : "SFRPG.Items.Categories.ArmorUpgrades",
+    "spell"        : "SFRPG.Items.Categories.Spells",
+    "augmentation" : "SFRPG.Items.Categories.Augmentations",
+    "shield"       : "SFRPG.Items.Categories.Shields"
 };

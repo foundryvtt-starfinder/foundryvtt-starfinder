@@ -1,29 +1,7 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
 
     {{!-- Item Sheet Header --}}
-    <header class="sheet-header flexrow">
-        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
-
-        <div class="header-details flexrow">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" data-tippy-content="<strong>Item Name</strong>" placeholder="Item Name"/>
-            </h1>
-
-            <div class="item-subtitle">
-                <h4 data-tippy-content="Item Type" class="item-type">{{itemType}}</h4>
-                <span data-tippy-content="Item Status" class="item-status">{{itemStatus}}</span>
-            </div>
-
-            <ul class="summary">
-                <li data-tippy-content="Weapon Type">
-                    {{lookup config.weaponTypes data.weaponType }}
-                </li>
-                <li data-tippy-content="Source<br><br><em>Used primarily to denote what rules document this item came from</em>">
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
-                </li>
-            </ul>
-        </div>
-    </header>
+    {{> "systems/sfrpg/templates/items/parts/item-header.html"}}
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
@@ -40,11 +18,11 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">Weapon Details</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.Weapon.Details" }}</h3>
 
             {{!-- Weapon Type --}}
             <div class="form-group">
-                <label>Weapon Type</label>
+                <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
                 <select name="data.weaponType">
                     {{#select data.weaponType}}
                     {{#each config.weaponTypes as |name type|}}
@@ -54,26 +32,39 @@
                 </select>
             </div>
 
+            {{!-- Weapon Category --}}
+            <div class="form-group">
+                <label>{{ localize "SFRPG.Items.Weapon.Category" }}</label>
+                <select name="data.weaponCategory">
+                    {{#select data.weaponCategory}}
+                    <option value="">Unspecified</option>
+                    {{#each config.weaponCategories as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
             {{!-- Equipment Status --}}
             <div class="form-group stacked">
-                <label>Equipment Status</label>
+                <label>{{ localize "SFRPG.Items.EquipmentStatus" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> Proficient
+                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SFRPG.Items.Proficient" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> Equipped
+                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> Identified
+                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SFRPG.Items.Identified" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> Attuned
+                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> {{ localize "SFRPG.Items.Attuned" }}
                 </label>
             </div>
 
             {{!-- Weapon Properties --}}
             <div class="form-group stacked weapon-properties">
-                <label>Weapon Properties</label>
+                <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
                 {{#each config.weaponProperties as |name prop|}}
                 <label class="checkbox">
                     <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../data.properties prop)}}/> {{ name }}
@@ -81,18 +72,33 @@
                 {{/each}}
             </div>
 
-            <h3 class="form-header">Weapon Usage</h3>
+            <br />
+
+            <h3 class="form-header">{{ localize "SFRPG.Items.Weapon.Usage" }}</h3>
 
             {{!-- Item Activation Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-activation.html"}}
 
-            <h3 class="form-header">Weapon Attack</h3>
+            <br />
+
+            <h3 class="form-header">{{ localize "SFRPG.Items.Weapon.Attack" }}</h3>
 
             {{!-- Item Action Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-action.html"}}
 
+            <br />
+
             <h3 class="form-header">{{ localize "SFRPG.CapacityUsage" }}</h3>
             {{> "systems/sfrpg/templates/items/parts/item-capacity.html"}}
+
+            <br />
+
+            {{> "systems/sfrpg/templates/items/parts/physical-item-details.html"}}
+
+            <br />
+
+            {{> "systems/sfrpg/templates/items/parts/container-details.html" message="SFRPG.ItemSheet.Weapons.ContainerTooltip"}}
+
         </div>
 
         {{!-- Modifiers Tab --}}

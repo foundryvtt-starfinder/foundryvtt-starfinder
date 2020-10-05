@@ -117,7 +117,7 @@ export class ItemSFRPG extends Item {
             // Save DC
             let save = data.save || {};
             if (!save.type) save.dc = null;
-            labels.save = save.type ? `DC ${save.dc || ""} ${C.saves[save.type]}` : "";
+            labels.save = this._getSaveLabel(save, actorData, itemData);
 
             // Damage
             let dam = data.damage || {};
@@ -126,6 +126,21 @@ export class ItemSFRPG extends Item {
 
         // Assign labels and return the Item
         this.labels = labels;
+    }
+
+    _getSaveLabel(save, actorData, itemData) {
+        if (!save.type) return "";
+        
+        let dcFormula = save.dc || `10 + ${Math.floor((itemData.data.attributes?.sturdy ? itemData.data.level + 2 : itemData.data.level) / 2)} + ${this.actor?.data?.data?.abilities?.dex ? this.actor.data.data.abilities.dex.mod : 0}`;
+        if (dcFormula && Number.isNaN(Number(dcFormula))) {
+            const rollData = duplicate(actorData?.data || {});
+            rollData.item = itemData;
+
+            let saveRoll = new Roll(dcFormula, rollData).roll();
+            return save.type ? `DC ${saveRoll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}` : "";
+        } else {
+            return save.type ? `DC ${save.dc || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}` : "";
+        }
     }
 
     /**
@@ -153,13 +168,16 @@ export class ItemSFRPG extends Item {
      * @return {Promise}
      */
     async roll() {
+        let htmlOptions = { secrets: this.actor?.owner || true, rollData: this.data };
+        htmlOptions.rollData.owner = this.actor?.data?.data;
+
         // Basic template rendering data
         const token = this.actor.token;
         const templateData = {
             actor: this.actor,
             tokenId: token ? `${token.scene._id}.${token.id}` : null,
             item: this.data,
-            data: this.getChatData(),
+            data: this.getChatData(htmlOptions),
             labels: this.labels,
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,
@@ -375,6 +393,22 @@ export class ItemSFRPG extends Item {
         );
     }
 
+    /**
+     * Prepare chat card data for shield type items
+     * @param {Object} data The items data
+     * @param {Object} labels Any labels for the item
+     * @param {Object} props The items properties
+     */
+    _shieldChatData(data, labels, props) {
+        props.push(
+            "Shield",
+            "Max dex bonus : " + data.dex.toString(),
+            "Armor check penalty: " + data.acp.toString(),
+            "Wielded bonus: " + data.bonus.wielded.toString() + " / Aligned bonus: " + data.bonus.aligned.toString(),
+            data.proficient ? "Proficient" : "Not Proficient"
+        );
+    }
+
     /* -------------------------------------------- */
 
     /**
@@ -388,7 +422,7 @@ export class ItemSFRPG extends Item {
         // Spell saving throw text
         const abl = ad.attributes.keyability || "int";
         if (this.hasSave && !data.save.dc) data.save.dc = 10 + data.level + ad.abilities[abl].mod;
-        labels.save = `DC ${data.save.dc} ${CONFIG.SFRPG.saves[data.save.type]}`;
+        labels.save = this._getSaveLabel(data.save, ad, data);
 
         // Spell properties
         props.push(
@@ -407,7 +441,7 @@ export class ItemSFRPG extends Item {
         // Spell saving throw text
         const abl = data.ability || ad.attributes.keyability || "str";
         if (this.hasSave && !data.save.dc) data.save.dc = 10 + ad.details.level + ad.abilities[abl].mod;
-        labels.save = `DC ${data.save.dc} ${CONFIG.SFRPG.saves[data.save.type]}`;
+        labels.save = this._getSaveLabel(data.save, ad, data);
 
         // Feat properties
         props.push(
@@ -441,6 +475,7 @@ export class ItemSFRPG extends Item {
      */
     rollAttack(options = {}) {
         const itemData = this.data;
+        const isWeapon = ["weapon", "shield"].includes(this.data.type);
 
         const actorData = this.actor.data.data;
         if (!this.hasAttack) {
@@ -461,7 +496,7 @@ export class ItemSFRPG extends Item {
         if (itemData.data.attackBonus !== 0) parts.push("@item.data.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.data.type)) parts.push("@attributes.bab");
-        if ((this.data.type === "weapon") && !itemData.data.proficient) parts.push("-4");
+        if (isWeapon && !itemData.data.proficient) parts.push("-4");
 
         let acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
@@ -472,9 +507,7 @@ export class ItemSFRPG extends Item {
             acceptedModifiers.push(SFRPGEffectType.MELEE_ATTACKS);
         }
 
-        if (this.data.type === "weapon") {
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
-        }
+        if (isWeapon) acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
 
         let modifiers = this.actor.getAllModifiers();
         modifiers = modifiers.filter(mod => {
@@ -524,7 +557,11 @@ export class ItemSFRPG extends Item {
         const title = game.settings.get('sfrpg', 'useCustomChatCard') ? `Attack Roll` : `Attack Roll - ${itemData.name}`;
 
         //Warn the user if there is no ammo left
-        if (itemData.data.capacity && itemData.data.capacity.value === 0)  ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
+        const usage = itemData.data.usage?.value || 0;
+        const availableCapacity = itemData.data.capacity?.value || 0;
+        if (availableCapacity < usage) {
+            ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
+        }
 
         // Call the roll helper utility
         DiceSFRPG.d20Roll({
@@ -554,11 +591,12 @@ export class ItemSFRPG extends Item {
     _onAttackRollClose(html, parts, data) {
         const itemData = duplicate(this.data.data);
 
-        if (itemData.hasOwnProperty("capacity")) {
-            const capacity = itemData.capacity;
+        if (itemData.hasOwnProperty("usage")) {
             const usage = itemData.usage;
 
-            if (!capacity || capacity.max && capacity.max === 0) return;
+            const capacity = itemData.capacity;
+            if (!capacity?.value || capacity.value <= 0) return;
+
             if (usage.per && ["round", "shot"].includes(usage.per)) {
                 capacity.value = Math.max(capacity.value - usage.value, 0);
             } else if (usage.per && ['minute'].includes(usage.per)) {
@@ -568,7 +606,7 @@ export class ItemSFRPG extends Item {
                         capacity.value = Math.max(capacity.value - usage.value, 0);
                     }
                 } else {
-                    ui.notifications.info("Currently cannot deduct usage from powered melee weapons outside of combat.");
+                    ui.notifications.info("Currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
                 }
             }
 
@@ -621,7 +659,9 @@ export class ItemSFRPG extends Item {
      */
     rollDamage({ event, versatile = false } = {}) {
         const itemData = this.data.data;
-        const actorData = this.actor.data.data;
+        const actorData = this.actor.getRollData(); //this.actor.data.data;
+        const isWeapon = ["weapon", "shield"].includes(this.data.type);
+
         if (!this.hasDamage) {
             throw new Error("You may not make a Damage Roll with this Item.");
         }
@@ -652,7 +692,7 @@ export class ItemSFRPG extends Item {
             acceptedModifiers.push(SFRPGEffectType.MELEE_DAMAGE);
         }
 
-        if (this.data.type === "weapon") {
+        if (isWeapon) {
             acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
             acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
         }
@@ -1051,7 +1091,7 @@ export class ItemSFRPG extends Item {
         name = "", 
         modifier = 0, 
         type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.CONSTANT, 
+        modifierType = SFRPGModifierType.FORMULA, 
         effectType = SFRPGEffectType.SKILL,
         subtab = "misc",
         valueAffected = "", 

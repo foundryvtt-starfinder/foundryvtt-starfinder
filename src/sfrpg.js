@@ -9,8 +9,9 @@
 import { SFRPG } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, getBarAttribute } from "./module/canvas.js";
+import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
+import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
@@ -28,6 +29,12 @@ import { generateUUID } from "./module/utilities.js";
 import migrateWorld from './module/migration.js';
 import CounterManagement from "./module/classes/counter-management.js";
 import templateOverrides from "./module/template-overrides.js";
+import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
+import { RPC } from "./module/rpc.js"
+
+import { } from "./module/packs/browsers.js"
+
+let defaultDropHandler = null;
 
 Hooks.once('init', async function () {
     console.log(`SFRPG | Initializing the Starfinder System`);
@@ -113,7 +120,12 @@ Hooks.once("setup", function () {
         "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
         "weaponProperties", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
         "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
-        "modifierArmorClassAffectedValues", "capacityUsagePer"
+        "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
+        "weaponSpecial", "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
+        "powerCoreSystems", "thrusterSystems", "armorSystems", "computerSystems", "crewQuarterSystems", "defenseSystems",
+        "driftEngineSystems", "sensorSystems", "shieldSystems", "expansionBaySystems", "securitySystems", "baseFrames",
+        "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
+        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes"
     ];
 
     for (let o of toLocalize) {
@@ -134,9 +146,9 @@ Hooks.once("setup", function () {
     Handlebars.registerHelper('greaterThan', function (v1, v2, options) {
         'use strict';
         if (v1 > v2) {
-            return options.fn(this);
+            return true;
         }
-        return options.inverse(this);
+        return false;
     });
 
     Handlebars.registerHelper('ellipsis', function (displayedValue, limit) {
@@ -145,6 +157,59 @@ Hooks.once("setup", function () {
             return str;
         }
         return str.substring(0, limit) + '…';
+    });
+
+    Handlebars.registerHelper('getChildBulk', function (children) {
+        const bulk = computeCompoundBulkForItem(null, children);
+        const reduced = bulk / 10;
+        if (reduced < 0.1) {
+            return "-";
+        } else if (reduced < 1) {
+            return "L";
+        } else return Math.floor(reduced);
+    });
+
+    Handlebars.registerHelper('getTotalStorageCapacity', function (item) {
+        let totalCapacity = 0;
+        if (item?.data?.container?.storage && item.data.container.storage.length > 0) {
+            for (let storage of item.data.container.storage) {
+                totalCapacity += storage.amount;
+            }
+        }
+        return totalCapacity;
+    });
+
+    Handlebars.registerHelper('capitalize', function (value) {
+        return value.capitalize();
+    });
+
+    Handlebars.registerHelper('contains', function (container, value) {
+        if (!container || !value) return false;
+
+        if (container instanceof Array) {
+            return container.includes(value);
+        }
+
+        if (container instanceof Object) {
+            return container.hasOwnProperty(value);
+        }
+
+        return false;
+    });
+
+    Handlebars.registerHelper('console', function (value) {
+        console.log(value);
+    });
+
+    Handlebars.registerHelper('indexOf', function (array, value, zeroBased = true) {
+        const index = array.indexOf(value);
+        if (index < 0) return index;
+        return index + (zeroBased ? 0 : 1);
+    });
+
+    /** Returns the value based on whether left is null or not. */
+    Handlebars.registerHelper('leftOrRight', function (left, right) {
+        return left || right;
     });
 });
 
@@ -158,7 +223,62 @@ Hooks.once("ready", () => {
             .then(_ => ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage")))
             .catch(_ => ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage")));
     }
+
+    defaultDropHandler = canvas._dragDrop.callbacks.drop;
+    canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
 });
+
+Hooks.on('ready', () => {
+    RPC.initialize();
+
+    initializeRemoteInventory();
+
+    if (game.user.isGM) {
+        migrateOldContainers();
+    }
+});
+
+async function migrateOldContainers() {
+    for (let actor of game.actors.entries) {
+        let sheetActorHelper = new ActorItemHelper(actor._id, null, null);
+        await sheetActorHelper.migrateItems();
+    }
+
+    for (let scene of game.scenes.entries) {
+        for (let token of scene.data.tokens) {
+            let sheetActorHelper = new ActorItemHelper(token.actorId, token._id, scene._id);
+            await sheetActorHelper.migrateItems();
+        }
+    }
+}
+
+export async function handleOnDrop(event) {
+    event.preventDefault();
+
+	let data = null;
+	try {
+		data = JSON.parse(event.dataTransfer.getData('text/plain'));
+	} catch (err) {
+        defaultDropHandler(event);
+		return false;
+    }
+
+    // We're only interested in overriding item drops.
+    if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
+        return await defaultDropHandler(event);
+    }
+
+    // Transform the cursor position to canvas space
+	const [x, y] = [event.clientX, event.clientY];
+	const t = this.stage.worldTransform;
+	data.x = (x - t.tx) / canvas.stage.scale.x;
+    data.y = (y - t.ty) / canvas.stage.scale.y;
+
+    if (data.type === "Item") {
+        return await handleItemDropCanvas(data);
+    }
+    return false;
+}
 
 Hooks.on("canvasInit", function () {
     canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");

@@ -56,17 +56,17 @@ export default class StackModifiers extends Closure {
             return prev;
         }, [[], [], [], [], [], [], [], [], [], [], []]);
 
-        const ability = abilityMods?.filter(mod => mod.modifier > 0)?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const armor = armorMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const base = baseMods?.sort((a, b) => b.modifier - a.modifer)?.shift() ?? null;
-        const circumstance = circumstanceMods?.sort((a, b) => b.modifier - a.modifier);
-        const divine = divineMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const enhancement = enhancementMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const insight = insightMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const luck = luckMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const morale = moraleMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const racial = racialMods?.sort((a, b) => b.modifier - a.modifier)?.shift() ?? null;
-        const untyped = untypedMods?.sort((a, b) => b.modifer - a.modifier);
+        const ability = abilityMods?.filter(mod => mod.max > 0)?.sort((a, b) => b.max - a.max)?.shift() ?? null;
+        const armor = armorMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
+        const base = baseMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
+        const circumstance = circumstanceMods?.sort((a, b) => b.max - a.max);
+        const divine = divineMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
+        const enhancement = enhancementMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
+        const insight = insightMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
+        const luck = luckMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
+        const morale = moraleMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
+        const racial = racialMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
+        const untyped = untypedMods?.sort((a, b) => b.max - a.max);
 
         return {
             ability,

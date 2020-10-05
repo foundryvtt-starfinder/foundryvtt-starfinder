@@ -115,8 +115,8 @@
                     },
                     "bab": 0,
                     "arms": 2,
-                    "space": 0,
-                    "reach": 0,
+                    "space": "",
+                    "reach": "",
                     "speed": {
                         "value": "30 ft",
                         "special": ""
@@ -440,6 +440,10 @@
                 "armorProf": {
                     "value": [],
                     "custom": ""
+                },
+                "shieldProf": {
+                    "value": [],
+                    "custom": ""
                 }
             },
             "resources": {
@@ -698,10 +702,12 @@
     },
     "Item": {
         "types": [
+            "asi",
             "weapon",
             "equipment",
             "consumable",
             "goods",
+            "container",
             "class",
             "spell",
             "feat",
@@ -714,9 +720,16 @@
             "starshipWeapon",
             "archetypes",
             "chassis",
-            "mod"
+            "mod",
+            "shield"
         ],
         "templates": {
+            "container": {
+                "container": {
+                    "contents": [],
+                    "storage": []
+                }
+            },
             "itemDescription": {
                 "description": {
                     "value": "",
@@ -733,7 +746,25 @@
                 "level": 1,
                 "attuned": false,
                 "equipped": false,
-                "identified": true
+                "identified": true,
+                "attributes": {
+                    "sturdy": false,
+                    "customBuilt": false,
+                    "size": "medium",
+                    "dex": {
+                        "mod": ""
+                    },
+                    "hp": {
+                        "value": 6,
+                        "max": ""
+                    },
+                    "hardness": {
+                        "value": ""
+                    },
+                    "ac": {
+                        "value": ""
+                    }
+                }
             },
             "activatedEffect": {
                 "activation": {
@@ -801,28 +832,46 @@
                 "modifiers": []
             }
         },
+        "asi": {
+            "abilities": {}
+        },
         "weapon": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers"],
-            "weaponType": {
-                "value": "basicM"
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "attributes": {
+                "sturdy": true
             },
+            "weaponType": "basicM",
+            "weaponCategory": "uncategorized",
             "special": "",
             "ability": "str",
             "properties": {},
             "proficient": true,
-            "fusions": []
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "slot",
+                        "subtype": "fusion",
+                        "amount": 0,
+                        "acceptsType": ["fusion"],
+                        "affectsEncumbrance": true,
+                        "weightProperty": "level"
+                    }
+                ]
+            }
         },
         "equipment": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "attributes": {
+                "sturdy": true
+            },
             "armor": {
                 "type": "light",
                 "eac": 0,
                 "kac": 0,
                 "dex": null,
                 "acp": 0,
-                "speedAdjust": 0,
-                "upgradeSlots": 0,
-                "upgrades": []
+                "speedAdjust": 0
             },
             "strength": 0,
             "speed": "",
@@ -831,8 +880,28 @@
             },
             "size": "",
             "reach": "",
-            "weaponSlots": 0,
-            "proficient": true
+            "proficient": true,
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "slot",
+                        "subtype": "armorUpgrade",
+                        "amount": 0,
+                        "acceptsType": ["upgrade", "weapon"],
+                        "affectsEncumbrance": true,
+                        "weightProperty": "slots"
+                    },
+                    {
+                        "type": "slot",
+                        "subtype": "weaponSlot",
+                        "amount": 0,
+                        "acceptsType": ["weapon"],
+                        "affectsEncumbrance": true,
+                        "weightProperty": ""
+                    }
+                ]
+            }
         },
         "consumable": {
             "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers"],
@@ -843,10 +912,40 @@
                 "per": null,
                 "autoUse": true,
                 "autoDestroy": true
+            },
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "slot",
+                        "subtype": "spellSlot",
+                        "amount": 0,
+                        "acceptsType": ["spell"],
+                        "affectsEncumbrance": false,
+                        "weightProperty": "bulk"
+                    }
+                ]
             }
         },
         "goods": {
             "templates": ["itemDescription", "physicalItem", "modifiers"]
+        },
+        "container": {
+            "templates": ["itemDescription", "physicalItem", "modifiers", "container"],
+            "equippedBulkMultiplier": 1,
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "bulk",
+                        "subtype": "",
+                        "amount": 0,
+                        "acceptsType": ["weapon", "shield", "equipment", "goods", "consumable", "container", "technological", "fusion", "upgrade", "augmentation", "magic", "hybrid"],
+                        "affectsEncumbrance": true,
+                        "weightProperty": "bulk"
+                    }
+                ]
+            }
         },
         "class": {
             "templates": ["itemDescription", "modifiers"],
@@ -867,12 +966,14 @@
             },
             "proficiencies": {
                 "weapon": {},
-                "armor": {}
+                "armor": {},
+                "shield": {}
             },
-            "bab": "bad",
-            "fort": "bad",
-            "ref": "good",
-            "will": "bad"
+            "bab": "moderate",
+            "fort": "slow",
+            "ref": "fast",
+            "will": "slow",
+            "isCaster": false
         },
         "spell": {
             "templates": ["itemDescription", "activatedEffect", "action", "modifiers"],
@@ -937,7 +1038,7 @@
             "hands": 0
         },
         "fusion": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": ["itemDescription", "physicalItem", "modifiers"],
             "level": 1
         },
         "upgrade": {
@@ -1006,8 +1107,49 @@
             },
             "isArmorSlot": false,
             "weaponProficiency": "",
+            "shieldProficiency": "",
             "additionalSenses": "",
             "bonusSkill": ""
+        },
+        "shield": {
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "attributes": {
+                "sturdy": true
+            },
+            "properties": {
+                "nonlethal": true
+            },
+            "dex": null,
+            "acp": null,
+            "bonus": {
+                "wielded": 0,
+                "aligned": 0
+            },
+            "damage": {
+                "parts": []
+            },
+            "proficient": true,
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "slot",
+                        "subtype": "armorUpgrade",
+                        "amount": 0,
+                        "acceptsType": ["upgrade"],
+                        "affectsEncumbrance": true,
+                        "weightProperty": "slots"
+                    },
+                    {
+                        "type": "slot",
+                        "subtype": "fusion",
+                        "amount": 0,
+                        "acceptsType": ["fusion"],
+                        "affectsEncumbrance": true,
+                        "weightProperty": "level"
+                    }
+                ]
+            }
         }
     }
 }

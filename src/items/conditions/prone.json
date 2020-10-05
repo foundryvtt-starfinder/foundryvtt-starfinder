@@ -1,18 +1,117 @@
 {
   "name": "Prone",
-  "permission": {
-    "default": 0,
-    "hg1bBCAUsIDPKim6": 3
-  },
-  "flags": {
-    "exportSource": {
-      "world": "SF_AG-OP",
-      "system": "sfrpg",
-      "coreVersion": "0.6.0",
-      "systemVersion": "0.2.5"
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.Conditions]</p>\n<hr/>\n<p style=\"text-align: justify;\">You are lying on the ground.</p>\n<p style=\"text-align: justify;\">You take a –4 penalty to melee attack rolls.</p>\n<p style=\"text-align: justify;\">You gain a +4 bonus to your Armor Class against ranged attacks, but you take a –4 penalty to your Armor Class against melee attacks.</p>\n<p style=\"text-align: justify;\">Standing up from prone is a move action.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB.277",
+    "type": "",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "target": {
+      "value": "",
+      "type": ""
+    },
+    "area": {
+      "value": null,
+      "units": null,
+      "shape": "",
+      "effect": ""
+    },
+    "range": {
+      "value": null,
+      "units": null,
+      "additional": "",
+      "per": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": ""
+    },
+    "ability": "int",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "parts": [],
+      "effect": ""
+    },
+    "damage": {
+      "parts": []
+    },
+    "formula": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": "negate"
+    },
+    "descriptors": [],
+    "modifiers": [
+      {
+        "name": "Prone",
+        "modifier": -4,
+        "type": "untyped",
+        "effectType": "melee-attacks",
+        "valueAffected": "",
+        "enabled": true,
+        "source": "Condition",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "0cce6d75-e03b-4ba6-bc66-48b00c0e9ac7"
+      },
+      {
+        "name": "AC against Ranged Attacks",
+        "modifier": 4,
+        "type": "untyped",
+        "effectType": "ac",
+        "valueAffected": "both",
+        "enabled": true,
+        "source": "Condition",
+        "notes": "Against Ranged attacks.",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "ca5db92b-5e41-4ad6-b36d-9afb48825189"
+      },
+      {
+        "name": "AC against Melee Attacks",
+        "modifier": -4,
+        "type": "untyped",
+        "effectType": "ac",
+        "valueAffected": "both",
+        "enabled": true,
+        "source": "Condition",
+        "notes": "AC against Melee Attacks.",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "b4741240-87bd-4f61-bc23-db280a640cf0"
+      }
+    ],
+    "requirements": "Condition",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "abilityMods": {
+      "parts": []
     }
   },
-  "content": "<table style=\"width: 703px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 72px;\">\n<td style=\"text-align: center; height: 72px; width: 398px;\">\n<h1><strong>Prone</strong></h1>\n<h3><strong>Source</strong>&nbsp;CRB.277</h3>\n<h3><strong>Related </strong>@Compendium[sfrpg.conditions.bPDAhCFEP5Jvybhg]{Conditions}</h3>\n</td>\n<td style=\"text-align: center; width: 398px;\">\n<p><img src=\"systems/sfrpg/icons/conditions/prone.png\" alt=\"\" width=\"100\" height=\"100\" /></p>\n</td>\n</tr>\n</tbody>\n</table>\n<h3 style=\"text-align: justify;\">You are lying on the ground. You take a &ndash;4 penalty to melee attack rolls. You gain a +4 bonus to your Armor Class against ranged attacks, but you take a &ndash;4 penalty to your Armor Class against melee attacks. Standing up from prone is a move action.</h3>\n<hr />\n<p>&nbsp;</p>",
   "img": "systems/sfrpg/icons/conditions/prone.png",
-  "_id": "XeRGqHVtcZ7vsgJ0"
+  "_id": "XeRGqHVtcZ7vsgJ0",
+  "sort": 3200000,
+  "flags": {}
 }

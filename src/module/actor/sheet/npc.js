@@ -1,4 +1,5 @@
 import { ActorSheetSFRPG } from "./base.js";
+import { SFRPG } from "../../config.js";
 
 /**
  * An Actor sheet for NPC type characters in the SFRPG system.
@@ -27,7 +28,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     /** @override */
     activateListeners(html) {
         super.activateListeners(html);
-
+        
+        html.find('.reload').click(this._onReloadWeapon.bind(this));
         html.find('#add-skills').click(this._toggleSkills.bind(this));
     }
 
@@ -53,26 +55,36 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     }
 
     _prepareItems(data) {
+        const inventory = {
+            inventory: { label: "Inventory", items: [], dataset: { type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon" }, allowAdd: true }
+        };
         const features = {
-            weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon", "weapon-type": "natural" } },
-            actions: { label: "Actions", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: "Features", items: [], dataset: { type: "feat" } },
-            equipment: { label: "Inventory", items: [], dataset: { type: "goods" } }
+            weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon,shield", "weapon-type": "natural" }, allowAdd: true },
+            actions: { label: "Actions", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" }, allowAdd: true },
+            passive: { label: "Features", items: [], dataset: { type: "feat" }, allowAdd: true },
+            activeItems: { label: "Active Items", items: [], dataset: { }, allowAdd: false }
         };
 
-        let [spells, other] = data.items.reduce((arr, item) => {
+        let [spells, other, conditionItems] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
-            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType);
-            const unusable = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
-            item.isCharged = !unusable;
+            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
+            item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
+            item.hasUses = item.data.uses && (item.data.uses.max > 0);
+            item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
             if (item.type === "spell") arr[0].push(item);
+            if (item.type === "feat") {
+                if ((item.data.requirements?.toLowerCase() || "") === "condition") {
+                    arr[2].push(item);
+                } else {
+                    arr[1].push(item);
+                }
+            }
             else arr[1].push(item);
             return arr;
-        }, [[], []]);
+        }, [[], [], []]);
 
         // Apply item filters
         spells = this._filterItems(spells, this._filters.spellbook);
@@ -82,20 +94,51 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         const spellbook = this._prepareSpellbook(data, spells);
 
         // Organize Features
+        let itemsToProcess = [];
         for (let item of other) {
-            if (item.type === "weapon") features.weapons.items.push(item);
+            if (["weapon", "shield"].includes(item.type)) {
+                if (!item.data.containerId) {
+                    features.weapons.items.push(item);
+                }
+                itemsToProcess.push(item);
+            }
             else if (item.type === "feat") {
                 if (item.data.activation.type) features.actions.items.push(item);
                 else features.passive.items.push(item);
             }
-            else if (["equipment", "consumable", "technological", "goods", "fusion", "upgrade", "augmentation"].includes(item.type)) {
-                features.equipment.items.push(item);
+            else if (["consumable", "technological"].includes(item.type)) {
+                if (!item.data.containerId) {
+                    features.activeItems.items.push(item);
+                }
+                itemsToProcess.push(item);
+            } else if (["archetype", "class", "race", "theme"].includes(item.type)) {
+                if (!(item.type in features)) {
+                    let label = "SFRPG.Items.Categories.MiscellaneousItems";
+                    if (item.type in SFRPG.itemTypes) {
+                        label = SFRPG.itemTypes[item.type];
+                    }
+                    features[item.type] = { label: game.i18n.format(label), items: [], dataset: { }, allowAdd: false };
+                }
+                features[item.type].items.push(item);
+            } else if (item.type in SFRPG.itemTypes) {
+                itemsToProcess.push(item);
             }
         }
 
+        this.processItemContainment(itemsToProcess, function (itemType, itemData) {
+            inventory.inventory.items.push(itemData);
+        });
+
+        const modifiers = {
+            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true }
+        };
+        modifiers.conditions.items = conditionItems;
+
         // Assign and return
+        data.inventory = inventory;
         data.features = Object.values(features);
         data.spellbook = spellbook;
+        data.modifiers = Object.values(modifiers);
     }
 
     /**

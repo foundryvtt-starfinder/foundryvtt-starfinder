@@ -22,7 +22,7 @@ export default class SFRPGCustomChatMessage {
         } else if (canvas.tokens.controlled[0]?.id) {
             return `${game.scenes.active._id}.${canvas.tokens.controlled[0].id}`;
         } else {
-            return {}
+            return "";
         }
     }
 

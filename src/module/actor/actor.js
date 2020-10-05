@@ -16,6 +16,7 @@ export class ActorSFRPG extends Actor {
     /** @override */
     getRollData() {
         const data = super.getRollData();
+        let casterLevel = 0;
         data.classes = this.data.items.reduce((obj, i) => {
             if (i.type === "class") {
                 const classData = {
@@ -25,10 +26,16 @@ export class ActorSFRPG extends Actor {
                     skillRanksPerLevel: i.data.skillRanks.value
                 };
 
+                if (i.data.isCaster) {
+                    casterLevel += i.data.levels
+                }
+
                 obj[i.name.slugify({replacement: "_", strict: true})] = classData;
             }
             return obj;
         }, {});
+
+        data.cl = casterLevel;
 
         return data;
     }
@@ -57,6 +64,7 @@ export class ActorSFRPG extends Actor {
         const theme = items.find(item => item.type === "theme");
         const mods = items.filter(item => item.type === "mod");
         const armorUpgrades = items.filter(item => item.type === "upgrade");
+        const asis = items.filter(item => item.type === "asi");
         game.sfrpg.engine.process("process-actors", {
             data,
             armor,
@@ -68,7 +76,8 @@ export class ActorSFRPG extends Actor {
             modifiers,
             theme,
             mods,
-            armorUpgrades
+            armorUpgrades,
+            asis
         });
     }
 
@@ -124,7 +133,7 @@ export class ActorSFRPG extends Actor {
     async createEmbeddedEntity(embeddedName, itemData, options) {
         if (!this.isPC) {
             let t = itemData.type;
-            let initial = {};
+            let initial = {};           
             if (t === "weapon") initial['data.proficient'] = true;
             if (["weapon", "equipment"].includes(t)) initial['data.equipped'] = true;
             if (t === "spell") initial['data.prepared'] = true;
@@ -222,7 +231,7 @@ export class ActorSFRPG extends Actor {
         name = "", 
         modifier = 0, 
         type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.CONSTANT, 
+        modifierType = SFRPGModifierType.FORMULA, 
         effectType = SFRPGEffectType.SKILL,
         subtab = "misc",
         valueAffected = "", 
@@ -291,7 +300,9 @@ export class ActorSFRPG extends Actor {
             let modifiersToConcat = [];
             switch (item.type) {
                 default:
-                    modifiersToConcat = item.data.modifiers;
+                    if (item.data.equipped !== false) {
+                        modifiersToConcat = item.data.modifiers;
+                    }
                     break;
                 case "feat":
                     if (item.data.activation?.type === "") {
@@ -355,7 +366,7 @@ export class ActorSFRPG extends Actor {
             skillId = `pro${++counter}`;
         }
 
-        const formData = await AddEditSkillDialog.create(skillId, skill, false),
+        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.isPC, this.owner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
@@ -364,7 +375,7 @@ export class ActorSFRPG extends Actor {
             ability = formData.get('ability'),
             subname = formData.get('subname');
 
-        return this.update({
+        let newSkillData = {
             [`data.skills.${skillId}`]: {},
             [`data.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
             [`data.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty,
@@ -372,8 +383,12 @@ export class ActorSFRPG extends Actor {
             [`data.skills.${skillId}.misc`]: misc,
             [`data.skills.${skillId}.ranks`]: ranks,
             [`data.skills.${skillId}.ability`]: ability,
-            [`data.skills.${skillId}.subname`]: subname
-        });
+            [`data.skills.${skillId}.subname`]: subname,
+            [`data.skills.${skillId}.mod`]: value + misc + ranks,
+            [`data.skills.${skillId}.enabled`]: true
+        };
+
+        return this.update(newSkillData);
     }
 
     /**
@@ -422,12 +437,19 @@ export class ActorSFRPG extends Actor {
     rollAbility(abilityId, options = {}) {
         const label = CONFIG.SFRPG.abilities[abilityId];
         const abl = this.data.data.abilities[abilityId];
+        let parts = ['@mod'];
+        let data = { mod: abl.mod };
+        //Include ability check bonus only if it's not 0
+        if(abl.abilityCheckBonus) {
+            parts.push('@abilityCheckBonus');
+            data.abilityCheckBonus = abl.abilityCheckBonus;
+        }
 
         return DiceSFRPG.d20Roll({
             event: options.event,
             actor: this,
-            parts: ["@mod"],
-            data: { mod: abl.mod },
+            parts: parts,
+            data: data,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Ability Check - ${label}`,
             title:  `Ability Check`,
             speaker: ChatMessage.getSpeaker({ actor: this })
@@ -455,12 +477,22 @@ export class ActorSFRPG extends Actor {
         });
     }
 
-    rollSkillCheck(skillId, skill, options = {}) {
+    async rollSkillCheck(skillId, skill, options = {}) {
+        let parts = [];
+        let data = this.getRollData();
+
+        if (skill.rolledMods) {
+            parts.push(...skill.rolledMods);
+        }
+
+        parts.push('@mod');
+        mergeObject(data, { mod: skill.mod });
+        
         return DiceSFRPG.d20Roll({
             actor: this,
             event: options.event,
-            parts: ["@mod"],
-            data: { mod: skill.mod },
+            parts: parts,
+            data: data,
             title: 'Skill Check',
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             speaker: ChatMessage.getSpeaker({ actor: this })

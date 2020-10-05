@@ -13,7 +13,7 @@
         <h3 class="item-name flexrow">{{section.label}}</h3>
 
         {{#if section.hasActions}}
-        <div class="item-detail item-uses">Charges</div>
+        <div class="item-detail item-uses">{{localize "SFRPG.FeaturesCharges"}}</div>
         <div class="item-detail item-action">{{localize "SFRPG.FeaturesUsage"}}</div>
         {{/if}}
 
@@ -30,64 +30,7 @@
 
     <ol class="item-list">
     {{#each section.items as |item iid|}}
-        <li class="item flexrow {{#unless isCharged}}uncharged{{/unless}}" data-item-id="{{item._id}}">
-            <div class="item-name flexrow rollable">
-                <div class="item-image" style="background-image: url({{item.img}})"></div>
-                <h4>
-                    {{#if item.data.isFree}}[{{localize "SFRPG.DroneSheet.Features.ModsFree"}}] {{/if}}
-                    {{item.name}}
-                </h4>
-                {{#if item.hasAttack}}
-                <div class="item-action flexcol">
-                    <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
-                    <button class="tag damage">{{localize "SFRPG.Damage"}}</button>
-                </div>
-                {{/if}}
-            </div>
-
-            {{#if section.hasActions}}
-            <div class="item-detail item-uses">
-                {{#if item.data.uses.value}}
-                {{item.data.uses.value}} / {{item.data.uses.max}}
-                {{else if item.data.recharge.value}}
-                {{#if item.isOnCooldown}}
-                <a class="item-recharge rollable">{{item.labels.recharge}}</a>
-                {{else}}
-                {{localize "SFRPGE.Charged"}}
-                {{/if}}
-                {{else if item.hasCapacity}}
-                {{item.data.capacity.value}} / {{item.data.capacity.max}}
-                {{/if}}
-            </div>
-            <div class="item-detail item-action">
-                {{#if item.data.activation.type }}
-                {{item.labels.activation}}
-                {{/if}}
-                {{#if item.hasCapacity}}
-                {{item.data.usage.value}} / {{item.data.usage.per}}
-                {{/if}}
-            </div>
-
-            {{else if section.isClass}}
-            <div class="item-detail player-class">
-                {{item.data.subclass}}
-            </div>
-            <div class="item-detail">
-                Level {{item.data.levels}}
-            </div>
-            {{else if section.isRace}}
-            <div class="item-detail player-race">
-                {{item.data.type}}
-            </div>
-            {{/if}}
-
-            {{#if ../../owner}}
-            <div class="item-controls">
-                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-            </div>
-            {{/if}}
-        </li>
+        {{> "systems/sfrpg/templates/actors/parts/actor-features-item.html" ../../this section=section item=item}}
     {{/each}}
     </ol>
 {{/each}}

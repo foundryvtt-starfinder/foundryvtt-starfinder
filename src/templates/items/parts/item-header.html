@@ -1,0 +1,68 @@
+<header class="sheet-header flexrow">
+    <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+    <div class="header-details flexrow">
+        <div class="header-background flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.ItemNameTooltip" }}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
+            </h1>
+            <div class="item-subtitle">
+                <h4 data-tippy-content="Item Type" class="item-type">{{itemType}}</h4>
+                <span data-tippy-content="Item Status" class="item-status">{{itemStatus}}</span>
+            </div>
+        </div>
+
+        {{!-- Item Summary --}}
+        <ul class="summary flexrow">
+            {{#if category.enabled}}
+            <li class="short" data-tippy-content="{{localize category.tooltip}}">
+                <label>{{localize category.value}}</label>
+            </li>
+            {{/if}}
+            <li class="wide" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
+                <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+            </li>
+        </ul>
+
+        {{!-- Header Attributes --}}
+        <ul class="attributes flexrow">
+            {{#if isPhysicalItem}}
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HitpointsTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Hitpoints" }}</h4>
+                <div class="attribute-value multiple">
+                    <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
+                        data-dtype="Number" placeholder="{{placeholders.maxHitpoints}}" />
+                    <span class="sep"> / </span>
+                    <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
+                        data-dtype="String" placeholder="{{placeholders.maxHitpoints}}" />
+                </div>
+            </li>
+
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.ArmorClassTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.ArmorClass" }}</h4>
+                <div class="attribute-value">
+                    <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
+                        data-dtype="String" placeholder="{{placeholders.armorClass}}" />
+                </div>
+            </li>
+
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HardnessTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Hardness" }}</h4>
+                <div class="attribute-value">
+                    <input name="data.attributes.hardness.value" type="text" value="{{data.attributes.hardness.value}}"
+                        data-dtype="String" placeholder="{{placeholders.hardness}}" />
+                </div>
+            </li>
+
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SaveTooltip" formula=placeholders.savingThrow.formula}}">
+                <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Save" }}</h4>
+                <div class="attribute-value">
+                    <label>{{placeholders.savingThrow.value}}</label>
+                </div>
+            </li>
+            {{else}}
+            &nbsp;
+            {{/if}}
+        </ul>
+    </div>
+</header>

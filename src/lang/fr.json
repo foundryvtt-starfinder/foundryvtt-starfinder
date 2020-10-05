@@ -29,6 +29,9 @@
         "AbilityScoreBase": "Score de caractéristique de base",
         "AbilityScoreBaseTooltip": "Score de caractéristique de base: {mod}",
         "AbilityScoreBonusTooltip": "{type} bonus: {mod} ({source})",
+        "AbilityScoreIncreaseTooltip": "Ability Score Increase: {mod}",
+        "AbilityScoreRaceTooltip": "Race: {mod}",
+        "AbilityScoreThemeTooltip": "Theme: {mod}",
         "AbilityStr": "Force",
         "AbilityWis": "Sagesse",
         "ACPTooltip": "Pénalité d'armure: {acp}",
@@ -62,6 +65,58 @@
                 }
             },
             "Inventory": {
+                "Container": {
+                    "AcceptedItemTypes": "Accepted item types",
+                    "AcceptedItemTypesTooltip": "This section allows you to specify which item types are accepted by the container.",
+                    "AffectsEncumbrance": "Contents affect encumbrance",
+                    "AffectsEncumbranceTooltip": "If disabled, contained items no longer affect character encumbrance.",
+                    "AffectsEncumbranceCheckbox": "Contained items count towards encumbrance.",
+                    "CapacityLabelBulk": "Bulk",
+                    "CapacityLabelItems": "Item(s)",
+                    "EquippedBulkMultiplier": "Equipped bulk multiplier",
+                    "EquippedBulkMultiplierTooltip": "This multiplier is used for altering the bulk of the current item when it is equipped.<br/>Setting this to 0 will make the current item not count its own bulk towards the actor's encumbrance when equipped.",
+                    "DetailsHeader": "Container details",
+                    "Capacity": "Capacity",
+                    "CapacityTooltip": "How many 'slots' that can be utilized within this container.",
+                    "CapacityPropertyItems": "Items",
+                    "CapacityPropertySlots": "Slots",
+                    "CapacityPropertyLevel": "Level",
+                    "CapacityBulk": "Capacity",
+                    "CapacityBulkTooltip": "How much bulk can be contained within this container.",
+                    "StorageIdentifier": "Storage Identifier",
+                    "StorageIdentifierTooltip": "The kind of storage slot that is represented by this storage section.",
+                    "StorageIdentifierItem": "Item Slot",
+                    "StorageIdentifierArmorUpgrade": "Armor Upgrade Slot",
+                    "StorageIdentifierWeaponSlot": "Weapon Slot",
+                    "StorageIdentifierFusion": "Fusion",
+                    "StorageIdentifierSpellSlot": "Spell Slot",
+                    "StorageSection": "Storage Section {index}",
+                    "StorageSections": "Storage Sections",
+                    "StorageSectionsAdd": "Add a new Storage Section",
+                    "StorageSectionsRemove": "Delete this Storage Section",
+                    "StorageType": "Storage Type",
+                    "StorageTypeTooltip": "This property defines if a storage section measures its contents in bulk or in slots.",
+                    "StorageTypeSlot": "Slot",
+                    "StorageTypeBulk": "Bulk"
+                },
+                "Encumbrance": {
+                    "Encumbrance": "Encumbrance",
+                    "EncumbranceBaseTooltip": "Encumbrance Base: {base} (Strength)",
+                    "EncumbranceModifierTooltip": "{type} Bonus: {mod} ({source})"
+                },
+                "Interface": {
+                    "DragFromExternalTokenError": "Cannot drag items from token actors not on the active scene.",
+                    "DragToExternalTokenError": "Cannot drag items to token actors not on the active scene.",
+                    "ItemCollectionLocked": "This container is locked and will not open.",
+                    "NoTarget": "No target actor or token specified.",
+                    "DeleteConfirmationTitle": "Delete '{itemName}'?",
+                    "DeleteConfirmationMessage": "Are you sure you wish to delete '{itemName}'?",
+                    "DeleteConfirmationDeleteChildren": "Also delete contained items.",
+                    "AmountToTransferTitle": "Transfer Items",
+                    "AmountToTransferMessage": "Please enter the amount of items you want to transfer.",
+                    "AmountToTransferLabel": "Amount",
+                    "AmountToTransferInfo": "Minimum 1, maximum {max}"
+                },
                 "Item": {
                     "Create": "Créer un objet",
                     "Delete": "Supprimer l'objet",
@@ -101,7 +156,8 @@
                     "SpellAttackDamage": "Dégats de sort",
                     "SpecificWeaponAttackDamage": "Dégâts d'arme spécifiques",
                     "WeaponPropertyDamage": "Dégats des armes",
-                    "AllAttackDamage": "Tous les dégâts d'attaque"
+                    "AllAttackDamage": "Tous les dégâts d'attaque",
+                    "Encumbrance": "Encumbrance"
                 },
                 "UI": {
                     "LongFormula": "Longue formule"
@@ -122,7 +178,17 @@
         "AlignmentNG": "Neutre bon",
         "AlignmentPlaceHolderText": "Alignement",
         "AlignmentTN": "Neutre absolu",
+        "AllowedClasses": {
+            "Myst": "Mystic",
+            "Tech": "Technomancer",
+            "Wysh": "Witchwarper"
+        },
         "ArchetypesAlternateClassFeatures": "Fonctions de classe alternatives",
+        "ArmorTypes": {
+            "Light": "Light Armor",
+            "Heavy": "Heavy Armor",
+            "Power": "Power Armor"
+        },
         "ArmorCheckPenalty": "Malus d'Armure",
         "ArmorProficiencyHeavy": "Armure lourde",
         "ArmorProficiencyLight": "Armure légère",
@@ -153,13 +219,40 @@
         "BaseAttackBonusTitle": "Bonus de base à l'attaque",
         "Biography": "Biographie",
         "Biotech": "Biotech",
-        "BrowserClearFilters": "Supprimer les filtres",
-        "BrowserFilterClass": "Classes",
-        "BrowserFilterSchool": "Ecoles",
-        "BrowserSearchPlaceholder": "Votre recherche",
-        "BrowserSearchTitle": "Rechercher",
-        "BrowserSortyByLabel": "Trier par nom",
+        "Browsers": {
+            "EquipmentBrowser": {
+                "BrowserSortMethodLevel": "Level",
+                "Button": "Equipment",
+                "EquipmentType": "Equipment Type",
+                "ItemType": "Item Type",
+                "Title": "Browse Equipment",
+                "WeaponCategories": "Weapon Categories",
+                "WeaponType": "Weapon Type"
+            },
+            "ItemBrowser": {
+                "BrowserClearFilters": "Supprimer les filtres",
+                "BrowserSearchPlaceholder": "Votre recherche",
+                "BrowserSearchTitle": "Rechercher",
+                "BrowserSortyByLabel": "Trier par nom",
+                "BrowserSortMethodName": "Name",
+                "SearchHint": "You can type the name of the item you are searching for.",
+                "Title": "Browse Items"
+            },
+            "SpellBrowser": {
+                "BrowserFilterClass": "Classes",
+                "BrowserFilterLevel": "Filter by Level",
+                "BrowserFilterSchool": "Ecoles",
+                "BrowserSortMethodLevel": "Level",
+                "Button": "Spells",
+                "Title": "Browse Spells"
+            }
+        },
         "CancelButtonLabel": "Annuler",
+        "Canvas": {
+            "Interface": {
+                "NoTargetTokenForItemDrop": "No target token, cannot drop item!"
+            }
+        },
         "Capacity": {
             "UsagePer": {
                 "Day": "Day",
@@ -191,6 +284,7 @@
         "CMDBaseTooltip": "Base: 8",
         "CMDKACModTooltip": "CAC: {kac}",
         "CMDModiferTooltip": "{type} Rebonds: {mod} ({source})",
+        "ComingSoon": "Coming soon!",
         "ConditionsAsleep": "Endormi",
         "ConditionsBleeding": "Saignement",
         "ConditionsBlinded": "Aveugle",
@@ -227,6 +321,14 @@
         "ConditionsStunned": "Étourdi",
         "ConditionsUnconscious": "Inconscient",
         "ConImm": "Imm. aux conditions",
+        "ConsumableTypes": {
+            "Serum"   : "Serums",
+            "Ampoule" : "Spell Ampoules",
+            "SpellGem": "Spell Gems",
+            "Drugs"   : "Drugs",
+            "Medicine": "Medicinals",
+            "Poison"  : "Poisons"
+        },
         "CounterClassesAddButton":"Ajouter 1",
         "CounterClassesCurrentCount":"Totals des points:",
         "CounterClassesCurrentPositionLabel":"Position actuelle:",
@@ -270,15 +372,23 @@
         "DamageTypesForce": "Force",
         "DamageTypesPiercing": "Perforant",
         "DamageTypesPiercingAndSonic": "Perforant & Sonique",
+        "DamageTypesRadiation": "Radiation",
         "DamageTypesSlashing": "Tranchant",
         "DamageTypesSlashingAndPiercing": "Tranchant & Perforant",
         "DamageTypesSlashingAndSonic": "Tranchant & Sonique",
         "DamageTypesSonic": "Sonique",
+        "DamageTypesNonlethal": "Nonlethal",
         "DamImm": "Imm. aux dommages",
         "DamRes": "Résistances aux energies",
         "DamVuln": "Vulnérabilités",
         "Description": "Description",
         "Details": "Détails",
+        "Dialogs": {
+            "InputDialog": {
+                "SingleFieldInvalid": "Invalid input for {fieldName}.",
+                "MultipleFieldsInvalid": "Invalid input for the following fields:<br/>{fieldNames}"
+            }
+        },
         "DistAny": "Tout",
         "DroneSheet": {
             "Chassis": {
@@ -319,7 +429,7 @@
             },
             "Details": {
                 "Speed": {
-                    "SpecialPlaceholder": "Pas de mouvement spéciaux",
+                    "SpecialPlaceholder": "Pas de mouvement spéciaux"
                 }
             },
             "Features": {
@@ -394,10 +504,15 @@
             }
         },
         "EnergyArmorClass": "CAE",
+        "FeatTypes": {
+            "General": "General Feats",
+            "Combat" : "Combat Feats"
+        },
         "Features": "Spécificités",
         "FeaturesAdd": "Add",
         "FeaturesFilter": "Filter",
         "FeaturesUsage": "Usage",
+        "FeaturesCharges": "Charges",
         "FlagDeprecationNotice": "<strong>REMARQUE:</strong> ces valeurs sont remplacées par le nouveau système de modificateurs et seront supprimées lors d'une prochaine mise à jour. Il est recommandé de décocher l'une de ces valeurs et de les ajouter en tant que modificateur dans l'onglet Modificateurs.",
         "FlagsInstructions": "Configurez les caractéristiques et traits de caractère qui déterminent les comportements du système ",
         "FlagsSave": "Mettre à jour les traits spéciaux",
@@ -425,7 +540,235 @@
         "InventoryUsage": "Usage",
         "IronWillHint": "Ajoute 2 au jet de sauvegarde de volonté",
         "IronWillLabel": "Volonté de fer",
+        "ItemCollectionSheet": {
+            "ItemCollectionLocked": "This container is locked and will not open.",
+            "Settings": {
+                "Header": "GM Settings:",
+                "Locked": "Locked",
+                "LockedTooltip": "<strong>Locked</strong><br/>A locked container prevents player access.",
+                "DeleteIfEmpty": "Delete when emptied",
+                "DeleteIfEmptyTooltip": "<strong>Delete when Emptied</strong><br/>Should this container token automatically be removed when the last item is removed from it?"
+            }
+        },
         "ItemNoUses": "{name} n'a plus de munitions !",
+        "Items": {
+            "ACP"            : "Armor Check Penalty",
+            "Attuned"        : "Attuned",
+            "EquipmentStatus": "Equipment Status",
+            "EquipmentUsage" : "Equipment Usage",
+            "Equipped"       : "Equipped",
+            "Identified"     : "Identified",
+            "MaxDex"         : "Max. Dexterity Modifier",
+            "Proficient"     : "Proficient",
+            "Unlimited"      : "Unlimited",
+            "Action": {
+                "ActionType"            : "Action Type",
+                "AbilityModifier"       : "Ability Modifier",
+                "AttackRollBonus"       : "Attack Roll Bonus",
+                "DamageFormula"         : "Damage Formula",
+                "HealingFormula"        : "Healing Formula",
+                "CriticalEffect"        : "Critical Effect",
+                "CriticalDamageFormula" : "Critical Damage Formula",
+                "CriticalHealingFormula": "Critical Healing Formula",
+                "OtherFormula"          : "Other Formula",
+                "SavingThrow"           : "Saving Throw",
+                "ChatMessageFlavor"     : "Chat Message Flavor"
+            },
+            "Activation": {
+                "ActivationCost"     : "Activation Cost",
+                "ActivationCondition": "Activation Condition",
+                "Target"             : "Target",
+                "Area"               : "Area",
+                "Range"              : "Range",
+                "Duration"           : "Duration",
+                "LimitedUses"        : "Limited Uses"
+            },
+            "Augmentation": {
+                "Details": "Augmentation Details",
+                "Type"   : "Type",
+                "System" : "System"
+            },
+            "Capacity": {
+                "Capacity"            : "Capacity",
+                "CapacityValueTooltip": "The current number of charges",
+                "CapacityMaxTooltip"  : "The max number of charges this item can hold",
+                "HeaderTooltip"       : "The number of rounds, charges, etc... that can be held by this item (eg, the number of charges a battery can hold)",
+                "Usage"               : "Usage",
+                "UsageTooltip"        : "The amount of charges, peices of ammuntition, etc.. that are consummed when this item is used.",
+                "UsageValueTooltip"   : "The time unit used to determine when the item's capacitiy is consumed."
+            },
+            "Categories": {
+                "AbilityScoreIncrease": "Ability Score Increases",
+                "Archetypes"          : "Archetypes",
+                "ArmorUpgrades"       : "Armor Upgrades",
+                "Augmentations"       : "Augmentations",
+                "DroneChassis"        : "Drone Chassis",
+                "DroneMods"           : "Drone Mods",
+                "Classes"             : "Classes",
+                "Consumables"         : "Consumables",
+                "Containers"          : "Containers",
+                "Equipment"           : "Equipment",
+                "Feats"               : "Feats",
+                "Goods"               : "Goods",
+                "HybridItems"         : "Hybrid Items",
+                "MagicItems"          : "Magic Items",
+                "MiscellaneousItems"  : "Miscellaneous Items",
+                "Races"               : "Races",
+                "Shields"             : "Shields",
+                "Spells"              : "Spells",
+                "StarshipWeapons"     : "Starship Weapons",
+                "TechnologicalItems"  : "Technological Items",
+                "Themes"              : "Themes",
+                "Weapons"             : "Weapons",
+                "WeaponFusions"       : "Weapon Fusions"
+            },
+            "Consumable": {
+                "Type"            : "Consumable Type",
+                "Usage"           : "Consumable Usage",
+                "OnUse"           : "Consume on use",
+                "DestroyWhenEmpty": "Destroy when empty",
+                "Action"          : "Consumable Action"
+            },
+            "Description": {
+                "Quantity": "Quantity",
+                "Bulk"    : "Bulk",
+                "Price"   : "Price",
+                "Level"   : "Level",
+                "Hands"   : "Hands"
+            },
+            "Equipment": {
+                "Category"         : "Equipment Type",
+                "ContainerTooltip" : "Equipment typically can contain armor upgrades, or other items. Increase the storage capacity to allow adding content.",
+                "EAC"              : "Energy Armor Class",
+                "KAC"              : "Kinetic Armor Class",
+                "SpeedAdjustment"  : "Speed Adjustment",
+                "PowerArmorDetails": "Power Armor Details",
+                "Action"           : "Equipment Action"
+            },
+            "Feat": {
+                "Requirements"  : "Requirements",
+                "FeatureUsage"  : "Feature Usage",
+                "ActionRecharge": "Action Recharge",
+                "RechargeOn"    : "Recharge On",
+                "Charged"       : "Charged",
+                "FeatureAttack" : "Feature Attack"
+            },
+            "Shield": {
+                "Action" : "Shield Action",
+                "Aligned": "Aligned",
+                "Bonus"  : "Shield Bonus",
+                "Details": "Shield Details",
+                "Wielded": "Wielded"
+            },
+            "ShipWeapon": {
+                "ItemType"    :"Starship Weapon",
+                "Source"      : "Source",
+                "Mounted"     : "Mounted",
+                "Activated"   : "Activated",
+                "WeaponArc"   : "Weapon Arc",
+                "WeaponClass" : "Weapon Class",
+                "WeaponStatus": "Weapon Status",
+                "PowerCost"   : "Power Cost",
+                "BpCost"      : "BP Cost",
+                "Range"       : "Range",
+                "AttackBonus" : "Attack Bonus"
+            },
+            "Spell": {
+                "Details"              : "Spell Details",
+                "AllowedClasses"       : "Allowed Classes",
+                "Level"                : "Spell Level",
+                "School"               : "Spell School",
+                "Properties"           : "Spell Properties",
+                "Resistance"           : "Spell Resistance",
+                "Dismissible"          : "Dismissible",
+                "Concentration"        : "Concentration",
+                "SpellcastingMaterials": "Spellcasting Materials",
+                "Supply"               : "Supply",
+                "Cost"                 : "Cost (Cr)",
+                "Consumed"             : "Consumed",
+                "PreparationMode"      : "Spell Preparation Mode",
+                "Prepared"             : "Prepared",
+                "Casting"              : "Spell Casting",
+                "Effects"              : "Spell Effects"
+            },
+            "Theme": {
+                "Details"          : "Theme Details",
+                "AbilityAdjustment": "Ability Adjustment",
+                "Skill"            : "Skill"
+            },
+            "Upgrade": {
+                "ArmorUpgradeDetails": "Armor Upgrade Details",
+                "Slots"              : "Slots",
+                "AllowedArmorType"   : "Allowed Armor Type",
+                "Any"                : "Any"
+            },
+            "Weapon": {
+                "Details"   : "Weapon Details",
+                "Type"      : "Weapon Type",
+                "Category"  : "Weapon Category",
+                "Properties": "Weapon Properties",
+                "Usage"     : "Weapon Usage",
+                "Attack"    : "Weapon Attack"
+            }
+        },
+        "ItemSheet": {
+            "AbilityScoreIncrease": {
+                "Header": "Ability Score Increases",
+                "Label": "Abilities",
+                "Instruction": "* Check 4 abilities to raise.",
+                "ItemName": "Ability Score Increase: Level {level}"
+            },
+            "Consumables": {
+                "Category": "Consumable Type"
+            },
+            "Containers": {
+                "ContainerTooltip": "Containers can contain just about any item. Increase the storage capacity to allow adding content."
+            },
+            "Header": {
+                "ArmorClass": "Armor Class",
+                "ArmorClassTooltip": "<strong>Armor Class</strong><br/>The armor class of this item, if left unattended. Otherwise, the attendee's armor class should be used instead.<br/>An item is considered unattended if it is not currently under any influence of a character.",
+                "DetailsHeader": "Equipment details",
+                "Hardness": "Hardness",
+                "HardnessTooltip": "<strong>Hardness</strong><br/>When taking damage, subtract the item's hardness from the incoming damage before applying.",
+                "Hitpoints": "Hitpoints",
+                "HitpointsTooltip": "<strong>Hitpoints</strong><br/>The amount of hitpoints available for this item.<br/>An item is considered 'broken' if it has damage.<br/>An item is considered 'destroyed' when its hitpoints are reduced to 0.",
+                "ItemName": "Item Name",
+                "ItemNameTooltip": "<strong>Item Name</strong><br/>The name given to this item.",
+                "Requirements": "Requirements",
+                "Save": "Save DC",
+                "SaveTooltip": "<strong>Save DC</strong><br/>Formula: {formula}<br/>This is the saving throw modifier for this item.",
+                "Source": "Source",
+                "SourceTooltip": "<strong>Source</strong><br/><em>Used primarily to denote what rules document this item came from</em>",
+                "Subtype": "Subtype",
+                "Type": "Type"
+            },
+            "PhysicalProperties": {
+                "ArmorClass": "Armor Class",
+                "ArmorClassTooltip": "<strong>Armor Class</strong><br/>The armor class of this item, if left unattended. Otherwise, the attendee's armor class should be used instead.<br/>An item is considered unattended if it is not currently under any influence of a character.",
+                "CustomBuilt": "Custom Built",
+                "CustomBuiltTooltip": "Was this item crafted by a character, or mass-produced?",
+                "DexterityModifier": "Dexterity Modifier",
+                "DexterityModifierTooltip": "If inanimate, an item's dexterity modifier is -5.",
+                "Hardness": "Hardness",
+                "HardnessTooltip": "<strong>Hardness</strong><br/>When taking damage, subtract the item's hardness from the incoming damage before applying.",
+                "Header": "Physical Properties",
+                "Hitpoints": {
+                    "CurrentTooltip": "The amount of hitpoints this item has.",
+                    "Header": "Hitpoints",
+                    "HeaderTooltip": "<strong>Hitpoints</strong><br/>The amount of hitpoints available for this item.<br/>An item is considered 'broken' if it has damage.<br/>An item is considered 'destroyed' when its hitpoints are reduced to 0.",
+                    "MaxTooltip": "The maximum amount of hitpoints this item can have. Leave blank for automatic calculation."
+                },
+                "ItemDescriptor": "Physical Settings",
+                "Size": "Size",
+                "SizeTooltip": "By default, an item's size is medium. Item sizes affect the item armor class, alter as needed.",
+                "Sturdy": "Sturdy",
+                "SturdyTooltip": "Equipment, such as weapons and armors, are considered sturdy."
+            },
+            "Weapons": {
+                "Category": "Weapon Type",
+                "ContainerTooltip": "Weapons typically can contain weapon fusions and weapon upgrades. Increase the storage capacity to allow adding upgrades and fusions."
+            }
+        },
         "KeyAbility": "Caractérisques clés",
         "KineticArmorClass": "CAC",
         "Languages": "Langues",
@@ -471,6 +814,28 @@
         "LimitedUsePeriodsLong": "Repos long",
         "LimitedUsePeriodsShort": "Repos court",
         "Long": "Long",
+        "Magic": {
+            "Levels": {
+                "0": "0 Level",
+                "1": "1st Level",
+                "2": "2nd Level",
+                "3": "3rd Level",
+                "4": "4th Level",
+                "5": "5th Level",
+                "6": "6th Level"
+            },
+            "Schools": {
+                "Abjuration": "Abjuration",
+                "Conjuration": "Conjuration",
+                "Divination": "Divination",
+                "Enchantment": "Enchantment",
+                "Evocation": "Evocation",
+                "Illusion": "Illusion",
+                "Necromancy": "Necromancy",
+                "Transmutation": "Transmutation",
+                "Universal": "Universal"
+            }
+        },
         "Magitech": "Magitech",
         "Medium": "Moyen",
         "Meter": "Mètre",
@@ -550,6 +915,20 @@
                 "AlignmentPlaceHolderText": "NG",
                 "TypePlaceHolderText": "Type (sub-type)",
                 "AuraPlaceHolderText": "Aura"
+            },
+            "Interface": {
+                "Navigation": {
+                    "Conditions": "Conditions"
+                },
+                "Conditions": {
+                    "Warning": "* NPCs do not support automatic modifier calculations yet!"
+                },
+                "CreateItem": {
+                    "Button": "Create Item",
+                    "Name": "New Item",
+                    "Note": "Select the type of item you would like to create.",
+                    "Title": "Create New Item"
+                }
             }
         },
         "NpcToggleSkillsDialogTitle": "Ajout de compétences aux NPC",
@@ -622,6 +1001,269 @@
         "ShipFrameLabel": "Armature",
         "ShipModelLabel": "Modèle",
         "ShipNameLabel": "Nom du vaisseau",
+        "ShipSystems": {
+            "ArmorSystems": {
+                "Mk01": "Mk 1 armor",
+                "Mk02": "Mk 2 armor",
+                "Mk03": "Mk 3 armor",
+                "Mk04": "Mk 4 armor",
+                "Mk05": "Mk 5 armor",
+                "Mk06": "Mk 6 armor",
+                "Mk07": "Mk 7 armor",
+                "Mk08": "Mk 8 armor",
+                "Mk09": "Mk 9 armor",
+                "Mk10": "Mk 10 armor",
+                "Mk11": "Mk 11 armor",
+                "Mk12": "Mk 12 armor",
+                "Mk13": "Mk 13 armor",
+                "Mk14": "Mk 14 armor",
+                "Mk15": "Mk 15 armor"
+            },
+            "BaseFrames": {
+                "Race"    : "Racer",
+                "Inter"   : "Interceptor",
+                "Fight"   : "Fighter",
+                "Shuttle" : "Shuttle",
+                "Lfreight": "Light Freighter",
+                "Expl"    : "Explorer",
+                "Trans"   : "Transport",
+                "Dest"    : "Destroyer",
+                "Hfreight": "Heavy Freighter",
+                "Bfreight": "Bulk Freighter",
+                "Cruiser" : "Cruiser",
+                "Carr"    : "Carrier",
+                "Battle"  : "Battleship",
+                "Dread"   : "Dreadnought"
+            },
+            "ComputerSystems": {
+                "Basic" : "Basic Computer",
+                "Mk01m" : "Mk 1 mononode",
+                "Mk01d" : "Mk 1 duonode",
+                "Mk01tr": "Mk 1 trinode",
+                "Mk01te": "Mk 1 tetranode",
+                "Mk02m" : "Mk 2 mononode",
+                "Mk02d" : "Mk 2 duonode",
+                "Mk02tr": "Mk 2 trinode",
+                "Mk02te": "Mk 2 tetranode",
+                "Mk03m" : "Mk 3 mononode",
+                "Mk03d" : "Mk 3 duonode",
+                "Mk03tr": "Mk 3 trinode",
+                "Mk03te": "Mk 3 tetranode",
+                "Mk04m" : "Mk 4 mononode",
+                "Mk04d" : "Mk 4 duonode",
+                "Mk04tr": "Mk 4 trinode",
+                "Mk05m" : "Mk 5 mononode",
+                "Mk05d" : "Mk 5 duonode",
+                "Mk05tr": "Mk 5 trinode",
+                "Mk06m" : "Mk 6 mononode",
+                "Mk06d" : "Mk 6 duonode",
+                "Mk07m" : "Mk 7 mononode",
+                "Mk07d" : "Mk 7 duonode",
+                "Mk08m" : "Mk 8 mononode",
+                "Mk08d" : "Mk 8 duonode",
+                "Mk09m" : "Mk 9 mononode",
+                "Mk09d" : "Mk 9 duonode",
+                "Mk10m" : "Mk 10 mononode",
+                "Mk10d" : "Mk 10 duonode"
+            },
+            "CrewQuarterSystems": {
+                "Common"   : "Common",
+                "Good"     : "Good",
+                "Luxurious": "Luxurious"
+            },
+            "DefenseSystems": {
+                "Mk01": "Mk 1 defenses",
+                "Mk02": "Mk 2 defenses",
+                "Mk03": "Mk 3 defenses",
+                "Mk04": "Mk 4 defenses",
+                "Mk05": "Mk 5 defenses",
+                "Mk06": "Mk 6 defenses",
+                "Mk07": "Mk 7 defenses",
+                "Mk08": "Mk 8 defenses",
+                "Mk09": "Mk 9 defenses",
+                "Mk10": "Mk 10 defenses",
+                "Mk11": "Mk 11 defenses",
+                "Mk12": "Mk 12 defenses",
+                "Mk13": "Mk 13 defenses",
+                "Mk14": "Mk 14 defenses",
+                "Mk15": "Mk 15 defenses"
+            },
+            "DriftEngineSystems": {
+                "Basic"   : "Signal Basic",
+                "Booster" : "Signal Booster",
+                "Major"   : "Signal Major",
+                "Superior": "Signal Superior",
+                "Ultra"   : "Signal Ultra"
+            },
+            "ExpansionBaySystems": {
+                "Arclab"  : "Arcane laboratory",
+                "Cargo"   : "Cargo hold",
+                "Escape"  : "Escape pods",
+                "Guest"   : "Guest quarters",
+                "Hangar"  : "Hangar bay",
+                "Life"    : "Life boats",
+                "Med"     : "Medical bay",
+                "Pass"    : "Passenger seating",
+                "Pwrhouse": "Power core housing",
+                "Recg"    : "Recreation suite (gym)",
+                "Rect"    : "Recreation suite (trivid den)",
+                "Hac"     : "Recreation suite (HAC)",
+                "Science" : "Science lab",
+                "Senv"    : "Sealed environment chamber",
+                "Shuttle" : "Shuttle bay",
+                "Smuggler": "Smuggler compartment",
+                "Syth"    : "Synthesis bay",
+                "Tech"    : "Tech workshop"
+            },
+            "Maneuverability": {
+                "Clumsy" : "Clumsy",
+                "Poor"   : "Poor",
+                "Average": "Average",
+                "Good"   : "Good",
+                "Perfect": "Perfect"
+            },
+            "PowerCoreSystems": {
+                "MicronLight"   : "Micron Light",
+                "MicronHeavy"   : "Micron Heavy",
+                "MicronUltra"   : "Micron Ultra",
+                "ArcusLight"    : "Arcus Light",
+                "PulseBrown"    : "Pulse Brown",
+                "PulseBlack"    : "Pulse Black",
+                "PulseWhite"    : "Pulse White",
+                "PulseGray"     : "Pulse Gray",
+                "ArcusHeavy"    : "Arcus Heavy",
+                "PulseGreen"    : "Pulse Green",
+                "PulseRed"      : "Pulse Red",
+                "PulseBlue"     : "Pulse Blue",
+                "ArcusUltra"    : "Arcus Ultra",
+                "ArcusMaximum"  : "Arcus Maximum",
+                "PulseOrange"   : "Pulse Orange",
+                "PulsePrismatic": "Pulse Prismatic",
+                "NovaLight"     : "Nova Light",
+                "NovaHeavy"     : "Nova Heavy",
+                "NovaUltra"     : "Nova Ultra",
+                "GatewayLight"  : "Gateway Light",
+                "GatewayHeavy"  : "Gateway Heavy",
+                "GatewayUltra"  : "Gateway Ultra"
+            },
+            "SecuritySystems": {
+                "Antihack"    : "Anti-Hacking Sytems",
+                "Antiper"     : "Antipersonnel Weapon",
+                "Bio"         : "Biometric Locks",
+                "Compcounter" : "Computer Countermeasures",
+                "Selfdestruct": "Self-Destruct System"
+            },
+            "SensorSystems": {
+                "Cut"    : "Cut-rate",
+                "Bushort": "Budget short-range",
+                "Bashort": "Basic short-range",
+                "Ashort" : "Advanced short-range",
+                "Bumed"  : "Budget medium-range",
+                "Bamed"  : "Basic medium-range",
+                "Amed"   : "Advanced medium-range",
+                "Bulong" : "Budget long-range",
+                "Balong" : "Basic long-range",
+                "Along"  : "Advanced long-range"
+            },
+            "ShieldSystems": {
+                "010": "Basic Shields 10",
+                "020": "Basic Shields 20",
+                "030": "Basic Shields 30",
+                "040": "Basic Shields 40",
+                "050": "Light Shields 50",
+                "060": "Light Shields 60",
+                "070": "Light Shields 70",
+                "080": "Light Shields 80",
+                "090": "Medium Shields 90",
+                "100": "Medium Shields 100",
+                "120": "Medium Shields 120",
+                "140": "Medium Shields 140",
+                "160": "Medium Shields 160",
+                "200": "Medium Shields 200",
+                "240": "Heavy Shields 240",
+                "280": "Heavy Shields 280",
+                "320": "Heavy Shields 320",
+                "360": "Heavy Shields 360",
+                "420": "Heavy Shields 420",
+                "480": "Heavy Shields 480",
+                "540": "Superior Shields 540",
+                "600": "Superior Shields 600"
+            },
+            "StarshipArcs": {
+                "Forward"  : "Forward",
+                "Starboard": "Starboard",
+                "Aft"      : "Aft",
+                "Port"     : "Port",
+                "Turret"   : "Turret"
+            },
+            "StarshipRoles": {
+                "Pilot"          : "Pilot",
+                "Captain"        : "Captain",
+                "Engineers"      : "Engineers",
+                "Gunners"        : "Gunners",
+                "ScienceOfficers": "Science Officers",
+                "Passengers"     : "Passengers"
+            },
+            "StarshipWeaponClass": {
+                "Light"  : "Light",
+                "Heavy"  : "Heavy",
+                "Capital": "Capital"
+            },
+            "StarshipWeaponProperties": {
+                "Array"     : "Array",
+                "Broad"     : "Broad Arc",
+                "Emp"       : "EMP",
+                "IrradiateL": "Irradiate (low)",
+                "IrradiateM": "Irradiate (medium)",
+                "IrradiateH": "Irradiate (high)",
+                "Limited"   : "Limited Fire",
+                "Line"      : "Line",
+                "Point"     : "Point",
+                "Quantum"   : "Quantum",
+                "Ripper"    : "Ripper",
+                "Tractor"   : "Tractor Beam",
+                "Vortex"    : "Vortex"
+            },
+            "StarshipWeaponRanges":{
+                "Short" : "Short",
+                "Medium": "Medium",
+                "Long"  : "Long"
+            },
+            "StarshipWeaponTypes": {
+                "Direct"  : "Direct-fire",
+                "Tracking": "Tracking"
+            },
+            "ThrusterSystems": {
+                "T6" : "T6 Thrusters",
+                "T8" : "T8 Thrusters",
+                "T10": "T10 Thrusters",
+                "T12": "T12 Thrusters",
+                "T14": "T14 Thrusters",
+                "S6" : "S6 Thrusters",
+                "S8" : "S8 Thrusters",
+                "S10": "S10 Thrusters",
+                "S12": "S12 Thrusters",
+                "M4" : "M4 Thrusters",
+                "M6" : "M6 Thrusters",
+                "M8" : "M8 Thrusters",
+                "M10": "M10 Thrusters",
+                "M12": "M12 Thrusters",
+                "L4" : "L4 Thrusters",
+                "L6" : "L6 Thrusters",
+                "L8" : "L8 Thrusters",
+                "L10": "L10 Thrusters",
+                "H4" : "H4 Thrusters",
+                "H6" : "H6 Thrusters",
+                "H8" : "H8 Thrusters",
+                "H10": "H10 Thrusters",
+                "G4" : "G4 Thrusters",
+                "G6" : "G6 Thrusters",
+                "G8" : "G8 Thrusters",
+                "C4" : "C4 Thrusters",
+                "C6" : "C6 Thrusters",
+                "C8" : "C8 Thrusters"
+            }
+        },
         "ShipTierLabel": "Tier",
         "Size": "Taille",
         "SizeColossal": "Colossal",
@@ -673,6 +1315,11 @@
         "SpecialTraits": "Traits spéciaux",
         "Speed": "Vitesse",
         "SpeedSpecial": "Mouv. spécial",
+        "SpellAreaEffects": {
+            "Burst"    : "Burst",
+            "Emanation": "Emanation",
+            "Spread"   : "Spread"
+        },
         "SpellAreaShapesCone": "Cone",
         "SpellAreaShapesCylinder": "Cylindre",
         "SpellAreaShapesLine": "Ligne",
@@ -712,6 +1359,23 @@
         "TraitWeaponProf": "M. des armes",
         "Unlimited": "Illimité",
         "UPBs": "PBU",
+        "Vehicles": {
+            "VehicleCoverTypes": {
+                "None"   : "None",
+                "Cover"  : "Cover",
+                "Soft"   : "Soft cover",
+                "Partial": "Partial cover",
+                "Total"  : "Total cover"
+            },
+            "VehicleTypes": {
+                "Land" : "Land",
+                "Water": "Water",
+                "Hover": "Hover",
+                "Landw": "Land and water",
+                "Air"  : "Air",
+                "Landa": "Land and air"
+            }
+        },
         "WeaponCategoriesCryo": "Armes cryogénique",
         "WeaponCategoriesFlame": "Armes incendiaires",
         "WeaponCategoriesLaser": "Armes laser",
@@ -720,6 +1384,19 @@
         "WeaponCategoriesShock": "Armes choc",
         "WeaponCategoriesSonic": "Armes sonique",
         "WeaponCategoriesUncategorized": "Armes sans satégorie",
+        "WeaponCriticalHitEffects": {
+            "Arc"        : "Arc",
+            "Bleed"      : "Bleed",
+            "Burn"       : "Burn",
+            "Corrode"    : "Corrode",
+            "Deafen"     : "Deafen",
+            "Injection"  : "Injection DC + 2",
+            "Knockdown"  : "Knockdown",
+            "SevereWound": "Severe Wound",
+            "Staggered"  : "Staggered",
+            "Stunned"    : "Stunned",
+            "Wound"      : "Wound"
+        },
         "WeaponProficiencyAdvMelee": "A. evoluées C&C",
         "WeaponProficiencyBasicMelee": "A. simples C&C",
         "WeaponProficiencyGrenades": "Grenades",
@@ -810,6 +1487,31 @@
         "WeaponPropertiesVariantBoost": "Amplif. variante",
         "WeaponPropertiesWideLine": "Wide line",
         "WeaponsPropertiesConceal": "Cacher",
+        "WeaponSpecial": {
+                "Analog"     : "Analog",
+                "Archaic"    : "Archaic",
+                "Auto"       : "Automatic",
+                "Blast"      : "Blast",
+                "Block"      : "Block",
+                "Boost"      : "Boost",
+                "Bright"     : "Bright",
+                "Disarm"     : "Disarm",
+                "Entangle"   : "Entangle",
+                "Exploade"   : "Explode",
+                "Injection"  : "Injection",
+                "Line"       : "Line",
+                "Nonlethal"  : "Nonlethal",
+                "Operative"  : "Operative",
+                "Penetrating": "Penetrating",
+                "Powered"    : "Powered",
+                "Quickreload": "Quick Reload",
+                "Reach"      : "Reach",
+                "Sniper"     : "Sniper",
+                "Stun"       : "Stun",
+                "Thrown"     : "Thrown",
+                "Trip"       : "Trip",
+                "Unwieldy"   : "Unwieldy"
+        },
         "WeaponTypesAdvMelee": "Armes ev. de C&C",
         "WeaponTypesBasicMelee": "Armes simp. de C&C",
         "WeaponTypesGrenades": "Grenades",
@@ -822,6 +1524,9 @@
         "WillSave": "Volonté",
         "Units": {
             "Speed": "m."
+        },
+        "Classes": {
+            "IsCasterClass": "Is this a spell casting class?"
         },
 
         "LocalizationTerminator": ""
