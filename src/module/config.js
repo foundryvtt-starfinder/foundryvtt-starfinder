@@ -555,13 +555,13 @@ SFRPG.conditionTypes = {
     "exhausted": "SFRPG.ConditionsExhausted",
     "fascinated": "SFRPG.ConditionsFascinated",
     "fatigued": "SFRPG.ConditionsFatigued",
-    "flat-footed": "SFRPG.ConditionsFlatFooted",
+    "flatfooted": "SFRPG.ConditionsFlatFooted",
     "frightened": "SFRPG.ConditionsFrightened",
     "grappled": "SFRPG.ConditionsGrappled",
     "helpless": "SFRPG.ConditionsHelpless",
     "nauseated": "SFRPG.ConditionsNauseated",
-    "off-kilter": "SFRPG.ConditionsOffKilter",
-    "off-target": "SFRPG.ConditionsOffTarget",
+    "offkilter": "SFRPG.ConditionsOffKilter",
+    "offtarget": "SFRPG.ConditionsOffTarget",
     "overburdened": "SFRPG.ConditionsOverburdened",
     "panicked": "SFRPG.ConditionsPanicked",
     "paralyzed": "SFRPG.ConditionsParalyzed",
@@ -1234,7 +1234,7 @@ SFRPG.statusEffectIconMapping = {
     "dazzled": "systems/sfrpg/icons/conditions/dazzled.png",
     "dead": "systems/sfrpg/icons/conditions/dead.png",
     "deafened": "systems/sfrpg/icons/conditions/deafened.png",
-    "dyning": "systems/sfrpg/icons/conditions/dying.png",
+    "dying": "systems/sfrpg/icons/conditions/dying.png",
     "encumbered": "systems/sfrpg/icons/conditions/encumbered.png",
     "entangled": "systems/sfrpg/icons/conditions/entangled.png",
     "exhausted": "systems/sfrpg/icons/conditions/exhausted.png",
@@ -1306,7 +1306,7 @@ SFRPG.conditions = {
         modifiers: [],
         tooltip: "<strong>Deafened</strong><br><br>You take a -4 penalty to initiative checks and opposed Perception checks, and you automatically fail sound-based Perception checks."
     },
-    "dyning": {
+    "dying": {
         modifiers: [],
         tooltip: "<strong>Dying</strong><br><br>You're unconscious, you can take no actions, and you must stabilize or lose Resolve Points and potentially die."
     },
