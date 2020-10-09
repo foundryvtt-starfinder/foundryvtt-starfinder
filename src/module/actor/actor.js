@@ -64,6 +64,7 @@ export class ActorSFRPG extends Actor {
         const theme = items.find(item => item.type === "theme");
         const mods = items.filter(item => item.type === "mod");
         const armorUpgrades = items.filter(item => item.type === "upgrade");
+        const asis = items.filter(item => item.type === "asi");
         game.sfrpg.engine.process("process-actors", {
             data,
             armor,
@@ -75,7 +76,8 @@ export class ActorSFRPG extends Actor {
             modifiers,
             theme,
             mods,
-            armorUpgrades
+            armorUpgrades,
+            asis
         });
     }
 

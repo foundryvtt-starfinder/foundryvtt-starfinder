@@ -30,7 +30,7 @@ Inside the `src/items` folder, you will find a subfolder for each compendium we 
 
 The easiest workflow is to work through Foundry, and follow the following steps:
 1. Create a new item in the Items sidebar tab.
-2. Fill out the details, modifiers, etc.
+2. Fill out the details, modifiers, etc. Make sure the name closely matches the original name from the SRD.
 3. Right-clicking the item in the Items sidebar tab and select Export Data.
 4. Save the JSON file into the appropriate compendium subfolder.
 5. Open the exported JSON file in a text editor of your choice, and do some clean-up.
@@ -38,6 +38,11 @@ The easiest workflow is to work through Foundry, and follow the following steps:
     2. Remove the permission field, if it is there.
     3. Remove the sort field, if it is there.
     4. Remove the exportSource section from the flags field, if it is there.
+    
+    Listed below is a list of regexp to help you edit .json files quickly:
+    * `"_id":.*`
+    * `"sort":.*`
+    * `"exportSource": \{.*\s.*\s.*\s.*\s.*\s.*\}$`
 6. Save and close the JSON file.
 7. Update the compendium pack files, by running the following command: `npm run cook`
 8. Restart Foundry.

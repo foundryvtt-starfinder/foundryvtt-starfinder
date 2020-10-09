@@ -1,3 +1,4 @@
+import { SFRPG } from "../../../config.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function (engine) {
@@ -40,6 +41,20 @@ export default function (engine) {
             }
         }
 
+        let abilityScoreIncreasesMod = {};
+        const asis = fact.asis?.filter(x => x.type === "asi") || [];
+        for (let asi of asis) {
+            for (let ability of Object.keys(SFRPG.abilities)) {
+                if (asi.data.abilities[ability]) {
+                    if (!(ability in abilityScoreIncreasesMod)) {
+                        abilityScoreIncreasesMod[ability] = 1;
+                    } else {
+                        abilityScoreIncreasesMod[ability] += 1;
+                    }
+                }
+            }
+        }
+
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
             const abilityMods = context.parameters.stackModifiers.process(
@@ -49,6 +64,32 @@ export default function (engine) {
 
             let score = ability.base ? ability.base : 10;
             ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreBaseTooltip", { mod: score.signedString() }));
+
+            const modFromTheme = themeMod[abl] ?? 0;
+            if(modFromTheme) {
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreThemeTooltip", { mod: modFromTheme.signedString() }));
+            }
+
+            const modFromRace = racesMod[abl] ?? 0;
+            if(modFromRace) {
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreRaceTooltip", { mod: modFromRace.signedString() }));
+            }
+
+            let intermediateScore = score + modFromTheme + modFromRace;
+            if (abl in abilityScoreIncreasesMod) {
+                for (let i = 0; i<abilityScoreIncreasesMod[abl]; i++) {
+                    if (intermediateScore <= 16) {
+                        intermediateScore += 2;
+                    } else {
+                        intermediateScore += 1;
+                    }
+                }
+            }
+
+            const raisedByASI = intermediateScore - (score + modFromTheme + modFromRace);
+            if(raisedByASI) {
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreIncreaseTooltip", { mod: raisedByASI.signedString() }));
+            }
 
             if (ability.userPenalty) {
                 let userPenalty = -Math.abs(ability.userPenalty);
@@ -76,17 +117,7 @@ export default function (engine) {
                 return sum;
             }, 0);
 
-            const modFromTheme = themeMod[abl] ?? 0;
-            if(modFromTheme) {
-                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreThemeTooltip", { mod: modFromTheme.signedString() }));
-            }
-
-            const modFromRace = racesMod[abl] ?? 0;
-            if(modFromRace) {
-                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreRaceTooltip", { mod: modFromRace.signedString() }));
-            }
-
-            ability.value = score + bonus + modFromTheme + modFromRace;
+            ability.value = score + modFromRace + modFromTheme + raisedByASI + bonus;
         }
 
         return fact;

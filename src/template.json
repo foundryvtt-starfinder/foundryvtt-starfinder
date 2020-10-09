@@ -440,6 +440,10 @@
                 "armorProf": {
                     "value": [],
                     "custom": ""
+                },
+                "shieldProf": {
+                    "value": [],
+                    "custom": ""
                 }
             },
             "resources": {
@@ -698,6 +702,7 @@
     },
     "Item": {
         "types": [
+            "asi",
             "weapon",
             "equipment",
             "consumable",
@@ -715,7 +720,8 @@
             "starshipWeapon",
             "archetypes",
             "chassis",
-            "mod"
+            "mod",
+            "shield"
         ],
         "templates": {
             "container": {
@@ -826,8 +832,14 @@
                 "modifiers": []
             }
         },
+        "asi": {
+            "abilities": {}
+        },
         "weapon": {
             "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "attributes": {
+                "sturdy": true
+            },
             "weaponType": "basicM",
             "weaponCategory": "uncategorized",
             "special": "",
@@ -849,7 +861,10 @@
             }
         },
         "equipment": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers", "container"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "attributes": {
+                "sturdy": true
+            },
             "armor": {
                 "type": "light",
                 "eac": 0,
@@ -925,7 +940,7 @@
                         "type": "bulk",
                         "subtype": "",
                         "amount": 0,
-                        "acceptsType": ["weapon", "equipment", "goods", "consumable", "container", "technological", "fusion", "upgrade", "augmentation", "magic", "hybrid"],
+                        "acceptsType": ["weapon", "shield", "equipment", "goods", "consumable", "container", "technological", "fusion", "upgrade", "augmentation", "magic", "hybrid"],
                         "affectsEncumbrance": true,
                         "weightProperty": "bulk"
                     }
@@ -951,7 +966,8 @@
             },
             "proficiencies": {
                 "weapon": {},
-                "armor": {}
+                "armor": {},
+                "shield": {}
             },
             "bab": "moderate",
             "fort": "slow",
@@ -1022,7 +1038,7 @@
             "hands": 0
         },
         "fusion": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": ["itemDescription", "physicalItem", "modifiers"],
             "level": 1
         },
         "upgrade": {
@@ -1091,8 +1107,49 @@
             },
             "isArmorSlot": false,
             "weaponProficiency": "",
+            "shieldProficiency": "",
             "additionalSenses": "",
             "bonusSkill": ""
+        },
+        "shield": {
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "attributes": {
+                "sturdy": true
+            },
+            "properties": {
+                "nonlethal": true
+            },
+            "dex": null,
+            "acp": null,
+            "bonus": {
+                "wielded": 0,
+                "aligned": 0
+            },
+            "damage": {
+                "parts": []
+            },
+            "proficient": true,
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "slot",
+                        "subtype": "armorUpgrade",
+                        "amount": 0,
+                        "acceptsType": ["upgrade"],
+                        "affectsEncumbrance": true,
+                        "weightProperty": "slots"
+                    },
+                    {
+                        "type": "slot",
+                        "subtype": "fusion",
+                        "amount": 0,
+                        "acceptsType": ["fusion"],
+                        "affectsEncumbrance": true,
+                        "weightProperty": "level"
+                    }
+                ]
+            }
         }
     }
 }

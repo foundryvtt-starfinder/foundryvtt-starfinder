@@ -18,11 +18,11 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">Equipment Details</h3>
+            <h3 class="form-header">{{ localize "SFRPG.ItemSheet.Header.DetailsHeader" }}</h3>
 
             {{!-- Equipment Type --}}
             <div class="form-group">
-                <label>Equipment Type</label>
+                <label>{{ localize "SFRPG.Items.Equipment.Category" }}</label>
                 <select name="data.armor.type">
                     {{#select data.armor.type}}
                     <option value=""></option>
@@ -37,29 +37,29 @@
             <div class="form-group stacked">
                 <label>Equipment Status</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> Proficient
+                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SFRPG.Items.Proficient" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> Equipped
+                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> Identified
+                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SFRPG.Items.Identified" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> Attuned
+                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> {{ localize "SFRPG.Items.Attuned" }}
                 </label>
             </div>
 
             {{!-- Armor Class --}}
             <div class="form-group">
-                <label>Energy Armor Class</label>
+                <label>{{ localize "SFRPG.Items.Equipment.EAC" }}</label>
                 <div class="form-fields">
                    <input type="text" name="data.armor.eac" value="{{data.armor.eac}}" data-dtype="Number"/>
                 </div>
             </div>
 
             <div class="form-group">
-                <label>Kinetic Armor Class</label>
+                <label>{{ localize "SFRPG.Items.Equipment.KAC" }}</label>
                 <div class="form-fields">
                    <input type="text" name="data.armor.kac" value="{{data.armor.kac}}" data-dtype="Number"/>
                 </div>
@@ -67,15 +67,15 @@
 
             {{!-- Dexterity Modifier --}}
             <div class="form-group">
-                <label>Max. Dexterity Modifier</label>
+                <label>{{ localize "SFRPG.Items.MaxDex" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="Unlimited"/>
+                   <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="{{ localize "SFRPG.Items.Unlimited" }}"/>
                 </div>
             </div>
 
             {{!-- Armor Check Penalty --}}
             <div class="form-group">
-                <label>Armor Check Penalty</label>
+                <label>{{ localize "SFRPG.Items.ACP" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.armor.acp" value="{{data.armor.acp}}" data-dtype="Number" placeholder="0" />
                 </div>
@@ -84,30 +84,30 @@
             {{#unless isPowerArmor}}
             {{!-- Speed Adjustment --}}
             <div class="form-group">
-                <label>Speed Adjustment</label>
+                <label>{{ localize "SFRPG.Items.Equipment.SpeedAdjustment" }}</label>
                 <div class="form-fields">
                     <input type="text" name="data.armor.speedAdjust" value="{{data.armor.speedAdjust}}" data-dtype="Number" placeholder="0" />
-                    <span>Feet</span>
+                    <span>{{ localize "SFRPG.Ft" }}</span>
                 </div>
             </div>
             {{/unless}}
 
             {{!-- Power Armor Specific --}}
             {{#if isPowerArmor}}
-            <h3 class="form-header">Power Armor Details</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.Equipment.PowerArmorDetails" }}</h3>
 
             {{!-- Required Strength --}}
             <div class="form-group">
-                <label>Strength</label>
+                <label>{{ localize "SFRPG.AbilityStr" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" placeholder="None"/>
+                   <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" placeholder="{{ localize "SFRPG.None" }}"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>{{ localize "SFRPG.Speed" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.speed" value="{{data.speed}}" placeholder="30 ft" />
+                    <input type="text" name="data.speed" value="{{data.speed}}" placeholder="30 {{ localize "SFRPG.Units.Speed" }}" />
                 </div>
             </div>
 
@@ -125,20 +125,24 @@
             </div>
 
             <div class="form-group">
-                <label>Reach</label>
+                <label>{{ localize "SFRPG.Reach" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.reach" value="{{data.reach}}" placeholder="5 ft." />
+                    <input type="text" name="data.reach" value="{{data.reach}}" placeholder="5 {{ localize "SFRPG.Units.Speed" }}" />
                 </div>
             </div>
 
+            <h3 class="form-header">{{ localize "SFRPG.CapacityUsage" }}</h3>
+            {{> "systems/sfrpg/templates/items/parts/item-capacity.html"}}
+
+
             {{/if}}
 
-            <h3 class="form-header">Equipment Usage</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.EquipmentUsage" }}</h3>
 
             {{!-- Item Activation Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-activation.html"}}
 
-            <h3 class="form-header">Equipment Action</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.Equipment.Action" }}</h3>
 
             {{!-- Item Action Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-action.html"}}
@@ -149,7 +153,7 @@
 
             <br />
 
-            {{> "systems/sfrpg/templates/items/parts/container-details.html" message="SFRPG.ItemSheet.Equipment.ContainerTooltip"}}
+            {{> "systems/sfrpg/templates/items/parts/container-details.html" message="SFRPG.Items.Equipment.ContainerTooltip"}}
 
         </div>
 

@@ -4,7 +4,7 @@
     "default": 0,
     "umHu8DFnCrMQVZ37": 3
   },
-  "type": "equipment",
+  "type": "shield",
   "data": {
     "description": {
       "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">A riot shield is a large slab of advanced material, normally thin layers of nanocarbon over plastics and resins, and often including a transparent aluminum view port. A hand wielding a riot shield cannot be used for anything else, and changing your grip from carrying a riot shield to wielding it, or vice versa, requires a move action. Pulling out a riot shield from storage or putting one away also requires a move action. If you are wielding a riot shield, you gain a +2 bonus to any bull rush combat maneuver you attempt.<br></span></p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\">When you wield a basic riot shield, it grants you a +1 shield bonus to AC. If you are proficient with a riot shield, as a move action you can align the shield against a specific foe, which does not increase your AC but does allow certain armor upgrades you may have in your shield to function. The field and advanced riot shields increase the shield bonus you receive when aligned against a target to +2, the elite riot shield increases it to +3, and the paragon riot shield increases the bonus to +4.</span></p>",
@@ -20,6 +20,9 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true
+    },
     "activation": {
       "type": "",
       "cost": 0,
@@ -51,7 +54,7 @@
       "per": null
     },
     "ability": null,
-    "actionType": "",
+    "actionType": "mwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -68,19 +71,13 @@
       "descriptor": ""
     },
     "descriptors": [],
-    "armor": {
-      "type": "shield",
-      "eac": 1,
-      "kac": 1,
-      "dex": 3,
-      "acp": -2,
-      "speedAdjust": 0
+    "dex": 3,
+    "acp": -2,
+    "bonus": {
+      "wielded": 1,
+      "aligned": 1
     },
-    "strength": 0,
-    "speed": "",
-    "size": "",
-    "reach": "",
-    "proficient": true,
+    "proficient": false,
     "container": {
       "contents": [],
       "storage": [
@@ -89,23 +86,25 @@
           "subtype": "armorUpgrade",
           "amount": 1,
           "acceptsType": [
-            "upgrade",
-            "weapon"
+            "upgrade"
           ],
           "affectsEncumbrance": true,
           "weightProperty": "slots"
         },
         {
           "type": "slot",
-          "subtype": "weaponSlot",
+          "subtype": "fusion",
           "amount": 0,
           "acceptsType": [
-            "weapon"
+            "fusion"
           ],
           "affectsEncumbrance": true,
-          "weightProperty": ""
+          "weightProperty": "level"
         }
       ]
+    },
+    "properties": {
+      "nonlethal": true
     }
   },
   "flags": {},
