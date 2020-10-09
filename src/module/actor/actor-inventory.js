@@ -123,6 +123,16 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
     if (!quantity) {
         quantity = itemToMove.data.data.quantity;
+
+        if (acceptsItem(targetItem, itemToMove, targetActor)) {
+            const storageIndex = getFirstAcceptableStorageIndex(targetItem, itemToMove);
+            if (storageIndex !== null) {
+                const storage = targetItem.data.data.container.storage[storageIndex];
+                if (storage.type === "slot") {
+                    quantity = 1;
+                }
+            }
+        }
     }
 
     if (sourceActor.actor === targetActor.actor) {

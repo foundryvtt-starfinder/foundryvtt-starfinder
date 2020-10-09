@@ -60,7 +60,7 @@
             {{#if owner}}
             <div class="item-controls">
                 {{#if (not disableEquipping)}}
-                {{#if (or (or (eq item.type "weapon") (eq item.type "equipment")) (eq item.type "container"))}}
+                {{#if (or (or (or (eq item.type "shield") (eq item.type "weapon")) (eq item.type "equipment")) (eq item.type "container"))}}
                 {{#if item.data.equipped}}
                 <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Equip"}}"><i class="fas fa-check"></i></a>
                 {{else}}

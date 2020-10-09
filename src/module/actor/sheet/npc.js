@@ -56,10 +56,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
     _prepareItems(data) {
         const inventory = {
-            inventory: { label: "Inventory", items: [], dataset: { type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,weapon" }, allowAdd: true }
+            inventory: { label: "Inventory", items: [], dataset: { type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon" }, allowAdd: true }
         };
         const features = {
-            weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon", "weapon-type": "natural" }, allowAdd: true },
+            weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon,shield", "weapon-type": "natural" }, allowAdd: true },
             actions: { label: "Actions", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" }, allowAdd: true },
             passive: { label: "Features", items: [], dataset: { type: "feat" }, allowAdd: true },
             activeItems: { label: "Active Items", items: [], dataset: { }, allowAdd: false }
@@ -70,8 +70,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
-            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (item.type !== "weapon" || item.data.equipped);
-            item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (item.type !== "weapon" || item.data.equipped);
+            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
+            item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
             if (item.type === "spell") arr[0].push(item);
@@ -96,7 +96,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         // Organize Features
         let itemsToProcess = [];
         for (let item of other) {
-            if (item.type === "weapon") {
+            if (["weapon", "shield"].includes(item.type)) {
                 if (!item.data.containerId) {
                     features.weapons.items.push(item);
                 }

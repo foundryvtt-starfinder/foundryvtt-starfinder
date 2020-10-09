@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -22,7 +22,7 @@
                     {{localize labels.school}}
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>
         </div>
@@ -42,11 +42,11 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">Spell Details</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.Spell.Details" }}</h3>
 
             {{!-- Allowed Classes --}}
             <div class="form-group stacked">
-                <label>Allowed Classes</label>
+                <label>{{ localize "SFRPG.Items.Spell.AllowedClasses" }}</label>
                 {{#each config.allowedClasses as |name key|}}
                 <label class="checkbox">
                     <input type="checkbox" name="data.allowedClasses.{{key}}" {{checked (lookup ../data.allowedClasses key)}} /> {{name}}
@@ -56,7 +56,7 @@
 
             {{!-- Spell Level --}}
             <div class="form-group">
-                <label>Spell Level</label>
+                <label>{{ localize "SFRPG.Items.Spell.Level" }}</label>
                 <select name="data.level" data-dtype="Number">
                     {{#select data.level}}
                     {{#each config.spellLevels as |name lvl|}}
@@ -68,7 +68,7 @@
 
             {{!-- Spell School --}}
             <div class="form-group">
-                <label>Spell School</label>
+                <label>{{ localize "SFRPG.Items.Spell.School" }}</label>
                 <select name="data.school">
                     {{#select data.school}}
                     {{#each config.spellSchools as |name sch|}}
@@ -80,29 +80,29 @@
 
             {{!-- Spell Components --}}
             <div class="spell-components form-group stacked">
-                <label>Spell Properties</label>
+                <label>{{ localize "SFRPG.Items.Spell.Properties" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.sr" {{checked data.sr}}/> Spell Resistance
+                    <input type="checkbox" name="data.sr" {{checked data.sr}}/> {{ localize "SFRPG.Items.Spell.Resistance" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.dismissible" {{checked data.dismissible}}/> Dismissible
+                    <input type="checkbox" name="data.dismissible" {{checked data.dismissible}}/> {{ localize "SFRPG.Items.Spell.Dismissible" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.concentration" {{checked data.concentration}}/> Concentration
+                    <input type="checkbox" name="data.concentration" {{checked data.concentration}}/> {{ localize "SFRPG.Items.Spell.Concentration" }}
                 </label>
             </div>
 
             {{!-- Material Components --}}
             <div class="form-group stacked">
-                <label>Spellcasting Materials</label>
+                <label>{{ localize "SFRPG.Items.Spell.SpellcastingMaterials" }}</label>
                 <input class="materials" type="text" name="data.materials.value" value="{{data.materials.value}}"/>
                 {{#if data.materials.value}}
                 <div class="spell-materials flexrow">
-                    <label>Supply</label>
+                    <label>{{ localize "SFRPG.Items.Spell.Supply" }}</label>
                     <input type="text" name="data.materials.supply" value="{{data.materials.supply}}" data-dtype="Number" Placeholder="0"/>
-                    <label>Cost (Cr)</label>
+                    <label>{{ localize "SFRPG.Items.Spell.Cost" }}</label>
                     <input type="text" name="data.materials.cost" value="{{data.materials.cost}}" data-dtype="Number" Placeholder="0"/>
-                    <label>Consumed</label>
+                    <label>{{ localize "SFRPG.Items.Spell.Consumed" }}</label>
                     <input type="checkbox" name="data.materials.consumed" {{checked data.materials.consumed}}/>
                 </div>
                 {{/if}}
@@ -110,10 +110,10 @@
 
             {{!-- Preparation Mode --}}
             <div class="form-group input-select">
-                <label>Spell Preparation Mode</label>
+                <label>{{ localize "SFRPG.Items.Spell.PreparationMode" }}</label>
                 <div class="form-fields">
                     <label class="checkbox prepared">
-                        Prepared <input type="checkbox" name="data.preparation.prepared" {{checked data.preparation.prepared}}/>
+                        {{ localize "SFRPG.Items.Spell.Prepared" }} <input type="checkbox" name="data.preparation.prepared" {{checked data.preparation.prepared}}/>
                     </label>
                     <select name="data.preparation.mode">
                         {{#select data.preparation.mode}}
@@ -126,12 +126,12 @@
                 </div>
             </div>
 
-            <h3 class="form-header">Spell Casting</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.Spell.Casting" }}</h3>
 
             {{!-- Item Activation Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-activation.html"}}
 
-            <h3 class="form-header">Spell Effects</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.Spell.Effects" }}</h3>
 
             {{!-- Item Action Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-action.html"}}

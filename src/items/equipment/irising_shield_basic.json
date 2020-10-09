@@ -1,6 +1,6 @@
 {
   "name": "Irising Shield, Basic",
-  "type": "equipment",
+  "type": "shield",
   "data": {
     "description": {
       "value": "<p>Manufactured by Veskarium engineers for quick deployment, irising shields are cited by vesk soldiers to be life-saving implements of battle. An irising shield is made of flexible, lightweight material that can be compressed into a small, rectangular container worn on your forearm (usually attached to the outside of your armor). You wield an irising shield by deploying it from its container as a swift action, and it can be stored with another swift action. While you have an irising shield deployed, you can&rsquo;t switch it to another hand. A hand wielding an irising shield can hold another object, but it can&rsquo;t wield weapons or other shields. An irising shield is an object of light bulk when not deployed but increases to 1 bulk when deployed. You can use an irising shield to make a special unarmed attack that does not count as archaic.</p>",
@@ -17,7 +17,7 @@
     "equipped": false,
     "identified": true,
     "attributes": {
-      "sturdy": false,
+      "sturdy": true,
       "customBuilt": false,
       "size": "medium",
       "dex": {
@@ -65,7 +65,7 @@
       "per": null
     },
     "ability": null,
-    "actionType": "",
+    "actionType": "mwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -99,39 +99,35 @@
           "subtype": "armorUpgrade",
           "amount": 0,
           "acceptsType": [
-            "upgrade",
-            "weapon"
+            "upgrade"
           ],
           "affectsEncumbrance": true,
           "weightProperty": "slots"
         },
         {
           "type": "slot",
-          "subtype": "weaponSlot",
+          "subtype": "fusion",
           "amount": 0,
           "acceptsType": [
-            "weapon"
+            "fusion"
           ],
           "affectsEncumbrance": true,
-          "weightProperty": ""
+          "weightProperty": "level"
         }
       ]
     },
-    "armor": {
-      "type": "shield",
-      "eac": 0,
-      "kac": 1,
-      "dex": null,
-      "acp": null,
-      "speedAdjust": 0
+    "dex": 0,
+    "acp": 0,
+    "bonus": {
+      "wielded": 0,
+      "aligned": 1
     },
-    "strength": 0,
-    "speed": "",
-    "size": "",
-    "reach": "",
-    "proficient": true,
+    "proficient": false,
     "abilityMods": {
       "parts": []
+    },
+    "properties": {
+      "nonlethal": true
     }
   },
   "flags": {},
