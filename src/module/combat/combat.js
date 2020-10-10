@@ -12,7 +12,7 @@ export class CombatSFRPG extends Combat {
             }
         ];
     
-        const combatType = this.data.data?.combatType || "normal";
+        const combatType = this.data.flags?.sfrpg?.combatType || "normal";
         if (combatType === "starship") {
             phases = [
                 {
@@ -70,9 +70,9 @@ export class CombatSFRPG extends Combat {
         }
     
         const update = {
-            "data.combatType": combatType,
-            "data.phase": 0,
-            "data.phases": phases
+            "flags.sfrpg.combatType": combatType,
+            "flags.sfrpg.phase": 0,
+            "flags.sfrpg.phases": phases
         };
     
         await this.update(update);
@@ -97,7 +97,7 @@ export class CombatSFRPG extends Combat {
         console.log(this);
     
         const oldRound = this.data.round;
-        const oldPhase = this.data.data.phase;
+        const oldPhase = this.data.flags.sfrpg.phase;
         const oldTurn = this.data.turn;
     
         const newRound = Math.max(1, oldRound - 1);
@@ -106,7 +106,7 @@ export class CombatSFRPG extends Combat {
     
         const update = {
             round: newRound,
-            "data.phase": newPhase,
+            "flags.sfrpg.phase": newPhase,
             turn: newTurn
         };
     
@@ -120,7 +120,7 @@ export class CombatSFRPG extends Combat {
         console.log(this);
     
         const oldRound = this.data.round;
-        const oldPhase = this.data.data.phase;
+        const oldPhase = this.data.flags.sfrpg.phase;
         const oldTurn = this.data.turn;
     
         const newRound = Math.max(1, oldRound + 1);
@@ -129,7 +129,7 @@ export class CombatSFRPG extends Combat {
     
         const update = {
             round: newRound,
-            "data.phase": newPhase,
+            "flags.sfrpg.phase": newPhase,
             turn: newTurn
         };
     
@@ -139,8 +139,8 @@ export class CombatSFRPG extends Combat {
     }
 
     async _handlePhaseStart() {
-        const currentPhaseIndex = this.data.data.phase;
-        const currentPhase = this.data.data.phases[currentPhaseIndex];
+        const currentPhaseIndex = this.data.flags.sfrpg.phase;
+        const currentPhase = this.data.flags.sfrpg.phases[currentPhaseIndex];
     
         console.log(`> Starting phase: ${currentPhase.name}`);
     
@@ -187,13 +187,13 @@ async function onConfigClicked(combat) {
     console.log('config combat');
     console.log(combat);
 
-    const combatType = combat.data.data?.combatType || "normal";
+    const combatType = combat.data.flags?.sfrpg?.combatType || "normal";
     const types = ["normal", "starship", "vehicleChase"];
     const indexOf = types.indexOf(combatType);
     const wrappedIndex = (indexOf + 1) % types.length;
     
     const update = {
-        "data.combatType": types[wrappedIndex]
+        "flags.sfrpg.combatType": types[wrappedIndex]
     };
     await combat.update(update);
     console.log(`Combat is now of type ${types[wrappedIndex]}`);
