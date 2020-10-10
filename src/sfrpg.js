@@ -211,6 +211,27 @@ Hooks.once("setup", function () {
     Handlebars.registerHelper('leftOrRight', function (left, right) {
         return left || right;
     });
+
+    Handlebars.registerHelper('editorPlus', function (options) {
+        const target = options.hash['target'];
+        if ( !target ) throw new Error("You must define the name of a target field.");
+    
+        // Enrich the content
+        const owner = Boolean(options.hash['owner']);
+        const rolls = Boolean(options.hash['rolls']);
+        const rollData = options.hash['rollData'];
+        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: owner, entities: true, rolls: rolls, rollData: rollData});
+    
+        // Construct the HTML
+        let editor = $(`<div class="editor"><div class="editor-content" data-edit="${target}">${content}</div></div>`);
+    
+        // Append edit button
+        const button = Boolean(options.hash['button']);
+        const editable = Boolean(options.hash['editable']);
+        if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
+        return new Handlebars.SafeString(editor[0].outerHTML);
+    });
+
 });
 
 Hooks.once("ready", () => {
