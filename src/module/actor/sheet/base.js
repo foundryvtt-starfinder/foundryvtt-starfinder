@@ -772,7 +772,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
             
             const itemInTargetActor = await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
-            if (itemInTargetActor === itemToMove) {
+            if (itemInTargetActor === addedItem) {
                 return await this._onSortItem(event, itemInTargetActor.data);
             }
 
