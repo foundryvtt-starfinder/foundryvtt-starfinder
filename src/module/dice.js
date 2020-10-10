@@ -58,7 +58,7 @@ export class DiceSFRPG {
             };
 
             // Flag critical thresholds
-            let d20 = roll.parts[0];
+            let d20 = roll.terms[0];
             d20.options.critical = critical;
             d20.options.fumble = fumble;
 
@@ -162,6 +162,9 @@ export class DiceSFRPG {
         // Inner roll function
         let rollMode = game.settings.get("core", "rollMode");
         let roll = crit => {
+            // Don't include situational bonus unless it is defined
+            if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
+
             let roll = new Roll(parts.join("+"), data);
             if (crit === true) {
                 let add = /*(actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 :*/ 0;

@@ -175,7 +175,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item-delete').click(ev => this._onItemDelete(ev));
 
         // Item Dragging
-        let handler = ev => this._onDragItemStart(ev);
+        let handler = ev => this._onDragStart(ev);
         html.find('li.item').each((i, li) => {
             li.setAttribute("draggable", true);
             li.addEventListener("dragstart", handler, false);
@@ -299,7 +299,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const header = event.currentTarget;
         let type = header.dataset.type;
         if (!type || type.includes(",")) {
-            let types = SFRPG.itemTypes;
+            let types = duplicate(SFRPG.itemTypes);
             if (type) {
                 let supportedTypes = type.split(',');
                 for (let key of Object.keys(types)) {
@@ -326,10 +326,14 @@ export class ActorSheetSFRPG extends ActorSheet {
                         label: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Button"),
                         callback: html => {
                             const form = html[0].querySelector("form");
-                            mergeObject(createData, validateForm(form));
+                            let formDataExtended = new FormDataExtended(form);
+                            mergeObject(createData, formDataExtended.toObject());
                             if (!createData.name) {
                                 createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
                             }
+
+                            this.onBeforeCreateNewItem(createData);
+
                             this.actor.createOwnedItem(createData);
                         }
                     }
@@ -345,7 +349,14 @@ export class ActorSheetSFRPG extends ActorSheet {
             data: duplicate(header.dataset)
         };
         delete itemData.data['type'];
+
+        this.onBeforeCreateNewItem(itemData);
+
         return this.actor.createOwnedItem(itemData);
+    }
+
+    onBeforeCreateNewItem(itemData) {
+
     }
 
     /**
@@ -759,19 +770,13 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (!(addedItem.type in SFRPG.containableTypes)) {
                 targetContainer = null;
             }
-    
-            if (targetContainer) {
-                let newContents = [];
-                if (targetContainer.data.data.container?.contents) {
-                    newContents = duplicate(targetContainer.data.data.container?.contents || []);
-                }
-                let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
-                newContents.push({id: addedItem._id, index: preferredStorageIndex});
-                let update = { _id: targetContainer._id, "data.container.contents": newContents };
-                await targetActor.updateOwnedItem(update);
+            
+            const itemInTargetActor = await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
+            if (itemInTargetActor === itemToMove) {
+                return await this._onSortItem(event, itemInTargetActor.data);
             }
 
-            return addedItem;
+            return itemInTargetActor;
         } else if (parsedDragData.data) {
             let sourceActor = new ActorItemHelper(parsedDragData.actorId, parsedDragData.tokenId, null);
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {

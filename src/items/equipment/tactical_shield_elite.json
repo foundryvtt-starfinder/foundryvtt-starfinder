@@ -4,7 +4,7 @@
     "default": 0,
     "umHu8DFnCrMQVZ37": 3
   },
-  "type": "equipment",
+  "type": "shield",
   "data": {
     "description": {
       "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">A tactical shield is a small, mobile defensive plate you carry on one limb and can maneuver to intercept attacks against you. A hand wielding a tactical shield can still hold another object and be used to reload weapons, but it cannot wield weapons or other shields. You can use a tactical shield to make unarmed attacks that do not count as archaic.<br></span></p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\">When you wield a basic tactical shield, as a move action you can align the shield to grant you greater protection against one opponent you are observing, which grants you a +1 shield bonus to AC against attacks from that opponent until the beginning of your next turn. The field and advanced tactical shields grant you a +1 shield bonus to AC when wielded, though this does not increase when aligned against a target. The elite tactical shield increases the shield bonus when aligned against a target to +2, and the paragon tactical shield increases this to +3.</span></p>",
@@ -20,6 +20,9 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true
+    },
     "activation": {
       "type": "",
       "cost": 0,
@@ -51,7 +54,7 @@
       "per": null
     },
     "ability": null,
-    "actionType": "",
+    "actionType": "mwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -67,20 +70,13 @@
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "armor": {
-      "type": "shield",
-      "eac": 1,
-      "kac": 2,
-      "dex": 0,
-      "acp": 0,
-      "speedAdjust": 0
+    "dex": 0,
+    "acp": 0,
+    "bonus": {
+      "wielded": 1,
+      "aligned": 2
     },
-    "strength": 0,
-    "speed": "",
-    "size": "",
-    "reach": "",
-    "proficient": true,
+    "proficient": false,
     "container": {
       "contents": [],
       "storage": [
@@ -89,23 +85,25 @@
           "subtype": "armorUpgrade",
           "amount": 1,
           "acceptsType": [
-            "upgrade",
-            "weapon"
+            "upgrade"
           ],
           "affectsEncumbrance": true,
           "weightProperty": "slots"
         },
         {
           "type": "slot",
-          "subtype": "weaponSlot",
+          "subtype": "fusion",
           "amount": 0,
           "acceptsType": [
-            "weapon"
+            "fusion"
           ],
           "affectsEncumbrance": true,
-          "weightProperty": ""
+          "weightProperty": "level"
         }
       ]
+    },
+    "properties": {
+      "nonlethal": true
     }
   },
   "flags": {},

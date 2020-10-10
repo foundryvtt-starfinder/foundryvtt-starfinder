@@ -64,6 +64,7 @@ export class ActorSFRPG extends Actor {
         const theme = items.find(item => item.type === "theme");
         const mods = items.filter(item => item.type === "mod");
         const armorUpgrades = items.filter(item => item.type === "upgrade");
+        const asis = items.filter(item => item.type === "asi");
         game.sfrpg.engine.process("process-actors", {
             data,
             armor,
@@ -75,7 +76,8 @@ export class ActorSFRPG extends Actor {
             modifiers,
             theme,
             mods,
-            armorUpgrades
+            armorUpgrades,
+            asis
         });
     }
 
@@ -129,7 +131,7 @@ export class ActorSFRPG extends Actor {
      * @returns {Promise}
      */
     async createEmbeddedEntity(embeddedName, itemData, options) {
-        if (!this.isPC) {
+        if (!this.hasPlayerOwner) {
             let t = itemData.type;
             let initial = {};           
             if (t === "weapon") initial['data.proficient'] = true;
@@ -364,7 +366,7 @@ export class ActorSFRPG extends Actor {
             skillId = `pro${++counter}`;
         }
 
-        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.isPC, this.owner),
+        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.hasPlayerOwner, this.owner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
@@ -398,7 +400,7 @@ export class ActorSFRPG extends Actor {
     rollSkill(skillId, options = {}) {
         const skl = this.data.data.skills[skillId];
 
-        if (!this.isPC) {
+        if (!this.hasPlayerOwner) {
             this.rollSkillCheck(skillId, skl, options);
             return;
         }

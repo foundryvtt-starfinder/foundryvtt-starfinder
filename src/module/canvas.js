@@ -54,7 +54,7 @@ async function onTokenUpdated(scene, tokenData, tokenFlags, userId) {
  * @returns {Number[]} An Array of distance measurmements for each segment
  */
 export const measureDistances = function(segments, options={}) {
-    if (!options.gridSpaces) return BaseGrid.prototype.measureDistance.call(this, segments, options);
+    if (!options?.gridSpaces) return BaseGrid.prototype.measureDistances.call(this, segments, options);
 
     let nDiagonal = 0;
     const rule = this.parent.diagonalRule;
@@ -244,6 +244,7 @@ function openLootCollectionSheet(event) {
         relevantToken.apps = {};
     }
     
+    relevantToken.hasPerm = () => true;
     const lootCollectionSheet = new ItemCollectionSheet(relevantToken);
     lootCollectionSheet.render(true);
 }

@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -16,10 +16,10 @@
 
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.requirements" value="{{data.requirements}}" placeholder="Requirements"/>
+                    <input type="text" name="data.requirements" value="{{data.requirements}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Requirements" }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>
         </div>
@@ -45,7 +45,7 @@
             <h3 class="form-header">{{localize "SFRPG.ArchetypesAlternateClassFeatures"}}</h3>
             
             {{!-- Granted alternate abilities --}}
-            <p class="notification warning">Coming soon!</p>
+            <p class="notification warning">{{localize "SFRPG.ComingSoon"}}</p>
         </div>
 
         {{!-- Modifiers Tab --}}

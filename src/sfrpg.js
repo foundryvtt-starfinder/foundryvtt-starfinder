@@ -123,7 +123,12 @@ Hooks.once("setup", function () {
         "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
         "weaponProperties", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
         "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
-        "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels"
+        "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
+        "weaponSpecial", "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
+        "powerCoreSystems", "thrusterSystems", "armorSystems", "computerSystems", "crewQuarterSystems", "defenseSystems",
+        "driftEngineSystems", "sensorSystems", "shieldSystems", "expansionBaySystems", "securitySystems", "baseFrames",
+        "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
+        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes"
     ];
 
     for (let o of toLocalize) {

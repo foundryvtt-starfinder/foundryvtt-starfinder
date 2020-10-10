@@ -196,7 +196,8 @@ export default class SFRPGModifierApplication extends FormApplication {
                 modifier.max = formData['modifier'];
                 break;
             case SFRPGModifierType.FORMULA:
-                modifier.max = Roll.maximize(formData['modifier']).total;
+                const roll = new Roll(formData['modifier']);
+                modifier.max = roll.evaluate({maximize: true}).total;
                 break;
         }
 

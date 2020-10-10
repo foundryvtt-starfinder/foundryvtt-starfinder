@@ -4,7 +4,7 @@
     "default": 0,
     "umHu8DFnCrMQVZ37": 3
   },
-  "type": "equipment",
+  "type": "shield",
   "data": {
     "description": {
       "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">A knight’s shield is a sizable plate of advanced material, normally thin layers of nanocarbon over ceramics and resins, and often including a transparent aluminum view port. It is broad at the top, narrowing towards the bottom. A hand wielding a knight’s shield cannot be used for anything else, and changing your grip from carrying a knight’s shield to wielding it, or vice versa, requires a move action. Pulling out a knight’s shield from storage or putting one away also requires a move action. If you are wielding a knight’s shield, you gain a +1 bonus to any bull rush combat maneuver you attempt. You can use a knight’s shield to make unarmed attacks that do not count as archaic, and can deal either bludgeoning or piercing damage (your choice for each attack). Many knightly orders have specific heraldry their members display on knight’s shields.<br></span></p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\">When you wield a basic knight’s shield, as a move action you can align the shield to grant you greater protection against one opponent you are observing, which grants you a +2 shield bonus to AC against attacks from that opponent until the beginning of your next turn. The field, advanced, and elite knight’s shields grant you a +1 shield bonus to AC when wielded, and their listed increased bonus when aligned against a specific opponent.</span></p>",
@@ -20,6 +20,9 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true
+    },
     "activation": {
       "type": "",
       "cost": 0,
@@ -51,7 +54,7 @@
       "per": null
     },
     "ability": null,
-    "actionType": "",
+    "actionType": "mwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -68,19 +71,13 @@
       "descriptor": ""
     },
     "descriptors": [],
-    "armor": {
-      "type": "shield",
-      "eac": 1,
-      "kac": 3,
-      "dex": 7,
-      "acp": -1,
-      "speedAdjust": 0
+    "dex": 7,
+    "acp": -1,
+    "bonus": {
+      "wielded": 1,
+      "aligned": 3
     },
-    "strength": 0,
-    "speed": "",
-    "size": "",
-    "reach": "",
-    "proficient": true,
+    "proficient": false,
     "container": {
       "contents": [],
       "storage": [
@@ -89,23 +86,25 @@
           "subtype": "armorUpgrade",
           "amount": 2,
           "acceptsType": [
-            "upgrade",
-            "weapon"
+            "upgrade"
           ],
           "affectsEncumbrance": true,
           "weightProperty": "slots"
         },
         {
           "type": "slot",
-          "subtype": "weaponSlot",
+          "subtype": "fusion",
           "amount": 0,
           "acceptsType": [
-            "weapon"
+            "fusion"
           ],
           "affectsEncumbrance": true,
-          "weightProperty": ""
+          "weightProperty": "level"
         }
       ]
+    },
+    "properties": {
+      "nonlethal": true
     }
   },
   "flags": {},

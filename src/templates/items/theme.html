@@ -39,10 +39,10 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="form-header">Theme Details</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.Theme.Details" }}</h3>
 
             <div class="form-group">
-                <label>Ability Adjustment</label>
+                <label>{{ localize "SFRPG.Items.Theme.AbilityAdjustment" }}</label>
                 <div class="form-fields">
                     <select name="data.abilityMod.ability">
                         {{#select data.abilityMod.ability}}
@@ -56,7 +56,7 @@
             </div>
 
             <div class="form-group">
-                <label>Skill</label>
+                <label>{{ localize "SFRPG.Items.Theme.Skill" }}</label>
                 <select name="data.skill">
                     {{#select data.skill}}
                     {{#each config.skills as |skill skl|}}

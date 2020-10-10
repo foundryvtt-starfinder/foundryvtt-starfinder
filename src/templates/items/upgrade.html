@@ -14,18 +14,18 @@
         {{> "systems/sfrpg/templates/items/parts/item-description.html"}}
 
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">Armor Upgrade Details</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Items.Upgrade.ArmorUpgradeDetails" }}</h3>
             <div class="form-group">
-                <label>Slots</label>
+                <label>{{ localize "SFRPG.Items.Upgrade.Slots" }}</label>
                 <input type="text" name="data.slots" value="{{data.slots}}" data-dtype="Number" />
             </div>
             <div class="form-group">
-                <label>Allowed Armor Type</label>
-                <select name="data.armorType">
-                    {{#select data.armorType}}
-                    <option value="any">Any</option>
-                    {{#each config.armorTypes as |armorType k|}}
-                    <option value="{{k}}">{{armorType}}</option>
+                <label>{{ localize "SFRPG.Items.Upgrade.AllowedArmorType" }}</label>
+                <select name="data.allowedArmorType">
+                    {{#select data.allowedArmorType}}
+                    <option value="any">{{ localize "SFRPG.Items.Upgrade.Any" }}</option>
+                    {{#each config.allowedArmorTypes as |allowedArmorType k|}}
+                    <option value="{{k}}">{{allowedArmorType}}</option>
                     {{/each}}
                     {{/select}}
                 </select>
