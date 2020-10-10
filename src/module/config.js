@@ -256,14 +256,15 @@ SFRPG.weaponTypes = {
 
 // Weapons sub categories
 SFRPG.weaponCategories = {
-    "cryo": "SFRPG.WeaponCategoriesCryo",
-    "disruption" : "SFRPG.WeaponCategoriesDisruption",
-    "flame": "SFRPG.WeaponCategoriesFlame",
-    "laser": "SFRPG.WeaponCategoriesLaser",
-    "plasma": "SFRPG.WeaponCategoriesPlasma",
-    "projectile": "SFRPG.WeaponCategoriesProjectile",
-    "shock": "SFRPG.WeaponCategoriesShock",
-    "sonic": "SFRPG.WeaponCategoriesSonic",
+    "cryo"         : "SFRPG.WeaponCategoriesCryo",
+    "disruption"   : "SFRPG.WeaponCategoriesDisruption",
+    "disintegrator": "SFRPG.WeaponCategoriesDisintegrator",
+    "flame"        : "SFRPG.WeaponCategoriesFlame",
+    "laser"        : "SFRPG.WeaponCategoriesLaser",
+    "plasma"       : "SFRPG.WeaponCategoriesPlasma",
+    "projectile"   : "SFRPG.WeaponCategoriesProjectile",
+    "shock"        : "SFRPG.WeaponCategoriesShock",
+    "sonic"        : "SFRPG.WeaponCategoriesSonic",
     "uncategorized": "SFRPG.WeaponCategoriesUncategorized"
 };
 
