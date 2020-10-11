@@ -1,0 +1,24 @@
+<div class="sfrpg chat-card combat-card" {{#if actor}}data-actor-id="{{actor._id}}"{{/if}} {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
+    <header class="card-header flexrow">
+        <img src="{{header.image}}" title="{{header.name}}" width="36" height="36"/>
+        <h3 class="item-name">{{header.name}}</h3>
+    </header>
+
+    <div class="card-content">
+        <h2 {{#if body.headerColor}}style="background-color:{{body.headerColor}}"{{/if}}>{{body.header}}</h2>
+        
+        {{#if body.message}}
+            <h3>{{body.message.title}}</h3>
+            {{body.message.body}}
+        {{/if}}
+        
+        {{#if body.turn}}
+            <h3>{{body.turn.combatantName}}'s Turn</h3>
+            {{body.turn.combatantName}} may act now.
+        {{/if}}
+    </div>
+
+    <footer class="card-footer">
+        {{footer.content}}
+    </footer>
+</div>

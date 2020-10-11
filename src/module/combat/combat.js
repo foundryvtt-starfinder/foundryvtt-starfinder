@@ -1,72 +1,92 @@
 export class CombatSFRPG extends Combat {
+    normalCombatPhases = [
+        {
+            name: "Combat",
+            iterateTurns: true,
+            resetInitiative: false,
+            sortInitiative: "desc",
+        }
+    ];
+
+    starshipPhases = [
+        {
+            name: "Changing Roles",
+            description: "Anyone who wishes to change starship roles, may do so now.",
+            iterateTurns: false,
+            resetInitiative: false,
+            sortInitiative: null,
+        },
+        {
+            name: "Engineering",
+            description: "Captains, Engineers, Magic Officers, Chief Mates and Deck Hands may choose to act during this phase.",
+            iterateTurns: false,
+            resetInitiative: false,
+            sortInitiative: null,
+        },
+        {
+            name: "Helm (Piloting)",
+            description: "Pilots may now roll their piloting checks to determine this round's initiative.",
+            iterateTurns: false,
+            resetInitiative: true,
+            sortInitiative: null,
+        },
+        {
+            name: "Helm (Execution)",
+            description: "Captains, Pilots, Science Officers, Chief Mates and Deck Hands may choose to act during this phase.",
+            iterateTurns: true,
+            resetInitiative: false,
+            sortInitiative: "asc",
+        },
+        {
+            name: "Gunnery",
+            description: "Captains, and Gunners may choose to act during this phase.",
+            iterateTurns: true,
+            resetInitiative: false,
+            sortInitiative: null,
+        },
+        {
+            name: "Damage",
+            description: "Everyone now processes their received damages, critical thresholds, etc.",
+            iterateTurns: false,
+            resetInitiative: false,
+            sortInitiative: null,
+        }
+    ];
+
+    vehicleChasePhases = [
+        {
+            name: "Piloting",
+            description: "Drivers may now decide their maneuvers.",
+            iterateTurns: true,
+            resetInitiative: false,
+            sortInitiative: "desc",
+        },
+        {
+            name: "Chase progress",
+            description: "The GM will now process the chase progress results.",
+            iterateTurns: false,
+            resetInitiative: false,
+            sortInitiative: null,
+        },
+        {
+            name: "Combat",
+            description: "Everyone may now act their combat turn.",
+            iterateTurns: true,
+            resetInitiative: false,
+            sortInitiative: null,
+        }
+    ];
+
     async begin() {
         console.log('beginning combat');
         console.log(this);
     
-        let phases = [
-            {
-                name: "Combat",
-                iterateTurns: true,
-                resetInitiative: false,
-                sortInitiative: "desc",
-            }
-        ];
-    
+        let phases = this.normalCombatPhases;
         const combatType = this.data.flags?.sfrpg?.combatType || "normal";
         if (combatType === "starship") {
-            phases = [
-                {
-                    name: "Engineering",
-                    iterateTurns: false,
-                    resetInitiative: false,
-                    sortInitiative: null,
-                },
-                {
-                    name: "Helm (Piloting)",
-                    iterateTurns: false,
-                    resetInitiative: true,
-                    sortInitiative: null,
-                },
-                {
-                    name: "Helm (Execution)",
-                    iterateTurns: true,
-                    resetInitiative: false,
-                    sortInitiative: "asc",
-                },
-                {
-                    name: "Gunnery",
-                    iterateTurns: true,
-                    resetInitiative: false,
-                    sortInitiative: null,
-                },
-                {
-                    name: "Damage",
-                    iterateTurns: false,
-                    resetInitiative: false,
-                    sortInitiative: null,
-                }
-            ];    
+            phases = this.starshipPhases;
         } else if (combatType === "vehicleChase") {
-            phases = [
-                {
-                    name: "Piloting",
-                    iterateTurns: true,
-                    resetInitiative: false,
-                    sortInitiative: "desc",
-                },
-                {
-                    name: "Chase progress",
-                    iterateTurns: false,
-                    resetInitiative: false,
-                    sortInitiative: null,
-                },
-                {
-                    name: "Combat",
-                    iterateTurns: true,
-                    resetInitiative: false,
-                    sortInitiative: null,
-                }
-            ];    
+            phases = this.vehicleChasePhases;
         }
     
         const update = {
@@ -88,8 +108,192 @@ export class CombatSFRPG extends Combat {
     async nextTurn() {
         console.log('next turn');
         console.log(this);
-    
-        await super.nextTurn();
+
+        let nextRound = this.round;
+        let nextPhase = this.data.flags.sfrpg.phase;
+        let nextTurn = this.turn + 1;
+
+        const currentPhase = this.getCurrentPhase();
+        if (currentPhase.iterateTurns) {
+            if (this.settings.skipDefeated) {
+                for (let [index, combatant] of this.turns.entries()) {
+                    if (index < nextTurn) continue;
+                    if (!combatant.defeated) {
+                        nextTurn = index;
+                        break;
+                    }
+                }
+            }
+        
+            if (nextTurn >= this.turns.length) {
+                nextPhase += 1;
+                nextTurn = 0;
+            }
+        } else {
+            nextPhase += 1;
+            nextTurn = 0;
+        }
+
+        if (nextPhase >= this.data.flags.sfrpg.phases.length) {
+            nextRound += 1;
+            nextPhase = 0;
+            nextTurn = 0;
+        }
+
+        const newPhase = this.data.flags.sfrpg.phases[nextPhase];
+
+        const eventData = {
+            combat: this,
+            isNewRound: nextRound != this.round,
+            isNewPhase: nextPhase != this.data.flags.sfrpg.phase,
+            isNewTurn: nextTurn != this.turn,
+            oldRound: this.round,
+            newRound: nextRound,
+            oldPhase: currentPhase,
+            newPhase: newPhase,
+            oldCombatant: currentPhase.iterateTurns ? this.turns[this.turn] : null,
+            newCombatant: newPhase.iterateTurns ? this.turns[nextTurn] : null,
+        };
+
+        await this._notifyBeforeUpdate(eventData);
+
+        const updateData = {
+            round: nextRound,
+            "flags.sfrpg.phase": nextPhase,
+            turn: nextTurn
+        };
+
+        const advanceTime = CONFIG.time.turnTime;
+        await this.update(updateData, {advanceTime});
+
+        await this._notifyAfterUpdate(eventData);
+    }
+
+    async _notifyBeforeUpdate(eventData) {
+        console.log(["_notifyBeforeUpdate", eventData]);
+        //console.log([isNewRound, isNewPhase, isNewTurn]);
+        //console.log([this.round, this.data.flags.sfrpg.phase, this.turn]);
+    }
+
+    async _notifyAfterUpdate(eventData) {
+        console.log(["_notifyAfterUpdate", eventData]);
+        //console.log([isNewRound, isNewPhase, isNewTurn]);
+        //console.log([this.round, this.data.flags.sfrpg.phase, this.turn]);
+
+        if (eventData.isNewRound) {
+            console.log(`Starting new round! New phase is ${eventData.newPhase.name}, it is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
+            await this._printNewRoundChatCard(eventData);
+        }
+        
+        if (eventData.isNewPhase) {
+            console.log(`Starting ${eventData.newPhase.name} phase! It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
+            await this._printNewPhaseChatCard(eventData);
+        }
+        
+        if (eventData.newCombatant) {
+            console.log(`[${eventData.newPhase.name}] It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
+            await this._printNewTurnChatCard(eventData);
+        }
+    }
+
+    async _printNewRoundChatCard(eventData) {
+        // Basic template rendering data
+        const speakerName = "The GM";
+        const templateData = {
+            header: {
+                image: "icons/svg/mystery-man.svg",
+                name: `Round ${this.round}`
+            },
+            body: {
+                header: `New Round`,
+                headerColor: 'Salmon'
+            },
+            footer: {
+                content: `Starship Combat - ${eventData.newPhase.name} phase`
+            }
+        };
+
+        // Render the chat card template
+        const template = `systems/sfrpg/templates/chat/combat-card.html`;
+        const html = await renderTemplate(template, templateData);
+
+        // Create the chat message
+        const chatData = {
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            speaker: { actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName },
+            content: html
+        };
+
+        await ChatMessage.create(chatData, { displaySheet: false });
+    }
+
+    async _printNewPhaseChatCard(eventData) {
+        // Basic template rendering data
+        const speakerName = "The GM";
+        const templateData = {
+            header: {
+                image: "icons/svg/mystery-man.svg",
+                name: `${eventData.newPhase.name} Phase`
+            },
+            body: {
+                header: eventData.newPhase.name,
+                headerColor: 'LightGreen',
+                message: {
+                    title: "Description",
+                    body: eventData.newPhase.description
+                }
+            },
+            footer: {
+                content: `Starship Combat - ${eventData.newPhase.name} phase`
+            }
+        };
+
+        // Render the chat card template
+        const template = `systems/sfrpg/templates/chat/combat-card.html`;
+        const html = await renderTemplate(template, templateData);
+
+        // Create the chat message
+        const chatData = {
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            speaker: { actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName },
+            content: html
+        };
+
+        await ChatMessage.create(chatData, { displaySheet: false });
+    }
+
+    async _printNewTurnChatCard(eventData) {
+        // Basic template rendering data
+        const speakerName = eventData.newCombatant.name;
+        const templateData = {
+            header: {
+                image: eventData.newCombatant.img,
+                name: `${eventData.newCombatant.name}'s Turn`
+            },
+            body: {
+                header: "",
+                message: {
+                    title: eventData.newPhase.name,
+                    body: eventData.newPhase.description
+                }
+            },
+            footer: {
+                content: `Starship Combat - ${eventData.newPhase.name} phase`
+            }
+        };
+
+        // Render the chat card template
+        const template = `systems/sfrpg/templates/chat/combat-card.html`;
+        const html = await renderTemplate(template, templateData);
+
+        // Create the chat message
+        const chatData = {
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            speaker: { actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName },
+            content: html
+        };
+
+        await ChatMessage.create(chatData, { displaySheet: false });
     }
 
     async previousRound() {
@@ -136,6 +340,10 @@ export class CombatSFRPG extends Combat {
         await this.update(update);
     
         await this._handlePhaseStart();
+    }
+
+    getCurrentPhase() {
+        return this.data.flags.sfrpg.phases[this.data.flags.sfrpg.phase];
     }
 
     async _handlePhaseStart() {
