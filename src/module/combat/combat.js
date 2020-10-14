@@ -1,10 +1,15 @@
 export class CombatSFRPG extends Combat {
+    colors = {
+        round: "Salmon",
+        phase: "LightGreen",
+        turn: null
+    };
+
     normalCombatPhases = [
         {
             name: "Combat",
             iterateTurns: true,
-            resetInitiative: false,
-            sortInitiative: "desc",
+            resetInitiative: false
         }
     ];
 
@@ -13,43 +18,37 @@ export class CombatSFRPG extends Combat {
             name: "Changing Roles",
             description: "Anyone who wishes to change starship roles, may do so now.",
             iterateTurns: false,
-            resetInitiative: false,
-            sortInitiative: null,
+            resetInitiative: false
         },
         {
             name: "Engineering",
             description: "Captains, Engineers, Magic Officers, Chief Mates and Deck Hands may choose to act during this phase.",
             iterateTurns: false,
-            resetInitiative: false,
-            sortInitiative: null,
+            resetInitiative: false
         },
         {
             name: "Helm (Piloting)",
             description: "Pilots may now roll their piloting checks to determine this round's initiative.",
             iterateTurns: false,
-            resetInitiative: true,
-            sortInitiative: null,
+            resetInitiative: true
         },
         {
             name: "Helm (Execution)",
             description: "Captains, Pilots, Science Officers, Chief Mates and Deck Hands may choose to act during this phase.",
             iterateTurns: true,
-            resetInitiative: false,
-            sortInitiative: "asc",
+            resetInitiative: false
         },
         {
             name: "Gunnery",
             description: "Captains, and Gunners may choose to act during this phase.",
             iterateTurns: true,
-            resetInitiative: false,
-            sortInitiative: null,
+            resetInitiative: false
         },
         {
             name: "Damage",
             description: "Everyone now processes their received damages, critical thresholds, etc.",
             iterateTurns: false,
-            resetInitiative: false,
-            sortInitiative: null,
+            resetInitiative: false
         }
     ];
 
@@ -58,22 +57,19 @@ export class CombatSFRPG extends Combat {
             name: "Piloting",
             description: "Drivers may now decide their maneuvers.",
             iterateTurns: true,
-            resetInitiative: false,
-            sortInitiative: "desc",
+            resetInitiative: false
         },
         {
             name: "Chase progress",
             description: "The GM will now process the chase progress results.",
             iterateTurns: false,
-            resetInitiative: false,
-            sortInitiative: null,
+            resetInitiative: false
         },
         {
             name: "Combat",
             description: "Everyone may now act their combat turn.",
             iterateTurns: true,
-            resetInitiative: false,
-            sortInitiative: null,
+            resetInitiative: false
         }
     ];
 
@@ -99,6 +95,10 @@ export class CombatSFRPG extends Combat {
     }
 
     async previousTurn() {
+        if (this.isEveryCombatantDefeated()) {
+            return;
+        }
+        
         console.log('previous turn');
         console.log(this);
     
@@ -106,6 +106,10 @@ export class CombatSFRPG extends Combat {
     }
 
     async nextTurn() {
+        if (this.isEveryCombatantDefeated()) {
+            return;
+        }
+        
         console.log('next turn');
         console.log(this);
 
@@ -140,13 +144,18 @@ export class CombatSFRPG extends Combat {
             nextTurn = 0;
         }
 
+        await this._handleUpdate(nextRound, nextPhase, nextTurn);
+    }
+
+    async _handleUpdate(nextRound, nextPhase, nextTurn) {
+        const currentPhase = this.getCurrentPhase();
         const newPhase = this.data.flags.sfrpg.phases[nextPhase];
 
         const eventData = {
             combat: this,
             isNewRound: nextRound != this.round,
-            isNewPhase: nextPhase != this.data.flags.sfrpg.phase,
-            isNewTurn: nextTurn != this.turn,
+            isNewPhase: nextRound != this.round || nextPhase != this.data.flags.sfrpg.phase,
+            isNewTurn: (nextRound != this.round && this.data.flags.sfrpg.phases[nextPhase].iterateTurns) || nextTurn != this.turn,
             oldRound: this.round,
             newRound: nextRound,
             oldPhase: currentPhase,
@@ -154,6 +163,10 @@ export class CombatSFRPG extends Combat {
             oldCombatant: currentPhase.iterateTurns ? this.turns[this.turn] : null,
             newCombatant: newPhase.iterateTurns ? this.turns[nextTurn] : null,
         };
+
+        if (!eventData.isNewRound && !eventData.isNewPhase && !eventData.isNewTurn) {
+            return;
+        }
 
         await this._notifyBeforeUpdate(eventData);
 
@@ -165,6 +178,10 @@ export class CombatSFRPG extends Combat {
 
         const advanceTime = CONFIG.time.turnTime;
         await this.update(updateData, {advanceTime});
+
+        if (eventData.isNewPhase) {
+            await this._handlePhaseStart();
+        }
 
         await this._notifyAfterUpdate(eventData);
     }
@@ -206,7 +223,7 @@ export class CombatSFRPG extends Combat {
             },
             body: {
                 header: `New Round`,
-                headerColor: 'Salmon'
+                headerColor: this.colors.round
             },
             footer: {
                 content: `Starship Combat - ${eventData.newPhase.name} phase`
@@ -237,7 +254,7 @@ export class CombatSFRPG extends Combat {
             },
             body: {
                 header: eventData.newPhase.name,
-                headerColor: 'LightGreen',
+                headerColor: this.colors.phase,
                 message: {
                     title: "Description",
                     body: eventData.newPhase.description
@@ -272,6 +289,7 @@ export class CombatSFRPG extends Combat {
             },
             body: {
                 header: "",
+                headerColor: this.colors.turn,
                 message: {
                     title: eventData.newPhase.name,
                     body: eventData.newPhase.description
@@ -297,53 +315,104 @@ export class CombatSFRPG extends Combat {
     }
 
     async previousRound() {
-        console.log('previous round');
-        console.log(this);
-    
-        const oldRound = this.data.round;
-        const oldPhase = this.data.flags.sfrpg.phase;
-        const oldTurn = this.data.turn;
-    
-        const newRound = Math.max(1, oldRound - 1);
-        const newPhase = 0;
-        const newTurn = 0; // TODO: Skip defeated, if phases[newPhase].iterateTurns
-    
-        const update = {
-            round: newRound,
-            "flags.sfrpg.phase": newPhase,
-            turn: newTurn
-        };
-    
-        await this.update(update);
-    
-        await this._handlePhaseStart();
+        if (this.isEveryCombatantDefeated()) {
+            return;
+        }
+
+        const indexOfFirstUndefeatedCombatant = this.getIndexOfFirstUndefeatedCombatant();
+
+        let nextRound = this.round;
+        let nextPhase = 0;
+        let nextTurn = 0;
+
+        if (this.data.flags.sfrpg.phase === 0 && this.turn <= indexOfFirstUndefeatedCombatant) {
+            nextRound = Math.max(1, this.round - 1);
+        }
+
+        const currentPhase = this.getCurrentPhase();
+        const newPhase = this.data.flags.sfrpg.phases[nextPhase];
+        if (newPhase.iterateTurns) {
+            if (this.settings.skipDefeated) {
+                nextTurn = indexOfFirstUndefeatedCombatant;
+            }
+        }
+
+        await this._handleUpdate(nextRound, nextPhase, nextTurn);
     }
 
     async nextRound() {
-        console.log('next round');
-        console.log(this);
-    
-        const oldRound = this.data.round;
-        const oldPhase = this.data.flags.sfrpg.phase;
-        const oldTurn = this.data.turn;
-    
-        const newRound = Math.max(1, oldRound + 1);
-        const newPhase = 0;
-        const newTurn = 0; // TODO: Skip defeated, if phases[newPhase].iterateTurns
-    
-        const update = {
-            round: newRound,
-            "flags.sfrpg.phase": newPhase,
-            turn: newTurn
-        };
-    
-        await this.update(update);
-    
-        await this._handlePhaseStart();
+        if (this.isEveryCombatantDefeated()) {
+            return;
+        }
+
+        const indexOfFirstUndefeatedCombatant = this.getIndexOfFirstUndefeatedCombatant();
+
+        let nextRound = this.round + 1;
+        let nextPhase = 0;
+        let nextTurn = 0;
+
+        const currentPhase = this.getCurrentPhase();
+        const newPhase = this.data.flags.sfrpg.phases[nextPhase];
+        if (newPhase.iterateTurns) {
+            if (this.settings.skipDefeated) {
+                nextTurn = indexOfFirstUndefeatedCombatant;
+            }
+        }
+
+        await this._handleUpdate(nextRound, nextPhase, nextTurn);
     }
 
     getCurrentPhase() {
         return this.data.flags.sfrpg.phases[this.data.flags.sfrpg.phase];
+    }
+
+    getIndexOfFirstUndefeatedCombatant() {
+        for (let [index, combatant] of this.turns.entries()) {
+            if (!combatant.defeated) {
+                return index;
+            }
+        }
+        return null;
+    }
+
+    isEveryCombatantDefeated() {
+        return this.getIndexOfFirstUndefeatedCombatant() === null;
+    }
+
+    _getInitiativeFormula(combatant) {
+        if (this.data.flags.sfrpg.combatType === "starship") {
+            return "1d20 + @skills.pil.mod"
+        }
+        else {
+            return "1d20 + @attributes.init.total";
+        }
+    }
+
+    _getInitiativeRoll(combatant, formula) {
+        let rollData = {};
+        if (this.data.flags.sfrpg.combatType === "starship") {
+            let pilotActor = this._getPilotForStarship(combatant.actor);
+            rollData = pilotActor ? pilotActor.getRollData() : { skills: { pil: { mod: 0 } } };
+        } else {
+            rollData = combatant.actor ? combatant.actor.getRollData() : {};
+        }
+        return Roll.create(formula, rollData).roll();
+    }
+
+    _getPilotForStarship(starshipActor) {
+        if (!starshipActor?.data?.flags?.sfrpg?.shipsCrew?.members) {
+            return null;
+        }
+
+        for (let crewId of starshipActor.data.flags.sfrpg.shipsCrew.members) {
+            let crewActor = game.actors.entries.find((x) => x._id === crewId);
+            if (crewActor) {
+                if (crewActor.data.flags.sfrpg.crewMember.role === "pilot") {
+                    return crewActor;
+                }
+            }
+        }
+        return null;
     }
 
     async _handlePhaseStart() {
@@ -353,41 +422,36 @@ export class CombatSFRPG extends Combat {
         console.log(`> Starting phase: ${currentPhase.name}`);
     
         if (currentPhase.resetInitiative) {
-            for (let combatant of this.combatants) {
-                await this.setInitative(combatant._id, null);
-            }
+            const updates = this.data.combatants.map(c => { return {
+                _id: c._id,
+                initiative: null
+            }});
+            await this.updateEmbeddedEntity("Combatant", updates);
         }
-        
-        if (currentPhase.sortInitiative) {
-            let turns = duplicate(this.turns);
-            switch (currentPhase.sortInitiative) {
-                case "asc":
-                    turns = turns.sort((a, b) => {
-                        const ia = Number.isNumeric(a.initiative) ? a.initiative : -9999;
-                        const ib = Number.isNumeric(b.initiative) ? b.initiative : -9999;
-                        let ci = ia - ib;
-                        if ( ci !== 0 ) return ci;
-                        let [an, bn] = [a.token.name || "", b.token.name || ""];
-                        let cn = an.localeCompare(bn);
-                        if ( cn !== 0 ) return cn;
-                        return a.tokenId - b.tokenId;
-                    });
-                    break;
-                case "desc":
-                    turns = turns.sort((a, b) => {
-                        const ia = Number.isNumeric(a.initiative) ? a.initiative : -9999;
-                        const ib = Number.isNumeric(b.initiative) ? b.initiative : -9999;
-                        let ci = ib - ia;
-                        if ( ci !== 0 ) return ci;
-                        let [an, bn] = [a.token.name || "", b.token.name || ""];
-                        let cn = an.localeCompare(bn);
-                        if ( cn !== 0 ) return cn;
-                        return a.tokenId - b.tokenId;
-                    });
-                    break;
-            }
-            await this.update({turns: turns});
-        }
+    }
+
+    setupTurns() {
+        const currentPhaseIndex = this.data.flags.sfrpg.phase;
+        const currentPhase = this.data.flags.sfrpg.phases[currentPhaseIndex];
+
+        const combatants = this.data.combatants;
+        const scene = game.scenes.get(this.data.scene);
+        const players = game.users.players;
+        const settings = game.settings.get("core", Combat.CONFIG_SETTING);
+        const turns = combatants.map(c => this._prepareCombatant(c, scene, players, settings)).sort(this.data.flags.sfrpg.combatType === "starship" ? this._sortCombatantsAsc : this._sortCombatants);
+        this.data.turn = Math.clamped(this.data.turn, 0, turns.length-1);
+        return this.turns = turns;
+    }
+
+    _sortCombatantsAsc(a, b) {
+        const ia = Number.isNumeric(a.initiative) ? a.initiative : -9999;
+        const ib = Number.isNumeric(b.initiative) ? b.initiative : -9999;
+        let ci = ia - ib;
+        if ( ci !== 0 ) return ci;
+        let [an, bn] = [a.token?.name || "", b.token?.name || ""];
+        let cn = an.localeCompare(bn);
+        if ( cn !== 0 ) return cn;
+        return a.tokenId - b.tokenId;
     }
 }
 
