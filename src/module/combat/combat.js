@@ -1,94 +1,11 @@
 export class CombatSFRPG extends Combat {
-    colors = {
-        round: "Salmon",
-        phase: "LightGreen",
-        turn: null
-    };
-
-    normalCombatPhases = [
-        {
-            name: "Combat",
-            iterateTurns: true,
-            resetInitiative: false
-        }
-    ];
-
-    starshipPhases = [
-        {
-            name: "Changing Roles",
-            description: "Anyone who wishes to change starship roles, may do so now.",
-            iterateTurns: false,
-            resetInitiative: false
-        },
-        {
-            name: "Engineering",
-            description: "Captains, Engineers, Magic Officers, Chief Mates and Deck Hands may choose to act during this phase.",
-            iterateTurns: false,
-            resetInitiative: false
-        },
-        {
-            name: "Helm (Piloting)",
-            description: "Pilots may now roll their piloting checks to determine this round's initiative.",
-            iterateTurns: false,
-            resetInitiative: true
-        },
-        {
-            name: "Helm (Execution)",
-            description: "Captains, Pilots, Science Officers, Chief Mates and Deck Hands may choose to act during this phase.",
-            iterateTurns: true,
-            resetInitiative: false
-        },
-        {
-            name: "Gunnery",
-            description: "Captains, and Gunners may choose to act during this phase.",
-            iterateTurns: true,
-            resetInitiative: false
-        },
-        {
-            name: "Damage",
-            description: "Everyone now processes their received damages, critical thresholds, etc.",
-            iterateTurns: false,
-            resetInitiative: false
-        }
-    ];
-
-    vehicleChasePhases = [
-        {
-            name: "Piloting",
-            description: "Drivers may now decide their maneuvers.",
-            iterateTurns: true,
-            resetInitiative: false
-        },
-        {
-            name: "Chase progress",
-            description: "The GM will now process the chase progress results.",
-            iterateTurns: false,
-            resetInitiative: false
-        },
-        {
-            name: "Combat",
-            description: "Everyone may now act their combat turn.",
-            iterateTurns: true,
-            resetInitiative: false
-        }
-    ];
-
     async begin() {
         console.log('beginning combat');
         console.log(this);
     
-        let phases = this.normalCombatPhases;
-        const combatType = this.data.flags?.sfrpg?.combatType || "normal";
-        if (combatType === "starship") {
-            phases = this.starshipPhases;
-        } else if (combatType === "vehicleChase") {
-            phases = this.vehicleChasePhases;
-        }
-    
         const update = {
             "flags.sfrpg.combatType": combatType,
-            "flags.sfrpg.phase": 0,
-            "flags.sfrpg.phases": phases
+            "flags.sfrpg.phase": 0
         };
     
         await this.update(update);
@@ -102,7 +19,6 @@ export class CombatSFRPG extends Combat {
         console.log('previous turn');
         console.log(this);
     
-        await super.previousTurn();
     }
 
     async nextTurn() {
@@ -138,7 +54,7 @@ export class CombatSFRPG extends Combat {
             nextTurn = 0;
         }
 
-        if (nextPhase >= this.data.flags.sfrpg.phases.length) {
+        if (nextPhase >= this.getPhases().length) {
             nextRound += 1;
             nextPhase = 0;
             nextTurn = 0;
@@ -148,14 +64,15 @@ export class CombatSFRPG extends Combat {
     }
 
     async _handleUpdate(nextRound, nextPhase, nextTurn) {
-        const currentPhase = this.getCurrentPhase();
-        const newPhase = this.data.flags.sfrpg.phases[nextPhase];
+        const phases = this.getPhases();
+        const currentPhase = phases[this.data.flags.sfrpg.phase];
+        const newPhase = phases[nextPhase];
 
         const eventData = {
             combat: this,
             isNewRound: nextRound != this.round,
             isNewPhase: nextRound != this.round || nextPhase != this.data.flags.sfrpg.phase,
-            isNewTurn: (nextRound != this.round && this.data.flags.sfrpg.phases[nextPhase].iterateTurns) || nextTurn != this.turn,
+            isNewTurn: (nextRound != this.round && phases[nextPhase].iterateTurns) || nextTurn != this.turn,
             oldRound: this.round,
             newRound: nextRound,
             oldPhase: currentPhase,
@@ -223,7 +140,7 @@ export class CombatSFRPG extends Combat {
             },
             body: {
                 header: `New Round`,
-                headerColor: this.colors.round
+                headerColor: CombatSFRPG.colors.round
             },
             footer: {
                 content: `Starship Combat - ${eventData.newPhase.name} phase`
@@ -254,7 +171,7 @@ export class CombatSFRPG extends Combat {
             },
             body: {
                 header: eventData.newPhase.name,
-                headerColor: this.colors.phase,
+                headerColor: CombatSFRPG.colors.phase,
                 message: {
                     title: "Description",
                     body: eventData.newPhase.description
@@ -289,7 +206,7 @@ export class CombatSFRPG extends Combat {
             },
             body: {
                 header: "",
-                headerColor: this.colors.turn,
+                headerColor: CombatSFRPG.colors.turn,
                 message: {
                     title: eventData.newPhase.name,
                     body: eventData.newPhase.description
@@ -329,8 +246,8 @@ export class CombatSFRPG extends Combat {
             nextRound = Math.max(1, this.round - 1);
         }
 
-        const currentPhase = this.getCurrentPhase();
-        const newPhase = this.data.flags.sfrpg.phases[nextPhase];
+        const phases = this.getPhases();
+        const newPhase = phases[nextPhase];
         if (newPhase.iterateTurns) {
             if (this.settings.skipDefeated) {
                 nextTurn = indexOfFirstUndefeatedCombatant;
@@ -351,8 +268,8 @@ export class CombatSFRPG extends Combat {
         let nextPhase = 0;
         let nextTurn = 0;
 
-        const currentPhase = this.getCurrentPhase();
-        const newPhase = this.data.flags.sfrpg.phases[nextPhase];
+        const phases = this.getPhases();
+        const newPhase = phases[nextPhase];
         if (newPhase.iterateTurns) {
             if (this.settings.skipDefeated) {
                 nextTurn = indexOfFirstUndefeatedCombatant;
@@ -362,8 +279,20 @@ export class CombatSFRPG extends Combat {
         await this._handleUpdate(nextRound, nextPhase, nextTurn);
     }
 
+    getPhases() {
+        switch (this.data.flags.sfrpg.combatType) {
+            default:
+            case "normal":
+                return CombatSFRPG.normalCombat.phases;
+            case "starship":
+                return CombatSFRPG.starshipCombat.phases;
+            case "vehicleChase":
+                return CombatSFRPG.vehicleChase.phases;
+        }
+    }
+
     getCurrentPhase() {
-        return this.data.flags.sfrpg.phases[this.data.flags.sfrpg.phase];
+        return this.getPhases()[this.data.flags.sfrpg.phase];
     }
 
     getIndexOfFirstUndefeatedCombatant() {
@@ -416,10 +345,9 @@ export class CombatSFRPG extends Combat {
     }
 
     async _handlePhaseStart() {
-        const currentPhaseIndex = this.data.flags.sfrpg.phase;
-        const currentPhase = this.data.flags.sfrpg.phases[currentPhaseIndex];
+        const currentPhase = this.getCurrentPhase();
     
-        console.log(`> Starting phase: ${currentPhase.name}`);
+        //console.log(`> Starting phase: ${currentPhase.name}`);
     
         if (currentPhase.resetInitiative) {
             const updates = this.data.combatants.map(c => { return {
@@ -431,14 +359,25 @@ export class CombatSFRPG extends Combat {
     }
 
     setupTurns() {
-        const currentPhaseIndex = this.data.flags.sfrpg.phase;
-        const currentPhase = this.data.flags.sfrpg.phases[currentPhaseIndex];
+        let sortMethod = "desc";
+        switch (this.data.flags.sfrpg.combatType) {
+            default:
+            case "normal":
+                sortMethod = CombatSFRPG.normalCombat.initiativeSorting;
+                break;
+            case "starship":
+                sortMethod = CombatSFRPG.starshipCombat.initiativeSorting;
+                break;
+            case "vehicleChase":
+                sortMethod = CombatSFRPG.vehicleChase.initiativeSorting;
+                break;
+        }
 
         const combatants = this.data.combatants;
         const scene = game.scenes.get(this.data.scene);
         const players = game.users.players;
         const settings = game.settings.get("core", Combat.CONFIG_SETTING);
-        const turns = combatants.map(c => this._prepareCombatant(c, scene, players, settings)).sort(this.data.flags.sfrpg.combatType === "starship" ? this._sortCombatantsAsc : this._sortCombatants);
+        const turns = combatants.map(c => this._prepareCombatant(c, scene, players, settings)).sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
         this.data.turn = Math.clamped(this.data.turn, 0, turns.length-1);
         return this.turns = turns;
     }
@@ -502,3 +441,86 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         });
     }
 });
+
+CombatSFRPG.colors = {
+    round: "Salmon",
+    phase: "LightGreen",
+    turn: null
+};
+
+CombatSFRPG.normalCombat = {
+    initiativeSorting: "desc",
+    phases: [
+        {
+            name: "Combat",
+            iterateTurns: true,
+            resetInitiative: false
+        }
+    ]
+};
+
+CombatSFRPG.starshipCombat = {
+    initiativeSorting: "asc",
+    phases: [
+        {
+            name: "Changing Roles",
+            description: "Anyone who wishes to change starship roles, may do so now.",
+            iterateTurns: false,
+            resetInitiative: false
+        },
+        {
+            name: "Engineering",
+            description: "Captains, Engineers, Magic Officers, Chief Mates and Deck Hands may choose to act during this phase.",
+            iterateTurns: false,
+            resetInitiative: false
+        },
+        {
+            name: "Helm (Piloting)",
+            description: "Pilots may now roll their piloting checks to determine this round's initiative.",
+            iterateTurns: false,
+            resetInitiative: true
+        },
+        {
+            name: "Helm (Execution)",
+            description: "Captains, Pilots, Science Officers, Chief Mates and Deck Hands may choose to act during this phase.",
+            iterateTurns: true,
+            resetInitiative: false
+        },
+        {
+            name: "Gunnery",
+            description: "Captains, and Gunners may choose to act during this phase.",
+            iterateTurns: true,
+            resetInitiative: false
+        },
+        {
+            name: "Damage",
+            description: "Everyone now processes their received damages, critical thresholds, etc.",
+            iterateTurns: false,
+            resetInitiative: false
+        }
+    ]
+};
+
+CombatSFRPG.vehicleChase = {
+    initiativeSorting: "desc",
+    phases: [
+        {
+            name: "Piloting",
+            description: "Drivers may now decide their maneuvers.",
+            iterateTurns: true,
+            resetInitiative: false
+        },
+        {
+            name: "Chase progress",
+            description: "The GM will now process the chase progress results.",
+            iterateTurns: false,
+            resetInitiative: false
+        },
+        {
+            name: "Combat",
+            description: "Everyone may now act their combat turn.",
+            iterateTurns: true,
+            resetInitiative: false
+        }
+    ]
+};
