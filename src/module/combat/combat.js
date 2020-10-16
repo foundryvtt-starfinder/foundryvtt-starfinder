@@ -11,6 +11,30 @@ export class CombatSFRPG extends Combat {
         await this.update(update);
     }
 
+    setupTurns() {
+        let sortMethod = "desc";
+        switch (this.data.flags.sfrpg.combatType) {
+            default:
+            case "normal":
+                sortMethod = CombatSFRPG.normalCombat.initiativeSorting;
+                break;
+            case "starship":
+                sortMethod = CombatSFRPG.starshipCombat.initiativeSorting;
+                break;
+            case "vehicleChase":
+                sortMethod = CombatSFRPG.vehicleChase.initiativeSorting;
+                break;
+        }
+
+        const combatants = this.data.combatants;
+        const scene = game.scenes.get(this.data.scene);
+        const players = game.users.players;
+        const settings = game.settings.get("core", Combat.CONFIG_SETTING);
+        const turns = combatants.map(c => this._prepareCombatant(c, scene, players, settings)).sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
+        this.data.turn = Math.clamped(this.data.turn, 0, turns.length-1);
+        return this.turns = turns;
+    }
+
     async previousTurn() {
         if (this.isEveryCombatantDefeated()) {
             return;
@@ -18,7 +42,48 @@ export class CombatSFRPG extends Combat {
         
         console.log('previous turn');
         console.log(this);
-    
+
+        let nextRound = this.round;
+        let nextPhase = this.data.flags.sfrpg.phase;
+        let nextTurn = this.turn - 1;
+
+        const currentPhase = this.getCurrentPhase();
+        if (currentPhase.resetInitiative) {
+            ui.notifications.error("The current phase has reset initiative, we cannot go back further in history.<br/><br/>Click to dismiss.", {permanent: false});
+            return;
+        }
+
+        if (currentPhase.iterateTurns) {
+            if (this.settings.skipDefeated) {
+                const turnEntries = Array.from(new Set(this.turns.entries())).reverse();
+                nextTurn = -1;
+                for (let [index, combatant] of turnEntries) {
+                    if (index >= this.turn) continue;
+                    if (!combatant.defeated) {
+                        nextTurn = index;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (nextTurn < 0) {
+            nextTurn = 0;
+            nextPhase = nextPhase - 1;
+            if (nextPhase < 0) {
+                nextPhase = this.getPhases().length - 1;
+                nextRound -= 1;
+            }
+        }
+
+        if (nextPhase !== this.data.flags.sfrpg.phase) {
+            const newPhase = this.getPhases()[nextPhase];
+            if (newPhase.iterateTurns) {
+                nextTurn = this.getIndexOfLastUndefeatedCombatant();
+            }
+        }
+
+        await this._handleUpdate(nextRound, nextPhase, nextTurn);
     }
 
     async nextTurn() {
@@ -33,7 +98,13 @@ export class CombatSFRPG extends Combat {
         let nextPhase = this.data.flags.sfrpg.phase;
         let nextTurn = this.turn + 1;
 
-        const currentPhase = this.getCurrentPhase();
+        const phases = this.getPhases();
+        const currentPhase = phases[this.data.flags.sfrpg.phase];
+        if (currentPhase.resetInitiative && this.hasCombatantsWithoutInitiative()) {
+            ui.notifications.error("The current phase has reset initiative, please re-roll initiative on all combatants before continueing.<br/><br/>Click to dismiss.", {permanent: false});
+            return;
+        }
+
         if (currentPhase.iterateTurns) {
             if (this.settings.skipDefeated) {
                 for (let [index, combatant] of this.turns.entries()) {
@@ -54,10 +125,65 @@ export class CombatSFRPG extends Combat {
             nextTurn = 0;
         }
 
-        if (nextPhase >= this.getPhases().length) {
+        if (nextPhase >= phases.length) {
             nextRound += 1;
             nextPhase = 0;
             nextTurn = 0;
+        }
+
+        if (nextPhase !== this.data.flags.sfrpg.phase) {
+            const newPhase = phases[nextPhase];
+            if (newPhase.iterateTurns) {
+                nextTurn = this.getIndexOfFirstUndefeatedCombatant();
+            }
+        }
+
+        await this._handleUpdate(nextRound, nextPhase, nextTurn);
+    }
+
+    async previousRound() {
+        if (this.isEveryCombatantDefeated()) {
+            return;
+        }
+
+        const indexOfFirstUndefeatedCombatant = this.getIndexOfFirstUndefeatedCombatant();
+
+        let nextRound = this.round;
+        let nextPhase = 0;
+        let nextTurn = 0;
+
+        if (this.data.flags.sfrpg.phase === 0 && this.turn <= indexOfFirstUndefeatedCombatant) {
+            nextRound = Math.max(1, this.round - 1);
+        }
+
+        const phases = this.getPhases();
+        const newPhase = phases[nextPhase];
+        if (newPhase.iterateTurns) {
+            if (this.settings.skipDefeated) {
+                nextTurn = indexOfFirstUndefeatedCombatant;
+            }
+        }
+
+        await this._handleUpdate(nextRound, nextPhase, nextTurn);
+    }
+
+    async nextRound() {
+        if (this.isEveryCombatantDefeated()) {
+            return;
+        }
+
+        const indexOfFirstUndefeatedCombatant = this.getIndexOfFirstUndefeatedCombatant();
+
+        let nextRound = this.round + 1;
+        let nextPhase = 0;
+        let nextTurn = 0;
+
+        const phases = this.getPhases();
+        const newPhase = phases[nextPhase];
+        if (newPhase.iterateTurns) {
+            if (this.settings.skipDefeated) {
+                nextTurn = indexOfFirstUndefeatedCombatant;
+            }
         }
 
         await this._handleUpdate(nextRound, nextPhase, nextTurn);
@@ -97,7 +223,13 @@ export class CombatSFRPG extends Combat {
         await this.update(updateData, {advanceTime});
 
         if (eventData.isNewPhase) {
-            await this._handlePhaseStart();
+            if (newPhase.resetInitiative) {
+                const updates = this.data.combatants.map(c => { return {
+                    _id: c._id,
+                    initiative: null
+                }});
+                await this.updateEmbeddedEntity("Combatant", updates);
+            }
         }
 
         await this._notifyAfterUpdate(eventData);
@@ -231,54 +363,6 @@ export class CombatSFRPG extends Combat {
         await ChatMessage.create(chatData, { displaySheet: false });
     }
 
-    async previousRound() {
-        if (this.isEveryCombatantDefeated()) {
-            return;
-        }
-
-        const indexOfFirstUndefeatedCombatant = this.getIndexOfFirstUndefeatedCombatant();
-
-        let nextRound = this.round;
-        let nextPhase = 0;
-        let nextTurn = 0;
-
-        if (this.data.flags.sfrpg.phase === 0 && this.turn <= indexOfFirstUndefeatedCombatant) {
-            nextRound = Math.max(1, this.round - 1);
-        }
-
-        const phases = this.getPhases();
-        const newPhase = phases[nextPhase];
-        if (newPhase.iterateTurns) {
-            if (this.settings.skipDefeated) {
-                nextTurn = indexOfFirstUndefeatedCombatant;
-            }
-        }
-
-        await this._handleUpdate(nextRound, nextPhase, nextTurn);
-    }
-
-    async nextRound() {
-        if (this.isEveryCombatantDefeated()) {
-            return;
-        }
-
-        const indexOfFirstUndefeatedCombatant = this.getIndexOfFirstUndefeatedCombatant();
-
-        let nextRound = this.round + 1;
-        let nextPhase = 0;
-        let nextTurn = 0;
-
-        const phases = this.getPhases();
-        const newPhase = phases[nextPhase];
-        if (newPhase.iterateTurns) {
-            if (this.settings.skipDefeated) {
-                nextTurn = indexOfFirstUndefeatedCombatant;
-            }
-        }
-
-        await this._handleUpdate(nextRound, nextPhase, nextTurn);
-    }
-
     getPhases() {
         switch (this.data.flags.sfrpg.combatType) {
             default:
@@ -295,8 +379,27 @@ export class CombatSFRPG extends Combat {
         return this.getPhases()[this.data.flags.sfrpg.phase];
     }
 
+    hasCombatantsWithoutInitiative() {
+        for (let [index, combatant] of this.turns.entries()) {
+            if ((!this.settings.skipDefeated || !combatant.defeated) && !combatant.initiative) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     getIndexOfFirstUndefeatedCombatant() {
         for (let [index, combatant] of this.turns.entries()) {
+            if (!combatant.defeated) {
+                return index;
+            }
+        }
+        return null;
+    }
+
+    getIndexOfLastUndefeatedCombatant() {
+        const turnEntries = Array.from(new Set(this.turns.entries())).reverse();
+        for (let [index, combatant] of turnEntries) {
             if (!combatant.defeated) {
                 return index;
             }
@@ -342,44 +445,6 @@ export class CombatSFRPG extends Combat {
             }
         }
         return null;
-    }
-
-    async _handlePhaseStart() {
-        const currentPhase = this.getCurrentPhase();
-    
-        //console.log(`> Starting phase: ${currentPhase.name}`);
-    
-        if (currentPhase.resetInitiative) {
-            const updates = this.data.combatants.map(c => { return {
-                _id: c._id,
-                initiative: null
-            }});
-            await this.updateEmbeddedEntity("Combatant", updates);
-        }
-    }
-
-    setupTurns() {
-        let sortMethod = "desc";
-        switch (this.data.flags.sfrpg.combatType) {
-            default:
-            case "normal":
-                sortMethod = CombatSFRPG.normalCombat.initiativeSorting;
-                break;
-            case "starship":
-                sortMethod = CombatSFRPG.starshipCombat.initiativeSorting;
-                break;
-            case "vehicleChase":
-                sortMethod = CombatSFRPG.vehicleChase.initiativeSorting;
-                break;
-        }
-
-        const combatants = this.data.combatants;
-        const scene = game.scenes.get(this.data.scene);
-        const players = game.users.players;
-        const settings = game.settings.get("core", Combat.CONFIG_SETTING);
-        const turns = combatants.map(c => this._prepareCombatant(c, scene, players, settings)).sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.data.turn = Math.clamped(this.data.turn, 0, turns.length-1);
-        return this.turns = turns;
     }
 
     _sortCombatantsAsc(a, b) {
