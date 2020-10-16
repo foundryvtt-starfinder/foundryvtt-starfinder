@@ -141,6 +141,7 @@ export default function (engine) {
                 when: { closure: "isActorType", type: "character" },
                 then: [
                     "clearTooltips",
+                    "calculateCharacterLevel",
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseArmorClass",
@@ -148,7 +149,6 @@ export default function (engine) {
                     { closure: "calculateBaseAttackBonus", stackModifiers: "stackModifiers" },
                     "calculateBaseSaves",
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
-                    "calculateCharacterLevel",
                     "calculateInitiative",
                     {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
                     "calculateCMD",

@@ -11,36 +11,55 @@ export default function (engine) {
         const highest = Object.values({fort, reflex, will}).sort((a, b) => b.bonus - a.bonus).shift();
         const lowest = Object.values({fort, reflex, will}).sort((a, b) => a.bonus - b.bonus).shift();
 
-        const addModifier = (bonus, data, save) => {
-            let computedBonus = bonus.modifier;
-            if (bonus.modifierType == "formula") {
-                let r = new Roll(bonus.modifier, data).roll();
-                computedBonus = r.total;
+        const addModifier = (bonus, data, item, localizationKey) => {
+            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
+                if (localizationKey) {
+                    item.tooltip.push(game.i18n.format(localizationKey, {
+                        type: bonus.type.capitalize(),
+                        mod: bonus.modifier,
+                        source: bonus.name
+                    }));
+                }
+                
+                if (item.rolledMods) {
+                    item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
+                } else {
+                    item.rolledMods = [{mod: bonus.modifier, bonus: bonus}];
+                }
+
+                return 0;
             }
 
+            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
+            let computedBonus = roll.total;
+
             let saveMod = 0;
-            
             switch (bonus.valueAffected) {
                 case "highest":
-                    if (save.bonus === highest.bonus) saveMod = computedBonus;
+                    if (save.bonus === highest.bonus) {
+                        saveMod = computedBonus;
+                    }
                     break;
                 case "lowest":
-                    if (save.bonus === lowest.bonus) saveMod = computedBonus;
+                    if (save.bonus === lowest.bonus) {
+                        saveMod = computedBonus;
+                    }
                     break;
                 default:
                     saveMod = computedBonus;
                     break;
             }
+            computedBonus = saveMod;
 
-            if (saveMod !== 0) {
-                save.tooltip.push(game.i18n.format("SFRPG.SaveModifiersTooltip", {
+            if (computedBonus !== 0 && localizationKey) {
+                item.tooltip.push(game.i18n.format(localizationKey, {
                     type: bonus.type.capitalize(),
-                    mod: saveMod.signedString(),
+                    mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
             }
             
-            return saveMod;
+            return computedBonus;
         };
 
         const filteredMods = modifiers.filter(mod => {
@@ -68,10 +87,10 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, fort);
+                    sum += addModifier(bonus, data, fort, "SFRPG.SaveModifiersTooltip");
                 }
             } else {
-                sum += addModifier(mod[1], data, fort);
+                sum += addModifier(mod[1], data, fort, "SFRPG.SaveModifiersTooltip");
             }
 
             return sum;
@@ -82,10 +101,10 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, reflex);
+                    sum += addModifier(bonus, data, reflex, "SFRPG.SaveModifiersTooltip");
                 }
             } else {
-                sum += addModifier(mod[1], data, reflex);
+                sum += addModifier(mod[1], data, reflex, "SFRPG.SaveModifiersTooltip");
             }
 
             return sum;
@@ -96,41 +115,18 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, will);
+                    sum += addModifier(bonus, data, will, "SFRPG.SaveModifiersTooltip");
                 }
             } else {
-                sum += addModifier(mod[1], data, will);
+                sum += addModifier(mod[1], data, will, "SFRPG.SaveModifiersTooltip");
             }
 
             return sum;
         }, 0);
 
-        /** @deprecated Will be removed in v0.4.0 */
-        const greatFortitude = getProperty(flags, "sfrpg.greatFortitude") ? 2 : 0;
-        const lightningReflexes = getProperty(flags, "sfrpg.lightningReflexes") ? 2 : 0;
-        const ironWill = getProperty(flags, "sfrpg.ironWill") ? 2 : 0;
-
-        fort.bonus += fort.misc + greatFortitude + fortMod;
-        reflex.bonus += reflex.misc + lightningReflexes + reflexMod;
-        will.bonus += will.misc + ironWill + willMod;
-
-        if (greatFortitude !== 0) fort.tooltip.push(game.i18n.format("SFRPG.SaveModifiersTooltip", {
-            type: SFRPGModifierTypes.UNTYPED.capitalize(),
-            source: "Great Fortitude",
-            mod: greatFortitude.signedString()
-        }));
-
-        if (lightningReflexes !== 0) fort.tooltip.push(game.i18n.format("SFRPG.SaveModifiersTooltip", {
-            type: SFRPGModifierTypes.UNTYPED.capitalize(),
-            source: "Lightning Reflexes",
-            mod: lightningReflexes.signedString()
-        }));
-
-        if (ironWill !== 0) fort.tooltip.push(game.i18n.format("SFRPG.SaveModifiersTooltip", {
-            type: SFRPGModifierTypes.UNTYPED.capitalize(),
-            source: "Iron Will",
-            mod: ironWill.signedString()
-        }));
+        fort.bonus += fort.misc + fortMod;
+        reflex.bonus += reflex.misc + reflexMod;
+        will.bonus += will.misc + willMod;
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

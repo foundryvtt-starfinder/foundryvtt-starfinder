@@ -440,13 +440,22 @@ export class ActorSFRPG extends Actor {
     rollAbility(abilityId, options = {}) {
         const label = CONFIG.SFRPG.abilities[abilityId];
         const abl = this.data.data.abilities[abilityId];
-        let parts = ['@mod'];
-        let data = { mod: abl.mod };
+        
+        let parts = [];
+        let data = this.getRollData();
+
+        if (abl.rolledMods) {
+            parts.push(...abl.rolledMods.map(x => x.mod));
+        }
+
         //Include ability check bonus only if it's not 0
         if(abl.abilityCheckBonus) {
             parts.push('@abilityCheckBonus');
             data.abilityCheckBonus = abl.abilityCheckBonus;
         }
+        parts.push('@mod')
+
+        mergeObject(data, { mod: abl.mod });
 
         return DiceSFRPG.d20Roll({
             event: options.event,
@@ -469,11 +478,21 @@ export class ActorSFRPG extends Actor {
         const label = CONFIG.SFRPG.saves[saveId];
         const save = this.data.data.attributes[saveId];
 
+        let parts = [];
+        let data = this.getRollData();
+
+        if (save.rolledMods) {
+            parts.push(...save.rolledMods.map(x => x.mod));
+        }
+        parts.push('@mod');
+
+        mergeObject(data, { mod: save.bonus });
+
         return DiceSFRPG.d20Roll({
             event: options.event,
             actor: this,
-            parts: ["@mod"],
-            data: { mod: save.bonus },
+            parts: parts,
+            data: data,
             title: `Save`,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Save - ${label}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
@@ -485,7 +504,7 @@ export class ActorSFRPG extends Actor {
         let data = this.getRollData();
 
         if (skill.rolledMods) {
-            parts.push(...skill.rolledMods);
+            parts.push(...skill.rolledMods.map(x => x.mod));
         }
 
         parts.push('@mod');

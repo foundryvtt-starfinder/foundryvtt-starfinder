@@ -7,21 +7,36 @@ export default function (engine) {
         const init = data.attributes.init;
         const modifiers = fact.modifiers;
 
-        const addModifier = (bonus, data, tooltip) => {
-            let computedBonus = bonus.modifier;
-            if (bonus.modifierType == "formula") {
-                let r = new Roll(bonus.modifier, data).roll();
-                computedBonus = r.total;
+        const addModifier = (bonus, data, item, localizationKey) => {
+            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
+                if (localizationKey) {
+                    item.tooltip.push(game.i18n.format(localizationKey, {
+                        type: bonus.type.capitalize(),
+                        mod: bonus.modifier,
+                        source: bonus.name
+                    }));
+                }
+                
+                if (item.rolledMods) {
+                    item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
+                } else {
+                    item.rolledMods = [{mod: bonus.modifier, bonus: bonus}];
+                }
+
+                return 0;
             }
 
-            if (computedBonus !== 0) {
-                tooltip.push(game.i18n.format("SFRPG.InitiativeModiferTooltip", {
+            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
+            let computedBonus = roll.total;
+
+            if (computedBonus !== 0 && localizationKey) {
+                item.tooltip.push(game.i18n.format(localizationKey, {
                     type: bonus.type.capitalize(),
-                    source: bonus.name,
-                    mod: computedBonus.signedString()
+                    mod: computedBonus.signedString(),
+                    source: bonus.name
                 }));
             }
-
+            
             return computedBonus;
         };
 
@@ -36,34 +51,18 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
-                    prev += addModifier(bonus, data, init.tooltip);
+                    prev += addModifier(bonus, data, init, "SFRPG.InitiativeModiferTooltip");
                 }
             } else {
-                prev += addModifier(curr[1], data, init.tooltip);
+                prev += addModifier(curr[1], data, init, "SFRPG.InitiativeModiferTooltip");
             }
 
             return prev;
         }, 0);
 
-        /** @deprecated will be removed in v0.4.0 */
-        const improvedInitiative = getProperty(flags, "sfrpg.improvedInititive") ? 4 : 0;
-        const rapidResponse = getProperty(flags, "sfrpg.rapidResponse") ? 4 : 0;
-
-        init.bonus = init.value + improvedInitiative + rapidResponse + mod;
+        init.bonus = init.value + mod;
 
         init.total += init.bonus;
-
-        if (improvedInitiative !== 0) init.tooltip.push(game.i18n.format("SFRPG.InitiativeModiferTooltip", {
-            type: SFRPGModifierTypes.UNTYPED.capitalize(),
-            source: "Improved Initiative",
-            mod: improvedInitiative.signedString()
-        }));
-
-        if (rapidResponse !== 0) init.tooltip.push(game.i18n.format("SFRPG.InitiativeModiferTooltip", {
-            type: SFRPGModifierTypes.UNTYPED.capitalize(),
-            source: "Rapid Response",
-            mod: rapidResponse.signedString()
-        }));
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

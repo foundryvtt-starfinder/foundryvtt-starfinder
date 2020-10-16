@@ -23,7 +23,7 @@ export default class SFRPGModifier {
         name = "", 
         modifier = 0, 
         type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.FORMULA, 
+        modifierType = SFRPGModifierType.CONSTANT, 
         effectType = SFRPGEffectType.SKILL, 
         valueAffected = "", 
         enabled = true, 
@@ -45,12 +45,8 @@ export default class SFRPGModifier {
         this.condition = condition;
         this.subtab = subtab;
 
-        if (modifierType === SFRPGModifierType.FORMULA) {
-            let roll = new Roll(modifier.toString()).evaluate({maximize: true});
-            this.max = roll.total;
-        } else {
-            this.max = modifier;
-        }
+        let roll = new Roll(modifier.toString()).evaluate({maximize: true});
+        this.max = roll.total;
 
         this._id = id ?? generateUUID();
     }

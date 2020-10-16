@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function (engine) {
     engine.closures.add("calculateEncumbrance", (fact, context) => {
@@ -9,20 +9,36 @@ export default function (engine) {
             tooltip = encumbrance.tooltip;
         }
 
-        const addModifier = (bonus, data, tooltip) => {
-            let computedBonus = bonus.modifier;
-            if (bonus.modifierType !== "constant") {
-                let r = new Roll(bonus.modifier, data).roll();
-                computedBonus = r.total;
+        const addModifier = (bonus, data, item, localizationKey) => {
+            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
+                if (localizationKey) {
+                    item.tooltip.push(game.i18n.format(localizationKey, {
+                        type: bonus.type.capitalize(),
+                        mod: bonus.modifier,
+                        source: bonus.name
+                    }));
+                }
+                
+                if (item.rolledMods) {
+                    item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
+                } else {
+                    item.rolledMods = [{mod: bonus.modifier, bonus: bonus}];
+                }
+
+                return 0;
             }
-            if (computedBonus !== 0) {
-                tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Encumbrance.EncumbranceModifierTooltip", {
+
+            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
+            let computedBonus = roll.total;
+
+            if (computedBonus !== 0 && localizationKey) {
+                item.tooltip.push(game.i18n.format(localizationKey, {
                     type: bonus.type.capitalize(),
                     mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
             }
-
+            
             return computedBonus;
         };
 
@@ -39,15 +55,21 @@ export default function (engine) {
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
 
+        let encumbrance = {
+            value: 0,
+            tooltip: tooltip,
+            rolledMods: []
+        };
+
         let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, tooltip);
+                    sum += addModifier(bonus, data, encumbrance, "SFRPG.ActorSheet.Inventory.Encumbrance.EncumbranceModifierTooltip");
                 }
             } else {
-                sum += addModifier(mod[1], data, tooltip);
+                sum += addModifier(mod[1], data, encumbrance, "SFRPG.ActorSheet.Inventory.Encumbrance.EncumbranceModifierTooltip");
             }
 
             return sum;
@@ -58,8 +80,9 @@ export default function (engine) {
             value: 0,
             pct: 0,
             encumbered: false,
-            tooltip: tooltip
-        }
+            tooltip: encumbrance.tooltip,
+            rolledMods: encumbrance.rolledMods
+        };
         
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

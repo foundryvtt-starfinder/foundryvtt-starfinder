@@ -27,11 +27,7 @@
                 </div>
 
                 <div class="item-detail modifier-mod">
-                    {{#if (eq modifier.modifierType "constant")}}
-                    {{ellipsis (numberFormat modifier.modifier decimals=0 sign=true) 10}}
-                    {{else}}
                     {{ellipsis modifier.modifier 12}}
-                    {{/if}}
                 </div>
                 <div class="item-detail modifier-type">
                     {{lookup ../config.modifierTypes modifier.type}}
