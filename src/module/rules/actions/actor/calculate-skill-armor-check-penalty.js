@@ -25,7 +25,6 @@ export default function (engine) {
                 return 0;
             }
 
-            console.log([bonus, bonus.modifier]);
             let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
             let computedBonus = roll.total;
 
@@ -81,7 +80,6 @@ export default function (engine) {
                 continue;
             }
 
-            console.log(armor);
             if (armor?.data?.armor?.acp) {
                 let acp = parseInt(armor.data.armor.acp);
                 if (!Number.isNaN(acp)) {
