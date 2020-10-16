@@ -46,7 +46,8 @@ export default class SFRPGModifier {
         this.subtab = subtab;
 
         if (modifierType === SFRPGModifierType.FORMULA) {
-            this.max = Roll.maximize(modifier.toString()).total;
+            let roll = new Roll(modifier.toString()).evaluate({maximize: true});
+            this.max = roll.total;
         } else {
             this.max = modifier;
         }
