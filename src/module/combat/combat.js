@@ -4,16 +4,42 @@ export class CombatSFRPG extends Combat {
         console.log(this);
     
         const update = {
-            "flags.sfrpg.combatType": combatType,
+            "flags.sfrpg.combatType": this.getCombatType(),
             "flags.sfrpg.phase": 0
         };
     
         await this.update(update);
+
+        const currentPhase = this.getCurrentPhase();
+        const eventData = {
+            combat: this,
+            isNewRound: true,
+            isNewPhase: true,
+            isNewTurn: currentPhase.iterateTurns,
+            oldRound: this.round,
+            newRound: this.round,
+            oldPhase: currentPhase,
+            newPhase: currentPhase,
+            oldCombatant: currentPhase.iterateTurns ? this.turns[this.turn] : null,
+            newCombatant: currentPhase.iterateTurns ? this.turns[this.turn] : null,
+        };
+
+        if (eventData.isNewPhase) {
+            if (this.round.resetInitiative) {
+                const updates = this.data.combatants.map(c => { return {
+                    _id: c._id,
+                    initiative: null
+                }});
+                await this.updateEmbeddedEntity("Combatant", updates);
+            }
+        }
+
+        await this._notifyAfterUpdate(eventData);
     }
 
     setupTurns() {
         let sortMethod = "desc";
-        switch (this.data.flags.sfrpg.combatType) {
+        switch (this.getCombatType()) {
             default:
             case "normal":
                 sortMethod = CombatSFRPG.normalCombat.initiativeSorting;
@@ -49,7 +75,7 @@ export class CombatSFRPG extends Combat {
 
         const currentPhase = this.getCurrentPhase();
         if (currentPhase.resetInitiative) {
-            ui.notifications.error("The current phase has reset initiative, we cannot go back further in history.<br/><br/>Click to dismiss.", {permanent: false});
+            ui.notifications.error(game.i18n.format(CombatSFRPG.errors.historyLimitedResetInitiative), {permanent: false});
             return;
         }
 
@@ -73,10 +99,14 @@ export class CombatSFRPG extends Combat {
             if (nextPhase < 0) {
                 nextPhase = this.getPhases().length - 1;
                 nextRound -= 1;
+                if (nextRound <= 0) {
+                    ui.notifications.error(game.i18n.format(CombatSFRPG.errors.historyLimitedStartOfEncounter), {permanent: false});
+                    return;
+                }
             }
         }
 
-        if (nextPhase !== this.data.flags.sfrpg.phase) {
+        if (nextPhase !== this.data.flags.sfrpg.phase || nextRound !== this.round) {
             const newPhase = this.getPhases()[nextPhase];
             if (newPhase.iterateTurns) {
                 nextTurn = this.getIndexOfLastUndefeatedCombatant();
@@ -101,7 +131,7 @@ export class CombatSFRPG extends Combat {
         const phases = this.getPhases();
         const currentPhase = phases[this.data.flags.sfrpg.phase];
         if (currentPhase.resetInitiative && this.hasCombatantsWithoutInitiative()) {
-            ui.notifications.error("The current phase has reset initiative, please re-roll initiative on all combatants before continueing.<br/><br/>Click to dismiss.", {permanent: false});
+            ui.notifications.error(game.i18n.format(CombatSFRPG.errors.missingInitiative), {permanent: false});
             return;
         }
 
@@ -363,8 +393,12 @@ export class CombatSFRPG extends Combat {
         await ChatMessage.create(chatData, { displaySheet: false });
     }
 
+    getCombatType() {
+        return this.data.flags?.sfrpg?.combatType || "normal";
+    }
+
     getPhases() {
-        switch (this.data.flags.sfrpg.combatType) {
+        switch (this.getCombatType()) {
             default:
             case "normal":
                 return CombatSFRPG.normalCombat.phases;
@@ -376,7 +410,7 @@ export class CombatSFRPG extends Combat {
     }
 
     getCurrentPhase() {
-        return this.getPhases()[this.data.flags.sfrpg.phase];
+        return this.getPhases()[this.data.flags?.sfrpg?.phase || 0];
     }
 
     hasCombatantsWithoutInitiative() {
@@ -412,7 +446,7 @@ export class CombatSFRPG extends Combat {
     }
 
     _getInitiativeFormula(combatant) {
-        if (this.data.flags.sfrpg.combatType === "starship") {
+        if (this.getCombatType() === "starship") {
             return "1d20 + @skills.pil.mod"
         }
         else {
@@ -422,7 +456,7 @@ export class CombatSFRPG extends Combat {
 
     _getInitiativeRoll(combatant, formula) {
         let rollData = {};
-        if (this.data.flags.sfrpg.combatType === "starship") {
+        if (this.getCombatType() === "starship") {
             let pilotActor = this._getPilotForStarship(combatant.actor);
             rollData = pilotActor ? pilotActor.getRollData() : { skills: { pil: { mod: 0 } } };
         } else {
@@ -504,6 +538,15 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
             ev.preventDefault();
             activeCombat.begin();
         });
+    } else {
+        const header = html.find('#combat-round');
+        const roundHeader = header.find('h3');
+        const originalHtml = roundHeader.html();
+
+        const phases = activeCombat.getPhases();
+        if (phases.length > 1) {
+            roundHeader.replaceWith(`<div>${originalHtml}<h4>${activeCombat.getCurrentPhase().name}</h4></div>`);
+        }
     }
 });
 
@@ -570,7 +613,7 @@ CombatSFRPG.vehicleChase = {
     initiativeSorting: "desc",
     phases: [
         {
-            name: "Piloting",
+            name: "Pilot Actions",
             description: "Drivers may now decide their maneuvers.",
             iterateTurns: true,
             resetInitiative: false
@@ -588,4 +631,10 @@ CombatSFRPG.vehicleChase = {
             resetInitiative: false
         }
     ]
+};
+
+CombatSFRPG.errors = {
+    historyLimitedResetInitiative: "The current phase has reset initiative, we cannot go back further in history.<br/><br/>Click to dismiss.",
+    historyLimitedStartOfEncounter: "You have reached the start of the encounter, we cannot go back further in history.<br/><br/>Click to dismiss.",
+    missingInitiative: "The current phase has reset initiative, please re-roll initiative on all combatants before continueing.<br/><br/>Click to dismiss."
 };
