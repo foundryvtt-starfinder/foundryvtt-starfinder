@@ -31,7 +31,13 @@ export class CombatSFRPG extends Combat {
             }
         }
 
+        Hooks.callAll("onBeginCombat", eventData);
         await this._notifyAfterUpdate(eventData);
+    }
+
+    async delete(options={}) {
+        Hooks.callAll("onBeforeCombatEnd", this);
+        super.delete(options);
     }
 
     setupTurns() {
@@ -535,8 +541,8 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
 
     const isRunning = (activeCombat.data.round > 0 || activeCombat.data.turn > 0);
     if (!isRunning) {
-        const prevCombatTypeButton = `<a class="combat-type-prev" title="Switch to previous combat type"><i class="fas fa-caret-left"></i></a>`;
-        const nextCombatTypeButton = `<a class="combat-type-next" title="Switch to next combat type"><i class="fas fa-caret-right"></i></a>`;
+        const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
+        const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
         roundHeader.replaceWith(`<div>${originalHtml}<h4>${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
         
         // Handle button clicks
@@ -560,7 +566,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     } else {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
-            roundHeader.replaceWith(`<div>${originalHtml}<h4>${activeCombat.getCurrentPhase().name}</h4></div>`);
+            roundHeader.replaceWith(`<div>${originalHtml}<h4>${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4></div>`);
         }
     }
 });
@@ -572,11 +578,11 @@ CombatSFRPG.colors = {
 };
 
 CombatSFRPG.normalCombat = {
-    name: "Normal Combat",
+    name: "SFRPG.Combat.Normal.Name",
     initiativeSorting: "desc",
     phases: [
         {
-            name: "Combat",
+            name: "SFRPG.Combat.Normal.Phases.1.Name",
             iterateTurns: true,
             resetInitiative: false
         }
@@ -584,42 +590,42 @@ CombatSFRPG.normalCombat = {
 };
 
 CombatSFRPG.starshipCombat = {
-    name: "Starship Combat",
+    name: "SFRPG.Combat.Starship.Name",
     initiativeSorting: "asc",
     phases: [
         {
-            name: "Changing Roles",
-            description: "Anyone who wishes to change starship roles, may do so now.",
+            name: "SFRPG.Combat.Starship.Phases.1.Name",
+            description: "SFRPG.Combat.Starship.Phases.1.Description",
             iterateTurns: false,
             resetInitiative: false
         },
         {
-            name: "Engineering",
-            description: "Captains, Engineers, Magic Officers, Chief Mates and Deck Hands may choose to act during this phase.",
+            name: "SFRPG.Combat.Starship.Phases.2.Name",
+            description: "SFRPG.Combat.Starship.Phases.2.Description",
             iterateTurns: false,
             resetInitiative: false
         },
         {
-            name: "Helm (Piloting)",
-            description: "Pilots may now roll their piloting checks to determine this round's initiative.",
+            name: "SFRPG.Combat.Starship.Phases.3.Name",
+            description: "SFRPG.Combat.Starship.Phases.3.Description",
             iterateTurns: false,
             resetInitiative: true
         },
         {
-            name: "Helm (Execution)",
-            description: "Captains, Pilots, Science Officers, Chief Mates and Deck Hands may choose to act during this phase.",
+            name: "SFRPG.Combat.Starship.Phases.4.Name",
+            description: "SFRPG.Combat.Starship.Phases.4.Description",
             iterateTurns: true,
             resetInitiative: false
         },
         {
-            name: "Gunnery",
-            description: "Captains, and Gunners may choose to act during this phase.",
+            name: "SFRPG.Combat.Starship.Phases.5.Name",
+            description: "SFRPG.Combat.Starship.Phases.5.Description",
             iterateTurns: true,
             resetInitiative: false
         },
         {
-            name: "Damage",
-            description: "Everyone now processes their received damages, critical thresholds, etc.",
+            name: "SFRPG.Combat.Starship.Phases.6.Name",
+            description: "SFRPG.Combat.Starship.Phases.6.Description",
             iterateTurns: false,
             resetInitiative: false
         }
@@ -627,24 +633,24 @@ CombatSFRPG.starshipCombat = {
 };
 
 CombatSFRPG.vehicleChase = {
-    name: "Vehicle Chase",
+    name: "SFRPG.Combat.VehicleChase.Name",
     initiativeSorting: "desc",
     phases: [
         {
-            name: "Pilot Actions",
-            description: "Drivers may now decide their maneuvers.",
+            name: "SFRPG.Combat.VehicleChase.Phases.1.Name",
+            description: "SFRPG.Combat.VehicleChase.Phases.1.Description",
             iterateTurns: true,
             resetInitiative: false
         },
         {
-            name: "Chase progress",
-            description: "The GM will now process the chase progress results.",
+            name: "SFRPG.Combat.VehicleChase.Phases.2.Name",
+            description: "SFRPG.Combat.VehicleChase.Phases.2.Description",
             iterateTurns: false,
             resetInitiative: false
         },
         {
-            name: "Combat",
-            description: "Everyone may now act their combat turn.",
+            name: "SFRPG.Combat.VehicleChase.Phases.3.Name",
+            description: "SFRPG.Combat.VehicleChase.Phases.3.Description",
             iterateTurns: true,
             resetInitiative: false
         }
@@ -652,25 +658,25 @@ CombatSFRPG.vehicleChase = {
 };
 
 CombatSFRPG.errors = {
-    historyLimitedResetInitiative: "The current phase has reset initiative, we cannot go back further in history.<br/><br/>Click to dismiss.",
-    historyLimitedStartOfEncounter: "You have reached the start of the encounter, we cannot go back further in history.<br/><br/>Click to dismiss.",
-    missingInitiative: "The current phase has reset initiative, please re-roll initiative on all combatants before continueing.<br/><br/>Click to dismiss."
+    historyLimitedResetInitiative: "SFRPG.Combat.Errors.HistoryLimitedResetInitiative",
+    historyLimitedStartOfEncounter: "SFRPG.Combat.Errors.HistoryLimitedStartOfEncounter",
+    missingInitiative: "SFRPG.Combat.Errors.MissingInitiative"
 };
 
 CombatSFRPG.chatCardsText = {
     round: {
-        headerName: `Round {round}`,
-        bodyHeader: `New Round`,
+        headerName: `SFRPG.Combat.ChatCards.Round.Header`,
+        bodyHeader: `SFRPG.Combat.ChatCards.Round.BodyHeader`,
     },
     phase: {
-        headerName: `{phase} Phase`,
-        messageTitle: `Description`
+        headerName: `SFRPG.Combat.ChatCards.Phase.Header`,
+        messageTitle: `SFRPG.Combat.ChatCards.Phase.MessageTitle`
     },
     turn: {
-        headerName: `{combatant}'s Turn`
+        headerName: `SFRPG.Combat.ChatCards.Turn.Header`
     },
-    footer: `{combatType} - {combatPhase} phase`,
+    footer: `SFRPG.Combat.ChatCards.Footer`,
     speaker: {
-        GM: `The GM`
+        GM: `SFRPG.Combat.ChatCards.Speaker.GM`
     }
 };
