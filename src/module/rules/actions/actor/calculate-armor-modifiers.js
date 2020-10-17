@@ -2,41 +2,47 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 
 export default function (engine) {
     engine.closures.add("calculateArmorModifiers", (fact, context) => {
-
-        const addModifiers = (bonus, data, armorClass) => {
-            let computedBonus = bonus.modifier;
-            if (bonus.modifierType == "formula") {
-                let r = new Roll(bonus.modifier, data).roll();
-                computedBonus = r.total;
-            }
-
-            if (computedBonus !== 0)
-                armorClass.tooltip.push(game.i18n.format("SFRPG.ACTooltipBonus", { 
-                    mod: computedBonus.signedString(), 
-                    source: bonus.name, 
-                    type: bonus.type.capitalize() 
-                }));
-
-            return computedBonus;
-        }
-        
         const data = fact.data;
-        const flags = fact.flags;
-        const wornArmor = fact.armor;
         const modifiers = fact.modifiers;
         const eac = data.attributes.eac;
         const kac = data.attributes.kac;
-
+        
         eac.tooltip = eac.tooltip ?? [];
         kac.tooltip = kac.tooltip ?? [];
 
-        // if (!flags) return fact;
-        // if (!wornArmor && fact.type !== "drone") return fact;
-        if (!modifiers) return fact;
+        const addModifier = (bonus, data, item, localizationKey) => {
+            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
+                if (localizationKey) {
+                    item.tooltip.push(game.i18n.format(localizationKey, {
+                        type: bonus.type.capitalize(),
+                        mod: bonus.modifier,
+                        source: bonus.name
+                    }));
+                }
+                
+                if (item.rolledMods) {
+                    item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
+                } else {
+                    item.rolledMods = [{mod: bonus.modifier, bonus: bonus}];
+                }
 
-        /** @deprecated Will be removed in 0.4.0 */
-        const armorSavant = getProperty(flags, "sfrpg.armorSavant") ? 1 : 0;
-        
+                return 0;
+            }
+
+            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
+            let computedBonus = roll.total;
+
+            if (computedBonus !== 0 && localizationKey) {
+                item.tooltip.push(game.i18n.format(localizationKey, {
+                    type: bonus.type.capitalize(),
+                    mod: computedBonus.signedString(),
+                    source: bonus.name
+                }));
+            }
+            
+            return computedBonus;
+        };
+
         let armorMods = modifiers.filter(mod => {
             return mod.enabled && [SFRPGEffectType.AC].includes(mod.effectType);
         });
@@ -49,11 +55,11 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
-                    sum += addModifiers(bonus, data, eac);
+                    sum += addModifier(bonus, data, eac, "SFRPG.ACTooltipBonus");
                 }
             }
             else {
-                sum += addModifiers(curr[1], data, eac);
+                sum += addModifier(curr[1], data, eac, "SFRPG.ACTooltipBonus");
             }
 
             return sum;
@@ -64,24 +70,18 @@ export default function (engine) {
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
-                    sum += addModifiers(bonus, data, kac);
+                    sum += addModifier(bonus, data, kac, "SFRPG.ACTooltipBonus");
                 }
             }
             else {
-                sum += addModifiers(curr[1], data, kac);
+                sum += addModifier(curr[1], data, kac, "SFRPG.ACTooltipBonus");
             }
 
             return sum;
         }, 0);
 
-        eac.value += armorSavant + eacMod;
-        kac.value += armorSavant + kacMod;
-
-        if (armorSavant > 0) {
-            const armorSavantTooltip = game.i18n.format("SFRPG.ACTooltipBonus", { mod: armorSavant.signedString(), source: "Armor Savant", type: SFRPGModifierTypes.RACIAL.capitalize() });
-            eac.tooltip.push(armorSavantTooltip);
-            kac.tooltip.push(armorSavantTooltip);
-        }
+        eac.value += eacMod;
+        kac.value += kacMod;
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

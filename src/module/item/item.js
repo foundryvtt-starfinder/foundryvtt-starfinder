@@ -1144,6 +1144,6 @@ export class ItemSFRPG extends Item {
         const modifiers = duplicate(this.data.data.modifiers);
         const modifier = modifiers.find(mod => mod._id === id);
 
-        new SFRPGModifierApplication(modifier, this).render(true);
+        new SFRPGModifierApplication(modifier, this, {}, this.actor).render(true);
     }
 }

@@ -5,12 +5,36 @@ export default function (engine) {
         const data = fact.data;
         const modifiers = fact.modifiers;
 
-        const addModifier = (bonus, data, abl) => {
-            let computedBonus = bonus.modifier;
-            if (bonus.modifierType == "formula") {
-                let r = new Roll(bonus.modifier, data).roll();
-                computedBonus = r.total;
+        const addModifier = (bonus, data, item, localizationKey) => {
+            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
+                if (localizationKey) {
+                    item.tooltip.push(game.i18n.format(localizationKey, {
+                        type: bonus.type.capitalize(),
+                        mod: bonus.modifier,
+                        source: bonus.name
+                    }));
+                }
+                
+                if (item.rolledMods) {
+                    item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
+                } else {
+                    item.rolledMods = [{mod: bonus.modifier, bonus: bonus}];
+                }
+
+                return 0;
             }
+
+            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
+            let computedBonus = roll.total;
+
+            if (computedBonus !== 0 && localizationKey) {
+                item.tooltip.push(game.i18n.format(localizationKey, {
+                    type: bonus.type.capitalize(),
+                    mod: computedBonus.signedString(),
+                    source: bonus.name
+                }));
+            }
+            
             return computedBonus;
         };
 
@@ -28,10 +52,10 @@ export default function (engine) {
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                     for (const bonus of mod[1]) {
-                        sum += addModifier(bonus, data, abl);
+                        sum += addModifier(bonus, data, ability, "SFRPG.AbilityScoreBonusTooltip");
                     }
                 } else {
-                    sum += addModifier(mod[1], data, abl);
+                    sum += addModifier(mod[1], data, ability, "SFRPG.AbilityScoreBonusTooltip");
                 }
 
                 return sum;
