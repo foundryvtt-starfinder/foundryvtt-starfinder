@@ -1,3 +1,33 @@
+/*
+The following hooks were added:
+"onBeginCombat", one argument, type object, contains all event data
+"onBeforeUpdateCombat", one argument, type object, contains all event data
+"onAfterUpdateCombat", one argument, type object, contains all event data
+"onBeforeCombatEnd": one argument, combat object right before it is deleted
+
+Event data is an object with the following data:
+eventData: {
+  combat: Reference to the combat item,
+  isNewRound: Whether a new round is going to start/has started (Depends on the hook if it is about to start, or has already started),
+  isNewPhase: Whether a new phase is going to start/has started,
+  isNewTurn: Whether a new turn is going to start/has started,
+  oldRound: Integer representing the old value for round,
+  newRound: Integer representing the current value for round,
+  oldPhase: Object representing the old value for phase,
+  newPhase: Object representing the new value for phase,
+  oldCombatant: Object representing the old value for the active combatant,
+  newCombatant: Object representing the new value for the active combatant
+}
+
+Phase is an object with the following data:
+phase: {
+  name: Localization key of the name,
+  description: Localization key of the description,
+  iterateTurns: Boolean representing if this phase has combatants acting in order,
+  resetInitiative: Boolean representing if this phase resets all initiative rolls
+}
+*/
+
 export class CombatSFRPG extends Combat {
     async begin() {
         const update = {
