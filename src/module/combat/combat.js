@@ -26,6 +26,18 @@ phase: {
   iterateTurns: Boolean representing if this phase has combatants acting in order,
   resetInitiative: Boolean representing if this phase resets all initiative rolls
 }
+
+These are the currently supported combat types:
+"normal": For normal combat.
+Normal has only one phase, "Combat".
+
+"starship": For starship combat.
+Starship has the following 6 phases: "Change Roles", "Engineering", "Helm (Piloting)", "Helm (Execution)", "Gunnery", and "Damage"
+The difference between helm piloting and helm execution is that during piloting initiative is reset, the pilots roll their pilot checks, and then we move on to execution.
+
+"vehicleChase": For vehicle chases
+Vehicle has the following 3 phases: "Pilot Actions", "Chase Progress", and "Combat"
+
 */
 
 export class CombatSFRPG extends Combat {
