@@ -493,14 +493,14 @@ export class CombatSFRPG extends Combat {
     }
 }
 
-async function onConfigClicked(combat) {
+async function onConfigClicked(combat, direction) {
     console.log('config combat');
     console.log(combat);
 
     const combatType = combat.data.flags?.sfrpg?.combatType || "normal";
     const types = ["normal", "starship", "vehicleChase"];
     const indexOf = types.indexOf(combatType);
-    const wrappedIndex = (indexOf + 1) % types.length;
+    const wrappedIndex = (types.length + indexOf + direction) % types.length;
     
     const update = {
         "flags.sfrpg.combatType": types[wrappedIndex]
@@ -515,22 +515,35 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         return;
     }
 
+    const header = html.find('#combat-round');
     const footer = html.find('.directory-footer');
+
+    const roundHeader = header.find('h3');
+    const originalHtml = roundHeader.html();
+
+    const localizedNames = {
+        "normal": game.i18n.format(CombatSFRPG.normalCombat.name),
+        "starship": game.i18n.format(CombatSFRPG.starshipCombat.name),
+        "vehicleChase": game.i18n.format(CombatSFRPG.vehicleChase.name)
+    };
+
     const isRunning = (activeCombat.data.round > 0 || activeCombat.data.turn > 0);
     if (!isRunning) {
-        const configureButtonHtml = (`<button class="combatConfigButton"><i class="fas fa-cog"></i>Config</button>`);
-
-        const footerNode = footer[0];
-        footerNode.classList.remove('directory-footer');
-        footerNode.classList.add('combat-config-directory-footer');
-        footerNode.classList.remove('flexrow');
-        footerNode.insertAdjacentHTML("beforeend", configureButtonHtml);
+        const prevCombatTypeButton = `<a class="combat-type-prev" title="Switch to previous combat type"><i class="fas fa-caret-left"></i></a>`;
+        const nextCombatTypeButton = `<a class="combat-type-next" title="Switch to next combat type"><i class="fas fa-caret-right"></i></a>`;
+        roundHeader.replaceWith(`<div>${originalHtml}<h4>${prevCombatTypeButton} &nbsp; ${localizedNames[activeCombat.getCombatType()]} &nbsp; ${nextCombatTypeButton}</h4></div>`);
         
         // Handle button clicks
-        const configureButton = footer.find('.combatConfigButton');
-        configureButton.click(ev => {
+        const configureButtonPrev = header.find('.combat-type-prev');
+        configureButtonPrev.click(ev => {
             ev.preventDefault();
-            onConfigClicked(activeCombat);
+            onConfigClicked(activeCombat, -1);
+        });
+
+        const configureButtonNext = header.find('.combat-type-next');
+        configureButtonNext.click(ev => {
+            ev.preventDefault();
+            onConfigClicked(activeCombat, 1);
         });
 
         const beginButton = footer.find('.combat-control[data-control=startCombat]');
@@ -539,10 +552,6 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
             activeCombat.begin();
         });
     } else {
-        const header = html.find('#combat-round');
-        const roundHeader = header.find('h3');
-        const originalHtml = roundHeader.html();
-
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
             roundHeader.replaceWith(`<div>${originalHtml}<h4>${activeCombat.getCurrentPhase().name}</h4></div>`);
@@ -557,6 +566,7 @@ CombatSFRPG.colors = {
 };
 
 CombatSFRPG.normalCombat = {
+    name: "Normal Combat",
     initiativeSorting: "desc",
     phases: [
         {
@@ -568,6 +578,7 @@ CombatSFRPG.normalCombat = {
 };
 
 CombatSFRPG.starshipCombat = {
+    name: "Starship Combat",
     initiativeSorting: "asc",
     phases: [
         {
@@ -610,6 +621,7 @@ CombatSFRPG.starshipCombat = {
 };
 
 CombatSFRPG.vehicleChase = {
+    name: "Vehicle Chase",
     initiativeSorting: "desc",
     phases: [
         {
