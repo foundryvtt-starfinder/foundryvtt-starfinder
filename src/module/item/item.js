@@ -133,7 +133,15 @@ export class ItemSFRPG extends Item {
         
         let dcFormula = save.dc || `10 + ${Math.floor((itemData.data.attributes?.sturdy ? itemData.data.level + 2 : itemData.data.level) / 2)} + ${this.actor?.data?.data?.abilities?.dex ? this.actor.data.data.abilities.dex.mod : 0}`;
         if (dcFormula && Number.isNaN(Number(dcFormula))) {
-            const rollData = duplicate(actorData?.data || {});
+            const rollData = duplicate(actorData?.data || { abilities: { dex: { mod: 0 }}});
+            rollData.abilities.key = {
+                mod: 0
+            };
+
+            let keyAbility = actorData?.data?.attributes?.keyability;
+            if (keyAbility) {
+                rollData.abilities.key = duplicate(actorData.data.abilities[keyAbility]);
+            }
             rollData.item = itemData;
 
             let saveRoll = new Roll(dcFormula, rollData).roll();
@@ -218,6 +226,7 @@ export class ItemSFRPG extends Item {
     getChatData(htmlOptions) {
         const data = duplicate(this.data.data);
         const labels = this.labels;
+        labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Rich text description
         data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);

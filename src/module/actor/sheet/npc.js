@@ -74,8 +74,16 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
-            if (item.type === "spell") arr[0].push(item);
-            if (item.type === "feat") {
+            if (item.type === "spell") {
+                let container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
+                console.log(container);
+                if (!container) {
+                    arr[0].push(item);
+                } else {
+                    arr[1].push(item);
+                }
+            }
+            else if (item.type === "feat") {
                 if ((item.data.requirements?.toLowerCase() || "") === "condition") {
                     arr[2].push(item);
                 } else {
