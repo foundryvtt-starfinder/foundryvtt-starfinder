@@ -76,7 +76,6 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
             if (item.type === "spell") {
                 let container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
-                console.log(container);
                 if (!container) {
                     arr[0].push(item);
                 } else {
