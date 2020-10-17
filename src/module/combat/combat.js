@@ -519,12 +519,26 @@ export class CombatSFRPG extends Combat {
 
     _getInitiativeRoll(combatant, formula) {
         let rollData = {};
+        let additionalParts = [];
         if (this.getCombatType() === "starship") {
             let pilotActor = this._getPilotForStarship(combatant.actor);
             rollData = pilotActor ? pilotActor.getRollData() : { skills: { pil: { mod: 0 } } };
+            if (pilotActor?.data?.data?.skills?.pil?.rolledMods) {
+                //additionalParts = pilotActor.data.data.skills.pil.rolledMods.map(x => `${x.mod}[${x.bonus.name}]`);
+                additionalParts = pilotActor.data.data.skills.pil.rolledMods.map(x => x.mod);
+            }
         } else {
             rollData = combatant.actor ? combatant.actor.getRollData() : {};
+            if (combatant?.actor?.data?.data?.attributes?.init?.rolledMods) {
+                //additionalParts = combatant.actor.data.data.attributes.init.rolledMods.map(x => `${x.mod}[${x.bonus.name}]`);
+                additionalParts = combatant.actor.data.data.attributes.init.rolledMods.map(x => x.mod);
+            }
         }
+
+        if (additionalParts.length > 0) {
+            formula += " + " + additionalParts.join(" + ");
+        }
+        
         return Roll.create(formula, rollData).roll();
     }
 
