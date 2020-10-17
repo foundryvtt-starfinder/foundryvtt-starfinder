@@ -189,6 +189,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Roll damage for item
         html.find('.item-action .damage').click(event => this._onItemRollDamage(event));
+        html.find('.item-action .healing').click(event => this._onItemRollDamage(event));
 
         // Item Recharging
         html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
