@@ -1,8 +1,5 @@
 export class CombatSFRPG extends Combat {
     async begin() {
-        console.log('beginning combat');
-        console.log(this);
-    
         const update = {
             "flags.sfrpg.combatType": this.getCombatType(),
             "flags.sfrpg.phase": 0
@@ -66,9 +63,6 @@ export class CombatSFRPG extends Combat {
             return;
         }
         
-        console.log('previous turn');
-        console.log(this);
-
         let nextRound = this.round;
         let nextPhase = this.data.flags.sfrpg.phase;
         let nextTurn = this.turn - 1;
@@ -121,9 +115,6 @@ export class CombatSFRPG extends Combat {
             return;
         }
         
-        console.log('next turn');
-        console.log(this);
-
         let nextRound = this.round;
         let nextPhase = this.data.flags.sfrpg.phase;
         let nextTurn = this.turn + 1;
@@ -266,46 +257,53 @@ export class CombatSFRPG extends Combat {
     }
 
     async _notifyBeforeUpdate(eventData) {
-        console.log(["_notifyBeforeUpdate", eventData]);
+        //console.log(["_notifyBeforeUpdate", eventData]);
         //console.log([isNewRound, isNewPhase, isNewTurn]);
         //console.log([this.round, this.data.flags.sfrpg.phase, this.turn]);
+
+        Hooks.callAll("onBeforeUpdateCombat", eventData);
     }
 
     async _notifyAfterUpdate(eventData) {
-        console.log(["_notifyAfterUpdate", eventData]);
+        //console.log(["_notifyAfterUpdate", eventData]);
         //console.log([isNewRound, isNewPhase, isNewTurn]);
         //console.log([this.round, this.data.flags.sfrpg.phase, this.turn]);
 
         if (eventData.isNewRound) {
-            console.log(`Starting new round! New phase is ${eventData.newPhase.name}, it is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
+            //console.log(`Starting new round! New phase is ${eventData.newPhase.name}, it is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewRoundChatCard(eventData);
         }
         
         if (eventData.isNewPhase) {
-            console.log(`Starting ${eventData.newPhase.name} phase! It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
+            //console.log(`Starting ${eventData.newPhase.name} phase! It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewPhaseChatCard(eventData);
         }
         
         if (eventData.newCombatant) {
-            console.log(`[${eventData.newPhase.name}] It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
+            //console.log(`[${eventData.newPhase.name}] It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewTurnChatCard(eventData);
         }
+
+        Hooks.callAll("onAfterUpdateCombat", eventData);
     }
 
     async _printNewRoundChatCard(eventData) {
+        const localizedCombatName = this.getCombatName();
+        const localizedPhaseName = game.i18n.format(eventData.newPhase.name);
+
         // Basic template rendering data
-        const speakerName = "The GM";
+        const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
                 image: "icons/svg/mystery-man.svg",
-                name: `Round ${this.round}`
+                name: game.i18n.format(CombatSFRPG.chatCardsText.round.headerName, {round: this.round})
             },
             body: {
-                header: `New Round`,
+                header: game.i18n.format(CombatSFRPG.chatCardsText.round.bodyHeader),
                 headerColor: CombatSFRPG.colors.round
             },
             footer: {
-                content: `Starship Combat - ${eventData.newPhase.name} phase`
+                content: game.i18n.format(CombatSFRPG.chatCardsText.footer, {combatType: localizedCombatName, combatPhase: localizedPhaseName})
             }
         };
 
@@ -324,23 +322,26 @@ export class CombatSFRPG extends Combat {
     }
 
     async _printNewPhaseChatCard(eventData) {
+        const localizedCombatName = this.getCombatName();
+        const localizedPhaseName = game.i18n.format(eventData.newPhase.name);
+
         // Basic template rendering data
-        const speakerName = "The GM";
+        const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
                 image: "icons/svg/mystery-man.svg",
-                name: `${eventData.newPhase.name} Phase`
+                name: game.i18n.format(CombatSFRPG.chatCardsText.phase.headerName, {phase: localizedPhaseName})
             },
             body: {
-                header: eventData.newPhase.name,
+                header: localizedPhaseName,
                 headerColor: CombatSFRPG.colors.phase,
                 message: {
-                    title: "Description",
-                    body: eventData.newPhase.description
+                    title: game.i18n.format(CombatSFRPG.chatCardsText.phase.messageTitle),
+                    body: game.i18n.format(eventData.newPhase.description || "")
                 }
             },
             footer: {
-                content: `Starship Combat - ${eventData.newPhase.name} phase`
+                content: game.i18n.format(CombatSFRPG.chatCardsText.footer, {combatType: localizedCombatName, combatPhase: localizedPhaseName})
             }
         };
 
@@ -359,23 +360,26 @@ export class CombatSFRPG extends Combat {
     }
 
     async _printNewTurnChatCard(eventData) {
+        const localizedCombatName = this.getCombatName();
+        const localizedPhaseName = game.i18n.format(eventData.newPhase.name);
+
         // Basic template rendering data
         const speakerName = eventData.newCombatant.name;
         const templateData = {
             header: {
                 image: eventData.newCombatant.img,
-                name: `${eventData.newCombatant.name}'s Turn`
+                name: game.i18n.format(CombatSFRPG.chatCardsText.turn.headerName, {combatant: eventData.newCombatant.name})
             },
             body: {
                 header: "",
                 headerColor: CombatSFRPG.colors.turn,
                 message: {
-                    title: eventData.newPhase.name,
-                    body: eventData.newPhase.description
+                    title: localizedPhaseName,
+                    body: game.i18n.format(eventData.newPhase.description || "")
                 }
             },
             footer: {
-                content: `Starship Combat - ${eventData.newPhase.name} phase`
+                content: game.i18n.format(CombatSFRPG.chatCardsText.footer, {combatType: localizedCombatName, combatPhase: localizedPhaseName})
             }
         };
 
@@ -395,6 +399,18 @@ export class CombatSFRPG extends Combat {
 
     getCombatType() {
         return this.data.flags?.sfrpg?.combatType || "normal";
+    }
+
+    getCombatName() {
+        switch (this.getCombatType()) {
+            default:
+            case "normal":
+                return game.i18n.format(CombatSFRPG.normalCombat.name);
+            case "starship":
+                return game.i18n.format(CombatSFRPG.starshipCombat.name);
+            case "vehicleChase":
+                return game.i18n.format(CombatSFRPG.vehicleChase.name);
+        }
     }
 
     getPhases() {
@@ -494,9 +510,6 @@ export class CombatSFRPG extends Combat {
 }
 
 async function onConfigClicked(combat, direction) {
-    console.log('config combat');
-    console.log(combat);
-
     const combatType = combat.data.flags?.sfrpg?.combatType || "normal";
     const types = ["normal", "starship", "vehicleChase"];
     const indexOf = types.indexOf(combatType);
@@ -506,7 +519,6 @@ async function onConfigClicked(combat, direction) {
         "flags.sfrpg.combatType": types[wrappedIndex]
     };
     await combat.update(update);
-    console.log(`Combat is now of type ${types[wrappedIndex]}`);
 }
 
 Hooks.on('renderCombatTracker', (app, html, data) => {
@@ -521,17 +533,11 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     const roundHeader = header.find('h3');
     const originalHtml = roundHeader.html();
 
-    const localizedNames = {
-        "normal": game.i18n.format(CombatSFRPG.normalCombat.name),
-        "starship": game.i18n.format(CombatSFRPG.starshipCombat.name),
-        "vehicleChase": game.i18n.format(CombatSFRPG.vehicleChase.name)
-    };
-
     const isRunning = (activeCombat.data.round > 0 || activeCombat.data.turn > 0);
     if (!isRunning) {
         const prevCombatTypeButton = `<a class="combat-type-prev" title="Switch to previous combat type"><i class="fas fa-caret-left"></i></a>`;
         const nextCombatTypeButton = `<a class="combat-type-next" title="Switch to next combat type"><i class="fas fa-caret-right"></i></a>`;
-        roundHeader.replaceWith(`<div>${originalHtml}<h4>${prevCombatTypeButton} &nbsp; ${localizedNames[activeCombat.getCombatType()]} &nbsp; ${nextCombatTypeButton}</h4></div>`);
+        roundHeader.replaceWith(`<div>${originalHtml}<h4>${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
         
         // Handle button clicks
         const configureButtonPrev = header.find('.combat-type-prev');
@@ -649,4 +655,22 @@ CombatSFRPG.errors = {
     historyLimitedResetInitiative: "The current phase has reset initiative, we cannot go back further in history.<br/><br/>Click to dismiss.",
     historyLimitedStartOfEncounter: "You have reached the start of the encounter, we cannot go back further in history.<br/><br/>Click to dismiss.",
     missingInitiative: "The current phase has reset initiative, please re-roll initiative on all combatants before continueing.<br/><br/>Click to dismiss."
+};
+
+CombatSFRPG.chatCardsText = {
+    round: {
+        headerName: `Round {round}`,
+        bodyHeader: `New Round`,
+    },
+    phase: {
+        headerName: `{phase} Phase`,
+        messageTitle: `Description`
+    },
+    turn: {
+        headerName: `{combatant}'s Turn`
+    },
+    footer: `{combatType} - {combatPhase} phase`,
+    speaker: {
+        GM: `The GM`
+    }
 };
