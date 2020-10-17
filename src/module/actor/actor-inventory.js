@@ -272,7 +272,7 @@ export function computeCompoundBulkForItem(item, contents) {
     }
 
     let personalBulk = 0;
-    if (item) {
+    if (item?.data?.bulk) {
         if (item.data.bulk.toUpperCase() === "L") {
             personalBulk = 1;
         } else if (!Number.isNaN(Number.parseInt(item.data.bulk))) {
