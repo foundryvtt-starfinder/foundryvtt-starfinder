@@ -667,9 +667,10 @@ export class ItemSFRPG extends Item {
      * Rely upon the DiceSFRPG.damageRoll logic for the core implementation
      */
     rollDamage({ event, versatile = false } = {}) {
-        const itemData = this.data.data;
+        const itemData  = this.data.data;
         const actorData = this.actor.getRollData(); //this.actor.data.data;
-        const isWeapon = ["weapon", "shield"].includes(this.data.type);
+        const isWeapon  = ["weapon", "shield"].includes(this.data.type);
+        const isHealing = this.data.data.actionType === "heal";
 
         if (!this.hasDamage) {
             throw new Error("You may not make a Damage Roll with this Item.");
@@ -749,7 +750,9 @@ export class ItemSFRPG extends Item {
             item: itemData,
             mod: actorData.abilities[abl].mod
         });
-        const title = game.settings.get('sfrpg', 'useCustomChatCard') ? `Damage Roll` : `Damage Roll - ${this.data.name}`;
+
+        let rollString = isHealing ? game.i18n.localize("SFRPG.ChatCard.HealingRoll") : game.i18n.localize("SFRPG.ChatCard.DamageRoll");
+        const title    = game.settings.get('sfrpg', 'useCustomChatCard') ? rollString : `${rollString} - ${this.data.name}`;
 
         // Call the roll helper utility
         DiceSFRPG.damageRoll({
