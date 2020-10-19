@@ -86,9 +86,9 @@ export class DiceSFRPG {
 
         // Modify the roll and handle fast-forwarding
         parts = ["1d20"].concat(parts);
-        if (event.shiftKey) return roll(parts, 0);
-        else if (event.altKey) return roll(parts, 1);
-        else if (event.ctrlKey || event.metaKey) return roll(parts, -1);
+        if (event.shiftKey) return Promise.resolve(roll(parts, 0));
+        else if (event.altKey) return Promise.resolve(roll(parts, 1));
+        else if (event.ctrlKey || event.metaKey) return Promise.resolve(roll(parts, -1));
         else parts = parts.concat(["@bonus"]);
 
         // Render modal dialog
@@ -202,7 +202,7 @@ export class DiceSFRPG {
         };
 
         // Modify the roll and handle fast-forwarding
-        if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) return roll(event.altKey);
+        if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) return Promise.resolve(roll(event.altKey));
         else parts = parts.concat(["@bonus"]);
 
         // Construct dialog data
