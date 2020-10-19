@@ -117,7 +117,7 @@ export class ItemSFRPG extends Item {
             // Save DC
             let save = data.save || {};
             if (!save.type) save.dc = null;
-            labels.save = this._getSaveLabel(save, actorData, itemData);
+            labels.save = this._getSaveLabel(save, actorData, data);
 
             // Damage
             let dam = data.damage || {};
@@ -131,7 +131,7 @@ export class ItemSFRPG extends Item {
     _getSaveLabel(save, actorData, itemData) {
         if (!save.type) return "";
         
-        let dcFormula = save.dc || `10 + ${Math.floor((itemData.data.attributes?.sturdy ? itemData.data.level + 2 : itemData.data.level) / 2)} + ${this.actor?.data?.data?.abilities?.dex ? this.actor.data.data.abilities.dex.mod : 0}`;
+        let dcFormula = save.dc || `10 + ${Math.floor((itemData.attributes?.sturdy ? itemData.level + 2 : itemData.level) / 2)} + ${this.actor?.data?.data?.abilities?.dex ? this.actor.data.data.abilities.dex.mod : 0}`;
         if (dcFormula && Number.isNaN(Number(dcFormula))) {
             const rollData = duplicate(actorData?.data || { abilities: { dex: { mod: 0 }}});
             rollData.abilities.key = {
@@ -482,7 +482,7 @@ export class ItemSFRPG extends Item {
      * Place an attack roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
      */
-    rollAttack(options = {}) {
+    async rollAttack(options = {}) {
         const itemData = this.data;
         const isWeapon = ["weapon", "shield"].includes(this.data.type);
 
@@ -573,7 +573,7 @@ export class ItemSFRPG extends Item {
         }
 
         // Call the roll helper utility
-        DiceSFRPG.d20Roll({
+        return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             actor: this.actor,
@@ -634,7 +634,7 @@ export class ItemSFRPG extends Item {
      * Place an attack roll for a starship using an item.
      * @param {Object} options Options to pass to the attack roll
      */
-    _rollStarshipAttack(options = {}) {
+    async _rollStarshipAttack(options = {}) {
         const itemData = this.data.data;
         const actorData = this.actor.data.data;
 
@@ -644,7 +644,7 @@ export class ItemSFRPG extends Item {
         rollData.item = itemData;
         const title = `${this.name} - Attack Roll`;
 
-        DiceSFRPG.d20Roll({
+        return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             actor: this.actor,
@@ -666,7 +666,7 @@ export class ItemSFRPG extends Item {
      * Place a damage roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.damageRoll logic for the core implementation
      */
-    rollDamage({ event, versatile = false } = {}) {
+    async rollDamage({ event, versatile = false } = {}) {
         const itemData  = this.data.data;
         const actorData = this.actor.getRollData(); //this.actor.data.data;
         const isWeapon  = ["weapon", "shield"].includes(this.data.type);
@@ -755,7 +755,7 @@ export class ItemSFRPG extends Item {
         const title    = game.settings.get('sfrpg', 'useCustomChatCard') ? rollString : `${rollString} - ${this.data.name}`;
 
         // Call the roll helper utility
-        DiceSFRPG.damageRoll({
+        return await DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
             actor: this.actor,
@@ -771,7 +771,7 @@ export class ItemSFRPG extends Item {
         });
     }
 
-    _rollStarshipDamage({ event } = {}) {
+    async _rollStarshipDamage({ event } = {}) {
         const itemData = this.data.data;
         const actorData = this.actor.data.data;
 
@@ -787,7 +787,7 @@ export class ItemSFRPG extends Item {
 
         const title = `${this.name} - Damage Roll`;
 
-        DiceSFRPG.damageRoll({
+        return await DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
             actor: this.actor,
@@ -826,7 +826,7 @@ export class ItemSFRPG extends Item {
      */
     async rollFormula(options = {}) {
         const itemData = this.data.data;
-        const actorData = this.actor.data.data;
+        const actorData = this.actor.getRollData();
         if (!itemData.formula) {
             throw new Error("This Item does not have a formula to roll!");
         }
@@ -835,6 +835,11 @@ export class ItemSFRPG extends Item {
         const rollData = duplicate(actorData);
         rollData.item = itemData;
         const title = `Other Formula`;
+
+        // return await DiceSFRPG.d20Roll({
+        //     event: new Event(''),
+
+        // });
 
         const roll = new Roll(itemData.formula, rollData).roll();
         return roll.toMessage({
@@ -935,7 +940,7 @@ export class ItemSFRPG extends Item {
      * Roll a Tool Check
      * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
      */
-    rollToolCheck(options = {}) {
+    async rollToolCheck(options = {}) {
         if (this.type !== "tool") throw "Wrong item type!";
         const itemData = this.data.data;
 
@@ -948,7 +953,7 @@ export class ItemSFRPG extends Item {
         rollData["proficiency"] = Math.floor((itemData.proficient || 0) * rollData.attributes.prof);
 
         // Call the roll helper utility
-        DiceSFRPG.d20Roll({
+        return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             actor: this.actor,
