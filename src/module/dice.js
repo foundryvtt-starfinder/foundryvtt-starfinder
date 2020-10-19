@@ -24,7 +24,7 @@ export class DiceSFRPG {
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-    static d20Roll({ event, parts, data, actor, template, title, speaker, flavor, advantage = true, situational = true,
+    static d20Roll({ event = new Event(''), parts, data, actor, template, title, speaker, flavor, advantage = true, situational = true,
         fastForward = true, critical = 20, fumble = 1, onClose, dialogOptions }) {
 
         flavor = flavor || title;
@@ -162,7 +162,7 @@ export class DiceSFRPG {
     * @param {Function} onClose      Callback for actions to take when the dialog form is closed
     * @param {Object} dialogOptions  Modal dialog options
     */
-    static damageRoll({ event = {}, parts, criticalData, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
+    static damageRoll({ event = new Event(''), parts, criticalData, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
         flavor = flavor || title;
 
         // Inner roll function
