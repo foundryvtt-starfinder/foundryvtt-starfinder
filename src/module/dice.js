@@ -202,8 +202,12 @@ export class DiceSFRPG {
         };
 
         // Modify the roll and handle fast-forwarding
-        if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) return Promise.resolve(roll(event.altKey));
-        else parts = parts.concat(["@bonus"]);
+        if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
+            console.log(parts);
+            this._updateModifiersForCrit(data, parts.join('+'), 2);
+            parts = this._updateScalarModifiersForCrit(parts.join('+'), 2);
+            return Promise.resolve(roll(event.altKey));
+        } else parts = parts.concat(["@bonus"]);
 
         // Construct dialog data
         template = template || "systems/sfrpg/templates/chat/roll-dialog.html";
@@ -256,7 +260,7 @@ export class DiceSFRPG {
      * @param {Number} multiplier The number to multiply the modifier by
      */
     static _updateModifiersForCrit(data, formula, multiplier) {
-        let matches = formula.match(new RegExp(/@[a-z.0-9]+/gi)).map(x => x.replace('@', ''));
+        let matches = formula.match(new RegExp(/@[a-z.0-9]+/gi))?.map(x => x.replace('@', '')) ?? [];
 
         for (let match of matches) {
             let value = getProperty(data, match);
