@@ -82,6 +82,13 @@ export class ActorSFRPG extends Actor {
     }
 
     /**
+     * TODO: Use these two methods to properly setup actor data for use
+     * in the new Active Effects API.
+     */
+    prepareBaseData() { super.prepareBaseData(); }
+    prepareDerivedData() { super.prepareDerivedData(); }
+
+    /**
      * Check to ensure that this actor has a modifiers data object set, if not then set it. 
      * These will always be needed from hence forth, so we'll just make sure that they always exist.
      * 
