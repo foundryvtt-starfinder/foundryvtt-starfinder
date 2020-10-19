@@ -1,4 +1,33 @@
 {
+    "ACTOR": {
+        "TypeCharacter": "Spielercharacter",
+        "TypeNpc": "Nichtspielercharakter",
+        "TypeVehicle": "Fahrzeug",
+        "TypeStarship": "Raumschiff",
+        "TypeDrone": "Drohne"
+    },
+    "ITEM": {
+        "TypeAsi": "Attributswertsteigerung",
+        "TypeWeapon": "Waffe",
+        "TypeEquipment": "Rüstung",
+        "TypeConsumable": "Verbrauchsmaterial",
+        "TypeGoods": "Waren",
+        "TypeContainer": "Behälter",
+        "TypeClass": "Klasse",
+        "TypeSpell": "Zauber",
+        "TypeFeat": "Talent",
+        "TypeRace": "Volk",
+        "TypeTheme": "Charaktermotiv",
+        "TypeTechnological": "Technologisch",
+        "TypeFusion": "Waffenfusion",
+        "TypeUpgrade": "Rüstungsverbesserung",
+        "TypeAugmentation": "Aufwertung",
+        "TypeStarshipweapon": "Raumschiffwaffe",
+        "TypeArchetypes": "Archetyp",
+        "TypeChassis": "Drohnenchassis",
+        "TypeMod": "Drohnenmodifikation",
+        "TypeShield": "Schild"
+    },
     "SFRPG": {
         "AbilityActivationTypesDay": "Tag",
         "AbilityActivationTypesFull": "Volle Aktion",
@@ -299,6 +328,89 @@
         "CMDBaseTooltip": "Grundwert: 8",
         "CMDKACModTooltip": "KRK: {kac}",
         "CMDModiferTooltip": "{type} Bonus: {mod} ({source})",
+        "Combat": {
+            "ChatCards": {
+                "Footer": "{combatType} - {combatPhase} Phase",
+                "Phase": {
+                    "Header": "{phase} Phase",
+                    "MessageTitle": "Beschreibung"
+                },
+                "Round": {
+                    "Header": "Runde {round}",
+                    "BodyHeader": "Neue Runde"
+                },
+                "Speaker": {
+                    "GM": "Der Spielleiter"
+                },
+                "Turn": {
+                    "Header": "{combatant} ist an der Reihe"
+                }
+            },
+            "EncounterTracker": {
+                "SelectNextType": "Zum nächsten Kampftyp wechseln",
+                "SelectPrevType": "Zum vorherigen Kampftyp wechseln"
+            },
+            "Errors": {
+                "HistoryLimitedResetInitiative": "Die aktuelle Phase hat die Initiative zurückgesetzt, du kannst nicht weiter in der Historie zurückgehen.<br/><br/>Zum Ausblenden klicken.",
+                "HistoryLimitedStartOfEncounter": "Du hast den Anfang der Begegnung erreicht und kannst nicht weiter in der Historie zurückgehen.<br/><br/>Zum Ausblenden klicken.",
+                "MissingInitiative": "Die gegenwärtige Phase hat die Initiative zurückgesetzt, bitte rolle sie für alle Kampfteilnehmer erneut aus, bevor du weitermachst.<br/><br/>Zum Ausblenden klicken."
+            },
+            "Normal": {
+                "Name": "Normaler Kampf",
+                "Phases": {
+                    "1": {
+                        "Name": "Kampf",
+                        "Description": "Jeder darf nun seinen Kampfhandlung durchführen."
+                    }
+                }
+            },
+            "Starship": {
+                "Name": "Raumschiffkampf",
+                "Phases": {
+                    "1": {
+                        "Name": "Rolle ändern",
+                        "Description": "Jeder, der seine Rolle im Raumschiff ändern möchte, kann dies jetzt tun."
+                    },
+                    "2": {
+                        "Name": "Ingenieursphase",
+                        "Description": "Kapitäne, Ingenieure, Magische Offiziere, Erste Offiziere und Deckhelfer können in dieser Phase handeln."
+                    },
+                    "3": {
+                        "Name": "Steuerungsprüfung",
+                        "Description": "Die Piloten können nun ihre Würfe auf Steuerung durchführen, um die Initiative dieser Runde zu bestimmen."
+                    },
+                    "4": {
+                        "Name": "Steuerungsphase",
+                        "Description": "Kapitäne, Piloten, Wissenschaftsoffiziere, Erste Offiziere und Deckhelfer können in dieser Phase handeln."
+                    },
+                    "5": {
+                        "Name": "Schützenphase",
+                        "Description": "Kapitäne und Bordschützen können in dieser Phase handeln."
+                    },
+                    "6": {
+                        "Name": "Schadensphase",
+                        "Description": "Jeder wendet nun seinen erhaltenen Schaden, kritische Schwellen usw. an."
+                    }
+                }
+            },
+            "VehicleChase": {
+                "Name": "Fahrzeugkampf",
+                "Phases": {
+                    "1": {
+                        "Name": "Aktionen der Fahrzeuglenker",
+                        "Description": "Die Fahrer können nun über ihre Manöver entscheiden."
+                    },
+                    "2": {
+                        "Name": "Verfolgungsfortschritt",
+                        "Description": "Der Spielleiter wird nun den Fortgang der Verfolgsjagd bestimmen."
+                    },
+                    "3": {
+                        "Name": "Kampf",
+                        "Description": "Jeder darf nun seine Kampfhandlung durchführen."
+                    }
+                }
+            }
+        },
         "ComingSoon": "Kommt demnächst!",
         "ConditionsAsleep": "Schlafend",
         "ConditionsBleeding": "Blutend",
