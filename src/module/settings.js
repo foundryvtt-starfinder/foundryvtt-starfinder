@@ -69,4 +69,13 @@ export const registerSystemSettings = function () {
         default: true,
         type: Boolean
     });
+
+    game.settings.register("sfrpg", "useQuickRollAsDefault", {
+        name: "SFRPG.SettingsUseQuickRollAsDefault",
+        hint: "SFRPG.SettingsUseQuickRollAsDefaultHint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
 };

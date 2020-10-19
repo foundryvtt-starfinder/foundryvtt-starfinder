@@ -28,6 +28,10 @@ export class DiceSFRPG {
         fastForward = true, critical = 20, fumble = 1, onClose, dialogOptions }) {
 
         flavor = flavor || title;
+        const autoFastForward = game.settings.get('sfrpg', 'useQuickRollAsDefault');
+        if (event && autoFastForward) {
+            event.shiftKey = autoFastForward;
+        }
         // Inner roll function
         let rollMode = game.settings.get("core", "rollMode");
         let roll = (parts, adv) => {
@@ -86,9 +90,12 @@ export class DiceSFRPG {
 
         // Modify the roll and handle fast-forwarding
         parts = ["1d20"].concat(parts);
-        if (event.shiftKey) return Promise.resolve(roll(parts, 0));
-        else if (event.altKey) return Promise.resolve(roll(parts, 1));
+        // Check for shift key last, so that alt and ctrl keys can
+        // still be captured in case the auto fast-forward setting
+        // is enabled.
+        if (event.altKey) return Promise.resolve(roll(parts, 1));
         else if (event.ctrlKey || event.metaKey) return Promise.resolve(roll(parts, -1));
+        else if (event.shiftKey) return Promise.resolve(roll(parts, 0));
         else parts = parts.concat(["@bonus"]);
 
         // Render modal dialog
@@ -165,6 +172,10 @@ export class DiceSFRPG {
     static damageRoll({ event = new Event(''), parts, criticalData, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
         flavor = flavor || title;
 
+        const autoFastForward = game.settings.get('sfrpg', 'useQuickRollAsDefault');
+        if (event && autoFastForward) {
+            event.shiftKey = autoFastForward;
+        }
         // Inner roll function
         let rollMode = game.settings.get("core", "rollMode");
         let roll = crit => {
@@ -203,9 +214,11 @@ export class DiceSFRPG {
 
         // Modify the roll and handle fast-forwarding
         if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
-            console.log(parts);
-            this._updateModifiersForCrit(data, parts.join('+'), 2);
-            parts = this._updateScalarModifiersForCrit(parts.join('+'), 2);
+            if (event.altKey) {
+                this._updateModifiersForCrit(data, parts.join('+'), 2);
+                parts = this._updateScalarModifiersForCrit(parts.join('+'), 2);
+            }
+            
             return Promise.resolve(roll(event.altKey));
         } else parts = parts.concat(["@bonus"]);
 
