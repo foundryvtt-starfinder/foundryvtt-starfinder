@@ -32,6 +32,7 @@ import CounterManagement from "./module/classes/counter-management.js";
 import templateOverrides from "./module/template-overrides.js";
 import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
 import { RPC } from "./module/rpc.js"
+import { DiceSFRPG } from './module/dice.js'
 
 import { } from "./module/packs/browsers.js"
 import { } from "./module/combat/combat.js"
@@ -61,7 +62,8 @@ Hooks.once('init', async function () {
         SFRPGModifierTypes: SFRPGModifierTypes,
         SFRPGModifier: SFRPGModifier,
         generateUUID,
-        migrateWorld
+        migrateWorld,
+        dice: DiceSFRPG
     };
 
     CONFIG.SFRPG = SFRPG;

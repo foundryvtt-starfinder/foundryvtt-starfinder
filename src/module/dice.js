@@ -72,6 +72,8 @@ export class DiceSFRPG {
                     rollMode: rollMode
                 });
             }
+
+            return roll;
         };
 
         let dialogCallback = html => {
@@ -79,7 +81,7 @@ export class DiceSFRPG {
             rollMode = html.find('[name="rollMode"]').val();
             data['bonus'] = html.find('[name="bonus"]').val();
             if (data['bonus'].trim() === "") delete data['bonus'];
-            roll(parts, adv);
+            return roll(parts, adv);
         };
 
         // Modify the roll and handle fast-forwarding
@@ -100,38 +102,42 @@ export class DiceSFRPG {
         };        
 
         let adv = 0;
-        renderTemplate(template, templateData).then(dlg => {
-            new Dialog({
-                title: title,
-                content: dlg,
-                buttons: {
-                    advantage: {
-                        label: "Advantage",
-                        condition: useAdvantage,
-                        callback: html => {
-                            adv = 1;
-                            dialogCallback(html);
+
+        return new Promise(resolve => {
+            renderTemplate(template, templateData).then(dlg => {
+                new Dialog({
+                    title: title,
+                    content: dlg,
+                    buttons: {
+                        advantage: {
+                            label: "Advantage",
+                            condition: useAdvantage,
+                            callback: html => {
+                                adv = 1;
+                                resolve(dialogCallback(html));
+                            }
+                        },
+                        normal: {
+                            label: useAdvantage ? "Normal" : "Roll",
+                            callback: html => {
+                                resolve(dialogCallback(html));
+                            }
+                        },
+                        disadvantage: {
+                            label: "Disadvantage",
+                            condition: useAdvantage,
+                            callback: html => {
+                                adv = -1; 
+                                resolve(dialogCallback(html));
+                            }
                         }
                     },
-                    normal: {
-                        label: useAdvantage ? "Normal" : "Roll",
-                        callback: html => {
-                            dialogCallback(html);
-                        }
-                    },
-                    disadvantage: {
-                        label: "Disadvantage",
-                        condition: useAdvantage,
-                        callback: html => {
-                            adv = -1; dialogCallback(html);
-                        }
+                    default: "normal",
+                    close: () => {
+                        // noop
                     }
-                },
-                default: "normal",
-                close: () => {
-                    // noop
-                }
-            }, dialogOptions).render(true);
+                }, dialogOptions).render(true);
+            });
         });
     }
 
