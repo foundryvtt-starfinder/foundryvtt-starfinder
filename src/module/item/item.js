@@ -129,7 +129,7 @@ export class ItemSFRPG extends Item {
     }
 
     _getSaveLabel(save, actorData, itemData) {
-        if (!save.type) return "";
+        if (!save?.type) return "";
         
         let dcFormula = save.dc || `10 + ${Math.floor((itemData.attributes?.sturdy ? itemData.level + 2 : itemData.level) / 2)} + ${this.actor?.data?.data?.abilities?.dex ? this.actor.data.data.abilities.dex.mod : 0}`;
         if (dcFormula && Number.isNaN(Number(dcFormula))) {
