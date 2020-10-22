@@ -189,6 +189,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Roll damage for item
         html.find('.item-action .damage').click(event => this._onItemRollDamage(event));
+        html.find('.item-action .healing').click(event => this._onItemRollDamage(event));
 
         // Item Recharging
         html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
@@ -326,7 +327,8 @@ export class ActorSheetSFRPG extends ActorSheet {
                         label: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Button"),
                         callback: html => {
                             const form = html[0].querySelector("form");
-                            mergeObject(createData, validateForm(form));
+                            let formDataExtended = new FormDataExtended(form);
+                            mergeObject(createData, formDataExtended.toObject());
                             if (!createData.name) {
                                 createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
                             }
@@ -771,7 +773,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
             
             const itemInTargetActor = await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
-            if (itemInTargetActor === itemToMove) {
+            if (itemInTargetActor === addedItem) {
                 return await this._onSortItem(event, itemInTargetActor.data);
             }
 

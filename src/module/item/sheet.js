@@ -169,6 +169,8 @@ export class ItemSheetSFRPG extends ItemSheet {
                 rollData = duplicate(this.item.actor.data.data);
                 rollData.item = this.item.data.data;
                 rollData.itemLevel = itemLevel;
+            } else {
+                rollData.abilities = { dex: { mod: 0 }};
             }
             let saveRoll = new Roll(formula, rollData).roll();
             return saveRoll.total;

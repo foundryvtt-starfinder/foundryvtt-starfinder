@@ -256,14 +256,15 @@ SFRPG.weaponTypes = {
 
 // Weapons sub categories
 SFRPG.weaponCategories = {
-    "cryo": "SFRPG.WeaponCategoriesCryo",
-    "disruption" : "SFRPG.WeaponCategoriesDisruption",
-    "flame": "SFRPG.WeaponCategoriesFlame",
-    "laser": "SFRPG.WeaponCategoriesLaser",
-    "plasma": "SFRPG.WeaponCategoriesPlasma",
-    "projectile": "SFRPG.WeaponCategoriesProjectile",
-    "shock": "SFRPG.WeaponCategoriesShock",
-    "sonic": "SFRPG.WeaponCategoriesSonic",
+    "cryo"         : "SFRPG.WeaponCategoriesCryo",
+    "disruption"   : "SFRPG.WeaponCategoriesDisruption",
+    "disintegrator": "SFRPG.WeaponCategoriesDisintegrator",
+    "flame"        : "SFRPG.WeaponCategoriesFlame",
+    "laser"        : "SFRPG.WeaponCategoriesLaser",
+    "plasma"       : "SFRPG.WeaponCategoriesPlasma",
+    "projectile"   : "SFRPG.WeaponCategoriesProjectile",
+    "shock"        : "SFRPG.WeaponCategoriesShock",
+    "sonic"        : "SFRPG.WeaponCategoriesSonic",
     "uncategorized": "SFRPG.WeaponCategoriesUncategorized"
 };
 
@@ -1406,120 +1407,6 @@ SFRPG.conditions = {
 
 // TODO localize
 SFRPG.characterFlags = {
-    "improvedInititive": {
-        name: "SFRPG.ImprovedInitiativeLabel",
-        hint: "SFRPG.ImprovedInitiativeHint",
-        section: "SFRPG.CharacterFlagsSectionFeats",
-        type: Boolean
-    },
-    "greatFortitude": {
-        name: "SFRPG.GreatFortitudeLabel",
-        hint: "SFRPG.GreatFortitudeHint",
-        section: "SFRPG.CharacterFlagsSectionFeats",
-        type: Boolean
-    },
-    "ironWill": {
-        name: "SFRPG.IronWillLabel",
-        hint: "SFRPG.IronWillHint",
-        section: "SFRPG.CharacterFlagsSectionFeats",
-        type: Boolean
-    },
-    "lightningReflexes": {
-        name: "SFRPG.LightningReflexesLabel",
-        hint: "SFRPG.LightningReflexesHint",
-        section: "SFRPG.CharacterFlagsSectionFeats",
-        type: Boolean
-    },
-    "flatAffect": {
-        name: "Flat Affect",
-        hint: "You take a -2 penalty to Sense Motive checks, but the DCs of Sense Motive checks attempted against you increase by 2.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "historian": {
-        name: "Historian",
-        hint: "Due to your in-depth historical training and the wide-ranging academic background knowledge you possess, you receive a +2 racial bonus to Culture checks.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "naturalGrace": {
-        name: "Natural Grace",
-        hint: "You recieve a +2 racial bonus to Acrobatics and Athletics checks",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "culturalFascination": {
-        name: "Cultural Fascination",
-        hint: "You recieve a +2 racial bonus to Culture and Diplomacy checks.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "armorSavant": {
-        name: "Armor Savant",
-        hint: "When wearing armor, you gain a +1 racial bonus to AC. When you're wearing heavy armor, your armor check penalty is 1 less severe than normal.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "scrounger": {
-        name: "Scrounger",
-        hint: "You receive a +2 racial bonus to Engineering, Stealth, and Survival checks.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "elvenMagic": {
-        name: "Elven Magic",
-        hint: "You receive a +2 racial bonus to caster level checks to overcome spell resistance. In addition, you receive a +2 racial bonus to Mysticism skill checks.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "keenSenses": {
-        name: "Keen Senses",
-        hint: "You receive a +2 racial bonus to Perception skill checks.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "curious": {
-        name: "Curious",
-        hint: "You receive a +2 racial bonus to Culture checks.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "intimidating": {
-        name: "Intimidating",
-        hint: "You receive a +2 racial bonus to Intimidate skill checks.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "selfSufficient": {
-        name: "Self-Sufficient",
-        hint: "You receive a +2 racial bonus to Survival skill checks.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "halflingLuck": {
-        name: "Halfling Luck",
-        hint: "Halflings receive a +1 racial bonus to all saving throws.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "sneaky": {
-        name: "Sneaky",
-        hint: "You receive a +2 racial bonus to Stealth checks",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "sureFooted": {
-        name: "Sure-Footed",
-        hint: "You receive a +2 racial bonus to Acrobatics and Athletics skill checks.",
-        section: "SFRPG.CharacterFlagsSectionRacialTraits",
-        type: Boolean
-    },
-    "rapidResponse": {
-        name: "Rapid Response",
-        hint: "You gain +4 bonus to initiative checks and increase your land speed by 10 feet.",
-        section: "SFRPG.CharacterFlagsSectionClassFeatures",
-        type: Boolean
-    },
     "solarianAttunement": {
         name: "Solarian Attunement",
         hint: "You can enabled the management of attenument inside the combat tracker.",

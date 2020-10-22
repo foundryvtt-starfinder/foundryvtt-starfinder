@@ -1,4 +1,33 @@
 {
+    "ACTOR": {
+        "TypeCharacter": "Player Character",
+        "TypeNpc": "Non-player Character",
+        "TypeVehicle": "Vehicle",
+        "TypeStarship": "Starship",
+        "TypeDrone": "Drone"
+    },
+    "ITEM": {
+        "TypeAsi": "Ability Score Increase",
+        "TypeWeapon": "Weapon",
+        "TypeEquipment": "Armor",
+        "TypeConsumable": "Consumable",
+        "TypeGoods": "Goods",
+        "TypeContainer": "Container",
+        "TypeClass": "Class",
+        "TypeSpell": "Spell",
+        "TypeFeat": "Feat",
+        "TypeRace": "Race",
+        "TypeTheme": "Theme",
+        "TypeTechnological": "Technological",
+        "TypeFusion": "Weapon Fusion",
+        "TypeUpgrade": "Armor Upgrade",
+        "TypeAugmentation": "Augmentation",
+        "TypeStarshipweapon": "Starship Weapon",
+        "TypeArchetypes": "Archetype",
+        "TypeChassis": "Drone Chassis",
+        "TypeMod": "Drone Mod",
+        "TypeShield": "Shield"
+    },
     "SFRPG": {
         "AbilityActivationTypesDay": "Jour",
         "AbilityActivationTypesFull": "Action C.",
@@ -34,7 +63,7 @@
         "AbilityScoreThemeTooltip": "Theme: {mod}",
         "AbilityStr": "Force",
         "AbilityWis": "Sagesse",
-        "ACPTooltip": "Pénalité d'armure: {acp}",
+        "ACPTooltip": "Pénalité d'armure: {mod} ({source})",
         "ActionAbil": "Test d'abilité",
         "ActionHeal": "Soin",
         "ActionMSAK": "Attaque de sort en mêlée",
@@ -268,6 +297,10 @@
         "CharacterFlagsSectionRacialTraits": "Traits raciaux",
         "CharacterLevelsTooltip": "{class} Niveaux: {levels}",
         "CharacterNamePlaceHolderText": "Nom du personnage",
+        "ChatCard": {
+            "DamageRoll": "Damage Roll",
+            "HealingRoll": "Healing Roll"
+        },
         "ClassArmorProf": "Maniements des armures",
         "ClassBABProgression": "Progression du BBA",
         "ClassFortSaveProgression": "Progression sauvegarde de vigueur",
@@ -284,6 +317,89 @@
         "CMDBaseTooltip": "Base: 8",
         "CMDKACModTooltip": "CAC: {kac}",
         "CMDModiferTooltip": "{type} Rebonds: {mod} ({source})",
+        "Combat": {
+            "ChatCards": {
+                "Footer": "{combatType} - {combatPhase} phase",
+                "Phase": {
+                    "Header": "{phase} Phase",
+                    "MessageTitle": "Description"
+                },
+                "Round": {
+                    "Header": "Round {round}",
+                    "BodyHeader": "New Round"
+                },
+                "Speaker": {
+                    "GM": "The GM"
+                },
+                "Turn": {
+                    "Header": "{combatant}`s Turn"
+                }
+            },
+            "EncounterTracker": {
+                "SelectNextType": "Switch to the next combat type",
+                "SelectPrevType": "Switch to the previous combat type"
+            },
+            "Errors": {
+                "HistoryLimitedResetInitiative": "The current phase has reset initiative, we cannot go back further in history.<br/><br/>Click to dismiss.",
+                "HistoryLimitedStartOfEncounter": "You have reached the start of the encounter, we cannot go back further in history.<br/><br/>Click to dismiss.",
+                "MissingInitiative": "The current phase has reset initiative, please re-roll initiative on all combatants before continueing.<br/><br/>Click to dismiss."
+            },
+            "Normal": {
+                "Name": "Normal Combat",
+                "Phases": {
+                    "1": {
+                        "Name": "Combat",
+                        "Description": "Everyone may now act out their combat turn."
+                    }
+                }
+            },
+            "Starship": {
+                "Name": "Starship Combat",
+                "Phases": {
+                    "1": {
+                        "Name": "Changing Roles",
+                        "Description": "Anyone who wishes to change starship roles, may do so now."
+                    },
+                    "2": {
+                        "Name": "Engineering",
+                        "Description": "Captains, Engineers, Magic Officers, Chief Mates and Deck Hands may choose to act during this phase."
+                    },
+                    "3": {
+                        "Name": "Piloting Check",
+                        "Description": "Pilots may now roll their piloting checks to determine this round's initiative."
+                    },
+                    "4": {
+                        "Name": "Helm",
+                        "Description": "Captains, Pilots, Science Officers, Chief Mates and Deck Hands may choose to act during this phase."
+                    },
+                    "5": {
+                        "Name": "Gunnery",
+                        "Description": "Captains, and Gunners may choose to act during this phase."
+                    },
+                    "6": {
+                        "Name": "Damage",
+                        "Description": "Everyone now processes their received damages, critical thresholds, etc."
+                    }
+                }
+            },
+            "VehicleChase": {
+                "Name": "Vehicle Chase",
+                "Phases": {
+                    "1": {
+                        "Name": "Pilot Actions",
+                        "Description": "Drivers may now decide their maneuvers."
+                    },
+                    "2": {
+                        "Name": "Chase Progress",
+                        "Description": "The GM will now process the chase progress results."
+                    },
+                    "3": {
+                        "Name": "Combat",
+                        "Description": "Everyone may now act out their combat turn."
+                    }
+                }
+            }
+        },
         "ComingSoon": "Coming soon!",
         "ConditionsAsleep": "Endormi",
         "ConditionsBleeding": "Saignement",
@@ -986,6 +1102,8 @@
         "SettingsAutoCollapseCardName": "Plier les fiches d'objets dans le chat",
         "SettingsUseCustomChatCard": "Utiliser les cartes de discussion personnalisée de Starfinder?",
         "SettingsUseCustomChatCardHint": "Indiquez si vous souhaitez utiliser les nouvelles cartes de chat personnalisées ou les originales.",
+        "SettingsUseQuickRollAsDefault": "Use Quick roll by default?",
+        "SettingsUseQuickRollAsDefaultHint": "When clicking abilities that roll dice, the roll will act as if the Shift key was depressed by default. This will trigger a fast-forwarded roll.",
         "SettingsUseStarfinderAOETemplates": "Utiliser les modèles d'AOE de système Starfinder",
         "SettingsUseStarfinderAOETemplatesHint": "Utiliser ou non la méthode de mesure de Starfinder pour les modèles AOE par rapport à la méthode par défaut de Foundry VTT",
         "SettingsWorldSchemaVersionHint": "Enregistre la version du schéma de données pour le système  AVERTISSEMENT: ne modifiez pas cette valeur à moins de savoir ce que vous faites!",
@@ -1376,13 +1494,15 @@
                 "Landa": "Land and air"
             }
         },
-        "WeaponCategoriesCryo": "Armes cryogénique",
-        "WeaponCategoriesFlame": "Armes incendiaires",
-        "WeaponCategoriesLaser": "Armes laser",
-        "WeaponCategoriesPlasma": "Armes plasma",
-        "WeaponCategoriesProjectile": "Armes à projectile",
-        "WeaponCategoriesShock": "Armes choc",
-        "WeaponCategoriesSonic": "Armes sonique",
+        "WeaponCategoriesCryo"         : "Armes cryogénique",
+        "WeaponCategoriesDisruption"   : "Disruption weapons",
+        "WeaponCategoriesDisintegrator": "Disintigrator weapons",
+        "WeaponCategoriesFlame"        : "Armes incendiaires",
+        "WeaponCategoriesLaser"        : "Armes laser",
+        "WeaponCategoriesPlasma"       : "Armes plasma",
+        "WeaponCategoriesProjectile"   : "Armes à projectile",
+        "WeaponCategoriesShock"        : "Armes choc",
+        "WeaponCategoriesSonic"        : "Armes sonique",
         "WeaponCategoriesUncategorized": "Armes sans satégorie",
         "WeaponCriticalHitEffects": {
             "Arc"        : "Arc",

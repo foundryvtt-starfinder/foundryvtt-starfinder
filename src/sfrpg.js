@@ -18,6 +18,7 @@ import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
 import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
 import { ItemSFRPG } from "./module/item/item.js";
+import { CombatSFRPG } from "./module/combat/combat.js";
 import { ItemSheetSFRPG } from "./module/item/sheet.js";
 import { highlightCriticalSuccessFailure } from "./module/dice.js";
 import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/combat.js";
@@ -31,8 +32,10 @@ import CounterManagement from "./module/classes/counter-management.js";
 import templateOverrides from "./module/template-overrides.js";
 import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
 import { RPC } from "./module/rpc.js"
+import { DiceSFRPG } from './module/dice.js'
 
 import { } from "./module/packs/browsers.js"
+import { } from "./module/combat/combat.js"
 
 let defaultDropHandler = null;
 
@@ -59,12 +62,14 @@ Hooks.once('init', async function () {
         SFRPGModifierTypes: SFRPGModifierTypes,
         SFRPGModifier: SFRPGModifier,
         generateUUID,
-        migrateWorld
+        migrateWorld,
+        dice: DiceSFRPG
     };
 
     CONFIG.SFRPG = SFRPG;
     CONFIG.Actor.entityClass = ActorSFRPG;
     CONFIG.Item.entityClass = ItemSFRPG;
+    CONFIG.Combat.entityClass = CombatSFRPG;
 
     CONFIG.statusEffects = CONFIG.SFRPG.statusEffectIcons;
 
@@ -211,6 +216,27 @@ Hooks.once("setup", function () {
     Handlebars.registerHelper('leftOrRight', function (left, right) {
         return left || right;
     });
+
+    Handlebars.registerHelper('editorPlus', function (options) {
+        const target = options.hash['target'];
+        if ( !target ) throw new Error("You must define the name of a target field.");
+    
+        // Enrich the content
+        const owner = Boolean(options.hash['owner']);
+        const rolls = Boolean(options.hash['rolls']);
+        const rollData = options.hash['rollData'];
+        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: owner, entities: true, rolls: rolls, rollData: rollData});
+    
+        // Construct the HTML
+        let editor = $(`<div class="editor"><div class="editor-content" data-edit="${target}">${content}</div></div>`);
+    
+        // Append edit button
+        const button = Boolean(options.hash['button']);
+        const editable = Boolean(options.hash['editable']);
+        if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
+        return new Handlebars.SafeString(editor[0].outerHTML);
+    });
+
 });
 
 Hooks.once("ready", () => {

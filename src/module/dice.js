@@ -24,10 +24,14 @@ export class DiceSFRPG {
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-    static d20Roll({ event, parts, data, actor, template, title, speaker, flavor, advantage = true, situational = true,
+    static d20Roll({ event = new Event(''), parts, data, actor, template, title, speaker, flavor, advantage = true, situational = true,
         fastForward = true, critical = 20, fumble = 1, onClose, dialogOptions }) {
 
         flavor = flavor || title;
+        const autoFastForward = game.settings.get('sfrpg', 'useQuickRollAsDefault');
+        if (event && autoFastForward) {
+            event.shiftKey = autoFastForward;
+        }
         // Inner roll function
         let rollMode = game.settings.get("core", "rollMode");
         let roll = (parts, adv) => {
@@ -58,7 +62,7 @@ export class DiceSFRPG {
             };
 
             // Flag critical thresholds
-            let d20 = roll.parts[0];
+            let d20 = roll.terms[0];
             d20.options.critical = critical;
             d20.options.fumble = fumble;
 
@@ -72,6 +76,8 @@ export class DiceSFRPG {
                     rollMode: rollMode
                 });
             }
+
+            return roll;
         };
 
         let dialogCallback = html => {
@@ -79,14 +85,17 @@ export class DiceSFRPG {
             rollMode = html.find('[name="rollMode"]').val();
             data['bonus'] = html.find('[name="bonus"]').val();
             if (data['bonus'].trim() === "") delete data['bonus'];
-            roll(parts, adv);
+            return roll(parts, adv);
         };
 
         // Modify the roll and handle fast-forwarding
         parts = ["1d20"].concat(parts);
-        if (event.shiftKey) return roll(parts, 0);
-        else if (event.altKey) return roll(parts, 1);
-        else if (event.ctrlKey || event.metaKey) return roll(parts, -1);
+        // Check for shift key last, so that alt and ctrl keys can
+        // still be captured in case the auto fast-forward setting
+        // is enabled.
+        if (event.altKey) return Promise.resolve(roll(parts, 1));
+        else if (event.ctrlKey || event.metaKey) return Promise.resolve(roll(parts, -1));
+        else if (event.shiftKey) return Promise.resolve(roll(parts, 0));
         else parts = parts.concat(["@bonus"]);
 
         // Render modal dialog
@@ -100,38 +109,42 @@ export class DiceSFRPG {
         };        
 
         let adv = 0;
-        renderTemplate(template, templateData).then(dlg => {
-            new Dialog({
-                title: title,
-                content: dlg,
-                buttons: {
-                    advantage: {
-                        label: "Advantage",
-                        condition: useAdvantage,
-                        callback: html => {
-                            adv = 1;
-                            dialogCallback(html);
+
+        return new Promise(resolve => {
+            renderTemplate(template, templateData).then(dlg => {
+                new Dialog({
+                    title: title,
+                    content: dlg,
+                    buttons: {
+                        advantage: {
+                            label: "Advantage",
+                            condition: useAdvantage,
+                            callback: html => {
+                                adv = 1;
+                                resolve(dialogCallback(html));
+                            }
+                        },
+                        normal: {
+                            label: useAdvantage ? "Normal" : "Roll",
+                            callback: html => {
+                                resolve(dialogCallback(html));
+                            }
+                        },
+                        disadvantage: {
+                            label: "Disadvantage",
+                            condition: useAdvantage,
+                            callback: html => {
+                                adv = -1; 
+                                resolve(dialogCallback(html));
+                            }
                         }
                     },
-                    normal: {
-                        label: useAdvantage ? "Normal" : "Roll",
-                        callback: html => {
-                            dialogCallback(html);
-                        }
-                    },
-                    disadvantage: {
-                        label: "Disadvantage",
-                        condition: useAdvantage,
-                        callback: html => {
-                            adv = -1; dialogCallback(html);
-                        }
+                    default: "normal",
+                    close: () => {
+                        // noop
                     }
-                },
-                default: "normal",
-                close: () => {
-                    // noop
-                }
-            }, dialogOptions).render(true);
+                }, dialogOptions).render(true);
+            });
         });
     }
 
@@ -156,12 +169,19 @@ export class DiceSFRPG {
     * @param {Function} onClose      Callback for actions to take when the dialog form is closed
     * @param {Object} dialogOptions  Modal dialog options
     */
-    static damageRoll({ event = {}, parts, criticalData, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
+    static damageRoll({ event = new Event(''), parts, criticalData, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
         flavor = flavor || title;
 
+        const autoFastForward = game.settings.get('sfrpg', 'useQuickRollAsDefault');
+        if (event && autoFastForward) {
+            event.shiftKey = autoFastForward;
+        }
         // Inner roll function
         let rollMode = game.settings.get("core", "rollMode");
         let roll = crit => {
+            // Don't include situational bonus unless it is defined
+            if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
+
             let roll = new Roll(parts.join("+"), data);
             if (crit === true) {
                 let add = /*(actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 :*/ 0;
@@ -193,8 +213,14 @@ export class DiceSFRPG {
         };
 
         // Modify the roll and handle fast-forwarding
-        if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) return roll(event.altKey);
-        else parts = parts.concat(["@bonus"]);
+        if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
+            if (event.altKey) {
+                this._updateModifiersForCrit(data, parts.join('+'), 2);
+                parts = this._updateScalarModifiersForCrit(parts.join('+'), 2);
+            }
+            
+            return Promise.resolve(roll(event.altKey));
+        } else parts = parts.concat(["@bonus"]);
 
         // Construct dialog data
         template = template || "systems/sfrpg/templates/chat/roll-dialog.html";
@@ -247,7 +273,7 @@ export class DiceSFRPG {
      * @param {Number} multiplier The number to multiply the modifier by
      */
     static _updateModifiersForCrit(data, formula, multiplier) {
-        let matches = formula.match(new RegExp(/@[a-z.0-9]+/gi)).map(x => x.replace('@', ''));
+        let matches = formula.match(new RegExp(/@[a-z.0-9]+/gi))?.map(x => x.replace('@', '')) ?? [];
 
         for (let match of matches) {
             let value = getProperty(data, match);

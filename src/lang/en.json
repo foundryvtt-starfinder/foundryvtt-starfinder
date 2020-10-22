@@ -1,4 +1,33 @@
 {
+    "ACTOR": {
+        "TypeCharacter": "Player Character",
+        "TypeNpc": "Non-player Character",
+        "TypeVehicle": "Vehicle",
+        "TypeStarship": "Starship",
+        "TypeDrone": "Drone"
+    },
+    "ITEM": {
+        "TypeAsi": "Ability Score Increase",
+        "TypeWeapon": "Weapon",
+        "TypeEquipment": "Armor",
+        "TypeConsumable": "Consumable",
+        "TypeGoods": "Goods",
+        "TypeContainer": "Container",
+        "TypeClass": "Class",
+        "TypeSpell": "Spell",
+        "TypeFeat": "Feat",
+        "TypeRace": "Race",
+        "TypeTheme": "Theme",
+        "TypeTechnological": "Technological",
+        "TypeFusion": "Weapon Fusion",
+        "TypeUpgrade": "Armor Upgrade",
+        "TypeAugmentation": "Augmentation",
+        "TypeStarshipweapon": "Starship Weapon",
+        "TypeArchetypes": "Archetype",
+        "TypeChassis": "Drone Chassis",
+        "TypeMod": "Drone Mod",
+        "TypeShield": "Shield"
+    },
     "SFRPG": {
         "AbilityActivationTypesDay": "Day",
         "AbilityActivationTypesFull": "Full Action",
@@ -34,7 +63,7 @@
         "AbilityScoreThemeTooltip": "Theme: {mod}",
         "AbilityStr": "Strength",
         "AbilityWis": "Wisdom",
-        "ACPTooltip": "Armor Check Penalty: {acp}",
+        "ACPTooltip": "Armor Check Penalty: {mod} ({source})",
         "ActionAbil": "Ability Test",
         "ActionHeal": "Healing",
         "ActionMSAK": "Melee Spell Attack",
@@ -279,6 +308,10 @@
         "CharacterFlagsSectionRacialTraits": "Racial Traits",
         "CharacterLevelsTooltip": "{class} Levels: {levels}",
         "CharacterNamePlaceHolderText": "Character Name",
+        "ChatCard":{
+            "DamageRoll" : "Damage Roll",
+            "HealingRoll": "Healing Roll"
+        },
         "ClassArmorProf": "Armor Proficiencies",
         "ClassBABProgression": "BAB Progression",
         "ClassFortSaveProgression": "Fortitude Save Progression",
@@ -295,6 +328,89 @@
         "CMDBaseTooltip": "Base: 8",
         "CMDKACModTooltip": "KAC: {kac}",
         "CMDModiferTooltip": "{type} Bonus: {mod} ({source})",
+        "Combat": {
+            "ChatCards": {
+                "Footer": "{combatType} - {combatPhase} phase",
+                "Phase": {
+                    "Header": "{phase} Phase",
+                    "MessageTitle": "Description"
+                },
+                "Round": {
+                    "Header": "Round {round}",
+                    "BodyHeader": "New Round"
+                },
+                "Speaker": {
+                    "GM": "The GM"
+                },
+                "Turn": {
+                    "Header": "{combatant}`s Turn"
+                }
+            },
+            "EncounterTracker": {
+                "SelectNextType": "Switch to the next combat type",
+                "SelectPrevType": "Switch to the previous combat type"
+            },
+            "Errors": {
+                "HistoryLimitedResetInitiative": "The current phase has reset initiative, we cannot go back further in history.<br/><br/>Click to dismiss.",
+                "HistoryLimitedStartOfEncounter": "You have reached the start of the encounter, we cannot go back further in history.<br/><br/>Click to dismiss.",
+                "MissingInitiative": "The current phase has reset initiative, please re-roll initiative on all combatants before continueing.<br/><br/>Click to dismiss."
+            },
+            "Normal": {
+                "Name": "Normal Combat",
+                "Phases": {
+                    "1": {
+                        "Name": "Combat",
+                        "Description": "Everyone may now act out their combat turn."
+                    }
+                }
+            },
+            "Starship": {
+                "Name": "Starship Combat",
+                "Phases": {
+                    "1": {
+                        "Name": "Changing Roles",
+                        "Description": "Anyone who wishes to change starship roles, may do so now."
+                    },
+                    "2": {
+                        "Name": "Engineering",
+                        "Description": "Captains, Engineers, Magic Officers, Chief Mates and Deck Hands may choose to act during this phase."
+                    },
+                    "3": {
+                        "Name": "Piloting Check",
+                        "Description": "Pilots may now roll their piloting checks to determine this round's initiative."
+                    },
+                    "4": {
+                        "Name": "Helm",
+                        "Description": "Captains, Pilots, Science Officers, Chief Mates and Deck Hands may choose to act during this phase."
+                    },
+                    "5": {
+                        "Name": "Gunnery",
+                        "Description": "Captains, and Gunners may choose to act during this phase."
+                    },
+                    "6": {
+                        "Name": "Damage",
+                        "Description": "Everyone now processes their received damages, critical thresholds, etc."
+                    }
+                }
+            },
+            "VehicleChase": {
+                "Name": "Vehicle Chase",
+                "Phases": {
+                    "1": {
+                        "Name": "Pilot Actions",
+                        "Description": "Drivers may now decide their maneuvers."
+                    },
+                    "2": {
+                        "Name": "Chase Progress",
+                        "Description": "The GM will now process the chase progress results."
+                    },
+                    "3": {
+                        "Name": "Combat",
+                        "Description": "Everyone may now act out their combat turn."
+                    }
+                }
+            }
+        },
         "ComingSoon": "Coming soon!",
         "ConditionsAsleep": "Asleep",
         "ConditionsBleeding": "Bleeding",
@@ -998,6 +1114,8 @@
         "SettingsAutoCollapseCardName": "Collapse Item Cards in Chat",
         "SettingsUseCustomChatCard": "Use custom Starfinder chat card?",
         "SettingsUseCustomChatCardHint": "Toggle whether to use the new custom chat cards or the original ones.",
+        "SettingsUseQuickRollAsDefault": "Use Quick roll by default?",
+        "SettingsUseQuickRollAsDefaultHint": "When clicking abilities that roll dice, the roll will act as if the Shift key was depressed by default. This will trigger a fast-forwarded roll.",
         "SettingsUseStarfinderAOETemplates": "Use Starfinder AOE templates",
         "SettingsUseStarfinderAOETemplatesHint": "Whether to use Starfinder's measurement method for AOE templates vs Foundry VTT's default method",
         "SettingsWorldSchemaVersionHint": "Records the data schema version for the Starfinder system. WARNING: Do not edit this value unless you know what you are doing!",
@@ -1388,14 +1506,15 @@
                 "Landa": "Land and air"
             }
         },
-        "WeaponCategoriesCryo": "Cryo weapons",
-        "WeaponCategoriesDisruption": "Disruption weapons",
-        "WeaponCategoriesFlame": "Flame weapons",
-        "WeaponCategoriesLaser": "Laser weapons",
-        "WeaponCategoriesPlasma": "Plasma weapons",
-        "WeaponCategoriesProjectile": "Projectile weapons",
-        "WeaponCategoriesShock": "Shock weapons",
-        "WeaponCategoriesSonic": "Sonic weapons",
+        "WeaponCategoriesCryo"         : "Cryo weapons",
+        "WeaponCategoriesDisruption"   : "Disruption weapons",
+        "WeaponCategoriesDisintegrator": "Disintigrator weapons",
+        "WeaponCategoriesFlame"        : "Flame weapons",
+        "WeaponCategoriesLaser"        : "Laser weapons",
+        "WeaponCategoriesPlasma"       : "Plasma weapons",
+        "WeaponCategoriesProjectile"   : "Projectile weapons",
+        "WeaponCategoriesShock"        : "Shock weapons",
+        "WeaponCategoriesSonic"        : "Sonic weapons",
         "WeaponCategoriesUncategorized": "Uncategorized weapons",
         "WeaponCriticalHitEffects": {
             "Arc"        : "Arc",

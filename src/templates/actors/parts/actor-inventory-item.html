@@ -11,7 +11,11 @@
                     <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
                     {{/if}}
                     {{#if item.hasDamage}}
-                    <button class="tag damage">{{localize "SFRPG.Damage"}}</button>
+                        {{#if (eq item.data.actionType "heal")}}
+                            <button class="tag healing">{{localize "SFRPG.ActionHeal"}}</button>
+                        {{else}}
+                            <button class="tag damage">{{localize "SFRPG.Damage"}}</button>
+                        {{/if}}
                     {{/if}}
                 </div>
                 {{/if}}

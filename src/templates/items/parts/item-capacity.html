@@ -16,7 +16,7 @@
     <div class="form-fields">
         <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.UsageTooltip" }}" name="data.usage.value" value="{{data.usage.value}}" data-dtype="Number" />
         <span class="sep"> / </span>
-        <select data-tippy-content="{{ localize "SFRPG.Items.Capacity.UsageValueTooltip" }}">
+        <select name="data.usage.per" data-tippy-content="{{ localize "SFRPG.Items.Capacity.UsageValueTooltip" }}">
         {{#select data.usage.per}}
             <option value=""></option>
             {{#each config.capacityUsagePer as |usage u|}}
