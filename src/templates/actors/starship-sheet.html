@@ -352,6 +352,12 @@
                         <div class="item-name flexrow rollable">
                             <div class="item-image" style="background-image: url({{item.img}})"></div>
                             <h4>{{item.name}}</h4>
+                            {{#if ../../owner}}
+                            <div class="item-action flexcol">
+                                <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
+                                <button class="tag damage">{{localize "SFRPG.Damage"}}</button>
+                            </div>
+                            {{/if}}
                         </div>
 
                         {{#if ../../owner}}

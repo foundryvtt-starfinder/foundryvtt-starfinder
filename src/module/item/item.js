@@ -635,13 +635,14 @@ export class ItemSFRPG extends Item {
      * @param {Object} options Options to pass to the attack roll
      */
     async _rollStarshipAttack(options = {}) {
-        const itemData = this.data.data;
-        const actorData = this.actor.data.data;
+        const parts = ["@weapon.data.attackBonus"];
 
-        const parts = ["@item.data.attackBonus"];
+        const rollData = 
+        {
+            ship: duplicate(this.actor.data),
+            weapon: duplicate(this.data)
+        };
 
-        const rollData = duplicate(actorData);
-        rollData.item = itemData;
         const title = `${this.name} - Attack Roll`;
 
         return await DiceSFRPG.d20Roll({
@@ -773,7 +774,6 @@ export class ItemSFRPG extends Item {
 
     async _rollStarshipDamage({ event } = {}) {
         const itemData = this.data.data;
-        const actorData = this.actor.data.data;
 
         if (!this.hasDamage) {
             throw new Error("you may not make a Damage Roll with this item");
@@ -781,9 +781,11 @@ export class ItemSFRPG extends Item {
 
         const parts = itemData.damage.parts.map(d => d[0]);
 
-        const rollData = mergeObject(duplicate(actorData), {
-            item: itemData
-        });
+        const rollData = 
+        {
+            ship: duplicate(this.actor.data),
+            weapon: duplicate(this.data)
+        };
 
         const title = `${this.name} - Damage Roll`;
 
