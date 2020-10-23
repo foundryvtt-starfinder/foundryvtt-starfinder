@@ -101,7 +101,7 @@ export class CombatSFRPG extends Combat {
         const players = game.users.players;
         const settings = game.settings.get("core", Combat.CONFIG_SETTING);
         const turns = combatants.map(c => this._prepareCombatant(c, scene, players, settings)).sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.data.turn = Math.clamped(this.data.turn, 0, turns.length-1);
+        this.data.turn = Math.clamped(this.data.turn, -1, turns.length-1);
         return this.turns = turns;
     }
 
@@ -280,6 +280,10 @@ export class CombatSFRPG extends Combat {
         }
 
         await this._notifyBeforeUpdate(eventData);
+
+        if (!newPhase.iterateTurns) {
+            nextTurn = -1;
+        }
 
         const updateData = {
             round: nextRound,
@@ -540,6 +544,64 @@ export class CombatSFRPG extends Combat {
         }
         
         return Roll.create(formula, rollData).roll();
+    }
+
+    async rollInitiative(ids, {formula=null, updateTurn=true, messageOptions={}}={}) {
+  
+      // Structure input data
+      ids = typeof ids === "string" ? [ids] : ids;
+      const currentId = this.combatant?._id;
+  
+      // Iterate over Combatants, performing an initiative roll for each
+      const [updates, messages] = ids.reduce((results, id, i) => {
+        let [updates, messages] = results;
+  
+        // Get Combatant data
+        const c = this.getCombatant(id);
+        if ( !c || !c.owner ) return results;
+  
+        // Roll initiative
+        const cf = formula || this._getInitiativeFormula(c);
+        const roll = this._getInitiativeRoll(c, cf);
+        updates.push({_id: id, initiative: roll.total});
+  
+        // Determine the roll mode
+        let rollMode = messageOptions.rollMode || game.settings.get("core", "rollMode");
+        if (( c.token.hidden || c.hidden ) && (rollMode === "roll") ) rollMode = "gmroll";
+  
+        // Construct chat message data
+        let messageData = mergeObject({
+          speaker: {
+            scene: canvas.scene._id,
+            actor: c.actor ? c.actor._id : null,
+            token: c.token._id,
+            alias: c.token.name
+          },
+          flavor: `${c.token.name} rolls for Initiative!`,
+          flags: {"core.initiativeRoll": true}
+        }, messageOptions);
+        const chatData = roll.toMessage(messageData, {rollMode, create:false});
+        if ( i > 0 ) chatData.sound = null;   // Only play 1 sound for the whole set
+        messages.push(chatData);
+  
+        // Return the Roll and the chat data
+        return results;
+      }, [[], []]);
+      if ( !updates.length ) return this;
+  
+      // Update multiple combatants
+      await this.updateEmbeddedEntity("Combatant", updates);
+  
+      // Ensure the turn order remains with the same combatant
+      if ( updateTurn && currentId ) {
+        await this.update({turn: this.turns.findIndex(t => t._id === currentId)});
+      }
+  
+      // Create multiple chat messages
+      await CONFIG.ChatMessage.entityClass.create(messages);
+  
+      // Return the updated Combat
+      return this;
     }
 
     _getPilotForStarship(starshipActor) {
