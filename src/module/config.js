@@ -1497,3 +1497,9 @@ SFRPG.containableTypes = {
     "augmentation" : "SFRPG.Items.Categories.Augmentations",
     "shield"       : "SFRPG.Items.Categories.Shields"
 };
+
+SFRPG.combatTypes = [
+    "normal",
+    "starship",
+    "vehicleChase"
+];

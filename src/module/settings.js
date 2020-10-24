@@ -1,21 +1,23 @@
+import { SFRPG } from "./config.js";
+
 export const registerSystemSettings = function () {
     game.settings.register("sfrpg", "diagonalMovement", {
-        name: "SFRPG.SFRPGDiagN",
-        hint: "SFRPG.SFRPGDiagL",
+        name: "SFRPG.Settings.DiagonalMovementRule.Name",
+        hint: "SFRPG.Settings.DiagonalMovementRule.Hint",
         scope: "world",
         config: true,
         default: "5105",
         type: String,
         choices: {
-            "5105": "SFRPG.SFRPGDiagCore",
-            "555": "SFRPG.SFRPGOptional"
+            "5105": "SFRPG.Settings.DiagonalMovementRule.Values.Core",
+            "555": "SFRPG.Settings.DiagonalMovementRule.Values.Optional"
         },
         onChange: rule => canvas.grid.diagonalRule = rule
     });
 
     game.settings.register("sfrpg", "disableExperienceTracking", {
-        name: "SFRPG.SFRPGNoExpN",
-        hint: "SFRPG.SFRPGNoExpL",
+        name: "SFRPG.Settings.ExperienceTracking.Name",
+        hint: "SFRPG.Settings.ExperienceTracking.Hint",
         scope: "world",
         config: true,
         default: false,
@@ -23,8 +25,8 @@ export const registerSystemSettings = function () {
     });
 
     game.settings.register("sfrpg", "useAdvantageDisadvantage", {
-        name: "SFRPG.SFRPGUseAdvantageDisadvantage",
-        hint: "SFRPG.SFRPGUseAdvantageDisadvantageHint",
+        name: "SFRPG.Settings.Advantage.Name",
+        hint: "SFRPG.Settings.Advantage.Hint",
         scope: "world",
         config: true,
         default: false,
@@ -32,8 +34,8 @@ export const registerSystemSettings = function () {
     });
 
     game.settings.register("sfrpg", "autoCollapseItemCards", {
-        name: "SFRPG.SettingsAutoCollapseCardName",
-        hint: "SFRPG.SettingsAutoCollapseCardHint",
+        name: "SFRPG.Settings.AutoCollapseCard.Name",
+        hint: "SFRPG.Settings.AutoCollapseCard.Hint",
         scope: "client",
         config: true,
         default: false,
@@ -44,8 +46,8 @@ export const registerSystemSettings = function () {
     });
 
     game.settings.register("sfrpg", "worldSchemaVersion", {
-        name: "SFRPG.SettingsWorldSchemaVersionName",
-        hint: "SFRPG.SettingsWorldSchemaVersionHint",
+        name: "SFRPG.Settings.WorldSchemaVersion.Name",
+        hint: "SFRPG.Settings.WorldSchemaVersion.Hint",
         scope: "world",
         config: false,
         default: 0,
@@ -53,17 +55,17 @@ export const registerSystemSettings = function () {
     });
 
     game.settings.register("sfrpg", "useCustomChatCard", {
-        name: "SFRPG.SettingsUseCustomChatCard",
-        hint: "SFRPG.SettingsUseCustomChatCardHint",
+        name: "SFRPG.Settings.UseCustomChatCard.Name",
+        hint: "SFRPG.Settings.UseCustomChatCard.Hint",
         scope: "world",
         config: true,
-        default: true,
+        default: false,
         type: Boolean
     });
 
     game.settings.register("sfrpg", "useStarfinderAOETemplates", {
-        name: "SFRPG.SettingsUseStarfinderAOETemplates",
-        hint: "SFRPG.SettingsUseStarfinderAOETemplatesHint",
+        name: "SFRPG.Settings.UseStarfinderAOETemplates.Name",
+        hint: "SFRPG.Settings.UseStarfinderAOETemplates.Hint",
         scope: "world",
         config: true,
         default: true,
@@ -71,11 +73,29 @@ export const registerSystemSettings = function () {
     });
 
     game.settings.register("sfrpg", "useQuickRollAsDefault", {
-        name: "SFRPG.SettingsUseQuickRollAsDefault",
-        hint: "SFRPG.SettingsUseQuickRollAsDefaultHint",
+        name: "SFRPG.Settings.UseQuickRollAsDefault.Name",
+        hint: "SFRPG.Settings.UseQuickRollAsDefault.Hint",
         scope: "world",
         config: true,
         default: false,
         type: Boolean
     });
+
+    for (let combatType of SFRPG.combatTypes) {
+        const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);
+        game.settings.register("sfrpg", `${combatType}ChatCards`, {
+            name: `SFRPG.Settings.CombatCards.${capitalizedCombatType}Name`,
+            hint: `SFRPG.Settings.CombatCards.${capitalizedCombatType}Hint`,
+            scope: "world",
+            config: true,
+            default: "enabled",
+            type: String,
+            choices: {
+                "enabled": "SFRPG.Settings.CombatCards.Values.Enabled",
+                "roundsPhases": "SFRPG.Settings.CombatCards.Values.RoundsPhases",
+                "roundsOnly": "SFRPG.Settings.CombatCards.Values.OnlyRounds",
+                "disabled": "SFRPG.Settings.CombatCards.Values.Disabled"
+            },
+        });
+    }
 };

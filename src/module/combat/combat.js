@@ -320,17 +320,20 @@ export class CombatSFRPG extends Combat {
         //console.log([isNewRound, isNewPhase, isNewTurn]);
         //console.log([this.round, this.data.flags.sfrpg.phase, this.turn]);
 
-        if (eventData.isNewRound) {
+        const combatType = this.getCombatType();
+        const combatChatSetting = game.settings.get('sfrpg', `${combatType}ChatCards`);
+
+        if (eventData.isNewRound && combatChatSetting !== "disabled") {
             //console.log(`Starting new round! New phase is ${eventData.newPhase.name}, it is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewRoundChatCard(eventData);
         }
         
-        if (eventData.isNewPhase) {
+        if (eventData.isNewPhase && (combatChatSetting === "enabled" || combatChatSetting === "roundsPhases")) {
             //console.log(`Starting ${eventData.newPhase.name} phase! It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewPhaseChatCard(eventData);
         }
         
-        if (eventData.newCombatant) {
+        if (eventData.newCombatant && combatChatSetting === "enabled") {
             //console.log(`[${eventData.newPhase.name}] It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewTurnChatCard(eventData);
         }
