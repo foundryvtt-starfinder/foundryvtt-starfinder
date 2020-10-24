@@ -36,12 +36,12 @@ export default function (engine) {
             } else {
                 mod = computedBonus;
             }
-            computedBonus = Math.abs(mod);
+            computedBonus = mod;
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: bonus.type.capitalize(),
-                    mod: (-computedBonus).signedString(),
+                    mod: computedBonus.signedString(),
                     source: bonus.name
                 }));
             }
@@ -83,18 +83,18 @@ export default function (engine) {
             if (armor?.data?.armor?.acp) {
                 let acp = parseInt(armor.data.armor.acp);
                 if (!Number.isNaN(acp)) {
-                    skill.mod -= Math.abs(acp);
+                    skill.mod += acp;
 
                     skill.tooltip.push(game.i18n.format("SFRPG.ACPTooltip", {
                         type: "Armor",
-                        mod: "-" + Math.abs(acp),
+                        mod: acp.signedString(),
                         source: armor.name
                     }));
                 }
             }
 
             if (skillModifier.tooltip.length !== 0) {
-                skill.mod -= mod;
+                skill.mod += mod;
                 skill.tooltip = skill.tooltip.concat(skillModifier.tooltip);
             }
 
