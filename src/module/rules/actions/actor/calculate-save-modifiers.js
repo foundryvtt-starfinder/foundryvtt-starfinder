@@ -36,12 +36,12 @@ export default function (engine) {
             let saveMod = 0;
             switch (bonus.valueAffected) {
                 case "highest":
-                    if (save.bonus === highest.bonus) {
+                    if (item.bonus === highest.bonus) {
                         saveMod = computedBonus;
                     }
                     break;
                 case "lowest":
-                    if (save.bonus === lowest.bonus) {
+                    if (item.bonus === lowest.bonus) {
                         saveMod = computedBonus;
                     }
                     break;
