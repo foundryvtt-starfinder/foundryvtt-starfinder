@@ -51,8 +51,9 @@ import calculateAbilityCheckModifiers from './rules/actions/actor/calculate-abil
 import calculateEncumbrance from './rules/actions/actor/calculate-encumbrance.js';
 // Character rules
 import calculateHitpoints from './rules/actions/actor/character/calculate-hitpoints.js';
-import calculateStamina from './rules/actions/actor/character/calculate-stamina.js';
 import calculateResolve from './rules/actions/actor/character/calculate-resolve.js';
+import calculateStamina from './rules/actions/actor/character/calculate-stamina.js';
+import calculateTraits from './rules/actions/actor/calculate-traits.js';
 // Drone rules
 import calculateDroneChassis from './rules/actions/actor/drone/calculate-drone-chassis.js';
 import calculateDroneDefense from './rules/actions/actor/drone/calculate-drone-defense.js';
@@ -95,8 +96,9 @@ export default function (engine) {
     calculateEncumbrance(engine);
     // Character actions
     calculateHitpoints(engine);
-    calculateStamina(engine);
     calculateResolve(engine);
+    calculateStamina(engine);
+    calculateTraits(engine);
     // Starship actions
     calculateShipArmorClass(engine);
     calculateShipCritThreshold(engine);
@@ -142,6 +144,7 @@ export default function (engine) {
                 then: [
                     "clearTooltips",
                     "calculateCharacterLevel",
+                    "calculateTraits",
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseArmorClass",

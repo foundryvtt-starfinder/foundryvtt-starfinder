@@ -100,34 +100,37 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Item attributes
         let itemData = this.item.data.data;
         data.placeholders = {};
-        if (itemData.attributes) {
-            let itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
-            let sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
-            let dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
 
-            data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, 5 + itemData.attributes.sturdy ? 2 * itemLevel : itemLevel);
-            data.placeholders.maxHitpoints = this.parseNumber(itemData.attributes.hp?.max, (itemData.attributes.sturdy ? 15 + 3 * itemLevel : 5 + itemLevel) + (itemLevel >= 15 ? 30 : 0));
-            data.placeholders.armorClass = this.parseNumber(itemData.attributes.ac, 10 + sizeModifier + dexterityModifier);
-            data.placeholders.dexterityModifier = dexterityModifier;
-            data.placeholders.sizeModifier = sizeModifier;
+        if (data.isPhysicalItem) {
+            if (itemData.attributes) {
+                let itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
+                let sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
+                let dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
 
-            data.placeholders.savingThrow = {};
-            data.placeholders.savingThrow.formula = `@itemLevel + @abilities.dex.mod`;
-            data.placeholders.savingThrow.value = this._computeSavingThrowValue(Math.floor(itemLevel / 2), data.placeholders.savingThrow.formula);
-        } else {
-            let itemLevel = this.parseNumber(itemData.level, 1);
-            let sizeModifier = 0;
-            let dexterityModifier = -5;
+                data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, 5 + itemData.attributes.sturdy ? 2 * itemLevel : itemLevel);
+                data.placeholders.maxHitpoints = this.parseNumber(itemData.attributes.hp?.max, (itemData.attributes.sturdy ? 15 + 3 * itemLevel : 5 + itemLevel) + (itemLevel >= 15 ? 30 : 0));
+                data.placeholders.armorClass = this.parseNumber(itemData.attributes.ac, 10 + sizeModifier + dexterityModifier);
+                data.placeholders.dexterityModifier = dexterityModifier;
+                data.placeholders.sizeModifier = sizeModifier;
 
-            data.placeholders.hardness = 5 + itemLevel;
-            data.placeholders.maxHitpoints = (5 + itemLevel) + (itemLevel >= 15 ? 30 : 0);
-            data.placeholders.armorClass = 10 + sizeModifier + dexterityModifier;
-            data.placeholders.dexterityModifier = dexterityModifier;
-            data.placeholders.sizeModifier = sizeModifier;
+                data.placeholders.savingThrow = {};
+                data.placeholders.savingThrow.formula = `@itemLevel + @abilities.dex.mod`;
+                data.placeholders.savingThrow.value = this._computeSavingThrowValue(Math.floor(itemLevel / 2), data.placeholders.savingThrow.formula);
+            } else {
+                let itemLevel = this.parseNumber(itemData.level, 1);
+                let sizeModifier = 0;
+                let dexterityModifier = -5;
 
-            data.placeholders.savingThrow = {};
-            data.placeholders.savingThrow.formula = `@itemLevel + @abilities.dex.mod`;
-            data.placeholders.savingThrow.value = this._computeSavingThrowValue(Math.floor(itemLevel / 2), data.placeholders.savingThrow.formula);
+                data.placeholders.hardness = 5 + itemLevel;
+                data.placeholders.maxHitpoints = (5 + itemLevel) + (itemLevel >= 15 ? 30 : 0);
+                data.placeholders.armorClass = 10 + sizeModifier + dexterityModifier;
+                data.placeholders.dexterityModifier = dexterityModifier;
+                data.placeholders.sizeModifier = sizeModifier;
+
+                data.placeholders.savingThrow = {};
+                data.placeholders.savingThrow.formula = `@itemLevel + @abilities.dex.mod`;
+                data.placeholders.savingThrow.value = this._computeSavingThrowValue(Math.floor(itemLevel / 2), data.placeholders.savingThrow.formula);
+            }
         }
 
         data.selectedSize = (itemData.attributes && itemData.attributes.size) ? itemData.attributes.size : "medium";
