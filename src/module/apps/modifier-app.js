@@ -105,6 +105,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                     }
                     break;
                 case SFRPGEffectType.SKILL:
+                case SFRPGEffectType.SKILL_RANKS:
                     target.prop('disabled', false);
                     target.find('option').remove();
                     for (const skills of Object.entries(CONFIG.SFRPG.skills)) {
@@ -159,6 +160,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                 valueAffectedElement.prop('disabled', false);
                 break;
             case SFRPGEffectType.SKILL:
+            case SFRPGEffectType.SKILL_RANKS:
                 valueAffectedElement.prop('disabled', false);
                 break;
             case SFRPGEffectType.WEAPON_ATTACKS:

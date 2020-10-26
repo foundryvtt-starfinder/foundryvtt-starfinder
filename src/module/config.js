@@ -1146,6 +1146,8 @@ SFRPG.modifierEffectTypes = {
     "ability-checks": "SFRPG.ModifierEffectTypeAbilityChecks",
     "skill": "SFRPG.ModifierEffectTypeSkill",
     "all-skills": "SFRPG.ModifierEffectTypeAllSkills",
+    "skill-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Skillpoints",
+    "skill-ranks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SkillRanks",
     "saves": "SFRPG.ModifierEffectTypeSaves",
     "save": "SFRPG.ModifierEffectTypeSave",
     "ranged-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackRolls",

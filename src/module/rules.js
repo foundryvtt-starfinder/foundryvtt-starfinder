@@ -52,6 +52,7 @@ import calculateEncumbrance from './rules/actions/actor/calculate-encumbrance.js
 // Character rules
 import calculateHitpoints from './rules/actions/actor/character/calculate-hitpoints.js';
 import calculateResolve from './rules/actions/actor/character/calculate-resolve.js';
+import calculateSkillpoints from './rules/actions/actor/character/calculate-skillpoints.js';
 import calculateStamina from './rules/actions/actor/character/calculate-stamina.js';
 import calculateTraits from './rules/actions/actor/calculate-traits.js';
 // Drone rules
@@ -97,6 +98,7 @@ export default function (engine) {
     // Character actions
     calculateHitpoints(engine);
     calculateResolve(engine);
+    calculateSkillpoints(engine);
     calculateStamina(engine);
     calculateTraits(engine);
     // Starship actions
@@ -157,6 +159,7 @@ export default function (engine) {
                     "calculateCMD",
                     { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
                     "calculateXP",
+                    { closure: "calculateSkillpoints", stackModifiers: "stackModifiers" },
                     "calculateBaseSkills",
                     { closure: "calculateSkillArmorCheckPenalty", stackModifiers: "stackModifiers" },
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },

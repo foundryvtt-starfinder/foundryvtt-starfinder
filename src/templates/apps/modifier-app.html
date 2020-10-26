@@ -53,6 +53,10 @@
             {{#each config.skills as |skill key|}}
             <option value="{{key}}">{{skill}}</option>
             {{/each}}
+            {{else if (eq modifier.effectType "skill-ranks")}}
+            {{#each config.skills as |skill key|}}
+            <option value="{{key}}">{{skill}}</option>
+            {{/each}}
             {{else if (eq modifier.effectType "ability-check")}}
             {{#each config.abilities as |ability abl|}}
             <option value="{{abl}}">{{ability}}</option>

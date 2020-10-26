@@ -93,6 +93,8 @@
                             {{lookup ../../config.abilities modifier.valueAffected}}
                         {{else if (eq modifier.effectType "skill")}}
                             {{lookup ../../config.skills modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "skill-ranks")}}
+                            {{lookup ../../config.skills modifier.valueAffected}}
                         {{else if (eq modifier.effectType "save")}}
                             {{#if (eq modifier.valueAffected "highest")}}
                                 {{localize "SFRPG.ModifierSaveHighest"}}
