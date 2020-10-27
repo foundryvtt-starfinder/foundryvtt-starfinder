@@ -26,7 +26,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         data.labels["tier"] = tier >= 1 ? String(tier) : tiers[tier] || 1;
 
         this._prepareStarshipSystems(data.actor.data.details.systems);
-        this._processFlags(data, data.actor.flags);
+        this._getCrewData(data);
 
         return data;
     }
@@ -65,55 +65,114 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     /**
      * Process any flags that the actor might have that would affect the sheet .
      * 
-     * @param {Obejct} data The data object to update with any flag data.
-     * @param {Object} flags The set of flags for the Actor
+     * @param {Object} data The data object to update with any crew data.
      */
-    _processFlags(data, flags) {
-        let sfrpg = flags["sfrpg"];
+    async _getCrewData(data) {
+        let crewData = this.actor.data.data.crew;
 
-        if (!sfrpg) sfrpg = {};
-        if (!sfrpg.shipsCrew) sfrpg.shipsCrew = {};
-        if (!sfrpg.shipsCrew.members) sfrpg.shipsCrew.members = [];
-        
-        // TODO: There are two more roles added in the Character Operations Manual that need to be added.
-        const crew = {
-            pilot: { label: "Pilot", actors: [], dataset: { type: "shipsCrew", role: "pilot" }},
-            captain: { label: "Captain", actors: [], dataset: { type: "shipsCrew", role: "captain" }},
-            gunners: { label: "Gunners", actors: [], dataset: { type: "shipsCrew", role: "gunners" }},
-            engineers: { label: "Engineers", actors: [], dataset: { type: "shipsCrew", role: "engineers" }},
-            scienceOfficers: { label: "Science Officers", actors: [], dataset: { type: "shipsCrew", role: "scienceOfficers" }},
-            passengers: { label: "Passengers", actors: [], dataset: { type: "shipsCrew", role: "passengers" }}
+        if (!crewData || this.actor.data?.flags?.shipsCrew) {
+            crewData = await this._processFlags(data, data.actor.flags);
         }
+        
+        const crew = {
+            captain: { label: "Captain", actors: [], dataset: { type: "shipsCrew", role: "captain" }},
+            pilot: { label: "Pilot", actors: [], dataset: { type: "shipsCrew", role: "pilot" }},
+            gunners: { label: "Gunners", actors: [], dataset: { type: "shipsCrew", role: "gunner" }},
+            engineers: { label: "Engineers", actors: [], dataset: { type: "shipsCrew", role: "engineer" }},
+            scienceOfficers: { label: "Science Officers", actors: [], dataset: { type: "shipsCrew", role: "scienceOfficer" }},
+            chiefMates: { label: "Chief Mates", actors: [], dataset: { type: "shipsCrew", role: "chiefMate" }},
+            magicOfficers: { label: "Magic Officers", actors: [], dataset: { type: "shipsCrew", role: "magicOfficer" }},
+            passengers: { label: "Passengers", actors: [], dataset: { type: "shipsCrew", role: "passenger" }}
+        };
 
-        let [captian, engineers, gunners, pilot, scienceOfficers, passengers] = sfrpg.shipsCrew.members.reduce((arr, id) => {
-            let actor = game.actors.get(id);
-            
-            if (!actor) return arr;
-
-            let crewMember = actor.getFlag("sfrpg", "crewMember") || null;
-            if (!crewMember) return arr;
-
-            actor.data.img = actor.data.img || DEFAULT_TOKEN;
-
-            if (crewMember.role === "captain") arr[0].push(actor);
-            else if (crewMember.role === "engineers") arr[1].push(actor);
-            else if (crewMember.role === "gunners") arr[2].push(actor);
-            else if (crewMember.role === "pilot") arr[3].push(actor);
-            else if (crewMember.role === "scienceOfficers") arr[4].push(actor);
-            else if (crewMember.role === "passengers") arr[5].push(actor);
-
-            return arr;
-
-        }, [[],[],[],[],[],[]]);
-
-        crew.captain.actors = captian;
-        crew.engineers.actors = engineers;
-        crew.gunners.actors = gunners;
-        crew.pilot.actors = pilot;
-        crew.scienceOfficers.actors = scienceOfficers;
-        crew.passengers.actors = passengers;
+        crew.captain.actors = crewData.captain.actors.map(crewId => game.actors.get(crewId));
+        crew.chiefMates.actors = crewData.chiefMate.actors.map(crewId => game.actors.get(crewId));
+        crew.engineers.actors = crewData.engineer.actors.map(crewId => game.actors.get(crewId));
+        crew.gunners.actors = crewData.gunner.actors.map(crewId => game.actors.get(crewId));
+        crew.magicOfficers.actors = crewData.magicOfficer.actors.map(crewId => game.actors.get(crewId));
+        crew.passengers.actors = crewData.passenger.actors.map(crewId => game.actors.get(crewId));
+        crew.pilot.actors = crewData.pilot.actors.map(crewId => game.actors.get(crewId));
+        crew.scienceOfficers.actors = crewData.scienceOfficer.actors.map(crewId => game.actors.get(crewId));
 
         data.crew = Object.values(crew);
+    }
+
+    /**
+     * Process any flags that the actor might have that would affect the sheet .
+     * 
+     * @param {Object} data The data object to update with any flag data.
+     * @param {Object} flags The set of flags for the Actor
+     */
+    async _processFlags(data, flags) {
+        let newCrew = {
+            captain: {
+                limit: 1,
+                actors: []
+            },
+            chiefMate: {
+                limit: -1,
+                actors: []
+            },
+            engineer: {
+                limit: -1,
+                actors: []
+            },
+            gunner: {
+                limit: 0,
+                actors: []
+            },
+            magicOfficer: {
+                limit: -1,
+                actors: []
+            },
+            passenger: {
+                limit: -1,
+                actors: []
+            },
+            pilot: {
+                limit: 1,
+                actors: []
+            },
+            scienceOfficer: {
+                limit: -1,
+                actors: []
+            }
+        };
+
+        if (!flags?.sfrpg?.shipsCrew?.members) {
+            await this.actor.update({
+                "data.crew": newCrew
+            });
+            return newCrew;
+        }
+
+        for (const actorId of flags.sfrpg.shipsCrew.members) {
+            const actor = game.actors.get(actorId);
+            if (!actor) continue;
+
+            let crewMember = actor.getFlag("sfrpg", "crewMember") || null;
+            if (!crewMember) continue;
+
+            if (crewMember.role === "captain") newCrew.captain.actors.push(actorId);
+            else if (crewMember.role === "engineers") newCrew.engineer.actors.push(actorId);
+            else if (crewMember.role === "gunners") newCrew.gunner.actors.push(actorId);
+            else if (crewMember.role === "pilot") newCrew.pilot.actors.push(actorId);
+            else if (crewMember.role === "scienceOfficers") newCrew.scienceOfficer.actors.push(actorId);
+            else if (crewMember.role === "passengers") newCrew.passenger.actors.push(actorId);
+        }
+
+        await this.actor.update({
+            "data.crew": newCrew
+        });
+
+        let cleanflags = duplicate(this.actor.data.flags);
+        delete cleanflags.sfrpg.shipsCrew;
+
+        await this.actor.update({
+            "flags.sfrpg": cleanflags
+        }, {recursive: false});
+        
+        return this.actor.data.data.crew;
     }
 
     /**
@@ -124,7 +183,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      */
     _prepareItems(data) {
         const arcs = {
-            foward: { label: "Forward", items: [], dataset: { type: "starshipWeapon" }},
+            forward: { label: "Forward", items: [], dataset: { type: "starshipWeapon" }},
             starboard: { label: "Starboard", items: [], dataset: { type: "starshipWeapon" }},
             aft: { label: "Aft", items: [], dataset: { type: "starshipWeapon" }},
             port: { label: "Port", items: [], dataset: { type: "starshipWeapon" }},
@@ -145,7 +204,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             return arr;
         }, [[], [], [], [], [], []]);
 
-        arcs.foward.items = forward;
+        arcs.forward.items = forward;
         arcs.starboard.items = starboard;
         arcs.aft.items = aft;
         arcs.port.items = port;
@@ -165,7 +224,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         if (!this.options.editable) return;
 
-        //html.find('.crew-name').click(this._onChangeCrewRole.bind(this));
         html.find('.crew-delete').click(this._onRemoveFromCrew.bind(this));
 
         let handler = ev => this._onDragCrewStart(ev);
@@ -279,46 +337,30 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         $(event.target).css('background', '');
 
-        // let data;
-        // try {
-        //     data = JSON.parse(event.dataTransfer.getData('text/plain'));
-        //     // Item's should have already been handled by the base class. 
-        //     // We only want to continue if there is an Actor being dropped
-        //     // on the sheet.
-            
-        //     if (data.type !== "Actor") return;
-        // } catch (err) {
-        //     return false;
-        // }
+        const targetRole = event.target.dataset.role;
 
         if (!data.id) return false;
 
-        let c = this.actor.getFlag("sfrpg","shipsCrew");
-        let crew;
+        const crew = duplicate(this.actor.data.data.crew);
+        const crewRole = crew[targetRole];
+        const oldRole = this.actor.getCrewRoleForActor(data.id);
 
-        if (c) crew = duplicate(c);
-        else crew = {
-            members: []
-        };
+        if (crewRole.limit === -1 || crewRole.actors.length < crewRole.limit) {
+            crewRole.actors.push(data.id);
 
-        if (!crew.members) {
-            crew.members = [data.id];
-        } else if (!crew.members.includes(data.id)) {
-            crew.members.push(data.id);
+            if (oldRole) {
+                const originalRole = crew[oldRole];
+                originalRole.actors = originalRole.actors.filter(x => x != data.id);
+            }
+    
+            await this.actor.update({
+                "data.crew": crew
+            }).then(this.render(false));
+        } else {
+            ui.notifications.error(`You have reached the maximum amount of characters allowed for the role of ${targetRole}.`);
         }
-        
-        let actor = game.actors.get(data.id);
 
-        if (!actor) return false;
-
-        let role = event.target.dataset.role;
-
-        await actor.setCrewMemberRole(this.actor.id, role);
-        this.actor.update({
-            "flags.sfrpg.shipsCrew": crew
-        }).then(this.render(false));
-
-        return false;
+        return true;
     }
 
     /**
@@ -367,20 +409,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     }
 
     /**
-     * Handles updating this crew's role on the ship.
-     * 
-     * @param {Event} event The originating click event
-     */
-    async _onChangeCrewRole(event) {
-        event.preventDefault();
-        
-        const actorId = event.currentTarget.parentElement.dataset.actorId;
-        const actor = game.actors.get(actorId);
-
-        await actor.setCrewMemberRole(this.actor.id);        
-    }
-
-    /**
      * Remove an actor from the crew.
      * 
      * @param {Event} event The originating click event
@@ -389,17 +417,14 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         event.preventDefault();
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
-        const actor = game.actors.get(actorId);
-
-        await actor.removeFromCrew();
-        
-        let shipsCrew = this.actor.getFlag('sfrpg', 'shipsCrew');
-
-        if (!shipsCrew) return;
-        
-        let updateData = shipsCrew.members.filter((val) => val !== actor.id);
-
-        await this.actor.update({'flags.sfrpg.shipsCrew.members': updateData});
+        const role = this.actor.getCrewRoleForActor(actorId);
+        if (role) {
+            const crewData = duplicate(this.actor.data.data.crew);
+            crewData[role].actors = crewData[role].actors.filter(x => x !== actorId);
+            await this.actor.update({
+                "data.crew": crewData
+            });
+        }
     }
 
     /**

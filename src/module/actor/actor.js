@@ -777,4 +777,44 @@ export class ActorSFRPG extends Actor {
             updateItems: updateItems
         }
     }
+
+    /** Crewed actor functionality */
+    getCrewRoleForActor(actorId) {
+        const acceptedActorTypes = ["starship", "vehicle"];
+        if (!acceptedActorTypes.includes(this.data.type)) {
+            console.log(`getCrewRoleForActor(${actorId}) called on an actor (${this.data._id}) of type ${this.data.type}, which is not supported!`);
+            console.trace();
+            return null;
+        }
+
+        if (!this.data?.data?.crew) {
+            return null;
+        }
+
+        for (const [role, entry] of Object.entries(this.data.data.crew)) {
+            if (entry.actors.includes(actorId)) {
+                return role;
+            }
+        }
+        return null;
+    }
+
+    getActorIdsForCrewRole(role) {
+        const acceptedActorTypes = ["starship", "vehicle"];
+        if (!acceptedActorTypes.includes(this.data.type)) {
+            console.log(`getActorIdsForCrewRole(${role}) called on an actor (${this.data._id}) of type ${this.data.type}, which is not supported!`);
+            console.trace();
+            return null;
+        }
+
+        if (!this.data?.data?.crew) {
+            return null;
+        }
+
+        if (!(role in this.data.data.crew)) {
+            return null;
+        }
+
+        return duplicate(this.data.data.crew[role]);
+    }
 }
