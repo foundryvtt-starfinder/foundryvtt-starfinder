@@ -608,19 +608,12 @@ export class CombatSFRPG extends Combat {
     }
 
     _getPilotForStarship(starshipActor) {
-        if (!starshipActor?.data?.flags?.sfrpg?.shipsCrew?.members) {
+        const pilotIds = starshipActor.getActorIdsForCrewRole("pilot");
+        if (!pilotIds || pilotIds.length === 0) {
             return null;
         }
 
-        for (let crewId of starshipActor.data.flags.sfrpg.shipsCrew.members) {
-            let crewActor = game.actors.entries.find((x) => x._id === crewId);
-            if (crewActor) {
-                if (crewActor.data.flags.sfrpg.crewMember.role === "pilot") {
-                    return crewActor;
-                }
-            }
-        }
-        return null;
+        return game.actors.entries.find(x => x._id === pilotIds[0]);
     }
 
     _sortCombatantsAsc(a, b) {

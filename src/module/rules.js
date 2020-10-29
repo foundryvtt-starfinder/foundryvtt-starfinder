@@ -64,6 +64,8 @@ import calculateDroneMods from './rules/actions/actor/drone/calculate-drone-mods
 import calculateDroneResolve from './rules/actions/actor/drone/calculate-drone-resolve.js';
 import calculateDroneSaves from './rules/actions/actor/drone/calculate-drone-saves.js';
 import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
+// Starship rules
+import calculateStarshipFrame from './rules/actions/actor/starship/calculate-starship-frame.js'
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -110,6 +112,7 @@ export default function (engine) {
     calculateShipShields(engine);
     calculateShipSpeed(engine);
     calculateShipTargetLock(engine);
+    calculateStarshipFrame(engine);
     // Drone actions
     calculateDroneChassis(engine);
     calculateDroneDefense(engine);
@@ -173,6 +176,7 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "starship" },
                 then: [
+                    "calculateStarshipFrame",
                     "calculateShipArmorClass",
                     "calculateShipCritThreshold",
                     "calculateDrift",

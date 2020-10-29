@@ -60,6 +60,7 @@ export class ActorSFRPG extends Actor {
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
         const weapons = items.filter(item => item.type === "weapon" && item.data.equipped);
         const races = items.filter(item => item.type === "race");
+        const frames = items.filter(item => item.type === "starshipFrame");
         const classes = items.filter(item => item.type === "class" || item.type === "chassis");
         const theme = items.find(item => item.type === "theme");
         const mods = items.filter(item => item.type === "mod");
@@ -67,6 +68,7 @@ export class ActorSFRPG extends Actor {
         const asis = items.filter(item => item.type === "asi");
         game.sfrpg.engine.process("process-actors", {
             data,
+            items,
             armor,
             weapons,
             races,
@@ -77,7 +79,8 @@ export class ActorSFRPG extends Actor {
             theme,
             mods,
             armorUpgrades,
-            asis
+            asis,
+            frames
         });
     }
 

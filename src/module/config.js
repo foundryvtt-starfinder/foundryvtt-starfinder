@@ -488,7 +488,8 @@ SFRPG.starshipSizes = {
     "large": "SFRPG.SizeLarge",
     "huge": "SFRPG.SizeHuge",
     "gargantuan": "SFRPG.SizeGargantuan",
-    "colossal": "SFRPG.SizeColossal"
+    "colossal": "SFRPG.SizeColossal",
+    "superColossal": "SFRPG.ShipSystems.Size.Supercolossal"
 };
 
 SFRPG.itemSizes = {
@@ -1475,6 +1476,7 @@ SFRPG.itemTypes = {
     "race": "SFRPG.Items.Categories.Races",
     "spell": "SFRPG.Items.Categories.Spells",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
+    "starshipFrame": "SFRPG.Items.Categories.StarshipFrames",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
     "theme": "SFRPG.Items.Categories.Themes",
     "upgrade": "SFRPG.Items.Categories.ArmorUpgrades",

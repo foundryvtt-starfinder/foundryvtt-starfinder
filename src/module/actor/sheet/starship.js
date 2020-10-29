@@ -73,26 +73,26 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         if (!crewData || this.actor.data?.flags?.shipsCrew) {
             crewData = await this._processFlags(data, data.actor.flags);
         }
+
+        const captainActors = crewData.captain.actors.map(crewId => game.actors.get(crewId));
+        const chiefMateActors = crewData.chiefMate.actors.map(crewId => game.actors.get(crewId));
+        const engineerActors = crewData.engineer.actors.map(crewId => game.actors.get(crewId));
+        const gunnerActors = crewData.gunner.actors.map(crewId => game.actors.get(crewId));
+        const magicOfficerActors = crewData.magicOfficer.actors.map(crewId => game.actors.get(crewId));
+        const passengerActors = crewData.passenger.actors.map(crewId => game.actors.get(crewId));
+        const pilotActors = crewData.pilot.actors.map(crewId => game.actors.get(crewId));
+        const scienceOfficerActors = crewData.scienceOfficer.actors.map(crewId => game.actors.get(crewId));
         
         const crew = {
-            captain: { label: "Captain", actors: [], dataset: { type: "shipsCrew", role: "captain" }},
-            pilot: { label: "Pilot", actors: [], dataset: { type: "shipsCrew", role: "pilot" }},
-            gunners: { label: "Gunners", actors: [], dataset: { type: "shipsCrew", role: "gunner" }},
-            engineers: { label: "Engineers", actors: [], dataset: { type: "shipsCrew", role: "engineer" }},
-            scienceOfficers: { label: "Science Officers", actors: [], dataset: { type: "shipsCrew", role: "scienceOfficer" }},
-            chiefMates: { label: "Chief Mates", actors: [], dataset: { type: "shipsCrew", role: "chiefMate" }},
-            magicOfficers: { label: "Magic Officers", actors: [], dataset: { type: "shipsCrew", role: "magicOfficer" }},
-            passengers: { label: "Passengers", actors: [], dataset: { type: "shipsCrew", role: "passenger" }}
+            captain: { label: game.i18n.format("SFRPG.StarshipSheet.Crew.Captain") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", {"current": captainActors.length, "max": crewData.captain.limit > -1 ? crewData.captain.limit : "No limit"}), actors: captainActors, dataset: { type: "shipsCrew", role: "captain" }},
+            pilot: { label: game.i18n.format("SFRPG.StarshipSheet.Crew.Pilot") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", {"current": pilotActors.length, "max": crewData.pilot.limit > -1 ? crewData.pilot.limit : "No limit"}), actors: pilotActors, dataset: { type: "shipsCrew", role: "pilot" }},
+            gunners: { label: game.i18n.format("SFRPG.StarshipSheet.Crew.Gunners") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", {"current": gunnerActors.length, "max": crewData.gunner.limit > -1 ? crewData.gunner.limit : "No limit"}), actors: gunnerActors, dataset: { type: "shipsCrew", role: "gunner" }},
+            engineers: { label: game.i18n.format("SFRPG.StarshipSheet.Crew.Engineers") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", {"current": engineerActors.length, "max": crewData.engineer.limit > -1 ? crewData.engineer.limit : "No limit"}), actors: engineerActors, dataset: { type: "shipsCrew", role: "engineer" }},
+            scienceOfficers: { label: game.i18n.format("SFRPG.StarshipSheet.Crew.ScienceOfficers") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", {"current": scienceOfficerActors.length, "max": crewData.scienceOfficer.limit > -1 ? crewData.scienceOfficer.limit : "No limit"}), actors: scienceOfficerActors, dataset: { type: "shipsCrew", role: "scienceOfficer" }},
+            chiefMates: { label: game.i18n.format("SFRPG.StarshipSheet.Crew.ChiefMates") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", {"current": chiefMateActors.length, "max": crewData.chiefMate.limit > -1 ? crewData.chiefMate.limit : "No limit"}), actors: chiefMateActors, dataset: { type: "shipsCrew", role: "chiefMate" }},
+            magicOfficers: { label: game.i18n.format("SFRPG.StarshipSheet.Crew.MagicOfficers") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", {"current": magicOfficerActors.length, "max": crewData.magicOfficer.limit > -1 ? crewData.magicOfficer.limit : "No limit"}), actors: magicOfficerActors, dataset: { type: "shipsCrew", role: "magicOfficer" }},
+            passengers: { label: game.i18n.format("SFRPG.StarshipSheet.Crew.Passengers") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", {"current": passengerActors.length, "max": crewData.passenger.limit > -1 ? crewData.passenger.limit : "No limit"}), actors: passengerActors, dataset: { type: "shipsCrew", role: "passenger" }}
         };
-
-        crew.captain.actors = crewData.captain.actors.map(crewId => game.actors.get(crewId));
-        crew.chiefMates.actors = crewData.chiefMate.actors.map(crewId => game.actors.get(crewId));
-        crew.engineers.actors = crewData.engineer.actors.map(crewId => game.actors.get(crewId));
-        crew.gunners.actors = crewData.gunner.actors.map(crewId => game.actors.get(crewId));
-        crew.magicOfficers.actors = crewData.magicOfficer.actors.map(crewId => game.actors.get(crewId));
-        crew.passengers.actors = crewData.passenger.actors.map(crewId => game.actors.get(crewId));
-        crew.pilot.actors = crewData.pilot.actors.map(crewId => game.actors.get(crewId));
-        crew.scienceOfficers.actors = crewData.scienceOfficer.actors.map(crewId => game.actors.get(crewId));
 
         data.crew = Object.values(crew);
     }
@@ -191,18 +191,21 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             unmounted: { label: "Not Mounted", items: [], dataset: { type: "starshipWeapon" }}
         };
 
-        let [forward, starboard, aft, port, turret, unmounted] = data.items.reduce((arr, item) => {
+        let [forward, starboard, aft, port, turret, unmounted, frame] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
-            if (item.data.mount.arc === "forward") arr[0].push(item);
-            else if (item.data.mount.arc === "starboard") arr[1].push(item);
-            else if (item.data.mount.arc === "aft") arr[2].push(item);
-            else if (item.data.mount.arc === "port") arr[3].push(item);
-            else if (item.data.mount.arc === "turret") arr[4].push(item);
-            else arr[5].push(item);
+            if (item.type === "starshipFrame") arr[6].push(item);
+            else {
+                if (item.data.mount.arc === "forward") arr[0].push(item);
+                else if (item.data.mount.arc === "starboard") arr[1].push(item);
+                else if (item.data.mount.arc === "aft") arr[2].push(item);
+                else if (item.data.mount.arc === "port") arr[3].push(item);
+                else if (item.data.mount.arc === "turret") arr[4].push(item);
+                else arr[5].push(item);
+            }
 
             return arr;
-        }, [[], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], []]);
 
         arcs.forward.items = forward;
         arcs.starboard.items = starboard;
@@ -212,6 +215,15 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         arcs.unmounted.items = unmounted;
 
         data.arcs = Object.values(arcs);
+
+        const features = {
+            frame: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", {"current": frame.length}), items: [], hasActions: false, dataset: { type: "starshipFrame" } }
+        };
+        features.frame.items = frame;
+
+        data.features = Object.values(features);
+
+        data.activeFrame = frame.length > 0 ? frame[0] : null;
     }
 
     /**
@@ -275,7 +287,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         if (!this.actor.owner) return false;
         let itemData = await this._getItemDropData(event, data);
 
-        if (itemData.type !== "starshipWeapon") {
+        const acceptedItems = ["starshipFrame", "starshipWeapon"];
+        if (!acceptedItems.includes(itemData.type)) {
             let name = itemData.name;
             ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name }));
             return false;
@@ -338,8 +351,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         $(event.target).css('background', '');
 
         const targetRole = event.target.dataset.role;
-
-        if (!data.id) return false;
+        if (!targetRole || !data.id) return false;
 
         const crew = duplicate(this.actor.data.data.crew);
         const crewRole = crew[targetRole];

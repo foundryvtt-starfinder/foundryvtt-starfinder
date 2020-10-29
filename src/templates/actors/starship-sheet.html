@@ -21,7 +21,7 @@
                     <input type="text" name="data.details.model" value="{{data.details.model}}" placeholder="{{localize "SFRPG.ShipModelLabel"}}" />
                 </li>
                 <li data-tippy-content="{{localize "SFRPG.ShipFrameLabel"}}<br>@details.frame">
-                    <input type="text" name="data.details.frame" value="{{data.details.frame}}" placeholder="{{localize "SFRPG.ShipFrameLabel"}}" />
+                    {{#if activeFrame}}<span>{{activeFrame.name}}</span>{{else}}<span class="no-chassis">{{localize "SFRPG.StarshipSheet.Header.FrameMissing"}}</span>{{/if}}
                 </li>
                 <li class="flexrow" data-tippy-content="{{ localize "SFRPG.Size"}}<br>@details.size">
                     <select name="data.details.size">
@@ -94,8 +94,9 @@
 
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
-        <a class="item" data-tab="weapons">Weapons</a>
-        <a class="item" data-tab="crew">Crew</a>
+        <a class="item" data-tab="weapons">{{ localize "SFRPG.StarshipSheet.Tabs.Weapons" }}</a>
+        <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
+        <a class="item" data-tab="crew">{{ localize "SFRPG.StarshipSheet.Tabs.Crew" }}</a>
         <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
     </nav>
 
@@ -371,6 +372,11 @@
                 </ol>
                 {{/each}}
             </ol>
+        </div>
+
+        {{!-- Features Tab --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="features">
+            {{> "systems/sfrpg/templates/actors/parts/actor-features.html" sections=features noFilters=true}}
         </div>
 
         <div class="tab crew" data-group="primary" data-tab="crew">
