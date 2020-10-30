@@ -34,14 +34,6 @@ import calculateInitiativeModifiers from './rules/actions/actor/calculate-initia
 import calculateCmd from './rules/actions/actor/calculate-cmd.js';
 import calculateCmdModifiers from './rules/actions/actor/calculate-cmd-modifiers.js';
 import calculatePlayerXp from './rules/actions/actor/calculate-xp.js';
-import calculateShipArmorClass from './rules/actions/starship/calculate-ac.js';
-import calculateShipCritThreshold from './rules/actions/starship/calculate-ct.js';
-import calculateDrift from './rules/actions/starship/calculate-drift.js';
-import calculateMaxShields from './rules/actions/starship/calculate-max-shields.js';
-import calculatePower from './rules/actions/starship/calculate-power.js';
-import calculateShipShields from './rules/actions/starship/calculate-shields.js';
-import calculateShipSpeed from './rules/actions/starship/calculate-speed.js';
-import calculateShipTargetLock from './rules/actions/starship/calculate-tl.js';
 import calculateBaseSkills from './rules/actions/actor/calculate-base-skills.js';
 import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modifiers.js';
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
@@ -65,7 +57,15 @@ import calculateDroneResolve from './rules/actions/actor/drone/calculate-drone-r
 import calculateDroneSaves from './rules/actions/actor/drone/calculate-drone-saves.js';
 import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
 // Starship rules
-import calculateStarshipFrame from './rules/actions/actor/starship/calculate-starship-frame.js'
+import calculateStarshipFrame       from './rules/actions/actor/starship/calculate-starship-frame.js'
+import calculateShipArmorClass      from './rules/actions/actor/starship/calculate-starship-ac.js';
+import calculateShipCritThreshold   from './rules/actions/actor/starship/calculate-starship-ct.js';
+import calculateDrift               from './rules/actions/actor/starship/calculate-starship-drift.js';
+import calculateMaxShields          from './rules/actions/actor/starship/calculate-starship-max-shields.js';
+import calculatePower               from './rules/actions/actor/starship/calculate-starship-power.js';
+import calculateShipShields         from './rules/actions/actor/starship/calculate-starship-shields.js';
+import calculateShipSpeed           from './rules/actions/actor/starship/calculate-starship-speed.js';
+import calculateShipTargetLock      from './rules/actions/actor/starship/calculate-starship-targetlock.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
