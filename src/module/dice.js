@@ -194,9 +194,7 @@ export class DiceSFRPG {
 
                     let critRoll = criticalData.parts.filter(x => x[0].length > 0).map(x => x[0]).join("+");
                     if (critRoll.length > 0) {
-                        let finalRoll = Roll.cleanFormula(roll.formula + " + " + critRoll);
-
-                        roll = new Roll(finalRoll, data);
+                        roll = new Roll(roll.formula + " + " + critRoll, data);
                     }
                 }
             }

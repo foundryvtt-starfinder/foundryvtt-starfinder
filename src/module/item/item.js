@@ -759,6 +759,7 @@ export class ItemSFRPG extends Item {
         return await DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
+            criticalData: itemData.critical,
             actor: this.actor,
             data: rollData,
             title: title,
