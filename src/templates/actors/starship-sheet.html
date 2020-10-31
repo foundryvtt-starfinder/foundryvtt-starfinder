@@ -138,52 +138,55 @@
                 </ul>
             </div>
             <div class="flexcol">
-                <h3 class="form-header">Shields</h3>
-                <div class="form-group flexrow">
-                    <label>Total</label>
-                    <div class="form-fields multiple" data-tippy-content="Shields<br>@attributes.shields.value<br>@attributes.shields.max">
-                        <input type="text" name="data.attributes.shields.value"
-                            value="{{data.attributes.shields.value}}" data-dtype="Number" />
-                        <span class="sep"> / </span>
-                        <span>{{data.attributes.shields.max}}</span>
-                    </div>
-                </div>
+                <h3 class="form-header" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Header"}}<br>@attributes.shields.value<br>@attributes.shields.max">{{localize "SFRPG.StarshipSheet.Details.Shields.Header"}} ({{data.attributes.shields.value}} / {{data.attributes.shields.max}})</h3>
                 <ul class="attributes flexrow">
-                    <li class="attribute" data-tippy-content="Forward Shields<br>@attributes.shields.forward.value<br>@attributes.shields.forward.max">
-                        <h4 class="attribute-name box-title">Forward</h4>
+                    <li class="attribute" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Forward"}}<br>@attributes.shields.forward.value<br>@attributes.shields.forward.max">
+                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Forward"}}</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.forward.value"
                                 value="{{data.attributes.shields.forward.value}}" data-dtype="Number" />
-                            <span class="sep"> / </span>
-                            <span>{{data.attributes.shields.forward.max}}</span>
                         </div>
+                        {{#if (greaterThan data.attributes.shields.forward.value data.attributes.shields.forward.max)}}
+                        <footer class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldTooHighTooltip"}}">
+                            {{localize "SFRPG.StarshipSheet.Details.ShieldTooHigh"}}
+                        </footer>
+                        {{/if}}
                     </li>
-                    <li class="attribute" data-tippy-content="Starboard Shields<br>@attributes.shields.starboard.value<br>@attributes.shields.starboard.max">
-                        <h4 class="attribute-name box-title">Starboard</h4>
+                    <li class="attribute" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Starboard"}}<br>@attributes.shields.starboard.value<br>@attributes.shields.starboard.max">
+                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Starboard"}}</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.starboard.value"
                                 value="{{data.attributes.shields.starboard.value}}" data-dtype="Number" />
-                            <span class="sep"> / </span>
-                            <span>{{data.attributes.shields.starboard.max}}</span>
                         </div>
+                        {{#if (greaterThan data.attributes.shields.starboard.value data.attributes.shields.starboard.max)}}
+                        <footer class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldTooHighTooltip"}}">
+                            {{localize "SFRPG.StarshipSheet.Details.ShieldTooHigh"}}
+                        </footer>
+                        {{/if}}
                     </li>
-                    <li class="attribute" data-tippy-content="Aft Shields<br>@attributes.shields.aft.value<br>@attributes.shields.aft.max">
-                        <h4 class="attribute-name box-title">Aft</h4>
+                    <li class="attribute" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Aft"}}<br>@attributes.shields.aft.value<br>@attributes.shields.aft.max">
+                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Aft"}}</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.aft.value"
                                 value="{{data.attributes.shields.aft.value}}" data-dtype="Number" />
-                            <span class="sep"> / </span>
-                            <span>{{data.attributes.shields.aft.max}}</span>
                         </div>
+                        {{#if (greaterThan data.attributes.shields.aft.value data.attributes.shields.aft.max)}}
+                        <footer class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldTooHighTooltip"}}">
+                            {{localize "SFRPG.StarshipSheet.Details.ShieldTooHigh"}}
+                        </footer>
+                        {{/if}}
                     </li>
-                    <li class="attribute" data-tippy-content="Port Shields<br>@attributes.shields.port.value<br>@attributes.shields.port.max">
-                        <h4 class="attribute-name box-title">Port</h4>
+                    <li class="attribute" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Port"}}<br>@attributes.shields.port.value<br>@attributes.shields.port.max">
+                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Port"}}</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.port.value"
                                 value="{{data.attributes.shields.port.value}}" data-dtype="Number" />
-                            <span class="sep"> / </span>
-                            <span>{{data.attributes.shields.port.max}}</span>
                         </div>
+                        {{#if (greaterThan data.attributes.shields.port.value data.attributes.shields.port.max)}}
+                        <footer class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldTooHighTooltip"}}">
+                            {{localize "SFRPG.StarshipSheet.Details.ShieldTooHigh"}}
+                        </footer>
+                        {{/if}}
                     </li>
                 </ul>
             </div>
