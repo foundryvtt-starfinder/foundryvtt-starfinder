@@ -318,11 +318,11 @@
         <div class="tab weapons flexcol" data-group="primary" data-tab="weapons">
             <ol class="inventory-list">
                 {{#each arcs as |section|}}
-                <li class="item flexrow inventory-header">
+                <li class="item flexrow inventory-header{{#if section.dataset.isDisabled}} disabled{{/if}}">
                     <div class="item-name flexrow">
                         <h3>{{section.label}}</h3>
                     </div>
-                    {{#if ../owner}}
+                    {{#if (and ../owner section.dataset.allowAdd)}}
                     <div class="item-controls">
                         <a class="item-control item-create" title="Create Items" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                             <i class="fas fa-plus"></i> Add

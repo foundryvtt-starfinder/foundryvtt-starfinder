@@ -180,6 +180,34 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         return this.actor.data.data.crew;
     }
 
+    _createLabel(localizationKey, items, mounts) {
+        const localizedLightSlots = ((mounts?.lightSlots || 0) > 0) ? game.i18n.format("SFRPG.StarshipSheet.Weapons.LightSlots", {current: items.filter(x => x.data.class === "light").length, max: mounts.lightSlots}) : null;
+        const localizedHeavySlots = ((mounts?.heavySlots || 0) > 0) ? game.i18n.format("SFRPG.StarshipSheet.Weapons.HeavySlots", {current: items.filter(x => x.data.class === "heavy").length, max: mounts.heavySlots}) : null;
+        const localizedCapitalSlots = ((mounts?.capitalSlots || 0) > 0) ? game.i18n.format("SFRPG.StarshipSheet.Weapons.CapitalSlots", {current: items.filter(x => x.data.class === "capital").length, max: mounts.capitalSlots}) : null;
+
+        let slots = "";
+        if (localizedLightSlots) {
+            slots += localizedLightSlots;
+        }
+        if (localizedHeavySlots) {
+            if (slots !== "") {
+                slots += ", ";
+            }
+            slots += localizedHeavySlots;
+        }
+        if (localizedCapitalSlots) {
+            if (slots !== "") {
+                slots += ", ";
+            }
+            slots += localizedCapitalSlots;
+        }
+        if (slots === "") {
+            slots = game.i18n.format("SFRPG.StarshipSheet.Weapons.NotAvailable");
+        }
+
+        return game.i18n.format(localizationKey, {slots: slots});
+    }
+
     /**
      * Organize and classify items for starship sheets.
      * 
@@ -187,14 +215,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
-        const arcs = {
-            forward: { label: "Forward", items: [], dataset: { type: "starshipWeapon" }},
-            starboard: { label: "Starboard", items: [], dataset: { type: "starshipWeapon" }},
-            aft: { label: "Aft", items: [], dataset: { type: "starshipWeapon" }},
-            port: { label: "Port", items: [], dataset: { type: "starshipWeapon" }},
-            turret: { label: "Turret", items: [], dataset: { type: "starshipWeapon" }},
-            unmounted: { label: "Not Mounted", items: [], dataset: { type: "starshipWeapon" }}
-        };
 
         let [forward, starboard, aft, port, turret, unmounted, frame] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
@@ -212,10 +232,32 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             return arr;
         }, [[], [], [], [], [], [], []]);
 
+        const weaponMounts = this.actor.data.data.frame?.data?.weaponMounts;
+        const hasForward = weaponMounts?.forward?.lightSlots || weaponMounts?.forward?.heavySlots || weaponMounts?.forward?.capitalSlots;
+        const hasStarboard = weaponMounts?.starboard?.lightSlots || weaponMounts?.starboard?.heavySlots || weaponMounts?.starboard?.capitalSlots;
+        const hasPort = weaponMounts?.port?.lightSlots || weaponMounts?.port?.heavySlots || weaponMounts?.port?.capitalSlots;
+        const hasAft = weaponMounts?.aft?.lightSlots || weaponMounts?.aft?.heavySlots || weaponMounts?.aft?.capitalSlots;
+        const hasTurret = weaponMounts?.turret?.lightSlots || weaponMounts?.turret?.heavySlots || weaponMounts?.turret?.capitalSlots;
+
+        const forwardLabel = this._createLabel("SFRPG.StarshipSheet.Weapons.ForwardArc", forward, weaponMounts?.forward);
+        const starboardLabel = this._createLabel("SFRPG.StarshipSheet.Weapons.StarboardArc", starboard, weaponMounts?.starboard);
+        const portLabel = this._createLabel("SFRPG.StarshipSheet.Weapons.PortArc", port, weaponMounts?.port);
+        const aftLabel = this._createLabel("SFRPG.StarshipSheet.Weapons.AftArc", aft, weaponMounts?.aft);
+        const turretLabel = this._createLabel("SFRPG.StarshipSheet.Weapons.Turret", turret, weaponMounts?.turret);
+
+        const arcs = {
+            forward: { label: forwardLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasForward }},
+            starboard: { label: starboardLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasStarboard }},
+            port: { label: portLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasPort }},
+            aft: { label: aftLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasAft }},
+            turret: { label: turretLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasTurret }},
+            unmounted: { label: game.i18n.format("SFRPG.StarshipSheet.Weapons.NotMounted"), items: [], dataset: { type: "starshipWeapon", allowAdd: true }}
+        };
+
         arcs.forward.items = forward;
         arcs.starboard.items = starboard;
-        arcs.aft.items = aft;
         arcs.port.items = port;
+        arcs.aft.items = aft;
         arcs.turret.items = turret;
         arcs.unmounted.items = unmounted;
 
