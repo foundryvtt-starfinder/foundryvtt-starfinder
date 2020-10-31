@@ -21,16 +21,10 @@
                     <input type="text" name="data.details.model" value="{{data.details.model}}" placeholder="{{localize "SFRPG.ShipModelLabel"}}" />
                 </li>
                 <li data-tippy-content="{{localize "SFRPG.ShipFrameLabel"}}<br>@details.frame">
-                    {{#if activeFrame}}<span>{{activeFrame.name}}</span>{{else}}<span class="no-chassis">{{localize "SFRPG.StarshipSheet.Header.FrameMissing"}}</span>{{/if}}
+                    {{#if activeFrame}}<span>{{activeFrame.name}}</span>{{else}}<span class="no-frame">{{localize "SFRPG.StarshipSheet.Header.FrameMissing"}}</span>{{/if}}
                 </li>
-                <li class="flexrow" data-tippy-content="{{ localize "SFRPG.Size"}}<br>@details.size">
-                    <select name="data.details.size">
-                        {{#select data.details.size}}
-                        {{#each config.starshipSizes as |size s|}}
-                        <option value="{{s}}">{{size}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
+                <li data-tippy-content="{{ localize "SFRPG.Size"}}<br>@details.size">
+                    <span>{{localize "SFRPG.StarshipSheet.Header.Size" size=data.details.size}}</span>
                 </li>
             </ul>
 
@@ -41,13 +35,10 @@
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
                             data-dtype="Number" placeholder="10" />
                         <span class="sep"> / </span>
-                        <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
-                            data-dtype="Number" placeholder="10" />
+                        <label>{{data.attributes.hp.max}}</label>
                     </div>
                     <footer class="attribute-footer">
-                        <input name="data.attributes.hp.increment" type="text" placeholder="Increment"
-                            value="{{data.attributes.hp.increment}}" data-dtype="Number"
-                            title="This is the number of hull points that are added when the ship reaches tier 4 (and every 4 tiers after)" />
+                        <span data-tippy-content="This is the number of hull points that are added when the ship reaches tier 4 (and every 4 tiers after)">{{data.attributes.hp.increment}}</span>
                     </footer>
                 </li>
                 <li class="attribute" data-tippy-content="Armor Class<br>@attributes.ac.value">
@@ -78,13 +69,7 @@
                         <span>{{data.attributes.speed}}</span>
                     </div>
                     <footer class="attribute-footer select" data-tippy-content="Maneuverability<br>@attributes.maneuverability">
-                        <select name="data.attributes.maneuverability">
-                            {{#select data.attributes.maneuverability}}
-                            {{#each config.maneuverability as |man k|}}
-                            <option value="{{k}}">{{man}}</option>
-                            {{/each}}
-                            {{/select}}
-                        </select>
+                        <span>{{localize "SFRPG.StarshipSheet.Header.Maneuverability" maneuverability=data.attributes.maneuverability}}</span>
                     </footer>
                 </li>
             </ul>
@@ -109,14 +94,12 @@
                         <h4 class="attribute-name box-title">CT</h4>
                         <div class="attribute-value">
                             <span>{{data.attributes.ct.value}}</span>
-
                         </div>
                     </li>
                     <li class="attribute" data-tippy-content="Damage Threshold<br>@attributes.dt">
                         <h4 class="attribute-name box-title">DT</h4>
                         <div class="attribute-value">
-                            <input type="text" name="data.attributes.dt" value="{{data.attributes.dt}}"
-                                data-dtype="Number" placeholder="-" />
+                            <span>{{data.attributes.dt}}</span>
                         </div>
                     </li>
                     <li class="attribute" data-tippy-content="Power Core<br>@attributes.pwr.pcu">
@@ -128,21 +111,15 @@
                     <li class="attribute" data-tippy-content="Complement<br>@attributes.complement.min<br>@attributes.complement.max">
                         <h4 class="attribute-name box-title">Complement</h4>
                         <div class="attribute-value multiple">
-                            <input type="text" name="data.attributes.complement.min"
-                                value="{{data.attributes.complement.min}}" data-dtype="Number"
-                                title="Minimum crew needed to run the ship" />
+                            <span data-tippy-content="Minimum crew needed to run the ship">{{data.attributes.complement.min}}</span>
                             <span class="sep"> / </span>
-                            <input type="text" name="data.attributes.complement.max"
-                                value="{{data.attributes.complement.max}}" data-dtype="Number"
-                                title="Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard)" />
+                            <span data-tippy-content="Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard)">{{data.attributes.complement.max}}</span>
                         </div>
                     </li>
                     <li class="attribute" data-tippy-content="Expansion Bays<br>@attributes.expansionBays">
                         <h4 class="attribute-name box-title">Expansion Bays</h4>
                         <div class="attribute-value">
-                            <input type="text" name="data.attributes.expansionBays"
-                                value="{{data.attributes.expansionBays}}" data-dtype="Number"
-                                title="Max number of expansion bays allowed" />
+                            <span data-tippy-content="Total amount of expansion bays available.">{{data.attributes.expansionBays}}</span>
                         </div>
                     </li>
                     <li class="attribute" data-tippy-content="Drift Rating<br>@attributes.drift">

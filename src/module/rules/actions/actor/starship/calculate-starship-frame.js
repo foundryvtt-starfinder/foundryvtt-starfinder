@@ -44,13 +44,17 @@ export default function (engine) {
         }
 
         if (!frames || frames.length === 0) {
-            data.frame = "No frame";
+            data.frame = {
+                name: ""
+            };
+            data.details.frame = "";
         } else {
             const frame = frames[0];
             //console.log([data, frame]);
 
-            data.frame = frame.name;
+            data.frame = frame;
 
+            data.details.frame = frame.name;
             data.details.size = frame.data.size;
             data.attributes.maneuverability = frame.data.maneuverability;
             data.attributes.dt = frame.data.damageThreshold.base;
