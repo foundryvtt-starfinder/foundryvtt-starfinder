@@ -77,14 +77,14 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             crewData = await this._processFlags(data, data.actor.flags);
         }
 
-        const captainActors = crewData.captain.actors.map(crewId => game.actors.get(crewId));
-        const chiefMateActors = crewData.chiefMate.actors.map(crewId => game.actors.get(crewId));
-        const engineerActors = crewData.engineer.actors.map(crewId => game.actors.get(crewId));
-        const gunnerActors = crewData.gunner.actors.map(crewId => game.actors.get(crewId));
-        const magicOfficerActors = crewData.magicOfficer.actors.map(crewId => game.actors.get(crewId));
-        const passengerActors = crewData.passenger.actors.map(crewId => game.actors.get(crewId));
-        const pilotActors = crewData.pilot.actors.map(crewId => game.actors.get(crewId));
-        const scienceOfficerActors = crewData.scienceOfficer.actors.map(crewId => game.actors.get(crewId));
+        const captainActors = crewData.captain.actorIds.map(crewId => game.actors.get(crewId));
+        const chiefMateActors = crewData.chiefMate.actorIds.map(crewId => game.actors.get(crewId));
+        const engineerActors = crewData.engineer.actorIds.map(crewId => game.actors.get(crewId));
+        const gunnerActors = crewData.gunner.actorIds.map(crewId => game.actors.get(crewId));
+        const magicOfficerActors = crewData.magicOfficer.actorIds.map(crewId => game.actors.get(crewId));
+        const passengerActors = crewData.passenger.actorIds.map(crewId => game.actors.get(crewId));
+        const pilotActors = crewData.pilot.actorIds.map(crewId => game.actors.get(crewId));
+        const scienceOfficerActors = crewData.scienceOfficer.actorIds.map(crewId => game.actors.get(crewId));
 
         const localizedNoLimit = game.i18n.format("SFRPG.StarshipSheet.Crew.UnlimitedMax");
         
@@ -112,35 +112,35 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         let newCrew = {
             captain: {
                 limit: 1,
-                actors: []
+                actorIds: []
             },
             chiefMate: {
                 limit: -1,
-                actors: []
+                actorIds: []
             },
             engineer: {
                 limit: -1,
-                actors: []
+                actorIds: []
             },
             gunner: {
                 limit: 0,
-                actors: []
+                actorIds: []
             },
             magicOfficer: {
                 limit: -1,
-                actors: []
+                actorIds: []
             },
             passenger: {
                 limit: -1,
-                actors: []
+                actorIds: []
             },
             pilot: {
                 limit: 1,
-                actors: []
+                actorIds: []
             },
             scienceOfficer: {
                 limit: -1,
-                actors: []
+                actorIds: []
             }
         };
 
@@ -158,12 +158,12 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             let crewMember = actor.getFlag("sfrpg", "crewMember") || null;
             if (!crewMember) continue;
 
-            if (crewMember.role === "captain") newCrew.captain.actors.push(actorId);
-            else if (crewMember.role === "engineers") newCrew.engineer.actors.push(actorId);
-            else if (crewMember.role === "gunners") newCrew.gunner.actors.push(actorId);
-            else if (crewMember.role === "pilot") newCrew.pilot.actors.push(actorId);
-            else if (crewMember.role === "scienceOfficers") newCrew.scienceOfficer.actors.push(actorId);
-            else if (crewMember.role === "passengers") newCrew.passenger.actors.push(actorId);
+            if (crewMember.role === "captain") newCrew.captain.actorIds.push(actorId);
+            else if (crewMember.role === "engineers") newCrew.engineer.actorIds.push(actorId);
+            else if (crewMember.role === "gunners") newCrew.gunner.actorIds.push(actorId);
+            else if (crewMember.role === "pilot") newCrew.pilot.actorIds.push(actorId);
+            else if (crewMember.role === "scienceOfficers") newCrew.scienceOfficer.actorIds.push(actorId);
+            else if (crewMember.role === "passengers") newCrew.passenger.actorIds.push(actorId);
         }
 
         await this.actor.update({
@@ -404,12 +404,12 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const crewRole = crew[targetRole];
         const oldRole = this.actor.getCrewRoleForActor(data.id);
 
-        if (crewRole.limit === -1 || crewRole.actors.length < crewRole.limit) {
-            crewRole.actors.push(data.id);
+        if (crewRole.limit === -1 || crewRole.actorIds.length < crewRole.limit) {
+            crewRole.actorIds.push(data.id);
 
             if (oldRole) {
                 const originalRole = crew[oldRole];
-                originalRole.actors = originalRole.actors.filter(x => x != data.id);
+                originalRole.actorIds = originalRole.actorIds.filter(x => x != data.id);
             }
     
             await this.actor.update({
@@ -479,7 +479,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const role = this.actor.getCrewRoleForActor(actorId);
         if (role) {
             const crewData = duplicate(this.actor.data.data.crew);
-            crewData[role].actors = crewData[role].actors.filter(x => x !== actorId);
+            crewData[role].actorIds = crewData[role].actorIds.filter(x => x !== actorId);
             await this.actor.update({
                 "data.crew": crewData
             });

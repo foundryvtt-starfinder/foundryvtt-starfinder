@@ -31,8 +31,10 @@ export default class Engine {
 
         const context = new Context(this);
         try {
+            Hooks.callAll("beforeClosureProcessed", closure.name, fact);
             const res = await Promise.resolve(closure.process(fact, context));
             context.fact = res;
+            Hooks.callAll("afterClosureProcessed", closure.name, fact);
             return context;
         } catch (error) {
             return Promise.reject(error);

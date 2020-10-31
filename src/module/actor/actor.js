@@ -8,6 +8,8 @@ import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
 import { DroneRepairDialog } from "../apps/drone-repair-dialog.js";
 
+import { } from "./starship-update.js"
+
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
  */
@@ -56,6 +58,7 @@ export class ActorSFRPG extends Actor {
         this._ensureHasModifiers(data);
         const modifiers = this.getAllModifiers();
 
+        const actorId = this._id;
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
         const weapons = items.filter(item => item.type === "weapon" && item.data.equipped);
@@ -67,14 +70,15 @@ export class ActorSFRPG extends Actor {
         const armorUpgrades = items.filter(item => item.type === "upgrade");
         const asis = items.filter(item => item.type === "asi");
         game.sfrpg.engine.process("process-actors", {
+            actorId,
+            type: actorType,
             data,
+            flags,
             items,
             armor,
             weapons,
             races,
             classes,
-            flags,
-            type: actorType,
             modifiers,
             theme,
             mods,
@@ -795,7 +799,7 @@ export class ActorSFRPG extends Actor {
         }
 
         for (const [role, entry] of Object.entries(this.data.data.crew)) {
-            if (entry.actors.includes(actorId)) {
+            if (entry?.actorIds?.includes(actorId)) {
                 return role;
             }
         }
