@@ -1,5 +1,5 @@
 export default function (engine) {
-    engine.closures.add("calculateShipTargetLock", (fact, context) => {
+    engine.closures.add("calculateStarshipTargetLock", (fact, context) => {
         const data = fact.data;
         const tl = CONFIG.SFRPG.armorDefenseMap[data.details.systems.defense] || 0;
         const sizeMod = CONFIG.SFRPG.starshipSizeMod[data.details.size] || 0;

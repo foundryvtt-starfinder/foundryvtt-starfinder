@@ -57,15 +57,15 @@ import calculateDroneResolve from './rules/actions/actor/drone/calculate-drone-r
 import calculateDroneSaves from './rules/actions/actor/drone/calculate-drone-saves.js';
 import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
 // Starship rules
-import calculateStarshipFrame       from './rules/actions/actor/starship/calculate-starship-frame.js'
-import calculateShipArmorClass      from './rules/actions/actor/starship/calculate-starship-ac.js';
-import calculateShipCritThreshold   from './rules/actions/actor/starship/calculate-starship-ct.js';
-import calculateDrift               from './rules/actions/actor/starship/calculate-starship-drift.js';
-import calculateMaxShields          from './rules/actions/actor/starship/calculate-starship-max-shields.js';
-import calculatePower               from './rules/actions/actor/starship/calculate-starship-power.js';
-import calculateShipShields         from './rules/actions/actor/starship/calculate-starship-shields.js';
-import calculateShipSpeed           from './rules/actions/actor/starship/calculate-starship-speed.js';
-import calculateShipTargetLock      from './rules/actions/actor/starship/calculate-starship-targetlock.js';
+import calculateStarshipFrame           from './rules/actions/actor/starship/calculate-starship-frame.js'
+import calculateStarshipArmorClass      from './rules/actions/actor/starship/calculate-starship-ac.js';
+import calculateStarshipCritThreshold   from './rules/actions/actor/starship/calculate-starship-ct.js';
+import calculateStarshipDrift           from './rules/actions/actor/starship/calculate-starship-drift.js';
+import calculateStarshipMaxShields      from './rules/actions/actor/starship/calculate-starship-max-shields.js';
+import calculateStarshipPower           from './rules/actions/actor/starship/calculate-starship-power.js';
+import calculateStarshipShields         from './rules/actions/actor/starship/calculate-starship-shields.js';
+import calculateStarshipSpeed           from './rules/actions/actor/starship/calculate-starship-speed.js';
+import calculateStarshipTargetLock      from './rules/actions/actor/starship/calculate-starship-targetlock.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -104,14 +104,14 @@ export default function (engine) {
     calculateStamina(engine);
     calculateTraits(engine);
     // Starship actions
-    calculateShipArmorClass(engine);
-    calculateShipCritThreshold(engine);
-    calculateDrift(engine);
-    calculateMaxShields(engine);
-    calculatePower(engine);
-    calculateShipShields(engine);
-    calculateShipSpeed(engine);
-    calculateShipTargetLock(engine);
+    calculateStarshipArmorClass(engine);
+    calculateStarshipCritThreshold(engine);
+    calculateStarshipDrift(engine);
+    calculateStarshipMaxShields(engine);
+    calculateStarshipPower(engine);
+    calculateStarshipShields(engine);
+    calculateStarshipSpeed(engine);
+    calculateStarshipTargetLock(engine);
     calculateStarshipFrame(engine);
     // Drone actions
     calculateDroneChassis(engine);
@@ -177,14 +177,14 @@ export default function (engine) {
                 when: { closure: "isActorType", type: "starship" },
                 then: [
                     "calculateStarshipFrame",
-                    "calculateShipArmorClass",
-                    "calculateShipCritThreshold",
-                    "calculateDrift",
-                    "calculateShields",
-                    "calculateShipMaxShields",
-                    "calculateShipPower",
-                    "calculateShipSpeed",
-                    "calculateShipTargetLock"
+                    "calculateStarshipArmorClass",
+                    "calculateStarshipCritThreshold",
+                    "calculateStarshipDrift",
+                    "calculateStarshipShields",
+                    "calculateStarshipMaxShields",
+                    "calculateStarshipPower",
+                    "calculateStarshipSpeed",
+                    "calculateStarshipTargetLock"
                 ]
             },
             {

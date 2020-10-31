@@ -1,5 +1,5 @@
 export default function (engine) {
-    engine.closures.add("calculateShipMaxShields", (fact, context) => {
+    engine.closures.add("calculateStarshipMaxShields", (fact, context) => {
         const data = fact.data;
         const shieldMax = Math.max(Math.floor(data.attributes.shields.max * 0.7), 1);
 
