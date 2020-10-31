@@ -57,8 +57,14 @@ export default function (engine) {
             data.details.frame = frame.name;
             data.details.size = frame.data.size;
             data.attributes.maneuverability = frame.data.maneuverability;
-            data.attributes.dt = frame.data.damageThreshold.base;
-            data.attributes.expansionBays = frame.data.expansionBays;
+            data.attributes.damageThreshold = {
+                value: frame.data.damageThreshold.base,
+                tooltip: []
+            };
+            data.attributes.expansionBays = {
+                value: frame.data.expansionBays,
+                tooltip: []
+            };
             data.attributes.complement.min = frame.data.crew.minimum;
             data.attributes.complement.max = frame.data.crew.maximum;
 

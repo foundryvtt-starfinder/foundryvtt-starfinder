@@ -41,7 +41,7 @@
                         <span data-tippy-content="This is the number of hull points that are added when the ship reaches tier 4 (and every 4 tiers after)">{{data.attributes.hp.increment}}</span>
                     </footer>
                 </li>
-                <li class="attribute" data-tippy-content="Armor Class<br>@attributes.ac.value">
+                <li class="attribute" data-tippy-content="Armor Class<br/>@attributes.ac.value<br/>@attributes.ac.misc">
                     <h4 class="attribute-name box-title">AC</h4>
                     <div class="attribute-value">
                         <span>{{data.attributes.ac.value}}</span>
@@ -52,21 +52,21 @@
                             placeholder="+Misc" />
                     </footer>
                 </li>
-                <li class="attribute" data-tippy-content="Target Lock<br>@attributes.tl.value">
-                    <h4 class="attribute-name box-title">TL</h4>
+                <li class="attribute" data-tippy-content="Target Lock<br/>@attributes.targetLock.value<br/>@attributes.targetLock.misc">
+                    <h4 class="attribute-name box-title">Target Lock</h4>
                     <div class="attribute-value">
-                        <span>{{data.attributes.tl.value}}</span>
+                        <span>{{data.attributes.targetLock.value}}</span>
                     </div>
                     <footer class="attribute-footer">
-                        <input type="text" name="data.attributes.tl.misc"
-                            value="{{numberFormat data.attributes.tl.misc decimals=0 sign=true}}" data-dtype="Number"
+                        <input type="text" name="data.attributes.targetLock.misc"
+                            value="{{numberFormat data.attributes.targetLock.misc decimals=0 sign=true}}" data-dtype="Number"
                             placeholder="+Misc" />
                     </footer>
                 </li>
-                <li class="attribute" data-tippy-content="{{localize "SFRPG.Speed"}}<br>@attributes.speed">
+                <li class="attribute" data-tippy-content="{{localize "SFRPG.Speed"}}<br>@attributes.speed.value">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
                     <div class="attribute-value">
-                        <span>{{data.attributes.speed}}</span>
+                        <span>{{data.attributes.speed.value}}</span>
                     </div>
                     <footer class="attribute-footer select" data-tippy-content="Maneuverability<br>@attributes.maneuverability">
                         <span>{{localize "SFRPG.StarshipSheet.Header.Maneuverability" maneuverability=data.attributes.maneuverability}}</span>
@@ -90,22 +90,22 @@
             <div class="flexcol">
                 <h3 class="form-header">{{ localize "SFRPG.Attributes"}}</h3>
                 <ul class="attributes flexrow">
-                    <li class="attribute" data-tippy-content="Critical Threshold<br>@attributes.ct.value">
-                        <h4 class="attribute-name box-title">CT</h4>
+                    <li class="attribute" data-tippy-content="Critical Threshold<br>@attributes.criticalThreshold.value">
+                        <h4 class="attribute-name box-title">Critical Threshold</h4>
                         <div class="attribute-value">
-                            <span>{{data.attributes.ct.value}}</span>
+                            <span>{{data.attributes.criticalThreshold.value}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="Damage Threshold<br>@attributes.dt">
-                        <h4 class="attribute-name box-title">DT</h4>
+                    <li class="attribute" data-tippy-content="Damage Threshold<br>@attributes.damageThreshold.value">
+                        <h4 class="attribute-name box-title">Damage Threshold</h4>
                         <div class="attribute-value">
-                            <span>{{data.attributes.dt}}</span>
+                            <span>{{data.attributes.damageThreshold.value}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="Power Core<br>@attributes.pwr.pcu">
+                    <li class="attribute" data-tippy-content="Power Core<br>@attributes.power.max">
                         <h4 class="attribute-name box-title">Power Core</h4>
                         <div class="attribute-value">
-                            <span>{{data.attributes.pwr.pcu}}</span>
+                            <span>{{data.attributes.power.max}}</span>
                         </div>
                     </li>
                     <li class="attribute" data-tippy-content="Complement<br>@attributes.complement.min<br>@attributes.complement.max">
@@ -116,16 +116,16 @@
                             <span data-tippy-content="Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard)">{{data.attributes.complement.max}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="Expansion Bays<br>@attributes.expansionBays">
+                    <li class="attribute" data-tippy-content="Expansion Bays<br>@attributes.expansionBays.value">
                         <h4 class="attribute-name box-title">Expansion Bays</h4>
                         <div class="attribute-value">
-                            <span data-tippy-content="Total amount of expansion bays available.">{{data.attributes.expansionBays}}</span>
+                            <span data-tippy-content="Total amount of expansion bays available.">{{data.attributes.expansionBays.value}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="Drift Rating<br>@attributes.drift">
+                    <li class="attribute" data-tippy-content="Drift Rating<br>@attributes.drift.value">
                         <h4 class="attribute-name box-title">Drift Rating</h4>
                         <div class="attribute-value">
-                            <span class="ability-mod">{{data.attributes.drift}}</span>
+                            <span class="ability-mod">{{data.attributes.drift.value}}</span>
                         </div>
                     </li>
                 </ul>
