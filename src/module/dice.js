@@ -184,9 +184,9 @@ export class DiceSFRPG {
 
             let roll = new Roll(parts.join("+"), data);
             if (crit === true) {
-                let add = /*(actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 :*/ 0;
+                let add = 0;
                 let mult = 2;
-                roll.alter(add, mult);
+                roll.alter(mult, add);
                 flavor = `${title} (Critical)`;
 
                 if (criticalData !== undefined) {
