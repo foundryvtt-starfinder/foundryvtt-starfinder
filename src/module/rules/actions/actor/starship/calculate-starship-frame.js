@@ -47,7 +47,24 @@ export default function (engine) {
             data.frame = {
                 name: ""
             };
+
             data.details.frame = "";
+            data.details.size = "n/a";
+            data.attributes.maneuverability = "n/a";
+            data.attributes.damageThreshold = {
+                value: 0,
+                tooltip: []
+            };
+            data.attributes.expansionBays = {
+                value: 0,
+                tooltip: []
+            };
+            data.attributes.complement.min = 0;
+            data.attributes.complement.max = 0;
+
+            data.attributes.hp.increment = 0;
+            data.attributes.hp.max = 0;
+            data.crew.gunner.limit = 0;
         } else {
             const frame = frames[0];
             //console.log([data, frame]);
@@ -68,8 +85,8 @@ export default function (engine) {
             data.attributes.complement.min = frame.data.crew.minimum;
             data.attributes.complement.max = frame.data.crew.maximum;
 
-            data.attributes.hp.max = frame.data.hitpoints.base + Math.floor(data.details.tier / 4) * frame.data.hitpoints.increment;
             data.attributes.hp.increment = frame.data.hitpoints.increment;
+            data.attributes.hp.max = frame.data.hitpoints.base + Math.floor(data.details.tier / 4) * frame.data.hitpoints.increment;
             data.crew.gunner.limit = frame.data.weaponMounts.forward.lightSlots + frame.data.weaponMounts.forward.heavySlots + frame.data.weaponMounts.forward.capitalSlots
                 + frame.data.weaponMounts.aft.lightSlots + frame.data.weaponMounts.aft.heavySlots + frame.data.weaponMounts.aft.capitalSlots
                 + frame.data.weaponMounts.port.lightSlots + frame.data.weaponMounts.port.heavySlots + frame.data.weaponMounts.port.capitalSlots

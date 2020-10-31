@@ -6,11 +6,14 @@ import { ActorSheetSFRPG } from "./base.js";
  */
 export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        const options = super.defaultOptions;
+        mergeObject(options, {
             classes: ["sfrpg", "sheet", "actor", "starship"],
-            witdh: 600,
+            width: 700,
             height: 800
         });
+
+        return options;
     }
 
     get template() {

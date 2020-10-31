@@ -41,27 +41,46 @@
                         <span data-tippy-content="This is the number of hull points that are added when the ship reaches tier 4 (and every 4 tiers after)">{{data.attributes.hp.increment}}</span>
                     </footer>
                 </li>
-                <li class="attribute" data-tippy-content="Armor Class<br/>@attributes.ac.value<br/>@attributes.ac.misc">
-                    <h4 class="attribute-name box-title">AC</h4>
-                    <div class="attribute-value">
-                        <span>{{data.attributes.ac.value}}</span>
-                    </div>
-                    <footer class="attribute-footer">
-                        <input type="text" name="data.attributes.ac.misc"
-                            value="{{numberFormat data.attributes.ac.misc decimals=0 sign=true}}" data-dtype="Number"
-                            placeholder="+Misc" />
-                    </footer>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">Defenses</h4>
+                    <ol class="attribute-multibox">
+                        <li class="box-header flexrow">
+                            <label></label>
+                            <label>Value</label>
+                            <label>Misc</label>
+                        </li>
+                        <li class="flexrow" data-tippy-content="Armor Class<br/>@attributes.ac.value<br/>@attributes.ac.misc">
+                            <label>AC</label>
+                            <label>{{data.attributes.ac.value}}</label>
+                            <input type="text" name="data.attributes.ac.misc"
+                                value="{{numberFormat data.attributes.ac.misc decimals=0 sign=true}}" data-dtype="Number"
+                                placeholder="+Misc" />
+                        </li>
+                        <li class="flexrow" data-tippy-content="Target Lock<br/>@attributes.targetLock.value<br/>@attributes.targetLock.misc">
+                            <label>TL</label>
+                            <label>{{data.attributes.tl.value}}</label>
+                            <input type="text" name="data.attributes.targetLock.misc"
+                                value="{{numberFormat data.attributes.targetLock.misc decimals=0 sign=true}}" data-dtype="Number"
+                                placeholder="+Misc" />
+                        </li>
+                    </ol>
                 </li>
-                <li class="attribute" data-tippy-content="Target Lock<br/>@attributes.targetLock.value<br/>@attributes.targetLock.misc">
-                    <h4 class="attribute-name box-title">Target Lock</h4>
-                    <div class="attribute-value">
-                        <span>{{data.attributes.targetLock.value}}</span>
-                    </div>
-                    <footer class="attribute-footer">
-                        <input type="text" name="data.attributes.targetLock.misc"
-                            value="{{numberFormat data.attributes.targetLock.misc decimals=0 sign=true}}" data-dtype="Number"
-                            placeholder="+Misc" />
-                    </footer>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">Thresholds</h4>
+                    <ol class="attribute-multibox">
+                        <li class="box-header flexrow">
+                            <label></label>
+                            <label>Value</label>
+                        </li>
+                        <li class="flexrow" data-tippy-content="Damage Threshold<br/>@attributes.damageThreshold.value">
+                            <label>DT</label>
+                            <label>{{data.attributes.damageThreshold.value}}</label>
+                        </li>
+                        <li class="flexrow" data-tippy-content="Critical Threshold<br/>@attributes.criticalThreshold.value">
+                            <label>CT</label>
+                            <label>{{data.attributes.criticalThreshold.value}}</label>
+                        </li>
+                    </ol>
                 </li>
                 <li class="attribute" data-tippy-content="{{localize "SFRPG.Speed"}}<br>@attributes.speed.value">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
@@ -90,18 +109,6 @@
             <div class="flexcol">
                 <h3 class="form-header">{{ localize "SFRPG.Attributes"}}</h3>
                 <ul class="attributes flexrow">
-                    <li class="attribute" data-tippy-content="Critical Threshold<br>@attributes.criticalThreshold.value">
-                        <h4 class="attribute-name box-title">Critical Threshold</h4>
-                        <div class="attribute-value">
-                            <span>{{data.attributes.criticalThreshold.value}}</span>
-                        </div>
-                    </li>
-                    <li class="attribute" data-tippy-content="Damage Threshold<br>@attributes.damageThreshold.value">
-                        <h4 class="attribute-name box-title">Damage Threshold</h4>
-                        <div class="attribute-value">
-                            <span>{{data.attributes.damageThreshold.value}}</span>
-                        </div>
-                    </li>
                     <li class="attribute" data-tippy-content="Power Core<br>@attributes.power.max">
                         <h4 class="attribute-name box-title">Power Core</h4>
                         <div class="attribute-value">
