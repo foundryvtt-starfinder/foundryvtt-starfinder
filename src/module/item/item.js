@@ -1111,7 +1111,7 @@ export class ItemSFRPG extends Item {
         name = "", 
         modifier = 0, 
         type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.FORMULA, 
+        modifierType = SFRPGModifierType.CONSTANT, 
         effectType = SFRPGEffectType.SKILL,
         subtab = "misc",
         valueAffected = "", 
