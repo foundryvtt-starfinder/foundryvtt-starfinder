@@ -14,6 +14,15 @@ export default function (engine) {
 
         }
 
+        /** Update theme field, but only if it is left empty. */
+        try {
+            if (!data.details.theme && fact.theme) {
+                data.details.theme = fact.theme.name;
+            }
+        } catch (error) {
+
+        }
+
         /** Update proficiencies from classes, but only if they are not set yet by the user. */
         try {
             const classes = fact.classes;
