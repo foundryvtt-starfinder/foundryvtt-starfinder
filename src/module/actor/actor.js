@@ -195,7 +195,7 @@ export class ActorSFRPG extends Actor {
 
         const skill = duplicate(this.data.data.skills[skillId]);
         const isNpc = this.data.type === "npc";
-        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc),
+        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.owner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
