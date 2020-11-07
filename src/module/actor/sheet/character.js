@@ -50,8 +50,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             goods: { label: game.i18n.format(SFRPG.itemTypes["goods"]), items: [], dataset: { type: "goods" }, allowAdd: true },
             container: { label: game.i18n.format(SFRPG.itemTypes["container"]), items: [], dataset: { type: "container" }, allowAdd: true },
             technological: { label: game.i18n.format(SFRPG.itemTypes["technological"]), items: [], dataset: { type: "technological" }, allowAdd: true },
-            fusion: { label: game.i18n.format(SFRPG.itemTypes["fusion"]), items: [], dataset: { type: "fusion" }, allowAdd: true },
-            upgrade: { label: game.i18n.format(SFRPG.itemTypes["upgrade"]), items: [], dataset: { type: "upgrade" }, allowAdd: true },
+            fusion: { label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.EquipmentEnhancements"), items: [], dataset: { type: "fusion,upgrade,weaponAccessory" }, allowAdd: true },
             augmentation: { label: game.i18n.format(SFRPG.itemTypes["augmentation"]), items: [], dataset: { type: "augmentation" }, allowAdd: true }
         };
 
@@ -123,16 +122,26 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         }
 
         this.processItemContainment(items, function (itemType, itemData) {
+            let targetItemType = itemType;
             if (!(itemType in inventory)) {
-                let label = "SFRPG.Items.Categories.MiscellaneousItems";
-                if (itemType in SFRPG.itemTypes) {
-                    label = SFRPG.itemTypes[itemType];
-                } else {
-                    console.log(`Item '${itemData.item.name}' with type '${itemType}' is not a registered item type!`);
+                for (let [key, entry] of Object.entries(inventory)) {
+                    if (entry.dataset.type.includes(itemType)) {
+                        targetItemType = key;
+                        break;
+                    }
                 }
-                inventory[itemType] = { label: game.i18n.format(label), items: [], dataset: { }, allowAdd: false };
             }
-            inventory[itemType].items.push(itemData);
+
+            if (!(targetItemType in inventory)) {
+                let label = "SFRPG.Items.Categories.MiscellaneousItems";
+                if (targetItemType in SFRPG.itemTypes) {
+                    label = SFRPG.itemTypes[targetItemType];
+                } else {
+                    console.log(`Item '${itemData.item.name}' with type '${targetItemType}' is not a registered item type!`);
+                }
+                inventory[targetItemType] = { label: game.i18n.format(label), items: [], dataset: { }, allowAdd: false };
+            }
+            inventory[targetItemType].items.push(itemData);
         });
 
         let totalWeight = 0;
