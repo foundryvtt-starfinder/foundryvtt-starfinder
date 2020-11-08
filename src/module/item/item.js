@@ -431,7 +431,7 @@ export class ItemSFRPG extends Item {
         // Spell saving throw text
         const abl = ad.attributes.keyability || "int";
         if (this.hasSave && !data.save.dc) data.save.dc = 10 + data.level + ad.abilities[abl].mod;
-        labels.save = this._getSaveLabel(data.save, ad, data);
+        labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Spell properties
         props.push(
@@ -450,7 +450,7 @@ export class ItemSFRPG extends Item {
         // Spell saving throw text
         const abl = data.ability || ad.attributes.keyability || "str";
         if (this.hasSave && !data.save.dc) data.save.dc = 10 + ad.details.level + ad.abilities[abl].mod;
-        labels.save = this._getSaveLabel(data.save, ad, data);
+        labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Feat properties
         props.push(
