@@ -667,7 +667,7 @@ export class ItemSFRPG extends Item {
      * Place a damage roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.damageRoll logic for the core implementation
      */
-    async rollDamage({ event, versatile = false } = {}) {
+    async rollDamage({ event } = {}) {
         const itemData  = this.data.data;
         const actorData = this.actor.getRollData(); //this.actor.data.data;
         const isWeapon  = ["weapon", "shield"].includes(this.data.type);
@@ -686,13 +686,7 @@ export class ItemSFRPG extends Item {
 
         // Define Roll parts
         let parts = itemData.damage.parts.map(d => d[0]);
-        //if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
-
-        // Cantrips in Starfinder don't scale :(
-        // if ( (this.data.type === "spell") && (itemData.scaling.mode === "cantrip") ) {
-        //   const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
-        //   this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
-        // }
+        let damageTypes = itemData.damage.parts.map(d => d[1]);
         
         let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
@@ -763,7 +757,7 @@ export class ItemSFRPG extends Item {
             actor: this.actor,
             data: rollData,
             title: title,
-            isVersatile: this.isVersatile,
+            damageTypes: damageTypes,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 width: 400,
@@ -1018,7 +1012,6 @@ export class ItemSFRPG extends Item {
         // Attack and Damage Rolls
         if (action === "attack") await item.rollAttack({ event });
         else if (action === "damage") await item.rollDamage({ event });
-        else if (action === "versatile") await item.rollDamage({ event, versatile: true });
         else if (action === "formula") await item.rollFormula({ event });
 
         // Saving Throw
