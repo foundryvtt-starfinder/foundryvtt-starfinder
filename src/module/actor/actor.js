@@ -307,8 +307,12 @@ export class ActorSFRPG extends Actor {
      */
     getAllModifiers(ignoreTemporary = false, ignoreEquipment = false) {
         let allModifiers = this.data.data.modifiers.filter(mod => {
-            return (!ignoreTemporary || mod.subtab == "permanent");
+            return (!ignoreTemporary || mod.subtab === "permanent");
         });
+
+        for (const actorModifier of allModifiers) {
+            actorModifier.container = {actorId: this._id, itemId: null};
+        }
 
         for (let item of this.data.items) {
             let modifiersToConcat = [];
@@ -333,7 +337,12 @@ export class ActorSFRPG extends Actor {
                     }
                     break;
             }
+
             if (modifiersToConcat && modifiersToConcat.length > 0) {
+                for (const itemModifier of modifiersToConcat) {
+                    itemModifier.container = {actorId: this._id, itemId: item._id};
+                }
+
                 allModifiers = allModifiers.concat(modifiersToConcat);
             }
         }

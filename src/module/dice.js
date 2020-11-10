@@ -182,7 +182,9 @@ export class DiceSFRPG {
             // Don't include situational bonus unless it is defined
             if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
 
-            let roll = new Roll(parts.join("+"), data);
+            //let roll = new Roll(parts.join("+"), data);
+            const combinedFormula = DiceSFRPG.contextualRoll(parts.join("+"), {main: {entity: actor, data: data}}, {debug: false});
+            let roll = new Roll(combinedFormula);
             if (crit === true) {
                 let add = 0;
                 let mult = 2;
@@ -291,6 +293,94 @@ export class DiceSFRPG {
 
         return parts.map(x => x.toString());
     }
+
+    static Defaults = {
+        "details.level": "details.level.value",
+        "skills.pil": "skills.pil.mod"
+    };
+
+    static _readValue(object, key) {
+        if (!object || !key) return null;
+
+        const tokens = key.split('.');
+        for (const token of tokens) {
+            object = object[token];
+            if (!object) return null;
+        }
+
+        return object;
+    }
+
+    static contextualRoll(formula, contexts, options = {}) {
+
+        try {
+            const tree = new RollTree();
+            const treeRoll = tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"});
+            console.log(treeRoll);
+        } catch (error) {
+            console.log(error);
+            console.trace();
+        }
+
+        if (options.debug) {
+            console.log(["contextualRoll", formula, contexts, options]);
+        }
+
+        const mainContext = options.mainContext ? contexts[options.mainContext] : (contexts ? Object.values(contexts)[0] : null);
+
+        const replacements = {};
+        
+        let processedFormula = formula;
+        const variableMatches = new Set(processedFormula.match(/@([a-z.0-9_\-]+)/g));
+        for (const variable of variableMatches) {
+            const variableParts = variable?.substring(1)?.split('.');
+            if (!variableParts || variableParts.length === 0) {
+                continue;
+            }
+
+            const bTargetsContext = (contexts && contexts[variableParts[0]] !== undefined) ? true : false;
+            const targetContext = bTargetsContext ? contexts[variableParts[0]] : mainContext;
+            const decontextedVariable = bTargetsContext ? variableParts.slice(1).join('.') : variableParts.join('.');
+            const processedVariable = (decontextedVariable in DiceSFRPG.Defaults) ? DiceSFRPG.Defaults[decontextedVariable] : decontextedVariable;
+            const rolledModsKey = processedVariable.substring(0, processedVariable.lastIndexOf('.')) + ".rolledMods";
+
+            if (targetContext) {
+                const rawValue = DiceSFRPG._readValue(targetContext.data, processedVariable);
+                const availableMods = DiceSFRPG._readValue(targetContext.data, rolledModsKey);
+                
+                replacements[variable] = {base: rawValue, availableMods: availableMods || [], context: targetContext};
+            } else {
+                replacements[variable] = {base: 0, availableMods: [], context: null};
+
+                if (options.debug) {
+                    console.log(`No context available for '${processedVariable}'. Replacing '${variable}' with '0'`);
+                }
+            }
+        }
+
+        let availableModifiers = {};
+        for (var [key, replacement] of Object.entries(replacements)) {
+            for (let mod of replacement.availableMods) {
+                availableModifiers[mod.bonus._id] = mod.bonus;
+            }
+        }
+
+        for (var [key, replacement] of Object.entries(replacements)) {
+            let result = replacement.base.toString();
+            for (let mod of replacement.availableMods) {
+                if (mod.bonus.enabled) {
+                    let modRoll = DiceSFRPG.contextualRoll(mod.bonus.modifier, {main: replacement.context}, {debug: options.debug});
+                    result += " + " + modRoll;
+                }
+            }
+            processedFormula = processedFormula.replace(key, result);
+        }
+
+        if (options.debug) {
+            console.log(["final result", formula, processedFormula]);
+        }
+        return processedFormula;
+    }
 }
 
 export const highlightCriticalSuccessFailure = function (message, html, data) {
@@ -304,3 +394,177 @@ export const highlightCriticalSuccessFailure = function (message, html, data) {
         else if (d.total <= (d.options.fumble || 1)) html.find('.dice-total').addClass('failure');
     }
 };
+
+class RollTree {
+    constructor() {
+        this.rootNode = null;
+        this.nodes = {};
+    }
+
+    buildRoll(formula, contexts) {
+        console.log(`Resolving '${formula}'`);
+        this.rootNode = new RollNode(this, formula, null, false, false, true);
+        this.nodes = {};
+
+        this.nodes[formula] = this.rootNode;
+        this.rootNode.populate(this.nodes, contexts);
+        
+        const allRolledMods = RollTree.getAllRolledModifiers(this.nodes);
+        this.displayUI(formula, contexts, allRolledMods);
+        
+        const finalRollFormula = this.rootNode.resolve();
+        console.log([`Final roll results outcome`, formula, finalRollFormula]);
+        return finalRollFormula;
+    }
+
+    displayUI(formula, contexts, allRolledMods) {
+
+    }
+
+    static getAllRolledModifiers(nodes) {
+        console.log(nodes);
+        return Object.values(nodes).filter(x => x.isRolled);
+    }
+}
+
+class RollNode {
+    constructor(tree, formula, baseValue, isRolled, isVariable, isEnabled) {
+        this.tree = tree;
+        this.formula = formula;
+        this.baseValue = baseValue;
+        this.isRolled = isRolled;
+        this.isVariable = isVariable;
+        this.isEnabled = isEnabled;
+        this.resolvedValue = undefined;
+        this.childNodes = {};
+    }
+        
+    populate(nodes, contexts) {
+        if (this.isVariable) {
+            const context = RollNode.getContextForVariable(this.formula, contexts);
+            const availableRolledMods = RollNode.getRolledModifiers(this.formula, context);
+
+            for (const mod of availableRolledMods) {
+                const modFormula = mod.mod;
+
+                let existingNode = nodes[modFormula];
+                if (!existingNode) {
+                    const childNode = new RollNode(this.tree, modFormula, null, false, false, mod.bonus.enabled);
+                    nodes[modFormula] = childNode;
+                    existingNode = childNode;
+                }
+                this.childNodes[modFormula] = existingNode;
+            }
+        }
+        else {
+            const variableMatches = new Set(this.formula.match(/@([a-z.0-9_\-]+)/g));
+            for (const fullVariable of variableMatches) {
+                const variable = fullVariable.substring(1);
+                const context = RollNode.getContextForVariable(variable, contexts);
+                const variableValue = RollNode._readValue(context.data, variable);
+
+                let existingNode = nodes[variable];
+                if (!existingNode) {
+                    const childNode = new RollNode(this.tree, variable, variableValue, false, true, true);
+                    nodes[variable] = childNode;
+                    existingNode = childNode;
+                }
+                this.childNodes[variable] = existingNode;
+            }
+        }
+
+        for (const childNode of Object.values(this.childNodes)) {
+            childNode.populate(nodes, contexts);
+        }
+    }
+            
+    resolve(depth = 0) {
+        if (this.resolvedValue) {
+            return this.resolvedValue;
+        } else {
+            console.log(['Resolving', depth, this]);
+            this.resolvedValue = {
+                finalRoll: "",
+                formula: ""
+            };
+
+            const enabledChildNodes = Object.values(this.childNodes).filter(x => x.isEnabled);
+
+            if (this.baseValue) {
+                this.resolvedValue.finalRoll = this.baseValue;
+                this.resolvedValue.formula = this.formula;
+
+                // formula
+                for (const childNode of enabledChildNodes) {
+                    const childResolution = childNode.resolve(depth + 1);
+                    if (this.resolvedValue.finalRoll !== "") {
+                        this.resolvedValue.finalRoll += " + ";
+                    }
+                    this.resolvedValue.finalRoll += childResolution.finalRoll;
+
+                    if (this.resolvedValue.formula !== "") {
+                        this.resolvedValue.formula += " + ";
+                    }
+                    this.resolvedValue.formula += childResolution.formula;
+                }
+            } else {
+                // TODO: Implement formula, for example "3d6 + @abilities.str.mod + 2" should correctly replace the child node
+                let valueString = this.formula;
+                let formulaString = this.formula;
+                const variableMatches = new Set(formulaString.match(/@([a-z.0-9_\-]+)/g));
+                for (const fullVariable of variableMatches) {
+                    const regexp = new RegExp(fullVariable, "gi");
+                    const variable = fullVariable.substring(1);
+                    const existingNode = this.childNodes[variable];
+                    console.log(["testing var", depth, this, fullVariable, variable, existingNode]);
+                    if (existingNode) {
+                        const childResolution = existingNode.resolve(depth + 1);
+                        valueString = valueString.replace(regexp, childResolution.finalRoll);
+                        formulaString = formulaString.replace(regexp, childResolution.formula);
+                        console.log(['Result', depth, childResolution, valueString, formulaString]);
+                    } else {
+                        console.log(['Result', depth, "0"]);
+                        valueString = valueString.replace(regexp, "0");
+                        formulaString = formulaString.replace(regexp, "0");
+                    }
+                }
+
+                this.resolvedValue.finalRoll = valueString;
+                this.resolvedValue.formula = formulaString;
+            }
+            console.log(["Resolved", depth, this, this.resolvedValue]);
+            return this.resolvedValue;
+        }
+    }
+            
+    static getContextForVariable(variable, contexts) {
+        const firstToken = variable.split('.')[0];
+        const context = contexts.allContexts[firstToken] || (contexts.mainContext ? contexts.allContexts[contexts.mainContext] : null);
+        //console.log(["getContextForVariable", variable, contexts, context]);
+        return context;
+    }
+        
+    static getRolledModifiers(variable, context) {
+        let variableString = variable + ".rolledMods";
+        let variableRolledMods = RollNode._readValue(context.data, variableString);
+        if (!variableRolledMods) {
+            variableString = variable.substring(0, variable.lastIndexOf('.')) + ".rolledMods";
+            variableRolledMods = RollNode._readValue(context.data, variableString);
+        }
+        //console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);
+        return variableRolledMods || []
+    }
+
+    static _readValue(object, key) {
+        //console.log(["_readValue", key, object]);
+        if (!object || !key) return null;
+
+        const tokens = key.split('.');
+        for (const token of tokens) {
+            object = object[token];
+            if (!object) return null;
+        }
+
+        return object;
+    }
+}
