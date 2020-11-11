@@ -116,7 +116,6 @@ export class ItemSFRPG extends Item {
 
             // Save DC
             let save = data.save || {};
-            if (!save.type) save.dc = null;
             labels.save = this._getSaveLabel(save, actorData, data);
 
             // Damage
