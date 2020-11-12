@@ -289,7 +289,7 @@ export class DiceSFRPG {
      * @param {Number} multiplier The number to multiply the modifier by
      */
     static _updateModifiersForCrit(data, formula, multiplier) {
-        let matches = formula.match(new RegExp(/@[a-z.0-9]+/gi))?.map(x => x.replace('@', '')) ?? [];
+        let matches = formula.match(new RegExp(/@[a-zA-Z.0-9]+/gi))?.map(x => x.replace('@', '')) ?? [];
 
         for (let match of matches) {
             let value = getProperty(data, match);
@@ -347,7 +347,7 @@ export class DiceSFRPG {
         const replacements = {};
         
         let processedFormula = formula;
-        const variableMatches = new Set(processedFormula.match(/@([a-z.0-9_\-]+)/g));
+        const variableMatches = new Set(processedFormula.match(/@([a-zA-Z.0-9_\-]+)/g));
         for (const variable of variableMatches) {
             const variableParts = variable?.substring(1)?.split('.');
             if (!variableParts || variableParts.length === 0) {
@@ -492,7 +492,7 @@ class RollNode {
             }
         }
         else {
-            const variableMatches = new Set(this.formula.match(/@([a-z.0-9_\-]+)/g));
+            const variableMatches = new Set(this.formula.match(/@([a-zA-Z.0-9_\-]+)/g));
             for (const fullVariable of variableMatches) {
                 const variable = fullVariable.substring(1);
                 const context = RollNode.getContextForVariable(variable, contexts);
@@ -546,7 +546,7 @@ class RollNode {
                 // TODO: Implement formula, for example "3d6 + @abilities.str.mod + 2" should correctly replace the child node
                 let valueString = this.formula;
                 let formulaString = this.formula;
-                const variableMatches = new Set(formulaString.match(/@([a-z.0-9_\-]+)/g));
+                const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_\-]+)/g));
                 for (const fullVariable of variableMatches) {
                     const regexp = new RegExp(fullVariable, "gi");
                     const variable = fullVariable.substring(1);
