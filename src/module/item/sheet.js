@@ -1,4 +1,5 @@
 import { SFRPG } from "../config.js"
+import { RPC } from "../rpc.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -114,8 +115,8 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.sizeModifier = sizeModifier;
 
                 data.placeholders.savingThrow = {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @abilities.dex.mod`;
-                data.placeholders.savingThrow.value = this._computeSavingThrowValue(Math.floor(itemLevel / 2), data.placeholders.savingThrow.formula);
+                data.placeholders.savingThrow.formula = `@itemLevel + @actor.abilities.dex.mod`;
+                data.placeholders.savingThrow.value = this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula);
             } else {
                 let itemLevel = this.parseNumber(itemData.level, 1);
                 let sizeModifier = 0;
@@ -128,8 +129,8 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.sizeModifier = sizeModifier;
 
                 data.placeholders.savingThrow = {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @abilities.dex.mod`;
-                data.placeholders.savingThrow.value = this._computeSavingThrowValue(Math.floor(itemLevel / 2), data.placeholders.savingThrow.formula);
+                data.placeholders.savingThrow.formula = `@itemLevel + @actor.abilities.dex.mod`;
+                data.placeholders.savingThrow.value = this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula);
             }
         }
 
@@ -164,18 +165,15 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     _computeSavingThrowValue(itemLevel, formula) {
         try {
-            let rollData = {
-                item: this.item.data.data,
+            const rollData = {
+                actor: this.item.actor ? duplicate(this.item.actor.data.data) : {abilities: {dex: {mod: 0}}},
+                item: duplicate(this.item.data.data),
                 itemLevel: itemLevel
             };
-            if (this.item.actor) {
-                rollData = duplicate(this.item.actor.data.data);
-                rollData.item = this.item.data.data;
-                rollData.itemLevel = itemLevel;
-            } else {
-                rollData.abilities = { dex: { mod: 0 }};
+            if (!rollData.actor.abilities?.dex?.mod) {
+                rollData.actor.abilities = {dex: {mod: 0}};
             }
-            let saveRoll = new Roll(formula, rollData).roll();
+            const saveRoll = new Roll(formula, rollData).roll();
             return saveRoll.total;
         } catch (err) {
             return 10;

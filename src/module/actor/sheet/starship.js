@@ -5,6 +5,8 @@ import { ActorSheetSFRPG } from "./base.js";
  * @type {ActorSheetSFRPG}
  */
 export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
+    static AcceptedEquipment = "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon";
+
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {
@@ -215,22 +217,32 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
+        const inventory = {
+            inventory: { label: "Inventory", items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
+        };
 
-        let [forward, starboard, aft, port, turret, unmounted, frame] = data.items.reduce((arr, item) => {
+        let [forward, starboard, aft, port, turret, unmounted, frame, equipment] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
             if (item.type === "starshipFrame") arr[6].push(item);
             else {
-                if (item.data.mount.arc === "forward") arr[0].push(item);
-                else if (item.data.mount.arc === "starboard") arr[1].push(item);
-                else if (item.data.mount.arc === "aft") arr[2].push(item);
-                else if (item.data.mount.arc === "port") arr[3].push(item);
-                else if (item.data.mount.arc === "turret") arr[4].push(item);
+                const weaponArc = item?.data?.mount?.arc;
+                if (weaponArc === "forward") arr[0].push(item);
+                else if (weaponArc === "starboard") arr[1].push(item);
+                else if (weaponArc === "aft") arr[2].push(item);
+                else if (weaponArc === "port") arr[3].push(item);
+                else if (weaponArc === "turret") arr[4].push(item);
+                else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[7].push(item);
                 else arr[5].push(item);
             }
 
             return arr;
-        }, [[], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], []]);
+
+        this.processItemContainment(equipment, function (itemType, itemData) {
+            inventory.inventory.items.push(itemData);
+        });
+        data.inventory = inventory;
 
         const weaponMounts = this.actor.data.data.frame?.data?.weaponMounts;
         const hasForward = weaponMounts?.forward?.lightSlots || weaponMounts?.forward?.heavySlots || weaponMounts?.forward?.capitalSlots;
@@ -309,40 +321,60 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         let data;
         try {
             data = JSON.parse(event.dataTransfer.getData('text/plain'));
+            if (!data) {
+                return false;
+            }
         } catch (err) {
             return false;
         }
 
-        if (!data) return false;
-
-        // Case 1 - Dropped Item
-        if (data.type === "Item")
-            return this._onDropItem(event, data);
-        
-        // Case 2 - Dropped Actor
-        if (data.type === "Actor")
+        // Case - Dropped Actor
+        if (data.type === "Actor") {
             return this._onCrewDrop(event, data);
-    }
+        } else if (data.type === "Item") {
+            const rawItemData = await this._getItemDropData(event, data);
 
-    /**
-     * Handle drop events for Items. 
-     * 
-     * @param {Event} event The originating click event
-     * @param {object} data The data transfer object
-     */
-    async _onDropItem(event, data) {
-        if (!this.actor.owner) return false;
-        let itemData = await this._getItemDropData(event, data);
-
-        const acceptedItems = ["starshipFrame", "starshipWeapon"];
-        if (!acceptedItems.includes(itemData.type)) {
-            let name = itemData.name;
-            ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name }));
-            return false;
+            const acceptedStarshipItems = ["starshipFrame", "starshipWeapon"];
+            if (acceptedStarshipItems.includes(rawItemData.type)) {
+                return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
+            } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {
+                return super._onDrop(event);
+            } else {
+                ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
+                return false;
+            }
         }
-
-        return this.actor.createEmbeddedEntity("OwnedItem", itemData);
+    
+        return false;
     }
+    
+    /**
+    * Get an items data.
+    * 
+    * @param {Event} event The originating drag event
+    * @param {object} data The data trasfer object
+    */
+   async _getItemDropData(event, data) {
+       let itemData = null;
+
+       const actor = this.actor;
+       if (data.pack) {
+           const pack = game.packs.get(data.pack);
+           if (pack.metadata.entity !== "Item") return;
+           itemData = await pack.getEntity(data.id);
+       } else if (data.data) {
+           let sameActor = data.actorId === actor._id;
+           if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
+           if (sameActor) return this._onSortItem(event, data.data);
+           itemData = data.data;
+       } else {
+           let item = game.items.get(data.id);
+           if (!item) return;
+           itemData = item.data;
+       }
+
+       return duplicate(itemData);
+   }
 
     async _render(...args) {
         await super._render(...args);
@@ -354,36 +386,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             duration: [500, null],
             delay: [800, null]
         });
-    }
-
-    // TODO: Remove this once https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
-    // has been implemented
-    /**
-     * Get an items data.
-     * 
-     * @param {Event} event The originating drag event
-     * @param {object} data The data trasfer object
-     */
-    async _getItemDropData(event, data) {
-        let itemData = null;
-
-        const actor = this.actor;
-        if (data.pack) {
-            const pack = game.packs.get(data.pack);
-            if (pack.metadata.entity !== "Item") return;
-            itemData = await pack.getEntity(data.id);
-        } else if (data.data) {
-            let sameActor = data.actorId === actor._id;
-            if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
-            if (sameActor) return this._onSortItem(event, data.data);
-            itemData = data.data;
-        } else {
-            let item = game.items.get(data.id);
-            if (!item) return;
-            itemData = item.data;
-        }
-
-        return duplicate(itemData);
     }
 
     /**

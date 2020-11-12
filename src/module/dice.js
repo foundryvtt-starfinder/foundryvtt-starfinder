@@ -62,9 +62,12 @@ export class DiceSFRPG {
             };
 
             // Flag critical thresholds
-            let d20 = roll.terms[0];
-            d20.options.critical = critical;
-            d20.options.fumble = fumble;
+            for (let d of roll.dice) {
+                if (d.faces === 20) {
+                    d.options.critical = critical;
+                    d.options.fumble = fumble;
+                }
+            }
 
             if (game.settings.get("sfrpg", "useCustomChatCard")) {
                 //Push the roll to the ChatBox
@@ -159,6 +162,7 @@ export class DiceSFRPG {
     * @param {Event} event           The triggering event which initiated the roll
     * @param {Array} parts           The dice roll component parts, excluding the initial d20
     * @param {Object} criticalData   Critical damage information, in case of a critical hit
+    * @param {Array} damageTypes     Array of damage types associated with this roll
     * @param {Actor} actor           The Actor making the damage roll
     * @param {Object} data           Actor or item data against which to parse the roll
     * @param {String} template       The HTML template used to render the roll dialog
@@ -169,7 +173,7 @@ export class DiceSFRPG {
     * @param {Function} onClose      Callback for actions to take when the dialog form is closed
     * @param {Object} dialogOptions  Modal dialog options
     */
-    static damageRoll({ event = new Event(''), parts, criticalData, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
+    static damageRoll({ event = new Event(''), parts, criticalData, damageTypes, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
         flavor = flavor || title;
 
         const autoFastForward = game.settings.get('sfrpg', 'useQuickRollAsDefault');
@@ -199,6 +203,18 @@ export class DiceSFRPG {
                         roll = new Roll(roll.formula + " + " + critRoll, data);
                     }
                 }
+            }
+
+            // evaluate the roll so we can add some metadata to it
+            roll.evaluate();
+            
+            // Associate the damage types for this attack to the first DiceTerm
+            // for the roll. 
+            const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
+            if (die) {
+                die.options.isDamageRoll = true;
+                die.options.damageTypes = damageTypes;
+                die.options.isModal = data.item.properties.modal || data.item.properties.double;
             }
 
             // Execute the roll and send it to chat
@@ -381,19 +397,38 @@ export class DiceSFRPG {
         }
         return processedFormula;
     }
-}
 
-export const highlightCriticalSuccessFailure = function (message, html, data) {
-    if (!message.isRoll || !message.isContentVisible) return;
-
-    let roll = message.roll;
-    if (!roll.dice.length) return;
-    let d = roll.dice[0];
-    if (d instanceof Die && (d.faces === 20) && (d.results.length === 1)) {
-        if (d.total >= (d.options.critical || 20)) html.find('.dice-total').addClass('success');
-        else if (d.total <= (d.options.fumble || 1)) html.find('.dice-total').addClass('failure');
+    static highlightCriticalSuccessFailure(message, html, data) {
+        if (!message.isRoll || !message.isContentVisible) return;
+    
+        let roll = message.roll;
+        if (!roll.dice.length) return;
+        for (let d of roll.dice) {
+            if (d.faces === 20 && d.results.length === 1) {
+                if (d.total >= (d.options.critical || 20)) html.find('.dice-total').addClass('success');
+                else if (d.total <= (d.options.fumble || 1)) html.find('.dice-total').addClass('failure');
+            }
+        }
     }
-};
+
+    /**
+     * Add damage types for damage rolls to the chat card.
+     * 
+     * @param {ChatMessage} message The chat message
+     * @param {JQuery}      html    The html of the chat message
+     */
+    static addDamageTypes(message, html) {
+        if (!message.isRoll || !message.isContentVisible) return;
+
+        const roll = message.roll;
+        if (!roll?.dice.length > 0) return;
+        const die = roll.dice[0];
+
+        if (die?.options?.isDamageRoll) {
+            const types = die?.options?.damageTypes;
+        }
+    }
+}
 
 class RollTree {
     constructor() {

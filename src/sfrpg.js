@@ -20,7 +20,6 @@ import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
 import { ItemSFRPG } from "./module/item/item.js";
 import { CombatSFRPG } from "./module/combat/combat.js";
 import { ItemSheetSFRPG } from "./module/item/sheet.js";
-import { highlightCriticalSuccessFailure } from "./module/dice.js";
 import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/combat.js";
 import Engine from "./module/engine/engine.js";
 import registerSystemRules from "./module/rules.js";
@@ -313,7 +312,8 @@ Hooks.on("canvasInit", function () {
 });
 
 Hooks.on("renderChatMessage", (app, html, data) => {
-    highlightCriticalSuccessFailure(app, html, data);
+    DiceSFRPG.highlightCriticalSuccessFailure(app, html, data);
+    DiceSFRPG.addDamageTypes(app, html);
 
     if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
 });

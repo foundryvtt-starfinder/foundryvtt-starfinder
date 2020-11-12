@@ -96,6 +96,39 @@ async function copyFiles() {
 }
 
 /**
+ * Copy only those files that we want to watch while developing.
+ * 
+ * Over time, with the inclusion of tons of images and icons, the number
+ * of files that are being copied over to the dist folder has increased by
+ * a large amount. This was causing the watch process to slow to a crawl while
+ * it re copied a bunch of static files. This method is only concerned with copying
+ * files that might actually change during development.
+ */
+async function copyWatchFiles() {
+	const name = 'sfrpg';
+
+	const statics = [
+		'lang',
+		'templates',
+		'module',
+		`${name}.js`,
+		'module.json',
+		'system.json',
+		'template.json',
+	];
+	try {
+		for (const file of statics) {
+			if (fs.existsSync(path.join('src', file))) {
+				await fs.copy(path.join('src', file), path.join('dist', file));
+			}
+		}
+		return Promise.resolve();
+	} catch (err) {
+		Promise.reject(err);
+	}
+}
+
+/**
  * Does the same as copyFiles, except it only moves the 
  * README, OGL, and LICENSE files. These aren't needed for
  * development, but they should be in the package.
@@ -144,7 +177,7 @@ function buildWatch() {
 	gulp.watch(
 		['src/fonts', 'src/templates', 'src/lang', 'src/*.json', 'src/**/*.js'],
 		{ ignoreInitial: false },
-		copyFiles
+		copyWatchFiles
 	);
 }
 
