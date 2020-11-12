@@ -133,9 +133,14 @@ export class ItemSFRPG extends Item {
         let dcFormula = save.dc || `10 + ${Math.floor((itemData.attributes?.sturdy ? itemData.level + 2 : itemData.level) / 2)} + ${this.actor?.data?.data?.abilities?.dex ? this.actor.data.data.abilities.dex.mod : 0}`;
         if (dcFormula && Number.isNaN(Number(dcFormula))) {
             const rollData = duplicate(actorData?.data || { abilities: { dex: { mod: 0 }}});
-            rollData.abilities.key = {
-                mod: 0
-            };
+            if (rollData.abilities) {
+                rollData.abilities.key = {
+                    mod: 0
+                };
+            }
+            else {
+                rollData.abilities = { key: { mod: 0 } };
+            }
 
             let keyAbility = actorData?.data?.attributes?.keyability;
             if (keyAbility) {
