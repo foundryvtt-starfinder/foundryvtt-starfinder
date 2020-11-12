@@ -332,16 +332,49 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         if (data.type === "Actor") {
             return this._onCrewDrop(event, data);
         } else if (data.type === "Item") {
-            if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(data.data.type)) {
+            const rawItemData = await this._getItemDropData(event, data);
+
+            const acceptedStarshipItems = ["starshipFrame", "starshipWeapon"];
+            if (acceptedStarshipItems.includes(rawItemData.type)) {
+                return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
+            } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {
                 return super._onDrop(event);
             } else {
-                ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: data.data.name }));
+                ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
                 return false;
             }
         }
     
         return false;
     }
+    
+    /**
+    * Get an items data.
+    * 
+    * @param {Event} event The originating drag event
+    * @param {object} data The data trasfer object
+    */
+   async _getItemDropData(event, data) {
+       let itemData = null;
+
+       const actor = this.actor;
+       if (data.pack) {
+           const pack = game.packs.get(data.pack);
+           if (pack.metadata.entity !== "Item") return;
+           itemData = await pack.getEntity(data.id);
+       } else if (data.data) {
+           let sameActor = data.actorId === actor._id;
+           if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
+           if (sameActor) return this._onSortItem(event, data.data);
+           itemData = data.data;
+       } else {
+           let item = game.items.get(data.id);
+           if (!item) return;
+           itemData = item.data;
+       }
+
+       return duplicate(itemData);
+   }
 
     async _render(...args) {
         await super._render(...args);
