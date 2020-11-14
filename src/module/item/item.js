@@ -515,7 +515,7 @@ export class ItemSFRPG extends Item {
         
         if (itemData.data.attackBonus !== 0) parts.push("@item.data.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
-        if (["character", "drone"].includes(this.actor.data.type)) parts.push("@attributes.bab");
+        if (["character", "drone"].includes(this.actor.data.type)) parts.push("@attributes.baseAttackBonus.value");
         if (isWeapon && !itemData.data.proficient) parts.push("-4");
 
         let acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];

@@ -27,6 +27,18 @@ export class DiceSFRPG {
     static d20Roll({ event = new Event(''), parts, data, actor, template, title, speaker, flavor, advantage = true, situational = true,
         fastForward = true, critical = 20, fumble = 1, onClose, dialogOptions }) {
 
+        /** New roll formula system */
+        try {
+            const formula = "1d20 + " + parts.join(" + ");
+            const contexts = {main: {entity: actor, data: data}};
+            const tree = new RollTree({debug: true});
+            const treeRoll = tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"});
+            console.log(treeRoll);
+        } catch (error) {
+            console.log(error);
+            console.trace();
+        }
+
         flavor = flavor || title;
         const autoFastForward = game.settings.get('sfrpg', 'useQuickRollAsDefault');
         if (event && autoFastForward) {
@@ -187,8 +199,19 @@ export class DiceSFRPG {
             if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
 
             //let roll = new Roll(parts.join("+"), data);
-            const combinedFormula = DiceSFRPG.contextualRoll(parts.join("+"), {main: {entity: actor, data: data}}, {debug: false});
-            let roll = new Roll(combinedFormula);
+
+            try {
+                const formula = parts.join(" + ");
+                const contexts = {main: {entity: actor, data: data}};
+                const tree = new RollTree({debug: true});
+                const treeRoll = tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"});
+                console.log(treeRoll);
+            } catch (error) {
+                console.log(error);
+                console.trace();
+            }
+
+            let roll = new Roll(parts.join("+"), data);
             if (crit === true) {
                 let add = 0;
                 let mult = 2;
@@ -329,15 +352,6 @@ export class DiceSFRPG {
 
     static contextualRoll(formula, contexts, options = {}) {
 
-        try {
-            const tree = new RollTree();
-            const treeRoll = tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"});
-            console.log(treeRoll);
-        } catch (error) {
-            console.log(error);
-            console.trace();
-        }
-
         if (options.debug) {
             console.log(["contextualRoll", formula, contexts, options]);
         }
@@ -431,14 +445,17 @@ export class DiceSFRPG {
 }
 
 class RollTree {
-    constructor() {
+    constructor(options = {}) {
         this.rootNode = null;
         this.nodes = {};
+        this.options = options;
     }
 
     buildRoll(formula, contexts) {
-        console.log(`Resolving '${formula}'`);
-        this.rootNode = new RollNode(this, formula, null, false, false, true);
+        if (this.options.debug) {
+            console.log(`Resolving '${formula}'`);
+        }
+        this.rootNode = new RollNode(this, formula, null, null, false, true);
         this.nodes = {};
 
         this.nodes[formula] = this.rootNode;
@@ -448,26 +465,28 @@ class RollTree {
         this.displayUI(formula, contexts, allRolledMods);
         
         const finalRollFormula = this.rootNode.resolve();
-        console.log([`Final roll results outcome`, formula, finalRollFormula]);
+        if (this.options.debug) {
+            console.log([`Final roll results outcome`, formula, finalRollFormula]);
+        }
         return finalRollFormula;
     }
 
     displayUI(formula, contexts, allRolledMods) {
-
+        const availableModifiers = (this.options.additionalModifiers || []).concat(allRolledMods.map(x => x.referenceModifier));
+        console.log(["Available modifiers", availableModifiers]);
     }
 
     static getAllRolledModifiers(nodes) {
-        console.log(nodes);
-        return Object.values(nodes).filter(x => x.isRolled);
+        return Object.values(nodes).filter(x => x.referenceModifier !== null);
     }
 }
 
 class RollNode {
-    constructor(tree, formula, baseValue, isRolled, isVariable, isEnabled) {
+    constructor(tree, formula, baseValue, referenceModifier, isVariable, isEnabled) {
         this.tree = tree;
         this.formula = formula;
         this.baseValue = baseValue;
-        this.isRolled = isRolled;
+        this.referenceModifier = referenceModifier;
         this.isVariable = isVariable;
         this.isEnabled = isEnabled;
         this.resolvedValue = undefined;
@@ -480,15 +499,15 @@ class RollNode {
             const availableRolledMods = RollNode.getRolledModifiers(this.formula, context);
 
             for (const mod of availableRolledMods) {
-                const modFormula = mod.mod;
+                const modKey = mod.bonus.name;
 
-                let existingNode = nodes[modFormula];
+                let existingNode = nodes[modKey];
                 if (!existingNode) {
-                    const childNode = new RollNode(this.tree, modFormula, null, false, false, mod.bonus.enabled);
-                    nodes[modFormula] = childNode;
+                    const childNode = new RollNode(this.tree, mod.bonus.modifier, null, mod.bonus, false, mod.bonus.enabled);
+                    nodes[modKey] = childNode;
                     existingNode = childNode;
                 }
-                this.childNodes[modFormula] = existingNode;
+                this.childNodes[modKey] = existingNode;
             }
         }
         else {
@@ -500,7 +519,7 @@ class RollNode {
 
                 let existingNode = nodes[variable];
                 if (!existingNode) {
-                    const childNode = new RollNode(this.tree, variable, variableValue, false, true, true);
+                    const childNode = new RollNode(this.tree, variable, variableValue, null, true, true);
                     nodes[variable] = childNode;
                     existingNode = childNode;
                 }
@@ -517,7 +536,7 @@ class RollNode {
         if (this.resolvedValue) {
             return this.resolvedValue;
         } else {
-            console.log(['Resolving', depth, this]);
+            //console.log(['Resolving', depth, this]);
             this.resolvedValue = {
                 finalRoll: "",
                 formula: ""
@@ -527,7 +546,7 @@ class RollNode {
 
             if (this.baseValue) {
                 this.resolvedValue.finalRoll = this.baseValue;
-                this.resolvedValue.formula = this.formula;
+                this.resolvedValue.formula = "@" + this.formula;
 
                 // formula
                 for (const childNode of enabledChildNodes) {
@@ -540,7 +559,7 @@ class RollNode {
                     if (this.resolvedValue.formula !== "") {
                         this.resolvedValue.formula += " + ";
                     }
-                    this.resolvedValue.formula += childResolution.formula;
+                    this.resolvedValue.formula += childNode.referenceModifier ? `[${childNode.referenceModifier.name}]` : childResolution.formula;
                 }
             } else {
                 // TODO: Implement formula, for example "3d6 + @abilities.str.mod + 2" should correctly replace the child node
@@ -551,14 +570,14 @@ class RollNode {
                     const regexp = new RegExp(fullVariable, "gi");
                     const variable = fullVariable.substring(1);
                     const existingNode = this.childNodes[variable];
-                    console.log(["testing var", depth, this, fullVariable, variable, existingNode]);
+                    //console.log(["testing var", depth, this, fullVariable, variable, existingNode]);
                     if (existingNode) {
                         const childResolution = existingNode.resolve(depth + 1);
                         valueString = valueString.replace(regexp, childResolution.finalRoll);
                         formulaString = formulaString.replace(regexp, childResolution.formula);
-                        console.log(['Result', depth, childResolution, valueString, formulaString]);
+                        //console.log(['Result', depth, childResolution, valueString, formulaString]);
                     } else {
-                        console.log(['Result', depth, "0"]);
+                        //console.log(['Result', depth, "0"]);
                         valueString = valueString.replace(regexp, "0");
                         formulaString = formulaString.replace(regexp, "0");
                     }
@@ -567,7 +586,7 @@ class RollNode {
                 this.resolvedValue.finalRoll = valueString;
                 this.resolvedValue.formula = formulaString;
             }
-            console.log(["Resolved", depth, this, this.resolvedValue]);
+            //console.log(["Resolved", depth, this, this.resolvedValue]);
             return this.resolvedValue;
         }
     }
