@@ -5,7 +5,7 @@ import { ActorSheetSFRPG } from "./base.js";
  * @type {ActorSheetSFRPG}
  */
 export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
-    static AcceptedEquipment = "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon";
+    static AcceptedEquipment = "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory";
 
     static get defaultOptions() {
         const options = super.defaultOptions;

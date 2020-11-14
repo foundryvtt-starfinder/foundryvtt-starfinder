@@ -56,7 +56,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
     _prepareItems(data) {
         const inventory = {
-            inventory: { label: "Inventory", items: [], dataset: { type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon" }, allowAdd: true }
+            inventory: { label: "Inventory", items: [], dataset: { type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory" }, allowAdd: true }
         };
         const features = {
             weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon,shield", "weapon-type": "natural" }, allowAdd: true },
