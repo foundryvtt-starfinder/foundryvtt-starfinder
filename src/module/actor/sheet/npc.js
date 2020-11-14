@@ -104,6 +104,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         let itemsToProcess = [];
         for (let item of other) {
             if (["weapon", "shield"].includes(item.type)) {
+                item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
                 if (!item.data.containerId) {
                     features.weapons.items.push(item);
                 }
@@ -114,6 +115,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 else features.passive.items.push(item);
             }
             else if (["consumable", "technological"].includes(item.type)) {
+                item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
                 if (!item.data.containerId) {
                     features.activeItems.items.push(item);
                 }
@@ -128,6 +130,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 }
                 features[item.type].items.push(item);
             } else if (item.type in SFRPG.itemTypes) {
+                item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
                 itemsToProcess.push(item);
             }
         }

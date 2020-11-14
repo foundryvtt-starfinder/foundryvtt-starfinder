@@ -248,6 +248,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         for (const item of equipment) {
             totalValue += (item?.data?.quantity || 0) * (item?.data?.price || 0);
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
+            item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
         }
         data.inventoryValue = Math.floor(totalValue);
 

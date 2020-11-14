@@ -130,6 +130,8 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         if (!this.options.editable) return;
 
+        html.find('.toggle-container').click(this._onToggleContainer.bind(this));
+
         html.find('.skill-proficiency').on("click contextmenu", this._onCycleClassSkill.bind(this));
         html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
@@ -530,6 +532,22 @@ export class ActorSheetSFRPG extends ActorSheet {
         const item = this.actor.getOwnedItem(itemId);
 
         return item.update({'data.capacity.value': item.data.data.capacity.max});
+    }
+
+    /**
+     * Handles toggling the open/close state of a container.
+     * 
+     * @param {Event} event The originating click event
+     */
+    _onToggleContainer(event) {
+        event.preventDefault();
+
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        const isOpen = item.data.data.container?.isOpen === undefined ? true : item.data.data.container.isOpen;
+
+        return item.update({'data.container.isOpen': !isOpen});
     }
 
     /**
