@@ -5,7 +5,7 @@ import { ActorSheetSFRPG } from "./base.js";
  * @type {ActorSheetSFRPG}
  */
 export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
-    static AcceptedEquipment = "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon";
+    static AcceptedEquipment = "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory";
 
     static get defaultOptions() {
         const options = super.defaultOptions;
@@ -244,6 +244,14 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         });
         data.inventory = inventory;
 
+        let totalValue = 0;
+        for (const item of equipment) {
+            totalValue += (item?.data?.quantity || 0) * (item?.data?.price || 0);
+            item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
+            item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
+        }
+        data.inventoryValue = Math.floor(totalValue);
+
         const weaponMounts = this.actor.data.data.frame?.data?.weaponMounts;
         const hasForward = weaponMounts?.forward?.lightSlots || weaponMounts?.forward?.heavySlots || weaponMounts?.forward?.capitalSlots;
         const hasStarboard = weaponMounts?.starboard?.lightSlots || weaponMounts?.starboard?.heavySlots || weaponMounts?.starboard?.capitalSlots;
@@ -338,7 +346,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             if (acceptedStarshipItems.includes(rawItemData.type)) {
                 return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
             } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {
-                return super._onDrop(event);
+                return this.processDroppedData(event, data);
             } else {
                 ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
                 return false;
@@ -365,7 +373,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
        } else if (data.data) {
            let sameActor = data.actorId === actor._id;
            if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
-           if (sameActor) return this._onSortItem(event, data.data);
+           if (sameActor) {
+               await this._onSortItem(event, data.data);
+           }
            itemData = data.data;
        } else {
            let item = game.items.get(data.id);

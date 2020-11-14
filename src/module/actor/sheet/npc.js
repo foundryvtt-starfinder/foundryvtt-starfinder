@@ -56,7 +56,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
     _prepareItems(data) {
         const inventory = {
-            inventory: { label: "Inventory", items: [], dataset: { type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon" }, allowAdd: true }
+            inventory: { label: "Inventory", items: [], dataset: { type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory" }, allowAdd: true }
         };
         const features = {
             weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon,shield", "weapon-type": "natural" }, allowAdd: true },
@@ -104,6 +104,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         let itemsToProcess = [];
         for (let item of other) {
             if (["weapon", "shield"].includes(item.type)) {
+                item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
                 if (!item.data.containerId) {
                     features.weapons.items.push(item);
                 }
@@ -114,6 +115,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 else features.passive.items.push(item);
             }
             else if (["consumable", "technological"].includes(item.type)) {
+                item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
                 if (!item.data.containerId) {
                     features.activeItems.items.push(item);
                 }
@@ -128,6 +130,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 }
                 features[item.type].items.push(item);
             } else if (item.type in SFRPG.itemTypes) {
+                item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
                 itemsToProcess.push(item);
             }
         }

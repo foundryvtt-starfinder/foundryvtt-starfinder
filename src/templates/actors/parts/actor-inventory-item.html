@@ -49,8 +49,14 @@
             </div>
 
             <div class="item-detail item-action">
-                {{#if item.hasCapacity }}
-                {{item.data.usage.value}} / {{item.data.usage.per}}
+                {{#if (eq item.type "container")}}
+                    {{#if item.isOpen}}
+                        <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.CloseTooltip"}}"><i class="fas fa-arrow-up"> {{localize "SFRPG.ActorSheet.Inventory.Container.Close"}}</i></a>
+                    {{else}}
+                        <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down"> {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</i></a>
+                    {{/if}}
+                {{else if item.hasUses}}
+                    {{item.data.usage.value}} / {{item.data.usage.per}}
                 {{/if}}
             </div>
             {{/unless}}
@@ -60,9 +66,9 @@
                 {{#if (not disableEquipping)}}
                 {{#if (and (or (or (or (eq item.type "weapon") (eq item.type "shield")) (eq item.type "equipment")) (eq item.type "container")) bigItem)}}
                 {{#if item.data.equipped}}
-                <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Equip"}}"><i class="fas fa-check"></i></a>
+                <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Unequip"}}"><i class="fas fa-check"></i></a>
                 {{else}}
-                <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Unequip"}}"><i class="far fa-square"></i></a>
+                <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Equip"}}"><i class="far fa-square"></i></a>
                 {{/if}}
                 {{/if}}
                 {{/if}}
@@ -72,7 +78,7 @@
             {{/if}}
         </li>
 
-        {{#if children}}
+        {{#if (and children item.isOpen)}}
         <ol class="item-list-child">
         {{#each children as |childItem iid|}}
             {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../this bigItem=false item=childItem.item children=childItem.contents}}

@@ -142,6 +142,13 @@ export class ItemSFRPG extends Item {
                 rollData.abilities = { key: { mod: 0 } };
             }
 
+            if (!rollData?.abilities?.dex?.mod) {
+                const mergedRollData = mergeObject(rollData, {
+                    abilities: {dex: {mod: 0}}
+                });
+                rollData.abilities = mergedRollData.abilities;
+            }
+
             let keyAbility = actorData?.data?.attributes?.keyability;
             if (keyAbility) {
                 rollData.abilities.key = duplicate(actorData.data.abilities[keyAbility]);
