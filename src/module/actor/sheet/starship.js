@@ -340,7 +340,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             return this._onCrewDrop(event, data);
         } else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
-            delete rawItemData._id;
 
             const acceptedStarshipItems = ["starshipFrame", "starshipWeapon"];
             if (acceptedStarshipItems.includes(rawItemData.type)) {
@@ -373,7 +372,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
        } else if (data.data) {
            let sameActor = data.actorId === actor._id;
            if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
-           if (sameActor) return this._onSortItem(event, data.data);
+           if (sameActor) {
+               await this._onSortItem(event, data.data);
+           }
            itemData = data.data;
        } else {
            let item = game.items.get(data.id);
