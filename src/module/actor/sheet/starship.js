@@ -244,6 +244,13 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         });
         data.inventory = inventory;
 
+        let totalValue = 0;
+        for (const item of equipment) {
+            totalValue += (item?.data?.quantity || 0) * (item?.data?.price || 0);
+            item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
+        }
+        data.inventoryValue = Math.floor(totalValue);
+
         const weaponMounts = this.actor.data.data.frame?.data?.weaponMounts;
         const hasForward = weaponMounts?.forward?.lightSlots || weaponMounts?.forward?.heavySlots || weaponMounts?.forward?.capitalSlots;
         const hasStarboard = weaponMounts?.starboard?.lightSlots || weaponMounts?.starboard?.heavySlots || weaponMounts?.starboard?.capitalSlots;
@@ -333,12 +340,13 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             return this._onCrewDrop(event, data);
         } else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
+            delete rawItemData._id;
 
             const acceptedStarshipItems = ["starshipFrame", "starshipWeapon"];
             if (acceptedStarshipItems.includes(rawItemData.type)) {
                 return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
             } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {
-                return super._onDrop(event);
+                return this.processDroppedData(event, data);
             } else {
                 ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
                 return false;
