@@ -468,18 +468,12 @@ export class ActorSFRPG extends Actor {
         let parts = [];
         let data = this.getRollData();
 
-        if (abl.rolledMods) {
-            parts.push(...abl.rolledMods.filter(x => x.bonus.enabled).map(x => x.mod));
-        }
-
         //Include ability check bonus only if it's not 0
         if(abl.abilityCheckBonus) {
             parts.push('@abilityCheckBonus');
             data.abilityCheckBonus = abl.abilityCheckBonus;
         }
-        parts.push('@mod')
-
-        mergeObject(data, { mod: abl.mod });
+        parts.push(`@abilities.${abilityId}.mod`);
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
@@ -487,7 +481,7 @@ export class ActorSFRPG extends Actor {
             parts: parts,
             data: data,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Ability Check - ${label}`,
-            title:  `Ability Check`,
+            title:  `Ability Check - ${label}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
     }
@@ -505,19 +499,14 @@ export class ActorSFRPG extends Actor {
         let parts = [];
         let data = this.getRollData();
 
-        if (save.rolledMods) {
-            parts.push(...save.rolledMods.filter(x => x.bonus.enabled).map(x => x.mod));
-        }
-        parts.push('@mod');
-
-        mergeObject(data, { mod: save.bonus });
+        parts.push(`@attributes.${saveId}.bonus`);
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
             actor: this,
             parts: parts,
             data: data,
-            title: `Save`,
+            title: `Save - ${label}`,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Save - ${label}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });
@@ -527,19 +516,14 @@ export class ActorSFRPG extends Actor {
         let parts = [];
         let data = this.getRollData();
 
-        if (skill.rolledMods) {
-            parts.push(...skill.rolledMods.filter(x => x.bonus.enabled).map(x => x.mod));
-        }
-
-        parts.push('@mod');
-        mergeObject(data, { mod: skill.mod });
+        parts.push(`@skills.${skillId}.mod`);
         
         return await DiceSFRPG.d20Roll({
             actor: this,
             event: options.event,
             parts: parts,
             data: data,
-            title: 'Skill Check',
+            title: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             speaker: ChatMessage.getSpeaker({ actor: this })
         });

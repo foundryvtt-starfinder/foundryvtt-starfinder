@@ -26,53 +26,43 @@ export class DiceSFRPG {
    */
     static d20Roll({ event = new Event(''), parts, data, actor, template, title, speaker, flavor, advantage = true, situational = true,
         fastForward = true, critical = 20, fumble = 1, onClose, dialogOptions }) {
+        
+        flavor = flavor || title;
 
         /** New roll formula system */
-        try {
-            const formula = "1d20 + " + parts.join(" + ");
-            const contexts = {main: {entity: actor, data: data}};
-            const tree = new RollTree({debug: true});
-            tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"}, (button, mode, finalFormula) => {
-                console.log([button, mode, finalFormula]);
-            });
-        } catch (error) {
-            console.log(error);
-            console.trace();
+        const buttons = {};
+        if (game.settings.get("sfrpg", "useAdvantageDisadvantage") && advantage) {
+            buttons["Disadvantage"] = {label: "Disadvantage"};
+            buttons["Normal"] = {label: "Normal"};
+            buttons["Advantage"] = {label: "Advantage"};
+        } else {
+            buttons["Normal"] = {label: "Normal"};
         }
-return;
-        flavor = flavor || title;
-        const autoFastForward = game.settings.get('sfrpg', 'useQuickRollAsDefault');
-        if (event && autoFastForward) {
-            event.shiftKey = autoFastForward;
-        }
-        // Inner roll function
-        let rollMode = game.settings.get("core", "rollMode");
-        let roll = (parts, adv) => {
-            if (adv === 1) {
-                parts[0] = ["2d20kh"];
-                flavor = `${title} (Advantage)`;
+
+        const options = {
+            debug: true,
+            buttons: buttons,
+            defaultButton: "Normal",
+            title: title,
+            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault'),
+            mainDie: "1d20"
+        };
+
+        const formula = parts.join(" + ");
+        const contexts = {main: {entity: actor, data: data}};
+        const tree = new RollTree(options);
+        tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"}, (button, rollMode, finalFormula) => {
+            let dieRoll = "1d20";
+            if (button === "Disadvantage") {
+                dieRoll = "2d20kl";
+            } else if (button === "Advantage") {
+                dieRoll = "2d20kh";
             }
-            else if (adv === -1) {
-                parts[0] = ["2d20kl"];
-                flavor = `${title} (Disadvantage)`;
-            }
 
-            // Don't include situational bonus unless it is defined
-            if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
+            finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
+            finalFormula.formula = dieRoll + " + " + finalFormula.formula;
 
-            // Execute the roll
-            let roll = new Roll(parts.join(" + "), data).roll();
-            const action = title.replace(/\s/g, '-').toLowerCase();
-
-             //My data to display
-            let myData = {
-                'title': title,
-                'data':  data,
-                'actor': actor,
-                'flavor': flavor,
-                'speaker': speaker,
-                'rollMode': rollMode
-            };
+            let roll = new Roll(finalFormula.finalRoll).roll();
 
             // Flag critical thresholds
             for (let d of roll.dice) {
@@ -84,7 +74,18 @@ return;
 
             if (game.settings.get("sfrpg", "useCustomChatCard")) {
                 //Push the roll to the ChatBox
-                SFRPGCustomChatMessage.renderStandardRoll(roll, myData, action);
+                const customData = {
+                    'title': title,
+                    'data':  data,
+                    'actor': actor,
+                    'flavor': flavor,
+                    'speaker': speaker,
+                    'rollMode': rollMode
+                };
+
+                const action = title.replace(/\s/g, '-').toLowerCase();
+
+                SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
             } else {
                 roll.toMessage({
                     speaker: speaker,
@@ -92,75 +93,6 @@ return;
                     rollMode: rollMode
                 });
             }
-
-            return roll;
-        };
-
-        let dialogCallback = html => {
-            if (onClose) onClose(html, parts, data);
-            rollMode = html.find('[name="rollMode"]').val();
-            data['bonus'] = html.find('[name="bonus"]').val();
-            if (data['bonus'].trim() === "") delete data['bonus'];
-            return roll(parts, adv);
-        };
-
-        // Modify the roll and handle fast-forwarding
-        parts = ["1d20"].concat(parts);
-        // Check for shift key last, so that alt and ctrl keys can
-        // still be captured in case the auto fast-forward setting
-        // is enabled.
-        if (event.altKey) return Promise.resolve(roll(parts, 1));
-        else if (event.ctrlKey || event.metaKey) return Promise.resolve(roll(parts, -1));
-        else if (event.shiftKey) return Promise.resolve(roll(parts, 0));
-        else parts = parts.concat(["@bonus"]);
-
-        // Render modal dialog
-        template = template || "systems/sfrpg/templates/chat/roll-dialog.html";
-        const useAdvantage = game.settings.get("sfrpg", "useAdvantageDisadvantage");
-        let templateData = {
-            formula: parts.join(" + "),
-            data: data,
-            rollMode: rollMode,
-            rollModes: CONFIG.Dice.rollModes
-        };        
-
-        let adv = 0;
-
-        return new Promise(resolve => {
-            renderTemplate(template, templateData).then(dlg => {
-                new Dialog({
-                    title: title,
-                    content: dlg,
-                    buttons: {
-                        advantage: {
-                            label: "Advantage",
-                            condition: useAdvantage,
-                            callback: html => {
-                                adv = 1;
-                                resolve(dialogCallback(html));
-                            }
-                        },
-                        normal: {
-                            label: useAdvantage ? "Normal" : "Roll",
-                            callback: html => {
-                                resolve(dialogCallback(html));
-                            }
-                        },
-                        disadvantage: {
-                            label: "Disadvantage",
-                            condition: useAdvantage,
-                            callback: html => {
-                                adv = -1; 
-                                resolve(dialogCallback(html));
-                            }
-                        }
-                    },
-                    default: "normal",
-                    close: () => {
-                        // noop
-                    }
-                }, dialogOptions).render(true);
-            });
         });
     }
 
@@ -464,7 +396,7 @@ class RollTree {
         this.rootNode.populate(this.nodes, contexts);
         
         const allRolledMods = RollTree.getAllRolledModifiers(this.nodes);
-        return this.displayUI(formula, contexts, allRolledMods).then(([button, rollMode, bonus, modifiers]) => {
+        return this.displayUI(formula, contexts, allRolledMods).then(([button, rollMode, bonus]) => {
             if (button === null) {
                 console.log('Roll was cancelled');
                 return;
@@ -495,7 +427,12 @@ class RollTree {
         if (this.options.debug) {
             console.log(["Available modifiers", availableModifiers]);
         }
-        return RollDialog.showRollDialog(formula, contexts, availableModifiers, {buttons: this.options.buttons});
+        if (this.options.skipUI) {
+            const firstButton = this.options.defaultButton || (this.options.buttons ? Object.values(this.options.buttons)[0].label : "Roll");
+            const defaultRollMode = game.settings.get("core", "rollMode");
+            return new Promise((resolve) => { resolve([firstButton, defaultRollMode, ""]); });
+        }
+        return RollDialog.showRollDialog(formula, contexts, availableModifiers, this.options.mainDie, {buttons: this.options.buttons, defaultButton: this.options.defaultButton, title: this.options.title});
     }
 
     static getAllRolledModifiers(nodes) {
@@ -647,16 +584,16 @@ class RollNode {
 
 class RollDialog extends Dialog
 {
-    constructor(formula, contexts, availableModifiers, dialogData={}, options={}) {
+    constructor(formula, contexts, availableModifiers, mainDie, dialogData={}, options={}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog", "roll"];
 
-        this.formula = formula;
+        this.formula = mainDie + " + " + formula;
         this.contexts = contexts;
         this.availableModifiers = availableModifiers;
 
         this.additionalBonus = "";
-        this.rollMode = "roll";
+        this.rollMode = game.settings.get("core", "rollMode");
 
         this.rolledButton = null;
     }
@@ -736,23 +673,23 @@ class RollDialog extends Dialog
     
     async close(options) {
         /** Fire callback, then delete, as it would get called again by Dialog#close. */
-        this.data.close(this.rolledButton, this.rollMode, this.additionalBonus, this.availableModifiers);
+        this.data.close(this.rolledButton, this.rollMode, this.additionalBonus);
         delete this.data.close;
 
         return super.close(options);
     }
 
-    static async showRollDialog(formula, contexts, availableModifiers = [], options = {}) {
+    static async showRollDialog(formula, contexts, availableModifiers = [], mainDie = "1d20", options = {}) {
         return new Promise(resolve => {
             const buttons = options.buttons || { roll: { label: "Roll" } };
-            const firstButtonLabel = Object.values(buttons)[0].label;
+            const firstButtonLabel = options.defaultButton || Object.values(buttons)[0].label;
 
-            const dlg = new RollDialog(formula, contexts, availableModifiers, {
+            const dlg = new RollDialog(formula, contexts, availableModifiers, mainDie, {
                 title: options.title || "Roll",
                 buttons: buttons,
                 default: firstButtonLabel,
-                close: (button, rollMode, bonus, modifiers) => {
-                    resolve([button, rollMode, bonus, modifiers]);
+                close: (button, rollMode, bonus) => {
+                    resolve([button, rollMode, bonus]);
                 }
             });
             dlg.render(true);
