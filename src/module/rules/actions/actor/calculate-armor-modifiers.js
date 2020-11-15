@@ -44,7 +44,7 @@ export default function (engine) {
         };
 
         let armorMods = modifiers.filter(mod => {
-            return mod.enabled && [SFRPGEffectType.AC].includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.AC].includes(mod.effectType);
         });
         
         let eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context);

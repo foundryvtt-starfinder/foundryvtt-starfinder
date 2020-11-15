@@ -53,7 +53,7 @@ export default function (engine) {
         // Iterate through any modifiers that grant the character additional skillpoints to distribute
         // These only count towards skillpoint max
         let skillPointModifiers = fact.modifiers.filter(mod => {
-            return mod.enabled && mod.effectType === SFRPGEffectType.SKILL_POINTS;
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.SKILL_POINTS;
         });
         skillPointModifiers = context.parameters.stackModifiers.process(skillPointModifiers, context);
 
@@ -74,7 +74,7 @@ export default function (engine) {
         // Iterate through any modifiers that grant the character additional skillranks distributed for them
         // These always apply to a specific skill
         let skillRankModifiers = fact.modifiers.filter(mod => {
-            return mod.enabled && mod.effectType === SFRPGEffectType.SKILL_RANKS;
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.SKILL_RANKS;
         });
 
         for (let [key, skill] of Object.entries(skills)) {

@@ -469,7 +469,7 @@ export class ActorSFRPG extends Actor {
         let data = this.getRollData();
 
         if (abl.rolledMods) {
-            parts.push(...abl.rolledMods.map(x => x.mod));
+            parts.push(...abl.rolledMods.filter(x => x.bonus.enabled).map(x => x.mod));
         }
 
         //Include ability check bonus only if it's not 0
@@ -506,7 +506,7 @@ export class ActorSFRPG extends Actor {
         let data = this.getRollData();
 
         if (save.rolledMods) {
-            parts.push(...save.rolledMods.map(x => x.mod));
+            parts.push(...save.rolledMods.filter(x => x.bonus.enabled).map(x => x.mod));
         }
         parts.push('@mod');
 
@@ -528,7 +528,7 @@ export class ActorSFRPG extends Actor {
         let data = this.getRollData();
 
         if (skill.rolledMods) {
-            parts.push(...skill.rolledMods.map(x => x.mod));
+            parts.push(...skill.rolledMods.filter(x => x.bonus.enabled).map(x => x.mod));
         }
 
         parts.push('@mod');

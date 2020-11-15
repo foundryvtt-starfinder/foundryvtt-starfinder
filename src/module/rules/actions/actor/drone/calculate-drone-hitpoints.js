@@ -41,7 +41,7 @@ export default function (engine) {
 
         // Iterate through any modifiers that affect HP
         let filteredModifiers = fact.modifiers.filter(mod => {
-            return mod.enabled && mod.effectType == SFRPGEffectType.HIT_POINTS;
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.HIT_POINTS;
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
 

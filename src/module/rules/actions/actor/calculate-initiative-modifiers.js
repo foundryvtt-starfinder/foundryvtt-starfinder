@@ -41,7 +41,7 @@ export default function (engine) {
         };
 
         const filteredMods = modifiers.filter(mod => {
-            return mod.enabled && [SFRPGEffectType.INITIATIVE].includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.INITIATIVE].includes(mod.effectType);
         });
 
         const mods = context.parameters.stackModifiers.process(filteredMods, context);

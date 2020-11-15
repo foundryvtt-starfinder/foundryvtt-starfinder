@@ -63,7 +63,7 @@ export default function (engine) {
         };
 
         const filteredMods = modifiers.filter(mod => {
-            return mod.enabled && [SFRPGEffectType.SAVE, SFRPGEffectType.SAVES].includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.SAVE, SFRPGEffectType.SAVES].includes(mod.effectType);
         });        
 
         const fortMods = context.parameters.stackModifiers.process(filteredMods.filter(mod => [

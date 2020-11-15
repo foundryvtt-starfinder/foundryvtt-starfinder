@@ -58,7 +58,7 @@ export default function (engine) {
         
         // Iterate through any modifiers that affect BAB
         let filteredModifiers = fact.modifiers.filter(mod => {
-            return mod.enabled && mod.effectType == SFRPGEffectType.BASE_ATTACK_BONUS;
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.BASE_ATTACK_BONUS;
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
 

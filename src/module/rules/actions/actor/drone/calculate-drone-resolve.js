@@ -41,7 +41,7 @@ export default function (engine) {
 
         // Iterate through any modifiers that affect RP
         let filteredModifiers = fact.modifiers.filter(mod => {
-            return mod.enabled && mod.effectType == SFRPGEffectType.RESOLVE_POINTS;
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.RESOLVE_POINTS;
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
 

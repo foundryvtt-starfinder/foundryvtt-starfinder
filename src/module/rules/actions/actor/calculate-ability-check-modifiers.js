@@ -39,7 +39,7 @@ export default function (engine) {
         };
 
         const filteredMods = modifiers.filter(mod => {
-            return mod.enabled && [SFRPGEffectType.ABILITY_CHECK, SFRPGEffectType.ABILITY_CHECKS].includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_CHECK, SFRPGEffectType.ABILITY_CHECKS].includes(mod.effectType);
         });
 
         for (let [abl, ability] of Object.entries(data.abilities)) {

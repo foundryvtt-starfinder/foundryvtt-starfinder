@@ -50,7 +50,7 @@ export default function (engine) {
         };
 
         const acpMods = modifiers.filter(mod => {
-            return mod.enabled && [SFRPGEffectType.ACP].includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ACP].includes(mod.effectType);
         });
 
         let skillModifier = {

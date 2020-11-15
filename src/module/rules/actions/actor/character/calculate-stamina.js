@@ -64,7 +64,7 @@ export default function (engine) {
         
         // Iterate through any modifiers that affect SP
         let filteredModifiers = fact.modifiers.filter(mod => {
-            return mod.enabled && mod.effectType == SFRPGEffectType.STAMINA_POINTS;
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.STAMINA_POINTS;
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
 

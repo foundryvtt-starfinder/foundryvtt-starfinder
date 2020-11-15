@@ -42,7 +42,7 @@ export default function (engine) {
         };
 
         const filteredMods = modifiers.filter(mod => {
-            return mod.enabled && [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType);
         })
 
         let themeMod = {};
