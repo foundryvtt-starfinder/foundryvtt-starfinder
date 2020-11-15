@@ -121,35 +121,29 @@ export class DiceSFRPG {
     static damageRoll({ event = new Event(''), parts, criticalData, damageTypes, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
         flavor = flavor || title;
 
-        const autoFastForward = game.settings.get('sfrpg', 'useQuickRollAsDefault');
-        if (event && autoFastForward) {
-            event.shiftKey = autoFastForward;
-        }
-        // Inner roll function
-        let rollMode = game.settings.get("core", "rollMode");
-        let roll = crit => {
-            // Don't include situational bonus unless it is defined
-            if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
+        /** New roll formula system */
+        const buttons = {
+            Normal: { label: "Normal" },
+            Critical: { label: "Critical" }
+        };
 
-            //let roll = new Roll(parts.join("+"), data);
+        const options = {
+            debug: true,
+            buttons: buttons,
+            defaultButton: "Normal",
+            title: title,
+            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault'),
+            mainDie: ""
+        };
 
-            try {
-                const formula = parts.join(" + ");
-                const contexts = {main: {entity: actor, data: data}};
-                const tree = new RollTree({debug: true});
-                tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"}, (button, mode, finalFormula) => {
-                    console.log([button, mode, finalFormula]);
-                });
-            } catch (error) {
-                console.log(error);
-                console.trace();
-            }
-
-            let roll = new Roll(parts.join("+"), data);
-            if (crit === true) {
-                let add = 0;
-                let mult = 2;
-                roll.alter(mult, add);
+        const formula = parts.join(" + ");
+        const contexts = {main: {entity: actor, data: data}};
+        const tree = new RollTree(options);
+        tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"}, (button, rollMode, finalFormula) => {
+            if (button === "Critical") {
+                finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
+                finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
+                
                 flavor = `${title} (Critical)`;
 
                 if (criticalData !== undefined) {
@@ -157,13 +151,13 @@ export class DiceSFRPG {
 
                     let critRoll = criticalData.parts.filter(x => x[0].length > 0).map(x => x[0]).join("+");
                     if (critRoll.length > 0) {
-                        roll = new Roll(roll.formula + " + " + critRoll, data);
+                        finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
+                        finalFormula.formula = finalFormula.formula + " + " + critRoll;
                     }
                 }
             }
 
-            // evaluate the roll so we can add some metadata to it
-            roll.evaluate();
+            let roll = new Roll(finalFormula.finalRoll).roll();
             
             // Associate the damage types for this attack to the first DiceTerm
             // for the roll. 
@@ -174,97 +168,36 @@ export class DiceSFRPG {
                 die.options.isModal = data.item.properties.modal || data.item.properties.double;
             }
 
-            // Execute the roll and send it to chat
-            roll.toMessage({
-                speaker: speaker,
-                flavor: flavor,
-                rollMode: rollMode
-            });
-
-            // Return the Roll object
-            return roll;
-        };
-
-        // Modify the roll and handle fast-forwarding
-        if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
-            if (event.altKey) {
-                this._updateModifiersForCrit(data, parts.join('+'), 2);
-                parts = this._updateScalarModifiersForCrit(parts.join('+'), 2);
+            // Flag critical thresholds
+            for (let d of roll.dice) {
+                if (d.faces === 20) {
+                    d.options.critical = critical;
+                    d.options.fumble = fumble;
+                }
             }
-            
-            return Promise.resolve(roll(event.altKey));
-        } else parts = parts.concat(["@bonus"]);
 
-        // Construct dialog data
-        template = template || "systems/sfrpg/templates/chat/roll-dialog.html";
-        let dialogData = {
-            formula: parts.join(" + "),
-            data: data,
-            rollMode: rollMode,
-            rollModes: CONFIG.Dice.rollModes
-        };
+            if (game.settings.get("sfrpg", "useCustomChatCard")) {
+                //Push the roll to the ChatBox
+                const customData = {
+                    'title': title,
+                    'data':  data,
+                    'actor': actor,
+                    'flavor': flavor,
+                    'speaker': speaker,
+                    'rollMode': rollMode
+                };
 
-        // Render modal dialog
-        let crit = false;
-        return new Promise(resolve => {
-            renderTemplate(template, dialogData).then(dlg => {
-                new Dialog({
-                    title: title,
-                    content: dlg,
-                    buttons: {
-                        critical: {
-                            condition: critical,
-                            label: "Critical Hit",
-                            callback: () => {
-                                crit = true;
-                                this._updateModifiersForCrit(data, parts.join('+'), 2);
-                                parts = this._updateScalarModifiersForCrit(parts.join('+'), 2);
-                            }
-                        },
-                        normal: {
-                            label: critical ? "Normal" : "Roll",
-                        },
-                    },
-                    default: "normal",
-                    close: html => {
-                        if (onClose) onClose(html, parts, data);
-                        rollMode = html.find('[name="rollMode"]').val();
-                        data['bonus'] = html.find('[name="bonus"]').val();
-                        let r = roll(crit);
-                        resolve(r);
-                    }
-                }, dialogOptions).render(true);
-            });
+                const action = title.replace(/\s/g, '-').toLowerCase();
+
+                SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
+            } else {
+                roll.toMessage({
+                    speaker: speaker,
+                    flavor: flavor,
+                    rollMode: rollMode
+                });
+            }
         });
-    }
-
-    /**
-     * Take a roll formula and multiply any modifiers by a given multiplier
-     * 
-     * @param {object} data The data model to extract from
-     * @param {String} formula The formula sent to the Roll class
-     * @param {Number} multiplier The number to multiply the modifier by
-     */
-    static _updateModifiersForCrit(data, formula, multiplier) {
-        let matches = formula.match(new RegExp(/@[a-zA-Z.0-9]+/gi))?.map(x => x.replace('@', '')) ?? [];
-
-        for (let match of matches) {
-            let value = getProperty(data, match);
-            if (!value) continue;
-            value *= multiplier;
-            setProperty(data, match, value);
-        }
-    }
-
-    static _updateScalarModifiersForCrit(formula, multiplier) {
-        const parts = formula.split('+');
-        for (let i = 0; i < parts.length; i++) {
-            if (Number.isNumeric(parts[i])) {
-                parts[i] *= multiplier;
-            }
-        }
-
-        return parts.map(x => x.toString());
     }
 
     static Defaults = {
@@ -588,7 +521,11 @@ class RollDialog extends Dialog
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog", "roll"];
 
-        this.formula = mainDie + " + " + formula;
+        if (mainDie) {
+            this.formula = mainDie + " + " + formula;
+        } else {
+            this.formula = formula;
+        }
         this.contexts = contexts;
         this.availableModifiers = availableModifiers;
 
@@ -679,7 +616,7 @@ class RollDialog extends Dialog
         return super.close(options);
     }
 
-    static async showRollDialog(formula, contexts, availableModifiers = [], mainDie = "1d20", options = {}) {
+    static async showRollDialog(formula, contexts, availableModifiers = [], mainDie, options = {}) {
         return new Promise(resolve => {
             const buttons = options.buttons || { roll: { label: "Roll" } };
             const firstButtonLabel = options.defaultButton || Object.values(buttons)[0].label;
