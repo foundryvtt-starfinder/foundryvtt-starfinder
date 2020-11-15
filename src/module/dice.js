@@ -32,13 +32,14 @@ export class DiceSFRPG {
             const formula = "1d20 + " + parts.join(" + ");
             const contexts = {main: {entity: actor, data: data}};
             const tree = new RollTree({debug: true});
-            const treeRoll = tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"});
-            console.log(treeRoll);
+            tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"}, (button, mode, finalFormula) => {
+                console.log([button, mode, finalFormula]);
+            });
         } catch (error) {
             console.log(error);
             console.trace();
         }
-
+return;
         flavor = flavor || title;
         const autoFastForward = game.settings.get('sfrpg', 'useQuickRollAsDefault');
         if (event && autoFastForward) {
@@ -204,8 +205,9 @@ export class DiceSFRPG {
                 const formula = parts.join(" + ");
                 const contexts = {main: {entity: actor, data: data}};
                 const tree = new RollTree({debug: true});
-                const treeRoll = tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"});
-                console.log(treeRoll);
+                tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"}, (button, mode, finalFormula) => {
+                    console.log([button, mode, finalFormula]);
+                });
             } catch (error) {
                 console.log(error);
                 console.trace();
@@ -451,7 +453,7 @@ class RollTree {
         this.options = options;
     }
 
-    buildRoll(formula, contexts) {
+    async buildRoll(formula, contexts, callback) {
         if (this.options.debug) {
             console.log(`Resolving '${formula}'`);
         }
@@ -462,18 +464,38 @@ class RollTree {
         this.rootNode.populate(this.nodes, contexts);
         
         const allRolledMods = RollTree.getAllRolledModifiers(this.nodes);
-        this.displayUI(formula, contexts, allRolledMods);
-        
-        const finalRollFormula = this.rootNode.resolve();
-        if (this.options.debug) {
-            console.log([`Final roll results outcome`, formula, finalRollFormula]);
-        }
-        return finalRollFormula;
+        return this.displayUI(formula, contexts, allRolledMods).then(([button, rollMode, bonus, modifiers]) => {
+            if (button === null) {
+                console.log('Roll was cancelled');
+                return;
+            }
+
+            for (const [key, value] of Object.entries(this.nodes)) {
+                if (value.referenceModifier) {
+                    value.isEnabled = value.referenceModifier.enabled;
+                }
+            }
+
+            const finalRollFormula = this.rootNode.resolve();
+            if (bonus) {
+                finalRollFormula.finalRoll += " + " + bonus;
+                finalRollFormula.formula += " + [Additional Bonus]";
+            }
+
+            if (this.options.debug) {
+                console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
+            }
+
+            callback(button, rollMode, finalRollFormula);
+        });
     }
 
-    displayUI(formula, contexts, allRolledMods) {
+    async displayUI(formula, contexts, allRolledMods) {
         const availableModifiers = (this.options.additionalModifiers || []).concat(allRolledMods.map(x => x.referenceModifier));
-        console.log(["Available modifiers", availableModifiers]);
+        if (this.options.debug) {
+            console.log(["Available modifiers", availableModifiers]);
+        }
+        return RollDialog.showRollDialog(formula, contexts, availableModifiers, {buttons: this.options.buttons});
     }
 
     static getAllRolledModifiers(nodes) {
@@ -620,5 +642,120 @@ class RollNode {
         }
 
         return object;
+    }
+}
+
+class RollDialog extends Dialog
+{
+    constructor(formula, contexts, availableModifiers, dialogData={}, options={}) {
+        super(dialogData, options);
+        this.options.classes = ["sfrpg", "dialog", "roll"];
+
+        this.formula = formula;
+        this.contexts = contexts;
+        this.availableModifiers = availableModifiers;
+
+        this.additionalBonus = "";
+        this.rollMode = "roll";
+
+        this.rolledButton = null;
+    }
+
+    get template() {
+        return "systems/sfrpg/templates/chat/roll-dialog.html";
+    }
+
+    getData() {
+        let data = super.getData();
+        data.formula = this.formula;
+        data.rollmode = this.rollMode;
+        data.rollModes = CONFIG.Dice.rollModes;
+        data.additionalBonus = this.additionalBonus;
+        data.availableModifiers = this.availableModifiers || [];
+        data.hasModifiers = data.availableModifiers.length > 0;
+        return data;
+    }
+    
+    activateListeners(html) {
+        super.activateListeners(html);
+
+        let additionalBonusTextbox = html.find('input[name=bonus]');
+        additionalBonusTextbox.bind('change', this._onAdditionalBonusChanged.bind(this));
+
+        let rollModeCombobox = html.find('select[name=rollMode]');
+        rollModeCombobox.bind('change', this._onRollModeChanged.bind(this));
+
+        let modifierEnabled = html.find('.toggle-modifier');
+        modifierEnabled.bind('click', this._toggleModifierEnabled.bind(this));
+    }
+
+    async _onAdditionalBonusChanged(event) {
+        this.additionalBonus = event.target.value;
+    }
+
+    async _onRollModeChanged(event) {
+        this.rollMode = event.target.value;
+    }
+
+    async _toggleModifierEnabled(event) {
+        const modifierIndex = $(event.currentTarget).parents('.modifier').data('modifierIndex');
+        const modifier = this.availableModifiers[modifierIndex];
+
+        modifier.enabled = !modifier.enabled;
+        this.render(false);
+
+        // Update container
+        const container = modifier.container;
+        const actor = await game.actors.get(container.actorId);
+        if (container.itemId) {
+            const item = container.itemId ? await actor.getOwnedItem(container.itemId) : null;
+
+            // Update modifier by ID in item
+            const containerModifiers = duplicate(item.data.data.modifiers);
+            const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
+            modifierToUpdate.enabled = modifier.enabled;
+            await item.update({"data.modifiers": containerModifiers});
+        } else {
+            // Update modifier by ID in actor
+            const containerModifiers = duplicate(actor.data.data.modifiers);
+            const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
+            modifierToUpdate.enabled = modifier.enabled;
+            await actor.update({"data.modifiers": containerModifiers});
+        }
+    }
+
+    submit(button) {
+        try {
+            this.rolledButton = button.label;
+            this.close();
+        } catch(err) {
+            ui.notifications.error(err);
+            throw new Error(err);
+        }
+    }
+    
+    async close(options) {
+        /** Fire callback, then delete, as it would get called again by Dialog#close. */
+        this.data.close(this.rolledButton, this.rollMode, this.additionalBonus, this.availableModifiers);
+        delete this.data.close;
+
+        return super.close(options);
+    }
+
+    static async showRollDialog(formula, contexts, availableModifiers = [], options = {}) {
+        return new Promise(resolve => {
+            const buttons = options.buttons || { roll: { label: "Roll" } };
+            const firstButtonLabel = Object.values(buttons)[0].label;
+
+            const dlg = new RollDialog(formula, contexts, availableModifiers, {
+                title: options.title || "Roll",
+                buttons: buttons,
+                default: firstButtonLabel,
+                close: (button, rollMode, bonus, modifiers) => {
+                    resolve([button, rollMode, bonus, modifiers]);
+                }
+            });
+            dlg.render(true);
+        });
     }
 }

@@ -536,7 +536,7 @@ export class ItemSFRPG extends Item {
                     return false;
                 }
             }
-            return mod.enabled && acceptedModifiers.includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && acceptedModifiers.includes(mod.effectType);
         });
 
         let stackModifiers = new StackModifiers();
@@ -724,7 +724,7 @@ export class ItemSFRPG extends Item {
                     return false;
                 }
             }
-            return mod.enabled && acceptedModifiers.includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && acceptedModifiers.includes(mod.effectType);
         });
 
         let stackModifiers = new StackModifiers();
