@@ -593,9 +593,8 @@ export class ItemSFRPG extends Item {
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: crit,
             dialogOptions: {
-                width: 400,
-                top: options.event ? options.event.clientY - 80 : null,
-                left: window.innerWidth - 710
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
             },
             onClose: this._onAttackRollClose.bind(this)
         });
@@ -608,7 +607,7 @@ export class ItemSFRPG extends Item {
      * @param {Array} parts The parts of the roll
      * @param {Object} data The data
      */
-    _onAttackRollClose(html, parts, data) {
+    _onAttackRollClose(roll, formula, finalFormula) {
         const itemData = duplicate(this.data.data);
 
         if (itemData.hasOwnProperty("usage")) {
@@ -665,9 +664,8 @@ export class ItemSFRPG extends Item {
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: 20,
             dialogOptions: {
-                width: 400,
-                top: options.event ? options.event.clientY - 80 : null,
-                left: window.innerWidth - 710
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
             }
         });
     }
@@ -844,11 +842,6 @@ export class ItemSFRPG extends Item {
         rollData.item = itemData;
         const title = `Other Formula`;
 
-        // return await DiceSFRPG.d20Roll({
-        //     event: new Event(''),
-
-        // });
-
         const roll = new Roll(itemData.formula, rollData).roll();
         return roll.toMessage({
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -944,50 +937,6 @@ export class ItemSFRPG extends Item {
 
     /* -------------------------------------------- */
 
-    /**
-     * Roll a Tool Check
-     * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
-     */
-    async rollToolCheck(options = {}) {
-        if (this.type !== "tool") throw "Wrong item type!";
-        const itemData = this.data.data;
-
-        // Prepare roll data
-        let rollData = duplicate(this.actor.data.data),
-            abl = itemData.ability || "int",
-            parts = [`@abilities.${abl}.mod`, "@proficiency"],
-            title = `Tool Check`;
-        rollData["ability"] = abl;
-        rollData["proficiency"] = Math.floor((itemData.proficient || 0) * rollData.attributes.prof);
-
-        // Call the roll helper utility
-        return await DiceSFRPG.d20Roll({
-            event: options.event,
-            parts: parts,
-            actor: this.actor,
-            data: rollData,
-            hasAttack: this.hasAttack,
-            hasDamage: this.hasDamage,
-            isVersatile: this.isVersatile,
-            template: "systems/sfrpg/templates/chat/tool-roll-dialog.html",
-            title: `${CONFIG.SFRPG.abilities[abl]} Check`,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            flavor: (parts, data) => `${this.name}`,
-            dialogOptions: {
-                width: 400,
-                top: options.event ? event.clientY - 80 : null,
-                left: window.innerWidth - 710,
-            },
-            onClose: (html, parts, data) => {
-                abl = html.find('[name="ability"]').val();
-                data.ability = abl;
-                parts[1] = `@abilities.${abl}.mod`;
-            }
-        });
-    }
-
-    /* -------------------------------------------- */
-
     static chatListeners(html) {
         html.on('click', '.card-buttons button', this._onChatCardAction.bind(this));
         html.on('click', '.item-name', this._onChatCardToggleContent.bind(this));
@@ -1030,9 +979,6 @@ export class ItemSFRPG extends Item {
 
         // Consumable usage
         else if (action === "consume") await item.rollConsumable({ event });
-
-        // Tool usage
-        else if (action === "toolCheck") await item.rollToolCheck({ event });
 
         // Re-enable the button
         button.disabled = false;

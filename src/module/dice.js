@@ -12,20 +12,17 @@ export class DiceSFRPG {
    * @param {Array} parts           The dice roll component parts, excluding the initial d20
    * @param {Actor} actor           The Actor making the d20 roll
    * @param {Object} data           Actor or item data against which to parse the roll
-   * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
    * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
    * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
    * @param {Boolean} advantage     Allow rolling with advantage (and therefore also with disadvantage)
-   * @param {Boolean} situational   Allow for an arbitrary situational bonus field
-   * @param {Boolean} fastForward   Allow fast-forward advantage selection
    * @param {Number} critical       The value of d20 result which represents a critical success
    * @param {Number} fumble         The value of d20 result which represents a critical failure
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-    static d20Roll({ event = new Event(''), parts, data, actor, template, title, speaker, flavor, advantage = true, situational = true,
-        fastForward = true, critical = 20, fumble = 1, onClose, dialogOptions }) {
+    static d20Roll({ event = new Event(''), parts, data, actor, title, speaker, flavor, advantage = true,
+        critical = 20, fumble = 1, onClose, dialogOptions }) {
         
         flavor = flavor || title;
 
@@ -45,13 +42,26 @@ export class DiceSFRPG {
             defaultButton: "Normal",
             title: title,
             skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault'),
-            mainDie: "1d20"
+            mainDie: "1d20",
+            dialogOptions: dialogOptions
         };
 
-        const formula = parts.join(" + ");
-        const contexts = {main: {entity: actor, data: data}};
+        const formula = parts.join(" + ");// + " + @gunner.abilities.str.mod";
+        const contexts = {
+            main: {entity: actor, data: data}//,
+            //gunner1: {entity: actor, data: data},
+            //gunner2: {entity: actor, data: data}
+        };
+        /*let gunnerCount = 1;
+        for (const gunnerActor of actor.data.data.crew.gunner.actors) {
+            contexts["gunner" + gunnerCount] = {entity: gunnerActor, data: gunnerActor.data.data};
+            gunnerCount += 1;
+        }*/
+        const selectors = [
+            //{target: "gunner", options: ["gunner1", "gunner2"]}
+        ];
         const tree = new RollTree(options);
-        tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"}, (button, rollMode, finalFormula) => {
+        tree.buildRoll(formula, {allContexts: contexts, selectors: selectors, mainContext: "main"}, (button, rollMode, finalFormula) => {
             let dieRoll = "1d20";
             if (button === "Disadvantage") {
                 dieRoll = "2d20kl";
@@ -93,6 +103,10 @@ export class DiceSFRPG {
                     rollMode: rollMode
                 });
             }
+
+            if (onClose) {
+                onClose(roll, formula, finalFormula);
+            }
         });
     }
 
@@ -110,7 +124,6 @@ export class DiceSFRPG {
     * @param {Array} damageTypes     Array of damage types associated with this roll
     * @param {Actor} actor           The Actor making the damage roll
     * @param {Object} data           Actor or item data against which to parse the roll
-    * @param {String} template       The HTML template used to render the roll dialog
     * @param {String} title          The dice roll UI window title
     * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
     * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
@@ -118,7 +131,7 @@ export class DiceSFRPG {
     * @param {Function} onClose      Callback for actions to take when the dialog form is closed
     * @param {Object} dialogOptions  Modal dialog options
     */
-    static damageRoll({ event = new Event(''), parts, criticalData, damageTypes, actor, data, template, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
+    static damageRoll({ event = new Event(''), parts, criticalData, damageTypes, actor, data, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
         flavor = flavor || title;
 
         /** New roll formula system */
@@ -133,7 +146,8 @@ export class DiceSFRPG {
             defaultButton: "Normal",
             title: title,
             skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault'),
-            mainDie: ""
+            mainDie: "",
+            dialogOptions: dialogOptions
         };
 
         const formula = parts.join(" + ");
@@ -197,86 +211,11 @@ export class DiceSFRPG {
                     rollMode: rollMode
                 });
             }
+
+            if (onClose) {
+                onClose(roll, formula, finalFormula);
+            }
         });
-    }
-
-    static Defaults = {
-        "details.level": "details.level.value",
-        "skills.pil": "skills.pil.mod"
-    };
-
-    static _readValue(object, key) {
-        if (!object || !key) return null;
-
-        const tokens = key.split('.');
-        for (const token of tokens) {
-            object = object[token];
-            if (!object) return null;
-        }
-
-        return object;
-    }
-
-    static contextualRoll(formula, contexts, options = {}) {
-
-        if (options.debug) {
-            console.log(["contextualRoll", formula, contexts, options]);
-        }
-
-        const mainContext = options.mainContext ? contexts[options.mainContext] : (contexts ? Object.values(contexts)[0] : null);
-
-        const replacements = {};
-        
-        let processedFormula = formula;
-        const variableMatches = new Set(processedFormula.match(/@([a-zA-Z.0-9_\-]+)/g));
-        for (const variable of variableMatches) {
-            const variableParts = variable?.substring(1)?.split('.');
-            if (!variableParts || variableParts.length === 0) {
-                continue;
-            }
-
-            const bTargetsContext = (contexts && contexts[variableParts[0]] !== undefined) ? true : false;
-            const targetContext = bTargetsContext ? contexts[variableParts[0]] : mainContext;
-            const decontextedVariable = bTargetsContext ? variableParts.slice(1).join('.') : variableParts.join('.');
-            const processedVariable = (decontextedVariable in DiceSFRPG.Defaults) ? DiceSFRPG.Defaults[decontextedVariable] : decontextedVariable;
-            const rolledModsKey = processedVariable.substring(0, processedVariable.lastIndexOf('.')) + ".rolledMods";
-
-            if (targetContext) {
-                const rawValue = DiceSFRPG._readValue(targetContext.data, processedVariable);
-                const availableMods = DiceSFRPG._readValue(targetContext.data, rolledModsKey);
-                
-                replacements[variable] = {base: rawValue, availableMods: availableMods || [], context: targetContext};
-            } else {
-                replacements[variable] = {base: 0, availableMods: [], context: null};
-
-                if (options.debug) {
-                    console.log(`No context available for '${processedVariable}'. Replacing '${variable}' with '0'`);
-                }
-            }
-        }
-
-        let availableModifiers = {};
-        for (var [key, replacement] of Object.entries(replacements)) {
-            for (let mod of replacement.availableMods) {
-                availableModifiers[mod.bonus._id] = mod.bonus;
-            }
-        }
-
-        for (var [key, replacement] of Object.entries(replacements)) {
-            let result = replacement.base.toString();
-            for (let mod of replacement.availableMods) {
-                if (mod.bonus.enabled) {
-                    let modRoll = DiceSFRPG.contextualRoll(mod.bonus.modifier, {main: replacement.context}, {debug: options.debug});
-                    result += " + " + modRoll;
-                }
-            }
-            processedFormula = processedFormula.replace(key, result);
-        }
-
-        if (options.debug) {
-            console.log(["final result", formula, processedFormula]);
-        }
-        return processedFormula;
     }
 
     static highlightCriticalSuccessFailure(message, html, data) {
@@ -319,16 +258,22 @@ class RollTree {
     }
 
     async buildRoll(formula, contexts, callback) {
-        if (this.options.debug) {
-            console.log(`Resolving '${formula}'`);
-        }
-        this.rootNode = new RollNode(this, formula, null, null, false, true);
-        this.nodes = {};
+        this.formula = formula;
+        this.contexts = contexts;
 
-        this.nodes[formula] = this.rootNode;
-        this.rootNode.populate(this.nodes, contexts);
-        
-        const allRolledMods = RollTree.getAllRolledModifiers(this.nodes);
+        /** Initialize selectors. */
+        if (this.contexts.selectors) {
+            for (const selector of this.contexts.selectors) {
+                const selectorTarget = selector.target;
+                const firstValue = selector.options[0];
+                if (selectorTarget && firstValue) {
+                    this.contexts.allContexts[selectorTarget] = this.contexts.allContexts[firstValue];
+                }
+            }
+        }
+
+        const allRolledMods = this.populate();
+
         return this.displayUI(formula, contexts, allRolledMods).then(([button, rollMode, bonus]) => {
             if (button === null) {
                 console.log('Roll was cancelled');
@@ -355,8 +300,23 @@ class RollTree {
         });
     }
 
-    async displayUI(formula, contexts, allRolledMods) {
+    populate() {
+        if (this.options.debug) {
+            console.log(`Resolving '${this.formula}'`);
+            console.log(duplicate(this.contexts));
+        }
+        this.rootNode = new RollNode(this, this.formula, null, null, false, true);
+        this.nodes = {};
+
+        this.nodes[this.formula] = this.rootNode;
+        this.rootNode.populate(this.nodes, this.contexts);
+        
+        const allRolledMods = RollTree.getAllRolledModifiers(this.nodes);
         const availableModifiers = (this.options.additionalModifiers || []).concat(allRolledMods.map(x => x.referenceModifier));
+        return availableModifiers;
+    }
+
+    async displayUI(formula, contexts, availableModifiers) {
         if (this.options.debug) {
             console.log(["Available modifiers", availableModifiers]);
         }
@@ -365,7 +325,7 @@ class RollTree {
             const defaultRollMode = game.settings.get("core", "rollMode");
             return new Promise((resolve) => { resolve([firstButton, defaultRollMode, ""]); });
         }
-        return RollDialog.showRollDialog(formula, contexts, availableModifiers, this.options.mainDie, {buttons: this.options.buttons, defaultButton: this.options.defaultButton, title: this.options.title});
+        return RollDialog.showRollDialog(this, formula, contexts, availableModifiers, this.options.mainDie, {buttons: this.options.buttons, defaultButton: this.options.defaultButton, title: this.options.title, dialogOptions: this.options.dialogOptions});
     }
 
     static getAllRolledModifiers(nodes) {
@@ -387,8 +347,8 @@ class RollNode {
         
     populate(nodes, contexts) {
         if (this.isVariable) {
-            const context = RollNode.getContextForVariable(this.formula, contexts);
-            const availableRolledMods = RollNode.getRolledModifiers(this.formula, context);
+            const [context, remainingVariable] = RollNode.getContextForVariable(this.formula, contexts);
+            const availableRolledMods = RollNode.getRolledModifiers(remainingVariable, context);
 
             for (const mod of availableRolledMods) {
                 const modKey = mod.bonus.name;
@@ -406,8 +366,8 @@ class RollNode {
             const variableMatches = new Set(this.formula.match(/@([a-zA-Z.0-9_\-]+)/g));
             for (const fullVariable of variableMatches) {
                 const variable = fullVariable.substring(1);
-                const context = RollNode.getContextForVariable(variable, contexts);
-                const variableValue = RollNode._readValue(context.data, variable);
+                const [context, remainingVariable] = RollNode.getContextForVariable(variable, contexts);
+                const variableValue = RollNode._readValue(context.data, remainingVariable);
 
                 let existingNode = nodes[variable];
                 if (!existingNode) {
@@ -454,7 +414,6 @@ class RollNode {
                     this.resolvedValue.formula += childNode.referenceModifier ? `[${childNode.referenceModifier.name}]` : childResolution.formula;
                 }
             } else {
-                // TODO: Implement formula, for example "3d6 + @abilities.str.mod + 2" should correctly replace the child node
                 let valueString = this.formula;
                 let formulaString = this.formula;
                 const variableMatches = new Set(formulaString.match(/@([a-zA-Z.0-9_\-]+)/g));
@@ -485,9 +444,14 @@ class RollNode {
             
     static getContextForVariable(variable, contexts) {
         const firstToken = variable.split('.')[0];
-        const context = contexts.allContexts[firstToken] || (contexts.mainContext ? contexts.allContexts[contexts.mainContext] : null);
+
+        if (contexts.allContexts[firstToken]) {
+            return [contexts.allContexts[firstToken], variable.substring(firstToken.length + 1)];
+        }
+
+        const context = (contexts.mainContext ? contexts.allContexts[contexts.mainContext] : null);
         //console.log(["getContextForVariable", variable, contexts, context]);
-        return context;
+        return [context, variable];
     }
         
     static getRolledModifiers(variable, context) {
@@ -517,21 +481,38 @@ class RollNode {
 
 class RollDialog extends Dialog
 {
-    constructor(formula, contexts, availableModifiers, mainDie, dialogData={}, options={}) {
+    constructor(rollTree, formula, contexts, availableModifiers, mainDie, dialogData={}, options={}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog", "roll"];
 
-        if (mainDie) {
-            this.formula = mainDie + " + " + formula;
-        } else {
-            this.formula = formula;
-        }
+        this.rollTree = rollTree;
+        this.formula = formula;
         this.contexts = contexts;
         this.availableModifiers = availableModifiers;
+        if (mainDie) {
+            this.formula = mainDie + " + " + formula;
+        }
 
+        /** Prepare selectors */
+        this.selectors = {};
+        if (this.contexts.selectors) {
+            for (const selector of this.contexts.selectors) {
+                this.selectors[selector.target] = {
+                    values: selector.options,
+                    value: selector.options[0]
+                };
+
+                const entries = {};
+                for (const selectorValue of selector.options) {
+                    entries[selectorValue] = this.contexts.allContexts[selectorValue].entity.name;
+                }
+                this.selectors[selector.target].entries = entries;
+            }
+        }
+
+        /** Returned values */
         this.additionalBonus = "";
         this.rollMode = game.settings.get("core", "rollMode");
-
         this.rolledButton = null;
     }
 
@@ -547,6 +528,9 @@ class RollDialog extends Dialog
         data.additionalBonus = this.additionalBonus;
         data.availableModifiers = this.availableModifiers || [];
         data.hasModifiers = data.availableModifiers.length > 0;
+        data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
+        data.selectors = this.selectors;
+        data.contexts = this.contexts;
         return data;
     }
     
@@ -561,6 +545,9 @@ class RollDialog extends Dialog
 
         let modifierEnabled = html.find('.toggle-modifier');
         modifierEnabled.bind('click', this._toggleModifierEnabled.bind(this));
+
+        let selectorCombobox = html.find('.selector');
+        selectorCombobox.bind('change', this._onSelectorChanged.bind(this));
     }
 
     async _onAdditionalBonusChanged(event) {
@@ -598,6 +585,20 @@ class RollDialog extends Dialog
         }
     }
 
+    async _onSelectorChanged(event) {
+        const selectorName = event.target.name;
+        const selectedValue = event.target.value;
+
+        console.log(`${selectorName} now set to ${selectedValue}`);
+        this.selectors[selectorName].value = selectedValue;
+        this.contexts.allContexts[selectorName] = this.contexts.allContexts[selectedValue];
+        
+        /** Repopulate nodes, might change modifiers because of different selector. */
+        this.availableModifiers = this.rollTree.populate();
+        
+        this.render(false);
+    }
+
     submit(button) {
         try {
             this.rolledButton = button.label;
@@ -616,19 +617,19 @@ class RollDialog extends Dialog
         return super.close(options);
     }
 
-    static async showRollDialog(formula, contexts, availableModifiers = [], mainDie, options = {}) {
+    static async showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
         return new Promise(resolve => {
             const buttons = options.buttons || { roll: { label: "Roll" } };
             const firstButtonLabel = options.defaultButton || Object.values(buttons)[0].label;
 
-            const dlg = new RollDialog(formula, contexts, availableModifiers, mainDie, {
+            const dlg = new RollDialog(rollTree, formula, contexts, availableModifiers, mainDie, {
                 title: options.title || "Roll",
                 buttons: buttons,
                 default: firstButtonLabel,
                 close: (button, rollMode, bonus) => {
                     resolve([button, rollMode, bonus]);
                 }
-            });
+            }, options.dialogOptions || {});
             dlg.render(true);
         });
     }

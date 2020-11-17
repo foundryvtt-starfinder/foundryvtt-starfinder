@@ -480,9 +480,13 @@ export class ActorSFRPG extends Actor {
             actor: this,
             parts: parts,
             data: data,
-            flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Ability Check - ${label}`,
             title:  `Ability Check - ${label}`,
-            speaker: ChatMessage.getSpeaker({ actor: this })
+            flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Ability Check - ${label}`,
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            dialogOptions: {
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
+            }
         });
     }
 
@@ -508,7 +512,11 @@ export class ActorSFRPG extends Actor {
             data: data,
             title: `Save - ${label}`,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Save - ${label}`,
-            speaker: ChatMessage.getSpeaker({ actor: this })
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            dialogOptions: {
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
+            }
         });
     }
 
@@ -519,13 +527,17 @@ export class ActorSFRPG extends Actor {
         parts.push(`@skills.${skillId}.mod`);
         
         return await DiceSFRPG.d20Roll({
-            actor: this,
             event: options.event,
+            actor: this,
             parts: parts,
             data: data,
             title: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
-            speaker: ChatMessage.getSpeaker({ actor: this })
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            dialogOptions: {
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
+            }
         });
     }
 

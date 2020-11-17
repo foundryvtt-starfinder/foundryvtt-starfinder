@@ -18,6 +18,20 @@
             {{/select}}
             </select>
         </div>
+        {{#if hasSelectors}}
+        {{#each selectors as |selector target|}}
+        <div class="form-group">
+            <label>Select '{{target}}'</label>
+            <select class="selector" name="{{target}}">
+            {{#select selector.value}}
+            {{#each selector.entries as |selectorName selectorKey|}}
+                <option value="{{selectorKey}}">{{selectorName}}</option>
+            {{/each}}
+            {{/select}}
+            </select>
+        </div>
+        {{/each}}
+        {{/if}}
     </form>
 </div>
 
