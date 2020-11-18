@@ -1,4 +1,4 @@
-import { DiceSFRPG } from "../dice.js";
+import { DiceSFRPG, RollContext } from "../dice.js";
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
@@ -582,13 +582,17 @@ export class ItemSFRPG extends Item {
         if (availableCapacity < usage) {
             ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
         }
+        
+        const rollContext = new RollContext();
+        rollContext.addContext("actor", this.actor);
+        rollContext.addContext("item", this, itemData);
+        rollContext.setMainContext("actor");
 
         // Call the roll helper utility
         return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
-            actor: this.actor,
-            data: rollData,
+            rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: crit,
@@ -640,26 +644,65 @@ export class ItemSFRPG extends Item {
         }
     }
 
+    _populateStarshipCrew(rollContext, desiredSelectors = []) {
+        if (this.actor.data.data.crew.captain?.actors?.length > 0) {
+            rollContext.addContext("captain", this.actor.data.data.crew.captain.actors[0]);
+        }
+
+        if (this.actor.data.data.crew.pilot?.actors?.length > 0) {
+            rollContext.addContext("pilot", this.actor.data.data.crew.pilot.actors[0]);
+        }
+
+        const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer"];
+        for (const crewType of crewMates) {
+            let crewCount = 1;
+            const crew = [];
+            for (const actor of this.actor.data.data.crew[crewType].actors) {
+                const contextId = crewType + crewCount;
+                rollContext.addContext(contextId, actor);
+                crew.push(contextId);
+                crewCount += 1;
+            }
+
+            if (desiredSelectors.includes(crewType)) {
+                rollContext.addSelector(crewType, crew);
+            }
+        }
+    }
+
     /**
      * Place an attack roll for a starship using an item.
      * @param {Object} options Options to pass to the attack roll
      */
     async _rollStarshipAttack(options = {}) {
-        const parts = ["@weapon.data.attackBonus"];
-
-        const rollData = 
-        {
-            ship: duplicate(this.actor.data),
-            weapon: duplicate(this.data)
-        };
+        const parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.mod)", "@gunner.abilities.dex.mod"];
 
         const title = `${this.name} - Attack Roll`;
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("ship", this.actor);
+        rollContext.addContext("item", this, this.data);
+        rollContext.addContext("weapon", this, this.data);
+        rollContext.setMainContext("");
+
+        this._populateStarshipCrew(rollContext, ["gunner"]);
+
+        /** Create additional modifiers. */
+        const additionalModifiers = [
+            {bonus: { name: "Computer bonus", modifier: "@ship.attributes.computer.bonus", enabled: false} },
+            {bonus: { name: "Captain's Demand", modifier: "4", enabled: false} },
+            {bonus: { name: "Captain's Encouragement", modifier: "2", enabled: false} },
+            {bonus: { name: "Science Officer's Lock On", modifier: "2", enabled: false} },
+            {bonus: { name: "Snap Shot", modifier: "-2", enabled: false} }
+        ];
+        rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+        parts.push("@additional.modifiers.bonus");
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
-            actor: this.actor,
-            data: rollData,
+            rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: 20,
@@ -757,14 +800,18 @@ export class ItemSFRPG extends Item {
 
         let rollString = isHealing ? game.i18n.localize("SFRPG.ChatCard.HealingRoll") : game.i18n.localize("SFRPG.ChatCard.DamageRoll");
         const title    = game.settings.get('sfrpg', 'useCustomChatCard') ? rollString : `${rollString} - ${this.data.name}`;
+        
+        const rollContext = new RollContext();
+        rollContext.addContext("actor", this.actor, rollData);
+        rollContext.addContext("item", this, itemData);
+        rollContext.setMainContext("actor");
 
         // Call the roll helper utility
         return await DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
             criticalData: itemData.critical,
-            actor: this.actor,
-            data: rollData,
+            rollContext: rollContext,
             title: title,
             damageTypes: damageTypes,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -785,19 +832,21 @@ export class ItemSFRPG extends Item {
 
         const parts = itemData.damage.parts.map(d => d[0]);
 
-        const rollData = 
-        {
-            ship: duplicate(this.actor.data),
-            weapon: duplicate(this.data)
-        };
-
         const title = `${this.name} - Damage Roll`;
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("ship", this.actor);
+        rollContext.addContext("item", this, this.data);
+        rollContext.addContext("weapon", this, this.data);
+        rollContext.setMainContext("");
+
+        this._populateStarshipCrew(rollContext, ["gunner"]);
 
         return await DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
-            actor: this.actor,
-            data: rollData,
+            rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {

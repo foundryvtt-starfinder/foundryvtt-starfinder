@@ -1,4 +1,4 @@
-import { DiceSFRPG } from "../dice.js";
+import { DiceSFRPG, RollContext } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
@@ -475,11 +475,14 @@ export class ActorSFRPG extends Actor {
         }
         parts.push(`@abilities.${abilityId}.mod`);
 
+        const rollContext = new RollContext();
+        rollContext.addContext("main", this, data);
+        rollContext.setMainContext("main");
+
         return await DiceSFRPG.d20Roll({
             event: options.event,
-            actor: this,
+            rollContext: rollContext,
             parts: parts,
-            data: data,
             title:  `Ability Check - ${label}`,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Ability Check - ${label}`,
             speaker: ChatMessage.getSpeaker({ actor: this }),
@@ -504,12 +507,15 @@ export class ActorSFRPG extends Actor {
         let data = this.getRollData();
 
         parts.push(`@attributes.${saveId}.bonus`);
+        
+        const rollContext = new RollContext();
+        rollContext.addContext("main", this, data);
+        rollContext.setMainContext("main");
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
-            actor: this,
+            rollContext: rollContext,
             parts: parts,
-            data: data,
             title: `Save - ${label}`,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Save - ${label}`,
             speaker: ChatMessage.getSpeaker({ actor: this }),
@@ -526,11 +532,14 @@ export class ActorSFRPG extends Actor {
 
         parts.push(`@skills.${skillId}.mod`);
         
+        const rollContext = new RollContext();
+        rollContext.addContext("main", this, data);
+        rollContext.setMainContext("main");
+        
         return await DiceSFRPG.d20Roll({
             event: options.event,
-            actor: this,
+            rollContext: rollContext,
             parts: parts,
-            data: data,
             title: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             speaker: ChatMessage.getSpeaker({ actor: this }),

@@ -3,28 +3,32 @@ import SFRPGCustomChatMessage from "./chat/chatbox.js";
 
 export class DiceSFRPG {
     /**
-   * A standardized helper function for managing core Starfinder "d20 rolls"
-   *
-   * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
-   * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
-   *
-   * @param {Event} event           The triggering event which initiated the roll
-   * @param {Array} parts           The dice roll component parts, excluding the initial d20
-   * @param {Actor} actor           The Actor making the d20 roll
-   * @param {Object} data           Actor or item data against which to parse the roll
-   * @param {String} title          The dice roll UI window title
-   * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
-   * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
-   * @param {Boolean} advantage     Allow rolling with advantage (and therefore also with disadvantage)
-   * @param {Number} critical       The value of d20 result which represents a critical success
-   * @param {Number} fumble         The value of d20 result which represents a critical failure
-   * @param {Function} onClose      Callback for actions to take when the dialog form is closed
-   * @param {Object} dialogOptions  Modal dialog options
-   */
-    static d20Roll({ event = new Event(''), parts, data, actor, title, speaker, flavor, advantage = true,
+    * A standardized helper function for managing core Starfinder "d20 rolls"
+    *
+    * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
+    * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
+    *
+    * @param {Event} event               The triggering event which initiated the roll
+    * @param {Array} parts               The dice roll component parts, excluding the initial d20
+    * @param {RollContext} rollContext   The contextual data for this roll
+    * @param {String} title              The dice roll UI window title
+    * @param {Object} speaker            The ChatMessage speaker to pass when creating the chat
+    * @param {Function} flavor           A callable function for determining the chat message flavor given parts and data
+    * @param {Boolean} advantage         Allow rolling with advantage (and therefore also with disadvantage)
+    * @param {Number} critical           The value of d20 result which represents a critical success
+    * @param {Number} fumble             The value of d20 result which represents a critical failure
+    * @param {Function} onClose          Callback for actions to take when the dialog form is closed
+    * @param {Object} dialogOptions      Modal dialog options
+    */
+    static d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true,
         critical = 20, fumble = 1, onClose, dialogOptions }) {
         
         flavor = flavor || title;
+
+        if (!rollContext?.isValid()) {
+            console.log(['Invalid rollContext', rollContext]);
+            return null;
+        }
 
         /** New roll formula system */
         const buttons = {};
@@ -37,7 +41,7 @@ export class DiceSFRPG {
         }
 
         const options = {
-            debug: true,
+            debug: false,
             buttons: buttons,
             defaultButton: "Normal",
             title: title,
@@ -46,22 +50,10 @@ export class DiceSFRPG {
             dialogOptions: dialogOptions
         };
 
-        const formula = parts.join(" + ");// + " + @gunner.abilities.str.mod";
-        const contexts = {
-            main: {entity: actor, data: data}//,
-            //gunner1: {entity: actor, data: data},
-            //gunner2: {entity: actor, data: data}
-        };
-        /*let gunnerCount = 1;
-        for (const gunnerActor of actor.data.data.crew.gunner.actors) {
-            contexts["gunner" + gunnerCount] = {entity: gunnerActor, data: gunnerActor.data.data};
-            gunnerCount += 1;
-        }*/
-        const selectors = [
-            //{target: "gunner", options: ["gunner1", "gunner2"]}
-        ];
+        const formula = parts.join(" + ");
+
         const tree = new RollTree(options);
-        tree.buildRoll(formula, {allContexts: contexts, selectors: selectors, mainContext: "main"}, (button, rollMode, finalFormula) => {
+        tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
             let dieRoll = "1d20";
             if (button === "Disadvantage") {
                 dieRoll = "2d20kl";
@@ -86,8 +78,7 @@ export class DiceSFRPG {
                 //Push the roll to the ChatBox
                 const customData = {
                     'title': title,
-                    'data':  data,
-                    'actor': actor,
+                    'rollContext':  rollContext,
                     'flavor': flavor,
                     'speaker': speaker,
                     'rollMode': rollMode
@@ -118,21 +109,25 @@ export class DiceSFRPG {
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
     *
-    * @param {Event} event           The triggering event which initiated the roll
-    * @param {Array} parts           The dice roll component parts, excluding the initial d20
-    * @param {Object} criticalData   Critical damage information, in case of a critical hit
-    * @param {Array} damageTypes     Array of damage types associated with this roll
-    * @param {Actor} actor           The Actor making the damage roll
-    * @param {Object} data           Actor or item data against which to parse the roll
-    * @param {String} title          The dice roll UI window title
-    * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
-    * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
-    * @param {Boolean} critical      Allow critical hits to be chosen
-    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
-    * @param {Object} dialogOptions  Modal dialog options
+    * @param {Event} event              The triggering event which initiated the roll
+    * @param {Array} parts              The dice roll component parts, excluding the initial d20
+    * @param {Object} criticalData      Critical damage information, in case of a critical hit
+    * @param {Array} damageTypes        Array of damage types associated with this roll
+    * @param {RollContext} rollContext  The contextual data for this roll
+    * @param {String} title             The dice roll UI window title
+    * @param {Object} speaker           The ChatMessage speaker to pass when creating the chat
+    * @param {Function} flavor          A callable function for determining the chat message flavor given parts and data
+    * @param {Boolean} critical         Allow critical hits to be chosen
+    * @param {Function} onClose         Callback for actions to take when the dialog form is closed
+    * @param {Object} dialogOptions     Modal dialog options
     */
-    static damageRoll({ event = new Event(''), parts, criticalData, damageTypes, actor, data, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
+    static damageRoll({ event = new Event(''), parts, criticalData, damageTypes, rollContext, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
         flavor = flavor || title;
+
+        if (!rollContext?.isValid()) {
+            console.log(['Invalid rollContext', rollContext]);
+            return null;
+        }
 
         /** New roll formula system */
         const buttons = {
@@ -141,7 +136,7 @@ export class DiceSFRPG {
         };
 
         const options = {
-            debug: true,
+            debug: false,
             buttons: buttons,
             defaultButton: "Normal",
             title: title,
@@ -151,9 +146,8 @@ export class DiceSFRPG {
         };
 
         const formula = parts.join(" + ");
-        const contexts = {main: {entity: actor, data: data}};
         const tree = new RollTree(options);
-        tree.buildRoll(formula, {allContexts: contexts, mainContext: "main"}, (button, rollMode, finalFormula) => {
+        tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
             if (button === "Critical") {
                 finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
@@ -179,7 +173,11 @@ export class DiceSFRPG {
             if (die) {
                 die.options.isDamageRoll = true;
                 die.options.damageTypes = damageTypes;
-                die.options.isModal = data.item.properties.modal || data.item.properties.double;
+
+                const properties = rollContext.allContexts["item"]?.data?.properties;
+                if (properties) {
+                    die.options.isModal = properties.modal || properties.double;
+                }
             }
 
             // Flag critical thresholds
@@ -194,8 +192,7 @@ export class DiceSFRPG {
                 //Push the roll to the ChatBox
                 const customData = {
                     'title': title,
-                    'data':  data,
-                    'actor': actor,
+                    'rollContext':  rollContext,
                     'flavor': flavor,
                     'speaker': speaker,
                     'rollMode': rollMode
@@ -312,7 +309,7 @@ class RollTree {
         this.rootNode.populate(this.nodes, this.contexts);
         
         const allRolledMods = RollTree.getAllRolledModifiers(this.nodes);
-        const availableModifiers = (this.options.additionalModifiers || []).concat(allRolledMods.map(x => x.referenceModifier));
+        const availableModifiers = [].concat(allRolledMods.map(x => x.referenceModifier));
         return availableModifiers;
     }
 
@@ -334,7 +331,7 @@ class RollTree {
 }
 
 class RollNode {
-    constructor(tree, formula, baseValue, referenceModifier, isVariable, isEnabled) {
+    constructor(tree, formula, baseValue, referenceModifier, isVariable, isEnabled, parentNode = null) {
         this.tree = tree;
         this.formula = formula;
         this.baseValue = baseValue;
@@ -343,19 +340,23 @@ class RollNode {
         this.isEnabled = isEnabled;
         this.resolvedValue = undefined;
         this.childNodes = {};
+        this.parentNode = parentNode;
+        this.nodeContext = null;
     }
         
     populate(nodes, contexts) {
         if (this.isVariable) {
             const [context, remainingVariable] = RollNode.getContextForVariable(this.formula, contexts);
-            const availableRolledMods = RollNode.getRolledModifiers(remainingVariable, context);
+            this.nodeContext = context;
+
+            const availableRolledMods = RollNode.getRolledModifiers(remainingVariable, this.getContext());
 
             for (const mod of availableRolledMods) {
                 const modKey = mod.bonus.name;
 
                 let existingNode = nodes[modKey];
                 if (!existingNode) {
-                    const childNode = new RollNode(this.tree, mod.bonus.modifier, null, mod.bonus, false, mod.bonus.enabled);
+                    const childNode = new RollNode(this.tree, mod.bonus.modifier, null, mod.bonus, false, mod.bonus.enabled, this);
                     nodes[modKey] = childNode;
                     existingNode = childNode;
                 }
@@ -367,11 +368,13 @@ class RollNode {
             for (const fullVariable of variableMatches) {
                 const variable = fullVariable.substring(1);
                 const [context, remainingVariable] = RollNode.getContextForVariable(variable, contexts);
-                const variableValue = RollNode._readValue(context.data, remainingVariable);
+                this.nodeContext = context;
+
+                const variableValue = RollNode._readValue(this.getContext().data, remainingVariable);
 
                 let existingNode = nodes[variable];
                 if (!existingNode) {
-                    const childNode = new RollNode(this.tree, variable, variableValue, null, true, true);
+                    const childNode = new RollNode(this.tree, variable, variableValue, null, true, true, this);
                     nodes[variable] = childNode;
                     existingNode = childNode;
                 }
@@ -382,6 +385,16 @@ class RollNode {
         for (const childNode of Object.values(this.childNodes)) {
             childNode.populate(nodes, contexts);
         }
+    }
+
+    getContext() {
+        if (this.nodeContext) return this.nodeContext;
+        let parent = this.parentNode;
+        while (parent && !this.nodeContext) {
+            this.nodeContext = parent.nodeContext;
+            parent = parent.parentNode;
+        }
+        return this.nodeContext;
     }
             
     resolve(depth = 0) {
@@ -396,9 +409,15 @@ class RollNode {
 
             const enabledChildNodes = Object.values(this.childNodes).filter(x => x.isEnabled);
 
+            if (this.isVariable && !this.baseValue) {
+                this.baseValue = "0";
+            }
+
             if (this.baseValue) {
-                this.resolvedValue.finalRoll = this.baseValue;
-                this.resolvedValue.formula = "@" + this.formula;
+                if (this.baseValue !== "n/a") {
+                    this.resolvedValue.finalRoll = this.baseValue;
+                    this.resolvedValue.formula = "@" + this.formula;
+                }
 
                 // formula
                 for (const childNode of enabledChildNodes) {
@@ -446,6 +465,7 @@ class RollNode {
         const firstToken = variable.split('.')[0];
 
         if (contexts.allContexts[firstToken]) {
+            //console.log(["getContextForVariable", variable, contexts, contexts.allContexts[firstToken]]);
             return [contexts.allContexts[firstToken], variable.substring(firstToken.length + 1)];
         }
 
@@ -565,23 +585,25 @@ class RollDialog extends Dialog
         modifier.enabled = !modifier.enabled;
         this.render(false);
 
-        // Update container
-        const container = modifier.container;
-        const actor = await game.actors.get(container.actorId);
-        if (container.itemId) {
-            const item = container.itemId ? await actor.getOwnedItem(container.itemId) : null;
+        if (modifier._id) {
+            // Update container
+            const container = modifier.container;
+            const actor = await game.actors.get(container.actorId);
+            if (container.itemId) {
+                const item = container.itemId ? await actor.getOwnedItem(container.itemId) : null;
 
-            // Update modifier by ID in item
-            const containerModifiers = duplicate(item.data.data.modifiers);
-            const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
-            modifierToUpdate.enabled = modifier.enabled;
-            await item.update({"data.modifiers": containerModifiers});
-        } else {
-            // Update modifier by ID in actor
-            const containerModifiers = duplicate(actor.data.data.modifiers);
-            const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
-            modifierToUpdate.enabled = modifier.enabled;
-            await actor.update({"data.modifiers": containerModifiers});
+                // Update modifier by ID in item
+                const containerModifiers = duplicate(item.data.data.modifiers);
+                const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
+                modifierToUpdate.enabled = modifier.enabled;
+                await item.update({"data.modifiers": containerModifiers});
+            } else {
+                // Update modifier by ID in actor
+                const containerModifiers = duplicate(actor.data.data.modifiers);
+                const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
+                modifierToUpdate.enabled = modifier.enabled;
+                await actor.update({"data.modifiers": containerModifiers});
+            }
         }
     }
 
@@ -589,7 +611,6 @@ class RollDialog extends Dialog
         const selectorName = event.target.name;
         const selectedValue = event.target.value;
 
-        console.log(`${selectorName} now set to ${selectedValue}`);
         this.selectors[selectorName].value = selectedValue;
         this.contexts.allContexts[selectorName] = this.contexts.allContexts[selectedValue];
         
@@ -633,5 +654,49 @@ class RollDialog extends Dialog
             }, options.dialogOptions || {});
             dlg.render(true);
         });
+    }
+}
+
+export class RollContext {
+    constructor() {
+        this.allContexts = {};
+        this.mainContext = null;
+        this.selectors = [];
+    }
+
+    addContext(name, entity, data = null) {
+        this.allContexts[name] = {entity: entity, data: data || entity.data.data};
+    }
+
+    addSelector(target, options) {
+        this.selectors.push({target: target, options: options});
+    }
+
+    setMainContext(mainContext) {
+        this.mainContext = mainContext;
+    }
+
+    isValid() {
+        /** Check if all contexts are valid. */
+        for (const context of Object.values(this.allContexts)) {
+            if (!context.entity || !context.data) {
+                return false;
+            }
+        }
+
+        /** Check if the main context is valid. */
+        if (this.mainContext && !this.allContexts[this.mainContext]) {
+            return false;
+        }
+
+        /** Check if selector options are valid. */
+        for (const selector of this.selectors) {
+            for (const option of selector.options) {
+                if (!this.allContexts[option]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
