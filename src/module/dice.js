@@ -596,6 +596,7 @@ class RollDialog extends Dialog
         /** Repopulate nodes, might change modifiers because of different selector. */
         this.availableModifiers = this.rollTree.populate();
         
+        this.position.height = "auto";
         this.render(false);
     }
 
