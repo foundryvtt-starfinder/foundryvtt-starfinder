@@ -43,6 +43,8 @@ export const SFRPGEffectType = Object.freeze({
     ABILITY_MODIFIERS: "ability-modifiers",
     HIT_POINTS: "hit-points",
     STAMINA_POINTS: "stamina-points",
+    SKILL_POINTS: "skill-points",
+    SKILL_RANKS: "skill-ranks",
     RESOLVE_POINTS: "resolve-points",
     SPELL_RESISTANCE: "spell-resistance",
     DAMAGE_REDUCTION: "damage-reduction",

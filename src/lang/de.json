@@ -1,6 +1,6 @@
 {
     "ACTOR": {
-        "TypeCharacter": "Spielercharacter",
+        "TypeCharacter": "Spielercharakter",
         "TypeNpc": "Nichtspielercharakter",
         "TypeVehicle": "Fahrzeug",
         "TypeStarship": "Raumschiff",
@@ -23,10 +23,12 @@
         "TypeUpgrade": "Rüstungsverbesserung",
         "TypeAugmentation": "Aufwertung",
         "TypeStarshipweapon": "Raumschiffwaffe",
+        "TypeStarshipframe": "Raumschiffgrundstruktur",
         "TypeArchetypes": "Archetyp",
         "TypeChassis": "Drohnenchassis",
         "TypeMod": "Drohnenmodifikation",
-        "TypeShield": "Schild"
+        "TypeShield": "Schild",
+        "TypeWeaponaccessory": "Weapon Accessory"
     },
     "SFRPG": {
         "AbilityActivationTypesDay": "Tag",
@@ -79,6 +81,11 @@
         "ACTooltipMaxDex": "Geschicklichkeitsmodifikator: {maxDex} (armor max dex: {armorMax})",
         "ACTooltipNotProficientMod": "Malus für fehlenden Umgang mit Rüstungsart: {profMod}",
         "ActorSheet": {
+            "Attributes": {
+                "Skills": {
+                    "SkillRanks": "Fertigkeitsränge"
+                }
+            },
             "Header": {
                 "Hitpoints": {
                     "RacialTooltip": "Volksgrundwert: {mod} ({source})",
@@ -112,6 +119,10 @@
                     "CapacityPropertyLevel": "Stufe",
                     "CapacityBulk": "Kapazität",
                     "CapacityBulkTooltip": "Last, die dieser Behälter erträgt.",
+                    "Close": "Close",
+                    "CloseTooltip": "Close this container's fold-out listing.",
+                    "Open": "Open",
+                    "OpenTooltip": "Open this container's fold-out listing.",
                     "StorageIdentifier": "Lagerbezeichnung",
                     "StorageIdentifierTooltip": "Die Art des Lagerplatzes, welcher von diesem Lagerabschnitt repräsentiert wird.",
                     "StorageIdentifierItem": "Gegenstandsplatz",
@@ -144,7 +155,8 @@
                     "AmountToTransferTitle": "Gegenstände übertragen",
                     "AmountToTransferMessage": "Bitte gib die Anzahl der Gegenstände an, die du übertragen möchtest.",
                     "AmountToTransferLabel": "Anzahl",
-                    "AmountToTransferInfo": "Minimum 1, Maximum {max}"
+                    "AmountToTransferInfo": "Minimum 1, Maximum {max}",
+                    "EquipmentEnhancements": "Equipment Enhancements"
                 },
                 "Item": {
                     "Create": "Neuen Gegenstand erstellen",
@@ -186,7 +198,14 @@
                     "SpecificWeaponAttackDamage": "Schaden mit spezifischer Waffe",
                     "WeaponPropertyDamage": "Schaden durch Waffeneigenschaft",
                     "AllAttackDamage": "Alle Angriffsschäden",
-                    "Encumbrance": "Traglast"
+                    "Encumbrance": "Traglast",
+                    "Skillpoints": "Fertigkeitspunkte",
+                    "SkillRanks": "Fertigkeitsränge"
+                },
+                "Tooltips": {
+                    "SkillRank": "{type} Ränge: {mod} ({source})",
+                    "ClassSkillpoints": "{class} Fertigkeitspunkte: {total}",
+                    "BonusSkillpoints": "{type} Bonus: {mod} ({source})"
                 },
                 "UI": {
                     "LongFormula": "Langformel"
@@ -746,9 +765,11 @@
                 "Spells"              : "Zauber",
                 "StarshipWeapons"     : "Raumschiffwaffen",
                 "TechnologicalItems"  : "Technische Gegenstände",
+                "StarshipFrames"      : "Raumschiffgrundstrukturen",
                 "Themes"              : "Motive",
                 "Weapons"             : "Waffen",
-                "WeaponFusions"       : "Waffenfusionen"
+                "WeaponFusions"       : "Waffenfusionen",
+                "WeaponAccessories"   : "Weapon Accessories"
             },
             "Consumable": {
                 "Type"            : "Verbrauchsmaterialart",
@@ -837,6 +858,16 @@
                 "Properties": "Waffeneigenschaften",
                 "Usage"     : "Waffenverwendung",
                 "Attack"    : "Waffenangriff"
+            },
+            "WeaponAccessory": {
+                "SupportedType": {
+                    "Any": "Any",
+                    "HeavyWeapon": "Heavy weapon",
+                    "MeleeWeapon": "Melee weapon",
+                    "Projectile": "Projectile",
+                    "RailedWeapon": "Railed weapon",
+                    "SmallArm": "Smallarm"
+                }
             }
         },
         "ItemSheet": {
@@ -892,9 +923,46 @@
                 "Sturdy": "Widerstandsfähig",
                 "SturdyTooltip": "Ausrüstung, wie Waffen und Rüstungen, gelten als widerstandsfähig."
             },
+            "StarshipFrame": {
+                "Details": {
+                    "Cost": "Raumschiffbaupunkte",
+                    "CostTooltip": "Die Menge der erforderlichen Baupunkte, um diese Grundstruktur zu erwerben.",
+                    "CrewMinimum": "Minimale Anzahl an Besatzungsmitgliedern",
+                    "CrewMinimumTooltip": "Die minimale Anzahl an Besatzungsmitgliedern, welche für den Betrieb eines Schiffes mit dieser Grundstruktur erforderlich sind.",
+                    "CrewMaximum": "Maximale Anzahl an Besatzungsmitgliedern",
+                    "CrewMaximumTooltip": "Die maximale Anzahl an Besatzungsmitgliedern, welche basierend auf der Grundstruktur eine Rolle auf dem Raumschiff einnehmen können.",
+                    "DamageThreshold": "Schadensschwelle",
+                    "DamageThresholdTooltip": "Wenn ein Raumschiff eine Schadensschwelle hat, kann ein Angriff, der Schaden an seinen Rumpfpunkten in Höhe dieser Schadensschwelle oder darunter verursachen würde, die Rumpfpunkte des Schiffes nicht beschädigen. Ist der Schaden größer als die Schadensschwelle, wird der volle Schadensbetrag auf die Rumpfpunkte des Schiffes angerechnet.",
+                    "ExpansionBays": "Erweiterungsbuchten",
+                    "ExpansionBaysTooltip": "Die Anzahl der Erweiterungsbuchten für diese Grundstruktur.",
+                    "HeaderDefense": "Verteidigung",
+                    "HeaderOffense": "Angriff",
+                    "HeaderSpecs": "Spezifikationen",
+                    "Hitpoints": "Rumpfpunkte",
+                    "HitpointsTooltip": "Die Anzahl der Rumpfpunkte, die diese Grundstruktur auf Grad 1 hat.",
+                    "HitpointsIncrement": "Erhöhung der Rumpfpunkte",
+                    "HitpointsIncrementTooltip": "Die Anzahl der Rumpfpunkte, die ein Raumschiff mit dieser Grundstruktur automatisch erhält, wenn sein Grad auf 4 steigt (und danach alle 4 Grade; siehe Seite 294).",
+                    "Maneuverability": "Manövrierfähigkeit",
+                    "ManeuverabilityTooltip": "Die Manövrierfähigkeit von Raumschiffen beeinflusst die Steuerungs- und Wendefähigkeiten.<br/>Unbeholfen: -2 Steuerung, Distanz zwischen Wendemanövern 4<br/>Schlecht: -1 Steuerung, Distanz zwischen Wendemanövern 3<br/>Durchschnitt: +0 Steuerung, Distanz zwischen Wendemanövern 2<br/>Gut: +1 Steuerung, Distanz zwischen Wendemanövern 1<br/>Perfekt: +1 Steuerung, Distanz zwischen Wendemanövern 1<br/>Perfekt: +2 Steuerung, Distanz zwischen Wendemanövern 0",
+                    "Size": "Größenkategorie",
+                    "SizeTooltip": "Die Größenkategorie der Grundstruktur legt die Größe des Raumschiffes fest.",
+                    "WeaponArcAft": "Achternbereich",
+                    "WeaponArcForward": "Bugbereich",
+                    "WeaponArcPort": "Backbordbereich",
+                    "WeaponArcStarboard": "Steuerbordbereich",
+                    "WeaponArcTurret": "Geschütztürme",
+                    "WeaponArcTooltip": "Die Anzahl der verfügbaren Waffenmontageplätze pro Feuerbereich, aufgeteilt nach Montageplätzen für Leicht, Schwer und Schiffsartillerie.",
+                    "WeaponTypeCapital": "Schiffsartillerie",
+                    "WeaponTypeHeavy": "Schwer",
+                    "WeaponTypeLight": "Leicht"
+                }
+            },
             "Weapons": {
                 "Category": "Waffenart",
                 "ContainerTooltip": "Waffen können in der Regel Waffenfusionen und Waffenverbesserungen enthalten. Erhöhen Sie die Lagerkapazität, um zusätzliche Verbesserungen und Fusionen zu ermöglichen."
+            },
+            "WeaponAccessory": {
+                "SupportedTypes": "Supported weapon types"
             }
         },
         "KeyAbility": "Schlüsselattribut",
@@ -1120,18 +1188,18 @@
                 "Name": "Objektkarten im Chat zusammenklappen"
             },
             "CombatCards": {
-                "NormalHint": "Change which combat chat cards should be displayed during normal combat.",
-                "NormalName": "Normal combat",
-                "StarshipHint": "Change which combat chat cards should be displayed during starship combat.",
-                "StarshipName": "Starship combat",
+                "NormalHint": "Lege fest, welche Chatkarten für Kämpfe im normalen Kampf angezeigt werden.",
+                "NormalName": "Normale Kämpfe",
+                "StarshipHint": "Lege fest, welche Chatkarten für Kämpfe im Raumschiffkampf angezeigt werden.",
+                "StarshipName": "Raumschiffkämpfe",
                 "Values": {
-                    "Disabled": "Disabled",
-                    "Enabled": "Rounds, phases, and turns",
-                    "OnlyRounds": "Only rounds",
-                    "RoundsPhases": "Rounds and phases"
+                    "Disabled": "Deaktiviert",
+                    "Enabled": "Runden, Phasen und Züge",
+                    "OnlyRounds": "Nur Runden",
+                    "RoundsPhases": "Runden und Phasen"
                 },
-                "VehicleChaseHint": "Change which combat chat cards should be displayed during vehicle chases.",
-                "VehicleChaseName": "Vehicle chases"
+                "VehicleChaseHint": "Lege fest, welche Chatkarten für Kämpfe im Fahrzeugkampf angezeigt werden.",
+                "VehicleChaseName": "Fahrzeugverfolgungsjagden"
             },
             "DiagonalMovementRule": {
                 "Hint": "Lege fest, welche Regel für diagonale Bewegung bei Spielen innerhalb dieses Systems verwendet werden soll.",
@@ -1150,8 +1218,8 @@
                 "Name": "Benutzerdefinierte Starfinder-Chatkarte verwenden?"
             },
             "UseQuickRollAsDefault": {
-                "Hint": "When clicking abilities that roll dice, the roll will act as if the Shift key was depressed by default. This will trigger a fast-forwarded roll.",
-                "Name": "Use Quick roll by default?"
+                "Hint": "Wenn du auf eine Fähigkeit drückst, bei der gewürfelt wird, verhält sich der Wurf so, als ob die Shift-Taste standardmäßig gedrückt wäre. Dies löst einen schnellen Wurf aus.",
+                "Name": "Standardmäßig schnellen Wurf verwenden?"
             },
             "UseStarfinderAOETemplates": {
                 "Hint": "Legt fest, ob das Messverfahren von Starfinder oder die Standardmethode von Foundry VTT für AOE-Vorlagen verwendet werden soll",
@@ -1353,6 +1421,9 @@
                 "540": "Überlegene Schilde 540",
                 "600": "Überlegene Schilde 600"
             },
+            "Size": {
+                "Supercolossal": "Superkolossal"
+            },
             "StarshipArcs": {
                 "Forward"  : "Bug",
                 "Starboard": "Steuerbord",
@@ -1512,6 +1583,61 @@
         "SpellPreparationModesInnate": "Angeborenes Zauberwirken",
         "SpellResistance": "Zauberresistenz",
         "Stamina": "Ausdauer",
+        "StarshipSheet": {
+            "Crew": {
+                "AssignedCount": "({current} / {max})",
+                "Captain": "Kapitän",
+                "Pilot": "Pilot",
+                "Gunners": "Bordschützen",
+                "Engineers": "Ingenieure",
+                "ScienceOfficers": "Wissenschaftsoffiziere",
+                "ChiefMates": "Erste Offiziere",
+                "MagicOfficers": "Magische Offiziere",
+                "Passengers": "Passagiere",
+                "UnlimitedMax": "Keine Beschränkung"
+            },
+            "Details": {
+                "Shields": {
+                    "Aft": "Achternschilde",
+                    "Forward": "Bugschilde",
+                    "Header": "Schilde",
+                    "Port": "Backbordschilde",
+                    "Starboard": "Steuerbordschilde"
+                },
+                "ShieldTooHigh": "Schild ist zu hoch!",
+                "ShieldTooHighTooltip": "Ein Schildquadrant darf nicht mehr als 70% der gesamten Schildzuweisung betragen, da das für jeden Schild verfügbare Minimum 10% betragen muss. (Weitere Informationen finden Sie im Grundregelwerk auf S. 302)"
+            },
+            "Features": {
+                "Frame": "Grundstruktur ({current} / 1)"
+            },
+            "Header": {
+                "FrameMissing": "Fehlende Grundstruktur",
+                "Maneuverability": "Manövrierfähigkeit: {maneuverability}",
+                "Size": "Größenkategorie: {size}"
+            },
+            "Sides": {
+                "Aft": "Achtern",
+                "Forward": "Bug",
+                "Port": "Backbord",
+                "Starboard": "Steuerbord"
+            },
+            "Tabs": {
+                "Crew": "Besatzung",
+                "Weapons": "Waffen"
+            },
+            "Weapons": {
+                "AftArc": "Achternbereich ({slots})",
+                "CapitalSlots": "Schiffsartillerie: {current} / {max}",
+                "ForwardArc": "Bugbereich ({slots})",
+                "HeavySlots": "Schwer: {current} / {max}",
+                "LightSlots": "Leicht: {current} / {max}",
+                "NotAvailable": "Nicht verfügbar",
+                "NotMounted": "Nicht ausgerüstete Waffen",
+                "PortArc": "Backbordbereich ({slots})",
+                "StarboardArc": "Steuerbordbereich ({slots})",
+                "Turret": "Geschütztürme ({slots})"
+            }
+        },
         "SubmitButtonLabel": "Bestätigen",
         "SystemWide": "Systemweit",
         "TempHPMaxPlaceHolderText": "+Max",

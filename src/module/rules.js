@@ -34,14 +34,6 @@ import calculateInitiativeModifiers from './rules/actions/actor/calculate-initia
 import calculateCmd from './rules/actions/actor/calculate-cmd.js';
 import calculateCmdModifiers from './rules/actions/actor/calculate-cmd-modifiers.js';
 import calculatePlayerXp from './rules/actions/actor/calculate-xp.js';
-import calculateShipArmorClass from './rules/actions/starship/calculate-ac.js';
-import calculateShipCritThreshold from './rules/actions/starship/calculate-ct.js';
-import calculateDrift from './rules/actions/starship/calculate-drift.js';
-import calculateMaxShields from './rules/actions/starship/calculate-max-shields.js';
-import calculatePower from './rules/actions/starship/calculate-power.js';
-import calculateShipShields from './rules/actions/starship/calculate-shields.js';
-import calculateShipSpeed from './rules/actions/starship/calculate-speed.js';
-import calculateShipTargetLock from './rules/actions/starship/calculate-tl.js';
 import calculateBaseSkills from './rules/actions/actor/calculate-base-skills.js';
 import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modifiers.js';
 import calculateNpcXp from './rules/actions/actor/calculate-npc-xp.js';
@@ -51,8 +43,10 @@ import calculateAbilityCheckModifiers from './rules/actions/actor/calculate-abil
 import calculateEncumbrance from './rules/actions/actor/calculate-encumbrance.js';
 // Character rules
 import calculateHitpoints from './rules/actions/actor/character/calculate-hitpoints.js';
-import calculateStamina from './rules/actions/actor/character/calculate-stamina.js';
 import calculateResolve from './rules/actions/actor/character/calculate-resolve.js';
+import calculateSkillpoints from './rules/actions/actor/character/calculate-skillpoints.js';
+import calculateStamina from './rules/actions/actor/character/calculate-stamina.js';
+import calculateTraits from './rules/actions/actor/calculate-traits.js';
 // Drone rules
 import calculateDroneChassis from './rules/actions/actor/drone/calculate-drone-chassis.js';
 import calculateDroneDefense from './rules/actions/actor/drone/calculate-drone-defense.js';
@@ -62,6 +56,17 @@ import calculateDroneMods from './rules/actions/actor/drone/calculate-drone-mods
 import calculateDroneResolve from './rules/actions/actor/drone/calculate-drone-resolve.js';
 import calculateDroneSaves from './rules/actions/actor/drone/calculate-drone-saves.js';
 import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
+// Starship rules
+import calculateStarshipFrame           from './rules/actions/actor/starship/calculate-starship-frame.js'
+import calculateStarshipArmorClass      from './rules/actions/actor/starship/calculate-starship-ac.js';
+import calculateStarshipCrew            from './rules/actions/actor/starship/calculate-starship-crew.js';
+import calculateStarshipCritThreshold   from './rules/actions/actor/starship/calculate-starship-ct.js';
+import calculateStarshipDrift           from './rules/actions/actor/starship/calculate-starship-drift.js';
+import calculateStarshipMaxShields      from './rules/actions/actor/starship/calculate-starship-max-shields.js';
+import calculateStarshipPower           from './rules/actions/actor/starship/calculate-starship-power.js';
+import calculateStarshipShields         from './rules/actions/actor/starship/calculate-starship-shields.js';
+import calculateStarshipSpeed           from './rules/actions/actor/starship/calculate-starship-speed.js';
+import calculateStarshipTargetLock      from './rules/actions/actor/starship/calculate-starship-targetlock.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -95,17 +100,21 @@ export default function (engine) {
     calculateEncumbrance(engine);
     // Character actions
     calculateHitpoints(engine);
-    calculateStamina(engine);
     calculateResolve(engine);
+    calculateSkillpoints(engine);
+    calculateStamina(engine);
+    calculateTraits(engine);
     // Starship actions
-    calculateShipArmorClass(engine);
-    calculateShipCritThreshold(engine);
-    calculateDrift(engine);
-    calculateMaxShields(engine);
-    calculatePower(engine);
-    calculateShipShields(engine);
-    calculateShipSpeed(engine);
-    calculateShipTargetLock(engine);
+    calculateStarshipArmorClass(engine);
+    calculateStarshipCrew(engine);
+    calculateStarshipCritThreshold(engine);
+    calculateStarshipDrift(engine);
+    calculateStarshipMaxShields(engine);
+    calculateStarshipPower(engine);
+    calculateStarshipShields(engine);
+    calculateStarshipSpeed(engine);
+    calculateStarshipTargetLock(engine);
+    calculateStarshipFrame(engine);
     // Drone actions
     calculateDroneChassis(engine);
     calculateDroneDefense(engine);
@@ -142,6 +151,7 @@ export default function (engine) {
                 then: [
                     "clearTooltips",
                     "calculateCharacterLevel",
+                    "calculateTraits",
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseArmorClass",
@@ -154,6 +164,7 @@ export default function (engine) {
                     "calculateCMD",
                     { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
                     "calculateXP",
+                    { closure: "calculateSkillpoints", stackModifiers: "stackModifiers" },
                     "calculateBaseSkills",
                     { closure: "calculateSkillArmorCheckPenalty", stackModifiers: "stackModifiers" },
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
@@ -167,14 +178,16 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "starship" },
                 then: [
-                    "calculateShipArmorClass",
-                    "calculateShipCritThreshold",
-                    "calculateDrift",
-                    "calculateShields",
-                    "calculateShipMaxShields",
-                    "calculateShipPower",
-                    "calculateShipSpeed",
-                    "calculateShipTargetLock"
+                    "calculateStarshipFrame",
+                    "calculateStarshipArmorClass",
+                    "calculateStarshipCrew",
+                    "calculateStarshipCritThreshold",
+                    "calculateStarshipDrift",
+                    "calculateStarshipShields",
+                    "calculateStarshipMaxShields",
+                    "calculateStarshipPower",
+                    "calculateStarshipSpeed",
+                    "calculateStarshipTargetLock"
                 ]
             },
             {

@@ -8,6 +8,8 @@ import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
 import { DroneRepairDialog } from "../apps/drone-repair-dialog.js";
 
+import { } from "./starship-update.js"
+
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
  */
@@ -56,28 +58,33 @@ export class ActorSFRPG extends Actor {
         this._ensureHasModifiers(data);
         const modifiers = this.getAllModifiers();
 
+        const actorId = this._id;
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
         const weapons = items.filter(item => item.type === "weapon" && item.data.equipped);
         const races = items.filter(item => item.type === "race");
+        const frames = items.filter(item => item.type === "starshipFrame");
         const classes = items.filter(item => item.type === "class" || item.type === "chassis");
         const theme = items.find(item => item.type === "theme");
         const mods = items.filter(item => item.type === "mod");
         const armorUpgrades = items.filter(item => item.type === "upgrade");
         const asis = items.filter(item => item.type === "asi");
         game.sfrpg.engine.process("process-actors", {
+            actorId,
+            type: actorType,
             data,
+            flags,
+            items,
             armor,
             weapons,
             races,
             classes,
-            flags,
-            type: actorType,
             modifiers,
             theme,
             mods,
             armorUpgrades,
-            asis
+            asis,
+            frames
         });
     }
 
@@ -188,7 +195,7 @@ export class ActorSFRPG extends Actor {
 
         const skill = duplicate(this.data.data.skills[skillId]);
         const isNpc = this.data.type === "npc";
-        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc),
+        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.owner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
@@ -238,7 +245,7 @@ export class ActorSFRPG extends Actor {
         name = "", 
         modifier = 0, 
         type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.FORMULA, 
+        modifierType = SFRPGModifierType.CONSTANT, 
         effectType = SFRPGEffectType.SKILL,
         subtab = "misc",
         valueAffected = "", 
@@ -776,5 +783,45 @@ export class ActorSFRPG extends Actor {
             updateData: updateData,
             updateItems: updateItems
         }
+    }
+
+    /** Crewed actor functionality */
+    getCrewRoleForActor(actorId) {
+        const acceptedActorTypes = ["starship", "vehicle"];
+        if (!acceptedActorTypes.includes(this.data.type)) {
+            console.log(`getCrewRoleForActor(${actorId}) called on an actor (${this.data._id}) of type ${this.data.type}, which is not supported!`);
+            console.trace();
+            return null;
+        }
+
+        if (!this.data?.data?.crew) {
+            return null;
+        }
+
+        for (const [role, entry] of Object.entries(this.data.data.crew)) {
+            if (entry?.actorIds?.includes(actorId)) {
+                return role;
+            }
+        }
+        return null;
+    }
+
+    getActorIdsForCrewRole(role) {
+        const acceptedActorTypes = ["starship", "vehicle"];
+        if (!acceptedActorTypes.includes(this.data.type)) {
+            console.log(`getActorIdsForCrewRole(${role}) called on an actor (${this.data._id}) of type ${this.data.type}, which is not supported!`);
+            console.trace();
+            return null;
+        }
+
+        if (!this.data?.data?.crew) {
+            return null;
+        }
+
+        if (!(role in this.data.data.crew)) {
+            return null;
+        }
+
+        return duplicate(this.data.data.crew[role]);
     }
 }

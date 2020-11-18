@@ -1,21 +1,14 @@
 <form class="{{cssClass}}" autocomplete="off">
-
-    <!-- HEADER -->
-    <header class="sheet-header">
-        <h1 class="charname">
-            <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
-        </h1>
-    </header>
-
-    <!-- BODY -->
-    <section class="sheet-body">
-        <div class="tab biography">
-            {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="200" width="200" style="border: none;" />
+        <div class="flexcol" style="margin-left: -2px;">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{actor.name}}" data-tippy-content="<strong>{{localize "SFRPG.CharacterNamePlaceHolderText"}}</strong>" placeholder="{{localize "SFRPG.CharacterNamePlaceHolderText"}}" />
+            </h1>
         </div>
-    </section>
-
-    <!-- SIDEBAR -->
-    <section class="sheet-sidebar">
-        <img class="sheet-profile" src="{{actor.img}}" title="{{actor.name}}" height="220" width="220" data-edit="img"/>
+    </header>
+    
+    <section class="sheet-body">
+        {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
     </section>
 </form>

@@ -13,7 +13,8 @@ const equipmentTypes = {
     "shield"       : "SFRPG.Items.Categories.Shields",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
     "upgrade"      : "SFRPG.Items.Categories.ArmorUpgrades",
-    "weapon"       : "SFRPG.Items.Categories.Weapons"
+    "weapon"       : "SFRPG.Items.Categories.Weapons",
+    "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories"
 };
 
 class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {

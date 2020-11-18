@@ -145,6 +145,9 @@
 
             {{!-- Skills --}}
             <ul class="skills-list">
+                <h3 class="skill-ranks {{#if (greaterThan data.skillpoints.used data.skillpoints.max)}}red{{/if}}" data-tippy-content="<strong>{{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}}</strong><br>@skillpoints.used<br>@skillpoints.total<br><br>{{#each data.skillpoints.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    {{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}} ({{data.skillpoints.used}} / {{data.skillpoints.max}})
+                </h3>
                 <li class="skills-header flexrow">
                     <div class="skill-header-prof"></div>
                     <h3 class="skill-header-name flexrow">{{localize "SFRPG.SkillsHeaderName"}}</h3>

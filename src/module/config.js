@@ -488,7 +488,8 @@ SFRPG.starshipSizes = {
     "large": "SFRPG.SizeLarge",
     "huge": "SFRPG.SizeHuge",
     "gargantuan": "SFRPG.SizeGargantuan",
-    "colossal": "SFRPG.SizeColossal"
+    "colossal": "SFRPG.SizeColossal",
+    "superColossal": "SFRPG.ShipSystems.Size.Supercolossal"
 };
 
 SFRPG.itemSizes = {
@@ -1146,6 +1147,8 @@ SFRPG.modifierEffectTypes = {
     "ability-checks": "SFRPG.ModifierEffectTypeAbilityChecks",
     "skill": "SFRPG.ModifierEffectTypeSkill",
     "all-skills": "SFRPG.ModifierEffectTypeAllSkills",
+    "skill-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Skillpoints",
+    "skill-ranks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SkillRanks",
     "saves": "SFRPG.ModifierEffectTypeSaves",
     "save": "SFRPG.ModifierEffectTypeSave",
     "ranged-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackRolls",
@@ -1465,7 +1468,7 @@ SFRPG.itemTypes = {
     "container": "SFRPG.Items.Categories.Containers",
     "equipment": "SFRPG.Items.Categories.Equipment",
     "feat": "SFRPG.Items.Categories.Feats",
-    "fusion": "SFRPG.Items.Categories.WeaponFusions",
+    "fusion": "ITEM.TypeFusion",
     "goods": "SFRPG.Items.Categories.Goods",
     "hybrid": "SFRPG.Items.Categories.HybridItems",
     "magic": "SFRPG.Items.Categories.MagicItems",
@@ -1473,13 +1476,14 @@ SFRPG.itemTypes = {
     "race": "SFRPG.Items.Categories.Races",
     "spell": "SFRPG.Items.Categories.Spells",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
+    "starshipFrame": "SFRPG.Items.Categories.StarshipFrames",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
     "theme": "SFRPG.Items.Categories.Themes",
-    "upgrade": "SFRPG.Items.Categories.ArmorUpgrades",
+    "upgrade": "ITEM.TypeUpgrade",
     "weapon": "SFRPG.Items.Categories.Weapons",
     "shield": "SFRPG.Items.Categories.Shields",
     "ammunition": "SFRPG.Items.Categories.Ammunition",
-    "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories"
+    "weaponAccessory": "ITEM.TypeWeaponaccessory"
 };
 
 SFRPG.containableTypes = {
@@ -1495,7 +1499,8 @@ SFRPG.containableTypes = {
     "upgrade"      : "SFRPG.Items.Categories.ArmorUpgrades",
     "spell"        : "SFRPG.Items.Categories.Spells",
     "augmentation" : "SFRPG.Items.Categories.Augmentations",
-    "shield"       : "SFRPG.Items.Categories.Shields"
+    "shield"       : "SFRPG.Items.Categories.Shields",
+    "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories"
 };
 
 SFRPG.combatTypes = [
@@ -1503,3 +1508,15 @@ SFRPG.combatTypes = [
     "starship",
     "vehicleChase"
 ];
+
+/**
+ * The supported weapon types for weapon accessories
+ */
+SFRPG.weaponAccessoriesSupportedTypes = {
+    "any": "SFRPG.Items.WeaponAccessory.SupportedType.Any",
+    "heavyWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.HeavyWeapon",
+    "meleeWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.MeleeWeapon",
+    "projectile": "SFRPG.Items.WeaponAccessory.SupportedType.Projectile",
+    "railedWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.RailedWeapon",
+    "smallarm": "SFRPG.Items.WeaponAccessory.SupportedType.SmallArm"
+};

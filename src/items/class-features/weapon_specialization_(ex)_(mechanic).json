@@ -62,14 +62,54 @@
       "descriptor": ""
     },
     "descriptors": [],
-    "modifiers": [],
+    "modifiers": [
+      {
+        "name": "Weapon Specialization Mechanic",
+        "modifier": "floor(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "smallA",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "309e09f2-b155-4a7c-ac20-bee89333af65"
+      },
+      {
+        "name": "Weapon Specialization Mech.",
+        "modifier": "@details.level.value",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "basicM",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "e9fd3a0e-d5eb-4338-b43e-6e9d90f25b8f"
+      },
+      {
+        "name": "Weapon Specialization Mech.",
+        "modifier": "-floor(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-property-damage",
+        "valueAffected": "operative",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "73455d1d-1f74-43b9-9068-3ceb77462dc4"
+      }
+    ],
     "requirements": "3rd Level",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "abilityMods": {
-      "parts": []
     }
   },
   "flags": {},

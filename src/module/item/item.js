@@ -116,7 +116,6 @@ export class ItemSFRPG extends Item {
 
             // Save DC
             let save = data.save || {};
-            if (!save.type) save.dc = null;
             labels.save = this._getSaveLabel(save, actorData, data);
 
             // Damage
@@ -134,9 +133,21 @@ export class ItemSFRPG extends Item {
         let dcFormula = save.dc || `10 + ${Math.floor((itemData.attributes?.sturdy ? itemData.level + 2 : itemData.level) / 2)} + ${this.actor?.data?.data?.abilities?.dex ? this.actor.data.data.abilities.dex.mod : 0}`;
         if (dcFormula && Number.isNaN(Number(dcFormula))) {
             const rollData = duplicate(actorData?.data || { abilities: { dex: { mod: 0 }}});
-            rollData.abilities.key = {
-                mod: 0
-            };
+            if (rollData.abilities) {
+                rollData.abilities.key = {
+                    mod: 0
+                };
+            }
+            else {
+                rollData.abilities = { key: { mod: 0 } };
+            }
+
+            if (!rollData?.abilities?.dex?.mod) {
+                const mergedRollData = mergeObject(rollData, {
+                    abilities: {dex: {mod: 0}}
+                });
+                rollData.abilities = mergedRollData.abilities;
+            }
 
             let keyAbility = actorData?.data?.attributes?.keyability;
             if (keyAbility) {
@@ -431,7 +442,7 @@ export class ItemSFRPG extends Item {
         // Spell saving throw text
         const abl = ad.attributes.keyability || "int";
         if (this.hasSave && !data.save.dc) data.save.dc = 10 + data.level + ad.abilities[abl].mod;
-        labels.save = this._getSaveLabel(data.save, ad, data);
+        labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Spell properties
         props.push(
@@ -450,7 +461,7 @@ export class ItemSFRPG extends Item {
         // Spell saving throw text
         const abl = data.ability || ad.attributes.keyability || "str";
         if (this.hasSave && !data.save.dc) data.save.dc = 10 + ad.details.level + ad.abilities[abl].mod;
-        labels.save = this._getSaveLabel(data.save, ad, data);
+        labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Feat properties
         props.push(
@@ -667,7 +678,7 @@ export class ItemSFRPG extends Item {
      * Place a damage roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.damageRoll logic for the core implementation
      */
-    async rollDamage({ event, versatile = false } = {}) {
+    async rollDamage({ event } = {}) {
         const itemData  = this.data.data;
         const actorData = this.actor.getRollData(); //this.actor.data.data;
         const isWeapon  = ["weapon", "shield"].includes(this.data.type);
@@ -686,13 +697,7 @@ export class ItemSFRPG extends Item {
 
         // Define Roll parts
         let parts = itemData.damage.parts.map(d => d[0]);
-        //if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
-
-        // Cantrips in Starfinder don't scale :(
-        // if ( (this.data.type === "spell") && (itemData.scaling.mode === "cantrip") ) {
-        //   const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
-        //   this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
-        // }
+        let damageTypes = itemData.damage.parts.map(d => d[1]);
         
         let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
@@ -759,10 +764,11 @@ export class ItemSFRPG extends Item {
         return await DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
+            criticalData: itemData.critical,
             actor: this.actor,
             data: rollData,
             title: title,
-            isVersatile: this.isVersatile,
+            damageTypes: damageTypes,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 width: 400,
@@ -1017,7 +1023,6 @@ export class ItemSFRPG extends Item {
         // Attack and Damage Rolls
         if (action === "attack") await item.rollAttack({ event });
         else if (action === "damage") await item.rollDamage({ event });
-        else if (action === "versatile") await item.rollDamage({ event, versatile: true });
         else if (action === "formula") await item.rollFormula({ event });
 
         // Saving Throw
@@ -1110,7 +1115,7 @@ export class ItemSFRPG extends Item {
         name = "", 
         modifier = 0, 
         type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.FORMULA, 
+        modifierType = SFRPGModifierType.CONSTANT, 
         effectType = SFRPGEffectType.SKILL,
         subtab = "misc",
         valueAffected = "", 

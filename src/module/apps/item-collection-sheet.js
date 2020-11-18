@@ -24,6 +24,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
             submitOnClose: true,
             submitOnChange: true,
             resizable: true,
+            pinnable: false, // [MODULE SUPPORT] Disable pinning, so the pin module doesn't break this admittedly hacky token implementation
             dragDrop: [{dragSelector: ".item-list .item", dropSelector: null}]
         });
     }

@@ -32,9 +32,8 @@ export default function (engine) {
             const modFromTheme = themeMod[skl] ?? 0;
             skill.mod = abilityMod + skill.ranks + (hasRanks ? classSkill : 0) + skill.misc + modFromTheme;
 
-            skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipAbilityMod", {abilityMod: abilityMod.signedString(), abilityAbbr: skill.ability.capitalize()}));
             if (hasRanks) {
-                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipSkillRanks", {ranks: skill.ranks.signedString()}));
+                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipSkillRanks", {ranks: (skill.ranks - skill.min).signedString()}));
                 
                 if (classSkill === 3) {
                     skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipTrainedClassSkill", {mod: classSkill.signedString()}));
@@ -44,6 +43,8 @@ export default function (engine) {
             if (modFromTheme !== 0) {
                 skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipThemeMod", {mod: modFromTheme.signedString()}));
             }
+
+            skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipAbilityMod", {abilityMod: abilityMod.signedString(), abilityAbbr: skill.ability.capitalize()}));
 
             if (skill.misc !== 0) {
                 skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipMiscMod", {mod: skill.misc.signedString()}));

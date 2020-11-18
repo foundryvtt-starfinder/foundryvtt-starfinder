@@ -23,10 +23,12 @@
         "TypeUpgrade": "Armor Upgrade",
         "TypeAugmentation": "Augmentation",
         "TypeStarshipweapon": "Starship Weapon",
+        "TypeStarshipframe": "Starship Frame",
         "TypeArchetypes": "Archetype",
         "TypeChassis": "Drone Chassis",
         "TypeMod": "Drone Mod",
-        "TypeShield": "Shield"
+        "TypeShield": "Shield",
+        "TypeWeaponaccessory": "Weapon Accessory"
     },
     "SFRPG": {
         "AbilityActivationTypesDay": "日",
@@ -79,6 +81,11 @@
         "ACTooltipMaxDex": "敏捷力修正値: {maxDex} (armor max dex: {armorMax})",
         "ACTooltipNotProficientMod": "未習熟ペナルティ: {profMod}",
         "ActorSheet": {
+            "Attributes": {
+                "Skills": {
+                    "SkillRanks": "Skill Ranks"
+                }
+            },
             "Header": {
                 "Hitpoints": {
                     "RacialTooltip": "種族基本値: {mod} ({source})",
@@ -112,6 +119,10 @@
                     "CapacityPropertyLevel": "Level",
                     "CapacityBulk": "Capacity",
                     "CapacityBulkTooltip": "How much bulk can be contained within this container.",
+                    "Close": "Close",
+                    "CloseTooltip": "Close this container's fold-out listing.",
+                    "Open": "Open",
+                    "OpenTooltip": "Open this container's fold-out listing.",
                     "StorageIdentifier": "Storage Identifier",
                     "StorageIdentifierTooltip": "The kind of storage slot that is represented by this storage section.",
                     "StorageIdentifierItem": "Item Slot",
@@ -144,7 +155,8 @@
                     "AmountToTransferTitle": "Transfer Items",
                     "AmountToTransferMessage": "Please enter the amount of items you want to transfer.",
                     "AmountToTransferLabel": "Amount",
-                    "AmountToTransferInfo": "Minimum 1, maximum {max}"
+                    "AmountToTransferInfo": "Minimum 1, maximum {max}",
+                    "EquipmentEnhancements": "Equipment Enhancements"
                 },
                 "Item": {
                     "Create": "新規アイテム作成",
@@ -186,7 +198,14 @@
                     "SpecificWeaponAttackDamage": "特殊武器ダメージ",
                     "WeaponPropertyDamage": "武器属性ダメージ",
                     "AllAttackDamage": "全ての攻撃ダメージ",
-                    "Encumbrance": "Encumbrance"
+                    "Encumbrance": "Encumbrance",
+                    "Skillpoints": "Skillpoints",
+                    "SkillRanks": "Skill ranks"
+                },
+                "Tooltips": {
+                    "SkillRank": "{type} Ranks: {mod} ({source})",
+                    "ClassSkillpoints": "{class} Skillpoints: {total}",
+                    "BonusSkillpoints": "{type} Bonus: {mod} ({source})"
                 },
                 "UI": {
                     "LongFormula": "長い式"
@@ -733,10 +752,12 @@
                 "Shields"             : "Shields",
                 "Spells"              : "Spells",
                 "StarshipWeapons"     : "Starship Weapons",
+                "StarshipFrames"      : "Starship Frames",
                 "TechnologicalItems"  : "Technological Items",
                 "Themes"              : "Themes",
                 "Weapons"             : "Weapons",
-                "WeaponFusions"       : "Weapon Fusions"
+                "WeaponFusions"       : "Weapon Fusions",
+                "WeaponAccessories"   : "Weapon Accessories"
             },
             "Consumable": {
                 "Type"            : "Consumable Type",
@@ -825,6 +846,16 @@
                 "Properties": "Weapon Properties",
                 "Usage"     : "Weapon Usage",
                 "Attack"    : "Weapon Attack"
+            },
+            "WeaponAccessory": {
+                "SupportedType": {
+                    "Any": "Any",
+                    "HeavyWeapon": "Heavy weapon",
+                    "MeleeWeapon": "Melee weapon",
+                    "Projectile": "Projectile",
+                    "RailedWeapon": "Railed weapon",
+                    "SmallArm": "Smallarm"
+                }
             }
         },
         "ItemSheet": {
@@ -880,9 +911,46 @@
                 "Sturdy": "Sturdy",
                 "SturdyTooltip": "Equipment, such as weapons and armors, are considered sturdy."
             },
+            "StarshipFrame": {
+                "Details": {
+                    "Cost": "Buildpoint Cost",
+                    "CostTooltip": "The amount of buildpoints required to obtain this frame.",
+                    "CrewMinimum": "Minimum number of crew",
+                    "CrewMinimumTooltip": "The minimum number of crew members required to operate a starship based on this frame.",
+                    "CrewMaximum": "Maximum number of crew",
+                    "CrewMaximumTooltip": "The maximum number of crew members able to take up a role on a starship based on this frame.",
+                    "DamageThreshold": "Damage Threshold",
+                    "DamageThresholdTooltip": "If a starship has a Damage Threshold, any attack that would deal damage to its Hull Points equal to or less than this Damage Threshold fails to damage the ship’s Hull Points. If the damage is greater than the Damage Threshold, the full amount of damage is dealt to the ship’s Hull Points.",
+                    "ExpansionBays": "Expansion Bays",
+                    "ExpansionBaysTooltip": "The number of expansion bays available for this frame.",
+                    "HeaderDefense": "Defense",
+                    "HeaderOffense": "Offense",
+                    "HeaderSpecs": "Specs",
+                    "Hitpoints": "Hull Points",
+                    "HitpointsTooltip": "The amount of Hull Points this frame has at tier 1.",
+                    "HitpointsIncrement": "Hull Point increment",
+                    "HitpointsIncrementTooltip": "The number of Hull Points a starship with that frame automatically gains when its tier increases to 4 (and every 4 tiers thereafter; see page 294).",
+                    "Maneuverability": "Maneuverability",
+                    "ManeuverabilityTooltip": "Starship maneuverability affects piloting and turning abilities.<br/>Clumsy: -2 Piloting, Turn 4<br/>Poor: -1 Piloting, Turn 3<br/>Average: +0 Piloting, Turn 2<br/>Good: +1 Piloting, Turn 1<br/>Perfect: +2 Piloting, Turn 0",
+                    "Size": "Size",
+                    "SizeTooltip": "The size of the frame dictates the size of the starship.",
+                    "WeaponArcAft": "Aft Arc",
+                    "WeaponArcForward": "Forward Arc",
+                    "WeaponArcPort": "Port Arc",
+                    "WeaponArcStarboard": "Starboard Arc",
+                    "WeaponArcTurret": "Turret",
+                    "WeaponArcTooltip": "The amount of weapon mounts available for the ship arc, split into light, heavy, and capital mounts.",
+                    "WeaponTypeCapital": "Capital",
+                    "WeaponTypeHeavy": "Heavy",
+                    "WeaponTypeLight": "Light"
+                }
+            },
             "Weapons": {
                 "Category": "Weapon Type",
                 "ContainerTooltip": "Weapons typically can contain weapon fusions and weapon upgrades. Increase the storage capacity to allow adding upgrades and fusions."
+            },
+            "WeaponAccessory": {
+                "SupportedTypes": "Supported weapon types"
             }
         },
         "KeyAbility": "主要能力値",
@@ -1341,6 +1409,9 @@
                 "540": "Superior Shields 540",
                 "600": "Superior Shields 600"
             },
+            "Size": {
+                "Supercolossal": "Supercolossal"
+            },
             "StarshipArcs": {
                 "Forward"  : "Forward",
                 "Starboard": "Starboard",
@@ -1500,6 +1571,61 @@
         "SpellPreparationModesInnate": "生来の呪文発動能力",
         "SpellResistance": "呪文耐性",
         "Stamina": "ＳＰ",
+        "StarshipSheet": {
+            "Crew": {
+                "AssignedCount": "({current} / {max})",
+                "Captain": "Captain",
+                "Pilot": "Pilot",
+                "Gunners": "Gunners",
+                "Engineers": "Engineers",
+                "ScienceOfficers": "Science Officers",
+                "ChiefMates": "Chief Mates",
+                "MagicOfficers": "Magic Officers",
+                "Passengers": "Passengers",
+                "UnlimitedMax": "No limit"
+            },
+            "Details": {
+                "Shields": {
+                    "Aft": "Aft Shields",
+                    "Forward": "Forward Shields",
+                    "Header": "Shields",
+                    "Port": "Port Shields",
+                    "Starboard": "Starboard Shields"
+                },
+                "ShieldTooHigh": "Shield is too high!",
+                "ShieldTooHighTooltip": "A shield quadrant cannot exceed 70% of the total shield allocation, as the minimum available for each shield must be 10%. (For more information, see the Core Rulebook pg. 302)"
+            },
+            "Features": {
+                "Frame": "Frame ({current} / 1)"
+            },
+            "Header": {
+                "FrameMissing": "Missing Frame",
+                "Maneuverability": "Maneuverability: {maneuverability}",
+                "Size": "Size: {size}"
+            },
+            "Sides": {
+                "Aft": "Aft",
+                "Forward": "Forward",
+                "Port": "Port",
+                "Starboard": "Starboard"
+            },
+            "Tabs": {
+                "Crew": "Crew",
+                "Weapons": "Weapons"
+            },
+            "Weapons": {
+                "AftArc": "Aft Arc ({slots})",
+                "CapitalSlots": "Capital: {current} / {max}",
+                "ForwardArc": "Forward Arc ({slots})",
+                "HeavySlots": "Heavy: {current} / {max}",
+                "LightSlots": "Light: {current} / {max}",
+                "NotAvailable": "Not available",
+                "NotMounted": "Unmounted weapons",
+                "PortArc": "Port Arc ({slots})",
+                "StarboardArc": "Starboard Arc ({slots})",
+                "Turret": "Turret ({slots})"
+            }
+        },
         "SubmitButtonLabel": "決定",
         "SystemWide": "星系間",
         "TempHPMaxPlaceHolderText": "最大",

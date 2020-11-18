@@ -21,16 +21,10 @@
                     <input type="text" name="data.details.model" value="{{data.details.model}}" placeholder="{{localize "SFRPG.ShipModelLabel"}}" />
                 </li>
                 <li data-tippy-content="{{localize "SFRPG.ShipFrameLabel"}}<br>@details.frame">
-                    <input type="text" name="data.details.frame" value="{{data.details.frame}}" placeholder="{{localize "SFRPG.ShipFrameLabel"}}" />
+                    {{#if activeFrame}}<span>{{activeFrame.name}}</span>{{else}}<span class="no-frame">{{localize "SFRPG.StarshipSheet.Header.FrameMissing"}}</span>{{/if}}
                 </li>
-                <li class="flexrow" data-tippy-content="{{ localize "SFRPG.Size"}}<br>@details.size">
-                    <select name="data.details.size">
-                        {{#select data.details.size}}
-                        {{#each config.starshipSizes as |size s|}}
-                        <option value="{{s}}">{{size}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
+                <li data-tippy-content="{{ localize "SFRPG.Size"}}<br>@details.size">
+                    <span>{{localize "SFRPG.StarshipSheet.Header.Size" size=data.details.size}}</span>
                 </li>
             </ul>
 
@@ -41,50 +35,60 @@
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
                             data-dtype="Number" placeholder="10" />
                         <span class="sep"> / </span>
-                        <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
-                            data-dtype="Number" placeholder="10" />
+                        <label>{{data.attributes.hp.max}}</label>
                     </div>
                     <footer class="attribute-footer">
-                        <input name="data.attributes.hp.increment" type="text" placeholder="Increment"
-                            value="{{data.attributes.hp.increment}}" data-dtype="Number"
-                            title="This is the number of hull points that are added when the ship reaches tier 4 (and every 4 tiers after)" />
+                        <span data-tippy-content="This is the number of hull points that are added when the ship reaches tier 4 (and every 4 tiers after)">{{data.attributes.hp.increment}}</span>
                     </footer>
                 </li>
-                <li class="attribute" data-tippy-content="Armor Class<br>@attributes.ac.value">
-                    <h4 class="attribute-name box-title">AC</h4>
-                    <div class="attribute-value">
-                        <span>{{data.attributes.ac.value}}</span>
-                    </div>
-                    <footer class="attribute-footer">
-                        <input type="text" name="data.attributes.ac.misc"
-                            value="{{numberFormat data.attributes.ac.misc decimals=0 sign=true}}" data-dtype="Number"
-                            placeholder="+Misc" />
-                    </footer>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">Defenses</h4>
+                    <ol class="attribute-multibox">
+                        <li class="box-header flexrow">
+                            <label></label>
+                            <label>Value</label>
+                            <label>Misc</label>
+                        </li>
+                        <li class="flexrow" data-tippy-content="Armor Class<br/>@attributes.ac.value<br/>@attributes.ac.misc">
+                            <label>AC</label>
+                            <label>{{data.attributes.ac.value}}</label>
+                            <input type="text" name="data.attributes.ac.misc"
+                                value="{{numberFormat data.attributes.ac.misc decimals=0 sign=true}}" data-dtype="Number"
+                                placeholder="+Misc" />
+                        </li>
+                        <li class="flexrow" data-tippy-content="Target Lock<br/>@attributes.targetLock.value<br/>@attributes.targetLock.misc">
+                            <label>TL</label>
+                            <label>{{data.attributes.targetLock.value}}</label>
+                            <input type="text" name="data.attributes.targetLock.misc"
+                                value="{{numberFormat data.attributes.targetLock.misc decimals=0 sign=true}}" data-dtype="Number"
+                                placeholder="+Misc" />
+                        </li>
+                    </ol>
                 </li>
-                <li class="attribute" data-tippy-content="Target Lock<br>@attributes.tl.value">
-                    <h4 class="attribute-name box-title">TL</h4>
-                    <div class="attribute-value">
-                        <span>{{data.attributes.tl.value}}</span>
-                    </div>
-                    <footer class="attribute-footer">
-                        <input type="text" name="data.attributes.tl.misc"
-                            value="{{numberFormat data.attributes.tl.misc decimals=0 sign=true}}" data-dtype="Number"
-                            placeholder="+Misc" />
-                    </footer>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">Thresholds</h4>
+                    <ol class="attribute-multibox">
+                        <li class="box-header flexrow">
+                            <label></label>
+                            <label>Value</label>
+                        </li>
+                        <li class="flexrow" data-tippy-content="Damage Threshold<br/>@attributes.damageThreshold.value">
+                            <label>DT</label>
+                            <label>{{data.attributes.damageThreshold.value}}</label>
+                        </li>
+                        <li class="flexrow" data-tippy-content="Critical Threshold<br/>@attributes.criticalThreshold.value">
+                            <label>CT</label>
+                            <label>{{data.attributes.criticalThreshold.value}}</label>
+                        </li>
+                    </ol>
                 </li>
-                <li class="attribute" data-tippy-content="{{localize "SFRPG.Speed"}}<br>@attributes.speed">
+                <li class="attribute" data-tippy-content="{{localize "SFRPG.Speed"}}<br>@attributes.speed.value">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
                     <div class="attribute-value">
-                        <span>{{data.attributes.speed}}</span>
+                        <span>{{data.attributes.speed.value}}</span>
                     </div>
                     <footer class="attribute-footer select" data-tippy-content="Maneuverability<br>@attributes.maneuverability">
-                        <select name="data.attributes.maneuverability">
-                            {{#select data.attributes.maneuverability}}
-                            {{#each config.maneuverability as |man k|}}
-                            <option value="{{k}}">{{man}}</option>
-                            {{/each}}
-                            {{/select}}
-                        </select>
+                        <span>{{localize "SFRPG.StarshipSheet.Header.Maneuverability" maneuverability=data.attributes.maneuverability}}</span>
                     </footer>
                 </li>
             </ul>
@@ -94,8 +98,10 @@
 
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
-        <a class="item" data-tab="weapons">Weapons</a>
-        <a class="item" data-tab="crew">Crew</a>
+        <a class="item" data-tab="weapons">{{ localize "SFRPG.StarshipSheet.Tabs.Weapons" }}</a>
+        <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
+        <a class="item" data-tab="crew">{{ localize "SFRPG.StarshipSheet.Tabs.Crew" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "SFRPG.Inventory" }}</a>
         <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
     </nav>
 
@@ -104,101 +110,84 @@
             <div class="flexcol">
                 <h3 class="form-header">{{ localize "SFRPG.Attributes"}}</h3>
                 <ul class="attributes flexrow">
-                    <li class="attribute" data-tippy-content="Critical Threshold<br>@attributes.ct.value">
-                        <h4 class="attribute-name box-title">CT</h4>
-                        <div class="attribute-value">
-                            <span>{{data.attributes.ct.value}}</span>
-
-                        </div>
-                    </li>
-                    <li class="attribute" data-tippy-content="Damage Threshold<br>@attributes.dt">
-                        <h4 class="attribute-name box-title">DT</h4>
-                        <div class="attribute-value">
-                            <input type="text" name="data.attributes.dt" value="{{data.attributes.dt}}"
-                                data-dtype="Number" placeholder="-" />
-                        </div>
-                    </li>
-                    <li class="attribute" data-tippy-content="Power Core<br>@attributes.pwr.pcu">
+                    <li class="attribute" data-tippy-content="Power Core<br>@attributes.power.max">
                         <h4 class="attribute-name box-title">Power Core</h4>
                         <div class="attribute-value">
-                            <span>{{data.attributes.pwr.pcu}}</span>
+                            <span>{{data.attributes.power.max}}</span>
                         </div>
                     </li>
                     <li class="attribute" data-tippy-content="Complement<br>@attributes.complement.min<br>@attributes.complement.max">
                         <h4 class="attribute-name box-title">Complement</h4>
                         <div class="attribute-value multiple">
-                            <input type="text" name="data.attributes.complement.min"
-                                value="{{data.attributes.complement.min}}" data-dtype="Number"
-                                title="Minimum crew needed to run the ship" />
+                            <span data-tippy-content="Minimum crew needed to run the ship">{{data.attributes.complement.min}}</span>
                             <span class="sep"> / </span>
-                            <input type="text" name="data.attributes.complement.max"
-                                value="{{data.attributes.complement.max}}" data-dtype="Number"
-                                title="Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard)" />
+                            <span data-tippy-content="Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard)">{{data.attributes.complement.max}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="Expansion Bays<br>@attributes.expansionBays">
+                    <li class="attribute" data-tippy-content="Expansion Bays<br>@attributes.expansionBays.value">
                         <h4 class="attribute-name box-title">Expansion Bays</h4>
                         <div class="attribute-value">
-                            <input type="text" name="data.attributes.expansionBays"
-                                value="{{data.attributes.expansionBays}}" data-dtype="Number"
-                                title="Max number of expansion bays allowed" />
+                            <span data-tippy-content="Total amount of expansion bays available.">{{data.attributes.expansionBays.value}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="Drift Rating<br>@attributes.drift">
+                    <li class="attribute" data-tippy-content="Drift Rating<br>@attributes.drift.value">
                         <h4 class="attribute-name box-title">Drift Rating</h4>
                         <div class="attribute-value">
-                            <span class="ability-mod">{{data.attributes.drift}}</span>
+                            <span class="ability-mod">{{data.attributes.drift.value}}</span>
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="flexcol">
-                <h3 class="form-header">Shields</h3>
-                <div class="form-group flexrow">
-                    <label>Total</label>
-                    <div class="form-fields multiple" data-tippy-content="Shields<br>@attributes.shields.value<br>@attributes.shields.max">
-                        <input type="text" name="data.attributes.shields.value"
-                            value="{{data.attributes.shields.value}}" data-dtype="Number" />
-                        <span class="sep"> / </span>
-                        <span>{{data.attributes.shields.max}}</span>
-                    </div>
-                </div>
+                <h3 class="form-header" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Header"}}<br>@attributes.shields.value<br>@attributes.shields.max">{{localize "SFRPG.StarshipSheet.Details.Shields.Header"}} ({{data.attributes.shields.value}} / {{data.attributes.shields.max}})</h3>
                 <ul class="attributes flexrow">
-                    <li class="attribute" data-tippy-content="Forward Shields<br>@attributes.shields.forward.value<br>@attributes.shields.forward.max">
-                        <h4 class="attribute-name box-title">Forward</h4>
+                    <li class="attribute" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Forward"}}<br>@attributes.shields.forward.value<br>@attributes.shields.forward.max">
+                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Forward"}}</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.forward.value"
                                 value="{{data.attributes.shields.forward.value}}" data-dtype="Number" />
-                            <span class="sep"> / </span>
-                            <span>{{data.attributes.shields.forward.max}}</span>
                         </div>
+                        {{#if (greaterThan data.attributes.shields.forward.value data.attributes.shields.forward.max)}}
+                        <footer class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldTooHighTooltip"}}">
+                            {{localize "SFRPG.StarshipSheet.Details.ShieldTooHigh"}}
+                        </footer>
+                        {{/if}}
                     </li>
-                    <li class="attribute" data-tippy-content="Starboard Shields<br>@attributes.shields.starboard.value<br>@attributes.shields.starboard.max">
-                        <h4 class="attribute-name box-title">Starboard</h4>
+                    <li class="attribute" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Starboard"}}<br>@attributes.shields.starboard.value<br>@attributes.shields.starboard.max">
+                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Starboard"}}</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.starboard.value"
                                 value="{{data.attributes.shields.starboard.value}}" data-dtype="Number" />
-                            <span class="sep"> / </span>
-                            <span>{{data.attributes.shields.starboard.max}}</span>
                         </div>
+                        {{#if (greaterThan data.attributes.shields.starboard.value data.attributes.shields.starboard.max)}}
+                        <footer class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldTooHighTooltip"}}">
+                            {{localize "SFRPG.StarshipSheet.Details.ShieldTooHigh"}}
+                        </footer>
+                        {{/if}}
                     </li>
-                    <li class="attribute" data-tippy-content="Aft Shields<br>@attributes.shields.aft.value<br>@attributes.shields.aft.max">
-                        <h4 class="attribute-name box-title">Aft</h4>
+                    <li class="attribute" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Aft"}}<br>@attributes.shields.aft.value<br>@attributes.shields.aft.max">
+                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Aft"}}</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.aft.value"
                                 value="{{data.attributes.shields.aft.value}}" data-dtype="Number" />
-                            <span class="sep"> / </span>
-                            <span>{{data.attributes.shields.aft.max}}</span>
                         </div>
+                        {{#if (greaterThan data.attributes.shields.aft.value data.attributes.shields.aft.max)}}
+                        <footer class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldTooHighTooltip"}}">
+                            {{localize "SFRPG.StarshipSheet.Details.ShieldTooHigh"}}
+                        </footer>
+                        {{/if}}
                     </li>
-                    <li class="attribute" data-tippy-content="Port Shields<br>@attributes.shields.port.value<br>@attributes.shields.port.max">
-                        <h4 class="attribute-name box-title">Port</h4>
+                    <li class="attribute" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Port"}}<br>@attributes.shields.port.value<br>@attributes.shields.port.max">
+                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Port"}}</h4>
                         <div class="attribute-value multiple">
                             <input type="text" name="data.attributes.shields.port.value"
                                 value="{{data.attributes.shields.port.value}}" data-dtype="Number" />
-                            <span class="sep"> / </span>
-                            <span>{{data.attributes.shields.port.max}}</span>
                         </div>
+                        {{#if (greaterThan data.attributes.shields.port.value data.attributes.shields.port.max)}}
+                        <footer class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldTooHighTooltip"}}">
+                            {{localize "SFRPG.StarshipSheet.Details.ShieldTooHigh"}}
+                        </footer>
+                        {{/if}}
                     </li>
                 </ul>
             </div>
@@ -333,11 +322,11 @@
         <div class="tab weapons flexcol" data-group="primary" data-tab="weapons">
             <ol class="inventory-list">
                 {{#each arcs as |section|}}
-                <li class="item flexrow inventory-header">
+                <li class="item flexrow inventory-header{{#if section.dataset.isDisabled}} disabled{{/if}}">
                     <div class="item-name flexrow">
                         <h3>{{section.label}}</h3>
                     </div>
-                    {{#if ../owner}}
+                    {{#if (and ../owner section.dataset.allowAdd)}}
                     <div class="item-controls">
                         <a class="item-control item-create" title="Create Items" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                             <i class="fas fa-plus"></i> Add
@@ -373,6 +362,11 @@
             </ol>
         </div>
 
+        {{!-- Features Tab --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="features">
+            {{> "systems/sfrpg/templates/actors/parts/actor-features.html" sections=features noFilters=true}}
+        </div>
+
         <div class="tab crew" data-group="primary" data-tab="crew">
             <ol class="crew-list">
                 {{#each crew as |role|}}
@@ -394,6 +388,12 @@
             </ol>
         </div>
 
+        {{!-- Inventory Tab --}}
+        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+            {{> "systems/sfrpg/templates/actors/parts/actor-inventory.html" sections=inventory}}
+        </div>
+
+        {{!-- Biography Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
             {{editorPlus content=data.details.notes target="data.details.notes" button=true owner=owner editable=editable rolls=false rollData=data}}
         </div>
