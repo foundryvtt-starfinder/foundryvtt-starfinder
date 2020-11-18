@@ -588,6 +588,14 @@ export class ItemSFRPG extends Item {
         rollContext.addContext("item", this, itemData);
         rollContext.setMainContext("actor");
 
+        /** Create additional modifiers. */
+        const additionalModifiers = [
+            {bonus: { name: "Full Attack", modifier: "-4", enabled: false} },
+            {bonus: { name: "Non-Lethal", modifier: "-4", enabled: false} }
+        ];
+        rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+        parts.push("@additional.modifiers.bonus");
+
         // Call the roll helper utility
         return await DiceSFRPG.d20Roll({
             event: options.event,
