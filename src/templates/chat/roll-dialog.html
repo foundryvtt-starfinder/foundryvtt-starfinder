@@ -47,8 +47,7 @@
         </li>
         
         {{#each availableModifiers as |modifier id|}}
-        <li class="modifier flexrow toggle-modifier" data-modifier-index="{{id}}">
-            <input type="hidden" name="modifier.id" value="{{id}}" data-dtype="Number" />
+        <li class="modifier flexrow toggle-modifier" data-modifier-index="{{id}}" {{#if modifier.notes}}data-tippy-content="<b>{{modifier.name}}</b><br/>{{modifier.notes}}"{{/if}}>
             <a class="modifier-enabled" title="{{modifier.name}}">{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
             <h4 class="modifier-name">{{modifier.name}}</h4>
             <span class="modifier-modifier">{{modifier.modifier}}</span>

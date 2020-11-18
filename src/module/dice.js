@@ -540,6 +540,18 @@ class RollDialog extends Dialog
         return "systems/sfrpg/templates/chat/roll-dialog.html";
     }
 
+    async _render(...args) {
+        await super._render(...args);
+
+        tippy('[data-tippy-content]', {
+            allowHTML: true,
+            arrow: false,
+            placement: 'top-start',
+            duration: [500, null],
+            delay: [800, null]
+        });
+    }
+
     getData() {
         let data = super.getData();
         data.formula = this.formula;
