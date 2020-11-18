@@ -47,10 +47,10 @@
         </li>
         
         {{#each availableModifiers as |modifier id|}}
-        <li class="modifier flexrow" data-modifier-index="{{id}}">
+        <li class="modifier flexrow toggle-modifier" data-modifier-index="{{id}}">
             <input type="hidden" name="modifier.id" value="{{id}}" data-dtype="Number" />
-            <a class="modifier-enabled toggle-modifier" title="{{modifier.name}}">{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
-            <h4 class="modifier-name toggle-modifier">{{modifier.name}}</h4>
+            <a class="modifier-enabled" title="{{modifier.name}}">{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
+            <h4 class="modifier-name">{{modifier.name}}</h4>
             <span class="modifier-modifier">{{modifier.modifier}}</span>
         </li>
         {{/each}}

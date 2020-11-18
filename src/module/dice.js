@@ -579,7 +579,7 @@ class RollDialog extends Dialog
     }
 
     async _toggleModifierEnabled(event) {
-        const modifierIndex = $(event.currentTarget).parents('.modifier').data('modifierIndex');
+        const modifierIndex = $(event.currentTarget).data('modifierIndex');
         const modifier = this.availableModifiers[modifierIndex];
 
         modifier.enabled = !modifier.enabled;
