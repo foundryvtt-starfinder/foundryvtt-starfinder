@@ -130,6 +130,8 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         if (!this.options.editable) return;
 
+        html.find('.toggle-container').click(this._onToggleContainer.bind(this));
+
         html.find('.skill-proficiency').on("click contextmenu", this._onCycleClassSkill.bind(this));
         html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
@@ -533,6 +535,22 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     /**
+     * Handles toggling the open/close state of a container.
+     * 
+     * @param {Event} event The originating click event
+     */
+    _onToggleContainer(event) {
+        event.preventDefault();
+
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        const isOpen = item.data.data.container?.isOpen === undefined ? true : item.data.data.container.isOpen;
+
+        return item.update({'data.container.isOpen': !isOpen});
+    }
+
+    /**
      * Get The font-awesome icon used to display if a skill is a class skill or not
      * 
      * @param {Number} level Flag that determines if a skill is a class skill or not
@@ -736,6 +754,10 @@ export class ActorSheetSFRPG extends ActorSheet {
             return;
         }
 
+        await this.processDroppedData(event, parsedDragData);
+    }
+
+    async processDroppedData(event, parsedDragData) {
         const targetActor = new ActorItemHelper(this.actor._id, this.token ? this.token.id : null, this.token ? this.token.scene.id : null);
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
             ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));

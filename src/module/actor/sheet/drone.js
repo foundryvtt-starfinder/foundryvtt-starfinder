@@ -95,6 +95,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             i.data.quantity = i.data.quantity || 0;
             i.data.price = i.data.price || 0;
             i.data.bulk = i.data.bulk || "-";
+            i.isOpen = i.data.container?.isOpen === undefined ? true : i.data.container.isOpen;
 
             let weight = 0;
             if (i.data.bulk === "L") {
