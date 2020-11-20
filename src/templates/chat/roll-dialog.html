@@ -1,15 +1,15 @@
 <div class="dialog-content">
     <form>
-        <div class="form-group">
-            <label>Formula</label>
+        <div class="form-group" data-tippy-content="<b>{{localize "SFRPG.Rolls.Dialog.Formula"}}</b><br/>{{localize "SFRPG.Rolls.Dialog.FormulaTooltip"}}">
+            <label>{{localize "SFRPG.Rolls.Dialog.Formula"}}:</label>
             <input type="text" name="formula" value="{{formula}}" disabled/>
         </div>
-        <div class="form-group">
-            <label>Situational Bonus?</label>
+        <div class="form-group" data-tippy-content="<b>{{localize "SFRPG.Rolls.Dialog.SituationalBonus"}}</b><br/>{{localize "SFRPG.Rolls.Dialog.SituationalBonusTooltip"}}">
+            <label>{{localize "SFRPG.Rolls.Dialog.SituationalBonus"}}:</label>
             <input type="text" name="bonus" value="{{additionalBonus}}" placeholder="e.g. +1d4"/>
         </div>
-        <div class="form-group">
-            <label>Roll Mode</label>
+        <div class="form-group" data-tippy-content="<b>{{localize "SFRPG.Rolls.Dialog.RollMode"}}</b><br/>{{localize "SFRPG.Rolls.Dialog.RollModeTooltip"}}">
+            <label>{{localize "SFRPG.Rolls.Dialog.RollMode"}}:</label>
             <select name="rollMode">
             {{#select rollMode}}
             {{#each rollModes as |label mode|}}
@@ -20,8 +20,8 @@
         </div>
         {{#if hasSelectors}}
         {{#each selectors as |selector target|}}
-        <div class="form-group">
-            <label>Select '{{target}}'</label>
+        <div class="form-group" data-tippy-content="<b>{{localize "SFRPG.Rolls.Dialog.Selector" name=target}}</b><br/>{{localize "SFRPG.Rolls.Dialog.SelectorTooltip" name=target}}">
+            <label>{{localize "SFRPG.Rolls.Dialog.Selector" name=target}}:</label>
             <select class="selector" name="{{target}}">
             {{#select selector.value}}
             {{#each selector.entries as |selectorName selectorKey|}}
@@ -38,12 +38,12 @@
 {{#if hasModifiers}}
 <div>
     <ul class="modifier-list">
-        <h3 class="modifier-list-title">Available modifiers</h3>
+        <h3 class="modifier-list-title" data-tippy-content="<b>{{localize "SFRPG.Rolls.Dialog.AvailableModifiers"}}</b><br/>{{localize "SFRPG.Rolls.Dialog.AvailableModifiersTooltip"}}">{{localize "SFRPG.Rolls.Dialog.AvailableModifiers"}}</h3>
 
         <li class="modifier-list-header flexrow">
             <div class="modifier-list-header-enabled"></div>
-            <h3 class="modifier-list-header-name">Name</h3>
-            <div class="modifier-list-header-modifier">Effect</div>
+            <h3 class="modifier-list-header-name">{{localize "SFRPG.Rolls.Dialog.ModifierName"}}</h3>
+            <div class="modifier-list-header-modifier">{{localize "SFRPG.Rolls.Dialog.ModifierEffect"}}</div>
         </li>
         
         {{#each availableModifiers as |modifier id|}}
@@ -59,7 +59,7 @@
 
 <div class="dialog-buttons">
     {{#each buttons as |button id|}}
-    <button class="dialog-button {{cssClass}}" data-button="{{id}}">
+    <button class="dialog-button {{cssClass}}" data-button="{{id}}" {{#if button.tooltip}}data-tippy-content="<b>{{button.label}}</b><br/>{{button.tooltip}}"{{/if}}>
         {{{button.icon}}}
         {{{button.label}}}
     </button>

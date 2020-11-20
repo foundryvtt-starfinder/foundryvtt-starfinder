@@ -82,6 +82,18 @@ SFRPG.weaponProficiencies = {
     "spec": "SFRPG.WeaponProficiencySpecial"
 };
 
+SFRPG.weaponTypeProficiency = {
+    "basicM": "bmelee",
+    "advancedM": "amelee",
+    "smallA": "sarms",
+    "longA": "larms",
+    "heavy": "hweap",
+    "sniper": "snipe",
+    "grenade": "gren",
+    "special": "",
+    "solarian": ""
+};
+
 /**
  * This describes the ways that an ability can be cativated
  * @type {Object}

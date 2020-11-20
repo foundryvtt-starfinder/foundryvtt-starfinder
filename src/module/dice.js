@@ -33,11 +33,11 @@ export class DiceSFRPG {
         /** New roll formula system */
         const buttons = {};
         if (game.settings.get("sfrpg", "useAdvantageDisadvantage") && advantage) {
-            buttons["Disadvantage"] = {label: "Disadvantage"};
-            buttons["Normal"] = {label: "Normal"};
-            buttons["Advantage"] = {label: "Advantage"};
+            buttons["Disadvantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
+            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
+            buttons["Advantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
         } else {
-            buttons["Normal"] = {label: "Normal"};
+            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
         }
 
         const options = {
@@ -131,8 +131,8 @@ export class DiceSFRPG {
 
         /** New roll formula system */
         const buttons = {
-            Normal: { label: "Normal" },
-            Critical: { label: "Critical" }
+            Normal: { label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
+            Critical: { label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
         };
 
         const options = {

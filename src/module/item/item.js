@@ -1,4 +1,5 @@
 import { DiceSFRPG, RollContext } from "../dice.js";
+import { SFRPG } from "../config.js";
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
@@ -516,7 +517,14 @@ export class ItemSFRPG extends Item {
         if (itemData.data.attackBonus !== 0) parts.push("@item.data.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.data.type)) parts.push("@attributes.baseAttackBonus.value");
-        if (isWeapon && !itemData.data.proficient) parts.push("-4");
+        if (isWeapon)
+        {
+            const procifiencyKey = SFRPG.weaponTypeProficiency[this.data.data.weaponType];
+            const proficient = itemData.data.proficient || this.actor?.data?.data?.traits?.weaponProf?.value?.includes(procifiencyKey);
+            if (!proficient) {
+                parts.push("-4");
+            }
+        }
 
         let acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
@@ -574,7 +582,7 @@ export class ItemSFRPG extends Item {
         itemData.hasCapacity = this.data.hasCapacity;
 
         rollData.item = itemData;
-        const title = game.settings.get('sfrpg', 'useCustomChatCard') ? `Attack Roll` : `Attack Roll - ${itemData.name}`;
+        const title = game.settings.get('sfrpg', 'useCustomChatCard') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: itemData.name});
 
         //Warn the user if there is no ammo left
         const usage = itemData.data.usage?.value || 0;
@@ -590,8 +598,8 @@ export class ItemSFRPG extends Item {
 
         /** Create additional modifiers. */
         const additionalModifiers = [
-            {bonus: { name: "Full Attack", modifier: "-4", enabled: false} },
-            {bonus: { name: "Non-Lethal", modifier: "-4", enabled: false} }
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.FullAttack"), modifier: "-4", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Nonlethal"), modifier: "-4", enabled: false} }
         ];
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
@@ -685,7 +693,7 @@ export class ItemSFRPG extends Item {
     async _rollStarshipAttack(options = {}) {
         const parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.mod)", "@gunner.abilities.dex.mod"];
 
-        const title = `${this.name} - Attack Roll`;
+        const title = game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         /** Build the roll context */
         const rollContext = new RollContext();
@@ -698,11 +706,11 @@ export class ItemSFRPG extends Item {
 
         /** Create additional modifiers. */
         const additionalModifiers = [
-            {bonus: { name: "Computer bonus", modifier: "@ship.attributes.computer.bonus", enabled: false} },
-            {bonus: { name: "Captain's Demand", modifier: "4", enabled: false} },
-            {bonus: { name: "Captain's Encouragement", modifier: "2", enabled: false} },
-            {bonus: { name: "Science Officer's Lock On", modifier: "2", enabled: false} },
-            {bonus: { name: "Snap Shot", modifier: "-2", enabled: false} }
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: "@ship.attributes.computer.bonus", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.SnapShot"), modifier: "-2", enabled: false} }
         ];
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
