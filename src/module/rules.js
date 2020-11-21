@@ -25,7 +25,8 @@ import calculateBaseAbilityScore from './rules/actions/actor/calculate-base-abil
 import calculateBaseAbilityModifier from './rules/actions/actor/calculate-base-ability-modifier.js';
 import calculateBaseArmorClass from './rules/actions/actor/calculate-base-armor-class.js';
 import calculateArmorModifiers from './rules/actions/actor/calculate-armor-modifiers.js';
-import calculateBab from './rules/actions/actor/calculate-bab.js';
+import calculateBaseAttackBonus from './rules/actions/actor/character/calculate-bab.js';
+import calculateBaseAttackBonusModifier from './rules/actions/actor/calculate-bab-modifier.js';
 import calculateBaseSaves from './rules/actions/actor/calculate-base-saves.js';
 import calculateSaveModifiers from './rules/actions/actor/calculate-save-modifiers.js';
 import calculateCharacterLevel from './rules/actions/actor/calculate-character-level.js';
@@ -82,7 +83,8 @@ export default function (engine) {
     calculateBaseAbilityModifier(engine);
     calculateBaseArmorClass(engine);
     calculateArmorModifiers(engine);
-    calculateBab(engine);
+    calculateBaseAttackBonus(engine);
+    calculateBaseAttackBonusModifier(engine);
     calculateBaseSaves(engine);
     calculateSaveModifiers(engine);
     calculateCharacterLevel(engine);
@@ -157,6 +159,7 @@ export default function (engine) {
                     "calculateBaseArmorClass",
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAttackBonus", stackModifiers: "stackModifiers" },
+                    { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseSaves",
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     "calculateInitiative",
@@ -218,6 +221,7 @@ export default function (engine) {
                     { closure: "calculateDroneHitpoints", stackModifiers: "stackModifiers" },
                     { closure: "calculateDroneResolve", stackModifiers: "stackModifiers" },
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
+                    { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" }
                 ]
             }

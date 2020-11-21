@@ -22,8 +22,15 @@ export default function (engine) {
             data.details.level.value = droneLevel;
             data.attributes.hp.max = SFRPG.droneHitpointsPerLevel[droneLevel - 1];
             data.attributes.rp.max = SFRPG.droneResolveMethod(droneLevel); // Upgraded Power Core (Ex)
-            data.attributes.bab = SFRPG.droneBABBonusPerLevel[droneLevel - 1];
-            
+            data.attributes.baseAttackBonus = {
+                value: SFRPG.droneBABBonusPerLevel[droneLevel - 1],
+                rolledMods: [],
+                tooltip: [game.i18n.format("SFRPG.BABTooltip", {
+                    class: activeChassis.name,
+                    bonus: SFRPG.droneBABBonusPerLevel[droneLevel - 1].signedString()
+                })]
+            };
+
             let abilityIncreaseStats = [activeChassis.data.abilityIncreaseStats.first, activeChassis.data.abilityIncreaseStats.second];
             let abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
 
