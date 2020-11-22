@@ -269,6 +269,17 @@ class RollTree {
             }
         }
 
+        /** Verify variable contexts, replace bad ones with 0. */
+        const variableMatches = new Set(this.formula.match(/@([a-zA-Z.0-9_\-]+)/g));
+        for (const variable of variableMatches) {
+            const [context, remainingVariable] = RollNode.getContextForVariable(variable, contexts);
+            if (!context) {
+                console.log(`Cannot find context for variable '${variable}', substituting with a 0.`);
+                const regexp = new RegExp(variable, "gi");
+                this.formula = this.formula.replace(regexp, "0");
+            }
+        }
+
         const allRolledMods = this.populate();
 
         return this.displayUI(formula, contexts, allRolledMods).then(([button, rollMode, bonus]) => {
@@ -370,7 +381,12 @@ class RollNode {
                 const [context, remainingVariable] = RollNode.getContextForVariable(variable, contexts);
                 this.nodeContext = context;
 
-                const variableValue = RollNode._readValue(this.getContext().data, remainingVariable);
+                let variableValue = 0;
+                try {
+                    variableValue = RollNode._readValue(this.getContext().data, remainingVariable);
+                } catch (error) {
+                    console.log(["error reading value", remainingVariable, this, error]);
+                }
 
                 let existingNode = nodes[variable];
                 if (!existingNode) {
@@ -462,6 +478,10 @@ class RollNode {
     }
             
     static getContextForVariable(variable, contexts) {
+        if (variable[0] === '@') {
+            variable = variable.substring(1);
+        }
+
         const firstToken = variable.split('.')[0];
 
         if (contexts.allContexts[firstToken]) {

@@ -691,7 +691,7 @@ export class ItemSFRPG extends Item {
      * @param {Object} options Options to pass to the attack roll
      */
     async _rollStarshipAttack(options = {}) {
-        const parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.mod)", "@gunner.abilities.dex.mod"];
+        const parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
 
         const title = game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
