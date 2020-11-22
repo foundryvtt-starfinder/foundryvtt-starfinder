@@ -53,6 +53,12 @@ export default function (engine) {
             data.abilities.int.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
             data.abilities.wis.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
             data.abilities.cha.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
+
+            data.attributes.baseAttackBonus = {
+                value: 0,
+                rolledMods: [],
+                tooltip: []
+            };
         }
 
         // Clear out skills, this and future closures will enable them again
