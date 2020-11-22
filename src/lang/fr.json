@@ -22,8 +22,9 @@
         "TypeFusion": "Weapon Fusion",
         "TypeUpgrade": "Armor Upgrade",
         "TypeAugmentation": "Augmentation",
-        "TypeStarshipweapon": "Starship Weapon",
+        "TypeStarshipcomputer": "Starship Computer",
         "TypeStarshipframe": "Starship Frame",
+        "TypeStarshipweapon": "Starship Weapon",
         "TypeArchetypes": "Archetype",
         "TypeChassis": "Drone Chassis",
         "TypeMod": "Drone Mod",
@@ -751,8 +752,9 @@
                 "Races"               : "Races",
                 "Shields"             : "Shields",
                 "Spells"              : "Spells",
-                "StarshipWeapons"     : "Starship Weapons",
+                "StarshipComputers"   : "Starship Computers",
                 "StarshipFrames"      : "Starship Frames",
+                "StarshipWeapons"     : "Starship Weapons",
                 "TechnologicalItems"  : "Technological Items",
                 "Themes"              : "Themes",
                 "Weapons"             : "Weapons",
@@ -910,6 +912,20 @@
                 "SizeTooltip": "By default, an item's size is medium. Item sizes affect the item armor class, alter as needed.",
                 "Sturdy": "Sturdy",
                 "SturdyTooltip": "Equipment, such as weapons and armors, are considered sturdy."
+            },
+            "StarshipComponent": {
+                "Cost": "Buildpoint Cost",
+                "CostTooltip": "The amount of buildpoints required to obtain this component.",
+                "Header": "Common Component Properties",
+                "PCU": "PCU Usage",
+                "PCUTooltip": "The amount of power this component requires to function."
+            },
+            "StarshipComputer": {
+                "Header": "Computer Properties",
+                "Modifier": "Modifier",
+                "ModifierTooltip": "The roll modifier provided by this computer.",
+                "Nodes": "Nodes",
+                "NodesTooltip": "The amount of times per turn this computer can provide its bonus for."
             },
             "StarshipFrame": {
                 "Details": {
@@ -1614,6 +1630,9 @@
         "SpellResistance": "Résistance au sort",
         "Stamina": "Endurance",
         "StarshipSheet": {
+            "Attributes": {
+                "Computer": "Computer"
+            },
             "Crew": {
                 "AssignedCount": "({current} / {max})",
                 "Captain": "Captain",
@@ -1638,12 +1657,16 @@
                 "ShieldTooHighTooltip": "A shield quadrant cannot exceed 70% of the total shield allocation, as the minimum available for each shield must be 10%. (For more information, see the Core Rulebook pg. 302)"
             },
             "Features": {
-                "Frame": "Frame ({current} / 1)"
+                "Frame": "Frame ({current} / 1)",
+                "Systems": "Systems"
             },
             "Header": {
                 "FrameMissing": "Missing Frame",
                 "Maneuverability": "Maneuverability: {maneuverability}",
                 "Size": "Size: {size}"
+            },
+            "Modifiers": {
+                "ComputerBonus": "Computer Bonus: {mod} ({source})"
             },
             "Sides": {
                 "Aft": "Aft",

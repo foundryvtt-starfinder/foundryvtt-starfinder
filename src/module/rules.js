@@ -59,6 +59,7 @@ import calculateDroneSaves from './rules/actions/actor/drone/calculate-drone-sav
 import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
 // Starship rules
 import calculateStarshipFrame           from './rules/actions/actor/starship/calculate-starship-frame.js'
+import calculateStarshipComputer        from './rules/actions/actor/starship/calculate-starship-computer.js'
 import calculateStarshipArmorClass      from './rules/actions/actor/starship/calculate-starship-ac.js';
 import calculateStarshipCrew            from './rules/actions/actor/starship/calculate-starship-crew.js';
 import calculateStarshipCritThreshold   from './rules/actions/actor/starship/calculate-starship-ct.js';
@@ -117,6 +118,7 @@ export default function (engine) {
     calculateStarshipSpeed(engine);
     calculateStarshipTargetLock(engine);
     calculateStarshipFrame(engine);
+    calculateStarshipComputer(engine);
     // Drone actions
     calculateDroneChassis(engine);
     calculateDroneDefense(engine);
@@ -190,7 +192,8 @@ export default function (engine) {
                     "calculateStarshipMaxShields",
                     "calculateStarshipPower",
                     "calculateStarshipSpeed",
-                    "calculateStarshipTargetLock"
+                    "calculateStarshipTargetLock",
+                    "calculateStarshipComputer"
                 ]
             },
             {
