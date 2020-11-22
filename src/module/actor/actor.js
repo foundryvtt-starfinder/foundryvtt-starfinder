@@ -479,6 +479,8 @@ export class ActorSFRPG extends Actor {
         rollContext.addContext("main", this, data);
         rollContext.setMainContext("main");
 
+        this.setupRollContexts(rollContext);
+
         return await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
@@ -512,6 +514,8 @@ export class ActorSFRPG extends Actor {
         rollContext.addContext("main", this, data);
         rollContext.setMainContext("main");
 
+        this.setupRollContexts(rollContext);
+
         return await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
@@ -535,6 +539,8 @@ export class ActorSFRPG extends Actor {
         const rollContext = new RollContext();
         rollContext.addContext("main", this, data);
         rollContext.setMainContext("main");
+
+        this.setupRollContexts(rollContext);
         
         return await DiceSFRPG.d20Roll({
             event: options.event,
@@ -837,5 +843,33 @@ export class ActorSFRPG extends Actor {
         }
 
         return duplicate(this.data.data.crew[role]);
+    }
+
+    setupRollContexts(rollContext, desiredSelectors = []) {
+        if (this.data.type === "starship") {
+            if (this.data.data.crew.captain?.actors?.length > 0) {
+                rollContext.addContext("captain", this.data.data.crew.captain.actors[0]);
+            }
+    
+            if (this.data.data.crew.pilot?.actors?.length > 0) {
+                rollContext.addContext("pilot", this.data.data.crew.pilot.actors[0]);
+            }
+    
+            const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer"];
+            for (const crewType of crewMates) {
+                let crewCount = 1;
+                const crew = [];
+                for (const actor of this.data.data.crew[crewType].actors) {
+                    const contextId = crewType + crewCount;
+                    rollContext.addContext(contextId, actor);
+                    crew.push(contextId);
+                    crewCount += 1;
+                }
+    
+                if (desiredSelectors.includes(crewType)) {
+                    rollContext.addSelector(crewType, crew);
+                }
+            }
+        }
     }
 }

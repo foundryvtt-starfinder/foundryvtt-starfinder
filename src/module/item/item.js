@@ -596,6 +596,8 @@ export class ItemSFRPG extends Item {
         rollContext.addContext("item", this, itemData);
         rollContext.setMainContext("actor");
 
+        this.actor?.setupRollContexts(rollContext);
+
         /** Create additional modifiers. */
         const additionalModifiers = [
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.FullAttack"), modifier: "-4", enabled: false} },
@@ -660,32 +662,6 @@ export class ItemSFRPG extends Item {
         }
     }
 
-    _populateStarshipCrew(rollContext, desiredSelectors = []) {
-        if (this.actor.data.data.crew.captain?.actors?.length > 0) {
-            rollContext.addContext("captain", this.actor.data.data.crew.captain.actors[0]);
-        }
-
-        if (this.actor.data.data.crew.pilot?.actors?.length > 0) {
-            rollContext.addContext("pilot", this.actor.data.data.crew.pilot.actors[0]);
-        }
-
-        const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer"];
-        for (const crewType of crewMates) {
-            let crewCount = 1;
-            const crew = [];
-            for (const actor of this.actor.data.data.crew[crewType].actors) {
-                const contextId = crewType + crewCount;
-                rollContext.addContext(contextId, actor);
-                crew.push(contextId);
-                crewCount += 1;
-            }
-
-            if (desiredSelectors.includes(crewType)) {
-                rollContext.addSelector(crewType, crew);
-            }
-        }
-    }
-
     /**
      * Place an attack roll for a starship using an item.
      * @param {Object} options Options to pass to the attack roll
@@ -702,7 +678,7 @@ export class ItemSFRPG extends Item {
         rollContext.addContext("weapon", this, this.data);
         rollContext.setMainContext("");
 
-        this._populateStarshipCrew(rollContext, ["gunner"]);
+        this.actor?.setupRollContexts(rollContext, ["gunner"]);
 
         /** Create additional modifiers. */
         const additionalModifiers = [
@@ -822,6 +798,8 @@ export class ItemSFRPG extends Item {
         rollContext.addContext("item", this, itemData);
         rollContext.setMainContext("actor");
 
+        this.actor?.setupRollContexts(rollContext);
+
         // Call the roll helper utility
         return await DiceSFRPG.damageRoll({
             event: event,
@@ -857,7 +835,7 @@ export class ItemSFRPG extends Item {
         rollContext.addContext("weapon", this, this.data);
         rollContext.setMainContext("");
 
-        this._populateStarshipCrew(rollContext, ["gunner"]);
+        this.actor?.setupRollContexts(rollContext, ["gunner"]);
 
         return await DiceSFRPG.damageRoll({
             event: event,
