@@ -103,14 +103,14 @@ export async function handleItemDropCanvas(data) {
     let sourceActor = null;
     let sourceItem = null;
     let sourceItemData = null;
-    if ("pack" in data) {
+    if (data["pack"]) {
         // Source is compendium
         //console.log("> Dragged item from compendium: " + data.pack);
         const pack = game.packs.get(data.pack);
         sourceItemData = duplicate(await pack.getEntry(data.id));
-    } else if ("tokenId" in data) {
+    } else if (data["tokenId"]) {
         // Source is token sheet
-        //console.log("> Dragged item from token: " + data.tokenId);
+        console.log(["> Dragged item from token: ", data]);
         let sourceToken = canvas.tokens.get(data.tokenId);
         if (!sourceToken) {
             ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
@@ -119,13 +119,13 @@ export async function handleItemDropCanvas(data) {
         sourceActor = new ActorItemHelper(sourceToken.actor._id, sourceToken.id, sourceToken.scene.id);
         sourceItemData = duplicate(data.data);
         sourceItem = sourceActor.getOwnedItem(sourceItemData._id);
-    } else if ("actorId" in data) {
+    } else if (data["actorId"]) {
         // Source is actor sheet
         //console.log("> Dragged item from actor: " + data.actorId);
         sourceActor = new ActorItemHelper(data.actorId, null, null);
         sourceItemData = duplicate(data.data);
         sourceItem = sourceActor.getOwnedItem(sourceItemData._id);
-    } else if ("id" in data) {
+    } else if (data["id"]) {
         // Source is sidebar
         //console.log("> Dragged item from sidebar: " + data.id);
         sourceItem = game.items.get(data.id);
