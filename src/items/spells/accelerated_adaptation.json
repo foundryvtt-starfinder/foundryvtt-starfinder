@@ -1,14 +1,13 @@
 {
-  "_id": "jTBvCOkJO6LYU6Rk",
-  "name": "Arcing Surge",
+  "name": "Accelerated Adaptation",
   "type": "spell",
   "data": {
     "description": {
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You cause an electrical device in your possession to surge in power and unleash a line of electricity from the massive oversurge. This deals 10d6 electricity damage to all creatures and objects in the area.&nbsp;&nbsp;</span></p>",
+      "value": "<p>You grant a barathu increased control over its own powers of adaptation. If the target has the early stage adaptation racial trait, it gains adaptation instead. If the target already has adaptation, it can have two adaptations in effect at a time, instead of only one.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "CRB pg. 340",
+    "source": "AP #29 pg. 44",
     "type": "",
     "activation": {
       "type": "action",
@@ -16,24 +15,24 @@
       "condition": ""
     },
     "duration": {
-      "value": "instantaneous",
+      "value": "1 round/level (D)",
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": "1 barathu",
       "type": ""
     },
     "area": {
-      "value": 120,
-      "units": "ft",
-      "shape": "line",
-      "effect": "burst"
-    },
-    "range": {
       "value": null,
       "units": null,
-      "additional": "",
-      "per": ""
+      "shape": "",
+      "effect": ""
+    },
+    "range": {
+      "value": 25,
+      "units": "ft",
+      "additional": "5 ft.",
+      "per": "2 levels"
     },
     "uses": {
       "value": null,
@@ -49,25 +48,20 @@
       "effect": ""
     },
     "damage": {
-      "parts": [
-        [
-          "10d6",
-          "electricity"
-        ]
-      ]
+      "parts": []
     },
     "formula": "",
     "save": {
-      "type": "reflex",
+      "type": "fort",
       "dc": "",
-      "descriptor": "half"
+      "descriptor": "harmless"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 3,
-    "school": "evo",
+    "school": "trs",
     "sr": true,
-    "dismissible": false,
+    "dismissible": true,
     "concentration": false,
     "materials": {
       "value": "",
@@ -80,15 +74,16 @@
       "prepared": false
     },
     "allowedClasses": {
-      "myst": false,
-      "tech": true,
-      "wysh": false
+      "myst": true,
+      "tech": false,
+      "wysh": true
     },
     "abilityMods": {
       "parts": []
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/arcing_surge.jpg",
-  "effects": []
+  "effects": [],
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "C44G2AwBOrxHuxHG"
 }
