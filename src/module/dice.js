@@ -101,6 +101,83 @@ export class DiceSFRPG {
         });
     }
 
+    /**
+    * A standardized helper function for managing Starfinder rolls.
+    *
+    * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
+    * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively (Only available for d20 rolls)
+    * 
+    * Returns a promise that will return an object containing roll and formula.
+    *
+    * @param {Event} event               The triggering event which initiated the roll
+    * @param {Array} parts               The dice roll component parts, excluding the initial die
+    * @param {RollContext} rollContext   The contextual data for this roll
+    * @param {String} title              The dice roll UI window title
+    * @param {String} mainDie            The main die to use for this roll, e.g. "d20".
+    * @param {Boolean} advantage         Allow rolling with advantage (and therefore also with disadvantage)
+    * @param {Number} critical           The value of d20 result which represents a critical success
+    * @param {Number} fumble             The value of d20 result which represents a critical failure
+    * @param {Object} dialogOptions      Modal dialog options
+    */
+    static createRoll({ event = new Event(''), parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, dialogOptions }) {
+        
+        if (!rollContext?.isValid()) {
+            console.log(['Invalid rollContext', rollContext]);
+            return null;
+        }
+
+        /** New roll formula system */
+        const buttons = {};
+        if (game.settings.get("sfrpg", "useAdvantageDisadvantage") && advantage) {
+            buttons["Disadvantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
+            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
+            buttons["Advantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
+        } else {
+            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
+        }
+
+        const options = {
+            debug: false,
+            buttons: buttons,
+            defaultButton: "Normal",
+            title: title,
+            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault'),
+            mainDie: "1" + mainDie,
+            dialogOptions: dialogOptions
+        };
+
+        const formula = parts.join(" + ");
+
+        const tree = new RollTree(options);
+        return new Promise((resolve) => {
+            tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+                let dieRoll = "1" + mainDie;
+                if (mainDie == "d20") {
+                    if (button === "Disadvantage") {
+                        dieRoll = "2d20kl";
+                    } else if (button === "Advantage") {
+                        dieRoll = "2d20kh";
+                    }
+                }
+
+                finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
+                finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+
+                let roll = new Roll(finalFormula.finalRoll).roll();
+
+                // Flag critical thresholds
+                for (let d of roll.dice) {
+                    if (d.faces === 20) {
+                        d.options.critical = critical;
+                        d.options.fumble = fumble;
+                    }
+                }
+
+                resolve({roll: roll, formula: finalFormula});
+            });
+        });
+    }
+
     /* -------------------------------------------- */
 
     /**
