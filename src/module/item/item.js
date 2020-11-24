@@ -1,4 +1,5 @@
-import { DiceSFRPG } from "../dice.js";
+import { DiceSFRPG, RollContext } from "../dice.js";
+import { SFRPG } from "../config.js";
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
@@ -515,8 +516,15 @@ export class ItemSFRPG extends Item {
         
         if (itemData.data.attackBonus !== 0) parts.push("@item.data.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
-        if (["character", "drone"].includes(this.actor.data.type)) parts.push("@attributes.bab");
-        if (isWeapon && !itemData.data.proficient) parts.push("-4");
+        if (["character", "drone"].includes(this.actor.data.type)) parts.push("@attributes.baseAttackBonus.value");
+        if (isWeapon)
+        {
+            const procifiencyKey = SFRPG.weaponTypeProficiency[this.data.data.weaponType];
+            const proficient = itemData.data.proficient || this.actor?.data?.data?.traits?.weaponProf?.value?.includes(procifiencyKey);
+            if (!proficient) {
+                parts.push("-4");
+            }
+        }
 
         let acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
@@ -536,7 +544,7 @@ export class ItemSFRPG extends Item {
                     return false;
                 }
             }
-            return mod.enabled && acceptedModifiers.includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && acceptedModifiers.includes(mod.effectType);
         });
 
         let stackModifiers = new StackModifiers();
@@ -574,7 +582,7 @@ export class ItemSFRPG extends Item {
         itemData.hasCapacity = this.data.hasCapacity;
 
         rollData.item = itemData;
-        const title = game.settings.get('sfrpg', 'useCustomChatCard') ? `Attack Roll` : `Attack Roll - ${itemData.name}`;
+        const title = game.settings.get('sfrpg', 'useCustomChatCard') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: itemData.name});
 
         //Warn the user if there is no ammo left
         const usage = itemData.data.usage?.value || 0;
@@ -582,20 +590,33 @@ export class ItemSFRPG extends Item {
         if (availableCapacity < usage) {
             ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
         }
+        
+        const rollContext = new RollContext();
+        rollContext.addContext("actor", this.actor);
+        rollContext.addContext("item", this, itemData);
+        rollContext.setMainContext("actor");
+
+        this.actor?.setupRollContexts(rollContext);
+
+        /** Create additional modifiers. */
+        const additionalModifiers = [
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.FullAttack"), modifier: "-4", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Nonlethal"), modifier: "-4", enabled: false} }
+        ];
+        rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+        parts.push("@additional.modifiers.bonus");
 
         // Call the roll helper utility
         return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
-            actor: this.actor,
-            data: rollData,
+            rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: crit,
             dialogOptions: {
-                width: 400,
-                top: options.event ? options.event.clientY - 80 : null,
-                left: window.innerWidth - 710
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
             },
             onClose: this._onAttackRollClose.bind(this)
         });
@@ -608,7 +629,7 @@ export class ItemSFRPG extends Item {
      * @param {Array} parts The parts of the roll
      * @param {Object} data The data
      */
-    _onAttackRollClose(html, parts, data) {
+    _onAttackRollClose(roll, formula, finalFormula) {
         const itemData = duplicate(this.data.data);
 
         if (itemData.hasOwnProperty("usage")) {
@@ -646,28 +667,40 @@ export class ItemSFRPG extends Item {
      * @param {Object} options Options to pass to the attack roll
      */
     async _rollStarshipAttack(options = {}) {
-        const parts = ["@weapon.data.attackBonus"];
+        const parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
 
-        const rollData = 
-        {
-            ship: duplicate(this.actor.data),
-            weapon: duplicate(this.data)
-        };
+        const title = game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
-        const title = `${this.name} - Attack Roll`;
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("ship", this.actor);
+        rollContext.addContext("item", this, this.data);
+        rollContext.addContext("weapon", this, this.data);
+        rollContext.setMainContext("");
+
+        this.actor?.setupRollContexts(rollContext, ["gunner"]);
+
+        /** Create additional modifiers. */
+        const additionalModifiers = [
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: "@ship.attributes.computer.value", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.SnapShot"), modifier: "-2", enabled: false} }
+        ];
+        rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+        parts.push("@additional.modifiers.bonus");
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
-            actor: this.actor,
-            data: rollData,
+            rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: 20,
             dialogOptions: {
-                width: 400,
-                top: options.event ? options.event.clientY - 80 : null,
-                left: window.innerWidth - 710
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
             }
         });
     }
@@ -724,7 +757,7 @@ export class ItemSFRPG extends Item {
                     return false;
                 }
             }
-            return mod.enabled && acceptedModifiers.includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && acceptedModifiers.includes(mod.effectType);
         });
 
         let stackModifiers = new StackModifiers();
@@ -759,14 +792,20 @@ export class ItemSFRPG extends Item {
 
         let rollString = isHealing ? game.i18n.localize("SFRPG.ChatCard.HealingRoll") : game.i18n.localize("SFRPG.ChatCard.DamageRoll");
         const title    = game.settings.get('sfrpg', 'useCustomChatCard') ? rollString : `${rollString} - ${this.data.name}`;
+        
+        const rollContext = new RollContext();
+        rollContext.addContext("actor", this.actor, rollData);
+        rollContext.addContext("item", this, itemData);
+        rollContext.setMainContext("actor");
+
+        this.actor?.setupRollContexts(rollContext);
 
         // Call the roll helper utility
         return await DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
             criticalData: itemData.critical,
-            actor: this.actor,
-            data: rollData,
+            rollContext: rollContext,
             title: title,
             damageTypes: damageTypes,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -787,19 +826,21 @@ export class ItemSFRPG extends Item {
 
         const parts = itemData.damage.parts.map(d => d[0]);
 
-        const rollData = 
-        {
-            ship: duplicate(this.actor.data),
-            weapon: duplicate(this.data)
-        };
-
         const title = `${this.name} - Damage Roll`;
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("ship", this.actor);
+        rollContext.addContext("item", this, this.data);
+        rollContext.addContext("weapon", this, this.data);
+        rollContext.setMainContext("");
+
+        this.actor?.setupRollContexts(rollContext, ["gunner"]);
 
         return await DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
-            actor: this.actor,
-            data: rollData,
+            rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
@@ -843,11 +884,6 @@ export class ItemSFRPG extends Item {
         const rollData = duplicate(actorData);
         rollData.item = itemData;
         const title = `Other Formula`;
-
-        // return await DiceSFRPG.d20Roll({
-        //     event: new Event(''),
-
-        // });
 
         const roll = new Roll(itemData.formula, rollData).roll();
         return roll.toMessage({
@@ -944,50 +980,6 @@ export class ItemSFRPG extends Item {
 
     /* -------------------------------------------- */
 
-    /**
-     * Roll a Tool Check
-     * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
-     */
-    async rollToolCheck(options = {}) {
-        if (this.type !== "tool") throw "Wrong item type!";
-        const itemData = this.data.data;
-
-        // Prepare roll data
-        let rollData = duplicate(this.actor.data.data),
-            abl = itemData.ability || "int",
-            parts = [`@abilities.${abl}.mod`, "@proficiency"],
-            title = `Tool Check`;
-        rollData["ability"] = abl;
-        rollData["proficiency"] = Math.floor((itemData.proficient || 0) * rollData.attributes.prof);
-
-        // Call the roll helper utility
-        return await DiceSFRPG.d20Roll({
-            event: options.event,
-            parts: parts,
-            actor: this.actor,
-            data: rollData,
-            hasAttack: this.hasAttack,
-            hasDamage: this.hasDamage,
-            isVersatile: this.isVersatile,
-            template: "systems/sfrpg/templates/chat/tool-roll-dialog.html",
-            title: `${CONFIG.SFRPG.abilities[abl]} Check`,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            flavor: (parts, data) => `${this.name}`,
-            dialogOptions: {
-                width: 400,
-                top: options.event ? event.clientY - 80 : null,
-                left: window.innerWidth - 710,
-            },
-            onClose: (html, parts, data) => {
-                abl = html.find('[name="ability"]').val();
-                data.ability = abl;
-                parts[1] = `@abilities.${abl}.mod`;
-            }
-        });
-    }
-
-    /* -------------------------------------------- */
-
     static chatListeners(html) {
         html.on('click', '.card-buttons button', this._onChatCardAction.bind(this));
         html.on('click', '.item-name', this._onChatCardToggleContent.bind(this));
@@ -1030,9 +1022,6 @@ export class ItemSFRPG extends Item {
 
         // Consumable usage
         else if (action === "consume") await item.rollConsumable({ event });
-
-        // Tool usage
-        else if (action === "toolCheck") await item.rollToolCheck({ event });
 
         // Re-enable the button
         button.disabled = false;

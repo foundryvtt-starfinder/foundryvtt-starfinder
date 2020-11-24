@@ -174,8 +174,11 @@
                     <div class="form-group">
                         <button id="add-profession"><i class="fas fa-plus"></i> {{localize "SFRPG.AddProfessionButtonText"}}</button>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group centered">
                         <small>* = {{localize "SFRPG.ArmorCheckPenalty"}}, &dagger; = {{localize "SFRPG.SkillTrainedOnly"}}</small>
+                    </div>
+                    <div class="centered">
+                        <small>{{localize "SFRPG.ActorSheet.Skills.RightClickHint"}}</small>
                     </div>
                 </li>
                 {{!-- <li class="flexrow">
@@ -276,12 +279,12 @@
                             <span>{{numberFormat data.attributes.cmd.value decimal=0 sign=false}}</span>
                         </div>
                     </li>
-                    <li class="attribute bab" data-tippy-content="<strong>{{localize "SFRPG.BaseAttackBonusTitle"}}</strong><br>@attributes.bab<br><br>{{#each data.attributes.babtooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <li class="attribute bab" data-tippy-content="<strong>{{localize "SFRPG.BaseAttackBonusTitle"}}</strong><br>@attributes.baseAttackBonus.value<br><br>{{#each data.attributes.baseAttackBonus.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                         <h4 class="attribute-name box-title">
                             {{localize "SFRPG.BaseAttackBonusLabel"}}
                         </h4>
                         <div class="attribute-value">
-                            <span>{{numberFormat data.attributes.bab decimal=0 sign=true}}</span>
+                            <span>{{numberFormat data.attributes.baseAttackBonus.value decimal=0 sign=true}}</span>
                         </div>
                     </li>
                     <li class="attribute resolve" data-tippy-content="<strong>{{localize "SFRPG.Resolve"}}</strong><br/>@attributes.rp.value<br/>@attributes.rp.max<br/><br/>{{#each data.attributes.rp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">

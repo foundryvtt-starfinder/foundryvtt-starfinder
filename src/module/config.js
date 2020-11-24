@@ -82,6 +82,18 @@ SFRPG.weaponProficiencies = {
     "spec": "SFRPG.WeaponProficiencySpecial"
 };
 
+SFRPG.weaponTypeProficiency = {
+    "basicM": "bmelee",
+    "advancedM": "amelee",
+    "smallA": "sarms",
+    "longA": "larms",
+    "heavy": "hweap",
+    "sniper": "snipe",
+    "grenade": "gren",
+    "special": "",
+    "solarian": ""
+};
+
 /**
  * This describes the ways that an ability can be cativated
  * @type {Object}
@@ -752,38 +764,6 @@ SFRPG.armorSystems = {
     "mk15": "SFRPG.ShipSystems.ArmorSystems.Mk15"
 };
 
-SFRPG.computerSystems = {
-    "basic": "SFRPG.ShipSystems.ComputerSystems.Basic",
-    "mk1m" : "SFRPG.ShipSystems.ComputerSystems.Mk01m",
-    "mk1d" : "SFRPG.ShipSystems.ComputerSystems.Mk01d",
-    "mk1tr": "SFRPG.ShipSystems.ComputerSystems.Mk01tr",
-    "mk1te": "SFRPG.ShipSystems.ComputerSystems.Mk01te",
-    "mk2m" : "SFRPG.ShipSystems.ComputerSystems.Mk02m",
-    "mk2d" : "SFRPG.ShipSystems.ComputerSystems.Mk02d",
-    "mk2tr": "SFRPG.ShipSystems.ComputerSystems.Mk02tr",
-    "mk2te": "SFRPG.ShipSystems.ComputerSystems.Mk02te",
-    "mk3m" : "SFRPG.ShipSystems.ComputerSystems.Mk03m",
-    "mk3d" : "SFRPG.ShipSystems.ComputerSystems.Mk03d",
-    "mk3tr": "SFRPG.ShipSystems.ComputerSystems.Mk03tr",
-    "mk3te": "SFRPG.ShipSystems.ComputerSystems.Mk03te",
-    "mk4m" : "SFRPG.ShipSystems.ComputerSystems.Mk04m",
-    "mk4d" : "SFRPG.ShipSystems.ComputerSystems.Mk04d",
-    "mk4tr": "SFRPG.ShipSystems.ComputerSystems.Mk04tr",
-    "mk5m" : "SFRPG.ShipSystems.ComputerSystems.Mk05m",
-    "mk5d" : "SFRPG.ShipSystems.ComputerSystems.Mk05d",
-    "mk5tr": "SFRPG.ShipSystems.ComputerSystems.Mk05tr",
-    "mk6m" : "SFRPG.ShipSystems.ComputerSystems.Mk06m",
-    "mk6d" : "SFRPG.ShipSystems.ComputerSystems.Mk06d",
-    "mk7m" : "SFRPG.ShipSystems.ComputerSystems.Mk07m",
-    "mk7d" : "SFRPG.ShipSystems.ComputerSystems.Mk07d",
-    "mk8m" : "SFRPG.ShipSystems.ComputerSystems.Mk08m",
-    "mk8d" : "SFRPG.ShipSystems.ComputerSystems.Mk08d",
-    "mk9m" : "SFRPG.ShipSystems.ComputerSystems.Mk09m",
-    "mk9d" : "SFRPG.ShipSystems.ComputerSystems.Mk09d",
-    "mk10m": "SFRPG.ShipSystems.ComputerSystems.Mk10m",
-    "mk10d": "SFRPG.ShipSystems.ComputerSystems.Mk10d"
-};
-
 SFRPG.crewQuarterSystems = {
     "common"   : "SFRPG.ShipSystems.CrewQuarterSystems.Common",
     "good"     : "SFRPG.ShipSystems.CrewQuarterSystems.Good",
@@ -881,25 +861,6 @@ SFRPG.securitySystems = {
     "bio"         : "SFRPG.ShipSystems.SecuritySystems.Bio",
     "compCounter" : "SFRPG.ShipSystems.SecuritySystems.Compcounter",
     "selfDestruct": "SFRPG.ShipSystems.SecuritySystems.Selfdestruct"
-};
-
-// TODO: Not currently used, but keeping it here
-// for future use
-SFRPG.baseFrames = {
-    "race"    : "SFRPG.ShipSystems.BaseFrames.Race",
-    "inter"   : "SFRPG.ShipSystems.BaseFrames.Inter",
-    "fight"   : "SFRPG.ShipSystems.BaseFrames.Fight",
-    "shuttle" : "SFRPG.ShipSystems.BaseFrames.Shuttle",
-    "lfreight": "SFRPG.ShipSystems.BaseFrames.Lfreight",
-    "expl"    : "SFRPG.ShipSystems.BaseFrames.Expl",
-    "trans"   : "SFRPG.ShipSystems.BaseFrames.Trans",
-    "dest"    : "SFRPG.ShipSystems.BaseFrames.Dest",
-    "hfreight": "SFRPG.ShipSystems.BaseFrames.Hfreight",
-    "bfreight": "SFRPG.ShipSystems.BaseFrames.Bfreight",
-    "cruiser" : "SFRPG.ShipSystems.BaseFrames.Cruiser",
-    "carr"    : "SFRPG.ShipSystems.BaseFrames.Carr",
-    "battle"  : "SFRPG.ShipSystems.BaseFrames.Battle",
-    "dread"   : "SFRPG.ShipSystems.BaseFrames.Dread"
 };
 
 // Starship Weapons
@@ -1475,8 +1436,9 @@ SFRPG.itemTypes = {
     "mod": "SFRPG.Items.Categories.DroneMods",
     "race": "SFRPG.Items.Categories.Races",
     "spell": "SFRPG.Items.Categories.Spells",
-    "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
+    "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
     "starshipFrame": "SFRPG.Items.Categories.StarshipFrames",
+    "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
     "theme": "SFRPG.Items.Categories.Themes",
     "upgrade": "ITEM.TypeUpgrade",

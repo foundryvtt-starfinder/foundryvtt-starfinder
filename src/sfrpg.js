@@ -126,8 +126,8 @@ Hooks.once("setup", function () {
         "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
         "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
         "weaponSpecial", "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
-        "powerCoreSystems", "thrusterSystems", "armorSystems", "computerSystems", "crewQuarterSystems", "defenseSystems",
-        "driftEngineSystems", "sensorSystems", "shieldSystems", "expansionBaySystems", "securitySystems", "baseFrames",
+        "powerCoreSystems", "thrusterSystems", "armorSystems", "crewQuarterSystems", "defenseSystems",
+        "driftEngineSystems", "sensorSystems", "shieldSystems", "expansionBaySystems", "securitySystems",
         "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
         "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes"
     ];

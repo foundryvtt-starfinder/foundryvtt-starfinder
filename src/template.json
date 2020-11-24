@@ -113,6 +113,11 @@
                         "misc": 0,
                         "tooltip": []
                     },
+                    "baseAttackBonus": {
+                        "value": 0,
+                        "rolledMods": [],
+                        "tooltip": []
+                    },
                     "bab": 0,
                     "arms": 2,
                     "space": "",
@@ -521,7 +526,6 @@
                     "powercore": "",
                     "thrusters": "",
                     "armor": "",
-                    "computer": "",
                     "quarters": "",
                     "defense": "",
                     "driftEngine": "",
@@ -577,6 +581,9 @@
             },
             "attributes": {
                 "maneuverability": "",
+                "computer": {
+                    "value": 0
+                },
                 "drift": {
                     "value": 0
                 },
@@ -781,6 +788,7 @@
             "race",
             "shield",
             "spell",
+            "starshipComputer",
             "starshipWeapon",
             "starshipFrame",
             "technological",
@@ -897,6 +905,10 @@
             },
             "modifiers": {
                 "modifiers": []
+            },
+            "starshipComponent": {
+                "cost": null,
+                "pcu": null
             }
         },
         "asi": {
@@ -1118,8 +1130,13 @@
             "system": "",
             "type": "cybernetic"
         },
+        "starshipComputer": {
+            "templates": ["starshipComponent", "itemDescription"],
+            "modifier": 0,
+            "nodes": 0
+        },
         "starshipWeapon": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
             "range": "short",
             "class": "light",
             "weaponType": "direct",
@@ -1128,8 +1145,6 @@
             "damage": {
                 "parts": []
             },
-            "pcu": 0,
-            "cost": 0,
             "special": {},
             "mount": {
                 "mounted": false,
@@ -1138,7 +1153,7 @@
             }
         },
         "starshipFrame": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
             "size": "medium",
             "maneuverability": "average",
             "hitpoints": {
@@ -1179,8 +1194,7 @@
             "crew": {
                 "minimum": 1,
                 "maximum": 6
-            },
-            "cost": 15
+            }
         },
         "chassis": {
             "templates": ["itemDescription", "modifiers"],

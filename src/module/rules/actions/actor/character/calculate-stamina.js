@@ -6,14 +6,6 @@ export default function (engine) {
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
-                if (localizationKey) {
-                    item.tooltip.push(game.i18n.format(localizationKey, {
-                        type: bonus.type.capitalize(),
-                        mod: bonus.modifier,
-                        source: bonus.name
-                    }));
-                }
-                
                 if (item.rolledMods) {
                     item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
                 } else {
@@ -64,7 +56,7 @@ export default function (engine) {
         
         // Iterate through any modifiers that affect SP
         let filteredModifiers = fact.modifiers.filter(mod => {
-            return mod.enabled && mod.effectType == SFRPGEffectType.STAMINA_POINTS;
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.STAMINA_POINTS;
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
 

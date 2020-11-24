@@ -228,16 +228,9 @@
                                 {{/select}}
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="data.details.systems.computer">Computer</label>
-                            <select name="data.details.systems.computer">
-                                {{#select data.details.systems.computer}}
-                                <option value="">None</option>
-                                {{#each config.computerSystems as |system s|}}
-                                <option value="{{s}}">{{system}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
+                        <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.StarshipSheet.Attributes.Computer"}}</strong><br/>@attributes.computer.value<br/><br/>{{#each data.attributes.computer.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <label>{{localize "SFRPG.StarshipSheet.Attributes.Computer"}}</label>
+                            <span>{{data.attributes.computer.value}}</span>
                         </div>
                         <div class="form-group">
                             <label for="data.details.systems.quarters">Crew Quarters</label>

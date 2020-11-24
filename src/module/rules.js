@@ -25,7 +25,8 @@ import calculateBaseAbilityScore from './rules/actions/actor/calculate-base-abil
 import calculateBaseAbilityModifier from './rules/actions/actor/calculate-base-ability-modifier.js';
 import calculateBaseArmorClass from './rules/actions/actor/calculate-base-armor-class.js';
 import calculateArmorModifiers from './rules/actions/actor/calculate-armor-modifiers.js';
-import calculateBab from './rules/actions/actor/calculate-bab.js';
+import calculateBaseAttackBonus from './rules/actions/actor/character/calculate-bab.js';
+import calculateBaseAttackBonusModifier from './rules/actions/actor/calculate-bab-modifier.js';
 import calculateBaseSaves from './rules/actions/actor/calculate-base-saves.js';
 import calculateSaveModifiers from './rules/actions/actor/calculate-save-modifiers.js';
 import calculateCharacterLevel from './rules/actions/actor/calculate-character-level.js';
@@ -58,6 +59,7 @@ import calculateDroneSaves from './rules/actions/actor/drone/calculate-drone-sav
 import calculateDroneSkills from './rules/actions/actor/drone/calculate-drone-skills.js';
 // Starship rules
 import calculateStarshipFrame           from './rules/actions/actor/starship/calculate-starship-frame.js'
+import calculateStarshipComputer        from './rules/actions/actor/starship/calculate-starship-computer.js'
 import calculateStarshipArmorClass      from './rules/actions/actor/starship/calculate-starship-ac.js';
 import calculateStarshipCrew            from './rules/actions/actor/starship/calculate-starship-crew.js';
 import calculateStarshipCritThreshold   from './rules/actions/actor/starship/calculate-starship-ct.js';
@@ -82,7 +84,8 @@ export default function (engine) {
     calculateBaseAbilityModifier(engine);
     calculateBaseArmorClass(engine);
     calculateArmorModifiers(engine);
-    calculateBab(engine);
+    calculateBaseAttackBonus(engine);
+    calculateBaseAttackBonusModifier(engine);
     calculateBaseSaves(engine);
     calculateSaveModifiers(engine);
     calculateCharacterLevel(engine);
@@ -115,6 +118,7 @@ export default function (engine) {
     calculateStarshipSpeed(engine);
     calculateStarshipTargetLock(engine);
     calculateStarshipFrame(engine);
+    calculateStarshipComputer(engine);
     // Drone actions
     calculateDroneChassis(engine);
     calculateDroneDefense(engine);
@@ -157,6 +161,7 @@ export default function (engine) {
                     "calculateBaseArmorClass",
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAttackBonus", stackModifiers: "stackModifiers" },
+                    { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseSaves",
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     "calculateInitiative",
@@ -179,15 +184,16 @@ export default function (engine) {
                 when: { closure: "isActorType", type: "starship" },
                 then: [
                     "calculateStarshipFrame",
-                    "calculateStarshipArmorClass",
                     "calculateStarshipCrew",
+                    "calculateStarshipArmorClass",
                     "calculateStarshipCritThreshold",
                     "calculateStarshipDrift",
                     "calculateStarshipShields",
                     "calculateStarshipMaxShields",
                     "calculateStarshipPower",
                     "calculateStarshipSpeed",
-                    "calculateStarshipTargetLock"
+                    "calculateStarshipTargetLock",
+                    "calculateStarshipComputer"
                 ]
             },
             {
@@ -218,6 +224,7 @@ export default function (engine) {
                     { closure: "calculateDroneHitpoints", stackModifiers: "stackModifiers" },
                     { closure: "calculateDroneResolve", stackModifiers: "stackModifiers" },
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
+                    { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" }
                 ]
             }

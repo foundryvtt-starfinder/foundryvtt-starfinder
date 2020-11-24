@@ -12,14 +12,6 @@ export default function (engine) {
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
-                if (localizationKey) {
-                    item.tooltip.push(game.i18n.format(localizationKey, {
-                        type: bonus.type.capitalize(),
-                        mod: bonus.modifier,
-                        source: bonus.name
-                    }));
-                }
-                
                 if (item.rolledMods) {
                     item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
                 } else {
@@ -44,7 +36,7 @@ export default function (engine) {
         };
 
         let armorMods = modifiers.filter(mod => {
-            return mod.enabled && [SFRPGEffectType.AC].includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.AC].includes(mod.effectType);
         });
         
         let eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context);
