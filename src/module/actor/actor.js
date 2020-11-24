@@ -1,4 +1,4 @@
-import { DiceSFRPG } from "../dice.js";
+import { DiceSFRPG, RollContext } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
@@ -307,8 +307,12 @@ export class ActorSFRPG extends Actor {
      */
     getAllModifiers(ignoreTemporary = false, ignoreEquipment = false) {
         let allModifiers = this.data.data.modifiers.filter(mod => {
-            return (!ignoreTemporary || mod.subtab == "permanent");
+            return (!ignoreTemporary || mod.subtab === "permanent");
         });
+
+        for (const actorModifier of allModifiers) {
+            actorModifier.container = {actorId: this._id, itemId: null};
+        }
 
         for (let item of this.data.items) {
             let modifiersToConcat = [];
@@ -333,7 +337,12 @@ export class ActorSFRPG extends Actor {
                     }
                     break;
             }
+
             if (modifiersToConcat && modifiersToConcat.length > 0) {
+                for (const itemModifier of modifiersToConcat) {
+                    itemModifier.container = {actorId: this._id, itemId: item._id};
+                }
+
                 allModifiers = allModifiers.concat(modifiersToConcat);
             }
         }
@@ -459,27 +468,30 @@ export class ActorSFRPG extends Actor {
         let parts = [];
         let data = this.getRollData();
 
-        if (abl.rolledMods) {
-            parts.push(...abl.rolledMods.map(x => x.mod));
-        }
-
         //Include ability check bonus only if it's not 0
         if(abl.abilityCheckBonus) {
             parts.push('@abilityCheckBonus');
             data.abilityCheckBonus = abl.abilityCheckBonus;
         }
-        parts.push('@mod')
+        parts.push(`@abilities.${abilityId}.mod`);
 
-        mergeObject(data, { mod: abl.mod });
+        const rollContext = new RollContext();
+        rollContext.addContext("main", this, data);
+        rollContext.setMainContext("main");
+
+        this.setupRollContexts(rollContext);
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
-            actor: this,
+            rollContext: rollContext,
             parts: parts,
-            data: data,
+            title:  `Ability Check - ${label}`,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Ability Check - ${label}`,
-            title:  `Ability Check`,
-            speaker: ChatMessage.getSpeaker({ actor: this })
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            dialogOptions: {
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
+            }
         });
     }
 
@@ -496,21 +508,25 @@ export class ActorSFRPG extends Actor {
         let parts = [];
         let data = this.getRollData();
 
-        if (save.rolledMods) {
-            parts.push(...save.rolledMods.map(x => x.mod));
-        }
-        parts.push('@mod');
+        parts.push(`@attributes.${saveId}.bonus`);
+        
+        const rollContext = new RollContext();
+        rollContext.addContext("main", this, data);
+        rollContext.setMainContext("main");
 
-        mergeObject(data, { mod: save.bonus });
+        this.setupRollContexts(rollContext);
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
-            actor: this,
+            rollContext: rollContext,
             parts: parts,
-            data: data,
-            title: `Save`,
+            title: `Save - ${label}`,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Save - ${label}`,
-            speaker: ChatMessage.getSpeaker({ actor: this })
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            dialogOptions: {
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
+            }
         });
     }
 
@@ -518,21 +534,25 @@ export class ActorSFRPG extends Actor {
         let parts = [];
         let data = this.getRollData();
 
-        if (skill.rolledMods) {
-            parts.push(...skill.rolledMods.map(x => x.mod));
-        }
+        parts.push(`@skills.${skillId}.mod`);
+        
+        const rollContext = new RollContext();
+        rollContext.addContext("main", this, data);
+        rollContext.setMainContext("main");
 
-        parts.push('@mod');
-        mergeObject(data, { mod: skill.mod });
+        this.setupRollContexts(rollContext);
         
         return await DiceSFRPG.d20Roll({
-            actor: this,
             event: options.event,
+            rollContext: rollContext,
             parts: parts,
-            data: data,
-            title: 'Skill Check',
+            title: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
-            speaker: ChatMessage.getSpeaker({ actor: this })
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            dialogOptions: {
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
+            }
         });
     }
 
@@ -823,5 +843,33 @@ export class ActorSFRPG extends Actor {
         }
 
         return duplicate(this.data.data.crew[role]);
+    }
+
+    setupRollContexts(rollContext, desiredSelectors = []) {
+        if (this.data.type === "starship") {
+            if (this.data.data.crew.captain?.actors?.length > 0) {
+                rollContext.addContext("captain", this.data.data.crew.captain.actors[0]);
+            }
+    
+            if (this.data.data.crew.pilot?.actors?.length > 0) {
+                rollContext.addContext("pilot", this.data.data.crew.pilot.actors[0]);
+            }
+    
+            const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer"];
+            for (const crewType of crewMates) {
+                let crewCount = 1;
+                const crew = [];
+                for (const actor of this.data.data.crew[crewType].actors) {
+                    const contextId = crewType + crewCount;
+                    rollContext.addContext(contextId, actor);
+                    crew.push(contextId);
+                    crewCount += 1;
+                }
+    
+                if (desiredSelectors.includes(crewType)) {
+                    rollContext.addSelector(crewType, crew);
+                }
+            }
+        }
     }
 }

@@ -158,6 +158,12 @@
                     <li class="flexcol skills-footer">
                         {{localize "SFRPG.DroneSheet.Skills.NoSkillsAvailable"}}
                     </li>
+                    {{else}}
+                    <li class="flexrow">
+                        <div class="centered">
+                            <small>{{localize "SFRPG.ActorSheet.Skills.RightClickHint"}}</small>
+                        </div>
+                    </li>
                     {{/if}}
                 </ul>
             </ul>
@@ -166,12 +172,12 @@
 
                 {{!-- Body Attributes --}}
                 <ul class="attributes flexrow last">
-                    <li class="attribute save" data-tippy-content="<strong>{{localize "SFRPG.BaseAttackBonusTitle"}}</strong><br>@attributes.bab<br><br>{{#each data.attributes.babtooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <li class="attribute save" data-tippy-content="<strong>{{localize "SFRPG.BaseAttackBonusTitle"}}</strong><br>@attributes.baseAttackBonus.value<br><br>{{#each data.attributes.baseAttackBonus.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                         <h4 class="attribute-name box-title">
                             {{localize "SFRPG.BaseAttackBonusLabel"}}
                         </h4>
                         <div class="attribute-value">
-                            <span>{{numberFormat data.attributes.bab decimal=0 sign=true}}</span>
+                            <span>{{numberFormat data.attributes.baseAttackBonus.value decimal=0 sign=true}}</span>
                         </div>
                     </li>
 

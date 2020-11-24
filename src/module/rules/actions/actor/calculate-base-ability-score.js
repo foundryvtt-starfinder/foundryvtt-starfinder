@@ -10,14 +10,6 @@ export default function (engine) {
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
-                if (localizationKey) {
-                    item.tooltip.push(game.i18n.format(localizationKey, {
-                        type: bonus.type.capitalize(),
-                        mod: bonus.modifier,
-                        source: bonus.name
-                    }));
-                }
-                
                 if (item.rolledMods) {
                     item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
                 } else {
@@ -42,7 +34,7 @@ export default function (engine) {
         };
 
         const filteredMods = modifiers.filter(mod => {
-            return mod.enabled && [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_SCORE].includes(mod.effectType);
         })
 
         let themeMod = {};

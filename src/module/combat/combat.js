@@ -1,3 +1,5 @@
+import { DiceSFRPG, RollContext } from "../dice.js";
+
 /*
 The following hooks were added:
 "onBeginCombat", one argument, type object, contains all event data
@@ -517,36 +519,36 @@ export class CombatSFRPG extends Combat {
 
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
-            return "1d20 + @skills.pil.mod"
+            return "1d20 + @skills.pil.ranks"
         }
         else {
             return "1d20 + @attributes.init.total";
         }
     }
 
-    _getInitiativeRoll(combatant, formula) {
-        let rollData = {};
-        let additionalParts = [];
-        if (this.getCombatType() === "starship") {
-            let pilotActor = this._getPilotForStarship(combatant.actor);
-            rollData = pilotActor ? pilotActor.getRollData() : { skills: { pil: { mod: 0 } } };
-            if (pilotActor?.data?.data?.skills?.pil?.rolledMods) {
-                //additionalParts = pilotActor.data.data.skills.pil.rolledMods.map(x => `${x.mod}[${x.bonus.name}]`);
-                additionalParts = pilotActor.data.data.skills.pil.rolledMods.map(x => x.mod);
-            }
-        } else {
-            rollData = combatant.actor ? combatant.actor.getRollData() : {};
-            if (combatant?.actor?.data?.data?.attributes?.init?.rolledMods) {
-                //additionalParts = combatant.actor.data.data.attributes.init.rolledMods.map(x => `${x.mod}[${x.bonus.name}]`);
-                additionalParts = combatant.actor.data.data.attributes.init.rolledMods.map(x => x.mod);
-            }
-        }
+    async _getInitiativeRoll(combatant, formula) {
+        const rollContext = new RollContext();
+        rollContext.addContext("combatant", combatant.actor);
+        rollContext.setMainContext("combatant");
 
-        if (additionalParts.length > 0) {
-            formula += " + " + additionalParts.join(" + ");
+        combatant.actor.setupRollContexts(rollContext);
+
+        const parts = [];
+
+        if (this.getCombatType() === "starship") {
+            parts.push("@pilot.skills.pil.ranks");
+            rollContext.setMainContext("pilot");
+        } else {
+            parts.push("@combatant.attributes.init.total");
         }
-        
-        return Roll.create(formula, rollData).roll();
+    
+        const rollResult = await DiceSFRPG.createRoll({
+            rollContext: rollContext,
+            parts: parts,
+            title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
+        });
+
+        return rollResult.roll;
     }
 
     async rollInitiative(ids, {formula=null, updateTurn=true, messageOptions={}}={}) {
@@ -556,16 +558,17 @@ export class CombatSFRPG extends Combat {
       const currentId = this.combatant?._id;
   
       // Iterate over Combatants, performing an initiative roll for each
-      const [updates, messages] = ids.reduce((results, id, i) => {
-        let [updates, messages] = results;
-  
+      const updates = [];
+      const messages = [];
+      let isFirst = true;
+      for (const id of ids) {
         // Get Combatant data
         const c = this.getCombatant(id);
         if ( !c || !c.owner ) return results;
   
         // Roll initiative
         const cf = formula || this._getInitiativeFormula(c);
-        const roll = this._getInitiativeRoll(c, cf);
+        const roll = await this._getInitiativeRoll(c, cf);
         updates.push({_id: id, initiative: roll.total});
   
         // Determine the roll mode
@@ -584,12 +587,13 @@ export class CombatSFRPG extends Combat {
           flags: {"core.initiativeRoll": true}
         }, messageOptions);
         const chatData = roll.toMessage(messageData, {rollMode, create:false});
-        if ( i > 0 ) chatData.sound = null;   // Only play 1 sound for the whole set
+        if ( isFirst ) {
+            chatData.sound = null;   // Only play 1 sound for the whole set
+            isFirst = false;
+        }
         messages.push(chatData);
-  
-        // Return the Roll and the chat data
-        return results;
-      }, [[], []]);
+      }
+      
       if ( !updates.length ) return this;
   
       // Update multiple combatants

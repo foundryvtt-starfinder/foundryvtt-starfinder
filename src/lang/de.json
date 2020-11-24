@@ -22,8 +22,9 @@
         "TypeFusion": "Waffenfusion",
         "TypeUpgrade": "Rüstungsverbesserung",
         "TypeAugmentation": "Aufwertung",
-        "TypeStarshipweapon": "Raumschiffwaffe",
+        "TypeStarshipcomputer": "Starship Computer",
         "TypeStarshipframe": "Raumschiffgrundstruktur",
+        "TypeStarshipweapon": "Raumschiffwaffe",
         "TypeArchetypes": "Archetyp",
         "TypeChassis": "Drohnenchassis",
         "TypeMod": "Drohnenmodifikation",
@@ -210,6 +211,9 @@
                 "UI": {
                     "LongFormula": "Langformel"
                 }
+            },
+            "Skills": {
+                "RightClickHint": "Right click a skill for more properties."
             }
         },
         "ACvsCombatManeuversLabel": "KMV",
@@ -763,9 +767,10 @@
                 "Races"               : "Rassen",
                 "Shields"             : "Schilde",
                 "Spells"              : "Zauber",
+                "StarshipComputers"   : "Starship Computers",
+                "StarshipFrames"      : "Raumschiffgrundstrukturen",
                 "StarshipWeapons"     : "Raumschiffwaffen",
                 "TechnologicalItems"  : "Technische Gegenstände",
-                "StarshipFrames"      : "Raumschiffgrundstrukturen",
                 "Themes"              : "Motive",
                 "Weapons"             : "Waffen",
                 "WeaponFusions"       : "Waffenfusionen",
@@ -922,6 +927,20 @@
                 "SizeTooltip": "Standardmäßig ist die Größe eines Gegenstandes mittelgroß. Die Größe eines Gegenstandes wirkt sich auf die Rüstungsklasse des Gegenstandes aus und kann bei Bedarf geändert werden.",
                 "Sturdy": "Widerstandsfähig",
                 "SturdyTooltip": "Ausrüstung, wie Waffen und Rüstungen, gelten als widerstandsfähig."
+            },
+            "StarshipComponent": {
+                "Cost": "Buildpoint Cost",
+                "CostTooltip": "The amount of buildpoints required to obtain this component.",
+                "Header": "Common Component Properties",
+                "PCU": "PCU Usage",
+                "PCUTooltip": "The amount of power this component requires to function."
+            },
+            "StarshipComputer": {
+                "Header": "Computer Properties",
+                "Modifier": "Modifier",
+                "ModifierTooltip": "The roll modifier provided by this computer.",
+                "Nodes": "Nodes",
+                "NodesTooltip": "The amount of times per turn this computer can provide its bonus for."
             },
             "StarshipFrame": {
                 "Details": {
@@ -1159,6 +1178,49 @@
         "RestSChatMessageRestored": "{name} nimmt eine kurze 10-minütige Rast und verwendet dabei {spentRP} Reservepunkt(e), um {regainedSP} Ausdauerpunkt(e) wiederherzustellen.",
         "RestSDescription": "Eine kurze Rast einlegen? Bei einer kurzen Rast verwendest du einen Reservepunkt, um alle Ausdauerpunkte wiederherzustellen.",
         "RestSTitle": "Kurze 10-minütige Rast",
+        "Rolls": {
+            "AttackRoll": "Attack Roll",
+            "AttackRollFull": "Attack Roll - {name}",
+            "Character": {
+                "FullAttack": "Full Attack",
+                "Nonlethal": "Nonlethal"
+            },
+            "Dialog": {
+                "AvailableModifiers": "Available modifiers",
+                "AvailableModifiersTooltip": "List of the available modifiers for this roll.",
+                "Formula": "Formula",
+                "FormulaTooltip": "The formula used to calculate the roll.",
+                "ModifierName": "Name",
+                "ModifierEffect": "Effect",
+                "RollMode": "Roll Mode",
+                "RollModeTooltip": "Roll Mode determines who can see this roll.",
+                "Selector": "Select '{name}'",
+                "SelectorTooltip": "Dynamic actor selection for the '{name}' formula context.",
+                "SituationalBonus": "Situational bonus",
+                "SituationalBonusTooltip": "Are there any additional bonuses that apply to this roll? (For example, range increments)"
+            },
+            "Dice": {
+                "Advantage": "Advantage",
+                "AdvantageTooltip": "Roll with advantage.",
+                "CriticalDamage": "Critical",
+                "CriticalDamageTooltip": "Roll critical damage.",
+                "Disadvantage": "Disadvantage",
+                "DisadvantageTooltip": "Roll with disadvantage.",
+                "Normal": "Normal",
+                "NormalTooltip": "Normal roll.",
+                "NormalDamage": "Normal",
+                "NormalDamageTooltip": "Roll normal damage.",
+                "Roll": "Roll"
+            },
+            "InitiativeRollFull": "Initiative Roll - {name}",
+            "Starship": {
+                "ComputerBonus": "Computer bonus",
+                "CaptainDemand": "Captain's Demand",
+                "CaptainEncouragement": "Captain's Encouragement",
+                "ScienceOfficerLockOn": "Science Officer's Lock On",
+                "SnapShot": "Snap Shot"
+            }
+        },
         "Save": "Speichern",
         "SaveAbilityModTooltip": "Attributsmodifikator: {mod} ({ability})",
         "SaveClassModTooltip": "Klassenmodifikator: {mod} ({class})",
@@ -1584,6 +1646,9 @@
         "SpellResistance": "Zauberresistenz",
         "Stamina": "Ausdauer",
         "StarshipSheet": {
+            "Attributes": {
+                "Computer": "Computer"
+            },
             "Crew": {
                 "AssignedCount": "({current} / {max})",
                 "Captain": "Kapitän",
@@ -1608,12 +1673,16 @@
                 "ShieldTooHighTooltip": "Ein Schildquadrant darf nicht mehr als 70% der gesamten Schildzuweisung betragen, da das für jeden Schild verfügbare Minimum 10% betragen muss. (Weitere Informationen finden Sie im Grundregelwerk auf S. 302)"
             },
             "Features": {
-                "Frame": "Grundstruktur ({current} / 1)"
+                "Frame": "Grundstruktur ({current} / 1)",
+                "Systems": "Systems"
             },
             "Header": {
                 "FrameMissing": "Fehlende Grundstruktur",
                 "Maneuverability": "Manövrierfähigkeit: {maneuverability}",
                 "Size": "Größenkategorie: {size}"
+            },
+            "Modifiers": {
+                "ComputerBonus": "Computer Bonus: {mod} ({source})"
             },
             "Sides": {
                 "Aft": "Achtern",

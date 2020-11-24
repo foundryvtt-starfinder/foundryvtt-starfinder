@@ -39,7 +39,9 @@ export default function (engine) {
             data.attributes.cmd.tooltip = [];
         }
 
-        data.attributes.babtooltip = [];
+        if (data.attributes.baseAttackBonus) {
+            data.attributes.baseAttackBonus.tooltip = [];
+        }
 
         if (data.attributes.fort) {
             data.attributes.fort.tooltip = [];

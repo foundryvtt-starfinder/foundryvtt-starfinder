@@ -22,8 +22,15 @@ export default function (engine) {
             data.details.level.value = droneLevel;
             data.attributes.hp.max = SFRPG.droneHitpointsPerLevel[droneLevel - 1];
             data.attributes.rp.max = SFRPG.droneResolveMethod(droneLevel); // Upgraded Power Core (Ex)
-            data.attributes.bab = SFRPG.droneBABBonusPerLevel[droneLevel - 1];
-            
+            data.attributes.baseAttackBonus = {
+                value: SFRPG.droneBABBonusPerLevel[droneLevel - 1],
+                rolledMods: [],
+                tooltip: [game.i18n.format("SFRPG.BABTooltip", {
+                    class: activeChassis.name,
+                    bonus: SFRPG.droneBABBonusPerLevel[droneLevel - 1].signedString()
+                })]
+            };
+
             let abilityIncreaseStats = [activeChassis.data.abilityIncreaseStats.first, activeChassis.data.abilityIncreaseStats.second];
             let abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
 
@@ -46,6 +53,12 @@ export default function (engine) {
             data.abilities.int.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
             data.abilities.wis.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
             data.abilities.cha.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
+
+            data.attributes.baseAttackBonus = {
+                value: 0,
+                rolledMods: [],
+                tooltip: []
+            };
         }
 
         // Clear out skills, this and future closures will enable them again

@@ -221,10 +221,14 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             inventory: { label: "Inventory", items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
         };
 
-        let [forward, starboard, aft, port, turret, unmounted, frame, equipment] = data.items.reduce((arr, item) => {
+        const starshipSystems = ["starshipComputer"];
+
+        let [forward, starboard, aft, port, turret, unmounted, frame, systems, cargo] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
             if (item.type === "starshipFrame") arr[6].push(item);
+            else if (starshipSystems.includes(item.type)) arr[7].push(item);
+            else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[8].push(item);
             else {
                 const weaponArc = item?.data?.mount?.arc;
                 if (weaponArc === "forward") arr[0].push(item);
@@ -232,20 +236,19 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 else if (weaponArc === "aft") arr[2].push(item);
                 else if (weaponArc === "port") arr[3].push(item);
                 else if (weaponArc === "turret") arr[4].push(item);
-                else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[7].push(item);
                 else arr[5].push(item);
             }
 
             return arr;
-        }, [[], [], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], [], []]);
 
-        this.processItemContainment(equipment, function (itemType, itemData) {
+        this.processItemContainment(cargo, function (itemType, itemData) {
             inventory.inventory.items.push(itemData);
         });
         data.inventory = inventory;
 
         let totalValue = 0;
-        for (const item of equipment) {
+        for (const item of cargo) {
             totalValue += (item?.data?.quantity || 0) * (item?.data?.price || 0);
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
@@ -284,7 +287,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         data.arcs = Object.values(arcs);
 
         const features = {
-            frame: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", {"current": frame.length}), items: [], hasActions: false, dataset: { type: "starshipFrame" } }
+            frame: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", {"current": frame.length}), items: [], hasActions: false, dataset: { type: "starshipFrame" } },
+            systems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Systems"), items: systems, hasActions: false, dataset: { type: "starshipComputer" } }
         };
         features.frame.items = frame;
 
@@ -342,7 +346,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         } else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
 
-            const acceptedStarshipItems = ["starshipFrame", "starshipWeapon"];
+            const acceptedStarshipItems = ["starshipFrame", "starshipWeapon", "starshipComputer"];
             if (acceptedStarshipItems.includes(rawItemData.type)) {
                 return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
             } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {
