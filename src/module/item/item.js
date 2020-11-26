@@ -630,6 +630,10 @@ export class ItemSFRPG extends Item {
      * @param {Object} data The data
      */
     _onAttackRollClose(roll, formula, finalFormula) {
+        if (!roll) {
+            return;
+        }
+        
         const itemData = duplicate(this.data.data);
 
         if (itemData.hasOwnProperty("usage")) {

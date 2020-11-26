@@ -54,6 +54,13 @@ export class DiceSFRPG {
 
         const tree = new RollTree(options);
         tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+            if (button === "cancel") {
+                if (onClose) {
+                    onClose(null, null, null);
+                }
+                return;
+            }
+
             let dieRoll = "1d20";
             if (button === "Disadvantage") {
                 dieRoll = "2d20kl";
@@ -110,6 +117,7 @@ export class DiceSFRPG {
     * Returns a promise that will return an object containing roll and formula.
     *
     * @param {Event} event               The triggering event which initiated the roll
+    * @param {String} rollFormula        The roll formula to use, excluding the initial die. If left empty, will look for parts.
     * @param {Array} parts               The dice roll component parts, excluding the initial die
     * @param {RollContext} rollContext   The contextual data for this roll
     * @param {String} title              The dice roll UI window title
@@ -119,7 +127,7 @@ export class DiceSFRPG {
     * @param {Number} fumble             The value of d20 result which represents a critical failure
     * @param {Object} dialogOptions      Modal dialog options
     */
-    static createRoll({ event = new Event(''), parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, dialogOptions }) {
+    static createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, dialogOptions }) {
         
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -146,11 +154,16 @@ export class DiceSFRPG {
             dialogOptions: dialogOptions
         };
 
-        const formula = parts.join(" + ");
+        const formula = rollFormula || parts.join(" + ");
 
         const tree = new RollTree(options);
         return new Promise((resolve) => {
             tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+                if (button === "cancel") {
+                    resolve(null);
+                    return;
+                }
+
                 let dieRoll = "1" + mainDie;
                 if (mainDie == "d20") {
                     if (button === "Disadvantage") {
@@ -225,6 +238,13 @@ export class DiceSFRPG {
         const formula = parts.join(" + ");
         const tree = new RollTree(options);
         tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+            if (button === 'cancel') {
+                if (onClose) {
+                    onClose(null, null, null);
+                }
+                return;
+            }
+
             if (button === "Critical") {
                 finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
@@ -362,6 +382,7 @@ class RollTree {
         return this.displayUI(formula, contexts, allRolledMods).then(([button, rollMode, bonus]) => {
             if (button === null) {
                 console.log('Roll was cancelled');
+                callback('cancel', "none", null);
                 return;
             }
 
