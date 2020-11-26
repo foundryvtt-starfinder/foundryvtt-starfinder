@@ -569,6 +569,9 @@ export class CombatSFRPG extends Combat {
         // Roll initiative
         const cf = formula || this._getInitiativeFormula(c);
         const roll = await this._getInitiativeRoll(c, cf);
+        if (!roll) {
+            continue;
+        }
         updates.push({_id: id, initiative: roll.total});
   
         // Determine the roll mode
