@@ -1,3 +1,4 @@
+import { DiceSFRPG, RollContext } from "../../dice.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 /**
@@ -6,6 +7,18 @@ import { ActorSheetSFRPG } from "./base.js";
  */
 export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     static AcceptedEquipment = "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory";
+
+    static StarshipActionsCache = null;
+
+    static RoleMap = {
+        captain: "SFRPG.StarshipSheet.Crew.Captain",
+        pilot: "SFRPG.StarshipSheet.Crew.Pilot",
+        gunners: "SFRPG.StarshipSheet.Crew.Gunners",
+        engineers: "SFRPG.StarshipSheet.Crew.Engineers",
+        scienceOfficers: "SFRPG.StarshipSheet.Crew.ScienceOfficers",
+        chiefMates: "SFRPG.StarshipSheet.Crew.ChiefMates",
+        magicOfficers: "SFRPG.StarshipSheet.Crew.MagicOfficers"
+    };
 
     static get defaultOptions() {
         const options = super.defaultOptions;
@@ -16,6 +29,37 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         });
 
         return options;
+    }
+
+    constructor(...args) {
+        super(...args);
+
+        /** Populate the starship actions cache, but only once. */
+        if (ActorSheetSFRPGStarship.StarshipActionsCache === null) {
+            ActorSheetSFRPGStarship.StarshipActionsCache = {};
+
+            const starshipActions = game.packs.get("sfrpg.starship-actions");
+            starshipActions.getIndex().then(async (indices) => {
+                for (const index of indices) {
+                    const entry = await starshipActions.getEntry(index._id);
+                    const role = entry.data.role;
+
+                    if (!ActorSheetSFRPGStarship.StarshipActionsCache[role]) {
+                        ActorSheetSFRPGStarship.StarshipActionsCache[role] = {label: ActorSheetSFRPGStarship.RoleMap[role], actions: []};
+                    }
+
+                    ActorSheetSFRPGStarship.StarshipActionsCache[role].actions.push(entry);
+                }
+
+                /** Sort them by order. */
+                for (const [roleKey, roleData] of Object.entries(ActorSheetSFRPGStarship.StarshipActionsCache)) {
+                    roleData.actions.sort(function(a, b){return a.data.order - b.data.order});
+                }
+
+                /** Refresh the UI. */
+                this.render(false);
+            });
+        }
     }
 
     get template() {
@@ -295,6 +339,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         data.features = Object.values(features);
 
         data.activeFrame = frame.length > 0 ? frame[0] : null;
+
+        data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
     }
 
     /**
@@ -324,6 +370,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             li.addEventListener("dragenter", this._onCrewDragEnter, false);
             li.addEventListener("dragleave", this._onCrewDragLeave, false);
         });
+
+        html.find('.action .action-name h4').click(event => this._onActionRoll(event));
+        html.find('.action .action-image').click(event => this._onActionRoll(event));
     }
 
     /** @override */
@@ -500,6 +549,59 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 "data.crew": crewData
             });
         }
+    }
+
+    /**
+     * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+     * @param {Event} event The triggering event
+     */
+    async _onActionRoll(event) {
+        event.preventDefault();
+        const actionId = event.currentTarget.closest('.action').dataset.actionId;
+
+        const starshipActions = game.packs.get("sfrpg.starship-actions");
+        const actionEntry = await starshipActions.getEntry(actionId);
+
+        /** Bad entry; no formula! */
+        if (actionEntry.data.formula.length < 1) {
+            ui.notifications.error("No formula present in data for starship action " + actionEntry.name);
+            return;
+        }
+
+        let selectedFormula = actionEntry.data.formula[0];
+        if (actionEntry.data.formula.length > 1) {
+            /** TODO: Select desired roll */
+        }
+
+        const rollContext = new RollContext();
+        rollContext.addContext("actor", this.actor);
+        rollContext.setMainContext("actor");
+
+        this.actor.setupRollContexts(rollContext);
+
+        const rollResult = await DiceSFRPG.createRoll({
+            rollContext: rollContext,
+            rollFormula: selectedFormula.formula,
+            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: selectedFormula.name, name: this.actor.name})
+        });
+
+        if (!rollResult) {
+            return;
+        }
+
+        let flavor = game.i18n.format("SFRPG.Rolls.StarshipAction", {action: selectedFormula.name, name: this.actor.name});
+        flavor += "<br/><strong>Effect:</strong><br/>";
+        flavor += game.i18n.format(actionEntry.data.effectNormal);
+
+        if (rollResult.roll.results[0] === 20) {
+            flavor += "<br/><br/><strong>Critical effect:</strong><br/>";
+            flavor += game.i18n.format(actionEntry.data.effectCritical);
+        }
+
+        rollResult.roll.toMessage({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            flavor: flavor
+        });
     }
 
     /**

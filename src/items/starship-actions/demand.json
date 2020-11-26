@@ -1,0 +1,30 @@
+{
+  "name": "Demand",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<p>You can make a demand of a crew member to try to improve his performance. You grant a +4 bonus to one specific check by succeeding at an Intimidate check (DC = 15 + 1-1/2 times your starship’s tier). You must use this action before the associated check is rolled, and you can grant this bonus to an individual character only once per combat. Demand might result in negative consequences if used on NPCs, and you can’t make demands of yourself.</p><br/><p>Your demand echoes throughout the starship. You can attempt the demand crew action with the targeted character one additional time during the current starship combat.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB",
+    "type": "",
+    "role": "captain",
+    "order": 0,
+    "phase": "any",
+    "isPush": false,
+    "resolvePointCost": 0,
+    "formula": [
+      {
+        "name": "Intimidate",
+        "formula": "@captain.skills.int.mod"
+      }
+    ],
+    "dc": "15 + 1.5 * @ship.details.tier",
+    "effectNormal": "You can make a demand of a crew member to try to improve his performance. You grant a +4 bonus to one specific check by succeeding at an Intimidate check (DC = 15 + 1-1/2 times your starship’s tier). You must use this action before the associated check is rolled, and you can grant this bonus to an individual character only once per combat. Demand might result in negative consequences if used on NPCs, and you can’t make demands of yourself.",
+    "effectCritical": "Your demand echoes throughout the starship. You can attempt the demand crew action with the targeted character one additional time during the current starship combat."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "tRnh0wFq61ScHfxf"
+}

@@ -788,6 +788,7 @@
             "race",
             "shield",
             "spell",
+            "starshipAction",
             "starshipComputer",
             "starshipWeapon",
             "starshipFrame",
@@ -1130,27 +1131,22 @@
             "system": "",
             "type": "cybernetic"
         },
+        "starshipAction": {
+            "templates": ["itemDescription"],
+            "role": "",
+            "order": 0,
+            "phase": "any",
+            "isPush": false,
+            "resolvePointCost": 0,
+            "formula": [],
+            "dc": "",
+            "effectNormal": "",
+            "effectCritical": ""
+        },
         "starshipComputer": {
             "templates": ["starshipComponent", "itemDescription"],
             "modifier": 0,
             "nodes": 0
-        },
-        "starshipWeapon": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
-            "range": "short",
-            "class": "light",
-            "weaponType": "direct",
-            "speed": 0,
-            "attackBonus": 0,
-            "damage": {
-                "parts": []
-            },
-            "special": {},
-            "mount": {
-                "mounted": false,
-                "arc": "",
-                "activated": false
-            }
         },
         "starshipFrame": {
             "templates": ["starshipComponent", "itemDescription", "modifiers"],
@@ -1194,6 +1190,23 @@
             "crew": {
                 "minimum": 1,
                 "maximum": 6
+            }
+        },
+        "starshipWeapon": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "range": "short",
+            "class": "light",
+            "weaponType": "direct",
+            "speed": 0,
+            "attackBonus": 0,
+            "damage": {
+                "parts": []
+            },
+            "special": {},
+            "mount": {
+                "mounted": false,
+                "arc": "",
+                "activated": false
             }
         },
         "chassis": {

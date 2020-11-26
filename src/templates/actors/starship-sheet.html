@@ -102,6 +102,7 @@
         <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
         <a class="item" data-tab="crew">{{ localize "SFRPG.StarshipSheet.Tabs.Crew" }}</a>
         <a class="item" data-tab="inventory">{{ localize "SFRPG.Inventory" }}</a>
+        <a class="item" data-tab="actions">{{ localize "SFRPG.StarshipSheet.Tabs.Actions" }}</a>
         <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
     </nav>
 
@@ -360,6 +361,7 @@
             {{> "systems/sfrpg/templates/actors/parts/actor-features.html" sections=features noFilters=true}}
         </div>
 
+        {{!-- Crew Tab --}}
         <div class="tab crew" data-group="primary" data-tab="crew">
             <ol class="crew-list">
                 {{#each crew as |role|}}
@@ -373,6 +375,26 @@
                         </div>
                         <div class="crew-controls">
                             <a class="crew-control crew-delete" title="Remove Crew Member"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+                {{/each}}
+            </ol>
+        </div>
+
+        {{!-- Actions Tab --}}
+        <div class="tab weapons flexcol" data-group="primary" data-tab="actions">
+            <ol class="action-list">
+                {{#each actions as |role|}}
+                {{console role}}
+                <li class="action flexrow action-header">{{localize role.label}}</li>
+                <ol class="action-list">
+                    {{#each role.actions as |action|}}
+                    <li class="action flexrow" data-action-id="{{action._id}}" data-tippy-content="<strong>{{localize action.name}}</strong><br/>Normal effect:<br/>{{localize action.data.effectNormal}}<br/><br/>Critical effect:<br/>{{localize action.data.effectCritical}}">
+                        <div class="action-name flexrow rollable">
+                            <div class="action-image" style="background-image: url({{action.img}})"></div>
+                            <h4>{{localize action.name}}</h4>
                         </div>
                     </li>
                     {{/each}}

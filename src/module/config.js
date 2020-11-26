@@ -1436,6 +1436,7 @@ SFRPG.itemTypes = {
     "mod": "SFRPG.Items.Categories.DroneMods",
     "race": "SFRPG.Items.Categories.Races",
     "spell": "SFRPG.Items.Categories.Spells",
+    "starshipAction": "SFRPG.Items.Categories.StarshipActions",
     "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
     "starshipFrame": "SFRPG.Items.Categories.StarshipFrames",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
