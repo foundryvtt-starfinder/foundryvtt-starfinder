@@ -566,19 +566,23 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         /** Bad entry; no formula! */
         if (actionEntry.data.formula.length < 1) {
-            ui.notifications.error("No formula present in data for starship action " + actionEntry.name);
+            ui.notifications.error(game.i18n.format("SFRPG.Rolls.StarshipActions.NoFormulaError", {name: actionEntry.name}));
             return;
         }
 
         let selectedFormula = actionEntry.data.formula[0];
         if (actionEntry.data.formula.length > 1) {
-            const results = await ChoiceDialog.show(`${actionEntry.name} - Select the desired roll`, `The starship action '${actionEntry.name}' offers multiple rolls to choose from. Please pick one.`, {
-                roll: {
-                    name: "Available rolls",
-                    options: actionEntry.data.formula.map(x => x.name),
-                    default: actionEntry.data.formula[0].name
+            const results = await ChoiceDialog.show(
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Choice.Title", {name: actionEntry.name}),
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Choice.Message", {name: actionEntry.name}),
+                {
+                    roll: {
+                        name: game.i18n.format("SFRPG.Rolls.StarshipActions.Choice.AvailableRolls"),
+                        options: actionEntry.data.formula.map(x => x.name),
+                        default: actionEntry.data.formula[0].name
+                    }
                 }
-            });
+            );
 
             if (results.resolution === 'cancel') {
                 return;
@@ -618,10 +622,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         }
 
         let flavor = "";
-        //flavor += game.i18n.format("SFRPG.Rolls.StarshipActionName", {name: this.actor.name});
-        flavor += game.i18n.format("SFRPG.Rolls.StarshipActionRole", {role: roleName, name: this.actor.name});
+        flavor += game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.Role", {role: roleName, name: this.actor.name});
         flavor += "<br/>";
-        //flavor += game.i18n.format("SFRPG.Rolls.StarshipAction", {action: selectedFormula.name});
         if (actionEntry.data.formula.length <= 1) {
             flavor += `<h2>${actionEntry.name}</h2>`;
         } else {
@@ -637,19 +639,19 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 dialogOptions: { skipUI: true }
             });
 
-            flavor += `<p><strong>DC: </strong>${dcRoll.roll.total}</p>`;
+            flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
         } else {
-            flavor += `<p><strong>DC: </strong>${actionEntry.data.dc.value}</p>`;
+            flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${actionEntry.data.dc.value}</p>`;
         }
 
-        flavor += "<p><strong>Effect: </strong>";
+        flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
         flavor += game.i18n.format(actionEntry.data.effectNormal);
         flavor += "</p>";
 
         const critEffectDisplayState = game.settings.get("sfrpg", "starshipActionsCrit");
         if (critEffectDisplayState !== 'never') {
             if (critEffectDisplayState === 'always' || rollResult.roll.results[0] === 20) {
-                flavor += "<p><strong>Critical effect: </strong>";
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
                 flavor += game.i18n.format(actionEntry.data.effectCritical);
                 flavor += "</p>";
             }
