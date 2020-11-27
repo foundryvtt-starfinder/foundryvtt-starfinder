@@ -855,15 +855,27 @@ export class ActorSFRPG extends Actor {
                 rollContext.addContext("pilot", this.data.data.crew.pilot.actors[0]);
             }
     
-            const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer"];
+            const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
+            const allCrewMates = ["minorCrew", "openCrew"];
             for (const crewType of crewMates) {
                 let crewCount = 1;
                 const crew = [];
-                for (const actor of this.data.data.crew[crewType].actors) {
-                    const contextId = crewType + crewCount;
-                    rollContext.addContext(contextId, actor);
-                    crew.push(contextId);
-                    crewCount += 1;
+                if (allCrewMates.includes(crewType)) {
+                    for (const crewEntries of Object.values(this.data.data.crew)) {
+                        for (const actor of crewEntries.actors) {
+                            const contextId = crewType + crewCount;
+                            rollContext.addContext(contextId, actor);
+                            crew.push(contextId);
+                            crewCount += 1;
+                        }
+                    }
+                } else {
+                    for (const actor of this.data.data.crew[crewType].actors) {
+                        const contextId = crewType + crewCount;
+                        rollContext.addContext(contextId, actor);
+                        crew.push(contextId);
+                        crewCount += 1;
+                    }
                 }
     
                 if (desiredSelectors.includes(crewType)) {
