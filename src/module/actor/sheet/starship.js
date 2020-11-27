@@ -1,4 +1,5 @@
 import { DiceSFRPG, RollContext } from "../../dice.js";
+import { ChoiceDialog } from "../../apps/choice-dialog.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 /**
@@ -570,36 +571,75 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         let selectedFormula = actionEntry.data.formula[0];
         if (actionEntry.data.formula.length > 1) {
-            /** TODO: Select desired roll */
+            const results = await ChoiceDialog.show(`${actionEntry.name} - Select the desired roll`, `The starship action '${actionEntry.name}' offers multiple rolls to choose from. Please pick one.`, {
+                roll: {
+                    name: "Available rolls",
+                    options: actionEntry.data.formula.map(x => x.name),
+                    default: actionEntry.data.formula[0].name
+                }
+            });
+
+            if (results.resolution === 'cancel') {
+                return;
+            }
+
+            selectedFormula = actionEntry.data.formula.find(x => x.name === results.result.roll);
+            console.log(['results', selectedFormula]);
         }
 
         const rollContext = new RollContext();
         rollContext.addContext("actor", this.actor);
         rollContext.setMainContext("actor");
 
-        this.actor.setupRollContexts(rollContext);
+        this.actor.setupRollContexts(rollContext, actionEntry.data.selectors || []);
 
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
             rollFormula: selectedFormula.formula,
-            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: selectedFormula.name, name: this.actor.name})
+            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name})
         });
 
         if (!rollResult) {
             return;
         }
 
-        let flavor = game.i18n.format("SFRPG.Rolls.StarshipAction", {action: selectedFormula.name, name: this.actor.name});
-        flavor += "<br/><strong>Effect:</strong><br/>";
-        flavor += game.i18n.format(actionEntry.data.effectNormal);
+        let speakerActor = this.actor;
+        const roleKey = ActorSheetSFRPGStarship.RoleMap[actionEntry.data.role];
+        let roleName = game.i18n.format(roleKey);
 
-        if (rollResult.roll.results[0] === 20) {
-            flavor += "<br/><br/><strong>Critical effect:</strong><br/>";
+        const desiredKey = actionEntry.data.selectorKey;
+        if (desiredKey) {
+            const selectedContext = rollContext.allContexts[desiredKey];
+            speakerActor = selectedContext.entity;
+            const name = rollContext.getValue(`@${desiredKey}.name`);
+            console.log([name, selectedContext]);
+
+            const actorRole = this.actor.getCrewRoleForActor(speakerActor._id);
+            const actorRoleKey = ActorSheetSFRPGStarship.RoleMap[actorRole];
+            roleName = game.i18n.format(actorRoleKey);
+        }
+
+        let flavor = "";
+        //flavor += game.i18n.format("SFRPG.Rolls.StarshipActionName", {name: this.actor.name});
+        flavor += game.i18n.format("SFRPG.Rolls.StarshipActionRole", {role: roleName, name: this.actor.name});
+        flavor += "<br/>";
+        //flavor += game.i18n.format("SFRPG.Rolls.StarshipAction", {action: selectedFormula.name});
+        flavor += `<h2>${actionEntry.name}</h2>`;
+
+        flavor += `<p><strong>DC: </strong>${actionEntry.data.dc}</p>`;
+
+        flavor += "<p><strong>Effect: </strong>";
+        flavor += game.i18n.format(actionEntry.data.effectNormal);
+        flavor += "</p>";
+
+        if (rollResult.roll.results[0] === 20 || true) {
+            flavor += "<p><strong>Critical effect: </strong>";
             flavor += game.i18n.format(actionEntry.data.effectCritical);
+            flavor += "</p>";
         }
 
         rollResult.roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
             flavor: flavor
         });
     }

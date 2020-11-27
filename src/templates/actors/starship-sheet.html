@@ -387,15 +387,20 @@
         <div class="tab weapons flexcol" data-group="primary" data-tab="actions">
             <ol class="action-list">
                 {{#each actions as |role|}}
-                {{console role}}
-                <li class="action flexrow action-header">{{localize role.label}}</li>
+                <li class="action flexrow action-header">
+                    <div class="action-name">{{localize role.label}}</div>
+                    <div class="action-phase">Phase</div>
+                    <div class="action-resolve">Resolve Points</div>
+                </li>
                 <ol class="action-list">
                     {{#each role.actions as |action|}}
-                    <li class="action flexrow" data-action-id="{{action._id}}" data-tippy-content="<strong>{{localize action.name}}</strong><br/>Normal effect:<br/>{{localize action.data.effectNormal}}<br/><br/>Critical effect:<br/>{{localize action.data.effectCritical}}">
-                        <div class="action-name flexrow rollable">
-                            <div class="action-image" style="background-image: url({{action.img}})"></div>
+                    <li class="action flexrow small" data-action-id="{{action._id}}">
+                        <div class="action-name flexrow rollable" data-tippy-content="<strong>{{localize action.name}}</strong><br/>Normal effect:<br/>{{localize action.data.effectNormal}}<br/><br/>Critical effect:<br/>{{localize action.data.effectCritical}}">
+                            <div class="action-image small" style="background-image: url({{action.img}})"></div>
                             <h4>{{localize action.name}}</h4>
                         </div>
+                        <div class="action-phase flexrow" data-tippy-content="<strong>{{localize action.data.phase.name}}</strong><br/>{{localize action.data.phase.tooltip}}{{#if action.data.isPush}}<br/><br/><strong>Push</strong><br/>Push actions (indicated in an action’s heading) are difficult to perform but can yield greater results. You can’t perform a push action if the necessary system is malfunctioning or wrecked (as noted in Critical Damage Conditions on page 321).{{/if}}">{{action.data.phase.name}}{{#if action.data.isPush}} (Push){{/if}}</div>
+                        <div class="action-resolve flexrow">{{#if (greaterThan action.data.resolvePointCost 0)}}{{action.data.resolvePointCost}}{{/if}}</div>
                     </li>
                     {{/each}}
                 </ol>

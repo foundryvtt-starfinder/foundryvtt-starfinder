@@ -829,4 +829,48 @@ export class RollContext {
         }
         return true;
     }
+
+    getValue(variable) {
+        if (!variable) return null;
+
+        const [context, key] = this.getContextForVariable(variable);
+        console.log(context);
+
+        let result = RollContext._readValue(context.data, key);
+        if (!result) {
+            result = RollContext._readValue(context.entity.data, key);
+        }
+
+        return result;
+    }
+            
+    getContextForVariable(variable) {
+        if (variable[0] === '@') {
+            variable = variable.substring(1);
+        }
+
+        const firstToken = variable.split('.')[0];
+
+        if (this.allContexts[firstToken]) {
+            //console.log(["getContextForVariable", variable, contexts, contexts.allContexts[firstToken]]);
+            return [this.allContexts[firstToken], variable.substring(firstToken.length + 1)];
+        }
+
+        const context = (this.mainContext ? this.allContexts[this.mainContext] : null);
+        //console.log(["getContextForVariable", variable, contexts, context]);
+        return [context, variable];
+    }
+
+    static _readValue(object, key) {
+        //console.log(["_readValue", key, object]);
+        if (!object || !key) return null;
+
+        const tokens = key.split('.');
+        for (const token of tokens) {
+            object = object[token];
+            if (!object) return null;
+        }
+
+        return object;
+    }
 }
