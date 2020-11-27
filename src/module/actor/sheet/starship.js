@@ -626,7 +626,12 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const desiredKey = actionEntry.data.selectorKey;
         if (desiredKey) {
             const selectedContext = rollContext.allContexts[desiredKey];
-            speakerActor = selectedContext.entity;
+            if (!selectedContext) {
+                ui.notifications.error(game.i18n.format("SFRPG.Rolls.StarshipActions.NoActorError", {name: desiredKey}));
+                return;
+            }
+
+            speakerActor = selectedContext?.entity || this.actor;
 
             const actorRole = this.actor.getCrewRoleForActor(speakerActor._id);
             const actorRoleKey = ActorSheetSFRPGStarship.RoleMap[actorRole];

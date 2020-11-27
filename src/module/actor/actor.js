@@ -20,11 +20,12 @@ export class ActorSFRPG extends Actor {
         const data = super.getRollData();
         let casterLevel = 0;
         data.classes = this.data.items.reduce((obj, i) => {
+            const keyAbilityScore = i.data.kas || "str";
             if (i.type === "class") {
                 const classData = {
-                    keyAbilityMod: this.data.data.abilities[i.data.kas].mod,
+                    keyAbilityMod: this.data.data.abilities[keyAbilityScore].mod,
                     levels: i.data.levels,
-                    keyAbilityScore: i.data.kas,
+                    keyAbilityScore: keyAbilityScore,
                     skillRanksPerLevel: i.data.skillRanks.value
                 };
 
