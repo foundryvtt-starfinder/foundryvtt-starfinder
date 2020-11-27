@@ -1,0 +1,40 @@
+{
+  "name": "Insidious Electronics",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>At 6th level, you can spend 1 Resolve Point to activate any one of your ECM modules that targets a starship. If you succeed, you gain the benefits of either the scan (one piece of information) or target system science officer action, in addition to the effects of the ECM module.</p><h2>Critical effect</h2><p>Your electronic attack triggers devastating side effects on the target starship. You also gain the critical effect of either the activate ECM, scan, or target system science officer action (your choice).</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SOM",
+    "type": "",
+    "role": "scienceOfficer",
+    "order": 31,
+    "phase": {
+      "name": "Gunnery phase",
+      "tooltip": "This action can be taken only during the gunnery phase."
+    },
+    "isPush": true,
+    "resolvePointCost": 1,
+    "formula": [
+      {
+        "name": "Computers",
+        "formula": "@scienceOfficer.skills.com.mod"
+      }
+    ],
+    "selectors": [
+      "scienceOfficer"
+    ],
+    "selectorKey": "scienceOfficer",
+    "dc": {
+      "value": "5 + 1-1/2 * Target Ship Tier + it's bonus from defensive countermeasures",
+      "resolve": false
+    },
+    "effectNormal": "At 6th level, you can spend 1 Resolve Point to activate any one of your ECM modules that targets a starship. If you succeed, you gain the benefits of either the scan (one piece of information) or target system science officer action, in addition to the effects of the ECM module.",
+    "effectCritical": "Your electronic attack triggers devastating side effects on the target starship. You also gain the critical effect of either the activate ECM, scan, or target system science officer action (your choice)."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "J1x8JPeFUy0FLUKW"
+}

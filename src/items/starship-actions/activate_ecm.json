@@ -1,0 +1,40 @@
+{
+  "name": "Activate ECM",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>You can activate one of your starship’s ECM modules. If you use an ECM module mounted on a turret, you can target a ship in any arc.</p><h2>Critical effect</h2><p>Your powerful ECM module disrupts enemy targeting computers. Gunners aboard the target starship also take a –2 penalty to gunnery checks during this round.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SOM",
+    "type": "",
+    "role": "scienceOfficer",
+    "order": 22,
+    "phase": {
+      "name": "Gunnery phase",
+      "tooltip": "This action can be taken only during the gunnery phase."
+    },
+    "isPush": false,
+    "resolvePointCost": 0,
+    "formula": [
+      {
+        "name": "Computers",
+        "formula": "@scienceOfficer.skills.com.mod + @scienceOfficer.abilities.int.mod"
+      }
+    ],
+    "selectors": [
+      "scienceOfficer"
+    ],
+    "selectorKey": "scienceOfficer",
+    "dc": {
+      "value": "Target ship's Target Lock score + 2 if shields are up.",
+      "resolve": false
+    },
+    "effectNormal": "You can activate one of your starship’s ECM modules. If you use an ECM module mounted on a turret, you can target a ship in any arc.",
+    "effectCritical": "Your powerful ECM module disrupts enemy targeting computers. Gunners aboard the target starship also take a –2 penalty to gunnery checks during this round."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "qHsecClYOjza7Lyb"
+}
