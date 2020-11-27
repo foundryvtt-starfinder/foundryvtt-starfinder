@@ -600,9 +600,18 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         this.actor.setupRollContexts(rollContext, actionEntry.data.selectors || []);
 
+        /** Create additional modifiers. */
+        const additionalModifiers = [
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: "@ship.attributes.computer.value", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} }
+        ];
+        rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
-            rollFormula: selectedFormula.formula,
+            rollFormula: selectedFormula.formula + " + @additional.modifiers.bonus",
             title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name})
         });
 
@@ -633,18 +642,20 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             flavor += `<h2>${actionEntry.name} (${selectedFormula.name})</h2>`;
         }
 
-        if (actionEntry.data.dc.resolve) {
-            const dcRoll = await DiceSFRPG.createRoll({
-                rollContext: rollContext,
-                rollFormula: actionEntry.data.dc.value,
-                mainDie: 'd0',
-                title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
-                dialogOptions: { skipUI: true }
-            });
+        if (actionEntry.data.dc) {
+            if (actionEntry.data.dc.resolve) {
+                const dcRoll = await DiceSFRPG.createRoll({
+                    rollContext: rollContext,
+                    rollFormula: actionEntry.data.dc.value,
+                    mainDie: 'd0',
+                    title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
+                    dialogOptions: { skipUI: true }
+                });
 
-            flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
-        } else {
-            flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${TextEditor.enrichHTML(actionEntry.data.dc.value)}</p>`;
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
+            } else {
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${TextEditor.enrichHTML(actionEntry.data.dc.value)}</p>`;
+            }
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
