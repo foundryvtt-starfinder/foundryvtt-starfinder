@@ -40,6 +40,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         /** Populate the starship actions cache, but only once. */
         if (ActorSheetSFRPGStarship.StarshipActionsCache === null) {
             ActorSheetSFRPGStarship.StarshipActionsCache = {};
+            const tempCache = {};
 
             const starshipActions = game.packs.get("sfrpg.starship-actions");
             starshipActions.getIndex().then(async (indices) => {
@@ -47,16 +48,28 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                     const entry = await starshipActions.getEntry(index._id);
                     const role = entry.data.role;
 
-                    if (!ActorSheetSFRPGStarship.StarshipActionsCache[role]) {
-                        ActorSheetSFRPGStarship.StarshipActionsCache[role] = {label: ActorSheetSFRPGStarship.RoleMap[role], actions: []};
+                    if (!tempCache[role]) {
+                        tempCache[role] = {label: ActorSheetSFRPGStarship.RoleMap[role], actions: []};
                     }
 
-                    ActorSheetSFRPGStarship.StarshipActionsCache[role].actions.push(entry);
+                    tempCache[role].actions.push(entry);
                 }
 
                 /** Sort them by order. */
-                for (const [roleKey, roleData] of Object.entries(ActorSheetSFRPGStarship.StarshipActionsCache)) {
+                for (const [roleKey, roleData] of Object.entries(tempCache)) {
                     roleData.actions.sort(function(a, b){return a.data.order - b.data.order});
+                }
+
+                const desiredOrder = ["captain", "pilot", "gunner", "engineer", "scienceOfficer", "chiefMate", "magicOfficer", "openCrew", "minorCrew"];
+                /** Automatically append any missing elements to the list at the end, in case new roles are added in the future. */
+                for (const key of Object.keys(tempCache)) {
+                    if (!desiredOrder.includes(key)) {
+                        desiredOrder.push(key);
+                    }
+                }
+
+                for (const key of desiredOrder) {
+                    ActorSheetSFRPGStarship.StarshipActionsCache[key] = tempCache[key];
                 }
 
                 /** Refresh the UI. */
