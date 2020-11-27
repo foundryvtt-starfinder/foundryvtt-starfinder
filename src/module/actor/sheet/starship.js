@@ -560,7 +560,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         event.preventDefault();
         const actionId = event.currentTarget.closest('.action').dataset.actionId;
 
-        const starshipActions = game.packs.get("sfrpg.starship-actions");
+        const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
+        const starshipActions = game.packs.get(starshipPackKey);
         const actionEntry = await starshipActions.getEntry(actionId);
 
         /** Bad entry; no formula! */
@@ -584,7 +585,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
 
             selectedFormula = actionEntry.data.formula.find(x => x.name === results.result.roll);
-            console.log(['results', selectedFormula]);
         }
 
         const rollContext = new RollContext();
@@ -611,8 +611,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         if (desiredKey) {
             const selectedContext = rollContext.allContexts[desiredKey];
             speakerActor = selectedContext.entity;
-            const name = rollContext.getValue(`@${desiredKey}.name`);
-            console.log([name, selectedContext]);
 
             const actorRole = this.actor.getCrewRoleForActor(speakerActor._id);
             const actorRoleKey = ActorSheetSFRPGStarship.RoleMap[actorRole];
@@ -632,10 +630,13 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         flavor += game.i18n.format(actionEntry.data.effectNormal);
         flavor += "</p>";
 
-        if (rollResult.roll.results[0] === 20 || true) {
-            flavor += "<p><strong>Critical effect: </strong>";
-            flavor += game.i18n.format(actionEntry.data.effectCritical);
-            flavor += "</p>";
+        const critEffectDisplayState = game.settings.get("sfrpg", "starshipActionsCrit");
+        if (critEffectDisplayState !== 'never') {
+            if (critEffectDisplayState === 'always' || rollResult.roll.results[0] === 20) {
+                flavor += "<p><strong>Critical effect: </strong>";
+                flavor += game.i18n.format(actionEntry.data.effectCritical);
+                flavor += "</p>";
+            }
         }
 
         rollResult.roll.toMessage({

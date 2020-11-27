@@ -85,7 +85,7 @@ export class ChoiceDialog extends Dialog {
                         }
                     }
                 },
-                default: 'no',
+                default: 'yes',
                 close: () => {
                     if (dialogCallback) {
                         dialogCallback({resolution: ChoiceDialog.resolution, result: ChoiceDialog.output});
