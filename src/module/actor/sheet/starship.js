@@ -12,13 +12,15 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     static StarshipActionsCache = null;
 
     static RoleMap = {
-        captain: "SFRPG.StarshipSheet.Crew.Captain",
-        pilot: "SFRPG.StarshipSheet.Crew.Pilot",
-        gunners: "SFRPG.StarshipSheet.Crew.Gunners",
-        engineers: "SFRPG.StarshipSheet.Crew.Engineers",
-        scienceOfficers: "SFRPG.StarshipSheet.Crew.ScienceOfficers",
-        chiefMates: "SFRPG.StarshipSheet.Crew.ChiefMates",
-        magicOfficers: "SFRPG.StarshipSheet.Crew.MagicOfficers"
+        captain: "SFRPG.StarshipSheet.Role.Captain",
+        pilot: "SFRPG.StarshipSheet.Role.Pilot",
+        gunner: "SFRPG.StarshipSheet.Role.Gunner",
+        engineer: "SFRPG.StarshipSheet.Role.Engineer",
+        scienceOfficer: "SFRPG.StarshipSheet.Role.ScienceOfficer",
+        chiefMate: "SFRPG.StarshipSheet.Role.ChiefMate",
+        magicOfficer: "SFRPG.StarshipSheet.Role.MagicOfficer",
+        minorCrew: "SFRPG.StarshipSheet.Role.MinorCrew",
+        openCrew: "SFRPG.StarshipSheet.Role.OpenCrew"
     };
 
     static get defaultOptions() {
@@ -448,7 +450,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             arrow: false,
             placement: 'top-start',
             duration: [500, null],
-            delay: [800, null]
+            delay: [800, null],
+            maxWidth: 600
         });
     }
 
@@ -645,15 +648,17 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += game.i18n.format(actionEntry.data.effectNormal);
+        flavor += game.i18n.format(selectedFormula.effectNormal || actionEntry.data.effectNormal);
         flavor += "</p>";
 
-        const critEffectDisplayState = game.settings.get("sfrpg", "starshipActionsCrit");
-        if (critEffectDisplayState !== 'never') {
-            if (critEffectDisplayState === 'always' || rollResult.roll.results[0] === 20) {
-                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                flavor += game.i18n.format(actionEntry.data.effectCritical);
-                flavor += "</p>";
+        if (actionEntry.data.effectCritical) {
+            const critEffectDisplayState = game.settings.get("sfrpg", "starshipActionsCrit");
+            if (critEffectDisplayState !== 'never') {
+                if (critEffectDisplayState === 'always' || rollResult.roll.results[0] === 20) {
+                    flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
+                    flavor += game.i18n.format(selectedFormula.effectCritical || actionEntry.data.effectCritical);
+                    flavor += "</p>";
+                }
             }
         }
 

@@ -1,0 +1,40 @@
+{
+  "name": "Overpower",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>If you have at least 6 ranks in Engineering, you can spend 1 Resolve Point and attempt an Engineering check (DC = 15 + 1-1/2 × your starship’s tier) to squeeze more out of your ship’s systems. If you’re successful, this functions as the divert action, but you can send extra power to any three systems listed in that action. This action and the divert action can’t be taken in the same round.</p><h2>Critical effect</h2><p>Choose one of the three systems to which you diverted extra power. One of those systems also receives the critical effect benefit of the divert action.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB",
+    "type": "",
+    "role": "engineer",
+    "order": 30,
+    "phase": {
+      "name": "Engineering phase",
+      "tooltip": "This action can be used during the engineering phase of combat."
+    },
+    "isPush": true,
+    "resolvePointCost": 1,
+    "formula": [
+      {
+        "name": "Engineering",
+        "formula": "@engineer.skills.eng.mod"
+      }
+    ],
+    "selectors": [
+      "engineer"
+    ],
+    "selectorKey": "engineer",
+    "dc": {
+      "value": "15 + floor(1.5 * @ship.details.tier)",
+      "resolve": true
+    },
+    "effectNormal": "If you have at least 6 ranks in Engineering, you can spend 1 Resolve Point and attempt an Engineering check (DC = 15 + 1-1/2 × your starship’s tier) to squeeze more out of your ship’s systems. If you’re successful, this functions as the divert action, but you can send extra power to any three systems listed in that action. This action and the divert action can’t be taken in the same round.",
+    "effectCritical": "Choose one of the three systems to which you diverted extra power. One of those systems also receives the critical effect benefit of the divert action."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "xuRQbRMlMpPppWbH"
+}
