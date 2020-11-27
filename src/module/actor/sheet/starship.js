@@ -485,7 +485,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 "data.crew": crew
             }).then(this.render(false));
         } else {
-            ui.notifications.error(`You have reached the maximum amount of characters allowed for the role of ${targetRole}.`);
+            ui.notifications.error(game.i18n.format("SFRPG.StarshipSheet.Crew.CrewLimitReached", {targetRole: targetRole}));
         }
 
         return true;
