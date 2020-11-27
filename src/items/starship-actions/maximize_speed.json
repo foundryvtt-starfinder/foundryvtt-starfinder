@@ -1,0 +1,44 @@
+{
+  "name": "Maximize Speed",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>If you have at least 12 ranks in Acrobatics or Athletics, you can help the pilot get the most speed possible out of your ship, pushing the engines to their limit. This requires spending 1 Resolve Point and succeeding at an Acrobatics or Athletics check (DC = 20 + 1-1/2 × your starship’s tier), at which point the speed of your starship increases by 2 for this round. This increase is cumulative with other increases to speed, such as from the engineer diverting power to the engines.</p><h2>Critical effect</h2><p>You’re able to maintain the engines for longer. The speed of your starship increases by 2 until the end of the next round.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "COM",
+    "type": "",
+    "role": "chiefMate",
+    "order": 40,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "isPush": true,
+    "resolvePointCost": 1,
+    "formula": [
+      {
+        "name": "Acrobatics",
+        "formula": "@chiefMate.skills.acr.mod"
+      },
+      {
+        "name": "Athletics",
+        "formula": "@chiefMate.skills.ath.mod"
+      }
+    ],
+    "selectors": [
+      "chiefMate"
+    ],
+    "selectorKey": "chiefMate",
+    "dc": {
+      "value": "20 + floor(1.5 * @ship.details.tier)",
+      "resolve": true
+    },
+    "effectNormal": "If you have at least 12 ranks in Acrobatics or Athletics, you can help the pilot get the most speed possible out of your ship, pushing the engines to their limit. This requires spending 1 Resolve Point and succeeding at an Acrobatics or Athletics check (DC = 20 + 1-1/2 × your starship’s tier), at which point the speed of your starship increases by 2 for this round. This increase is cumulative with other increases to speed, such as from the engineer diverting power to the engines.",
+    "effectCritical": "You’re able to maintain the engines for longer. The speed of your starship increases by 2 until the end of the next round."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "tlib3m1UOWD0LFDZ"
+}
