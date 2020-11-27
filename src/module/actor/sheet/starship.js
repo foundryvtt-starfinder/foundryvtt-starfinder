@@ -588,8 +588,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         }
 
         const rollContext = new RollContext();
-        rollContext.addContext("actor", this.actor);
-        rollContext.setMainContext("actor");
+        rollContext.addContext("ship", this.actor);
+        rollContext.setMainContext("ship");
 
         this.actor.setupRollContexts(rollContext, actionEntry.data.selectors || []);
 
@@ -622,9 +622,25 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         flavor += game.i18n.format("SFRPG.Rolls.StarshipActionRole", {role: roleName, name: this.actor.name});
         flavor += "<br/>";
         //flavor += game.i18n.format("SFRPG.Rolls.StarshipAction", {action: selectedFormula.name});
-        flavor += `<h2>${actionEntry.name}</h2>`;
+        if (actionEntry.data.formula.length <= 1) {
+            flavor += `<h2>${actionEntry.name}</h2>`;
+        } else {
+            flavor += `<h2>${actionEntry.name} (${selectedFormula.name})</h2>`;
+        }
 
-        flavor += `<p><strong>DC: </strong>${actionEntry.data.dc}</p>`;
+        if (actionEntry.data.dc.resolve) {
+            const dcRoll = await DiceSFRPG.createRoll({
+                rollContext: rollContext,
+                rollFormula: actionEntry.data.dc.value,
+                mainDie: 'd0',
+                title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
+                dialogOptions: { skipUI: true }
+            });
+
+            flavor += `<p><strong>DC: </strong>${dcRoll.roll.total}</p>`;
+        } else {
+            flavor += `<p><strong>DC: </strong>${actionEntry.data.dc.value}</p>`;
+        }
 
         flavor += "<p><strong>Effect: </strong>";
         flavor += game.i18n.format(actionEntry.data.effectNormal);

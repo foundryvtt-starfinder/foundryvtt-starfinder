@@ -37,7 +37,10 @@
     ],
     "selectors": [],
     "selectorKey": "captain",
-    "dc": "15 + 1.5 * @ship.details.tier",
+    "dc": {
+      "value": "15 + floor(1.5 * @ship.details.tier)",
+      "resolve": true
+    },
     "effectNormal": "At 6th level, you can grant an additional action to one member of the crew by spending 1 Resolve Point and succeeding at a difficult skill check at the beginning of the phase in which the crew member would normally act. The type of check depends on the role of the crew member targeted: a Computers check for a science officer, an Engineering check for an engineer, a gunnery check (see page 320) for a gunner, and a Piloting check for a pilot. The DC of this check is equal to 15 + 1-1/2 × your starship’s tier. If the check succeeds, the crew member can take two actions in her role this round (both when she would normally act), but she can’t take the same action twice. You can’t give yourself orders.",
     "effectCritical": "You orders flow so naturally that you can take one additional captain crew action this turn."
   },

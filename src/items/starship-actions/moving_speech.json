@@ -25,7 +25,10 @@
     ],
     "selectors": [],
     "selectorKey": "captain",
-    "dc": "20 + 1.5 * @ship.details.tier",
+    "dc": {
+      "value": "20 + floor(1.5 * @ship.details.tier)",
+      "resolve": true
+    },
     "effectNormal": "At 12th level, you can spend 1 Resolve Point and use your action to give a moving speech to the crew during one phase of combat with a successful Diplomacy check (DC = 20 + 1-1/2 × your starship’s tier). For the remainder of that phase, your allies can roll twice and take the better result when performing crew actions.",
     "effectCritical": "The crew is so motivated by your speech that they also gain a +2 bonus to all checks that phase, as if you had successfully used the encourage action to aid them."
   },

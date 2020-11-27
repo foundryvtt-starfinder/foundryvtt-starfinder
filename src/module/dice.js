@@ -45,7 +45,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "Normal",
             title: title,
-            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault'),
+            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI,
             mainDie: "1d20",
             dialogOptions: dialogOptions
         };
@@ -149,7 +149,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "Normal",
             title: title,
-            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault'),
+            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI,
             mainDie: "1" + mainDie,
             dialogOptions: dialogOptions
         };
@@ -230,7 +230,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "Normal",
             title: title,
-            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault'),
+            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI,
             mainDie: "",
             dialogOptions: dialogOptions
         };
