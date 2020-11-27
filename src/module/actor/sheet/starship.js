@@ -644,11 +644,11 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
             flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
         } else {
-            flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${actionEntry.data.dc.value}</p>`;
+            flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${TextEditor.enrichHTML(actionEntry.data.dc.value)}</p>`;
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += game.i18n.format(selectedFormula.effectNormal || actionEntry.data.effectNormal);
+        flavor += TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.data.effectNormal);
         flavor += "</p>";
 
         if (actionEntry.data.effectCritical) {
@@ -656,7 +656,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             if (critEffectDisplayState !== 'never') {
                 if (critEffectDisplayState === 'always' || rollResult.roll.results[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                    flavor += game.i18n.format(selectedFormula.effectCritical || actionEntry.data.effectCritical);
+                    flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.data.effectCritical);
                     flavor += "</p>";
                 }
             }

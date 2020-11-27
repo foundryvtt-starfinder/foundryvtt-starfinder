@@ -395,7 +395,7 @@
                 <ol class="action-list">
                     {{#each role.actions as |action|}}
                     <li class="action flexrow small" data-action-id="{{action._id}}">
-                        <div class="action-name flexrow rollable" data-tippy-content="<strong>{{localize action.name}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect"}}:<br/>{{localize action.data.effectNormal}}<br/><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.CriticalEffect"}}:<br/>{{localize action.data.effectCritical}}">
+                        <div class="action-name flexrow rollable" id="{{action._id}}" data-tippy-content="<strong>{{localize action.name}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect"}}:<br/>{{localize action.data.effectNormal}}<br/><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.CriticalEffect"}}:<br/>{{localize action.data.effectCritical}}">
                             <div class="action-image small" style="background-image: url({{action.img}})"></div>
                             <h4>{{localize action.name}}</h4>
                         </div>
