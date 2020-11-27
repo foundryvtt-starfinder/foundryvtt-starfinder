@@ -1,0 +1,133 @@
+{
+  "name": "Stunt",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>You can attempt any one of the stunts described on page 319. The DCs of the Piloting checks required and the results of success and failure are described in each stunt’s description.</p><h2>Critical effect</h2><p>The results of a critical stunt action depend on the stunt being attempted.<br/>Back Off: Your starship can move up to its full speed and make turns as normal for its maneuverability rating.<br/>Barrel Roll: The sudden roll makes it difficult to target your starship. You also gain the effects of a successful evade stunt until the start of the next round.<br/>Evade: You successfully anticipate your enemy’s firing patterns. The stunt’s circumstance bonus to your starship’s AC and TL increases to +4.<br/>Flip and Burn: With a flawlessly executed stunt, your starship can move up to its full speed (without turning) and rotate 180 degrees to face the aft edge at the end of the movement.<br/>Flyby: You line up the shot perfectly. The gunner gains a +2 circumstance bonus to the gunnery check affected by this stunt.<br/>Ramming Speed: You fly your ship fast and true. You gain a +2 circumstance bonus to the gunnery check to ram the target, and if you succeed, you deal additional damage to the target equal to your starship’s tier.<br/>Slide: You slide and rotate your starship simultaneously. At the end of the stunt’s movement, your starship can turn once.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB",
+    "type": "",
+    "role": "pilot",
+    "order": 20,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "isPush": true,
+    "resolvePointCost": 0,
+    "formula": [
+      {
+        "name": "Back Off",
+        "formula": "@pilot.skills.pil.ranks",
+        "effectNormal": "The starship moves up to half its speed in the direction of the aft edge without changing facing. It can’t take any turns during this movement. To perform this stunt, you must succeed at a Piloting check (DC = 10 + 1 – 1/2 × your starship’s tier). On a failed check, your starship moves backward only 1 hex. If you fail this check by 5 or more, your starship does not move at all and takes a –4 penalty to its AC and TL until the start of the next round.",
+        "effectCritical": "Your starship can move up to its full speed and make turns as normal for its maneuverability rating.",
+        "dc": {
+          "value": "10 + floor(1.5 * @ship.details.tier)",
+          "resolve": true
+        }
+      },
+      {
+        "name": "Barrel Roll",
+        "formula": "@pilot.skills.pil.ranks",
+        "effectNormal": "The starship moves up to half its speed and flips along its central axis. For the next gunnery phase, the starship’s port shields and weapons function as if they were in the starboard firing arc and vice versa. The starship reverts to normal at the beginning of the next round. To perform this stunt, your starship must be Large or smaller and you must succeed at a Piloting check (DC = 10 + 1–1/2 × your starship’s tier). On a failed check, the starship moves half its speed but doesn’t roll. If you fail by 5 or more, your starship moves half its speed, doesn’t roll, and takes a –4 penalty to its AC and TL until the start of the next round.",
+        "effectCritical": "The sudden roll makes it difficult to target your starship. You also gain the effects of a successful evade stunt until the start of the next round.",
+        "dc": {
+          "value": "10 + floor(1.5 * @ship.details.tier)",
+          "resolve": true
+        }
+      },
+      {
+        "name": "Evade",
+        "formula": "@pilot.skills.pil.ranks",
+        "effectNormal": "The ship moves up to its speed and can turn as normal, but it gains a +2 circumstance bonus to its AC and TL until the start of the next round. To perform this stunt, you must succeed at a Piloting check (DC = 10 + 1 – 1/2 × your Starship’s tier). If you fail, the starship moves as normal. If you fail the check by 5 or more, the starship moves as normal, but it also takes a –2 penalty to its AC and TL until the start of the next round.",
+        "effectCritical": "You successfully anticipate your enemy’s firing patterns. The stunt’s circumstance bonus to your starship’s AC and TL increases to +4.",
+        "dc": {
+          "value": "10 + floor(1.5 * @ship.details.tier)",
+          "resolve": true
+        }
+      },
+      {
+        "name": "Flip and Burn",
+        "formula": "@pilot.skills.pil.ranks",
+        "effectNormal": "The ship moves forward up to half its speed (without turning) and rotates 180 degrees to face the aft edge at the end of the movement. To perform this stunt, you must succeed at a Piloting check (DC = 15 + 1 – 1/2 × your ship’s tier). If you fail this check, your starship moves forward half its speed but doesn’t rotate.",
+        "effectCritical": "With a flawlessly executed stunt, your starship can move up to its full speed (without turning) and rotate 180 degrees to face the aft edge at the end of the movement.",
+        "dc": {
+          "value": "15 + floor(1.5 * @ship.details.tier)",
+          "resolve": true
+        }
+      },
+      {
+        "name": "Flyby",
+        "formula": "@pilot.skills.pil.ranks",
+        "effectNormal": "The ship moves as normal, but it can move through 1 hex occupied by an enemy starship without provoking a free attack (as described in Moving through Other starships). During the following gunnery phase, you can select one arc of your starship’s weapons to fire at the enemy vessel as if the vessel were in close range (treat the range as 1 hex), against any quadrant of the enemy starship. To perform this stunt, you must succeed at a Piloting check (DC = 15 + 1–1/2 × the tier of the enemy starship). If you fail this check, your starship still moves as described above, but you follow the normal rules for attacking (based on your starship’s final position and distance), and the movement provokes a free attack from that starship as normal.",
+        "effectCritical": "You line up the shot perfectly. The gunner gains a +2 circumstance bonus to the gunnery check affected by this stunt.",
+        "dc": {
+          "value": "15 + floor(1.5 * @ship.details.tier)",
+          "resolve": true
+        }
+      },
+      {
+        "name": "Slide",
+        "formula": "@pilot.skills.pil.ranks",
+        "effectNormal": "The starship moves up to its speed in the direction of either the forward-port or forward-starboard edge without changing its facing. To perform this stunt, you must succeed at a Piloting check (DC = 10+ 1–1/2 × your ship’s tier). If you fail this check, the ship moves forward up to half its speed and can’t make any turns.",
+        "effectCritical": "You slide and rotate your starship simultaneously. At the end of the stunt’s movement, your starship can turn once.",
+        "dc": {
+          "value": "10 + floor(1.5 * @ship.details.tier)",
+          "resolve": true
+        }
+      },
+      {
+        "name": "Turn in Place",
+        "formula": "@pilot.skills.pil.ranks",
+        "effectNormal": "The ship does not move but instead can turn to face any direction. If the ship has a maneuverability of clumsy, it takes a –4 penalty to its AC and TL until the start of the next round. If it has a maneuverability of poor, it instead takes a –2 penalty to its AC and TL until the start of the next round. Ships with a maneuverability of average or better do not take a penalty. This stunt doesn’t require a skill check."
+      },
+      {
+        "name": "Escort",
+        "formula": "@pilot.skills.pil.ranks",
+        "effectNormal": "Choose an allied starship. Your starship moves up to its speed and can turn as normal. If your starship occupies a hex that is adjacent to the chosen starship at the end of the helm phase, that allied starship gains a +2 circumstance bonus to its AC and TL until the start of the next round. To perform this stunt, you must succeed at a Piloting check (DC = 10 + 1-1/2 × the chosen starship’s tier). On a failed check, your starship moves as normal. If you fail the check by 5 or more, your starship moves as normal but interferes with the chosen starship’s movement; that starship takes a –2 penalty to its AC and TL until the start of the next round.",
+        "dc": {
+          "value": "10 + 1-1/2 * Target Ship Tier",
+          "resolve": false
+        }
+      },
+      {
+        "name": "Flank",
+        "formula": "@pilot.skills.pil.ranks",
+        "effectNormal": "Choose an enemy starship. Your starship moves up to its speed and can turn as normal. If your starship ends the helm phase within 5 hexes of the chosen starship, the next attack against the chosen starship, made during that round and originating from an arc not occupied by your ship, gains a +2 bonus to its gunnery check. To perform this stunt, you must succeed at a Piloting check (DC = 10 + 1-1/2 × the enemy starship’s tier). If you fail this check, your starship moves as normal but does not grant the bonus to the gunnery check.",
+        "dc": {
+          "value": "10 + 1-1/2 * Target Ship Tier",
+          "resolve": false
+        }
+      },
+      {
+        "name": "Run Interference",
+        "formula": "@pilot.skills.pil.ranks",
+        "effectNormal": "Choose one active tracking projectile that is moving toward (but has not yet reached) its target. Your starship moves up to its speed and can turn as normal. If it moves through a hex occupied by the projectile, the starship attempts to interfere with the projectile’s tracking system, causing it to veer off course and take a –4 penalty to its next gunnery check to continue moving toward its target. To perform this stunt, you must succeed at a Piloting check (DC = 5 + the tracking weapon’s speed + 1-1/2 × the attacking starship’s tier) with a circumstance bonus to your check equal to the bonus to TL granted by your starship’s defensive countermeasures. If you succeed by 5 or more, you cause the projectile to detonate harmlessly, destroying it. If you fail, your starship moves as normal but does not penalize the tracking weapon’s gunnery check. If you fail the check by 5 or more, the tracking projectile immediately attacks you instead; it makes a new gunnery check against your starship’s TL, dealing damage if it succeeds and veering off course to explode harmlessly if it fails.",
+        "dc": {
+          "value": "5 + The Tracking Weapon's Speed + 1-1/2 * Target Ship Tier",
+          "resolve": false
+        }
+      },
+      {
+        "name": "Ramming Speed",
+        "formula": "@pilot.skills.pil.ranks",
+        "effectNormal": "The starship increases its distance between turns by 2 (to a maximum of 4) and moves up to its speed, but it can move through 1 hex occupied by an enemy starship that has already moved during this helm phase. To perform this stunt, you must first succeed at a Piloting check (DC = 15 + 1/1-2 × your starship’s tier). If you succeed, you then attempt a gunnery check against the enemy starship’s AC upon entering that starship’s hex.<br/>If the gunnery check succeeds, your starship collides with the enemy starship, dealing collision damage to each based on your starship’s speed and the sizes of the two starships. The base collision damage equals 1d4 × half your starship’s speed, plus an additional 1d4 damage × a value based on your starship’s size (for the purpose of this calculation, Tiny = 1, Small = 2, Medium = 3, etc.). The enemy starship takes the full damage to the struck quadrant, and your starship takes half this damage to its forward quadrant, after which your movement ends. If your starship has a ramming weapon, add the ramming weapon’s damage to the damage to the enemy starship. If your starship is one size category smaller than the enemy ship or larger, you push the ship 1 hex in the direction your ship is facing. If this would push the ship into an occupied hex, the ship does not move but instead takes additional damage equal to your starship’s tier. If your starship is more than one size category smaller than the enemy starship, your starship returns to the hex from which it entered the enemy ship’s hex, facing that starship.<br/>If the initial Piloting check fails, your starship still moves as described and doesn’t attempt the gunnery check, but the movement provokes a free attack from that starship as normal. If the Piloting check is successful yet the gunnery check fails, your starship still moves as described, but the movement doesn’t provoke a free attack from that starship.",
+        "effectCritical": "You fly your ship fast and true. You gain a +2 circumstance bonus to the gunnery check to ram the target, and if you succeed, you deal additional damage to the target equal to your starship’s tier.",
+        "dc": {
+          "value": "15 + floor(1.5 * @ship.details.tier)",
+          "resolve": true
+        }
+      }
+    ],
+    "selectors": [],
+    "selectorKey": "pilot",
+    "dc": null,
+    "effectNormal": "You can attempt any one of the stunts described on page 319. The DCs of the Piloting checks required and the results of success and failure are described in each stunt’s description.",
+    "effectCritical": "The results of a critical stunt action depend on the stunt being attempted.<br/>Back Off: Your starship can move up to its full speed and make turns as normal for its maneuverability rating.<br/>Barrel Roll: The sudden roll makes it difficult to target your starship. You also gain the effects of a successful evade stunt until the start of the next round.<br/>Evade: You successfully anticipate your enemy’s firing patterns. The stunt’s circumstance bonus to your starship’s AC and TL increases to +4.<br/>Flip and Burn: With a flawlessly executed stunt, your starship can move up to its full speed (without turning) and rotate 180 degrees to face the aft edge at the end of the movement.<br/>Flyby: You line up the shot perfectly. The gunner gains a +2 circumstance bonus to the gunnery check affected by this stunt.<br/>Ramming Speed: You fly your ship fast and true. You gain a +2 circumstance bonus to the gunnery check to ram the target, and if you succeed, you deal additional damage to the target equal to your starship’s tier.<br/>Slide: You slide and rotate your starship simultaneously. At the end of the stunt’s movement, your starship can turn once."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "7rt4q9ZonN0GlCXx"
+}

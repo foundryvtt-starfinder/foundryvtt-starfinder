@@ -642,11 +642,12 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             flavor += `<h2>${actionEntry.name} (${selectedFormula.name})</h2>`;
         }
 
-        if (actionEntry.data.dc) {
-            if (actionEntry.data.dc.resolve) {
+        const dc = selectedFormula.dc || actionEntry.data.dc;
+        if (dc) {
+            if (dc.resolve) {
                 const dcRoll = await DiceSFRPG.createRoll({
                     rollContext: rollContext,
-                    rollFormula: actionEntry.data.dc.value,
+                    rollFormula: dc.value,
                     mainDie: 'd0',
                     title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
                     dialogOptions: { skipUI: true }
@@ -654,7 +655,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
             } else {
-                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${TextEditor.enrichHTML(actionEntry.data.dc.value)}</p>`;
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${TextEditor.enrichHTML(dc.value)}</p>`;
             }
         }
 
