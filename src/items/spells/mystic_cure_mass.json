@@ -1,10 +1,5 @@
 {
-  "_id": "KRxNlIql9Z3ZsTSE",
-  "name": "Mystic Cure, Mass*",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Mystic Cure, Mass",
   "type": "spell",
   "data": {
     "description": {
@@ -12,40 +7,40 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "",
+    "source": "CRB pg. 367",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "instantaneous",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "up to one creature/level, no two of which can be more than 30 ft. apart",
       "type": ""
     },
     "area": {
       "value": null,
-      "units": "",
+      "units": null,
       "shape": "",
       "effect": ""
     },
     "range": {
-      "value": null,
+      "value": 25,
       "units": "ft",
-      "additional": "",
-      "per": ""
+      "additional": "5 ft.",
+      "per": "2 levels"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "heal",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -53,19 +48,24 @@
       "effect": ""
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "3d8 + @abilities.wis.mod",
+          "healing"
+        ]
+      ]
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "will",
+      "dc": "",
+      "descriptor": "harmless"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 5,
-    "school": "abj",
-    "sr": false,
+    "school": "con",
+    "sr": true,
     "dismissible": false,
     "concentration": false,
     "materials": {
@@ -88,5 +88,7 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/mystic_cure_mass.png"
+  "img": "systems/sfrpg/icons/spells/mystic_cure_mass.png",
+  "effects": [],
+  "_id": "KRxNlIql9Z3ZsTSE"
 }
