@@ -95,7 +95,30 @@ export const registerSystemSettings = function () {
                 "roundsPhases": "SFRPG.Settings.CombatCards.Values.RoundsPhases",
                 "roundsOnly": "SFRPG.Settings.CombatCards.Values.OnlyRounds",
                 "disabled": "SFRPG.Settings.CombatCards.Values.Disabled"
-            },
+            }
         });
     }
+
+    game.settings.register("sfrpg", "starshipActionsSource", {
+        name: "SFRPG.Settings.StarshipActionsSource.Name",
+        hint: "SFRPG.Settings.StarshipActionsSource.Hint",
+        scope: "world",
+        config: true,
+        default: "sfrpg.starship-actions",
+        type: String
+    });
+
+    game.settings.register("sfrpg", "starshipActionsCrit", {
+        name: "SFRPG.Settings.StarshipActionsCrit.Name",
+        hint: "SFRPG.Settings.StarshipActionsCrit.Hint",
+        scope: "world",
+        config: true,
+        default: "critOnly",
+        type: String,
+        choices: {
+            "never": "SFRPG.Settings.StarshipActionsCrit.Values.Never",
+            "critOnly": "SFRPG.Settings.StarshipActionsCrit.Values.CritOnly",
+            "always": "SFRPG.Settings.StarshipActionsCrit.Values.Always"
+        }
+    });
 };

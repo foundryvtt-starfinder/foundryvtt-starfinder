@@ -22,6 +22,7 @@
         "TypeFusion": "Waffenfusion",
         "TypeUpgrade": "Rüstungsverbesserung",
         "TypeAugmentation": "Aufwertung",
+        "TypeStarshipaction": "Starship Action",
         "TypeStarshipcomputer": "Starship Computer",
         "TypeStarshipframe": "Raumschiffgrundstruktur",
         "TypeStarshipweapon": "Raumschiffwaffe",
@@ -1218,7 +1219,25 @@
                 "CaptainDemand": "Captain's Demand",
                 "CaptainEncouragement": "Captain's Encouragement",
                 "ScienceOfficerLockOn": "Science Officer's Lock On",
-                "SnapShot": "Snap Shot"
+                "SnapShot": "Snap Shot",
+                "FireAtWill": "Fire At Will",
+                "Broadside": "Broadside"
+            },
+            "StarshipAction": "Starship Action: {action}",
+            "StarshipActions": {
+                "Chat": {
+                    "CriticalEffect": "Critical Effect",
+                    "DC": "DC",
+                    "NormalEffect": "Effect",
+                    "Role": "{role} of the Starship: '{name}'"
+                },
+                "Choice": {
+                    "Title": "{name} - Select the desired roll",
+                    "Message": "The starship action '{name}' offers multiple rolls to choose from. Please pick one.",
+                    "AvailableRolls": "Available rolls"
+                },
+                "NoFormulaError": "No formula present in data for starship action '{name}'.",
+                "NoActorError": "No crew member available for this role."
             }
         },
         "Save": "Speichern",
@@ -1274,6 +1293,19 @@
             "ExperienceTracking": {
                 "Hint": "Entfernet die Erfahrungsbalken aus den Charakterbögen.",
                 "Name": "Erfahrungsverfolgung deaktivieren"
+            },
+            "StarshipActionsCrit": {
+                "Hint": "Display state for the critical effect of starship actions.",
+                "Name": "Starship Actions Critical Effect",
+                "Values": {
+                    "Never": "Never display critical effects.",
+                    "CritOnly": "Only display critical effects on a critical roll.",
+                    "Always": "Always display critical effects."
+                }
+            },
+            "StarshipActionsSource": {
+                "Hint": "Compendium key containing the starship action definitions.",
+                "Name": "Starship Actions Source Compendium"
             },
             "UseCustomChatCard": {
                 "Hint": "Schaltet zwischen den neuen benutzerdefinierten Chat-Karten und den ursprünglichen um.",
@@ -1659,7 +1691,8 @@
                 "ChiefMates": "Erste Offiziere",
                 "MagicOfficers": "Magische Offiziere",
                 "Passengers": "Passagiere",
-                "UnlimitedMax": "Keine Beschränkung"
+                "UnlimitedMax": "Keine Beschränkung",
+                "CrewLimitReached": "You have reached the maximum amount of crew allowed for the role of '{targetRole}'."
             },
             "Details": {
                 "Shields": {
@@ -1684,6 +1717,18 @@
             "Modifiers": {
                 "ComputerBonus": "Computer Bonus: {mod} ({source})"
             },
+            "Role": {
+                "Captain": "Captain",
+                "Pilot": "Pilot",
+                "Gunner": "Gunner",
+                "Engineer": "Engineer",
+                "ScienceOfficer": "Science Officer",
+                "ChiefMate": "Chief Mate",
+                "MagicOfficer": "Magic Officer",
+                "Passenger": "Passenger",
+                "MinorCrew": "Minor Crew",
+                "OpenCrew": "Open Crew"
+            },
             "Sides": {
                 "Aft": "Achtern",
                 "Forward": "Bug",
@@ -1691,6 +1736,7 @@
                 "Starboard": "Steuerbord"
             },
             "Tabs": {
+                "Actions": "Actions",
                 "Crew": "Besatzung",
                 "Weapons": "Waffen"
             },

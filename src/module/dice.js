@@ -45,7 +45,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "Normal",
             title: title,
-            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault'),
+            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI,
             mainDie: "1d20",
             dialogOptions: dialogOptions
         };
@@ -54,6 +54,13 @@ export class DiceSFRPG {
 
         const tree = new RollTree(options);
         tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+            if (button === "cancel") {
+                if (onClose) {
+                    onClose(null, null, null);
+                }
+                return;
+            }
+
             let dieRoll = "1d20";
             if (button === "Disadvantage") {
                 dieRoll = "2d20kl";
@@ -110,6 +117,7 @@ export class DiceSFRPG {
     * Returns a promise that will return an object containing roll and formula.
     *
     * @param {Event} event               The triggering event which initiated the roll
+    * @param {String} rollFormula        The roll formula to use, excluding the initial die. If left empty, will look for parts.
     * @param {Array} parts               The dice roll component parts, excluding the initial die
     * @param {RollContext} rollContext   The contextual data for this roll
     * @param {String} title              The dice roll UI window title
@@ -119,7 +127,7 @@ export class DiceSFRPG {
     * @param {Number} fumble             The value of d20 result which represents a critical failure
     * @param {Object} dialogOptions      Modal dialog options
     */
-    static createRoll({ event = new Event(''), parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, dialogOptions }) {
+    static createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, dialogOptions }) {
         
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -141,16 +149,21 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "Normal",
             title: title,
-            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault'),
+            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI,
             mainDie: "1" + mainDie,
             dialogOptions: dialogOptions
         };
 
-        const formula = parts.join(" + ");
+        const formula = rollFormula || parts.join(" + ");
 
         const tree = new RollTree(options);
         return new Promise((resolve) => {
             tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+                if (button === "cancel") {
+                    resolve(null);
+                    return;
+                }
+
                 let dieRoll = "1" + mainDie;
                 if (mainDie == "d20") {
                     if (button === "Disadvantage") {
@@ -217,7 +230,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "Normal",
             title: title,
-            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault'),
+            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI,
             mainDie: "",
             dialogOptions: dialogOptions
         };
@@ -225,6 +238,13 @@ export class DiceSFRPG {
         const formula = parts.join(" + ");
         const tree = new RollTree(options);
         tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+            if (button === 'cancel') {
+                if (onClose) {
+                    onClose(null, null, null);
+                }
+                return;
+            }
+
             if (button === "Critical") {
                 finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
@@ -362,6 +382,7 @@ class RollTree {
         return this.displayUI(formula, contexts, allRolledMods).then(([button, rollMode, bonus]) => {
             if (button === null) {
                 console.log('Roll was cancelled');
+                callback('cancel', "none", null);
                 return;
             }
 
@@ -807,5 +828,49 @@ export class RollContext {
             }
         }
         return true;
+    }
+
+    getValue(variable) {
+        if (!variable) return null;
+
+        const [context, key] = this.getContextForVariable(variable);
+        console.log(context);
+
+        let result = RollContext._readValue(context.data, key);
+        if (!result) {
+            result = RollContext._readValue(context.entity.data, key);
+        }
+
+        return result;
+    }
+            
+    getContextForVariable(variable) {
+        if (variable[0] === '@') {
+            variable = variable.substring(1);
+        }
+
+        const firstToken = variable.split('.')[0];
+
+        if (this.allContexts[firstToken]) {
+            //console.log(["getContextForVariable", variable, contexts, contexts.allContexts[firstToken]]);
+            return [this.allContexts[firstToken], variable.substring(firstToken.length + 1)];
+        }
+
+        const context = (this.mainContext ? this.allContexts[this.mainContext] : null);
+        //console.log(["getContextForVariable", variable, contexts, context]);
+        return [context, variable];
+    }
+
+    static _readValue(object, key) {
+        //console.log(["_readValue", key, object]);
+        if (!object || !key) return null;
+
+        const tokens = key.split('.');
+        for (const token of tokens) {
+            object = object[token];
+            if (!object) return null;
+        }
+
+        return object;
     }
 }

@@ -1,0 +1,41 @@
+{
+  "name": "Patch",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>You can patch a system to reduce the effects of a critical damage condition. The number of actions and the DC of the Engineering check required to patch a system depend on how badly the system is damaged, as indicated on the table on page 324. Multiple engineers can pool their actions in a single round to effect repairs more quickly, but each engineer must succeed at her Engineering check to contribute her action to the patch. The number of actions required can be reduced by 1 (to a minimum of 1 action) by increasing the DC by 5. If you succeed at this check, the severity of the critical damage is unchanged, but it is treated as one step less severe for the remainder of the combat, until 1 hour has passed, or until the system takes critical damage again (which removes the patch and applies the new severity). This action can be taken more than once per round, and this check is not modified by any critical damage to the core.<table class='inner'> <tbody><tr><td><b>Critical Damage Condition</b></td><td><b>Actions to Patch</b></td><td><b>DC</b></td></tr> <tr><td>Glitching</td><td>1</td><td>10 + 1-1/2 times your starship’s tier</td></tr> <tr><td>Malfunctioning</td><td>2</td><td>15 + 1-1/2 times your starship’s tier</td></tr> <tr><td>Wrecked</td><td>3</td><td>20 + 1-1/2 times your starship’s tier</td></tr></tbody></table></p><h2>Critical effect</h2><p>Your patch was especially robust. If the system takes critical damage again, it removes the patch but doesn’t also apply additional critical damage.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB",
+    "type": "",
+    "role": "engineer",
+    "order": 20,
+    "phase": {
+      "name": "Engineering phase",
+      "tooltip": "This action can be used during the engineering phase of combat."
+    },
+    "isPush": false,
+    "resolvePointCost": 0,
+    "formula": [
+      {
+        "name": "Engineering",
+        "formula": "@engineer.skills.eng.mod",
+        "effectNormal": "You can patch a system to reduce the effects of a critical damage condition. If you succeed at this check, the severity of the critical damage is unchanged, but it is treated as one step less severe for the remainder of the combat, until 1 hour has passed, or until the system takes critical damage again (which removes the patch and applies the new severity)."
+      }
+    ],
+    "selectors": [
+      "engineer"
+    ],
+    "selectorKey": "engineer",
+    "dc": {
+      "value": "The number of actions and the DC of the Engineering check required to patch a system depend on how badly the system is damaged, as indicated on the table on @Compendium[sfrpg.starship-actions.zWxJLgoAgkHsdr61].",
+      "resolve": false
+    },
+    "effectNormal": "You can patch a system to reduce the effects of a critical damage condition. The number of actions and the DC of the Engineering check required to patch a system depend on how badly the system is damaged, as indicated on the table on page 324. Multiple engineers can pool their actions in a single round to effect repairs more quickly, but each engineer must succeed at her Engineering check to contribute her action to the patch. The number of actions required can be reduced by 1 (to a minimum of 1 action) by increasing the DC by 5. If you succeed at this check, the severity of the critical damage is unchanged, but it is treated as one step less severe for the remainder of the combat, until 1 hour has passed, or until the system takes critical damage again (which removes the patch and applies the new severity). This action can be taken more than once per round, and this check is not modified by any critical damage to the core.<table class='inner'> <tbody><tr><td><b>Critical Damage Condition</b></td><td><b>Actions to Patch</b></td><td><b>DC</b></td></tr> <tr><td>Glitching</td><td>1</td><td>10 + 1-1/2 times your starship’s tier</td></tr> <tr><td>Malfunctioning</td><td>2</td><td>15 + 1-1/2 times your starship’s tier</td></tr> <tr><td>Wrecked</td><td>3</td><td>20 + 1-1/2 times your starship’s tier</td></tr></tbody></table>",
+    "effectCritical": "Your patch was especially robust. If the system takes critical damage again, it removes the patch but doesn’t also apply additional critical damage."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "zWxJLgoAgkHsdr61"
+}

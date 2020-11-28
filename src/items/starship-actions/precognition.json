@@ -1,0 +1,40 @@
+{
+  "name": "Precognition",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>You use your supernatural senses and a spark of divination magic to see opponents’ motion before it happens, giving you just a split second to shout a warning to your ship’s pilot. Attempt a Mysticism check (DC = 10 + 1-1/2 × your starship’s tier). On a success, you grant the pilot a +2 circumstance bonus to their Piloting check at the beginning of the helm phase to determine piloting order.</p><h2>Critical effect</h2><p>Your precise senses give you detailed information about your opponents’ next move. Increase the circumstance bonus to the Piloting check to +4.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB",
+    "type": "",
+    "role": "magicOfficer",
+    "order": 10,
+    "phase": {
+      "name": "Engineering phase",
+      "tooltip": "This action can be used during the engineering phase of combat."
+    },
+    "isPush": false,
+    "resolvePointCost": 0,
+    "formula": [
+      {
+        "name": "Mysticism",
+        "formula": "@magicOfficer.skills.mys.mod"
+      }
+    ],
+    "selectors": [
+      "magicOfficer"
+    ],
+    "selectorKey": "magicOfficer",
+    "dc": {
+      "value": "10 + floor(1.5 * @ship.details.tier)",
+      "resolve": true
+    },
+    "effectNormal": "You use your supernatural senses and a spark of divination magic to see opponents’ motion before it happens, giving you just a split second to shout a warning to your ship’s pilot. Attempt a Mysticism check (DC = 10 + 1-1/2 × your starship’s tier). On a success, you grant the pilot a +2 circumstance bonus to their Piloting check at the beginning of the helm phase to determine piloting order.",
+    "effectCritical": "Your precise senses give you detailed information about your opponents’ next move. Increase the circumstance bonus to the Piloting check to +4."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "j7QVUYCTfHXDQMOX"
+}
