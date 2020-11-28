@@ -550,7 +550,12 @@ export class ItemSFRPG extends Item {
         let stackModifiers = new StackModifiers();
         modifiers = stackModifiers.process(modifiers, null);
 
+        const rolledMods = [];
         const addModifier = (bonus, parts) => {
+            if (bonus.modifierType === "formula") {
+                rolledMods.push(bonus);
+                return;
+            }
             let computedBonus = bonus.modifier;
             parts.push(computedBonus);
             return computedBonus;
@@ -603,6 +608,14 @@ export class ItemSFRPG extends Item {
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.FullAttack"), modifier: "-4", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Nonlethal"), modifier: "-4", enabled: false} }
         ];
+
+        /** Apply bonus rolled mods from relevant attack roll formula modifiers. */
+        for (const rolledMod of rolledMods) {
+            additionalModifiers.push({
+                bonus: rolledMod
+            });
+        }
+
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
@@ -769,8 +782,14 @@ export class ItemSFRPG extends Item {
         let stackModifiers = new StackModifiers();
         modifiers = stackModifiers.process(modifiers, null);
 
+        const rolledMods = [];
         const addModifier = (bonus, parts) => {
-            console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
+            if (bonus.modifierType === "formula") {
+                rolledMods.push(bonus);
+                return;
+            }
+
+            //console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
             let computedBonus = bonus.modifier;
             parts.push(computedBonus);
             return computedBonus;
@@ -805,6 +824,19 @@ export class ItemSFRPG extends Item {
         rollContext.setMainContext("actor");
 
         this.actor?.setupRollContexts(rollContext);
+
+        /** Create additional modifiers. */
+        const additionalModifiers = [];
+        for (const rolledMod of rolledMods) {
+            additionalModifiers.push({
+                bonus: rolledMod
+            });
+        }
+
+        if (additionalModifiers.length > 0) {
+            rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+            parts.push("@additional.modifiers.bonus");
+        }
 
         // Call the roll helper utility
         return await DiceSFRPG.damageRoll({
