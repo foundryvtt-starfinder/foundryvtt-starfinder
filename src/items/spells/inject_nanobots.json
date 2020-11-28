@@ -1,10 +1,5 @@
 {
-  "_id": "rxkxVP2lYJep5lV9",
-  "name": "Inject Nanobots*",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Inject Nanobots",
   "type": "spell",
   "data": {
     "description": {
@@ -12,24 +7,24 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Starfinder Core Rulebook pg. 361",
+    "source": "CRB pg. 361",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "instantaneous and 1 round/level; see text",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "one living creature or construct",
       "type": ""
     },
     "area": {
       "value": null,
-      "units": "",
+      "units": null,
       "shape": "",
       "effect": ""
     },
@@ -40,12 +35,12 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "str",
+    "actionType": "msak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -53,19 +48,24 @@
       "effect": ""
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "4d8",
+          ""
+        ]
+      ]
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "",
+      "descriptor": "partial"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 2,
     "school": "nec",
-    "sr": false,
+    "sr": true,
     "dismissible": false,
     "concentration": false,
     "materials": {
@@ -88,5 +88,7 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/inject_nanobot.png"
+  "img": "systems/sfrpg/icons/spells/inject_nanobot.png",
+  "effects": [],
+  "_id": "rxkxVP2lYJep5lV9"
 }
