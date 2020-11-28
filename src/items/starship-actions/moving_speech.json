@@ -1,0 +1,38 @@
+{
+  "name": "Moving Speech",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>At 12th level, you can spend 1 Resolve Point and use your action to give a moving speech to the crew during one phase of combat with a successful Diplomacy check (DC = 20 + 1-1/2 × your starship’s tier). For the remainder of that phase, your allies can roll twice and take the better result when performing crew actions.</p><h2>Critical effect</h2><p>The crew is so motivated by your speech that they also gain a +2 bonus to all checks that phase, as if you had successfully used the encourage action to aid them.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB",
+    "type": "",
+    "role": "captain",
+    "order": 40,
+    "phase": {
+      "name": "Any phase",
+      "tooltip": "This action can be used during any phase of combat."
+    },
+    "isPush": false,
+    "resolvePointCost": 1,
+    "formula": [
+      {
+        "name": "Diplomacy",
+        "formula": "@captain.skills.dip.mod"
+      }
+    ],
+    "selectors": [],
+    "selectorKey": "captain",
+    "dc": {
+      "value": "20 + floor(1.5 * @ship.details.tier)",
+      "resolve": true
+    },
+    "effectNormal": "At 12th level, you can spend 1 Resolve Point and use your action to give a moving speech to the crew during one phase of combat with a successful Diplomacy check (DC = 20 + 1-1/2 × your starship’s tier). For the remainder of that phase, your allies can roll twice and take the better result when performing crew actions.",
+    "effectCritical": "The crew is so motivated by your speech that they also gain a +2 bonus to all checks that phase, as if you had successfully used the encourage action to aid them."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "jLK5slr8t0KuxeYn"
+}

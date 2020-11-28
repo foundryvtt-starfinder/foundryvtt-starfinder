@@ -1,0 +1,40 @@
+{
+  "name": "Swift Kick",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>With swift, physical encouragement, you can force a failing system to ignore its recent damage. If you succeed at an Engineering check (DC = 15 + 1-1/2 × your starship’s tier), you can select one system; that system is treated as if its critical damage condition were one step less severe for the rest of the round (wrecked becomes malfunctioning, malfunctioning becomes glitching, and a glitching system functions as if it had taken no critical damage). This check isn’t modified by penalties from critical damage to the power core; however, you can’t affect a particular system with the swift kick action more than once per combat.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB",
+    "type": "",
+    "role": "minorCrew",
+    "order": 31,
+    "phase": {
+      "name": "Engineering phase",
+      "tooltip": "This action can be taken only during the gunnery phase."
+    },
+    "isPush": false,
+    "resolvePointCost": 0,
+    "formula": [
+      {
+        "name": "Engineering",
+        "formula": "@minorCrew.skills.eng.mod"
+      }
+    ],
+    "selectors": [
+      "minorCrew"
+    ],
+    "selectorKey": "minorCrew",
+    "dc": {
+      "value": "15 + floor(1.5 * @ship.details.tier)",
+      "resolve": true
+    },
+    "effectNormal": "With swift, physical encouragement, you can force a failing system to ignore its recent damage. If you succeed at an Engineering check (DC = 15 + 1-1/2 × your starship’s tier), you can select one system; that system is treated as if its critical damage condition were one step less severe for the rest of the round (wrecked becomes malfunctioning, malfunctioning becomes glitching, and a glitching system functions as if it had taken no critical damage). This check isn’t modified by penalties from critical damage to the power core; however, you can’t affect a particular system with the swift kick action more than once per combat.",
+    "effectCritical": ""
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "SvmYvEk0UTJ8MRhE"
+}

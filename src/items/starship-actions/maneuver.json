@@ -1,0 +1,38 @@
+{
+  "name": "Maneuver",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>You move your starship up to its speed. You can also attempt a Piloting check (DC = 15 + 1-1/2 × your starship’s tier) to reduce your starship’s distance between turns by 1 (to a minimum of 0).</p><h2>Critical effect</h2><p>Fancy flying keeps you safe through incoming fire. You gain the effects of a successful evade stunt until the start of the next round.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB",
+    "type": "",
+    "role": "pilot",
+    "order": 10,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "isPush": false,
+    "resolvePointCost": 0,
+    "formula": [
+      {
+        "name": "Piloting",
+        "formula": "@pilot.skills.pil.ranks"
+      }
+    ],
+    "selectors": [],
+    "selectorKey": "pilot",
+    "dc": {
+      "value": "15 + floor(1.5 * @ship.details.tier)",
+      "resolve": true
+    },
+    "effectNormal": "You move your starship up to its speed. You can also attempt a Piloting check (DC = 15 + 1-1/2 × your starship’s tier) to reduce your starship’s distance between turns by 1 (to a minimum of 0).",
+    "effectCritical": "Fancy flying keeps you safe through incoming fire. You gain the effects of a successful evade stunt until the start of the next round."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "YWYFgrrLuurLr0KG"
+}

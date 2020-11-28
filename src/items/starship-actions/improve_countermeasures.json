@@ -1,0 +1,40 @@
+{
+  "name": "Improve Countermeasures",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>If you have at least 12 ranks in Computers, you can try to foil enemy targeting arrays and incoming projectiles by spending 1 Resolve Point and attempting a Computers check. The DC equals 5 + 1-1/2 × the tier of the target starship + its bonus from defensive countermeasures (see page 298). If you’re successful, gunners aboard the target starship roll twice and take the worse result for gunnery checks during this round (including checks for tracking weapons).</p><h2>Critical effect</h2><p>Your powerful countermeasures send false signals to the enemy targeting systems. Gunners aboard the target starship also take a –2 penalty to gunnery checks during this round.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB",
+    "type": "",
+    "role": "scienceOfficer",
+    "order": 40,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "isPush": false,
+    "resolvePointCost": 1,
+    "formula": [
+      {
+        "name": "Computers",
+        "formula": "@scienceOfficer.skills.com.mod"
+      }
+    ],
+    "selectors": [
+      "scienceOfficer"
+    ],
+    "selectorKey": "scienceOfficer",
+    "dc": {
+      "value": "5 + 1-1/2 * Target Ship Tier + it's bonus from defensive countermeasures",
+      "resolve": false
+    },
+    "effectNormal": "If you have at least 12 ranks in Computers, you can try to foil enemy targeting arrays and incoming projectiles by spending 1 Resolve Point and attempting a Computers check. The DC equals 5 + 1-1/2 × the tier of the target starship + its bonus from defensive countermeasures (see page 298). If you’re successful, gunners aboard the target starship roll twice and take the worse result for gunnery checks during this round (including checks for tracking weapons).",
+    "effectCritical": "Your powerful countermeasures send false signals to the enemy targeting systems. Gunners aboard the target starship also take a –2 penalty to gunnery checks during this round."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "MkGcNrSOwmE0hFyW"
+}

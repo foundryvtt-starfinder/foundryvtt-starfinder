@@ -1,0 +1,40 @@
+{
+  "name": "Target System",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>You can use your starship’s sensors to target a specific system on an enemy starship. This action requires your starship to have sensors. You must attempt a Computers check, applying any modifiers from the starship’s sensors. The DC equals 5 + 1-1/2 × the tier of the enemy starship + its bonus from defensive countermeasures (see page 298). If you succeed, choose one system (core, engines, life support, sensors, or weapons). The next attack made by your starship that hits the enemy ship scores a critical hit on a natural roll of 19 or 20. If that attack deals critical damage, it affects the chosen system. For any further critical damage resulting from the attack, determine which system is affected randomly as normal. Your starship’s sensors can target only one system on a specific enemy starship at a time, though this action can be used to concurrently target systems on multiple starships.</p><h2>Critical effect</h2><p>Your sensors keep a continuous lock on the enemy starship. The effects of target system last until the start of the next round.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB",
+    "type": "",
+    "role": "scienceOfficer",
+    "order": 20,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "isPush": true,
+    "resolvePointCost": 0,
+    "formula": [
+      {
+        "name": "Computers",
+        "formula": "@scienceOfficer.skills.com.mod"
+      }
+    ],
+    "selectors": [
+      "scienceOfficer"
+    ],
+    "selectorKey": "scienceOfficer",
+    "dc": {
+      "value": "5 + 1-1/2 * Target Ship Tier + it's bonus from defensive countermeasures",
+      "resolve": false
+    },
+    "effectNormal": "You can use your starship’s sensors to target a specific system on an enemy starship. This action requires your starship to have sensors. You must attempt a Computers check, applying any modifiers from the starship’s sensors. The DC equals 5 + 1-1/2 × the tier of the enemy starship + its bonus from defensive countermeasures (see page 298). If you succeed, choose one system (core, engines, life support, sensors, or weapons). The next attack made by your starship that hits the enemy ship scores a critical hit on a natural roll of 19 or 20. If that attack deals critical damage, it affects the chosen system. For any further critical damage resulting from the attack, determine which system is affected randomly as normal. Your starship’s sensors can target only one system on a specific enemy starship at a time, though this action can be used to concurrently target systems on multiple starships.",
+    "effectCritical": "Your sensors keep a continuous lock on the enemy starship. The effects of target system last until the start of the next round."
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "CGOK99xDHW47gA3M"
+}

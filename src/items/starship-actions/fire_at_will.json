@@ -1,0 +1,37 @@
+{
+  "name": "Fire At Will",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>You can fire any two starship weapons, regardless of their arc. Each attack is made at a –4 penalty.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "CRB",
+    "type": "",
+    "role": "gunner",
+    "order": 0,
+    "phase": {
+      "name": "Gunnery phase",
+      "tooltip": "This action can be taken only during the gunnery phase."
+    },
+    "isPush": true,
+    "resolvePointCost": 0,
+    "formula": [
+      {
+        "name": "Gunnery",
+        "formula": "max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks) + @gunner.abilities.dex.mod - 4"
+      }
+    ],
+    "selectors": [
+      "gunner"
+    ],
+    "selectorKey": "gunner",
+    "dc": null,
+    "effectNormal": "You can fire any two starship weapons, regardless of their arc. Each attack is made at a –4 penalty.",
+    "effectCritical": ""
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "gTnq68hXhcwfMhfO"
+}

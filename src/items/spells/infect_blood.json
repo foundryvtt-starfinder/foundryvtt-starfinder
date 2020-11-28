@@ -1,10 +1,5 @@
 {
-  "_id": "KVUHlPJeNA5YeJhR",
-  "name": "Infect Blood*",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Infect Blood",
   "type": "spell",
   "data": {
     "description": {
@@ -12,24 +7,24 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Character Operations Manual pg. 137",
+    "source": "COM pg. 137",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "full",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "1 round/level",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "one living creature",
       "type": ""
     },
     "area": {
       "value": null,
-      "units": "",
+      "units": null,
       "shape": "",
       "effect": ""
     },
@@ -40,12 +35,12 @@
       "per": "2 levels"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "save",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -53,19 +48,24 @@
       "effect": ""
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "3d8",
+          ""
+        ]
+      ]
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "",
+      "descriptor": "half"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 3,
     "school": "trs",
-    "sr": false,
+    "sr": true,
     "dismissible": false,
     "concentration": false,
     "materials": {
@@ -88,5 +88,7 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/infect_blood.PNG"
+  "img": "systems/sfrpg/icons/spells/infect_blood.PNG",
+  "effects": [],
+  "_id": "KVUHlPJeNA5YeJhR"
 }

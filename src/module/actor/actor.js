@@ -20,11 +20,12 @@ export class ActorSFRPG extends Actor {
         const data = super.getRollData();
         let casterLevel = 0;
         data.classes = this.data.items.reduce((obj, i) => {
+            const keyAbilityScore = i.data.kas || "str";
             if (i.type === "class") {
                 const classData = {
-                    keyAbilityMod: this.data.data.abilities[i.data.kas].mod,
+                    keyAbilityMod: this.data.data.abilities[keyAbilityScore].mod,
                     levels: i.data.levels,
-                    keyAbilityScore: i.data.kas,
+                    keyAbilityScore: keyAbilityScore,
                     skillRanksPerLevel: i.data.skillRanks.value
                 };
 
@@ -855,15 +856,27 @@ export class ActorSFRPG extends Actor {
                 rollContext.addContext("pilot", this.data.data.crew.pilot.actors[0]);
             }
     
-            const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer"];
+            const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
+            const allCrewMates = ["minorCrew", "openCrew"];
             for (const crewType of crewMates) {
                 let crewCount = 1;
                 const crew = [];
-                for (const actor of this.data.data.crew[crewType].actors) {
-                    const contextId = crewType + crewCount;
-                    rollContext.addContext(contextId, actor);
-                    crew.push(contextId);
-                    crewCount += 1;
+                if (allCrewMates.includes(crewType)) {
+                    for (const crewEntries of Object.values(this.data.data.crew)) {
+                        for (const actor of crewEntries.actors) {
+                            const contextId = crewType + crewCount;
+                            rollContext.addContext(contextId, actor);
+                            crew.push(contextId);
+                            crewCount += 1;
+                        }
+                    }
+                } else {
+                    for (const actor of this.data.data.crew[crewType].actors) {
+                        const contextId = crewType + crewCount;
+                        rollContext.addContext(contextId, actor);
+                        crew.push(contextId);
+                        crewCount += 1;
+                    }
                 }
     
                 if (desiredSelectors.includes(crewType)) {

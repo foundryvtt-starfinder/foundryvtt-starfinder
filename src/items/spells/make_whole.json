@@ -1,51 +1,46 @@
 {
-  "_id": "fiFr41dYjlAxJlwn",
-  "name": "Make Whole*",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Make Whole",
   "type": "spell",
   "data": {
     "description": {
-      "value": "<p style=\"text-align: justify;\">This spell functions as&nbsp;mending, except it restores 5d6 Hit Points when cast on an object or construct creature.<br><br>Make whole&nbsp;can fix destroyed magic items, and it restores the magic properties of the item if your technomancer level is at least twice the item’s level. Items with charges (such as batteries) and single-use items (such as potions and grenades) can’t be repaired in this way. When you cast&nbsp;make whole&nbsp;on a construct, the spell bypasses any immunity to magic as if the spell did not allow spell resistance.</p>",
+      "value": "<p>This spell functions as&nbsp;mending, except it restores 5d6 Hit Points when cast on an object or construct creature.<br /><br />Make whole&nbsp;can fix destroyed magic items, and it restores the magic properties of the item if your technomancer level is at least twice the item&rsquo;s level. Items with charges (such as batteries) and single-use items (such as potions and grenades) can&rsquo;t be repaired in this way. When you cast&nbsp;make whole&nbsp;on a construct, the spell bypasses any immunity to magic as if the spell did not allow spell resistance.</p>\n<p>&nbsp;</p>\n<h2>Mending</h2>\n<p>This spell repairs damaged objects and constructs, restoring 1d4 Hit Points. If the object has the broken condition, this condition is removed if the object is restored to at least half its original Hit Points. All of the pieces of an object must be present for this spell to function. A construct can benefit from this spell only once per day. Magic items can be repaired by this spell, but magic items that are destroyed don&rsquo;t have their magic abilities restored. This spell doesn&rsquo;t reverse effects that warp or otherwise transmute items, but it can still repair damage dealt to such items.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "Starfinder Core Rulebook pg. 364",
+    "source": "CRB pg. 364",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "min",
+      "cost": 10,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "instantaneous",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "one object of up to 1 bulk/level or one construct of any size",
       "type": ""
     },
     "area": {
       "value": null,
-      "units": "",
+      "units": null,
       "shape": "",
       "effect": ""
     },
     "range": {
       "value": 25,
       "units": "ft",
-      "additional": "5",
+      "additional": "5 ft.",
       "per": "2 levels"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "heal",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -53,19 +48,24 @@
       "effect": ""
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "5d6",
+          "healing"
+        ]
+      ]
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "will",
+      "dc": "",
+      "descriptor": "object"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 2,
     "school": "trs",
-    "sr": false,
+    "sr": true,
     "dismissible": false,
     "concentration": false,
     "materials": {
@@ -88,5 +88,7 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/make_whole.png"
+  "img": "systems/sfrpg/icons/spells/make_whole.png",
+  "effects": [],
+  "_id": "fiFr41dYjlAxJlwn"
 }

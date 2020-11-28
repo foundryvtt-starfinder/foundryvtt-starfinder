@@ -1,0 +1,37 @@
+{
+  "name": "Prioritize Calculation",
+  "type": "starshipAction",
+  "data": {
+    "description": {
+      "value": "<h2>Normal effect</h2><p>You use a command terminal to temporarily suspend background computer tasks running noncritical systems throughout the ship, prioritizing the combat calculations made at one specific crew station. One crew member attempting a check this round and using a bonus from the ship’s computer can increase that bonus by 1.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "COM",
+    "type": "",
+    "role": "openCrew",
+    "order": 20,
+    "phase": {
+      "name": "Engineering phase, Open",
+      "tooltip": "Open crew actions occur at the beginning of the engineering phase, before any other actions occur. All open crew actions occur simultaneously and can be resolved in any order the GM sees fit. Each open crew action can be performed only once per round."
+    },
+    "isPush": false,
+    "resolvePointCost": 0,
+    "formula": [
+      {
+        "name": "Prioritize Calculation (No skill check required)",
+        "formula": "0"
+      }
+    ],
+    "selectors": [
+      "openCrew"
+    ],
+    "selectorKey": "openCrew",
+    "dc": null,
+    "effectNormal": "You use a command terminal to temporarily suspend background computer tasks running noncritical systems throughout the ship, prioritizing the combat calculations made at one specific crew station. One crew member attempting a check this round and using a bonus from the ship’s computer can increase that bonus by 1.",
+    "effectCritical": ""
+  },
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "_id": "BeKPQFkSRO2c79rn"
+}

@@ -22,6 +22,7 @@
         "TypeFusion": "Weapon Fusion",
         "TypeUpgrade": "Armor Upgrade",
         "TypeAugmentation": "Augmentation",
+        "TypeStarshipaction": "Starship Action",
         "TypeStarshipcomputer": "Starship Computer",
         "TypeStarshipframe": "Starship Frame",
         "TypeStarshipweapon": "Starship Weapon",
@@ -1206,7 +1207,25 @@
                 "CaptainDemand": "Captain's Demand",
                 "CaptainEncouragement": "Captain's Encouragement",
                 "ScienceOfficerLockOn": "Science Officer's Lock On",
-                "SnapShot": "Snap Shot"
+                "SnapShot": "Snap Shot",
+                "FireAtWill": "Fire At Will",
+                "Broadside": "Broadside"
+            },
+            "StarshipAction": "Starship Action: {action}",
+            "StarshipActions": {
+                "Chat": {
+                    "CriticalEffect": "Critical Effect",
+                    "DC": "DC",
+                    "NormalEffect": "Effect",
+                    "Role": "{role} of the Starship: '{name}'"
+                },
+                "Choice": {
+                    "Title": "{name} - Select the desired roll",
+                    "Message": "The starship action '{name}' offers multiple rolls to choose from. Please pick one.",
+                    "AvailableRolls": "Available rolls"
+                },
+                "NoFormulaError": "No formula present in data for starship action '{name}'.",
+                "NoActorError": "No crew member available for this role."
             }
         },
         "Save": "保存",
@@ -1262,6 +1281,19 @@
             "ExperienceTracking": {
                 "Hint": "キャラクターシートから経験値バーを削除する。",
                 "Name": "経験値表示の無効化"
+            },
+            "StarshipActionsCrit": {
+                "Hint": "Display state for the critical effect of starship actions.",
+                "Name": "Starship Actions Critical Effect",
+                "Values": {
+                    "Never": "Never display critical effects.",
+                    "CritOnly": "Only display critical effects on a critical roll.",
+                    "Always": "Always display critical effects."
+                }
+            },
+            "StarshipActionsSource": {
+                "Hint": "Compendium key containing the starship action definitions.",
+                "Name": "Starship Actions Source Compendium"
             },
             "UseCustomChatCard": {
                 "Hint": "新しいカスタムチャットカードを使用するか、元のチャットカードを使用するかを切り替えます。",
@@ -1647,7 +1679,8 @@
                 "ChiefMates": "Chief Mates",
                 "MagicOfficers": "Magic Officers",
                 "Passengers": "Passengers",
-                "UnlimitedMax": "No limit"
+                "UnlimitedMax": "No limit",
+                "CrewLimitReached": "You have reached the maximum amount of crew allowed for the role of '{targetRole}'."
             },
             "Details": {
                 "Shields": {
@@ -1672,6 +1705,18 @@
             "Modifiers": {
                 "ComputerBonus": "Computer Bonus: {mod} ({source})"
             },
+            "Role": {
+                "Captain": "Captain",
+                "Pilot": "Pilot",
+                "Gunner": "Gunner",
+                "Engineer": "Engineer",
+                "ScienceOfficer": "Science Officer",
+                "ChiefMate": "Chief Mate",
+                "MagicOfficer": "Magic Officer",
+                "Passenger": "Passenger",
+                "MinorCrew": "Minor Crew",
+                "OpenCrew": "Open Crew"
+            },
             "Sides": {
                 "Aft": "Aft",
                 "Forward": "Forward",
@@ -1679,6 +1724,7 @@
                 "Starboard": "Starboard"
             },
             "Tabs": {
+                "Actions": "Actions",
                 "Crew": "Crew",
                 "Weapons": "Weapons"
             },
