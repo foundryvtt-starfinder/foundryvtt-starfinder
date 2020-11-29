@@ -1,10 +1,5 @@
 {
-  "_id": "oViI34Oo08wy593d",
   "name": "Corrosive Haze",
-  "permission": {
-    "default": 0,
-    "umHu8DFnCrMQVZ37": 3
-  },
   "type": "spell",
   "data": {
     "description": {
@@ -12,7 +7,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Starfinder Core Rulebook pg. 346",
+    "source": "CRB pg. 346",
     "type": "",
     "activation": {
       "type": "action",
@@ -28,20 +23,20 @@
       "type": ""
     },
     "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
-      "effect": ""
+      "value": 5,
+      "units": "ft",
+      "shape": "sphere",
+      "effect": "emanation"
     },
     "range": {
       "value": 100,
       "units": "ft",
-      "additional": "10",
+      "additional": "10 ft",
       "per": "level"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
     "ability": "",
@@ -53,15 +48,21 @@
       "effect": ""
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "4d6",
+          "acid"
+        ]
+      ]
     },
     "formula": "",
     "save": {
       "type": "reflex",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
+    "modifiers": [],
     "level": 4,
     "school": "evo",
     "sr": true,
@@ -87,5 +88,7 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/corrosive_hase.png"
+  "img": "systems/sfrpg/icons/spells/corrosive_hase.png",
+  "effects": [],
+  "_id": "oViI34Oo08wy593d"
 }

@@ -1,10 +1,5 @@
 {
-  "_id": "CO9wzmYbZjeijJUc",
-  "name": "Ectoplasmic Eruption*",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Ectoplasmic Eruption",
   "type": "spell",
   "data": {
     "description": {
@@ -12,60 +7,65 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Starfinder #23: Hive of Minds pg. 52",
+    "source": "AP #23 pg. 52",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "1 round/level",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "",
       "type": ""
     },
     "area": {
-      "value": null,
-      "units": "",
-      "shape": "",
-      "effect": ""
+      "value": 30,
+      "units": "ft",
+      "shape": "sphere",
+      "effect": "burst"
     },
     "range": {
       "value": 100,
       "units": "ft",
-      "additional": "10",
+      "additional": "10 ft.",
       "per": "level"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "save",
     "attackBonus": 0,
-    "chatFlavor": "",
+    "chatFlavor": "Entangled on failed Reflex Save",
     "critical": {
       "parts": [],
       "effect": ""
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "6d6",
+          "bludgeoning"
+        ]
+      ]
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "reflex",
+      "dc": "",
+      "descriptor": "partial"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 4,
     "school": "evo",
-    "sr": false,
+    "sr": true,
     "dismissible": false,
     "concentration": false,
     "materials": {
@@ -88,5 +88,7 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/ectoplastmic_eruption.png"
+  "img": "systems/sfrpg/icons/spells/ectoplastmic_eruption.png",
+  "effects": [],
+  "_id": "CO9wzmYbZjeijJUc"
 }

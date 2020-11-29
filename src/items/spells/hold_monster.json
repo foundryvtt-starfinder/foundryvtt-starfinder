@@ -1,51 +1,47 @@
 {
   "_id": "sI0dGecvFmVOPPhn",
-  "name": "Hold Monster*",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Hold Monster",
   "type": "spell",
   "data": {
     "description": {
-      "value": "<p style=\"text-align: justify;\">This spell functions as&nbsp;hold person, except it can target any living creature.</p>",
+      "value": "<p>This spell functions as&nbsp;hold person, except it can target any living creature.</p>\n<p>&nbsp;</p>\n<h2>Hold Person</h2>\n<p>The target becomes paralyzed and freezes in place. It is aware and breathes normally but can&rsquo;t take any physical actions, even speech. A held creature can&rsquo;t cast spells. Each round on its turn, the target can spend a full action to attempt a new saving throw to end the effect. This does not provoke attacks of opportunity. A winged creature that is paralyzed can&rsquo;t flap its wings and falls. A swimmer can&rsquo;t swim and may drown.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "Starfinder Core Rulebook pg. 359",
+    "source": "CRB pg. 359",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "1 round/level (D)",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "one living creature",
       "type": ""
     },
     "area": {
       "value": null,
-      "units": "",
+      "units": null,
       "shape": "",
       "effect": ""
     },
     "range": {
-      "value": null,
+      "value": 100,
       "units": "ft",
-      "additional": "",
-      "per": ""
+      "additional": "10 ft.",
+      "per": "level"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "save",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -57,16 +53,16 @@
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "will",
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 4,
     "school": "enc",
-    "sr": false,
-    "dismissible": false,
+    "sr": true,
+    "dismissible": true,
     "concentration": false,
     "materials": {
       "value": "",
@@ -88,5 +84,6 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/hold_monster.PNG"
+  "img": "systems/sfrpg/icons/spells/hold_monster.PNG",
+  "effects": []
 }
