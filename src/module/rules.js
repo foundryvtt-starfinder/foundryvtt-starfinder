@@ -181,30 +181,6 @@ export default function (engine) {
                 ]
             },
             {
-                when: { closure: "isActorType", type: "starship" },
-                then: [
-                    "calculateStarshipFrame",
-                    "calculateStarshipCrew",
-                    "calculateStarshipArmorClass",
-                    "calculateStarshipCritThreshold",
-                    "calculateStarshipDrift",
-                    "calculateStarshipShields",
-                    "calculateStarshipMaxShields",
-                    "calculateStarshipPower",
-                    "calculateStarshipSpeed",
-                    "calculateStarshipTargetLock",
-                    "calculateStarshipComputer"
-                ]
-            },
-            {
-                when: { closure: "isActorType", type: "npc" },
-                then: ["calculateNpcXp", "calculateNpcAbilityValue"]
-            },
-            {
-                when: { closure: "isActorType", type: "vehicle" },
-                then: "identity"
-            },
-            {
                 when: { closure: "isActorType", type: "drone" },
                 then: [
                     "clearTooltips",
@@ -227,6 +203,34 @@ export default function (engine) {
                     { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" }
                 ]
+            },
+            {
+                when: { closure: "isActorType", type: "hazard" },
+                then: ["calculateNpcXp"]
+            },
+            {
+                when: { closure: "isActorType", type: "npc" },
+                then: ["calculateNpcXp", "calculateNpcAbilityValue"]
+            },
+            {
+                when: { closure: "isActorType", type: "starship" },
+                then: [
+                    "calculateStarshipFrame",
+                    "calculateStarshipCrew",
+                    "calculateStarshipArmorClass",
+                    "calculateStarshipCritThreshold",
+                    "calculateStarshipDrift",
+                    "calculateStarshipShields",
+                    "calculateStarshipMaxShields",
+                    "calculateStarshipPower",
+                    "calculateStarshipSpeed",
+                    "calculateStarshipTargetLock",
+                    "calculateStarshipComputer"
+                ]
+            },
+            {
+                when: { closure: "isActorType", type: "vehicle" },
+                then: "identity"
             }
         ]
     });

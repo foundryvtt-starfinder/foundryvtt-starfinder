@@ -2,10 +2,11 @@
     "Actor": {
         "types": [
             "character",
+            "drone",
+            "hazard",
             "npc",
             "starship",
-            "vehicle",
-            "drone"
+            "vehicle"
         ],
         "templates": {
             "common": {
@@ -497,6 +498,156 @@
                 }
             }
         },
+        "drone": {
+            "templates": [
+                "common",
+                "modifiers",
+                "conditions",
+                "counterClassesManagement"
+            ],
+            "details": {
+                "deity": "",
+                "level": {
+                    "value": 1,
+                    "min": 1,
+                    "max": 20
+                },
+                "chassis": ""
+            },
+            "skills": {
+                "acr": {
+                    "enabled": true
+                },
+                "ath": {
+                    "enabled": true
+                },
+                "com": {
+                    "enabled": true
+                },
+                "eng": {
+                    "enabled": true
+                },
+                "per": {
+                    "enabled": true
+                },
+                "ste": {
+                    "enabled": true
+                }
+            },
+            "traits": {
+                "weaponProf": {
+                    "value": [],
+                    "custom": ""
+                }
+            },
+            "attributes": {
+              "armorSlots": {
+                  "current": 0,
+                  "max": 0
+              },
+              "weaponMounts": {
+                  "melee": {
+                    "current": 0,
+                    "max": 0
+                  },
+                  "ranged": {
+                    "current": 0,
+                    "max": 0
+                  }
+              }
+            },
+            "resources": {
+                "primary": {
+                    "value": 0,
+                    "max": 0,
+                    "sr": 0,
+                    "lr": 0
+                },
+                "secondary": {
+                    "value": 0,
+                    "max": 0,
+                    "sr": 0,
+                    "lr": 0
+                },
+                "tertiary": {
+                    "value": 0,
+                    "max": 0,
+                    "sr": 0,
+                    "lr": 0
+                }
+            }
+        },
+        "hazard": {
+            "attributes": {
+                "baseAttackBonus": {
+                    "value": 0
+                },
+                "bypass": {
+                    "value": ""
+                },
+                "damage": {
+                    "value": ""
+                },
+                "duration": {
+                    "value": null
+                },
+                "eac": {
+                    "value": 10
+                },
+                "effect": {
+                    "value": ""
+                },
+                "fort": {
+                    "value": 0
+                },
+                "hardness": {
+                    "value": 0
+                },
+                "hp": {
+                    "max": 10,
+                    "value": 10
+                },
+                "init": {
+                    "value": null
+                },
+                "kac": {
+                    "value": 10
+                },
+                "reflex": {
+                    "value": 0
+                },
+                "reset": {
+                    "value": ""
+                },
+                "trigger": {
+                    "value": ""
+                },
+                "will": {
+                    "value": 0
+                }
+            },
+            "dcs": {
+                "disable": {
+                    "value": ""
+                },
+                "perception": {
+                    "value": 10
+                }
+            },
+            "details": {
+                "cr": {
+                    "value": "1"
+                },
+                "description": {
+                    "value": ""
+                },
+                "source": "",
+                "type": "",
+                "xp": {
+                    "value": 10
+                }
+            }
+        },
         "npc": {
             "templates": [
                 "common",
@@ -689,85 +840,6 @@
                 "systems": [],
                 "passengers": 0,
                 "special": []
-            }
-        },
-        "drone": {
-            "templates": [
-                "common",
-                "modifiers",
-                "conditions",
-                "counterClassesManagement"
-            ],
-            "details": {
-                "deity": "",
-                "level": {
-                    "value": 1,
-                    "min": 1,
-                    "max": 20
-                },
-                "chassis": ""
-            },
-            "skills": {
-                "acr": {
-                    "enabled": true
-                },
-                "ath": {
-                    "enabled": true
-                },
-                "com": {
-                    "enabled": true
-                },
-                "eng": {
-                    "enabled": true
-                },
-                "per": {
-                    "enabled": true
-                },
-                "ste": {
-                    "enabled": true
-                }
-            },
-            "traits": {
-                "weaponProf": {
-                    "value": [],
-                    "custom": ""
-                }
-            },
-            "attributes": {
-              "armorSlots": {
-                  "current": 0,
-                  "max": 0
-              },
-              "weaponMounts": {
-                  "melee": {
-                    "current": 0,
-                    "max": 0
-                  },
-                  "ranged": {
-                    "current": 0,
-                    "max": 0
-                  }
-              }
-            },
-            "resources": {
-                "primary": {
-                    "value": 0,
-                    "max": 0,
-                    "sr": 0,
-                    "lr": 0
-                },
-                "secondary": {
-                    "value": 0,
-                    "max": 0,
-                    "sr": 0,
-                    "lr": 0
-                },
-                "tertiary": {
-                    "value": 0,
-                    "max": 0,
-                    "sr": 0,
-                    "lr": 0
-                }
             }
         }
     },

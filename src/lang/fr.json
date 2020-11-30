@@ -1,10 +1,11 @@
 {
     "ACTOR": {
         "TypeCharacter": "Player Character",
+        "TypeDrone": "Drone",
+        "TypeHazard": "Hazard",
         "TypeNpc": "Non-player Character",
         "TypeVehicle": "Vehicle",
-        "TypeStarship": "Starship",
-        "TypeDrone": "Drone"
+        "TypeStarship": "Starship"
     },
     "ITEM": {
         "TypeAsi": "Ability Score Increase",
@@ -661,6 +662,84 @@
         "Ft": "Pieds",
         "GreatFortitudeHint": "Ajoute 2 au jet de sauvegarde de vigueur",
         "GreatFortitudeLabel": "Vigueur surhumaine",
+        "HazardSheet": {
+            "Details": {
+                "Attributes": {
+                    "Bypass": "Bypass",
+                    "BypassTooltip": "(Optional) Some traps have a bypass mechanism that allows the trap’s creator or other users to temporarily disarm the trap.",
+                    "Duration": "Duration",
+                    "DurationTooltip": "(Optional) If a trap has a duration longer than instantaneous, that is indicated here. Such a trap continues to produce its effect over multiple rounds on its initiative count.",
+                    "Header": "Attributes",
+                    "Initiative": "Initiative",
+                    "InitiativeTooltip": "(Optional) Some traps roll initiative to determine when they activate in a combat round.",
+                    "Reset": "Reset",
+                    "ResetPlaceholder": "None, Manual, 1 minute, etc.",
+                    "ResetTooltip": "This lists the amount of time it takes for a trap to reset itself automatically.",
+                    "Trigger": "Trigger",
+                    "TriggerPlaceholder": "Location, Proximity, Touch, etc.",
+                    "TriggerTooltip": "A trap’s trigger determines how it is set off. Unless otherwise noted, creatures smaller than Tiny do not normally set off traps."
+                },
+                "DCs": {
+                    "Disable": "Disable",
+                    "DisableTooltip": "This is the DC to disable the trap using the listed skill or skills.",
+                    "Header": "DCs",
+                    "Notice": "Notice (Perception DC)",
+                    "NoticeTooltip": "This is the DC to find the trap using Perception."
+                },
+                "Effects": {
+                    "Effect": "Effect",
+                    "EffectTooltip": "This lists the effect the trap has on those that trigger it.",
+                    "Header": "Effects"
+                },
+                "Vitals": {
+                    "Defenses": {
+                        "EAC": "EAC",
+                        "EACTooltip": "If the mechanical parts of your trap can be attacked, this value helps determine how easy it is to hit.",
+                        "Hardness": "Hardness",
+                        "HardnessTooltip": "Traps have a hardness based on their material.",
+                        "Header": "Defenses",
+                        "Hitpoints": "Hitpoints",
+                        "HitpointsTooltip": "Crucial parts of some traps can be damaged and should have the listed number of Hit Points. Traps are immune to anything an object is immune to unless otherwise noted. A trap reduced to 0 HP is destroyed. Destroying a trap might set off a final component of the trap, like an explosion. Traps never have Stamina Points.",
+                        "KAC": "KAC",
+                        "KACTooltip": "If the mechanical parts of your trap can be attacked, this value helps determine how easy it is to hit."
+                    },
+                    "Offense": {
+                        "Attack": "Attack",
+                        "AttackTooltip": "(Optional) The trap’s attack bonus is used if it directly attacks a target.",
+                        "Damage": "Damage",
+                        "DamageTooltip": "(Optional) The trap’s average damage is used if it directly attacks a target, but consider reducing this damage if a trap has multiple attacks or affects multiple targets.",
+                        "Header": "Offense"
+                    },
+                    "Saves": {
+                        "Fortitude": "Fortitude save",
+                        "FortitudeTooltip": "If PCs use special attacks that can target objects against the trap, this value can be used for the trap’s Fortitude save.",
+                        "Header": "Saving throws",
+                        "Reflex": "Reflex save",
+                        "ReflexTooltip": "If PCs use special attacks that can target objects against the trap, this value can be used for the trap’s Reflex save.",
+                        "Will": "Will save",
+                        "WillTooltip": "Traps don’t normally need Will saves, but if necessary, a trap’s Will save is a poor save."
+                    }
+                }
+            },
+            "Header": {
+                "NamePlaceholder": "Hazard name",
+                "SourcePlaceholder": "Source",
+                "TypePlaceholder": "Analog, Magical, Technological, Hybrid"
+            },
+            "Notifications": {
+                "NoDamage": "No value entered for damage, cannot make a roll for {name}."
+            },
+            "Rolls": {
+                "Attack": "Attack - {name}",
+                "Damage": "Damage - {name}",
+                "Fortitude": "Fortitude Save - {name}",
+                "Reflex": "Reflex Save - {name}",
+                "Will": "Will Save - {name}"
+            },
+            "Tabs": {
+                "Vitals": "Vitals"
+            }
+        },
         "HealingTypesHealing": "Guérison",
         "Health": "Pts de vie",
         "HullPoints": "Pts de structure",

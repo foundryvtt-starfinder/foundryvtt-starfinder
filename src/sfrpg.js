@@ -13,10 +13,11 @@ import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./modul
 import { ActorSFRPG } from "./module/actor/actor.js";
 import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
+import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
+import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
-import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
 import { ItemSFRPG } from "./module/item/item.js";
 import { CombatSFRPG } from "./module/combat/combat.js";
 import { ItemSheetSFRPG } from "./module/item/sheet.js";
@@ -99,10 +100,11 @@ Hooks.once('init', async function () {
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("sfrpg", ActorSheetSFRPGCharacter, { types: ["character"], makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGDrone, { types: ["drone"], makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGHazard, { types: ["hazard"], makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGNPC, { types: ["npc"], makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGStarship, { types: ["starship"], makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGVehicle, { types: ["vehicle"], makeDefault: true });
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGDrone, { types: ["drone"], makeDefault: true });
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
