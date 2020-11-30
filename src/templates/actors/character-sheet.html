@@ -11,7 +11,7 @@
                 </h1>
 
                 <div class="charlevel">
-                    <div class="level {{#if disableExperience}}noxp{{/if}}" data-tippy-content="<strong>{{localize "SFRPG.LevelLabelText"}}</strong><br>@details.level.value<br><br>{{#each data.details.level.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <div class="level {{#if disableExperience}}noxp{{/if}}" data-tippy-content="<strong>{{localize "SFRPG.LevelLabelText"}}</strong><br>@details.level.value<br><br>{{#each data.details.level.tooltip as |tip|}}{{tip}}<br>{{/each}}{{#if data.details.cl.value}}<br/><strong>{{localize "SFRPG.ActorSheet.Header.CL"}}</strong><br>@details.cl.value<br><br>{{#each data.details.cl.tooltip as |tip|}}{{tip}}<br>{{/each}}{{/if}}">
                         <label>{{localize "SFRPG.LevelLabelText"}} </label>
                         <span>{{data.details.level.value}}</span>
                     </div>

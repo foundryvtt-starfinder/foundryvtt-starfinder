@@ -8,6 +8,10 @@ export default function (engine) {
             data.details.level.tooltip = [];
         }
 
+        if (data.details.cl) {
+            data.details.cl.tooltip = [];
+        }
+
         if (data.attributes.hp) {
             data.attributes.hp.tooltip = [];
         }
