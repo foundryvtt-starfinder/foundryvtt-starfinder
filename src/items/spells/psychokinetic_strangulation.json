@@ -1,10 +1,6 @@
 {
   "_id": "OHGWvzUb9MJCNB8u",
-  "name": "Psychokinetic Strangulation*",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Psychokinetic Strangulation",
   "type": "spell",
   "data": {
     "description": {
@@ -12,40 +8,40 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Starfinder Core Rulebook pg. 370",
+    "source": "CRB pg. 370",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "concentration up to 1 round/level",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "one creature that breathes",
       "type": ""
     },
     "area": {
       "value": null,
-      "units": "",
+      "units": null,
       "shape": "",
       "effect": ""
     },
     "range": {
       "value": 25,
       "units": "ft",
-      "additional": "5",
+      "additional": "5 ft.",
       "per": "2 levels"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "save",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -53,19 +49,24 @@
       "effect": ""
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "3d8",
+          "bludgeoning"
+        ]
+      ]
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "",
+      "descriptor": "partial"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 3,
     "school": "trs",
-    "sr": false,
+    "sr": true,
     "dismissible": false,
     "concentration": true,
     "materials": {
@@ -88,5 +89,6 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/psychokinetic_strangulation.png"
+  "img": "systems/sfrpg/icons/spells/psychokinetic_strangulation.png",
+  "effects": []
 }
