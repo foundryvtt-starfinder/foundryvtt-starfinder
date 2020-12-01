@@ -677,6 +677,11 @@ export class ItemSFRPG extends Item {
             //   'data.capacity.value': capacity.value
             // });
         }
+
+        const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
+        if (rollDamageWithAttack) {
+            this.rollDamage({});
+        }
     }
 
     /**
@@ -720,6 +725,14 @@ export class ItemSFRPG extends Item {
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
+            },
+            onClose: (roll, formula, finalFormula) => {
+                if (roll) {
+                    const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
+                    if (rollDamageWithAttack) {
+                        this.rollDamage({});
+                    }
+                }
             }
         });
     }

@@ -5,6 +5,14 @@ export default function (engine) {
         const data = fact.data;
         const modifiers = fact.modifiers;
         const frames = fact.frames;
+        
+        const maneuverabilityMap = {
+            "clumsy" : -2,
+            "poor"   : -1,
+            "average": 0,
+            "good"   : 1,
+            "perfect": 2
+        };
 
         if (!data.crew) {
             data.crew = {
@@ -50,7 +58,7 @@ export default function (engine) {
 
             data.details.frame = "";
             data.details.size = "n/a";
-            data.attributes.maneuverability = "n/a";
+            data.attributes.maneuverability = "average";
             data.attributes.damageThreshold = {
                 value: 0,
                 tooltip: []
@@ -94,6 +102,11 @@ export default function (engine) {
                 + frame.data.weaponMounts.turret.lightSlots + frame.data.weaponMounts.turret.heavySlots + frame.data.weaponMounts.turret.capitalSlots;
         }
 
+        /** Ensure pilotingBonus exists. */
+        if (!data.attributes.pilotingBonus) {
+            data.attributes.pilotingBonus = {value: 0};
+        }
+        data.attributes.pilotingBonus.value = maneuverabilityMap[data.attributes.maneuverability];
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );

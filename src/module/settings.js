@@ -121,4 +121,13 @@ export const registerSystemSettings = function () {
             "always": "SFRPG.Settings.StarshipActionsCrit.Values.Always"
         }
     });
+
+    game.settings.register("sfrpg", "rollDamageWithAttack", {
+        name: "SFRPG.Settings.DamageWithAttack.Name",
+        hint: "SFRPG.Settings.DamageWithAttack.Hint",
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean
+    });
 };

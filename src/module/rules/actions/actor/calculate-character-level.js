@@ -3,17 +3,36 @@ export default function (engine) {
         const data = fact.data;
         const classes = fact.classes;
 
-        let level = 0;
+        data.details.level.value = 0;
 
-        for (const cls of classes) {
-            level += cls.data.levels;
-            data.details.level.tooltip.push(game.i18n.format("SFRPG.CharacterLevelsTooltip", {
-                class: cls.name,
-                levels: cls.data.levels
-            }));
+        /** Ensure CL exists. */
+        if (!data.details.cl) {
+            data.details.cl = {
+                value: null,
+                tooltip: []
+            };
+        } else {
+            data.details.cl.value = null;
         }
 
-        data.details.level.value = level;
+        for (const cls of classes) {
+            const classLevel = cls.data.levels;
+            const tooltip = game.i18n.format("SFRPG.CharacterLevelsTooltip", {
+                class: cls.name,
+                levels: classLevel
+            });
+
+            data.details.level.value += classLevel;
+            data.details.level.tooltip.push(tooltip);
+
+            if (cls.data.isCaster) {
+                if (data.details.cl.value === null) {
+                    data.details.cl.value = 0;
+                }
+                data.details.cl.value += classLevel;
+                data.details.cl.tooltip.push(tooltip);
+            }
+        }
 
         return fact;
     });

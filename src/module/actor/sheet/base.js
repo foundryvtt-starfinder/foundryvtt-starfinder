@@ -58,6 +58,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             isVehicle: this.entity.data.type === 'vehicle',
             isDrone: this.entity.data.type === 'drone',
             isNPC: this.entity.data.type === 'npc',
+            isHazard: this.entity.data.type === 'hazard',
             config: CONFIG.SFRPG
         };
 
@@ -71,12 +72,14 @@ export class ActorSheetSFRPG extends ActorSheet {
         data.labels = this.actor.labels || {};
         data.filters = this._filters;
 
-        if (data.actor.type !== "starship" && data.actor.type !== "vehicle") {
+        if (data.actor.data.abilities) {
             // Ability Scores
             for (let [a, abl] of Object.entries(data.actor.data.abilities)) {
                 abl.label = CONFIG.SFRPG.abilities[a];
             }
+        }
 
+        if (data.actor.data.skills) {
             // Update skill labels
             for (let [s, skl] of Object.entries(data.actor.data.skills)) {                
                 skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
@@ -98,7 +101,9 @@ export class ActorSheetSFRPG extends ActorSheet {
             }, {});
 
             data.data.hasSkills = Object.values(this.entity.data.data.skills).filter(x => x.enabled).length > 0;
+        }
 
+        if (data.actor.data.traits) {
             this._prepareTraits(data.actor.data.traits);
         }
 
