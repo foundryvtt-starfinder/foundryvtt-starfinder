@@ -569,13 +569,13 @@ SFRPG.conditionTypes = {
     "exhausted": "SFRPG.ConditionsExhausted",
     "fascinated": "SFRPG.ConditionsFascinated",
     "fatigued": "SFRPG.ConditionsFatigued",
-    "flatfooted": "SFRPG.ConditionsFlatFooted",
+    "flat-footed": "SFRPG.ConditionsFlatFooted",
     "frightened": "SFRPG.ConditionsFrightened",
     "grappled": "SFRPG.ConditionsGrappled",
     "helpless": "SFRPG.ConditionsHelpless",
     "nauseated": "SFRPG.ConditionsNauseated",
-    "offkilter": "SFRPG.ConditionsOffKilter",
-    "offtarget": "SFRPG.ConditionsOffTarget",
+    "off-kilter": "SFRPG.ConditionsOffKilter",
+    "off-target": "SFRPG.ConditionsOffTarget",
     "overburdened": "SFRPG.ConditionsOverburdened",
     "panicked": "SFRPG.ConditionsPanicked",
     "paralyzed": "SFRPG.ConditionsParalyzed",
@@ -1295,7 +1295,7 @@ SFRPG.conditions = {
         modifiers: [],
         tooltip: "<strong>Fatigued</strong><br><br>You cannot run or charge; you take a -1 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 1 bulk."
     },
-    "flatfooted": {
+    "flat-footed": {
         modifiers: [],
         tooltip: "<strong>Flat-Footed</strong><br><br>You take a -2 penalty to AC, and you cannot take reactions or make attacks of opportunity."
     },
@@ -1315,11 +1315,11 @@ SFRPG.conditions = {
         modifiers: [],
         tooltip: "<strong>Nauseated</strong><br><br>You're unable to attack, cast spells, or concentrate on spells, and the only action you can take is a single move action per turn."
     },
-    "offkilter": {
+    "off-kilter": {
         modifiers: [],
         tooltip: "<strong>Off-kilter</strong><br><br>You can't take move actions except to right yourself, you take a -2 penalty to attacks, and you're flat-footed."
     },
-    "offtarget": {
+    "off-target": {
         modifiers: [],
         tooltip: "<strong>Off-target</strong><br><br>You take a -2 penalty to attack rolls."
     },
