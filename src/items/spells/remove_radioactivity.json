@@ -1,36 +1,32 @@
 {
   "_id": "ANDdDHLnY7Dfnhtq",
-  "name": "Remove Radioactivity*",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Remove Radioactivity",
   "type": "spell",
   "data": {
     "description": {
-      "value": "<p style=\"text-align: justify;\">You remove all ongoing effects of radiation from a single target if you succeed at a caster level check (DC = the DC associated with the radiation effect). The target is cured of both the radiation’s poison effects and the radiation sickness disease, moving the target to the healthy state on both tracks. When cast on an area, a single casting of&nbsp;remove radioactivity&nbsp;removes radiation from a 20-foot-radius area around the point you touch. This spell has no power to negate naturally radioactive materials, and as long as such materials remain in an area, the radiation that was removed may return.</p>",
+      "value": "<p style=\"text-align: justify;\">You remove all ongoing effects of radiation from a single target if you succeed at a caster level check (<strong>DC = the DC associated with the radiation effect</strong>). The target is cured of both the radiation&rsquo;s poison effects and the radiation sickness disease, moving the target to the healthy state on both tracks. When cast on an area, a single casting of&nbsp;remove radioactivity&nbsp;removes radiation from a 20-foot-radius area around the point you touch. This spell has no power to negate naturally radioactive materials, and as long as such materials remain in an area, the radiation that was removed may return.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "Starfinder Core Rulebook pg. 374",
+    "source": "CRB pg. 374",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "instantaneous",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "one creature or object or one 20 ft. radius area",
       "type": ""
     },
     "area": {
-      "value": null,
-      "units": "",
-      "shape": "",
+      "value": 20,
+      "units": "ft",
+      "shape": "sphere",
       "effect": ""
     },
     "range": {
@@ -40,12 +36,12 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "save",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -57,15 +53,15 @@
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "",
+      "descriptor": "harmless"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 4,
     "school": "con",
-    "sr": false,
+    "sr": true,
     "dismissible": false,
     "concentration": false,
     "materials": {
@@ -88,5 +84,6 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/remove_radioactivity.PNG"
+  "img": "systems/sfrpg/icons/spells/remove_radioactivity.PNG",
+  "effects": []
 }
