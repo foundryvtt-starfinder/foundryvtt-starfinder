@@ -1,10 +1,6 @@
 {
   "_id": "MmPKosFJAHgEbz6u",
-  "name": "Slice Reality*",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Slice Reality",
   "type": "spell",
   "data": {
     "description": {
@@ -12,40 +8,40 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Character Operations Manual pg. 141",
+    "source": "COM pg. 141",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "instantaneous",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "1 creature + 1 creature/3 levels",
       "type": ""
     },
     "area": {
       "value": null,
-      "units": "",
+      "units": null,
       "shape": "",
       "effect": ""
     },
     "range": {
       "value": 100,
       "units": "ft",
-      "additional": "10",
+      "additional": "10 ft.",
       "per": "level"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "save",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -53,19 +49,24 @@
       "effect": ""
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "2d6",
+          ""
+        ]
+      ]
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "",
+      "descriptor": "half"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 2,
     "school": "evo",
-    "sr": false,
+    "sr": true,
     "dismissible": false,
     "concentration": false,
     "materials": {
@@ -88,5 +89,6 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/slice_reality.png"
+  "img": "systems/sfrpg/icons/spells/slice_reality.png",
+  "effects": []
 }
