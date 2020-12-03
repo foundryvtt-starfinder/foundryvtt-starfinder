@@ -1,51 +1,47 @@
 {
   "_id": "Enyvti4Zc7DyeRKt",
-  "name": "Synaptic Pulse, Greater*",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Synaptic Pulse, Greater",
   "type": "spell",
   "data": {
     "description": {
-      "value": "<p style=\"text-align: justify;\">You stun all creatures in range for 1d4 rounds. With a successful Will saving throw, a creature is instead sickened for 1 round.</p>",
+      "value": "<p style=\"text-align: justify;\">You stun all creatures in range for [[1d4]] rounds. With a successful Will saving throw, a creature is instead sickened for 1 round.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "",
+    "source": "CRB pg. 380",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "1d4 rounds",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "",
       "type": ""
     },
     "area": {
-      "value": null,
-      "units": "",
-      "shape": "",
-      "effect": ""
+      "value": 20,
+      "units": "ft",
+      "shape": "sphere",
+      "effect": "spread"
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "personal",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "save",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -57,15 +53,15 @@
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "will",
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 5,
-    "school": "abj",
-    "sr": false,
+    "school": "enc",
+    "sr": true,
     "dismissible": false,
     "concentration": false,
     "materials": {
@@ -88,5 +84,6 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/synaptic_pulse_greater.png"
+  "img": "systems/sfrpg/icons/spells/synaptic_pulse_greater.png",
+  "effects": []
 }
