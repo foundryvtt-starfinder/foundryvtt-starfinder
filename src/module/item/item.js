@@ -74,9 +74,6 @@ export class ItemSFRPG extends Item {
             labels.kac = data.armor.kac ? `${data.armor.kac} KAC` : "";
         }
 
-        else if (itemData.type === "class") {
-        }
-
         // Activated Items
         if (data.hasOwnProperty("activation")) {
 
