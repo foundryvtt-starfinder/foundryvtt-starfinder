@@ -767,7 +767,6 @@ export class ActorItemHelper {
             // Migrate original format
             let migrate = propertiesToTest.filter(x => itemData.hasOwnProperty(x));
             if (migrate.length > 0) {
-                console.log("> Migrating " + item.name);
                 //console.log(migrate);
 
                 let container = {
@@ -855,6 +854,7 @@ export class ActorItemHelper {
             }
 
             if (isDirty) {
+                console.log("> Migrating " + item.name);
                 await this.actor.updateOwnedItem({ _id: item._id, data: itemData});
             }
         }
