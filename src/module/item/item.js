@@ -249,7 +249,8 @@ export class ItemSFRPG extends Item {
         if (fn) fn.bind(this)(data, labels, props);
 
         // General equipment properties
-        if (data.hasOwnProperty("equipped") && !["goods", "augmentation", "technological", "upgrade"].includes(this.data.type)) {
+        const equippableTypes = ["weapon", "equipment", "shield"];
+        if (data.hasOwnProperty("equipped") && equippableTypes.includes(this.data.type)) {
             props.push(
                 data.equipped ? "Equipped" : "Not Equipped",
                 data.proficient ? "Proficient" : "Not Proficient",
@@ -355,6 +356,34 @@ export class ItemSFRPG extends Item {
     _technologicalChatData(data, labels, props) {
         props.push(
             "Technological",
+            data.bulk ? `Bulk ${data.bulk}` : null,
+            data.hands ? `Hands ${data.hands}` : null
+        );
+    }
+
+    /**
+     * Prepare chat card data for hybrid type items
+     * @param {Object} data The items data
+     * @param {Object} labels Any labels for the item
+     * @param {Object} props The items properties
+     */
+    _hybridChatData(data, labels, props) {
+        props.push(
+            "Hybrid",
+            data.bulk ? `Bulk ${data.bulk}` : null,
+            data.hands ? `Hands ${data.hands}` : null
+        );
+    }
+
+    /**
+     * Prepare chat card data for magic type items
+     * @param {Object} data The items data
+     * @param {Object} labels Any labels for the item
+     * @param {Object} props The items properties
+     */
+    _magicChatData(data, labels, props) {
+        props.push(
+            "Magic",
             data.bulk ? `Bulk ${data.bulk}` : null,
             data.hands ? `Hands ${data.hands}` : null
         );

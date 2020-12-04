@@ -95,7 +95,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasCapacity = data.item.data.hasOwnProperty("capacity");
 
         // Physical items
-        const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "upgrade", "augmentation", "shield"];
+        const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "magic", "hybrid", "upgrade", "augmentation", "shield", "weaponAccessory"];
         data.isPhysicalItem = physicalItems.includes(data.item.type);
 
         // Item attributes
