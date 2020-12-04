@@ -186,7 +186,7 @@ export class ItemSheetSFRPG extends ItemSheet {
      * @private
      */
     _getItemStatus(item) {
-        if (["weapon", "equipment"].includes(item.type)) return item.data.equipped ? "Equipped" : "Unequipped";
+        if (["weapon", "equipment", "shield"].includes(item.type)) return item.data.equipped ? "Equipped" : "Unequipped";
         else if (item.type === "starshipWeapon") return item.data.mount.mounted ? "Mounted" : "Not Mounted";
         else if (item.type === "augmentation") return `${item.data.type} (${item.data.system})`;
     }
