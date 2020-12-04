@@ -1428,7 +1428,7 @@ SFRPG.itemTypes = {
     "class": "SFRPG.Items.Categories.Classes",
     "consumable": "SFRPG.Items.Categories.Consumables",
     "container": "SFRPG.Items.Categories.Containers",
-    "equipment": "SFRPG.Items.Categories.Equipment",
+    "equipment": "SFRPG.Items.Categories.Armor",
     "feat": "SFRPG.Items.Categories.Feats",
     "fusion": "ITEM.TypeFusion",
     "goods": "SFRPG.Items.Categories.Goods",
