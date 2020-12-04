@@ -115,7 +115,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.sizeModifier = sizeModifier;
 
                 data.placeholders.savingThrow = {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @actor.abilities.dex.mod`;
+                data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
                 data.placeholders.savingThrow.value = this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula);
             } else {
                 let itemLevel = this.parseNumber(itemData.level, 1);
@@ -129,7 +129,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.sizeModifier = sizeModifier;
 
                 data.placeholders.savingThrow = {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @actor.abilities.dex.mod`;
+                data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
                 data.placeholders.savingThrow.value = this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula);
             }
         }
@@ -166,12 +166,12 @@ export class ItemSheetSFRPG extends ItemSheet {
     _computeSavingThrowValue(itemLevel, formula) {
         try {
             const rollData = {
-                actor: this.item.actor ? duplicate(this.item.actor.data.data) : {abilities: {dex: {mod: 0}}},
+                owner: this.item.actor ? duplicate(this.item.actor.data.data) : {abilities: {dex: {mod: 0}}},
                 item: duplicate(this.item.data.data),
                 itemLevel: itemLevel
             };
-            if (!rollData.actor.abilities?.dex?.mod) {
-                rollData.actor.abilities = {dex: {mod: 0}};
+            if (!rollData.owner.abilities?.dex?.mod) {
+                rollData.owner.abilities = {dex: {mod: 0}};
             }
             const saveRoll = new Roll(formula, rollData).roll();
             return saveRoll.total;

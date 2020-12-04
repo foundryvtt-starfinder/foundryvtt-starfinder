@@ -626,9 +626,9 @@ export class ItemSFRPG extends Item {
         }
         
         const rollContext = new RollContext();
-        rollContext.addContext("actor", this.actor);
+        rollContext.addContext("owner", this.actor);
         rollContext.addContext("item", this, itemData);
-        rollContext.setMainContext("actor");
+        rollContext.setMainContext("owner");
 
         this.actor?.setupRollContexts(rollContext);
 
@@ -861,9 +861,9 @@ export class ItemSFRPG extends Item {
         const title    = game.settings.get('sfrpg', 'useCustomChatCard') ? rollString : `${rollString} - ${this.data.name}`;
         
         const rollContext = new RollContext();
-        rollContext.addContext("actor", this.actor, rollData);
+        rollContext.addContext("owner", this.actor, rollData);
         rollContext.addContext("item", this, itemData);
-        rollContext.setMainContext("actor");
+        rollContext.setMainContext("owner");
 
         this.actor?.setupRollContexts(rollContext);
 
