@@ -128,35 +128,26 @@ export class ItemSFRPG extends Item {
     _getSaveLabel(save, actorData, itemData) {
         if (!save?.type) return "";
         
-        let dcFormula = save.dc || `10 + ${Math.floor((itemData.attributes?.sturdy ? itemData.level + 2 : itemData.level) / 2)} + ${this.actor?.data?.data?.abilities?.dex ? this.actor.data.data.abilities.dex.mod : 0}`;
-        if (dcFormula && Number.isNaN(Number(dcFormula))) {
-            const rollData = duplicate(actorData?.data || { abilities: { dex: { mod: 0 }}});
-            if (rollData.abilities) {
-                rollData.abilities.key = {
-                    mod: 0
-                };
-            }
-            else {
-                rollData.abilities = { key: { mod: 0 } };
-            }
+        let dcFormula = save.dc.toString();
+        if (dcFormula) {
+            const rollContext = new RollContext();
+            rollContext.addContext("owner", this.actor);
+            rollContext.addContext("item", this, itemData);
+            rollContext.setMainContext("owner");
+    
+            this.actor?.setupRollContexts(rollContext);
 
-            if (!rollData?.abilities?.dex?.mod) {
-                const mergedRollData = mergeObject(rollData, {
-                    abilities: {dex: {mod: 0}}
-                });
-                rollData.abilities = mergedRollData.abilities;
-            }
+            const rollResult = DiceSFRPG.createRoll({
+                rollContext: rollContext,
+                rollFormula: dcFormula,
+                mainDie: 'd0',
+                dialogOptions: { skipUI: true }
+            });
 
-            let keyAbility = actorData?.data?.attributes?.keyability;
-            if (keyAbility) {
-                rollData.abilities.key = duplicate(actorData.data.abilities[keyAbility]);
-            }
-            rollData.item = itemData;
-
-            let saveRoll = new Roll(dcFormula, rollData).roll();
-            return save.type ? `DC ${saveRoll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}` : "";
+            const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+            return returnValue;
         } else {
-            return save.type ? `DC ${save.dc || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}` : "";
+            return `DC ${save.dc || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
         }
     }
 
@@ -468,7 +459,7 @@ export class ItemSFRPG extends Item {
 
         // Spell saving throw text
         const abl = ad.attributes.keyability || "int";
-        if (this.hasSave && !data.save.dc) data.save.dc = 10 + data.level + ad.abilities[abl].mod;
+        if (this.hasSave && !data.save.dc) data.save.dc = `10 + @owner.details.level.value + @owner.abilities.${abl}.mod`;
         labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Spell properties
@@ -487,7 +478,7 @@ export class ItemSFRPG extends Item {
 
         // Spell saving throw text
         const abl = data.ability || ad.attributes.keyability || "str";
-        if (this.hasSave && !data.save.dc) data.save.dc = 10 + ad.details.level + ad.abilities[abl].mod;
+        if (this.hasSave && !data.save.dc) data.save.dc = `10 + @owner.details.level.value + @owner.abilities.${abl}.mod`;
         labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Feat properties

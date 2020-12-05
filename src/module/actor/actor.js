@@ -865,19 +865,25 @@ export class ActorSFRPG extends Actor {
                 const crew = [];
                 if (allCrewMates.includes(crewType)) {
                     for (const crewEntries of Object.values(this.data.data.crew)) {
-                        for (const actor of crewEntries.actors) {
+                        const crewList = crewEntries.actors;
+                        if (crewList && crewList.length > 0) {
+                            for (const actor of crewList) {
+                                const contextId = crewType + crewCount;
+                                rollContext.addContext(contextId, actor);
+                                crew.push(contextId);
+                                crewCount += 1;
+                            }
+                        }
+                    }
+                } else {
+                    const crewList = this.data.data.crew[crewType].actors;
+                    if (crewList && crewList.length > 0) {
+                        for (const actor of crewList) {
                             const contextId = crewType + crewCount;
                             rollContext.addContext(contextId, actor);
                             crew.push(contextId);
                             crewCount += 1;
                         }
-                    }
-                } else {
-                    for (const actor of this.data.data.crew[crewType].actors) {
-                        const contextId = crewType + crewCount;
-                        rollContext.addContext(contextId, actor);
-                        crew.push(contextId);
-                        crewCount += 1;
                     }
                 }
     
