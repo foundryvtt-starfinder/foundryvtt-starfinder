@@ -328,9 +328,11 @@ export class ActorSFRPG extends Actor {
                     break;
                 case "upgrade":
                     {
-                        const container = getItemContainer(this.data.items, item._id);
-                        if (container && container.type === "equipment" && container.data.equipped) {
-                            modifiersToConcat = item.data.modifiers;
+                        if (!ignoreEquipment) {
+                            const container = getItemContainer(this.data.items, item._id);
+                            if (container && container.type === "equipment" && container.data.equipped) {
+                                modifiersToConcat = item.data.modifiers;
+                            }
                         }
                         break;
                     }
