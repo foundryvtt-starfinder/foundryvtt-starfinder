@@ -849,7 +849,7 @@ export class ActorSFRPG extends Actor {
     }
 
     setupRollContexts(rollContext, desiredSelectors = []) {
-        if (this.data.type === "starship") {
+        if (this.data.type === "starship" && this.data.data.crew) {
             if (this.data.data.crew.captain?.actors?.length > 0) {
                 rollContext.addContext("captain", this.data.data.crew.captain.actors[0]);
             }
