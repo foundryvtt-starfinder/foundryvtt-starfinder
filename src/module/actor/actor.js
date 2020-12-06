@@ -7,6 +7,7 @@ import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modif
 import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
 import { DroneRepairDialog } from "../apps/drone-repair-dialog.js";
+import { getItemContainer } from "./actor-inventory.js"
 
 import { } from "./starship-update.js"
 
@@ -325,6 +326,14 @@ export class ActorSFRPG extends Actor {
                         modifiersToConcat = item.data.modifiers;
                     }
                     break;
+                case "upgrade":
+                    {
+                        const container = getItemContainer(this.data.items, item._id);
+                        if (container) {
+                            modifiersToConcat = item.data.modifiers;
+                        }
+                        break;
+                    }
                 case "augmentation":
                     modifiersToConcat = item.data.modifiers;
                     break;
@@ -334,6 +343,7 @@ export class ActorSFRPG extends Actor {
                     }
                     break;
                 case "equipment":
+                case "shield":
                 case "weapon":
                     if (!ignoreEquipment && item.data.equipped) {
                         modifiersToConcat = item.data.modifiers;

@@ -317,6 +317,10 @@ export function getChildItems(actor, item) {
     return actor.items.filter(x => item.data.data.container.contents.find(y => y.id === x._id));
 }
 
+export function getItemContainer(items, itemId) {
+    return items.find(x => x.data.container?.contents?.find(y => y.id === itemId) !== undefined);
+}
+
 /**
  * Checks if two given items can be merged.
  * @param {Item} itemA 
