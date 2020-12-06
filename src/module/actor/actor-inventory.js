@@ -776,7 +776,7 @@ export class ActorItemHelper {
 
         const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
         for (const item of this.actor.items) {
-            const itemData = item.data.data;
+            const itemData = duplicate(item.data.data);
             let isDirty = false;
 
             // Migrate original format
