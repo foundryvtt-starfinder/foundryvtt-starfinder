@@ -336,6 +336,17 @@ export class ActorSFRPG extends Actor {
                         }
                         break;
                     }
+                case "fusion":
+                case "weaponAccessory":
+                    {
+                        if (!ignoreEquipment) {
+                            const container = getItemContainer(this.data.items, item._id);
+                            if (container && container.type === "weapon" && container.data.equipped) {
+                                modifiersToConcat = item.data.modifiers;
+                            }
+                        }
+                        break;
+                    }
                 case "augmentation":
                     modifiersToConcat = item.data.modifiers;
                     break;
