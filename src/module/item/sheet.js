@@ -93,9 +93,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasLevel = data.item.data.hasOwnProperty("level") && data.item.type !== "spell";
         data.hasHands = data.item.data.hasOwnProperty("hands");
         data.hasCapacity = data.item.data.hasOwnProperty("capacity");
+        data.hasProficiency = data.item.data.proficient === true || data.item.data.proficient === false;
 
         // Physical items
-        const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "upgrade", "augmentation", "shield"];
+        const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "magic", "hybrid", "upgrade", "augmentation", "shield", "weaponAccessory"];
         data.isPhysicalItem = physicalItems.includes(data.item.type);
 
         // Item attributes
@@ -115,7 +116,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.sizeModifier = sizeModifier;
 
                 data.placeholders.savingThrow = {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @actor.abilities.dex.mod`;
+                data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
                 data.placeholders.savingThrow.value = this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula);
             } else {
                 let itemLevel = this.parseNumber(itemData.level, 1);
@@ -129,7 +130,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.sizeModifier = sizeModifier;
 
                 data.placeholders.savingThrow = {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @actor.abilities.dex.mod`;
+                data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
                 data.placeholders.savingThrow.value = this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula);
             }
         }
@@ -166,12 +167,12 @@ export class ItemSheetSFRPG extends ItemSheet {
     _computeSavingThrowValue(itemLevel, formula) {
         try {
             const rollData = {
-                actor: this.item.actor ? duplicate(this.item.actor.data.data) : {abilities: {dex: {mod: 0}}},
+                owner: this.item.actor ? duplicate(this.item.actor.data.data) : {abilities: {dex: {mod: 0}}},
                 item: duplicate(this.item.data.data),
                 itemLevel: itemLevel
             };
-            if (!rollData.actor.abilities?.dex?.mod) {
-                rollData.actor.abilities = {dex: {mod: 0}};
+            if (!rollData.owner.abilities?.dex?.mod) {
+                rollData.owner.abilities = {dex: {mod: 0}};
             }
             const saveRoll = new Roll(formula, rollData).roll();
             return saveRoll.total;
@@ -186,7 +187,7 @@ export class ItemSheetSFRPG extends ItemSheet {
      * @private
      */
     _getItemStatus(item) {
-        if (["weapon", "equipment"].includes(item.type)) return item.data.equipped ? "Equipped" : "Unequipped";
+        if (["weapon", "equipment", "shield"].includes(item.type)) return item.data.equipped ? "Equipped" : "Unequipped";
         else if (item.type === "starshipWeapon") return item.data.mount.mounted ? "Mounted" : "Not Mounted";
         else if (item.type === "augmentation") return `${item.data.type} (${item.data.system})`;
     }

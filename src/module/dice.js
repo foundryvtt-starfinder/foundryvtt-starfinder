@@ -157,13 +157,9 @@ export class DiceSFRPG {
         const formula = rollFormula || parts.join(" + ");
 
         const tree = new RollTree(options);
-        return new Promise((resolve) => {
+        if (dialogOptions?.skipUI) {
+            let result = null;
             tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
-                if (button === "cancel") {
-                    resolve(null);
-                    return;
-                }
-
                 let dieRoll = "1" + mainDie;
                 if (mainDie == "d20") {
                     if (button === "Disadvantage") {
@@ -186,9 +182,43 @@ export class DiceSFRPG {
                     }
                 }
 
-                resolve({roll: roll, formula: finalFormula});
+                result = {roll: roll, formula: finalFormula};
             });
-        });
+            return result;
+        } else {
+            return new Promise((resolve) => {
+                tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+                    if (button === "cancel") {
+                        resolve(null);
+                        return;
+                    }
+    
+                    let dieRoll = "1" + mainDie;
+                    if (mainDie == "d20") {
+                        if (button === "Disadvantage") {
+                            dieRoll = "2d20kl";
+                        } else if (button === "Advantage") {
+                            dieRoll = "2d20kh";
+                        }
+                    }
+    
+                    finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
+                    finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+    
+                    let roll = new Roll(finalFormula.finalRoll).roll();
+    
+                    // Flag critical thresholds
+                    for (let d of roll.dice) {
+                        if (d.faces === 20) {
+                            d.options.critical = critical;
+                            d.options.fumble = fumble;
+                        }
+                    }
+    
+                    resolve({roll: roll, formula: finalFormula});
+                });
+            });
+        }
     }
 
     /* -------------------------------------------- */
@@ -378,6 +408,33 @@ class RollTree {
         }
 
         const allRolledMods = this.populate();
+
+        if (this.options.skipUI) {
+            const button = this.options.defaultButton || (this.options.buttons ? Object.values(this.options.buttons)[0].label : "Roll");
+            const rollMode = game.settings.get("core", "rollMode");
+            const bonus = "";
+
+            for (const [key, value] of Object.entries(this.nodes)) {
+                if (value.referenceModifier) {
+                    value.isEnabled = value.referenceModifier.enabled;
+                }
+            }
+
+            const finalRollFormula = this.rootNode.resolve();
+            if (bonus) {
+                finalRollFormula.finalRoll += " + " + bonus;
+                finalRollFormula.formula += " + [Additional Bonus]";
+            }
+
+            if (this.options.debug) {
+                console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
+            }
+
+            if (callback) {
+                callback(button, rollMode, finalRollFormula);
+            }
+            return {button: button, rollMode: rollMode, finalRollFormula: finalRollFormula};
+        }
 
         return this.displayUI(formula, contexts, allRolledMods).then(([button, rollMode, bonus]) => {
             if (button === null) {
@@ -834,7 +891,6 @@ export class RollContext {
         if (!variable) return null;
 
         const [context, key] = this.getContextForVariable(variable);
-        console.log(context);
 
         let result = RollContext._readValue(context.data, key);
         if (!result) {

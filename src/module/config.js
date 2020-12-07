@@ -634,12 +634,13 @@ SFRPG.augmentationTypes = {
 };
 
 SFRPG.consumableTypes = {
-    "serum"   : "SFRPG.ConsumableTypes.Serum",
-    "ampoule" : "SFRPG.ConsumableTypes.Ampoule",
-    "spellGem": "SFRPG.ConsumableTypes.SpellGem",
-    "drugs"   : "SFRPG.ConsumableTypes.Drugs",
-    "medicne" : "SFRPG.ConsumableTypes.Medicine",
-    "poison"  : "SFRPG.ConsumableTypes.Poison"
+    "serum"    : "SFRPG.ConsumableTypes.Serum",
+    "ampoule"  : "SFRPG.ConsumableTypes.Ampoule",
+    "spellGem" : "SFRPG.ConsumableTypes.SpellGem",
+    "drugs"    : "SFRPG.ConsumableTypes.Drugs",
+    "medicne"  : "SFRPG.ConsumableTypes.Medicine",
+    "poison"   : "SFRPG.ConsumableTypes.Poison",
+    "foodDrink": "SFRPG.ConsumableTypes.FoodDrink"
 };
 
 SFRPG.augmentationSytems = {
@@ -1427,7 +1428,7 @@ SFRPG.itemTypes = {
     "class": "SFRPG.Items.Categories.Classes",
     "consumable": "SFRPG.Items.Categories.Consumables",
     "container": "SFRPG.Items.Categories.Containers",
-    "equipment": "SFRPG.Items.Categories.Equipment",
+    "equipment": "SFRPG.Items.Categories.Armor",
     "feat": "SFRPG.Items.Categories.Feats",
     "fusion": "ITEM.TypeFusion",
     "goods": "SFRPG.Items.Categories.Goods",

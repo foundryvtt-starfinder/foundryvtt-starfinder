@@ -74,9 +74,6 @@ export class ItemSFRPG extends Item {
             labels.kac = data.armor.kac ? `${data.armor.kac} KAC` : "";
         }
 
-        else if (itemData.type === "class") {
-        }
-
         // Activated Items
         if (data.hasOwnProperty("activation")) {
 
@@ -129,37 +126,28 @@ export class ItemSFRPG extends Item {
     }
 
     _getSaveLabel(save, actorData, itemData) {
-        if (!save?.type) return "";
+        if (!save?.type || !save?.dc) return "";
         
-        let dcFormula = save.dc || `10 + ${Math.floor((itemData.attributes?.sturdy ? itemData.level + 2 : itemData.level) / 2)} + ${this.actor?.data?.data?.abilities?.dex ? this.actor.data.data.abilities.dex.mod : 0}`;
-        if (dcFormula && Number.isNaN(Number(dcFormula))) {
-            const rollData = duplicate(actorData?.data || { abilities: { dex: { mod: 0 }}});
-            if (rollData.abilities) {
-                rollData.abilities.key = {
-                    mod: 0
-                };
-            }
-            else {
-                rollData.abilities = { key: { mod: 0 } };
-            }
+        let dcFormula = save.dc.toString();
+        if (dcFormula) {
+            const rollContext = new RollContext();
+            rollContext.addContext("owner", this.actor);
+            rollContext.addContext("item", this, itemData);
+            rollContext.setMainContext("owner");
+    
+            this.actor?.setupRollContexts(rollContext);
 
-            if (!rollData?.abilities?.dex?.mod) {
-                const mergedRollData = mergeObject(rollData, {
-                    abilities: {dex: {mod: 0}}
-                });
-                rollData.abilities = mergedRollData.abilities;
-            }
+            const rollResult = DiceSFRPG.createRoll({
+                rollContext: rollContext,
+                rollFormula: dcFormula,
+                mainDie: 'd0',
+                dialogOptions: { skipUI: true }
+            });
 
-            let keyAbility = actorData?.data?.attributes?.keyability;
-            if (keyAbility) {
-                rollData.abilities.key = duplicate(actorData.data.abilities[keyAbility]);
-            }
-            rollData.item = itemData;
-
-            let saveRoll = new Roll(dcFormula, rollData).roll();
-            return save.type ? `DC ${saveRoll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}` : "";
+            const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+            return returnValue;
         } else {
-            return save.type ? `DC ${save.dc || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}` : "";
+            return `DC ${save.dc || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
         }
     }
 
@@ -249,7 +237,8 @@ export class ItemSFRPG extends Item {
         if (fn) fn.bind(this)(data, labels, props);
 
         // General equipment properties
-        if (data.hasOwnProperty("equipped") && !["goods", "augmentation", "technological", "upgrade"].includes(this.data.type)) {
+        const equippableTypes = ["weapon", "equipment", "shield"];
+        if (data.hasOwnProperty("equipped") && equippableTypes.includes(this.data.type)) {
             props.push(
                 data.equipped ? "Equipped" : "Not Equipped",
                 data.proficient ? "Proficient" : "Not Proficient",
@@ -361,6 +350,34 @@ export class ItemSFRPG extends Item {
     }
 
     /**
+     * Prepare chat card data for hybrid type items
+     * @param {Object} data The items data
+     * @param {Object} labels Any labels for the item
+     * @param {Object} props The items properties
+     */
+    _hybridChatData(data, labels, props) {
+        props.push(
+            "Hybrid",
+            data.bulk ? `Bulk ${data.bulk}` : null,
+            data.hands ? `Hands ${data.hands}` : null
+        );
+    }
+
+    /**
+     * Prepare chat card data for magic type items
+     * @param {Object} data The items data
+     * @param {Object} labels Any labels for the item
+     * @param {Object} props The items properties
+     */
+    _magicChatData(data, labels, props) {
+        props.push(
+            "Magic",
+            data.bulk ? `Bulk ${data.bulk}` : null,
+            data.hands ? `Hands ${data.hands}` : null
+        );
+    }
+
+    /**
      * Prepare chat card data for armor upgrades
      * @param {Object} data The items data
      * @param {Object} labels Any labels for the item
@@ -442,7 +459,7 @@ export class ItemSFRPG extends Item {
 
         // Spell saving throw text
         const abl = ad.attributes.keyability || "int";
-        if (this.hasSave && !data.save.dc) data.save.dc = 10 + data.level + ad.abilities[abl].mod;
+        if (this.hasSave && !data.save.dc) data.save.dc = `10 + @owner.details.level.value + @owner.abilities.${abl}.mod`;
         labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Spell properties
@@ -461,7 +478,7 @@ export class ItemSFRPG extends Item {
 
         // Spell saving throw text
         const abl = data.ability || ad.attributes.keyability || "str";
-        if (this.hasSave && !data.save.dc) data.save.dc = 10 + ad.details.level + ad.abilities[abl].mod;
+        if (this.hasSave && !data.save.dc) data.save.dc = `10 + @owner.details.level.value + @owner.abilities.${abl}.mod`;
         labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Feat properties
@@ -597,9 +614,9 @@ export class ItemSFRPG extends Item {
         }
         
         const rollContext = new RollContext();
-        rollContext.addContext("actor", this.actor);
+        rollContext.addContext("owner", this.actor);
         rollContext.addContext("item", this, itemData);
-        rollContext.setMainContext("actor");
+        rollContext.setMainContext("owner");
 
         this.actor?.setupRollContexts(rollContext);
 
@@ -832,9 +849,9 @@ export class ItemSFRPG extends Item {
         const title    = game.settings.get('sfrpg', 'useCustomChatCard') ? rollString : `${rollString} - ${this.data.name}`;
         
         const rollContext = new RollContext();
-        rollContext.addContext("actor", this.actor, rollData);
+        rollContext.addContext("owner", this.actor, rollData);
         rollContext.addContext("item", this, itemData);
-        rollContext.setMainContext("actor");
+        rollContext.setMainContext("owner");
 
         this.actor?.setupRollContexts(rollContext);
 

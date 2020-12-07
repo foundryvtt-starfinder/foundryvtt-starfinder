@@ -1,0 +1,18 @@
+
+            <div class="form-group stacked">
+                <label>{{ localize "SFRPG.Items.EquipmentStatus" }}</label>
+                {{#if hasProficiency}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SFRPG.Items.Proficient" }}
+                </label>
+                {{/if}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SFRPG.Items.Identified" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> {{ localize "SFRPG.Items.Attuned" }}
+                </label>
+            </div>

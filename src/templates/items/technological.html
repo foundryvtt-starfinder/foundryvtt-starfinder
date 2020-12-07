@@ -7,6 +7,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
         <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+        <a class="item" data-tab="modifiers">{{ localize "SFRPG.Modifiers" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -14,6 +15,11 @@
         {{> "systems/sfrpg/templates/items/parts/item-description.html"}}
 
         <div class="tab details" data-tab="details" data-group="primary">
+            <h3 class="form-header">{{ localize "SFRPG.Items.Technological.Details" }}</h3>
+            
+            {{!-- Equipment Status --}}
+            {{> "systems/sfrpg/templates/items/parts/item-status.html"}}
+
             <h3 class="form-header">{{ localize "SFRPG.CapacityUsage" }}</h3>
             {{> "systems/sfrpg/templates/items/parts/item-capacity.html"}}
 
@@ -21,6 +27,9 @@
 
             {{> "systems/sfrpg/templates/items/parts/physical-item-details.html"}}
         </div>
+
+        {{!-- Modifiers Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-modifiers.html"}}
 
     </section>
 </form>
