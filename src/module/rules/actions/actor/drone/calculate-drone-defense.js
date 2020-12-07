@@ -6,7 +6,7 @@ export default function (engine) {
 
         // We only care about the first chassis
         let activeChassis = null;
-        for (const chassis of fact.classes) {
+        for (const chassis of fact.chassis) {
             activeChassis = chassis;
             break;
         }

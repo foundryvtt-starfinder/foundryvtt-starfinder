@@ -43,6 +43,18 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         return data;
     }
 
+    async _render(...args) {
+        await super._render(...args);
+
+        tippy('[data-tippy-content]', {
+            allowHTML: true,
+            arrow: false,
+            placement: 'top-start',
+            duration: [500, null],
+            delay: [800, null]
+        });
+    }
+
     /**
      * Toggle the visibility of skills on the NPC sheet.
      * 

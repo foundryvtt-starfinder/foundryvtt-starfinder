@@ -41,7 +41,11 @@
             </div>
             <div class="item-detail item-action">
                 {{#if item.data.activation.type }}
-                    {{item.labels.activation}}
+                    {{#if item.data.isActive}}
+                    <button class="tag featDeactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
+                    {{else}}
+                    <button class="tag featActivate">{{item.labels.activation}}</button>
+                    {{/if}}
                 {{/if}}
                 {{#if item.hasCapacity}}
                     {{item.data.usage.value}} / {{item.data.usage.per}}

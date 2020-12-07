@@ -852,28 +852,34 @@
     "Item": {
         "types": [
             "archetypes",
-            "equipment",
-            "upgrade",
             "asi",
-            "augmentation",
             "class",
-            "consumable",
-            "container",
+            "race",
+
+            "feat",
+
             "chassis",
             "mod",
-            "feat",
-            "goods",
-            "race",
-            "shield",
-            "spell",
+
             "starshipAction",
             "starshipComputer",
             "starshipWeapon",
             "starshipFrame",
+
+            "augmentation",
+            "consumable",
+            "container",
+            "equipment",
+            "fusion",
+            "goods",
+            "hybrid",
+            "magic",
+            "shield",
+            "spell",
             "technological",
             "theme",            
+            "upgrade",
             "weapon",
-            "fusion",
             "weaponAccessory"
         ],
         "templates": {
@@ -950,7 +956,8 @@
                     "value": 0,
                     "max": 0,
                     "per": null
-                }
+                },
+                "isActive": null
             },
             "action": {
                 "ability": null,
@@ -1015,7 +1022,8 @@
                         "affectsEncumbrance": true,
                         "weightProperty": "level"
                     }
-                ]
+                ],
+                "isOpen": true
             }
         },
         "equipment": {
@@ -1058,11 +1066,12 @@
                         "affectsEncumbrance": true,
                         "weightProperty": ""
                     }
-                ]
+                ],
+                "isOpen": true
             }
         },
         "consumable": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers", "container"],
             "consumableType": "serum",
             "uses": {
                 "value": 0,
@@ -1082,7 +1091,8 @@
                         "affectsEncumbrance": false,
                         "weightProperty": "bulk"
                     }
-                ]
+                ],
+                "isOpen": true
             }
         },
         "goods": {
@@ -1102,7 +1112,8 @@
                         "affectsEncumbrance": true,
                         "weightProperty": "bulk"
                     }
-                ]
+                ],
+                "isOpen": true
             }
         },
         "class": {
@@ -1192,6 +1203,14 @@
             }
         },
         "technological": {
+            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers"],
+            "hands": 0
+        },
+        "hybrid": {
+            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers"],
+            "hands": 0
+        },
+        "magic": {
             "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers"],
             "hands": 0
         },
@@ -1367,7 +1386,8 @@
                         "affectsEncumbrance": true,
                         "weightProperty": "level"
                     }
-                ]
+                ],
+                "isOpen": true
             }
         },
         "weaponAccessory": {

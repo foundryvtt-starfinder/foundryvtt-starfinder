@@ -317,6 +317,10 @@ export function getChildItems(actor, item) {
     return actor.items.filter(x => item.data.data.container.contents.find(y => y.id === x._id));
 }
 
+export function getItemContainer(items, itemId) {
+    return items.find(x => x.data.container?.contents?.find(y => y.id === itemId) !== undefined);
+}
+
 /**
  * Checks if two given items can be merged.
  * @param {Item} itemA 
@@ -354,20 +358,24 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
     for (let storageOption of container.data.data.container.storage) {
         index += 1;
         if (storageOption.amount == 0) {
+            //console.log(`Skipping storage ${index} because it has a 0 amount.`);
             continue;
         }
 
         if (!storageOption.acceptsType.includes(itemToAdd.type)) {
+            //console.log(`Skipping storage ${index} because it doesn't accept ${itemToAdd.type}.`);
             continue;
         }
 
         if (storageOption.weightProperty && !itemToAdd.data.data[storageOption.weightProperty]) {
+            //console.log(`Skipping storage ${index} because it does not match the weight settings.`);
             continue;
         }
 
         if (storageOption.type === "slot") {
             let numItemsInStorage = container.data.data.container.contents.filter(x => x.index === index).length;
             if (numItemsInStorage >= storageOption.amount) {
+                //console.log(`Skipping storage ${index} because it has too many items in the slots already. (${numItemsInStorage} / ${storageOption.amount})`);
                 continue;
             }
         }
@@ -726,6 +734,13 @@ export class ActorItemHelper {
             }
         }
 
+        /** Clean up parent container, if deleted from container. */
+        const container = this.actor.items.find(x => x.data.data?.container?.contents?.find(y => y.id === itemId) !== undefined);
+        if (container) {
+            const newContents = container.data.data.container.contents.filter(x => x.id !== itemId);
+            await container.update({"data.container.contents": newContents});
+        }
+
         return this.actor.deleteOwnedItem(itemsToDelete);
     }
 
@@ -760,14 +775,13 @@ export class ActorItemHelper {
         if (!this.isValid()) return;
 
         const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
-        for (let item of this.actor.items) {
-            let itemData = item.data.data;
+        for (const item of this.actor.items) {
+            const itemData = duplicate(item.data.data);
             let isDirty = false;
 
             // Migrate original format
             let migrate = propertiesToTest.filter(x => itemData.hasOwnProperty(x));
             if (migrate.length > 0) {
-                console.log("> Migrating " + item.name);
                 //console.log(migrate);
 
                 let container = {
@@ -854,7 +868,16 @@ export class ActorItemHelper {
                 }
             }
 
+            /** Ensure deleted items are cleaned up. */
+            const newContents = itemData.container?.contents?.filter(x => this.actor.items.find(ownedItem => ownedItem._id === x.id));
+            if (newContents?.length !== itemData.container?.contents?.length) {
+                //console.log([`Actor ${this.actor.name} has deleted item(s) for ${item.name}`, item, itemData.container.contents, newContents]);
+                itemData.container.contents = newContents;
+                isDirty = true;
+            }
+
             if (isDirty) {
+                console.log("> Migrating " + item.name);
                 await this.actor.updateOwnedItem({ _id: item._id, data: itemData});
             }
         }
