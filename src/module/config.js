@@ -569,13 +569,13 @@ SFRPG.conditionTypes = {
     "exhausted": "SFRPG.ConditionsExhausted",
     "fascinated": "SFRPG.ConditionsFascinated",
     "fatigued": "SFRPG.ConditionsFatigued",
-    "flatfooted": "SFRPG.ConditionsFlatFooted",
+    "flat-footed": "SFRPG.ConditionsFlatFooted",
     "frightened": "SFRPG.ConditionsFrightened",
     "grappled": "SFRPG.ConditionsGrappled",
     "helpless": "SFRPG.ConditionsHelpless",
     "nauseated": "SFRPG.ConditionsNauseated",
-    "offkilter": "SFRPG.ConditionsOffKilter",
-    "offtarget": "SFRPG.ConditionsOffTarget",
+    "off-kilter": "SFRPG.ConditionsOffKilter",
+    "off-target": "SFRPG.ConditionsOffTarget",
     "overburdened": "SFRPG.ConditionsOverburdened",
     "panicked": "SFRPG.ConditionsPanicked",
     "paralyzed": "SFRPG.ConditionsParalyzed",
@@ -634,12 +634,13 @@ SFRPG.augmentationTypes = {
 };
 
 SFRPG.consumableTypes = {
-    "serum"   : "SFRPG.ConsumableTypes.Serum",
-    "ampoule" : "SFRPG.ConsumableTypes.Ampoule",
-    "spellGem": "SFRPG.ConsumableTypes.SpellGem",
-    "drugs"   : "SFRPG.ConsumableTypes.Drugs",
-    "medicne" : "SFRPG.ConsumableTypes.Medicine",
-    "poison"  : "SFRPG.ConsumableTypes.Poison"
+    "serum"    : "SFRPG.ConsumableTypes.Serum",
+    "ampoule"  : "SFRPG.ConsumableTypes.Ampoule",
+    "spellGem" : "SFRPG.ConsumableTypes.SpellGem",
+    "drugs"    : "SFRPG.ConsumableTypes.Drugs",
+    "medicne"  : "SFRPG.ConsumableTypes.Medicine",
+    "poison"   : "SFRPG.ConsumableTypes.Poison",
+    "foodDrink": "SFRPG.ConsumableTypes.FoodDrink"
 };
 
 SFRPG.augmentationSytems = {
@@ -1205,13 +1206,13 @@ SFRPG.statusEffectIconMapping = {
     "exhausted": "systems/sfrpg/icons/conditions/exhausted.png",
     "fascinated": "systems/sfrpg/icons/conditions/fascinated.png",
     "fatigued": "systems/sfrpg/icons/conditions/fatigued.png",
-    "flatfooted": "systems/sfrpg/icons/conditions/flatfooted.png",
+    "flat-footed": "systems/sfrpg/icons/conditions/flatfooted.png",
     "frightened": "systems/sfrpg/icons/conditions/frightened.png",
     "grappled": "systems/sfrpg/icons/conditions/grappled.png",
     "helpless": "systems/sfrpg/icons/conditions/helpless.png",
     "nauseated": "systems/sfrpg/icons/conditions/nauseated.png",
-    "offkilter": "systems/sfrpg/icons/conditions/offkilter.png",
-    "offtarget": "systems/sfrpg/icons/conditions/offtarget.png",
+    "off-kilter": "systems/sfrpg/icons/conditions/offkilter.png",
+    "off-target": "systems/sfrpg/icons/conditions/offtarget.png",
     "overburdened": "systems/sfrpg/icons/conditions/overburdened.png",
     "panicked": "systems/sfrpg/icons/conditions/panicked.png",
     "paralyzed": "systems/sfrpg/icons/conditions/paralyzed.png",
@@ -1295,7 +1296,7 @@ SFRPG.conditions = {
         modifiers: [],
         tooltip: "<strong>Fatigued</strong><br><br>You cannot run or charge; you take a -1 penalty to AC, attack rolls, melee damage rolls, Reflex saves, initiative checks, and Str- and Dex-based skill and ability checks; and you reduce your encumbered limit by 1 bulk."
     },
-    "flatfooted": {
+    "flat-footed": {
         modifiers: [],
         tooltip: "<strong>Flat-Footed</strong><br><br>You take a -2 penalty to AC, and you cannot take reactions or make attacks of opportunity."
     },
@@ -1315,11 +1316,11 @@ SFRPG.conditions = {
         modifiers: [],
         tooltip: "<strong>Nauseated</strong><br><br>You're unable to attack, cast spells, or concentrate on spells, and the only action you can take is a single move action per turn."
     },
-    "offkilter": {
+    "off-kilter": {
         modifiers: [],
         tooltip: "<strong>Off-kilter</strong><br><br>You can't take move actions except to right yourself, you take a -2 penalty to attacks, and you're flat-footed."
     },
-    "offtarget": {
+    "off-target": {
         modifiers: [],
         tooltip: "<strong>Off-target</strong><br><br>You take a -2 penalty to attack rolls."
     },
@@ -1427,7 +1428,7 @@ SFRPG.itemTypes = {
     "class": "SFRPG.Items.Categories.Classes",
     "consumable": "SFRPG.Items.Categories.Consumables",
     "container": "SFRPG.Items.Categories.Containers",
-    "equipment": "SFRPG.Items.Categories.Equipment",
+    "equipment": "SFRPG.Items.Categories.Armor",
     "feat": "SFRPG.Items.Categories.Feats",
     "fusion": "ITEM.TypeFusion",
     "goods": "SFRPG.Items.Categories.Goods",

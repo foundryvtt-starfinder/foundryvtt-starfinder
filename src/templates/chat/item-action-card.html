@@ -1,0 +1,32 @@
+<div class="sfrpg chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
+    <header class="card-header flexrow">
+        <img class="action-img" src="{{item.img}}" title="{{item.name}}" />
+        <div class="flexcol">
+            <h3 class="action-name">{{localize action}}</h3>
+            <h3 class="item-name">{{item.name}}</h3>
+        </div>
+    </header>
+
+    <div class="card-content">
+        {{{item.data.data.description.value}}}
+    </div>
+
+    <div class="card-buttons">
+        {{#if hasAttack}}<button data-action="attack">{{ localize "SFRPG.Attack" }}</button>{{/if}}
+        {{#if hasDamage}}<button data-action="damage">{{ localize "SFRPG.Damage" }}</button>{{/if}}
+        {{!-- {{#if isVersatile}}<button data-action="versatile">{{ localize "SFRPG.Versatile" }}</button>{{/if}} --}}
+        {{#if hasSave}}<button data-action="save" data-type="{{data.save.type}}" disabled>{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
+    </div>
+
+    <footer class="card-footer">
+        {{#each data.properties}}
+        <span>{{this}}</span>
+        {{/each}}
+        {{#if cost}}
+        <span>{{localize "SFRPG.ChatCard.ItemActivation.Cost" cost=cost}}</span>
+        {{else}}
+        <span>{{localize "SFRPG.ChatCard.ItemActivation.Cost" cost=item.labels.activation}}</span>
+        {{/if}}
+        {{#if item.data.data.duration.value}}<span>{{{localize "SFRPG.ChatCard.ItemActivation.Duration" duration=item.data.data.duration.value}}}</span>{{/if}}
+    </footer>
+</div>

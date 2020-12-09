@@ -1,10 +1,6 @@
 {
   "_id": "JPArD7V0HTjCRxwd",
   "name": "Ambuscade (Combat)",
-  "permission": {
-    "default": 0,
-    "umHu8DFnCrMQVZ37": 3
-  },
   "type": "feat",
   "data": {
     "description": {
@@ -62,6 +58,40 @@
       "descriptor": ""
     },
     "descriptors": [],
+    "modifiers": [
+      {
+        "name": "Ambuscade",
+        "modifier": "1",
+        "type": "untyped",
+        "effectType": "all-attacks",
+        "valueAffected": "",
+        "enabled": false,
+        "source": "",
+        "notes": "When you act in a surprise round and attack a target that has not yet acted, you gain a bonus to your attack roll.",
+        "modifierType": "formula",
+        "condition": "",
+        "subtab": "misc",
+        "max": 1,
+        "_id": "bd192388-5158-42ea-a507-140ff12a9790",
+        "container": {}
+      },
+      {
+        "name": "Ambuscade",
+        "modifier": "round(@attributes.baseAttackBonus.value / 2)",
+        "type": "untyped",
+        "effectType": "all-damage",
+        "valueAffected": "",
+        "enabled": false,
+        "source": "",
+        "notes": "When you act in a surprise round and attack a target that has not yet acted, you gain a bonus to your attack roll.",
+        "modifierType": "formula",
+        "condition": "",
+        "subtab": "misc",
+        "max": 0,
+        "_id": "ce271224-c494-40c4-94e0-6af78e92ce2d",
+        "container": {}
+      }
+    ],
     "requirements": "",
     "recharge": {
       "value": null,

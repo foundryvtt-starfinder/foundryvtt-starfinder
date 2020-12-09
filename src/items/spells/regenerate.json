@@ -1,10 +1,6 @@
 {
   "_id": "9Jk5eas4Zz0Sd0LL",
-  "name": "Regenerate*",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Regenerate",
   "type": "spell",
   "data": {
     "description": {
@@ -12,24 +8,24 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Starfinder Core Rulebook pg. 372",
+    "source": "CRB pg. 372",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "full",
+      "cost": 3,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "instantaneous",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "one living creature",
       "type": ""
     },
     "area": {
       "value": null,
-      "units": "",
+      "units": null,
       "shape": "",
       "effect": ""
     },
@@ -40,12 +36,12 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "heal",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -53,19 +49,24 @@
       "effect": ""
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "12d8",
+          "healing"
+        ]
+      ]
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "",
+      "descriptor": "harmless"
     },
     "descriptors": [],
     "modifiers": [],
     "level": 6,
     "school": "con",
-    "sr": false,
+    "sr": true,
     "dismissible": false,
     "concentration": false,
     "materials": {
@@ -88,5 +89,6 @@
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/regenerate.png"
+  "img": "systems/sfrpg/icons/spells/regenerate.png",
+  "effects": []
 }

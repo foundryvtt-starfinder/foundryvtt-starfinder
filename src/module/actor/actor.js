@@ -7,6 +7,7 @@ import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modif
 import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
 import { DroneRepairDialog } from "../apps/drone-repair-dialog.js";
+import { getItemContainer } from "./actor-inventory.js"
 
 import { } from "./starship-update.js"
 
@@ -65,7 +66,8 @@ export class ActorSFRPG extends Actor {
         const weapons = items.filter(item => item.type === "weapon" && item.data.equipped);
         const races = items.filter(item => item.type === "race");
         const frames = items.filter(item => item.type === "starshipFrame");
-        const classes = items.filter(item => item.type === "class" || item.type === "chassis");
+        const classes = items.filter(item => item.type === "class");
+        const chassis = items.filter(item => item.type === "chassis");
         const theme = items.find(item => item.type === "theme");
         const mods = items.filter(item => item.type === "mod");
         const armorUpgrades = items.filter(item => item.type === "upgrade");
@@ -80,6 +82,7 @@ export class ActorSFRPG extends Actor {
             weapons,
             races,
             classes,
+            chassis,
             modifiers,
             theme,
             mods,
@@ -323,15 +326,37 @@ export class ActorSFRPG extends Actor {
                         modifiersToConcat = item.data.modifiers;
                     }
                     break;
+                case "upgrade":
+                    {
+                        if (!ignoreEquipment) {
+                            const container = getItemContainer(this.data.items, item._id);
+                            if (container && container.type === "equipment" && container.data.equipped) {
+                                modifiersToConcat = item.data.modifiers;
+                            }
+                        }
+                        break;
+                    }
+                case "fusion":
+                case "weaponAccessory":
+                    {
+                        if (!ignoreEquipment) {
+                            const container = getItemContainer(this.data.items, item._id);
+                            if (container && container.type === "weapon" && container.data.equipped) {
+                                modifiersToConcat = item.data.modifiers;
+                            }
+                        }
+                        break;
+                    }
                 case "augmentation":
                     modifiersToConcat = item.data.modifiers;
                     break;
                 case "feat":
-                    if (item.data.activation?.type === "") {
+                    if (item.data.activation?.type === "" || item.data.isActive) {
                         modifiersToConcat = item.data.modifiers;
                     }
                     break;
                 case "equipment":
+                case "shield":
                 case "weapon":
                     if (!ignoreEquipment && item.data.equipped) {
                         modifiersToConcat = item.data.modifiers;
@@ -847,7 +872,7 @@ export class ActorSFRPG extends Actor {
     }
 
     setupRollContexts(rollContext, desiredSelectors = []) {
-        if (this.data.type === "starship") {
+        if (this.data.type === "starship" && this.data.data.crew) {
             if (this.data.data.crew.captain?.actors?.length > 0) {
                 rollContext.addContext("captain", this.data.data.crew.captain.actors[0]);
             }
@@ -863,19 +888,25 @@ export class ActorSFRPG extends Actor {
                 const crew = [];
                 if (allCrewMates.includes(crewType)) {
                     for (const crewEntries of Object.values(this.data.data.crew)) {
-                        for (const actor of crewEntries.actors) {
+                        const crewList = crewEntries.actors;
+                        if (crewList && crewList.length > 0) {
+                            for (const actor of crewList) {
+                                const contextId = crewType + crewCount;
+                                rollContext.addContext(contextId, actor);
+                                crew.push(contextId);
+                                crewCount += 1;
+                            }
+                        }
+                    }
+                } else {
+                    const crewList = this.data.data.crew[crewType].actors;
+                    if (crewList && crewList.length > 0) {
+                        for (const actor of crewList) {
                             const contextId = crewType + crewCount;
                             rollContext.addContext(contextId, actor);
                             crew.push(contextId);
                             crewCount += 1;
                         }
-                    }
-                } else {
-                    for (const actor of this.data.data.crew[crewType].actors) {
-                        const contextId = crewType + crewCount;
-                        rollContext.addContext(contextId, actor);
-                        crew.push(contextId);
-                        crewCount += 1;
                     }
                 }
     
