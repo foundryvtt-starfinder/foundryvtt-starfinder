@@ -48,8 +48,14 @@ export default class SFRPGCustomChatMessage {
         const temmplateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
         //get Actor
         const mainContext = data.rollContext.mainContext ? data.rollContext.allContexts[data.rollContext.mainContext] : null;
-        const actor = data.rollContext.allContexts['actor'] ? data.rollContext.allContexts['actor'].entity : mainContext?.entity;
-        const item = data.rollContext.allContexts['item'] ? data.rollContext.allContexts['item'].entity : mainContext?.entity;
+        let actor = data.rollContext.allContexts['actor'] ? data.rollContext.allContexts['actor'].entity : mainContext?.entity;
+        if (!actor) {
+            actor = data.rollContext.allContexts['ship'] ? data.rollContext.allContexts['ship'].entity : mainContext?.entity;
+        }
+        let item = data.rollContext.allContexts['item'] ? data.rollContext.allContexts['item'].entity : mainContext?.entity;
+        if (!item) {
+            item = data.rollContext.allContexts['weapon'] ? data.rollContext.allContexts['weapon'].entity : mainContext?.entity;
+        }
         //Render the roll
         const customRoll = await roll.render();
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
