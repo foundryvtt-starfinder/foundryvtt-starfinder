@@ -1,14 +1,13 @@
 {
-  "_id": "MTHL2TQjb7tWuZVS",
-  "name": "Reflecting Armor",
+  "name": "Inflame",
   "type": "spell",
   "data": {
     "description": {
-      "value": "<p style=\"text-align: justify;\">You create a shimmering skin-like coating of mystical force that covers your body, allowing you to reflect damage you take back against your attacker. At any time during this spell’s duration, when you take Hit Point damage from an attack made with a weapon by a foe within 100 feet, you can choose to dismiss the spell as a reaction. If you do, the armor crackles with energy as it disappears, arcing through the air to strike the attacking creature, which takes an amount of force damage equal to the damage dealt to you at the time this spell was dismissed (maximum 10). The target can attempt a Reflex save for half damage.</p>",
+      "value": "<p>You make a melee attack against a single target&rsquo;s EAC. If you hit, the target must succeed at a Fortitude save or it is sickened and develops painful blisters and boils that last for the spell&rsquo;s duration. If the target takes bludgeoning, piercing, or slashing damage while inflamed, the boils burst, dealing 4d6 acid damage to the target and all adjacent creatures; adjacent creatures can halve this damage with a successful Reflex save. Once the boils burst, the spell ends and the sickened effect continues until the end of the target&rsquo;s next turn.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "CRB pg. 372",
+    "source": "AA4 pg. 19",
     "type": "",
     "activation": {
       "type": "action",
@@ -16,7 +15,7 @@
       "condition": ""
     },
     "duration": {
-      "value": "10 minutes/level or until dismissed (D); see text",
+      "value": "1 minute/level (see text)",
       "units": ""
     },
     "target": {
@@ -31,7 +30,7 @@
     },
     "range": {
       "value": null,
-      "units": "personal",
+      "units": null,
       "additional": "",
       "per": ""
     },
@@ -41,7 +40,7 @@
       "per": ""
     },
     "ability": "",
-    "actionType": "save",
+    "actionType": "msak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -53,16 +52,16 @@
     },
     "formula": "",
     "save": {
-      "type": "reflex",
+      "type": "fort",
       "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
     "modifiers": [],
-    "level": 1,
-    "school": "abj",
-    "sr": false,
-    "dismissible": true,
+    "level": 2,
+    "school": "evo",
+    "sr": true,
+    "dismissible": false,
     "concentration": false,
     "materials": {
       "value": "",
@@ -75,15 +74,16 @@
       "prepared": false
     },
     "allowedClasses": {
-      "myst": true,
-      "tech": false,
-      "wysh": false
+      "myst": false,
+      "tech": true,
+      "wysh": true
     },
     "abilityMods": {
       "parts": []
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/reflecting_armor.PNG",
-  "effects": []
+  "img": "systems/sfrpg/icons/classes/healing_touch.png",
+  "effects": [],
+  "_id": "2lGt4K6SqeK60WbB"
 }
