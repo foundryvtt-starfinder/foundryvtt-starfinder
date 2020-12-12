@@ -54,7 +54,7 @@ export const registerSystemSettings = function () {
         type: Number
     });
 
-    game.settings.register("sfrpg", "useCustomChatCard", {
+    game.settings.register("sfrpg", "useCustomChatCards", {
         name: "SFRPG.Settings.UseCustomChatCard.Name",
         hint: "SFRPG.Settings.UseCustomChatCard.Hint",
         scope: "world",

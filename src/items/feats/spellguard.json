@@ -15,12 +15,12 @@
     "source": "Character Operations Manual",
     "type": "",
     "activation": {
-      "type": "",
-      "cost": 0,
-      "condition": ""
+      "type": "reaction",
+      "cost": 1,
+      "condition": "Adjacent ally is targeted by a spell or spell-like ability."
     },
     "duration": {
-      "value": null,
+      "value": "Ally: that effect. Self: until the beginning of your next turn.",
       "units": ""
     },
     "target": {
@@ -40,9 +40,9 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": 1,
+      "max": 1,
+      "per": "sr"
     },
     "ability": null,
     "actionType": "",
@@ -62,6 +62,23 @@
       "descriptor": ""
     },
     "descriptors": [],
+    "modifiers": [
+      {
+        "name": "Spellguard",
+        "modifier": "-2",
+        "type": "untyped",
+        "effectType": "saves",
+        "valueAffected": "",
+        "enabled": false,
+        "source": "",
+        "notes": "Penalty to saving throws against spells and spell-like abilities after warding an ally.",
+        "modifierType": "formula",
+        "condition": "",
+        "subtab": "misc",
+        "max": -2,
+        "_id": "1e8a00f8-12a9-4230-901b-06ab9b374553"
+      }
+    ],
     "requirements": "",
     "recharge": {
       "value": null,

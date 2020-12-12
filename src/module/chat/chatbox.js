@@ -47,8 +47,15 @@ export default class SFRPGCustomChatMessage {
         //Get the template
         const temmplateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
         //get Actor
-        const actor = data.actor ? data.actor : {};
-        const item = data.data.item ? data.data.item : {};
+        const mainContext = data.rollContext.mainContext ? data.rollContext.allContexts[data.rollContext.mainContext] : null;
+        let actor = data.rollContext.allContexts['actor'] ? data.rollContext.allContexts['actor'].entity : mainContext?.entity;
+        if (!actor) {
+            actor = data.rollContext.allContexts['ship'] ? data.rollContext.allContexts['ship'].entity : mainContext?.entity;
+        }
+        let item = data.rollContext.allContexts['item'] ? data.rollContext.allContexts['item'].entity : mainContext?.entity;
+        if (!item) {
+            item = data.rollContext.allContexts['weapon'] ? data.rollContext.allContexts['weapon'].entity : mainContext?.entity;
+        }
         //Render the roll
         const customRoll = await roll.render();
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
@@ -72,7 +79,7 @@ export default class SFRPGCustomChatMessage {
             dataRoll: roll,
             type: CHAT_MESSAGE_TYPES.ROLL,
             config: CONFIG.STARFINDER,
-            tokenImg: actor.data.token.img,
+            tokenImg: actor.data.token?.img || actor.img,
             actorId: actor._id,
             tokenId: this.createToken(actor),
         });
