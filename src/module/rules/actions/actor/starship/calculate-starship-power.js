@@ -1,13 +1,13 @@
 export default function (engine) {
     engine.closures.add("calculateStarshipPower", (fact, context) => {
         const data = fact.data;
-        const powercore = CONFIG.SFRPG.powercoreMap[data.details.systems.powercore] || { size: ["tiny"], pcu: 0 };
 
-        data.attributes.power = {
-            value: 0,
-            max: powercore.pcu,
-            tooltip: []
-        };
+        data.attributes.power.max = 0;
+
+        const powerCores = fact.items.filter(x => x.type === "starshipPowerCore");
+        for (const powerCore of powerCores) {
+            data.attributes.power.max += powerCore.data.pcu;
+        }
 
         return fact;
     });

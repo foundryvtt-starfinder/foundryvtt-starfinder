@@ -1439,6 +1439,7 @@ SFRPG.itemTypes = {
     "spell": "SFRPG.Items.Categories.Spells",
     "starshipAction": "SFRPG.Items.Categories.StarshipActions",
     "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
+    "starshipPowerCore": "SFRPG.Items.Categories.StarshipPowerCores",
     "starshipFrame": "SFRPG.Items.Categories.StarshipFrames",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",

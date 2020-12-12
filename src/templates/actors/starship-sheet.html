@@ -111,10 +111,20 @@
             <div class="flexcol">
                 <h3 class="form-header">{{ localize "SFRPG.Attributes"}}</h3>
                 <ul class="attributes flexrow">
-                    <li class="attribute" data-tippy-content="Power Core<br>@attributes.power.max">
+                    <li class="attribute" data-tippy-content="Power Core<br/>@attributes.power.value<br/>@attributes.power.max<br/><br/>Consumption:<br/>{{#each data.attributes.power.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name box-title">Power Core</h4>
                         <div class="attribute-value">
+                            <span>{{data.attributes.power.value}}</span>
+                            <span class="sep"> / </span>
                             <span>{{data.attributes.power.max}}</span>
+                        </div>
+                    </li>
+                    <li class="attribute" data-tippy-content="Build points<br/>@attributes.bp.value<br/>@attributes.bp.max<br/><br/>Usage:<br/>{{#each data.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <h4 class="attribute-name box-title">Build points</h4>
+                        <div class="attribute-value">
+                            <span>{{data.attributes.bp.value}}</span>
+                            <span class="sep"> / </span>
+                            <span>{{data.attributes.bp.max}}</span>
                         </div>
                     </li>
                     <li class="attribute" data-tippy-content="Complement<br>@attributes.complement.min<br>@attributes.complement.max">
@@ -123,12 +133,6 @@
                             <span data-tippy-content="Minimum crew needed to run the ship">{{data.attributes.complement.min}}</span>
                             <span class="sep"> / </span>
                             <span data-tippy-content="Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard)">{{data.attributes.complement.max}}</span>
-                        </div>
-                    </li>
-                    <li class="attribute" data-tippy-content="Expansion Bays<br>@attributes.expansionBays.value">
-                        <h4 class="attribute-name box-title">Expansion Bays</h4>
-                        <div class="attribute-value">
-                            <span data-tippy-content="Total amount of expansion bays available.">{{data.attributes.expansionBays.value}}</span>
                         </div>
                     </li>
                     <li class="attribute" data-tippy-content="Drift Rating<br>@attributes.drift.value">
@@ -196,17 +200,6 @@
                 <h3 class="form-header">Systems</h3>
                 <div class="flexrow">
                     <div class="flexcol">
-                        <div class="form-group">
-                            <label for="data.details.systems.powercore">Power Core</label>
-                            <select name="data.details.systems.powercore">
-                                {{#select data.details.systems.powercore}}
-                                <option value="">None</option>
-                                {{#each config.powerCoreSystems as |system s|}}
-                                <option value="{{s}}">{{system}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
                         <div class="form-group">
                             <label for="data.details.systems.thrusters">Thrusters</label>
                             <select name="data.details.systems.thrusters">
@@ -291,7 +284,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="data.details.systems.bays">Expansion Bays</label>
+                            <label for="data.details.systems.bays">Expansion Bays (Total: {{data.attributes.expansionBays.value}})</label>
                             <ul class="traits-list">
                                 {{#each data.details.systems.bays.selected as |v k|}}
                                 <li class="tag {{k}}">{{v}}</li>

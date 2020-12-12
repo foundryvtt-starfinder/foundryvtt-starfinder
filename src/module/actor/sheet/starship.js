@@ -281,7 +281,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             inventory: { label: "Inventory", items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
         };
 
-        const starshipSystems = ["starshipComputer"];
+        const starshipSystems = ["starshipComputer", "starshipPowerCore"];
 
         let [forward, starboard, aft, port, turret, unmounted, frame, systems, cargo] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
@@ -348,7 +348,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const features = {
             frame: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", {"current": frame.length}), items: [], hasActions: false, dataset: { type: "starshipFrame" } },
-            systems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Systems"), items: systems, hasActions: false, dataset: { type: "starshipComputer" } }
+            systems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Systems"), items: systems, hasActions: false, dataset: { type: "starshipComputer,starshipPowerCore" } }
         };
         features.frame.items = frame;
 
@@ -411,7 +411,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         } else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
 
-            const acceptedStarshipItems = ["starshipFrame", "starshipWeapon", "starshipComputer"];
+            const acceptedStarshipItems = ["starshipFrame", "starshipWeapon", "starshipComputer", "starshipPowerCore"];
             if (acceptedStarshipItems.includes(rawItemData.type)) {
                 return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
             } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {

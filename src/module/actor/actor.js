@@ -52,6 +52,7 @@ export class ActorSFRPG extends Actor {
      */
     prepareData() {
         super.prepareData();
+        const actor = this;
         const actorData = this.data;
         const data = actorData.data;
         const flags = actorData.flags;
@@ -74,6 +75,7 @@ export class ActorSFRPG extends Actor {
         const asis = items.filter(item => item.type === "asi");
         game.sfrpg.engine.process("process-actors", {
             actorId,
+            actor,
             type: actorType,
             data,
             flags,
