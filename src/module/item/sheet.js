@@ -346,6 +346,8 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find('select[name="storage.weightProperty"]').change(this._onChangeStorageWeightProperty.bind(this));
         html.find('input[class="storage.acceptsType"]').change(this._onChangeStorageAcceptsItem.bind(this));
         html.find('input[name="storage.affectsEncumbrance"]').change(this._onChangeStorageAffectsEncumbrance.bind(this));
+
+        html.find('input[class="data.supportedSizes"]').change(this._onChangeSupportedStarshipSizes.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -609,6 +611,25 @@ export class ItemSheetSFRPG extends ItemSheet {
         }
         await this.item.update({
             "data.container.storage": storage
+        });
+    }
+
+    async _onChangeSupportedStarshipSizes(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const toggleSize = event.currentTarget.name;
+        const enabled = event.currentTarget.checked;
+
+        let supportedSizes = duplicate(this.item.data.data.supportedSizes);
+        if (enabled && !supportedSizes.includes(toggleSize)) {
+            supportedSizes.push(toggleSize);
+        } else if (!enabled && supportedSizes.includes(toggleSize)) {
+            supportedSizes = supportedSizes.filter(x => x !== toggleSize);
+        }
+
+        await this.item.update({
+            "data.supportedSizes": supportedSizes
         });
     }
 

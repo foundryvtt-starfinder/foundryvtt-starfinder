@@ -39,7 +39,7 @@
                 <label>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.Sizes" }}</label>
                 {{#each config.starshipSizes as |typeName typeKey|}}
                 <label class="checkbox">
-                    <input type="checkbox" class="data.supportedSizes" name="{{typeKey}}" {{checked (contains data.supportedSizes typeKey)}}/>{{localize typeName}}
+                    <input type="checkbox" class="data.supportedSizes" name="{{typeKey}}" {{checked (contains ../data.supportedSizes typeKey)}}/>{{localize typeName}}
                 </label>
                 {{/each}}
             </div>
