@@ -46,7 +46,7 @@
                     <ol class="attribute-multibox">
                         <li class="box-header flexrow">
                             <label></label>
-                            <label>Value</label>
+                            <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                             <label>Misc</label>
                         </li>
                         <li class="flexrow" data-tippy-content="Armor Class<br/>@attributes.ac.value<br/>@attributes.ac.misc">
@@ -70,7 +70,7 @@
                     <ol class="attribute-multibox">
                         <li class="box-header flexrow">
                             <label></label>
-                            <label>Value</label>
+                            <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                         </li>
                         <li class="flexrow" data-tippy-content="Damage Threshold<br/>@attributes.damageThreshold.value">
                             <label>DT</label>
@@ -82,14 +82,22 @@
                         </li>
                     </ol>
                 </li>
-                <li class="attribute" data-tippy-content="{{localize "SFRPG.Speed"}}<br>@attributes.speed.value">
-                    <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
-                    <div class="attribute-value">
-                        <span>{{data.attributes.speed.value}}</span>
-                    </div>
-                    <footer class="attribute-footer select" data-tippy-content="Maneuverability<br>@attributes.maneuverability">
-                        <span>{{localize "SFRPG.StarshipSheet.Header.Maneuverability" maneuverability=data.attributes.maneuverability}}</span>
-                    </footer>
+                <li class="attribute">
+                    <h4 class="attribute-name box-title" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{localize "SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip" maneuverability=(capitalize data.attributes.maneuverability)}}">Movement</h4>
+                    <ol class="attribute-multibox">
+                        <li class="box-header flexrow">
+                            <label></label>
+                            <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
+                        </li>
+                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}<br/>@attributes.speed.value<br/><br/>{{#each data.attributes.speed.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <label>{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}</label>
+                            <label>{{data.attributes.speed.value}}</label>
+                        </li>
+                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}<br/>@attributes.turn.value<br/><br/>{{#each data.attributes.turn.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <label>{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}</label>
+                            <label>{{data.attributes.turn.value}}</label>
+                        </li>
+                    </ol>
                 </li>
             </ul>
 

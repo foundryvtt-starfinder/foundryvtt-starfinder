@@ -7,11 +7,11 @@ export default function (engine) {
         const frames = fact.frames;
         
         const maneuverabilityMap = {
-            "clumsy" : -2,
-            "poor"   : -1,
-            "average": 0,
-            "good"   : 1,
-            "perfect": 2
+            "clumsy" : { pilotingBonus: -2, turn: 4 },
+            "poor"   : { pilotingBonus: -1, turn: 3 },
+            "average": { pilotingBonus: 0, turn: 2 },
+            "good"   : { pilotingBonus: 1, turn: 1 },
+            "perfect": { pilotingBonus: 2, turn: 0 }
         };
 
         if (!data.crew) {
@@ -103,6 +103,16 @@ export default function (engine) {
             }
         }
 
+        data.attributes.speed = {
+            value: 0,
+            tooltip: []
+        };
+
+        data.attributes.turn = {
+            value: 0,
+            tooltip: []
+        };
+
         if (!frames || frames.length === 0) {
             data.frame = {
                 name: ""
@@ -152,14 +162,17 @@ export default function (engine) {
                 + frame.data.weaponMounts.port.lightSlots + frame.data.weaponMounts.port.heavySlots + frame.data.weaponMounts.port.capitalSlots
                 + frame.data.weaponMounts.starboard.lightSlots + frame.data.weaponMounts.starboard.heavySlots + frame.data.weaponMounts.starboard.capitalSlots
                 + frame.data.weaponMounts.turret.lightSlots + frame.data.weaponMounts.turret.heavySlots + frame.data.weaponMounts.turret.capitalSlots;
+
+            data.attributes.turn.value = maneuverabilityMap[data.attributes.maneuverability].turn;
+            data.attributes.turn.tooltip.push(`${data.details.frame}: ${data.attributes.turn.value.signedString()}`);
         }
 
         /** Ensure pilotingBonus exists. */
         if (!data.attributes.pilotingBonus) {
             data.attributes.pilotingBonus = {value: 0};
         }
-        data.attributes.pilotingBonus.value = maneuverabilityMap[data.attributes.maneuverability];
-
+        data.attributes.pilotingBonus.value = maneuverabilityMap[data.attributes.maneuverability].pilotingBonus;
+        
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );
 }
