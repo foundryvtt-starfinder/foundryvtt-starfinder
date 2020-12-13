@@ -111,32 +111,32 @@
             <div class="flexcol">
                 <h3 class="form-header">{{ localize "SFRPG.Attributes"}}</h3>
                 <ul class="attributes flexrow">
-                    <li class="attribute" data-tippy-content="Power Core<br/>@attributes.power.value<br/>@attributes.power.max<br/><br/>Consumption:<br/>{{#each data.attributes.power.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                        <h4 class="attribute-name box-title">Power Core</h4>
+                    <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.Power" }}<br/>@attributes.power.value<br/>@attributes.power.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.PowerConsumption" }}:<br/>{{#each data.attributes.power.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.Power" }}</h4>
                         <div class="attribute-value">
                             <span>{{data.attributes.power.value}}</span>
                             <span class="sep"> / </span>
                             <span>{{data.attributes.power.max}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="Build points<br/>@attributes.bp.value<br/>@attributes.bp.max<br/><br/>Usage:<br/>{{#each data.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                        <h4 class="attribute-name box-title">Build points</h4>
+                    <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}<br/>@attributes.bp.value<br/>@attributes.bp.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsUsage" }}:<br/>{{#each data.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}</h4>
                         <div class="attribute-value">
                             <span>{{data.attributes.bp.value}}</span>
                             <span class="sep"> / </span>
                             <span>{{data.attributes.bp.max}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="Complement<br>@attributes.complement.min<br>@attributes.complement.max">
-                        <h4 class="attribute-name box-title">Complement</h4>
+                    <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.Complement" }}<br>@attributes.complement.min<br>@attributes.complement.max">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.Complement" }}</h4>
                         <div class="attribute-value multiple">
-                            <span data-tippy-content="Minimum crew needed to run the ship">{{data.attributes.complement.min}}</span>
+                            <span data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.ComplementMin" }}">{{data.attributes.complement.min}}</span>
                             <span class="sep"> / </span>
-                            <span data-tippy-content="Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard)">{{data.attributes.complement.max}}</span>
+                            <span data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.ComplementMax" }}">{{data.attributes.complement.max}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="Drift Rating<br>@attributes.drift.value">
-                        <h4 class="attribute-name box-title">Drift Rating</h4>
+                    <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.DriftRating" }}<br>@attributes.drift.value">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.DriftRating" }}</h4>
                         <div class="attribute-value">
                             <span class="ability-mod">{{data.attributes.drift.value}}</span>
                         </div>
