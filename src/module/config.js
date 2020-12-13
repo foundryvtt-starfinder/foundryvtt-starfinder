@@ -684,31 +684,6 @@ SFRPG.maneuverability = {
     "perfect": "SFRPG.ShipSystems.Maneuverability.Perfect"
 };
 
-SFRPG.powerCoreSystems = {
-    "micronL" : "SFRPG.ShipSystems.PowerCoreSystems.MicronLight",
-    "micronH" : "SFRPG.ShipSystems.PowerCoreSystems.MicronHeavy",
-    "micronU" : "SFRPG.ShipSystems.PowerCoreSystems.MicronUltra",
-    "arcusL"  : "SFRPG.ShipSystems.PowerCoreSystems.ArcusLight",
-    "pulseBr" : "SFRPG.ShipSystems.PowerCoreSystems.PulseBrown",
-    "pulseBl" : "SFRPG.ShipSystems.PowerCoreSystems.PulseBlack",
-    "pulseWh" : "SFRPG.ShipSystems.PowerCoreSystems.PulseWhite",
-    "pulseGy" : "SFRPG.ShipSystems.PowerCoreSystems.PulseGray",
-    "arcusH"  : "SFRPG.ShipSystems.PowerCoreSystems.ArcusHeavy",
-    "puslseGr": "SFRPG.ShipSystems.PowerCoreSystems.PulseGreen",
-    "pulseRe" : "SFRPG.ShipSystems.PowerCoreSystems.PulseRed",
-    "pulseBu" : "SFRPG.ShipSystems.PowerCoreSystems.PulseBlue",
-    "arcusUl" : "SFRPG.ShipSystems.PowerCoreSystems.ArcusUltra",
-    "arcusMax": "SFRPG.ShipSystems.PowerCoreSystems.ArcusMaximum",
-    "pulseOr" : "SFRPG.ShipSystems.PowerCoreSystems.PulseOrange",
-    "pulsePr" : "SFRPG.ShipSystems.PowerCoreSystems.PulsePrismatic",
-    "novaL"   : "SFRPG.ShipSystems.PowerCoreSystems.NovaLight",
-    "novaH"   : "SFRPG.ShipSystems.PowerCoreSystems.NovaHeavy",
-    "novaU"   : "SFRPG.ShipSystems.PowerCoreSystems.NovaUltra",
-    "gateL"   : "SFRPG.ShipSystems.PowerCoreSystems.GatewayLight",
-    "gateH"   : "SFRPG.ShipSystems.PowerCoreSystems.GatewayHeavy",
-    "gateU"   : "SFRPG.ShipSystems.PowerCoreSystems.GatewayUltra"
-}
-
 SFRPG.thrusterSystems = {
     // Tiny
     "t6" : "SFRPG.ShipSystems.ThrusterSystems.T6",
