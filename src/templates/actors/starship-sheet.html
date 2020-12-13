@@ -121,11 +121,17 @@
                 <ul class="attributes flexrow">
                     <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.Power" }}<br/>@attributes.power.value<br/>@attributes.power.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.PowerConsumption" }}:<br/>{{#each data.attributes.power.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.Power" }}</h4>
+                        {{#if hasPower}}
                         <div class="attribute-value">
                             <span>{{data.attributes.power.value}}</span>
                             <span class="sep"> / </span>
                             <span>{{data.attributes.power.max}}</span>
                         </div>
+                        {{else}}
+                        <div class="attribute-value">
+                            <label class="error">{{ localize "SFRPG.StarshipSheet.Attributes.PowerMissing" }}</label>
+                        </div>
+                        {{/if}}
                     </li>
                     <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}<br/>@attributes.bp.value<br/>@attributes.bp.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsUsage" }}:<br/>{{#each data.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}</h4>

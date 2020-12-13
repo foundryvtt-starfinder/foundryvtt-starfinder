@@ -281,14 +281,15 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             inventory: { label: "Inventory", items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
         };
 
-        const starshipSystems = ["starshipComputer", "starshipPowerCore"];
+        const starshipSystems = ["starshipComputer"];
 
-        let [forward, starboard, aft, port, turret, unmounted, frame, systems, cargo] = data.items.reduce((arr, item) => {
+        let [forward, starboard, aft, port, turret, unmounted, frame, powerCores, thrusters, systems, cargo] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
             if (item.type === "starshipFrame") arr[6].push(item);
-            else if (starshipSystems.includes(item.type)) arr[7].push(item);
-            else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[8].push(item);
+            else if (item.type === "starshipPowerCore") arr[7].push(item);
+            else if (starshipSystems.includes(item.type)) arr[9].push(item);
+            else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[10].push(item);
             else {
                 const weaponArc = item?.data?.mount?.arc;
                 if (weaponArc === "forward") arr[0].push(item);
@@ -300,7 +301,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
 
             return arr;
-        }, [[], [], [], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], [], [], [], []]);
 
         this.processItemContainment(cargo, function (itemType, itemData) {
             inventory.inventory.items.push(itemData);
@@ -347,14 +348,15 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         data.arcs = Object.values(arcs);
 
         const features = {
-            frame: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", {"current": frame.length}), items: [], hasActions: false, dataset: { type: "starshipFrame" } },
-            systems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Systems"), items: systems, hasActions: false, dataset: { type: "starshipComputer,starshipPowerCore" } }
+            frame: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", {"current": frame.length}), items: frame, hasActions: false, dataset: { type: "starshipFrame" } },
+            powerCore: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PowerCores"), items: powerCores, hasActions: false, dataset: { type: "starshipPowerCore" } },
+            systems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Systems"), items: systems, hasActions: false, dataset: { type: "starshipComputer" } }
         };
-        features.frame.items = frame;
 
         data.features = Object.values(features);
 
         data.activeFrame = frame.length > 0 ? frame[0] : null;
+        data.hasPower = powerCores.length > 0;
 
         data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
     }
