@@ -604,7 +604,7 @@ export class ItemSFRPG extends Item {
         itemData.hasCapacity = this.data.hasCapacity;
 
         rollData.item = itemData;
-        const title = game.settings.get('sfrpg', 'useCustomChatCard') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: itemData.name});
+        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: itemData.name});
 
         //Warn the user if there is no ammo left
         const usage = itemData.data.usage?.value || 0;
@@ -622,7 +622,11 @@ export class ItemSFRPG extends Item {
 
         /** Create additional modifiers. */
         const additionalModifiers = [
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Charge"), modifier: "-2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Flanking"), modifier: "+2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.FightDefensively"), modifier: "-4", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.FullAttack"), modifier: "-4", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.HarryingFire"), modifier: "+2", enabled: false, notes: game.i18n.format("SFRPG.Rolls.Character.HarryingFireTooltip") } },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Nonlethal"), modifier: "-4", enabled: false} }
         ];
 
@@ -846,7 +850,7 @@ export class ItemSFRPG extends Item {
         });
 
         let rollString = isHealing ? game.i18n.localize("SFRPG.ChatCard.HealingRoll") : game.i18n.localize("SFRPG.ChatCard.DamageRoll");
-        const title    = game.settings.get('sfrpg', 'useCustomChatCard') ? rollString : `${rollString} - ${this.data.name}`;
+        const title    = game.settings.get('sfrpg', 'useCustomChatCards') ? rollString : `${rollString} - ${this.data.name}`;
         
         const rollContext = new RollContext();
         rollContext.addContext("owner", this.actor, rollData);

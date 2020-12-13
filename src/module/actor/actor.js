@@ -512,7 +512,7 @@ export class ActorSFRPG extends Actor {
             rollContext: rollContext,
             parts: parts,
             title:  `Ability Check - ${label}`,
-            flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Ability Check - ${label}`,
+            flavor: game.settings.get('sfrpg', 'useCustomChatCards') ? `${label}` : `Ability Check - ${label}`,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
@@ -547,7 +547,7 @@ export class ActorSFRPG extends Actor {
             rollContext: rollContext,
             parts: parts,
             title: `Save - ${label}`,
-            flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${label}` : `Save - ${label}`,
+            flavor: game.settings.get('sfrpg', 'useCustomChatCards') ? `${label}` : `Save - ${label}`,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
@@ -573,7 +573,7 @@ export class ActorSFRPG extends Actor {
             rollContext: rollContext,
             parts: parts,
             title: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
-            flavor: game.settings.get('sfrpg', 'useCustomChatCard') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
+            flavor: game.settings.get('sfrpg', 'useCustomChatCards') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,

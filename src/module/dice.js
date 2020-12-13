@@ -81,7 +81,7 @@ export class DiceSFRPG {
                 }
             }
 
-            if (game.settings.get("sfrpg", "useCustomChatCard")) {
+            if (game.settings.get("sfrpg", "useCustomChatCards")) {
                 //Push the roll to the ChatBox
                 const customData = {
                     'title': title,
@@ -315,7 +315,7 @@ export class DiceSFRPG {
                 }
             }
 
-            if (game.settings.get("sfrpg", "useCustomChatCard")) {
+            if (game.settings.get("sfrpg", "useCustomChatCards")) {
                 //Push the roll to the ChatBox
                 const customData = {
                     'title': title,
