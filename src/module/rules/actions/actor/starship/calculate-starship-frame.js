@@ -168,10 +168,10 @@ export default function (engine) {
         }
 
         /** Ensure pilotingBonus exists. */
-        if (!data.attributes.pilotingBonus) {
-            data.attributes.pilotingBonus = {value: 0};
-        }
-        data.attributes.pilotingBonus.value = maneuverabilityMap[data.attributes.maneuverability].pilotingBonus;
+        data.attributes.pilotingBonus = {
+            value: maneuverabilityMap[data.attributes.maneuverability].pilotingBonus,
+            tooltip: [game.i18n.format("SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip", {maneuverability: data.attributes.maneuverability})]
+        };
         
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );

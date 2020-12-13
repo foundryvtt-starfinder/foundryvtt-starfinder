@@ -288,6 +288,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
             if (item.type === "starshipFrame") arr[6].push(item);
             else if (item.type === "starshipPowerCore") arr[7].push(item);
+            else if (item.type === "starshipThruster") arr[8].push(item);
             else if (starshipSystems.includes(item.type)) arr[9].push(item);
             else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[10].push(item);
             else {
@@ -349,7 +350,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const features = {
             frame: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", {"current": frame.length}), items: frame, hasActions: false, dataset: { type: "starshipFrame" } },
-            powerCore: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PowerCores"), items: powerCores, hasActions: false, dataset: { type: "starshipPowerCore" } },
+            powerCores: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PowerCores"), items: powerCores, hasActions: false, dataset: { type: "starshipPowerCore" } },
+            thrusters: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Thrusters"), items: thrusters, hasActions: false, dataset: { type: "starshipThruster" } },
             systems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Systems"), items: systems, hasActions: false, dataset: { type: "starshipComputer" } }
         };
 
@@ -357,6 +359,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         data.activeFrame = frame.length > 0 ? frame[0] : null;
         data.hasPower = powerCores.length > 0;
+        data.hasThrusters = thrusters.filter(x => !x.data.isBooster).length > 0;
 
         data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
     }
@@ -413,7 +416,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         } else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
 
-            const acceptedStarshipItems = ["starshipFrame", "starshipWeapon", "starshipComputer", "starshipPowerCore"];
+            const acceptedStarshipItems = ["starshipFrame", "starshipComputer", "starshipPowerCore", "starshipThruster", "starshipWeapon"];
             if (acceptedStarshipItems.includes(rawItemData.type)) {
                 return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
             } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {
