@@ -801,6 +801,10 @@ export class ItemSFRPG extends Item {
 
         let modifiers = this.actor.getAllModifiers();
         modifiers = modifiers.filter(mod => {
+            if (!acceptedModifiers.includes(mod.effectType)) {
+                return false;
+            }
+
             if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
                 if (mod.valueAffected !== this.data.data.weaponType) {
                     return false;
@@ -810,7 +814,7 @@ export class ItemSFRPG extends Item {
                     return false;
                 }
             }
-            return (mod.enabled || mod.modifierType === "formula") && acceptedModifiers.includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula");
         });
 
         let stackModifiers = new StackModifiers();
