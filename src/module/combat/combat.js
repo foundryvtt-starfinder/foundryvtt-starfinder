@@ -137,7 +137,11 @@ export class CombatSFRPG extends Combat {
         }
         
         if (nextTurn < 0) {
-            nextTurn = 0;
+            if (this.settings.skipDefeated) {
+                nextTurn = this.getIndexOfFirstUndefeatedCombatant();;
+            } else {
+                nextTurn = 0;
+            }
             nextPhase = nextPhase - 1;
             if (nextPhase < 0) {
                 nextPhase = this.getPhases().length - 1;
@@ -152,7 +156,11 @@ export class CombatSFRPG extends Combat {
         if (nextPhase !== this.data.flags.sfrpg.phase || nextRound !== this.round) {
             const newPhase = this.getPhases()[nextPhase];
             if (newPhase.iterateTurns) {
-                nextTurn = this.getIndexOfLastUndefeatedCombatant();
+                if (this.settings.skipDefeated) {
+                    nextTurn = this.getIndexOfLastUndefeatedCombatant();
+                } else {
+                    nextTurn = this.turns.length - 1;
+                }
             }
         }
 
@@ -184,27 +192,48 @@ export class CombatSFRPG extends Combat {
                         break;
                     }
                 }
+
+                /** Skip the last actor if it is dead. */
+                if (nextTurn === this.turns.length - 1 && this.turns[nextTurn].defeated) {
+                    nextTurn = this.turns.length + 1; 
+                }
             }
         
             if (nextTurn >= this.turns.length) {
                 nextPhase += 1;
-                nextTurn = 0;
+                if (this.settings.skipDefeated) {
+                    nextTurn = this.getIndexOfFirstUndefeatedCombatant();;
+                } else {
+                    nextTurn = 0;
+                }
             }
         } else {
             nextPhase += 1;
-            nextTurn = 0;
-        }
+            if (this.settings.skipDefeated) {
+                nextTurn = this.getIndexOfFirstUndefeatedCombatant();;
+            } else {
+                nextTurn = 0;
+            }
+    }
 
         if (nextPhase >= phases.length) {
             nextRound += 1;
             nextPhase = 0;
-            nextTurn = 0;
-        }
+            if (this.settings.skipDefeated) {
+                nextTurn = this.getIndexOfFirstUndefeatedCombatant();;
+            } else {
+                nextTurn = 0;
+            }
+    }
 
         if (nextPhase !== this.data.flags.sfrpg.phase) {
             const newPhase = phases[nextPhase];
             if (newPhase.iterateTurns) {
-                nextTurn = this.getIndexOfFirstUndefeatedCombatant();
+                if (this.settings.skipDefeated) {
+                    nextTurn = this.getIndexOfFirstUndefeatedCombatant();
+                } else {
+                    nextTurn = 0;
+                }
             }
         }
 
