@@ -65,8 +65,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     }
 
     get template() {
-        if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/limited-starship-sheet.html";
-        return "systems/sfrpg/templates/actors/starship-sheet.html";
+        if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/starship-sheet-limited.html";
+        return "systems/sfrpg/templates/actors/starship-sheet-full.html";
     }
 
     getData() {
