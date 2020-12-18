@@ -64,7 +64,7 @@ import calculateStarshipArmorClass      from './rules/actions/actor/starship/cal
 import calculateStarshipCrew            from './rules/actions/actor/starship/calculate-starship-crew.js';
 import calculateStarshipCritThreshold   from './rules/actions/actor/starship/calculate-starship-ct.js';
 import calculateStarshipDrift           from './rules/actions/actor/starship/calculate-starship-drift.js';
-import calculateStarshipMaxShields      from './rules/actions/actor/starship/calculate-starship-max-shields.js';
+import calculateStarshipAblative        from './rules/actions/actor/starship/calculate-starship-ablative.js';
 import calculateStarshipPower           from './rules/actions/actor/starship/calculate-starship-power.js';
 import calculateStarshipShields         from './rules/actions/actor/starship/calculate-starship-shields.js';
 import calculateStarshipSpeed           from './rules/actions/actor/starship/calculate-starship-speed.js';
@@ -112,7 +112,7 @@ export default function (engine) {
     calculateStarshipCrew(engine);
     calculateStarshipCritThreshold(engine);
     calculateStarshipDrift(engine);
-    calculateStarshipMaxShields(engine);
+    calculateStarshipAblative(engine);
     calculateStarshipPower(engine);
     calculateStarshipShields(engine);
     calculateStarshipSpeed(engine);
@@ -217,13 +217,13 @@ export default function (engine) {
                 then: [
                     "calculateStarshipFrame",
                     "calculateStarshipCrew",
-                    "calculateStarshipArmorClass",
                     "calculateStarshipCritThreshold",
                     "calculateStarshipDrift",
                     "calculateStarshipShields",
-                    "calculateStarshipMaxShields",
+                    "calculateStarshipAblative",
                     "calculateStarshipPower",
                     "calculateStarshipSpeed",
+                    "calculateStarshipArmorClass",
                     "calculateStarshipTargetLock",
                     "calculateStarshipComputer"
                 ]

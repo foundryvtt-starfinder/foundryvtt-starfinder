@@ -42,6 +42,10 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Common component data --}}
+            {{> "systems/sfrpg/templates/items/parts/starship-component.html" this}}
+
             <h3 class="form-header">{{ "SFRPG.Items.Weapon.Details" }}</h3>
 
             {{!-- Weapon Type --}}
@@ -97,16 +101,6 @@
                     {{ name }}
                 </label>
                 {{/each}}
-            </div>
-
-            {{!-- Weapon Costs --}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.ShipWeapon.PowerCost" }}</label>
-                <input type="text" value="{{data.pcu}}" name="data.pcu" data-dtype="Number" />
-            </div>
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.ShipWeapon.BpCost" }}</label>
-                <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number" />
             </div>
 
             {{!-- Weapon speed (only applies to tracking weapons) --}}

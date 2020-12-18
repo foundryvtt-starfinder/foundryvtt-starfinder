@@ -128,8 +128,8 @@ Hooks.once("setup", function () {
         "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
         "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
         "weaponSpecial", "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
-        "thrusterSystems", "armorSystems", "crewQuarterSystems", "defenseSystems",
-        "driftEngineSystems", "sensorSystems", "shieldSystems", "expansionBaySystems", "securitySystems",
+        "crewQuarterSystems", "defenseSystems",
+        "driftEngineSystems", "sensorSystems", "expansionBaySystems", "securitySystems",
         "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
         "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes"
     ];
@@ -147,6 +147,26 @@ Hooks.once("setup", function () {
 
     Handlebars.registerHelper("not", function (value) {
         return !Boolean(value);
+    });
+
+    Handlebars.registerHelper("add", function (v1, v2, options) {
+        'use strict';
+        return v1 + v2;
+    });
+
+    Handlebars.registerHelper("sub", function (v1, v2, options) {
+        'use strict';
+        return v1 - v2;
+    });
+
+    Handlebars.registerHelper("mult", function (v1, v2, options) {
+        'use strict';
+        return v1 * v2;
+    });
+
+    Handlebars.registerHelper("div", function (v1, v2, options) {
+        'use strict';
+        return v1 / v2;
     });
 
     Handlebars.registerHelper('greaterThan', function (v1, v2, options) {

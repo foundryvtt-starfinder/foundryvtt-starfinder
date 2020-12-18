@@ -25,10 +25,14 @@
         "TypeFusion": "Waffenfusion",
         "TypeUpgrade": "Rüstungsverbesserung",
         "TypeAugmentation": "Aufwertung",
+        "TypeStarshipablativearmor": "Starship Ablative Armor",
         "TypeStarshipaction": "Starship Action",
+        "TypeStarshiparmor": "Starship Armor",
         "TypeStarshipcomputer": "Starship Computer",
+        "TypeStarshipdefensivecountermeasure": "Starship Defensive Countermeasure",
         "TypeStarshipframe": "Raumschiffgrundstruktur",
         "TypeStarshippowercore": "Starship Power Core",
+        "TypeStarshipshield": "Starship Shield",
         "TypeStarshipthruster": "Starship Thruster",
         "TypeStarshipweapon": "Raumschiffwaffe",
         "TypeArchetypes": "Archetyp",
@@ -864,9 +868,13 @@
                 "Races"               : "Rassen",
                 "Shields"             : "Schilde",
                 "Spells"              : "Zauber",
+                "StarshipAblativeArmor": "Starship Ablative Armors",
+                "StarshipArmors"      : "Starship Armors",
                 "StarshipComputers"   : "Starship Computers",
+                "StarshipDefensiveCountermeasures": "Starship Defensive Countermeasures",
                 "StarshipFrames"      : "Raumschiffgrundstrukturen",
                 "StarshipPowerCores"  : "Starship Power Cores",
+                "StarshipShields"     : "Starship Shields",
                 "StarshipThrusters"   : "Starship Thrusters",
                 "StarshipWeapons"     : "Raumschiffwaffen",
                 "TechnologicalItems"  : "Technische Gegenstände",
@@ -1036,9 +1044,30 @@
                 "Sturdy": "Widerstandsfähig",
                 "SturdyTooltip": "Ausrüstung, wie Waffen und Rüstungen, gelten als widerstandsfähig."
             },
+            "StarshipAblativeArmor": {
+                "AblativeValue": "Total additional hitpoints",
+                "AblativeValueTooltip": "The total amount of ablative armor hitpoints to distribute over the four quadrants.",
+                "Header": "Ablative Armor Properties",
+                "TargetLockPenalty": "Target Lock Penalty",
+                "TargetLockPenaltyTooltip": "The penalty applied to the ship's target lock score.",
+                "TurnDistancePenalty": "Turn Distance Penalty",
+                "TurnDistancePenaltyTooltip": "The penalty applied to the ship's turn distance score."
+            },
+            "StarshipArmor": {
+                "ArmorBonus": "Armor Bonus",
+                "ArmorBonusTooltip": "The armor class bonus provided by this armor.",
+                "Header": "Ablative Armor Properties",
+                "TargetLockPenalty": "Target Lock Penalty",
+                "TargetLockPenaltyTooltip": "The penalty applied to the ship's target lock score.",
+                "TurnDistancePenalty": "Turn Distance Penalty",
+                "TurnDistancePenaltyTooltip": "The penalty applied to the ship's turn distance score."
+            },
             "StarshipComponent": {
                 "Cost": "Buildpoint Cost",
                 "CostTooltip": "The amount of buildpoints required to obtain this component.",
+                "CostMultipliedBySize": "BP Cost Multiplied by Size",
+                "CostMultipliedBySizeTooltip": "Is the BP cost multiplied by the starship frame size?",
+                "IsCostMultipliedBySize": "Is multiplied",
                 "Header": "Common Component Properties",
                 "PCU": "PCU Usage",
                 "PCUTooltip": "The amount of power this component requires to function."
@@ -1049,6 +1078,11 @@
                 "ModifierTooltip": "The roll modifier provided by this computer.",
                 "Nodes": "Nodes",
                 "NodesTooltip": "The amount of times per turn this computer can provide its bonus for."
+            },
+            "StarshipDefensiveCountermeasure": {
+                "Header": "Defensive Countermeasure Properties",
+                "TargetLockBonus": "Target Lock Bonus",
+                "TargetLockBonusTooltip": "The bonus applied to the ship's target lock score."
             },
             "StarshipFrame": {
                 "Details": {
@@ -1090,6 +1124,22 @@
                 "ProvidedPowerTooltip": "The amount of PCU provided by this power core.",
                 "Sizes": "Supported Starship Sizes",
                 "SizesTooltip": "Select the starship sizes that this power core can be installed onto."
+            },
+            "StarshipShield": {
+                "ArmorBonus": "Armor Bonus",
+                "ArmorBonusTooltip": "The armor class bonus provided by this shield.",
+                "DefenseValue": "Defense Value",
+                "DefenseValueTooltip": "The maximum defense value available with this deflector shield.",
+                "Header": "Shield Properties",
+                "Regeneration": "Regeneration per minute",
+                "RegenerationTooltip": "The amount of shield points regenerated per minute.",
+                "ShieldPoints": "Shield Points",
+                "ShieldPointsTooltip": "The total amount of shield points provided by this shield.",
+                "ShieldType": "Shield Type",
+                "ShieldTypeTooltip": "Is this shield a deflector shield?",
+                "IsDeflector": "Is Deflector Shield",
+                "TargetLockBonus": "Target Lock Bonus",
+                "TargetLockBonusTooltip": "The bonus applied to the ship's target lock score."
             },
             "StarshipThruster": {
                 "Booster": "Booster Thruster",
@@ -1782,15 +1832,30 @@
                 "CrewLimitReached": "You have reached the maximum amount of crew allowed for the role of '{targetRole}'."
             },
             "Details": {
+                "Ablative": {
+                    "Aft": "Aft Ablative Armor",
+                    "Forward": "Forward Ablative Armor",
+                    "Header": "Ablative",
+                    "Port": "Port Ablative Armor",
+                    "Starboard": "Starboard Ablative Armor"
+                },
+                "AblativeExceedsHull": "Total ablative exceeds double hull points!",
+                "AblativeExceedsHullTooltip": " starship cannot support ablative armor if its temporary Hull Points exceed twice its standard Hull Point total. (For more information, see the Starship Operations Manual pg. 20)",
+                "AblativeTooHigh": "Too much ablative assigned!",
+                "AblativeTooHighTooltip": "Either the total of installed ablative is too high, or the sum total of current ablative score is too high.",
                 "Shields": {
                     "Aft": "Achternschilde",
+                    "Conventional": "Shields",
+                    "Deflector": "Shield DV",
                     "Forward": "Bugschilde",
                     "Header": "Schilde",
                     "Port": "Backbordschilde",
                     "Starboard": "Steuerbordschilde"
                 },
-                "ShieldTooHigh": "Schild ist zu hoch!",
-                "ShieldTooHighTooltip": "Ein Schildquadrant darf nicht mehr als 70% der gesamten Schildzuweisung betragen, da das für jeden Schild verfügbare Minimum 10% betragen muss. (Weitere Informationen finden Sie im Grundregelwerk auf S. 302)"
+                "ShieldHighestTooHigh": "One or more quadrants exceed limits!",
+                "ShieldHighestTooHighTooltip": "Ein Schildquadrant darf nicht mehr als 70% der gesamten Schildzuweisung betragen, da das für jeden Schild verfügbare Minimum 10% betragen muss. (Weitere Informationen finden Sie im Grundregelwerk auf S. 302)",
+                "ShieldTotalTooHigh": "Shield total exceeds maximum!",
+                "ShieldTotalTooHighTooltip": "The total sum of shields exceeds the shield's maximum output."
             },
             "Features": {
                 "Frame": "Grundstruktur ({current} / 1)",
@@ -1800,6 +1865,8 @@
             },
             "Header": {
                 "FrameMissing": "Fehlende Grundstruktur",
+                "Max": "Max",
+                "Misc": "Misc",
                 "Movement": {
                     "Maneuverability": "Manövrierfähigkeit",
                     "ManeuverabilityTooltip": "Manövrierfähigkeit: {maneuverability}",
@@ -1811,7 +1878,24 @@
                 "Value": "Value"
             },
             "Modifiers": {
-                "ComputerBonus": "Computer Bonus: {mod} ({source})"
+                "AblativeOverload": "Ablative overload: {mod}",
+                "Base": "Base: 10",
+                "ComputerBonus": "Computer Bonus: {mod} ({source})",
+                "MiscModifier": "Misc modifier: {value}",
+                "PilotingBonus": "Piloting Bonus: {value}",
+                "PilotSkillBonus": "Pilot Skill Bonus: {value}",
+                "SizeModifier": "Size modifier: {value}",
+                "UnevenAblative": "Uneven Ablative: {mod}"
+            },
+            "Quadrants": {
+                "AblativeHeader": "Ablative Armor",
+                "ArmorClass": "Armor Class",
+                "EvenDistribution": "Even distribution",
+                "Header": "Quadrant Defenses",
+                "NotAvailable": "Not available",
+                "QuadrantLimit": "Quadrant limit",
+                "ShieldHeader": "Shields",
+                "TargetLock": "Target Lock"
             },
             "Role": {
                 "Captain": "Captain",

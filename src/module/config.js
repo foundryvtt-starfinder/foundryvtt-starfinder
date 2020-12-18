@@ -684,62 +684,6 @@ SFRPG.maneuverability = {
     "perfect": "SFRPG.ShipSystems.Maneuverability.Perfect"
 };
 
-SFRPG.thrusterSystems = {
-    // Tiny
-    "t6" : "SFRPG.ShipSystems.ThrusterSystems.T6",
-    "t8" : "SFRPG.ShipSystems.ThrusterSystems.T8",
-    "t10": "SFRPG.ShipSystems.ThrusterSystems.T10",
-    "t12": "SFRPG.ShipSystems.ThrusterSystems.T12",
-    "t14": "SFRPG.ShipSystems.ThrusterSystems.T14",
-    // Small
-    "s6" : "SFRPG.ShipSystems.ThrusterSystems.S6",
-    "s8" : "SFRPG.ShipSystems.ThrusterSystems.S8",
-    "s10": "SFRPG.ShipSystems.ThrusterSystems.S10",
-    "s12": "SFRPG.ShipSystems.ThrusterSystems.S12",
-    // Medium
-    "m4" : "SFRPG.ShipSystems.ThrusterSystems.M4",
-    "m6" : "SFRPG.ShipSystems.ThrusterSystems.M6",
-    "m8" : "SFRPG.ShipSystems.ThrusterSystems.M8",
-    "m10": "SFRPG.ShipSystems.ThrusterSystems.M10",
-    "m12": "SFRPG.ShipSystems.ThrusterSystems.M12",
-    // Large
-    "l4" : "SFRPG.ShipSystems.ThrusterSystems.L4",
-    "l6" : "SFRPG.ShipSystems.ThrusterSystems.L6",
-    "l8" : "SFRPG.ShipSystems.ThrusterSystems.L8",
-    "l10": "SFRPG.ShipSystems.ThrusterSystems.L10",
-    // Huge
-    "h4" : "SFRPG.ShipSystems.ThrusterSystems.H4",
-    "h6" : "SFRPG.ShipSystems.ThrusterSystems.H6",
-    "h8" : "SFRPG.ShipSystems.ThrusterSystems.H8",
-    "h10": "SFRPG.ShipSystems.ThrusterSystems.H10",
-    // Gargantuan
-    "g4" : "SFRPG.ShipSystems.ThrusterSystems.G4",
-    "g6" : "SFRPG.ShipSystems.ThrusterSystems.G6",
-    "g8" : "SFRPG.ShipSystems.ThrusterSystems.G8",
-    // Colossal
-    "c4" : "SFRPG.ShipSystems.ThrusterSystems.C4",
-    "c6" : "SFRPG.ShipSystems.ThrusterSystems.C6",
-    "c8" : "SFRPG.ShipSystems.ThrusterSystems.C8"
-};
-
-SFRPG.armorSystems = {
-    "mk1" : "SFRPG.ShipSystems.ArmorSystems.Mk01",
-    "mk2" : "SFRPG.ShipSystems.ArmorSystems.Mk02",
-    "mk3" : "SFRPG.ShipSystems.ArmorSystems.Mk03",
-    "mk4" : "SFRPG.ShipSystems.ArmorSystems.Mk04",
-    "mk5" : "SFRPG.ShipSystems.ArmorSystems.Mk05",
-    "mk6" : "SFRPG.ShipSystems.ArmorSystems.Mk06",
-    "mk7" : "SFRPG.ShipSystems.ArmorSystems.Mk07",
-    "mk8" : "SFRPG.ShipSystems.ArmorSystems.Mk08",
-    "mk9" : "SFRPG.ShipSystems.ArmorSystems.Mk09",
-    "mk10": "SFRPG.ShipSystems.ArmorSystems.Mk10",
-    "mk11": "SFRPG.ShipSystems.ArmorSystems.Mk11",
-    "mk12": "SFRPG.ShipSystems.ArmorSystems.Mk12",
-    "mk13": "SFRPG.ShipSystems.ArmorSystems.Mk13",
-    "mk14": "SFRPG.ShipSystems.ArmorSystems.Mk14",
-    "mk15": "SFRPG.ShipSystems.ArmorSystems.Mk15"
-};
-
 SFRPG.crewQuarterSystems = {
     "common"   : "SFRPG.ShipSystems.CrewQuarterSystems.Common",
     "good"     : "SFRPG.ShipSystems.CrewQuarterSystems.Good",
@@ -783,31 +727,6 @@ SFRPG.sensorSystems = {
     "bulong" : "SFRPG.ShipSystems.SensorSystems.Bulong",
     "balong" : "SFRPG.ShipSystems.SensorSystems.Balong",
     "along"  : "SFRPG.ShipSystems.SensorSystems.Along"
-};
-
-SFRPG.shieldSystems = {
-    "10" : "SFRPG.ShipSystems.ShieldSystems.010",
-    "20" : "SFRPG.ShipSystems.ShieldSystems.020",
-    "30" : "SFRPG.ShipSystems.ShieldSystems.030",
-    "40" : "SFRPG.ShipSystems.ShieldSystems.040",
-    "50" : "SFRPG.ShipSystems.ShieldSystems.050",
-    "60" : "SFRPG.ShipSystems.ShieldSystems.060",
-    "70" : "SFRPG.ShipSystems.ShieldSystems.070",
-    "80" : "SFRPG.ShipSystems.ShieldSystems.080",
-    "90" : "SFRPG.ShipSystems.ShieldSystems.090",
-    "100": "SFRPG.ShipSystems.ShieldSystems.100",
-    "120": "SFRPG.ShipSystems.ShieldSystems.120",
-    "140": "SFRPG.ShipSystems.ShieldSystems.140",
-    "160": "SFRPG.ShipSystems.ShieldSystems.160",
-    "200": "SFRPG.ShipSystems.ShieldSystems.200",
-    "240": "SFRPG.ShipSystems.ShieldSystems.240",
-    "280": "SFRPG.ShipSystems.ShieldSystems.280",
-    "320": "SFRPG.ShipSystems.ShieldSystems.320",
-    "360": "SFRPG.ShipSystems.ShieldSystems.360",
-    "420": "SFRPG.ShipSystems.ShieldSystems.420",
-    "480": "SFRPG.ShipSystems.ShieldSystems.480",
-    "540": "SFRPG.ShipSystems.ShieldSystems.540",
-    "600": "SFRPG.ShipSystems.ShieldSystems.600"
 };
 
 SFRPG.expansionBaySystems = {
@@ -903,105 +822,6 @@ SFRPG.starshipRoleNames = {
 };
 
 // starship value maps
-SFRPG.shieldsMap = {
-    "10": 10,
-    "20": 20,
-    "30": 30,
-    "40": 40,
-    "50": 50,
-    "60": 60,
-    "70": 70,
-    "80": 80,
-    "90": 90,
-    "100": 100,
-    "120": 120,
-    "140": 140,
-    "160": 160,
-    "200": 200,
-    "240": 240,
-    "280": 280,
-    "320": 320,
-    "360": 360,
-    "420": 420,
-    "480": 480,
-    "540": 540,
-    "600": 600
-};
-
-SFRPG.armorDefenseMap = {
-    "mk1": 1,
-    "mk2": 2,
-    "mk3": 3,
-    "mk4": 4,
-    "mk5": 5,
-    "mk6": 6,
-    "mk7": 7,
-    "mk8": 8,
-    "mk9": 9,
-    "mk10": 10,
-    "mk11": 11,
-    "mk12": 12,
-    "mk13": 13,
-    "mk14": 14,
-    "mk15": 15
-};
-
-SFRPG.thrustersMap = {
-    "t6": { speed: 6, mod: 1 },
-    "t8": { speed: 8, mod: 0 },
-    "t10": { speed: 10, mod: 0 },
-    "t12": { speed: 12, mod: -1 },
-    "t14": { speed: 14, mod: -2 },
-    "s6": { speed: 6, mod: 1 },
-    "s8": { speed: 8, mod: 0 },
-    "s10": { speed: 10, mod: 0 },
-    "s12": { speed: 12, mod: -1 },
-    "m4": { speed: 4, mod: 2 },
-    "m6": { speed: 6, mod: 1 },
-    "m8": { speed: 8, mod: 0 },
-    "m10": { speed: 10, mod: 0 },
-    "m12": { speed: 12, mod: -1 },
-    "l4": { speed: 4, mod: 2 },
-    "l6": { speed: 6, mod: 1 },
-    "l8": { speed: 8, mod: 0 },
-    "l10": { speed: 10, mod: 0 },
-    "h4": { speed: 4, mod: 2 },
-    "h6": { speed: 6, mod: 1 },
-    "h8": { speed: 8, mod: 0 },
-    "h10": { speed: 10, mod: 0 },
-    "g4": { speed: 4, mod: 2 },
-    "g6": { speed: 6, mod: 1 },
-    "g8": { speed: 8, mod: 0 },
-    "c4": { speed: 4, mod: 2 },
-    "c6": { speed: 6, mod: 1 },
-    "c8": { speed: 8, mod: 0 }
-};
-
-SFRPG.powercoreMap = {
-    "micronL": { size: ["tiny"], pcu: 50 },
-    "micronH": { size: ["tiny"], pcu: 70 },
-    "micronU": { size: ["tiny"], pcu: 80 },
-    "arcusL": { size: ["tiny", "small"], pcu: 75 },
-    "pulseBr": { size: ["tiny", "small"], pcu: 90 },
-    "pulseBl": { size: ["tiny", "small"], pcu: 120 },
-    "pulseWh": { size: ["tiny", "small"], pcu: 140 },
-    "pulseGy": { size: ["tiny", "small", "medium"], pcu: 100 },
-    "arcusH": { size: ["tiny", "small", "medium"], pcu: 130 },
-    "puslseGr": { size: ["tiny", "small", "medium"], pcu: 150 },
-    "pulseRe": { size: ["tiny", "small", "medium"], pcu: 175 },
-    "pulseBu": { size: ["tiny", "small", "medium"], pcu: 200 },
-    "arcusUl": { size: ["small", "medium", "large"], pcu: 150 },
-    "arcusMax": { size: ["small", "medium", "large"], pcu: 200 },
-    "pulseOr": { size: ["small", "medium", "large"], pcu: 250 },
-    "pulsePr": { size: ["small", "medium", "large"], pcu: 300 },
-    "novaL": { size: ["medium", "large", "huge"], pcu: 150 },
-    "novaH": { size: ["medium", "large", "huge"], pcu: 200 },
-    "novaU": { size: ["medium", "large", "huge"], pcu: 300 },
-    "gateL": { size: ["large", "huge", "gargantuan"], pcu: 300 },
-    "gateH": { size: ["large", "huge", "gargantuan"], pcu: 400 },
-    "gateU": { size: ["huge", "gargantuan", "colossal"], pcu: 500 }
-};
-
 SFRPG.driftEngineMap = {
     "basic": 1,
     "booster": 2,
@@ -1425,9 +1245,13 @@ SFRPG.itemTypes = {
     "race": "SFRPG.Items.Categories.Races",
     "spell": "SFRPG.Items.Categories.Spells",
     "starshipAction": "SFRPG.Items.Categories.StarshipActions",
+    "starshipAblativeArmor": "SFRPG.Items.Categories.StarshipAblativeArmors",
+    "starshipArmor": "SFRPG.Items.Categories.StarshipArmors",
     "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
+    "starshipDefensiveCountermeasure": "SFRPG.Items.Categories.StarshipDefensiveCountermeasures",
     "starshipFrame": "SFRPG.Items.Categories.StarshipFrames",
     "starshipPowerCore": "SFRPG.Items.Categories.StarshipPowerCores",
+    "starshipShield": "SFRPG.Items.Categories.StarshipShields",
     "starshipThruster": "SFRPG.Items.Categories.StarshipThrusters",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",

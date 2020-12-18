@@ -94,8 +94,48 @@
     .sheet-body {
         .attributes {
             .attribute {
+                &.defenses {
+                    height: 140px;
+                }
+
                 .attribute-value span {
                     font-size: 24px;
+                }
+
+                .attribute-value {
+                    label {
+                        font-size: 16px;
+
+                        &.rightAligned {
+                            text-align: right;
+                        }
+
+                        &.notInstalled {
+                            flex: 6;
+                            font-size: 12px;
+                            text-align: left;
+                        }
+                    }
+
+                    .name {
+                        flex: 6;
+                    }
+
+                    .quadrantText {
+                        flex: 2;
+                        font-size: 16px;
+                    }
+
+                    .quadrantFiller {
+                        flex: 4;
+                    }
+
+                    input {
+                        &.quadrantDefense {
+                            flex: 2;
+                            text-align: center;
+                        }
+                    }
                 }
             }
         }

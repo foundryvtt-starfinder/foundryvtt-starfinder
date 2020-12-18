@@ -17,21 +17,9 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipComponent.Header" }}</h4>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number" placeholder="0"/>
-                </div>
-            </div>
-
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCU" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCUTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCU" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="data.pcu" value="{{data.pcu}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
+            {{!-- Common component data --}}
+            {{> "systems/sfrpg/templates/items/parts/starship-component.html" this}}
 
             <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipThruster.Header" }}</h4>
 

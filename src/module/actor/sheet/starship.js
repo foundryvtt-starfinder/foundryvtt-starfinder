@@ -267,7 +267,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             inventory: { label: "Inventory", items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
         };
 
-        const starshipSystems = ["starshipComputer"];
+        const starshipSystems = ["starshipAblativeArmor", "starshipArmor", "starshipComputer", "starshipDefensiveCountermeasure", "starshipShield"];
 
         let [forward, starboard, aft, port, turret, unmounted, frame, powerCores, thrusters, systems, cargo] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
@@ -338,7 +338,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             frame: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", {"current": frame.length}), items: frame, hasActions: false, dataset: { type: "starshipFrame" } },
             powerCores: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PowerCores"), items: powerCores, hasActions: false, dataset: { type: "starshipPowerCore" } },
             thrusters: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Thrusters"), items: thrusters, hasActions: false, dataset: { type: "starshipThruster" } },
-            systems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Systems"), items: systems, hasActions: false, dataset: { type: "starshipComputer" } }
+            systems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Systems"), items: systems, hasActions: false, dataset: { type: "starshipAblativeArmor,starshipArmor,starshipComputer,starshipDefensiveCountermeasure,starshipShield" } }
         };
 
         data.features = Object.values(features);
@@ -402,7 +402,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         } else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
 
-            const acceptedStarshipItems = ["starshipFrame", "starshipComputer", "starshipPowerCore", "starshipThruster", "starshipWeapon"];
+            const acceptedStarshipItems = ["starshipAblativeArmor", "starshipArmor", "starshipComputer", "starshipDefensiveCountermeasure", "starshipFrame", "starshipPowerCore", "starshipShield", "starshipThruster", "starshipWeapon"];
             if (acceptedStarshipItems.includes(rawItemData.type)) {
                 return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
             } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {

@@ -14,6 +14,18 @@ export default function (engine) {
             "perfect": { pilotingBonus: 2, turn: 0 }
         };
 
+        const sizeModifierMap = {
+            "n/a": 0,
+            "tiny": 1,
+            "small": 2,
+            "medium": 3,
+            "large": 4,
+            "huge": 5,
+            "gargantuan": 6,
+            "colossal": 7,
+            "superColossal": 8
+        };
+
         if (!data.crew) {
             data.crew = {
                 captain: {
@@ -91,18 +103,6 @@ export default function (engine) {
             tooltip: []
         };
 
-        const starshipComponents = fact.items.filter(x => x.type.startsWith("starship"));
-        for (const component of starshipComponents) {
-            data.attributes.bp.value += component.data.cost;
-            data.attributes.bp.tooltip.push(`${component.name}: ${component.data.cost}`);
-
-            const excludedComponents = ["starshipFrame", "starshipPowerCore"];
-            if (!excludedComponents.includes(component.type)) {
-                data.attributes.power.value += component.data.pcu;
-                data.attributes.power.tooltip.push(`${component.name}: ${component.data.pcu}`);
-            }
-        }
-
         data.attributes.speed = {
             value: 0,
             tooltip: []
@@ -172,6 +172,93 @@ export default function (engine) {
             value: maneuverabilityMap[data.attributes.maneuverability].pilotingBonus,
             tooltip: [game.i18n.format("SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip", {maneuverability: data.attributes.maneuverability})]
         };
+
+        /** Ensure quadrants exist */
+        if (!data.quadrants) {
+            data.quadrants = {
+                forward: {
+                    shields: {
+                        value: 0
+                    },
+                    ablative: {
+                        value: 0
+                    },
+                    ac: {
+                        value: 10,
+                        misc: null
+                    },
+                    targetLock: {
+                        value: 10,
+                        misc: null
+                    }
+                },
+                port: {
+                    shields: {
+                        value: 0
+                    },
+                    ablative: {
+                        value: 0
+                    },
+                    ac: {
+                        value: 10,
+                        misc: null
+                    },
+                    targetLock: {
+                        value: 10,
+                        misc: null
+                    }
+                },
+                starboard: {
+                    shields: {
+                        value: 0
+                    },
+                    ablative: {
+                        value: 0
+                    },
+                    ac: {
+                        value: 10,
+                        misc: null
+                    },
+                    targetLock: {
+                        value: 10,
+                        misc: null
+                    }
+                },
+                aft: {
+                    shields: {
+                        value: 0
+                    },
+                    ablative: {
+                        value: 0
+                    },
+                    ac: {
+                        value: 10,
+                        misc: null
+                    },
+                    targetLock: {
+                        value: 10,
+                        misc: null
+                    }
+                }
+            };
+        }
+
+        /** Compute BP */
+        const sizeModifier = sizeModifierMap[data.details.size] || 0;
+        const starshipComponents = fact.items.filter(x => x.type.startsWith("starship"));
+        for (const component of starshipComponents) {
+            const bpCost = component.data.costMultipliedBySize ? sizeModifier * component.data.cost : component.data.cost;
+            data.attributes.bp.value += bpCost;
+            data.attributes.bp.tooltip.push(`${component.name}: ${bpCost}`);
+
+            const excludedComponents = ["starshipFrame", "starshipPowerCore"];
+            if (!excludedComponents.includes(component.type)) {
+                if (component.data.pcu) {
+                    data.attributes.power.value += component.data.pcu;
+                    data.attributes.power.tooltip.push(`${component.name}: ${component.data.pcu}`);
+                }
+            }
+        }
         
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );
