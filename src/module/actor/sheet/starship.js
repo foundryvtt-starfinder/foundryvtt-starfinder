@@ -1,4 +1,6 @@
 import { ActorSheetSFRPG } from "./base.js";
+import { AddEditSkillDialog } from "../../apps/edit-skill-dialog.js";
+import { ChoiceDialog } from "../../apps/choice-dialog.js";
 
 /**
  * An Actor sheet for a starship in the SFRPG system.
@@ -347,7 +349,19 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         data.hasPower = powerCores.length > 0;
         data.hasThrusters = thrusters.filter(x => !x.data.isBooster).length > 0;
 
-        data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
+        if (!this.actor.data.data.isNPCCrew) {
+            data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
+        } else {
+            data.actions = {
+                captain: ActorSheetSFRPGStarship.StarshipActionsCache.captain,
+                pilot: ActorSheetSFRPGStarship.StarshipActionsCache.pilot,
+                gunner: ActorSheetSFRPGStarship.StarshipActionsCache.gunner,
+                engineer: ActorSheetSFRPGStarship.StarshipActionsCache.engineer,
+                scienceOfficer: ActorSheetSFRPGStarship.StarshipActionsCache.scienceOfficer,
+                chiefMate: ActorSheetSFRPGStarship.StarshipActionsCache.chiefMate,
+                magicOfficer: ActorSheetSFRPGStarship.StarshipActionsCache.magicOfficer
+            };
+        }
     }
 
     /**
@@ -380,6 +394,12 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         html.find('.action .action-name h4').click(event => this._onActionRoll(event));
         html.find('.action .action-image').click(event => this._onActionRoll(event));
+        
+        html.find('.skill-create').click(ev => this._onCrewSkillCreate(ev));
+        html.find('.skill-delete').click(this._onCrewSkillDelete.bind(this));
+        html.find('.crew-role-numberOfUses').change(this._onCrewNumberOfUsesChanged.bind(this));
+        html.find('.crew-skill-mod').change(this._onCrewSkillModifierChanged.bind(this));
+        html.find('.crew-skill-ranks').change(this._onCrewSkillRanksChanged.bind(this));
     }
 
     /** @override */
@@ -567,6 +587,110 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         event.preventDefault();
         const actionId = event.currentTarget.closest('.action').dataset.actionId;
         return this.actor.useStarshipAction(actionId);
+    }
+
+    async _onCrewSkillCreate(event) {
+        event.preventDefault();
+
+        const roleId = $(event.currentTarget).closest('li').data('role');
+
+        const results = await ChoiceDialog.show(
+            "Add Skill",
+            "Select the skill you wish to add to the role of " + roleId + "?",
+            {
+                skill: {
+                    name: "Skill",
+                    options: Object.values(CONFIG.SFRPG.skills),
+                    default: Object.values(CONFIG.SFRPG.skills)[0]
+                }
+            }
+        );
+
+        if (results.resolution === 'cancel') {
+            return;
+        }
+
+        let skillId = null;
+        for(const [key, value] of Object.entries(CONFIG.SFRPG.skills)) {
+            if (value === results.result.skill) {
+                skillId = key;
+                break;
+            }
+        }
+
+        if (!skillId) {
+            return;
+        }
+
+        const crewData = duplicate(this.actor.data.data.crew);
+        crewData.npcData[roleId].skills[skillId] = {
+            isTrainedOnly: false,
+            hasArmorCheckPenalty: false,
+            value: 0,
+            misc: 0,
+            ranks: 0,
+            ability: "int",
+            subname: "",
+            mod: 0,
+            enabled: true
+        };
+        
+        await this.actor.update({"data.crew": crewData});
+    }
+
+    async _onCrewSkillDelete(event) {
+        event.preventDefault();
+        const roleId = $(event.currentTarget).closest('li').data('role');
+        const skillId = $(event.currentTarget).closest('li').data('skill');
+
+        this.actor.update({ [`data.crew.npcData.${roleId}.skills.-=${skillId}`]: null });
+    }
+
+    async _onCrewNumberOfUsesChanged(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const roleId = $(event.currentTarget).closest('li').data('role');
+
+        let parsedValue = parseInt(event.currentTarget.value);
+        if (Number.isNaN(parsedValue)) {
+            parsedValue = 0;
+        }
+
+        await this.actor.update({ [`data.crew.npcData.${roleId}.numberOfUses`]: parsedValue });
+        this.render(false);
+    }
+
+    async _onCrewSkillModifierChanged(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const roleId = $(event.currentTarget).closest('li').data('role');
+        const skillId = $(event.currentTarget).closest('li').data('skill');
+
+        let parsedValue = parseInt(event.currentTarget.value);
+        if (Number.isNaN(parsedValue)) {
+            parsedValue = 0;
+        }
+
+        await this.actor.update({ [`data.crew.npcData.${roleId}.skills.${skillId}.mod`]: parsedValue });
+        this.render(false);
+    }
+
+    async _onCrewSkillRanksChanged(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const roleId = $(event.currentTarget).closest('li').data('role');
+        const skillId = $(event.currentTarget).closest('li').data('skill');
+
+        let parsedValue = parseInt(event.currentTarget.value);
+        if (Number.isNaN(parsedValue)) {
+            parsedValue = 0;
+        }
+
+        await this.actor.update({ [`data.crew.npcData.${roleId}.skills.${skillId}.ranks`]: parsedValue });
+        this.render(false);
     }
 
     /**

@@ -494,6 +494,22 @@
 
         {{!-- Crew Tab --}}
         <div class="tab crew" data-group="primary" data-tab="crew">
+            <div class="crew-settings flexrow">
+                <ol class="settings flexrow">
+                    <h3>
+                        {{localize "SFRPG.StarshipSheet.Crew.Header"}}
+                        <i class="fas fa-users"></i>
+                    </h3>
+                    {{#if isGM}}
+                    <label class="checkbox">
+                        <label><b>{{localize "SFRPG.StarshipSheet.Crew.CrewSetting"}}</b></label>
+                        <input type="checkbox" name="data.isNPCCrew" {{checked data.isNPCCrew}}/>{{localize "SFRPG.StarshipSheet.Crew.IsNPCCrew"}}
+                    </label>
+                    {{/if}}
+                </ol>
+            </div>
+
+            {{#unless data.isNPCCrew}}
             <ol class="crew-list">
                 {{#each crew as |role|}}
                 <li class="flexrow crew-header {{role.cssClass}}" {{#each role.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>{{role.label}}</li>
@@ -512,6 +528,59 @@
                 </ol>
                 {{/each}}
             </ol>
+            {{else}}
+            <ol class="crew-list">
+                {{#each data.crew.npcData as |role roleId|}}
+                <li class="flexrow crew-header" data-role="{{roleId}}">
+                    <h3 class="crew-name flexrow">{{ localize (lookup ../config.starshipRoleNames roleId) }}</h3>
+                    <div class="flexrow">
+                        <label>{{localize "SFRPG.StarshipSheet.Crew.ActionsPerRound"}}</label>
+                        <input type="text" class="crew-role-numberOfUses" value="{{role.numberOfUses}}" data-dtype="Number" placeholder="0" />
+                    </div>
+                    <div class="crew-controls">
+                        <a class="crew-control skill-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}">
+                            <i class="fas fa-plus"></i>&nbsp;{{localize "SFRPG.StarshipSheet.Crew.AddSkill"}}
+                        </a>
+                    </div>
+                </li>
+                <ol class="crew-item-list">
+                    {{#if (greaterThan (length role.skills) 0)}}
+                    <li class="crew small flexrow" data-role="{{roleId}}">
+                        <div class="crew-name flexrow">
+                        </div>
+                        <div class="flexrow">
+                            <div class="form-fields">
+                                <label>{{localize "SFRPG.StarshipSheet.Crew.SkillModifier"}}</label>
+                            </div>
+                            <div class="form-fields">
+                                <label>{{localize "SFRPG.StarshipSheet.Crew.SkillRanks"}}</label>
+                            </div>
+                        </div>
+                        <div class="crew-controls"></div>
+                    </li>
+                    {{#each role.skills as |skill skillId|}}
+                    <li class="crew small flexrow" data-role="{{roleId}}" data-skill="{{skillId}}">
+                        <div class="crew-name flexrow">
+                            <h4>{{ lookup ../../config.skills skillId }}</h4>
+                        </div>
+                        <div class="flexrow">
+                            <div class="form-fields">
+                                <input type="text" class="crew-skill-mod" value="{{skill.mod}}" data-dtype="Number" placeholder="0" />
+                            </div>
+                            <div class="form-fields">
+                                <input type="text" class="crew-skill-ranks" value="{{skill.ranks}}" data-dtype="Number" placeholder="0" />
+                            </div>
+                        </div>
+                        <div class="crew-controls">
+                            <a class="crew-control skill-delete" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Delete"}}"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                    {{/if}}
+                </ol>
+                {{/each}}
+            </ol>
+            {{/unless}}
         </div>
 
         {{!-- Actions Tab --}}

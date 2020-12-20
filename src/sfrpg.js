@@ -145,6 +145,15 @@ Hooks.once("setup", function () {
     console.log("SFRPG | Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);
 
+    Handlebars.registerHelper("length", function (value) {
+        if (value instanceof Array) {
+            return value.length;
+        } else if (value instanceof Object) {
+            return Object.entries(value).length;
+        }
+        return 0;
+    });
+
     Handlebars.registerHelper("not", function (value) {
         return !Boolean(value);
     });

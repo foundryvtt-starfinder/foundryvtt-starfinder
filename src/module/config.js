@@ -810,15 +810,15 @@ SFRPG.starshipRoles = {
 };
 
 SFRPG.starshipRoleNames = {
-    captain: "SFRPG.StarshipSheet.Role.Captain",
-    pilot: "SFRPG.StarshipSheet.Role.Pilot",
-    gunner: "SFRPG.StarshipSheet.Role.Gunner",
-    engineer: "SFRPG.StarshipSheet.Role.Engineer",
-    scienceOfficer: "SFRPG.StarshipSheet.Role.ScienceOfficer",
-    chiefMate: "SFRPG.StarshipSheet.Role.ChiefMate",
-    magicOfficer: "SFRPG.StarshipSheet.Role.MagicOfficer",
-    minorCrew: "SFRPG.StarshipSheet.Role.MinorCrew",
-    openCrew: "SFRPG.StarshipSheet.Role.OpenCrew"
+    "captain": "SFRPG.StarshipSheet.Role.Captain",
+    "pilot": "SFRPG.StarshipSheet.Role.Pilot",
+    "gunner": "SFRPG.StarshipSheet.Role.Gunner",
+    "engineer": "SFRPG.StarshipSheet.Role.Engineer",
+    "scienceOfficer": "SFRPG.StarshipSheet.Role.ScienceOfficer",
+    "chiefMate": "SFRPG.StarshipSheet.Role.ChiefMate",
+    "magicOfficer": "SFRPG.StarshipSheet.Role.MagicOfficer",
+    "minorCrew": "SFRPG.StarshipSheet.Role.MinorCrew",
+    "openCrew": "SFRPG.StarshipSheet.Role.OpenCrew"
 };
 
 // starship value maps
