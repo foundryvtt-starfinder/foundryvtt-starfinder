@@ -409,17 +409,6 @@
                     </div>
                     <div class="flexcol">
                         <div class="form-group">
-                            <label for="data.details.systems.sensors">Sensors</label>
-                            <select name="data.details.systems.sensors">
-                                {{#select data.details.systems.sensors}}
-                                <option value="">None</option>
-                                {{#each config.sensorSystems as |system s|}}
-                                <option value="{{s}}">{{system}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="data.details.systems.security">Security</label>
                             <ul class="traits-list">
                                 {{#each data.details.systems.security.selected as |v k|}}

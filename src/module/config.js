@@ -708,19 +708,6 @@ SFRPG.defenseSystems = {
     "mk15": "SFRPG.ShipSystems.DefenseSystems.Mk15"
 };
 
-SFRPG.sensorSystems = {
-    "cut"    : "SFRPG.ShipSystems.SensorSystems.Cut",
-    "bushort": "SFRPG.ShipSystems.SensorSystems.Bushort",
-    "bashort": "SFRPG.ShipSystems.SensorSystems.Bashort",
-    "ashort" : "SFRPG.ShipSystems.SensorSystems.Ashort",
-    "bumed"  : "SFRPG.ShipSystems.SensorSystems.Bumed",
-    "bamed"  : "SFRPG.ShipSystems.SensorSystems.Bamed",
-    "amed"   : "SFRPG.ShipSystems.SensorSystems.Amed",
-    "bulong" : "SFRPG.ShipSystems.SensorSystems.Bulong",
-    "balong" : "SFRPG.ShipSystems.SensorSystems.Balong",
-    "along"  : "SFRPG.ShipSystems.SensorSystems.Along"
-};
-
 SFRPG.expansionBaySystems = {
     "arclab"  : "SFRPG.ShipSystems.ExpansionBaySystems.Arclab",
     "cargo"   : "SFRPG.ShipSystems.ExpansionBaySystems.Cargo",
@@ -1244,6 +1231,7 @@ SFRPG.itemTypes = {
     "starshipDriftEngine": "SFRPG.Items.Categories.StarshipDriftEngine",
     "starshipFrame": "SFRPG.Items.Categories.StarshipFrames",
     "starshipPowerCore": "SFRPG.Items.Categories.StarshipPowerCores",
+    "starshipSensor": "SFRPG.Items.Categories.StarshipSensors",
     "starshipShield": "SFRPG.Items.Categories.StarshipShields",
     "starshipThruster": "SFRPG.Items.Categories.StarshipThrusters",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
