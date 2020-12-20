@@ -250,14 +250,6 @@ export default function (engine) {
             const bpCost = component.data.costMultipliedBySize ? sizeModifier * component.data.cost : component.data.cost;
             data.attributes.bp.value += bpCost;
             data.attributes.bp.tooltip.push(`${component.name}: ${bpCost}`);
-
-            const excludedComponents = ["starshipFrame", "starshipPowerCore"];
-            if (!excludedComponents.includes(component.type)) {
-                if (component.data.pcu && component.data.isPowered) {
-                    data.attributes.power.value += component.data.pcu;
-                    data.attributes.power.tooltip.push(`${component.name}: ${component.data.pcu}`);
-                }
-            }
         }
         
         return fact;
