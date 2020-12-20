@@ -78,41 +78,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         let tiers = { 0: "0", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
         data.labels["tier"] = tier >= 1 ? String(tier) : tiers[tier] || 1;
 
-        this._prepareStarshipSystems(data.actor.data.details.systems);
         this._getCrewData(data);
 
         return data;
-    }
-
-    /**
-     * Prepare the details for this starship.
-     * @param {Object} detials The details about this ship
-     */
-    _prepareStarshipSystems(details) {
-        
-
-        const systemsMap = {
-            "bays": CONFIG.SFRPG.expansionBaySystems,
-            "security": CONFIG.SFRPG.securitySystems
-        };
-
-        for (let [t, choices] of Object.entries(systemsMap)) {
-            const detail = details[t];
-            if (!detail) continue;
-            let values = [];
-            if (detail.value) {
-                values = detail.value instanceof Array ? detail.value : [detail.value];
-            }
-            detail.selected = values.reduce((obj, t) => {
-                obj[t] = choices[t];
-                return obj;
-            }, {});
-
-            if (detail.custom) {
-                detail.custom.split(';').forEach((c, i) => detail.selected[`custom${i + 1}`] = c.trim());
-            }
-            detail.cssClass = !isObjectEmpty(detail.selected) ? "" : "inactive";
-        }
     }
 
     /**
@@ -269,17 +237,24 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             inventory: { label: "Inventory", items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
         };
 
-        const starshipSystems = ["starshipAblativeArmor", "starshipArmor", "starshipComputer", "starshipDefensiveCountermeasure", "starshipDriftEngine", "starshipSensor", "starshipShield"];
+        const starshipSystems = [
+            "starshipAblativeArmor",
+            "starshipArmor",
+            "starshipComputer",
+            "starshipCrewQuarter",
+            "starshipDefensiveCountermeasure",
+            "starshipDriftEngine",
+            "starshipFortifiedHull",
+            "starshipReinforcedBulkhead",
+            "starshipSensor",
+            "starshipShield"
+        ];
 
-        let [forward, starboard, aft, port, turret, unmounted, frame, powerCores, thrusters, systems, cargo] = data.items.reduce((arr, item) => {
+        //   0        1          2    3     4       5          6      7           8          9               10            11               12             13
+        let [forward, starboard, aft, port, turret, unmounted, frame, powerCores, thrusters, primarySystems, otherSystems, securitySystems, expansionBays, cargo] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
-            if (item.type === "starshipFrame") arr[6].push(item);
-            else if (item.type === "starshipPowerCore") arr[7].push(item);
-            else if (item.type === "starshipThruster") arr[8].push(item);
-            else if (starshipSystems.includes(item.type)) arr[9].push(item);
-            else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[10].push(item);
-            else {
+            if (item.type === "starshipWeapon") {
                 const weaponArc = item?.data?.mount?.arc;
                 if (weaponArc === "forward") arr[0].push(item);
                 else if (weaponArc === "starboard") arr[1].push(item);
@@ -288,9 +263,17 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 else if (weaponArc === "turret") arr[4].push(item);
                 else arr[5].push(item);
             }
+            else if (item.type === "starshipFrame") arr[6].push(item);
+            else if (item.type === "starshipPowerCore") arr[7].push(item);
+            else if (item.type === "starshipThruster") arr[8].push(item);
+            else if (starshipSystems.includes(item.type)) arr[9].push(item);
+            else if (item.type === "starshipOtherSystem") arr[10].push(item);
+            else if (item.type === "starshipSecuritySystem") arr[11].push(item);
+            else if (item.type === "starshipExpansionBay") arr[12].push(item);
+            else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[13].push(item);
 
             return arr;
-        }, [[], [], [], [], [], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], [], [], [], [], [], [], []]);
 
         this.processItemContainment(cargo, function (itemType, itemData) {
             inventory.inventory.items.push(itemData);
@@ -340,7 +323,10 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             frame: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", {"current": frame.length}), items: frame, hasActions: false, dataset: { type: "starshipFrame" } },
             powerCores: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PowerCores"), items: powerCores, hasActions: false, dataset: { type: "starshipPowerCore" } },
             thrusters: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Thrusters"), items: thrusters, hasActions: false, dataset: { type: "starshipThruster" } },
-            systems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Systems"), items: systems, hasActions: false, dataset: { type: "starshipAblativeArmor,starshipArmor,starshipComputer,starshipDefensiveCountermeasure,starshipDriftEngine,starshipSensor,starshipShield" } }
+            primarySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PrimarySystems"), items: primarySystems, hasActions: false, dataset: { type: starshipSystems.join(',') } },
+            otherSystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.OtherSystems"), items: otherSystems, hasActions: false, dataset: { type: "starshipOtherSystem" } },
+            securitySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.SecuritySystems"), items: securitySystems, hasActions: false, dataset: { type: "starshipSecuritySystem" } },
+            expansionBays: { label: game.i18n.format("SFRPG.StarshipSheet.Features.ExpansionBays", {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } }
         };
 
         data.features = Object.values(features);
@@ -422,8 +408,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         } else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
 
-            const acceptedStarshipItems = ["starshipAblativeArmor", "starshipArmor", "starshipComputer", "starshipDefensiveCountermeasure", "starshipDriftEngine", "starshipFrame", "starshipPowerCore", "starshipSensor", "starshipShield", "starshipThruster", "starshipWeapon"];
-            if (acceptedStarshipItems.includes(rawItemData.type)) {
+            if (rawItemData.type.startsWith("starship")) {
                 return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
             } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {
                 return this.processDroppedData(event, data);

@@ -684,59 +684,6 @@ SFRPG.maneuverability = {
     "perfect": "SFRPG.ShipSystems.Maneuverability.Perfect"
 };
 
-SFRPG.crewQuarterSystems = {
-    "common"   : "SFRPG.ShipSystems.CrewQuarterSystems.Common",
-    "good"     : "SFRPG.ShipSystems.CrewQuarterSystems.Good",
-    "luxurious": "SFRPG.ShipSystems.CrewQuarterSystems.Luxurious"
-};
-
-SFRPG.defenseSystems = {
-    "mk1" : "SFRPG.ShipSystems.DefenseSystems.Mk01",
-    "mk2" : "SFRPG.ShipSystems.DefenseSystems.Mk02",
-    "mk3" : "SFRPG.ShipSystems.DefenseSystems.Mk03",
-    "mk4" : "SFRPG.ShipSystems.DefenseSystems.Mk04",
-    "mk5" : "SFRPG.ShipSystems.DefenseSystems.Mk05",
-    "mk6" : "SFRPG.ShipSystems.DefenseSystems.Mk06",
-    "mk7" : "SFRPG.ShipSystems.DefenseSystems.Mk07",
-    "mk8" : "SFRPG.ShipSystems.DefenseSystems.Mk08",
-    "mk9" : "SFRPG.ShipSystems.DefenseSystems.Mk09",
-    "mk10": "SFRPG.ShipSystems.DefenseSystems.Mk10",
-    "mk11": "SFRPG.ShipSystems.DefenseSystems.Mk11",
-    "mk12": "SFRPG.ShipSystems.DefenseSystems.Mk12",
-    "mk13": "SFRPG.ShipSystems.DefenseSystems.Mk13",
-    "mk14": "SFRPG.ShipSystems.DefenseSystems.Mk14",
-    "mk15": "SFRPG.ShipSystems.DefenseSystems.Mk15"
-};
-
-SFRPG.expansionBaySystems = {
-    "arclab"  : "SFRPG.ShipSystems.ExpansionBaySystems.Arclab",
-    "cargo"   : "SFRPG.ShipSystems.ExpansionBaySystems.Cargo",
-    "escape"  : "SFRPG.ShipSystems.ExpansionBaySystems.Escape",
-    "guest"   : "SFRPG.ShipSystems.ExpansionBaySystems.Guest",
-    "hangar"  : "SFRPG.ShipSystems.ExpansionBaySystems.Hangar",
-    "life"    : "SFRPG.ShipSystems.ExpansionBaySystems.Life",
-    "med"     : "SFRPG.ShipSystems.ExpansionBaySystems.Med",
-    "pass"    : "SFRPG.ShipSystems.ExpansionBaySystems.Pass",
-    "pwrHouse": "SFRPG.ShipSystems.ExpansionBaySystems.Pwrhouse",
-    "recg"    : "SFRPG.ShipSystems.ExpansionBaySystems.Recg",
-    "rect"    : "SFRPG.ShipSystems.ExpansionBaySystems.Rect",
-    "hac"     : "SFRPG.ShipSystems.ExpansionBaySystems.Hac",
-    "science" : "SFRPG.ShipSystems.ExpansionBaySystems.Science",
-    "senv"    : "SFRPG.ShipSystems.ExpansionBaySystems.Senv",
-    "shuttle" : "SFRPG.ShipSystems.ExpansionBaySystems.Shuttle",
-    "smuggler": "SFRPG.ShipSystems.ExpansionBaySystems.Smuggler",
-    "syth"    : "SFRPG.ShipSystems.ExpansionBaySystems.Syth",
-    "tech"    : "SFRPG.ShipSystems.ExpansionBaySystems.Tech"
-};
-
-SFRPG.securitySystems = {
-    "antiHack"    : "SFRPG.ShipSystems.SecuritySystems.Antihack",
-    "antiPer"     : "SFRPG.ShipSystems.SecuritySystems.Antiper",
-    "bio"         : "SFRPG.ShipSystems.SecuritySystems.Bio",
-    "compCounter" : "SFRPG.ShipSystems.SecuritySystems.Compcounter",
-    "selfDestruct": "SFRPG.ShipSystems.SecuritySystems.Selfdestruct"
-};
-
 // Starship Weapons
 SFRPG.starshipWeaponTypes = {
     "direct"  : "SFRPG.ShipSystems.StarshipWeaponTypes.Direct",
@@ -1227,10 +1174,16 @@ SFRPG.itemTypes = {
     "starshipAblativeArmor": "SFRPG.Items.Categories.StarshipAblativeArmors",
     "starshipArmor": "SFRPG.Items.Categories.StarshipArmors",
     "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
+    "starshipCrewQuarter": "SFRPG.Items.Categories.StarshipCrewQuarters",
     "starshipDefensiveCountermeasure": "SFRPG.Items.Categories.StarshipDefensiveCountermeasures",
     "starshipDriftEngine": "SFRPG.Items.Categories.StarshipDriftEngine",
+    "starshipExpansionBay": "SFRPG.Items.Categories.StarshipExpansionBays",
+    "starshipFortifiedHull": "SFRPG.Items.Categories.StarshipFortifiedHulls",
     "starshipFrame": "SFRPG.Items.Categories.StarshipFrames",
+    "starshipOtherSystem": "SFRPG.Items.Categories.StarshipOtherSystems",
     "starshipPowerCore": "SFRPG.Items.Categories.StarshipPowerCores",
+    "starshipReinforcedBulkhead": "SFRPG.Items.Categories.StarshipReinforcedBulkheads",
+    "starshipSecuritySystem": "SFRPG.Items.Categories.StarshipSecuritySystems",
     "starshipSensor": "SFRPG.Items.Categories.StarshipSensors",
     "starshipShield": "SFRPG.Items.Categories.StarshipShields",
     "starshipThruster": "SFRPG.Items.Categories.StarshipThrusters",

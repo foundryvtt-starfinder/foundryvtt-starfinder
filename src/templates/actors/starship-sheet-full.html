@@ -68,11 +68,11 @@
                             <label></label>
                             <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                         </li>
-                        <li class="flexrow" data-tippy-content="Damage Threshold<br/>@attributes.damageThreshold.value">
+                        <li class="flexrow" data-tippy-content="Damage Threshold<br/>@attributes.damageThreshold.value<br/><br/>{{#each data.attributes.damageThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                             <label>DT</label>
                             <label>{{data.attributes.damageThreshold.value}}</label>
                         </li>
-                        <li class="flexrow" data-tippy-content="Critical Threshold<br/>@attributes.criticalThreshold.value">
+                        <li class="flexrow" data-tippy-content="Critical Threshold<br/>@attributes.criticalThreshold.value<br/><br/>{{#each data.attributes.criticalThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                             <label>CT</label>
                             <label>{{data.attributes.criticalThreshold.value}}</label>
                         </li>
@@ -381,45 +381,6 @@
                 </div>
             </div>
             {{/if}}
-            
-            <div class="flexcol traits">
-                <h3 class="form-header">Systems</h3>
-                <div class="flexrow">
-                    <div class="flexcol">
-                        <div class="form-group">
-                            <label for="data.details.systems.quarters">Crew Quarters</label>
-                            <select name="data.details.systems.quarters">
-                                {{#select data.details.systems.quarters}}
-                                <option value="">None</option>
-                                {{#each config.crewQuarterSystems as |system s|}}
-                                <option value="{{s}}">{{system}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="data.details.systems.bays">Expansion Bays (Total: {{data.attributes.expansionBays.value}})</label>
-                            <ul class="traits-list">
-                                {{#each data.details.systems.bays.selected as |v k|}}
-                                <li class="tag {{k}}">{{v}}</li>
-                                {{/each}}
-                            </ul>
-                            <a class="trait-selector" data-options="expansionBaySystems"><i class="fas fa-edit"></i></a>
-                        </div>
-                    </div>
-                    <div class="flexcol">
-                        <div class="form-group">
-                            <label for="data.details.systems.security">Security</label>
-                            <ul class="traits-list">
-                                {{#each data.details.systems.security.selected as |v k|}}
-                                <li class="tag {{k}}">{{v}}</li>
-                                {{/each}}
-                            </ul>
-                            <a class="trait-selector" data-options="securitySystems"><i class="fas fa-edit"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="tab weapons flexcol" data-group="primary" data-tab="weapons">

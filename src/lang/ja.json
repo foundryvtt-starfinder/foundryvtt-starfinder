@@ -29,10 +29,16 @@
         "TypeStarshipaction": "Starship Action",
         "TypeStarshiparmor": "Starship Armor",
         "TypeStarshipcomputer": "Starship Computer",
+        "TypeStarshipcrewquarter": "Starship Crew Quarter",
         "TypeStarshipdefensivecountermeasure": "Starship Defensive Countermeasure",
         "TypeStarshipdriftengine": "Starship Drift Engine",
+        "TypeStarshipexpansionbay": "Starship Expansion Bay",
+        "TypeStarshipfortifiedhull": "Starship Fortified Hull",
         "TypeStarshipframe": "Starship Frame",
+        "TypeStarshipothersystem": "Starship Other System",
         "TypeStarshippowercore": "Starship Power Core",
+        "TypeStarshipreinforcedbulkhead": "Starship Reinforced Bulkhead",
+        "TypeStarshipsecuritysystem": "Starship Security System",
         "TypeStarshipsensor": "Starship Sensor",
         "TypeStarshipshield": "Starship Shield",
         "TypeStarshipthruster": "Starship Thruster",
@@ -873,10 +879,16 @@
                 "StarshipAblativeArmors": "Starship Ablative Armors",
                 "StarshipArmors"      : "Starship Armors",
                 "StarshipComputers"   : "Starship Computers",
+                "StarshipCrewQuarters": "Starship Crew Quarters",
                 "StarshipDefensiveCountermeasures": "Starship Defensive Countermeasures",
                 "StarshipDriftEngine" : "Starship Drift Engine",
+                "StarshipExpansionBays": "Starship Expansion Bays",
+                "StarshipFortifiedHulls": "Starship Fortified Hulls",
                 "StarshipFrames"      : "Starship Frames",
+                "StarshipOtherSystems": "Starship Other Systems",
                 "StarshipPowerCores"  : "Starship Power Cores",
+                "StarshipReinforcedBulkheads": "Starship Reinforced Bulkheads",
+                "StarshipSecuritySystems": "Starship Security Systems",
                 "StarshipSensors"     : "Starship Sensors",
                 "StarshipShields"     : "Starship Shields",
                 "StarshipThrusters"   : "Starship Thrusters",
@@ -1098,6 +1110,11 @@
                 "MaxSize": "Maximum ship size",
                 "MaxSizeTooltip": "The maximum ship size this engine can be installed onto."
             },
+            "StarshipFortifiedHull": {
+                "CriticalThresholdBonus": "Critical Threshold Bonus",
+                "CriticalThresholdBonusTooltip": "The bonus applied to the ship's critical threshold score.",
+                "Header": "Fortified Hull Properties"
+            },
             "StarshipFrame": {
                 "Details": {
                     "Cost": "Buildpoint Cost",
@@ -1138,6 +1155,11 @@
                 "ProvidedPowerTooltip": "The amount of PCU provided by this power core.",
                 "Sizes": "Supported Starship Sizes",
                 "SizesTooltip": "Select the starship sizes that this power core can be installed onto."
+            },
+            "StarshipReinforcedBulkhead": {
+                "Fortification": "Fortification",
+                "FortificationTooltip": "Whenever the starship would sustain critical damage, there is a percent chance based on the reinforced bulkhead’s fortification rating that the critical damage effect is negated (though the attack still deals damage to the starship).",
+                "Header": "Reinforced Bulkhead Properties"
             },
             "StarshipSensor": {
                 "Header": "Sensor Properties",
@@ -1762,7 +1784,7 @@
                     "Starboard": "Starboard Ablative Armor"
                 },
                 "AblativeExceedsHull": "Total ablative exceeds double hull points!",
-                "AblativeExceedsHullTooltip": " starship cannot support ablative armor if its temporary Hull Points exceed twice its standard Hull Point total. (For more information, see the Starship Operations Manual pg. 20)",
+                "AblativeExceedsHullTooltip": "A starship cannot support ablative armor if its temporary Hull Points exceed twice its standard Hull Point total. (For more information, see the Starship Operations Manual pg. 20)",
                 "AblativeTooHigh": "Too much ablative assigned!",
                 "AblativeTooHighTooltip": "Either the total of installed ablative is too high, or the sum total of current ablative score is too high.",
                 "Shields": {
@@ -1780,9 +1802,12 @@
                 "ShieldTotalTooHighTooltip": "The total sum of shields exceeds the shield's maximum output."
             },
             "Features": {
+                "ExpansionBays": "Expansion Bays ({current} / {max})",
                 "Frame": "Frame ({current} / 1)",
+                "OtherSystems": "Other Systems",
                 "PowerCores": "Power Cores",
-                "Systems": "Other Systems",
+                "PrimarySystems": "Primary Systems",
+                "SecuritySystems": "Security Systems",
                 "Thrusters": "Thrusters"
             },
             "Header": {
