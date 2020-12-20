@@ -129,10 +129,14 @@
                             <span data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.ComplementMax" }}">{{data.attributes.complement.max}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.DriftRating" }}<br />@attributes.drift.value">
+                    <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.DriftRating" }}<br />@attributes.drift.value<br/><br/>{{#each data.attributes.drift.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.DriftRating" }}</h4>
                         <div class="attribute-value">
+                            {{#if (eq data.attributes.drift.value 0)}}
+                            {{localize "SFRPG.StarshipSheet.Attributes.DriftNotAvailable"}}
+                            {{else}}
                             <span class="ability-mod">{{data.attributes.drift.value}}</span>
+                            {{/if}}
                         </div>
                     </li>
                 </ul>
@@ -408,17 +412,6 @@
                         </div>
                     </div>
                     <div class="flexcol">
-                        <div class="form-group">
-                            <label for="data.details.systems.driftEngine">Drift Engine</label>
-                            <select name="data.details.systems.driftEngine">
-                                {{#select data.details.systems.driftEngine}}
-                                <option value="">None</option>
-                                {{#each config.driftEngineSystems as |system s|}}
-                                <option value="{{s}}">{{system}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
                         <div class="form-group">
                             <label for="data.details.systems.sensors">Sensors</label>
                             <select name="data.details.systems.sensors">

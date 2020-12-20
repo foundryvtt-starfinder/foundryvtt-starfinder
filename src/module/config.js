@@ -708,14 +708,6 @@ SFRPG.defenseSystems = {
     "mk15": "SFRPG.ShipSystems.DefenseSystems.Mk15"
 };
 
-SFRPG.driftEngineSystems = {
-    "basic"   : "SFRPG.ShipSystems.DriftEngineSystems.Basic",
-    "booster" : "SFRPG.ShipSystems.DriftEngineSystems.Booster",
-    "major"   : "SFRPG.ShipSystems.DriftEngineSystems.Major",
-    "superior": "SFRPG.ShipSystems.DriftEngineSystems.Superior",
-    "ultra"   : "SFRPG.ShipSystems.DriftEngineSystems.Ultra"
-};
-
 SFRPG.sensorSystems = {
     "cut"    : "SFRPG.ShipSystems.SensorSystems.Cut",
     "bushort": "SFRPG.ShipSystems.SensorSystems.Bushort",
@@ -1249,6 +1241,7 @@ SFRPG.itemTypes = {
     "starshipArmor": "SFRPG.Items.Categories.StarshipArmors",
     "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
     "starshipDefensiveCountermeasure": "SFRPG.Items.Categories.StarshipDefensiveCountermeasures",
+    "starshipDriftEngine": "SFRPG.Items.Categories.StarshipDriftEngine",
     "starshipFrame": "SFRPG.Items.Categories.StarshipFrames",
     "starshipPowerCore": "SFRPG.Items.Categories.StarshipPowerCores",
     "starshipShield": "SFRPG.Items.Categories.StarshipShields",

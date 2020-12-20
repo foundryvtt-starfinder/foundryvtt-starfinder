@@ -26,4 +26,13 @@
                     <input type="text" name="data.pcu" value="{{data.pcu}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
+
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredStateTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.isPowered" {{checked data.isPowered}}/> {{ localize "SFRPG.ItemSheet.StarshipComponent.IsPowered" }}
+                    </label>
+                </div>
+            </div>
             {{/unless}}

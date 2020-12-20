@@ -30,6 +30,7 @@
         "TypeStarshiparmor": "Starship Armor",
         "TypeStarshipcomputer": "Starship Computer",
         "TypeStarshipdefensivecountermeasure": "Starship Defensive Countermeasure",
+        "TypeStarshipdriftengine": "Starship Drift Engine",
         "TypeStarshipframe": "Starship Frame",
         "TypeStarshippowercore": "Starship Power Core",
         "TypeStarshipshield": "Starship Shield",
@@ -868,10 +869,11 @@
                 "Races"               : "Races",
                 "Shields"             : "Shields",
                 "Spells"              : "Spells",
-                "StarshipAblativeArmor": "Starship Ablative Armors",
+                "StarshipAblativeArmors": "Starship Ablative Armors",
                 "StarshipArmors"      : "Starship Armors",
                 "StarshipComputers"   : "Starship Computers",
                 "StarshipDefensiveCountermeasures": "Starship Defensive Countermeasures",
+                "StarshipDriftEngine" : "Starship Drift Engine",
                 "StarshipFrames"      : "Starship Frames",
                 "StarshipPowerCores"  : "Starship Power Cores",
                 "StarshipShields"     : "Starship Shields",
@@ -1070,7 +1072,10 @@
                 "IsCostMultipliedBySize": "Is multiplied",
                 "Header": "Common Component Properties",
                 "PCU": "PCU Usage",
-                "PCUTooltip": "The amount of power this component requires to function."
+                "PCUTooltip": "The amount of power this component requires to function.",
+                "PoweredState": "PoweredState",
+                "PoweredStateTooltip": "Is this starship component powered?",
+                "IsPowered": "Is powered"
             },
             "StarshipComputer": {
                 "Header": "Computer Properties",
@@ -1083,6 +1088,13 @@
                 "Header": "Defensive Countermeasure Properties",
                 "TargetLockBonus": "Target Lock Bonus",
                 "TargetLockBonusTooltip": "The bonus applied to the ship's target lock score."
+            },
+            "StarshipDriftEngine": {
+                "EngineRating": "Engine Rating",
+                "EngineRatingTooltip": "The Engine Rating for this drift engine.",
+                "Header": "Drift Engine Properties",
+                "MaxSize": "Maximum ship size",
+                "MaxSizeTooltip": "The maximum ship size this engine can be installed onto."
             },
             "StarshipFrame": {
                 "Details": {
@@ -1515,51 +1527,10 @@
         "ShipModelLabel": "モデル",
         "ShipNameLabel": "シップ名",
         "ShipSystems": {
-            "ArmorSystems": {
-                "Mk01": "Mk 1 armor",
-                "Mk02": "Mk 2 armor",
-                "Mk03": "Mk 3 armor",
-                "Mk04": "Mk 4 armor",
-                "Mk05": "Mk 5 armor",
-                "Mk06": "Mk 6 armor",
-                "Mk07": "Mk 7 armor",
-                "Mk08": "Mk 8 armor",
-                "Mk09": "Mk 9 armor",
-                "Mk10": "Mk 10 armor",
-                "Mk11": "Mk 11 armor",
-                "Mk12": "Mk 12 armor",
-                "Mk13": "Mk 13 armor",
-                "Mk14": "Mk 14 armor",
-                "Mk15": "Mk 15 armor"
-            },
             "CrewQuarterSystems": {
                 "Common"   : "Common",
                 "Good"     : "Good",
                 "Luxurious": "Luxurious"
-            },
-            "DefenseSystems": {
-                "Mk01": "Mk 1 defenses",
-                "Mk02": "Mk 2 defenses",
-                "Mk03": "Mk 3 defenses",
-                "Mk04": "Mk 4 defenses",
-                "Mk05": "Mk 5 defenses",
-                "Mk06": "Mk 6 defenses",
-                "Mk07": "Mk 7 defenses",
-                "Mk08": "Mk 8 defenses",
-                "Mk09": "Mk 9 defenses",
-                "Mk10": "Mk 10 defenses",
-                "Mk11": "Mk 11 defenses",
-                "Mk12": "Mk 12 defenses",
-                "Mk13": "Mk 13 defenses",
-                "Mk14": "Mk 14 defenses",
-                "Mk15": "Mk 15 defenses"
-            },
-            "DriftEngineSystems": {
-                "Basic"   : "Signal Basic",
-                "Booster" : "Signal Booster",
-                "Major"   : "Signal Major",
-                "Superior": "Signal Superior",
-                "Ultra"   : "Signal Ultra"
             },
             "ExpansionBaySystems": {
                 "Arclab"  : "Arcane laboratory",
@@ -1607,30 +1578,6 @@
                 "Balong" : "Basic long-range",
                 "Along"  : "Advanced long-range"
             },
-            "ShieldSystems": {
-                "010": "Basic Shields 10",
-                "020": "Basic Shields 20",
-                "030": "Basic Shields 30",
-                "040": "Basic Shields 40",
-                "050": "Light Shields 50",
-                "060": "Light Shields 60",
-                "070": "Light Shields 70",
-                "080": "Light Shields 80",
-                "090": "Medium Shields 90",
-                "100": "Medium Shields 100",
-                "120": "Medium Shields 120",
-                "140": "Medium Shields 140",
-                "160": "Medium Shields 160",
-                "200": "Medium Shields 200",
-                "240": "Heavy Shields 240",
-                "280": "Heavy Shields 280",
-                "320": "Heavy Shields 320",
-                "360": "Heavy Shields 360",
-                "420": "Heavy Shields 420",
-                "480": "Heavy Shields 480",
-                "540": "Superior Shields 540",
-                "600": "Superior Shields 600"
-            },
             "Size": {
                 "Supercolossal": "Supercolossal"
             },
@@ -1677,36 +1624,6 @@
             "StarshipWeaponTypes": {
                 "Direct"  : "Direct-fire",
                 "Tracking": "Tracking"
-            },
-            "ThrusterSystems": {
-                "T6" : "T6 Thrusters",
-                "T8" : "T8 Thrusters",
-                "T10": "T10 Thrusters",
-                "T12": "T12 Thrusters",
-                "T14": "T14 Thrusters",
-                "S6" : "S6 Thrusters",
-                "S8" : "S8 Thrusters",
-                "S10": "S10 Thrusters",
-                "S12": "S12 Thrusters",
-                "M4" : "M4 Thrusters",
-                "M6" : "M6 Thrusters",
-                "M8" : "M8 Thrusters",
-                "M10": "M10 Thrusters",
-                "M12": "M12 Thrusters",
-                "L4" : "L4 Thrusters",
-                "L6" : "L6 Thrusters",
-                "L8" : "L8 Thrusters",
-                "L10": "L10 Thrusters",
-                "H4" : "H4 Thrusters",
-                "H6" : "H6 Thrusters",
-                "H8" : "H8 Thrusters",
-                "H10": "H10 Thrusters",
-                "G4" : "G4 Thrusters",
-                "G6" : "G6 Thrusters",
-                "G8" : "G8 Thrusters",
-                "C4" : "C4 Thrusters",
-                "C6" : "C6 Thrusters",
-                "C8" : "C8 Thrusters"
             }
         },
         "ShipTierLabel": "ティア",
@@ -1813,6 +1730,7 @@
                 "ComplementMin": "Minimum crew needed to run the ship.",
                 "ComplementMax": "Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard).",
                 "Computer": "Computer",
+                "DriftNotAvailable": "Not available",
                 "DriftRating": "Drift Rating",
                 "Power": "Power Core",
                 "PowerConsumption": "Consumption",

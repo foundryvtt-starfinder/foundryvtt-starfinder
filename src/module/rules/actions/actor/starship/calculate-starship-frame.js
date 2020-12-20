@@ -253,7 +253,7 @@ export default function (engine) {
 
             const excludedComponents = ["starshipFrame", "starshipPowerCore"];
             if (!excludedComponents.includes(component.type)) {
-                if (component.data.pcu) {
+                if (component.data.pcu && component.data.isPowered) {
                     data.attributes.power.value += component.data.pcu;
                     data.attributes.power.tooltip.push(`${component.name}: ${component.data.pcu}`);
                 }

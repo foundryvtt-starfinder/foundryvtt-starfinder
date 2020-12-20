@@ -30,6 +30,7 @@
         "TypeStarshiparmor": "Starship Armor",
         "TypeStarshipcomputer": "Starship Computer",
         "TypeStarshipdefensivecountermeasure": "Starship Defensive Countermeasure",
+        "TypeStarshipdriftengine": "Starship Drift Engine",
         "TypeStarshipframe": "Raumschiffgrundstruktur",
         "TypeStarshippowercore": "Starship Power Core",
         "TypeStarshipshield": "Starship Shield",
@@ -868,10 +869,11 @@
                 "Races"               : "Rassen",
                 "Shields"             : "Schilde",
                 "Spells"              : "Zauber",
-                "StarshipAblativeArmor": "Starship Ablative Armors",
+                "StarshipAblativeArmors": "Starship Ablative Armors",
                 "StarshipArmors"      : "Starship Armors",
                 "StarshipComputers"   : "Starship Computers",
                 "StarshipDefensiveCountermeasures": "Starship Defensive Countermeasures",
+                "StarshipDriftEngine" : "Starship Drift Engine",
                 "StarshipFrames"      : "Raumschiffgrundstrukturen",
                 "StarshipPowerCores"  : "Starship Power Cores",
                 "StarshipShields"     : "Starship Shields",
@@ -1070,7 +1072,10 @@
                 "IsCostMultipliedBySize": "Is multiplied",
                 "Header": "Common Component Properties",
                 "PCU": "PCU Usage",
-                "PCUTooltip": "The amount of power this component requires to function."
+                "PCUTooltip": "The amount of power this component requires to function.",
+                "PoweredState": "PoweredState",
+                "PoweredStateTooltip": "Is this starship component powered?",
+                "IsPowered": "Is powered"
             },
             "StarshipComputer": {
                 "Header": "Computer Properties",
@@ -1083,6 +1088,13 @@
                 "Header": "Defensive Countermeasure Properties",
                 "TargetLockBonus": "Target Lock Bonus",
                 "TargetLockBonusTooltip": "The bonus applied to the ship's target lock score."
+            },
+            "StarshipDriftEngine": {
+                "EngineRating": "Engine Rating",
+                "EngineRatingTooltip": "The Engine Rating for this drift engine.",
+                "Header": "Drift Engine Properties",
+                "MaxSize": "Maximum ship size",
+                "MaxSizeTooltip": "The maximum ship size this engine can be installed onto."
             },
             "StarshipFrame": {
                 "Details": {
@@ -1515,51 +1527,10 @@
         "ShipModelLabel": "Modell",
         "ShipNameLabel": "Schiffsname",
         "ShipSystems": {
-            "ArmorSystems": {
-                "Mk01": "Mk. 1",
-                "Mk02": "Mk. 2",
-                "Mk03": "Mk. 3",
-                "Mk04": "Mk. 4",
-                "Mk05": "Mk. 5",
-                "Mk06": "Mk. 6",
-                "Mk07": "Mk. 7",
-                "Mk08": "Mk. 8",
-                "Mk09": "Mk. 9",
-                "Mk10": "Mk. 10",
-                "Mk11": "Mk. 11",
-                "Mk12": "Mk. 12",
-                "Mk13": "Mk. 13",
-                "Mk14": "Mk. 14",
-                "Mk15": "Mk. 15"
-            },
             "CrewQuarterSystems": {
                 "Common"   : "Gewöhnlich",
                 "Good"     : "Gut",
                 "Luxurious": "Luxus"
-            },
-            "DefenseSystems": {
-                "Mk01": "Mk. 1 Verteidigung",
-                "Mk02": "Mk. 2 Verteidigung",
-                "Mk03": "Mk. 3 Verteidigung",
-                "Mk04": "Mk. 4 Verteidigung",
-                "Mk05": "Mk. 5 Verteidigung",
-                "Mk06": "Mk. 6 Verteidigung",
-                "Mk07": "Mk. 7 Verteidigung",
-                "Mk08": "Mk. 8 Verteidigung",
-                "Mk09": "Mk. 9 Verteidigung",
-                "Mk10": "Mk. 10 Verteidigung",
-                "Mk11": "Mk. 11 Verteidigung",
-                "Mk12": "Mk. 12 Verteidigung",
-                "Mk13": "Mk. 13 Verteidigung",
-                "Mk14": "Mk. 14 Verteidigung",
-                "Mk15": "Mk. 15 Verteidigung"
-            },
-            "DriftEngineSystems": {
-                "Basic"   : "Einfacher Driftantrieb",
-                "Booster" : "Verbesserter Driftantrieb",
-                "Major"   : "Kräftiger Driftantrieb",
-                "Superior": "Überlegener Driftantrieb",
-                "Ultra"   : "Ultra-Driftantrieb"
             },
             "ExpansionBaySystems": {
                 "Arclab"  : "Arkanes Labor",
@@ -1607,30 +1578,6 @@
                 "Balong" : "Einfache Langstrecke",
                 "Along"  : "Fortschrittliche Langstrecke"
             },
-            "ShieldSystems": {
-                "010": "Einfache Schilde 10",
-                "020": "Einfache Schilde 20",
-                "030": "Einfache Schilde 30",
-                "040": "Einfache Schilde 40",
-                "050": "Leichte Schilde 50",
-                "060": "Leichte Schilde 60",
-                "070": "Leichte Schilde 70",
-                "080": "Leichte Schilde 80",
-                "090": "Mittlere Schilde 90",
-                "100": "Mittlere Schilde 100",
-                "120": "Mittlere Schilde 120",
-                "140": "Mittlere Schilde 140",
-                "160": "Mittlere Schilde 160",
-                "200": "Mittlere Schilde 200",
-                "240": "Schwere Schilde 240",
-                "280": "Schwere Schilde 280",
-                "320": "Schwere Schilde 320",
-                "360": "Schwere Schilde 360",
-                "420": "Schwere Schilde 420",
-                "480": "Schwere Schilde 480",
-                "540": "Überlegene Schilde 540",
-                "600": "Überlegene Schilde 600"
-            },
             "Size": {
                 "Supercolossal": "Superkolossal"
             },
@@ -1677,36 +1624,6 @@
             "StarshipWeaponTypes": {
                 "Direct"  : "Direktbeschuss",
                 "Tracking": "Lenkbar"
-            },
-            "ThrusterSystems": {
-                "T6" : "T6 Schubdüsen",
-                "T8" : "T8 Schubdüsen",
-                "T10": "T10 Schubdüsen",
-                "T12": "T12 Schubdüsen",
-                "T14": "T14 Schubdüsen",
-                "S6" : "S6 Schubdüsen",
-                "S8" : "S8 Schubdüsen",
-                "S10": "S10 Schubdüsen",
-                "S12": "S12 Schubdüsen",
-                "M4" : "M4 Schubdüsen",
-                "M6" : "M6 Schubdüsen",
-                "M8" : "M8 Schubdüsen",
-                "M10": "M10 Schubdüsen",
-                "M12": "M12 Schubdüsen",
-                "L4" : "L4 Schubdüsen",
-                "L6" : "L6 Schubdüsen",
-                "L8" : "L8 Schubdüsen",
-                "L10": "L10 Schubdüsen",
-                "H4" : "H4 Schubdüsen",
-                "H6" : "H6 Schubdüsen",
-                "H8" : "H8 Schubdüsen",
-                "H10": "H10 Schubdüsen",
-                "G4" : "G4 Schubdüsen",
-                "G6" : "G6 Schubdüsen",
-                "G8" : "G8 Schubdüsen",
-                "C4" : "C4 Schubdüsen",
-                "C6" : "C6 Schubdüsen",
-                "C8" : "C8 Schubdüsen"
             }
         },
         "ShipTierLabel": "Grad",
@@ -1813,6 +1730,7 @@
                 "ComplementMin": "Minimum crew needed to run the ship.",
                 "ComplementMax": "Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard).",
                 "Computer": "Computer",
+                "DriftNotAvailable": "Not available",
                 "DriftRating": "Drift Rating",
                 "Power": "Power Core",
                 "PowerConsumption": "Consumption",
