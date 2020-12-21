@@ -381,6 +381,64 @@
                 </div>
             </div>
             {{/if}}
+                        
+            <div class="flexcol traits">
+                <h3 class="form-header">{{localize "SFRPG.StarshipSheet.Critical.Header"}}</h3>
+                <div class="flexrow">
+                    <div class="flexcol">
+                        <div class="form-group">
+                            <label for="data.attributes.systems.lifeSupport.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.LifeSupport"}}</label>
+                            <select name="data.attributes.systems.lifeSupport.value">
+                                {{#select data.attributes.systems.lifeSupport.value}}
+                                {{#each config.starshipSystemStatus as |status statusKey|}}
+                                <option value="{{statusKey}}">{{status}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.attributes.systems.sensors.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.Sensors"}}</label>
+                            <select name="data.attributes.systems.sensors.value">
+                                {{#select data.attributes.systems.sensors.value}}
+                                {{#each config.starshipSystemStatus as |status statusKey|}}
+                                <option value="{{statusKey}}">{{status}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.attributes.systems.weaponsArray.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArray"}}</label>
+                            <select name="data.attributes.systems.weaponsArray.value">
+                                {{#select data.attributes.systems.weaponsArray.value}}
+                                {{#each config.starshipSystemStatus as |status statusKey|}}
+                                <option value="{{statusKey}}">{{status}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.attributes.systems.engines.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.Engines"}}</label>
+                            <select name="data.attributes.systems.engines.value">
+                                {{#select data.attributes.systems.engines.value}}
+                                {{#each config.starshipSystemStatus as |status statusKey|}}
+                                <option value="{{statusKey}}">{{status}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.attributes.systems.powerCore.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.PowerCore"}}</label>
+                            <select name="data.attributes.systems.powerCore.value">
+                                {{#select data.attributes.systems.powerCore.value}}
+                                {{#each config.starshipSystemStatus as |status statusKey|}}
+                                <option value="{{statusKey}}">{{status}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="tab weapons flexcol" data-group="primary" data-tab="weapons">

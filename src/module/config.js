@@ -748,12 +748,11 @@ SFRPG.starshipRoleNames = {
 };
 
 // starship value maps
-SFRPG.driftEngineMap = {
-    "basic": 1,
-    "booster": 2,
-    "major": 3,
-    "superior": 4,
-    "ultra": 5
+SFRPG.starshipSystemStatus = {
+    "nominal": "SFRPG.StarshipSheet.Critical.Status.Nominal",
+    "glitching": "SFRPG.StarshipSheet.Critical.Status.Glitching",
+    "malfunctioning": "SFRPG.StarshipSheet.Critical.Status.Malfunctioning",
+    "wrecked": "SFRPG.StarshipSheet.Critical.Status.Wrecked"
 };
 
 SFRPG.starshipSizeMod = {
