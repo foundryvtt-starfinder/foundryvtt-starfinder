@@ -730,7 +730,7 @@ class RollDialog extends Dialog
     getData() {
         let data = super.getData();
         data.formula = this.formula;
-        data.rollmode = this.rollMode;
+        data.rollMode = this.rollMode;
         data.rollModes = CONFIG.Dice.rollModes;
         data.additionalBonus = this.additionalBonus;
         data.availableModifiers = this.availableModifiers || [];

@@ -640,12 +640,15 @@ export class ItemSFRPG extends Item {
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
+        const flavor = this.data?.data?.chatFlavor ? title + "<br/>" + this.data.data.chatFlavor : title;
+
         // Call the roll helper utility
         return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
             title: title,
+            flavor: flavor,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: crit,
             dialogOptions: {

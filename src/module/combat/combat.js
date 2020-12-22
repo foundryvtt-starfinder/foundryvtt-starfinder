@@ -548,7 +548,7 @@ export class CombatSFRPG extends Combat {
 
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
-            return "1d20 + @skills.pil.ranks"
+            return "1d20 + @skills.pil.mod"
         }
         else {
             return "1d20 + @attributes.init.total";
@@ -565,7 +565,7 @@ export class CombatSFRPG extends Combat {
         const parts = [];
 
         if (this.getCombatType() === "starship") {
-            parts.push("@pilot.skills.pil.ranks");
+            parts.push("@pilot.skills.pil.mod");
             rollContext.setMainContext("pilot");
         } else {
             parts.push("@combatant.attributes.init.total");

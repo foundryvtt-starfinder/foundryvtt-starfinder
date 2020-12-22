@@ -1,5 +1,3 @@
-import { DiceSFRPG, RollContext } from "../../dice.js";
-import { ChoiceDialog } from "../../apps/choice-dialog.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 /**

@@ -77,6 +77,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 } else {
                     arr[2].push(item);
                 }
+                item.isFeat = true;
             }
             else if (item.type === "class") arr[3].push(item);
             else if (item.type === "race") arr[4].push(item);
