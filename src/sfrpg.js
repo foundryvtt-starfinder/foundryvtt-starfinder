@@ -128,10 +128,8 @@ Hooks.once("setup", function () {
         "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
         "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
         "weaponSpecial", "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
-        "powerCoreSystems", "thrusterSystems", "armorSystems", "crewQuarterSystems", "defenseSystems",
-        "driftEngineSystems", "sensorSystems", "shieldSystems", "expansionBaySystems", "securitySystems",
         "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
-        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes"
+        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus"
     ];
 
     for (let o of toLocalize) {
@@ -145,8 +143,37 @@ Hooks.once("setup", function () {
     console.log("SFRPG | Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);
 
+    Handlebars.registerHelper("length", function (value) {
+        if (value instanceof Array) {
+            return value.length;
+        } else if (value instanceof Object) {
+            return Object.entries(value).length;
+        }
+        return 0;
+    });
+
     Handlebars.registerHelper("not", function (value) {
         return !Boolean(value);
+    });
+
+    Handlebars.registerHelper("add", function (v1, v2, options) {
+        'use strict';
+        return v1 + v2;
+    });
+
+    Handlebars.registerHelper("sub", function (v1, v2, options) {
+        'use strict';
+        return v1 - v2;
+    });
+
+    Handlebars.registerHelper("mult", function (v1, v2, options) {
+        'use strict';
+        return v1 * v2;
+    });
+
+    Handlebars.registerHelper("div", function (v1, v2, options) {
+        'use strict';
+        return v1 / v2;
     });
 
     Handlebars.registerHelper('greaterThan', function (v1, v2, options) {

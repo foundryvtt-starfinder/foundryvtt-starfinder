@@ -49,6 +49,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         let isOwner = this.entity.owner;
         const data = {
             owner: isOwner,
+            isGM: game.user.isGM,
             limited: this.entity.limited,
             options: this.options,
             editable: this.isEditable,

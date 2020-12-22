@@ -53,6 +53,7 @@ export class ActorSFRPG extends Actor {
      */
     prepareData() {
         super.prepareData();
+        const actor = this;
         const actorData = this.data;
         const data = actorData.data;
         const flags = actorData.flags;
@@ -75,6 +76,7 @@ export class ActorSFRPG extends Actor {
         const asis = items.filter(item => item.type === "asi");
         game.sfrpg.engine.process("process-actors", {
             actorId,
+            actor,
             type: actorType,
             data,
             flags,
@@ -917,8 +919,10 @@ export class ActorSFRPG extends Actor {
             speakerActor = selectedContext?.entity || this;
 
             const actorRole = this.getCrewRoleForActor(speakerActor._id);
-            const actorRoleKey = CONFIG.SFRPG.starshipRoleNames[actorRole];
-            roleName = game.i18n.format(actorRoleKey);
+            if (actorRole) {
+                const actorRoleKey = CONFIG.SFRPG.starshipRoleNames[actorRole];
+                roleName = game.i18n.format(actorRoleKey);
+            }
         }
 
         let flavor = "";
@@ -1010,23 +1014,39 @@ export class ActorSFRPG extends Actor {
 
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
-        if (this.data.type === "starship" && this.data.data.crew) {
-            if (this.data.data.crew.captain?.actors?.length > 0) {
-                rollContext.addContext("captain", this.data.data.crew.captain.actors[0]);
-            }
-    
-            if (this.data.data.crew.pilot?.actors?.length > 0) {
-                rollContext.addContext("pilot", this.data.data.crew.pilot.actors[0]);
-            }
-    
-            const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
-            const allCrewMates = ["minorCrew", "openCrew"];
-            for (const crewType of crewMates) {
-                let crewCount = 1;
-                const crew = [];
-                if (allCrewMates.includes(crewType)) {
-                    for (const crewEntries of Object.values(this.data.data.crew)) {
-                        const crewList = crewEntries.actors;
+        if (this.data.type === "starship") {
+
+            if (!this.data.data.isNPCCrew) {
+                /** Add player captain if available. */
+                if (this.data.data.crew.captain?.actors?.length > 0) {
+                    rollContext.addContext("captain", this.data.data.crew.captain.actors[0]);
+                }
+        
+                /** Add player pilot if available. */
+                if (this.data.data.crew.pilot?.actors?.length > 0) {
+                    rollContext.addContext("pilot", this.data.data.crew.pilot.actors[0]);
+                }
+        
+                /** Add remaining roles if available. */
+                const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
+                const allCrewMates = ["minorCrew", "openCrew"];
+                for (const crewType of crewMates) {
+                    let crewCount = 1;
+                    const crew = [];
+                    if (allCrewMates.includes(crewType)) {
+                        for (const crewEntries of Object.values(this.data.data.crew)) {
+                            const crewList = crewEntries.actors;
+                            if (crewList && crewList.length > 0) {
+                                for (const actor of crewList) {
+                                    const contextId = crewType + crewCount;
+                                    rollContext.addContext(contextId, actor);
+                                    crew.push(contextId);
+                                    crewCount += 1;
+                                }
+                            }
+                        }
+                    } else {
+                        const crewList = this.data.data.crew[crewType].actors;
                         if (crewList && crewList.length > 0) {
                             for (const actor of crewList) {
                                 const contextId = crewType + crewCount;
@@ -1036,21 +1056,20 @@ export class ActorSFRPG extends Actor {
                             }
                         }
                     }
-                } else {
-                    const crewList = this.data.data.crew[crewType].actors;
-                    if (crewList && crewList.length > 0) {
-                        for (const actor of crewList) {
-                            const contextId = crewType + crewCount;
-                            rollContext.addContext(contextId, actor);
-                            crew.push(contextId);
-                            crewCount += 1;
-                        }
+        
+                    if (desiredSelectors.includes(crewType)) {
+                        rollContext.addSelector(crewType, crew);
                     }
                 }
-    
-                if (desiredSelectors.includes(crewType)) {
-                    rollContext.addSelector(crewType, crew);
-                }
+            } else {
+                /** Create 'fake' actors. */
+                rollContext.addContext("captain", this, this.data.data.crew.npcData.captain);
+                rollContext.addContext("pilot", this, this.data.data.crew.npcData.pilot);
+                rollContext.addContext("gunner", this, this.data.data.crew.npcData.gunner);
+                rollContext.addContext("engineer", this, this.data.data.crew.npcData.engineer);
+                rollContext.addContext("chiefMate", this, this.data.data.crew.npcData.chiefMate);
+                rollContext.addContext("magicOfficer", this, this.data.data.crew.npcData.magicOfficer);
+                rollContext.addContext("scienceOfficer", this, this.data.data.crew.npcData.scienceOfficer);
             }
         }
     }
