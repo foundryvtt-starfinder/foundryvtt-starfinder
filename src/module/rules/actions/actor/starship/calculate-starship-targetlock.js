@@ -2,16 +2,126 @@ export default function (engine) {
     engine.closures.add("calculateStarshipTargetLock", (fact, context) => {
         const data = fact.data;
 
-        const pilotingBonus = data.crew.pilot.actors[0]?.data?.data?.skills?.pil?.ranks || 0;
-        const defenses = CONFIG.SFRPG.armorDefenseMap[data.details.systems.defense] || 0;
+        const pilot = (data.crew?.pilot?.actors) ? data.crew?.pilot?.actors[0] : null;
         const sizeMod = CONFIG.SFRPG.starshipSizeMod[data.details.size] || 0;
-        const misc = data.attributes.targetLock?.misc || 0;
-
-        data.attributes.targetLock = {
-            value: 10 + pilotingBonus + defenses + sizeMod + misc,
-            misc: misc,
-            tooltip: []
+        
+        /** Set up base values. */
+        const forwardTL = duplicate(data.quadrants.forward.targetLock);
+        data.quadrants.forward.targetLock = {
+            value: 10,
+            misc: (forwardTL?.misc || 0),
+            tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
+
+        const portTL = duplicate(data.quadrants.port.targetLock);
+        data.quadrants.port.targetLock = {
+            value: 10,
+            misc: (portTL?.misc || 0),
+            tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
+        };
+
+        const starboardTL = duplicate(data.quadrants.starboard.targetLock);
+        data.quadrants.starboard.targetLock = {
+            value: 10,
+            misc: (starboardTL?.misc || 0),
+            tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
+        };
+
+        const aftTL = duplicate(data.quadrants.aft.targetLock);
+        data.quadrants.aft.targetLock = {
+            value: 10,
+            misc: (aftTL?.misc || 0),
+            tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
+        };
+
+        /** Get modifying items. */
+        let defensiveCountermeasureItem = null;
+        const defensiveCountermeasureItems = fact.items.filter(x => x.type === "starshipDefensiveCountermeasure");
+        if (defensiveCountermeasureItems && defensiveCountermeasureItems.length > 0) {
+            defensiveCountermeasureItem = defensiveCountermeasureItems[0];
+        }
+
+        const ablativeArmorItems = fact.items.filter(x => x.type === "starshipAblativeArmor");
+        let ablativeArmorItem = null;
+        if (ablativeArmorItems && ablativeArmorItems.length > 0) {
+            ablativeArmorItem = ablativeArmorItems[0];
+        }
+
+        const armorItems = fact.items.filter(x => x.type === "starshipArmor");
+        let armorItem = null;
+        if (armorItems && armorItems.length > 0) {
+            armorItem = armorItems[0];
+        }
+
+        const shieldItems = fact.items.filter(x => x.type === "starshipShield");
+        let shieldItem = null;
+        if (shieldItems && shieldItems.length > 0 && shieldItems[0].data.isDeflector) {
+            shieldItem = shieldItems[0];
+        }
+
+        /** Apply bonuses. */
+        const addScore = (target, title, value, bLocalize = true) => {
+            target.value += value;
+            if (bLocalize && game?.i18n) {
+                target.tooltip.push(game.i18n.format(title, {value: value}));
+            } else {
+                target.tooltip.push(`${title}: ${value}`);
+            }
+        }
+
+        if (data.attributes.pilotingBonus.value > 0) {
+            addScore(data.quadrants.forward.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
+            addScore(data.quadrants.port.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
+            addScore(data.quadrants.starboard.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
+            addScore(data.quadrants.aft.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
+        }
+
+        if (pilot && pilot?.data?.data?.skills?.pil?.ranks > 0) {
+            addScore(data.quadrants.forward.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
+            addScore(data.quadrants.port.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
+            addScore(data.quadrants.starboard.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
+            addScore(data.quadrants.aft.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
+        }
+
+        if (sizeMod !== 0) {
+            addScore(data.quadrants.forward.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
+            addScore(data.quadrants.port.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
+            addScore(data.quadrants.starboard.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
+            addScore(data.quadrants.aft.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
+        }
+
+        if (defensiveCountermeasureItem) {
+            addScore(data.quadrants.forward.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureItem.data.targetLockBonus, false);
+            addScore(data.quadrants.port.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureItem.data.targetLockBonus, false);
+            addScore(data.quadrants.starboard.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureItem.data.targetLockBonus, false);
+            addScore(data.quadrants.aft.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureItem.data.targetLockBonus, false);
+        }
+
+        if (forwardTL?.misc < 0 || forwardTL?.misc > 0) addScore(data.quadrants.forward.targetLock, "SFRPG.StarshipSheet.Modifiers.MiscModifier", forwardTL.misc);
+        if (portTL?.misc < 0 || portTL?.misc > 0) addScore(data.quadrants.port.targetLock, "SFRPG.StarshipSheet.Modifiers.MiscModifier", portTL.misc);
+        if (starboardTL?.misc < 0 || starboardTL?.misc > 0) addScore(data.quadrants.starboard.targetLock, "SFRPG.StarshipSheet.Modifiers.MiscModifier", starboardTL.misc);
+        if (aftTL?.misc < 0 || aftTL?.misc > 0) addScore(data.quadrants.aft.targetLock, "SFRPG.StarshipSheet.Modifiers.MiscModifier", aftTL.misc);
+
+        if (shieldItem && shieldItem.data.isDeflector) {
+            if (data.quadrants.forward.shields.value > 0) addScore(data.quadrants.forward.targetLock, shieldItem.name, shieldItem.data.armorBonus, false);
+            if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.targetLock, shieldItem.name, shieldItem.data.armorBonus, false);
+            if (data.quadrants.starboard.shields.value > 0) addScore(data.quadrants.starboard.targetLock, shieldItem.name, shieldItem.data.armorBonus, false);
+            if (data.quadrants.aft.shields.value > 0) addScore(data.quadrants.aft.targetLock, shieldItem.name, shieldItem.data.armorBonus, false);
+        }
+
+        if (armorItem && (armorItem.data.targetLockPenalty < 0 || armorItem.data.targetLockPenalty > 0)) {
+            addScore(data.quadrants.forward.targetLock, armorItem.name, armorItem.data.targetLockPenalty, false);
+            addScore(data.quadrants.port.targetLock, armorItem.name, armorItem.data.targetLockPenalty, false);
+            addScore(data.quadrants.starboard.targetLock, armorItem.name, armorItem.data.targetLockPenalty, false);
+            addScore(data.quadrants.aft.targetLock, armorItem.name, armorItem.data.targetLockPenalty, false);
+        }
+
+        if (ablativeArmorItem && (ablativeArmorItem.data.targetLockPenalty < 0 || ablativeArmorItem.data.targetLockPenalty > 0)) {
+            addScore(data.quadrants.forward.targetLock, ablativeArmorItem.name, ablativeArmorItem.data.targetLockPenalty, false);
+            addScore(data.quadrants.port.targetLock, ablativeArmorItem.name, ablativeArmorItem.data.targetLockPenalty, false);
+            addScore(data.quadrants.starboard.targetLock, ablativeArmorItem.name, ablativeArmorItem.data.targetLockPenalty, false);
+            addScore(data.quadrants.aft.targetLock, ablativeArmorItem.name, ablativeArmorItem.data.targetLockPenalty, false);
+        }
 
         return fact;
     });
