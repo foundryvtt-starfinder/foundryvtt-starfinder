@@ -40,7 +40,7 @@
                 {{/if}}
             </div>
             <div class="item-detail item-action">
-                {{#if item.data.activation.type }}
+                {{#if (and item.data.activation.type item.isFeat)}}
                     {{#if item.data.isActive}}
                     <button class="tag featDeactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
                     {{else}}

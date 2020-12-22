@@ -1,0 +1,36 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    {{> "systems/sfrpg/templates/items/parts/item-header.html"}}
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Common component data --}}
+            {{> "systems/sfrpg/templates/items/parts/starship-component.html" this noPCUCost=true}}
+
+            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.Header" }}</h4>
+
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.Fortification" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.FortificationTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipReinforcedBulkhead.Fortification" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.fortification" value="{{data.fortification}}" data-dtype="String" placeholder="0%" />
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+</form>

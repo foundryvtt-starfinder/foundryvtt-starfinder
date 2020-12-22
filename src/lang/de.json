@@ -25,9 +25,23 @@
         "TypeFusion": "Waffenfusion",
         "TypeUpgrade": "Rüstungsverbesserung",
         "TypeAugmentation": "Aufwertung",
+        "TypeStarshipablativearmor": "Starship Ablative Armor",
         "TypeStarshipaction": "Starship Action",
+        "TypeStarshiparmor": "Starship Armor",
         "TypeStarshipcomputer": "Starship Computer",
+        "TypeStarshipcrewquarter": "Starship Crew Quarter",
+        "TypeStarshipdefensivecountermeasure": "Starship Defensive Countermeasure",
+        "TypeStarshipdriftengine": "Starship Drift Engine",
+        "TypeStarshipexpansionbay": "Starship Expansion Bay",
+        "TypeStarshipfortifiedhull": "Starship Fortified Hull",
         "TypeStarshipframe": "Raumschiffgrundstruktur",
+        "TypeStarshipothersystem": "Starship Other System",
+        "TypeStarshippowercore": "Starship Power Core",
+        "TypeStarshipreinforcedbulkhead": "Starship Reinforced Bulkhead",
+        "TypeStarshipsecuritysystem": "Starship Security System",
+        "TypeStarshipsensor": "Starship Sensor",
+        "TypeStarshipshield": "Starship Shield",
+        "TypeStarshipthruster": "Starship Thruster",
         "TypeStarshipweapon": "Raumschiffwaffe",
         "TypeArchetypes": "Archetyp",
         "TypeChassis": "Drohnenchassis",
@@ -862,8 +876,22 @@
                 "Races"               : "Rassen",
                 "Shields"             : "Schilde",
                 "Spells"              : "Zauber",
+                "StarshipAblativeArmors": "Starship Ablative Armors",
+                "StarshipArmors"      : "Starship Armors",
                 "StarshipComputers"   : "Starship Computers",
+                "StarshipCrewQuarters": "Starship Crew Quarters",
+                "StarshipDefensiveCountermeasures": "Starship Defensive Countermeasures",
+                "StarshipDriftEngine" : "Starship Drift Engine",
+                "StarshipExpansionBays": "Starship Expansion Bays",
+                "StarshipFortifiedHulls": "Starship Fortified Hulls",
                 "StarshipFrames"      : "Raumschiffgrundstrukturen",
+                "StarshipOtherSystems": "Starship Other Systems",
+                "StarshipPowerCores"  : "Starship Power Cores",
+                "StarshipReinforcedBulkheads": "Starship Reinforced Bulkheads",
+                "StarshipSecuritySystems": "Starship Security Systems",
+                "StarshipSensors"     : "Starship Sensors",
+                "StarshipShields"     : "Starship Shields",
+                "StarshipThrusters"   : "Starship Thrusters",
                 "StarshipWeapons"     : "Raumschiffwaffen",
                 "TechnologicalItems"  : "Technische Gegenstände",
                 "Themes"              : "Motive",
@@ -1032,12 +1060,36 @@
                 "Sturdy": "Widerstandsfähig",
                 "SturdyTooltip": "Ausrüstung, wie Waffen und Rüstungen, gelten als widerstandsfähig."
             },
+            "StarshipAblativeArmor": {
+                "AblativeValue": "Total additional hitpoints",
+                "AblativeValueTooltip": "The total amount of ablative armor hitpoints to distribute over the four quadrants.",
+                "Header": "Ablative Armor Properties",
+                "TargetLockPenalty": "Target Lock Penalty",
+                "TargetLockPenaltyTooltip": "The penalty applied to the ship's target lock score.",
+                "TurnDistancePenalty": "Turn Distance Penalty",
+                "TurnDistancePenaltyTooltip": "The penalty applied to the ship's turn distance score."
+            },
+            "StarshipArmor": {
+                "ArmorBonus": "Armor Bonus",
+                "ArmorBonusTooltip": "The armor class bonus provided by this armor.",
+                "Header": "Ablative Armor Properties",
+                "TargetLockPenalty": "Target Lock Penalty",
+                "TargetLockPenaltyTooltip": "The penalty applied to the ship's target lock score.",
+                "TurnDistancePenalty": "Turn Distance Penalty",
+                "TurnDistancePenaltyTooltip": "The penalty applied to the ship's turn distance score."
+            },
             "StarshipComponent": {
                 "Cost": "Buildpoint Cost",
                 "CostTooltip": "The amount of buildpoints required to obtain this component.",
+                "CostMultipliedBySize": "BP Cost Multiplied by Size",
+                "CostMultipliedBySizeTooltip": "Is the BP cost multiplied by the starship frame size?",
+                "IsCostMultipliedBySize": "Is multiplied",
                 "Header": "Common Component Properties",
                 "PCU": "PCU Usage",
-                "PCUTooltip": "The amount of power this component requires to function."
+                "PCUTooltip": "The amount of power this component requires to function.",
+                "PoweredState": "PoweredState",
+                "PoweredStateTooltip": "Is this starship component powered?",
+                "IsPowered": "Is powered"
             },
             "StarshipComputer": {
                 "Header": "Computer Properties",
@@ -1045,6 +1097,23 @@
                 "ModifierTooltip": "The roll modifier provided by this computer.",
                 "Nodes": "Nodes",
                 "NodesTooltip": "The amount of times per turn this computer can provide its bonus for."
+            },
+            "StarshipDefensiveCountermeasure": {
+                "Header": "Defensive Countermeasure Properties",
+                "TargetLockBonus": "Target Lock Bonus",
+                "TargetLockBonusTooltip": "The bonus applied to the ship's target lock score."
+            },
+            "StarshipDriftEngine": {
+                "EngineRating": "Engine Rating",
+                "EngineRatingTooltip": "The Engine Rating for this drift engine.",
+                "Header": "Drift Engine Properties",
+                "MaxSize": "Maximum ship size",
+                "MaxSizeTooltip": "The maximum ship size this engine can be installed onto."
+            },
+            "StarshipFortifiedHull": {
+                "CriticalThresholdBonus": "Critical Threshold Bonus",
+                "CriticalThresholdBonusTooltip": "The bonus applied to the ship's critical threshold score.",
+                "Header": "Fortified Hull Properties"
             },
             "StarshipFrame": {
                 "Details": {
@@ -1079,6 +1148,54 @@
                     "WeaponTypeHeavy": "Schwer",
                     "WeaponTypeLight": "Leicht"
                 }
+            },
+            "StarshipPowerCore": {
+                "Header": "Power Core Properties",
+                "ProvidedPower": "Provided PCU",
+                "ProvidedPowerTooltip": "The amount of PCU provided by this power core.",
+                "Sizes": "Supported Starship Sizes",
+                "SizesTooltip": "Select the starship sizes that this power core can be installed onto."
+            },
+            "StarshipReinforcedBulkhead": {
+                "Fortification": "Fortification",
+                "FortificationTooltip": "Whenever the starship would sustain critical damage, there is a percent chance based on the reinforced bulkhead’s fortification rating that the critical damage effect is negated (though the attack still deals damage to the starship).",
+                "Header": "Reinforced Bulkhead Properties"
+            },
+            "StarshipSensor": {
+                "Header": "Sensor Properties",
+                "Modifier": "Sensor scan modifier",
+                "ModifierTooltip": "An additional modifier when scanning planets outside of combat.",
+                "Range": "Range",
+                "RangeTooltip": "Range increment of the scanner, short is 5, medium is 10, and long is 15 hexes."
+            },
+            "StarshipShield": {
+                "ArmorBonus": "Armor Bonus",
+                "ArmorBonusTooltip": "The armor class bonus provided by this shield.",
+                "DefenseValue": "Defense Value",
+                "DefenseValueTooltip": "The maximum defense value available with this deflector shield.",
+                "Header": "Shield Properties",
+                "Regeneration": "Regeneration per minute",
+                "RegenerationTooltip": "The amount of shield points regenerated per minute.",
+                "ShieldPoints": "Shield Points",
+                "ShieldPointsTooltip": "The total amount of shield points provided by this shield.",
+                "ShieldType": "Shield Type",
+                "ShieldTypeTooltip": "Is this shield a deflector shield?",
+                "IsDeflector": "Is Deflector Shield",
+                "TargetLockBonus": "Target Lock Bonus",
+                "TargetLockBonusTooltip": "The bonus applied to the ship's target lock score."
+            },
+            "StarshipThruster": {
+                "Booster": "Booster Thruster",
+                "BoosterTooltip": "For more information, see the Booster Thruster Housing expansion bay.",
+                "Header": "Thruster Properties",
+                "IsBooster": "Is a booster",
+                "IsEnabled": "Is enabled",
+                "PilotingModifier": "Piloting Modifier",
+                "PilotingModifierTooltip": "Additional piloting modifier gained from this thruster.",
+                "Size": "Supported Starship Size",
+                "SizeTooltip": "Select the starship size that this thruster can be installed onto.",
+                "Speed": "Speed",
+                "SpeedTooltip": "Number of hexes the starship will be able to move per turn using this thruster."
             },
             "Weapons": {
                 "Category": "Waffenart",
@@ -1333,6 +1450,7 @@
             },
             "StarshipAction": "Starship Action: {action}",
             "StarshipActions": {
+                "ActionNotFoundError": "Starship action with id '{actionId}' does not exist!",
                 "Chat": {
                     "CriticalEffect": "Critical Effect",
                     "DC": "DC",
@@ -1440,98 +1558,10 @@
         "ShipModelLabel": "Modell",
         "ShipNameLabel": "Schiffsname",
         "ShipSystems": {
-            "ArmorSystems": {
-                "Mk01": "Mk. 1",
-                "Mk02": "Mk. 2",
-                "Mk03": "Mk. 3",
-                "Mk04": "Mk. 4",
-                "Mk05": "Mk. 5",
-                "Mk06": "Mk. 6",
-                "Mk07": "Mk. 7",
-                "Mk08": "Mk. 8",
-                "Mk09": "Mk. 9",
-                "Mk10": "Mk. 10",
-                "Mk11": "Mk. 11",
-                "Mk12": "Mk. 12",
-                "Mk13": "Mk. 13",
-                "Mk14": "Mk. 14",
-                "Mk15": "Mk. 15"
-            },
-            "BaseFrames": {
-                "Race"    : "Raumjäger",
-                "Inter"   : "Abfangjäger",
-                "Fight"   : "Angriffsjäger",
-                "Shuttle" : "Raumfähre",
-                "Lfreight": "Leichter Frachter",
-                "Expl"    : "Erkundungsschiff",
-                "Trans"   : "Transporter",
-                "Dest"    : "Zerstörer",
-                "Hfreight": "Schwerer Frachter",
-                "Bfreight": "Großraumfrachter",
-                "Cruiser" : "Raumkreuzer",
-                "Carr"    : "Trägerschiff",
-                "Battle"  : "Kriegsschiff",
-                "Dread"   : "Schlachtschiff"
-            },
-            "ComputerSystems": {
-                "Basic" : "Einfacher Computer",
-                "Mk01m" : "Mk. 1 Monoknoten",
-                "Mk01d" : "Mk. 1 Dualknoten",
-                "Mk01tr": "Mk. 1 Trioknoten",
-                "Mk01te": "Mk. 1 Quadknoten",
-                "Mk02m" : "Mk. 2 Monoknoten",
-                "Mk02d" : "Mk. 2 Dualknoten",
-                "Mk02tr": "Mk. 2 Trioknoten",
-                "Mk02te": "Mk. 2 Quadknoten",
-                "Mk03m" : "Mk. 3 Monoknoten",
-                "Mk03d" : "Mk. 3 Dualknoten",
-                "Mk03tr": "Mk. 3 Trioknoten",
-                "Mk03te": "Mk. 3 Quadknoten",
-                "Mk04m" : "Mk. 4 Monoknoten",
-                "Mk04d" : "Mk. 4 Dualknoten",
-                "Mk04tr": "Mk. 4 Trioknoten",
-                "Mk05m" : "Mk. 5 Monoknoten",
-                "Mk05d" : "Mk. 5 Dualknoten",
-                "Mk05tr": "Mk. 5 Trioknoten",
-                "Mk06m" : "Mk. 6 Monoknoten",
-                "Mk06d" : "Mk. 6 Dualknoten",
-                "Mk07m" : "Mk. 7 Monoknoten",
-                "Mk07d" : "Mk. 7 Dualknoten",
-                "Mk08m" : "Mk. 8 Monoknoten",
-                "Mk08d" : "Mk. 8 Dualknoten",
-                "Mk09m" : "Mk. 9 Monoknoten",
-                "Mk09d" : "Mk. 9 Dualknoten",
-                "Mk10m" : "Mk. 10 Monoknoten",
-                "Mk10d" : "Mk. 10 Dualknoten"
-            },
             "CrewQuarterSystems": {
                 "Common"   : "Gewöhnlich",
                 "Good"     : "Gut",
                 "Luxurious": "Luxus"
-            },
-            "DefenseSystems": {
-                "Mk01": "Mk. 1 Verteidigung",
-                "Mk02": "Mk. 2 Verteidigung",
-                "Mk03": "Mk. 3 Verteidigung",
-                "Mk04": "Mk. 4 Verteidigung",
-                "Mk05": "Mk. 5 Verteidigung",
-                "Mk06": "Mk. 6 Verteidigung",
-                "Mk07": "Mk. 7 Verteidigung",
-                "Mk08": "Mk. 8 Verteidigung",
-                "Mk09": "Mk. 9 Verteidigung",
-                "Mk10": "Mk. 10 Verteidigung",
-                "Mk11": "Mk. 11 Verteidigung",
-                "Mk12": "Mk. 12 Verteidigung",
-                "Mk13": "Mk. 13 Verteidigung",
-                "Mk14": "Mk. 14 Verteidigung",
-                "Mk15": "Mk. 15 Verteidigung"
-            },
-            "DriftEngineSystems": {
-                "Basic"   : "Einfacher Driftantrieb",
-                "Booster" : "Verbesserter Driftantrieb",
-                "Major"   : "Kräftiger Driftantrieb",
-                "Superior": "Überlegener Driftantrieb",
-                "Ultra"   : "Ultra-Driftantrieb"
             },
             "ExpansionBaySystems": {
                 "Arclab"  : "Arkanes Labor",
@@ -1560,72 +1590,12 @@
                 "Good"   : "Gut",
                 "Perfect": "Perfekt"
             },
-            "PowerCoreSystems": {
-                "MicronLight"   : "Mikron (Leicht)",
-                "MicronHeavy"   : "Mikron (Schwer)",
-                "MicronUltra"   : "Mikron (Ultra)",
-                "ArcusLight"    : "Arkus (Leicht)",
-                "PulseBrown"    : "Puls (Braun)",
-                "PulseBlack"    : "Puls (Schwarz)",
-                "PulseWhite"    : "Puls (Weiß)",
-                "PulseGray"     : "Puls (Grau)",
-                "ArcusHeavy"    : "Arkus (Schwer)",
-                "PulseGreen"    : "Puls (Grün)",
-                "PulseRed"      : "Puls (Rot)",
-                "PulseBlue"     : "Puls (Blau)",
-                "ArcusUltra"    : "Arkus (Ultra)",
-                "ArcusMaximum"  : "Arkus (Maximum)",
-                "PulseOrange"   : "Puls (Orange)",
-                "PulsePrismatic": "Puls (Prisma)",
-                "NovaLight"     : "Nova (Leicht)",
-                "NovaHeavy"     : "Nova (Schwer)",
-                "NovaUltra"     : "Nova (Ultra)",
-                "GatewayLight"  : "Portal (Leicht)",
-                "GatewayHeavy"  : "Portal (Schwer)",
-                "GatewayUltra"  : "Portal (Ultra)"
-            },
             "SecuritySystems": {
                 "Antihack"    : "Anti-Hackersysteme",
                 "Antiper"     : "Anti-Personenwaffe",
                 "Bio"         : "Biometrische Schlösser",
                 "Compcounter" : "Computergegenmaßnahmen",
                 "Selfdestruct": "Selbstzerstörung"
-            },
-            "SensorSystems": {
-                "Cut"    : "Billige Version",
-                "Bushort": "Günstige Kurzstrecke",
-                "Bashort": "Einfache Kurzstrecke",
-                "Ashort" : "Fortschrittliche Kurzstrecke",
-                "Bumed"  : "Billige Mittelstrecke",
-                "Bamed"  : "Einfache Mittelstrecke",
-                "Amed"   : "Fortschrittliche Mittelstrecke",
-                "Bulong" : "Billige Langstrecke",
-                "Balong" : "Einfache Langstrecke",
-                "Along"  : "Fortschrittliche Langstrecke"
-            },
-            "ShieldSystems": {
-                "010": "Einfache Schilde 10",
-                "020": "Einfache Schilde 20",
-                "030": "Einfache Schilde 30",
-                "040": "Einfache Schilde 40",
-                "050": "Leichte Schilde 50",
-                "060": "Leichte Schilde 60",
-                "070": "Leichte Schilde 70",
-                "080": "Leichte Schilde 80",
-                "090": "Mittlere Schilde 90",
-                "100": "Mittlere Schilde 100",
-                "120": "Mittlere Schilde 120",
-                "140": "Mittlere Schilde 140",
-                "160": "Mittlere Schilde 160",
-                "200": "Mittlere Schilde 200",
-                "240": "Schwere Schilde 240",
-                "280": "Schwere Schilde 280",
-                "320": "Schwere Schilde 320",
-                "360": "Schwere Schilde 360",
-                "420": "Schwere Schilde 420",
-                "480": "Schwere Schilde 480",
-                "540": "Überlegene Schilde 540",
-                "600": "Überlegene Schilde 600"
             },
             "Size": {
                 "Supercolossal": "Superkolossal"
@@ -1673,36 +1643,6 @@
             "StarshipWeaponTypes": {
                 "Direct"  : "Direktbeschuss",
                 "Tracking": "Lenkbar"
-            },
-            "ThrusterSystems": {
-                "T6" : "T6 Schubdüsen",
-                "T8" : "T8 Schubdüsen",
-                "T10": "T10 Schubdüsen",
-                "T12": "T12 Schubdüsen",
-                "T14": "T14 Schubdüsen",
-                "S6" : "S6 Schubdüsen",
-                "S8" : "S8 Schubdüsen",
-                "S10": "S10 Schubdüsen",
-                "S12": "S12 Schubdüsen",
-                "M4" : "M4 Schubdüsen",
-                "M6" : "M6 Schubdüsen",
-                "M8" : "M8 Schubdüsen",
-                "M10": "M10 Schubdüsen",
-                "M12": "M12 Schubdüsen",
-                "L4" : "L4 Schubdüsen",
-                "L6" : "L6 Schubdüsen",
-                "L8" : "L8 Schubdüsen",
-                "L10": "L10 Schubdüsen",
-                "H4" : "H4 Schubdüsen",
-                "H6" : "H6 Schubdüsen",
-                "H8" : "H8 Schubdüsen",
-                "H10": "H10 Schubdüsen",
-                "G4" : "G4 Schubdüsen",
-                "G6" : "G6 Schubdüsen",
-                "G8" : "G8 Schubdüsen",
-                "C4" : "C4 Schubdüsen",
-                "C6" : "C6 Schubdüsen",
-                "C8" : "C8 Schubdüsen"
             }
         },
         "ShipTierLabel": "Grad",
@@ -1790,44 +1730,135 @@
         "SpellResistance": "Zauberresistenz",
         "Stamina": "Ausdauer",
         "StarshipSheet": {
+            "Actions": {
+                "Header": {
+                    "Phase": "Phase",
+                    "ResolvePoints": "Resolve Points"
+                },
+                "Tooltips": {
+                    "NormalEffect": "Normal effect",
+                    "CriticalEffect": "Critical Effect",
+                    "Push": "Push",
+                    "PushTooltip": "Push actions (indicated in an action’s heading) are difficult to perform but can yield greater results. You can’t perform a push action if the necessary system is malfunctioning or wrecked (as noted in Critical Damage Conditions on page 321)."
+                }
+            },
             "Attributes": {
-                "Computer": "Computer"
+                "BuildPoints": "Build Points",
+                "BuildPointsUsage": "Usage",
+                "Complement": "Complement",
+                "ComplementMin": "Minimum crew needed to run the ship.",
+                "ComplementMax": "Maximum number of crew that can be assigned to a role on the ship (not the maximum number of creatures that can be aboard).",
+                "Computer": "Computer",
+                "DriftNotAvailable": "Not available",
+                "DriftRating": "Drift Rating",
+                "Power": "Power Core",
+                "PowerConsumption": "Consumption",
+                "PowerMissing": "Power Core Missing"
             },
             "Crew": {
+                "ActionsPerRound": "Actions per round",
+                "AddSkill": "Add skill",
                 "AssignedCount": "({current} / {max})",
                 "Captain": "Kapitän",
-                "Pilot": "Pilot",
-                "Gunners": "Bordschützen",
-                "Engineers": "Ingenieure",
-                "ScienceOfficers": "Wissenschaftsoffiziere",
                 "ChiefMates": "Erste Offiziere",
+                "CrewLimitReached": "You have reached the maximum amount of crew allowed for the role of '{targetRole}'.",
+                "CrewSetting": "Crew setting",
+                "Engineers": "Ingenieure",
+                "Gunners": "Bordschützen",
+                "Header": "Starship Crew",
+                "IsNPCCrew": "Is NPC crew",
                 "MagicOfficers": "Magische Offiziere",
                 "Passengers": "Passagiere",
-                "UnlimitedMax": "Keine Beschränkung",
-                "CrewLimitReached": "You have reached the maximum amount of crew allowed for the role of '{targetRole}'."
+                "Pilot": "Pilot",
+                "ScienceOfficers": "Wissenschaftsoffiziere",
+                "SkillModifier": "Modifier",
+                "SkillRanks": "Ranks",
+                "UnlimitedMax": "Keine Beschränkung"
+            },
+            "Critical": {
+                "Header": "Critical Damage",
+                "Status": {
+                    "Glitching": "Glitching",
+                    "Malfunctioning": "Malfunctioning",
+                    "Nominal": "Nominal",
+                    "Wrecked": "Wrecked"
+                },
+                "Systems": {
+                    "LifeSupport": "Life Support",
+                    "Sensors": "Sensors",
+                    "WeaponsArray": "Weapons Array",
+                    "Engines": "Engines",
+                    "PowerCore": "Power Core"
+                }
             },
             "Details": {
+                "Ablative": {
+                    "Aft": "Aft Ablative Armor",
+                    "Forward": "Forward Ablative Armor",
+                    "Header": "Ablative",
+                    "Port": "Port Ablative Armor",
+                    "Starboard": "Starboard Ablative Armor"
+                },
+                "AblativeExceedsHull": "Total ablative exceeds double hull points!",
+                "AblativeExceedsHullTooltip": "A starship cannot support ablative armor if its temporary Hull Points exceed twice its standard Hull Point total. (For more information, see the Starship Operations Manual pg. 20)",
+                "AblativeTooHigh": "Too much ablative assigned!",
+                "AblativeTooHighTooltip": "Either the total of installed ablative is too high, or the sum total of current ablative score is too high.",
                 "Shields": {
                     "Aft": "Achternschilde",
+                    "Conventional": "Shields",
+                    "Deflector": "Shield DV",
                     "Forward": "Bugschilde",
                     "Header": "Schilde",
                     "Port": "Backbordschilde",
                     "Starboard": "Steuerbordschilde"
                 },
-                "ShieldTooHigh": "Schild ist zu hoch!",
-                "ShieldTooHighTooltip": "Ein Schildquadrant darf nicht mehr als 70% der gesamten Schildzuweisung betragen, da das für jeden Schild verfügbare Minimum 10% betragen muss. (Weitere Informationen finden Sie im Grundregelwerk auf S. 302)"
+                "ShieldHighestTooHigh": "One or more quadrants exceed limits!",
+                "ShieldHighestTooHighTooltip": "Ein Schildquadrant darf nicht mehr als 70% der gesamten Schildzuweisung betragen, da das für jeden Schild verfügbare Minimum 10% betragen muss. (Weitere Informationen finden Sie im Grundregelwerk auf S. 302)",
+                "ShieldTotalTooHigh": "Shield total exceeds maximum!",
+                "ShieldTotalTooHighTooltip": "The total sum of shields exceeds the shield's maximum output."
             },
             "Features": {
+                "ExpansionBays": "Expansion Bays ({current} / {max})",
                 "Frame": "Grundstruktur ({current} / 1)",
-                "Systems": "Systems"
+                "OtherSystems": "Other Systems",
+                "PowerCores": "Power Cores",
+                "PrimarySystems": "Primary Systems",
+                "SecuritySystems": "Security Systems",
+                "Thrusters": "Thrusters"
             },
             "Header": {
                 "FrameMissing": "Fehlende Grundstruktur",
-                "Maneuverability": "Manövrierfähigkeit: {maneuverability}",
-                "Size": "Größenkategorie: {size}"
+                "Max": "Max",
+                "Misc": "Misc",
+                "Movement": {
+                    "Maneuverability": "Manövrierfähigkeit",
+                    "ManeuverabilityTooltip": "Manövrierfähigkeit: {maneuverability}",
+                    "Speed": "Speed",
+                    "ThrustersMissing": "Thrusters Missing",
+                    "Turn": "Turn"
+                },
+                "Size": "Größenkategorie: {size}",
+                "Value": "Value"
             },
             "Modifiers": {
-                "ComputerBonus": "Computer Bonus: {mod} ({source})"
+                "AblativeOverload": "Ablative overload: {mod}",
+                "Base": "Base: 10",
+                "ComputerBonus": "Computer Bonus: {mod} ({source})",
+                "MiscModifier": "Misc modifier: {value}",
+                "PilotingBonus": "Piloting Bonus: {value}",
+                "PilotSkillBonus": "Pilot Skill Bonus: {value}",
+                "SizeModifier": "Size modifier: {value}",
+                "UnevenAblative": "Uneven Ablative: {mod}"
+            },
+            "Quadrants": {
+                "AblativeHeader": "Ablative Armor",
+                "ArmorClass": "Armor Class",
+                "EvenDistribution": "Even distribution",
+                "Header": "Quadrant Defenses",
+                "NotAvailable": "Not available",
+                "QuadrantLimit": "Quadrant limit",
+                "ShieldHeader": "Shields",
+                "TargetLock": "Target Lock"
             },
             "Role": {
                 "Captain": "Captain",

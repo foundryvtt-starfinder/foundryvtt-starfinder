@@ -62,9 +62,10 @@ import calculateStarshipFrame           from './rules/actions/actor/starship/cal
 import calculateStarshipComputer        from './rules/actions/actor/starship/calculate-starship-computer.js'
 import calculateStarshipArmorClass      from './rules/actions/actor/starship/calculate-starship-ac.js';
 import calculateStarshipCrew            from './rules/actions/actor/starship/calculate-starship-crew.js';
+import calculateStarshipCriticalStatus  from './rules/actions/actor/starship/calculate-starship-critical-status.js';
 import calculateStarshipCritThreshold   from './rules/actions/actor/starship/calculate-starship-ct.js';
 import calculateStarshipDrift           from './rules/actions/actor/starship/calculate-starship-drift.js';
-import calculateStarshipMaxShields      from './rules/actions/actor/starship/calculate-starship-max-shields.js';
+import calculateStarshipAblative        from './rules/actions/actor/starship/calculate-starship-ablative.js';
 import calculateStarshipPower           from './rules/actions/actor/starship/calculate-starship-power.js';
 import calculateStarshipShields         from './rules/actions/actor/starship/calculate-starship-shields.js';
 import calculateStarshipSpeed           from './rules/actions/actor/starship/calculate-starship-speed.js';
@@ -110,9 +111,10 @@ export default function (engine) {
     // Starship actions
     calculateStarshipArmorClass(engine);
     calculateStarshipCrew(engine);
+    calculateStarshipCriticalStatus(engine);
     calculateStarshipCritThreshold(engine);
     calculateStarshipDrift(engine);
-    calculateStarshipMaxShields(engine);
+    calculateStarshipAblative(engine);
     calculateStarshipPower(engine);
     calculateStarshipShields(engine);
     calculateStarshipSpeed(engine);
@@ -217,15 +219,16 @@ export default function (engine) {
                 then: [
                     "calculateStarshipFrame",
                     "calculateStarshipCrew",
-                    "calculateStarshipArmorClass",
                     "calculateStarshipCritThreshold",
                     "calculateStarshipDrift",
                     "calculateStarshipShields",
-                    "calculateStarshipMaxShields",
+                    "calculateStarshipAblative",
                     "calculateStarshipPower",
                     "calculateStarshipSpeed",
+                    "calculateStarshipArmorClass",
                     "calculateStarshipTargetLock",
-                    "calculateStarshipComputer"
+                    "calculateStarshipComputer",
+                    "calculateStarshipCriticalStatus"
                 ]
             },
             {
