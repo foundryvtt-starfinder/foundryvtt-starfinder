@@ -50,9 +50,13 @@
                             <label>{{localize "SFRPG.StarshipSheet.Header.Max"}}</label>
                         </li>
                         <li class="flexrow" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.Power" }}<br/>@attributes.power.value<br/>@attributes.power.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.PowerConsumption" }}:<br/>{{#each data.attributes.power.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            {{#if hasPower}}
                             <label>PCU</label>
                             <label>{{data.attributes.power.value}}</label>
                             <label>{{data.attributes.power.max}}</label>
+                            {{else}}
+                            <label class="error" style="flex: 3; font-size: 12px;">{{localize "SFRPG.StarshipSheet.Attributes.PowerMissing"}}</label>
+                            {{/if}}
                         </li>
                         <li class="flexrow" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}<br/>@attributes.bp.value<br/>@attributes.bp.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsUsage" }}:<br/>{{#each data.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                             <label>BP</label>
