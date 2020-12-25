@@ -697,19 +697,41 @@ SFRPG.starshipWeaponClass = {
 };
 
 SFRPG.starshipWeaponProperties = {
-    "array"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Array",
-    "broad"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Broad",
-    "emp"       : "SFRPG.ShipSystems.StarshipWeaponProperties.Emp",
-    "irradiateL": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateL",
-    "irradiateM": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateM",
-    "irradiateH": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateH",
-    "limited"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Limited",
-    "line"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Line",
-    "point"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Point",
-    "quantum"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Quantum",
-    "ripper"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Ripper",
-    "tractor"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Tractor",
-    "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex"
+    "anchoring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Anchoring", // SOM
+    "array"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Array", // CRB
+    "automated" : "SFRPG.ShipSystems.StarshipWeaponProperties.Automated", // SOM
+    "broad"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Broad", // CRB
+    "burrowing" : "SFRPG.ShipSystems.StarshipWeaponProperties.Burrowing", // Pact Worlds
+    "buster"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Buster", // SOM
+    "deployed"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Deployed", // SOM
+    "emp"       : "SFRPG.ShipSystems.StarshipWeaponProperties.Emp", // CRB
+    "forceField": "SFRPG.ShipSystems.StarshipWeaponProperties.ForceField", // SOM
+    "gravityWell": "SFRPG.ShipSystems.StarshipWeaponProperties.GravityWell", // SOM
+    "hacking"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Hacking", // SOM
+    "intimidating": "SFRPG.ShipSystems.StarshipWeaponProperties.Intimidating", // SOM
+    "irradiateL": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateL", // CRB
+    "irradiateM": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateM", // CRB
+    "irradiateH": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateH", // CRB
+    "limited"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Limited", // CRB
+    "line"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Line", // CRB
+    "mine"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Mine", // SOM
+    "mystical"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Mystical", // SOM
+    "navScram"  : "SFRPG.ShipSystems.StarshipWeaponProperties.NavScram", // SOM
+    "numbing"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Numbing", // SOM
+    "orbital"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Orbital", // SOM
+    "pod"       : "SFRPG.ShipSystems.StarshipWeaponProperties.Pod", // SOM
+    "point"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Point", // CRB
+    "quantum"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Quantum", // CRB
+    "rail"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Rail", // SOM
+    "ramming"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Ramming", // SOM
+    "restricted": "SFRPG.ShipSystems.StarshipWeaponProperties.Restricted", // SOM
+    "ripper"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Ripper", // CRB
+    "smart"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Smart", // SOM
+    "spore"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Spore", // Pact Worlds
+    "teleportation": "SFRPG.ShipSystems.StarshipWeaponProperties.Teleportation", // SOM
+    "transposition": "SFRPG.ShipSystems.StarshipWeaponProperties.Transposition", // SOM
+    "tractor"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Tractor", // CRB
+    "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex" // CRB
 };
 
 SFRPG.starshipArcs = {
