@@ -858,6 +858,42 @@ export class ActorSFRPG extends Actor {
             return;
         }
 
+        let quadrant = "";
+        if (actionEntry.data.role === "gunner") {
+            const options = [
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Forward"),
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Port"),
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Starboard"),
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Aft")
+            ];
+            const results = await ChoiceDialog.show(
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Title", {name: actionEntry.name}),
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Message"),
+                {
+                    quadrant: {
+                        name: game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Quadrant"),
+                        options: options,
+                        default: options[0]
+                    }
+                }
+            );
+
+            if (results.resolution === 'cancel') {
+                return;
+            }
+
+            const selectedOption = options.indexOf(results.result.quadrant);
+            if (selectedOption === 1) {
+                quadrant = "Port";
+            } else if (selectedOption === 2) {
+                quadrant = "Starboard";
+            } else if (selectedOption === 3) {
+                quadrant = "Aft";
+            } else {
+                quadrant = "Forward";
+            }
+        }
+
         let selectedFormula = actionEntry.data.formula[0];
         if (actionEntry.data.formula.length > 1) {
             const results = await ChoiceDialog.show(
@@ -894,9 +930,25 @@ export class ActorSFRPG extends Actor {
         ];
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
 
+        let systemBonus = "";
+        // Patch and Hold It Together are not affected by critical damage.
+        if (actionEntry.name !== "Patch" && actionEntry.name !== "Hold It Together") {
+            // Gunners must select a quadrant.
+            if (actionEntry.data.role === "gunner") {
+                systemBonus = ` + @ship.attributes.systems.weaponsArray${quadrant}.mod`;
+                systemBonus += ` + @ship.attributes.systems.powerCore.mod`;
+            } else {
+                for (const [key, value] of Object.entries(this.data.data.attributes.systems)) {
+                    if (value.affectedRoles && value.affectedRoles[actionEntry.data.role]) {
+                        systemBonus += ` + @ship.attributes.systems.${key}.mod`;
+                    }
+                }
+            }
+        }
+
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
-            rollFormula: selectedFormula.formula + " + @additional.modifiers.bonus",
+            rollFormula: selectedFormula.formula + systemBonus + " + @additional.modifiers.bonus",
             title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name})
         });
 
