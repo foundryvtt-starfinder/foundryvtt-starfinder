@@ -11,46 +11,79 @@ export default function (engine) {
             wrecked: -4
         };
 
+        /** Ensure Critical Status data is properly populated. */
         if (!data.attributes.systems) {
-            data.attributes.systems = {
-                lifeSupport: {
-                    value: "nominal",
-                    mod: 0
-                },
-                sensors: {
-                    value: "nominal",
-                    mod: 0
-                },
-                weaponsArray: {
-                    value: "nominal",
-                    mod: 0
-                },
-                engines: {
-                    value: "nominal",
-                    mod: 0
-                },
-                powerCore: {
-                    value: "nominal",
-                    mod: 0
-                }
-            };
+            data.attributes.systems = {};
         }
+        
+        data.attributes.systems = mergeObject(data.attributes.systems, {
+            lifeSupport: {
+                value: "nominal",
+                affectedRoles: {
+                    captain: true
+                },
+                mod: 0
+            },
+            sensors: {
+                value: "nominal",
+                affectedRoles: {
+                    scienceOfficer: true
+                },
+                mod: 0
+            },
+            weaponsArrayForward: {
+                value: "nominal",
+                affectedRoles: {
+                    gunner: true
+                },
+                mod: 0
+            },
+            weaponsArrayPort: {
+                value: "nominal",
+                affectedRoles: {
+                    gunner: true
+                },
+                mod: 0
+            },
+            weaponsArrayStarboard: {
+                value: "nominal",
+                affectedRoles: {
+                    gunner: true
+                },
+                mod: 0
+            },
+            weaponsArrayAft: {
+                value: "nominal",
+                affectedRoles: {
+                    gunner: true
+                },
+                mod: 0
+            },
+            engines: {
+                value: "nominal",
+                affectedRoles: {
+                    pilot: true
+                },
+                mod: 0
+            },
+            powerCore: {
+                value: "nominal",
+                affectedRoles: {
+                    captain: true,
+                    pilot: true,
+                    gunner: true,
+                    engineer: true,
+                    scienceOfficer: true,
+                    magicOfficer: true,
+                    chiefMate: true
+                },
+                mod: 0
+            }
+        }, {overwrite: false});
 
         for (const [key, systemData] of Object.entries(data.attributes.systems)) {
             const modifier = critMods[systemData.value];
             systemData.mod = modifier;
-        }
-
-        if (data.attributes.systems.powerCore.value === "malfunctioning") {
-            data.attributes.systems.lifeSupport.mod -= 2;
-            data.attributes.systems.sensors.mod -= 2;
-            data.attributes.systems.weaponsArray.mod -= 2;
-            data.attributes.systems.engines.mod -= 2;
-        } else if (data.attributes.systems.powerCore.value === "wrecked") {
-            data.attributes.systems.lifeSupport.mod -= 4;
-            data.attributes.systems.sensors.mod -= 4;
-            data.attributes.systems.weaponsArray.mod -= 4;
-            data.attributes.systems.engines.mod -= 4;
         }
         
         return fact;
