@@ -131,9 +131,12 @@ export class ItemSFRPG extends Item {
         let dcFormula = save.dc.toString();
         if (dcFormula) {
             const rollContext = new RollContext();
-            rollContext.addContext("owner", this.actor);
             rollContext.addContext("item", this, itemData);
-            rollContext.setMainContext("owner");
+            rollContext.setMainContext("item");
+            if (this.actor) {
+                rollContext.addContext("owner", this.actor);
+                rollContext.setMainContext("owner");
+            }
     
             this.actor?.setupRollContexts(rollContext);
 
@@ -640,12 +643,15 @@ export class ItemSFRPG extends Item {
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
+        const flavor = this.data?.data?.chatFlavor ? title + "<br/>" + this.data.data.chatFlavor : title;
+
         // Call the roll helper utility
         return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
             title: title,
+            flavor: flavor,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: crit,
             dialogOptions: {
@@ -801,6 +807,10 @@ export class ItemSFRPG extends Item {
 
         let modifiers = this.actor.getAllModifiers();
         modifiers = modifiers.filter(mod => {
+            if (!acceptedModifiers.includes(mod.effectType)) {
+                return false;
+            }
+
             if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
                 if (mod.valueAffected !== this.data.data.weaponType) {
                     return false;
@@ -810,7 +820,7 @@ export class ItemSFRPG extends Item {
                     return false;
                 }
             }
-            return (mod.enabled || mod.modifierType === "formula") && acceptedModifiers.includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula");
         });
 
         let stackModifiers = new StackModifiers();

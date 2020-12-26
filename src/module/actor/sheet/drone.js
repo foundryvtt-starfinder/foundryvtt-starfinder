@@ -80,6 +80,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                 } else {
                     arr[1].push(item);
                 }
+                item.isFeat = true;
             }
             else if (item.type === "chassis") arr[2].push(item);
             else if (item.type === "mod") arr[3].push(item);

@@ -1,4 +1,5 @@
 import { DiceSFRPG, RollContext } from "../dice.js";
+import { ChoiceDialog } from "../apps/choice-dialog.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
@@ -52,6 +53,7 @@ export class ActorSFRPG extends Actor {
      */
     prepareData() {
         super.prepareData();
+        const actor = this;
         const actorData = this.data;
         const data = actorData.data;
         const flags = actorData.flags;
@@ -74,6 +76,7 @@ export class ActorSFRPG extends Actor {
         const asis = items.filter(item => item.type === "asi");
         game.sfrpg.engine.process("process-actors", {
             actorId,
+            actor,
             type: actorType,
             data,
             flags,
@@ -831,6 +834,196 @@ export class ActorSFRPG extends Actor {
         }
     }
 
+    /** Starship code */
+    async useStarshipAction(actionId) {
+        /** Bad entry; no action! */
+        if (!actionId) {
+            ui.notifications.error(game.i18n.format("SFRPG.Rolls.StarshipActions.ActionNotFoundError", {actionId: actionId}));
+            return;
+        }
+
+        const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
+        const starshipActions = game.packs.get(starshipPackKey);
+        const actionEntry = await starshipActions.getEntry(actionId);
+
+        /** Bad entry; no action! */
+        if (!actionEntry) {
+            ui.notifications.error(game.i18n.format("SFRPG.Rolls.StarshipActions.ActionNotFoundError", {actionId: actionId}));
+            return;
+        }
+
+        /** Bad entry; no formula! */
+        if (actionEntry.data.formula.length < 1) {
+            ui.notifications.error(game.i18n.format("SFRPG.Rolls.StarshipActions.NoFormulaError", {name: actionEntry.name}));
+            return;
+        }
+
+        let quadrant = "";
+        if (actionEntry.data.role === "gunner") {
+            const options = [
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Forward"),
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Port"),
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Starboard"),
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Aft")
+            ];
+            const results = await ChoiceDialog.show(
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Title", {name: actionEntry.name}),
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Message"),
+                {
+                    quadrant: {
+                        name: game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Quadrant"),
+                        options: options,
+                        default: options[0]
+                    }
+                }
+            );
+
+            if (results.resolution === 'cancel') {
+                return;
+            }
+
+            const selectedOption = options.indexOf(results.result.quadrant);
+            if (selectedOption === 1) {
+                quadrant = "Port";
+            } else if (selectedOption === 2) {
+                quadrant = "Starboard";
+            } else if (selectedOption === 3) {
+                quadrant = "Aft";
+            } else {
+                quadrant = "Forward";
+            }
+        }
+
+        let selectedFormula = actionEntry.data.formula[0];
+        if (actionEntry.data.formula.length > 1) {
+            const results = await ChoiceDialog.show(
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Choice.Title", {name: actionEntry.name}),
+                game.i18n.format("SFRPG.Rolls.StarshipActions.Choice.Message", {name: actionEntry.name}),
+                {
+                    roll: {
+                        name: game.i18n.format("SFRPG.Rolls.StarshipActions.Choice.AvailableRolls"),
+                        options: actionEntry.data.formula.map(x => x.name),
+                        default: actionEntry.data.formula[0].name
+                    }
+                }
+            );
+
+            if (results.resolution === 'cancel') {
+                return;
+            }
+
+            selectedFormula = actionEntry.data.formula.find(x => x.name === results.result.roll);
+        }
+
+        const rollContext = new RollContext();
+        rollContext.addContext("ship", this);
+        rollContext.setMainContext("ship");
+
+        this.setupRollContexts(rollContext, actionEntry.data.selectors || []);
+
+        /** Create additional modifiers. */
+        const additionalModifiers = [
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: "@ship.attributes.computer.value", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
+            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} }
+        ];
+        rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+
+        let systemBonus = "";
+        // Patch and Hold It Together are not affected by critical damage.
+        if (actionEntry.name !== "Patch" && actionEntry.name !== "Hold It Together") {
+            // Gunners must select a quadrant.
+            if (actionEntry.data.role === "gunner") {
+                systemBonus = ` + @ship.attributes.systems.weaponsArray${quadrant}.mod`;
+                systemBonus += ` + @ship.attributes.systems.powerCore.mod`;
+            } else {
+                for (const [key, value] of Object.entries(this.data.data.attributes.systems)) {
+                    if (value.affectedRoles && value.affectedRoles[actionEntry.data.role]) {
+                        systemBonus += ` + @ship.attributes.systems.${key}.mod`;
+                    }
+                }
+            }
+        }
+
+        const rollResult = await DiceSFRPG.createRoll({
+            rollContext: rollContext,
+            rollFormula: selectedFormula.formula + systemBonus + " + @additional.modifiers.bonus",
+            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name})
+        });
+
+        if (!rollResult) {
+            return;
+        }
+
+        let speakerActor = this;
+        const roleKey = CONFIG.SFRPG.starshipRoleNames[actionEntry.data.role];
+        let roleName = game.i18n.format(roleKey);
+
+        const desiredKey = actionEntry.data.selectorKey;
+        if (desiredKey) {
+            const selectedContext = rollContext.allContexts[desiredKey];
+            if (!selectedContext) {
+                ui.notifications.error(game.i18n.format("SFRPG.Rolls.StarshipActions.NoActorError", {name: desiredKey}));
+                return;
+            }
+
+            speakerActor = selectedContext?.entity || this;
+
+            const actorRole = this.getCrewRoleForActor(speakerActor._id);
+            if (actorRole) {
+                const actorRoleKey = CONFIG.SFRPG.starshipRoleNames[actorRole];
+                roleName = game.i18n.format(actorRoleKey);
+            }
+        }
+
+        let flavor = "";
+        flavor += game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.Role", {role: roleName, name: this.name});
+        flavor += "<br/>";
+        if (actionEntry.data.formula.length <= 1) {
+            flavor += `<h2>${actionEntry.name}</h2>`;
+        } else {
+            flavor += `<h2>${actionEntry.name} (${selectedFormula.name})</h2>`;
+        }
+
+        const dc = selectedFormula.dc || actionEntry.data.dc;
+        if (dc) {
+            if (dc.resolve) {
+                const dcRoll = await DiceSFRPG.createRoll({
+                    rollContext: rollContext,
+                    rollFormula: dc.value,
+                    mainDie: 'd0',
+                    title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
+                    dialogOptions: { skipUI: true }
+                });
+
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
+            } else {
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${TextEditor.enrichHTML(dc.value)}</p>`;
+            }
+        }
+
+        flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
+        flavor += TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.data.effectNormal);
+        flavor += "</p>";
+
+        if (actionEntry.data.effectCritical) {
+            const critEffectDisplayState = game.settings.get("sfrpg", "starshipActionsCrit");
+            if (critEffectDisplayState !== 'never') {
+                if (critEffectDisplayState === 'always' || rollResult.roll.results[0] === 20) {
+                    flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
+                    flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.data.effectCritical);
+                    flavor += "</p>";
+                }
+            }
+        }
+
+        rollResult.roll.toMessage({
+            speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
+            flavor: flavor
+        });
+    }
+
     /** Crewed actor functionality */
     getCrewRoleForActor(actorId) {
         const acceptedActorTypes = ["starship", "vehicle"];
@@ -871,24 +1064,41 @@ export class ActorSFRPG extends Actor {
         return duplicate(this.data.data.crew[role]);
     }
 
+    /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
-        if (this.data.type === "starship" && this.data.data.crew) {
-            if (this.data.data.crew.captain?.actors?.length > 0) {
-                rollContext.addContext("captain", this.data.data.crew.captain.actors[0]);
-            }
-    
-            if (this.data.data.crew.pilot?.actors?.length > 0) {
-                rollContext.addContext("pilot", this.data.data.crew.pilot.actors[0]);
-            }
-    
-            const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
-            const allCrewMates = ["minorCrew", "openCrew"];
-            for (const crewType of crewMates) {
-                let crewCount = 1;
-                const crew = [];
-                if (allCrewMates.includes(crewType)) {
-                    for (const crewEntries of Object.values(this.data.data.crew)) {
-                        const crewList = crewEntries.actors;
+        if (this.data.type === "starship") {
+
+            if (!this.data.data.isNPCCrew) {
+                /** Add player captain if available. */
+                if (this.data.data.crew.captain?.actors?.length > 0) {
+                    rollContext.addContext("captain", this.data.data.crew.captain.actors[0]);
+                }
+        
+                /** Add player pilot if available. */
+                if (this.data.data.crew.pilot?.actors?.length > 0) {
+                    rollContext.addContext("pilot", this.data.data.crew.pilot.actors[0]);
+                }
+        
+                /** Add remaining roles if available. */
+                const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
+                const allCrewMates = ["minorCrew", "openCrew"];
+                for (const crewType of crewMates) {
+                    let crewCount = 1;
+                    const crew = [];
+                    if (allCrewMates.includes(crewType)) {
+                        for (const crewEntries of Object.values(this.data.data.crew)) {
+                            const crewList = crewEntries.actors;
+                            if (crewList && crewList.length > 0) {
+                                for (const actor of crewList) {
+                                    const contextId = crewType + crewCount;
+                                    rollContext.addContext(contextId, actor);
+                                    crew.push(contextId);
+                                    crewCount += 1;
+                                }
+                            }
+                        }
+                    } else {
+                        const crewList = this.data.data.crew[crewType].actors;
                         if (crewList && crewList.length > 0) {
                             for (const actor of crewList) {
                                 const contextId = crewType + crewCount;
@@ -898,21 +1108,20 @@ export class ActorSFRPG extends Actor {
                             }
                         }
                     }
-                } else {
-                    const crewList = this.data.data.crew[crewType].actors;
-                    if (crewList && crewList.length > 0) {
-                        for (const actor of crewList) {
-                            const contextId = crewType + crewCount;
-                            rollContext.addContext(contextId, actor);
-                            crew.push(contextId);
-                            crewCount += 1;
-                        }
+        
+                    if (desiredSelectors.includes(crewType)) {
+                        rollContext.addSelector(crewType, crew);
                     }
                 }
-    
-                if (desiredSelectors.includes(crewType)) {
-                    rollContext.addSelector(crewType, crew);
-                }
+            } else {
+                /** Create 'fake' actors. */
+                rollContext.addContext("captain", this, this.data.data.crew.npcData.captain);
+                rollContext.addContext("pilot", this, this.data.data.crew.npcData.pilot);
+                rollContext.addContext("gunner", this, this.data.data.crew.npcData.gunner);
+                rollContext.addContext("engineer", this, this.data.data.crew.npcData.engineer);
+                rollContext.addContext("chiefMate", this, this.data.data.crew.npcData.chiefMate);
+                rollContext.addContext("magicOfficer", this, this.data.data.crew.npcData.magicOfficer);
+                rollContext.addContext("scienceOfficer", this, this.data.data.crew.npcData.scienceOfficer);
             }
         }
     }

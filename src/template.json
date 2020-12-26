@@ -676,30 +676,13 @@
                 "frame": "",
                 "size": "",
                 "notes": "",
-                "systems": {
-                    "powercore": "",
-                    "thrusters": "",
-                    "armor": "",
-                    "quarters": "",
-                    "defense": "",
-                    "driftEngine": "",
-                    "bays": {
-                        "value": [],
-                        "custom": ""
-                    },
-                    "security": {
-                        "value": [],
-                        "custom": ""
-                    },
-                    "sensors": "",
-                    "shields": ""
-                },
                 "modifiers": {
                     "value": [],
                     "custom": ""
                 }
             },
             "crew": {
+                "useNPCCrew": false,
                 "captain": {
                     "limit": 1,
                     "actorIds": []
@@ -731,6 +714,43 @@
                 "scienceOfficer": {
                     "limit": -1,
                     "actorIds": []
+                },
+                "npcData": {
+                    "captain": {
+                        "abilities": {},
+                        "numberOfUses": null,
+                        "skills": {}
+                    },
+                    "chiefMate": {
+                        "abilities": {},
+                        "numberOfUses": null,
+                        "skills": {}
+                    },
+                    "engineer": {
+                        "abilities": {},
+                        "numberOfUses": null,
+                        "skills": {}
+                    },
+                    "gunner": {
+                        "abilities": {},
+                        "numberOfUses": null,
+                        "skills": {}
+                    },
+                    "magicOfficer": {
+                        "abilities": {},
+                        "numberOfUses": null,
+                        "skills": {}
+                    },
+                    "pilot": {
+                        "abilities": {},
+                        "numberOfUses": null,
+                        "skills": {}
+                    },
+                    "scienceOfficer": {
+                        "abilities": {},
+                        "numberOfUses": null,
+                        "skills": {}
+                    }
                 }
             },
             "attributes": {
@@ -804,7 +824,143 @@
                     "starboard": [],
                     "port": [],
                     "turret": []
+                },
+                "systems": {
+                    "lifeSupport": {
+                        "status": "nominal",
+                        "affectedRoles": {
+                            "captain": true
+                        },
+                        "mod": 0
+                    },
+                    "sensors": {
+                        "status": "nominal",
+                        "affectedRoles": {
+                            "scienceOfficer": true
+                        },
+                        "mod": 0
+                    },
+                    "weaponsArrayForward": {
+                        "status": "nominal",
+                        "affectedRoles": {
+                            "gunner": true
+                        },
+                        "mod": 0
+                    },
+                    "weaponsArrayPort": {
+                        "status": "nominal",
+                        "affectedRoles": {
+                            "gunner": true
+                        },
+                        "mod": 0
+                    },
+                    "weaponsArrayStarboard": {
+                        "status": "nominal",
+                        "affectedRoles": {
+                            "gunner": true
+                        },
+                        "mod": 0
+                    },
+                    "weaponsArrayAft": {
+                        "status": "nominal",
+                        "affectedRoles": {
+                            "gunner": true
+                        },
+                        "mod": 0
+                    },
+                    "engines": {
+                        "status": "nominal",
+                        "affectedRoles": {
+                            "pilot": true
+                        },
+                        "mod": 0
+                    },
+                    "powerCore": {
+                        "status": "nominal",
+                        "affectedRoles": {
+                            "captain": true,
+                            "pilot": true,
+                            "gunner": true,
+                            "engineer": true,
+                            "scienceOfficer": true,
+                            "magicOfficer": true,
+                            "chiefMate": true,
+                            "openCrew": true,
+                            "minorCrew": true
+                        },
+                        "mod": 0
+                    }
                 }
+            },
+            "quadrants": {
+                "forward": {
+                    "ac": {
+                        "value": 10,
+                        "misc": 0
+                    },
+                    "targetLock": {
+                        "value": 10,
+                        "misc": 0
+                    },
+                    "shields": {
+                        "value": null
+                    },
+                    "ablative": {
+                        "value": null,
+                        "max": null
+                    }
+                },
+                "port": {
+                    "ac": {
+                        "value": 10,
+                        "misc": 0
+                    },
+                    "targetLock": {
+                        "value": 10,
+                        "misc": 0
+                    },
+                    "shields": {
+                        "value": null
+                    },
+                    "ablative": {
+                        "value": null,
+                        "max": null
+                    }
+                },
+                "starboard": {
+                    "ac": {
+                        "value": 10,
+                        "misc": 0
+                    },
+                    "targetLock": {
+                        "value": 10,
+                        "misc": 0
+                    },
+                    "shields": {
+                        "value": null
+                    },
+                    "ablative": {
+                        "value": null,
+                        "max": null
+                    }
+                },
+                "aft": {
+                    "ac": {
+                        "value": 10,
+                        "misc": 0
+                    },
+                    "targetLock": {
+                        "value": 10,
+                        "misc": 0
+                    },
+                    "shields": {
+                        "value": null
+                    },
+                    "ablative": {
+                        "value": null,
+                        "max": null
+                    }
+                }                
             }
         },
         "vehicle": {
@@ -862,9 +1018,23 @@
             "mod",
 
             "starshipAction",
+            "starshipAblativeArmor",
+            "starshipArmor",
             "starshipComputer",
-            "starshipWeapon",
+            "starshipCrewQuarter",
+            "starshipDefensiveCountermeasure",
+            "starshipDriftEngine",
+            "starshipExpansionBay",
+            "starshipFortifiedHull",
             "starshipFrame",
+            "starshipOtherSystem",
+            "starshipPowerCore",
+            "starshipReinforcedBulkhead",
+            "starshipSecuritySystem",
+            "starshipSensor",
+            "starshipShield",
+            "starshipThruster",
+            "starshipWeapon",
 
             "augmentation",
             "consumable",
@@ -994,7 +1164,9 @@
             },
             "starshipComponent": {
                 "cost": null,
-                "pcu": null
+                "costMultipliedbySize": false,
+                "pcu": null,
+                "isPowered": true
             }
         },
         "asi": {
@@ -1242,10 +1414,41 @@
             "effectNormal": "",
             "effectCritical": ""
         },
+        "starshipAblativeArmor": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "ablativeValue": 0,
+            "targetLockPenalty": 0,
+            "turnDistancePenalty": 0
+        },
+        "starshipArmor": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "armorBonus": 0,
+            "targetLockPenalty": 0,
+            "turnDistancePenalty": 0
+        },
         "starshipComputer": {
-            "templates": ["starshipComponent", "itemDescription"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
             "modifier": 0,
             "nodes": 0
+        },
+        "starshipCrewQuarter": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"]
+        },
+        "starshipDefensiveCountermeasure": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "targetLockBonus": 0
+        },
+        "starshipDriftEngine": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "engineRating": 0,
+            "maxSize": null
+        },
+        "starshipExpansionBay": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"]
+        },
+        "starshipFortifiedHull": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "criticalThresholdBonus": 0
         },
         "starshipFrame": {
             "templates": ["starshipComponent", "itemDescription", "modifiers"],
@@ -1290,6 +1493,42 @@
                 "minimum": 1,
                 "maximum": 6
             }
+        },
+        "starshipOtherSystem": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"]
+        },
+        "starshipPowerCore": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "supportedSizes": []
+        },
+        "starshipReinforcedBulkhead": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "fortification": null
+        },
+        "starshipSecuritySystem": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"]
+        },
+        "starshipSensor": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "modifier": 0,
+            "range": ""
+        },
+        "starshipShield": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "isDeflector": false,
+            "shieldPoints": 0,
+            "regeneration": 0,
+            "defenseValue": 0,
+            "armorBonus": 0,
+            "targetLockBonus": 0
+        },
+        "starshipThruster": {
+            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "supportedSize": "",
+            "speed": 0,
+            "pilotingModifier": 0,
+            "isBooster": false,
+            "isEnabled": true
         },
         "starshipWeapon": {
             "templates": ["starshipComponent", "itemDescription", "modifiers"],

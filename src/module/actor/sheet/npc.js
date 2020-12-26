@@ -100,6 +100,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 } else {
                     arr[1].push(item);
                 }
+                item.isFeat = true;
             }
             else arr[1].push(item);
             return arr;
