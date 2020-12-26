@@ -75,7 +75,9 @@ export default function (engine) {
                     engineer: true,
                     scienceOfficer: true,
                     magicOfficer: true,
-                    chiefMate: true
+                    chiefMate: true,
+                    openCrew: true,
+                    minorCrew: true
                 },
                 mod: 0
             }
