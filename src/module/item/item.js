@@ -131,9 +131,12 @@ export class ItemSFRPG extends Item {
         let dcFormula = save.dc.toString();
         if (dcFormula) {
             const rollContext = new RollContext();
-            rollContext.addContext("owner", this.actor);
             rollContext.addContext("item", this, itemData);
-            rollContext.setMainContext("owner");
+            rollContext.setMainContext("item");
+            if (this.actor) {
+                rollContext.addContext("owner", this.actor);
+                rollContext.setMainContext("owner");
+            }
     
             this.actor?.setupRollContexts(rollContext);
 
