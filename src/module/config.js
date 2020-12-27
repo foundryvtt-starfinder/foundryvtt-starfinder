@@ -697,19 +697,57 @@ SFRPG.starshipWeaponClass = {
 };
 
 SFRPG.starshipWeaponProperties = {
-    "array"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Array",
-    "broad"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Broad",
-    "emp"       : "SFRPG.ShipSystems.StarshipWeaponProperties.Emp",
-    "irradiateL": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateL",
-    "irradiateM": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateM",
-    "irradiateH": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateH",
-    "limited"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Limited",
-    "line"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Line",
-    "point"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Point",
-    "quantum"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Quantum",
-    "ripper"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Ripper",
-    "tractor"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Tractor",
-    "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex"
+    "anchoring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Anchoring", // SOM
+    "array"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Array", // CRB
+    "automated" : "SFRPG.ShipSystems.StarshipWeaponProperties.Automated", // SOM
+    "broad"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Broad", // CRB
+    "bugging"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Bugging", // Near Space
+    "burrowing" : "SFRPG.ShipSystems.StarshipWeaponProperties.Burrowing", // Pact Worlds
+    "buster"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Buster", // SOM
+    "connecting": "SFRPG.ShipSystems.StarshipWeaponProperties.Connecting", // The Last Refuge
+    "deathField": "SFRPG.ShipSystems.StarshipWeaponProperties.DeathField", // AA 3
+    "deployed"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Deployed", // SOM
+    "drone"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Drone", // The Reach of Empire
+    "emp"       : "SFRPG.ShipSystems.StarshipWeaponProperties.Emp", // CRB
+    "flakArea"  : "SFRPG.ShipSystems.StarshipWeaponProperties.FlakArea", // The Last Refuge
+    "forceField": "SFRPG.ShipSystems.StarshipWeaponProperties.ForceField", // SOM
+    "gravityTether": "SFRPG.ShipSystems.StarshipWeaponProperties.GravityTether", // Near Space
+    "gravityWell": "SFRPG.ShipSystems.StarshipWeaponProperties.GravityWell", // SOM
+    "hacking"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Hacking", // SOM
+    "immobilize": "SFRPG.ShipSystems.StarshipWeaponProperties.Immobilize", // Deceivers' Moon
+    "intimidating": "SFRPG.ShipSystems.StarshipWeaponProperties.Intimidating", // SOM
+    "irradiateL": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateL", // CRB
+    "irradiateM": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateM", // CRB
+    "irradiateH": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateH", // CRB
+    "jamming"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Jamming", // Near Space
+    "limited"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Limited", // CRB
+    "line"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Line", // CRB
+    "mine"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Mine", // SOM
+    "mystical"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Mystical", // SOM
+    "navScram"  : "SFRPG.ShipSystems.StarshipWeaponProperties.NavScram", // SOM
+    "numbing"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Numbing", // SOM
+    "orbital"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Orbital", // SOM
+    "pod"       : "SFRPG.ShipSystems.StarshipWeaponProperties.Pod", // SOM
+    "point"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Point", // CRB
+    "quantum"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Quantum", // CRB
+    "radiant"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Radiant", // The Reach of Empire
+    "rail"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Rail", // SOM
+    "ramming"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Ramming", // SOM
+    "redirect"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Redirect", // Deceivers' Moon
+    "restricted": "SFRPG.ShipSystems.StarshipWeaponProperties.Restricted", // SOM
+    "ripper"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Ripper", // CRB
+    "scatterscan": "SFRPG.ShipSystems.StarshipWeaponProperties.Scatterscan", // Deceivers' Moon
+    "smart"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Smart", // SOM
+    "smoldering": "SFRPG.ShipSystems.StarshipWeaponProperties.Smoldering", // Near Space
+    "spore"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Spore", // Pact Worlds
+    "suspending": "SFRPG.ShipSystems.StarshipWeaponProperties.Suspending", // Near Space
+    "sustained" : "SFRPG.ShipSystems.StarshipWeaponProperties.Sustained", // Soldiers of Brass
+    "teleportation": "SFRPG.ShipSystems.StarshipWeaponProperties.Teleportation", // SOM
+    "tractor"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Tractor", // CRB
+    "transposition": "SFRPG.ShipSystems.StarshipWeaponProperties.Transposition", // SOM
+    "vandalDrones": "SFRPG.ShipSystems.StarshipWeaponProperties.VandalDrones", // AA 3
+    "volatile": "SFRPG.ShipSystems.StarshipWeaponProperties.Volatile", // Empire of Bones
+    "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex" // CRB
 };
 
 SFRPG.starshipArcs = {

@@ -386,6 +386,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         html.find('.crew-role-numberOfUses').change(this._onCrewNumberOfUsesChanged.bind(this));
         html.find('.crew-skill-mod').change(this._onCrewSkillModifierChanged.bind(this));
         html.find('.crew-skill-ranks').change(this._onCrewSkillRanksChanged.bind(this));
+
+        html.find('.critical-edit').click(this._onEditAffectedCriticalRoles.bind(this));
     }
 
     /** @override */
@@ -676,6 +678,87 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         await this.actor.update({ [`data.crew.npcData.${roleId}.skills.${skillId}.ranks`]: parsedValue });
         this.render(false);
+    }
+
+    /**
+     * Edit critical roles.
+     * 
+     * @param {Event} event The originating click event
+     */
+    async _onEditAffectedCriticalRoles(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        
+        const affectedSystem = $(event.currentTarget).data('system');
+
+        const options = [game.i18n.localize("No"), game.i18n.localize("Yes")];
+
+        const results = await ChoiceDialog.show(
+            game.i18n.format("SFRPG.StarshipSheet.Critical.EditTitle"),
+            game.i18n.format("SFRPG.StarshipSheet.Critical.EditMessage"),
+            {
+                captain: {
+                    name: game.i18n.format("SFRPG.StarshipSheet.Role.Captain"),
+                    options: options,
+                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["captain"] ? options[1] : options[0]
+                },
+                pilot: {
+                    name: game.i18n.format("SFRPG.StarshipSheet.Role.Pilot"),
+                    options: options,
+                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["pilot"] ? options[1] : options[0]
+                },
+                engineer: {
+                    name: game.i18n.format("SFRPG.StarshipSheet.Role.Engineer"),
+                    options: options,
+                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["engineer"] ? options[1] : options[0]
+                },
+                gunner: {
+                    name: game.i18n.format("SFRPG.StarshipSheet.Role.Gunner"),
+                    options: options,
+                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["gunner"] ? options[1] : options[0]
+                },
+                scienceOfficer: {
+                    name: game.i18n.format("SFRPG.StarshipSheet.Role.ScienceOfficer"),
+                    options: options,
+                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["scienceOfficer"] ? options[1] : options[0]
+                },
+                magicOfficer: {
+                    name: game.i18n.format("SFRPG.StarshipSheet.Role.MagicOfficer"),
+                    options: options,
+                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["magicOfficer"] ? options[1] : options[0]
+                },
+                chiefMate: {
+                    name: game.i18n.format("SFRPG.StarshipSheet.Role.ChiefMate"),
+                    options: options,
+                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["chiefMate"] ? options[1] : options[0]
+                },
+                openCrew: {
+                    name: game.i18n.format("SFRPG.StarshipSheet.Role.OpenCrew"),
+                    options: options,
+                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["openCrew"] ? options[1] : options[0]
+                },
+                minorCrew: {
+                    name: game.i18n.format("SFRPG.StarshipSheet.Role.MinorCrew"),
+                    options: options,
+                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["minorCrew"] ? options[1] : options[0]
+                }
+            }
+        );
+
+        const currentSystem = duplicate(this.actor.data.data.attributes.systems[affectedSystem]);
+        currentSystem.affectedRoles = {
+            captain: results.result.captain === options[1],
+            pilot: results.result.pilot === options[1],
+            engineer: results.result.engineer === options[1],
+            gunner: results.result.gunner === options[1],
+            scienceOfficer: results.result.scienceOfficer === options[1],
+            magicOfficer: results.result.magicOfficer === options[1],
+            chiefMate: results.result.chiefMate === options[1],
+            openCrew: results.result.openCrew === options[1],
+            minorCrew: results.result.minorCrew === options[1]
+        };
+
+        await this.actor.update({[`data.attributes.systems.${affectedSystem}`]: currentSystem});
     }
 
     /**
