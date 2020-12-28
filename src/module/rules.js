@@ -33,6 +33,7 @@ import calculateInitiativeModifiers     from './rules/actions/actor/calculate-in
 import calculateCmd                     from './rules/actions/actor/calculate-cmd.js';
 import calculateCmdModifiers            from './rules/actions/actor/calculate-cmd-modifiers.js';
 import calculateBaseSkills              from './rules/actions/actor/calculate-base-skills.js';
+import calculateClasses                 from './rules/actions/actor/calculate-classes.js';
 import calculateSkillModifiers          from './rules/actions/actor/calculate-skill-modifiers.js';
 import calculateSkillArmorCheckPenalty  from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
 import calculateAbilityCheckModifiers   from './rules/actions/actor/calculate-ability-check-modifiers.js';
@@ -94,6 +95,7 @@ export default function (engine) {
     calculateCmd(engine);
     calculateCmdModifiers(engine);
     calculateBaseSkills(engine);
+    calculateClasses(engine);
     calculateSkillModifiers(engine);
     calculateSkillArmorCheckPenalty(engine);
     calculateAbilityCheckModifiers(engine);
@@ -159,6 +161,7 @@ export default function (engine) {
                 then: [
                     "clearTooltips",
                     "calculateCharacterLevel",
+                    "calculateClasses",
                     "calculateTraits",
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
@@ -214,7 +217,11 @@ export default function (engine) {
             },
             {
                 when: { closure: "isActorType", type: "npc" },
-                then: ["calculateNpcXp", "calculateNpcAbilityValue"]
+                then: [
+                    "calculateNpcXp",
+                    "calculateClasses",
+                    "calculateNpcAbilityValue"
+                ]
             },
             {
                 when: { closure: "isActorType", type: "starship" },
