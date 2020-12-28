@@ -46,7 +46,7 @@
             {{!-- Common component data --}}
             {{> "systems/sfrpg/templates/items/parts/starship-component.html" this}}
 
-            <h3 class="form-header">{{ "SFRPG.Items.Weapon.Details" }}</h3>
+            <h4 class="section-header">{{ localize "SFRPG.ItemSheet.StarshipWeapon.Header" }}</h4>
 
             {{!-- Weapon Type --}}
             <div class="form-group">
@@ -78,9 +78,6 @@
                 <label class="checkbox">
                     <input type="checkbox" name="data.mount.mounted" {{checked data.mount.mounted}} /> {{ localize "SFRPG.Items.ShipWeapon.Mounted" }}
                 </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.mount.activated" {{checked data.equipped}} /> {{ localize "SFRPG.Items.ShipWeapon.Activated" }}
-                </label>
                 <label>{{ localize "SFRPG.Items.ShipWeapon.WeaponArc" }}</label>
                 <select name="data.mount.arc">
                     {{#select data.mount.arc}}
@@ -109,7 +106,7 @@
                 <input type="text" name="data.speed" value="{{data.speed}}" data-dtype="Number" />
             </div>
 
-            <h3 class="form-header">Weapon Attack</h3>
+            <h4 class="section-header">Weapon Attack</h4>
 
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.ShipWeapon.Range" }}</label>

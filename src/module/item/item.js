@@ -429,8 +429,7 @@ export class ItemSFRPG extends Item {
             data.weaponType ? CONFIG.SFRPG.starshipWeaponTypes[data.weaponType] : null,
             data.class ? CONFIG.SFRPG.starshipWeaponClass[data.class] : null,
             data.range ? CONFIG.SFRPG.starshipWeaponRanges[data.range] : null,
-            data.mount.mounted ? "Mounted" : "Not Mounted",
-            data.mount.activated ? "Activated" : "Not Activated"
+            data.mount.mounted ? "Mounted" : "Not Mounted"
         );
     }
 
