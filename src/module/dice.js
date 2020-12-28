@@ -45,7 +45,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "Normal",
             title: title,
-            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI,
+            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "1d20",
             dialogOptions: dialogOptions
         };
@@ -149,7 +149,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "Normal",
             title: title,
-            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI,
+            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "1" + mainDie,
             dialogOptions: dialogOptions
         };
@@ -260,7 +260,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "Normal",
             title: title,
-            skipUI: event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI,
+            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "",
             dialogOptions: dialogOptions
         };
@@ -915,6 +915,15 @@ export class RollContext {
         const context = (this.mainContext ? this.allContexts[this.mainContext] : null);
         //console.log(["getContextForVariable", variable, contexts, context]);
         return [context, variable];
+    }
+
+    hasMultipleSelectors() {
+        for (const [key, value] of Object.entries(this.selectors)) {
+            if (value.options?.length > 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     static _readValue(object, key) {
