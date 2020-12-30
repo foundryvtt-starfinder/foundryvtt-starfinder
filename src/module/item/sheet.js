@@ -227,7 +227,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         } else if (item.type === "shield") {
             if (item.data.dex) props.push(`Dex: ${item.data.dex}`);
             if (item.data.acp) props.push(`ACP: ${item.data.acp}`);
-            props.push(`Shield: ${item.data.bonus.wielded}/${item.data.bonus.aligned}`);
+            let wieldedBonus = item.data.proficient ? item.data.bonus.wielded : 0;
+            let alignedBonus = item.data.proficient ? item.data.bonus.aligned : 0;
+            props.push(`Shield: ${wieldedBonus}/${alignedBonus}`);
         }
 
         // Action type

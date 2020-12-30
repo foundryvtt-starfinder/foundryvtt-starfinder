@@ -440,11 +440,14 @@ export class ItemSFRPG extends Item {
      * @param {Object} props The items properties
      */
     _shieldChatData(data, labels, props) {
+        let wieldedBonus = data.proficient ? data.bonus.wielded.toString() : "0";
+        let alignedBonus = data.proficient ? data.bonus.aligned.toString() : "0";
+
         props.push(
             "Shield",
             "Max dex bonus : " + data.dex.toString(),
             "Armor check penalty: " + data.acp.toString(),
-            "Wielded bonus: " + data.bonus.wielded.toString() + " / Aligned bonus: " + data.bonus.aligned.toString(),
+            "Wielded bonus: " + wieldedBonus + " / Aligned bonus: " + alignedBonus,
             data.proficient ? "Proficient" : "Not Proficient"
         );
     }
