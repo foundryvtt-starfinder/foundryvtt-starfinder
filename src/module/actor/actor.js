@@ -11,6 +11,7 @@ import { DroneRepairDialog } from "../apps/drone-repair-dialog.js";
 import { getItemContainer } from "./actor-inventory.js"
 
 import { } from "./starship-update.js"
+import { ItemSheetSFRPG } from "../item/sheet.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
@@ -72,6 +73,29 @@ export class ActorSFRPG extends Actor {
             asis,
             frames
         });
+    }
+
+    
+    /** @override */
+    render(force, context={}) {
+        /** Clear out deleted item sheets. */
+        const keysToDelete = [];
+        for (const [appId, app] of Object.entries(this.apps)) {
+            if (app instanceof ItemSheetSFRPG) {
+                const item = app.object;
+                if (!this.items.find(x => x._id === item._id)) {
+                    keysToDelete.push(appId);
+                }
+            }
+        }
+        if (keysToDelete.length > 0) {
+            for (const key of keysToDelete) {
+                delete this.apps[key];
+            }
+        }
+
+        /** Now render this actor. */
+        return super.render(force, context);
     }
 
     /**
