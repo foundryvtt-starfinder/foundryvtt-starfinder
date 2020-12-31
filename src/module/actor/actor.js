@@ -11,6 +11,7 @@ import { DroneRepairDialog } from "../apps/drone-repair-dialog.js";
 import { getItemContainer } from "./actor-inventory.js"
 
 import { } from "./starship-update.js"
+import { ItemSheetSFRPG } from "../item/sheet.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
@@ -20,27 +21,6 @@ export class ActorSFRPG extends Actor {
     /** @override */
     getRollData() {
         const data = super.getRollData();
-        let casterLevel = 0;
-        data.classes = this.data.items.reduce((obj, i) => {
-            const keyAbilityScore = i.data.kas || "str";
-            if (i.type === "class") {
-                const classData = {
-                    keyAbilityMod: this.data.data.abilities[keyAbilityScore].mod,
-                    levels: i.data.levels,
-                    keyAbilityScore: keyAbilityScore,
-                    skillRanksPerLevel: i.data.skillRanks.value
-                };
-
-                if (i.data.isCaster) {
-                    casterLevel += i.data.levels
-                }
-
-                obj[i.name.slugify({replacement: "_", strict: true})] = classData;
-            }
-            return obj;
-        }, {});
-
-        data.cl = casterLevel;
 
         return data;
     }
@@ -93,6 +73,29 @@ export class ActorSFRPG extends Actor {
             asis,
             frames
         });
+    }
+
+    
+    /** @override */
+    render(force, context={}) {
+        /** Clear out deleted item sheets. */
+        const keysToDelete = [];
+        for (const [appId, app] of Object.entries(this.apps)) {
+            if (app instanceof ItemSheetSFRPG) {
+                const item = app.object;
+                if (!this.items.find(x => x._id === item._id)) {
+                    keysToDelete.push(appId);
+                }
+            }
+        }
+        if (keysToDelete.length > 0) {
+            for (const key of keysToDelete) {
+                delete this.apps[key];
+            }
+        }
+
+        /** Now render this actor. */
+        return super.render(force, context);
     }
 
     /**

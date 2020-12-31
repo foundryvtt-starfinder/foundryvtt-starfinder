@@ -2,43 +2,41 @@ export default function (engine) {
     engine.closures.add("calculateStarshipCrew", (fact, context) => {
         const data = fact.data;
 
-        if (!data.crew) {
-            data.crew = {
-                captain: {
-                    limit: 1,
-                    actorIds: []
-                },
-                chiefMate: {
-                    limit: -1,
-                    actorIds: []
-                },
-                engineer: {
-                    limit: -1,
-                    actorIds: []
-                },
-                gunner: {
-                    limit: 0,
-                    actorIds: []
-                },
-                magicOfficer: {
-                    limit: -1,
-                    actorIds: []
-                },
-                passenger: {
-                    limit: -1,
-                    actorIds: []
-                },
-                pilot: {
-                    limit: 1,
-                    actorIds: []
-                },
-                scienceOfficer: {
-                    limit: -1,
-                    actorIds: []
-                },
-                npcData: {}
-            };
-        }
+        data.crew = mergeObject(data.crew, {
+            captain: {
+                limit: 1,
+                actorIds: []
+            },
+            chiefMate: {
+                limit: -1,
+                actorIds: []
+            },
+            engineer: {
+                limit: -1,
+                actorIds: []
+            },
+            gunner: {
+                limit: 0,
+                actorIds: []
+            },
+            magicOfficer: {
+                limit: -1,
+                actorIds: []
+            },
+            passenger: {
+                limit: -1,
+                actorIds: []
+            },
+            pilot: {
+                limit: 1,
+                actorIds: []
+            },
+            scienceOfficer: {
+                limit: -1,
+                actorIds: []
+            },
+            npcData: {}
+        }, {overwrite: false});
 
         if (!data.crew.npcData) {
             data.crew.npcData = {};
@@ -84,7 +82,7 @@ export default function (engine) {
         }, {overwrite: false});
 
         for (let [key, crew] of Object.entries(data.crew)) {
-            if (key === "npcData") {
+            if (key === "npcData" || key === "useNPCCrew") {
                 continue;
             }
 

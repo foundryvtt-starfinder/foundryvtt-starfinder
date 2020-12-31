@@ -199,25 +199,29 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     }
 
     _createLabel(localizationKey, items, mounts) {
-        const localizedLightSlots = ((mounts?.lightSlots || 0) > 0) ? game.i18n.format("SFRPG.StarshipSheet.Weapons.LightSlots", {current: items.filter(x => x.data.class === "light").length, max: mounts.lightSlots}) : null;
-        const localizedHeavySlots = ((mounts?.heavySlots || 0) > 0) ? game.i18n.format("SFRPG.StarshipSheet.Weapons.HeavySlots", {current: items.filter(x => x.data.class === "heavy").length, max: mounts.heavySlots}) : null;
-        const localizedCapitalSlots = ((mounts?.capitalSlots || 0) > 0) ? game.i18n.format("SFRPG.StarshipSheet.Weapons.CapitalSlots", {current: items.filter(x => x.data.class === "capital").length, max: mounts.capitalSlots}) : null;
+        const numLightWeapons = items.filter(x => x.data.class === "light").length;
+        const numHeavyWeapons = items.filter(x => x.data.class === "heavy").length;
+        const numCapitalWeapons = items.filter(x => x.data.class === "capital").length;
+
+        const maxLightWeapons = (mounts?.lightSlots || 0);
+        const maxHeavyWeapons = (mounts?.heavySlots || 0);
+        const maxCapitalWeapons = (mounts?.capitalSlots || 0);
 
         let slots = "";
-        if (localizedLightSlots) {
-            slots += localizedLightSlots;
+        if (numLightWeapons + maxLightWeapons > 0) {
+            slots += game.i18n.format("SFRPG.StarshipSheet.Weapons.LightSlots", {current: numLightWeapons, max: maxLightWeapons});
         }
-        if (localizedHeavySlots) {
+        if (numHeavyWeapons + maxHeavyWeapons > 0) {
             if (slots !== "") {
                 slots += ", ";
             }
-            slots += localizedHeavySlots;
+            slots += game.i18n.format("SFRPG.StarshipSheet.Weapons.HeavySlots", {current: numHeavyWeapons, max: maxHeavyWeapons});
         }
-        if (localizedCapitalSlots) {
+        if (numCapitalWeapons + maxCapitalWeapons > 0) {
             if (slots !== "") {
                 slots += ", ";
             }
-            slots += localizedCapitalSlots;
+            slots += game.i18n.format("SFRPG.StarshipSheet.Weapons.CapitalSlots", {current: numCapitalWeapons, max: maxCapitalWeapons});
         }
         if (slots === "") {
             slots = game.i18n.format("SFRPG.StarshipSheet.Weapons.NotAvailable");
@@ -418,6 +422,36 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
                 return false;
             }
+        } else if (data.type === "ItemCollection") {
+            const starshipItems = [];
+            const acceptedItems = [];
+            const rejectedItems = [];
+            for (const item of data.items) {
+                if (item.type.startsWith("starship")) {
+                    starshipItems.push(item);
+                } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) {
+                    acceptedItems.push(item);
+                } else {
+                    rejectedItems.push(item);
+                }
+            }
+
+            if (starshipItems.length > 0) {
+                await this.actor.createEmbeddedEntity("OwnedItem", starshipItems);
+            }
+
+            if (acceptedItems.length > 0) {
+                const acceptedItemData = duplicate(data);
+                acceptedItemData.items = acceptedItems;
+                await this.processDroppedData(event, data);
+            }
+
+            if (rejectedItems.length > 0) {
+                const rejectedItemNames = rejectedItems.map(x => x.name).join(", ");
+                ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rejectedItemNames }));
+            }
+            
+            return true;
         }
     
         return false;
@@ -456,14 +490,16 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     async _render(...args) {
         await super._render(...args);
 
-        tippy('[data-tippy-content]', {
-            allowHTML: true,
-            arrow: false,
-            placement: 'top-start',
-            duration: [500, null],
-            delay: [800, null],
-            maxWidth: 600
-        });
+        if (this.rendered) {
+            tippy('[data-tippy-content]', {
+                allowHTML: true,
+                arrow: false,
+                placement: 'top-start',
+                duration: [500, null],
+                delay: [800, null],
+                maxWidth: 600
+            });
+        }
     }
 
     /**

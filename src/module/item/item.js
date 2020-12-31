@@ -429,8 +429,7 @@ export class ItemSFRPG extends Item {
             data.weaponType ? CONFIG.SFRPG.starshipWeaponTypes[data.weaponType] : null,
             data.class ? CONFIG.SFRPG.starshipWeaponClass[data.class] : null,
             data.range ? CONFIG.SFRPG.starshipWeaponRanges[data.range] : null,
-            data.mount.mounted ? "Mounted" : "Not Mounted",
-            data.mount.activated ? "Activated" : "Not Activated"
+            data.mount.mounted ? "Mounted" : "Not Mounted"
         );
     }
 
@@ -1006,7 +1005,7 @@ export class ItemSFRPG extends Item {
 
             // Deduct an item quantity
             if (c <= 1 && q > 1) {
-                await this.update({
+                this.update({
                     'data.quantity': Math.max(q - 1, 0),
                     'data.uses.value': itemData.uses.max
                 });
@@ -1014,12 +1013,12 @@ export class ItemSFRPG extends Item {
 
             // Optionally destroy the item
             else if (c <= 1 && q <= 1 && itemData.uses.autoDestroy) {
-                await this.actor.deleteOwnedItem(this.id);
+                this.actor.deleteOwnedItem(this.id);
             }
 
             // Deduct the remaining charges
             else {
-                await this.update({'data.uses.value': Math.max(c - 1, 0) });
+                this.update({'data.uses.value': Math.max(c - 1, 0) });
             }
         }
     }

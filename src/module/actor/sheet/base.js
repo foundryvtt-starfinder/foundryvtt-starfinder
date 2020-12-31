@@ -212,6 +212,14 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Condition toggling
         html.find('.conditions input[type="checkbox"]').change(this._onToggleConditions.bind(this));
     }
+    
+    /** @override */
+    render(force, options) {
+        if (this.stopRendering) {
+            return this;
+        }
+        return super.render(force, options);
+    }
 
     /** @override */
     _onChangeTab(event, tabs, active) {
@@ -387,8 +395,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         let containsItems = (item.data.data.container?.contents && item.data.data.container.contents.length > 0);
         ItemDeletionDialog.show(item.name, containsItems, (recursive) => {
-            actorHelper.deleteOwnedItem(itemId, recursive);
-            li.slideUp(200, () => this.render(false));
+            actorHelper.deleteOwnedItem(itemId, recursive).then(() => {
+                li.slideUp(200, () => this.render(false));
+            });
         });
     }
 
@@ -558,7 +567,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         
         const tokens = this.actor.getActiveTokens(true);
         for (const token of tokens) {
-            await token.toggleEffect(CONFIG.SFRPG.statusEffectIconMapping[condition]);
+            token.toggleEffect(CONFIG.SFRPG.statusEffectIconMapping[condition]);
         }
     }
 
@@ -850,7 +859,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             return;
         }
 
-        await this.processDroppedData(event, parsedDragData);
+        return this.processDroppedData(event, parsedDragData);
     }
 
     async processDroppedData(event, parsedDragData) {
@@ -863,7 +872,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         let targetContainer = null;
         if (event) {
             const targetId = $(event.target).parents('.item').attr('data-item-id')
-            targetContainer = await targetActor.getOwnedItem(targetId);
+            targetContainer = targetActor.getOwnedItem(targetId);
         }
         
         if (parsedDragData.type === "ItemCollection") {
@@ -892,7 +901,8 @@ export class ActorSheetSFRPG extends ActorSheet {
             
             const itemInTargetActor = await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
             if (itemInTargetActor === addedItem) {
-                return await this._onSortItem(event, itemInTargetActor.data);
+                await this._onSortItem(event, itemInTargetActor.data);
+                return itemInTargetActor;
             }
 
             return itemInTargetActor;
