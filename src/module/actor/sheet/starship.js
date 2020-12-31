@@ -422,6 +422,36 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
                 return false;
             }
+        } else if (data.type === "ItemCollection") {
+            const starshipItems = [];
+            const acceptedItems = [];
+            const rejectedItems = [];
+            for (const item of data.items) {
+                if (item.type.startsWith("starship")) {
+                    starshipItems.push(item);
+                } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) {
+                    acceptedItems.push(item);
+                } else {
+                    rejectedItems.push(item);
+                }
+            }
+
+            if (starshipItems.length > 0) {
+                await this.actor.createEmbeddedEntity("OwnedItem", starshipItems);
+            }
+
+            if (acceptedItems.length > 0) {
+                const acceptedItemData = duplicate(data);
+                acceptedItemData.items = acceptedItems;
+                await this.processDroppedData(event, data);
+            }
+
+            if (rejectedItems.length > 0) {
+                const rejectedItemNames = rejectedItems.map(x => x.name).join(", ");
+                ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rejectedItemNames }));
+            }
+            
+            return true;
         }
     
         return false;
@@ -460,14 +490,16 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     async _render(...args) {
         await super._render(...args);
 
-        tippy('[data-tippy-content]', {
-            allowHTML: true,
-            arrow: false,
-            placement: 'top-start',
-            duration: [500, null],
-            delay: [800, null],
-            maxWidth: 600
-        });
+        if (this.rendered) {
+            tippy('[data-tippy-content]', {
+                allowHTML: true,
+                arrow: false,
+                placement: 'top-start',
+                duration: [500, null],
+                delay: [800, null],
+                maxWidth: 600
+            });
+        }
     }
 
     /**

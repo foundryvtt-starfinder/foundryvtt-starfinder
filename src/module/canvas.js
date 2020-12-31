@@ -170,26 +170,26 @@ export async function handleItemDropCanvas(data) {
             }
         }
 
-        await placeItemCollectionOnCanvas(data.x, data.y, itemData, true);
-
-        // Now remove old items
-        if (sourceActor) {
-            let idsToDrop = [];
-            for (let droppedItem of itemData) {
-                idsToDrop.push(droppedItem._id);
+        placeItemCollectionOnCanvas(data.x, data.y, itemData, true).then(() => {
+            // Remove old items
+            if (sourceActor) {
+                let idsToDrop = [];
+                for (let droppedItem of itemData) {
+                    idsToDrop.push(droppedItem._id);
+                }
+                sourceActor.deleteOwnedItem(idsToDrop);
             }
-            await sourceActor.deleteOwnedItem(idsToDrop);
-        }
+        });
 
         return true;
     }
 
-    let target = new ActorItemHelper(targetActor._id, targetActor.token.id, targetActor.token.scene.id)
+    const target = new ActorItemHelper(targetActor._id, targetActor.token.id, targetActor.token.scene.id)
 
     if (sourceItem) {
-        await moveItemBetweenActorsAsync(sourceActor, sourceItem, target);
+        return moveItemBetweenActorsAsync(sourceActor, sourceItem, target);
     } else {
-        await targetActor.createOwnedItem(sourceItemData);
+        return targetActor.createOwnedItem(sourceItemData);
     }
 }
 

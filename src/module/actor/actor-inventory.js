@@ -79,20 +79,11 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
     const newItemQuantity = sourceItemQuantity - quantity;
 
     if (newItemQuantity < 1) {
-        await sourceActor.deleteOwnedItem(itemToRemove._id);
-        if (recursive && containsItems(itemToRemove)) {
-            for (let content of itemToRemove.data.data.container.contents) {
-                let child = sourceActor.getOwnedItem(content.id);
-                if (child) {
-                    await removeItemFromActorAsync(sourceActor, child, child.data.data.quantity, recursive);
-                }
-            }
-        }
+        return sourceActor.deleteOwnedItem(itemToRemove);
     } else {
         const update = { '_id': itemToRemove._id, 'data.quantity': newItemQuantity };
-        await sourceActor.updateOwnedItem(update);
+        return sourceActor.updateOwnedItem(update);
     }
-    return true;
 }
 
 /**
@@ -118,7 +109,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
     if (!ActorItemHelper.IsValidHelper(sourceActor)) {
         console.log("Inventory::moveItemBetweenActorsAsync: sourceActor is not a valid ActorItemHelper, switching to addItemToActorAsync.");
-        return await addItemToActorAsync(targetActor, itemToMove, itemToMove.data.data.quantity, targetItem, targetItemStorageIndex);
+        return addItemToActorAsync(targetActor, itemToMove, itemToMove.data.data.quantity, targetItem, targetItemStorageIndex);
     }
 
     if (!quantity) {
@@ -134,6 +125,8 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
         }
     }
+
+    const isFullMove = (quantity >= itemToMove.data.data.quantity);
 
     if (sourceActor.actor === targetActor.actor) {
         if (quantity < itemToMove.data.data.quantity) {
@@ -208,18 +201,65 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
         return itemToMove;
     } else {
-        let movedItem = await addItemToActorAsync(targetActor, itemToMove, quantity, targetItem, targetItemStorageIndex);
+        /** Get all items to move. */
+        const items = [];
+        const itemsToMove = [{item: itemToMove, parent: null}];
+        while (itemsToMove.length > 0) {
+            const itemToMove = itemsToMove.shift();
+            const contents = getChildItems(sourceActor, itemToMove.item);
+            if (contents) {
+                for (const contentItem of contents) {
+                    itemsToMove.push({item: contentItem, parent: itemToMove});
+                }
+            }
 
-        if (containsItems(itemToMove)) {
-            for (let content of itemToMove.data.data.container.contents) {
-                let child = sourceActor.getOwnedItem(content.id);
-                await moveItemBetweenActorsAsync(sourceActor, child, targetActor, movedItem);
+            items.push({item: itemToMove.item, children: contents, parent: itemToMove.parent});
+        }
+
+        /** Add new items to target actor. */
+        const itemData = items.map(x => x.item);
+        if (targetActor.actor?.sheet) {
+            targetActor.actor.sheet.stopRendering = true;
+        }
+        if (targetActor.token?.sheet) {
+            targetActor.token.sheet.stopRendering = true;
+        }
+
+        const createResult = await targetActor.createOwnedItem(itemData);
+        if (targetActor.actor?.sheet) {
+            targetActor.actor.sheet.stopRendering = false;
+        }
+        if (targetActor.token?.sheet) {
+            targetActor.token.sheet.stopRendering = false;
+        }
+
+        const updatesToPerform = [];
+        for (let i = 0; i<items.length; i++) {
+            const itemToTest = items[i];
+            const itemToUpdate = createResult[i];
+
+            if (itemToTest.children && itemToTest.children.length > 0) {
+                const indexMap = itemToTest.item.data.data.container.contents.map(x => items.indexOf(items.find(y => y.item._id == x.id)));
+                const newContents = duplicate(itemToUpdate.data.container.contents);
+                for (let j = 0; j<indexMap.length; j++) {
+                    const index = indexMap[j];
+                    newContents[j].id = createResult[index]._id;
+                }
+                updatesToPerform.push({ _id: itemToUpdate._id, 'data.container.contents': newContents});
             }
         }
 
-        await removeItemFromActorAsync(sourceActor, itemToMove, quantity, true);
+        await targetActor.updateOwnedItem(updatesToPerform);
 
-        return movedItem;
+        /** Delete all items from source actor. */
+        if (isFullMove) {
+            const itemsToRemove = items.map(x => x.item._id);
+            await sourceActor.deleteOwnedItem(itemsToRemove);
+        } else {
+            await sourceActor.updateOwnedItem({_id: itemToMove.id, 'data.quantity': itemToMove.data.data.quantity - quantity});
+        }
+
+        return createResult;
     }
 }
 
@@ -314,7 +354,7 @@ export function containsItems(item) {
 export function getChildItems(actor, item) {
     if (!actor) return [];
     if (!containsItems(item)) return [];
-    return actor.items.filter(x => item.data.data.container.contents.find(y => y.id === x._id));
+    return actor.filterItems(x => item.data.data.container.contents.find(y => y.id === x._id));
 }
 
 export function getItemContainer(items, itemId) {
@@ -552,34 +592,38 @@ async function onItemCollectionItemDraggedToPlayer(message) {
 
     // Add items to target
     let uncontainedItemIds = [];
-    let copiedItemIds = [];
-    let itemToItemMapping = {};
-    for (let originalItem of data.draggedItems) {
-        const itemData = duplicate(originalItem);
-        delete itemData._id;
+    const copiedItemIds = [];
+    const itemToItemMapping = {};
 
-        let newItem = await target.createOwnedItem(itemData);
-        if (newItem) {
-            itemToItemMapping[originalItem._id] = newItem;
-            copiedItemIds.push(originalItem._id);
-            uncontainedItemIds.push(newItem._id);
-        }
+    const creationResult = await target.createOwnedItem(data.draggedItems);
+    const createdItems = creationResult instanceof Array ? creationResult : [creationResult];
+    for (let i = 0; i<createdItems.length; i++) {
+        const newItem = createdItems[i];
+        const originalItem = data.draggedItems[i];
+
+        itemToItemMapping[originalItem._id] = newItem;
+        copiedItemIds.push(originalItem._id);
+        uncontainedItemIds.push(newItem._id);
     }
 
-    for (let originalItem of data.draggedItems) {
-        let newItem = itemToItemMapping[originalItem._id];
-        if (originalItem.data.container?.contents) {
+    const bulkUpdates = [];
+    for (const originalItem of data.draggedItems) {
+        const newItem = itemToItemMapping[originalItem._id];
+        if (originalItem.data.container?.contents && originalItem.data.container.contents.length > 0) {
             let newContents = [];
-            for (let originalContent of originalItem.data.container.contents) {
-                let originalContentItem = data.draggedItems.find(x => x._id === originalContent.id);
-                let newContentItem = itemToItemMapping[originalContentItem._id];
+            for (const originalContent of originalItem.data.container.contents) {
+                const originalContentItem = data.draggedItems.find(x => x._id === originalContent.id);
+                const newContentItem = itemToItemMapping[originalContentItem._id];
                 newContents.push({id: newContentItem._id, index: originalContent.index});
                 uncontainedItemIds = uncontainedItemIds.filter(x => x !== newContentItem._id);
             }
 
             const update = {_id: newItem._id, "data.container.contents": newContents};
-            await target.updateOwnedItem(update);
+            bulkUpdates.push(update);
         }
+    }
+    if (bulkUpdates.length > 0) {
+        await target.updateOwnedItem(bulkUpdates);
     }
 
     // Remove items from source token
@@ -593,9 +637,9 @@ async function onItemCollectionItemDraggedToPlayer(message) {
 
     // Add any uncontained items into targetItem, if applicable
     if (targetContainer) {
-        let acceptableItemIds = [];
+        const acceptableItemIds = [];
         for (let uncontainedItemId of uncontainedItemIds) {
-            let uncontainedItem = target.getOwnedItem(uncontainedItemId);
+            const uncontainedItem = target.getOwnedItem(uncontainedItemId);
             if (acceptsItem(targetContainer, uncontainedItem, target.actor)) {
                 let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, uncontainedItem) || 0;
                 acceptableItemIds.push({id: uncontainedItemId, index: preferredStorageIndex});
@@ -603,7 +647,7 @@ async function onItemCollectionItemDraggedToPlayer(message) {
         }
 
         if (acceptableItemIds.length > 0) {
-            let combinedContents = targetContainer.data.data.container.contents.concat(acceptableItemIds);
+            const combinedContents = targetContainer.data.data.container.contents.concat(acceptableItemIds);
             const update = {_id: targetContainer._id, "data.container.contents": combinedContents};
             await target.updateOwnedItem(update);
         }
@@ -694,8 +738,7 @@ export class ActorItemHelper {
             await this.actor.token.update({"actorData.items": items}, {});
             newItem = this.getOwnedItem(created._id);
         } else {
-            const createItemResult = await this.actor.createOwnedItem(itemData);
-            newItem = this.getOwnedItem(createItemResult._id);
+            newItem = await this.actor.createOwnedItem(itemData);
         }
 
         return newItem;
@@ -735,13 +778,16 @@ export class ActorItemHelper {
         }
 
         /** Clean up parent container, if deleted from container. */
+        const promises = [];
         const container = this.actor.items.find(x => x.data.data?.container?.contents?.find(y => y.id === itemId) !== undefined);
         if (container) {
             const newContents = container.data.data.container.contents.filter(x => x.id !== itemId);
-            await container.update({"data.container.contents": newContents});
+            promises.push(this.actor.updateOwnedItem({"_id": container._id, "data.container.contents": newContents}));
         }
 
-        return this.actor.deleteOwnedItem(itemsToDelete);
+        promises.push(this.actor.deleteEmbeddedEntity("OwnedItem", itemsToDelete));
+
+        return Promise.all(promises);
     }
 
     /**
