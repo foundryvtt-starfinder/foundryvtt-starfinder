@@ -225,11 +225,11 @@ export class ItemSheetSFRPG extends ItemSheet {
             props.push(CONFIG.SFRPG.starshipWeaponTypes[item.data.weaponType]);
             props.push(CONFIG.SFRPG.starshipWeaponClass[item.data.class]);
         } else if (item.type === "shield") {
-            if (item.data.dex) props.push(`Dex: ${item.data.dex}`);
-            if (item.data.acp) props.push(`ACP: ${item.data.acp}`);
+            if (item.data.dex) props.push(game.i18n.format("SFRPG.Items.Shield.Dex", { dex: item.data.dex.signedString() }));
+            if (item.data.acp) props.push(game.i18n.format("SFRPG.Items.Shield.ACP", { acp: item.data.acp.signedString() }));
             let wieldedBonus = item.data.proficient ? item.data.bonus.wielded : 0;
             let alignedBonus = item.data.proficient ? item.data.bonus.aligned : 0;
-            props.push(`Shield: ${wieldedBonus}/${alignedBonus}`);
+            props.push(game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }));
         }
 
         // Action type

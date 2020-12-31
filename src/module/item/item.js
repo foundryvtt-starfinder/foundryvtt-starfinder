@@ -429,7 +429,7 @@ export class ItemSFRPG extends Item {
             data.weaponType ? CONFIG.SFRPG.starshipWeaponTypes[data.weaponType] : null,
             data.class ? CONFIG.SFRPG.starshipWeaponClass[data.class] : null,
             data.range ? CONFIG.SFRPG.starshipWeaponRanges[data.range] : null,
-            data.mount.mounted ? "Mounted" : "Not Mounted"
+            data.mount.mounted ? game.i18n.localize("SFRPG.ShipWeapon.Mounted") : game.i18n.localize("SFRPG.ShipWeapon.NotMounted")
         );
     }
 
@@ -444,11 +444,11 @@ export class ItemSFRPG extends Item {
         let alignedBonus = data.proficient ? data.bonus.aligned.toString() : "0";
 
         props.push(
-            "Shield",
-            "Max dex bonus : " + data.dex.toString(),
-            "Armor check penalty: " + data.acp.toString(),
-            "Wielded bonus: " + wieldedBonus + " / Aligned bonus: " + alignedBonus,
-            data.proficient ? "Proficient" : "Not Proficient"
+            game.i18n.localize("SFRPG.Items.Shield.Shield"),
+            game.i18n.format("SFRPG.Items.Shield.AcMaxDex", { maxDex: data.dex.signedString() }),
+            game.i18n.format("SFRPG.Items.Shield.ArmorCheck", { acp: data.acp.signedString() }),
+            game.i18n.format("SFRPG.Items.Shield.Bonuses", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),
+            data.proficient ? game.i18n.localize("SFRPG.Items.Proficient") : game.i18n.localize("SFRPG.Items.NotProficient")
         );
     }
 
