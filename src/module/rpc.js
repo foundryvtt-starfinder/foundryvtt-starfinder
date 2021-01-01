@@ -159,14 +159,18 @@ export class RPC {
         let wasHandled = false;
         let handlers = this.callbacks[data.eventName];
         if (handlers) {
+            const filteredCallbacks = [];
             for (let callback of handlers) {
                 if ((callback.target === "gm" && game.user.isGM)
                     || (callback.target === "player" && !game.user.isGM)
                     || (callback.target === "local" && data.recipient === game.user.id)
                     || callback.target === "any") {
-                    await callback.callback(data);
-                    wasHandled = true;
+                    filteredCallbacks.push(callback.callback(data));
                 }
+            }
+            if (filteredCallbacks.length > 0) {
+                await Promise.all(filteredCallbacks);
+                wasHandled = true;
             }
         }
 

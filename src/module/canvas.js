@@ -1,4 +1,4 @@
-import { moveItemBetweenActorsAsync, ActorItemHelper } from "./actor/actor-inventory.js";
+import { moveItemBetweenActorsAsync, onCreateItemCollection, ActorItemHelper } from "./actor/actor-inventory.js";
 import { ItemCollectionSheet } from "./apps/item-collection-sheet.js";
 
 import { RPC } from "./rpc.js"
@@ -226,10 +226,17 @@ function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
         }
     }
 
-    const result = RPC.sendMessageTo("gm", "createItemCollection", msg);
-    if (result === "errorRecipientNotAvailable") {
-        ui.notifications.error(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.ItemCollectionNoGMError"));
-        return false;
+    if (game.user.can("TOKEN_CREATE")) {
+        const messageData = {
+            payload: msg
+        };
+        return onCreateItemCollection(messageData);
+    } else {
+        const result = RPC.sendMessageTo("gm", "createItemCollection", msg);
+        if (result === "errorRecipientNotAvailable") {
+            ui.notifications.error(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.ItemCollectionNoGMError"));
+            return false;
+        }
     }
     return true;
 }

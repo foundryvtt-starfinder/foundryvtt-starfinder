@@ -492,10 +492,10 @@ function wouldCreateParentCycle(item, container, actor) {
 /******************************************************************************
  * RPC handlers
  ******************************************************************************/
-async function onCreateItemCollection(message) {
+export async function onCreateItemCollection(message) {
     let payload = message.payload;
     if (!payload.itemData) {
-        return;
+        return false;
     }
 
     return Token.create({
