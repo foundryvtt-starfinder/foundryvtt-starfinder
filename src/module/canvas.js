@@ -10,38 +10,31 @@ Hooks.on('updateToken', onTokenUpdated);
 function onCanvasReady(...args) {
     for (let placeable of canvas.tokens.placeables) {
 		if (placeable.getFlag("sfrpg", "itemCollection")) {
-            setupLootCollectionTokenInteraction(placeable);
+            setupLootCollectionTokenInteraction(placeable, false);
         }
     }
 }
 
-async function onTokenCreated(scene, tokenData, tokenFlags, userId) {
+function onTokenCreated(scene, tokenData, tokenFlags, userId) {
     if (getProperty(tokenData, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === tokenData._id);
-
-        await new Promise(resolve => setTimeout(resolve, 25));
-
-        setupLootCollectionTokenInteraction(token);
-        
-        for (let appId in token.apps) {
-            let app = token.apps[appId];
-            app.render(true);
-        }
+        trySetupLootToken(token);
     }
 }
 
-async function onTokenUpdated(scene, tokenData, tokenFlags, userId) {
+function onTokenUpdated(scene, tokenData, tokenFlags, userId) {
     if (getProperty(tokenData, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === tokenData._id);
+        trySetupLootToken(token);
+    }
+}
 
-        await new Promise(resolve => setTimeout(resolve, 25));
-
-        setupLootCollectionTokenInteraction(token);
-        
-        for (let appId in token.apps) {
-            let app = token.apps[appId];
-            app.render(true);
-        }
+function trySetupLootToken(token) {
+    if (token.mouseInteractionManager) {
+        setupLootCollectionTokenInteraction(token, true);
+    } else {
+        const waitForInteraction = new Promise(resolve => setTimeout(resolve, 25));
+        waitForInteraction.then(() => trySetupLootToken(token));
     }
 }
 
@@ -241,9 +234,16 @@ function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
     return true;
 }
 
-function setupLootCollectionTokenInteraction(lootCollectionToken) {
+function setupLootCollectionTokenInteraction(lootCollectionToken, updateApps = false) {
     lootCollectionToken.mouseInteractionManager.callbacks.clickLeft2 = openLootCollectionSheet.bind(lootCollectionToken);
     lootCollectionToken.mouseInteractionManager.permissions.clickLeft2 = () => true;
+
+    if (updateApps) {
+        for (let appId in lootCollectionToken.apps) {
+            let app = lootCollectionToken.apps[appId];
+            app.render(true);
+        }
+    }
 }
 
 function openLootCollectionSheet(event) {
