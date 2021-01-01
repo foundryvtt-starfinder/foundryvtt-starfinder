@@ -328,6 +328,15 @@ export async function handleOnDrop(event) {
 	data.x = (x - t.tx) / canvas.stage.scale.x;
     data.y = (y - t.ty) / canvas.stage.scale.y;
 
+    data.x -= Math.floor(canvas.grid.size / 2);
+    data.y -= Math.floor(canvas.grid.size / 2);
+
+    if (!event.shiftKey) {
+        const point = canvas.grid.getSnappedPosition(data.x, data.y, canvas.activeLayer.gridPrecision);
+        data.x = point.x;
+        data.y = point.y;
+    }
+
     if (data.type === "Item") {
         return handleItemDropCanvas(data);
     }
