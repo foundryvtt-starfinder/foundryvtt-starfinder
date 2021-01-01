@@ -3,6 +3,7 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function (engine) {
     engine.closures.add("calculateSkillArmorCheckPenalty", (fact, context) => {
         const armor = fact.armor;
+        const shields = fact.shields;
         const skills = fact.data.skills;
         const modifiers = fact.modifiers;
 
@@ -83,6 +84,23 @@ export default function (engine) {
                         source: armor.name
                     }));
                 }
+            }
+
+            if (shields) {
+                shields.forEach(shield => {
+                    if (shield.data?.acp) {
+                        let acp = parseInt(shield.data.acp);
+                        if (!Number.isNaN(acp)) {
+                            skill.mod += acp;
+
+                            skill.tooltip.push(game.i18n.format("SFRPG.ACPTooltip", {
+                                type: "Shield",
+                                mod: acp.signedString(),
+                                source: shield.name
+                            }));
+                        }
+                    }
+                });
             }
 
             if (skillModifier.tooltip.length !== 0) {
