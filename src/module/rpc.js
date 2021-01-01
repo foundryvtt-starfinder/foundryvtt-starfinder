@@ -45,7 +45,7 @@ export class RPC {
     }
 
     static sendMessageTo(recipient, eventName, payload) {
-        RPC.rpc._sendMessageTo(recipient, eventName, payload);
+        return RPC.rpc._sendMessageTo(recipient, eventName, payload);
     }
 
     _sendMessageTo(recipient, eventName, payload) {
@@ -58,20 +58,41 @@ export class RPC {
 
         //console.log(`Sending message:\n${JSON.stringify(messageData)}`);
 
+        /** Sending to GM, local user is GM, send to self always succeeds. */
         if (recipient === "gm" && game.user.isGM) {
             this._handleMessage(messageData);
-            return;
+            return 'successMessageHandled';
         }
 
+        /** Sending to self, send to self always succeeds. */
         if (recipient === game.user.id) {
             this._handleMessage(messageData);
-            return;
+            return 'successMessageHandled';
         }
 
         if (this.initialized) {
-            game.socket.emit('system.sfrpg', messageData);
+            let recipientIsActive = false;
+            if (recipient === "gm") {
+                for (const user of game.users.entries) {
+                    if (user.isGM && user.active) {
+                        recipientIsActive = true;
+                        break;
+                    }
+                }
+            } else {
+                const recipientUser = game.users.get(recipient);
+                recipientIsActive = recipientUser?.active || false;
+            }
+
+            if (recipientIsActive) {
+                game.socket.emit('system.sfrpg', messageData);
+                return 'successMessageSent';
+            } else {
+                return 'errorRecipientNotAvailable';
+            }
         } else {
             this.messageBuffer.push(messageData);
+            return 'successMessagePending';
         }
     }
 

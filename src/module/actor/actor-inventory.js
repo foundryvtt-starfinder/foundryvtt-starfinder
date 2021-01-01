@@ -498,7 +498,7 @@ async function onCreateItemCollection(message) {
         return;
     }
 
-    await Token.create({
+    return Token.create({
         name: payload.itemData[0].name,
         x: payload.position.x,
         y: payload.position.y,

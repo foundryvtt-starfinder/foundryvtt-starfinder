@@ -329,7 +329,7 @@ export async function handleOnDrop(event) {
     data.y = (y - t.ty) / canvas.stage.scale.y;
 
     if (data.type === "Item") {
-        return await handleItemDropCanvas(data);
+        return handleItemDropCanvas(data);
     }
     return false;
 }

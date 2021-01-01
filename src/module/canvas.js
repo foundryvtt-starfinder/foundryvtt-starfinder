@@ -170,7 +170,8 @@ export async function handleItemDropCanvas(data) {
             }
         }
 
-        placeItemCollectionOnCanvas(data.x, data.y, itemData, true).then(() => {
+        const hasDropped = placeItemCollectionOnCanvas(data.x, data.y, itemData, true);
+        if (hasDropped) {
             // Remove old items
             if (sourceActor) {
                 let idsToDrop = [];
@@ -179,7 +180,7 @@ export async function handleItemDropCanvas(data) {
                 }
                 sourceActor.deleteOwnedItem(idsToDrop);
             }
-        });
+        }
 
         return true;
     }
@@ -201,9 +202,9 @@ export async function handleItemDropCanvas(data) {
  * @param {Boolean} deleteIfEmpty Should this Token be deleted when its last item is removed?
  * @param {Object} itemData Either a single item data, or an array of item data, that are to be placed on the currently active canvas.
  */
-async function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
+function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
     if (!itemData) {
-        return;
+        return false;
     }
 
     if (!(itemData instanceof Array)) {
@@ -225,7 +226,12 @@ async function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
         }
     }
 
-    RPC.sendMessageTo("gm", "createItemCollection", msg);
+    const result = RPC.sendMessageTo("gm", "createItemCollection", msg);
+    if (result === "errorRecipientNotAvailable") {
+        ui.notifications.error(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.ItemCollectionNoGMError"));
+        return false;
+    }
+    return true;
 }
 
 function setupLootCollectionTokenInteraction(lootCollectionToken) {
