@@ -54,6 +54,13 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             augmentation: { label: game.i18n.format(SFRPG.itemTypes["augmentation"]), items: [], dataset: { type: "augmentation" }, allowAdd: true }
         };
 
+        let physicalInventoryItems = [];
+        for (const [key, value] of Object.entries(inventory)) {
+            const datasetType = value.dataset.type;
+            const types = datasetType.split(',');
+            physicalInventoryItems = physicalInventoryItems.concat(types);
+        }
+
         let [items, spells, feats, classes, races, themes, archetypes, conditionItems, asis] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
@@ -84,7 +91,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             else if (item.type === "theme") arr[5].push(item);
             else if (item.type === "archetypes") arr[6].push(item);
             else if (item.type === "asi") arr[8].push(item);
-            else if (Object.keys(inventory).includes(item.type)) arr[0].push(item);
+            else if (physicalInventoryItems.includes(item.type)) arr[0].push(item);
             else arr[0].push(item);
             return arr;
         }, [[], [], [], [], [], [], [], [], []]);
@@ -95,7 +102,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         for (let i of items) {
             i.img = i.img || DEFAULT_TOKEN;
 
-            if (!(i.type in inventory)) {
+            if (!physicalInventoryItems.includes(i.type)) {
                 continue;
             }
 
