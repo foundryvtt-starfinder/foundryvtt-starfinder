@@ -4,14 +4,16 @@ export default function (engine) {
     engine.closures.add("calculateBaseAttackBonus", (fact, context) => {
         const data = fact.data;
         const classes = fact.classes;
+        
+        data.attributes.baseAttackBonus = mergeObject(data.attributes.baseAttackBonus, {
+            value: 0,
+            rolledMods: [],
+            tooltip: []
+        }, {overwrite: false});
 
-        if (!data.attributes.baseAttackBonus) {
-            data.attributes.baseAttackBonus = {
-                value: 0,
-                rolledMods: [],
-                tooltip: []
-            };
-        }
+        /** Clear out default values. */
+        data.attributes.baseAttackBonus.value = 0;
+        data.attributes.baseAttackBonus.rolledMods = [];
 
         for (const cls of classes) {
             let mod = 0;
