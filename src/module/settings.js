@@ -130,4 +130,13 @@ export const registerSystemSettings = function () {
         default: false,
         type: Boolean
     });
+
+    game.settings.register("sfrpg", "alwaysShowQuantity", {
+        name: "SFRPG.Settings.AlwaysShowQuantity.Name",
+        hint: "SFRPG.Settings.AlwaysShowQuantity.Hint",
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean
+    });
 };

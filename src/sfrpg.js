@@ -212,6 +212,10 @@ Hooks.once("setup", function () {
         return totalCapacity;
     });
 
+    Handlebars.registerHelper('getStarfinderBoolean', function (settingName) {
+        return game.settings.get('sfrpg', settingName);
+    });
+
     Handlebars.registerHelper('capitalize', function (value) {
         return value.capitalize();
     });
