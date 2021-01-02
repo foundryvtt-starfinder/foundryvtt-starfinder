@@ -57,13 +57,6 @@ export default function(engine) {
             }
         }
 
-        if (data.attributes.pilotingBonus.value > 0) {
-            addScore(data.quadrants.forward.ac, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
-            addScore(data.quadrants.port.ac, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
-            addScore(data.quadrants.starboard.ac, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
-            addScore(data.quadrants.aft.ac, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
-        }
-
         if (pilot && pilot?.data?.data?.skills?.pil?.ranks > 0) {
             addScore(data.quadrants.forward.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
             addScore(data.quadrants.port.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
