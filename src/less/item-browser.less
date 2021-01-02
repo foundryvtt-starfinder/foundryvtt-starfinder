@@ -18,10 +18,9 @@
         .control-area {
             position: sticky;
             display: block;
-            min-width: 320px;
-            width: 320px;
             padding-right: 5px;
             overflow: auto;
+            flex: 0 0 320px;
         }
     
         .filtercontainer,.sortcontainer {
@@ -84,15 +83,46 @@
             padding: 3px;
         }
     
-      /*  item list  */
-        ul {
-            float: right;
-            display: block;
-            min-width: 335px;
-            width: 785px;
-            margin: 0;
-            height: 100%;
+        /*  item list  */
+        .content {
+            flex: 1;
+        }
+
+        .header {
+            flex: 0 0 15px;
+            padding: 0px 10px;
+
+            .item-image {
+                width: 32px;
+                height: 15px;
+            }
+    
+            .item-name {
+                height: 15px;
+                padding-left: 5px;
+            }
+    
+            .item-tags {
+                flex: 0 0 50px;
+                height: 15px;
+                padding-left: 5px;
+            }
+
+            .item-sort-link {
+                font-weight: 900;
+                &:hover {
+                    color: #111;
+                    text-shadow: 0 0 10px red;
+                }
+            }
+        }
+    
+        .item-list {
+            background-color:rgba(0,0,0,0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
             overflow: auto;
+            flex: 1 1 0;
         }
     
         .item {
@@ -106,12 +136,6 @@
             max-width: 32px;
             height: 32px;
             border: none !important;
-        }
-    
-        .item-list {
-            background-color:rgba(0,0,0,0.2);
-            padding:10px;
-            border-radius: 5px;
         }
     
         .filtercontainer h3 {
@@ -137,10 +161,11 @@
             padding-left: 5px;
         }
     
-         .item-tags {
+        .item-tags {
+            flex: 0 0 50px;
             text-align: right;
             margin-right: 3px;
-            font-weight: 900;
+            font-weight: 0;
             max-width: 100px;
             height: 32px;
         }

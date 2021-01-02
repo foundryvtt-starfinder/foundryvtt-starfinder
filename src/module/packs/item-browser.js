@@ -60,6 +60,13 @@ export class ItemBrowserSFRPG extends Application {
       });
     }); // make draggable
 
+    html.on('click', '.item-sort-link', ev => {
+      const sortKey = $(ev.currentTarget).attr('data-key');
+      const sortingControl = $(".sortingControl");
+      sortingControl.val(sortKey);
+      sortingControl.trigger('change');
+    });
+
     html.find('.draggable').each((i, li) => {
       li.setAttribute('draggable', true);
       li.addEventListener('dragstart', event => {
@@ -93,7 +100,7 @@ export class ItemBrowserSFRPG extends Application {
       const itemList = html.find('li');
       const sortedList = this.sortItems(itemList, ev.target.value);
 
-      const ol = $(html.find('ul'));
+      const ol = $(html.find('.item-list'));
       ol[0].innerHTML = [];
       for (const element of sortedList) {
         ol[0].append(element);
@@ -144,10 +151,16 @@ export class ItemBrowserSFRPG extends Application {
     }
 
     const data = {};
+    data.defaultSortMethod = this.getDefaultSortMethod();
+    data.tags = this.getTags();
     data.items = this.items;
     data.sortingMethods = this.sortingMethods;
     data.filters = this.filters;
     return data;
+  }
+
+  getDefaultSortMethod() {
+    return "name";
   }
 
   getSortingMethods() {
@@ -171,6 +184,10 @@ export class ItemBrowserSFRPG extends Application {
   }
 
   getFilters() {
+    return {};
+  }
+
+  getTags() {
     return {};
   }
 
@@ -333,7 +350,7 @@ export class ItemBrowserSFRPG extends Application {
     };
   }
 
-  initializeSettings() {
+  initializeSettings(defaultAllowedCompendiums = null) {
     let configuration = this.getConfigurationProperties();
 
     game.settings.register('sfrpg', configuration.settings, {
@@ -356,8 +373,8 @@ export class ItemBrowserSFRPG extends Application {
         for (const compendium of game.packs) {
             if (compendium.metadata.entity == 'Item') {
                 settings[compendium.collection] = {
-                    load: true,
-                    name: `${compendium.metadata.label} (${compendium.collection})`
+                  load: !defaultAllowedCompendiums || defaultAllowedCompendiums.includes(compendium.metadata.name),
+                  name: compendium.metadata.label
                 };
             }
         }

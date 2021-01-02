@@ -68,6 +68,16 @@ class SpellBrowserSFRPG extends ItemBrowserSFRPG {
         return filters;
     }
 
+    getTags() {
+        return {
+            level: {
+                name: game.i18n.localize("SFRPG.Browsers.SpellBrowser.BrowserSortMethodLevel"),
+                dataKey: "level",
+                sortValue: "level"
+            }
+        };
+    }
+
     _filterLevels(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
@@ -108,5 +118,7 @@ export function getSpellBrowser() {
 
 Hooks.on('ready', e => {
     let browser = getSpellBrowser();
-    browser.initializeSettings();
+
+    const defaultAllowedCompendiums = ["spells"];
+    browser.initializeSettings(defaultAllowedCompendiums);
 });
