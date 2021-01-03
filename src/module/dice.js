@@ -865,14 +865,16 @@ export class RollContext {
 
     isValid() {
         /** Check if all contexts are valid. */
-        for (const context of Object.values(this.allContexts)) {
+        for (const [key, context] of Object.entries(this.allContexts)) {
             if (!context.entity || !context.data) {
+                console.log([`Context for entity ${key}:${context.entity?.name} is invalid (${context.data}).`, context, this.allContexts]);
                 return false;
             }
         }
 
         /** Check if the main context is valid. */
         if (this.mainContext && !this.allContexts[this.mainContext]) {
+            console.log([`Main context is invalid.`, this.mainContext]);
             return false;
         }
 
@@ -880,6 +882,7 @@ export class RollContext {
         for (const selector of this.selectors) {
             for (const option of selector.options) {
                 if (!this.allContexts[option]) {
+                    console.log([`Selector ${selector.name} has an invalid option ${option}.`, selector, option]);
                     return false;
                 }
             }

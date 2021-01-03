@@ -1,4 +1,4 @@
-<div class="item-browser">
+<div class="item-browser flexrow">
     <div class="control-area">
         <div class="sortcontainer" id="tagfilter">
             <input class="" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchPlaceholder"}}" title="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchTitle"}}"/>
@@ -7,10 +7,12 @@
             </div>
             <dl id="sorter">
                 <dt>{{localize "SFRPG.Browsers.ItemBrowser.BrowserSortByLabel"}}:</dt>
-                <dd><select class="null" name="sortorder">
+                <dd><select class="sortingControl" name="sortorder">
+                    {{#select defaultSortMethod}}
                     {{#each sortingMethods as |method id|}}
                     <option value="{{id}}" {{#if method.selected}}selected{{/if}}>{{method.name}}</option>
                     {{/each}}
+                    {{/select}}
                 </select></dd>
             </dl>
         </div>
@@ -20,29 +22,49 @@
             <h3>{{filter.label}}</h3>
             <dl>
                 {{#each filter.content as |content key|}}
-                <dt><input type="checkbox" name="{{filterKey}}-{{key}}" /></dt><dd>{{localize content}}</dd>
+                <label>
+                    <dt>
+                        <input type="checkbox" name="{{filterKey}}-{{key}}" />
+                    </dt>
+                    <dd>
+                        {{localize content}}
+                    </dd>
+                </label>
                 {{/each}}
             </dl>
         </div>
         {{/each}}
     </div>
-    <ul class="item-list">
-        {{#each items as |item|}}
-        <li class="item flexrow draggable" data-entry-compendium="{{item.compendium}}" data-entry-id="{{item._id}}" data-item-category="items">
-            <div class="item-image">
-                <img class="" src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
-            </div>
-
-            <div class="item-name">
-                <span class="item-edit" ><a>{{item.name}}</a></span>
-            </div>
-            <div class="item-tags">
-                <span title="item level">{{item.data.level}}</span>
-            </div>
-            {{#each item.data as |attrib id|}}
-            <input type="hidden" name="{{id}}" value="{{attrib}}">
+    <div class="content flexcol">
+        <div class="header flexrow">
+            <div class="item-image"></div>
+            <div class="item-name item-sort-link" data-key="name">{{localize "SFRPG.Browsers.ItemBrowser.BrowserSortMethodName"}}</div>
+            {{#each tags as |value key|}}
+            <div class="item-tags item-sort-link" data-key="{{value.sortValue}}">{{value.name}}</div>
             {{/each}}
-        </li>
-        {{/each}}
-    </ul>
+        </div>
+        <ul class="item-list">
+            {{#each items as |item|}}
+            <li class="item flexrow draggable" data-entry-compendium="{{item.compendium}}" data-entry-id="{{item._id}}" data-item-category="items">
+                <div class="item-image">
+                    <img class="" src="{{item.img}}" title="{{item.name}}" width="32" height="32"/>
+                </div>
+
+                <div class="item-name">
+                    <span class="item-edit" ><a>{{item.name}}</a></span>
+                </div>
+
+                {{#each ../tags as |value key|}}
+                <div class="item-tags">
+                    <span title="item level">{{lookup item.data value.dataKey}}</span>
+                </div>
+                {{/each}}
+
+                {{#each item.data as |attrib id|}}
+                <input type="hidden" name="{{id}}" value="{{attrib}}">
+                {{/each}}
+            </li>
+            {{/each}}
+        </ul>
+    </div>
 </div>

@@ -2,26 +2,24 @@
     <header class="sheet-header flexrow">
         <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
 
-        <div class="header-details flexrow">
-            <div class="header-background flexrow">
+        <div class="header-details flexcol">
+            <div class="header-background flexrow" style="flex: 0 0 60px;">
                 <h1 class="charname">
-                    <input name="name" type="text" value="{{actor.name}}" placeholder="Vehicle Name"
-                        title="Vehicle Name" />
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize "SFRPG.VehicleSheet.Header.NamePlaceholder" }}" title="{{ localize "SFRPG.VehicleSheet.Header.NameTooltip" }}" />
                 </h1>
 
                 <div class="charlevel">
                     <div class="level noxp">
-                        <label>level</label>
-                        <input name="data.details.level" type="text" value="{{labels.level}}" placeholder="Level" />
+                        <label>{{ localize "SFRPG.VehicleSheet.Header.Level" }}</label>
+                        <input name="data.details.level" type="text" value="{{labels.level}}" placeholder="{{ localize "SFRPG.VehicleSheet.Header.LevelPlaceholder" }}" />
                     </div>
                 </div>
             </div>
 
-            <ul class="summary">
+            <ul class="summary" style="flex: 0 0 80px;">
                 <li>
-                    <label>Price</label>
-                    <input type="text" name="data.details.price" value="{{data.details.price}}" data-dtype="Number"
-                        placeholder="Price" title="Price" />
+                    <label>{{ localize "SFRPG.VehicleSheet.Header.Price" }}</label>
+                    <input type="text" name="data.details.price" value="{{data.details.price}}" data-dtype="Number" placeholder="{{ localize "SFRPG.VehicleSheet.Header.PricePlaceholder" }}" title="{{ localize "SFRPG.VehicleSheet.Header.PriceTooltip" }}" />
                 </li>
             </ul>
         </div>
@@ -29,7 +27,7 @@
 
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
-        <a class="item" data-tab="attacks">Attacks</a>
+        <a class="item" data-tab="attacks">{{ localize "SFRPG.VehicleSheet.Tabs.Attacks" }}</a>
         <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
     </nav>
 
@@ -40,64 +38,55 @@
                     <li class="attribute health">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.Health" }}</h4>
                         <div class="attribute-value multiple">
-                            <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
-                                data-dtype="Number" placeholder="10" />
+                            <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" data-dtype="Number" placeholder="10" />
                             <span class="sep"> / </span>
-                            <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
-                                data-dtype="Number" placeholder="10" />
+                            <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" data-dtype="Number" placeholder="10" />
                         </div>
                         <footer class="attribute-footer">
                             <div class="flexrow">
-                                <span>Threshold</span>
-                                <input name="data.attributes.hp.threshold" type="text"
-                                    value="{{data.attributes.hp.threshold}}" data-dtype="Number" placeholder="5" />
+                                <span>{{ localize "SFRPG.VehicleSheet.Details.Threshold" }}</span>
+                                <input name="data.attributes.hp.threshold" type="text" value="{{data.attributes.hp.threshold}}" data-dtype="Number" placeholder="5" />
                             </div>
                             <div class="flexrow">
-                                <span>Hardness</span>
-                                <input name="data.attributes.hardness" type="text" value="{{data.attributes.hardness}}"
-                                    data-dtype="Number" placeholder="10" />
+                                <span>{{ localize "SFRPG.VehicleSheet.Details.Hardness" }}</span>
+                                <input name="data.attributes.hardness" type="text" value="{{data.attributes.hardness}}" data-dtype="Number" placeholder="10" />
                             </div>
                         </footer>
                     </li>
                     <li class="attribute">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
                         <div class="attribute-value">
-                            <input name="data.attributes.eac.value" type="text" value="{{data.attributes.eac.value}}"
-                                data-dtype="Number" placeholder="10" />
+                            <input name="data.attributes.eac.value" type="text" value="{{data.attributes.eac.value}}" data-dtype="Number" placeholder="10" />
                         </div>
                     </li>
                     <li class="attribute">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.KineticArmorClass" }}</h4>
                         <div class="attribute-value">
-                            <input name="data.attributes.kac.value" type="text" value="{{data.attributes.kac.value}}"
-                                data-dtype="Number" placeholder="10" />
+                            <input name="data.attributes.kac.value" type="text" value="{{data.attributes.kac.value}}" data-dtype="Number" placeholder="10" />
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="flexcol">
-                <h3 class="form-header">Speed</h3>
+                <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Details.Movement.Title" }}</h3>
                 <div class="flexrow">
                     <div class="flexcol">
                         <div class="form-group">
-                            <label title="Movement in tactical combat when using a move action">Drive</label>
+                            <label title="{{ localize "SFRPG.VehicleSheet.Details.Movement.DriveTooltip" }}">{{ localize "SFRPG.VehicleSheet.Details.Movement.Drive" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="data.attributes.speed.drive"
-                                    value="{{data.attributes.speed.drive}}" placeholder="15 ft" />
+                                <input type="text" name="data.attributes.speed.drive" value="{{data.attributes.speed.drive}}" placeholder="{{ localize "SFRPG.VehicleSheet.Details.Movement.DrivePlaceholder" }}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label title="Movement in tactical combat when using full action">Full</label>
+                            <label title="{{ localize "SFRPG.VehicleSheet.Details.Movement.FullTooltip" }}">{{ localize "SFRPG.VehicleSheet.Details.Movement.Full" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="data.attributes.speed.full"
-                                    value="{{data.attributes.speed.full}}" placeholder="100 ft" />
+                                <input type="text" name="data.attributes.speed.full" value="{{data.attributes.speed.full}}" placeholder="{{ localize "SFRPG.VehicleSheet.Details.Movement.FullPlaceholder" }}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label title="Overall overland speed">MPH</label>
+                            <label title="{{ localize "SFRPG.VehicleSheet.Details.Movement.SpeedTooltip" }}">{{ localize "SFRPG.VehicleSheet.Details.Movement.Speed" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="data.attributes.speed.mph"
-                                    value="{{data.attributes.speed.mph}}" placeholder="40 mph" />
+                                <input type="text" name="data.attributes.speed.mph" value="{{data.attributes.speed.mph}}" placeholder="{{ localize "SFRPG.VehicleSheet.Details.Movement.SpeedPlaceholder" }}" />
                             </div>
                         </div>
                     </div>
@@ -105,39 +94,39 @@
 
             </div>
             <div class="flexcol">
-                <h3 class="form-header">Dimensions</h3>
+                <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Details.Dimensions.Title" }}</h3>
                 <div class="flexrow">
                     <div class="flexcol">
                         <div class="form-group">
-                            <label>Width</label>
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.Dimensions.Width" }}</label>
                             <div class="form-fields">
                                 <input type="text" name="data.attributes.dimensions.width" value="{{data.attributes.dimensions.width}}" />
-                                <span>Feet</span>
+                                <span>{{ localize "SFRPG.VehicleSheet.Details.Dimensions.Unit" }}</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Length</label>
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.Dimensions.Length" }}</label>
                             <div class="form-fields">
                                 <input type="text" name="data.attributes.dimensions.length" value="{{data.attributes.dimensions.length}}" />
-                                <span>Feet</span>
+                                <span>{{ localize "SFRPG.VehicleSheet.Details.Dimensions.Unit" }}</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Height</label>
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.Dimensions.Height" }}</label>
                             <div class="form-fields">
                                 <input type="text" name="data.attributes.dimensions.height" value="{{data.attributes.dimensions.height}}" />
-                                <span>Feet</span>
+                                <span>{{ localize "SFRPG.VehicleSheet.Details.Dimensions.Unit" }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="flexcol">
-                <h3 class="form-header">Other Attributes</h3>
+                <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Title" }}</h3>
                 <div class="flexrow">
                     <div class="flexcol">
                         <div class="form-group">
-                            <label>Size</label>
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Size" }}</label>
                             <div class="form-fields">
                                 <select name="data.attributes.size">
                                     {{#select data.attributes.size}}
@@ -149,7 +138,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Type</label>
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Type" }}</label>
                             <div class="form-fields">
                                 <select name="data.attributes.type">
                                     {{#select data.attributes.type}}
@@ -161,7 +150,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Cover</label>
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Cover" }}</label>
                             <div class="form-fields">
                                 <select name="data.attributes.cover">
                                     {{#select data.attributes.cover}}
@@ -173,10 +162,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Passengers</label>
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Passengers" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="data.attributes.passengers" value="{{data.attributes.passengers}}" 
-                                    data-dtype="Number" />
+                                <input type="text" name="data.attributes.passengers" value="{{data.attributes.passengers}}" data-dtype="Number" />
                             </div>
                         </div>
                     </div>
@@ -184,8 +172,8 @@
             </div>
         </div>
         <div class="tab attacks" data-group="primary" data-tab="attacks">
-            <h3 class="form-header">Attacks and Modifiers</h3>
-            <p class="notification warning">This is still to-do</p>
+            <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Attacks.Title" }}</h3>
+            <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Attacks.ToDo" }}</p>
         </div>
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
             {{editorPlus content=data.details.description.value target="data.details.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}

@@ -54,6 +54,13 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             augmentation: { label: game.i18n.format(SFRPG.itemTypes["augmentation"]), items: [], dataset: { type: "augmentation" }, allowAdd: true }
         };
 
+        let physicalInventoryItems = [];
+        for (const [key, value] of Object.entries(inventory)) {
+            const datasetType = value.dataset.type;
+            const types = datasetType.split(',');
+            physicalInventoryItems = physicalInventoryItems.concat(types);
+        }
+
         let [items, spells, feats, classes, races, themes, archetypes, conditionItems, asis] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
@@ -84,7 +91,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             else if (item.type === "theme") arr[5].push(item);
             else if (item.type === "archetypes") arr[6].push(item);
             else if (item.type === "asi") arr[8].push(item);
-            else if (Object.keys(inventory).includes(item.type)) arr[0].push(item);
+            else if (physicalInventoryItems.includes(item.type)) arr[0].push(item);
             else arr[0].push(item);
             return arr;
         }, [[], [], [], [], [], [], [], [], []]);
@@ -95,7 +102,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         for (let i of items) {
             i.img = i.img || DEFAULT_TOKEN;
 
-            if (!(i.type in inventory)) {
+            if (!physicalInventoryItems.includes(i.type)) {
                 continue;
             }
 
@@ -162,13 +169,13 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         data.inventoryValue = Math.floor(totalValue);
 
         const features = {
-            classes: { label: "Class Levels", items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
-            race: { label: "Race", items: [], hasActions: false, dataset: { type: "race" }, isRace: true },
-            theme: { label: "Theme", items: [], hasActions: false, dataset: { type: "theme" }, isTheme: true },
+            classes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"), items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
+            race: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Race"), items: [], hasActions: false, dataset: { type: "race" }, isRace: true },
+            theme: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Theme"), items: [], hasActions: false, dataset: { type: "theme" }, isTheme: true },
             asi: { label: game.i18n.format("SFRPG.Items.Categories.AbilityScoreIncrease"), items: asis, hasActions: false, dataset: { type: "asi" }, isASI: true },
-            archetypes: { label: "Archetypes", items: [], dataset: { type: "archetypes" }, isArchetype: true },
-            active: { label: "Active", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: "Passive", items: [], hasActions: false, dataset: { type: "feat" } }
+            archetypes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Archetypes"), items: [], dataset: { type: "archetypes" }, isArchetype: true },
+            active: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActiveFeats"), items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
+            passive: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.PassiveFeats"), items: [], hasActions: false, dataset: { type: "feat" } }
         };
 
         for (let f of feats) {

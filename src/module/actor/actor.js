@@ -45,6 +45,7 @@ export class ActorSFRPG extends Actor {
         const actorId = this._id;
         const items = actorData.items;
         const armor = items.find(item => item.type === "equipment" && item.data.equipped);
+        const shields = items.filter(item => item.type === "shield" && item.data.equipped);
         const weapons = items.filter(item => item.type === "weapon" && item.data.equipped);
         const races = items.filter(item => item.type === "race");
         const frames = items.filter(item => item.type === "starshipFrame");
@@ -62,6 +63,7 @@ export class ActorSFRPG extends Actor {
             flags,
             items,
             armor,
+            shields,
             weapons,
             races,
             classes,
@@ -1074,12 +1076,26 @@ export class ActorSFRPG extends Actor {
             if (!this.data.data.isNPCCrew) {
                 /** Add player captain if available. */
                 if (this.data.data.crew.captain?.actors?.length > 0) {
-                    rollContext.addContext("captain", this.data.data.crew.captain.actors[0]);
+                    const actor = this.data.data.crew.captain.actors[0];
+                    let actorData = null;
+                    if (actor instanceof ActorSFRPG) {
+                        actorData = actor.data.data;
+                    } else {
+                        actorData = actor.data;
+                    }
+                    rollContext.addContext("captain", actor, actorData);
                 }
         
                 /** Add player pilot if available. */
                 if (this.data.data.crew.pilot?.actors?.length > 0) {
-                    rollContext.addContext("pilot", this.data.data.crew.pilot.actors[0]);
+                    const actor = this.data.data.crew.pilot.actors[0];
+                    let actorData = null;
+                    if (actor instanceof ActorSFRPG) {
+                        actorData = actor.data.data;
+                    } else {
+                        actorData = actor.data;
+                    }
+                    rollContext.addContext("pilot", actor, actorData);
                 }
         
                 /** Add remaining roles if available. */
@@ -1093,8 +1109,15 @@ export class ActorSFRPG extends Actor {
                             const crewList = crewEntries.actors;
                             if (crewList && crewList.length > 0) {
                                 for (const actor of crewList) {
+                                    let actorData = null;
+                                    if (actor instanceof ActorSFRPG) {
+                                        actorData = actor.data.data;
+                                    } else {
+                                        actorData = actor.data;
+                                    }
+
                                     const contextId = crewType + crewCount;
-                                    rollContext.addContext(contextId, actor);
+                                    rollContext.addContext(contextId, actor, actorData);
                                     crew.push(contextId);
                                     crewCount += 1;
                                 }
@@ -1104,8 +1127,15 @@ export class ActorSFRPG extends Actor {
                         const crewList = this.data.data.crew[crewType].actors;
                         if (crewList && crewList.length > 0) {
                             for (const actor of crewList) {
+                                let actorData = null;
+                                if (actor instanceof ActorSFRPG) {
+                                    actorData = actor.data.data;
+                                } else {
+                                    actorData = actor.data;
+                                }
+
                                 const contextId = crewType + crewCount;
-                                rollContext.addContext(contextId, actor);
+                                rollContext.addContext(contextId, actor, actorData);
                                 crew.push(contextId);
                                 crewCount += 1;
                             }

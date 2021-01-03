@@ -97,12 +97,29 @@
         "ACTooltipArmorACMod": "Modificateur d'armure: {armor} ({name})",
         "ACTooltipBase": "Classe d'Armure de base: {base}",
         "ACTooltipBonus": "{type} Bonus: {mod} ({source})",
-        "ACTooltipMaxDex": "Modificateur de dextérité: {maxDex} (armure max dex: {armorMax})",
-        "ACTooltipNotProficientMod": "Pénalité pour non-maniement: {profMod}",
+        "ACTooltipMaxDex": "Modificateur de dextérité: {maxDex} (armure max: {armorMax}, shield max: {shieldMax})",
+        "ACTooltipNotProficientMod": "Penalty for armor non-proficiency: {profMod}",
+        "ACTooltipNotProficientShield": "Penalty for shield non-proficiency: {profMod}",
+        "ACTooltipShieldACMod": "Shield Modifier: {shield} ({name})",
         "ActorSheet": {
             "Attributes": {
                 "Skills": {
                     "SkillRanks": "Skill Ranks"
+                }
+            },
+            "Features": {
+                "Categories": {
+                    "Classes": "Classes",
+                    "Race": "Race",
+                    "Theme": "Theme",
+                    "Archetypes": "Archetypes",
+                    "ActiveFeats": "Active Feats",
+                    "PassiveFeats": "Passive Feats"
+                },
+                "Filters": {
+                    "Action": "Action",
+                    "Bonus": "Bonus",
+                    "Reaction": "Reaction"
                 }
             },
             "Header": {
@@ -329,6 +346,13 @@
                 "BrowserSortMethodLevel": "Level",
                 "Button": "Spells",
                 "Title": "Browse Spells"
+            },
+            "StarshipBrowser": {
+                "BrowserSortMethodBP": "BP",
+                "BrowserSortMethodPCU": "PCU",
+                "Button": "Starships",
+                "ComponentType": "Component Type",
+                "Title": "Browse Starships"
             }
         },
         "CancelButtonLabel": "Annuler",
@@ -353,6 +377,11 @@
         "CharacterFlagsSectionRacialTraits": "Traits raciaux",
         "CharacterLevelsTooltip": "{class} Niveaux: {levels}",
         "CharacterNamePlaceHolderText": "Nom du personnage",
+        "CharacterSheet": {
+            "Inventory": {
+                "ContainedWealth": "Contained wealth: {wealth}"
+            }
+        },
         "ChatCard": {
             "DamageRoll": "Damage Roll",
             "HealingRoll": "Healing Roll",
@@ -820,6 +849,7 @@
             "Identified"     : "Identified",
             "MaxDex"         : "Max. Dexterity Modifier",
             "Proficient"     : "Proficient",
+            "NotProficient"  : "Not Proficient",
             "Unlimited"      : "Unlimited",
             "Action": {
                 "ActionType"            : "Action Type",
@@ -938,16 +968,24 @@
                 "Details": "Magic Item Details"
             },
             "Shield": {
-                "Action" : "Shield Action",
-                "Aligned": "Aligned",
-                "Bonus"  : "Shield Bonus",
-                "Details": "Shield Details",
-                "Wielded": "Wielded"
+                "Action"     : "Shield Action",
+                "AcMaxDex"   : "Max dex bonus: {maxDex}",
+                "ACP"        : "ACP: {acp}",
+                "Aligned"    : "Aligned",
+                "ArmorCheck" : "Armor check penalty: {acp}",
+                "Bonus"      : "Shield Bonus",
+                "Bonuses"    : "Wielded bonus: {wielded} / Aligned bonus: {aligned}",
+                "Details"    : "Shield Details",
+                "Dex"        : "Dex: {dex}",
+                "Shield"     : "Shield",
+                "ShieldBonus": "Shield: {wielded} / {aligned}",
+                "Wielded"    : "Wielded"
             },
             "ShipWeapon": {
                 "ItemType"    :"Starship Weapon",
                 "Source"      : "Source",
                 "Mounted"     : "Mounted",
+                "NotMounted"  : "Not Mounted",
                 "Activated"   : "Activated",
                 "WeaponArc"   : "Weapon Arc",
                 "WeaponClass" : "Weapon Class",
@@ -1348,6 +1386,12 @@
         "None": "Aucun",
         "Notes": "Notes",
         "NPCSheet": {
+            "Features": {
+                "Actions": "Actions",
+                "ActiveItems": "Active Items",
+                "Attacks": "Attacks",
+                "Features": "Features"
+            },
             "Header": {
                 "NamePlaceHolderText": "Character Name",
                 "RaceAndGraftsPlaceHolderText": "Gender, Race, and Class/Grafts",
@@ -1369,6 +1413,9 @@
                     "Note": "Select the type of item you would like to create.",
                     "Title": "Create New Item"
                 }
+            },
+            "Inventory": {
+                "Inventory": "Inventory"
             }
         },
         "NpcToggleSkillsDialogTitle": "Ajout de compétences aux NPC",
@@ -1502,6 +1549,10 @@
             "Advantage": {
                 "Hint": "Basculer les avantages ou désavantages sur les lancers de dés.",
                 "Name": "Utilisez les avantages et désavantages?"
+            },
+            "AlwaysShowQuantity": {
+                "Hint": "Always shows the quantity of items, even if it is 0 or 1. You will have to refresh your window before this change will take effect.",
+                "Name": "Always show item quantity"
             },
             "AutoCollapseCard": {
                 "Hint": "Plier automatiquement les descriptions des fiches d'articles dans le journal de discussion",
@@ -1881,10 +1932,35 @@
                 "PowerCores": "Power Cores",
                 "PrimarySystems": "Primary Systems",
                 "SecuritySystems": "Security Systems",
-                "Thrusters": "Thrusters"
+                "Thrusters": "Thrusters",
+                "Prefixes": {
+                    "StarshipAblativeArmors": "Ablative Armor",
+                    "StarshipArmors"      : "Armor",
+                    "StarshipComputers"   : "Computer",
+                    "StarshipCrewQuarters": "Crew Quarters",
+                    "StarshipDefensiveCountermeasures": "Defensive Countermeasure",
+                    "StarshipDriftEngine" : "Drift Engine",
+                    "StarshipExpansionBays": "Expansion Bay",
+                    "StarshipFortifiedHulls": "Fortified Hull",
+                    "StarshipFrames"      : "Frame",
+                    "StarshipOtherSystems": "Other System",
+                    "StarshipPowerCores"  : "Power Core",
+                    "StarshipReinforcedBulkheads": "Reinforced Bulkhead",
+                    "StarshipSecuritySystems": "Security System",
+                    "StarshipSensors"     : "Sensor",
+                    "StarshipShields"     : "Shield",
+                    "StarshipThrusters"   : "Thruster",
+                    "StarshipWeapons"     : "Weapon"    
+                }
             },
             "Header": {
+                "BP": "BP",
+                "CT": "CT",
+                "CriticalThreshold": "Critical Threshold",
+                "DT": "DT",
+                "DamageThreshold": "Damage Threshold",
                 "FrameMissing": "Missing Frame",
+                "HullPointIncrementTooltip": "This is the number of hull points that are added when the ship reaches tier 4 (and every 4 tiers after)",
                 "Max": "Max",
                 "Misc": "Misc",
                 "Movement": {
@@ -1892,10 +1968,17 @@
                     "ManeuverabilityTooltip": "Maneuverability: {maneuverability}",
                     "Speed": "Speed",
                     "ThrustersMissing": "Thrusters Missing",
+                    "Title": "Movement",
                     "Turn": "Turn"
                 },
+                "PCU": "PCU",
                 "Size": "Size: {size}",
+                "Statistics": "Statistics",
+                "Thresholds": "Thresholds",
                 "Value": "Value"
+            },
+            "Inventory": {
+                "Inventory": "Inventory"
             },
             "Modifiers": {
                 "AblativeOverload": "Ablative overload: {mod}",
@@ -1979,6 +2062,54 @@
                 "Landw": "Land and water",
                 "Air"  : "Air",
                 "Landa": "Land and air"
+            }
+        },
+        "VehicleSheet": {
+            "Attacks": {
+                "Title": "Attacks and Modifiers",
+                "ToDo": "This is still to-do."
+            },
+            "Details": {
+                "Dimensions": {
+                    "Length": "Length",
+                    "Height": "Height",
+                    "Title": "Dimensions",
+                    "Unit": "Feet",
+                    "Width": "Width"
+                },
+                "Hardness": "Hardness",
+                "Movement": {
+                    "Drive": "Drive",
+                    "DrivePlaceholder": "e.g. 20 ft",
+                    "DriveTooltip": "Movement in tactical combat when using a move action.",
+                    "Full": "Full",
+                    "FullPlaceholder": "e.g. 500 ft",
+                    "FullTooltip": "Movement in tactical combat when using full action.",
+                    "Speed": "Speed",
+                    "SpeedPlaceholder": "e.g. 55 mph",
+                    "SpeedTooltip": "Overall overland speed.",
+                    "Title": "Speed"
+                },
+                "OtherAttributes": {
+                    "Cover": "Cover",
+                    "Passengers": "Passengers",
+                    "Size": "Size",
+                    "Title": "Other Attributes",
+                    "Type": "Type"
+                },
+                "Threshold": "Threshold"
+            },
+            "Header": {
+                "Level": "Level",
+                "LevelPlaceholder": "1",
+                "NamePlaceholder": "Vehicle name",
+                "NameTooltip": "Enter the vehicle's name here.",
+                "Price": "Price",
+                "PricePlaceholder": "Price in credits",
+                "PriceTooltip": "The amount of credits this is vehicle worth."
+            },
+            "Tabs": {
+                "Attacks": "Attacks"
             }
         },
         "WeaponCategoriesCryo"         : "Armes cryogénique",

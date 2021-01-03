@@ -169,7 +169,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 if (targetsParent) {
                     if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
                         desiredParent = targetsParent;
-                        desiredTargetIndex = getFirstAcceptableStorageIndex(desiredParent);
+                        desiredStorageIndex = getFirstAcceptableStorageIndex(desiredParent, itemToMove);
                     } else {
                         return itemToMove;
                     }

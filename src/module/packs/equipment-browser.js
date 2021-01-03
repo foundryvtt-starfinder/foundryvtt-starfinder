@@ -104,6 +104,16 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
         return filters;
     }
 
+    getTags() {
+        return {
+            level: {
+              name: game.i18n.localize("SFRPG.Browsers.EquipmentBrowser.BrowserSortMethodLevel"),
+              dataKey: "level",
+              sortValue: "level"
+            }
+        };
+    }
+
     onFiltersUpdated(html) {
         this.refreshFilters = true;
         super.onFiltersUpdated(html);
@@ -188,5 +198,7 @@ export function getEquipmentBrowser() {
 
 Hooks.on('ready', e => {
     let browser = getEquipmentBrowser();
-    browser.initializeSettings();
+
+    const defaultAllowedCompendiums = ["equipment"];
+    browser.initializeSettings(defaultAllowedCompendiums);
 });

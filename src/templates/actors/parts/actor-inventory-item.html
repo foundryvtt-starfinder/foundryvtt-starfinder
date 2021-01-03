@@ -2,8 +2,8 @@
             <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
                 <div class="item-image {{#if (not bigItem)}}small{{/if}}" style="background-image: url({{item.img}})"></div>
                 <h4>
-                    {{~#if item.isStack}}({{item.data.quantity}}) {{/if}}
-                    {{item.name~}}
+                    {{#if (or item.isStack (getStarfinderBoolean "alwaysShowQuantity"))}}({{item.data.quantity}}) {{/if}}
+                    {{item.name}}
                 </h4>
                 {{#if (and owner (and bigItem (or item.hasAttack item.hasDamage)))}}
                 <div class="item-action flexcol">

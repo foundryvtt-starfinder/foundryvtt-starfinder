@@ -238,7 +238,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      */
     _prepareItems(data) {
         const inventory = {
-            inventory: { label: "Inventory", items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
+            inventory: { label: game.i18n.localize("SFRPG.StarshipSheet.Inventory.Inventory"), items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
         };
 
         const starshipSystems = [
@@ -338,6 +338,26 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         data.activeFrame = frame.length > 0 ? frame[0] : null;
         data.hasPower = powerCores.length > 0;
         data.hasThrusters = thrusters.filter(x => !x.data.isBooster).length > 0;
+
+        data.prefixTable = {
+            starshipAblativeArmor:              game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipAblativeArmors"),
+            starshipArmor:                      game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipArmors"),
+            starshipComputer:                   game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipComputers"),
+            starshipCrewQuarter:                game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipCrewQuarters"),
+            starshipDefensiveCountermeasure:    game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipDefensiveCountermeasures"),
+            starshipDriftEngine:                game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipDriftEngine"),
+            starshipExpansionBay:               game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipExpansionBays"),
+            starshipFortifiedHull:              game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipFortifiedHulls"),
+            starshipFrame:                      game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipFrames"),
+            starshipOtherSystem:                game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipOtherSystems"),
+            starshipPowerCore:                  game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipPowerCores"),
+            starshipReinforcedBulkhead:         game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipReinforcedBulkheads"),
+            starshipSecuritySystem:             game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipSecuritySystems"),
+            starshipSensor:                     game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipSensors"),
+            starshipShield:                     game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipShields"),
+            starshipThruster:                   game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipThrusters"),
+            starshipWeapon:                     game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipWeapons")
+        };
 
         if (!this.actor.data.data.isNPCCrew) {
             data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
