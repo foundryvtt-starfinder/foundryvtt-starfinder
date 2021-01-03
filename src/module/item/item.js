@@ -265,9 +265,50 @@ export class ItemSFRPG extends Item {
             );
         }
 
+        if (this.data.type === "container") {
+            if (this.actor) {
+                let wealth = 0;
+                const containedItems = this._getContainedItems();
+                for (const item of containedItems) {
+                    wealth += item.data.data.quantity * item.data.data.price;
+                }
+                wealth = Math.floor(wealth);
+
+                const wealthString = new Intl.NumberFormat().format(wealth);
+                const wealthProperty = game.i18n.format("SFRPG.CharacterSheet.Inventory.ContainedWealth", {wealth: wealthString});
+                props.push(wealthProperty);
+            }
+        }
+
         // Filter properties and return
         data.properties = props.filter(p => !!p);
         return data;
+    }
+
+    _getContainedItems() {
+        const contents = this.data.data.container?.contents;
+        if (!contents || !this.actor) {
+            return [];
+        }
+
+        const itemsToTest = [this];
+        const containedItems = [];
+        while (itemsToTest.length > 0) {
+            const itemToTest = itemsToTest.shift();
+            
+            const contents = itemToTest?.data?.data?.container?.contents;
+            if (contents) {
+                for (const content of contents) {
+                    const containedItem = this.actor.getOwnedItem(content.id);
+                    if (containedItem) {
+                        containedItems.push(containedItem);
+                        itemsToTest.push(containedItem);
+                    }
+                }
+            }
+        }
+
+        return containedItems;
     }
 
     /* -------------------------------------------- */
