@@ -10,8 +10,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     }
 
     get template() {
-        if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/limited-vehicle-sheet.html";
-        return "systems/sfrpg/templates/actors/vehicle-sheet.html";
+        if (!game.user.isGM && this.actor.limited) return "systems/sfrpg/templates/actors/vehicle-sheet-limited.html";
+        return "systems/sfrpg/templates/actors/vehicle-sheet-full.html";
     }
 
     getData() {
