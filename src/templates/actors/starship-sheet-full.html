@@ -38,11 +38,11 @@
                         <label>{{data.attributes.hp.max}}</label>
                     </div>
                     <footer class="attribute-footer">
-                        <span data-tippy-content="This is the number of hull points that are added when the ship reaches tier 4 (and every 4 tiers after)">{{data.attributes.hp.increment}}</span>
+                        <span data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.HullPointIncrementTooltip"}}">{{data.attributes.hp.increment}}</span>
                     </footer>
                 </li>
                 <li class="attribute">
-                    <h4 class="attribute-name box-title">Statistics</h4>
+                    <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Statistics"}}</h4>
                     <ol class="attribute-multibox">
                         <li class="box-header flexrow">
                             <label></label>
@@ -51,7 +51,7 @@
                         </li>
                         <li class="flexrow" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.Power" }}<br/>@attributes.power.value<br/>@attributes.power.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.PowerConsumption" }}:<br/>{{#each data.attributes.power.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                             {{#if hasPower}}
-                            <label>PCU</label>
+                            <label>{{localize "SFRPG.StarshipSheet.Header.PCU"}}</label>
                             <label>{{data.attributes.power.value}}</label>
                             <label>{{data.attributes.power.max}}</label>
                             {{else}}
@@ -59,31 +59,31 @@
                             {{/if}}
                         </li>
                         <li class="flexrow" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}<br/>@attributes.bp.value<br/>@attributes.bp.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsUsage" }}:<br/>{{#each data.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>BP</label>
+                            <label>{{localize "SFRPG.StarshipSheet.Header.BP"}}</label>
                             <label>{{data.attributes.bp.value}}</label>
                             <label>{{data.attributes.bp.max}}</label>
                         </li>
                     </ol>
                 </li>
                 <li class="attribute">
-                    <h4 class="attribute-name box-title">Thresholds</h4>
+                    <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Thresholds"}}</h4>
                     <ol class="attribute-multibox">
                         <li class="box-header flexrow">
                             <label></label>
                             <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                         </li>
-                        <li class="flexrow" data-tippy-content="Damage Threshold<br/>@attributes.damageThreshold.value<br/><br/>{{#each data.attributes.damageThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>DT</label>
+                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.DamageThreshold"}}<br/>@attributes.damageThreshold.value<br/><br/>{{#each data.attributes.damageThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <label>{{localize "SFRPG.StarshipSheet.Header.DT"}}</label>
                             <label>{{data.attributes.damageThreshold.value}}</label>
                         </li>
-                        <li class="flexrow" data-tippy-content="Critical Threshold<br/>@attributes.criticalThreshold.value<br/><br/>{{#each data.attributes.criticalThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>CT</label>
+                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.CriticalThreshold"}}<br/>@attributes.criticalThreshold.value<br/><br/>{{#each data.attributes.criticalThreshold.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <label>{{localize "SFRPG.StarshipSheet.Header.CT"}}</label>
                             <label>{{data.attributes.criticalThreshold.value}}</label>
                         </li>
                     </ol>
                 </li>
                 <li class="attribute">
-                    <h4 class="attribute-name box-title" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{localize "SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip" maneuverability=(capitalize data.attributes.maneuverability)}}">Movement</h4>
+                    <h4 class="attribute-name box-title" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{localize "SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip" maneuverability=(capitalize data.attributes.maneuverability)}}">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
                     <ol class="attribute-multibox">
                         {{#if hasThrusters}}
                         <li class="box-header flexrow">
