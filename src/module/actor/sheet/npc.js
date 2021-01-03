@@ -68,13 +68,13 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
     _prepareItems(data) {
         const inventory = {
-            inventory: { label: "Inventory", items: [], dataset: { type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory" }, allowAdd: true }
+            inventory: { label: game.i18n.localize("SFRPG.NPCSheet.Inventory.Inventory"), items: [], dataset: { type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory" }, allowAdd: true }
         };
         const features = {
-            weapons: { label: "Attacks", items: [], hasActions: true, dataset: { type: "weapon,shield", "weapon-type": "natural" }, allowAdd: true },
-            actions: { label: "Actions", items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" }, allowAdd: true },
-            passive: { label: "Features", items: [], dataset: { type: "feat" }, allowAdd: true },
-            activeItems: { label: "Active Items", items: [], dataset: { }, allowAdd: false }
+            weapons: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Attacks"), items: [], hasActions: true, dataset: { type: "weapon,shield", "weapon-type": "natural" }, allowAdd: true },
+            actions: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Actions"), items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" }, allowAdd: true },
+            passive: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Features"), items: [], dataset: { type: "feat" }, allowAdd: true },
+            activeItems: { label: game.i18n.localize("SFRPG.NPCSheet.Features.ActiveItems"), items: [], dataset: { }, allowAdd: false }
         };
 
         let [spells, other, conditionItems] = data.items.reduce((arr, item) => {

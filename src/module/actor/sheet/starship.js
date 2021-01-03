@@ -238,7 +238,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      */
     _prepareItems(data) {
         const inventory = {
-            inventory: { label: "Inventory", items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
+            inventory: { label: game.i18n.localize("SFRPG.StarshipSheet.Inventory.Inventory"), items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
         };
 
         const starshipSystems = [
