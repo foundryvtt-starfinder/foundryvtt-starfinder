@@ -687,13 +687,16 @@ SFRPG.maneuverability = {
 // Starship Weapons
 SFRPG.starshipWeaponTypes = {
     "direct"  : "SFRPG.ShipSystems.StarshipWeaponTypes.Direct",
+    "ecm":      "SFRPG.ShipSystems.StarshipWeaponTypes.ECM",
+    "melee":    "SFRPG.ShipSystems.StarshipWeaponTypes.Melee",
     "tracking": "SFRPG.ShipSystems.StarshipWeaponTypes.Tracking"
 };
 
 SFRPG.starshipWeaponClass = {
     "light"  : "SFRPG.ShipSystems.StarshipWeaponClass.Light",
     "heavy"  : "SFRPG.ShipSystems.StarshipWeaponClass.Heavy",
-    "capital": "SFRPG.ShipSystems.StarshipWeaponClass.Capital"
+    "capital": "SFRPG.ShipSystems.StarshipWeaponClass.Capital",
+    "spinal":  "SFRPG.ShipSystems.StarshipWeaponClass.Spinal"
 };
 
 SFRPG.starshipWeaponProperties = {
