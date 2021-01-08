@@ -762,6 +762,7 @@ SFRPG.starshipArcs = {
 };
 
 SFRPG.starshipWeaponRanges = {
+    "none":   "SFRPG.ShipSystems.StarshipWeaponRanges.None",
     "short" : "SFRPG.ShipSystems.StarshipWeaponRanges.Short",
     "medium": "SFRPG.ShipSystems.StarshipWeaponRanges.Medium",
     "long"  : "SFRPG.ShipSystems.StarshipWeaponRanges.Long"
