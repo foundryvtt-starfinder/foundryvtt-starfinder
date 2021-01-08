@@ -687,6 +687,8 @@ SFRPG.maneuverability = {
 // Starship Weapons
 SFRPG.starshipWeaponTypes = {
     "direct"  : "SFRPG.ShipSystems.StarshipWeaponTypes.Direct",
+    "ecm":      "SFRPG.ShipSystems.StarshipWeaponTypes.ECM",
+    "melee":    "SFRPG.ShipSystems.StarshipWeaponTypes.Melee",
     "tracking": "SFRPG.ShipSystems.StarshipWeaponTypes.Tracking"
 };
 
