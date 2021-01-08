@@ -202,10 +202,12 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const numLightWeapons = items.filter(x => x.data.class === "light").length;
         const numHeavyWeapons = items.filter(x => x.data.class === "heavy").length;
         const numCapitalWeapons = items.filter(x => x.data.class === "capital").length;
+        const numSpinalWeapons = items.filter(x => x.data.class === "spinal").length;
 
         const maxLightWeapons = (mounts?.lightSlots || 0);
         const maxHeavyWeapons = (mounts?.heavySlots || 0);
         const maxCapitalWeapons = (mounts?.capitalSlots || 0);
+        const maxSpinalWeapons = (mounts?.spinalSlots || 0);
 
         let slots = "";
         if (numLightWeapons + maxLightWeapons > 0) {
@@ -222,6 +224,12 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 slots += ", ";
             }
             slots += game.i18n.format("SFRPG.StarshipSheet.Weapons.CapitalSlots", {current: numCapitalWeapons, max: maxCapitalWeapons});
+        }
+        if (numSpinalWeapons + maxSpinalWeapons > 0) {
+            if (slots !== "") {
+                slots += ", ";
+            }
+            slots += game.i18n.format("SFRPG.StarshipSheet.Weapons.SpinalSlots", {current: numSpinalWeapons, max: maxSpinalWeapons});
         }
         if (slots === "") {
             slots = game.i18n.format("SFRPG.StarshipSheet.Weapons.NotAvailable");

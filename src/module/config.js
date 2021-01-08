@@ -695,7 +695,8 @@ SFRPG.starshipWeaponTypes = {
 SFRPG.starshipWeaponClass = {
     "light"  : "SFRPG.ShipSystems.StarshipWeaponClass.Light",
     "heavy"  : "SFRPG.ShipSystems.StarshipWeaponClass.Heavy",
-    "capital": "SFRPG.ShipSystems.StarshipWeaponClass.Capital"
+    "capital": "SFRPG.ShipSystems.StarshipWeaponClass.Capital",
+    "spinal":  "SFRPG.ShipSystems.StarshipWeaponClass.Spinal"
 };
 
 SFRPG.starshipWeaponProperties = {
