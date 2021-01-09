@@ -851,7 +851,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             item: item,
             tokenId: this.actor.token?.id,
             action: "SFRPG.ChatCard.ItemActivation.Reloads",
-            cost: game.i18n.format("SFRPG.AbilityActivationTypesMove")
+            cost: game.i18n.localize("SFRPG.Items.ShipWeapon.ReloadCost")
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.html`;
