@@ -70,6 +70,7 @@ export class DiceSFRPG {
 
             finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
             finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ");
 
             let roll = new Roll(finalFormula.finalRoll).roll();
 
@@ -291,6 +292,8 @@ export class DiceSFRPG {
                     }
                 }
             }
+            
+            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ");
 
             let roll = new Roll(finalFormula.finalRoll).roll();
             
@@ -578,8 +581,6 @@ class RollNode {
                 formula: ""
             };
 
-            const enabledChildNodes = Object.values(this.childNodes).filter(x => x.isEnabled);
-
             if (this.isVariable && !this.baseValue) {
                 this.baseValue = "0";
             }
@@ -587,10 +588,11 @@ class RollNode {
             if (this.baseValue) {
                 if (this.baseValue !== "n/a") {
                     this.resolvedValue.finalRoll = this.baseValue;
-                    this.resolvedValue.formula = "@" + this.formula;
+                    this.resolvedValue.formula = this.baseValue + "[" + (this.referenceModifier?.name || "@" + this.formula) + "]";
                 }
 
                 // formula
+                const enabledChildNodes = Object.values(this.childNodes).filter(x => x.isEnabled);
                 for (const childNode of enabledChildNodes) {
                     const childResolution = childNode.resolve(depth + 1);
                     if (this.resolvedValue.finalRoll !== "") {
@@ -601,7 +603,12 @@ class RollNode {
                     if (this.resolvedValue.formula !== "") {
                         this.resolvedValue.formula += " + ";
                     }
-                    this.resolvedValue.formula += childNode.referenceModifier ? `[${childNode.referenceModifier.name}]` : childResolution.formula;
+
+                    if (childResolution.formula.endsWith("]")) {
+                        this.resolvedValue.formula += childResolution.formula;
+                    } else {
+                        this.resolvedValue.formula += childResolution.formula + `[${childNode.referenceModifier.name}]`;
+                    }
                 }
             } else {
                 let valueString = this.formula;
