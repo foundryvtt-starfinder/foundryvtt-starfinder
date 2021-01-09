@@ -300,6 +300,18 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         }
         data.inventoryValue = Math.floor(totalValue);
 
+        const weapons = [].concat(forward, starboard, port, aft, turret);
+        for (const weapon of weapons) {
+            weapon.hasCapacity = (
+                weapon.data.weaponType === "tracking"
+                || weapon.data.special["mine"]
+                || weapon.data.special["transposition"]
+                || weapon.data.special["orbital"]
+                || weapon.data.special["rail"]
+                || weapon.data.special["forcefield"]
+            );
+        }
+
         const weaponMounts = this.actor.data.data.frame?.data?.weaponMounts;
         const hasForward = weaponMounts?.forward?.lightSlots || weaponMounts?.forward?.heavySlots || weaponMounts?.forward?.capitalSlots;
         const hasStarboard = weaponMounts?.starboard?.lightSlots || weaponMounts?.starboard?.heavySlots || weaponMounts?.starboard?.capitalSlots;
@@ -420,6 +432,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         html.find('.crew-skill-ranks').change(this._onCrewSkillRanksChanged.bind(this));
 
         html.find('.critical-edit').click(this._onEditAffectedCriticalRoles.bind(this));
+
+        html.find('.reload').click(this._onWeaponReloadClicked.bind(this));
     }
 
     /** @override */
@@ -823,6 +837,36 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         };
 
         await this.actor.update({[`data.attributes.systems.${affectedSystem}`]: currentSystem});
+    }
+
+    async _onWeaponReloadClicked(event) {
+        event.preventDefault();
+        
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        // Render the chat card template
+        const templateData = {
+            actor: this.actor,
+            item: item,
+            tokenId: this.actor.token?.id,
+            action: "SFRPG.ChatCard.ItemActivation.Reloads",
+            cost: game.i18n.format("SFRPG.AbilityActivationTypesMove")
+        };
+
+        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+        const html = await renderTemplate(template, templateData);
+
+        // Create the chat message
+        const chatData = {
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: html
+        };
+
+        await ChatMessage.create(chatData, { displaySheet: false });
+        
+        return item.update({'data.capacity.value': item.data.data.capacity.max});
     }
 
     /**

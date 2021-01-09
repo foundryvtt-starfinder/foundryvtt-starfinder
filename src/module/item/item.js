@@ -470,7 +470,8 @@ export class ItemSFRPG extends Item {
             data.weaponType ? CONFIG.SFRPG.starshipWeaponTypes[data.weaponType] : null,
             data.class ? CONFIG.SFRPG.starshipWeaponClass[data.class] : null,
             data.range ? CONFIG.SFRPG.starshipWeaponRanges[data.range] : null,
-            data.mount.mounted ? game.i18n.localize("SFRPG.ShipWeapon.Mounted") : game.i18n.localize("SFRPG.ShipWeapon.NotMounted")
+            data.mount.mounted ? game.i18n.localize("SFRPG.Items.ShipWeapon.Mounted") : game.i18n.localize("SFRPG.Items.ShipWeapon.NotMounted"),
+            data.speed > 0 ? game.i18n.format("SFRPG.Items.ShipWeapon.Speed", {speed: data.speed}) : null
         );
     }
 
@@ -647,7 +648,7 @@ export class ItemSFRPG extends Item {
         // Add hasSave to roll
         itemData.hasSave = this.hasSave;
         itemData.hasDamage = this.hasDamage;
-        itemData.hasCapacity = this.data.hasCapacity;
+        itemData.hasCapacity = this.hasCapacity();
 
         rollData.item = itemData;
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: itemData.name});
@@ -762,6 +763,13 @@ export class ItemSFRPG extends Item {
         const parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
 
         const title = game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
+        
+        if (this.hasCapacity()) {
+            if (this.data.data.capacity.value <= 0) {
+                ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
+                return false;
+            }
+        }
 
         /** Build the roll context */
         const rollContext = new RollContext();
@@ -801,6 +809,13 @@ export class ItemSFRPG extends Item {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
                     if (rollDamageWithAttack) {
                         this.rollDamage({});
+                    }
+
+                    if (this.hasCapacity()) {
+                        this.actor.updateEmbeddedEntity("OwnedItem", {
+                            _id: this.data._id,
+                            "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
+                        }, {});
                     }
                 }
             }
@@ -1283,5 +1298,22 @@ export class ItemSFRPG extends Item {
         const modifier = modifiers.find(mod => mod._id === id);
 
         new SFRPGModifierApplication(modifier, this, {}, this.actor).render(true);
+    }
+
+    /**
+     * Checks if this item has capacity.
+     */
+    hasCapacity() {
+        if (this.type === "starshipWeapon") {
+            return (
+                this.data.data.weaponType === "tracking"
+                || this.data.data.special["mine"]
+                || this.data.data.special["transposition"]
+                || this.data.data.special["orbital"]
+                || this.data.data.special["rail"]
+                || this.data.data.special["forcefield"]
+            );
+        }
+        return this.data.hasCapacity;
     }
 }
