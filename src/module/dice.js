@@ -310,14 +310,6 @@ export class DiceSFRPG {
                 }
             }
 
-            // Flag critical thresholds
-            for (let d of roll.dice) {
-                if (d.faces === 20) {
-                    d.options.critical = critical;
-                    d.options.fumble = fumble;
-                }
-            }
-
             if (game.settings.get("sfrpg", "useCustomChatCards")) {
                 //Push the roll to the ChatBox
                 const customData = {
