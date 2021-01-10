@@ -70,13 +70,11 @@ export default class SFRPGCustomChatMessage {
         const hasCapacity = item.hasCapacity();
         const ammoLeft = hasCapacity ? this.getAmmoLeft(item.data) : null;
         const options = {
-            item: item ? item : {},
-            hasAttack: item.hasAttack ? item.hasAttack : false,
-            hasDamage: item.hasDamage ? item.hasDamage : false,
+            item: item,
+            hasDamage: item.hasDamage || false,
+            hasSave: item.hasSave || false,
             hasCapacity: hasCapacity,
             ammoLeft: ammoLeft,
-            isVersatile: item.isVersatile ? item.isVersatile : false,
-            hasSave: item.hasSave ? item.hasSave : false,
             title: data.title ? data.title : 'Roll',
             rawTitle: data.speaker.alias,
             dataRoll: roll,
@@ -93,15 +91,14 @@ export default class SFRPGCustomChatMessage {
     }
 
     static async _render(roll, data, options) {
-        /** Render the roll */
         const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
-        const content = await renderTemplate(templateName, options);
-        const customRoll = await roll.render();
+        const cardContent = await renderTemplate(templateName, options);
+        const rollContent = await roll.render();
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
 
         ChatMessage.create({
             speaker: data.speaker,
-            content: content + customRoll, //push the diceRoll at the end of the template
+            content: cardContent + rollContent,
             rollMode: rollMode,
             roll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
