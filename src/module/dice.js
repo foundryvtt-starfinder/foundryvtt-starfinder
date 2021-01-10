@@ -114,7 +114,7 @@ export class DiceSFRPG {
             if (!useCustomCard) {
                 roll.toMessage({
                     speaker: speaker,
-                    flavor: flavor,
+                    flavor: title,
                     rollMode: rollMode
                 });
             }
@@ -354,7 +354,7 @@ export class DiceSFRPG {
             if (!useCustomCard) {
                 roll.toMessage({
                     speaker: speaker,
-                    flavor: flavor,
+                    flavor: title,
                     rollMode: rollMode
                 });
             }
