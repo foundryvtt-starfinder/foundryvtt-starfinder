@@ -760,7 +760,7 @@ export class ItemSFRPG extends Item {
     async _rollStarshipAttack(options = {}) {
         const parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
 
-        const title = game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
+        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
         
         if (this.hasCapacity()) {
             if (this.data.data.capacity.value <= 0) {
@@ -915,8 +915,20 @@ export class ItemSFRPG extends Item {
             mod: actorData.abilities[abl].mod
         });
 
-        let rollString = isHealing ? game.i18n.localize("SFRPG.ChatCard.HealingRoll") : game.i18n.localize("SFRPG.ChatCard.DamageRoll");
-        const title    = game.settings.get('sfrpg', 'useCustomChatCards') ? rollString : `${rollString} - ${this.data.name}`;
+        let title = '';
+        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
+            if (isHealing) {
+                title = game.i18n.localize("SFRPG.Rolls.HealingRoll");
+            } else {
+                title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
+            }
+        } else {
+            if (isHealing) {
+                title = game.i18n.format("SFRPG.Rolls.HealingRollFull", {name: this.data.name});
+            } else {
+                title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.data.name});
+            }
+        }
         
         const rollContext = new RollContext();
         rollContext.addContext("owner", this.actor, rollData);
@@ -964,7 +976,12 @@ export class ItemSFRPG extends Item {
 
         const parts = itemData.damage.parts.map(d => d[0]);
 
-        const title = `${this.name} - Damage Roll`;
+        let title = '';
+        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
+            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
+        } else {
+            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
+        }
 
         /** Build the roll context */
         const rollContext = new RollContext();
