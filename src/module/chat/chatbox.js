@@ -61,12 +61,6 @@ export default class SFRPGCustomChatMessage {
         }
 
         /** Set up variables */
-        if (data.speaker.alias) {
-            data.speaker.alias = data.speaker.alias.length >= 13 ? data.speaker.alias.substr(0, 11) + '...' : data.speaker.alias
-        } else {
-            data.speaker.alias = '';
-        }
-
         const hasCapacity = item.hasCapacity();
         const ammoLeft = hasCapacity ? this.getAmmoLeft(item.data) : null;
         const options = {
@@ -97,6 +91,7 @@ export default class SFRPGCustomChatMessage {
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
 
         ChatMessage.create({
+            flavor: data.title,
             speaker: data.speaker,
             content: cardContent + rollContent,
             rollMode: rollMode,
