@@ -23,8 +23,6 @@ export class DiceSFRPG {
     static d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true,
         critical = 20, fumble = 1, onClose, dialogOptions }) {
         
-        flavor = flavor || title;
-
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
             return null;
@@ -70,6 +68,7 @@ export class DiceSFRPG {
 
             finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
             finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ");
 
             let roll = new Roll(finalFormula.finalRoll).roll();
 
@@ -81,29 +80,51 @@ export class DiceSFRPG {
                 }
             }
 
-            if (game.settings.get("sfrpg", "useCustomChatCards")) {
+            if (flavor) {
+                const chatData = {
+                    type: CONST.CHAT_MESSAGE_TYPES.IC,
+                    speaker: speaker,
+                    content: flavor
+                };
+        
+                ChatMessage.create(chatData, { chatBubble: true });
+            }
+
+            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
+            let errorToThrow = null;
+            if (useCustomCard) {
                 //Push the roll to the ChatBox
                 const customData = {
-                    'title': title,
-                    'rollContext':  rollContext,
-                    'flavor': flavor,
-                    'speaker': speaker,
-                    'rollMode': rollMode
+                    title: title,
+                    rollContext:  rollContext,
+                    speaker: speaker,
+                    rollMode: rollMode
                 };
 
                 const action = title.replace(/\s/g, '-').toLowerCase();
 
-                SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
-            } else {
+                try {
+                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
+                } catch (error) {
+                    useCustomCard = false;
+                    errorToThrow = error;
+                }
+            }
+            
+            if (!useCustomCard) {
                 roll.toMessage({
                     speaker: speaker,
-                    flavor: flavor,
+                    flavor: title,
                     rollMode: rollMode
                 });
             }
 
             if (onClose) {
                 onClose(roll, formula, finalFormula);
+            }
+
+            if (errorToThrow) {
+                throw errorToThrow;
             }
         });
     }
@@ -291,6 +312,8 @@ export class DiceSFRPG {
                     }
                 }
             }
+            
+            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ");
 
             let roll = new Roll(finalFormula.finalRoll).roll();
             
@@ -307,37 +330,41 @@ export class DiceSFRPG {
                 }
             }
 
-            // Flag critical thresholds
-            for (let d of roll.dice) {
-                if (d.faces === 20) {
-                    d.options.critical = critical;
-                    d.options.fumble = fumble;
-                }
-            }
-
-            if (game.settings.get("sfrpg", "useCustomChatCards")) {
+            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
+            let errorToThrow = null;
+            if (useCustomCard) {
                 //Push the roll to the ChatBox
                 const customData = {
-                    'title': title,
-                    'rollContext':  rollContext,
-                    'flavor': flavor,
-                    'speaker': speaker,
-                    'rollMode': rollMode
+                    title: title,
+                    rollContext:  rollContext,
+                    speaker: speaker,
+                    rollMode: rollMode
                 };
 
                 const action = title.replace(/\s/g, '-').toLowerCase();
 
-                SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
-            } else {
+                try {
+                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
+                } catch (error) {
+                    useCustomCard = false;
+                    errorToThrow = error;
+                }
+            }
+            
+            if (!useCustomCard) {
                 roll.toMessage({
                     speaker: speaker,
-                    flavor: flavor,
+                    flavor: title,
                     rollMode: rollMode
                 });
             }
 
             if (onClose) {
                 onClose(roll, formula, finalFormula);
+            }
+
+            if (errorToThrow) {
+                throw errorToThrow;
             }
         });
     }
@@ -578,8 +605,6 @@ class RollNode {
                 formula: ""
             };
 
-            const enabledChildNodes = Object.values(this.childNodes).filter(x => x.isEnabled);
-
             if (this.isVariable && !this.baseValue) {
                 this.baseValue = "0";
             }
@@ -587,10 +612,11 @@ class RollNode {
             if (this.baseValue) {
                 if (this.baseValue !== "n/a") {
                     this.resolvedValue.finalRoll = this.baseValue;
-                    this.resolvedValue.formula = "@" + this.formula;
+                    this.resolvedValue.formula = this.baseValue + "[" + (this.referenceModifier?.name || "@" + this.formula) + "]";
                 }
 
                 // formula
+                const enabledChildNodes = Object.values(this.childNodes).filter(x => x.isEnabled);
                 for (const childNode of enabledChildNodes) {
                     const childResolution = childNode.resolve(depth + 1);
                     if (this.resolvedValue.finalRoll !== "") {
@@ -601,7 +627,12 @@ class RollNode {
                     if (this.resolvedValue.formula !== "") {
                         this.resolvedValue.formula += " + ";
                     }
-                    this.resolvedValue.formula += childNode.referenceModifier ? `[${childNode.referenceModifier.name}]` : childResolution.formula;
+
+                    if (childResolution.formula.endsWith("]")) {
+                        this.resolvedValue.formula += childResolution.formula;
+                    } else {
+                        this.resolvedValue.formula += childResolution.formula + `[${childNode.referenceModifier.name}]`;
+                    }
                 }
             } else {
                 let valueString = this.formula;
@@ -820,8 +851,10 @@ class RollDialog extends Dialog
     
     async close(options) {
         /** Fire callback, then delete, as it would get called again by Dialog#close. */
-        this.data.close(this.rolledButton, this.rollMode, this.additionalBonus);
-        delete this.data.close;
+        if (this.data.close) {
+            this.data.close(this.rolledButton, this.rollMode, this.additionalBonus);
+            delete this.data.close;
+        }
 
         return super.close(options);
     }
