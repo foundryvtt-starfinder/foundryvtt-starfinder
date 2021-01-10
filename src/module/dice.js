@@ -23,8 +23,6 @@ export class DiceSFRPG {
     static d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true,
         critical = 20, fumble = 1, onClose, dialogOptions }) {
         
-        flavor = flavor || title;
-
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
             return null;
@@ -96,9 +94,19 @@ export class DiceSFRPG {
 
                 SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
             } else {
+                if (flavor) {
+                    const chatData = {
+                        type: CONST.CHAT_MESSAGE_TYPES.IC,
+                        speaker: speaker,
+                        content: flavor
+                    };
+            
+                    ChatMessage.create(chatData, { chatBubble: true });
+                }
+
                 roll.toMessage({
                     speaker: speaker,
-                    flavor: flavor,
+                    flavor: title,
                     rollMode: rollMode
                 });
             }
