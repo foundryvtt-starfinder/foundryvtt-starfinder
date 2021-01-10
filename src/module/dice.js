@@ -80,6 +80,16 @@ export class DiceSFRPG {
                 }
             }
 
+            if (flavor) {
+                const chatData = {
+                    type: CONST.CHAT_MESSAGE_TYPES.IC,
+                    speaker: speaker,
+                    content: flavor
+                };
+        
+                ChatMessage.create(chatData, { chatBubble: true });
+            }
+
             if (game.settings.get("sfrpg", "useCustomChatCards")) {
                 //Push the roll to the ChatBox
                 const customData = {
@@ -94,16 +104,6 @@ export class DiceSFRPG {
 
                 SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
             } else {
-                if (flavor) {
-                    const chatData = {
-                        type: CONST.CHAT_MESSAGE_TYPES.IC,
-                        speaker: speaker,
-                        content: flavor
-                    };
-            
-                    ChatMessage.create(chatData, { chatBubble: true });
-                }
-
                 roll.toMessage({
                     speaker: speaker,
                     flavor: title,
