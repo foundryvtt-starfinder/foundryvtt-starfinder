@@ -851,8 +851,10 @@ class RollDialog extends Dialog
     
     async close(options) {
         /** Fire callback, then delete, as it would get called again by Dialog#close. */
-        this.data.close(this.rolledButton, this.rollMode, this.additionalBonus);
-        delete this.data.close;
+        if (this.data.close) {
+            this.data.close(this.rolledButton, this.rollMode, this.additionalBonus);
+            delete this.data.close;
+        }
 
         return super.close(options);
     }
