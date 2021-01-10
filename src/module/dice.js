@@ -90,29 +90,41 @@ export class DiceSFRPG {
                 ChatMessage.create(chatData, { chatBubble: true });
             }
 
-            if (game.settings.get("sfrpg", "useCustomChatCards")) {
+            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
+            let errorToThrow = null;
+            if (useCustomCard) {
                 //Push the roll to the ChatBox
                 const customData = {
-                    'title': title,
-                    'rollContext':  rollContext,
-                    'flavor': flavor,
-                    'speaker': speaker,
-                    'rollMode': rollMode
+                    title: title,
+                    rollContext:  rollContext,
+                    speaker: speaker,
+                    rollMode: rollMode
                 };
 
                 const action = title.replace(/\s/g, '-').toLowerCase();
 
-                SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
-            } else {
+                try {
+                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
+                } catch (error) {
+                    useCustomCard = false;
+                    errorToThrow = error;
+                }
+            }
+            
+            if (!useCustomCard) {
                 roll.toMessage({
                     speaker: speaker,
-                    flavor: title,
+                    flavor: flavor,
                     rollMode: rollMode
                 });
             }
 
             if (onClose) {
                 onClose(roll, formula, finalFormula);
+            }
+
+            if (errorToThrow) {
+                throw errorToThrow;
             }
         });
     }
@@ -318,20 +330,28 @@ export class DiceSFRPG {
                 }
             }
 
-            if (game.settings.get("sfrpg", "useCustomChatCards")) {
+            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
+            let errorToThrow = null;
+            if (useCustomCard) {
                 //Push the roll to the ChatBox
                 const customData = {
-                    'title': title,
-                    'rollContext':  rollContext,
-                    'flavor': flavor,
-                    'speaker': speaker,
-                    'rollMode': rollMode
+                    title: title,
+                    rollContext:  rollContext,
+                    speaker: speaker,
+                    rollMode: rollMode
                 };
 
                 const action = title.replace(/\s/g, '-').toLowerCase();
 
-                SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
-            } else {
+                try {
+                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
+                } catch (error) {
+                    useCustomCard = false;
+                    errorToThrow = error;
+                }
+            }
+            
+            if (!useCustomCard) {
                 roll.toMessage({
                     speaker: speaker,
                     flavor: flavor,
@@ -341,6 +361,10 @@ export class DiceSFRPG {
 
             if (onClose) {
                 onClose(roll, formula, finalFormula);
+            }
+
+            if (errorToThrow) {
+                throw errorToThrow;
             }
         });
     }

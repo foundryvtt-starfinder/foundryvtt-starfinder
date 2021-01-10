@@ -4,19 +4,16 @@
 export default class SFRPGCustomChatMessage {
 
     static getAmmoLeft(itemData) {
-        if (itemData.capacity.value > 0) {
-            const finalAmmo = itemData.capacity.value - itemData.usage.value;
+        if (itemData.data.capacity.value > 0) {
+            const usage = itemData.data.usage?.value || 1;
+            const finalAmmo = itemData.data.capacity.value - usage;
             return (finalAmmo >= 0) ? finalAmmo : 0;
         }
 
         return null;
     }
 
-    static hasCapacity(itemData) {
-        return itemData.capacity > 0 ? itemData.capacity : 0;
-    }
-
-    static createToken(actor) {
+    static getToken(actor) {
         if (actor.token) {
             return `${actor.token.scene.data._id}.${actor.token.data._id}`;
         } else if (canvas.tokens.controlled[0]?.id) {
@@ -43,55 +40,72 @@ export default class SFRPGCustomChatMessage {
      * @param {object} data The data for the roll
      * @param {string} action The action being taken
      */
-    static async renderStandardRoll(roll, data, action) {
-        //Get the template
-        const temmplateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
-        //get Actor
+    static renderStandardRoll(roll, data, action) {
+        /** Get entities */
         const mainContext = data.rollContext.mainContext ? data.rollContext.allContexts[data.rollContext.mainContext] : null;
+        
         let actor = data.rollContext.allContexts['actor'] ? data.rollContext.allContexts['actor'].entity : mainContext?.entity;
         if (!actor) {
             actor = data.rollContext.allContexts['ship'] ? data.rollContext.allContexts['ship'].entity : mainContext?.entity;
+            if (!actor) {
+                return false;
+            }
         }
+        
         let item = data.rollContext.allContexts['item'] ? data.rollContext.allContexts['item'].entity : mainContext?.entity;
         if (!item) {
             item = data.rollContext.allContexts['weapon'] ? data.rollContext.allContexts['weapon'].entity : mainContext?.entity;
+            if (!item) {
+                return false;
+            }
         }
-        //Render the roll
-        const customRoll = await roll.render();
-        const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
 
+        /** Set up variables */
         if (data.speaker.alias) {
             data.speaker.alias = data.speaker.alias.length >= 13 ? data.speaker.alias.substr(0, 11) + '...' : data.speaker.alias
         } else {
             data.speaker.alias = '';
         }
 
-        const content = await renderTemplate(temmplateName, {
+        const hasCapacity = item.hasCapacity();
+        const ammoLeft = hasCapacity ? this.getAmmoLeft(item.data) : null;
+        const options = {
+            item: item ? item : {},
             hasAttack: item.hasAttack ? item.hasAttack : false,
             hasDamage: item.hasDamage ? item.hasDamage : false,
+            hasCapacity: hasCapacity,
+            ammoLeft: ammoLeft,
             isVersatile: item.isVersatile ? item.isVersatile : false,
             hasSave: item.hasSave ? item.hasSave : false,
             title: data.title ? data.title : 'Roll',
             rawTitle: data.speaker.alias,
-            item: item ? item : {},
-            ammoLeft: item.hasCapacity ? this.getAmmoLeft(item.data) : null,
-            flavor: data.flavor ? data.flavor : '',
             dataRoll: roll,
             type: CHAT_MESSAGE_TYPES.ROLL,
             config: CONFIG.STARFINDER,
             tokenImg: actor.data.token?.img || actor.img,
             actorId: actor._id,
-            tokenId: this.createToken(actor),
-        });
-        
+            tokenId: this.getToken(actor)
+        };
+
+        SFRPGCustomChatMessage._render(roll, data, options);
+
+        return true;
+    }
+
+    static async _render(roll, data, options) {
+        /** Render the roll */
+        const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
+        const content = await renderTemplate(templateName, options);
+        const customRoll = await roll.render();
+        const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
+
         ChatMessage.create({
-            //flavor: flavor,
             speaker: data.speaker,
             content: content + customRoll, //push the diceRoll at the end of the template
             rollMode: rollMode,
-            rollModes: CONFIG.Dice.rollModes,
             roll: roll,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL
+            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            sound: CONFIG.sounds.dice
         });
     }
 }
