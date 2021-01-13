@@ -621,7 +621,7 @@ export class ItemSFRPG extends Item {
                 return;
             }
             let computedBonus = bonus.modifier;
-            parts.push(computedBonus);
+            parts.push({score: computedBonus, explanation: bonus.name});
             return computedBonus;
         };
 
@@ -1036,15 +1036,37 @@ export class ItemSFRPG extends Item {
         }
 
         // Define Roll Data
-        const rollData = duplicate(actorData);
-        rollData.item = itemData;
-        const title = `Other Formula`;
+        const rollContext = new RollContext();
+        rollContext.addContext("item", this, itemData);
+        rollContext.setMainContext("item");
+        if (this.actor) {
+            rollContext.addContext("owner", this.actor);
+            rollContext.setMainContext("owner");
+        }
 
-        const roll = new Roll(itemData.formula, rollData).roll();
-        return roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            flavor: itemData.chatFlavor || title,
-            rollMode: game.settings.get("core", "rollMode")
+        this.actor?.setupRollContexts(rollContext);
+    
+        const title = `Other Formula`;
+        const rollResult = await DiceSFRPG.createRoll({
+            rollContext: rollContext,
+            rollFormula: itemData.formula,
+            title: title
+        });
+
+        const preparedRollExplanation = rollResult.formula.formula.replace(/\+/gi, "<br/> +").replace(/-/gi, "<br/> -");
+        rollResult.roll.render().then((rollContent) => {
+            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+            const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+    
+            ChatMessage.create({
+                flavor: itemData.chatFlavor || title,
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                content: explainedRollContent,
+                rollMode: game.settings.get("core", "rollMode"),
+                roll: rollResult.roll,
+                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                sound: CONFIG.sounds.dice
+            });
         });
     }
 

@@ -577,6 +577,7 @@ export class CombatSFRPG extends Combat {
             title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
         });
 
+        rollResult.roll.flags = { sfrpg: { finalFormula: rollResult.formula } };
         return rollResult.roll;
     }
 
@@ -618,11 +619,27 @@ export class CombatSFRPG extends Combat {
           flavor: `${c.token.name} rolls for Initiative!`,
           flags: {"core.initiativeRoll": true}
         }, messageOptions);
-        const chatData = roll.toMessage(messageData, {rollMode, create:false});
-        if ( isFirst ) {
+
+        const preparedRollExplanation = roll.flags.sfrpg.finalFormula.formula.replace(/\+/gi, "<br/> +").replace(/-/gi, "<br/> -");
+        const rollContent = await roll.render();
+        const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+        const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+
+        const chatData = {
+            flavor: messageData.flavor,
+            speaker: messageData.speaker,
+            flags: messageData.flags,
+            content: explainedRollContent,
+            rollMode: rollMode,
+            roll: roll,
+            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            sound: CONFIG.sounds.dice
+        };
+
+        if ( !isFirst ) {
             chatData.sound = null;   // Only play 1 sound for the whole set
-            isFirst = false;
         }
+        isFirst = false;
         messages.push(chatData);
       }
       
