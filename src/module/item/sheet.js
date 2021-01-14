@@ -160,7 +160,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         data.modifiers = this.item.data.data.modifiers;
 
-        data.hasSpeed = this.item.data.data.weaponType === "tracking" || this.item.data.data.special["limited"];
+        data.hasSpeed = this.item.data.data.weaponType === "tracking" || (this.item.data.data.special && this.item.data.data.special["limited"]);
         data.hasCapacity = this.item.hasCapacity();
 
         return data;
