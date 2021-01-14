@@ -620,7 +620,7 @@ export class CombatSFRPG extends Combat {
           flags: {"core.initiativeRoll": true}
         }, messageOptions);
 
-        const preparedRollExplanation = roll.flags.sfrpg.finalFormula.formula.replace(/\+/gi, "<br/> +").replace(/-/gi, "<br/> -");
+        const preparedRollExplanation = DiceSFRPG.formatFormula(roll.flags.sfrpg.finalFormula.formula);
         const rollContent = await roll.render();
         const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
         const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
