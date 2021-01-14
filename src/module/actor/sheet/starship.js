@@ -309,6 +309,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 || weapon.data.special["orbital"]
                 || weapon.data.special["rail"]
                 || weapon.data.special["forcefield"]
+                || weapon.data.special["limited"]
             );
         }
 
