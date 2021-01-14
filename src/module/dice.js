@@ -367,7 +367,7 @@ export class DiceSFRPG {
                     const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
             
                     ChatMessage.create({
-                        flavor: title,
+                        flavor: flavor,
                         speaker: speaker,
                         content: explainedRollContent,
                         rollMode: rollMode,
