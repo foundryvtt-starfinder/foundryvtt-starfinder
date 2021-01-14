@@ -205,15 +205,35 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         const items = [];
         const itemsToMove = [{item: itemToMove, parent: null}];
         while (itemsToMove.length > 0) {
-            const itemToMove = itemsToMove.shift();
-            const contents = getChildItems(sourceActor, itemToMove.item);
+            const itemToCreate = itemsToMove.shift();
+            const contents = getChildItems(sourceActor, itemToCreate.item);
             if (contents) {
                 for (const contentItem of contents) {
-                    itemsToMove.push({item: contentItem, parent: itemToMove});
+                    itemsToMove.push({item: contentItem, parent: itemToCreate});
                 }
             }
 
-            items.push({item: itemToMove.item, children: contents, parent: itemToMove.parent});
+            const duplicatedData = duplicate(itemToCreate.item);
+            if (duplicatedData.data.equipped) {
+                duplicatedData.data.equipped = false;
+            }
+            
+            items.push({item: duplicatedData, children: contents, parent: itemToCreate.parent});
+        }
+
+        if (targetItem) {
+            if (canMerge(targetItem, itemToMove)) {
+                const createResult = await targetActor.updateOwnedItem({ _id: targetItem._id, 'data.quantity': parseInt(targetItem.data.data.quantity) + parseInt(quantity)});
+                
+                if (isFullMove) {
+                    const itemsToRemove = items.map(x => x.item._id);
+                    await sourceActor.deleteOwnedItem(itemsToRemove);
+                } else {
+                    await sourceActor.updateOwnedItem({_id: itemToMove.id, 'data.quantity': itemToMove.data.data.quantity - quantity});
+                }
+
+                return createResult;
+            }
         }
 
         /** Add new items to target actor. */
@@ -225,7 +245,11 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             targetActor.token.sheet.stopRendering = true;
         }
 
-        const createResult = await targetActor.createOwnedItem(itemData);
+        /** Ensure the original to-move item has the quantity correct. */
+        itemData[0].data.quantity = quantity;
+
+        const createOwnedItemResult = await targetActor.createOwnedItem(itemData);
+        const createResult = createOwnedItemResult instanceof Array ? createOwnedItemResult : [createOwnedItemResult];
         if (targetActor.actor?.sheet) {
             targetActor.actor.sheet.stopRendering = false;
         }
@@ -239,8 +263,9 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             const itemToUpdate = createResult[i];
 
             if (itemToTest.children && itemToTest.children.length > 0) {
-                const indexMap = itemToTest.item.data.data.container.contents.map(x => items.indexOf(items.find(y => y.item._id == x.id)));
+                const indexMap = itemToTest.item.data.container.contents.map(x => items.indexOf(items.find(y => y.item._id == x.id)));
                 const newContents = duplicate(itemToUpdate.data.container.contents);
+
                 for (let j = 0; j<indexMap.length; j++) {
                     const index = indexMap[j];
                     newContents[j].id = createResult[index]._id;
@@ -249,7 +274,36 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
         }
 
+        let desiredParent = null;
+        let desiredStorageIndex = null;
+        if (targetItem) {
+            if (acceptsItem(targetItem, itemToMove, targetActor)) {
+                desiredParent = targetItem;
+                desiredStorageIndex = targetItemStorageIndex;
+            } else {
+                let targetsParent = targetActor.findItem(x => x.data.data.container?.contents && x.data.data.container.contents.find( y => y.id === targetItem._id));
+                if (targetsParent) {
+                    if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
+                        desiredParent = targetsParent;
+                        desiredStorageIndex = getFirstAcceptableStorageIndex(desiredParent, itemToMove);
+                    }
+                }
+            }
+        }
+
+        if (desiredParent) {
+            const newContents = duplicate(desiredParent.data.data.container?.contents || []);
+            newContents.push({id: createResult[0]._id, index: desiredStorageIndex || 0});
+            updatesToPerform.push({_id: desiredParent._id, "data.container.contents": newContents});
+        }
+
         await targetActor.updateOwnedItem(updatesToPerform);
+        if (targetActor.actor?.sheet) {
+            targetActor.actor.sheet.render(false);
+        }
+        if (targetActor.token?.sheet) {
+            targetActor.token.sheet.render(false);
+        }
 
         /** Delete all items from source actor. */
         if (isFullMove) {
@@ -726,19 +780,21 @@ export class ActorItemHelper {
     /**
      * Wrapper around actor.createOwnedItem.
      * @param {Object} itemData Data for item to create.
-     * @returns The newly created item.
+     * @returns An array of newly created items.
      */
     async createOwnedItem(itemData) {
         if (!this.actor) return null;
 
         let newItem = null;
         if (this.actor.isToken) {
-            const  created = await Entity.prototype.createEmbeddedEntity.call(this.actor, "OwnedItem", itemData, {temporary: true});
-            const items = duplicate(this.actor.data.items).concat(created instanceof Array ? created : [created]);
+            const created = await Entity.prototype.createEmbeddedEntity.call(this.actor, "OwnedItem", itemData, {temporary: true});
+            const createResult = created instanceof Array ? created : [created];
+            const items = duplicate(this.actor.data.items).concat(createResult);
             await this.actor.token.update({"actorData.items": items}, {});
-            newItem = this.getOwnedItem(created._id);
+            newItem = createResult;
         } else {
-            newItem = await this.actor.createOwnedItem(itemData);
+            const createResult = await this.actor.createOwnedItem(itemData);
+            newItem = createResult instanceof Array ? createResult : [createResult];
         }
 
         return newItem;
