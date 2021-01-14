@@ -1024,7 +1024,7 @@ export class ActorSFRPG extends Actor {
         }
 
         const rollMode = game.settings.get("core", "rollMode");
-        const preparedRollExplanation = rollResult.formula.formula.replace(/\+/gi, "<br/> +").replace(/-/gi, "<br/> -");
+        const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
         rollResult.roll.render().then((rollContent) => {
             const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
             const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
