@@ -248,6 +248,11 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         /** Ensure the original to-move item has the quantity correct. */
         itemData[0].data.quantity = quantity;
 
+        if (itemData.length != items.length) {
+            console.log(['Mismatch in item count', itemData, items]);
+            return;
+        }
+
         const createOwnedItemResult = await targetActor.createOwnedItem(itemData);
         const createResult = createOwnedItemResult instanceof Array ? createOwnedItemResult : [createOwnedItemResult];
         if (targetActor.actor?.sheet) {
@@ -257,19 +262,51 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             targetActor.token.sheet.stopRendering = false;
         }
 
+        if (createResult.length != items.length) {
+            console.log(['Mismatch in item count after creating', createResult, items]);
+            const deleteIds = createResult.map(x => x._id);
+            return targetActor.deleteOwnedItem(deleteIds);
+        }
+
         const updatesToPerform = [];
         for (let i = 0; i<items.length; i++) {
             const itemToTest = items[i];
             const itemToUpdate = createResult[i];
 
             if (itemToTest.children && itemToTest.children.length > 0) {
-                const indexMap = itemToTest.item.data.container.contents.map(x => items.indexOf(items.find(y => y.item._id == x.id)));
-                const newContents = duplicate(itemToUpdate.data.container.contents);
+                const indexMap = itemToTest.item.data.container.contents.map(x => {
+                    const foundItem = items.find(y => y.item._id === x.id);
+                    const foundItemIndex = items.indexOf(foundItem);
+                    return foundItemIndex;
+                });
 
+                let newContents = duplicate(itemToUpdate.data.container.contents);
                 for (let j = 0; j<indexMap.length; j++) {
                     const index = indexMap[j];
-                    newContents[j].id = createResult[index]._id;
+                    if (index === -1) {
+                        newContents[j].id = "deleteme";
+                        continue;
+                    }
+
+                    try {
+                        newContents[j].id = createResult[index]._id;
+                    } catch (error) {
+                        console.log({
+                            index: index,
+                            items: items,
+                            createResult: createResult,
+                            itemToTest: itemToTest,
+                            itemToUpdate: itemToUpdate,
+                            indexMap: indexMap
+                        });
+                        const deleteIds = createResult.map(x => x._id);
+                        await targetActor.deleteOwnedItem(deleteIds);
+                        throw error;
+                    }
                 }
+
+                newContents = newContents.filter(x => x.id !== "deleteme");
+
                 updatesToPerform.push({ _id: itemToUpdate._id, 'data.container.contents': newContents});
             }
         }
