@@ -150,7 +150,7 @@
                 <ul class="attributes flexrow">
                     <li class="attribute defenses">
                         <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Forward"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Forward"}}<br />@quadrants.forward.shields.value<br />@quadrants.forward.shields.max">
+                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Forward"}}<br />@quadrants.forward.shields.value{{#if data.hasDeflectorShields}}<br />@quadrants.forward.shields.max{{/if}}">
                             <label class="name rightAligned">{{#if data.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
                             {{#if data.hasShields}}
                             {{#if data.hasDeflectorShields}}
@@ -197,7 +197,7 @@
                     </li>
                     <li class="attribute defenses">
                         <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Port"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Port"}}<br />@quadrants.port.shields.value<br />@quadrants.port.shields.max">
+                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Port"}}<br />@quadrants.port.shields.value{{#if data.hasDeflectorShields}}<br />@quadrants.port.shields.max{{/if}}">
                             <label class="name rightAligned">{{#if data.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
                             {{#if data.hasShields}}
                             {{#if data.hasDeflectorShields}}
@@ -244,7 +244,7 @@
                     </li>
                     <li class="attribute defenses">
                         <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Starboard"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Starboard"}}<br />@quadrants.starboard.shields.value<br />@quadrants.starboard.shields.max">
+                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Starboard"}}<br />@quadrants.starboard.shields.value{{#if data.hasDeflectorShields}}<br />@quadrants.starboard.shields.max{{/if}}">
                             <label class="name rightAligned">{{#if data.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
                             {{#if data.hasShields}}
                             {{#if data.hasDeflectorShields}}
@@ -293,7 +293,7 @@
                     </li>
                     <li class="attribute defenses">
                         <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Aft"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Aft"}}<br />@quadrants.aft.shields.value<br />@quadrants.aft.shields.max">
+                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Aft"}}<br />@quadrants.aft.shields.value{{#if data.hasDeflectorShields}}<br />@quadrants.aft.shields.max{{/if}}">
                             <label class="name rightAligned">{{#if data.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
                             {{#if data.hasShields}}
                             {{#if data.hasDeflectorShields}}
@@ -506,6 +506,16 @@
                             </div>
                             {{/if}}
                         </div>
+
+                        {{#if item.hasCapacity}}
+                        <div class="item-detail item-uses">
+                            {{item.data.capacity.value}} / {{item.data.capacity.max}}
+                            {{#if ../../owner}}
+                            &nbsp;
+                            <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
+                            {{/if}}
+                        </div>
+                        {{/if}}
 
                         {{#if ../../owner}}
                         <div class="item-controls">

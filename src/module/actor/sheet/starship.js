@@ -202,10 +202,12 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const numLightWeapons = items.filter(x => x.data.class === "light").length;
         const numHeavyWeapons = items.filter(x => x.data.class === "heavy").length;
         const numCapitalWeapons = items.filter(x => x.data.class === "capital").length;
+        const numSpinalWeapons = items.filter(x => x.data.class === "spinal").length;
 
         const maxLightWeapons = (mounts?.lightSlots || 0);
         const maxHeavyWeapons = (mounts?.heavySlots || 0);
         const maxCapitalWeapons = (mounts?.capitalSlots || 0);
+        const maxSpinalWeapons = (mounts?.spinalSlots || 0);
 
         let slots = "";
         if (numLightWeapons + maxLightWeapons > 0) {
@@ -222,6 +224,12 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 slots += ", ";
             }
             slots += game.i18n.format("SFRPG.StarshipSheet.Weapons.CapitalSlots", {current: numCapitalWeapons, max: maxCapitalWeapons});
+        }
+        if (numSpinalWeapons + maxSpinalWeapons > 0) {
+            if (slots !== "") {
+                slots += ", ";
+            }
+            slots += game.i18n.format("SFRPG.StarshipSheet.Weapons.SpinalSlots", {current: numSpinalWeapons, max: maxSpinalWeapons});
         }
         if (slots === "") {
             slots = game.i18n.format("SFRPG.StarshipSheet.Weapons.NotAvailable");
@@ -291,6 +299,18 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
         }
         data.inventoryValue = Math.floor(totalValue);
+
+        const weapons = [].concat(forward, starboard, port, aft, turret);
+        for (const weapon of weapons) {
+            weapon.hasCapacity = (
+                weapon.data.weaponType === "tracking"
+                || weapon.data.special["mine"]
+                || weapon.data.special["transposition"]
+                || weapon.data.special["orbital"]
+                || weapon.data.special["rail"]
+                || weapon.data.special["forcefield"]
+            );
+        }
 
         const weaponMounts = this.actor.data.data.frame?.data?.weaponMounts;
         const hasForward = weaponMounts?.forward?.lightSlots || weaponMounts?.forward?.heavySlots || weaponMounts?.forward?.capitalSlots;
@@ -412,6 +432,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         html.find('.crew-skill-ranks').change(this._onCrewSkillRanksChanged.bind(this));
 
         html.find('.critical-edit').click(this._onEditAffectedCriticalRoles.bind(this));
+
+        html.find('.reload').click(this._onWeaponReloadClicked.bind(this));
     }
 
     /** @override */
@@ -815,6 +837,36 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         };
 
         await this.actor.update({[`data.attributes.systems.${affectedSystem}`]: currentSystem});
+    }
+
+    async _onWeaponReloadClicked(event) {
+        event.preventDefault();
+        
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        // Render the chat card template
+        const templateData = {
+            actor: this.actor,
+            item: item,
+            tokenId: this.actor.token?.id,
+            action: "SFRPG.ChatCard.ItemActivation.Reloads",
+            cost: game.i18n.localize("SFRPG.Items.ShipWeapon.ReloadCost")
+        };
+
+        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+        const html = await renderTemplate(template, templateData);
+
+        // Create the chat message
+        const chatData = {
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: html
+        };
+
+        await ChatMessage.create(chatData, { displaySheet: false });
+        
+        return item.update({'data.capacity.value': item.data.data.capacity.max});
     }
 
     /**

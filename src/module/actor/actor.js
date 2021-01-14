@@ -520,7 +520,7 @@ export class ActorSFRPG extends Actor {
             rollContext: rollContext,
             parts: parts,
             title:  `Ability Check - ${label}`,
-            flavor: game.settings.get('sfrpg', 'useCustomChatCards') ? `${label}` : `Ability Check - ${label}`,
+            flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
@@ -555,7 +555,7 @@ export class ActorSFRPG extends Actor {
             rollContext: rollContext,
             parts: parts,
             title: `Save - ${label}`,
-            flavor: game.settings.get('sfrpg', 'useCustomChatCards') ? `${label}` : `Save - ${label}`,
+            flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
@@ -581,7 +581,7 @@ export class ActorSFRPG extends Actor {
             rollContext: rollContext,
             parts: parts,
             title: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
-            flavor: game.settings.get('sfrpg', 'useCustomChatCards') ? `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
+            flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
@@ -1023,9 +1023,21 @@ export class ActorSFRPG extends Actor {
             }
         }
 
-        rollResult.roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
-            flavor: flavor
+        const rollMode = game.settings.get("core", "rollMode");
+        const preparedRollExplanation = rollResult.formula.formula.replace(/\+/gi, "<br/> +").replace(/-/gi, "<br/> -");
+        rollResult.roll.render().then((rollContent) => {
+            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+            const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+    
+            ChatMessage.create({
+                flavor: flavor,
+                speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
+                content: explainedRollContent,
+                rollMode: rollMode,
+                roll: rollResult.roll,
+                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                sound: CONFIG.sounds.dice
+            });
         });
     }
 

@@ -383,8 +383,6 @@
             }
         },
         "ChatCard":{
-            "DamageRoll": "Schadenswurf",
-            "HealingRoll": "Heilungswurf",
             "ItemActivation": {
                 "Activates": "Activates",
                 "Cost": "Cost: {cost}",
@@ -993,6 +991,8 @@
                 "PowerCost"   : "Energiekerneinheiten",
                 "BpCost"      : "Baupunktekosten",
                 "Range"       : "Reichweite",
+                "ReloadCost"  : "10 minutes",
+                "Speed"       : "Speed: {speed} hexes",
                 "AttackBonus" : "Angriffsbonus"
             },
             "Spell": {
@@ -1185,7 +1185,8 @@
                     "WeaponArcTooltip": "Die Anzahl der verfügbaren Waffenmontageplätze pro Feuerbereich, aufgeteilt nach Montageplätzen für Leicht, Schwer und Schiffsartillerie.",
                     "WeaponTypeCapital": "Schiffsartillerie",
                     "WeaponTypeHeavy": "Schwer",
-                    "WeaponTypeLight": "Leicht"
+                    "WeaponTypeLight": "Leicht",
+                    "WeaponTypeSpinal": "Spinal"
                 }
             },
             "StarshipPowerCore": {
@@ -1237,7 +1238,9 @@
                 "SpeedTooltip": "Number of hexes the starship will be able to move per turn using this thruster."
             },
             "StarshipWeapon": {
-                "Header": "Starship Weapon Properties"
+                "Header": "Starship Weapon Properties",
+                "Placeholder": "e.g. 5",
+                "Unmounted": "Unmounted"
             },
             "Weapons": {
                 "Category": "Waffenart",
@@ -1462,6 +1465,8 @@
                 "HarryingFireTooltip": "Enable this bonus when attacking a target affected by Harrying Fire.",
                 "Nonlethal": "Nonlethal"
             },
+            "DamageRoll": "Schadenswurf",
+            "DamageRollFull": "Schadenswurf - {name}",
             "Dialog": {
                 "AvailableModifiers": "Available modifiers",
                 "AvailableModifiersTooltip": "List of the available modifiers for this roll.",
@@ -1489,6 +1494,8 @@
                 "NormalDamageTooltip": "Roll normal damage.",
                 "Roll": "Roll"
             },
+            "HealingRoll": "Heilungswurf",
+            "HealingRollFull": "Heilungswurf - {name}",
             "InitiativeRollFull": "Initiative Roll - {name}",
             "Starship": {
                 "ComputerBonus": "Computer bonus",
@@ -1682,7 +1689,8 @@
             "StarshipWeaponClass": {
                 "Light"  : "Leicht",
                 "Heavy"  : "Schwer",
-                "Capital": "Schiffsartillerie"
+                "Capital": "Schiffsartillerie",
+                "Spinal":  "Spinal"
             },
             "StarshipWeaponProperties": {
                 "Anchoring" : "Anchoring",
@@ -1738,12 +1746,15 @@
                 "Vortex"    : "Vortex"
             },
             "StarshipWeaponRanges":{
+                "None": "None",
                 "Short" : "Kurz",
                 "Medium": "Mittel",
                 "Long"  : "Lang"
             },
             "StarshipWeaponTypes": {
                 "Direct"  : "Direktbeschuss",
+                "ECM":      "ECM Module",
+                "Melee":    "Melee Weapon",
                 "Tracking": "Lenkbar"
             }
         },
@@ -2029,6 +2040,8 @@
                 "ForwardArc": "Bugbereich ({slots})",
                 "HeavySlots": "Schwer: {current} / {max}",
                 "LightSlots": "Leicht: {current} / {max}",
+                "SpinalSlots": "Spinal: {current} / {max}",
+                "NoCapacity": "This weapon does not have any charges left to attack.",
                 "NotAvailable": "Nicht verfügbar",
                 "NotMounted": "Nicht ausgerüstete Waffen",
                 "PortArc": "Backbordbereich ({slots})",
