@@ -114,8 +114,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         const spellbook = this._prepareSpellbook(data, spells);
 
         // Organize Features
-        let itemsToProcess = [];
-        for (let item of other) {
+        const itemsToProcess = [];
+        for (const item of other) {
             if (["weapon", "shield"].includes(item.type)) {
                 item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
                 if (!item.data.containerId) {
@@ -133,7 +133,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     features.activeItems.items.push(item);
                 }
                 itemsToProcess.push(item);
-            } else if (["archetype", "class", "race", "theme"].includes(item.type)) {
+            } else if (["archetypes", "class", "race", "theme"].includes(item.type)) {
                 if (!(item.type in features)) {
                     let label = "SFRPG.Items.Categories.MiscellaneousItems";
                     if (item.type in SFRPG.itemTypes) {
