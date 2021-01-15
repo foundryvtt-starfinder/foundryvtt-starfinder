@@ -1023,9 +1023,21 @@ export class ActorSFRPG extends Actor {
             }
         }
 
-        rollResult.roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
-            flavor: flavor
+        const rollMode = game.settings.get("core", "rollMode");
+        const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
+        rollResult.roll.render().then((rollContent) => {
+            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+            const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+    
+            ChatMessage.create({
+                flavor: flavor,
+                speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
+                content: explainedRollContent,
+                rollMode: rollMode,
+                roll: rollResult.roll,
+                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                sound: CONFIG.sounds.dice
+            });
         });
     }
 

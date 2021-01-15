@@ -1,4 +1,3 @@
-
 import SFRPGCustomChatMessage from "./chat/chatbox.js";
 
 export class DiceSFRPG {
@@ -48,7 +47,7 @@ export class DiceSFRPG {
             dialogOptions: dialogOptions
         };
 
-        const formula = parts.join(" + ");
+        const formula = parts.map(x => x instanceof Object ? `${x.score}[${x.explanation}]` : x).join(" + ");
 
         const tree = new RollTree(options);
         tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
@@ -68,7 +67,9 @@ export class DiceSFRPG {
 
             finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
             finalFormula.formula = dieRoll + " + " + finalFormula.formula;
-            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ");
+            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
+            finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
+            const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
             let roll = new Roll(finalFormula.finalRoll).roll();
 
@@ -101,10 +102,8 @@ export class DiceSFRPG {
                     rollMode: rollMode
                 };
 
-                const action = title.replace(/\s/g, '-').toLowerCase();
-
                 try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
+                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, preparedRollExplanation);
                 } catch (error) {
                     useCustomCard = false;
                     errorToThrow = error;
@@ -112,10 +111,19 @@ export class DiceSFRPG {
             }
             
             if (!useCustomCard) {
-                roll.toMessage({
-                    speaker: speaker,
-                    flavor: title,
-                    rollMode: rollMode
+                roll.render().then((rollContent) => {
+                    const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+                    const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+            
+                    ChatMessage.create({
+                        flavor: title,
+                        speaker: speaker,
+                        content: explainedRollContent,
+                        rollMode: rollMode,
+                        roll: roll,
+                        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                        sound: CONFIG.sounds.dice
+                    });
                 });
             }
 
@@ -225,6 +233,8 @@ export class DiceSFRPG {
     
                     finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
                     finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+                    finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
+                    finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
     
                     let roll = new Roll(finalFormula.finalRoll).roll();
     
@@ -313,7 +323,9 @@ export class DiceSFRPG {
                 }
             }
             
-            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ");
+            finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
+            finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
+            const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
             let roll = new Roll(finalFormula.finalRoll).roll();
             
@@ -341,10 +353,8 @@ export class DiceSFRPG {
                     rollMode: rollMode
                 };
 
-                const action = title.replace(/\s/g, '-').toLowerCase();
-
                 try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, action);
+                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, preparedRollExplanation);
                 } catch (error) {
                     useCustomCard = false;
                     errorToThrow = error;
@@ -352,10 +362,19 @@ export class DiceSFRPG {
             }
             
             if (!useCustomCard) {
-                roll.toMessage({
-                    speaker: speaker,
-                    flavor: title,
-                    rollMode: rollMode
+                roll.render().then((rollContent) => {
+                    const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+                    const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+            
+                    ChatMessage.create({
+                        flavor: flavor,
+                        speaker: speaker,
+                        content: explainedRollContent,
+                        rollMode: rollMode,
+                        roll: roll,
+                        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                        sound: CONFIG.sounds.dice
+                    });
                 });
             }
 
@@ -398,6 +417,39 @@ export class DiceSFRPG {
         if (die?.options?.isDamageRoll) {
             const types = die?.options?.damageTypes;
         }
+    }
+
+    static formatFormula(formulaText) {
+        let index = 0;
+        let consumedText = "";
+        let isReading = false;
+        const sections = [];
+        while (index < formulaText.length) {
+            const token = formulaText[index++];
+            if (token === "[") {
+                sections.push({text: consumedText, replace: true});
+                consumedText = "";
+                isReading = true;
+            } else if (token === "]" && isReading) {
+                sections.push({text: consumedText, replace: false});
+                consumedText = "";
+                isReading = false;
+            }
+            consumedText += token;
+        }
+        if (consumedText) {
+            sections.push({text: consumedText, replace: true});
+        }
+        console.log(sections);
+        let finalResult = "";
+        for (const section of sections) {
+            if (section.replace) {
+                finalResult += section.text.replace(/\+/gi, "<br/> +").replace(/-/gi, "<br/> -");
+            } else {
+                finalResult += section.text;
+            }
+        }
+        return finalResult;
     }
 }
 
@@ -535,6 +587,7 @@ class RollNode {
         this.childNodes = {};
         this.parentNode = parentNode;
         this.nodeContext = null;
+        this.variableTooltips = null;
     }
         
     populate(nodes, contexts) {
@@ -543,6 +596,7 @@ class RollNode {
             this.nodeContext = context;
 
             const availableRolledMods = RollNode.getRolledModifiers(remainingVariable, this.getContext());
+            this.variableTooltips = RollNode.getTooltips(remainingVariable, this.getContext());
 
             for (const mod of availableRolledMods) {
                 const modKey = mod.bonus.name;
@@ -611,8 +665,18 @@ class RollNode {
 
             if (this.baseValue) {
                 if (this.baseValue !== "n/a") {
+                    const joinedTooltips = this.variableTooltips.join(',\n');
+
                     this.resolvedValue.finalRoll = this.baseValue;
-                    this.resolvedValue.formula = this.baseValue + "[" + (this.referenceModifier?.name || "@" + this.formula) + "]";
+                    this.resolvedValue.formula = this.baseValue + "[";
+                    this.resolvedValue.formula += "<span";
+                    if (joinedTooltips) {
+                        this.resolvedValue.formula += ` title="${joinedTooltips}"`;
+                    }
+                    this.resolvedValue.formula += `>`;
+                    this.resolvedValue.formula += (this.referenceModifier?.name || "@" + this.formula);
+                    this.resolvedValue.formula += `</span>`;
+                    this.resolvedValue.formula += "]";
                 }
 
                 // formula
@@ -655,6 +719,27 @@ class RollNode {
                     }
                 }
 
+                valueString = valueString.trim();
+                if (valueString.endsWith("+")) {
+                    valueString = valueString.substring(0, valueString.length - 1).trim();
+                }
+
+                /** Remove any naming from the valueString. */
+                let limit = 5;
+                while (valueString.includes("[") && valueString.includes("]") && limit > 0) {
+                    const openIndex = valueString.indexOf("[");
+                    const closeIndex = valueString.indexOf("]");
+                    if (closeIndex > openIndex) {
+                        valueString = valueString.substring(0, openIndex) + valueString.substring(closeIndex + 1);
+                    }
+                    limit--;
+                }
+
+                formulaString = formulaString.trim();
+                if (formulaString.endsWith("+")) {
+                    formulaString = formulaString.substring(0, formulaString.length - 1).trim();
+                }
+
                 this.resolvedValue.finalRoll = valueString;
                 this.resolvedValue.formula = formulaString;
             }
@@ -685,6 +770,17 @@ class RollNode {
         let variableRolledMods = RollNode._readValue(context.data, variableString);
         if (!variableRolledMods) {
             variableString = variable.substring(0, variable.lastIndexOf('.')) + ".rolledMods";
+            variableRolledMods = RollNode._readValue(context.data, variableString);
+        }
+        //console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);
+        return variableRolledMods || []
+    }
+        
+    static getTooltips(variable, context) {
+        let variableString = variable + ".tooltip";
+        let variableRolledMods = RollNode._readValue(context.data, variableString);
+        if (!variableRolledMods) {
+            variableString = variable.substring(0, variable.lastIndexOf('.')) + ".tooltip";
             variableRolledMods = RollNode._readValue(context.data, variableString);
         }
         //console.log(["getRolledModifiers", variable, context, variableString, variableRolledMods]);

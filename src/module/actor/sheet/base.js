@@ -393,12 +393,18 @@ export class ActorSheetSFRPG extends ActorSheet {
         let actorHelper = new ActorItemHelper(this.actor._id, this.token ? this.token.id : null, this.token ? this.token.scene.id : null);
         let item = actorHelper.getOwnedItem(itemId);
 
-        let containsItems = (item.data.data.container?.contents && item.data.data.container.contents.length > 0);
-        ItemDeletionDialog.show(item.name, containsItems, (recursive) => {
-            actorHelper.deleteOwnedItem(itemId, recursive).then(() => {
+        if (event.shiftKey) {
+            actorHelper.deleteOwnedItem(itemId, true).then(() => {
                 li.slideUp(200, () => this.render(false));
             });
-        });
+        } else {
+            let containsItems = (item.data.data.container?.contents && item.data.data.container.contents.length > 0);
+            ItemDeletionDialog.show(item.name, containsItems, (recursive) => {
+                actorHelper.deleteOwnedItem(itemId, recursive).then(() => {
+                    li.slideUp(200, () => this.render(false));
+                });
+            });
+        }
     }
 
     _onItemRollAttack(event) {

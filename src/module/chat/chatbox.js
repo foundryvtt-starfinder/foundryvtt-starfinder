@@ -38,9 +38,9 @@ export default class SFRPGCustomChatMessage {
      * 
      * @param {Roll} roll The roll data
      * @param {object} data The data for the roll
-     * @param {string} action The action being taken
+     * @param {string} explanation The explanation of the roll
      */
-    static renderStandardRoll(roll, data, action) {
+    static renderStandardRoll(roll, data, explanation) {
         /** Get entities */
         const mainContext = data.rollContext.mainContext ? data.rollContext.allContexts[data.rollContext.mainContext] : null;
         
@@ -76,7 +76,8 @@ export default class SFRPGCustomChatMessage {
             config: CONFIG.STARFINDER,
             tokenImg: actor.data.token?.img || actor.img,
             actorId: actor._id,
-            tokenId: this.getToken(actor)
+            tokenId: this.getToken(actor),
+            explanation: explanation
         };
 
         SFRPGCustomChatMessage._render(roll, data, options);
@@ -90,10 +91,16 @@ export default class SFRPGCustomChatMessage {
         const rollContent = await roll.render();
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
 
+        let explainedRollContent = rollContent;
+        if (options.explanation) {
+            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+            explainedRollContent = rollContent.substring(0, insertIndex) + options.explanation + rollContent.substring(insertIndex);
+        }
+
         ChatMessage.create({
             flavor: data.title,
             speaker: data.speaker,
-            content: cardContent + rollContent,
+            content: cardContent + explainedRollContent,
             rollMode: rollMode,
             roll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
