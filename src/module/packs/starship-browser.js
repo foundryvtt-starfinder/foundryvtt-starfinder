@@ -114,10 +114,26 @@ class StarshipBrowserSFRPG extends ItemBrowserSFRPG {
             starshipComponentTypes: {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.ComponentType"),
                 content: starshipComponentTypes,
-                filter: (element, filters) => { return this._filterItemType(element, filters); },
+                filter: (element, filters) => { return this._filterComponentType(element, filters); },
                 activeFilters: this.filters?.starshipComponentTypes?.activeFilters || []
             }
         };
+
+        if ((this.filters?.starshipComponentTypes?.activeFilters || []).includes("starshipWeapon")) {
+            filters.starshipWeaponTypes = {
+                label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.WeaponType"),
+                content: SFRPG.starshipWeaponTypes,
+                filter: (element, filters) => { return this._filterWeaponType(element, filters); },
+                activeFilters: this.filters.starshipWeaponTypes?.activeFilters || []
+            }
+
+            filters.starshipWeaponClass = {
+                label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.WeaponClass"),
+                content: SFRPG.starshipWeaponClass,
+                filter: (element, filters) => { return this._filterWeaponClass(element, filters); },
+                activeFilters: this.filters.starshipWeaponClass?.activeFilters || []
+            }
+        }
 
         return filters;
     }
@@ -137,11 +153,30 @@ class StarshipBrowserSFRPG extends ItemBrowserSFRPG {
         };
     }
 
-    _filterItemType(element, filters) {
+    onFiltersUpdated(html) {
+        this.refreshFilters = true;
+        super.onFiltersUpdated(html);
+    }
+
+    _filterComponentType(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
         let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
         return item && filters.includes(item.type);
+    }
+
+    _filterWeaponType(element, filters) {
+        let compendium = element.dataset.entryCompendium;
+        let itemId = element.dataset.entryId;
+        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        return item && (item.type !== "starshipWeapon" || filters.includes(item.data.weaponType));
+    }
+
+    _filterWeaponClass(element, filters) {
+        let compendium = element.dataset.entryCompendium;
+        let itemId = element.dataset.entryId;
+        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        return item && (item.type !== "starshipWeapon" || filters.includes(item.data.class));
     }
 
     openSettings() {
