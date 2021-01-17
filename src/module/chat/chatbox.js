@@ -40,7 +40,7 @@ export default class SFRPGCustomChatMessage {
      * @param {object} data The data for the roll
      * @param {string} explanation The explanation of the roll
      */
-    static renderStandardRoll(roll, data, explanation) {
+    static renderStandardRoll(roll, data, explanation, additionalContent) {
         /** Get entities */
         const mainContext = data.rollContext.mainContext ? data.rollContext.allContexts[data.rollContext.mainContext] : null;
         
@@ -77,7 +77,8 @@ export default class SFRPGCustomChatMessage {
             tokenImg: actor.data.token?.img || actor.img,
             actorId: actor._id,
             tokenId: this.getToken(actor),
-            explanation: explanation
+            explanation: explanation,
+            additionalContent: additionalContent
         };
 
         SFRPGCustomChatMessage._render(roll, data, options);
@@ -100,7 +101,7 @@ export default class SFRPGCustomChatMessage {
         ChatMessage.create({
             flavor: data.title,
             speaker: data.speaker,
-            content: cardContent + explainedRollContent,
+            content: cardContent + explainedRollContent + (options.additionalContent || ""),
             rollMode: rollMode,
             roll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
