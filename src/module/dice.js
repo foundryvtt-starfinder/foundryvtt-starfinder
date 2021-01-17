@@ -343,6 +343,57 @@ export class DiceSFRPG {
                 }
             }
 
+            const tags = [];
+
+            // TODO @TimT: Remove this once @wildj79 implements proper damage type tracking.
+            if (damageTypes) {
+                for (const damageType of damageTypes) {
+                    tags.push({tag: `damageType${damageType.capitalize()}`, text: damageType.capitalize()});
+                }
+            }
+
+            if (button === "Critical") {
+                tags.push({tag: `critical`, text: "Critical Hit"});
+            }
+
+            const itemContext = rollContext.allContexts['item']; 
+            if (itemContext) {
+                /** Regular Weapons use data.properties for their properties */
+                if (itemContext.entity.data.data.properties) {
+                    try {
+                        for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.properties)) {
+                            if (isEnabled) {
+                                tags.push({tag: key, text: SFRPG.weaponProperties[key]});
+                            }
+                        }
+                    } catch { }
+                }
+
+                /** Starship Weapons use data.special for their properties */
+                if (itemContext.entity.data.type === "starshipWeapon") {
+                    tags.push({tag: itemContext.entity.data.data.weaponType, text: SFRPG.starshipWeaponTypes[itemContext.entity.data.data.weaponType]});
+
+                    if (itemContext.entity.data.data.special) {
+                        try {
+                            for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.special)) {
+                                if (isEnabled) {
+                                    tags.push({tag: key, text: SFRPG.starshipWeaponProperties[key]});
+                                }
+                            }
+                        } catch { }
+                    }
+                }
+            }
+
+            let tagContent = ``;
+            if (tags.length > 0) {
+                tagContent = `<div class="sfrpg chat-card"><footer class="card-footer">`;
+                for (const tag of tags) {
+                    tagContent += `<span id="${tag.tag}"> ${tag.text}</span>`;
+                }
+                tagContent += `</footer></div>`;
+            }
+
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
             if (useCustomCard) {
@@ -355,7 +406,7 @@ export class DiceSFRPG {
                 };
 
                 try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, preparedRollExplanation);
+                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, preparedRollExplanation, tagContent);
                 } catch (error) {
                     useCustomCard = false;
                     errorToThrow = error;
@@ -366,57 +417,6 @@ export class DiceSFRPG {
                 roll.render().then((rollContent) => {
                     const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
                     const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
-
-                    const tags = [];
-
-                    // TODO @TimT: Remove this once @wildj79 implements proper damage type tracking.
-                    if (damageTypes) {
-                        for (const damageType of damageTypes) {
-                            tags.push({tag: `damageType${damageType.capitalize()}`, text: damageType.capitalize()});
-                        }
-                    }
-
-                    if (button === "Critical") {
-                        tags.push({tag: `critical`, text: "Critical Hit"});
-                    }
-
-                    const itemContext = rollContext.allContexts['item']; 
-                    if (itemContext) {
-                        /** Regular Weapons use data.properties for their properties */
-                        if (itemContext.entity.data.data.properties) {
-                            try {
-                                for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.properties)) {
-                                    if (isEnabled) {
-                                        tags.push({tag: key, text: SFRPG.weaponProperties[key]});
-                                    }
-                                }
-                            } catch { }
-                        }
-
-                        /** Starship Weapons use data.special for their properties */
-                        if (itemContext.entity.data.type === "starshipWeapon") {
-                            tags.push({tag: itemContext.entity.data.data.weaponType, text: SFRPG.starshipWeaponTypes[itemContext.entity.data.data.weaponType]});
-
-                            if (itemContext.entity.data.data.special) {
-                                try {
-                                    for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.special)) {
-                                        if (isEnabled) {
-                                            tags.push({tag: key, text: SFRPG.starshipWeaponProperties[key]});
-                                        }
-                                    }
-                                } catch { }
-                            }
-                        }
-                    }
-
-                    let tagContent = ``;
-                    if (tags.length > 0) {
-                        tagContent = `<div class="sfrpg chat-card"><footer class="card-footer">`;
-                        for (const tag of tags) {
-                            tagContent += `<span id="${tag.tag}"> ${tag.text}</span>`;
-                        }
-                        tagContent += `</footer></div>`;
-                    }
             
                     ChatMessage.create({
                         flavor: flavor,
