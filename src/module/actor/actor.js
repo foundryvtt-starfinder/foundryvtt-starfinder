@@ -658,14 +658,110 @@ export class ActorSFRPG extends Actor {
     }
 
     static async _applyStarshipDamage(starshipActor, totalDamageDealt, isHealing) {
-        /** Ask for quadrant */
+        if (isHealing) {
+            ui.notifications.warn("Cannot currently apply healing to starships using the context menu.");
+            return null;
+        }
 
-        /** Apply damage based on deflector shield, regular shield, ablative armor, and hull points.
-        * This may affect deflector shield power too.
-        */
+        /** Ask for quadrant */
+        const options = [
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Forward"),
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Port"),
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Starboard"),
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Aft")
+        ];
+        const results = await ChoiceDialog.show(
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Title", {name: starshipActor.name}),
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Message"),
+            {
+                quadrant: {
+                    name: game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Quadrant"),
+                    options: options,
+                    default: options[0]
+                }
+            }
+        );
+
+        if (results.resolution !== "ok") {
+            return null;
+        }
+
+        let targetKey = null;
+        let originalData = null;
+        let newData = null;
+
+        const selectedQuadrant = results.result.quadrant;
+        const indexOfQuadrant = options.indexOf(selectedQuadrant);
+        if (indexOfQuadrant === 0) {
+            targetKey = "data.quadrants.forward";
+            originalData = starshipActor.data.data.quadrants.forward;
+        } else if (indexOfQuadrant === 1) {
+            targetKey = "data.quadrants.port";
+            originalData = starshipActor.data.data.quadrants.port;
+        } else if (indexOfQuadrant === 2) {
+            targetKey = "data.quadrants.starboard";
+            originalData = starshipActor.data.data.quadrants.starboard;
+        } else if (indexOfQuadrant === 3) {
+            targetKey = "data.quadrants.aft";
+            originalData = starshipActor.data.data.quadrants.aft;
+        } else {
+            /** Error, unrecognized quadrant, somehow. */
+            return null;
+        }
+
+        let actorUpdate = {};
+        newData = duplicate(originalData);
+
+        let remainingUndealtDamage = totalDamageDealt;
+        const hasDeflectorShields = starshipActor.data.data.hasDeflectorShields;
+        const hasAblativeArmor = starshipActor.data.data.hasAblativeArmor;
+        
+        if (hasDeflectorShields) {
+            if (originalData.shields.value > 0) {
+                remainingUndealtDamage = Math.max(0, remainingUndealtDamage - originalData.shields.value);
+            }
+        } else {
+            newData.shields.value = Math.max(0, originalData.shields.value - remainingUndealtDamage);
+            remainingUndealtDamage = remainingUndealtDamage - (originalData.shields.value - newData.shields.value);
+        }
+
+        if (hasAblativeArmor) {
+            newData.ablative.value = Math.max(0, originalData.ablative.value - remainingUndealtDamage);
+            remainingUndealtDamage = remainingUndealtDamage - (originalData.ablative.value - newData.ablative.value);
+        }
+
+        const originalHullPoints = starshipActor.data.data.attributes.hp.value;
+        const newHullPoints = Math.clamped(originalHullPoints - remainingUndealtDamage, 0, starshipActor.data.data.attributes.hp.max);
+        remainingUndealtDamage = remainingUndealtDamage - (originalHullPoints - newHullPoints);
+
+        /** Deflector shields only drop in efficiency when the ship takes hull point damage. */
+        if (hasDeflectorShields && newHullPoints !== originalHullPoints) {
+            if (originalData.shields.value < totalDamageDealt) {
+                let deflectorShieldDamage = 1;
+                // TODO: Deflector shields are twice as effective against attacks from melee, ramming, and ripper starship weapons, so the starship ignores double the amount of damage from such attacks
+                // TODO: Any attack that would ignore a fraction or all of a target’s shields instead reduces the amount of damage the deflector shields ignore by an equal amount, rounded in the defender’s favor (e.g., deflector shields with a defense value of 5 would reduce damage from a burrowing weapon [Pact Worlds 153] by 3)
+                // TODO: Weapons with the array or line special property that damage a starship’s Hull Points overwhelm its deflector shields, reducing their defense value in that quadrant by 2, whereas vortex weapons that deal Hull Point damage reduce the target’s deflector shields’ defense value in each quadrant by 1d4.
+                // TODO: Any successful attack by a weapon with the buster special property (or another special property that deals reduced damage to Hull Points) reduces the deflector shields’ defense value in the struck quadrant by 2, whether or not the attack damaged the target’s Hull Points.
+                // TODO: When a gunnery check results in a natural 20, any decrease to the target’s deflector shield’s defense value from the attack is 1 greater.
+
+                newData.shields.value = Math.max(0, newData.shields.value - deflectorShieldDamage);
+            }
+        }
+
+        if (originalData.shields.value !== newData.shields.value) {
+            actorUpdate[targetKey + ".shields.value"] = newData.shields.value;
+        }
+
+        if (originalData.ablative.value !== newData.ablative.value) {
+            actorUpdate[targetKey + ".ablative.value"] = newData.ablative.value;
+        }
+
+        if (newHullPoints !== originalHullPoints) {
+            actorUpdate["data.attributes.hp.value"] = newHullPoints;
+        }
      
-        ui.notifications.warn("Cannot currently apply damage to starships using the context menu");
-        return null;
+        const promise = starshipActor.update(actorUpdate);
+        return promise;
     }
 
     /**
