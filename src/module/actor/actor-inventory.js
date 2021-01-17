@@ -112,8 +112,9 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         return addItemToActorAsync(targetActor, itemToMove, itemToMove.data.data.quantity, targetItem, targetItemStorageIndex);
     }
 
+    const itemQuantity = itemToMove.data?.data?.quantity;
     if (!quantity) {
-        quantity = itemToMove.data.data.quantity;
+        quantity = itemQuantity;
 
         if (acceptsItem(targetItem, itemToMove, targetActor)) {
             const storageIndex = getFirstAcceptableStorageIndex(targetItem, itemToMove);
@@ -126,11 +127,11 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         }
     }
 
-    const isFullMove = (quantity >= itemToMove.data.data.quantity);
+    const isFullMove = (quantity >= itemQuantity);
 
     if (sourceActor.actor === targetActor.actor) {
-        if (quantity < itemToMove.data.data.quantity) {
-            let updateOld = { _id: itemToMove._id, "data.quantity": itemToMove.data.data.quantity - quantity };
+        if (quantity < itemQuantity) {
+            let updateOld = { _id: itemToMove._id, "data.quantity": itemQuantity - quantity };
             await sourceActor.updateOwnedItem(updateOld);
 
             let newItemData = duplicate(itemToMove.data);
@@ -138,6 +139,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             newItemData.data.quantity = quantity;
             
             itemToMove = await targetActor.createOwnedItem(newItemData);
+            itemToMove = targetActor.getOwnedItem(itemToMove[0]._id);
         }
 
         if (itemToMove === targetItem) {
@@ -156,10 +158,10 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 const update = { '_id': targetItem._id, 'data.quantity': targetItemNewQuantity};
                 await targetActor.updateOwnedItem(update);
 
-                if (quantity >= itemToMove.data.data.quantity) {
+                if (quantity >= itemQuantity) {
                     await sourceActor.deleteOwnedItem(itemToMove._id);
                 } else {
-                    const updateOld = { '_id': itemToMove._id, 'data.quantity': itemToMove.data.data.quantity - quantity};
+                    const updateOld = { '_id': itemToMove._id, 'data.quantity': itemQuantity - quantity};
                     await sourceActor.updateOwnedItem(updateOld);
                 }
 
@@ -229,7 +231,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                     const itemsToRemove = items.map(x => x.item._id);
                     await sourceActor.deleteOwnedItem(itemsToRemove);
                 } else {
-                    await sourceActor.updateOwnedItem({_id: itemToMove.id, 'data.quantity': itemToMove.data.data.quantity - quantity});
+                    await sourceActor.updateOwnedItem({_id: itemToMove.id, 'data.quantity': itemQuantity - quantity});
                 }
 
                 return createResult;
@@ -347,7 +349,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             const itemsToRemove = items.map(x => x.item._id);
             await sourceActor.deleteOwnedItem(itemsToRemove);
         } else {
-            await sourceActor.updateOwnedItem({_id: itemToMove.id, 'data.quantity': itemToMove.data.data.quantity - quantity});
+            await sourceActor.updateOwnedItem({_id: itemToMove.id, 'data.quantity': itemQuantity - quantity});
         }
 
         return createResult;
@@ -458,14 +460,28 @@ export function getItemContainer(items, itemId) {
  * @param {Item} itemB 
  */
 function canMerge(itemA, itemB) {
-    if (!itemA || !itemB) return false;
-    if (itemA.name !== itemB.name || itemA.type !== itemB.type) return false;
+    if (!itemA || !itemB) {
+        console.log(`Can't merge because of null-items: itemA: ${itemA}, itemB: ${itemB}`)
+        return false;
+    }
+    if (itemA.name !== itemB.name || itemA.type !== itemB.type) {
+        console.log(`Can't merge because of name or type mismatch: itemA: ${itemA.type}/${itemA.name}, itemB: ${itemB.type}/${itemB.name}`);
+        return false;
+    }
 
     // Containers cannot merge, otherwise you can have multiple containers containing the same items multiple times, etc.
-    if (itemA.type === "container" || itemB.type === "container") return false;
+    if (itemA.type === "container" || itemB.type === "container") {
+        console.log(`Can't merge because one or both items are a container: itemA: ${itemA.type}/${itemA.name}, itemB: ${itemB.type}/${itemB.name}`);
+        return false;
+    }
 
     // If items contain other items, they cannot merge. This can be the case for non-containers like armors with armor upgrades, etc.
-    if (containsItems(itemA) || containsItems(itemB)) return false;
+    const itemAContainsItems = containsItems(itemA);
+    const itemBContainsItems = containsItems(itemB);
+    if (itemAContainsItems || itemBContainsItems) {
+        console.log(`Can't merge because one or both items contain items: itemA: ${itemAContainsItems}, itemB: ${itemBContainsItems}`);
+        return false;
+    }
 
     // Perform deep comparison on item data.
     let itemDataA = duplicate(itemA.data.data);
