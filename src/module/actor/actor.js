@@ -597,11 +597,11 @@ export class ActorSFRPG extends Actor {
         for (const controlledToken of canvas.tokens.controlled) {
             let promise = null;
             if (controlledToken.actor.data.type === "starship") {
-                promise = ActorSFRPG._applyStarshipDamage(controlledToken.actor, totalDamageDealt, isHealing);
+                promise = ActorSFRPG._applyStarshipDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
             } else if (controlledToken.actor.data.type === "vehicle") {
-                promise = ActorSFRPG._applyVehicleDamage(controlledToken.actor, totalDamageDealt, isHealing);
+                promise = ActorSFRPG._applyVehicleDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
             } else {
-                promise = ActorSFRPG._applyActorDamage(controlledToken.actor, totalDamageDealt, isHealing);
+                promise = ActorSFRPG._applyActorDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
             }
 
             if (promise) {
@@ -612,7 +612,7 @@ export class ActorSFRPG extends Actor {
         return Promise.all(promises);
     }
 
-    static async _applyActorDamage(actor, totalDamageDealt, isHealing) {
+    static async _applyActorDamage(roll, actor, totalDamageDealt, isHealing) {
         let remainingUndealtDamage = totalDamageDealt;
         const actorUpdate = {};
 
@@ -652,12 +652,12 @@ export class ActorSFRPG extends Actor {
         return promise;
     }
 
-    static async _applyVehicleDamage(vehicleActor, totalDamageDealt, isHealing) {
+    static async _applyVehicleDamage(roll, vehicleActor, totalDamageDealt, isHealing) {
         ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
         return null;
     }
 
-    static async _applyStarshipDamage(starshipActor, totalDamageDealt, isHealing) {
+    static async _applyStarshipDamage(roll, starshipActor, totalDamageDealt, isHealing) {
         if (isHealing) {
             ui.notifications.warn("Cannot currently apply healing to starships using the context menu.");
             return null;
@@ -718,7 +718,14 @@ export class ActorSFRPG extends Actor {
         
         if (hasDeflectorShields) {
             if (originalData.shields.value > 0) {
-                remainingUndealtDamage = Math.max(0, remainingUndealtDamage - originalData.shields.value);
+                // Deflector shields are twice as effective against attacks from melee, ramming, and ripper starship weapons, so the starship ignores double the amount of damage from such attacks.
+                // TODO: Any attack that would ignore a fraction or all of a target’s shields instead reduces the amount of damage the deflector shields ignore by an equal amount, rounded in the defender’s favor (e.g., deflector shields with a defense value of 5 would reduce damage from a burrowing weapon [Pact Worlds 153] by 3)
+                const isMelee = roll.find('#melee').length > 0;
+                const isRamming = roll.find('#ramming').length > 0;
+                const isRipper = roll.find('#ripper').length > 0;
+
+                const shieldMultiplier = (isMelee || isRamming || isRipper) ? 2 : 1;
+                remainingUndealtDamage = Math.max(0, remainingUndealtDamage - (originalData.shields.value * shieldMultiplier));
             }
         } else {
             newData.shields.value = Math.max(0, originalData.shields.value - remainingUndealtDamage);
@@ -735,17 +742,32 @@ export class ActorSFRPG extends Actor {
         remainingUndealtDamage = remainingUndealtDamage - (originalHullPoints - newHullPoints);
 
         /** Deflector shields only drop in efficiency when the ship takes hull point damage. */
-        if (hasDeflectorShields && newHullPoints !== originalHullPoints) {
-            if (originalData.shields.value < totalDamageDealt) {
-                let deflectorShieldDamage = 1;
-                // TODO: Deflector shields are twice as effective against attacks from melee, ramming, and ripper starship weapons, so the starship ignores double the amount of damage from such attacks
-                // TODO: Any attack that would ignore a fraction or all of a target’s shields instead reduces the amount of damage the deflector shields ignore by an equal amount, rounded in the defender’s favor (e.g., deflector shields with a defense value of 5 would reduce damage from a burrowing weapon [Pact Worlds 153] by 3)
-                // TODO: Weapons with the array or line special property that damage a starship’s Hull Points overwhelm its deflector shields, reducing their defense value in that quadrant by 2, whereas vortex weapons that deal Hull Point damage reduce the target’s deflector shields’ defense value in each quadrant by 1d4.
-                // TODO: Any successful attack by a weapon with the buster special property (or another special property that deals reduced damage to Hull Points) reduces the deflector shields’ defense value in the struck quadrant by 2, whether or not the attack damaged the target’s Hull Points.
-                // TODO: When a gunnery check results in a natural 20, any decrease to the target’s deflector shield’s defense value from the attack is 1 greater.
+        if (hasDeflectorShields) {
+            let deflectorShieldDamage = 0;
 
-                newData.shields.value = Math.max(0, newData.shields.value - deflectorShieldDamage);
+            if (newHullPoints !== originalHullPoints) {
+                deflectorShieldDamage = 1;
+
+                // Weapons with the array or line special property that damage a starship’s Hull Points overwhelm its deflector shields, reducing their defense value in that quadrant by 2
+                if (roll.find('#array').length > 0 || roll.find('#line').length > 0) {
+                    deflectorShieldDamage = 2;
+                }
+
+                // TODO: ..whereas vortex weapons that deal Hull Point damage reduce the target’s deflector shields’ defense value in each quadrant by 1d4.
+                else if (roll.find('#vortex').length > 0) {
+                }
             }
+
+            // Any successful attack by a weapon with the buster special property (or another special property that deals reduced damage to Hull Points) reduces the deflector shields’ defense value in the struck quadrant by 2, whether or not the attack damaged the target’s Hull Points.
+            if (roll.find('#buster').length > 0) {
+                deflectorShieldDamage = 2;
+            }
+
+            // When a gunnery check results in a natural 20, any decrease to the target’s deflector shield’s defense value from the attack is 1 greater.
+            const isCritical = roll.find('#critical').length > 0;
+            deflectorShieldDamage += isCritical ? 1 : 0;
+
+            newData.shields.value = Math.max(0, newData.shields.value - deflectorShieldDamage);
         }
 
         if (originalData.shields.value !== newData.shields.value) {
