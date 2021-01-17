@@ -759,6 +759,14 @@ export class ActorSFRPG extends Actor {
         if (newHullPoints !== originalHullPoints) {
             actorUpdate["data.attributes.hp.value"] = newHullPoints;
         }
+
+        const originalCT = Math.floor((starshipActor.data.data.attributes.hp.max - originalHullPoints) / starshipActor.data.data.attributes.criticalThreshold.value);
+        const newCT = Math.floor((starshipActor.data.data.attributes.hp.max - newHullPoints) / starshipActor.data.data.attributes.criticalThreshold.value);
+        if (newCT > originalCT) {
+            const crossedThresholds = newCT - originalCT;
+            const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: starshipActor.name, crossedThresholds: crossedThresholds});
+            ui.notifications.warn(warningMessage);
+        }
      
         const promise = starshipActor.update(actorUpdate);
         return promise;
