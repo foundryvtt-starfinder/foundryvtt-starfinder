@@ -591,39 +591,74 @@ export class ActorSFRPG extends Actor {
     }
 
     static async applyDamage(roll, multiplier) {
-        let value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
+        const totalDamageDealt = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
+        const isHealing = (multiplier < 0);
         const promises = [];
-        for (let t of canvas.tokens.controlled) {
-            if (t.actor.data.type === "starship") {
-                ui.notifications.warn("Cannot currently apply damage to starships using the context menu");
-                continue;
-            } else if (t.actor.data.type === "vehicle") {
+        for (const controlledToken of canvas.tokens.controlled) {
+            let remainingUndealtDamage = totalDamageDealt;
+
+            let promise = null;
+            if (controlledToken.actor.data.type === "starship") {
+                promise = applyStarshipDamage(controlledToken.actor, remainingUndealtDamage, isHealing);
+            } else if (controlledToken.actor.data.type === "vehicle") {
+                promise = null;
                 ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
-                continue;
+            } else {
+                const actor = controlledToken.actor;
+
+                const actorUpdate = {};
+
+                /** Update temp hitpoints */
+                if (!isHealing) {
+                    const originalTempHP = parseInt(actor.data.data.attributes.hp.temp) | 0;
+                    const newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.tempmax);
+                    remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
+                    
+                    actorUpdate["data.attributes.hp.temp"] = newTempHP;
+                }
+
+                /** Update stamina points */
+                if (!isHealing) {
+                    const originalSP = actor.data.data.attributes.sp.value;
+                    const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actor.data.data.attributes.sp.max);
+                    remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
+                    
+                    actorUpdate["data.attributes.sp.value"] = newSP;
+                }
+
+                /** Update hitpoints */
+                const originalHP = actor.data.data.attributes.hp.value;
+                const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.max);
+                remainingUndealtDamage = remainingUndealtDamage - (originalHP - newHP);
+                
+                actorUpdate["data.attributes.hp.value"] = newHP;
+
+                promise = actor.update(actorUpdate);
+
+                /** If the remaining undealt damage is equal to or greater than the max hp, the character dies of Massive Damage. */
+                if (actor.data.type === "character" && remainingUndealtDamage >= actor.data.data.attributes.hp.max) {
+                    const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", {name: actor.name});
+                    ui.notifications.warn(localizedDeath, {permanent: true});
+                }
             }
 
-            let a = t.actor,
-                hp = a.data.data.attributes.hp,
-                sp = a.data.data.attributes.sp,
-                tmp = parseInt(hp.temp) | 0,
-                dt = value > 0 ? Math.min(tmp, value) : 0,
-                tmpd = tmp - dt,
-                // stamina doesn't get healed like hit points do, so skip it if we're appling 
-                // healing instead of damage.
-                spd = value > 0 ? Math.clamped(sp.value - (value - dt), 0, sp.max) : sp.value;
-
-            dt = value > 0 ? value - Math.clamped((value - dt) - sp.value, 0, value) : 0;
-
-            let hpd = Math.clamped(hp.value - (value - dt), 0, hp.max);
-
-            promises.push(t.actor.update({
-                "data.attributes.hp.temp": tmpd,
-                "data.attributes.sp.value": spd,
-                "data.attributes.hp.value": hpd
-            }));
+            if (promise) {
+                promises.push(promise);
+            }
         }
 
         return Promise.all(promises);
+    }
+
+    static async applyStarshipDamage(starshipActor, totalDamageDealt, isHealing) {
+        /** Ask for quadrant */
+
+        /** Apply damage based on deflector shield, regular shield, ablative armor, and hull points.
+        * This may affect deflector shield power too.
+        */
+     
+        ui.notifications.warn("Cannot currently apply damage to starships using the context menu");
+        return null;
     }
 
     /**
