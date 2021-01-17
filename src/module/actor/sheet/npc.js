@@ -88,7 +88,6 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
-            console.log(item.type);
             if (droneItemTypes.includes(item.type)) {
                 arr[3].push(item);
             } else if (item.type === "spell") {
