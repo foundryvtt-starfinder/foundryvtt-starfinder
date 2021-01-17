@@ -595,51 +595,13 @@ export class ActorSFRPG extends Actor {
         const isHealing = (multiplier < 0);
         const promises = [];
         for (const controlledToken of canvas.tokens.controlled) {
-            let remainingUndealtDamage = totalDamageDealt;
-
             let promise = null;
             if (controlledToken.actor.data.type === "starship") {
-                promise = applyStarshipDamage(controlledToken.actor, remainingUndealtDamage, isHealing);
+                promise = ActorSFRPG._applyStarshipDamage(controlledToken.actor, totalDamageDealt, isHealing);
             } else if (controlledToken.actor.data.type === "vehicle") {
-                promise = null;
-                ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
+                promise = ActorSFRPG._applyVehicleDamage(controlledToken.actor, totalDamageDealt, isHealing);
             } else {
-                const actor = controlledToken.actor;
-
-                const actorUpdate = {};
-
-                /** Update temp hitpoints */
-                if (!isHealing) {
-                    const originalTempHP = parseInt(actor.data.data.attributes.hp.temp) | 0;
-                    const newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.tempmax);
-                    remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
-                    
-                    actorUpdate["data.attributes.hp.temp"] = newTempHP;
-                }
-
-                /** Update stamina points */
-                if (!isHealing) {
-                    const originalSP = actor.data.data.attributes.sp.value;
-                    const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actor.data.data.attributes.sp.max);
-                    remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
-                    
-                    actorUpdate["data.attributes.sp.value"] = newSP;
-                }
-
-                /** Update hitpoints */
-                const originalHP = actor.data.data.attributes.hp.value;
-                const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.max);
-                remainingUndealtDamage = remainingUndealtDamage - (originalHP - newHP);
-                
-                actorUpdate["data.attributes.hp.value"] = newHP;
-
-                promise = actor.update(actorUpdate);
-
-                /** If the remaining undealt damage is equal to or greater than the max hp, the character dies of Massive Damage. */
-                if (actor.data.type === "character" && remainingUndealtDamage >= actor.data.data.attributes.hp.max) {
-                    const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", {name: actor.name});
-                    ui.notifications.warn(localizedDeath, {permanent: true});
-                }
+                promise = ActorSFRPG._applyActorDamage(controlledToken.actor, totalDamageDealt, isHealing);
             }
 
             if (promise) {
@@ -650,7 +612,52 @@ export class ActorSFRPG extends Actor {
         return Promise.all(promises);
     }
 
-    static async applyStarshipDamage(starshipActor, totalDamageDealt, isHealing) {
+    static async _applyActorDamage(actor, totalDamageDealt, isHealing) {
+        let remainingUndealtDamage = totalDamageDealt;
+        const actorUpdate = {};
+
+        /** Update temp hitpoints */
+        if (!isHealing) {
+            const originalTempHP = parseInt(actor.data.data.attributes.hp.temp) | 0;
+            const newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.tempmax);
+            remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
+            
+            actorUpdate["data.attributes.hp.temp"] = newTempHP;
+        }
+
+        /** Update stamina points */
+        if (!isHealing) {
+            const originalSP = actor.data.data.attributes.sp.value;
+            const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actor.data.data.attributes.sp.max);
+            remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
+            
+            actorUpdate["data.attributes.sp.value"] = newSP;
+        }
+
+        /** Update hitpoints */
+        const originalHP = actor.data.data.attributes.hp.value;
+        const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.max);
+        remainingUndealtDamage = remainingUndealtDamage - (originalHP - newHP);
+        
+        actorUpdate["data.attributes.hp.value"] = newHP;
+
+        const promise = actor.update(actorUpdate);
+
+        /** If the remaining undealt damage is equal to or greater than the max hp, the character dies of Massive Damage. */
+        if (actor.data.type === "character" && remainingUndealtDamage >= actor.data.data.attributes.hp.max) {
+            const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", {name: actor.name});
+            ui.notifications.warn(localizedDeath, {permanent: true});
+        }
+    
+        return promise;
+    }
+
+    static async _applyVehicleDamage(vehicleActor, totalDamageDealt, isHealing) {
+        ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
+        return null;
+    }
+
+    static async _applyStarshipDamage(starshipActor, totalDamageDealt, isHealing) {
         /** Ask for quadrant */
 
         /** Apply damage based on deflector shield, regular shield, ablative armor, and hull points.
