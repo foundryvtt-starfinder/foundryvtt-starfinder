@@ -4,6 +4,11 @@ export default function (engine) {
 
         const pilot = (data.crew?.pilot?.actors) ? data.crew?.pilot?.actors[0] : null;
         const sizeMod = CONFIG.SFRPG.starshipSizeMod[data.details.size] || 0;
+
+        let pilotingRanks = pilot?.data?.data?.skills?.pil?.ranks || 0;
+        if (data.crew.useNPCCrew) {
+            pilotingRanks = data.crew.npcData?.pilot?.skills?.pil?.ranks || 0;
+        }
         
         /** Set up base values. */
         const forwardTL = duplicate(data.quadrants.forward.targetLock);
@@ -69,25 +74,11 @@ export default function (engine) {
             }
         }
 
-        if (data.attributes.pilotingBonus.value > 0) {
-            addScore(data.quadrants.forward.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
-            addScore(data.quadrants.port.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
-            addScore(data.quadrants.starboard.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
-            addScore(data.quadrants.aft.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotingBonus", data.attributes.pilotingBonus.value);
-        }
-
-        if (pilot && pilot?.data?.data?.skills?.pil?.ranks > 0) {
-            addScore(data.quadrants.forward.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
-            addScore(data.quadrants.port.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
-            addScore(data.quadrants.starboard.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
-            addScore(data.quadrants.aft.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
-        }
-
-        if (sizeMod !== 0) {
-            addScore(data.quadrants.forward.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
-            addScore(data.quadrants.port.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
-            addScore(data.quadrants.starboard.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
-            addScore(data.quadrants.aft.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
+        if (pilotingRanks > 0) {
+            addScore(data.quadrants.forward.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilotingRanks);
+            addScore(data.quadrants.port.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilotingRanks);
+            addScore(data.quadrants.starboard.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilotingRanks);
+            addScore(data.quadrants.aft.targetLock, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilotingRanks);
         }
 
         if (defensiveCountermeasureItem) {
@@ -95,6 +86,13 @@ export default function (engine) {
             addScore(data.quadrants.port.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureItem.data.targetLockBonus, false);
             addScore(data.quadrants.starboard.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureItem.data.targetLockBonus, false);
             addScore(data.quadrants.aft.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureItem.data.targetLockBonus, false);
+        }
+
+        if (sizeMod !== 0) {
+            addScore(data.quadrants.forward.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
+            addScore(data.quadrants.port.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
+            addScore(data.quadrants.starboard.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
+            addScore(data.quadrants.aft.targetLock, "SFRPG.StarshipSheet.Modifiers.SizeModifier", sizeMod);
         }
 
         if (forwardTL?.misc < 0 || forwardTL?.misc > 0) addScore(data.quadrants.forward.targetLock, "SFRPG.StarshipSheet.Modifiers.MiscModifier", forwardTL.misc);
