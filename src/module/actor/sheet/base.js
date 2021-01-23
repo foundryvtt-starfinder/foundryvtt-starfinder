@@ -899,7 +899,8 @@ export class ActorSheetSFRPG extends ActorSheet {
             const pack = game.packs.get(parsedDragData.pack);
             const itemData = await pack.getEntry(parsedDragData.id);
 
-            const addedItem = await targetActor.createOwnedItem(itemData);
+            const createResult = await targetActor.createOwnedItem(itemData);
+            const addedItem = targetActor.getOwnedItem(createResult[0]._id);
 
             if (!(addedItem.type in SFRPG.containableTypes)) {
                 targetContainer = null;
