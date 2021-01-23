@@ -546,13 +546,13 @@
                     {{#if isGM}}
                     <label class="checkbox">
                         <label><b>{{localize "SFRPG.StarshipSheet.Crew.CrewSetting"}}</b></label>
-                        <input type="checkbox" name="data.isNPCCrew" {{checked data.isNPCCrew}}/>{{localize "SFRPG.StarshipSheet.Crew.IsNPCCrew"}}
+                        <input type="checkbox" name="data.crew.useNPCCrew" {{checked data.crew.useNPCCrew}}/>{{localize "SFRPG.StarshipSheet.Crew.IsNPCCrew"}}
                     </label>
                     {{/if}}
                 </ol>
             </div>
 
-            {{#unless data.isNPCCrew}}
+            {{#unless data.crew.useNPCCrew}}
             <ol class="crew-list">
                 {{#each crew as |role|}}
                 <li class="flexrow crew-header {{role.cssClass}}" {{#each role.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>{{role.label}}</li>

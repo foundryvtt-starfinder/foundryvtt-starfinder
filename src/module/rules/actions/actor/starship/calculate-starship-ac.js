@@ -5,6 +5,11 @@ export default function(engine) {
         const pilot = (data.crew?.pilot?.actors) ? data.crew?.pilot?.actors[0] : null;
         const sizeMod = CONFIG.SFRPG.starshipSizeMod[data.details.size] || 0;
 
+        let pilotingRanks = pilot?.data?.data?.skills?.pil?.ranks || 0;
+        if (data.crew.useNPCCrew) {
+            pilotingRanks = data.crew.npcData?.pilot?.skills?.pil?.ranks || 0;
+        }
+
         /** Set up base values. */
         const forwardAC = duplicate(data.quadrants.forward.ac);
         data.quadrants.forward.ac = {
@@ -57,11 +62,11 @@ export default function(engine) {
             }
         }
 
-        if (pilot && pilot?.data?.data?.skills?.pil?.ranks > 0) {
-            addScore(data.quadrants.forward.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
-            addScore(data.quadrants.port.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
-            addScore(data.quadrants.starboard.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
-            addScore(data.quadrants.aft.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilot.data.data.skills.pil.ranks);
+        if (pilotingRanks > 0) {
+            addScore(data.quadrants.forward.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilotingRanks);
+            addScore(data.quadrants.port.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilotingRanks);
+            addScore(data.quadrants.starboard.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilotingRanks);
+            addScore(data.quadrants.aft.ac, "SFRPG.StarshipSheet.Modifiers.PilotSkillBonus", pilotingRanks);
         }
 
         if (sizeMod !== 0) {
