@@ -871,7 +871,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     async processDroppedData(event, parsedDragData) {
         const targetActor = new ActorItemHelper(this.actor._id, this.token ? this.token.id : null, this.token ? this.token.scene.id : null);
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
-            ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
+            ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
             return;
         }
 
@@ -893,7 +893,10 @@ export class ActorSheetSFRPG extends ActorSheet {
                 containerId: targetContainer ? targetContainer._id : null
             }
 
-            RPC.sendMessageTo("gm", "dragItemFromCollectionToPlayer", msg);
+            const messageResult = RPC.sendMessageTo("gm", "dragItemFromCollectionToPlayer", msg);
+            if (messageResult === "errorRecipientNotAvailable") {
+                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.ItemCollectionPickupNoGMError"));
+            }
             return;
         } else if (parsedDragData.pack) {
             const pack = game.packs.get(parsedDragData.pack);
@@ -916,7 +919,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else if (parsedDragData.data) {
             let sourceActor = new ActorItemHelper(parsedDragData.actorId, parsedDragData.tokenId, null);
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {
-                ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
+                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
                 return;
             }
 
