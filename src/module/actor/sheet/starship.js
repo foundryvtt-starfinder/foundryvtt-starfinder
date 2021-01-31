@@ -380,7 +380,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             starshipWeapon:                     game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipWeapons")
         };
 
-        if (!this.actor.data.data.isNPCCrew) {
+        if (!this.actor.data.data.crew.useNPCCrew) {
             data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
         } else {
             data.actions = {

@@ -1253,7 +1253,7 @@ export class ActorSFRPG extends Actor {
     setupRollContexts(rollContext, desiredSelectors = []) {
         if (this.data.type === "starship") {
 
-            if (!this.data.data.isNPCCrew) {
+            if (!this.data.data.crew.useNPCCrew) {
                 /** Add player captain if available. */
                 if (this.data.data.crew.captain?.actors?.length > 0) {
                     const actor = this.data.data.crew.captain.actors[0];

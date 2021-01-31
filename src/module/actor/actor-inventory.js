@@ -225,7 +225,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
         if (targetItem) {
             if (canMerge(targetItem, itemToMove)) {
-                const createResult = await targetActor.updateOwnedItem({ _id: targetItem._id, 'data.quantity': parseInt(targetItem.data.data.quantity) + parseInt(quantity)});
+                const updateResult = await targetActor.updateOwnedItem({ _id: targetItem._id, 'data.quantity': parseInt(targetItem.data.data.quantity) + parseInt(quantity)});
                 
                 if (isFullMove) {
                     const itemsToRemove = items.map(x => x.item._id);
@@ -234,7 +234,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                     await sourceActor.updateOwnedItem({_id: itemToMove.id, 'data.quantity': itemQuantity - quantity});
                 }
 
-                return createResult;
+                return updateResult;
             }
         }
 
@@ -352,7 +352,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             await sourceActor.updateOwnedItem({_id: itemToMove.id, 'data.quantity': itemQuantity - quantity});
         }
 
-        return createResult;
+        return createResult[0];
     }
 }
 
