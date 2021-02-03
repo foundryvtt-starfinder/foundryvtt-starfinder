@@ -1,9 +1,6 @@
 {
   "_id": "DrOU7gR7rj9tqXiL",
   "name": "Plasma sword, red star",
-  "permission": {
-    "default": 0
-  },
   "type": "weapon",
   "data": {
     "description": {
@@ -11,7 +8,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Core Rulebook, P. 171",
+    "source": "CRB pg. 171",
     "type": "",
     "quantity": 1,
     "bulk": "1",
@@ -20,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 54,
+        "max": "54"
+      },
+      "hardness": {
+        "value": "31"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -41,39 +56,36 @@
     },
     "range": {
       "value": null,
-      "units": "none",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "mwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "parts": [],
-      "effect": ""
+      "effect": "Severe wound"
     },
     "damage": {
       "parts": [
         [
           "4d8 + @mod",
-          "electricity"
-        ],
-        [
-          "",
-          "fire"
+          "electricity+fire"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
@@ -84,6 +96,34 @@
     "usage": {
       "value": 4,
       "per": "minute"
+    },
+    "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 13,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
     },
     "weaponType": "advancedM",
     "weaponCategory": "plasma",
@@ -170,29 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 13,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "sort": 200000,
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/plasma-sword-red-star.jpg"
+  "img": "systems/sfrpg/icons/equipment/weapons/plasma-sword-red-star.jpg",
+  "effects": []
 }
