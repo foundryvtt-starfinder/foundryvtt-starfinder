@@ -92,7 +92,6 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.isPhysical = data.item.data.hasOwnProperty("quantity");
         data.hasLevel = data.item.data.hasOwnProperty("level") && data.item.type !== "spell";
         data.hasHands = data.item.data.hasOwnProperty("hands");
-        data.hasCapacity = data.item.data.hasOwnProperty("capacity");
         data.hasProficiency = data.item.data.proficient === true || data.item.data.proficient === false;
         data.isFeat = this.type === "feat";
 
