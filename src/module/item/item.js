@@ -1352,6 +1352,6 @@ export class ItemSFRPG extends Item {
                 || this.data.data.special["limited"]
             );
         }
-        return this.data.hasCapacity;
+        return this.data.data.hasOwnProperty("capacity");
     }
 }
