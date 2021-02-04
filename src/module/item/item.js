@@ -1053,7 +1053,7 @@ export class ItemSFRPG extends Item {
             title: title
         });
 
-        const preparedRollExplanation = rollResult.formula.formula.replace(/\+/gi, "<br/> +").replace(/-/gi, "<br/> -");
+        const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
         rollResult.roll.render().then((rollContent) => {
             const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
             const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
@@ -1349,8 +1349,9 @@ export class ItemSFRPG extends Item {
                 || this.data.data.special["orbital"]
                 || this.data.data.special["rail"]
                 || this.data.data.special["forcefield"]
+                || this.data.data.special["limited"]
             );
         }
-        return this.data.hasCapacity;
+        return this.data.data.hasOwnProperty("capacity");
     }
 }

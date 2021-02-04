@@ -309,6 +309,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 || weapon.data.special["orbital"]
                 || weapon.data.special["rail"]
                 || weapon.data.special["forcefield"]
+                || weapon.data.special["limited"]
             );
         }
 
@@ -379,7 +380,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             starshipWeapon:                     game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipWeapons")
         };
 
-        if (!this.actor.data.data.isNPCCrew) {
+        if (!this.actor.data.data.crew.useNPCCrew) {
             data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
         } else {
             data.actions = {

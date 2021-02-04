@@ -186,6 +186,7 @@
                     "DragToExternalTokenError": "Cannot drag items to token actors not on the active scene.",
                     "ItemCollectionLocked": "This container is locked and will not open.",
                     "ItemCollectionNoGMError": "Failed to drop the items because there is no GM logged in.",
+                    "ItemCollectionPickupNoGMError": "Failed to pick up the item(s) because there is no GM logged in.",
                     "NoTarget": "No target actor or token specified.",
                     "DeleteConfirmationTitle": "Delete '{itemName}'?",
                     "DeleteConfirmationMessage": "Are you sure you wish to delete '{itemName}'?",
@@ -352,7 +353,9 @@
                 "BrowserSortMethodPCU": "PCU",
                 "Button": "Starships",
                 "ComponentType": "Component Type",
-                "Title": "Browse Starships"
+                "Title": "Browse Starships",
+                "WeaponClass": "Weapon Class",
+                "WeaponType": "Weapon Type"
             }
         },
         "CancelButtonLabel": "Cancel",
@@ -380,6 +383,9 @@
         "CharacterSheet": {
             "Inventory": {
                 "ContainedWealth": "Contained wealth: {wealth}"
+            },
+            "Warnings": {
+                "DeathByMassiveDamage": "{name} has died of Massive Damage!"
             }
         },
         "ChatCard":{
@@ -1391,9 +1397,10 @@
         "NPCSheet": {
             "Features": {
                 "Actions": "Actions",
-                "ActiveItems": "Active Items",
+                "ActiveItems": "Active Feats",
+                "Drone": "Drone Items",
                 "Attacks": "Attacks",
-                "Features": "Features"
+                "Features": "Passive Feats"
             },
             "Header": {
                 "NamePlaceHolderText": "Character Name",
@@ -1909,6 +1916,18 @@
                     "WeaponsArrayPort": "Weapons (Port)",
                     "WeaponsArrayStarboard": "Weapons (Starboard)"
                 }
+            },
+            "Damage": {
+                "CrossedCriticalThreshold": "{name} crossed {crossedThresholds} critical thresholds!",
+                "Message": "Damage to a starship always originates from a specific direction, please select the quadrant the incoming damage should be applied to.",
+                "Quadrant": {
+                    "Quadrant": "Quadrant",
+                    "Forward": "Forward",
+                    "Port": "Port",
+                    "Starboard": "Starboard",
+                    "Aft": "Aft"
+                },
+                "Title": "{name} - Select the damaged quadrant."
             },
             "Details": {
                 "Ablative": {

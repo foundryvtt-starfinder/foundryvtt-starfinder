@@ -67,6 +67,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     }
 
     _prepareItems(data) {
+        const droneItemTypes = ["chassis", "mod"];
+
         const inventory = {
             inventory: { label: game.i18n.localize("SFRPG.NPCSheet.Inventory.Inventory"), items: [], dataset: { type: "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory" }, allowAdd: true }
         };
@@ -77,7 +79,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             activeItems: { label: game.i18n.localize("SFRPG.NPCSheet.Features.ActiveItems"), items: [], dataset: { }, allowAdd: false }
         };
 
-        let [spells, other, conditionItems] = data.items.reduce((arr, item) => {
+        let [spells, other, conditionItems, droneItems] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
@@ -86,15 +88,16 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
-            if (item.type === "spell") {
+            if (droneItemTypes.includes(item.type)) {
+                arr[3].push(item);
+            } else if (item.type === "spell") {
                 let container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
                     arr[0].push(item);
                 } else {
                     arr[1].push(item);
                 }
-            }
-            else if (item.type === "feat") {
+            } else if (item.type === "feat") {
                 if ((item.data.requirements?.toLowerCase() || "") === "condition") {
                     arr[2].push(item);
                 } else {
@@ -104,7 +107,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             }
             else arr[1].push(item);
             return arr;
-        }, [[], [], []]);
+        }, [[], [], [], []]);
 
         // Apply item filters
         spells = this._filterItems(spells, this._filters.spellbook);
@@ -114,8 +117,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         const spellbook = this._prepareSpellbook(data, spells);
 
         // Organize Features
-        let itemsToProcess = [];
-        for (let item of other) {
+        const itemsToProcess = [];
+        for (const item of other) {
             if (["weapon", "shield"].includes(item.type)) {
                 item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
                 if (!item.data.containerId) {
@@ -133,7 +136,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     features.activeItems.items.push(item);
                 }
                 itemsToProcess.push(item);
-            } else if (["archetype", "class", "race", "theme"].includes(item.type)) {
+            } else if (["archetypes", "class", "race", "theme"].includes(item.type)) {
                 if (!(item.type in features)) {
                     let label = "SFRPG.Items.Categories.MiscellaneousItems";
                     if (item.type in SFRPG.itemTypes) {
@@ -151,6 +154,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         this.processItemContainment(itemsToProcess, function (itemType, itemData) {
             inventory.inventory.items.push(itemData);
         });
+
+        if (droneItems.length > 0) {
+            features.drone = { label: game.i18n.localize("SFRPG.NPCSheet.Features.Drone"), items: droneItems, dataset: { type: droneItemTypes.join(',') }, allowAdd: true };
+        }
 
         const modifiers = {
             conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true }

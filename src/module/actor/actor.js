@@ -591,39 +591,207 @@ export class ActorSFRPG extends Actor {
     }
 
     static async applyDamage(roll, multiplier) {
-        let value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
+        const totalDamageDealt = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
+        const isHealing = (multiplier < 0);
         const promises = [];
-        for (let t of canvas.tokens.controlled) {
-            if (t.actor.data.type === "starship") {
-                ui.notifications.warn("Cannot currently apply damage to starships using the context menu");
-                continue;
-            } else if (t.actor.data.type === "vehicle") {
-                ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
-                continue;
+        for (const controlledToken of canvas.tokens.controlled) {
+            let promise = null;
+            if (controlledToken.actor.data.type === "starship") {
+                promise = ActorSFRPG._applyStarshipDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
+            } else if (controlledToken.actor.data.type === "vehicle") {
+                promise = ActorSFRPG._applyVehicleDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
+            } else {
+                promise = ActorSFRPG._applyActorDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
             }
 
-            let a = t.actor,
-                hp = a.data.data.attributes.hp,
-                sp = a.data.data.attributes.sp,
-                tmp = parseInt(hp.temp) | 0,
-                dt = value > 0 ? Math.min(tmp, value) : 0,
-                tmpd = tmp - dt,
-                // stamina doesn't get healed like hit points do, so skip it if we're appling 
-                // healing instead of damage.
-                spd = value > 0 ? Math.clamped(sp.value - (value - dt), 0, sp.max) : sp.value;
-
-            dt = value > 0 ? value - Math.clamped((value - dt) - sp.value, 0, value) : 0;
-
-            let hpd = Math.clamped(hp.value - (value - dt), 0, hp.max);
-
-            promises.push(t.actor.update({
-                "data.attributes.hp.temp": tmpd,
-                "data.attributes.sp.value": spd,
-                "data.attributes.hp.value": hpd
-            }));
+            if (promise) {
+                promises.push(promise);
+            }
         }
 
         return Promise.all(promises);
+    }
+
+    static async _applyActorDamage(roll, actor, totalDamageDealt, isHealing) {
+        let remainingUndealtDamage = totalDamageDealt;
+        const actorUpdate = {};
+
+        /** Update temp hitpoints */
+        if (!isHealing) {
+            const originalTempHP = parseInt(actor.data.data.attributes.hp.temp) | 0;
+            const newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.tempmax);
+            remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
+            
+            actorUpdate["data.attributes.hp.temp"] = newTempHP;
+        }
+
+        /** Update stamina points */
+        if (!isHealing) {
+            const originalSP = actor.data.data.attributes.sp.value;
+            const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actor.data.data.attributes.sp.max);
+            remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
+            
+            actorUpdate["data.attributes.sp.value"] = newSP;
+        }
+
+        /** Update hitpoints */
+        const originalHP = actor.data.data.attributes.hp.value;
+        const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.max);
+        remainingUndealtDamage = remainingUndealtDamage - (originalHP - newHP);
+        
+        actorUpdate["data.attributes.hp.value"] = newHP;
+
+        const promise = actor.update(actorUpdate);
+
+        /** If the remaining undealt damage is equal to or greater than the max hp, the character dies of Massive Damage. */
+        if (actor.data.type === "character" && remainingUndealtDamage >= actor.data.data.attributes.hp.max) {
+            const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", {name: actor.name});
+            ui.notifications.warn(localizedDeath, {permanent: true});
+        }
+    
+        return promise;
+    }
+
+    static async _applyVehicleDamage(roll, vehicleActor, totalDamageDealt, isHealing) {
+        ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
+        return null;
+    }
+
+    static async _applyStarshipDamage(roll, starshipActor, totalDamageDealt, isHealing) {
+        if (isHealing) {
+            ui.notifications.warn("Cannot currently apply healing to starships using the context menu.");
+            return null;
+        }
+
+        /** Ask for quadrant */
+        const options = [
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Forward"),
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Port"),
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Starboard"),
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Aft")
+        ];
+        const results = await ChoiceDialog.show(
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Title", {name: starshipActor.name}),
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Message"),
+            {
+                quadrant: {
+                    name: game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Quadrant"),
+                    options: options,
+                    default: options[0]
+                }
+            }
+        );
+
+        if (results.resolution !== "ok") {
+            return null;
+        }
+
+        let targetKey = null;
+        let originalData = null;
+        let newData = null;
+
+        const selectedQuadrant = results.result.quadrant;
+        const indexOfQuadrant = options.indexOf(selectedQuadrant);
+        if (indexOfQuadrant === 0) {
+            targetKey = "data.quadrants.forward";
+            originalData = starshipActor.data.data.quadrants.forward;
+        } else if (indexOfQuadrant === 1) {
+            targetKey = "data.quadrants.port";
+            originalData = starshipActor.data.data.quadrants.port;
+        } else if (indexOfQuadrant === 2) {
+            targetKey = "data.quadrants.starboard";
+            originalData = starshipActor.data.data.quadrants.starboard;
+        } else if (indexOfQuadrant === 3) {
+            targetKey = "data.quadrants.aft";
+            originalData = starshipActor.data.data.quadrants.aft;
+        } else {
+            /** Error, unrecognized quadrant, somehow. */
+            return null;
+        }
+
+        let actorUpdate = {};
+        newData = duplicate(originalData);
+
+        let remainingUndealtDamage = totalDamageDealt;
+        const hasDeflectorShields = starshipActor.data.data.hasDeflectorShields;
+        const hasAblativeArmor = starshipActor.data.data.hasAblativeArmor;
+        
+        if (hasDeflectorShields) {
+            if (originalData.shields.value > 0) {
+                // Deflector shields are twice as effective against attacks from melee, ramming, and ripper starship weapons, so the starship ignores double the amount of damage from such attacks.
+                // TODO: Any attack that would ignore a fraction or all of a target’s shields instead reduces the amount of damage the deflector shields ignore by an equal amount, rounded in the defender’s favor (e.g., deflector shields with a defense value of 5 would reduce damage from a burrowing weapon [Pact Worlds 153] by 3)
+                const isMelee = roll.find('#melee').length > 0;
+                const isRamming = roll.find('#ramming').length > 0;
+                const isRipper = roll.find('#ripper').length > 0;
+
+                const shieldMultiplier = (isMelee || isRamming || isRipper) ? 2 : 1;
+                remainingUndealtDamage = Math.max(0, remainingUndealtDamage - (originalData.shields.value * shieldMultiplier));
+            }
+        } else {
+            newData.shields.value = Math.max(0, originalData.shields.value - remainingUndealtDamage);
+            remainingUndealtDamage = remainingUndealtDamage - (originalData.shields.value - newData.shields.value);
+        }
+
+        if (hasAblativeArmor) {
+            newData.ablative.value = Math.max(0, originalData.ablative.value - remainingUndealtDamage);
+            remainingUndealtDamage = remainingUndealtDamage - (originalData.ablative.value - newData.ablative.value);
+        }
+
+        const originalHullPoints = starshipActor.data.data.attributes.hp.value;
+        const newHullPoints = Math.clamped(originalHullPoints - remainingUndealtDamage, 0, starshipActor.data.data.attributes.hp.max);
+        remainingUndealtDamage = remainingUndealtDamage - (originalHullPoints - newHullPoints);
+
+        /** Deflector shields only drop in efficiency when the ship takes hull point damage. */
+        if (hasDeflectorShields) {
+            let deflectorShieldDamage = 0;
+
+            if (newHullPoints !== originalHullPoints) {
+                deflectorShieldDamage = 1;
+
+                // Weapons with the array or line special property that damage a starship’s Hull Points overwhelm its deflector shields, reducing their defense value in that quadrant by 2
+                if (roll.find('#array').length > 0 || roll.find('#line').length > 0) {
+                    deflectorShieldDamage = 2;
+                }
+
+                // TODO: ..whereas vortex weapons that deal Hull Point damage reduce the target’s deflector shields’ defense value in each quadrant by 1d4.
+                else if (roll.find('#vortex').length > 0) {
+                }
+            }
+
+            // Any successful attack by a weapon with the buster special property (or another special property that deals reduced damage to Hull Points) reduces the deflector shields’ defense value in the struck quadrant by 2, whether or not the attack damaged the target’s Hull Points.
+            if (roll.find('#buster').length > 0) {
+                deflectorShieldDamage = 2;
+            }
+
+            // When a gunnery check results in a natural 20, any decrease to the target’s deflector shield’s defense value from the attack is 1 greater.
+            const isCritical = roll.find('#critical').length > 0;
+            deflectorShieldDamage += isCritical ? 1 : 0;
+
+            newData.shields.value = Math.max(0, newData.shields.value - deflectorShieldDamage);
+        }
+
+        if (originalData.shields.value !== newData.shields.value) {
+            actorUpdate[targetKey + ".shields.value"] = newData.shields.value;
+        }
+
+        if (originalData.ablative.value !== newData.ablative.value) {
+            actorUpdate[targetKey + ".ablative.value"] = newData.ablative.value;
+        }
+
+        if (newHullPoints !== originalHullPoints) {
+            actorUpdate["data.attributes.hp.value"] = newHullPoints;
+        }
+
+        const originalCT = Math.floor((starshipActor.data.data.attributes.hp.max - originalHullPoints) / starshipActor.data.data.attributes.criticalThreshold.value);
+        const newCT = Math.floor((starshipActor.data.data.attributes.hp.max - newHullPoints) / starshipActor.data.data.attributes.criticalThreshold.value);
+        if (newCT > originalCT) {
+            const crossedThresholds = newCT - originalCT;
+            const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: starshipActor.name, crossedThresholds: crossedThresholds});
+            ui.notifications.warn(warningMessage);
+        }
+     
+        const promise = starshipActor.update(actorUpdate);
+        return promise;
     }
 
     /**
@@ -1024,7 +1192,7 @@ export class ActorSFRPG extends Actor {
         }
 
         const rollMode = game.settings.get("core", "rollMode");
-        const preparedRollExplanation = rollResult.formula.formula.replace(/\+/gi, "<br/> +").replace(/-/gi, "<br/> -");
+        const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
         rollResult.roll.render().then((rollContent) => {
             const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
             const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
@@ -1085,7 +1253,7 @@ export class ActorSFRPG extends Actor {
     setupRollContexts(rollContext, desiredSelectors = []) {
         if (this.data.type === "starship") {
 
-            if (!this.data.data.isNPCCrew) {
+            if (!this.data.data.crew.useNPCCrew) {
                 /** Add player captain if available. */
                 if (this.data.data.crew.captain?.actors?.length > 0) {
                     const actor = this.data.data.crew.captain.actors[0];
