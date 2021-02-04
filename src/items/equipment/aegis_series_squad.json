@@ -1,10 +1,5 @@
 {
-  "_id": "NnvAbtALwCWMhEGc",
   "name": "Aegis series, squad",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
   "type": "equipment",
   "data": {
     "description": {
@@ -12,7 +7,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SCR",
+    "source": "CRB pg. 198",
     "type": "",
     "quantity": 1,
     "bulk": "3",
@@ -21,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 51,
+        "max": "51"
+      },
+      "hardness": {
+        "value": "29"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "",
       "cost": 0,
@@ -51,6 +64,7 @@
       "max": 0,
       "per": null
     },
+    "isActive": null,
     "ability": null,
     "actionType": "",
     "attackBonus": 0,
@@ -69,23 +83,15 @@
       "descriptor": ""
     },
     "descriptors": [],
+    "capacity": {
+      "value": 0,
+      "max": 0
+    },
+    "usage": {
+      "value": 0,
+      "per": ""
+    },
     "modifiers": [],
-    "armor": {
-      "type": "heavy",
-      "eac": 17,
-      "kac": 19,
-      "dex": 3,
-      "acp": -5,
-      "speedAdjust": -10
-    },
-    "strength": 0,
-    "speed": "",
-    "size": "",
-    "reach": "",
-    "proficient": true,
-    "abilityMods": {
-      "parts": []
-    },
     "container": {
       "contents": [],
       "storage": [
@@ -99,20 +105,50 @@
           ],
           "affectsEncumbrance": true,
           "weightProperty": "slots"
-        },
-        {
-          "type": "slot",
-          "subtype": "weaponSlot",
-          "amount": 0,
-          "acceptsType": [
-            "weapon"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": ""
         }
-      ]
+      ],
+      "isOpen": true
+    },
+    "armor": {
+      "type": "heavy",
+      "eac": 17,
+      "kac": 19,
+      "dex": 3,
+      "acp": -5,
+      "speedAdjust": -10
+    },
+    "strength": 0,
+    "speed": "",
+    "size": "",
+    "reach": "",
+    "proficient": false,
+    "abilityMods": {
+      "parts": []
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/armor/aegis_squad.jpg"
+  "img": "systems/sfrpg/icons/equipment/armor/aegis_squad.jpg",
+  "effects": [],
+  "_id": "NnvAbtALwCWMhEGc",
+  "storage": {
+    "type": "slot",
+    "subtype": "armorUpgrade",
+    "amount": 5,
+    "weightProperty": "slots",
+    "affectsEncumbrance": true
+  },
+  "weapon": true,
+  "equipment": false,
+  "consumable": false,
+  "goods": false,
+  "container": false,
+  "hybrid": false,
+  "magic": false,
+  "technological": false,
+  "fusion": false,
+  "upgrade": true,
+  "spell": false,
+  "augmentation": false,
+  "shield": false,
+  "weaponAccessory": false
 }
