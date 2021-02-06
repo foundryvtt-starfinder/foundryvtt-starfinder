@@ -329,11 +329,7 @@ export class ActorSFRPG extends Actor {
         for (let item of this.data.items) {
             let modifiersToConcat = [];
             switch (item.type) {
-                default:
-                    if (item.data.equipped !== false) {
-                        modifiersToConcat = item.data.modifiers;
-                    }
-                    break;
+                // Armor upgrades are only valid if they are slotted into an equipped armor
                 case "upgrade":
                     {
                         if (!ignoreEquipment) {
@@ -344,6 +340,8 @@ export class ActorSFRPG extends Actor {
                         }
                         break;
                     }
+
+                // Weapon upgrades (Fusions and accessories) are only valid if they are slotted into an equipped weapon
                 case "fusion":
                 case "weaponAccessory":
                     {
@@ -355,18 +353,31 @@ export class ActorSFRPG extends Actor {
                         }
                         break;
                     }
+
+                // Augmentations are always applied
                 case "augmentation":
                     modifiersToConcat = item.data.modifiers;
                     break;
+
+                // Feats are only active when they are passive, or activated
                 case "feat":
                     if (item.data.activation?.type === "" || item.data.isActive) {
                         modifiersToConcat = item.data.modifiers;
                     }
                     break;
+
+                // Special handling for equipment, shield, and weapon
                 case "equipment":
                 case "shield":
                 case "weapon":
                     if (!ignoreEquipment && item.data.equipped) {
+                        modifiersToConcat = item.data.modifiers;
+                    }
+                    break;
+
+                // Everything else
+                default:
+                    if (!item.data.equippable || item.data.equipped) {
                         modifiersToConcat = item.data.modifiers;
                     }
                     break;

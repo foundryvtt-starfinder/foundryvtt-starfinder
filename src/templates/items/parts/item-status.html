@@ -7,12 +7,14 @@
                 </label>
                 {{/if}}
                 <label class="checkbox">
+                    <input type="checkbox" name="data.equippable" {{checked data.equippable}}/> {{ localize "SFRPG.Items.Equippable" }}
+                </label>
+                {{#if data.equippable}}
+                <label class="checkbox">
                     <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
                 </label>
+                {{/if}}
                 <label class="checkbox">
                     <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SFRPG.Items.Identified" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> {{ localize "SFRPG.Items.Attuned" }}
                 </label>
             </div>

@@ -599,12 +599,19 @@ export class ItemSFRPG extends Item {
             acceptedModifiers.push(SFRPGEffectType.MELEE_ATTACKS);
         }
 
-        if (isWeapon) acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
+        if (isWeapon) {
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_ATTACKS);
+        }
 
         let modifiers = this.actor.getAllModifiers();
         modifiers = modifiers.filter(mod => {
             if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
                 if (mod.valueAffected !== this.data.data.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
+                if (!this.data.data.properties[mod.valueAffected]) {
                     return false;
                 }
             }
