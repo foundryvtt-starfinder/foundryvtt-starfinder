@@ -64,7 +64,8 @@
             {{#if owner}}
             <div class="item-controls">
                 {{#if (not disableEquipping)}}
-                {{#if (and (or (or (or (eq item.type "weapon") (eq item.type "shield")) (eq item.type "equipment")) (eq item.type "container")) bigItem)}}
+                {{!-- TODO: Remove this massive or chain once all weapons, shields, equipments, and containers have their data.equippable flag set in their json definitions --}}
+                {{#if (and (or (or (or (or (eq item.type "weapon") (eq item.type "shield")) (eq item.type "equipment")) (eq item.type "container")) item.data.equippable) bigItem)}}
                 {{#if item.data.equipped}}
                 <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Unequip"}}"><i class="fas fa-check"></i></a>
                 {{else}}
