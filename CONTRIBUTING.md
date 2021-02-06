@@ -91,3 +91,21 @@ There is no Foundry workflow for this, and this is going to get a little more te
 8. Restart Foundry.
 6. Check in Foundry if the compendium is updated properly.
 7. Submit pull request if everything's great. :-)
+
+### Source
+
+Items have a source field, and this source field should be filled in. There is a format that has been decided upon to use for the value inside the Source field.
+
+| Book | Format | Example |
+| --- | --- | --- |
+| Core Rulebook | CRB pg. x | CRB pg. 123 |
+| Armory | AR pg. x | AR pg. 123 |
+| Pact Worlds | PW pg. x | PW pg. 123 |
+| Character Operations Manual | COM pg. x | COM pg. 123 |
+| Starship Operations Manual | SOM pg. x | SOM pg. 123 |
+| Near Space | NS pg. x | NS pg. 123 |
+| Alien Archive 1 | AA1 pg. x | AA1 pg. 123 |
+| Alien Archive 2 | AA2 pg. x | AA2 pg. 123 |
+| Alien Archive 3 | AA3 pg. x | AA3 pg. 123 |
+| Alien Archive 4 | AA4 pg. x | AA4 pg. 123 |
+| Adventure path books | AP #x pg. y | AP #03 pg. 58 |
