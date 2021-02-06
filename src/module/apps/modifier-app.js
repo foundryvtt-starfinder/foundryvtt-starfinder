@@ -120,6 +120,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                         target.append(`<option value="${weapons[0]}">${weapons[1]}</option>`);
                     }
                     break;
+                case SFRPGEffectType.WEAPON_PROPERTY_ATTACKS:
                 case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
                     target.prop('disabled', false);
                     target.find('option').remove();
@@ -164,6 +165,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                 valueAffectedElement.prop('disabled', false);
                 break;
             case SFRPGEffectType.WEAPON_ATTACKS:
+            case SFRPGEffectType.WEAPON_PROPERTY_ATTACKS:
             case SFRPGEffectType.WEAPON_DAMAGE:
             case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
                 valueAffectedElement.prop('disabled', false);
