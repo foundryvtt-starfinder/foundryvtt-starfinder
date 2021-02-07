@@ -8,6 +8,7 @@
 export const preloadHandlebarsTemplates = async function () {
     const templatePaths = [
         // Actor Sheet Partials
+        "systems/sfrpg/templates/actors/parts/actor-biography.html",
         "systems/sfrpg/templates/actors/parts/actor-traits.html",
         "systems/sfrpg/templates/actors/parts/actor-inventory.html",
         "systems/sfrpg/templates/actors/parts/actor-inventory-item.html",

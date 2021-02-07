@@ -258,9 +258,10 @@ Hooks.once("setup", function () {
         const rolls = Boolean(options.hash['rolls']);
         const rollData = options.hash['rollData'];
         const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: owner, entities: true, rolls: rolls, rollData: rollData});
+        const maxSize = Boolean(options.hash['maxSize']) ? ` style="flex: 1;"` : "";
     
         // Construct the HTML
-        let editor = $(`<div class="editor"><div class="editor-content" data-edit="${target}">${content}</div></div>`);
+        let editor = $(`<div class="editor flexcol"${maxSize}><div class="editor-content"${maxSize} data-edit="${target}">${content}</div></div>`);
     
         // Append edit button
         const button = Boolean(options.hash['button']);

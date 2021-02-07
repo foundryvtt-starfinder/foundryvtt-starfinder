@@ -36,8 +36,9 @@ export class ActorSheetSFRPG extends ActorSheet {
                 ".modifiers .inventory-list"
             ],
             tabs: [
-                {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes"}, 
-                {navSelector: ".subtabs", contentSelector: ".modifiers-body", initial: "permanent"}
+                {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes"},
+                {navSelector: ".subtabs", contentSelector: ".modifiers-body", initial: "permanent"},
+                {navSelector: ".biotabs", contentSelector: ".bio-body", initial: "biography"}
             ]
         });
     }
@@ -63,6 +64,19 @@ export class ActorSheetSFRPG extends ActorSheet {
             config: CONFIG.SFRPG
         };
 
+        if (!this.actor.data.data?.details?.biography?.fullBodyImage)
+        {
+            this.actor.data = mergeObject(this.actor.data, {
+                data: {
+                    details: {
+                        biography: {
+                            fullBodyImage: "systems/sfrpg/images/mystery-body.png"
+                        }
+                    }
+                }
+            }, {overwrite: false});
+            this.actor.data.data.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.png";
+        }
         data.actor = duplicate(this.actor.data);
         data.items = this.actor.items.map(i => {
             i.data.labels = i.labels;
@@ -428,8 +442,21 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.getOwnedItem(itemId);
 
+        const updateData = {};
+
+        if (item.data.data.uses.max > 0) {
+            if (!item.data.data.uses.value || item.data.data.uses.value <= 0) {
+                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.UI.ErrorNoCharges", {name: item.name}));
+                return false;
+            }
+
+            updateData['data.uses.value'] = Math.max(0, item.data.data.uses.value - 1);
+        }
+
         const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : true;
-        await item.update({'data.isActive': desiredOutput});
+        updateData['data.isActive'] = desiredOutput;
+
+        await item.update(updateData);
         
         // Render the chat card template
         const templateData = {
@@ -962,22 +989,28 @@ export class ActorSheetSFRPG extends ActorSheet {
                 }
             }
         } else {
-            let sidebarItem = game.items.get(parsedDragData.id);
+            const sidebarItem = game.items.get(parsedDragData.id);
             if (sidebarItem) {
-                const addedItem = await targetActor.createOwnedItem(duplicate(sidebarItem.data));
-                
-                if (targetContainer) {
-                    let newContents = [];
-                    if (targetContainer.data.data.container?.contents) {
-                        newContents = duplicate(targetContainer.data.data.container?.contents || []);
-                    }
-                    let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
-                    newContents.push({id: addedItem._id, index: preferredStorageIndex});
-                    let update = { _id: targetContainer._id, "data.container.contents": newContents };
-                    await targetActor.updateOwnedItem(update);
-                }
+                const addedItemResult = await targetActor.createOwnedItem(duplicate(sidebarItem.data));
+                if (addedItemResult.length > 0) {
+                    const addedItem = addedItemResult[0];
+                    
+                    if (targetContainer) {
+                        let newContents = [];
+                        if (targetContainer.data.data.container?.contents) {
+                            newContents = duplicate(targetContainer.data.data.container?.contents || []);
+                        }
 
-                return addedItem;
+                        const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
+                        newContents.push({id: addedItem._id, index: preferredStorageIndex});
+                        
+                        const update = { _id: targetContainer._id, "data.container.contents": newContents };
+                        await targetActor.updateOwnedItem(update);
+                    }
+
+                    return addedItem;
+                }
+                return null;
             }
             
             console.log("Unknown item source: " + JSON.stringify(parsedDragData));
