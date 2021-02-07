@@ -26,7 +26,7 @@
 
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
-                {{#if item.data.uses.value}}
+                {{#if (or item.data.uses.value item.data.uses.max)}}
                     {{item.data.uses.value}} / {{item.data.uses.max}}
                 {{else if item.data.recharge.value}}
                     {{#if item.isOnCooldown}}

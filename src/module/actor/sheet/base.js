@@ -442,8 +442,21 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.getOwnedItem(itemId);
 
+        const updateData = {};
+
+        if (item.data.data.uses.max > 0) {
+            if (!item.data.data.uses.value || item.data.data.uses.value <= 0) {
+                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.UI.ErrorNoCharges", {name: item.name}));
+                return false;
+            }
+
+            updateData['data.uses.value'] = Math.max(0, item.data.data.uses.value - 1);
+        }
+
         const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : true;
-        await item.update({'data.isActive': desiredOutput});
+        updateData['data.isActive'] = desiredOutput;
+
+        await item.update(updateData);
         
         // Render the chat card template
         const templateData = {
