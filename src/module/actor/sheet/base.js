@@ -989,22 +989,28 @@ export class ActorSheetSFRPG extends ActorSheet {
                 }
             }
         } else {
-            let sidebarItem = game.items.get(parsedDragData.id);
+            const sidebarItem = game.items.get(parsedDragData.id);
             if (sidebarItem) {
-                const addedItem = await targetActor.createOwnedItem(duplicate(sidebarItem.data));
-                
-                if (targetContainer) {
-                    let newContents = [];
-                    if (targetContainer.data.data.container?.contents) {
-                        newContents = duplicate(targetContainer.data.data.container?.contents || []);
-                    }
-                    let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
-                    newContents.push({id: addedItem._id, index: preferredStorageIndex});
-                    let update = { _id: targetContainer._id, "data.container.contents": newContents };
-                    await targetActor.updateOwnedItem(update);
-                }
+                const addedItemResult = await targetActor.createOwnedItem(duplicate(sidebarItem.data));
+                if (addedItemResult.length > 0) {
+                    const addedItem = addedItemResult[0];
+                    
+                    if (targetContainer) {
+                        let newContents = [];
+                        if (targetContainer.data.data.container?.contents) {
+                            newContents = duplicate(targetContainer.data.data.container?.contents || []);
+                        }
 
-                return addedItem;
+                        const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
+                        newContents.push({id: addedItem._id, index: preferredStorageIndex});
+                        
+                        const update = { _id: targetContainer._id, "data.container.contents": newContents };
+                        await targetActor.updateOwnedItem(update);
+                    }
+
+                    return addedItem;
+                }
+                return null;
             }
             
             console.log("Unknown item source: " + JSON.stringify(parsedDragData));
