@@ -36,8 +36,9 @@ export class ActorSheetSFRPG extends ActorSheet {
                 ".modifiers .inventory-list"
             ],
             tabs: [
-                {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes"}, 
-                {navSelector: ".subtabs", contentSelector: ".modifiers-body", initial: "permanent"}
+                {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes"},
+                {navSelector: ".subtabs", contentSelector: ".modifiers-body", initial: "permanent"},
+                {navSelector: ".biotabs", contentSelector: ".bio-body", initial: "biography"}
             ]
         });
     }
@@ -63,6 +64,19 @@ export class ActorSheetSFRPG extends ActorSheet {
             config: CONFIG.SFRPG
         };
 
+        if (!this.actor.data.data?.details?.biography?.fullBodyImage)
+        {
+            this.actor.data = mergeObject(this.actor.data, {
+                data: {
+                    details: {
+                        biography: {
+                            fullBodyImage: "systems/sfrpg/images/mystery-body.png"
+                        }
+                    }
+                }
+            }, {overwrite: false});
+            this.actor.data.data.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.png";
+        }
         data.actor = duplicate(this.actor.data);
         data.items = this.actor.items.map(i => {
             i.data.labels = i.labels;

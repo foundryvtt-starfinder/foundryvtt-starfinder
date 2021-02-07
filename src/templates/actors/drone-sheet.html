@@ -86,13 +86,13 @@
         </div>
     </header>
 
-    {{!-- NPC Sheet Navigation --}}
+    {{!-- Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="attributes">{{ localize "SFRPG.Attributes" }}</a>
         <a class="item" data-tab="inventory">{{ localize "SFRPG.Inventory" }}</a>
         <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
         <a class="item" data-tab="modifiers">{{localize "SFRPG.Modifiers"}}</a>
-        <a class="item" data-tab="biography">{{ localize "SFRPG.Biography" }}</a>        
+        <a class="item" data-tab="biography" {{#if (and isGM data.details.biography.gmNotes)}}data-tippy-content="{{localize "SFRPG.ActorSheet.Biography.TooltipGM"}}"{{/if}}>{{ localize "SFRPG.Biography" }} {{#if (and isGM data.details.biography.gmNotes)}} (!){{/if}}</a>
     </nav>
 
     {{!-- NPC Sheet Body --}}
@@ -247,8 +247,8 @@
         </div>
 
         {{!-- Biography Tab --}}
-        <div class="tab biography flexcol" data-group="primary" data-tab="biography">
-            {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+        <div class="tab biography flexrow" data-group="primary" data-tab="biography">
+            {{> "systems/sfrpg/templates/actors/parts/actor-biography.html" hideVitals=true}}
         </div>
     </section>
 </form>
