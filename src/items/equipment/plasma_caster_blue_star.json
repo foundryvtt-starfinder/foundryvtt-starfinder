@@ -1,10 +1,6 @@
 {
-  "_id": "uXPuDyf9ZA5DH38z",
+  "_id": "N7ANqhqEFjE1KPQY",
   "name": "Plasma caster, blue star",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
   "type": "weapon",
   "data": {
     "description": {
@@ -12,72 +8,123 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "",
+    "source": "CRB pg. 176",
     "type": "",
     "quantity": 1,
-    "bulk": "L",
-    "price": 0,
-    "level": 1,
+    "bulk": "2",
+    "price": 275000,
+    "level": 17,
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 96,
+        "max": "96"
+      },
+      "hardness": {
+        "value": "39"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "",
       "type": ""
     },
     "area": {
       "value": null,
-      "units": "",
+      "units": "none",
       "shape": "",
       "effect": ""
     },
     "range": {
-      "value": null,
-      "units": "",
+      "value": 80,
+      "units": "ft",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": "str",
-    "actionType": "",
+    "isActive": null,
+    "ability": "dex",
+    "actionType": "rwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "parts": [],
-      "effect": ""
+      "effect": "Burn 2d10"
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "5d10",
+          "electricity+fire"
+        ]
+      ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
-      "value": 0,
-      "max": 0
+      "value": 200,
+      "max": 200
     },
     "usage": {
-      "value": 0,
-      "per": ""
+      "value": 10,
+      "per": "shot"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 1,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "basicM",
     "weaponCategory": "plasma",
     "special": "",
@@ -90,7 +137,7 @@
       "automatic": false,
       "blast": false,
       "block": false,
-      "boost": false,
+      "boost": true,
       "bright": false,
       "disarm": false,
       "entangle": false,
@@ -163,28 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 1,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  "img": "systems/sfrpg/icons/equipment/weapons/desperation_canon_titan-killer.jpg",
+  "effects": []
 }

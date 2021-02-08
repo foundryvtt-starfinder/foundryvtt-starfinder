@@ -1,21 +1,40 @@
 {
-  "name": "Aeon Guard, Accelerator Rifle",
+  "_id": "ry5nFHZg5OBgnI9j",
+  "name": "RPPR, AG",
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>The AG series of longarms is manufactured by governmentheld factories for the sole use of the Aeon Guard. Its ingenious designers are held via lifelong &ldquo;contracts&rdquo; as pampered but neurally locked prisoners of the throne. The AG assault rifle is a selective-fire rifle that is standard issue for rank-and-file troops. Other weapons in the series include the AG accelerator rifle, which uses magnetic fields to propel metal projectiles like a magnetar rifle does, and the rocket propelled&ndash;projectile rifle (RPPR, or &ldquo;Ripper,&rdquo; as it&rsquo;s known in the ranks of the Aeon Guard), which fires mini-rockets like those used in gyrojet rifles. Pact Worlds intelligence believes that some AG weapons can also be equipped with aeon stones, though what functions they provide and how this hybrid technology actually works is unknown. In the Azlanti Star Empire, civilian possession of any AG-series weapon is a criminal offense punishable by death.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AA",
+    "source": "AA1 pg. 7",
     "type": "",
     "quantity": 1,
     "bulk": "2",
-    "price": 7500,
-    "level": 7,
+    "price": 21000,
+    "level": 10,
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 45,
+        "max": "45"
+      },
+      "hardness": {
+        "value": "25"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -36,63 +55,86 @@
       "effect": ""
     },
     "range": {
-      "value": 60,
+      "value": 100,
       "units": "ft",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 1,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "Automatic",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
-      "effect": ""
+      "parts": [],
+      "effect": "Knockdown"
     },
     "damage": {
       "parts": [
         [
-          "3d4",
-          "piercing"
+          "2d12",
+          "bludgeoning"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
-      "value": 16,
-      "max": 16
+      "value": 12,
+      "max": 12
     },
     "usage": {
       "value": 1,
       "per": "shot"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 10,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "longA",
     "weaponCategory": "projectile",
     "special": "",
     "properties": {
       "one": false,
       "two": true,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
-      "automatic": true,
+      "automatic": false,
       "blast": false,
       "block": false,
       "boost": false,
@@ -168,30 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 7,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
   "img": "icons/svg/mystery-man.svg",
-  "_id": "KOer0WFv0bYQ3man"
+  "effects": []
 }

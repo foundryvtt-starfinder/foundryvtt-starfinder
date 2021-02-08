@@ -1,5 +1,6 @@
 {
-  "name": "Flash Grenade III",
+  "_id": "SxJqdqzZpfhbW7RV",
+  "name": "Flash grenade III",
   "type": "weapon",
   "data": {
     "description": {
@@ -7,31 +8,31 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "",
+    "source": "CRB pg. 178",
     "type": "",
     "quantity": 1,
     "bulk": "L",
-    "price": 10400,
+    "price": 4800,
     "level": 12,
     "attuned": false,
     "equipped": false,
     "identified": true,
     "attributes": {
-      "sturdy": false,
+      "sturdy": true,
       "customBuilt": false,
       "size": "medium",
       "dex": {
         "mod": ""
       },
       "hp": {
-        "value": null,
-        "max": ""
+        "value": 51,
+        "max": "51"
       },
       "hardness": {
-        "value": ""
+        "value": "29"
       },
       "ac": {
-        "value": ""
+        "value": "5"
       }
     },
     "activation": {
@@ -40,7 +41,7 @@
       "condition": ""
     },
     "duration": {
-      "value": "blinded 1d6 rounds",
+      "value": "",
       "units": ""
     },
     "target": {
@@ -50,7 +51,7 @@
     "area": {
       "value": 15,
       "units": "ft",
-      "shape": "",
+      "shape": "sphere",
       "effect": "burst"
     },
     "range": {
@@ -60,14 +61,15 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
+      "value": 1,
+      "max": 1,
+      "per": "charges"
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "",
+    "chatFlavor": "blinded [[1d6]] rounds",
     "critical": {
       "parts": [],
       "effect": ""
@@ -78,8 +80,8 @@
     "formula": "",
     "save": {
       "type": "reflex",
-      "dc": "16+@abilities.dex.mod",
-      "descriptor": "negate"
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
+      "descriptor": "partial"
     },
     "descriptors": [],
     "capacity": {
@@ -104,7 +106,8 @@
           "affectsEncumbrance": true,
           "weightProperty": "level"
         }
-      ]
+      ],
+      "isOpen": true
     },
     "weaponType": "grenade",
     "weaponCategory": "",
@@ -196,12 +199,12 @@
       "regrowth": false,
       "unbalancing": false
     },
-    "proficient": true,
+    "proficient": false,
     "abilityMods": {
       "parts": []
     }
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "SxJqdqzZpfhbW7RV"
+  "img": "icons/weapons/thrown/grenade-round.webp",
+  "effects": []
 }

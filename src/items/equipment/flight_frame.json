@@ -1,37 +1,37 @@
 {
-  "name": "Flight Frame",
+  "name": "Flight frame",
   "type": "equipment",
   "data": {
     "description": {
-      "value": "<p>This massive, sleek machine is shaped like a person and equipped with powerful thrusters built into the feet and attached to the back, giving it a fly speed with average maneuverability.</p>",
+      "value": "<p><span class=\"fontstyle0\">This massive, sleek machine is shaped like a person and equipped with powerful thrusters built into the feet and attached to the back, giving it a fly speed with average maneuverability.</span></p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "",
+    "source": "CRB pg. 204",
     "type": "",
     "quantity": 1,
-    "bulk": "30",
+    "bulk": "40",
     "price": 27100,
     "level": 11,
     "attuned": false,
     "equipped": false,
     "identified": true,
     "attributes": {
-      "sturdy": false,
+      "sturdy": true,
       "customBuilt": false,
       "size": "medium",
       "dex": {
         "mod": ""
       },
       "hp": {
-        "value": 6,
-        "max": ""
+        "value": 48,
+        "max": "48"
       },
       "hardness": {
-        "value": ""
+        "value": "22"
       },
       "ac": {
-        "value": ""
+        "value": "5"
       }
     },
     "activation": {
@@ -64,9 +64,10 @@
       "max": 0,
       "per": null
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "mwak",
-    "attackBonus": 0,
+    "attackBonus": 6,
     "chatFlavor": "",
     "critical": {
       "parts": [],
@@ -75,7 +76,7 @@
     "damage": {
       "parts": [
         [
-          "2d6",
+          "1d10 + 6",
           "bludgeoning"
         ]
       ]
@@ -83,7 +84,7 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
@@ -95,7 +96,53 @@
       "value": 1,
       "per": "minute"
     },
-    "modifiers": [],
+    "modifiers": [
+      {
+        "name": "Flight frame - char attack",
+        "modifier": "-(@abilities.str.mod)",
+        "type": "untyped",
+        "effectType": "melee-attacks",
+        "valueAffected": "",
+        "enabled": true,
+        "source": "Powered Armor",
+        "notes": "Removes character str bonus to armor.",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "max": 0,
+        "_id": "d3f74c83-5a2f-45fe-94e9-3c46d432625d"
+      },
+      {
+        "name": "Flight frame - char str skills",
+        "modifier": "-(@abilities.str.mod)",
+        "type": "untyped",
+        "effectType": "ability-skills",
+        "valueAffected": "str",
+        "enabled": true,
+        "source": "Powered Armor",
+        "notes": "Removes character bonus to str based skills. See other mod for added bonus from powered armor.",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "max": 0,
+        "_id": "919262f4-0d50-42f4-9fb8-66d2ec17280a"
+      },
+      {
+        "name": "Flight frame - char str skills",
+        "modifier": "6",
+        "type": "untyped",
+        "effectType": "ability-skills",
+        "valueAffected": "str",
+        "enabled": true,
+        "source": "Powered Armor",
+        "notes": "Adds powered armor str bonus to applicable strength based skills.",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "max": 6,
+        "_id": "e45fb28d-c511-4f7a-ad96-ca2ec047b8c8"
+      }
+    ],
     "container": {
       "contents": [],
       "storage": [
@@ -104,8 +151,7 @@
           "subtype": "armorUpgrade",
           "amount": 4,
           "acceptsType": [
-            "upgrade",
-            "weapon"
+            "upgrade"
           ],
           "affectsEncumbrance": true,
           "weightProperty": "slots"
@@ -120,7 +166,8 @@
           "affectsEncumbrance": true,
           "weightProperty": ""
         }
-      ]
+      ],
+      "isOpen": true
     },
     "armor": {
       "type": "power",
@@ -131,15 +178,94 @@
       "speedAdjust": 0
     },
     "strength": 22,
-    "speed": "30 feet, fly 30 feet (average)",
+    "speed": "30 ft., fly 30 ft. (average)",
     "size": "huge",
-    "reach": "10 ft",
-    "proficient": true,
+    "reach": "10 ft.",
+    "proficient": false,
     "abilityMods": {
       "parts": []
     }
   },
   "flags": {},
   "img": "icons/svg/mystery-man.svg",
-  "_id": "LmH2QAAlFlrKHQfz"
+  "effects": [],
+  "_id": "LmH2QAAlFlrKHQfz",
+  "storage": {
+    "type": [
+      "slot",
+      "slot"
+    ],
+    "subtype": [
+      "armorUpgrade",
+      "weaponSlot"
+    ],
+    "amount": [
+      "4",
+      "3"
+    ],
+    "weightProperty": [
+      "slots",
+      ""
+    ],
+    "affectsEncumbrance": [
+      true,
+      true
+    ]
+  },
+  "weapon": [
+    false,
+    true
+  ],
+  "equipment": [
+    false,
+    false
+  ],
+  "consumable": [
+    false,
+    false
+  ],
+  "goods": [
+    false,
+    false
+  ],
+  "container": [
+    false,
+    false
+  ],
+  "hybrid": [
+    false,
+    false
+  ],
+  "magic": [
+    false,
+    false
+  ],
+  "technological": [
+    false,
+    false
+  ],
+  "fusion": [
+    false,
+    false
+  ],
+  "upgrade": [
+    true,
+    false
+  ],
+  "spell": [
+    false,
+    false
+  ],
+  "augmentation": [
+    false,
+    false
+  ],
+  "shield": [
+    false,
+    false
+  ],
+  "weaponAccessory": [
+    false,
+    false
+  ]
 }

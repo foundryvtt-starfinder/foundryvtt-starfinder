@@ -1,10 +1,6 @@
 {
-  "_id": "N7ANqhqEFjE1KPQY",
+  "_id": "uXPuDyf9ZA5DH38z",
   "name": "Plasma rifle, blue star",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
   "type": "weapon",
   "data": {
     "description": {
@@ -12,7 +8,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "PHB",
+    "source": "CRB pg. 176",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -21,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 105,
+        "max": "105"
+      },
+      "hardness": {
+        "value": "45"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -35,29 +49,30 @@
       "type": ""
     },
     "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
+      "value": 100,
+      "units": "ft",
+      "shape": "line",
       "effect": ""
     },
     "range": {
-      "value": 100,
-      "units": "ft",
+      "value": null,
+      "units": "none",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "Burn [[4d8]]",
+    "chatFlavor": "",
     "critical": {
       "parts": [],
-      "effect": ""
+      "effect": "Burn 4d8"
     },
     "damage": {
       "parts": [
@@ -70,7 +85,7 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
@@ -80,9 +95,36 @@
     },
     "usage": {
       "value": 10,
-      "per": "shot"
+      "per": "round"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 20,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "longA",
     "weaponCategory": "plasma",
     "special": "",
@@ -168,28 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 20,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  "img": "systems/sfrpg/icons/equipment/weapons/caustolance-executioner.jpg",
+  "effects": []
 }

@@ -1,9 +1,6 @@
 {
   "_id": "9VQax8ZTreM4HhLP",
   "name": "Shock truncheon, storm",
-  "permission": {
-    "default": 0
-  },
   "type": "weapon",
   "data": {
     "description": {
@@ -11,7 +8,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Core Rulebook, P. 171",
+    "source": "CRB pg. 171",
     "type": "",
     "quantity": 1,
     "bulk": "1",
@@ -20,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 93,
+        "max": "93"
+      },
+      "hardness": {
+        "value": "37"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -41,22 +56,28 @@
     },
     "range": {
       "value": null,
-      "units": "none",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "mwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "parts": [
+        [
+          "3d4",
+          "electricity"
+        ]
+      ],
+      "effect": "Arc 3d4"
     },
     "damage": {
       "parts": [
@@ -69,7 +90,7 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
@@ -80,6 +101,34 @@
     "usage": {
       "value": 2,
       "per": "minute"
+    },
+    "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 16,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
     },
     "weaponType": "advancedM",
     "weaponCategory": "shock",
@@ -110,26 +159,73 @@
       "stun": true,
       "thrown": false,
       "trip": false,
-      "unwieldy": false
+      "unwieldy": false,
+      "aeon": false,
+      "antibiological": false,
+      "aurora": false,
+      "breach": false,
+      "breakdown": false,
+      "cluster": false,
+      "conceal": false,
+      "deconstruct": false,
+      "deflect": false,
+      "double": false,
+      "drainCharge": false,
+      "echo": false,
+      "extinguish": false,
+      "feint": false,
+      "fiery": false,
+      "firstArc": false,
+      "flexibleLine": false,
+      "force": false,
+      "freeHands": false,
+      "fueled": false,
+      "grapple": false,
+      "gravitation": false,
+      "guided": false,
+      "harrying": false,
+      "holyWater": false,
+      "hybrid": false,
+      "ignite": false,
+      "indirect": false,
+      "integrated": false,
+      "living": false,
+      "lockdown": false,
+      "mind-affecting": false,
+      "mine": false,
+      "mire": false,
+      "modal": false,
+      "necrotic": false,
+      "polarize": false,
+      "polymorphic": false,
+      "professional": false,
+      "punchGun": false,
+      "radioactive": false,
+      "recall": false,
+      "regrowth": false,
+      "relic": false,
+      "reposition": false,
+      "shape": false,
+      "shells": false,
+      "shield": false,
+      "subtle": false,
+      "sunder": false,
+      "swarm": false,
+      "tail": false,
+      "teleportive": false,
+      "thought": false,
+      "throttle": false,
+      "unbalancing": false,
+      "underwater": false,
+      "variantBoost": false,
+      "wideLine": false
     },
     "proficient": false,
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 16,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
+    "abilityMods": {
+      "parts": []
     }
   },
-  "sort": 200000,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  "img": "systems/sfrpg/icons/equipment/weapons/peacemaker.PNG",
+  "effects": []
 }

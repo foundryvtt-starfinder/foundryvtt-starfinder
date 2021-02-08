@@ -1,9 +1,5 @@
 {
   "name": "Thinplate",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
   "type": "equipment",
   "data": {
     "description": {
@@ -11,7 +7,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SCR",
+    "source": "CRB pg. 198",
     "type": "",
     "quantity": 1,
     "bulk": "3",
@@ -20,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 21,
+        "max": "21"
+      },
+      "hardness": {
+        "value": "9"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "",
       "cost": 0,
@@ -50,6 +64,7 @@
       "max": 0,
       "per": null
     },
+    "isActive": null,
     "ability": null,
     "actionType": "",
     "attackBonus": 0,
@@ -68,23 +83,15 @@
       "descriptor": ""
     },
     "descriptors": [],
+    "capacity": {
+      "value": 0,
+      "max": 0
+    },
+    "usage": {
+      "value": 0,
+      "per": ""
+    },
     "modifiers": [],
-    "armor": {
-      "type": "heavy",
-      "eac": 4,
-      "kac": 6,
-      "dex": 2,
-      "acp": -3,
-      "speedAdjust": -10
-    },
-    "strength": 0,
-    "speed": "",
-    "size": "",
-    "reach": "",
-    "proficient": true,
-    "abilityMods": {
-      "parts": []
-    },
     "container": {
       "contents": [],
       "storage": [
@@ -98,21 +105,50 @@
           ],
           "affectsEncumbrance": true,
           "weightProperty": "slots"
-        },
-        {
-          "type": "slot",
-          "subtype": "weaponSlot",
-          "amount": 0,
-          "acceptsType": [
-            "weapon"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": ""
         }
-      ]
+      ],
+      "isOpen": true
+    },
+    "armor": {
+      "type": "heavy",
+      "eac": 4,
+      "kac": 6,
+      "dex": 2,
+      "acp": -3,
+      "speedAdjust": -10
+    },
+    "strength": 0,
+    "speed": "",
+    "size": "",
+    "reach": "",
+    "proficient": false,
+    "abilityMods": {
+      "parts": []
     }
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "hVmuLGFSybTEfHkv"
+  "img": "icons/equipment/chest/breastplate-layered-steel.webp",
+  "effects": [],
+  "_id": "hVmuLGFSybTEfHkv",
+  "storage": {
+    "type": "slot",
+    "subtype": "armorUpgrade",
+    "amount": 1,
+    "weightProperty": "slots",
+    "affectsEncumbrance": true
+  },
+  "weapon": true,
+  "equipment": false,
+  "consumable": false,
+  "goods": false,
+  "container": false,
+  "hybrid": false,
+  "magic": false,
+  "technological": false,
+  "fusion": false,
+  "upgrade": true,
+  "spell": false,
+  "augmentation": false,
+  "shield": false,
+  "weaponAccessory": false
 }

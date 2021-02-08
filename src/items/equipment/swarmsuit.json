@@ -1,9 +1,5 @@
 {
   "name": "Swarmsuit",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
   "type": "equipment",
   "data": {
     "description": {
@@ -11,7 +7,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SCR",
+    "source": "CRB pg. 197",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -20,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 90,
+        "max": "90"
+      },
+      "hardness": {
+        "value": "35"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "",
       "cost": 0,
@@ -50,6 +64,7 @@
       "max": 0,
       "per": null
     },
+    "isActive": null,
     "ability": null,
     "actionType": "",
     "attackBonus": 0,
@@ -68,7 +83,32 @@
       "descriptor": ""
     },
     "descriptors": [],
+    "capacity": {
+      "value": 0,
+      "max": 0
+    },
+    "usage": {
+      "value": 0,
+      "per": ""
+    },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "armorUpgrade",
+          "amount": 4,
+          "acceptsType": [
+            "upgrade",
+            "weapon"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "slots"
+        }
+      ],
+      "isOpen": true
+    },
     "armor": {
       "type": "light",
       "eac": 18,
@@ -84,35 +124,18 @@
     "proficient": true,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "armorUpgrade",
-          "amount": 4,
-          "acceptsType": [
-            "upgrade",
-            "weapon"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "slots"
-        },
-        {
-          "type": "slot",
-          "subtype": "weaponSlot",
-          "amount": 0,
-          "acceptsType": [
-            "weapon"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": ""
-        }
-      ]
     }
   },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "sort": 4100000,
+  "flags": {
+    "exportSource": {
+      "world": "dev",
+      "system": "sfrpg",
+      "coreVersion": "0.7.9",
+      "systemVersion": "0.8.3.0"
+    }
+  },
+  "img": "icons/equipment/chest/breastplate-banded-steel-gold.webp",
+  "effects": [],
   "_id": "YM2E3aBtNpflih2A"
 }

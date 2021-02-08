@@ -1,9 +1,6 @@
 {
   "_id": "z5kz9TDrS3pu6sDw",
   "name": "Flare gun, survival",
-  "permission": {
-    "default": 0
-  },
   "type": "weapon",
   "data": {
     "description": {
@@ -11,7 +8,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Core Rulebook, P. 173",
+    "source": "CRB pg. 173",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -20,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 18,
+        "max": "18"
+      },
+      "hardness": {
+        "value": "7"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -46,17 +61,18 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "parts": [],
-      "effect": ""
+      "effect": "Burn 1d6"
     },
     "damage": {
       "parts": [
@@ -69,7 +85,7 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
@@ -79,7 +95,35 @@
     },
     "usage": {
       "value": 1,
-      "per": "round"
+      "per": "shot"
+    },
+    "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 1,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
     },
     "weaponType": "smallA",
     "weaponCategory": "flame",
@@ -166,29 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 1,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "sort": 700000,
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/flare-gun.jpg"
+  "img": "systems/sfrpg/icons/equipment/weapons/flare-gun.jpg",
+  "effects": []
 }
