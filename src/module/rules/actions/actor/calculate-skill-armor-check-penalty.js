@@ -7,6 +7,9 @@ export default function (engine) {
         const skills = fact.data.skills;
         const modifiers = fact.modifiers;
 
+        const hasLightArmor = armor?.data?.armor?.type === "light";
+        const hasHeavyArmor = armor?.data?.armor?.type === "heavy";
+
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
                 if (item.rolledMods) {
@@ -22,9 +25,9 @@ export default function (engine) {
             let computedBonus = roll.total;
 
             let mod = 0;
-            if (bonus.valueAffected === "acp-light" && armor.data.armor.type === "light") {
+            if (bonus.valueAffected === "acp-light" && hasLightArmor) {
                 mod = computedBonus;
-            } else if (bonus.valueAffected === "acp-heavy" && armor.data.armor.type === "heavy") {
+            } else if (bonus.valueAffected === "acp-heavy" && hasHeavyArmor) {
                 mod = computedBonus;
             } else {
                 mod = computedBonus;
