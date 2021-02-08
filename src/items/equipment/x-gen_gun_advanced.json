@@ -1,10 +1,6 @@
 {
   "_id": "8nNSxxIKD7NrZnSq",
-  "name": "X-gen Gun, Advanced",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "X-gen gun, advanced",
   "type": "weapon",
   "data": {
     "description": {
@@ -12,47 +8,66 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "",
+    "source": "CRB pg. 177",
     "type": "",
     "quantity": 1,
-    "bulk": "L",
-    "price": 0,
-    "level": 1,
+    "bulk": "2",
+    "price": 13100,
+    "level": 9,
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 42,
+        "max": "42"
+      },
+      "hardness": {
+        "value": "23"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "",
       "type": ""
     },
     "area": {
       "value": null,
-      "units": "",
+      "units": "none",
       "shape": "",
       "effect": ""
     },
     "range": {
-      "value": null,
-      "units": "",
+      "value": 120,
+      "units": "ft",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
+      "value": null,
+      "max": null,
+      "per": ""
     },
-    "ability": "str",
-    "actionType": "",
+    "isActive": null,
+    "ability": "dex",
+    "actionType": "rwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -60,34 +75,66 @@
       "effect": ""
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "2d12",
+          "piercing"
+        ]
+      ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
-      "value": 0,
-      "max": 0
+      "value": 100,
+      "max": 100
     },
     "usage": {
-      "value": 0,
-      "per": ""
+      "value": 2,
+      "per": "shot"
     },
     "modifiers": [],
-    "weaponType": "basicM",
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 1,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
+    "weaponType": "heavy",
     "weaponCategory": "projectile",
     "special": "",
     "properties": {
       "one": false,
-      "two": false,
+      "two": true,
       "amm": false,
       "analog": false,
       "archaic": false,
-      "automatic": false,
+      "automatic": true,
       "blast": false,
       "block": false,
       "boost": false,
@@ -163,28 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 1,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/advanced_x-gen_gun.jpg"
+  "img": "systems/sfrpg/icons/equipment/weapons/advanced_x-gen_gun.jpg",
+  "effects": []
 }

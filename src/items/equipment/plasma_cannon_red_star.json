@@ -1,10 +1,6 @@
 {
   "_id": "CK1NKQsBsOBuy1dx",
-  "name": "Plasma Cannon, Red Star",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Plasma cannon, red star",
   "type": "weapon",
   "data": {
     "description": {
@@ -12,7 +8,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SCR",
+    "source": "CRB pg. 177",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -21,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 39,
+        "max": "39"
+      },
+      "hardness": {
+        "value": "21"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -37,8 +51,8 @@
     "area": {
       "value": 5,
       "units": "ft",
-      "shape": "other",
-      "effect": ""
+      "shape": "sphere",
+      "effect": "burst"
     },
     "range": {
       "value": 100,
@@ -47,17 +61,18 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "Burn [[1d8]]",
+    "chatFlavor": "",
     "critical": {
       "parts": [],
-      "effect": ""
+      "effect": "Burn 1d8"
     },
     "damage": {
       "parts": [
@@ -70,7 +85,7 @@
     "formula": "",
     "save": {
       "type": "reflex",
-      "dc": null,
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
       "descriptor": "half"
     },
     "descriptors": [],
@@ -80,9 +95,36 @@
     },
     "usage": {
       "value": 5,
-      "per": "shot"
+      "per": "round"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 8,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "heavy",
     "weaponCategory": "plasma",
     "special": "",
@@ -168,28 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 8,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/red_star_plasma_cannon.jpg"
+  "img": "systems/sfrpg/icons/equipment/weapons/red_star_plasma_cannon.jpg",
+  "effects": []
 }

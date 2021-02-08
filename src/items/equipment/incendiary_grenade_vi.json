@@ -1,10 +1,6 @@
 {
   "_id": "XlpFd7mb2GK98gSj",
-  "name": "Incendiary Grenade VI",
-  "permission": {
-    "default": 0,
-    "umHu8DFnCrMQVZ37": 3
-  },
+  "name": "Incendiary grenade VI",
   "type": "weapon",
   "data": {
     "description": {
@@ -12,18 +8,36 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Core Rulebook",
+    "source": "CRB pg. 179",
     "type": "",
     "quantity": 1,
     "bulk": "L",
-    "price": 108800,
+    "price": 54300,
     "level": 18,
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 99,
+        "max": "99"
+      },
+      "hardness": {
+        "value": "41"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
-      "type": "none",
-      "cost": null,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
@@ -35,10 +49,10 @@
       "type": ""
     },
     "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
-      "effect": ""
+      "value": 15,
+      "units": "ft",
+      "shape": "sphere",
+      "effect": "burst"
     },
     "range": {
       "value": 20,
@@ -51,10 +65,11 @@
       "max": 1,
       "per": "charges"
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "",
+    "chatFlavor": "burning 6d6",
     "critical": {
       "parts": [],
       "effect": ""
@@ -69,9 +84,9 @@
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": "negate"
+      "type": "reflex",
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
+      "descriptor": "partial"
     },
     "descriptors": [],
     "capacity": {
@@ -79,13 +94,31 @@
       "max": 1
     },
     "usage": {
-      "value": 0,
-      "per": ""
+      "value": 1,
+      "per": "shot"
+    },
+    "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 18,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
     },
     "weaponType": "grenade",
+    "weaponCategory": "flame",
     "special": "",
     "properties": {
-      "one": false,
+      "one": true,
       "two": false,
       "amm": false,
       "analog": false,
@@ -166,28 +199,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 18,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/incendiary-grenade.jpg"
+  "img": "systems/sfrpg/icons/equipment/weapons/incendiary-grenade.jpg",
+  "effects": []
 }
