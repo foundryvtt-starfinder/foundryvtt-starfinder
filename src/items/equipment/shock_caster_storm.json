@@ -1,10 +1,6 @@
 {
   "_id": "nUmJmNu0kkuTz2tn",
-  "name": "Shock Caster, Storm",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Shock caster, storm",
   "type": "weapon",
   "data": {
     "description": {
@@ -12,7 +8,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SCR",
+    "source": "CRB pg. 178",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -21,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 93,
+        "max": "93"
+      },
+      "hardness": {
+        "value": "37"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -37,8 +51,8 @@
     "area": {
       "value": 20,
       "units": "ft",
-      "shape": "shapable",
-      "effect": ""
+      "shape": "sphere",
+      "effect": "burst"
     },
     "range": {
       "value": 40,
@@ -47,10 +61,11 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
@@ -70,7 +85,7 @@
     "formula": "",
     "save": {
       "type": "reflex",
-      "dc": null,
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
       "descriptor": "half"
     },
     "descriptors": [],
@@ -80,9 +95,36 @@
     },
     "usage": {
       "value": 10,
-      "per": "shot"
+      "per": "round"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 16,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "heavy",
     "weaponCategory": "shock",
     "special": "",
@@ -168,28 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 16,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  "img": "systems/sfrpg/icons/equipment/weapons/aurora_shock_caster.jpg",
+  "effects": []
 }

@@ -1,10 +1,6 @@
 {
   "_id": "ueaVB0BMSh0NdYCz",
-  "name": "Flamethrower, Salamander-class",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
+  "name": "Flamethrower, salamander-class",
   "type": "weapon",
   "data": {
     "description": {
@@ -12,7 +8,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SCR",
+    "source": "CRB pg. 177",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -21,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 39,
+        "max": "39"
+      },
+      "hardness": {
+        "value": "21"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -35,29 +49,30 @@
       "type": ""
     },
     "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
+      "value": 30,
+      "units": "ft",
+      "shape": "cone",
       "effect": ""
     },
     "range": {
-      "value": 30,
-      "units": "ft",
+      "value": null,
+      "units": "none",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "Burn [[2d6]]",
+    "chatFlavor": "",
     "critical": {
       "parts": [],
-      "effect": ""
+      "effect": "Burn 2d6"
     },
     "damage": {
       "parts": [
@@ -70,7 +85,7 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
@@ -80,9 +95,36 @@
     },
     "usage": {
       "value": 5,
-      "per": "shot"
+      "per": "round"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 8,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "heavy",
     "weaponCategory": "flame",
     "special": "",
@@ -168,28 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 8,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/salamander-class_flamethrower.png.png"
+  "img": "systems/sfrpg/icons/equipment/weapons/salamander-class_flamethrower.png.png",
+  "effects": []
 }

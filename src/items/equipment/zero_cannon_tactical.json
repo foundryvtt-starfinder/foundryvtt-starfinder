@@ -1,4 +1,5 @@
 {
+  "_id": "wz0kdWrkGohttsuG",
   "name": "Zero cannon, tactical",
   "type": "weapon",
   "data": {
@@ -7,7 +8,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "CRB",
+    "source": "CRB pg. 177",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -16,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 48,
+        "max": "48"
+      },
+      "hardness": {
+        "value": "27"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -30,48 +49,44 @@
       "type": ""
     },
     "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
+      "value": 60,
+      "units": "ft",
+      "shape": "line",
       "effect": ""
     },
     "range": {
-      "value": 60,
-      "units": "ft",
+      "value": null,
+      "units": "none",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 4,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "Line, unwieldy",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
+      "parts": [],
       "effect": "Staggered"
     },
     "damage": {
       "parts": [
         [
           "3d8",
-          "cryo"
+          "cold"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,13 +98,40 @@
       "per": "Battery charge"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 11,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "heavy",
     "weaponCategory": "cryo",
     "special": "",
     "properties": {
       "one": false,
       "two": true,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -168,30 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 11,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "wz0kdWrkGohttsuG"
+  "img": "systems/sfrpg/icons/equipment/weapons/advanced_zero_cannon.jpg",
+  "effects": []
 }
