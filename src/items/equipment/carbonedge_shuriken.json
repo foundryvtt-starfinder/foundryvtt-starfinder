@@ -1,26 +1,40 @@
 {
   "_id": "CelYhllAdq0AYFdw",
   "name": "Carbonedge shuriken",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
   "type": "weapon",
   "data": {
     "description": {
-      "value": "<p>The four-armed kasathas favor thrown weapons, so they are the most common users of these finely edged projectiles. Users of thrown weapons appreciate the light weight and keen edges of carbonedge shuriken.</p>",
+      "value": "<p>The four-armed kasathas favor thrown weapons, so they are the most common users of these finely edged projectiles. Users of thrown weapons appreciate the light weight and keen edges of carbonedge shuriken.</p>\n<p><strong>Capacity</strong>:&nbsp;10</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "SCR",
+    "source": "CRB pg. 179",
     "type": "",
-    "quantity": 1,
-    "bulk": "L",
+    "quantity": 10,
+    "bulk": "-",
     "price": 85,
     "level": 1,
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 18,
+        "max": "18"
+      },
+      "hardness": {
+        "value": "7"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -47,17 +61,18 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
+      "value": 10,
+      "max": 10,
+      "per": "charges"
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "Bleed [[1d4]]",
+    "chatFlavor": "",
     "critical": {
       "parts": [],
-      "effect": ""
+      "effect": "Bleed 1d4"
     },
     "damage": {
       "parts": [
@@ -70,7 +85,7 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
@@ -83,14 +98,31 @@
       "per": "shot"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 1,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "special",
+    "weaponCategory": "projectile",
     "special": "",
     "properties": {
       "one": true,
       "two": false,
       "amm": false,
       "aeon": false,
-      "analog": false,
+      "analog": true,
       "antibiological": false,
       "archaic": false,
       "aurora": false,
@@ -167,28 +199,17 @@
       "underwater": false,
       "unwieldy": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 1,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  "img": "icons/weapons/thrown/shuriken-blue.webp",
+  "effects": []
 }

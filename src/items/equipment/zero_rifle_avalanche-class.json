@@ -1,4 +1,5 @@
 {
+  "_id": "zaB0PGIkOXLGudHL",
   "name": "Zero rifle, avalanche-class",
   "type": "weapon",
   "data": {
@@ -7,7 +8,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "CRB",
+    "source": "CRB pg. 176",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -16,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 99,
+        "max": "99"
+      },
+      "hardness": {
+        "value": "41"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -42,31 +61,32 @@
       "per": ""
     },
     "uses": {
-      "value": 5,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "parts": [],
-      "effect": "#Staggered"
+      "effect": "Staggered"
     },
     "damage": {
       "parts": [
         [
           "7d8 + @bonus",
-          "Cryo"
+          "cold"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -75,16 +95,43 @@
     },
     "usage": {
       "value": 5,
-      "per": "Battery charge"
+      "per": "shot"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 18,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "longA",
     "weaponCategory": "cryo",
     "special": "",
     "properties": {
       "one": false,
       "two": true,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -163,30 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 18,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "zaB0PGIkOXLGudHL"
+  "img": "systems/sfrpg/icons/equipment/weapons/scattergun-snub.jpg",
+  "effects": []
 }

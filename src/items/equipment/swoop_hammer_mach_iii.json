@@ -1,9 +1,6 @@
 {
   "_id": "UWvDcx5yQmuXhAui",
   "name": "Swoop hammer, mach III",
-  "permission": {
-    "default": 0
-  },
   "type": "weapon",
   "data": {
     "description": {
@@ -11,7 +8,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Core Rulebook, P. 173",
+    "source": "CRB pg. 173",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -20,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 105,
+        "max": "105"
+      },
+      "hardness": {
+        "value": "45"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -40,40 +55,37 @@
       "effect": ""
     },
     "range": {
-      "value": null,
-      "units": "none",
+      "value": 10,
+      "units": "ft",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "mwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "parts": [],
-      "effect": ""
+      "effect": "Knockdown"
     },
     "damage": {
       "parts": [
         [
           "14d10 + @mod",
-          "bludgeoning"
-        ],
-        [
-          "",
-          "fire"
+          "bludgeoning+fire"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
@@ -85,7 +97,36 @@
       "value": 4,
       "per": "minute"
     },
+    "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 20,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
+    "weaponCategory": "uncategorized",
     "special": "",
     "properties": {
       "one": false,
@@ -169,29 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 20,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "sort": 2200001,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  "img": "icons/weapons/hammers/shorthammer-double-steel-embossed.webp",
+  "effects": []
 }

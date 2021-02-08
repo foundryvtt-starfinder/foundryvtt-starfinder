@@ -1,10 +1,6 @@
 {
   "_id": "kkZz6UDKSe81DGnC",
-  "name": "Shock Grenade III",
-  "permission": {
-    "default": 0,
-    "umHu8DFnCrMQVZ37": 3
-  },
+  "name": "Shock grenade III",
   "type": "weapon",
   "data": {
     "description": {
@@ -12,18 +8,36 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Core Rulebook",
+    "source": "CRB pg. 177",
     "type": "",
     "quantity": 1,
     "bulk": "L",
-    "price": 5380,
+    "price": 2500,
     "level": 10,
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 45,
+        "max": "45"
+      },
+      "hardness": {
+        "value": "25"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
-      "type": "none",
-      "cost": null,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
@@ -37,8 +51,8 @@
     "area": {
       "value": 15,
       "units": "ft",
-      "shape": "",
-      "effect": ""
+      "shape": "sphere",
+      "effect": "burst"
     },
     "range": {
       "value": 20,
@@ -47,10 +61,11 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
+      "value": 1,
+      "max": 1,
+      "per": "charges"
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "rwak",
     "attackBonus": 0,
@@ -69,23 +84,41 @@
     },
     "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": "negate"
+      "type": "reflex",
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
+      "descriptor": "half"
     },
     "descriptors": [],
     "capacity": {
-      "value": 0,
-      "max": 0
+      "value": 1,
+      "max": 1
     },
     "usage": {
-      "value": 0,
-      "per": ""
+      "value": 1,
+      "per": "shot"
+    },
+    "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 10,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
     },
     "weaponType": "grenade",
+    "weaponCategory": "shock",
     "special": "",
     "properties": {
-      "one": false,
+      "one": true,
       "two": false,
       "amm": false,
       "analog": false,
@@ -166,28 +199,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 10,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/shock-grenade.jpg"
+  "img": "systems/sfrpg/icons/equipment/weapons/shock-grenade.jpg",
+  "effects": []
 }

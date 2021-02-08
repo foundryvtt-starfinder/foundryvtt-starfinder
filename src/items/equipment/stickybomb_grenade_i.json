@@ -1,10 +1,6 @@
 {
   "_id": "d4OoifxLs3FzBgja",
-  "name": "Stickybomb Grenade I",
-  "permission": {
-    "default": 0,
-    "umHu8DFnCrMQVZ37": 3
-  },
+  "name": "Stickybomb grenade I",
   "type": "weapon",
   "data": {
     "description": {
@@ -12,18 +8,36 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "Core Rulebook",
+    "source": "CRB pg. 178",
     "type": "",
     "quantity": 1,
     "bulk": "L",
-    "price": 170,
+    "price": 80,
     "level": 1,
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 18,
+        "max": "18"
+      },
+      "hardness": {
+        "value": "7"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
-      "type": "none",
-      "cost": null,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
@@ -37,8 +51,8 @@
     "area": {
       "value": 10,
       "units": "ft",
-      "shape": "",
-      "effect": ""
+      "shape": "sphere",
+      "effect": "burst"
     },
     "range": {
       "value": 20,
@@ -47,14 +61,15 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
+      "value": 1,
+      "max": 1,
+      "per": "charges"
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "entangled 2d4 rounds",
+    "chatFlavor": "entangled [[2d4]] rounds",
     "critical": {
       "parts": [],
       "effect": ""
@@ -62,25 +77,43 @@
     "damage": {
       "parts": []
     },
-    "formula": "2d4",
+    "formula": "",
     "save": {
-      "type": "",
-      "dc": null,
+      "type": "reflex",
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
       "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
-      "value": 0,
-      "max": 0
+      "value": 1,
+      "max": 1
     },
     "usage": {
-      "value": 0,
-      "per": ""
+      "value": 1,
+      "per": "shot"
+    },
+    "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 1,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
     },
     "weaponType": "grenade",
+    "weaponCategory": "uncategorized",
     "special": "",
     "properties": {
-      "one": false,
+      "one": true,
       "two": false,
       "amm": false,
       "analog": false,
@@ -161,28 +194,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 1,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/stickybomb-grenade.jpg"
+  "img": "systems/sfrpg/icons/equipment/weapons/stickybomb-grenade.jpg",
+  "effects": []
 }

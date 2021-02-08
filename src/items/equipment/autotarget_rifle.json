@@ -1,9 +1,6 @@
 {
+  "_id": "OSUjCakkpj6iAj7U",
   "name": "Autotarget rifle",
-  "permission": {
-    "default": 0,
-    "EgDbkW0aYa1c3C2f": 3
-  },
   "type": "weapon",
   "data": {
     "description": {
@@ -11,7 +8,7 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SCR",
+    "source": "CRB pg. 176",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -20,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 21,
+        "max": "21"
+      },
+      "hardness": {
+        "value": "9"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -35,7 +50,7 @@
     },
     "area": {
       "value": null,
-      "units": null,
+      "units": "none",
       "shape": "",
       "effect": ""
     },
@@ -46,12 +61,13 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
-    "ability": "str",
-    "actionType": "",
+    "isActive": null,
+    "ability": "dex",
+    "actionType": "rwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -59,13 +75,18 @@
       "effect": ""
     },
     "damage": {
-      "parts": []
+      "parts": [
+        [
+          "1d6",
+          "piercing"
+        ]
+      ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -77,6 +98,33 @@
       "per": "shot"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 2,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "longA",
     "weaponCategory": "projectile",
     "special": "",
@@ -162,29 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 2,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "OSUjCakkpj6iAj7U"
+  "img": "systems/sfrpg/icons/equipment/weapons/needler-rifle.jpg",
+  "effects": []
 }

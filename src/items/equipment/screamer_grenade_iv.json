@@ -1,5 +1,6 @@
 {
-  "name": "Screamer Grenade IV",
+  "_id": "COCIZc9doKNLCnMz",
+  "name": "Screamer grenade IV",
   "type": "weapon",
   "data": {
     "description": {
@@ -7,31 +8,31 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "",
+    "source": "CRB pg. 179",
     "type": "",
     "quantity": 1,
     "bulk": "L",
-    "price": 43500,
+    "price": 20000,
     "level": 16,
     "attuned": false,
     "equipped": false,
     "identified": true,
     "attributes": {
-      "sturdy": false,
+      "sturdy": true,
       "customBuilt": false,
       "size": "medium",
       "dex": {
         "mod": ""
       },
       "hp": {
-        "value": null,
-        "max": ""
+        "value": 93,
+        "max": "93"
       },
       "hardness": {
-        "value": ""
+        "value": "37"
       },
       "ac": {
-        "value": ""
+        "value": "5"
       }
     },
     "activation": {
@@ -40,7 +41,7 @@
       "condition": ""
     },
     "duration": {
-      "value": "deafened 1d4 minutes",
+      "value": "",
       "units": ""
     },
     "target": {
@@ -50,7 +51,7 @@
     "area": {
       "value": 30,
       "units": "ft",
-      "shape": "",
+      "shape": "sphere",
       "effect": "burst"
     },
     "range": {
@@ -60,14 +61,15 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
+      "value": 1,
+      "max": 1,
+      "per": "charges"
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "",
+    "chatFlavor": "deafened [[1d4]] minutes",
     "critical": {
       "parts": [],
       "effect": ""
@@ -83,7 +85,7 @@
     "formula": "",
     "save": {
       "type": "reflex",
-      "dc": "18+@abilities.dex.mod",
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
       "descriptor": "partial"
     },
     "descriptors": [],
@@ -109,10 +111,11 @@
           "affectsEncumbrance": true,
           "weightProperty": "level"
         }
-      ]
+      ],
+      "isOpen": true
     },
     "weaponType": "grenade",
-    "weaponCategory": "",
+    "weaponCategory": "sonic",
     "special": "",
     "properties": {
       "one": true,
@@ -201,12 +204,12 @@
       "regrowth": false,
       "unbalancing": false
     },
-    "proficient": true,
+    "proficient": false,
     "abilityMods": {
       "parts": []
     }
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "COCIZc9doKNLCnMz"
+  "img": "icons/weapons/thrown/bomb-gas-grey-purple.webp",
+  "effects": []
 }

@@ -1,17 +1,13 @@
 {
-  "name": "Iridishell, Advanced",
-  "permission": {
-    "default": 0,
-    "QKfICymYNdnzinV1": 3
-  },
+  "name": "Iridishell, advanced",
   "type": "equipment",
   "data": {
     "description": {
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">These gleaming metal plates lock together to form a suit of heavy armor reminiscent of an insect’s shell. Although the iridishell was initially designed for shirrens, its beauty combined and functionality makes it a popular choice for many. More expensive suits of iridishell not only offer more protection but feature elaborate designs with gold or silver trim and embedded jewels.&nbsp;</span></p>",
+      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">These gleaming metal plates lock together to form a suit of heavy armor reminiscent of an insectâ€™s shell. Although the iridishell was initially designed for shirrens, its beauty combined and functionality makes it a popular choice for many. More expensive suits of iridishell not only offer more protection but feature elaborate designs with gold or silver trim and embedded jewels.&nbsp;</span></p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "Core Rulebook",
+    "source": "CRB pg. 198",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -20,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 42,
+        "max": "42"
+      },
+      "hardness": {
+        "value": "23"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "",
       "cost": 0,
@@ -50,6 +64,7 @@
       "max": 0,
       "per": null
     },
+    "isActive": null,
     "ability": null,
     "actionType": "",
     "attackBonus": 0,
@@ -68,19 +83,15 @@
       "descriptor": ""
     },
     "descriptors": [],
-    "armor": {
-      "type": "heavy",
-      "eac": 13,
-      "kac": 15,
-      "dex": 3,
-      "acp": null,
-      "speedAdjust": null
+    "capacity": {
+      "value": 0,
+      "max": 0
     },
-    "strength": 0,
-    "speed": "",
-    "size": "",
-    "reach": "",
-    "proficient": true,
+    "usage": {
+      "value": 0,
+      "per": ""
+    },
+    "modifiers": [],
     "container": {
       "contents": [],
       "storage": [
@@ -94,21 +105,50 @@
           ],
           "affectsEncumbrance": true,
           "weightProperty": "slots"
-        },
-        {
-          "type": "slot",
-          "subtype": "weaponSlot",
-          "amount": 0,
-          "acceptsType": [
-            "weapon"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": ""
         }
-      ]
+      ],
+      "isOpen": true
+    },
+    "armor": {
+      "type": "heavy",
+      "eac": 13,
+      "kac": 15,
+      "dex": 3,
+      "acp": null,
+      "speedAdjust": null
+    },
+    "strength": 0,
+    "speed": "",
+    "size": "",
+    "reach": "",
+    "proficient": false,
+    "abilityMods": {
+      "parts": []
     }
   },
   "flags": {},
   "img": "systems/sfrpg/icons/equipment/armor/iridishell-advanced.jpg",
-  "_id": "Ce2B8suWEDoiSkgP"
+  "effects": [],
+  "_id": "Ce2B8suWEDoiSkgP",
+  "storage": {
+    "type": "slot",
+    "subtype": "armorUpgrade",
+    "amount": 3,
+    "weightProperty": "slots",
+    "affectsEncumbrance": true
+  },
+  "weapon": true,
+  "equipment": false,
+  "consumable": false,
+  "goods": false,
+  "container": false,
+  "hybrid": false,
+  "magic": false,
+  "technological": false,
+  "fusion": false,
+  "upgrade": true,
+  "spell": false,
+  "augmentation": false,
+  "shield": false,
+  "weaponAccessory": false
 }
