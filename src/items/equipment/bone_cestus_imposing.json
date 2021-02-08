@@ -1,21 +1,39 @@
 {
-  "name": "Aeon Guard, RPPR",
+  "name": "Bone cestus, imposing",
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>Centuries ago, some kasathas crafted simple weapons out of crest-eaters&rsquo; bony protrusions; these formidable gauntlets were badges of honor for the mightiest kasathan warriors, and modern artisans have recreated that aesthetic in the form of bone cestuses, though now they are usually formed of state-of-the-art resin instead of crest-eater bone. Due to the flecks of minerals embedded within, bone cestuses are often warm to the touch, especially after they have been exposed to natural sunlight. These basic one-handed melee weapons are capable of punching through a foe&rsquo;s defenses, sometimes puncturing vital organs in the process.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AA",
+    "source": "AA1 pg. 31",
     "type": "",
     "quantity": 1,
-    "bulk": "2",
-    "price": 21000,
-    "level": 10,
+    "bulk": "L",
+    "price": 32000,
+    "level": 12,
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 51,
+        "max": "51"
+      },
+      "hardness": {
+        "value": "29"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -36,61 +54,73 @@
       "effect": ""
     },
     "range": {
-      "value": 100,
-      "units": "ft",
+      "value": null,
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 1,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
-    "ability": "dex",
-    "actionType": "rwak",
+    "isActive": null,
+    "ability": "str",
+    "actionType": "mwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
-      "effect": "Knockdown"
+      "parts": [],
+      "effect": "Bleed 2d6"
     },
     "damage": {
       "parts": [
         [
-          "2d12",
-          "bludgeoning"
+          "3d6 + @mod",
+          "piercing"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
-      "value": 12,
-      "max": 12
+      "value": null,
+      "max": null
     },
     "usage": {
-      "value": 1,
-      "per": "shot"
+      "value": null,
+      "per": ""
     },
     "modifiers": [],
-    "weaponType": "longA",
-    "weaponCategory": "projectile",
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 12,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
+    },
+    "weaponType": "basicM",
+    "weaponCategory": "uncategorized",
     "special": "",
     "properties": {
-      "one": false,
-      "two": true,
-      "amm": true,
-      "analog": false,
+      "one": true,
+      "two": false,
+      "amm": false,
+      "analog": true,
       "archaic": false,
       "automatic": false,
       "blast": false,
@@ -168,30 +198,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 10,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "ry5nFHZg5OBgnI9j"
+  "img": "icons/weapons/fist/fist-knuckles-teeth.webp",
+  "effects": [],
+  "_id": "S3xHB0zD86XF7ITm"
 }

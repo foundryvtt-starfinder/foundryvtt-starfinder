@@ -1,13 +1,14 @@
 {
+  "_id": "zZwrA4SusXXoAYRu",
   "name": "Acid lancer, liquefier-class",
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>In addition to collecting the valuable composites the creature leaves behind, some entrepreneurs enter surnochs&rsquo; territory to hunt and kill them for their acid-producing glands and spines. These components can be made into heavy weapons known as acid lancers, which shoot jets of caustic fluid. A wielder of an acid lancer can squeeze the gland located near the trigger to give her next shot an extra boost of damaging acid. Acid lancers use a special synthetic acid called caustrol for ammunition, which has the same price and comes in the same size containers as petrol.</p>\n<p><strong>Boost</strong>: 1d8</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AA",
+    "source": "AA1 pg. 109",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -16,6 +17,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 57,
+        "max": "57"
+      },
+      "hardness": {
+        "value": "33"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -30,34 +49,30 @@
       "type": ""
     },
     "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
+      "value": 50,
+      "units": "ft",
+      "shape": "line",
       "effect": ""
     },
     "range": {
-      "value": 50,
-      "units": "ft",
+      "value": null,
+      "units": "none",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 8,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "Analog, boost 1d8, line, unwieldy",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "4d4",
-          "acid"
-        ]
-      ],
-      "effect": "Corrode"
+      "parts": [],
+      "effect": "Corrode 4d4"
     },
     "damage": {
       "parts": [
@@ -70,8 +85,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -80,15 +95,43 @@
     },
     "usage": {
       "value": 8,
-      "per": "shot"
+      "per": "round"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 14,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "heavy",
+    "weaponCategory": "uncategorized",
     "special": "",
     "properties": {
       "one": false,
       "two": true,
-      "amm": true,
+      "amm": false,
       "analog": true,
       "archaic": false,
       "automatic": false,
@@ -167,30 +210,17 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 14,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "zZwrA4SusXXoAYRu"
+  "img": "systems/sfrpg/icons/equipment/weapons/salamander-class_flamethrower.png.png",
+  "effects": []
 }
