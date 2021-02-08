@@ -11,6 +11,13 @@ export default function (engine) {
             wrecked: -4
         };
 
+        const critModsOther = {
+            nominal: 0,
+            glitching: 0,
+            malfunctioning: -2,
+            wrecked: -4
+        };
+
         /** Ensure Critical Status data is properly populated. */
         if (!data.attributes.systems) {
             data.attributes.systems = {};
@@ -86,6 +93,7 @@ export default function (engine) {
         for (const [key, systemData] of Object.entries(data.attributes.systems)) {
             const modifier = critMods[systemData.value];
             systemData.mod = modifier;
+            systemData.modOther = (key === "powerCore") ? critModsOther[systemData.value] : 0;
         }
         
         return fact;

@@ -1120,11 +1120,15 @@ export class ActorSFRPG extends Actor {
             // Gunners must select a quadrant.
             if (actionEntry.data.role === "gunner") {
                 systemBonus = ` + @ship.attributes.systems.weaponsArray${quadrant}.mod`;
-                systemBonus += ` + @ship.attributes.systems.powerCore.mod`;
+                systemBonus += ` + @ship.attributes.systems.powerCore.modOther`;
             } else {
                 for (const [key, value] of Object.entries(this.data.data.attributes.systems)) {
                     if (value.affectedRoles && value.affectedRoles[actionEntry.data.role]) {
-                        systemBonus += ` + @ship.attributes.systems.${key}.mod`;
+                        if (key === "powerCore" && actionEntry.data.role !== "engineer") {
+                            systemBonus += ` + @ship.attributes.systems.${key}.modOther`;
+                        } else {
+                            systemBonus += ` + @ship.attributes.systems.${key}.mod`;
+                        }
                     }
                 }
             }
