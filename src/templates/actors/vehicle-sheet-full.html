@@ -174,6 +174,30 @@
         <div class="tab attacks" data-group="primary" data-tab="attacks">
             <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Attacks.Title" }}</h3>
             <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Attacks.ToDo" }}</p>
+
+            <ol class="inventory-list">
+                {{#each inventory as |section sid|}}
+                <li class="inventory-header flexrow">
+                    <h3 class="item-name flexrow">{{section.label}}</h3>
+                    {{#if ../owner}}
+                    <div class="item-controls">
+                        {{#if section.allowAdd}}
+                        <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                        </a>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                </li>
+
+                <ol class="item-list">
+                    {{#each section.items as |item iid|}}
+                    {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../../this bigItem=true item=item.item children=item.contents}}
+                    {{/each}}
+                </ol>
+                {{/each}}
+            </ol>
+
         </div>
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
             {{editorPlus content=data.details.description.value target="data.details.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}

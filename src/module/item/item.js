@@ -17,6 +17,7 @@ export class ItemSFRPG extends Item {
      */
     get hasAttack() {
         if (this.data.type === "starshipWeapon") return true;
+        if (this.data.type === "vehicleAttack") return true;
         return ["mwak", "rwak", "msak", "rsak"].includes(this.data.data.actionType);
     }
 
@@ -568,6 +569,7 @@ export class ItemSFRPG extends Item {
         }
 
         if (this.data.type === "starshipWeapon") return this._rollStarshipAttack(options);
+        if (this.data.type === "vehicleAttack") return this._rollVehicleAttack(options);
 
         // Determine ability score modifier
         let abl = itemData.data.ability;
@@ -797,6 +799,53 @@ export class ItemSFRPG extends Item {
         ];
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
+
+        return await DiceSFRPG.d20Roll({
+            event: options.event,
+            parts: parts,
+            rollContext: rollContext,
+            title: title,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            critical: 20,
+            dialogOptions: {
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
+            },
+            onClose: (roll, formula, finalFormula) => {
+                if (roll) {
+                    const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
+                    if (rollDamageWithAttack) {
+                        this.rollDamage({});
+                    }
+
+                    if (this.hasCapacity()) {
+                        this.actor.updateEmbeddedEntity("OwnedItem", {
+                            _id: this.data._id,
+                            "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
+                        }, {});
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Place an attack roll for a vehicle using an item.
+     * @param {Object} options Options to pass to the attack roll
+     */
+    async _rollVehicleAttack(options = {}) {
+
+        // TODO: Take vehicle's negative attack modifiers
+        const parts = []
+
+        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("ship", this.actor);
+        rollContext.addContext("item", this, this.data);
+        rollContext.addContext("weapon", this, this.data);
+        rollContext.setMainContext("");
 
         return await DiceSFRPG.d20Roll({
             event: options.event,

@@ -1,6 +1,9 @@
 import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
+
+    static AcceptedWeapons = "vehicleAttack";
+
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["sfrpg", "sheet", "actor", "vehicle"],
@@ -32,6 +35,15 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      */
     _prepareItems(data) {
 
+        const inventory = {
+            // TODO: Localize label
+            inventory: { label: "Attacks", items: [], dataset: { type: ActorSheetSFRPGVehicle.AcceptedEquipment }, allowAdd: true }
+        };
+
+        this.processItemContainment(data.items, function (itemType, itemData) {
+            inventory.inventory.items.push(itemData);
+        });
+        data.inventory = inventory
     }
 
     /**

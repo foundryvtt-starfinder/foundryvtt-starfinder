@@ -1,0 +1,87 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ "SFRPG.Items.Header.ItemName" }}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{ localize "SFRPG.Items.VehicleAttack.Type" }}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    Item 1
+                </li>
+                <li>
+                    Item 2
+                </li>
+                <li>
+                    Item 3
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <h4 class="section-header">Weapon Attack</h4>
+
+            {{!-- Damage Formula --}}
+            <h4 class="damage-header">
+                {{ localize "SFRPG.Items.Action.DamageFormula" }}
+                <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
+            </h4>
+            <ol class="damage-parts form-group">
+                {{#each data.damage.parts as |part i| }}
+                <li class="damage-part flexrow" data-damage-part="{{i}}">
+                    <input type="text" name="data.damage.parts.{{i}}.0" value="{{lookup this "0"}}" />
+                    <a class="damage-control delete-damage"><i class="fas fa-minus"></i></a>
+                </li>
+                {{/each}}
+            </ol>
+
+            {{!-- Nonlethal Status --}}
+            <div class="form-group">
+                <label>Properties</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.nonlethal" {{checked data.nonlethal}} /> {{ localize "SFRPG.Items.VehicleAttack.Nonlethal" }}
+                    </label>
+                </div>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.canAvoid" {{checked data.canAvoid}} /> {{ localize "SFRPG.Items.VehicleAttack.canAvoid" }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>{{ localize "SFRPG.Items.VehicleAttack.avoidDC" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="data.avoidDC" value="{{data.avoidDC}}" data-dtype="Number" placeholder="{{localize "10"}}" />
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+</form>
