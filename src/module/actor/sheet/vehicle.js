@@ -2,7 +2,7 @@ import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
-    static AcceptedWeapons = "vehicleAttack";
+    static AcceptedWeapons = "vehicleAttack,weapon";
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -36,8 +36,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     _prepareItems(data) {
 
         const inventory = {
-            // TODO: Localize label
-            inventory: { label: "Attacks", items: [], dataset: { type: ActorSheetSFRPGVehicle.AcceptedEquipment }, allowAdd: true }
+            inventory: { label: game.i18n.format("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: ActorSheetSFRPGVehicle.AcceptedEquipment }, allowAdd: true }
         };
 
         this.processItemContainment(data.items, function (itemType, itemData) {
