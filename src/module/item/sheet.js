@@ -43,11 +43,10 @@ export class ItemSheetSFRPG extends ItemSheet {
             classes: ["sfrpg", "sheet", "item"],
             resizable: true,
             scrollY: [".tab.details"],
-            tabs: [{
-                navSelector: ".tabs",
-                contentSelector: ".sheet-body",
-                initial: "description"
-            }]
+            tabs: [
+                {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"},
+                {navSelector: ".descTabs", contentSelector: ".desc-body", initial: "description"}
+            ]
         });
     }
 
@@ -94,6 +93,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasHands = data.item.data.hasOwnProperty("hands");
         data.hasProficiency = data.item.data.proficient === true || data.item.data.proficient === false;
         data.isFeat = this.type === "feat";
+        data.isGM = game.user.isGM;
 
         // Physical items
         const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "magic", "hybrid", "upgrade", "augmentation", "shield", "weaponAccessory"];
