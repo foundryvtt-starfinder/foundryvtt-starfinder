@@ -74,6 +74,11 @@ export class ItemSFRPG extends Item {
             labels.kac = data.armor.kac ? `${data.armor.kac} KAC` : "";
         }
 
+        // Vehicle Attacks
+        else if (itemData.type == "vehicleAttack") {
+            //
+        }
+
         // Activated Items
         if (data.hasOwnProperty("activation")) {
 
@@ -568,6 +573,7 @@ export class ItemSFRPG extends Item {
         }
 
         if (this.data.type === "starshipWeapon") return this._rollStarshipAttack(options);
+        if (this.data.type === "vehicleAttack") return this._rollVehicleAttack(options);
 
         // Determine ability score modifier
         let abl = itemData.data.ability;
@@ -827,6 +833,53 @@ export class ItemSFRPG extends Item {
         });
     }
 
+    /**
+     * Place an attack roll for a vehicle using an item.
+     * @param {Object} options Options to pass to the attack roll
+     */
+    async _rollVehicleAttack(options = {}) {
+
+        // TODO: Take vehicle's negative attack modifiers
+        const parts = []
+
+        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("ship", this.actor);
+        rollContext.addContext("item", this, this.data);
+        rollContext.addContext("weapon", this, this.data);
+        rollContext.setMainContext("");
+
+        return await DiceSFRPG.d20Roll({
+            event: options.event,
+            parts: parts,
+            rollContext: rollContext,
+            title: title,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            critical: 20,
+            dialogOptions: {
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
+            },
+            onClose: (roll, formula, finalFormula) => {
+                if (roll) {
+                    const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
+                    if (rollDamageWithAttack) {
+                        this.rollDamage({});
+                    }
+
+                    if (this.hasCapacity()) {
+                        this.actor.updateEmbeddedEntity("OwnedItem", {
+                            _id: this.data._id,
+                            "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
+                        }, {});
+                    }
+                }
+            }
+        });
+    }
+
     /* -------------------------------------------- */
 
     /**
@@ -844,6 +897,7 @@ export class ItemSFRPG extends Item {
         }
 
         if (this.data.type === "starshipWeapon") return this._rollStarshipDamage({ event: event });
+        if (this.data.type === "vehicleAttack") return this._rollVehicleDamage({ event: event});
 
         // Determine ability score modifier
         let abl = itemData.ability;
@@ -967,6 +1021,44 @@ export class ItemSFRPG extends Item {
             damageTypes: damageTypes,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
+                width: 400,
+                top: event ? event.clientY - 80 : null,
+                left: window.innerWidth - 710
+            }
+        });
+    }
+
+    async _rollVehicleDamage({ event } = {}) {
+        const itemData = this.data.data;
+
+        if (!this.hasDamage) {
+            throw new Error("you may not make a Damage Roll with this item");
+        }
+
+        const parts = itemData.damage.parts.map(d => d[0]);
+
+        let title = '';
+        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
+            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
+        } else {
+            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
+        }
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("vehicle", this.actor);
+        rollContext.addContext("item", this, this.data);
+        rollContext.addContext("weapon", this, this.data);
+        rollContext.setMainContext("");
+
+        return await DiceSFRPG.damageRoll({
+            event: event,
+            parts: parts,
+            rollContext: rollContext,
+            title: title,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            dialogOptions: {
+                skipUI: true,
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
