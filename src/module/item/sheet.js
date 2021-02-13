@@ -94,6 +94,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasHands = data.item.data.hasOwnProperty("hands");
         data.hasProficiency = data.item.data.proficient === true || data.item.data.proficient === false;
         data.isFeat = this.type === "feat";
+        data.isVehicleAttack = data.item.type === "vehicleAttack";
 
         // Physical items
         const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "magic", "hybrid", "upgrade", "augmentation", "shield", "weaponAccessory"];
@@ -155,6 +156,12 @@ export class ItemSheetSFRPG extends ItemSheet {
                 let abl = actor.data.data.attributes.keyability || "int";
                 save.dc = 10 + data.item.data.level + actor.data.data.abilities[abl].mod;
             }
+        }
+
+        // Vehicle Attacks
+        if (data.isVehicleAttack) {
+            data.placeholders.savingThrow = {};
+            data.placeholders.savingThrow.value = data.item.data.save.dc;
         }
 
         data.modifiers = this.item.data.data.modifiers;
@@ -232,6 +239,9 @@ export class ItemSheetSFRPG extends ItemSheet {
             let wieldedBonus = item.data.proficient ? item.data.bonus.wielded : 0;
             let alignedBonus = item.data.proficient ? item.data.bonus.aligned : 0;
             props.push(game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }));
+        }
+        else if (item.type == "vehicleAttack") {
+            props.push(labels.nonlethal);
         }
 
         // Action type

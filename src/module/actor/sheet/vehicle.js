@@ -1,6 +1,7 @@
 import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
+
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["sfrpg", "sheet", "actor", "vehicle"],
@@ -32,6 +33,17 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      */
     _prepareItems(data) {
 
+        const inventory = {
+            inventory: { label: game.i18n.format("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
+        };
+
+        this.processItemContainment(data.items, function (itemType, itemData) {
+
+            itemData.item.hasDamage = itemData.item.data.damage?.parts && itemData.item.data.damage.parts.length > 0;
+
+            inventory.inventory.items.push(itemData);
+        });
+        data.inventory = inventory
     }
 
     /**
