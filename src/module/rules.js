@@ -224,7 +224,6 @@ export default function (engine) {
                     "calculateNpcXp",
                     "calculateClasses",
                     "calculateNpcAbilityValue",
-                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"}
                 ]
             },
