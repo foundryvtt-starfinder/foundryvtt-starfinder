@@ -1058,6 +1058,7 @@ export class ItemSFRPG extends Item {
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
+                skipUI: true,
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
