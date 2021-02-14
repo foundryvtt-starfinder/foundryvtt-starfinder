@@ -28,6 +28,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
         <a class="item" data-tab="attacks">{{ localize "SFRPG.VehicleSheet.Tabs.Attacks" }}</a>
+        <a class="item" data-tab="passengers">{{ localize "SFRPG.VehicleSheet.Tabs.Passengers" }}</a>
         <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
     </nav>
 
@@ -199,6 +200,12 @@
             </ol>
 
         </div>
+
+        <div class="tab attacks" data-group="primary" data-tab="passengers">
+            <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Passengers.Title" }}</h3>
+            <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Passengers.ToDo" }}</p>
+        </div>
+
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
             {{editorPlus content=data.details.description.value target="data.details.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}
         </div>
