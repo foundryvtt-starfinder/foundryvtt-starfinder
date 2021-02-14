@@ -39,7 +39,12 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         this.processItemContainment(data.items, function (itemType, itemData) {
 
-            itemData.item.hasDamage = itemData.item.data.damage?.parts && itemData.item.data.damage.parts.length > 0;
+            // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
+            // vehicle sheet until we can assign passengers and access their dexterity modifiers.
+            if (itemData.item.type == "vehicleAttack") {
+
+                itemData.item.hasDamage = itemData.item.data.damage?.parts && itemData.item.data.damage.parts.length > 0;
+            }
 
             inventory.inventory.items.push(itemData);
         });
