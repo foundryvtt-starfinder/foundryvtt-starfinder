@@ -55,7 +55,7 @@
                         <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.Capacity" }}</label>
                         <div class="form-fields">
                             <input type="text" name="storage.amount" value="{{storage.amount}}" data-dtype="Number" placeholder="0" />
-                            <select name="storage.weightProperty">
+                            <select name="storage.weightProperty" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItems" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItemsTooltip" }}<br/><br/><strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlots" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlotsTooltip" }}<br/><br/><strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevel" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevelTooltip" }}">
                                 {{#select storage.weightProperty}}
                                 <option value="">{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItems" }}</option>
                                 <option value="slots">{{ localize "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlots" }}</option>
