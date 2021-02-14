@@ -31,9 +31,7 @@
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">
         {{!-- Description Tab --}}
-        <div class="tab flexrow active" data-group="primary" data-tab="description">
-            {{editorPlus content=data.description.value target="data.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}
-        </div>
+        {{> "systems/sfrpg/templates/items/parts/item-description.html" hideProperties=true}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">

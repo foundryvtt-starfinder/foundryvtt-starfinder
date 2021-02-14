@@ -23,16 +23,16 @@ import logToConsole                     from './rules/actions/log.js';
 import clearTooltips                    from './rules/actions/actor/clear-tooltips.js';
 import calculateBaseAbilityScore        from './rules/actions/actor/calculate-base-ability-score.js';
 import calculateBaseAbilityModifier     from './rules/actions/actor/calculate-base-ability-modifier.js';
-import calculateBaseArmorClass          from './rules/actions/actor/calculate-base-armor-class.js';
+import calculateBaseArmorClass          from './rules/actions/actor/character/calculate-base-armor-class.js';
 import calculateArmorModifiers          from './rules/actions/actor/calculate-armor-modifiers.js';
 import calculateBaseAttackBonusModifier from './rules/actions/actor/calculate-bab-modifier.js';
-import calculateBaseSaves               from './rules/actions/actor/calculate-base-saves.js';
+import calculateBaseSaves               from './rules/actions/actor/character/calculate-base-saves.js';
 import calculateSaveModifiers           from './rules/actions/actor/calculate-save-modifiers.js';
-import calculateInitiative              from './rules/actions/actor/calculate-initiative.js';
-import calculateInitiativeModifiers     from './rules/actions/actor/calculate-initiative-modifiers.js';
+import calculateInitiative              from './rules/actions/actor/character/calculate-initiative.js';
+import calculateInitiativeModifiers     from './rules/actions/actor/character/calculate-initiative-modifiers.js';
 import calculateCmd                     from './rules/actions/actor/calculate-cmd.js';
 import calculateCmdModifiers            from './rules/actions/actor/calculate-cmd-modifiers.js';
-import calculateBaseSkills              from './rules/actions/actor/calculate-base-skills.js';
+import calculateBaseSkills              from './rules/actions/actor/character/calculate-base-skills.js';
 import calculateClasses                 from './rules/actions/actor/calculate-classes.js';
 import calculateSkillModifiers          from './rules/actions/actor/calculate-skill-modifiers.js';
 import calculateSkillArmorCheckPenalty  from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
@@ -220,9 +220,11 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "npc" },
                 then: [
+                    "clearTooltips",
                     "calculateNpcXp",
                     "calculateClasses",
-                    "calculateNpcAbilityValue"
+                    "calculateNpcAbilityValue",
+                    { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"}
                 ]
             },
             {

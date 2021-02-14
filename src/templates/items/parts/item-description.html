@@ -1,5 +1,6 @@
 <div class="tab flexrow active" data-group="primary" data-tab="description">
 
+    {{#unless hideProperties}}
     <div class="item-properties">
         {{#if isPhysical}}
         <div class="form-group">
@@ -38,6 +39,26 @@
             {{/each}}
         </ol>
     </div>
+{{/unless}}
 
-    {{editorPlus content=data.description.value target="data.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+    <div class="flexcol">
+        <nav class="sheet-subnavigation descTabs" data-group="descriptionTabs">
+            <a class="item active{{#if data.description.value}} highlight{{/if}}" data-tab="description">{{localize "SFRPG.Description"}}</a>
+            {{#if isGM}}
+            <a class="item{{#if data.description.gmNotes}} highlight{{/if}}" data-tab="gmNotes">{{localize "SFRPG.ActorSheet.Biography.TabGM"}} {{#if data.description.gmNotes}} (!){{/if}}</a>
+            {{/if}}
+        </nav>
+
+        <section class="desc-body">
+            <div class="tab flexrow" data-group="descriptionTabs" data-tab="description">
+                {{editorPlus content=data.description.value target="data.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+            </div>
+            {{#if isGM}}
+            <div class="tab flexrow" data-group="descriptionTabs" data-tab="gmNotes">
+                {{editorPlus content=data.description.gmNotes target="data.description.gmNotes" button=true owner=owner editable=editable rolls=false rollData=data}}
+            </div>
+            {{/if}}
+        </section>
+    </div>
+
 </div>

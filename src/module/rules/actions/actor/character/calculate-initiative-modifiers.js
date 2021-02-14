@@ -1,4 +1,4 @@
-import { SFRPGModifierType, SFRPGEffectType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGModifierType, SFRPGEffectType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
 
 export default function (engine) {
     engine.closures.add("calculateInitiativeModifiers", (fact, context) => {
