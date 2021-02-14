@@ -241,7 +241,47 @@
 
         <div class="tab attacks" data-group="primary" data-tab="passengers">
             <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Passengers.Title" }}</h3>
-            <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Passengers.ToDo" }}</p>
+            <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Passengers.UnderConstruction" }}</p>
+
+            <div class="crew-settings flexrow">
+                <ol class="settings flexrow">
+                    <h3>
+                        {{localize "SFRPG.VehicleSheet.Passengers.Header"}}
+                        <i class="fas fa-users"></i>
+                    </h3>
+                    {{#if isGM}}
+                    <label class="checkbox">
+                        <label><b>{{localize "SFRPG.VehicleSheet.Passengers.PassengersSetting"}}</b></label>
+                        <input type="checkbox" name="data.crew.useNPCCrew" {{checked data.crew.useNPCCrew}}/>{{localize "SFRPG.VehicleSheet.Passengers.IsNPCPassengers"}}
+                    </label>
+                    {{/if}}
+                </ol>
+            </div>
+
+            {{#unless data.crew.useNPCCrew}}
+            <ol class="crew-list">
+                {{#each crew as |role|}}
+                <li class="flexrow crew-header {{role.cssClass}}" {{#each role.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>{{role.label}}</li>
+                <ol class="crew-item-list">
+                    {{#each role.actors as |actor a|}}
+                    <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
+                        <div class="crew-name flexrow">
+                            <div class="crew-image" style="background-image: url({{actor.data.img}})"></div>
+                            <h4>{{actor.name}}</h4>
+                        </div>
+                        <div class="crew-controls">
+                            <a class="crew-control crew-delete" title="Remove Crew Member"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+                {{/each}}
+            </ol>
+            {{else}}
+            <ol class="crew-list">
+                <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Passengers.ToDo" }}</p>
+            </ol>
+            {{/unless}}
         </div>
 
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">

@@ -22,7 +22,36 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         let levels = { 0: "0", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
         data.labels["level"] = lvl >= 1 ? String(lvl) : levels[lvl] || 1;
 
+        this._getCrewData(data)
+
         return data;
+    }
+
+    /**
+     * Process any flags that the actor might have that would affect the sheet .
+     *
+     * @param {Object} data The data object to update with any crew data.
+     */
+    async _getCrewData(data) {
+        let crewData = this.actor.data.data.crew;
+
+        if (!crewData || this.actor.data?.flags?.shipsCrew) {
+            crewData = await this._processFlags(data, data.actor.flags);
+        }
+
+        const pilotActors = crewData.pilot.actorIds.map(crewId => game.actors.get(crewId));
+        const complementActors = crewData.complement.actorIds.map(crewId => game.actors.get(crewId));
+        const passengerActors = crewData.passenger.actorIds.map(crewId => game.actors.get(crewId));
+
+        const localizedNoLimit = game.i18n.format("SFRPG.StarshipSheet.Crew.UnlimitedMax");
+
+        const crew = {
+            pilots: { label: game.i18n.format("SFRPG.VehicleSheet.Passengers.Pilot") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": pilotActors.length, "max": crewData.pilot.limit > -1 ? crewData.pilot.limit : localizedNoLimit}), actors: pilotActors, dataset: { type: "passenger", role: "pilot" }},
+            complement: { label: game.i18n.format("SFRPG.VehicleSheet.Passengers.Complement") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": complementActors.length, "max": crewData.complement.limit > -1 ? crewData.complement.limit : localizedNoLimit}), actors: complementActors, dataset: { type: "passenger", role: "complement" }},
+            passengers: { label: game.i18n.format("SFRPG.VehicleSheet.Passengers.Passengers") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": passengerActors.length, "max": crewData.passenger.limit > -1 ? crewData.passenger.limit : localizedNoLimit}), actors: passengerActors, dataset: { type: "passenger", role: "passenger" }}
+        };
+
+        data.crew = Object.values(crew);
     }
 
     /**
