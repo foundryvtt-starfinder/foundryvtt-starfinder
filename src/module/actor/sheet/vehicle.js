@@ -81,6 +81,36 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     }
 
     /**
+     * Activate event listeners using the prepared sheet HTML
+     *
+     * @param {HTML} html The prepared HTML object ready to be rendered into the DOM
+     */
+    activateListeners(html) {
+        super.activateListeners(html);
+
+        if (!this.options.editable) return;
+
+        html.find('.crew-delete').click(this._onRemoveFromCrew.bind(this));
+
+        let handler = ev => this._onDragCrewStart(ev);
+        html.find('li.crew').each((i, li) => {
+            li.setAttribute("draggable", true);
+            li.addEventListener("dragstart", handler, false);
+        });
+
+        html.find('.crew-list').each((i, li) => {
+            li.addEventListener("dragover", this._onCrewDragOver.bind(this), false);
+            // li.addEventListener("drop", this._onCrewDrop.bind(this), false);
+        });
+
+        html.find('li.crew-header').each((i, li) => {
+            li.addEventListener("dragenter", this._onCrewDragEnter, false);
+            li.addEventListener("dragleave", this._onCrewDragLeave, false);
+        });
+
+    }
+
+    /**
      * This method is called upon form submission after form data is validated
      * 
      * @param {Event} event The initial triggering submission event
@@ -97,7 +127,162 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         super._updateObject(event, formData);
     }
 
-    activateListeners(html) {
-        super.activateListeners(html);
+    /** @override */
+    async _onDrop(event) {
+        event.preventDefault();
+
+        let data;
+        try {
+            data = JSON.parse(event.dataTransfer.getData('text/plain'));
+            if (!data) {
+                return false;
+            }
+        } catch (err) {
+            return false;
+        }
+
+        // Case - Dropped Actor
+        if (data.type === "Actor") {
+            return this._onCrewDrop(event, data);
+        }
+        else if (data.type === "Item") {
+            const rawItemData = await this._getItemDropData(event, data);
+
+            if (rawItemData.type == "weapon" || rawItemData.type == "vehicleAttack") {
+                return this.processDroppedData(event, data);
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Get an items data.
+     *
+     * @param {Event} event The originating drag event
+     * @param {object} data The data transfer object
+     */
+    async _getItemDropData(event, data) {
+        let itemData = null;
+
+        const actor = this.actor;
+        if (data.pack) {
+            const pack = game.packs.get(data.pack);
+            if (pack.metadata.entity !== "Item") return;
+            itemData = await pack.getEntity(data.id);
+        } else if (data.data) {
+            let sameActor = data.actorId === actor._id;
+            if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
+            if (sameActor) {
+                await this._onSortItem(event, data.data);
+            }
+            itemData = data.data;
+        } else {
+            let item = game.items.get(data.id);
+            if (!item) return;
+            itemData = item.data;
+        }
+
+        return duplicate(itemData);
+    }
+
+    /**
+     * Handles drop events for the Passenger list
+     *
+     * @param {Event}  event The originating drop event
+     * @param {object} data  The data transfer object.
+     */
+    async _onCrewDrop(event, data) {
+        // event.preventDefault();
+
+        $(event.target).css('background', '');
+
+        const targetRole = event.target.dataset.role;
+        if (!targetRole || !data.id) return false;
+
+        const crew = duplicate(this.actor.data.data.crew);
+        const crewRole = crew[targetRole];
+        const oldRole = this.actor.getCrewRoleForActor(data.id);
+
+        if (crewRole.limit === -1 || crewRole.actorIds.length < crewRole.limit) {
+            crewRole.actorIds.push(data.id);
+
+            if (oldRole) {
+                const originalRole = crew[oldRole];
+                originalRole.actorIds = originalRole.actorIds.filter(x => x != data.id);
+            }
+
+            await this.actor.update({
+                "data.crew": crew
+            }).then(this.render(false));
+        } else {
+            ui.notifications.error(game.i18n.format("SFRPG.VehicleSheet.Passengers.PassengersLimitReached", {targetRole: targetRole}));
+        }
+
+        return true;
+    }
+
+    /**
+     * Handles dragenter for the passengers tab
+     * @param {Event} event The originating dragenter event
+     */
+    _onCrewDragEnter(event) {
+        $(event.target).css('background', "rgba(0,0,0,0.3)");
+    }
+
+    /**
+     * Handles dragleave for the passengers tab
+     * @param {Event} event The originating dragleave event
+     */
+    _onCrewDragLeave(event) {
+        $(event.target).css('background', '');
+    }
+
+    /**
+     * Handle dragging crew members on the sheet.
+     *
+     * @param {Event} event Originating dragstart event
+     */
+    _onDragCrewStart(event) {
+        const actorId = event.currentTarget.dataset.actorId;
+        const actor = game.actors.get(actorId);
+
+        const dragData = {
+            type: "Actor",
+            id: actor.id,
+            data: actor.data
+        };
+
+        if (this.actor.isToken) dragData.tokenId = actorId;
+        event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+    }
+
+    /**
+     * Handles ondragover for crew drag-n-drop
+     *
+     * @param {Event} event Orgininating ondragover event
+     */
+    _onCrewDragOver(event) {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = "move";
+    }
+
+    /**
+     * Remove an actor from the crew.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onRemoveFromCrew(event) {
+        event.preventDefault();
+
+        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const role = this.actor.getCrewRoleForActor(actorId);
+        if (role) {
+            const crewData = duplicate(this.actor.data.data.crew);
+            crewData[role].actorIds = crewData[role].actorIds.filter(x => x !== actorId);
+            await this.actor.update({
+                "data.crew": crewData
+            });
+        }
     }
 }
