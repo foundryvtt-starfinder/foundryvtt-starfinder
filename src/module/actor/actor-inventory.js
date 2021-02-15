@@ -520,10 +520,24 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
         }
 
         if (storageOption.type === "slot") {
-            let numItemsInStorage = container.data.data.container.contents.filter(x => x.index === index).length;
-            if (numItemsInStorage >= storageOption.amount) {
-                //console.log(`Skipping storage ${index} because it has too many items in the slots already. (${numItemsInStorage} / ${storageOption.amount})`);
-                continue;
+            const storedItemLinks = container.data.data.container.contents.filter(x => x.index === index);
+
+            if (storageOption.weightProperty === "items") {
+                const numItemsInStorage = storedItemLinks.length;
+                if (numItemsInStorage >= storageOption.amount) {
+                    //console.log(`Skipping storage ${index} because it has too many items in the slots already. (${numItemsInStorage} / ${storageOption.amount})`);
+                    continue;
+                }
+            } else {
+                const storedItems = storedItemLinks.map(x => container.actor?.getOwnedItem(x.id));
+                const totalStoredAmount = storedItems.reduce((accumulator, currentValue, currentIndex, array) => {
+                    return accumulator + currentValue.data.data[storageOption.weightProperty];
+                }, itemToAdd.data.data[storageOption.weightProperty]);
+
+                if (totalStoredAmount > storageOption.amount) {
+                    //console.log(`Skipping storage ${index} because it has too many items in the slots already. (${totalStoredAmount} / ${storageOption.amount})`);
+                    continue;
+                }
             }
         }
 
