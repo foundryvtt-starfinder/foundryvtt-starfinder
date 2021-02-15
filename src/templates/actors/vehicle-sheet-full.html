@@ -131,6 +131,14 @@
                             <label>Piloting</label>
                             <div class="form-fields">
                                 <input type="text" name="data.attributes.modifiers.piloting" value="{{data.attributes.modifiers.piloting}}" />
+
+                                {{#if actor.data.crew.useNPCCrew }}
+                                <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
+                                    <div class="npcpassenger-action flexcol">
+                                        <button class="tag piloting">{{localize "SFRPG.VehicleSheet.Passengers.Piloting"}}</button>
+                                    </div>
+                                </div>
+                                {{/if}}
                             </div>
                         </div>
                         <div class="form-group">
@@ -211,9 +219,7 @@
             </div>
         </div>
         <div class="tab attacks" data-group="primary" data-tab="attacks">
-            <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Attacks.Title" }}</h3>
             <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Attacks.ToDo" }}</p>
-
             <ol class="inventory-list">
                 {{#each inventory as |section sid|}}
                 <li class="inventory-header flexrow">
@@ -240,9 +246,6 @@
         </div>
 
         <div class="tab attacks" data-group="primary" data-tab="passengers">
-            <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Passengers.Title" }}</h3>
-            <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Passengers.UnderConstruction" }}</p>
-
             <div class="crew-settings flexrow">
                 <ol class="settings flexrow">
                     <h3>
@@ -286,7 +289,7 @@
             </ol>
             {{else}}
             <ol class="crew-list">
-                <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Passengers.ToDo" }}</p>
+                <p class="notification info">{{ localize "SFRPG.VehicleSheet.Passengers.NPCPilotingHint" }}</p>
             </ol>
             {{/unless}}
         </div>

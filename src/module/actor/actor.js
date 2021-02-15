@@ -606,6 +606,38 @@ export class ActorSFRPG extends Actor {
         });
     }
 
+    /**
+     * Roll the Piloting skill of the NPC pilot of a vehicle
+     *
+     * @param {Object} options Options which configure how saves are rolled
+     */
+    async rollVehicleNPCPilotingSkill(options = {}) {
+
+        let parts = [];
+        let data = this.getRollData();
+
+        parts.push(this.data.data.attributes.modifiers.piloting);
+
+        const rollContext = new RollContext();
+        rollContext.addContext("main", this, data);
+        rollContext.setMainContext("main");
+
+        this.setupRollContexts(rollContext);
+
+        return await DiceSFRPG.d20Roll({
+            event: options.event,
+            rollContext: rollContext,
+            parts: parts,
+            title: `Skill Check - ${CONFIG.SFRPG.skills["pil"]}`,
+            flavor: null,
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            dialogOptions: {
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
+            }
+        });
+    }
+
     static async applyDamage(roll, multiplier) {
         const totalDamageDealt = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
         const isHealing = (multiplier < 0);

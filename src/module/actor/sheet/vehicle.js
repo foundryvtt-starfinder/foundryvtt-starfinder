@@ -105,8 +105,10 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             li.addEventListener("dragleave", this._onCrewDragLeave, false);
         });
 
-        // Roll damage for item
-        html.find('.passenger-action .piloting').click(event => this._onRollPassengerPiloting(event));
+        // Roll piloting skill for PC or NPC passengers
+        html.find('.passenger-action .piloting').click(event => this._onRollPassengerPilotingSkill(event));
+        html.find('.npcpassenger-action .piloting').click(event => this._onRollNPCPilotingSkill(event));
+
     }
 
     /**
@@ -290,7 +292,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      *
      * @param {Event} event The originating click event
      */
-    async _onRollPassengerPiloting(event) {
+    async _onRollPassengerPilotingSkill(event) {
         event.preventDefault();
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
@@ -302,4 +304,16 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             crew.rollSkill("piloting", {event: event}, this.actor.data.data.attributes.modifiers.piloting);
         }
     }
+
+    /**
+     * Rolls the Piloting skill check of the NPC passengers.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onRollNPCPilotingSkill(event) {
+        event.preventDefault();
+
+        this.actor.rollVehicleNPCPilotingSkill();
+    }
+
 }
