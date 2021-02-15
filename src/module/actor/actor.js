@@ -1018,6 +1018,10 @@ export class ActorSFRPG extends Actor {
         }
     }
 
+    async rollVehiclePilotingCheck(crewId) {
+
+    }
+
     /** Starship code */
     async useStarshipAction(actionId) {
         /** Bad entry; no action! */

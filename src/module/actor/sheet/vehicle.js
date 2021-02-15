@@ -90,6 +90,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         if (!this.options.editable) return;
 
+        // Crew Tab
         html.find('.crew-delete').click(this._onRemoveFromCrew.bind(this));
 
         let handler = ev => this._onDragCrewStart(ev);
@@ -108,6 +109,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             li.addEventListener("dragleave", this._onCrewDragLeave, false);
         });
 
+        // Roll damage for item
+        html.find('.passenger-action .piloting').click(event => this._onRollPassengerPiloting(event));
     }
 
     /**
@@ -283,6 +286,24 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             await this.actor.update({
                 "data.crew": crewData
             });
+        }
+    }
+
+    /**
+     * Rolls the Piloting skill check of a passenger.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onRollPassengerPiloting(event) {
+        event.preventDefault();
+
+        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const role = this.actor.getCrewRoleForActor(actorId);
+        if (role) {
+            const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+            const crew = game.actors.get(actorId);
+
+            crew.rollSkill("piloting", {event: event});
         }
     }
 }
