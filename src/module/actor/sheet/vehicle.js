@@ -43,7 +43,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const complementActors = crewData.complement.actorIds.map(crewId => game.actors.get(crewId));
         const passengerActors = crewData.passenger.actorIds.map(crewId => game.actors.get(crewId));
 
-        const localizedNoLimit = game.i18n.format("SFRPG.StarshipSheet.Crew.UnlimitedMax");
+        const localizedNoLimit = game.i18n.format("SFRPG.VehicleSheet.Passengers.UnlimitedMax");
 
         const crew = {
             pilots: { label: game.i18n.format("SFRPG.VehicleSheet.Passengers.Pilot") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": pilotActors.length, "max": crewData.pilot.limit > -1 ? crewData.pilot.limit : localizedNoLimit}), actors: pilotActors, dataset: { type: "passenger", role: "pilot" }},
