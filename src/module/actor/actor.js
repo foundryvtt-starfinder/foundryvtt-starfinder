@@ -467,12 +467,13 @@ export class ActorSFRPG extends Actor {
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
      * @param {string} skillId      The skill id (e.g. "ins")
      * @param {Object} options      Options which configure how the skill check is rolled
+     * @param {string} modified     A string which adds a specific modifier to the roll formula
      */
-    async rollSkill(skillId, options = {}) {
+    async rollSkill(skillId, options = {}, modified = null) {
         const skl = this.data.data.skills[skillId];
 
         if (!this.hasPlayerOwner) {
-            return await this.rollSkillCheck(skillId, skl, options);
+            return await this.rollSkillCheck(skillId, skl, options, modified);
         }
 
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
@@ -486,7 +487,7 @@ export class ActorSFRPG extends Actor {
                     buttons: {
                         yes: {
                             label: "Yes",
-                            callback: () => resolve(this.rollSkillCheck(skillId, skl, options))
+                            callback: () => resolve(this.rollSkillCheck(skillId, skl, options, modified))
                         },
                         cancel: {
                             label: "No"
@@ -496,7 +497,7 @@ export class ActorSFRPG extends Actor {
                 }).render(true);
             });
         } else {
-            return await this.rollSkillCheck(skillId, skl, options);
+            return await this.rollSkillCheck(skillId, skl, options, modified);
         }
     }
 
@@ -575,11 +576,15 @@ export class ActorSFRPG extends Actor {
         });
     }
 
-    async rollSkillCheck(skillId, skill, options = {}) {
+    async rollSkillCheck(skillId, skill, options = {}, modified = null) {
         let parts = [];
         let data = this.getRollData();
 
         parts.push(`@skills.${skillId}.mod`);
+
+        if (modified != null && modified != undefined) {
+            parts.push(modified)
+        }
         
         const rollContext = new RollContext();
         rollContext.addContext("main", this, data);
@@ -1016,10 +1021,6 @@ export class ActorSFRPG extends Actor {
             updateData: updateData,
             updateItems: updateItems
         }
-    }
-
-    async rollVehiclePilotingCheck(crewId) {
-
     }
 
     /** Starship code */

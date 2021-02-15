@@ -61,20 +61,16 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
-
         const inventory = {
             inventory: { label: game.i18n.format("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
         };
-
         this.processItemContainment(data.items, function (itemType, itemData) {
-
             // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
             // vehicle sheet until we can assign passengers and access their dexterity modifiers.
             if (itemData.item.type == "vehicleAttack") {
 
                 itemData.item.hasDamage = itemData.item.data.damage?.parts && itemData.item.data.damage.parts.length > 0;
             }
-
             inventory.inventory.items.push(itemData);
         });
         data.inventory = inventory
@@ -303,7 +299,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             const actorId = $(event.currentTarget).parents('.crew').data('actorId');
             const crew = game.actors.get(actorId);
 
-            crew.rollSkill("piloting", {event: event});
+            crew.rollSkill("piloting", {event: event}, this.actor.data.data.attributes.modifiers.piloting);
         }
     }
 }
