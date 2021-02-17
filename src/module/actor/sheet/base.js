@@ -225,7 +225,6 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Condition toggling
         html.find('.conditions input[type="checkbox"]').change(this._onToggleConditions.bind(this));
-
     }
     
     /** @override */

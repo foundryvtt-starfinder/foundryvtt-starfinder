@@ -73,12 +73,7 @@ export class ItemSFRPG extends Item {
             labels.eac = data.armor.eac ? `${data.armor.eac} EAC` : "";
             labels.kac = data.armor.kac ? `${data.armor.kac} KAC` : "";
         }
-
-        // Vehicle Attacks
-        else if (itemData.type == "vehicleAttack") {
-            //
-        }
-
+        
         // Activated Items
         if (data.hasOwnProperty("activation")) {
 

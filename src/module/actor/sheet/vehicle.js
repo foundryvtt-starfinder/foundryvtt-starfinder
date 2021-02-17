@@ -108,7 +108,6 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         // Roll piloting skill for PC or NPC passengers
         html.find('.passenger-action .piloting').click(event => this._onRollPassengerPilotingSkill(event));
         html.find('.npcpassenger-action .piloting').click(event => this._onRollNPCPilotingSkill(event));
-
     }
 
     /**
