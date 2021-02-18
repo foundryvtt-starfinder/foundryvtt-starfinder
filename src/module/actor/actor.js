@@ -607,20 +607,24 @@ export class ActorSFRPG extends Actor {
     }
 
     /**
-     * Roll the Piloting skill of the NPC pilot of a vehicle
+     * Roll the Piloting skill of the pilot of a vehicle
      *
      * @param {Object} options Options which configure how saves are rolled
      */
-    async rollVehicleNPCPilotingSkill(options = {}) {
+    async rollVehiclePilotingSkill(options = {}) {
 
         let parts = [];
         let data = this.getRollData();
 
-        parts.push(this.data.data.attributes.modifiers.piloting);
-
         const rollContext = new RollContext();
-        rollContext.addContext("main", this, data);
-        rollContext.setMainContext("main");
+        rollContext.addContext("vehicle", this, data);
+        rollContext.setMainContext("vehicle");
+
+        // Add piloting modifier of vehicle
+        parts.push(`@attributes.modifiers.piloting`);
+
+        // Add pilot's piloting modifier
+        parts.push(`@pilot.skills.pil.mod`);
 
         this.setupRollContexts(rollContext);
 
@@ -1303,7 +1307,24 @@ export class ActorSFRPG extends Actor {
 
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
-        if (this.data.type === "starship") {
+
+        if (this.data.type === "vehicle") {
+            if (!this.data.data.crew.useNPCCrew) {
+
+                /** Add player pilot if available. */
+                if (this.data.data.crew.pilot?.actors?.length > 0) {
+                    const actor = this.data.data.crew.pilot.actors[0];
+                    let actorData = null;
+                    if (actor instanceof ActorSFRPG) {
+                        actorData = actor.data.data;
+                    } else {
+                        actorData = actor.data;
+                    }
+                    rollContext.addContext("pilot", actor, actorData);
+                }
+            }
+        }
+        else if (this.data.type === "starship") {
 
             if (!this.data.data.crew.useNPCCrew) {
                 /** Add player captain if available. */
