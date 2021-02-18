@@ -73,12 +73,7 @@ export class ItemSFRPG extends Item {
             labels.eac = data.armor.eac ? `${data.armor.eac} EAC` : "";
             labels.kac = data.armor.kac ? `${data.armor.kac} KAC` : "";
         }
-
-        // Vehicle Attacks
-        else if (itemData.type == "vehicleAttack") {
-            //
-        }
-
+        
         // Activated Items
         if (data.hasOwnProperty("activation")) {
 
@@ -1032,7 +1027,7 @@ export class ItemSFRPG extends Item {
         const itemData = this.data.data;
 
         if (!this.hasDamage) {
-            throw new Error("you may not make a Damage Roll with this item");
+            ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"))
         }
 
         const parts = itemData.damage.parts.map(d => d[0]);

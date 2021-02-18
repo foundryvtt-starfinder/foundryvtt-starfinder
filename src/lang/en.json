@@ -47,8 +47,8 @@
         "TypeChassis": "Drone Chassis",
         "TypeMod": "Drone Mod",
         "TypeShield": "Shield",
-        "TypeWeaponaccessory": "Weapon Accessory",
-        "TypeVehicleattack": "Vehicle Attack"
+        "TypeVehicleattack": "Vehicle Attack",
+        "TypeWeaponaccessory": "Weapon Accessory"
     },
     "SFRPG": {
         "AbilityActivationTypesDay": "Day",
@@ -954,10 +954,10 @@
                 "StarshipWeapons"     : "Starship Weapons",
                 "TechnologicalItems"  : "Technological Items",
                 "Themes"              : "Themes",
+                "VehicleAttacks"      : "Vehicle Attacks",
                 "Weapons"             : "Weapons",
                 "WeaponFusions"       : "Weapon Fusions",
-                "WeaponAccessories"   : "Weapon Accessories",
-                "VehicleAttacks"      : "Vehicle Attacks"
+                "WeaponAccessories"   : "Weapon Accessories"
             },
             "Consumable": {
                 "Type"            : "Consumable Type",
@@ -1058,6 +1058,9 @@
                 "AllowedArmorType"   : "Allowed Armor Type",
                 "Any"                : "Any"
             },
+            "VehicleAttack": {
+                "Type"      : "Vehicle Attack"
+            },
             "Weapon": {
                 "Details"   : "Weapon Details",
                 "Type"      : "Weapon Type",
@@ -1075,9 +1078,6 @@
                     "RailedWeapon": "Railed weapon",
                     "SmallArm": "Smallarm"
                 }
-            },
-            "VehicleAttack": {
-                "Type"      : "Vehicle Attack"
             }
         },
         "ItemSheet": {
@@ -2125,6 +2125,9 @@
             }
         },
         "VehicleAttackSheet": {
+            "Errors": {
+                "NoDamage": "you may not make a Damage Roll with this item"
+            },
             "Header": {
                 "Save": "Save DC",
                 "SaveTooltip": "<strong>Save DC</strong><br/>This is the saving throw modifier for this attack."
@@ -2132,33 +2135,25 @@
         },
         "VehicleSheet": {
             "Attacks": {
-                "Title"   : "Attacks",
-                "ToDo"    : "This is still under construction.",
-                "Attacks" : "Attacks"
-            },
-            "Passengers": {
-                "Title"   : "Passengers",
-                "Header"  : "Vehicle Passengers",
-                "PassengersSetting": "NPC Passengers",
-                "IsNPCPassengers": "Is NPC Passengers",
-                "NPCPilotingHint": "You can roll a Piloting check for the NPC pilot from the Details tab",
-                "AssignedCount": "({current} / {max})",
-                "Piloting": "Roll Piloting",
-                "Pilot"   : "Pilot",
-                "Complement": "Complement",
-                "Passengers": "Passengers",
-                "UnlimitedMax": "No limit",
-                "PassengersLimitReached": "You have reached the maximum amount of passengers allowed for the role of '{targetRole}'."
+                "Attacks": "Attacks",
+                "Title": "Attacks",
+                "ToDo": "This is still under construction."
             },
             "Details": {
                 "Dimensions": {
-                    "Length": "Length",
                     "Height": "Height",
+                    "Length": "Length",
                     "Title": "Dimensions",
                     "Unit": "Feet",
                     "Width": "Width"
                 },
                 "Hardness": "Hardness",
+                "Modifiers": {
+                    "AttackFullSpeed": "Attack (moving)",
+                    "AttackMoving": "Attack (moving)",
+                    "AttackStopped": "Attack (stopped)",
+                    "Title": "Modifiers"
+                },
                 "Movement": {
                     "Drive": "Drive",
                     "DrivePlaceholder": "e.g. 20 ft",
@@ -2171,19 +2166,13 @@
                     "SpeedTooltip": "Overall overland speed.",
                     "Title": "Speed"
                 },
-                "Modifiers": {
-                    "Title": "Modifiers",
-                    "AttackStopped": "Attack (stopped)",
-                    "AttackMoving": "Attack (moving)",
-                    "AttackFullSpeed": "Attack (moving)"
-                },
                 "OtherAttributes": {
+                    "Complement": "Complement",
                     "Cover": "Cover",
                     "Passengers": "Passengers",
                     "Size": "Size",
                     "Title": "Other Attributes",
-                    "Type": "Type",
-                    "Complement": "Complement"
+                    "Type": "Type"
                 },
                 "Threshold": "Threshold"
             },
@@ -2195,6 +2184,20 @@
                 "Price": "Price",
                 "PricePlaceholder": "Price in credits",
                 "PriceTooltip": "The amount of credits this is vehicle worth."
+            },
+            "Passengers": {
+                "AssignedCount": "({current} / {max})",
+                "Complement": "Complement",
+                "Header": "Vehicle Passengers",
+                "IsNPCPassengers": "Is NPC Passengers",
+                "NPCPilotingHint": "You can roll a Piloting check for the NPC pilot from the Details tab",
+                "Passengers": "Passengers",
+                "PassengersLimitReached": "You have reached the maximum amount of passengers allowed for the role of '{targetRole}'.",
+                "PassengersSetting": "NPC Passengers",
+                "Pilot": "Pilot",
+                "Piloting": "Roll Piloting",
+                "Title": "Passengers",
+                "UnlimitedMax": "No limit"
             },
             "Tabs": {
                 "Attacks": "Attacks",

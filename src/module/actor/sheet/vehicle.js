@@ -106,9 +106,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         });
 
         // Roll piloting skill for PC or NPC passengers
-        html.find('.passenger-action .piloting').click(event => this._onRollPassengerPilotingSkill(event));
-        html.find('.npcpassenger-action .piloting').click(event => this._onRollNPCPilotingSkill(event));
-
+        html.find('.passenger-action .passengerPilotingSkill').click(event => this._onRollPassengerPilotingSkill(event));
+        html.find('.passenger-action .pilotPilotingSkill').click(event => this._onRollPilotPilotingSkill(event));
     }
 
     /**
@@ -297,23 +296,19 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
         const role = this.actor.getCrewRoleForActor(actorId);
-        if (role) {
-            const actorId = $(event.currentTarget).parents('.crew').data('actorId');
-            const crew = game.actors.get(actorId);
 
-            crew.rollSkill("piloting", {event: event}, this.actor.data.data.attributes.modifiers.piloting);
-        }
+        await this.actor.rollVehiclePilotingSkill(role,actorId);
     }
 
     /**
-     * Rolls the Piloting skill check of the NPC passengers.
+     * Rolls the Piloting skill check of the pilot.
      *
      * @param {Event} event The originating click event
      */
-    async _onRollNPCPilotingSkill(event) {
+    async _onRollPilotPilotingSkill(event) {
         event.preventDefault();
 
-        this.actor.rollVehicleNPCPilotingSkill();
+        this.actor.rollVehiclePilotingSkill();
     }
 
 }

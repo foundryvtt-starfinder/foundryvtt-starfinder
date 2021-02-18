@@ -467,13 +467,12 @@ export class ActorSFRPG extends Actor {
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
      * @param {string} skillId      The skill id (e.g. "ins")
      * @param {Object} options      Options which configure how the skill check is rolled
-     * @param {string} modified     A string which adds a specific modifier to the roll formula
      */
-    async rollSkill(skillId, options = {}, modified = null) {
+    async rollSkill(skillId, options = {}) {
         const skl = this.data.data.skills[skillId];
 
         if (!this.hasPlayerOwner) {
-            return await this.rollSkillCheck(skillId, skl, options, modified);
+            return await this.rollSkillCheck(skillId, skl, options);
         }
 
         if (skl.isTrainedOnly && !(skl.ranks > 0)) {
@@ -487,7 +486,7 @@ export class ActorSFRPG extends Actor {
                     buttons: {
                         yes: {
                             label: "Yes",
-                            callback: () => resolve(this.rollSkillCheck(skillId, skl, options, modified))
+                            callback: () => resolve(this.rollSkillCheck(skillId, skl, options))
                         },
                         cancel: {
                             label: "No"
@@ -497,7 +496,7 @@ export class ActorSFRPG extends Actor {
                 }).render(true);
             });
         } else {
-            return await this.rollSkillCheck(skillId, skl, options, modified);
+            return await this.rollSkillCheck(skillId, skl, options);
         }
     }
 
@@ -576,15 +575,11 @@ export class ActorSFRPG extends Actor {
         });
     }
 
-    async rollSkillCheck(skillId, skill, options = {}, modified = null) {
+    async rollSkillCheck(skillId, skill, options = {}) {
         let parts = [];
         let data = this.getRollData();
 
         parts.push(`@skills.${skillId}.mod`);
-
-        if (modified != null && modified != undefined) {
-            parts.push(modified)
-        }
         
         const rollContext = new RollContext();
         rollContext.addContext("main", this, data);
@@ -607,20 +602,38 @@ export class ActorSFRPG extends Actor {
     }
 
     /**
-     * Roll the Piloting skill of the NPC pilot of a vehicle
+     * Roll the Piloting skill of the pilot of a vehicle
      *
      * @param {Object} options Options which configure how saves are rolled
      */
-    async rollVehicleNPCPilotingSkill(options = {}) {
+    async rollVehiclePilotingSkill(role = null, actorId = null, options = {}) {
 
         let parts = [];
         let data = this.getRollData();
 
-        parts.push(this.data.data.attributes.modifiers.piloting);
-
         const rollContext = new RollContext();
-        rollContext.addContext("main", this, data);
-        rollContext.setMainContext("main");
+        rollContext.addContext("vehicle", this, data);
+        rollContext.setMainContext("vehicle");
+
+        // Add piloting modifier of vehicle
+        parts.push(`@attributes.modifiers.piloting`);
+
+        if(!role || !actorId) {
+            // Add pilot's piloting modifier
+            parts.push(`@pilot.skills.pil.mod`);
+        }
+        else {
+            let passenger = this.data.data.crew[role].actors.find(element => element._id == actorId);
+            let actorData = null;
+            if (passenger instanceof ActorSFRPG) {
+                actorData = passenger.data.data;
+            } else {
+                actorData = passenger.data;
+            }
+
+            rollContext.addContext("passenger", passenger, actorData);
+            parts.push(`@passenger.skills.pil.mod`);
+        }
 
         this.setupRollContexts(rollContext);
 
@@ -1303,7 +1316,24 @@ export class ActorSFRPG extends Actor {
 
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
-        if (this.data.type === "starship") {
+
+        if (this.data.type === "vehicle") {
+            if (!this.data.data.crew.useNPCCrew) {
+
+                /** Add player pilot if available. */
+                if (this.data.data.crew.pilot?.actors?.length > 0) {
+                    const actor = this.data.data.crew.pilot.actors[0];
+                    let actorData = null;
+                    if (actor instanceof ActorSFRPG) {
+                        actorData = actor.data.data;
+                    } else {
+                        actorData = actor.data;
+                    }
+                    rollContext.addContext("pilot", actor, actorData);
+                }
+            }
+        }
+        else if (this.data.type === "starship") {
 
             if (!this.data.data.crew.useNPCCrew) {
                 /** Add player captain if available. */
