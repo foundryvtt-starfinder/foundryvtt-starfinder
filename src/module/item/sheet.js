@@ -240,10 +240,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             let alignedBonus = item.data.proficient ? item.data.bonus.aligned : 0;
             props.push(game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }));
         }
-        else if (item.type === "vehicleAttack") {
-            props.push(labels.nonlethal);
-        }
-
+        
         // Action type
         if (item.data.actionType) {
             props.push(CONFIG.SFRPG.itemActionTypes[item.data.actionType]);
