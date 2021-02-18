@@ -296,12 +296,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
         const role = this.actor.getCrewRoleForActor(actorId);
-        if (role) {
-            const actorId = $(event.currentTarget).parents('.crew').data('actorId');
-            const crew = game.actors.get(actorId);
 
-            crew.rollSkill("piloting", {event: event}, this.actor.data.data.attributes.modifiers.piloting);
-        }
+        await this.actor.rollVehiclePilotingSkill(role,actorId);
     }
 
     /**
