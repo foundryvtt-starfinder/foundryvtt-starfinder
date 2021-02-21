@@ -29,10 +29,13 @@
         <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
         <a class="item" data-tab="attacks">{{ localize "SFRPG.VehicleSheet.Tabs.Attacks" }}</a>
         <a class="item" data-tab="passengers">{{ localize "SFRPG.VehicleSheet.Tabs.Passengers" }}</a>
+        <a class="item" data-tab="systems">{{ localize "SFRPG.VehicleSheet.Tabs.Systems" }}</a>
         <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
     </nav>
 
     <section class="sheet-body">
+
+        {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
             <div class="flexrow">
                 <ul class="attributes flexrow">
@@ -221,6 +224,8 @@
                 </div>
             </div>
         </div>
+
+        {{!-- Attacks Tab --}}
         <div class="tab attacks" data-group="primary" data-tab="attacks">
             <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Attacks.ToDo" }}</p>
             <ol class="inventory-list">
@@ -248,6 +253,7 @@
 
         </div>
 
+        {{!-- Passengers Tab --}}
         <div class="tab attacks" data-group="primary" data-tab="passengers">
             <div class="crew-settings flexrow">
                 <ol class="settings flexrow">
@@ -297,6 +303,12 @@
             {{/unless}}
         </div>
 
+        {{!-- Systems Tab --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="systems">
+            {{> "systems/sfrpg/templates/actors/parts/actor-features.html" sections=features noFilters=true prefixTable=prefixTable}}
+        </div>
+
+        {{!-- Notes Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
             {{editorPlus content=data.details.description.value target="data.details.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}
         </div>

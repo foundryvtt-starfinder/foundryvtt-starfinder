@@ -61,10 +61,46 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
+
         const inventory = {
             inventory: { label: game.i18n.format("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
         };
-        this.processItemContainment(data.items, function (itemType, itemData) {
+
+        const starshipSystems = [
+            "starshipAblativeArmor",
+            "starshipArmor",
+            "starshipComputer",
+            "starshipCrewQuarter",
+            "starshipDefensiveCountermeasure",
+            "starshipDriftEngine",
+            "starshipFortifiedHull",
+            "starshipReinforcedBulkhead",
+            "starshipSensor",
+            "starshipShield"
+        ];
+
+        //   0        1               2             3
+        let [attacks, primarySystems, otherSystems, expansionBays] = data.items.reduce((arr, item) => {
+            item.img = item.img || DEFAULT_TOKEN;
+
+            if (item.type === "weapon" || item.type === "vehicleAttack") {
+                arr[0].push(item);
+            }
+            /*
+            else if (item.type === "starshipFrame") arr[6].push(item);
+            else if (item.type === "starshipPowerCore") arr[7].push(item);
+            else if (item.type === "starshipThruster") arr[8].push(item);
+            else if (starshipSystems.includes(item.type)) arr[9].push(item);
+            else if (item.type === "starshipOtherSystem") arr[10].push(item);
+            else if (item.type === "starshipSecuritySystem") arr[11].push(item);
+            else if (item.type === "starshipExpansionBay") arr[12].push(item);
+            else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[13].push(item);
+            */
+
+            return arr;
+        }, [ [], [], [], [] ]);
+
+        this.processItemContainment(attacks, function (itemType, itemData) {
             // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
             // vehicle sheet until we can assign passengers and access their dexterity modifiers.
             if (itemData.item.type == "vehicleAttack") {
@@ -74,6 +110,13 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             inventory.inventory.items.push(itemData);
         });
         data.inventory = inventory
+
+        const features = {
+            primarySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PrimarySystems"), items: primarySystems, hasActions: false, dataset: { type: starshipSystems.join(',') } },
+            otherSystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.OtherSystems"), items: otherSystems, hasActions: false, dataset: { type: "starshipOtherSystem" } },
+            expansionBays: { label: game.i18n.format("SFRPG.StarshipSheet.Features.ExpansionBays", {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } }
+        };
+        data.features = Object.values(features);
     }
 
     /**
