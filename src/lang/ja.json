@@ -47,6 +47,7 @@
         "TypeChassis": "Drone Chassis",
         "TypeMod": "Drone Mod",
         "TypeShield": "Shield",
+        "TypeVehicleattack": "Vehicle Attack",
         "TypeWeaponaccessory": "Weapon Accessory"
     },
     "SFRPG": {
@@ -955,6 +956,7 @@
                 "Themes"              : "Themes",
                 "Weapons"             : "Weapons",
                 "WeaponFusions"       : "Weapon Fusions",
+                "VehicleAttacks"      : "Vehicle Attacks",
                 "WeaponAccessories"   : "Weapon Accessories"
             },
             "Consumable": {
@@ -1073,6 +1075,9 @@
                     "RailedWeapon": "Railed weapon",
                     "SmallArm": "Smallarm"
                 }
+            },
+            "VehicleAttack": {
+                "Type"      : "Vehicle Attack"
             }
         },
         "ItemSheet": {
@@ -2119,20 +2124,36 @@
                 "Landa": "Land and air"
             }
         },
+        "VehicleAttackSheet": {
+            "Header": {
+                "Save": "Save DC",
+                "SaveTooltip": "<strong>Save DC</strong><br/>This is the saving throw modifier for this attack."
+            }
+        },
         "VehicleSheet": {
+            "Errors": {
+                "NoDamage": "you may not make a Damage Roll with this item"
+            },
             "Attacks": {
-                "Title": "Attacks and Modifiers",
-                "ToDo": "This is still to-do."
+                "Attacks": "Attacks",
+                "Title": "Attacks",
+                "ToDo": "This is still under construction."
             },
             "Details": {
                 "Dimensions": {
-                    "Length": "Length",
                     "Height": "Height",
+                    "Length": "Length",
                     "Title": "Dimensions",
                     "Unit": "Feet",
                     "Width": "Width"
                 },
                 "Hardness": "Hardness",
+                "Modifiers": {
+                    "AttackFullSpeed": "Attack (moving)",
+                    "AttackMoving": "Attack (moving)",
+                    "AttackStopped": "Attack (stopped)",
+                    "Title": "Modifiers"
+                },
                 "Movement": {
                     "Drive": "Drive",
                     "DrivePlaceholder": "e.g. 20 ft",
@@ -2146,6 +2167,7 @@
                     "Title": "Speed"
                 },
                 "OtherAttributes": {
+                    "Complement": "Complement",
                     "Cover": "Cover",
                     "Passengers": "Passengers",
                     "Size": "Size",
@@ -2163,8 +2185,23 @@
                 "PricePlaceholder": "Price in credits",
                 "PriceTooltip": "The amount of credits this is vehicle worth."
             },
+            "Passengers": {
+                "AssignedCount": "({current} / {max})",
+                "Complement": "Complement",
+                "Header": "Vehicle Passengers",
+                "IsNPCPassengers": "Is NPC Passengers",
+                "NPCPilotingHint": "You can roll a Piloting check for the NPC pilot from the Details tab",
+                "Passengers": "Passengers",
+                "PassengersLimitReached": "You have reached the maximum amount of passengers allowed for the role of '{targetRole}'.",
+                "PassengersSetting": "NPC Passengers",
+                "Pilot": "Pilot",
+                "Piloting": "Roll Piloting",
+                "Title": "Passengers",
+                "UnlimitedMax": "No limit"
+            },
             "Tabs": {
-                "Attacks": "Attacks"
+                "Attacks": "Attacks",
+                "Passengers": "Passengers"
             }
         },
         "WeaponCategoriesCryo"         : "凍結武器",
