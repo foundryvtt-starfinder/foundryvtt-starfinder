@@ -50,9 +50,9 @@ export default class CounterManagement {
                  */
                  combatants.forEach(c => {
                     // Add class to trigger drag events.
-                    this.currentActor = game.actors.get(c.actor.data._id);
+                    this.currentActor = game.actors.get(c.actor.data.id);
 
-                    let $combatant = html.find(`.combatant[data-combatant-id="${c._id}"]`);
+                    let $combatant = html.find(`.combatant[data-combatant-id="${c.id}"]`);
                     let featureCounterActivated = this.howManyClassesWithCounterHaveTheActor(c);
 
                     //We manage today only actor with feature activated, and if is active on the combat tracker
@@ -62,16 +62,16 @@ export default class CounterManagement {
                         this.initCounterClasses(this.currentActor, currentClasses);
                         $combatant.addClass('counter-image-relative');
                         //Must be done only one time for each combattant
-                        if (game.combat.data.round > this.currentRound[c._id] || !this.currentRound[c._id]) {
+                        if (game.combat.data.round > this.currentRound[c.id] || !this.currentRound[c.id]) {
                             this.addOneToCounterForActiveActor(c, currentClasses);
                         }
-                        $combatant.find('.token-image').after("<div class='counter-token-management'><div class='counter-token'><p>"+this.getCurrentCounter(currentClasses)+"</p><img id='counter-token-image-"+c._id+"' class='counter-token-image' data-actor-id='"+c.actor._id+"' data-actor-classe='"+currentClasses+"' src='systems/sfrpg/icons/classes/"+this.getCurrentClassesOrPosition(currentClasses)+".png' /></div></div>");
+                        $combatant.find('.token-image').after("<div class='counter-token-management'><div class='counter-token'><p>"+this.getCurrentCounter(currentClasses)+"</p><img id='counter-token-image-"+c.id+"' class='counter-token-image' data-actor-id='"+c.actor.id+"' data-actor-classe='"+currentClasses+"' src='systems/sfrpg/icons/classes/"+this.getCurrentClassesOrPosition(currentClasses)+".png' /></div></div>");
 
                         //Display the dialogue box to manage the right class
-                        let solarianPosition = html.find('#counter-token-image-'+c._id);
+                        let solarianPosition = html.find('#counter-token-image-'+c.id);
                         solarianPosition.click(event => {
                             event.preventDefault();
-                            this.displayDialogBoxCounterManagement(c.actor._id, currentClasses, c._id);
+                            this.displayDialogBoxCounterManagement(c.actor.id, currentClasses, c.id);
                         });
                     } else if (featureCounterActivated.count > 1) {
                         //Todo need to change the design part with a rollover windows with multiple counter
@@ -82,8 +82,8 @@ export default class CounterManagement {
             } else if (!this.initDone){
                 //Reset all counter if the combat is not started
                 combatants.forEach(c => {
-                    this.resetCounterManagement(c.actor?._id);
-                    this.currentRound[c._id] = -1;
+                    this.resetCounterManagement(c.actor?.id);
+                    this.currentRound[c.id] = -1;
                 });
                 this.initDone = true;
             }
@@ -93,9 +93,9 @@ export default class CounterManagement {
                 combatants.forEach(c => {
                     let featureCounterActivated = this.howManyClassesWithCounterHaveTheActor(c);
                     if (featureCounterActivated.count >= 1 ) {
-                        this.resetCounterManagement(c.actor._id);
+                        this.resetCounterManagement(c.actor.id);
                     }
-                    this.currentRound[c._id] = -1;
+                    this.currentRound[c.id] = -1;
                 });
                 this.initDone = false;
             })
@@ -181,11 +181,11 @@ export default class CounterManagement {
             if (!this.isSolarian(targetClasses) || this.getCurrentCounter(targetClasses) < 3) {
                 this.addOneToCurrentCounter(targetClasses);
             } else if (this.isSolarian(targetClasses)) {
-                this.activePixiEffect(combatant._id);
+                this.activePixiEffect(combatant.id);
             }
 
             //get the last round
-            this.currentRound[combatant._id] = game.combat.data.round;
+            this.currentRound[combatant.id] = game.combat.data.round;
         }
     }
 
@@ -265,7 +265,7 @@ export default class CounterManagement {
             // If this is for a combatant that has had its token/actor deleted,
             // remove it from the combat.
             if (!combatant.actor) {
-                game.combat.deleteCombatant(combatant._id);
+                game.combat.deleteCombatant(combatant.id);
             }
             return combatant;
         });

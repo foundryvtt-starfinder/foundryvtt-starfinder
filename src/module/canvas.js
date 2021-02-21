@@ -17,14 +17,14 @@ function onCanvasReady(...args) {
 
 function onTokenCreated(scene, tokenData, tokenFlags, userId) {
     if (getProperty(tokenData, "flags.sfrpg.itemCollection")) {
-        const token = canvas.tokens.placeables.find(x => x.id === tokenData._id);
+        const token = canvas.tokens.placeables.find(x => x.id === tokenData.id);
         trySetupLootToken(token);
     }
 }
 
 function onTokenUpdated(scene, tokenData, tokenFlags, userId) {
     if (getProperty(tokenData, "flags.sfrpg.itemCollection")) {
-        const token = canvas.tokens.placeables.find(x => x.id === tokenData._id);
+        const token = canvas.tokens.placeables.find(x => x.id === tokenData.id);
         trySetupLootToken(token);
     }
 }
@@ -109,15 +109,15 @@ export async function handleItemDropCanvas(data) {
             ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
             return;
         }
-        sourceActor = new ActorItemHelper(sourceToken.actor._id, sourceToken.id, sourceToken.scene.id);
+        sourceActor = new ActorItemHelper(sourceToken.actor.id, sourceToken.id, sourceToken.scene.id);
         sourceItemData = duplicate(data.data);
-        sourceItem = sourceActor.getOwnedItem(sourceItemData._id);
+        sourceItem = sourceActor.getOwnedItem(sourceItemData.id);
     } else if (data["actorId"]) {
         // Source is actor sheet
         //console.log("> Dragged item from actor: " + data.actorId);
         sourceActor = new ActorItemHelper(data.actorId, null, null);
         sourceItemData = duplicate(data.data);
-        sourceItem = sourceActor.getOwnedItem(sourceItemData._id);
+        sourceItem = sourceActor.getOwnedItem(sourceItemData.id);
     } else if (data["id"]) {
         // Source is sidebar
         //console.log("> Dragged item from sidebar: " + data.id);
@@ -150,7 +150,7 @@ export async function handleItemDropCanvas(data) {
             while (containersToTest.length > 0)
             {
                 let container = containersToTest.shift();
-                let children = sourceActor.filterItems(x => container.data.container.contents.find(y => y.id === x._id));
+                let children = sourceActor.filterItems(x => container.data.container.contents.find(y => y.id === x.id));
                 if (children) {
                     for (let child of children) {
                         itemData.push(child.data);
@@ -169,7 +169,7 @@ export async function handleItemDropCanvas(data) {
             if (sourceActor) {
                 let idsToDrop = [];
                 for (let droppedItem of itemData) {
-                    idsToDrop.push(droppedItem._id);
+                    idsToDrop.push(droppedItem.id);
                 }
                 sourceActor.deleteOwnedItem(idsToDrop);
             }
@@ -178,7 +178,7 @@ export async function handleItemDropCanvas(data) {
         return true;
     }
 
-    const target = new ActorItemHelper(targetActor._id, targetActor.token.id, targetActor.token.scene.id)
+    const target = new ActorItemHelper(targetActor.id, targetActor.token.id, targetActor.token.scene.id)
 
     if (sourceItem) {
         return moveItemBetweenActorsAsync(sourceActor, sourceItem, target);

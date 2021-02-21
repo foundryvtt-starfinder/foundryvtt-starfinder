@@ -187,7 +187,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Update Inventory Item
         html.find('.item-edit').click(ev => {
             let itemId = $(ev.currentTarget).parents(".item").attr("data-item-id");
-            const item = this.actor.getOwnedItem(itemId);
+            const item = this.actor.items.get(itemId);
             // const item = this.actor.getEmbeddedEntity("Item", itemId);
             item.sheet.render(true);
         });
@@ -423,7 +423,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     _onItemRollAttack(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         return item.rollAttack({event: event});
     }
@@ -431,7 +431,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     _onItemRollDamage(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         return item.rollDamage({event: event});
     }
@@ -439,7 +439,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     async _onActivateFeat(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         const updateData = {};
 
@@ -486,7 +486,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     async _onDeactivateFeat(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : false;
         await item.update({'data.isActive': desiredOutput});
@@ -521,7 +521,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     _onItemRoll(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         if (item.data.type === "spell") {
             return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
@@ -537,7 +537,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     _ontItemRecharge(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
         return item.rollRecharge();
     }
 
@@ -645,7 +645,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
 
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         // Render the chat card template
         const templateData = {
@@ -680,7 +680,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
 
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         const isOpen = item.data.data.container?.isOpen === undefined ? true : item.data.data.container.isOpen;
 
@@ -711,7 +711,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     _onItemSummary(event) {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item'),
-            item = this.actor.getOwnedItem(li.data('item-id')),
+            item = this.actor.items.get(li.data('item-id')),
             chatData = item.getChatData({ secrets: this.actor.owner, rollData: this.actor.data.data });
 
         if (li.hasClass('expanded')) {
@@ -731,7 +731,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     async _onItemSplit(event) {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item'),
-            item = this.actor.getOwnedItem(li.data('item-id'));
+            item = this.actor.items.get(li.data('item-id'));
 
         let itemQuantity = item.data.data.quantity;
         if (!itemQuantity || itemQuantity <= 1) {

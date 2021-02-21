@@ -12,11 +12,17 @@ import { getItemContainer } from "./actor-inventory.js"
 
 import { } from "./starship-update.js"
 import { ItemSheetSFRPG } from "../item/sheet.js";
+import { ItemSFRPG } from "../item/item.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
  */
 export class ActorSFRPG extends Actor {
+
+    constructor(data, context) {
+        super(data, context);
+        //console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
+    }
 
     /** @override */
     getRollData() {
@@ -175,8 +181,10 @@ export class ActorSFRPG extends Actor {
             const spellFormData = await SpellCastDialog.create(this, item);
             lvl = parseInt(spellFormData.get("level"));
             consume = Boolean(spellFormData.get("consume"));
-            if (lvl !== item.data.data.level) {
-                item = item.constructor.createOwned(mergeObject(item.data, { "data.level": lvl }, { inplace: false }), this);
+            if (lvl !== item.data.data.level && !Number.isNaN(lvl)) {
+                const mergedData = mergeObject(item.data, { "data.level": lvl }, { inplace: false });
+                console.log([item.data, mergedData]);
+                item = new ItemSFRPG(mergedData, this);
             }
         }
 

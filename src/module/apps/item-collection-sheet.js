@@ -37,13 +37,13 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
 
     _handleTokenUpdated(scene, token, options, userId) {
-        if (token._id === this.itemCollection.id && token.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
+        if (token.id === this.itemCollection.id && token.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
             this.close();
         }
     }
 
     _handleTokenDelete(scene, token, options, userId) {
-        if (token._id === this.itemCollection.id) {
+        if (token.id === this.itemCollection.id) {
             this.close();
         }
     }
@@ -132,7 +132,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         for (let item of items) {
             let itemData = {
                 item: item,
-                parent: items.find(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === item._id)),
+                parent: items.find(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === item.id)),
                 contents: []
             };
             preprocessedItems.push(itemData);
@@ -145,7 +145,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         }
 
         for (let item of containedItems) {
-            let parent = preprocessedItems.find(x => x.item._id === item.parent._id);
+            let parent = preprocessedItems.find(x => x.item.id === item.parent.id);
             if (parent) {
                 parent.contents.push(item);
             }
@@ -177,7 +177,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item');
         let itemId = li.attr("data-item-id");
-        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
         let chatData = this.getChatData(item, { secrets: true, rollData: item.data.data });
 
         if (li.hasClass('expanded')) {
@@ -196,7 +196,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
     _onItemEdit(event) {
         let itemId = $(event.currentTarget).parents('.item').attr("data-item-id");
-        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
         const itemData = {
             data: duplicate(item),
             labels: {},
@@ -218,7 +218,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         let li = $(event.currentTarget).parents(".item");
         let itemId = li.attr("data-item-id");
 
-        const itemToDelete = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        const itemToDelete = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
         let containsItems = (itemToDelete.data.container?.contents && itemToDelete.data.container.contents.length > 0);
         ItemDeletionDialog.show(itemToDelete.name, containsItems, (recursive) => {
             this._deleteItemById(itemId, recursive);
@@ -233,7 +233,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             let itemsToTest = [itemId];
             while (itemsToTest.length > 0) {
                 let itemIdToTest = itemsToTest.shift();
-                let itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemIdToTest);
+                let itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemIdToTest);
                 if (itemData.data.container?.contents) {
                     for (let content of itemData.data.container.contents) {
                         itemsToDelete.push(content.id);
@@ -243,7 +243,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             }
         }
 
-        const newItems = this.itemCollection.data.flags.sfrpg.itemCollection.items.filter(x => !itemsToDelete.includes(x._id));
+        const newItems = this.itemCollection.data.flags.sfrpg.itemCollection.items.filter(x => !itemsToDelete.includes(x.id));
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
         }
@@ -256,7 +256,7 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
 
     findItem(itemId) {
-        return this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        return this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
     }
 
     getItems() {
@@ -353,16 +353,16 @@ export class ItemCollectionSheet extends DocumentSheet {
             return;
         }
 
-        const item = tokenData.items.find(x => x._id === li.dataset.itemId);
+        const item = tokenData.items.find(x => x.id === li.dataset.itemId);
         let draggedItems = [item];
         for (let i = 0; i<draggedItems.length; i++) {
             if (draggedItems[i].data.container?.contents) {
                 let newContents = [];
                 for (let content of draggedItems[i].data.container.contents) {
-                    let contentItem = tokenData.items.find(x => x._id === content.id);
+                    let contentItem = tokenData.items.find(x => x.id === content.id);
                     if (contentItem) {
                         draggedItems.push(contentItem);
-                        newContents.push({id: contentItem._id, index: content.index});
+                        newContents.push({id: contentItem.id, index: content.index});
                     }
                 }
                 draggedItems[i].data.container.contents = newContents;
@@ -372,7 +372,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         const dragData = {
             type: "ItemCollection",
             tokenId: this.entity.id,
-            sceneId: this.entity.scene._id,
+            sceneId: this.entity.scene.id,
             items: draggedItems
         };
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
@@ -409,7 +409,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             target: {
                 actorId: null,
                 tokenId: this.itemCollection.id,
-                sceneId: this.itemCollection.scene._id
+                sceneId: this.itemCollection.scene.id
             },
             source: {
                 actorId: data.actorId,
@@ -419,7 +419,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             draggedItemId: data.id,
             draggedItemData: data.data,
             pack: data.pack,
-            containerId: targetContainer ? targetContainer._id : null
+            containerId: targetContainer ? targetContainer.id : null
         }
 
         RPC.sendMessageTo("gm", "dragItemToCollection", msg);

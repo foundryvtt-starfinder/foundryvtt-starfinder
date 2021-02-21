@@ -179,14 +179,14 @@ export class ItemSFRPG extends Item {
      * @return {Promise}
      */
     async roll() {
-        let htmlOptions = { secrets: this.actor?.owner || true, rollData: this.data };
+        let htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this.data };
         htmlOptions.rollData.owner = this.actor?.data?.data;
 
         // Basic template rendering data
         const token = this.actor.token;
         const templateData = {
             actor: this.actor,
-            tokenId: token ? `${token.scene._id}.${token.id}` : null,
+            tokenId: token ? `${token.scene.id}.${token.id}` : null,
             item: this.data,
             data: this.getChatData(htmlOptions),
             labels: this.labels,
@@ -203,11 +203,11 @@ export class ItemSFRPG extends Item {
 
         // Basic chat message data
         const chatData = {
-            user: game.user._id,
+            user: game.user.id,
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             content: html,
             speaker: {
-                actor: this.actor._id,
+                actor: this.actor.id,
                 token: this.actor.token,
                 alias: this.actor.name
             }
@@ -745,7 +745,7 @@ export class ItemSFRPG extends Item {
             }
 
             this.actor.updateEmbeddedEntity("Item", {
-                _id: this.data._id,
+                id: this.data.id,
                 "data.capacity.value": capacity.value
             }, {});
             // this.actor.updateOwnedItem({
@@ -818,7 +818,7 @@ export class ItemSFRPG extends Item {
 
                     if (this.hasCapacity()) {
                         this.actor.updateEmbeddedEntity("Item", {
-                            _id: this.data._id,
+                            id: this.data.id,
                             "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
                         }, {});
                     }
@@ -1095,7 +1095,7 @@ export class ItemSFRPG extends Item {
             });
         } else {
             ChatMessage.create({
-                user: game.user._id,
+                user: game.user.id,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 content: `Consumes ${this.name}`
             })
@@ -1143,14 +1143,14 @@ export class ItemSFRPG extends Item {
         // Display a Chat Message
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
-            user: game.user._id,
+            user: game.user.id,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
             roll: roll,
             speaker: {
-                actor: this.actor._id,
+                actor: this.actor.id,
                 token: this.actor.token,
                 alias: this.actor.name
             }
@@ -1191,7 +1191,7 @@ export class ItemSFRPG extends Item {
         if (!actor) return;
 
         // Get the Item
-        const item = actor.getOwnedItem(card.dataset.itemId);
+        const item = actor.items.get(card.dataset.itemId);
 
         // Get the target
         const target = isTargetted ? this._getChatCardTarget(card) : null;

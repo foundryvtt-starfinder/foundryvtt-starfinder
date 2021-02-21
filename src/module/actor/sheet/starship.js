@@ -515,7 +515,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
            if (pack.metadata.entity !== "Item") return;
            itemData = await pack.getEntity(data.id);
        } else if (data.data) {
-           let sameActor = data.actorId === actor._id;
+           let sameActor = data.actorId === actor.id;
            if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
            if (sameActor) {
                await this._onSortItem(event, data.data);
