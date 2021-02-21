@@ -73,6 +73,8 @@ import calculateStarshipSensors         from './rules/actions/actor/starship/cal
 import calculateStarshipShields         from './rules/actions/actor/starship/calculate-starship-shields.js';
 import calculateStarshipSpeed           from './rules/actions/actor/starship/calculate-starship-speed.js';
 import calculateStarshipTargetLock      from './rules/actions/actor/starship/calculate-starship-targetlock.js';
+// Vehicle rules
+import calculateVehiclePassengers       from './rules/actions/actor/vehicle/calculate-vehicle-passengers.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -136,6 +138,8 @@ export default function (engine) {
     calculateStarshipTargetLock(engine);
     calculateStarshipFrame(engine);
     calculateStarshipComputer(engine);
+    // Vehicle actions
+    calculateVehiclePassengers(engine);
 
     // Conditions
     always(engine);
@@ -247,7 +251,10 @@ export default function (engine) {
             },
             {
                 when: { closure: "isActorType", type: "vehicle" },
-                then: "identity"
+                then: [
+                        "calculateVehiclePassengers",
+                        "identity"
+                    ]
             }
         ]
     });
