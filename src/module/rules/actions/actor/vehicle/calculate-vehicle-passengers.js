@@ -2,13 +2,14 @@ export default function (engine) {
     engine.closures.add("calculateVehiclePassengers", (fact, context) => {
         const data = fact.data;
 
-        data.crew = mergeObject(data.crew, {
+        // Ensure that all vehicles have a crew
+        data.crew = mergeObject(data.crew ?? {}, {
             complement: {
-                limit: -1,
+                limit: 0,
                 actorIds: []
             },
             passenger: {
-                limit: -1,
+                limit: 0,
                 actorIds: []
             },
             pilot: {
