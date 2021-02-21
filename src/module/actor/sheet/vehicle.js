@@ -34,11 +34,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      */
     async _getCrewData(data) {
         let crewData = this.actor.data.data.crew;
-
-        if (!crewData || this.actor.data?.flags?.shipsCrew) {
-            crewData = await this._processFlags(data, data.actor.flags);
-        }
-
+        
         const pilotActors = crewData.pilot.actorIds.map(crewId => game.actors.get(crewId));
         const complementActors = crewData.complement.actorIds.map(crewId => game.actors.get(crewId));
         const passengerActors = crewData.passenger.actorIds.map(crewId => game.actors.get(crewId));
