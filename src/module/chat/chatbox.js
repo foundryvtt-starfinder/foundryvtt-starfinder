@@ -15,7 +15,7 @@ export default class SFRPGCustomChatMessage {
 
     static getToken(actor) {
         if (actor.token) {
-            return `${actor.token.scene.data.id}.${actor.token.data.id}`;
+            return `${actor.token.parent.id}.${actor.token.id}`;
         } else if (canvas.tokens.controlled[0]?.id) {
             return `${game.scenes.active.id}.${canvas.tokens.controlled[0].id}`;
         } else {

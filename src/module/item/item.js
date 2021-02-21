@@ -745,10 +745,10 @@ export class ItemSFRPG extends Item {
                 }
             }
 
-            this.actor.updateEmbeddedEntity("Item", {
+            this.actor.updateEmbeddedDocuments("Item", [{
                 id: this.data.id,
                 "data.capacity.value": capacity.value
-            }, {});
+            }], {});
             // this.actor.updateOwnedItem({
             //   id: this.data.id,
             //   'data.capacity.value': capacity.value
@@ -818,10 +818,10 @@ export class ItemSFRPG extends Item {
                     }
 
                     if (this.hasCapacity()) {
-                        this.actor.updateEmbeddedEntity("Item", {
+                        this.actor.updateEmbeddedDocuments("Item", [{
                             id: this.data.id,
                             "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
-                        }, {});
+                        }], {});
                     }
                 }
             }

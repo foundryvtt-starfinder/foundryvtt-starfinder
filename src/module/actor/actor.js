@@ -859,7 +859,7 @@ export class ActorSFRPG extends Actor {
             }
         });
 
-        await this.updateEmbeddedEntity("Item", updateItems);
+        await this.updateEmbeddedDocuments("Item", updateItems);
 
         // Notify chat what happened
         if (chat) {
@@ -1001,7 +1001,7 @@ export class ActorSFRPG extends Actor {
         });
 
         await this.update(updateData);
-        await this.updateEmbeddedEntity("Item", updateItems);
+        await this.updateEmbeddedDocuments("Item", updateItems);
 
         if (chat) {
             ChatMessage.create({

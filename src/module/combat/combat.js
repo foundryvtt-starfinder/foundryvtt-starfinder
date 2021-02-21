@@ -70,7 +70,7 @@ export class CombatSFRPG extends Combat {
                     id: c.id,
                     initiative: null
                 }});
-                await this.updateEmbeddedEntity("Combatant", updates);
+                await this.updateEmbeddedDocuments("Combatant", updates);
             }
         }
 
@@ -331,7 +331,7 @@ export class CombatSFRPG extends Combat {
                     id: c.id,
                     initiative: null
                 }});
-                await this.updateEmbeddedEntity("Combatant", updates);
+                await this.updateEmbeddedDocuments("Combatant", updates);
             }
         }
 
@@ -646,7 +646,7 @@ export class CombatSFRPG extends Combat {
       if ( !updates.length ) return this;
   
       // Update multiple combatants
-      await this.updateEmbeddedEntity("Combatant", updates);
+      await this.updateEmbeddedDocuments("Combatant", updates);
   
       // Ensure the turn order remains with the same combatant
       if ( updateTurn && currentId ) {
