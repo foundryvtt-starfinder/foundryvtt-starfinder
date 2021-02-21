@@ -14,11 +14,13 @@ export default function (engine) {
         data.attributes.baseAttackBonus.rolledMods = [];
 
         for (const cls of classes) {
+            const classData = cls.data.data;
+
             let mod = 0;
-            switch (cls.data.bab) {
-                case "slow": mod += Math.floor(cls.data.levels * 0.5); break;
-                case "moderate": mod += Math.floor(cls.data.levels * 0.75); break;
-                case "full": mod += cls.data.levels; break;
+            switch (classData.bab) {
+                case "slow": mod += Math.floor(classData.levels * 0.5); break;
+                case "moderate": mod += Math.floor(classData.levels * 0.75); break;
+                case "full": mod += classData.levels; break;
             }
 
             data.attributes.baseAttackBonus.tooltip.push(game.i18n.format("SFRPG.BABTooltip", {

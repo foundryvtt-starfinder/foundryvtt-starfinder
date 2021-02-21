@@ -2,7 +2,7 @@ import { ItemDeletionDialog } from "./item-deletion-dialog.js"
 import { ItemSheetSFRPG } from "../item/sheet.js"
 import { RPC } from "../rpc.js"
 
-export class ItemCollectionSheet extends BaseEntitySheet {
+export class ItemCollectionSheet extends DocumentSheet {
     constructor(itemCollection) {
         super(itemCollection, {});
         this.itemCollection = itemCollection;

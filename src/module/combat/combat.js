@@ -654,7 +654,7 @@ export class CombatSFRPG extends Combat {
       }
   
       // Create multiple chat messages
-      await CONFIG.ChatMessage.entityClass.create(messages);
+      await CONFIG.ChatMessage.documentClass.create(messages);
   
       // Return the updated Combat
       return this;

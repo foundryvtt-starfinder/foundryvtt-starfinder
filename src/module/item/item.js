@@ -744,7 +744,7 @@ export class ItemSFRPG extends Item {
                 }
             }
 
-            this.actor.updateEmbeddedEntity("OwnedItem", {
+            this.actor.updateEmbeddedEntity("Item", {
                 _id: this.data._id,
                 "data.capacity.value": capacity.value
             }, {});
@@ -817,7 +817,7 @@ export class ItemSFRPG extends Item {
                     }
 
                     if (this.hasCapacity()) {
-                        this.actor.updateEmbeddedEntity("OwnedItem", {
+                        this.actor.updateEmbeddedEntity("Item", {
                             _id: this.data._id,
                             "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
                         }, {});

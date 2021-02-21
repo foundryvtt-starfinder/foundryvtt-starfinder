@@ -6,7 +6,8 @@ export default function (engine) {
         const data = fact.data;
         const modifiers = fact.modifiers;
         const races = fact.races;
-        const theme = fact.theme;
+
+        const themeData = fact?.theme?.data?.data;
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -38,13 +39,14 @@ export default function (engine) {
         })
 
         let themeMod = {};
-        if(theme && theme.data.abilityMod) {
-            themeMod[theme.data.abilityMod.ability] = theme.data.abilityMod.mod;
+        if(themeData?.abilityMod) {
+            themeMod[themeData.abilityMod.ability] = themeData.abilityMod.mod;
         }
 
         let racesMod = {};
         for (let race of races) {
-            for(let raceMod of race.data.abilityMods.parts) {
+            const raceData = race.data.data;
+            for(let raceMod of raceData.abilityMods.parts) {
                 racesMod[raceMod[1]] = racesMod[raceMod[1]] !== undefined ? racesMod[raceMod[1]] + raceMod[0] : raceMod[0];
             }
         }
@@ -52,8 +54,10 @@ export default function (engine) {
         let abilityScoreIncreasesMod = {};
         const asis = fact.asis?.filter(x => x.type === "asi") || [];
         for (let asi of asis) {
+            const asiData = asi.data.data;
+
             for (let ability of Object.keys(SFRPG.abilities)) {
-                if (asi.data.abilities[ability]) {
+                if (asiData.abilities[ability]) {
                     if (!(ability in abilityScoreIncreasesMod)) {
                         abilityScoreIncreasesMod[ability] = 1;
                     } else {

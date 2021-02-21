@@ -9,10 +9,12 @@ export default function (engine) {
         };
 
         if (computers && computers.length > 0) {
-            data.attributes.computer.value = computers[0].data.modifier;
+            const computerData = computers[0].data.data;
+
+            data.attributes.computer.value = computerData.modifier;
             data.attributes.computer.tooltip.push(
                 game.i18n.format("SFRPG.StarshipSheet.Modifiers.ComputerBonus", {
-                    mod: computers[0].data.modifier.signedString(),
+                    mod: computerData.modifier.signedString(),
                     source: computers[0].name
                 })
             );

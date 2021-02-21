@@ -9,7 +9,7 @@ Hooks.on('updateToken', onTokenUpdated);
 
 function onCanvasReady(...args) {
     for (let placeable of canvas.tokens.placeables) {
-		if (placeable.getFlag("sfrpg", "itemCollection")) {
+		if (placeable.document.getFlag("sfrpg", "itemCollection")) {
             setupLootCollectionTokenInteraction(placeable, false);
         }
     }

@@ -54,10 +54,12 @@ export default function (engine) {
             let className = "";
 
             for (const cls of fact.classes) {
-                if (!cls.data.kas) continue;
-                let classScore = fact.data.abilities[cls.data.kas].mod;
+                const classData = cls.data.data;
+
+                if (!classData.kas) continue;
+                let classScore = fact.data.abilities[classData.kas].mod;
                 if (classScore > highestKeyAbilityScoreModifier) {
-                    keyAbilityScore = cls.data.kas;
+                    keyAbilityScore = classData.kas;
                     highestKeyAbilityScoreModifier = classScore;
                     className = cls.name;
                 }

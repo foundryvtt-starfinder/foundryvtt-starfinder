@@ -75,7 +75,7 @@ export default function (engine) {
             tooltip: encumbrance.tooltip,
             rolledMods: encumbrance.rolledMods
         };
-        
+
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

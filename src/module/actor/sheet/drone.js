@@ -33,7 +33,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
      */
     _prepareItems(data) {
 
-        const actorData = data.actor;
+        const actorData = data.data;
 
         let weaponLabel = "";
         if (data.data.attributes.weaponMounts.melee.max > 0 && data.data.attributes.weaponMounts.ranged.max > 0) {
@@ -116,7 +116,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             totalValue += (i.data.price * i.data.quantity);
         }
         totalWeight = Math.floor(totalWeight);
-        data.encumbrance = this._computeEncumbrance(totalWeight, data);
+        data.encumbrance = this._computeEncumbrance(totalWeight, actorData);
         data.inventoryValue = Math.floor(totalValue);
 
         this.processItemContainment(items, function (itemType, itemData) {
@@ -210,8 +210,8 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
      */
     _computeEncumbrance(totalWeight, actorData) {
         const enc = {
-            max: actorData.data.attributes.encumbrance.max,
-            tooltip: actorData.data.attributes.encumbrance.tooltip,
+            max: actorData.attributes.encumbrance.max,
+            tooltip: actorData.attributes.encumbrance.tooltip,
             value: totalWeight
         };
 
