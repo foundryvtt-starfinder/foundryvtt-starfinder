@@ -3,20 +3,19 @@ export default function (engine) {
         const data = fact.data;
 
         data.crew = mergeObject(data.crew, {
-
             complement: {
-                limit: 0,
+                limit: -1,
                 actorIds: []
             },
             passenger: {
-                limit: 0,
+                limit: -1,
                 actorIds: []
             },
             pilot: {
                 limit: 1,
                 actorIds: []
             },
-            useNPCCrew: false
+            useNPCCrew: true
         }, {overwrite: false});
 
         for (let [key, crew] of Object.entries(data.crew)) {
