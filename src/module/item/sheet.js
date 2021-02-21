@@ -96,6 +96,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasHands = data.item.data.hasOwnProperty("hands");
         data.hasProficiency = data.item.data.proficient === true || data.item.data.proficient === false;
         data.isFeat = this.type === "feat";
+        data.isVehicleAttack = data.item.type === "vehicleAttack";
         data.isGM = game.user.isGM;
         data.isOwner = data.owner;
 
@@ -159,6 +160,12 @@ export class ItemSheetSFRPG extends ItemSheet {
                 let abl = actor.data.data.attributes.keyability || "int";
                 save.dc = 10 + data.item.data.level + actor.data.data.abilities[abl].mod;
             }
+        }
+
+        // Vehicle Attacks
+        if (data.isVehicleAttack) {
+            data.placeholders.savingThrow = {};
+            data.placeholders.savingThrow.value = data.item.data.save.dc;
         }
 
         data.modifiers = this.item.data.data.modifiers;
@@ -243,7 +250,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             let alignedBonus = itemData.proficient ? itemData.bonus.aligned : 0;
             props.push(game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }));
         }
-
+        
         // Action type
         if (itemData.actionType) {
             props.push(CONFIG.SFRPG.itemActionTypes[itemData.actionType]);

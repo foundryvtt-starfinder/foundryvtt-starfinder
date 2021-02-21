@@ -603,6 +603,56 @@ export class ActorSFRPG extends Actor {
         });
     }
 
+    /**
+     * Roll the Piloting skill of the pilot of a vehicle
+     *
+     * @param {Object} options Options which configure how saves are rolled
+     */
+    async rollVehiclePilotingSkill(role = null, actorId = null, options = {}) {
+
+        let parts = [];
+        let data = this.getRollData();
+
+        const rollContext = new RollContext();
+        rollContext.addContext("vehicle", this, data);
+        rollContext.setMainContext("vehicle");
+
+        // Add piloting modifier of vehicle
+        parts.push(`@attributes.modifiers.piloting`);
+
+        if(!role || !actorId) {
+            // Add pilot's piloting modifier
+            parts.push(`@pilot.skills.pil.mod`);
+        }
+        else {
+            let passenger = this.data.data.crew[role].actors.find(element => element._id == actorId);
+            let actorData = null;
+            if (passenger instanceof ActorSFRPG) {
+                actorData = passenger.data.data;
+            } else {
+                actorData = passenger.data;
+            }
+
+            rollContext.addContext("passenger", passenger, actorData);
+            parts.push(`@passenger.skills.pil.mod`);
+        }
+
+        this.setupRollContexts(rollContext);
+
+        return await DiceSFRPG.d20Roll({
+            event: options.event,
+            rollContext: rollContext,
+            parts: parts,
+            title: `Skill Check - ${CONFIG.SFRPG.skills["pil"]}`,
+            flavor: null,
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            dialogOptions: {
+                left: options.event ? options.event.clientX - 80 : null,
+                top: options.event ? options.event.clientY - 80 : null
+            }
+        });
+    }
+
     static async applyDamage(roll, multiplier) {
         const totalDamageDealt = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
         const isHealing = (multiplier < 0);
@@ -1269,9 +1319,23 @@ export class ActorSFRPG extends Actor {
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
         const actorData = this.data.data;
-        
-        if (actorData.type === "starship") {
 
+        if (actorData.type === "vehicle") {
+            if (!actorData.data.crew.useNPCCrew) {
+                /** Add player pilot if available. */
+                if (actorData.data.crew.pilot?.actors?.length > 0) {
+                    const pilotActor = actorData.data.crew.pilot.actors[0];
+                    let pilotData = null;
+                    if (actor instanceof ActorSFRPG) {
+                        pilotData = pilotActor.data.data;
+                    } else {
+                        pilotData = pilotActor.data;
+                    }
+                    rollContext.addContext("pilot", actor, pilotData);
+                }
+            }
+        }
+        else if (actorData.type === "starship") {
             if (!actorData.data.crew.useNPCCrew) {
                 /** Add player captain if available. */
                 if (actorData.data.crew.captain?.actors?.length > 0) {

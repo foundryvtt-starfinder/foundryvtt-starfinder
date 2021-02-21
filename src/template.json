@@ -966,7 +966,7 @@
             }
         },
         "vehicle": {
-            "templates": ["modifiers", "conditions"],
+            "templates": ["conditions"],
             "details": {
                 "level": 1,
                 "price": 0,
@@ -974,6 +974,21 @@
                     "value": "",
                     "chat": "",
                     "unidentified": ""
+                }
+            },
+            "crew": {
+                "useNPCCrew": true,
+                "pilot": {
+                    "limit": 1,
+                    "actorIds": []
+                },
+                "complement": {
+                    "limit": 0,
+                    "actorIds": []
+                },
+                "passenger": {
+                    "limit": 0,
+                    "actorIds": []
                 }
             },
             "attributes": {
@@ -999,10 +1014,13 @@
                     "threshold": 7
                 },
                 "hardness": 5,
-                "attacks": [],
-                "modifiers": [],
+                "modifiers": {
+                  "piloting": 0,
+                  "attackStopped": 0,
+                  "attackMoving": 0,
+                  "attackFullSpeed": 0
+                },
                 "systems": [],
-                "passengers": 0,
                 "special": []
             }
         }
@@ -1037,6 +1055,8 @@
             "starshipShield",
             "starshipThruster",
             "starshipWeapon",
+
+            "vehicleAttack",
 
             "augmentation",
             "consumable",
@@ -1583,6 +1603,13 @@
                 "first": "str",
                 "second": "dex"
             }
+        },
+        "vehicleAttack": {
+            "templates": ["itemDescription", "modifiers"],
+            "damage": {
+                "parts": []
+            },
+            "save": {}
         },
         "mod": {
             "templates": ["itemDescription", "modifiers"],
