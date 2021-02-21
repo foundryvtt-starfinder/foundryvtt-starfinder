@@ -30,7 +30,7 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
 
     async close(options={}) {
-        delete this.entity.apps[this.appId];
+        delete this.document.apps[this.appId];
         Hooks.off("updateToken", this.updateCallback);
         Hooks.off("deleteToken", this.deleteCallback);
         super.close(options);
