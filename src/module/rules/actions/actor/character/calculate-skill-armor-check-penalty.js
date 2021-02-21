@@ -84,7 +84,7 @@ export default function (engine) {
                     skill.tooltip.push(game.i18n.format("SFRPG.ACPTooltip", {
                         type: "Armor",
                         mod: acp.signedString(),
-                        source: armor.name
+                        source: fact.armor?.data.name
                     }));
                 }
             }

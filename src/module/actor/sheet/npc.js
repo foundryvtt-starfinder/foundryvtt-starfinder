@@ -186,6 +186,6 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         if (cr) formData[crv] = cr < 1 ? cr : parseInt(cr);
 
         // Parent ActorSheet update steps
-        super._updateObject(event, formData);
+        return super._updateObject(event, formData);
     }
 }

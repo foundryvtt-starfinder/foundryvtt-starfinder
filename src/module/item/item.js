@@ -52,7 +52,7 @@ export class ItemSFRPG extends Item {
         const C = CONFIG.SFRPG;
         const labels = {};
         const itemData = this.data;
-        const actorData = this.actor ? this.actor.data : {};
+        const actorData = this.parent ? this.parent.data : {};
         const data = itemData.data;
 
         // Spell Level,  School, and Components
@@ -127,19 +127,19 @@ export class ItemSFRPG extends Item {
 
     _getSaveLabel(save, actorData, itemData) {
         if (!save?.type || !save?.dc) return "";
-        
+
         let dcFormula = save.dc.toString();
         if (dcFormula) {
             const rollContext = new RollContext();
             rollContext.addContext("item", this, itemData);
             rollContext.setMainContext("item");
-            if (this.actor) {
+            if (this.actor && this.actor.data) {
                 rollContext.addContext("owner", this.actor);
                 rollContext.setMainContext("owner");
+                
+                this.actor.setupRollContexts(rollContext);
             }
     
-            this.actor?.setupRollContexts(rollContext);
-
             const rollResult = DiceSFRPG.createRoll({
                 rollContext: rollContext,
                 rollFormula: dcFormula,

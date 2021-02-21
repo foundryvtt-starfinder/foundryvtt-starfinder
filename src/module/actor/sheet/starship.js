@@ -884,6 +884,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         tier = tiers[tier] || parseFloat(tier);
         if (tier) formData[v] = tier < 1 ? tier : parseInt(tier);
 
-        super._updateObject(event, formData);
+        return super._updateObject(event, formData);
     }
 }

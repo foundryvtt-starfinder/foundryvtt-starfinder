@@ -79,6 +79,9 @@ export class ItemSheetSFRPG extends ItemSheet {
      */
     getData() {
         const data = super.getData();
+
+        data.itemData = this.document.data.data;
+        data.actor = this.document.parent;
         data.labels = this.item.labels;
 
         // Include CONFIG values
@@ -86,28 +89,29 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Item Type, Status, and Details
         data.itemType = game.i18n.format(`ITEM.Type${data.item.type.titleCase()}`);
-        data.itemStatus = this._getItemStatus(data.item);
-        data.itemProperties = this._getItemProperties(data.item);
+        data.itemStatus = this._getItemStatus();
+        data.itemProperties = this._getItemProperties();
         data.isPhysical = data.item.data.hasOwnProperty("quantity");
         data.hasLevel = data.item.data.hasOwnProperty("level") && data.item.type !== "spell";
         data.hasHands = data.item.data.hasOwnProperty("hands");
         data.hasProficiency = data.item.data.proficient === true || data.item.data.proficient === false;
         data.isFeat = this.type === "feat";
         data.isGM = game.user.isGM;
+        data.isOwner = data.owner;
 
         // Physical items
         const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "magic", "hybrid", "upgrade", "augmentation", "shield", "weaponAccessory"];
         data.isPhysicalItem = physicalItems.includes(data.item.type);
 
         // Item attributes
-        let itemData = this.item.data.data;
+        const itemData = this.item.data.data;
         data.placeholders = {};
 
         if (data.isPhysicalItem) {
             if (itemData.attributes) {
-                let itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
-                let sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
-                let dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
+                const itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
+                const sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
+                const dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
 
                 data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, 5 + itemData.attributes.sturdy ? 2 * itemLevel : itemLevel);
                 data.placeholders.maxHitpoints = this.parseNumber(itemData.attributes.hp?.max, (itemData.attributes.sturdy ? 15 + 3 * itemLevel : 5 + itemLevel) + (itemLevel >= 15 ? 30 : 0));
@@ -119,9 +123,9 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
                 data.placeholders.savingThrow.value = this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula);
             } else {
-                let itemLevel = this.parseNumber(itemData.level, 1);
-                let sizeModifier = 0;
-                let dexterityModifier = -5;
+                const itemLevel = this.parseNumber(itemData.level, 1);
+                const sizeModifier = 0;
+                const dexterityModifier = -5;
 
                 data.placeholders.hardness = 5 + itemLevel;
                 data.placeholders.maxHitpoints = (5 + itemLevel) + (itemLevel >= 15 ? 30 : 0);
@@ -138,7 +142,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.selectedSize = (itemData.attributes && itemData.attributes.size) ? itemData.attributes.size : "medium";
 
         // Category
-        data.category = this._getItemCategory(data.item);
+        data.category = this._getItemCategory();
 
         // Armor specific details
         data.isPowerArmor = data.item.data.hasOwnProperty("armor") && data.item.data.armor.type === 'power';
@@ -189,10 +193,13 @@ export class ItemSheetSFRPG extends ItemSheet {
      * @return {string}
      * @private
      */
-    _getItemStatus(item) {
-        if (["weapon", "equipment", "shield"].includes(item.type)) return item.data.equipped ? "Equipped" : "Unequipped";
-        else if (item.type === "starshipWeapon") return item.data.mount.mounted ? "Mounted" : "Not Mounted";
-        else if (item.type === "augmentation") return `${item.data.type} (${item.data.system})`;
+    _getItemStatus() {
+        const item = this.document.data;
+        const itemData = item.data;
+
+        if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? "Equipped" : "Unequipped";
+        else if (item.type === "starshipWeapon") return itemData.mount.mounted ? "Mounted" : "Not Mounted";
+        else if (item.type === "augmentation") return `${itemData.type} (${itemData.system})`;
     }
 
     /* -------------------------------------------- */
@@ -202,45 +209,48 @@ export class ItemSheetSFRPG extends ItemSheet {
      * @return {Array}
      * @private
      */
-    _getItemProperties(item) {
+    _getItemProperties() {
         const props = [];
         const labels = this.item.labels;
 
+        const item = this.document.data;
+        const itemData = item.data;
+
         if (item.type === "weapon") {
-            props.push(...Object.entries(item.data.properties)
+            props.push(...Object.entries(itemData.properties)
                 .filter(e => e[1] === true)
                 .map(e => CONFIG.SFRPG.weaponProperties[e[0]]));
         } else if (item.type === "spell") {
             props.push(
                 labels.components,
                 labels.materials,
-                item.data.concentration ? "Concentration" : null,
-                item.data.sr ? "Spell Resistence" : null,
-                item.data.dismissible ? "Dismissible" : null
+                itemData.concentration ? "Concentration" : null,
+                itemData.sr ? "Spell Resistence" : null,
+                itemData.dismissible ? "Dismissible" : null
             )
         } else if (item.type === "equipment") {
-            props.push(CONFIG.SFRPG.armorTypes[item.data.armor.type]);
+            props.push(CONFIG.SFRPG.armorTypes[itemData.armor.type]);
             props.push(labels.armor);
         } else if (item.type === "feat") {
             props.push(labels.featType);
         } else if (item.type === "starshipWeapon") {
-            props.push(CONFIG.SFRPG.starshipWeaponTypes[item.data.weaponType]);
-            props.push(CONFIG.SFRPG.starshipWeaponClass[item.data.class]);
+            props.push(CONFIG.SFRPG.starshipWeaponTypes[itemData.weaponType]);
+            props.push(CONFIG.SFRPG.starshipWeaponClass[itemData.class]);
         } else if (item.type === "shield") {
-            if (item.data.dex) props.push(game.i18n.format("SFRPG.Items.Shield.Dex", { dex: item.data.dex.signedString() }));
-            if (item.data.acp) props.push(game.i18n.format("SFRPG.Items.Shield.ACP", { acp: item.data.acp.signedString() }));
-            let wieldedBonus = item.data.proficient ? item.data.bonus.wielded : 0;
-            let alignedBonus = item.data.proficient ? item.data.bonus.aligned : 0;
+            if (itemData.dex) props.push(game.i18n.format("SFRPG.Items.Shield.Dex", { dex: itemData.dex.signedString() }));
+            if (itemData.acp) props.push(game.i18n.format("SFRPG.Items.Shield.ACP", { acp: itemData.acp.signedString() }));
+            let wieldedBonus = itemData.proficient ? itemData.bonus.wielded : 0;
+            let alignedBonus = itemData.proficient ? itemData.bonus.aligned : 0;
             props.push(game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }));
         }
 
         // Action type
-        if (item.data.actionType) {
-            props.push(CONFIG.SFRPG.itemActionTypes[item.data.actionType]);
+        if (itemData.actionType) {
+            props.push(CONFIG.SFRPG.itemActionTypes[itemData.actionType]);
         }
 
         // Action usage
-        if ((item.type !== "weapon") && item.data.activation && !isObjectEmpty(item.data.activation)) {
+        if ((item.type !== "weapon") && itemData.activation && !isObjectEmpty(itemData.activation)) {
             props.push(
                 labels.activation,
                 labels.range,
@@ -251,24 +261,27 @@ export class ItemSheetSFRPG extends ItemSheet {
         return props.filter(p => !!p);
     }
 
-    _getItemCategory(item) {
+    _getItemCategory() {
         let category = {
             enabled: false,
             value: "",
             tooltip: ""
         };
 
+        const item = this.document.data;
+        const itemData = item.data;
+
         if (item.type === "weapon") {
             category.enabled = true;
-            category.value = SFRPG.weaponTypes[item.data.weaponType];
+            category.value = SFRPG.weaponTypes[itemData.weaponType];
             category.tooltip = "SFRPG.ItemSheet.Weapons.Category";
         } else if (item.type === "equipment") {
             category.enabled = true;
-            category.value = SFRPG.equipmentTypes[item.data.armor.type];
+            category.value = SFRPG.equipmentTypes[itemData.armor.type];
             category.tooltip = "SFRPG.Items.Equipment.Category";
         } else if (item.type === "consumable") {
             category.enabled = true;
-            category.value = SFRPG.consumableTypes[item.data.consumableType];
+            category.value = SFRPG.consumableTypes[itemData.consumableType];
             category.tooltip = "SFRPG.ItemSheet.Consumables.Category";
         }
 
@@ -319,7 +332,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         }, []);
 
         // Update the Item
-        super._updateObject(event, formData);
+        return super._updateObject(event, formData);
     }
 
     /* -------------------------------------------- */

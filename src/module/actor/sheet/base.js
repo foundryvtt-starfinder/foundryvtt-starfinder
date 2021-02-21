@@ -76,12 +76,10 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         if (!data.data?.details?.biography?.fullBodyImage)
         {
-            this.actor.data = mergeObject(this.actor.data, {
-                data: {
-                    details: {
-                        biography: {
-                            fullBodyImage: "systems/sfrpg/images/mystery-body.png"
-                        }
+            this.actor.data.data = mergeObject(this.actor.data.data, {
+                details: {
+                    biography: {
+                        fullBodyImage: "systems/sfrpg/images/mystery-body.png"
                     }
                 }
             }, {overwrite: false});
@@ -760,6 +758,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     _prepareSpellbook(data, spells) {
         const owner = this.actor.isOwner;
+        const actorData = this.actor.data.data;
 
         const levels = {
             "always": -30,
@@ -773,26 +772,28 @@ export class ActorSheetSFRPG extends ActorSheet {
             "0": "&infin;"
         };
 
-        let spellbook = spells.reduce((sb, spell) => {
-            const mode = spell.data.preparation.mode || "";
-            const lvl = levels[mode] || spell.data.level || 0;
+        let spellbook = spells.reduce((spellBook, spell) => {
+            const spellData = spell.data;
 
-            if (!sb[lvl]) {
-                sb[lvl] = {
+            const mode = spellData.preparation.mode || "";
+            const lvl = levels[mode] || spellData.level || 0;
+
+            if (!spellBook[lvl]) {
+                spellBook[lvl] = {
                     level: lvl,
                     usesSlots: lvl > 0,
                     canCreate: owner && (lvl >= 0),
-                    canPrepare: (data.actor.type === 'character') && (lvl > 0),
+                    canPrepare: (this.actor.data.type === 'character') && (lvl > 0),
                     label: lvl >= 0 ? CONFIG.SFRPG.spellLevels[lvl] : CONFIG.SFRPG.spellPreparationModes[mode],
                     spells: [],
-                    uses: useLabels[lvl] || data.actor.spells["spell"+lvl].value || 0,
-                    slots: useLabels[lvl] || data.actor.spells["spell"+lvl].max || 0,
+                    uses: useLabels[lvl] || actorData.spells["spell"+lvl].value || 0,
+                    slots: useLabels[lvl] || actorData.spells["spell"+lvl].max || 0,
                     dataset: {"type": "spell", "level": lvl}
                 };
             }
 
-            sb[lvl].spells.push(spell);
-            return sb;
+            spellBook[lvl].spells.push(spell);
+            return spellBook;
         }, {});
 
         spellbook = Object.values(spellbook);
