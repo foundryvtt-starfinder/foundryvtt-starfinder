@@ -109,7 +109,7 @@ export async function handleItemDropCanvas(data) {
             ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
             return;
         }
-        sourceActor = new ActorItemHelper(sourceToken.actor.id, sourceToken.id, sourceToken.scene.id);
+        sourceActor = new ActorItemHelper(sourceToken.actor.id, sourceToken.id, sourceToken.parent.id);
         sourceItemData = duplicate(data.data);
         sourceItem = sourceActor.getOwnedItem(sourceItemData.id);
     } else if (data["actorId"]) {
@@ -178,7 +178,7 @@ export async function handleItemDropCanvas(data) {
         return true;
     }
 
-    const target = new ActorItemHelper(targetActor.id, targetActor.token.id, targetActor.token.scene.id)
+    const target = new ActorItemHelper(targetActor.id, targetActor.token.id, targetActor.token.parent.id)
 
     if (sourceItem) {
         return moveItemBetweenActorsAsync(sourceActor, sourceItem, target);

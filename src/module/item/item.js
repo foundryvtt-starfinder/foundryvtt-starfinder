@@ -184,9 +184,10 @@ export class ItemSFRPG extends Item {
 
         // Basic template rendering data
         const token = this.actor.token;
+        console.log(token);
         const templateData = {
             actor: this.actor,
-            tokenId: token ? `${token.scene.id}.${token.id}` : null,
+            tokenId: token ? `${token.parent.id}.${token.id}` : null,
             item: this.data,
             data: this.getChatData(htmlOptions),
             labels: this.labels,

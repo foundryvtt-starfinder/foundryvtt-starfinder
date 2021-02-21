@@ -371,8 +371,8 @@ export class ItemCollectionSheet extends DocumentSheet {
 
         const dragData = {
             type: "ItemCollection",
-            tokenId: this.entity.id,
-            sceneId: this.entity.scene.id,
+            tokenId: this.document.id,
+            sceneId: this.document.parent.id,
             items: draggedItems
         };
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
@@ -409,7 +409,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             target: {
                 actorId: null,
                 tokenId: this.itemCollection.id,
-                sceneId: this.itemCollection.scene.id
+                sceneId: this.itemCollection.parent.id
             },
             source: {
                 actorId: data.actorId,
