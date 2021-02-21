@@ -860,7 +860,8 @@ export class ActorItemHelper {
             await this.actor.token.update({"actorData.items": items}, {});
             newItem = createResult;
         } else {
-            const createResult = await this.actor.createEmbeddedDocuments("Item", [itemData], {});
+            const dataToCreate = itemData instanceof Array ? itemData : [itemData];
+            const createResult = await this.actor.createEmbeddedDocuments("Item", dataToCreate, {});
             newItem = createResult instanceof Array ? createResult : [createResult];
         }
 

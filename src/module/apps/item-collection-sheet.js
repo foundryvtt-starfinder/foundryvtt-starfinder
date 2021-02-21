@@ -37,7 +37,8 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
 
     _handleTokenUpdated(scene, token, options, userId) {
-        if (token.id === this.itemCollection.id && token.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
+        const tokenData = this.document.getFlag("sfrpg", "itemCollection");
+        if (token.id === this.itemCollection.id && tokenData.locked && !game.user.isGM) {
             this.close();
         }
     }
@@ -73,7 +74,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         data.owner = game.user.isGM;
         data.isGM = game.user.isGM;
 
-        const tokenData = this.entity.getFlag("sfrpg", "itemCollection");
+        const tokenData = this.document.getFlag("sfrpg", "itemCollection");
 
         let items = duplicate(tokenData.items);
         for (let item of items) {
@@ -105,7 +106,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             data.items.push(itemData);
         });
 
-        data.itemCollection = this.entity.data.flags.sfrpg.itemCollection;
+        data.itemCollection = tokenData;
 
         if (data.itemCollection.locked && !game.user.isGM) {
             this.close();
@@ -156,7 +157,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         event.preventDefault();
 
         await this.itemCollection.update({
-            "flags.sfrpg.itemCollection.locked": !this.entity.data.flags.sfrpg.itemCollection.locked
+            "flags.sfrpg.itemCollection.locked": !this.document.getFlag("sfrpg", "itemCollection").locked
         });
     }
 
@@ -164,7 +165,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         event.preventDefault();
 
         await this.itemCollection.update({
-            "flags.sfrpg.itemCollection.deleteIfEmpty": !this.entity.data.flags.sfrpg.itemCollection.deleteIfEmpty
+            "flags.sfrpg.itemCollection.deleteIfEmpty": !this.document.getFlag("sfrpg", "itemCollection").deleteIfEmpty
         });
     }
 
@@ -313,7 +314,7 @@ export class ItemCollectionSheet extends DocumentSheet {
      */
     _onEditImage(event) {
       const attr = event.currentTarget.dataset.edit;
-      const current = getProperty(this.entity.data, attr);
+      const current = getProperty(this.document.data, attr);
       new FilePicker({
         type: "image",
         current: current,
@@ -347,25 +348,27 @@ export class ItemCollectionSheet extends DocumentSheet {
     /** @override */
     _onDragStart(event) {
         const li = event.currentTarget;
-        const tokenData = this.entity.getFlag("sfrpg", "itemCollection");
+        const tokenData = this.document.getFlag("sfrpg", "itemCollection");
 
         if (tokenData.locked && !game.user.isGM) {
             return;
         }
 
-        const item = tokenData.items.find(x => x.id === li.dataset.itemId);
+        const item = tokenData.items.find(x => x._id === li.dataset.itemId);
         let draggedItems = [item];
         for (let i = 0; i<draggedItems.length; i++) {
-            if (draggedItems[i].data.container?.contents) {
+            const draggedItemData = draggedItems[i];
+
+            if (draggedItemData.container?.contents) {
                 let newContents = [];
-                for (let content of draggedItems[i].data.container.contents) {
-                    let contentItem = tokenData.items.find(x => x.id === content.id);
+                for (let content of draggedItemData.container.contents) {
+                    let contentItem = tokenData.items.find(x => x._id === content.id);
                     if (contentItem) {
                         draggedItems.push(contentItem);
                         newContents.push({id: contentItem.id, index: content.index});
                     }
                 }
-                draggedItems[i].data.container.contents = newContents;
+                draggedItemData.container.contents = newContents;
             }
         }
 
