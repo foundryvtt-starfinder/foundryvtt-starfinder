@@ -1,5 +1,3 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
-
 export default function (engine) {
     engine.closures.add("calculateBaseAttackBonus", (fact, context) => {
         const data = fact.data;

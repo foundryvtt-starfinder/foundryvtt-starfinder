@@ -23,30 +23,30 @@ import logToConsole                     from './rules/actions/log.js';
 import clearTooltips                    from './rules/actions/actor/clear-tooltips.js';
 import calculateBaseAbilityScore        from './rules/actions/actor/calculate-base-ability-score.js';
 import calculateBaseAbilityModifier     from './rules/actions/actor/calculate-base-ability-modifier.js';
-import calculateBaseArmorClass          from './rules/actions/actor/character/calculate-base-armor-class.js';
 import calculateArmorModifiers          from './rules/actions/actor/calculate-armor-modifiers.js';
 import calculateBaseAttackBonusModifier from './rules/actions/actor/calculate-bab-modifier.js';
-import calculateBaseSaves               from './rules/actions/actor/character/calculate-base-saves.js';
 import calculateSaveModifiers           from './rules/actions/actor/calculate-save-modifiers.js';
-import calculateInitiative              from './rules/actions/actor/character/calculate-initiative.js';
-import calculateInitiativeModifiers     from './rules/actions/actor/character/calculate-initiative-modifiers.js';
 import calculateCmd                     from './rules/actions/actor/calculate-cmd.js';
 import calculateCmdModifiers            from './rules/actions/actor/calculate-cmd-modifiers.js';
-import calculateBaseSkills              from './rules/actions/actor/character/calculate-base-skills.js';
 import calculateClasses                 from './rules/actions/actor/calculate-classes.js';
 import calculateSkillModifiers          from './rules/actions/actor/calculate-skill-modifiers.js';
-import calculateSkillArmorCheckPenalty  from './rules/actions/actor/calculate-skill-armor-check-penalty.js';
 import calculateAbilityCheckModifiers   from './rules/actions/actor/calculate-ability-check-modifiers.js';
 import calculateEncumbrance             from './rules/actions/actor/calculate-encumbrance.js';
 // Character rules
+import calculateBaseArmorClass          from './rules/actions/actor/character/calculate-base-armor-class.js';
 import calculateBaseAttackBonus         from './rules/actions/actor/character/calculate-bab.js';
+import calculateBaseSaves               from './rules/actions/actor/character/calculate-base-saves.js';
+import calculateBaseSkills              from './rules/actions/actor/character/calculate-base-skills.js';
 import calculateCharacterLevel          from './rules/actions/actor/character/calculate-character-level.js';
 import calculateHitpoints               from './rules/actions/actor/character/calculate-hitpoints.js';
+import calculateInitiative              from './rules/actions/actor/character/calculate-initiative.js';
+import calculateInitiativeModifiers     from './rules/actions/actor/character/calculate-initiative-modifiers.js';
+import calculatePlayerXp                from './rules/actions/actor/character/calculate-xp.js';
 import calculateResolve                 from './rules/actions/actor/character/calculate-resolve.js';
+import calculateSkillArmorCheckPenalty  from './rules/actions/actor/character/calculate-skill-armor-check-penalty.js';
 import calculateSkillpoints             from './rules/actions/actor/character/calculate-skillpoints.js';
 import calculateStamina                 from './rules/actions/actor/character/calculate-stamina.js';
 import calculateTraits                  from './rules/actions/actor/character/calculate-traits.js';
-import calculatePlayerXp                from './rules/actions/actor/character/calculate-xp.js';
 // Drone rules
 import calculateDroneChassis            from './rules/actions/actor/drone/calculate-drone-chassis.js';
 import calculateDroneDefense            from './rules/actions/actor/drone/calculate-drone-defense.js';
@@ -73,6 +73,8 @@ import calculateStarshipSensors         from './rules/actions/actor/starship/cal
 import calculateStarshipShields         from './rules/actions/actor/starship/calculate-starship-shields.js';
 import calculateStarshipSpeed           from './rules/actions/actor/starship/calculate-starship-speed.js';
 import calculateStarshipTargetLock      from './rules/actions/actor/starship/calculate-starship-targetlock.js';
+// Vehicle rules
+import calculateVehiclePassengers       from './rules/actions/actor/vehicle/calculate-vehicle-passengers.js';
 
 export default function (engine) {
     console.log("SFRPG | Registering rules");
@@ -136,6 +138,8 @@ export default function (engine) {
     calculateStarshipTargetLock(engine);
     calculateStarshipFrame(engine);
     calculateStarshipComputer(engine);
+    // Vehicle actions
+    calculateVehiclePassengers(engine);
 
     // Conditions
     always(engine);
@@ -247,7 +251,10 @@ export default function (engine) {
             },
             {
                 when: { closure: "isActorType", type: "vehicle" },
-                then: "identity"
+                then: [
+                        "calculateVehiclePassengers",
+                        "identity"
+                    ]
             }
         ]
     });
