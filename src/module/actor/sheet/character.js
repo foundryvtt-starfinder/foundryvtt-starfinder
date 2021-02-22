@@ -40,7 +40,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
      */
     _prepareItems(data) {
 
-        const actorData = data.actor;
+        const actorData = data.data;
 
         const inventory = {
             weapon: { label: game.i18n.format(SFRPG.itemTypes["weapon"]), items: [], dataset: { type: "weapon" }, allowAdd: true },
@@ -71,7 +71,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
             if (item.type === "spell") {
-                let container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
+                let container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item.id) || false);
                 if (!container) {
                     arr[1].push(item);
                 } else {
@@ -165,7 +165,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
         }
         totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
-        data.encumbrance = this._computeEncumbrance(totalWeight, data);
+        data.encumbrance = this._computeEncumbrance(totalWeight, actorData);
         data.inventoryValue = Math.floor(totalValue);
 
         const features = {
@@ -199,7 +199,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } }
         };
 
-        let [permanent, temporary, itemModifiers, conditions, misc] = data.data.modifiers.reduce((arr, modifier) => {
+        let [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
             if (modifier.subtab === "permanent") arr[0].push(modifier);
             else if (modifier.subtab === "conditions") arr[3].push(modifier);
             else arr[1].push(modifier); // Any unspecific categories go into temporary.
@@ -236,8 +236,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
      */
     _computeEncumbrance(totalWeight, actorData) {
         const enc = {
-            max: actorData.data.attributes.encumbrance.max,
-            tooltip: actorData.data.attributes.encumbrance.tooltip,
+            max: actorData.attributes.encumbrance.max,
+            tooltip: actorData.attributes.encumbrance.tooltip,
             value: totalWeight
         };
 

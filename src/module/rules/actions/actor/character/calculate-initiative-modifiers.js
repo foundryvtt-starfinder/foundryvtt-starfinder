@@ -3,7 +3,6 @@ import { SFRPGModifierType, SFRPGEffectType, SFRPGModifierTypes } from "../../..
 export default function (engine) {
     engine.closures.add("calculateInitiativeModifiers", (fact, context) => {
         const data = fact.data;
-        const flags = fact.flags;
         const init = data.attributes.init;
         const modifiers = fact.modifiers;
 

@@ -2,7 +2,7 @@ import { ItemDeletionDialog } from "./item-deletion-dialog.js"
 import { ItemSheetSFRPG } from "../item/sheet.js"
 import { RPC } from "../rpc.js"
 
-export class ItemCollectionSheet extends BaseEntitySheet {
+export class ItemCollectionSheet extends DocumentSheet {
     constructor(itemCollection) {
         super(itemCollection, {});
         this.itemCollection = itemCollection;
@@ -30,20 +30,21 @@ export class ItemCollectionSheet extends BaseEntitySheet {
     }
 
     async close(options={}) {
-        delete this.entity.apps[this.appId];
+        delete this.document.apps[this.appId];
         Hooks.off("updateToken", this.updateCallback);
         Hooks.off("deleteToken", this.deleteCallback);
         super.close(options);
     }
 
     _handleTokenUpdated(scene, token, options, userId) {
-        if (token._id === this.itemCollection.id && token.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
+        const tokenData = this.document.getFlag("sfrpg", "itemCollection");
+        if (token.id === this.itemCollection.id && tokenData.locked && !game.user.isGM) {
             this.close();
         }
     }
 
     _handleTokenDelete(scene, token, options, userId) {
-        if (token._id === this.itemCollection.id) {
+        if (token.id === this.itemCollection.id) {
             this.close();
         }
     }
@@ -73,7 +74,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         data.owner = game.user.isGM;
         data.isGM = game.user.isGM;
 
-        const tokenData = this.entity.getFlag("sfrpg", "itemCollection");
+        const tokenData = this.document.getFlag("sfrpg", "itemCollection");
 
         let items = duplicate(tokenData.items);
         for (let item of items) {
@@ -105,7 +106,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
             data.items.push(itemData);
         });
 
-        data.itemCollection = this.entity.data.flags.sfrpg.itemCollection;
+        data.itemCollection = tokenData;
 
         if (data.itemCollection.locked && !game.user.isGM) {
             this.close();
@@ -132,7 +133,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         for (let item of items) {
             let itemData = {
                 item: item,
-                parent: items.find(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === item._id)),
+                parent: items.find(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === item.id)),
                 contents: []
             };
             preprocessedItems.push(itemData);
@@ -145,7 +146,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         }
 
         for (let item of containedItems) {
-            let parent = preprocessedItems.find(x => x.item._id === item.parent._id);
+            let parent = preprocessedItems.find(x => x.item.id === item.parent.id);
             if (parent) {
                 parent.contents.push(item);
             }
@@ -156,7 +157,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         event.preventDefault();
 
         await this.itemCollection.update({
-            "flags.sfrpg.itemCollection.locked": !this.entity.data.flags.sfrpg.itemCollection.locked
+            "flags.sfrpg.itemCollection.locked": !this.document.getFlag("sfrpg", "itemCollection").locked
         });
     }
 
@@ -164,7 +165,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         event.preventDefault();
 
         await this.itemCollection.update({
-            "flags.sfrpg.itemCollection.deleteIfEmpty": !this.entity.data.flags.sfrpg.itemCollection.deleteIfEmpty
+            "flags.sfrpg.itemCollection.deleteIfEmpty": !this.document.getFlag("sfrpg", "itemCollection").deleteIfEmpty
         });
     }
 
@@ -177,7 +178,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item');
         let itemId = li.attr("data-item-id");
-        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
         let chatData = this.getChatData(item, { secrets: true, rollData: item.data.data });
 
         if (li.hasClass('expanded')) {
@@ -196,7 +197,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
 
     _onItemEdit(event) {
         let itemId = $(event.currentTarget).parents('.item').attr("data-item-id");
-        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
         const itemData = {
             data: duplicate(item),
             labels: {},
@@ -218,7 +219,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         let li = $(event.currentTarget).parents(".item");
         let itemId = li.attr("data-item-id");
 
-        const itemToDelete = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        const itemToDelete = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
         let containsItems = (itemToDelete.data.container?.contents && itemToDelete.data.container.contents.length > 0);
         ItemDeletionDialog.show(itemToDelete.name, containsItems, (recursive) => {
             this._deleteItemById(itemId, recursive);
@@ -233,7 +234,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
             let itemsToTest = [itemId];
             while (itemsToTest.length > 0) {
                 let itemIdToTest = itemsToTest.shift();
-                let itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemIdToTest);
+                let itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemIdToTest);
                 if (itemData.data.container?.contents) {
                     for (let content of itemData.data.container.contents) {
                         itemsToDelete.push(content.id);
@@ -243,7 +244,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
             }
         }
 
-        const newItems = this.itemCollection.data.flags.sfrpg.itemCollection.items.filter(x => !itemsToDelete.includes(x._id));
+        const newItems = this.itemCollection.data.flags.sfrpg.itemCollection.items.filter(x => !itemsToDelete.includes(x.id));
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
         }
@@ -256,7 +257,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
     }
 
     findItem(itemId) {
-        return this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        return this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
     }
 
     getItems() {
@@ -313,7 +314,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
      */
     _onEditImage(event) {
       const attr = event.currentTarget.dataset.edit;
-      const current = getProperty(this.entity.data, attr);
+      const current = getProperty(this.document.data, attr);
       new FilePicker({
         type: "image",
         current: current,
@@ -347,7 +348,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
     /** @override */
     _onDragStart(event) {
         const li = event.currentTarget;
-        const tokenData = this.entity.getFlag("sfrpg", "itemCollection");
+        const tokenData = this.document.getFlag("sfrpg", "itemCollection");
 
         if (tokenData.locked && !game.user.isGM) {
             return;
@@ -356,23 +357,25 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         const item = tokenData.items.find(x => x._id === li.dataset.itemId);
         let draggedItems = [item];
         for (let i = 0; i<draggedItems.length; i++) {
-            if (draggedItems[i].data.container?.contents) {
+            const draggedItemData = draggedItems[i];
+
+            if (draggedItemData.container?.contents) {
                 let newContents = [];
-                for (let content of draggedItems[i].data.container.contents) {
+                for (let content of draggedItemData.container.contents) {
                     let contentItem = tokenData.items.find(x => x._id === content.id);
                     if (contentItem) {
                         draggedItems.push(contentItem);
-                        newContents.push({id: contentItem._id, index: content.index});
+                        newContents.push({id: contentItem.id, index: content.index});
                     }
                 }
-                draggedItems[i].data.container.contents = newContents;
+                draggedItemData.container.contents = newContents;
             }
         }
 
         const dragData = {
             type: "ItemCollection",
-            tokenId: this.entity.id,
-            sceneId: this.entity.scene._id,
+            tokenId: this.document.id,
+            sceneId: this.document.parent.id,
             items: draggedItems
         };
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
@@ -409,7 +412,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
             target: {
                 actorId: null,
                 tokenId: this.itemCollection.id,
-                sceneId: this.itemCollection.scene._id
+                sceneId: this.itemCollection.parent.id
             },
             source: {
                 actorId: data.actorId,
@@ -419,7 +422,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
             draggedItemId: data.id,
             draggedItemData: data.data,
             pack: data.pack,
-            containerId: targetContainer ? targetContainer._id : null
+            containerId: targetContainer ? targetContainer.id : null
         }
 
         RPC.sendMessageTo("gm", "dragItemToCollection", msg);

@@ -13,20 +13,22 @@ export default function(engine) {
             data.quadrants.aft.shields = { value: 0 };
         } else {
             const shieldItem = shieldItems[0];
-            data.hasDeflectorShields = shieldItem.data.isDeflector;
+            const shieldData = shieldItem.data.data;
+
+            data.hasDeflectorShields = shieldData.isDeflector;
 
             if (data.hasDeflectorShields) {
-                data.quadrants.forward.shields.max = shieldItem.data.defenseValue;
-                data.quadrants.port.shields.max = shieldItem.data.defenseValue;
-                data.quadrants.starboard.shields.max = shieldItem.data.defenseValue;
-                data.quadrants.aft.shields.max = shieldItem.data.defenseValue;
+                data.quadrants.forward.shields.max = shieldData.defenseValue;
+                data.quadrants.port.shields.max = shieldData.defenseValue;
+                data.quadrants.starboard.shields.max = shieldData.defenseValue;
+                data.quadrants.aft.shields.max = shieldData.defenseValue;
             } else {
-                const evenDistributionValue = shieldItem.data.shieldPoints / 4;
+                const evenDistributionValue = shieldData.shieldPoints / 4;
                 data.attributes.shields = {
                     value: data.quadrants.forward.shields.value + data.quadrants.port.shields.value + data.quadrants.starboard.shields.value + data.quadrants.aft.shields.value,
                     highest: Math.max(data.quadrants.forward.shields.value, data.quadrants.port.shields.value, data.quadrants.starboard.shields.value, data.quadrants.aft.shields.value),
-                    limit: Math.floor(shieldItem.data.shieldPoints * 0.7),
-                    max: shieldItem.data.shieldPoints,
+                    limit: Math.floor(shieldData.shieldPoints * 0.7),
+                    max: shieldData.shieldPoints,
                     evenDistribution: evenDistributionValue
                 };
             }

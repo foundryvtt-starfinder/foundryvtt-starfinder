@@ -6,7 +6,9 @@ export default function (engine) {
         const classes = fact.classes;
 
         const classSkills = classes.reduce((prev, cls) => {
-            Object.entries(cls.data.csk).filter(s => s[1]).forEach((skill) => {
+            const classData = cls.data.data;
+
+            Object.entries(classData.csk).filter(s => s[1]).forEach((skill) => {
                 prev[skill[0]] = 3;
             });
 
@@ -15,11 +17,15 @@ export default function (engine) {
 
         let themeMod = {};
 
-        if (theme && theme.data.skill !== "" && !Object.keys(classSkills).includes(theme.data.skill)) {
-            classSkills[theme.data.skill] = 3;
-            themeMod[theme.data.skill] = 0;
-        } else if (theme && theme.data.skill !== "") {
-            themeMod[theme.data.skill] = 1;
+        const themeData = theme?.data?.data;
+        if (themeData)
+        {
+            if (themeData.skill !== "" && !Object.keys(classSkills).includes(themeData.skill)) {
+                classSkills[themeData.skill] = 3;
+                themeMod[themeData.skill] = 0;
+            } else if (themeData.skill !== "") {
+                themeMod[themeData.skill] = 1;
+            }
         }
 
         // Skills

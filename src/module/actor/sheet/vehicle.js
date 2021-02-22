@@ -120,7 +120,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         lvl = levels[lvl] || parseFloat(lvl);
         if (lvl) formData[v] = lvl < 1 ? lvl : parseInt(lvl);
 
-        super._updateObject(event, formData);
+        return super._updateObject(event, formData);
     }
 
     /** @override */

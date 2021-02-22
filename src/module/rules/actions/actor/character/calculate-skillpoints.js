@@ -98,9 +98,11 @@ export default function (engine) {
         let skillpointsMax = 0;
         let totalLevel = 0;
         for (const cls of classes) {
-            const classBonus = cls.data.levels * (intModifier + cls.data.skillRanks.value);
+            const classData = cls.data.data;
+
+            const classBonus = classData.levels * (intModifier + classData.skillRanks.value);
             skillpointsMax += classBonus;
-            totalLevel += cls.data.levels;
+            totalLevel += classData.levels;
 
             data.skillpoints.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.ClassSkillpoints", {
                 class: cls.name,

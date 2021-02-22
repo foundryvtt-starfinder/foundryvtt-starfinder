@@ -16,7 +16,7 @@ export default function() {
 
         // Create the template
         const data = {
-            user: game.user._id,
+            user: game.user.id,
             t: tool,
             x: pos.x,
             y: pos.y,

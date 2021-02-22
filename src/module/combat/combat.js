@@ -67,10 +67,10 @@ export class CombatSFRPG extends Combat {
         if (eventData.isNewPhase) {
             if (this.round.resetInitiative) {
                 const updates = this.data.combatants.map(c => { return {
-                    _id: c._id,
+                    id: c.id,
                     initiative: null
                 }});
-                await this.updateEmbeddedEntity("Combatant", updates);
+                await this.updateEmbeddedDocuments("Combatant", updates);
             }
         }
 
@@ -328,10 +328,10 @@ export class CombatSFRPG extends Combat {
         if (eventData.isNewPhase) {
             if (newPhase.resetInitiative) {
                 const updates = this.data.combatants.map(c => { return {
-                    _id: c._id,
+                    id: c.id,
                     initiative: null
                 }});
-                await this.updateEmbeddedEntity("Combatant", updates);
+                await this.updateEmbeddedDocuments("Combatant", updates);
             }
         }
 
@@ -585,7 +585,7 @@ export class CombatSFRPG extends Combat {
   
       // Structure input data
       ids = typeof ids === "string" ? [ids] : ids;
-      const currentId = this.combatant?._id;
+      const currentId = this.combatant?.id;
   
       // Iterate over Combatants, performing an initiative roll for each
       const updates = [];
@@ -602,7 +602,7 @@ export class CombatSFRPG extends Combat {
         if (!roll) {
             continue;
         }
-        updates.push({_id: id, initiative: roll.total});
+        updates.push({id: id, initiative: roll.total});
   
         // Determine the roll mode
         let rollMode = messageOptions.rollMode || game.settings.get("core", "rollMode");
@@ -611,9 +611,9 @@ export class CombatSFRPG extends Combat {
         // Construct chat message data
         let messageData = mergeObject({
           speaker: {
-            scene: canvas.scene._id,
-            actor: c.actor ? c.actor._id : null,
-            token: c.token._id,
+            scene: canvas.scene.id,
+            actor: c.actor ? c.actor.id : null,
+            token: c.token.id,
             alias: c.token.name
           },
           flavor: `${c.token.name} rolls for Initiative!`,
@@ -646,15 +646,15 @@ export class CombatSFRPG extends Combat {
       if ( !updates.length ) return this;
   
       // Update multiple combatants
-      await this.updateEmbeddedEntity("Combatant", updates);
+      await this.updateEmbeddedDocuments("Combatant", updates);
   
       // Ensure the turn order remains with the same combatant
       if ( updateTurn && currentId ) {
-        await this.update({turn: this.turns.findIndex(t => t._id === currentId)});
+        await this.update({turn: this.turns.findIndex(t => t.id === currentId)});
       }
   
       // Create multiple chat messages
-      await CONFIG.ChatMessage.entityClass.create(messages);
+      await CONFIG.ChatMessage.documentClass.create(messages);
   
       // Return the updated Combat
       return this;
@@ -666,7 +666,7 @@ export class CombatSFRPG extends Combat {
             return null;
         }
 
-        return game.actors.entries.find(x => x._id === pilotIds[0]);
+        return game.actors.entries.find(x => x.id === pilotIds[0]);
     }
 
     _sortCombatantsAsc(a, b) {

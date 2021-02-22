@@ -2,13 +2,13 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 
 export default function (engine) {
     engine.closures.add("calculateSkillArmorCheckPenalty", (fact, context) => {
-        const armor = fact.armor;
+        const armorData = fact.armor?.data?.data;
         const shields = fact.shields;
         const skills = fact.data.skills;
         const modifiers = fact.modifiers;
 
-        const hasLightArmor = armor?.data?.armor?.type === "light";
-        const hasHeavyArmor = armor?.data?.armor?.type === "heavy";
+        const hasLightArmor = armorData?.armor?.type === "light";
+        const hasHeavyArmor = armorData?.armor?.type === "heavy";
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -76,23 +76,25 @@ export default function (engine) {
                 continue;
             }
 
-            if (armor?.data?.armor?.acp) {
-                let acp = parseInt(armor.data.armor.acp);
+            if (armorData?.armor?.acp) {
+                let acp = parseInt(armorData.armor.acp);
                 if (!Number.isNaN(acp)) {
                     skill.mod += acp;
 
                     skill.tooltip.push(game.i18n.format("SFRPG.ACPTooltip", {
                         type: "Armor",
                         mod: acp.signedString(),
-                        source: armor.name
+                        source: fact.armor?.data.name
                     }));
                 }
             }
 
             if (shields) {
                 shields.forEach(shield => {
-                    if (shield.data?.acp) {
-                        let acp = parseInt(shield.data.acp);
+                    const shieldData = shield.data.data;
+
+                    if (shieldData?.acp) {
+                        let acp = parseInt(shieldData.acp);
                         if (!Number.isNaN(acp)) {
                             skill.mod += acp;
 

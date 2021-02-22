@@ -33,7 +33,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             const starshipActions = game.packs.get("sfrpg.starship-actions");
             starshipActions.getIndex().then(async (indices) => {
                 for (const index of indices) {
-                    const entry = await starshipActions.getEntry(index._id);
+                    const entry = await starshipActions.getDocument(index.id);
                     const role = entry.data.role;
 
                     if (!tempCache[role]) {
@@ -458,7 +458,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             const rawItemData = await this._getItemDropData(event, data);
 
             if (rawItemData.type.startsWith("starship")) {
-                return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
+                return this.actor.createEmbeddedEntity("Item", rawItemData);
             } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {
                 return this.processDroppedData(event, data);
             } else {
@@ -480,7 +480,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
 
             if (starshipItems.length > 0) {
-                await this.actor.createEmbeddedEntity("OwnedItem", starshipItems);
+                await this.actor.createEmbeddedEntity("Item", starshipItems);
             }
 
             if (acceptedItems.length > 0) {
@@ -515,7 +515,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
            if (pack.metadata.entity !== "Item") return;
            itemData = await pack.getEntity(data.id);
        } else if (data.data) {
-           let sameActor = data.actorId === actor._id;
+           let sameActor = data.actorId === actor.id;
            if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
            if (sameActor) {
                await this._onSortItem(event, data.data);
@@ -884,6 +884,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         tier = tiers[tier] || parseFloat(tier);
         if (tier) formData[v] = tier < 1 ? tier : parseInt(tier);
 
-        super._updateObject(event, formData);
+        return super._updateObject(event, formData);
     }
 }

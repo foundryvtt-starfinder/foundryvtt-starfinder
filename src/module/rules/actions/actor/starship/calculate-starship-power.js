@@ -14,11 +14,13 @@ export default function (engine) {
         /** Compute power use. */
         const starshipComponents = fact.items.filter(x => x.type.startsWith("starship"));
         for (const component of starshipComponents) {
+            const componentData = component.data.data;
+
             const excludedComponents = ["starshipFrame", "starshipPowerCore"];
             if (!excludedComponents.includes(component.type)) {
-                if (component.data.pcu && component.data.isPowered) {
-                    data.attributes.power.value += component.data.pcu;
-                    data.attributes.power.tooltip.push(`${component.name}: ${component.data.pcu}`);
+                if (componentData.pcu && componentData.isPowered) {
+                    data.attributes.power.value += componentData.pcu;
+                    data.attributes.power.tooltip.push(`${component.name}: ${componentData.pcu}`);
                 }
             }
         }

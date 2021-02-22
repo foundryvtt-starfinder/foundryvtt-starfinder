@@ -67,9 +67,9 @@ Hooks.once('init', async function () {
     };
 
     CONFIG.SFRPG = SFRPG;
-    CONFIG.Actor.entityClass = ActorSFRPG;
-    CONFIG.Item.entityClass = ItemSFRPG;
-    CONFIG.Combat.entityClass = CombatSFRPG;
+    CONFIG.Actor.documentClass = ActorSFRPG;
+    CONFIG.Item.documentClass = ItemSFRPG;
+    CONFIG.Combat.documentClass = CombatSFRPG;
 
     CONFIG.statusEffects = CONFIG.SFRPG.statusEffectIcons;
 
@@ -298,14 +298,14 @@ Hooks.on('ready', () => {
 });
 
 async function migrateOldContainers() {
-    for (let actor of game.actors.entries) {
-        let sheetActorHelper = new ActorItemHelper(actor._id, null, null);
+    for (let actor of game.actors.contents) {
+        let sheetActorHelper = new ActorItemHelper(actor.id, null, null);
         await sheetActorHelper.migrateItems();
     }
 
-    for (let scene of game.scenes.entries) {
+    for (let scene of game.scenes.contents) {
         for (let token of scene.data.tokens) {
-            let sheetActorHelper = new ActorItemHelper(token.actorId, token._id, scene._id);
+            let sheetActorHelper = new ActorItemHelper(token.actorId, token.id, scene.id);
             await sheetActorHelper.migrateItems();
         }
     }

@@ -12,11 +12,17 @@ import { getItemContainer } from "./actor-inventory.js"
 
 import { } from "./starship-update.js"
 import { ItemSheetSFRPG } from "../item/sheet.js";
+import { ItemSFRPG } from "../item/item.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
  */
 export class ActorSFRPG extends Actor {
+
+    constructor(data, context) {
+        super(data, context);
+        //console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
+    }
 
     /** @override */
     getRollData() {
@@ -33,20 +39,14 @@ export class ActorSFRPG extends Actor {
      */
     prepareData() {
         super.prepareData();
-        const actor = this;
-        const actorData = this.data;
-        const data = actorData.data;
-        const flags = actorData.flags;
-        const actorType = actorData.type;
 
-        this._ensureHasModifiers(data);
+        this._ensureHasModifiers(this.data.data);
         const modifiers = this.getAllModifiers();
 
-        const actorId = this._id;
-        const items = actorData.items;
-        const armor = items.find(item => item.type === "equipment" && item.data.equipped);
-        const shields = items.filter(item => item.type === "shield" && item.data.equipped);
-        const weapons = items.filter(item => item.type === "weapon" && item.data.equipped);
+        const items = this.items;
+        const armor = items.find(item => item.type === "equipment" && item.data.data.equipped);
+        const shields = items.filter(item => item.type === "shield" && item.data.data.equipped);
+        const weapons = items.filter(item => item.type === "weapon" && item.data.data.equipped);
         const races = items.filter(item => item.type === "race");
         const frames = items.filter(item => item.type === "starshipFrame");
         const classes = items.filter(item => item.type === "class");
@@ -56,12 +56,12 @@ export class ActorSFRPG extends Actor {
         const armorUpgrades = items.filter(item => item.type === "upgrade");
         const asis = items.filter(item => item.type === "asi");
         game.sfrpg.engine.process("process-actors", {
-            actorId,
-            actor,
-            type: actorType,
-            data,
-            flags,
-            items,
+            actorId: this.id,
+            actor: this,
+            type: this.data.type,
+            data: this.data.data,
+            flags: this.data.flags,
+            items: this.items,
             armor,
             shields,
             weapons,
@@ -85,7 +85,7 @@ export class ActorSFRPG extends Actor {
         for (const [appId, app] of Object.entries(this.apps)) {
             if (app instanceof ItemSheetSFRPG) {
                 const item = app.object;
-                if (!this.items.find(x => x._id === item._id)) {
+                if (!this.items.find(x => x.id === item.id)) {
                     keysToDelete.push(appId);
                 }
             }
@@ -181,8 +181,10 @@ export class ActorSFRPG extends Actor {
             const spellFormData = await SpellCastDialog.create(this, item);
             lvl = parseInt(spellFormData.get("level"));
             consume = Boolean(spellFormData.get("consume"));
-            if (lvl !== item.data.data.level) {
-                item = item.constructor.createOwned(mergeObject(item.data, { "data.level": lvl }, { inplace: false }), this);
+            if (lvl !== item.data.data.level && !Number.isNaN(lvl)) {
+                const mergedData = mergeObject(item.data, { "data.level": lvl }, { inplace: false });
+                console.log([item.data, mergedData]);
+                item = new ItemSFRPG(mergedData, this);
             }
         }
 
@@ -294,7 +296,7 @@ export class ActorSFRPG extends Actor {
      * @param {String} id The id for the modifier to delete
      */
     async deleteModifier(id) {
-        const modifiers = this.data.data.modifiers.filter(mod => mod._id !== id);
+        const modifiers = this.data.data.modifiers.filter(mod => mod.id !== id);
         
         await this.update({"data.modifiers": modifiers});
     }
@@ -306,7 +308,7 @@ export class ActorSFRPG extends Actor {
      */
     editModifier(id) {
         const modifiers = duplicate(this.data.data.modifiers);
-        const modifier = modifiers.find(mod => mod._id === id);
+        const modifier = modifiers.find(mod => mod.id === id);
 
         new SFRPGModifierApplication(modifier, this).render(true);
     }
@@ -323,7 +325,7 @@ export class ActorSFRPG extends Actor {
         });
 
         for (const actorModifier of allModifiers) {
-            actorModifier.container = {actorId: this._id, itemId: null};
+            actorModifier.container = {actorId: this.id, itemId: null};
         }
 
         for (let item of this.data.items) {
@@ -333,7 +335,7 @@ export class ActorSFRPG extends Actor {
                 case "upgrade":
                     {
                         if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item._id);
+                            const container = getItemContainer(this.data.items, item.id);
                             if (container && container.type === "equipment" && container.data.equipped) {
                                 modifiersToConcat = item.data.modifiers;
                             }
@@ -346,7 +348,7 @@ export class ActorSFRPG extends Actor {
                 case "weaponAccessory":
                     {
                         if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item._id);
+                            const container = getItemContainer(this.data.items, item.id);
                             if (container && container.type === "weapon" && container.data.equipped) {
                                 modifiersToConcat = item.data.modifiers;
                             }
@@ -385,7 +387,7 @@ export class ActorSFRPG extends Actor {
 
             if (modifiersToConcat && modifiersToConcat.length > 0) {
                 for (const itemModifier of modifiersToConcat) {
-                    itemModifier.container = {actorId: this._id, itemId: item._id};
+                    itemModifier.container = {actorId: this.id, itemId: item.id};
                 }
 
                 allModifiers = allModifiers.concat(modifiersToConcat);
@@ -437,7 +439,7 @@ export class ActorSFRPG extends Actor {
             skillId = `pro${++counter}`;
         }
 
-        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.hasPlayerOwner, this.owner),
+        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.hasPlayerOwner, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
@@ -902,12 +904,12 @@ export class ActorSFRPG extends Actor {
         const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
         const updateItems = items.map(item => {
             return {
-                _id: item._id,
+                id: item.id,
                 "data.uses.value": item.data.data.uses.max
             }
         });
 
-        await this.updateEmbeddedEntity("OwnedItem", updateItems);
+        await this.updateEmbeddedDocuments("Item", updateItems);
 
         // Notify chat what happened
         if (chat) {
@@ -917,7 +919,7 @@ export class ActorSFRPG extends Actor {
             }
             
             ChatMessage.create({
-                user: game.user._id,
+                user: game.user.id,
                 speaker: { actor: this, alias: this.name },
                 content: msg,
                 type: CONST.CHAT_MESSAGE_TYPES.OTHER
@@ -970,7 +972,7 @@ export class ActorSFRPG extends Actor {
             let msg = game.i18n.format("SFRPG.RepairDroneChatMessage", { name: this.name, regainedHP: dhp });
             
             ChatMessage.create({
-                user: game.user._id,
+                user: game.user.id,
                 speaker: { actor: this, alias: this.name },
                 content: msg,
                 type: CONST.CHAT_MESSAGE_TYPES.OTHER
@@ -1043,17 +1045,17 @@ export class ActorSFRPG extends Actor {
         const items = this.items.filter(i => i.data.data.uses && ["sr", "lr", "day"].includes(i.data.data.uses.per));
         const updateItems = items.map(item => {
             return {
-                _id: item._id,
+                id: item.id,
                 "data.uses.value": item.data.data.uses.max
             }
         });
 
         await this.update(updateData);
-        await this.updateEmbeddedEntity("OwnedItem", updateItems);
+        await this.updateEmbeddedDocuments("Item", updateItems);
 
         if (chat) {
             ChatMessage.create({
-                user: game.user._id,
+                user: game.user.id,
                 speaker: { actor: this, alias: this.name },
                 content: `${this.name} takes a night's rest and recovers ${dhp} Hit points, ${dsp} Stamina points, and ${drp} Resolve points.`
             });
@@ -1208,7 +1210,7 @@ export class ActorSFRPG extends Actor {
 
             speakerActor = selectedContext?.entity || this;
 
-            const actorRole = this.getCrewRoleForActor(speakerActor._id);
+            const actorRole = this.getCrewRoleForActor(speakerActor.id);
             if (actorRole) {
                 const actorRoleKey = CONFIG.SFRPG.starshipRoleNames[actorRole];
                 roleName = game.i18n.format(actorRoleKey);
@@ -1278,7 +1280,7 @@ export class ActorSFRPG extends Actor {
     getCrewRoleForActor(actorId) {
         const acceptedActorTypes = ["starship", "vehicle"];
         if (!acceptedActorTypes.includes(this.data.type)) {
-            console.log(`getCrewRoleForActor(${actorId}) called on an actor (${this.data._id}) of type ${this.data.type}, which is not supported!`);
+            console.log(`getCrewRoleForActor(${actorId}) called on an actor (${this.data.id}) of type ${this.data.type}, which is not supported!`);
             console.trace();
             return null;
         }
@@ -1298,7 +1300,7 @@ export class ActorSFRPG extends Actor {
     getActorIdsForCrewRole(role) {
         const acceptedActorTypes = ["starship", "vehicle"];
         if (!acceptedActorTypes.includes(this.data.type)) {
-            console.log(`getActorIdsForCrewRole(${role}) called on an actor (${this.data._id}) of type ${this.data.type}, which is not supported!`);
+            console.log(`getActorIdsForCrewRole(${role}) called on an actor (${this.data.id}) of type ${this.data.type}, which is not supported!`);
             console.trace();
             return null;
         }
@@ -1316,29 +1318,28 @@ export class ActorSFRPG extends Actor {
 
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
+        const actorData = this.data.data;
 
-        if (this.data.type === "vehicle") {
-            if (!this.data.data.crew.useNPCCrew) {
-
+        if (actorData.type === "vehicle") {
+            if (!actorData.data.crew.useNPCCrew) {
                 /** Add player pilot if available. */
-                if (this.data.data.crew.pilot?.actors?.length > 0) {
-                    const actor = this.data.data.crew.pilot.actors[0];
-                    let actorData = null;
+                if (actorData.data.crew.pilot?.actors?.length > 0) {
+                    const pilotActor = actorData.data.crew.pilot.actors[0];
+                    let pilotData = null;
                     if (actor instanceof ActorSFRPG) {
-                        actorData = actor.data.data;
+                        pilotData = pilotActor.data.data;
                     } else {
-                        actorData = actor.data;
+                        pilotData = pilotActor.data;
                     }
-                    rollContext.addContext("pilot", actor, actorData);
+                    rollContext.addContext("pilot", actor, pilotData);
                 }
             }
         }
-        else if (this.data.type === "starship") {
-
-            if (!this.data.data.crew.useNPCCrew) {
+        else if (actorData.type === "starship") {
+            if (!actorData.data.crew.useNPCCrew) {
                 /** Add player captain if available. */
-                if (this.data.data.crew.captain?.actors?.length > 0) {
-                    const actor = this.data.data.crew.captain.actors[0];
+                if (actorData.data.crew.captain?.actors?.length > 0) {
+                    const actor = actorData.data.crew.captain.actors[0];
                     let actorData = null;
                     if (actor instanceof ActorSFRPG) {
                         actorData = actor.data.data;
@@ -1349,8 +1350,8 @@ export class ActorSFRPG extends Actor {
                 }
         
                 /** Add player pilot if available. */
-                if (this.data.data.crew.pilot?.actors?.length > 0) {
-                    const actor = this.data.data.crew.pilot.actors[0];
+                if (actorData.data.crew.pilot?.actors?.length > 0) {
+                    const actor = actorData.data.crew.pilot.actors[0];
                     let actorData = null;
                     if (actor instanceof ActorSFRPG) {
                         actorData = actor.data.data;
@@ -1367,7 +1368,7 @@ export class ActorSFRPG extends Actor {
                     let crewCount = 1;
                     const crew = [];
                     if (allCrewMates.includes(crewType)) {
-                        for (const crewEntries of Object.values(this.data.data.crew)) {
+                        for (const crewEntries of Object.values(actorData.data.crew)) {
                             const crewList = crewEntries.actors;
                             if (crewList && crewList.length > 0) {
                                 for (const actor of crewList) {
@@ -1386,7 +1387,7 @@ export class ActorSFRPG extends Actor {
                             }
                         }
                     } else {
-                        const crewList = this.data.data.crew[crewType].actors;
+                        const crewList = actorData.data.crew[crewType].actors;
                         if (crewList && crewList.length > 0) {
                             for (const actor of crewList) {
                                 let actorData = null;
@@ -1410,13 +1411,13 @@ export class ActorSFRPG extends Actor {
                 }
             } else {
                 /** Create 'fake' actors. */
-                rollContext.addContext("captain", this, this.data.data.crew.npcData.captain);
-                rollContext.addContext("pilot", this, this.data.data.crew.npcData.pilot);
-                rollContext.addContext("gunner", this, this.data.data.crew.npcData.gunner);
-                rollContext.addContext("engineer", this, this.data.data.crew.npcData.engineer);
-                rollContext.addContext("chiefMate", this, this.data.data.crew.npcData.chiefMate);
-                rollContext.addContext("magicOfficer", this, this.data.data.crew.npcData.magicOfficer);
-                rollContext.addContext("scienceOfficer", this, this.data.data.crew.npcData.scienceOfficer);
+                rollContext.addContext("captain", this, actorData.data.crew.npcData.captain);
+                rollContext.addContext("pilot", this, actorData.data.crew.npcData.pilot);
+                rollContext.addContext("gunner", this, actorData.data.crew.npcData.gunner);
+                rollContext.addContext("engineer", this, actorData.data.crew.npcData.engineer);
+                rollContext.addContext("chiefMate", this, actorData.data.crew.npcData.chiefMate);
+                rollContext.addContext("magicOfficer", this, actorData.data.crew.npcData.magicOfficer);
+                rollContext.addContext("scienceOfficer", this, actorData.data.crew.npcData.scienceOfficer);
             }
         }
     }

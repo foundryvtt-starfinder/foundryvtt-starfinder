@@ -2,7 +2,6 @@ export default function (engine) {
     engine.closures.add("calculateVehiclePassengers", (fact, context) => {
         const data = fact.data;
 
-        // Ensure that all vehicles have a crew
         data.crew = mergeObject(data.crew ?? {}, {
             complement: {
                 limit: 0,
@@ -18,6 +17,7 @@ export default function (engine) {
             },
             useNPCCrew: true
         }, {overwrite: false});
+
 
         for (let [key, crew] of Object.entries(data.crew)) {
             if (key === "useNPCCrew") {

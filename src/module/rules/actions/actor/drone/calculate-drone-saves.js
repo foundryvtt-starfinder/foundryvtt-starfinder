@@ -16,12 +16,14 @@ export default function (engine) {
         data.attributes.will.bonus = 0;
         
         if (activeChassis) {
-            let droneLevel = activeChassis.data.levels;
+            const chassisData = activeChassis.data.data;
+
+            let droneLevel = chassisData.levels;
             droneLevel = Math.max(1, Math.min(droneLevel, 20));
 
-            data.attributes.fort.bonus = activeChassis.data.fort == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
-            data.attributes.reflex.bonus = activeChassis.data.ref == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
-            data.attributes.will.bonus = activeChassis.data.will == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
+            data.attributes.fort.bonus = chassisData.fort == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
+            data.attributes.reflex.bonus = chassisData.ref == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
+            data.attributes.will.bonus = chassisData.will == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
         }
 
         data.attributes.fort.bonus += data.abilities.con.mod;

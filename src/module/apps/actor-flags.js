@@ -1,4 +1,4 @@
-export class ActorSheetFlags extends BaseEntitySheet {
+export class ActorSheetFlags extends DocumentSheet {
     static get defaultOptions() {
         const options = super.defaultOptions;
         return mergeObject(options, {
@@ -29,7 +29,7 @@ export class ActorSheetFlags extends BaseEntitySheet {
             flag.type = v.type.name;
             flag.isCheckbox = v.type === Boolean;
             flag.isSelect = v.hasOwnProperty('choices');
-            flag.value = this.entity.getFlag("sfrpg", k);
+            flag.value = this.document.getFlag("sfrpg", k);
             flags[v.section][k] = flag;
         }
 
