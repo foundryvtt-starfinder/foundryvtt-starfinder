@@ -33,8 +33,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             const starshipActions = game.packs.get("sfrpg.starship-actions");
             starshipActions.getIndex().then(async (indices) => {
                 for (const index of indices) {
-                    const entry = await starshipActions.getDocument(index.id);
-                    const role = entry.data.role;
+                    const entry = await starshipActions.getDocument(index._id);
+                    const role = entry.data.data.role;
 
                     if (!tempCache[role]) {
                         tempCache[role] = {label: CONFIG.SFRPG.starshipRoleNames[role], actions: []};
