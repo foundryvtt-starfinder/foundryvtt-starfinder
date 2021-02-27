@@ -154,7 +154,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Spell-specific data
         if (data.item.type === "spell") {
-            let save = data.item.data.save;
+            let save = data.item.data.data.save;
             if (this.item.isOwned && (save.type && !save.dc)) {
                 let actor = this.item.actor;
                 let abl = actor.data.data.attributes.keyability || "int";
@@ -165,7 +165,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Vehicle Attacks
         if (data.isVehicleAttack) {
             data.placeholders.savingThrow = {};
-            data.placeholders.savingThrow.value = data.item.data.save.dc;
+            data.placeholders.savingThrow.value = data.item.data.data.save.dc;
         }
 
         data.modifiers = this.item.data.data.modifiers;
