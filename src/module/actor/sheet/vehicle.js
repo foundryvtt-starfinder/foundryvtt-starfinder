@@ -82,6 +82,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             if (item.type === "weapon" || item.type === "vehicleAttack") {
                 arr[0].push(item);
             }
+            else if (item.type === "starshipExpansionBay") arr[3].push(item);
             /*
             else if (item.type === "starshipFrame") arr[6].push(item);
             else if (item.type === "starshipPowerCore") arr[7].push(item);
@@ -187,8 +188,11 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
 
-            if (rawItemData.type == "weapon" || rawItemData.type == "vehicleAttack") {
+            if (rawItemData.type === "weapon" || rawItemData.type === "vehicleAttack") {
                 return this.processDroppedData(event, data);
+            }
+            else if (rawItemData.type === "starshipExpansionBay") {
+                return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
             }
         }
 
