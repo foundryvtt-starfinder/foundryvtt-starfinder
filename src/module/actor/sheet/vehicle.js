@@ -23,12 +23,13 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         data.labels["level"] = lvl >= 1 ? String(lvl) : levels[lvl] || 1;
 
         this._getCrewData(data)
+        this._getHangarBayData(data)
 
         return data;
     }
 
     /**
-     * Process any flags that the actor might have that would affect the sheet .
+     * Process any flags that the crew actor might have that would affect the sheet .
      *
      * @param {Object} data The data object to update with any crew data.
      */
@@ -51,6 +52,26 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     }
 
     /**
+     * Process any flags that the hangar bay actor might have that would affect the sheet.
+     *
+     * @param {Object} data The data object to update with any hangar bay data.
+     */
+    async _getHangarBayData(data) {
+        let hangarBayData = this.actor.data.data.hangarBay;
+        data.hasHangarBays = this.actor.data.data.hangarBay.limit > 0;
+
+        const hangarBayActors = hangarBayData.actorIds.map(crewId => game.actors.get(crewId));
+
+        // TODO: Localize
+        const localizedNoLimit = "No limit";
+
+        // TODO: Localize
+        const hangarBay = { label: "Vehicles" + " " + game.i18n.format("({current} / {max})", {"current": hangarBayActors.length, "max": hangarBayData.limit > -1 ? hangarBayData.limit : localizedNoLimit}), actors: hangarBayActors, dataset: { type: "vehicle" }};
+
+        data.hangarBay = hangarBay;
+    }
+
+    /**
      * Organize and classify items for vehicle sheets.
      * 
      * @param {Object} data Data for the sheet
@@ -62,40 +83,17 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             inventory: { label: game.i18n.format("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
         };
 
-        const starshipSystems = [
-            "starshipAblativeArmor",
-            "starshipArmor",
-            "starshipComputer",
-            "starshipCrewQuarter",
-            "starshipDefensiveCountermeasure",
-            "starshipDriftEngine",
-            "starshipFortifiedHull",
-            "starshipReinforcedBulkhead",
-            "starshipSensor",
-            "starshipShield"
-        ];
-
-        //   0        1               2             3
-        let [attacks, primarySystems, otherSystems, expansionBays] = data.items.reduce((arr, item) => {
+        //   0        1               3
+        let [attacks, primarySystems, expansionBays] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
             if (item.type === "weapon" || item.type === "vehicleAttack") {
                 arr[0].push(item);
             }
-            else if (item.type === "starshipExpansionBay") arr[3].push(item);
-            /*
-            else if (item.type === "starshipFrame") arr[6].push(item);
-            else if (item.type === "starshipPowerCore") arr[7].push(item);
-            else if (item.type === "starshipThruster") arr[8].push(item);
-            else if (starshipSystems.includes(item.type)) arr[9].push(item);
-            else if (item.type === "starshipOtherSystem") arr[10].push(item);
-            else if (item.type === "starshipSecuritySystem") arr[11].push(item);
-            else if (item.type === "starshipExpansionBay") arr[12].push(item);
-            else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[13].push(item);
-            */
+            else if (item.type === "starshipExpansionBay") arr[2].push(item);
 
             return arr;
-        }, [ [], [], [], [] ]);
+        }, [ [], [], [] ]);
 
         this.processItemContainment(attacks, function (itemType, itemData) {
             // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
@@ -108,10 +106,10 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         });
         data.inventory = inventory
 
+        // TODO: Localize
         const features = {
-            primarySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PrimarySystems"), items: primarySystems, hasActions: false, dataset: { type: starshipSystems.join(',') } },
-            otherSystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.OtherSystems"), items: otherSystems, hasActions: false, dataset: { type: "starshipOtherSystem" } },
-            expansionBays: { label: game.i18n.format("SFRPG.StarshipSheet.Features.ExpansionBays", {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } }
+            primarySystems: { label: "Primary Systems", items: primarySystems, hasActions: false, dataset: { type: "" } },
+            expansionBays: { label: game.i18n.format("Expansion Bays ({current} / {max})", {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
         };
         data.features = Object.values(features);
     }
@@ -183,7 +181,18 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         // Case - Dropped Actor
         if (data.type === "Actor") {
-            return this._onCrewDrop(event, data);
+
+            const actorId = data.id;
+            const actor = game.actors.get(actorId);
+
+            // Other vehicles are only acceptable if this vehicle has 1 or more hangar bays
+            if (actor.data.type === "vehicle") {
+                return this._onVehicleDrop(event, data);
+            }
+            // The only other actors allowed are crew
+            else {
+                return this._onCrewDrop(event, data);
+            }
         }
         else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
@@ -229,7 +238,37 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         return duplicate(itemData);
     }
 
+
     /**
+     * Handles drop events for the Hangar Bay list
+     *
+     * @param {Event}  event The originating drop event
+     * @param {object} data  The data transfer object.
+     */
+    async _onVehicleDrop(event, data) {
+        // event.preventDefault();
+
+        $(event.target).css('background', '');
+
+        if (!data.id) return false;
+
+        const hangarBay = duplicate(this.actor.data.data.hangarBay);
+
+        if (hangarBay.limit === -1 || hangarBay.actorIds.length < hangarBay.limit) {
+            hangarBay.actorIds.push(data.id);
+
+            await this.actor.update({
+                "data.hangarBay": hangarBay
+            }).then(this.render(false));
+        } else {
+            // TODO: Localize
+            ui.notifications.error("Vehicle limit reached");
+        }
+
+        return true;
+    }
+
+        /**
      * Handles drop events for the Passenger list
      *
      * @param {Event}  event The originating drop event

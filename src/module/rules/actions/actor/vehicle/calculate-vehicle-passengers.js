@@ -19,6 +19,13 @@ export default function (engine) {
             useNPCCrew: true
         }, {overwrite: false});
 
+        // Ensures that all vehicles have hangar bays
+        data.hangarBay = mergeObject(data.hangarBay ?? {}, {
+                limit: 0,
+                actorIds: []
+        }, {overwrite: false});
+
+        //
         for (let [key, crew] of Object.entries(data.crew)) {
             if (key === "useNPCCrew") {
                 continue;

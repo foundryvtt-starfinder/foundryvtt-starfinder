@@ -30,6 +30,9 @@
         <a class="item" data-tab="attacks">{{ localize "SFRPG.VehicleSheet.Tabs.Attacks" }}</a>
         <a class="item" data-tab="passengers">{{ localize "SFRPG.VehicleSheet.Tabs.Passengers" }}</a>
         <a class="item" data-tab="systems">{{ localize "SFRPG.VehicleSheet.Tabs.Systems" }}</a>
+        {{#if hasHangarBays }}
+        <a class="item" data-tab="hangar">{{ localize "SFRPG.VehicleSheet.Tabs.Hangar" }}</a>
+        {{/if }}
         <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
     </nav>
 
@@ -220,6 +223,12 @@
                                 <input type="text" name="data.attributes.expansionBays.value" value="{{data.attributes.expansionBays.value}}" data-dtype="Number" />
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.HangarBays" }}</label>
+                            <div class="form-fields">
+                                <input type="text" name="data.hangarBay.limit" value="{{data.hangarBay.limit}}" data-dtype="Number" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -305,7 +314,29 @@
 
         {{!-- Systems Tab --}}
         <div class="tab features flexcol" data-group="primary" data-tab="systems">
+
             {{> "systems/sfrpg/templates/actors/parts/actor-features.html" sections=features noFilters=true prefixTable=prefixTable}}
+        </div>
+
+        {{!-- Hangar Bays --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="hangar">
+            <ol class="crew-list">
+                <li class="flexrow crew-header {{hangarBays.cssClass}}" {{#each hangarBay.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>{{hangarBay.label}}</li>
+                <ol class="crew-item-list">
+                    {{#each hangarBay.actors as |actor a|}}
+                    <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
+                        <div class="crew-name flexrow">
+                            <div class="crew-image" style="background-image: url({{actor.data.img}})"></div>
+                            <h4>{{actor.name}}</h4>
+                        </div>
+
+                        <div class="crew-controls">
+                            <a class="crew-control crew-delete" title="Remove Crew Member"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+            </ol>
         </div>
 
         {{!-- Notes Tab --}}
