@@ -143,6 +143,9 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             li.addEventListener("dragleave", this._onCrewDragLeave, false);
         });
 
+        // Hangar Tab
+        html.find('.vehicle-delete').click(this._onRemoveFromHangarBar.bind(this));
+
         // Roll piloting skill for PC or NPC passengers
         html.find('.passenger-action .passengerPilotingSkill').click(event => this._onRollPassengerPilotingSkill(event));
         html.find('.passenger-action .pilotPilotingSkill').click(event => this._onRollPilotPilotingSkill(event));
@@ -350,6 +353,27 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     }
 
     /**
+     * Remove an vehicle from the hangar bay.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onRemoveFromHangarBar(event) {
+        event.preventDefault();
+
+        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+
+        if (!this.actor.data?.data?.hangarBay.actorIds) {
+            return null;
+        }
+
+        const hangarData = duplicate(this.actor.data.data.hangarBay);
+        hangarData.actorIds = hangarData.actorIds.filter(x => x !== actorId);
+        await this.actor.update({
+            "data.hangarBay": hangarData
+        });
+    }
+
+    /**
      * Remove an actor from the crew.
      *
      * @param {Event} event The originating click event
@@ -358,6 +382,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         event.preventDefault();
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+
         const role = this.actor.getCrewRoleForActor(actorId);
         if (role) {
             const crewData = duplicate(this.actor.data.data.crew);
