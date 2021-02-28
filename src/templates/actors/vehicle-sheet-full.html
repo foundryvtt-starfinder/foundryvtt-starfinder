@@ -28,6 +28,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
         <a class="item" data-tab="attacks">{{ localize "SFRPG.VehicleSheet.Tabs.Attacks" }}</a>
+        <a class="item" data-tab="passengers">{{ localize "SFRPG.VehicleSheet.Tabs.Passengers" }}</a>
         <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
     </nav>
 
@@ -121,6 +122,43 @@
                     </div>
                 </div>
             </div>
+
+            <div class="flexcol">
+                <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.Title" }}</h3>
+                <div class="flexrow">
+                    <div class="flexcol">
+                        <div class="form-group">
+                            <label>Piloting</label>
+                            <div class="form-fields">
+                                <input type="text" name="data.attributes.modifiers.piloting" value="{{data.attributes.modifiers.piloting}}" />
+                                <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
+                                    <div class="passenger-action flexcol">
+                                        <button class="tag pilotPilotingSkill">{{localize "SFRPG.VehicleSheet.Passengers.Piloting"}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackStopped" }}</label>
+                            <div class="form-fields">
+                                <input type="text" name="data.attributes.modifiers.attackStopped" value="{{data.attributes.modifiers.attackStopped}}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackMoving" }}</label>
+                            <div class="form-fields">
+                                <input type="text" name="data.attributes.modifiers.attackMoving" value="{{data.attributes.modifiers.attackMoving}}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackFullSpeed" }}</label>
+                            <div class="form-fields">
+                                <input type="text" name="data.attributes.modifiers.attackFullSpeed" value="{{data.attributes.modifiers.attackFullSpeed}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="flexcol">
                 <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Title" }}</h3>
                 <div class="flexrow">
@@ -164,7 +202,13 @@
                         <div class="form-group">
                             <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Passengers" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="data.attributes.passengers" value="{{data.attributes.passengers}}" data-dtype="Number" />
+                                <input type="text" name="data.crew.passenger.limit" value="{{data.crew.passenger.limit}}" data-dtype="Number" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Complement" }}</label>
+                            <div class="form-fields">
+                                <input type="text" name="data.crew.complement.limit" value="{{data.crew.complement.limit}}" data-dtype="Number" />
                             </div>
                         </div>
                     </div>
@@ -172,9 +216,81 @@
             </div>
         </div>
         <div class="tab attacks" data-group="primary" data-tab="attacks">
-            <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Attacks.Title" }}</h3>
             <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Attacks.ToDo" }}</p>
+            <ol class="inventory-list">
+                {{#each inventory as |section sid|}}
+                <li class="inventory-header flexrow">
+                    <h3 class="item-name flexrow">{{section.label}}</h3>
+                    {{#if ../owner}}
+                    <div class="item-controls">
+                        {{#if section.allowAdd}}
+                        <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                        </a>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                </li>
+
+                <ol class="item-list">
+                    {{#each section.items as |item iid|}}
+                    {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../../this bigItem=true item=item.item children=item.contents disableEquipping=true }}
+                    {{/each}}
+                </ol>
+                {{/each}}
+            </ol>
+
         </div>
+
+        <div class="tab attacks" data-group="primary" data-tab="passengers">
+            <div class="crew-settings flexrow">
+                <ol class="settings flexrow">
+                    <h3>
+                        {{localize "SFRPG.VehicleSheet.Passengers.Header"}}
+                        <i class="fas fa-users"></i>
+                    </h3>
+                    {{#if isGM}}
+                    <label class="checkbox">
+                        <label><b>{{localize "SFRPG.VehicleSheet.Passengers.PassengersSetting"}}</b></label>
+                        <input type="checkbox" name="data.crew.useNPCCrew" {{checked data.crew.useNPCCrew}}/>{{localize "SFRPG.VehicleSheet.Passengers.IsNPCPassengers"}}
+                    </label>
+                    {{/if}}
+                </ol>
+            </div>
+
+            {{#unless data.crew.useNPCCrew}}
+            <ol class="crew-list">
+                {{#each crew as |role|}}
+                <li class="flexrow crew-header {{role.cssClass}}" {{#each role.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>{{role.label}}</li>
+                <ol class="crew-item-list">
+                    {{#each role.actors as |actor a|}}
+                    <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
+                        <div class="crew-name flexrow">
+                            <div class="crew-image" style="background-image: url({{actor.data.img}})"></div>
+                            <h4>{{actor.name}}</h4>
+                        </div>
+
+                        <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
+                            <div class="passenger-action flexcol">
+                                <button class="tag passengerPilotingSkill">{{localize "SFRPG.VehicleSheet.Passengers.Piloting"}}</button>
+                            </div>
+                        </div>
+
+                        <div class="crew-controls">
+                            <a class="crew-control crew-delete" title="Remove Crew Member"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+                {{/each}}
+            </ol>
+            {{else}}
+            <ol class="crew-list">
+                <p class="notification info">{{ localize "SFRPG.VehicleSheet.Passengers.NPCPilotingHint" }}</p>
+            </ol>
+            {{/unless}}
+        </div>
+
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
             {{editorPlus content=data.details.description.value target="data.details.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}
         </div>

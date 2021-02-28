@@ -1236,7 +1236,8 @@ SFRPG.itemTypes = {
     "weapon": "SFRPG.Items.Categories.Weapons",
     "shield": "SFRPG.Items.Categories.Shields",
     "ammunition": "SFRPG.Items.Categories.Ammunition",
-    "weaponAccessory": "ITEM.TypeWeaponaccessory"
+    "weaponAccessory": "ITEM.TypeWeaponaccessory",
+    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks"
 };
 
 SFRPG.containableTypes = {
@@ -1253,7 +1254,8 @@ SFRPG.containableTypes = {
     "spell"        : "SFRPG.Items.Categories.Spells",
     "augmentation" : "SFRPG.Items.Categories.Augmentations",
     "shield"       : "SFRPG.Items.Categories.Shields",
-    "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories"
+    "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories",
+    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks"
 };
 
 SFRPG.combatTypes = [
