@@ -90,6 +90,9 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             if (item.type === "weapon" || item.type === "vehicleAttack") {
                 arr[0].push(item);
             }
+            else if (item.type === "vehicleSystem") {
+                arr[1].push(item);
+            }
             else if (item.type === "starshipExpansionBay") arr[2].push(item);
 
             return arr;
@@ -108,7 +111,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         // TODO: Localize
         const features = {
-            primarySystems: { label: "Primary Systems", items: primarySystems, hasActions: false, dataset: { type: "" } },
+            primarySystems: { label: "Primary Systems", items: primarySystems, hasActions: false, dataset: { type: "vehicleSystem" } },
             expansionBays: { label: game.i18n.format("Expansion Bays ({current} / {max})", {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
         };
         data.features = Object.values(features);

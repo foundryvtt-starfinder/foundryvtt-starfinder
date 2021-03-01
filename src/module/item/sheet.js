@@ -200,6 +200,15 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (["weapon", "equipment", "shield"].includes(item.type)) return item.data.equipped ? "Equipped" : "Unequipped";
         else if (item.type === "starshipWeapon") return item.data.mount.mounted ? "Mounted" : "Not Mounted";
         else if (item.type === "augmentation") return `${item.data.type} (${item.data.system})`;
+        else if (item.type === "vehicleSystem")
+        {
+            // Only systems which can be activated have an activation status
+            if (item.data.canBeActivated === false) {
+                return ""
+            }
+
+            return item.data.isActivated ? "Activated" : "Not Activated";
+        }
     }
 
     /* -------------------------------------------- */
