@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>With these phasic scythes, weaponsmiths harnessed the nyssholora&rsquo;s ability to oscillate its upper appendages to produce a deadly sonic effect. Using a complex array of internal energy conductors powered by Pact Worlds high-, super-, and ultra-capacity batteries, the technological components of phasic scythes can replicate the nyssholora&rsquo;s nervous system by causing an authentic nyssholora claw to vibrate at similar frequencies to their natural counterparts. These weapons slice through solid matter with wicked efficiency, sometimes leaving their living targets with lasting wounds. These powered blades keep the market for nyssholora hunting lucrative despite the dangers inherent in recovering the raw materials.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AA2",
+    "source": "AA2 pg. 87",
     "type": "",
     "quantity": 1,
     "bulk": "1",
@@ -16,9 +16,27 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 36,
+        "max": "36"
+      },
+      "hardness": {
+        "value": "19"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -37,32 +55,28 @@
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 4,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Penetrating, powered",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
+      "parts": [],
       "effect": "Wound"
     },
     "damage": {
       "parts": [
         [
-          "3d4 + @mod",
+          "3d4 + @abilities.str.mod",
           "sonic"
         ]
       ]
@@ -70,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,12 +97,40 @@
       "per": "minute"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 7,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
+    "weaponCategory": "uncategorized",
     "special": "",
     "properties": {
       "one": false,
       "two": true,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -167,30 +209,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 7,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "icons/weapons/sickles/scythe-bone-green.webp",
+  "effects": [],
   "_id": "gDMKCU4KA64ZUgiS"
 }
