@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>A xenolash is a genetically engineered vine that weeps caustic, quick-hardening sap from the razor-sharp thorns along its length. Because the sap (rather than the weapon itself) entangles creatures, targets are not anchored to the xenolash. Grown in extraordinary conditions by Xenowardens and primarily sold only to those they trust, the plants derive their sustenance and amberlike sap from light, ambient energy, and atmospheric chemicals.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "PW",
+    "source": "PW pg. 192",
     "type": "",
     "quantity": 1,
     "bulk": "1",
@@ -16,9 +16,27 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 6,
+        "max": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "ac": {
+        "value": ""
+      }
+    },
     "activation": {
       "type": "none",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -36,33 +54,29 @@
       "effect": ""
     },
     "range": {
-      "value": null,
+      "value": 10,
       "units": "ft",
       "additional": "",
       "per": ""
     },
     "uses": {
       "value": null,
-      "max": 0,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Analog, disarm, entangle, reach, trip",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "1d4",
-          "acid"
-        ]
-      ],
-      "effect": "Corrode"
+      "parts": [],
+      "effect": "Corrode 1d4"
     },
     "damage": {
       "parts": [
         [
-          "2d4 + @mod",
+          "2d4 + @abilities.str.mod",
           "acid+slashing"
         ]
       ]
@@ -70,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,7 +97,24 @@
       "per": ""
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 4,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
+    "weaponCategory": "uncategorized",
     "special": "",
     "properties": {
       "one": false,
@@ -167,30 +198,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 4,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/feats/major_eldrith_lore.png",
+  "effects": [],
   "_id": "Idk3YLRJrf0oibsk"
 }
