@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>This thin blade comes with a scabbard that makes it resemble a stylish cane. Sword canes are popular on Absalom Station, where similar nonweapon items have some popularity as fashionable affectations. A sword cane can incorporate one of the following at the standard price for that item: 20 feet of retractable cable line, a personal comm unit, or a spotlight. A successful Perception check (DC = 15 + the weapon&rsquo;s item level) is required to identify a sword cane as a weapon when it is sheathed.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "PW",
+    "source": "PW pg. 192",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -16,9 +16,27 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 45,
+        "max": "45"
+      },
+      "hardness": {
+        "value": "25"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -37,38 +55,37 @@
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
       "value": null,
-      "max": 0,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Analog, operative",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        "1d6"
-      ],
-      "effect": "Bleed"
+      "parts": [],
+      "effect": "Bleed 1d6"
     },
     "damage": {
       "parts": [
         [
-          "2d6 + @mod",
-          "Piercing"
+          "2d6 + @abilities.str.mod",
+          "piercing"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -80,7 +97,24 @@
       "per": ""
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 10,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "basicM",
+    "weaponCategory": "uncategorized",
     "special": "",
     "properties": {
       "one": true,
@@ -164,30 +198,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
-    "proficient": false,
+    "proficient": true,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 10,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "icons/weapons/staves/staff-orb-red.webp",
+  "effects": [],
   "_id": "tbBiok3FEGsqNlaM"
 }

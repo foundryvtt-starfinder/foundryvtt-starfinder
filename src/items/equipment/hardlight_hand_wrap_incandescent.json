@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>A hardlight hand wrap consists of a small generator of force energy built into a form-fitting glove made of interwoven photoelectric ribbon. The weapon uses cutting-edge hologram technology to create bursts of hardlight that can briefly interact with both corporeal and incorporeal beings. It takes a bit of training to perfect the timing of strikes made with a hardlight hand wrap, as you must activate the force generator at the precise moment you hit your target, but many feel that the practice is worth the effort. Relatively inconspicuous and easily modifiable to fit any species&rsquo; anatomy, hardlight hand wraps are invaluable when facing living holograms, ghosts, and other incorporeal dangers.</p>\n<p>Hardlight hand wraps can be customized to shine in any color in the visible spectrum when used, and a few manufacturers of weapon accessories even offer custom firmware that modifies the appearance of a hardlight hand wrap to manifest as an animalistic claw or fist when used. This doesn&rsquo;t change the weapon&rsquo;s statistics, but it can be intimidating on the field of battle. A few unscrupulous types wield hardlight hand wraps when attempting to impersonate solarians, usually to scare off their enemies or as part of complicated con jobs. However, these ruses quickly fall apart when the faux solarians are unable to manifest any other powers these mystic warriors possess.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AA3",
+    "source": "AA3 pg. 67",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -16,9 +16,27 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 105,
+        "max": "105"
+      },
+      "hardness": {
+        "value": "45"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -37,32 +55,28 @@
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 2,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Bright, force, powered",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
+      "parts": [],
       "effect": ""
     },
     "damage": {
       "parts": [
         [
-          "11d8 + @mod",
+          "11d8 + @abilities.str.mod",
           "bludgeoning"
         ]
       ]
@@ -70,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,12 +97,40 @@
       "per": "minute"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 20,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
+    "weaponCategory": "uncategorized",
     "special": "",
     "properties": {
       "one": true,
       "two": false,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -167,30 +209,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 20,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "icons/equipment/hand/glove-simple-leather-brown-blue.webp",
+  "effects": [],
   "_id": "j3nbQwBxNEvA9xnC"
 }
