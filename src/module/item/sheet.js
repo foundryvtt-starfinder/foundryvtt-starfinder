@@ -94,6 +94,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasProficiency = data.item.data.proficient === true || data.item.data.proficient === false;
         data.isFeat = this.type === "feat";
         data.isVehicleAttack = data.item.type === "vehicleAttack";
+        data.isVehicleSystem = data.item.type === "vehicleSystem";
         data.isGM = game.user.isGM;
 
         // Physical items

@@ -24,8 +24,10 @@
         {{/each}}
         {{#if cost}}
         <span>{{localize "SFRPG.ChatCard.ItemActivation.Cost" cost=cost}}</span>
-        {{else}}
+        {{else if item.labels.activation}}
         <span>{{localize "SFRPG.ChatCard.ItemActivation.Cost" cost=item.labels.activation}}</span>
+        {{else}}
+        {{!-- No charge --}}
         {{/if}}
         {{#if item.data.data.duration.value}}<span>{{{localize "SFRPG.ChatCard.ItemActivation.Duration" duration=item.data.data.duration.value}}}</span>{{/if}}
     </footer>
