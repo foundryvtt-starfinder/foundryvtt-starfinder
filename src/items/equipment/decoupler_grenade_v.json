@@ -1,13 +1,13 @@
 {
-  "name": "Decoupler Grenade V",
+  "name": "Decoupler grenade V",
   "type": "weapon",
   "data": {
     "description": {
-      "value": "<p>Although tripods can use other grenades, they are infamous for the decoupler grenades they produce internally. Other creatures in the galaxy, such as the weapon-dealing drow of Apostae, have replicated this horrid tech. A decoupler grenade produces a dense cloud of dark nanites. This cloud provides concealment and corrodes creatures and materials within it. Each creature that starts its turn in the cloud must succeed at a Fortitude saving throw (DC = 10 + half the grenade’s item level) or be subject to the corrode critical hit effect. A creature that inhales the nanites takes a –4 penalty to this saving throw.</p>",
+      "value": "<p>Although tripods can use other grenades, they are infamous for the decoupler grenades they produce internally. Other creatures in the galaxy, such as the weapon-dealing drow of Apostae, have replicated this horrid tech. A decoupler grenade produces a dense cloud of dark nanites. This cloud provides concealment and corrodes creatures and materials within it. Each creature that starts its turn in the cloud must succeed at a Fortitude saving throw (DC = 10 + half the grenade&rsquo;s item level) or be subject to the corrode critical hit effect. A creature that inhales the nanites takes a &ndash;4 penalty to this saving throw.</p>\n<p><strong>Corrode</strong>: 4d6</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "",
+    "source": "AA3 pg. 119",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -17,21 +17,21 @@
     "equipped": false,
     "identified": true,
     "attributes": {
-      "sturdy": false,
+      "sturdy": true,
       "customBuilt": false,
       "size": "medium",
       "dex": {
         "mod": ""
       },
       "hp": {
-        "value": null,
-        "max": ""
+        "value": 99,
+        "max": "99"
       },
       "hardness": {
-        "value": ""
+        "value": "41"
       },
       "ac": {
-        "value": ""
+        "value": "5"
       }
     },
     "activation": {
@@ -50,7 +50,7 @@
     "area": {
       "value": 15,
       "units": "ft",
-      "shape": "",
+      "shape": "sphere",
       "effect": "burst"
     },
     "range": {
@@ -60,14 +60,15 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
+      "value": 1,
+      "max": 1,
+      "per": "charges"
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "corrode 4d6",
+    "chatFlavor": "",
     "critical": {
       "parts": [],
       "effect": ""
@@ -78,7 +79,7 @@
     "formula": "",
     "save": {
       "type": "fort",
-      "dc": "19",
+      "dc": "10+floor(@item.level/2)",
       "descriptor": "negate"
     },
     "descriptors": [],
@@ -104,7 +105,8 @@
           "affectsEncumbrance": true,
           "weightProperty": "level"
         }
-      ]
+      ],
+      "isOpen": true
     },
     "weaponType": "grenade",
     "weaponCategory": "",
@@ -196,12 +198,13 @@
       "regrowth": false,
       "unbalancing": false
     },
-    "proficient": true,
+    "proficient": false,
     "abilityMods": {
       "parts": []
     }
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "icons/weapons/thrown/bomb-timer.webp",
+  "effects": [],
   "_id": "tGtN7psCXYXBdNGB"
 }
