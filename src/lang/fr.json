@@ -4,27 +4,27 @@
         "TypeDrone": "Drone",
         "TypeHazard": "Piège",
         "TypeNpc": "Personnage Non-Joueur",
-        "TypeVehicle": "Véhicule",
-        "TypeStarship": "Vaisseau"
+        "TypeStarship": "Vaisseau",
+        "TypeVehicle": "Véhicule"
     },
     "ITEM": {
+        "TypeArchetypes": "Archétype",
         "TypeAsi": "Augmentation de valeur de Caractéristique",
-        "TypeWeapon": "Arme",
-        "TypeEquipment": "Armure",
-        "TypeConsumable": "Consommable",
-        "TypeGoods": "Marchandises",
-        "TypeContainer": "Conteneur",
+        "TypeAugmentation": "Augmentation",
+        "TypeChassis": "Châssis de Drone",
         "TypeClass": "Classe",
-        "TypeSpell": "Sort",
+        "TypeConsumable": "Consommable",
+        "TypeContainer": "Conteneur",
+        "TypeEquipment": "Armure",
         "TypeFeat": "Trait",
-        "TypeRace": "Race",
-        "TypeTheme": "Thème",
-        "TypeTechnological": "Technologique",
+        "TypeFusion": "Fusion d'Arme",
+        "TypeGoods": "Marchandises",
         "TypeHybrid": "Hybride",
         "TypeMagic": "Magique",
-        "TypeFusion": "Fusion d'Arme",
-        "TypeUpgrade": "Amélioration d'Armure",
-        "TypeAugmentation": "Augmentation",
+        "TypeMod": "Module de Drone",
+        "TypeRace": "Race",
+        "TypeShield": "Bouclier",
+        "TypeSpell": "Sort",
         "TypeStarshipablativearmor": "Armure Ablative de Vaisseau Spatial",
         "TypeStarshipaction": "Action de Vaisseau Spatial",
         "TypeStarshiparmor": "Armure de Vaisseau Spatial",
@@ -43,11 +43,11 @@
         "TypeStarshipshield": "Bouclier de Vaisseau Spatial",
         "TypeStarshipthruster": "Propulseur de Vaisseau Spatial",
         "TypeStarshipweapon": "Arme de Vaisseau Spatial",
-        "TypeArchetypes": "Archétype",
-        "TypeChassis": "Châssis de Drone",
-        "TypeMod": "Module de Drone",
-        "TypeShield": "Bouclier",
+        "TypeTechnological": "Technologique",
+        "TypeTheme": "Thème",
+        "TypeUpgrade": "Amélioration d'Armure",
         "TypeVehicleattack": "Vehicle Attack",
+        "TypeWeapon": "Arme",
         "TypeWeaponaccessory": "Accessoire d'Arme"
     },
     "SFRPG": {
@@ -125,12 +125,12 @@
             },
             "Features": {
                 "Categories": {
-                    "Classes": "Classes",
-                    "Race": "Race",
-                    "Theme": "Thème",
-                    "Archetypes": "Archétypes",
                     "ActiveFeats": "Traits Actifs",
-                    "PassiveFeats": "Traits Passifs"
+                    "Archetypes": "Archétypes",
+                    "Classes": "Classes",
+                    "PassiveFeats": "Traits Passifs",
+                    "Race": "Race",
+                    "Theme": "Thème"
                 },
                 "Filters": {
                     "Action": "Action",
@@ -141,16 +141,16 @@
             "Header": {
                 "CL": "CL",
                 "Hitpoints": {
-                    "RacialTooltip": "Base Raciale: {mod} ({source})",
-                    "ClassTooltip": "Base de Classe: {mod} ({source})"
-                },
-                "Stamina": {
-                    "ConstitutionTooltip": "Constitution de Base: {mod}",
-                    "ClassTooltip": "Base de Classe: {mod} ({source})"
+                    "ClassTooltip": "Base de Classe: {mod} ({source})",
+                    "RacialTooltip": "Base Raciale: {mod} ({source})"
                 },
                 "Resolve": {
-                    "LevelTooltip": "Niveau de Base: {mod}",
-                    "KeyAbilityTooltip": "Base de la caractéristique essentielle: {mod} ({kas}, {source})"
+                    "KeyAbilityTooltip": "Base de la caractéristique essentielle: {mod} ({kas}, {source})",
+                    "LevelTooltip": "Niveau de Base: {mod}"
+                },
+                "Stamina": {
+                    "ClassTooltip": "Base de Classe: {mod} ({source})",
+                    "ConstitutionTooltip": "Constitution de Base: {mod}"
                 }
             },
             "Inventory": {
@@ -158,42 +158,42 @@
                     "AcceptedItemTypes": "Types d'objets acceptés",
                     "AcceptedItemTypesTooltip": "Cette section vous permet de préciser quels types d'objets sont acceptés par le conteneur.",
                     "AffectsEncumbrance": "Le contenu modifie l'encombrement",
-                    "AffectsEncumbranceTooltip": "Si désactivé, les éléments contenus n'affectent plus l'encombrement des personnages.",
                     "AffectsEncumbranceCheckbox": "Les objets contenus comptent pour l'encombrement.",
+                    "AffectsEncumbranceTooltip": "Si désactivé, les éléments contenus n'affectent plus l'encombrement des personnages.",
+                    "Capacity": "Capacité",
+                    "CapacityBulk": "Capacité",
+                    "CapacityBulkTooltip": "Le volume pouvant être contenu dans ce conteneur.",
                     "CapacityLabelBulk": "Volume",
                     "CapacityLabelItems": "Objet(s)",
-                    "EquippedBulkMultiplier": "Multiplicateur de volume équipé",
-                    "EquippedBulkMultiplierTooltip": "Ce multiplicateur est utilisé pour modifier la masse de l'objet lorsqu'il est équipé.<br/>Définir cette valeur à 0 fait en sorte que la masse de l'objet ne compte pas dans les charges de l'acteur lorsqu'il est équipé.",
-                    "DetailsHeader": "Détails du contenant",
-                    "Capacity": "Capacité",
-                    "CapacityTooltip": "Le nombre ''d'emplacements'' pouvant être utilisés dans ce conteneur.",
                     "CapacityPropertyItems": "Objets",
                     "CapacityPropertyItemsTooltip": "When set to Items, this container will accept up to the amount of items specified in capacity. Items with a quantity higher than 1 will count more towards this limit.",
                     "CapacityPropertyLevel": "Niveau",
                     "CapacityPropertyLevelTooltip": "When set to Level, this container will only accept items up to a cumulative total of what is specified in capacity.",
                     "CapacityPropertySlots": "Emplacements",
                     "CapacityPropertySlotsTooltip": "When set to Slots, this container will only accept items that have a slots property, such as armor upgrades. It will not accept more items than it has slots to fill.",
-                    "CapacityBulk": "Capacité",
-                    "CapacityBulkTooltip": "Le volume pouvant être contenu dans ce conteneur.",
+                    "CapacityTooltip": "Le nombre ''d'emplacements'' pouvant être utilisés dans ce conteneur.",
                     "Close": "Fermé",
                     "CloseTooltip": "Ferme la liste dépliante de ce conteneur.",
+                    "DetailsHeader": "Détails du contenant",
+                    "EquippedBulkMultiplier": "Multiplicateur de volume équipé",
+                    "EquippedBulkMultiplierTooltip": "Ce multiplicateur est utilisé pour modifier la masse de l'objet lorsqu'il est équipé.<br/>Définir cette valeur à 0 fait en sorte que la masse de l'objet ne compte pas dans les charges de l'acteur lorsqu'il est équipé.",
                     "Open": "Ouvert",
                     "OpenTooltip": "Ouvre la liste dépliante de ce conteneur.",
                     "StorageIdentifier": "Indentifiant de stockage",
-                    "StorageIdentifierTooltip": "Le type d'emplacement de stockage qui est représenté par cette section de stockage.",
-                    "StorageIdentifierItem": "Emplacement d'Objet",
                     "StorageIdentifierArmorUpgrade": "Emplacement d'Amélioration d'Armure",
-                    "StorageIdentifierWeaponSlot": "Emplacement d'Arme",
                     "StorageIdentifierFusion": "Fusion",
+                    "StorageIdentifierItem": "Emplacement d'Objet",
                     "StorageIdentifierSpellSlot": "Emplacement de Sort",
+                    "StorageIdentifierTooltip": "Le type d'emplacement de stockage qui est représenté par cette section de stockage.",
+                    "StorageIdentifierWeaponSlot": "Emplacement d'Arme",
                     "StorageSection": "Section de Stockage {index}",
                     "StorageSections": "Sections de Stockage",
                     "StorageSectionsAdd": "Ajoute une nouvelle Section de Stockage",
                     "StorageSectionsRemove": "Supprime cette Section de Stockage",
                     "StorageType": "Type de Stockage",
-                    "StorageTypeTooltip": "Cette propriété définit si une section de stockage mesure son contenu en volume ou en emplacements.",
+                    "StorageTypeBulk": "Volume",
                     "StorageTypeSlot": "Emplacement",
-                    "StorageTypeBulk": "Volume"
+                    "StorageTypeTooltip": "Cette propriété définit si une section de stockage mesure son contenu en volume ou en emplacements."
                 },
                 "Encumbrance": {
                     "Encumbrance": "Encombrement",
@@ -201,20 +201,20 @@
                     "EncumbranceModifierTooltip": "{type} Bonus: {mod} ({source})"
                 },
                 "Interface": {
+                    "AmountToTransferInfo": "Minimum 1, maximum {max}",
+                    "AmountToTransferLabel": "Quantité",
+                    "AmountToTransferMessage": "Veuillez indiquer le nombre d'éléments que vous souhaitez transférer.",
+                    "AmountToTransferTitle": "Transférer les Eléments",
+                    "DeleteConfirmationDeleteChildren": "Supprimer également les éléments contenus.",
+                    "DeleteConfirmationMessage": "Êtes-vous sûr de vouloir supprimer '{itemName}'?",
+                    "DeleteConfirmationTitle": "Supprimer '{itemName}'?",
                     "DragFromExternalTokenError": "Impossible de faire glisser des objets provenant de tokens d'acteurs qui ne sont pas sur la scène active.",
                     "DragToExternalTokenError": "Impossible de faire glisser des objets sur des tokens d'acteurs qui ne sont pas sur la scène active.",
+                    "EquipmentEnhancements": "Améliorations d'équipement",
                     "ItemCollectionLocked": "Ce conteneur est verrouillé et ne s'ouvre pas.",
                     "ItemCollectionNoGMError": "Impossible de déposer les éléments car aucun MJ n'est connecté.",
                     "ItemCollectionPickupNoGMError": "Impossible de ramasser les éléments car aucun MJ n'est connecté.",
                     "NoTarget": "Aucun acteur ou token cible n'est spécifié.",
-                    "DeleteConfirmationTitle": "Supprimer '{itemName}'?",
-                    "DeleteConfirmationMessage": "Êtes-vous sûr de vouloir supprimer '{itemName}'?",
-                    "DeleteConfirmationDeleteChildren": "Supprimer également les éléments contenus.",
-                    "AmountToTransferTitle": "Transférer les Eléments",
-                    "AmountToTransferMessage": "Veuillez indiquer le nombre d'éléments que vous souhaitez transférer.",
-                    "AmountToTransferLabel": "Quantité",
-                    "AmountToTransferInfo": "Minimum 1, maximum {max}",
-                    "EquipmentEnhancements": "Améliorations d'équipement",
                     "SpecialItems": "Eléments Technologique, Magique, et Hybride"
                 },
                 "Item": {
@@ -234,39 +234,39 @@
                 }
             },
             "Modifiers": {
+                "EffectTypes": {
+                    "AllAttackDamage": "Tous les dégâts d'attaque",
+                    "AllAttackRolls": "Tous les Jets d'attaques",
+                    "BAB": "BBA",
+                    "BaseAttackBonus": "Bonus de base à l'attaque",
+                    "Encumbrance": "Encombrement",
+                    "Hitpoints": "Points de vies",
+                    "HP": "PV",
+                    "MeleeAttackDamage": "Dégats de mêlée",
+                    "MeleeAttackRolls": "Jets d'attaque de mêlée",
+                    "RangedAttackDamage": "Dégats à distance",
+                    "RangedAttackRolls": "Jets d'attaque à distance",
+                    "Resolve": "Persévérance",
+                    "RP": "PR",
+                    "Skillpoints": "Points de Compétences",
+                    "SkillRanks": "Rangs de Compétence",
+                    "SP": "PE",
+                    "SpecificWeaponAttackDamage": "Dégâts d'arme spécifiques",
+                    "SpecificWeaponAttackRolls": "Jets d'attaque d'arme spécifiques",
+                    "SpellAttackDamage": "Dégats de sort",
+                    "SpellAttackRolls": "Jet d'attaque de sort",
+                    "Stamina": "Endurance",
+                    "WeaponPropertyAttackRolls": "Weapon Property Attack Rolls",
+                    "WeaponPropertyDamage": "Dégats des armes"
+                },
                 "ModifierTypes": {
                     "Class": "Classe",
                     "Racial": "Raciale"
                 },
-                "EffectTypes": {
-                    "Hitpoints": "Points de vies",
-                    "HP": "PV",
-                    "Stamina": "Endurance",
-                    "SP": "PE",
-                    "Resolve": "Persévérance",
-                    "RP": "PR",
-                    "BaseAttackBonus": "Bonus de base à l'attaque",
-                    "BAB": "BBA",
-                    "RangedAttackRolls": "Jets d'attaque à distance",
-                    "MeleeAttackRolls": "Jets d'attaque de mêlée",
-                    "SpellAttackRolls": "Jet d'attaque de sort",
-                    "SpecificWeaponAttackRolls": "Jets d'attaque d'arme spécifiques",
-                    "AllAttackRolls": "Tous les Jets d'attaques",
-                    "WeaponPropertyAttackRolls": "Weapon Property Attack Rolls",
-                    "RangedAttackDamage": "Dégats à distance",
-                    "MeleeAttackDamage": "Dégats de mêlée",
-                    "SpellAttackDamage": "Dégats de sort",
-                    "SpecificWeaponAttackDamage": "Dégâts d'arme spécifiques",
-                    "WeaponPropertyDamage": "Dégats des armes",
-                    "AllAttackDamage": "Tous les dégâts d'attaque",
-                    "Encumbrance": "Encombrement",
-                    "Skillpoints": "Points de Compétences",
-                    "SkillRanks": "Rangs de Compétence"
-                },
                 "Tooltips": {
-                    "SkillRank": "{type} Rangs: {mod} ({source})",
+                    "BonusSkillpoints": "{type} Bonus: {mod} ({source})",
                     "ClassSkillpoints": "{class} Points de Compétence: {total}",
-                    "BonusSkillpoints": "{type} Bonus: {mod} ({source})"
+                    "SkillRank": "{type} Rangs: {mod} ({source})"
                 },
                 "UI": {
                     "LongFormula": "Longue formule"
@@ -299,16 +299,16 @@
             "Wysh": "Witchwarper"
         },
         "ArchetypesAlternateClassFeatures": "Fonctions de classe alternatives",
-        "ArmorTypes": {
-            "Light": "Armure Légère",
-            "Heavy": "Armure Lourde",
-            "Power": "Armure Assistée"
-        },
         "ArmorCheckPenalty": "Malus d'Armure",
         "ArmorProficiencyHeavy": "Armure lourde",
         "ArmorProficiencyLight": "Armure légère",
         "ArmorProficiencyPower": "Armure assistée",
         "ArmorProficiencyShields": "Boucliers",
+        "ArmorTypes": {
+            "Heavy": "Armure Lourde",
+            "Light": "Armure Légère",
+            "Power": "Armure Assistée"
+        },
         "Attack": "Attaque",
         "Attributes": "Attributs",
         "AugAllArms": "Les Bras",
@@ -319,8 +319,8 @@
         "AugArm": "Bras",
         "AugArmAndHand": "Bras et Main",
         "AugBrain": "Cerveau",
-        "AugBrainHeartLungs": "Cerveau, Coeur, Poumons",
         "AugBrainAndEyes": "Cerveau et yeux",
+        "AugBrainHeartLungs": "Cerveau, Coeur, Poumons",
         "AugEars": "Oreilles",
         "AugEarsAndThroat": "Oreilles et Gorge",
         "AugEndocrine": "Endocrine",
@@ -358,8 +358,8 @@
                 "BrowserClearFilters": "Supprimer les filtres",
                 "BrowserSearchPlaceholder": "Votre recherche",
                 "BrowserSearchTitle": "Rechercher",
-                "BrowserSortyByLabel": "Trier par nom",
                 "BrowserSortMethodName": "Nom",
+                "BrowserSortyByLabel": "Trier par nom",
                 "SearchHint": "Vous pouvez taper le nom de l'élément que vous recherchez.",
                 "Title": "Parcourir les éléments"
             },
@@ -392,9 +392,9 @@
                 "Action": "Action",
                 "Day": "Jour",
                 "Hour": "Heure",
+                "Minute": "Minute",
                 "Round": "Round de Combat",
-                "Shot": "Tir",
-                "Minute": "Minute"
+                "Shot": "Tir"
             }
         },
         "CapacityUsage": "Capacité & utilisation",
@@ -422,6 +422,9 @@
         },
         "ClassArmorProf": "Maniements des armures",
         "ClassBABProgression": "Progression du BBA",
+        "Classes": {
+            "IsCasterClass": "S'agit-il d'une classe de lanceur de sorts ?"
+        },
         "ClassFortSaveProgression": "Progression sauvegarde de vigueur",
         "ClassHPPerLevel": "Points de vie par niveau",
         "ClassKeyAbilityScore": "Caractéristique essentielle",
@@ -444,8 +447,8 @@
                     "MessageTitle": "Description"
                 },
                 "Round": {
-                    "Header": "Round {round}",
-                    "BodyHeader": "Nouveau Round"
+                    "BodyHeader": "Nouveau Round",
+                    "Header": "Round {round}"
                 },
                 "Speaker": {
                     "GM": "Le MJ"
@@ -467,8 +470,8 @@
                 "Name": "Combat Normal",
                 "Phases": {
                     "1": {
-                        "Name": "Combat",
-                        "Description": "Chacun peut maintenant jouer son tour de combat."
+                        "Description": "Chacun peut maintenant jouer son tour de combat.",
+                        "Name": "Combat"
                     }
                 }
             },
@@ -476,28 +479,28 @@
                 "Name": "Combat de Vaisseaux",
                 "Phases": {
                     "1": {
-                        "Name": "Changement de Rôles",
-                        "Description": "Toute personne qui souhaite changer de rôle de vaisseau peut le faire dès maintenant."
+                        "Description": "Toute personne qui souhaite changer de rôle de vaisseau peut le faire dès maintenant.",
+                        "Name": "Changement de Rôles"
                     },
                     "2": {
-                        "Name": "Ingénierie",
-                        "Description": "Les capitaines, les ingénieurs, les officiers magiciens, les seconds et les matelots de pont peuvent choisir d'agir pendant cette phase."
+                        "Description": "Les capitaines, les ingénieurs, les officiers magiciens, les seconds et les matelots de pont peuvent choisir d'agir pendant cette phase.",
+                        "Name": "Ingénierie"
                     },
                     "3": {
-                        "Name": "Tests de Pilotage",
-                        "Description": "Les pilotes peuvent maintenant effectuer leurs tests de pilotage pour déterminer l'initiative de ce round."
+                        "Description": "Les pilotes peuvent maintenant effectuer leurs tests de pilotage pour déterminer l'initiative de ce round.",
+                        "Name": "Tests de Pilotage"
                     },
                     "4": {
-                        "Name": "Manoeuvre",
-                        "Description": "Les capitaines, les pilotes, les officiers scientifiques, les seconds et les matelots de pont peuvent choisir d'agir pendant cette phase."
+                        "Description": "Les capitaines, les pilotes, les officiers scientifiques, les seconds et les matelots de pont peuvent choisir d'agir pendant cette phase.",
+                        "Name": "Manoeuvre"
                     },
                     "5": {
-                        "Name": "Canonnage",
-                        "Description": "Les capitaines et les canonniers peuvent choisir d'agir pendant cette phase."
+                        "Description": "Les capitaines et les canonniers peuvent choisir d'agir pendant cette phase.",
+                        "Name": "Canonnage"
                     },
                     "6": {
-                        "Name": "Dommage",
-                        "Description": "Chacun traite maintenant les dommages reçus, les seuils critiques, etc."
+                        "Description": "Chacun traite maintenant les dommages reçus, les seuils critiques, etc.",
+                        "Name": "Dommage"
                     }
                 }
             },
@@ -505,16 +508,16 @@
                 "Name": "Poursuite de véhicules",
                 "Phases": {
                     "1": {
-                        "Name": "Actions de Pilotes",
-                        "Description": "Les conducteurs peuvent désormais décider de leurs manœuvres."
+                        "Description": "Les conducteurs peuvent désormais décider de leurs manœuvres.",
+                        "Name": "Actions de Pilotes"
                     },
                     "2": {
-                        "Name": "Evolution de la Poursuite",
-                        "Description": "Le MJ va maintenant traiter les résultats de l'évolution de la poursuite."
+                        "Description": "Le MJ va maintenant traiter les résultats de l'évolution de la poursuite.",
+                        "Name": "Evolution de la Poursuite"
                     },
                     "3": {
-                        "Name": "Combat",
-                        "Description": "Chacun peut maintenant jouer son tour de combat."
+                        "Description": "Chacun peut maintenant jouer son tour de combat.",
+                        "Name": "Combat"
                     }
                 }
             }
@@ -557,13 +560,13 @@
         "ConditionsUnconscious": "Inconscient",
         "ConImm": "Imm. aux conditions",
         "ConsumableTypes": {
-            "Serum": "Sérums",
             "Ampoule": "Ampoules à Sort",
-            "SpellGem": "Gemmes à Sort",
             "Drugs": "Drogues",
+            "FoodDrink": "Nourritures et Boissons",
             "Medicine": "Médicaments",
             "Poison": "Poisons",
-            "FoodDrink": "Nourritures et Boissons"
+            "Serum": "Sérums",
+            "SpellGem": "Gemmes à Sort"
         },
         "CounterClassesAddButton": "Ajouter 1",
         "CounterClassesCurrentCount": "Total des points :",
@@ -607,6 +610,7 @@
         "DamageTypesFireOrSlashing": "Feu | Tranchant",
         "DamageTypesFireOrSonic": "Feu | Sonique",
         "DamageTypesForce": "Force",
+        "DamageTypesNonlethal": "Non létal",
         "DamageTypesPiercing": "Perforant",
         "DamageTypesPiercingAndSonic": "Perforant & Sonique",
         "DamageTypesRadiation": "Radiation",
@@ -614,7 +618,6 @@
         "DamageTypesSlashingAndPiercing": "Tranchant & Perforant",
         "DamageTypesSlashingAndSonic": "Tranchant & Sonique",
         "DamageTypesSonic": "Sonique",
-        "DamageTypesNonlethal": "Non létal",
         "DamImm": "Imm. aux dommages",
         "DamRes": "Résistances aux energies",
         "DamVuln": "Vulnérabilités",
@@ -622,15 +625,13 @@
         "Details": "Détails",
         "Dialogs": {
             "InputDialog": {
-                "SingleFieldInvalid": "Entrée invalide pour {fieldName}.",
-                "MultipleFieldsInvalid": "Entrée invalide pour les champs suivants :<br/>{fieldNames}"
+                "MultipleFieldsInvalid": "Entrée invalide pour les champs suivants :<br/>{fieldNames}",
+                "SingleFieldInvalid": "Entrée invalide pour {fieldName}."
             }
         },
         "DistAny": "Tout",
         "DroneSheet": {
             "Chassis": {
-                "Missing": "Châssis manquant",
-                "NotInstalled": "Pas de châssis installé.",
                 "Details": {
                     "AbilityScores": {
                         "Dexterity": "Base en dexterité",
@@ -658,9 +659,11 @@
                         "Will": "Progression de la volonté"
                     }
                 },
+                "Missing": "Châssis manquant",
                 "Name": {
                     "Placeholder": "Nom du châssis"
                 },
+                "NotInstalled": "Pas de châssis installé.",
                 "Source": "Source",
                 "SourceTooltip": "D'où vient ce châssis ? Quel livre ? Quelle page ?"
             },
@@ -742,14 +745,14 @@
         },
         "EnergyArmorClass": "CAE",
         "FeatTypes": {
-            "General": "Traits Généraux",
-            "Combat": "Traits de Combat"
+            "Combat": "Traits de Combat",
+            "General": "Traits Généraux"
         },
         "Features": "Spécificités",
         "FeaturesAdd": "Ajouter",
+        "FeaturesCharges": "Charges",
         "FeaturesFilter": "Filter",
         "FeaturesUsage": "Utilisation",
-        "FeaturesCharges": "Charges",
         "FlagDeprecationNotice": "<strong>REMARQUE:</strong> ces valeurs sont remplacées par le nouveau système de modificateurs et seront supprimées lors d'une prochaine mise à jour. Il est recommandé de décocher l'une de ces valeurs et de les ajouter en tant que modificateur dans l'onglet Modificateurs.",
         "FlagsInstructions": "Configurez les caractéristiques et traits de caractère qui déterminent les comportements du système.",
         "FlagsSave": "Mettre à jour les traits spéciaux.",
@@ -859,57 +862,48 @@
         "ItemCollectionSheet": {
             "ItemCollectionLocked": "Ce conteneur est verrouillé et ne s'ouvre pas.",
             "Settings": {
+                "DeleteIfEmpty": "Supprimer une fois vidé",
+                "DeleteIfEmptyTooltip": "<strong>Supprimer une fois vidé</strong><br/>Ce token de conteneur devrait-il être automatiquement retiré lorsque le dernier article en est retiré ?",
                 "Header": "Réglages du MJ :",
                 "Locked": "Verrouillé",
-                "LockedTooltip": "<strong>Verrouillé</strong><br/>Un conteneur verrouillé empêche l'accès aux joueurs.",
-                "DeleteIfEmpty": "Supprimer une fois vidé",
-                "DeleteIfEmptyTooltip": "<strong>Supprimer une fois vidé</strong><br/>Ce token de conteneur devrait-il être automatiquement retiré lorsque le dernier article en est retiré ?"
+                "LockedTooltip": "<strong>Verrouillé</strong><br/>Un conteneur verrouillé empêche l'accès aux joueurs."
             }
         },
         "ItemNoUses": "{name} n'a plus de munitions !",
         "Items": {
             "ACP": "Malus d'Armure aux Tests",
-            "Attuned": "Harmonisé",
-            "EquipmentStatus": "Status d'Equipement",
-            "EquipmentUsage": "Utilisation d'Equipement",
-            "Equippable"     : "Equippable",
-            "Equipped": "Equipé",
-            "Identified": "Identifié",
-            "MaxDex": "Modificateur de Dextérité Maximum",
-            "Proficient": "Maîtrise",
-            "NotProficient": "Non maîtrisé",
-            "Unlimited": "Illimité",
             "Action": {
-                "ActionType": "Type d'Action",
                 "AbilityModifier": "Modificateur de Capacité",
+                "ActionType": "Type d'Action",
                 "AttackRollBonus": "Bonus au Jet d'Attaque",
+                "ChatMessageFlavor": "Message de Chat",
+                "CriticalDamageFormula": "Formule de Dommages Critiques",
+                "CriticalEffect": "Effet Critique",
+                "CriticalHealingFormula": "Formule de Soins Critiques",
                 "DamageFormula": "Formule de Dommages",
                 "HealingFormula": "Formule de Soin",
-                "CriticalEffect": "Effet Critique",
-                "CriticalDamageFormula": "Formule de Dommages Critiques",
-                "CriticalHealingFormula": "Formule de Soins Critiques",
                 "OtherFormula": "Autre Formule",
-                "SavingThrow": "Jet de Sauvegarde",
-                "ChatMessageFlavor": "Message de Chat"
+                "SavingThrow": "Jet de Sauvegarde"
             },
             "Activation": {
-                "ActivationCost": "Coût d'Activation",
                 "ActivationCondition": "Condition d'Activation",
-                "Target": "Cible",
+                "ActivationCost": "Coût d'Activation",
                 "Area": "Zone",
-                "Range": "Portée",
                 "Duration": "Durée",
-                "LimitedUses": "Utilisations Limitées"
+                "LimitedUses": "Utilisations Limitées",
+                "Range": "Portée",
+                "Target": "Cible"
             },
+            "Attuned": "Harmonisé",
             "Augmentation": {
                 "Details": "Détails de l'Augmentation",
-                "Type": "Type",
-                "System": "Système"
+                "System": "Système",
+                "Type": "Type"
             },
             "Capacity": {
                 "Capacity": "Capacité",
-                "CapacityValueTooltip": "Le nombre actuel de charges",
                 "CapacityMaxTooltip": "Le nombre maximum de charges que cet élément peut supporter",
+                "CapacityValueTooltip": "Le nombre actuel de charges",
                 "HeaderTooltip": "Le nombre de rounds, de charges, etc... que peut contenir cet élément (par exemple, le nombre de charges qu'une batterie peut contenir)",
                 "Usage": "Utilisation",
                 "UsageTooltip": "Le nombre de charges, de munitions, etc. qui sont consommées lorsque cet article est utilisé.",
@@ -921,11 +915,11 @@
                 "Armor": "Armures",
                 "ArmorUpgrades": "Améliorations d'Armure",
                 "Augmentations": "Augmentations",
-                "DroneChassis": "Châssis de Drone",
-                "DroneMods": "Modules de Drone",
                 "Classes": "Classes",
                 "Consumables": "Consommables",
                 "Containers": "Conteneurs",
+                "DroneChassis": "Châssis de Drone",
+                "DroneMods": "Modules de Drone",
                 "Equipment": "Equipement",
                 "Feats": "Traits",
                 "Goods": "Marchandises",
@@ -954,52 +948,60 @@
                 "StarshipWeapons": "Armes de Vaisseau",
                 "TechnologicalItems": "Objets Technologiques",
                 "Themes": "Thèmes",
-                "Weapons": "Armes",
+                "VehicleAttacks": "Vehicle Attacks",
+                "WeaponAccessories": "Accessoires d'Armes",
                 "WeaponFusions": "Fusions d'Armes",
-                "VehicleAttacks" : "Vehicle Attacks",
-                "WeaponAccessories": "Accessoires d'Armes"
+                "Weapons": "Armes"
             },
             "Consumable": {
-                "Type": "Type de Consommable",
-                "Usage": "Utilisation de Consommable",
-                "OnUse": "Consommer à l'utilisation",
+                "Action": "Action de Consomable",
                 "DestroyWhenEmpty": "Détruire si vide",
-                "Action": "Action de Consomable"
+                "OnUse": "Consommer à l'utilisation",
+                "Type": "Type de Consommable",
+                "Usage": "Utilisation de Consommable"
             },
             "Description": {
-                "Quantity": "Quantité",
                 "Bulk": "Volume",
-                "Price": "Prix",
+                "Hands": "Mains",
                 "Level": "Niveau",
-                "Hands": "Mains"
+                "Price": "Prix",
+                "Quantity": "Quantité"
             },
             "Equipment": {
+                "Action": "Action de l'Equipement",
                 "Category": "Type d'Armure",
                 "ContainerTooltip": "L'armure peut généralement contenir des améliorations d'armure ou d'autres éléments. Augmentez la capacité de stockage pour permettre l'ajout de contenu.",
                 "EAC": "Classe d'Armure Energétique",
                 "KAC": "Classe d'Armure Cinétique",
-                "SpeedAdjustment": "Modificateur de Vitesse",
                 "PowerArmorDetails": "Détails de l'Armure Assistée",
-                "Action": "Action de l'Equipement"
+                "SpeedAdjustment": "Modificateur de Vitesse"
             },
+            "EquipmentStatus": "Status d'Equipement",
+            "EquipmentUsage": "Utilisation d'Equipement",
+            "Equippable": "Equippable",
+            "Equipped": "Equipé",
             "Feat": {
-                "Requirements": "Prérequis",
-                "FeatureUsage": "Utilisation du Trait",
                 "ActionRecharge": "Recharge de l'Action",
-                "RechargeOn": "Recharge",
                 "Charged": "Chargé",
-                "FeatureAttack": "Attaque du Trait"
+                "FeatureAttack": "Attaque du Trait",
+                "FeatureUsage": "Utilisation du Trait",
+                "RechargeOn": "Recharge",
+                "Requirements": "Prérequis"
             },
             "Hybrid": {
                 "Details": "Détails de l'Elément Hybride"
             },
+            "Identified": "Identifié",
             "Magic": {
                 "Details": "Détails de l'Elément Magique"
             },
+            "MaxDex": "Modificateur de Dextérité Maximum",
+            "NotProficient": "Non maîtrisé",
+            "Proficient": "Maîtrise",
             "Shield": {
-                "Action": "Action de Bouclier",
                 "AcMaxDex": "Bonus de dex max : {maxDex}",
                 "ACP": "MAT: {acp}",
+                "Action": "Action de Bouclier",
                 "Aligned": "Aligné",
                 "ArmorCheck": "Malus d'armure aux tests : {acp}",
                 "Bonus": "Bonus de Bouclier",
@@ -1011,60 +1013,64 @@
                 "Wielded": "Utilisé"
             },
             "ShipWeapon": {
+                "Activated": "Activé",
+                "AttackBonus": "Bonus d'Attaque",
+                "BpCost": "Coût en PC",
                 "ItemType": "Arme de Vaisseau",
-                "Source": "Source",
                 "Mounted": "Monté",
                 "NotMounted": "Non Monté",
-                "Activated": "Activé",
+                "PowerCost": "Coût en Energie",
+                "Range": "Portée",
+                "ReloadCost": "10 minutes",
+                "Source": "Source",
+                "Speed": "Speed: {speed} hexes",
                 "WeaponArc": "Arc d'Arme",
                 "WeaponClass": "Classe d'Arme",
-                "WeaponStatus": "Statut de l'Arme",
-                "PowerCost": "Coût en Energie",
-                "BpCost": "Coût en PC",
-                "Range": "Portée",
-                "ReloadCost"  : "10 minutes",
-                "Speed"       : "Speed: {speed} hexes",
-                "AttackBonus": "Bonus d'Attaque"
+                "WeaponStatus": "Statut de l'Arme"
             },
             "Spell": {
-                "Details": "Détails du Sort",
                 "AllowedClasses": "Classes Permises",
-                "Level": "Niveau de Sort",
-                "School": "Ecole de Magie",
-                "Properties": "Propriétés du Sort",
-                "Resistance": "Résistance à la Magie",
-                "Dismissible": "Révocable",
+                "Casting": "Lancement du Sort",
                 "Concentration": "Concentration",
-                "SpellcastingMaterials": "Composantes Matérielles",
-                "Supply": "Supply",
-                "Cost": "Coût (Cr)",
                 "Consumed": "Consommé",
+                "Cost": "Coût (Cr)",
+                "Details": "Détails du Sort",
+                "Dismissible": "Révocable",
+                "Effects": "Effets du Sort",
+                "Level": "Niveau de Sort",
                 "PreparationMode": "Préparation du Sort",
                 "Prepared": "Préparé",
-                "Casting": "Lancement du Sort",
-                "Effects": "Effets du Sort"
+                "Properties": "Propriétés du Sort",
+                "Resistance": "Résistance à la Magie",
+                "School": "Ecole de Magie",
+                "SpellcastingMaterials": "Composantes Matérielles",
+                "Supply": "Supply"
             },
             "Technological": {
                 "Details": "Détails de l'Elément Technologique"
             },
             "Theme": {
-                "Details": "Détails du Thème",
                 "AbilityAdjustment": "Modificateur de Capacité",
+                "Details": "Détails du Thème",
                 "Skill": "Compétence"
             },
+            "Unlimited": "Illimité",
             "Upgrade": {
-                "ArmorUpgradeDetails": "Détails de l'Amélioration d'Armure",
-                "Slots": "Emplacements",
                 "AllowedArmorType": "Type d'Armure Permis",
-                "Any": "Tous"
+                "Any": "Tous",
+                "ArmorUpgradeDetails": "Détails de l'Amélioration d'Armure",
+                "Slots": "Emplacements"
+            },
+            "VehicleAttack": {
+                "Type": "Vehicle Attack"
             },
             "Weapon": {
-                "Details": "Détails de l'Arme",
-                "Type": "Type d'Arme",
+                "Attack": "Attaque de l'Arme",
                 "Category": "Catégorie d'Arme",
+                "Details": "Détails de l'Arme",
                 "Properties": "Propriétés de l'Arme",
-                "Usage": "Utilisation de l'Arme",
-                "Attack": "Attaque de l'Arme"
+                "Type": "Type d'Arme",
+                "Usage": "Utilisation de l'Arme"
             },
             "WeaponAccessory": {
                 "SupportedType": {
@@ -1075,17 +1081,14 @@
                     "RailedWeapon": "Railed weapon",
                     "SmallArm": "Smallarm"
                 }
-            },
-            "VehicleAttack": {
-                "Type"      : "Vehicle Attack"
             }
         },
         "ItemSheet": {
             "AbilityScoreIncrease": {
                 "Header": "Améliorations de Caractéristique",
-                "Label": "Caractéristiques",
                 "Instruction": "* Cochez 4 capacités à augmenter.",
-                "ItemName": "Amélioration de Caractéristique : Niveau {level}"
+                "ItemName": "Amélioration de Caractéristique : Niveau {level}",
+                "Label": "Caractéristiques"
             },
             "Consumables": {
                 "Category": "Type de Consommable"
@@ -1153,16 +1156,16 @@
             },
             "StarshipComponent": {
                 "Cost": "Coût en Points de Construction",
-                "CostTooltip": "Le nombre de points de construction nécessaires pour obtenir ce composant.",
                 "CostMultipliedBySize": "Coût en PC Multiplié par la Taille",
                 "CostMultipliedBySizeTooltip": "Le coût en PC est-il multiplié par la taille du vaisseau ?",
-                "IsCostMultipliedBySize": "Est multiplié",
+                "CostTooltip": "Le nombre de points de construction nécessaires pour obtenir ce composant.",
                 "Header": "Propriétés Communes des Composants",
+                "IsCostMultipliedBySize": "Est multiplié",
+                "IsPowered": "Est Allimenté",
                 "PCU": "Utilisation d'UE",
                 "PCUTooltip": "La quantité de puissance dont ce composant a besoin pour fonctionner.",
                 "PoweredState": "Etat d'Allumage",
-                "PoweredStateTooltip": "Ce composant du vaisseau est-il alimenté en énergie ?",
-                "IsPowered": "Est Allimenté"
+                "PoweredStateTooltip": "Ce composant du vaisseau est-il alimenté en énergie ?"
             },
             "StarshipComputer": {
                 "Header": "Propriétés de l'Ordinateur",
@@ -1192,10 +1195,10 @@
                 "Details": {
                     "Cost": "Coût en Points de Construction",
                     "CostTooltip": "Le nombre de points de construction requis pour obtenir cette armature.",
-                    "CrewMinimum": "Nombre minimum de membres d'équipage",
-                    "CrewMinimumTooltip": "Le nombre minimum de membres d'équipage requis pour faire fonctionner un vaisseau spatial basé sur cette armature.",
                     "CrewMaximum": "Nombre minimum de membres d'équipage",
                     "CrewMaximumTooltip": "Le nombre maximum de membres d'équipage pouvant occuper un rôle sur un vaisseau spatial basé sur cette armature.",
+                    "CrewMinimum": "Nombre minimum de membres d'équipage",
+                    "CrewMinimumTooltip": "Le nombre minimum de membres d'équipage requis pour faire fonctionner un vaisseau spatial basé sur cette armature.",
                     "DamageThreshold": "Seuil de Dommages",
                     "DamageThresholdTooltip": "Si un vaisseau a un seuil de dommages, toute attaque qui causerait des dommages à ses points de structure inférieurs ou égaux à ce seuil de dommages n'endommagerait pas les points de structure du vaisseau. Si les dommages sont supérieurs au seuil de dommages, le montant total des dommages est attribué aux points de coque du navire.",
                     "ExpansionBays": "Compartiments Annexes",
@@ -1204,9 +1207,9 @@
                     "HeaderOffense": "Attaque",
                     "HeaderSpecs": "Specs",
                     "Hitpoints": "Points de Structure",
-                    "HitpointsTooltip": "Le nombre de points de structure que cette armature a au niveau 1.",
                     "HitpointsIncrement": "Augmentation de Points de Structure",
                     "HitpointsIncrementTooltip": "Le nombre de Points de Structure qu'un vaisseau avec cette armature gagne automatiquement lorsque son niveau passe à 4 (et tous les 4 niveaux par la suite ; voir page 294).",
+                    "HitpointsTooltip": "Le nombre de points de structure que cette armature a au niveau 1.",
                     "Maneuverability": "Manoeuvrabilité",
                     "ManeuverabilityTooltip": "La manoeuvrabilité du vaisseau affecte les capacités de pilotage et de virage.<br/>Déplorable : -2 Pilotage, Tour 4<br/>Médiocre : -1 Pilotage, Tour 3<br/>Moyenne : +0 Pilotage, Tour 2<br/>Bonne : +1 Pilotage, Tour 1<br/>Parfaite : +2 Pilotage, Tour 0",
                     "Size": "Taille",
@@ -1215,8 +1218,8 @@
                     "WeaponArcForward": "Arc de Proue",
                     "WeaponArcPort": "Arc Bâbord",
                     "WeaponArcStarboard": "Arc Tribord",
-                    "WeaponArcTurret": "Tourelles",
                     "WeaponArcTooltip": "La quantité de supports d'armes disponibles pour les arcs de navire, divisée en supports légers, lourds et capitaux.",
+                    "WeaponArcTurret": "Tourelles",
                     "WeaponTypeCapital": "Capitale",
                     "WeaponTypeHeavy": "Lourde",
                     "WeaponTypeLight": "Légère",
@@ -1248,13 +1251,13 @@
                 "DefenseValue": "Valeur de Défense",
                 "DefenseValueTooltip": "La valeur de défense maximale disponible avec ce bouclier déflecteur.",
                 "Header": "Propriétés du Bouclier",
+                "IsDeflector": "Est un Bouclier Déflecteur",
                 "Regeneration": "Régénération par minute",
                 "RegenerationTooltip": "La quantité de points de bouclier régénérés par minute.",
                 "ShieldPoints": "Points de Bouclier",
                 "ShieldPointsTooltip": "Le nombre total de points de bouclier fournis par ce bouclier.",
                 "ShieldType": "Type de Bouclier",
                 "ShieldTypeTooltip": "Ce bouclier est-il un bouclier déflecteur ?",
-                "IsDeflector": "Est un Bouclier Déflecteur",
                 "TargetLockBonus": "Bonus de Verrouillage de Cible",
                 "TargetLockBonusTooltip": "Le bonus appliqué au score de verrouillage de cible du vaisseau."
             },
@@ -1276,12 +1279,12 @@
                 "Placeholder": "e.g. 5",
                 "Unmounted": "Unmounted"
             },
+            "WeaponAccessory": {
+                "SupportedTypes": "Types d'Armes Supportés"
+            },
             "Weapons": {
                 "Category": "Type d'Arme",
                 "ContainerTooltip": "Les armes peuvent généralement contenir des fusions d'armes et des améliorations d'armes. Augmenter la capacité de stockage pour permettre l'ajout de fusions et d'améliorations."
-            },
-            "WeaponAccessory": {
-                "SupportedTypes": "Types d'Armes Supportés"
             }
         },
         "KeyAbility": "Caractérisques clés",
@@ -1328,6 +1331,7 @@
         "LimitedUsePeriodsDay": "Jour",
         "LimitedUsePeriodsLong": "Repos long",
         "LimitedUsePeriodsShort": "Repos court",
+        "LocalizationTerminator": "",
         "Long": "Long",
         "Magic": {
             "Levels": {
@@ -1426,22 +1430,19 @@
             "Features": {
                 "Actions": "Actions",
                 "ActiveItems": "Eléments Actifs",
-                "Drone": "Eléments de Drones",
                 "Attacks": "Attaques",
+                "Drone": "Eléments de Drones",
                 "Features": "Spécificités"
             },
             "Header": {
+                "AlignmentPlaceHolderText": "NB",
+                "AuraPlaceHolderText": "Aura",
                 "NamePlaceHolderText": "Nom du Personnage",
                 "RaceAndGraftsPlaceHolderText": "Genre, Race, et Classe/Greffes",
                 "SourcePlaceHolderText": "Source",
-                "AlignmentPlaceHolderText": "NB",
-                "TypePlaceHolderText": "Type (sous-type)",
-                "AuraPlaceHolderText": "Aura"
+                "TypePlaceHolderText": "Type (sous-type)"
             },
             "Interface": {
-                "Navigation": {
-                    "Conditions": "Conditions"
-                },
                 "Conditions": {
                     "Warning": "* Les PNJ ne prennent pas encore en charge les calculs automatiques des modificateurs !"
                 },
@@ -1450,6 +1451,9 @@
                     "Name": "Nouvel élément",
                     "Note": "Sélectionnez le type d'élément que vous souhaitez créer.",
                     "Title": "Créer un nouvel élément"
+                },
+                "Navigation": {
+                    "Conditions": "Conditions"
                 }
             },
             "Inventory": {
@@ -1493,8 +1497,8 @@
             "AttackRollFull": "Jet d'Attaque - {name}",
             "Character": {
                 "Charge": "Charger",
-                "Flanking": "Prise en tenaille",
                 "FightDefensively": "Combattre sur la défensive",
+                "Flanking": "Prise en tenaille",
                 "FullAttack": "Attaquer à outrance",
                 "HarryingFire": "Bonus de tir de diversion",
                 "HarryingFireTooltip": "Activez ce bonus lorsque vous attaquez une cible affectée par un tir de diversion.",
@@ -1507,8 +1511,8 @@
                 "AvailableModifiersTooltip": "Liste des modificateurs disponibles pour ce jet.",
                 "Formula": "Formule",
                 "FormulaTooltip": "La formule utilisée pour calculer le jet.",
-                "ModifierName": "Nom",
                 "ModifierEffect": "Effet",
+                "ModifierName": "Nom",
                 "RollMode": "Mode du Jet",
                 "RollModeTooltip": "Le Mode de Jet détermine qui peut voir ce jet.",
                 "Selector": "Sélectionner '{name}'",
@@ -1524,22 +1528,22 @@
                 "Disadvantage": "Désavantage",
                 "DisadvantageTooltip": "Lancer avec désavantage.",
                 "Normal": "Normal",
-                "NormalTooltip": "Jet normal.",
                 "NormalDamage": "Normal",
                 "NormalDamageTooltip": "Dommages normaux.",
+                "NormalTooltip": "Jet normal.",
                 "Roll": "Lancer"
             },
             "HealingRoll": "Jet de Soin",
             "HealingRollFull": "Jet de Soin - {name}",
             "InitiativeRollFull": "Jet d'initiative - {name}",
             "Starship": {
-                "ComputerBonus": "Bonus d'ordinateur",
+                "Broadside": "Bordée",
                 "CaptainDemand": "Instruction du Capitaine",
                 "CaptainEncouragement": "Encouragement du Capitaine",
-                "ScienceOfficerLockOn": "Verrouillage de l'Officier scientifique",
-                "SnapShot": "Tir à la volée",
+                "ComputerBonus": "Bonus d'ordinateur",
                 "FireAtWill": "Feu à volonté",
-                "Broadside": "Bordée"
+                "ScienceOfficerLockOn": "Verrouillage de l'Officier scientifique",
+                "SnapShot": "Tir à la volée"
             },
             "StarshipAction": "Actions de vaisseau : {action}",
             "StarshipActions": {
@@ -1551,20 +1555,20 @@
                     "Role": "{role} du vaisseau : '{name}'"
                 },
                 "Choice": {
-                    "Title": "{name} - Sélectionnez le jet souhaité",
+                    "AvailableRolls": "Jets disponibles",
                     "Message": "L'action de vaisseau '{nom}' offre plusieurs jets au choix. Veuillez en choisir un.",
-                    "AvailableRolls": "Jets disponibles"
+                    "Title": "{name} - Sélectionnez le jet souhaité"
                 },
-                "NoFormulaError": "Pas de formule présente dans les données pour l'action du vaisseau '{name}'.",
                 "NoActorError": "Aucun membre d'équipage disponible pour ce rôle.",
+                "NoFormulaError": "Pas de formule présente dans les données pour l'action du vaisseau '{name}'.",
                 "Quadrant": {
-                    "Title": "{name} - Sélectionner le quadrant d'arme utilisé",
-                    "Message": "Les actions d'artillerie nécessitent la sélection d'un quadrant. Les tourelles peuvent choisir à volonté. Veuillez en sélectionner un.",
-                    "Quadrant": "Quadrant",
+                    "Aft": "Poupe",
                     "Forward": "Proue",
+                    "Message": "Les actions d'artillerie nécessitent la sélection d'un quadrant. Les tourelles peuvent choisir à volonté. Veuillez en sélectionner un.",
                     "Port": "Bâbord",
+                    "Quadrant": "Quadrant",
                     "Starboard": "Tribord",
-                    "Aft": "Poupe"
+                    "Title": "{name} - Sélectionner le quadrant d'arme utilisé"
                 }
             }
         },
@@ -1634,9 +1638,9 @@
                 "Hint": "État d'affichage pour l'effet critique des actions des vaisseaux spatiaux.",
                 "Name": "Effets Critiques des Actions de Vaisseaux Spatiaux",
                 "Values": {
-                    "Never": "Ne jamais afficher d'effets critiques.",
+                    "Always": "Toujours afficher les effets critiques.",
                     "CritOnly": "N'affichez les effets critiques que sur un jet critique.",
-                    "Always": "Toujours afficher les effets critiques."
+                    "Never": "Ne jamais afficher d'effets critiques."
                 }
             },
             "StarshipActionsSource": {
@@ -1674,6 +1678,7 @@
                 "Cargo": "Soute",
                 "Escape": "Capsules de sauvetage",
                 "Guest": "Quartiers passagers",
+                "Hac": "Salle de détente (SLH)",
                 "Hangar": "Hangar",
                 "Life": "Nacelles de sauvetage",
                 "Med": "Infirmerie",
@@ -1681,7 +1686,6 @@
                 "Pwrhouse": "Salle de réacteur",
                 "Recg": "Salle de détente (salle de sport)",
                 "Rect": "Salle de détente (salle trividéo)",
-                "Hac": "Salle de détente (SLH)",
                 "Science": "Laboratoire scientifique",
                 "Senv": "Salle environnementale isolée",
                 "Shuttle": "Aire de lancement",
@@ -1690,11 +1694,11 @@
                 "Tech": "Atelier"
             },
             "Maneuverability": {
-                "Clumsy": "Déplorable",
-                "Poor": "Médiocre",
                 "Average": "Moyenne",
+                "Clumsy": "Déplorable",
                 "Good": "Bonne",
-                "Perfect": "Parfaite"
+                "Perfect": "Parfaite",
+                "Poor": "Médiocre"
             },
             "SecuritySystems": {
                 "Antihack": "Systèmes anti-piratage",
@@ -1707,25 +1711,25 @@
                 "Supercolossal": "Supercolossal"
             },
             "StarshipArcs": {
-                "Forward": "Proue",
-                "Starboard": "Tribord",
                 "Aft": "Poupe",
+                "Forward": "Proue",
                 "Port": "Bâbord",
+                "Starboard": "Tribord",
                 "Turret": "Tourelles"
             },
             "StarshipRoles": {
-                "Pilot": "Pilote",
                 "Captain": "Capitaine",
                 "Engineers": "Ingénieur",
                 "Gunners": "Cannoniers",
-                "ScienceOfficers": "Officiers scientifiques",
-                "Passengers": "Passagers"
+                "Passengers": "Passagers",
+                "Pilot": "Pilote",
+                "ScienceOfficers": "Officiers scientifiques"
             },
             "StarshipWeaponClass": {
-                "Light": "Légère",
-                "Heavy": "Lourde",
                 "Capital": "Capitale",
-                "Spinal":  "Spinal"
+                "Heavy": "Lourde",
+                "Light": "Légère",
+                "Spinal": "Spinal"
             },
             "StarshipWeaponProperties": {
                 "Anchoring": "Anchoring",
@@ -1747,9 +1751,9 @@
                 "Hacking": "Hacking",
                 "Immobilize": "Immobilize",
                 "Intimidating": "Intimidating",
+                "IrradiateH": "Irradiante (forte)",
                 "IrradiateL": "Irradiante (faible)",
                 "IrradiateM": "Irradiante (moyenne)",
-                "IrradiateH": "Irradiante (forte)",
                 "Jamming": "Jamming",
                 "Limited": "Cadence limitée",
                 "Line": "Ligne",
@@ -1781,15 +1785,15 @@
                 "Vortex": "Vortex"
             },
             "StarshipWeaponRanges": {
-                "None": "None",
-                "Short": "Courte",
+                "Long": "Longue",
                 "Medium": "Moyenne",
-                "Long": "Longue"
+                "None": "None",
+                "Short": "Courte"
             },
             "StarshipWeaponTypes": {
                 "Direct": "Tir direct",
-                "ECM":      "ECM Module",
-                "Melee":    "Melee Weapon",
+                "ECM": "ECM Module",
+                "Melee": "Melee Weapon",
                 "Tracking": "Autonome"
             }
         },
@@ -1856,7 +1860,6 @@
         "SpellAreaShapesShapable": "Forme",
         "SpellAreaShapesSphere": "Sphère",
         "SpellBook": {
-            "Spellbook": "Livre de sorts",
             "Add": "Ajouter",
             "AddSpells": "Ajouter un Sort",
             "AttributesNone": "Aucun",
@@ -1866,6 +1869,7 @@
             "EditItem": "Editer un élément",
             "NoSpells": "Aucun sort trouvé pour ce set de filtres.",
             "SearchSpell": "Rechercher un Sort",
+            "Spellbook": "Livre de sorts",
             "SpellCastingAbility": "Abilité de lanceur de sort",
             "SpellSchool": "Ecole de magie",
             "SpellUsage": "Utilisation du Sort",
@@ -1884,8 +1888,8 @@
                     "ResolvePoints": "Points de persévérence"
                 },
                 "Tooltips": {
-                    "NormalEffect": "Normal effect",
                     "CriticalEffect": "Critical Effect",
+                    "NormalEffect": "Normal effect",
                     "Push": "Push",
                     "PushTooltip": "Push actions (indicated in an action’s heading) are difficult to perform but can yield greater results. You can’t perform a push action if the necessary system is malfunctioning or wrecked (as noted in Critical Damage Conditions on page 321)."
                 }
@@ -1894,14 +1898,34 @@
                 "BuildPoints": "Points de Construction",
                 "BuildPointsUsage": "Utilisation",
                 "Complement": "Complémentment",
-                "ComplementMin": "L'équipage minimum nécessaire pour faire fonctionner le vaisseau.",
                 "ComplementMax": "Nombre maximum de membres d'équipage pouvant être affectés à un rôle sur le vaisseau (et non le nombre maximum de créatures pouvant être à bord).",
+                "ComplementMin": "L'équipage minimum nécessaire pour faire fonctionner le vaisseau.",
                 "Computer": "Ordinateur",
                 "DriftNotAvailable": "Indisponible",
                 "DriftRating": "Coefficient de Drift",
                 "Power": "Réacteur",
                 "PowerConsumption": "Consommation",
                 "PowerMissing": "Réacteur Manquant"
+            },
+            "Crew": {
+                "ActionsPerRound": "Actions par tour",
+                "AddSkill": "Ajouter compétence",
+                "AssignedCount": "({current} / {max})",
+                "Captain": "Capitaine",
+                "ChiefMates": "Chief Mates",
+                "CrewLimitReached": "Vous avez atteint le nombre maximum de membres d'équipage autorisé pour le rôle de '{targetRole}'.",
+                "CrewSetting": "Disposition de l'équipage",
+                "Engineers": "Ingénieurs",
+                "Gunners": "Cannoniers",
+                "Header": "Equipage du Vaisseau Spatial",
+                "IsNPCCrew": "Le PNJ est -il membre d'équipage ?",
+                "MagicOfficers": "Officiers magiques",
+                "Passengers": "Passagers",
+                "Pilot": "Pilote",
+                "ScienceOfficers": "Officiers scientifiques",
+                "SkillModifier": "Modificateur",
+                "SkillRanks": "Rang",
+                "UnlimitedMax": "Pas de limite"
             },
             "Critical": {
                 "Edit": "Editer les rôles affectés",
@@ -1925,35 +1949,15 @@
                     "WeaponsArrayStarboard": "Armes (Tribord)"
                 }
             },
-            "Crew": {
-                "ActionsPerRound": "Actions par tour",
-                "AddSkill": "Ajouter compétence",
-                "AssignedCount": "({current} / {max})",
-                "Captain": "Capitaine",
-                "ChiefMates": "Chief Mates",
-                "CrewLimitReached": "Vous avez atteint le nombre maximum de membres d'équipage autorisé pour le rôle de '{targetRole}'.",
-                "CrewSetting": "Disposition de l'équipage",
-                "Engineers": "Ingénieurs",
-                "Gunners": "Cannoniers",
-                "Header": "Equipage du Vaisseau Spatial",
-                "IsNPCCrew": "Le PNJ est -il membre d'équipage ?",
-                "MagicOfficers": "Officiers magiques",
-                "Passengers": "Passagers",
-                "Pilot": "Pilote",
-                "ScienceOfficers": "Officiers scientifiques",
-                "SkillModifier": "Modificateur",
-                "SkillRanks": "Rang",
-                "UnlimitedMax": "Pas de limite"
-            },
             "Damage": {
                 "CrossedCriticalThreshold": "{name} croise {crossedThresholds} dommages critiques !",
                 "Message": "Les dommages à un vaisseau spatial proviennent toujours d'une direction spécifique, veuillez sélectionner le quadrant auquel les dommages entrants doivent être appliqués.",
                 "Quadrant": {
-                    "Quadrant": "Quadrant",
+                    "Aft": "Poupe",
                     "Forward": "Proue",
                     "Port": "Bâbord",
-                    "Starboard": "Tribord",
-                    "Aft": "Poupe"
+                    "Quadrant": "Quadrant",
+                    "Starboard": "Tribord"
                 },
                 "Title": "{name} - Sélectionner le quadrant endommagé."
             },
@@ -1969,6 +1973,7 @@
                 "AblativeExceedsHullTooltip": "Un vaisseau ne peut pas supporter de blindage ablatif si ses points de coque temporaires dépassent le double de son total de points de coque standard. (Pour plus d'informations, voir le Starship Operations Manual, p. 20)",
                 "AblativeTooHigh": "Trop d'ablatif assigné !",
                 "AblativeTooHighTooltip": "Soit le total d'ablatifs installés est trop élevé, soit la somme totale des scores ablatifs actuels est trop élevée.",
+                "ShieldHighestTooHigh": "Un ou plusieurs quadrants dépassent les limites !",
                 "Shields": {
                     "Aft": "Boucliers de poupe",
                     "Conventional": "Boucliers",
@@ -1978,7 +1983,6 @@
                     "Port": "Boucliers bâbord",
                     "Starboard": "Boucliers tribord"
                 },
-                "ShieldHighestTooHigh": "Un ou plusieurs quadrants dépassent les limites !",
                 "ShieldTooHigh": "Le bouclier est trop élevé !",
                 "ShieldTotalTooHigh": "Le total du bouclier dépasse le maximum !",
                 "ShieldTotalTooHighTooltip": "La somme totale des boucliers dépasse la puissance maximale du bouclier."
@@ -1988,9 +1992,6 @@
                 "Frame": "Armature ({current} / 1)",
                 "OtherSystems": "Autres Systèmes",
                 "PowerCores": "Réacteurs",
-                "PrimarySystems": "Systèmes Primaires",
-                "SecuritySystems": "Systèmes de Sécurité",
-                "Thrusters": "Thrusters",
                 "Prefixes": {
                     "StarshipAblativeArmors": "Blindage Ablatif",
                     "StarshipArmors": "Blindage",
@@ -2009,14 +2010,17 @@
                     "StarshipShields": "Bouclier",
                     "StarshipThrusters": "Propulseur",
                     "StarshipWeapons": "Arme"
-                }
+                },
+                "PrimarySystems": "Systèmes Primaires",
+                "SecuritySystems": "Systèmes de Sécurité",
+                "Thrusters": "Thrusters"
             },
             "Header": {
                 "BP": "PC",
-                "CT": "SC",
                 "CriticalThreshold": "Seuil Critique",
-                "DT": "SD",
+                "CT": "SC",
                 "DamageThreshold": "Seuil de Dommages",
+                "DT": "SD",
                 "FrameMissing": "Armature manquante",
                 "HullPointIncrementTooltip": "C'est le nombre de points de coque qui sont ajoutés lorsque le navire atteint le niveau 4 (et tous les 4 niveaux par la suite)",
                 "Max": "Max",
@@ -2060,15 +2064,15 @@
             },
             "Role": {
                 "Captain": "Capitaine",
-                "Pilot": "Pilote",
-                "Gunner": "Cannonier",
-                "Engineer": "Ingénieur",
-                "ScienceOfficer": "Officier scientifique",
                 "ChiefMate": "Chief Mate",
+                "Engineer": "Ingénieur",
+                "Gunner": "Cannonier",
                 "MagicOfficer": "Officier magique",
-                "Passenger": "Passager",
                 "MinorCrew": "Equipage restreint",
-                "OpenCrew": "Open Crew"
+                "OpenCrew": "Open Crew",
+                "Passenger": "Passager",
+                "Pilot": "Pilote",
+                "ScienceOfficer": "Officier scientifique"
             },
             "Sides": {
                 "Aft": "Poupe",
@@ -2087,11 +2091,11 @@
                 "ForwardArc": "Arc de poupe ({slots})",
                 "HeavySlots": "Lourde : {current} / {max}",
                 "LightSlots": "Légère : {current} / {max}",
-                "SpinalSlots": "Spinal: {current} / {max}",
                 "NoCapacity": "This weapon does not have any charges left to attack.",
                 "NotAvailable": "Indisponible",
                 "NotMounted": "Armes non montées",
                 "PortArc": "Arc bâbord ({slots})",
+                "SpinalSlots": "Spinal: {current} / {max}",
                 "StarboardArc": "Arc tribord ({slots})",
                 "Turret": "Tourelles ({slots})"
             }
@@ -2105,35 +2109,35 @@
         "Touch": "Toucher",
         "TraitArmorProf": "M. des armures",
         "TraitWeaponProf": "M. des armes",
+        "Units": {
+            "Speed": "m."
+        },
         "Unlimited": "Illimité",
         "UPBs": "PBU",
-        "Vehicles": {
-            "VehicleCoverTypes": {
-                "None": "Aucune",
-                "Cover": "Couvert",
-                "Soft": "Couverture faible",
-                "Partial": "Couverture partielle",
-                "Total": "Couverture totale"
-            },
-            "VehicleTypes": {
-                "Land": "Sol",
-                "Water": "Nage",
-                "Hover": "Aéroglisseur",
-                "Landw": "Sol et nage",
-                "Air": "Vol",
-                "Landa": "Sol et vol"
-            }
-        },
         "VehicleAttackSheet": {
             "Header": {
                 "Save": "Save DC",
                 "SaveTooltip": "<strong>Save DC</strong><br/>This is the saving throw modifier for this attack."
             }
         },
-        "VehicleSheet": {
-            "Errors": {
-                "NoDamage": "you may not make a Damage Roll with this item"
+        "Vehicles": {
+            "VehicleCoverTypes": {
+                "Cover": "Couvert",
+                "None": "Aucune",
+                "Partial": "Couverture partielle",
+                "Soft": "Couverture faible",
+                "Total": "Couverture totale"
             },
+            "VehicleTypes": {
+                "Air": "Vol",
+                "Hover": "Aéroglisseur",
+                "Land": "Sol",
+                "Landa": "Sol et vol",
+                "Landw": "Sol et nage",
+                "Water": "Nage"
+            }
+        },
+        "VehicleSheet": {
             "Attacks": {
                 "Attacks": "Attacks",
                 "Title": "Attaques",
@@ -2176,6 +2180,9 @@
                 },
                 "Threshold": "Seuil"
             },
+            "Errors": {
+                "NoDamage": "you may not make a Damage Roll with this item"
+            },
             "Header": {
                 "Level": "Niveau",
                 "LevelPlaceholder": "1",
@@ -2205,8 +2212,8 @@
             }
         },
         "WeaponCategoriesCryo": "Armes cryogénique",
-        "WeaponCategoriesDisruption": "Armes à perturbation",
         "WeaponCategoriesDisintegrator": "Armes à désintégration",
+        "WeaponCategoriesDisruption": "Armes à perturbation",
         "WeaponCategoriesFlame": "Armes incendiaires",
         "WeaponCategoriesLaser": "Armes laser",
         "WeaponCategoriesPlasma": "Armes plasma",
@@ -2300,8 +2307,8 @@
         "WeaponPropertiesRelic": "Relique",
         "WeaponPropertiesReposition": "Reposition",
         "WeaponPropertiesShape": "Façonner",
-        "WeaponPropertiesShells": "Coquilles",
         "WeaponPropertiesShatter": "Shatter",
+        "WeaponPropertiesShells": "Coquilles",
         "WeaponPropertiesShield": "Bouclier",
         "WeaponPropertiesSniper": "Précision",
         "WeaponPropertiesStun": "Etourdissant",
@@ -2320,7 +2327,6 @@
         "WeaponPropertiesUnwieldy": "Peu maniable",
         "WeaponPropertiesVariantBoost": "Amplif. variante",
         "WeaponPropertiesWideLine": "Ligne large",
-        "WeaponsPropertiesConceal": "Cacher",
         "WeaponSpecial": {
             "Analog": "Analogique",
             "Archaic": "Archaïque",
@@ -2346,6 +2352,7 @@
             "Trip": "Croc-en-jambe",
             "Unwieldy": "Peu maniable"
         },
+        "WeaponsPropertiesConceal": "Cacher",
         "WeaponTypesAdvMelee": "Armes ev. de CàC",
         "WeaponTypesBasicMelee": "Armes simp. de CàC",
         "WeaponTypesGrenades": "Grenades",
@@ -2355,14 +2362,6 @@
         "WeaponTypesSniper": "Armes de précision",
         "WeaponTypesSolarian": "Cristaux de combat Solariens",
         "WeaponTypesSpecial": "Armes spéciales",
-        "WillSave": "Volonté",
-        "Units": {
-            "Speed": "m."
-        },
-        "Classes": {
-            "IsCasterClass": "S'agit-il d'une classe de lanceur de sorts ?"
-        },
-
-        "LocalizationTerminator": ""
+        "WillSave": "Volonté"
     }
 }
