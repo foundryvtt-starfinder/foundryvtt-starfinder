@@ -10,7 +10,8 @@
     <span style="flex: 0 0 5px;"></span>
     <section class="sheet-body">
         <div class="tab biography flexrow">
-            {{> "systems/sfrpg/templates/actors/parts/actor-biography.html" limited=true hideVitals=(not (eq actor.type "character"))}}
+{{!-- This must be de-indented so it doesn't break text area for Other Visuals. --}}
+{{> "systems/sfrpg/templates/actors/parts/actor-biography.html" limited=true hideVitals=(not (eq actor.type "character"))}}
         </div>
     </section>
 </form>
