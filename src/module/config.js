@@ -349,6 +349,7 @@ SFRPG.weaponProperties = {
     "relic": "SFRPG.WeaponPropertiesRelic",
     "reposition": "SFRPG.WeaponPropertiesReposition",
     "shape": "SFRPG.WeaponPropertiesShape",
+    "shatter": "SFRPG.WeaponPropertiesShatter",
     "shells": "SFRPG.WeaponPropertiesShells",
     "shield": "SFRPG.WeaponPropertiesShield",
     "sniper": "SFRPG.WeaponPropertiesSniper",
