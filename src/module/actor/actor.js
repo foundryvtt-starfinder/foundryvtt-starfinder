@@ -606,7 +606,7 @@ export class ActorSFRPG extends Actor {
      *
      * @param {Object} options Options which configure how saves are rolled
      */
-    async rollVehiclePilotingSkill(role = null, actorId = null, options = {}) {
+    async rollVehiclePilotingSkill(role = null, actorId = null, system = null, options = {}) {
 
         let parts = [];
         let data = this.getRollData();
@@ -618,7 +618,13 @@ export class ActorSFRPG extends Actor {
         // Add piloting modifier of vehicle
         parts.push(`@attributes.modifiers.piloting`);
 
-        if(!role || !actorId) {
+        // Roll a piloting check with a specific system (usually Autopilot).
+        // Only takes vehicle and system piloting into account
+        if (system) {
+            rollContext.addContext("system", system, system.data.data);
+            parts.push(`@system.piloting.piloting`);
+        }
+        else if(!role || !actorId) {
             // Add pilot's piloting modifier
             parts.push(`@pilot.skills.pil.mod`);
         }

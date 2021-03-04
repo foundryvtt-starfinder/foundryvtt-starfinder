@@ -217,9 +217,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item-detail .featActivate').click(event => this._onActivateFeat(event));
         html.find('.item-detail .featDeactivate').click(event => this._onDeactivateFeat(event));
 
-        html.find('.item-detail .vehicleSystemActivate').click(event => this._onActivateVehicleSystem(event));
-        html.find('.item-detail .vehicleSystemDeactivate').click(event => this._onDeactivateVehicleSystem(event));
-
         // Item Recharging
         html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
 
@@ -463,72 +460,6 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         await item.update(updateData);
 
-        // Render the chat card template
-        const templateData = {
-            actor: this.actor,
-            item: item,
-            tokenId: this.actor.token?.id,
-            action: "SFRPG.ChatCard.ItemActivation.Activates",
-            labels: item.labels,
-            hasAttack: item.hasAttack,
-            hasDamage: item.hasDamage,
-            isVersatile: item.isVersatile,
-            hasSave: item.hasSave
-        };
-
-        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
-        const html = await renderTemplate(template, templateData);
-
-        // Create the chat message
-        const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: html
-        };
-
-        await ChatMessage.create(chatData, { displaySheet: false });
-    }
-
-    async _onDeactivateVehicleSystem(event) {
-        event.preventDefault();
-        const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
-
-        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : false;
-        await item.update({'data.isActive': desiredOutput});
-
-        // Render the chat card template
-        const templateData = {
-            actor: this.actor,
-            item: item,
-            tokenId: this.actor.token?.id,
-            action: "SFRPG.ChatCard.ItemActivation.Deactivates"
-        };
-
-        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
-        const html = await renderTemplate(template, templateData);
-
-        // Create the chat message
-        const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: html
-        };
-
-        await ChatMessage.create(chatData, { displaySheet: false });
-    }
-
-    async _onActivateVehicleSystem(event) {
-        event.preventDefault();
-        const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
-        const updateData = {};
-
-        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : true;
-        updateData['data.isActive'] = desiredOutput;
-
-        await item.update(updateData);
-        
         // Render the chat card template
         const templateData = {
             actor: this.actor,

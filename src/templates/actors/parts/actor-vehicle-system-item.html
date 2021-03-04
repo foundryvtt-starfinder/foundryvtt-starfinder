@@ -1,5 +1,5 @@
-<li class="vehicle-system flexrow" data-item-id="{{item._id}}">
-    <div class="vehicle-system-name flexrow rollable">
+<li class="item flexrow" data-item-id="{{item._id}}">
+    <div class="item-name flexrow rollable">
         <div class="item-image" style="background-image: url({{item.img}})"></div>
         <h4>
             {{#if prefixTable}}
@@ -18,9 +18,9 @@
     <div class="item-detail item-action">
         {{#if (and item.isVehicleSystem item.data.canBeActivated)}}
             {{#if item.data.isActive}}
-            <button class="tag vehicleSystemDeactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
+            <button class="tag vehicle-system-deactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
             {{else}}
-            <button class="tag vehicleSystemActivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Activate"}}</button>
+            <button class="tag vehicle-system-activate">{{localize "SFRPG.ActorSheet.Inventory.Item.Activate"}}</button>
             {{/if}}
         {{/if}}
     </div>

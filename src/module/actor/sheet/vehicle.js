@@ -148,6 +148,11 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             li.addEventListener("dragleave", this._onCrewDragLeave, false);
         });
 
+        // Systems Tan
+        html.find('.vehicle-system-action .roll-piloting').click(event => this._onRollPilotingForSystem(event));
+        html.find('.item-detail .vehicle-system-activate').click(event => this._onActivateVehicleSystem(event));
+        html.find('.item-detail .vehicle-system-deactivate').click(event => this._onDeactivateVehicleSystem(event));
+
         // Hangar Tab
         html.find('.vehicle-delete').click(this._onRemoveFromHangarBar.bind(this));
 
@@ -422,5 +427,97 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         this.actor.rollVehiclePilotingSkill();
     }
+
+    /**
+     * Performs a Piloting check for a system (generally Autopilot)
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onRollPilotingForSystem(event) {
+
+        event.preventDefault();
+
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const system = this.actor.getOwnedItem(itemId);
+
+        this.actor.rollVehiclePilotingSkill(null, null, system);
+    }
+
+    /**
+     * Deactivates a vehicle system.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onDeactivateVehicleSystem(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : false;
+        await item.update({'data.isActive': desiredOutput});
+
+        // Render the chat card template
+        const templateData = {
+            actor: this.actor,
+            item: item,
+            tokenId: this.actor.token?.id,
+            action: "SFRPG.ChatCard.ItemActivation.Deactivates"
+        };
+
+        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+        const html = await renderTemplate(template, templateData);
+
+        // Create the chat message
+        const chatData = {
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: html
+        };
+
+        await ChatMessage.create(chatData, { displaySheet: false });
+    }
+
+    /**
+     * Activates a vehicle system.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onActivateVehicleSystem(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+        const updateData = {};
+
+        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : true;
+        updateData['data.isActive'] = desiredOutput;
+
+        await item.update(updateData);
+
+        // Render the chat card template
+        const templateData = {
+            actor: this.actor,
+            item: item,
+            tokenId: this.actor.token?.id,
+            action: "SFRPG.ChatCard.ItemActivation.Activates",
+            labels: item.labels,
+            hasAttack: item.hasAttack,
+            hasDamage: item.hasDamage,
+            isVersatile: item.isVersatile,
+            hasSave: item.hasSave
+        };
+
+        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+        const html = await renderTemplate(template, templateData);
+
+        // Create the chat message
+        const chatData = {
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: html
+        };
+
+        await ChatMessage.create(chatData, { displaySheet: false });
+    }
+
 
 }
