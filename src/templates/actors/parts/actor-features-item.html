@@ -49,12 +49,6 @@
                     {{else}}
                     <button class="tag featActivate">{{item.labels.activation}}</button>
                     {{/if}}
-                {{else if (and item.isVehicleSystem item.data.canBeActivated)}}
-                    {{#if item.data.isActive}}
-                    <button class="tag vehicleSystemDeactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
-                    {{else}}
-                    <button class="tag vehicleSystemActivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Activate"}}</button>
-                    {{/if}}
                 {{/if}}
                 {{#if item.hasCapacity}}
                     {{item.data.usage.value}} / {{item.data.usage.per}}
