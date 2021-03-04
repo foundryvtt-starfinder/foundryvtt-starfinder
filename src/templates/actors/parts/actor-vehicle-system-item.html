@@ -1,0 +1,35 @@
+<li class="vehicle-system flexrow" data-item-id="{{item._id}}">
+    <div class="vehicle-system-name flexrow rollable">
+        <div class="item-image" style="background-image: url({{item.img}})"></div>
+        <h4>
+            {{#if prefixTable}}
+            {{ lookup prefixTable item.type }}:
+            {{/if}}
+            {{item.name}}
+        </h4>
+        {{#if (and item.data.piloting.usedAsPilot item.data.isActive)}}
+        <div class="vehicle-system-action flexcol">
+            <button class="tag roll-piloting">{{localize "SFRPG.VehicleSheet.Systems.RollPiloting"}}</button>
+        </div>
+        {{/if}}
+    </div>
+
+    {{#if section.hasActions}}
+    <div class="item-detail item-action">
+        {{#if (and item.isVehicleSystem item.data.canBeActivated)}}
+            {{#if item.data.isActive}}
+            <button class="tag vehicleSystemDeactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
+            {{else}}
+            <button class="tag vehicleSystemActivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Activate"}}</button>
+            {{/if}}
+        {{/if}}
+    </div>
+    {{/if}}
+
+    {{#if owner}}
+    <div class="item-controls">
+        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+    </div>
+    {{/if}}
+</li>
