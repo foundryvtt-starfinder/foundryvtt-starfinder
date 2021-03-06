@@ -130,7 +130,7 @@ export class ItemSFRPG extends Item {
         
         let dcFormula = save.dc.toString();
         if (!dcFormula) {
-            const ownerKeyAbilityId = this.actor.data.data.attributes.keyability;
+            const ownerKeyAbilityId = this.actor?.data.data.attributes.keyability;
             const itemKeyAbilityId = this.data.data.ability;
             const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
             if (abilityKey) {
