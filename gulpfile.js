@@ -299,7 +299,7 @@ async function cookPacks() {
     console.log(`\nStarting formatting check.`);
     formattingCheck(allItems)
 
-	console.log(`\nStarting consistency check.`);
+    console.log(`\nStarting consistency check.`);
     consistencyCheck(allItems, compendiumMap)
 
     console.log(`\nUpdating items with updated IDs.\n`);
@@ -313,197 +313,191 @@ async function cookPacks() {
 
 function formattingCheck(allItems) {
 
-	for (let item of allItems) {
-		let data = item.data;
-		let pack = item.pack;
+    for (let item of allItems) {
+        let data = item.data;
+        let pack = item.pack;
 
-		if(!data || !data.data  || !data.type) {
-			return; // Malformed data - outside the scope of the formatting check
-		}
-
-		// We only check formatting of aliens & equipment for now
-		if (data.type === "npc") {
-			formattingCheckAlien(data,pack, item.file)
-		}
-		else if (data.type === "equipment") {
-			formattingCheckEquipment(data, pack, item.file)
-		}
-
-	}
+        if(!data || !data.data  || !data.type) {
+            return; // Malformed data - outside the scope of the formatting check
+        }
+        // We only check formatting of aliens & equipment for now
+        if (data.type === "npc") {
+            formattingCheckAlien(data,pack, item.file)
+        }
+        else if (data.type === "equipment") {
+            formattingCheckEquipment(data, pack, item.file)
+        }
+    }
 }
 
 function formattingCheckAlien(data, pack, file) {
 
-	// Validate name
-	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
-	}
+    // Validate name
+    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+    }
+    // Validate attributes
+    // Validate HP & Stamina Points
+    if (!data.data.attributes || !data.data.attributes.hp || !data.data.attributes.sp) {
+        addWarningForPack(`${file}: Missing HP/SP values.`, pack);
+        return;
+    }
+    // Validate HP values
+    else if(data.data.attributes.hp.value != data.data.attributes.hp.max) {
+        addWarningForPack(`${file}: HP value not entered correctly.`, pack);
+    }
+    // Validate SP values
+    if(data.data.attributes.sp.value != data.data.attributes.sp.max) {
+        addWarningForPack(`${file}: SP value not entered correctly.`, pack);
+    }
 
-	// Validate attributes
-	// Validate HP & Stamina Points
-	if (!data.data.attributes || !data.data.attributes.hp || !data.data.attributes.sp) {
-		addWarningForPack(`${file}: Missing HP/SP values.`, pack);
-		return;
-	}
-	// Validate HP values
-	else if(data.data.attributes.hp.value != data.data.attributes.hp.max) {
-		addWarningForPack(`${file}: HP value not entered correctly.`, pack);
-	}
-	// Validate SP values
-	if(data.data.attributes.sp.value != data.data.attributes.sp.max) {
-		addWarningForPack(`${file}: SP value not entered correctly.`, pack);
-	}
+    // Validate image
+    if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+        addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+    }
 
-	// Validate image
-	if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
-	}
+    // Validate token image
+    if (data.token.img && !data.token.img.startsWith("systems") && !data.token.img.startsWith("icons")) {
+    addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+    }
 
-	// Validate token image
-	if (data.token.img && !data.token.img.startsWith("systems") && !data.token.img.startsWith("icons")) {
-		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
-	}
-
-	// Validate source
-	let source = data.data.details.source;
-	if (!source) {
-		addWarningForPack(`${file}: Missing source field.`, pack);
-		return;
-	}
-	if (!isSourceValid(source)) {
-		addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
-	}
-
+    // Validate source
+    let source = data.data.details.source;
+    if (!source) {
+        addWarningForPack(`${file}: Missing source field.`, pack);
+       return;
+    }
+    if (!isSourceValid(source)) {
+       addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+    }
 }
 
 function formattingCheckEquipment(data, pack, file) {
 
-	// Validate name
-	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
-	}
+    // Validate name
+    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+       addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+    }
 
-	// Validate img
-	if (!data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
-	}
+    // Validate img
+    if (!data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+       addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+    }
 
-	// Validate source
-	let source = data.data.source;
-	if (!isSourceValid(source)) {
-
-		addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
-	}
+    // Validate source
+    let source = data.data.source;
+    if (!isSourceValid(source)) {
+       addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+    }
 }
 
 // Checks a source string for conformance to string format outlined in CONTRIBUTING.md
 function isSourceValid(source) {
 
-	// NOTE: One day this should be changed if they publish further Core books (Galaxy Exploration Manual included for posterity)
-	let CoreBooksSourceMatch = [...source.matchAll(/(CRB|AR|PW|COM|SOM|NS|GEM) pg. ([\d])+/g)];
-	// NOTE: One day this should be increased when they publish further Alien Archives (Alien Archive 5 included for posterity)
-	let AlienArchiveSourceMatch = [...source.matchAll(/AA([1-5]) pg. ([\d])+/g)];
-	let AdventurePathSourceMatch = [...source.matchAll(/AP #([\d]) pg. ([\d])+/g)];
+    // NOTE: One day this should be changed if they publish further Core books (Galaxy Exploration Manual included for posterity)
+    let CoreBooksSourceMatch = [...source.matchAll(/(CRB|AR|PW|COM|SOM|NS|GEM) pg. ([\d])+/g)];
+    // NOTE: One day this should be increased when they publish further Alien Archives (Alien Archive 5 included for posterity)
+    let AlienArchiveSourceMatch = [...source.matchAll(/AA([1-5]) pg. ([\d])+/g)];
+    let AdventurePathSourceMatch = [...source.matchAll(/AP #([\d]) pg. ([\d])+/g)];
 
-	if (CoreBooksSourceMatch && CoreBooksSourceMatch.length > 0) {
-		// ✅ formatted Core book source
-		return true;
-	}
-	else if (AlienArchiveSourceMatch && AlienArchiveSourceMatch.length > 0) {
-		// ✅ formatted Alien Archives source
-		return true;
-	}
-	if (AdventurePathSourceMatch && AdventurePathSourceMatch.length > 0) {
-		// ✅ formatted Adventure path source
-		return true;
-	}
+    if (CoreBooksSourceMatch && CoreBooksSourceMatch.length > 0) {
+       // ✅ formatted Core book source
+       return true;
+    }
+    else if (AlienArchiveSourceMatch && AlienArchiveSourceMatch.length > 0) {
+       // ✅ formatted Alien Archives source
+       return true;
+    }
+    if (AdventurePathSourceMatch && AdventurePathSourceMatch.length > 0) {
+       // ✅ formatted Adventure path source
+       return true;
+    }
 
-	return false;
+    return false;
 }
 
 function addWarningForPack(warning, pack) {
 
-	if (!(pack in packWarnings)) {
-		packWarnings[pack] = [];
-	}
+    if (!(pack in packWarnings)) {
+       packWarnings[pack] = [];
+    }
 
-	cookWarningCount += 1;
-	packWarnings[pack].push(warning);
-
+    cookWarningCount += 1;
+    packWarnings[pack].push(warning);
 }
 
 function consistencyCheck(allItems, compendiumMap) {
-	for (let item of allItems) {
-		let data = item.data;
-		if (!data || !data.data || !data.data.description) continue;
+    for (let item of allItems) {
+        let data = item.data;
+        if (!data || !data.data || !data.data.description) continue;
 
-		let desc = data.data.description.value;
-		if (!desc) continue;
+        let desc = data.data.description.value;
+        if (!desc) continue;
 
-		let pack = item.pack;
+        let pack = item.pack;
 
-		let errors = [];
-		let itemMatch = [...desc.matchAll(/@Item\[([^\]]*)\]({([^}]*)})?/gm)];
-		if (itemMatch && itemMatch.length > 0) {
-			for (let localItem of itemMatch) {
-				let localItemId = localItem[1];
-				let localItemName = localItem[2] || localItemId;
+        let errors = [];
+        let itemMatch = [...desc.matchAll(/@Item\[([^\]]*)\]({([^}]*)})?/gm)];
+        if (itemMatch && itemMatch.length > 0) {
+            for (let localItem of itemMatch) {
+                let localItemId = localItem[1];
+                let localItemName = localItem[2] || localItemId;
 
-				// @Item links cannot exist in compendiums.
-				if (!(pack in packErrors)) {
-					packErrors[pack] = [];
-				}
-				packErrors[pack].push(`${item.file}: Using @Item to reference to '${localItemName}' (with id: ${localItemId}), @Item is not allowed in compendiums. Please use '@Compendium[sfrpg.${pack}.${localItemId}]' instead.`);
-				cookErrorCount++;
-			}
-		}
+                // @Item links cannot exist in compendiums.
+                if (!(pack in packErrors)) {
+                    packErrors[pack] = [];
+                }
+                packErrors[pack].push(`${item.file}: Using @Item to reference to '${localItemName}' (with id: ${localItemId}), @Item is not allowed in compendiums. Please use '@Compendium[sfrpg.${pack}.${localItemId}]' instead.`);
+                cookErrorCount++;
+            }
+        }
 
-		let journalMatch = [...desc.matchAll(/@JournalEntry\[([^\]]*)\]({([^}]*)})?/gm)];
-		if (journalMatch && journalMatch.length > 0) {
-			for (let localItem of journalMatch) {
-				let localItemId = localItem[1];
-				let localItemName = localItem[2] || localItemId;
+        let journalMatch = [...desc.matchAll(/@JournalEntry\[([^\]]*)\]({([^}]*)})?/gm)];
+        if (journalMatch && journalMatch.length > 0) {
+            for (let localItem of journalMatch) {
+                let localItemId = localItem[1];
+                let localItemName = localItem[2] || localItemId;
 
-				// @Item links cannot exist in compendiums.
-				if (!(pack in packErrors)) {
-					packErrors[pack] = [];
-				}
-				packErrors[pack].push(`${item.file}: Using @JournalEntry to reference to '${localItemName}' (with id: ${localItemId}), @JournalEntry is not allowed in compendiums. Please use '@Compendium[sfrpg.${pack}.${localItemId}]' instead.`);
-				cookErrorCount++;
-			}
-		}
+                // @Item links cannot exist in compendiums.
+                if (!(pack in packErrors)) {
+                    packErrors[pack] = [];
+                }
+                packErrors[pack].push(`${item.file}: Using @JournalEntry to reference to '${localItemName}' (with id: ${localItemId}), @JournalEntry is not allowed in compendiums. Please use '@Compendium[sfrpg.${pack}.${localItemId}]' instead.`);
+                cookErrorCount++;
+            }
+        }
 
-		let compendiumMatch = [...desc.matchAll(/@Compendium\[([^\]]*)]({([^}]*)})?/gm)];
-		if (compendiumMatch && compendiumMatch.length > 0) {
-			for (let otherItem of compendiumMatch) {
-				let link = otherItem[1];
-				let otherItemName = (otherItem.length == 4) ? otherItem[3] || link : link;
+        let compendiumMatch = [...desc.matchAll(/@Compendium\[([^\]]*)]({([^}]*)})?/gm)];
+        if (compendiumMatch && compendiumMatch.length > 0) {
+            for (let otherItem of compendiumMatch) {
+                let link = otherItem[1];
+                let otherItemName = (otherItem.length == 4) ? otherItem[3] || link : link;
 
-				let linkParts = link.split('.');
-				if (linkParts.length !== 3) {
-					if (!(pack in packErrors)) {
-						packErrors[pack] = [];
-					}
-					packErrors[pack].push(`${item.file}: Compendium link to '${link}' is not valid. It does not have enough segments in the link. Expected format is sfrpg.compendiumName.itemId.`);
-					cookErrorCount++;
-					continue;
-				}
+                let linkParts = link.split('.');
+                if (linkParts.length !== 3) {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: Compendium link to '${link}' is not valid. It does not have enough segments in the link. Expected format is sfrpg.compendiumName.itemId.`);
+                    cookErrorCount++;
+                    continue;
+                }
 
-				let system = linkParts[0];
-				let otherPack = linkParts[1];
-				let otherItemId = linkParts[2];
+                let system = linkParts[0];
+                let otherPack = linkParts[1];
+                let otherItemId = linkParts[2];
 
-				// @Compendium links must link to sfrpg compendiums.
-				if (system !== "sfrpg") {
-					if (!(pack in packErrors)) {
-						packErrors[pack] = [];
-					}
-					packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is not referencing the sfrpg system, but instead using '${system}'.`);
-					cookErrorCount++;
-				}
+                // @Compendium links must link to sfrpg compendiums.
+                if (system !== "sfrpg") {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is not referencing the sfrpg system, but instead using '${system}'.`);
+                    cookErrorCount++;
+                }
 
-				// @Compendium links to the same compendium could be @Item links instead.
-				/*if (otherPack === pack) {
+                // @Compendium links to the same compendium could be @Item links instead.
+                /*if (otherPack === pack) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
                     }
@@ -511,35 +505,35 @@ function consistencyCheck(allItems, compendiumMap) {
                     cookErrorCount++;
                 }*/
 
-				// @Compendium links must link to a valid compendium.
-				if (!(otherPack in compendiumMap)) {
-					if (!(pack in packErrors)) {
-						packErrors[pack] = [];
-					}
-					packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) cannot find '${otherPack}', is there an error in the compendium name?`);
-					cookErrorCount++;
-					continue;
-				}
+                // @Compendium links must link to a valid compendium.
+                if (!(otherPack in compendiumMap)) {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) cannot find '${otherPack}', is there an error in the compendium name?`);
+                    cookErrorCount++;
+                    continue;
+                }
 
-				// @Compendium links must link to a valid item ID.
-				var itemExists = false;
-				if (otherItemId in compendiumMap[otherPack]) {
-					itemExists = true;
-				} else {
-					let foundItem = allItems.find(x => x.pack === otherPack && (x.data.name == otherItemId || x.data.name == otherItemName));
-					itemExists = foundItem !== null;
-				}
+                // @Compendium links must link to a valid item ID.
+                var itemExists = false;
+                if (otherItemId in compendiumMap[otherPack]) {
+                    itemExists = true;
+                } else {
+                    let foundItem = allItems.find(x => x.pack === otherPack && (x.data.name == otherItemId || x.data.name == otherItemName));
+                    itemExists = foundItem !== null;
+                }
 
-				if (!itemExists) {
-					if (!(pack in packErrors)) {
-						packErrors[pack] = [];
-					}
-					packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) not found in '${otherPack}'.`);
-					cookErrorCount++;
-				}
-			}
-		}
-	}
+                if (!itemExists) {
+                    if (!(pack in packErrors)) {
+                        packErrors[pack] = [];
+                    }
+                    packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) not found in '${otherPack}'.`);
+                    cookErrorCount++;
+                }
+            }
+        }
+    }
 }
 
 async function postCook() {
