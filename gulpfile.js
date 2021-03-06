@@ -234,10 +234,8 @@ async function unpackPacks() {
  * Cook db source json files into .db files with nedb
  */
 var cookErrorCount = 0;
-var cookWarningCount = 0;
 var cookAborted = false;
 var packErrors = {};
-var packWarnings = {};
 async function cookPacks() {
     console.log(`Cooking db files`);
     
@@ -245,7 +243,6 @@ async function cookPacks() {
     let allItems = [];
     
     cookErrorCount = 0;
-    cookWarningCount = 0;
     cookAborted = false;
     packErrors = {};
     
@@ -418,12 +415,12 @@ function isSourceValid(source) {
 
 function addWarningForPack(warning, pack) {
 
-    if (!(pack in packWarnings)) {
-       packWarnings[pack] = [];
+    if (!(pack in packErrors)) {
+        packErrors[pack] = [];
     }
 
-    cookWarningCount += 1;
-    packWarnings[pack].push(warning);
+    cookErrorCount += 1;
+    packErrors[pack].push(warning);
 }
 
 function consistencyCheck(allItems, compendiumMap) {
@@ -538,15 +535,6 @@ function consistencyCheck(allItems, compendiumMap) {
 
 async function postCook() {
 
-	if (Object.keys(packWarnings).length > 0) {
-		for (let pack of Object.keys(packWarnings)) {
-			console.log(`\n${packWarnings[pack].length} Warnings cooking ${pack}.db:`);
-			for (let warning of packWarnings[pack]) {
-				console.log(`> ${warning}`);
-			}
-		}
-	}
-
     if (Object.keys(packErrors).length > 0) {
         for (let pack of Object.keys(packErrors)) {
             console.log(`\n${packErrors[pack].length} Errors cooking ${pack}.db:`);
@@ -557,7 +545,7 @@ async function postCook() {
     }
     
     if (!cookAborted) {
-        console.log(`\nCompendiums cooked with ${cookWarningCount} warnings, ${cookErrorCount} errors!\nDon't forget to restart Foundry to refresh compendium data!\n`);
+        console.log(`\nCompendiums cooked with ${cookErrorCount} errors!\nDon't forget to restart Foundry to refresh compendium data!\n`);
     } else {
         console.log(`\nCook aborted after ${cookErrorCount} critical errors!\n`);
     }
