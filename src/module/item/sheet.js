@@ -148,16 +148,6 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasAttackRoll = this.item.hasAttack;
         data.isHealing = data.item.data.actionType === "heal";
 
-        // Spell-specific data
-        if (data.item.type === "spell") {
-            let save = data.item.data.save;
-            if (this.item.isOwned && (save.type && !save.dc)) {
-                let actor = this.item.actor;
-                let abl = actor.data.data.attributes.keyability || "int";
-                save.dc = 10 + data.item.data.level + actor.data.data.abilities[abl].mod;
-            }
-        }
-
         // Vehicle Attacks
         if (data.isVehicleAttack) {
             data.placeholders.savingThrow = {};
