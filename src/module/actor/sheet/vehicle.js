@@ -61,14 +61,9 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         data.hasHangarBays = this.actor.data.data.hangarBay.limit > 0;
 
         const hangarBayActors = hangarBayData.actorIds.map(crewId => game.actors.get(crewId));
+        const localizedNoLimit = game.i18n.localize("SFRPG.VehicleSheet.Hangar.UnlimitedMax");
 
-        // TODO: Localize
-        const localizedNoLimit = "No limit";
-
-        // TODO: Localize
-        const hangarBay = { label: "Vehicles" + " " + game.i18n.format("({current} / {max})", {"current": hangarBayActors.length, "max": hangarBayData.limit > -1 ? hangarBayData.limit : localizedNoLimit}), actors: hangarBayActors, dataset: { type: "vehicle" }};
-
-        data.hangarBay = hangarBay;
+        data.hangarBay = { label:  game.i18n.localize("SFRPG.VehicleSheet.Hangar.Vehicles") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": hangarBayActors.length, "max": hangarBayData.limit > -1 ? hangarBayData.limit : localizedNoLimit}), actors: hangarBayActors, dataset: { type: "vehicle" }};
     }
 
     /**
@@ -80,7 +75,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     _prepareItems(data) {
 
         const inventory = {
-            inventory: { label: game.i18n.format("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
+            inventory: { label: game.i18n.localize("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
         };
 
         //   0        1               3
@@ -103,7 +98,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         this.processItemContainment(attacks, function (itemType, itemData) {
             // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
             // vehicle sheet until we can assign passengers and access their dexterity modifiers.
-            if (itemData.item.type == "vehicleAttack") {
+            if (itemData.item.type === "vehicleAttack") {
 
                 itemData.item.hasDamage = itemData.item.data.damage?.parts && itemData.item.data.damage.parts.length > 0;
             }
@@ -111,10 +106,9 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         });
         data.inventory = inventory
 
-        // TODO: Localize
         const features = {
-            primarySystems: { label: "Primary Systems", items: primarySystems, hasActions: true, dataset: { type: "vehicleSystem" } },
-            expansionBays: { label: game.i18n.format("Expansion Bays ({current} / {max})", {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
+            primarySystems: { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.PrimarySystems"), items: primarySystems, hasActions: true, dataset: { type: "vehicleSystem" } },
+            expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
         };
         data.features = Object.values(features);
     }
@@ -274,8 +268,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
                 "data.hangarBay": hangarBay
             }).then(this.render(false));
         } else {
-            // TODO: Localize
-            ui.notifications.error("Vehicle limit reached");
+            ui.notifications.error(game.i18n.localize("SFRPG.VehicleSheet.Hangar.VehiclesLimitReached"));
         }
 
         return true;
