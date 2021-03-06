@@ -135,7 +135,7 @@ export class ItemSFRPG extends Item {
             const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
             if (abilityKey) {
                 if (this.data.type === "spell") {
-                    dcFormula = `10 + @owner.details.cl.value + @owner.abilities.${abilityKey}.mod`;
+                    dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
                 } else if (this.data.type === "feat") {
                     dcFormula = `10 + @owner.details.level.value + @owner.abilities.${abilityKey}.mod`;
                 } else {
