@@ -128,7 +128,7 @@ export class ItemSFRPG extends Item {
     _getSaveLabel(save, actorData, itemData) {
         if (!save?.type) return "";
         
-        let dcFormula = save.dc.toString();
+        let dcFormula = save.dc?.toString();
         if (!dcFormula) {
             const ownerKeyAbilityId = this.actor?.data.data.attributes.keyability;
             const itemKeyAbilityId = this.data.data.ability;
