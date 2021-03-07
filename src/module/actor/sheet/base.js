@@ -719,7 +719,8 @@ export class ActorSheetSFRPG extends ActorSheet {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
+            const desiredDescription = TextEditor.enrichHTML(chatData.description.short || chatData.description.value, {});
+            let div = $(`<div class="item-summary">${desiredDescription}</div>`);
             let props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
             div.append(props);
