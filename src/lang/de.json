@@ -47,6 +47,7 @@
         "TypeTheme": "Charaktermotiv",
         "TypeUpgrade": "Rüstungsverbesserung",
         "TypeVehicleattack": "Vehicle Attack",
+        "TypeVehiclesystem": "Vehicle System",
         "TypeWeapon": "Waffe",
         "TypeWeaponaccessory": "Weapon Accessory"
     },
@@ -218,6 +219,7 @@
                     "SpecialItems": "Technological, Magical, and Hybrid Items"
                 },
                 "Item": {
+                    "Activate": "Activate",
                     "Create": "Neuen Gegenstand erstellen",
                     "Deactivate": "Deactivate",
                     "Delete": "Gegenstand entfernen",
@@ -622,6 +624,7 @@
         "DamRes": "Energieresistenzen",
         "DamVuln": "Schwächen gegenüber Schaden",
         "Description": "Beschreibung",
+        "DescriptionShort": "Short Description",
         "Details": "Details",
         "Dialogs": {
             "InputDialog": {
@@ -949,6 +952,7 @@
                 "TechnologicalItems": "Technische Gegenstände",
                 "Themes": "Motive",
                 "VehicleAttacks": "Vehicle Attacks",
+                "VehicleSystems": "Vehicle Systems",
                 "WeaponAccessories": "Weapon Accessories",
                 "WeaponFusions": "Waffenfusionen",
                 "Weapons": "Waffen"
@@ -1063,6 +1067,9 @@
             },
             "VehicleAttack": {
                 "Type": "Vehicle Attack"
+            },
+            "VehicleSystem": {
+                "Type": "Vehicle System"
             },
             "Weapon": {
                 "Attack": "Waffenangriff",
@@ -2126,6 +2133,7 @@
                 "None": "Keine",
                 "Partial": "Teilweise Deckung",
                 "Soft": "Weiche Deckung",
+                "Improved": "Improved cover",
                 "Total": "Vollständige Deckung"
             },
             "VehicleTypes": {
@@ -2153,7 +2161,7 @@
                 },
                 "Hardness": "Hardness",
                 "Modifiers": {
-                    "AttackFullSpeed": "Attack (moving)",
+                    "AttackFullSpeed": "Attack (full speed)",
                     "AttackMoving": "Attack (moving)",
                     "AttackStopped": "Attack (stopped)",
                     "Title": "Modifiers"
@@ -2173,6 +2181,8 @@
                 "OtherAttributes": {
                     "Complement": "Complement",
                     "Cover": "Cover",
+                    "ExpansionBays": "Expansion Bays",
+                    "HangarBays": "Hangar Bays",
                     "Passengers": "Passengers",
                     "Size": "Size",
                     "Title": "Other Attributes",
@@ -2182,6 +2192,14 @@
             },
             "Errors": {
                 "NoDamage": "you may not make a Damage Roll with this item"
+            },
+            "Hangar": {
+                "AssignedCount": "({current} / {max})",
+                "ExpansionBays": "Expansion Bays",
+                "PrimarySystems": "Primary Systems",
+                "UnlimitedMax": "No limit",
+                "Vehicles": "Vehicles",
+                "VehiclesLimitReached": "You have reached the maximum amount of vehicles allowed in this vehicles hangar bays."
             },
             "Header": {
                 "Level": "Level",
@@ -2206,10 +2224,26 @@
                 "Title": "Passengers",
                 "UnlimitedMax": "No limit"
             },
+            "Systems": {
+                "Piloting": "Piloting",
+                "RollPiloting": "Roll Piloting"
+            },
             "Tabs": {
                 "Attacks": "Attacks",
-                "Passengers": "Passengers"
+                "Hangar": "Hangar",
+                "Passengers": "Passengers",
+                "Systems": "Systems"
             }
+        },
+        "VehicleSystemSheet": {
+            "CanBeActivated": "Can be activated",
+            "CanBeActivatedTooltip": "This system has an activated state.",
+            "isActivated": "Is activated",
+            "isActivatedTooltip": "Is currently activated",
+            "Piloting": "Piloting",
+            "PilotingTooltip": "The Piloting modifier to apply when using this system to pilot.",
+            "UseToPilot": "Use to Pilot",
+            "UseToPilotTooltip": "This system can be used to make piloting rolls when activated."
         },
         "WeaponCategoriesCryo": "Kryowaffen",
         "WeaponCategoriesDisintegrator": "Auflösungswaffen",

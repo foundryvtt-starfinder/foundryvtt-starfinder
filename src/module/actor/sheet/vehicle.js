@@ -23,12 +23,13 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         data.labels["level"] = lvl >= 1 ? String(lvl) : levels[lvl] || 1;
 
         this._getCrewData(data)
+        this._getHangarBayData(data)
 
         return data;
     }
 
     /**
-     * Process any flags that the actor might have that would affect the sheet .
+     * Process any flags that the crew actor might have that would affect the sheet .
      *
      * @param {Object} data The data object to update with any crew data.
      */
@@ -51,25 +52,65 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     }
 
     /**
+     * Process any flags that the hangar bay actor might have that would affect the sheet.
+     *
+     * @param {Object} data The data object to update with any hangar bay data.
+     */
+    async _getHangarBayData(data) {
+        let hangarBayData = this.actor.data.data.hangarBay;
+        data.hasHangarBays = this.actor.data.data.hangarBay.limit > 0;
+
+        const hangarBayActors = hangarBayData.actorIds.map(crewId => game.actors.get(crewId));
+        const localizedNoLimit = game.i18n.localize("SFRPG.VehicleSheet.Hangar.UnlimitedMax");
+
+        data.hangarBay = { label:  game.i18n.localize("SFRPG.VehicleSheet.Hangar.Vehicles") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": hangarBayActors.length, "max": hangarBayData.limit > -1 ? hangarBayData.limit : localizedNoLimit}), actors: hangarBayActors, dataset: { type: "vehicle" }};
+    }
+
+    /**
      * Organize and classify items for vehicle sheets.
      * 
      * @param {Object} data Data for the sheet
      * @private
      */
     _prepareItems(data) {
+
         const inventory = {
-            inventory: { label: game.i18n.format("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
+            inventory: { label: game.i18n.localize("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
         };
-        this.processItemContainment(data.items, function (itemType, itemData) {
+
+        //   0        1               3
+        let [attacks, primarySystems, expansionBays] = data.items.reduce((arr, item) => {
+            item.img = item.img || DEFAULT_TOKEN;
+
+            if (item.type === "weapon" || item.type === "vehicleAttack") {
+                arr[0].push(item);
+            }
+            else if (item.type === "vehicleSystem") {
+
+                item.isVehicleSystem = true;
+                arr[1].push(item);
+            }
+            else if (item.type === "starshipExpansionBay") arr[2].push(item);
+
+            return arr;
+        }, [ [], [], [] ]);
+
+        this.processItemContainment(attacks, function (itemType, itemData) {
             // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
             // vehicle sheet until we can assign passengers and access their dexterity modifiers.
-            if (itemData.item.type == "vehicleAttack") {
+            if (itemData.item.type === "vehicleAttack") {
 
                 itemData.item.hasDamage = itemData.item.data.damage?.parts && itemData.item.data.damage.parts.length > 0;
             }
             inventory.inventory.items.push(itemData);
         });
         data.inventory = inventory
+
+        const features = {
+            primarySystems: { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.PrimarySystems"), items: primarySystems, hasActions: true, dataset: { type: "vehicleSystem" } },
+            expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
+        };
+        data.features = Object.values(features);
     }
 
     /**
@@ -100,6 +141,14 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             li.addEventListener("dragenter", this._onCrewDragEnter, false);
             li.addEventListener("dragleave", this._onCrewDragLeave, false);
         });
+
+        // Systems Tan
+        html.find('.vehicle-system-action .roll-piloting').click(event => this._onRollPilotingForSystem(event));
+        html.find('.item-detail .vehicle-system-activate').click(event => this._onActivateVehicleSystem(event));
+        html.find('.item-detail .vehicle-system-deactivate').click(event => this._onDeactivateVehicleSystem(event));
+
+        // Hangar Tab
+        html.find('.vehicle-delete').click(this._onRemoveFromHangarBar.bind(this));
 
         // Roll piloting skill for PC or NPC passengers
         html.find('.passenger-action .passengerPilotingSkill').click(event => this._onRollPassengerPilotingSkill(event));
@@ -139,13 +188,27 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         // Case - Dropped Actor
         if (data.type === "Actor") {
-            return this._onCrewDrop(event, data);
+
+            const actorId = data.id;
+            const actor = game.actors.get(actorId);
+
+            // Other vehicles are only acceptable if this vehicle has 1 or more hangar bays
+            if (actor.data.type === "vehicle") {
+                return this._onVehicleDrop(event, data);
+            }
+            // The only other actors allowed are crew
+            else {
+                return this._onCrewDrop(event, data);
+            }
         }
         else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
 
-            if (rawItemData.type == "weapon" || rawItemData.type == "vehicleAttack") {
+            if (rawItemData.type === "weapon" || rawItemData.type === "vehicleAttack") {
                 return this.processDroppedData(event, data);
+            }
+            else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem") {
+                return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
             }
         }
 
@@ -182,7 +245,36 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         return duplicate(itemData);
     }
 
+
     /**
+     * Handles drop events for the Hangar Bay list
+     *
+     * @param {Event}  event The originating drop event
+     * @param {object} data  The data transfer object.
+     */
+    async _onVehicleDrop(event, data) {
+        // event.preventDefault();
+
+        $(event.target).css('background', '');
+
+        if (!data.id) return false;
+
+        const hangarBay = duplicate(this.actor.data.data.hangarBay);
+
+        if (hangarBay.limit === -1 || hangarBay.actorIds.length < hangarBay.limit) {
+            hangarBay.actorIds.push(data.id);
+
+            await this.actor.update({
+                "data.hangarBay": hangarBay
+            }).then(this.render(false));
+        } else {
+            ui.notifications.error(game.i18n.localize("SFRPG.VehicleSheet.Hangar.VehiclesLimitReached"));
+        }
+
+        return true;
+    }
+
+        /**
      * Handles drop events for the Passenger list
      *
      * @param {Event}  event The originating drop event
@@ -264,6 +356,27 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     }
 
     /**
+     * Remove an vehicle from the hangar bay.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onRemoveFromHangarBar(event) {
+        event.preventDefault();
+
+        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+
+        if (!this.actor.data?.data?.hangarBay.actorIds) {
+            return null;
+        }
+
+        const hangarData = duplicate(this.actor.data.data.hangarBay);
+        hangarData.actorIds = hangarData.actorIds.filter(x => x !== actorId);
+        await this.actor.update({
+            "data.hangarBay": hangarData
+        });
+    }
+
+    /**
      * Remove an actor from the crew.
      *
      * @param {Event} event The originating click event
@@ -272,6 +385,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         event.preventDefault();
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+
         const role = this.actor.getCrewRoleForActor(actorId);
         if (role) {
             const crewData = duplicate(this.actor.data.data.crew);
@@ -306,5 +420,97 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         this.actor.rollVehiclePilotingSkill();
     }
+
+    /**
+     * Performs a Piloting check for a system (generally Autopilot)
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onRollPilotingForSystem(event) {
+
+        event.preventDefault();
+
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const system = this.actor.getOwnedItem(itemId);
+
+        this.actor.rollVehiclePilotingSkill(null, null, system);
+    }
+
+    /**
+     * Deactivates a vehicle system.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onDeactivateVehicleSystem(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+
+        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : false;
+        await item.update({'data.isActive': desiredOutput});
+
+        // Render the chat card template
+        const templateData = {
+            actor: this.actor,
+            item: item,
+            tokenId: this.actor.token?.id,
+            action: "SFRPG.ChatCard.ItemActivation.Deactivates"
+        };
+
+        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+        const html = await renderTemplate(template, templateData);
+
+        // Create the chat message
+        const chatData = {
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: html
+        };
+
+        await ChatMessage.create(chatData, { displaySheet: false });
+    }
+
+    /**
+     * Activates a vehicle system.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onActivateVehicleSystem(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+        const updateData = {};
+
+        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : true;
+        updateData['data.isActive'] = desiredOutput;
+
+        await item.update(updateData);
+
+        // Render the chat card template
+        const templateData = {
+            actor: this.actor,
+            item: item,
+            tokenId: this.actor.token?.id,
+            action: "SFRPG.ChatCard.ItemActivation.Activates",
+            labels: item.labels,
+            hasAttack: item.hasAttack,
+            hasDamage: item.hasDamage,
+            isVersatile: item.isVersatile,
+            hasSave: item.hasSave
+        };
+
+        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
+        const html = await renderTemplate(template, templateData);
+
+        // Create the chat message
+        const chatData = {
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: html
+        };
+
+        await ChatMessage.create(chatData, { displaySheet: false });
+    }
+
 
 }

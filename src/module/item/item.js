@@ -126,32 +126,47 @@ export class ItemSFRPG extends Item {
     }
 
     _getSaveLabel(save, actorData, itemData) {
-        if (!save?.type || !save?.dc) return "";
+        if (!save?.type) return "";
         
-        let dcFormula = save.dc.toString();
-        if (dcFormula) {
-            const rollContext = new RollContext();
-            rollContext.addContext("item", this, itemData);
-            rollContext.setMainContext("item");
-            if (this.actor) {
-                rollContext.addContext("owner", this.actor);
-                rollContext.setMainContext("owner");
+        let dcFormula = save.dc?.toString();
+        if (!dcFormula) {
+            const ownerKeyAbilityId = this.actor?.data.data.attributes.keyability;
+            const itemKeyAbilityId = this.data.data.ability;
+            const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
+            if (abilityKey) {
+                if (this.data.type === "spell") {
+                    dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
+                } else if (this.data.type === "feat") {
+                    dcFormula = `10 + @owner.details.level.value + @owner.abilities.${abilityKey}.mod`;
+                } else {
+                    dcFormula = `10 + floor(@item.level / 2) + @owner.abilities.${abilityKey}.mod`;
+                }
             }
-    
-            this.actor?.setupRollContexts(rollContext);
-
-            const rollResult = DiceSFRPG.createRoll({
-                rollContext: rollContext,
-                rollFormula: dcFormula,
-                mainDie: 'd0',
-                dialogOptions: { skipUI: true }
-            });
-
-            const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
-            return returnValue;
-        } else {
-            return `DC ${save.dc || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+            
+            if (!dcFormula) {
+                return "";
+            }
         }
+
+        const rollContext = new RollContext();
+        rollContext.addContext("item", this, itemData);
+        rollContext.setMainContext("item");
+        if (this.actor) {
+            rollContext.addContext("owner", this.actor);
+            rollContext.setMainContext("owner");
+        }
+
+        this.actor?.setupRollContexts(rollContext);
+
+        const rollResult = DiceSFRPG.createRoll({
+            rollContext: rollContext,
+            rollFormula: dcFormula,
+            mainDie: 'd0',
+            dialogOptions: { skipUI: true }
+        });
+
+        const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+        return returnValue;
     }
 
     /**
@@ -506,7 +521,6 @@ export class ItemSFRPG extends Item {
 
         // Spell saving throw text
         const abl = ad.attributes.keyability || "int";
-        if (this.hasSave && !data.save.dc) data.save.dc = `10 + @owner.details.level.value + @owner.abilities.${abl}.mod`;
         labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Spell properties
@@ -525,7 +539,6 @@ export class ItemSFRPG extends Item {
 
         // Spell saving throw text
         const abl = data.ability || ad.attributes.keyability || "str";
-        if (this.hasSave && !data.save.dc) data.save.dc = `10 + @owner.details.level.value + @owner.abilities.${abl}.mod`;
         labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Feat properties

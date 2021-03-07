@@ -74,6 +74,7 @@ import calculateStarshipShields         from './rules/actions/actor/starship/cal
 import calculateStarshipSpeed           from './rules/actions/actor/starship/calculate-starship-speed.js';
 import calculateStarshipTargetLock      from './rules/actions/actor/starship/calculate-starship-targetlock.js';
 // Vehicle rules
+import calculateVehicleHangar       from './rules/actions/actor/vehicle/calculate-vehicle-hangar.js';
 import calculateVehiclePassengers       from './rules/actions/actor/vehicle/calculate-vehicle-passengers.js';
 
 export default function (engine) {
@@ -139,6 +140,7 @@ export default function (engine) {
     calculateStarshipFrame(engine);
     calculateStarshipComputer(engine);
     // Vehicle actions
+    calculateVehicleHangar(engine);
     calculateVehiclePassengers(engine);
 
     // Conditions
@@ -252,6 +254,7 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "vehicle" },
                 then: [
+                        "calculateVehicleHangar",
                         "calculateVehiclePassengers",
                         "identity"
                     ]

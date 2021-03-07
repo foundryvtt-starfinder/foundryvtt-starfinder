@@ -831,11 +831,12 @@ SFRPG.vehicleTypes = {
 };
 
 SFRPG.vehicleCoverTypes = {
-    "none"   : "SFRPG.Vehicles.VehicleCoverTypes.None",
-    "cover"  : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
-    "soft"   : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
-    "partial": "SFRPG.Vehicles.VehicleCoverTypes.Partial",
-    "total"  : "SFRPG.Vehicles.VehicleCoverTypes.Total"
+    "none"    : "SFRPG.Vehicles.VehicleCoverTypes.None",
+    "cover"   : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
+    "soft"    : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
+    "partial" : "SFRPG.Vehicles.VehicleCoverTypes.Partial",
+    "improved": "SFRPG.Vehicles.VehicleCoverTypes.Improved",
+    "total"   : "SFRPG.Vehicles.VehicleCoverTypes.Total"
 };
 
 /**
@@ -1238,7 +1239,8 @@ SFRPG.itemTypes = {
     "shield": "SFRPG.Items.Categories.Shields",
     "ammunition": "SFRPG.Items.Categories.Ammunition",
     "weaponAccessory": "ITEM.TypeWeaponaccessory",
-    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks"
+    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
+    "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
 };
 
 SFRPG.containableTypes = {
@@ -1256,7 +1258,8 @@ SFRPG.containableTypes = {
     "augmentation" : "SFRPG.Items.Categories.Augmentations",
     "shield"       : "SFRPG.Items.Categories.Shields",
     "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories",
-    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks"
+    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
+    "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
 };
 
 SFRPG.combatTypes = [

@@ -94,6 +94,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasProficiency = data.item.data.proficient === true || data.item.data.proficient === false;
         data.isFeat = this.type === "feat";
         data.isVehicleAttack = data.item.type === "vehicleAttack";
+        data.isVehicleSystem = data.item.type === "vehicleSystem";
         data.isGM = game.user.isGM;
 
         // Physical items
@@ -148,16 +149,6 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasAttackRoll = this.item.hasAttack;
         data.isHealing = data.item.data.actionType === "heal";
 
-        // Spell-specific data
-        if (data.item.type === "spell") {
-            let save = data.item.data.save;
-            if (this.item.isOwned && (save.type && !save.dc)) {
-                let actor = this.item.actor;
-                let abl = actor.data.data.attributes.keyability || "int";
-                save.dc = 10 + data.item.data.level + actor.data.data.abilities[abl].mod;
-            }
-        }
-
         // Vehicle Attacks
         if (data.isVehicleAttack) {
             data.placeholders.savingThrow = {};
@@ -200,6 +191,15 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (["weapon", "equipment", "shield"].includes(item.type)) return item.data.equipped ? "Equipped" : "Unequipped";
         else if (item.type === "starshipWeapon") return item.data.mount.mounted ? "Mounted" : "Not Mounted";
         else if (item.type === "augmentation") return `${item.data.type} (${item.data.system})`;
+        else if (item.type === "vehicleSystem")
+        {
+            // Only systems which can be activated have an activation status
+            if (item.data.canBeActivated === false) {
+                return ""
+            }
+
+            return item.data.isActivated ? "Activated" : "Not Activated";
+        }
     }
 
     /* -------------------------------------------- */

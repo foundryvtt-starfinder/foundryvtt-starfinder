@@ -1,5 +1,5 @@
 <div class="traits">
-    <div class="form-group">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Size"}}</strong><br/>@data.traits.size">
         <label>{{localize "SFRPG.Size"}}</label>
         {{#if (not isDrone)}}
         <select class="actor-size" name="data.traits.size">
@@ -15,7 +15,7 @@
     </div>
 
     {{#if (not isDrone)}}
-    <div class="form-group">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.KeyAbility"}}</strong><br/>@data.attributes.keyability">
         <label>{{localize "SFRPG.KeyAbility"}}</label>
         <select class="actor-keyability" name="data.attributes.keyability">
             {{#select data.attributes.keyability}}
@@ -28,7 +28,7 @@
     </div>
     {{/if}}
 
-    <div class="form-group {{#unless data.traits.senses}}inactive{{/unless}}">
+    <div class="form-group {{#unless data.traits.senses}}inactive{{/unless}}" data-tippy-content="<strong>{{localize "SFRPG.Senses"}}</strong><br/>@data.traits.senses">
         <label>{{localize "SFRPG.Senses"}}</label>
         {{#if (not isDrone)}}
         <input type="text" name="data.traits.senses" value="{{data.traits.senses}}" placeholder="{{localize "SFRPG.None"}}"/>
@@ -38,43 +38,35 @@
     </div>
 
     {{#if (not isDrone)}}
-    <div class="form-group">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.NumberOfArms"}}</strong><br/>@data.attributes.arms">
         <label>{{localize "SFRPG.NumberOfArms"}}</label>
         <input type="text" name="data.attributes.arms" value="{{data.attributes.arms}}" placeholder="2" />
     </div>
-    <div class="form-group">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Space"}}</strong><br/>@data.attributes.space">
         <label>{{localize "SFRPG.Space"}}</label>
         <input type="text" name="data.attributes.space" value="{{data.attributes.space}}" placeholder="5" />
     </div>
-    <div class="form-group">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Reach"}}</strong><br/>@data.attributes.reach">
         <label>{{localize "SFRPG.Reach"}}</label>
         <input type="text" name="data.attributes.reach" value="{{data.attributes.reach}}" placeholder="0" />
     </div>
     {{else}}
-    <div class="form-group">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.DroneSheet.Traits.GeneralPurposeArms"}}</strong><br/>@data.attributes.arms">
         <label>{{localize "SFRPG.DroneSheet.Traits.GeneralPurposeArms"}}</label>
         <span class="value">{{data.attributes.arms}}</span>
     </div>
-    <!-- <div class="form-group">
-        <label>{{localize "SFRPG.Space"}}</label>
-        <span class="value">{{data.attributes.space}}</span>
-    </div>
-    <div class="form-group">
-        <label>{{localize "SFRPG.Reach"}}</label>
-        <span class="value">{{data.attributes.reach}}</span>
-    </div> -->
-    <div class="form-group">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.DroneSheet.Traits.MeleeWeaponMounts"}}</strong><br/>@data.attributes.weaponMounts.melee.max">
         <label>{{localize "SFRPG.DroneSheet.Traits.MeleeWeaponMounts"}}</label>
         <span class="value">{{data.attributes.weaponMounts.melee.max}}</span>
     </div>
-    <div class="form-group">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.DroneSheet.Traits.RangedWeaponMounts"}}</strong><br/>@data.attributes.weaponMounts.ranged.max">
         <label>{{localize "SFRPG.DroneSheet.Traits.RangedWeaponMounts"}}</label>
         <span class="value">{{data.attributes.weaponMounts.ranged.max}}</span>
     </div>
     {{/if}}
     
     {{#if isDrone}}
-    <div class="form-group">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.SFRPG.DroneSheet.Traits.ArmorSlots"}}</strong><br/>@data.attributes.armorSlots.current<br/>@data.attributes.armorSlots.max">
         <label>{{localize "SFRPG.DroneSheet.Traits.ArmorSlots"}}</label>
         <span class="value">{{data.attributes.armorSlots.current}}</span>
         <span class="sep">/</span>
@@ -83,13 +75,13 @@
     {{/if}}
     
     {{#if (not isDrone)}}
-    <div class="form-group">
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.SpellResistance"}}</strong><br/>@data.traits.sr">
         <label>{{localize "SFRPG.SpellResistance"}}</label>
         <input type="text" name="data.traits.sr" value="{{data.traits.sr}}" data-dtype="Number" />
     </div>
     {{/if}}
     
-    <div class="form-group damage-reduction">
+    <div class="form-group damage-reduction" data-tippy-content="<strong>{{localize "SFRPG.DamageReduction"}}</strong><br/>@data.traits.damageReduction.value<br/>@data.traits.damageReduction.negatedBy">
         <label>{{localize "SFRPG.DamageReduction"}}</label>
         <input type="text" name="data.traits.damageReduction.value" value="{{data.traits.damageReduction.value}}" data-dtype="Number" />
         <span class="sep">/</span>
