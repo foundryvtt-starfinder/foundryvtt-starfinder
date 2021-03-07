@@ -974,7 +974,8 @@
                     "value": "",
                     "chat": "",
                     "unidentified": ""
-                }
+                },
+                "source": ""
             },
             "crew": {
                 "useNPCCrew": true,
@@ -991,6 +992,10 @@
                     "actorIds": []
                 }
             },
+            "hangarBay": {
+                "limit": 0,
+                "actorIds": []
+            },
             "attributes": {
                 "size": "large",
                 "type": "land",
@@ -1006,6 +1011,9 @@
                     "type": ""
                 },
                 "eac": 10,
+                "expansionBays": {
+                    "value": 0
+                },
                 "kac": 10,
                 "cover": "partial",
                 "hp": {
@@ -1057,6 +1065,7 @@
             "starshipWeapon",
 
             "vehicleAttack",
+            "vehicleSystem",
 
             "augmentation",
             "consumable",
@@ -1615,6 +1624,15 @@
                 "dc": null,
                 "descriptor": ""
             }
+        },
+        "vehicleSystem": {
+            "templates": ["itemDescription"],
+            "piloting": {
+                "usedAsPilot": false,
+                "piloting": 0
+            },
+            "canBeActivated" : true,
+            "isActive" : true
         },
         "mod": {
             "templates": ["itemDescription", "modifiers"],
