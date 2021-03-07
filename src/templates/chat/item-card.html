@@ -5,7 +5,11 @@
     </header>
 
     <div class="card-content">
-        {{{data.description.value}}}
+        {{#if data.description.short}}
+            {{{data.description.short}}}
+        {{else}}
+            {{{data.description.value}}}
+        {{/if}}
         {{#if data.materials.value}}
         <p><strong>{{ localize "SFRPG.ChatReqMats" }}.</strong> {{data.materials.value}}</p>
         {{/if}}

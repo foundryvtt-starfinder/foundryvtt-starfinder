@@ -292,18 +292,147 @@ async function cookPacks() {
         cookAborted = true;
         return 1;
     }
-    
+
+    console.log(`\nStarting formatting check.`);
+    formattingCheck(allItems)
+
     console.log(`\nStarting consistency check.`);
+    consistencyCheck(allItems, compendiumMap)
+
+    console.log(`\nUpdating items with updated IDs.\n`);
     
+    await unpackPacks();
+    
+    console.log(`\nCook finished with ${cookErrorCount} errors.\n`);
+
+    return 0;
+}
+
+function formattingCheck(allItems) {
+
+    for (let item of allItems) {
+        let data = item.data;
+        let pack = item.pack;
+
+        if(!data || !data.data  || !data.type) {
+            return; // Malformed data - outside the scope of the formatting check
+        }
+        // We only check formatting of aliens & equipment for now
+        if (data.type === "npc") {
+            formattingCheckAlien(data,pack, item.file)
+        }
+        else if (data.type === "equipment") {
+            formattingCheckEquipment(data, pack, item.file)
+        }
+    }
+}
+
+function formattingCheckAlien(data, pack, file) {
+
+    // Validate name
+    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+    }
+    // Validate attributes
+    // Validate HP & Stamina Points
+    if (!data.data.attributes || !data.data.attributes.hp || !data.data.attributes.sp) {
+        addWarningForPack(`${file}: Missing HP/SP values.`, pack);
+        return;
+    }
+    // Validate HP values
+    else if(data.data.attributes.hp.value != data.data.attributes.hp.max) {
+        addWarningForPack(`${file}: HP value not entered correctly.`, pack);
+    }
+    // Validate SP values
+    if(data.data.attributes.sp.value != data.data.attributes.sp.max) {
+        addWarningForPack(`${file}: SP value not entered correctly.`, pack);
+    }
+
+    // Validate image
+    if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+        addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+    }
+
+    // Validate token image
+    if (data.token.img && !data.token.img.startsWith("systems") && !data.token.img.startsWith("icons")) {
+    addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+    }
+
+    // Validate source
+    let source = data.data.details.source;
+    if (!source) {
+        addWarningForPack(`${file}: Missing source field.`, pack);
+       return;
+    }
+    if (!isSourceValid(source)) {
+       addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+    }
+}
+
+function formattingCheckEquipment(data, pack, file) {
+
+    // Validate name
+    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+       addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+    }
+
+    // Validate img
+    if (!data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+       addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+    }
+
+    // Validate source
+    let source = data.data.source;
+    if (!isSourceValid(source)) {
+       addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+    }
+}
+
+// Checks a source string for conformance to string format outlined in CONTRIBUTING.md
+function isSourceValid(source) {
+
+    // NOTE: One day this should be changed if they publish further Core books (Galaxy Exploration Manual included for posterity)
+    let CoreBooksSourceMatch = [...source.matchAll(/(CRB|AR|PW|COM|SOM|NS|GEM) pg. ([\d])+/g)];
+    // NOTE: One day this should be increased when they publish further Alien Archives (Alien Archive 5 included for posterity)
+    let AlienArchiveSourceMatch = [...source.matchAll(/AA([1-5]) pg. ([\d])+/g)];
+    let AdventurePathSourceMatch = [...source.matchAll(/AP #([\d]) pg. ([\d])+/g)];
+
+    if (CoreBooksSourceMatch && CoreBooksSourceMatch.length > 0) {
+       // ✅ formatted Core book source
+       return true;
+    }
+    else if (AlienArchiveSourceMatch && AlienArchiveSourceMatch.length > 0) {
+       // ✅ formatted Alien Archives source
+       return true;
+    }
+    if (AdventurePathSourceMatch && AdventurePathSourceMatch.length > 0) {
+       // ✅ formatted Adventure path source
+       return true;
+    }
+
+    return false;
+}
+
+function addWarningForPack(warning, pack) {
+
+    if (!(pack in packErrors)) {
+        packErrors[pack] = [];
+    }
+
+    cookErrorCount += 1;
+    packErrors[pack].push(warning);
+}
+
+function consistencyCheck(allItems, compendiumMap) {
     for (let item of allItems) {
         let data = item.data;
         if (!data || !data.data || !data.data.description) continue;
-        
+
         let desc = data.data.description.value;
         if (!desc) continue;
-        
+
         let pack = item.pack;
-        
+
         let errors = [];
         let itemMatch = [...desc.matchAll(/@Item\[([^\]]*)\]({([^}]*)})?/gm)];
         if (itemMatch && itemMatch.length > 0) {
@@ -319,7 +448,7 @@ async function cookPacks() {
                 cookErrorCount++;
             }
         }
-        
+
         let journalMatch = [...desc.matchAll(/@JournalEntry\[([^\]]*)\]({([^}]*)})?/gm)];
         if (journalMatch && journalMatch.length > 0) {
             for (let localItem of journalMatch) {
@@ -334,13 +463,13 @@ async function cookPacks() {
                 cookErrorCount++;
             }
         }
-        
+
         let compendiumMatch = [...desc.matchAll(/@Compendium\[([^\]]*)]({([^}]*)})?/gm)];
         if (compendiumMatch && compendiumMatch.length > 0) {
             for (let otherItem of compendiumMatch) {
                 let link = otherItem[1];
                 let otherItemName = (otherItem.length == 4) ? otherItem[3] || link : link;
-                
+
                 let linkParts = link.split('.');
                 if (linkParts.length !== 3) {
                     if (!(pack in packErrors)) {
@@ -350,7 +479,7 @@ async function cookPacks() {
                     cookErrorCount++;
                     continue;
                 }
-                
+
                 let system = linkParts[0];
                 let otherPack = linkParts[1];
                 let otherItemId = linkParts[2];
@@ -363,7 +492,7 @@ async function cookPacks() {
                     packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is not referencing the sfrpg system, but instead using '${system}'.`);
                     cookErrorCount++;
                 }
-                
+
                 // @Compendium links to the same compendium could be @Item links instead.
                 /*if (otherPack === pack) {
                     if (!(pack in packErrors)) {
@@ -372,7 +501,7 @@ async function cookPacks() {
                     packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is referencing the same compendium, consider using @Item[${otherItemId}] instead.`);
                     cookErrorCount++;
                 }*/
-                
+
                 // @Compendium links must link to a valid compendium.
                 if (!(otherPack in compendiumMap)) {
                     if (!(pack in packErrors)) {
@@ -382,7 +511,7 @@ async function cookPacks() {
                     cookErrorCount++;
                     continue;
                 }
-                
+
                 // @Compendium links must link to a valid item ID.
                 var itemExists = false;
                 if (otherItemId in compendiumMap[otherPack]) {
@@ -391,7 +520,7 @@ async function cookPacks() {
                     let foundItem = allItems.find(x => x.pack === otherPack && (x.data.name == otherItemId || x.data.name == otherItemName));
                     itemExists = foundItem !== null;
                 }
-                
+
                 if (!itemExists) {
                     if (!(pack in packErrors)) {
                         packErrors[pack] = [];
@@ -402,18 +531,10 @@ async function cookPacks() {
             }
         }
     }
-
-    console.log(`\nUpdating items with updated IDs.\n`);
-    
-    await unpackPacks();
-    
-    console.log(`\nCook finished with ${cookErrorCount} errors.\n`);
-
-    return 0;
 }
 
 async function postCook() {
-    
+
     if (Object.keys(packErrors).length > 0) {
         for (let pack of Object.keys(packErrors)) {
             console.log(`\n${packErrors[pack].length} Errors cooking ${pack}.db:`);
