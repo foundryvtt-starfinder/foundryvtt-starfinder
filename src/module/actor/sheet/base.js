@@ -457,7 +457,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         updateData['data.isActive'] = desiredOutput;
 
         await item.update(updateData);
-        
         // Render the chat card template
         const templateData = {
             actor: this.actor,
