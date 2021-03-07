@@ -437,8 +437,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         return item.rollDamage({event: event});
     }
 
-
-
     async _onActivateFeat(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
@@ -459,7 +457,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         updateData['data.isActive'] = desiredOutput;
 
         await item.update(updateData);
-
         // Render the chat card template
         const templateData = {
             actor: this.actor,
