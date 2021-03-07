@@ -831,11 +831,12 @@ SFRPG.vehicleTypes = {
 };
 
 SFRPG.vehicleCoverTypes = {
-    "none"   : "SFRPG.Vehicles.VehicleCoverTypes.None",
-    "cover"  : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
-    "soft"   : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
-    "partial": "SFRPG.Vehicles.VehicleCoverTypes.Partial",
-    "total"  : "SFRPG.Vehicles.VehicleCoverTypes.Total"
+    "none"    : "SFRPG.Vehicles.VehicleCoverTypes.None",
+    "cover"   : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
+    "soft"    : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
+    "partial" : "SFRPG.Vehicles.VehicleCoverTypes.Partial",
+    "improved": "SFRPG.Vehicles.VehicleCoverTypes.Improved",
+    "total"   : "SFRPG.Vehicles.VehicleCoverTypes.Total"
 };
 
 /**
