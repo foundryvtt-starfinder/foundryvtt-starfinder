@@ -178,11 +178,15 @@ export class ActorSFRPG extends Actor {
 
         let consume = true;
         if (configureDialog) {
-            const spellFormData = await SpellCastDialog.create(this, item);
-            lvl = parseInt(spellFormData.get("level"));
-            consume = Boolean(spellFormData.get("consume"));
-            if (lvl !== item.data.data.level) {
-                item = item.constructor.createOwned(mergeObject(item.data, { "data.level": lvl }, { inplace: false }), this);
+            try {
+                const spellFormData = await SpellCastDialog.create(this, item);
+                lvl = parseInt(spellFormData.get("level"));
+                consume = Boolean(spellFormData.get("consume"));
+                if (lvl && lvl !== item.data.data.level) {
+                    item = item.constructor.createOwned(mergeObject(item.data, { "data.level": lvl }, { inplace: false }), this);
+                }
+            } catch (error) {
+                return null;
             }
         }
 
