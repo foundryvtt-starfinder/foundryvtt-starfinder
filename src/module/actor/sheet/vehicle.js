@@ -207,7 +207,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             if (rawItemData.type === "weapon" || rawItemData.type === "vehicleAttack") {
                 return this.processDroppedData(event, data);
             }
-            else if (rawItemData.type === "starshipExpansionBay") {
+            else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem") {
                 return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
             }
         }
