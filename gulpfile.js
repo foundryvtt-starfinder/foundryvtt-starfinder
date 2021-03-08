@@ -314,8 +314,6 @@ function formattingCheck(allItems) {
         let data = item.data;
         let pack = item.pack;
 
-
-
         if(!data || !data.data  || !data.type) {
             continue; // Malformed data or journal entry - outside the scope of the formatting check
         }
@@ -329,7 +327,6 @@ function formattingCheck(allItems) {
         else if (data.type === "vehicle") {
             formattingCheckVehicle(data, pack, item.file);
         }
-
     }
 }
 
@@ -415,7 +412,6 @@ function formattingCheckEquipment(data, pack, file) {
             addWarningForPack(`${file}: Improperly formatted armor type field "${armorType}".`, pack);
         }
     }
-
 }
 
 function formattingCheckVehicle(data, pack, file) {
