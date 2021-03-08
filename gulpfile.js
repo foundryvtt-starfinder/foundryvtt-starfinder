@@ -314,16 +314,22 @@ function formattingCheck(allItems) {
         let data = item.data;
         let pack = item.pack;
 
+
+
         if(!data || !data.data  || !data.type) {
-            return; // Malformed data - outside the scope of the formatting check
+            continue; // Malformed data or journal entry - outside the scope of the formatting check
         }
-        // We only check formatting of aliens & equipment for now
+        // We only check formatting of aliens, vehicles & equipment for now
         if (data.type === "npc") {
             formattingCheckAlien(data,pack, item.file)
         }
         else if (data.type === "equipment") {
             formattingCheckEquipment(data, pack, item.file)
         }
+        else if (data.type === "vehicle") {
+            formattingCheckVehicle(data, pack, item.file);
+        }
+
     }
 }
 
@@ -384,7 +390,66 @@ function formattingCheckEquipment(data, pack, file) {
     // Validate source
     let source = data.data.source;
     if (!isSourceValid(source)) {
-       addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+        addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+    }
+
+    // Validate price
+    let price = data.data.price;
+    if (!price || price <= 0) {
+        addWarningForPack(`${file}: Improperly formatted armor price field "${armorType}".`, pack);
+    }
+
+    // Validate level
+    let level = data.data.level;
+    if (!level || level <= 0) {
+        addWarningForPack(`${file}: Improperly formatted armor level field "${armorType}".`, pack);
+    }
+
+    // If armor
+    let armor = data.data.armor
+    if (armor) {
+        // Validate armor type
+        let armorType = data.data.armor.type
+
+        if (armorType != "light" && armorType != "power" && armorType != "heavy"  && armorType != "shield") {
+            addWarningForPack(`${file}: Improperly formatted armor type field "${armorType}".`, pack);
+        }
+    }
+
+}
+
+function formattingCheckVehicle(data, pack, file) {
+
+    // Validate name
+    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+    }
+
+    // Validate image
+    if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+        addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+    }
+
+    // Validate source
+    let source = data.data.details.source;
+    if (!source) {
+        addWarningForPack(`${file}: Missing source field.`, pack);
+        return;
+    }
+    if (!isSourceValid(source)) {
+        addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+    }
+
+    // Validate price
+    let price = data.data.details.price;
+    if (!price || price <= 0) {
+        addWarningForPack(`${file}: Improperly formatted vehicle price field "${armorType}".`, pack);
+    }
+
+    // Validate level
+    let level = data.data.details.level;
+    if (!level || level <= 0) {
+        addWarningForPack(`${file}: Improperly formatted vehicle level field "${armorType}".`, pack);
     }
 }
 
