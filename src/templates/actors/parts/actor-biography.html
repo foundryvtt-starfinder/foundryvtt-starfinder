@@ -1,10 +1,22 @@
 <div class="flexcol bio-properties">
-    <div class="form-group singleFlex" data-tippy-content="{{localize "SFRPG.ActorSheet.Biography.ImageTooltip"}}">
+    <div class="form-group singleFlex" data-tippy-content="{{localize 'SFRPG.ActorSheet.Biography.ImageTooltip'}}">
         <label>Full body image</label>
     </div>
-    <img class="avatar" src="{{data.details.biography.fullBodyImage}}" title="{{actor.name}}&#10;{{localize "SFRPG.ActorSheet.Biography.ImageTooltip"}}" data-edit="data.details.biography.fullBodyImage" width="200" height="250" />
+    <img class="avatar" src="{{data.details.biography.fullBodyImage}}" title="{{actor.name}}&#10;{{localize 'SFRPG.ActorSheet.Biography.ImageTooltip'}}" data-edit="data.details.biography.fullBodyImage" width="200" height="250" />
+
+    {{#if isNPC}}
+    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>{{localize 'SFRPG.Environment'}}</strong><br/>@data.details.biography.climate">
+        <label class="singleLine">{{localize "SFRPG.Environment"}}</label>
+        <input class="singleLine" type="text" name="data.details.biography.climate" value="{{data.details.biography.climate}}" data-dtype="String" placeholder="{{localize 'SFRPG.Any'}}" />
+    </div>
+    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>{{localize 'SFRPG.Organization'}}</strong><br/>@data.details.biography.organization">
+        <label class="singleLine">{{localize "SFRPG.Organization"}}</label>
+        <input class="singleLine" type="text" name="data.details.biography.organization" value="{{data.details.biography.organization}}" data-dtype="String" placeholder="{{localize 'SFRPG.Any'}}" />
+    </div>
+    {{/if}}
+
     {{#unless hideVitals}}
-    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>{{localize "SFRPG.ActorSheet.Biography.DateOfBirth"}}</strong><br>@details.biography.dateOfBirth">
+    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.DateOfBirth'}}</strong><br>@details.biography.dateOfBirth">
         <label class="singleLine">{{localize "SFRPG.ActorSheet.Biography.DateOfBirth"}}</label>
         <input class="singleLine" type="text" name="data.details.biography.dateOfBirth" value="{{data.details.biography.dateOfBirth}}" data-dtype="String" placeholder="{{localize "SFRPG.ActorSheet.Biography.DateOfBirthPlaceholder"}}" />
     </div>
@@ -43,34 +55,8 @@
     </nav>
 
     <section class="bio-body">
-        <div class="tab" data-group="biographyTabs" data-tab="biography">
-            <div class="ecologyrow flexrow">
-                <div class="flexcol">
-                    <div class="form-group flex-shrink" data-tippy-content="<strong>{{localize "SFRPG.Climate"}}</strong><br/>@data.details.biography.climate">
-                        <label><i class="fab fa-pagelines"></i>&nbsp;{{localize "SFRPG.Climate"}}</label>
-                        <input type="text" name="data.details.biography.climate" value="{{data.details.biography.climate}}" placeholder="{{localize "SFRPG.Any"}}"/>
-                    </div>
-                </div>
-            </div>
-            <div class="ecologyrow flexrow">
-                <div class="flexcol">
-                    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Location"}}</strong><br/>@data.details.biography.location">
-                        <label><i class="fas fa-globe"></i>&nbsp;&nbsp;{{localize "SFRPG.Location"}}</label>
-                        <input type="text" name="data.details.biography.location" value="{{data.details.biography.location}}" placeholder="{{localize "SFRPG.Any"}}"/>
-                    </div>
-                </div>
-            </div>
-            <div class="ecologyrow ecologybottom flexrow">
-                <div class="flexcol">
-                    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Organization"}}</strong><br/>@data.details.biography.organization">
-                        <label><i class="fas fa-users"></i>&nbsp;&nbsp;{{localize "SFRPG.Organization"}}</label>
-                        <input type="text" name="data.details.biography.organization" value="{{data.details.biography.organization}}" placeholder="{{localize "SFRPG.Any"}}"/>
-                    </div>
-                </div>
-            </div>
-            <div class="flexrow">
-                {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
-            </div>
+        <div class="tab flexrow" data-group="biographyTabs" data-tab="biography">
+            {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
         </div>
 
         {{#if isGM}}
@@ -78,5 +64,6 @@
             {{editorPlus content=data.details.biography.gmNotes target="data.details.biography.gmNotes" button=true owner=owner editable=editable rolls=false rollData=data}}
         </div>
         {{/if}}
+
     </section>
 </div>
