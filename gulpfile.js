@@ -453,10 +453,10 @@ function formattingCheckVehicle(data, pack, file) {
 function isSourceValid(source) {
 
     // NOTE: One day this should be changed if they publish further Core books (Galaxy Exploration Manual included for posterity)
-    let CoreBooksSourceMatch = [...source.matchAll(/(CRB|AR|PW|COM|SOM|NS|GEM) pg. ([\d])+/g)];
+    let CoreBooksSourceMatch = [...source.matchAll(/(CRB|AR|PW|COM|SOM|NS|GEM) pg\. [\d]+/g)];
     // NOTE: One day this should be increased when they publish further Alien Archives (Alien Archive 5 included for posterity)
-    let AlienArchiveSourceMatch = [...source.matchAll(/AA([1-5]) pg. ([\d])+/g)];
-    let AdventurePathSourceMatch = [...source.matchAll(/AP #([\d]) pg. ([\d])+/g)];
+    let AlienArchiveSourceMatch = [...source.matchAll(/AA([1-5]) pg\. [\d]+/g)];
+    let AdventurePathSourceMatch = [...source.matchAll(/AP #[\d]+ pg\. [\d]+/g)];
 
     if (CoreBooksSourceMatch && CoreBooksSourceMatch.length > 0) {
        // ✅ formatted Core book source
