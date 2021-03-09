@@ -43,9 +43,36 @@
     </nav>
 
     <section class="bio-body">
-        <div class="tab flexrow" data-group="biographyTabs" data-tab="biography">
-            {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+        <div class="tab" data-group="biographyTabs" data-tab="biography">
+            <div class="ecologyrow flexrow">
+                <div class="flexcol">
+                    <div class="form-group flex-shrink" data-tippy-content="<strong>{{localize "SFRPG.Climate"}}</strong><br/>@data.details.biography.climate">
+                        <label><i class="fab fa-pagelines"></i>&nbsp;{{localize "SFRPG.Climate"}}</label>
+                        <input type="text" name="data.details.biography.climate" value="{{data.details.biography.climate}}" placeholder="{{localize "SFRPG.Any"}}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="ecologyrow flexrow">
+                <div class="flexcol">
+                    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Location"}}</strong><br/>@data.details.biography.location">
+                        <label><i class="fas fa-globe"></i>&nbsp;&nbsp;{{localize "SFRPG.Location"}}</label>
+                        <input type="text" name="data.details.biography.location" value="{{data.details.biography.location}}" placeholder="{{localize "SFRPG.Any"}}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="ecologyrow ecologybottom flexrow">
+                <div class="flexcol">
+                    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Organization"}}</strong><br/>@data.details.biography.organization">
+                        <label><i class="fas fa-users"></i>&nbsp;&nbsp;{{localize "SFRPG.Organization"}}</label>
+                        <input type="text" name="data.details.biography.organization" value="{{data.details.biography.organization}}" placeholder="{{localize "SFRPG.Any"}}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="flexrow">
+                {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+            </div>
         </div>
+
         {{#if isGM}}
         <div class="tab flexrow" data-group="biographyTabs" data-tab="gmNotes">
             {{editorPlus content=data.details.biography.gmNotes target="data.details.biography.gmNotes" button=true owner=owner editable=editable rolls=false rollData=data}}
