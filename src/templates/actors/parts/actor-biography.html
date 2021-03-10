@@ -4,17 +4,6 @@
     </div>
     <img class="avatar" src="{{data.details.biography.fullBodyImage}}" title="{{actor.name}}&#10;{{localize 'SFRPG.ActorSheet.Biography.ImageTooltip'}}" data-edit="data.details.biography.fullBodyImage" width="200" height="250" />
 
-    {{#if isNPC}}
-    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>{{localize 'SFRPG.Environment'}}</strong><br/>@data.details.biography.environment">
-        <label class="singleLine">{{localize "SFRPG.Environment"}}</label>
-        <input class="singleLine" type="text" name="data.details.biography.environment" value="{{data.details.biography.environment}}" data-dtype="String" placeholder="{{localize 'SFRPG.Any'}}" />
-    </div>
-    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>{{localize 'SFRPG.Organization'}}</strong><br/>@data.details.biography.organization">
-        <label class="singleLine">{{localize "SFRPG.Organization"}}</label>
-        <input class="singleLine" type="text" name="data.details.biography.organization" value="{{data.details.biography.organization}}" data-dtype="String" placeholder="{{localize 'SFRPG.Any'}}" />
-    </div>
-    {{/if}}
-
     {{#unless hideVitals}}
     <div class="form-group stacked doubleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.DateOfBirth'}}</strong><br>@details.biography.dateOfBirth">
         <label class="singleLine">{{localize "SFRPG.ActorSheet.Biography.DateOfBirth"}}</label>
@@ -49,6 +38,9 @@
 <div class="flexcol">
     <nav class="sheet-subnavigation biotabs" data-group="biographyTabs">
         <a class="item active{{#if data.details.biography.value}} highlight{{/if}}" data-tab="biography">{{localize "SFRPG.ActorSheet.Biography.TabBio"}}</a>
+        {{#if isNPC}}
+        <a class="item active{{#if data.details.ecology.value}} highlight{{/if}}" data-tab="ecology">{{localize "SFRPG.ActorSheet.Biography.TabEcology"}}</a>
+        {{/if}}
         {{#if isGM}}
         <a class="item{{#if data.details.biography.gmNotes}} highlight{{/if}}" data-tab="gmNotes">{{localize "SFRPG.ActorSheet.Biography.TabGM"}} {{#if data.details.biography.gmNotes}} (!){{/if}}</a>
         {{/if}}
@@ -56,14 +48,30 @@
 
     <section class="bio-body">
         <div class="tab flexrow" data-group="biographyTabs" data-tab="biography">
-            {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+                {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
         </div>
-
+        <div class="tab" data-group="biographyTabs" data-tab="ecology">
+            <div class="flexrow">
+                <div class="flexcol">
+                    <div class="form-group ecology" data-tippy-content="<strong>{{localize 'SFRPG.Environment'}}</strong><br/>@data.details.biography.environment">
+                        <label>{{localize 'SFRPG.Environment'}}</label>
+                        <input type="text" name="data.details.biography.environment" value="{{data.details.biography.environment}}" placeholder="{{localize "SFRPG.Any"}}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="flexrow">
+                <div class="flexcol">
+                    <div class="form-group ecology" data-tippy-content="<strong>{{localize 'SFRPG.Organization'}}</strong><br/>@data.details.biography.organization">
+                        <label>{{localize 'SFRPG.Organization'}}</label>
+                        <input type="text" name="data.details.biography.organization" value="{{data.details.biography.organization}}" placeholder="{{localize "SFRPG.Any"}}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
         {{#if isGM}}
         <div class="tab flexrow" data-group="biographyTabs" data-tab="gmNotes">
             {{editorPlus content=data.details.biography.gmNotes target="data.details.biography.gmNotes" button=true owner=owner editable=editable rolls=false rollData=data}}
         </div>
         {{/if}}
-
     </section>
 </div>
