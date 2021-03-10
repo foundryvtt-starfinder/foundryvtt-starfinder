@@ -370,36 +370,54 @@ function formattingCheckAlien(data, pack, file) {
     if (!isSourceValid(source)) {
        addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
     }
+
+    // Validate items
+    for (i in data.items) {
+        formattingCheckEquipment(data.items[i], pack, file, {checkSource: false, checkPrice: false})
+    }
 }
 
-function formattingCheckEquipment(data, pack, file) {
+function formattingCheckWeapons(data, pack, file) {
+
+}
+
+function formattingCheckEquipment(data, pack, file, options = {checkImage: true, checkSource: true, checkPrice: true, checkLevel: true}) {
 
     // Validate name
     if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-       addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
     }
 
-    // Validate img
-    if (!data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-       addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+    // Validate image
+    if ( options.checkImage) {
+        if (data.img && // Only validate if img is set
+            !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+            addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+        }
     }
 
     // Validate source
-    let source = data.data.source;
-    if (!isSourceValid(source)) {
-        addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+    if (options.checkSource) {
+        let source = data.data.source;
+        if (!isSourceValid(source)) {
+            addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+        }
     }
 
     // Validate price
-    let price = data.data.price;
-    if (!price || price <= 0) {
-        addWarningForPack(`${file}: Improperly formatted armor price field "${armorType}".`, pack);
+    if (options.checkPrice) {
+        let price = data.data.price;
+        if (!price || price <= 0) {
+            addWarningForPack(`${file}: Improperly formatted armor price field "${price}".`, pack);
+        }
     }
 
     // Validate level
-    let level = data.data.level;
-    if (!level || level <= 0) {
-        addWarningForPack(`${file}: Improperly formatted armor level field "${armorType}".`, pack);
+    if (options.checkLevel){
+        let level = data.data.level;
+        if (!level || level <= 0) {
+            addWarningForPack(`${file}: Improperly formatted armor level field "${level}".`, pack);
+        }
     }
 
     // If armor
