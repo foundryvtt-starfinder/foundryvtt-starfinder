@@ -377,10 +377,6 @@ function formattingCheckAlien(data, pack, file) {
     }
 }
 
-function formattingCheckWeapons(data, pack, file) {
-
-}
-
 function formattingCheckEquipment(data, pack, file, options = {checkImage: true, checkSource: true, checkPrice: true, checkLevel: true}) {
 
     // Validate name
@@ -420,6 +416,12 @@ function formattingCheckEquipment(data, pack, file, options = {checkImage: true,
         }
     }
 
+    // If a weapon
+   // if (data.weaponTy)
+    if(data.data.weaponType) {
+        formattingCheckWeapons(data, pack, file);
+    }
+
     // If armor
     let armor = data.data.armor
     if (armor) {
@@ -428,6 +430,27 @@ function formattingCheckEquipment(data, pack, file, options = {checkImage: true,
 
         if (armorType != "light" && armorType != "power" && armorType != "heavy"  && armorType != "shield") {
             addWarningForPack(`${file}: Improperly formatted armor type field "${armorType}".`, pack);
+        }
+    }
+}
+
+function formattingCheckWeapons(data, pack, file) {
+
+    let lowecaseName = data.name.toLowerCase()
+    if(lowecaseName.includes("multiattack"))
+    {
+        // Should be [MultiATK]
+        addWarningForPack(`${file}: Improperly formatted multiattack name field "${data.name}".`, pack);
+    }
+    if(lowecaseName.includes("multiatk") ) {
+
+        if(data.name.includes("[MultiATK] "))
+        {
+            // Looks good, contains the proper multi-attack prefix and a space
+        }
+        else {
+            // Anything else is close, but is slightly off
+            addWarningForPack(`${file}: Improperly formatted multiattack name field "${data.name}".`, pack);
         }
     }
 }
@@ -490,6 +513,10 @@ function isSourceValid(source) {
     }
 
     return false;
+}
+
+function x() {
+
 }
 
 function addWarningForPack(warning, pack) {
