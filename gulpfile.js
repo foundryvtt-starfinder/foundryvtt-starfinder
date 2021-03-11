@@ -233,10 +233,15 @@ async function unpackPacks() {
 /**
  * Cook db source json files into .db files with nedb
  */
+var conditionsCache = {};
+var conditionsRegularExpression;
 var cookErrorCount = 0;
 var cookAborted = false;
 var packErrors = {};
-async function cookPacks() {
+async function cookPacksNoFormattingCheck() {
+    await cookPacks({formattingCheck: false})
+}
+async function cookPacks(options = {formattingCheck: true}) {
     console.log(`Cooking db files`);
     
     let compendiumMap = {};
@@ -279,22 +284,50 @@ async function cookPacks() {
                 cookErrorCount++;
                 continue;
             }
-            
+
+            // Cache conditions to be referenced later
+            if (directory == "conditions") {
+                conditionsCache[jsonInput._id] = jsonInput;
+            }
+
             compendiumMap[directory][jsonInput._id] = jsonInput;
             allItems.push({pack: directory, data: jsonInput, file: file});
             
             await db.asyncInsert(jsonInput);
         }
     }
-    
+
     if (cookErrorCount > 0) {
         console.log(`\nCritical parsing errors occurred, aborting cook.`);
         cookAborted = true;
         return 1;
     }
 
-    console.log(`\nStarting formatting check.`);
-    formattingCheck(allItems)
+    // Construct condition finding regular expression
+    var regularExpressionSubstring = "";
+    let numberOfConditions = Object.keys(conditionsCache).length
+    var index = 0;
+    for (let conditionId in conditionsCache) {
+        let condition = conditionsCache[conditionId];
+        // Construct a substring used to generate a condition finding regular expression
+        if (index == numberOfConditions - 1) {
+            regularExpressionSubstring += condition.name;
+        }
+        else {
+            regularExpressionSubstring += condition.name + "|";
+        }
+        index++;
+    }
+
+    conditionsRegularExpression =  new RegExp("(" + regularExpressionSubstring + ")","g");
+
+    if (options.formattingCheck) {
+        console.log(`\nStarting formatting check.`);
+        formattingCheck(allItems)
+    }
+    else {
+        console.log(`\n*Skipping* formatting check.`);
+    }
 
     console.log(`\nStarting consistency check.`);
     consistencyCheck(allItems, compendiumMap)
@@ -326,6 +359,9 @@ function formattingCheck(allItems) {
         }
         else if (data.type === "vehicle") {
             formattingCheckVehicle(data, pack, item.file);
+        }
+        else if (data.type == "spell") {
+            formattingCheckSpell(data, pack, item.file);
         }
     }
 }
@@ -488,6 +524,87 @@ function formattingCheckVehicle(data, pack, file) {
     if (!level || level <= 0) {
         addWarningForPack(`${file}: Improperly formatted vehicle level field "${armorType}".`, pack);
     }
+}
+
+function formattingCheckSpell(data, pack, file) {
+
+    // Validate name
+    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+    }
+
+    // Validate image
+    if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+        addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+    }
+
+    // Validate source
+    let source = data.data.source;
+    if (!source) {
+        addWarningForPack(`${file}: Missing source field.`, pack);
+        return;
+    }
+    if (!isSourceValid(source)) {
+        addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+    }
+
+    // Contruct regular expression checking for conditions
+    let description = data.data.description.value
+    let result = searchDescriptionForUnlinkedCondition(description);
+    if (result.found) {
+        addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
+    }
+}
+
+// Check if a description contains an unlinked reference to a condition
+function searchDescriptionForUnlinkedCondition(description) {
+
+    let matches = [...description.matchAll(conditionsRegularExpression)];
+    //Found a potential reference to a condition
+    if (matches && matches.length > 0) {
+        // Capture the character before and after each match and use some basic heuristics to decide if it's an linked condition in the description
+        for(let matchIndex in matches) {
+
+            let match = matches[matchIndex];
+            let conditionWord = match[0];
+            let matchedWord = description.substring( match["index"], match["index"] + match["length"]);
+
+            // We want to capture a character before and after
+            let characterBeforeIndex = match["index"] - 1;
+            let characterAfterIndex = match["index"] + conditionWord.length;
+            let characterBefore = description.substring(characterBeforeIndex, characterBeforeIndex + 1);
+            let characterAfter = description.substring(characterAfterIndex, characterAfterIndex + 1);
+            let delimiterCharacters = [">", "<", ";",",","/","(",")","."];
+
+            var unlinkedReferenceFound = false;
+            // If surrounded by { and } we assume it is linked and continue
+            if (characterBefore === "{" && characterAfter === "}")
+            {
+                continue;
+            }
+            // If the condition is surrounded by spaces, it is unlinked
+            // it should be contained in a link to the compendium like this `@Compendium[sfrpg.spells.YDXegEus8p0BnsH1]{Invisibility}`
+            else if (characterBefore === " " && characterAfter === " ") {
+                unlinkedReferenceFound = true;
+            }
+            // If potentially within the contents of a tag or surrounded by delimiting characters
+            else if (delimiterCharacters.includes(characterBefore) && (delimiterCharacters.includes(characterAfter) || " ")) {
+                // The condition was found between two delimiters, most likely in the contents of an html tag.
+                // Or it was found at the tail of a delimiter followed by a space (at the end of a comma separated list.
+                unlinkedReferenceFound = true
+            }
+            // Condition was found after a space but right before a delimiting character, like the end of a sentence.
+            // Or hugging opening brackets, or the start of a comma separated list.
+            else if ((delimiterCharacters.includes(characterBefore) || " ") && delimiterCharacters.includes(characterAfter)) {
+                unlinkedReferenceFound = true;
+            }
+
+            if (unlinkedReferenceFound) {
+                return {found: true, match: conditionWord};
+            }
+        }
+    }
+    return {found: false};
 }
 
 // Checks a source string for conformance to string format outlined in CONTRIBUTING.md
@@ -921,5 +1038,6 @@ exports.publish = gulp.series(
 	packageBuild
 );
 exports.cook = gulp.series(cookPacks, clean, execBuild, postCook);
+exports.cookNoFormattingCheck = gulp.series(cookPacksNoFormattingCheck, clean, execBuild, postCook);
 exports.unpack = unpackPacks;
 exports.default = gulp.series(clean, execBuild);
