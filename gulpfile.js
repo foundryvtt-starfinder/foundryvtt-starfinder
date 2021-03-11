@@ -515,10 +515,6 @@ function isSourceValid(source) {
     return false;
 }
 
-function x() {
-
-}
-
 function addWarningForPack(warning, pack) {
 
     if (!(pack in packErrors)) {
