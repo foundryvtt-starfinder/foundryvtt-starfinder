@@ -159,6 +159,7 @@ SFRPG.weaponDamageTypes = {
     "acid|slashing": "SFRPG.DamageTypesAcidOrSlashing",    
     "cold": "SFRPG.DamageTypesCold",
     "cold+piercing": "SFRPG.DamageTypesColdAndPiercing",
+    "cold+slashing": "SFRPG.DamageTypesColdAndSlashing",
     "cold|fire": "SFRPG.DamageTypesColdOrFire",
     "electricity": "SFRPG.DamageTypesElectricity",
     "electricity+fire": "SFRPG.DamageTypesElectricityAndFire",
