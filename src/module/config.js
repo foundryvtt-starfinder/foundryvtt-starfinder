@@ -371,6 +371,11 @@ SFRPG.weaponProperties = {
     "wideLine": "SFRPG.WeaponPropertiesWideLine"
 };
 
+SFRPG.weaponPropertiesTooltips = {
+    "one": "SFRPG.WeaponPropertiesOneHandedTooltip",
+    "shatter": "SFRPG.WeaponPropertiesShatterTooltip"
+};
+
 SFRPG.spellAreaShapes = {
     "": "",
     "cone": "SFRPG.SpellAreaShapesCone",
