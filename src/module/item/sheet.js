@@ -216,12 +216,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (item.type === "weapon") {
             props.push(...Object.entries(item.data.properties)
                 .filter(e => e[1] === true)
-                .map(e => (
-                    {
-                        name: CONFIG.SFRPG.weaponProperties[e[0]],
-                        tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]
-                    }
-                )
+                .map(e => ({
+                    name: CONFIG.SFRPG.weaponProperties[e[0]],
+                    tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]
+                })
             )
         );
         } else if (item.type === "spell") {
@@ -247,11 +245,10 @@ export class ItemSheetSFRPG extends ItemSheet {
                 tooltip: null
             });
         } else if (item.type === "starshipWeapon") {
-            props.push(
-                {
-                    name: CONFIG.SFRPG.starshipWeaponTypes[item.data.weaponType],
-                    tooltip: null
-                });
+            props.push({
+                name: CONFIG.SFRPG.starshipWeaponTypes[item.data.weaponType],
+                tooltip: null
+            });
             props.push({
                 name: CONFIG.SFRPG.starshipWeaponClass[item.data.class],
                 tooltip: null
@@ -286,22 +283,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Action usage
         if ((item.type !== "weapon") && item.data.activation && !isObjectEmpty(item.data.activation)) {
             props.push(
-                {
-                    name: labels.activation,
-                    tooltip: null
-                },
-                {
-                    name: labels.range,
-                    tooltip: null
-                },
-                {
-                    name: labels.target,
-                    tooltip: null
-                },
-                {
-                    name: labels.duration,
-                    tooltip: null
-                }
+                {name: labels.activation, tooltip: null},
+                {name: labels.range, tooltip: null},
+                {name: labels.target, tooltip: null},
+                {name: labels.duration, tooltip: null}
             )
         }
         return props.filter(p => !!p && !!p.name);
