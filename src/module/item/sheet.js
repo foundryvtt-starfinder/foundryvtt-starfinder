@@ -304,7 +304,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 }
             )
         }
-        return props.filter(p => !!p);
+        return props.filter(p => !!p.name);
     }
 
     _getItemCategory(item) {
