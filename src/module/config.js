@@ -374,6 +374,21 @@ SFRPG.weaponProperties = {
 SFRPG.weaponPropertiesTooltips = {
     "one": "SFRPG.WeaponPropertiesOneHandedTooltip",
     "two": "SFRPG.WeaponPropertiesTwoHandedTooltip",
+    "aeon": "SFRPG.WeaponPropertiesAeonTooltip",
+    "analog": "SFRPG.WeaponPropertiesAnalogTooltip",
+    "antibiological": "SFRPG.WeaponPropertiesAntibiologicalTooltip",
+    "archaic": "SFRPG.WeaponPropertiesArchaicTooltip",
+    "aurora": "SFRPG.WeaponPropertiesAuroraTooltip",
+    "automatic": "SFRPG.WeaponPropertiesAutomaticTooltip",
+    "blast": "SFRPG.WeaponPropertiesBlastTooltip",
+    "block": "SFRPG.WeaponPropertiesBlockTooltip",
+    "boost": "SFRPG.WeaponPropertiesBoostTooltip",
+    "breach": "SFRPG.WeaponPropertiesBreachTooltip",
+    "breakdown": "SFRPG.WeaponPropertiesBreakdownTooltip",
+    "bright": "SFRPG.WeaponPropertiesBrightTooltip",
+    "conceal": "SFRPG.WeaponsPropertiesConcealTooltip",
+    "cluster": "SFRPG.WeaponPropertiesClusterTooltip",
+    "deconstruct": "SFRPG.WeaponPropertiesDeconstructTooltip",
     "shatter": "SFRPG.WeaponPropertiesShatterTooltip"
 };
 
