@@ -373,6 +373,7 @@ SFRPG.weaponProperties = {
 
 SFRPG.weaponPropertiesTooltips = {
     "one": "SFRPG.WeaponPropertiesOneHandedTooltip",
+    "two": "SFRPG.WeaponPropertiesTwoHandedTooltip",
     "shatter": "SFRPG.WeaponPropertiesShatterTooltip"
 };
 

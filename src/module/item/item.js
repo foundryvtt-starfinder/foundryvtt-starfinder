@@ -382,7 +382,7 @@ export class ItemSFRPG extends Item {
     _goodsChatData(data, labels, props) {
         props.push(
             {name: "Goods", tooltip: null},
-            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : {name: null}
+            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null
         );
     }
 
@@ -395,8 +395,8 @@ export class ItemSFRPG extends Item {
     _technologicalChatData(data, labels, props) {
         props.push(
             {name: "Technological", tooltip: null},
-            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : {name:null},
-            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : {name:null}
+            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null,
+            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : null
         );
     }
 
@@ -409,8 +409,8 @@ export class ItemSFRPG extends Item {
     _hybridChatData(data, labels, props) {
         props.push(
             {name: "Hybrid", tooltip: null},
-            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : {name: null},
-            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : {name: null}
+            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null,
+            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : null
         );
     }
 
@@ -423,8 +423,8 @@ export class ItemSFRPG extends Item {
     _magicChatData(data, labels, props) {
         props.push(
             "Magic",
-            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : {name: null},
-            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : {name: null}
+            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null,
+            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : null
         );
     }
 
@@ -445,7 +445,7 @@ export class ItemSFRPG extends Item {
 
         props.push(
             {name: "Armor Upgrade", tooltip: null},
-            data.slots ? {name: `Slots ${data.slots}`, tooltip: null} : {name: null},
+            data.slots ? {name: `Slots ${data.slots}`, tooltip: null} : null,
             {name: `Allowed armor ${armorType}`, tooltip: null}
         );
     }
@@ -453,8 +453,8 @@ export class ItemSFRPG extends Item {
     _augmentationChatData(data, labels, props) {
         props.push(
             {name:"Augmentation", tooltip: null},
-            data.type ? {name: CONFIG.SFRPG.augmentationTypes[data.type], tooltip: null} : {name:null},
-            data.system ? {name: CONFIG.SFRPG.augmentationSytems[data.system], tooltip: null} : {name:null}
+            data.type ? {name: CONFIG.SFRPG.augmentationTypes[data.type], tooltip: null} : null,
+            data.system ? {name: CONFIG.SFRPG.augmentationSytems[data.system], tooltip: null} : null
         );
     }
 
@@ -467,18 +467,18 @@ export class ItemSFRPG extends Item {
     _fusionChatData(data, labels, props) {
         props.push(
             {name: "Weapon Fusion", tooltip: null},
-            data.level ? {name: `Level ${data.level}`, tooltip: null} : {name: null}
+            data.level ? {name: `Level ${data.level}`, tooltip: null} : null
         );
     }
 
     _starshipWeaponChatData(data, labels, props) {
         props.push(
             {name: "Starship Weapon", tooltip: null},
-            data.weaponType ? {name: CONFIG.SFRPG.starshipWeaponTypes[data.weaponType], tooltip: null} : {name: null},
-            data.class ? {name: CONFIG.SFRPG.starshipWeaponClass[data.class], tooltip: null} : {name: null},
-            data.range ? {name: CONFIG.SFRPG.starshipWeaponRanges[data.range], tooltip: null} : {name: null},
+            data.weaponType ? {name: CONFIG.SFRPG.starshipWeaponTypes[data.weaponType], tooltip: null} : null,
+            data.class ? {name: CONFIG.SFRPG.starshipWeaponClass[data.class], tooltip: null} : null,
+            data.range ? {name: CONFIG.SFRPG.starshipWeaponRanges[data.range], tooltip: null} : null,
             data.mount.mounted ? {name: game.i18n.localize("SFRPG.Items.ShipWeapon.Mounted"), tooltip: null} : {name: game.i18n.localize("SFRPG.Items.ShipWeapon.NotMounted"), tooltip: null},
-            data.speed > 0 ? {name: game.i18n.format("SFRPG.Items.ShipWeapon.Speed", {speed: data.speed}), tooltip: null} : {name: null}
+            data.speed > 0 ? {name: game.i18n.format("SFRPG.Items.ShipWeapon.Speed", {speed: data.speed}), tooltip: null} : null
         );
     }
 
