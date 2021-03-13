@@ -226,11 +226,11 @@ export class ItemSheetSFRPG extends ItemSheet {
         );
         } else if (item.type === "spell") {
             props.push(
-                labels.components,
-                labels.materials,
-                item.data.concentration ? "Concentration" : null,
-                item.data.sr ? "Spell Resistence" : null,
-                item.data.dismissible ? "Dismissible" : null
+                {name: labels.components, tooltip: null},
+                {name: labels.materials, tooltip: null},
+                item.data.concentration ? {name: "Concentration", tooltip: null} : null,
+                item.data.sr ? {name: "Spell Resistence", tooltip: null} : null,
+                item.data.dismissible ? {name: "Dismissible", tooltip: null} : null
             )
         } else if (item.type === "equipment") {
             props.push({
@@ -304,7 +304,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 }
             )
         }
-        return props.filter(p => !!p.name);
+        return props.filter(p => !!p && !!p.name);
     }
 
     _getItemCategory(item) {
