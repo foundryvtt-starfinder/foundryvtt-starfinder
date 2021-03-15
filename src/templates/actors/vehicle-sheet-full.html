@@ -151,9 +151,15 @@
                                 <input type="text" name="data.attributes.modifiers.piloting" value="{{data.attributes.modifiers.piloting}}" />
                                 <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
                                     <div class="passenger-action flexcol">
-                                        <button class="tag pilotPilotingSkill">{{localize "SFRPG.VehicleSheet.Passengers.Piloting"}}</button>
+                                        <a class="pilotPilotingSkill">.</a>
                                     </div>
                                 </div>
+                                {{/if}}
+                                {{#if (eq data.attributes.controlSkill "ath")}}
+                                <input type="text" name="data.attributes.modifiers.athletics" value="{{data.attributes.modifiers.athletics}}" />
+                                {{/if}}
+                                {{#if (eq data.attributes.controlSkill "sur")}}
+                                <input type="text" name="data.attributes.modifiers.survival" value="{{data.attributes.modifiers.survival}}" />
                                 {{/if}}
                             </div>
                         </div>
