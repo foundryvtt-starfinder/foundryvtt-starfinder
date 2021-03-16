@@ -1,33 +1,34 @@
 <div class="flexcol bio-properties">
-    <div class="form-group singleFlex" data-tippy-content="{{localize "SFRPG.ActorSheet.Biography.ImageTooltip"}}">
+    <div class="form-group singleFlex" data-tippy-content="{{localize 'SFRPG.ActorSheet.Biography.ImageTooltip'}}">
         <label>Full body image</label>
     </div>
-    <img class="avatar" src="{{data.details.biography.fullBodyImage}}" title="{{actor.name}}&#10;{{localize "SFRPG.ActorSheet.Biography.ImageTooltip"}}" data-edit="data.details.biography.fullBodyImage" width="200" height="250" />
+    <img class="avatar" src="{{data.details.biography.fullBodyImage}}" title="{{actor.name}}&#10;{{localize 'SFRPG.ActorSheet.Biography.ImageTooltip'}}" data-edit="data.details.biography.fullBodyImage" width="200" height="250" />
+
     {{#unless hideVitals}}
-    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>{{localize "SFRPG.ActorSheet.Biography.DateOfBirth"}}</strong><br>@details.biography.dateOfBirth">
+    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.DateOfBirth'}}</strong><br>@details.biography.dateOfBirth">
         <label class="singleLine">{{localize "SFRPG.ActorSheet.Biography.DateOfBirth"}}</label>
-        <input class="singleLine" type="text" name="data.details.biography.dateOfBirth" value="{{data.details.biography.dateOfBirth}}" data-dtype="String" placeholder="{{localize "SFRPG.ActorSheet.Biography.DateOfBirthPlaceholder"}}" />
+        <input class="singleLine" type="text" name="data.details.biography.dateOfBirth" value="{{data.details.biography.dateOfBirth}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.DateOfBirthPlaceholder'}}" />
     </div>
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize "SFRPG.ActorSheet.Biography.Age"}}</strong><br>@details.biography.age">
+    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.Age'}}</strong><br>@details.biography.age">
         <label>{{localize "SFRPG.ActorSheet.Biography.Age"}}</label>
         <div class="form-fields">
-            <input type="text" name="data.details.biography.age" value="{{data.details.biography.age}}" data-dtype="Number" placeholder="{{localize "SFRPG.ActorSheet.Biography.AgePlaceholder"}}" />
+            <input type="text" name="data.details.biography.age" value="{{data.details.biography.age}}" data-dtype="Number" placeholder="{{localize 'SFRPG.ActorSheet.Biography.AgePlaceholder'}}" />
         </div>
     </div>
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize "SFRPG.ActorSheet.Biography.Height"}}</strong><br>@details.biography.height">
+    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.Height'}}</strong><br>@details.biography.height">
         <label>{{localize "SFRPG.ActorSheet.Biography.Height"}}</label>
         <div class="form-fields">
-            <input type="text" name="data.details.biography.height" value="{{data.details.biography.height}}" data-dtype="String" placeholder="{{localize "SFRPG.ActorSheet.Biography.HeightPlaceholder"}}" />
+            <input type="text" name="data.details.biography.height" value="{{data.details.biography.height}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.HeightPlaceholder'}}" />
         </div>
     </div>
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize "SFRPG.ActorSheet.Biography.Weight"}}</strong><br>@details.biography.weight">
+    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.Weight'}}</strong><br>@details.biography.weight">
         <label>{{localize "SFRPG.ActorSheet.Biography.Weight"}}</label>
         <div class="form-fields">
-            <input type="text" name="data.details.biography.weight" value="{{data.details.biography.weight}}" data-dtype="String" placeholder="{{localize "SFRPG.ActorSheet.Biography.WeightPlaceholder"}}" />
+            <input type="text" name="data.details.biography.weight" value="{{data.details.biography.weight}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.WeightPlaceholder'}}" />
         </div>
     </div>
     {{/unless}}
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize "SFRPG.ActorSheet.Biography.OtherVisuals"}}</strong><br>@details.biography.otherVisuals">
+    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.OtherVisuals'}}</strong><br>@details.biography.otherVisuals">
         <label>{{localize "SFRPG.ActorSheet.Biography.OtherVisuals"}}</label>
     </div>
 
@@ -37,6 +38,9 @@
 <div class="flexcol">
     <nav class="sheet-subnavigation biotabs" data-group="biographyTabs">
         <a class="item active{{#if data.details.biography.value}} highlight{{/if}}" data-tab="biography">{{localize "SFRPG.ActorSheet.Biography.TabBio"}}</a>
+        {{#if isNPC}}
+        <a class="item active{{#if data.details.ecology.value}} highlight{{/if}}" data-tab="ecology">{{localize "SFRPG.ActorSheet.Biography.TabEcology"}}</a>
+        {{/if}}
         {{#if isGM}}
         <a class="item{{#if data.details.biography.gmNotes}} highlight{{/if}}" data-tab="gmNotes">{{localize "SFRPG.ActorSheet.Biography.TabGM"}} {{#if data.details.biography.gmNotes}} (!){{/if}}</a>
         {{/if}}
@@ -44,7 +48,25 @@
 
     <section class="bio-body">
         <div class="tab flexrow" data-group="biographyTabs" data-tab="biography">
-            {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+                {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+        </div>
+        <div class="tab" data-group="biographyTabs" data-tab="ecology">
+            <div class="flexrow">
+                <div class="flexcol">
+                    <div class="form-group ecology" data-tippy-content="<strong>{{localize 'SFRPG.Environment'}}</strong><br/>@data.details.biography.environment">
+                        <label>{{localize 'SFRPG.Environment'}}</label>
+                        <input type="text" name="data.details.environment" value="{{data.details.environment}}" placeholder="{{localize "SFRPG.Any"}}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="flexrow">
+                <div class="flexcol">
+                    <div class="form-group ecology" data-tippy-content="<strong>{{localize 'SFRPG.Organization'}}</strong><br/>@data.details.biography.organization">
+                        <label>{{localize 'SFRPG.Organization'}}</label>
+                        <input type="text" name="data.details.organization" value="{{data.details.organization}}" placeholder="{{localize "SFRPG.Any"}}"/>
+                    </div>
+                </div>
+            </div>
         </div>
         {{#if isGM}}
         <div class="tab flexrow" data-group="biographyTabs" data-tab="gmNotes">

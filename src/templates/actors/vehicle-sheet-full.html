@@ -137,14 +137,30 @@
                 <div class="flexrow">
                     <div class="flexcol">
                         <div class="form-group">
-                            <label>Piloting</label>
+                            <label>Control</label>
                             <div class="form-fields">
+                                <select name="data.attributes.controlSkill">
+                                    {{#select data.attributes.controlSkill}}
+                                    <option value="pil">{{ config.skills.pil }}</option>
+                                    <option value="ath">{{ config.skills.ath }}</option>
+                                    <option value="sur">{{ config.skills.sur }}</option>
+                                    <option value="none">None</option>
+                                    {{/select}}
+                                </select>
+                                {{#if (eq data.attributes.controlSkill "pil")}}
                                 <input type="text" name="data.attributes.modifiers.piloting" value="{{data.attributes.modifiers.piloting}}" />
                                 <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
                                     <div class="passenger-action flexcol">
-                                        <button class="tag pilotPilotingSkill">{{localize "SFRPG.VehicleSheet.Passengers.Piloting"}}</button>
+                                        <a class="pilotPilotingSkill">&nbsp;</a>
                                     </div>
                                 </div>
+                                {{/if}}
+                                {{#if (eq data.attributes.controlSkill "ath")}}
+                                <input type="text" name="data.attributes.modifiers.athletics" value="{{data.attributes.modifiers.athletics}}" />
+                                {{/if}}
+                                {{#if (eq data.attributes.controlSkill "sur")}}
+                                <input type="text" name="data.attributes.modifiers.survival" value="{{data.attributes.modifiers.survival}}" />
+                                {{/if}}
                             </div>
                         </div>
                         <div class="form-group">
