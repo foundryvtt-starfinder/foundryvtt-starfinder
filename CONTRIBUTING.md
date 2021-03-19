@@ -108,4 +108,5 @@ Items have a source field, and this source field should be filled in. There is a
 | Alien Archive 2 | AA2 pg. x | AA2 pg. 123 |
 | Alien Archive 3 | AA3 pg. x | AA3 pg. 123 |
 | Alien Archive 4 | AA4 pg. x | AA4 pg. 123 |
-| Adventure path books | AP #x pg. y | AP #03 pg. 58 |
+| Adventure path books | AP #x pg. y | AP #3 pg. 58 |
+| Starfinder Society | SFS #x-y pg. z | SFS #1-2 pg. 23 |
