@@ -1,17 +1,17 @@
 {
-  "name": "Stealth Enercopter",
+  "name": "Biped Walker",
   "type": "vehicle",
   "data": {
     "conditions": {},
     "details": {
-      "level": 16,
-      "price": 535000,
+      "level": 3,
+      "price": 3860,
       "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">This partially open aircraft has an antigrav rotor and two turrets.</span></p>",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Used by planetary military forces, this two-legged walker has advanced digital stabilizers that ensure balance.</span></p>",
         "chat": "",
         "unidentified": ""
       },
-      "source": "AR pg. 138"
+      "source": "AP #24 pg. 51"
     },
     "crew": {
       "useNPCCrew": false,
@@ -24,7 +24,7 @@
         "actorIds": []
       },
       "passenger": {
-        "limit": 9,
+        "limit": 0,
         "actorIds": []
       }
     },
@@ -33,43 +33,45 @@
       "actorIds": []
     },
     "attributes": {
-      "size": "huge",
-      "type": "air",
+      "size": "large",
+      "type": "land",
       "dimensions": {
-        "width": "10",
-        "length": "20",
+        "width": "4",
+        "length": "4",
         "height": "7"
       },
       "speed": {
-        "drive": "70 ft",
-        "full": "850 ft",
-        "mph": "95 mph (fly)",
+        "drive": "35 ft",
+        "full": "350 ft",
+        "mph": "40 mph",
         "type": ""
       },
       "eac": {
-        "value": 30
+        "value": 13
       },
       "expansionBays": {
         "value": 0
       },
       "kac": {
-        "value": 31
+        "value": 15
       },
-      "cover": "total",
+      "cover": "partial",
       "hp": {
-        "value": 280,
-        "max": 280,
-        "threshold": 140
+        "value": 40,
+        "max": 40,
+        "threshold": 20
       },
-      "hardness": 15,
+      "hardness": 6,
       "modifiers": {
-        "piloting": "0",
+        "piloting": "-3",
         "attackStopped": "0",
-        "attackMoving": "-2",
-        "attackFullSpeed": "-4"
+        "attackMoving": "-3",
+        "attackFullSpeed": "-6",
+        "athletics": ""
       },
       "systems": [],
-      "special": []
+      "special": [],
+      "controlSkill": "pil"
     }
   },
   "flags": {},
@@ -96,7 +98,7 @@
       "speed": 5,
       "intensity": 5
     },
-    "actorId": "LtEMWeWEAx1n4MHQ",
+    "actorId": "8nVYpHNJazD7CwHm",
     "actorLink": false,
     "disposition": -1,
     "displayBars": 0,
@@ -106,6 +108,7 @@
   },
   "items": [
     {
+      "_id": "6hYEGXGbezExRSQD",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
@@ -122,14 +125,14 @@
         "damage": {
           "parts": [
             [
-              "2*(18d10)",
+              "2*(5d4)",
               "bludgeoning"
             ]
           ]
         },
         "save": {
           "type": "reflex",
-          "dc": "20",
+          "dc": "12",
           "descriptor": "negate"
         },
         "critical": {
@@ -139,11 +142,13 @@
           "parts": []
         }
       },
+      "sort": 100000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     },
     {
+      "_id": "LS40UB61zorcVeSs",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
@@ -160,14 +165,14 @@
         "damage": {
           "parts": [
             [
-              "18d10",
+              "5d4",
               "bludgeoning"
             ]
           ]
         },
         "save": {
           "type": "reflex",
-          "dc": "20",
+          "dc": "12",
           "descriptor": "half"
         },
         "critical": {
@@ -177,26 +182,28 @@
           "parts": []
         }
       },
+      "sort": 200000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     },
     {
-      "name": "Autopilot",
+      "_id": "ude6lenbqgWPYHuw",
+      "name": "Planetary comm unit",
       "type": "vehicleSystem",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>",
           "unidentified": ""
         },
-        "source": "CRB pg. 280",
+        "source": "CRB pg. 218",
         "type": "",
         "piloting": {
-          "usedAsPilot": true,
-          "piloting": "28"
+          "usedAsPilot": false,
+          "piloting": "0"
         },
         "canBeActivated": true,
         "isActive": false,
@@ -210,28 +217,30 @@
           "parts": []
         }
       },
+      "sort": 500000,
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
       "effects": []
     },
     {
-      "name": "Enhanced sensors (darkvision 5 mile)",
+      "_id": "VdtQuxDYnp9VPSpW",
+      "name": "Autocontrol",
       "type": "vehicleSystem",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have autocontrol, which enables you to spend your actions on tasks other than piloting, but is far less capable than an autopilot. You can engage autocontrol as a swift action after taking a drive or race action, and it lasts until it is disengaged (also a swift action) or until the vehicle is no longer capable of moving. When you&rsquo;re using autocontrol, the vehicle becomes uncontrolled, but each round it moves in a straight line for the same distance and at the same heading and speed as the last pilot action (moving as if taking two drive actions if drive was the last action the pilot took, or as a race action if that was the last action the pilot took). The autocontrol uses the result of the pilot&rsquo;s most recent Piloting check as the result of its Piloting checks.</span></p>",
           "unidentified": ""
         },
-        "source": "",
+        "source": "CRB pg. 280",
         "type": "",
         "piloting": {
           "usedAsPilot": false,
-          "piloting": "0"
+          "piloting": 0
         },
-        "canBeActivated": false,
+        "canBeActivated": true,
         "isActive": false,
         "damage": {
           "parts": []
@@ -243,27 +252,29 @@
           "parts": []
         }
       },
+      "sort": 300000,
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
+      "img": "icons/svg/mystery-man.svg",
       "effects": []
     },
     {
-      "name": "Plasma cannon, white star",
+      "_id": "rlhIo1jaFGFacc9I",
+      "name": "Anchor pistol, voltaic",
       "type": "weapon",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Plasma cannons shoot large, explosive blasts of ionized plasma. They are difficult to use and have a relatively short range for a heavy weapon, but their impact has devastating effect.</p>",
+          "value": "",
           "unidentified": ""
         },
-        "source": "CRB pg. 177",
+        "source": "AR",
         "type": "",
         "quantity": 1,
-        "bulk": "2",
-        "price": 189200,
-        "level": 16,
+        "bulk": "L",
+        "price": 2100,
+        "level": 4,
         "attuned": false,
         "equipped": true,
         "equippable": true,
@@ -276,14 +287,14 @@
             "mod": ""
           },
           "hp": {
-            "value": 93,
-            "max": "93"
+            "value": 6,
+            "max": ""
           },
           "hardness": {
-            "value": "37"
+            "value": ""
           },
           "ac": {
-            "value": "5"
+            "value": ""
           }
         },
         "activation": {
@@ -300,53 +311,58 @@
           "type": ""
         },
         "area": {
-          "value": 5,
-          "units": "ft",
-          "shape": "sphere",
-          "effect": "burst"
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
         },
         "range": {
-          "value": 100,
+          "value": 40,
           "units": "ft",
           "additional": "",
           "per": ""
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 2,
+          "max": 0,
           "per": ""
         },
         "isActive": null,
         "ability": "dex",
         "actionType": "rwak",
         "attackBonus": 0,
-        "chatFlavor": "",
+        "chatFlavor": "Nonlethal",
         "critical": {
-          "parts": [],
-          "effect": "Burn 3d8"
+          "parts": [
+            [
+              "",
+              ""
+            ]
+          ],
+          "effect": "Bind"
         },
         "damage": {
           "parts": [
             [
-              "6d10",
-              "electricity+fire"
+              "1d6",
+              "electricity"
             ]
           ]
         },
         "formula": "",
         "save": {
-          "type": "reflex",
-          "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
-          "descriptor": "half"
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
         },
         "descriptors": [],
         "capacity": {
-          "value": 100,
-          "max": 100
+          "value": 40,
+          "max": 40
         },
         "usage": {
-          "value": 5,
-          "per": "round"
+          "value": 2,
+          "per": "shot"
         },
         "modifiers": [],
         "container": {
@@ -355,33 +371,23 @@
             {
               "type": "slot",
               "subtype": "fusion",
-              "amount": 16,
+              "amount": 4,
               "acceptsType": [
                 "fusion"
               ],
               "affectsEncumbrance": true,
               "weightProperty": "level"
-            },
-            {
-              "type": "slot",
-              "subtype": "",
-              "amount": 1,
-              "acceptsType": [
-                "goods"
-              ],
-              "weightProperty": "",
-              "affectsEncumbrance": true
             }
           ],
           "isOpen": true
         },
-        "weaponType": "heavy",
-        "weaponCategory": "plasma",
+        "weaponType": "smallA",
+        "weaponCategory": "shock",
         "special": "",
         "properties": {
-          "one": false,
-          "two": true,
-          "amm": false,
+          "one": true,
+          "two": false,
+          "amm": true,
           "analog": false,
           "archaic": false,
           "automatic": false,
@@ -391,12 +397,12 @@
           "bright": false,
           "disarm": false,
           "entangle": false,
-          "explode": true,
+          "explode": false,
           "injection": false,
           "line": false,
           "living": false,
           "mind-affecting": false,
-          "nonlethal": false,
+          "nonlethal": true,
           "operative": false,
           "penetrating": false,
           "powered": false,
@@ -408,7 +414,7 @@
           "subtle": false,
           "thrown": false,
           "trip": false,
-          "unwieldy": true,
+          "unwieldy": false,
           "aeon": false,
           "antibiological": false,
           "aurora": false,
@@ -463,7 +469,232 @@
           "wideLine": false,
           "hybrid": false,
           "regrowth": false,
+          "shatter": false,
+          "unbalancing": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 300000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "LCm6fKxE1B5Ysqwj",
+      "name": "NIL grenade launcher, merc",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">NIL (an acronym for “neutronic individual launcher”) grenade launchers are the most common grenade launcher available on the market. NILs can be fitted with any sort of grenade as ammunition. Grenades are loaded individually, rather than in magazines. You can load different types of grenades into a NIL grenade launcher, and you can select which grenade to fire as part of the action used to make an attack.&nbsp;</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 178",
+        "type": "",
+        "quantity": 1,
+        "bulk": "2",
+        "price": 280,
+        "level": 1,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 18,
+            "max": "18"
+          },
+          "hardness": {
+            "value": "7"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": null,
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 60,
+          "units": "ft",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "dex",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "reflex",
+          "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
+          "descriptor": "half"
+        },
+        "descriptors": [],
+        "capacity": {
+          "value": 6,
+          "max": 6
+        },
+        "usage": {
+          "value": 1,
+          "per": "shot"
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 1,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "subtype": "",
+              "amount": 1,
+              "acceptsType": [
+                "goods"
+              ],
+              "weightProperty": "",
+              "affectsEncumbrance": true
+            }
+          ],
+          "isOpen": true
+        },
+        "weaponType": "heavy",
+        "weaponCategory": "uncategorized",
+        "special": "",
+        "properties": {
+          "one": false,
+          "two": true,
+          "amm": false,
+          "analog": false,
+          "archaic": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": false,
+          "injection": false,
+          "line": false,
+          "nonlethal": false,
+          "operative": false,
+          "penetrating": false,
+          "powered": false,
+          "qreload": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "thrown": false,
+          "trip": false,
+          "unwieldy": false,
+          "radioactive": false,
+          "subtle": false,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
           "unbalancing": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false,
           "shatter": false
         },
         "proficient": true,
@@ -471,110 +702,12 @@
           "parts": []
         }
       },
+      "sort": 200000,
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/white_star_plasma_cannon.jpg",
-      "effects": []
-    },
-    {
-      "name": "System-wide comm unit",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>\n<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">Comm units that function at system-wide and unlimited ranges aren&rsquo;t as portable; they include built-in generators that provide the necessary amount of power.&nbsp;</span></p>\n<p>&nbsp;</p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 218",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": true,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
-      "effects": []
-    },
-    {
-      "name": "Stealth (+0)",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>The coloration of the vehicle&rsquo;s exterior automatically changes to match its surroundings. Its pilot can always attempt Stealth checks for the vehicle as long as it is stationary, but with the listed modifier. This check is opposed by the Computers or Perception check of anyone scanning the area with sensors.</p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "name": "Force field (gray (20 HP))",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>You can activate or deactivate your armor&rsquo;s force field as a standard action. Once active, the device generates an invisible force field around you, including all your worn and carried items. The force field blocks solids and liquids but not gases or light (including laser beams). You can breathe while the field is active, but you can&rsquo;t eat or drink.</p>\n<p>While a force field is active, you gain a number of temporary Hit Points depending on the force field&rsquo;s power. All damage dealt to you is subtracted from the force field&rsquo;s temporary Hit Points first. A force field has fast healing, meaning that it regains temporary Hit Points at a fixed rate each round at the end of your turn, up to its normal maximum. If the force field&rsquo;s temporary Hit Points are reduced to 0, it is inactive until the end of your next turn, when its fast healing restores some of its Hit Points. The charge capacity, amount of temporary Hit Points granted, and rate of fast healing vary according to the force field&rsquo;s color code. A force field has a usage of 1 charge per round.</p>\n<p>More powerful force fields also have a fortification ability, which gives a percentage chance that a critical hit is treated as a normal attack, dealing normal damage and not applying any critical effect. You roll your fortification percentage chance before the critical hit&rsquo;s damage is rolled. If a force field is inactive, its fortification ability does not function. A suit of armor cannot support more than one force field upgrade.</p>\n<p>&nbsp;</p>\n<table>\n<tbody>\n<tr>\n<th>COLOR</th>\n<th>CAPACITY</th>\n<th>TEMP HP</th>\n<th>FAST HEALING</th>\n<th>FORTIFICATION</th>\n</tr>\n<tr>\n<td>Brown</td>\n<td>10</td>\n<td>1</td>\n<td>1</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Purple</td>\n<td>10</td>\n<td>5</td>\n<td>2</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Black</td>\n<td>10</td>\n<td>10</td>\n<td>3</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>White</td>\n<td>20</td>\n<td>15</td>\n<td>4</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Gray</td>\n<td>20</td>\n<td>20</td>\n<td>5</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Green</td>\n<td>20</td>\n<td>25</td>\n<td>6</td>\n<td>20%</td>\n</tr>\n<tr>\n<td>Red</td>\n<td>40</td>\n<td>30</td>\n<td>7</td>\n<td>40%</td>\n</tr>\n<tr>\n<td>Blue</td>\n<td>40</td>\n<td>35</td>\n<td>8</td>\n<td>60%</td>\n</tr>\n<tr>\n<td>Orange</td>\n<td>40</td>\n<td>40</td>\n<td>9</td>\n<td>80%</td>\n</tr>\n<tr>\n<td>Prismatic</td>\n<td>100</td>\n<td>50</td>\n<td>10</td>\n<td>100%</td>\n</tr>\n</tbody>\n</table>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": true,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/equipment/weapons/nil-grenade-launcher-merc.jpg",
       "effects": []
     }
   ],
   "effects": [],
-  "_id": "wTVKxLzZ1rnhCCNk"
+  "_id": "9SNsWDZ3iLOTokla"
 }

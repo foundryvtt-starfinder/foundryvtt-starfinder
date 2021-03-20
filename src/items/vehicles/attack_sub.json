@@ -1,17 +1,17 @@
 {
-  "name": "Stealth Enercopter",
+  "name": "Attack Sub",
   "type": "vehicle",
   "data": {
     "conditions": {},
     "details": {
-      "level": 16,
-      "price": 535000,
+      "level": 12,
+      "price": 130000,
       "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">This partially open aircraft has an antigrav rotor and two turrets.</span></p>",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">The forward section of this submarine holds two rows of missile bays designed to intercept aircraft.</span></p>",
         "chat": "",
         "unidentified": ""
       },
-      "source": "AR pg. 138"
+      "source": "AP #24 pg. 51"
     },
     "crew": {
       "useNPCCrew": false,
@@ -20,11 +20,11 @@
         "actorIds": []
       },
       "complement": {
-        "limit": 0,
+        "limit": 11,
         "actorIds": []
       },
       "passenger": {
-        "limit": 9,
+        "limit": 8,
         "actorIds": []
       }
     },
@@ -33,40 +33,43 @@
       "actorIds": []
     },
     "attributes": {
-      "size": "huge",
-      "type": "air",
+      "size": "gargantuan",
+      "type": "water",
       "dimensions": {
-        "width": "10",
-        "length": "20",
-        "height": "7"
+        "width": "20",
+        "length": "70",
+        "height": "20"
       },
       "speed": {
-        "drive": "70 ft",
-        "full": "850 ft",
-        "mph": "95 mph (fly)",
+        "drive": "20 ft (swim)",
+        "full": "450 ft (swim)",
+        "mph": "50 mph (swim)",
         "type": ""
       },
       "eac": {
-        "value": 30
+        "value": 26
       },
       "expansionBays": {
-        "value": 0
+        "value": 4
       },
       "kac": {
-        "value": 31
+        "value": 28
       },
+      "controlSkill": "pil",
       "cover": "total",
       "hp": {
-        "value": 280,
-        "max": 280,
-        "threshold": 140
+        "value": 210,
+        "max": 210,
+        "threshold": 105
       },
-      "hardness": 15,
+      "hardness": 14,
       "modifiers": {
-        "piloting": "0",
+        "piloting": "-4",
+        "survival": "",
+        "athletics": "",
         "attackStopped": "0",
-        "attackMoving": "-2",
-        "attackFullSpeed": "-4"
+        "attackMoving": "-4",
+        "attackFullSpeed": "-6"
       },
       "systems": [],
       "special": []
@@ -75,7 +78,7 @@
   "flags": {},
   "token": {
     "flags": {},
-    "name": "Motorcycle",
+    "name": "Battle Chariot",
     "displayName": 0,
     "img": "icons/svg/mystery-man.svg",
     "tint": null,
@@ -96,7 +99,7 @@
       "speed": 5,
       "intensity": 5
     },
-    "actorId": "LtEMWeWEAx1n4MHQ",
+    "actorId": "SMPkU2BAi5TV0wWM",
     "actorLink": false,
     "disposition": -1,
     "displayBars": 0,
@@ -106,6 +109,7 @@
   },
   "items": [
     {
+      "_id": "IFQG4V1jH9iw8fZK",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
@@ -122,14 +126,14 @@
         "damage": {
           "parts": [
             [
-              "2*(18d10)",
+              "2*(`13d10)",
               "bludgeoning"
             ]
           ]
         },
         "save": {
           "type": "reflex",
-          "dc": "20",
+          "dc": "15",
           "descriptor": "negate"
         },
         "critical": {
@@ -139,11 +143,13 @@
           "parts": []
         }
       },
+      "sort": 100000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     },
     {
+      "_id": "ZNQw4yfixdMSttws",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
@@ -160,14 +166,14 @@
         "damage": {
           "parts": [
             [
-              "18d10",
+              "13d10",
               "bludgeoning"
             ]
           ]
         },
         "save": {
           "type": "reflex",
-          "dc": "20",
+          "dc": "15",
           "descriptor": "half"
         },
         "critical": {
@@ -177,11 +183,13 @@
           "parts": []
         }
       },
+      "sort": 0,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     },
     {
+      "_id": "nftdLik1SKP5TCSx",
       "name": "Autopilot",
       "type": "vehicleSystem",
       "data": {
@@ -196,7 +204,7 @@
         "type": "",
         "piloting": {
           "usedAsPilot": true,
-          "piloting": "28"
+          "piloting": "22"
         },
         "canBeActivated": true,
         "isActive": false,
@@ -210,12 +218,14 @@
           "parts": []
         }
       },
+      "sort": 400000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     },
     {
-      "name": "Enhanced sensors (darkvision 5 mile)",
+      "_id": "Ve7f4c2P7ezSj38E",
+      "name": "Enhanced sensors (blindsight (sound) 1 mile)",
       "type": "vehicleSystem",
       "data": {
         "description": {
@@ -243,27 +253,99 @@
           "parts": []
         }
       },
+      "sort": 500000,
       "flags": {},
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
       "effects": []
     },
     {
-      "name": "Plasma cannon, white star",
+      "_id": "qvgGlC7FbVDM9Jgk",
+      "name": "Planetary comm unit",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 218",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
+      "effects": []
+    },
+    {
+      "_id": "ghulHcIJvAhMCTUc",
+      "name": "Enclosed (Ex)",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">In addition to having total cover, the pilot and passengers in an enclosed vehicle can&rsquo;t use their personal weapons to attack creatures and objects outside the vehicle, though they can use the vehicle&rsquo;s weapons (if any).</span></p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": 0
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 700000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "yMmYcsxBtzwzMh7f",
+      "name": "SAM Launcher (Ex)",
       "type": "weapon",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Plasma cannons shoot large, explosive blasts of ionized plasma. They are difficult to use and have a relatively short range for a heavy weapon, but their impact has devastating effect.</p>",
+          "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">This heavy weapon launches a guided missile that has a range increment of 2,000 feet. The weapon can target only airborne vehicles or starships. On a successful attack, the pilot of the defending vehicle can attempt a Piloting check (DC = the attack roll&rsquo;s result) to halve the damage. An airspace defender has a capacity of five missiles.</span></p>",
           "unidentified": ""
         },
-        "source": "CRB pg. 177",
+        "source": "",
         "type": "",
         "quantity": 1,
         "bulk": "2",
-        "price": 189200,
-        "level": 16,
+        "price": 18200,
+        "level": 12,
         "attuned": false,
         "equipped": true,
         "equippable": true,
@@ -276,11 +358,11 @@
             "mod": ""
           },
           "hp": {
-            "value": 93,
-            "max": "93"
+            "value": 45,
+            "max": "45"
           },
           "hardness": {
-            "value": "37"
+            "value": "25"
           },
           "ac": {
             "value": "5"
@@ -300,13 +382,13 @@
           "type": ""
         },
         "area": {
-          "value": 5,
+          "value": 2000,
           "units": "ft",
-          "shape": "sphere",
-          "effect": "burst"
+          "shape": "",
+          "effect": ""
         },
         "range": {
-          "value": 100,
+          "value": 80,
           "units": "ft",
           "additional": "",
           "per": ""
@@ -323,30 +405,30 @@
         "chatFlavor": "",
         "critical": {
           "parts": [],
-          "effect": "Burn 3d8"
+          "effect": ""
         },
         "damage": {
           "parts": [
             [
-              "6d10",
-              "electricity+fire"
+              "2d6 * 10",
+              "bludgeoning+fire"
             ]
           ]
         },
         "formula": "",
         "save": {
-          "type": "reflex",
-          "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
-          "descriptor": "half"
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
         },
         "descriptors": [],
         "capacity": {
-          "value": 100,
-          "max": 100
+          "value": 0,
+          "max": 1
         },
         "usage": {
-          "value": 5,
-          "per": "round"
+          "value": 1,
+          "per": "shot"
         },
         "modifiers": [],
         "container": {
@@ -355,7 +437,7 @@
             {
               "type": "slot",
               "subtype": "fusion",
-              "amount": 16,
+              "amount": 10,
               "acceptsType": [
                 "fusion"
               ],
@@ -369,6 +451,7 @@
               "acceptsType": [
                 "goods"
               ],
+              "weightMultiplier": 1,
               "weightProperty": "",
               "affectsEncumbrance": true
             }
@@ -376,11 +459,11 @@
           "isOpen": true
         },
         "weaponType": "heavy",
-        "weaponCategory": "plasma",
+        "weaponCategory": "uncategorized",
         "special": "",
         "properties": {
           "one": false,
-          "two": true,
+          "two": false,
           "amm": false,
           "analog": false,
           "archaic": false,
@@ -391,7 +474,7 @@
           "bright": false,
           "disarm": false,
           "entangle": false,
-          "explode": true,
+          "explode": false,
           "injection": false,
           "line": false,
           "living": false,
@@ -408,7 +491,7 @@
           "subtle": false,
           "thrown": false,
           "trip": false,
-          "unwieldy": true,
+          "unwieldy": false,
           "aeon": false,
           "antibiological": false,
           "aurora": false,
@@ -471,110 +554,98 @@
           "parts": []
         }
       },
+      "sort": 100000,
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/white_star_plasma_cannon.jpg",
-      "effects": []
-    },
-    {
-      "name": "System-wide comm unit",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>\n<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">Comm units that function at system-wide and unlimited ranges aren&rsquo;t as portable; they include built-in generators that provide the necessary amount of power.&nbsp;</span></p>\n<p>&nbsp;</p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 218",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": true,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+      "img": "systems/sfrpg/icons/equipment/weapons/imds_missile_launcher.png",
+      "effects": [],
+      "storage": {
+        "type": [
+          "slot",
+          "slot"
+        ],
+        "subtype": [
+          "fusion",
+          ""
+        ],
+        "amount": [
+          "10",
+          "1"
+        ],
+        "weightProperty": [
+          "level",
+          ""
+        ],
+        "affectsEncumbrance": [
+          true,
+          true
+        ]
       },
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
-      "effects": []
-    },
-    {
-      "name": "Stealth (+0)",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>The coloration of the vehicle&rsquo;s exterior automatically changes to match its surroundings. Its pilot can always attempt Stealth checks for the vehicle as long as it is stationary, but with the listed modifier. This check is opposed by the Computers or Perception check of anyone scanning the area with sensors.</p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "name": "Force field (gray (20 HP))",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>You can activate or deactivate your armor&rsquo;s force field as a standard action. Once active, the device generates an invisible force field around you, including all your worn and carried items. The force field blocks solids and liquids but not gases or light (including laser beams). You can breathe while the field is active, but you can&rsquo;t eat or drink.</p>\n<p>While a force field is active, you gain a number of temporary Hit Points depending on the force field&rsquo;s power. All damage dealt to you is subtracted from the force field&rsquo;s temporary Hit Points first. A force field has fast healing, meaning that it regains temporary Hit Points at a fixed rate each round at the end of your turn, up to its normal maximum. If the force field&rsquo;s temporary Hit Points are reduced to 0, it is inactive until the end of your next turn, when its fast healing restores some of its Hit Points. The charge capacity, amount of temporary Hit Points granted, and rate of fast healing vary according to the force field&rsquo;s color code. A force field has a usage of 1 charge per round.</p>\n<p>More powerful force fields also have a fortification ability, which gives a percentage chance that a critical hit is treated as a normal attack, dealing normal damage and not applying any critical effect. You roll your fortification percentage chance before the critical hit&rsquo;s damage is rolled. If a force field is inactive, its fortification ability does not function. A suit of armor cannot support more than one force field upgrade.</p>\n<p>&nbsp;</p>\n<table>\n<tbody>\n<tr>\n<th>COLOR</th>\n<th>CAPACITY</th>\n<th>TEMP HP</th>\n<th>FAST HEALING</th>\n<th>FORTIFICATION</th>\n</tr>\n<tr>\n<td>Brown</td>\n<td>10</td>\n<td>1</td>\n<td>1</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Purple</td>\n<td>10</td>\n<td>5</td>\n<td>2</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Black</td>\n<td>10</td>\n<td>10</td>\n<td>3</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>White</td>\n<td>20</td>\n<td>15</td>\n<td>4</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Gray</td>\n<td>20</td>\n<td>20</td>\n<td>5</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Green</td>\n<td>20</td>\n<td>25</td>\n<td>6</td>\n<td>20%</td>\n</tr>\n<tr>\n<td>Red</td>\n<td>40</td>\n<td>30</td>\n<td>7</td>\n<td>40%</td>\n</tr>\n<tr>\n<td>Blue</td>\n<td>40</td>\n<td>35</td>\n<td>8</td>\n<td>60%</td>\n</tr>\n<tr>\n<td>Orange</td>\n<td>40</td>\n<td>40</td>\n<td>9</td>\n<td>80%</td>\n</tr>\n<tr>\n<td>Prismatic</td>\n<td>100</td>\n<td>50</td>\n<td>10</td>\n<td>100%</td>\n</tr>\n</tbody>\n</table>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": true,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "weapon": [
+        false,
+        false
+      ],
+      "equipment": [
+        false,
+        false
+      ],
+      "consumable": [
+        false,
+        false
+      ],
+      "goods": [
+        false,
+        true
+      ],
+      "container": [
+        false,
+        false
+      ],
+      "hybrid": [
+        false,
+        false
+      ],
+      "magic": [
+        false,
+        false
+      ],
+      "technological": [
+        false,
+        false
+      ],
+      "fusion": [
+        true,
+        false
+      ],
+      "upgrade": [
+        false,
+        false
+      ],
+      "spell": [
+        false,
+        false
+      ],
+      "augmentation": [
+        false,
+        false
+      ],
+      "shield": [
+        false,
+        false
+      ],
+      "weaponAccessory": [
+        false,
+        false
+      ],
+      "vehicleAttack": [
+        false,
+        false
+      ],
+      "vehicleSystem": [
+        false,
+        false
+      ]
     }
   ],
   "effects": [],
-  "_id": "wTVKxLzZ1rnhCCNk"
+  "_id": "MDAcRu7NYDJc3dBj"
 }

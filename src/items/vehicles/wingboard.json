@@ -1,17 +1,17 @@
 {
-  "name": "Ultralight Turboglider",
+  "name": "Wingboard",
   "type": "vehicle",
   "data": {
     "conditions": {},
     "details": {
-      "level": 3,
-      "price": 3170,
+      "level": 1,
+      "price": 900,
       "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">The pilot and passenger hang from minimal harnesses underneath this turbofan-propelled wing, which is steered with dangling hand controls and by leaning.</span></p>",
+        "value": "<p>Simple, single-person vessels, wingboards can only gain altitude by catching updrafts and thermals or by hitching a ride on other vehicles. Riders use the Athletics skill to control a wingboard instead of the Piloting skill.</p>",
         "chat": "",
         "unidentified": ""
       },
-      "source": "AR pg. 139"
+      "source": "AP #28 pg. 45"
     },
     "crew": {
       "useNPCCrew": false,
@@ -24,7 +24,7 @@
         "actorIds": []
       },
       "passenger": {
-        "limit": 1,
+        "limit": 0,
         "actorIds": []
       }
     },
@@ -33,49 +33,51 @@
       "actorIds": []
     },
     "attributes": {
-      "size": "large",
+      "size": "tiny",
       "type": "air",
       "dimensions": {
-        "width": "10",
-        "length": "5",
-        "height": "3"
+        "width": "1",
+        "length": "3",
+        "height": "-"
       },
       "speed": {
-        "drive": "20 ft",
-        "full": "350 ft",
-        "mph": "40 mph (fly)",
+        "drive": "40 ft  (fly)",
+        "full": "100 ft  (fly)",
+        "mph": "22 mph (fly)",
         "type": ""
       },
       "eac": {
-        "value": null
+        "value": 11
       },
       "expansionBays": {
         "value": 0
       },
       "kac": {
-        "value": 11
+        "value": 12
       },
       "cover": "none",
       "hp": {
-        "value": 43,
-        "max": 43,
-        "threshold": 21
+        "value": 12,
+        "max": 12,
+        "threshold": 6
       },
       "hardness": 4,
       "modifiers": {
-        "piloting": "-1",
+        "piloting": "0",
         "attackStopped": "0",
-        "attackMoving": "-1",
-        "attackFullSpeed": "-3"
+        "attackMoving": "-3",
+        "attackFullSpeed": "-6",
+        "athletics": "+2"
       },
       "systems": [],
-      "special": []
+      "special": [],
+      "controlSkill": "ath"
     }
   },
   "flags": {},
   "token": {
     "flags": {},
-    "name": "Motorcycle",
+    "name": "Battle Chariot",
     "displayName": 0,
     "img": "icons/svg/mystery-man.svg",
     "tint": null,
@@ -96,7 +98,7 @@
       "speed": 5,
       "intensity": 5
     },
-    "actorId": "NGlV7kym77ATj2Ux",
+    "actorId": "TIIx2El9iu6lfYEg",
     "actorLink": false,
     "disposition": -1,
     "displayBars": 0,
@@ -106,6 +108,7 @@
   },
   "items": [
     {
+      "_id": "IFQG4V1jH9iw8fZK",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
@@ -122,14 +125,14 @@
         "damage": {
           "parts": [
             [
-              "2*(4d4)",
+              "2*(1d4)",
               "bludgeoning"
             ]
           ]
         },
         "save": {
           "type": "reflex",
-          "dc": "10",
+          "dc": "16",
           "descriptor": "negate"
         },
         "critical": {
@@ -139,11 +142,13 @@
           "parts": []
         }
       },
+      "sort": 100000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     },
     {
+      "_id": "ZNQw4yfixdMSttws",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
@@ -160,14 +165,14 @@
         "damage": {
           "parts": [
             [
-              "4d4",
+              "1d4",
               "bludgeoning"
             ]
           ]
         },
         "save": {
           "type": "reflex",
-          "dc": "10",
+          "dc": "16",
           "descriptor": "half"
         },
         "critical": {
@@ -177,110 +182,12 @@
           "parts": []
         }
       },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "name": "Planetary comm unit",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 218",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": true,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
-      "effects": []
-    },
-    {
-      "name": "Autocontrol",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have autocontrol, which enables you to spend your actions on tasks other than piloting, but is far less capable than an autopilot. You can engage autocontrol as a swift action after taking a drive or race action, and it lasts until it is disengaged (also a swift action) or until the vehicle is no longer capable of moving. When you&rsquo;re using autocontrol, the vehicle becomes uncontrolled, but each round it moves in a straight line for the same distance and at the same heading and speed as the last pilot action (moving as if taking two drive actions if drive was the last action the pilot took, or as a race action if that was the last action the pilot took). The autocontrol uses the result of the pilot&rsquo;s most recent Piloting check as the result of its Piloting checks.</span></p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 280",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": true,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "name": "Low-Altitude (Ex)",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">An ultralight turboglider doesn&rsquo;t afford its pilot and passenger environmental protection against the thin atmosphere of high altitudes.</span></p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
+      "sort": 200000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     }
   ],
   "effects": [],
-  "_id": "lTHM5IG2AKhOCC7v"
+  "_id": "0PDlefqBkNlz6ldv"
 }

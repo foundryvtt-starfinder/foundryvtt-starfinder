@@ -1,17 +1,17 @@
 {
-  "name": "Tactical Underminer",
+  "name": "War Wagon",
   "type": "vehicle",
   "data": {
     "conditions": {},
     "details": {
-      "level": 11,
-      "price": 79500,
+      "level": 3,
+      "price": 2980,
       "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">This massive drill can punch through stone at high speeds and is often used to aid in the construction of large, underground complexes.</span></p>",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">This archaic boxy wagon&rsquo;s sturdy sides and numerous embrasures provide a surprisingly effective strongpoint from which determined passengers can defend themselves.</span></p>",
         "chat": "",
         "unidentified": ""
       },
-      "source": "AR pg. 139"
+      "source": "AP #24 pg. 53"
     },
     "crew": {
       "useNPCCrew": false,
@@ -20,11 +20,11 @@
         "actorIds": []
       },
       "complement": {
-        "limit": 2,
+        "limit": 0,
         "actorIds": []
       },
       "passenger": {
-        "limit": 3,
+        "limit": 5,
         "actorIds": []
       }
     },
@@ -34,48 +34,50 @@
     },
     "attributes": {
       "size": "huge",
-      "type": "landTW",
+      "type": "land",
       "dimensions": {
         "width": "10",
-        "length": "20",
-        "height": "10"
+        "length": "15",
+        "height": "7"
       },
       "speed": {
-        "drive": "40 ft",
-        "full": "550 ft (hover); 120 ft (burrow through stone)",
-        "mph": "65 mph (hover); 13 mph (borrow through stone)",
+        "drive": "-",
+        "full": "-",
+        "mph": "-",
         "type": ""
       },
       "eac": {
-        "value": 24
+        "value": 15
       },
       "expansionBays": {
-        "value": 1
+        "value": 0
       },
       "kac": {
-        "value": 25
+        "value": 17
       },
-      "cover": "total",
+      "cover": "improved",
       "hp": {
-        "value": 170,
-        "max": 170,
-        "threshold": 85
+        "value": 44,
+        "max": 44,
+        "threshold": 22
       },
-      "hardness": 12,
+      "hardness": 5,
       "modifiers": {
         "piloting": "0",
         "attackStopped": "0",
-        "attackMoving": "-3",
-        "attackFullSpeed": "-5"
+        "attackMoving": "-1",
+        "attackFullSpeed": "-3",
+        "survival": "-2"
       },
       "systems": [],
-      "special": []
+      "special": [],
+      "controlSkill": "sur"
     }
   },
   "flags": {},
   "token": {
     "flags": {},
-    "name": "Motorcycle",
+    "name": "Battle Chariot",
     "displayName": 0,
     "img": "icons/svg/mystery-man.svg",
     "tint": null,
@@ -96,7 +98,7 @@
       "speed": 5,
       "intensity": 5
     },
-    "actorId": "GDVzE15bwD41Uo0P",
+    "actorId": "5rM2sMv0uRwqmZV5",
     "actorLink": false,
     "disposition": -1,
     "displayBars": 0,
@@ -106,13 +108,14 @@
   },
   "items": [
     {
-      "name": "Collision (Ram) - ignores 10 points of hardness",
+      "_id": "IFQG4V1jH9iw8fZK",
+      "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
-          "short": "<p>Ignores 5 points of hardness</p>",
+          "short": "",
           "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
           "unidentified": ""
         },
@@ -122,14 +125,14 @@
         "damage": {
           "parts": [
             [
-              "2*(11d10)",
+              "2*(6d4)",
               "bludgeoning"
             ]
           ]
         },
         "save": {
           "type": "reflex",
-          "dc": "16",
+          "dc": "10",
           "descriptor": "negate"
         },
         "critical": {
@@ -139,12 +142,14 @@
           "parts": []
         }
       },
+      "sort": 100000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     },
     {
-      "name": "Collision (Run Over) - ignores 10 points of hardness",
+      "_id": "ZNQw4yfixdMSttws",
+      "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
         "description": {
@@ -160,14 +165,14 @@
         "damage": {
           "parts": [
             [
-              "11d10",
+              "6d4",
               "bludgeoning"
             ]
           ]
         },
         "save": {
           "type": "reflex",
-          "dc": "16",
+          "dc": "10",
           "descriptor": "half"
         },
         "critical": {
@@ -177,26 +182,63 @@
           "parts": []
         }
       },
+      "sort": 200000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     },
     {
-      "name": "Enhanced sensors (darkvision 120 ft., sense through (darkvision 500 ft., stone only) 60 ft.)",
+      "_id": "27DgSz79HWxu3iNf",
+      "name": "Autocontrol",
       "type": "vehicleSystem",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have autocontrol, which enables you to spend your actions on tasks other than piloting, but is far less capable than an autopilot. You can engage autocontrol as a swift action after taking a drive or race action, and it lasts until it is disengaged (also a swift action) or until the vehicle is no longer capable of moving. When you&rsquo;re using autocontrol, the vehicle becomes uncontrolled, but each round it moves in a straight line for the same distance and at the same heading and speed as the last pilot action (moving as if taking two drive actions if drive was the last action the pilot took, or as a race action if that was the last action the pilot took). The autocontrol uses the result of the pilot&rsquo;s most recent Piloting check as the result of its Piloting checks.</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 280",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": 0
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 300000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "aJqI7RaYNjqMegra",
+      "name": "Drawn",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>This vehicle relies on a creature or another machine to set its speed.</p>\n<p>&nbsp;</p>\n<h3>Drawn Vehicles</h3>\n<p>While most vehicles have their own means of propulsion, a handful of archaic designs harken to a time when the weight of civilization rested upon the backs of beasts. Such vehicles have no speed, and instead rely on creatures to pull them along by a specially designed harness. A drawn vehicle can be harnessed either to one creature of the same size category, or to two or more creatures one size category smaller than the vehicle. When a drawn vehicle is harnessed to creatures trained for the task, it gains a drive speed equal to the creatures&rsquo; walk speed, and a full speed equal to 3 &times;the creatures&rsquo; walk speed. A pilot uses their Survival skill instead of their Piloting skill for checks to control a vehicle drawn by a creature, and drawn vehicles are always considered to have autocontrol.</p>",
           "unidentified": ""
         },
         "source": "",
         "type": "",
         "piloting": {
           "usedAsPilot": false,
-          "piloting": "0"
+          "piloting": 0
         },
         "canBeActivated": false,
         "isActive": false,
@@ -210,77 +252,12 @@
           "parts": []
         }
       },
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
-      "effects": []
-    },
-    {
-      "name": "Autopilot",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 280",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": true,
-          "piloting": "20"
-        },
-        "canBeActivated": true,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
+      "sort": 400000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "name": "System-wide comm unit",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>\n<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">Comm units that function at system-wide and unlimited ranges aren&rsquo;t as portable; they include built-in generators that provide the necessary amount of power.&nbsp;</span></p>\n<p>&nbsp;</p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 218",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": true,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
       "effects": []
     }
   ],
   "effects": [],
-  "_id": "5sZ7cBrPGQVEBzlD"
+  "_id": "thFEUyFiF2vtbynK"
 }

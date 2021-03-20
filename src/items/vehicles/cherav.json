@@ -1,31 +1,34 @@
 {
-  "name": "Stealth Sub",
+  "name": "Cherav",
   "type": "vehicle",
   "data": {
     "conditions": {},
     "details": {
-      "level": 10,
-      "price": 57500,
+      "level": 4,
+      "price": 6600,
       "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Used by many planetary military forces for undersea engagements, a stealth sub features a small promenade along its dorsal surface for use when it surfaces.</span></p>",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Able to tunnel through soil and loose rock using jets of acid, this cylindrical, tracked vehicle has portholes and a rear-facing entry hatch.</span></p>",
         "chat": "",
         "unidentified": ""
       },
-      "source": "AR pg. 138"
+      "source": "SFS #2-13 pg. 9"
     },
     "crew": {
       "useNPCCrew": false,
       "pilot": {
         "limit": 1,
-        "actorIds": []
+        "actorIds": [],
+        "actors": []
       },
       "complement": {
-        "limit": 5,
-        "actorIds": []
+        "limit": 0,
+        "actorIds": [],
+        "actors": []
       },
       "passenger": {
-        "limit": 3,
-        "actorIds": []
+        "limit": 7,
+        "actorIds": [],
+        "actors": []
       }
     },
     "hangarBay": {
@@ -33,46 +36,50 @@
       "actorIds": []
     },
     "attributes": {
-      "size": "gargantuan",
-      "type": "water",
+      "size": "huge",
+      "type": "landW",
       "dimensions": {
-        "width": "15",
-        "length": "50",
-        "height": "15"
+        "width": "10",
+        "length": "15",
+        "height": "5"
       },
       "speed": {
-        "drive": "20 ft",
-        "full": "550 ft",
-        "mph": "65 mph (swim)",
+        "drive": "15 ft",
+        "full": "450 ft (hover)",
+        "mph": "50 mph (hover)",
         "type": ""
       },
       "eac": {
-        "value": 24
+        "value": 17
       },
       "expansionBays": {
-        "value": 3
+        "value": 0
       },
       "kac": {
-        "value": 26
+        "value": 19
       },
+      "controlSkill": "pil",
       "cover": "total",
       "hp": {
-        "value": 165,
-        "max": 165,
-        "threshold": 82
+        "value": 50,
+        "max": 50,
+        "threshold": 25
       },
-      "hardness": 12,
+      "hardness": 7,
       "modifiers": {
-        "piloting": "-3",
+        "piloting": "2",
+        "survival": 0,
+        "athletics": 0,
         "attackStopped": "0",
-        "attackMoving": "-4",
-        "attackFullSpeed": "-6"
+        "attackMoving": "-2",
+        "attackFullSpeed": "-4"
       },
       "systems": [],
       "special": []
     }
   },
   "flags": {},
+  "img": "icons/svg/mystery-man.svg",
   "token": {
     "flags": {},
     "name": "Motorcycle",
@@ -96,7 +103,7 @@
       "speed": 5,
       "intensity": 5
     },
-    "actorId": "emcqEUpG9vUJJ0dx",
+    "actorId": "dZHf4Up0Nqt5AiVN",
     "actorLink": false,
     "disposition": -1,
     "displayBars": 0,
@@ -106,13 +113,14 @@
   },
   "items": [
     {
+      "_id": "iDSzHLD0PBzmTNL6",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
-          "short": "",
+          "short": "<p>Ignores 5 points of hardness</p>",
           "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
           "unidentified": ""
         },
@@ -122,7 +130,7 @@
         "damage": {
           "parts": [
             [
-              "2*(11d10)",
+              "2*(5d6)",
               "bludgeoning"
             ]
           ]
@@ -144,6 +152,7 @@
       "effects": []
     },
     {
+      "_id": "5uJGvesReBXwAcgt",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
@@ -160,7 +169,7 @@
         "damage": {
           "parts": [
             [
-              "11d10",
+              "5d6",
               "bludgeoning"
             ]
           ]
@@ -182,6 +191,7 @@
       "effects": []
     },
     {
+      "_id": "aCNG0zemR3IwjTic",
       "name": "Planetary comm unit",
       "type": "vehicleSystem",
       "data": {
@@ -215,21 +225,22 @@
       "effects": []
     },
     {
-      "name": "Autopilot",
+      "_id": "9etkLLHuvHxFwkxU",
+      "name": "Autocontrol",
       "type": "vehicleSystem",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have autocontrol, which enables you to spend your actions on tasks other than piloting, but is far less capable than an autopilot. You can engage autocontrol as a swift action after taking a drive or race action, and it lasts until it is disengaged (also a swift action) or until the vehicle is no longer capable of moving. When you&rsquo;re using autocontrol, the vehicle becomes uncontrolled, but each round it moves in a straight line for the same distance and at the same heading and speed as the last pilot action (moving as if taking two drive actions if drive was the last action the pilot took, or as a race action if that was the last action the pilot took). The autocontrol uses the result of the pilot&rsquo;s most recent Piloting check as the result of its Piloting checks.</span></p>",
           "unidentified": ""
         },
         "source": "CRB pg. 280",
         "type": "",
         "piloting": {
-          "usedAsPilot": true,
-          "piloting": "19"
+          "usedAsPilot": false,
+          "piloting": 0
         },
         "canBeActivated": true,
         "isActive": false,
@@ -248,14 +259,15 @@
       "effects": []
     },
     {
-      "name": "Stealth (-6)",
+      "_id": "HwHcETdeFbyEGvbs",
+      "name": "Chair Flip (Ex)",
       "type": "vehicleSystem",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>The coloration of the vehicle&rsquo;s exterior automatically changes to match its surroundings. Its pilot can always attempt Stealth checks for the vehicle as long as it is stationary, but with the listed modifier. This check is opposed by the Computers or Perception check of anyone scanning the area with sensors.</p>",
+          "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\"> A CHERAV is considered a Large vehicle for the purpose of its collision damage and DC. When a CHERAV is targeted by a vehicle collision attack or is used to make a vehicle collision attack, the pilot can spend 1 Resolve Point before the damage is rolled to reduce the damage to the CHERAV by half.</span></p>",
           "unidentified": ""
         },
         "source": "",
@@ -276,77 +288,12 @@
           "parts": []
         }
       },
+      "sort": 300000,
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "name": "Enhanced sensors (blindsight (sound) 1 mile)",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
-      "effects": []
-    },
-    {
-      "name": "Enclosed (Ex)",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">In addition to having total cover, the pilot and passengers in an enclosed vehicle can&rsquo;t use their personal weapons to attack creatures and objects outside of the vehicle, though they can use the vehicle&rsquo;s weapons (if any).</span></p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "effects": [],
+      "img": "icons/svg/mystery-man.svg"
     }
   ],
   "effects": [],
-  "_id": "aITjS7Kxt97gvGWM"
+  "_id": "e2PNDfaYS19CTy7E"
 }

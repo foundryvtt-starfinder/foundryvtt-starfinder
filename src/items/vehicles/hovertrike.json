@@ -1,17 +1,17 @@
 {
-  "name": "Stealth Sub",
+  "name": "Hovertrike",
   "type": "vehicle",
   "data": {
     "conditions": {},
     "details": {
-      "level": 10,
-      "price": 57500,
+      "level": 2,
+      "price": 1850,
       "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Used by many planetary military forces for undersea engagements, a stealth sub features a small promenade along its dorsal surface for use when it surfaces.</span></p>",
+        "value": null,
         "chat": "",
         "unidentified": ""
       },
-      "source": "AR pg. 138"
+      "source": "AP #7 pg. 21"
     },
     "crew": {
       "useNPCCrew": false,
@@ -20,11 +20,11 @@
         "actorIds": []
       },
       "complement": {
-        "limit": 5,
+        "limit": 0,
         "actorIds": []
       },
       "passenger": {
-        "limit": 3,
+        "limit": 2,
         "actorIds": []
       }
     },
@@ -33,40 +33,40 @@
       "actorIds": []
     },
     "attributes": {
-      "size": "gargantuan",
-      "type": "water",
+      "size": "large",
+      "type": "land",
       "dimensions": {
-        "width": "15",
-        "length": "50",
-        "height": "15"
+        "width": "5",
+        "length": "10",
+        "height": "3"
       },
       "speed": {
-        "drive": "20 ft",
-        "full": "550 ft",
-        "mph": "65 mph (swim)",
+        "drive": "20 ft  (hover)",
+        "full": "200 ft  (hover)",
+        "mph": "22 mph (hover)",
         "type": ""
       },
       "eac": {
-        "value": 24
+        "value": 13
       },
       "expansionBays": {
-        "value": 3
+        "value": 0
       },
       "kac": {
-        "value": 26
+        "value": 15
       },
-      "cover": "total",
+      "cover": "partial",
       "hp": {
-        "value": 165,
-        "max": 165,
-        "threshold": 82
+        "value": 28,
+        "max": 28,
+        "threshold": 14
       },
-      "hardness": 12,
+      "hardness": 5,
       "modifiers": {
-        "piloting": "-3",
+        "piloting": "-1",
         "attackStopped": "0",
-        "attackMoving": "-4",
-        "attackFullSpeed": "-6"
+        "attackMoving": "-2",
+        "attackFullSpeed": "-4"
       },
       "systems": [],
       "special": []
@@ -75,7 +75,7 @@
   "flags": {},
   "token": {
     "flags": {},
-    "name": "Motorcycle",
+    "name": "Battle Chariot",
     "displayName": 0,
     "img": "icons/svg/mystery-man.svg",
     "tint": null,
@@ -96,7 +96,7 @@
       "speed": 5,
       "intensity": 5
     },
-    "actorId": "emcqEUpG9vUJJ0dx",
+    "actorId": "1ct3bSbnUhhKdiBz",
     "actorLink": false,
     "disposition": -1,
     "displayBars": 0,
@@ -106,6 +106,7 @@
   },
   "items": [
     {
+      "_id": "IFQG4V1jH9iw8fZK",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
@@ -122,14 +123,14 @@
         "damage": {
           "parts": [
             [
-              "2*(11d10)",
+              "2*(5d4)",
               "bludgeoning"
             ]
           ]
         },
         "save": {
           "type": "reflex",
-          "dc": "13",
+          "dc": "11",
           "descriptor": "negate"
         },
         "critical": {
@@ -139,11 +140,13 @@
           "parts": []
         }
       },
+      "sort": 100000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     },
     {
+      "_id": "ZNQw4yfixdMSttws",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
@@ -160,14 +163,14 @@
         "damage": {
           "parts": [
             [
-              "11d10",
+              "5d4",
               "bludgeoning"
             ]
           ]
         },
         "save": {
           "type": "reflex",
-          "dc": "13",
+          "dc": "11",
           "descriptor": "half"
         },
         "critical": {
@@ -177,11 +180,13 @@
           "parts": []
         }
       },
+      "sort": 200000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     },
     {
+      "_id": "pvgJBELMsxPrtX7N",
       "name": "Planetary comm unit",
       "type": "vehicleSystem",
       "data": {
@@ -210,52 +215,21 @@
           "parts": []
         }
       },
+      "sort": 500000,
       "flags": {},
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
       "effects": []
     },
     {
-      "name": "Autopilot",
+      "_id": "lW5A5vmFsMf8AtzD",
+      "name": "Complicated Starter (Ex)",
       "type": "vehicleSystem",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 280",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": true,
-          "piloting": "19"
-        },
-        "canBeActivated": true,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "name": "Stealth (-6)",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>The coloration of the vehicle&rsquo;s exterior automatically changes to match its surroundings. Its pilot can always attempt Stealth checks for the vehicle as long as it is stationary, but with the listed modifier. This check is opposed by the Computers or Perception check of anyone scanning the area with sensors.</p>",
+          "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Due to being heavily used over the past several months and hobgar tampering, starting one of Madelon&rsquo;s Landing&rsquo;s hovertrikes is a complicated ordeal, even with its ignition components restored. Starting a hovertrike requires a full action rather than a move action.</span></p>",
           "unidentified": ""
         },
         "source": "",
@@ -276,77 +250,12 @@
           "parts": []
         }
       },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
-    },
-    {
-      "name": "Enhanced sensors (blindsight (sound) 1 mile)",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
-      "effects": []
-    },
-    {
-      "name": "Enclosed (Ex)",
-      "type": "vehicleSystem",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">In addition to having total cover, the pilot and passengers in an enclosed vehicle can&rsquo;t use their personal weapons to attack creatures and objects outside of the vehicle, though they can use the vehicle&rsquo;s weapons (if any).</span></p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      },
+      "sort": 600000,
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
       "effects": []
     }
   ],
   "effects": [],
-  "_id": "aITjS7Kxt97gvGWM"
+  "_id": "tCpYAD1DUX74Doc6"
 }
