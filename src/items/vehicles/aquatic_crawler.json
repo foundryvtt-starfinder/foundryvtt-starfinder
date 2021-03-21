@@ -1,0 +1,412 @@
+{
+  "_id": "NiTmrGOcbRTJ6wYN",
+  "name": "Aquatic Crawler",
+  "type": "vehicle",
+  "data": {
+    "conditions": {},
+    "details": {
+      "level": 8,
+      "price": 32000,
+      "description": {
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Similar in design to other crawlers, this walker traverses ocean floors, the underside of sea ice, and other terrain too tight for submarines to maneuver around.</span></p>",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "AP #24 pg. 50"
+    },
+    "crew": {
+      "useNPCCrew": false,
+      "pilot": {
+        "limit": 1,
+        "actorIds": []
+      },
+      "complement": {
+        "limit": 0,
+        "actorIds": []
+      },
+      "passenger": {
+        "limit": 5,
+        "actorIds": []
+      }
+    },
+    "hangarBay": {
+      "limit": 0,
+      "actorIds": []
+    },
+    "attributes": {
+      "size": "huge",
+      "type": "landW",
+      "dimensions": {
+        "width": "20",
+        "length": "20",
+        "height": "12"
+      },
+      "speed": {
+        "drive": "30 ft (climb and land) 20 ft (swim)",
+        "full": "350 ft (climb and land) 260 ft (swim)",
+        "mph": "40 mph (climb and land) 30 mph (swim)",
+        "type": ""
+      },
+      "eac": {
+        "value": 20
+      },
+      "expansionBays": {
+        "value": 0
+      },
+      "kac": {
+        "value": 22
+      },
+      "cover": "total",
+      "hp": {
+        "value": 130,
+        "max": 130,
+        "threshold": 65
+      },
+      "hardness": 11,
+      "modifiers": {
+        "piloting": "-2",
+        "attackStopped": "0",
+        "attackMoving": "-3",
+        "attackFullSpeed": "-5",
+        "survival": "",
+        "athletics": ""
+      },
+      "systems": [],
+      "special": [],
+      "controlSkill": "pil"
+    }
+  },
+  "sort": 600000,
+  "flags": {
+    "exportSource": {
+      "world": "development",
+      "system": "sfrpg",
+      "coreVersion": "0.7.9",
+      "systemVersion": "0.8.3.0"
+    }
+  },
+  "token": {
+    "flags": {},
+    "name": "Battle Chariot",
+    "displayName": 0,
+    "img": "icons/svg/mystery-man.svg",
+    "tint": null,
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 360,
+    "lightAngle": 360,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "actorId": "NiTmrGOcbRTJ6wYN",
+    "actorLink": false,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {},
+    "bar2": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "_id": "IFQG4V1jH9iw8fZK",
+      "name": "Collision (Ram)",
+      "type": "vehicleAttack",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "modifiers": [],
+        "damage": {
+          "parts": [
+            [
+              "2*(8d10)",
+              "bludgeoning"
+            ]
+          ]
+        },
+        "save": {
+          "type": "reflex",
+          "dc": "14",
+          "descriptor": "negate"
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 100000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "ZNQw4yfixdMSttws",
+      "name": "Collision (Run Over)",
+      "type": "vehicleAttack",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "modifiers": [],
+        "damage": {
+          "parts": [
+            [
+              "8d10",
+              "bludgeoning"
+            ]
+          ]
+        },
+        "save": {
+          "type": "reflex",
+          "dc": "18",
+          "descriptor": "half"
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 200000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "nftdLik1SKP5TCSx",
+      "name": "Autopilot",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 280",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": true,
+          "piloting": "16"
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 400000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "n9E17kB2undqsb16",
+      "name": "Clingers",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>A combination of electromagnets, graspers, grav emitters, high-friction grips, or other mechanisms allow this vehicle to climb as though affected by the spider climb spell. The vehicle must have a climb speed to have this ability.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": 0
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "Ve7f4c2P7ezSj38E",
+      "name": "Enhanced sensors (darkvision 120 ft.)",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
+      "effects": []
+    },
+    {
+      "_id": "iT17SpxppYyfe3r9",
+      "name": "Manipulators",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>This vehicle is fitted with the listed number of manipulators.</p>\n<h4>&nbsp;</h4>\n<p>Some vehicles are fitted with appendages ending in manipulating mechanisms such as digits and pincers. Such a vehicle is treated as a tall creature of the same size category for the purpose of determining the reach of its manipulators, and each manipulator can hold up to 10 &times; the vehicle&rsquo;s item level in bulk. Manipulators are generally too large and clumsy for delicate tasks such as operating equipment designed for Medium and smaller creatures.<br />A manipulator&rsquo;s EAC is equal to 4 + the vehicle&rsquo;s EAC and its KAC is equal to the 4 + the vehicle&rsquo;s KAC. It has Hit Points equal to 3 &times; the item level of the vehicle and hardness equal to half the vehicle&rsquo;s hardness. A manipulator that has lost at least half of its total Hit Points gains the broken condition, imposing a &ndash;2 penalty to Piloting checks to control the manipulator and to the DC of checks to escape the manipulator. Damage done to a vehicle&rsquo;s manipulator doesn&rsquo;t affect the vehicle&rsquo;s Hit Point total.</p>\n<p><br />A vehicle&rsquo;s pilot (or one of its complement) can control a manipulator in the following ways, though only one person can control a manipulator in a round.</p>\n<h5>Crush</h5>\n<p>As a standard action, you direct the manipulator to clamp tighter around a held creature or object (see Grab below), dealing half the vehicle&rsquo;s collision damage. The creature or object can halve this damage by succeeding at a Fortitude saving throw (DC = 10 + the vehicle item level).</p>\n<h5>Grab</h5>\n<p>As a standard action, you direct the manipulator to grab at a target within its reach by attempting a Piloting check (DC = 10 + the target&rsquo;s KAC). On a success, the target is grappled by the manipulator. If the target is a creature, it gains soft cover and the grappled condition while held by the manipulator. If the result of your Piloting check exceeded the DC by 5 or more, the creature is instead pinned. A creature held by a manipulator can use the escape action to free itself by succeeding at an Acrobatics check (DC = 10 + the vehicle&rsquo;s KAC), but it can&rsquo;t grapple the vehicle in return.<br />If the target of a successful grab is another vehicle, both vehicles are considered to be connected by a rigid tether (see Tethered Vehicles below).</p>\n<h5>Slam</h5>\n<p>As a standard action, you direct the manipulator to strike a target within its reach by attempting a Piloting check (DC = 5 + the target&rsquo;s KAC). On a success, the manipulator deals half the vehicle&rsquo;s collision damage to the target.<br />If the target of the slam action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to halve the damage. If the target of the slam action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to halve the damage, with a DC equal to the result of your Piloting check.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": 0
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 600000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "qvgGlC7FbVDM9Jgk",
+      "name": "Planetary comm unit",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 218",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
+      "effects": []
+    },
+    {
+      "_id": "ghulHcIJvAhMCTUc",
+      "name": "Enclosed (Ex)",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">In addition to having total cover, the pilot and passengers in an enclosed vehicle can&rsquo;t use their personal weapons to attack creatures and objects outside the vehicle, though they can use the vehicle&rsquo;s weapons (if any).</span></p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": 0
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 700000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    }
+  ],
+  "effects": []
+}
