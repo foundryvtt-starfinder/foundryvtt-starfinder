@@ -245,7 +245,18 @@ export class ItemSheetSFRPG extends ItemSheet {
                 props.push(game.i18n.localize("SFRPG.VehicleAttackSheet.Details.IgnoresHardness") + " " + item.data.ignoresHardness);
             }
         }
-        
+        else if (item.type === "vehicleSystem") {
+            if (item.data.senses &&  item.data.senses.usedForSenses == true) {
+                // We deliminate the senses by `,` and present each sense as a separate property
+                let sensesDeliminated = item.data.senses.senses.split(",");
+                for (let index = 0; index < sensesDeliminated.length; index++)
+                {
+                    var sense = sensesDeliminated[index];
+                    props.push(sense);
+                }
+            }
+        }
+
         // Action type
         if (item.data.actionType) {
             props.push(CONFIG.SFRPG.itemActionTypes[item.data.actionType]);
