@@ -106,19 +106,20 @@
   },
   "items": [
     {
-      "name": "Collision (Ram) - ignores 10 points of hardness",
+      "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
-          "short": "<p>Ignores 5 points of hardness</p>",
+          "short": "",
           "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
           "unidentified": ""
         },
         "source": "",
         "type": "",
         "modifiers": [],
+        "ignoresHardness": 10,
         "damage": {
           "parts": [
             [
@@ -144,7 +145,7 @@
       "effects": []
     },
     {
-      "name": "Collision (Run Over) - ignores 10 points of hardness",
+      "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
         "description": {
@@ -157,6 +158,7 @@
         "source": "",
         "type": "",
         "modifiers": [],
+        "ignoresHardness": 10,
         "damage": {
           "parts": [
             [
@@ -182,7 +184,7 @@
       "effects": []
     },
     {
-      "name": "Enhanced sensors (darkvision 120 ft., sense through (darkvision 500 ft., stone only) 60 ft.)",
+      "name": "Enhanced sensors",
       "type": "vehicleSystem",
       "data": {
         "description": {
@@ -197,6 +199,10 @@
         "piloting": {
           "usedAsPilot": false,
           "piloting": "0"
+        },
+        "senses": {
+          "usedForSenses": true,
+          "senses": "darkvision 500 ft., sense through (vision - stone only) 60 ft."
         },
         "canBeActivated": false,
         "isActive": false,
