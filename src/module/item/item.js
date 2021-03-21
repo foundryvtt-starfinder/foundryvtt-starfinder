@@ -563,6 +563,12 @@ export class ItemSFRPG extends Item {
         );
     }
 
+    _vehicleAttackChatData(data, label, props) {
+        props.push(
+            data.ignoresHardness ? game.i18n.localize("SFRPG.VehicleAttackSheet.Details.IgnoresHardness") + " " + data.ignoresHardness : null
+        );
+    }
+
     /* -------------------------------------------- */
     /*  Item Rolls - Attack, Damage, Saves, Checks  */
     /* -------------------------------------------- */

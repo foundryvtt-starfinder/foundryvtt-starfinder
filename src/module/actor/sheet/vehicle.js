@@ -512,5 +512,18 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         await ChatMessage.create(chatData, { displaySheet: false });
     }
 
+    /** @override */
+    async _render(...args) {
+        await super._render(...args);
 
+        if (this.rendered) {
+            tippy('[data-tippy-content]', {
+                allowHTML: true,
+                arrow: false,
+                placement: 'top-start',
+                duration: [500, null],
+                delay: [800, null]
+            });
+        }
+    }
 }

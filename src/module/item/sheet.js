@@ -240,6 +240,11 @@ export class ItemSheetSFRPG extends ItemSheet {
             let alignedBonus = item.data.proficient ? item.data.bonus.aligned : 0;
             props.push(game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }));
         }
+        else if (item.type === "vehicleAttack") {
+            if (item.data.ignoresHardness && item.data.ignoresHardness > 0) {
+                props.push(game.i18n.localize("SFRPG.VehicleAttackSheet.Details.IgnoresHardness") + " " + item.data.ignoresHardness);
+            }
+        }
         
         // Action type
         if (item.data.actionType) {
