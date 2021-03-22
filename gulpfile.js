@@ -185,49 +185,49 @@ function buildWatch() {
  * Unpack existing db files into json files.
  */
 async function unpack(sourceDatabase, outputDirectory) {
-    await fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => { if (err) throw err; });
-    
-    let db = new AsyncNedb({ filename: sourceDatabase, autoload: true });
-    let items = await db.asyncFind({});
-    
-    for (let item of items) {
-        let jsonOutput = JSON.stringify(item, null, 2);
-        let filename = sanitize(item.name);
-        filename = filename.replace(/[\s]/g,"_");
-        filename = filename.replace(/[,;]/g,"");
-        filename = filename.toLowerCase();
-        
-        let targetFile = `${outputDirectory}/${filename}.json`;
-        await fs.writeFileSync(targetFile, jsonOutput, {"flag": "w"});
-    }
+	await fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => { if (err) throw err; });
+
+	let db = new AsyncNedb({ filename: sourceDatabase, autoload: true });
+	let items = await db.asyncFind({});
+
+	for (let item of items) {
+		let jsonOutput = JSON.stringify(item, null, 2);
+		let filename = sanitize(item.name);
+		filename = filename.replace(/[\s]/g, "_");
+		filename = filename.replace(/[,;]/g, "");
+		filename = filename.toLowerCase();
+
+		let targetFile = `${outputDirectory}/${filename}.json`;
+		await fs.writeFileSync(targetFile, jsonOutput, { "flag": "w" });
+	}
 }
- 
+
 async function unpackPacks() {
-    console.log(`Unpacking all packs`);
-    
-    let sourceDir = "./src/packs";
-    let files = await fs.readdirSync(sourceDir);
-    for (let file of files) {
-        if (file.endsWith(".db")) {
-            let fileWithoutExt = file.substr(0, file.length - 3);
-            let unpackDir = `./src/items/${fileWithoutExt}`;
-            let sourceFile = `${sourceDir}/${file}`;
-            
-            console.log(`Processing ${fileWithoutExt}`);
+	console.log(`Unpacking all packs`);
 
-            console.log(`> Cleaning up ${unpackDir}`);
-            await fs.rmdirSync(unpackDir, {recursive: true});
+	let sourceDir = "./src/packs";
+	let files = await fs.readdirSync(sourceDir);
+	for (let file of files) {
+		if (file.endsWith(".db")) {
+			let fileWithoutExt = file.substr(0, file.length - 3);
+			let unpackDir = `./src/items/${fileWithoutExt}`;
+			let sourceFile = `${sourceDir}/${file}`;
 
-            console.log(`> Unpacking ${sourceFile} into ${unpackDir}`);
-            await unpack(sourceFile, unpackDir);
+			console.log(`Processing ${fileWithoutExt}`);
 
-            console.log(`> Done.`);
-        }
-    }
+			console.log(`> Cleaning up ${unpackDir}`);
+			await fs.rmdirSync(unpackDir, { recursive: true });
 
-    console.log(`\nUnpack finished.\n`);
-    
-    return 0;
+			console.log(`> Unpacking ${sourceFile} into ${unpackDir}`);
+			await unpack(sourceFile, unpackDir);
+
+			console.log(`> Done.`);
+		}
+	}
+
+	console.log(`\nUnpack finished.\n`);
+
+	return 0;
 }
 
 /**
@@ -237,109 +237,109 @@ var cookErrorCount = 0;
 var cookAborted = false;
 var packErrors = {};
 async function cookPacksNoFormattingCheck() {
-    await cookWithOptions({formattingCheck: false});
+	await cookWithOptions({ formattingCheck: false });
 }
 async function cookPacks() {
-    await cookWithOptions();
+	await cookWithOptions();
 }
-async function cookWithOptions(options = {formattingCheck: true}) {
-    console.log(`Cooking db files`);
-    
-    let compendiumMap = {};
-    let allItems = [];
-    
-    cookErrorCount = 0;
-    cookAborted = false;
-    packErrors = {};
-    
-    let sourceDir = "./src/items";
-    let directories = await fs.readdirSync(sourceDir);
-    for (let directory of directories) {
-        let itemSourceDir = `${sourceDir}/${directory}`;
-        let outputFile = `./src/packs/${directory}.db`;
-        
-        console.log(`Processing ${directory}`);
-        
-        if (fs.existsSync(outputFile)) {
-            console.log(`> Removing ${outputFile}`);
-            await fs.unlinkSync(outputFile);
-        }
-        
-        compendiumMap[directory] = {};
-        
-        let db = new AsyncNedb({ filename: outputFile, autoload: true });
-        
-        console.log(`Opening files in ${itemSourceDir}`);
-        let files = await fs.readdirSync(itemSourceDir);
-        for (let file of files) {
-            let filePath = `${itemSourceDir}/${file}`;
-            let jsonInput = await fs.readFileSync(filePath);
-            try {
-                jsonInput = JSON.parse(jsonInput);
-                
-            } catch (err) {
-                if (!(directory in packErrors)) {
-                    packErrors[directory] = [];
-                }
-                packErrors[directory].push(`${filePath}: Error parsing file: ${err}`);
-                cookErrorCount++;
-                continue;
-            }
+async function cookWithOptions(options = { formattingCheck: true }) {
+	console.log(`Cooking db files`);
 
-            // Cache conditions to be referenced later
-            if (directory == "conditions") {
-                conditionsCache[jsonInput._id] = jsonInput;
-            }
+	let compendiumMap = {};
+	let allItems = [];
 
-            compendiumMap[directory][jsonInput._id] = jsonInput;
-            allItems.push({pack: directory, data: jsonInput, file: file});
-            
-            await db.asyncInsert(jsonInput);
-        }
-    }
+	cookErrorCount = 0;
+	cookAborted = false;
+	packErrors = {};
 
-    if (cookErrorCount > 0) {
-        console.log(`\nCritical parsing errors occurred, aborting cook.`);
-        cookAborted = true;
-        return 1;
-    }
+	let sourceDir = "./src/items";
+	let directories = await fs.readdirSync(sourceDir);
+	for (let directory of directories) {
+		let itemSourceDir = `${sourceDir}/${directory}`;
+		let outputFile = `./src/packs/${directory}.db`;
 
-    // Construct condition finding regular expression
-    var regularExpressionSubstring = "";
-    let numberOfConditions = Object.keys(conditionsCache).length
-    var index = 0;
-    for (let conditionId in conditionsCache) {
-        let condition = conditionsCache[conditionId];
-        // Construct a substring used to generate a condition finding regular expression
-        if (index == numberOfConditions - 1) {
-            regularExpressionSubstring += condition.name;
-        }
-        else {
-            regularExpressionSubstring += condition.name + "|";
-        }
-        index++;
-    }
+		console.log(`Processing ${directory}`);
 
-    conditionsRegularExpression =  new RegExp("(" + regularExpressionSubstring + ")","g");
+		if (fs.existsSync(outputFile)) {
+			console.log(`> Removing ${outputFile}`);
+			await fs.unlinkSync(outputFile);
+		}
 
-    if (options.formattingCheck == true) {
-        console.log(`\nStarting formatting check.`);
-        formattingCheck(allItems)
-    }
-    else {
-        console.log(`\n*Skipping* formatting check.`);
-    }
+		compendiumMap[directory] = {};
 
-    console.log(`\nStarting consistency check.`);
-    consistencyCheck(allItems, compendiumMap)
+		let db = new AsyncNedb({ filename: outputFile, autoload: true });
 
-    console.log(`\nUpdating items with updated IDs.\n`);
-    
-    await unpackPacks();
-    
-    console.log(`\nCook finished with ${cookErrorCount} errors.\n`);
+		console.log(`Opening files in ${itemSourceDir}`);
+		let files = await fs.readdirSync(itemSourceDir);
+		for (let file of files) {
+			let filePath = `${itemSourceDir}/${file}`;
+			let jsonInput = await fs.readFileSync(filePath);
+			try {
+				jsonInput = JSON.parse(jsonInput);
 
-    return 0;
+			} catch (err) {
+				if (!(directory in packErrors)) {
+					packErrors[directory] = [];
+				}
+				packErrors[directory].push(`${filePath}: Error parsing file: ${err}`);
+				cookErrorCount++;
+				continue;
+			}
+
+			// Cache conditions to be referenced later
+			if (directory == "conditions") {
+				conditionsCache[jsonInput._id] = jsonInput;
+			}
+
+			compendiumMap[directory][jsonInput._id] = jsonInput;
+			allItems.push({ pack: directory, data: jsonInput, file: file });
+
+			await db.asyncInsert(jsonInput);
+		}
+	}
+
+	if (cookErrorCount > 0) {
+		console.log(`\nCritical parsing errors occurred, aborting cook.`);
+		cookAborted = true;
+		return 1;
+	}
+
+	// Construct condition finding regular expression
+	var regularExpressionSubstring = "";
+	let numberOfConditions = Object.keys(conditionsCache).length
+	var index = 0;
+	for (let conditionId in conditionsCache) {
+		let condition = conditionsCache[conditionId];
+		// Construct a substring used to generate a condition finding regular expression
+		if (index == numberOfConditions - 1) {
+			regularExpressionSubstring += condition.name;
+		}
+		else {
+			regularExpressionSubstring += condition.name + "|";
+		}
+		index++;
+	}
+
+	conditionsRegularExpression = new RegExp("(" + regularExpressionSubstring + ")", "g");
+
+	if (options.formattingCheck == true) {
+		console.log(`\nStarting formatting check.`);
+		formattingCheck(allItems)
+	}
+	else {
+		console.log(`\n*Skipping* formatting check.`);
+	}
+
+	console.log(`\nStarting consistency check.`);
+	consistencyCheck(allItems, compendiumMap)
+
+	console.log(`\nUpdating items with updated IDs.\n`);
+
+	await unpackPacks();
+
+	console.log(`\nCook finished with ${cookErrorCount} errors.\n`);
+
+	return 0;
 }
 
 /**
@@ -351,373 +351,370 @@ async function cookWithOptions(options = {formattingCheck: true}) {
 // Conditions cache and regular expression are generated during beginning of cooking and used during formatting checks
 var conditionsCache = {};
 var conditionsRegularExpression;
-var validArmorTypes = ["light","power","heavy","shield"];
+var validArmorTypes = ["light", "power", "heavy", "shield"];
 var validCreatureSizes = ["fine", "diminutive", "tiny", "small", "medium", "large", "huge", "gargantuan", "colossal"];
 function formattingCheck(allItems) {
 
-    for (let item of allItems) {
-        let data = item.data;
-        let pack = item.pack;
+	for (let item of allItems) {
+		let data = item.data;
+		let pack = item.pack;
 
-        if(!data || !data.data  || !data.type) {
-            continue; // Malformed data or journal entry - outside the scope of the formatting check
-        }
-        // We only check formatting of aliens, vehicles & equipment for now
-        if (data.type === "npc") {
-            formattingCheckAlien(data,pack, item.file, {checkLinks: true})
-        }
-        else if (data.type === "equipment") {
-            formattingCheckItems(data, pack, item.file, {checkImage: true, checkSource: true, checkPrice: true, checkLevel: true, checkLinks: true})
-        }
-        else if (data.type === "vehicle") {
-            formattingCheckVehicle(data, pack, item.file,{checkLinks:true});
-        }
-        else if (data.type == "spell") {
-            formattingCheckSpell(data, pack, item.file, {checkLinks:true});
-        }
-        else if (data.type == "race") {
-            formattingCheckRace(data, pack, item.file, {checkLinks:true});
-        }
-    }
+		if (!data || !data.data || !data.type) {
+			continue; // Malformed data or journal entry - outside the scope of the formatting check
+		}
+		// We only check formatting of aliens, vehicles & equipment for now
+		if (data.type === "npc") {
+			formattingCheckAlien(data, pack, item.file, { checkLinks: true })
+		}
+		else if (data.type === "equipment") {
+			formattingCheckItems(data, pack, item.file, { checkImage: true, checkSource: true, checkPrice: true, checkLevel: true, checkLinks: true })
+		}
+		else if (data.type === "vehicle") {
+			formattingCheckVehicle(data, pack, item.file, { checkLinks: true });
+		}
+		else if (data.type == "spell") {
+			formattingCheckSpell(data, pack, item.file, { checkLinks: true });
+		}
+		else if (data.type == "race") {
+			formattingCheckRace(data, pack, item.file, { checkLinks: true });
+		}
+	}
 }
 
-function formattingCheckRace(data, pack, file, options = {checkLinks:true}) {
+function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
 
-    // Validate name
-    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
-    }
+	// Validate name
+	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+	}
 
-    // Validate HP values
-    if(data.data.hp.value < 0) {
-        addWarningForPack(`${file}: HP value not entered correctly.`, pack);
-    }
+	// Validate HP values
+	if (data.data.hp.value < 0) {
+		addWarningForPack(`${file}: HP value not entered correctly.`, pack);
+	}
 
-    if(data.data.size) {
-        if(!validCreatureSizes.includes(data.data.size)) {
-            addWarningForPack(`${file}: Size value not entered correctly.`, pack);
-        }
-    }
-    else {
-        addWarningForPack(`${file}: Size value not entered correctly.`, pack);
-    }
+	if (data.data.size) {
+		if (!validCreatureSizes.includes(data.data.size)) {
+			addWarningForPack(`${file}: Size value not entered correctly.`, pack);
+		}
+	}
+	else {
+		addWarningForPack(`${file}: Size value not entered correctly.`, pack);
+	}
 
-    // Validate image
-    if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-        addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
-    }
+	// Validate image
+	if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+	}
 
-    // Validate source
-    let source = data.data.source;
-    if (!source) {
-        addWarningForPack(`${file}: Missing source field.`, pack);
-        return;
-    }
-    if (!isSourceValid(source)) {
-        addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
-    }
+	// Validate source
+	let source = data.data.source;
+	if (!source) {
+		addWarningForPack(`${file}: Missing source field.`, pack);
+		return;
+	}
+	if (!isSourceValid(source)) {
+		addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+	}
 
-    // Check biography for references to conditions
-    if (options.checkLinks) {
-        let description = data.data.description.value
-        let result = searchDescriptionForUnlinkedCondition(description);
-        if (result.found) {
-            addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
-        }
-    }
+	// Check biography for references to conditions
+	if (options.checkLinks) {
+		let description = data.data.description.value
+		let result = searchDescriptionForUnlinkedCondition(description);
+		if (result.found) {
+			addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
+		}
+	}
 }
 
-function formattingCheckAlien(data, pack, file, options = {checkLinks: true}) {
+function formattingCheckAlien(data, pack, file, options = { checkLinks: true }) {
 
-    // Validate name
-    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
-    }
-    // Validate attributes
-    // Validate HP & Stamina Points
-    if (!data.data.attributes || !data.data.attributes.hp || !data.data.attributes.sp) {
-        addWarningForPack(`${file}: Missing HP/SP values.`, pack);
-        return;
-    }
-    // Validate HP values
-    else if(data.data.attributes.hp.value != data.data.attributes.hp.max) {
-        addWarningForPack(`${file}: HP value not entered correctly.`, pack);
-    }
-    // Validate SP values
-    if(data.data.attributes.sp.value != data.data.attributes.sp.max) {
-        addWarningForPack(`${file}: SP value not entered correctly.`, pack);
-    }
+	// Validate name
+	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+	}
+	// Validate attributes
+	// Validate HP & Stamina Points
+	if (!data.data.attributes || !data.data.attributes.hp || !data.data.attributes.sp) {
+		addWarningForPack(`${file}: Missing HP/SP values.`, pack);
+		return;
+	}
+	// Validate HP values
+	else if (data.data.attributes.hp.value != data.data.attributes.hp.max) {
+		addWarningForPack(`${file}: HP value not entered correctly.`, pack);
+	}
+	// Validate SP values
+	if (data.data.attributes.sp.value != data.data.attributes.sp.max) {
+		addWarningForPack(`${file}: SP value not entered correctly.`, pack);
+	}
 
-    if(data.data.traits.size) {
-        if(!validCreatureSizes.includes(data.data.traits.size)) {
-            addWarningForPack(`${file}: Size value not entered correctly.`, pack);
-        }
-    }
-    else {
-        addWarningForPack(`${file}: Size value not entered correctly.`, pack);
-    }
+	if (data.data.traits.size) {
+		if (!validCreatureSizes.includes(data.data.traits.size)) {
+			addWarningForPack(`${file}: Size value not entered correctly.`, pack);
+		}
+	}
+	else {
+		addWarningForPack(`${file}: Size value not entered correctly.`, pack);
+	}
 
-    // Validate image
-    if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-        addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
-    }
+	// Validate image
+	if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+	}
 
-    // Validate token image
-    if (data.token.img && !data.token.img.startsWith("systems") && !data.token.img.startsWith("icons")) {
-    addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
-    }
+	// Validate token image
+	if (data.token.img && !data.token.img.startsWith("systems") && !data.token.img.startsWith("icons")) {
+		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+	}
 
-    // Validate source
-    let source = data.data.details.source;
-    if (!source) {
-        addWarningForPack(`${file}: Missing source field.`, pack);
-       return;
-    }
-    if (!isSourceValid(source)) {
-       addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
-    }
+	// Validate source
+	let source = data.data.details.source;
+	if (!source) {
+		addWarningForPack(`${file}: Missing source field.`, pack);
+		return;
+	}
+	if (!isSourceValid(source)) {
+		addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+	}
 
-    // Check biography for references to conditions
-    if (options.checkLinks) {
-        let description = data.data.details.biography.value
-        let result = searchDescriptionForUnlinkedCondition(description);
-        if (result.found) {
-            addWarningForPack(`${file}: Found reference to ${result.match} in biography without link".`, pack);
-        }
-    }
+	// Check biography for references to conditions
+	if (options.checkLinks) {
+		let description = data.data.details.biography.value
+		let result = searchDescriptionForUnlinkedCondition(description);
+		if (result.found) {
+			addWarningForPack(`${file}: Found reference to ${result.match} in biography without link".`, pack);
+		}
+	}
 
-    // Validate items
-    for (i in data.items) {
-        formattingCheckItems(data.items[i], pack, file, {checkImage: true, checkSource: false, checkPrice: false, checkLinks: options.checkLinks})
-    }
+	// Validate items
+	for (i in data.items) {
+		formattingCheckItems(data.items[i], pack, file, { checkImage: true, checkSource: false, checkPrice: false, checkLinks: options.checkLinks })
+	}
 }
 
-function formattingCheckItems(data, pack, file, options = {checkImage: true, checkSource: true, checkPrice: true, checkLevel: true, checkLinks: true}) {
+function formattingCheckItems(data, pack, file, options = { checkImage: true, checkSource: true, checkPrice: true, checkLevel: true, checkLinks: true }) {
 
-    // Validate name
-    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
-    }
+	// Validate name
+	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+	}
 
-    // Validate image
-    if ( options.checkImage) {
-        if (data.img && // Only validate if img is set
-            !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-            addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
-        }
-    }
+	// Validate image
+	if (options.checkImage) {
+		if (data.img && // Only validate if img is set
+			!data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+			addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+		}
+	}
 
-    // Validate source
-    if (options.checkSource) {
-        let source = data.data.source;
-        if (!isSourceValid(source)) {
-            addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
-        }
-    }
+	// Validate source
+	if (options.checkSource) {
+		let source = data.data.source;
+		if (!isSourceValid(source)) {
+			addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+		}
+	}
 
-    // Validate price
-    if (options.checkPrice) {
-        let price = data.data.price;
-        if (!price || price <= 0) {
-            addWarningForPack(`${file}: Improperly formatted armor price field "${price}".`, pack);
-        }
-    }
+	// Validate price
+	if (options.checkPrice) {
+		let price = data.data.price;
+		if (!price || price <= 0) {
+			addWarningForPack(`${file}: Improperly formatted armor price field "${price}".`, pack);
+		}
+	}
 
-    // Validate level
-    if (options.checkLevel) {
-        let level = data.data.level;
-        if (!level || level <= 0) {
-            addWarningForPack(`${file}: Improperly formatted armor level field "${level}".`, pack);
-        }
-    }
+	// Validate level
+	if (options.checkLevel) {
+		let level = data.data.level;
+		if (!level || level <= 0) {
+			addWarningForPack(`${file}: Improperly formatted armor level field "${level}".`, pack);
+		}
+	}
 
-    // If a weapon
-    if(data.data.weaponType) {
-        formattingCheckWeapons(data, pack, file);
-    }
+	// If a weapon
+	if (data.data.weaponType) {
+		formattingCheckWeapons(data, pack, file);
+	}
 
-    // If armor
-    let armor = data.data.armor
-    if (armor) {
-        // Validate armor type
-        let armorType = data.data.armor.type
-        if(!validArmorTypes.includes(armorType)) {
-            addWarningForPack(`${file}: Improperly formatted armor type field "${armorType}".`, pack);
-        }
-    }
+	// If armor
+	let armor = data.data.armor
+	if (armor) {
+		// Validate armor type
+		let armorType = data.data.armor.type
+		if (!validArmorTypes.includes(armorType)) {
+			addWarningForPack(`${file}: Improperly formatted armor type field "${armorType}".`, pack);
+		}
+	}
 
-    // Check description for references to conditions
-    if (options.checkLinks) {
-        let description = data.data.description.value
+	// Check description for references to conditions
+	if (options.checkLinks) {
+		let description = data.data.description.value
 
-        if (description) {
-            let result = searchDescriptionForUnlinkedCondition(description);
-            if (result.found) {
-                addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
-            }
-        }
-        else {
-            // Item has no description
-        }
-    }
+		if (description) {
+			let result = searchDescriptionForUnlinkedCondition(description);
+			if (result.found) {
+				addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
+			}
+		}
+		else {
+			// Item has no description
+		}
+	}
 }
 
 function formattingCheckWeapons(data, pack, file) {
 
-    let lowecaseName = data.name.toLowerCase()
-    if(lowecaseName.includes("multiattack"))
-    {
-        // Should be [MultiATK]
-        addWarningForPack(`${file}: Improperly formatted multiattack name field "${data.name}".`, pack);
-    }
-    if(lowecaseName.includes("multiatk") ) {
+	let lowecaseName = data.name.toLowerCase()
+	if (lowecaseName.includes("multiattack")) {
+		// Should be [MultiATK]
+		addWarningForPack(`${file}: Improperly formatted multiattack name field "${data.name}".`, pack);
+	}
+	if (lowecaseName.includes("multiatk")) {
 
-        if(data.name.includes("[MultiATK] "))
-        {
-            // Looks good, contains the proper multi-attack prefix and a space
-        }
-        else {
-            // Anything else is close, but is slightly off
-            addWarningForPack(`${file}: Improperly formatted multiattack name field "${data.name}".`, pack);
-        }
-    }
+		if (data.name.includes("[MultiATK] ")) {
+			// Looks good, contains the proper multi-attack prefix and a space
+		}
+		else {
+			// Anything else is close, but is slightly off
+			addWarningForPack(`${file}: Improperly formatted multiattack name field "${data.name}".`, pack);
+		}
+	}
 }
 
-function formattingCheckVehicle(data, pack, file, options = {checkLinks: true}) {
+function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }) {
 
-    // Validate name
-    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
-    }
+	// Validate name
+	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+	}
 
-    // Validate image
-    if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-        addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
-    }
+	// Validate image
+	if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+	}
 
-    // Validate source
-    let source = data.data.details.source;
-    if (!source) {
-        addWarningForPack(`${file}: Missing source field.`, pack);
-        return;
-    }
-    if (!isSourceValid(source)) {
-        addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
-    }
+	// Validate source
+	let source = data.data.details.source;
+	if (!source) {
+		addWarningForPack(`${file}: Missing source field.`, pack);
+		return;
+	}
+	if (!isSourceValid(source)) {
+		addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+	}
 
-    // Validate price
-    let price = data.data.details.price;
-    if (!price || price <= 0) {
-        addWarningForPack(`${file}: Improperly formatted vehicle price field "${armorType}".`, pack);
-    }
+	// Validate price
+	let price = data.data.details.price;
+	if (!price || price <= 0) {
+		addWarningForPack(`${file}: Improperly formatted vehicle price field "${armorType}".`, pack);
+	}
 
-    // Validate level
-    let level = data.data.details.level;
-    if (!level || level <= 0) {
-        addWarningForPack(`${file}: Improperly formatted vehicle level field "${armorType}".`, pack);
-    }
+	// Validate level
+	let level = data.data.details.level;
+	if (!level || level <= 0) {
+		addWarningForPack(`${file}: Improperly formatted vehicle level field "${armorType}".`, pack);
+	}
 
-    // Check description for references to conditions
-    if (options.checkLinks) {
-        let description = data.data.details.description.value
-        if (description) {
-            let result = searchDescriptionForUnlinkedCondition(description);
-            if (result.found) {
-                addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
-            }
-        }
-        else {
-            // Vehicle has no description
-        }
-    }
+	// Check description for references to conditions
+	if (options.checkLinks) {
+		let description = data.data.details.description.value
+		if (description) {
+			let result = searchDescriptionForUnlinkedCondition(description);
+			if (result.found) {
+				addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
+			}
+		}
+		else {
+			// Vehicle has no description
+		}
+	}
 
-    // Validate items
-    for (i in data.items) {
-        formattingCheckItems(data.items[i], pack, file, {checkImage: true, checkSource: false, checkPrice: false, checkLinks: options.checkLinks})
-    }
+	// Validate items
+	for (i in data.items) {
+		formattingCheckItems(data.items[i], pack, file, { checkImage: true, checkSource: false, checkPrice: false, checkLinks: options.checkLinks })
+	}
 }
 
-function formattingCheckSpell(data, pack, file, options = {checkLinks:true}) {
+function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) {
 
-    // Validate name
-    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
-    }
+	// Validate name
+	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+	}
 
-    // Validate image
-    if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-        addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
-    }
+	// Validate image
+	if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+	}
 
-    // Validate source
-    let source = data.data.source;
-    if (!source) {
-        addWarningForPack(`${file}: Missing source field.`, pack);
-        return;
-    }
-    if (!isSourceValid(source)) {
-        addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
-    }
+	// Validate source
+	let source = data.data.source;
+	if (!source) {
+		addWarningForPack(`${file}: Missing source field.`, pack);
+		return;
+	}
+	if (!isSourceValid(source)) {
+		addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+	}
 
-    //Check spell description for unlinked references to conditions
-    if(options.checkLinks) {
-        let description = data.data.description.value
-        let result = searchDescriptionForUnlinkedCondition(description);
-        if (result.found) {
-            addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
-        }
-    }
+	//Check spell description for unlinked references to conditions
+	if (options.checkLinks) {
+		let description = data.data.description.value
+		let result = searchDescriptionForUnlinkedCondition(description);
+		if (result.found) {
+			addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
+		}
+	}
 }
 
 // Check if a description contains an unlinked reference to a condition
 function searchDescriptionForUnlinkedCondition(description) {
 
-    let matches = [...description.matchAll(conditionsRegularExpression)];
-    //Found a potential reference to a condition
-    if (matches && matches.length > 0) {
-        // Capture the character before and after each match and use some basic heuristics to decide if it's an linked condition in the description
-        for(let matchIndex in matches) {
+	let matches = [...description.matchAll(conditionsRegularExpression)];
+	//Found a potential reference to a condition
+	if (matches && matches.length > 0) {
+		// Capture the character before and after each match and use some basic heuristics to decide if it's an linked condition in the description
+		for (let matchIndex in matches) {
 
-            let match = matches[matchIndex];
-            let conditionWord = match[0];
-            let matchedWord = description.substring( match["index"], match["index"] + match["length"]);
+			let match = matches[matchIndex];
+			let conditionWord = match[0];
+			let matchedWord = description.substring(match["index"], match["index"] + match["length"]);
 
-            // We want to capture a character before and after
-            let characterBeforeIndex = match["index"] - 1;
-            let characterAfterIndex = match["index"] + conditionWord.length;
-            let characterBefore = description.substring(characterBeforeIndex, characterBeforeIndex + 1);
-            let characterAfter = description.substring(characterAfterIndex, characterAfterIndex + 1);
-            let delimiterCharacters = [">", "<", ";",",","/","(",")","."];
+			// We want to capture a character before and after
+			let characterBeforeIndex = match["index"] - 1;
+			let characterAfterIndex = match["index"] + conditionWord.length;
+			let characterBefore = description.substring(characterBeforeIndex, characterBeforeIndex + 1);
+			let characterAfter = description.substring(characterAfterIndex, characterAfterIndex + 1);
+			let delimiterCharacters = [">", "<", ";", ",", "/", "(", ")", "."];
 
-            var unlinkedReferenceFound = false;
-            // If surrounded by { and } we assume it is linked and continue
-            if (characterBefore === "{" && characterAfter === "}")
-            {
-                continue;
-            }
-            // If the condition is surrounded by spaces, it is unlinked
-            // it should be contained in a link to the compendium like this `@Compendium[sfrpg.spells.YDXegEus8p0BnsH1]{Invisibility}`
-            else if (characterBefore === " " && characterAfter === " ") {
-                unlinkedReferenceFound = true;
-            }
-            // If potentially within the contents of a tag or surrounded by delimiting characters
-            else if (delimiterCharacters.includes(characterBefore) && (delimiterCharacters.includes(characterAfter) || " ")) {
-                // The condition was found between two delimiters, most likely in the contents of an html tag.
-                // Or it was found at the tail of a delimiter followed by a space (at the end of a comma separated list.
-                unlinkedReferenceFound = true
-            }
-            // Condition was found after a space but right before a delimiting character, like the end of a sentence.
-            // Or hugging opening brackets, or the start of a comma separated list.
-            else if ((delimiterCharacters.includes(characterBefore) || " ") && delimiterCharacters.includes(characterAfter)) {
-                unlinkedReferenceFound = true;
-            }
+			var unlinkedReferenceFound = false;
+			// If surrounded by { and } we assume it is linked and continue
+			if (characterBefore === "{" && characterAfter === "}") {
+				continue;
+			}
+			// If the condition is surrounded by spaces, it is unlinked
+			// it should be contained in a link to the compendium like this `@Compendium[sfrpg.spells.YDXegEus8p0BnsH1]{Invisibility}`
+			else if (characterBefore === " " && characterAfter === " ") {
+				unlinkedReferenceFound = true;
+			}
+			// If potentially within the contents of a tag or surrounded by delimiting characters
+			else if (delimiterCharacters.includes(characterBefore) && (delimiterCharacters.includes(characterAfter) || " ")) {
+				// The condition was found between two delimiters, most likely in the contents of an html tag.
+				// Or it was found at the tail of a delimiter followed by a space (at the end of a comma separated list.
+				unlinkedReferenceFound = true
+			}
+			// Condition was found after a space but right before a delimiting character, like the end of a sentence.
+			// Or hugging opening brackets, or the start of a comma separated list.
+			else if ((delimiterCharacters.includes(characterBefore) || " ") && delimiterCharacters.includes(characterAfter)) {
+				unlinkedReferenceFound = true;
+			}
 
-            if (unlinkedReferenceFound) {
-                return {found: true, match: conditionWord};
-            }
-        }
-    }
-    return {found: false};
+			if (unlinkedReferenceFound) {
+				return { found: true, match: conditionWord };
+			}
+		}
+	}
+	return { found: false };
 }
 
 // Checks a source string for conformance to string format outlined in CONTRIBUTING.md
@@ -728,6 +725,7 @@ function isSourceValid(source) {
     // NOTE: One day this should be increased when they publish further Alien Archives (Alien Archive 5 included for posterity)
     let AlienArchiveSourceMatch = [...source.matchAll(/AA([1-5]) pg\. [\d]+/g)];
     let AdventurePathSourceMatch = [...source.matchAll(/AP #[\d]+ pg\. [\d]+/g)];
+    let StarfinderSocietySourceMatch =  [...source.matchAll(/SFS #[\d]+-[\d]+ pg\. [\d]+/g)];
 
     if (CoreBooksSourceMatch && CoreBooksSourceMatch.length > 0) {
        // ✅ formatted Core book source
@@ -737,9 +735,13 @@ function isSourceValid(source) {
        // ✅ formatted Alien Archives source
        return true;
     }
-    if (AdventurePathSourceMatch && AdventurePathSourceMatch.length > 0) {
+    else if (AdventurePathSourceMatch && AdventurePathSourceMatch.length > 0) {
        // ✅ formatted Adventure path source
        return true;
+    }
+    else if (StarfinderSocietySourceMatch && StarfinderSocietySourceMatch.length > 0) {
+        // ✅ formatted Starfinder Society path source
+        return true;
     }
 
     return false;
@@ -747,141 +749,141 @@ function isSourceValid(source) {
 
 function addWarningForPack(warning, pack) {
 
-    if (!(pack in packErrors)) {
-        packErrors[pack] = [];
-    }
+	if (!(pack in packErrors)) {
+		packErrors[pack] = [];
+	}
 
-    cookErrorCount += 1;
-    packErrors[pack].push(warning);
+	cookErrorCount += 1;
+	packErrors[pack].push(warning);
 }
 
 function consistencyCheck(allItems, compendiumMap) {
-    for (let item of allItems) {
-        let data = item.data;
-        if (!data || !data.data || !data.data.description) continue;
+	for (let item of allItems) {
+		let data = item.data;
+		if (!data || !data.data || !data.data.description) continue;
 
-        let desc = data.data.description.value;
-        if (!desc) continue;
+		let desc = data.data.description.value;
+		if (!desc) continue;
 
-        let pack = item.pack;
+		let pack = item.pack;
 
-        let errors = [];
-        let itemMatch = [...desc.matchAll(/@Item\[([^\]]*)\]({([^}]*)})?/gm)];
-        if (itemMatch && itemMatch.length > 0) {
-            for (let localItem of itemMatch) {
-                let localItemId = localItem[1];
-                let localItemName = localItem[2] || localItemId;
+		let errors = [];
+		let itemMatch = [...desc.matchAll(/@Item\[([^\]]*)\]({([^}]*)})?/gm)];
+		if (itemMatch && itemMatch.length > 0) {
+			for (let localItem of itemMatch) {
+				let localItemId = localItem[1];
+				let localItemName = localItem[2] || localItemId;
 
-                // @Item links cannot exist in compendiums.
-                if (!(pack in packErrors)) {
-                    packErrors[pack] = [];
-                }
-                packErrors[pack].push(`${item.file}: Using @Item to reference to '${localItemName}' (with id: ${localItemId}), @Item is not allowed in compendiums. Please use '@Compendium[sfrpg.${pack}.${localItemId}]' instead.`);
-                cookErrorCount++;
-            }
-        }
+				// @Item links cannot exist in compendiums.
+				if (!(pack in packErrors)) {
+					packErrors[pack] = [];
+				}
+				packErrors[pack].push(`${item.file}: Using @Item to reference to '${localItemName}' (with id: ${localItemId}), @Item is not allowed in compendiums. Please use '@Compendium[sfrpg.${pack}.${localItemId}]' instead.`);
+				cookErrorCount++;
+			}
+		}
 
-        let journalMatch = [...desc.matchAll(/@JournalEntry\[([^\]]*)\]({([^}]*)})?/gm)];
-        if (journalMatch && journalMatch.length > 0) {
-            for (let localItem of journalMatch) {
-                let localItemId = localItem[1];
-                let localItemName = localItem[2] || localItemId;
+		let journalMatch = [...desc.matchAll(/@JournalEntry\[([^\]]*)\]({([^}]*)})?/gm)];
+		if (journalMatch && journalMatch.length > 0) {
+			for (let localItem of journalMatch) {
+				let localItemId = localItem[1];
+				let localItemName = localItem[2] || localItemId;
 
-                // @Item links cannot exist in compendiums.
-                if (!(pack in packErrors)) {
-                    packErrors[pack] = [];
-                }
-                packErrors[pack].push(`${item.file}: Using @JournalEntry to reference to '${localItemName}' (with id: ${localItemId}), @JournalEntry is not allowed in compendiums. Please use '@Compendium[sfrpg.${pack}.${localItemId}]' instead.`);
-                cookErrorCount++;
-            }
-        }
+				// @Item links cannot exist in compendiums.
+				if (!(pack in packErrors)) {
+					packErrors[pack] = [];
+				}
+				packErrors[pack].push(`${item.file}: Using @JournalEntry to reference to '${localItemName}' (with id: ${localItemId}), @JournalEntry is not allowed in compendiums. Please use '@Compendium[sfrpg.${pack}.${localItemId}]' instead.`);
+				cookErrorCount++;
+			}
+		}
 
-        let compendiumMatch = [...desc.matchAll(/@Compendium\[([^\]]*)]({([^}]*)})?/gm)];
-        if (compendiumMatch && compendiumMatch.length > 0) {
-            for (let otherItem of compendiumMatch) {
-                let link = otherItem[1];
-                let otherItemName = (otherItem.length == 4) ? otherItem[3] || link : link;
+		let compendiumMatch = [...desc.matchAll(/@Compendium\[([^\]]*)]({([^}]*)})?/gm)];
+		if (compendiumMatch && compendiumMatch.length > 0) {
+			for (let otherItem of compendiumMatch) {
+				let link = otherItem[1];
+				let otherItemName = (otherItem.length == 4) ? otherItem[3] || link : link;
 
-                let linkParts = link.split('.');
-                if (linkParts.length !== 3) {
-                    if (!(pack in packErrors)) {
-                        packErrors[pack] = [];
-                    }
-                    packErrors[pack].push(`${item.file}: Compendium link to '${link}' is not valid. It does not have enough segments in the link. Expected format is sfrpg.compendiumName.itemId.`);
-                    cookErrorCount++;
-                    continue;
-                }
+				let linkParts = link.split('.');
+				if (linkParts.length !== 3) {
+					if (!(pack in packErrors)) {
+						packErrors[pack] = [];
+					}
+					packErrors[pack].push(`${item.file}: Compendium link to '${link}' is not valid. It does not have enough segments in the link. Expected format is sfrpg.compendiumName.itemId.`);
+					cookErrorCount++;
+					continue;
+				}
 
-                let system = linkParts[0];
-                let otherPack = linkParts[1];
-                let otherItemId = linkParts[2];
+				let system = linkParts[0];
+				let otherPack = linkParts[1];
+				let otherItemId = linkParts[2];
 
-                // @Compendium links must link to sfrpg compendiums.
-                if (system !== "sfrpg") {
-                    if (!(pack in packErrors)) {
-                        packErrors[pack] = [];
-                    }
-                    packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is not referencing the sfrpg system, but instead using '${system}'.`);
-                    cookErrorCount++;
-                }
+				// @Compendium links must link to sfrpg compendiums.
+				if (system !== "sfrpg") {
+					if (!(pack in packErrors)) {
+						packErrors[pack] = [];
+					}
+					packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is not referencing the sfrpg system, but instead using '${system}'.`);
+					cookErrorCount++;
+				}
 
-                // @Compendium links to the same compendium could be @Item links instead.
-                /*if (otherPack === pack) {
-                    if (!(pack in packErrors)) {
-                        packErrors[pack] = [];
-                    }
-                    packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is referencing the same compendium, consider using @Item[${otherItemId}] instead.`);
-                    cookErrorCount++;
-                }*/
+				// @Compendium links to the same compendium could be @Item links instead.
+				/*if (otherPack === pack) {
+					if (!(pack in packErrors)) {
+						packErrors[pack] = [];
+					}
+					packErrors[pack].push(`${item.file}: Compendium link to '${otherItemName}' (with id: ${otherItemId}) is referencing the same compendium, consider using @Item[${otherItemId}] instead.`);
+					cookErrorCount++;
+				}*/
 
-                // @Compendium links must link to a valid compendium.
-                if (!(otherPack in compendiumMap)) {
-                    if (!(pack in packErrors)) {
-                        packErrors[pack] = [];
-                    }
-                    packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) cannot find '${otherPack}', is there an error in the compendium name?`);
-                    cookErrorCount++;
-                    continue;
-                }
+				// @Compendium links must link to a valid compendium.
+				if (!(otherPack in compendiumMap)) {
+					if (!(pack in packErrors)) {
+						packErrors[pack] = [];
+					}
+					packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) cannot find '${otherPack}', is there an error in the compendium name?`);
+					cookErrorCount++;
+					continue;
+				}
 
-                // @Compendium links must link to a valid item ID.
-                var itemExists = false;
-                if (otherItemId in compendiumMap[otherPack]) {
-                    itemExists = true;
-                } else {
-                    let foundItem = allItems.find(x => x.pack === otherPack && (x.data.name == otherItemId || x.data.name == otherItemName));
-                    itemExists = foundItem !== null;
-                }
+				// @Compendium links must link to a valid item ID.
+				var itemExists = false;
+				if (otherItemId in compendiumMap[otherPack]) {
+					itemExists = true;
+				} else {
+					let foundItem = allItems.find(x => x.pack === otherPack && (x.data.name == otherItemId || x.data.name == otherItemName));
+					itemExists = foundItem !== null;
+				}
 
-                if (!itemExists) {
-                    if (!(pack in packErrors)) {
-                        packErrors[pack] = [];
-                    }
-                    packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) not found in '${otherPack}'.`);
-                    cookErrorCount++;
-                }
-            }
-        }
-    }
+				if (!itemExists) {
+					if (!(pack in packErrors)) {
+						packErrors[pack] = [];
+					}
+					packErrors[pack].push(`${item.file}: '${otherItemName}' (with id: ${otherItemId}) not found in '${otherPack}'.`);
+					cookErrorCount++;
+				}
+			}
+		}
+	}
 }
 
 async function postCook() {
 
-    if (Object.keys(packErrors).length > 0) {
-        for (let pack of Object.keys(packErrors)) {
-            console.log(`\n${packErrors[pack].length} Errors cooking ${pack}.db:`);
-            for (let error of packErrors[pack]) {
-                console.log(`> ${error}`);
-            }
-        }
-    }
-    
-    if (!cookAborted) {
-        console.log(`\nCompendiums cooked with ${cookErrorCount} errors!\nDon't forget to restart Foundry to refresh compendium data!\n`);
-    } else {
-        console.log(`\nCook aborted after ${cookErrorCount} critical errors!\n`);
-    }
-    return 0;
+	if (Object.keys(packErrors).length > 0) {
+		for (let pack of Object.keys(packErrors)) {
+			console.log(`\n${packErrors[pack].length} Errors cooking ${pack}.db:`);
+			for (let error of packErrors[pack]) {
+				console.log(`> ${error}`);
+			}
+		}
+	}
+
+	if (!cookAborted) {
+		console.log(`\nCompendiums cooked with ${cookErrorCount} errors!\nDon't forget to restart Foundry to refresh compendium data!\n`);
+	} else {
+		console.log(`\nCook aborted after ${cookErrorCount} critical errors!\n`);
+	}
+	return 0;
 }
 
 /********************/

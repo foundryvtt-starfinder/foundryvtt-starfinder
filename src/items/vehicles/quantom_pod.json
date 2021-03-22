@@ -1,0 +1,684 @@
+{
+  "_id": "kkk2sOVbpwxIWYXE",
+  "name": "Quantom Pod",
+  "type": "vehicle",
+  "data": {
+    "conditions": {},
+    "details": {
+      "level": 19,
+      "price": 1630000,
+      "description": {
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Windows and apertures open on this smooth, gray sphere at a touch and a thought. The vehicle&rsquo;s pilot wears a control helmet that accepts mental commands.</span><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\"></span></p>",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "AR pg. 138"
+    },
+    "crew": {
+      "useNPCCrew": false,
+      "pilot": {
+        "limit": 1,
+        "actorIds": []
+      },
+      "complement": {
+        "limit": 0,
+        "actorIds": []
+      },
+      "passenger": {
+        "limit": 8,
+        "actorIds": []
+      }
+    },
+    "hangarBay": {
+      "limit": 0,
+      "actorIds": []
+    },
+    "attributes": {
+      "size": "huge",
+      "type": "landATW",
+      "dimensions": {
+        "width": "15",
+        "length": "15",
+        "height": "15"
+      },
+      "speed": {
+        "drive": "80 ft (fly, hover, and swim); 60 ft (burrow through steel and softer)",
+        "full": "900 ft (fly, hover, and swim); 300 ft (burrow through steel and softer)",
+        "mph": "105 mph (fly, hover, and swim); 34 mph (borrow through steel and softer)",
+        "type": ""
+      },
+      "eac": {
+        "value": 32
+      },
+      "expansionBays": {
+        "value": 0
+      },
+      "kac": {
+        "value": 33
+      },
+      "cover": "total",
+      "hp": {
+        "value": 350,
+        "max": 350,
+        "threshold": 175
+      },
+      "hardness": 15,
+      "modifiers": {
+        "piloting": "3",
+        "attackStopped": "0",
+        "attackMoving": "-2",
+        "attackFullSpeed": "-4"
+      },
+      "systems": [],
+      "special": []
+    }
+  },
+  "sort": 100001,
+  "flags": {},
+  "token": {
+    "flags": {},
+    "name": "Motorcycle",
+    "displayName": 0,
+    "img": "icons/svg/mystery-man.svg",
+    "tint": null,
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 360,
+    "lightAngle": 360,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "actorId": "kkk2sOVbpwxIWYXE",
+    "actorLink": false,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {},
+    "bar2": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "_id": "6hYEGXGbezExRSQD",
+      "name": "Collision (Ram) - ignores 12 points of hardness",
+      "type": "vehicleAttack",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "<p>Ignores 5 points of hardness</p>",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "modifiers": [],
+        "damage": {
+          "parts": [
+            [
+              "2*(24d10)",
+              "bludgeoning"
+            ]
+          ]
+        },
+        "save": {
+          "type": "reflex",
+          "dc": "22",
+          "descriptor": "negate"
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 100000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "LS40UB61zorcVeSs",
+      "name": "Collision (Run Over) - ignores 12 points of hardness",
+      "type": "vehicleAttack",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "modifiers": [],
+        "damage": {
+          "parts": [
+            [
+              "24d10",
+              "bludgeoning"
+            ]
+          ]
+        },
+        "save": {
+          "type": "reflex",
+          "dc": "22",
+          "descriptor": "half"
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 0,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "t8ppOFG8tN6rceTc",
+      "name": "Enhanced sensors (darkvision 5 miles, sense through (vision) 500 ft.)",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
+      "effects": []
+    },
+    {
+      "_id": "ReqIpnbmRfNXhAcE",
+      "name": "Autopilot",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 280",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": true,
+          "piloting": "32"
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 400000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "0FbaazWWmd2G4LKk",
+      "name": "Zero cannon, elite",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>Zero cannons project a freezing line straight out from a generator, affecting any targets within the line. A pair of tanks in the cannon&rsquo;s heavy stock contain chemical coolants that produce a violent endothermic reaction when mixed in the insulated barrel.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 177",
+        "type": "",
+        "quantity": 1,
+        "bulk": "2",
+        "price": 412800,
+        "level": 18,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 99,
+            "max": "99"
+          },
+          "hardness": {
+            "value": "41"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": 80,
+          "units": "ft",
+          "shape": "line",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "none",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "dex",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": "Staggered"
+        },
+        "damage": {
+          "parts": [
+            [
+              "8d8",
+              "cold"
+            ]
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "capacity": {
+          "value": 100,
+          "max": 100
+        },
+        "usage": {
+          "value": 5,
+          "per": "shot"
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 18,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "subtype": "",
+              "amount": 1,
+              "acceptsType": [
+                "goods"
+              ],
+              "weightMultiplier": 1,
+              "weightProperty": "",
+              "affectsEncumbrance": true
+            }
+          ],
+          "isOpen": true
+        },
+        "weaponType": "heavy",
+        "weaponCategory": "cryo",
+        "special": "",
+        "properties": {
+          "one": false,
+          "two": true,
+          "amm": false,
+          "analog": false,
+          "archaic": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": false,
+          "injection": false,
+          "line": true,
+          "living": false,
+          "mind-affecting": false,
+          "nonlethal": false,
+          "operative": false,
+          "penetrating": false,
+          "powered": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "thrown": false,
+          "trip": false,
+          "unwieldy": true,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "lockdown": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false,
+          "hybrid": false,
+          "regrowth": false,
+          "unbalancing": false,
+          "shatter": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 100000,
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/weapons/advanced_zero_cannon.jpg",
+      "effects": [],
+      "storage": {
+        "type": [
+          "slot",
+          "slot"
+        ],
+        "subtype": [
+          "fusion",
+          ""
+        ],
+        "amount": [
+          "18",
+          "1"
+        ],
+        "weightProperty": [
+          "level",
+          ""
+        ],
+        "affectsEncumbrance": [
+          true,
+          true
+        ]
+      },
+      "weapon": [
+        false,
+        false
+      ],
+      "equipment": [
+        false,
+        false
+      ],
+      "consumable": [
+        false,
+        false
+      ],
+      "goods": [
+        false,
+        true
+      ],
+      "container": [
+        false,
+        false
+      ],
+      "hybrid": [
+        false,
+        false
+      ],
+      "magic": [
+        false,
+        false
+      ],
+      "technological": [
+        false,
+        false
+      ],
+      "fusion": [
+        true,
+        false
+      ],
+      "upgrade": [
+        false,
+        false
+      ],
+      "spell": [
+        false,
+        false
+      ],
+      "augmentation": [
+        false,
+        false
+      ],
+      "shield": [
+        false,
+        false
+      ],
+      "weaponAccessory": [
+        false,
+        false
+      ],
+      "vehicleAttack": [
+        false,
+        false
+      ],
+      "vehicleSystem": [
+        false,
+        false
+      ]
+    },
+    {
+      "_id": "LCPhktGud1bJDQUA",
+      "name": "Unlimited comm unit",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>\n<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">Comm units that function at system-wide and unlimited ranges aren&rsquo;t as portable; they include built-in generators that provide the necessary amount of power.&nbsp;</span></p>\n<p>&nbsp;</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 218",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
+      "effects": []
+    },
+    {
+      "_id": "rAvYf3GHuJXBHcJx",
+      "name": "Force field (red (30 HP))",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>You can activate or deactivate your armor&rsquo;s force field as a standard action. Once active, the device generates an invisible force field around you, including all your worn and carried items. The force field blocks solids and liquids but not gases or light (including laser beams). You can breathe while the field is active, but you can&rsquo;t eat or drink.</p>\n<p>While a force field is active, you gain a number of temporary Hit Points depending on the force field&rsquo;s power. All damage dealt to you is subtracted from the force field&rsquo;s temporary Hit Points first. A force field has fast healing, meaning that it regains temporary Hit Points at a fixed rate each round at the end of your turn, up to its normal maximum. If the force field&rsquo;s temporary Hit Points are reduced to 0, it is inactive until the end of your next turn, when its fast healing restores some of its Hit Points. The charge capacity, amount of temporary Hit Points granted, and rate of fast healing vary according to the force field&rsquo;s color code. A force field has a usage of 1 charge per round.</p>\n<p>More powerful force fields also have a fortification ability, which gives a percentage chance that a critical hit is treated as a normal attack, dealing normal damage and not applying any critical effect. You roll your fortification percentage chance before the critical hit&rsquo;s damage is rolled. If a force field is inactive, its fortification ability does not function. A suit of armor cannot support more than one force field upgrade.</p>\n<p>&nbsp;</p>\n<table>\n<tbody>\n<tr>\n<th>COLOR</th>\n<th>CAPACITY</th>\n<th>TEMP HP</th>\n<th>FAST HEALING</th>\n<th>FORTIFICATION</th>\n</tr>\n<tr>\n<td>Brown</td>\n<td>10</td>\n<td>1</td>\n<td>1</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Purple</td>\n<td>10</td>\n<td>5</td>\n<td>2</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Black</td>\n<td>10</td>\n<td>10</td>\n<td>3</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>White</td>\n<td>20</td>\n<td>15</td>\n<td>4</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Gray</td>\n<td>20</td>\n<td>20</td>\n<td>5</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Green</td>\n<td>20</td>\n<td>25</td>\n<td>6</td>\n<td>20%</td>\n</tr>\n<tr>\n<td>Red</td>\n<td>40</td>\n<td>30</td>\n<td>7</td>\n<td>40%</td>\n</tr>\n<tr>\n<td>Blue</td>\n<td>40</td>\n<td>35</td>\n<td>8</td>\n<td>60%</td>\n</tr>\n<tr>\n<td>Orange</td>\n<td>40</td>\n<td>40</td>\n<td>9</td>\n<td>80%</td>\n</tr>\n<tr>\n<td>Prismatic</td>\n<td>100</td>\n<td>50</td>\n<td>10</td>\n<td>100%</td>\n</tr>\n</tbody>\n</table>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": 0
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 700000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "hotyEajRXwFwfpVU",
+      "name": "Extradimensional Storage",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>The vehicle contains a rear hatch (interior or exterior) that opens seemingly onto a solid wall, unless a button is pressed first (a move action) to open the hatch into an extradimensional space similar to that of a nullspace chamber. Each vehicle with this system accesses its own extradimensional space, which holds up to 100 bulk in a 9-foot cube. The extradimensional storage space can&rsquo;t be closed if more than the listed bulk is inside.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/other_items/null-space_chamber.png",
+      "effects": []
+    }
+  ],
+  "effects": []
+}

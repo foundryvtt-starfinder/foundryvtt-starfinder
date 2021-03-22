@@ -4,11 +4,11 @@
   "type": "feat",
   "data": {
     "description": {
-      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.Conditions]</p>\n<hr/>\n<p style=\"text-align: justify;\">You are sleeping and @Compendium[sfrpg.conditions.Helpless].</p>\n<p style=\"text-align: justify;\">While asleep, you take a &ndash;10 penalty to Perception checks to notice anything.</p>\n<p style=\"text-align: justify;\">If you succeed at a Perception check to notice something despite the penalty, you automatically awaken.</p>\n<p style=\"text-align: justify;\">You are also awoken if you are slapped or wounded.</p>\n<p style=\"text-align: justify;\">An ally can wake you as a standard action.</p>",
+      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p style=\"text-align: justify;\">You are sleeping and @Compendium[sfrpg.conditions.RxvbSB9ZgSCBu2jw]{Helpless}.</p>\n<p style=\"text-align: justify;\">While asleep, you take a &ndash;10 penalty to Perception checks to notice anything.</p>\n<p style=\"text-align: justify;\">If you succeed at a Perception check to notice something despite the penalty, you automatically awaken.</p>\n<p style=\"text-align: justify;\">You are also awoken if you are slapped or wounded.</p>\n<p style=\"text-align: justify;\">An ally can wake you as a standard action.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "CRB.273",
+    "source": "CRB pg. 273",
     "type": "",
     "activation": {
       "type": "",
@@ -40,6 +40,7 @@
       "max": 0,
       "per": null
     },
+    "isActive": null,
     "ability": null,
     "actionType": "",
     "attackBonus": 0,
@@ -61,17 +62,18 @@
     "modifiers": [
       {
         "name": "Perception (Notice)",
-        "modifier": -10,
+        "modifier": "-10",
         "type": "untyped",
         "effectType": "skill",
         "valueAffected": "per",
         "enabled": true,
         "source": "Condition (SRD)",
         "notes": "While Asleep.",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "condition": "",
         "subtab": "misc",
-        "_id": "7777a761-d1bf-467b-859f-aaa872fd4569"
+        "_id": "7777a761-d1bf-467b-859f-aaa872fd4569",
+        "max": -10
       }
     ],
     "requirements": "Condition",
@@ -83,7 +85,8 @@
       "parts": []
     }
   },
+  "sort": 100000,
+  "flags": {},
   "img": "systems/sfrpg/icons/conditions/asleep.png",
-  "sort": 0,
-  "flags": {}
+  "effects": []
 }

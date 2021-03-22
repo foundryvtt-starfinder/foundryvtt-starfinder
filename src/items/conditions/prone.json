@@ -3,7 +3,7 @@
   "type": "feat",
   "data": {
     "description": {
-      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.Conditions]</p>\n<hr/>\n<p style=\"text-align: justify;\">You are lying on the ground.</p>\n<p style=\"text-align: justify;\">You take a –4 penalty to melee attack rolls.</p>\n<p style=\"text-align: justify;\">You gain a +4 bonus to your Armor Class against ranged attacks, but you take a –4 penalty to your Armor Class against melee attacks.</p>\n<p style=\"text-align: justify;\">Standing up from prone is a move action.</p>",
+      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p style=\"text-align: justify;\">You are lying on the ground.</p>\n<p style=\"text-align: justify;\">You take a &ndash;4 penalty to melee attack rolls.</p>\n<p style=\"text-align: justify;\">You gain a +4 bonus to your Armor Class against ranged attacks, but you take a &ndash;4 penalty to your Armor Class against melee attacks.</p>\n<p style=\"text-align: justify;\">Standing up from prone is a move action.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -39,6 +39,7 @@
       "max": 0,
       "per": ""
     },
+    "isActive": null,
     "ability": "int",
     "actionType": "",
     "attackBonus": 0,
@@ -60,45 +61,18 @@
     "modifiers": [
       {
         "name": "Prone",
-        "modifier": -4,
+        "modifier": "-4",
         "type": "untyped",
         "effectType": "melee-attacks",
         "valueAffected": "",
         "enabled": true,
         "source": "Condition",
         "notes": "",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "condition": "",
         "subtab": "misc",
-        "_id": "0cce6d75-e03b-4ba6-bc66-48b00c0e9ac7"
-      },
-      {
-        "name": "AC against Ranged Attacks",
-        "modifier": 4,
-        "type": "untyped",
-        "effectType": "ac",
-        "valueAffected": "both",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "Against Ranged attacks.",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "ca5db92b-5e41-4ad6-b36d-9afb48825189"
-      },
-      {
-        "name": "AC against Melee Attacks",
-        "modifier": -4,
-        "type": "untyped",
-        "effectType": "ac",
-        "valueAffected": "both",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "AC against Melee Attacks.",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "b4741240-87bd-4f61-bc23-db280a640cf0"
+        "_id": "0cce6d75-e03b-4ba6-bc66-48b00c0e9ac7",
+        "max": -4
       }
     ],
     "requirements": "Condition",
@@ -110,8 +84,8 @@
       "parts": []
     }
   },
+  "flags": {},
   "img": "systems/sfrpg/icons/conditions/prone.png",
-  "_id": "XeRGqHVtcZ7vsgJ0",
-  "sort": 3200000,
-  "flags": {}
+  "effects": [],
+  "_id": "XeRGqHVtcZ7vsgJ0"
 }

@@ -167,6 +167,7 @@ SFRPG.weaponDamageTypes = {
     "electricity+slashing": "SFRPG.DamageTypesElectricityAndSlashing",
     "force": "SFRPG.DamageTypesForce",
     "fire": "SFRPG.DamageTypesFire",
+    "fire+force": "SFRPG.DamageTypesFireAndForce",
     "fire+piercing": "SFRPG.DamageTypesFireAndPiercing",
     "fire+slashing": "SFRPG.DamageTypesFireAndSlashing",
     "fire|slashing": "SFRPG.DamageTypesFireOrSlashing",
@@ -849,7 +850,11 @@ SFRPG.vehicleTypes = {
     "hover": "SFRPG.Vehicles.VehicleTypes.Hover",
     "landW": "SFRPG.Vehicles.VehicleTypes.Landw",
     "air"  : "SFRPG.Vehicles.VehicleTypes.Air",
-    "landA": "SFRPG.Vehicles.VehicleTypes.Landa"
+    "landA": "SFRPG.Vehicles.VehicleTypes.Landa",
+    "landATW": "SFRPG.Vehicles.VehicleTypes.Landatw",
+    "landAW": "SFRPG.Vehicles.VehicleTypes.Landaw",
+    "landT": "SFRPG.Vehicles.VehicleTypes.Landt",
+    "landTW": "SFRPG.Vehicles.VehicleTypes.Landtw"
 };
 
 SFRPG.vehicleCoverTypes = {

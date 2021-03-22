@@ -1,0 +1,526 @@
+{
+  "name": "Light Hover Tank",
+  "type": "vehicle",
+  "data": {
+    "conditions": {},
+    "details": {
+      "level": 11,
+      "price": 80000,
+      "description": {
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">A light hover tank&rsquo;s compact chassis and its moderate maneuverability are ideal for patrolling urban centers. Its sonic weaponry fills narrow streets with suppressive blasts while minimizing risk to infrastructure.</span></p>",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "AP #24 pg. 52"
+    },
+    "crew": {
+      "useNPCCrew": false,
+      "pilot": {
+        "limit": 1,
+        "actorIds": []
+      },
+      "complement": {
+        "limit": 1,
+        "actorIds": []
+      },
+      "passenger": {
+        "limit": 0,
+        "actorIds": []
+      }
+    },
+    "hangarBay": {
+      "limit": 0,
+      "actorIds": []
+    },
+    "attributes": {
+      "size": "huge",
+      "type": "landW",
+      "dimensions": {
+        "width": "10",
+        "length": "15",
+        "height": "6"
+      },
+      "speed": {
+        "drive": "40 ft  (hover)",
+        "full": "650 ft  (hover)",
+        "mph": "70 mph (hover)",
+        "type": ""
+      },
+      "eac": {
+        "value": 25
+      },
+      "expansionBays": {
+        "value": 0
+      },
+      "kac": {
+        "value": 27
+      },
+      "cover": "total",
+      "hp": {
+        "value": 180,
+        "max": 180,
+        "threshold": 90
+      },
+      "hardness": 13,
+      "modifiers": {
+        "piloting": "0",
+        "attackStopped": "0",
+        "attackMoving": "-2",
+        "attackFullSpeed": "-4"
+      },
+      "systems": [],
+      "special": []
+    }
+  },
+  "flags": {},
+  "token": {
+    "flags": {},
+    "name": "Battle Chariot",
+    "displayName": 0,
+    "img": "icons/svg/mystery-man.svg",
+    "tint": null,
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 360,
+    "lightAngle": 360,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "actorId": "aW4k2HJ7rCtu8328",
+    "actorLink": false,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {},
+    "bar2": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "_id": "IFQG4V1jH9iw8fZK",
+      "name": "Collision (Ram)",
+      "type": "vehicleAttack",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "modifiers": [],
+        "damage": {
+          "parts": [
+            [
+              "2*(11d10)",
+              "bludgeoning"
+            ]
+          ]
+        },
+        "save": {
+          "type": "reflex",
+          "dc": "16",
+          "descriptor": "negate"
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 100000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "ZNQw4yfixdMSttws",
+      "name": "Collision (Run Over)",
+      "type": "vehicleAttack",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "modifiers": [],
+        "damage": {
+          "parts": [
+            [
+              "11d10",
+              "bludgeoning"
+            ]
+          ]
+        },
+        "save": {
+          "type": "reflex",
+          "dc": "11",
+          "descriptor": "half"
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 0,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "O2g0TK0KrRuiEV8K",
+      "name": "Autopilot",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 280",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": true,
+          "piloting": "20"
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 400000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "218OpuZ8i7MNYleR",
+      "name": "Planetary comm unit",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 218",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
+      "effects": []
+    },
+    {
+      "_id": "qRjjvz6Rnb8avEvd",
+      "name": "Enhanced sensors (darkvision 500 ft.)",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
+      "effects": []
+    },
+    {
+      "_id": "WmEKl2y5oAjHfiTc",
+      "name": "Screamer, LFD",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>A screamer is a circular metal device with two handles on the back. The front of a screamer projects a cone of sonic energy that can damage and deafen anyone within the weapon&rsquo;s area of effect.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 178",
+        "type": "",
+        "quantity": 1,
+        "bulk": "2",
+        "price": 14400,
+        "level": 9,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 42,
+            "max": "42"
+          },
+          "hardness": {
+            "value": "23"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": 60,
+          "units": "ft",
+          "shape": "cone",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": null,
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "dex",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": "Deafen"
+        },
+        "damage": {
+          "parts": [
+            [
+              "2d10",
+              "sonic"
+            ]
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "capacity": {
+          "value": 80,
+          "max": 80
+        },
+        "usage": {
+          "value": 8,
+          "per": "round"
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 9,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "subtype": "",
+              "amount": 1,
+              "acceptsType": [
+                "goods"
+              ],
+              "weightProperty": "",
+              "affectsEncumbrance": true
+            }
+          ],
+          "isOpen": true
+        },
+        "weaponType": "heavy",
+        "weaponCategory": "sonic",
+        "special": "",
+        "properties": {
+          "one": false,
+          "two": true,
+          "amm": false,
+          "analog": false,
+          "archaic": false,
+          "automatic": false,
+          "blast": true,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": false,
+          "injection": false,
+          "line": false,
+          "living": false,
+          "mind-affecting": false,
+          "nonlethal": false,
+          "operative": false,
+          "penetrating": false,
+          "powered": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "thrown": false,
+          "trip": false,
+          "unwieldy": true,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "lockdown": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false,
+          "hybrid": false,
+          "regrowth": false,
+          "unbalancing": false,
+          "shatter": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 100000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    }
+  ],
+  "effects": [],
+  "_id": "Bu1MWxGXFRIXbcz5"
+}
