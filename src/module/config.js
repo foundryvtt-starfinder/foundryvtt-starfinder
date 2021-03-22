@@ -394,7 +394,8 @@ SFRPG.weaponPropertiesTooltips = {
     "disarm": "SFRPG.WeaponPropertiesDisarmTooltip",
     "double": "SFRPG.WeaponPropertiesDoubleTooltip",
     "shatter": "SFRPG.WeaponPropertiesShatterTooltip",
-    "drainCharge": "SFRPG.WeaponPropertiesDrainChargeTooltip"
+    "drainCharge": "SFRPG.WeaponPropertiesDrainChargeTooltip",
+    "echo": "SFRPG.WeaponPropertiesEchoTooltip"
 };
 
 SFRPG.spellAreaShapes = {
