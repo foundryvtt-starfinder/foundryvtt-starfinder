@@ -395,7 +395,11 @@ SFRPG.weaponPropertiesTooltips = {
     "double": "SFRPG.WeaponPropertiesDoubleTooltip",
     "shatter": "SFRPG.WeaponPropertiesShatterTooltip",
     "drainCharge": "SFRPG.WeaponPropertiesDrainChargeTooltip",
-    "echo": "SFRPG.WeaponPropertiesEchoTooltip"
+    "echo": "SFRPG.WeaponPropertiesEchoTooltip",
+    "entangle": "SFRPG.WeaponPropertiesEntangleTooltip",
+    "explode": "SFRPG.WeaponPropertiesExplodeTooltip",
+    "extinguish": "SFRPG.WeaponPropertiesExtinguishTooltip"
+
 };
 
 SFRPG.spellAreaShapes = {
