@@ -698,16 +698,21 @@ function searchDescriptionForUnlinkedCondition(description) {
 				unlinkedReferenceFound = true;
 			}
 			// If potentially within the contents of a tag or surrounded by delimiting characters
-			else if (delimiterCharacters.includes(characterBefore) && (delimiterCharacters.includes(characterAfter) || " ")) {
+			else if (delimiterCharacters.includes(characterBefore) && (delimiterCharacters.includes(characterAfter) || characterAfter === " ")) {
 				// The condition was found between two delimiters, most likely in the contents of an html tag.
 				// Or it was found at the tail of a delimiter followed by a space (at the end of a comma separated list.
 				unlinkedReferenceFound = true
 			}
 			// Condition was found after a space but right before a delimiting character, like the end of a sentence.
 			// Or hugging opening brackets, or the start of a comma separated list.
-			else if ((delimiterCharacters.includes(characterBefore) || " ") && delimiterCharacters.includes(characterAfter)) {
+			else if ((delimiterCharacters.includes(characterBefore) || characterAfter === " ") && delimiterCharacters.includes(characterAfter)) {
 				unlinkedReferenceFound = true;
 			}
+			// This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
+            // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
+            else if (characterBefore == ";" && characterAfter == "&") {
+                unlinkedReferenceFound = false;
+            }
 
 			if (unlinkedReferenceFound) {
 				return { found: true, match: conditionWord };
