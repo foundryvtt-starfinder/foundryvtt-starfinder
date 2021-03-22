@@ -51,7 +51,7 @@
         <div class="tab details" data-group="primary" data-tab="details">
 
             <h4 class="section-header">Weapon Attack</h4>
-
+            
             {{!-- Damage Formula --}}
             <h4 class="damage-header">
                 {{ localize "SFRPG.Items.Action.DamageFormula" }}
@@ -76,6 +76,14 @@
                 </li>
                 {{/each}}
             </ol>
+            
+            {{!-- Ignores Hardnes --}}
+            <div class="form-group input-select">
+                <label>{{ localize "SFRPG.VehicleAttackSheet.Details.IgnoresHardness" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.ignoresHardness" value="{{data.ignoresHardness}}" data-dtype="String" placeholder="0"/>
+                </div>
+            </div>
 
             {{!-- Saving Throw --}}
             <div class="form-group input-select">

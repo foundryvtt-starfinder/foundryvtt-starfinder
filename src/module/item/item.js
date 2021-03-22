@@ -563,6 +563,25 @@ export class ItemSFRPG extends Item {
         );
     }
 
+    _vehicleAttackChatData(data, label, props) {
+        props.push(
+            data.ignoresHardness ? game.i18n.localize("SFRPG.VehicleAttackSheet.Details.IgnoresHardness") + " " + data.ignoresHardness : null
+        );
+    }
+
+    _vehicleSystemChatData(data, label, props) {
+
+        if (data.senses &&  data.senses.usedForSenses == true) {
+            // We deliminate the senses by `,` and present each sense as a separate property
+            let sensesDeliminated = data.senses.senses.split(",");
+            for (let index = 0; index < sensesDeliminated.length; index++)
+            {
+                var sense = sensesDeliminated[index];
+                props.push(sense);
+            }
+        }
+    }
+
     /* -------------------------------------------- */
     /*  Item Rolls - Attack, Damage, Saves, Checks  */
     /* -------------------------------------------- */

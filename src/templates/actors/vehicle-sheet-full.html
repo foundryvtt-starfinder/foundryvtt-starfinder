@@ -45,7 +45,7 @@
         <div class="tab details" data-group="primary" data-tab="details">
             <div class="flexrow">
                 <ul class="attributes flexrow">
-                    <li class="attribute health">
+                    <li data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.HealthTooltip'}}" class="attribute health">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.Health" }}</h4>
                         <div class="attribute-value multiple">
                             <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" data-dtype="Number" placeholder="10" />
@@ -164,21 +164,21 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackStopped" }}</label>
+                            <label data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackStopped" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="data.attributes.modifiers.attackStopped" value="{{data.attributes.modifiers.attackStopped}}" />
+                                <input data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="data.attributes.modifiers.attackStopped" value="{{data.attributes.modifiers.attackStopped}}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackMoving" }}</label>
+                            <label data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackMoving" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="data.attributes.modifiers.attackMoving" value="{{data.attributes.modifiers.attackMoving}}" />
+                                <input data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="data.attributes.modifiers.attackMoving" value="{{data.attributes.modifiers.attackMoving}}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackFullSpeed" }}</label>
+                            <label data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackFullSpeed" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="data.attributes.modifiers.attackFullSpeed" value="{{data.attributes.modifiers.attackFullSpeed}}" />
+                                <input data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="data.attributes.modifiers.attackFullSpeed" value="{{data.attributes.modifiers.attackFullSpeed}}" />
                             </div>
                         </div>
                     </div>
@@ -307,7 +307,7 @@
                     <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
                         <div class="crew-name flexrow">
                             <div class="crew-image" style="background-image: url({{actor.data.img}})"></div>
-                            <h4>{{actor.name}}</h4>
+                            <a class="passenger-view"><h4>{{actor.name}}</h4></a>
                         </div>
 
                         <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
@@ -345,7 +345,7 @@
                     <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
                         <div class="crew-name flexrow">
                             <div class="crew-image" style="background-image: url({{actor.data.img}})"></div>
-                            <h4>{{actor.name}}</h4>
+                            <a class="vehicle-view"><h4>{{actor.name}}</h4></a>
                         </div>
 
                         <div class="crew-controls">
