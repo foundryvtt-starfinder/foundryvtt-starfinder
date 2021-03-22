@@ -398,8 +398,16 @@ SFRPG.weaponPropertiesTooltips = {
     "echo": "SFRPG.WeaponPropertiesEchoTooltip",
     "entangle": "SFRPG.WeaponPropertiesEntangleTooltip",
     "explode": "SFRPG.WeaponPropertiesExplodeTooltip",
-    "extinguish": "SFRPG.WeaponPropertiesExtinguishTooltip"
-
+    "extinguish": "SFRPG.WeaponPropertiesExtinguishTooltip",
+    "injection": "SFRPG.WeaponPropertiesInjectionTooltip",
+    "nonlethal": "SFRPG.WeaponPropertiesNonlethalTooltip",
+    "operative": "SFRPG.WeaponPropertiesOperativeTooltip",
+    "reach": "SFRPG.WeaponPropertiesReachTooltip",
+    "sniper": "SFRPG.WeaponPropertiesSniperTooltip",
+    "stun": "SFRPG.WeaponPropertiesStunTooltip",
+    "thrown": "SFRPG.WeaponPropertiesThrownTooltip",
+    "trip": "SFRPG.WeaponPropertiesTripTooltip",
+    "unwieldy": "SFRPG.WeaponPropertiesUnwieldyTooltip"
 };
 
 SFRPG.spellAreaShapes = {
