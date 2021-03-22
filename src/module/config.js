@@ -390,7 +390,11 @@ SFRPG.weaponPropertiesTooltips = {
     "conceal": "SFRPG.WeaponsPropertiesConcealTooltip",
     "cluster": "SFRPG.WeaponPropertiesClusterTooltip",
     "deconstruct": "SFRPG.WeaponPropertiesDeconstructTooltip",
-    "shatter": "SFRPG.WeaponPropertiesShatterTooltip"
+    "deflect": "SFRPG.WeaponPropertiesDeflectTooltip",
+    "disarm": "SFRPG.WeaponPropertiesDisarmTooltip",
+    "double": "SFRPG.WeaponPropertiesDoubleTooltip",
+    "shatter": "SFRPG.WeaponPropertiesShatterTooltip",
+    "drainCharge": "SFRPG.WeaponPropertiesDrainChargeTooltip"
 };
 
 SFRPG.spellAreaShapes = {
