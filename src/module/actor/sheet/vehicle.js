@@ -149,6 +149,10 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         // Hangar Tab
         html.find('.vehicle-delete').click(this._onRemoveFromHangarBar.bind(this));
+        html.find('.vehicle-view').click(event => this._onActorView(event));
+
+        // Passanger Tab
+        html.find('.passenger-view').click(event => this._onActorView(event));
 
         // Roll piloting skill for PC or NPC passengers
         html.find('.passenger-action .passengerPilotingSkill').click(event => this._onRollPassengerPilotingSkill(event));
@@ -397,6 +401,19 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     }
 
     /**
+     * Opens the sheet of a passenger.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onActorView(event) {
+        event.preventDefault();
+
+        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        let actor = game.actors.get(actorId);
+        actor.sheet.render(true);
+    }
+
+    /**
      * Rolls the Piloting skill check of a passenger.
      *
      * @param {Event} event The originating click event
@@ -512,5 +529,18 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         await ChatMessage.create(chatData, { displaySheet: false });
     }
 
+    /** @override */
+    async _render(...args) {
+        await super._render(...args);
 
+        if (this.rendered) {
+            tippy('[data-tippy-content]', {
+                allowHTML: true,
+                arrow: false,
+                placement: 'top-start',
+                duration: [500, null],
+                delay: [800, null]
+            });
+        }
+    }
 }
