@@ -186,10 +186,20 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         } else {
             let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
             let props = $(`<div class="item-properties"></div>`);
-            chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
+            chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
+
             div.append(props);
             li.append(div.hide());
-            div.slideDown(200);
+            div.slideDown(200, function() {
+                // On completion enable tippy tooltips for the new elements
+                tippy('[data-tippy-content]', {
+                    allowHTML: true,
+                    arrow: false,
+                    placement: 'top-start',
+                    duration: [500, null],
+                    delay: [800, null]
+                });
+            });
         }
         li.toggleClass('expanded');
     }
@@ -301,7 +311,7 @@ export class ItemCollectionSheet extends BaseEntitySheet {
         }
 
         // Filter properties and return
-        data.properties = props.filter(p => !!p);
+        data.properties = props.filter(p => !!p && !!p.name);
         return data;
     }
 
