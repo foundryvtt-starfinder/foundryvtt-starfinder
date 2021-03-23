@@ -52,8 +52,9 @@
             <div class="form-group stacked weapon-properties">
                 <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
                 {{#each config.weaponProperties as |name prop|}}
-                <label class="checkbox">
-                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../data.properties prop)}}/> {{ name }}
+                <!-- If there's a tooltip entry set for this weapon property we set a Tippy tooltip -->
+                <label class="checkbox" {{#if (lookup ../config.weaponPropertiesTooltips prop)}} data-tippy-content='{{lookup ../config.weaponPropertiesTooltips prop}}' {{/if}}>
+                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../data.properties prop)}} /> {{ name }}
                 </label>
                 {{/each}}
             </div>
