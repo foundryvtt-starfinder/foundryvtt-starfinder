@@ -216,29 +216,60 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (item.type === "weapon") {
             props.push(...Object.entries(item.data.properties)
                 .filter(e => e[1] === true)
-                .map(e => CONFIG.SFRPG.weaponProperties[e[0]]));
+                .map(e => ({
+                    name: CONFIG.SFRPG.weaponProperties[e[0]],
+                    tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]
+                })
+            )
+        );
         } else if (item.type === "spell") {
             props.push(
-                labels.components,
-                labels.materials,
-                item.data.concentration ? "Concentration" : null,
-                item.data.sr ? "Spell Resistence" : null,
-                item.data.dismissible ? "Dismissible" : null
+                {name: labels.components, tooltip: null},
+                {name: labels.materials, tooltip: null},
+                item.data.concentration ? {name: "Concentration", tooltip: null} : null,
+                item.data.sr ? {name: "Spell Resistence", tooltip: null} : null,
+                item.data.dismissible ? {name: "Dismissible", tooltip: null} : null
             )
         } else if (item.type === "equipment") {
-            props.push(CONFIG.SFRPG.armorTypes[item.data.armor.type]);
-            props.push(labels.armor);
+            props.push({
+                name: CONFIG.SFRPG.armorTypes[item.data.armor.type],
+                tooltip: null
+            });
+            props.push({
+                name: labels.armor,
+                tooltip: null
+            });
         } else if (item.type === "feat") {
-            props.push(labels.featType);
+            props.push({
+                name: labels.featType,
+                tooltip: null
+            });
         } else if (item.type === "starshipWeapon") {
-            props.push(CONFIG.SFRPG.starshipWeaponTypes[item.data.weaponType]);
-            props.push(CONFIG.SFRPG.starshipWeaponClass[item.data.class]);
+            props.push({
+                name: CONFIG.SFRPG.starshipWeaponTypes[item.data.weaponType],
+                tooltip: null
+            });
+            props.push({
+                name: CONFIG.SFRPG.starshipWeaponClass[item.data.class],
+                tooltip: null
+            });
         } else if (item.type === "shield") {
-            if (item.data.dex) props.push(game.i18n.format("SFRPG.Items.Shield.Dex", { dex: item.data.dex.signedString() }));
-            if (item.data.acp) props.push(game.i18n.format("SFRPG.Items.Shield.ACP", { acp: item.data.acp.signedString() }));
+            // Add max dexterity modifier
+            if (item.data.dex) props.push({
+                name: game.i18n.format("SFRPG.Items.Shield.Dex", { dex: item.data.dex.signedString() }),
+                tooltip: null
+            });
+            // Add armor check penalty
+            if (item.data.acp) props.push({
+                name: game.i18n.format("SFRPG.Items.Shield.ACP", { acp: item.data.acp.signedString() }),
+                tooltip: null
+            });
             let wieldedBonus = item.data.proficient ? item.data.bonus.wielded : 0;
             let alignedBonus = item.data.proficient ? item.data.bonus.aligned : 0;
-            props.push(game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }));
+            props.push({
+                name: game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),
+                tooltip: null
+            });
         }
         else if (item.type === "vehicleAttack") {
             if (item.data.ignoresHardness && item.data.ignoresHardness > 0) {
@@ -259,19 +290,22 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Action type
         if (item.data.actionType) {
-            props.push(CONFIG.SFRPG.itemActionTypes[item.data.actionType]);
+            props.push({
+                name: CONFIG.SFRPG.itemActionTypes[item.data.actionType],
+                tooltip: null
+            });
         }
 
         // Action usage
         if ((item.type !== "weapon") && item.data.activation && !isObjectEmpty(item.data.activation)) {
             props.push(
-                labels.activation,
-                labels.range,
-                labels.target,
-                labels.duration
+                {name: labels.activation, tooltip: null},
+                {name: labels.range, tooltip: null},
+                {name: labels.target, tooltip: null},
+                {name: labels.duration, tooltip: null}
             )
         }
-        return props.filter(p => !!p);
+        return props.filter(p => !!p && !!p.name);
     }
 
     _getItemCategory(item) {

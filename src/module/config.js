@@ -372,6 +372,44 @@ SFRPG.weaponProperties = {
     "wideLine": "SFRPG.WeaponPropertiesWideLine"
 };
 
+SFRPG.weaponPropertiesTooltips = {
+    "one": "SFRPG.WeaponPropertiesOneHandedTooltip",
+    "two": "SFRPG.WeaponPropertiesTwoHandedTooltip",
+    "aeon": "SFRPG.WeaponPropertiesAeonTooltip",
+    "analog": "SFRPG.WeaponPropertiesAnalogTooltip",
+    "antibiological": "SFRPG.WeaponPropertiesAntibiologicalTooltip",
+    "archaic": "SFRPG.WeaponPropertiesArchaicTooltip",
+    "aurora": "SFRPG.WeaponPropertiesAuroraTooltip",
+    "automatic": "SFRPG.WeaponPropertiesAutomaticTooltip",
+    "blast": "SFRPG.WeaponPropertiesBlastTooltip",
+    "block": "SFRPG.WeaponPropertiesBlockTooltip",
+    "boost": "SFRPG.WeaponPropertiesBoostTooltip",
+    "breach": "SFRPG.WeaponPropertiesBreachTooltip",
+    "breakdown": "SFRPG.WeaponPropertiesBreakdownTooltip",
+    "bright": "SFRPG.WeaponPropertiesBrightTooltip",
+    "conceal": "SFRPG.WeaponsPropertiesConcealTooltip",
+    "cluster": "SFRPG.WeaponPropertiesClusterTooltip",
+    "deconstruct": "SFRPG.WeaponPropertiesDeconstructTooltip",
+    "deflect": "SFRPG.WeaponPropertiesDeflectTooltip",
+    "disarm": "SFRPG.WeaponPropertiesDisarmTooltip",
+    "double": "SFRPG.WeaponPropertiesDoubleTooltip",
+    "shatter": "SFRPG.WeaponPropertiesShatterTooltip",
+    "drainCharge": "SFRPG.WeaponPropertiesDrainChargeTooltip",
+    "echo": "SFRPG.WeaponPropertiesEchoTooltip",
+    "entangle": "SFRPG.WeaponPropertiesEntangleTooltip",
+    "explode": "SFRPG.WeaponPropertiesExplodeTooltip",
+    "extinguish": "SFRPG.WeaponPropertiesExtinguishTooltip",
+    "injection": "SFRPG.WeaponPropertiesInjectionTooltip",
+    "nonlethal": "SFRPG.WeaponPropertiesNonlethalTooltip",
+    "operative": "SFRPG.WeaponPropertiesOperativeTooltip",
+    "reach": "SFRPG.WeaponPropertiesReachTooltip",
+    "sniper": "SFRPG.WeaponPropertiesSniperTooltip",
+    "stun": "SFRPG.WeaponPropertiesStunTooltip",
+    "thrown": "SFRPG.WeaponPropertiesThrownTooltip",
+    "trip": "SFRPG.WeaponPropertiesTripTooltip",
+    "unwieldy": "SFRPG.WeaponPropertiesUnwieldyTooltip"
+};
+
 SFRPG.spellAreaShapes = {
     "": "",
     "cone": "SFRPG.SpellAreaShapesCone",
