@@ -543,7 +543,6 @@ class RollTree {
         if (this.options.skipUI) {
             const button = this.options.defaultButton || (this.options.buttons ? Object.values(this.options.buttons)[0].label : "Roll");
             const rollMode = game.settings.get("core", "rollMode");
-            const bonus = "";
 
             for (const [key, value] of Object.entries(this.nodes)) {
                 if (value.referenceModifier) {
@@ -552,10 +551,6 @@ class RollTree {
             }
 
             const finalRollFormula = this.rootNode.resolve();
-            if (bonus) {
-                finalRollFormula.finalRoll += " + " + bonus;
-                finalRollFormula.formula += " + [Additional Bonus]";
-            }
 
             if (this.options.debug) {
                 console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
@@ -581,9 +576,15 @@ class RollTree {
             }
 
             const finalRollFormula = this.rootNode.resolve();
+            bonus = bonus.trim();
             if (bonus) {
-                finalRollFormula.finalRoll += " + " + bonus;
-                finalRollFormula.formula += " + [Additional Bonus]";
+                const operators = ['+', '-', '*', '/'];
+                if (!operators.includes(bonus[0])) {
+                    finalRollFormula.finalRoll += " +";
+                    finalRollFormula.formula += " +";
+                }
+                finalRollFormula.finalRoll += " " + bonus;
+                finalRollFormula.formula += ` ${bonus} [Additional Bonus]`;
             }
 
             if (this.options.debug) {
