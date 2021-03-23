@@ -1005,8 +1005,8 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (sidebarItem) {
                 const addedItemResult = await targetActor.createOwnedItem(duplicate(sidebarItem.data));
                 if (addedItemResult.length > 0) {
-                    const addedItem = addedItemResult[0];
-                    
+                    const addedItem = targetActor.getOwnedItem(addedItemResult[0]._id);
+
                     if (targetContainer) {
                         let newContents = [];
                         if (targetContainer.data.data.container?.contents) {
