@@ -75,15 +75,7 @@
       "special": []
     }
   },
-  "sort": 300000,
-  "flags": {
-    "exportSource": {
-      "world": "development",
-      "system": "sfrpg",
-      "coreVersion": "0.7.9",
-      "systemVersion": "0.8.3.0"
-    }
-  },
+  "flags": {},
   "token": {
     "flags": {},
     "name": "Battle Chariot",
@@ -118,7 +110,7 @@
   "items": [
     {
       "_id": "IFQG4V1jH9iw8fZK",
-      "name": "Collision (Ram) - ignores 10 points of hardness",
+      "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
         "description": {
@@ -131,6 +123,7 @@
         "source": "",
         "type": "",
         "modifiers": [],
+        "ignoresHardness": 10,
         "damage": {
           "parts": [
             [
@@ -171,6 +164,7 @@
         "source": "",
         "type": "",
         "modifiers": [],
+        "ignoresHardness": 10,
         "damage": {
           "parts": [
             [
@@ -233,7 +227,7 @@
     },
     {
       "_id": "bQH3PoHCTObqnuj3",
-      "name": "Enhanced sensors (darkvision 500 ft.)",
+      "name": "Enhanced sensors",
       "type": "vehicleSystem",
       "data": {
         "description": {
@@ -248,6 +242,10 @@
         "piloting": {
           "usedAsPilot": false,
           "piloting": "0"
+        },
+        "senses": {
+          "usedForSenses": true,
+          "senses": "darkvision 500 ft."
         },
         "canBeActivated": false,
         "isActive": false,
