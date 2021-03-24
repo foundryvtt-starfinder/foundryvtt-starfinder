@@ -351,6 +351,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 // Conditions cache and regular expression are generated during beginning of cooking and used during formatting checks
 var conditionsCache = {};
 var conditionsRegularExpression;
+var poisonAndDiseasesRegularExpression = new RegExp("(poison|disease)", "g");
 var validArmorTypes = ["light", "power", "heavy", "shield"];
 var validCreatureSizes = ["fine", "diminutive", "tiny", "small", "medium", "large", "huge", "gargantuan", "colossal"];
 function formattingCheck(allItems) {
@@ -546,20 +547,29 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 		}
 	}
 
-	// Check description for references to conditions
+	// Validate links
 	if (options.checkLinks) {
 		let description = data.data.description.value
 
 		if (description) {
-			let result = searchDescriptionForUnlinkedCondition(description);
-			if (result.found) {
-				addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
+
+            // Check description for references to conditions
+			let conditionResult = serchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
+			if (conditionResult.found) {
+				addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link".`, pack);
 			}
+
+            // Check description for references to poisons / diseases
+            let poisonResult = serchDescriptionForUnlinkedReference(description, poisonAndDiseasesRegularExpression);
+            if (poisonResult.found) {
+                addWarningForPack(`${file}: Found reference to ${poisonResult.match} in description without link".`, pack);
+            }
 		}
 		else {
 			// Item has no description
 		}
 	}
+
 }
 
 function formattingCheckWeapons(data, pack, file) {
@@ -670,56 +680,62 @@ function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) 
 // Check if a description contains an unlinked reference to a condition
 function searchDescriptionForUnlinkedCondition(description) {
 
-	let matches = [...description.matchAll(conditionsRegularExpression)];
-	//Found a potential reference to a condition
-	if (matches && matches.length > 0) {
-		// Capture the character before and after each match and use some basic heuristics to decide if it's an linked condition in the description
-		for (let matchIndex in matches) {
+    return serchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
+}
 
-			let match = matches[matchIndex];
-			let conditionWord = match[0];
-			let matchedWord = description.substring(match["index"], match["index"] + match["length"]);
+// Checks if a description contains an unlinked reference to any value found in the provided regular expression
+function serchDescriptionForUnlinkedReference(description, regularExpression) {
 
-			// We want to capture a character before and after
-			let characterBeforeIndex = match["index"] - 1;
-			let characterAfterIndex = match["index"] + conditionWord.length;
-			let characterBefore = description.substring(characterBeforeIndex, characterBeforeIndex + 1);
-			let characterAfter = description.substring(characterAfterIndex, characterAfterIndex + 1);
-			let delimiterCharacters = [">", "<", ";", ",", "/", "(", ")", "."];
+    let matches = [...description.matchAll(regularExpression)];
+    //Found a potential reference to a condition
+    if (matches && matches.length > 0) {
+        // Capture the character before and after each match and use some basic heuristics to decide if it's an linked condition in the description
+        for (let matchIndex in matches) {
 
-			var unlinkedReferenceFound = false;
-			// If surrounded by { and } we assume it is linked and continue
-			if (characterBefore === "{" && characterAfter === "}") {
-				continue;
-			}
-			// If the condition is surrounded by spaces, it is unlinked
-			// it should be contained in a link to the compendium like this `@Compendium[sfrpg.spells.YDXegEus8p0BnsH1]{Invisibility}`
-			else if (characterBefore === " " && characterAfter === " ") {
-				unlinkedReferenceFound = true;
-			}
-			// If potentially within the contents of a tag or surrounded by delimiting characters
-			else if (delimiterCharacters.includes(characterBefore) && (delimiterCharacters.includes(characterAfter) || characterAfter === " ")) {
-				// The condition was found between two delimiters, most likely in the contents of an html tag.
-				// Or it was found at the tail of a delimiter followed by a space (at the end of a comma separated list.
-				unlinkedReferenceFound = true
-			}
-			// Condition was found after a space but right before a delimiting character, like the end of a sentence.
-			// Or hugging opening brackets, or the start of a comma separated list.
-			else if ((delimiterCharacters.includes(characterBefore) || characterAfter === " ") && delimiterCharacters.includes(characterAfter)) {
-				unlinkedReferenceFound = true;
-			}
-			// This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
+            let match = matches[matchIndex];
+            let conditionWord = match[0];
+            let matchedWord = description.substring(match["index"], match["index"] + match["length"]);
+
+            // We want to capture a character before and after
+            let characterBeforeIndex = match["index"] - 1;
+            let characterAfterIndex = match["index"] + conditionWord.length;
+            let characterBefore = description.substring(characterBeforeIndex, characterBeforeIndex + 1);
+            let characterAfter = description.substring(characterAfterIndex, characterAfterIndex + 1);
+            let delimiterCharacters = [">", "<", ";", ",", "/", "(", ")", "."];
+
+            var unlinkedReferenceFound = false;
+            // If surrounded by { and } we assume it is linked and continue
+            if (characterBefore === "{" && characterAfter === "}") {
+                continue;
+            }
+                // If the condition is surrounded by spaces, it is unlinked
+            // it should be contained in a link to the compendium like this `@Compendium[sfrpg.spells.YDXegEus8p0BnsH1]{Invisibility}`
+            else if (characterBefore === " " && characterAfter === " ") {
+                unlinkedReferenceFound = true;
+            }
+            // If potentially within the contents of a tag or surrounded by delimiting characters
+            else if (delimiterCharacters.includes(characterBefore) && (delimiterCharacters.includes(characterAfter) || characterAfter === " ")) {
+                // The condition was found between two delimiters, most likely in the contents of an html tag.
+                // Or it was found at the tail of a delimiter followed by a space (at the end of a comma separated list.
+                unlinkedReferenceFound = true
+            }
+                // Condition was found after a space but right before a delimiting character, like the end of a sentence.
+            // Or hugging opening brackets, or the start of a comma separated list.
+            else if ((delimiterCharacters.includes(characterBefore) || characterAfter === " ") && delimiterCharacters.includes(characterAfter)) {
+                unlinkedReferenceFound = true;
+            }
+                // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
             // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
             else if (characterBefore == ";" && characterAfter == "&") {
                 unlinkedReferenceFound = false;
             }
 
-			if (unlinkedReferenceFound) {
-				return { found: true, match: conditionWord };
-			}
-		}
-	}
-	return { found: false };
+            if (unlinkedReferenceFound) {
+                return { found: true, match: conditionWord };
+            }
+        }
+    }
+    return { found: false };
 }
 
 // Checks a source string for conformance to string format outlined in CONTRIBUTING.md
