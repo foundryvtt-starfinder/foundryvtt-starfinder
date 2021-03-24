@@ -286,10 +286,14 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 				continue;
 			}
 
-			// Cache conditions to be referenced later
+			// Cached conditions to be referenced later
 			if (directory == "conditions") {
 				conditionsCache[jsonInput._id] = jsonInput;
 			}
+            // Cached setting to be referenced later
+            else if (directory == "setting") {
+                settingCache[jsonInput._id] = jsonInput;
+            }
 
 			compendiumMap[directory][jsonInput._id] = jsonInput;
 			allItems.push({ pack: directory, data: jsonInput, file: file });
@@ -304,23 +308,9 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 		return 1;
 	}
 
-	// Construct condition finding regular expression
-	var regularExpressionSubstring = "";
-	let numberOfConditions = Object.keys(conditionsCache).length
-	var index = 0;
-	for (let conditionId in conditionsCache) {
-		let condition = conditionsCache[conditionId];
-		// Construct a substring used to generate a condition finding regular expression
-		if (index == numberOfConditions - 1) {
-			regularExpressionSubstring += condition.name;
-		}
-		else {
-			regularExpressionSubstring += condition.name + "|";
-		}
-		index++;
-	}
-
-	conditionsRegularExpression = new RegExp("(" + regularExpressionSubstring + ")", "g");
+    // Construct condition & setting finding regular expressions
+    conditionsRegularExpression = regularExpressionForFindingItemsInCache(conditionsCache);
+    settingRegularExpression = regularExpressionForFindingItemsInCache(settingCache);
 
 	if (options.formattingCheck == true) {
 		console.log(`\nStarting formatting check.`);
@@ -342,15 +332,37 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 	return 0;
 }
 
+// Generates a regular expression to find references to the provided items
+function regularExpressionForFindingItemsInCache(cache) {
+
+    var regularExpressionSubstring = "";
+    let numberOfConditions = Object.keys(cache).length
+    var index = 0;
+    for (let itemId in cache) {
+        let item = cache[itemId];
+        // Construct a substring used to generate a condition finding regular expression
+        if (index == numberOfConditions - 1) {
+            regularExpressionSubstring += item.name;
+        }
+        else {
+            regularExpressionSubstring += item.name + "|";
+        }
+        index++;
+    }
+    return new RegExp("(" + regularExpressionSubstring + ")", "g");
+}
+
 /**
  *
  * The formatting check goes through all items and checks various fields to ensure the entered values meets certain criteria.
  * Usually individual checks are added when we notice a larger risk of data entry error on a specific field, or when any data entry error
  * would cause significant harm to the usability of the entry.
  */
-// Conditions cache and regular expression are generated during beginning of cooking and used during formatting checks
+// conditions / setting cache and regular expression are generated during beginning of cooking and used during formatting checks
 var conditionsCache = {};
+var settingCache = {};
 var conditionsRegularExpression;
+var settingRegularExpression;
 var poisonAndDiseasesRegularExpression = new RegExp("(poison|disease)", "g");
 var validArmorTypes = ["light", "power", "heavy", "shield"];
 var validCreatureSizes = ["fine", "diminutive", "tiny", "small", "medium", "large", "huge", "gargantuan", "colossal"];
@@ -365,7 +377,8 @@ function formattingCheck(allItems) {
 		}
 		// We only check formatting of aliens, vehicles & equipment for now
 		if (data.type === "npc") {
-			formattingCheckAlien(data, pack, item.file, { checkLinks: true })
+            // NOTE: `checkEcology` off by default as it currently produces hundreds of errors.
+			formattingCheckAlien(data, pack, item.file, { checkLinks: true, checkEcology: false })
 		}
 		else if (data.type === "equipment") {
 			formattingCheckItems(data, pack, item.file, { checkImage: true, checkSource: true, checkPrice: true, checkLevel: true, checkLinks: true })
@@ -379,6 +392,9 @@ function formattingCheck(allItems) {
 		else if (data.type == "race") {
 			formattingCheckRace(data, pack, item.file, { checkLinks: true });
 		}
+		else if (data.type == "feat") {
+            formattingCheckFeat(data, pack, item.file, { checkLinks: true });
+        }
 	}
 }
 
@@ -428,7 +444,7 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
 	}
 }
 
-function formattingCheckAlien(data, pack, file, options = { checkLinks: true }) {
+function formattingCheckAlien(data, pack, file, options = { checkLinks: true, checkEcology: true }) {
 
 	// Validate name
 	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
@@ -478,13 +494,30 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true }) 
 		addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
 	}
 
-	// Check biography for references to conditions
-	if (options.checkLinks) {
+    if (options.checkEcology == true) {
+        // Validate ecology
+        let environment = data.data.details.environment;
+        let organization = data.data.details.organization;
+        if (environment == null || environment == "") {
+            addWarningForPack(`${file}: Environment is missing".`, pack);
+        }
+        if (organization == null || organization == "") {
+            addWarningForPack(`${file}: Organization is missing".`, pack);
+        }
+    }
+
+	if (options.checkLinks == true) {
 		let description = data.data.details.biography.value
-		let result = searchDescriptionForUnlinkedCondition(description);
-		if (result.found) {
-			addWarningForPack(`${file}: Found reference to ${result.match} in biography without link".`, pack);
+        // Check biography for references to conditions
+		let conditionResult = searchDescriptionForUnlinkedCondition(description);
+		if (conditionResult.found) {
+			addWarningForPack(`${file}: Found reference to ${conditionResult.match} in biography without link".`, pack);
 		}
+        // Check biography for references to the setting
+        let settingResult = serchDescriptionForUnlinkedReference(description, settingRegularExpression);
+        if (settingResult.found) {
+            addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link".`, pack);
+        }
 	}
 
 	// Validate items
@@ -668,13 +701,51 @@ function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) 
 	}
 
 	//Check spell description for unlinked references to conditions
-	if (options.checkLinks) {
+	if (options.checkLinks == true) {
 		let description = data.data.description.value
-		let result = searchDescriptionForUnlinkedCondition(description);
-		if (result.found) {
-			addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
-		}
+
+        // Check references to conditions
+        let conditionResult = serchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
+		if (conditionResult.found) {
+            addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link".`, pack);
+        }
+		// Check references to the setting
+        let settingResult = serchDescriptionForUnlinkedReference(description, settingRegularExpression);
+        if (settingResult.found) {
+            addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link".`, pack);
+        }
 	}
+}
+
+function formattingCheckFeat(data, pack, file, options = { checkLinks: true }) {
+
+    // Validate name
+    if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
+        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+    }
+
+    // Validate image
+    if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
+        addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+    }
+
+    // NOTE: We don't validate `source` for feats as we currently are not decided if we should use this field as
+    // it's used for other items (it is generally used to provide an explanation of what game mechanic unlocks the
+    // feat)
+
+    if (options.checkLinks == true) {
+        let description = data.data.description.value
+        // Check description for references to conditions
+        let conditionResult = serchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
+        if (conditionResult.found) {
+            addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link".`, pack);
+        }
+        // Check description for references to the setting
+        let settingResult = serchDescriptionForUnlinkedReference(description, settingRegularExpression);
+        if (settingResult.found) {
+            addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link".`, pack);
+        }
+    }
 }
 
 // Check if a description contains an unlinked reference to a condition
@@ -708,7 +779,7 @@ function serchDescriptionForUnlinkedReference(description, regularExpression) {
             if (characterBefore === "{" && characterAfter === "}") {
                 continue;
             }
-                // If the condition is surrounded by spaces, it is unlinked
+            // If the condition is surrounded by spaces, it is unlinked
             // it should be contained in a link to the compendium like this `@Compendium[sfrpg.spells.YDXegEus8p0BnsH1]{Invisibility}`
             else if (characterBefore === " " && characterAfter === " ") {
                 unlinkedReferenceFound = true;
@@ -721,7 +792,7 @@ function serchDescriptionForUnlinkedReference(description, regularExpression) {
             }
                 // Condition was found after a space but right before a delimiting character, like the end of a sentence.
             // Or hugging opening brackets, or the start of a comma separated list.
-            else if ((delimiterCharacters.includes(characterBefore) || characterAfter === " ") && delimiterCharacters.includes(characterAfter)) {
+            else if ((delimiterCharacters.includes(characterBefore) || characterBefore === " ") && delimiterCharacters.includes(characterAfter)) {
                 unlinkedReferenceFound = true;
             }
                 // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
