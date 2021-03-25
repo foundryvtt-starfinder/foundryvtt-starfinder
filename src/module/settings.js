@@ -122,6 +122,15 @@ export const registerSystemSettings = function () {
         }
     });
 
+    game.settings.register("sfrpg", "enableGalacticTrade", {
+        name: "SFRPG.Settings.GalacticTrade.Name",
+        hint: "SFRPG.Settings.GalacticTrade.Hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
+
     game.settings.register("sfrpg", "rollDamageWithAttack", {
         name: "SFRPG.Settings.DamageWithAttack.Name",
         hint: "SFRPG.Settings.DamageWithAttack.Hint",

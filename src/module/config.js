@@ -122,8 +122,9 @@ SFRPG.skillProficiencyLevels = {
  * @type {Object}
  */
 SFRPG.currencies = {
-    "credit": "SFRPG.Credits",
-    "upb": "SFRPG.UPBs"
+    "credit": "SFRPG.Currencies.Credits",
+    "upb": "SFRPG.Currencies.UPBs",
+    "bp": "SFRPG.Currencies.BPs"
 };
 
 // Damage Types
