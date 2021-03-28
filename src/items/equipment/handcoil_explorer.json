@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>An ultraminiaturized version of the coilguns used on starships, this weapon has a short range but a powerful effect. Some of the first versions were produced by starship manufacturers and were accompanied by a promotional campaign suggesting that a starship&rsquo;s crew should match the starship itself, complete with flight suits to match a given ship&rsquo;s paint job. Most manufacturers still use the model classification set forth in those early campaigns: explorer, fighter, pilot, and capital handcoils.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 15",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 24,
+        "max": "24"
+      },
+      "hardness": {
+        "value": "11"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -42,10 +60,11 @@
       "per": ""
     },
     "uses": {
-      "value": 2,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
@@ -57,7 +76,7 @@
           "electricity"
         ]
       ],
-      "effect": "Arc"
+      "effect": "Arc 1d6"
     },
     "damage": {
       "parts": [
@@ -70,8 +89,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,13 +102,40 @@
       "per": "shot"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 3,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "smallA",
     "weaponCategory": "shock",
     "special": "",
     "properties": {
       "one": true,
       "two": false,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -168,30 +214,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 3,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-parallax.jpg",
+  "effects": [],
   "_id": "iKLjT1dMBChFwpJn"
 }

@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>Inspired by the Shadow Plane&mdash;or, some say, followers of Zon-Kuthon&mdash;a shadow pistol replicates the energy of the Plane of Shadow to momentarily separate the target from the thermodynamic energy of the universe, damaging it with the instantaneous change in temperature. With their shadowy appearance, the caliginous and sable models resemble guns cut from polished obsidian, while the more advanced tenebrous and umbral models look more like they were cut from the blackness of space.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 13",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 36,
+        "max": "36"
+      },
+      "hardness": {
+        "value": "19"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -42,36 +60,32 @@
       "per": ""
     },
     "uses": {
-      "value": 4,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
+      "parts": [],
       "effect": "Blind"
     },
     "damage": {
       "parts": [
         [
           "1d10",
-          "cryo"
+          "cold"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,13 +97,40 @@
       "per": "shot"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 7,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "smallA",
     "weaponCategory": "cryo",
     "special": "",
     "properties": {
       "one": true,
       "two": false,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -168,30 +209,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 7,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
   "img": "icons/svg/mystery-man.svg",
+  "effects": [],
   "_id": "GHrTy6GZcREXQOsm"
 }

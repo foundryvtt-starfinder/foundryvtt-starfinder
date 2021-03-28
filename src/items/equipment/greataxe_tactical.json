@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>No one can argue against the damage potential of a greataxe. Half-orcs who take an interest in fragmentary records from lost Golarion embrace the greataxe as a cultural symbol. Tactical greataxes are the most common, but sintered models are made of dense ceramic and designed to increase the axe&rsquo;s effectiveness against modern gear. It&rsquo;s hard to tell ultrathin greataxes from molecular rift models at a glance, but one&rsquo;s edge is merely blurry while the other&rsquo;s is actually translucent.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 9",
     "type": "",
     "quantity": 1,
     "bulk": "1",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 24,
+        "max": "24"
+      },
+      "hardness": {
+        "value": "11"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -37,32 +55,28 @@
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
       "value": null,
-      "max": 0,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Analog",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
+      "parts": [],
       "effect": ""
     },
     "damage": {
       "parts": [
         [
-          "1d12 + @mod",
+          "1d12 + @abilities.str.mod",
           "slashing"
         ]
       ]
@@ -70,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,7 +97,24 @@
       "per": ""
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 3,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "basicM",
+    "weaponCategory": "uncategorized",
     "special": "",
     "properties": {
       "one": false,
@@ -167,30 +198,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
-    "proficient": false,
+    "proficient": true,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 3,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "icons/weapons/axes/axe-broad-engraved-black-grey.webp",
+  "effects": [],
   "_id": "ZGdY9U2N0DWKqSeh"
 }

@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>The searing grip was originally designed for artists who craft their visions in various metals. The grip has several layers of insulation to separate the wearer&rsquo;s hand from the resistance coils lining the palm and fingers; as such, the glove is often mistaken for a simple well-insulated work glove. Lengthy application of this heat can soften many metals, which aids in sculpting efforts, but even a quick touch can inflict painful burns, allowing searing grips to double as low-profile weapons. The versions typically employed by sculptors are designated low-heat and high-heat, though this is a relative distinction, as both operate at temperatures capable of dealing substantial damage. The weaponized searing grip drops the pretense of being an artist&rsquo;s tool, though those trained in its use find that its functionality doesn&rsquo;t differ substantially from the other models.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 10",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 30,
+        "max": "30"
+      },
+      "hardness": {
+        "value": "15"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -37,36 +55,37 @@
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 2,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Grapple, powered",
+    "chatFlavor": "",
     "critical": {
       "parts": [],
-      "effect": "1d6#Burn"
+      "effect": "Burn 1d6"
     },
     "damage": {
       "parts": [
         [
-          "1d6 + @bonus +@mod",
-          "Fire"
+          "1d6 + @abilities.str.mod",
+          "fire"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -75,16 +94,43 @@
     },
     "usage": {
       "value": 2,
-      "per": "Battery charge"
+      "per": "minute"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 5,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
     "weaponCategory": "flame",
     "special": "",
     "properties": {
       "one": true,
       "two": false,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -163,30 +209,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 5,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "icons/equipment/hand/glove-studded-leather-pink.webp",
+  "effects": [],
   "_id": "tOqfVpMIsvzskqcJ"
 }
