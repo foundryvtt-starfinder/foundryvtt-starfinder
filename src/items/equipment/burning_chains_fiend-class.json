@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>Hellknights of the Order of the Chain favor these lengths of blackened, fiery chain, which often incorporate etchings of infernal runes or hellscapes into their complex designs. Burning chains aren&rsquo;t known for their damage so much as their extreme flexibility in confounding an enemy&mdash;and, of course, for the visual imagery a burning chain provides when combined with the distinctive Hellknight armor. The order&rsquo;s names for the various models have become the most commonly used, from fiend-class burning chains to malebranche- and archdevil-class burning chains.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 12",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 24,
+        "max": "24"
+      },
+      "hardness": {
+        "value": "11"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -36,30 +54,29 @@
       "effect": ""
     },
     "range": {
-      "value": null,
+      "value": 10,
       "units": "ft",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 1,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Analog, disarm, fueled, reach, trip",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        ""
-      ],
+      "parts": [],
       "effect": "Fatigue"
     },
     "damage": {
       "parts": [
         [
-          "1d8 + @mod",
+          "1d8 + @abilities.str.mod",
           "fire"
         ]
       ]
@@ -67,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -77,16 +94,32 @@
     },
     "usage": {
       "value": 1,
-      "per": "Petrol"
+      "per": "minute"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 3,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
     "weaponCategory": "flame",
     "special": "",
     "properties": {
       "one": false,
       "two": true,
-      "amm": true,
+      "amm": false,
       "analog": true,
       "archaic": false,
       "automatic": false,
@@ -165,30 +198,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 3,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
   "img": "icons/svg/mystery-man.svg",
+  "effects": [],
   "_id": "lIPRO6naAkIgS4ot"
 }
