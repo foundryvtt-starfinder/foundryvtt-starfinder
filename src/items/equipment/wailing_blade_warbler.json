@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>While it looks like a longsword at a glance, a wailing blade is composed of a series of microtextured plates. When powered, these plates vibrate to generate an array of sonic frequencies at deafening and damaging volumes. A tymbal wailing blade produces only a single audible sound, while a euphonic wailing blade produces multiple pitches concurrently. Strident wailing blades and warbler wailing blades have pitches that vary, the former sounding like a layered chirping and the latter combining&nbsp;trilling notes.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 11",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 99,
+        "max": "99"
+      },
+      "hardness": {
+        "value": "41"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -37,32 +55,28 @@
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 4,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Powered",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
+      "parts": [],
       "effect": "Deafen"
     },
     "damage": {
       "parts": [
         [
-          "15d6 + @mod",
+          "15d6 + @abilities.str.mod",
           "slashing+sonic"
         ]
       ]
@@ -70,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,13 +97,40 @@
       "per": "minute"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 18,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
     "weaponCategory": "sonic",
     "special": "",
     "properties": {
       "one": true,
       "two": false,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -168,30 +209,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 18,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/equipment/weapons/longsword-microserrated.jpg",
+  "effects": [],
   "_id": "6GBliquTmwUdbICl"
 }

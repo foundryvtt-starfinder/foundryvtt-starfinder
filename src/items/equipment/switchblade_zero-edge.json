@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>This blade looks much like a single-edged survival knife when opened, but the blade can be folded or collapsed to fit within the grip, making it easier to conceal. A switch on the knife means the blade can be folded or extended as a swift action, or as part of making an attack or full attack. Most weapon manufacturers that offer daggers also produce switchblades, which are made in the same models: tactical, ultrathin, zero-edge, and molecular rift.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 8",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 54,
+        "max": "54"
+      },
+      "hardness": {
+        "value": "31"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -37,32 +55,28 @@
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
       "value": null,
-      "max": 0,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Analog, conceal, operative",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
+      "parts": [],
       "effect": ""
     },
     "damage": {
       "parts": [
         [
-          "5d4 + @mod",
+          "5d4 + @abilities.str.mod",
           "slashing"
         ]
       ]
@@ -70,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,7 +97,24 @@
       "per": ""
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 13,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "basicM",
+    "weaponCategory": "uncategorized",
     "special": "",
     "properties": {
       "one": true,
@@ -167,30 +198,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
-    "proficient": false,
+    "proficient": true,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 13,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.jpg",
+  "effects": [],
   "_id": "vsVKZyNNJQWfXOkK"
 }

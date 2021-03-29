@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>A two-handed hammer with a reservoir of coolant in its head, a frost maul simultaneously bludgeons and chills its target. As most substances become brittle and prone to shattering when subjected to extremely low temperatures, the frost maul excels at damaging objects it hits. Frost mauls come in aufeis, iceberg, floe, and glacier models.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 12",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -15,7 +15,25 @@
     "level": 17,
     "attuned": false,
     "equipped": false,
-    "identified": true,
+    "identified": false,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 96,
+        "max": "96"
+      },
+      "hardness": {
+        "value": "39"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -37,59 +55,82 @@
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 2,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Powered, sunder",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
+      "parts": [],
       "effect": "Staggered"
     },
     "damage": {
       "parts": [
         [
-          "10d8 + @mod",
-          "bludgeoning+cryo"
+          "10d8 + @abilities.str.mod",
+          "bludgeoning+cold"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
-      "value": 40,
-      "max": 40
+      "value": 20,
+      "max": 20
     },
     "usage": {
       "value": 2,
       "per": "minute"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 17,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
     "weaponCategory": "cryo",
     "special": "",
     "properties": {
       "one": false,
       "two": true,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -168,30 +209,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 17,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "icons/weapons/hammers/hammer-double-stone-worn.webp",
+  "effects": [],
   "_id": "CuK7Ewg0WTkGPKsk"
 }
