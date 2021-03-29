@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>Worshipers of Zon-Kuthon developed the first shadow chains using cutting-edge heat-transfer technology, but outsiders rapidly reverse-engineered the weapons, constructing functional facsimiles from their own tech. Shadow chains&rsquo; links rapidly absorb heat, while their heavily insulated handle protect their wieldersfrom direct exposure to the freezing darkness. Many adherents of the Midnight Lord make use of the follower, acolyte, and penitent shadow chains, while only the most devout can afford the more powerful ecclesiastic and devotional shadow chains.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 11",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 45,
+        "max": "45"
+      },
+      "hardness": {
+        "value": "25"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -36,42 +54,38 @@
       "effect": ""
     },
     "range": {
-      "value": null,
+      "value": 10,
       "units": "ft",
       "additional": "",
       "per": ""
     },
     "uses": {
       "value": null,
-      "max": 0,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Analog, disarm, reach, trip",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
+      "parts": [],
       "effect": "Bind"
     },
     "damage": {
       "parts": [
         [
-          "5d4 + @mod",
-          "cryo"
+          "5d4 + @abilities.str.mod",
+          "cold"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,6 +97,22 @@
       "per": ""
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 10,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
     "weaponCategory": "cryo",
     "special": "",
@@ -168,30 +198,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 10,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/spells/slithering_chain.png",
+  "effects": [],
   "_id": "n3sHaeuoNfIVYjr4"
 }

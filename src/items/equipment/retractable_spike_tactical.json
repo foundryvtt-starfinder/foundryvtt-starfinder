@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>These keen-edged spikes are installed in an armor upgrade slot rather than held, stored in a surface slot in armor or an android&rsquo;s body until extended. You can extend the spike as a move action and retract the spike as a swift action. Such a spike usually extends from the elbow, foot, knee, or wrist, but a spike can be fitted into a helmet or an android&rsquo;s head for use in headbutting or goring foes. Retractable spikes are widely available throughout the Pact Worlds, with the various models&mdash;tactical, advanced, elite, and paragon&mdash;having individual rarity based on the credit outlay to acquire a given model.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 8",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 30,
+        "max": "30"
+      },
+      "hardness": {
+        "value": "15"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -37,32 +55,28 @@
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
       "value": null,
-      "max": 0,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Conceal, integrated (1 slot), operative",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
+      "parts": [],
       "effect": ""
     },
     "damage": {
       "parts": [
         [
-          "1d4 + @mod",
+          "1d4 + @abilities.str.mod",
           "piercing"
         ]
       ]
@@ -70,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,7 +97,24 @@
       "per": ""
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 5,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "basicM",
+    "weaponCategory": "uncategorized",
     "special": "",
     "properties": {
       "one": true,
@@ -167,30 +198,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
-    "proficient": false,
+    "proficient": true,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 5,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "icons/weapons/fist/fist-katar-triple-gold-black.webp",
+  "effects": [],
   "_id": "iMVWycwtwXbKilw0"
 }
