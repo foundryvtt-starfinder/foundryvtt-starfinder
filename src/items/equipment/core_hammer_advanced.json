@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>The hollow head of this two-handed hammer is filled with exceptionally dense plasma, which is released on contact with enemies, sometimes even spraying plasma on a wellplaced strike. Core hammers constructed by the followers of Angradd tend to be functional works of dark metal, where vesk models are usually designed to display the plasma behind magnetic containment. Tactical core hammers and advanced core hammers contain a stable plasma core, while fusion core hammers and reactor core hammers employ devices that focus plasma to trigger momentary flares of nuclear fusion.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 12",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 39,
+        "max": "39"
+      },
+      "hardness": {
+        "value": "21"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -37,19 +55,20 @@
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 2,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Powered",
+    "chatFlavor": "",
     "critical": {
       "parts": [
         [
@@ -57,12 +76,12 @@
           "electricity+fire"
         ]
       ],
-      "effect": "Jet"
+      "effect": "Jet 2d6"
     },
     "damage": {
       "parts": [
         [
-          "3d6 + @mod",
+          "3d6 + @abilities.str.mod",
           "electricity+fire"
         ]
       ]
@@ -70,8 +89,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,13 +102,40 @@
       "per": "minute"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 8,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
     "weaponCategory": "plasma",
     "special": "",
     "properties": {
       "one": false,
       "two": true,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -168,30 +214,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 8,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
   "img": "icons/svg/mystery-man.svg",
+  "effects": [],
   "_id": "Z01odJht8isOuK5J"
 }

@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>The glaive is an ancient weapon, originally developed for use by and against mounted warriors. The meteor glaive is the Skyfire Legion&rsquo;s update on the original design, incorporating a petrol tank near the base of the slightly curved blade and relying on a long shaft to keep the wielder at a safe distance. Meteor glaives are classified into tactical, advanced, elite, and paragon models.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg. 12",
     "type": "",
     "quantity": 1,
     "bulk": "2",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 90,
+        "max": "90"
+      },
+      "hardness": {
+        "value": "35"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -36,33 +54,29 @@
       "effect": ""
     },
     "range": {
-      "value": null,
+      "value": 10,
       "units": "ft",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 4,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "Fueled, reach",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "",
-          ""
-        ]
-      ],
+      "parts": [],
       "effect": "Wound"
     },
     "damage": {
       "parts": [
         [
-          "5d10 + @mod",
+          "5d10 + @abilities.str.mod",
           "fire+slashing"
         ]
       ]
@@ -70,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,13 +97,29 @@
       "per": "minute"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 15,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
     "weaponCategory": "flame",
     "special": "",
     "properties": {
       "one": false,
       "two": true,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -168,30 +198,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 15,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "icons/weapons/polearms/glaive-hooked-steel.webp",
+  "effects": [],
   "_id": "dRzc3DCR7nsUq3IA"
 }

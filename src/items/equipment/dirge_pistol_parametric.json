@@ -1,18 +1,13 @@
 {
-  "_id": "uKTIUlzJOAhHmetC",
-  "name": "Dirge Pistol, Parametric",
-  "permission": {
-    "default": 0,
-    "umHu8DFnCrMQVZ37": 3
-  },
+  "name": "Dirge pistol, parametric",
   "type": "weapon",
   "data": {
     "description": {
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">The oscillating sonic waves discharged from a dirge pistol work like those fired from a dirge cannon. Raiders and hijackers prize these weapons for their effect against living targets, which can leave many valuables unharmed. Harmonic and resonant dirge pistols generate stable oscillations, while the anharmonic, parametric, and radial dirge pistols have concentric generator cylinders to produce dissonant and more harmful output.</span></p>\n<h3 class=\"framing\"><strong>Sonic Weapons</strong></h3>\n<hr>\n<p>Sonic weapons emit sonar waves at frequencies that are designed to injure or incapacitate enemies. Many of them are termed “low-frequency devices” (LFDs) and “high-frequency devices” (HFDs) based on the frequencies at which they operate and damage foes.</p>",
+      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">The oscillating sonic waves discharged from a dirge pistol work like those fired from a dirge cannon. Raiders and hijackers prize these weapons for their effect against living targets, which can leave many valuables unharmed. Harmonic and resonant dirge pistols generate stable oscillations, while the anharmonic, parametric, and radial dirge pistols have concentric generator cylinders to produce dissonant and more harmful output.</span></p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "Armory",
+    "source": "AR pg. 16",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -21,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 90,
+        "max": "90"
+      },
+      "hardness": {
+        "value": "35"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -47,17 +60,18 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "parts": [],
-      "effect": ""
+      "effect": "Sicken"
     },
     "damage": {
       "parts": [
@@ -70,7 +84,7 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
@@ -80,7 +94,35 @@
     },
     "usage": {
       "value": 1,
-      "per": "round"
+      "per": "shot"
+    },
+    "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 15,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
     },
     "weaponType": "smallA",
     "weaponCategory": "sonic",
@@ -111,25 +153,74 @@
       "stun": false,
       "thrown": false,
       "trip": false,
-      "unwieldy": false
+      "unwieldy": false,
+      "aeon": false,
+      "antibiological": true,
+      "aurora": false,
+      "breach": false,
+      "breakdown": false,
+      "cluster": false,
+      "conceal": false,
+      "deconstruct": false,
+      "deflect": false,
+      "double": false,
+      "drainCharge": false,
+      "echo": false,
+      "extinguish": false,
+      "feint": false,
+      "fiery": false,
+      "firstArc": false,
+      "flexibleLine": false,
+      "force": false,
+      "freeHands": false,
+      "fueled": false,
+      "grapple": false,
+      "gravitation": false,
+      "guided": false,
+      "harrying": false,
+      "holyWater": false,
+      "hybrid": false,
+      "ignite": false,
+      "indirect": false,
+      "integrated": false,
+      "living": false,
+      "lockdown": false,
+      "mind-affecting": false,
+      "mine": false,
+      "mire": false,
+      "modal": false,
+      "necrotic": false,
+      "polarize": false,
+      "polymorphic": false,
+      "professional": false,
+      "punchGun": false,
+      "radioactive": false,
+      "recall": false,
+      "regrowth": false,
+      "relic": false,
+      "reposition": false,
+      "shape": false,
+      "shells": false,
+      "shield": false,
+      "subtle": false,
+      "sunder": false,
+      "swarm": false,
+      "tail": false,
+      "teleportive": false,
+      "thought": false,
+      "throttle": false,
+      "unbalancing": false,
+      "underwater": false,
+      "variantBoost": false,
+      "wideLine": false
     },
     "proficient": false,
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 15,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
+    "abilityMods": {
+      "parts": []
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/dirge-pistol-parametric.jpg"
+  "img": "systems/sfrpg/icons/equipment/weapons/dirge-pistol-harmonic.jpg",
+  "effects": [],
+  "_id": "uKTIUlzJOAhHmetC"
 }
