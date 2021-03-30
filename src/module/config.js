@@ -766,6 +766,25 @@ SFRPG.augmentationSytems = {
 };
 
 /*--------------------------------*
+ * NPC properties and values *
+ *--------------------------------*/
+SFRPG.npctypes = {
+    "animal": "Animal",
+    "aberration": "Aberration",
+    "construct": "Construct",
+    "dragon": "Dragon",
+    "fey": "Fey",
+    "humanoid": "Humanoid",
+    "magical beast": "Magical Beast",
+    "monstrous humanoid": "Monstrous Humanoid",
+    "ooze": "Ooze",
+    "outsider": "Outsider",
+    "planet": "Plant",
+    "undead": "Undead",
+    "vermin": "Vermin"
+};
+
+/*--------------------------------*
  * Starship properties and values *
  *--------------------------------*/
 SFRPG.maneuverability = {
@@ -899,7 +918,9 @@ SFRPG.starshipSizeMod = {
     "colossal": -8
 };
 
-// End starship stuff
+/*--------------------------------*
+ * Vehicle properties and values *
+ *--------------------------------*/
 
 SFRPG.vehicleSizes = {
     "diminutive": "SFRPG.SizeDim",

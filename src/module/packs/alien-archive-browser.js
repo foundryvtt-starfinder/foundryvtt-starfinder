@@ -93,6 +93,11 @@ class AlienArchiveBrowserSFRPG extends ItemBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterSize"),
                 content: SFRPG.actorSizes,
                 filter: (element, filters) => { return this._filterSizes(element, filters); }
+            },
+            type: {
+                label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterType"),
+                content: SFRPG.npctypes,
+                filter: (element, filters) => { return this._filterTypes(element, filters); }
             }
         };
         return filters;
@@ -114,6 +119,24 @@ class AlienArchiveBrowserSFRPG extends ItemBrowserSFRPG {
         let alien = this.items.find(x => x.compendium === compendium && x._id === itemId);
         let alienSize = alien ? alien.data.traits.size : "null";
         return alien && filters.includes(alienSize);
+    }
+
+    _filterTypes(element, filters) {
+        let compendium = element.dataset.entryCompendium;
+        let itemId = element.dataset.entryId;
+        let alien = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        let alienType = alien ? alien.data.details.type.toLowerCase() : "null";
+
+        var found = false;
+        for (let filter in filters) {
+            let filterValue = filters[filter];
+            if(alienType.includes(filterValue)) {
+                found = true;
+                break;
+            }
+        }
+
+        return alien && found;
     }
 }
 
