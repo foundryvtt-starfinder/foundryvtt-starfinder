@@ -103,7 +103,7 @@ const _migrateNPCData = function (actor, data) {
 const _migrateItemData = function(item, data) {
     var img = item.img;
     // Any reference to a .png or .jpg in /sfrpg/icons should be replaced with a link to a .webp with the same name
-    if (img.includes("systems/sfrpg/icons/")) {
+    if (img.includes("systems/sfrpg/icons/") || img.includes("systems/sfrpg/images/cup/gameplay/")) {
         img = img.toLowerCase().replace(".png",".webp");
         img = img.toLowerCase().replace(".jpg",".webp");
         data["img"] = img;
