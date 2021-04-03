@@ -76,7 +76,7 @@ const _migrateActorItemsIconToWebP = function (actor, data) {
             continue;
         }
         // Any reference to a .png or .jpg in /sfrpg/icons should be replaced with a link to a .webp with the same name
-        if (img.includes("systems/sfrpg/icons/") || img.includes("systems/sfrpg/images/cup/gameplay/")) {
+        if (img.includes("systems/sfrpg/icons/") || img.includes("systems/sfrpg/images/cup/")) {
             img = img.toLowerCase().replace(".png",".webp");
             img = img.toLowerCase().replace(".jpg",".webp");
             item.img = img;
@@ -134,6 +134,7 @@ const _migrateItemData = function(item, data) {
        return data;
     }
     // Any reference to a .png or .jpg in /sfrpg/icons should be replaced with a link to a .webp with the same name
+    // We do the same for the references to the sfrpg/images/cup folder
     if (img.includes("systems/sfrpg/icons/") || img.includes("systems/sfrpg/images/cup/gameplay/")) {
         img = img.toLowerCase().replace(".png",".webp");
         img = img.toLowerCase().replace(".jpg",".webp");
