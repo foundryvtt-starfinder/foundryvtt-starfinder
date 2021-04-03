@@ -277,7 +277,7 @@ Hooks.once("ready", () => {
     const systemSchema = Number(game.system.data.schema);
     const needsMigration = currentSchema < systemSchema || currentSchema === 0;
 
-    if (needsMigration && game.user.isGM) {
+    if (true) { //needsMigration && game.user.isGM) {
         migrateWorld()
             .then(_ => ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage")))
             .catch(_ => ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage")));
