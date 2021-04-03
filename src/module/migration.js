@@ -45,7 +45,8 @@ const migrateActorData = function (actor, schema) {
 
 const migrateItemData = function (item, schema) {
     const updateData = {};
-    
+    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateItemData(item, updateData);
+
     return updateData;
 };
 
@@ -99,8 +100,20 @@ const _migrateNPCData = function (actor, data) {
     return data;
 };
 
+const _migrateItemData = function(item, data) {
+    var img = item.img;
+    // Any reference to a .png or .jpg in /sfrpg/icons should be replaced with a link to a .webp with the same name
+    if (img.includes("systems/sfrpg/icons/")) {
+        img = img.toLowerCase().replace(".png",".webp");
+        img = img.toLowerCase().replace(".jpg",".webp");
+        data["img"] = img;
+    }
+    return data;
+}
+
 const SFRPGMigrationSchemas = Object.freeze({
     NPC_DATA_UPATE: 0.001,
     THE_PAINFUL_UPDATE: 0.002,
-    THE_HAPPY_UPDATE: 0.003
+    THE_HAPPY_UPDATE: 0.003,
+    THE_WEBP_UPDATE: 0.004 // We changed all icons from .png to .webp
 });
