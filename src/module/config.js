@@ -1370,7 +1370,9 @@ SFRPG.weaponAccessoriesSupportedTypes = {
     "any": "SFRPG.Items.WeaponAccessory.SupportedType.Any",
     "heavyWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.HeavyWeapon",
     "meleeWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.MeleeWeapon",
+    "meleeWeaponSA": "SFRPG.Items.WeaponAccessory.SupportedType.MeleeWeaponSA",
     "projectile": "SFRPG.Items.WeaponAccessory.SupportedType.Projectile",
     "railedWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.RailedWeapon",
+    "railedWeaponSA": "SFRPG.Items.WeaponAccessory.SupportedType.RailedWeaponSA",
     "smallarm": "SFRPG.Items.WeaponAccessory.SupportedType.SmallArm"
 };
