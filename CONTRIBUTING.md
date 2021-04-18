@@ -110,3 +110,4 @@ Items have a source field, and this source field should be filled in. There is a
 | Alien Archive 4 | AA4 pg. x | AA4 pg. 123 |
 | Adventure path books | AP #x pg. y | AP #3 pg. 58 |
 | Starfinder Society | SFS #x-y pg. z | SFS #1-2 pg. 23 |
+| Alien Card Deck | ACD | ACD |

@@ -819,6 +819,7 @@ function isSourceValid(source) {
     let AdventurePathSourceMatch = [...source.matchAll(/AP #[\d]+ pg\. [\d]+/g)];
     let StarfinderSocietySourceMatch =  [...source.matchAll(/SFS #[\d]+-[\d]+ pg\. [\d]+/g)];
 
+
     if (CoreBooksSourceMatch && CoreBooksSourceMatch.length > 0) {
        // ✅ formatted Core book source
        return true;
@@ -832,8 +833,12 @@ function isSourceValid(source) {
        return true;
     }
     else if (StarfinderSocietySourceMatch && StarfinderSocietySourceMatch.length > 0) {
-        // ✅ formatted Starfinder Society path source
+        // ✅ formatted Starfinder Society source
         return true;
+    }
+    else if (source == "ACD") {
+        //  ✅ formatted Alien Card Deck source
+        return true
     }
 
     return false;
