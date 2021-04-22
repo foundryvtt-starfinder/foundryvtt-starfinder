@@ -38,6 +38,7 @@
 <div class="flexcol">
     <nav class="sheet-subnavigation biotabs" data-group="biographyTabs">
         <a class="item active{{#if data.details.biography.value}} highlight{{/if}}" data-tab="biography">{{localize "SFRPG.ActorSheet.Biography.TabBio"}}</a>
+        <a class="item {{#if data.description.short}} highlight{{/if}}" data-tab="descriptionShort">{{localize "SFRPG.DescriptionShort"}}</a>
         {{#if isNPC}}
         <a class="item active{{#if data.details.ecology.value}} highlight{{/if}}" data-tab="ecology">{{localize "SFRPG.ActorSheet.Biography.TabEcology"}}</a>
         {{/if}}
@@ -49,6 +50,9 @@
     <section class="bio-body">
         <div class="tab flexrow" data-group="biographyTabs" data-tab="biography">
                 {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+        </div>
+        <div class="tab flexrow" data-group="biographyTabs" data-tab="descriptionShort">
+            {{editorPlus content=data.description.short target="data.description.short" button=true owner=owner editable=editable rolls=false rollData=data}}
         </div>
         <div class="tab" data-group="biographyTabs" data-tab="ecology">
             <div class="flexrow">
