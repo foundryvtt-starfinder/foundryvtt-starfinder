@@ -996,6 +996,67 @@ async function linkUserData() {
 	}
 }
 
+
+/********************/
+/*	COPY USER DATA	*/
+/********************/
+
+/**
+ * Copy build to User Data folder (for Docker - doesn't like symlinks)
+ */
+async function copyUserData() {
+	const name = 'sfrpg';
+	const config = fs.readJSONSync('foundryconfig.json');
+	console.log("THIS IS SPARTA!");
+	let destDir;
+	try {
+		if (
+			fs.existsSync(path.resolve('.', 'dist', 'module.json')) ||
+			fs.existsSync(path.resolve('.', 'src', 'module.json'))
+		) {
+			destDir = 'modules';
+		} else if (
+			fs.existsSync(path.resolve('.', 'dist', 'system.json')) ||
+			fs.existsSync(path.resolve('.', 'src', 'system.json'))
+		) {
+			destDir = 'systems';
+		} else {
+			throw Error(
+				`Could not find ${chalk.blueBright(
+					'module.json'
+				)} or ${chalk.blueBright('system.json')}`
+			);
+		}
+
+		let targetDir;
+		console.log("TARGET TIME");
+		if (config.dataPath) {
+			if (!fs.existsSync(path.join(config.dataPath, 'Data')))
+				throw Error('User Data path invalid, no Data directory found');
+
+			targetDir = path.join(config.dataPath, 'Data', destDir, name);
+		} else {
+			throw Error('No User Data path defined in foundryconfig.json');
+		}
+
+		if (argv.clean || argv.c) {
+			console.log(
+				chalk.yellow(`Removing build in ${chalk.blueBright(targetDir)}`)
+			);
+
+			await fs.remove(targetDir);
+		} else if (!fs.existsSync(targetDir)) {
+			console.log(
+				chalk.green(`Copying build to ${chalk.blueBright(targetDir)}`)
+			);
+			await fs.copy(path.resolve('./dist'), targetDir);
+		}
+		return Promise.resolve();
+	} catch (err) {
+		Promise.reject(err);
+	}
+}
+
 /*********************/
 /*		PACKAGE		 */
 /*********************/
@@ -1148,6 +1209,7 @@ exports.build = gulp.series(clean, execBuild);
 exports.watch = buildWatch;
 exports.clean = clean;
 exports.link = linkUserData;
+exports.copyUser = copyUserData;
 exports.libs = copyLibs;
 exports.package = gulp.series(copyReadmeAndLicenses, packageBuild);
 exports.publish = gulp.series(
