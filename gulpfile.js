@@ -335,20 +335,10 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 // Generates a regular expression to find references to the provided items
 function regularExpressionForFindingItemsInCache(cache) {
 
-    var regularExpressionSubstring = "";
-    let numberOfConditions = Object.keys(cache).length
-    var index = 0;
-    for (let itemId in cache) {
-        let item = cache[itemId];
-        // Construct a substring used to generate a condition finding regular expression
-        if (index === numberOfConditions - 1) {
-            regularExpressionSubstring += item.name;
-        }
-        else {
-            regularExpressionSubstring += item.name + "|";
-        }
-        index++;
-    }
+    let regularExpressionSubstring = "";
+    const conditionNames = Object.entries(cache).map(x => x[1].name);
+    regularExpressionSubstring = conditionNames.join("|");
+
     return new RegExp("(" + regularExpressionSubstring + ")", "g");
 }
 
