@@ -10,7 +10,7 @@ import SFRPGModifierApplication from "../apps/modifier-app.js";
 import { DroneRepairDialog } from "../apps/drone-repair-dialog.js";
 import { getItemContainer } from "./actor-inventory.js"
 
-import { } from "./starship-update.js"
+import { } from "./crew-update.js"
 import { ItemSheetSFRPG } from "../item/sheet.js";
 
 /**
@@ -118,7 +118,7 @@ export class ActorSFRPG extends Actor {
      */
     _ensureHasModifiers(data, prop = null) {
         if (!hasProperty(data, "modifiers")) {
-            console.log(`SFRPG | ${this.name} does not have the modifiers data object, attempting to create them...`);
+            //console.log(`SFRPG | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
         }
 
@@ -993,15 +993,16 @@ export class ActorSFRPG extends Actor {
         };
     }
 
-    async removeFromCrew() {
-        await this.unsetFlag('sfrpg', 'crewMember');
-    }
-
-    async setCrewMemberRole(shipId, role) {
-        return this.setFlag('sfrpg', 'crewMember', {
-            shipId: shipId,
-            role: role
-        });
+    async removeFromCrew(actorId) {
+        const role = this.getCrewRoleForActor(actorId);
+        if (role) {
+            const crewData = duplicate(this.data.data.crew);
+            crewData[role].actorIds = crewData[role].actorIds.filter(x => x !== actorId);
+            return this.update({
+                "data.crew": crewData
+            });
+        }
+        return null;
     }
 
     /**
@@ -1286,18 +1287,19 @@ export class ActorSFRPG extends Actor {
 
     /** Crewed actor functionality */
     getCrewRoleForActor(actorId) {
+        const dataSource = this.data;
         const acceptedActorTypes = ["starship", "vehicle"];
-        if (!acceptedActorTypes.includes(this.data.type)) {
-            console.log(`getCrewRoleForActor(${actorId}) called on an actor (${this.data._id}) of type ${this.data.type}, which is not supported!`);
+        if (!acceptedActorTypes.includes(dataSource.type)) {
+            console.log(`getCrewRoleForActor(${actorId}) called on an actor (${dataSource._id}) of type ${dataSource.type}, which is not supported!`);
             console.trace();
             return null;
         }
 
-        if (!this.data?.data?.crew) {
+        if (!dataSource?.data?.crew) {
             return null;
         }
 
-        for (const [role, entry] of Object.entries(this.data.data.crew)) {
+        for (const [role, entry] of Object.entries(dataSource.data.crew)) {
             if (entry?.actorIds?.includes(actorId)) {
                 return role;
             }
