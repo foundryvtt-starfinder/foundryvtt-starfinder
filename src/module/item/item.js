@@ -158,15 +158,19 @@ export class ItemSFRPG extends Item {
 
         this.actor?.setupRollContexts(rollContext);
     
-        const rollResult = DiceSFRPG.createRoll({
+        const rollPromise = DiceSFRPG.createRoll({
             rollContext: rollContext,
             rollFormula: dcFormula,
             mainDie: 'd0',
             dialogOptions: { skipUI: true }
         });
 
-        const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
-        return returnValue;
+        rollPromise.then(rollResult => {
+            const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+            this.labels.save = returnValue;
+        });
+
+        return 10;
     }
 
     /**
