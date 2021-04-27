@@ -287,11 +287,11 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 			}
 
 			// Cached conditions to be referenced later
-			if (directory == "conditions") {
+			if (directory === "conditions") {
 				conditionsCache[jsonInput._id] = jsonInput;
 			}
             // Cached setting to be referenced later
-            else if (directory == "setting") {
+            else if (directory === "setting") {
                 settingCache[jsonInput._id] = jsonInput;
             }
 
@@ -312,7 +312,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
     conditionsRegularExpression = regularExpressionForFindingItemsInCache(conditionsCache);
     settingRegularExpression = regularExpressionForFindingItemsInCache(settingCache);
 
-	if (options.formattingCheck == true) {
+	if (options.formattingCheck === true) {
 		console.log(`\nStarting formatting check.`);
 		formattingCheck(allItems)
 	}
@@ -341,7 +341,7 @@ function regularExpressionForFindingItemsInCache(cache) {
     for (let itemId in cache) {
         let item = cache[itemId];
         // Construct a substring used to generate a condition finding regular expression
-        if (index == numberOfConditions - 1) {
+        if (index === numberOfConditions - 1) {
             regularExpressionSubstring += item.name;
         }
         else {
@@ -386,13 +386,13 @@ function formattingCheck(allItems) {
 		else if (data.type === "vehicle") {
 			formattingCheckVehicle(data, pack, item.file, { checkLinks: true });
 		}
-		else if (data.type == "spell") {
+		else if (data.type === "spell") {
 			formattingCheckSpell(data, pack, item.file, { checkLinks: true });
 		}
-		else if (data.type == "race") {
+		else if (data.type === "race") {
 			formattingCheckRace(data, pack, item.file, { checkLinks: true });
 		}
-		else if (data.type == "feat") {
+		else if (data.type === "feat") {
             formattingCheckFeat(data, pack, item.file, { checkLinks: true });
         }
 	}
@@ -402,7 +402,7 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
 
 	// Validate name
 	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+		addWarningForPack(`${file}: Name is not well formatted "${data.name}.`, pack);
 	}
 
 	// Validate HP values
@@ -421,7 +421,7 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
 
 	// Validate image
 	if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}.`, pack);
 	}
 
 	// Validate source
@@ -431,7 +431,7 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
 		return;
 	}
 	if (!isSourceValid(source)) {
-		addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+		addWarningForPack(`${file}: Improperly formatted source field "${source}.`, pack);
 	}
 
 	// Check biography for references to conditions
@@ -439,7 +439,7 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
 		let description = data.data.description.value
 		let result = searchDescriptionForUnlinkedCondition(description);
 		if (result.found) {
-			addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
+			addWarningForPack(`${file}: Found reference to ${result.match} in description without link.`, pack);
 		}
 	}
 }
@@ -448,7 +448,7 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
 
 	// Validate name
 	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+		addWarningForPack(`${file}: Name is not well formatted "${data.name}.`, pack);
 	}
 	// Validate attributes
 	// Validate HP & Stamina Points
@@ -476,12 +476,12 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
 
 	// Validate image
 	if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}.`, pack);
 	}
 
 	// Validate token image
 	if (data.token.img && !data.token.img.startsWith("systems") && !data.token.img.startsWith("icons")) {
-		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}.`, pack);
 	}
 
 	// Validate source
@@ -491,32 +491,32 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
 		return;
 	}
 	if (!isSourceValid(source)) {
-		addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+		addWarningForPack(`${file}: Improperly formatted source field "${source}.`, pack);
 	}
 
-    if (options.checkEcology == true) {
+    if (options.checkEcology === true) {
         // Validate ecology
         let environment = data.data.details.environment;
         let organization = data.data.details.organization;
-        if (environment == null || environment == "") {
-            addWarningForPack(`${file}: Environment is missing".`, pack);
+        if (environment === null || environment === "") {
+            addWarningForPack(`${file}: Environment is missing.`, pack);
         }
-        if (organization == null || organization == "") {
-            addWarningForPack(`${file}: Organization is missing".`, pack);
+        if (organization === null || organization === "") {
+            addWarningForPack(`${file}: Organization is missing.`, pack);
         }
     }
 
-	if (options.checkLinks == true) {
+	if (options.checkLinks === true) {
 		let description = data.data.details.biography.value
         // Check biography for references to conditions
 		let conditionResult = searchDescriptionForUnlinkedCondition(description);
 		if (conditionResult.found) {
-			addWarningForPack(`${file}: Found reference to ${conditionResult.match} in biography without link".`, pack);
+			addWarningForPack(`${file}: Found reference to ${conditionResult.match} in biography without link.`, pack);
 		}
         // Check biography for references to the setting
         let settingResult = serchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
-            addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link".`, pack);
+            addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link.`, pack);
         }
 	}
 
@@ -530,14 +530,14 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
 	// Validate name
 	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+		addWarningForPack(`${file}: Name is not well formatted "${data.name}.`, pack);
 	}
 
 	// Validate image
 	if (options.checkImage) {
 		if (data.img && // Only validate if img is set
 			!data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-			addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+			addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}.`, pack);
 		}
 	}
 
@@ -545,7 +545,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 	if (options.checkSource) {
 		let source = data.data.source;
 		if (!isSourceValid(source)) {
-			addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+			addWarningForPack(`${file}: Improperly formatted source field "${source}.`, pack);
 		}
 	}
 
@@ -553,7 +553,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 	if (options.checkPrice) {
 		let price = data.data.price;
 		if (!price || price <= 0) {
-			addWarningForPack(`${file}: Improperly formatted armor price field "${price}".`, pack);
+			addWarningForPack(`${file}: Improperly formatted armor price field "${price}.`, pack);
 		}
 	}
 
@@ -561,7 +561,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 	if (options.checkLevel) {
 		let level = data.data.level;
 		if (!level || level <= 0) {
-			addWarningForPack(`${file}: Improperly formatted armor level field "${level}".`, pack);
+			addWarningForPack(`${file}: Improperly formatted armor level field "${level}.`, pack);
 		}
 	}
 
@@ -576,7 +576,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 		// Validate armor type
 		let armorType = data.data.armor.type
 		if (!validArmorTypes.includes(armorType)) {
-			addWarningForPack(`${file}: Improperly formatted armor type field "${armorType}".`, pack);
+			addWarningForPack(`${file}: Improperly formatted armor type field "${armorType}.`, pack);
 		}
 	}
 
@@ -589,13 +589,13 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
             // Check description for references to conditions
 			let conditionResult = serchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
 			if (conditionResult.found) {
-				addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link".`, pack);
+				addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link.`, pack);
 			}
 
             // Check description for references to poisons / diseases
             let poisonResult = serchDescriptionForUnlinkedReference(description, poisonAndDiseasesRegularExpression);
             if (poisonResult.found) {
-                addWarningForPack(`${file}: Found reference to ${poisonResult.match} in description without link".`, pack);
+                addWarningForPack(`${file}: Found reference to ${poisonResult.match} in description without link.`, pack);
             }
 		}
 		else {
@@ -610,7 +610,7 @@ function formattingCheckWeapons(data, pack, file) {
 	let lowecaseName = data.name.toLowerCase()
 	if (lowecaseName.includes("multiattack")) {
 		// Should be [MultiATK]
-		addWarningForPack(`${file}: Improperly formatted multiattack name field "${data.name}".`, pack);
+		addWarningForPack(`${file}: Improperly formatted multiattack name field "${data.name}.`, pack);
 	}
 	if (lowecaseName.includes("multiatk")) {
 
@@ -619,7 +619,7 @@ function formattingCheckWeapons(data, pack, file) {
 		}
 		else {
 			// Anything else is close, but is slightly off
-			addWarningForPack(`${file}: Improperly formatted multiattack name field "${data.name}".`, pack);
+			addWarningForPack(`${file}: Improperly formatted multiattack name field "${data.name}.`, pack);
 		}
 	}
 }
@@ -628,12 +628,12 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
 
 	// Validate name
 	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+		addWarningForPack(`${file}: Name is not well formatted "${data.name}.`, pack);
 	}
 
 	// Validate image
 	if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}.`, pack);
 	}
 
 	// Validate source
@@ -643,19 +643,19 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
 		return;
 	}
 	if (!isSourceValid(source)) {
-		addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+		addWarningForPack(`${file}: Improperly formatted source field "${source}.`, pack);
 	}
 
 	// Validate price
 	let price = data.data.details.price;
 	if (!price || price <= 0) {
-		addWarningForPack(`${file}: Improperly formatted vehicle price field "${armorType}".`, pack);
+		addWarningForPack(`${file}: Improperly formatted vehicle price field "${armorType}.`, pack);
 	}
 
 	// Validate level
 	let level = data.data.details.level;
 	if (!level || level <= 0) {
-		addWarningForPack(`${file}: Improperly formatted vehicle level field "${armorType}".`, pack);
+		addWarningForPack(`${file}: Improperly formatted vehicle level field "${armorType}.`, pack);
 	}
 
 	// Check description for references to conditions
@@ -664,7 +664,7 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
 		if (description) {
 			let result = searchDescriptionForUnlinkedCondition(description);
 			if (result.found) {
-				addWarningForPack(`${file}: Found reference to ${result.match} in description without link".`, pack);
+				addWarningForPack(`${file}: Found reference to ${result.match} in description without link.`, pack);
 			}
 		}
 		else {
@@ -682,12 +682,12 @@ function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) 
 
 	// Validate name
 	if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-		addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+		addWarningForPack(`${file}: Name is not well formatted "${data.name}.`, pack);
 	}
 
 	// Validate image
 	if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+		addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}.`, pack);
 	}
 
 	// Validate source
@@ -697,22 +697,22 @@ function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) 
 		return;
 	}
 	if (!isSourceValid(source)) {
-		addWarningForPack(`${file}: Improperly formatted source field "${source}".`, pack);
+		addWarningForPack(`${file}: Improperly formatted source field "${source}.`, pack);
 	}
 
 	//Check spell description for unlinked references to conditions
-	if (options.checkLinks == true) {
+	if (options.checkLinks === true) {
 		let description = data.data.description.value
 
         // Check references to conditions
         let conditionResult = serchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
 		if (conditionResult.found) {
-            addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link".`, pack);
+            addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link.`, pack);
         }
 		// Check references to the setting
         let settingResult = serchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
-            addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link".`, pack);
+            addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link.`, pack);
         }
 	}
 }
@@ -721,29 +721,29 @@ function formattingCheckFeat(data, pack, file, options = { checkLinks: true }) {
 
     // Validate name
     if (!data.name || data.name.endsWith(' ') || data.name.startsWith(' ')) {
-        addWarningForPack(`${file}: Name is not well formatted "${data.name}".`, pack);
+        addWarningForPack(`${file}: Name is not well formatted "${data.name}.`, pack);
     }
 
     // Validate image
     if (data.img && !data.img.startsWith("systems") && !data.img.startsWith("icons")) {
-        addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}".`, pack);
+        addWarningForPack(`${file}: Image is pointing to invalid location "${data.name}.`, pack);
     }
 
     // NOTE: We don't validate `source` for feats as we currently are not decided if we should use this field as
     // it's used for other items (it is generally used to provide an explanation of what game mechanic unlocks the
     // feat)
 
-    if (options.checkLinks == true) {
+    if (options.checkLinks === true) {
         let description = data.data.description.value
         // Check description for references to conditions
         let conditionResult = serchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
         if (conditionResult.found) {
-            addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link".`, pack);
+            addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link.`, pack);
         }
         // Check description for references to the setting
         let settingResult = serchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
-            addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link".`, pack);
+            addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link.`, pack);
         }
     }
 }
@@ -797,7 +797,7 @@ function serchDescriptionForUnlinkedReference(description, regularExpression) {
             }
                 // This is a simple rule of thumb which checks of the word in question is surrounded by `&nbsp;`. In this case we'll ignore,
             // as this can be used to escape a condition word (ie. `Burning`) in an otherwise unrelated context (ie. `... the Burning Archipelago...`)
-            else if (characterBefore == ";" && characterAfter == "&") {
+            else if (characterBefore === ";" && characterAfter === "&") {
                 unlinkedReferenceFound = false;
             }
 
@@ -836,7 +836,7 @@ function isSourceValid(source) {
         // ✅ formatted Starfinder Society source
         return true;
     }
-    else if (source == "ACD") {
+    else if (source === "ACD") {
         //  ✅ formatted Alien Card Deck source
         return true
     }
