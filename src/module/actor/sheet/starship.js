@@ -405,6 +405,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         if (!this.options.editable) return;
 
+        // Crew Tab
+        html.find('.crew-view').click(event => this._onActorView(event));
+
         html.find('.crew-delete').click(this._onRemoveFromCrew.bind(this));
 
         let handler = ev => this._onDragCrewStart(ev);
@@ -635,14 +638,20 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         event.preventDefault();
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
-        const role = this.actor.getCrewRoleForActor(actorId);
-        if (role) {
-            const crewData = duplicate(this.actor.data.data.crew);
-            crewData[role].actorIds = crewData[role].actorIds.filter(x => x !== actorId);
-            await this.actor.update({
-                "data.crew": crewData
-            });
-        }
+        this.actor.removeFromCrew(actorId);
+    }
+
+    /**
+     * Opens the sheet of a crew member.
+     *
+     * @param {Event} event The originating click event
+     */
+    async _onActorView(event) {
+        event.preventDefault();
+
+        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        let actor = game.actors.get(actorId);
+        actor.sheet.render(true);
     }
 
     /**

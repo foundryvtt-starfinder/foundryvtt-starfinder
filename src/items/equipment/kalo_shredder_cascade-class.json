@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>Favored by the much-romanticized kalo hunters of Kalo-Mahoi, kalo shredders fire razor-sharp flechettes with nearly silent magnetism. The gun&rsquo;s distinctive organic design is grown from magnetic coral that grants you a +2 bonus to KAC against disarm combat maneuvers.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "PW",
+    "source": "PW pg. 192",
     "type": "",
     "quantity": 1,
     "bulk": "1",
@@ -16,9 +16,27 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 36,
+        "max": "36"
+      },
+      "hardness": {
+        "value": "19"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -42,19 +60,18 @@
       "per": ""
     },
     "uses": {
-      "value": 1,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
-    "chatFlavor": "Analog, automatic, underwater",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        "1d6"
-      ],
-      "effect": "Bleed"
+      "parts": [],
+      "effect": "Bleed 1d6"
     },
     "damage": {
       "parts": [
@@ -67,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -77,16 +94,43 @@
     },
     "usage": {
       "value": 1,
-      "per": "Flechettes"
+      "per": "shot"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 7,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "longA",
     "weaponCategory": "projectile",
     "special": "",
     "properties": {
       "one": false,
       "two": true,
-      "amm": true,
+      "amm": false,
       "analog": true,
       "archaic": false,
       "automatic": true,
@@ -165,30 +209,18 @@
       "throttle": false,
       "underwater": true,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 7,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/equipment/weapons/diasporan-rifle-tactical.jpg",
+  "effects": [],
   "_id": "XEZi8Tbpf8ujO4Gi"
 }

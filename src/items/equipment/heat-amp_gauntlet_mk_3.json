@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>Quorlus have developed gauntlets that store and amplify ambient heat, unleashing it in hand-to-hand combat. Notorious for their use of these weapons, quorlu infiltrators and sappers also use heat-amp gauntlets to start fires to hinder their enemies.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AA2",
+    "source": "AA2 pg. 105",
     "type": "",
     "quantity": 1,
     "bulk": "1",
@@ -16,9 +16,27 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": null,
+        "max": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "ac": {
+        "value": ""
+      }
+    },
     "activation": {
       "type": "none",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -37,32 +55,28 @@
     },
     "range": {
       "value": null,
-      "units": "ft",
+      "units": "touch",
       "additional": "",
       "per": ""
     },
     "uses": {
-      "value": 1,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Powered",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "2d6",
-          "fire"
-        ]
-      ],
-      "effect": "Burn"
+      "parts": [],
+      "effect": "Burn 2d6"
     },
     "damage": {
       "parts": [
         [
-          "5d6 + @mod",
+          "5d6 + @abilities.str.mod",
           "bludgeoning+fire"
         ]
       ]
@@ -70,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -80,16 +94,43 @@
     },
     "usage": {
       "value": 1,
-      "per": "Battery charge"
+      "per": "shot"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 12,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
     "weaponCategory": "flame",
     "special": "",
     "properties": {
       "one": true,
       "two": false,
-      "amm": true,
+      "amm": false,
       "analog": false,
       "archaic": false,
       "automatic": false,
@@ -168,30 +209,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 12,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
+  "img": "icons/equipment/hand/gauntlet-armored-red-gold.webp",
+  "effects": [],
   "_id": "nv2y9jxgidus4L1j"
 }

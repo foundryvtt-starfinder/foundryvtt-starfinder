@@ -63,6 +63,20 @@ export default function (engine) {
             };
         }
 
+        data.currency = mergeObject(data.currency || {}, {
+            upb: 0
+        }, {overwrite: false});
+
+        /** If galactic trade is enabled, allow starship sheets to track unspent BPs. */
+        const isGalacticTradeEnabled = game.settings.get('sfrpg', 'enableGalacticTrade');
+        if (isGalacticTradeEnabled) {
+            data.currency = mergeObject(data.currency, {
+                bp: 0
+            }, {overwrite: false});
+        } else if (data.currency?.bp !== null) {
+            delete data.currency.bp;
+        }
+
         const tierToBuildpoints = {
             "1/4": 25,
             "0.25": 25,
@@ -96,6 +110,11 @@ export default function (engine) {
             max: tierToBuildpoints[data.details.tier],
             tooltip: []
         };
+
+        /** If galactic trade is enabled, max spent BP per tier is 5% higher. */
+        if (isGalacticTradeEnabled) {
+            data.attributes.bp.max = Math.floor(data.attributes.bp.max * 1.05);
+        }
 
         data.attributes.power = {
             value: 0,

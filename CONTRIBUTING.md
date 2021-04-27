@@ -87,7 +87,7 @@ There is no Foundry workflow for this, and this is going to get a little more te
 3. Search the entire `src/items` directory for files containing that ID.
     1. If no results are found, no-one was referencing this item directly, and you can safely delete the JSON file.
     2. If results are found, you will have to remove all references to the item from the referencing items.
-4. Update the compendium pack files, by running the following command: `npm run cook`
+4. Update the compendium pack files, by running the following command: `npm run cook`. Alternately you can run `npm run cookNoFormattingCheck` to only cook the files, and skip validation steps. This should only be done if you need to quickly update the data and are sure of it's validity.
 8. Restart Foundry.
 6. Check in Foundry if the compendium is updated properly.
 7. Submit pull request if everything's great. :-)
@@ -108,4 +108,5 @@ Items have a source field, and this source field should be filled in. There is a
 | Alien Archive 2 | AA2 pg. x | AA2 pg. 123 |
 | Alien Archive 3 | AA3 pg. x | AA3 pg. 123 |
 | Alien Archive 4 | AA4 pg. x | AA4 pg. 123 |
-| Adventure path books | AP #x pg. y | AP #03 pg. 58 |
+| Adventure path books | AP #x pg. y | AP #3 pg. 58 |
+| Starfinder Society | SFS #x-y pg. z | SFS #1-2 pg. 23 |

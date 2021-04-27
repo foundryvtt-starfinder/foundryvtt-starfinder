@@ -1,17 +1,13 @@
 {
-  "name": "Plasma Claw, Organic",
-  "permission": {
-    "default": 0,
-    "umHu8DFnCrMQVZ37": 3
-  },
+  "name": "Plasma claw, organic",
   "type": "weapon",
   "data": {
     "description": {
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">The Xenowardens bioengineered these large arthropod claws based on a creature from a lost world in the Vast—the claws create a burst of plasma as they snap shut. The organic plasma claw and biodynamic plasma claw models function most similarly to the original creature. Other manufacturers have created the slightly different electrocellular and synthecite models, which are less powerful versions of the two earlier models.</span></p>\n<h3 class=\"framing\"><strong>Plasma Weapons</strong></h3>\n<hr>\n<p>Superheated or electromagnetically charged gas becomes ionized plasma, which plasma weapons emit in a controlled blast. Ionized plasma deals both electricity and fire damage, tearing through organic flesh and metal alike. Plasma beams can be projected, as from a gun, or maintained in a steady beam with a powerful magnetic field, as the blade of a melee weapon.<br><br>Followers of Sarenrae popularized terms for the different intensities of plasma swords based on the heat they emit. The hottest, deadliest plasma weapon is a blue star, followed in descending order by white star, yellow star, red star, and finally tactical plasma weapons.</p>",
+      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">The Xenowardens bioengineered these large arthropod claws based on a creature from a lost world in the Vast&mdash;the claws create a burst of plasma as they snap shut. The organic plasma claw and biodynamic plasma claw models function most similarly to the original creature. Other manufacturers have created the slightly different electrocellular and synthecite models, which are less powerful versions of the two earlier models.</span></p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "Armory",
+    "source": "AR pg. 15",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -20,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 45,
+        "max": "45"
+      },
+      "hardness": {
+        "value": "25"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -35,7 +49,7 @@
     },
     "area": {
       "value": null,
-      "units": null,
+      "units": "none",
       "shape": "",
       "effect": ""
     },
@@ -46,10 +60,11 @@
       "per": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "dex",
     "actionType": "rwak",
     "attackBonus": 0,
@@ -62,14 +77,14 @@
       "parts": [
         [
           "2d6",
-          "electricity"
+          "electricity+fire"
         ]
       ]
     },
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "descriptors": [],
@@ -79,7 +94,35 @@
     },
     "usage": {
       "value": 8,
-      "per": "round"
+      "per": "shot"
+    },
+    "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 10,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "subtype": "",
+          "amount": 1,
+          "acceptsType": [
+            "goods"
+          ],
+          "weightMultiplier": 1,
+          "weightProperty": "",
+          "affectsEncumbrance": true
+        }
+      ],
+      "isOpen": true
     },
     "weaponType": "smallA",
     "weaponCategory": "plasma",
@@ -110,26 +153,74 @@
       "stun": false,
       "thrown": false,
       "trip": false,
-      "unwieldy": false
+      "unwieldy": false,
+      "aeon": false,
+      "antibiological": false,
+      "aurora": false,
+      "breach": false,
+      "breakdown": false,
+      "cluster": false,
+      "conceal": false,
+      "deconstruct": false,
+      "deflect": false,
+      "double": false,
+      "drainCharge": false,
+      "echo": false,
+      "extinguish": false,
+      "feint": false,
+      "fiery": false,
+      "firstArc": false,
+      "flexibleLine": false,
+      "force": false,
+      "freeHands": false,
+      "fueled": false,
+      "grapple": false,
+      "gravitation": false,
+      "guided": false,
+      "harrying": false,
+      "holyWater": false,
+      "hybrid": false,
+      "ignite": false,
+      "indirect": false,
+      "integrated": false,
+      "living": true,
+      "lockdown": false,
+      "mind-affecting": false,
+      "mine": false,
+      "mire": false,
+      "modal": false,
+      "necrotic": false,
+      "polarize": false,
+      "polymorphic": false,
+      "professional": false,
+      "punchGun": false,
+      "radioactive": false,
+      "recall": false,
+      "regrowth": false,
+      "relic": false,
+      "reposition": false,
+      "shape": false,
+      "shells": false,
+      "shield": false,
+      "subtle": false,
+      "sunder": false,
+      "swarm": false,
+      "tail": false,
+      "teleportive": false,
+      "thought": false,
+      "throttle": false,
+      "unbalancing": false,
+      "underwater": false,
+      "variantBoost": false,
+      "wideLine": false
     },
     "proficient": false,
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 10,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
+    "abilityMods": {
+      "parts": []
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/plasma-claw-organic.jpg",
+  "img": "systems/sfrpg/icons/equipment/weapons/plasma-claw-electocellular.jpg",
+  "effects": [],
   "_id": "Z6ktq1UkVCKM0IMq"
 }

@@ -126,32 +126,47 @@ export class ItemSFRPG extends Item {
     }
 
     _getSaveLabel(save, actorData, itemData) {
-        if (!save?.type || !save?.dc) return "";
-
-        let dcFormula = save.dc.toString();
-        if (dcFormula) {
-            const rollContext = new RollContext();
-            rollContext.addContext("item", this, itemData);
-            rollContext.setMainContext("item");
-            if (this.actor && this.actor.data) {
-                rollContext.addContext("owner", this.actor);
-                rollContext.setMainContext("owner");
-                
-                this.actor.setupRollContexts(rollContext);
+        if (!save?.type) return "";
+        
+        let dcFormula = save.dc?.toString();
+        if (!dcFormula) {
+            const ownerKeyAbilityId = this.actor?.data.data.attributes.keyability;
+            const itemKeyAbilityId = this.data.data.ability;
+            const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
+            if (abilityKey) {
+                if (this.data.type === "spell") {
+                    dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
+                } else if (this.data.type === "feat") {
+                    dcFormula = `10 + @owner.details.level.value + @owner.abilities.${abilityKey}.mod`;
+                } else {
+                    dcFormula = `10 + floor(@item.level / 2) + @owner.abilities.${abilityKey}.mod`;
+                }
             }
-    
-            const rollResult = DiceSFRPG.createRoll({
-                rollContext: rollContext,
-                rollFormula: dcFormula,
-                mainDie: 'd0',
-                dialogOptions: { skipUI: true }
-            });
-
-            const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
-            return returnValue;
-        } else {
-            return `DC ${save.dc || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+            
+            if (!dcFormula) {
+                return "";
+            }
         }
+
+        const rollContext = new RollContext();
+        rollContext.addContext("item", this, itemData);
+        rollContext.setMainContext("item");
+        if (this.actor && this.actor.data) {
+            rollContext.addContext("owner", this.actor);
+            rollContext.setMainContext("owner");
+        }
+
+        this.actor?.setupRollContexts(rollContext);
+    
+        const rollResult = DiceSFRPG.createRoll({
+            rollContext: rollContext,
+            rollFormula: dcFormula,
+            mainDie: 'd0',
+            dialogOptions: { skipUI: true }
+        });
+
+        const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+        return returnValue;
     }
 
     /**
@@ -244,26 +259,27 @@ export class ItemSFRPG extends Item {
         const equippableTypes = ["weapon", "equipment", "shield"];
         if (data.hasOwnProperty("equipped") && equippableTypes.includes(this.data.type)) {
             props.push(
-                data.equipped ? "Equipped" : "Not Equipped",
-                data.proficient ? "Proficient" : "Not Proficient",
+                {name: data.equipped ? "Equipped" : "Not Equipped", tooltip: null },
+                {name: data.proficient ? "Proficient" : "Not Proficient", tooltip: null }
             );
         }
 
         // Ability activation properties
         if (data.hasOwnProperty("activation")) {
             props.push(
-                labels.target,
-                labels.area,
-                labels.activation,
-                labels.range,
-                labels.duration
+                {name: labels.target, tooltip: null },
+                {name: labels.area, tooltip: null },
+                {name: labels.activation, tooltip: null },
+                {name: labels.range, tooltip: null },
+                {name: labels.duration, tooltip: null }
             );
         }
 
         if (data.hasOwnProperty("capacity")) {
-            props.push(
-                labels.capacity
-            );
+            props.push({
+                name: labels.capacity,
+                tooltip: null
+            });
         }
 
         if (this.data.type === "container") {
@@ -277,12 +293,15 @@ export class ItemSFRPG extends Item {
 
                 const wealthString = new Intl.NumberFormat().format(wealth);
                 const wealthProperty = game.i18n.format("SFRPG.CharacterSheet.Inventory.ContainedWealth", {wealth: wealthString});
-                props.push(wealthProperty);
+                props.push({
+                    name: wealthProperty,
+                    tooltip: null
+                });
             }
         }
 
         // Filter properties and return
-        data.properties = props.filter(p => !!p);
+        data.properties = props.filter(p => !!p && !!p.name);
         return data;
     }
 
@@ -320,9 +339,9 @@ export class ItemSFRPG extends Item {
      */
     _equipmentChatData(data, labels, props) {
         props.push(
-            CONFIG.SFRPG.armorTypes[data.armor.type],
-            labels.eac || null,
-            labels.kac || null
+            {name: CONFIG.SFRPG.armorTypes[data.armor.type], tooltip: null},
+            {name: labels.eac || null, tooltip: null},
+            {name: labels.kac || null, tooltip: null}
         );
     }
 
@@ -334,9 +353,10 @@ export class ItemSFRPG extends Item {
      */
     _weaponChatData(data, labels, props) {
         props.push(
-            CONFIG.SFRPG.weaponTypes[data.weaponType],
+            {name: CONFIG.SFRPG.weaponTypes[data.weaponType], tooltip: null},
             ...Object.entries(data.properties).filter(e => e[1] === true)
-                .map(e => CONFIG.SFRPG.weaponProperties[e[0]])
+                .map(e => ({name: CONFIG.SFRPG.weaponProperties[e[0]], tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]})
+                )
         );
     }
 
@@ -348,23 +368,10 @@ export class ItemSFRPG extends Item {
      */
     _consumableChatData(data, labels, props) {
         props.push(
-            CONFIG.SFRPG.consumableTypes[data.consumableType],
-            data.uses.value + "/" + data.uses.max + " Charges"
+            {name: CONFIG.SFRPG.consumableTypes[data.consumableType], tooltip: null},
+            {name: data.uses.value + "/" + data.uses.max + " Charges", tooltip: null}
         );
         data.hasCharges = data.uses.value >= 0;
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Prepare chat card data for tool type items
-     * @private
-     */
-    _toolChatData(data, labels, props) {
-        props.push(
-            CONFIG.SFRPG.abilities[data.ability] || null,
-            CONFIG.SFRPG.proficiencyLevels[data.proficient || 0]
-        );
     }
 
     /* -------------------------------------------- */
@@ -375,8 +382,8 @@ export class ItemSFRPG extends Item {
      */
     _goodsChatData(data, labels, props) {
         props.push(
-            "Goods",
-            data.bulk ? `Bulk ${data.bulk}` : null
+            {name: "Goods", tooltip: null},
+            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null
         );
     }
 
@@ -388,9 +395,9 @@ export class ItemSFRPG extends Item {
      */
     _technologicalChatData(data, labels, props) {
         props.push(
-            "Technological",
-            data.bulk ? `Bulk ${data.bulk}` : null,
-            data.hands ? `Hands ${data.hands}` : null
+            {name: "Technological", tooltip: null},
+            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null,
+            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : null
         );
     }
 
@@ -402,9 +409,9 @@ export class ItemSFRPG extends Item {
      */
     _hybridChatData(data, labels, props) {
         props.push(
-            "Hybrid",
-            data.bulk ? `Bulk ${data.bulk}` : null,
-            data.hands ? `Hands ${data.hands}` : null
+            {name: "Hybrid", tooltip: null},
+            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null,
+            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : null
         );
     }
 
@@ -417,8 +424,8 @@ export class ItemSFRPG extends Item {
     _magicChatData(data, labels, props) {
         props.push(
             "Magic",
-            data.bulk ? `Bulk ${data.bulk}` : null,
-            data.hands ? `Hands ${data.hands}` : null
+            data.bulk ? {name: `Bulk ${data.bulk}`, tooltip: null} : null,
+            data.hands ? {name: `Hands ${data.hands}`, tooltip: null} : null
         );
     }
 
@@ -438,17 +445,17 @@ export class ItemSFRPG extends Item {
         }
 
         props.push(
-            "Armor Upgrade",
-            data.slots ? `Slots ${data.slots}` : null,
-            `Allowed armor ${armorType}`
+            {name: "Armor Upgrade", tooltip: null},
+            data.slots ? {name: `Slots ${data.slots}`, tooltip: null} : null,
+            {name: `Allowed armor ${armorType}`, tooltip: null}
         );
     }
 
     _augmentationChatData(data, labels, props) {
         props.push(
-            "Augmentation",
-            data.type ? CONFIG.SFRPG.augmentationTypes[data.type] : null,
-            data.system ? CONFIG.SFRPG.augmentationSytems[data.system] : null
+            {name:"Augmentation", tooltip: null},
+            data.type ? {name: CONFIG.SFRPG.augmentationTypes[data.type], tooltip: null} : null,
+            data.system ? {name: CONFIG.SFRPG.augmentationSytems[data.system], tooltip: null} : null
         );
     }
 
@@ -460,19 +467,19 @@ export class ItemSFRPG extends Item {
      */
     _fusionChatData(data, labels, props) {
         props.push(
-            "Weapon Fusion",
-            data.level ? `Level ${data.level}` : null
+            {name: "Weapon Fusion", tooltip: null},
+            data.level ? {name: `Level ${data.level}`, tooltip: null} : null
         );
     }
 
     _starshipWeaponChatData(data, labels, props) {
         props.push(
-            "Starship Weapon",
-            data.weaponType ? CONFIG.SFRPG.starshipWeaponTypes[data.weaponType] : null,
-            data.class ? CONFIG.SFRPG.starshipWeaponClass[data.class] : null,
-            data.range ? CONFIG.SFRPG.starshipWeaponRanges[data.range] : null,
-            data.mount.mounted ? game.i18n.localize("SFRPG.Items.ShipWeapon.Mounted") : game.i18n.localize("SFRPG.Items.ShipWeapon.NotMounted"),
-            data.speed > 0 ? game.i18n.format("SFRPG.Items.ShipWeapon.Speed", {speed: data.speed}) : null
+            {name: "Starship Weapon", tooltip: null},
+            data.weaponType ? {name: CONFIG.SFRPG.starshipWeaponTypes[data.weaponType], tooltip: null} : null,
+            data.class ? {name: CONFIG.SFRPG.starshipWeaponClass[data.class], tooltip: null} : null,
+            data.range ? {name: CONFIG.SFRPG.starshipWeaponRanges[data.range], tooltip: null} : null,
+            data.mount.mounted ? {name: game.i18n.localize("SFRPG.Items.ShipWeapon.Mounted"), tooltip: null} : {name: game.i18n.localize("SFRPG.Items.ShipWeapon.NotMounted"), tooltip: null},
+            data.speed > 0 ? {name: game.i18n.format("SFRPG.Items.ShipWeapon.Speed", {speed: data.speed}), tooltip: null} : null
         );
     }
 
@@ -487,11 +494,11 @@ export class ItemSFRPG extends Item {
         let alignedBonus = data.proficient ? data.bonus.aligned.toString() : "0";
 
         props.push(
-            game.i18n.localize("SFRPG.Items.Shield.Shield"),
-            game.i18n.format("SFRPG.Items.Shield.AcMaxDex", { maxDex: data.dex.signedString() }),
-            game.i18n.format("SFRPG.Items.Shield.ArmorCheck", { acp: data.acp.signedString() }),
-            game.i18n.format("SFRPG.Items.Shield.Bonuses", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),
-            data.proficient ? game.i18n.localize("SFRPG.Items.Proficient") : game.i18n.localize("SFRPG.Items.NotProficient")
+            {name: game.i18n.localize("SFRPG.Items.Shield.Shield"), tooltip: null},
+            {name: game.i18n.format("SFRPG.Items.Shield.AcMaxDex", { maxDex: data.dex.signedString() }),  tooltip: null},
+            {name: game.i18n.format("SFRPG.Items.Shield.ArmorCheck", { acp: data.acp.signedString() }),  tooltip: null},
+            {name: game.i18n.format("SFRPG.Items.Shield.Bonuses", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),  tooltip: null},
+            data.proficient ? {name: game.i18n.localize("SFRPG.Items.Proficient"), tooltip: null} : {name: game.i18n.localize("SFRPG.Items.NotProficient"), tooltip: null}
         );
     }
 
@@ -507,12 +514,11 @@ export class ItemSFRPG extends Item {
 
         // Spell saving throw text
         const abl = ad.attributes.keyability || "int";
-        if (this.hasSave && !data.save.dc) data.save.dc = `10 + @owner.details.level.value + @owner.abilities.${abl}.mod`;
         labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Spell properties
         props.push(
-            labels.level
+            {name: labels.level, tooltip: null}
         );
     }
 
@@ -526,29 +532,47 @@ export class ItemSFRPG extends Item {
 
         // Spell saving throw text
         const abl = data.ability || ad.attributes.keyability || "str";
-        if (this.hasSave && !data.save.dc) data.save.dc = `10 + @owner.details.level.value + @owner.abilities.${abl}.mod`;
         labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Feat properties
         props.push(
-            data.requirements
+            {name: data.requirements, tooltip: null}
         );
     }
 
     _themeChatData(data, labels, props) {
         props.push(
-            "Theme",
-            data.abilityMod.ability ? `Ability ${CONFIG.SFRPG.abilities[data.abilityMod.ability]}` : null,
-            data.skill ? `Skill ${CONFIG.SFRPG.skills[data.skill]}` : null
+            {name: "Theme", tooltip: null},
+            data.abilityMod.ability ? {name: `Ability ${CONFIG.SFRPG.abilities[data.abilityMod.ability]}`, tooltip: null} : null,
+            data.skill ? {name: `Skill ${CONFIG.SFRPG.skills[data.skill]}`, tooltip: null} : null
         );
     }
 
     _raceChatData(data, labels, props) {
         props.push(
-            "Race",
-            data.type ? data.type : null,
-            data.subtype ? data.subtype : null
+            {name: "Race", tooltip: null},
+            data.type ? {name: data.type, tooltip: null} : null,
+            data.subtype ? {name: data.subtype, tooltip: null} : null
         );
+    }
+
+    _vehicleAttackChatData(data, label, props) {
+        props.push(
+            data.ignoresHardness ? game.i18n.localize("SFRPG.VehicleAttackSheet.Details.IgnoresHardness") + " " + data.ignoresHardness : null
+        );
+    }
+
+    _vehicleSystemChatData(data, label, props) {
+
+        if (data.senses &&  data.senses.usedForSenses == true) {
+            // We deliminate the senses by `,` and present each sense as a separate property
+            let sensesDeliminated = data.senses.senses.split(",");
+            for (let index = 0; index < sensesDeliminated.length; index++)
+            {
+                var sense = sensesDeliminated[index];
+                props.push(sense);
+            }
+        }
     }
 
     /* -------------------------------------------- */

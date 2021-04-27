@@ -5,24 +5,35 @@
         <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
 
         <div class="header-details flexrow">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
-            </h1>
-
-            <div class="item-subtitle">
-                <h4 class="item-type">{{itemType}}</h4>
-                <span class="item-status">{{itemStatus}}</span>
+            <div class="header-background flexrow">
+                <h1 class="charname" style="flex: auto;">
+                    <input name="name" type="text" value="{{item.name}}" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.ItemNameTooltip" }}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
+                </h1>
+                <div class="item-subtitle">
+                    <h4 data-tippy-content="Item Type" class="item-type">{{itemType}}</h4>
+                    <span data-tippy-content="Item Status" class="item-status">{{itemStatus}}</span>
+                </div>
             </div>
-
-            <ul class="summary">
+    
+            {{!-- Item Summary --}}
+            <ul class="summary flexrow">
+                {{#if category.enabled}}
+                <li class="short" data-tippy-content="{{localize category.tooltip}}">
+                    <label>{{localize category.value}}</label>
+                </li>
+                {{/if}}
+                <li class="wide" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                </li>
+            </ul>
+    
+            {{!-- Header Attributes --}}
+            <ul class="summary flexrow">
                 <li>
                     {{localize labels.level}}
                 </li>
                 <li>
                     {{localize labels.school}}
-                </li>
-                <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>
         </div>

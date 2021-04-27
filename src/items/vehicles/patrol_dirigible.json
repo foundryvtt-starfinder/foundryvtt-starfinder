@@ -1,0 +1,336 @@
+{
+  "name": "Patrol Dirigible",
+  "type": "vehicle",
+  "data": {
+    "conditions": {},
+    "details": {
+      "level": 7,
+      "price": 2100,
+      "description": {
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Most often found drifting through the endless skies of gas giants, a patrol dirigible provides protection for nonflying creatures.</span></p>",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "AP #24 pg. 53"
+    },
+    "crew": {
+      "useNPCCrew": false,
+      "pilot": {
+        "limit": 1,
+        "actorIds": []
+      },
+      "complement": {
+        "limit": 2,
+        "actorIds": []
+      },
+      "passenger": {
+        "limit": 12,
+        "actorIds": []
+      }
+    },
+    "hangarBay": {
+      "limit": 2,
+      "actorIds": []
+    },
+    "attributes": {
+      "size": "colossal",
+      "type": "air",
+      "dimensions": {
+        "width": "60",
+        "length": "80",
+        "height": "40"
+      },
+      "speed": {
+        "drive": "20 ft  (fly and hover)",
+        "full": "450 ft  (fly and hover)",
+        "mph": "50 mph (fly and hover)",
+        "type": ""
+      },
+      "eac": {
+        "value": 19
+      },
+      "expansionBays": {
+        "value": 2
+      },
+      "kac": {
+        "value": 21
+      },
+      "cover": "cover",
+      "hp": {
+        "value": 110,
+        "max": 110,
+        "threshold": 55
+      },
+      "hardness": 4,
+      "modifiers": {
+        "piloting": "-4",
+        "attackStopped": "0",
+        "attackMoving": "-1",
+        "attackFullSpeed": "-3"
+      },
+      "systems": [],
+      "special": [],
+      "controlSkill": "pil"
+    }
+  },
+  "flags": {},
+  "token": {
+    "flags": {},
+    "name": "Battle Chariot",
+    "displayName": 0,
+    "img": "icons/svg/mystery-man.svg",
+    "tint": null,
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 360,
+    "lightAngle": 360,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "actorId": "b82ZWHaNyShpO1G4",
+    "actorLink": false,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {},
+    "bar2": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "_id": "IFQG4V1jH9iw8fZK",
+      "name": "Collision (Ram)",
+      "type": "vehicleAttack",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "modifiers": [],
+        "damage": {
+          "parts": [
+            [
+              "2*(9d10)",
+              "bludgeoning"
+            ]
+          ]
+        },
+        "save": {
+          "type": "reflex",
+          "dc": "9",
+          "descriptor": "negate"
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 100000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "ZNQw4yfixdMSttws",
+      "name": "Collision (Run Over)",
+      "type": "vehicleAttack",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "modifiers": [],
+        "damage": {
+          "parts": [
+            [
+              "9d10",
+              "bludgeoning"
+            ]
+          ]
+        },
+        "save": {
+          "type": "reflex",
+          "dc": "9",
+          "descriptor": "half"
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 200000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "Y132g0jIjQzCBcad",
+      "name": "Autopilot",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 280",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": true,
+          "piloting": "14"
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 400000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "_id": "bQH3PoHCTObqnuj3",
+      "name": "Enhanced sensors",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "senses": {
+          "usedForSenses": true,
+          "senses": "darkvision 1 mile, sense through (vision - clouds only)"
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
+      "effects": []
+    },
+    {
+      "_id": "1NmB8xv1BU5ZMuHM",
+      "name": "Planetary comm unit",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 218",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
+      "effects": []
+    },
+    {
+      "_id": "qlTyMw6s09sdyZNY",
+      "name": "Hangar Bay (Ex)",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>A patrol dirigible provides a place for up to two Huge or smaller vehicles to be docked.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": 0
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "sort": 600000,
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    }
+  ],
+  "effects": [],
+  "_id": "IhSHGn0PeL3QngQG"
+}

@@ -456,7 +456,6 @@ export class ActorSheetSFRPG extends ActorSheet {
         updateData['data.isActive'] = desiredOutput;
 
         await item.update(updateData);
-        
         // Render the chat card template
         const templateData = {
             actor: this.actor,
@@ -718,14 +717,27 @@ export class ActorSheetSFRPG extends ActorSheet {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
+            const desiredDescription = TextEditor.enrichHTML(chatData.description.short || chatData.description.value, {});
+            let div = $(`<div class="item-summary">${desiredDescription}</div>`);
             let props = $(`<div class="item-properties"></div>`);
-            chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
+            chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
+
             div.append(props);
             li.append(div.hide());
-            div.slideDown(200);
+
+            div.slideDown(200, function() {
+                // On completion enable tippy tooltips for the new elements
+                tippy('[data-tippy-content]', {
+                    allowHTML: true,
+                    arrow: false,
+                    placement: 'top-start',
+                    duration: [500, null],
+                    delay: [800, null]
+                });
+            });
         }
         li.toggleClass('expanded');
+
     }
 
     async _onItemSplit(event) {
@@ -995,8 +1007,8 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (sidebarItem) {
                 const addedItemResult = await targetActor.createOwnedItem(duplicate(sidebarItem.data));
                 if (addedItemResult.length > 0) {
-                    const addedItem = addedItemResult[0];
-                    
+                    const addedItem = targetActor.getOwnedItem(addedItemResult[0]._id);
+
                     if (targetContainer) {
                         let newContents = [];
                         if (targetContainer.data.data.container?.contents) {

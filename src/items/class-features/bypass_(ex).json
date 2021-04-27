@@ -65,7 +65,7 @@
     "modifiers": [
       {
         "name": "Bypass",
-        "modifier": "1 + floor((@details.level.value - 1) / 4) + floor(@details.level.value / 20)",
+        "modifier": "1 + ceil(max(0, @classes.mechanic.levels - 4) / 4) + max(0, floor(@classes.mechanic.levels / 20))",
         "type": "insight",
         "effectType": "skill",
         "valueAffected": "com",
@@ -79,7 +79,7 @@
       },
       {
         "name": "Bypass",
-        "modifier": "1 + floor((@details.level.value - 1) / 4) + floor(@details.level.value / 20)",
+        "modifier": "1 + ceil(max(0, @classes.mechanic.levels - 4) / 4) + max(0, floor(@classes.mechanic.levels / 20))",
         "type": "insight",
         "effectType": "skill",
         "valueAffected": "eng",

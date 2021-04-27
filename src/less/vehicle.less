@@ -58,9 +58,36 @@
     }
 
     .passenger-action {
-        flex: 0 0 50%;
+      flex: 0 0 25%;
 
-        .pilotPilotingSkill, .passengerPilotingSkill {
+      .passengerPilotingSkill {
+          width: auto;
+          background: @sfrpgBlue;
+          color: #fff;
+          cursor: pointer;
+
+          &:hover, &:focus{
+              box-shadow: 0 0 5px @sfrpgBlue;
+          }
+      }
+
+      .pilotPilotingSkill {
+        width: auto;
+        display: block;
+        background: url("/icons/svg/d20-grey.svg") no-repeat 50% 50%;
+        background-size: 16px;
+        margin: 0 0.5em;
+
+        &:hover, &:focus{
+          background-image: url("/icons/svg/d20-black.svg")
+        }
+      }
+    }
+
+    .vehicle-system-action {
+        flex: 0 0 25%;
+
+        .roll-piloting {
             width: auto;
             background: @sfrpgBlue;
             color: #fff;
@@ -71,4 +98,5 @@
             }
         }
     }
+
 }

@@ -35,7 +35,7 @@
 
         <ol class="properties-list">
             {{#each itemProperties}}
-            <li>{{this}}</li>
+            <li {{#if this.tooltip}} data-tippy-content="{{ this.tooltip }}"{{/if}}>{{ this.name }}</li>
             {{/each}}
         </ol>
     </div>
@@ -44,6 +44,7 @@
     <div class="flexcol">
         <nav class="sheet-subnavigation descTabs" data-group="descriptionTabs">
             <a class="item active{{#if data.description.value}} highlight{{/if}}" data-tab="description">{{localize "SFRPG.Description"}}</a>
+            <a class="item {{#if data.description.short}} highlight{{/if}}" data-tab="descriptionShort">{{localize "SFRPG.DescriptionShort"}}</a>
             {{#if isGM}}
             <a class="item{{#if data.description.gmNotes}} highlight{{/if}}" data-tab="gmNotes">{{localize "SFRPG.ActorSheet.Biography.TabGM"}} {{#if data.description.gmNotes}} (!){{/if}}</a>
             {{/if}}
@@ -52,6 +53,9 @@
         <section class="desc-body">
             <div class="tab flexrow" data-group="descriptionTabs" data-tab="description">
                 {{editorPlus content=data.description.value target="data.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+            </div>
+            <div class="tab flexrow" data-group="descriptionTabs" data-tab="descriptionShort">
+                {{editorPlus content=data.description.short target="data.description.short" button=true owner=owner editable=editable rolls=false rollData=data}}
             </div>
             {{#if isGM}}
             <div class="tab flexrow" data-group="descriptionTabs" data-tab="gmNotes">

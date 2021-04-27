@@ -1,0 +1,1268 @@
+{
+  "name": "Ultimate Hover Carrier",
+  "type": "vehicle",
+  "data": {
+    "conditions": {},
+    "details": {
+      "level": 20,
+      "price": 3750000,
+      "description": {
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Used by many planetary military forces for undersea engagements, a stealth sub features a small promenade along its dorsal surface for use when it surfaces.</span></p>",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "AR pg. 139"
+    },
+    "crew": {
+      "useNPCCrew": false,
+      "pilot": {
+        "limit": 1,
+        "actorIds": []
+      },
+      "complement": {
+        "limit": 59,
+        "actorIds": []
+      },
+      "passenger": {
+        "limit": 1000,
+        "actorIds": []
+      }
+    },
+    "hangarBay": {
+      "limit": 2,
+      "actorIds": []
+    },
+    "attributes": {
+      "size": "colossal",
+      "type": "landAW",
+      "dimensions": {
+        "width": "120",
+        "length": "800",
+        "height": "65"
+      },
+      "speed": {
+        "drive": "10 ft",
+        "full": "350 ft",
+        "mph": "40 mph (fly and hover)",
+        "type": ""
+      },
+      "eac": {
+        "value": 35
+      },
+      "expansionBays": {
+        "value": 8
+      },
+      "kac": {
+        "value": 37
+      },
+      "cover": "total",
+      "hp": {
+        "value": 465,
+        "max": 465,
+        "threshold": 232
+      },
+      "hardness": 20,
+      "modifiers": {
+        "piloting": "-5",
+        "attackStopped": "0",
+        "attackMoving": "-5",
+        "attackFullSpeed": "-7"
+      },
+      "systems": [],
+      "special": []
+    }
+  },
+  "flags": {},
+  "token": {
+    "flags": {},
+    "name": "Motorcycle",
+    "displayName": 0,
+    "img": "icons/svg/mystery-man.svg",
+    "tint": null,
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 360,
+    "lightAngle": 360,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "actorId": "dd8lcZBDOpoddMmp",
+    "actorLink": false,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {},
+    "bar2": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Collision (Ram)",
+      "type": "vehicleAttack",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "modifiers": [],
+        "damage": {
+          "parts": [
+            [
+              "2*(28d10)",
+              "bludgeoning"
+            ]
+          ]
+        },
+        "save": {
+          "type": "reflex",
+          "dc": "19",
+          "descriptor": "negate"
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "name": "Collision (Run Over)",
+      "type": "vehicleAttack",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "modifiers": [],
+        "damage": {
+          "parts": [
+            [
+              "28d10",
+              "bludgeoning"
+            ]
+          ]
+        },
+        "save": {
+          "type": "reflex",
+          "dc": "19",
+          "descriptor": "half"
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "name": "Unlimited comm unit",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>Comm units that function at system-wide and unlimited ranges aren&rsquo;t as portable; they include built-in generators that provide the necessary amount of power.&nbsp;</p>\n<p>&nbsp;</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 218",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
+      "effects": []
+    },
+    {
+      "name": "Autopilot",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 280",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": true,
+          "piloting": "34"
+        },
+        "canBeActivated": true,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "effects": []
+    },
+    {
+      "name": "Enhanced sensors",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": "0"
+        },
+        "senses": {
+          "usedForSenses": true,
+          "senses": "darkvision 20 miles."
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
+      "effects": []
+    },
+    {
+      "name": "Reaction cannon, paragon",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>An ancient yet still popular vesk weapon, the reaction cannon uses advanced materials and technology to redirect the recoil of a projectile back into the projectile itself, making it an extremely damaging heavy weapon.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 178",
+        "type": "",
+        "quantity": 1,
+        "bulk": "3",
+        "price": 810000,
+        "level": 20,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 105,
+            "max": "105"
+          },
+          "hardness": {
+            "value": "45"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 100,
+          "units": "ft",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "dex",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "12d10",
+              "piercing"
+            ]
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "capacity": {
+          "value": 6,
+          "max": 6
+        },
+        "usage": {
+          "value": 1,
+          "per": "shot"
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 20,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "subtype": "",
+              "amount": 1,
+              "acceptsType": [
+                "goods"
+              ],
+              "weightMultiplier": 1,
+              "weightProperty": "",
+              "affectsEncumbrance": true
+            }
+          ],
+          "isOpen": true
+        },
+        "weaponType": "heavy",
+        "weaponCategory": "projectile",
+        "special": "",
+        "properties": {
+          "one": false,
+          "two": true,
+          "amm": false,
+          "analog": false,
+          "archaic": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": false,
+          "injection": false,
+          "line": false,
+          "living": false,
+          "mind-affecting": false,
+          "nonlethal": false,
+          "operative": false,
+          "penetrating": true,
+          "powered": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "thrown": false,
+          "trip": false,
+          "unwieldy": false,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "lockdown": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false,
+          "hybrid": false,
+          "regrowth": false,
+          "unbalancing": false,
+          "shatter": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/weapons/advanced_reaction_cannon.jpg",
+      "effects": [],
+      "storage": {
+        "type": [
+          "slot",
+          "slot"
+        ],
+        "subtype": [
+          "fusion",
+          ""
+        ],
+        "amount": [
+          "20",
+          "1"
+        ],
+        "weightProperty": [
+          "level",
+          ""
+        ],
+        "affectsEncumbrance": [
+          true,
+          true
+        ]
+      },
+      "weapon": [
+        false,
+        false
+      ],
+      "equipment": [
+        false,
+        false
+      ],
+      "consumable": [
+        false,
+        false
+      ],
+      "goods": [
+        false,
+        true
+      ],
+      "container": [
+        false,
+        false
+      ],
+      "hybrid": [
+        false,
+        false
+      ],
+      "magic": [
+        false,
+        false
+      ],
+      "technological": [
+        false,
+        false
+      ],
+      "fusion": [
+        true,
+        false
+      ],
+      "upgrade": [
+        false,
+        false
+      ],
+      "spell": [
+        false,
+        false
+      ],
+      "augmentation": [
+        false,
+        false
+      ],
+      "shield": [
+        false,
+        false
+      ],
+      "weaponAccessory": [
+        false,
+        false
+      ],
+      "vehicleAttack": [
+        false,
+        false
+      ],
+      "vehicleSystem": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Shock caster, tempest",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>Shock casters fire a blast of electrical energy that explodes when it impacts, creating an electrical storm that can damage and stun anyone within its radius.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 178",
+        "type": "",
+        "quantity": 1,
+        "bulk": "2",
+        "price": 735000,
+        "level": 20,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 105,
+            "max": "105"
+          },
+          "hardness": {
+            "value": "45"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": 20,
+          "units": "ft",
+          "shape": "sphere",
+          "effect": "burst"
+        },
+        "range": {
+          "value": 40,
+          "units": "ft",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "dex",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "7d12",
+              "electricity"
+            ]
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "reflex",
+          "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
+          "descriptor": "half"
+        },
+        "descriptors": [],
+        "capacity": {
+          "value": 100,
+          "max": 100
+        },
+        "usage": {
+          "value": 10,
+          "per": "round"
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 20,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "subtype": "",
+              "amount": 1,
+              "acceptsType": [
+                "goods"
+              ],
+              "weightMultiplier": 1,
+              "weightProperty": "",
+              "affectsEncumbrance": true
+            }
+          ],
+          "isOpen": true
+        },
+        "weaponType": "heavy",
+        "weaponCategory": "shock",
+        "special": "",
+        "properties": {
+          "one": false,
+          "two": true,
+          "amm": false,
+          "analog": false,
+          "archaic": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": true,
+          "injection": false,
+          "line": false,
+          "living": false,
+          "mind-affecting": false,
+          "nonlethal": false,
+          "operative": false,
+          "penetrating": false,
+          "powered": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "thrown": false,
+          "trip": false,
+          "unwieldy": true,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "lockdown": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false,
+          "hybrid": false,
+          "regrowth": false,
+          "unbalancing": false,
+          "shatter": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/weapons/aurora_shock_caster.jpg",
+      "effects": [],
+      "storage": {
+        "type": [
+          "slot",
+          "slot"
+        ],
+        "subtype": [
+          "fusion",
+          ""
+        ],
+        "amount": [
+          "20",
+          "1"
+        ],
+        "weightProperty": [
+          "level",
+          ""
+        ],
+        "affectsEncumbrance": [
+          true,
+          true
+        ]
+      },
+      "weapon": [
+        false,
+        false
+      ],
+      "equipment": [
+        false,
+        false
+      ],
+      "consumable": [
+        false,
+        false
+      ],
+      "goods": [
+        false,
+        true
+      ],
+      "container": [
+        false,
+        false
+      ],
+      "hybrid": [
+        false,
+        false
+      ],
+      "magic": [
+        false,
+        false
+      ],
+      "technological": [
+        false,
+        false
+      ],
+      "fusion": [
+        true,
+        false
+      ],
+      "upgrade": [
+        false,
+        false
+      ],
+      "spell": [
+        false,
+        false
+      ],
+      "augmentation": [
+        false,
+        false
+      ],
+      "shield": [
+        false,
+        false
+      ],
+      "weaponAccessory": [
+        false,
+        false
+      ],
+      "vehicleAttack": [
+        false,
+        false
+      ],
+      "vehicleSystem": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Artillery laser, zenith",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Artillery lasers are heavy weapons designed to be effective against hardened targets such as vehicles and enemy bunkers.</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 177",
+        "type": "",
+        "quantity": 1,
+        "bulk": "3",
+        "price": 722000,
+        "level": 20,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 105,
+            "max": "105"
+          },
+          "hardness": {
+            "value": "45"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 150,
+          "units": "ft",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "dex",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": "Burn 5d6"
+        },
+        "damage": {
+          "parts": [
+            [
+              "9d8",
+              "fire"
+            ]
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "capacity": {
+          "value": 100,
+          "max": 100
+        },
+        "usage": {
+          "value": 5,
+          "per": "shot"
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 20,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "subtype": "",
+              "amount": 1,
+              "acceptsType": [
+                "goods"
+              ],
+              "weightMultiplier": 1,
+              "weightProperty": "",
+              "affectsEncumbrance": true
+            }
+          ],
+          "isOpen": true
+        },
+        "weaponType": "heavy",
+        "weaponCategory": "laser",
+        "special": "",
+        "properties": {
+          "one": false,
+          "two": true,
+          "amm": false,
+          "analog": false,
+          "archaic": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": false,
+          "injection": false,
+          "line": false,
+          "nonlethal": false,
+          "operative": false,
+          "penetrating": true,
+          "powered": false,
+          "qreload": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "thrown": false,
+          "trip": false,
+          "unwieldy": false,
+          "radioactive": false,
+          "subtle": false,
+          "mind-affecting": false,
+          "living": false,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "lockdown": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "unbalancing": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false,
+          "shatter": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/weapons/artillery-laser-azimuth.jpg",
+      "effects": [],
+      "storage": {
+        "type": [
+          "slot",
+          "slot"
+        ],
+        "subtype": [
+          "fusion",
+          ""
+        ],
+        "amount": [
+          "20",
+          "1"
+        ],
+        "weightProperty": [
+          "level",
+          ""
+        ],
+        "affectsEncumbrance": [
+          true,
+          true
+        ]
+      },
+      "weapon": [
+        false,
+        false
+      ],
+      "equipment": [
+        false,
+        false
+      ],
+      "consumable": [
+        false,
+        false
+      ],
+      "goods": [
+        false,
+        true
+      ],
+      "container": [
+        false,
+        false
+      ],
+      "hybrid": [
+        false,
+        false
+      ],
+      "magic": [
+        false,
+        false
+      ],
+      "technological": [
+        false,
+        false
+      ],
+      "fusion": [
+        true,
+        false
+      ],
+      "upgrade": [
+        false,
+        false
+      ],
+      "spell": [
+        false,
+        false
+      ],
+      "augmentation": [
+        false,
+        false
+      ],
+      "shield": [
+        false,
+        false
+      ],
+      "weaponAccessory": [
+        false,
+        false
+      ],
+      "vehicleAttack": [
+        false,
+        false
+      ],
+      "vehicleSystem": [
+        false,
+        false
+      ]
+    },
+    {
+      "name": "Hangar Bay (Ex)",
+      "type": "vehicleSystem",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">A hover carrier&rsquo;s hangar bay provides a place for up to 8 Huge or smaller vehicles to be docked.</span></p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "piloting": {
+          "usedAsPilot": false,
+          "piloting": 0
+        },
+        "canBeActivated": false,
+        "isActive": false,
+        "damage": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "flags": {},
+      "effects": [],
+      "img": "icons/svg/mystery-man.svg"
+    }
+  ],
+  "effects": [],
+  "_id": "woBgY9ZWRsshjbRA"
+}

@@ -122,8 +122,9 @@ SFRPG.skillProficiencyLevels = {
  * @type {Object}
  */
 SFRPG.currencies = {
-    "credit": "SFRPG.Credits",
-    "upb": "SFRPG.UPBs"
+    "credit": "SFRPG.Currencies.Credits",
+    "upb": "SFRPG.Currencies.UPBs",
+    "bp": "SFRPG.Currencies.BPs"
 };
 
 // Damage Types
@@ -159,6 +160,7 @@ SFRPG.weaponDamageTypes = {
     "acid|slashing": "SFRPG.DamageTypesAcidOrSlashing",    
     "cold": "SFRPG.DamageTypesCold",
     "cold+piercing": "SFRPG.DamageTypesColdAndPiercing",
+    "cold+slashing": "SFRPG.DamageTypesColdAndSlashing",
     "cold|fire": "SFRPG.DamageTypesColdOrFire",
     "electricity": "SFRPG.DamageTypesElectricity",
     "electricity+fire": "SFRPG.DamageTypesElectricityAndFire",
@@ -166,6 +168,7 @@ SFRPG.weaponDamageTypes = {
     "electricity+slashing": "SFRPG.DamageTypesElectricityAndSlashing",
     "force": "SFRPG.DamageTypesForce",
     "fire": "SFRPG.DamageTypesFire",
+    "fire+force": "SFRPG.DamageTypesFireAndForce",
     "fire+piercing": "SFRPG.DamageTypesFireAndPiercing",
     "fire+slashing": "SFRPG.DamageTypesFireAndSlashing",
     "fire|slashing": "SFRPG.DamageTypesFireOrSlashing",
@@ -349,6 +352,7 @@ SFRPG.weaponProperties = {
     "relic": "SFRPG.WeaponPropertiesRelic",
     "reposition": "SFRPG.WeaponPropertiesReposition",
     "shape": "SFRPG.WeaponPropertiesShape",
+    "shatter": "SFRPG.WeaponPropertiesShatter",
     "shells": "SFRPG.WeaponPropertiesShells",
     "shield": "SFRPG.WeaponPropertiesShield",
     "sniper": "SFRPG.WeaponPropertiesSniper",
@@ -367,6 +371,94 @@ SFRPG.weaponProperties = {
     "unwieldy": "SFRPG.WeaponPropertiesUnwieldy",
     "variantBoost": "SFRPG.WeaponPropertiesVariantBoost",
     "wideLine": "SFRPG.WeaponPropertiesWideLine"
+};
+
+SFRPG.weaponPropertiesTooltips = {
+    "one": "SFRPG.WeaponPropertiesOneHandedTooltip",
+    "two": "SFRPG.WeaponPropertiesTwoHandedTooltip",
+    "aeon": "SFRPG.WeaponPropertiesAeonTooltip",
+    "analog": "SFRPG.WeaponPropertiesAnalogTooltip",
+    "antibiological": "SFRPG.WeaponPropertiesAntibiologicalTooltip",
+    "archaic": "SFRPG.WeaponPropertiesArchaicTooltip",
+    "aurora": "SFRPG.WeaponPropertiesAuroraTooltip",
+    "automatic": "SFRPG.WeaponPropertiesAutomaticTooltip",
+    "blast": "SFRPG.WeaponPropertiesBlastTooltip",
+    "block": "SFRPG.WeaponPropertiesBlockTooltip",
+    "boost": "SFRPG.WeaponPropertiesBoostTooltip",
+    "breach": "SFRPG.WeaponPropertiesBreachTooltip",
+    "breakdown": "SFRPG.WeaponPropertiesBreakdownTooltip",
+    "bright": "SFRPG.WeaponPropertiesBrightTooltip",
+    "conceal": "SFRPG.WeaponsPropertiesConcealTooltip",
+    "cluster": "SFRPG.WeaponPropertiesClusterTooltip",
+    "deconstruct": "SFRPG.WeaponPropertiesDeconstructTooltip",
+    "deflect": "SFRPG.WeaponPropertiesDeflectTooltip",
+    "disarm": "SFRPG.WeaponPropertiesDisarmTooltip",
+    "double": "SFRPG.WeaponPropertiesDoubleTooltip",
+    "drainCharge": "SFRPG.WeaponPropertiesDrainChargeTooltip",
+    "echo": "SFRPG.WeaponPropertiesEchoTooltip",
+    "entangle": "SFRPG.WeaponPropertiesEntangleTooltip",
+    "explode": "SFRPG.WeaponPropertiesExplodeTooltip",
+    "extinguish": "SFRPG.WeaponPropertiesExtinguishTooltip",
+    "feint": "SFRPG.WeaponPropertiesFeintTooltip",
+    "fiery": "SFRPG.WeaponPropertiesFieryTooltip",
+    "firstArc": "SFRPG.WeaponPropertiesFirstArcTooltip",
+    "flexibleLine": "SFRPG.WeaponPropertiesFlexibleLineTooltip",
+    "force": "SFRPG.WeaponPropertiesForceTooltip",
+    "freeHands": "SFRPG.WeaponPropertiesFreeHandsTooltip",
+    "fueled": "SFRPG.WeaponPropertiesFueledTooltip",
+    "grapple": "SFRPG.WeaponPropertiesGrappleTooltip",
+    "gravitation": "SFRPG.WeaponPropertiesGravitationTooltip",
+    "guided": "SFRPG.WeaponPropertiesGuidedTooltip",
+    "harrying": "SFRPG.WeaponPropertiesHarryingTooltip",
+    "holyWater": "SFRPG.WeaponPropertiesHolyWaterTooltip",
+    "hybrid": "SFRPG.WeaponPropertiesHybridTooltip",
+    "ignite": "SFRPG.WeaponPropertiesIgniteTooltip",
+    "indirect": "SFRPG.WeaponPropertiesIndirectTooltip",
+    "injection": "SFRPG.WeaponPropertiesInjectionTooltip",
+    "integrated": "SFRPG.WeaponPropertiesIntegratedTooltip",
+    "line": "SFRPG.WeaponPropertiesLineTooltip",
+    "living": "SFRPG.WeaponPropertiesLivingTooltip",
+    "lockdown": "SFRPG.WeaponPropertiesLockdownTooltip",
+    "mind-affecting": "SFRPG.WeaponPropertiesMindAffectingTooltip",
+    "mine": "SFRPG.WeaponPropertiesMineTooltip",
+    "mire": "SFRPG.WeaponPropertiesMireTooltip",
+    "modal": "SFRPG.WeaponPropertiesModalTooltip",
+    "necrotic": "SFRPG.WeaponPropertiesNecroticTooltip",
+    "nonlethal": "SFRPG.WeaponPropertiesNonlethalTooltip",
+    "operative": "SFRPG.WeaponPropertiesOperativeTooltip",
+    "penetrating": "SFRPG.WeaponPropertiesPenetratingTooltip",
+    "polarize": "SFRPG.WeaponPropertiesPolarizeTooltip",
+    "polymorphic": "SFRPG.WeaponPropertiesPolymorphicTooltip",
+    "powered": "SFRPG.WeaponPropertiesPoweredTooltip",
+    "professional": "SFRPG.WeaponPropertiesProfessionalTooltip",
+    "punchGun": "SFRPG.WeaponPropertiesPunchGunTooltip",
+    "qreload": "SFRPG.WeaponPropertiesQuickReloadTooltip",
+    "radioactive": "SFRPG.WeaponPropertiesRadioactiveTooltip",
+    "reach": "SFRPG.WeaponPropertiesReachTooltip",
+    "recall": "SFRPG.WeaponPropertiesRecallTooltip",
+    "regrowth": "SFRPG.WeaponPropertiesRegrowthTooltip",
+    "relic": "SFRPG.WeaponPropertiesRelicTooltip",
+    "reposition": "SFRPG.WeaponPropertiesReposition",
+    "shape": "SFRPG.WeaponPropertiesShapeTooltip",
+    "shatter": "SFRPG.WeaponPropertiesShatterTooltip",
+    "shells": "SFRPG.WeaponPropertiesShellsTooltip",
+    "shield": "SFRPG.WeaponPropertiesShieldTooltip",
+    "sniper": "SFRPG.WeaponPropertiesSniperTooltip",
+    "stun": "SFRPG.WeaponPropertiesStunTooltip",
+    "subtle": "SFRPG.WeaponPropertiesSubtleTooltip",
+    "sunder": "SFRPG.WeaponPropertiesSunderTooltip",
+    "swarm": "SFRPG.WeaponPropertiesSwarmTooltip",
+    "tail": "SFRPG.WeaponPropertiesTailTooltip",
+    "teleportive": "SFRPG.WeaponPropertiesTeleportiveTooltip",
+    "thought": "SFRPG.WeaponPropertiesThoughtTooltip",
+    "throttle": "SFRPG.WeaponPropertiesThrottleTooltip",
+    "thrown": "SFRPG.WeaponPropertiesThrownTooltip",
+    "trip": "SFRPG.WeaponPropertiesTripTooltip",
+    "unbalancing": "SFRPG.WeaponPropertiesUnbalancingTooltip",
+    "underwater": "SFRPG.WeaponPropertiesUnderwaterTooltip",
+    "unwieldy": "SFRPG.WeaponPropertiesUnwieldyTooltip",
+    "variantBoost": "SFRPG.WeaponPropertiesVariantBoostTooltip",
+    "wideLine": "SFRPG.WeaponPropertiesWideLineTooltip"
 };
 
 SFRPG.spellAreaShapes = {
@@ -826,15 +918,20 @@ SFRPG.vehicleTypes = {
     "hover": "SFRPG.Vehicles.VehicleTypes.Hover",
     "landW": "SFRPG.Vehicles.VehicleTypes.Landw",
     "air"  : "SFRPG.Vehicles.VehicleTypes.Air",
-    "landA": "SFRPG.Vehicles.VehicleTypes.Landa"
+    "landA": "SFRPG.Vehicles.VehicleTypes.Landa",
+    "landATW": "SFRPG.Vehicles.VehicleTypes.Landatw",
+    "landAW": "SFRPG.Vehicles.VehicleTypes.Landaw",
+    "landT": "SFRPG.Vehicles.VehicleTypes.Landt",
+    "landTW": "SFRPG.Vehicles.VehicleTypes.Landtw"
 };
 
 SFRPG.vehicleCoverTypes = {
-    "none"   : "SFRPG.Vehicles.VehicleCoverTypes.None",
-    "cover"  : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
-    "soft"   : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
-    "partial": "SFRPG.Vehicles.VehicleCoverTypes.Partial",
-    "total"  : "SFRPG.Vehicles.VehicleCoverTypes.Total"
+    "none"    : "SFRPG.Vehicles.VehicleCoverTypes.None",
+    "cover"   : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
+    "soft"    : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
+    "partial" : "SFRPG.Vehicles.VehicleCoverTypes.Partial",
+    "improved": "SFRPG.Vehicles.VehicleCoverTypes.Improved",
+    "total"   : "SFRPG.Vehicles.VehicleCoverTypes.Total"
 };
 
 /**
@@ -1237,7 +1334,8 @@ SFRPG.itemTypes = {
     "shield": "SFRPG.Items.Categories.Shields",
     "ammunition": "SFRPG.Items.Categories.Ammunition",
     "weaponAccessory": "ITEM.TypeWeaponaccessory",
-    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks"
+    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
+    "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
 };
 
 SFRPG.containableTypes = {
@@ -1255,7 +1353,8 @@ SFRPG.containableTypes = {
     "augmentation" : "SFRPG.Items.Categories.Augmentations",
     "shield"       : "SFRPG.Items.Categories.Shields",
     "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories",
-    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks"
+    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
+    "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
 };
 
 SFRPG.combatTypes = [
@@ -1271,7 +1370,9 @@ SFRPG.weaponAccessoriesSupportedTypes = {
     "any": "SFRPG.Items.WeaponAccessory.SupportedType.Any",
     "heavyWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.HeavyWeapon",
     "meleeWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.MeleeWeapon",
+    "meleeWeaponSA": "SFRPG.Items.WeaponAccessory.SupportedType.MeleeWeaponSA",
     "projectile": "SFRPG.Items.WeaponAccessory.SupportedType.Projectile",
     "railedWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.RailedWeapon",
+    "railedWeaponSA": "SFRPG.Items.WeaponAccessory.SupportedType.RailedWeaponSA",
     "smallarm": "SFRPG.Items.WeaponAccessory.SupportedType.SmallArm"
 };

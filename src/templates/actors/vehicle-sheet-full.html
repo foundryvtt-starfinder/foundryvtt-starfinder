@@ -21,6 +21,9 @@
                     <label>{{ localize "SFRPG.VehicleSheet.Header.Price" }}</label>
                     <input type="text" name="data.details.price" value="{{data.details.price}}" data-dtype="Number" placeholder="{{ localize "SFRPG.VehicleSheet.Header.PricePlaceholder" }}" title="{{ localize "SFRPG.VehicleSheet.Header.PriceTooltip" }}" />
                 </li>
+                <li>
+                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="{{localize "SFRPG.NPCSheet.Header.SourcePlaceHolderText"}}" />
+                </li>
             </ul>
         </div>
     </header>
@@ -29,14 +32,20 @@
         <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
         <a class="item" data-tab="attacks">{{ localize "SFRPG.VehicleSheet.Tabs.Attacks" }}</a>
         <a class="item" data-tab="passengers">{{ localize "SFRPG.VehicleSheet.Tabs.Passengers" }}</a>
+        <a class="item" data-tab="systems">{{ localize "SFRPG.VehicleSheet.Tabs.Systems" }}</a>
+        {{#if hasHangarBays }}
+        <a class="item" data-tab="hangar">{{ localize "SFRPG.VehicleSheet.Tabs.Hangar" }}</a>
+        {{/if }}
         <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
     </nav>
 
     <section class="sheet-body">
+
+        {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
             <div class="flexrow">
                 <ul class="attributes flexrow">
-                    <li class="attribute health">
+                    <li data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.HealthTooltip'}}" class="attribute health">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.Health" }}</h4>
                         <div class="attribute-value multiple">
                             <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" data-dtype="Number" placeholder="10" />
@@ -128,32 +137,48 @@
                 <div class="flexrow">
                     <div class="flexcol">
                         <div class="form-group">
-                            <label>Piloting</label>
+                            <label>Control</label>
                             <div class="form-fields">
+                                <select name="data.attributes.controlSkill">
+                                    {{#select data.attributes.controlSkill}}
+                                    <option value="pil">{{ config.skills.pil }}</option>
+                                    <option value="ath">{{ config.skills.ath }}</option>
+                                    <option value="sur">{{ config.skills.sur }}</option>
+                                    <option value="none">None</option>
+                                    {{/select}}
+                                </select>
+                                {{#if (eq data.attributes.controlSkill "pil")}}
                                 <input type="text" name="data.attributes.modifiers.piloting" value="{{data.attributes.modifiers.piloting}}" />
                                 <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
                                     <div class="passenger-action flexcol">
-                                        <button class="tag pilotPilotingSkill">{{localize "SFRPG.VehicleSheet.Passengers.Piloting"}}</button>
+                                        <a class="pilotPilotingSkill">&nbsp;</a>
                                     </div>
                                 </div>
+                                {{/if}}
+                                {{#if (eq data.attributes.controlSkill "ath")}}
+                                <input type="text" name="data.attributes.modifiers.athletics" value="{{data.attributes.modifiers.athletics}}" />
+                                {{/if}}
+                                {{#if (eq data.attributes.controlSkill "sur")}}
+                                <input type="text" name="data.attributes.modifiers.survival" value="{{data.attributes.modifiers.survival}}" />
+                                {{/if}}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackStopped" }}</label>
+                            <label data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackStopped" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="data.attributes.modifiers.attackStopped" value="{{data.attributes.modifiers.attackStopped}}" />
+                                <input data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="data.attributes.modifiers.attackStopped" value="{{data.attributes.modifiers.attackStopped}}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackMoving" }}</label>
+                            <label data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackMoving" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="data.attributes.modifiers.attackMoving" value="{{data.attributes.modifiers.attackMoving}}" />
+                                <input data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="data.attributes.modifiers.attackMoving" value="{{data.attributes.modifiers.attackMoving}}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackFullSpeed" }}</label>
+                            <label data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}">{{ localize "SFRPG.VehicleSheet.Details.Modifiers.AttackFullSpeed" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="data.attributes.modifiers.attackFullSpeed" value="{{data.attributes.modifiers.attackFullSpeed}}" />
+                                <input data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip'}}" type="text" name="data.attributes.modifiers.attackFullSpeed" value="{{data.attributes.modifiers.attackFullSpeed}}" />
                             </div>
                         </div>
                     </div>
@@ -211,10 +236,24 @@
                                 <input type="text" name="data.crew.complement.limit" value="{{data.crew.complement.limit}}" data-dtype="Number" />
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.ExpansionBays" }}</label>
+                            <div class="form-fields">
+                                <input type="text" name="data.attributes.expansionBays.value" value="{{data.attributes.expansionBays.value}}" data-dtype="Number" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.HangarBays" }}</label>
+                            <div class="form-fields">
+                                <input type="text" name="data.hangarBay.limit" value="{{data.hangarBay.limit}}" data-dtype="Number" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        {{!-- Attacks Tab --}}
         <div class="tab attacks" data-group="primary" data-tab="attacks">
             <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Attacks.ToDo" }}</p>
             <ol class="inventory-list">
@@ -242,6 +281,7 @@
 
         </div>
 
+        {{!-- Passengers Tab --}}
         <div class="tab attacks" data-group="primary" data-tab="passengers">
             <div class="crew-settings flexrow">
                 <ol class="settings flexrow">
@@ -267,7 +307,7 @@
                     <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
                         <div class="crew-name flexrow">
                             <div class="crew-image" style="background-image: url({{actor.data.img}})"></div>
-                            <h4>{{actor.name}}</h4>
+                            <a class="passenger-view"><h4>{{actor.name}}</h4></a>
                         </div>
 
                         <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
@@ -291,6 +331,33 @@
             {{/unless}}
         </div>
 
+        {{!-- Systems Tab --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="systems">
+            {{> "systems/sfrpg/templates/actors/parts/actor-vehicle-systems.html" sections=features noFilters=true prefixTable=prefixTable}}
+        </div>
+
+        {{!-- Hangar Bays --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="hangar">
+            <ol class="crew-list">
+                <li class="flexrow crew-header {{hangarBays.cssClass}}" {{#each hangarBay.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>{{hangarBay.label}}</li>
+                <ol class="crew-item-list">
+                    {{#each hangarBay.actors as |actor a|}}
+                    <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
+                        <div class="crew-name flexrow">
+                            <div class="crew-image" style="background-image: url({{actor.data.img}})"></div>
+                            <a class="vehicle-view"><h4>{{actor.name}}</h4></a>
+                        </div>
+
+                        <div class="crew-controls">
+                            <a class="crew-control vehicle-delete" title="Remove Vehicle"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+            </ol>
+        </div>
+
+        {{!-- Notes Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
             {{editorPlus content=data.details.description.value target="data.details.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}
         </div>

@@ -3,11 +3,11 @@
   "type": "weapon",
   "data": {
     "description": {
-      "value": "",
+      "value": "<p>A chain, cable, or other cord connects the long handle of this weapon to a perforated or grated container that is filled with exceptionally volatile compounds. Few are foolish enough to use such a weapon, so there&rsquo;s been little advancement on its design, but many space goblins use junk censers with reckless and even gleeful abandon. While it is most often wielded in melee, the junk censer can also be thrown at an enemy. Like many cobbled-together weapons, a junk censer is unstable; on an attack roll of a natural 1, it deals its regular damage to the user and gains the broken condition.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "AR",
+    "source": "AR pg, 10",
     "type": "",
     "quantity": 1,
     "bulk": "L",
@@ -16,6 +16,24 @@
     "attuned": false,
     "equipped": false,
     "identified": true,
+    "attributes": {
+      "sturdy": true,
+      "customBuilt": false,
+      "size": "medium",
+      "dex": {
+        "mod": ""
+      },
+      "hp": {
+        "value": 18,
+        "max": "18"
+      },
+      "hardness": {
+        "value": "7"
+      },
+      "ac": {
+        "value": "5"
+      }
+    },
     "activation": {
       "type": "none",
       "cost": null,
@@ -42,27 +60,23 @@
       "per": ""
     },
     "uses": {
-      "value": 4,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": ""
     },
+    "isActive": null,
     "ability": "str",
-    "actionType": "rwak",
+    "actionType": "mwak",
     "attackBonus": 0,
-    "chatFlavor": "Analog, fueled, thrown",
+    "chatFlavor": "",
     "critical": {
-      "parts": [
-        [
-          "1d4",
-          "fire"
-        ]
-      ],
-      "effect": "Burn"
+      "parts": [],
+      "effect": "Burn 1d4"
     },
     "damage": {
       "parts": [
         [
-          "1d6 + @mod + @mod",
+          "1d6 + @abilities.str.mod",
           "bludgeoning+fire"
         ]
       ]
@@ -70,8 +84,8 @@
     "formula": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "descriptors": [],
     "capacity": {
@@ -83,13 +97,29 @@
       "per": "minute"
     },
     "modifiers": [],
+    "container": {
+      "contents": [],
+      "storage": [
+        {
+          "type": "slot",
+          "subtype": "fusion",
+          "amount": 1,
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "weightProperty": "level"
+        }
+      ],
+      "isOpen": true
+    },
     "weaponType": "advancedM",
     "weaponCategory": "flame",
     "special": "",
     "properties": {
       "one": true,
       "two": false,
-      "amm": true,
+      "amm": false,
       "analog": true,
       "archaic": false,
       "automatic": false,
@@ -168,30 +198,18 @@
       "throttle": false,
       "underwater": false,
       "variantBoost": false,
-      "wideLine": false
+      "wideLine": false,
+      "hybrid": false,
+      "regrowth": false,
+      "unbalancing": false
     },
     "proficient": false,
     "abilityMods": {
       "parts": []
-    },
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 1,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ]
     }
   },
-  "folder": null,
   "flags": {},
   "img": "icons/svg/mystery-man.svg",
+  "effects": [],
   "_id": "v9m5a0PaC997U0p9"
 }

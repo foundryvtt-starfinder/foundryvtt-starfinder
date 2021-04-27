@@ -3,7 +3,7 @@
   "type": "feat",
   "data": {
     "description": {
-      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.Conditions]</p>\n<hr/>\n<p style=\"text-align: justify;\">You are unable to see well because of overstimulation of your eyes.</p>\n<p style=\"text-align: justify;\">You take a –1 penalty to attack rolls and sight-based Perception checks.</p>",
+      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p style=\"text-align: justify;\">You are unable to see well because of overstimulation of your eyes.</p>\n<p style=\"text-align: justify;\">You take a &ndash;1 penalty to attack rolls and sight-based Perception checks.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -39,6 +39,7 @@
       "max": 0,
       "per": ""
     },
+    "isActive": null,
     "ability": "int",
     "actionType": "",
     "attackBonus": 0,
@@ -60,31 +61,33 @@
     "modifiers": [
       {
         "name": "Perception (Sight) Checks",
-        "modifier": -1,
+        "modifier": "-1",
         "type": "untyped",
         "effectType": "skill",
         "valueAffected": "per",
         "enabled": true,
         "source": "Condition",
         "notes": "For Perception (Sight) Checks.",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "condition": "",
         "subtab": "misc",
-        "_id": "94ec57e3-0c16-4efb-adee-96b699dafeea"
+        "_id": "94ec57e3-0c16-4efb-adee-96b699dafeea",
+        "max": -1
       },
       {
         "name": "Attack Rolls",
-        "modifier": -1,
+        "modifier": "-1",
         "type": "untyped",
         "effectType": "all-attacks",
         "valueAffected": "",
         "enabled": true,
         "source": "Condition",
         "notes": "Sight-Based Attack Rolls.",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "condition": "",
         "subtab": "misc",
-        "_id": "27306a31-a6cc-49ca-b587-f16ae175cdbd"
+        "_id": "27306a31-a6cc-49ca-b587-f16ae175cdbd",
+        "max": -1
       }
     ],
     "requirements": "Condition",
@@ -96,8 +99,8 @@
       "parts": []
     }
   },
+  "flags": {},
   "img": "systems/sfrpg/icons/conditions/dazzled.png",
-  "_id": "YjE6UGzwOTfO9p4g",
-  "sort": 1200000,
-  "flags": {}
+  "effects": [],
+  "_id": "YjE6UGzwOTfO9p4g"
 }

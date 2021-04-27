@@ -3,7 +3,7 @@
   "type": "feat",
   "data": {
     "description": {
-      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.Conditions]</p>\n<hr/>\n<p style=\"text-align: justify;\">You can&rsquo;t hear.</p>\n<p style=\"text-align: justify;\">You take a &ndash;4 penalty to initiative checks and opposed Perception checks, and you automatically fail Perception checks based on sound.</p>\n<p style=\"text-align: justify;\">Characters who remain deafened for a long time grow accustomed to these drawbacks and can overcome some of them.</p>",
+      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p style=\"text-align: justify;\">You can&rsquo;t hear.</p>\n<p style=\"text-align: justify;\">You take a &ndash;4 penalty to initiative checks and opposed Perception checks, and you automatically fail Perception checks based on sound.</p>\n<p style=\"text-align: justify;\">Characters who remain @Compendium[sfrpg.conditions.D8JvCEmOiWKe2UDx]{Deafened} for a long time grow accustomed to these drawbacks and can overcome some of them.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -39,6 +39,7 @@
       "max": 0,
       "per": ""
     },
+    "isActive": null,
     "ability": "int",
     "actionType": "",
     "attackBonus": 0,
@@ -60,21 +61,22 @@
     "modifiers": [
       {
         "name": "Perception (Opposed)",
-        "modifier": -4,
+        "modifier": "-4",
         "type": "untyped",
         "effectType": "skill",
         "valueAffected": "per",
         "enabled": true,
         "source": "Condition",
         "notes": "",
-        "modifierType": "constant",
+        "modifierType": "formula",
         "condition": "",
         "subtab": "misc",
-        "_id": "b325f976-e17f-4ade-a640-2e736fd2d350"
+        "_id": "b325f976-e17f-4ade-a640-2e736fd2d350",
+        "max": -4
       },
       {
         "name": "Initiative",
-        "modifier": -4,
+        "modifier": "-4",
         "type": "untyped",
         "effectType": "initiative",
         "valueAffected": "",
@@ -84,7 +86,8 @@
         "modifierType": "constant",
         "condition": "",
         "subtab": "misc",
-        "_id": "b08bd1bb-bb45-44d0-811c-ab6dddfe843c"
+        "_id": "b08bd1bb-bb45-44d0-811c-ab6dddfe843c",
+        "max": -4
       }
     ],
     "requirements": "Condition",
@@ -96,8 +99,8 @@
       "parts": []
     }
   },
+  "flags": {},
   "img": "systems/sfrpg/icons/conditions/deafened.png",
-  "_id": "D8JvCEmOiWKe2UDx",
-  "sort": 1400000,
-  "flags": {}
+  "effects": [],
+  "_id": "D8JvCEmOiWKe2UDx"
 }

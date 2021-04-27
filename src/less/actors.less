@@ -558,7 +558,8 @@
   }
 
   .inventory-list,
-  .crew-list {
+  .crew-list,
+  .vehicle-system-list {
     list-style: none;
     margin: 0;
     padding: 0 5px;
@@ -650,6 +651,7 @@
               box-shadow: 0 0 5px @sfrpgGreen;
             }
           }
+
         }
       }
       
@@ -713,13 +715,13 @@
       border-right: 1px solid @colorFaint;
       &:last-child { border-right: none; }
   
-      .featDeactivate {
+      .featDeactivate, .vehicle-system-deactivate {
         background: @sfrpgRed;
         color: #fff;
         cursor: pointer;
       }
 
-      .featActivate {
+      .featActivate, .vehicle-system-activate {
         background: @sfrpgGreen;
         color: #fff;
         cursor: pointer;
@@ -853,5 +855,20 @@
 
   .editor {
     padding: 0 8px;
+  }
+
+  .bio-properties {
+    textarea {
+      padding: 5px;
+      margin: 0 3px 0 0;
+      margin-right: 0;
+
+      resize: vertical;
+      height: 100%;
+
+      min-width: 200px;
+      max-width: 200px;
+      overflow-x: hidden;
+    }
   }
 }
