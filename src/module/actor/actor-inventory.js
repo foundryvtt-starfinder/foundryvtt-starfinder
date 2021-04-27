@@ -1048,7 +1048,7 @@ export class ActorItemHelper {
 
             if (isDirty) {
                 console.log("> Migrating " + item.name);
-                await this.actor.updateOwnedItem({ id: item.id, data: itemData});
+                await this.actor.updateEmbeddedDocuments("Item", [{ id: item.id, data: itemData}]);
             }
         }
     }

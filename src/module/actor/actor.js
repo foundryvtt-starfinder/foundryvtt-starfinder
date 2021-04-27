@@ -1330,6 +1330,10 @@ export class ActorSFRPG extends Actor {
 
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
+        if (!this.data) {
+            return;
+        }
+
         const actorData = this.data.data;
 
         if (actorData.type === "vehicle") {

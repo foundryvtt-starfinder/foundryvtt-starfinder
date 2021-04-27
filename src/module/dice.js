@@ -72,7 +72,8 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            let roll = new Roll(finalFormula.finalRoll).roll();
+            const rollObject = new Roll(finalFormula.finalRoll);
+            let roll = rollObject.evaluate();
 
             // Flag critical thresholds
             for (let d of roll.dice) {
@@ -202,8 +203,9 @@ export class DiceSFRPG {
                 finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = dieRoll + " + " + finalFormula.formula;
 
-                let roll = new Roll(finalFormula.finalRoll).roll();
-
+                const rollObject = new Roll(finalFormula.finalRoll);
+                let roll = rollObject.evaluate();
+    
                 // Flag critical thresholds
                 for (let d of roll.dice) {
                     if (d.faces === 20) {
@@ -237,8 +239,9 @@ export class DiceSFRPG {
                     finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
                     finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
     
-                    let roll = new Roll(finalFormula.finalRoll).roll();
-    
+                    const rollObject = new Roll(finalFormula.finalRoll);
+                    let roll = rollObject.evaluate();
+            
                     // Flag critical thresholds
                     for (let d of roll.dice) {
                         if (d.faces === 20) {
@@ -328,7 +331,8 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            let roll = new Roll(finalFormula.finalRoll).roll();
+            const rollObject = new Roll(finalFormula.finalRoll);
+            let roll = rollObject.evaluate();
             
             // Associate the damage types for this attack to the first DiceTerm
             // for the roll. 

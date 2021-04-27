@@ -130,7 +130,7 @@ export class ItemSFRPG extends Item {
         
         let dcFormula = save.dc?.toString();
         if (!dcFormula) {
-            const ownerKeyAbilityId = this.actor?.data.data.attributes.keyability;
+            const ownerKeyAbilityId = this.actor?.data?.data?.attributes.keyability;
             const itemKeyAbilityId = this.data.data.ability;
             const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
             if (abilityKey) {
@@ -1249,7 +1249,7 @@ export class ItemSFRPG extends Item {
         if (!data.recharge.value) return;
 
         // Roll the check
-        const roll = new Roll("1d6").roll();
+        const roll = new Roll("1d6").evaluate();
         const success = roll.total >= parseInt(data.recharge.value);
 
         // Display a Chat Message

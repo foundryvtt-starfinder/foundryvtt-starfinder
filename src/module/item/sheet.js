@@ -179,7 +179,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             if (!rollData.owner.abilities?.dex?.mod) {
                 rollData.owner.abilities = {dex: {mod: 0}};
             }
-            const saveRoll = new Roll(formula, rollData).roll();
+            const saveRoll = new Roll(formula, rollData).evaluate();
             return saveRoll.total;
         } catch (err) {
             return 10;
