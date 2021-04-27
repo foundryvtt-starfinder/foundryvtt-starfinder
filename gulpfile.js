@@ -514,7 +514,7 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
 			addWarningForPack(`${file}: Found reference to ${conditionResult.match} in biography without link.`, pack);
 		}
         // Check biography for references to the setting
-        let settingResult = serchDescriptionForUnlinkedReference(description, settingRegularExpression);
+        let settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
             addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link.`, pack);
         }
@@ -587,13 +587,13 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 		if (description) {
 
             // Check description for references to conditions
-			let conditionResult = serchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
+			let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
 			if (conditionResult.found) {
 				addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link.`, pack);
 			}
 
             // Check description for references to poisons / diseases
-            let poisonResult = serchDescriptionForUnlinkedReference(description, poisonAndDiseasesRegularExpression);
+            let poisonResult = searchDescriptionForUnlinkedReference(description, poisonAndDiseasesRegularExpression);
             if (poisonResult.found) {
                 addWarningForPack(`${file}: Found reference to ${poisonResult.match} in description without link.`, pack);
             }
@@ -705,12 +705,12 @@ function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) 
 		let description = data.data.description.value
 
         // Check references to conditions
-        let conditionResult = serchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
+        let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
 		if (conditionResult.found) {
             addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link.`, pack);
         }
 		// Check references to the setting
-        let settingResult = serchDescriptionForUnlinkedReference(description, settingRegularExpression);
+        let settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
             addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link.`, pack);
         }
@@ -736,12 +736,12 @@ function formattingCheckFeat(data, pack, file, options = { checkLinks: true }) {
     if (options.checkLinks === true) {
         let description = data.data.description.value
         // Check description for references to conditions
-        let conditionResult = serchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
+        let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
         if (conditionResult.found) {
             addWarningForPack(`${file}: Found reference to ${conditionResult.match} in description without link.`, pack);
         }
         // Check description for references to the setting
-        let settingResult = serchDescriptionForUnlinkedReference(description, settingRegularExpression);
+        let settingResult = searchDescriptionForUnlinkedReference(description, settingRegularExpression);
         if (settingResult.found) {
             addWarningForPack(`${file}: Found reference to ${settingResult.match} in description without link.`, pack);
         }
@@ -751,19 +751,18 @@ function formattingCheckFeat(data, pack, file, options = { checkLinks: true }) {
 // Check if a description contains an unlinked reference to a condition
 function searchDescriptionForUnlinkedCondition(description) {
 
-    return serchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
+    return searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
 }
 
 // Checks if a description contains an unlinked reference to any value found in the provided regular expression
-function serchDescriptionForUnlinkedReference(description, regularExpression) {
+function searchDescriptionForUnlinkedReference(description, regularExpression) {
 
     let matches = [...description.matchAll(regularExpression)];
     //Found a potential reference to a condition
     if (matches && matches.length > 0) {
         // Capture the character before and after each match and use some basic heuristics to decide if it's an linked condition in the description
-        for (let matchIndex in matches) {
+        for (let match of matches) {
 
-            let match = matches[matchIndex];
             let conditionWord = match[0];
             let matchedWord = description.substring(match["index"], match["index"] + match["length"]);
 
