@@ -930,7 +930,7 @@ export class ActorSFRPG extends Actor {
             
             ChatMessage.create({
                 user: game.user.id,
-                speaker: { actor: this, alias: this.name },
+                speaker: ChatMessage.getSpeaker({actor: this}),
                 content: msg,
                 type: CONST.CHAT_MESSAGE_TYPES.OTHER
             });
@@ -983,7 +983,7 @@ export class ActorSFRPG extends Actor {
             
             ChatMessage.create({
                 user: game.user.id,
-                speaker: { actor: this, alias: this.name },
+                speaker: ChatMessage.getSpeaker({actor: this}),
                 content: msg,
                 type: CONST.CHAT_MESSAGE_TYPES.OTHER
             });
@@ -1067,7 +1067,7 @@ export class ActorSFRPG extends Actor {
         if (chat) {
             ChatMessage.create({
                 user: game.user.id,
-                speaker: { actor: this, alias: this.name },
+                speaker: ChatMessage.getSpeaker({actor: this}),
                 content: `${this.name} takes a night's rest and recovers ${dhp} Hit points, ${dsp} Stamina points, and ${drp} Resolve points.`
             });
         }

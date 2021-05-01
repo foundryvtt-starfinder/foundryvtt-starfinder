@@ -203,7 +203,6 @@ export class ItemSFRPG extends Item {
 
         // Basic template rendering data
         const token = this.actor.token;
-        console.log(token);
         const templateData = {
             actor: this.actor,
             tokenId: token ? `${token.parent.id}.${token.id}` : null,
@@ -226,11 +225,7 @@ export class ItemSFRPG extends Item {
             user: game.user.id,
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             content: html,
-            speaker: {
-                actor: this.actor.id,
-                token: this.actor.token,
-                alias: this.actor.name
-            }
+            speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
         // Toggle default roll mode
@@ -1253,7 +1248,8 @@ export class ItemSFRPG extends Item {
         if (!data.recharge.value) return;
 
         // Roll the check
-        const roll = new Roll("1d6").evaluate();
+        const rollObject = new Roll("1d6");
+        const roll = await rollObject.evaluate({async: true});
         const success = roll.total >= parseInt(data.recharge.value);
 
         // Display a Chat Message
@@ -1265,11 +1261,10 @@ export class ItemSFRPG extends Item {
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
             roll: roll,
-            speaker: {
-                actor: this.actor.id,
-                token: this.actor.token,
+            speaker: ChatMessage.getSpeaker({
+                actor: this.actor,
                 alias: this.actor.name
-            }
+            })
         };
 
         // Update the Item data

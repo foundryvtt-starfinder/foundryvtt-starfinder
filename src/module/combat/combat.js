@@ -399,7 +399,7 @@ export class CombatSFRPG extends Combat {
         // Create the chat message
         const chatData = {
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: { actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName },
+            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
 
@@ -437,7 +437,7 @@ export class CombatSFRPG extends Combat {
         // Create the chat message
         const chatData = {
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: { actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName },
+            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
 
@@ -475,7 +475,7 @@ export class CombatSFRPG extends Combat {
         // Create the chat message
         const chatData = {
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: { actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName },
+            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
 
