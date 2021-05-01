@@ -1,6 +1,6 @@
 <div class="tab flexrow active" data-group="primary" data-tab="description">
 
-    {{#unless hideProperties}}
+{{#unless hideProperties}}
     <div class="item-properties">
         {{#if isPhysical}}
         <div class="form-group">
@@ -41,7 +41,7 @@
     </div>
 {{/unless}}
 
-    <div class="flexcol">
+    <div class="flexcol" style="height: 100%;">
         <nav class="sheet-subnavigation descTabs" data-group="descriptionTabs">
             <a class="item active{{#if data.description.value}} highlight{{/if}}" data-tab="description">{{localize "SFRPG.Description"}}</a>
             <a class="item {{#if data.description.short}} highlight{{/if}}" data-tab="descriptionShort">{{localize "SFRPG.DescriptionShort"}}</a>
@@ -52,14 +52,14 @@
 
         <section class="desc-body">
             <div class="tab flexrow" data-group="descriptionTabs" data-tab="description">
-                {{editorPlus content=data.description.value target="data.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+                {{editorPlus content=data.data.description.value target="data.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}
             </div>
             <div class="tab flexrow" data-group="descriptionTabs" data-tab="descriptionShort">
-                {{editorPlus content=data.description.short target="data.description.short" button=true owner=owner editable=editable rolls=false rollData=data}}
+                {{editorPlus content=data.data.description.short target="data.description.short" button=true owner=owner editable=editable rolls=false rollData=data}}
             </div>
             {{#if isGM}}
             <div class="tab flexrow" data-group="descriptionTabs" data-tab="gmNotes">
-                {{editorPlus content=data.description.gmNotes target="data.description.gmNotes" button=true owner=owner editable=editable rolls=false rollData=data}}
+                {{editorPlus content=data.data.description.gmNotes target="data.description.gmNotes" button=true owner=owner editable=editable rolls=false rollData=data}}
             </div>
             {{/if}}
         </section>
