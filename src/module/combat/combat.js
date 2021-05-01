@@ -102,7 +102,7 @@ export class CombatSFRPG extends Combat {
         const scene = game.scenes.get(this.data.scene);
         const players = game.users.players;
         const settings = game.settings.get("core", Combat.CONFIG_SETTING);
-        const turns = combatants.map(c => this._prepareCombatant(c, scene, players, settings)).sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
+        const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
         this.data.turn = Math.clamped(this.data.turn, -1, turns.length-1);
         return this.turns = turns;
     }
@@ -193,7 +193,7 @@ export class CombatSFRPG extends Combat {
                     }
                 }
 
-                /** Skip the last actor if it is dead. */
+                // Skip the last actor if it is dead.
                 if (nextTurn === this.turns.length - 1 && this.turns[nextTurn].defeated) {
                     nextTurn = this.turns.length + 1; 
                 }
@@ -214,7 +214,7 @@ export class CombatSFRPG extends Combat {
             } else {
                 nextTurn = 0;
             }
-    }
+        }
 
         if (nextPhase >= phases.length) {
             nextRound += 1;
@@ -224,7 +224,7 @@ export class CombatSFRPG extends Combat {
             } else {
                 nextTurn = 0;
             }
-    }
+        }
 
         if (nextPhase !== this.data.flags.sfrpg.phase) {
             const newPhase = phases[nextPhase];
