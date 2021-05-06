@@ -4,6 +4,10 @@ This is a game system definition of the Starfinder RPG for the awesome [Foundry 
 
 _The latest version of the Starfinder system is compatible with FoundryVTT version 0.7.8 or later._
 
+## Join the disscussion
+
+If you have quesions or just want to chat about all things Starfinder, then join us on the official FoundryVTT discord server [here](https://discord.gg/QyAeMy4Dyu).
+
 ## Version support table
 If you wish to use Starfinder with older versions of FoundryVTT, the following table will help:
 - FoundryVTT v0.5.5 or earlier: The latest supported Starfinder system version is v0.2.2
