@@ -81,7 +81,7 @@ class SpellBrowserSFRPG extends ItemBrowserSFRPG {
     _filterLevels(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x.id === itemId);
+        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
         let itemLevel = item ? JSON.stringify(item.data.level) : "null";
         return item && filters.includes(itemLevel);
     }
@@ -89,7 +89,7 @@ class SpellBrowserSFRPG extends ItemBrowserSFRPG {
     _filterClasses(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x.id === itemId);
+        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
         if (!item) return false;
 
         for (let allowedClass of filters) {
@@ -103,7 +103,7 @@ class SpellBrowserSFRPG extends ItemBrowserSFRPG {
     _filterSchools(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
-        let item = this.items.find(x => x.compendium === compendium && x.id === itemId);
+        let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
         return item && filters.includes(item.data.school);
     }
 }

@@ -42,9 +42,9 @@ export class ItemBrowserSFRPG extends Application {
       const itemId = $(ev.currentTarget).parents('.item').attr('data-entry-id');
       const itemCategory = $(ev.currentTarget).parents('.item').attr('data-item-category');
       const items = this[itemCategory];
-      let item = items.find(x => x.id === itemId);
+      let item = items.find(x => x._id === itemId);
       const pack = game.packs.find(p => p.collection === item.compendium);
-      item = pack.getEntity(itemId).then(item => {
+      item = pack.getDocument(itemId).then(item => {
         item.sheet.render(true);
       });
     }); //show actor card
@@ -55,7 +55,7 @@ export class ItemBrowserSFRPG extends Application {
       const actors = this[actorCategory];
       let actor = actors[actorId];
       const pack = game.packs.find(p => p.collection === actor.compendium);
-      actor = pack.getEntity(actorId).then(npc => {
+      actor = pack.getDocument(actorId).then(npc => {
         npc.sheet.render(true);
       });
     }); // make draggable
