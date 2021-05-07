@@ -14,9 +14,10 @@ Once you've cloned the repository to your local machine, follow these steps to g
 
 1. Install the development dependencies by running the following command: `npm install`
 2. Configure a `foundryconfig.json` file in the root folder of the project with a `dataPath` property. And example can be found in the `foundryconfig.example.json` file provided in the project. Just copy the file and rename it to `foundryconfig.json` and change the `dataPath`. The `dataPath` property is the file path to your Foundry installs user data. This can be found on the Configuration tab on the Setup screen.
-3. Run `npm run build`. This will compile all of the `less` and copy all of the necessary files to a `dist` folder in the project root. It will also create a symbolic link to this new folder with your Foundry installs user data path.
+3. If you already have the Starfinder RPG System installed on Foundry VTT, uninstall from Foundry it so that the next steps will properly set up your Symlink.
+4. Run `npm run build`. This will compile all of the `less` and copy all of the necessary files to a `dist` folder in the project root. It will also create a symbolic link to this new folder with your Foundry installs user data path.
 > Note for Windows users: You may need to run your commandline with administrator privileges if your dataPath folder is the default FoundryVTT setting of "C:\Users\Username\AppData\Local\FoundryVTT\Data".
-4. Run `npm run build:watch` while your developing so that changes are automatically synced with the `dist` folder. When you make changes to `html`, `css`, or `javascript` files, you'll need to do a page refresh in foundry to pick up the changes (F5). Any changes to `template.json` or `system.json` require you to return to the Setup screen and then reload the world.
+5. Run `npm run build:watch` while your developing so that changes are automatically synced with the `dist` folder. When you make changes to `html`, `css`, or `javascript` files, you'll need to do a page refresh in foundry to pick up the changes (F5). Any changes to `template.json` or `system.json` require you to return to the Setup screen and then reload the world.
 
 This should be all you need to help contribute. If you have any issues, you can reach out to me on the Foundry discord.
 
