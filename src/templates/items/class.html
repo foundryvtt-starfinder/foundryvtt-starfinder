@@ -16,7 +16,7 @@
 
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source" />
+                    <input type="text" name="data.source" value="{{itemData.source}}" placeholder="Source" />
                 </li>
             </ul>
         </div>
@@ -42,7 +42,7 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassLevelLabel"}}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.levels" value="{{data.levels}}" data-dtype="Number" />
+                    <input type="text" name="data.levels" value="{{itemData.levels}}" data-dtype="Number" />
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
                 <label>{{localize "SFRPG.ClassBABProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.bab">
-                        {{#select data.bab}}
+                        {{#select itemData.bab}}
                         {{#each config.babProgression as |name val|}}
                         <option value="{{val}}">{{name}}</option>
                         {{/each}}
@@ -63,7 +63,7 @@
                 <label>{{localize "SFRPG.ClassFortSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.fort">
-                        {{#select data.fort}}
+                        {{#select itemData.fort}}
                         {{#each config.saveProgression as |name val|}}
                         <option value="{{val}}">{{name}}</option>
                         {{/each}}
@@ -76,7 +76,7 @@
                 <label>{{localize "SFRPG.ClassReflexSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.ref">
-                        {{#select data.ref}}
+                        {{#select itemData.ref}}
                         {{#each config.saveProgression as |name val|}}
                         <option value="{{val}}">{{name}}</option>
                         {{/each}}
@@ -89,7 +89,7 @@
                 <label>{{localize "SFRPG.ClassWillSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="data.will">
-                        {{#select data.will}}
+                        {{#select itemData.will}}
                         {{#each config.saveProgression as |name val|}}
                         <option value="{{val}}">{{name}}</option>
                         {{/each}}
@@ -102,7 +102,7 @@
                 <label>{{localize "SFRPG.ClassKeyAbilityScore"}}</label>
                 <div class="form-fields">
                     <select name="data.kas">
-                        {{#select data.kas}}
+                        {{#select itemData.kas}}
                         {{#each config.abilities as |name val|}}
                         <option value="{{val}}">{{name}}</option>
                         {{/each}}
@@ -115,7 +115,7 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassHPPerLevel"}}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.hp.value" value="{{data.hp.value}}" data-dtype="Number" />
+                    <input type="text" name="data.hp.value" value="{{itemData.hp.value}}" data-dtype="Number" />
                 </div>
             </div>
 
@@ -123,20 +123,20 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassSPPerlevel"}}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.sp.value" value="{{data.sp.value}}" data-dtype="Number" />
+                    <input type="text" name="data.sp.value" value="{{itemData.sp.value}}" data-dtype="Number" />
                 </div>
             </div>
 
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassSkillRanksPerlevel"}}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.skillRanks.value" value="{{data.skillRanks.value}}" data-dtype="Number" />
+                    <input type="text" name="data.skillRanks.value" value="{{itemData.skillRanks.value}}" data-dtype="Number" />
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="checkbox">
-                    {{localize "SFRPG.Classes.IsCasterClass"}} <input type="checkbox" name="data.isCaster" {{checked data.isCaster}} /> 
+                    {{localize "SFRPG.Classes.IsCasterClass"}} <input type="checkbox" name="data.isCaster" {{checked itemData.isCaster}} /> 
                 </label>
             </div>
 
@@ -145,7 +145,7 @@
                 <label>{{localize "SFRPG.ClassSkills"}}</label>
                 {{#each config.skills as |name val|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="data.csk.{{val}}" {{checked (lookup ../data.csk val)}}/> {{ name }}
+                    <input type="checkbox" name="data.csk.{{val}}" {{checked (lookup ../itemData.csk val)}}/> {{ name }}
                 </label>
                 {{/each}}
             </div>
@@ -155,7 +155,7 @@
                 <label>{{localize "SFRPG.ClassWeaponProf"}}</label>
                 {{#each config.weaponProficiencies as |name val|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="data.proficiencies.weapon.{{val}}" {{checked (lookup ../data.proficiencies.weapon val)}}/> {{ name }}
+                    <input type="checkbox" name="data.proficiencies.weapon.{{val}}" {{checked (lookup ../itemData.proficiencies.weapon val)}}/> {{ name }}
                 </label>
                 {{/each}}
             </div>
@@ -165,7 +165,7 @@
                 <label>{{localize "SFRPG.ClassArmorProf"}}</label>
                 {{#each config.armorProficiencies as |name val|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="data.proficiencies.armor.{{val}}" {{checked (lookup ../data.proficiencies.armor val)}}/> {{ name }}
+                    <input type="checkbox" name="data.proficiencies.armor.{{val}}" {{checked (lookup ../itemData.proficiencies.armor val)}}/> {{ name }}
                 </label>
                 {{/each}}
             </div>

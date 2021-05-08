@@ -2,7 +2,7 @@
 <div class="form-group select">
     <label>{{ localize "SFRPG.Items.Action.ActionType" }}</label>
     <select name="data.actionType">
-        {{#select data.actionType}}
+        {{#select itemData.actionType}}
         <option value=""></option>
         {{#each config.itemActionTypes as |name type|}}
         <option value="{{type}}">{{name}}</option>
@@ -10,13 +10,13 @@
         {{/select}}
     </select>
 </div>
-{{#if data.actionType}}
+{{#if itemData.actionType}}
 
 {{!-- Ability Modifier --}}
 <div class="form-group select">
     <label>{{ localize "SFRPG.Items.Action.AbilityModifier" }}</label>
     <select name="data.ability">
-        {{#select data.ability}}
+        {{#select itemData.ability}}
         <option value=""></option>
         {{#each config.abilities as |ability a|}}
         <option value="{{a}}">{{ability}}</option>
@@ -30,7 +30,7 @@
 <div class="form-group">
     <label>{{ localize "SFRPG.Items.Action.AttackRollBonus" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.attackBonus" value="{{data.attackBonus}}" data-dtype="Number"/>
+        <input type="text" name="data.attackBonus" value="{{itemData.attackBonus}}" data-dtype="Number"/>
     </div>
 </div>
 {{/if}}
@@ -41,7 +41,7 @@
     <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
 </h4>
 <ol class="damage-parts form-group">
-    {{#each data.damage.parts as |part i| }}
+    {{#each itemData.damage.parts as |part i| }}
     <li class="damage-part flexrow" data-damage-part="{{i}}">
         <input type="text" name="data.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
         <select name="data.damage.parts.{{i}}.1">
@@ -62,7 +62,7 @@
 <div class="form-group">
     <label>{{ localize "SFRPG.Items.Action.CriticalEffect" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.critical.effect" value="{{data.critical.effect}}"/>
+        <input type="text" name="data.critical.effect" value="{{itemData.critical.effect}}"/>
     </div>
 </div>
 <h4 class="damage-header">
@@ -70,7 +70,7 @@
     <a class="damage-control add-critical-damage"><i class="fas fa-plus"></i></a>
 </h4>
 <ol class="damage-parts form-group">
-    {{#each data.critical.parts as |part i| }}
+    {{#each itemData.critical.parts as |part i| }}
     <li class="damage-part flexrow" data-critical-part="{{i}}">
         <input type="text" name="data.critical.parts.{{i}}.0" value="{{lookup this "0"}}"/>
         <select name="data.critical.parts.{{i}}.1">
@@ -93,7 +93,7 @@
 <div class="form-group">
     <label>{{ localize "SFRPG.Items.Action.OtherFormula" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.formula" value="{{data.formula}}" placeholder="Formula"/>
+        <input type="text" name="data.formula" value="{{itemData.formula}}" placeholder="Formula"/>
     </div>
 </div>
 
@@ -101,9 +101,9 @@
 <div class="form-group input-select">
     <label>{{ localize "SFRPG.Items.Action.SavingThrow" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.save.dc" value="{{data.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
+        <input type="text" name="data.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
         <select name="data.save.type">
-            {{#select data.save.type}}
+            {{#select itemData.save.type}}
             <option value=""></option>
             {{#each config.saves as |save s|}}
             <option value="{{s}}">{{save}}</option>
@@ -111,7 +111,7 @@
             {{/select}}
         </select>
         <select name="data.save.descriptor">
-            {{#select data.save.descriptor}}
+            {{#select itemData.save.descriptor}}
             {{#each config.saveDescriptors as |descriptor k|}}
             <option value="{{k}}">{{descriptor}}</option>
             {{/each}}
@@ -123,6 +123,6 @@
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">
     <label>{{ localize "SFRPG.Items.Action.ChatMessageFlavor" }}</label>
-    <input type="text" name="data.chatFlavor" value="{{data.chatFlavor}}"/>
+    <input type="text" name="data.chatFlavor" value="{{itemData.chatFlavor}}"/>
 </div>
 {{/if}}

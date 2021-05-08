@@ -17,7 +17,7 @@
             {{!-- Item Summary --}}
             <ul class="summary flexrow">
                 <li class="wide" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
-                <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                <input type="text" name="data.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>
 
@@ -58,7 +58,7 @@
                 <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
             </h4>
             <ol class="damage-parts form-group">
-                {{#each data.data.damage.parts as |part i| }}
+                {{#each itemData.damage.parts as |part i| }}
                 <li class="damage-part flexrow" data-damage-part="{{i}}">
                     <input type="text" name="data.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
                     <select name="data.damage.parts.{{i}}.1">
@@ -81,7 +81,7 @@
             <div class="form-group input-select">
                 <label>{{ localize "SFRPG.VehicleAttackSheet.Details.IgnoresHardness" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.ignoresHardness" value="{{data.ignoresHardness}}" data-dtype="String" placeholder="0"/>
+                    <input type="text" name="data.ignoresHardness" value="{{itemData.ignoresHardness}}" data-dtype="String" placeholder="0"/>
                 </div>
             </div>
 
@@ -89,9 +89,9 @@
             <div class="form-group input-select">
                 <label>{{ localize "SFRPG.Items.Action.SavingThrow" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.save.dc" value="{{data.data.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
+                    <input type="text" name="data.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
                     <select name="data.save.type">
-                        {{#select data.data.save.type}}
+                        {{#select itemData.save.type}}
                         <option value=""></option>
                         {{#each config.saves as |save s|}}
                         <option value="{{s}}">{{save}}</option>
@@ -99,7 +99,7 @@
                         {{/select}}
                     </select>
                     <select name="data.save.descriptor">
-                        {{#select data.data.save.descriptor}}
+                        {{#select itemData.save.descriptor}}
                         {{#each config.saveDescriptors as |descriptor k|}}
                         <option value="{{k}}">{{descriptor}}</option>
                         {{/each}}

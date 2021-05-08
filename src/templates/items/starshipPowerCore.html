@@ -26,7 +26,7 @@
             <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.ProvidedPower" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.ProvidedPowerTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.ProvidedPower" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.pcu" value="{{data.pcu}}" data-dtype="Number" placeholder="0" />
+                    <input type="text" name="data.pcu" value="{{itemData.pcu}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                 <label>{{ localize "SFRPG.ItemSheet.StarshipPowerCore.Sizes" }}</label>
                 {{#each config.starshipSizes as |typeName typeKey|}}
                 <label class="checkbox">
-                    <input type="checkbox" class="data.supportedSizes" name="{{typeKey}}" {{checked (contains ../data.supportedSizes typeKey)}}/>{{localize typeName}}
+                    <input type="checkbox" class="data.supportedSizes" name="{{typeKey}}" {{checked (contains ../itemData.supportedSizes typeKey)}}/>{{localize typeName}}
                 </label>
                 {{/each}}
             </div>

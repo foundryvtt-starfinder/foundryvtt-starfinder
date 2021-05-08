@@ -73,6 +73,15 @@ export class ItemSheetSFRPG extends ItemSheet {
         return numericValue;
     }
 
+    async onPlaceholderUpdated(item, newSavingThrowScore) {
+        const placeholders = item.data.flags.placeholders;
+        if (placeholders.savingThrow.value !== newSavingThrowScore.total) {
+            placeholders.savingThrow.value = newSavingThrowScore.total;
+            await new Promise(resolve => setTimeout(resolve, 50));
+            this.render(false);
+        }
+    }
+
     /**
      * Prepare item sheet data
      * Start with the base item data and extending with additional properties for rendering.
@@ -107,7 +116,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Item attributes
         const itemData = this.item.data.data;
-        data.placeholders = {};
+        data.placeholders = this.item.data.flags.placeholders || {};
 
         if (data.isPhysicalItem) {
             if (itemData.attributes) {
@@ -121,9 +130,12 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.dexterityModifier = dexterityModifier;
                 data.placeholders.sizeModifier = sizeModifier;
 
-                data.placeholders.savingThrow = {};
+                data.placeholders.savingThrow = data.placeholders.savingThrow || {};
                 data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
-                data.placeholders.savingThrow.value = this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula);
+                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value || 10;
+                
+                this.item.data.flags.placeholders = data.placeholders;
+                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula).then((total) => { this.onPlaceholderUpdated(this.item, total); });
             } else {
                 const itemLevel = this.parseNumber(itemData.level, 1);
                 const sizeModifier = 0;
@@ -135,9 +147,12 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.dexterityModifier = dexterityModifier;
                 data.placeholders.sizeModifier = sizeModifier;
 
-                data.placeholders.savingThrow = {};
+                data.placeholders.savingThrow = data.placeholders.savingThrow || {};
                 data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
-                data.placeholders.savingThrow.value = this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula);
+                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value || 10;
+                
+                this.item.data.flags.placeholders = data.placeholders;
+                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula).then((total) => { this.onPlaceholderUpdated(this.item, total); });
             }
         }
 
@@ -169,7 +184,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     /* -------------------------------------------- */
 
-    _computeSavingThrowValue(itemLevel, formula) {
+    async _computeSavingThrowValue(itemLevel, formula) {
         try {
             const rollData = {
                 owner: this.item.actor ? duplicate(this.item.actor.data.data) : {abilities: {dex: {mod: 0}}},
@@ -179,10 +194,10 @@ export class ItemSheetSFRPG extends ItemSheet {
             if (!rollData.owner.abilities?.dex?.mod) {
                 rollData.owner.abilities = {dex: {mod: 0}};
             }
-            const saveRoll = new Roll(formula, rollData).evaluate();
-            return saveRoll.total;
+            const saveRoll = new Roll(formula, rollData);
+            return saveRoll.evaluate({async: true});
         } catch (err) {
-            return 10;
+            return null;
         }
     }
 

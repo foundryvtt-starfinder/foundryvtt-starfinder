@@ -16,7 +16,7 @@
 
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source" />
+                    <input type="text" name="data.source" value="{{itemData.source}}" placeholder="Source" />
                 </li>
             </ul>
         </div>
@@ -39,7 +39,7 @@
                 <label>{{localize "SFRPG.ItemSheet.AbilityScoreIncrease.Label"}}</label>
                 {{#each config.abilities as |ability name|}}
                 <label class="checkbox" data-tippy-content="{{lookup (lookup ../config.abilities name) "tooltip"}}">
-                    <input type="checkbox" name="data.abilities.{{name}}" {{checked (lookup ../data.abilities name)}} /> {{ability}}
+                    <input type="checkbox" name="data.abilities.{{name}}" {{checked (lookup ../itemData.abilities name)}} /> {{ability}}
                 </label>
                 {{/each}}
             </div>
