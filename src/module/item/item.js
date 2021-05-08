@@ -1227,7 +1227,7 @@ export class ItemSFRPG extends Item {
 
             // Optionally destroy the item
             else if (c <= 1 && q <= 1 && itemData.uses.autoDestroy) {
-                this.actor.deleteOwnedItem(this.id);
+                this.actor.deleteEmbeddedDocuments("Item", [this.id]);
             }
 
             // Deduct the remaining charges

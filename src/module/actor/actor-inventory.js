@@ -79,7 +79,7 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
     const newItemQuantity = sourceItemQuantity - quantity;
 
     if (newItemQuantity < 1) {
-        return sourceActor.deleteOwnedItem(itemToRemove);
+        return sourceActor.deleteItem(itemToRemove);
     } else {
         return sourceActor.updateItem(itemToRemove._id, {'data.quantity': newItemQuantity });
     }
@@ -156,7 +156,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 await targetActor.updateItem(targetItem._id, {'data.quantity': targetItemNewQuantity});
 
                 if (quantity >= itemQuantity) {
-                    await sourceActor.deleteOwnedItem(itemToMove._id);
+                    await sourceActor.deleteItem(itemToMove._id);
                 } else {
                     await sourceActor.updateItem(itemToMove._id, {'data.quantity': itemQuantity - quantity});
                 }
@@ -225,7 +225,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 
                 if (isFullMove) {
                     const itemsToRemove = items.map(x => x.item.id);
-                    await sourceActor.deleteOwnedItem(itemsToRemove);
+                    await sourceActor.deleteItem(itemsToRemove);
                 } else {
                     await sourceActor.updateItem(itemToMove._id, {'data.quantity': itemQuantity - quantity});
                 }
@@ -263,7 +263,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         if (createResult.length != items.length) {
             console.log(['Mismatch in item count after creating', createResult, items]);
             const deleteIds = createResult.map(x => x.id);
-            return targetActor.deleteOwnedItem(deleteIds);
+            return targetActor.deleteItem(deleteIds);
         }
 
         const updatesToPerform = [];
@@ -298,7 +298,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                             indexMap: indexMap
                         });
                         const deleteIds = createResult.map(x => x.id);
-                        await targetActor.deleteOwnedItem(deleteIds);
+                        await targetActor.deleteItem(deleteIds);
                         throw error;
                     }
                 }
@@ -343,7 +343,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         /** Delete all items from source actor. */
         if (isFullMove) {
             const itemsToRemove = items.map(x => x.item.id);
-            await sourceActor.deleteOwnedItem(itemsToRemove);
+            await sourceActor.deleteItem(itemsToRemove);
         } else {
             await sourceActor.updateItem(itemToMove._id, {'data.quantity': itemQuantity - quantity});
         }
@@ -660,7 +660,7 @@ async function onItemDraggedToCollection(message) {
         }
 
         newItems.push(data.draggedItemData);
-        await source.deleteOwnedItem(data.draggedItemData.id);
+        await source.deleteItem(data.draggedItemData.id);
     } else {
         let sidebarItem = game.items.get(data.draggedItemId);
         if (sidebarItem) {
@@ -868,14 +868,14 @@ export class ActorItemHelper {
     }
 
     /**
-     * Wrapper around actor.deleteOwnedItem.
+     * Wrapper around actor.deleteEmbeddedDocuments, also removes the item cleanly from its container, if applicable.
      * @param {String} itemId ID of item to delete.
      * @param {Boolean} recursive (Optional) Set to true to also delete contained items. Defaults to false.
      */
-    async deleteOwnedItem(itemId, recursive = false) {
+    async deleteItem(itemId, recursive = false) {
         if (!this.actor) return null;
 
-        let itemsToDelete = (itemId instanceof Array) ? itemId : [itemId];
+        const itemIdsToDelete = (itemId instanceof Array) ? itemId : [itemId];
 
         if (recursive) {
             let idsToTest = [itemId];
@@ -884,7 +884,7 @@ export class ActorItemHelper {
                 let item = this.getItem(idToTest);
                 if (item && item.data.data.container?.contents) {
                     for (let containedItem of item.data.data.container.contents) {
-                        itemsToDelete.push(containedItem.id);
+                        itemIdsToDelete.push(containedItem.id);
                         idsToTest.push(containedItem.id);
                     }
                 }
@@ -899,7 +899,7 @@ export class ActorItemHelper {
             promises.push(this.actor.updateEmbeddedDocuments("Item", [{"id": container.id, "data.container.contents": newContents}]));
         }
 
-        promises.push(this.actor.deleteEmbeddedDocuments("Item", itemsToDelete, {}));
+        promises.push(this.actor.deleteEmbeddedDocuments("Item", itemIdsToDelete, {}));
 
         return Promise.all(promises);
     }

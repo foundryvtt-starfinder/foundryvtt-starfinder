@@ -407,13 +407,13 @@ export class ActorSheetSFRPG extends ActorSheet {
         let item = actorHelper.getItem(itemId);
 
         if (event.shiftKey) {
-            actorHelper.deleteOwnedItem(itemId, true).then(() => {
+            actorHelper.deleteItem(itemId, true).then(() => {
                 li.slideUp(200, () => this.render(false));
             });
         } else {
             let containsItems = (item.data.data.container?.contents && item.data.data.container.contents.length > 0);
             ItemDeletionDialog.show(item.name, containsItems, (recursive) => {
-                actorHelper.deleteOwnedItem(itemId, recursive).then(() => {
+                actorHelper.deleteItem(itemId, recursive).then(() => {
                     li.slideUp(200, () => this.render(false));
                 });
             });
@@ -586,7 +586,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Try find existing condition, remove if possible
             let conditionItem = this.actor.items.find(x => x.type === "feat" && x.data.data.requirements?.toLowerCase() === "condition" && x.name.toLowerCase() === condition.toLowerCase());
             if (conditionItem) {
-                await this.actor.deleteOwnedItem(conditionItem.id);
+                await this.actor.deleteEmbeddedDocuments("Item", [conditionItem.id]);
             }
         }
 
