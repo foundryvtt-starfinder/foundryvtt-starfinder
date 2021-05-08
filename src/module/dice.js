@@ -961,7 +961,7 @@ class RollDialog extends Dialog
             const container = modifier.container;
             const actor = await game.actors.get(container.actorId);
             if (container.itemId) {
-                const item = container.itemId ? await actor.getOwnedItem(container.itemId) : null;
+                const item = container.itemId ? await actor.items.get(container.itemId) : null;
 
                 // Update modifier by ID in item
                 const containerModifiers = duplicate(item.data.data.modifiers);

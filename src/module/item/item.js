@@ -318,7 +318,7 @@ export class ItemSFRPG extends Item {
             const contents = itemToTest?.data?.data?.container?.contents;
             if (contents) {
                 for (const content of contents) {
-                    const containedItem = this.actor.getOwnedItem(content.id);
+                    const containedItem = this.actor.items.get(content.id);
                     if (containedItem) {
                         containedItems.push(containedItem);
                         itemsToTest.push(containedItem);

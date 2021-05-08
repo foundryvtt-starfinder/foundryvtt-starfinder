@@ -308,7 +308,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         event.preventDefault();
 
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         return item.update({'data.preparation.prepared': !item.data.data.preparation.prepared});
     }

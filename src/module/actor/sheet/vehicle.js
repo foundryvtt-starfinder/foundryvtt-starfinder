@@ -440,7 +440,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         event.preventDefault();
 
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const system = this.actor.getOwnedItem(itemId);
+        const system = this.actor.items.get(itemId);
 
         this.actor.rollVehiclePilotingSkill(null, null, system);
     }
@@ -453,7 +453,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onDeactivateVehicleSystem(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : false;
         await item.update({'data.isActive': desiredOutput});
@@ -487,7 +487,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onActivateVehicleSystem(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
         const updateData = {};
 
         const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : true;

@@ -404,7 +404,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             itemId = li.attr("data-item-id");
 
         let actorHelper = new ActorItemHelper(this.actor.id, this.token ? this.token.id : null, this.token ? this.token.parent.id : null);
-        let item = actorHelper.getOwnedItem(itemId);
+        let item = actorHelper.getItem(itemId);
 
         if (event.shiftKey) {
             actorHelper.deleteOwnedItem(itemId, true).then(() => {
@@ -760,12 +760,12 @@ export class ActorSheetSFRPG extends ActorSheet {
         let actorHelper = new ActorItemHelper(this.actor.id, this.token ? this.token.id : null, this.token ? this.token.parent.id : null);
 
         let update = { id: item.id, "data.quantity": bigStack };
-        await actorHelper.updateOwnedItem(update);
+        await actorHelper.updateItem(update);
 
         let itemData = duplicate(item.data);
         itemData.id = null;
         itemData.data.quantity = smallStack;
-        await actorHelper.createOwnedItem(itemData);
+        await actorHelper.createItem(itemData);
     }
 
     _prepareSpellbook(data, spells) {
@@ -910,7 +910,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     async processDroppedData(event, parsedDragData) {
-        const targetActor = new ActorItemHelper(this.actor.id, this.token ? this.token.id : null, this.token ? this.token.parent.id : null);
+        const targetActor = new ActorItemHelper(this.actor.id, this.token?.id, this.token?.parent?.id);
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
             ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
             return;
@@ -919,9 +919,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         let targetContainer = null;
         if (event) {
             const targetId = $(event.target).parents('.item').attr('data-item-id')
-            targetContainer = targetActor.getOwnedItem(targetId);
+            targetContainer = targetActor.getItem(targetId);
         }
-        
+
         if (parsedDragData.type === "ItemCollection") {
             const msg = {
                 target: targetActor.toObject(),
@@ -943,8 +943,8 @@ export class ActorSheetSFRPG extends ActorSheet {
             const pack = game.packs.get(parsedDragData.pack);
             const itemData = await pack.getDocument(parsedDragData.id);
             
-            const createResult = await targetActor.createOwnedItem(itemData.data);
-            const addedItem = targetActor.getOwnedItem(createResult[0].id);
+            const createResult = await targetActor.createItem(itemData.data);
+            const addedItem = targetActor.getItem(createResult[0]._id);
 
             if (!(addedItem.type in SFRPG.containableTypes)) {
                 targetContainer = null;
@@ -958,13 +958,13 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             return itemInTargetActor;
         } else if (parsedDragData.data) {
-            let sourceActor = new ActorItemHelper(parsedDragData.actorId, parsedDragData.tokenId, null);
+            const sourceActor = new ActorItemHelper(parsedDragData.actorId, parsedDragData.tokenId, parsedDragData.sceneId);
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
                 return;
             }
 
-            const itemToMove = await sourceActor.getOwnedItem(parsedDragData.data.id);
+            const itemToMove = await sourceActor.getItem(parsedDragData.data._id);
 
             if (event.shiftKey) {
                 InputDialog.show(
@@ -1005,9 +1005,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else {
             const sidebarItem = game.items.get(parsedDragData.id);
             if (sidebarItem) {
-                const addedItemResult = await targetActor.createOwnedItem(duplicate(sidebarItem.data));
+                const addedItemResult = await targetActor.createItem(duplicate(sidebarItem.data));
                 if (addedItemResult.length > 0) {
-                    const addedItem = targetActor.getOwnedItem(addedItemResult[0]._id);
+                    const addedItem = targetActor.getItem(addedItemResult[0]._id);
 
                     if (targetContainer) {
                         let newContents = [];
@@ -1019,7 +1019,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                         newContents.push({id: addedItem.id, index: preferredStorageIndex});
                         
                         const update = { id: targetContainer.id, "data.container.contents": newContents };
-                        await targetActor.updateOwnedItem(update);
+                        await targetActor.updateItem(update);
                     }
 
                     return addedItem;

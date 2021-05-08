@@ -111,13 +111,13 @@ export async function handleItemDropCanvas(data) {
         }
         sourceActor = new ActorItemHelper(sourceToken.actor.id, sourceToken.id, sourceToken.parent.id);
         sourceItemData = duplicate(data.data);
-        sourceItem = sourceActor.getOwnedItem(sourceItemData.id);
+        sourceItem = sourceActor.getItem(sourceItemData.id);
     } else if (data["actorId"]) {
         // Source is actor sheet
         //console.log("> Dragged item from actor: " + data.actorId);
         sourceActor = new ActorItemHelper(data.actorId, null, null);
         sourceItemData = duplicate(data.data);
-        sourceItem = sourceActor.getOwnedItem(sourceItemData.id);
+        sourceItem = sourceActor.getItem(sourceItemData.id);
     } else if (data["id"]) {
         // Source is sidebar
         //console.log("> Dragged item from sidebar: " + data.id);
