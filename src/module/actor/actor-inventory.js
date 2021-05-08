@@ -224,7 +224,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 const updateResult = await targetActor.updateItem(targetItem._id, {'data.quantity': parseInt(targetItem.data.data.quantity) + parseInt(quantity)});
                 
                 if (isFullMove) {
-                    const itemsToRemove = items.map(x => x.item.id);
+                    const itemsToRemove = items.map(x => x.item._id);
                     await sourceActor.deleteItem(itemsToRemove);
                 } else {
                     await sourceActor.updateItem(itemToMove._id, {'data.quantity': itemQuantity - quantity});
@@ -273,12 +273,12 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
             if (itemToTest.children && itemToTest.children.length > 0) {
                 const indexMap = itemToTest.item.data.container.contents.map(x => {
-                    const foundItem = items.find(y => y.item.id === x.id);
+                    const foundItem = items.find(y => y.item._id === x.id);
                     const foundItemIndex = items.indexOf(foundItem);
                     return foundItemIndex;
                 });
 
-                let newContents = duplicate(itemToUpdate.data.container.contents);
+                let newContents = duplicate(itemToUpdate.data.data.container.contents);
                 for (let j = 0; j<indexMap.length; j++) {
                     const index = indexMap[j];
                     if (index === -1) {
@@ -305,7 +305,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
                 newContents = newContents.filter(x => x.id !== "deleteme");
 
-                updatesToPerform.push({ id: itemToUpdate.id, 'data.container.contents': newContents});
+                updatesToPerform.push({ _id: itemToUpdate.id, 'data.container.contents': newContents});
             }
         }
 
@@ -316,7 +316,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 desiredParent = targetItem;
                 desiredStorageIndex = targetItemStorageIndex;
             } else {
-                let targetsParent = targetActor.findItem(x => x.data.data.container?.contents && x.data.data.container.contents.find( y => y.id === targetItem.id));
+                let targetsParent = targetActor.findItem(x => x.data.data.container?.contents && x.data.data.container.contents.find( y => y.id === targetItem._id));
                 if (targetsParent) {
                     if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
                         desiredParent = targetsParent;
@@ -329,10 +329,10 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         if (desiredParent) {
             const newContents = duplicate(desiredParent.data.data.container?.contents || []);
             newContents.push({id: createResult[0].id, index: desiredStorageIndex || 0});
-            updatesToPerform.push({id: desiredParent.id, "data.container.contents": newContents});
+            updatesToPerform.push({_id: desiredParent.id, "data.container.contents": newContents});
         }
 
-        await targetActor.updateItem(updatesToPerform);
+        await targetActor.actor.updateEmbeddedDocuments("Item", updatesToPerform);
         if (targetActor.actor?.sheet) {
             targetActor.actor.sheet.render(false);
         }
@@ -342,7 +342,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
         /** Delete all items from source actor. */
         if (isFullMove) {
-            const itemsToRemove = items.map(x => x.item.id);
+            const itemsToRemove = items.map(x => x.item._id);
             await sourceActor.deleteItem(itemsToRemove);
         } else {
             await sourceActor.updateItem(itemToMove._id, {'data.quantity': itemQuantity - quantity});
@@ -929,7 +929,7 @@ export class ActorItemHelper {
         const container = this.actor.items.find(x => x.data.data?.container?.contents?.find(y => y.id === itemId) !== undefined);
         if (container) {
             const newContents = container.data.data.container.contents.filter(x => x.id !== itemId);
-            promises.push(this.actor.updateEmbeddedDocuments("Item", [{"id": container.id, "data.container.contents": newContents}]));
+            promises.push(this.actor.updateEmbeddedDocuments("Item", [{"_id": container._id, "data.container.contents": newContents}]));
         }
 
         promises.push(this.actor.deleteEmbeddedDocuments("Item", itemIdsToDelete, {}));
@@ -1071,7 +1071,7 @@ export class ActorItemHelper {
 
             if (isDirty) {
                 console.log("> Migrating " + item.name);
-                await this.actor.updateEmbeddedDocuments("Item", [{ id: item.id, data: itemData}]);
+                await this.actor.updateEmbeddedDocuments("Item", [{ _id: item.id, data: itemData}]);
             }
         }
     }

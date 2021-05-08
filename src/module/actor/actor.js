@@ -914,7 +914,7 @@ export class ActorSFRPG extends Actor {
         const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
         const updateItems = items.map(item => {
             return {
-                id: item.id,
+                _id: item._id,
                 "data.uses.value": item.data.data.uses.max
             }
         });
@@ -1056,7 +1056,7 @@ export class ActorSFRPG extends Actor {
         const items = this.items.filter(i => i.data.data.uses && ["sr", "lr", "day"].includes(i.data.data.uses.per));
         const updateItems = items.map(item => {
             return {
-                id: item.id,
+                _id: item._id,
                 "data.uses.value": item.data.data.uses.max
             }
         });
