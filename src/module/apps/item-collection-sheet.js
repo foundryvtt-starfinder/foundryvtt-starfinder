@@ -76,8 +76,8 @@ export class ItemCollectionSheet extends DocumentSheet {
 
         const tokenData = this.document.getFlag("sfrpg", "itemCollection");
 
-        let items = duplicate(tokenData.items);
-        for (let item of items) {
+        const items = duplicate(tokenData.items);
+        for (const item of items) {
             item.img = item.img || DEFAULT_TOKEN;
 
             item.data.quantity = item.data.quantity || 0;
@@ -106,6 +106,13 @@ export class ItemCollectionSheet extends DocumentSheet {
             data.items.push(itemData);
         });
 
+        // Ensure containers are always open in loot collection tokens
+        for(const itemData of data.items) {
+            if (itemData.contents && itemData.contents.length > 0) {
+                itemData.item.isOpen = true;
+            }
+        }
+
         data.itemCollection = tokenData;
 
         if (data.itemCollection.locked && !game.user.isGM) {
@@ -128,12 +135,12 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
 
     processItemContainment(items, pushItemFn) {
-        let preprocessedItems = [];
-        let containedItems = [];
-        for (let item of items) {
-            let itemData = {
+        const preprocessedItems = [];
+        const containedItems = [];
+        for (const item of items) {
+            const itemData = {
                 item: item,
-                parent: items.find(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === item.id)),
+                parent: items.find(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === item._id)),
                 contents: []
             };
             preprocessedItems.push(itemData);
@@ -145,8 +152,8 @@ export class ItemCollectionSheet extends DocumentSheet {
             }
         }
 
-        for (let item of containedItems) {
-            let parent = preprocessedItems.find(x => x.item.id === item.parent.id);
+        for (const item of containedItems) {
+            const parent = preprocessedItems.find(x => x.item._id === item.parent._id);
             if (parent) {
                 parent.contents.push(item);
             }

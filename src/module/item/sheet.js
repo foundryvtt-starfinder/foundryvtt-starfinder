@@ -100,10 +100,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.itemType = game.i18n.format(`ITEM.Type${data.item.type.titleCase()}`);
         data.itemStatus = this._getItemStatus();
         data.itemProperties = this._getItemProperties();
-        data.isPhysical = data.item.data.hasOwnProperty("quantity");
-        data.hasLevel = data.item.data.hasOwnProperty("level") && data.item.type !== "spell";
-        data.hasHands = data.item.data.hasOwnProperty("hands");
-        data.hasProficiency = data.item.data.proficient === true || data.item.data.proficient === false;
+        data.isPhysical = data.itemData.hasOwnProperty("quantity");
+        data.hasLevel = data.itemData.hasOwnProperty("level") && data.item.type !== "spell";
+        data.hasHands = data.itemData.hasOwnProperty("hands");
+        data.hasProficiency = data.itemData.proficient === true || data.itemData.proficient === false;
         data.isFeat = this.type === "feat";
         data.isVehicleAttack = data.item.type === "vehicleAttack";
         data.isVehicleSystem = data.item.type === "vehicleSystem";

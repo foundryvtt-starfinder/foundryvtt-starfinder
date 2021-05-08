@@ -610,12 +610,12 @@ function wouldCreateParentCycle(item, container, actor) {
  * RPC handlers
  ******************************************************************************/
 export async function onCreateItemCollection(message) {
-    let payload = message.payload;
+    const payload = message.payload;
     if (!payload.itemData) {
         return false;
     }
 
-    return Token.create({
+    const createdTokenPromise = canvas.scene.createEmbeddedDocuments("Token", [{
         name: payload.itemData[0].name,
         x: payload.position.x,
         y: payload.position.y,
@@ -632,7 +632,15 @@ export async function onCreateItemCollection(message) {
                 }
             }
         }
-    });
+    }]);
+
+    /*createdTokenPromise.then((createdTokens) => {
+        const createdToken = createdTokens[0];
+        console.log(createdToken);
+        
+        createdToken.createEmbeddedDocuments("Item", payload.itemData);
+    });*/
+    return createdTokenPromise;
 }
 
 async function onItemDraggedToCollection(message) {
@@ -712,27 +720,52 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     const copiedItemIds = [];
     const itemToItemMapping = {};
 
-    const creationResult = await target.createItem(data.draggedItems);
-    const createdItems = creationResult instanceof Array ? creationResult : [creationResult];
+    // Get child items as well
+    const itemsToTest = duplicate(data.draggedItems);
+    while (itemsToTest.length > 0) {
+        const draggedItem = itemsToTest.shift();
+        if (draggedItem.data?.container?.contents?.length > 0) {
+            draggedItem.data.container.contents = draggedItem.data.container.contents.filter(x => x.id);
+            for (const {id:contentItemId, index:contentItemIndex} of draggedItem.data.container.contents) {
+                if (contentItemId) {
+                    const contentItem = source.token.data.flags.sfrpg.itemCollection.items.find(x => x._id == contentItemId);
+                    if (contentItem) {
+                        data.draggedItems.push(contentItem);
+                        itemsToTest.push(contentItem);
+                    }
+                }
+            }
+        }
+    }
+
+    // If effects are serialized (0.8) remove them now
+    for (const item of data.draggedItems) {
+        item.effects = [];
+    }
+
+    const createdItems = await target.createItem(data.draggedItems);
     for (let i = 0; i<createdItems.length; i++) {
         const newItem = createdItems[i];
         const originalItem = data.draggedItems[i];
 
-        itemToItemMapping[originalItem.id] = newItem;
-        copiedItemIds.push(originalItem.id);
+        itemToItemMapping[originalItem._id] = newItem;
+        copiedItemIds.push(originalItem._id);
         uncontainedItemIds.push(newItem.id);
     }
 
     const bulkUpdates = [];
     for (const originalItem of data.draggedItems) {
-        const newItem = itemToItemMapping[originalItem.id];
+        const newItem = itemToItemMapping[originalItem._id];
         if (originalItem.data.container?.contents && originalItem.data.container.contents.length > 0) {
-            let newContents = [];
+            originalItem.data.container.contents = originalItem.data.container.contents.filter(x => x.id);
+            const newContents = [];
             for (const originalContent of originalItem.data.container.contents) {
-                const originalContentItem = data.draggedItems.find(x => x.id === originalContent.id);
-                const newContentItem = itemToItemMapping[originalContentItem.id];
-                newContents.push({id: newContentItem.id, index: originalContent.index});
-                uncontainedItemIds = uncontainedItemIds.filter(x => x !== newContentItem.id);
+                const originalContentItem = data.draggedItems.find(x => x._id === originalContent.id);
+                if (originalContentItem) {
+                    const newContentItem = itemToItemMapping[originalContentItem._id];
+                    newContents.push({id: newContentItem.id, index: originalContent.index});
+                    uncontainedItemIds = uncontainedItemIds.filter(x => x !== newContentItem.id);
+                }
             }
 
             const update = {_id: newItem.id, "data.container.contents": newContents};
@@ -745,11 +778,11 @@ async function onItemCollectionItemDraggedToPlayer(message) {
 
     // Remove items from source token
     let sourceItems = duplicate(source.token.data.flags.sfrpg.itemCollection.items);
-    sourceItems = sourceItems.filter(x => !copiedItemIds.includes(x.id));
-    await source.token.update({"flags.sfrpg.itemCollection.items": sourceItems});
+    sourceItems = sourceItems.filter(x => !copiedItemIds.includes(x._id));
+    await source.token.document.update({"flags.sfrpg.itemCollection.items": sourceItems});
 
     if (sourceItems.length === 0 && source.token.data.flags.sfrpg.itemCollection.deleteIfEmpty) {
-        await source.token.delete();
+        await source.token.document.delete();
     }
 
     // Add any uncontained items into targetItem, if applicable
@@ -765,7 +798,7 @@ async function onItemCollectionItemDraggedToPlayer(message) {
 
         if (acceptableItemIds.length > 0) {
             const combinedContents = targetContainer.data.data.container.contents.concat(acceptableItemIds);
-            await target.updateItem(targetContainer._id, {"data.container.contents": combinedContents});
+            await target.updateItem(targetContainer.id, {"data.container.contents": combinedContents});
         }
     }
 }
@@ -817,8 +850,8 @@ export class ActorItemHelper {
      * Parses a new ActorItemHelper out of an object containing actorId, tokenId, and sceneId.
      * @param {Object} actorReferenceObject 
      */
-    static FromObject(actorReferenceObject) {
-        return new ActorItemHelper(actorReferenceObject.actorId, actorReferenceObject.tokenId, actorReferenceObject.sceneId);
+    static FromObject(actorReferenceObject, options = {}) {
+        return new ActorItemHelper(actorReferenceObject.actorId, actorReferenceObject.tokenId, actorReferenceObject.sceneId, options);
     }
 
     toObject() {

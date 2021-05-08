@@ -15,16 +15,16 @@ function onCanvasReady(...args) {
     }
 }
 
-function onTokenCreated(scene, tokenData, tokenFlags, userId) {
-    if (getProperty(tokenData, "flags.sfrpg.itemCollection")) {
-        const token = canvas.tokens.placeables.find(x => x.id === tokenData.id);
+function onTokenCreated(document, options, userId) {
+    if (getProperty(document.data, "flags.sfrpg.itemCollection")) {
+        const token = canvas.tokens.placeables.find(x => x.id === document.id);
         trySetupLootToken(token);
     }
 }
 
-function onTokenUpdated(scene, tokenData, tokenFlags, userId) {
-    if (getProperty(tokenData, "flags.sfrpg.itemCollection")) {
-        const token = canvas.tokens.placeables.find(x => x.id === tokenData.id);
+function onTokenUpdated(document, options, userId) {
+    if (getProperty(document.data, "flags.sfrpg.itemCollection")) {
+        const token = canvas.tokens.placeables.find(x => x.id === document.id);
         trySetupLootToken(token);
     }
 }
@@ -103,15 +103,15 @@ export async function handleItemDropCanvas(data) {
         sourceItemData = duplicate(await pack.getEntry(data.id));
     } else if (data["tokenId"]) {
         // Source is token sheet
-        console.log(["> Dragged item from token: ", data]);
-        let sourceToken = canvas.tokens.get(data.tokenId);
+        //console.log(["> Dragged item from token: ", data]);
+        const sourceToken = canvas.tokens.get(data.tokenId);
         if (!sourceToken) {
             ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
             return;
         }
-        sourceActor = new ActorItemHelper(sourceToken.actor.id, sourceToken.id, sourceToken.parent.id);
+        sourceActor = new ActorItemHelper(sourceToken.actor.id, sourceToken.id, sourceToken.scene.id);
         sourceItemData = duplicate(data.data);
-        sourceItem = sourceActor.getItem(sourceItemData.id);
+        sourceItem = sourceActor.getItem(sourceItemData._id);
     } else if (data["actorId"]) {
         // Source is actor sheet
         //console.log("> Dragged item from actor: " + data.actorId);
@@ -135,7 +135,7 @@ export async function handleItemDropCanvas(data) {
     // Potential targets:
     // Canvas (floor), Token Actor (may be linked)
     let targetActor = null;
-	for (let placeable of canvas.tokens.placeables) {
+	for (const placeable of canvas.tokens.placeables) {
 		if (data.x < placeable.x + placeable.width && data.x > placeable.x && data.y < placeable.y + placeable.height && data.y > placeable.y && placeable instanceof Token) {
 			targetActor = placeable.actor;
 			break;
@@ -144,16 +144,16 @@ export async function handleItemDropCanvas(data) {
 
     // Create a placeable instead and do item transferral there.
     if (targetActor === null) {
-        let itemData = [sourceItemData];
+        const transferringItems = [sourceItemData];
         if (sourceActor !== null && sourceItemData.data.container?.contents && sourceItemData.data.container.contents.length > 0) {
-            let containersToTest = [sourceItemData];
+            const containersToTest = [sourceItemData];
             while (containersToTest.length > 0)
             {
-                let container = containersToTest.shift();
-                let children = sourceActor.filterItems(x => container.data.container.contents.find(y => y.id === x.id));
+                const container = containersToTest.shift();
+                const children = sourceActor.filterItems(x => container.data.container.contents.find(y => y.id === x.id));
                 if (children) {
-                    for (let child of children) {
-                        itemData.push(child.data);
+                    for (const child of children) {
+                        transferringItems.push(child.data);
 
                         if (child.data.data.container?.contents && child.data.data.container.contents.length > 0) {
                             containersToTest.push(child.data);
@@ -163,15 +163,15 @@ export async function handleItemDropCanvas(data) {
             }
         }
 
-        const hasDropped = placeItemCollectionOnCanvas(data.x, data.y, itemData, true);
+        const hasDropped = placeItemCollectionOnCanvas(data.x, data.y, transferringItems, true);
         if (hasDropped) {
             // Remove old items
             if (sourceActor) {
-                let idsToDrop = [];
-                for (let droppedItem of itemData) {
-                    idsToDrop.push(droppedItem.id);
+                const idsToDrop = [];
+                for (const droppedItem of transferringItems) {
+                    idsToDrop.push(droppedItem._id);
                 }
-                sourceActor.deleteOwnedItem(idsToDrop);
+                sourceActor.deleteItem(idsToDrop);
             }
         }
 
@@ -239,8 +239,8 @@ function setupLootCollectionTokenInteraction(lootCollectionToken, updateApps = f
     lootCollectionToken.mouseInteractionManager.permissions.clickLeft2 = () => true;
 
     if (updateApps) {
-        for (let appId in lootCollectionToken.apps) {
-            let app = lootCollectionToken.apps[appId];
+        for (const appId in lootCollectionToken.apps) {
+            const app = lootCollectionToken.apps[appId];
             app.render(true);
         }
     }
