@@ -942,9 +942,8 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else if (parsedDragData.pack) {
             const pack = game.packs.get(parsedDragData.pack);
             const itemData = await pack.getDocument(parsedDragData.id);
-            
-            const createResult = await targetActor.createItem(itemData.data);
-            const addedItem = targetActor.getItem(createResult[0]._id);
+            const createResult = await targetActor.createItem(itemData.data._source);
+            const addedItem = targetActor.getItem(createResult[0].id);
 
             if (!(addedItem.type in SFRPG.containableTypes)) {
                 targetContainer = null;
@@ -1007,7 +1006,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (sidebarItem) {
                 const addedItemResult = await targetActor.createItem(duplicate(sidebarItem.data));
                 if (addedItemResult.length > 0) {
-                    const addedItem = targetActor.getItem(addedItemResult[0]._id);
+                    const addedItem = targetActor.getItem(addedItemResult[0].id);
 
                     if (targetContainer) {
                         let newContents = [];

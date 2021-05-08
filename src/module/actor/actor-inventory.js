@@ -137,7 +137,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             newItemData.data.quantity = quantity;
             
             itemToMove = await targetActor.createItem(newItemData);
-            itemToMove = targetActor.getItem(itemToMove[0]._id);
+            itemToMove = targetActor.getItem(itemToMove[0].id);
         }
 
         if (itemToMove === targetItem) {
@@ -850,18 +850,9 @@ export class ActorItemHelper {
     async createItem(itemData) {
         if (!this.actor) return null;
 
-        let newItem = null;
-        if (this.actor.isToken) {
-            const created = await Entity.prototype.createEmbeddedEntity.call(this.actor, "Item", itemData, {temporary: true});
-            const createResult = created instanceof Array ? created : [created];
-            const items = duplicate(this.actor.data.items).concat(createResult);
-            await this.actor.token.update({"actorData.items": items}, {});
-            newItem = createResult;
-        } else {
-            const dataToCreate = itemData instanceof Array ? itemData : [itemData];
-            const createResult = await this.actor.createEmbeddedDocuments("Item", dataToCreate, {});
-            newItem = createResult instanceof Array ? createResult : [createResult];
-        }
+        const dataToCreate = itemData instanceof Array ? itemData : [itemData];
+        const createResult = await this.actor.createEmbeddedDocuments("Item", dataToCreate, {});
+        const newItem = createResult instanceof Array ? createResult : [createResult];
 
         return newItem;
     }
