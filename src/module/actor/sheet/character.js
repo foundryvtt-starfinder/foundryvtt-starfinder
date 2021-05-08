@@ -71,7 +71,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
             if (item.type === "spell") {
-                let container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item.id) || false);
+                const container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
                     arr[1].push(item);
                 } else {

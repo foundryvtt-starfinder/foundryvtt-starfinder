@@ -368,7 +368,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
                             this.onBeforeCreateNewItem(createData);
 
-                            this.actor.createOwnedItem(createData);
+                            this.actor.createEmbeddedDocuments("Item", [createData]);
                         }
                     }
                 },
@@ -386,7 +386,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         this.onBeforeCreateNewItem(itemData);
 
-        return this.actor.createOwnedItem(itemData);
+        return this.actor.createEmbeddedDocuments("Item", [itemData]);
     }
 
     onBeforeCreateNewItem(itemData) {
@@ -1032,12 +1032,12 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     processItemContainment(items, pushItemFn) {
-        let preprocessedItems = [];
-        let containedItems = [];
-        for (let item of items) {
-            let itemData = {
+        const preprocessedItems = [];
+        const containedItems = [];
+        for (const item of items) {
+            const itemData = {
                 item: item,
-                parent: items.find(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === item.id)),
+                parent: items.find(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === item._id)),
                 contents: []
             };
             preprocessedItems.push(itemData);
@@ -1049,8 +1049,8 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
         }
 
-        for (let item of containedItems) {
-            let parent = preprocessedItems.find(x => x.item.id === item.parent.id);
+        for (const item of containedItems) {
+            const parent = preprocessedItems.find(x => x.item._id === item.parent._id);
             if (parent) {
                 parent.contents.push(item);
             }
