@@ -47,11 +47,11 @@ export class ActorSheetSFRPG extends ActorSheet {
      * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
      */
     getData() {
-        let isOwner = this.document.isOwner;
+        const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
             data: duplicate(this.actor.data.data),
-            owner: isOwner,
+            isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
             options: this.options,
@@ -770,7 +770,6 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     _prepareSpellbook(data, spells) {
-        const owner = this.actor.isOwner;
         const actorData = this.actor.data.data;
 
         const levels = {
@@ -795,7 +794,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 spellBook[lvl] = {
                     level: lvl,
                     usesSlots: lvl > 0,
-                    canCreate: owner && (lvl >= 0),
+                    canCreate: this.actor.isOwner && (lvl >= 0),
                     canPrepare: (this.actor.data.type === 'character') && (lvl > 0),
                     label: lvl >= 0 ? CONFIG.SFRPG.spellLevels[lvl] : CONFIG.SFRPG.spellPreparationModes[mode],
                     spells: [],

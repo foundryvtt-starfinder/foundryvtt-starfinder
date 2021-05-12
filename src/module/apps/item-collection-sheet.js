@@ -71,7 +71,6 @@ export class ItemCollectionSheet extends DocumentSheet {
         const data = super.getData();
         data.config = CONFIG.SFRPG;
         data.isCharacter = true;
-        data.owner = game.user.isGM;
         data.isOwner = game.user.isGM;
         data.isGM = game.user.isGM;
 

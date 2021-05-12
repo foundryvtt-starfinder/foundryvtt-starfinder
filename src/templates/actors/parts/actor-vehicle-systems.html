@@ -19,7 +19,7 @@
         <div class="item-detail item-action">{{localize "SFRPG.FeaturesUsage"}}</div>
         {{/if}}
 
-        {{#if ../owner}}
+        {{#if ../isOwner}}
         <div class="item-controls">
             {{#if section.dataset.type}}
             <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>

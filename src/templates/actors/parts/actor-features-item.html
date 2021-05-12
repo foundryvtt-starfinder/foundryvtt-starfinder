@@ -36,7 +36,7 @@
                     {{/if}}
                 {{else if item.hasCapacity}}
                     {{item.data.capacity.value}} / {{item.data.capacity.max}}
-                    {{#if owner}}
+                    {{#if isOwner}}
                     &nbsp;
                     <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
                     {{/if}}
@@ -68,7 +68,7 @@
             </div>
             {{/if}}
 
-            {{#if owner}}
+            {{#if isOwner}}
             <div class="item-controls">
                 {{#if (not disableEquipping)}}
                 {{#if (or (or (or (eq item.type "shield") (eq item.type "weapon")) (eq item.type "equipment")) (eq item.type "container"))}}

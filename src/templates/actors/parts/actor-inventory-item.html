@@ -5,7 +5,7 @@
                     {{#if (and (not (eq item.type "feat")) (or item.isStack (getStarfinderBoolean "alwaysShowQuantity")))}}({{item.data.quantity}}) {{/if}}
                     {{item.name}}
                 </h4>
-                {{#if (and owner (and bigItem (or item.hasAttack item.hasDamage)))}}
+                {{#if (and isOwner (and bigItem (or item.hasAttack item.hasDamage)))}}
                 <div class="item-action flexcol">
                     {{#if item.hasAttack}}
                     <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
@@ -35,7 +35,7 @@
             <div class="item-detail item-uses">
                 {{#if item.hasCapacity}}
                     {{item.data.capacity.value}} / {{item.data.capacity.max}}
-                    {{#if owner}}
+                    {{#if isOwner}}
                 &nbsp;
                 <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
                     {{/if}}
@@ -61,7 +61,7 @@
             </div>
             {{/unless}}
 
-            {{#if owner}}
+            {{#if isOwner}}
             <div class="item-controls">
                 {{#if (not disableEquipping)}}
                 {{!-- TODO: Remove this massive or chain once all weapons, shields, equipments, and containers have their data.equippable flag set in their json definitions --}}

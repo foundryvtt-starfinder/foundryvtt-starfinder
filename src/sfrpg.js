@@ -254,10 +254,10 @@ Hooks.once("setup", function () {
         if ( !target ) throw new Error("You must define the name of a target field.");
     
         // Enrich the content
-        const owner = Boolean(options.hash['owner']);
+        const isOwner = Boolean(options.hash['isOwner']);
         const rolls = Boolean(options.hash['rolls']);
         const rollData = options.hash['rollData'];
-        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: owner, entities: true, rolls: rolls, rollData: rollData});
+        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: isOwner, entities: true, rolls: rolls, rollData: rollData});
         const maxSize = Boolean(options.hash['maxSize']) ? ` style="flex: 1;"` : "";
     
         // Construct the HTML
