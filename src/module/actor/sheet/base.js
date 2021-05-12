@@ -742,10 +742,10 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     async _onItemSplit(event) {
         event.preventDefault();
-        let li = $(event.currentTarget).parents('.item'),
+        const li = $(event.currentTarget).parents('.item'),
             item = this.actor.items.get(li.data('item-id'));
 
-        let itemQuantity = item.data.data.quantity;
+        const itemQuantity = item.data.data.quantity;
         if (!itemQuantity || itemQuantity <= 1) {
             return;
         }
@@ -754,17 +754,18 @@ export class ActorSheetSFRPG extends ActorSheet {
             return;
         }
 
-        let bigStack = Math.ceil(itemQuantity / 2.0);
-        let smallStack = Math.floor(itemQuantity / 2.0);
+        const bigStack = Math.ceil(itemQuantity / 2.0);
+        const smallStack = Math.floor(itemQuantity / 2.0);
 
-        let actorHelper = new ActorItemHelper(this.actor.id, this.token ? this.token.id : null, this.token ? this.token.parent.id : null);
+        const actorHelper = new ActorItemHelper(this.actor.id, this.token ? this.token.id : null, this.token ? this.token.parent.id : null);
 
-        let update = { id: item.id, "data.quantity": bigStack };
-        await actorHelper.updateItem(update);
+        const update = { "quantity": bigStack };
+        await actorHelper.updateItem(item.id, update);
 
-        let itemData = duplicate(item.data);
+        const itemData = duplicate(item.data);
         itemData.id = null;
         itemData.data.quantity = smallStack;
+        itemData.effects = [];
         await actorHelper.createItem(itemData);
     }
 
