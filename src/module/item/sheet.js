@@ -289,6 +289,9 @@ export class ItemSheetSFRPG extends ItemSheet {
                 name: game.i18n.format("SFRPG.Items.Shield.ACP", { acp: item.data.acp.signedString() }),
                 tooltip: null
             });
+            
+            const wieldedBonus = itemData.proficient ? itemData.bonus.wielded : 0;
+            const alignedBonus = itemData.proficient ? itemData.bonus.aligned : 0;
             props.push({
                 name: game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),
                 tooltip: null

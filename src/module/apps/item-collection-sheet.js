@@ -1,4 +1,5 @@
 import { ItemDeletionDialog } from "./item-deletion-dialog.js"
+import { ItemSFRPG } from "../item/item.js"
 import { ItemSheetSFRPG } from "../item/sheet.js"
 import { RPC } from "../rpc.js"
 
@@ -185,7 +186,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item');
         let itemId = li.attr("data-item-id");
-        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
+        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
         let chatData = this.getChatData(item, { secrets: true, rollData: item.data.data });
 
         if (li.hasClass('expanded')) {
@@ -213,14 +214,14 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
 
     _onItemEdit(event) {
-        let itemId = $(event.currentTarget).parents('.item').attr("data-item-id");
-        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
-        const itemData = {
-            data: duplicate(item),
-            labels: {},
-            apps: {}
-        };
-        let sheet = new ItemSheetSFRPG(itemData, {submitOnChange: false, submitOnClose: false, editable: false});
+        const itemId = $(event.currentTarget).parents('.item').attr("data-item-id");
+        const itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+
+        const item = new ItemSFRPG(itemData);
+        const sheet = new ItemSheetSFRPG(item);
+        sheet.options.submitOnChange = false;
+        sheet.options.submitOnClose = false;
+        sheet.options.editable = false;
         sheet.render(true);
     }
 
@@ -236,7 +237,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         let li = $(event.currentTarget).parents(".item");
         let itemId = li.attr("data-item-id");
 
-        const itemToDelete = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
+        const itemToDelete = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
         let containsItems = (itemToDelete.data.container?.contents && itemToDelete.data.container.contents.length > 0);
         ItemDeletionDialog.show(itemToDelete.name, containsItems, (recursive) => {
             this._deleteItemById(itemId, recursive);
@@ -251,7 +252,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             let itemsToTest = [itemId];
             while (itemsToTest.length > 0) {
                 let itemIdToTest = itemsToTest.shift();
-                let itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemIdToTest);
+                let itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemIdToTest);
                 if (itemData.data.container?.contents) {
                     for (let content of itemData.data.container.contents) {
                         itemsToDelete.push(content.id);
@@ -261,7 +262,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             }
         }
 
-        const newItems = this.itemCollection.data.flags.sfrpg.itemCollection.items.filter(x => !itemsToDelete.includes(x.id));
+        const newItems = this.itemCollection.data.flags.sfrpg.itemCollection.items.filter(x => !itemsToDelete.includes(x._id));
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
         }
@@ -274,7 +275,7 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
 
     findItem(itemId) {
-        return this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x.id === itemId);
+        return this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
     }
 
     getItems() {

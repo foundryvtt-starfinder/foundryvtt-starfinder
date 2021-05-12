@@ -257,7 +257,6 @@ function openLootCollectionSheet(event) {
         relevantToken.apps = {};
     }
     
-    relevantToken.testUserPermission = () => true;
     const lootCollectionSheet = new ItemCollectionSheet(relevantToken.document);
     lootCollectionSheet.render(true);
 }
