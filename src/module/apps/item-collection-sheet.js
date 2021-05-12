@@ -72,6 +72,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         data.config = CONFIG.SFRPG;
         data.isCharacter = true;
         data.owner = game.user.isGM;
+        data.isOwner = game.user.isGM;
         data.isGM = game.user.isGM;
 
         const tokenData = this.document.getFlag("sfrpg", "itemCollection");

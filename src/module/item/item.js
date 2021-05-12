@@ -770,13 +770,9 @@ export class ItemSFRPG extends Item {
             }
 
             this.actor.updateEmbeddedDocuments("Item", [{
-                _id: this.data.id,
+                _id: this.data._id,
                 "data.capacity.value": capacity.value
             }], {});
-            // this.actor.updateOwnedItem({
-            //   id: this.data.id,
-            //   'data.capacity.value': capacity.value
-            // });
         }
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");

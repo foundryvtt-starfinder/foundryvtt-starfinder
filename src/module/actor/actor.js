@@ -213,7 +213,7 @@ export class ActorSFRPG extends Actor {
 
         const skill = duplicate(this.data.data.skills[skillId]);
         const isNpc = this.data.type === "npc";
-        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.owner),
+        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
@@ -312,7 +312,7 @@ export class ActorSFRPG extends Actor {
      */
     editModifier(id) {
         const modifiers = duplicate(this.data.data.modifiers);
-        const modifier = modifiers.find(mod => mod.id === id);
+        const modifier = modifiers.find(mod => mod._id === id);
 
         new SFRPGModifierApplication(modifier, this).render(true);
     }
