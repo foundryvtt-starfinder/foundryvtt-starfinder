@@ -570,15 +570,15 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Try find existing condition, add from compendium if not found
             let conditionItem = this.actor.items.find(x => x.type === "feat" && x.data.data.requirements?.toLowerCase() === "condition" && x.name.toLowerCase() === condition.toLowerCase());
             if (!conditionItem) {
-                let compendium = game.packs.find(element => element.title.includes("Conditions"));
+                const compendium = game.packs.find(element => element.title.includes("Conditions"));
                 if (compendium) {
                     // Let the compendium load
                     await compendium.getIndex();
 
-                    let entry = compendium.index.find(e => e.name.toLowerCase() === condition.toLowerCase());
+                    const entry = compendium.index.find(e => e.name.toLowerCase() === condition.toLowerCase());
                     if (entry) {
-                        let entity = await compendium.getEntity(entry.id);
-                        await this.actor.createOwnedItem(entity);
+                        const entity = await compendium.getDocument(entry._id);
+                        await this.actor.createEmbeddedDocuments("Item", [entity.data]);
                     }
                 }
             }
@@ -711,7 +711,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item'),
             item = this.actor.items.get(li.data('item-id')),
-            chatData = item.getChatData({ secrets: this.actor.owner, rollData: this.actor.data.data });
+            chatData = item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.data.data });
 
         if (li.hasClass('expanded')) {
             let summary = li.children('.item-summary');

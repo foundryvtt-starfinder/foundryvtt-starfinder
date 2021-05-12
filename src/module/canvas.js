@@ -183,7 +183,7 @@ export async function handleItemDropCanvas(data) {
     if (sourceItem) {
         return moveItemBetweenActorsAsync(sourceActor, sourceItem, target);
     } else {
-        return targetActor.createOwnedItem(sourceItemData);
+        return target.createItem(sourceItemData);
     }
 }
 
