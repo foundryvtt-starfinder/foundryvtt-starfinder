@@ -1031,10 +1031,10 @@ async function linkUserData() {
 
 	let destDir;
 	try {
-		if (
+		if (			
 			fs.existsSync(path.resolve('.', 'dist', 'module.json')) ||
 			fs.existsSync(path.resolve('.', 'src', 'module.json'))
-		) {
+		) {		
 			destDir = 'modules';
 		} else if (
 			fs.existsSync(path.resolve('.', 'dist', 'system.json')) ||
@@ -1055,6 +1055,7 @@ async function linkUserData() {
 				throw Error('User Data path invalid, no Data directory found');
 
 			linkDir = path.join(config.dataPath, 'Data', destDir, name);
+			
 		} else {
 			throw Error('No User Data path defined in foundryconfig.json');
 		}
