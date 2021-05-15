@@ -389,15 +389,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         event.preventDefault();
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
-
-        const role = this.actor.getCrewRoleForActor(actorId);
-        if (role) {
-            const crewData = duplicate(this.actor.data.data.crew);
-            crewData[role].actorIds = crewData[role].actorIds.filter(x => x !== actorId);
-            await this.actor.update({
-                "data.crew": crewData
-            });
-        }
+        this.actor.removeFromCrew(actorId);
     }
 
     /**
