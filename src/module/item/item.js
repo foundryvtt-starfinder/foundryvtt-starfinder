@@ -746,6 +746,10 @@ export class ItemSFRPG extends Item {
      * @param {Html} html The html from the dailog
      * @param {Array} parts The parts of the roll
      * @param {Object} data The data
+     * 
+     * Supported options:
+     * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
+     * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
     _onAttackRollClose(options, roll, formula, finalFormula) {
         if (!roll) {
@@ -787,6 +791,10 @@ export class ItemSFRPG extends Item {
     /**
      * Place an attack roll for a starship using an item.
      * @param {Object} options Options to pass to the attack roll
+     * 
+     * Supported options:
+     * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
+     * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
     async _rollStarshipAttack(options = {}) {
         const parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
