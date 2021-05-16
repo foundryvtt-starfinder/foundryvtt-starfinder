@@ -581,6 +581,10 @@ export class ItemSFRPG extends Item {
     /**
      * Place an attack roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
+     * 
+     * Supported options:
+     * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
+     * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
     async rollAttack(options = {}) {
         const itemData = this.data;
@@ -732,7 +736,7 @@ export class ItemSFRPG extends Item {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            onClose: this._onAttackRollClose.bind(this)
+            onClose: this._onAttackRollClose.bind(this, options)
         });
     }
 
@@ -743,14 +747,13 @@ export class ItemSFRPG extends Item {
      * @param {Array} parts The parts of the roll
      * @param {Object} data The data
      */
-    _onAttackRollClose(roll, formula, finalFormula) {
+    _onAttackRollClose(options, roll, formula, finalFormula) {
         if (!roll) {
             return;
         }
-        
-        const itemData = duplicate(this.data.data);
 
-        if (itemData.hasOwnProperty("usage")) {
+        const itemData = duplicate(this.data.data);
+        if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 
             const capacity = itemData.capacity;
@@ -776,7 +779,7 @@ export class ItemSFRPG extends Item {
         }
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
-        if (rollDamageWithAttack) {
+        if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
             this.rollDamage({});
         }
     }
