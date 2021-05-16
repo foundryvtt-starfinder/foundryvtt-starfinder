@@ -836,11 +836,11 @@ export class ItemSFRPG extends Item {
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
-                    if (rollDamageWithAttack) {
+                    if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
                         this.rollDamage({});
                     }
 
-                    if (this.hasCapacity()) {
+                    if (this.hasCapacity() && !options.disableDeductAmmo) {
                         this.actor.updateEmbeddedDocuments("Item", [{
                             _id: this.data.id,
                             "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
@@ -883,11 +883,11 @@ export class ItemSFRPG extends Item {
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
-                    if (rollDamageWithAttack) {
+                    if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
                         this.rollDamage({});
                     }
 
-                    if (this.hasCapacity()) {
+                    if (this.hasCapacity() && !options.disableDeductAmmo) {
                         this.actor.updateEmbeddedEntity("OwnedItem", {
                             _id: this.data._id,
                             "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
