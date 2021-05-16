@@ -78,7 +78,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (placeholders.savingThrow.value !== newSavingThrowScore.total) {
             placeholders.savingThrow.value = newSavingThrowScore.total;
             await new Promise(resolve => setTimeout(resolve, 50));
-            this.render(false);
+            this.render(false, {editable: this.options.editable});
         }
     }
 
