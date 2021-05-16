@@ -720,7 +720,7 @@ export class ItemSFRPG extends Item {
         parts.push("@additional.modifiers.bonus");
 
         // Call the roll helper utility
-        return await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
@@ -1027,7 +1027,7 @@ export class ItemSFRPG extends Item {
         }
 
         // Call the roll helper utility
-        return await DiceSFRPG.damageRoll({
+        return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
             criticalData: itemData.critical,
@@ -1066,7 +1066,7 @@ export class ItemSFRPG extends Item {
         rollContext.addContext("weapon", this, this.data);
         rollContext.setMainContext("");
 
-        return await DiceSFRPG.damageRoll({
+        return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
             rollContext: rollContext,
@@ -1106,7 +1106,7 @@ export class ItemSFRPG extends Item {
 
         this.actor?.setupRollContexts(rollContext, ["gunner"]);
 
-        return await DiceSFRPG.damageRoll({
+        return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
             rollContext: rollContext,
