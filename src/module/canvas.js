@@ -100,7 +100,8 @@ export async function handleItemDropCanvas(data) {
         // Source is compendium
         //console.log("> Dragged item from compendium: " + data.pack);
         const pack = game.packs.get(data.pack);
-        sourceItemData = duplicate(await pack.getEntry(data.id));
+        const document = await pack.getDocument(data.id);
+        sourceItemData = duplicate(document.data);
     } else if (data["tokenId"]) {
         // Source is token sheet
         //console.log(["> Dragged item from token: ", data]);

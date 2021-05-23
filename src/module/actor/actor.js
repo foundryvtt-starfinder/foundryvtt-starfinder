@@ -1091,7 +1091,8 @@ export class ActorSFRPG extends Actor {
 
         const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
         const starshipActions = game.packs.get(starshipPackKey);
-        const actionEntry = await starshipActions.getEntry(actionId);
+        const actionEntryDocument = await starshipActions.getDocument(actionId);
+        const actionEntry = actionEntryDocument.data;
 
         /** Bad entry; no action! */
         if (!actionEntry) {
