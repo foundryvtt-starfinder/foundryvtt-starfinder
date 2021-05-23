@@ -896,10 +896,10 @@ export class ItemSFRPG extends Item {
                     }
 
                     if (this.hasCapacity() && !options.disableDeductAmmo) {
-                        this.actor.updateEmbeddedEntity("OwnedItem", {
+                        this.actor.updateEmbeddedDocuments("Item", [{
                             _id: this.data._id,
                             "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
-                        }, {});
+                        }], {});
                     }
                 }
             }

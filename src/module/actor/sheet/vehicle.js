@@ -212,7 +212,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
                 return this.processDroppedData(event, data);
             }
             else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem") {
-                return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
+                return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             }
         }
 
