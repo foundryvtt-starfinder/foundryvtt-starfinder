@@ -78,11 +78,14 @@ export class ItemBrowserSFRPG extends Application {
           return false;
         }
 
-        event.dataTransfer.setData('text/plain', JSON.stringify({
-          type: pack.entity,
+        const rawData = {
+          type: pack.documentName,
           pack: pack.collection,
           id: li.getAttribute('data-entry-id')
-        }));
+        };
+        const data = JSON.stringify(rawData);
+
+        event.dataTransfer.setData('text/plain', data);
       }, false);
     }); // toggle visibility of filter containers
 
