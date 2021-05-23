@@ -644,10 +644,10 @@ export async function onCreateItemCollection(message) {
 }
 
 async function onItemDraggedToCollection(message) {
-    let data = message.payload;
+    const data = message.payload;
 
-    let target = ActorItemHelper.FromObject(data.target);
-    let items = target.token.data.flags.sfrpg.itemCollection.items;
+    const target = ActorItemHelper.FromObject(data.target);
+    const items = target.token.data.flags.sfrpg.itemCollection.items;
 
     let targetContainer = null;
     if (data.containerId) {
@@ -657,23 +657,44 @@ async function onItemDraggedToCollection(message) {
     let newItems = [];
     if (data.pack) {
         const pack = game.packs.get(data.pack);
-        const itemData = await pack.getEntry(data.draggedItemId);
-        itemData.id = randomID(16);
+        const itemData = await pack.getDocument(data.draggedItemId);
         newItems.push(duplicate(itemData));
     } else if (data.source.tokenId || data.source.actorId) {
         // from another token
-        let source = ActorItemHelper.FromObject(data.source);
+        const source = ActorItemHelper.FromObject(data.source);
         if (!source.isValid()) {
             return;
         }
 
         newItems.push(data.draggedItemData);
-        await source.deleteItem(data.draggedItemData.id);
+
+        const itemIdsToDelete = [data.draggedItemData._id];
+
+        const sourceItemData = data.draggedItemData;
+        if (source !== null && sourceItemData.data.container?.contents && sourceItemData.data.container.contents.length > 0) {
+            const containersToTest = [sourceItemData];
+            while (containersToTest.length > 0)
+            {
+                const container = containersToTest.shift();
+                const children = source.filterItems(x => container.data.container.contents.find(y => y.id === x.id));
+                if (children) {
+                    for (const child of children) {
+                        newItems.push(child.data);
+                        itemIdsToDelete.push(child.id);
+
+                        if (child.data.data.container?.contents && child.data.data.container.contents.length > 0) {
+                            containersToTest.push(child.data);
+                        }
+                    }
+                }
+            }
+        }
+
+        await source.deleteItem(itemIdsToDelete);
     } else {
-        let sidebarItem = game.items.get(data.draggedItemId);
+        const sidebarItem = game.items.get(data.draggedItemId);
         if (sidebarItem) {
-            let itemData = duplicate(sidebarItem.data);
-            itemData.id = randomID(16);
+            const itemData = duplicate(sidebarItem.data);
             newItems.push(duplicate(itemData));
         }
     }
@@ -682,14 +703,14 @@ async function onItemDraggedToCollection(message) {
         if (targetContainer && targetContainer.data.container?.contents) {
             for (let newItem of newItems) {
                 let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, newItem) || 0;
-                targetContainer.data.container.contents.push({id: newItem.id, index: preferredStorageIndex});
+                targetContainer.data.container.contents.push({id: newItem._id, index: preferredStorageIndex});
             }
         }
         newItems = items.concat(newItems);
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
         }
-        await target.token.update(update);
+        await target.token.document.update(update);
     }
 }
 
