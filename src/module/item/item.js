@@ -489,13 +489,13 @@ export class ItemSFRPG extends Item {
      * @param {Object} props The items properties
      */
     _shieldChatData(data, labels, props) {
-        let wieldedBonus = data.proficient ? data.bonus.wielded.toString() : "0";
-        let alignedBonus = data.proficient ? data.bonus.aligned.toString() : "0";
+        const wieldedBonus = (data.proficient ? data.bonus.wielded : 0) || 0;
+        const alignedBonus = (data.proficient ? data.bonus.aligned : 0) || 0;
 
         props.push(
             {name: game.i18n.localize("SFRPG.Items.Shield.Shield"), tooltip: null},
-            {name: game.i18n.format("SFRPG.Items.Shield.AcMaxDex", { maxDex: data.dex.signedString() }),  tooltip: null},
-            {name: game.i18n.format("SFRPG.Items.Shield.ArmorCheck", { acp: data.acp.signedString() }),  tooltip: null},
+            {name: game.i18n.format("SFRPG.Items.Shield.AcMaxDex", { maxDex: (data.dex || 0).signedString() }),  tooltip: null},
+            {name: game.i18n.format("SFRPG.Items.Shield.ArmorCheck", { acp: (data.acp || 0).signedString() }),  tooltip: null},
             {name: game.i18n.format("SFRPG.Items.Shield.Bonuses", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),  tooltip: null},
             data.proficient ? {name: game.i18n.localize("SFRPG.Items.Proficient"), tooltip: null} : {name: game.i18n.localize("SFRPG.Items.NotProficient"), tooltip: null}
         );
