@@ -225,7 +225,7 @@ export class DiceSFRPG {
                         return;
                     }
     
-                    let dieRoll = "1" + mainDie;
+                    const dieRoll = "1" + mainDie;
                     if (mainDie == "d20") {
                         if (button === "Disadvantage") {
                             dieRoll = "2d20kl";
@@ -240,7 +240,7 @@ export class DiceSFRPG {
                     finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
     
                     const rollObject = new Roll(finalFormula.finalRoll);
-                    let roll = await rollObject.evaluate({async: true});
+                    const roll = await rollObject.evaluate({async: true});
             
                     // Flag critical thresholds
                     for (let d of roll.dice) {
@@ -302,7 +302,7 @@ export class DiceSFRPG {
 
         const formula = parts.join(" + ");
         const tree = new RollTree(options);
-        await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
             if (button === 'cancel') {
                 if (onClose) {
                     onClose(null, null, null);
@@ -566,7 +566,8 @@ class RollTree {
             return {button: button, rollMode: rollMode, finalRollFormula: finalRollFormula};
         }
 
-        return this.displayUI(formula, contexts, allRolledMods).then(async ([button, rollMode, bonus]) => {
+        const uiPromise = this.displayUI(formula, contexts, allRolledMods);
+        uiPromise.then(async ([button, rollMode, bonus]) => {
             if (button === null) {
                 console.log('Roll was cancelled');
                 await callback('cancel', "none", null);
@@ -597,6 +598,7 @@ class RollTree {
 
             await callback(button, rollMode, finalRollFormula);
         });
+        return uiPromise;
     }
 
     populate() {
