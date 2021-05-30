@@ -285,6 +285,8 @@ Hooks.once("ready", () => {
 
     defaultDropHandler = canvas._dragDrop.callbacks.drop;
     canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+
+    ActorSheetSFRPGStarship.ensureStarshipActions();
 });
 
 Hooks.on('ready', () => {

@@ -24,47 +24,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
     constructor(...args) {
         super(...args);
-
-        /** Populate the starship actions cache, but only once. */
-        if (ActorSheetSFRPGStarship.StarshipActionsCache === null) {
-            ActorSheetSFRPGStarship.StarshipActionsCache = {};
-            const tempCache = {};
-
-            const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
-            const starshipActions = game.packs.get(starshipPackKey);
-            starshipActions.getIndex().then(async (indices) => {
-                for (const index of indices) {
-                    const entry = await starshipActions.getDocument(index._id);
-                    const role = entry.data.data.role;
-
-                    if (!tempCache[role]) {
-                        tempCache[role] = {label: CONFIG.SFRPG.starshipRoleNames[role], actions: []};
-                    }
-
-                    tempCache[role].actions.push(entry);
-                }
-
-                /** Sort them by order. */
-                for (const [roleKey, roleData] of Object.entries(tempCache)) {
-                    roleData.actions.sort(function(a, b){return a.data.order - b.data.order});
-                }
-
-                const desiredOrder = ["captain", "pilot", "gunner", "engineer", "scienceOfficer", "chiefMate", "magicOfficer", "openCrew", "minorCrew"];
-                /** Automatically append any missing elements to the list at the end, in case new roles are added in the future. */
-                for (const key of Object.keys(tempCache)) {
-                    if (!desiredOrder.includes(key)) {
-                        desiredOrder.push(key);
-                    }
-                }
-
-                for (const key of desiredOrder) {
-                    ActorSheetSFRPGStarship.StarshipActionsCache[key] = tempCache[key];
-                }
-
-                /** Refresh the UI. */
-                this.render(false);
-            });
-        }
     }
 
     get template() {
@@ -895,5 +854,44 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         if (tier) formData[v] = tier < 1 ? tier : parseInt(tier);
 
         return super._updateObject(event, formData);
+    }
+
+    static ensureStarshipActions() {
+        /** Populate the starship actions cache. */
+        ActorSheetSFRPGStarship.StarshipActionsCache = {};
+        const tempCache = {};
+
+        console.log("SFRPG | Initializing starship actions.");
+        const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
+        const starshipActions = game.packs.get(starshipPackKey);
+        starshipActions.getIndex().then(async (indices) => {
+            for (const index of indices) {
+                const entry = await starshipActions.getDocument(index._id);
+                const role = entry.data.data.role;
+
+                if (!tempCache[role]) {
+                    tempCache[role] = {label: CONFIG.SFRPG.starshipRoleNames[role], actions: []};
+                }
+
+                tempCache[role].actions.push(entry);
+            }
+
+            /** Sort them by order. */
+            for (const [roleKey, roleData] of Object.entries(tempCache)) {
+                roleData.actions.sort(function(a, b){return a.data.order - b.data.order});
+            }
+
+            const desiredOrder = ["captain", "pilot", "gunner", "engineer", "scienceOfficer", "chiefMate", "magicOfficer", "openCrew", "minorCrew"];
+            /** Automatically append any missing elements to the list at the end, in case new roles are added in the future. */
+            for (const key of Object.keys(tempCache)) {
+                if (!desiredOrder.includes(key)) {
+                    desiredOrder.push(key);
+                }
+            }
+
+            for (const key of desiredOrder) {
+                ActorSheetSFRPGStarship.StarshipActionsCache[key] = tempCache[key];
+            }
+        });
     }
 }
