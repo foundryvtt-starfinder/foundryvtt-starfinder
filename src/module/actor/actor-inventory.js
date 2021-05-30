@@ -989,6 +989,7 @@ export class ActorItemHelper {
         if (!this.isValid()) return;
 
         const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
+        const migrations = [];
         for (const item of this.actor.items) {
             const itemData = duplicate(item.data.data);
             let isDirty = false;
@@ -1092,8 +1093,13 @@ export class ActorItemHelper {
 
             if (isDirty) {
                 console.log("> Migrating " + item.name);
-                await this.actor.updateEmbeddedDocuments("Item", [{ _id: item.id, data: itemData}]);
+                migrations.push({ _id: item.id, data: itemData});
             }
+        }
+
+        if (migrations.length > 0) {
+            console.log(`SFRPG | Executing migration of ${migrations.length} items for actor ${this.actor.name}.`);
+            await this.actor.updateEmbeddedDocuments("Item", migrations);
         }
     }
 }
