@@ -332,7 +332,9 @@ export class ActorSFRPG extends Actor {
             actorModifier.container = {actorId: this.id, itemId: null};
         }
 
-        for (let item of this.data.items) {
+        for (const item of this.data.items) {
+            const itemModifiers = item.data.data.modifiers;
+
             let modifiersToConcat = [];
             switch (item.type) {
                 // Armor upgrades are only valid if they are slotted into an equipped armor
@@ -341,7 +343,7 @@ export class ActorSFRPG extends Actor {
                         if (!ignoreEquipment) {
                             const container = getItemContainer(this.data.items, item.id);
                             if (container && container.type === "equipment" && container.data.equipped) {
-                                modifiersToConcat = item.data.modifiers;
+                                modifiersToConcat = itemModifiers;
                             }
                         }
                         break;
@@ -354,7 +356,7 @@ export class ActorSFRPG extends Actor {
                         if (!ignoreEquipment) {
                             const container = getItemContainer(this.data.items, item.id);
                             if (container && container.type === "weapon" && container.data.equipped) {
-                                modifiersToConcat = item.data.modifiers;
+                                modifiersToConcat = itemModifiers;
                             }
                         }
                         break;
@@ -362,13 +364,13 @@ export class ActorSFRPG extends Actor {
 
                 // Augmentations are always applied
                 case "augmentation":
-                    modifiersToConcat = item.data.modifiers;
+                    modifiersToConcat = itemModifiers;
                     break;
 
                 // Feats are only active when they are passive, or activated
                 case "feat":
                     if (item.data.activation?.type === "" || item.data.isActive) {
-                        modifiersToConcat = item.data.modifiers;
+                        modifiersToConcat = itemModifiers;
                     }
                     break;
 
@@ -377,14 +379,14 @@ export class ActorSFRPG extends Actor {
                 case "shield":
                 case "weapon":
                     if (!ignoreEquipment && item.data.equipped) {
-                        modifiersToConcat = item.data.modifiers;
+                        modifiersToConcat = itemModifiers;
                     }
                     break;
 
                 // Everything else
                 default:
                     if (!item.data.equippable || item.data.equipped) {
-                        modifiersToConcat = item.data.modifiers;
+                        modifiersToConcat = itemModifiers;
                     }
                     break;
             }
