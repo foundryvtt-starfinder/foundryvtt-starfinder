@@ -1218,7 +1218,7 @@ SFRPG.conditions = {
     },
     "shaken": {
         modifiers: [],
-        tooltip: "<strong>Skaken</strong><br><br>You take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks."
+        tooltip: "<strong>Shaken</strong><br><br>You take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks."
     },
     "sickened": {
         modifiers: [],
