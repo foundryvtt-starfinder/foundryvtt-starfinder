@@ -173,7 +173,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         lvl = levels[lvl] || parseFloat(lvl);
         if (lvl) formData[v] = lvl < 1 ? lvl : parseInt(lvl);
 
-        super._updateObject(event, formData);
+        return super._updateObject(event, formData);
     }
 
     /** @override */
@@ -212,7 +212,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
                 return this.processDroppedData(event, data);
             }
             else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem") {
-                return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
+                return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             }
         }
 
@@ -440,7 +440,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         event.preventDefault();
 
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const system = this.actor.getOwnedItem(itemId);
+        const system = this.actor.items.get(itemId);
 
         this.actor.rollVehiclePilotingSkill(null, null, system);
     }
@@ -453,7 +453,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onDeactivateVehicleSystem(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : false;
         await item.update({'data.isActive': desiredOutput});
@@ -487,7 +487,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onActivateVehicleSystem(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
         const updateData = {};
 
         const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : true;

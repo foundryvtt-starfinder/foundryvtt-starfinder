@@ -12,44 +12,46 @@ export default function (engine) {
 
         // Process common mod properties
         for (let mod of mods) {
-            if (mod.data.arms.number > 0) {
-                if (mod.data.arms.armType === "general") {
-                    data.attributes.arms += mod.data.arms.number;
+            const modData = mod.data.data;
+
+            if (modData.arms.number > 0) {
+                if (modData.arms.armType === "general") {
+                    data.attributes.arms += modData.arms.number;
                 }
-                if (mod.data.arms.armType === "melee") {
-                    data.attributes.weaponMounts.melee.max = mod.data.arms.number;
+                if (modData.arms.armType === "melee") {
+                    data.attributes.weaponMounts.melee.max = modData.arms.number;
                 }
-                if (mod.data.arms.armType === "ranged") {
-                    data.attributes.weaponMounts.ranged.max = mod.data.arms.number;
+                if (modData.arms.armType === "ranged") {
+                    data.attributes.weaponMounts.ranged.max = modData.arms.number;
                 }
             }
 
-            if (mod.data.additionalMovement) {
+            if (modData.additionalMovement) {
                 if (data.attributes.speed.special) {
                     data.attributes.speed.special += ", ";
                 }
-                data.attributes.speed.special += mod.data.additionalMovement;
+                data.attributes.speed.special += modData.additionalMovement;
             }
 
-            if (mod.data.additionalSenses) {
+            if (modData.additionalSenses) {
                 if (data.traits.senses) {
                     data.traits.senses += ", ";
                 }
-                data.traits.senses += mod.data.additionalSenses;
+                data.traits.senses += modData.additionalSenses;
             }
 
-            if (mod.data.isArmorSlot) {
+            if (modData.isArmorSlot) {
                 data.attributes.armorSlots.max += 1;
             }
 
-            if (mod.data.weaponProficiency) {
-                if (!data.traits.weaponProf.value.includes(mod.data.weaponProficiency)) {
-                    data.traits.weaponProf.value.push(mod.data.weaponProficiency);
+            if (modData.weaponProficiency) {
+                if (!data.traits.weaponProf.value.includes(modData.weaponProficiency)) {
+                    data.traits.weaponProf.value.push(modData.weaponProficiency);
                 }
             }
 
-            if (mod.data.bonusSkill) {
-                let skill = data.skills[mod.data.bonusSkill];
+            if (modData.bonusSkill) {
+                let skill = data.skills[modData.bonusSkill];
 
                 skill.enabled = true;
                 skill.value = 3;

@@ -10,8 +10,10 @@ export default function (engine) {
         const driftEngineItems = fact.items.filter(x => x.type === "starshipDriftEngine");
         if (driftEngineItems && driftEngineItems.length > 0) {
             const driftEngine = driftEngineItems[0];
-            data.attributes.drift.value += driftEngine.data.engineRating;
-            data.attributes.drift.tooltip.push(`${driftEngine.name}: ${driftEngine.data.engineRating}`);
+            const driftEngineData = driftEngine.data.data;
+
+            data.attributes.drift.value += driftEngineData.engineRating;
+            data.attributes.drift.tooltip.push(`${driftEngine.name}: ${driftEngineData.engineRating}`);
         }
 
         return fact;

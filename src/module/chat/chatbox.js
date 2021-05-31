@@ -15,9 +15,9 @@ export default class SFRPGCustomChatMessage {
 
     static getToken(actor) {
         if (actor.token) {
-            return `${actor.token.scene.data._id}.${actor.token.data._id}`;
+            return `${actor.token.parent.id}.${actor.token.id}`;
         } else if (canvas.tokens.controlled[0]?.id) {
-            return `${game.scenes.active._id}.${canvas.tokens.controlled[0].id}`;
+            return `${game.scenes.active.id}.${canvas.tokens.controlled[0].id}`;
         } else {
             return "";
         }
@@ -72,10 +72,10 @@ export default class SFRPGCustomChatMessage {
             title: data.title ? data.title : 'Roll',
             rawTitle: data.speaker.alias,
             dataRoll: roll,
-            type: CHAT_MESSAGE_TYPES.ROLL,
+            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             config: CONFIG.STARFINDER,
             tokenImg: actor.data.token?.img || actor.img,
-            actorId: actor._id,
+            actorId: actor.id,
             tokenId: this.getToken(actor),
             explanation: explanation,
             additionalContent: additionalContent

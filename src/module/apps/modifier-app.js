@@ -6,14 +6,14 @@ import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "../modif
  * @param {Object} modifier The modifier being edited.
  * @param {Object} target    The actor or item that the modifier belongs to.
  * @param {Object} options  Any options that modify the rendering of the sheet.
- * @param {Object} owner    The actor that the target belongs to, if target is an item.
+ * @param {Object} owningActor    The actor that the target belongs to, if target is an item.
  */
 export default class SFRPGModifierApplication extends FormApplication {
-    constructor(modifier, target, options={}, owner = null) {
+    constructor(modifier, target, options={}, owningActor = null) {
         super(modifier, options);
 
         this.actor = target;
-        this.owner = owner;
+        this.owningActor = owningActor;
     }
 
     static get defaultOptions() {
@@ -46,12 +46,12 @@ export default class SFRPGModifierApplication extends FormApplication {
      */
     getData() {
         const data = {
-            owner: this.actor.owner,
+            isOwner: this.actor.isOwner,
             modifier: this.modifier,
             limited: this.actor.limited,
             options: this.options,
             editable: this.isEditable,
-            cssClass: this.actor.owner ? "editable": "locked",
+            cssClass: this.actor.isOwner ? "editable": "locked",
             config: CONFIG.SFRPG
         };
 
@@ -194,7 +194,7 @@ export default class SFRPGModifierApplication extends FormApplication {
         const modifiers = duplicate(this.actor.data.data.modifiers);
         const modifier = modifiers.find(mod => mod._id === this.modifier._id);
 
-        const roll = new Roll(formData['modifier'], this.owner?.data?.data || this.actor.data.data);
+        const roll = new Roll(formData['modifier'], this.owningActor?.data?.data || this.actor.data.data);
         modifier.max = roll.evaluate({maximize: true}).total;
 
         mergeObject(modifier, formData);

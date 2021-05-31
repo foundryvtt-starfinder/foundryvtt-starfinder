@@ -294,6 +294,9 @@ async function cookWithOptions(options = { formattingCheck: true }) {
             else if (directory === "setting") {
                 settingCache[jsonInput._id] = jsonInput;
             }
+            
+            // For actors, we should double-check the token names are set correctly.
+            fixTokenName(jsonInput);
 
 			compendiumMap[directory][jsonInput._id] = jsonInput;
 			allItems.push({ pack: directory, data: jsonInput, file: file });
@@ -342,6 +345,19 @@ function regularExpressionForFindingItemsInCache(cache) {
     return new RegExp("(" + regularExpressionSubstring + ")", "g");
 }
 
+// Ensures token names are the same as the actor name.
+function fixTokenName(item) {
+    if (!item) return;
+    
+    // Did not add Character because iconics come in multiple levels, and we don't want to include level in the name.
+    const actorTypes = ["npc", "starship", "vehicle"];
+
+    // Ensure token name is the same as the actor name, if applicable
+    if (actorTypes.includes(item.type) && item.token) {
+        item.token.name = item.name;
+    }
+}
+
 /**
  *
  * The formatting check goes through all items and checks various fields to ensure the entered values meets certain criteria.
@@ -357,14 +373,14 @@ var poisonAndDiseasesRegularExpression = new RegExp("(poison|disease)", "g");
 var validArmorTypes = ["light", "power", "heavy", "shield"];
 var validCreatureSizes = ["fine", "diminutive", "tiny", "small", "medium", "large", "huge", "gargantuan", "colossal"];
 function formattingCheck(allItems) {
-
-	for (let item of allItems) {
-		let data = item.data;
-		let pack = item.pack;
+	for (const item of allItems) {
+		const data = item.data;
+		const pack = item.pack;
 
 		if (!data || !data.data || !data.type) {
 			continue; // Malformed data or journal entry - outside the scope of the formatting check
 		}
+        
 		// We only check formatting of aliens, vehicles & equipment for now
 		if (data.type === "npc") {
             // NOTE: `checkEcology` off by default as it currently produces hundreds of errors.

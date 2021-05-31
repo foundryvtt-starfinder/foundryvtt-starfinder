@@ -42,6 +42,8 @@ Vehicle has the following 3 phases: "Pilot Actions", "Chase Progress", and "Comb
 */
 
 export class CombatSFRPG extends Combat {
+    static HiddenTurn = 0;
+
     async begin() {
         const update = {
             "flags.sfrpg.combatType": this.getCombatType(),
@@ -67,10 +69,10 @@ export class CombatSFRPG extends Combat {
         if (eventData.isNewPhase) {
             if (this.round.resetInitiative) {
                 const updates = this.data.combatants.map(c => { return {
-                    _id: c._id,
+                    _id: c.id,
                     initiative: null
                 }});
-                await this.updateEmbeddedEntity("Combatant", updates);
+                await this.updateEmbeddedDocuments("Combatant", updates);
             }
         }
 
@@ -102,8 +104,9 @@ export class CombatSFRPG extends Combat {
         const scene = game.scenes.get(this.data.scene);
         const players = game.users.players;
         const settings = game.settings.get("core", Combat.CONFIG_SETTING);
-        const turns = combatants.map(c => this._prepareCombatant(c, scene, players, settings)).sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.data.turn = Math.clamped(this.data.turn, -1, turns.length-1);
+        const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
+        this.data.turn = Math.clamped(this.data.turn, CombatSFRPG.HiddenTurn, turns.length-1);
+
         return this.turns = turns;
     }
 
@@ -128,7 +131,7 @@ export class CombatSFRPG extends Combat {
                 nextTurn = -1;
                 for (let [index, combatant] of turnEntries) {
                     if (index >= this.turn) continue;
-                    if (!combatant.defeated) {
+                    if (!combatant.data.defeated) {
                         nextTurn = index;
                         break;
                     }
@@ -187,14 +190,15 @@ export class CombatSFRPG extends Combat {
             if (this.settings.skipDefeated) {
                 for (let [index, combatant] of this.turns.entries()) {
                     if (index < nextTurn) continue;
-                    if (!combatant.defeated) {
+                    if (!combatant.data.defeated) {
                         nextTurn = index;
                         break;
                     }
                 }
 
-                /** Skip the last actor if it is dead. */
-                if (nextTurn === this.turns.length - 1 && this.turns[nextTurn].defeated) {
+                // Skip the next actors if they are dead.
+                const lastUndefeatedIndex = this.getIndexOfLastUndefeatedCombatant();
+                if (nextTurn > lastUndefeatedIndex) {
                     nextTurn = this.turns.length + 1; 
                 }
             }
@@ -214,7 +218,7 @@ export class CombatSFRPG extends Combat {
             } else {
                 nextTurn = 0;
             }
-    }
+        }
 
         if (nextPhase >= phases.length) {
             nextRound += 1;
@@ -224,7 +228,7 @@ export class CombatSFRPG extends Combat {
             } else {
                 nextTurn = 0;
             }
-    }
+        }
 
         if (nextPhase !== this.data.flags.sfrpg.phase) {
             const newPhase = phases[nextPhase];
@@ -313,7 +317,7 @@ export class CombatSFRPG extends Combat {
         await this._notifyBeforeUpdate(eventData);
 
         if (!newPhase.iterateTurns) {
-            nextTurn = -1;
+            nextTurn = CombatSFRPG.HiddenTurn;
         }
 
         const updateData = {
@@ -328,10 +332,10 @@ export class CombatSFRPG extends Combat {
         if (eventData.isNewPhase) {
             if (newPhase.resetInitiative) {
                 const updates = this.data.combatants.map(c => { return {
-                    _id: c._id,
+                    _id: c.id,
                     initiative: null
                 }});
-                await this.updateEmbeddedEntity("Combatant", updates);
+                await this.updateEmbeddedDocuments("Combatant", updates);
             }
         }
 
@@ -399,7 +403,7 @@ export class CombatSFRPG extends Combat {
         // Create the chat message
         const chatData = {
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: { actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName },
+            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
 
@@ -437,7 +441,7 @@ export class CombatSFRPG extends Combat {
         // Create the chat message
         const chatData = {
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: { actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName },
+            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
 
@@ -475,7 +479,7 @@ export class CombatSFRPG extends Combat {
         // Create the chat message
         const chatData = {
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: { actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName },
+            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
 
@@ -516,7 +520,7 @@ export class CombatSFRPG extends Combat {
 
     hasCombatantsWithoutInitiative() {
         for (let [index, combatant] of this.turns.entries()) {
-            if ((!this.settings.skipDefeated || !combatant.defeated) && !combatant.initiative) {
+            if ((!this.settings.skipDefeated || !combatant.data.defeated) && !combatant.initiative) {
                 return true;
             }
         }
@@ -525,7 +529,7 @@ export class CombatSFRPG extends Combat {
 
     getIndexOfFirstUndefeatedCombatant() {
         for (let [index, combatant] of this.turns.entries()) {
-            if (!combatant.defeated) {
+            if (!combatant.data.defeated) {
                 return index;
             }
         }
@@ -535,7 +539,7 @@ export class CombatSFRPG extends Combat {
     getIndexOfLastUndefeatedCombatant() {
         const turnEntries = Array.from(new Set(this.turns.entries())).reverse();
         for (let [index, combatant] of turnEntries) {
-            if (!combatant.defeated) {
+            if (!combatant.data.defeated) {
                 return index;
             }
         }
@@ -585,7 +589,8 @@ export class CombatSFRPG extends Combat {
   
       // Structure input data
       ids = typeof ids === "string" ? [ids] : ids;
-      const currentId = this.combatant?._id;
+      const currentId = this.combatant?.id;
+      let rollMode = messageOptions.rollMode || game.settings.get("core", "rollMode");
   
       // Iterate over Combatants, performing an initiative roll for each
       const updates = [];
@@ -593,30 +598,26 @@ export class CombatSFRPG extends Combat {
       let isFirst = true;
       for (const id of ids) {
         // Get Combatant data
-        const c = this.getCombatant(id);
-        if ( !c || !c.owner ) return results;
+        const combatant = this.combatants.get(id);
+        if ( !combatant?.isOwner ) return results;
   
         // Roll initiative
-        const cf = formula || this._getInitiativeFormula(c);
-        const roll = await this._getInitiativeRoll(c, cf);
+        const combatantInitiativeFormula = formula || this._getInitiativeFormula(combatant);
+        const roll = await this._getInitiativeRoll(combatant, combatantInitiativeFormula);
         if (!roll) {
             continue;
         }
         updates.push({_id: id, initiative: roll.total});
   
-        // Determine the roll mode
-        let rollMode = messageOptions.rollMode || game.settings.get("core", "rollMode");
-        if (( c.token.hidden || c.hidden ) && (rollMode === "roll") ) rollMode = "gmroll";
-  
         // Construct chat message data
         let messageData = mergeObject({
           speaker: {
-            scene: canvas.scene._id,
-            actor: c.actor ? c.actor._id : null,
-            token: c.token._id,
-            alias: c.token.name
+            scene: canvas.scene.id,
+            actor: combatant.actor ? combatant.actor.id : null,
+            token: combatant.token.id,
+            alias: combatant.token.name
           },
-          flavor: `${c.token.name} rolls for Initiative!`,
+          flavor: `${combatant.token.name} rolls for Initiative!`,
           flags: {"core.initiativeRoll": true}
         }, messageOptions);
 
@@ -630,7 +631,7 @@ export class CombatSFRPG extends Combat {
             speaker: messageData.speaker,
             flags: messageData.flags,
             content: explainedRollContent,
-            rollMode: rollMode,
+            rollMode: combatant.hidden && (rollMode === "roll") ? "gmroll" : rollMode,
             roll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             sound: CONFIG.sounds.dice
@@ -646,15 +647,15 @@ export class CombatSFRPG extends Combat {
       if ( !updates.length ) return this;
   
       // Update multiple combatants
-      await this.updateEmbeddedEntity("Combatant", updates);
+      await this.updateEmbeddedDocuments("Combatant", updates);
   
       // Ensure the turn order remains with the same combatant
       if ( updateTurn && currentId ) {
-        await this.update({turn: this.turns.findIndex(t => t._id === currentId)});
+        await this.update({turn: this.turns.findIndex(t => t.id === currentId)});
       }
   
       // Create multiple chat messages
-      await CONFIG.ChatMessage.entityClass.create(messages);
+      await CONFIG.ChatMessage.documentClass.create(messages);
   
       // Return the updated Combat
       return this;
@@ -666,7 +667,7 @@ export class CombatSFRPG extends Combat {
             return null;
         }
 
-        return game.actors.entries.find(x => x._id === pilotIds[0]);
+        return game.actors.entries.find(x => x.id === pilotIds[0]);
     }
 
     _sortCombatantsAsc(a, b) {

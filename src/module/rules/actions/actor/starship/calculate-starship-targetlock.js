@@ -82,10 +82,11 @@ export default function (engine) {
         }
 
         if (defensiveCountermeasureItem) {
-            addScore(data.quadrants.forward.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureItem.data.targetLockBonus, false);
-            addScore(data.quadrants.port.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureItem.data.targetLockBonus, false);
-            addScore(data.quadrants.starboard.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureItem.data.targetLockBonus, false);
-            addScore(data.quadrants.aft.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureItem.data.targetLockBonus, false);
+            const defensiveCountermeasureData = defensiveCountermeasureItem.data.data;
+            addScore(data.quadrants.forward.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureData.targetLockBonus, false);
+            addScore(data.quadrants.port.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureData.targetLockBonus, false);
+            addScore(data.quadrants.starboard.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureData.targetLockBonus, false);
+            addScore(data.quadrants.aft.targetLock, defensiveCountermeasureItem.name, defensiveCountermeasureData.targetLockBonus, false);
         }
 
         if (sizeMod !== 0) {
@@ -100,25 +101,34 @@ export default function (engine) {
         if (starboardTL?.misc < 0 || starboardTL?.misc > 0) addScore(data.quadrants.starboard.targetLock, "SFRPG.StarshipSheet.Modifiers.MiscModifier", starboardTL.misc);
         if (aftTL?.misc < 0 || aftTL?.misc > 0) addScore(data.quadrants.aft.targetLock, "SFRPG.StarshipSheet.Modifiers.MiscModifier", aftTL.misc);
 
-        if (shieldItem && shieldItem.data.isDeflector) {
-            if (data.quadrants.forward.shields.value > 0) addScore(data.quadrants.forward.targetLock, shieldItem.name, shieldItem.data.armorBonus, false);
-            if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.targetLock, shieldItem.name, shieldItem.data.armorBonus, false);
-            if (data.quadrants.starboard.shields.value > 0) addScore(data.quadrants.starboard.targetLock, shieldItem.name, shieldItem.data.armorBonus, false);
-            if (data.quadrants.aft.shields.value > 0) addScore(data.quadrants.aft.targetLock, shieldItem.name, shieldItem.data.armorBonus, false);
+        if (shieldItem) {
+            const shieldData = shieldItem.data.data;
+            if (shieldData.isDeflector) {
+                if (data.quadrants.forward.shields.value > 0) addScore(data.quadrants.forward.targetLock, shieldItem.name, shieldData.armorBonus, false);
+                if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.targetLock, shieldItem.name, shieldData.armorBonus, false);
+                if (data.quadrants.starboard.shields.value > 0) addScore(data.quadrants.starboard.targetLock, shieldItem.name, shieldData.armorBonus, false);
+                if (data.quadrants.aft.shields.value > 0) addScore(data.quadrants.aft.targetLock, shieldItem.name, shieldData.armorBonus, false);
+            }
         }
 
-        if (armorItem && (armorItem.data.targetLockPenalty < 0 || armorItem.data.targetLockPenalty > 0)) {
-            addScore(data.quadrants.forward.targetLock, armorItem.name, armorItem.data.targetLockPenalty, false);
-            addScore(data.quadrants.port.targetLock, armorItem.name, armorItem.data.targetLockPenalty, false);
-            addScore(data.quadrants.starboard.targetLock, armorItem.name, armorItem.data.targetLockPenalty, false);
-            addScore(data.quadrants.aft.targetLock, armorItem.name, armorItem.data.targetLockPenalty, false);
+        if (armorItem) {
+            const armorItemData = armorItem.data.data;
+            if (armorItemData.targetLockPenalty < 0 || armorItemData.targetLockPenalty > 0) {
+                addScore(data.quadrants.forward.targetLock, armorItem.name, armorItemData.targetLockPenalty, false);
+                addScore(data.quadrants.port.targetLock, armorItem.name, armorItemData.targetLockPenalty, false);
+                addScore(data.quadrants.starboard.targetLock, armorItem.name, armorItemData.targetLockPenalty, false);
+                addScore(data.quadrants.aft.targetLock, armorItem.name, armorItemData.targetLockPenalty, false);
+            }
         }
 
-        if (ablativeArmorItem && (ablativeArmorItem.data.targetLockPenalty < 0 || ablativeArmorItem.data.targetLockPenalty > 0)) {
-            addScore(data.quadrants.forward.targetLock, ablativeArmorItem.name, ablativeArmorItem.data.targetLockPenalty, false);
-            addScore(data.quadrants.port.targetLock, ablativeArmorItem.name, ablativeArmorItem.data.targetLockPenalty, false);
-            addScore(data.quadrants.starboard.targetLock, ablativeArmorItem.name, ablativeArmorItem.data.targetLockPenalty, false);
-            addScore(data.quadrants.aft.targetLock, ablativeArmorItem.name, ablativeArmorItem.data.targetLockPenalty, false);
+        if (ablativeArmorItem) {
+            const ablativeArmorData = ablativeArmorItem.data.data;
+            if (ablativeArmorData.targetLockPenalty < 0 || ablativeArmorData.targetLockPenalty > 0) {
+                addScore(data.quadrants.forward.targetLock, ablativeArmorItem.name, ablativeArmorData.targetLockPenalty, false);
+                addScore(data.quadrants.port.targetLock, ablativeArmorItem.name, ablativeArmorData.targetLockPenalty, false);
+                addScore(data.quadrants.starboard.targetLock, ablativeArmorItem.name, ablativeArmorData.targetLockPenalty, false);
+                addScore(data.quadrants.aft.targetLock, ablativeArmorItem.name, ablativeArmorData.targetLockPenalty, false);
+            }
         }
 
         return fact;

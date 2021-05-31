@@ -67,9 +67,9 @@ Hooks.once('init', async function () {
     };
 
     CONFIG.SFRPG = SFRPG;
-    CONFIG.Actor.entityClass = ActorSFRPG;
-    CONFIG.Item.entityClass = ItemSFRPG;
-    CONFIG.Combat.entityClass = CombatSFRPG;
+    CONFIG.Actor.documentClass = ActorSFRPG;
+    CONFIG.Item.documentClass = ItemSFRPG;
+    CONFIG.Combat.documentClass = CombatSFRPG;
 
     CONFIG.statusEffects = CONFIG.SFRPG.statusEffectIcons;
 
@@ -254,10 +254,10 @@ Hooks.once("setup", function () {
         if ( !target ) throw new Error("You must define the name of a target field.");
     
         // Enrich the content
-        const owner = Boolean(options.hash['owner']);
+        const isOwner = Boolean(options.hash['isOwner']);
         const rolls = Boolean(options.hash['rolls']);
         const rollData = options.hash['rollData'];
-        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: owner, entities: true, rolls: rolls, rollData: rollData});
+        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: isOwner, entities: true, rolls: rolls, rollData: rollData});
         const maxSize = Boolean(options.hash['maxSize']) ? ` style="flex: 1;"` : "";
     
         // Construct the HTML
@@ -285,6 +285,8 @@ Hooks.once("ready", () => {
 
     defaultDropHandler = canvas._dragDrop.callbacks.drop;
     canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+
+    ActorSheetSFRPGStarship.ensureStarshipActions();
 });
 
 Hooks.on('ready', () => {
@@ -298,14 +300,14 @@ Hooks.on('ready', () => {
 });
 
 async function migrateOldContainers() {
-    for (let actor of game.actors.entries) {
-        let sheetActorHelper = new ActorItemHelper(actor._id, null, null);
+    for (let actor of game.actors.contents) {
+        let sheetActorHelper = new ActorItemHelper(actor.id, null, null);
         await sheetActorHelper.migrateItems();
     }
 
-    for (let scene of game.scenes.entries) {
+    for (let scene of game.scenes.contents) {
         for (let token of scene.data.tokens) {
-            let sheetActorHelper = new ActorItemHelper(token.actorId, token._id, scene._id);
+            let sheetActorHelper = new ActorItemHelper(token.actorId, token.id, scene.id);
             await sheetActorHelper.migrateItems();
         }
     }

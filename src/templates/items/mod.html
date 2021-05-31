@@ -16,7 +16,7 @@
 
             <ul class="summary source-wide">
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize "SFRPG.DroneSheet.Mod.Source" }}"/>
+                    <input type="text" name="data.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.DroneSheet.Mod.Source" }}"/>
                 </li>
             </ul>
         </div>
@@ -43,14 +43,14 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.MaxInstalls" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.maxInstalls" value="{{data.maxInstalls}}" data-dtype="Number"/>
+                    <input type="text" name="data.maxInstalls" value="{{itemData.maxInstalls}}" data-dtype="Number"/>
                  </div>
              </div>
 
              <div class="form-group">
                  <label>{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.FreeInstall" }}</label>
                  <label class="checkbox">
-                    <input type="checkbox" name="data.isFree" {{checked data.isFree}}/>{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.FreeInstallLabel" }}
+                    <input type="checkbox" name="data.isFree" {{checked itemData.isFree}}/>{{ localize "SFRPG.DroneSheet.Mod.Details.BaseStatistics.FreeInstallLabel" }}
                 </label>
               </div>
 
@@ -59,7 +59,7 @@
              <div class="form-group">
                  <label>{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.Amount" }}</label>
                  <div class="form-fields">
-                     <input type="text" name="data.arms.number" value="{{data.arms.number}}" data-dtype="Number"/>
+                     <input type="text" name="data.arms.number" value="{{itemData.arms.number}}" data-dtype="Number"/>
                   </div>
               </div>
  
@@ -67,7 +67,7 @@
                   <label>{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Label" }}</label>
                   <div class="form-fields">
                       <select name="data.arms.armType">
-                          {{#select data.arms.armType}}
+                          {{#select itemData.arms.armType}}
                           <option value="general">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.General" }}</option>
                           <option value="melee">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Melee" }}</option>
                           <option value="ranged">{{ localize "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Ranged" }}</option>
@@ -81,21 +81,21 @@
             <div class="form-group">
                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.SpeedSpecial" }}</label>
                <div class="form-fields">
-                   <input type="text" name="data.additionalMovement" value="{{data.additionalMovement}}" data-dtype="String"/>
+                   <input type="text" name="data.additionalMovement" value="{{itemData.additionalMovement}}" data-dtype="String"/>
                 </div>
             </div>
 
             <div class="form-group">
                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.AdditionalSenses" }}</label>
                <div class="form-fields">
-                   <input type="text" name="data.additionalSenses" value="{{data.additionalSenses}}" data-dtype="String"/>
+                   <input type="text" name="data.additionalSenses" value="{{itemData.additionalSenses}}" data-dtype="String"/>
                 </div>
             </div>
 
             <div class="form-group">
                <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.ArmorSlot" }}</label>
                <label class="checkbox">
-                   <input type="checkbox" name="data.isArmorSlot" {{checked data.isArmorSlot}}/>
+                   <input type="checkbox" name="data.isArmorSlot" {{checked itemData.isArmorSlot}}/>
                </label>
             </div>
 
@@ -104,7 +104,7 @@
                 <div class="form-fields">
                     <select name="data.weaponProficiency">
                         <option value="">{{ localize "SFRPG.None" }}</option>
-                        {{#select data.weaponProficiency}}
+                        {{#select itemData.weaponProficiency}}
                         {{#each config.weaponProficiencies as |name val|}}
                         <option value="{{val}}">{{name}}</option>
                         {{/each}}
@@ -118,7 +118,7 @@
                 <div class="form-fields">
                     <select name="data.bonusSkill">
                         <option value="">{{ localize "SFRPG.None" }}</option>
-                        {{#select data.bonusSkill}}
+                        {{#select itemData.bonusSkill}}
                         {{#each config.skills as |name val|}}
                         <option value="{{val}}">{{name}}</option>
                         {{/each}}

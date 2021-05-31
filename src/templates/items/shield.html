@@ -28,7 +28,7 @@
                 <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
                 {{#each config.weaponProperties as |name prop|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../data.properties prop)}}/> {{ name }}
+                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../itemData.properties prop)}}/> {{ name }}
                 </label>
                 {{/each}}
             </div>
@@ -40,10 +40,10 @@
                 <label>{{ localize "SFRPG.Items.Shield.Bonus" }}</label>
                 <div class="form-fields">
                     <span class="sep">{{ localize "SFRPG.Items.Shield.Wielded" }} </span>
-                    <input type="text" name="data.bonus.wielded" value="{{data.bonus.wielded}}" data-dtype="Number"/>
+                    <input type="text" name="data.bonus.wielded" value="{{itemData.bonus.wielded}}" data-dtype="Number"/>
                     <span class="sep"> / </span>
                     <span class="sep">{{ localize "SFRPG.Items.Shield.Aligned" }} </span>
-                    <input type="text" name="data.bonus.aligned" value="{{data.bonus.aligned}}" data-dtype="Number"/>
+                    <input type="text" name="data.bonus.aligned" value="{{itemData.bonus.aligned}}" data-dtype="Number"/>
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.MaxDex" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="data.dex" value="{{data.dex}}" data-dtype="Number" placeholder="{{ localize "SFRPG.Items.Unlimited" }}"/>
+                   <input type="text" name="data.dex" value="{{itemData.dex}}" data-dtype="Number" placeholder="{{ localize "SFRPG.Items.Unlimited" }}"/>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.ACP" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.acp" value="{{data.acp}}" data-dtype="Number" placeholder="0" />
+                    <input type="text" name="data.acp" value="{{itemData.acp}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
 

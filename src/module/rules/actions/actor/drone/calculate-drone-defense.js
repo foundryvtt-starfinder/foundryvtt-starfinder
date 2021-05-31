@@ -12,11 +12,13 @@ export default function (engine) {
         }
 
         if (activeChassis) {
-            let droneLevel = activeChassis.data.levels;
+            const chassisData = activeChassis.data.data;
+
+            let droneLevel = chassisData.levels;
             droneLevel = Math.max(1, Math.min(droneLevel, 20));
 
-            data.attributes.eac.value = activeChassis.data.eac + SFRPG.droneACBonusPerLevel[droneLevel - 1];
-            data.attributes.kac.value = activeChassis.data.kac + SFRPG.droneACBonusPerLevel[droneLevel - 1];
+            data.attributes.eac.value = chassisData.eac + SFRPG.droneACBonusPerLevel[droneLevel - 1];
+            data.attributes.kac.value = chassisData.kac + SFRPG.droneACBonusPerLevel[droneLevel - 1];
         }
 
         data.attributes.eac.value += data.abilities.dex.mod;

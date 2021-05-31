@@ -91,7 +91,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             if (droneItemTypes.includes(item.type)) {
                 arr[3].push(item);
             } else if (item.type === "spell") {
-                let container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
+                const container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
                     arr[0].push(item);
                 } else {
@@ -186,6 +186,6 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         if (cr) formData[crv] = cr < 1 ? cr : parseInt(cr);
 
         // Parent ActorSheet update steps
-        super._updateObject(event, formData);
+        return super._updateObject(event, formData);
     }
 }

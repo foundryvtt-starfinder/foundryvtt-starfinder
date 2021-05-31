@@ -4,9 +4,9 @@
         {{ localize "SFRPG.Items.Capacity.Capacity" }}
     </label>
     <div class="form-fields">
-        <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.CapacityValueTooltip" }}" name="data.capacity.value" value="{{data.capacity.value}}" data-dtype="Number" />
+        <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.CapacityValueTooltip" }}" name="data.capacity.value" value="{{itemData.capacity.value}}" data-dtype="Number" />
         <span class="sep"> / </span>
-        <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.CapacityMaxTooltip" }}" name="data.capacity.max" value="{{data.capacity.max}}" data-dtype="Number" />
+        <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.CapacityMaxTooltip" }}" name="data.capacity.max" value="{{itemData.capacity.max}}" data-dtype="Number" />
     </div>
 </div>
 <div class="form-group">
@@ -14,10 +14,10 @@
         {{ localize "SFRPG.Items.Capacity.Usage" }}
     </label>
     <div class="form-fields">
-        <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.UsageTooltip" }}" name="data.usage.value" value="{{data.usage.value}}" data-dtype="Number" />
+        <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.UsageTooltip" }}" name="data.usage.value" value="{{itemData.usage.value}}" data-dtype="Number" />
         <span class="sep"> / </span>
         <select name="data.usage.per" data-tippy-content="{{ localize "SFRPG.Items.Capacity.UsageValueTooltip" }}">
-        {{#select data.usage.per}}
+        {{#select itemData.usage.per}}
             <option value=""></option>
             {{#each config.capacityUsagePer as |usage u|}}
             <option value="{{u}}">{{usage}}</option>

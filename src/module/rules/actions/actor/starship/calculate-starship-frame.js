@@ -155,8 +155,7 @@ export default function (engine) {
             data.attributes.hp.max = 0;
             data.crew.gunner.limit = 0;
         } else {
-            const frame = frames[0];
-            //console.log([data, frame]);
+            const frame = frames[0].data;
 
             data.frame = frame;
 

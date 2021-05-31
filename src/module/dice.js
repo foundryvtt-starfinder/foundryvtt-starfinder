@@ -20,7 +20,7 @@ export class DiceSFRPG {
     * @param {Function} onClose          Callback for actions to take when the dialog form is closed
     * @param {Object} dialogOptions      Modal dialog options
     */
-    static d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true,
+    static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true,
         critical = 20, fumble = 1, onClose, dialogOptions }) {
         
         if (!rollContext?.isValid()) {
@@ -51,12 +51,12 @@ export class DiceSFRPG {
         const formula = parts.map(x => x instanceof Object ? `${x.score}[${x.explanation}]` : x).join(" + ");
 
         const tree = new RollTree(options);
-        tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
             if (button === "cancel") {
                 if (onClose) {
                     onClose(null, null, null);
                 }
-                return;
+                return null;
             }
 
             let dieRoll = "1d20";
@@ -72,7 +72,8 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            let roll = new Roll(finalFormula.finalRoll).roll();
+            const rollObject = new Roll(finalFormula.finalRoll);
+            let roll = await rollObject.evaluate({async: true});
 
             // Flag critical thresholds
             for (let d of roll.dice) {
@@ -157,7 +158,7 @@ export class DiceSFRPG {
     * @param {Number} fumble             The value of d20 result which represents a critical failure
     * @param {Object} dialogOptions      Modal dialog options
     */
-    static createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, dialogOptions }) {
+    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, dialogOptions }) {
         
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -189,7 +190,7 @@ export class DiceSFRPG {
         const tree = new RollTree(options);
         if (dialogOptions?.skipUI) {
             let result = null;
-            tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+            await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
                 let dieRoll = "1" + mainDie;
                 if (mainDie == "d20") {
                     if (button === "Disadvantage") {
@@ -202,8 +203,9 @@ export class DiceSFRPG {
                 finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = dieRoll + " + " + finalFormula.formula;
 
-                let roll = new Roll(finalFormula.finalRoll).roll();
-
+                const rollObject = new Roll(finalFormula.finalRoll);
+                let roll = await rollObject.evaluate({async: true});
+    
                 // Flag critical thresholds
                 for (let d of roll.dice) {
                     if (d.faces === 20) {
@@ -217,13 +219,13 @@ export class DiceSFRPG {
             return result;
         } else {
             return new Promise((resolve) => {
-                tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+                tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
                     if (button === "cancel") {
                         resolve(null);
                         return;
                     }
     
-                    let dieRoll = "1" + mainDie;
+                    const dieRoll = "1" + mainDie;
                     if (mainDie == "d20") {
                         if (button === "Disadvantage") {
                             dieRoll = "2d20kl";
@@ -237,8 +239,9 @@ export class DiceSFRPG {
                     finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
                     finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
     
-                    let roll = new Roll(finalFormula.finalRoll).roll();
-    
+                    const rollObject = new Roll(finalFormula.finalRoll);
+                    const roll = await rollObject.evaluate({async: true});
+            
                     // Flag critical thresholds
                     for (let d of roll.dice) {
                         if (d.faces === 20) {
@@ -273,7 +276,7 @@ export class DiceSFRPG {
     * @param {Function} onClose         Callback for actions to take when the dialog form is closed
     * @param {Object} dialogOptions     Modal dialog options
     */
-    static damageRoll({ event = new Event(''), parts, criticalData, damageTypes, rollContext, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
+    static async damageRoll({ event = new Event(''), parts, criticalData, damageTypes, rollContext, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
         flavor = flavor || title;
 
         if (!rollContext?.isValid()) {
@@ -299,12 +302,12 @@ export class DiceSFRPG {
 
         const formula = parts.join(" + ");
         const tree = new RollTree(options);
-        tree.buildRoll(formula, rollContext, (button, rollMode, finalFormula) => {
+        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
             if (button === 'cancel') {
                 if (onClose) {
                     onClose(null, null, null);
                 }
-                return;
+                return null;
             }
 
             if (button === "Critical") {
@@ -328,7 +331,8 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            let roll = new Roll(finalFormula.finalRoll).roll();
+            const rollObject = new Roll(finalFormula.finalRoll);
+            let roll = await rollObject.evaluate({async: true});
             
             // Associate the damage types for this attack to the first DiceTerm
             // for the roll. 
@@ -345,7 +349,7 @@ export class DiceSFRPG {
 
             const tags = [];
 
-            // TODO @TimT: Remove this once @wildj79 implements proper damage type tracking.
+            // TODO @Deepflame: Remove this once @wildj79 implements proper damage type tracking.
             if (damageTypes) {
                 for (const damageType of damageTypes) {
                     tags.push({tag: `damageType${damageType.capitalize()}`, text: damageType.capitalize()});
@@ -557,15 +561,16 @@ class RollTree {
             }
 
             if (callback) {
-                callback(button, rollMode, finalRollFormula);
+                await callback(button, rollMode, finalRollFormula);
             }
             return {button: button, rollMode: rollMode, finalRollFormula: finalRollFormula};
         }
 
-        return this.displayUI(formula, contexts, allRolledMods).then(([button, rollMode, bonus]) => {
+        const uiPromise = this.displayUI(formula, contexts, allRolledMods);
+        uiPromise.then(async ([button, rollMode, bonus]) => {
             if (button === null) {
                 console.log('Roll was cancelled');
-                callback('cancel', "none", null);
+                await callback('cancel', "none", null);
                 return;
             }
 
@@ -591,8 +596,9 @@ class RollTree {
                 console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
             }
 
-            callback(button, rollMode, finalRollFormula);
+            await callback(button, rollMode, finalRollFormula);
         });
+        return uiPromise;
     }
 
     populate() {
@@ -957,7 +963,7 @@ class RollDialog extends Dialog
             const container = modifier.container;
             const actor = await game.actors.get(container.actorId);
             if (container.itemId) {
-                const item = container.itemId ? await actor.getOwnedItem(container.itemId) : null;
+                const item = container.itemId ? await actor.items.get(container.itemId) : null;
 
                 // Update modifier by ID in item
                 const containerModifiers = duplicate(item.data.data.modifiers);

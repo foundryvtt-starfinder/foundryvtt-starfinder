@@ -48,7 +48,7 @@
 
     <section class="bio-body">
         <div class="tab flexrow" data-group="biographyTabs" data-tab="biography">
-                {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+                {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true isOwner=isOwner editable=editable rolls=false rollData=data}}
         </div>
         <div class="tab" data-group="biographyTabs" data-tab="ecology">
             <div class="flexrow">
@@ -70,7 +70,7 @@
         </div>
         {{#if isGM}}
         <div class="tab flexrow" data-group="biographyTabs" data-tab="gmNotes">
-            {{editorPlus content=data.details.biography.gmNotes target="data.details.biography.gmNotes" button=true owner=owner editable=editable rolls=false rollData=data}}
+            {{editorPlus content=data.details.biography.gmNotes target="data.details.biography.gmNotes" button=true isOwner=isOwner editable=editable rolls=false rollData=data}}
         </div>
         {{/if}}
     </section>

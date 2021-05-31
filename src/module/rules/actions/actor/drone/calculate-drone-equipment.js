@@ -11,12 +11,14 @@ export default function (engine) {
         data.attributes.weaponMounts.ranged.current = 0;
         if (fact.weapons) {
             for (let weapon of fact.weapons) {
+                const weaponData = weapon.data.data;
+
                 let mountCost = 1;
-                if (weapon.data.properties.two) {
+                if (weaponData.properties.two) {
                     mountCost = 2;
                 }
 
-                switch (weapon.data.actionType) {
+                switch (weaponData.actionType) {
                     default:
                         break;
                     case "mwak":

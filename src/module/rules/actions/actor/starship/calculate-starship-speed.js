@@ -6,15 +6,17 @@ export default function (engine) {
 
         const thrusters = fact.items.filter(x => x.type === "starshipThruster");
         for (const thruster of thrusters) {
-            if (!thruster.data.isBooster) {
-                data.attributes.speed.value += thruster.data.speed;
-                data.attributes.speed.tooltip.push(`${thruster.name}: ${thruster.data.speed.signedString()}`);
+            const thrusterData = thruster.data.data;
 
-                data.attributes.pilotingBonus.value += thruster.data.pilotingModifier;
-                data.attributes.pilotingBonus.tooltip.push(`${thruster.name}: ${thruster.data.pilotingModifier.signedString()}`);
-            } else if (thruster.data.isEnabled) {
-                data.attributes.speed.value += Math.floor(thruster.data.speed / 4);
-                data.attributes.speed.tooltip.push(`${thruster.name}: ${thruster.data.speed.signedString()}`);
+            if (!thrusterData.isBooster) {
+                data.attributes.speed.value += thrusterData.speed;
+                data.attributes.speed.tooltip.push(`${thruster.name}: ${thrusterData.speed.signedString()}`);
+
+                data.attributes.pilotingBonus.value += thrusterData.pilotingModifier;
+                data.attributes.pilotingBonus.tooltip.push(`${thruster.name}: ${thrusterData.pilotingModifier.signedString()}`);
+            } else if (thrusterData.isEnabled) {
+                data.attributes.speed.value += Math.floor(thrusterData.speed / 4);
+                data.attributes.speed.tooltip.push(`${thruster.name}: ${thrusterData.speed.signedString()}`);
             }
         }
 

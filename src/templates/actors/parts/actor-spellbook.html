@@ -58,7 +58,7 @@
             <div class="spell-school">{{localize labels.school}}</div>
             <div class="spell-action">{{labels.activation}}</div>
 
-            {{#if ../../owner}}
+            {{#if ../../isOwner}}
             <div class="item-controls">
                 <a class="item-control item-edit" title="{{localize "SFRPG.SpellBook.EditItem"}}"><i class="fas fa-edit"></i></a>
                 <a class="item-control item-delete" title="{{localize "SFRPG.SpellBook.DeleteItem"}}"><i class="fas fa-trash"></i></a>
@@ -68,7 +68,7 @@
     {{/each}}
     </ol>
 {{else}}
-    {{#if owner}}
+    {{#if isOwner}}
     {{#if filters.spellbook.size}}
     <li class="item flexrow"><p class="notes">{{localize "SFRPG.SpellBook.NoSpells"}}</p></li>
     {{else}}

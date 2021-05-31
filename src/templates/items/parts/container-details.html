@@ -14,11 +14,11 @@
             </div>
 
             <ul>
-                {{#each data.container.storage as |storage|}}
+                {{#each itemData.container.storage as |storage|}}
                 <hr/>
-                <li class="storage-slot" data-slot-index="{{indexOf ../data.container.storage storage}}">
+                <li class="storage-slot" data-slot-index="{{indexOf ../itemData.container.storage storage}}">
                     <div class="form-group">
-                        <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSection" index=(indexOf ../data.container.storage storage false) }}</label>
+                        <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSection" index=(indexOf ../itemData.container.storage storage false) }}</label>
                         <div class="form-fields">
                             <a class="item-control remove-storage">
                                 <i class="fas fa-minus"></i> {{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSectionsRemove" }}

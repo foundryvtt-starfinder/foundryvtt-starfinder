@@ -25,7 +25,7 @@ export class PackLoader {
                 progress.advance(`Loading ${pack.metadata.label}`);
 
                 if (pack.metadata.entity === entityType) {
-                    const content = await pack.getContent();
+                    const content = await pack.getDocuments();
                     data = this.loadedPacks[entityType][packId] = {
                       pack,
                       content

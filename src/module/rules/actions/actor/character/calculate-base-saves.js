@@ -12,23 +12,25 @@ export default function (engine) {
         const will = data.attributes.will;
 
         for (const cls of classes) {
-            let slowSave = Math.floor(cls.data.levels * (1/3));
-            let fastSave = Math.floor(cls.data.levels * 0.5) + 2;
+            const classData = cls.data.data;
 
-            fortSave += cls.data.fort === "slow" ? slowSave : fastSave;
+            let slowSave = Math.floor(classData.levels * (1/3));
+            let fastSave = Math.floor(classData.levels * 0.5) + 2;
+
+            fortSave += classData.fort === "slow" ? slowSave : fastSave;
             fort.tooltip.push(game.i18n.format("SFRPG.SaveClassModTooltip", {
                 class: cls.name,
-                mod: cls.data.fort === "slow" ? slowSave.signedString() : fastSave.signedString()
+                mod: classData.fort === "slow" ? slowSave.signedString() : fastSave.signedString()
             }));
-            refSave += cls.data.ref === "slow" ? slowSave : fastSave;
+            refSave += classData.ref === "slow" ? slowSave : fastSave;
             reflex.tooltip.push(game.i18n.format("SFRPG.SaveClassModTooltip", {
                 class: cls.name,
-                mod: cls.data.ref === "slow" ? slowSave.signedString() : fastSave.signedString()
+                mod: classData.ref === "slow" ? slowSave.signedString() : fastSave.signedString()
             }));
-            willSave += cls.data.will === "slow" ? slowSave : fastSave;
+            willSave += classData.will === "slow" ? slowSave : fastSave;
             will.tooltip.push(game.i18n.format("SFRPG.SaveClassModTooltip", {
                 class: cls.name,
-                mod: cls.data.will === "slow" ? slowSave.signedString() : fastSave.signedString()
+                mod: classData.will === "slow" ? slowSave.signedString() : fastSave.signedString()
             }));
         }
 

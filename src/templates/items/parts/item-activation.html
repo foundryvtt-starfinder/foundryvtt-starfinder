@@ -2,9 +2,9 @@
 <div class="form-group input-select">
     <label>{{ localize "SFRPG.Items.Activation.ActivationCost" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.activation.cost" value="{{data.activation.cost}}" data-dtype="Number" placeholder="-"/>
+        <input type="text" name="data.activation.cost" value="{{itemData.activation.cost}}" data-dtype="Number" placeholder="-"/>
         <select name="data.activation.type">
-            {{#select data.activation.type}}
+            {{#select itemData.activation.type}}
             <option value=""></option>
             {{#each config.abilityActivationTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -13,13 +13,13 @@
         </select>
     </div>
 </div>
-{{#if data.activation.type}}
+{{#if itemData.activation.type}}
 
 {{!-- Activation Condition --}}
 <div class="form-group">
     <label>{{ localize "SFRPG.Items.Activation.ActivationCondition" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.activation.condition" value="{{data.activation.condition}}"/>
+        <input type="text" name="data.activation.condition" value="{{itemData.activation.condition}}"/>
     </div>
 </div>
 
@@ -28,30 +28,30 @@
 <div class="form-group input-select-select">
     <label>{{ localize "SFRPG.Items.Activation.Target" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="String" placeholder="-"/>
+        <input type="text" name="data.target.value" value="{{itemData.target.value}}" data-dtype="String" placeholder="-"/>
     </div>
 </div>
 
 <div class="form-group input-select-select-select">
     <label>{{ localize "SFRPG.Items.Activation.Area" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.area.value" value="{{data.area.value}}" data-dtype="Number" placeholder="Area" />
+        <input type="text" name="data.area.value" value="{{itemData.area.value}}" data-dtype="Number" placeholder="Area" />
         <select name="data.area.units">
-            {{#select data.area.units}}
+            {{#select itemData.area.units}}
             {{#each config.distanceUnits as |unit key|}}
             <option value="{{key}}">{{unit}}</option>
             {{/each}}
             {{/select}}
         </select>
         <select name="data.area.shape">
-            {{#select data.area.shape}}
+            {{#select itemData.area.shape}}
             {{#each config.spellAreaShapes as |shape s|}}
             <option value="{{s}}">{{shape}}</option>
             {{/each}}
             {{/select}}
         </select>
         <select name="data.area.effect">
-            {{#select data.area.effect}}
+            {{#select itemData.area.effect}}
             {{#each config.spellAreaEffects as |effect e|}}
             <option value="{{e}}">{{effect}}</option>
             {{/each}}
@@ -64,18 +64,18 @@
 <div class="form-group input-select">
     <label>{{ localize "SFRPG.Items.Activation.Range" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="Range"/>
+        <input type="text" name="data.range.value" value="{{itemData.range.value}}" data-dtype="Number" placeholder="Range"/>
         <select name="data.range.units">
-            {{#select data.range.units}}
+            {{#select itemData.range.units}}
             {{#each config.distanceUnits as |unit key|}}
             <option value="{{key}}">{{unit}}</option>
             {{/each}}
             {{/select}}
         </select>
         <span class="sep"> + </span>
-        <input type="text" name="data.range.additional" value="{{data.range.additional}}" data-dtype="String" placeholder="5 ft." />
+        <input type="text" name="data.range.additional" value="{{itemData.range.additional}}" data-dtype="String" placeholder="5 ft." />
         <span class="sep"> / </span>
-        <input type="text" name="data.range.per" value="{{data.range.per}}" placeholder="level" />
+        <input type="text" name="data.range.per" value="{{itemData.range.per}}" placeholder="level" />
     </div>
 </div>
 
@@ -83,19 +83,19 @@
 <div class="form-group input-select">
     <label>{{ localize "SFRPG.Items.Activation.Duration" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="String" placeholder="-"/>
+        <input type="text" name="data.duration.value" value="{{itemData.duration.value}}" data-dtype="String" placeholder="-"/>
     </div>
 </div>
 
 {{!-- Limited Uses --}}
-<div class="form-group uses-per" data-tippy-content="<strong>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</strong><br/>@data.uses.value<br/>@data.uses.max</br/>@data.uses.per">
+<div class="form-group uses-per" data-tippy-content="<strong>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</strong><br/>@itemData.uses.value<br/>@itemData.uses.max</br/>@itemData.uses.per">
     <label>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.uses.value" value="{{data.uses.value}}" data-dtype="Number"/>
+        <input type="text" name="data.uses.value" value="{{itemData.uses.value}}" data-dtype="Number"/>
         <span class="sep"> of </span>
-        <input type="text" name="data.uses.max" value="{{data.uses.max}}" data-dtype="Number"/>
+        <input type="text" name="data.uses.max" value="{{itemData.uses.max}}" data-dtype="Number"/>
         <select name="data.uses.per">
-            {{#select data.uses.per}}
+            {{#select itemData.uses.per}}
             <option value=""></option>
             {{#each config.limitedUsePeriods as |name key|}}
             <option value="{{key}}">{{name}}</option>

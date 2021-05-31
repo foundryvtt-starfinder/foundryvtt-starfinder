@@ -42,7 +42,9 @@ export default function (engine) {
         // Class bonus
         if (fact.classes && fact.classes.length > 0) {
             for (const cls of fact.classes) {
-                let classBonus = Math.floor(cls.data.levels * cls.data.sp.value);
+                const classData = cls.data.data;
+
+                let classBonus = Math.floor(classData.levels * classData.sp.value);
                 spMax += classBonus;
 
                 data.attributes.sp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Stamina.ClassTooltip", {

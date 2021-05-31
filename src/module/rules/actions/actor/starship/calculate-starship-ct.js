@@ -30,9 +30,11 @@ export default function (engine) {
         const fortifiedHullItems = fact.items.filter(x => x.type === "starshipFortifiedHull");
         if (fortifiedHullItems && fortifiedHullItems.length > 0) {
             const fortifiedHull = fortifiedHullItems[0];
+            const fortifiedHullData = fortifiedHull.data.data;
+
             const sizeMultiplier = sizeMultiplierMap[data.details.size] || 0;
 
-            const ctBonus = fortifiedHull.data.criticalThresholdBonus * sizeMultiplier;
+            const ctBonus = fortifiedHullData.criticalThresholdBonus * sizeMultiplier;
             data.attributes.criticalThreshold.value += ctBonus;
             data.attributes.criticalThreshold.tooltip.push(`${fortifiedHull.name}: ${ctBonus}`);
         }

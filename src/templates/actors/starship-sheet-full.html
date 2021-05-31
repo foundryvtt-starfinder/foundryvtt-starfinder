@@ -484,7 +484,7 @@
                     <div class="item-name flexrow">
                         <h3>{{section.label}}</h3>
                     </div>
-                    {{#if (and ../owner section.dataset.allowAdd)}}
+                    {{#if (and ../isOwner section.dataset.allowAdd)}}
                     <div class="item-controls">
                         <a class="item-control item-create" title="Create Items" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                             <i class="fas fa-plus"></i> Add
@@ -499,7 +499,7 @@
                         <div class="item-name flexrow rollable">
                             <div class="item-image" style="background-image: url({{item.img}})"></div>
                             <h4>{{item.name}}</h4>
-                            {{#if ../../owner}}
+                            {{#if ../../isOwner}}
                             <div class="item-action flexcol">
                                 <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
                                 <button class="tag damage">{{localize "SFRPG.Damage"}}</button>
@@ -510,14 +510,14 @@
                         {{#if item.hasCapacity}}
                         <div class="item-detail item-uses">
                             {{item.data.capacity.value}} / {{item.data.capacity.max}}
-                            {{#if ../../owner}}
+                            {{#if ../../isOwner}}
                             &nbsp;
                             <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
                             {{/if}}
                         </div>
                         {{/if}}
 
-                        {{#if ../../owner}}
+                        {{#if ../../isOwner}}
                         <div class="item-controls">
                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                             <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -637,8 +637,8 @@
                 </li>
                 <ol class="action-list">
                     {{#each role.actions as |action|}}
-                    <li class="action flexrow small" data-action-id="{{action._id}}">
-                        <div class="action-name flexrow rollable" id="{{action._id}}" data-tippy-content="<strong>{{localize action.name}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect"}}:<br/>{{localize action.data.effectNormal}}<br/><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.CriticalEffect"}}:<br/>{{localize action.data.effectCritical}}">
+                    <li class="action flexrow small" data-action-id="{{action.id}}">
+                        <div class="action-name flexrow rollable" id="{{action.id}}" data-tippy-content="<strong>{{localize action.name}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect"}}:<br/>{{localize action.data.effectNormal}}<br/><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.CriticalEffect"}}:<br/>{{localize action.data.effectCritical}}">
                             <div class="action-image small" style="background-image: url({{action.img}})"></div>
                             <h4>{{localize action.name}}</h4>
                         </div>
@@ -658,7 +658,7 @@
 
         {{!-- Biography Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
-            {{editorPlus content=data.details.notes target="data.details.notes" button=true owner=owner editable=editable rolls=false rollData=data}}
+            {{editorPlus content=data.details.notes target="data.details.notes" button=true isOwner=isOwner editable=editable rolls=false rollData=data}}
         </div>
     </section>
 

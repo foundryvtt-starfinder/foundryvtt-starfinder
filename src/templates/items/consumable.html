@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Consumable.Type" }}</label>
                 <select name="data.consumableType">
-                    {{#select data.consumableType}}
+                    {{#select itemData.consumableType}}
                     {{#each config.consumableTypes as |name type|}}
                     <option value="{{type}}">{{name}}</option>
                     {{/each}}
@@ -40,14 +40,14 @@
             {{> "systems/sfrpg/templates/items/parts/item-activation.html"}}
 
             {{!-- Consumable Usage --}}
-            {{#if data.activation.type}}
+            {{#if itemData.activation.type}}
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Consumable.Usage" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.uses.autoUse" {{checked data.uses.autoUse}}/> {{ localize "SFRPG.Items.Consumable.OnUse" }}
+                    <input type="checkbox" name="data.uses.autoUse" {{checked itemData.uses.autoUse}}/> {{ localize "SFRPG.Items.Consumable.OnUse" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.uses.autoDestroy" {{checked data.uses.autoDestroy}}/> {{ localize "SFRPG.Items.Consumable.DestroyWhenEmpty" }}
+                    <input type="checkbox" name="data.uses.autoDestroy" {{checked itemData.uses.autoDestroy}}/> {{ localize "SFRPG.Items.Consumable.DestroyWhenEmpty" }}
                 </label>
             </div>
             {{/if}}

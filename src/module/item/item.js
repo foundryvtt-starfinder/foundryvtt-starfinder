@@ -52,7 +52,7 @@ export class ItemSFRPG extends Item {
         const C = CONFIG.SFRPG;
         const labels = {};
         const itemData = this.data;
-        const actorData = this.actor ? this.actor.data : {};
+        const actorData = this.parent ? this.parent.data : {};
         const data = itemData.data;
 
         // Spell Level,  School, and Components
@@ -130,7 +130,7 @@ export class ItemSFRPG extends Item {
         
         let dcFormula = save.dc?.toString();
         if (!dcFormula) {
-            const ownerKeyAbilityId = this.actor?.data.data.attributes.keyability;
+            const ownerKeyAbilityId = this.actor?.data?.data?.attributes.keyability;
             const itemKeyAbilityId = this.data.data.ability;
             const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
             if (abilityKey) {
@@ -151,22 +151,26 @@ export class ItemSFRPG extends Item {
         const rollContext = new RollContext();
         rollContext.addContext("item", this, itemData);
         rollContext.setMainContext("item");
-        if (this.actor) {
+        if (this.actor && this.actor.data) {
             rollContext.addContext("owner", this.actor);
             rollContext.setMainContext("owner");
         }
 
         this.actor?.setupRollContexts(rollContext);
-
-        const rollResult = DiceSFRPG.createRoll({
+    
+        const rollPromise = DiceSFRPG.createRoll({
             rollContext: rollContext,
             rollFormula: dcFormula,
             mainDie: 'd0',
             dialogOptions: { skipUI: true }
         });
 
-        const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
-        return returnValue;
+        rollPromise.then(rollResult => {
+            const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+            this.labels.save = returnValue;
+        });
+
+        return 10;
     }
 
     /**
@@ -194,14 +198,14 @@ export class ItemSFRPG extends Item {
      * @return {Promise}
      */
     async roll() {
-        let htmlOptions = { secrets: this.actor?.owner || true, rollData: this.data };
+        let htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this.data };
         htmlOptions.rollData.owner = this.actor?.data?.data;
 
         // Basic template rendering data
         const token = this.actor.token;
         const templateData = {
             actor: this.actor,
-            tokenId: token ? `${token.scene._id}.${token.id}` : null,
+            tokenId: token ? `${token.parent.id}.${token.id}` : null,
             item: this.data,
             data: this.getChatData(htmlOptions),
             labels: this.labels,
@@ -218,14 +222,10 @@ export class ItemSFRPG extends Item {
 
         // Basic chat message data
         const chatData = {
-            user: game.user._id,
+            user: game.user.id,
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             content: html,
-            speaker: {
-                actor: this.actor._id,
-                token: this.actor.token,
-                alias: this.actor.name
-            }
+            speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
         // Toggle default roll mode
@@ -318,7 +318,7 @@ export class ItemSFRPG extends Item {
             const contents = itemToTest?.data?.data?.container?.contents;
             if (contents) {
                 for (const content of contents) {
-                    const containedItem = this.actor.getOwnedItem(content.id);
+                    const containedItem = this.actor.items.get(content.id);
                     if (containedItem) {
                         containedItems.push(containedItem);
                         itemsToTest.push(containedItem);
@@ -489,13 +489,13 @@ export class ItemSFRPG extends Item {
      * @param {Object} props The items properties
      */
     _shieldChatData(data, labels, props) {
-        let wieldedBonus = data.proficient ? data.bonus.wielded.toString() : "0";
-        let alignedBonus = data.proficient ? data.bonus.aligned.toString() : "0";
+        const wieldedBonus = (data.proficient ? data.bonus.wielded : 0) || 0;
+        const alignedBonus = (data.proficient ? data.bonus.aligned : 0) || 0;
 
         props.push(
             {name: game.i18n.localize("SFRPG.Items.Shield.Shield"), tooltip: null},
-            {name: game.i18n.format("SFRPG.Items.Shield.AcMaxDex", { maxDex: data.dex.signedString() }),  tooltip: null},
-            {name: game.i18n.format("SFRPG.Items.Shield.ArmorCheck", { acp: data.acp.signedString() }),  tooltip: null},
+            {name: game.i18n.format("SFRPG.Items.Shield.AcMaxDex", { maxDex: (data.dex || 0).signedString() }),  tooltip: null},
+            {name: game.i18n.format("SFRPG.Items.Shield.ArmorCheck", { acp: (data.acp || 0).signedString() }),  tooltip: null},
             {name: game.i18n.format("SFRPG.Items.Shield.Bonuses", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),  tooltip: null},
             data.proficient ? {name: game.i18n.localize("SFRPG.Items.Proficient"), tooltip: null} : {name: game.i18n.localize("SFRPG.Items.NotProficient"), tooltip: null}
         );
@@ -581,6 +581,10 @@ export class ItemSFRPG extends Item {
     /**
      * Place an attack roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
+     * 
+     * Supported options:
+     * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
+     * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
     async rollAttack(options = {}) {
         const itemData = this.data;
@@ -720,7 +724,7 @@ export class ItemSFRPG extends Item {
         parts.push("@additional.modifiers.bonus");
 
         // Call the roll helper utility
-        return await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
@@ -732,7 +736,7 @@ export class ItemSFRPG extends Item {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            onClose: this._onAttackRollClose.bind(this)
+            onClose: this._onAttackRollClose.bind(this, options)
         });
     }
 
@@ -742,15 +746,18 @@ export class ItemSFRPG extends Item {
      * @param {Html} html The html from the dailog
      * @param {Array} parts The parts of the roll
      * @param {Object} data The data
+     * 
+     * Supported options:
+     * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
+     * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
-    _onAttackRollClose(roll, formula, finalFormula) {
+    _onAttackRollClose(options, roll, formula, finalFormula) {
         if (!roll) {
             return;
         }
-        
-        const itemData = duplicate(this.data.data);
 
-        if (itemData.hasOwnProperty("usage")) {
+        const itemData = duplicate(this.data.data);
+        if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 
             const capacity = itemData.capacity;
@@ -769,18 +776,14 @@ export class ItemSFRPG extends Item {
                 }
             }
 
-            this.actor.updateEmbeddedEntity("OwnedItem", {
+            this.actor.updateEmbeddedDocuments("Item", [{
                 _id: this.data._id,
                 "data.capacity.value": capacity.value
-            }, {});
-            // this.actor.updateOwnedItem({
-            //   id: this.data.id,
-            //   'data.capacity.value': capacity.value
-            // });
+            }], {});
         }
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
-        if (rollDamageWithAttack) {
+        if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
             this.rollDamage({});
         }
     }
@@ -788,6 +791,10 @@ export class ItemSFRPG extends Item {
     /**
      * Place an attack roll for a starship using an item.
      * @param {Object} options Options to pass to the attack roll
+     * 
+     * Supported options:
+     * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
+     * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
     async _rollStarshipAttack(options = {}) {
         const parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
@@ -837,15 +844,15 @@ export class ItemSFRPG extends Item {
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
-                    if (rollDamageWithAttack) {
+                    if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
                         this.rollDamage({});
                     }
 
-                    if (this.hasCapacity()) {
-                        this.actor.updateEmbeddedEntity("OwnedItem", {
-                            _id: this.data._id,
+                    if (this.hasCapacity() && !options.disableDeductAmmo) {
+                        this.actor.updateEmbeddedDocuments("Item", [{
+                            _id: this.data.id,
                             "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
-                        }, {});
+                        }], {});
                     }
                 }
             }
@@ -884,15 +891,15 @@ export class ItemSFRPG extends Item {
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
-                    if (rollDamageWithAttack) {
+                    if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
                         this.rollDamage({});
                     }
 
-                    if (this.hasCapacity()) {
-                        this.actor.updateEmbeddedEntity("OwnedItem", {
+                    if (this.hasCapacity() && !options.disableDeductAmmo) {
+                        this.actor.updateEmbeddedDocuments("Item", [{
                             _id: this.data._id,
                             "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
-                        }, {});
+                        }], {});
                     }
                 }
             }
@@ -1031,7 +1038,7 @@ export class ItemSFRPG extends Item {
         }
 
         // Call the roll helper utility
-        return await DiceSFRPG.damageRoll({
+        return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
             criticalData: itemData.critical,
@@ -1070,7 +1077,7 @@ export class ItemSFRPG extends Item {
         rollContext.addContext("weapon", this, this.data);
         rollContext.setMainContext("");
 
-        return await DiceSFRPG.damageRoll({
+        return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
             rollContext: rollContext,
@@ -1110,7 +1117,7 @@ export class ItemSFRPG extends Item {
 
         this.actor?.setupRollContexts(rollContext, ["gunner"]);
 
-        return await DiceSFRPG.damageRoll({
+        return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
             rollContext: rollContext,
@@ -1206,7 +1213,7 @@ export class ItemSFRPG extends Item {
             });
         } else {
             ChatMessage.create({
-                user: game.user._id,
+                user: game.user.id,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 content: `Consumes ${this.name}`
             })
@@ -1227,7 +1234,7 @@ export class ItemSFRPG extends Item {
 
             // Optionally destroy the item
             else if (c <= 1 && q <= 1 && itemData.uses.autoDestroy) {
-                this.actor.deleteOwnedItem(this.id);
+                this.actor.deleteEmbeddedDocuments("Item", [this.id]);
             }
 
             // Deduct the remaining charges
@@ -1248,23 +1255,23 @@ export class ItemSFRPG extends Item {
         if (!data.recharge.value) return;
 
         // Roll the check
-        const roll = new Roll("1d6").roll();
+        const rollObject = new Roll("1d6");
+        const roll = await rollObject.evaluate({async: true});
         const success = roll.total >= parseInt(data.recharge.value);
 
         // Display a Chat Message
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
-            user: game.user._id,
+            user: game.user.id,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
             roll: roll,
-            speaker: {
-                actor: this.actor._id,
-                token: this.actor.token,
+            speaker: ChatMessage.getSpeaker({
+                actor: this.actor,
                 alias: this.actor.name
-            }
+            })
         };
 
         // Update the Item data
@@ -1302,7 +1309,7 @@ export class ItemSFRPG extends Item {
         if (!actor) return;
 
         // Get the Item
-        const item = actor.getOwnedItem(card.dataset.itemId);
+        const item = actor.items.get(card.dataset.itemId);
 
         // Get the target
         const target = isTargetted ? this._getChatCardTarget(card) : null;
