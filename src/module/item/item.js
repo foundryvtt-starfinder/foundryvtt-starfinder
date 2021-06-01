@@ -1358,7 +1358,7 @@ export class ItemSFRPG extends Item {
             const [sceneId, tokenId] = tokenKey.split(".");
             const scene = game.scenes.get(sceneId);
             if (!scene) return null;
-            const tokenData = scene.getEmbeddedEntity("Token", tokenId);
+            const tokenData = scene.getEmbeddedDocument("Token", tokenId);
             if (!tokenData) return null;
             const token = new Token(tokenData);
             return token.actor;
