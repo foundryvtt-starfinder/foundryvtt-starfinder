@@ -333,7 +333,8 @@ export class ActorSFRPG extends Actor {
         }
 
         for (const item of this.data.items) {
-            const itemModifiers = item.data.data.modifiers;
+            const itemData = item.data.data;
+            const itemModifiers = itemData.modifiers;
 
             let modifiersToConcat = [];
             switch (item.type) {
@@ -369,7 +370,7 @@ export class ActorSFRPG extends Actor {
 
                 // Feats are only active when they are passive, or activated
                 case "feat":
-                    if (item.data.activation?.type === "" || item.data.isActive) {
+                    if (itemData.activation?.type === "" || itemData.isActive) {
                         modifiersToConcat = itemModifiers;
                     }
                     break;
@@ -378,14 +379,14 @@ export class ActorSFRPG extends Actor {
                 case "equipment":
                 case "shield":
                 case "weapon":
-                    if (!ignoreEquipment && item.data.equipped) {
+                    if (!ignoreEquipment && itemData.equipped) {
                         modifiersToConcat = itemModifiers;
                     }
                     break;
 
                 // Everything else
                 default:
-                    if (!item.data.equippable || item.data.equipped) {
+                    if (!itemData.equippable || itemData.equipped) {
                         modifiersToConcat = itemModifiers;
                     }
                     break;
