@@ -112,3 +112,7 @@ Items have a source field, and this source field should be filled in. There is a
 | Adventure path books | AP #x pg. y | AP #3 pg. 58 |
 | Starfinder Society | SFS #x-y pg. z | SFS #1-2 pg. 23 |
 | Alien Card Deck | ACD | ACD |
+
+### Getting Foudnry Intellisense in Visual Studio Code
+
+If you would like some basic intelisense for the foundry types when using Visual Studio Code, all you have to do is copy `foundry.js` into the projects root folder. Once you do this, restart VS Code, and you should now see proper intelisense.
