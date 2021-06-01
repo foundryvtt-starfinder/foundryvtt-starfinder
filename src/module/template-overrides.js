@@ -18,9 +18,9 @@ export default function() {
         const data = {
             user: game.user.id,
             t: tool,
-            x: pos.x,
-            y: pos.y,
-            distance: 0,
+            x: origin.x,
+            y: origin.y,
+            distance: 1,
             direction: 0,
             fillColor: game.user.data.color || "#FF0000"
         };
