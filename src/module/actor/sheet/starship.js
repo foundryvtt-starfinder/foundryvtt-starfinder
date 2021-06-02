@@ -421,7 +421,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             const rawItemData = await this._getItemDropData(event, data);
 
             if (rawItemData.type.startsWith("starship")) {
-                return this.actor.createEmbeddedEntity("Item", rawItemData);
+                return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {
                 return this.processDroppedData(event, data);
             } else {
@@ -443,7 +443,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
 
             if (starshipItems.length > 0) {
-                await this.actor.createEmbeddedEntity("Item", starshipItems);
+                await this.actor.createEmbeddedDocuments("Item", [starshipItems]);
             }
 
             if (acceptedItems.length > 0) {
@@ -476,7 +476,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
        if (data.pack) {
            const pack = game.packs.get(data.pack);
            if (pack.metadata.entity !== "Item") return;
-           itemData = await pack.getEntity(data.id);
+           itemData = await pack.getDocument(data.id);
        } else if (data.data) {
            let sameActor = data.actorId === actor.id;
            if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;

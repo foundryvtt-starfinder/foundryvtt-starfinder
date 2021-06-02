@@ -156,17 +156,19 @@ export class ActorSFRPG extends Actor {
      * @param {Object} options Any options passed in
      * @returns {Promise}
      */
-    async createEmbeddedEntity(embeddedName, itemData, options) {
-        if (!this.hasPlayerOwner) {
-            let t = itemData.type;
-            let initial = {};           
-            if (t === "weapon") initial['data.proficient'] = true;
-            if (["weapon", "equipment"].includes(t)) initial['data.equipped'] = true;
-            if (t === "spell") initial['data.prepared'] = true;
-            mergeObject(itemData, initial);
+    async createEmbeddedDocuments(embeddedName, itemData, options) {
+        for (const item of itemData) {
+            if (!this.hasPlayerOwner) {
+                let t = item.type;
+                let initial = {};           
+                if (t === "weapon") initial['data.proficient'] = true;
+                if (["weapon", "equipment"].includes(t)) initial['data.equipped'] = true;
+                if (t === "spell") initial['data.prepared'] = true;
+                mergeObject(item, initial);
+            }
         }
 
-        return super.createEmbeddedEntity(embeddedName, itemData, options);
+        return super.createEmbeddedDocuments(embeddedName, itemData, options);
     }
 
     async useSpell(item, { configureDialog = true } = {}) {

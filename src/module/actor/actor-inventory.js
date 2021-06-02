@@ -45,7 +45,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
     
     let addedItem = null;
     if (targetActor.isToken) {
-        const created = await Entity.prototype.createEmbeddedEntity.call(targetActor.actor, "Item", newItemData, {temporary: true});
+        const created = await Entity.prototype.createEmbeddedDocuments.call(targetActor.actor, "Item", [newItemData], {temporary: true});
         const items = duplicate(targetActor.actor.data.items).concat(created instanceof Array ? created : [created]);
         await targetActor.token.update({"actorData.items": items}, {});
         addedItem = targetActor.getItem(created._id);
