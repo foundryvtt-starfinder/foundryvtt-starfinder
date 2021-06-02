@@ -166,6 +166,8 @@ export class ActorSFRPG extends Actor {
                 if (t === "spell") initial['data.prepared'] = true;
                 mergeObject(item, initial);
             }
+
+            item.effects = null;
         }
 
         return super.createEmbeddedDocuments(embeddedName, itemData, options);
