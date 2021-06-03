@@ -274,7 +274,7 @@ Hooks.once("setup", function () {
 
 Hooks.once("ready", () => {
     const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
-    const systemSchema = Number(game.system.data.schema);
+    const systemSchema = Number(game.system.data.flags.sfrpg.schema);
     const needsMigration = currentSchema < systemSchema || currentSchema === 0;
 
     if (needsMigration && game.user.isGM) {
