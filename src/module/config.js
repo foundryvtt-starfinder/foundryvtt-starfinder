@@ -1334,6 +1334,7 @@ SFRPG.itemTypes = {
     "shield": "SFRPG.Items.Categories.Shields",
     "ammunition": "SFRPG.Items.Categories.Ammunition",
     "weaponAccessory": "ITEM.TypeWeaponaccessory",
+    "weaponManufacturer": "ITEM.TypeWeaponManufacturer",
     "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
     "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
 };
@@ -1353,6 +1354,7 @@ SFRPG.containableTypes = {
     "augmentation" : "SFRPG.Items.Categories.Augmentations",
     "shield"       : "SFRPG.Items.Categories.Shields",
     "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories",
+    "weaponManufacturer": "SFRPG.Items.Categories.WeaponManufacturer",
     "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
     "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
 };
@@ -1367,6 +1369,20 @@ SFRPG.combatTypes = [
  * The supported weapon types for weapon accessories
  */
 SFRPG.weaponAccessoriesSupportedTypes = {
+    "any": "SFRPG.Items.WeaponAccessory.SupportedType.Any",
+    "heavyWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.HeavyWeapon",
+    "meleeWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.MeleeWeapon",
+    "meleeWeaponSA": "SFRPG.Items.WeaponAccessory.SupportedType.MeleeWeaponSA",
+    "projectile": "SFRPG.Items.WeaponAccessory.SupportedType.Projectile",
+    "railedWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.RailedWeapon",
+    "railedWeaponSA": "SFRPG.Items.WeaponAccessory.SupportedType.RailedWeaponSA",
+    "smallarm": "SFRPG.Items.WeaponAccessory.SupportedType.SmallArm"
+};
+
+/**
+ * The supported weapon types for weapon manufacturers
+ */
+SFRPG.weaponManufacturerSupportedTypes = {
     "any": "SFRPG.Items.WeaponAccessory.SupportedType.Any",
     "heavyWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.HeavyWeapon",
     "meleeWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.MeleeWeapon",

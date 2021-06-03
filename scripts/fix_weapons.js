@@ -1,5 +1,5 @@
 const fs = require('fs');
-const equipmentPath = "src/items/equipment";
+const equipmentPath = "../src/items/equipment";
 
 try {
     fs.readdir(equipmentPath, 'utf8', (err, files) => {
@@ -15,6 +15,22 @@ try {
 
             if (!["weapon"].includes(equipment?.type ?? "")) continue;
 
+            if (equipment.type == "weapon") {
+                var i = 0;
+                var container = equipment.data?.container;
+
+                for(const s in container){
+                    container.storage = container.storage.filter(function(a){return a.subtype != "weaponManufacturer"});
+                    container.storage.push({
+                        type: "slot",
+                        subtype: "weaponManufacturer",
+                        amount: 1,
+                        acceptsType: ["weaponManufacturer"],
+                        affectsEncumbrance: true,
+                        weightProperty: "slots"
+                    });
+                }
+            }
             // Weapons that have their activation type set to something
             // other than none are causing display issues on an actor's 
             // inventory tab.

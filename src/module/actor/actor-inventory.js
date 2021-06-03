@@ -988,7 +988,7 @@ export class ActorItemHelper {
     async migrateItems() {
         if (!this.isValid()) return;
 
-        const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
+        const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades", "weaponManufacturer"];
         const migrations = [];
         for (const item of this.actor.items) {
             const itemData = duplicate(item.data.data);
@@ -1019,6 +1019,14 @@ export class ActorItemHelper {
                         subtype: "fusion",
                         amount: itemData.level,
                         acceptsType: ["fusion"],
+                        affectsEncumbrance: false,
+                        weightProperty: "level"
+                    });
+                    container.storage.push({
+                        type: "slot",
+                        subtype: "weaponManufacturer",
+                        amount: 1,
+                        acceptsType: ["weaponManufacturer"],
                         affectsEncumbrance: false,
                         weightProperty: "level"
                     });

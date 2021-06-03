@@ -12,11 +12,10 @@ const equipmentTypes = {
     "magic"        : "SFRPG.Items.Categories.MagicItems",
     "shield"       : "SFRPG.Items.Categories.Shields",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
-    "magic"        : "SFRPG.Items.Categories.MagicItems",
-    "hybrid"       : "SFRPG.Items.Categories.HybridItems",
     "upgrade"      : "SFRPG.Items.Categories.ArmorUpgrades",
     "weapon"       : "SFRPG.Items.Categories.Weapons",
-    "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories"
+    "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories",
+    "weaponManufacturer": "SFRPG.Items.Categories.WeaponManufacturer"
 };
 
 class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
