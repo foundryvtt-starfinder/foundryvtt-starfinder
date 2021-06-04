@@ -13,6 +13,7 @@ import { getItemContainer } from "./actor-inventory.js"
 import { } from "./crew-update.js"
 import { ItemSheetSFRPG } from "../item/sheet.js";
 import { ItemSFRPG } from "../item/item.js";
+import { ActorSheetSFRPG } from "./sheet/base.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
@@ -670,7 +671,7 @@ export class ActorSFRPG extends Actor {
         });
     }
 
-    static async applyDamage(roll, multiplier) {
+    static async applyDamageFromContextMenu(roll, multiplier) {
         const totalDamageDealt = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
         const isHealing = (multiplier < 0);
         const promises = [];
@@ -690,6 +691,23 @@ export class ActorSFRPG extends Actor {
         }
 
         return Promise.all(promises);
+    }
+
+    async applyDamage(roll, multiplier) {
+        const totalDamageDealt = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
+        const isHealing = (multiplier < 0);
+
+        switch (this.data.type) {
+            case 'starship':
+                await ActorSFRPG._applyStarshipDamage(roll, this, totalDamageDealt, isHealing);
+                break;
+            case 'vehicle':
+                await ActorSFRPG._applyVehicleDamage(roll, this, totalDamageDealt, isHealing);
+                break;
+            default:
+                await ActorSFRPG._applyActorDamage(roll, this, totalDamageDealt, isHealing);
+                break;
+        }
     }
 
     static async _applyActorDamage(roll, actor, totalDamageDealt, isHealing) {

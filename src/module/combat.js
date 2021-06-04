@@ -13,28 +13,28 @@ export const addChatMessageContextOptions = function (html, options) {
     let canApply = li => canvas.tokens.controlled.length && li.find(".dice-roll").length;
     options.push(
         {
-            name: "Apply Damage",
+            name: game.i18n.localize("SFRPG.ChatChard.ContextMenu.ApplyDamage"),
             icon: "<i class='fas fa-user-minus'></i>",
             condition: canApply,
-            callback: li => ActorSFRPG.applyDamage(li, 1)
+            callback: li => ActorSFRPG.applyDamageFromContextMenu(li, 1)
         },
         {
-            name: "Apply Healing",
+            name: game.i18n.localize("SFRPG.ChatChard.ContextMenu.ApplyHealing"),
             icon: '<i class="fas fa-user-plus"></i>',
             condition: canApply,
-            callback: li => ActorSFRPG.applyDamage(li, -1)
+            callback: li => ActorSFRPG.applyDamageFromContextMenu(li, -1)
         },
         {
-            name: "Double Damage",
+            name: game.i18n.localize("SFRPG.ChatChard.ContextMenu.DamageAndAHalf"),
             icon: '<i class="fas fa-user-injured"></i>',
             condition: canApply,
-            callback: li => ActorSFRPG.applyDamage(li, 2)
+            callback: li => ActorSFRPG.applyDamageFromContextMenu(li, 1.5)
         },
         {
-            name: "Half Damage",
+            name: game.i18n.localize("SFRPG.ChatChard.ContextMenu.HalfDamage"),
             icon: '<i class="fas fa-user-shield"></i>',
             condition: canApply,
-            callback: li => ActorSFRPG.applyDamage(li, 0.5)
+            callback: li => ActorSFRPG.applyDamageFromContextMenu(li, 0.5)
         }
     );
 
