@@ -27,7 +27,7 @@ try {
                         amount: 1,
                         acceptsType: ["weaponManufacturer"],
                         affectsEncumbrance: true,
-                        weightProperty: "slots"
+                        weightProperty: ""
                     });
                 }
             }
