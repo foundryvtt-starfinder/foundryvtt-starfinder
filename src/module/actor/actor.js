@@ -304,7 +304,7 @@ export class ActorSFRPG extends Actor {
      * @param {String} id The id for the modifier to delete
      */
     async deleteModifier(id) {
-        const modifiers = this.data.data.modifiers.filter(mod => mod.id !== id);
+        const modifiers = this.data.data.modifiers.filter(mod => mod._id !== id);
         
         await this.update({"data.modifiers": modifiers});
     }
