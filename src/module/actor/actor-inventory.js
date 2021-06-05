@@ -1099,7 +1099,7 @@ export class ActorItemHelper {
         }
 
         if (migrations.length > 0) {
-            console.log(`SFRPG | Executing migration of ${migrations.length} items for actor ${this.actor.name}.`);
+            console.log(`Starfinder | Executing migration of ${migrations.length} items for actor ${this.actor.name}.`);
             return this.actor.updateEmbeddedDocuments("Item", migrations);
         }
         

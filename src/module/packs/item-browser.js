@@ -199,11 +199,11 @@ export class ItemBrowserSFRPG extends Application {
   }
 
   async loadItems() {
-    console.log('SFRPG | Compendium Browser | Started loading items');
+    console.log('Starfinder | Compendium Browser | Started loading items');
     const items = [];
 
     for await (const {pack, content} of packLoader.loadPacks('Item', this._loadedPacks)) {
-      console.log(`SFRPG | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
+      console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
       for (let item of content) {
         item = item.data;
@@ -215,7 +215,7 @@ export class ItemBrowserSFRPG extends Application {
       }
     }
 
-    console.log('SFRPG | Compendium Browser | Finished loading items');
+    console.log('Starfinder | Compendium Browser | Finished loading items');
     return items;
   }
 
@@ -370,7 +370,7 @@ export class ItemBrowserSFRPG extends Application {
     let settings = game.settings.get('sfrpg', configuration.settings);
     if (settings == '') {
         // if settings are empty create the settings data
-        console.log(`SFRPG | [READY] ${configuration.label} | Creating settings`);
+        console.log(`Starfinder | [READY] ${configuration.label} | Creating settings`);
         settings = {};
 
         for (const compendium of game.packs) {
@@ -385,7 +385,7 @@ export class ItemBrowserSFRPG extends Application {
         game.settings.set('sfrpg', configuration.settings, JSON.stringify(settings));
     } else {
         // if settings do exist, reload and apply them to make sure they conform with current compendium
-        console.log(`SFRPG | [READY] ${configuration.label} | Loading settings`);
+        console.log(`Starfinder | [READY] ${configuration.label} | Loading settings`);
         const loadedSettings = JSON.parse(settings);
         settings = {};
 

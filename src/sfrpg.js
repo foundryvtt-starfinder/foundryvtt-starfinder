@@ -42,7 +42,7 @@ let initTime = null;
 
 Hooks.once('init', async function () {
     initTime = (new Date()).getTime();
-    console.log(`SFRPG | [INIT] Initializing the Starfinder System`);
+    console.log(`Starfinder | [INIT] Initializing the Starfinder System`);
     console.log(
 `__________________________________________________
  ____  _              __ _           _
@@ -53,7 +53,7 @@ Hooks.once('init', async function () {
 ==================================================`
     );
 
-    console.log("SFRPG | [INIT] Initializing the rules engine");
+    console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
 
     game.sfrpg = {
@@ -71,7 +71,7 @@ Hooks.once('init', async function () {
     CONFIG.SFRPG = SFRPG;
     CONFIG.statusEffects = CONFIG.SFRPG.statusEffectIcons;
 
-    console.log("SFRPG | [INIT] Overriding document classes");
+    console.log("Starfinder | [INIT] Overriding document classes");
     CONFIG.Actor.documentClass = ActorSFRPG;
     CONFIG.Item.documentClass = ItemSFRPG;
     CONFIG.Combat.documentClass = CombatSFRPG;
@@ -94,10 +94,10 @@ Hooks.once('init', async function () {
         wordWrap: false
     });
 
-    console.log("SFRPG | [INIT] Registering system settings");
+    console.log("Starfinder | [INIT] Registering system settings");
     registerSystemSettings();
 
-    console.log("SFRPG | [INIT] Registering sheets");
+    console.log("Starfinder | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("sfrpg", ActorSheetSFRPGCharacter, { types: ["character"], makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGDrone,     { types: ["drone"],     makeDefault: true });
@@ -110,11 +110,11 @@ Hooks.once('init', async function () {
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
 
     const finishTime = (new Date()).getTime();
-    console.log(`SFRPG | [INIT] Done (operation took ${finishTime - initTime} ms)`);
+    console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
 
 Hooks.once("setup", function () {
-    console.log(`SFRPG | [SETUP] Setting up Starfinder System subsystems`);
+    console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
     const setupTime = (new Date()).getTime();
 
     Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
@@ -123,17 +123,17 @@ Hooks.once("setup", function () {
      * Manage counter classe feature from combat tracker
      * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
     **/
-    console.log("SFRPG | [SETUP] Initializing counter management");
+    console.log("Starfinder | [SETUP] Initializing counter management");
     const counterManagement = new CounterManagement();
     counterManagement.startup();
 
-    console.log("SFRPG | [SETUP] Initializing RPC system");
+    console.log("Starfinder | [SETUP] Initializing RPC system");
     RPC.initialize();
 
-    console.log("SFRPG | [SETUP] Initializing remote inventory system");
+    console.log("Starfinder | [SETUP] Initializing remote inventory system");
     initializeRemoteInventory();
 
-    console.log("SFRPG | [SETUP] Localizing global arrays");
+    console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
         "abilities", "alignments", "distanceUnits", "senses", "skills", "currencies", "saves",
         "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes",
@@ -156,31 +156,31 @@ Hooks.once("setup", function () {
         }, {});
     }
 
-    console.log("SFRPG | [SETUP] Configuring rules engine");
+    console.log("Starfinder | [SETUP] Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);
 
-    console.log("SFRPG | [SETUP] Registering custom handlebars");
+    console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
 
     const finishTime = (new Date()).getTime();
-    console.log(`SFRPG | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
+    console.log(`Starfinder | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
 });
 
 Hooks.once("ready", () => {
-    console.log(`SFRPG | [READY] Preparing system for operation`);
+    console.log(`Starfinder | [READY] Preparing system for operation`);
     const readyTime = (new Date()).getTime();
 
-    console.log("SFRPG | [READY] Overriding canvas drop handler");
+    console.log("Starfinder | [READY] Overriding canvas drop handler");
     defaultDropHandler = canvas._dragDrop.callbacks.drop;
     canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
 
-    console.log("SFRPG | [READY] Setting up AOE template overrides");
+    console.log("Starfinder | [READY] Setting up AOE template overrides");
     templateOverrides();
 
-    console.log("SFRPG | [READY] Preloading handlebar templates");
+    console.log("Starfinder | [READY] Preloading handlebar templates");
     preloadHandlebarsTemplates();
 
-    console.log("SFRPG | [READY] Caching starship actions");
+    console.log("Starfinder | [READY] Caching starship actions");
     ActorSheetSFRPGStarship.ensureStarshipActions();
 
     if (game.user.isGM) {
@@ -189,24 +189,24 @@ Hooks.once("ready", () => {
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
     
         if (needsMigration) {
-            console.log("SFRPG | [READY] Performing world migration");
+            console.log("Starfinder | [READY] Performing world migration");
             migrateWorld()
                 .then(_ => ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage")))
                 .catch(_ => ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage")));
         }
     
-        console.log("SFRPG | [READY] Checking items for migration");
+        console.log("Starfinder | [READY] Checking items for migration");
         migrateOldContainers();
     }
 
-    console.log("SFRPG | [READY] Initializing compendium browsers");
+    console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();
 
     const finishTime = (new Date()).getTime();
-    console.log(`SFRPG | [READY] Done (operation took ${finishTime - readyTime} ms)`);
+    console.log(`Starfinder | [READY] Done (operation took ${finishTime - readyTime} ms)`);
     
     const startupDuration = finishTime - initTime;
-    console.log(`SFRPG | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
+    console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
 
 async function migrateOldContainers() {
@@ -230,7 +230,7 @@ async function migrateOldContainers() {
     }
 
     if (promises.length > 0) {
-        console.log(`SFRPG | [READY] Migrating ${promises.length} documents.`);
+        console.log(`Starfinder | [READY] Migrating ${promises.length} documents.`);
         return Promise.all(promises);
     }
 }

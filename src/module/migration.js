@@ -9,7 +9,7 @@ export default async function migrateWorld() {
         try {
             const updateData = migrateActorData(actor.data, worldSchema);
             if (!isObjectEmpty(updateData)) {
-                console.log(`SFRPG | Migrating Actor entity ${actor.name}`);
+                console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
                 await actor.update(updateData, { enforceTypes: false });
             }
         } catch (err) {
@@ -21,7 +21,7 @@ export default async function migrateWorld() {
         try {
             const updateData = migrateItemData(item.data, worldSchema);
             if (!isObjectEmpty(updateData)) {
-                console.log(`SFRPG | Migrating Item entity ${item.name}`);
+                console.log(`Starfinder | Migrating Item entity ${item.name}`);
                 await item.update(updateData, { enforceTypes: false });
             }
         } catch (err) {
