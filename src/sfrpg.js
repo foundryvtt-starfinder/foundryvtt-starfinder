@@ -174,10 +174,10 @@ Hooks.once("ready", () => {
     defaultDropHandler = canvas._dragDrop.callbacks.drop;
     canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
 
-    console.log("SFRPG | [READY] Setting up template overrides");
+    console.log("SFRPG | [READY] Setting up AOE template overrides");
     templateOverrides();
 
-    console.log("SFRPG | [READY] Preloading templates");
+    console.log("SFRPG | [READY] Preloading handlebar templates");
     preloadHandlebarsTemplates();
 
     console.log("SFRPG | [READY] Caching starship actions");
