@@ -31,6 +31,12 @@ export const addChatMessageContextOptions = function (html, options) {
             callback: li => ActorSFRPG.applyDamageFromContextMenu(li, 1.5)
         },
         {
+            name: "SFRPG.ChatCard.ContextMenu.DoubleDamage",
+            icon: '<i class="fas fa-user-times"></i>',
+            condition: canApply,
+            callback: li => ActorSFRPG.applyDamageFromContextMenu(li, 2)
+        },
+        {
             name: "SFRPG.ChatCard.ContextMenu.HalfDamage",
             icon: '<i class="fas fa-user-shield"></i>',
             condition: canApply,
