@@ -861,7 +861,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         ActorSheetSFRPGStarship.StarshipActionsCache = {};
         const tempCache = {};
 
-        console.log("SFRPG | Initializing starship actions.");
         const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
         const starshipActions = game.packs.get(starshipPackKey);
         starshipActions.getIndex().then(async (indices) => {

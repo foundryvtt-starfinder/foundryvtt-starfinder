@@ -310,17 +310,17 @@ export class ItemBrowserSFRPG extends Application {
 
   onFiltersUpdated(html) {
     if (this.refreshFilters) {
-      let filterContainers = html.find('.filtercontainer');
-      let filterParent = filterContainers[0]?.parentElement;
+      const filterContainers = html.find('.filtercontainer');
+      const filterParent = filterContainers[0]?.parentElement;
 
-      for (let filterContainer of filterContainers) {
+      for (const filterContainer of filterContainers) {
         filterContainer.remove();
       }
 
       this.filters = this.getFilters();
-      for (let filterKey of Object.keys(this.filters)) {
-        let filter = this.filters[filterKey];
-        let generatedHTML = this.generateFilterHTML(filterKey, filter);
+      for (const filterKey of Object.keys(this.filters)) {
+        const filter = this.filters[filterKey];
+        const generatedHTML = this.generateFilterHTML(filterKey, filter);
         filterParent.insertAdjacentHTML('beforeend', generatedHTML);
       }
 
@@ -329,17 +329,17 @@ export class ItemBrowserSFRPG extends Application {
   }
 
   generateFilterHTML(filterKey, filter) {
-    let header = `<div class="filtercontainer" id="classfilter">\n
+    const header = `<div class="filtercontainer" id="classfilter">\n
       <h3>${filter.label}</h3>\n
       <dl>\n`;
 
     let body = "";
     for (let settingKey of Object.keys(filter.content)) {
-      let checked = filter.activeFilters ? filter.activeFilters.includes(settingKey) : false;
+      const checked = filter.activeFilters ? filter.activeFilters.includes(settingKey) : false;
       body += `<dt><input type="checkbox" name="${filterKey}-${settingKey}" ${checked ? "checked": ""} /></dt><dd>${game.i18n.format(filter.content[settingKey])}</dd>\n`;
     }
     
-    let footer = `</dl>\n
+    const footer = `</dl>\n
     </div>\n`;
 
     return header + body + footer;
@@ -354,7 +354,7 @@ export class ItemBrowserSFRPG extends Application {
   }
 
   initializeSettings(defaultAllowedCompendiums = null) {
-    let configuration = this.getConfigurationProperties();
+    const configuration = this.getConfigurationProperties();
 
     game.settings.register('sfrpg', configuration.settings, {
         name: `${configuration.label} Settings`,
@@ -370,7 +370,7 @@ export class ItemBrowserSFRPG extends Application {
     let settings = game.settings.get('sfrpg', configuration.settings);
     if (settings == '') {
         // if settings are empty create the settings data
-        console.log(`SFRPG | ${configuration.label} | Creating settings`);
+        console.log(`SFRPG | [READY] ${configuration.label} | Creating settings`);
         settings = {};
 
         for (const compendium of game.packs) {
@@ -385,7 +385,7 @@ export class ItemBrowserSFRPG extends Application {
         game.settings.set('sfrpg', configuration.settings, JSON.stringify(settings));
     } else {
         // if settings do exist, reload and apply them to make sure they conform with current compendium
-        console.log(`SFRPG | ${configuration.label} | Loading settings`);
+        console.log(`SFRPG | [READY] ${configuration.label} | Loading settings`);
         const loadedSettings = JSON.parse(settings);
         settings = {};
 
@@ -405,7 +405,7 @@ export class ItemBrowserSFRPG extends Application {
   }
 
   openSettings() {
-    let configuration = this.getConfigurationProperties();
+    const configuration = this.getConfigurationProperties();
 
     // Generate HTML for settings menu
     // Item Browser

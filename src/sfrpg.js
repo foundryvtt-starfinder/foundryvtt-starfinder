@@ -34,13 +34,15 @@ import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
 import { RPC } from "./module/rpc.js"
 import { DiceSFRPG } from './module/dice.js'
 
-import { } from "./module/packs/browsers.js"
+import { initializeBrowsers } from "./module/packs/browsers.js"
 import { } from "./module/combat/combat.js"
 
 let defaultDropHandler = null;
+let initTime = null;
 
 Hooks.once('init', async function () {
-    console.log(`SFRPG | Initializing the Starfinder System`);
+    initTime = (new Date()).getTime();
+    console.log(`SFRPG | [INIT] Initializing the Starfinder System`);
     console.log(
 `__________________________________________________
  ____  _              __ _           _
@@ -51,7 +53,7 @@ Hooks.once('init', async function () {
 ==================================================`
     );
 
-    console.log("SFRPG | Initializing the rules engine");
+    console.log("SFRPG | [INIT] Initializing the rules engine");
     const engine = new Engine();
 
     game.sfrpg = {
@@ -91,13 +93,15 @@ Hooks.once('init', async function () {
         wordWrap: false
     });
 
+    console.log("SFRPG | [INIT] Registering system settings");
     registerSystemSettings();
 
-    await preloadHandlebarsTemplates();
-
     Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
+
+    console.log("SFRPG | [INIT] Setting up template overrides");
     templateOverrides();
 
+    console.log("SFRPG | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("sfrpg", ActorSheetSFRPGCharacter, { types: ["character"], makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGDrone, { types: ["drone"], makeDefault: true });
@@ -113,11 +117,16 @@ Hooks.once('init', async function () {
      * Manage counter classe feature from combat tracker
      * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
     **/
-    let counterManagement = new CounterManagement();
+    console.log("SFRPG | [INIT] Initializing counter management");
+    const counterManagement = new CounterManagement();
     counterManagement.startup();
+
+    console.log(`SFRPG | [INIT] Done`);
 });
 
 Hooks.once("setup", function () {
+    console.log(`SFRPG | [SETUP] Setting up Starfinder System subsystems`);
+
     const toLocalize = [
         "abilities", "alignments", "distanceUnits", "senses", "skills", "currencies", "saves",
         "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes",
@@ -140,9 +149,10 @@ Hooks.once("setup", function () {
         }, {});
     }
 
-    console.log("SFRPG | Configuring rules engine");
+    console.log("SFRPG | [SETUP] Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);
 
+    console.log("SFRPG | [SETUP] Registering custom handlebars");
     Handlebars.registerHelper("length", function (value) {
         if (value instanceof Array) {
             return value.length;
@@ -270,9 +280,12 @@ Hooks.once("setup", function () {
         return new Handlebars.SafeString(editor[0].outerHTML);
     });
 
+    console.log(`SFRPG | [SETUP] Done`);
 });
 
 Hooks.once("ready", () => {
+    console.log(`SFRPG | [READY] Preparing system for operation`);
+
     const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
     const systemSchema = Number(game.system.data.flags.sfrpg.schema);
     const needsMigration = currentSchema < systemSchema || currentSchema === 0;
@@ -286,17 +299,29 @@ Hooks.once("ready", () => {
     defaultDropHandler = canvas._dragDrop.callbacks.drop;
     canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
 
-    ActorSheetSFRPGStarship.ensureStarshipActions();
-});
+    console.log("SFRPG | [READY] Preloading templates");
+    preloadHandlebarsTemplates();
 
-Hooks.on('ready', () => {
+    console.log("SFRPG | [READY] Caching starship actions");
+    ActorSheetSFRPGStarship.ensureStarshipActions();
+
+    console.log("SFRPG | [READY] Initializing RPC system");
     RPC.initialize();
 
+    console.log("SFRPG | [READY] Initializing remote inventory system");
     initializeRemoteInventory();
 
     if (game.user.isGM) {
+        console.log("SFRPG | [READY] Checking items for migration");
         migrateOldContainers();
     }
+
+    console.log("SFRPG | [READY] Initializing compendium browsers");
+    initializeBrowsers();
+
+    const readyTime = (new Date()).getTime();
+    const startupDuration = readyTime - initTime;
+    console.log(`SFRPG | [READY] Done, total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
 
 async function migrateOldContainers() {

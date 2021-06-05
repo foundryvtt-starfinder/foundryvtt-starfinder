@@ -33,3 +33,14 @@ Hooks.on('renderCompendiumDirectory', (app, html, data) => {
         browser.render(true);
     });
 });
+
+export function initializeBrowsers() {
+    const equipmentBrowser = getEquipmentBrowser();
+    equipmentBrowser.initializeSettings(["equipment"]);
+
+    const spellBrowser = getSpellBrowser();
+    spellBrowser.initializeSettings(["spells"]);
+
+    const starshipBrowser = getStarshipBrowser();
+    starshipBrowser.initializeSettings(["starship-components"]);
+}

@@ -195,10 +195,3 @@ export function getEquipmentBrowser() {
     }
     return _equipmentBrowser;
 }
-
-Hooks.on('ready', e => {
-    let browser = getEquipmentBrowser();
-
-    const defaultAllowedCompendiums = ["equipment"];
-    browser.initializeSettings(defaultAllowedCompendiums);
-});
