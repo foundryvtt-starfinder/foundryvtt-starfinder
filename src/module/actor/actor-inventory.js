@@ -984,9 +984,10 @@ export class ActorItemHelper {
 
     /**
      * Function that migrates actor items to the new data format, using some rough guesstimations.
+     * Returns null if no migrations are performed, or a Promise if there is.
      */
-    async migrateItems() {
-        if (!this.isValid()) return;
+    migrateItems() {
+        if (!this.isValid()) return null;
 
         const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
         const migrations = [];
@@ -995,11 +996,11 @@ export class ActorItemHelper {
             let isDirty = false;
 
             // Migrate original format
-            let migrate = propertiesToTest.filter(x => itemData.hasOwnProperty(x));
+            const migrate = propertiesToTest.filter(x => itemData.hasOwnProperty(x));
             if (migrate.length > 0) {
                 //console.log(migrate);
 
-                let container = {
+                const container = {
                     contents: (itemData.contents || []).map(x => { return { id: x, index: 0 }; }),
                     storage: []
                 };
@@ -1099,7 +1100,9 @@ export class ActorItemHelper {
 
         if (migrations.length > 0) {
             console.log(`SFRPG | Executing migration of ${migrations.length} items for actor ${this.actor.name}.`);
-            await this.actor.updateEmbeddedDocuments("Item", migrations);
+            return this.actor.updateEmbeddedDocuments("Item", migrations);
         }
+        
+        return null;
     }
 }
