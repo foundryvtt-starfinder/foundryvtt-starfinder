@@ -1,15 +1,20 @@
+const SFRPGActorMigrationSchemas = Object.freeze({
+    NPC_DATA_UPATE: 0.001,
+    THE_PAINFUL_UPDATE: 0.002, // Due to copyright concerns, all references to Starfinder were renamed to SFRPG
+    THE_HAPPY_UPDATE: 0.003 // Due to Paizo clarifying their stance, most references to SFRPG were returned to Starfinder
+});
+
 export default async function migrateWorld() {
     const systemVersion = game.system.data.version;
-    const systemSchema = Number(game.system.data.schema);
     const worldSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
 
     ui.notifications.info(game.i18n.format("SFRPG.MigrationBeginingMigration", { systemVersion }), { permanent: true });
 
-    for (const actor of game.actors.entities) {
+    for (const actor of game.actors.contents) {
         try {
             const updateData = migrateActorData(actor.data, worldSchema);
             if (!isObjectEmpty(updateData)) {
-                console.log(`SFRPG | Migrating Actor entity ${actor.name}`);
+                console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
                 await actor.update(updateData, { enforceTypes: false });
             }
         } catch (err) {
@@ -17,11 +22,11 @@ export default async function migrateWorld() {
         }
     }
 
-    for (const item of game.items.entities) {
+    for (const item of game.items.contents) {
         try {
             const updateData = migrateItemData(item.data, worldSchema);
             if (!isObjectEmpty(updateData)) {
-                console.log(`SFRPG | Migrating Item entity ${item.name}`);
+                console.log(`Starfinder | Migrating Item entity ${item.name}`);
                 await item.update(updateData, { enforceTypes: false });
             }
         } catch (err) {
@@ -29,19 +34,10 @@ export default async function migrateWorld() {
         }
     }
 
+    const systemSchema = Number(game.system.data.flags.sfrpg.schema);
     game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
     ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
 }
-
-const migrateActorData = function (actor, schema) {
-    const updateData = {};
-
-    if (schema < SFRPGMigrationSchemas.NPC_DATA_UPATE && actor.type === 'npc') _migrateNPCData(actor, updateData);
-    if (schema < SFRPGMigrationSchemas.THE_PAINFUL_UPDATE) _resetActorFlags(actor, updateData);
-    if (schema < SFRPGMigrationSchemas.THE_HAPPY_UPDATE && actor.type === 'character') _migrateActorAbilityScores(actor, updateData);
-
-    return updateData;
-};
 
 const migrateItemData = function (item, schema) {
     const updateData = {};
@@ -49,34 +45,17 @@ const migrateItemData = function (item, schema) {
     return updateData;
 };
 
-const _migrateActorAbilityScores = function (actor, data) {
-    const actorData = duplicate(actor.data);
-    const abilities = actorData.abilities;
+const migrateActorData = function (actor, schema) {
+    const updateData = {};
 
-    for (const ability of Object.values(abilities)) {
-        ability.base = ability.value || 10;
-    }
+    if (schema < SFRPGActorMigrationSchemas.NPC_DATA_UPATE && actor.type === 'npc') _migrateNPCData(actor, updateData);
+    if (schema < SFRPGActorMigrationSchemas.THE_PAINFUL_UPDATE) _resetActorFlags(actor, updateData);
+    if (schema < SFRPGActorMigrationSchemas.THE_HAPPY_UPDATE && actor.type === 'character') _migrateActorAbilityScores(actor, updateData);
 
-    data["data.abilities"] = abilities;
-
-    return data;
+    return updateData;
 };
 
-const _resetActorFlags = function (actor, data) {
-    const actorData = duplicate(actor.data);
-    let sfFlags = null;
-
-    if (actor.flags.starfinder) {
-        sfFlags = duplicate(actor.flags.starfinder);
-    }
-
-    data["flags.-=starfinder"] = null;
-    data["flags.sfrpg"] = sfFlags;
-
-    return data;
-}
-
-const _migrateNPCData = function (actor, data) {
+const _migrateNPCData = function (actor, migratedData) {
     const actorData = duplicate(actor.data);
     const abilities = actorData.abilities;
     const skills = actorData.skills;
@@ -93,14 +72,35 @@ const _migrateNPCData = function (actor, data) {
         if (skill.misc && skill.misc > 0) skill.enabled = true;
     }
 
-    data['data.abilities'] = abilities;
-    data['data.skills'] = skills;
+    migratedData['data.abilities'] = abilities;
+    migratedData['data.skills'] = skills;
 
-    return data;
+    return migratedData;
 };
 
-const SFRPGMigrationSchemas = Object.freeze({
-    NPC_DATA_UPATE: 0.001,
-    THE_PAINFUL_UPDATE: 0.002,
-    THE_HAPPY_UPDATE: 0.003
-});
+const _resetActorFlags = function (actor, migratedData) {
+    const actorData = duplicate(actor.data);
+    let sfFlags = null;
+
+    if (actor.flags.starfinder) {
+        sfFlags = duplicate(actor.flags.starfinder);
+    }
+
+    migratedData["flags.-=starfinder"] = null;
+    migratedData["flags.sfrpg"] = sfFlags;
+
+    return migratedData;
+}
+
+const _migrateActorAbilityScores = function (actor, migratedData) {
+    const actorData = duplicate(actor.data);
+    const abilities = actorData.abilities;
+
+    for (const ability of Object.values(abilities)) {
+        ability.base = ability.value || 10;
+    }
+
+    migratedData["data.abilities"] = abilities;
+
+    return migratedData;
+};

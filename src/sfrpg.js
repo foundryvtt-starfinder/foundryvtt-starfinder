@@ -34,13 +34,15 @@ import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
 import { RPC } from "./module/rpc.js"
 import { DiceSFRPG } from './module/dice.js'
 
-import { } from "./module/packs/browsers.js"
+import { initializeBrowsers } from "./module/packs/browsers.js"
 import { } from "./module/combat/combat.js"
 
 let defaultDropHandler = null;
+let initTime = null;
 
 Hooks.once('init', async function () {
-    console.log(`SFRPG | Initializing the Starfinder System`);
+    initTime = (new Date()).getTime();
+    console.log(`Starfinder | [INIT] Initializing the Starfinder System`);
     console.log(
 `__________________________________________________
  ____  _              __ _           _
@@ -51,7 +53,7 @@ Hooks.once('init', async function () {
 ==================================================`
     );
 
-    console.log("SFRPG | Initializing the rules engine");
+    console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
 
     game.sfrpg = {
@@ -67,13 +69,14 @@ Hooks.once('init', async function () {
     };
 
     CONFIG.SFRPG = SFRPG;
+    CONFIG.statusEffects = CONFIG.SFRPG.statusEffectIcons;
+
+    console.log("Starfinder | [INIT] Overriding document classes");
     CONFIG.Actor.documentClass = ActorSFRPG;
     CONFIG.Item.documentClass = ItemSFRPG;
     CONFIG.Combat.documentClass = CombatSFRPG;
 
-    CONFIG.statusEffects = CONFIG.SFRPG.statusEffectIcons;
-
-    CONFIG.fontFamilies.push("Exo 2");
+    CONFIG.fontFamilies.push("Exo2");
     CONFIG.defaultFontFamily = "Exo 2";
 
     CONFIG.canvasTextStyle = new PIXI.TextStyle({
@@ -91,33 +94,46 @@ Hooks.once('init', async function () {
         wordWrap: false
     });
 
+    console.log("Starfinder | [INIT] Registering system settings");
     registerSystemSettings();
 
-    await preloadHandlebarsTemplates();
-
-    Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
-    templateOverrides();
-
+    console.log("Starfinder | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("sfrpg", ActorSheetSFRPGCharacter, { types: ["character"], makeDefault: true });
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGDrone, { types: ["drone"], makeDefault: true });
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGHazard, { types: ["hazard"], makeDefault: true });
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGNPC, { types: ["npc"], makeDefault: true });
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGStarship, { types: ["starship"], makeDefault: true });
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGVehicle, { types: ["vehicle"], makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGDrone,     { types: ["drone"],     makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGHazard,    { types: ["hazard"],    makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGNPC,       { types: ["npc"],       makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGStarship,  { types: ["starship"],  makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGVehicle,   { types: ["vehicle"],   makeDefault: true });
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
+
+    const finishTime = (new Date()).getTime();
+    console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
+});
+
+Hooks.once("setup", function () {
+    console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
+    const setupTime = (new Date()).getTime();
+
+    Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
 
     /**
      * Manage counter classe feature from combat tracker
      * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
     **/
-    let counterManagement = new CounterManagement();
+    console.log("Starfinder | [SETUP] Initializing counter management");
+    const counterManagement = new CounterManagement();
     counterManagement.startup();
-});
 
-Hooks.once("setup", function () {
+    console.log("Starfinder | [SETUP] Initializing RPC system");
+    RPC.initialize();
+
+    console.log("Starfinder | [SETUP] Initializing remote inventory system");
+    initializeRemoteInventory();
+
+    console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
         "abilities", "alignments", "distanceUnits", "senses", "skills", "currencies", "saves",
         "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes",
@@ -140,9 +156,181 @@ Hooks.once("setup", function () {
         }, {});
     }
 
-    console.log("SFRPG | Configuring rules engine");
+    console.log("Starfinder | [SETUP] Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);
 
+    console.log("Starfinder | [SETUP] Registering custom handlebars");
+    setupHandlebars();
+
+    const finishTime = (new Date()).getTime();
+    console.log(`Starfinder | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
+});
+
+Hooks.once("ready", () => {
+    console.log(`Starfinder | [READY] Preparing system for operation`);
+    const readyTime = (new Date()).getTime();
+
+    console.log("Starfinder | [READY] Overriding canvas drop handler");
+    defaultDropHandler = canvas._dragDrop.callbacks.drop;
+    canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+
+    console.log("Starfinder | [READY] Setting up AOE template overrides");
+    templateOverrides();
+
+    console.log("Starfinder | [READY] Preloading handlebar templates");
+    preloadHandlebarsTemplates();
+
+    console.log("Starfinder | [READY] Caching starship actions");
+    ActorSheetSFRPGStarship.ensureStarshipActions();
+
+    if (game.user.isGM) {
+        const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
+        const systemSchema = Number(game.system.data.flags.sfrpg.schema);
+        const needsMigration = currentSchema < systemSchema || currentSchema === 0;
+    
+        if (needsMigration) {
+            console.log("Starfinder | [READY] Performing world migration");
+            migrateWorld()
+                .then(_ => ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage")))
+                .catch(_ => ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage")));
+        }
+    
+        console.log("Starfinder | [READY] Checking items for migration");
+        migrateOldContainers();
+    }
+
+    console.log("Starfinder | [READY] Initializing compendium browsers");
+    initializeBrowsers();
+
+    const finishTime = (new Date()).getTime();
+    console.log(`Starfinder | [READY] Done (operation took ${finishTime - readyTime} ms)`);
+    
+    const startupDuration = finishTime - initTime;
+    console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
+});
+
+async function migrateOldContainers() {
+    const promises = [];
+    for (const actor of game.actors.contents) {
+        const sheetActorHelper = new ActorItemHelper(actor.id, null, null);
+        const migrationProcess = sheetActorHelper.migrateItems();
+        if (migrationProcess) {
+            promises.push(migrationProcess);
+        }
+    }
+
+    for (const scene of game.scenes.contents) {
+        for (const token of scene.data.tokens) {
+            const sheetActorHelper = new ActorItemHelper(token.actorId, token.id, scene.id);
+            const migrationProcess = sheetActorHelper.migrateItems();
+            if (migrationProcess) {
+                promises.push(migrationProcess);
+            }
+        }
+    }
+
+    if (promises.length > 0) {
+        console.log(`Starfinder | [READY] Migrating ${promises.length} documents.`);
+        return Promise.all(promises);
+    }
+}
+
+export async function handleOnDrop(event) {
+    event.preventDefault();
+
+	let data = null;
+	try {
+		data = JSON.parse(event.dataTransfer.getData('text/plain'));
+	} catch (err) {
+        defaultDropHandler(event);
+		return false;
+    }
+
+    // We're only interested in overriding item drops.
+    if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
+        return await defaultDropHandler(event);
+    }
+
+    // Transform the cursor position to canvas space
+	const [x, y] = [event.clientX, event.clientY];
+	const t = this.stage.worldTransform;
+	data.x = (x - t.tx) / canvas.stage.scale.x;
+    data.y = (y - t.ty) / canvas.stage.scale.y;
+
+    data.x -= Math.floor(canvas.grid.size / 2);
+    data.y -= Math.floor(canvas.grid.size / 2);
+
+    if (!event.shiftKey) {
+        const point = canvas.grid.getSnappedPosition(data.x, data.y, canvas.activeLayer.gridPrecision);
+        data.x = point.x;
+        data.y = point.y;
+    }
+
+    if (data.type === "Item") {
+        return handleItemDropCanvas(data);
+    }
+    return false;
+}
+
+Hooks.on("canvasInit", function () {
+    canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
+    SquareGrid.prototype.measureDistances = measureDistances;
+    Token.prototype.getBarAttribute = getBarAttribute;
+});
+
+Hooks.on("renderChatMessage", (app, html, data) => {
+    DiceSFRPG.highlightCriticalSuccessFailure(app, html, data);
+    DiceSFRPG.addDamageTypes(app, html);
+
+    if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
+});
+Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
+Hooks.on("renderChatLog", (app, html, data) => ItemSFRPG.chatListeners(html));
+
+Hooks.on("hotbarDrop", (bar, data, slot) => {
+    if (data.type !== "Item") return;
+    createItemMacro(data.data, slot);
+    return false;
+});
+
+/**
+ * Create a Macro form an Item drop.
+ * Get an existing item macro if one exists, otherwise create a new one.
+ * 
+ * @param {Object} item The item data
+ * @param {number} slot The hotbar slot to use
+ * @returns {Promise}
+ */
+async function createItemMacro(item, slot) {
+    const command = `game.sfrpg.rollItemMacro("${item.name}");`;
+    let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+    if (!macro) {
+        macro = await Macro.create({
+            name: item.name,
+            type: "script",
+            img: item.img,
+            command: command,
+            flags: {"sfrpg.itemMacro": true}
+        }, {displaySheet: false});
+    }
+
+    game.user.assignHotbarMacro(macro, slot);
+}
+
+function rollItemMacro(itemName) {
+    const speaker = ChatMessage.getSpeaker();
+    let actor;
+
+    if (speaker.token) actor = game.actors.tokens[speaker.token];
+    if (!actor) actor = game.actors.get(speaker.actor);
+    const item = actor ? actor.items.find(i => i.name === itemName) : null;
+    if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
+
+    if (item.data.type === 'spell') return actor.useSpell(item);
+    return item.roll();
+}
+
+function setupHandlebars() {
     Handlebars.registerHelper("length", function (value) {
         if (value instanceof Array) {
             return value.length;
@@ -269,141 +457,4 @@ Hooks.once("setup", function () {
         if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
         return new Handlebars.SafeString(editor[0].outerHTML);
     });
-
-});
-
-Hooks.once("ready", () => {
-    const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
-    const systemSchema = Number(game.system.data.flags.sfrpg.schema);
-    const needsMigration = currentSchema < systemSchema || currentSchema === 0;
-
-    if (needsMigration && game.user.isGM) {
-        migrateWorld()
-            .then(_ => ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage")))
-            .catch(_ => ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage")));
-    }
-
-    defaultDropHandler = canvas._dragDrop.callbacks.drop;
-    canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
-
-    ActorSheetSFRPGStarship.ensureStarshipActions();
-});
-
-Hooks.on('ready', () => {
-    RPC.initialize();
-
-    initializeRemoteInventory();
-
-    if (game.user.isGM) {
-        migrateOldContainers();
-    }
-});
-
-async function migrateOldContainers() {
-    for (let actor of game.actors.contents) {
-        let sheetActorHelper = new ActorItemHelper(actor.id, null, null);
-        await sheetActorHelper.migrateItems();
-    }
-
-    for (let scene of game.scenes.contents) {
-        for (let token of scene.data.tokens) {
-            let sheetActorHelper = new ActorItemHelper(token.actorId, token.id, scene.id);
-            await sheetActorHelper.migrateItems();
-        }
-    }
-}
-
-export async function handleOnDrop(event) {
-    event.preventDefault();
-
-	let data = null;
-	try {
-		data = JSON.parse(event.dataTransfer.getData('text/plain'));
-	} catch (err) {
-        defaultDropHandler(event);
-		return false;
-    }
-
-    // We're only interested in overriding item drops.
-    if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
-        return await defaultDropHandler(event);
-    }
-
-    // Transform the cursor position to canvas space
-	const [x, y] = [event.clientX, event.clientY];
-	const t = this.stage.worldTransform;
-	data.x = (x - t.tx) / canvas.stage.scale.x;
-    data.y = (y - t.ty) / canvas.stage.scale.y;
-
-    data.x -= Math.floor(canvas.grid.size / 2);
-    data.y -= Math.floor(canvas.grid.size / 2);
-
-    if (!event.shiftKey) {
-        const point = canvas.grid.getSnappedPosition(data.x, data.y, canvas.activeLayer.gridPrecision);
-        data.x = point.x;
-        data.y = point.y;
-    }
-
-    if (data.type === "Item") {
-        return handleItemDropCanvas(data);
-    }
-    return false;
-}
-
-Hooks.on("canvasInit", function () {
-    canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
-    SquareGrid.prototype.measureDistances = measureDistances;
-    Token.prototype.getBarAttribute = getBarAttribute;
-});
-
-Hooks.on("renderChatMessage", (app, html, data) => {
-    DiceSFRPG.highlightCriticalSuccessFailure(app, html, data);
-    DiceSFRPG.addDamageTypes(app, html);
-
-    if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
-});
-Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
-Hooks.on("renderChatLog", (app, html, data) => ItemSFRPG.chatListeners(html));
-
-Hooks.on("hotbarDrop", (bar, data, slot) => {
-    if (data.type !== "Item") return;
-    createItemMacro(data.data, slot);
-    return false;
-});
-
-/**
- * Create a Macro form an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- * 
- * @param {Object} item The item data
- * @param {number} slot The hotbar slot to use
- * @returns {Promise}
- */
-async function createItemMacro(item, slot) {
-    const command = `game.sfrpg.rollItemMacro("${item.name}");`;
-    let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
-    if (!macro) {
-        macro = await Macro.create({
-            name: item.name,
-            type: "script",
-            img: item.img,
-            command: command,
-            flags: {"sfrpg.itemMacro": true}
-        }, {displaySheet: false});
-    }
-
-    game.user.assignHotbarMacro(macro, slot);
-}
-
-function rollItemMacro(itemName) {
-    const speaker = ChatMessage.getSpeaker();
-    let actor;
-
-    if (speaker.token) actor = game.actors.tokens[speaker.token];
-    if (!actor) actor = game.actors.get(speaker.actor);
-    const item = actor ? actor.items.find(i => i.name === itemName) : null;
-    if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
-
-    if (item.data.type === 'spell') return actor.useSpell(item);
-    return item.roll();
 }

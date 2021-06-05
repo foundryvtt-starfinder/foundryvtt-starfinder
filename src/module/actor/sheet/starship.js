@@ -856,15 +856,14 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         return super._updateObject(event, formData);
     }
 
-    static ensureStarshipActions() {
+    static async ensureStarshipActions() {
         /** Populate the starship actions cache. */
         ActorSheetSFRPGStarship.StarshipActionsCache = {};
         const tempCache = {};
 
-        console.log("SFRPG | Initializing starship actions.");
         const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
         const starshipActions = game.packs.get(starshipPackKey);
-        starshipActions.getIndex().then(async (indices) => {
+        return starshipActions.getIndex().then(async (indices) => {
             for (const index of indices) {
                 const entry = await starshipActions.getDocument(index._id);
                 const role = entry.data.data.role;

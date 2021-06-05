@@ -79,7 +79,7 @@ import calculateVehicleHangar       from './rules/actions/actor/vehicle/calculat
 import calculateVehiclePassengers   from './rules/actions/actor/vehicle/calculate-vehicle-passengers.js';
 
 export default function (engine) {
-    console.log("SFRPG | Registering rules");
+    console.log("Starfinder | [SETUP] Registering rules");
 
     // Actions
     error(engine);
@@ -267,5 +267,5 @@ export default function (engine) {
 
     Hooks.callAll('sfrpg.registerRules', engine);
 
-    console.log("SFRPG | Done registering rules");
+    console.log("Starfinder | [SETUP] Done registering rules");
 }

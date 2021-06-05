@@ -227,10 +227,3 @@ export function getStarshipBrowser() {
     }
     return _starshipBrowser;
 }
-
-Hooks.on('ready', e => {
-    let browser = getStarshipBrowser();
-
-    const defaultAllowedCompendiums = ["starship-components"];
-    browser.initializeSettings(defaultAllowedCompendiums);
-});

@@ -119,7 +119,7 @@ export class ActorSFRPG extends Actor {
      */
     _ensureHasModifiers(data, prop = null) {
         if (!hasProperty(data, "modifiers")) {
-            //console.log(`SFRPG | ${this.name} does not have the modifiers data object, attempting to create them...`);
+            //console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
         }
 
