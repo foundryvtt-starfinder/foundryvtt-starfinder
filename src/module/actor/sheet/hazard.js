@@ -106,7 +106,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
                 },
                 onClose: (roll, formula, finalFormula, isCritical) => {
                     if (roll) {
-                        Hooks.callAll("damageRolled", {actor: this.actor, item: null, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}});
+                        Hooks.callAll("damageRolled", {actor: this.actor, item: null, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: null});
                     }
                 }
             });
@@ -135,7 +135,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
             },
             onClose: (roll, formula, finalFormula) => {
                 if (roll && isAttack) {
-                    Hooks.callAll("attackRolled", {actor: this.actor, item: null, roll: roll, formula: {base: formula, final: finalFormula}});
+                    Hooks.callAll("attackRolled", {actor: this.actor, item: null, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: null});
                 }
             }
         });

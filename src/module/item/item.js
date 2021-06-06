@@ -782,7 +782,7 @@ export class ItemSFRPG extends Item {
             }
         }
 
-        Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}});
+        Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
         if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
@@ -857,7 +857,7 @@ export class ItemSFRPG extends Item {
                         }], {});
                     }
 
-                    Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}});
+                    Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
             }
         });
@@ -906,7 +906,7 @@ export class ItemSFRPG extends Item {
                         }], {});
                     }
 
-                    Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}});
+                    Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
             }
         });
@@ -918,7 +918,7 @@ export class ItemSFRPG extends Item {
      * Place a damage roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.damageRoll logic for the core implementation
      */
-    async rollDamage({ event } = {}) {
+    async rollDamage({ event } = {}, options = {}) {
         const itemData  = this.data.data;
         const actorData = this.actor.getRollData(); //this.actor.data.data;
         const isWeapon  = ["weapon", "shield"].includes(this.data.type);
@@ -1059,13 +1059,13 @@ export class ItemSFRPG extends Item {
             },
             onClose: (roll, formula, finalFormula, isCritical) => {
                 if (roll) {
-                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}});
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
             }
         });
     }
 
-    async _rollVehicleDamage({ event } = {}) {
+    async _rollVehicleDamage({ event } = {}, options = {}) {
         const itemData = this.data.data;
 
         if (!this.hasDamage) {
@@ -1102,13 +1102,13 @@ export class ItemSFRPG extends Item {
             },
             onClose: (roll, formula, finalFormula, isCritical) => {
                 if (roll) {
-                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}});
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
             }
         });
     }
 
-    async _rollStarshipDamage({ event } = {}) {
+    async _rollStarshipDamage({ event } = {}, options = {}) {
         const itemData = this.data.data;
 
         if (!this.hasDamage) {
@@ -1146,7 +1146,7 @@ export class ItemSFRPG extends Item {
             },
             onClose: (roll, formula, finalFormula, isCritical) => {
                 if (roll) {
-                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}});
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
             }
         });
