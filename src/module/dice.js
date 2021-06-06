@@ -305,12 +305,13 @@ export class DiceSFRPG {
         return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
             if (button === 'cancel') {
                 if (onClose) {
-                    onClose(null, null, null);
+                    onClose(null, null, null, false);
                 }
                 return null;
             }
 
-            if (button === "Critical") {
+            const isCritical = (button === "Critical");
+            if (isCritical) {
                 finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                 
@@ -435,7 +436,7 @@ export class DiceSFRPG {
             }
 
             if (onClose) {
-                onClose(roll, formula, finalFormula);
+                onClose(roll, formula, finalFormula, isCritical);
             }
 
             if (errorToThrow) {

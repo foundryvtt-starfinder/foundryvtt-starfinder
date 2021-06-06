@@ -58,28 +58,28 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Fortitude", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.fort.value);
+        return await this._performRoll(event, name, this.actor.data.data.attributes.fort.value, false);
     }
 
     async _onReflexSaveClicked(event) {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Reflex", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.reflex.value);
+        return await this._performRoll(event, name, this.actor.data.data.attributes.reflex.value, false);
     }
 
     async _onWillSaveClicked(event) {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Will", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.will.value);
+        return await this._performRoll(event, name, this.actor.data.data.attributes.will.value, false);
     }
 
     async _onAttackClicked(event) {
         event.preventDefault();
 
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Attack", {name: this.actor.name});
-        return await this._performRoll(event, name, this.actor.data.data.attributes.baseAttackBonus.value);
+        return await this._performRoll(event, name, this.actor.data.data.attributes.baseAttackBonus.value, true);
     }
 
     async _onDamageClicked(event) {
@@ -103,6 +103,11 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
                 dialogOptions: {
                     left: event ? event.clientX - 80 : null,
                     top: event ? event.clientY - 80 : null
+                },
+                onClose: (roll, formula, finalFormula, isCritical) => {
+                    if (roll) {
+                        Hooks.callAll("damageRolled", {actor: this.actor, item: null, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}});
+                    }
                 }
             });
         } else {
@@ -110,7 +115,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         }
     }
 
-    _performRoll(event, rollName, rollValue) {
+    _performRoll(event, rollName, rollValue, isAttack) {
         const rollContext = new RollContext();
         rollContext.addContext("main", this.actor);
         rollContext.setMainContext("main");
@@ -127,6 +132,11 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
             dialogOptions: {
                 left: event ? event.clientX - 80 : null,
                 top: event ? event.clientY - 80 : null
+            },
+            onClose: (roll, formula, finalFormula) => {
+                if (roll && isAttack) {
+                    Hooks.callAll("attackRolled", {actor: this.actor, item: null, roll: roll, formula: {base: formula, final: finalFormula}});
+                }
             }
         });
     }

@@ -761,26 +761,28 @@ export class ItemSFRPG extends Item {
             const usage = itemData.usage;
 
             const capacity = itemData.capacity;
-            if (!capacity?.value || capacity.value <= 0) return;
-
-            if (usage.per && ["round", "shot"].includes(usage.per)) {
-                capacity.value = Math.max(capacity.value - usage.value, 0);
-            } else if (usage.per && ['minute'].includes(usage.per)) {
-                if (game.combat) {
-                    const round = game.combat.current.round || 0;
-                    if (round % 10 === 1) {
-                        capacity.value = Math.max(capacity.value - usage.value, 0);
+            if (capacity.value > 0) {
+                if (usage.per && ["round", "shot"].includes(usage.per)) {
+                    capacity.value = Math.max(capacity.value - usage.value, 0);
+                } else if (usage.per && ['minute'].includes(usage.per)) {
+                    if (game.combat) {
+                        const round = game.combat.current.round || 0;
+                        if (round % 10 === 1) {
+                            capacity.value = Math.max(capacity.value - usage.value, 0);
+                        }
+                    } else {
+                        ui.notifications.info("Currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
                     }
-                } else {
-                    ui.notifications.info("Currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
                 }
-            }
 
-            this.actor.updateEmbeddedDocuments("Item", [{
-                _id: this.data._id,
-                "data.capacity.value": capacity.value
-            }], {});
+                this.actor.updateEmbeddedDocuments("Item", [{
+                    _id: this.data._id,
+                    "data.capacity.value": capacity.value
+                }], {});
+            }
         }
+
+        Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}});
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
         if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
@@ -854,6 +856,8 @@ export class ItemSFRPG extends Item {
                             "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
                         }], {});
                     }
+
+                    Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}});
                 }
             }
         });
@@ -901,6 +905,8 @@ export class ItemSFRPG extends Item {
                             "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
                         }], {});
                     }
+
+                    Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}});
                 }
             }
         });
@@ -1050,6 +1056,11 @@ export class ItemSFRPG extends Item {
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}});
+                }
             }
         });
     }
@@ -1088,6 +1099,11 @@ export class ItemSFRPG extends Item {
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}});
+                }
             }
         });
     }
@@ -1127,6 +1143,11 @@ export class ItemSFRPG extends Item {
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}});
+                }
             }
         });
     }
