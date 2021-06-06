@@ -598,7 +598,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         
         const tokens = this.actor.getActiveTokens(true);
         for (const token of tokens) {
-            token.toggleEffect(CONFIG.SFRPG.statusEffectIconMapping[condition]);
+            token.toggleEffect(CONFIG.SFRPG.statusEffectIconMapping[condition], {active: active});
         }
     }
 

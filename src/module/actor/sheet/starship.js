@@ -421,7 +421,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             const rawItemData = await this._getItemDropData(event, data);
 
             if (rawItemData.type.startsWith("starship")) {
-                return this.actor.createEmbeddedEntity("Item", rawItemData);
+                return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {
                 return this.processDroppedData(event, data);
             } else {
@@ -443,7 +443,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
 
             if (starshipItems.length > 0) {
-                await this.actor.createEmbeddedEntity("Item", starshipItems);
+                await this.actor.createEmbeddedDocuments("Item", [starshipItems]);
             }
 
             if (acceptedItems.length > 0) {
@@ -476,7 +476,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
        if (data.pack) {
            const pack = game.packs.get(data.pack);
            if (pack.metadata.entity !== "Item") return;
-           itemData = await pack.getEntity(data.id);
+           itemData = await pack.getDocument(data.id);
        } else if (data.data) {
            let sameActor = data.actorId === actor.id;
            if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
@@ -856,15 +856,14 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         return super._updateObject(event, formData);
     }
 
-    static ensureStarshipActions() {
+    static async ensureStarshipActions() {
         /** Populate the starship actions cache. */
         ActorSheetSFRPGStarship.StarshipActionsCache = {};
         const tempCache = {};
 
-        console.log("SFRPG | Initializing starship actions.");
         const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
         const starshipActions = game.packs.get(starshipPackKey);
-        starshipActions.getIndex().then(async (indices) => {
+        return starshipActions.getIndex().then(async (indices) => {
             for (const index of indices) {
                 const entry = await starshipActions.getDocument(index._id);
                 const role = entry.data.data.role;

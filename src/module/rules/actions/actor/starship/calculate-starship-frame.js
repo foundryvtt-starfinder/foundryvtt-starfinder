@@ -265,7 +265,8 @@ export default function (engine) {
         const sizeModifier = sizeModifierMap[data.details.size] || 0;
         const starshipComponents = fact.items.filter(x => x.type.startsWith("starship"));
         for (const component of starshipComponents) {
-            const bpCost = component.data.costMultipliedBySize ? sizeModifier * component.data.cost : component.data.cost;
+            const componentData = component.data.data;
+            const bpCost = componentData.costMultipliedBySize ? sizeModifier * componentData.cost : componentData.cost;
             data.attributes.bp.value += bpCost;
             data.attributes.bp.tooltip.push(`${component.name}: ${bpCost}`);
         }

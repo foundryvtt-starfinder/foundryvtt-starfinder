@@ -257,14 +257,14 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         if (!this.options.editable) return;
 
         //html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
-        html.find('.reload').click(this._onReloadWeapon.bind(this));
+        html.find('.reload').on('click', this._onReloadWeapon.bind(this));
 
-        html.find('.short-rest').click(this._onShortRest.bind(this));
-        html.find('.long-rest').click(this._onLongRest.bind(this));
-        html.find('.modifier-create').click(this._onModifierCreate.bind(this));
-        html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
-        html.find('.modifier-delete').click(this._onModifierDelete.bind(this));
-        html.find('.modifier-toggle').click(this._onToggleModifierEnabled.bind(this));
+        html.find('.short-rest').on('click', this._onShortRest.bind(this));
+        html.find('.long-rest').on('click', this._onLongRest.bind(this));
+        html.find('.modifier-create').on('click', this._onModifierCreate.bind(this));
+        html.find('.modifier-edit').on('click', this._onModifierEdit.bind(this));
+        html.find('.modifier-delete').on('click', this._onModifierDelete.bind(this));
+        html.find('.modifier-toggle').on('click', this._onToggleModifierEnabled.bind(this));
     }
 
     onBeforeCreateNewItem(itemData) {

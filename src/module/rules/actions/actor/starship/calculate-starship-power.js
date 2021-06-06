@@ -8,7 +8,7 @@ export default function (engine) {
         /** Compute max power. */
         const powerCores = fact.items.filter(x => x.type === "starshipPowerCore");
         for (const powerCore of powerCores) {
-            data.attributes.power.max += powerCore.data.pcu;
+            data.attributes.power.max += powerCore.data.data.pcu;
         }
 
         /** Compute power use. */

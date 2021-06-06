@@ -13,6 +13,7 @@ import { getItemContainer } from "./actor-inventory.js"
 import { } from "./crew-update.js"
 import { ItemSheetSFRPG } from "../item/sheet.js";
 import { ItemSFRPG } from "../item/item.js";
+import { ActorSheetSFRPG } from "./sheet/base.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
@@ -118,7 +119,7 @@ export class ActorSFRPG extends Actor {
      */
     _ensureHasModifiers(data, prop = null) {
         if (!hasProperty(data, "modifiers")) {
-            //console.log(`SFRPG | ${this.name} does not have the modifiers data object, attempting to create them...`);
+            //console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
         }
 
@@ -156,17 +157,21 @@ export class ActorSFRPG extends Actor {
      * @param {Object} options Any options passed in
      * @returns {Promise}
      */
-    async createEmbeddedEntity(embeddedName, itemData, options) {
-        if (!this.hasPlayerOwner) {
-            let t = itemData.type;
-            let initial = {};           
-            if (t === "weapon") initial['data.proficient'] = true;
-            if (["weapon", "equipment"].includes(t)) initial['data.equipped'] = true;
-            if (t === "spell") initial['data.prepared'] = true;
-            mergeObject(itemData, initial);
+    async createEmbeddedDocuments(embeddedName, itemData, options) {
+        for (const item of itemData) {
+            if (!this.hasPlayerOwner) {
+                let t = item.type;
+                let initial = {};           
+                if (t === "weapon") initial['data.proficient'] = true;
+                if (["weapon", "equipment"].includes(t)) initial['data.equipped'] = true;
+                if (t === "spell") initial['data.prepared'] = true;
+                mergeObject(item, initial);
+            }
+
+            item.effects = null;
         }
 
-        return super.createEmbeddedEntity(embeddedName, itemData, options);
+        return super.createEmbeddedDocuments(embeddedName, itemData, options);
     }
 
     async useSpell(item, { configureDialog = true } = {}) {
@@ -300,7 +305,7 @@ export class ActorSFRPG extends Actor {
      * @param {String} id The id for the modifier to delete
      */
     async deleteModifier(id) {
-        const modifiers = this.data.data.modifiers.filter(mod => mod.id !== id);
+        const modifiers = this.data.data.modifiers.filter(mod => mod._id !== id);
         
         await this.update({"data.modifiers": modifiers});
     }
@@ -666,18 +671,26 @@ export class ActorSFRPG extends Actor {
         });
     }
 
-    static async applyDamage(roll, multiplier) {
-        const totalDamageDealt = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
+    /**
+     * A utility method used to apply damage to any selected tokens when an option
+     * is selected from a chat card context menu.
+     * 
+     * @param {JQuery} html The jQuery object representing the chat card.
+     * @param {Number} multiplier A number used to multiply the damage being applied
+     * @returns {Promise<any[]>} 
+     */
+    static async applyDamageFromContextMenu(html, multiplier) {
+        const totalDamageDealt = Math.floor(parseFloat(html.find('.dice-total').text()) * multiplier);
         const isHealing = (multiplier < 0);
         const promises = [];
         for (const controlledToken of canvas.tokens.controlled) {
             let promise = null;
             if (controlledToken.actor.data.type === "starship") {
-                promise = ActorSFRPG._applyStarshipDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
+                promise = ActorSFRPG._applyStarshipDamage(html, controlledToken.actor, totalDamageDealt, isHealing);
             } else if (controlledToken.actor.data.type === "vehicle") {
-                promise = ActorSFRPG._applyVehicleDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
+                promise = ActorSFRPG._applyVehicleDamage(html, controlledToken.actor, totalDamageDealt, isHealing);
             } else {
-                promise = ActorSFRPG._applyActorDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
+                promise = ActorSFRPG._applyActorDamage(html, controlledToken.actor, totalDamageDealt, isHealing);
             }
 
             if (promise) {
@@ -686,6 +699,36 @@ export class ActorSFRPG extends Actor {
         }
 
         return Promise.all(promises);
+    }
+
+    /**
+     * Applies damage to the Actor.
+     * 
+     * TODO: This isn't ready for mainstream use yet. The method signiture is probably gonna
+     * need to change, and the way it functions will most definetly change as well. So, I'm 
+     * basically putting this here as a stub that has some limited functionality until I can
+     * get some other changes in place to allow this to work the way most people would expect
+     * it to work. So, don't mention that this method exists for the time being ;) Consider it
+     * an easter egg.
+     * 
+     * @param {JQuery} html The jQuery object representing the roll data.
+     * @param {Number} multiplier A number that is used to change the damage value.
+     */
+    async applyDamage(html, multiplier) {
+        const totalDamageDealt = Math.floor(parseFloat(html.find('.dice-total').text()) * multiplier);
+        const isHealing = (multiplier < 0);
+
+        switch (this.data.type) {
+            case 'starship':
+                await ActorSFRPG._applyStarshipDamage(html, this, totalDamageDealt, isHealing);
+                break;
+            case 'vehicle':
+                await ActorSFRPG._applyVehicleDamage(html, this, totalDamageDealt, isHealing);
+                break;
+            default:
+                await ActorSFRPG._applyActorDamage(html, this, totalDamageDealt, isHealing);
+                break;
+        }
     }
 
     static async _applyActorDamage(roll, actor, totalDamageDealt, isHealing) {

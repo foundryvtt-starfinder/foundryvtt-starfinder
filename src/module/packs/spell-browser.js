@@ -115,10 +115,3 @@ export function getSpellBrowser() {
     }
     return _spellBrowser;
 }
-
-Hooks.on('ready', e => {
-    let browser = getSpellBrowser();
-
-    const defaultAllowedCompendiums = ["spells"];
-    browser.initializeSettings(defaultAllowedCompendiums);
-});
