@@ -1308,7 +1308,7 @@ export class ActorSFRPG extends Actor {
         if (actionEntry.data.effectCritical) {
             const critEffectDisplayState = game.settings.get("sfrpg", "starshipActionsCrit");
             if (critEffectDisplayState !== 'never') {
-                if (critEffectDisplayState === 'always' || rollResult.roll.results[0] === 20) {
+                if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
                     flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.data.effectCritical);
                     flavor += "</p>";
