@@ -1,3 +1,6 @@
+import { mix } from "./mixins/item_mixer.js";
+import { ItemCapacityMixin } from "./mixins/item_capacity.js";
+
 import { DiceSFRPG, RollContext } from "../dice.js";
 import { SFRPG } from "../config.js";
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
@@ -5,7 +8,7 @@ import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
 import StackModifiers from "../rules/closures/stack-modifiers.js";
 
-export class ItemSFRPG extends Item {
+export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
 
     /* -------------------------------------------- */
     /*  Item Properties                             */
@@ -760,25 +763,17 @@ export class ItemSFRPG extends Item {
         if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 
-            const capacity = itemData.capacity;
-            if (capacity.value > 0) {
-                if (usage.per && ["round", "shot"].includes(usage.per)) {
-                    capacity.value = Math.max(capacity.value - usage.value, 0);
-                } else if (usage.per && ['minute'].includes(usage.per)) {
-                    if (game.combat) {
-                        const round = game.combat.current.round || 0;
-                        if (round % 10 === 1) {
-                            capacity.value = Math.max(capacity.value - usage.value, 0);
-                        }
-                    } else {
-                        ui.notifications.info("Currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
+            if (usage.per && ["round", "shot"].includes(usage.per)) {
+                this.consumeCapacity(usage.value);
+            } else if (usage.per && ['minute'].includes(usage.per)) {
+                if (game.combat) {
+                    const round = game.combat.current.round || 0;
+                    if (round % 10 === 1) {
+                        this.consumeCapacity(usage.value);
                     }
+                } else {
+                    ui.notifications.info("Currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
                 }
-
-                this.actor.updateEmbeddedDocuments("Item", [{
-                    _id: this.data._id,
-                    "data.capacity.value": capacity.value
-                }], {});
             }
         }
 
@@ -804,7 +799,7 @@ export class ItemSFRPG extends Item {
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
         
         if (this.hasCapacity()) {
-            if (this.data.data.capacity.value <= 0) {
+            if (this.getCurrentCapacity() <= 0) {
                 ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
                 return false;
             }
@@ -851,10 +846,7 @@ export class ItemSFRPG extends Item {
                     }
 
                     if (this.hasCapacity() && !options.disableDeductAmmo) {
-                        this.actor.updateEmbeddedDocuments("Item", [{
-                            _id: this.data.id,
-                            "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
-                        }], {});
+                        this.consumeCapacity(1);
                     }
 
                     Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
@@ -900,10 +892,7 @@ export class ItemSFRPG extends Item {
                     }
 
                     if (this.hasCapacity() && !options.disableDeductAmmo) {
-                        this.actor.updateEmbeddedDocuments("Item", [{
-                            _id: this.data._id,
-                            "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
-                        }], {});
+                        this.consumeCapacity(1);
                     }
 
                     Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
@@ -1481,23 +1470,5 @@ export class ItemSFRPG extends Item {
         const modifier = modifiers.find(mod => mod._id === id);
 
         new SFRPGModifierApplication(modifier, this, {}, this.actor).render(true);
-    }
-
-    /**
-     * Checks if this item has capacity.
-     */
-    hasCapacity() {
-        if (this.type === "starshipWeapon") {
-            return (
-                this.data.data.weaponType === "tracking"
-                || this.data.data.special["mine"]
-                || this.data.data.special["transposition"]
-                || this.data.data.special["orbital"]
-                || this.data.data.special["rail"]
-                || this.data.data.special["forcefield"]
-                || this.data.data.special["limited"]
-            );
-        }
-        return this.data.data.hasOwnProperty("capacity");
     }
 }

@@ -646,28 +646,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        // Render the chat card template
-        const templateData = {
-            actor: this.actor,
-            item: item,
-            tokenId: this.actor.token?.id,
-            action: "SFRPG.ChatCard.ItemActivation.Reloads",
-            cost: game.i18n.format("SFRPG.AbilityActivationTypesMove")
-        };
-
-        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
-        const html = await renderTemplate(template, templateData);
-
-        // Create the chat message
-        const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: html
-        };
-
-        await ChatMessage.create(chatData, { displaySheet: false });
-        
-        return item.update({'data.capacity.value': item.data.data.capacity.max});
+        return item.reload();
     }
 
     /**

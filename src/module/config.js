@@ -186,6 +186,17 @@ SFRPG.weaponDamageTypes = {
     "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic",
 };
 
+SFRPG.ammunitionTypes = {
+    "charge": "Charges",
+    "roundS": "Small Arm Rounds",
+    "roundL": "Longarm and Sniper Rounds",
+    "roundH": "Heavy Rounds",
+    "arrow": "Arrows",
+    "dart": "Darts",
+    "fuel": "Fuel",
+    "rocket": "Rockets"
+};
+
 SFRPG.distanceUnits = {
     "none": "SFRPG.None",
     "personal": "SFRPG.Personal",
