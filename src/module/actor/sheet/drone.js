@@ -68,12 +68,18 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         let [items, feats, chassis, mods, conditionItems] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
             item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (item.type !== "weapon" || item.data.equipped);
             item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (item.type !== "weapon" || item.data.equipped);
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
+
+            item.hasCapacity = item.document.hasCapacity();
+            if (item.hasCapacity) {
+                item.capacityCurrent = item.document.getCurrentCapacity();
+                item.capacityMaximum = item.document.getMaxCapacity();
+            }
+
             if (item.type === "feat") {
                 if ((item.data.requirements?.toLowerCase() || "") === "condition") {
                     arr[4].push(item);

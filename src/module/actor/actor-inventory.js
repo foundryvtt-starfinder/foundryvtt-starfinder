@@ -436,14 +436,14 @@ export function containsItems(item) {
 /**
  * Returns an array of child items for a given item on an actor.
  * 
- * @param {Actor} actor Actor for whom's items to test.
+ * @param {Actor} actorItemHelper ActorItemHelper for whom's items to test.
  * @param {Item} item Item to get the children of.
  * @returns {Array} An array of child items.
  */
-export function getChildItems(actor, item) {
-    if (!actor) return [];
+export function getChildItems(actorItemHelper, item) {
+    if (!actorItemHelper) return [];
     if (!containsItems(item)) return [];
-    return actor.filterItems(x => item.data.data.container.contents.find(y => y.id === x.id));
+    return actorItemHelper.filterItems(x => item.data.data.container.contents.find(y => y.id === x.id));
 }
 
 export function getItemContainer(items, itemId) {
@@ -950,7 +950,7 @@ export class ActorItemHelper {
         const container = this.actor.items.find(x => x.data.data?.container?.contents?.find(y => y.id === itemId) !== undefined);
         if (container) {
             const newContents = container.data.data.container.contents.filter(x => x.id !== itemId);
-            promises.push(this.actor.updateEmbeddedDocuments("Item", [{"_id": container._id, "data.container.contents": newContents}]));
+            promises.push(this.actor.updateEmbeddedDocuments("Item", [{"_id": container.id, "data.container.contents": newContents}]));
         }
 
         promises.push(this.actor.deleteEmbeddedDocuments("Item", itemIdsToDelete, {}));

@@ -1351,6 +1351,7 @@ SFRPG.itemTypes = {
 
 SFRPG.containableTypes = {
     "weapon"       : "SFRPG.Items.Categories.Weapons",
+    "ammunition"   : "SFRPG.Items.Categories.Ammunition",
     "equipment"    : "SFRPG.Items.Categories.Equipment",
     "consumable"   : "SFRPG.Items.Categories.Consumables",
     "goods"        : "SFRPG.Items.Categories.Goods",

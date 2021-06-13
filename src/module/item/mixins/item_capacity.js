@@ -1,3 +1,5 @@
+import { ActorItemHelper, getChildItems } from "../../actor/actor-inventory.js"
+
 export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**
      * Checks if this item has capacity.
@@ -19,35 +21,69 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
     }
 
     /**
+     * Returns whether or not this item requires capacity items (typically ammunition) or not
+     */
+    requiresCapacityItem() {
+        const chargedItems = ["weapon"];
+        return chargedItems.includes(this.type);
+    }
+
+    getCapacityItem() {
+        if (!this.requiresCapacityItem()) {
+            return false;
+        }
+
+        // Create actor item helper
+        const tokenId = this.actor.isToken ? this.actor.token.id : null;
+        const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
+        const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId);
+
+        // Find child item
+        const childItems = getChildItems(itemHelper, this);
+        const loadedAmmunition = childItems.find(x => x.type === "ammunition");
+        return loadedAmmunition;
+    }
+
+    /**
      * Returns the current capacity of the item.
      */
     getCurrentCapacity() {
-        const chargedItems = ["weapon"];
-        if (chargedItems.includes(this.type)) {
-            // TODO [AMMO]: Get embedded item, get from that instead.
+        if (this.requiresCapacityItem()) {
+            const capacityItem = this.getCapacityItem();
+            return capacityItem?.getCurrentCapacity() || 0;
         }
 
-        const itemData = this.data.data;
-        const currentCapacity = itemData.capacity.value;
-        return currentCapacity;
+        if (this.type === "ammunition" && this.data.data.ammunitionType !== "charge") {
+            const itemData = this.data;
+            const currentCapacity = itemData.quantity;
+            return currentCapacity;
+        } else {
+            const itemData = this.data.data;
+            const currentCapacity = itemData.capacity?.value;
+            return currentCapacity;
+        }
     }
 
     /**
      * Consumes some amount of capacity.
      */
     consumeCapacity(consumedAmount) {
-        const chargedItems = ["weapon"];
-        if (chargedItems.includes(this.type)) {
-            // TODO [AMMO]: Get embedded item, consume from that instead.
+        if (this.requiresCapacityItem()) {
+            const capacityItem = this.getCapacityItem();
+            return capacityItem?.consumeCapacity(consumedAmount);
         }
 
-        let currentCapacity = this.getCurrentCapacity();
-        currentCapacity -= consumedAmount;
-        if (currentCapacity < 0) {
-            currentCapacity = 0;
+        let updatedCapacity = this.getCurrentCapacity();
+        updatedCapacity -= consumedAmount;
+        if (updatedCapacity < 0) {
+            updatedCapacity = 0;
         }
 
-        return this.update({'data.capacity.value': currentCapacity});
+        if (this.type === "ammunition" && !this.data.data.useCapacity) {
+            return this.update({'quantity': updatedCapacity});
+        } else {
+            return this.update({'data.capacity.value': updatedCapacity});
+        }
     }
 
     /**
@@ -55,7 +91,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
      */
     getMaxCapacity() {
         const itemData = this.data.data;
-        const maxCapacity = itemData.capacity.max;
+        const maxCapacity = itemData.capacity?.max;
         return maxCapacity;
     }
 
@@ -70,11 +106,15 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         }
 
         let newCapacity = maxCapacity;
+        if (this.requiresCapacityItem()) {
+            const capacityItem = this.getCapacityItem();
+            console.log(capacityItem);
+        }
         /*if (this.type === "weapon") {
             if (itemData.ammunitionType === "charge") {
                 // Find item matching ammunition type
                 const matchingItems = this.actor.items
-                    .filter(x => x.type === "ammunition" && x.data.data.type === itemData.ammunitionType && x.getCurrentCapacity() > currentCapacity && x.getMaxCapacity() <= maxCapacity)
+                    .filter(x => x.type === "ammunition" && x.data.data.ammunitionType === itemData.ammunitionType && x.getCurrentCapacity() > currentCapacity && x.getMaxCapacity() <= maxCapacity)
                     .sort((firstEl, secondEl) => secondEl.getCurrentCapacity() - firstEl.getCurrentCapacity() );
                 
                 if (matchingItems.length > 0) {

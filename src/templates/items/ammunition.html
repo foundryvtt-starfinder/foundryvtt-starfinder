@@ -22,8 +22,9 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Ammunition.Type" }}</label>
                 <div class="form-fields">
-                    <select name="data.type">
-                        {{#select itemData.type}}
+                    <select name="data.ammunitionType">
+                        {{#select itemData.ammunitionType}}
+                        <option value="">SFRPG.Items.Ammunition.Type.None</option>
                         {{#each config.ammunitionTypes as |ammunition type|}}
                         <option value="{{type}}">{{ammunition}}</option>
                         {{/each}}
@@ -35,7 +36,14 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Ammunition.Capacity" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="data.capacity.value" value="{{itemData.capacity.value}}" data-dtype="Number"/> /&nbsp;<input type="text" name="data.capacity.max" value="{{itemData.capacity.max}}" data-dtype="Number"/>
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.useCapacity" {{checked itemData.useCapacity}} /> {{ localize "SFRPG.Items.Ammunition.UseCapacity" }}
+                    </label>
+                    {{#if data.data.useCapacity}}
+                    <input type="text" name="data.capacity.value" value="{{itemData.capacity.value}}" data-dtype="Number"/>
+                    <span class="sep"> / </span>
+                    <input type="text" name="data.capacity.max" value="{{itemData.capacity.max}}" data-dtype="Number"/>
+                    {{/if}}
                 </div>
             </div>
 

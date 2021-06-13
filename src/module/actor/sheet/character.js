@@ -64,12 +64,18 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         let [items, spells, feats, classes, races, themes, archetypes, conditionItems, asis] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
             item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
+
+            item.hasCapacity = item.document.hasCapacity();
+            if (item.hasCapacity) {
+                item.capacityCurrent = item.document.getCurrentCapacity();
+                item.capacityMaximum = item.document.getMaxCapacity();
+            }
+
             if (item.type === "spell") {
                 const container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
