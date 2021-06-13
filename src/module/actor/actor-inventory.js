@@ -2,6 +2,7 @@ import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
 import { value_equals } from "../utils/value_equals.js";
+import { generateUUID } from "../../module/utilities.js";
 
 export function initializeRemoteInventory() {
     RPC.registerCallback("createItemCollection", "gm", onCreateItemCollection);
@@ -718,10 +719,14 @@ async function onItemDraggedToCollection(message) {
         }
     }
 
+    for (const item of newItems) {
+        item._id = generateUUID();
+    }
+
     if (newItems.length > 0) {
         if (targetContainer && targetContainer.data.container?.contents) {
-            for (let newItem of newItems) {
-                let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, newItem) || 0;
+            for (const newItem of newItems) {
+                const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, newItem) || 0;
                 targetContainer.data.container.contents.push({id: newItem._id, index: preferredStorageIndex});
             }
         }
@@ -779,7 +784,10 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     }
 
     // If effects are serialized (0.8) remove them now
+    const oldIds = [];
     for (const item of data.draggedItems) {
+        oldIds.push(item._id);
+        item._id = null;
         item.effects = [];
     }
 
@@ -787,6 +795,7 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     for (let i = 0; i<createdItems.length; i++) {
         const newItem = createdItems[i];
         const originalItem = data.draggedItems[i];
+        originalItem._id = oldIds[i];
 
         itemToItemMapping[originalItem._id] = newItem;
         copiedItemIds.push(originalItem._id);
