@@ -24,8 +24,8 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
      * Returns whether or not this item requires capacity items (typically ammunition) or not
      */
     requiresCapacityItem() {
-        const chargedItems = ["weapon"];
-        return chargedItems.includes(this.type);
+        const itemData = this.data.data;
+        return (this.type !== "ammunition" && itemData.ammunitionType);
     }
 
     getCapacityItem() {
@@ -46,6 +46,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
     /**
      * Returns the current capacity of the item.
+     * Can return null if there is no capacity available.
      */
     getCurrentCapacity() {
         if (this.requiresCapacityItem()) {
@@ -53,14 +54,11 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             return capacityItem?.getCurrentCapacity() || 0;
         }
 
-        if (this.type === "ammunition" && this.data.data.ammunitionType !== "charge") {
-            const itemData = this.data;
-            const currentCapacity = itemData.quantity;
-            return currentCapacity;
+        const itemData = this.data.data;
+        if (this.type === "ammunition" && !this.data.data.useCapacity) {
+            return itemData.quantity;
         } else {
-            const itemData = this.data.data;
-            const currentCapacity = itemData.capacity?.value;
-            return currentCapacity;
+            return itemData.capacity?.value;
         }
     }
 
@@ -73,14 +71,16 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             return capacityItem?.consumeCapacity(consumedAmount);
         }
 
-        let updatedCapacity = this.getCurrentCapacity();
-        updatedCapacity -= consumedAmount;
-        if (updatedCapacity < 0) {
-            updatedCapacity = 0;
+        // Attempt to retrieve current capacity. If it is null, exit early.
+        const currentCapacity = this.getCurrentCapacity();
+        if (!currentCapacity) {
+            return;
         }
 
+        const updatedCapacity = Math.max(0, currentCapacity - consumedAmount);
+
         if (this.type === "ammunition" && !this.data.data.useCapacity) {
-            return this.update({'quantity': updatedCapacity});
+            return this.update({'data.quantity': updatedCapacity});
         } else {
             return this.update({'data.capacity.value': updatedCapacity});
         }
@@ -88,13 +88,21 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
     /**
      * Returns the maximum capacity of the item.
+     * Can return null if there is no maximum capacity.
      */
     getMaxCapacity() {
+        if (this.type === "ammunition" && !this.data.data.useCapacity) {
+            return null;
+        }
+        
         const itemData = this.data.data;
         const maxCapacity = itemData.capacity?.max;
         return maxCapacity;
     }
 
+    /**
+     * Attempts to reload the item's capacity.
+     */
     reload() {
         const itemData = this.data.data;
         const currentCapacity = this.getCurrentCapacity();
