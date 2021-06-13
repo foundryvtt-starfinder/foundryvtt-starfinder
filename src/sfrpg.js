@@ -135,7 +135,7 @@ Hooks.once("setup", function () {
 
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
-        "abilities", "alignments", "distanceUnits", "senses", "skills", "currencies", "saves",
+        "abilities", "alignments", "ammunitionTypes", "distanceUnits", "senses", "skills", "currencies", "saves",
         "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes",
         "vehicleSizes", "babProgression", "saveProgression", "saveDescriptors", "armorProficiencies",
         "weaponProficiencies", "abilityActivationTypes", "skillProficiencyLevels", "damageTypes",

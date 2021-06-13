@@ -187,16 +187,16 @@ SFRPG.weaponDamageTypes = {
 };
 
 SFRPG.ammunitionTypes = {
-    "charge": "Charges",
-    "roundS": "Small Arm Rounds",
-    "roundL": "Longarm and Sniper Rounds",
-    "roundH": "Heavy Rounds",
-    "arrow": "Arrows",
-    "dart": "Darts",
-    "fuel": "Fuel",
-    "rocket": "Rockets",
-    "shell": "Shells",
-    "flare": "Flares"
+    "charge": "SFRPG.Items.Ammunition.Type.Charges",
+    "roundS": "SFRPG.Items.Ammunition.Type.SmallArmRounds",
+    "roundL": "SFRPG.Items.Ammunition.Type.LongarmAndSniperRounds",
+    "roundH": "SFRPG.Items.Ammunition.Type.HeavyRounds",
+    "arrow": "SFRPG.Items.Ammunition.Type.Arrows",
+    "dart": "SFRPG.Items.Ammunition.Type.Darts",
+    "fuel": "SFRPG.Items.Ammunition.Type.Fuel",
+    "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
+    "shell": "SFRPG.Items.Ammunition.Type.Shells",
+    "flare": "SFRPG.Items.Ammunition.Type.Flares"
 };
 
 SFRPG.distanceUnits = {

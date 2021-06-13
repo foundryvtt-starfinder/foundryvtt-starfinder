@@ -8,6 +8,7 @@
         "TypeVehicle": "Veículo"
     },
     "ITEM": {
+        "TypeAmmunition": "Ammunition",
         "TypeArchetypes": "Arquetipo",
         "TypeAsi": "Incremento Valor Habilidade",
         "TypeAugmentation": "Acréscimo",
@@ -234,6 +235,8 @@
                     "Tooltip": "Este número representa a soma do valor total de todos os itens desta lista."
                 },
                 "Weapon": {
+                    "AlreadyFullyLoaded": "The weapon {name} is already fully loaded.",
+                    "NoAmmunitionAvailable": "You have no ammunition available for the weapon {name}.",
                     "Reload": "Recarregar arma"
                 }
             },
@@ -915,6 +918,25 @@
                 "Range": "Alcance",
                 "Target": "Alvo"
             },
+            "Ammunition": {
+                "AmmunitionType": "Ammunition Type",
+                "Capacity": "Capacity Settings",
+                "Details": "Ammunition Details",
+                "Type": {
+                    "Arrows": "Arrows",
+                    "Charges": "Charges",
+                    "Darts": "Darts",
+                    "Flares": "Flares",
+                    "Fuel": "Fuel",
+                    "HeavyRounds": "Heavy Rounds",
+                    "LongarmAndSniperRounds": "Longarm and Sniper Rounds",
+                    "None": "None",
+                    "Rockets": "Rockets",
+                    "SmallArmRounds": "Small Arm Rounds",
+                    "Shells": "Shells"
+                },
+                "UseCapacity": "Use Capacity"
+            },
             "Attuned": "Sintonizar",
             "Augmentation": {
                 "Details": "Detalhes Acrescimo",
@@ -934,6 +956,7 @@
                 "AbilityScoreIncrease": "Aumento valores de habilidade",
                 "Archetypes": "Arquetipos",
                 "Armor": "Armadura",
+                "Ammunition": "Ammunition",
                 "ArmorUpgrades": "Atualização Armadura",
                 "Augmentations": "Acrescimo",
                 "Classes": "Classes",
@@ -987,7 +1010,8 @@
                 "Hands": "Mãos",
                 "Level": "Nível",
                 "Price": "Preço",
-                "Quantity": "Quantidade"
+                "Quantity": "Quantidade",
+                "QuantityPerPack": "Pack size"
             },
             "Equipment": {
                 "Action": "Ação Equipamento",
@@ -2148,7 +2172,7 @@
         "UPBs": "BPU's",
         "VehicleAttackSheet": {
             "Details": {
-                 "IgnoresHardness": "Ignora dureza"
+                "IgnoresHardness": "Ignora dureza"
             },
             "Errors": {
                 "NoDamage": "Você não pode fazer uma Rolagem de Danos com este item."
@@ -2350,7 +2374,7 @@
         "WeaponPropertiesDisarm": "Desarmar",
         "WeaponPropertiesDisarmTooltip": "Quando você tenta uma manobra de combate de desarme enquanto empunha uma arma com a propriedade especial de desarmar, você ganha um bônus de +2 em sua jogada de ataque. ",
         "WeaponPropertiesDouble": "Dobro",
-        "WeaponPropertiesDoubleTooltip": "Uma arma dupla tem duas armas diferentes posicionadas de ponta a ponta para que você possa atacar com qualquer uma delas facilmente, sem alterar sua empunhadura. Para o propósito do talento Combate com Múltiplas Armas, uma arma dupla é tratada como duas ou mais armas corpo-a-corpo operativas. Uma arma dupla não é tratada como uma arma operativa para qualquer outro propósito, a menos que tenha a propriedade especial da arma operativa. \n \n Algumas armas duplas têm extremidades que causam diferentes tipos de dano. Ao fazer um único ataque com essa arma, você pode escolher o tipo de dano a ser causado, mas se fizer mais de um ataque na mesma rodada, pelo menos um desses ataques deve ser feito com o segundo tipo de dano. A categoria de arma de uma arma dupla que causa mais de um tipo de dano é baseada no primeiro tipo de dano listado. Se seu segundo tipo de dano faz com que seja considerada uma categoria de arma diferente ao causar aquele dano, essa categoria é listada entre parênteses. Por exemplo, uma arma dupla na categoria de fogo que causa 1d6 de dano de fogo ou 1d6 de dano de frio lista “double (cryo)” para indicar que quando é usada para causar dano de frio, é tratada como uma arma na categoria de cryo. " ,
+        "WeaponPropertiesDoubleTooltip": "Uma arma dupla tem duas armas diferentes posicionadas de ponta a ponta para que você possa atacar com qualquer uma delas facilmente, sem alterar sua empunhadura. Para o propósito do talento Combate com Múltiplas Armas, uma arma dupla é tratada como duas ou mais armas corpo-a-corpo operativas. Uma arma dupla não é tratada como uma arma operativa para qualquer outro propósito, a menos que tenha a propriedade especial da arma operativa. \n \n Algumas armas duplas têm extremidades que causam diferentes tipos de dano. Ao fazer um único ataque com essa arma, você pode escolher o tipo de dano a ser causado, mas se fizer mais de um ataque na mesma rodada, pelo menos um desses ataques deve ser feito com o segundo tipo de dano. A categoria de arma de uma arma dupla que causa mais de um tipo de dano é baseada no primeiro tipo de dano listado. Se seu segundo tipo de dano faz com que seja considerada uma categoria de arma diferente ao causar aquele dano, essa categoria é listada entre parênteses. Por exemplo, uma arma dupla na categoria de fogo que causa 1d6 de dano de fogo ou 1d6 de dano de frio lista “double (cryo)” para indicar que quando é usada para causar dano de frio, é tratada como uma arma na categoria de cryo. ",
         "WeaponPropertiesDrainCharge": "Carga de drenagem",
         "WeaponPropertiesDrainChargeTooltip": "Quando uma arma com a propriedade especial de arma de carga de drenagem atinge um inimigo que tem um ataque natural que causa dano de eletricidade (um ataque não dependente de atualizações de armadura, feitiços, habilidades semelhantes a feitiços ou armas ou equipamentos carregados), ele desvia alguns de a eletricidade inerente daquele alvo e recupera o número de cargas listadas na entrada de uso da arma. ",
         "WeaponPropertiesEcho": "Eco",
@@ -2408,7 +2432,7 @@
         "WeaponPropertiesMire": "Lama",
         "WeaponPropertiesMireTooltip": "Uma arma de lama tem uma área definida (geralmente um raio) que temporariamente transforma em terreno difícil. Apenas uma superfície pode ser transformada em terreno difícil (você não pode usar uma arma de lama para criar terreno difícil no ar, por exemplo), e o terreno difícil afeta apenas a velocidade de subida e a velocidade de terreno das criaturas na área. ",
         "WeaponPropertiesModal": "Modal",
-        "WeaponPropertiesModalTooltip": "Uma arma modal pode ser alternada para causar diferentes tipos de dano, com as opções listadas na entrada de dano da arma. A arma pode causar apenas um tipo de dano por vez; mudar o modo da arma para causar outro tipo de dano requer uma ação de movimento. A categoria de arma de uma arma modal é baseada no primeiro tipo de dano listado. Se seu segundo tipo de dano faz com que ela seja considerada uma categoria diferente de arma ao causar aquele dano, essa categoria é listada entre parênteses. Por exemplo, uma arma modal na categoria de fogo que causa 1d6 de dano de fogo ou 1d6 de dano de frio lista “modal (cryo)” para indicar que quando é usada para causar dano de frio, é tratada como uma arma na categoria de crio. " ,
+        "WeaponPropertiesModalTooltip": "Uma arma modal pode ser alternada para causar diferentes tipos de dano, com as opções listadas na entrada de dano da arma. A arma pode causar apenas um tipo de dano por vez; mudar o modo da arma para causar outro tipo de dano requer uma ação de movimento. A categoria de arma de uma arma modal é baseada no primeiro tipo de dano listado. Se seu segundo tipo de dano faz com que ela seja considerada uma categoria diferente de arma ao causar aquele dano, essa categoria é listada entre parênteses. Por exemplo, uma arma modal na categoria de fogo que causa 1d6 de dano de fogo ou 1d6 de dano de frio lista “modal (cryo)” para indicar que quando é usada para causar dano de frio, é tratada como uma arma na categoria de crio. ",
         "WeaponPropertiesNecrotic": "Necrótica",
         "WeaponPropertiesNecroticTooltip": "Uma arma necrótica causa dano de frio infundido com energia negativa. Criaturas imunes à energia negativa (como os alvos de um feitiço de proteção contra a morte) são imunes ao dano frio de uma arma necrótica, e o dano frio de armas necróticas afeta apenas criaturas vivas. As criaturas mortas-vivas visadas por uma arma com esta propriedade não só não recebem dano do frio, mas também ganham pontos de vida temporários iguais ao nível do item da arma. Esses pontos de vida temporários duram 10 minutos, até serem gastos ou até que o morto-vivo ganhe um número maior de pontos de vida temporários de uma arma necrótica. Uma criatura pode se beneficiar de apenas uma fonte de Pontos de Vida temporários de uma arma necrótica por vez. ",
         "WeaponPropertiesNonlethal": "Não letal",

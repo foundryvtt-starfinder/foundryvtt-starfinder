@@ -114,7 +114,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
         if (currentCapacity >= maxCapacity) {
             // No need to reload if already at max capacity.
-            ui.notifications.warn(game.i18n.format("SFRPG.ItemSheet.Reload.AlreadyFullyLoaded", {name: this.data.name}));
+            ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.AlreadyFullyLoaded", {name: this.data.name}));
             return false;
         }
 
@@ -157,7 +157,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                     updatePromise = this._internalQuantityReload(currentCapacity, maxCapacity, capacityItem, newAmmunition);
                 }
             } else {
-                ui.notifications.warn(game.i18n.format("SFRPG.ItemSheet.Reload.NoAmmunitionAvailable", {name: this.data.name}));
+                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.NoAmmunitionAvailable", {name: this.data.name}));
             }
         } else {
             updatePromise = this.update({'data.capacity.value': maxCapacity});

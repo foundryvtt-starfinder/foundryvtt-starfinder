@@ -989,6 +989,57 @@ async function postCook() {
 }
 
 /********************/
+/*   LOCALIZATION   */
+/********************/
+async function copyLocalization() {
+    console.log(`Opening localization files`);
+	const englishFilePath = "./src/lang/en.json";
+    const englishRaw = await fs.readFileSync(englishFilePath);
+    const englishJson = JSON.parse(englishRaw);
+    
+	const itemSourceDir = "./src/lang";
+    const files = await fs.readdirSync(itemSourceDir);
+    for (const filePath of files) {
+        if (filePath.includes("en.json")) {
+            continue;
+        }
+        
+		console.log(`Processing ${filePath}`);
+        const fileRaw = await fs.readFileSync(itemSourceDir + "/" + filePath);
+        const fileJson = JSON.parse(fileRaw);
+        
+        let copiedJson = JSON.parse(JSON.stringify(englishJson));
+        //const mergedObject = Object.assign({}, englishJson, fileJson);
+        mergeDeep(copiedJson, fileJson);
+        
+        const outRaw = JSON.stringify(copiedJson, null, 4);
+        await fs.writeFileSync(itemSourceDir + "/" + filePath, outRaw);
+    }
+}
+
+function isObject(item) {
+  return (item && typeof item === 'object' && !Array.isArray(item));
+}
+
+function mergeDeep(target, ...sources) {
+  if (!sources.length) return target;
+  const source = sources.shift();
+
+  if (isObject(target) && isObject(source)) {
+    for (const key in source) {
+      if (isObject(source[key])) {
+        if (!target[key]) Object.assign(target, { [key]: {} });
+        mergeDeep(target[key], source[key]);
+      } else {
+        Object.assign(target, { [key]: source[key] });
+      }
+    }
+  }
+
+  return mergeDeep(target, ...sources);
+}
+
+/********************/
 /*		CLEAN		*/
 /********************/
 
@@ -1317,6 +1368,7 @@ exports.publish = gulp.series(
 	copyReadmeAndLicenses,
 	packageBuild
 );
+exports.copyLocalization = copyLocalization;
 exports.cook = gulp.series(cookPacks, clean, execBuild, postCook);
 exports.cookNoFormattingCheck = gulp.series(cookPacksNoFormattingCheck, clean, execBuild, postCook);
 exports.unpack = unpackPacks;
