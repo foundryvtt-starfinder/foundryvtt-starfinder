@@ -1111,6 +1111,22 @@ export class ActorItemHelper {
                 isDirty = true;
             }
 
+            // Test for ammunition slots
+            if (item.type === "weapon" && itemData.capacity && itemData.capacity.max > 0) {
+                const ammunitionStorageSlot = itemData.container.storage.find(x => x.acceptsType.includes("ammunition"));
+                if (!ammunitionStorageSlot) {
+                    itemData.container.storage.push({
+                        type: "slot",
+                        subtype: "ammunitionSlot",
+                        amount: 1,
+                        acceptsType: ["ammunition"],
+                        affectsEncumbrance: true,
+                        weightProperty: ""
+                    });
+                    isDirty = true;
+                }
+            }
+
             if (isDirty) {
                 console.log("> Migrating " + item.name);
                 migrations.push({ _id: item.id, data: itemData});
