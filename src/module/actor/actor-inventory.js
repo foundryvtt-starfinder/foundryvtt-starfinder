@@ -409,7 +409,19 @@ export function computeCompoundBulkForItem(item, contents) {
         }
 
         if (item.data.quantity && !Number.isNaN(Number.parseInt(item.data.quantity))) {
-            personalBulk *= item.data.quantity;
+            // Compute number of packs based on quantityPerPack, provided quantityPerPack is set to a value.
+            let packs = 1;
+            if (item.data.quantityPerPack === null || item.data.quantityPerPack === undefined) {
+                packs = item.data.quantity;
+            } else {
+                if (item.data.quantityPerPack <= 0) {
+                    packs = 0;
+                } else {
+                    packs = Math.floor(item.data.quantity / item.data.quantityPerPack);
+                }
+            }
+
+            personalBulk *= packs;
         }
 
         if (item.data.equipped) {

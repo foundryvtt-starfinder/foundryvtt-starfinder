@@ -61,6 +61,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         const inventory = {
             weapon: { label: weaponLabel, items: [], dataset: { type: "weapon" } },
+            ammunition: { label: game.i18n.format(SFRPG.itemTypes["ammunition"]), items: [], dataset: { type: "ammunition" }, allowAdd: true },
             upgrade: { label: armorUpgradesLabel, items: [], dataset: { type: "upgrade" } },
             cargo: { label: cargoLabel, items: [], dataset: { type: "goods" } }
         };
@@ -96,7 +97,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         
         let totalWeight = 0;
         let totalValue = 0;
-        for (let i of items) {
+        for (const i of items) {
             i.img = i.img || DEFAULT_TOKEN;
 
             i.data.quantity = i.data.quantity || 0;
@@ -113,13 +114,25 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                 weight = parseFloat(i.data.bulk);
             }
 
-            i.totalWeight = i.data.quantity * weight;
+            // Compute number of packs based on quantityPerPack, provided quantityPerPack is set to a value.
+            let packs = 1;
+            if (i.data.quantityPerPack === null || i.data.quantityPerPack === undefined) {
+                packs = i.data.quantity;
+            } else {
+                if (i.data.quantityPerPack <= 0) {
+                    packs = 0;
+                } else {
+                    packs = Math.floor(i.data.quantity / i.data.quantityPerPack);
+                }
+            }
+
+            i.totalWeight = packs * weight;
 
             totalWeight += i.totalWeight;
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
 
-            totalValue += (i.data.price * i.data.quantity);
+            totalValue += (i.data.price * packs);
         }
         totalWeight = Math.floor(totalWeight);
         data.encumbrance = this._computeEncumbrance(totalWeight, actorData);

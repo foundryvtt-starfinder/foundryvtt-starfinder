@@ -194,7 +194,9 @@ SFRPG.ammunitionTypes = {
     "arrow": "Arrows",
     "dart": "Darts",
     "fuel": "Fuel",
-    "rocket": "Rockets"
+    "rocket": "Rockets",
+    "shell": "Shells",
+    "flare": "Flares"
 };
 
 SFRPG.distanceUnits = {

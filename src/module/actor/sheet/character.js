@@ -46,6 +46,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             weapon: { label: game.i18n.format(SFRPG.itemTypes["weapon"]), items: [], dataset: { type: "weapon" }, allowAdd: true },
             shield: { label: game.i18n.format(SFRPG.itemTypes["shield"]), items: [], dataset: { type: "shield" }, allowAdd: true },
             equipment: { label: game.i18n.format(SFRPG.itemTypes["equipment"]), items: [], dataset: { type: "equipment" }, allowAdd: true },
+            ammunition: { label: game.i18n.format(SFRPG.itemTypes["ammunition"]), items: [], dataset: { type: "ammunition" }, allowAdd: true },
             consumable: { label: game.i18n.format(SFRPG.itemTypes["consumable"]), items: [], dataset: { type: "consumable" }, allowAdd: true },
             goods: { label: game.i18n.format(SFRPG.itemTypes["goods"]), items: [], dataset: { type: "goods" }, allowAdd: true },
             container: { label: game.i18n.format(SFRPG.itemTypes["container"]), items: [], dataset: { type: "container" }, allowAdd: true },
@@ -105,7 +106,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         const spellbook = this._prepareSpellbook(data, spells);
 
         let totalValue = 0;
-        for (let i of items) {
+        for (const i of items) {
             i.img = i.img || DEFAULT_TOKEN;
 
             if (!physicalInventoryItems.includes(i.type)) {
@@ -126,14 +127,26 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 weight = parseFloat(i.data.bulk);
             }
 
-            i.totalWeight = i.data.quantity * weight;
+            // Compute number of packs based on quantityPerPack, provided quantityPerPack is set to a value.
+            let packs = 1;
+            if (i.data.quantityPerPack === null || i.data.quantityPerPack === undefined) {
+                packs = i.data.quantity;
+            } else {
+                if (i.data.quantityPerPack <= 0) {
+                    packs = 0;
+                } else {
+                    packs = Math.floor(i.data.quantity / i.data.quantityPerPack);
+                }
+            }
+
+            i.totalWeight = packs * weight;
             if (i.data.equippedBulkMultiplier !== undefined && i.data.equipped) {
                 i.totalWeight *= i.data.equippedBulkMultiplier;
             }
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
 
-            totalValue += (i.data.price * i.data.quantity);
+            totalValue += (i.data.price * packs);
         }
 
         this.processItemContainment(items, function (itemType, itemData) {
@@ -160,13 +173,13 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         });
 
         let totalWeight = 0;
-        for (let section of Object.entries(inventory)) {
-            for (let i of section[1].items) {
-                if (!(i.item.type in inventory)) {
+        for (const section of Object.entries(inventory)) {
+            for (const sectionItem of section[1].items) {
+                if (!(sectionItem.item.type in inventory)) {
                     continue;
                 }
 
-                let itemBulk = computeCompoundBulkForItem(i.item, i.contents);
+                const itemBulk = computeCompoundBulkForItem(sectionItem.item, sectionItem.contents);
                 totalWeight += itemBulk;
             }
         }
