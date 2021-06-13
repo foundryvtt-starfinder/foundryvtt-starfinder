@@ -73,7 +73,7 @@ export class RPC {
         if (this.initialized) {
             let recipientIsActive = false;
             if (recipient === "gm") {
-                for (const user of game.users.entries) {
+                for (const user of game.users.contents) {
                     if (user.isGM && user.active) {
                         recipientIsActive = true;
                         break;

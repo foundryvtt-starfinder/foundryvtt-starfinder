@@ -259,5 +259,6 @@ function openLootCollectionSheet(event) {
     }
     
     const lootCollectionSheet = new ItemCollectionSheet(relevantToken.document);
+    lootCollectionSheet.options.viewPermission = -1;
     lootCollectionSheet.render(true);
 }
