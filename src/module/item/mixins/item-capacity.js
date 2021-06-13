@@ -28,9 +28,13 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         return (this.type !== "ammunition" && itemData.ammunitionType);
     }
 
+    /**
+     * Returns the current capacity item assigned to this item.
+     * Can return null if there is no item assigned or necessary.
+     */
     getCapacityItem() {
         if (!this.requiresCapacityItem()) {
-            return false;
+            return null;
         }
 
         // Create actor item helper
