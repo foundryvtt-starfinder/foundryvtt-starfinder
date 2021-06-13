@@ -1,5 +1,5 @@
-import { mix } from "./mixins/item_mixer.js";
-import { ItemCapacityMixin } from "./mixins/item_capacity.js";
+import { mix } from "./mixins/item-mixer.js";
+import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
 import { DiceSFRPG, RollContext } from "../dice.js";
 import { SFRPG } from "../config.js";
