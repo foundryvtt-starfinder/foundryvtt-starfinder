@@ -1009,7 +1009,6 @@ async function copyLocalization() {
         const fileJson = JSON.parse(fileRaw);
         
         let copiedJson = JSON.parse(JSON.stringify(englishJson));
-        //const mergedObject = Object.assign({}, englishJson, fileJson);
         mergeDeep(copiedJson, fileJson);
         
         const outRaw = JSON.stringify(copiedJson, null, 4);
