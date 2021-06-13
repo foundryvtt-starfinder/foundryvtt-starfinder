@@ -1,4 +1,4 @@
-import { ActorItemHelper, getChildItems } from "../../actor/actor-inventory.js"
+import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory.js"
 
 export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**
@@ -108,43 +108,78 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         const currentCapacity = this.getCurrentCapacity();
         const maxCapacity = this.getMaxCapacity();
 
-        if (currentCapacity >= maxCapacity && false) {
+        if (currentCapacity >= maxCapacity) {
             // No need to reload if already at max capacity.
+            ui.notifications.warn(game.i18n.format("SFRPG.ItemSheet.Reload.AlreadyFullyLoaded", {name: this.data.name}));
             return false;
         }
 
-        let newCapacity = maxCapacity;
+        let updatePromise = null;
         if (this.requiresCapacityItem()) {
             const capacityItem = this.getCapacityItem();
-            console.log(capacityItem);
-        }
-        /*if (this.type === "weapon") {
-            if (itemData.ammunitionType === "charge") {
-                // Find item matching ammunition type
-                const matchingItems = this.actor.items
-                    .filter(x => x.type === "ammunition" && x.data.data.ammunitionType === itemData.ammunitionType && x.getCurrentCapacity() > currentCapacity && x.getMaxCapacity() <= maxCapacity)
-                    .sort((firstEl, secondEl) => secondEl.getCurrentCapacity() - firstEl.getCurrentCapacity() );
-                
-                if (matchingItems.length > 0) {
-                    const itemId = matchingItems[0]._id;
-                    const itemQuantity = matchingItems[0].data.quantity;
-                    const itemCapacity = matchingItems[0].getCurrentCapacity();
+            
+            // Find more items matching ammunition type
+            const matchingItems = this.actor.items
+                .filter(x => x.type === "ammunition" && x.data.data.ammunitionType === itemData.ammunitionType && ((x.getCurrentCapacity() > currentCapacity && x.getMaxCapacity() <= maxCapacity) || !x.data.data.useCapacity))
+                .filter(x => getItemContainer(this.actor.data.items, x) == null)
+                .sort((firstEl, secondEl) => secondEl.getCurrentCapacity() - firstEl.getCurrentCapacity() );
 
-                    newCapacity = itemCapacity;
+            if (matchingItems.length > 0) {
+                const newAmmunition = matchingItems[0];
 
-                    // Step 1: Destroy old item
-                    if (itemQuantity > 1) {
-                        this.actor.updateEmbeddedDocuments("Item", [{"id": itemId, "data.quantity": itemQuantity - 1}]);
-                    } else {
-                        this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+                // Create actor item helper
+                const tokenId = this.actor.isToken ? this.actor.token.id : null;
+                const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
+                const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId);
+
+                if (newAmmunition.data.data.useCapacity) {
+                    updatePromise = setItemContainer(itemHelper, capacityItem, null);
+                    if (updatePromise) {
+                        updatePromise.then(() => {
+                            setItemContainer(itemHelper, newAmmunition, this);
+                        });
                     }
+                } else {
+                    const newQuantity = Math.min(currentCapacity + newAmmunition.getCurrentCapacity(), maxCapacity);
+                    const quantityToMove = newQuantity - currentCapacity;
 
-                    // Step 2: Create new battery w/ old charge
+                    if (quantityToMove > 0) {
+                        const currentItemCapacity = newQuantity;
+                        const ammunitionItemCapacity = newAmmunition.getCurrentCapacity() - quantityToMove;
+
+                        const updates = [];
+                        updates.push({_id: capacityItem.id, "data.quantity": currentItemCapacity});
+
+                        if (ammunitionItemCapacity > 0) {
+                            updates.push({_id: newAmmunition.id, "data.quantity": ammunitionItemCapacity});
+                        }
+
+                        updatePromise = this.actor.updateEmbeddedDocuments("Item", updates);
+
+                        if (ammunitionItemCapacity <= 0) {
+                            updatePromise.then(() => {
+                                this.actor.deleteEmbeddedDocuments("Item", [newAmmunition.id]);
+                            });
+                        }
+                    }
                 }
             } else {
-                
+                ui.notifications.warn(game.i18n.format("SFRPG.ItemSheet.Reload.NoAmmunitionAvailable", {name: this.data.name}));
             }
-        }*/
+        } else {
+            updatePromise = this.update({'data.capacity.value': maxCapacity});
+        }
+
+        if (updatePromise) {
+            updatePromise.then(() => {
+                this._postReloadMessage();
+            });
+        }
+
+        return updatePromise;
+    }
+
+    _postReloadMessage() {
 
         // Render the chat card template
         const templateData = {
@@ -167,7 +202,6 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
             ChatMessage.create(chatData, { displaySheet: false });
         });
-        
-        return this.update({'data.capacity.value': newCapacity});
+
     }
 }

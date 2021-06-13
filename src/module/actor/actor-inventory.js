@@ -130,7 +130,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
     if (sourceActor.actor === targetActor.actor) {
         if (quantity < itemQuantity) {
-            await sourceActor.updateItem(itemToMove._id, {"data.quantity": itemQuantity - quantity});
+            await sourceActor.updateItem(itemToMove.id, {"quantity": itemQuantity - quantity});
 
             let newItemData = duplicate(itemToMove.data);
             delete newItemData.id;
@@ -153,12 +153,12 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             } else if (canMerge(targetItem, itemToMove)) {
                 // Merging will destroy the old item, so we return the targetItem here.
                 const targetItemNewQuantity = Number(targetItem.data.data.quantity) + Number(quantity);
-                await targetActor.updateItem(targetItem._id, {'data.quantity': targetItemNewQuantity});
+                await targetActor.updateItem(targetItem.id, {'quantity': targetItemNewQuantity});
 
                 if (quantity >= itemQuantity) {
-                    await sourceActor.deleteItem(itemToMove._id);
+                    await sourceActor.deleteItem(itemToMove.id);
                 } else {
-                    await sourceActor.updateItem(itemToMove._id, {'data.quantity': itemQuantity - quantity});
+                    await sourceActor.updateItem(itemToMove.id, {'quantity': itemQuantity - quantity});
                 }
 
                 return targetItem;
@@ -355,12 +355,12 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 /**
  * Changes the item's container on an actor.
  * 
- * @param {ActorItemHelper} actor 
+ * @param {ActorItemHelper} actorItemHelper 
  * @param {Item} item 
  * @param {Item} container 
  */
-export async function setItemContainer(actor, item, container) {
-    return await moveItemBetweenActorsAsync(actor, item, actor, container);
+export async function setItemContainer(actorItemHelper, item, container) {
+    return await moveItemBetweenActorsAsync(actorItemHelper, item, actorItemHelper, container);
 }
 
 /**
@@ -446,8 +446,15 @@ export function getChildItems(actorItemHelper, item) {
     return actorItemHelper.filterItems(x => item.data.data.container.contents.find(y => y.id === x.id));
 }
 
-export function getItemContainer(items, itemId) {
-    return items.find(x => x.data.container?.contents?.find(y => y.id === itemId) !== undefined);
+/**
+ * Returns the containing item for a given item.
+ * 
+ * @param {Array} items Array of items to test, typically actor.items.
+ * @param {Item} item Item to find the parent of.
+ * @returns {Item} The parent item of the item, or null if not contained.
+ */
+export function getItemContainer(items, item) {
+    return items.find(x => x.data.data.container?.contents?.find(y => y.id === item.id) !== undefined);
 }
 
 /**

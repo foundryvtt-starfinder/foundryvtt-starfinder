@@ -347,7 +347,7 @@ export class ActorSFRPG extends Actor {
                 case "upgrade":
                     {
                         if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item.id);
+                            const container = getItemContainer(this.data.items, item);
                             if (container && container.type === "equipment" && container.data.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
@@ -360,7 +360,7 @@ export class ActorSFRPG extends Actor {
                 case "weaponAccessory":
                     {
                         if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item.id);
+                            const container = getItemContainer(this.data.items, item);
                             if (container && container.type === "weapon" && container.data.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
