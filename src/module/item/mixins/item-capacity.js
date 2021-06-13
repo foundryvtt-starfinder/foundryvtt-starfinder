@@ -136,36 +136,25 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
                 const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId);
 
-                if (newAmmunition.data.data.useCapacity) {
-                    updatePromise = setItemContainer(itemHelper, capacityItem, null);
+                if (newAmmunition.data.data.useCapacity || capacityItem == null) {
+                    if (capacityItem) {
+                        updatePromise = setItemContainer(itemHelper, capacityItem, null, 1);
+                    }
+                    
                     if (updatePromise) {
                         updatePromise.then(() => {
-                            setItemContainer(itemHelper, newAmmunition, this);
+                            setItemContainer(itemHelper, newAmmunition, this, 1);
                         });
+                    } else {
+                        let totalAmountLoaded = 1;
+                        if (!newAmmunition.data.data.useCapacity) {
+                            totalAmountLoaded = Math.min(maxCapacity, newAmmunition.getCurrentCapacity());
+                        }
+
+                        updatePromise = setItemContainer(itemHelper, newAmmunition, this, totalAmountLoaded);
                     }
                 } else {
-                    const newQuantity = Math.min(currentCapacity + newAmmunition.getCurrentCapacity(), maxCapacity);
-                    const quantityToMove = newQuantity - currentCapacity;
-
-                    if (quantityToMove > 0) {
-                        const currentItemCapacity = newQuantity;
-                        const ammunitionItemCapacity = newAmmunition.getCurrentCapacity() - quantityToMove;
-
-                        const updates = [];
-                        updates.push({_id: capacityItem.id, "data.quantity": currentItemCapacity});
-
-                        if (ammunitionItemCapacity > 0) {
-                            updates.push({_id: newAmmunition.id, "data.quantity": ammunitionItemCapacity});
-                        }
-
-                        updatePromise = this.actor.updateEmbeddedDocuments("Item", updates);
-
-                        if (ammunitionItemCapacity <= 0) {
-                            updatePromise.then(() => {
-                                this.actor.deleteEmbeddedDocuments("Item", [newAmmunition.id]);
-                            });
-                        }
-                    }
+                    updatePromise = this._internalQuantityReload(currentCapacity, maxCapacity, capacityItem, newAmmunition);
                 }
             } else {
                 ui.notifications.warn(game.i18n.format("SFRPG.ItemSheet.Reload.NoAmmunitionAvailable", {name: this.data.name}));
@@ -181,6 +170,35 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         }
 
         return updatePromise;
+    }
+
+    _internalQuantityReload(currentCapacity, maxCapacity, capacityItem, newAmmunition) {
+        const newQuantity = Math.min(currentCapacity + newAmmunition.getCurrentCapacity(), maxCapacity);
+        const quantityToMove = newQuantity - currentCapacity;
+
+        if (quantityToMove > 0) {
+            const currentItemCapacity = newQuantity;
+            const ammunitionItemCapacity = newAmmunition.getCurrentCapacity() - quantityToMove;
+
+            const updates = [];
+            if (capacityItem) {
+                updates.push({_id: capacityItem.id, "data.quantity": currentItemCapacity});
+            }
+
+            if (newAmmunition && ammunitionItemCapacity > 0) {
+                updates.push({_id: newAmmunition.id, "data.quantity": ammunitionItemCapacity});
+            }
+
+            const updatePromise = this.actor.updateEmbeddedDocuments("Item", updates);
+
+            if (ammunitionItemCapacity <= 0) {
+                updatePromise.then(() => {
+                    this.actor.deleteEmbeddedDocuments("Item", [newAmmunition.id]);
+                });
+            }
+
+            return updatePromise;
+        }
     }
 
     _postReloadMessage() {

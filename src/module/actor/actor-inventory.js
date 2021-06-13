@@ -359,8 +359,8 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
  * @param {Item} item 
  * @param {Item} container 
  */
-export async function setItemContainer(actorItemHelper, item, container) {
-    return await moveItemBetweenActorsAsync(actorItemHelper, item, actorItemHelper, container);
+export async function setItemContainer(actorItemHelper, item, container, quantity = null) {
+    return await moveItemBetweenActorsAsync(actorItemHelper, item, actorItemHelper, container, quantity);
 }
 
 /**
