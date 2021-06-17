@@ -50,7 +50,7 @@ export default class CounterManagement {
                  */
                  combatants.forEach(c => {
                     // Add class to trigger drag events.
-                    this.currentActor = game.actors.get(c.actor.data.id);
+                    this.currentActor = game.actors.get(c.data.actorId);
 
                     let $combatant = html.find(`.combatant[data-combatant-id="${c.id}"]`);
                     let featureCounterActivated = this.howManyClassesWithCounterHaveTheActor(c);
