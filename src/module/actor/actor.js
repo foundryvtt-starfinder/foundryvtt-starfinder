@@ -1,3 +1,4 @@
+import { SFRPG } from "../config.js"
 import { DiceSFRPG, RollContext } from "../dice.js";
 import { ChoiceDialog } from "../apps/choice-dialog.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
@@ -13,7 +14,6 @@ import { getItemContainer } from "./actor-inventory.js"
 import { } from "./crew-update.js"
 import { ItemSheetSFRPG } from "../item/sheet.js";
 import { ItemSFRPG } from "../item/item.js";
-import { ActorSheetSFRPG } from "./sheet/base.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
@@ -1484,23 +1484,39 @@ export class ActorSFRPG extends Actor {
         }
     }
 
+    /** Conditions */
     hasCondition(conditionName) {
+        if (!SFRPG.statusEffectIconMapping[conditionName]) {
+            ui.notifications.warn(`Trying to check condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
+            return false;
+        }
+
         const conditionItem = this.getCondition(conditionName);
         return (conditionItem !== undefined);
     }
 
     getCondition(conditionName) {
+        if (!SFRPG.statusEffectIconMapping[conditionName]) {
+            ui.notifications.warn(`Trying to get condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
+            return undefined;
+        }
+
         const conditionItem = this.items.find(x => x.type === "feat" && x.data.data.requirements?.toLowerCase() === "condition" && x.name.toLowerCase() === conditionName.toLowerCase());
         return conditionItem;
     }
 
     async setCondition(conditionName, enabled) {
+        if (!SFRPG.statusEffectIconMapping[conditionName]) {
+            ui.notifications.warn(`Trying to set condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
+            return;
+        }
+
         const conditionItem = this.getCondition(conditionName);
 
         // Reflect state on tokens
         const tokens = this.getActiveTokens(true);
         for (const token of tokens) {
-            await token.toggleEffect(CONFIG.SFRPG.statusEffectIconMapping[conditionName], {active: enabled});
+            await token.toggleEffect(SFRPG.statusEffectIconMapping[conditionName], {active: enabled});
         }
 
         // Update condition item
