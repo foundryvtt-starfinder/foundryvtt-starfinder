@@ -559,47 +559,31 @@ export class ActorSheetSFRPG extends ActorSheet {
      * 
      * @param {Event} event The triggering event.
      */
-    async _onToggleConditions(event) {
+    _onToggleConditions(event) {
         event.preventDefault();
 
         const target = $(event.currentTarget);
-        const condition = target.data('condition');
-        const active = target[0].checked;
 
-        if (active) {
-            // Try find existing condition, add from compendium if not found
-            let conditionItem = this.actor.items.find(x => x.type === "feat" && x.data.data.requirements?.toLowerCase() === "condition" && x.name.toLowerCase() === condition.toLowerCase());
-            if (!conditionItem) {
-                const compendium = game.packs.find(element => element.title.includes("Conditions"));
-                if (compendium) {
-                    // Let the compendium load
-                    await compendium.getIndex();
+        // Try find existing condition
+        const conditionName = target.data('condition');
 
-                    const entry = compendium.index.find(e => e.name.toLowerCase() === condition.toLowerCase());
-                    if (entry) {
-                        const entity = await compendium.getDocument(entry._id);
-                        await this.actor.createEmbeddedDocuments("Item", [entity.data]);
-                    }
+        this.actor.setCondition(conditionName, target[0].checked).then(() => {
+
+            const flatfootedConditions = ["blinded", "cowering", "offkilter", "pinned", "stunned"];
+            let shouldBeFlatfooted = (conditionName === "flat-footed" && target[0].checked);
+            for (const ffCondition of flatfootedConditions) {
+                if (this.actor.hasCondition(ffCondition)) {
+                    shouldBeFlatfooted = true;
+                    break;
                 }
             }
-        } else {
-            // Try find existing condition, remove if possible
-            let conditionItem = this.actor.items.find(x => x.type === "feat" && x.data.data.requirements?.toLowerCase() === "condition" && x.name.toLowerCase() === condition.toLowerCase());
-            if (conditionItem) {
-                await this.actor.deleteEmbeddedDocuments("Item", [conditionItem.id]);
-            }
-        }
 
-        if (["blinded", "cowering", "offkilter", "pinned", "stunned"].includes(condition)) {
-            const flatfooted = $('.condition.flatfooted');
-            const ffIsChecked = flatfooted.is(':checked');
-            flatfooted.prop("checked", !ffIsChecked).change();
-        }
-        
-        const tokens = this.actor.getActiveTokens(true);
-        for (const token of tokens) {
-            token.toggleEffect(CONFIG.SFRPG.statusEffectIconMapping[condition], {active: active});
-        }
+            if (shouldBeFlatfooted != this.actor.hasCondition("flat-footed")) {
+                // This will trigger another sheet reload as the other condition gets created or deleted a moment later.
+                const flatfooted = $('.condition.flat-footed');
+                flatfooted.prop("checked", shouldBeFlatfooted).change();
+            }
+        });
     }
 
     /**
