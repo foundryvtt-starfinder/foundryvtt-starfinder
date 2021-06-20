@@ -6,7 +6,9 @@ The Starfinder system has a couple of its own hooks available for module/macro d
 
 ### onActorSetCondition
 Name: onActorSetCondition
+
 Called when: Whenever the conditions on an actor are set or removed.
+
 Arguments: Object with four keys: actor, item, conditionName, enabled.
 * actor: The actor who is getting the condition set.
 * item: The condition item that was created or destroyed.
@@ -24,7 +26,9 @@ Hooks.on("onActorSetCondition", ({actor, item, conditionName, enabled}) => {
 
 ### attackRolled
 Name: attackRolled
+
 Called when: Whenever an attack is rolled, either from the inventory, a chat card, a macro, or any other way of rolling attacks from a given actor and its items.
+
 Arguments: Object with five keys: actor, item, roll, formula, rollMetadata.
 * actor: The actor who is rolling the attack.
 * item: The item that is used in the attack, may be null.
@@ -41,7 +45,9 @@ Hooks.on("attackRolled", ({actor, item, roll, formula, rollMetadata}) => {
 
 ### damageRolled
 Name: damageRolled
+
 Called when: Whenever damage is rolled, either from the inventory, a chat card, a macro, or any other way of rolling damage from a given actor and its items.
+
 Arguments: Object with five keys: actor, item, roll, isCritical, formula, rollMetadata.
 * actor: The actor who is rolling the damage.
 * item: The item that is used in the damage, may be null.
@@ -77,7 +83,9 @@ Combat Event Data is an object with a series of keys:
 
 ### onBeginCombat
 Name: onBeginCombat
+
 Called when: When a combat is began, i.e. right after the GM presses "Begin Combat" in the encounter tracker.
+
 Arguments: Combat Hook Event Data
 
 Example usage:
@@ -89,7 +97,9 @@ Hooks.on("onBeginCombat", (combatEventData) => {
 
 ### onBeforeUpdateCombat
 Name: onBeforeUpdateCombat
+
 Called when: When a combat encounter is about to be updated, for example when "End Turn" is clicked.
+
 Arguments: Combat Hook Event Data
 
 Example usage:
@@ -101,7 +111,9 @@ Hooks.on("onBeforeUpdateCombat", (combatEventData) => {
 
 ### onAfterUpdateCombat
 Name: onAfterUpdateCombat
+
 Called when: Right after a combat has been updated, for example when "End Turn" is clicked.
+
 Arguments: Combat Hook Event Data
 
 Example usage:
@@ -113,7 +125,9 @@ Hooks.on("onAfterUpdateCombat", (combatEventData) => {
 
 ### onBeforeCombatEnd
 Name: onBeforeCombatEnd
+
 Called when: Right before a combat ends.
+
 Arguments: Combat object
 
 Example usage:
