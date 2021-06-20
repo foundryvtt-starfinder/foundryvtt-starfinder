@@ -569,7 +569,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         this.actor.setCondition(conditionName, target[0].checked).then(() => {
 
-            const flatfootedConditions = ["blinded", "cowering", "offkilter", "pinned", "stunned"];
+            const flatfootedConditions = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
             let shouldBeFlatfooted = (conditionName === "flat-footed" && target[0].checked);
             for (const ffCondition of flatfootedConditions) {
                 if (this.actor.hasCondition(ffCondition)) {
