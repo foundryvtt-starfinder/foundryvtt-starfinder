@@ -194,6 +194,7 @@ SFRPG.ammunitionTypes = {
     "arrow": "SFRPG.Items.Ammunition.Type.Arrows",
     "dart": "SFRPG.Items.Ammunition.Type.Darts",
     "fuel": "SFRPG.Items.Ammunition.Type.Fuel",
+    "missile": "SFRPG.Items.Ammunition.Type.Missiles",
     "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
     "shell": "SFRPG.Items.Ammunition.Type.Shells",
     "flare": "SFRPG.Items.Ammunition.Type.Flares"
