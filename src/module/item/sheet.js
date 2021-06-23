@@ -32,6 +32,8 @@ export class ItemSheetSFRPG extends ItemSheet {
          * @type {number}
          */
         this._scrollTab = 100;
+
+        this._tooltips = null;
     }
 
     /* -------------------------------------------- */
@@ -742,8 +744,9 @@ export class ItemSheetSFRPG extends ItemSheet {
     async _render(...args) {
         await super._render(...args);
 
-        if (this.rendered) {
-            tippy('[data-tippy-content]', {
+        if (this._tooltips === null) {
+            this._tooltips = tippy.delegate(`#${this.id}`, {
+                target: '[data-tippy-content]',
                 allowHTML: true,
                 arrow: false,
                 placement: 'top-start',
@@ -751,5 +754,17 @@ export class ItemSheetSFRPG extends ItemSheet {
                 delay: [800, null]
             });
         }
+    }
+
+    async close(...args) {
+        if (this._tooltips !== null) {
+            for (const tooltip of this._tooltips) {
+                tooltip.destroy();
+            }
+
+            this._tooltips = null;
+        }
+
+        return super.close(...args);
     }
 }

@@ -1,4 +1,5 @@
 import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "../modifiers/types.js";
+import { globalStore } from "../tippy-config.js";
 
 /**
  * Application that is used to edit a dynamic modifier.
@@ -14,6 +15,7 @@ export default class SFRPGModifierApplication extends FormApplication {
 
         this.actor = target;
         this.owningActor = owningActor;
+        this._tooltips = null;
     }
 
     static get defaultOptions() {
@@ -175,13 +177,28 @@ export default class SFRPGModifierApplication extends FormApplication {
                 break;
         }
 
-        tippy('[data-tippy-content]', {
-            allowHTML: true,
-            arrow: false,
-            placement: 'top-start',
-            duration: [500, null],
-            delay: [800, null]
-        });
+        if (this._tooltips === null) {
+            this._tooltips = tippy.delegate(`#${this.id}`, {
+                target: '[data-tippy-content]',
+                allowHTML: true,
+                arrow: false,
+                placement: 'top-start',
+                duration: [500, null],
+                delay: [800, null]
+            });
+        }
+    }
+
+    async close(...args) {
+        if (this._tooltips !== null) {
+            for (const tooltip of this._tooltips) {
+                tooltip.destroy();
+            }
+
+            this._tooltips = null;
+        }
+
+        return super.close(...args);
     }
 
     /**

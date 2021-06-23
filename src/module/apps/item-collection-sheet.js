@@ -2,6 +2,7 @@ import { ItemDeletionDialog } from "./item-deletion-dialog.js"
 import { ItemSFRPG } from "../item/item.js"
 import { ItemSheetSFRPG } from "../item/sheet.js"
 import { RPC } from "../rpc.js"
+import { globalStore } from "../tippy-config.js";
 
 export class ItemCollectionSheet extends DocumentSheet {
     constructor(itemCollection) {
@@ -12,6 +13,8 @@ export class ItemCollectionSheet extends DocumentSheet {
         Hooks.on("updateToken", this.updateCallback);
         this.deleteCallback = (scene, token, options, userId) => this._handleTokenDelete(scene, token, options, userId);
         Hooks.on("deleteToken", this.deleteCallback);
+
+        this._tooltips = null;
     }
 
     static get defaultOptions() {
@@ -34,7 +37,16 @@ export class ItemCollectionSheet extends DocumentSheet {
         delete this.document.apps[this.appId];
         Hooks.off("updateToken", this.updateCallback);
         Hooks.off("deleteToken", this.deleteCallback);
-        super.close(options);
+
+        if (this._tooltips !== null) {
+            for (const tooltip of this._tooltips) {
+                tooltip.destroy();
+            }
+
+            this._tooltips = null;
+        }
+
+        return super.close(options);
     }
 
     _handleTokenUpdated(scene, token, options, userId) {
@@ -126,13 +138,16 @@ export class ItemCollectionSheet extends DocumentSheet {
     async _render(...args) {
         await super._render(...args);
 
-        tippy('[data-tippy-content]', {
-            allowHTML: true,
-            arrow: false,
-            placement: 'top-start',
-            duration: [500, null],
-            delay: [800, null]
-        });
+        if (this._tooltips === null) {
+            this._tooltips = tippy.delegate(`#${this.id}`, {
+                target: '[data-tippy-content]',
+                allowHTML: true,
+                arrow: false,
+                placement: 'top-start',
+                duration: [500, null],
+                delay: [800, null]
+            });
+        }
     }
 
     processItemContainment(items, pushItemFn) {
@@ -199,16 +214,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
             div.append(props);
             li.append(div.hide());
-            div.slideDown(200, function() {
-                // On completion enable tippy tooltips for the new elements
-                tippy('[data-tippy-content]', {
-                    allowHTML: true,
-                    arrow: false,
-                    placement: 'top-start',
-                    duration: [500, null],
-                    delay: [800, null]
-                });
-            });
+            div.slideDown(200, function() { /* noop */ });
         }
         li.toggleClass('expanded');
     }

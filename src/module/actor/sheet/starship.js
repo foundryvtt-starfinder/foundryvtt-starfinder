@@ -493,21 +493,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
        return duplicate(itemData);
    }
 
-    async _render(...args) {
-        await super._render(...args);
-
-        if (this.rendered) {
-            tippy('[data-tippy-content]', {
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null],
-                maxWidth: 600
-            });
-        }
-    }
-
     /**
      * Handles drop events for the Crew list
      * 
