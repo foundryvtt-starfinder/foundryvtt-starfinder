@@ -1,5 +1,4 @@
 import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "../modifiers/types.js";
-import { globalStore } from "../tippy-config.js";
 
 /**
  * Application that is used to edit a dynamic modifier.

@@ -2,7 +2,6 @@ import { ItemDeletionDialog } from "./item-deletion-dialog.js"
 import { ItemSFRPG } from "../item/item.js"
 import { ItemSheetSFRPG } from "../item/sheet.js"
 import { RPC } from "../rpc.js"
-import { globalStore } from "../tippy-config.js";
 
 export class ItemCollectionSheet extends DocumentSheet {
     constructor(itemCollection) {
