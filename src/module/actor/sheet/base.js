@@ -8,7 +8,6 @@ import { RPC } from "../../rpc.js"
 import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js"
 import { InputDialog } from "../../apps/input-dialog.js"
 import { SFRPG } from "../../config.js";
-import { globalStore } from "../../tippy-config.js";
 
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
