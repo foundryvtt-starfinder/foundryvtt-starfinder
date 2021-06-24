@@ -79,7 +79,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const placeholders = item.data.flags.placeholders;
         if (placeholders.savingThrow.value !== newSavingThrowScore.total) {
             placeholders.savingThrow.value = newSavingThrowScore.total;
-            await new Promise(resolve => setTimeout(resolve, 50));
+            await new Promise(resolve => setTimeout(resolve, 500));
             this.render(false, {editable: this.options.editable});
         }
     }
@@ -137,7 +137,9 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.savingThrow.value = data.placeholders.savingThrow.value || 10;
                 
                 this.item.data.flags.placeholders = data.placeholders;
-                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula).then((total) => { this.onPlaceholderUpdated(this.item, total); });
+                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
+                    .then((total) => this.onPlaceholderUpdated(this.item, total))
+                    .catch((reason) => console.log(reason));
             } else {
                 const itemLevel = this.parseNumber(itemData.level, 1);
                 const sizeModifier = 0;
@@ -154,7 +156,9 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.savingThrow.value = data.placeholders.savingThrow.value || 10;
                 
                 this.item.data.flags.placeholders = data.placeholders;
-                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula).then((total) => { this.onPlaceholderUpdated(this.item, total); });
+                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
+                    .then((total) => this.onPlaceholderUpdated(this.item, total))
+                    .catch((reason) => console.log(reason));
             }
         }
 
@@ -199,6 +203,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const saveRoll = new Roll(formula, rollData);
             return saveRoll.evaluate({async: true});
         } catch (err) {
+            console.log(err);
             return null;
         }
     }
