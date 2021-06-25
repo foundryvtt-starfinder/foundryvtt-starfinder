@@ -305,12 +305,13 @@ export class DiceSFRPG {
         return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
             if (button === 'cancel') {
                 if (onClose) {
-                    onClose(null, null, null);
+                    onClose(null, null, null, false);
                 }
                 return null;
             }
 
-            if (button === "Critical") {
+            const isCritical = (button === "Critical");
+            if (isCritical) {
                 finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                 
@@ -435,7 +436,7 @@ export class DiceSFRPG {
             }
 
             if (onClose) {
-                onClose(roll, formula, finalFormula);
+                onClose(roll, formula, finalFormula, isCritical);
             }
 
             if (errorToThrow) {
@@ -895,6 +896,9 @@ class RollDialog extends Dialog
         this.additionalBonus = "";
         this.rollMode = game.settings.get("core", "rollMode");
         this.rolledButton = null;
+
+        // tooltips
+        this._tooltips = null;
     }
 
     get template() {
@@ -904,13 +908,16 @@ class RollDialog extends Dialog
     async _render(...args) {
         await super._render(...args);
 
-        tippy('[data-tippy-content]', {
-            allowHTML: true,
-            arrow: false,
-            placement: 'top-start',
-            duration: [500, null],
-            delay: [800, null]
-        });
+        if (this._tooltips === null) {
+            this._tooltips = tippy.delegate(`#${this.id}`, {
+                target: '[data-tippy-content]',
+                allowHTML: true,
+                arrow: false,
+                placement: 'top-start',
+                duration: [500, null],
+                delay: [800, null]
+            });
+        }        
     }
 
     getData() {
@@ -1009,6 +1016,14 @@ class RollDialog extends Dialog
         if (this.data.close) {
             this.data.close(this.rolledButton, this.rollMode, this.additionalBonus);
             delete this.data.close;
+        }
+
+        if (this._tooltips !== null) {
+            for (const tooltip of this._tooltips) {
+                tooltip.destroy();
+            }
+
+            this._tooltips = null;
         }
 
         return super.close(options);

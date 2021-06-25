@@ -2,6 +2,7 @@ import { ItemBrowserSFRPG } from './item-browser.js';
 import { SFRPG } from "../config.js"
 
 const equipmentTypes = {
+    "ammunition"   : "SFRPG.Items.Categories.Ammunition",
     "augmentation" : "SFRPG.Items.Categories.Augmentations",
     "consumable"   : "SFRPG.Items.Categories.Consumables",
     "container"    : "SFRPG.Items.Categories.Containers",

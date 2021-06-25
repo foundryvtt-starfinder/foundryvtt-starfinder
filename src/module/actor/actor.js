@@ -1,3 +1,4 @@
+import { SFRPG } from "../config.js"
 import { DiceSFRPG, RollContext } from "../dice.js";
 import { ChoiceDialog } from "../apps/choice-dialog.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
@@ -13,7 +14,6 @@ import { getItemContainer } from "./actor-inventory.js"
 import { } from "./crew-update.js"
 import { ItemSheetSFRPG } from "../item/sheet.js";
 import { ItemSFRPG } from "../item/item.js";
-import { ActorSheetSFRPG } from "./sheet/base.js";
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
@@ -347,7 +347,7 @@ export class ActorSFRPG extends Actor {
                 case "upgrade":
                     {
                         if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item.id);
+                            const container = getItemContainer(this.data.items, item);
                             if (container && container.type === "equipment" && container.data.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
@@ -360,7 +360,7 @@ export class ActorSFRPG extends Actor {
                 case "weaponAccessory":
                     {
                         if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item.id);
+                            const container = getItemContainer(this.data.items, item);
                             if (container && container.type === "weapon" && container.data.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
@@ -1308,7 +1308,7 @@ export class ActorSFRPG extends Actor {
         if (actionEntry.data.effectCritical) {
             const critEffectDisplayState = game.settings.get("sfrpg", "starshipActionsCrit");
             if (critEffectDisplayState !== 'never') {
-                if (critEffectDisplayState === 'always' || rollResult.roll.results[0] === 20) {
+                if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
                     flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.data.effectCritical);
                     flavor += "</p>";
@@ -1480,6 +1480,74 @@ export class ActorSFRPG extends Actor {
                 rollContext.addContext("chiefMate", this, actorData.data.crew.npcData.chiefMate);
                 rollContext.addContext("magicOfficer", this, actorData.data.crew.npcData.magicOfficer);
                 rollContext.addContext("scienceOfficer", this, actorData.data.crew.npcData.scienceOfficer);
+            }
+        }
+    }
+
+    /** Conditions */
+    hasCondition(conditionName) {
+        if (!SFRPG.statusEffectIconMapping[conditionName]) {
+            ui.notifications.warn(`Trying to check condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
+            return false;
+        }
+
+        const conditionItem = this.getCondition(conditionName);
+        return (conditionItem !== undefined);
+    }
+
+    getCondition(conditionName) {
+        if (!SFRPG.statusEffectIconMapping[conditionName]) {
+            ui.notifications.warn(`Trying to get condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
+            return undefined;
+        }
+
+        const conditionItem = this.items.find(x => x.type === "feat" && x.data.data.requirements?.toLowerCase() === "condition" && x.name.toLowerCase() === conditionName.toLowerCase());
+        return conditionItem;
+    }
+
+    async setCondition(conditionName, enabled) {
+        if (!SFRPG.statusEffectIconMapping[conditionName]) {
+            ui.notifications.warn(`Trying to set condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
+            return;
+        }
+
+        const conditionItem = this.getCondition(conditionName);
+
+        // Reflect state on tokens
+        const tokens = this.getActiveTokens(true);
+        for (const token of tokens) {
+            await token.toggleEffect(SFRPG.statusEffectIconMapping[conditionName], {active: enabled});
+        }
+
+        // Update condition item
+        if (enabled) {
+            if (!conditionItem) {
+                const compendium = game.packs.find(element => element.title.includes("Conditions"));
+                if (compendium) {
+                    await compendium.getIndex();
+
+                    const entry = compendium.index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
+                    if (entry) {
+                        const entity = await compendium.getDocument(entry._id);
+                        const itemData = duplicate(entity.data);
+
+                        const promise = this.createEmbeddedDocuments("Item", [itemData]);
+                        promise.then((createdItems) => {
+                            if (createdItems && createdItems.length > 0) {
+                                Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName: conditionName, enabled: enabled});
+                            }
+                        });
+                        return promise;
+                    }
+                }
+            }
+        } else {
+            if (conditionItem) {
+                const promise = this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
+                promise.then(() => {
+                    Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
+                });
+                return promise;
             }
         }
     }

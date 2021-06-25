@@ -2,6 +2,7 @@ import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
 import { value_equals } from "../utils/value_equals.js";
+import { generateUUID } from "../../module/utilities.js";
 
 export function initializeRemoteInventory() {
     RPC.registerCallback("createItemCollection", "gm", onCreateItemCollection);
@@ -130,7 +131,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 
     if (sourceActor.actor === targetActor.actor) {
         if (quantity < itemQuantity) {
-            await sourceActor.updateItem(itemToMove._id, {"data.quantity": itemQuantity - quantity});
+            await sourceActor.updateItem(itemToMove.id, {"quantity": itemQuantity - quantity});
 
             let newItemData = duplicate(itemToMove.data);
             delete newItemData.id;
@@ -153,12 +154,12 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             } else if (canMerge(targetItem, itemToMove)) {
                 // Merging will destroy the old item, so we return the targetItem here.
                 const targetItemNewQuantity = Number(targetItem.data.data.quantity) + Number(quantity);
-                await targetActor.updateItem(targetItem._id, {'data.quantity': targetItemNewQuantity});
+                await targetActor.updateItem(targetItem.id, {'quantity': targetItemNewQuantity});
 
                 if (quantity >= itemQuantity) {
-                    await sourceActor.deleteItem(itemToMove._id);
+                    await sourceActor.deleteItem(itemToMove.id);
                 } else {
-                    await sourceActor.updateItem(itemToMove._id, {'data.quantity': itemQuantity - quantity});
+                    await sourceActor.updateItem(itemToMove.id, {'quantity': itemQuantity - quantity});
                 }
 
                 return targetItem;
@@ -355,12 +356,12 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
 /**
  * Changes the item's container on an actor.
  * 
- * @param {ActorItemHelper} actor 
+ * @param {ActorItemHelper} actorItemHelper 
  * @param {Item} item 
  * @param {Item} container 
  */
-export async function setItemContainer(actor, item, container) {
-    return await moveItemBetweenActorsAsync(actor, item, actor, container);
+export async function setItemContainer(actorItemHelper, item, container, quantity = null) {
+    return await moveItemBetweenActorsAsync(actorItemHelper, item, actorItemHelper, container, quantity);
 }
 
 /**
@@ -409,7 +410,19 @@ export function computeCompoundBulkForItem(item, contents) {
         }
 
         if (item.data.quantity && !Number.isNaN(Number.parseInt(item.data.quantity))) {
-            personalBulk *= item.data.quantity;
+            // Compute number of packs based on quantityPerPack, provided quantityPerPack is set to a value.
+            let packs = 1;
+            if (item.data.quantityPerPack === null || item.data.quantityPerPack === undefined) {
+                packs = item.data.quantity;
+            } else {
+                if (item.data.quantityPerPack <= 0) {
+                    packs = 0;
+                } else {
+                    packs = Math.floor(item.data.quantity / item.data.quantityPerPack);
+                }
+            }
+
+            personalBulk *= packs;
         }
 
         if (item.data.equipped) {
@@ -436,18 +449,25 @@ export function containsItems(item) {
 /**
  * Returns an array of child items for a given item on an actor.
  * 
- * @param {Actor} actor Actor for whom's items to test.
+ * @param {Actor} actorItemHelper ActorItemHelper for whom's items to test.
  * @param {Item} item Item to get the children of.
  * @returns {Array} An array of child items.
  */
-export function getChildItems(actor, item) {
-    if (!actor) return [];
+export function getChildItems(actorItemHelper, item) {
+    if (!actorItemHelper) return [];
     if (!containsItems(item)) return [];
-    return actor.filterItems(x => item.data.data.container.contents.find(y => y.id === x.id));
+    return actorItemHelper.filterItems(x => item.data.data.container.contents.find(y => y.id === x.id));
 }
 
-export function getItemContainer(items, itemId) {
-    return items.find(x => x.data.container?.contents?.find(y => y.id === itemId) !== undefined);
+/**
+ * Returns the containing item for a given item.
+ * 
+ * @param {Array} items Array of items to test, typically actor.items.
+ * @param {Item} item Item to find the parent of.
+ * @returns {Item} The parent item of the item, or null if not contained.
+ */
+export function getItemContainer(items, item) {
+    return items.find(x => x.data.data.container?.contents?.find(y => y.id === item.id) !== undefined);
 }
 
 /**
@@ -699,10 +719,14 @@ async function onItemDraggedToCollection(message) {
         }
     }
 
+    for (const item of newItems) {
+        item._id = generateUUID();
+    }
+
     if (newItems.length > 0) {
         if (targetContainer && targetContainer.data.container?.contents) {
-            for (let newItem of newItems) {
-                let preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, newItem) || 0;
+            for (const newItem of newItems) {
+                const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, newItem) || 0;
                 targetContainer.data.container.contents.push({id: newItem._id, index: preferredStorageIndex});
             }
         }
@@ -760,7 +784,10 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     }
 
     // If effects are serialized (0.8) remove them now
+    const oldIds = [];
     for (const item of data.draggedItems) {
+        oldIds.push(item._id);
+        item._id = null;
         item.effects = [];
     }
 
@@ -768,6 +795,7 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     for (let i = 0; i<createdItems.length; i++) {
         const newItem = createdItems[i];
         const originalItem = data.draggedItems[i];
+        originalItem._id = oldIds[i];
 
         itemToItemMapping[originalItem._id] = newItem;
         copiedItemIds.push(originalItem._id);
@@ -950,7 +978,7 @@ export class ActorItemHelper {
         const container = this.actor.items.find(x => x.data.data?.container?.contents?.find(y => y.id === itemId) !== undefined);
         if (container) {
             const newContents = container.data.data.container.contents.filter(x => x.id !== itemId);
-            promises.push(this.actor.updateEmbeddedDocuments("Item", [{"_id": container._id, "data.container.contents": newContents}]));
+            promises.push(this.actor.updateEmbeddedDocuments("Item", [{"_id": container.id, "data.container.contents": newContents}]));
         }
 
         promises.push(this.actor.deleteEmbeddedDocuments("Item", itemIdsToDelete, {}));
@@ -1090,6 +1118,22 @@ export class ActorItemHelper {
                 //console.log([`Actor ${this.actor.name} has deleted item(s) for ${item.name}`, item, itemData.container.contents, newContents]);
                 itemData.container.contents = newContents;
                 isDirty = true;
+            }
+
+            // Test for ammunition slots
+            if (item.type === "weapon" && itemData.capacity && itemData.capacity.max > 0) {
+                const ammunitionStorageSlot = itemData.container.storage.find(x => x.acceptsType.includes("ammunition"));
+                if (!ammunitionStorageSlot) {
+                    itemData.container.storage.push({
+                        type: "slot",
+                        subtype: "ammunitionSlot",
+                        amount: 1,
+                        acceptsType: ["ammunition"],
+                        affectsEncumbrance: true,
+                        weightProperty: ""
+                    });
+                    isDirty = true;
+                }
             }
 
             if (isDirty) {

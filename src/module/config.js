@@ -186,6 +186,20 @@ SFRPG.weaponDamageTypes = {
     "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic",
 };
 
+SFRPG.ammunitionTypes = {
+    "charge": "SFRPG.Items.Ammunition.Type.Charges",
+    "roundS": "SFRPG.Items.Ammunition.Type.SmallArmRounds",
+    "roundL": "SFRPG.Items.Ammunition.Type.LongarmAndSniperRounds",
+    "roundH": "SFRPG.Items.Ammunition.Type.HeavyRounds",
+    "arrow": "SFRPG.Items.Ammunition.Type.Arrows",
+    "dart": "SFRPG.Items.Ammunition.Type.Darts",
+    "fuel": "SFRPG.Items.Ammunition.Type.Fuel",
+    "missile": "SFRPG.Items.Ammunition.Type.Missiles",
+    "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
+    "shell": "SFRPG.Items.Ammunition.Type.Shells",
+    "flare": "SFRPG.Items.Ammunition.Type.Flares"
+};
+
 SFRPG.distanceUnits = {
     "none": "SFRPG.None",
     "personal": "SFRPG.Personal",
@@ -1340,6 +1354,7 @@ SFRPG.itemTypes = {
 
 SFRPG.containableTypes = {
     "weapon"       : "SFRPG.Items.Categories.Weapons",
+    "ammunition"   : "SFRPG.Items.Categories.Ammunition",
     "equipment"    : "SFRPG.Items.Categories.Equipment",
     "consumable"   : "SFRPG.Items.Categories.Consumables",
     "goods"        : "SFRPG.Items.Categories.Goods",

@@ -17,23 +17,25 @@
             </dl>
         </div>
         <button class="clear-filters">{{localize "SFRPG.Browsers.ItemBrowser.BrowserClearFilters"}}</button>
-        {{#each filters as |filter filterKey|}}
-        <div class="filtercontainer" id="classfilter">
-            <h3>{{filter.label}}</h3>
-            <dl>
-                {{#each filter.content as |content key|}}
-                <label>
-                    <dt>
-                        <input type="checkbox" name="{{filterKey}}-{{key}}" />
-                    </dt>
-                    <dd>
-                        {{localize content}}
-                    </dd>
-                </label>
-                {{/each}}
-            </dl>
+        <div class="item-browser-filters">
+            {{#each filters as |filter filterKey|}}
+            <div class="filtercontainer" id="classfilter">
+                <h3>{{filter.label}}</h3>
+                <dl>
+                    {{#each filter.content as |content key|}}
+                    <label>
+                        <dt>
+                            <input type="checkbox" name="{{filterKey}}-{{key}}" />
+                        </dt>
+                        <dd>
+                            {{localize content}}
+                        </dd>
+                    </label>
+                    {{/each}}
+                </dl>
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
     </div>
     <div class="content flexcol">
         <div class="header flexrow">

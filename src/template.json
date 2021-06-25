@@ -1075,6 +1075,7 @@
             "vehicleAttack",
             "vehicleSystem",
 
+            "ammunition",
             "augmentation",
             "consumable",
             "container",
@@ -1114,6 +1115,7 @@
                 "quantity": 1,
                 "bulk": "L",
                 "price": 0,
+                "quantityPerPack": 1,
                 "level": 1,
                 "attuned": false,
                 "equipped": false,
@@ -1192,6 +1194,7 @@
                 "descriptors": []
             },
             "itemUsage": {
+                "ammunitionType": "",
                 "capacity": {
                     "value": 0,
                     "max": 0
@@ -1435,6 +1438,15 @@
             "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers"],
             "slots": 1,
             "armorType": "any"
+        },
+        "ammunition": {
+            "templates": ["itemDescription", "physicalItem"],
+            "ammunitionType": "",
+            "useCapacity": false,
+            "capacity": {
+                "max": 0,
+                "value": 0
+            }
         },
         "augmentation": {
             "templates": ["itemDescription", "physicalItem", "modifiers"],

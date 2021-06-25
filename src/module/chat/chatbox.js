@@ -3,16 +3,6 @@
  */
 export default class SFRPGCustomChatMessage {
 
-    static getAmmoLeft(itemData) {
-        if (itemData.data.capacity.value > 0) {
-            const usage = itemData.data.usage?.value || 1;
-            const finalAmmo = itemData.data.capacity.value - usage;
-            return (finalAmmo >= 0) ? finalAmmo : 0;
-        }
-
-        return null;
-    }
-
     static getToken(actor) {
         if (actor.token) {
             return `${actor.token.parent.id}.${actor.token.id}`;
@@ -62,13 +52,13 @@ export default class SFRPGCustomChatMessage {
 
         /** Set up variables */
         const hasCapacity = item.hasCapacity();
-        const ammoLeft = hasCapacity ? this.getAmmoLeft(item.data) : null;
+        const currentCapacity = item.getCurrentCapacity();
         const options = {
             item: item,
             hasDamage: item.hasDamage || false,
             hasSave: item.hasSave || false,
             hasCapacity: hasCapacity,
-            ammoLeft: ammoLeft,
+            ammoLeft: currentCapacity,
             title: data.title ? data.title : 'Roll',
             rawTitle: data.speaker.alias,
             dataRoll: roll,
