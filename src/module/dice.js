@@ -119,15 +119,15 @@ export class DiceSFRPG {
                     const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
             
                     if(chatMessage){
-						ChatMessage.create({
-							flavor: title,
-							speaker: speaker,
-							content: explainedRollContent,
-							rollMode: rollMode,
-							roll: roll,
-							type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-							sound: CONFIG.sounds.dice
-						});
+                        ChatMessage.create({
+                            flavor: title,
+                            speaker: speaker,
+                            content: explainedRollContent,
+                            rollMode: rollMode,
+                            roll: roll,
+                            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                            sound: CONFIG.sounds.dice
+                        });
                     }
                 });
             }
@@ -427,15 +427,15 @@ export class DiceSFRPG {
                     const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
             
                     if(chatMessage){
-						ChatMessage.create({
-							flavor: flavor,
-							speaker: speaker,
-							content: explainedRollContent + tagContent,
-							rollMode: rollMode,
-							roll: roll,
-							type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-							sound: CONFIG.sounds.dice
-						});
+                        ChatMessage.create({
+                            flavor: flavor,
+                            speaker: speaker,
+                            content: explainedRollContent + tagContent,
+                            rollMode: rollMode,
+                            roll: roll,
+                            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                            sound: CONFIG.sounds.dice
+                        });
                     }
                 });
             }
