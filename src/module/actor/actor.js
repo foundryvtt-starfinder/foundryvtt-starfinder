@@ -547,8 +547,8 @@ export class ActorSFRPG extends Actor {
             title:  `Ability Check - ${label}`,
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
-			chatMessage: options.chatMessage,
-			onClose: options.onClose,									
+            chatMessage: options.chatMessage,
+            onClose: options.onClose,									
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -584,8 +584,8 @@ export class ActorSFRPG extends Actor {
             title: `Save - ${label}`,
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
-			chatMessage: options.chatMessage,
-			onClose: options.onClose,							
+            chatMessage: options.chatMessage,
+            onClose: options.onClose,							
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -612,8 +612,8 @@ export class ActorSFRPG extends Actor {
             title: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
-			chatMessage: options.chatMessage,
-			onClose: options.onClose,									
+            chatMessage: options.chatMessage,
+            onClose: options.onClose,									
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -670,8 +670,8 @@ export class ActorSFRPG extends Actor {
             title: `Skill Check - ${CONFIG.SFRPG.skills["pil"]}`,
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
-			chatMessage: options.chatMessage,
-			onClose: options.onClose,									
+            chatMessage: options.chatMessage,
+            onClose: options.onClose,									
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null

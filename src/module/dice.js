@@ -90,8 +90,8 @@ export class DiceSFRPG {
                     content: flavor
                 };
 				
-				if(chatMessage)
-					ChatMessage.create(chatData, { chatBubble: true });
+                if(chatMessage)
+                    ChatMessage.create(chatData, { chatBubble: true });
             }
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
@@ -118,7 +118,7 @@ export class DiceSFRPG {
                     const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
                     const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
             
-					if(chatMessage){
+                    if(chatMessage){
 						ChatMessage.create({
 							flavor: title,
 							speaker: speaker,
@@ -128,7 +128,7 @@ export class DiceSFRPG {
 							type: CONST.CHAT_MESSAGE_TYPES.ROLL,
 							sound: CONFIG.sounds.dice
 						});
-					}
+                    }
                 });
             }
 
@@ -426,7 +426,7 @@ export class DiceSFRPG {
                     const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
                     const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
             
-					if(chatMessage){
+                    if(chatMessage){
 						ChatMessage.create({
 							flavor: flavor,
 							speaker: speaker,
@@ -436,7 +436,7 @@ export class DiceSFRPG {
 							type: CONST.CHAT_MESSAGE_TYPES.ROLL,
 							sound: CONFIG.sounds.dice
 						});
-					}
+                    }
                 });
             }
 
