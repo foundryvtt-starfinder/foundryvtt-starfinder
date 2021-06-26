@@ -1133,7 +1133,7 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
             rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-			chatMessage: options.chatMessage,						
+            chatMessage: options.chatMessage,
             dialogOptions: {
                 width: 400,
                 top: event ? event.clientY - 80 : null,
@@ -1202,7 +1202,7 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
             ChatMessage.create({
                 flavor: itemData.chatFlavor || title,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-				chatMessage: options.chatMessage,					 
+                chatMessage: options.chatMessage,
                 content: explainedRollContent,
                 rollMode: game.settings.get("core", "rollMode"),
                 roll: rollResult.roll,
