@@ -1552,3 +1552,11 @@ export class ActorSFRPG extends Actor {
         }
     }
 }
+
+Hooks.on("afterClosureProcessed", (closureName, fact) => {
+    if (closureName == "process-actors") {
+        for (const item of fact.actor.items) {
+            item.processData();
+        }
+    }
+});

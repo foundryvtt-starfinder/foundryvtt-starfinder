@@ -40,7 +40,13 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
      * @type {boolean}
      */
     get hasSave() {
-        return !!(this.data.data.save && this.data.data.save.type);
+        const saveData = this.data?.data?.save;
+        if (!saveData) {
+            return false;
+        }
+
+        const hasType = !!saveData.type;
+        return hasType;
     }
 
     /* -------------------------------------------- */
@@ -114,11 +120,6 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
 
         // Item Actions
         if (data.hasOwnProperty("actionType")) {
-
-            // Save DC
-            let save = data.save || {};
-            labels.save = this._getSaveLabel(save, actorData, data);
-
             // Damage
             let dam = data.damage || {};
             if (dam.parts) labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
@@ -128,52 +129,17 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
         this.labels = labels;
     }
 
-    _getSaveLabel(save, actorData, itemData) {
-        if (!save?.type) return "";
-        
-        let dcFormula = save.dc?.toString();
-        if (!dcFormula) {
-            const ownerKeyAbilityId = this.actor?.data?.data?.attributes.keyability;
-            const itemKeyAbilityId = this.data.data.ability;
-            const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
-            if (abilityKey) {
-                if (this.data.type === "spell") {
-                    dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
-                } else if (this.data.type === "feat") {
-                    dcFormula = `10 + @owner.details.level.value + @owner.abilities.${abilityKey}.mod`;
-                } else {
-                    dcFormula = `10 + floor(@item.level / 2) + @owner.abilities.${abilityKey}.mod`;
-                }
+    processData() {
+        game.sfrpg.engine.process("process-items", {
+            item: this,
+            itemData: this.data,
+            owner: {
+                actor: this.actor,
+                actorData: this.actor?.data?.data,
+                token: this.actor?.token,
+                scene: this.actor?.token?.parent
             }
-            
-            if (!dcFormula) {
-                return "";
-            }
-        }
-
-        const rollContext = new RollContext();
-        rollContext.addContext("item", this, itemData);
-        rollContext.setMainContext("item");
-        if (this.actor && this.actor.data) {
-            rollContext.addContext("owner", this.actor);
-            rollContext.setMainContext("owner");
-        }
-
-        this.actor?.setupRollContexts(rollContext);
-    
-        const rollPromise = DiceSFRPG.createRoll({
-            rollContext: rollContext,
-            rollFormula: dcFormula,
-            mainDie: 'd0',
-            dialogOptions: { skipUI: true }
         });
-
-        rollPromise.then(rollResult => {
-            const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
-            this.labels.save = returnValue;
-        });
-
-        return 10;
     }
 
     /**
@@ -247,7 +213,6 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
     getChatData(htmlOptions) {
         const data = duplicate(this.data.data);
         const labels = this.labels;
-        labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Rich text description
         data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
@@ -512,11 +477,6 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
      * @private
      */
     _spellChatData(data, labels, props) {
-        const ad = this.actor.data.data;
-
-        // Spell saving throw text
-        const abl = ad.attributes.keyability || "int";
-        labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Spell properties
         props.push(
@@ -530,12 +490,6 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
      * Prepare chat card data for items of the "Feat" type
      */
     _featChatData(data, labels, props) {
-        const ad = this.actor.data.data;
-
-        // Spell saving throw text
-        const abl = data.ability || ad.attributes.keyability || "str";
-        labels.save = this._getSaveLabel(data.save, this.actor.data, data);
-
         // Feat properties
         props.push(
             {name: data.requirements, tooltip: null}
