@@ -1,3 +1,5 @@
+# Requiers python 3
+
 # Load the JSON module and use it to load your JSON file.                       
 # I'm assuming that the JSON file contains a list of objects.
 import os
