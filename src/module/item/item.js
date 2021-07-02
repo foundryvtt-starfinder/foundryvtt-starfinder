@@ -648,7 +648,7 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
 
         //Warn the user if there is no ammo left
         const usage = itemData.data.usage?.value || 0;
-        const availableCapacity = itemData.data.capacity?.value || 0;
+        const availableCapacity = this.getCurrentCapacity();
         if (availableCapacity < usage) {
             ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
         }
