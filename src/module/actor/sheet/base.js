@@ -24,6 +24,8 @@ export class ActorSheetSFRPG extends ActorSheet {
             spellbook: new Set(),
             features: new Set()
         };
+
+        this._tooltips = null;
     }
 
     static get defaultOptions() {
@@ -231,7 +233,36 @@ export class ActorSheetSFRPG extends ActorSheet {
         if (this.stopRendering) {
             return this;
         }
+        
         return super.render(force, options);
+    }
+
+    async _render(...args) {
+        await super._render(...args);
+
+        if (this._tooltips === null) {
+            this._tooltips = tippy.delegate(`#${this.id}`, {
+                target: '[data-tippy-content]',
+                allowHTML: true,
+                arrow: false,
+                placement: 'top-start',
+                duration: [500, null],
+                delay: [800, null],
+                maxWidth: 600
+            });
+        }
+    }
+
+    async close(...args) {
+        if (this._tooltips !== null) {
+            for (const tooltip of this._tooltips) {
+                tooltip.destroy();
+            }
+
+            this._tooltips = null;
+        }
+
+        return super.close(...args);
     }
 
     /** @override */
@@ -559,47 +590,31 @@ export class ActorSheetSFRPG extends ActorSheet {
      * 
      * @param {Event} event The triggering event.
      */
-    async _onToggleConditions(event) {
+    _onToggleConditions(event) {
         event.preventDefault();
 
         const target = $(event.currentTarget);
-        const condition = target.data('condition');
-        const active = target[0].checked;
 
-        if (active) {
-            // Try find existing condition, add from compendium if not found
-            let conditionItem = this.actor.items.find(x => x.type === "feat" && x.data.data.requirements?.toLowerCase() === "condition" && x.name.toLowerCase() === condition.toLowerCase());
-            if (!conditionItem) {
-                const compendium = game.packs.find(element => element.title.includes("Conditions"));
-                if (compendium) {
-                    // Let the compendium load
-                    await compendium.getIndex();
+        // Try find existing condition
+        const conditionName = target.data('condition');
 
-                    const entry = compendium.index.find(e => e.name.toLowerCase() === condition.toLowerCase());
-                    if (entry) {
-                        const entity = await compendium.getDocument(entry._id);
-                        await this.actor.createEmbeddedDocuments("Item", [entity.data]);
-                    }
+        this.actor.setCondition(conditionName, target[0].checked).then(() => {
+
+            const flatfootedConditions = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
+            let shouldBeFlatfooted = (conditionName === "flat-footed" && target[0].checked);
+            for (const ffCondition of flatfootedConditions) {
+                if (this.actor.hasCondition(ffCondition)) {
+                    shouldBeFlatfooted = true;
+                    break;
                 }
             }
-        } else {
-            // Try find existing condition, remove if possible
-            let conditionItem = this.actor.items.find(x => x.type === "feat" && x.data.data.requirements?.toLowerCase() === "condition" && x.name.toLowerCase() === condition.toLowerCase());
-            if (conditionItem) {
-                await this.actor.deleteEmbeddedDocuments("Item", [conditionItem.id]);
-            }
-        }
 
-        if (["blinded", "cowering", "offkilter", "pinned", "stunned"].includes(condition)) {
-            const flatfooted = $('.condition.flatfooted');
-            const ffIsChecked = flatfooted.is(':checked');
-            flatfooted.prop("checked", !ffIsChecked).change();
-        }
-        
-        const tokens = this.actor.getActiveTokens(true);
-        for (const token of tokens) {
-            token.toggleEffect(CONFIG.SFRPG.statusEffectIconMapping[condition], {active: active});
-        }
+            if (shouldBeFlatfooted != this.actor.hasCondition("flat-footed")) {
+                // This will trigger another sheet reload as the other condition gets created or deleted a moment later.
+                const flatfooted = $('.condition.flat-footed');
+                flatfooted.prop("checked", shouldBeFlatfooted).change();
+            }
+        });
     }
 
     /**
@@ -646,28 +661,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        // Render the chat card template
-        const templateData = {
-            actor: this.actor,
-            item: item,
-            tokenId: this.actor.token?.id,
-            action: "SFRPG.ChatCard.ItemActivation.Reloads",
-            cost: game.i18n.format("SFRPG.AbilityActivationTypesMove")
-        };
-
-        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
-        const html = await renderTemplate(template, templateData);
-
-        // Create the chat message
-        const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: html
-        };
-
-        await ChatMessage.create(chatData, { displaySheet: false });
-        
-        return item.update({'data.capacity.value': item.data.data.capacity.max});
+        return item.reload();
     }
 
     /**
@@ -725,16 +719,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             div.append(props);
             li.append(div.hide());
 
-            div.slideDown(200, function() {
-                // On completion enable tippy tooltips for the new elements
-                tippy('[data-tippy-content]', {
-                    allowHTML: true,
-                    arrow: false,
-                    placement: 'top-start',
-                    duration: [500, null],
-                    delay: [800, null]
-                });
-            });
+            div.slideDown(200, function() { /* noop */ });
         }
         li.toggleClass('expanded');
 

@@ -77,6 +77,8 @@ import calculateStarshipTargetLock      from './rules/actions/actor/starship/cal
 import calculateVehicleControlSkill from './rules/actions/actor/vehicle/calculate-vehicle-control-skill.js';
 import calculateVehicleHangar       from './rules/actions/actor/vehicle/calculate-vehicle-hangar.js';
 import calculateVehiclePassengers   from './rules/actions/actor/vehicle/calculate-vehicle-passengers.js';
+// Item rules
+import calculateSaveDC from './rules/actions/item/calculate-save-dc.js';
 
 export default function (engine) {
     console.log("Starfinder | [SETUP] Registering rules");
@@ -144,6 +146,8 @@ export default function (engine) {
     calculateVehicleControlSkill(engine);
     calculateVehicleHangar(engine);
     calculateVehiclePassengers(engine);
+    // Item actions
+    calculateSaveDC(engine);
 
     // Conditions
     always(engine);
@@ -262,6 +266,14 @@ export default function (engine) {
                         "identity"
                     ]
             }
+        ]
+    });
+
+    engine.add({
+        name: "process-items",
+        description: "Take all of the item data and process it.",
+        rules: [
+            "calculateSaveDC"
         ]
     });
 

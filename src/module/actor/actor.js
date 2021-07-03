@@ -1,3 +1,4 @@
+import { SFRPG } from "../config.js"
 import { DiceSFRPG, RollContext } from "../dice.js";
 import { ChoiceDialog } from "../apps/choice-dialog.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
@@ -346,7 +347,7 @@ export class ActorSFRPG extends Actor {
                 case "upgrade":
                     {
                         if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item.id);
+                            const container = getItemContainer(this.data.items, item);
                             if (container && container.type === "equipment" && container.data.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
@@ -359,7 +360,7 @@ export class ActorSFRPG extends Actor {
                 case "weaponAccessory":
                     {
                         if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item.id);
+                            const container = getItemContainer(this.data.items, item);
                             if (container && container.type === "weapon" && container.data.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
@@ -670,18 +671,26 @@ export class ActorSFRPG extends Actor {
         });
     }
 
-    static async applyDamage(roll, multiplier) {
-        const totalDamageDealt = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
+    /**
+     * A utility method used to apply damage to any selected tokens when an option
+     * is selected from a chat card context menu.
+     * 
+     * @param {JQuery} html The jQuery object representing the chat card.
+     * @param {Number} multiplier A number used to multiply the damage being applied
+     * @returns {Promise<any[]>} 
+     */
+    static async applyDamageFromContextMenu(html, multiplier) {
+        const totalDamageDealt = Math.floor(parseFloat(html.find('.dice-total').text()) * multiplier);
         const isHealing = (multiplier < 0);
         const promises = [];
         for (const controlledToken of canvas.tokens.controlled) {
             let promise = null;
             if (controlledToken.actor.data.type === "starship") {
-                promise = ActorSFRPG._applyStarshipDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
+                promise = ActorSFRPG._applyStarshipDamage(html, controlledToken.actor, totalDamageDealt, isHealing);
             } else if (controlledToken.actor.data.type === "vehicle") {
-                promise = ActorSFRPG._applyVehicleDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
+                promise = ActorSFRPG._applyVehicleDamage(html, controlledToken.actor, totalDamageDealt, isHealing);
             } else {
-                promise = ActorSFRPG._applyActorDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
+                promise = ActorSFRPG._applyActorDamage(html, controlledToken.actor, totalDamageDealt, isHealing);
             }
 
             if (promise) {
@@ -690,6 +699,36 @@ export class ActorSFRPG extends Actor {
         }
 
         return Promise.all(promises);
+    }
+
+    /**
+     * Applies damage to the Actor.
+     * 
+     * TODO: This isn't ready for mainstream use yet. The method signiture is probably gonna
+     * need to change, and the way it functions will most definetly change as well. So, I'm 
+     * basically putting this here as a stub that has some limited functionality until I can
+     * get some other changes in place to allow this to work the way most people would expect
+     * it to work. So, don't mention that this method exists for the time being ;) Consider it
+     * an easter egg.
+     * 
+     * @param {JQuery} html The jQuery object representing the roll data.
+     * @param {Number} multiplier A number that is used to change the damage value.
+     */
+    async applyDamage(html, multiplier) {
+        const totalDamageDealt = Math.floor(parseFloat(html.find('.dice-total').text()) * multiplier);
+        const isHealing = (multiplier < 0);
+
+        switch (this.data.type) {
+            case 'starship':
+                await ActorSFRPG._applyStarshipDamage(html, this, totalDamageDealt, isHealing);
+                break;
+            case 'vehicle':
+                await ActorSFRPG._applyVehicleDamage(html, this, totalDamageDealt, isHealing);
+                break;
+            default:
+                await ActorSFRPG._applyActorDamage(html, this, totalDamageDealt, isHealing);
+                break;
+        }
     }
 
     static async _applyActorDamage(roll, actor, totalDamageDealt, isHealing) {
@@ -1269,7 +1308,7 @@ export class ActorSFRPG extends Actor {
         if (actionEntry.data.effectCritical) {
             const critEffectDisplayState = game.settings.get("sfrpg", "starshipActionsCrit");
             if (critEffectDisplayState !== 'never') {
-                if (critEffectDisplayState === 'always' || rollResult.roll.results[0] === 20) {
+                if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
                     flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.data.effectCritical);
                     flavor += "</p>";
@@ -1444,4 +1483,80 @@ export class ActorSFRPG extends Actor {
             }
         }
     }
+
+    /** Conditions */
+    hasCondition(conditionName) {
+        if (!SFRPG.statusEffectIconMapping[conditionName]) {
+            ui.notifications.warn(`Trying to check condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
+            return false;
+        }
+
+        const conditionItem = this.getCondition(conditionName);
+        return (conditionItem !== undefined);
+    }
+
+    getCondition(conditionName) {
+        if (!SFRPG.statusEffectIconMapping[conditionName]) {
+            ui.notifications.warn(`Trying to get condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
+            return undefined;
+        }
+
+        const conditionItem = this.items.find(x => x.type === "feat" && x.data.data.requirements?.toLowerCase() === "condition" && x.name.toLowerCase() === conditionName.toLowerCase());
+        return conditionItem;
+    }
+
+    async setCondition(conditionName, enabled) {
+        if (!SFRPG.statusEffectIconMapping[conditionName]) {
+            ui.notifications.warn(`Trying to set condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
+            return;
+        }
+
+        const conditionItem = this.getCondition(conditionName);
+
+        // Reflect state on tokens
+        const tokens = this.getActiveTokens(true);
+        for (const token of tokens) {
+            await token.toggleEffect(SFRPG.statusEffectIconMapping[conditionName], {active: enabled});
+        }
+
+        // Update condition item
+        if (enabled) {
+            if (!conditionItem) {
+                const compendium = game.packs.find(element => element.title.includes("Conditions"));
+                if (compendium) {
+                    await compendium.getIndex();
+
+                    const entry = compendium.index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
+                    if (entry) {
+                        const entity = await compendium.getDocument(entry._id);
+                        const itemData = duplicate(entity.data);
+
+                        const promise = this.createEmbeddedDocuments("Item", [itemData]);
+                        promise.then((createdItems) => {
+                            if (createdItems && createdItems.length > 0) {
+                                Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName: conditionName, enabled: enabled});
+                            }
+                        });
+                        return promise;
+                    }
+                }
+            }
+        } else {
+            if (conditionItem) {
+                const promise = this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
+                promise.then(() => {
+                    Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
+                });
+                return promise;
+            }
+        }
+    }
 }
+
+Hooks.on("afterClosureProcessed", (closureName, fact) => {
+    if (closureName == "process-actors") {
+        for (const item of fact.actor.items) {
+            item.processData();
+        }
+    }
+});

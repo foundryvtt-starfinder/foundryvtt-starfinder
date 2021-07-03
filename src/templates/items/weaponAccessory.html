@@ -15,17 +15,9 @@
         {{> "systems/sfrpg/templates/items/parts/item-description.html"}}
 
         <div class="tab details" data-tab="details" data-group="primary">
-            <h3 class="form-header first">{{ localize "SFRPG.CapacityUsage" }}</h3>
-            {{> "systems/sfrpg/templates/items/parts/item-capacity.html"}}
-
-            <br />
-
-            {{> "systems/sfrpg/templates/items/parts/physical-item-details.html"}}
-
-            <br />
 
             {{!-- Supported Types --}}
-            <h3 class="form-header">{{ localize "SFRPG.ItemSheet.WeaponAccessory.SupportedTypes" }}</h3>
+            <h3 class="form-header first">{{ localize "SFRPG.ItemSheet.WeaponAccessory.SupportedTypes" }}</h3>
             <div class="form-group">
                 <label>{{ localize "SFRPG.ItemSheet.WeaponAccessory.SupportedTypes" }}</label>
                 <div class="form-fields">
@@ -38,6 +30,14 @@
                     </select>
                 </div>
             </div>
+
+            <br />
+
+            {{> "systems/sfrpg/templates/items/parts/item-capacity.html"}}
+
+            <br />
+
+            {{> "systems/sfrpg/templates/items/parts/physical-item-details.html"}}
 
             <br />
 

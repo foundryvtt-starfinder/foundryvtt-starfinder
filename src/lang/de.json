@@ -8,6 +8,7 @@
         "TypeVehicle": "Fahrzeug"
     },
     "ITEM": {
+        "TypeAmmunition": "Ammunition",
         "TypeArchetypes": "Archetyp",
         "TypeAsi": "Attributswertsteigerung",
         "TypeAugmentation": "Aufwertung",
@@ -84,9 +85,9 @@
         "AbilityScoreIncreaseTooltip": "Attributswertsteigerung: {mod}",
         "AbilityScoreRaceTooltip": "Volk: {mod}",
         "AbilityScoreThemeTooltip": "Charaktermotiv: {mod}",
+        "About": "About",
         "AbilityStr": "Stärke",
         "AbilityWis": "Weisheit",
-        "About": "About",
         "ACPTooltip": "Rüstungsmalus: {mod} ({source})",
         "ActionAbil": "Attributswurf",
         "ActionHeal": "Heilen",
@@ -234,6 +235,8 @@
                     "Tooltip": "Diese Zahl stellt den Gesamtwert aller Gegenstände auf dieser Liste dar."
                 },
                 "Weapon": {
+                    "AlreadyFullyLoaded": "The weapon {name} is already fully loaded.",
+                    "NoAmmunitionAvailable": "You have no ammunition available for the weapon {name}.",
                     "Reload": "Waffe nachladen"
                 }
             },
@@ -417,6 +420,13 @@
             }
         },
         "ChatCard": {
+            "ContextMenu": {
+                "ApplyDamage": "Apply Damage",
+                "ApplyHealing": "Apply Healing",
+                "DamageAndAHalf": "1.5x Damage",
+                "DoubleDamage": "Double Damage",
+                "HalfDamage": "Half Damage"
+            },
             "ItemActivation": {
                 "Activates": "Activates",
                 "Cost": "Cost: {cost}",
@@ -908,6 +918,26 @@
                 "Range": "Reichweite",
                 "Target": "Ziel"
             },
+            "Ammunition": {
+                "AmmunitionType": "Ammunition Type",
+                "Capacity": "Capacity Settings",
+                "Details": "Ammunition Details",
+                "Type": {
+                    "Arrows": "Arrows",
+                    "Charges": "Charges",
+                    "Darts": "Darts",
+                    "Flares": "Flares",
+                    "Fuel": "Fuel",
+                    "HeavyRounds": "Heavy Rounds",
+                    "LongarmAndSniperRounds": "Longarm and Sniper Rounds",
+                    "Missiles": "Missiles",
+                    "None": "None",
+                    "Rockets": "Rockets",
+                    "SmallArmRounds": "Small Arm Rounds",
+                    "Shells": "Shells"
+                },
+                "UseCapacity": "Use Capacity"
+            },
             "Attuned": "Verbunden",
             "Augmentation": {
                 "Details": "Aufwertungsdetails",
@@ -927,6 +957,7 @@
                 "AbilityScoreIncrease": "Attributswertsteigerung",
                 "Archetypes": "Archetypen",
                 "Armor": "Armor",
+                "Ammunition": "Ammunition",
                 "ArmorUpgrades": "Rüstungsverbesserungen",
                 "Augmentations": "Aufwertungen",
                 "Classes": "Klassen",
@@ -980,7 +1011,8 @@
                 "Hands": "Hände",
                 "Level": "Stufe",
                 "Price": "Preis",
-                "Quantity": "Menge"
+                "Quantity": "Menge",
+                "QuantityPerPack": "Pack size"
             },
             "Equipment": {
                 "Action": "Aktion für Ausrüstung",
@@ -2141,7 +2173,7 @@
         "UPBs": "UPB's",
         "VehicleAttackSheet": {
             "Details": {
-                 "IgnoresHardness": "Ignores hardness"
+                "IgnoresHardness": "Ignores hardness"
             },
             "Errors": {
                 "NoDamage": "You may not make a Damage Roll with this item."

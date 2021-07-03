@@ -13,28 +13,34 @@ export const addChatMessageContextOptions = function (html, options) {
     let canApply = li => canvas.tokens.controlled.length && li.find(".dice-roll").length;
     options.push(
         {
-            name: "Apply Damage",
+            name: "SFRPG.ChatCard.ContextMenu.ApplyDamage",
             icon: "<i class='fas fa-user-minus'></i>",
             condition: canApply,
-            callback: li => ActorSFRPG.applyDamage(li, 1)
+            callback: li => ActorSFRPG.applyDamageFromContextMenu(li, 1)
         },
         {
-            name: "Apply Healing",
+            name: "SFRPG.ChatCard.ContextMenu.ApplyHealing",
             icon: '<i class="fas fa-user-plus"></i>',
             condition: canApply,
-            callback: li => ActorSFRPG.applyDamage(li, -1)
+            callback: li => ActorSFRPG.applyDamageFromContextMenu(li, -1)
         },
         {
-            name: "Double Damage",
+            name: "SFRPG.ChatCard.ContextMenu.DamageAndAHalf",
             icon: '<i class="fas fa-user-injured"></i>',
             condition: canApply,
-            callback: li => ActorSFRPG.applyDamage(li, 2)
+            callback: li => ActorSFRPG.applyDamageFromContextMenu(li, 1.5)
         },
         {
-            name: "Half Damage",
+            name: "SFRPG.ChatCard.ContextMenu.DoubleDamage",
+            icon: '<i class="fas fa-user-times"></i>',
+            condition: canApply,
+            callback: li => ActorSFRPG.applyDamageFromContextMenu(li, 2)
+        },
+        {
+            name: "SFRPG.ChatCard.ContextMenu.HalfDamage",
             icon: '<i class="fas fa-user-shield"></i>',
             condition: canApply,
-            callback: li => ActorSFRPG.applyDamage(li, 0.5)
+            callback: li => ActorSFRPG.applyDamageFromContextMenu(li, 0.5)
         }
     );
 

@@ -1,3 +1,6 @@
+import { mix } from "./mixins/item-mixer.js";
+import { ItemCapacityMixin } from "./mixins/item-capacity.js";
+
 import { DiceSFRPG, RollContext } from "../dice.js";
 import { SFRPG } from "../config.js";
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
@@ -5,7 +8,7 @@ import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
 import StackModifiers from "../rules/closures/stack-modifiers.js";
 
-export class ItemSFRPG extends Item {
+export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
 
     /* -------------------------------------------- */
     /*  Item Properties                             */
@@ -37,7 +40,13 @@ export class ItemSFRPG extends Item {
      * @type {boolean}
      */
     get hasSave() {
-        return !!(this.data.data.save && this.data.data.save.type);
+        const saveData = this.data?.data?.save;
+        if (!saveData) {
+            return false;
+        }
+
+        const hasType = !!saveData.type;
+        return hasType;
     }
 
     /* -------------------------------------------- */
@@ -111,11 +120,6 @@ export class ItemSFRPG extends Item {
 
         // Item Actions
         if (data.hasOwnProperty("actionType")) {
-
-            // Save DC
-            let save = data.save || {};
-            labels.save = this._getSaveLabel(save, actorData, data);
-
             // Damage
             let dam = data.damage || {};
             if (dam.parts) labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
@@ -125,52 +129,17 @@ export class ItemSFRPG extends Item {
         this.labels = labels;
     }
 
-    _getSaveLabel(save, actorData, itemData) {
-        if (!save?.type) return "";
-        
-        let dcFormula = save.dc?.toString();
-        if (!dcFormula) {
-            const ownerKeyAbilityId = this.actor?.data?.data?.attributes.keyability;
-            const itemKeyAbilityId = this.data.data.ability;
-            const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
-            if (abilityKey) {
-                if (this.data.type === "spell") {
-                    dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
-                } else if (this.data.type === "feat") {
-                    dcFormula = `10 + @owner.details.level.value + @owner.abilities.${abilityKey}.mod`;
-                } else {
-                    dcFormula = `10 + floor(@item.level / 2) + @owner.abilities.${abilityKey}.mod`;
-                }
+    processData() {
+        game.sfrpg.engine.process("process-items", {
+            item: this,
+            itemData: this.data,
+            owner: {
+                actor: this.actor,
+                actorData: this.actor?.data?.data,
+                token: this.actor?.token,
+                scene: this.actor?.token?.parent
             }
-            
-            if (!dcFormula) {
-                return "";
-            }
-        }
-
-        const rollContext = new RollContext();
-        rollContext.addContext("item", this, itemData);
-        rollContext.setMainContext("item");
-        if (this.actor && this.actor.data) {
-            rollContext.addContext("owner", this.actor);
-            rollContext.setMainContext("owner");
-        }
-
-        this.actor?.setupRollContexts(rollContext);
-    
-        const rollPromise = DiceSFRPG.createRoll({
-            rollContext: rollContext,
-            rollFormula: dcFormula,
-            mainDie: 'd0',
-            dialogOptions: { skipUI: true }
         });
-
-        rollPromise.then(rollResult => {
-            const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
-            this.labels.save = returnValue;
-        });
-
-        return 10;
     }
 
     /**
@@ -244,7 +213,6 @@ export class ItemSFRPG extends Item {
     getChatData(htmlOptions) {
         const data = duplicate(this.data.data);
         const labels = this.labels;
-        labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Rich text description
         data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
@@ -509,11 +477,6 @@ export class ItemSFRPG extends Item {
      * @private
      */
     _spellChatData(data, labels, props) {
-        const ad = this.actor.data.data;
-
-        // Spell saving throw text
-        const abl = ad.attributes.keyability || "int";
-        labels.save = this._getSaveLabel(data.save, this.actor.data, data);
 
         // Spell properties
         props.push(
@@ -527,12 +490,6 @@ export class ItemSFRPG extends Item {
      * Prepare chat card data for items of the "Feat" type
      */
     _featChatData(data, labels, props) {
-        const ad = this.actor.data.data;
-
-        // Spell saving throw text
-        const abl = data.ability || ad.attributes.keyability || "str";
-        labels.save = this._getSaveLabel(data.save, this.actor.data, data);
-
         // Feat properties
         props.push(
             {name: data.requirements, tooltip: null}
@@ -691,7 +648,7 @@ export class ItemSFRPG extends Item {
 
         //Warn the user if there is no ammo left
         const usage = itemData.data.usage?.value || 0;
-        const availableCapacity = itemData.data.capacity?.value || 0;
+        const availableCapacity = this.getCurrentCapacity();
         if (availableCapacity < usage) {
             ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
         }
@@ -760,27 +717,21 @@ export class ItemSFRPG extends Item {
         if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 
-            const capacity = itemData.capacity;
-            if (!capacity?.value || capacity.value <= 0) return;
-
             if (usage.per && ["round", "shot"].includes(usage.per)) {
-                capacity.value = Math.max(capacity.value - usage.value, 0);
+                this.consumeCapacity(usage.value);
             } else if (usage.per && ['minute'].includes(usage.per)) {
                 if (game.combat) {
                     const round = game.combat.current.round || 0;
                     if (round % 10 === 1) {
-                        capacity.value = Math.max(capacity.value - usage.value, 0);
+                        this.consumeCapacity(usage.value);
                     }
                 } else {
                     ui.notifications.info("Currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
                 }
             }
-
-            this.actor.updateEmbeddedDocuments("Item", [{
-                _id: this.data._id,
-                "data.capacity.value": capacity.value
-            }], {});
         }
+
+        Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
         if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
@@ -802,7 +753,7 @@ export class ItemSFRPG extends Item {
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
         
         if (this.hasCapacity()) {
-            if (this.data.data.capacity.value <= 0) {
+            if (this.getCurrentCapacity() <= 0) {
                 ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
                 return false;
             }
@@ -849,11 +800,10 @@ export class ItemSFRPG extends Item {
                     }
 
                     if (this.hasCapacity() && !options.disableDeductAmmo) {
-                        this.actor.updateEmbeddedDocuments("Item", [{
-                            _id: this.data.id,
-                            "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
-                        }], {});
+                        this.consumeCapacity(1);
                     }
+
+                    Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
             }
         });
@@ -896,11 +846,10 @@ export class ItemSFRPG extends Item {
                     }
 
                     if (this.hasCapacity() && !options.disableDeductAmmo) {
-                        this.actor.updateEmbeddedDocuments("Item", [{
-                            _id: this.data._id,
-                            "data.capacity.value": Math.max(0, this.data.data.capacity.value - 1)
-                        }], {});
+                        this.consumeCapacity(1);
                     }
+
+                    Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
             }
         });
@@ -912,7 +861,7 @@ export class ItemSFRPG extends Item {
      * Place a damage roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.damageRoll logic for the core implementation
      */
-    async rollDamage({ event } = {}) {
+    async rollDamage({ event } = {}, options = {}) {
         const itemData  = this.data.data;
         const actorData = this.actor.getRollData(); //this.actor.data.data;
         const isWeapon  = ["weapon", "shield"].includes(this.data.type);
@@ -1050,11 +999,16 @@ export class ItemSFRPG extends Item {
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                }
             }
         });
     }
 
-    async _rollVehicleDamage({ event } = {}) {
+    async _rollVehicleDamage({ event } = {}, options = {}) {
         const itemData = this.data.data;
 
         if (!this.hasDamage) {
@@ -1088,11 +1042,16 @@ export class ItemSFRPG extends Item {
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                }
             }
         });
     }
 
-    async _rollStarshipDamage({ event } = {}) {
+    async _rollStarshipDamage({ event } = {}, options = {}) {
         const itemData = this.data.data;
 
         if (!this.hasDamage) {
@@ -1127,6 +1086,11 @@ export class ItemSFRPG extends Item {
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                }
             }
         });
     }
@@ -1460,23 +1424,5 @@ export class ItemSFRPG extends Item {
         const modifier = modifiers.find(mod => mod._id === id);
 
         new SFRPGModifierApplication(modifier, this, {}, this.actor).render(true);
-    }
-
-    /**
-     * Checks if this item has capacity.
-     */
-    hasCapacity() {
-        if (this.type === "starshipWeapon") {
-            return (
-                this.data.data.weaponType === "tracking"
-                || this.data.data.special["mine"]
-                || this.data.data.special["transposition"]
-                || this.data.data.special["orbital"]
-                || this.data.data.special["rail"]
-                || this.data.data.special["forcefield"]
-                || this.data.data.special["limited"]
-            );
-        }
-        return this.data.data.hasOwnProperty("capacity");
     }
 }

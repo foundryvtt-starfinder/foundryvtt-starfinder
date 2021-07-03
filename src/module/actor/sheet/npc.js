@@ -43,18 +43,6 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         return data;
     }
 
-    async _render(...args) {
-        await super._render(...args);
-
-        tippy('[data-tippy-content]', {
-            allowHTML: true,
-            arrow: false,
-            placement: 'top-start',
-            duration: [500, null],
-            delay: [800, null]
-        });
-    }
-
     /**
      * Toggle the visibility of skills on the NPC sheet.
      * 
@@ -82,12 +70,18 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         let [spells, other, conditionItems, droneItems] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
             item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasUses = item.data.uses && (item.data.uses.max > 0);
             item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
+
+            item.hasCapacity = item.document.hasCapacity();
+            if (item.hasCapacity) {
+                item.capacityCurrent = item.document.getCurrentCapacity();
+                item.capacityMaximum = item.document.getMaxCapacity();
+            }
+
             if (droneItemTypes.includes(item.type)) {
                 arr[3].push(item);
             } else if (item.type === "spell") {
