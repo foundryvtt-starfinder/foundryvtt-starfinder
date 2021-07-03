@@ -1,4 +1,4 @@
-<div class="sfrpg chat-card item-card" data-actor-id="{{actor.id}}" data-item-id="{{item.id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
+<div class="sfrpg chat-card item-card" data-actor-id="{{actor.id}}" data-item-id="{{item.id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if sceneId}}data-scene-id="{{sceneId}}"{{/if}}>
     <header class="card-header flexrow">
         <img class="action-img" src="{{item.img}}" title="{{item.name}}" />
         <div class="flexcol">
@@ -15,7 +15,7 @@
         {{#if hasAttack}}<button data-action="attack">{{ localize "SFRPG.Attack" }}</button>{{/if}}
         {{#if hasDamage}}<button data-action="damage">{{ localize "SFRPG.Damage" }}</button>{{/if}}
         {{!-- {{#if isVersatile}}<button data-action="versatile">{{ localize "SFRPG.Versatile" }}</button>{{/if}} --}}
-        {{#if hasSave}}<button data-action="save" data-type="{{data.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
+        {{#if hasSave}}<button data-action="save" data-type="{{item.data.data.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">

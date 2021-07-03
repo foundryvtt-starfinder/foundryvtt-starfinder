@@ -560,7 +560,7 @@ export class ActorSFRPG extends Actor {
      * @param {String} saveId The save id (e.g. "will")
      * @param {Object} options Options which configure how saves are rolled
      */
-    async rollSave(saveId, options = {}) {
+    rollSave(saveId, options = {}) {
         const label = CONFIG.SFRPG.saves[saveId];
         const save = this.data.data.attributes[saveId];
 
@@ -575,7 +575,7 @@ export class ActorSFRPG extends Actor {
 
         this.setupRollContexts(rollContext);
 
-        return await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -960,8 +960,8 @@ export class ActorSFRPG extends Actor {
         const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
         const updateItems = items.map(item => {
             return {
-                _id: item._id,
-                "data.uses.value": item.data.data.uses.max
+                _id: item.id,
+                "data.uses.value": item.getMaxUses()
             }
         });
 
@@ -1102,8 +1102,8 @@ export class ActorSFRPG extends Actor {
         const items = this.items.filter(i => i.data.data.uses && ["sr", "lr", "day"].includes(i.data.data.uses.per));
         const updateItems = items.map(item => {
             return {
-                _id: item._id,
-                "data.uses.value": item.data.data.uses.max
+                _id: item.id,
+                "data.uses.value": item.getMaxUses()
             }
         });
 
