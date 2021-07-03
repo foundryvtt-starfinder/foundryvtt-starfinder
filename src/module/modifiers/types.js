@@ -36,6 +36,8 @@ export const SFRPGEffectType = Object.freeze({
     SAVES: "saves",
     SAVE: "save",
     SPEED: "speed",
+    ALL_SPEEDS: "all-speeds",
+    SPECIFIC_SPEED: "specific-speed",
     DAMAGE: "damage",
     ABILITY_CHECKS: "ability-checks",
     ABILITY_CHECK: "ability-check",

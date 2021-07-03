@@ -90,7 +90,7 @@
                     </footer>
                 </li>
 
-                <li class="attribute" data-tippy-content="<strong>{{ localize "SFRPG.Speed" }}</strong><br>@attributes.speed.land.value<br>@attributes.speed.flying.value<br>@attributes.speed.swimming.value<br>@attributes.speed.burrowing.value<br>@attributes.speed.climbing.value<br>@attributes.speed.special">
+                <li class="attribute" data-tippy-content="<strong>{{ localize "SFRPG.Speed" }}</strong><br>@attributes.speed.land.value<br>@attributes.speed.flying.value<br>@attributes.speed.swimming.value<br>@attributes.speed.burrowing.value<br>@attributes.speed.climbing.value<br>@attributes.speed.special<br><br>{{#each data.attributes.speed.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                     <h4 class="attribute-name box-title">
                         {{ localize "SFRPG.Speed" }}
                         <a class="config-button" data-action="movement" title="Movement speed"><i class="fas fa-cog"></i></a>
