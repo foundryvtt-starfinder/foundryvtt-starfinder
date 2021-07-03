@@ -18,7 +18,7 @@ export class ActorMovementConfig extends DocumentSheet {
 
   /** @override */
   get title() {
-    return `Movement speeds: ${this.document.name}`;
+    return game.i18n.format("SFRPG.ActorSheet.Attributes.Speed.MovementSpeedNamedTitle", {name: this.document.name});
   }
 
   /* -------------------------------------------- */
