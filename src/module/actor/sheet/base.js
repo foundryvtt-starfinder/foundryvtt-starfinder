@@ -472,45 +472,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        const updateData = {};
-
-        if (item.data.data.uses.max > 0) {
-            if (!item.data.data.uses.value || item.data.data.uses.value <= 0) {
-                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.UI.ErrorNoCharges", {name: item.name}));
-                return false;
-            }
-
-            updateData['data.uses.value'] = Math.max(0, item.data.data.uses.value - 1);
-        }
-
-        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : true;
-        updateData['data.isActive'] = desiredOutput;
-
-        await item.update(updateData);
-        // Render the chat card template
-        const templateData = {
-            actor: this.actor,
-            item: item,
-            tokenId: this.actor.token?.id,
-            action: "SFRPG.ChatCard.ItemActivation.Activates",
-            labels: item.labels,
-            hasAttack: item.hasAttack,
-            hasDamage: item.hasDamage,
-            isVersatile: item.isVersatile,
-            hasSave: item.hasSave
-        };
-
-        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
-        const html = await renderTemplate(template, templateData);
-
-        // Create the chat message
-        const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: html
-        };
-
-        await ChatMessage.create(chatData, { displaySheet: false });
+        item.setActive(true);
     }
 
     async _onDeactivateFeat(event) {
@@ -518,30 +480,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : false;
-        await item.update({'data.isActive': desiredOutput});
-
-        if (item.data.data.duration.value) {
-            // Render the chat card template
-            const templateData = {
-                actor: this.actor,
-                item: item,
-                tokenId: this.actor.token?.id,
-                action: "SFRPG.ChatCard.ItemActivation.Deactivates"
-            };
-
-            const template = `systems/sfrpg/templates/chat/item-action-card.html`;
-            const html = await renderTemplate(template, templateData);
-
-            // Create the chat message
-            const chatData = {
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                content: html
-            };
-
-            await ChatMessage.create(chatData, { displaySheet: false });
-        }
+        item.setActive(false);
     }
 
     /**

@@ -1,4 +1,5 @@
 import { mix } from "./mixins/item-mixer.js";
+import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
 import { DiceSFRPG, RollContext } from "../dice.js";
@@ -8,7 +9,7 @@ import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
 import StackModifiers from "../rules/closures/stack-modifiers.js";
 
-export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
+export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
     /* -------------------------------------------- */
     /*  Item Properties                             */
@@ -336,9 +337,9 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
     _consumableChatData(data, labels, props) {
         props.push(
             {name: CONFIG.SFRPG.consumableTypes[data.consumableType], tooltip: null},
-            {name: data.uses.value + "/" + data.uses.max + " Charges", tooltip: null}
+            {name: this.getRemainingUses() + "/" + this.getMaxUses() + " Charges", tooltip: null}
         );
-        data.hasCharges = data.uses.value >= 0;
+        data.hasCharges = this.getRemainingUses() >= 0;
     }
 
     /* -------------------------------------------- */
@@ -1165,7 +1166,7 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
      * Use a consumable item
      */
     async rollConsumable(options = {}) {
-        let itemData = this.data.data;
+        const itemData = this.data.data;
         const labels = this.labels;
         const formula = itemData.damage ? labels.damage : itemData.formula;
 
@@ -1185,25 +1186,25 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
 
         // Deduct consumed charges from the item
         if (itemData.uses.autoUse) {
-            let q = itemData.quantity;
-            let c = itemData.uses.value;
+            const quantity = itemData.quantity;
+            const remainingUses = this.getRemainingUses();
 
             // Deduct an item quantity
-            if (c <= 1 && q > 1) {
+            if (remainingUses <= 1 && quantity > 1) {
                 this.update({
-                    'data.quantity': Math.max(q - 1, 0),
-                    'data.uses.value': itemData.uses.max
+                    'data.quantity': Math.max(remainingUses - 1, 0),
+                    'data.uses.value': this.getMaxUses()
                 });
             }
 
             // Optionally destroy the item
-            else if (c <= 1 && q <= 1 && itemData.uses.autoDestroy) {
+            else if (remainingUses <= 1 && quantity <= 1 && itemData.uses.autoDestroy) {
                 this.actor.deleteEmbeddedDocuments("Item", [this.id]);
             }
 
             // Deduct the remaining charges
             else {
-                this.update({'data.uses.value': Math.max(c - 1, 0) });
+                this.update({'data.uses.value': Math.max(remainingUses - 1, 0) });
             }
         }
     }
@@ -1258,7 +1259,6 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
 
         // Extract card data
         const button = event.currentTarget;
-        button.disabled = true;
         const card = button.closest(".chat-card");
         const messageId = card.closest(".message").dataset.messageId;
         const message = game.messages.get(messageId);
@@ -1269,14 +1269,16 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
         if (!(isTargetted || game.user.isGM || message.isAuthor)) return;
 
         // Get the Actor from a synthetic Token
-        const actor = this._getChatCardActor(card);
-        if (!actor) return;
+        const chatCardActor = this._getChatCardActor(card);
+        if (!chatCardActor) return;
+
+        button.disabled = true;
 
         // Get the Item
-        const item = actor.items.get(card.dataset.itemId);
+        const item = chatCardActor.items.get(card.dataset.itemId);
 
         // Get the target
-        const target = isTargetted ? this._getChatCardTarget(card) : null;
+        const targetActor = isTargetted ? this._getChatCardTarget(card) : null;
 
         // Attack and Damage Rolls
         if (action === "attack") await item.rollAttack({ event });
@@ -1284,7 +1286,13 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
         else if (action === "formula") await item.rollFormula({ event });
 
         // Saving Throw
-        else if (action === "save" && target) await target.rollSave(button.dataset.type, { event });
+        else if (action === "save" && targetActor) {
+            const savePromise = targetActor.rollSave(button.dataset.type, { event });
+            savePromise.then(() => {
+                button.disabled = false;
+            });
+            return;
+        }
 
         // Consumable usage
         else if (action === "consume") await item.rollConsumable({ event });
@@ -1316,21 +1324,34 @@ export class ItemSFRPG extends mix(Item).with(ItemCapacityMixin) {
      */
     static _getChatCardActor(card) {
 
-        // Case 1 - a synthetic actor from a Token
-        const tokenKey = card.dataset.tokenId;
-        if (tokenKey) {
-            const [sceneId, tokenId] = tokenKey.split(".");
+        const actorId = card.dataset.actorId;
+
+        // Case 1 - a synthetic actor from a Token, legacy reasons the token Id can be a compound key of sceneId and tokenId
+        let tokenId = card.dataset.tokenId;
+        let sceneId = card.dataset.sceneId;
+        if (!sceneId && tokenId.includes('.')) {
+            [sceneId, tokenId] = tokenId.split(".");
+        }
+
+        let chatCardActor = null;
+        if (tokenId && sceneId) {
             const scene = game.scenes.get(sceneId);
-            if (!scene) return null;
-            const tokenData = scene.getEmbeddedDocument("Token", tokenId);
-            if (!tokenData) return null;
-            const token = new Token(tokenData);
-            return token.actor;
+            if (scene) {
+                const tokenData = scene.getEmbeddedDocument("Token", tokenId);
+                if (tokenData)
+                {
+                    const token = new Token(tokenData);
+                    chatCardActor = token.actor;
+                }
+            }
         }
 
         // Case 2 - use Actor ID directory
-        const actorId = card.dataset.actorId;
-        return game.actors.get(actorId) || null;
+        if (!chatCardActor) {
+            chatCardActor = game.actors.get(actorId);
+        }
+
+        return chatCardActor;
     }
 
     /* -------------------------------------------- */
