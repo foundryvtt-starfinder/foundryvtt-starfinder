@@ -72,6 +72,22 @@
                  </div>
              </div>
 
+             <div class="form-group">
+                <label>Main movement type</label>
+                <div class="form-fields">
+                    <select name="data.speed.movementType">
+                        {{#select itemData.speed.movementType}}
+                        <option value="land">Land</option>
+                        <option value="burrowing">Burrowing</option>
+                        <option value="climbing">Climbing</option>
+                        <option value="flying">Flying</option>
+                        <option value="swimming">Swimming</option>
+                        <option value="special">Special</option>
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
              <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Chassis.Details.Defense.Header" }}</h4>
 
              <div class="form-group">

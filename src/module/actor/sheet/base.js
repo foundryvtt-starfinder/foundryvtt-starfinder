@@ -1,5 +1,6 @@
 import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
+import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
 
 import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory.js";
@@ -150,6 +151,8 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
         if (!this.options.editable) return;
+        
+        html.find('.config-button').click(this._onConfigMenu.bind(this));
 
         html.find('.toggle-container').click(this._onToggleContainer.bind(this));
 
@@ -272,6 +275,18 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
 
         super._onChangeTab();
+    }
+
+    _onConfigMenu(event) {
+      event.preventDefault();
+      const button = event.currentTarget;
+      let app;
+      switch ( button.dataset.action ) {
+        case "movement":
+          app = new ActorMovementConfig(this.object);
+          break;
+      }
+      app?.render(true);
     }
 
     _prepareTraits(traits) {

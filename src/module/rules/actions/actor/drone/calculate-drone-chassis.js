@@ -13,9 +13,14 @@ export default function (engine) {
 
         if (activeChassis) {
             const chassisData = activeChassis.data.data;
+
+            const movementType = chassisData.speed.movementType || "land";
             
             data.traits.size = SFRPG.actorSizes[chassisData.size];
-            data.attributes.speed.value = chassisData.speed.value;
+            if (movementType !== "special") {
+                data.attributes.speed[movementType].base = chassisData.speed.value;
+            }
+            data.attributes.speed.mainMovement = movementType;
             data.attributes.speed.special = chassisData.speed.special;
 
             let droneLevel = chassisData.levels;

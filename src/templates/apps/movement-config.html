@@ -1,0 +1,41 @@
+<form autocomplete="off">
+    <p class="notes">Movement speeds</p>
+    <div class="form-group">
+        <label>Land</label>
+        <input name="data.attributes.speed.land.base" type="number" step="0.1" value="{{data.attributes.speed.land.base}}"/>
+    </div>
+    <div class="form-group">
+        <label>Burrowing</label>
+        <input name="data.attributes.speed.burrowing.base" type="number" step="0.1" value="{{data.attributes.speed.burrowing.base}}"/>
+    </div>
+    <div class="form-group">
+        <label>Climbing</label>
+        <input name="data.attributes.speed.climbing.base" type="number" step="0.1" value="{{data.attributes.speed.climbing.base}}"/>
+    </div>
+    <div class="form-group">
+        <label>Flying</label>
+        <input name="data.attributes.speed.flying.base" type="number" step="0.1" value="{{data.attributes.speed.flying.base}}"/>
+    </div>
+    <div class="form-group">
+        <label>Swimming</label>
+        <input name="data.attributes.speed.swimming.base" type="number" step="0.1" value="{{data.attributes.speed.swimming.base}}"/>
+    </div>
+    <div class="form-group">
+        <label>Special</label>
+        <input type="text" class="speed" name="data.attributes.speed.special" value="{{data.attributes.speed.special}}" placeholder="{{ localize 'SFRPG.SpeedSpecial' }}" />
+    </div>
+    <div class="form-group">
+        <label>Main movement type</label>
+        <select name="data.attributes.speed.mainMovement">
+            {{#select data.attributes.speed.mainMovement}}
+            <option value="land">Land</option>
+            <option value="burrowing">Burrowing</option>
+            <option value="climbing">Climbing</option>
+            <option value="flying">Flying</option>
+            <option value="swimming">Swimming</option>
+            <option value="special">Special</option>
+            {{/select}}
+        </select>
+    </div>
+    <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
+</form>

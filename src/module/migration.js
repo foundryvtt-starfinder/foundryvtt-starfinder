@@ -36,7 +36,7 @@ export default async function migrateWorld() {
     }
 
     const systemSchema = Number(game.system.data.flags.sfrpg.schema);
-    game.settings.set('sfrpg', 'worldSchemaVersion', 0.003); // replace with systemSchema when done implementing
+    game.settings.set('sfrpg', 'worldSchemaVersion', 0.003); // TODO: replace 0.003 with systemSchema when done implementing
     ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
 }
 
@@ -113,22 +113,27 @@ const _migrateActorSpeed = function (actor, migratedData) {
     const actorData = actor.data;
 
     let baseSpeed = actorData.attributes.speed?.value;
-    if (baseSpeed) {
+    if (baseSpeed && isNaN(baseSpeed)) {
         baseSpeed = baseSpeed.replace(/\D/g,'');
     }
 
+    // If all else fails, forcibly reset it to 30.
+    if (isNaN(baseSpeed)) {
+        baseSpeed = 30;
+    }
+
     const speed = {
-        ground: { base: baseSpeed ?? 30, value: 0 },
+        land: { base: baseSpeed ?? 30, value: 0 },
         flying: { base: 0, value: 0 },
         swimming: { base: 0, value: 0 },
         burrowing: { base: 0, value: 0 },
-        climb: { base: 0, value: 0 },
+        climbing: { base: 0, value: 0 },
         value: actorData.attributes.speed.value, // TODO: Remove this line when done reprogramming speed
-        special: actorData.attributes.speed.special
+        special: actorData.attributes.speed.special,
+        mainMovement: "land"
     };
 
     migratedData["data.attributes.speed"] = speed;
-    console.log([actorData, migratedData]);
 
     return migratedData;
 };
