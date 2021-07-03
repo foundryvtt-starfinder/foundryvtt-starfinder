@@ -94,6 +94,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
                     ChatMessage.create(chatData, { displaySheet: false });
                 });
+
+                Hooks.callAll("itemActivationChanged", {actor: this.actor, item: this, isActive: active});
             });
         } else {
             if (this.data.data.duration.value) {
@@ -123,6 +125,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             
                         ChatMessage.create(chatData, { displaySheet: false });
                     });
+
+                    Hooks.callAll("itemActivationChanged", {actor: this.actor, item: this, isActive: active});
                 });
             }
         }
