@@ -298,6 +298,11 @@ async function cookWithOptions(options = { formattingCheck: true }) {
             // For actors, we should double-check the token names are set correctly.
             fixTokenName(jsonInput);
 
+            // Fix missing images
+            if (!jsonInput.img) {
+                jsonInput.img = "icons/svg/mystery-man.svg";
+            }
+
 			compendiumMap[directory][jsonInput._id] = jsonInput;
 			allItems.push({ pack: directory, data: jsonInput, file: file });
 
