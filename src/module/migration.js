@@ -112,27 +112,47 @@ const _migrateActorAbilityScores = function (actor, migratedData) {
 const _migrateActorSpeed = function (actor, migratedData) {
     const actorData = actor.data;
 
-    let baseSpeed = actorData.attributes.speed?.value;
+    const speedValue = actorData.attributes.speed?.value;
+
+    let baseSpeed = duplicate(speedValue);
     if (baseSpeed && isNaN(baseSpeed)) {
         baseSpeed = baseSpeed.replace(/\D/g,'');
         baseSpeed = Number(baseSpeed);
     }
 
     // If all else fails, forcibly reset it to 30.
-    if (isNaN(baseSpeed)) {
+    if (!baseSpeed || isNaN(baseSpeed)) {
         baseSpeed = 30;
     }
 
     const speed = {
-        land: { base: baseSpeed ?? 30, value: 0 },
-        flying: { base: 0, value: 0 },
-        swimming: { base: 0, value: 0 },
-        burrowing: { base: 0, value: 0 },
-        climbing: { base: 0, value: 0 },
+        land: { base: 0 },
+        flying: { base: 0 },
+        swimming: { base: 0 },
+        burrowing: { base: 0 },
+        climbing: { base: 0 },
         value: actorData.attributes.speed.value, // TODO: Remove this line when done reprogramming speed
         special: actorData.attributes.speed.special,
         mainMovement: "land"
     };
+        
+    const lowercaseSpeedValue = ("" + speedValue || "").toLowerCase();
+    if (lowercaseSpeedValue.includes("climb")) {
+        speed.climbing.base = baseSpeed;
+        speed.mainMovement = "climbing";
+    } else if (lowercaseSpeedValue.includes("fly")) {
+        speed.flying.base = baseSpeed;
+        speed.mainMovement = "flying";
+    } else if (lowercaseSpeedValue.includes("burrow")) {
+        speed.burrowing.base = baseSpeed;
+        speed.mainMovement = "burrowing";
+    } else if (lowercaseSpeedValue.includes("swim")) {
+        speed.swimming.base = baseSpeed;
+        speed.mainMovement = "swimming";
+    } else {
+        speed.land.base = baseSpeed;
+        speed.mainMovement = "land";
+    }
 
     migratedData["data.attributes.speed"] = speed;
 
