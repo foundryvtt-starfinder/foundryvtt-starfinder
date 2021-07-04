@@ -166,6 +166,8 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         if (updatePromise) {
             updatePromise.then(() => {
                 this._postReloadMessage();
+
+                Hooks.callAll("itemReloaded", {actor: this.actor, item: this});
             });
         }
 

@@ -73,8 +73,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
             item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
-            item.hasUses = item.data.uses && (item.data.uses.max > 0);
-            item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
+            item.hasUses = item.document.canBeUsed();
+            item.isCharged = !item.hasUses || item.document.getRemainingUses() <= 0 || !item.isOnCooldown;
 
             item.hasCapacity = item.document.hasCapacity();
             if (item.hasCapacity) {

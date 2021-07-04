@@ -298,6 +298,16 @@ async function cookWithOptions(options = { formattingCheck: true }) {
             // For actors, we should double-check the token names are set correctly.
             fixTokenName(jsonInput);
 
+            // Fix missing images
+            if (!jsonInput.img) {
+                jsonInput.img = "icons/svg/mystery-man.svg";
+            }
+            
+            const movingActorTypes = ["character", "drone", "npc"];
+            if (movingActorTypes.includes(jsonInput.type)) {
+                tryMigrateActorSpeed(jsonInput);
+            }
+
 			compendiumMap[directory][jsonInput._id] = jsonInput;
 			allItems.push({ pack: directory, data: jsonInput, file: file });
 
@@ -355,6 +365,64 @@ function fixTokenName(item) {
     // Ensure token name is the same as the actor name, if applicable
     if (actorTypes.includes(item.type) && item.token) {
         item.token.name = item.name;
+    }
+}
+
+function tryMigrateActorSpeed(jsonInput) {
+    const speedValue = jsonInput.data?.attributes?.speed?.value;
+    const specialValue = jsonInput.data?.attributes?.speed?.special;
+    if (speedValue) {
+        let baseSpeed = speedValue;
+        if (baseSpeed && isNaN(baseSpeed)) {
+            baseSpeed = baseSpeed.replace(/\D/g,'');
+            baseSpeed = Number(baseSpeed);
+        }
+
+        // If all else fails, forcibly reset it to 30.
+        if (!baseSpeed || isNaN(baseSpeed)) {
+            baseSpeed = 30;
+        }
+        
+        jsonInput.data.attributes.speed = {
+            land: { base: 0 },
+            flying: { base: 0 },
+            swimming: { base: 0 },
+            burrowing: { base: 0 },
+            climbing: { base: 0 },
+            special: "",
+            mainMovement: "land"
+        };
+        
+        const lowercaseSpeedValue = speedValue.toLowerCase();
+        if (lowercaseSpeedValue.includes("climb")) {
+            jsonInput.data.attributes.speed.climbing.base = baseSpeed;
+            jsonInput.data.attributes.speed.mainMovement = "climbing";
+        } else if (lowercaseSpeedValue.includes("fly")) {
+            jsonInput.data.attributes.speed.flying.base = baseSpeed;
+            jsonInput.data.attributes.speed.mainMovement = "flying";
+        } else if (lowercaseSpeedValue.includes("burrow")) {
+            jsonInput.data.attributes.speed.burrowing.base = baseSpeed;
+            jsonInput.data.attributes.speed.mainMovement = "burrowing";
+        } else if (lowercaseSpeedValue.includes("swim")) {
+            jsonInput.data.attributes.speed.swimming.base = baseSpeed;
+            jsonInput.data.attributes.speed.mainMovement = "swimming";
+        } else {
+            jsonInput.data.attributes.speed.land.base = baseSpeed;
+            jsonInput.data.attributes.speed.mainMovement = "land";
+        }
+        
+        let finalSpecial = "";
+        if (speedValue != baseSpeed) {
+            finalSpecial += "original base: " + speedValue.trim();
+        }
+        if (specialValue) {
+            if (finalSpecial.length > 0) {
+                finalSpecial += "; original special: ";
+            }
+            finalSpecial += specialValue.trim();
+        }
+        
+        jsonInput.data.attributes.speed.special = finalSpecial;
     }
 }
 
