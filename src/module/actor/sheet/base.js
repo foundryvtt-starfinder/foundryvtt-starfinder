@@ -881,6 +881,17 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else if (parsedDragData.pack) {
             const pack = game.packs.get(parsedDragData.pack);
             const itemData = await pack.getDocument(parsedDragData.id);
+
+            if (itemData.type === "class") {
+                const existingClass = targetActor.findItem(x => x.type === "class" && x.name === itemData.name);
+                if (existingClass) {
+                    const levelUpdate = {};
+                    levelUpdate["data.levels"] = existingClass.data.data.levels + 1;
+                    existingClass.update(levelUpdate)
+                    return existingClass;
+                }
+            }
+
             const createResult = await targetActor.createItem(itemData.data._source);
             const addedItem = targetActor.getItem(createResult[0].id);
 
@@ -943,6 +954,16 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else {
             const sidebarItem = game.items.get(parsedDragData.id);
             if (sidebarItem) {
+                if (sidebarItem.type === "class") {
+                    const existingClass = targetActor.findItem(x => x.type === "class" && x.name === sidebarItem.name);
+                    if (existingClass) {
+                        const levelUpdate = {};
+                        levelUpdate["data.levels"] = existingClass.data.data.levels + 1;
+                        existingClass.update(levelUpdate)
+                        return existingClass;
+                    }
+                }
+
                 const addedItemResult = await targetActor.createItem(duplicate(sidebarItem.data));
                 if (addedItemResult.length > 0) {
                     const addedItem = targetActor.getItem(addedItemResult[0].id);
