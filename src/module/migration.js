@@ -115,6 +115,7 @@ const _migrateActorSpeed = function (actor, migratedData) {
     let baseSpeed = actorData.attributes.speed?.value;
     if (baseSpeed && isNaN(baseSpeed)) {
         baseSpeed = baseSpeed.replace(/\D/g,'');
+        baseSpeed = Number(baseSpeed);
     }
 
     // If all else fails, forcibly reset it to 30.
