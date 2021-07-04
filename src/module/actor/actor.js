@@ -1534,9 +1534,14 @@ export class ActorSFRPG extends Actor {
                         const promise = this.createEmbeddedDocuments("Item", [itemData]);
                         promise.then((createdItems) => {
                             if (createdItems && createdItems.length > 0) {
-                                Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName: conditionName, enabled: enabled});
+                                const updateData = {};
+                                updateData[`data.conditions.${conditionName}`] = true;
+                                this.update(updateData).then(() => {
+                                    Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName: conditionName, enabled: enabled});
+                                });
                             }
                         });
+                        
                         return promise;
                     }
                 }
@@ -1545,7 +1550,11 @@ export class ActorSFRPG extends Actor {
             if (conditionItem) {
                 const promise = this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
                 promise.then(() => {
-                    Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
+                    const updateData = {};
+                    updateData[`data.conditions.${conditionName}`] = false;
+                    this.update(updateData).then(() => {
+                        Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
+                    });
                 });
                 return promise;
             }
