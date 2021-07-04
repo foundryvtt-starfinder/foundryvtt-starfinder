@@ -36,7 +36,7 @@ export default async function migrateWorld() {
     }
 
     const systemSchema = Number(game.system.data.flags.sfrpg.schema);
-    game.settings.set('sfrpg', 'worldSchemaVersion', 0.003); // TODO: replace 0.003 with systemSchema when done implementing
+    game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
     ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
 }
 
@@ -131,7 +131,6 @@ const _migrateActorSpeed = function (actor, migratedData) {
         swimming: { base: 0 },
         burrowing: { base: 0 },
         climbing: { base: 0 },
-        value: actorData.attributes.speed.value, // TODO: Remove this line when done reprogramming speed
         special: actorData.attributes.speed.special,
         mainMovement: "land"
     };
