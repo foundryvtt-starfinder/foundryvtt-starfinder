@@ -1012,7 +1012,8 @@ SFRPG.modifierEffectTypes = {
     "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage",
     "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance",
     "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
-    "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed"
+    "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
+    "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds"
 };
 
 SFRPG.modifierType = {

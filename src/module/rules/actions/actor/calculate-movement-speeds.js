@@ -41,10 +41,15 @@ export default function (engine) {
 
             const supportedTypes = [SFRPGEffectType.ALL_SPEEDS, SFRPGEffectType.SPECIFIC_SPEED];
             let filteredModifiers = fact.modifiers.filter(mod => {
-                return (mod.enabled || mod.modifierType === "formula") && (mod.effectType === SFRPGEffectType.ALL_SPEEDS || (mod.effectType === SFRPGEffectType.SPECIFIC_SPEED && mod.valueAffected === speedKey))
+                return (mod.enabled || mod.modifierType === "formula") && (mod.effectType === SFRPGEffectType.ALL_SPEEDS || (mod.effectType === SFRPGEffectType.SPECIFIC_SPEED && mod.valueAffected === speedKey));
             });
             filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
     
+            let filteredMultiplyModifiers = fact.modifiers.filter(mod => {
+                return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.MULTIPLY_ALL_SPEEDS;
+            });
+            filteredMultiplyModifiers = context.parameters.stackModifiers.process(filteredMultiplyModifiers, context);
+
             const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
     
@@ -60,6 +65,40 @@ export default function (engine) {
             }, 0);
 
             data.attributes.speed[speedKey].value = Math.max(0, baseValue + bonus);
+
+            for(const modifier of Object.values(filteredMultiplyModifiers)) {
+                if (!modifier || !modifier.length) {
+                    continue;
+                }
+
+                for (const modifierBonus of modifier) {
+                    if (modifierBonus.modifierType === SFRPGModifierType.FORMULA) {
+                        if (data.attributes.speed.rolledMods) {
+                            data.attributes.speed.rolledMods.push({mod: modifierBonus.modifier, bonus: modifierBonus});
+                        } else {
+                            data.attributes.speed.rolledMods = [{mod: modifierBonus.modifier, bonus: modifierBonus}];
+                        }
+        
+                        return 0;
+                    }
+        
+                    const roll = new Roll(modifierBonus.modifier.toString(), data).evaluate({maximize: true});
+                    const computedBonus = roll.total;
+
+                    if (computedBonus !== 0) {
+                        data.attributes.speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
+                            speed: SFRPG.speeds[speedKey],
+                            type: modifierBonus.type.capitalize(),
+                            mod: Math.floor(100 * computedBonus) + "%",
+                            source: modifierBonus.name
+                        }));
+                    }
+
+                    data.attributes.speed[speedKey].value *= computedBonus;
+                }
+            }
+
+            data.attributes.speed[speedKey].value = Math.floor(data.attributes.speed[speedKey].value);
         }
 
         return fact;
