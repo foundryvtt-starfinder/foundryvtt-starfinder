@@ -1329,7 +1329,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Case 1 - a synthetic actor from a Token, legacy reasons the token Id can be a compound key of sceneId and tokenId
         let tokenId = card.dataset.tokenId;
         let sceneId = card.dataset.sceneId;
-        if (!sceneId && tokenId.includes('.')) {
+        if (!sceneId && tokenId?.includes('.')) {
             [sceneId, tokenId] = tokenId.split(".");
         }
 
