@@ -12,7 +12,10 @@ export const registerSystemSettings = function () {
             "5105": "SFRPG.Settings.DiagonalMovementRule.Values.Core",
             "555": "SFRPG.Settings.DiagonalMovementRule.Values.Optional"
         },
-        onChange: rule => canvas.grid.diagonalRule = rule
+        onChange: rule => {
+            if (canvas.initialized)
+                canvas.grid.diagonalRule = rule;
+        }
     });
 
     game.settings.register("sfrpg", "disableExperienceTracking", {
