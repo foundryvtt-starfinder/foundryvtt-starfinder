@@ -737,7 +737,7 @@ export class ActorSFRPG extends Actor {
 
         /** Update temp hitpoints */
         if (!isHealing) {
-            const originalTempHP = parseInt(actor.data.data.attributes.hp.temp) | 0;
+            const originalTempHP = parseInt(actor.data.data.attributes.hp.temp) || 0;
             const newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.tempmax);
             remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
             

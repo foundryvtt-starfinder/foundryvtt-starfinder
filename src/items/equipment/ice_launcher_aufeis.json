@@ -61,10 +61,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d12",
-          "bludgeoning+cryo"
-        ]
+        {
+          "formula": "1d12",
+          "types": {
+            "bludgeoning": true,
+            "cryo": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

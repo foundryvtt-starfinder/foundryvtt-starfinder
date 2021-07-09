@@ -40,10 +40,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "8d8",
-          "electricity+fire"
-        ]
+        {
+          "formula": "8d8",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "ammunitionType": "missile",

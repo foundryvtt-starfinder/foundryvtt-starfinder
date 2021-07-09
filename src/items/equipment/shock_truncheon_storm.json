@@ -81,10 +81,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "3d12 + @abilities.str.mod",
-          "electricity"
-        ]
+        {
+          "formula": "3d12 + @abilities.str.mod",
+          "types": {
+            "electricity": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

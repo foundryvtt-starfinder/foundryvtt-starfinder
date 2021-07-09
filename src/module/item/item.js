@@ -881,8 +881,22 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
         else if (!abl) abl = "str";
 
         // Define Roll parts
-        let parts = itemData.damage.parts.map(d => d[0]);
-        let damageTypes = itemData.damage.parts.map(d => d[1]);
+        // let parts = itemData.damage.parts.map(d => d[0]);
+        // let damageTypes = itemData.damage.parts.map(d => d[1]);
+
+        let [parts, damageTypes, damageTypeOperators] = itemData.damage.parts.reduce((acc, cur) => {
+            if (cur.formula && cur.formula.trim() !== "") acc[0].push(cur.formula);
+            if (cur.types) {
+                let filteredTypes = Object.entries(cur.types).filter(type => type[1]);
+
+                for (const type of filteredTypes) {
+                    acc[1].push(type[0]);
+                }
+            }
+            if (cur.operator) acc[2].push(cur.operator);
+
+            return acc;
+        }, [[], [], []]);
         
         let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
@@ -995,6 +1009,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
             rollContext: rollContext,
             title: title,
             damageTypes: damageTypes,
+            damageTypeOperators: damageTypeOperators,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 width: 400,

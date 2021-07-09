@@ -75,10 +75,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "9d6 + @abilities.str.mod",
-          "electricity"
-        ]
+        {
+          "formula": "9d6 + @abilities.str.mod",
+          "types": {
+            "electricity": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

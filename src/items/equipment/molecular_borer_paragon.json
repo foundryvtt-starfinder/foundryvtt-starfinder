@@ -77,10 +77,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "11d12",
-          "cold|fire"
-        ]
+        {
+          "formula": "11d12",
+          "types": {
+            "cold": true,
+            "fire": true
+          },
+          "operator": "or"
+        }
       ]
     },
     "formula": "",

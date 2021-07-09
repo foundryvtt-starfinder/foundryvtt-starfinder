@@ -264,19 +264,20 @@ export class DiceSFRPG {
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
     *
-    * @param {Event} event              The triggering event which initiated the roll
-    * @param {Array} parts              The dice roll component parts, excluding the initial d20
-    * @param {Object} criticalData      Critical damage information, in case of a critical hit
-    * @param {Array} damageTypes        Array of damage types associated with this roll
-    * @param {RollContext} rollContext  The contextual data for this roll
-    * @param {String} title             The dice roll UI window title
-    * @param {Object} speaker           The ChatMessage speaker to pass when creating the chat
-    * @param {Function} flavor          A callable function for determining the chat message flavor given parts and data
-    * @param {Boolean} critical         Allow critical hits to be chosen
-    * @param {Function} onClose         Callback for actions to take when the dialog form is closed
-    * @param {Object} dialogOptions     Modal dialog options
+    * @param {Event} event                The triggering event which initiated the roll
+    * @param {Array} parts                The dice roll component parts, excluding the initial d20
+    * @param {Object} criticalData        Critical damage information, in case of a critical hit
+    * @param {Array} damageTypes          Array of damage types associated with this roll
+    * @param {string} damageTypeOperators Determines how to handle damage when there are multiple damage types
+    * @param {RollContext} rollContext    The contextual data for this roll
+    * @param {String} title               The dice roll UI window title
+    * @param {Object} speaker             The ChatMessage speaker to pass when creating the chat
+    * @param {Function} flavor            A callable function for determining the chat message flavor given parts and data
+    * @param {Boolean} critical           Allow critical hits to be chosen
+    * @param {Function} onClose           Callback for actions to take when the dialog form is closed
+    * @param {Object} dialogOptions       Modal dialog options
     */
-    static async damageRoll({ event = new Event(''), parts, criticalData, damageTypes, rollContext, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
+    static async damageRoll({ event = new Event(''), parts, criticalData, damageTypes, damageTypeOperators, rollContext, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
         flavor = flavor || title;
 
         if (!rollContext?.isValid()) {
@@ -341,6 +342,7 @@ export class DiceSFRPG {
             if (die) {
                 die.options.isDamageRoll = true;
                 die.options.damageTypes = damageTypes;
+                die.options.damageTypeOperators = damageTypeOperators;
 
                 const properties = rollContext.allContexts["item"]?.data?.properties;
                 if (properties) {
@@ -353,7 +355,7 @@ export class DiceSFRPG {
             // TODO @Deepflame: Remove this once @wildj79 implements proper damage type tracking.
             if (damageTypes) {
                 for (const damageType of damageTypes) {
-                    tags.push({tag: `damageType${damageType.capitalize()}`, text: damageType.capitalize()});
+                    tags.push({tag: `damageType${damageType.capitalize()}`, text: CONFIG.SFRPG.damageTypes[damageType]});
                 }
             }
 
@@ -494,9 +496,11 @@ export class DiceSFRPG {
         const roll = message.roll;
         if (!roll?.dice.length > 0) return;
         const die = roll.dice[0];
+        console.log(die);
 
         if (die?.options?.isDamageRoll) {
             const types = die?.options?.damageTypes;
+
         }
     }
 

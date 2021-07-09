@@ -61,10 +61,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "6d8 + @mod",
-          "piercing+slashing"
-        ]
+        {
+          "formula": "6d8 + @mod",
+          "types": {
+            "piercing": true,
+            "slashing": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

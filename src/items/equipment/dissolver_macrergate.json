@@ -61,10 +61,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "2d8",
-          "acid+fire"
-        ]
+        {
+          "formula": "2d8",
+          "types": {
+            "acid": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

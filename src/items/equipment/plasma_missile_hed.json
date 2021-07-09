@@ -40,10 +40,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "17d12",
-          "electricity+fire"
-        ]
+        {
+          "formula": "17d12",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "ammunitionType": "missile",

@@ -58,10 +58,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "6d8",
-          "Cryo+Piercing"
-        ]
+        {
+          "formula": "6d8",
+          "types": {
+            "Cryo": true,
+            "Piercing": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

@@ -80,10 +80,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "2d12",
-          "electricity+fire"
-        ]
+        {
+          "formula": "2d12",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

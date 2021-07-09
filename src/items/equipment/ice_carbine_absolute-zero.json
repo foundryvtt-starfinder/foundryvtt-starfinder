@@ -61,10 +61,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "11d6",
-          "cryo+piercing"
-        ]
+        {
+          "formula": "11d6",
+          "types": {
+            "cryo": true,
+            "piercing": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

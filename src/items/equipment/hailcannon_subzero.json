@@ -61,10 +61,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d8",
-          "cryo+piercing"
-        ]
+        {
+          "formula": "1d8",
+          "types": {
+            "cryo": true,
+            "piercing": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

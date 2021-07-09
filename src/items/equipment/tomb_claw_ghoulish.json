@@ -61,10 +61,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "2d4 + @mod",
-          "cryo+piercing"
-        ]
+        {
+          "formula": "2d4 + @mod",
+          "types": {
+            "cryo": true,
+            "piercing": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

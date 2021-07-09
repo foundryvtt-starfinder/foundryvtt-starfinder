@@ -282,7 +282,7 @@ Hooks.on("canvasInit", function () {
 
 Hooks.on("renderChatMessage", (app, html, data) => {
     DiceSFRPG.highlightCriticalSuccessFailure(app, html, data);
-    DiceSFRPG.addDamageTypes(app, html);
+    DiceSFRPG.addDamageTypes(app, html, data);
 
     if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
 });

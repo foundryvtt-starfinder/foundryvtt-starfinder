@@ -75,10 +75,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "4d6 + @abilities.str.mod",
-          "acid|slashing"
-        ]
+        {
+          "formula": "4d6 + @abilities.str.mod",
+          "types": {
+            "acid": true,
+            "slashing": true
+          },
+          "operator": "or"
+        }
       ]
     },
     "formula": "",

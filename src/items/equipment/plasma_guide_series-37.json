@@ -58,10 +58,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "2d8",
-          "Electricity+Fire"
-        ]
+        {
+          "formula": "2d8",
+          "types": {
+            "Electricity": true,
+            "Fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

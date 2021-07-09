@@ -129,24 +129,24 @@ SFRPG.currencies = {
 
 // Damage Types
 SFRPG.energyDamageTypes = {
-    "acid": "SFRPG.DamageTypesAcid",
-    "cold": "SFRPG.DamageTypesCold",
-    "electricity": "SFRPG.DamageTypesElectricity",
-    "fire": "SFRPG.DamageTypesFire",
-    "radiation": "SFRPG.DamageTypesRadiation",
-    "sonic": "SFRPG.DamageTypesSonic"
+    "acid": "SFRPG.Damage.Types.Acid",
+    "cold": "SFRPG.Damage.Types.Cold",
+    "electricity": "SFRPG.Damage.Types.Electricity",
+    "fire": "SFRPG.Damage.Types.Fire",
+    "sonic": "SFRPG.Damage.Types.Sonic"
 };
 
 SFRPG.kineticDamageTypes = {
-    "bludgeoning": "SFRPG.DamageTypesBludgeoning",
-    "piercing": "SFRPG.DamageTypesPiercing",
-    "slashing": "SFRPG.DamageTypesSlashing"
+    "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
+    "piercing": "SFRPG.Damage.Types.Piercing",
+    "slashing": "SFRPG.Damage.Types.Slashing"
 };
 
 SFRPG.damageTypes = {
     ...SFRPG.energyDamageTypes,
     ...SFRPG.kineticDamageTypes,
-    "nonlethal": "SFRPG.DamageTypesNonlethal"
+    "radiation": "SFRPG.Damage.Types.Radiation",
+    "nonlethal": "SFRPG.Damage.Types.Nonlethal"
 };
 
 SFRPG.weaponDamageTypes = {

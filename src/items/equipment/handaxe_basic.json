@@ -75,10 +75,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d4 + @abilities.str.mod",
-          "slashing"
-        ]
+        {
+          "formula": "1d4 + @abilities.str.mod",
+          "types": {
+            "slashing": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

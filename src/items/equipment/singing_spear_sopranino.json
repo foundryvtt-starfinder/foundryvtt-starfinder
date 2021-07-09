@@ -75,10 +75,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d8 + @abilities.str.mod",
-          "piercing+sonic"
-        ]
+        {
+          "formula": "1d8 + @abilities.str.mod",
+          "types": {
+            "piercing": true,
+            "sonic": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",
