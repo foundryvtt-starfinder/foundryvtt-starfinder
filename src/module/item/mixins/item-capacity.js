@@ -125,7 +125,10 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             // Find more items matching ammunition type
             const matchingItems = this.actor.items
                 .filter(x => x.type === "ammunition" && x.data.data.ammunitionType === itemData.ammunitionType && ((x.getCurrentCapacity() > currentCapacity && x.getMaxCapacity() <= maxCapacity) || !x.data.data.useCapacity))
-                .filter(x => getItemContainer(this.actor.data.items, x) == null)
+                .filter(x => {
+                    const container = getItemContainer(this.actor.data.items, x);
+                    return !container || container.type === "container";
+                })
                 .sort((firstEl, secondEl) => secondEl.getCurrentCapacity() - firstEl.getCurrentCapacity() );
 
             if (matchingItems.length > 0) {
@@ -135,6 +138,8 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 const tokenId = this.actor.isToken ? this.actor.token.id : null;
                 const sceneId = this.actor.isToken ? this.actor.token.parent.id : null;
                 const itemHelper = new ActorItemHelper(this.actor.id, tokenId, sceneId);
+
+                const originalContainer = getItemContainer(this.actor.data.items, newAmmunition);
 
                 if (newAmmunition.data.data.useCapacity || capacityItem == null) {
                     if (capacityItem) {
@@ -156,6 +161,11 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 } else {
                     updatePromise = this._internalQuantityReload(currentCapacity, maxCapacity, capacityItem, newAmmunition);
                 }
+
+                if (updatePromise && originalContainer) {
+                    ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.ReloadFromContainer", {name: this.data.name, ammoName: newAmmunition.name, containerName: originalContainer.name}), {permanent: true});
+                }
+
             } else {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.NoAmmunitionAvailable", {name: this.data.name}));
             }
@@ -166,6 +176,8 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         if (updatePromise) {
             updatePromise.then(() => {
                 this._postReloadMessage();
+
+                Hooks.callAll("itemReloaded", {actor: this.actor, item: this});
             });
         }
 

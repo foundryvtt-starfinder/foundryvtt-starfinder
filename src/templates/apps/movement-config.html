@@ -1,0 +1,41 @@
+<form autocomplete="off">
+    <p class="notes">{{ localize "SFRPG.ActorSheet.Attributes.Speed.MovementSpeedTitle" }}</p>
+    <div class="form-group">
+        <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land" }}</label>
+        <input name="data.attributes.speed.land.base" type="number" step="0.1" value="{{data.attributes.speed.land.base}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing" }}</label>
+        <input name="data.attributes.speed.burrowing.base" type="number" step="0.1" value="{{data.attributes.speed.burrowing.base}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}</label>
+        <input name="data.attributes.speed.climbing.base" type="number" step="0.1" value="{{data.attributes.speed.climbing.base}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }}</label>
+        <input name="data.attributes.speed.flying.base" type="number" step="0.1" value="{{data.attributes.speed.flying.base}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}</label>
+        <input name="data.attributes.speed.swimming.base" type="number" step="0.1" value="{{data.attributes.speed.swimming.base}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special" }}</label>
+        <input type="text" class="speed" name="data.attributes.speed.special" value="{{data.attributes.speed.special}}" placeholder="{{ localize 'SFRPG.SpeedSpecial' }}" />
+    </div>
+    <div class="form-group">
+        <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.MainMovementType" }}</label>
+        <select name="data.attributes.speed.mainMovement">
+            {{#select data.attributes.speed.mainMovement}}
+            <option value="land">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land" }}</option>
+            <option value="burrowing">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing" }}</option>
+            <option value="climbing">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}</option>
+            <option value="flying">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }}</option>
+            <option value="swimming">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}</option>
+            <option value="special">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special" }}</option>
+            {{/select}}
+        </select>
+    </div>
+    <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
+</form>

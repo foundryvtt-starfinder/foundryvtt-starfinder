@@ -1,7 +1,8 @@
 const SFRPGActorMigrationSchemas = Object.freeze({
     NPC_DATA_UPATE: 0.001,
     THE_PAINFUL_UPDATE: 0.002, // Due to copyright concerns, all references to Starfinder were renamed to SFRPG
-    THE_HAPPY_UPDATE: 0.003 // Due to Paizo clarifying their stance, most references to SFRPG were returned to Starfinder
+    THE_HAPPY_UPDATE: 0.003, // Due to Paizo clarifying their stance, most references to SFRPG were returned to Starfinder
+    THE_ACTOR_SPEED_UPDATE: 0.004
 });
 
 export default async function migrateWorld() {
@@ -48,9 +49,12 @@ const migrateItemData = function (item, schema) {
 const migrateActorData = function (actor, schema) {
     const updateData = {};
 
+    const speedActorTypes = ['character', 'npc', 'drone'];
+
     if (schema < SFRPGActorMigrationSchemas.NPC_DATA_UPATE && actor.type === 'npc') _migrateNPCData(actor, updateData);
     if (schema < SFRPGActorMigrationSchemas.THE_PAINFUL_UPDATE) _resetActorFlags(actor, updateData);
     if (schema < SFRPGActorMigrationSchemas.THE_HAPPY_UPDATE && actor.type === 'character') _migrateActorAbilityScores(actor, updateData);
+    if (schema < SFRPGActorMigrationSchemas.THE_ACTOR_SPEED_UPDATE && speedActorTypes.includes(actor.type)) _migrateActorSpeed(actor, updateData);
 
     return updateData;
 };
@@ -101,6 +105,55 @@ const _migrateActorAbilityScores = function (actor, migratedData) {
     }
 
     migratedData["data.abilities"] = abilities;
+
+    return migratedData;
+};
+
+const _migrateActorSpeed = function (actor, migratedData) {
+    const actorData = actor.data;
+
+    const speedValue = actorData.attributes.speed?.value;
+
+    let baseSpeed = duplicate(speedValue);
+    if (baseSpeed && isNaN(baseSpeed)) {
+        baseSpeed = baseSpeed.replace(/\D/g,'');
+        baseSpeed = Number(baseSpeed);
+    }
+
+    // If all else fails, forcibly reset it to 30.
+    if (!baseSpeed || isNaN(baseSpeed)) {
+        baseSpeed = 30;
+    }
+
+    const speed = {
+        land: { base: 0 },
+        flying: { base: 0 },
+        swimming: { base: 0 },
+        burrowing: { base: 0 },
+        climbing: { base: 0 },
+        special: actorData.attributes.speed.special,
+        mainMovement: "land"
+    };
+        
+    const lowercaseSpeedValue = ("" + speedValue || "").toLowerCase();
+    if (lowercaseSpeedValue.includes("climb")) {
+        speed.climbing.base = baseSpeed;
+        speed.mainMovement = "climbing";
+    } else if (lowercaseSpeedValue.includes("fly")) {
+        speed.flying.base = baseSpeed;
+        speed.mainMovement = "flying";
+    } else if (lowercaseSpeedValue.includes("burrow")) {
+        speed.burrowing.base = baseSpeed;
+        speed.mainMovement = "burrowing";
+    } else if (lowercaseSpeedValue.includes("swim")) {
+        speed.swimming.base = baseSpeed;
+        speed.mainMovement = "swimming";
+    } else {
+        speed.land.base = baseSpeed;
+        speed.mainMovement = "land";
+    }
+
+    migratedData["data.attributes.speed"] = speed;
 
     return migratedData;
 };

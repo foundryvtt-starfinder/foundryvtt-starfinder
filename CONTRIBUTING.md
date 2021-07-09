@@ -4,7 +4,7 @@ If you would like to contribute to the project then I welcome any contributions.
 
 In order to setup your development environment, we need to ensure that a few things are in place:
 
-1. You'll need `node` installed on your system. You will need a version of `node` that is at least 12.x or greater. To install it, go to https://nodejs.org/en/download/ and choose an installer for your operating system. The current LTS is probably a good choice, though the current version works just as well.
+1. You'll need `node` installed on your system. You will need a version of `node` that is at least 14.x or greater. To install it, go to https://nodejs.org/en/download/ and choose an installer for your operating system. The current LTS is probably a good choice, though the current version works just as well.
 2. This system uses `gulp` to process `less` into usable `css` as well as some other utilities. You will need to install `gulp` for this purpose. To install, open up your prefered command line tool and enter the following command `npm install --global gulp-cli`. This will install the `gulp` command line utilities globally.
 3. You'll also need a `git` client installed. Whether that is the command line tool or something like Sourcetree or GitKraken is up to you.
 

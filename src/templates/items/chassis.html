@@ -58,19 +58,65 @@
                 </div>
             </div>
 
+            <h4 class="section-header">{{ localize "SFRPG.ActorSheet.Attributes.Speed.MovementSpeedTitle" }}</h4>
+
             <div class="form-group">
-                <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.SpeedBase" }}</label>
+                <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.speed.value" value="{{itemData.speed.value}}" data-dtype="Number"/>
-                 </div>
+                    <input type="text" name="data.speed.land.base" value="{{itemData.speed.land.base}}" data-dtype="Number"/>
+                </div>
              </div>
+
+             <div class="form-group">
+                <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.speed.burrowing.base" value="{{itemData.speed.burrowing.base}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.speed.climbing.base" value="{{itemData.speed.climbing.base}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.speed.flying.base" value="{{itemData.speed.flying.base}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.speed.swimming.base" value="{{itemData.speed.swimming.base}}" data-dtype="Number"/>
+                </div>
+            </div>
 
              <div class="form-group">
                 <label>{{ localize "SFRPG.DroneSheet.Chassis.Details.BaseStatistics.SpeedSpecial" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.speed.special" value="{{itemData.speed.special}}" data-dtype="String"/>
+                    <input type="text" name="data.speed.special" value="{{itemData.speed.special}}" data-dtype="String" placeholder="{{ localize 'SFRPG.SpeedSpecial' }}"/>
                  </div>
              </div>
+
+             <div class="form-group">
+                <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.MainMovementType" }}</label>
+                <div class="form-fields">
+                    <select name="data.speed.mainMovement">
+                        {{#select itemData.speed.mainMovement}}
+                        <option value="land">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land" }}</option>
+                        <option value="burrowing">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing" }}</option>
+                        <option value="climbing">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}</option>
+                        <option value="flying">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }}</option>
+                        <option value="swimming">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}</option>
+                        <option value="special">{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special" }}</option>
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
 
              <h4 class="section-header">{{ localize "SFRPG.DroneSheet.Chassis.Details.Defense.Header" }}</h4>
 

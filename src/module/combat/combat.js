@@ -612,7 +612,7 @@ export class CombatSFRPG extends Combat {
         // Construct chat message data
         let messageData = mergeObject({
           speaker: {
-            scene: canvas.scene.id,
+            scene: game.scenes.current?.id,
             actor: combatant.actor ? combatant.actor.id : null,
             token: combatant.token.id,
             alias: combatant.token.name

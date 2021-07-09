@@ -145,7 +145,7 @@ Hooks.once("setup", function () {
         "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
         "weaponSpecial", "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
         "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
-        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus"
+        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds"
     ];
 
     for (let o of toLocalize) {
@@ -171,8 +171,10 @@ Hooks.once("ready", () => {
     const readyTime = (new Date()).getTime();
 
     console.log("Starfinder | [READY] Overriding canvas drop handler");
-    defaultDropHandler = canvas._dragDrop.callbacks.drop;
-    canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+    if (canvas.initialized) {
+        defaultDropHandler = canvas._dragDrop.callbacks.drop;
+        canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+    }
 
     console.log("Starfinder | [READY] Setting up AOE template overrides");
     templateOverrides();

@@ -120,6 +120,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const itemData = this.item.data.data;
         data.placeholders = this.item.data.flags.placeholders || {};
 
+        // Only physical items have hardness, hp, and their own saving throw when attacked.
         if (data.isPhysicalItem) {
             if (itemData.attributes) {
                 const itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
@@ -223,11 +224,11 @@ export class ItemSheetSFRPG extends ItemSheet {
         else if (item.type === "vehicleSystem")
         {
             // Only systems which can be activated have an activation status
-            if (itemData.canBeActivated === false) {
+            if (this.document.canBeActivated() === false) {
                 return ""
             }
 
-            return itemData.isActivated ? "Activated" : "Not Activated";
+            return this.document.isActive() ? "Activated" : "Not Activated";
         }
     }
 

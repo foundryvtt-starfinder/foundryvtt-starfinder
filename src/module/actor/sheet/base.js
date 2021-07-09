@@ -1,5 +1,6 @@
 import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
+import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
 
 import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory.js";
@@ -150,6 +151,8 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
         if (!this.options.editable) return;
+        
+        html.find('.config-button').click(this._onConfigMenu.bind(this));
 
         html.find('.toggle-container').click(this._onToggleContainer.bind(this));
 
@@ -272,6 +275,18 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
 
         super._onChangeTab();
+    }
+
+    _onConfigMenu(event) {
+      event.preventDefault();
+      const button = event.currentTarget;
+      let app;
+      switch ( button.dataset.action ) {
+        case "movement":
+          app = new ActorMovementConfig(this.object);
+          break;
+      }
+      app?.render(true);
     }
 
     _prepareTraits(traits) {
@@ -472,45 +487,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        const updateData = {};
-
-        if (item.data.data.uses.max > 0) {
-            if (!item.data.data.uses.value || item.data.data.uses.value <= 0) {
-                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.UI.ErrorNoCharges", {name: item.name}));
-                return false;
-            }
-
-            updateData['data.uses.value'] = Math.max(0, item.data.data.uses.value - 1);
-        }
-
-        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : true;
-        updateData['data.isActive'] = desiredOutput;
-
-        await item.update(updateData);
-        // Render the chat card template
-        const templateData = {
-            actor: this.actor,
-            item: item,
-            tokenId: this.actor.token?.id,
-            action: "SFRPG.ChatCard.ItemActivation.Activates",
-            labels: item.labels,
-            hasAttack: item.hasAttack,
-            hasDamage: item.hasDamage,
-            isVersatile: item.isVersatile,
-            hasSave: item.hasSave
-        };
-
-        const template = `systems/sfrpg/templates/chat/item-action-card.html`;
-        const html = await renderTemplate(template, templateData);
-
-        // Create the chat message
-        const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: html
-        };
-
-        await ChatMessage.create(chatData, { displaySheet: false });
+        item.setActive(true);
     }
 
     async _onDeactivateFeat(event) {
@@ -518,30 +495,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : false;
-        await item.update({'data.isActive': desiredOutput});
-
-        if (item.data.data.duration.value) {
-            // Render the chat card template
-            const templateData = {
-                actor: this.actor,
-                item: item,
-                tokenId: this.actor.token?.id,
-                action: "SFRPG.ChatCard.ItemActivation.Deactivates"
-            };
-
-            const template = `systems/sfrpg/templates/chat/item-action-card.html`;
-            const html = await renderTemplate(template, templateData);
-
-            // Create the chat message
-            const chatData = {
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                content: html
-            };
-
-            await ChatMessage.create(chatData, { displaySheet: false });
-        }
+        item.setActive(false);
     }
 
     /**
@@ -927,6 +881,17 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else if (parsedDragData.pack) {
             const pack = game.packs.get(parsedDragData.pack);
             const itemData = await pack.getDocument(parsedDragData.id);
+
+            if (itemData.type === "class") {
+                const existingClass = targetActor.findItem(x => x.type === "class" && x.name === itemData.name);
+                if (existingClass) {
+                    const levelUpdate = {};
+                    levelUpdate["data.levels"] = existingClass.data.data.levels + 1;
+                    existingClass.update(levelUpdate)
+                    return existingClass;
+                }
+            }
+
             const createResult = await targetActor.createItem(itemData.data._source);
             const addedItem = targetActor.getItem(createResult[0].id);
 
@@ -989,6 +954,16 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else {
             const sidebarItem = game.items.get(parsedDragData.id);
             if (sidebarItem) {
+                if (sidebarItem.type === "class") {
+                    const existingClass = targetActor.findItem(x => x.type === "class" && x.name === sidebarItem.name);
+                    if (existingClass) {
+                        const levelUpdate = {};
+                        levelUpdate["data.levels"] = existingClass.data.data.levels + 1;
+                        existingClass.update(levelUpdate)
+                        return existingClass;
+                    }
+                }
+
                 const addedItemResult = await targetActor.createItem(duplicate(sidebarItem.data));
                 if (addedItemResult.length > 0) {
                     const addedItem = targetActor.getItem(addedItemResult[0].id);

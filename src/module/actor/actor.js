@@ -560,7 +560,7 @@ export class ActorSFRPG extends Actor {
      * @param {String} saveId The save id (e.g. "will")
      * @param {Object} options Options which configure how saves are rolled
      */
-    async rollSave(saveId, options = {}) {
+    rollSave(saveId, options = {}) {
         const label = CONFIG.SFRPG.saves[saveId];
         const save = this.data.data.attributes[saveId];
 
@@ -575,7 +575,7 @@ export class ActorSFRPG extends Actor {
 
         this.setupRollContexts(rollContext);
 
-        return await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -683,7 +683,7 @@ export class ActorSFRPG extends Actor {
         const totalDamageDealt = Math.floor(parseFloat(html.find('.dice-total').text()) * multiplier);
         const isHealing = (multiplier < 0);
         const promises = [];
-        for (const controlledToken of canvas.tokens.controlled) {
+        for (const controlledToken of canvas.tokens?.controlled) {
             let promise = null;
             if (controlledToken.actor.data.type === "starship") {
                 promise = ActorSFRPG._applyStarshipDamage(html, controlledToken.actor, totalDamageDealt, isHealing);
@@ -960,8 +960,8 @@ export class ActorSFRPG extends Actor {
         const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
         const updateItems = items.map(item => {
             return {
-                _id: item._id,
-                "data.uses.value": item.data.data.uses.max
+                _id: item.id,
+                "data.uses.value": item.getMaxUses()
             }
         });
 
@@ -1102,8 +1102,8 @@ export class ActorSFRPG extends Actor {
         const items = this.items.filter(i => i.data.data.uses && ["sr", "lr", "day"].includes(i.data.data.uses.per));
         const updateItems = items.map(item => {
             return {
-                _id: item._id,
-                "data.uses.value": item.data.data.uses.max
+                _id: item.id,
+                "data.uses.value": item.getMaxUses()
             }
         });
 
@@ -1534,9 +1534,14 @@ export class ActorSFRPG extends Actor {
                         const promise = this.createEmbeddedDocuments("Item", [itemData]);
                         promise.then((createdItems) => {
                             if (createdItems && createdItems.length > 0) {
-                                Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName: conditionName, enabled: enabled});
+                                const updateData = {};
+                                updateData[`data.conditions.${conditionName}`] = true;
+                                this.update(updateData).then(() => {
+                                    Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName: conditionName, enabled: enabled});
+                                });
                             }
                         });
+                        
                         return promise;
                     }
                 }
@@ -1545,7 +1550,11 @@ export class ActorSFRPG extends Actor {
             if (conditionItem) {
                 const promise = this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
                 promise.then(() => {
-                    Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
+                    const updateData = {};
+                    updateData[`data.conditions.${conditionName}`] = false;
+                    this.update(updateData).then(() => {
+                        Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
+                    });
                 });
                 return promise;
             }
