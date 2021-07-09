@@ -1329,7 +1329,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Case 1 - a synthetic actor from a Token, legacy reasons the token Id can be a compound key of sceneId and tokenId
         let tokenId = card.dataset.tokenId;
         let sceneId = card.dataset.sceneId;
-        if (!sceneId && tokenId.includes('.')) {
+        if (!sceneId && tokenId?.includes('.')) {
             [sceneId, tokenId] = tokenId.split(".");
         }
 
@@ -1364,7 +1364,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     static _getChatCardTarget(card) {
         const character = game.user.character;
-        const controlled = canvas.tokens.controlled;
+        const controlled = canvas.tokens?.controlled;
         if (controlled.length === 0) return character || null;
         if (controlled.length === 1) return controlled[0].actor;
         else throw new Error(`You must designate a specific Token as the roll target`);

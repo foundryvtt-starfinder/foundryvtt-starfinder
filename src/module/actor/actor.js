@@ -683,7 +683,7 @@ export class ActorSFRPG extends Actor {
         const totalDamageDealt = Math.floor(parseFloat(html.find('.dice-total').text()) * multiplier);
         const isHealing = (multiplier < 0);
         const promises = [];
-        for (const controlledToken of canvas.tokens.controlled) {
+        for (const controlledToken of canvas.tokens?.controlled) {
             let promise = null;
             if (controlledToken.actor.data.type === "starship") {
                 promise = ActorSFRPG._applyStarshipDamage(html, controlledToken.actor, totalDamageDealt, isHealing);

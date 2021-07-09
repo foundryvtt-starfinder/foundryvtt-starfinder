@@ -635,6 +635,8 @@ export async function onCreateItemCollection(message) {
         return false;
     }
 
+    if (!canvas.initialized) return false;
+
     const createdTokenPromise = canvas.scene.createEmbeddedDocuments("Token", [{
         name: payload.itemData[0].name,
         x: payload.position.x,
@@ -873,7 +875,7 @@ export class ActorItemHelper {
         this.sceneId = sceneId;
 
         if (tokenId) {
-            this.token = canvas.tokens.placeables.find(x => x.id === tokenId);
+            this.token = canvas.tokens?.placeables.find(x => x.id === tokenId);
             if (!this.token) {
                 this.token = game.scenes.get(sceneId).data.tokens.find(x => x.id === tokenId);
             }
