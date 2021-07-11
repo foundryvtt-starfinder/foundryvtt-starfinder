@@ -500,7 +500,10 @@ export class DiceSFRPG {
 
         if (die?.options?.isDamageRoll) {
             const types = die?.options?.damageTypes;
+            const operators = die?.options?.damageTypeOperators;
 
+            html.data("damageTypes", types);
+            html.data("operators", operators);
         }
     }
 

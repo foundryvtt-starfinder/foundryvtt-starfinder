@@ -731,14 +731,50 @@ export class ActorSFRPG extends Actor {
         }
     }
 
-    static async _applyActorDamage(roll, actor, totalDamageDealt, isHealing) {
+    /**
+     * Apply damage to an Actor.
+     * 
+     * @param {JQuery|Roll} htmlOrRoll The html for the chat card
+     * @param {ActorSFRPG} actor The actor this damage is being applied to
+     * @param {number} totalDamageDealt The total damage being dealt
+     * @param {boolean} isHealing Is this actualy a healing affect
+     * @returns A Promise that resolves to the updated Actor
+     */
+    static async _applyActorDamage(htmlOrRoll, actor, totalDamageDealt, isHealing) {
         let remainingUndealtDamage = totalDamageDealt;
         const actorUpdate = {};
+        const actorData = foundry.utils.duplicate(actor.data.data);
+
+        let damageTypes = [];
+        let operators = [];
+
+        if (htmlOrRoll && htmlOrRoll instanceof Roll) {
+            // TODO: get the first Die term, which will have the data
+            // on the damage types and it's operator.
+        } else if (htmlOrRoll && htmlOrRoll.length > 0) {
+            damageTypes = htmlOrRoll.data("damageTypes");
+            operators = htmlOrRoll.data("operators");
+        }
+
+        let vulnerabilities = actorData.traits.dv;
+        let energyResistances = actorData.traits.dr;
+        let immunities = actorData.traits.di;
+        let damageReduction = actorData.traits.damageReduction;
+
+
+        
+        // If the attack is dealing more than one type of damage, then 
+        // things that affact immunities, resitances, and vulnerabilities
+        // will be handeled differently. Different amounts of the total damage
+        // might be decreased, increased, or just flat out ignored.
+        if (!isHealing && damageTypes.length > 1) {
+
+        }
 
         /** Update temp hitpoints */
         if (!isHealing) {
-            const originalTempHP = parseInt(actor.data.data.attributes.hp.temp) || 0;
-            const newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.tempmax);
+            const originalTempHP = parseInt(actorData.attributes.hp.temp) || 0;
+            const newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
             remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
             
             actorUpdate["data.attributes.hp.temp"] = newTempHP;
@@ -747,15 +783,15 @@ export class ActorSFRPG extends Actor {
         /** Update stamina points */
         if (!isHealing) {
             const originalSP = actor.data.data.attributes.sp.value;
-            const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actor.data.data.attributes.sp.max);
+            const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actorData.attributes.sp.max);
             remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
             
             actorUpdate["data.attributes.sp.value"] = newSP;
         }
 
         /** Update hitpoints */
-        const originalHP = actor.data.data.attributes.hp.value;
-        const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.max);
+        const originalHP = actorData.attributes.hp.value;
+        const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actorData.attributes.hp.max);
         remainingUndealtDamage = remainingUndealtDamage - (originalHP - newHP);
         
         actorUpdate["data.attributes.hp.value"] = newHP;
@@ -763,7 +799,7 @@ export class ActorSFRPG extends Actor {
         const promise = actor.update(actorUpdate);
 
         /** If the remaining undealt damage is equal to or greater than the max hp, the character dies of Massive Damage. */
-        if (actor.data.type === "character" && remainingUndealtDamage >= actor.data.data.attributes.hp.max) {
+        if (actor.data.type === "character" && remainingUndealtDamage >= actorData.attributes.hp.max) {
             const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", {name: actor.name});
             ui.notifications.warn(localizedDeath, {permanent: true});
         }
