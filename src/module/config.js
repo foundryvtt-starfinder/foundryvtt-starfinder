@@ -149,6 +149,11 @@ SFRPG.damageTypes = {
     "nonlethal": "SFRPG.Damage.Types.Nonlethal"
 };
 
+SFRPG.damageTypeOperators = {
+    "and": "SFRPG.Damage.Types.Operators.And",
+    "or": "SFRPG.Damage.Types.Operators.Or"
+}
+
 SFRPG.weaponDamageTypes = {
     "acid": "SFRPG.DamageTypesAcid",
     "acid+bludgeoning": "SFRPG.DamageTypesAcidAndBludgeoning",

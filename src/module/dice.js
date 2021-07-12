@@ -268,7 +268,6 @@ export class DiceSFRPG {
     * @param {Array} parts                The dice roll component parts, excluding the initial d20
     * @param {Object} criticalData        Critical damage information, in case of a critical hit
     * @param {Array} damageTypes          Array of damage types associated with this roll
-    * @param {string} damageTypeOperators Determines how to handle damage when there are multiple damage types
     * @param {RollContext} rollContext    The contextual data for this roll
     * @param {String} title               The dice roll UI window title
     * @param {Object} speaker             The ChatMessage speaker to pass when creating the chat
@@ -277,7 +276,7 @@ export class DiceSFRPG {
     * @param {Function} onClose           Callback for actions to take when the dialog form is closed
     * @param {Object} dialogOptions       Modal dialog options
     */
-    static async damageRoll({ event = new Event(''), parts, criticalData, damageTypes, damageTypeOperators, rollContext, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
+    static async damageRoll({ event = new Event(''), parts, criticalData, damageTypes, rollContext, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
         flavor = flavor || title;
 
         if (!rollContext?.isValid()) {
@@ -342,7 +341,6 @@ export class DiceSFRPG {
             if (die) {
                 die.options.isDamageRoll = true;
                 die.options.damageTypes = damageTypes;
-                die.options.damageTypeOperators = damageTypeOperators;
 
                 const properties = rollContext.allContexts["item"]?.data?.properties;
                 if (properties) {
@@ -352,10 +350,20 @@ export class DiceSFRPG {
 
             const tags = [];
 
-            // TODO @Deepflame: Remove this once @wildj79 implements proper damage type tracking.
             if (damageTypes) {
                 for (const damageType of damageTypes) {
-                    tags.push({tag: `damageType${damageType.capitalize()}`, text: CONFIG.SFRPG.damageTypes[damageType]});
+                    const tag = "damage-type-" + damageType.types.join(`-${damageType.operator}-`);
+                    let text = "";
+                    for (const type of damageType.types) {
+                        text += CONFIG.SFRPG.damageTypes[type];
+                        if (damageType.operator.trim() !== "")
+                            text += ` ${CONFIG.SFRPG.damageTypeOperators[damageType.operator]} `;
+                    }
+
+                    if (damageType.operator.trim() !== "")
+                        text = text.substring(0, text.lastIndexOf(CONFIG.SFRPG.damageTypeOperators[damageType.operator]) - 1);
+                    
+                    tags.push({ tag: tag, text: text });
                 }
             }
 
@@ -396,7 +404,7 @@ export class DiceSFRPG {
             if (tags.length > 0) {
                 tagContent = `<div class="sfrpg chat-card"><footer class="card-footer">`;
                 for (const tag of tags) {
-                    tagContent += `<span id="${tag.tag}"> ${tag.text}</span>`;
+                    tagContent += `<span class="${tag.tag}"> ${tag.text}</span>`;
                 }
                 tagContent += `</footer></div>`;
             }
@@ -496,14 +504,11 @@ export class DiceSFRPG {
         const roll = message.roll;
         if (!roll?.dice.length > 0) return;
         const die = roll.dice[0];
-        console.log(die);
 
         if (die?.options?.isDamageRoll) {
             const types = die?.options?.damageTypes;
-            const operators = die?.options?.damageTypeOperators;
 
             html.data("damageTypes", types);
-            html.data("operators", operators);
         }
     }
 

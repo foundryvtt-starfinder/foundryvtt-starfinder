@@ -9,7 +9,7 @@ import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modif
 import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
 import { DroneRepairDialog } from "../apps/drone-repair-dialog.js";
-import { getItemContainer } from "./actor-inventory.js"
+import { getItemContainer, removeItemFromActorAsync } from "./actor-inventory.js"
 
 import { } from "./crew-update.js"
 import { ItemSheetSFRPG } from "../item/sheet.js";
@@ -711,22 +711,22 @@ export class ActorSFRPG extends Actor {
      * it to work. So, don't mention that this method exists for the time being ;) Consider it
      * an easter egg.
      * 
-     * @param {JQuery} html The jQuery object representing the roll data.
+     * @param {Roll} roll The Roll object representing the roll data.
      * @param {Number} multiplier A number that is used to change the damage value.
      */
-    async applyDamage(html, multiplier) {
-        const totalDamageDealt = Math.floor(parseFloat(html.find('.dice-total').text()) * multiplier);
+    async applyDamage(roll, multiplier) {
+        const totalDamageDealt = roll.total;
         const isHealing = (multiplier < 0);
 
         switch (this.data.type) {
             case 'starship':
-                await ActorSFRPG._applyStarshipDamage(html, this, totalDamageDealt, isHealing);
+                await ActorSFRPG._applyStarshipDamage(roll, this, totalDamageDealt, isHealing);
                 break;
             case 'vehicle':
-                await ActorSFRPG._applyVehicleDamage(html, this, totalDamageDealt, isHealing);
+                await ActorSFRPG._applyVehicleDamage(roll, this, totalDamageDealt, isHealing);
                 break;
             default:
-                await ActorSFRPG._applyActorDamage(html, this, totalDamageDealt, isHealing);
+                await ActorSFRPG._applyActorDamage(roll, this, totalDamageDealt, isHealing);
                 break;
         }
     }
@@ -734,41 +734,125 @@ export class ActorSFRPG extends Actor {
     /**
      * Apply damage to an Actor.
      * 
-     * @param {JQuery|Roll} htmlOrRoll The html for the chat card
+     * @param {JQuery|Roll} htmlOrRoll The html for the chat card or a Roll object
      * @param {ActorSFRPG} actor The actor this damage is being applied to
      * @param {number} totalDamageDealt The total damage being dealt
      * @param {boolean} isHealing Is this actualy a healing affect
      * @returns A Promise that resolves to the updated Actor
      */
     static async _applyActorDamage(htmlOrRoll, actor, totalDamageDealt, isHealing) {
-        let remainingUndealtDamage = totalDamageDealt;
+        let remainingUndealtDamage = 0;
         const actorUpdate = {};
         const actorData = foundry.utils.duplicate(actor.data.data);
 
         let damageTypes = [];
-        let operators = [];
 
         if (htmlOrRoll && htmlOrRoll instanceof Roll) {
             // TODO: get the first Die term, which will have the data
             // on the damage types and it's operator.
         } else if (htmlOrRoll && htmlOrRoll.length > 0) {
             damageTypes = htmlOrRoll.data("damageTypes");
-            operators = htmlOrRoll.data("operators");
         }
 
-        let vulnerabilities = actorData.traits.dv;
-        let energyResistances = actorData.traits.dr;
-        let immunities = actorData.traits.di;
-        let damageReduction = actorData.traits.damageReduction;
+        if (damageTypes.length === 0) remainingUndealtDamage = totalDamageDealt;
 
+        if (!isHealing) {
+            for (const damageType of damageTypes) {
+                if (damageType.types.length > 1 && damageType.operator === "and") {
+                    // If the attack is dealing more than one type of damage, then 
+                    // things that affact immunities, resitances, and vulnerabilities
+                    // will be handeled differently. Different amounts of the total damage
+                    // might be decreased, increased, or just flat out ignored.
+                    
+                    // First, we split the damage.
+                    const damageAppliedPerType = Math.floor(totalDamageDealt / damageType.types.length);
+                    const remainder = totalDamageDealt % damageType.types.length;
+                    let remainderAppliedTo = "";
+                    if (remainder > 0) {
+                        // We have an uneven amount of damage being split among the damage types, so prompt the user to apply
+                        // the remainder to a specific type.
+                        let content = `<p>${game.i18n.localize("The total damage can't be split evenly between all damage types. Please select a damage type to apply the remainder to:")}</p><div class="form-group">`;
+                        content += "<select name='selected-damage-type'>"
+                        for (const type of damageType.types) {
+                            content += `<option value="${type}">${CONFIG.SFRPG.damageTypes[type]}</option>`
+                        }
+                        content += "</select></div>"
 
-        
-        // If the attack is dealing more than one type of damage, then 
-        // things that affact immunities, resitances, and vulnerabilities
-        // will be handeled differently. Different amounts of the total damage
-        // might be decreased, increased, or just flat out ignored.
-        if (!isHealing && damageTypes.length > 1) {
+                        remainderAppliedTo = await Dialog.prompt({
+                            title: game.i18n.localize("Assign Damage Remainder"),
+                            content: content,
+                            label: game.i18n.localize("Ok"),
+                            callback: html => html.find('[name="selected-damage-type"]').val()
+                        });
+                    }
 
+                    // Loop through the damage types
+                    for (const type of damageType.types) {
+                        let damageBeingAssessed = damageAppliedPerType;
+                        if (remainderAppliedTo === type) damageBeingAssessed += remainder;
+
+                        // Apply immunities first
+                        if (!actor.isImmuneToDamageType(type)) {
+                            // Then vulnerabilties
+                            damageBeingAssessed += actor._applyVulnerabilities(damageBeingAssessed, type);
+                            // Now apply energy resistance
+                            damageBeingAssessed -= actor._applyEnergyResistances(damageBeingAssessed, type);
+                            // And lastly, damage reduction
+                            damageBeingAssessed -= await actor._applyDamageReduction(damageBeingAssessed, type);
+
+                            remainingUndealtDamage += damageBeingAssessed;
+                        } else {
+                            // The assumption here is that if an actor is immune to a specific type of damage, then
+                            // checking everything else is kind of pointless, since the damage from this source is
+                            // being completely negated.
+                            remainingUndealtDamage += 0;
+                        }
+                    }
+                } else if (damageType.types.length > 1 && damageType.operator === "or") {
+                    // We have more than one damage type, but instead of spliting the damage between all
+                    // of them, we prompt the user to choose which one applies
+                    let content = `<p>${game.i18n.localize("Please choose a damage type to apply to this damage:")}</p><div class="form-group"><select name="selected-damage-type">`
+                    for (const type of damageType.types) {
+                        content += `<option value="${type}">${CONFIG.SFRPG.damageTypes[type]}</option>`
+                    }
+                    content += "</select></div>";
+
+                    let type = await Dialog.prompt({
+                        title: game.i18n.localize("Choose Damage Type"),
+                        content: content,
+                        label: game.i18n.localize("Ok"),
+                        callback: html => html.find('[name="selected-damage-type"]').val()
+                    });
+
+                    if (!actor.isImmuneToDamageType(type)) {
+                        let damageBeingApplied = totalDamageDealt;
+                        damageBeingApplied += actor._applyVulnerabilities(damageBeingApplied, type);
+                        damageBeingApplied -= actor._applyEnergyResistances(damageBeingApplied, type);
+                        damageBeingApplied -= await actor._applyDamageReduction(damageBeingApplied, type);
+
+                        remainingUndealtDamage = damageBeingApplied;
+                    } else {
+                        remainingUndealtDamage = 0;
+                    }                    
+                } else {
+                    // there's only one type of damage (or untyped), so all immunities, resistances, and vulnerabilities
+                    // will be calculated off of this one type.
+                    let type = damageType.types[0];
+
+                    if (!actor.isImmuneToDamageType(type)) {
+                        let damageBeingApplied = totalDamageDealt;
+                        damageBeingApplied += actor._applyVulnerabilities(damageBeingApplied, type);
+                        damageBeingApplied -= actor._applyEnergyResistances(damageBeingApplied, type);
+                        damageBeingApplied -= await actor._applyDamageReduction(damageBeingApplied, type);
+
+                        remainingUndealtDamage = damageBeingApplied;
+                    } else {
+                        remainingUndealtDamage = 0;
+                    }
+                }
+            }
+        } else {
+            remainingUndealtDamage = totalDamageDealt;
         }
 
         /** Update temp hitpoints */
@@ -805,6 +889,89 @@ export class ActorSFRPG extends Actor {
         }
     
         return promise;
+    }
+
+    /**
+     * Checks whether an acotr is immune to a specific damage type.
+     * 
+     * @param {string} damageType The damage type to evaluate.
+     * @returns True if the actor is immune to this damage type
+     */
+    isImmuneToDamageType(damageType) {
+        return this.data.data.traits.di.value.includes(damageType);
+    }
+
+    /**
+     * Apply any damage vulnerabilites to the supplied damage type.
+     * 
+     * @param {number} damageBeingApplied The damage of the supplied type that will be increased if this actor has a vulnerability to it.
+     * @param {string} damageType The damage type being evaluated.
+     * @returns The amount of damage being added by the vulnerability.
+     */
+    _applyVulnerabilities(damageBeingApplied, damageType) {
+        if (this.data.data.traits.dv.value.includes(damageType))
+            return Math.floor(damageBeingApplied * 0.5);
+            
+        return 0;
+    }
+
+    /**
+     * Apply any energy resistance to the supplied damage type.
+     * 
+     * @param {number} damageBeingApplied The damage of the supplied type that will be negated if this actor has a resistance to it.
+     * @param {string} damageType The damage type being evaluated.
+     * @returns The amount of damage that is being negated if this actor has resistance to this damage type.
+     */
+    _applyEnergyResistances(damageBeingApplied, damageType) {
+        const energyResistances = this.data.data.traits.dr.value;
+        if (energyResistances.length > 0 && !["bludgeoning", "piercing", "slashing"].includes(damageType)) {
+            let resistedDamage = 0;
+            for (const resistance of energyResistances) {
+                console.log(resistance);
+                if (resistance[damageType]) {
+                    resistedDamage += resistance[damageType];
+                }
+            }
+
+            return Math.min(damageBeingApplied, resistedDamage);
+        }
+
+        return 0;
+    }
+    
+    /**
+     * Applies any damage reduction that this actor might have on the supplied damage type.
+     * 
+     * @param {number} damageBeingApplied The amount of damage being negated if this actor has damage reduction.
+     * @param {string} damageType The damage type being evaluated.
+     * @returns The amount of damage being negated by damage reduction.
+     */
+    async _applyDamageReduction(damageBeingApplied, damageType) {
+        const damageReduction = this.data.data.traits.damageReduction;
+        if (damageReduction.value && ["bludgeoning", "piercing", "slashing"].includes(damageType)) {
+            // NOTE: We have a cunumdrum here. The negation of damage reduction is fairly complex.
+            // We could probably have a complex set of Regular expressions designed to filter out
+            // all of the various negation effects, but applying them consistently is cumbersome at best.
+            // My belief is that it's better to prompt the user to say yay or nay on whether the damage reduction
+            // is negated or not.
+            let isNegated = false;
+            if (damageReduction.negatedBy?.trim() !== "") {
+                let content = `<p>${game.i18n.format("Damage reduction is negated by {negatedBy} for this actor. Should this reduction be negated?", { negatedBy: damageReduction.negatedBy })}</p>`;
+                isNegated = await Dialog.confirm({
+                    title: game.i18n.localize("Negate Damage Reduction?"),
+                    content: content,
+                    defaultYes: false
+                });
+            }
+
+            if (isNegated) return 0;
+
+            let reducedDamage = parseFloat(damageReduction.value);
+
+            return Math.min(damageBeingApplied, reducedDamage);
+        }
+
+        return 0;
     }
 
     static async _applyVehicleDamage(roll, vehicleActor, totalDamageDealt, isHealing) {
