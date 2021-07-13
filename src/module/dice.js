@@ -355,13 +355,13 @@ export class DiceSFRPG {
                     const tag = "damage-type-" + damageType.types.join(`-${damageType.operator}-`);
                     let text = "";
                     for (const type of damageType.types) {
-                        text += CONFIG.SFRPG.damageTypes[type];
+                        text += SFRPG.damageTypes[type];
                         if (damageType.operator.trim() !== "")
-                            text += ` ${CONFIG.SFRPG.damageTypeOperators[damageType.operator]} `;
+                            text += ` ${SFRPG.damageTypeOperators[damageType.operator]} `;
                     }
 
                     if (damageType.operator.trim() !== "")
-                        text = text.substring(0, text.lastIndexOf(CONFIG.SFRPG.damageTypeOperators[damageType.operator]) - 1);
+                        text = text.substring(0, text.lastIndexOf(SFRPG.damageTypeOperators[damageType.operator]) - 1);
                     
                     tags.push({ tag: tag, text: text });
                 }
@@ -378,7 +378,7 @@ export class DiceSFRPG {
                     try {
                         for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.properties)) {
                             if (isEnabled) {
-                                tags.push({tag: key, text: SFRPG.weaponProperties[key]});
+                                tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
                             }
                         }
                     } catch { }
@@ -386,13 +386,13 @@ export class DiceSFRPG {
 
                 /** Starship Weapons use data.special for their properties */
                 if (itemContext.entity.data.type === "starshipWeapon") {
-                    tags.push({tag: itemContext.entity.data.data.weaponType, text: SFRPG.starshipWeaponTypes[itemContext.entity.data.data.weaponType]});
+                    tags.push({tag: `starship-weapon-type ${itemContext.entity.data.data.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.data.data.weaponType]});
 
                     if (itemContext.entity.data.data.special) {
                         try {
                             for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.special)) {
                                 if (isEnabled) {
-                                    tags.push({tag: key, text: SFRPG.starshipWeaponProperties[key]});
+                                    tags.push({tag: `starship-weapon-properties ${key}`, text: SFRPG.starshipWeaponProperties[key]});
                                 }
                             }
                         } catch { }
@@ -404,7 +404,7 @@ export class DiceSFRPG {
             if (tags.length > 0) {
                 tagContent = `<div class="sfrpg chat-card"><footer class="card-footer">`;
                 for (const tag of tags) {
-                    tagContent += `<span class="${tag.tag}"> ${tag.text}</span>`;
+                    tagContent += `<span class="${tag.tag}">${tag.text}</span>`;
                 }
                 tagContent += `</footer></div>`;
             }
