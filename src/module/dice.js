@@ -310,17 +310,19 @@ export class DiceSFRPG {
                 return null;
             }
 
+            const tags = [];
+
             const isCritical = (button === "Critical");
             if (isCritical) {
                 finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                 
-                flavor = `${title} (Critical)`;
+                flavor = game.i18n.format("{title} (Critical)", { "title": title });
 
                 if (criticalData !== undefined) {
-                    flavor = `${title} (Critical; ${criticalData.effect})`;
+                    flavor = game.i18n.format("{title} (Critical; {criticalEffect})", { "title": title, "criticalEffect": criticalData.effect });
 
-                    let critRoll = criticalData.parts.filter(x => x[0].length > 0).map(x => x[0]).join("+");
+                    let critRoll = criticalData.parts.filter(x => x.formula.length > 0).map(x => x.formula).join("+");
                     if (critRoll.length > 0) {
                         finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
                         finalFormula.formula = finalFormula.formula + " + " + critRoll;
@@ -342,14 +344,16 @@ export class DiceSFRPG {
                 die.options.isDamageRoll = true;
                 die.options.damageTypes = damageTypes;
 
+                if (criticalData) {
+                    die.options.criticalData = criticalData;
+                }
+
                 const properties = rollContext.allContexts["item"]?.data?.properties;
                 if (properties) {
                     die.options.isModal = properties.modal || properties.double;
                 }
             }
-
-            const tags = [];
-
+            
             if (damageTypes) {
                 for (const damageType of damageTypes) {
                     const tag = "damage-type-" + damageType.types.join(`-${damageType.operator}-`);
@@ -367,8 +371,11 @@ export class DiceSFRPG {
                 }
             }
 
-            if (button === "Critical") {
-                tags.push({tag: `critical`, text: "Critical Hit"});
+            if (isCritical) {
+                tags.push({tag: `critical`, text: game.i18n.localize("Critical Hit")});
+                if (criticalData !== undefined && criticalData.effect.length > 0) {
+                    tags.push({ tag: "critical-effect", text: game.i18n.format("Critical Effect: {criticalEffect}", {"criticalEffect": criticalData.effect })});
+                }
             }
 
             const itemContext = rollContext.allContexts['item']; 
@@ -404,7 +411,7 @@ export class DiceSFRPG {
             if (tags.length > 0) {
                 tagContent = `<div class="sfrpg chat-card"><footer class="card-footer">`;
                 for (const tag of tags) {
-                    tagContent += `<span class="${tag.tag}">${tag.text}</span>`;
+                    tagContent += `<span class="${tag.tag}"> ${tag.text}</span>`;
                 }
                 tagContent += `</footer></div>`;
             }
@@ -507,8 +514,10 @@ export class DiceSFRPG {
 
         if (die?.options?.isDamageRoll) {
             const types = die?.options?.damageTypes;
+            const critical = die?.options?.criticalData;
 
             html.data("damageTypes", types);
+            html.data("critical", critical);
         }
     }
 
