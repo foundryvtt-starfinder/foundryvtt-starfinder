@@ -22,7 +22,7 @@ try {
 
                     // if (type === "healing") return arr;
                     if (!type) {
-                        arr.push({ "formula": formula, "types": {}, "operator": "" });
+                        arr.push({ "formula": formula || "", "types": {}, "operator": "" });
                     } else if (type.includes("+")) {
                         let types = type.split('+');
                         arr.push({ "formula": formula, "types": { [types[0]]: true, [types[1]]: true }, "operator": "and" });

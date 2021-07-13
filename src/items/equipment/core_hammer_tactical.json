@@ -71,10 +71,14 @@
     "chatFlavor": "",
     "critical": {
       "parts": [
-        [
-          "1d6",
-          "electricity+fire"
-        ]
+        {
+          "formula": "1d6",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ],
       "effect": "Jet 1d6"
     },
