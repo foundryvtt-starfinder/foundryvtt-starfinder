@@ -721,10 +721,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d10+18",
-              ""
-            ]
+            {
+              "formula": "2d10+18",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1122,10 +1123,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d10+10",
-              "electricity+fire"
-            ]
+            {
+              "formula": "2d10+10",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

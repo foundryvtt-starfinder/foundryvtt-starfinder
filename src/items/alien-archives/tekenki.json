@@ -745,10 +745,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "6d12+28",
-              "bludgeoning"
-            ]
+            {
+              "formula": "6d12+28",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1310,19 +1313,24 @@
         "chatFlavor": "Burn [[3d8]]",
         "critical": {
           "parts": [
-            [
-              "3d8",
-              ""
-            ]
+            {
+              "formula": "3d8",
+              "types": {},
+              "operator": ""
+            }
           ],
           "effect": "burn 3d8"
         },
         "damage": {
           "parts": [
-            [
-              "6d10+17",
-              "electricity+fire"
-            ]
+            {
+              "formula": "6d10+17",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "3d8",

@@ -1175,10 +1175,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d3+3",
-              "acid+bludgeoning"
-            ]
+            {
+              "formula": "1d3+3",
+              "types": {
+                "acid": true,
+                "bludgeoning": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1442,10 +1446,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8",
-              "healing"
-            ]
+            {
+              "formula": "1d8",
+              "types": {
+                "healing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1838,10 +1845,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6",
-              "piercing"
-            ]
+            {
+              "formula": "1d6",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

@@ -683,10 +683,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8 + 6",
-              "cold+slashing"
-            ]
+            {
+              "formula": "1d8 + 6",
+              "types": {
+                "cold": true,
+                "slashing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -969,19 +973,24 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d6",
-              ""
-            ]
+            {
+              "formula": "1d6",
+              "types": {},
+              "operator": ""
+            }
           ],
           "effect": "bleed"
         },
         "damage": {
           "parts": [
-            [
-              "1d10+6",
-              "cold+piercing"
-            ]
+            {
+              "formula": "1d10+6",
+              "types": {
+                "cold": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1734,10 +1743,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d3",
-              ""
-            ]
+            {
+              "formula": "1d3",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2012,10 +2022,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8 + @abilities.wis.mod",
-              "healing"
-            ]
+            {
+              "formula": "1d8 + @abilities.wis.mod",
+              "types": {
+                "healing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

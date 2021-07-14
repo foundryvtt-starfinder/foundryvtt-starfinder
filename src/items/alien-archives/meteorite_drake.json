@@ -621,10 +621,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "6d10+26",
-              "slashing"
-            ]
+            {
+              "formula": "6d10+26",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -836,10 +839,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "6d10+16",
-              "bludgeoning"
-            ]
+            {
+              "formula": "6d10+16",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1026,10 +1032,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "17d10",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "17d10",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

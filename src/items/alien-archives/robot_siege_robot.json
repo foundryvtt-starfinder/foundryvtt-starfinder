@@ -733,10 +733,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "4d12+15",
-              "slashing"
-            ]
+            {
+              "formula": "4d12+15",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -941,19 +944,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "21]",
-              "piercing"
-            ]
+            {
+              "formula": "21]",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Wound [DC"
         },
         "damage": {
           "parts": [
-            [
-              "4d12+15",
-              "piercing"
-            ]
+            {
+              "formula": "4d12+15",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1162,10 +1171,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "13d8+15",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "13d8+15",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

@@ -611,10 +611,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d4+3",
-              "slashing"
-            ]
+            {
+              "formula": "1d4+3",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -765,10 +768,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6+3",
-              "piercing"
-            ]
+            {
+              "formula": "1d6+3",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -887,23 +893,32 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d6",
-              "electricity"
-            ]
+            {
+              "formula": "1d6",
+              "types": {
+                "electricity": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Second Arc 1d6"
         },
         "damage": {
           "parts": [
-            [
-              "1d8+1",
-              "electricity"
-            ],
-            [
-              "1d6",
-              "electricity"
-            ]
+            {
+              "formula": "1d8+1",
+              "types": {
+                "electricity": true
+              },
+              "operator": ""
+            },
+            {
+              "formula": "1d6",
+              "types": {
+                "electricity": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

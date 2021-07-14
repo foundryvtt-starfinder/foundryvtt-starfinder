@@ -841,10 +841,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d4+8",
-              "slashing"
-            ]
+            {
+              "formula": "2d4+8",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1054,10 +1057,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8+7",
-              "electricity+fire"
-            ]
+            {
+              "formula": "1d8+7",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1276,10 +1283,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d4+7",
-              "fire"
-            ]
+            {
+              "formula": "3d4+7",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2001,10 +2011,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "4d8",
-              ""
-            ]
+            {
+              "formula": "4d8",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",

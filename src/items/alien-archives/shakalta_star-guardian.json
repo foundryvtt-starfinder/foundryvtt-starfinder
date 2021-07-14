@@ -1028,19 +1028,24 @@
         "chatFlavor": "Unwieldy",
         "critical": {
           "parts": [
-            [
-              "1d6",
-              ""
-            ]
+            {
+              "formula": "1d6",
+              "types": {},
+              "operator": ""
+            }
           ],
           "effect": "Pulse"
         },
         "damage": {
           "parts": [
-            [
-              "2d6",
-              "electricity+fire"
-            ]
+            {
+              "formula": "2d6",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -2085,10 +2090,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6+1d4+9",
-              "slashing"
-            ]
+            {
+              "formula": "1d6+1d4+9",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2368,10 +2376,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d3",
-              ""
-            ]
+            {
+              "formula": "1d3",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2634,10 +2643,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d4+1",
-              ""
-            ]
+            {
+              "formula": "1d4+1",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2813,10 +2823,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6",
-              "bludgeoning"
-            ]
+            {
+              "formula": "1d6",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

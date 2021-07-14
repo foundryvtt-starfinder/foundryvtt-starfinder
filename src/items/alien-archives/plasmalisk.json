@@ -618,14 +618,21 @@
         },
         "damage": {
           "parts": [
-            [
-              "6d6+22",
-              "piercing"
-            ],
-            [
-              "2d6",
-              "electricity+fire"
-            ]
+            {
+              "formula": "6d6+22",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            },
+            {
+              "formula": "2d6",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -838,10 +845,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "8d6",
-              "electricity+fire"
-            ]
+            {
+              "formula": "8d6",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

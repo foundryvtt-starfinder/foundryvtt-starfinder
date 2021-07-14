@@ -525,10 +525,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d12",
-              "acid+bludgeoning"
-            ]
+            {
+              "formula": "3d12",
+              "types": {
+                "acid": true,
+                "bludgeoning": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -710,10 +714,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d12+25",
-              "acid+piercing"
-            ]
+            {
+              "formula": "3d12+25",
+              "types": {
+                "acid": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -927,10 +935,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d12+25",
-              "slashing"
-            ]
+            {
+              "formula": "3d12+25",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1144,10 +1155,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d10+25",
-              "piercing"
-            ]
+            {
+              "formula": "3d10+25",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1361,10 +1375,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d12+25",
-              "acid+piercing"
-            ]
+            {
+              "formula": "3d12+25",
+              "types": {
+                "acid": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1578,10 +1596,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d12+25",
-              "slashing"
-            ]
+            {
+              "formula": "3d12+25",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1795,10 +1816,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d10+25",
-              "piercing"
-            ]
+            {
+              "formula": "3d10+25",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2005,10 +2029,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "17d6",
-              "acid"
-            ]
+            {
+              "formula": "17d6",
+              "types": {
+                "acid": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2186,10 +2213,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "17d6",
-              "sonic"
-            ]
+            {
+              "formula": "17d6",
+              "types": {
+                "sonic": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2279,10 +2309,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d4*10",
-              ""
-            ]
+            {
+              "formula": "1d4*10",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "knocked prone and pushed 1d4*10 ft away",
