@@ -1094,7 +1094,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
             throw new Error("you may not make a Damage Roll with this item");
         }
 
-        const parts = itemData.damage.parts.map(d => d[0]);
+        const parts = itemData.damage.parts.map(d => d.formula);
 
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
