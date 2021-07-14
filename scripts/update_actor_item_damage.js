@@ -38,6 +38,27 @@ try {
                                 return arr;
                             }, []);
                         }
+
+                        if (item.data.critical?.parts?.length > 0) {
+                            item.data.critical.parts = item.data.critical.parts.reduce((arr, curr) => {
+                                let [formula, type] = curr;
+
+                                // if (type === "healing") return arr;
+                                if (!type) {
+                                    arr.push({ "formula": formula || "", "types": {}, "operator": "" });
+                                } else if (type.includes("+")) {
+                                    let types = type.split('+');
+                                    arr.push({ "formula": formula, "types": { [types[0]]: true, [types[1]]: true }, "operator": "and" });
+                                } else if (type.includes('|')) {
+                                    let types = type.split('|');
+                                    arr.push({ "formula": formula, "types": { [types[0]]: true, [types[1]]: true }, "operator": "or" });
+                                } else {
+                                    arr.push({ "formula": formula, "types": { [type]: true }, "operator": "" } );
+                                }
+
+                                return arr;
+                            }, []);
+                        }
                     }
                 }
 
