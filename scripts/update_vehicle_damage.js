@@ -17,8 +17,8 @@ try {
             if (vehicle.items && vehicle.items.length > 0) {
                 console.log(`Updating the damage types for vehicle attacks...`);
                 for (const item of vehicle.items) {
-                    if (item.data.damage && item.data.damage.parts > 0) {
-                        item.data.damage.parts = vehicle.data.damage.parts.reduce((arr, curr) => {
+                    if (item.data.damage?.parts?.length > 0) {
+                        item.data.damage.parts = item.data.damage.parts.reduce((arr, curr) => {
                             let [formula, type] = curr;
 
                             // if (type === "healing") return arr;

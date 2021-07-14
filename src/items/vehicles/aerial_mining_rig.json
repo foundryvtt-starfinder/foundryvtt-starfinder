@@ -123,10 +123,13 @@
         "modifiers": [],
         "damage": {
           "parts": [
-            [
-              "2*(23d10)",
-              "bludgeoning"
-            ]
+            {
+              "formula": "2*(23d10)",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "save": {
@@ -163,10 +166,13 @@
         "modifiers": [],
         "damage": {
           "parts": [
-            [
-              "23d10",
-              "bludgeoning"
-            ]
+            {
+              "formula": "23d10",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "save": {
@@ -311,10 +317,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "8d8",
-              "fire+force"
-            ]
+            {
+              "formula": "8d8",
+              "types": {
+                "fire": true,
+                "force": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
