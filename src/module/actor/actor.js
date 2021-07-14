@@ -1623,12 +1623,12 @@ export class ActorSFRPG extends Actor {
                 if (actorData.data.crew.pilot?.actors?.length > 0) {
                     const pilotActor = actorData.data.crew.pilot.actors[0];
                     let pilotData = null;
-                    if (actor instanceof ActorSFRPG) {
+                    if (pilotActor instanceof ActorSFRPG) {
                         pilotData = pilotActor.data.data;
                     } else {
                         pilotData = pilotActor.data;
                     }
-                    rollContext.addContext("pilot", actor, pilotData);
+                    rollContext.addContext("pilot", pilotActor, pilotData);
                 }
             }
         }

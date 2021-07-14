@@ -1034,7 +1034,23 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
             ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"))
         }
 
-        const parts = itemData.damage.parts.map(d => d[0]);
+        const [parts, damageTypes] = itemData.damage.parts.reduce((acc, cur) => {
+            if (cur.formula && cur.formula.trim() !== "") acc[0].push(cur.formula);
+            if (cur.types) {
+                const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
+                const obj = { types: [], operator: "" };
+
+                for (const type of filteredTypes) {
+                    obj.types.push(type[0]);
+                }
+
+                if (cur.operator) obj.operator = cur.operator;
+
+                acc[1].push(obj);
+            }
+
+            return acc;
+        }, [[], []]);
 
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
@@ -1055,6 +1071,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             rollContext: rollContext,
             title: title,
+            damageTypes: damageTypes,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 skipUI: true,
