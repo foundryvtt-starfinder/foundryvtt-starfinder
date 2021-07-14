@@ -326,6 +326,17 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
                 .map(e => ({name: CONFIG.SFRPG.weaponProperties[e[0]], tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]})
                 )
         );
+        
+        // Show damage values on weapons
+        if (data.damage.parts) {
+            for (const dmgPart of data.damage.parts) {
+                const dmg = dmgPart[0].split("+")[0];
+                const dmgType = dmgPart[1];
+                props.push(
+                    { name: 'Damage '.concat(dmg).concat(" ").concat(dmgType), tooltip: null },
+                );
+            }
+        }
     }
 
     /* -------------------------------------------- */
