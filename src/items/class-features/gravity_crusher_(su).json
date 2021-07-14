@@ -52,10 +52,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "(ceil(1,@classes.solarian.levels / 2))d6",
-          "bludgeoning"
-        ]
+        {
+          "formula": "(ceil(1,@classes.solarian.levels / 2))d6",
+          "types": {
+            "bludgeoning": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

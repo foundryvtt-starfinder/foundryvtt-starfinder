@@ -49,10 +49,16 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d3",
-          ""
-        ]
+        {
+          "formula": "1d3",
+          "types": {
+            "acid": true,
+            "cold": true,
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "or"
+        }
       ]
     },
     "formula": "",
