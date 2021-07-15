@@ -333,7 +333,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
                 const dmg = dmgPart[0].split("+")[0];
                 const dmgType = dmgPart[1];
                 props.push(
-                    { name: 'Damage '.concat(dmg).concat(" ").concat(dmgType), tooltip: null },
+                    { name: "Damage " + dmg + " " + dmgType, tooltip: null },
                 );
             }
         }
