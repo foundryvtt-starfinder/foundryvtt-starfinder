@@ -32,6 +32,16 @@ export default function (engine) {
             return computedBonus;
         };
 
+        const armorSpeed = fact.armor?.data?.data?.armor?.speedAdjust || 0;
+        if (armorSpeed) {
+            data.attributes.speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
+                speed: game.i18n.localize("SFRPG.ActorSheet.Attributes.Speed.Types.All"),
+                type: SFRPG.modifierTypes["armor"],
+                mod: armorSpeed.signedString(),
+                source: fact.armor.name
+            }));
+        }
+        
         for (const speedKey of Object.keys(SFRPG.speeds)) {
             if (speedKey === "special") {
                 continue;
@@ -39,7 +49,6 @@ export default function (engine) {
 
             const baseValue = Number(data.attributes.speed[speedKey].base);
 
-            const supportedTypes = [SFRPGEffectType.ALL_SPEEDS, SFRPGEffectType.SPECIFIC_SPEED];
             let filteredModifiers = fact.modifiers.filter(mod => {
                 return (mod.enabled || mod.modifierType === "formula") && (mod.effectType === SFRPGEffectType.ALL_SPEEDS || (mod.effectType === SFRPGEffectType.SPECIFIC_SPEED && mod.valueAffected === speedKey));
             });
@@ -64,7 +73,7 @@ export default function (engine) {
                 return sum;
             }, 0);
 
-            data.attributes.speed[speedKey].value = Math.max(0, baseValue + bonus);
+            data.attributes.speed[speedKey].value = Math.max(0, baseValue + armorSpeed + bonus);
 
             for(const modifier of Object.values(filteredMultiplyModifiers)) {
                 if (!modifier || !modifier.length) {
