@@ -108,6 +108,10 @@ export default function (engine) {
             }
 
             data.attributes.speed[speedKey].value = Math.floor(data.attributes.speed[speedKey].value);
+
+            if (speedKey === "flying") {
+                data.attributes.speed[speedKey].maneuverability = data.attributes.speed[speedKey].baseManeuverability;
+            }
         }
 
         return fact;
