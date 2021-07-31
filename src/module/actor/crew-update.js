@@ -24,7 +24,7 @@ Hooks.on('deleteActor', async (entity, options, userId) => {
         /** Iterate through crewed actors to see if they need to remove a deleted character or NPC from their crew */
         for (const actor of game.actors.contents) {
             if (actor.data.type === "starship" || actor.data.type === "vehicle") {
-                const actorUpdated = await actor.removeFromCrew(entity._id);
+                const actorUpdated = await actor.removeFromCrew(entity.id);
                 if (actorUpdated) {
                     actor.prepareData();
                     try {
