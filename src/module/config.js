@@ -1403,3 +1403,9 @@ SFRPG.speeds = {
     "swimming": "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming",
     "special": "SFRPG.ActorSheet.Attributes.Speed.Types.Special"
 };
+
+SFRPG.flightManeuverability = {
+    "-1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Clumsy",
+    "0": "SFRPG.ActorSheet.Attributes.Speed.Flight.Average",
+    "1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Perfect"
+};

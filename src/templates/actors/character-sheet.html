@@ -90,44 +90,7 @@
                     </footer>
                 </li>
 
-                <li class="attribute" data-tippy-content="<strong>{{ localize "SFRPG.Speed" }}</strong><br>@attributes.speed.land.value<br>@attributes.speed.flying.value<br>@attributes.speed.swimming.value<br>@attributes.speed.burrowing.value<br>@attributes.speed.climbing.value<br>@attributes.speed.special{{#if data.attributes.speed.special}}<br><br>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}}: {{data.attributes.speed.special}}{{/if}}<br><br>{{#each data.attributes.speed.tooltip as |tip|}}{{tip}}<br>{{/each}}">
-                    <h4 class="attribute-name box-title">
-                        {{ localize "SFRPG.Speed" }}
-                        <a class="config-button" data-action="movement" title="Movement speed"><i class="fas fa-cog"></i></a>
-                    </h4>
-                    <div class="attribute-value">
-                        {{#if (eq data.attributes.speed.mainMovement "land")}}
-                            <span>{{data.attributes.speed.land.value}}</span> {{ localize "SFRPG.Units.Speed" }}
-                        {{else if (eq data.attributes.speed.mainMovement "burrowing")}}
-                            <span>{{data.attributes.speed.burrowing.value}}</span> {{ localize "SFRPG.Units.Speed" }}
-                        {{else if (eq data.attributes.speed.mainMovement "climbing")}}
-                            <span>{{data.attributes.speed.climbing.value}}</span> {{ localize "SFRPG.Units.Speed" }}
-                        {{else if (eq data.attributes.speed.mainMovement "flying")}}
-                            <span>{{data.attributes.speed.flying.value}}</span>  {{ localize "SFRPG.Units.Speed" }}
-                        {{else if (eq data.attributes.speed.mainMovement "swimming")}}
-                            <span>{{data.attributes.speed.swimming.value}}</span> {{ localize "SFRPG.Units.Speed" }}
-                        {{else if (eq data.attributes.speed.mainMovement "special")}}
-                            <input type="text" class="speed" name="data.attributes.speed.special"
-                                value="{{data.attributes.speed.special}}"
-                                placeholder="{{ localize 'SFRPG.SpeedSpecial' }}" disabled />
-                        {{/if}}
-                    </div>
-                    <footer class="attribute-footer">
-                        {{#if (eq data.attributes.speed.mainMovement "land")}}
-                            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land" }}
-                        {{else if (eq data.attributes.speed.mainMovement "burrowing")}}
-                            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing" }}
-                        {{else if (eq data.attributes.speed.mainMovement "climbing")}}
-                            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}
-                        {{else if (eq data.attributes.speed.mainMovement "flying")}}
-                            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }}
-                        {{else if (eq data.attributes.speed.mainMovement "swimming")}}
-                            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}
-                        {{else if (eq data.attributes.speed.mainMovement "special")}}
-                            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special" }}
-                        {{/if}}
-                    </footer>
-                </li>
+                {{> "systems/sfrpg/templates/actors/parts/actor-movement-element.html"}}
             </ul>
         </div>
     </header>
