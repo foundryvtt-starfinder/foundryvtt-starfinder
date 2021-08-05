@@ -98,7 +98,7 @@
       "rp": {
         "min": 0,
         "max": 10,
-        "value": 0,
+        "value": 8,
         "tooltip": []
       },
       "init": {
@@ -135,8 +135,23 @@
       "space": "",
       "reach": "",
       "speed": {
-        "value": "40 ft",
-        "special": "fly 40 ft. (jump jets, average)"
+        "land": {
+          "base": 40
+        },
+        "flying": {
+          "base": 40
+        },
+        "swimming": {
+          "base": 0
+        },
+        "burrowing": {
+          "base": 0
+        },
+        "climbing": {
+          "base": 0
+        },
+        "special": "fly (jump jets, average)",
+        "mainMovement": "land"
       },
       "keyability": "dex",
       "spellcasting": ""
@@ -564,7 +579,7 @@
     },
     "actorId": "jrPItmdAKakfneHO",
     "actorLink": false,
-    "disposition": -1,
+    "disposition": 1,
     "displayBars": 0,
     "bar1": {},
     "bar2": {},

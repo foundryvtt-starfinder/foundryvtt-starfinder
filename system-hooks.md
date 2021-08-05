@@ -63,6 +63,39 @@ Hooks.on("attackDamage", ({actor, item, roll, isCritical, formula, rollMetadata}
 });
 ```
 
+### itemActivationChanged
+Name: itemActivationChanged
+
+Called when: Whenever an item is activated or deactivated.
+
+Arguments: Object with three keys: actor, item, isActive.
+* actor: The actor who owns the item that is being activated or deactivated.
+* item: The item that is being activated or deactivated.
+* isActive: Boolean value indicating whether the item is being activated (true) or deactivated (false).
+
+Example usage:
+```javascript
+Hooks.on("itemActivationChanged", ({actor, item, isActive}) => {
+    console.log(['activatedOrDeactivated', actor, item, isActive]);
+});
+```
+
+### itemReloaded
+Name: itemReloaded
+
+Called when: Whenever an item is reloaded, using the reload button on the character sheet.
+
+Arguments: Object with two keys: actor, item.
+* actor: The actor who owns the item that is being reloaded.
+* item: The item that is being reloaded.
+
+Example usage:
+```javascript
+Hooks.on("itemReloaded", ({actor, item}) => {
+    console.log(['reloaded', actor, item]);
+});
+```
+
 ## Combat Hooks
 
 ### Combat hook event data

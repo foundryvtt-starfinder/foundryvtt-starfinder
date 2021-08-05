@@ -9,15 +9,16 @@ export const preloadHandlebarsTemplates = async function () {
     const templatePaths = [
         // Actor Sheet Partials
         "systems/sfrpg/templates/actors/parts/actor-biography.html",
-        "systems/sfrpg/templates/actors/parts/actor-traits.html",
-        "systems/sfrpg/templates/actors/parts/actor-inventory.html",
-        "systems/sfrpg/templates/actors/parts/actor-inventory-item.html",
-        "systems/sfrpg/templates/actors/parts/actor-features.html",
         "systems/sfrpg/templates/actors/parts/actor-features-item.html",
-        "systems/sfrpg/templates/actors/parts/actor-spellbook.html",
+        "systems/sfrpg/templates/actors/parts/actor-features.html",
+        "systems/sfrpg/templates/actors/parts/actor-inventory-item.html",
+        "systems/sfrpg/templates/actors/parts/actor-inventory.html",
         "systems/sfrpg/templates/actors/parts/actor-modifiers.html",
-        "systems/sfrpg/templates/actors/parts/actor-vehicle-systems.html",
+        "systems/sfrpg/templates/actors/parts/actor-movement-element.html",
+        "systems/sfrpg/templates/actors/parts/actor-spellbook.html",
+        "systems/sfrpg/templates/actors/parts/actor-traits.html",
         "systems/sfrpg/templates/actors/parts/actor-vehicle-system-item.html",
+        "systems/sfrpg/templates/actors/parts/actor-vehicle-systems.html",
 
         // Item Sheet Partials
         "systems/sfrpg/templates/items/parts/item-action.html",

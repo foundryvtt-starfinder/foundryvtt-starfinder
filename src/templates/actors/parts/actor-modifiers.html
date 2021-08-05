@@ -111,6 +111,8 @@
                             {{lookup ../../config.weaponTypes modifier.valueAffected}}
                         {{else if (eq modifier.effectType "weapon-property-damage")}}
                             {{lookup ../../config.weaponProperties modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "specific-speed")}}
+                            {{lookup ../../config.speeds modifier.valueAffected}}
                         {{else}}
                         {{!-- Nothing --}}
                         {{/if}}

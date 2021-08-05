@@ -18,6 +18,7 @@ import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
+import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
 import { ItemSFRPG } from "./module/item/item.js";
 import { CombatSFRPG } from "./module/combat/combat.js";
 import { ItemSheetSFRPG } from "./module/item/sheet.js";
@@ -30,12 +31,25 @@ import { generateUUID } from "./module/utilities.js";
 import migrateWorld from './module/migration.js';
 import CounterManagement from "./module/classes/counter-management.js";
 import templateOverrides from "./module/template-overrides.js";
-import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js"
-import { RPC } from "./module/rpc.js"
-import { DiceSFRPG } from './module/dice.js'
+import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js";
+import { RPC } from "./module/rpc.js";
+import { DiceSFRPG } from './module/dice.js';
+import { ActorSheetFlags } from './module/apps/actor-flags.js';
+import { ChoiceDialog } from './module/apps/choice-dialog.js';
+import { DroneRepairDialog } from './module/apps/drone-repair-dialog.js';
+import { AddEditSkillDialog } from './module/apps/edit-skill-dialog.js';
+import { InputDialog } from './module/apps/input-dialog.js';
+import { ItemCollectionSheet } from './module/apps/item-collection-sheet.js';
+import { ItemDeletionDialog } from './module/apps/item-deletion-dialog.js';
+import SFRPGModifierApplication from './module/apps/modifier-app.js';
+import { ActorMovementConfig } from './module/apps/movement-config.js';
+import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
+import { ShortRestDialog } from './module/apps/short-rest.js';
+import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
+import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
 
-import { initializeBrowsers } from "./module/packs/browsers.js"
-import { } from "./module/combat/combat.js"
+import { initializeBrowsers } from "./module/packs/browsers.js";
+import { } from "./module/combat/combat.js";
 
 let defaultDropHandler = null;
 let initTime = null;
@@ -57,15 +71,45 @@ Hooks.once('init', async function () {
     const engine = new Engine();
 
     game.sfrpg = {
-        rollItemMacro,
+        applications: {
+            // Actor Sheets
+            ActorSheetSFRPG,
+            ActorSheetSFRPGCharacter,
+            ActorSheetSFRPGDrone,
+            ActorSheetSFRPGHazard,
+            ActorSheetSFRPGNPC,
+            ActorSheetSFRPGStarship,
+            ActorSheetSFRPGVehicle,
+            // Item Sheets
+            ItemSheetSFRPG,
+            // Misc
+            ActorSheetFlags,
+            ChoiceDialog,
+            DroneRepairDialog,
+            AddEditSkillDialog,
+            InputDialog,
+            ItemCollectionSheet,
+            ItemDeletionDialog,
+            SFRPGModifierApplication,
+            ActorMovementConfig,
+            NpcSkillToggleDialog,
+            ShortRestDialog,
+            SpellCastDialog,
+            TraitSelectorSFRPG
+        },
+        config: SFRPG,
+        dice: DiceSFRPG,
+        documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
         engine,
-        SFRPGModifierType: SFRPGModifierType,
-        SFRPGEffectType: SFRPGEffectType,
-        SFRPGModifierTypes: SFRPGModifierTypes,
-        SFRPGModifier: SFRPGModifier,
+        entities: { ActorSFRPG, ItemSFRPG },
         generateUUID,
         migrateWorld,
-        dice: DiceSFRPG
+        rollItemMacro,
+        RPC,
+        SFRPGEffectType,
+        SFRPGModifier,
+        SFRPGModifierType,        
+        SFRPGModifierTypes
     };
 
     CONFIG.SFRPG = SFRPG;
@@ -145,7 +189,7 @@ Hooks.once("setup", function () {
         "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
         "weaponSpecial", "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
         "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
-        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus"
+        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds", "flightManeuverability"
     ];
 
     for (let o of toLocalize) {
@@ -171,8 +215,10 @@ Hooks.once("ready", () => {
     const readyTime = (new Date()).getTime();
 
     console.log("Starfinder | [READY] Overriding canvas drop handler");
-    defaultDropHandler = canvas._dragDrop.callbacks.drop;
-    canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+    if (canvas.initialized) {
+        defaultDropHandler = canvas._dragDrop.callbacks.drop;
+        canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+    }
 
     console.log("Starfinder | [READY] Setting up AOE template overrides");
     templateOverrides();

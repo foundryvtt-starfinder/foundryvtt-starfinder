@@ -81,6 +81,10 @@
             {{#each config.weaponProperties as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
+            {{else if (eq modifier.effectType "specific-speed")}}
+            {{#each config.speeds as |speed key|}}
+            <option value="{{key}}">{{speed}}</option>
+            {{/each}}
             {{else}}
             <option value=""></option>
             {{/if}}

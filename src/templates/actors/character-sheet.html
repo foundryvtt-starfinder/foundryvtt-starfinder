@@ -90,18 +90,7 @@
                     </footer>
                 </li>
 
-                <li class="attribute" data-tippy-content="<strong>{{ localize "SFRPG.Speed" }}</strong><br>@attributes.speed.value<br>@attributes.speed.special">
-                    <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
-                    <div class="attribute-value">
-                        <input name="data.attributes.speed.value" type="text" value="{{data.attributes.speed.value}}"
-                            placeholder="0" />
-                    </div>
-                    <footer class="attribute-footer">
-                        <input type="text" class="speed" name="data.attributes.speed.special"
-                            value="{{data.attributes.speed.special}}"
-                            placeholder="{{ localize 'SFRPG.SpeedSpecial' }}" />
-                    </footer>
-                </li>
+                {{> "systems/sfrpg/templates/actors/parts/actor-movement-element.html"}}
             </ul>
         </div>
     </header>
