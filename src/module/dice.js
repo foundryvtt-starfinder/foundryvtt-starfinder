@@ -259,24 +259,58 @@ export class DiceSFRPG {
     /* -------------------------------------------- */
 
     /**
-    * A standardized helper function for managing core 5e "d20 rolls"
+     * A data structure for storing data about damage types
+     * 
+     * @typedef {Object} DamageType
+     * @property {String[]} types    An array of damage types.
+     * @property {string}   operator An operator that determines how damage is split between multiple types.
+     */
+
+    /**
+     * A data structure for storing damage statistics.
+     * 
+     * @typedef {Object} DamagePart
+     * @property {string}                     formula  The roll formula to use.
+     * @property {{[key: string]: boolean}}   types    An array of damage types
+     * @property {string}                     operator An operator that determines how damage is split between multiple types.
+     */
+
+    /**
+     * A data structure to define critical damage.
+     * 
+     * @typedef {Object} CriticalDamage
+     * @property {string} effect The critical damage effect.
+     * @property {DamagePart[]} parts Any damage rolls used with this critical
+     */
+
+    /**
+     * Function called when the damage roll dialog is closed.
+     * 
+     * @callback onDamageDialogClosed
+     * @param {Roll} roll The roll.
+     * @param {string} formula The roll formula used in the roll.
+     * @param {string} finalFormula The final computed roll formula.
+     * @param {boolean} isCritical Was this a critial damage roll.
+     */
+
+    /**
+    * A standardized helper function for managing core Starfinder damage rolls.
     *
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
     *
-    * @param {Event} event                The triggering event which initiated the roll
-    * @param {Array} parts                The dice roll component parts, excluding the initial d20
-    * @param {Object} criticalData        Critical damage information, in case of a critical hit
-    * @param {Array} damageTypes          Array of damage types associated with this roll
-    * @param {RollContext} rollContext    The contextual data for this roll
-    * @param {String} title               The dice roll UI window title
-    * @param {Object} speaker             The ChatMessage speaker to pass when creating the chat
-    * @param {Function} flavor            A callable function for determining the chat message flavor given parts and data
-    * @param {Boolean} critical           Allow critical hits to be chosen
-    * @param {Function} onClose           Callback for actions to take when the dialog form is closed
-    * @param {Object} dialogOptions       Modal dialog options
+    * @param {Object}               data               Parameters passed into the method
+    * @param {Event}                [data.event]       The triggering event which initiated the roll
+    * @param {DamagePart[]}         data.parts         The dice roll component parts
+    * @param {CriticalDamage}       data.criticalData  Critical damage information, in case of a critical hit
+    * @param {RollContext}          data.rollContext   The contextual data for this roll
+    * @param {String}               data.title         The dice roll UI window title
+    * @param {Object}               data.speaker       The ChatMessage speaker to pass when creating the chat
+    * @param {Function}             data.flavor        A callable function for determining the chat message flavor given parts and data
+    * @param {onDamageDialogClosed} data.onClose       Callback for actions to take when the dialog form is closed
+    * @param {Object}               data.dialogOptions Modal dialog options
     */
-    static async damageRoll({ event = new Event(''), parts, criticalData, damageTypes, rollContext, title, speaker, flavor, critical = true, onClose, dialogOptions }) {
+    static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, onClose, dialogOptions }) {
         flavor = flavor || title;
 
         if (!rollContext?.isValid()) {
@@ -300,7 +334,7 @@ export class DiceSFRPG {
             dialogOptions: dialogOptions
         };
 
-        const formula = parts.join(" + ");
+        const formula = parts.filter(part => part.formula.length > 0).map(part => part.formula).join(" + ");
         const tree = new RollTree(options);
         return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
             if (button === 'cancel') {
@@ -336,11 +370,33 @@ export class DiceSFRPG {
 
             const rollObject = new Roll(finalFormula.finalRoll);
             let roll = await rollObject.evaluate({async: true});
+
+            /** @type {DamageType[]} */
+            const damageTypes = parts.reduce((acc, cur) => {
+                if (cur.types) {
+                    const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
+                    const obj = { types: [], operator: "" };
+
+                    for (const type of filteredTypes) {
+                        obj.types.push(type[0]);
+                    }
+
+                    if (cur.operator) obj.operator = cur.operator;
+
+                    acc.push(obj);
+                }
+
+                return acc;
+            }, []);
+
+            console.log(damageTypes);
             
             // Associate the damage types for this attack to the first DiceTerm
             // for the roll. 
             const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
+
             if (die) {
+                /** @type {boolean} */
                 die.options.isDamageRoll = true;
                 die.options.damageTypes = damageTypes;
 

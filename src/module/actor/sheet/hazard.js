@@ -88,7 +88,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
             return DiceSFRPG.damageRoll({
                 event: event,
                 rollContext: rollContext,
-                parts: [this.actor.data.data.attributes.damage.value],
+                parts: [{ "formula": this.actor.data.data.attributes.damage.value, "types": [], "operator": null }],
                 title: name,
                 flavor: name,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),

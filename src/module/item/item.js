@@ -884,23 +884,25 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
         // let parts = itemData.damage.parts.map(d => d[0]);
         // let damageTypes = itemData.damage.parts.map(d => d[1]);
 
-        let [parts, damageTypes] = itemData.damage.parts.reduce((acc, cur) => {
-            if (cur.formula && cur.formula.trim() !== "") acc[0].push(cur.formula);
-            if (cur.types) {
-                const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
-                const obj = { types: [], operator: "" };
+        // const [parts, damageTypes] = itemData.damage.parts.reduce((acc, cur) => {
+        //     if (cur.formula && cur.formula.trim() !== "") acc[0].push(cur.formula);
+        //     if (cur.types) {
+        //         const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
+        //         const obj = { types: [], operator: "" };
 
-                for (const type of filteredTypes) {
-                    obj.types.push(type[0]);
-                }
+        //         for (const type of filteredTypes) {
+        //             obj.types.push(type[0]);
+        //         }
 
-                if (cur.operator) obj.operator = cur.operator;
+        //         if (cur.operator) obj.operator = cur.operator;
 
-                acc[1].push(obj);
-            }
+        //         acc[1].push(obj);
+        //     }
 
-            return acc;
-        }, [[], []]);
+        //     return acc;
+        // }, [[], []]);
+        /** @type {DamageParts[]} */
+        const parts = itemData.damage.parts;
         
         let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
@@ -946,7 +948,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             //console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
             let computedBonus = bonus.modifier;
-            parts.push(computedBonus);
+            parts.push({ "formula": computedBonus, "types": [], "operator": null });
             return computedBonus;
         };
 
@@ -1002,7 +1004,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (additionalModifiers.length > 0) {
             rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
-            parts.push("@additional.modifiers.bonus");
+            parts.push({ "formula": "@additional.modifiers.bonus", "types": [], "operator": null });
         }
 
         // Call the roll helper utility
@@ -1012,7 +1014,6 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
-            damageTypes: damageTypes,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 width: 400,
@@ -1034,23 +1035,25 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
             ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"))
         }
 
-        const [parts, damageTypes] = itemData.damage.parts.reduce((acc, cur) => {
-            if (cur.formula && cur.formula.trim() !== "") acc[0].push(cur.formula);
-            if (cur.types) {
-                const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
-                const obj = { types: [], operator: "" };
+        // const [parts, damageTypes] = itemData.damage.parts.reduce((acc, cur) => {
+        //     if (cur.formula && cur.formula.trim() !== "") acc[0].push(cur.formula);
+        //     if (cur.types) {
+        //         const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
+        //         const obj = { types: [], operator: "" };
 
-                for (const type of filteredTypes) {
-                    obj.types.push(type[0]);
-                }
+        //         for (const type of filteredTypes) {
+        //             obj.types.push(type[0]);
+        //         }
 
-                if (cur.operator) obj.operator = cur.operator;
+        //         if (cur.operator) obj.operator = cur.operator;
 
-                acc[1].push(obj);
-            }
+        //         acc[1].push(obj);
+        //     }
 
-            return acc;
-        }, [[], []]);
+        //     return acc;
+        // }, [[], []]);
+
+        const parts = itemData.damage.parts;
 
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
@@ -1071,7 +1074,6 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             rollContext: rollContext,
             title: title,
-            damageTypes: damageTypes,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 skipUI: true,
@@ -1094,7 +1096,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
             throw new Error("you may not make a Damage Roll with this item");
         }
 
-        const parts = itemData.damage.parts.map(d => d.formula);
+        const parts = itemData.damage.parts;
 
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
