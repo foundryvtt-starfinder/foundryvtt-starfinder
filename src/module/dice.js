@@ -1,6 +1,116 @@
 import SFRPGCustomChatMessage from "./chat/chatbox.js";
 import { SFRPG } from "./config.js";
 
+// Type definitions for documentation.
+/**
+ * A data structure for storing data about damage types
+ * 
+ * @typedef {Object} DamageType
+ * @property {String[]} types    An array of damage types.
+ * @property {string}   operator An operator that determines how damage is split between multiple types.
+ */
+
+/**
+ * A data structure for storing damage statistics.
+ * 
+ * @typedef {Object} DamagePart
+ * @property {string}                     formula  The roll formula to use.
+ * @property {{[key: string]: boolean}}   types    A set of key value pairs that determines the available damage types.
+ * @property {string}                     operator An operator that determines how damage is split between multiple types.
+ */
+
+/**
+ * A data structure to define critical damage.
+ * 
+ * @typedef {Object} CriticalDamage
+ * @property {string}       effect The critical damage effect.
+ * @property {DamagePart[]} parts  Any damage rolls used with this critical
+ */
+
+/**
+ * The data for a foundry Speaker
+ * 
+ * @typedef {Object} SpeakerData
+ * @property {string} scene The internal ID for the associated scene.
+ * @property {string} actor The internal ID for the associated actor.
+ * @property {string} token The internal ID for the associated token.
+ * @property {string} alias The name of the speaker.
+ */
+
+/**
+ * Options that can be passed into a foundry Dialog.
+ * 
+ * @typedef {Object} DialogOptions
+ * @property {boolean}  [jQuery]          Whether to provide jQuery objects to callback functions (if true)
+ *                                        or play HTMLElement instances (if false). This is currently true by 
+ *                                        default but in the future will become false by default.
+ * @property {string}   [baseApplication] A named "base application" which generates an additional hook
+ * @property {number}   [width]           The default pixel width for the rendered HTML
+ * @property {number}   [height]          The default pixel height for the rendered HTML
+ * @property {number}   [top]             The default offset-top position for the rendered HTML
+ * @property {number}   [left]            The default offset-left position for the rendered HTML
+ * @property {number}   [scale]           A transformation scale for the rendered HTML
+ * @property {boolean}  [popOut]          Whether to display the application as a pop-out container
+ * @property {boolean}  [minimizable]     Whether the rendered application can be minimized (popOut only)
+ * @property {boolean}  [resizable]       Whether the rendered application can be drag-resized (popOut only)
+ * @property {string}   [id]              The default CSS id to assign to the rendered HTML
+ * @property {string[]} [classes]         An array of CSS string classes to apply to the rendered HTML
+ * @property {string}   [title]           A default window title string (popOut only)
+ * @property {string}   [template]        The default HTML template path to render for this Application
+ * @property {string[]} [scrollY]         A list of unique CSS selectors which target containers that should
+ *                                        have their vertical scroll positions preserved during a re-render.
+ * @property {TabsConfiguration[]} [tabs] An array of tabbed container configurations which should be enabled
+ *                                        for the application. 
+ * @property {boolean}  [skipUI]          Should this dialog be skipped?
+ */
+
+/**
+ * Temporary data structure used to hold the final formula and explanation for a Roll.
+ * 
+ * @typedef {Object} FinalFormula
+ * @property {string} finalRoll The finalized forumla used in the Roll
+ * @property {string} formula   The summarized explanation of the roll formula
+ */
+
+/**
+ * The results of a Roll
+ * 
+ * @typedef {Object} RollResult
+ * @property {Roll}         roll    The data for the roll
+ * @property {FinalFormula} formula The finalized formula used in the roll
+ */
+
+/**
+ * Function called when the attack roll dialog is closed.
+ * 
+ * @callback onD20DialogClosed
+ * @param {Roll}         roll         The data for the roll.
+ * @param {string}       formula      The formula used in the roll.
+ * @param {FinalFormula} finalFormula The final computed roll formula.
+ * @returns {void}
+ */
+
+/**
+ * Function called when the damage roll dialog is closed.
+ * 
+ * @callback onDamageDialogClosed
+ * @param {Roll}         roll         The data for the roll.
+ * @param {string}       formula      The formula used in the roll.
+ * @param {FinalFormula} finalFormula The final computed roll formula.
+ * @param {boolean}      isCritical   Was this a critial damage roll.
+ */
+
+/**
+ * Called when a roll is built.
+ * 
+ * @async
+ * @callback onRollBuilt
+ * @param {string}       button           The name of the button clicked.
+ * @param {string}       rollMode         The roll mode passed into the Roll.
+ * @param {FinalFormula} finalRollFormula The final roll formula.
+ * @returns {Promise<void>}
+ */
+
 export class DiceSFRPG {
     /**
     * A standardized helper function for managing core Starfinder "d20 rolls"
@@ -8,17 +118,18 @@ export class DiceSFRPG {
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
     *
-    * @param {Event} event               The triggering event which initiated the roll
-    * @param {Array} parts               The dice roll component parts, excluding the initial d20
-    * @param {RollContext} rollContext   The contextual data for this roll
-    * @param {String} title              The dice roll UI window title
-    * @param {Object} speaker            The ChatMessage speaker to pass when creating the chat
-    * @param {Function} flavor           A callable function for determining the chat message flavor given parts and data
-    * @param {Boolean} advantage         Allow rolling with advantage (and therefore also with disadvantage)
-    * @param {Number} critical           The value of d20 result which represents a critical success
-    * @param {Number} fumble             The value of d20 result which represents a critical failure
-    * @param {Function} onClose          Callback for actions to take when the dialog form is closed
-    * @param {Object} dialogOptions      Modal dialog options
+    * @param {Object}               data               The parameters passed into the method   
+    * @param {Event|JQuery.Event}   [data.event]       The triggering event which initiated the roll
+    * @param {string[]}             data.parts         The dice roll component parts, excluding the initial d20
+    * @param {RollContext}          data.rollContext   The contextual data for this roll
+    * @param {String}               data.title         The dice roll UI window title
+    * @param {SpeakerData}          data.speaker       The ChatMessage speaker to pass when creating the chat
+    * @param {string}               data.flavor        Any flavor text associated with this roll
+    * @param {Boolean}              [data.advantage]   Allow rolling with advantage (and therefore also with disadvantage)
+    * @param {Number}               [data.critical]    The value of d20 result which represents a critical success
+    * @param {Number}               [data.fumble]      The value of d20 result which represents a critical failure
+    * @param {onD20DialogClosed}    data.onClose       Callback for actions to take when the dialog form is closed
+    * @param {DialogOptions}        data.dialogOptions Modal dialog options
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true,
         critical = 20, fumble = 1, onClose, dialogOptions }) {
@@ -72,7 +183,7 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const rollObject = new Roll(finalFormula.finalRoll);
+            const rollObject = Roll.create(finalFormula.finalRoll);
             let roll = await rollObject.evaluate({async: true});
 
             // Flag critical thresholds
@@ -147,16 +258,18 @@ export class DiceSFRPG {
     * 
     * Returns a promise that will return an object containing roll and formula.
     *
-    * @param {Event} event               The triggering event which initiated the roll
-    * @param {String} rollFormula        The roll formula to use, excluding the initial die. If left empty, will look for parts.
-    * @param {Array} parts               The dice roll component parts, excluding the initial die
-    * @param {RollContext} rollContext   The contextual data for this roll
-    * @param {String} title              The dice roll UI window title
-    * @param {String} mainDie            The main die to use for this roll, e.g. "d20".
-    * @param {Boolean} advantage         Allow rolling with advantage (and therefore also with disadvantage)
-    * @param {Number} critical           The value of d20 result which represents a critical success
-    * @param {Number} fumble             The value of d20 result which represents a critical failure
-    * @param {Object} dialogOptions      Modal dialog options
+    * @param {Object}             data               The parameters passed into the method.
+    * @param {Event|JQuery.Event} [data.event]       The triggering event which initiated the roll
+    * @param {String}             [data.rollFormula] The roll formula to use, excluding the initial die. If left empty, will look for parts.
+    * @param {string[]}           data.parts         The dice roll component parts, excluding the initial die
+    * @param {RollContext}        data.rollContext   The contextual data for this roll
+    * @param {String}             data.title         The dice roll UI window title
+    * @param {String}             [data.mainDie]     The main die to use for this roll, e.g. "d20".
+    * @param {Boolean}            [data.advantage]   Allow rolling with advantage (and therefore also with disadvantage)
+    * @param {Number}             [data.critical]    The value of d20 result which represents a critical success
+    * @param {Number}             [data.fumble]      The value of d20 result which represents a critical failure
+    * @param {DialogOptions}      data.dialogOptions Modal dialog options
+    * @returns {Promise<RollResult>|Promise} Returns the roll's result or an empty promise.
     */
     static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, dialogOptions }) {
         
@@ -189,6 +302,7 @@ export class DiceSFRPG {
 
         const tree = new RollTree(options);
         if (dialogOptions?.skipUI) {
+            /** @type {RollResult|null} */
             let result = null;
             await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
                 let dieRoll = "1" + mainDie;
@@ -203,7 +317,7 @@ export class DiceSFRPG {
                 finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = dieRoll + " + " + finalFormula.formula;
 
-                const rollObject = new Roll(finalFormula.finalRoll);
+                const rollObject = Roll.create(finalFormula.finalRoll);
                 let roll = await rollObject.evaluate({async: true});
     
                 // Flag critical thresholds
@@ -239,7 +353,7 @@ export class DiceSFRPG {
                     finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
                     finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
     
-                    const rollObject = new Roll(finalFormula.finalRoll);
+                    const rollObject = Roll.create(finalFormula.finalRoll);
                     const roll = await rollObject.evaluate({async: true});
             
                     // Flag critical thresholds
@@ -256,43 +370,6 @@ export class DiceSFRPG {
         }
     }
 
-    /* -------------------------------------------- */
-
-    /**
-     * A data structure for storing data about damage types
-     * 
-     * @typedef {Object} DamageType
-     * @property {String[]} types    An array of damage types.
-     * @property {string}   operator An operator that determines how damage is split between multiple types.
-     */
-
-    /**
-     * A data structure for storing damage statistics.
-     * 
-     * @typedef {Object} DamagePart
-     * @property {string}                     formula  The roll formula to use.
-     * @property {{[key: string]: boolean}}   types    An array of damage types
-     * @property {string}                     operator An operator that determines how damage is split between multiple types.
-     */
-
-    /**
-     * A data structure to define critical damage.
-     * 
-     * @typedef {Object} CriticalDamage
-     * @property {string} effect The critical damage effect.
-     * @property {DamagePart[]} parts Any damage rolls used with this critical
-     */
-
-    /**
-     * Function called when the damage roll dialog is closed.
-     * 
-     * @callback onDamageDialogClosed
-     * @param {Roll} roll The roll.
-     * @param {string} formula The roll formula used in the roll.
-     * @param {string} finalFormula The final computed roll formula.
-     * @param {boolean} isCritical Was this a critial damage roll.
-     */
-
     /**
     * A standardized helper function for managing core Starfinder damage rolls.
     *
@@ -305,8 +382,8 @@ export class DiceSFRPG {
     * @param {CriticalDamage}       data.criticalData  Critical damage information, in case of a critical hit
     * @param {RollContext}          data.rollContext   The contextual data for this roll
     * @param {String}               data.title         The dice roll UI window title
-    * @param {Object}               data.speaker       The ChatMessage speaker to pass when creating the chat
-    * @param {Function}             data.flavor        A callable function for determining the chat message flavor given parts and data
+    * @param {object}               data.speaker       The ChatMessage speaker to pass when creating the chat
+    * @param {string}               data.flavor        Any flavor text associated with this roll
     * @param {onDamageDialogClosed} data.onClose       Callback for actions to take when the dialog form is closed
     * @param {Object}               data.dialogOptions Modal dialog options
     */
@@ -368,12 +445,12 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const rollObject = new Roll(finalFormula.finalRoll);
+            const rollObject = Roll.create(finalFormula.finalRoll);
             let roll = await rollObject.evaluate({async: true});
 
             /** @type {DamageType[]} */
             const damageTypes = parts.reduce((acc, cur) => {
-                if (cur.types) {
+                if (cur.types && !foundry.utils.isObjectEmpty(cur.types)) {
                     const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
                     const obj = { types: [], operator: "" };
 
@@ -388,8 +465,6 @@ export class DiceSFRPG {
 
                 return acc;
             }, []);
-
-            console.log(damageTypes);
             
             // Associate the damage types for this attack to the first DiceTerm
             // for the roll. 
@@ -565,15 +640,15 @@ export class DiceSFRPG {
         if (!message.isRoll || !message.isContentVisible) return;
 
         const roll = message.roll;
-        if (!roll?.dice.length > 0) return;
-        const die = roll.dice[0];
+        if (!(roll?.dice.length > 0)) return;
+        for (const die of roll.dice) {
+            if (die?.options?.isDamageRoll) {
+                const types = die?.options?.damageTypes;
+                const critical = die?.options?.criticalData;
 
-        if (die?.options?.isDamageRoll) {
-            const types = die?.options?.damageTypes;
-            const critical = die?.options?.criticalData;
-
-            html.data("damageTypes", types);
-            html.data("critical", critical);
+                html.data("damageTypes", types);
+                html.data("critical", critical);
+            }
         }
     }
 
@@ -613,11 +688,21 @@ export class DiceSFRPG {
 
 class RollTree {
     constructor(options = {}) {
+        /** @type {RollNode} */
         this.rootNode = null;
+        /** @type {RollNode} */
         this.nodes = {};
         this.options = options;
     }
 
+    /**
+     * Method used to build the roll data needed for a Roll.
+     * 
+     * @param {string} formula The formula for the Roll
+     * @param {RollContext} contexts The data context for this roll
+     * @param {onRollBuilt} callback Function called when the Roll is built.
+     * @returns Stuff
+     */
     async buildRoll(formula, contexts, callback) {
         this.formula = formula;
         this.contexts = contexts;

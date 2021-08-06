@@ -902,7 +902,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
         //     return acc;
         // }, [[], []]);
         /** @type {DamageParts[]} */
-        const parts = itemData.damage.parts;
+        const parts = itemData.damage.parts.map(part => part);
         
         let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
@@ -948,7 +948,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             //console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
             let computedBonus = bonus.modifier;
-            parts.push({ "formula": computedBonus, "types": [], "operator": null });
+            parts.push({ "formula": computedBonus, "types": null, "operator": null });
             return computedBonus;
         };
 
@@ -1004,7 +1004,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (additionalModifiers.length > 0) {
             rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
-            parts.push({ "formula": "@additional.modifiers.bonus", "types": [], "operator": null });
+            parts.push({ "formula": "@additional.modifiers.bonus", "types": null, "operator": null });
         }
 
         // Call the roll helper utility
@@ -1053,7 +1053,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
         //     return acc;
         // }, [[], []]);
 
-        const parts = itemData.damage.parts;
+        const parts = itemData.damage.parts.map(part => part);
 
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
@@ -1096,7 +1096,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
             throw new Error("you may not make a Damage Roll with this item");
         }
 
-        const parts = itemData.damage.parts;
+        const parts = itemData.damage.parts.map(part => part);
 
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
@@ -1209,7 +1209,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Submit the roll to chat
         if (formula) {
-            new Roll(formula).toMessage({
+            Roll.create(formula).toMessage({
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 flavor: `Consumes ${this.name}`
             });
@@ -1257,7 +1257,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (!data.recharge.value) return;
 
         // Roll the check
-        const rollObject = new Roll("1d6");
+        const rollObject = Roll.create("1d6");
         const roll = await rollObject.evaluate({async: true});
         const success = roll.total >= parseInt(data.recharge.value);
 

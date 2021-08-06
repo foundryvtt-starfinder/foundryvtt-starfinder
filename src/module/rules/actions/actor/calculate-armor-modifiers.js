@@ -21,7 +21,7 @@ export default function (engine) {
                 return 0;
             }
 
-            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
+            let roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
             let computedBonus = roll.total;
 
             if (computedBonus !== 0 && localizationKey) {

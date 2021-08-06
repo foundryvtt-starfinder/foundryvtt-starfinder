@@ -45,7 +45,7 @@ export default class SFRPGModifier {
         this.condition = condition;
         this.subtab = subtab;
 
-        let roll = new Roll(modifier.toString()).evaluate({maximize: true});
+        let roll = Roll.create(modifier.toString()).evaluate({maximize: true});
         this.max = roll.total;
 
         this._id = id ?? generateUUID();
