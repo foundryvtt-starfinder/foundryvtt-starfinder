@@ -51,7 +51,6 @@ import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import { } from "./module/combat/combat.js";
 import SFRPGRoll from "./module/rolls/roll.js";
-import SFRPGDie from "./module/rolls/die.js";
 
 let defaultDropHandler = null;
 let initTime = null;
@@ -123,8 +122,6 @@ Hooks.once('init', async function () {
     CONFIG.Item.documentClass = ItemSFRPG;
     CONFIG.Combat.documentClass = CombatSFRPG;
     CONFIG.Dice.rolls.unshift(SFRPGRoll);
-    CONFIG.Dice.types.push(SFRPGDie);
-    CONFIG.Dice.terms["d"] = SFRPGDie;
 
     CONFIG.fontFamilies.push("Exo2");
     CONFIG.defaultFontFamily = "Exo 2";

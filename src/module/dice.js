@@ -444,10 +444,7 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
-
-            const rollObject = Roll.create(finalFormula.finalRoll);
-            let roll = await rollObject.evaluate({async: true});
-
+            
             /** @type {DamageType[]} */
             const damageTypes = parts.reduce((acc, cur) => {
                 if (cur.types && !foundry.utils.isObjectEmpty(cur.types)) {
@@ -465,25 +462,6 @@ export class DiceSFRPG {
 
                 return acc;
             }, []);
-            
-            // Associate the damage types for this attack to the first DiceTerm
-            // for the roll. 
-            const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
-
-            if (die) {
-                /** @type {boolean} */
-                die.options.isDamageRoll = true;
-                die.options.damageTypes = damageTypes;
-
-                if (criticalData) {
-                    die.options.criticalData = criticalData;
-                }
-
-                const properties = rollContext.allContexts["item"]?.data?.properties;
-                if (properties) {
-                    die.options.isModal = properties.modal || properties.double;
-                }
-            }
             
             if (damageTypes) {
                 for (const damageType of damageTypes) {
@@ -538,14 +516,36 @@ export class DiceSFRPG {
                 }
             }
 
-            let tagContent = ``;
-            if (tags.length > 0) {
-                tagContent = `<div class="sfrpg chat-card"><footer class="card-footer">`;
-                for (const tag of tags) {
-                    tagContent += `<span class="${tag.tag}"> ${tag.text}</span>`;
+            const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
+            let roll = await rollObject.evaluate({async: true});
+
+            // Associate the damage types for this attack to the first DiceTerm
+            // for the roll. 
+            const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
+
+            if (die) {
+                /** @type {boolean} */
+                die.options.isDamageRoll = true;
+                die.options.damageTypes = damageTypes;
+
+                if (criticalData) {
+                    die.options.criticalData = criticalData;
                 }
-                tagContent += `</footer></div>`;
+
+                const properties = rollContext.allContexts["item"]?.data?.properties;
+                if (properties) {
+                    die.options.isModal = properties.modal || properties.double;
+                }
             }
+
+            let tagContent = ``;
+            // if (tags.length > 0) {
+            //     tagContent = `<div class="sfrpg chat-card"><footer class="card-footer">`;
+            //     for (const tag of tags) {
+            //         tagContent += `<span class="${tag.tag}"> ${tag.text}</span>`;
+            //     }
+            //     tagContent += `</footer></div>`;
+            // }
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
@@ -555,7 +555,9 @@ export class DiceSFRPG {
                     title: title,
                     rollContext:  rollContext,
                     speaker: speaker,
-                    rollMode: rollMode
+                    rollMode: rollMode,
+                    breakdown: preparedRollExplanation,
+                    tags: tags
                 };
 
                 try {
@@ -567,19 +569,16 @@ export class DiceSFRPG {
             }
             
             if (!useCustomCard) {
-                roll.render().then((rollContent) => {
-                    const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-                    const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
-            
-                    ChatMessage.create({
-                        flavor: flavor,
-                        speaker: speaker,
-                        content: explainedRollContent + tagContent,
-                        rollMode: rollMode,
-                        roll: roll,
-                        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-                        sound: CONFIG.sounds.dice
-                    });
+                const content = await roll.render();
+
+                ChatMessage.create({
+                    flavor: flavor,
+                    speaker: speaker,
+                    content: content,
+                    rollMode: rollMode,
+                    roll: roll,
+                    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                    sound: CONFIG.sounds.dice
                 });
             }
 
@@ -677,7 +676,7 @@ export class DiceSFRPG {
         let finalResult = "";
         for (const section of sections) {
             if (section.replace) {
-                finalResult += section.text.replace(/\+/gi, "<br/> +").replace(/-/gi, "<br/> -");
+                finalResult += section.text.replace(/\+/gi, "<br /> +").replace(/-/gi, "<br /> -");
             } else {
                 finalResult += section.text;
             }
