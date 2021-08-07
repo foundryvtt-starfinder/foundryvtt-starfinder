@@ -51,8 +51,6 @@ export default class SFRPGRoll extends Roll {
           tags: this.tags,
           breakdown: this.breakdown
         };
-
-        console.log(chatData);
     
         // Render the roll display template
         return renderTemplate(chatOptions.template, chatData);

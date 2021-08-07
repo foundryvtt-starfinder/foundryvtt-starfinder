@@ -24,7 +24,7 @@
 
     <footer class="card-footer">
         {{#each data.properties}}
-        <span>{{this.name}}</span>
+        <span {{#if this.tooltip}}data-tippy-content="{{this.tooltip}}{{/if}}">{{this.name}}</span>
         {{/each}}
     </footer>
 </div>

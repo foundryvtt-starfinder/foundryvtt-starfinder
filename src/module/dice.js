@@ -183,7 +183,7 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const rollObject = Roll.create(finalFormula.finalRoll);
+            const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation });
             let roll = await rollObject.evaluate({async: true});
 
             // Flag critical thresholds
@@ -212,11 +212,12 @@ export class DiceSFRPG {
                     title: title,
                     rollContext:  rollContext,
                     speaker: speaker,
-                    rollMode: rollMode
+                    rollMode: rollMode,
+                    breakdown: preparedRollExplanation
                 };
 
                 try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, preparedRollExplanation);
+                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
                 } catch (error) {
                     useCustomCard = false;
                     errorToThrow = error;
@@ -224,19 +225,16 @@ export class DiceSFRPG {
             }
             
             if (!useCustomCard) {
-                roll.render().then((rollContent) => {
-                    const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-                    const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
-            
-                    ChatMessage.create({
-                        flavor: title,
-                        speaker: speaker,
-                        content: explainedRollContent,
-                        rollMode: rollMode,
-                        roll: roll,
-                        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-                        sound: CONFIG.sounds.dice
-                    });
+                const rollContent = await roll.render();
+
+                ChatMessage.create({
+                    flavor: title,
+                    speaker: speaker,
+                    content: rollContent,
+                    rollMode: rollMode,
+                    roll: roll,
+                    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                    sound: CONFIG.sounds.dice
                 });
             }
 

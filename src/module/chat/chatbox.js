@@ -28,9 +28,8 @@ export default class SFRPGCustomChatMessage {
      * 
      * @param {Roll} roll The roll data
      * @param {object} data The data for the roll
-     * @param {string} explanation The explanation of the roll
      */
-    static renderStandardRoll(roll, data, explanation, additionalContent) {
+    static renderStandardRoll(roll, data) {
         /** Get entities */
         const mainContext = data.rollContext.mainContext ? data.rollContext.allContexts[data.rollContext.mainContext] : null;
         
@@ -63,12 +62,12 @@ export default class SFRPGCustomChatMessage {
             rawTitle: data.speaker.alias,
             dataRoll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-            config: CONFIG.STARFINDER,
+            config: CONFIG.SFRPG,
             tokenImg: actor.data.token?.img || actor.img,
             actorId: actor.id,
             tokenId: this.getToken(actor),
-            explanation: explanation,
-            additionalContent: additionalContent
+            breakdown: data.breakdown,
+            tags: data.tags
         };
 
         SFRPGCustomChatMessage._render(roll, data, options);
@@ -78,20 +77,21 @@ export default class SFRPGCustomChatMessage {
 
     static async _render(roll, data, options) {
         const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
-        const cardContent = await renderTemplate(templateName, options);
         const rollContent = await roll.render();
+        options = foundry.utils.mergeObject(options, { rollContent });
+        const cardContent = await renderTemplate(templateName, options);        
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
 
-        let explainedRollContent = rollContent;
-        if (options.explanation) {
-            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-            explainedRollContent = rollContent.substring(0, insertIndex) + options.explanation + rollContent.substring(insertIndex);
-        }
+        // let explainedRollContent = rollContent;
+        // if (options.breakdown) {
+        //     const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+        //     explainedRollContent = rollContent.substring(0, insertIndex) + options.explanation + rollContent.substring(insertIndex);
+        // }
 
         ChatMessage.create({
             flavor: data.title,
             speaker: data.speaker,
-            content: cardContent + explainedRollContent + (options.additionalContent || ""),
+            content: cardContent, //+ explainedRollContent + (options.additionalContent || ""),
             rollMode: rollMode,
             roll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
