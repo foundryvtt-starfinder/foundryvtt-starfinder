@@ -24,6 +24,10 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
         return ["mwak", "rwak", "msak", "rsak"].includes(this.data.data.actionType);
     }
 
+    get hasOtherFormula() {
+        return ("formula" in this.data.data) && this.data.data.formula?.trim().length > 0;
+    }
+
     /* -------------------------------------------- */
 
     /**
@@ -181,8 +185,8 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
             labels: this.labels,
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,
-            isVersatile: this.isVersatile,
-            hasSave: this.hasSave
+            hasSave: this.hasSave,
+            hasOtherFormula: this.hasOtherFormula
         };
 
         // Render the chat card template
@@ -565,7 +569,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Define Roll parts
         const parts = [];
         
-        if (itemData.data.attackBonus !== 0) parts.push("@item.data.attackBonus");
+        if (Number.isNumeric(itemData.data.attackBonus) && itemData.data.attackBonus !== 0) parts.push("@item.data.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.data.type)) parts.push("@attributes.baseAttackBonus.value");
         if (isWeapon)
@@ -881,26 +885,6 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
         else if (!abl) abl = "str";
 
         // Define Roll parts
-        // let parts = itemData.damage.parts.map(d => d[0]);
-        // let damageTypes = itemData.damage.parts.map(d => d[1]);
-
-        // const [parts, damageTypes] = itemData.damage.parts.reduce((acc, cur) => {
-        //     if (cur.formula && cur.formula.trim() !== "") acc[0].push(cur.formula);
-        //     if (cur.types) {
-        //         const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
-        //         const obj = { types: [], operator: "" };
-
-        //         for (const type of filteredTypes) {
-        //             obj.types.push(type[0]);
-        //         }
-
-        //         if (cur.operator) obj.operator = cur.operator;
-
-        //         acc[1].push(obj);
-        //     }
-
-        //     return acc;
-        // }, [[], []]);
         /** @type {DamageParts[]} */
         const parts = itemData.damage.parts.map(part => part);
         
@@ -1014,6 +998,7 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
+            flavor: itemData.chatFlavor,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 width: 400,
@@ -1173,27 +1158,27 @@ export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         this.actor?.setupRollContexts(rollContext);
     
-        const title = `Other Formula`;
+        const title = game.i18n.localize(`SFRPG.Items.Action.OtherFormula`);
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
             rollFormula: itemData.formula,
-            title: title
+            title: title,
+            mainDie: null
         });
 
+        if (!rollResult) return;
+
         const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
-        rollResult.roll.render().then((rollContent) => {
-            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-            const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
-    
-            ChatMessage.create({
-                flavor: itemData.chatFlavor || title,
-                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                content: explainedRollContent,
-                rollMode: game.settings.get("core", "rollMode"),
-                roll: rollResult.roll,
-                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-                sound: CONFIG.sounds.dice
-            });
+        const content = await rollResult.roll.render({ breakdown: preparedRollExplanation });
+
+        ChatMessage.create({
+            flavor: `${title}${(itemData.chatFlavor ? " - " + itemData.chatFlavor : "")}`,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: content,
+            rollMode: game.settings.get("core", "rollMode"),
+            roll: rollResult.roll,
+            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            sound: CONFIG.sounds.dice
         });
     }
 

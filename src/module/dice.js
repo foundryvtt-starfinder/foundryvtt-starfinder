@@ -81,6 +81,15 @@ import { SFRPG } from "./config.js";
  */
 
 /**
+ * A data structure for outputing any metadata that is rendered at the bottom
+ * of a Roll chat card.
+ * 
+ * @typedef {Object} Tag
+ * @property {string} tag Text that will be addeded as a class on an HTMLElement
+ * @property {string} text The text rendered on the card.
+ */
+
+/**
  * Function called when the attack roll dialog is closed.
  * 
  * @callback onD20DialogClosed
@@ -133,6 +142,8 @@ export class DiceSFRPG {
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true,
         critical = 20, fumble = 1, onClose, dialogOptions }) {
+
+        flavor = `${title}${(flavor ? " - " + flavor : "")}`;
         
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -194,22 +205,22 @@ export class DiceSFRPG {
                 }
             }
 
-            if (flavor) {
-                const chatData = {
-                    type: CONST.CHAT_MESSAGE_TYPES.IC,
-                    speaker: speaker,
-                    content: flavor
-                };
+            // if (flavor) {
+            //     const chatData = {
+            //         type: CONST.CHAT_MESSAGE_TYPES.IC,
+            //         speaker: speaker,
+            //         content: flavor
+            //     };
         
-                ChatMessage.create(chatData, { chatBubble: true });
-            }
+            //     ChatMessage.create(chatData, { chatBubble: true });
+            // }
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
             if (useCustomCard) {
                 //Push the roll to the ChatBox
                 const customData = {
-                    title: title,
+                    title: flavor,
                     rollContext:  rollContext,
                     speaker: speaker,
                     rollMode: rollMode,
@@ -228,7 +239,7 @@ export class DiceSFRPG {
                 const rollContent = await roll.render();
 
                 ChatMessage.create({
-                    flavor: title,
+                    flavor: flavor,
                     speaker: speaker,
                     content: rollContent,
                     rollMode: rollMode,
@@ -266,10 +277,12 @@ export class DiceSFRPG {
     * @param {Boolean}            [data.advantage]   Allow rolling with advantage (and therefore also with disadvantage)
     * @param {Number}             [data.critical]    The value of d20 result which represents a critical success
     * @param {Number}             [data.fumble]      The value of d20 result which represents a critical failure
+    * @param {string}             [data.breakdown]   An explanation of the roll modifiers and where they came from.
+    * @param {Tag[]}              [data.tags]        Any roll metadata that will be output on the bottom of the chat card.
     * @param {DialogOptions}      data.dialogOptions Modal dialog options
     * @returns {Promise<RollResult>|Promise} Returns the roll's result or an empty promise.
     */
-    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, dialogOptions }) {
+    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions }) {
         
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -292,7 +305,7 @@ export class DiceSFRPG {
             defaultButton: "Normal",
             title: title,
             skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            mainDie: "1" + mainDie,
+            mainDie: mainDie ? "1" + mainDie : null,
             dialogOptions: dialogOptions
         };
 
@@ -303,19 +316,21 @@ export class DiceSFRPG {
             /** @type {RollResult|null} */
             let result = null;
             await tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
-                let dieRoll = "1" + mainDie;
-                if (mainDie == "d20") {
-                    if (button === "Disadvantage") {
-                        dieRoll = "2d20kl";
-                    } else if (button === "Advantage") {
-                        dieRoll = "2d20kh";
+                if (mainDie) {
+                    let dieRoll = "1" + mainDie;
+                    if (mainDie === "d20") {
+                        if (button === "Disadvantage") {
+                            dieRoll = "2d20kl";
+                        } else if (button === "Advantage") {
+                            dieRoll = "2d20kh";
+                        }
                     }
+
+                    finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
+                    finalFormula.formula = dieRoll + " + " + finalFormula.formula;
                 }
 
-                finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
-                finalFormula.formula = dieRoll + " + " + finalFormula.formula;
-
-                const rollObject = Roll.create(finalFormula.finalRoll);
+                const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
                 let roll = await rollObject.evaluate({async: true});
     
                 // Flag critical thresholds
@@ -336,22 +351,25 @@ export class DiceSFRPG {
                         resolve(null);
                         return;
                     }
-    
-                    const dieRoll = "1" + mainDie;
-                    if (mainDie == "d20") {
-                        if (button === "Disadvantage") {
-                            dieRoll = "2d20kl";
-                        } else if (button === "Advantage") {
-                            dieRoll = "2d20kh";
+                    
+                    if (mainDie) {
+                        const dieRoll = "1" + mainDie;
+                        if (mainDie == "d20") {
+                            if (button === "Disadvantage") {
+                                dieRoll = "2d20kl";
+                            } else if (button === "Advantage") {
+                                dieRoll = "2d20kh";
+                            }
                         }
+        
+                        finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
+                        finalFormula.formula = dieRoll + " + " + finalFormula.formula;
                     }
-    
-                    finalFormula.finalRoll = dieRoll + " + " + finalFormula.finalRoll;
-                    finalFormula.formula = dieRoll + " + " + finalFormula.formula;
+
                     finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
                     finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
     
-                    const rollObject = Roll.create(finalFormula.finalRoll);
+                    const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
                     const roll = await rollObject.evaluate({async: true});
             
                     // Flag critical thresholds
@@ -380,13 +398,13 @@ export class DiceSFRPG {
     * @param {CriticalDamage}       data.criticalData  Critical damage information, in case of a critical hit
     * @param {RollContext}          data.rollContext   The contextual data for this roll
     * @param {String}               data.title         The dice roll UI window title
-    * @param {object}               data.speaker       The ChatMessage speaker to pass when creating the chat
+    * @param {SpeakerData}          data.speaker       The ChatMessage speaker to pass when creating the chat
     * @param {string}               data.flavor        Any flavor text associated with this roll
     * @param {onDamageDialogClosed} data.onClose       Callback for actions to take when the dialog form is closed
     * @param {Object}               data.dialogOptions Modal dialog options
     */
     static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, onClose, dialogOptions }) {
-        flavor = flavor || title;
+        flavor = `${title}${(flavor ? " - " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -419,6 +437,7 @@ export class DiceSFRPG {
                 return null;
             }
 
+            /** @type {Tag[]} */
             const tags = [];
 
             const isCritical = (button === "Critical");
@@ -426,10 +445,10 @@ export class DiceSFRPG {
                 finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                 
-                flavor = game.i18n.format("{title} (Critical)", { "title": title });
+                flavor = game.i18n.format("{title} (Critical)", { "title": flavor });
 
                 if (criticalData !== undefined) {
-                    flavor = game.i18n.format("{title} (Critical; {criticalEffect})", { "title": title, "criticalEffect": criticalData.effect });
+                    flavor = game.i18n.format("{title} (Critical; {criticalEffect})", { "title": flavor, "criticalEffect": criticalData.effect });
 
                     let critRoll = criticalData.parts.filter(x => x.formula.length > 0).map(x => x.formula).join("+");
                     if (critRoll.length > 0) {
@@ -536,21 +555,12 @@ export class DiceSFRPG {
                 }
             }
 
-            let tagContent = ``;
-            // if (tags.length > 0) {
-            //     tagContent = `<div class="sfrpg chat-card"><footer class="card-footer">`;
-            //     for (const tag of tags) {
-            //         tagContent += `<span class="${tag.tag}"> ${tag.text}</span>`;
-            //     }
-            //     tagContent += `</footer></div>`;
-            // }
-
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
             if (useCustomCard) {
                 //Push the roll to the ChatBox
                 const customData = {
-                    title: title,
+                    title: flavor,
                     rollContext:  rollContext,
                     speaker: speaker,
                     rollMode: rollMode,
@@ -559,7 +569,7 @@ export class DiceSFRPG {
                 };
 
                 try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData, preparedRollExplanation, tagContent);
+                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
                 } catch (error) {
                     useCustomCard = false;
                     errorToThrow = error;

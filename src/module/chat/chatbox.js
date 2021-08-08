@@ -26,8 +26,14 @@ export default class SFRPGCustomChatMessage {
     /**
      * Render a custom standard roll to chat.
      * 
-     * @param {Roll} roll The roll data
-     * @param {object} data The data for the roll
+     * @param {Roll}        roll             The roll data
+     * @param {object}      data             The data for the roll
+     * @param {RollContext} data.rollContent The context for the roll
+     * @param {string}      [data.title]     The chat card title
+     * @param {SpeakerData} [data.speaker]   The speaker for the ChatMesage
+     * @param {string}      [data.rollMode]  The roll mode
+     * @param {string}      [data.breakdown] An explanation for the roll and it's modifiers
+     * @param {Tag[]}       [data.tags]      Any item metadata that will be output at the bottom of the chat card.
      */
     static renderStandardRoll(roll, data) {
         /** Get entities */

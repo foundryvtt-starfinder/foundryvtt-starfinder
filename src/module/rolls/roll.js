@@ -37,6 +37,9 @@ export default class SFRPGRoll extends Roll {
           blind: false
         }, chatOptions);
         const isPrivate = chatOptions.isPrivate;
+
+        if (chatOptions?.breakdown) this.breakdown = chatOptions.breakdown;
+        if (chatOptions?.tags) this.tags = chatOptions.tags;
     
         // Execute the roll, if needed
         if (!this._evaluated) this.evaluate();
