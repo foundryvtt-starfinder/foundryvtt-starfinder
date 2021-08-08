@@ -51,6 +51,7 @@ import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import { } from "./module/combat/combat.js";
 import SFRPGRoll from "./module/rolls/roll.js";
+import SFRPGTokenDocument from "./module/token/tokendocument.js";
 
 let defaultDropHandler = null;
 let initTime = null;
@@ -122,6 +123,8 @@ Hooks.once('init', async function () {
     CONFIG.Item.documentClass = ItemSFRPG;
     CONFIG.Combat.documentClass = CombatSFRPG;
     CONFIG.Dice.rolls.unshift(SFRPGRoll);
+
+    CONFIG.Token.documentClass = SFRPGTokenDocument;
 
     CONFIG.fontFamilies.push("Exo2");
     CONFIG.defaultFontFamily = "Exo 2";
@@ -325,7 +328,7 @@ export async function handleOnDrop(event) {
 Hooks.on("canvasInit", function () {
     canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
     SquareGrid.prototype.measureDistances = measureDistances;
-    Token.prototype.getBarAttribute = getBarAttribute;
+    // Token.prototype.getBarAttribute = getBarAttribute;
 });
 
 Hooks.on("renderChatMessage", (app, html, data) => {

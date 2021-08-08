@@ -1362,6 +1362,23 @@ export class ActorSFRPG extends Actor {
         }
     }
 
+    /**
+     * Handle how changes to a Token attribute bar are applied to the Actor.
+     * This allows for game systems to override this behavior and deploy special logic.
+     * 
+     * TODO: Pulling this in for future feature updates. The goal is to setup this method
+     *       to apply damage correctly if the bar attributes are being used to track HP and/or SP.
+     * 
+     * @param {string}  attribute The attribute path
+     * @param {number}  value     The target attribute value
+     * @param {boolean} isDelta   Whether the number represents a relative change (true) or an absolute change (false)
+     * @param {boolean} isBar     Whether the new value is part of an attribute bar, or just a direct value
+     * @return {Promise<documents.Actor>}  The updated Actor document
+     */
+    async modifyTokenAttribute(attribute, value, isDelta, isBar) {
+        return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
+    }
+
     /** Starship code */
     async useStarshipAction(actionId) {
         /** Bad entry; no action! */
