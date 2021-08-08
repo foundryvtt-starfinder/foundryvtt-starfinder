@@ -2,7 +2,8 @@ const SFRPGActorMigrationSchemas = Object.freeze({
     NPC_DATA_UPATE: 0.001,
     THE_PAINFUL_UPDATE: 0.002, // Due to copyright concerns, all references to Starfinder were renamed to SFRPG
     THE_HAPPY_UPDATE: 0.003, // Due to Paizo clarifying their stance, most references to SFRPG were returned to Starfinder
-    THE_ACTOR_SPEED_UPDATE: 0.004
+    THE_ACTOR_SPEED_UPDATE: 0.004,
+    DAMAGE_TYPE_REFACTOR: 0.005
 });
 
 export default async function migrateWorld() {
@@ -17,6 +18,14 @@ export default async function migrateWorld() {
             if (!isObjectEmpty(updateData)) {
                 console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
                 await actor.update(updateData, { enforceTypes: false });
+            }
+            
+            for(const item of actor.items) {
+                const itemUpdateData = migrateItemData(item, worldSchema);
+                if (!foundry.utils.isObjectEmpty(itemUpdateData)) {
+                    console.log(`Starfinder | Migrating Actor item ${item.name}`);
+                    await item.update(itemUpdateData, { enforceTypes: false });
+                }
             }
         } catch (err) {
             console.error(err);
@@ -42,6 +51,8 @@ export default async function migrateWorld() {
 
 const migrateItemData = function (item, schema) {
     const updateData = {};
+
+    if (schema < SFRPGActorMigrationSchemas.DAMAGE_TYPE_REFACTOR) _migrateDamageTypes(item, updateData);
     
     return updateData;
 };
@@ -57,6 +68,44 @@ const migrateActorData = function (actor, schema) {
     if (schema < SFRPGActorMigrationSchemas.THE_ACTOR_SPEED_UPDATE && speedActorTypes.includes(actor.type)) _migrateActorSpeed(actor, updateData);
 
     return updateData;
+};
+
+const damageTypeMigrationCallback = function (arr, curr) {
+    let [formula, type] = curr;
+
+    if (!type) {
+        arr.push({ "formula": formula || "", "types": {}, "operator": "" });
+    } else if (type.includes("+")) {
+        let types = type.split("+");
+        arr.push({ "formula": formula, "types": { [types[0]]: true, [types[1]]: true }, "operator": "and" });
+    } else if (type.includes("|")) {
+        let types = type.split("|");
+        arr.push({ "formula": formula, "types": { [types[0]]: true, [types[1]]: true }, "operator": "or" });
+    } else {
+        arr.push({ "formula": formula, "types": { [type]: true }, "operator": "" });
+    }
+
+    return arr;
+};
+
+const _migrateDamageTypes = function (item, data) {
+    const itemData = foundry.utils.duplicate(item.data);
+    const damage = itemData.damage;
+    const critical = itemData.critical;
+
+    if (damage?.parts?.length > 0) {
+        let parts = damage.parts.reduce(damageTypeMigrationCallback, []);
+
+        data['data.damage.parts'] = parts;
+    }
+
+    if (critical?.parts?.length > 0) {
+        let parts = critical.parts.reduce(damageTypeMigrationCallback, []);
+
+        data['data.critical.parts'] = parts;
+    }
+
+    return data;
 };
 
 const _migrateNPCData = function (actor, migratedData) {
