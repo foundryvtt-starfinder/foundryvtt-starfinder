@@ -35,6 +35,16 @@
     </form>
 </div>
 
+{{#if hasDamageTypes}}
+<div class="damage-type-selector-list">
+    <ul class="damage-type-list">
+        {{#each damageTypes}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+</div>
+{{/if}}
+
 {{#if hasModifiers}}
 <div>
     <ul class="modifier-list">

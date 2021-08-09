@@ -90,6 +90,16 @@ import { SFRPG } from "./config.js";
  */
 
 /**
+ * An optional modifer that can be added to a roll.
+ * 
+ * @typedef {Object} Modifier
+ * @property {string}  name     The name of the modifer.
+ * @property {boolean} enabled  Whether this modifier is enabled or not.
+ * @property {string}  modifier The modifier being added.
+ * @property {string}  notes    Any additional text about the modifier.
+ */
+
+/**
  * Function called when the attack roll dialog is closed.
  * 
  * @callback onD20DialogClosed
@@ -1054,9 +1064,24 @@ class RollNode {
     }
 }
 
-class RollDialog extends Dialog
+/**
+ * A custom dialog for confirming rolls from a user.
+ */
+export class RollDialog extends Dialog
 {
-    constructor(rollTree, formula, contexts, availableModifiers, mainDie, dialogData={}, options={}) {
+    /**
+     * Construct a custom RollDialog
+     * 
+     * @param {object} params The parameters passed into the class.
+     * @param {RollTree} params.rollTree 
+     * @param {string} params.formula The formula used for this roll.
+     * @param {RollContext} params.contexts Contextual data for the roll.
+     * @param {Modifier[]} params.availableModifiers Any conditional modifiers that can apply to this roll.
+     * @param {string} params.mainDie The primary die type used in this roll.
+     * @param {Object} [params.dialogData] Any additional data being passed to the dialog.
+     * @param {DialogOptions} [params.options] Any additional options being passed to the dialog.
+     */
+    constructor({rollTree, formula, contexts, availableModifiers, mainDie, dialogData={}, options={}} = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog", "roll"];
 
@@ -1222,19 +1247,30 @@ class RollDialog extends Dialog
         return super.close(options);
     }
 
+    /**
+     * Factory method used to create a RollDialog.
+     * 
+     * @param {RollTree} rollTree 
+     * @param {string} formula 
+     * @param {RollContext} contexts 
+     * @param {Modifier[]} availableModifiers 
+     * @param {string} mainDie 
+     * @param {DialogOptions} options 
+     * @returns {RollDialog}
+     */
     static async showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
         return new Promise(resolve => {
             const buttons = options.buttons || { roll: { label: "Roll" } };
             const firstButtonLabel = options.defaultButton || Object.values(buttons)[0].label;
 
-            const dlg = new RollDialog(rollTree, formula, contexts, availableModifiers, mainDie, {
+            const dlg = new RollDialog({rollTree, formula, contexts, availableModifiers, mainDie, dialogData: {
                 title: options.title || "Roll",
                 buttons: buttons,
                 default: firstButtonLabel,
                 close: (button, rollMode, bonus) => {
                     resolve([button, rollMode, bonus]);
                 }
-            }, options.dialogOptions || {});
+            }, options: options.dialogOptions || {}});
             dlg.render(true);
         });
     }

@@ -33,7 +33,7 @@ import CounterManagement from "./module/classes/counter-management.js";
 import templateOverrides from "./module/template-overrides.js";
 import { computeCompoundBulkForItem } from "./module/actor/actor-inventory.js";
 import { RPC } from "./module/rpc.js";
-import { DiceSFRPG } from './module/dice.js';
+import { DiceSFRPG, RollDialog } from './module/dice.js';
 import { ActorSheetFlags } from './module/apps/actor-flags.js';
 import { ChoiceDialog } from './module/apps/choice-dialog.js';
 import { DroneRepairDialog } from './module/apps/drone-repair-dialog.js';
@@ -97,7 +97,8 @@ Hooks.once('init', async function () {
             NpcSkillToggleDialog,
             ShortRestDialog,
             SpellCastDialog,
-            TraitSelectorSFRPG
+            TraitSelectorSFRPG,
+            RollDialog
         },
         config: SFRPG,
         dice: DiceSFRPG,
