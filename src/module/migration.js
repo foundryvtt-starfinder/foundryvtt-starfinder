@@ -21,7 +21,7 @@ export default async function migrateWorld() {
             }
             
             for(const item of actor.items) {
-                const itemUpdateData = migrateItemData(item, worldSchema);
+                const itemUpdateData = migrateItemData(item.data, worldSchema);
                 if (!foundry.utils.isObjectEmpty(itemUpdateData)) {
                     console.log(`Starfinder | Migrating Actor item ${item.name}`);
                     await item.update(itemUpdateData, { enforceTypes: false });
@@ -71,6 +71,7 @@ const migrateActorData = function (actor, schema) {
 };
 
 const damageTypeMigrationCallback = function (arr, curr) {
+    if (!Array.isArray(curr)) return arr;
     let [formula, type] = curr;
 
     if (!type) {
