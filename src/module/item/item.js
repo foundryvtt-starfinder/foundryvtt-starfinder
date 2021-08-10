@@ -2,7 +2,8 @@ import { mix } from "./mixins/item-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
-import { DiceSFRPG, RollContext } from "../dice.js";
+import { DiceSFRPG } from "../dice.js";
+import RollContext from "../rolls/rollcontext.js";
 import { SFRPG } from "../config.js";
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
 import SFRPGModifier from "../modifiers/modifier.js";

@@ -1,5 +1,6 @@
 import { SFRPG } from "../config.js"
-import { DiceSFRPG, RollContext } from "../dice.js";
+import { DiceSFRPG } from "../dice.js";
+import RollContext from "../rolls/rollcontext.js";
 import { ChoiceDialog } from "../apps/choice-dialog.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";

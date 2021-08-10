@@ -1,4 +1,5 @@
-import { DiceSFRPG, RollContext } from "../../dice.js";
+import { DiceSFRPG } from "../../dice.js";
+import RollContext from "../../rolls/rollcontext.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
