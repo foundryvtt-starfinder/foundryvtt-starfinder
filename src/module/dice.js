@@ -455,17 +455,21 @@ export class DiceSFRPG {
                 finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                 
-                flavor = game.i18n.format("{title} (Critical)", { "title": flavor });
+                let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
 
                 if (criticalData !== undefined) {
-                    flavor = game.i18n.format("{title} (Critical; {criticalEffect})", { "title": flavor, "criticalEffect": criticalData.effect });
+                    if (criticalData?.effect?.trim().length > 0) {
+                        tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": flavor, "criticalEffect": criticalData.effect });
+                    }
 
-                    let critRoll = criticalData.parts.filter(x => x.formula.length > 0).map(x => x.formula).join("+");
+                    let critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula).join("+") ?? "";
                     if (critRoll.length > 0) {
                         finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
                         finalFormula.formula = finalFormula.formula + " + " + critRoll;
                     }
                 }
+
+                flavor = tempFlavor;
             }
             
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
@@ -508,9 +512,9 @@ export class DiceSFRPG {
             }
 
             if (isCritical) {
-                tags.push({tag: `critical`, text: game.i18n.localize("Critical Hit")});
+                tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
                 if (criticalData !== undefined && criticalData.effect.length > 0) {
-                    tags.push({ tag: "critical-effect", text: game.i18n.format("Critical Effect: {criticalEffect}", {"criticalEffect": criticalData.effect })});
+                    tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                 }
             }
 
@@ -749,7 +753,7 @@ class RollTree {
         const allRolledMods = this.populate();
 
         if (this.options.skipUI) {
-            const button = this.options.defaultButton || (this.options.buttons ? Object.values(this.options.buttons)[0].label : "Roll");
+            const button = this.options.defaultButton || (this.options.buttons ? Object.values(this.options.buttons)[0].label : game.i18n.localize("SFRPG.Rolls.Dice.Roll"));
             const rollMode = game.settings.get("core", "rollMode");
 
             for (const [key, value] of Object.entries(this.nodes)) {
@@ -793,7 +797,7 @@ class RollTree {
                     finalRollFormula.formula += " +";
                 }
                 finalRollFormula.finalRoll += " " + bonus;
-                finalRollFormula.formula += ` ${bonus} [Additional Bonus]`;
+                finalRollFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
             }
 
             if (this.options.debug) {
@@ -826,7 +830,7 @@ class RollTree {
             console.log(["Available modifiers", availableModifiers]);
         }
         if (this.options.skipUI) {
-            const firstButton = this.options.defaultButton || (this.options.buttons ? Object.values(this.options.buttons)[0].label : "Roll");
+            const firstButton = this.options.defaultButton || (this.options.buttons ? Object.values(this.options.buttons)[0].label : game.i18n.localize("SFRPG.Rolls.Dice.Roll"));
             const defaultRollMode = game.settings.get("core", "rollMode");
             return new Promise((resolve) => { resolve([firstButton, defaultRollMode, ""]); });
         }
@@ -1152,20 +1156,25 @@ export class RollDialog extends Dialog
         return data;
     }
     
+    /**
+     * Activate any event listeners.
+     * 
+     * @param {JQuery} html The jQuery object that represents the HTMl content.
+     */
     activateListeners(html) {
         super.activateListeners(html);
 
         let additionalBonusTextbox = html.find('input[name=bonus]');
-        additionalBonusTextbox.bind('change', this._onAdditionalBonusChanged.bind(this));
+        additionalBonusTextbox.on('change', this._onAdditionalBonusChanged.bind(this));
 
         let rollModeCombobox = html.find('select[name=rollMode]');
-        rollModeCombobox.bind('change', this._onRollModeChanged.bind(this));
+        rollModeCombobox.on('change', this._onRollModeChanged.bind(this));
 
         let modifierEnabled = html.find('.toggle-modifier');
-        modifierEnabled.bind('click', this._toggleModifierEnabled.bind(this));
+        modifierEnabled.on('click', this._toggleModifierEnabled.bind(this));
 
         let selectorCombobox = html.find('.selector');
-        selectorCombobox.bind('change', this._onSelectorChanged.bind(this));
+        selectorCombobox.on('change', this._onSelectorChanged.bind(this));
     }
 
     async _onAdditionalBonusChanged(event) {
@@ -1260,11 +1269,11 @@ export class RollDialog extends Dialog
      */
     static async showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
         return new Promise(resolve => {
-            const buttons = options.buttons || { roll: { label: "Roll" } };
+            const buttons = options.buttons || { roll: { label: game.i18n.localize("SFRPG.Rolls.Dice.Roll") } };
             const firstButtonLabel = options.defaultButton || Object.values(buttons)[0].label;
 
             const dlg = new RollDialog({rollTree, formula, contexts, availableModifiers, mainDie, dialogData: {
-                title: options.title || "Roll",
+                title: options.title || game.i18n.localize("SFRPG.Rolls.Dice.Roll"),
                 buttons: buttons,
                 default: firstButtonLabel,
                 close: (button, rollMode, bonus) => {
