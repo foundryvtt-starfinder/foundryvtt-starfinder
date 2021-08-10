@@ -1,3 +1,15 @@
+import { SFRPG } from "../config.js";
+
+// Typedef's for documentation purposes.
+/**
+ * A data structure for storing damage statistics.
+ * 
+ * @typedef {Object} DamagePart
+ * @property {string}                     formula  The roll formula to use.
+ * @property {{[key: string]: boolean}}   types    A set of key value pairs that determines the available damage types.
+ * @property {string}                     operator An operator that determines how damage is split between multiple types.
+ */
+
 /**
  * A custom dialog for confirming rolls from a user.
  */
@@ -11,10 +23,11 @@ export default class RollDialog extends Dialog {
      * @param {RollContext} params.contexts Contextual data for the roll.
      * @param {Modifier[]} params.availableModifiers Any conditional modifiers that can apply to this roll.
      * @param {string} params.mainDie The primary die type used in this roll.
+     * @param {DamagePart[]} [params.parts] An array of DamageParts.
      * @param {Object} [params.dialogData] Any additional data being passed to the dialog.
      * @param {DialogOptions} [params.options] Any additional options being passed to the dialog.
      */
-    constructor({ rollTree, formula, contexts, availableModifiers, mainDie, dialogData = {}, options = {} } = {}) {
+    constructor({ rollTree, formula, contexts, availableModifiers, mainDie, parts = [], dialogData = {}, options = {} }) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog", "roll"];
 
@@ -25,6 +38,8 @@ export default class RollDialog extends Dialog {
         if (mainDie) {
             this.formula = mainDie + " + " + formula;
         }
+
+        this.parts = parts
 
         /** Prepare selectors */
         this.selectors = {};
@@ -82,6 +97,16 @@ export default class RollDialog extends Dialog {
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
         data.contexts = this.contexts;
+
+        data.damageTypeLabel = this.parts?.reduce((arr, curr) => {
+            if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
+                arr += `<p>${(Object.entries(curr.types).filter(type => type[1]).map(type => SFRPG.damageTypes[type[0]]).join(` ${SFRPG.damageTypeOperators[curr.operator]} `))}</p>`;
+            }
+
+            return arr;
+        }, "");
+        data.hasDamageTypes = data.damageTypeLabel.trim().length > 0;
+        //data.config = SFRPG; Don't remove this. Will be needed later
         return data;
     }
 
@@ -202,14 +227,21 @@ export default class RollDialog extends Dialog {
             const firstButtonLabel = options.defaultButton || Object.values(buttons)[0].label;
 
             const dlg = new RollDialog({
-                rollTree, formula, contexts, availableModifiers, mainDie, dialogData: {
+                rollTree, 
+                formula, 
+                contexts, 
+                availableModifiers, 
+                mainDie, 
+                parts: options.parts,
+                dialogData: {
                     title: options.title || game.i18n.localize("SFRPG.Rolls.Dice.Roll"),
                     buttons: buttons,
                     default: firstButtonLabel,
                     close: (button, rollMode, bonus) => {
                         resolve([button, rollMode, bonus]);
                     }
-                }, options: options.dialogOptions || {}
+                }, 
+                options: options.dialogOptions || {}
             });
             dlg.render(true);
         });

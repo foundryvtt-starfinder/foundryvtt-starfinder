@@ -129,7 +129,19 @@ export default class RollTree {
             const defaultRollMode = game.settings.get("core", "rollMode");
             return new Promise((resolve) => { resolve([firstButton, defaultRollMode, ""]); });
         }
-        return RollDialog.showRollDialog(this, formula, contexts, availableModifiers, this.options.mainDie, {buttons: this.options.buttons, defaultButton: this.options.defaultButton, title: this.options.title, dialogOptions: this.options.dialogOptions});
+        return RollDialog.showRollDialog(
+            this, 
+            formula, 
+            contexts, 
+            availableModifiers, 
+            this.options.mainDie, 
+            {
+                buttons: this.options.buttons, 
+                defaultButton: this.options.defaultButton, 
+                title: this.options.title, 
+                dialogOptions: this.options.dialogOptions,
+                parts: this.options.parts
+            });
     }
 
     static getAllRolledModifiers(nodes) {

@@ -429,6 +429,25 @@ export class DiceSFRPG {
             Critical: { label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
         };
 
+        /** @type {DamageType[]} */
+        const damageTypes = parts.reduce((acc, cur) => {
+            if (cur.types && !foundry.utils.isObjectEmpty(cur.types)) {
+                const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
+                const obj = { types: [], operator: "" };
+
+                for (const type of filteredTypes) {
+                    obj.types.push(type[0]);
+                }
+
+                if (cur.operator) obj.operator = cur.operator;
+
+                if (obj.types.length > 0)
+                    acc.push(obj);
+            }
+
+            return acc;
+        }, []);
+
         const options = {
             debug: false,
             buttons: buttons,
@@ -436,7 +455,8 @@ export class DiceSFRPG {
             title: title,
             skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "",
-            dialogOptions: dialogOptions
+            dialogOptions: dialogOptions,
+            parts
         };
 
         const formula = parts.filter(part => part.formula.length > 0).map(part => part.formula).join(" + ");
@@ -478,36 +498,12 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
             
-            /** @type {DamageType[]} */
-            const damageTypes = parts.reduce((acc, cur) => {
-                if (cur.types && !foundry.utils.isObjectEmpty(cur.types)) {
-                    const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
-                    const obj = { types: [], operator: "" };
-
-                    for (const type of filteredTypes) {
-                        obj.types.push(type[0]);
-                    }
-
-                    if (cur.operator) obj.operator = cur.operator;
-
-                    acc.push(obj);
-                }
-
-                return acc;
-            }, []);
+            
             
             if (damageTypes) {
                 for (const damageType of damageTypes) {
                     const tag = "damage-type-" + damageType.types.join(`-${damageType.operator}-`);
-                    let text = "";
-                    for (const type of damageType.types) {
-                        text += SFRPG.damageTypes[type];
-                        if (damageType.operator.trim() !== "")
-                            text += ` ${SFRPG.damageTypeOperators[damageType.operator]} `;
-                    }
-
-                    if (damageType.operator.trim() !== "")
-                        text = text.substring(0, text.lastIndexOf(SFRPG.damageTypeOperators[damageType.operator]) - 1);
+                    const text = damageType.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[damageType.operator]} `);
                     
                     tags.push({ tag: tag, text: text });
                 }
