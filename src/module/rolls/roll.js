@@ -9,6 +9,14 @@
  */
 
 /**
+ * A structure for passing data into an HTML for for use in data- attributes.
+ * 
+ * @typedef {Object} HtmlData
+ * @property {string} name The name of the data property sans data-
+ * @property {string} value The value of the data property.
+ */
+
+/**
  * A custom implementaion for the foundry {@link Roll} class.
  * 
  * @inheritdoc
@@ -21,6 +29,8 @@ export default class SFRPGRoll extends Roll {
         this.tags = data.tags;
         /** @type {string} */
         this.breakdown = data.breakdown;
+        /** @type {HtmlData[]} */
+        this.htmlData = data.htmlData;
     }
 
     /** @inheritdoc */
@@ -40,6 +50,7 @@ export default class SFRPGRoll extends Roll {
 
         if (chatOptions?.breakdown) this.breakdown = chatOptions.breakdown;
         if (chatOptions?.tags) this.tags = chatOptions.tags;
+        if (chatOptions?.htmlData) this.htmlData = chatOptions.htmlData;
     
         // Execute the roll, if needed
         if (!this._evaluated) this.evaluate();
@@ -52,7 +63,8 @@ export default class SFRPGRoll extends Roll {
           tooltip: isPrivate ? "" : await this.getTooltip(),
           total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
           tags: this.tags,
-          breakdown: this.breakdown
+          breakdown: this.breakdown,
+          htmlData: this.htmlData
         };
     
         // Render the roll display template

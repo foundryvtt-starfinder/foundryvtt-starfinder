@@ -1,5 +1,8 @@
 <div class="sfrpg dice-roll"
-     data-sfrpg-dice-total="{{total}}">
+     data-sfrpg-dice-total="{{total}}"
+     {{#each htmlData}}
+     data-sfrpg-{{this.name}}="{{this.value}}"
+     {{/each}}>
     {{#if flavor}}
     <div class="dice-flavor">{{flavor}}</div>
     {{/if}}

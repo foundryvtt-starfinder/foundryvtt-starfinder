@@ -92,6 +92,14 @@ import RollTree from "./rolls/rolltree.js";
  */
 
 /**
+ * A structure for passing data into an HTML for for use in data- attributes.
+ * 
+ * @typedef {Object} HtmlData
+ * @property {string} name The name of the data property sans data-
+ * @property {string} value The value of the data property.
+ */
+
+/**
  * An optional modifer that can be added to a roll.
  * 
  * @typedef {Object} Modifier
@@ -471,17 +479,89 @@ export class DiceSFRPG {
 
             /** @type {Tag[]} */
             const tags = [];
+            /** @type {HtmlData[]} */
+            const htmlData = [{ name: "is-damage", value: "true" }];
+
+            const tempParts = parts.reduce((arr, curr) => {
+                let obj = { formula: curr.formula, types: [], operator: curr.operator };
+                if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
+                    for (const [key, isEnabled] of Object.entries(curr.types)) {
+                        if (isEnabled) {
+                            obj.types.push(key);
+                        }
+                    }
+                }
+
+                if (obj.types && obj.types.length > 0) {
+                    const tag = `damage-type-${(obj.types.join(`-${obj.operator}-`))}`;
+                    const text = obj.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[obj.operator]} `);
+
+                    tags.push({ tag: tag, text: text });
+                }
+
+                arr.push(obj);
+                return arr;
+            }, []);
+            htmlData.push({ name: "damage-parts", value: JSON.stringify(tempParts) });
+
+            // if (damageTypes) {
+            //     for (const damageType of damageTypes) {
+            //         const tag = "damage-type-" + damageType.types.join(`-${damageType.operator}-`);
+            //         const text = damageType.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[damageType.operator]} `);
+                    
+            //         tags.push({ tag: tag, text: text });
+            //     }
+            // }
+
+            const itemContext = rollContext.allContexts['item']; 
+            if (itemContext) {
+                /** Regular Weapons use data.properties for their properties */
+                if (itemContext.entity.data.data.properties) {
+                    try {
+                        const props = [];
+                        for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.properties)) {
+                            if (isEnabled) {
+                                tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
+                                props.push(key);
+                            }
+                        }
+                        htmlData.push({ name: "weapon-properties", value: JSON.stringify(props) });
+                    } catch { }
+                }
+
+                /** Starship Weapons use data.special for their properties */
+                if (itemContext.entity.data.type === "starshipWeapon") {
+                    tags.push({tag: `starship-weapon-type ${itemContext.entity.data.data.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.data.data.weaponType]});
+                    htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.data.data.weaponType });
+
+                    if (itemContext.entity.data.data.special) {
+                        try {
+                            const props = [];
+                            for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.special)) {
+                                if (isEnabled) {
+                                    tags.push({tag: `starship-weapon-properties ${key}`, text: SFRPG.starshipWeaponProperties[key]});
+                                    props.push(key);
+                                }
+                            }
+                            htmlData.push({ name: "starship-weapon-properties", value: JSON.stringify(props) });
+                        } catch { }
+                    }
+                }
+            }
 
             const isCritical = (button === "Critical");
             if (isCritical) {
+                htmlData.push({ name: "is-critical", value: "true" });
+                tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
                 finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                 
                 let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
-
+                
                 if (criticalData !== undefined) {
                     if (criticalData?.effect?.trim().length > 0) {
                         tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": flavor, "criticalEffect": criticalData.effect });
+                        tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                     }
 
                     let critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula).join("+") ?? "";
@@ -489,6 +569,8 @@ export class DiceSFRPG {
                         finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
                         finalFormula.formula = finalFormula.formula + " + " + critRoll;
                     }
+
+                    htmlData.push({ name: "critical-data", value: JSON.stringify(criticalData) });
                 }
 
                 flavor = tempFlavor;
@@ -497,55 +579,8 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
-            
-            
-            
-            if (damageTypes) {
-                for (const damageType of damageTypes) {
-                    const tag = "damage-type-" + damageType.types.join(`-${damageType.operator}-`);
-                    const text = damageType.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[damageType.operator]} `);
-                    
-                    tags.push({ tag: tag, text: text });
-                }
-            }
 
-            if (isCritical) {
-                tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
-                if (criticalData !== undefined && criticalData.effect.length > 0) {
-                    tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
-                }
-            }
-
-            const itemContext = rollContext.allContexts['item']; 
-            if (itemContext) {
-                /** Regular Weapons use data.properties for their properties */
-                if (itemContext.entity.data.data.properties) {
-                    try {
-                        for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.properties)) {
-                            if (isEnabled) {
-                                tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
-                            }
-                        }
-                    } catch { }
-                }
-
-                /** Starship Weapons use data.special for their properties */
-                if (itemContext.entity.data.type === "starshipWeapon") {
-                    tags.push({tag: `starship-weapon-type ${itemContext.entity.data.data.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.data.data.weaponType]});
-
-                    if (itemContext.entity.data.data.special) {
-                        try {
-                            for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.special)) {
-                                if (isEnabled) {
-                                    tags.push({tag: `starship-weapon-properties ${key}`, text: SFRPG.starshipWeaponProperties[key]});
-                                }
-                            }
-                        } catch { }
-                    }
-                }
-            }
-
-            const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
+            const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation, htmlData: htmlData });
             let roll = await rollObject.evaluate({async: true});
 
             // Associate the damage types for this attack to the first DiceTerm
@@ -577,7 +612,8 @@ export class DiceSFRPG {
                     speaker: speaker,
                     rollMode: rollMode,
                     breakdown: preparedRollExplanation,
-                    tags: tags
+                    tags: tags,
+                    htmlData: htmlData
                 };
 
                 try {

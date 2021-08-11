@@ -681,6 +681,8 @@ export class ActorSFRPG extends Actor {
      * @returns {Promise<any[]>} 
      */
     static async applyDamageFromContextMenu(html, multiplier) {
+        const data = html.find('.sfrpg.dice-roll').data();
+        console.log(data);
         const totalDamageDealt = Math.floor(parseFloat(html.find('.dice-total').text()) * multiplier);
         const isHealing = (multiplier < 0);
         const promises = [];
