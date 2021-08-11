@@ -10,7 +10,7 @@ export const _getInitiativeFormula = function (combatant) {
 };
 
 export const addChatMessageContextOptions = function (html, options) {
-    if (!canvas.initialized) return;
+    if (!canvas.initialized) { return; }
     let canApply = li => canvas.tokens.controlled.length && li.find(".dice-roll").length;
     options.push(
         {
