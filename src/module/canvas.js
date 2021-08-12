@@ -8,8 +8,8 @@ Hooks.on('createToken', onTokenCreated);
 Hooks.on('updateToken', onTokenUpdated);
 
 function onCanvasReady(...args) {
-    if (!canvas.initialized) return;
-    for (let placeable of canvas.tokens.placeables) {
+    if (!canvas.initialized) { return; }
+    for (const placeable of canvas.tokens.placeables) {
 		if (placeable.document.getFlag("sfrpg", "itemCollection")) {
             setupLootCollectionTokenInteraction(placeable, false);
         }
@@ -17,7 +17,7 @@ function onCanvasReady(...args) {
 }
 
 function onTokenCreated(document, options, userId) {
-    if (!canvas.initialized) return;
+    if (!canvas.initialized) { return; }
     if (getProperty(document.data, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === document.id);
         trySetupLootToken(token);
@@ -25,7 +25,7 @@ function onTokenCreated(document, options, userId) {
 }
 
 function onTokenUpdated(document, options, userId) {
-    if (!canvas.initialized) return;
+    if (!canvas.initialized) { return; }
     if (getProperty(document.data, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === document.id);
         trySetupLootToken(token);
@@ -50,8 +50,10 @@ function trySetupLootToken(token) {
  * @returns {Number[]} An Array of distance measurmements for each segment
  */
 export const measureDistances = function(segments, options={}) {
-    if (!canvas.initialized) return;
-    if (!options?.gridSpaces) return BaseGrid.prototype.measureDistances.call(this, segments, options);
+    if (!canvas.initialized) { return; }
+    if (!options?.gridSpaces) {
+        return BaseGrid.prototype.measureDistances.call(this, segments, options);
+    }
 
     let nDiagonal = 0;
     const rule = this.parent.diagonalRule;
@@ -73,7 +75,7 @@ export const measureDistances = function(segments, options={}) {
             return spaces * canvas.dimensions.distance;
         }
 
-        else return (ns + nd) * canvas.scene.data.gridDistance;
+        return (ns + nd) * canvas.scene.data.gridDistance;
     });
 };
 
@@ -93,7 +95,7 @@ export const getBarAttribute = function (...args) {
 }
 
 export async function handleItemDropCanvas(data) {
-    if (!canvas.initialized) return;
+    if (!canvas.initialized) { return; }
     //console.log("Canvas::handleItemDrop()");
     
     // Potential sources:

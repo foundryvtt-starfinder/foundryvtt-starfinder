@@ -13,8 +13,9 @@ export const registerSystemSettings = function () {
             "555": "SFRPG.Settings.DiagonalMovementRule.Values.Optional"
         },
         onChange: rule => {
-            if (canvas.initialized)
+            if (canvas.initialized) {
                 canvas.grid.diagonalRule = rule;
+            }
         }
     });
 
