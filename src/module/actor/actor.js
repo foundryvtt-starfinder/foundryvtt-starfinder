@@ -545,7 +545,7 @@ export class ActorSFRPG extends Actor {
             event: options.event,
             rollContext: rollContext,
             parts: parts,
-            title:  `Ability Check - ${label}`,
+            title:  game.i18n.format("SFRPG.Rolls.Dice.AbilityCheckTitle", {label: label}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
@@ -580,7 +580,7 @@ export class ActorSFRPG extends Actor {
             event: options.event,
             rollContext: rollContext,
             parts: parts,
-            title: `Save - ${label}`,
+            title: game.i18n.format("SFRPG.Rolls.Dice.SaveTitle", {label: label}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
@@ -606,7 +606,7 @@ export class ActorSFRPG extends Actor {
             event: options.event,
             rollContext: rollContext,
             parts: parts,
-            title: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
+            title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)]}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
@@ -662,7 +662,7 @@ export class ActorSFRPG extends Actor {
             event: options.event,
             rollContext: rollContext,
             parts: parts,
-            title: `Skill Check - ${CONFIG.SFRPG.skills["pil"]}`,
+            title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills["pil"]}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
@@ -1207,9 +1207,9 @@ export class ActorSFRPG extends Actor {
 
         // Notify chat what happened
         if (chat) {
-            let msg = game.i18n.format("SFRPG.RestSChatMessage", { name: this.name });
+            let msg = game.i18n.format("SFRPG.Rest.Short.ChatMessage.Message", { name: this.name });
             if (drp > 0) {
-                msg = game.i18n.format("SFRPG.RestSChatMessageRestored", { name: this.name, spentRP: drp, regainedSP: dsp });
+                msg = game.i18n.format("SFRPG.Rest.Short.ChatMessage.Restored", { name: this.name, spentRP: drp, regainedSP: dsp });
             }
             
             ChatMessage.create({
@@ -1352,7 +1352,7 @@ export class ActorSFRPG extends Actor {
             ChatMessage.create({
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
-                content: `${this.name} takes a night's rest and recovers ${dhp} Hit points, ${dsp} Stamina points, and ${drp} Resolve points.`
+                content: game.i18n.format("SFRPG.Rest.Long.ChatMessage.Content", {name: this.name, deltaHP: dhp, deltaSP: dsp, deltaRP: drp})
             });
         }
 
@@ -1573,19 +1573,16 @@ export class ActorSFRPG extends Actor {
 
         const rollMode = game.settings.get("core", "rollMode");
         const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
-        rollResult.roll.render().then((rollContent) => {
-            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-            const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
-    
-            ChatMessage.create({
-                flavor: flavor,
-                speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
-                content: explainedRollContent,
-                rollMode: rollMode,
-                roll: rollResult.roll,
-                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-                sound: CONFIG.sounds.dice
-            });
+        const rollContent = await rollResult.roll.render({ breakdown: preparedRollExplanation });
+
+        ChatMessage.create({
+            flavor: flavor,
+            speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
+            content: rollContent,
+            rollMode: rollMode,
+            roll: rollResult.roll,
+            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            sound: CONFIG.sounds.dice
         });
     }
 
