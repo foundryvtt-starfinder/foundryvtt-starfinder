@@ -1560,15 +1560,30 @@
         "RepairDroneDialogTitle": "Réparation du drone",
         "RepairDroneUnnecessary": "{name} est déjà au maximum de points de vie, aucune réparation n'est nécessaire.",
         "Resolve": "Persévérance",
-        "RestButton": "Repos",
-        "RestCancel": "Annuler",
-        "RestL": "Repos L",
-        "RestS": "Repos C",
-        "RestSActionHeader": "Dépenser un point de résolution ?",
-        "RestSChatMessage": "{name} prend un repos court de 10 minutes.",
-        "RestSChatMessageRestored": "{name} prend un repos court de 10 minutes et a dépensé {sharedRP} points de résolution pour récupérer {regainedSP} points d'endurance.",
-        "RestSDescription": "Prendre un peu de repos ? pendant un repos court, vous pouvez dépenser un point de résolution pour récupérer tous vos points d'endurance.",
-        "RestSTitle": "Repos court de 10 Minutes",
+        "Rest": {
+            "Button": "Repos",
+            "Cancel": "Annuler",
+            "Long": {
+                "ChatMessage": {
+                    "Content": "{name} takes a night's rest and recovers {deltaHP} Hit points, {deltaSP} Stamina points, and {deltaRP} Resolve points."
+                },
+                "Dialog": {
+                    "Title": "Night's Rest",
+                    "Description": "<p>Take a night's rest?</p><p>On a night's rest you will recover 1 hit point per character level, all stamina points, all resolve points, class resources, limited use item charges, and spell slots.</p>"
+                },
+                "Title": "Repos L"
+            },
+            "Short": {
+                "ActionHeader": "Dépenser un point de résolution ?",
+                "ChatMessage": {
+                    "Message": "{name} prend un repos court de 10 minutes.",
+                    "Restored": "{name} prend un repos court de 10 minutes et a dépensé {sharedRP} points de résolution pour récupérer {regainedSP} points d'endurance."
+                },
+                "DialogDescription": "Prendre un peu de repos ? pendant un repos court, vous pouvez dépenser un point de résolution pour récupérer tous vos points d'endurance.",
+                "DialogTitle": "Repos court de 10 Minutes",
+                "Title": "Repos C"
+            }
+        },
         "Rolls": {
             "AttackRoll": "Jet d'Attaque",
             "AttackRollFull": "Jet d'Attaque - {name}",
@@ -1598,6 +1613,7 @@
                 "SituationalBonusTooltip": "Y a-t-il des bonus supplémentaires qui s'appliquent à ce jet ? (Par exemple, des incréments de plage)"
             },
             "Dice": {
+                "AbilityCheckTitle": "Ability Check - {label}",
                 "Advantage": "Avantage",
                 "AdvantageTooltip": "Lancer avec avantage.",
                 "CriticalDamage": "Critique",
@@ -1615,7 +1631,9 @@
                 "NormalDamage": "Normal",
                 "NormalDamageTooltip": "Dommages normaux.",
                 "NormalTooltip": "Jet normal.",
-                "Roll": "Lancer"
+                "Roll": "Lancer",
+                "SaveTitle": "Save - {label}",
+                "SkillCheckTitle": "Skill Check - {skill}"
             },
             "HealingRoll": "Jet de Soin",
             "HealingRollFull": "Jet de Soin - {name}",

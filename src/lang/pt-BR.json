@@ -1560,15 +1560,30 @@
         "RepairDroneDialogTitle": "Reparar Drone",
         "RepairDroneUnnecessary": "{name} á está com o máximo de pontos de vida, sem necessidade de reparos.",
         "Resolve": "Determinação",
-        "RestButton": "Descanso",
-        "RestCancel": "Cancelar",
-        "RestL": "Descanso Longo",
-        "RestS": "Descanso Curto",
-        "RestSActionHeader": "Gastar um Ponto de Determinação?",
-        "RestSChatMessage": "{name} fazer um breve descanso de 10 minutos.",
-        "RestSChatMessageRestored": "{name} faz um breve descanso de 10 minutos, e gasta {spentRP} Pontos de Determinação para recuperar {regainedSP} Pontos Estamina.",
-        "RestSDescription": "Faça um descanso rápido? Em um breve descanso, você pode gastar um Ponto de Determinação para recuperar todos os Pontos de Estamina.",
-        "RestSTitle": "Descanso Curto de 10 Minutos",
+        "Rest": {
+            "Button": "Descanso",
+            "Cancel": "Cancelar",
+            "Long": {
+                "ChatMessage": {
+                    "Content": "{name} takes a night's rest and recovers {deltaHP} Hit points, {deltaSP} Stamina points, and {deltaRP} Resolve points."
+                },
+                "Dialog": {
+                    "Title": "Night's Rest",
+                    "Description": "<p>Take a night's rest?</p><p>On a night's rest you will recover 1 hit point per character level, all stamina points, all resolve points, class resources, limited use item charges, and spell slots.</p>"
+                },
+                "Title": "Descanso Longo"
+            },
+            "Short": {
+                "ActionHeader": "Gastar um Ponto de Determinação?",
+                "ChatMessage": {
+                    "Message": "{name} fazer um breve descanso de 10 minutos.",
+                    "Restored": "{name} faz um breve descanso de 10 minutos, e gasta {spentRP} Pontos de Determinação para recuperar {regainedSP} Pontos Estamina."
+                },
+                "DialogDescription": "Faça um descanso rápido? Em um breve descanso, você pode gastar um Ponto de Determinação para recuperar todos os Pontos de Estamina.",
+                "DialogTitle": "Descanso Curto de 10 Minutos",
+                "Title": "Descanso Curto"
+            }
+        },
         "Rolls": {
             "AttackRoll": "Rolagem Ataque",
             "AttackRollFull": "Rolagem Ataque - {name}",
@@ -1598,6 +1613,7 @@
                 "SituationalBonusTooltip": "Existem bônus adicionais que se aplicam a este teste? (Por exemplo, incrementos de distância)"
             },
             "Dice": {
+                "AbilityCheckTitle": "Ability Check - {label}",
                 "Advantage": "Avantagem",
                 "AdvantageTooltip": "Rolar com Vantagem.",
                 "CriticalDamage": "Crítico",
@@ -1615,7 +1631,9 @@
                 "NormalDamage": "Normal",
                 "NormalDamageTooltip": "Rolar Dano Normal.",
                 "NormalTooltip": "Rolagem Normal.",
-                "Roll": "Rolagem"
+                "Roll": "Rolagem",
+                "SaveTitle": "Save - {label}",
+                "SkillCheckTitle": "Skill Check - {skill}"
             },
             "HealingRoll": "Rolar Cura",
             "HealingRollFull": "Rolar Cura - {name}",
