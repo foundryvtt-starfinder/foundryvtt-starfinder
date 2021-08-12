@@ -483,7 +483,7 @@ export class DiceSFRPG {
             const htmlData = [{ name: "is-damage", value: "true" }];
 
             const tempParts = parts.reduce((arr, curr) => {
-                let obj = { formula: curr.formula, types: [], operator: curr.operator };
+                let obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
                 if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
                     for (const [key, isEnabled] of Object.entries(curr.types)) {
                         if (isEnabled) {
@@ -502,7 +502,6 @@ export class DiceSFRPG {
                 arr.push(obj);
                 return arr;
             }, []);
-            htmlData.push({ name: "damage-parts", value: JSON.stringify(tempParts) });
 
             // if (damageTypes) {
             //     for (const damageType of damageTypes) {
@@ -580,7 +579,7 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation, htmlData: htmlData });
+            const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
             let roll = await rollObject.evaluate({async: true});
 
             // Associate the damage types for this attack to the first DiceTerm
@@ -591,6 +590,7 @@ export class DiceSFRPG {
                 /** @type {boolean} */
                 die.options.isDamageRoll = true;
                 die.options.damageTypes = damageTypes;
+                die.options.damageParts = tempParts;
 
                 if (criticalData) {
                     die.options.criticalData = criticalData;
@@ -601,6 +601,10 @@ export class DiceSFRPG {
                     die.options.isModal = properties.modal || properties.double;
                 }
             }
+            for (const term of roll.terms) {
+                console.log(term.expression);
+            }
+            htmlData.push({ name: "damage-parts", value: JSON.stringify(tempParts) });
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
@@ -625,7 +629,7 @@ export class DiceSFRPG {
             }
             
             if (!useCustomCard) {
-                const content = await roll.render();
+                const content = await roll.render({ htmlData: htmlData });
 
                 ChatMessage.create({
                     flavor: flavor,

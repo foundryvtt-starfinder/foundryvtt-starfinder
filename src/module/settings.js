@@ -152,4 +152,13 @@ export const registerSystemSettings = function () {
         default: false,
         type: Boolean
     });
+
+    game.settings.register("sfrpg", "useCalculateAppliedDamage", {
+        name: "SFRPG.Damage.Automation.Title",
+        hint: "SFRPG.Damage.Automation.Hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
 };
