@@ -77,12 +77,11 @@ export default class RollContext {
     getRollData() {
         let obj = {};
         for (const [context, data] of Object.entries(this.allContexts)) {
-            console.log(context, data);
-            if ("entity" in data) {
-                obj[context] = data.entity.data;
-            } else {
-                obj[context] = data;
+            if (context === this.mainContext) {
+                obj = foundry.utils.mergeObject(obj, data.data);
             }
+
+            obj[context] = data.data;
         }
 
         return obj;
