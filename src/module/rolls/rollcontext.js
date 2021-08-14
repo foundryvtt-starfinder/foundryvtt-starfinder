@@ -74,6 +74,20 @@ export default class RollContext {
         return [context, variable];
     }
 
+    getRollData() {
+        let obj = {};
+        for (const [context, data] of Object.entries(this.allContexts)) {
+            console.log(context, data);
+            if ("entity" in data) {
+                obj[context] = data.entity.data;
+            } else {
+                obj[context] = data;
+            }
+        }
+
+        return obj;
+    }
+
     hasMultipleSelectors() {
         for (const [key, value] of Object.entries(this.selectors)) {
             if (value.options?.length > 1) {
