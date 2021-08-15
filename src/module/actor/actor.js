@@ -36,6 +36,11 @@ export class ActorSFRPG extends Actor {
         //console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
     }
 
+    _initialize() {
+        this.rollContext = new RollContext();
+        super._initialize();
+    }
+
     /** @override */
     getRollData() {
         const data = super.getRollData();
@@ -545,15 +550,9 @@ export class ActorSFRPG extends Actor {
         }
         parts.push(`@abilities.${abilityId}.mod`);
 
-        const rollContext = new RollContext();
-        rollContext.addContext("main", this, data);
-        rollContext.setMainContext("main");
-
-        this.setupRollContexts(rollContext);
-
         return await DiceSFRPG.d20Roll({
             event: options.event,
-            rollContext: rollContext,
+            rollContext: this.rollContext,
             parts: parts,
             title:  game.i18n.format("SFRPG.Rolls.Dice.AbilityCheckTitle", {label: label}),
             flavor: null,
@@ -579,16 +578,10 @@ export class ActorSFRPG extends Actor {
         let data = this.getRollData();
 
         parts.push(`@attributes.${saveId}.bonus`);
-        
-        const rollContext = new RollContext();
-        rollContext.addContext("main", this, data);
-        rollContext.setMainContext("main");
-
-        this.setupRollContexts(rollContext);
 
         return DiceSFRPG.d20Roll({
             event: options.event,
-            rollContext: rollContext,
+            rollContext: this.rollContext,
             parts: parts,
             title: game.i18n.format("SFRPG.Rolls.Dice.SaveTitle", {label: label}),
             flavor: null,
@@ -606,15 +599,9 @@ export class ActorSFRPG extends Actor {
 
         parts.push(`@skills.${skillId}.mod`);
         
-        const rollContext = new RollContext();
-        rollContext.addContext("main", this, data);
-        rollContext.setMainContext("main");
-
-        this.setupRollContexts(rollContext);
-        
         return await DiceSFRPG.d20Roll({
             event: options.event,
-            rollContext: rollContext,
+            rollContext: this.rollContext,
             parts: parts,
             title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)]}),
             flavor: null,
@@ -636,17 +623,13 @@ export class ActorSFRPG extends Actor {
         let parts = [];
         let data = this.getRollData();
 
-        const rollContext = new RollContext();
-        rollContext.addContext("vehicle", this, data);
-        rollContext.setMainContext("vehicle");
-
         // Add piloting modifier of vehicle
         parts.push(`@attributes.modifiers.piloting`);
 
         // Roll a piloting check with a specific system (usually Autopilot).
         // Only takes vehicle and system piloting into account
         if (system) {
-            rollContext.addContext("system", system, system.data.data);
+            this.rollContext.addContext("system", system, system.data.data);
             parts.push(`@system.piloting.piloting`);
         }
         else if(!role || !actorId) {
@@ -662,15 +645,15 @@ export class ActorSFRPG extends Actor {
                 actorData = passenger.data;
             }
 
-            rollContext.addContext("passenger", passenger, actorData);
+            this.rollContext.addContext("passenger", passenger, actorData);
             parts.push(`@passenger.skills.pil.mod`);
         }
 
-        this.setupRollContexts(rollContext);
+        this.setupRollContexts(this.rollContext);
 
         return await DiceSFRPG.d20Roll({
             event: options.event,
-            rollContext: rollContext,
+            rollContext: this.rollContext,
             parts: parts,
             title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills["pil"]}),
             flavor: null,
@@ -1485,11 +1468,7 @@ export class ActorSFRPG extends Actor {
             selectedFormula = actionEntry.data.formula.find(x => x.name === results.result.roll);
         }
 
-        const rollContext = new RollContext();
-        rollContext.addContext("ship", this);
-        rollContext.setMainContext("ship");
-
-        this.setupRollContexts(rollContext, actionEntry.data.selectors || []);
+        this.setupRollContexts(this.rollContext, actionEntry.data.selectors || []);
 
         /** Create additional modifiers. */
         const additionalModifiers = [
@@ -1498,7 +1477,7 @@ export class ActorSFRPG extends Actor {
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} }
         ];
-        rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+        this.rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
 
         let systemBonus = "";
         // Patch and Hold It Together are not affected by critical damage.
@@ -1521,7 +1500,7 @@ export class ActorSFRPG extends Actor {
         }
 
         const rollResult = await DiceSFRPG.createRoll({
-            rollContext: rollContext,
+            rollContext: this.rollContext,
             rollFormula: selectedFormula.formula + systemBonus + " + @additional.modifiers.bonus",
             title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name})
         });
@@ -1536,7 +1515,7 @@ export class ActorSFRPG extends Actor {
 
         const desiredKey = actionEntry.data.selectorKey;
         if (desiredKey) {
-            const selectedContext = rollContext.allContexts[desiredKey];
+            const selectedContext = this.rollContext.allContexts[desiredKey];
             if (!selectedContext) {
                 ui.notifications.error(game.i18n.format("SFRPG.Rolls.StarshipActions.NoActorError", {name: desiredKey}));
                 return;
@@ -1564,7 +1543,7 @@ export class ActorSFRPG extends Actor {
         if (dc) {
             if (dc.resolve) {
                 const dcRoll = await DiceSFRPG.createRoll({
-                    rollContext: rollContext,
+                    rollContext: this.rollContext,
                     rollFormula: dc.value,
                     mainDie: 'd0',
                     title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
