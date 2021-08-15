@@ -1,4 +1,4 @@
-import { mix } from "./mixins/item-mixer.js";
+import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
@@ -9,7 +9,7 @@ import SFRPGModifier from "../modifiers/modifier.js";
 import SFRPGModifierApplication from "../apps/modifier-app.js";
 import StackModifiers from "../rules/closures/stack-modifiers.js";
 
-export class ItemSFRPG extends mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
+export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
     /* -------------------------------------------- */
     /*  Item Properties                             */
