@@ -33,7 +33,6 @@ import calculateEncumbrance             from './rules/actions/actor/calculate-en
 import calculateMovementSpeeds          from './rules/actions/actor/calculate-movement-speeds.js';
 import calculateSaveModifiers           from './rules/actions/actor/calculate-save-modifiers.js';
 import calculateSkillModifiers          from './rules/actions/actor/calculate-skill-modifiers.js';
-import setupActorRollContexts           from './rules/actions/actor/setup-actor-roll-contexts.js';
 // Character rules
 import calculateBaseArmorClass          from './rules/actions/actor/character/calculate-base-armor-class.js';
 import calculateBaseAttackBonus         from './rules/actions/actor/character/calculate-bab.js';
@@ -110,7 +109,6 @@ export default function (engine) {
     calculateAbilityCheckModifiers(engine);
     calculateEncumbrance(engine);
     calculateMovementSpeeds(engine);
-    setupActorRollContexts(engine);
     // Character actions
     calculateBaseAttackBonus(engine);
     calculateCharacterLevel(engine);
@@ -272,8 +270,7 @@ export default function (engine) {
                         "calculateVehiclePassengers",
                         "identity"
                     ]
-            },
-            "setupActorRollContexts"
+            }
         ]
     });
 
