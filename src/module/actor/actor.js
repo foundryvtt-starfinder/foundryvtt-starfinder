@@ -982,12 +982,18 @@ export class ActorSFRPG extends Actor {
             });
         }
 
-        return {
-            drp: drp,
-            dsp: dsp,
+        const restResults = {
+            actor: this,
+            restType: "short",
+            deltaStamina: dsp,
+            deltaResolve: drp,
             updateData: updateData,
             updateItems: updateItems
-        }
+        };
+
+        Hooks.callAll("onActorRest", restResults);
+
+        return restResults;
     }
 
     /**
@@ -1035,22 +1041,16 @@ export class ActorSFRPG extends Actor {
             });
         }
 
-        return {
-            dhp: dhp,
+        const restResults = {
+            actor: this,
+            restType: "repair",
+            deltaHitpoints: dhp,
             updateData: updateData
         };
-    }
 
-    async removeFromCrew(actorId) {
-        const role = this.getCrewRoleForActor(actorId);
-        if (role) {
-            const crewData = duplicate(this.data.data.crew);
-            crewData[role].actorIds = crewData[role].actorIds.filter(x => x !== actorId);
-            return this.update({
-                "data.crew": crewData
-            });
-        }
-        return null;
+        Hooks.callAll("onActorRest", restResults);
+
+        return restResults;
     }
 
     /**
@@ -1118,13 +1118,31 @@ export class ActorSFRPG extends Actor {
             });
         }
 
-        return {
-            dhp: dhp,
-            dsp: dsp,
-            drp: drp,
+        const restResults = {
+            actor: this,
+            restType: "long",
+            deltaHitpoints: dhp,
+            deltaStamina: dsp,
+            deltaResolve: drp,
             updateData: updateData,
             updateItems: updateItems
+        };
+
+        Hooks.callAll("onActorRest", restResults);
+
+        return restResults;
+    }
+
+    async removeFromCrew(actorId) {
+        const role = this.getCrewRoleForActor(actorId);
+        if (role) {
+            const crewData = duplicate(this.data.data.crew);
+            crewData[role].actorIds = crewData[role].actorIds.filter(x => x !== actorId);
+            return this.update({
+                "data.crew": crewData
+            });
         }
+        return null;
     }
 
     /** Starship code */
