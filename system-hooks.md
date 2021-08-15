@@ -22,6 +22,27 @@ Hooks.on("onActorSetCondition", ({actor, item, conditionName, enabled}) => {
 });
 ```
 
+### onActorRest
+Name: onActorRest
+
+Called when: Whenever an actor does a short rest (10 min rest), a long rest (8 hour rest), or if they are repaired (Drone only).
+
+Arguments: Object with several keys: actor, restType, deltaHitpoints, deltaStamina, deltaResolve, updateData, updateItems.
+* actor: The actor who is performing the rest.
+* restType: Supported values are "short", "long", or "repair", depending on the type of rest.
+* deltaHitpoints (optional): The amount of hitpoints gained during this rest.
+* deltaStamina (optional): The amount of stamina gained during this rest.
+* deltaResolve (optional): The amount of resolve points gained during this rest.
+* updateData: The updated data as written to the actor's entity.
+* updateItems: Array of items that have been updated for this rest.
+
+Example usage:
+```javascript
+Hooks.on("onActorRest", ({actor, restType, deltaHitpoints, deltaStamina, deltaResolve, updateData, updateItems}) => {
+    console.log(['Actor condition', actor, restType, deltaHitpoints, deltaStamina, deltaResolve, updateData, updateItems]);
+});
+```
+
 ## Item Hooks
 
 ### attackRolled
