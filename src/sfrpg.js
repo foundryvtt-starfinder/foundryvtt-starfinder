@@ -103,11 +103,7 @@ Hooks.once('init', async function () {
             // Misc
             ActorSheetFlags,            
             SFRPGModifierApplication,            
-            TraitSelectorSFRPG,
-            // Roll classes
-            RollContext,
-            RollNode,
-            RollTree
+            TraitSelectorSFRPG
         },
         config: SFRPG,
         dice: DiceSFRPG,
@@ -117,12 +113,17 @@ Hooks.once('init', async function () {
         generateUUID,
         migrateWorld,
         rollItemMacro,
+        rolls: {
+            RollContext,
+            RollNode,
+            RollTree,
+            SFRPGRoll
+        },
         RPC,
         SFRPGEffectType,
         SFRPGModifier,
         SFRPGModifierType,
-        SFRPGModifierTypes,
-        SFRPGRoll
+        SFRPGModifierTypes  
     };
 
     CONFIG.SFRPG = SFRPG;

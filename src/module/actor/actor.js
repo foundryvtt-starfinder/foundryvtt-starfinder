@@ -693,7 +693,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                             callback: html => html.find('[name="selected-damage-type"]').val()
                         });
 
-                        if (!actor.isImmuneToDamageType(type)) {
+                        if (!this.isImmuneToDamageType(type)) {
                             let damageBeingApplied = totalDamageDealt;
                             damageBeingApplied += this._applyVulnerabilities(damageBeingApplied, type);
                             damageBeingApplied -= this._applyEnergyResistances(damageBeingApplied, type);

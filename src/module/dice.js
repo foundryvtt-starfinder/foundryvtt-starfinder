@@ -495,8 +495,9 @@ export class DiceSFRPG {
                 if (obj.types && obj.types.length > 0) {
                     const tag = `damage-type-${(obj.types.join(`-${obj.operator}-`))}`;
                     const text = obj.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[obj.operator]} `);
-
-                    tags.push({ tag: tag, text: text });
+                    
+                    if (!tags.some(t => t.tag === tag && t.text === text))
+                        tags.push({ tag: tag, text: text });
                 }
 
                 arr.push(obj);
@@ -601,9 +602,7 @@ export class DiceSFRPG {
                     die.options.isModal = properties.modal || properties.double;
                 }
             }
-            for (const term of roll.terms) {
-                console.log(term.expression);
-            }
+
             htmlData.push({ name: "damage-parts", value: JSON.stringify(tempParts) });
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
