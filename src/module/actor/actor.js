@@ -512,7 +512,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      */
     static async applyDamageFromContextMenu(html, multiplier) {
         const diceTotal = html.find('.sfrpg.dice-roll').data("sfrpgDiceTotal");
-        const totalDamageDealt = (diceTotal ?? Math.floor(parseFloat(html.find('.dice-total').text()))) * multiplier;
+        const totalDamageDealt = Math.floor((diceTotal ?? Math.floor(parseFloat(html.find('.dice-total').text()))) * multiplier);
         const isHealing = (multiplier < 0);
         const promises = [];
         for (const controlledToken of canvas.tokens?.controlled) {
@@ -573,160 +573,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @returns A Promise that resolves to the updated Actor
      */
     async _applyActorDamage(htmlOrRoll, totalDamageDealt, isHealing) {
-        let remainingUndealtDamage = 0;
+        let remainingUndealtDamage = totalDamageDealt;
         const actorUpdate = {};
         const actorData = foundry.utils.duplicate(this.data.data);
-        let data = {};
-        const useCalculateAppliedDamage = game.settings.get('sfrpg', 'useCalculateAppliedDamage');
-
-        if (htmlOrRoll && htmlOrRoll instanceof Roll) {
-            // TODO: get the first Die term, which will have the data
-            // on the damage types and it's operator.
-        } else if (htmlOrRoll && htmlOrRoll.length > 0) {
-            data = htmlOrRoll.find('.sfrpg.dice-roll').data();
-        }
-
-        console.log(data);
-
-        if (useCalculateAppliedDamage) {
-            if (data?.sfrpgDamageParts?.length > 0) {
-                /** @type {DamagePart} */
-                for (const part of data?.sfrpgDamageParts) {
-                    console.log(part);
-                    if (part.types.length < 1) continue;
-                    if (part.types.length > 1 && part.operator === "and") {
-                        // If the attack is dealing more than one type of damage, then 
-                        // things that affact immunities, resitances, and vulnerabilities
-                        // will be handeled differently. Different amounts of the total damage
-                        // might be decreased, increased, or just flat out ignored.
-                        
-                        // First, we split the damage.
-                        const damageAppliedPerType = Math.floor(totalDamageDealt / part.types.length);
-                        const remainder = totalDamageDealt % part.types.length;
-                        let remainderAppliedTo = "";
-                        if (remainder > 0) {
-                            // We have an uneven amount of damage being split among the damage types, so prompt the user to apply
-                            // the remainder to a specific type.
-                            let content = `<p>${game.i18n.localize("The total damage can't be split evenly between all damage types. Please select a damage type to apply the remainder to:")}</p><div class="form-group">`;
-                            content += "<select name='selected-damage-type'>"
-                            for (const type of part.types) {
-                                content += `<option value="${type}">${CONFIG.SFRPG.damageTypes[type]}</option>`
-                            }
-                            content += "</select></div>"
-
-                            remainderAppliedTo = await Dialog.prompt({
-                                title: game.i18n.localize("Assign Damage Remainder"),
-                                content: content,
-                                label: game.i18n.localize("Ok"),
-                                callback: html => html.find('[name="selected-damage-type"]').val()
-                            });
-                        }
-
-                        // Loop through the damage types
-                        for (const type of part.types) {
-                            console.log(type);
-                            let damageBeingAssessed = damageAppliedPerType;
-                            if (remainderAppliedTo === type) damageBeingAssessed += remainder;
-
-                            // Apply immunities first
-                            if (!this.isImmuneToDamageType(type)) {
-                                // Then vulnerabilties
-                                damageBeingAssessed += this._applyVulnerabilities(damageBeingAssessed, type);
-                                // Now apply energy resistance
-                                damageBeingAssessed -= this._applyEnergyResistances(damageBeingAssessed, type);
-                                // And lastly, damage reduction
-                                damageBeingAssessed -= await this._applyDamageReduction(damageBeingAssessed, type);
-
-                                remainingUndealtDamage += damageBeingAssessed;
-                            } else {
-                                // The assumption here is that if an actor is immune to a specific type of damage, then
-                                // checking everything else is kind of pointless, since the damage from this source is
-                                // being completely negated.
-                                remainingUndealtDamage += 0;
-                            }
-                        }
-
-                        /********************************************************************************
-                         * Just some notes on the above code block. Starfinder's handling of multiple
-                         * damage types and damage application looks good on paper, and is usually pretty 
-                         * good at the table but causes some probelms when you try to sit down and codify
-                         * them. For starters there is a lack of guidance on how damage should be applied.
-                         * I couldn't find a single rules reference that said "apply immunities first, 
-                         * then vulnerabilities, and then resistances", but computers can't operate 
-                         * without explicit instuctions, so I chose to go with Pathfinder 2nd Editions 
-                         * sequencing. And sequencing is key here. It is possible to have a creature with 
-                         * a racial vulnerablity to "Cold", and them have a piece of equipment or ability 
-                         * that provides "Cold" resistance. So, which should be applied first? The sequence
-                         * I chose is logical, but anyone could (and probably will) make an argument for 
-                         * doing it in a different order.
-                         * 
-                         * On damage reduction. The negation effects for damage reduction can be pretty 
-                         * broad. We could probably come up with a set of Regular Expressions to deal with
-                         * most cases (but probably not all. There's just too many edge cases), but then we
-                         * have to codify those values somewhere on the PC sheet. A human is gonna be better
-                         * at determining if an actor meets the criteria for damage reduction negation, so 
-                         * for expedience, I've chosen to make the negation a prompt and let the GM decide
-                         * if damage reduction can be negated or not.
-                         * 
-                         * Concerning multiple damage types. I've coded the application of multiple damage
-                         * types in a way that any number of them could theorectcally be applied to one
-                         * source. The rules don't explicitly state that only two types can be applied to
-                         * one source of damage, but every ability, weapon fusion, feat, etc... that I have
-                         * found that adds extra damage types to damage states that only two can be applied.
-                         * For now, the system doesn't enforce any restrictions on this, but I'm considering
-                         * adding some configuration options to limit the number of allowed damage types
-                         * per source.
-                         ********************************************************************************/
-                    } else if (part.types.length > 1 && part.operator === "or") {
-                        // We have more than one damage type, but instead of spliting the damage between all
-                        // of them, we prompt the user to choose which one applies
-                        let content = `<p>${game.i18n.localize("Please choose a damage type to apply to this damage:")}</p><div class="form-group"><select name="selected-damage-type">`
-                        for (const type of part.types) {
-                            content += `<option value="${type}">${CONFIG.SFRPG.damageTypes[type]}</option>`
-                        }
-                        content += "</select></div>";
-
-                        let type = await Dialog.prompt({
-                            title: game.i18n.localize("Choose Damage Type"),
-                            content: content,
-                            label: game.i18n.localize("Ok"),
-                            callback: html => html.find('[name="selected-damage-type"]').val()
-                        });
-
-                        if (!this.isImmuneToDamageType(type)) {
-                            let damageBeingApplied = totalDamageDealt;
-                            damageBeingApplied += this._applyVulnerabilities(damageBeingApplied, type);
-                            damageBeingApplied -= this._applyEnergyResistances(damageBeingApplied, type);
-                            damageBeingApplied -= await this._applyDamageReduction(damageBeingApplied, type);
-
-                            remainingUndealtDamage = damageBeingApplied;
-                        } else {
-                            remainingUndealtDamage = 0;
-                        }                    
-                    } else {
-                        // there's only one type of damage (or untyped), so all immunities, resistances, and vulnerabilities
-                        // will be calculated off of this one type.
-                        let type = part.types[0];
-
-                        if (!this.isImmuneToDamageType(type)) {
-                            let damageBeingApplied = totalDamageDealt;
-                            damageBeingApplied += this._applyVulnerabilities(damageBeingApplied, type);
-                            damageBeingApplied -= this._applyEnergyResistances(damageBeingApplied, type);
-                            damageBeingApplied -= await this._applyDamageReduction(damageBeingApplied, type);
-
-                            remainingUndealtDamage = damageBeingApplied;
-                        } else {
-                            remainingUndealtDamage = 0;
-                        }
-                    }
-                }
-            } else {
-                remainingUndealtDamage = totalDamageDealt;
-            }
-        } else {
-            remainingUndealtDamage = totalDamageDealt;
-        }
-
+        
         /** Update temp hitpoints */
         if (!isHealing) {
             const originalTempHP = parseInt(actorData.attributes.hp.temp) || 0;
