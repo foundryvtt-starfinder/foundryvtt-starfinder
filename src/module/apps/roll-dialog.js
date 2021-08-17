@@ -98,14 +98,17 @@ export default class RollDialog extends Dialog {
         data.selectors = this.selectors;
         data.contexts = this.contexts;
 
-        data.damageTypeLabel = this.parts?.reduce((arr, curr) => {
+        data.damageTypeLabels = this.parts?.reduce((arr, curr) => {
+            let typeString = "";
             if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
-                arr += `<p>${(Object.entries(curr.types).filter(type => type[1]).map(type => SFRPG.damageTypes[type[0]]).join(` ${SFRPG.damageTypeOperators[curr.operator]} `))}</p>`;
+                typeString = `${(Object.entries(curr.types).filter(type => type[1]).map(type => SFRPG.damageTypes[type[0]]).join(` ${SFRPG.damageTypeOperators[curr.operator]} `))}`
+                if (!arr.some(val => val === typeString) && typeString.trim().length > 0)
+                    arr.push(typeString);
             }
 
             return arr;
-        }, "");
-        data.hasDamageTypes = data.damageTypeLabel.trim().length > 0;
+        }, []);
+        data.hasDamageTypes = data.damageTypeLabels.length > 0;
         //data.config = SFRPG; Don't remove this. Will be needed later
         return data;
     }
