@@ -75,10 +75,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d8 + @abilities.str.mod",
-          "fire"
-        ]
+        {
+          "formula": "1d8 + @abilities.str.mod",
+          "types": {
+            "fire": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

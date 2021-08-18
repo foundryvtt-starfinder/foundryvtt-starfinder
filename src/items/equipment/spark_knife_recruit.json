@@ -71,19 +71,26 @@
     "chatFlavor": "",
     "critical": {
       "parts": [
-        [
-          "1d6",
-          "electricity"
-        ]
+        {
+          "formula": "1d6",
+          "types": {
+            "electricity": true
+          },
+          "operator": ""
+        }
       ],
       "effect": "Arc 1d6"
     },
     "damage": {
       "parts": [
-        [
-          "1d6 + @abilities.str.mod",
-          "electricity+slashing"
-        ]
+        {
+          "formula": "1d6 + @abilities.str.mod",
+          "types": {
+            "electricity": true,
+            "slashing": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

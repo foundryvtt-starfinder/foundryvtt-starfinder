@@ -26,11 +26,16 @@ export default class SFRPGCustomChatMessage {
     /**
      * Render a custom standard roll to chat.
      * 
-     * @param {Roll} roll The roll data
-     * @param {object} data The data for the roll
-     * @param {string} explanation The explanation of the roll
+     * @param {Roll}        roll             The roll data
+     * @param {object}      data             The data for the roll
+     * @param {RollContext} data.rollContent The context for the roll
+     * @param {string}      [data.title]     The chat card title
+     * @param {SpeakerData} [data.speaker]   The speaker for the ChatMesage
+     * @param {string}      [data.rollMode]  The roll mode
+     * @param {string}      [data.breakdown] An explanation for the roll and it's modifiers
+     * @param {Tag[]}       [data.tags]      Any item metadata that will be output at the bottom of the chat card.
      */
-    static renderStandardRoll(roll, data, explanation, additionalContent) {
+    static renderStandardRoll(roll, data) {
         /** Get entities */
         const mainContext = data.rollContext.mainContext ? data.rollContext.allContexts[data.rollContext.mainContext] : null;
         
@@ -63,12 +68,12 @@ export default class SFRPGCustomChatMessage {
             rawTitle: data.speaker.alias,
             dataRoll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-            config: CONFIG.STARFINDER,
+            config: CONFIG.SFRPG,
             tokenImg: actor.data.token?.img || actor.img,
             actorId: actor.id,
             tokenId: this.getToken(actor),
-            explanation: explanation,
-            additionalContent: additionalContent
+            breakdown: data.breakdown,
+            tags: data.tags
         };
 
         SFRPGCustomChatMessage._render(roll, data, options);
@@ -78,20 +83,21 @@ export default class SFRPGCustomChatMessage {
 
     static async _render(roll, data, options) {
         const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
-        const cardContent = await renderTemplate(templateName, options);
         const rollContent = await roll.render();
+        options = foundry.utils.mergeObject(options, { rollContent });
+        const cardContent = await renderTemplate(templateName, options);        
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
 
-        let explainedRollContent = rollContent;
-        if (options.explanation) {
-            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-            explainedRollContent = rollContent.substring(0, insertIndex) + options.explanation + rollContent.substring(insertIndex);
-        }
+        // let explainedRollContent = rollContent;
+        // if (options.breakdown) {
+        //     const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+        //     explainedRollContent = rollContent.substring(0, insertIndex) + options.explanation + rollContent.substring(insertIndex);
+        // }
 
         ChatMessage.create({
             flavor: data.title,
             speaker: data.speaker,
-            content: cardContent + explainedRollContent + (options.additionalContent || ""),
+            content: cardContent, //+ explainedRollContent + (options.additionalContent || ""),
             rollMode: rollMode,
             roll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,

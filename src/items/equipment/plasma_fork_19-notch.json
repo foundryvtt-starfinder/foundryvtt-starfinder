@@ -52,16 +52,24 @@
     "chatFlavor": "Boost 2d10",
     "critical": {
       "parts": [
-        ""
+        {
+          "formula": "",
+          "types": {},
+          "operator": ""
+        }
       ],
       "effect": "Knockdown"
     },
     "damage": {
       "parts": [
-        [
-          "3d10",
-          "Electricity+Fire"
-        ]
+        {
+          "formula": "3d10",
+          "types": {
+            "Electricity": true,
+            "Fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

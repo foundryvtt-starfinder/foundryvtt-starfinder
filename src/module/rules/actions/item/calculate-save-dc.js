@@ -1,4 +1,5 @@
-import { DiceSFRPG, RollContext } from "../../../dice.js"
+import { DiceSFRPG } from "../../../dice.js"
+import RollContext from "../../../rolls/rollcontext.js";
 
 export default function (engine) {
     engine.closures.add("calculateSaveDC", (fact, context) => {

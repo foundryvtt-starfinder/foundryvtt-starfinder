@@ -75,10 +75,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "4d20 + @abilities.str.mod",
-          "acid"
-        ]
+        {
+          "formula": "4d20 + @abilities.str.mod",
+          "types": {
+            "acid": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

@@ -591,10 +591,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6+10",
-              "cold+piercing"
-            ]
+            {
+              "formula": "1d6+10",
+              "types": {
+                "cold": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -793,10 +797,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d4+10",
-              "bludgeoning"
-            ]
+            {
+              "formula": "1d4+10",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

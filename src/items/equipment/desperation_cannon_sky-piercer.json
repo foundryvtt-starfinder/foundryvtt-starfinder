@@ -61,10 +61,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "6d12",
-          "electricity+fire"
-        ]
+        {
+          "formula": "6d12",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

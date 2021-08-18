@@ -600,10 +600,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d4+7",
-              "electricity+slashing"
-            ]
+            {
+              "formula": "1d4+7",
+              "types": {
+                "electricity": true,
+                "slashing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -700,19 +704,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d4",
-              "electricity"
-            ]
+            {
+              "formula": "1d4",
+              "types": {
+                "electricity": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Arc 1d4"
         },
         "damage": {
           "parts": [
-            [
-              "1d4 + 5",
-              "electricity"
-            ]
+            {
+              "formula": "1d4 + 5",
+              "types": {
+                "electricity": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

@@ -52,16 +52,25 @@
     "chatFlavor": "Quick reload, recall, thrown",
     "critical": {
       "parts": [
-        "12d6"
+        {
+          "formula": "1",
+          "types": {
+            "2": true
+          },
+          "operator": ""
+        }
       ],
       "effect": ""
     },
     "damage": {
       "parts": [
-        [
-          "12d6 + @mod",
-          "Electricity"
-        ]
+        {
+          "formula": "12d6 + @mod",
+          "types": {
+            "Electricity": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

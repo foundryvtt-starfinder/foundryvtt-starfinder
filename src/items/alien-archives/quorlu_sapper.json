@@ -927,10 +927,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d6+12",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "2d6+12",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1170,19 +1174,25 @@
         "chatFlavor": "Burn [[1d8]]",
         "critical": {
           "parts": [
-            [
-              "1d8",
-              "slashing"
-            ]
+            {
+              "formula": "1d8",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Burn"
         },
         "damage": {
           "parts": [
-            [
-              "2d10+9",
-              "slashing"
-            ]
+            {
+              "formula": "2d10+9",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1426,10 +1436,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "4d6",
-              "piercing"
-            ]
+            {
+              "formula": "4d6",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

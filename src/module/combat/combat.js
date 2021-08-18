@@ -1,4 +1,5 @@
-import { DiceSFRPG, RollContext } from "../dice.js";
+import { DiceSFRPG } from "../dice.js";
+import RollContext from "../rolls/rollcontext.js";
 
 /*
 The following hooks were added:

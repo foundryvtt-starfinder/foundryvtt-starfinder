@@ -121,10 +121,13 @@
         "modifiers": [],
         "damage": {
           "parts": [
-            [
-              "2*(18d10)",
-              "bludgeoning"
-            ]
+            {
+              "formula": "2*(18d10)",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "save": {
@@ -159,10 +162,13 @@
         "modifiers": [],
         "damage": {
           "parts": [
-            [
-              "18d10",
-              "bludgeoning"
-            ]
+            {
+              "formula": "18d10",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "save": {
@@ -331,10 +337,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "6d10",
-              "electricity+fire"
-            ]
+            {
+              "formula": "6d10",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

@@ -584,10 +584,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d4+1",
-              "slashing"
-            ]
+            {
+              "formula": "1d4+1",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -795,10 +798,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6+1",
-              "piercing"
-            ]
+            {
+              "formula": "1d6+1",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1260,10 +1266,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d3",
-              ""
-            ]
+            {
+              "formula": "1d3",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1445,10 +1452,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8 + @abilities.cha.mod",
-              ""
-            ]
+            {
+              "formula": "1d8 + @abilities.cha.mod",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",

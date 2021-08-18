@@ -617,10 +617,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d10+15",
-              "acid+piercing"
-            ]
+            {
+              "formula": "2d10+15",
+              "types": {
+                "acid": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -823,19 +827,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d6",
-              "acid"
-            ]
+            {
+              "formula": "1d6",
+              "types": {
+                "acid": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Corrode 1d6"
         },
         "damage": {
           "parts": [
-            [
-              "4d6+4",
-              "acid"
-            ]
+            {
+              "formula": "4d6+4",
+              "types": {
+                "acid": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

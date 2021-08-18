@@ -515,10 +515,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d4+4",
-              "bludgeoning"
-            ]
+            {
+              "formula": "1d4+4",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -704,19 +707,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d4",
-              "fire"
-            ]
+            {
+              "formula": "1d4",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Burn"
         },
         "damage": {
           "parts": [
-            [
-              "1d4+3",
-              "fire"
-            ]
+            {
+              "formula": "1d4+3",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1249,10 +1258,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d10",
-              ""
-            ]
+            {
+              "formula": "2d10",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",

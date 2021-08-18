@@ -75,10 +75,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d6 + @abilities.str.mod",
-          "electricity+piercing"
-        ]
+        {
+          "formula": "1d6 + @abilities.str.mod",
+          "types": {
+            "electricity": true,
+            "piercing": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

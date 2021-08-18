@@ -75,10 +75,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "15d6 + @abilities.str.mod",
-          "slashing+sonic"
-        ]
+        {
+          "formula": "15d6 + @abilities.str.mod",
+          "types": {
+            "slashing": true,
+            "sonic": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

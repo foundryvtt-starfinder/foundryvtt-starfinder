@@ -526,10 +526,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d4+7",
-              "bludgeoning"
-            ]
+            {
+              "formula": "1d4+7",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -729,10 +732,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6+5",
-              "slashing"
-            ]
+            {
+              "formula": "1d6+5",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1551,10 +1557,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8 + @abilities.cha.mod",
-              ""
-            ]
+            {
+              "formula": "1d8 + @abilities.cha.mod",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",

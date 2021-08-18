@@ -76,10 +76,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d10 + @abilities.str.mod",
-          "electricity+fire"
-        ]
+        {
+          "formula": "1d10 + @abilities.str.mod",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

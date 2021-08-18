@@ -75,10 +75,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d3 + @abilities.str.mod",
-          "electricity"
-        ]
+        {
+          "formula": "1d3 + @abilities.str.mod",
+          "types": {
+            "electricity": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

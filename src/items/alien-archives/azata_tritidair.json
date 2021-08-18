@@ -618,10 +618,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d10+8",
-              "electricity+fire"
-            ]
+            {
+              "formula": "1d10+8",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1062,10 +1066,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "4d4+4",
-              "piercing"
-            ]
+            {
+              "formula": "4d4+4",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1617,10 +1624,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d8 + @abilities.wis.mod",
-              "healing"
-            ]
+            {
+              "formula": "3d8 + @abilities.wis.mod",
+              "types": {
+                "healing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

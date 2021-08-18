@@ -75,10 +75,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d3",
-          "electricity+fire"
-        ]
+        {
+          "formula": "1d3",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

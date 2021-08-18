@@ -49,10 +49,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d8 + @abilities.int.mod",
-          "healing"
-        ]
+        {
+          "formula": "1d8 + @abilities.int.mod",
+          "types": {
+            "healing": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

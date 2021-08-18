@@ -52,19 +52,24 @@
     "chatFlavor": "Injection, unwieldy",
     "critical": {
       "parts": [
-        [
-          "2d6",
-          ""
-        ]
+        {
+          "formula": "2d6",
+          "types": {},
+          "operator": ""
+        }
       ],
       "effect": "Bleed"
     },
     "damage": {
       "parts": [
-        [
-          "6d8 + @mod",
-          "piercing+slashing"
-        ]
+        {
+          "formula": "6d8 + @mod",
+          "types": {
+            "piercing": true,
+            "slashing": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

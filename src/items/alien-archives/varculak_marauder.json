@@ -618,10 +618,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6+6",
-              "slashing"
-            ]
+            {
+              "formula": "1d6+6",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -823,19 +826,27 @@
         "chatFlavor": "Corrode [[1d4]]",
         "critical": {
           "parts": [
-            [
-              "1d4",
-              "acid+piercing"
-            ]
+            {
+              "formula": "1d4",
+              "types": {
+                "acid": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": "Corrode 1d4"
         },
         "damage": {
           "parts": [
-            [
-              "1d8+2",
-              "acid+piercing"
-            ]
+            {
+              "formula": "1d8+2",
+              "types": {
+                "acid": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1041,14 +1052,18 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6",
-              "fire"
-            ],
-            [
-              "1d4 burn",
-              ""
-            ]
+            {
+              "formula": "1d6",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            },
+            {
+              "formula": "1d4 burn",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",

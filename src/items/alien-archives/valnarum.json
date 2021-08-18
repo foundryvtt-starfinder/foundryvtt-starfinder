@@ -689,10 +689,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d12+14",
-              "piercing"
-            ]
+            {
+              "formula": "1d12+14",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -898,10 +901,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d6+14",
-              "slashing"
-            ]
+            {
+              "formula": "2d6+14",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1253,10 +1259,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "8d10",
-              "bludgeoning+sonic"
-            ]
+            {
+              "formula": "8d10",
+              "types": {
+                "bludgeoning": true,
+                "sonic": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

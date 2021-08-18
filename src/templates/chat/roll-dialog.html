@@ -35,6 +35,30 @@
     </form>
 </div>
 
+{{#if hasDamageTypes}}
+<div class="damage-type-selector-list">
+    <h3 class="damage-type-list-title" data-tippy-content="{{localize "SFRPG.Damage.Types.Hint"}}">{{localize "SFRPG.Damage.Types.Title"}}</h3>
+    <div class="damage-type-label">
+        {{#each damageTypeLabels as |type|}}
+        <p class="damage-type">{{type}}</p>
+        {{/each}}
+    </div>
+    {{!-- TODO: use this to allow a user to specify which damage types should get the remainder damage when damage can't be split evenly --}}
+    {{!-- <ul class="damage-type-list">
+        {{#each damageTypes as |damageType i|}}
+        <li class="damage-types" data-damage-types-index="{{i}}">
+            <ul>
+                {{#each damageType.types as |type j|}}
+                <li data-damage-type-index="{{j}}">{{lookup ../../config.damageTypes type}}</li>
+                {{/each}}
+            </ul>
+            <span>{{lookup ../config.damageTypeOperators damageType.operator}}</span>
+        </li>
+        {{/each}}
+    </ul> --}}
+</div>
+{{/if}}
+
 {{#if hasModifiers}}
 <div>
     <ul class="modifier-list">

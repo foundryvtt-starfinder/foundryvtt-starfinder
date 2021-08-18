@@ -517,10 +517,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d4+12",
-              "electricity+slashing"
-            ]
+            {
+              "formula": "3d4+12",
+              "types": {
+                "electricity": true,
+                "slashing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -708,10 +712,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d4+12",
-              "slashing"
-            ]
+            {
+              "formula": "3d4+12",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -896,19 +903,27 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d8",
-              "electricity+fire"
-            ]
+            {
+              "formula": "1d8",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": "Burn"
         },
         "damage": {
           "parts": [
-            [
-              "1d8+8",
-              "electricity+fire"
-            ]
+            {
+              "formula": "1d8+8",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1345,19 +1360,23 @@
         "chatFlavor": "Analog",
         "critical": {
           "parts": [
-            [
-              "",
-              ""
-            ]
+            {
+              "formula": "",
+              "types": {},
+              "operator": ""
+            }
           ],
           "effect": ""
         },
         "damage": {
           "parts": [
-            [
-              "3d4 + @mod",
-              "slashing"
-            ]
+            {
+              "formula": "3d4 + @mod",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

@@ -894,10 +894,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "6d4+16",
-              "sonic"
-            ]
+            {
+              "formula": "6d4+16",
+              "types": {
+                "sonic": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1316,14 +1319,16 @@
         },
         "damage": {
           "parts": [
-            [
-              "18d8",
-              ""
-            ],
-            [
-              "4d8",
-              ""
-            ]
+            {
+              "formula": "18d8",
+              "types": {},
+              "operator": ""
+            },
+            {
+              "formula": "4d8",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1415,10 +1420,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8 + @abilities.wis.mod",
-              "healing"
-            ]
+            {
+              "formula": "1d8 + @abilities.wis.mod",
+              "types": {
+                "healing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1600,10 +1608,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "18d8",
-              ""
-            ]
+            {
+              "formula": "18d8",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",

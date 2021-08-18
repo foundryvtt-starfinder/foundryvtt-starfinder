@@ -77,10 +77,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "2d4",
-          "cold|fire"
-        ]
+        {
+          "formula": "2d4",
+          "types": {
+            "cold": true,
+            "fire": true
+          },
+          "operator": "or"
+        }
       ]
     },
     "formula": "",

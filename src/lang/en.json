@@ -626,7 +626,36 @@
             "UPBs": "UPBs"
         },
         "Cybernetic": "Cybernetic",
-        "Damage": "Damage",
+        "Damage": {
+            "Automation": {
+                "Hint": "Should the system handle calculating the total applied damge based on an Actor's vulnerabilities, resistances, etc...? If checked, when you right click on a chat card and select \"Apply Damage\", then the system will attempt to calculate the total applied damage. NOTE: This is an experimental feature! You should always double check it's results!",
+                "Title": "Calculate Applied Damage (Experimental)"
+            },
+            "Immunities": "Damage Immunities",
+            "Reduction": "Damage Reduction",
+            "Resistances": "Energy Resistances",
+            "Title": "Damage",            
+            "Types": {
+                "Acid": "Acid",
+                "Bludgeoning": "Bludgeoning",
+                "Cold": "Cold",
+                "Electricity": "Electricity",
+                "Fire": "Fire",
+                "Force": "Force",
+                "Hint": "This is a list of damage types that apply to this damage roll.",
+                "Nonlethal": "Nonlethal",
+                "Piercing": "Piercing",
+                "Radiation": "Radiation",
+                "Slashing": "Slashing",
+                "Sonic": "Sonic",
+                "Title": "Damage Types",
+                "Operators": {
+                    "And": "and",
+                    "Or": "or"
+                }
+            },
+            "Vulnerabilities": "Damage Vulnerabilities"
+        },
         "DamageReduction": "Damage Reduction",
         "DamageTypesAcid": "Acid",
         "DamageTypesAcidAndBludgeoning": "Acid & Bludgeoning",
@@ -1465,7 +1494,7 @@
         "ModifierModifierLabel": "Modifier",
         "ModifierModifierTooltip": "The value used to modify with.",
         "ModifierModifierTypeLabel": "Modifier Type",
-        "ModifierModifierTypeTooltip": "A modifier can be a constant value (+2) or a roll formula (+1d4). This is used to identifiy the Modifier field as one or the other",
+        "ModifierModifierTypeTooltip": "A modifier can be a constant value that allways applies or a situational modifier that only applies in certian situations. This is used to identifiy the Modifier field as one or the other",
         "ModifierNameLabel": "Name",
         "ModifierNameTooltip": "The name of the modifier",
         "ModifierNotesLabel": "Notes",
@@ -1485,10 +1514,10 @@
         "ModifierTypeArmor": "Armor",
         "ModifierTypeBase": "Base",
         "ModifierTypeCircumstance": "Circumstance",
-        "ModifierTypeConstant": "Constant",
+        "ModifierTypeConstant": "Constant Modifier",
         "ModifierTypeDivine": "Divine",
         "ModifierTypeEnhancement": "Enhancement",
-        "ModifierTypeFormula": "Roll Formula",
+        "ModifierTypeFormula": "Situational Modifier",
         "ModifierTypeInsight": "Insight",
         "ModifierTypeLabel": "Type",
         "ModifierTypeLuck": "Luck",
@@ -1560,15 +1589,30 @@
         "RepairDroneDialogTitle": "Repair Drone",
         "RepairDroneUnnecessary": "{name} is already at max hit points, no repairs needed.",
         "Resolve": "Resolve",
-        "RestButton": "Rest",
-        "RestCancel": "Cancel",
-        "RestL": "Long Rest",
-        "RestS": "Short Rest",
-        "RestSActionHeader": "Spend one Resolve Point?",
-        "RestSChatMessage": "{name} takes a short 10 minute rest.",
-        "RestSChatMessageRestored": "{name} takes a short 10 minute rest, and spent {spentRP} Resolve Point to recover {regainedSP} Stamina Points.",
-        "RestSDescription": "Take a short rest? On a short rest you may spend one Resolve Point to recover all Stamina Points.",
-        "RestSTitle": "Short 10 Minute Rest",
+        "Rest": {
+            "Button": "Rest",
+            "Cancel": "Cancel",
+            "Long": {
+                "ChatMessage": {
+                    "Content": "{name} takes a night's rest and recovers {deltaHP} Hit points, {deltaSP} Stamina points, and {deltaRP} Resolve points."
+                },
+                "Dialog": {
+                    "Title": "Night's Rest",
+                    "Description": "<p>Take a night's rest?</p><p>On a night's rest you will recover 1 hit point per character level, all stamina points, all resolve points, class resources, limited use item charges, and spell slots.</p>"
+                },
+                "Title": "Long Rest"
+            },
+            "Short": {
+                "ActionHeader": "Spend one Resolve Point?",
+                "ChatMessage": {
+                    "Message": "{name} takes a short 10 minute rest.",
+                    "Restored": "{name} takes a short 10 minute rest, and spent {spentRP} Resolve Point to recover {regainedSP} Stamina Points."
+                },
+                "DialogDescription": "Take a short rest? On a short rest you may spend one Resolve Point to recover all Stamina Points.",
+                "DialogTitle": "Short 10 Minute Rest",
+                "Title": "Short Rest"
+            }
+        },
         "Rolls": {
             "AttackRoll": "Attack Roll",
             "AttackRollFull": "Attack Roll - {name}",
@@ -1598,17 +1642,27 @@
                 "SituationalBonusTooltip": "Are there any additional bonuses that apply to this roll? (For example, range increments)"
             },
             "Dice": {
+                "AbilityCheckTitle": "Ability Check - {label}",
                 "Advantage": "Advantage",
                 "AdvantageTooltip": "Roll with advantage.",
                 "CriticalDamage": "Critical",
                 "CriticalDamageTooltip": "Roll critical damage.",
+                "CriticalEffect": "Critical Effect: {criticalEffect}",
+                "CriticalFlavor": "{title} (Critical)",
+                "CriticalFlavorWithEffect": "{title} (Critical; {criticalEffect})",
+                "CriticalHit": "Critical Hit",
                 "Disadvantage": "Disadvantage",
                 "DisadvantageTooltip": "Roll with disadvantage.",
+                "Formula": {
+                    "AdditionalBonus": " {bonus} [Additional Bonus]"
+                },
                 "Normal": "Normal",
                 "NormalDamage": "Normal",
                 "NormalDamageTooltip": "Roll normal damage.",
                 "NormalTooltip": "Normal roll.",
-                "Roll": "Roll"
+                "Roll": "Roll",
+                "SaveTitle": "Save - {label}",
+                "SkillCheckTitle": "Skill Check - {skill}"
             },
             "HealingRoll": "Healing Roll",
             "HealingRollFull": "Healing Roll - {name}",

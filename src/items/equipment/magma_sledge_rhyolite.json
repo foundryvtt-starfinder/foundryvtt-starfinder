@@ -75,10 +75,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d10 + @abilities.str.mod",
-          "bludgeoning+fire"
-        ]
+        {
+          "formula": "1d10 + @abilities.str.mod",
+          "types": {
+            "bludgeoning": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

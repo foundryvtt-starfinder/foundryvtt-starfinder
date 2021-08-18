@@ -674,10 +674,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "5d8+15",
-              "acid+electricity"
-            ]
+            {
+              "formula": "5d8+15",
+              "types": {
+                "acid": true,
+                "electricity": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -888,10 +892,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "4d6+15",
-              "sonic"
-            ]
+            {
+              "formula": "4d6+15",
+              "types": {
+                "sonic": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1167,10 +1174,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "18d8",
-              ""
-            ]
+            {
+              "formula": "18d8",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1353,10 +1361,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "10d10",
-              ""
-            ]
+            {
+              "formula": "10d10",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",

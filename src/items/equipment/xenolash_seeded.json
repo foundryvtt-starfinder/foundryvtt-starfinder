@@ -75,10 +75,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "9d8 + @abilities.str.mod",
-          "acid+slashing"
-        ]
+        {
+          "formula": "9d8 + @abilities.str.mod",
+          "types": {
+            "acid": true,
+            "slashing": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

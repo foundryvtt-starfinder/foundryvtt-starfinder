@@ -71,19 +71,27 @@
     "chatFlavor": "",
     "critical": {
       "parts": [
-        [
-          "1d6",
-          "electricity+fire"
-        ]
+        {
+          "formula": "1d6",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ],
       "effect": "Pulse 1d6"
     },
     "damage": {
       "parts": [
-        [
-          "2d6",
-          "electricity+fire"
-        ]
+        {
+          "formula": "2d6",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

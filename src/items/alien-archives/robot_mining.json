@@ -724,19 +724,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "2d4",
-              "piercing"
-            ]
+            {
+              "formula": "2d4",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Bleed"
         },
         "damage": {
           "parts": [
-            [
-              "3d4+14",
-              "piercing"
-            ]
+            {
+              "formula": "3d4+14",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1085,19 +1091,24 @@
         "chatFlavor": "Powered",
         "critical": {
           "parts": [
-            [
-              "",
-              ""
-            ]
+            {
+              "formula": "",
+              "types": {},
+              "operator": ""
+            }
           ],
           "effect": "Wound"
         },
         "damage": {
           "parts": [
-            [
-              "2d8 + @mod",
-              "fire+slashing"
-            ]
+            {
+              "formula": "2d8 + @mod",
+              "types": {
+                "fire": true,
+                "slashing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1351,10 +1362,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d10",
-              "sonic"
-            ]
+            {
+              "formula": "2d10",
+              "types": {
+                "sonic": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

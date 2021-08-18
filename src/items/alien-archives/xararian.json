@@ -522,10 +522,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "8d8+18",
-              "bludgeoning"
-            ]
+            {
+              "formula": "8d8+18",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -738,10 +741,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d12+18",
-              "piercing"
-            ]
+            {
+              "formula": "3d12+18",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -948,14 +954,22 @@
         },
         "damage": {
           "parts": [
-            [
-              "12d6",
-              "bludgeoning+fire"
-            ],
-            [
-              "12d10",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "12d6",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            },
+            {
+              "formula": "12d10",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -2173,10 +2187,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "15d10",
-              ""
-            ]
+            {
+              "formula": "15d10",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2281,10 +2296,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "4d6",
-              "bludgeoning"
-            ]
+            {
+              "formula": "4d6",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

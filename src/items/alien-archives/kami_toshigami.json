@@ -1358,10 +1358,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "5d8 + @abilities.wis.mod",
-              "healing"
-            ]
+            {
+              "formula": "5d8 + @abilities.wis.mod",
+              "types": {
+                "healing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1479,10 +1482,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "4d6 + 15",
-              "bludgeoning"
-            ]
+            {
+              "formula": "4d6 + 15",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

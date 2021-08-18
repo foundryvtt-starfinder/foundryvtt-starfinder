@@ -76,10 +76,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d10 + @abilities.str.modabilities.str.mod",
-          "bludgeoning"
-        ]
+        {
+          "formula": "1d10 + @abilities.str.modabilities.str.mod",
+          "types": {
+            "bludgeoning": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

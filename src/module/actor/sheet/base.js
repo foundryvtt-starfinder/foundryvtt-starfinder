@@ -132,7 +132,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     /**
      * Activate event listeners using the prepared sheet HTML
      * 
-     * @param {HTML} html The prepared HTML object ready to be rendered into the DOM
+     * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
      */
     activateListeners(html) {
         super.activateListeners(html);

@@ -75,10 +75,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "3d8 + @abilities.str.mod",
-          "fire+slashing"
-        ]
+        {
+          "formula": "3d8 + @abilities.str.mod",
+          "types": {
+            "fire": true,
+            "slashing": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

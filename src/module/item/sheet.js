@@ -201,7 +201,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             if (!rollData.owner.abilities?.dex?.mod) {
                 rollData.owner.abilities = {dex: {mod: 0}};
             }
-            const saveRoll = new Roll(formula, rollData);
+            const saveRoll = Roll.create(formula, rollData);
             return saveRoll.evaluate({async: true});
         } catch (err) {
             console.log(err);
@@ -388,18 +388,42 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Handle Damage Array
         let damage = Object.entries(formData).filter(e => e[0].startsWith("data.damage.parts"));
         formData["data.damage.parts"] = damage.reduce((arr, entry) => {
-            let [i, j] = entry[0].split(".").slice(3);
-            if (!arr[i]) arr[i] = [];
-            arr[i][j] = entry[1];
+            let [i, key, type] = entry[0].split(".").slice(3);
+            if (!arr[i]) arr[i] = { formula: "", types: {}, operator: "" };
+
+            switch (key) {
+                case 'formula':
+                    arr[i].formula = entry[1];
+                    break;
+                case 'operator':
+                    arr[i].operator = entry[1];
+                    break;
+                case 'types':
+                    if (type) arr[i].types[type] = entry[1];
+                    break;
+            }
+            
             return arr;
         }, []);
 
         // Handle Critical Damage Array
         let criticalDamage = Object.entries(formData).filter(e => e[0].startsWith("data.critical.parts"));
         formData["data.critical.parts"] = criticalDamage.reduce((arr, entry) => {
-            let [i, j] = entry[0].split(".").slice(3);
-            if (!arr[i]) arr[i] = [];
-            arr[i][j] = entry[1];
+            let [i, key, type] = entry[0].split(".").slice(3);
+            if (!arr[i]) arr[i] = { formula: "", types: {}, operator: "" };
+
+            switch (key) {
+                case 'formula':
+                    arr[i].formula = entry[1];
+                    break;
+                case 'operator':
+                    arr[i].operator = entry[1];
+                    break;
+                case 'types':
+                    if (type) arr[i].types[type] = entry[1];
+                    break;
+            }
+            
             return arr;
         }, []);
 
@@ -494,7 +518,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const damage = this.item.data.data.damage;
             return this.item.update({
                 "data.damage.parts": damage.parts.concat([
-                    ["", ""]
+                    { formula: "", types: {}, operator: "" }
                 ])
             });
         }
