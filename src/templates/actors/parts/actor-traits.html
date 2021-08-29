@@ -166,6 +166,13 @@
     {{/if}}
     {{/if}}
 
+    {{#if isNPC}}
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}</strong><br/>@data.details.aura">
+        <label>{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}</label>
+        <input type="text" name="data.details.aura" value="{{data.details.aura}}" />
+    </div>
+    {{/if}}
+    
     {{#if (not isDrone)}}
     <div class="form-group ">
         <label>{{localize "SFRPG.SpecialTraits"}}</label>
