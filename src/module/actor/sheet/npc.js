@@ -113,9 +113,11 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         // Organize Features
         const itemsToProcess = [];
         for (const item of other) {
+            const container = this.actor.items.contents.find(x => x.data.data.container?.contents?.find(y => y.id === item._id) !== undefined);
+
             if (["weapon", "shield"].includes(item.type)) {
                 item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
-                if (!item.data.containerId) {
+                if (!item.data.containerId && !container) {
                     features.weapons.items.push(item);
                 }
                 itemsToProcess.push(item);
