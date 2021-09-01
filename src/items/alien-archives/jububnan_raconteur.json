@@ -611,10 +611,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d4+8",
-              "slashing"
-            ]
+            {
+              "formula": "2d4+8",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -820,19 +823,27 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d8",
-              "electricity+fire"
-            ]
+            {
+              "formula": "1d8",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": "Burn"
         },
         "damage": {
           "parts": [
-            [
-              "1d8+8",
-              "electricity+fire"
-            ]
+            {
+              "formula": "1d8+8",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -983,10 +994,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d6",
-              "fire"
-            ]
+            {
+              "formula": "2d6",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1610,10 +1624,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "9d6",
-              "fire"
-            ]
+            {
+              "formula": "9d6",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1797,10 +1814,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "4d4",
-              "acid"
-            ]
+            {
+              "formula": "4d4",
+              "types": {
+                "acid": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2259,10 +2279,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d4",
-              "piercing"
-            ]
+            {
+              "formula": "1d4",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2446,10 +2469,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d6",
-              ""
-            ]
+            {
+              "formula": "2d6",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",

@@ -1,4 +1,5 @@
-import { DiceSFRPG, RollContext } from "../../dice.js";
+import { DiceSFRPG } from "../../dice.js";
+import RollContext from "../../rolls/rollcontext.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
@@ -88,7 +89,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
             return DiceSFRPG.damageRoll({
                 event: event,
                 rollContext: rollContext,
-                parts: [this.actor.data.data.attributes.damage.value],
+                parts: [{ "formula": this.actor.data.data.attributes.damage.value, "types": {}, "operator": null }],
                 title: name,
                 flavor: name,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),

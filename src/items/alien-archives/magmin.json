@@ -755,19 +755,27 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d4",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "1d4",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": "Burn"
         },
         "damage": {
           "parts": [
-            [
-              "1d6+4",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "1d6+4",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

@@ -81,8 +81,8 @@
     </div>
     {{/if}}
     
-    <div class="form-group damage-reduction" data-tippy-content="<strong>{{localize "SFRPG.DamageReduction"}}</strong><br/>@data.traits.damageReduction.value<br/>@data.traits.damageReduction.negatedBy">
-        <label>{{localize "SFRPG.DamageReduction"}}</label>
+    <div class="form-group damage-reduction" data-tippy-content="<strong>{{localize "SFRPG.Damage.Reduction"}}</strong><br/>@data.traits.damageReduction.value<br/>@data.traits.damageReduction.negatedBy">
+        <label>{{localize "SFRPG.Damage.Reduction"}}</label>
         <input type="text" name="data.traits.damageReduction.value" value="{{data.traits.damageReduction.value}}" data-dtype="Number" />
         <span class="sep">/</span>
         <input type="text" name="data.traits.damageReduction.negatedBy" value="{{data.traits.damageReduction.negatedBy}}" />
@@ -166,6 +166,13 @@
     {{/if}}
     {{/if}}
 
+    {{#if isNPC}}
+    <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}</strong><br/>@data.details.aura">
+        <label>{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}</label>
+        <input type="text" name="data.details.aura" value="{{data.details.aura}}" />
+    </div>
+    {{/if}}
+    
     {{#if (not isDrone)}}
     <div class="form-group ">
         <label>{{localize "SFRPG.SpecialTraits"}}</label>

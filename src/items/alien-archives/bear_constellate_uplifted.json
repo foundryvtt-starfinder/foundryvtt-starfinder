@@ -615,10 +615,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d6+12",
-              "slashing"
-            ]
+            {
+              "formula": "2d6+12",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -824,19 +827,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d4",
-              "electricity"
-            ]
+            {
+              "formula": "1d4",
+              "types": {
+                "electricity": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Arc"
         },
         "damage": {
           "parts": [
-            [
-              "1d12+12",
-              "electricity"
-            ]
+            {
+              "formula": "1d12+12",
+              "types": {
+                "electricity": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -983,19 +992,27 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d8",
-              "electricity+fire"
-            ]
+            {
+              "formula": "1d8",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": "Burn"
         },
         "damage": {
           "parts": [
-            [
-              "1d8+7",
-              "electricity+fire"
-            ]
+            {
+              "formula": "1d8+7",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

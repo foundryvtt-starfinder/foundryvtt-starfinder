@@ -75,10 +75,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "10d6 + @abilities.str.mod",
-          "cold"
-        ]
+        {
+          "formula": "10d6 + @abilities.str.mod",
+          "types": {
+            "cold": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

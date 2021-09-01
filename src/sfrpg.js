@@ -50,6 +50,12 @@ import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
 
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import { } from "./module/combat/combat.js";
+import SFRPGRoll from "./module/rolls/roll.js";
+import SFRPGTokenDocument from "./module/token/tokendocument.js";
+import RollDialog from "./module/apps/roll-dialog.js";
+import RollNode from "./module/rolls/rollnode.js";
+import RollContext from "./module/rolls/rollcontext.js";
+import RollTree from "./module/rolls/rolltree.js";
 
 let defaultDropHandler = null;
 let initTime = null;
@@ -81,20 +87,22 @@ Hooks.once('init', async function () {
             ActorSheetSFRPGStarship,
             ActorSheetSFRPGVehicle,
             // Item Sheets
-            ItemSheetSFRPG,
-            // Misc
-            ActorSheetFlags,
+            ItemCollectionSheet,
+            ItemSheetSFRPG,            
+            // Dialogs
+            ActorMovementConfig,
+            AddEditSkillDialog,
             ChoiceDialog,
             DroneRepairDialog,
-            AddEditSkillDialog,
             InputDialog,
-            ItemCollectionSheet,
             ItemDeletionDialog,
-            SFRPGModifierApplication,
-            ActorMovementConfig,
+            RollDialog,
             NpcSkillToggleDialog,
-            ShortRestDialog,
             SpellCastDialog,
+            ShortRestDialog,                        
+            // Misc
+            ActorSheetFlags,            
+            SFRPGModifierApplication,            
             TraitSelectorSFRPG
         },
         config: SFRPG,
@@ -105,11 +113,17 @@ Hooks.once('init', async function () {
         generateUUID,
         migrateWorld,
         rollItemMacro,
+        rolls: {
+            RollContext,
+            RollNode,
+            RollTree,
+            SFRPGRoll
+        },
         RPC,
         SFRPGEffectType,
         SFRPGModifier,
-        SFRPGModifierType,        
-        SFRPGModifierTypes
+        SFRPGModifierType,
+        SFRPGModifierTypes  
     };
 
     CONFIG.SFRPG = SFRPG;
@@ -119,6 +133,9 @@ Hooks.once('init', async function () {
     CONFIG.Actor.documentClass = ActorSFRPG;
     CONFIG.Item.documentClass = ItemSFRPG;
     CONFIG.Combat.documentClass = CombatSFRPG;
+    CONFIG.Dice.rolls.unshift(SFRPGRoll);
+
+    CONFIG.Token.documentClass = SFRPGTokenDocument;
 
     CONFIG.fontFamilies.push("Exo2");
     CONFIG.defaultFontFamily = "Exo 2";
@@ -189,7 +206,8 @@ Hooks.once("setup", function () {
         "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
         "weaponSpecial", "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
         "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
-        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds", "flightManeuverability"
+        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds",
+        "damageTypeOperators", "flightManeuverability"
     ];
 
     for (let o of toLocalize) {
@@ -321,12 +339,12 @@ export async function handleOnDrop(event) {
 Hooks.on("canvasInit", function () {
     canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
     SquareGrid.prototype.measureDistances = measureDistances;
-    Token.prototype.getBarAttribute = getBarAttribute;
+    // Token.prototype.getBarAttribute = getBarAttribute;
 });
 
 Hooks.on("renderChatMessage", (app, html, data) => {
     DiceSFRPG.highlightCriticalSuccessFailure(app, html, data);
-    DiceSFRPG.addDamageTypes(app, html);
+    DiceSFRPG.addDamageTypes(app, html, data);
 
     if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
 });

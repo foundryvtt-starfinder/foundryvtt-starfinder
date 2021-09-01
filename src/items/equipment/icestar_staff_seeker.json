@@ -75,10 +75,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "2d6 + @abilities.str.mod",
-          "cold|fire"
-        ]
+        {
+          "formula": "2d6 + @abilities.str.mod",
+          "types": {
+            "cold": true,
+            "fire": true
+          },
+          "operator": "or"
+        }
       ]
     },
     "formula": "",

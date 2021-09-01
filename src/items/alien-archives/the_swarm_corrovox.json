@@ -602,10 +602,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6+5",
-              "slashing"
-            ]
+            {
+              "formula": "1d6+5",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -775,19 +778,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d4",
-              "acid"
-            ]
+            {
+              "formula": "1d4",
+              "types": {
+                "acid": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Corrode 1d4"
         },
         "damage": {
           "parts": [
-            [
-              "1d4+3",
-              "acid"
-            ]
+            {
+              "formula": "1d4+3",
+              "types": {
+                "acid": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -954,10 +963,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d4",
-              ""
-            ]
+            {
+              "formula": "3d4",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",

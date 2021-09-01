@@ -75,10 +75,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d10 + @abilities.str.mod",
-          "piercing"
-        ]
+        {
+          "formula": "1d10 + @abilities.str.mod",
+          "types": {
+            "piercing": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

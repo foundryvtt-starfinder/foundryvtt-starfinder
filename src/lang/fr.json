@@ -626,47 +626,32 @@
             "UPBs": "UPBs"
         },
         "Cybernetic": "Cybernétique",
-        "Damage": "Dommage",
-        "DamageReduction": "Réduction des Dommages",
-        "DamageTypesAcid": "Acide",
-        "DamageTypesAcidAndBludgeoning": "Acide & Contondant",
-        "DamageTypesAcidAndElectricity": "Acide & Electricité",
-        "DamageTypesAcidAndFire": "Acide & Feu",
-        "DamageTypesAcidAndPiercing": "Acide & Perforant",
-        "DamageTypesAcidAndSlashing": "Acide & Tranchant",
-        "DamageTypesAcidOrFire": "Acide | Feu",
-        "DamageTypesAcidOrSlashing": "Acide | Tranchant",
-        "DamageTypesBludgeoning": "Contondant",
-        "DamageTypesBludgeoningAndCold": "Contondant & Froid",
-        "DamageTypesBludgeoningAndElectricity": "Contondant & Electricité",
-        "DamageTypesBludgeoningAndFire": "Contondant & Feu",
-        "DamageTypesBludgeoningAndSonic": "Contondant & Sonique",
-        "DamageTypesCold": "Froid",
-        "DamageTypesColdAndPiercing": "Froid & Perforant",
-        "DamageTypesColdAndSlashing": "Froid & Tranchant",
-        "DamageTypesColdOrFire": "Froid | Feu",
-        "DamageTypesElectricity": "Electricité",
-        "DamageTypesElectricityAndFire": "Electricité & Feu",
-        "DamageTypesElectricityAndPiercing": "Electricité & Perforant",
-        "DamageTypesElectricityAndSlashing": "Electricité & Tranchant",
-        "DamageTypesFire": "Feu",
-        "DamageTypesFireAndForce": "Feu & Force",
-        "DamageTypesFireAndPiercing": "Feu & Perforant",
-        "DamageTypesFireAndSlashing": "Feu & Tranchant",
-        "DamageTypesFireOrSlashing": "Feu | Tranchant",
-        "DamageTypesFireOrSonic": "Feu | Sonique",
-        "DamageTypesForce": "Force",
-        "DamageTypesNonlethal": "Non létal",
-        "DamageTypesPiercing": "Perforant",
-        "DamageTypesPiercingAndSonic": "Perforant & Sonique",
-        "DamageTypesRadiation": "Radiation",
-        "DamageTypesSlashing": "Tranchant",
-        "DamageTypesSlashingAndPiercing": "Tranchant & Perforant",
-        "DamageTypesSlashingAndSonic": "Tranchant & Sonique",
-        "DamageTypesSonic": "Sonique",
-        "DamImm": "Imm. aux dommages",
-        "DamRes": "Résistances aux energies",
-        "DamVuln": "Vulnérabilités",
+        "Damage": {
+            "Immunities": "Imm. aux dommages",
+            "Reduction": "Réduction des Dommages",
+            "Resistances": "Résistances aux energies",
+            "Title": "Dommage",            
+            "Types": {
+                "Acid": "Acide",
+                "Bludgeoning": "Contondant",
+                "Cold": "Froid",
+                "Electricity": "Electricité",
+                "Fire": "Feu",
+                "Force": "Force",
+                "Hint": "This is a list of damage types that apply to this damage roll.",
+                "Nonlethal": "Non létal",
+                "Piercing": "Perforant",
+                "Radiation": "Radiation",
+                "Slashing": "Tranchant",
+                "Sonic": "Sonique",
+                "Title": "Types de dommages",
+                "Operators": {
+                    "And": "et",
+                    "Or": "ou"
+                }
+            },
+            "Vulnerabilities": "Vulnérabilités"
+        },
         "Description": "Description",
         "DescriptionShort": "Short Description",
         "Details": "Détails",
@@ -1516,7 +1501,8 @@
                 "NamePlaceHolderText": "Nom du Personnage",
                 "RaceAndGraftsPlaceHolderText": "Genre, Race, et Classe/Greffes",
                 "SourcePlaceHolderText": "Source",
-                "TypePlaceHolderText": "Type (sous-type)"
+                "SubtypePlaceHolderText": "Sous-type",
+                "TypePlaceHolderText": "Type"
             },
             "Interface": {
                 "Conditions": {
@@ -1560,15 +1546,30 @@
         "RepairDroneDialogTitle": "Réparation du drone",
         "RepairDroneUnnecessary": "{name} est déjà au maximum de points de vie, aucune réparation n'est nécessaire.",
         "Resolve": "Persévérance",
-        "RestButton": "Repos",
-        "RestCancel": "Annuler",
-        "RestL": "Repos L",
-        "RestS": "Repos C",
-        "RestSActionHeader": "Dépenser un point de résolution ?",
-        "RestSChatMessage": "{name} prend un repos court de 10 minutes.",
-        "RestSChatMessageRestored": "{name} prend un repos court de 10 minutes et a dépensé {sharedRP} points de résolution pour récupérer {regainedSP} points d'endurance.",
-        "RestSDescription": "Prendre un peu de repos ? pendant un repos court, vous pouvez dépenser un point de résolution pour récupérer tous vos points d'endurance.",
-        "RestSTitle": "Repos court de 10 Minutes",
+        "Rest": {
+            "Button": "Repos",
+            "Cancel": "Annuler",
+            "Long": {
+                "ChatMessage": {
+                    "Content": "{name} takes a night's rest and recovers {deltaHP} Hit points, {deltaSP} Stamina points, and {deltaRP} Resolve points."
+                },
+                "Dialog": {
+                    "Title": "Night's Rest",
+                    "Description": "<p>Take a night's rest?</p><p>On a night's rest you will recover 1 hit point per character level, all stamina points, all resolve points, class resources, limited use item charges, and spell slots.</p>"
+                },
+                "Title": "Repos L"
+            },
+            "Short": {
+                "ActionHeader": "Dépenser un point de résolution ?",
+                "ChatMessage": {
+                    "Message": "{name} prend un repos court de 10 minutes.",
+                    "Restored": "{name} prend un repos court de 10 minutes et a dépensé {sharedRP} points de résolution pour récupérer {regainedSP} points d'endurance."
+                },
+                "DialogDescription": "Prendre un peu de repos ? pendant un repos court, vous pouvez dépenser un point de résolution pour récupérer tous vos points d'endurance.",
+                "DialogTitle": "Repos court de 10 Minutes",
+                "Title": "Repos C"
+            }
+        },
         "Rolls": {
             "AttackRoll": "Jet d'Attaque",
             "AttackRollFull": "Jet d'Attaque - {name}",
@@ -1598,17 +1599,27 @@
                 "SituationalBonusTooltip": "Y a-t-il des bonus supplémentaires qui s'appliquent à ce jet ? (Par exemple, des incréments de plage)"
             },
             "Dice": {
+                "AbilityCheckTitle": "Ability Check - {label}",
                 "Advantage": "Avantage",
                 "AdvantageTooltip": "Lancer avec avantage.",
                 "CriticalDamage": "Critique",
                 "CriticalDamageTooltip": "Lancer les dommages critiques.",
+                "CriticalEffect": "Critical Effect: {criticalEffect}",
+                "CriticalFlavor": "{title} (Critical)",
+                "CriticalFlavorWithEffect": "{title} (Critical; {criticalEffect})",
+                "CriticalHit": "Critical Hit",
                 "Disadvantage": "Désavantage",
                 "DisadvantageTooltip": "Lancer avec désavantage.",
+                "Formula": {
+                    "AdditionalBonus": " {bonus} [Additional Bonus]"
+                },
                 "Normal": "Normal",
                 "NormalDamage": "Normal",
                 "NormalDamageTooltip": "Dommages normaux.",
                 "NormalTooltip": "Jet normal.",
-                "Roll": "Lancer"
+                "Roll": "Lancer",
+                "SaveTitle": "Save - {label}",
+                "SkillCheckTitle": "Skill Check - {skill}"
             },
             "HealingRoll": "Jet de Soin",
             "HealingRollFull": "Jet de Soin - {name}",

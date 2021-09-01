@@ -74,10 +74,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "2d6",
-          "bludgeoning+cold"
-        ]
+        {
+          "formula": "2d6",
+          "types": {
+            "bludgeoning": true,
+            "cold": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

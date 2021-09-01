@@ -74,10 +74,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "6d8",
-          "acid+electricity"
-        ]
+        {
+          "formula": "6d8",
+          "types": {
+            "acid": true,
+            "electricity": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

@@ -1982,10 +1982,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8",
-              "healing"
-            ]
+            {
+              "formula": "1d8",
+              "types": {
+                "healing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2105,10 +2108,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8",
-              "healing"
-            ]
+            {
+              "formula": "1d8",
+              "types": {
+                "healing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -2988,10 +2994,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6",
-              "cold"
-            ]
+            {
+              "formula": "1d6",
+              "types": {
+                "cold": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -3272,10 +3281,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d6 + @abilities.str.mod",
-              "slashing"
-            ]
+            {
+              "formula": "2d6 + @abilities.str.mod",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -3556,10 +3568,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8",
-              "electricity+fire"
-            ]
+            {
+              "formula": "1d8",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

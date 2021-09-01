@@ -52,19 +52,26 @@
     "chatFlavor": "Automatic",
     "critical": {
       "parts": [
-        [
-          "3d4",
-          "fire"
-        ]
+        {
+          "formula": "3d4",
+          "types": {
+            "fire": true
+          },
+          "operator": ""
+        }
       ],
       "effect": "Burn"
     },
     "damage": {
       "parts": [
-        [
-          "3d10",
-          "electricity+fire"
-        ]
+        {
+          "formula": "3d10",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

@@ -59,20 +59,45 @@
             </h4>
             <ol class="damage-parts form-group">
                 {{#each itemData.damage.parts as |part i| }}
-                <li class="damage-part flexrow" data-damage-part="{{i}}">
-                    <input type="text" name="data.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
-                    <select name="data.damage.parts.{{i}}.1">
-                        {{#select (lookup this "1") }}
-                        <option value="">None</option>
-                        {{#each ../config.weaponDamageTypes as |name type|}}
-                        <option value="{{type}}">{{name}}</option>
-                        {{/each}}
-                        {{#each ../config.healingTypes as |name type|}}
-                        <option value="{{type}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                    <a class="damage-control delete-damage"><i class="fas fa-minus"></i></a>
+                <li class="damage-part flexcol" data-damage-part="{{i}}">
+                    <div class="damage-part-formula form-group flexrow">
+                        <input type="text" name="data.damage.parts.{{i}}.formula" value="{{lookup this "formula"}}"/>
+                        <a class="damage-control delete-damage"><i class="fas fa-minus"></i></a>
+                    </div>
+                    <div class="damage-part-type form-group stacked">
+                        <div class="form-group form-group-stacked">
+                            <label>{{localize "Energy Damage"}}</label>
+                            {{#each ../config.energyDamageTypes as |name type|}}
+                            <label class="checkbox">
+                                <input type="checkbox" name="data.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
+                            </label>
+                            {{/each}}
+                        </div>
+                        <div class="form-group form-group-stacked">
+                            <label>{{localize "Kinetic Damage"}}</label>
+                            {{#each ../config.kineticDamageTypes as |name type|}}
+                            <label class="checkbox">
+                                <input type="checkbox" name="data.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
+                            </label>
+                            {{/each}}
+                        </div>
+                        <div class="form-group form-group-stacked">
+                            <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="data.damage.parts.{{i}}.types.healing" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") "healing")}} />{{localize "SFRPG.HealingTypesHealing"}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="damage-part-operator form-group flexrow" data-tippy-content="When an item or ablity does multiple types of damage, this will determine if both damage types apply, or if only one or the other apply.">
+                        <label>{{localize "Damage Operator"}}</label>
+                        <select name="data.damage.parts.{{i}}.operator">
+                            {{#select (lookup this "operator")}}
+                            <option value=""></option>
+                            <option value="and">{{localize "And"}}</option>
+                            <option value="or">{{localize "Or"}}</option>
+                            {{/select}}
+                        </select>
+                    </div>
                 </li>
                 {{/each}}
             </ol>

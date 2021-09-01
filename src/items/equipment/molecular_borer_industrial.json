@@ -77,10 +77,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "3d6",
-          "cold|fire"
-        ]
+        {
+          "formula": "3d6",
+          "types": {
+            "cold": true,
+            "fire": true
+          },
+          "operator": "or"
+        }
       ]
     },
     "formula": "",

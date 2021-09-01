@@ -75,10 +75,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d4",
-          "fire|sonic"
-        ]
+        {
+          "formula": "1d4",
+          "types": {
+            "fire": true,
+            "sonic": true
+          },
+          "operator": "or"
+        }
       ]
     },
     "formula": "",

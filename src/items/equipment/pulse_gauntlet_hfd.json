@@ -76,10 +76,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "5d6 + @abilities.str.mod",
-          "bludgeoning+sonic"
-        ]
+        {
+          "formula": "5d6 + @abilities.str.mod",
+          "types": {
+            "bludgeoning": true,
+            "sonic": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

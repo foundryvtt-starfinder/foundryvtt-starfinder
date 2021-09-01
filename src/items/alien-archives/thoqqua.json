@@ -598,19 +598,26 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d6",
-              "fire"
-            ]
+            {
+              "formula": "1d6",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Burn 1d6"
         },
         "damage": {
           "parts": [
-            [
-              "1d6+2",
-              "fire+piercing"
-            ]
+            {
+              "formula": "1d6+2",
+              "types": {
+                "fire": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

@@ -612,10 +612,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d4+11",
-              "bludgeoning"
-            ]
+            {
+              "formula": "3d4+11",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -843,10 +846,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d4+9",
-              "electricity+fire"
-            ]
+            {
+              "formula": "2d4+9",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

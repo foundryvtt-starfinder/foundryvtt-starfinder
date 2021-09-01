@@ -75,10 +75,13 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d6 + @abilities.str.mod",
-          "sonic"
-        ]
+        {
+          "formula": "1d6 + @abilities.str.mod",
+          "types": {
+            "sonic": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

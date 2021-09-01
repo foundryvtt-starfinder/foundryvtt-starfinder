@@ -52,19 +52,26 @@
     "chatFlavor": "Blast, living, swarm, unwieldy",
     "critical": {
       "parts": [
-        [
-          "2d4",
-          "acid"
-        ]
+        {
+          "formula": "2d4",
+          "types": {
+            "acid": true
+          },
+          "operator": ""
+        }
       ],
       "effect": "Corrode"
     },
     "damage": {
       "parts": [
-        [
-          "2d8",
-          "acid+fire"
-        ]
+        {
+          "formula": "2d8",
+          "types": {
+            "acid": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

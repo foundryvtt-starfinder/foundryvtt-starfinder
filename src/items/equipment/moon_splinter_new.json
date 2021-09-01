@@ -74,10 +74,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "2d12",
-          "bludgeoning+cold"
-        ]
+        {
+          "formula": "2d12",
+          "types": {
+            "bludgeoning": true,
+            "cold": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

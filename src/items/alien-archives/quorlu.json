@@ -927,10 +927,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6+2",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "1d6+2",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1170,19 +1174,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "2",
-              "electricity"
-            ]
+            {
+              "formula": "2",
+              "types": {
+                "electricity": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Arc"
         },
         "damage": {
           "parts": [
-            [
-              "1d6+2",
-              "electricity"
-            ]
+            {
+              "formula": "1d6+2",
+              "types": {
+                "electricity": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

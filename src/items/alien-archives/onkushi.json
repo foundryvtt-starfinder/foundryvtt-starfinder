@@ -819,19 +819,27 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "3d4",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "3d4",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": "Burn 3d4"
         },
         "damage": {
           "parts": [
-            [
-              "6d4+20",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "6d4+20",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1005,10 +1013,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "10d6",
-              ""
-            ]
+            {
+              "formula": "10d6",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1393,10 +1402,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "9d6",
-              ""
-            ]
+            {
+              "formula": "9d6",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",

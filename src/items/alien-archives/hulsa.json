@@ -841,19 +841,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d6",
-              "slashing"
-            ]
+            {
+              "formula": "1d6",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Burn"
         },
         "damage": {
           "parts": [
-            [
-              "3d6+11",
-              "slashing"
-            ]
+            {
+              "formula": "3d6+11",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -976,10 +982,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d6+11",
-              "electricity+fire"
-            ]
+            {
+              "formula": "3d6+11",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1391,10 +1401,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "11d6",
-              "fire"
-            ]
+            {
+              "formula": "11d6",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

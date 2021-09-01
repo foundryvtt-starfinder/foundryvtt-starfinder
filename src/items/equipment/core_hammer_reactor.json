@@ -71,19 +71,27 @@
     "chatFlavor": "",
     "critical": {
       "parts": [
-        [
-          "8d6",
-          "electricity+fire"
-        ]
+        {
+          "formula": "8d6",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ],
       "effect": "Jet 8d6"
     },
     "damage": {
       "parts": [
-        [
-          "15d6 + @abilities.str.mod",
-          "electricity+fire"
-        ]
+        {
+          "formula": "15d6 + @abilities.str.mod",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

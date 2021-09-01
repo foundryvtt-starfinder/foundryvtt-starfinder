@@ -56,10 +56,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "1d4 + @bonus",
-          "Electricity+Fire"
-        ]
+        {
+          "formula": "1d4 + @bonus",
+          "types": {
+            "Electricity": true,
+            "Fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

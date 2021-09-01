@@ -125,10 +125,13 @@
         "modifiers": [],
         "damage": {
           "parts": [
-            [
-              "2*(13d10)",
-              "bludgeoning"
-            ]
+            {
+              "formula": "2*(13d10)",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "save": {
@@ -165,10 +168,13 @@
         "modifiers": [],
         "damage": {
           "parts": [
-            [
-              "13d10",
-              "bludgeoning"
-            ]
+            {
+              "formula": "13d10",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "save": {
@@ -378,10 +384,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d6 * 10",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "2d6 * 10",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

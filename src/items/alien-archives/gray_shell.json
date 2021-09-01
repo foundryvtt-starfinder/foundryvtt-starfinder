@@ -1,0 +1,2438 @@
+{
+  "name": "Gray Shell",
+  "type": "npc",
+  "img": "icons/svg/mystery-man.svg",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 1,
+        "base": 10
+      },
+      "dex": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 4,
+        "base": 10
+      },
+      "con": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": -1,
+        "base": 10
+      },
+      "int": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 8,
+        "base": 10
+      },
+      "wis": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 1,
+        "base": 10
+      },
+      "cha": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 6,
+        "base": 10
+      }
+    },
+    "attributes": {
+      "eac": {
+        "min": 0,
+        "value": 26,
+        "tooltip": []
+      },
+      "kac": {
+        "min": 0,
+        "value": 27,
+        "tooltip": []
+      },
+      "cmd": {
+        "min": 0,
+        "value": 10,
+        "tooltip": []
+      },
+      "hp": {
+        "min": 0,
+        "max": 190,
+        "value": 190,
+        "temp": null,
+        "tempmax": null,
+        "tooltip": []
+      },
+      "sp": {
+        "min": 0,
+        "max": 0,
+        "value": 0,
+        "tooltip": []
+      },
+      "rp": {
+        "min": 0,
+        "max": 0,
+        "value": 0,
+        "tooltip": []
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "total": 4,
+        "tooltip": []
+      },
+      "fort": {
+        "value": 0,
+        "bonus": 12,
+        "misc": 0,
+        "tooltip": []
+      },
+      "reflex": {
+        "value": 0,
+        "bonus": 12,
+        "misc": 0,
+        "tooltip": []
+      },
+      "will": {
+        "value": 0,
+        "bonus": 18,
+        "misc": 0,
+        "tooltip": []
+      },
+      "baseAttackBonus": {
+        "value": 0,
+        "rolledMods": [],
+        "tooltip": []
+      },
+      "bab": 0,
+      "arms": "2",
+      "space": "",
+      "reach": "",
+      "speed": {
+        "land": {
+          "base": 30
+        },
+        "flying": {
+          "base": 0,
+          "baseManeuverability": 0
+        },
+        "swimming": {
+          "base": 0
+        },
+        "burrowing": {
+          "base": 0
+        },
+        "climbing": {
+          "base": 0
+        },
+        "value": null,
+        "special": "",
+        "mainMovement": "land"
+      },
+      "keyability": "",
+      "spellcasting": ""
+    },
+    "details": {
+      "alignment": "NE",
+      "race": "",
+      "class": "",
+      "biography": {
+        "value": "<h2>Description</h2>\n<p>As part of their continued efforts to observe other species, a symposium of gray mysteriarchs collaborated to create a clone controlled by a more loyal force than is typical, a creature they call a gray shell. A gray shell has an exterior made of partially living organic material but is animated by an incorporeal gray-shaped being drawn from whatever world or dimension grays call home. These gray shells can be produced to look like nearly any humanoid form in the galaxy and, like the clones grays can engineer, are able to speak languages and exhibit cultural knowledge appropriate to whatever area they are meant to infiltrate. However, to keen onlookers, a gray shell&rsquo;s skin is too smooth, their eyes slightly larger than normal for the species they are imitating.</p>\n<p>Gray shells are still mostly experimental and haven&rsquo;t seen much use outside of carefully monitored testing grounds.</p>\n<p>&nbsp;</p>",
+        "public": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.png",
+        "dateOfBirth": "",
+        "age": 0,
+        "height": "",
+        "weight": "",
+        "otherVisuals": ""
+      },
+      "type": "Humanoid (gray)",
+      "environment": "any",
+      "organization": "solitary, pair, or conspiracy (4-8)",
+      "cr": 13,
+      "xp": {
+        "value": 10
+      },
+      "source": "AP #30 pg. 57",
+      "subtype": "Gray",
+      "raceAndGrafts": "",
+      "aura": ""
+    },
+    "skillpoints": {
+      "used": 0,
+      "max": 0,
+      "tooltip": []
+    },
+    "skills": {
+      "acr": {
+        "ability": "dex",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "ath": {
+        "ability": "str",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "blu": {
+        "ability": "cha",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 28,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "com": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "cul": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "dip": {
+        "ability": "cha",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "dis": {
+        "ability": "cha",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 28,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "eng": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "int": {
+        "ability": "cha",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "lsc": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "med": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "mys": {
+        "ability": "wis",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "per": {
+        "ability": "wis",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 23,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "phs": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "pil": {
+        "ability": "dex",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "pro": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 3,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false,
+        "subname": ""
+      },
+      "sen": {
+        "ability": "wis",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 23,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "sle": {
+        "ability": "dex",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": true
+      },
+      "ste": {
+        "ability": "dex",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "sur": {
+        "ability": "wis",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      }
+    },
+    "traits": {
+      "size": "medium",
+      "senses": "darkvision 60 ft.",
+      "languages": {
+        "value": [
+          "aklo",
+          "common"
+        ],
+        "custom": ""
+      },
+      "di": {
+        "value": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [
+          "acid"
+        ],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "damageReduction": {
+        "value": 0,
+        "negatedBy": ""
+      },
+      "sr": 0
+    },
+    "currency": {
+      "credit": 0,
+      "upb": 0
+    },
+    "spells": {
+      "spell0": {
+        "value": 0,
+        "max": 0
+      },
+      "spell1": {
+        "value": 0,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "modifiers": [],
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
+    "counterClasses": {
+      "values": {}
+    }
+  },
+  "token": {
+    "name": "Gray Shell",
+    "img": "icons/svg/mystery-man.svg",
+    "displayName": 20,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightAlpha": 0.25,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "disposition": -1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": "attributes.rp"
+    },
+    "flags": {},
+    "randomImg": false,
+    "tint": null,
+    "lightColor": null,
+    "x": null,
+    "y": null,
+    "elevation": null
+  },
+  "items": [
+    {
+      "_id": "sTujG2SNufVatXwY",
+      "name": "Incorporeal Rider (Ex)",
+      "type": "feat",
+      "img": "icons/svg/item-bag.svg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "When a gray shell is reduced to fewer than half its Hit Points, its corporeal exterior falls away, revealing the incorporeal gray-shaped animating force within. The gray shell’s size is reduced to Small, it loses its vulnerability to acid and the ability to use its gear, gains the incorporeal subtype, and gains a supernatural fly speed of 30 with perfect maneuverability.",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": 0,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "3K5MlT19d4xu2Fg5",
+      "name": "Pulse gauntlet, HFD",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/equipment/weapons/battleglove.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>When a pulse gauntlet strikes its target, it releases a surge of sonic energy that can knock the target down. Pulse gauntlets are made of heavy-duty nylon with reinforced pads over the items' knuckles.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 171",
+        "type": "",
+        "quantity": null,
+        "bulk": "1",
+        "price": 31300,
+        "quantityPerPack": 1,
+        "level": 12,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 51,
+            "max": "51"
+          },
+          "hardness": {
+            "value": "29"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "touch",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": 20,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [
+            {
+              "formula": null,
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
+          ],
+          "effect": ""
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "5d6 +14",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "ammunitionType": "",
+        "capacity": {
+          "value": 20,
+          "max": 20
+        },
+        "usage": {
+          "value": 1,
+          "per": "minute"
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [
+            {
+              "id": "P050z1tD19SYbs13",
+              "index": 0
+            }
+          ],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 12,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "subtype": "",
+              "amount": 1,
+              "acceptsType": [
+                "goods"
+              ],
+              "weightMultiplier": 1,
+              "weightProperty": "",
+              "affectsEncumbrance": true
+            },
+            {
+              "type": "slot",
+              "subtype": "ammunitionSlot",
+              "amount": 1,
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": ""
+            }
+          ],
+          "isOpen": true
+        },
+        "weaponType": "advancedM",
+        "weaponCategory": "sonic",
+        "special": "",
+        "properties": {
+          "one": true,
+          "two": false,
+          "amm": false,
+          "analog": false,
+          "archaic": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": false,
+          "injection": false,
+          "line": false,
+          "nonlethal": false,
+          "operative": false,
+          "penetrating": false,
+          "powered": true,
+          "qreload": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "thrown": false,
+          "trip": false,
+          "unwieldy": false,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "radioactive": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false,
+          "hybrid": false,
+          "regrowth": false,
+          "unbalancing": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "VUcJaJcC2FnfeHhM",
+      "name": "Sonic rifle, LFD",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/equipment/weapons/diasporan-rifle-elite.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>A sonic rifle fires a blast that is loud enough to @Compendium[sfrpg.rules.O5GDQUKPCJ9Zbnfj]{Deafen} targets in addition to damaging them. Sonic rifles have snub-nosed barrels and typically incorporate U-shaped prongs to improve beam stability.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 177",
+        "type": "",
+        "quantity": null,
+        "bulk": "2",
+        "price": 17000,
+        "quantityPerPack": 1,
+        "level": 10,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 45,
+            "max": "45"
+          },
+          "hardness": {
+            "value": "25"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 50,
+          "units": "ft",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "rwak",
+        "attackBonus": 22,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [
+            {
+              "formula": "21]",
+              "types": {
+                "sonic": true
+              },
+              "operator": ""
+            }
+          ],
+          "effect": "Deafen [DC"
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2d10 +13",
+              "types": {
+                "sonic": true
+              },
+              "operator": ""
+            }
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "ammunitionType": "",
+        "capacity": {
+          "value": 40,
+          "max": 40
+        },
+        "usage": {
+          "value": 2,
+          "per": "shot"
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [
+            {
+              "id": "BNniRsI1wTyXOuls",
+              "index": 0
+            }
+          ],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 10,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "subtype": "",
+              "amount": 1,
+              "acceptsType": [
+                "goods"
+              ],
+              "weightMultiplier": 1,
+              "weightProperty": "",
+              "affectsEncumbrance": true
+            },
+            {
+              "type": "slot",
+              "subtype": "ammunitionSlot",
+              "amount": 1,
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": ""
+            }
+          ],
+          "isOpen": true
+        },
+        "weaponType": "longA",
+        "weaponCategory": "sonic",
+        "special": "",
+        "properties": {
+          "one": false,
+          "two": true,
+          "amm": false,
+          "analog": false,
+          "archaic": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": false,
+          "injection": false,
+          "line": false,
+          "living": false,
+          "mind-affecting": false,
+          "nonlethal": false,
+          "operative": false,
+          "penetrating": false,
+          "powered": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "thrown": false,
+          "trip": false,
+          "unwieldy": false,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "lockdown": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false,
+          "hybrid": false,
+          "regrowth": false,
+          "unbalancing": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "5vEHJxzgs3d0E42T",
+      "name": "Concealing Shell (Ex)",
+      "type": "feat",
+      "img": "icons/svg/item-bag.svg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "A gray shell appears as a member of a humanoid or monstrous humanoid race, gaining a +10 racial bonus to Disguise checks to appear as that type of creature. However, a creature that succeeds at a DC 30 Medicine check when providing long-term care or long-term stability to a gray shell notices the strange hollowness of many of its internal organs.",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": 0,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": -100000,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "iLKiUfiu4Ir1plsn",
+      "name": "Partial Phasing (Su)",
+      "type": "feat",
+      "img": "icons/svg/item-bag.svg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "The animating force within a gray shell can pull its body out of phase temporarily. A gray shell can pass through walls or material objects (but not corporeal creatures) as long as it begins and ends its turn outside of any wall or obstacle.",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": 0,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "RrjLr1RMCEUxicoB",
+      "name": "AbadarCorp Travel Suit, Platinum",
+      "type": "equipment",
+      "img": "systems/sfrpg/icons/equipment/armor/abadarcorp_travel_suit_platinium.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>Executives popularized these light armor business suits for boardrooms and diplomatic meetings. Contingent force fields and concealed rebreathers protect the wearer in hostile environmental conditions. Higher grades of travel suits offer more protection&mdash;along with a designer label.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 197",
+        "type": "",
+        "quantity": 1,
+        "bulk": "L",
+        "price": 34600,
+        "quantityPerPack": 1,
+        "level": 12,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 51,
+            "max": "51"
+          },
+          "hardness": {
+            "value": "29"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "ammunitionType": "",
+        "capacity": {
+          "value": 0,
+          "max": 0
+        },
+        "usage": {
+          "value": 0,
+          "per": ""
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "armorUpgrade",
+              "amount": 0,
+              "acceptsType": [
+                "upgrade",
+                "weapon"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "slots"
+            }
+          ],
+          "isOpen": true
+        },
+        "armor": {
+          "type": "light",
+          "eac": 12,
+          "kac": 13,
+          "dex": 8,
+          "acp": 0,
+          "speedAdjust": 0
+        },
+        "strength": 0,
+        "speed": "",
+        "size": "",
+        "reach": "",
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "P050z1tD19SYbs13",
+      "name": "Battery",
+      "type": "ammunition",
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 20</p>",
+          "unidentified": ""
+        },
+        "source": "Core Rulebook",
+        "type": "",
+        "quantity": "1",
+        "bulk": "-",
+        "price": 60,
+        "quantityPerPack": 1,
+        "level": 1,
+        "attuned": false,
+        "equipped": false,
+        "equippable": false,
+        "identified": true,
+        "attributes": {
+          "sturdy": false,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 6,
+            "max": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "ac": {
+            "value": ""
+          }
+        },
+        "ammunitionType": "charge",
+        "useCapacity": true,
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "damage": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "gcfzYgpYa6m92Hay",
+      "name": "Battery, High-Capacity",
+      "type": "ammunition",
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item&rsquo;s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 40</p>",
+          "unidentified": ""
+        },
+        "source": "Core Rulebook",
+        "type": "",
+        "quantity": 1,
+        "bulk": "-",
+        "price": 330,
+        "quantityPerPack": 1,
+        "level": 4,
+        "attuned": false,
+        "equipped": false,
+        "equippable": false,
+        "identified": true,
+        "attributes": {
+          "sturdy": false,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 6,
+            "max": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "ac": {
+            "value": ""
+          }
+        },
+        "ammunitionType": "charge",
+        "useCapacity": true,
+        "capacity": {
+          "max": 40,
+          "value": 40
+        },
+        "damage": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "ZU50gJb6qyGp3sfv",
+      "name": "Dominate Person (DC 24)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/dominate_person.png",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You fire a bright purple ray at your target, making a ranged attack against your target’s EAC, but you can add your key ability score bonus to this attack instead of your Dexterity modifier if it is higher.<br><br>If you hit and your target fails its Will saving throw, you establish a telepathic link with the target’s mind and can control its actions. If you and the target have a common language, you can generally force the target to perform as you desire, within the limits of its abilities. If no common language exists, you can communicate only basic commands, such as “Come here,” “Go there,” “Fight,” and “Stand still.” You know what the target is experiencing, but you don’t receive direct sensory input from it, nor can it communicate with you telepathically. Once you have given a dominated creature a command, it continues to attempt to carry out that command to the exclusion of all other activities except those necessary for day-to-day survival (such as sleeping, eating, and so forth). Changing your orders or giving a dominated creature a new command is a move action.<br></span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">By concentrating fully on the spell (a standard action), you can receive full sensory input as interpreted by the mind of the target, though it still can’t communicate with you. You don’t actually see through the target’s eyes, but you still get a good idea of what’s going on.<br></span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">The target resists this control, and any target forced to take actions against its nature can attempt a new saving throw with a +2 bonus. Obviously self-destructive orders are not carried out. Once control is established, the range at which it can be exercised is unlimited as long as you and the target are on the same plane. You don’t need to see the target to control it.<br></span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">If you don’t spend at least 1 round concentrating on the spell each following day, the target can attempt a new saving throw to throw off the domination. You can be prevented from exercising control or using the telepathic link while the target is under the effects of some spells, but such effects don’t automatically dispel the domination.</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 352",
+        "type": "",
+        "activation": {
+          "type": "full",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1 day/level; see text",
+          "units": ""
+        },
+        "target": {
+          "value": "one humanoid",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 25,
+          "units": "ft",
+          "additional": "5 ft.",
+          "per": "2 levels"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "rsak",
+        "attackBonus": 22,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "will",
+          "dc": "24",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "level": 5,
+        "school": "enc",
+        "sr": true,
+        "dismissible": false,
+        "concentration": false,
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "Pq16KSj3fAusJPxR",
+      "name": "Modify Memory (DC 24)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/modify_memory.png",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p style=\"text-align: justify;\">You reach into the target’s mind and modify up to 5 minutes of its memories in one of the following ways.</p>\n<ul style=\"text-align: justify;\">\n<li>Eliminate all memory of an event the target actually experienced. This spell cannot negate&nbsp;@Compendium[sfrpg.spells.3nFCrisRp2GIjbR3]{Charm Person},&nbsp;suggestion, or similar spells.</li>\n<li>Allow the target to recall with perfect clarity an event it actually experienced.</li>\n<li>Change the details of an event the target actually experienced.</li>\n<li>Implant a memory of an event the target never experienced.</li>\n</ul>\n<p style=\"text-align: justify;\">Casting the spell takes 1 round. If the target fails its saving throw, you proceed with the spell by spending as much as 5 minutes (a period of time equal to the amount of memory you want to modify) visualizing the memory you wish to modify in the target. If your concentration is disturbed before the visualization is complete, or if the target moves beyond the spell’s range at any point during this time, the spell fails.<br><br>A modified memory does not necessarily affect the target’s actions, particularly if it contradicts the creature’s natural inclinations. An illogical modified memory is usually dismissed as a bad dream, a hallucination, or another similar excuse.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 366",
+        "type": "",
+        "activation": {
+          "type": "full",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "permanent",
+          "units": ""
+        },
+        "target": {
+          "value": "one living creature",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 25,
+          "units": "ft",
+          "additional": "5 ft.",
+          "per": "2 levels"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "will",
+          "dc": "24",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "level": 5,
+        "school": "enc",
+        "sr": true,
+        "dismissible": false,
+        "concentration": false,
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": true
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "SFLhKZjylSYrPaB9",
+      "name": "Confusion (DC 23)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/confusion.png",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">This spell causes @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confusion} in all creatures in the area, making them unable to determine their actions. Any @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused} creature that is attacked automatically attacks or attempts to attack its attackers on its next turn, as long as it is still @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused} at the start of its next turn. Note that a @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused} creature will not make attacks of opportunity against any foe that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked). For @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused} creatures that have not been attacked, roll on the following table at the start of each affected creature’s turn each round to see what it does in that round.</span></p>\n<table style=\"width: 403px; height: 85px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; background-color: #34495e; text-align: center; width: 44px;\">\n<p style=\"color: white;\">D%</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"><strong>Behavior</strong></span></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">1-25</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Act normally</span></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">26-50</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Do nothing but babble incoherently</span></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">51-75</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Deal 1d8 + Str modifier damage to self with item in hand</span></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">76-100</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Attack nearest creature</span></p>\n</td>\n</tr>\n</tbody>\n</table>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">A @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused} creature that can’t carry out the indicated action does nothing but babble incoherently. Attackers are not at any special advantage when attacking a @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused} target.</span></p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 344",
+        "type": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1 round/level",
+          "units": ""
+        },
+        "target": {
+          "value": "one living creature",
+          "type": ""
+        },
+        "area": {
+          "value": 15,
+          "units": "ft",
+          "shape": "sphere",
+          "effect": "burst"
+        },
+        "range": {
+          "value": 100,
+          "units": "ft",
+          "additional": "10 ft.",
+          "per": "lelvellevel"
+        },
+        "uses": {
+          "value": 3,
+          "max": 3,
+          "per": "day"
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "1d100",
+        "save": {
+          "type": "will",
+          "dc": "23",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "level": 4,
+        "school": "enc",
+        "sr": true,
+        "dismissible": false,
+        "concentration": false,
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": true
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "FyEFmp2Ryn1FJjLB",
+      "name": "Discern Lies (DC 23)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/discern-lies.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Each round, you concentrate on one target within range. You know if the target deliberately and knowingly speaks a lie by discerning disturbances in its aura caused by lying. The spell does not reveal the truth or uncover unintentional inaccuracies, and it doesn’t necessarily reveal evasions. Each round, you can concentrate on a different target.&nbsp;</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 349",
+        "type": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "concentration, up to 1 round/level",
+          "units": ""
+        },
+        "target": {
+          "value": "up to one creature/level, no two of which can be more than 30 ft. apart",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 25,
+          "units": "ft",
+          "additional": "5 ft.",
+          "per": "2 levels"
+        },
+        "uses": {
+          "value": 3,
+          "max": 3,
+          "per": "day"
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "will",
+          "dc": "23",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "level": 4,
+        "school": "div",
+        "sr": false,
+        "dismissible": false,
+        "concentration": true,
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "FOZYWA64Brji102M",
+      "name": "Hold Monster (DC 23)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/hold_monster.PNG",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>This spell functions as&nbsp;hold person, except it can target any living creature.</p>\n<p>&nbsp;</p>\n<h2>Hold Person</h2>\n<p>The target becomes @Compendium[sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralyzed} and freezes in place. It is aware and breathes normally but can&rsquo;t take any physical actions, even speech. A held creature can&rsquo;t cast spells. Each round on its turn, the target can spend a full action to attempt a new saving throw to end the effect. This does not provoke attacks of opportunity. A winged creature that is @Compendium[sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralyzed} can&rsquo;t flap its wings and falls. A swimmer can&rsquo;t swim and may drown.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 359",
+        "type": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1 round/level (D)",
+          "units": ""
+        },
+        "target": {
+          "value": "one living creature",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 100,
+          "units": "ft",
+          "additional": "10 ft.",
+          "per": "level"
+        },
+        "uses": {
+          "value": 3,
+          "max": 3,
+          "per": "day"
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "will",
+          "dc": "23",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "level": 4,
+        "school": "enc",
+        "sr": true,
+        "dismissible": true,
+        "concentration": false,
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": true
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "AnJKDfqVgNLKJZBB",
+      "name": "Mind Probe (DC 23)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/mind-probe.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p style=\"text-align: justify;\">You gain access to the target’s memories and knowledge, and you can pry the information you want from them involuntarily.<br><br>You can attempt to learn the answer to one question of your choice per round; after each question, the target can attempt a Will saving throw to end the spell. If it fails, the creature can attempt a Bluff check with a DC equal to 11 + your Sense Motive modifier. If it fails its Bluff check, you gain the answer you desire. If it succeeds at its check, you gain no information. If it succeeds by 5 or more, it answers however it chooses and you believe that wrong answer to be the truth. Your questions are purely telepathic inquiries, and the answers to those questions are imparted directly into your mind. You and the target don’t need to speak the same language, though less intelligent creatures may yield up only appropriate sensory images in answer to your questions.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 365",
+        "type": "",
+        "activation": {
+          "type": "min",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1 round/level (D)",
+          "units": ""
+        },
+        "target": {
+          "value": "one creature",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 25,
+          "units": "ft",
+          "additional": "5 ft.",
+          "per": "2 levels"
+        },
+        "uses": {
+          "value": 3,
+          "max": 3,
+          "per": "day"
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "will",
+          "dc": "23",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "level": 4,
+        "school": "div",
+        "sr": true,
+        "dismissible": true,
+        "concentration": false,
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "IUIs5h3q7a3qggKH",
+      "name": "Deep Slumber (DC 22) (At Will)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/deep_slumber.png",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">This spell causes living creatures in the area to fall into a magical sleep, gaining the @Compendium[sfrpg.conditions.3iTdt2NRgIyrychR]{Asleep} condition (except normal noise doesn’t wake up the sleeping creatures). Creatures with the lowest CR are affected first. Among creatures of equal CR, those who are closest to the spell’s point of origin are affected first. <em>Deep slumber</em> doesn’t affect unconscious creatures, constructs, or undead creatures.&nbsp;</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 348",
+        "type": "",
+        "activation": {
+          "type": "full",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1 minute/level",
+          "units": ""
+        },
+        "target": {
+          "value": "one or more living creatures with a total CR of 8 or lower, all within a 10 ft.-radius burst",
+          "type": ""
+        },
+        "area": {
+          "value": 10,
+          "units": "ft",
+          "shape": "sphere",
+          "effect": "burst"
+        },
+        "range": {
+          "value": 25,
+          "units": "ft",
+          "additional": "5 ft.",
+          "per": "2 levels"
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "will",
+          "dc": "22",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "level": 3,
+        "school": "enc",
+        "sr": true,
+        "dismissible": false,
+        "concentration": false,
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "always",
+          "prepared": true
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "R6Mf9Iw3GT9PuhuT",
+      "name": "Mind Thrust (4th Level, DC 22) (At Will)",
+      "type": "spell",
+      "img": "systems/sfrpg/icons/spells/mind_thrust.png",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p style=\"text-align: justify;\">You divine the most vulnerable portion of your opponent&rsquo;s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.<br /><br /></p>\n<ul>\n<li style=\"text-align: justify;\"><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li style=\"text-align: justify;\"><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li style=\"text-align: justify;\"><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li style=\"text-align: justify;\"><strong>4th: </strong>When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is fatigued for 1 round if it fails its saving throw.</li>\n<li style=\"text-align: justify;\"><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n<li style=\"text-align: justify;\"><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} and @Compendium[sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 365",
+        "type": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "instantaneous",
+          "units": ""
+        },
+        "target": {
+          "value": "one creature",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 25,
+          "units": "ft",
+          "additional": "5 ft.",
+          "per": "2 levels"
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "10d10",
+              "types": {},
+              "operator": ""
+            }
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "will",
+          "dc": "22",
+          "descriptor": "half"
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "level": 4,
+        "school": "div",
+        "sr": true,
+        "dismissible": false,
+        "concentration": false,
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "always",
+          "prepared": true
+        },
+        "allowedClasses": {
+          "myst": true,
+          "tech": false,
+          "wysh": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "BNniRsI1wTyXOuls",
+      "name": "Battery, High-Capacity",
+      "type": "ammunition",
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item&rsquo;s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 40</p>",
+          "unidentified": ""
+        },
+        "source": "Core Rulebook",
+        "type": "",
+        "quantity": 1,
+        "bulk": "-",
+        "price": 330,
+        "quantityPerPack": 1,
+        "level": 4,
+        "attuned": false,
+        "equipped": false,
+        "equippable": false,
+        "identified": true,
+        "attributes": {
+          "sturdy": false,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 6,
+            "max": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "ac": {
+            "value": ""
+          }
+        },
+        "ammunitionType": "charge",
+        "useCapacity": true,
+        "capacity": {
+          "max": 40,
+          "value": 40
+        },
+        "damage": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    }
+  ],
+  "effects": [],
+  "flags": {
+    "core": {}
+  },
+  "_id": "Jsl4oG97LCZvG5mD"
+}

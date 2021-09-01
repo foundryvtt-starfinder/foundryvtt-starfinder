@@ -600,10 +600,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d12+21",
-              "bludgeoning"
-            ]
+            {
+              "formula": "3d12+21",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -798,19 +801,27 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d10",
-              "electricity+fire"
-            ]
+            {
+              "formula": "1d10",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": "Burn"
         },
         "damage": {
           "parts": [
-            [
-              "5d6+13",
-              "electricity+fire"
-            ]
+            {
+              "formula": "5d6+13",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

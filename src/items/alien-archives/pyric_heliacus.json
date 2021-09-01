@@ -723,19 +723,27 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "F",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "F",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": "Burn 2d4"
         },
         "damage": {
           "parts": [
-            [
-              "2d8+10",
-              "bludgeoning+fire"
-            ]
+            {
+              "formula": "2d8+10",
+              "types": {
+                "bludgeoning": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -941,19 +949,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "2d4",
-              "fire"
-            ]
+            {
+              "formula": "2d4",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Burn 2d4 F"
         },
         "damage": {
           "parts": [
-            [
-              "3d4+10",
-              "fire"
-            ]
+            {
+              "formula": "3d4+10",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1138,10 +1152,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "5d6",
-              ""
-            ]
+            {
+              "formula": "5d6",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1887,10 +1902,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "4d8",
-              "cold"
-            ]
+            {
+              "formula": "4d8",
+              "types": {
+                "cold": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

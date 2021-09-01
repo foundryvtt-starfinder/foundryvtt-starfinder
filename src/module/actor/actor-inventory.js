@@ -635,7 +635,9 @@ export async function onCreateItemCollection(message) {
         return false;
     }
 
-    if (!canvas.initialized) return false;
+    if (!canvas.initialized) {
+        return false;
+    }
 
     const createdTokenPromise = canvas.scene.createEmbeddedDocuments("Token", [{
         name: payload.itemData[0].name,

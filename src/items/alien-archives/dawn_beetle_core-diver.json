@@ -612,14 +612,20 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d10+15",
-              "piercing"
-            ],
-            [
-              "1d10",
-              "fire"
-            ]
+            {
+              "formula": "2d10+15",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            },
+            {
+              "formula": "1d10",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -832,14 +838,20 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d6+15",
-              "slashing"
-            ],
-            [
-              "1d10",
-              "fire"
-            ]
+            {
+              "formula": "2d6+15",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            },
+            {
+              "formula": "1d10",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1027,10 +1039,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "11d6",
-              "fire"
-            ]
+            {
+              "formula": "11d6",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

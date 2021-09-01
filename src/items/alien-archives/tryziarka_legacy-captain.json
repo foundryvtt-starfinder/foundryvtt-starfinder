@@ -612,10 +612,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "3d6+13",
-              "slashing"
-            ]
+            {
+              "formula": "3d6+13",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -828,10 +831,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "4d4+12",
-              "fire"
-            ]
+            {
+              "formula": "4d4+12",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1459,10 +1465,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d10",
-              ""
-            ]
+            {
+              "formula": "2d10",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1828,18 +1835,27 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d4+1",
-              "force"
-            ],
-            [
-              "1d4+1",
-              "force"
-            ],
-            [
-              "1d4+1",
-              "force"
-            ]
+            {
+              "formula": "1d4+1",
+              "types": {
+                "force": true
+              },
+              "operator": ""
+            },
+            {
+              "formula": "1d4+1",
+              "types": {
+                "force": true
+              },
+              "operator": ""
+            },
+            {
+              "formula": "1d4+1",
+              "types": {
+                "force": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1932,10 +1948,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8 + @abilities.wis.mod",
-              "healing"
-            ]
+            {
+              "formula": "1d8 + @abilities.wis.mod",
+              "types": {
+                "healing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

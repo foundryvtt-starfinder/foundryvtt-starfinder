@@ -52,16 +52,24 @@
     "chatFlavor": "Boost 1d4",
     "critical": {
       "parts": [
-        ""
+        {
+          "formula": "",
+          "types": {},
+          "operator": ""
+        }
       ],
       "effect": "Knockdown"
     },
     "damage": {
       "parts": [
-        [
-          "1d8",
-          "electricity+fire"
-        ]
+        {
+          "formula": "1d8",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

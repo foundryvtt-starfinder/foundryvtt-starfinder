@@ -72,19 +72,25 @@
     "chatFlavor": "",
     "critical": {
       "parts": [
-        [
-          "1d4",
-          "electricity"
-        ]
+        {
+          "formula": "1d4",
+          "types": {
+            "electricity": true
+          },
+          "operator": ""
+        }
       ],
       "effect": "Arc 1d4"
     },
     "damage": {
       "parts": [
-        [
-          "1d12 + @abilities.str.mod",
-          "electricity"
-        ]
+        {
+          "formula": "1d12 + @abilities.str.mod",
+          "types": {
+            "electricity": true
+          },
+          "operator": ""
+        }
       ]
     },
     "formula": "",

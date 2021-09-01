@@ -763,18 +763,22 @@
         "critical": {
           "effect": "1d6 burn",
           "parts": [
-            [
-              "1d6",
-              ""
-            ]
+            {
+              "formula": "1d6",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "damage": {
           "parts": [
-            [
-              "3d6+8",
-              "fire"
-            ]
+            {
+              "formula": "3d6+8",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1027,19 +1031,24 @@
         "chatFlavor": "Powered",
         "critical": {
           "parts": [
-            [
-              "1d8",
-              ""
-            ]
+            {
+              "formula": "1d8",
+              "types": {},
+              "operator": ""
+            }
           ],
           "effect": "Bleed"
         },
         "damage": {
           "parts": [
-            [
-              "2d6 + 14",
-              "slashing+sonic"
-            ]
+            {
+              "formula": "2d6 + 14",
+              "types": {
+                "slashing": true,
+                "sonic": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",

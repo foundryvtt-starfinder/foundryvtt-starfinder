@@ -626,47 +626,32 @@
             "UPBs": "UPBs"
         },
         "Cybernetic": "サイバー化",
-        "Damage": "ダメージ",
-        "DamageReduction": "ダメージ抵抗",
-        "DamageTypesAcid": "[酸]",
-        "DamageTypesAcidAndBludgeoning": "[酸] & [殴打]",
-        "DamageTypesAcidAndElectricity": "[酸] & [電気]",
-        "DamageTypesAcidAndFire": "[酸] & [火]",
-        "DamageTypesAcidAndPiercing": "[酸] & [刺突]",
-        "DamageTypesAcidAndSlashing": "[酸] & [斬撃]",
-        "DamageTypesAcidOrFire": "[酸] | [火]",
-        "DamageTypesAcidOrSlashing": "[酸] | [斬撃]",
-        "DamageTypesBludgeoning": "[殴打]",
-        "DamageTypesBludgeoningAndCold": "[殴打] & [冷気]",
-        "DamageTypesBludgeoningAndElectricity": "[殴打] & [電気]",
-        "DamageTypesBludgeoningAndFire": "[殴打] & [火]",
-        "DamageTypesBludgeoningAndSonic": "[殴打] & [音波]",
-        "DamageTypesCold": "[冷気]",
-        "DamageTypesColdAndPiercing": "[冷気] & [刺突]",
-        "DamageTypesColdAndSlashing": "[冷気] & [斬撃]",
-        "DamageTypesColdOrFire": "[冷気] | [火]",
-        "DamageTypesElectricity": "[電気]",
-        "DamageTypesElectricityAndFire": "[電気] & [火]",
-        "DamageTypesElectricityAndPiercing": "[電気] & [刺突]",
-        "DamageTypesElectricityAndSlashing": "[電気] & [斬撃]",
-        "DamageTypesFire": "[火]",
-        "DamageTypesFireAndForce": "[火] & [力場]",
-        "DamageTypesFireAndPiercing": "[火] & [刺突]",
-        "DamageTypesFireAndSlashing": "[火] & [斬撃]",
-        "DamageTypesFireOrSlashing": "[火] | [斬撃]",
-        "DamageTypesFireOrSonic": "[火] | [音波]",
-        "DamageTypesForce": "[力場]",
-        "DamageTypesNonlethal": "Nonlethal",
-        "DamageTypesPiercing": "[刺突]",
-        "DamageTypesPiercingAndSonic": "[刺突] & [音波]",
-        "DamageTypesRadiation": "Radiation",
-        "DamageTypesSlashing": "[斬撃]",
-        "DamageTypesSlashingAndPiercing": "[刺突] & [音波]",
-        "DamageTypesSlashingAndSonic": "[斬撃] & [音波]",
-        "DamageTypesSonic": "[音波]",
-        "DamImm": "ダメージ完全耐性",
-        "DamRes": "エネルギー抵抗",
-        "DamVuln": "脆弱性",
+        "Damage": {
+            "Immunities": "ダメージ完全耐性",
+            "Reduction": "ダメージ抵抗",
+            "Resistances": "エネルギー抵抗",
+            "Title": "ダメージ",            
+            "Types": {
+                "Acid": "[酸]",
+                "Bludgeoning": "[殴打]",
+                "Cold": "[冷気]",
+                "Electricity": "[電気]",
+                "Fire": "[火]",
+                "Force": "[力場]",
+                "Hint": "This is a list of damage types that apply to this damage roll.",
+                "Nonlethal": "Nonlethal",
+                "Piercing": "[刺突]",
+                "Radiation": "Radiation",
+                "Slashing": "[斬撃]",
+                "Sonic": "[音波]",
+                "Title": "ダメージタイプ",
+                "Operators": {
+                    "And": "and",
+                    "Or": "or"
+                }
+            },
+            "Vulnerabilities": "脆弱性"
+        },
         "Description": "説明",
         "DescriptionShort": "Short Description",
         "Details": "詳細",
@@ -1516,7 +1501,8 @@
                 "NamePlaceHolderText": "キャラクター名",
                 "RaceAndGraftsPlaceHolderText": "性別, 種族, クラス, 収賄など",
                 "SourcePlaceHolderText": "参照元",
-                "TypePlaceHolderText": "タイプ (サブタイプ)"
+                "SubtypePlaceHolderText": "サブタイプ",
+                "TypePlaceHolderText": "タイプ"
             },
             "Interface": {
                 "Conditions": {
@@ -1560,15 +1546,30 @@
         "RepairDroneDialogTitle": "ドローンの修理",
         "RepairDroneUnnecessary": "{name} は､すでに最大HPに達しているため修理の必要はありません。",
         "Resolve": "ＲＰ",
-        "RestButton": "休憩する",
-        "RestCancel": "キャンセル",
-        "RestL": "大休憩",
-        "RestS": "小休憩",
-        "RestSActionHeader": "RPを１点消費しますか？",
-        "RestSChatMessage": "{name} は１０分の小休憩を取ります。",
-        "RestSChatMessageRestored": "{name} は１０分の小休憩をとり、{spentRP} RPを費やして {regainedSP} SPを回復しました。",
-        "RestSDescription": "小休憩しますか？ 小休憩時に１点のRPを費やして、全てのSPが回復できます。",
-        "RestSTitle": "１０分の小休憩",
+        "Rest": {
+            "Button": "休憩する",
+            "Cancel": "キャンセル",
+            "Long": {
+                "ChatMessage": {
+                    "Content": "{name} takes a night's rest and recovers {deltaHP} Hit points, {deltaSP} Stamina points, and {deltaRP} Resolve points."
+                },
+                "Dialog": {
+                    "Title": "Night's Rest",
+                    "Description": "<p>Take a night's rest?</p><p>On a night's rest you will recover 1 hit point per character level, all stamina points, all resolve points, class resources, limited use item charges, and spell slots.</p>"
+                },
+                "Title": "大休憩"
+            },
+            "Short": {
+                "ActionHeader": "RPを１点消費しますか？",
+                "ChatMessage": {
+                    "Message": "{name} は１０分の小休憩を取ります。",
+                    "Restored": "{name} は１０分の小休憩をとり、{spentRP} RPを費やして {regainedSP} SPを回復しました。"
+                },
+                "DialogDescription": "小休憩しますか？ 小休憩時に１点のRPを費やして、全てのSPが回復できます。",
+                "DialogTitle": "１０分の小休憩",
+                "Title": "小休憩"
+            }
+        },
         "Rolls": {
             "AttackRoll": "Attack Roll",
             "AttackRollFull": "Attack Roll - {name}",
@@ -1598,17 +1599,27 @@
                 "SituationalBonusTooltip": "Are there any additional bonuses that apply to this roll? (For example, range increments)"
             },
             "Dice": {
+                "AbilityCheckTitle": "Ability Check - {label}",
                 "Advantage": "Advantage",
                 "AdvantageTooltip": "Roll with advantage.",
                 "CriticalDamage": "Critical",
                 "CriticalDamageTooltip": "Roll critical damage.",
+                "CriticalEffect": "Critical Effect: {criticalEffect}",
+                "CriticalFlavor": "{title} (Critical)",
+                "CriticalFlavorWithEffect": "{title} (Critical; {criticalEffect})",
+                "CriticalHit": "Critical Hit",
                 "Disadvantage": "Disadvantage",
                 "DisadvantageTooltip": "Roll with disadvantage.",
+                "Formula": {
+                    "AdditionalBonus": " {bonus} [Additional Bonus]"
+                },
                 "Normal": "Normal",
                 "NormalDamage": "Normal",
                 "NormalDamageTooltip": "Roll normal damage.",
                 "NormalTooltip": "Normal roll.",
-                "Roll": "Roll"
+                "Roll": "Roll",
+                "SaveTitle": "Save - {label}",
+                "SkillCheckTitle": "Skill Check - {skill}"
             },
             "HealingRoll": "Healing Roll",
             "HealingRollFull": "Healing Roll - {name}",

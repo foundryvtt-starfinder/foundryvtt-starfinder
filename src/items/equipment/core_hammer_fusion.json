@@ -71,19 +71,27 @@
     "chatFlavor": "",
     "critical": {
       "parts": [
-        [
-          "4d6",
-          "electricity+fire"
-        ]
+        {
+          "formula": "4d6",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ],
       "effect": "Jet 4d6"
     },
     "damage": {
       "parts": [
-        [
-          "6d6 + @abilities.str.mod",
-          "electricity+fire"
-        ]
+        {
+          "formula": "6d6 + @abilities.str.mod",
+          "types": {
+            "electricity": true,
+            "fire": true
+          },
+          "operator": "and"
+        }
       ]
     },
     "formula": "",

@@ -596,19 +596,27 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d4",
-              "acid+piercing"
-            ]
+            {
+              "formula": "1d4",
+              "types": {
+                "acid": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": "Corrode"
         },
         "damage": {
           "parts": [
-            [
-              "1d6+7",
-              "acid+piercing"
-            ]
+            {
+              "formula": "1d6+7",
+              "types": {
+                "acid": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -794,10 +802,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6+7",
-              "slashing"
-            ]
+            {
+              "formula": "1d6+7",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -983,10 +994,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6+1",
-              "acid"
-            ]
+            {
+              "formula": "1d6+1",
+              "types": {
+                "acid": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

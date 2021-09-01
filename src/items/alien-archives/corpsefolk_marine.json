@@ -510,19 +510,27 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              null,
-              "bludgeoning+sonic"
-            ]
+            {
+              "formula": null,
+              "types": {
+                "bludgeoning": true,
+                "sonic": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": ""
         },
         "damage": {
           "parts": [
-            [
-              "2d6+9",
-              "bludgeoning+sonic"
-            ]
+            {
+              "formula": "2d6+9",
+              "types": {
+                "bludgeoning": true,
+                "sonic": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -704,19 +712,27 @@
         "chatFlavor": "Corrode [[2d4]]",
         "critical": {
           "parts": [
-            [
-              "2d4",
-              "acid+piercing"
-            ]
+            {
+              "formula": "2d4",
+              "types": {
+                "acid": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": "Corrode"
         },
         "damage": {
           "parts": [
-            [
-              "2d8+9",
-              "acid+piercing"
-            ]
+            {
+              "formula": "2d8+9",
+              "types": {
+                "acid": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -902,10 +918,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d6",
-              "piercing"
-            ]
+            {
+              "formula": "2d6",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

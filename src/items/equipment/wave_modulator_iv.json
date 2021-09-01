@@ -75,10 +75,14 @@
     },
     "damage": {
       "parts": [
-        [
-          "2d8",
-          "fire|sonic"
-        ]
+        {
+          "formula": "2d8",
+          "types": {
+            "fire": true,
+            "sonic": true
+          },
+          "operator": "or"
+        }
       ]
     },
     "formula": "",

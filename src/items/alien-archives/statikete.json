@@ -688,19 +688,27 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "discharge",
-              "electricity+piercing"
-            ]
+            {
+              "formula": "discharge",
+              "types": {
+                "electricity": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ],
           "effect": "Energy"
         },
         "damage": {
           "parts": [
-            [
-              "8d6+20",
-              "electricity+piercing"
-            ]
+            {
+              "formula": "8d6+20",
+              "types": {
+                "electricity": true,
+                "piercing": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -823,19 +831,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              null,
-              "electricity"
-            ]
+            {
+              "formula": null,
+              "types": {
+                "electricity": true
+              },
+              "operator": ""
+            }
           ],
           "effect": ""
         },
         "damage": {
           "parts": [
-            [
-              "5d8+15",
-              "electricity"
-            ]
+            {
+              "formula": "5d8+15",
+              "types": {
+                "electricity": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

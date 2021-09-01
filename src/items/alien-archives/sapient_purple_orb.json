@@ -680,10 +680,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d4+4",
-              "bludgeoning"
-            ]
+            {
+              "formula": "1d4+4",
+              "types": {
+                "bludgeoning": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -781,10 +784,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "2d6",
-              "force"
-            ]
+            {
+              "formula": "2d6",
+              "types": {
+                "force": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -877,10 +883,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "4d10",
-              ""
-            ]
+            {
+              "formula": "4d10",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -973,10 +980,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8 + @abilities.wis.mod",
-              "healing"
-            ]
+            {
+              "formula": "1d8 + @abilities.wis.mod",
+              "types": {
+                "healing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

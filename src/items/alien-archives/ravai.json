@@ -593,10 +593,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8+6",
-              "electricity+fire"
-            ]
+            {
+              "formula": "1d8+6",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -801,19 +805,26 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d4",
-              "fire"
-            ]
+            {
+              "formula": "1d4",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Burn 1d4"
         },
         "damage": {
           "parts": [
-            [
-              "2d6+5",
-              "electricity+fire"
-            ]
+            {
+              "formula": "2d6+5",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -998,10 +1009,14 @@
         },
         "damage": {
           "parts": [
-            [
-              "6d8",
-              "electricity+fire"
-            ]
+            {
+              "formula": "6d8",
+              "types": {
+                "electricity": true,
+                "fire": true
+              },
+              "operator": "and"
+            }
           ]
         },
         "formula": "",
@@ -1075,10 +1090,11 @@
         },
         "damage": {
           "parts": [
-            [
-              "6d6",
-              ""
-            ]
+            {
+              "formula": "6d6",
+              "types": {},
+              "operator": ""
+            }
           ]
         },
         "formula": "",

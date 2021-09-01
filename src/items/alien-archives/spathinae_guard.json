@@ -608,10 +608,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d8 + 2",
-              "slashing"
-            ]
+            {
+              "formula": "1d8 + 2",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -822,18 +825,24 @@
         "critical": {
           "effect": "Burn",
           "parts": [
-            [
-              "1d6",
-              "fire"
-            ]
+            {
+              "formula": "1d6",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "damage": {
           "parts": [
-            [
-              "1d8+1",
-              "fire"
-            ]
+            {
+              "formula": "1d8+1",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",

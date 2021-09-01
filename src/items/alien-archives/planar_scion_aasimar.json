@@ -591,10 +591,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6 + @mod",
-              "slashing"
-            ]
+            {
+              "formula": "1d6 + @mod",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -800,19 +803,25 @@
         "chatFlavor": "",
         "critical": {
           "parts": [
-            [
-              "1d4",
-              "fire"
-            ]
+            {
+              "formula": "1d4",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ],
           "effect": "Burn"
         },
         "damage": {
           "parts": [
-            [
-              "1d4+1",
-              "fire"
-            ]
+            {
+              "formula": "1d4+1",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
@@ -1023,10 +1032,13 @@
         },
         "damage": {
           "parts": [
-            [
-              "1d6",
-              "piercing"
-            ]
+            {
+              "formula": "1d6",
+              "types": {
+                "piercing": true
+              },
+              "operator": ""
+            }
           ]
         },
         "formula": "",
