@@ -58,9 +58,9 @@ export const ActorRestMixin = (superclass) => class extends superclass {
 
         // Notify chat what happened
         if (chat) {
-            let msg = game.i18n.format("SFRPG.RestSChatMessage", { name: this.name });
+            let msg = game.i18n.format("SFRPG.Rest.Short.ChatMessage.Message", { name: this.name });
             if (drp > 0) {
-                msg = game.i18n.format("SFRPG.RestSChatMessageRestored", { name: this.name, spentRP: drp, regainedSP: dsp });
+                msg = game.i18n.format("SFRPG.Rest.Short.ChatMessage.Restored", { name: this.name, spentRP: drp, regainedSP: dsp });
             }
             
             ChatMessage.create({
