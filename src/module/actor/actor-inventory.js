@@ -383,7 +383,7 @@ export function computeCompoundBulkForItem(item, contents) {
             let storageIndex = item.data.container.storage.indexOf(storage);
             let storageBulk = 0;
 
-            let storedItems = contents.filter(x => item.data.container.contents.find(y => y.id === x.item.id && y.index === storageIndex));
+            let storedItems = contents.filter(x => item.data.container.contents.find(y => y.id === x.item._id && y.index === storageIndex));
             if (storage.affectsEncumbrance) {
                 for (let child of storedItems) {
                     let childBulk = computeCompoundBulkForItem(child.item, child.contents);
