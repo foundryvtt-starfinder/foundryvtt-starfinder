@@ -54,7 +54,11 @@
                 {{/if}}
             </div>
 
-            <div class="spell-comps">{{labels.components}}</div>
+            <div class="spell-comps">
+                {{#if item.data.concentration }}
+                <span class="spell-component"data-tippy-content="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
+                {{/if}}
+            </div>
             <div class="spell-school">{{localize labels.school}}</div>
             <div class="spell-action">{{labels.activation}}</div>
 
