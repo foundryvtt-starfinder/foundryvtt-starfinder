@@ -113,6 +113,8 @@
                             {{lookup ../../config.weaponProperties modifier.valueAffected}}
                         {{else if (eq modifier.effectType "specific-speed")}}
                             {{lookup ../../config.speeds modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "actor-resource")}}
+                            <h4>{{~modifier.valueAffected~}}</h4>
                         {{else}}
                         {{!-- Nothing --}}
                         {{/if}}

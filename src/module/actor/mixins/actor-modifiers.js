@@ -165,6 +165,12 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                     }
                     break;
 
+                case "actorResource":
+                    if (itemData.enabled && itemData.type && itemData.subType && (itemData.base || itemData.base === 0)) {
+                        modifiersToConcat = itemModifiers;
+                    }
+                    break;
+
                 // Everything else
                 default:
                     if (!itemData.equippable || itemData.equipped) {

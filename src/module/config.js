@@ -1018,7 +1018,8 @@ SFRPG.modifierEffectTypes = {
     "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance",
     "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
     "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
-    "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds"
+    "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
+    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource"
 };
 
 SFRPG.modifierType = {

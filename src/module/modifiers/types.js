@@ -53,7 +53,8 @@ export const SFRPGEffectType = Object.freeze({
     SPELL_RESISTANCE: "spell-resistance",
     DAMAGE_REDUCTION: "damage-reduction",
     BULK: "bulk",
-    BULK_CALCULATION: "bulk-calculation"
+    BULK_CALCULATION: "bulk-calculation",
+    ACTOR_RESOURCE: "actor-resource"
 });
 
 export const SFRPGModifierType = Object.freeze({

@@ -3,7 +3,7 @@
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>
                     {{#if item.data.isFree}}[{{localize "SFRPG.DroneSheet.Features.ModsFree"}}] {{/if}}
-                    {{#if prefixTable}}
+                    {{#if (and prefixTable (lookup prefixTable item.type))}}
                     {{ lookup prefixTable item.type }}: 
                     {{/if}}
                     {{item.name}}

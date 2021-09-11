@@ -66,7 +66,8 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             cargo: { label: cargoLabel, items: [], dataset: { type: "goods" } }
         };
 
-        let [items, feats, chassis, mods, conditionItems] = data.items.reduce((arr, item) => {
+        //   0      1      2        3     4               5
+        let [items, feats, chassis, mods, conditionItems, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
@@ -83,17 +84,18 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
             if (item.type === "feat") {
                 if ((item.data.requirements?.toLowerCase() || "") === "condition") {
-                    arr[4].push(item);
+                    arr[4].push(item); // conditionItems
                 } else {
-                    arr[1].push(item);
+                    arr[1].push(item); // feats
                 }
                 item.isFeat = true;
             }
-            else if (item.type === "chassis") arr[2].push(item);
-            else if (item.type === "mod") arr[3].push(item);
-            else arr[0].push(item);
+            else if (item.type === "chassis") arr[2].push(item); // chassis
+            else if (item.type === "mod") arr[3].push(item); // mods
+            else if (item.type === "actorResource") arr[5].push(item); // actorResources
+            else arr[0].push(item); // items
             return arr;
-        }, [[], [], [], [], []]);
+        }, [[], [], [], [], [], []]);
         
         let totalWeight = 0;
         let totalValue = 0;
@@ -175,7 +177,8 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             mods: { label: modsLabel, items: mods, hasActions: false, dataset: { type: "mod" } },
             _featsHeader: { label: featsLabel, items: [], hasActions: false, dataset: { } },
             active: { label: activeFeatsLabel, items: activeFeats, hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: passiveFeatsLabel, items: passiveFeats, hasActions: false, dataset: { type: "feat" } }
+            passive: { label: passiveFeatsLabel, items: passiveFeats, hasActions: false, dataset: { type: "feat" } },
+            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         };
 
         data.inventory = Object.values(inventory);

@@ -22,6 +22,7 @@ import stackModifiers                   from './rules/actions/modifiers/stack-mo
 import logToConsole                     from './rules/actions/log.js';
 import clearTooltips                    from './rules/actions/actor/clear-tooltips.js';
 import calculateAbilityCheckModifiers   from './rules/actions/actor/calculate-ability-check-modifiers.js';
+import calculateActorResources          from './rules/actions/actor/calculate-actor-resources.js';
 import calculateArmorModifiers          from './rules/actions/actor/calculate-armor-modifiers.js';
 import calculateBaseAttackBonusModifier from './rules/actions/actor/calculate-bab-modifier.js';
 import calculateBaseAbilityModifier     from './rules/actions/actor/calculate-base-ability-modifier.js';
@@ -92,6 +93,7 @@ export default function (engine) {
     // Actor actions
     clearTooltips(engine);
     calculateBaseAbilityScore(engine);
+    calculateActorResources(engine);
     calculateBaseAbilityModifier(engine);
     calculateBaseArmorClass(engine);
     calculateArmorModifiers(engine);
@@ -179,6 +181,7 @@ export default function (engine) {
                     "calculateCharacterLevel",
                     "calculateClasses",
                     "calculateTraits",
+                    { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateBaseArmorClass",
@@ -211,6 +214,7 @@ export default function (engine) {
                     "calculateDroneChassis",
                     "calculateDroneMods",
                     "calculateDroneEquipment",
+                    { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateDroneSkills",
@@ -239,6 +243,7 @@ export default function (engine) {
                     "clearTooltips",
                     "calculateNpcXp",
                     "calculateClasses",
+                    { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     "calculateNpcAbilityValue",
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" }
@@ -248,6 +253,7 @@ export default function (engine) {
                 when: { closure: "isActorType", type: "starship" },
                 then: [
                     "calculateStarshipFrame",
+                    { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     "calculateStarshipCrew",
                     "calculateStarshipCritThreshold",
                     "calculateStarshipDrift",
@@ -265,11 +271,12 @@ export default function (engine) {
             {
                 when: { closure: "isActorType", type: "vehicle" },
                 then: [
-                        "calculateVehicleControlSkill",
-                        "calculateVehicleHangar",
-                        "calculateVehiclePassengers",
-                        "identity"
-                    ]
+                    { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
+                    "calculateVehicleControlSkill",
+                    "calculateVehicleHangar",
+                    "calculateVehiclePassengers",
+                    "identity"
+                ]
             }
         ]
     });

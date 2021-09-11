@@ -62,7 +62,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             physicalInventoryItems = physicalInventoryItems.concat(types);
         }
 
-        let [items, spells, feats, classes, races, themes, archetypes, conditionItems, asis] = data.items.reduce((arr, item) => {
+        //   0      1       2      3        4      5       6           7               8     9
+        let [items, spells, feats, classes, races, themes, archetypes, conditionItems, asis, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
@@ -80,28 +81,29 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             if (item.type === "spell") {
                 const container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
-                    arr[1].push(item);
+                    arr[1].push(item); // spells
                 } else {
-                    arr[0].push(item);
+                    arr[0].push(item); // items
                 }
             }
             else if (item.type === "feat") {
                 if ((item.data.requirements?.toLowerCase() || "") === "condition") {
-                    arr[7].push(item);
+                    arr[7].push(item); // conditionItems
                 } else {
-                    arr[2].push(item);
+                    arr[2].push(item); // feats
                 }
                 item.isFeat = true;
             }
-            else if (item.type === "class") arr[3].push(item);
-            else if (item.type === "race") arr[4].push(item);
-            else if (item.type === "theme") arr[5].push(item);
-            else if (item.type === "archetypes") arr[6].push(item);
-            else if (item.type === "asi") arr[8].push(item);
-            else if (physicalInventoryItems.includes(item.type)) arr[0].push(item);
-            else arr[0].push(item);
+            else if (item.type === "class") arr[3].push(item); // classes
+            else if (item.type === "race") arr[4].push(item); // races
+            else if (item.type === "theme") arr[5].push(item); // themes
+            else if (item.type === "archetypes") arr[6].push(item); // archetypes
+            else if (item.type === "asi") arr[8].push(item); // asis
+            else if (item.type === "actorResource") arr[9].push(item); // asis
+            else if (physicalInventoryItems.includes(item.type)) arr[0].push(item); // items
+            else arr[0].push(item); // items
             return arr;
-        }, [[], [], [], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], [], [], []]);
         
         const spellbook = this._prepareSpellbook(data, spells);
 
@@ -194,7 +196,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             asi: { label: game.i18n.format("SFRPG.Items.Categories.AbilityScoreIncrease"), items: asis, hasActions: false, dataset: { type: "asi" }, isASI: true },
             archetypes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Archetypes"), items: [], dataset: { type: "archetypes" }, isArchetype: true },
             active: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActiveFeats"), items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.PassiveFeats"), items: [], hasActions: false, dataset: { type: "feat" } }
+            passive: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.PassiveFeats"), items: [], hasActions: false, dataset: { type: "feat" } },
+            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: [], hasActions: false, dataset: { type: "actorResource" } }
         };
 
         for (let f of feats) {
@@ -207,6 +210,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         features.race.items = races;
         features.theme.items = themes;
         features.archetypes.items = archetypes;
+        features.resources.items = actorResources;
 
         data.inventory = Object.values(inventory);
         data.spellbook = spellbook;

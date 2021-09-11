@@ -9,6 +9,7 @@
     },
     "ITEM": {
         "TypeAmmunition": "Ammunition",
+        "TypeActorresource": "Actor Resource",
         "TypeArchetypes": "Arquetipo",
         "TypeAsi": "Incremento Valor Habilidade",
         "TypeAugmentation": "Acréscimo",
@@ -149,6 +150,7 @@
             "Features": {
                 "Categories": {
                     "ActiveFeats": "Talentos Ativos",
+                    "ActorResources": "Actor Resources",
                     "Archetypes": "Arquetipos",
                     "Classes": "Classes",
                     "PassiveFeats": "Talentos Passivos",
@@ -262,6 +264,7 @@
             },
             "Modifiers": {
                 "EffectTypes": {
+                    "ActorResource": "Actor Resource",
                     "AllAttackDamage": "Todo dano de Ataque",
                     "AllAttackRolls": "Toda rolagem de Ataque",
                     "AllSpeeds": "All Speeds",
@@ -1151,6 +1154,31 @@
                 "Instruction": "* escolha 4 habilidades para aumentar.",
                 "ItemName": "Incremento Valor Habilidade: Nível {level}",
                 "Label": "Habilidades"
+            },
+            "ActorResource": {
+                "Base": "Base value",
+                "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
+                "Enabled": "Enabled",
+                "EnabledTooltip": "If unchecked this resource will not produce a key in the resources data format, nor will it have automation running on it.",
+                "ErrorMissingFields": "Please fill in any of the missing fields.",
+                "ErrorNoBase": "Base value is a required field.",
+                "ErrorNoSubType": "Subtype is a required field.",
+                "ErrorNoType": "Type is a required field.",
+                "Header": "Resource Properties",
+                "Range": "Value range",
+                "RangeTooltip": "(Optional) Minimum and maximum values for this resource.<br/>The value cannot be lower than the range minimum, nor can it be higher than the range maximum.",
+                "RangeMode": "Range mode",
+                "RangeModeImmediate": "Immediate",
+                "RangeModePost": "Post",
+                "RangeModeTooltip": "(Advanced) Defines whether the range limitations are applied only after the modifiers are all processed, or for each modifier as they are being processed.<br/><br/>For example, if the range is set to maximum of 1, and the base value is 0, and you have a modifier of +2, and a modifier of -1, the different modes would work as follows:<br/><br/>Post: 0 + 2 - 1 would output 1, which does not exceed the range maximum.<br/><br/>Immediate: 0 + 2 - 1 would output 0. Because 0 + 2 is 2, which exceeds the range maximum of 1, so it gets clamped to 1. Then -1 is applied, producing 0.",
+                "SubType": "Subtype",
+                "SubTypeTooltip": "(Required) Subtype makes up the second half of the resource identifier.<br/>For example: @resources.type.subtype.value",
+                "Type": "Type",
+                "TypeTooltip": "(Required) Type makes up the first half of the resource identifier.<br/>For example: @resources.type.subtype.value",
+                "Usage": "Attribute usage",
+                "UsageBaseValue": "Base value",
+                "UsageComputedValue": "Computed value",
+                "UsageTooltip": "What follows are a couple of example attributes how you may be able to access this resource in formulas:"
             },
             "Consumables": {
                 "Category": "Tipo Consumíveis"
@@ -2198,6 +2226,10 @@
         "TempHPMaxPlaceHolderText": "+Max",
         "TempHPPlaceHolderText": "+Temp",
         "ThemePlaceHolderText": "Tema",
+        "Tippy": {
+            "Attributes": "Attributes:",
+            "ErrorNoTitle": "You must define a title for the tooltip."
+        },
         "ToggleSkillsButtonLabel": "Mostrar/Ocultar Perícias",
         "Touch": "Toque",
         "TraitArmorProf": "Proficiencia Armadura",

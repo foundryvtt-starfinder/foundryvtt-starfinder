@@ -428,6 +428,11 @@ function setupHandlebars() {
         return v1 / v2;
     });
 
+    Handlebars.registerHelper("isNull", function (value) {
+        if (value === 0) return false;
+        return !Boolean(value);
+    });
+
     Handlebars.registerHelper('greaterThan', function (v1, v2, options) {
         'use strict';
         if (v1 > v2) {
@@ -520,5 +525,61 @@ function setupHandlebars() {
         const editable = Boolean(options.hash['editable']);
         if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
         return new Handlebars.SafeString(editor[0].outerHTML);
+    });
+
+    Handlebars.registerHelper('createTippy', function (options) {
+        const title = options.hash['title'];
+        const subtitle = options.hash['subtitle'];
+        const attributes = options.hash['attributes'];
+        const tooltips = options.hash['tooltips'];
+        if ( !title ) {
+            console.stack();
+            throw new Error(game.i18n.localize("SFRPG.Tippy.ErrorNoTitle"));
+        }
+
+        let html = "data-tippy-content=\"<strong>" + game.i18n.localize(title) + "</strong>";
+        if (subtitle) {
+            html += "<br/>" + game.i18n.localize(subtitle);
+        }
+        if (attributes) {
+            const printableAttributes = [];
+            if (attributes instanceof Array) {
+                for(const attrib of attributes) {
+                    printableAttributes.push(attrib);
+                }
+            } else if (attributes instanceof Object) {
+                for (const key of Object.keys(attributes)) {
+                    printableAttributes.push(key);
+                }
+            } else {
+                printableAttributes.push(attributes);
+            }
+            if (printableAttributes.length > 0) {
+                html += "<br/><br/>" + game.i18n.localize("SFRPG.Tippy.Attributes");
+                for (const attrib of printableAttributes) {
+                    html += "<br/>" + attrib;
+                }
+            }
+        }
+        if (tooltips) {
+            const printabletooltips = [];
+            if (tooltips instanceof Array) {
+                for(const tooltip of tooltips) {
+                    printabletooltips.push(tooltip);
+                }
+            } else {
+                printabletooltips.push(tooltips);
+            }
+            if (printabletooltips.length > 0) {
+                html += "<br/>";
+                for (const attrib of printabletooltips) {
+                    html += "<br/>" + attrib;
+                }
+            }
+        }
+
+        html += "\"";
+
+        return new Handlebars.SafeString(html);
     });
 }

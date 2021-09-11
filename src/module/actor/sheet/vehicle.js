@@ -78,22 +78,23 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             inventory: { label: game.i18n.localize("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
         };
 
-        //   0        1               3
-        let [attacks, primarySystems, expansionBays] = data.items.reduce((arr, item) => {
+        //   0        1               2              3
+        let [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
             if (item.type === "weapon" || item.type === "vehicleAttack") {
-                arr[0].push(item);
+                arr[0].push(item); // attacks
             }
             else if (item.type === "vehicleSystem") {
 
                 item.isVehicleSystem = true;
-                arr[1].push(item);
+                arr[1].push(item); // primarySystems
             }
-            else if (item.type === "starshipExpansionBay") arr[2].push(item);
+            else if (item.type === "starshipExpansionBay") arr[2].push(item); // expansionBays
+            else if (item.type === "actorResource") arr[3].push(item); // actorResources
 
             return arr;
-        }, [ [], [], [] ]);
+        }, [ [], [], [], []]);
 
         this.processItemContainment(attacks, function (itemType, itemData) {
             // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
@@ -109,6 +110,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const features = {
             primarySystems: { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.PrimarySystems"), items: primarySystems, hasActions: true, dataset: { type: "vehicleSystem" } },
             expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
+            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         };
         data.features = Object.values(features);
     }
@@ -211,7 +213,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             if (rawItemData.type === "weapon" || rawItemData.type === "vehicleAttack") {
                 return this.processDroppedData(event, data);
             }
-            else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem") {
+            else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem" || rawItemData.type === "actorResource") {
                 return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             }
         }

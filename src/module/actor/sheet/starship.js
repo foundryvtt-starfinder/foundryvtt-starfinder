@@ -7,7 +7,7 @@ import { ChoiceDialog } from "../../apps/choice-dialog.js";
  * @type {ActorSheetSFRPG}
  */
 export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
-    static AcceptedEquipment = "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory";
+    static AcceptedEquipment = "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory,actorResource";
 
     static StarshipActionsCache = null;
 
@@ -222,8 +222,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             "starshipShield"
         ];
 
-        //   0        1          2    3     4       5          6      7           8          9               10            11               12             13
-        let [forward, starboard, aft, port, turret, unmounted, frame, powerCores, thrusters, primarySystems, otherSystems, securitySystems, expansionBays, cargo] = data.items.reduce((arr, item) => {
+        //   0        1          2    3     4       5          6      7           8          9               10            11               12             13     14
+        let [forward, starboard, aft, port, turret, unmounted, frame, powerCores, thrusters, primarySystems, otherSystems, securitySystems, expansionBays, cargo, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
             if (item.type === "starshipWeapon") {
@@ -242,10 +242,11 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             else if (item.type === "starshipOtherSystem") arr[10].push(item);
             else if (item.type === "starshipSecuritySystem") arr[11].push(item);
             else if (item.type === "starshipExpansionBay") arr[12].push(item);
+            else if (item.type === "actorResource") arr[14].push(item);
             else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[13].push(item);
 
             return arr;
-        }, [[], [], [], [], [], [], [], [], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]);
 
         this.processItemContainment(cargo, function (itemType, itemData) {
             inventory.inventory.items.push(itemData);
@@ -311,7 +312,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             primarySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PrimarySystems"), items: primarySystems, hasActions: false, dataset: { type: starshipSystems.join(',') } },
             otherSystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.OtherSystems"), items: otherSystems, hasActions: false, dataset: { type: "starshipOtherSystem" } },
             securitySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.SecuritySystems"), items: securitySystems, hasActions: false, dataset: { type: "starshipSecuritySystem" } },
-            expansionBays: { label: game.i18n.format("SFRPG.StarshipSheet.Features.ExpansionBays", {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } }
+            expansionBays: { label: game.i18n.format("SFRPG.StarshipSheet.Features.ExpansionBays", {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
+            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         };
 
         data.features = Object.values(features);

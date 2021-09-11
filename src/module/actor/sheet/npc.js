@@ -64,10 +64,12 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             weapons: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Attacks"), items: [], hasActions: true, dataset: { type: "weapon,shield", "weapon-type": "natural" }, allowAdd: true },
             actions: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Actions"), items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" }, allowAdd: true },
             passive: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Features"), items: [], dataset: { type: "feat" }, allowAdd: true },
-            activeItems: { label: game.i18n.localize("SFRPG.NPCSheet.Features.ActiveItems"), items: [], dataset: { }, allowAdd: false }
+            activeItems: { label: game.i18n.localize("SFRPG.NPCSheet.Features.ActiveItems"), items: [], dataset: { }, allowAdd: false },
+            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: [], hasActions: false, dataset: { type: "actorResource" } }
         };
 
-        let [spells, other, conditionItems, droneItems] = data.items.reduce((arr, item) => {
+        //   0       1      2               3           4
+        let [spells, other, conditionItems, droneItems, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
@@ -83,25 +85,26 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             }
 
             if (droneItemTypes.includes(item.type)) {
-                arr[3].push(item);
+                arr[3].push(item); // droneItems
             } else if (item.type === "spell") {
                 const container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
-                    arr[0].push(item);
+                    arr[0].push(item); // spells
                 } else {
-                    arr[1].push(item);
+                    arr[1].push(item); // other
                 }
             } else if (item.type === "feat") {
                 if ((item.data.requirements?.toLowerCase() || "") === "condition") {
-                    arr[2].push(item);
+                    arr[2].push(item); // conditionItems
                 } else {
-                    arr[1].push(item);
+                    arr[1].push(item); // other
                 }
                 item.isFeat = true;
             }
-            else arr[1].push(item);
+            else if (item.type === "actorResource") arr[4].push(item); // actorResources
+            else arr[1].push(item); // other
             return arr;
-        }, [[], [], [], []]);
+        }, [[], [], [], [], []]);
 
         // Apply item filters
         spells = this._filterItems(spells, this._filters.spellbook);
@@ -146,6 +149,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 itemsToProcess.push(item);
             }
         }
+
+        features.resources.items = actorResources;
 
         this.processItemContainment(itemsToProcess, function (itemType, itemData) {
             inventory.inventory.items.push(itemData);

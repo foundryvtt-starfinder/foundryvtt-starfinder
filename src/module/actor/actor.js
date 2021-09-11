@@ -5,6 +5,7 @@ import { Mix } from "../utils/custom-mixer.js";
 import { ActorConditionsMixin } from "./mixins/actor-conditions.js";
 import { ActorCrewMixin } from "./mixins/actor-crew.js";
 import { ActorModifiersMixin } from "./mixins/actor-modifiers.js";
+import { ActorResourcesMixin } from "./mixins/actor-resources.js";
 import { ActorRestMixin } from "./mixins/actor-rest.js";
 import { ChoiceDialog } from "../apps/choice-dialog.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
@@ -28,7 +29,7 @@ import { hasDiceTerms } from "../utilities.js";
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
  */
-export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorModifiersMixin, ActorRestMixin) {
+export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
     constructor(data, context) {
         super(data, context);
@@ -66,6 +67,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const mods = items.filter(item => item.type === "mod");
         const armorUpgrades = items.filter(item => item.type === "upgrade");
         const asis = items.filter(item => item.type === "asi");
+        const actorResources = items.filter(item => item.type === "actorResource");
         game.sfrpg.engine.process("process-actors", {
             actorId: this.id,
             actor: this,
@@ -84,7 +86,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             mods,
             armorUpgrades,
             asis,
-            frames
+            frames,
+            actorResources
         });
     }
 

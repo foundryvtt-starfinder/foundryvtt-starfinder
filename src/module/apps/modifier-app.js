@@ -70,6 +70,16 @@ export default class SFRPGModifierApplication extends FormApplication {
             const current = $(event.currentTarget);
             const target = $('.modifier-value-affected select');
             const effectType = current.val();
+            const oldValue = this.object.effectType;
+
+            if (oldValue === SFRPGEffectType.ACTOR_RESOURCE || effectType === SFRPGEffectType.ACTOR_RESOURCE) {
+                const modifierDialog = this;
+                modifierDialog.object.effectType = effectType;
+                this._updateModifierData(modifierDialog.object).then(() => {
+                    modifierDialog.render();
+                });
+                return;
+            }
 
             switch (effectType) {
                 case SFRPGEffectType.ABILITY_SKILLS:
@@ -179,6 +189,8 @@ export default class SFRPGModifierApplication extends FormApplication {
             case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
             case SFRPGEffectType.SPECIFIC_SPEED:
                 valueAffectedElement.prop('disabled', false);
+            case SFRPGEffectType.ACTOR_RESOURCE:
+                valueAffectedElement.prop('disabled', false);
                 break;
             default:
                 valueAffectedElement.prop('disabled', true);
@@ -216,6 +228,10 @@ export default class SFRPGModifierApplication extends FormApplication {
      * @param {Object} formData The data from the form
      */
     _updateObject(event, formData) {
+        this._updateModifierData(formData);
+    }
+
+    async _updateModifierData(formData) {
         const modifiers = duplicate(this.actor.data.data.modifiers);
         const modifier = modifiers.find(mod => mod._id === this.modifier._id);
 
@@ -224,6 +240,6 @@ export default class SFRPGModifierApplication extends FormApplication {
 
         mergeObject(modifier, formData);
         
-        this.actor.update({'data.modifiers': modifiers});
+        return this.actor.update({'data.modifiers': modifiers});
     }
 }
