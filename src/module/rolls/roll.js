@@ -17,20 +17,27 @@
  */
 
 /**
- * A custom implementaion for the foundry {@link Roll} class.
+ * A custom implementation for the foundry {@link Roll} class.
  * 
  * @inheritdoc
  */
 export default class SFRPGRoll extends Roll {
     constructor(formula, data={}, options={}) {
-        super(formula, data, options);
+        const rollData = {
+            formula: formula,
+            data: data,
+            options: options
+        };
+        Hooks.callAll("preRoll", rollData);
+
+        super(rollData.formula, rollData.data, rollData.options);
 
         /** @type {Tag[]} */
-        this.tags = data.tags;
+        this.tags = rollData.data.tags;
         /** @type {string} */
-        this.breakdown = data.breakdown;
+        this.breakdown = rollData.data.breakdown;
         /** @type {HtmlData[]} */
-        this.htmlData = data.htmlData;
+        this.htmlData = rollData.data.htmlData;
     }
 
     /** @inheritdoc */
@@ -41,10 +48,10 @@ export default class SFRPGRoll extends Roll {
     /** @override */
     async render(chatOptions={}) {
         chatOptions = foundry.utils.mergeObject({
-          user: game.user.id,
-          flavor: null,
-          template: this.constructor.CHAT_TEMPLATE,
-          blind: false
+            user: game.user.id,
+            flavor: null,
+            template: this.constructor.CHAT_TEMPLATE,
+            blind: false
         }, chatOptions);
         const isPrivate = chatOptions.isPrivate;
 
@@ -57,17 +64,17 @@ export default class SFRPGRoll extends Roll {
     
         // Define chat data
         const chatData = {
-          formula: isPrivate ? "???" : this._formula,
-          flavor: isPrivate ? null : chatOptions.flavor,
-          user: chatOptions.user,
-          tooltip: isPrivate ? "" : await this.getTooltip(),
-          total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
-          tags: this.tags,
-          breakdown: this.breakdown,
-          htmlData: this.htmlData
+            formula: isPrivate ? "???" : this._formula,
+            flavor: isPrivate ? null : chatOptions.flavor,
+            user: chatOptions.user,
+            tooltip: isPrivate ? "" : await this.getTooltip(),
+            total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
+            tags: this.tags,
+            breakdown: this.breakdown,
+            htmlData: this.htmlData
         };
     
         // Render the roll display template
         return renderTemplate(chatOptions.template, chatData);
-      }
+    }
 }

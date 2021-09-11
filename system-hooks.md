@@ -2,6 +2,25 @@
 
 The Starfinder system has a couple of its own hooks available for module/macro developers.
 
+## General Hooks
+
+### preRoll
+Name: preRoll
+
+Called when: Whenever the system makes a roll.
+
+Arguments: Object with three keys: formula, data, options.
+* formula: String that describes the roll formula.
+* data: Data to be passed along into the roll.
+* options: Options to be passed along into the roll.
+
+Example usage:
+```javascript
+Hooks.on("preRoll", (rollData) => {
+    rollData.formula = rollData.formula + " + 1";
+});
+```
+
 ## Actor Hooks
 
 ### onActorSetCondition
