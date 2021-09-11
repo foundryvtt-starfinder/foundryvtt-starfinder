@@ -4,8 +4,8 @@ The Starfinder system has a couple of its own hooks available for module/macro d
 
 ## General Hooks
 
-### preRoll
-Name: preRoll
+### onBeforeRoll
+Name: onBeforeRoll
 
 Called when: Whenever the system makes a roll.
 
@@ -16,7 +16,7 @@ Arguments: Object with three keys: formula, data, options.
 
 Example usage:
 ```javascript
-Hooks.on("preRoll", (rollData) => {
+Hooks.on("onBeforeRoll", (rollData) => {
     rollData.formula = rollData.formula + " + 1";
 });
 ```

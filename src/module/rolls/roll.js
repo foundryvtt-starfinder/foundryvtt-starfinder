@@ -28,7 +28,7 @@ export default class SFRPGRoll extends Roll {
             data: data,
             options: options
         };
-        Hooks.callAll("preRoll", rollData);
+        Hooks.callAll("onBeforeRoll", rollData);
 
         super(rollData.formula, rollData.data, rollData.options);
 
