@@ -21,8 +21,11 @@ export default function (engine) {
                 return 0;
             }
 
-            let roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
-            let computedBonus = roll.total;
+            let computedBonus = 0;
+            try {
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                computedBonus = roll.total;
+            } catch {}
 
             let mod = 0;
             if (bonus.valueAffected === "acp-light" && hasLightArmor) {
