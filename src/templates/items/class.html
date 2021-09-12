@@ -127,6 +127,58 @@
                 </div>
             </div>
 
+            {{!-- Spellcasting --}}
+            <h4 class="section-header">{{localize "SFRPG.ItemSheet.Class.SpellCasting.Header"}}</h4>
+
+            <div class="form-group">
+                <label>{{localize "SFRPG.Classes.IsCasterClass"}}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.isCaster" {{checked itemData.isCaster}} /> {{localize "SFRPG.ItemSheet.Class.SpellCasting.IsCaster"}}
+                    </label>
+                </div>
+            </div>
+
+            {{#if itemData.isCaster}}
+            <div class="form-group" style="align-items: flex-start;">
+                <label>{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsKnown"}}</label>
+                <table class="spells-known" cellpadding="5">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="class-level">{{localize "SFRPG.ItemSheet.Class.SpellCasting.ClassLevel"}}</th>
+                            <th colspan="7">{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsKnownHeader"}}</th>
+                        </tr>
+                        <tr>
+                            <th>{{localize "SFRPG.Levels.0"}}</th>
+                            <th>{{localize "SFRPG.Levels.1"}}</th>
+                            <th>{{localize "SFRPG.Levels.2"}}</th>
+                            <th>{{localize "SFRPG.Levels.3"}}</th>
+                            <th>{{localize "SFRPG.Levels.4"}}</th>
+                            <th>{{localize "SFRPG.Levels.5"}}</th>
+                            <th>{{localize "SFRPG.Levels.6"}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each itemData.spellsKnown}}
+                        <tr>
+                            <td>{{localize (append "SFRPG.Levels." @key)}}</td>
+                            <td><input type="text" name="data.spellsKnown.{{@key}}.0" value="{{nonZero (lookup this 0)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="data.spellsKnown.{{@key}}.1" value="{{nonZero (lookup this 1)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="data.spellsKnown.{{@key}}.2" value="{{nonZero (lookup this 2)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="data.spellsKnown.{{@key}}.3" value="{{nonZero (lookup this 3)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="data.spellsKnown.{{@key}}.4" value="{{nonZero (lookup this 4)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="data.spellsKnown.{{@key}}.5" value="{{nonZero (lookup this 5)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="data.spellsKnown.{{@key}}.6" value="{{nonZero (lookup this 6)}}" data-dtype="Number" /></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            {{/if}}
+
+            {{!-- Skills --}}
+            <h4 class="section-header">Skills and Proficiencies</h4>
+
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassSkillRanksPerlevel"}}</label>
                 <div class="form-fields">
@@ -134,13 +186,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="checkbox">
-                    {{localize "SFRPG.Classes.IsCasterClass"}} <input type="checkbox" name="data.isCaster" {{checked itemData.isCaster}} /> 
-                </label>
-            </div>
-
-            {{!-- Class skills --}}
             <div class="form-group stacked weapon-properties">
                 <label>{{localize "SFRPG.ClassSkills"}}</label>
                 {{#each config.skills as |name val|}}

@@ -501,6 +501,16 @@ function setupHandlebars() {
         return index + (zeroBased ? 0 : 1);
     });
 
+    Handlebars.registerHelper('append', function (left, right) {
+        return left + right;
+    });
+
+    /** Returns null if 0 is entered. */
+    Handlebars.registerHelper('nonZero', function (value) {
+        if (value === 0) return null;
+        return value;
+    });
+
     /** Returns the value based on whether left is null or not. */
     Handlebars.registerHelper('leftOrRight', function (left, right) {
         return left || right;
