@@ -506,7 +506,7 @@ function setupHandlebars() {
     });
 
     /** Returns null if 0 is entered. */
-    Handlebars.registerHelper('nonZero', function (value) {
+    Handlebars.registerHelper('nullOrNonZero', function (value) {
         if (value === 0) return null;
         return value;
     });
