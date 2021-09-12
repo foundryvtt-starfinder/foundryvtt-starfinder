@@ -506,6 +506,12 @@ function setupHandlebars() {
     });
 
     /** Returns null if 0 is entered. */
+    Handlebars.registerHelper('modToScoreRange', function (value) {
+        const score = 10 + value * 2;
+        return `${score}-${score+1}`;
+    });
+
+    /** Returns null if 0 is entered. */
     Handlebars.registerHelper('nullOrNonZero', function (value) {
         if (value === 0) return null;
         return value;

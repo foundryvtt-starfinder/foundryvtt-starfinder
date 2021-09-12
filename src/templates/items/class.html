@@ -207,6 +207,41 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="form-group" style="align-items: flex-start;">
+                <label>{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsPerDayBonus"}}</label>
+                <table class="spells-known" cellpadding="5">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="class-level">{{localize "SFRPG.ItemSheet.Class.SpellCasting.KeyAbilityScore"}}</th>
+                            <th colspan="7">{{localize "SFRPG.ItemSheet.Class.SpellCasting.SpellsPerDayBonusHeader"}}</th>
+                        </tr>
+                        <tr>
+                            <th style="width: 30px;">{{localize "SFRPG.Levels.0"}}</th>
+                            <th>{{localize "SFRPG.Levels.1"}}</th>
+                            <th>{{localize "SFRPG.Levels.2"}}</th>
+                            <th>{{localize "SFRPG.Levels.3"}}</th>
+                            <th>{{localize "SFRPG.Levels.4"}}</th>
+                            <th>{{localize "SFRPG.Levels.5"}}</th>
+                            <th>{{localize "SFRPG.Levels.6"}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each itemData.bonusSpellsPerDay}}
+                        <tr>
+                            <td>{{modToScoreRange @key}}</td>
+                            <td> - </td>
+                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
             {{/if}}
 
             {{!-- Skills --}}
