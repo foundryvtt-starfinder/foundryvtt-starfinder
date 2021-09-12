@@ -44,9 +44,7 @@ export class SpellCastDialog extends Dialog {
         const casterData = actor.data.data;
         const spellData = item.data.data;
     
-        // Determine whether the spell may be downcast
         const maxSpellLevel = spellData.level;
-        const canDowncast = (maxSpellLevel > 0);
 
         // Stupid spell slots counter
         const availableSlots = {
@@ -97,6 +95,7 @@ export class SpellCastDialog extends Dialog {
 
         // Determine the levels which are feasible
         const spellLevels = [];
+        const includedClasses = [];
         for (const [slotLevel, slotAvailability] of Object.entries(availableSlots)) {
             if (slotLevel < maxSpellLevel && !spellData.isVariableLevel) {
                 continue;
@@ -107,6 +106,7 @@ export class SpellCastDialog extends Dialog {
                 hasClasses = true;
                 if (classSlot.value > 0) {
                     const classEntry = casterData.spells.classes.find(x => x.key === classSlot.class);
+                    includedClasses.push(classEntry.key);
 
                     const label = game.i18n.format("SFRPG.SpellCasting.SpellLabelClass", {className: classEntry.name, spellSlot: game.i18n.format(CONFIG.SFRPG.spellLevels[slotLevel], slotLevel), remainingSlots: classSlot.value});
                     spellLevels.push({
@@ -138,7 +138,8 @@ export class SpellCastDialog extends Dialog {
             hasSlots: spellLevels.length > 0,
             consume: spellLevels.length > 0,
             spellLevels,
-            config: CONFIG.SFRPG
+            config: CONFIG.SFRPG,
+            includedClasses: includedClasses
         });
     
         // Create the Dialog and return as a Promise

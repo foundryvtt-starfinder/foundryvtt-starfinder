@@ -1,14 +1,18 @@
 <form id="spell-config-form">
     <p>{{localize "SFRPG.SpellCasting.Header" spellName=item.name}}
 
+    {{#if includedClasses}}
     <div class="form-group">
         <label>{{localize "SFRPG.SpellCasting.AllowedClasses"}}</label>
         <div class="form-fields stacked">
             {{#each item.data.allowedClasses as |isAllowed allowedClass|}}
-            <label class="checkbox"><input type="checkbox" name="" {{checked isAllowed}} disabled /> {{lookup ../config.allowedClasses allowedClass}}</label>
+                {{#if isAllowed}}
+                    <label class="checkbox"><input type="checkbox" name="" {{checked isAllowed}} disabled /> {{lookup ../config.allowedClasses allowedClass}}</label>
+                {{/if}}
             {{/each}}
         </div>
     </div>
+    {{/if}}
 
     <div class="form-group">
         <label>{{localize "SFRPG.SpellCasting.ConsumeSlot"}}</label>
