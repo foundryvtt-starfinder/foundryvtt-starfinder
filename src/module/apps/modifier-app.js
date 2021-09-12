@@ -228,7 +228,7 @@ export default class SFRPGModifierApplication extends FormApplication {
      * @param {Object} formData The data from the form
      */
     _updateObject(event, formData) {
-        this._updateModifierData(formData);
+        return this._updateModifierData(formData);
     }
 
     async _updateModifierData(formData) {

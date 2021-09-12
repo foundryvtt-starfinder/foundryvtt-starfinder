@@ -172,30 +172,50 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     async useSpell(item, { configureDialog = true } = {}) {
         if (item.data.type !== "spell") throw new Error("Wrong item type");
 
-        let lvl = item.data.data.level;
-        const usesSlots = (lvl > 0) && item.data.data.preparation.mode === "";
-        if (!usesSlots) return item.roll();
+        let spellLevel = item.data.data.level;
+        const usesSlots = (spellLevel > 0) && item.data.data.preparation.mode === "";
+        if (!usesSlots) {
+            return item.roll();
+        }
 
-        let consume = true;
+        let consumeSpellSlot = true;
+        let selectedSlot = null;
         if (configureDialog) {
             try {
-                const spellFormData = await SpellCastDialog.create(this, item);
-                lvl = parseInt(spellFormData.get("level"));
-                consume = Boolean(spellFormData.get("consume"));
-            if (lvl && lvl !== item.data.data.level && !Number.isNaN(lvl)) {
-                const mergedData = mergeObject(item.data, { "data.level": lvl }, { inplace: false });
-                console.log([item.data, mergedData]);
-                item = new ItemSFRPG(mergedData, this);
+                const dialogResponse = await SpellCastDialog.create(this, item);
+                const slotIndex = parseInt(dialogResponse.formData.get("level"));
+                consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
+                selectedSlot = dialogResponse.spellLevels[slotIndex];
+                spellLevel = parseInt(selectedSlot.level);
+
+                if (spellLevel !== item.data.data.level) {
+                    const newItemData = duplicate(item.data);
+                    newItemData.data.level = spellLevel;
+
+                    item = new ItemSFRPG(newItemData, {parent: this});
                 }
             } catch (error) {
+                console.error(error);
                 return null;
             }
         }
 
-        if (consume && (lvl > 0)) {
-            await this.update({
-                [`data.spells.spell${lvl}.value`]: Math.max(parseInt(this.data.data.spells[`spell${lvl}`].value) - 1, 0)
-            });
+        if (consumeSpellSlot && (spellLevel > 0)) {
+
+            if (selectedSlot) {
+                if (selectedSlot.source === "general") {
+                    await this.update({
+                        [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(this.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+                    });
+                } else {
+                    const selectedLevel = selectedSlot.level;
+                    const selectedClass = selectedSlot.source;
+
+                    await this.update({
+                        [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(this.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                    });
+                }
+            }
         }
 
         return item.roll();

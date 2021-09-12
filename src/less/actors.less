@@ -816,6 +816,22 @@
     }
   }
 
+  .spell-class {
+    line-height: 14px;
+    display: inline-block;
+    text-align: center;
+    padding: 0 5px;
+    padding-top: 1px;
+    color: @colorFaint;
+    background: rgb(21, 92, 155);
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    input {
+      color: @colorFaint;
+    }
+  }
+
   .spell-slots,
   .spell-comps {
     flex: none;
@@ -824,6 +840,11 @@
     text-align: center;
     color: @colorTan;
     border-right: 1px solid @colorFaint;
+
+    &.fit-classes {
+      width: calc(100% - 400px);
+      text-align: right;
+    }
   }
   
   .spell-component {

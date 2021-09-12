@@ -728,6 +728,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const mode = spellData.preparation.mode || "";
             const lvl = levels[mode] || spellData.level || 0;
+            const spellsPerDay = actorData.spells["spell" + lvl];
 
             if (!spellBook[lvl]) {
                 spellBook[lvl] = {
@@ -737,10 +738,20 @@ export class ActorSheetSFRPG extends ActorSheet {
                     canPrepare: (this.actor.data.type === 'character') && (lvl > 0),
                     label: lvl >= 0 ? CONFIG.SFRPG.spellLevels[lvl] : CONFIG.SFRPG.spellPreparationModes[mode],
                     spells: [],
-                    uses: useLabels[lvl] || actorData.spells["spell"+lvl].value || 0,
-                    slots: useLabels[lvl] || actorData.spells["spell"+lvl].max || 0,
+                    uses: useLabels[lvl] || spellsPerDay.value || 0,
+                    slots: useLabels[lvl] || spellsPerDay.max || 0,
                     dataset: {"type": "spell", "level": lvl}
                 };
+
+                if (actorData.spells.classes && actorData.spells.classes.length > 0) {
+                    spellBook[lvl].classes = [];
+                    for (const [classKey, storedData] of Object.entries(spellsPerDay.perClass)) {
+                        const classInfo = actorData.spells.classes.find(x => x.key === classKey);
+                        if (storedData.max > 0) {
+                            spellBook[lvl].classes.push({key: classKey, name: classInfo?.name || classKey, value: storedData.value || 0, max: storedData.max});
+                        }
+                    }
+                }
             }
 
             spellBook[lvl].spells.push(spell);

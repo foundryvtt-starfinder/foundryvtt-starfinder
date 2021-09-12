@@ -47,6 +47,7 @@ import calculatePlayerXp                from './rules/actions/actor/character/ca
 import calculateResolve                 from './rules/actions/actor/character/calculate-resolve.js';
 import calculateSkillArmorCheckPenalty  from './rules/actions/actor/character/calculate-skill-armor-check-penalty.js';
 import calculateSkillpoints             from './rules/actions/actor/character/calculate-skillpoints.js';
+import calculateSpellsPerDay            from './rules/actions/actor/character/calculate-spellsPerDay.js';
 import calculateStamina                 from './rules/actions/actor/character/calculate-stamina.js';
 import calculateTraits                  from './rules/actions/actor/character/calculate-traits.js';
 // Drone rules
@@ -117,6 +118,7 @@ export default function (engine) {
     calculateHitpoints(engine);
     calculateResolve(engine);
     calculateSkillpoints(engine);
+    calculateSpellsPerDay(engine);
     calculateStamina(engine);
     calculateTraits(engine);
     calculatePlayerXp(engine);
@@ -204,7 +206,8 @@ export default function (engine) {
                     { closure: "calculateResolve", stackModifiers: "stackModifiers" },
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
-                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" }
+                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
+                    "calculateSpellsPerDay"
                 ]
             },
             {

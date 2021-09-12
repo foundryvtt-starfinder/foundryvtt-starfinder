@@ -19,15 +19,27 @@
             <h3>{{localize section.label}}</h3>
         </div>
 
-        <div class="spell-slots">
+        <div class="spell-slots fit-classes">
             {{#if section.usesSlots}}
-            <input type="text" name="data.spells.spell{{section.level}}.value" value="{{section.uses}}" placeholder="0"/>
-            <span class="sep"> / </span>
-            <input type="text" name="data.spells.spell{{section.level}}.max" value="{{section.slots}}" placeholder="0"/>
+                {{#if section.classes}}
+                    <div>
+                        {{#each section.classes as |spellsPerClass|}}
+                            <span class="spell-class">
+                                <span class="sep">{{spellsPerClass.name}}: </span>
+                                <input type="text" name="data.spells.spell{{section.level}}.perClass.{{spellsPerClass.key}}.value" value="{{spellsPerClass.value}}"/>
+                                <span class="sep"> / {{spellsPerClass.max}}</span>
+                            </span>
+                        {{/each}}
+                    </div>
+                {{else}}
+                    <input type="text" name="data.spells.spell{{section.level}}.value" value="{{section.uses}}" placeholder="0"/>
+                    <span class="sep"> / </span>
+                    <input type="text" name="data.spells.spell{{section.level}}.max" value="{{section.slots}}" placeholder="0"/>
+                {{/if}}
             {{ else }}
-            <span class="spell-slots">{{{section.uses}}}</span>
-            <span class="sep"> / </span>
-            <span class="spell-max">{{{section.slots}}}</span>
+                <span class="spell-slots">{{{section.uses}}}</span>
+                <span class="sep"> / </span>
+                <span class="spell-max">{{{section.slots}}}</span>
             {{/if}}
         </div>
 
@@ -56,7 +68,7 @@
 
             <div class="spell-comps">
                 {{#if item.data.concentration }}
-                <span class="spell-component"data-tippy-content="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
+                <span class="spell-component" data-tippy-content="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
                 {{/if}}
             </div>
             <div class="spell-school">{{localize labels.school}}</div>
