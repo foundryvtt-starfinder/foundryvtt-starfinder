@@ -298,8 +298,8 @@ export class ItemSheetSFRPG extends ItemSheet {
                 tooltip: null
             });
             
-            const wieldedBonus = itemData.proficient ? itemData.bonus.wielded : 0;
-            const alignedBonus = itemData.proficient ? itemData.bonus.aligned : 0;
+            const wieldedBonus = itemData.proficient ? (itemData.bonus.wielded || 0) : 0;
+            const alignedBonus = itemData.proficient ? (itemData.bonus.aligned || 0) : 0;
             props.push({
                 name: game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),
                 tooltip: null

@@ -44,9 +44,10 @@ export default function (engine) {
             if (shields) {
                 shields.forEach(shield => {
                     const shieldData = shield.data.data;
+                    const shieldBonus = shieldData.bonus.wielded || 0;
 
-                    totalShieldBonus += shieldData.bonus.wielded;
-                    if (shieldData.proficient) shieldBonus += shieldData.bonus.wielded;
+                    totalShieldBonus += shieldBonus;
+                    if (shieldData.proficient) shieldBonus += shieldBonus;
                 });
 
                 if (shieldBonus !== totalShieldBonus) {
@@ -64,11 +65,11 @@ export default function (engine) {
             kac.value = 10 + kacMod;
             
             if (armor) eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorEac.signedString(), name: armor.name }));
-            if (shields) shields.forEach(shield => eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: shield.data.data.bonus.wielded.signedString(), name: shield.name })));
+            if (shields) shields.forEach(shield => eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.data.data.bonus.wielded || 0).signedString(), name: shield.name })));
             eac.tooltip.push(maxDexTooltip);
 
             if (armor) kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorKac.signedString(), name: armor.name }));
-            if (shields) shields.forEach(shield => kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: shield.data.data.bonus.wielded.signedString(), name: shield.name })));
+            if (shields) shields.forEach(shield => kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.data.data.bonus.wielded || 0).signedString(), name: shield.name })));
             kac.tooltip.push(maxDexTooltip);
         } else {
             eac.value = 10 + data.abilities.dex.mod;
