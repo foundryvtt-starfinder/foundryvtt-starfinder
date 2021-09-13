@@ -52,6 +52,8 @@ Arguments: Object with several keys: actor, restType, deltaHitpoints, deltaStami
 * deltaHitpoints (optional): The amount of hitpoints gained during this rest.
 * deltaStamina (optional): The amount of stamina gained during this rest.
 * deltaResolve (optional): The amount of resolve points gained during this rest.
+* deltaSpellSlots (optional): The amount of spell slots gained during this rest.
+* restoredAbilityDamages (optional): The amount of ability damage removed during this rest.
 * updateData: The updated data as written to the actor's entity.
 * updateItems: Array of items that have been updated for this rest.
 

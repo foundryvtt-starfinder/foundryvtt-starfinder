@@ -1,5 +1,6 @@
 import { ShortRestDialog } from "../../apps/short-rest.js";
 import { DroneRepairDialog } from "../../apps/drone-repair-dialog.js";
+import { SFRPG } from "../../config.js";
 
 export const ActorRestMixin = (superclass) => class extends superclass {
     /**
@@ -171,9 +172,11 @@ export const ActorRestMixin = (superclass) => class extends superclass {
         updateData['data.attributes.rp.value'] = data.attributes.rp.max;
 
         // Heal Ability damage
+        const restoredAbilityDamages = [];
         for (let [abl, ability] of Object.entries(data.abilities)) {
             if (ability.damage && ability.damage > 0) {
                 updateData[`data.abilities.${abl}.damage`] = --ability.damage;
+                restoredAbilityDamages.push({ability: abl, amount: 1});
             } 
         }
 
@@ -183,12 +186,25 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             }
         }
 
-        for (let [k, v] of Object.entries(data.spells)) {
-            if (!v.max) continue;
-            updateData[`data.spells.${k}.value`] = v.max;
+        let deltaSpellSlots = 0;
+        for (let spellLevel = 1; spellLevel <= 6; spellLevel++) {
+            const spellLevelData = data.spells[`spell${spellLevel}`];
+            if (spellLevelData.value < spellLevelData.max) {
+                updateData[`data.spells.spell${spellLevel}.value`] = spellLevelData.max;
+                deltaSpellSlots += (spellLevelData.max - spellLevelData.value);
+            }
+
+            if (spellLevelData.perClass) {
+                for (const [classKey, classData] of Object.entries(spellLevelData.perClass)) {
+                    if (classData.value < classData.max) {
+                        updateData[`data.spells.spell${spellLevel}.perClass.${classKey}.value`] = classData.max;
+                        deltaSpellSlots += (classData.max - classData.value);
+                    }
+                }
+            }
         }
 
-        const items = this.items.filter(i => i.data.data.uses && ["sr", "lr", "day"].includes(i.data.data.uses.per));
+        const items = this.items.filter(i => i.data.data.uses && ["sr", "lr", "day"].includes(i.data.data.uses.per) && i.data.data.uses.value < i.getMaxUses());
         const updateItems = items.map(item => {
             return {
                 _id: item.id,
@@ -200,10 +216,28 @@ export const ActorRestMixin = (superclass) => class extends superclass {
         await this.updateEmbeddedDocuments("Item", updateItems);
 
         if (chat) {
+            const bulletPoint = '<br/><span><i class="fas fa-circle" style="font-size: 6px; vertical-align: middle; height: 7px;"></i></span> ';
+            let content = "";
+            if (dhp || dsp || drp || deltaSpellSlots || restoredAbilityDamages.length > 0 || items.length > 0) {
+                content = game.i18n.format("SFRPG.Rest.Long.ChatMessage.Header", {name: this.name});
+                if (dhp) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.HitPoints", {deltaHP: dhp}); }
+                if (dsp) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.StaminaPoints", {deltaSP: dsp}); }
+                if (drp) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.ResolvePoints", {deltaRP: drp}); }
+                if (deltaSpellSlots) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.SpellSlots", {deltaSS: deltaSpellSlots}); }
+                for (const restoredAbilityDamage of restoredAbilityDamages) {
+                    content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.AbilityDamage", {ability: SFRPG.abilities[restoredAbilityDamage.ability], amount: restoredAbilityDamage.amount});
+                }
+                for (const rechargedItem of items) {
+                    content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.Item", {itemName: rechargedItem.name});
+                }
+            } else {
+                content = game.i18n.format("SFRPG.Rest.Long.ChatMessage.HeaderNoRecovery", {name: this.name});
+            }
+
             ChatMessage.create({
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
-                content: `${this.name} takes a night's rest and recovers ${dhp} Hit points, ${dsp} Stamina points, and ${drp} Resolve points.`
+                content: content
             });
         }
 
@@ -213,6 +247,8 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             deltaHitpoints: dhp,
             deltaStamina: dsp,
             deltaResolve: drp,
+            deltaSpellSlots: deltaSpellSlots,
+            restoredAbilityDamages: restoredAbilityDamages.length,
             updateData: updateData,
             updateItems: updateItems
         };
