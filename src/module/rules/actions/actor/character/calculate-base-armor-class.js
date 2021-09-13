@@ -44,10 +44,10 @@ export default function (engine) {
             if (shields) {
                 shields.forEach(shield => {
                     const shieldData = shield.data.data;
-                    const shieldBonus = shieldData.bonus.wielded || 0;
+                    const wieldBonus = shieldData.bonus.wielded || 0;
 
-                    totalShieldBonus += shieldBonus;
-                    if (shieldData.proficient) shieldBonus += shieldBonus;
+                    totalShieldBonus += wieldBonus;
+                    if (shieldData.proficient) shieldBonus += wieldBonus;
                 });
 
                 if (shieldBonus !== totalShieldBonus) {
