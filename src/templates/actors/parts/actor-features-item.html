@@ -1,12 +1,27 @@
         <li class="item flexrow {{#unless isCharged}}uncharged{{/unless}}" data-item-id="{{item._id}}">
-            <div class="item-name flexrow rollable">
+            <div class="item-name flexrow rollable" {{createTippy title=item.name subtitle=item.data.description.short attributes=item.attributes tooltips=item.actorResourceData.tooltip}}>
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>
                     {{#if item.data.isFree}}[{{localize "SFRPG.DroneSheet.Features.ModsFree"}}] {{/if}}
                     {{#if (and prefixTable (lookup prefixTable item.type))}}
-                    {{ lookup prefixTable item.type }}: 
+                        {{ lookup prefixTable item.type }}: 
                     {{/if}}
-                    {{item.name}}
+                    {{#if (not (eq item.type "actorResource"))}}
+                        {{item.name}}
+                    {{else}}
+                    <div style="flex: 0 0 180px; line-height: 21px;">
+                        <div>
+                            <label style="display: inline-block; width: 105px;">{{item.name}}</label>
+                        </div>
+                        <div>
+                            {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
+                            <label style="display: inline-block; width: 105px;">@resources.{{item.data.type}}.{{item.data.subType}}.value</label>
+                            {{else}}
+                            <label class="error">{{localize "SFRPG.ItemSheet.ActorResource.ErrorIncompleteData"}}</label>
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/if}}
                 </h4>
                 {{#if (or item.hasAttack item.hasDamage)}}
                 <div class="item-action flexcol">
@@ -20,6 +35,19 @@
                             <button class="tag damage">{{localize "SFRPG.Damage.Title"}}</button>
                         {{/if}}
                     {{/if}}
+                </div>
+                {{/if}}
+                {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
+                <div style="flex: 0 0 180px; line-height: 21px;">
+                    <div>
+                        <label style="display: inline-block; width: 105px;">{{localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue"}}:</label>
+                        <!--<input style="width: 70px;" type="text" name="" value="{{item.data.base}}" data-dtype="Number"/>-->
+                        <span>{{item.actorResourceData.base}}</span>
+                    </div>
+                    <div>
+                        <label style="display: inline-block; width: 105px;">{{localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue"}}:</label>
+                        <span>{{item.actorResourceData.value}}</span>
+                    </div>
                 </div>
                 {{/if}}
             </div>

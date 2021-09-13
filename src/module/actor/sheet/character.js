@@ -78,6 +78,18 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 item.capacityMaximum = item.document.getMaxCapacity();
             }
 
+            if (item.type === "actorResource") {
+                item.attributes = [];
+                if (item.data.type && item.data.subType) {
+                    item.attributes.push(`@resources.${item.data.type}.${item.data.subType}.base`);
+                    item.attributes.push(`@resources.${item.data.type}.${item.data.subType}.value`);
+
+                    if (item.data.base) {
+                        item.actorResourceData = actorData.resources[item.data.type][item.data.subType];
+                    }
+                }
+            }
+
             if (item.type === "spell") {
                 const container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
