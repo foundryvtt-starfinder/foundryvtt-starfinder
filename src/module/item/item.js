@@ -213,7 +213,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     /* -------------------------------------------- */
-    /*  Chat Cards																	*/
+    /*  Chat Cards                                  */
     /* -------------------------------------------- */
 
     getChatData(htmlOptions) {
