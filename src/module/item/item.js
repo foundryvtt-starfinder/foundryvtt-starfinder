@@ -192,7 +192,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (this.type === "spell") {
             let descriptionText = duplicate(templateData.data.description.short || templateData.data.description.value);
-            if (descriptionText.length > 0) {
+            if (descriptionText?.length > 0) {
                 // Alter description by removing non-eligble level tags.
                 const levelTags = [
                     {level: 0, tag: "level_0"},
