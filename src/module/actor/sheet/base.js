@@ -229,6 +229,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Condition toggling
         html.find('.conditions input[type="checkbox"]').change(this._onToggleConditions.bind(this));
+
+        // Actor resource update
+        html.find('.actor-resource-base-input').change(this._onActorResourceChanged.bind(this));
     }
     
     /** @override */
@@ -321,6 +324,23 @@ export class ActorSheetSFRPG extends ActorSheet {
                 trait.custom.split(';').forEach((c, i) => trait.selected[`custom${i + 1}`] = c.trim());
             }
             trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
+        }
+    }
+
+    _prepareActorResource(actorResourceItem, actorData) {
+        if (actorResourceItem?.type !== "actorResource") {
+            return;
+        }
+
+        actorResourceItem.attributes = [];
+        actorResourceItem.actorResourceData = null;
+        if (actorResourceItem.data.type && actorResourceItem.data.subType) {
+            actorResourceItem.attributes.push(`@resources.${actorResourceItem.data.type}.${actorResourceItem.data.subType}.base`);
+            actorResourceItem.attributes.push(`@resources.${actorResourceItem.data.type}.${actorResourceItem.data.subType}.value`);
+
+            if (actorResourceItem.data.base || actorResourceItem.data.base === 0) {
+                actorResourceItem.actorResourceData = actorData.resources[actorResourceItem.data.type][actorResourceItem.data.subType];
+            }
         }
     }
 
@@ -569,6 +589,20 @@ export class ActorSheetSFRPG extends ActorSheet {
                 flatfooted.prop("checked", shouldBeFlatfooted).change();
             }
         });
+    }
+
+    _onActorResourceChanged(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const resourceId = target.data('resourceId');
+        const resourceItem = this.actor.items.get(resourceId);
+        const newBaseValue = parseInt(target[0].value);
+
+        if (!Number.isNaN(newBaseValue)) {
+            resourceItem.update({"data.base": newBaseValue});
+        } else {
+            resourceItem.update({"data.base": 0});
+        }
     }
 
     /**

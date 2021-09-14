@@ -39,7 +39,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
-
         const actorData = data.data;
 
         const inventory = {
@@ -79,15 +78,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
 
             if (item.type === "actorResource") {
-                item.attributes = [];
-                if (item.data.type && item.data.subType) {
-                    item.attributes.push(`@resources.${item.data.type}.${item.data.subType}.base`);
-                    item.attributes.push(`@resources.${item.data.type}.${item.data.subType}.value`);
-
-                    if (item.data.base) {
-                        item.actorResourceData = actorData.resources[item.data.type][item.data.subType];
-                    }
-                }
+                this._prepareActorResource(item, actorData);
             }
 
             if (item.type === "spell") {

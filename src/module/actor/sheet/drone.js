@@ -32,7 +32,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
-
         const actorData = data.data;
 
         let weaponLabel = "";
@@ -80,6 +79,10 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             if (item.hasCapacity) {
                 item.capacityCurrent = item.document.getCurrentCapacity();
                 item.capacityMaximum = item.document.getMaxCapacity();
+            }
+
+            if (item.type === "actorResource") {
+                this._prepareActorResource(item, actorData);
             }
 
             if (item.type === "feat") {

@@ -9,13 +9,13 @@
                     {{#if (not (eq item.type "actorResource"))}}
                         {{item.name}}
                     {{else}}
-                    <div style="flex: 0 0 180px; line-height: 21px;">
+                    <div class="actor-resource-name">
                         <div>
-                            <label style="display: inline-block; width: 105px;">{{item.name}}</label>
+                            <label class="name-label">{{item.name}}</label>
                         </div>
                         <div>
                             {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
-                            <label style="display: inline-block; width: 105px;">@resources.{{item.data.type}}.{{item.data.subType}}.value</label>
+                            <label class="value-label">@resources.{{item.data.type}}.{{item.data.subType}}.value</label>
                             {{else}}
                             <label class="error">{{localize "SFRPG.ItemSheet.ActorResource.ErrorIncompleteData"}}</label>
                             {{/if}}
@@ -38,14 +38,13 @@
                 </div>
                 {{/if}}
                 {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
-                <div style="flex: 0 0 180px; line-height: 21px;">
+                <div class="actor-resource-values">
                     <div>
-                        <label style="display: inline-block; width: 105px;">{{localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue"}}:</label>
-                        <!--<input style="width: 70px;" type="text" name="" value="{{item.data.base}}" data-dtype="Number"/>-->
-                        <span>{{item.actorResourceData.base}}</span>
+                        <label class="actor-resource-base-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue"}}:</label>
+                        <input class="actor-resource-base-input" data-resource-id="{{item._id}}" type="text" name="" value="{{item.data.base}}" data-dtype="Number"/>
                     </div>
                     <div>
-                        <label style="display: inline-block; width: 105px;">{{localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue"}}:</label>
+                        <label class="actor-resource-computed-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue"}}:</label>
                         <span>{{item.actorResourceData.value}}</span>
                     </div>
                 </div>

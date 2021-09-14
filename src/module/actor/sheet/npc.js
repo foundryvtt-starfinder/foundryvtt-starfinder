@@ -55,6 +55,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     }
 
     _prepareItems(data) {
+        const actorData = data.data;
         const droneItemTypes = ["chassis", "mod"];
 
         const inventory = {
@@ -82,6 +83,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             if (item.hasCapacity) {
                 item.capacityCurrent = item.document.getCurrentCapacity();
                 item.capacityMaximum = item.document.getMaxCapacity();
+            }
+
+            if (item.type === "actorResource") {
+                this._prepareActorResource(item, actorData);
             }
 
             if (droneItemTypes.includes(item.type)) {

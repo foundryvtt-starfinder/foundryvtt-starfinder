@@ -73,6 +73,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
+        const actorData = data.data;
 
         const inventory = {
             inventory: { label: game.i18n.localize("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
@@ -81,6 +82,10 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         //   0        1               2              3
         let [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
+
+            if (item.type === "actorResource") {
+                this._prepareActorResource(item, actorData);
+            }
 
             if (item.type === "weapon" || item.type === "vehicleAttack") {
                 arr[0].push(item); // attacks

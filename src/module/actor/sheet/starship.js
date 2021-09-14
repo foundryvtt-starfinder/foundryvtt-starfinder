@@ -205,6 +205,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
+        const actorData = data.data;
         const inventory = {
             inventory: { label: game.i18n.localize("SFRPG.StarshipSheet.Inventory.Inventory"), items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
         };
@@ -225,6 +226,10 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         //   0        1          2    3     4       5          6      7           8          9               10            11               12             13     14
         let [forward, starboard, aft, port, turret, unmounted, frame, powerCores, thrusters, primarySystems, otherSystems, securitySystems, expansionBays, cargo, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
+
+            if (item.type === "actorResource") {
+                this._prepareActorResource(item, actorData);
+            }
 
             if (item.type === "starshipWeapon") {
                 const weaponArc = item?.data?.mount?.arc;

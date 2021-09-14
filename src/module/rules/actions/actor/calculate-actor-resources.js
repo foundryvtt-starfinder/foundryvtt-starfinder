@@ -55,8 +55,8 @@ export default function (engine) {
                     data.resources[resourceData.type] = {};
                 }
 
-                if (!data.resources[resourceData.subType]) {
-                    data.resources[resourceData.subType] = {};
+                if (!data.resources[resourceData.type][resourceData.subType]) {
+                    data.resources[resourceData.type][resourceData.subType] = {};
                 }
 
                 const finalActorResource = {
@@ -69,7 +69,9 @@ export default function (engine) {
 
                 data.resources[resourceData.type][resourceData.subType] = finalActorResource;
 
+                // Post mode only performs clamping at the end. Immediate mode clamps at every step along the way.
                 if (resourceData.range.mode === "post") {
+                    // First apply all modifiers
                     const resourceMod = Object.entries(processedMods).reduce((sum, curr) => {
                         if (curr[1] === null || curr[1].length < 1) return sum;
             
@@ -86,6 +88,8 @@ export default function (engine) {
                     }, 0);
 
                     finalActorResource.value = finalActorResource.base + resourceMod;
+
+                    // Finally, clamp value at the very end
                     if (resourceData.range.min || resourceData.range.min === 0) {
                         finalActorResource.value = Math.max(finalActorResource.value, resourceData.range.min);
                     }
@@ -94,6 +98,16 @@ export default function (engine) {
                         finalActorResource.value = Math.min(finalActorResource.value, resourceData.range.max);
                     }
                 } else {
+                    // First, clamp base value
+                    if (resourceData.range.min || resourceData.range.min === 0) {
+                        finalActorResource.value = Math.max(finalActorResource.value, resourceData.range.min);
+                    }
+    
+                    if (resourceData.range.max || resourceData.range.max === 0) {
+                        finalActorResource.value = Math.min(finalActorResource.value, resourceData.range.max);
+                    }
+
+                    // Next, iterate each modifier, and re-clamp value.
                     for (const [key, mod] of Object.entries(processedMods)) {
                         if (mod === null || mod.length < 1) continue;
 

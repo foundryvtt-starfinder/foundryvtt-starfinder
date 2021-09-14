@@ -5,11 +5,38 @@
             {{#if prefixTable}}
             {{ lookup prefixTable item.type }}:
             {{/if}}
-            {{item.name}}
+            {{#if (not (eq item.type "actorResource"))}}
+                {{item.name}}
+            {{else}}
+            <div class="actor-resource-name">
+                <div>
+                    <label class="name-label">{{item.name}}</label>
+                </div>
+                <div>
+                    {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
+                    <label class="value-label">@resources.{{item.data.type}}.{{item.data.subType}}.value</label>
+                    {{else}}
+                    <label class="error">{{localize "SFRPG.ItemSheet.ActorResource.ErrorIncompleteData"}}</label>
+                    {{/if}}
+                </div>
+            </div>
+            {{/if}}
         </h4>
         {{#if (and item.data.piloting.usedAsPilot item.data.isActive)}}
         <div class="vehicle-system-action flexcol">
             <button class="tag roll-piloting">{{localize "SFRPG.VehicleSheet.Systems.RollPiloting"}}</button>
+        </div>
+        {{/if}}
+        {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
+        <div class="actor-resource-values">
+            <div>
+                <label class="actor-resource-base-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue"}}:</label>
+                <input class="actor-resource-base-input" data-resource-id="{{item._id}}" type="text" name="" value="{{item.data.base}}" data-dtype="Number"/>
+            </div>
+            <div>
+                <label class="actor-resource-computed-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue"}}:</label>
+                <span>{{item.actorResourceData.value}}</span>
+            </div>
         </div>
         {{/if}}
     </div>
