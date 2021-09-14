@@ -190,6 +190,82 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             hasOtherFormula: this.hasOtherFormula
         };
 
+        if (this.type === "spell") {
+            let descriptionText = duplicate(templateData.data.description.short || templateData.data.description.value);
+            if (descriptionText.length > 0) {
+                // Alter description by removing non-eligble level tags.
+                const levelTags = [
+                    {level: 0, tag: "level_0"},
+                    {level: 1, tag: "level_1"},
+                    {level: 2, tag: "level_2"},
+                    {level: 3, tag: "level_3"},
+                    {level: 4, tag: "level_4"},
+                    {level: 5, tag: "level_5"},
+                    {level: 6, tag: "level_6"}
+                ];
+
+                for (const {level, tag} of levelTags) {
+                    const shouldShowEx = level === this.data.data.level;
+                    const startTagEx = `[${tag}_only]`;
+                    const endTagEx = `[/${tag}_only]`;
+
+                    const shouldShowInc = level <= this.data.data.level;
+                    const startTagInc = `[${tag}]`;
+                    const endTagInc = `[/${tag}]`;
+
+                    if (shouldShowEx) {
+                        let tagStartIndex = descriptionText.indexOf(startTagEx);
+                        while (tagStartIndex != -1) {
+                            descriptionText = descriptionText.replace(startTagEx, "");
+                            tagStartIndex = descriptionText.indexOf(startTagEx);
+                        }
+
+                        let tagEndIndex = descriptionText.indexOf(endTagEx);
+                        while (tagEndIndex != -1) {
+                            descriptionText = descriptionText.replace(endTagEx, "");
+                            tagEndIndex = descriptionText.indexOf(endTagEx);
+                        }
+                    } else {
+                        let tagStartIndex = descriptionText.indexOf(startTagEx);
+                        let tagEndIndex = descriptionText.indexOf(endTagEx);
+                        while (tagStartIndex != -1 && tagEndIndex != -1) {
+                            descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagEx.length);
+                            tagStartIndex = descriptionText.indexOf(startTagEx);
+                            tagEndIndex = descriptionText.indexOf(endTagEx);
+                        }
+                    }
+
+                    if (shouldShowInc) {
+                        let tagStartIndex = descriptionText.indexOf(startTagInc);
+                        while (tagStartIndex != -1) {
+                            descriptionText = descriptionText.replace(startTagInc, "");
+                            tagStartIndex = descriptionText.indexOf(startTagInc);
+                        }
+
+                        let tagEndIndex = descriptionText.indexOf(endTagInc);
+                        while (tagEndIndex != -1) {
+                            descriptionText = descriptionText.replace(endTagInc, "");
+                            tagEndIndex = descriptionText.indexOf(endTagInc);
+                        }
+                    } else {
+                        let tagStartIndex = descriptionText.indexOf(startTagInc);
+                        let tagEndIndex = descriptionText.indexOf(endTagInc);
+                        while (tagStartIndex != -1 && tagEndIndex != -1) {
+                            descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagInc.length);
+                            tagStartIndex = descriptionText.indexOf(startTagInc);
+                            tagEndIndex = descriptionText.indexOf(endTagInc);
+                        }
+                    }
+                }
+
+                if (templateData.data.description.short) {
+                    templateData.data.description.short = descriptionText;
+                } else {
+                    templateData.data.description.value = descriptionText;
+                }
+            }
+        }
+
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.data.type) ? this.data.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.html`;
