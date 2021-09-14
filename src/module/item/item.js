@@ -135,8 +135,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         this.labels = labels;
     }
 
-    processData() {
-        game.sfrpg.engine.process("process-items", {
+    async processData() {
+        return game.sfrpg.engine.process("process-items", {
             item: this,
             itemData: this.data,
             owner: {

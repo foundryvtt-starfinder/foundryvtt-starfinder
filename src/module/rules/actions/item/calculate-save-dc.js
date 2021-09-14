@@ -54,6 +54,11 @@ export default function (engine) {
                         const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
                         item.labels.save = returnValue;
                     });
+
+                    if (!fact.promises) {
+                        fact.promises = [];
+                    }
+                    fact.promises.push(rollPromise);
                 } else {
                     item.labels.save = 10;
                 }

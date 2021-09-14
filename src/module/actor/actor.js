@@ -193,6 +193,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     newItemData.data.level = spellLevel;
 
                     item = new ItemSFRPG(newItemData, {parent: this});
+                    
+                    // Run automation to ensure save DCs are correct.
+                    item.prepareData();
+                    const processContext = await item.processData();
+                    if (processContext.fact.promises) {
+                        await Promise.all(processContext.fact.promises);
+                    }
                 }
             } catch (error) {
                 console.error(error);
