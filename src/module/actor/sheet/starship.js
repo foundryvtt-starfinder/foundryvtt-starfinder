@@ -277,6 +277,11 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 || weapon.data.special["forcefield"]
                 || weapon.data.special["limited"]
             );
+
+            if (weapon.hasCapacity) {
+                weapon.capacityCurrent = weapon.document.getCurrentCapacity();
+                weapon.capacityMaximum = weapon.document.getMaxCapacity();
+            }
         }
 
         const weaponMounts = this.actor.data.data.frame?.data?.weaponMounts;
