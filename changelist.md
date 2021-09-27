@@ -20,14 +20,15 @@ Future work is planned, such as a more elegant way of having spells identify whi
 Full rest has also received a little update. Partially because the new spells per day setup required it, and partly because it simply hadn't been set up for proper localization yet. The full rest chat card will now provide a more complete summary of recovered character stats and items.
 
 ## Bugfixes
+* Renamed Apply Damage roll context menu items to be consistent with each other, and added a warning when no token is selected.
+* Added a safety check around rolls to prevent character sheets from becoming inaccessible when a roll formula contains invalid terms.
+* Added a safety check to prevent incorrect shield data from rendering character sheets inaccessible.
 * Removed modifier tab from the ammunition sheet, it wasn't implemented correctly and misleading in its existence.
 * Removed max height constraint from item sheets, it is now possible to resize them vertically as much as you like.
-* Added a safety check around rolls to prevent character sheets from becoming inaccessible when a roll formula contains invalid terms.
-* Fixing bulk calculation for items contained by other items.
+* Fixed a small mistake with wielding bonus' calculation causing character sheets to break.
+* Fixed bulk calculation for items contained by other items.
 * Fixed hobgoblin speed, it was listed as able to run 3025 ft per round which is a little speedier than intended.
-* Correcting small mistake with wielding bonus' calculation causing character sheets to break.
-* Preventing broken shield data from rendering character sheets inaccessible.
-* Fixing missing capacity on starship weapons.
+* Fixed missing capacity on starship weapons.
 
 ## System Hooks
 * Added a hook to alter rolls before rolling them.
