@@ -16,9 +16,60 @@ export default class CounterManagement {
                 for (const displayedResource of displayedResources) {
                     const resourceValue = currentActor.getResourceComputedValue(displayedResource.data.data.type, displayedResource.data.data.subType);
 
-                    additionalHtml += `<a class='combatant-control-counter counter-token' data-combatant-id='${combatant.id}' data-actor-resource-id='${displayedResource.id}' title='${displayedResource.name}'>`;
-                    additionalHtml += `<img class='counter-token-image' src='${displayedResource.img}' />`;
-                    additionalHtml += `<p>${resourceValue}</p>`;
+                    let title = displayedResource.name;
+                    let image = displayedResource.img;
+                    let displayValue = resourceValue;
+
+                    if (displayedResource.data.data.combatTracker.displayAbsoluteValue) {
+                        displayValue = Math.abs(displayValue);
+                    }
+
+                    if (displayedResource.data.data.combatTracker.visualization) {
+                        for (const visualizationEntry of displayedResource.data.data.combatTracker.visualization) {
+                            switch (visualizationEntry.mode) {
+                                case 'eq':
+                                    if (resourceValue === visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'neq':
+                                    if (resourceValue !== visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'gt':
+                                    if (resourceValue > visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'gte':
+                                    if (resourceValue >= visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'lt':
+                                    if (resourceValue < visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'lte':
+                                    if (resourceValue <= visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+
+                    additionalHtml += `<a class='combatant-control-counter counter-token' data-combatant-id='${combatant.id}' data-actor-resource-id='${displayedResource.id}' title='${title}'>`;
+                    additionalHtml += `<img class='counter-token-image' src='${image}' />`;
+                    additionalHtml += `<p>${displayValue}</p>`;
                     additionalHtml += "</a>";
                 }
 

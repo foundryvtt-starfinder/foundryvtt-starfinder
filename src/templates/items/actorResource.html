@@ -25,7 +25,7 @@
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.Enabled" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.enabled" {{checked itemData.enabled}}/> {{ localize "SFRPG.ItemSheet.ActorResource.Enabled" }}
+                        <input type="checkbox" name="data.enabled" {{checked itemData.enabled}}/>
                     </label>
                 </div>
             </div>
@@ -105,10 +105,21 @@
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.combatTracker.show" {{checked itemData.combatTracker.show}}/> {{ localize "SFRPG.ItemSheet.ActorResource.Enabled" }}
+                        <input type="checkbox" name="data.combatTracker.show" {{checked itemData.combatTracker.show}}/>
                     </label>
                 </div>
             </div>
+
+            {{#if itemData.combatTracker.show}}
+            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValue" subtitle="SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValueTooltip"}}>
+                <label>{{ localize "SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValue" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.combatTracker.displayAbsoluteValue" {{checked itemData.combatTracker.displayAbsoluteValue}}/>
+                    </label>
+                </div>
+            </div>
+            {{/if}}
 
             <h4 class="section-header first">{{localize "SFRPG.ItemSheet.ActorResource.Usage"}}</h4>
             <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageTooltip" }}<br/></label>
