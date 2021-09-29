@@ -24,9 +24,14 @@ export const ActorResourcesMixin = (superclass) => class extends superclass {
     }
 
     getResourceComputedValue(type, subType) {
-        const actorResource = this.getResource(type, subType);
-        if (actorResource) {
-            return actorResource.value;
+        if (this.data.data.resources) {
+            const typeMap = this.data.data.resources[type];
+            if (typeMap) {
+                const subTypeData = typeMap[subType];
+                if (subTypeData) {
+                    return subTypeData.value;
+                }
+            }
         }
         return null;
     }
@@ -41,5 +46,10 @@ export const ActorResourcesMixin = (superclass) => class extends superclass {
             ui.notifications.warn(`Found multiple actorResources matching ${type}.${subType} on actor ${this.name}, returning the first one.`);
         }
         return conditionItems[0];
+    }
+
+    getResourcesForCombatTracker() {
+        const actorResources = this.items.filter(x => x.type === "actorResource" && x.data.data.combatTracker?.show);
+        return actorResources;
     }
 }

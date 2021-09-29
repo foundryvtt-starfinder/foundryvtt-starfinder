@@ -99,6 +99,17 @@
                 </div>
             </div>
 
+            <h4 class="section-header first">{{localize "SFRPG.ItemSheet.ActorResource.CombatTracker"}}</h4>
+
+            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" subtitle="SFRPG.ItemSheet.ActorResource.ShowInCombatTrackerTooltip"}}>
+                <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.combatTracker.show" {{checked itemData.combatTracker.show}}/> {{ localize "SFRPG.ItemSheet.ActorResource.Enabled" }}
+                    </label>
+                </div>
+            </div>
+
             <h4 class="section-header first">{{localize "SFRPG.ItemSheet.ActorResource.Usage"}}</h4>
             <label>{{ localize "SFRPG.ItemSheet.ActorResource.UsageTooltip" }}<br/></label>
 
