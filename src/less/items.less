@@ -248,6 +248,7 @@
   /* ----------------------------------------- */
 
   h4.damage-header,
+  h4.visualization-header,
   h4.ability-adjustments-header {
     margin: 0;
     padding: 0;
@@ -256,21 +257,30 @@
     color: @colorOlive;
   }
 
-  ol.damage-parts {
+  ol.damage-parts,
+  ol.visualization-parts {
     border-top: groove 2px #fff;
+
+    img.part-image {
+      flex: 0 0 50px;
+      height: 50px;
+    }
   }
 
-  li.damage-part {
+  li.damage-part,
+  li.visualization-part {
     border-bottom: groove 2px #fff;
   }
 
   .damage-parts,
+  .visualization-parts,
   .ability-adjustment-parts {
     list-style: none;
     margin: 0;
     padding: 0;
 
     .damage-part,
+    .visualization-part,
     .ability-adjustment-part {
       flex: 0 0 100%;
       padding: 0;
@@ -281,17 +291,53 @@
         margin-left: 5px;
         flex: 1;
       }
+
+      .visualization-part-mode {
+        flex: 0 0 220px;
+        line-height: 20px;
+
+        span {
+          margin: 0px 0px 0px 4px;
+        }
+
+        select {
+          margin-top: 1px;
+          margin-bottom: 1px;
+          margin-left: 0px;
+          margin-right: 2px;
+        }
+      }
+
+      .visualization-part-middle {
+        flex: 0 0 58px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .visualization-part-title {
+        justify-content: center;
+      }
+
+      .visualization-part-delete {
+        flex: 0 0 30px;
+      }
+    }
+
+    .visualization-part {
+      padding-bottom: 4px;
     }
   }
 
   .damage-control,
+  .visualization-control,
   .ability-adjustments-control {
     line-height: 24px;
     color: @colorTan;
     text-align: right;
   }
 
-  .damage-control {
+  .damage-control,
+  .visualization-control {
     width: 18px;
     flex: 0 0 18px;
     float: right;    
