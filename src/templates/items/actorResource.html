@@ -111,6 +111,15 @@
             </div>
 
             {{#if itemData.combatTracker.show}}
+            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnly" subtitle="SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnlyTooltip"}}>
+                <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnly" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.combatTracker.showOwnerAndGMOnly" {{checked itemData.combatTracker.showOwnerAndGMOnly}}/>
+                    </label>
+                </div>
+            </div>
+
             <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValue" subtitle="SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValueTooltip"}}>
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValue" }}</label>
                 <div class="form-fields">

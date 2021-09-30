@@ -16,6 +16,12 @@ export default class CounterManagement {
                 for (const displayedResource of displayedResources) {
                     const resourceValue = currentActor.getResourceComputedValue(displayedResource.data.data.type, displayedResource.data.data.subType);
 
+                    if (displayedResource.data.data.combatTracker.showOwnerAndGMOnly) {
+                        if (!game.user.isGM && !currentActor.isOwner) {
+                            continue;
+                        }
+                    }
+
                     let title = displayedResource.name;
                     let image = displayedResource.img;
                     let displayValue = resourceValue;
