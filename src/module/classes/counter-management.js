@@ -79,6 +79,11 @@ export default class CounterManagement {
                     additionalHtml += "</a>";
                 }
 
+                // If no additional HTML needs to be added, we can exit early. This can happen when the resources are all set to only show for owner and GM, and local user is neither.
+                if (additionalHtml.length === 0) {
+                    continue;
+                }
+
                 const $combatantHtml = html.find(`.combatant[data-combatant-id="${combatant.id}"]`);
                 $combatantHtml.addClass('counter-image-relative');
                 $combatantHtml.addClass('flexcol');
@@ -94,8 +99,6 @@ export default class CounterManagement {
                 $div.after('<div id="counter-tokens" class=""></div>');
                 const $counterTokens = $combatantHtml.find('#counter-tokens');
                 $counterTokens.append(additionalHtml);
-
-                //$combatantHtml.find('.token-effects').before(additionalHtml);
 
                 html.on('click', '.counter-token', function(event) {
                     event.preventDefault();
