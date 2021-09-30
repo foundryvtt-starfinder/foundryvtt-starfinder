@@ -7,6 +7,9 @@ The latest extension to our modifier system is the ability to give characters 'A
 
 You can use actor resources in modifiers and rolls like any actor value. Mouse over the Actor Resource for a tooltip showcasing the fields you can use in your formula.
 
+### Special note for Solarian players
+In addition to creating Actor Resources, we have removed the old system for tracking stellar mode attunement and replaced it with the new system. If you want to have a combat tracker element tracking your Stellar Mode, remove your old Stellar Mode feat, and drag the new Stellar Mode feat from the compendium.
+
 ## Spellcaster updates
 One of the long time coming updates is to the spellcasting implementation. The old spell casting implementation was a very minorly adapted 5e system implementation, but Starfinder has different rules. These new rules have been reflected in the system now. Spellcasting classes now provide separate spells known, spells per day, and bonus spells per day calculations, and the spellbook will inform you which classes' spellslots are available or used. The spellbook will now also show which spells require concentration.
 
