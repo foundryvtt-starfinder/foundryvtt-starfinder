@@ -33,6 +33,7 @@ Full rest has also received a little update. Partially because the new spells pe
 * Fixed bulk calculation for items contained by other items.
 * Fixed hobgoblin speed, it was listed as able to run 3025 ft per round which is a little speedier than intended.
 * Fixed missing capacity on starship weapons.
+* Fixed NPC spellcasting always taking intelligence into account. (Thanks J-Dawe!)
 
 ## System Hooks
 * Added a hook to alter rolls before rolling them.
