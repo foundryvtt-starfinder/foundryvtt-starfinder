@@ -639,8 +639,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Determine ability score modifier
         let abl = itemData.data.ability;
-        if (!abl && (this.data.type === "spell")) abl = actorData.attributes.spellcasting || "int";
-        else if (!abl && this.actor.data.type === "npc") abl = "";
+        if (!abl && this.actor.data.type === "npc") abl = "";
+        else if (!abl && (this.data.type === "spell")) abl = actorData.attributes.spellcasting || "int";
         else if (!abl) abl = "str";        
 
         // Define Roll parts
