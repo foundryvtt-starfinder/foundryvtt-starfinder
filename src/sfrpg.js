@@ -186,7 +186,7 @@ Hooks.once("setup", function () {
     **/
     console.log("Starfinder | [SETUP] Initializing counter management");
     const counterManagement = new CounterManagement();
-    counterManagement.startup();
+    counterManagement.setup();
 
     console.log("Starfinder | [SETUP] Initializing RPC system");
     RPC.initialize();
