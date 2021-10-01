@@ -473,6 +473,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         html.find('input[class="data.supportedSizes"]').change(this._onChangeSupportedStarshipSizes.bind(this));
 
+        html.find('img[name="resource-image"]').click(this._onClickResourceVisualizationImage.bind(this));
         html.find('select[name="resource-mode"]').change(this._onChangeResourceVisualizationMode.bind(this));
         html.find('input[name="resource-value"]').change(this._onChangeResourceVisualizationValue.bind(this));
         html.find('input[name="resource-title"]').change(this._onChangeResourceVisualizationTitle.bind(this));
@@ -803,13 +804,38 @@ export class ItemSheetSFRPG extends ItemSheet {
         }
     }
 
+    async _onClickResourceVisualizationImage(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const parent = $(event.currentTarget).parents(".visualization-part");
+        const visualizationIndex = $(parent).attr("data-index");
+
+        const visualization = duplicate(this.item.data.data.combatTracker.visualization);
+        const currentImage = visualization[visualizationIndex].image || this.item.img;
+
+        const attr = event.currentTarget.dataset.edit;
+        const fp = new FilePicker({
+          type: "image",
+          current: currentImage,
+          callback: path => {
+            visualization[visualizationIndex].image = path;
+            this.item.update({
+                "data.combatTracker.visualization": visualization
+            });
+          },
+          top: this.position.top + 40,
+          left: this.position.left + 10
+        });
+        return fp.browse();
+    }
+
     async _onChangeResourceVisualizationMode(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
 
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
-        console.log(['update value', visualizationIndex, event.currentTarget.value]);
 
         const visualization = duplicate(this.item.data.data.combatTracker.visualization);
         visualization[visualizationIndex].mode = event.currentTarget.value;
@@ -825,7 +851,6 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
-        console.log(['update value', visualizationIndex, event.currentTarget.value]);
 
         const visualization = duplicate(this.item.data.data.combatTracker.visualization);
         visualization[visualizationIndex].value = Number(event.currentTarget.value);
@@ -844,7 +869,6 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
-        console.log(['update value', visualizationIndex, event.currentTarget.value]);
 
         const visualization = duplicate(this.item.data.data.combatTracker.visualization);
         visualization[visualizationIndex].title = event.currentTarget.value;
