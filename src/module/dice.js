@@ -190,7 +190,23 @@ export class DiceSFRPG {
             dialogOptions: dialogOptions
         };
 
-        const formula = parts.map(x => x instanceof Object ? `${x.score}[${x.explanation}]` : x).join(" + ");
+        const partMapper = (part) => {
+            if (part instanceof Object) {
+                if (part.explanation) {
+                    if (part.score) {
+                        return `${part.score}[${part.explanation}]`;
+                    }
+                    return `0[${part.explanation}]`;
+                } else {
+                    if (part.score) {
+                        return `${part.score}`;
+                    }
+                    return `0`;
+                }
+            }
+            return part;
+        };
+        const formula = parts.map(partMapper).join(" + ");
 
         const tree = new RollTree(options);
         return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
@@ -467,7 +483,24 @@ export class DiceSFRPG {
             parts
         };
 
-        const formula = parts.filter(part => part.formula.length > 0).map(part => part.formula).join(" + ");
+        const partMapper = (part) => {
+            if (part instanceof Object) {
+                if (part.explanation) {
+                    if (part.formula) {
+                        return `${part.formula}[${part.explanation}]`;
+                    }
+                    return `0[${part.explanation}]`;
+                } else {
+                    if (part.formula) {
+                        return `${part.formula}`;
+                    }
+                    return `0`;
+                }
+            }
+            return part;
+        };
+
+        const formula = parts.map(partMapper).join(" + ");
         const tree = new RollTree(options);
         return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
             if (button === 'cancel') {
@@ -580,6 +613,7 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
+            console.log(finalFormula.finalRoll);
             const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
             let roll = await rollObject.evaluate({async: true});
 

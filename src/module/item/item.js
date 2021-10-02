@@ -958,6 +958,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Determine ability score modifier
         let abl = itemData.ability;
+        console.log(itemData);
         if (!abl && (this.data.type === "spell")) abl = actorData.attributes.spellcasting || "int";
         else if (!abl) abl = "str";
 
@@ -1009,7 +1010,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             //console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
             let computedBonus = bonus.modifier;
-            parts.push({ "formula": computedBonus, "types": null, "operator": null });
+            parts.push({ formula: computedBonus, explanation: bonus.name });
             return computedBonus;
         };
 
@@ -1065,7 +1066,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (additionalModifiers.length > 0) {
             rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
-            parts.push({ "formula": "@additional.modifiers.bonus", "types": null, "operator": null });
+            parts.push({ formula: "@additional.modifiers.bonus", explanation: game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus") });
         }
 
         // Call the roll helper utility
