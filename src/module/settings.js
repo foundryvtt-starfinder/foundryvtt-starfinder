@@ -97,6 +97,7 @@ export const registerSystemSettings = function () {
             choices: {
                 "enabled": "SFRPG.Settings.CombatCards.Values.Enabled",
                 "roundsPhases": "SFRPG.Settings.CombatCards.Values.RoundsPhases",
+                "roundsTurns": "SFRPG.Settings.CombatCards.Values.RoundsTurns",
                 "roundsOnly": "SFRPG.Settings.CombatCards.Values.OnlyRounds",
                 "disabled": "SFRPG.Settings.CombatCards.Values.Disabled"
             }

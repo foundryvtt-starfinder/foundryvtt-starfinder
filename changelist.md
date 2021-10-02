@@ -28,6 +28,7 @@ Full rest has also received a little update. Partially because the new spells pe
 * Renamed Apply Damage roll context menu items to be consistent with each other, and added a warning when no token is selected.
 * Added a safety check around rolls to prevent character sheets from becoming inaccessible when a roll formula contains invalid terms.
 * Added a safety check to prevent incorrect shield data from rendering character sheets inaccessible.
+* Added a setting to only show rounds and turns during combat. Fixes #403
 * Added a weapon property for the Nanocyte's Gear Array created weaponry.
 * Removed modifier tab from the ammunition sheet, it wasn't implemented correctly and misleading in its existence.
 * Removed max height constraint from item sheets, it is now possible to resize them vertically as much as you like.
