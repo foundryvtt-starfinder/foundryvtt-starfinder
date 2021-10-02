@@ -24,6 +24,9 @@ Future work is planned, such as a more elegant way of having spells identify whi
 ## Full rest changes
 Full rest has also received a little update. Partially because the new spells per day setup required it, and partly because it simply hadn't been set up for proper localization yet. The full rest chat card will now provide a more complete summary of recovered character stats and items.
 
+## Nanocyte added
+With the release of Tech Revolution, a new class has been added, the Nanocyte. Thanks to the efforts of Iankid, this has now been added to the system.
+
 ## Bugfixes
 * Damage rolls now display the modifier names properly. Fixes #428
 * Feats with charges now send chat messages when deactivated. Fixes #446
