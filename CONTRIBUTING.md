@@ -105,6 +105,8 @@ Items have a source field, and this source field should be filled in. There is a
 | Character Operations Manual | COM pg. x | COM pg. 123 |
 | Starship Operations Manual | SOM pg. x | SOM pg. 123 |
 | Near Space | NS pg. x | NS pg. 123 |
+| Galaxy Exploration Manual | GEM pg. x | GEM pg. 123 |
+| Tech Revolution | TR pg. x | TR pg. 123 |
 | Alien Archive 1 | AA1 pg. x | AA1 pg. 123 |
 | Alien Archive 2 | AA2 pg. x | AA2 pg. 123 |
 | Alien Archive 3 | AA3 pg. x | AA3 pg. 123 |
