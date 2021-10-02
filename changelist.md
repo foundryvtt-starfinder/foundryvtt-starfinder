@@ -1,4 +1,4 @@
-# v0.14.x - Starfinder
+# v0.14.1 - Starfinder
 
 Hello World to Starfinder v0.14, where we introduce the latest improvements to the system. This update is primarily great for spellcasters and people making macros and custom things, but there are little things for everyone else as well.
 
