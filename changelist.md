@@ -7,6 +7,8 @@ The latest extension to our modifier system is the ability to give characters 'A
 
 You can use actor resources in modifiers and rolls like any actor value. Mouse over the Actor Resource for a tooltip showcasing the fields you can use in your formula.
 
+Actor resources can also be listed in the combat tracker, and you can provide conditional texts and images for specific values. Finally, they can be set up to only display on the combat tracker for the actor's owner and the GM, or for everyone.
+
 ### Special note for Solarian players
 In addition to creating Actor Resources, we have removed the old system for tracking stellar mode attunement and replaced it with the new system. If you want to have a combat tracker element tracking your Stellar Mode, remove your old Stellar Mode feat, and drag the new Stellar Mode feat from the compendium.
 
