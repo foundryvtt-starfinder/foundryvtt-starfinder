@@ -23,6 +23,7 @@ Future work is planned, such as a more elegant way of having spells identify whi
 Full rest has also received a little update. Partially because the new spells per day setup required it, and partly because it simply hadn't been set up for proper localization yet. The full rest chat card will now provide a more complete summary of recovered character stats and items.
 
 ## Bugfixes
+* Feats with charges now send chat messages when deactivated. Fixes #446
 * Renamed Apply Damage roll context menu items to be consistent with each other, and added a warning when no token is selected.
 * Added a safety check around rolls to prevent character sheets from becoming inaccessible when a roll formula contains invalid terms.
 * Added a safety check to prevent incorrect shield data from rendering character sheets inaccessible.
