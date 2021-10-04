@@ -757,7 +757,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             "0": "&infin;"
         };
 
-        let spellbook = spells.reduce((spellBook, spell) => {
+        const spellbookReduced = spells.reduce((spellBook, spell) => {
             const spellData = spell.data;
 
             const mode = spellData.preparation.mode || "";
@@ -779,10 +779,12 @@ export class ActorSheetSFRPG extends ActorSheet {
 
                 if (actorData.spells.classes && actorData.spells.classes.length > 0) {
                     spellBook[lvl].classes = [];
-                    for (const [classKey, storedData] of Object.entries(spellsPerDay.perClass)) {
-                        const classInfo = actorData.spells.classes.find(x => x.key === classKey);
-                        if (storedData.max > 0) {
-                            spellBook[lvl].classes.push({key: classKey, name: classInfo?.name || classKey, value: storedData.value || 0, max: storedData.max});
+                    if (spellsPerDay?.perClass) {
+                        for (const [classKey, storedData] of Object.entries(spellsPerDay.perClass)) {
+                            const classInfo = actorData.spells.classes.find(x => x.key === classKey);
+                            if (storedData.max > 0) {
+                                spellBook[lvl].classes.push({key: classKey, name: classInfo?.name || classKey, value: storedData.value || 0, max: storedData.max});
+                            }
                         }
                     }
                 }
@@ -792,10 +794,10 @@ export class ActorSheetSFRPG extends ActorSheet {
             return spellBook;
         }, {});
 
-        spellbook = Object.values(spellbook);
-        spellbook.sort((a, b) => a.level - b.level);
+        const spellbookValues = Object.values(spellbookReduced);
+        spellbookValues.sort((a, b) => a.level - b.level);
 
-        return spellbook;
+        return spellbookValues;
     }
 
     /**

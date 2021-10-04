@@ -3,6 +3,7 @@
 A small bugfix patch to address any issues caused by v0.14.1
 
 # Fixes
+* Fixed player character spells set to Always Available or Innate Spellcasting.
 
 # v0.14.1 - Starfinder
 
