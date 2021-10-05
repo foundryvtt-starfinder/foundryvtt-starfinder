@@ -1,3 +1,11 @@
+# v0.14.2 - Starfinder
+
+A small bugfix patch to address any issues caused by v0.14.1
+
+# Fixes
+* Fixed player character spells set to Always Available or Innate Spellcasting.
+* Fixed Innate Spellcasting and Always Available headers on spellbook to no longer take two rows.
+
 # v0.14.1 - Starfinder
 
 Hello World to Starfinder v0.14, where we introduce the latest improvements to the system. This update is primarily great for spellcasters and people making macros and custom things, but there are little things for everyone else as well.
