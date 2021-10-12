@@ -1417,3 +1417,17 @@ SFRPG.flightManeuverability = {
     "0": "SFRPG.ActorSheet.Attributes.Speed.Flight.Average",
     "1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Perfect"
 };
+
+/**
+ * Mech stuff:
+ * 
+ * The following are various tables used for configuring mech statistics.
+ */
+
+SFRPG.mechPointsPerPc = [ 
+    0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300 
+];
+
+SFRPG.minimumMechPoints = [
+    0, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315
+];
