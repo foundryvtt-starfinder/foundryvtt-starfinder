@@ -11,8 +11,10 @@ export default function (engine) {
         for (const sensor of sensors) {
             const sensorData = sensor.data.data;
 
-            data.attributes.sensors.mod += sensorData.modifier;
-            data.attributes.sensors.tooltip.push(`${sensor.data.name}: ${sensorData.modifier.signedString()}`);
+            if (sensorData.modifier) {
+                data.attributes.sensors.mod += sensorData.modifier;
+                data.attributes.sensors.tooltip.push(`${sensor.data.name}: ${sensorData.modifier.signedString()}`);
+            }
         }
 
         return fact;

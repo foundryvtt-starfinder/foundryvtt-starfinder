@@ -1,3 +1,10 @@
+# v0.x.x - Starfinder
+
+Next update description goes here.
+
+# Fixes
+* Fixed an error caused by the starship sensor's modifier being empty.
+
 # v0.14.2 - Starfinder
 
 A small bugfix patch to address any issues caused by v0.14.1
