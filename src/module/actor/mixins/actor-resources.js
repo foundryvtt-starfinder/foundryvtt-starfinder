@@ -2,7 +2,7 @@ export const ActorResourcesMixin = (superclass) => class extends superclass {
     getResourceBaseValue(type, subType) {
         const actorResource = this.getResource(type, subType);
         if (actorResource) {
-            return actorResource.base;
+            return actorResource.data.data.base;
         }
         return null;
     }
