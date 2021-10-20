@@ -530,7 +530,7 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
             continue;
         }
 
-        if (storageOption.weightProperty && !itemToAdd.data.data[storageOption.weightProperty]) {
+        if (storageOption.weightProperty && !itemToAdd.data.data[storageOption.weightProperty] && !itemToAdd.type == 'spell') {
             //console.log(`Skipping storage ${index} because it does not match the weight settings.`);
             continue;
         }
