@@ -3,7 +3,7 @@ import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
 
-import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory.js";
+import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory-utils.js";
 import { RPC } from "../../rpc.js"
 
 import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js"

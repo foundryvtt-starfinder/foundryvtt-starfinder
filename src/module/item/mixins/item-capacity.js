@@ -1,4 +1,4 @@
-import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory.js"
+import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory-utils.js"
 
 export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**

@@ -4,6 +4,7 @@ import RollContext from "../rolls/rollcontext.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ActorConditionsMixin } from "./mixins/actor-conditions.js";
 import { ActorCrewMixin } from "./mixins/actor-crew.js";
+import { ActorInventoryMixin } from "./mixins/actor-inventory.js";
 import { ActorModifiersMixin } from "./mixins/actor-modifiers.js";
 import { ActorResourcesMixin } from "./mixins/actor-resources.js";
 import { ActorRestMixin } from "./mixins/actor-rest.js";
@@ -29,7 +30,7 @@ import { hasDiceTerms } from "../utilities.js";
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
  */
-export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
+export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
     constructor(data, context) {
         super(data, context);
