@@ -1,9 +1,18 @@
 # v0.x.x - Starfinder
 
-Next update description goes here.
+Notes for the next release
+
+## Fixes
+
+
+# v0.14.3 - Starfinder
+
+A small update to mostly correct issues with NPC's having temporary HP pre set in the compendiums, which caused issues with token attribute bars to appear incorrect.
 
 # Fixes
 * Fixed an error caused by the starship sensor's modifier being empty.
+* Updated NPC's in the compendium to remove any temporary hit points they might have had. This caused an issue where a tokens attribute bar would make it seem that there health wasn't full even though they were at full health.
+* Fixed `Actor#getResourceBaseValue()` not returning the correct value.
 
 # v0.14.2 - Starfinder
 
