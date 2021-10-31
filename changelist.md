@@ -1,3 +1,10 @@
+# v0.x.x - Starfinder
+
+Notes for the next release
+
+## Fixes
+
+
 # v0.14.3 - Starfinder
 
 A small update to mostly correct issues with NPC's having temporary HP pre set in the compendiums, which caused issues with token attribute bars to appear incorrect.
