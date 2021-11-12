@@ -126,7 +126,7 @@ Hooks.once('init', async function () {
     };
 
     CONFIG.SFRPG = SFRPG;
-    CONFIG.statusEffects = CONFIG.SFRPG.statusEffectIcons;
+    CONFIG.statusEffects = CONFIG.SFRPG.statusEffects;
 
     console.log("Starfinder | [INIT] Overriding document classes");
     CONFIG.Actor.documentClass = ActorSFRPG;
