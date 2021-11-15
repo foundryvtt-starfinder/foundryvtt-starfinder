@@ -55,6 +55,7 @@ import RollDialog from "./module/apps/roll-dialog.js";
 import RollNode from "./module/rolls/rollnode.js";
 import RollContext from "./module/rolls/rollcontext.js";
 import RollTree from "./module/rolls/rolltree.js";
+import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 
 let defaultDropHandler = null;
 let initTime = null;
@@ -230,6 +231,9 @@ Hooks.once("setup", function () {
 Hooks.once("ready", () => {
     console.log(`Starfinder | [READY] Preparing system for operation`);
     const readyTime = (new Date()).getTime();
+
+    console.log("Starfinder | [READY] Overriding token HUD");
+    canvas.hud.token = new SFRPGTokenHUD();
 
     console.log("Starfinder | [READY] Overriding canvas drop handler");
     if (canvas.initialized) {
