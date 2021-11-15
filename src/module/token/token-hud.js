@@ -8,16 +8,18 @@ export class SFRPGTokenHUD extends TokenHUD {
      * @returns super
      */
     async _onToggleEffect(event, { overlay = false } = {}) {
+        event.preventDefault();
+        event.stopPropagation();
+
         let img = event.currentTarget;
+        let isEnabled = $(img).hasClass('active');
 
         if (img.dataset.statusId && this.object.actor) {
-            let isEnabled = $(img).hasClass('active');
             let conditionId = img.dataset.statusId;
-
-            this.object.actor.setCondition(conditionId, !isEnabled);
+            await this.object.actor.setCondition(conditionId, !isEnabled, false);
         }
 
-        return super._onToggleEffect(event, { overlay });
+        return !isEnabled;
     }
 
     /**
@@ -113,8 +115,7 @@ export class SFRPGTokenHUD extends TokenHUD {
 
         for (const [k, status] of Object.entries(statuses)) {
             if (status.isActive) {
-                await this.object.actor.setCondition(status.id, false);
-                await this.object.toggleEffect({ id: status.id, icon: status.src });
+                await this.object.actor.setCondition(status.id, false, false);
             }
         }
 
