@@ -1,6 +1,12 @@
 import { SFRPG } from "../../config.js"
 
 export const ActorConditionsMixin = (superclass) => class extends superclass {
+    /**
+     * Check if the Actor has the condition.
+     * @param {String} conditionName The name of the condition. Must match any key from config.js SFRPG.statusEffectIconMapping. Case insensitive.
+     * @returns {Boolean} True if the conditionName exists and a condition with that name is assigned to the Actor. False in any other case.
+     * @public
+     */
     hasCondition(conditionName) {
         if (!SFRPG.statusEffectIconMapping[conditionName]) {
             ui.notifications.warn(`Trying to check condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
@@ -11,6 +17,12 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         return (conditionItem !== undefined);
     }
 
+    /**
+     * Get a condition Item from the actor.
+     * @param {String} conditionName The name of the condition. Must match any key from config.js SFRPG.statusEffectIconMapping. Case insensitive.
+     * @returns {undefined|*} The condition Item if found. Returns undefined if conditionName does not exist or if the Item is not found.
+     * @public
+     */
     getCondition(conditionName) {
         if (!SFRPG.statusEffectIconMapping[conditionName]) {
             ui.notifications.warn(`Trying to get condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
@@ -21,6 +33,12 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         return conditionItem;
     }
 
+    /**
+     * Updates the Actor's conditions. Either adds or removes a condition Item as necessary to match the enabled argument.
+     * @param {String} conditionName The name of the condition. Must match any key from config.js SFRPG.statusEffectIconMapping. Case insensitive.
+     * @param {Boolean} enabled If this value is true it ensures the condition is present on the Actor.
+     * @returns {Promise<*>} the Promise resulting from the create or delete Embedded Document call.
+     */
     async setCondition(conditionName, enabled) {
         if (!SFRPG.statusEffectIconMapping[conditionName]) {
             ui.notifications.warn(`Trying to set condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
@@ -50,11 +68,8 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                         const promise = this.createEmbeddedDocuments("Item", [itemData]);
                         promise.then((createdItems) => {
                             if (createdItems && createdItems.length > 0) {
-                                const updateData = {};
-                                updateData[`data.conditions.${conditionName}`] = true;
-                                this.update(updateData).then(() => {
-                                    Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName: conditionName, enabled: enabled});
-                                });
+                                this._updateActor(conditionName, true);
+                                Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName: conditionName, enabled: enabled});
                             }
                         });
                         
@@ -66,14 +81,53 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             if (conditionItem) {
                 const promise = this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
                 promise.then(() => {
-                    const updateData = {};
-                    updateData[`data.conditions.${conditionName}`] = false;
-                    this.update(updateData).then(() => {
-                        Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
-                    });
+                    this._updateActor(conditionName, false);
+                    Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
                 });
+
                 return promise;
             }
+        }
+    }
+
+    /**
+     * Updates the actor data with the condition settings and then checks if Flat-Footed needs to be updated.
+     *
+     * @param {String} conditionName The name of the condition matching keys from config.js SFRPG.statusEffectIconMapping
+     * @param {Boolean} enabled If this value is true it enables the condition
+     * @private
+     * */
+    _updateActor(conditionName, enabled) {
+        console.log("[ActorConditionsMixin] _updateActor()");
+        const updateData = {};
+        updateData[`data.conditions.${conditionName}`] = enabled;
+
+        this.update(updateData).then(() => {
+            this._checkFlatFooted(conditionName, enabled);
+        });
+    }
+
+    /**
+     *
+     * @param conditionName
+     * @param enabled
+     * @private
+     */
+    _checkFlatFooted(conditionName, enabled) {
+        console.log("[ActorConditionsMixin] _checkFlatFooted()");
+        const flatFooted = "flat-footed";
+        let shouldBeFlatfooted = (conditionName === flatFooted && enabled);
+
+        for (const ffCondition of SFRPG.conditionsCausingFlatFooted) {
+            if (this.hasCondition(ffCondition)) {
+                shouldBeFlatfooted = true;
+                break;
+            }
+        }
+        console.log(`[ActorConditionsMixin] shouldBeFlatfooted: ${shouldBeFlatfooted}`);
+
+        if (shouldBeFlatfooted !== this.hasCondition(flatFooted)) {
+            this.setCondition(flatFooted, shouldBeFlatfooted);
         }
     }
 }

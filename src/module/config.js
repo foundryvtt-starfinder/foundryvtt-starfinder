@@ -1407,6 +1407,8 @@ SFRPG.conditions = {
     }
 };
 
+SFRPG.conditionsCausingFlatFooted = ["blinded", "cowering", "off-kilter", "pinned", "stunned"]
+
 // TODO localize
 SFRPG.characterFlags = {
     "solarianAttunement": {
