@@ -16,7 +16,7 @@ export class SFRPGTokenHUD extends TokenHUD {
 
         if (img.dataset.statusId && this.object.actor) {
             let conditionId = img.dataset.statusId;
-            await this.object.actor.setCondition(conditionId, !isEnabled, false);
+            await this.object.actor.setCondition(conditionId, !isEnabled, {overlay: overlay});
         }
 
         return !isEnabled;
@@ -115,7 +115,7 @@ export class SFRPGTokenHUD extends TokenHUD {
 
         for (const [k, status] of Object.entries(statuses)) {
             if (status.isActive) {
-                await this.object.actor.setCondition(status.id, false, false);
+                await this.object.actor.setCondition(status.id, false, {overlay: status.isOverlay});
             }
         }
 

@@ -37,23 +37,34 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * Updates the Actor's conditions. Either adds or removes a condition Item as necessary to match the enabled argument.
      * @param {String} conditionName The name of the condition. Must match any key from config.js SFRPG.statusEffectIconMapping. Case insensitive.
      * @param {Boolean} enabled If this value is true it ensures the condition is present on the Actor.
-     * @returns {Promise<*>} the Promise resulting from the create or delete Embedded Document call.
+     * @param {Object} overlay If this value is true it indicates that the token icon should be added as a full-sized overlay. Default is false.
+     * @returns {Promise<*>} The Promise resulting from the create or delete Embedded Document call.
      */
-    async setCondition(conditionName, enabled) {
+    async setCondition(conditionName, enabled, { overlay = false } = {}) {
         if (!SFRPG.statusEffectIconMapping[conditionName]) {
             ui.notifications.warn(`Trying to set condition ${conditionName} on actor ${this.name} but the condition is not valid. See CONFIG.SFRPG.statusEffectIconMapping for all valid conditions.`);
             return;
         }
 
-        const conditionItem = this.getCondition(conditionName);
+        // Try to get status effect object as a workaround for a poorly conceived check in foundry.js Token.toggleEffect(...)
+        let statusEffect;
+        for (const effect of SFRPG.statusEffects) {
+            if (effect.id === conditionName) {
+                statusEffect = effect;
+            }
+        }
+        
+        statusEffect = statusEffect ?? SFRPG.statusEffectIconMapping[conditionName];
 
         // Reflect state on tokens
         const tokens = this.getActiveTokens(true);
         for (const token of tokens) {
-            await token.toggleEffect(SFRPG.statusEffectIconMapping[conditionName], {active: enabled});
+            await token.toggleEffect(statusEffect, {active: enabled, overlay: overlay});
         }
 
         // Update condition item
+        const conditionItem = this.getCondition(conditionName);
+        
         if (enabled) {
             if (!conditionItem) {
                 const compendium = game.packs.find(element => element.title.includes("Conditions"));
@@ -98,7 +109,6 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @private
      * */
     _updateActor(conditionName, enabled) {
-        console.log("[ActorConditionsMixin] _updateActor()");
         const updateData = {};
         updateData[`data.conditions.${conditionName}`] = enabled;
 
@@ -114,7 +124,6 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @private
      */
     _checkFlatFooted(conditionName, enabled) {
-        console.log("[ActorConditionsMixin] _checkFlatFooted()");
         const flatFooted = "flat-footed";
         let shouldBeFlatfooted = (conditionName === flatFooted && enabled);
 
@@ -124,8 +133,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                 break;
             }
         }
-        console.log(`[ActorConditionsMixin] shouldBeFlatfooted: ${shouldBeFlatfooted}`);
-
+        
         if (shouldBeFlatfooted !== this.hasCondition(flatFooted)) {
             this.setCondition(flatFooted, shouldBeFlatfooted);
         }
