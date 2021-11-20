@@ -2,20 +2,20 @@ export class SFRPGTokenHUD extends TokenHUD {
 
     /**
      * @override
-     * Calls setCondition from the SFRPG actor before calling super
+     * Calls setCondition from the SFRPG actor
      * @param {Event} event 
-     * @param {any} param1 - contains overlay boolean
-     * @returns super
+     * @param {any} param1 contains overlay boolean
+     * @returns {Boolean} the new enabled state of the condition
      */
     async _onToggleEffect(event, { overlay = false } = {}) {
         event.preventDefault();
         event.stopPropagation();
 
-        let img = event.currentTarget;
-        let isEnabled = $(img).hasClass('active');
+        const img = event.currentTarget;
+        const isEnabled = $(img).hasClass('active');
 
         if (img.dataset.statusId && this.object.actor) {
-            let conditionId = img.dataset.statusId;
+            const conditionId = img.dataset.statusId;
             await this.object.actor.setCondition(conditionId, !isEnabled, {overlay: overlay});
         }
 
@@ -30,7 +30,7 @@ export class SFRPGTokenHUD extends TokenHUD {
         const effects = this.element.find(".status-effects")[0];
         const statuses = this._getStatusEffectChoices();
 
-        for (let img of $('[src]', effects)) {
+        for (const img of $('[src]', effects)) {
             const status = statuses[img.getAttribute("src")] || {};
 
             img.classList.toggle("overlay", !!status.isOverlay);
@@ -40,24 +40,10 @@ export class SFRPGTokenHUD extends TokenHUD {
 
     /**
      * @override
-     * Localizes and sorts the effects list before calling super
-     */
-    _getStatusEffectChoices() {
-        CONFIG.statusEffects = CONFIG.statusEffects.sort(function (a, b) {
-            let aid = (a.label != undefined ? game.i18n.localize(a.label) : a.id);
-            let bid = (b.label != undefined ? game.i18n.localize(b.label) : b.id);
-            return (aid > bid ? 1 : (aid < bid ? -1 : 0));
-        });
-
-        return super._getStatusEffectChoices();
-    }
-
-    /**
-     * @override
      * Calls super then adds a remove all button and optionally reformats the grid with text.
      */
     async _render(force, options) {
-        let result = super._render(force, options).then((success, fail) => {
+        const result = super._render(force, options).then((success, fail) => {
             SFRPGTokenHUD.modifyConditions.call(this, this.element);
         });
 
@@ -80,12 +66,12 @@ export class SFRPGTokenHUD extends TokenHUD {
             // allow alternate styling
             $('#token-hud').addClass('modified');
 
-            let allStatusImages = $('.col.right .control-icon[data-action="effects"] .status-effects > img');
+            const allStatusImages = $('.col.right .control-icon[data-action="effects"] .status-effects > img');
 
-            for (let image of allStatusImages) {
-                let name      = $(image).attr('title');
-                let nameLabel = $('<div>').addClass('condition-name').html(name);
-                let container = $('<div>').addClass('condition').attr('title', name);
+            for (const image of allStatusImages) {
+                const name      = $(image).attr('title');
+                const nameLabel = $('<div>').addClass('condition-name').html(name);
+                const container = $('<div>').addClass('condition').attr('title', name);
 
                 // Insert the container and append the image and the name inside
                 container.insertAfter(image)
@@ -96,12 +82,12 @@ export class SFRPGTokenHUD extends TokenHUD {
 
         // Add a button to remove all conditions
         const label = game.i18n.localize("SFRPG.Canvas.TokenHud.RemoveAll");
-        let content = game.settings.get('sfrpg', 'tokenConditionLabels') ? `${label} <i class="fas fa-times-circle" />` : `<i class="fas fa-times-circle" />`;
+        const content = game.settings.get('sfrpg', 'tokenConditionLabels') ? `${label} <i class="fas fa-times-circle" />` : `<i class="fas fa-times-circle" />`;
 
-        let button = $('<div>').addClass('remove-all').attr('title', label).html(content)
+        const button = $('<div>').addClass('remove-all').attr('title', label).html(content)
             .on("click", SFRPGTokenHUD.onRemoveAllConditions.bind(this));
 
-        let gridContainer = $('.col.right .control-icon[data-action="effects"] .status-effects', html);
+        const gridContainer = $('.col.right .control-icon[data-action="effects"] .status-effects', html);
         gridContainer.append(button);
     }
 
@@ -111,6 +97,7 @@ export class SFRPGTokenHUD extends TokenHUD {
      * @param {Object} event - standard event interface
      */
     static async onRemoveAllConditions(event) {
+        event.preventDefault();
         const statuses = this._getStatusEffectChoices();
 
         for (const [k, status] of Object.entries(statuses)) {
@@ -118,7 +105,5 @@ export class SFRPGTokenHUD extends TokenHUD {
                 await this.object.actor.setCondition(status.id, false, {overlay: status.isOverlay});
             }
         }
-
-        event.preventDefault();
     }
 }

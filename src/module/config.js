@@ -1223,45 +1223,7 @@ SFRPG.statusEffects = [
         label: "SFRPG.ConditionsUnconscious",
         icon: "systems/sfrpg/icons/conditions/unconscious.png"
     }
-]
-
-SFRPG.statusEffectIconMapping = {
-    "asleep": "systems/sfrpg/icons/conditions/asleep.png",
-    "bleeding": "systems/sfrpg/icons/conditions/bleeding.png",
-    "blinded": "systems/sfrpg/icons/conditions/blinded.png",
-    "broken": "systems/sfrpg/icons/conditions/broken.png",
-    "burning": "systems/sfrpg/icons/conditions/burning.png",
-    "confused": "systems/sfrpg/icons/conditions/confused.png",
-    "cowering": "systems/sfrpg/icons/conditions/cowering.png",
-    "dazed": "systems/sfrpg/icons/conditions/dazed.png",
-    "dazzled": "systems/sfrpg/icons/conditions/dazzled.png",
-    "dead": "systems/sfrpg/icons/conditions/dead.png",
-    "deafened": "systems/sfrpg/icons/conditions/deafened.png",
-    "dying": "systems/sfrpg/icons/conditions/dying.png",
-    "encumbered": "systems/sfrpg/icons/conditions/encumbered.png",
-    "entangled": "systems/sfrpg/icons/conditions/entangled.png",
-    "exhausted": "systems/sfrpg/icons/conditions/exhausted.png",
-    "fascinated": "systems/sfrpg/icons/conditions/fascinated.png",
-    "fatigued": "systems/sfrpg/icons/conditions/fatigued.png",
-    "flat-footed": "systems/sfrpg/icons/conditions/flatfooted.png",
-    "frightened": "systems/sfrpg/icons/conditions/frightened.png",
-    "grappled": "systems/sfrpg/icons/conditions/grappled.png",
-    "helpless": "systems/sfrpg/icons/conditions/helpless.png",
-    "nauseated": "systems/sfrpg/icons/conditions/nauseated.png",
-    "off-kilter": "systems/sfrpg/icons/conditions/offkilter.png",
-    "off-target": "systems/sfrpg/icons/conditions/offtarget.png",
-    "overburdened": "systems/sfrpg/icons/conditions/overburdened.png",
-    "panicked": "systems/sfrpg/icons/conditions/panicked.png",
-    "paralyzed": "systems/sfrpg/icons/conditions/paralyzed.png",
-    "pinned": "systems/sfrpg/icons/conditions/pinned.png",
-    "prone": "systems/sfrpg/icons/conditions/prone.png",
-    "shaken": "systems/sfrpg/icons/conditions/shaken.png",
-    "sickened": "systems/sfrpg/icons/conditions/sickened.png",
-    "stable": "systems/sfrpg/icons/conditions/stable.png",
-    "staggered": "systems/sfrpg/icons/conditions/staggered.png",
-    "stunned": "systems/sfrpg/icons/conditions/stunned.png",
-    "unconscious": "systems/sfrpg/icons/conditions/unconscious.png"
-};
+];
 
 // TODO localize
 SFRPG.conditions = {
@@ -1407,7 +1369,7 @@ SFRPG.conditions = {
     }
 };
 
-SFRPG.conditionsCausingFlatFooted = ["blinded", "cowering", "off-kilter", "pinned", "stunned"]
+SFRPG.conditionsCausingFlatFooted = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
 
 // TODO localize
 SFRPG.characterFlags = {

@@ -218,6 +218,8 @@ Hooks.once("setup", function () {
         }, {});
     }
 
+    CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));
+
     console.log("Starfinder | [SETUP] Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);
 
