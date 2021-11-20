@@ -35,6 +35,7 @@ export const SFRPGEffectType = Object.freeze({
     ALL_SKILLS: "all-skills",
     SAVES: "saves",
     SAVE: "save",
+    SPELL_SAVE_DC: "spell-save-dc",
     SPEED: "speed",
     ALL_SPEEDS: "all-speeds",
     SPECIFIC_SPEED: "specific-speed",
