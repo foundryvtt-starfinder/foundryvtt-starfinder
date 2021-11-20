@@ -1,8 +1,18 @@
 # v0.x.x - Starfinder
 
-Notes for the next release
+With this update we introduce a few nice features to the Starfinder system.
 
-## Fixes
+## Token HUD improvements
+
+The small array of little images you'd get right-clicking a token and checking the status effects was always difficult to navigate. So now we've extended them with names, and added a convenient "Remove all" button. These also link to the proper condition items and will activate or remove the appropriate condition modifiers.
+
+Please be aware that modifiers are still mostly unimplemented for NPCs.
+
+## Spell Save DC modifier
+
+It is now possible to create modifiers for spell save DC, useful for feats like Spell Focus, or various diseases.
+
+# Fixes
 
 
 # v0.14.3 - Starfinder
