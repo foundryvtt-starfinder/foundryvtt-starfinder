@@ -1005,6 +1005,7 @@ SFRPG.modifierEffectTypes = {
     "skill-ranks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SkillRanks",
     "saves": "SFRPG.ModifierEffectTypeSaves",
     "save": "SFRPG.ModifierEffectTypeSave",
+    "spell-save-dc": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellSaveDC",
     "ranged-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackRolls",
     "melee-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackRolls",
     "spell-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackRolls",
