@@ -8,6 +8,8 @@ The small array of little images you'd get right-clicking a token and checking t
 
 Please be aware that modifiers are still mostly unimplemented for NPCs.
 
+Thanks to CptTwinkie for building this.
+
 ## Spell Save DC modifier
 
 It is now possible to create modifiers for spell save DC, useful for feats like Spell Focus, or various diseases.
