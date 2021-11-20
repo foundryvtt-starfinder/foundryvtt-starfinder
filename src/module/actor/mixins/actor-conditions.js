@@ -72,7 +72,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         }
 
         // Try to get status effect object as a workaround for a poorly conceived check in foundry.js Token.toggleEffect(...)
-        let statusEffect = SFRPG.statusEffects.find(effect => effect.id === conditionName);
+        const statusEffect = SFRPG.statusEffects.find(effect => effect.id === conditionName);
 
         // Reflect state on tokens
         const tokens = this.getActiveTokens(true);
@@ -132,7 +132,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         const updateData = {};
         updateData[`data.conditions.${conditionName}`] = enabled;
 
-        this.update(updateData).then(() => {
+        return this.update(updateData).then(() => {
             this._checkFlatFooted(conditionName, enabled);
         });
     }
@@ -143,7 +143,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @param enabled True if the condition is being added
      * @private
      */
-    _checkFlatFooted(conditionName, enabled) {
+    async _checkFlatFooted(conditionName, enabled) {
         const flatFooted = "flat-footed";
         let shouldBeFlatfooted = (conditionName === flatFooted && enabled);
 
@@ -155,7 +155,9 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         }
         
         if (shouldBeFlatfooted !== this.hasCondition(flatFooted)) {
-            this.setCondition(flatFooted, shouldBeFlatfooted);
+            return this.setCondition(flatFooted, shouldBeFlatfooted);
         }
+
+        return Promise.reject();
     }
 }
