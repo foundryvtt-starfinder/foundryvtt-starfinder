@@ -15,7 +15,7 @@ Thanks to CptTwinkie for building this.
 It is now possible to create modifiers for spell save DC, useful for feats like Spell Focus, or various diseases.
 
 # Fixes
-
+* Updated Spell Focus feat to include spell save DC modifier.
 
 # v0.14.3 - Starfinder
 
