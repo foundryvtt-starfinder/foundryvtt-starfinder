@@ -153,4 +153,13 @@ export const registerSystemSettings = function () {
         default: false,
         type: Boolean
     });
+
+    game.settings.register("sfrpg", "tokenConditionLabels", {
+        name: "SFRPG.Settings.TokenConditionLabels.Name",
+        hint: "SFRPG.Settings.TokenConditionLabels.Hint",
+        scope: "client",
+        config: true,
+        default: true,
+        type: Boolean
+    });
 };

@@ -1,15 +1,28 @@
 # v0.x.x - Starfinder
 
-Notes for the next release
+With this update we introduce a few nice features to the Starfinder system.
 
-## Fixes
+## Token HUD improvements
 
+The small array of little images you'd get right-clicking a token and checking the status effects was always difficult to navigate. So now we've extended them with names, and added a convenient "Remove all" button. These also link to the proper condition items and will activate or remove the appropriate condition modifiers.
+
+Please be aware that modifiers are still mostly unimplemented for NPCs.
+
+Thanks to CptTwinkie for building this.
+
+## Spell Save DC modifier
+
+It is now possible to create modifiers for spell save DC, useful for feats like Spell Focus, or various diseases.
+
+## Bugfixes and small improvements
+* Updated Spell Focus feat to include spell save DC modifier.
+* Removed attack and damage features from confused condition. We're still confused about how that happened.
 
 # v0.14.3 - Starfinder
 
 A small update to mostly correct issues with NPC's having temporary HP pre set in the compendiums, which caused issues with token attribute bars to appear incorrect.
 
-# Fixes
+## Bugfixes
 * Fixed an error caused by the starship sensor's modifier being empty.
 * Updated NPC's in the compendium to remove any temporary hit points they might have had. This caused an issue where a tokens attribute bar would make it seem that there health wasn't full even though they were at full health.
 * Fixed `Actor#getResourceBaseValue()` not returning the correct value.
@@ -18,7 +31,7 @@ A small update to mostly correct issues with NPC's having temporary HP pre set i
 
 A small bugfix patch to address any issues caused by v0.14.1
 
-# Fixes
+## Bugfixes
 * Fixed player character spells set to Always Available or Innate Spellcasting.
 * Fixed Innate Spellcasting and Always Available headers on spellbook to no longer take two rows.
 
