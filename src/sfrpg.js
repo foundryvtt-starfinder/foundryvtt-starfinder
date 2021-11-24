@@ -207,7 +207,7 @@ Hooks.once("setup", function () {
         "weaponSpecial", "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
         "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
         "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds",
-        "damageTypeOperators", "flightManeuverability"
+        "damageTypeOperators", "flightManeuverability", "mechSizes"
     ];
 
     for (let o of toLocalize) {

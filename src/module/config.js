@@ -1529,6 +1529,13 @@ SFRPG.flightManeuverability = {
  * The following are various tables used for configuring mech statistics.
  */
 
+// Mechs use a subset of the available actor sizes
+SFRPG.mechSizes = {
+    "huge": "SFRPG.SizeHuge",
+    "gargantuan": "SFRPG.SizeGargantuan",
+    "colossal": "SFRPG.SizeColossal"
+}
+
 SFRPG.mechPointsPerPc = [ 
     0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300 
 ];
@@ -1536,3 +1543,173 @@ SFRPG.mechPointsPerPc = [
 SFRPG.minimumMechPoints = [
     0, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315
 ];
+
+SFRPG.mechWeaponDamage = {
+    "low": { 1: "1d4", 2: "1d6", 3: "2d4", 4: "2d6", 5: "3d4", 6: "3d6", 7: "5d4", 8: "6d4", 9: "7d4", 10: "8d4", 11: "9d4", 12: "10d4", 13: "11d4", 14: "12d4", 15: "10d6", 16: "11d6", 17: "12d6", 18: "13d6", 19: "14d6", 20: "15d6" },
+    "medium": { 1: "1d6", 2: "1d8", 3: "2d6", 4: "2d8", 5: "3d6", 6: "3d8", 7: "4d6", 8: "5d6", 9: "4d8", 10: "6d6", 11: "6d8", 12: "9d6", 13: "10d6", 14: "9d8", 15: "10d8", 16: "11d8", 17: "12d8", 18: "13d8", 19: "14d8", 20: "15d8" },
+    "high": { 1: "1d10", 2: "2d6", 3: "2d8", 4: "2d10", 5: "3d8", 6: "3d10", 7: "4d8", 8: "4d10", 9: "5d8", 10: "5d10", 11: "6d10", 12: "7d10", 13: "8d10", 14: "9d10", 15: "10d10", 16: "11d10", 17: "12d10", 18: "13d10", 19: "14d10", 20: "15d10" },
+    "extreme": { 1: "1d12", 2: "2d8", 3: "2d10", 4: "2d12", 5: "3d10", 6: "3d12", 7: "4d10", 8: "4d12", 9: "5d10", 10: "5d12", 11: "6d12", 12: "7d12", 13: "8d12", 14: "9d12", 15: "10d12", 16: "11d12", 17: "12d12", 18: "13d12", 19: "14d12", 20: "15d12" }
+}
+
+SFRPG.mechStatisticsByTier = {
+    1: {
+        sp: 5,
+        hardness: 0,
+        baseAc: 14,
+        baseSave: 2,
+        baseAttackBonus: 8,
+        strength: 0
+    },
+    2: {
+        sp: 7,
+        hardness: 1,
+        baseAc: 15,
+        baseSave: 3,
+        baseAttackBonus: 8,
+        strength: 0
+    },
+    3: {
+        sp: 9,
+        hardness: 1,
+        baseAc: 16,
+        baseSave: 4,
+        baseAttackBonus: 8,
+        strength: 0
+    },
+    4: {
+        sp: 11,
+        hardness: 2,
+        baseAc: 18,
+        baseSave: 4,
+        baseAttackBonus: 8,
+        strength: 1
+    },
+    5: {
+        sp: 13,
+        hardness: 2,
+        baseAc: 19,
+        baseSave: 5,
+        baseAttackBonus: 9,
+        strength: 1
+    },
+    6: {
+        sp: 15,
+        hardness: 3,
+        baseAc: 20,
+        baseSave: 6,
+        baseAttackBonus: 9,
+        strength: 1
+    },
+    7: {
+        sp: 17,
+        hardness: 3,
+        baseAc: 21,
+        baseSave: 7,
+        baseAttackBonus: 9,
+        strength: 2
+    },
+    8: {
+        sp: 19,
+        hardness: 4,
+        baseAc: 23,
+        baseSave: 8,
+        baseAttackBonus: 9,
+        strength: 2
+    },
+    9: {
+        sp: 21,
+        hardness: 4,
+        baseAc: 24,
+        baseSave: 8,
+        baseAttackBonus: 9,
+        strength: 2
+    },
+    10: {
+        sp: 23,
+        hardness: 5,
+        baseAc: 25,
+        baseSave: 9,
+        baseAttackBonus: 10,
+        strength: 3
+    },
+    11: {
+        sp: 25,
+        hardness: 5,
+        baseAc: 26,
+        baseSave: 10,
+        baseAttackBonus: 10,
+        strength: 3
+    },
+    12: {
+        sp: 27,
+        hardness: 6,
+        baseAc: 28,
+        baseSave: 11,
+        baseAttackBonus: 10,
+        strength: 3
+    },
+    13: {
+        sp: 29,
+        hardness: 6,
+        baseAc: 29,
+        baseSave: 11,
+        baseAttackBonus: 10,
+        strength: 4
+    },
+    14: {
+        sp: 31,
+        hardness: 7,
+        baseAc: 30,
+        baseSave: 12,
+        baseAttackBonus: 10,
+        strength: 4
+    },
+    15: {
+        sp: 33,
+        hardness: 7,
+        baseAc: 31,
+        baseSave: 13,
+        baseAttackBonus: 11,
+        strength: 4
+    },
+    16: {
+        sp: 35,
+        hardness: 8,
+        baseAc: 33,
+        baseSave: 14,
+        baseAttackBonus: 11,
+        strength: 5
+    },
+    17: {
+        sp: 37,
+        hardness: 8,
+        baseAc: 34,
+        baseSave: 14,
+        baseAttackBonus: 11,
+        strength: 5
+    }, 
+    18: {
+        sp: 39,
+        hardness: 9,
+        baseAc: 35,
+        baseSave: 15,
+        baseAttackBonus: 11,
+        strength: 5
+    },
+    19: {
+        sp: 41,
+        hardness: 9,
+        baseAc: 36,
+        baseSave: 16,
+        baseAttackBonus: 11,
+        strength: 6
+    },
+    20: {
+        sp: 43,
+        hardness: 10,
+        baseAc: 38,
+        baseSave: 17,
+        baseAttackBonus: 12,
+        strength: 6
+    }
+}
