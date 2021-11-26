@@ -105,6 +105,8 @@ Items have a source field, and this source field should be filled in. There is a
 | Character Operations Manual | COM pg. x | COM pg. 123 |
 | Starship Operations Manual | SOM pg. x | SOM pg. 123 |
 | Near Space | NS pg. x | NS pg. 123 |
+| Galaxy Exploration Manual | GEM pg. x | GEM pg. 123 |
+| Tech Revolution | TR pg. x | TR pg. 123 |
 | Alien Archive 1 | AA1 pg. x | AA1 pg. 123 |
 | Alien Archive 2 | AA2 pg. x | AA2 pg. 123 |
 | Alien Archive 3 | AA3 pg. x | AA3 pg. 123 |
@@ -114,6 +116,14 @@ Items have a source field, and this source field should be filled in. There is a
 | Starfinder Adventures | SA:xy pg. z | SA:JD pg. 61 |
 | Starfinder One Shot | SOS #x pg. y | SOS #1 pg. 51 |
 | Alien Card Deck | ACD | ACD |
+
+### Fast cooking
+
+Sometimes you are only making changes to a single compendium, such as alien-archives. Having to wait for the entire project to cook each time, even though nothing changed outside the alien-archives compendium data folder takes longer and just wastes electricity. You can speed up the process by only cooking the specific compendium as follows:
+`npm run cook -- --pack alien-archives`
+
+This also works for other compendiums, naturally. Just replace alien-archives with another pack.
+It can only work with 1 pack at a time, adding more pack arguments will be ignored. If this is desired functionality, you can request it in discord.
 
 ### Getting Foudnry Intellisense in Visual Studio Code
 

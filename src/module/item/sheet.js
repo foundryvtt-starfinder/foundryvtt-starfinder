@@ -454,6 +454,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Modify damage formula
         html.find(".damage-control").click(this._onDamageControl.bind(this));
+        html.find(".visualization-control").click(this._onActorResourceVisualizationControl.bind(this));
         html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
 
         html.find('.modifier-create').click(this._onModifierCreate.bind(this));
@@ -471,6 +472,11 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find('input[name="storage.affectsEncumbrance"]').change(this._onChangeStorageAffectsEncumbrance.bind(this));
 
         html.find('input[class="data.supportedSizes"]').change(this._onChangeSupportedStarshipSizes.bind(this));
+
+        html.find('img[name="resource-image"]').click(this._onClickResourceVisualizationImage.bind(this));
+        html.find('select[name="resource-mode"]').change(this._onChangeResourceVisualizationMode.bind(this));
+        html.find('input[name="resource-value"]').change(this._onChangeResourceVisualizationValue.bind(this));
+        html.find('input[name="resource-title"]').change(this._onChangeResourceVisualizationTitle.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -767,6 +773,108 @@ export class ItemSheetSFRPG extends ItemSheet {
         storage[slotIndex].affectsEncumbrance = event.currentTarget.checked;
         await this.item.update({
             "data.container.storage": storage
+        });
+    }
+
+    /** Actor resource visualization */
+    async _onActorResourceVisualizationControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+
+        // Add new visualization rule
+        if (a.classList.contains("add-visualization")) {
+            await this._onSubmit(event); // Submit any unsaved changes
+            const visualization = duplicate(this.item.data.data.combatTracker.visualization);
+            return this.item.update({
+                "data.combatTracker.visualization": visualization.concat([
+                    { mode: "eq", value: 0, title: this.item.name, image: this.item.img }
+                ])
+            });
+        }
+
+        // Remove a visualization rule
+        if (a.classList.contains("delete-visualization")) {
+            await this._onSubmit(event); // Submit any unsaved changes
+            const li = a.closest(".visualization-part");
+            const visualization = duplicate(this.item.data.data.combatTracker.visualization);
+            visualization.splice(Number(li.dataset.index), 1);
+            return this.item.update({
+                "data.combatTracker.visualization": visualization
+            });
+        }
+    }
+
+    async _onClickResourceVisualizationImage(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const parent = $(event.currentTarget).parents(".visualization-part");
+        const visualizationIndex = $(parent).attr("data-index");
+
+        const visualization = duplicate(this.item.data.data.combatTracker.visualization);
+        const currentImage = visualization[visualizationIndex].image || this.item.img;
+
+        const attr = event.currentTarget.dataset.edit;
+        const fp = new FilePicker({
+          type: "image",
+          current: currentImage,
+          callback: path => {
+            visualization[visualizationIndex].image = path;
+            this.item.update({
+                "data.combatTracker.visualization": visualization
+            });
+          },
+          top: this.position.top + 40,
+          left: this.position.left + 10
+        });
+        return fp.browse();
+    }
+
+    async _onChangeResourceVisualizationMode(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const parent = $(event.currentTarget).parents(".visualization-part");
+        const visualizationIndex = $(parent).attr("data-index");
+
+        const visualization = duplicate(this.item.data.data.combatTracker.visualization);
+        visualization[visualizationIndex].mode = event.currentTarget.value;
+
+        return this.item.update({
+            "data.combatTracker.visualization": visualization
+        });
+    }
+
+    async _onChangeResourceVisualizationValue(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const parent = $(event.currentTarget).parents(".visualization-part");
+        const visualizationIndex = $(parent).attr("data-index");
+
+        const visualization = duplicate(this.item.data.data.combatTracker.visualization);
+        visualization[visualizationIndex].value = Number(event.currentTarget.value);
+        if (Number.isNaN(visualization[visualizationIndex].value)) {
+            visualization[visualizationIndex].value = 0;
+        }
+
+        return this.item.update({
+            "data.combatTracker.visualization": visualization
+        });
+    }
+
+    async _onChangeResourceVisualizationTitle(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const parent = $(event.currentTarget).parents(".visualization-part");
+        const visualizationIndex = $(parent).attr("data-index");
+
+        const visualization = duplicate(this.item.data.data.combatTracker.visualization);
+        visualization[visualizationIndex].title = event.currentTarget.value;
+
+        return this.item.update({
+            "data.combatTracker.visualization": visualization
         });
     }
 

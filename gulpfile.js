@@ -208,6 +208,10 @@ async function unpackPacks() {
 	let sourceDir = "./src/packs";
 	let files = await fs.readdirSync(sourceDir);
 	for (let file of files) {
+        if (limitToPack && !file.includes(limitToPack)) {
+            continue;
+        }
+        
 		if (file.endsWith(".db")) {
 			let fileWithoutExt = file.substr(0, file.length - 3);
 			let unpackDir = `./src/items/${fileWithoutExt}`;
@@ -236,14 +240,21 @@ async function unpackPacks() {
 var cookErrorCount = 0;
 var cookAborted = false;
 var packErrors = {};
+var limitToPack = null;
 async function cookPacksNoFormattingCheck() {
 	await cookWithOptions({ formattingCheck: false });
 }
-async function cookPacks() {
-	await cookWithOptions();
+async function cookPacks(params) {
+	await cookWithOptions({parameters: params, formattingCheck: true});
 }
 async function cookWithOptions(options = { formattingCheck: true }) {
 	console.log(`Cooking db files`);
+    for (let i = 3; i<process.argv.length; i++) {
+        if (process.argv[i] === '--pack') {
+            limitToPack = process.argv[i+1];
+            i++;
+        }
+    }
 
 	let compendiumMap = {};
 	let allItems = [];
@@ -259,17 +270,19 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 		let outputFile = `./src/packs/${directory}.db`;
 
 		console.log(`Processing ${directory}`);
-
-		if (fs.existsSync(outputFile)) {
-			console.log(`> Removing ${outputFile}`);
-			await fs.unlinkSync(outputFile);
-		}
-
 		compendiumMap[directory] = {};
 
-		let db = new AsyncNedb({ filename: outputFile, autoload: true });
+        let db = null;
+        if (!limitToPack || directory === limitToPack) {
+            if (fs.existsSync(outputFile)) {
+                console.log(`> Removing ${outputFile}`);
+                await fs.unlinkSync(outputFile);
+            }
+            
+            db = new AsyncNedb({ filename: outputFile, autoload: true });
+        }
 
-		console.log(`Opening files in ${itemSourceDir}`);
+		console.log(`> Reading files in ${itemSourceDir}`);
 		let files = await fs.readdirSync(itemSourceDir);
 		for (let file of files) {
 			let filePath = `${itemSourceDir}/${file}`;
@@ -294,25 +307,33 @@ async function cookWithOptions(options = { formattingCheck: true }) {
             else if (directory === "setting") {
                 settingCache[jsonInput._id] = jsonInput;
             }
-            
-            // For actors, we should double-check the token names are set correctly.
-            fixTokenName(jsonInput);
 
-            // Fix missing images
-            if (!jsonInput.img) {
-                jsonInput.img = "icons/svg/mystery-man.svg";
-            }
-            
-            const movingActorTypes = ["character", "drone", "npc"];
-            if (movingActorTypes.includes(jsonInput.type)) {
-                tryMigrateActorSpeed(jsonInput);
+            if (!limitToPack || directory === limitToPack) {
+                // For actors, we should double-check the token names are set correctly.
+                fixTokenName(jsonInput);
+
+                // Fix missing images
+                if (!jsonInput.img) {
+                    jsonInput.img = "icons/svg/mystery-man.svg";
+                }
+                
+                const movingActorTypes = ["character", "drone", "npc"];
+                if (movingActorTypes.includes(jsonInput.type)) {
+                    tryMigrateActorSpeed(jsonInput);
+                }
             }
 
 			compendiumMap[directory][jsonInput._id] = jsonInput;
 			allItems.push({ pack: directory, data: jsonInput, file: file });
 
+            if (limitToPack && directory !== limitToPack) {
+                continue;
+            }
 			await db.asyncInsert(jsonInput);
 		}
+        if (!limitToPack || directory === limitToPack) {
+            console.log(`> Finished processing data for ${directory}.`);
+        }
 	}
 
 	if (cookErrorCount > 0) {
@@ -886,12 +907,12 @@ function searchDescriptionForUnlinkedReference(description, regularExpression) {
 function isSourceValid(source) {
 
     // NOTE: One day this should be changed if they publish further Core books (Galaxy Exploration Manual included for posterity)
-    let CoreBooksSourceMatch = [...source.matchAll(/(CRB|AR|PW|COM|SOM|NS|GEM) pg\. [\d]+/g)];
+    const CoreBooksSourceMatch = [...source.matchAll(/(CRB|AR|PW|COM|SOM|NS|GEM|TR) pg\. [\d]+/g)];
     // NOTE: One day this should be increased when they publish further Alien Archives (Alien Archive 5 included for posterity)
-    let AlienArchiveSourceMatch = [...source.matchAll(/AA([1-5]) pg\. [\d]+/g)];
-    let AdventurePathSourceMatch = [...source.matchAll(/AP #[\d]+ pg\. [\d]+/g)];
-    let StarfinderSocietySourceMatch =  [...source.matchAll(/SFS #[\d]+-[\d]+ pg\. [\d]+/g)];
-
+    const AlienArchiveSourceMatch = [...source.matchAll(/AA([1-5]) pg\. [\d]+/g)];
+    const AdventurePathSourceMatch = [...source.matchAll(/AP #[\d]+ pg\. [\d]+/g)];
+    const StarfinderSocietySourceMatch =  [...source.matchAll(/SFS #[\d]+-[\d]+ pg\. [\d]+/g)];
+    const StarfinderAdventureSourceMatch =  [...source.matchAll(/SA:\S+ pg\. [\d]+/g)];
 
     if (CoreBooksSourceMatch && CoreBooksSourceMatch.length > 0) {
        // ✅ formatted Core book source
@@ -907,6 +928,10 @@ function isSourceValid(source) {
     }
     else if (StarfinderSocietySourceMatch && StarfinderSocietySourceMatch.length > 0) {
         // ✅ formatted Starfinder Society source
+        return true;
+    }
+    else if (StarfinderAdventureSourceMatch && StarfinderAdventureSourceMatch.length > 0) {
+        // ✅ formatted Starfinder Adventure source
         return true;
     }
     else if (source === "ACD") {

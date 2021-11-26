@@ -1,4 +1,41 @@
-# v0.14.x - Starfinder
+# v0.x.x - Starfinder
+
+With this update we introduce a few nice features to the Starfinder system.
+
+## Token HUD improvements
+
+The small array of little images you'd get right-clicking a token and checking the status effects was always difficult to navigate. So now we've extended them with names, and added a convenient "Remove all" button. These also link to the proper condition items and will activate or remove the appropriate condition modifiers.
+
+Please be aware that modifiers are still mostly unimplemented for NPCs.
+
+Thanks to CptTwinkie for building this.
+
+## Spell Save DC modifier
+
+It is now possible to create modifiers for spell save DC, useful for feats like Spell Focus, or various diseases.
+
+## Bugfixes and small improvements
+* Updated Spell Focus feat to include spell save DC modifier.
+* Removed attack and damage features from confused condition. We're still confused about how that happened.
+
+# v0.14.3 - Starfinder
+
+A small update to mostly correct issues with NPC's having temporary HP pre set in the compendiums, which caused issues with token attribute bars to appear incorrect.
+
+## Bugfixes
+* Fixed an error caused by the starship sensor's modifier being empty.
+* Updated NPC's in the compendium to remove any temporary hit points they might have had. This caused an issue where a tokens attribute bar would make it seem that there health wasn't full even though they were at full health.
+* Fixed `Actor#getResourceBaseValue()` not returning the correct value.
+
+# v0.14.2 - Starfinder
+
+A small bugfix patch to address any issues caused by v0.14.1
+
+## Bugfixes
+* Fixed player character spells set to Always Available or Innate Spellcasting.
+* Fixed Innate Spellcasting and Always Available headers on spellbook to no longer take two rows.
+
+# v0.14.1 - Starfinder
 
 Hello World to Starfinder v0.14, where we introduce the latest improvements to the system. This update is primarily great for spellcasters and people making macros and custom things, but there are little things for everyone else as well.
 
@@ -6,6 +43,11 @@ Hello World to Starfinder v0.14, where we introduce the latest improvements to t
 The latest extension to our modifier system is the ability to give characters 'Actor Resources'. These Actor Resources are all-purpose numeric fields that you can use for macros and other automation purposes. An example is provided as 'Stellar Mode (Su)' in the 'Class Features' compendium, that lets you affect your character based on how attuned they are. Actor Resources are available for every actor, PCs, NPCs, Drones, Starships, and Vehicles.
 
 You can use actor resources in modifiers and rolls like any actor value. Mouse over the Actor Resource for a tooltip showcasing the fields you can use in your formula.
+
+Actor resources can also be listed in the combat tracker, and you can provide conditional texts and images for specific values. Finally, they can be set up to only display on the combat tracker for the actor's owner and the GM, or for everyone.
+
+### Special note for Solarian and Vanguard players
+In addition to creating Actor Resources, we have removed the old system for tracking stellar mode attunement and replaced it with the new system. If you want to have a combat tracker element tracking your Stellar Mode, remove your old Stellar Mode feat, and drag the new Stellar Mode feat from the compendium. For Vanguards, you want to pull out Entropic Pool again.
 
 ## Spellcaster updates
 One of the long time coming updates is to the spellcasting implementation. The old spell casting implementation was a very minorly adapted 5e system implementation, but Starfinder has different rules. These new rules have been reflected in the system now. Spellcasting classes now provide separate spells known, spells per day, and bonus spells per day calculations, and the spellbook will inform you which classes' spellslots are available or used. The spellbook will now also show which spells require concentration.
@@ -19,16 +61,24 @@ Future work is planned, such as a more elegant way of having spells identify whi
 ## Full rest changes
 Full rest has also received a little update. Partially because the new spells per day setup required it, and partly because it simply hadn't been set up for proper localization yet. The full rest chat card will now provide a more complete summary of recovered character stats and items.
 
+## Nanocyte added
+With the release of Tech Revolution, a new class has been added, the Nanocyte. Thanks to the efforts of Iankid, this has now been added to the system.
+
 ## Bugfixes
+* Damage rolls now display the modifier names properly. Fixes #428
+* Feats with charges now send chat messages when deactivated. Fixes #446
 * Renamed Apply Damage roll context menu items to be consistent with each other, and added a warning when no token is selected.
 * Added a safety check around rolls to prevent character sheets from becoming inaccessible when a roll formula contains invalid terms.
 * Added a safety check to prevent incorrect shield data from rendering character sheets inaccessible.
+* Added a setting to only show rounds and turns during combat. Fixes #403
+* Added a weapon property for the Nanocyte's Gear Array created weaponry.
 * Removed modifier tab from the ammunition sheet, it wasn't implemented correctly and misleading in its existence.
 * Removed max height constraint from item sheets, it is now possible to resize them vertically as much as you like.
 * Fixed a small mistake with wielding bonus' calculation causing character sheets to break.
 * Fixed bulk calculation for items contained by other items.
 * Fixed hobgoblin speed, it was listed as able to run 3025 ft per round which is a little speedier than intended.
 * Fixed missing capacity on starship weapons.
+* Fixed NPC spellcasting always taking intelligence into account. (Thanks J-Dawe!)
 
 ## System Hooks
 * Added a hook to alter rolls before rolling them.

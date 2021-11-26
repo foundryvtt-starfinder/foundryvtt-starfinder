@@ -97,6 +97,7 @@ export const registerSystemSettings = function () {
             choices: {
                 "enabled": "SFRPG.Settings.CombatCards.Values.Enabled",
                 "roundsPhases": "SFRPG.Settings.CombatCards.Values.RoundsPhases",
+                "roundsTurns": "SFRPG.Settings.CombatCards.Values.RoundsTurns",
                 "roundsOnly": "SFRPG.Settings.CombatCards.Values.OnlyRounds",
                 "disabled": "SFRPG.Settings.CombatCards.Values.Disabled"
             }
@@ -150,6 +151,15 @@ export const registerSystemSettings = function () {
         scope: "client",
         config: true,
         default: false,
+        type: Boolean
+    });
+
+    game.settings.register("sfrpg", "tokenConditionLabels", {
+        name: "SFRPG.Settings.TokenConditionLabels.Name",
+        hint: "SFRPG.Settings.TokenConditionLabels.Hint",
+        scope: "client",
+        config: true,
+        default: true,
         type: Boolean
     });
 };

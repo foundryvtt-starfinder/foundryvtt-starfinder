@@ -1,6 +1,6 @@
 import { SFRPG } from "../../config.js"
 import { ActorSheetSFRPG } from "./base.js"
-import { computeCompoundBulkForItem } from "../actor-inventory.js"
+import { computeCompoundBulkForItem } from "../actor-inventory-utils.js"
 
 export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     static get defaultOptions() {

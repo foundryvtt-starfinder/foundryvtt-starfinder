@@ -288,6 +288,7 @@
                     "SpecificSpeed": "Specific Speed",
                     "SpellAttackDamage": "呪文ダメージ",
                     "SpellAttackRolls": "呪文攻撃ロール",
+                    "SpellSaveDC": "Spell Save DC",
                     "Stamina": "ＳＰ",
                     "WeaponPropertyAttackRolls": "Weapon Property Attack Rolls",
                     "WeaponPropertyDamage": "武器属性ダメージ"
@@ -420,6 +421,9 @@
         "Canvas": {
             "Interface": {
                 "NoTargetTokenForItemDrop": "No target token, cannot drop item!"
+            },
+            "TokenHud": {
+                "RemoveAll": "Remove All"
             }
         },
         "Capacity": {
@@ -1161,6 +1165,9 @@
             "ActorResource": {
                 "Base": "Base value",
                 "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
+                "CombatTracker": "Combat Tracker settings",
+                "DisplayAbsoluteValue": "Display Absolute Value",
+                "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
                 "Enabled": "Enabled",
                 "EnabledTooltip": "If unchecked this resource will not produce a key in the resources data format, nor will it have automation running on it.",
                 "ErrorIncompleteData": "Resource is missing type, subType, or base value.",
@@ -1175,6 +1182,10 @@
                 "RangeModeImmediate": "Immediate",
                 "RangeModePost": "Post",
                 "RangeModeTooltip": "(Advanced) Defines whether the range limitations are applied only after the modifiers are all processed, or for each modifier as they are being processed.<br/><br/>For example, if the range is set to maximum of 1, and the base value is 0, and you have a modifier of +2, and a modifier of -1, the different modes would work as follows:<br/><br/>Post: 0 + 2 - 1 would output 1, which does not exceed the range maximum.<br/><br/>Immediate: 0 + 2 - 1 would output 0. Because 0 + 2 is 2, which exceeds the range maximum of 1, so it gets clamped to 1. Then -1 is applied, producing 0.",
+                "ShowInCombatTracker": "Show in Combat Tracker",
+                "ShowInCombatTrackerTooltip": "If enabled, this resource will be visible in the combat tracker for quick reference.",
+                "ShowOwnerAndGMOnly": "Only shown for Owner and GM",
+                "ShowOwnerAndGMOnlyTooltip": "If enabled, this resource will only be visible in the combat tracker for the sheet owner and the GM.",
                 "SubType": "Subtype",
                 "SubTypeTooltip": "(Required) Subtype makes up the second half of the resource identifier.<br/>For example: @resources.type.subtype.value",
                 "Type": "Type",
@@ -1182,7 +1193,17 @@
                 "Usage": "Attribute usage",
                 "UsageBaseValue": "Base value",
                 "UsageComputedValue": "Computed value",
-                "UsageTooltip": "What follows are a couple of example attributes how you may be able to access this resource in formulas:"
+                "UsageTooltip": "What follows are a couple of example attributes how you may be able to access this resource in formulas:",
+                "Visualizations": "Conditional Visualization",
+                "VisualizationsIntro": "If resource value is..",
+                "VisualizationsModeEqual": "equal to",
+                "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsModeGreaterThan": "greater than",
+                "VisualizationsModeGreaterThanEqual": "greather than or equal to",
+                "VisualizationsModeLesserThan": "lesser than",
+                "VisualizationsModeLesserThanEqual": "lesser than or equal to",
+                "VisualizationsThen": "Then:",
+                "VisualizationsTitle": "Title:"
             },
             "Class": {
                 "SpellCasting": {
@@ -1779,7 +1800,8 @@
                     "Disabled": "Disabled",
                     "Enabled": "Rounds, phases, and turns",
                     "OnlyRounds": "Only rounds",
-                    "RoundsPhases": "Rounds and phases"
+                    "RoundsPhases": "Rounds and phases",
+                    "RoundsTurns": "Rounds and turns"
                 },
                 "VehicleChaseHint": "Change which combat chat cards should be displayed during vehicle chases.",
                 "VehicleChaseName": "Vehicle chases"
@@ -1816,6 +1838,10 @@
             "StarshipActionsSource": {
                 "Hint": "Compendium key containing the starship action definitions.",
                 "Name": "Starship Actions Source Compendium"
+            },
+            "TokenConditionLabels": {
+                "Hint": "Adds text labels to the token conditions.",
+                "Name": "Token condition labels"
             },
             "UseCustomChatCard": {
                 "Hint": "新しいカスタムチャットカードを使用するか、元のチャットカードを使用するかを切り替えます。",
@@ -2529,6 +2555,8 @@
         "WeaponPropertiesFreeHandsTooltip": "A free hands weapon is unbalanced or otherwise awkward to use. This difficulty in using the weapon can be negated by moving the listed number of hands that are not holding anything or being used for any other purpose as counterweights. You wield a free hands weapon using the normal number of hands, but if you have the listed number of free hands available while wielding it, the weapon is not considered unwieldy. For example, a kasatha wielding a flame spinner in two of her hands while her other two hands remain empty treats the weapon as though it does not have the unwieldy weapon special property.",
         "WeaponPropertiesFueled": "燃料 [Fueled]",
         "WeaponPropertiesFueledTooltip": "A fueled weapon has an integrated petrol tank and must be activated to function properly. This works like the powered weapon special property, except it uses petrol as a fuel source instead of a battery. Unlike a battery, petrol is permanently expended upon use and must be purchased rather than recharged.",
+        "WeaponPropertiesGearArray": "Gear Array",
+        "WeaponPropertiesGearArrayTooltip": "Your nanites shape themselves into a single piece of equipment, such as a weapon, tool, or cybernetic augmentation.",
         "WeaponPropertiesGrapple": "組み付き　[Grapple]",
         "WeaponPropertiesGrappleTooltip": "When wielding a grapple weapon, you can use it to perform a grapple combat maneuver without having your hands free. When you do so, you gain a +2 bonus to the attack roll, and if you roll a natural 20 on the attack roll, you apply the weapon’s critical hit effect (if any) to the target.",
         "WeaponPropertiesGravitation": "重力 [Gravitation]",

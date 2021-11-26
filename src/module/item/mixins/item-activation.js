@@ -1,5 +1,3 @@
-import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory.js"
-
 export const ItemActivationMixin = (superclass) => class extends superclass {
 
     hasUses() {
@@ -98,7 +96,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 Hooks.callAll("itemActivationChanged", {actor: this.actor, item: this, isActive: active});
             });
         } else {
-            if (this.data.data.duration.value) {
+            if (this.data.data.duration.value || this.data.data.uses.max > 0) {
                updatePromise.then(() => {
                     // Render the chat card template
                     const templateData = {

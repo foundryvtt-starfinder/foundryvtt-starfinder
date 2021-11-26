@@ -2,7 +2,7 @@ import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
 import { value_equals } from "../utils/value_equals.js";
-import { generateUUID } from "../../module/utilities.js";
+import { generateUUID } from "../utilities.js";
 
 export function initializeRemoteInventory() {
     RPC.registerCallback("createItemCollection", "gm", onCreateItemCollection);

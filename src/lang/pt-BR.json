@@ -288,6 +288,7 @@
                     "SpecificSpeed": "Specific Speed",
                     "SpellAttackDamage": "Dano Magia",
                     "SpellAttackRolls": "Rolagem Ataque Magia",
+                    "SpellSaveDC": "Spell Save DC",
                     "Stamina": "Estamina",
                     "WeaponPropertyAttackRolls": "Rolagem Ataque Propriedade de Arma",
                     "WeaponPropertyDamage": "Dano Propriedade de Arma"
@@ -420,6 +421,9 @@
         "Canvas": {
             "Interface": {
                 "NoTargetTokenForItemDrop": "Sem token de destino, não é possível descartar o item!"
+            },
+            "TokenHud": {
+                "RemoveAll": "Remove All"
             }
         },
         "Capacity": {
@@ -1161,6 +1165,9 @@
             "ActorResource": {
                 "Base": "Base value",
                 "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
+                "CombatTracker": "Combat Tracker settings",
+                "DisplayAbsoluteValue": "Display Absolute Value",
+                "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
                 "Enabled": "Enabled",
                 "EnabledTooltip": "If unchecked this resource will not produce a key in the resources data format, nor will it have automation running on it.",
                 "ErrorIncompleteData": "Resource is missing type, subType, or base value.",
@@ -1175,6 +1182,10 @@
                 "RangeModeImmediate": "Immediate",
                 "RangeModePost": "Post",
                 "RangeModeTooltip": "(Advanced) Defines whether the range limitations are applied only after the modifiers are all processed, or for each modifier as they are being processed.<br/><br/>For example, if the range is set to maximum of 1, and the base value is 0, and you have a modifier of +2, and a modifier of -1, the different modes would work as follows:<br/><br/>Post: 0 + 2 - 1 would output 1, which does not exceed the range maximum.<br/><br/>Immediate: 0 + 2 - 1 would output 0. Because 0 + 2 is 2, which exceeds the range maximum of 1, so it gets clamped to 1. Then -1 is applied, producing 0.",
+                "ShowInCombatTracker": "Show in Combat Tracker",
+                "ShowInCombatTrackerTooltip": "If enabled, this resource will be visible in the combat tracker for quick reference.",
+                "ShowOwnerAndGMOnly": "Only shown for Owner and GM",
+                "ShowOwnerAndGMOnlyTooltip": "If enabled, this resource will only be visible in the combat tracker for the sheet owner and the GM.",
                 "SubType": "Subtype",
                 "SubTypeTooltip": "(Required) Subtype makes up the second half of the resource identifier.<br/>For example: @resources.type.subtype.value",
                 "Type": "Type",
@@ -1182,7 +1193,17 @@
                 "Usage": "Attribute usage",
                 "UsageBaseValue": "Base value",
                 "UsageComputedValue": "Computed value",
-                "UsageTooltip": "What follows are a couple of example attributes how you may be able to access this resource in formulas:"
+                "UsageTooltip": "What follows are a couple of example attributes how you may be able to access this resource in formulas:",
+                "Visualizations": "Conditional Visualization",
+                "VisualizationsIntro": "If resource value is..",
+                "VisualizationsModeEqual": "equal to",
+                "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsModeGreaterThan": "greater than",
+                "VisualizationsModeGreaterThanEqual": "greather than or equal to",
+                "VisualizationsModeLesserThan": "lesser than",
+                "VisualizationsModeLesserThanEqual": "lesser than or equal to",
+                "VisualizationsThen": "Then:",
+                "VisualizationsTitle": "Title:"
             },
             "Class": {
                 "SpellCasting": {
@@ -1779,7 +1800,8 @@
                     "Disabled": "Desabilitar",
                     "Enabled": "Rodadas, fases, e turnos",
                     "OnlyRounds": "Somente rodadas",
-                    "RoundsPhases": "Rodadas e fases"
+                    "RoundsPhases": "Rodadas e fases",
+                    "RoundsTurns": "Rounds and turns"
                 },
                 "VehicleChaseHint": "Alterar quais cartões de bate-papo de combate devem ser exibidos durante as perseguições de veículos.",
                 "VehicleChaseName": "Perseguição Veículo"
@@ -1816,6 +1838,10 @@
             "StarshipActionsSource": {
                 "Hint": "Chave de compêndio contendo as definições de ação da nave.",
                 "Name": "Compêndio da fonte de ações da espaçonave"
+            },
+            "TokenConditionLabels": {
+                "Hint": "Adds text labels to the token conditions.",
+                "Name": "Token condition labels"
             },
             "UseCustomChatCard": {
                 "Hint": "Alterne se deseja usar os novos cartões de bate-papo personalizados ou os originais.",
@@ -2529,6 +2555,8 @@
         "WeaponPropertiesFreeHandsTooltip": "Uma arma de mãos livres é desequilibrada ou difícil de usar. Esta dificuldade em usar a arma pode ser anulada movendo o número listado de mãos que não estão segurando nada ou sendo usadas para qualquer outro propósito como contrapeso. Você empunha uma arma de mãos livres usando o número normal de mãos, mas se tiver o número listado de mãos livres disponíveis enquanto a empunha, a arma não é considerada de difícil manejo. Por exemplo, um kasatha empunhando um girador de chamas em duas de suas mãos enquanto as outras duas mãos permanecem vazias trata a arma como se ela não tivesse a propriedade especial de arma pesada. ",
         "WeaponPropertiesFueled": "Abastecido",
         "WeaponPropertiesFueledTooltip": "Uma arma abastecida tem um tanque de gasolina integrado e deve ser ativada para funcionar corretamente. Isso funciona como a propriedade especial da arma motorizada, exceto que usa gasolina como fonte de combustível em vez de bateria. Ao contrário de uma bateria, a gasolina é permanentemente gasta com o uso e deve ser comprada em vez de recarregada. ",
+        "WeaponPropertiesGearArray": "Gear Array",
+        "WeaponPropertiesGearArrayTooltip": "Your nanites shape themselves into a single piece of equipment, such as a weapon, tool, or cybernetic augmentation.",
         "WeaponPropertiesGrapple": "Agarrar",
         "WeaponPropertiesGrappleTooltip": "Ao empunhar uma arma de agarrar, você pode usá-la para realizar uma manobra de combate de agarrar sem ter as mãos livres. Ao fazer isso, você ganha um bônus de +2 na jogada de ataque e, se rolar um 20 natural na jogada de ataque, aplica o efeito de acerto crítico da arma (se houver) ao alvo. ",
         "WeaponPropertiesGravitation": "Gravitação",

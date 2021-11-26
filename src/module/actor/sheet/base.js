@@ -3,7 +3,7 @@ import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
 
-import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory.js";
+import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory-utils.js";
 import { RPC } from "../../rpc.js"
 
 import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js"
@@ -568,27 +568,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
 
         const target = $(event.currentTarget);
-
-        // Try find existing condition
         const conditionName = target.data('condition');
 
-        this.actor.setCondition(conditionName, target[0].checked).then(() => {
-
-            const flatfootedConditions = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
-            let shouldBeFlatfooted = (conditionName === "flat-footed" && target[0].checked);
-            for (const ffCondition of flatfootedConditions) {
-                if (this.actor.hasCondition(ffCondition)) {
-                    shouldBeFlatfooted = true;
-                    break;
-                }
-            }
-
-            if (shouldBeFlatfooted != this.actor.hasCondition("flat-footed")) {
-                // This will trigger another sheet reload as the other condition gets created or deleted a moment later.
-                const flatfooted = $('.condition.flat-footed');
-                flatfooted.prop("checked", shouldBeFlatfooted).change();
-            }
-        });
+        this.actor.setCondition(conditionName, target[0].checked);
     }
 
     _onActorResourceChanged(event) {
@@ -757,7 +739,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             "0": "&infin;"
         };
 
-        let spellbook = spells.reduce((spellBook, spell) => {
+        const spellbookReduced = spells.reduce((spellBook, spell) => {
             const spellData = spell.data;
 
             const mode = spellData.preparation.mode || "";
@@ -779,10 +761,12 @@ export class ActorSheetSFRPG extends ActorSheet {
 
                 if (actorData.spells.classes && actorData.spells.classes.length > 0) {
                     spellBook[lvl].classes = [];
-                    for (const [classKey, storedData] of Object.entries(spellsPerDay.perClass)) {
-                        const classInfo = actorData.spells.classes.find(x => x.key === classKey);
-                        if (storedData.max > 0) {
-                            spellBook[lvl].classes.push({key: classKey, name: classInfo?.name || classKey, value: storedData.value || 0, max: storedData.max});
+                    if (spellsPerDay?.perClass) {
+                        for (const [classKey, storedData] of Object.entries(spellsPerDay.perClass)) {
+                            const classInfo = actorData.spells.classes.find(x => x.key === classKey);
+                            if (storedData.max > 0) {
+                                spellBook[lvl].classes.push({key: classKey, name: classInfo?.name || classKey, value: storedData.value || 0, max: storedData.max});
+                            }
                         }
                     }
                 }
@@ -792,10 +776,10 @@ export class ActorSheetSFRPG extends ActorSheet {
             return spellBook;
         }, {});
 
-        spellbook = Object.values(spellbook);
-        spellbook.sort((a, b) => a.level - b.level);
+        const spellbookValues = Object.values(spellbookReduced);
+        spellbookValues.sort((a, b) => a.level - b.level);
 
-        return spellbook;
+        return spellbookValues;
     }
 
     /**
