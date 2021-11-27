@@ -1552,6 +1552,14 @@ SFRPG.mechWeaponDamage = {
 }
 
 SFRPG.mechStatisticsByTier = {
+    0: {
+        sp: 0,
+        hardness: 0,
+        baseAc: 0,
+        baseSave: 0,
+        baseAttackBonus: 0,
+        strength: 0
+    },
     1: {
         sp: 5,
         hardness: 0,

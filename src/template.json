@@ -673,8 +673,14 @@
                 "conditions"
             ],
             "attributes": {
-                "eac": 0,
-                "kac": 0,
+                "eac": {
+                    "value": 0,
+                    "tooltip": []
+                },
+                "kac": {
+                    "value": 0,
+                    "tooltip": []
+                },
                 "saves": {
                     "fort": {
                         "base": 0,
@@ -696,7 +702,10 @@
                     "current": 0,
                     "max": 0
                 },
-                "hardness": 0,
+                "hardness": {
+                    "value": 0,
+                    "tooltip": []
+                },
                 "speed": {
                     "land": { "base": 30 },
                     "flying": { "base": 0, "baseManeuverability": 0 },
@@ -783,6 +792,24 @@
                 "mechPoints": {
                     "min": 0,
                     "value": 0
+                }
+            },
+            "slots": {
+                "frame": {
+                    "value": 0,
+                    "max": 0
+                },
+                "upperLimb": {
+                    "value": 0,
+                    "max": 0
+                },
+                "lowerLimb": {
+                    "value": 0,
+                    "max": 0
+                },
+                "auxiliary": {
+                    "value": 0,
+                    "max": 0
                 }
             },
             "powerPoints": {
@@ -1370,6 +1397,14 @@
             },
             "mechPoints": {
                 "mechPointCost": 0
+            },
+            "mechSlots": {
+                "slots": {
+                    "frame": 0,
+                    "auxiliary": 0,
+                    "upperLimb": 0,
+                    "lowerLimb": 0
+                }
             }
         },
         "asi": {
@@ -1940,8 +1975,7 @@
         "weaponAccessory": {
             "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
             "weaponType": "any"
-        },
- 
+        }, 
         "actorResource": {
             "templates": ["itemDescription", "modifiers"],
             "type": null,
@@ -1957,7 +1991,7 @@
             }
         },
         "mechFrame": {
-            "templates": ["itemDescription", "modifiers", "powerPointAbility", "mechPoints"],
+            "templates": ["itemDescription", "modifiers", "powerPointAbility", "mechPoints", "mechSlots"],
             "subtypes": {},
             "size": "huge",
             "hp": {
@@ -1973,17 +2007,13 @@
             },
             "speed": {},
             "strength": 0,
-            "slots": {
-                "frame": 0,
-                "auxiliary": 0
-            },
             "operators": {
                 "min": 0,
                 "max": 0
             }
         },
         "mechLimb": {
-            "templates": ["itemDescription", "modifiers", "powerPointAbility", "mechPoints"],
+            "templates": ["itemDescription", "modifiers", "powerPointAbility", "mechPoints", "mechSlots"],
             "hp": {
                 "base": 0,
                 "advancement": 0
@@ -1996,10 +2026,6 @@
             },
             "melee": 0,
             "ranged": 0,
-            "slots": {
-                "upperLimb": 0,
-                "lowerLimb": 0
-            },
             "speed": {},
             "special": ""
         },
