@@ -1066,7 +1066,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (additionalModifiers.length > 0) {
             rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
-            parts.push({ formula: "@additional.modifiers.bonus", explanation: game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus") });
+            parts.push({ formula: "@additional.modifiers.bonus" });
         }
 
         // Call the roll helper utility
