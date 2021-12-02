@@ -18,6 +18,7 @@ It is now possible to create modifiers for spell save DC, useful for feats like 
 * Added gadgeteer and utility belt to the class features compendium. Thanks sturteva!
 * Fixed an issue where rolls would not work if there were situational bonuses available, but none were selected.
 * Removed attack and damage features from confused condition. We're still confused about how that happened.
+* Removing critical damage formulas from weapons no longer deletes their normal damage instead.
 * Updated Spell Focus feat to include spell save DC modifier.
 * Spells now adjust their item level also for damage calculations. Please note that this will only count for spell chat cards that aren't already in the chat.
 
