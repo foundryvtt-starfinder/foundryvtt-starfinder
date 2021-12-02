@@ -15,6 +15,7 @@ Thanks to CptTwinkie for building this.
 It is now possible to create modifiers for spell save DC, useful for feats like Spell Focus, or various diseases.
 
 ## Bugfixes and small improvements
+* Added gadgeteer and utility belt to the class features compendium. Thanks sturteva!
 * Updated Spell Focus feat to include spell save DC modifier.
 * Removed attack and damage features from confused condition. We're still confused about how that happened.
 
