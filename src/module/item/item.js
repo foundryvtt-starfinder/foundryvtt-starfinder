@@ -276,6 +276,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             user: game.user.id,
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             content: html,
+            flags: { level: this.data.data.level },
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
@@ -958,7 +959,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Determine ability score modifier
         let abl = itemData.ability;
-        console.log(itemData);
         if (!abl && (this.data.type === "spell")) abl = actorData.attributes.spellcasting || "int";
         else if (!abl) abl = "str";
 
@@ -1375,7 +1375,22 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         button.disabled = true;
 
         // Get the Item
-        const item = chatCardActor.items.get(card.dataset.itemId);
+        let item = chatCardActor.items.get(card.dataset.itemId);
+
+        // Adjust item to level, if required
+        if (typeof(message.data.flags.level) !== 'undefined' && message.data.flags.level !== item.data.data.level) {
+            const newItemData = duplicate(item.data);
+            newItemData.data.level = message.data.flags.level;
+
+            item = new ItemSFRPG(newItemData, {parent: item.parent});
+
+            // Run automation to ensure save DCs are correct.
+            item.prepareData();
+            const processContext = await item.processData();
+            if (processContext.fact.promises) {
+                await Promise.all(processContext.fact.promises);
+            }
+        }
 
         // Get the target
         const targetActor = isTargetted ? this._getChatCardTarget(card) : null;
