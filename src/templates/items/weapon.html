@@ -53,7 +53,7 @@
                 <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
                 {{#each config.weaponProperties as |name prop|}}
                 <!-- If there's a tooltip entry set for this weapon property we set a Tippy tooltip -->
-                <label class="checkbox" {{#if (lookup ../config.weaponPropertiesTooltips prop)}} data-tippy-content='{{lookup ../config.weaponPropertiesTooltips prop}}' {{/if}}>
+                <label class="checkbox" {{#if (lookup ../config.weaponPropertiesTooltips prop)}} data-tippy-content='<strong>{{ name }}</strong><br/>{{lookup ../config.weaponPropertiesTooltips prop}}' {{/if}}>
                     <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../itemData.properties prop)}} /> {{ name }}
                 </label>
                 {{/each}}

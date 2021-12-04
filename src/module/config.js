@@ -320,6 +320,7 @@ SFRPG.weaponProperties = {
     "breach": "SFRPG.WeaponPropertiesBreach",
     "breakdown": "SFRPG.WeaponPropertiesBreakdown",
     "bright": "SFRPG.WeaponPropertiesBright",
+    "buttressing": "SFRPG.WeaponPropertiesButtressing",
     "cluster": "SFRPG.WeaponPropertiesCluster",
     "conceal": "SFRPG.WeaponsPropertiesConceal",
     "deconstruct": "SFRPG.WeaponPropertiesDeconstruct",
@@ -386,6 +387,7 @@ SFRPG.weaponProperties = {
     "thought": "SFRPG.WeaponPropertiesThought",
     "throttle": "SFRPG.WeaponPropertiesThrottle",
     "thrown": "SFRPG.WeaponPropertiesThrown",
+    "thruster": "SFRPG.WeaponPropertiesThruster",
     "trip": "SFRPG.WeaponPropertiesTrip",
     "unbalancing": "SFRPG.WeaponPropertiesUnbalancing",
     "underwater": "SFRPG.WeaponPropertiesUnderwater",
@@ -409,6 +411,7 @@ SFRPG.weaponPropertiesTooltips = {
     "breach": "SFRPG.WeaponPropertiesBreachTooltip",
     "breakdown": "SFRPG.WeaponPropertiesBreakdownTooltip",
     "bright": "SFRPG.WeaponPropertiesBrightTooltip",
+    "buttressing": "SFRPG.WeaponPropertiesButtressingTooltip",
     "conceal": "SFRPG.WeaponsPropertiesConcealTooltip",
     "cluster": "SFRPG.WeaponPropertiesClusterTooltip",
     "deconstruct": "SFRPG.WeaponPropertiesDeconstructTooltip",
@@ -475,6 +478,7 @@ SFRPG.weaponPropertiesTooltips = {
     "thought": "SFRPG.WeaponPropertiesThoughtTooltip",
     "throttle": "SFRPG.WeaponPropertiesThrottleTooltip",
     "thrown": "SFRPG.WeaponPropertiesThrownTooltip",
+    "thruster": "SFRPG.WeaponPropertiesThrusterTooltip",
     "trip": "SFRPG.WeaponPropertiesTripTooltip",
     "unbalancing": "SFRPG.WeaponPropertiesUnbalancingTooltip",
     "underwater": "SFRPG.WeaponPropertiesUnderwaterTooltip",
@@ -499,33 +503,6 @@ SFRPG.spellAreaEffects = {
     "emanation": "SFRPG.SpellAreaEffects.Emanation",
     "spread"   : "SFRPG.SpellAreaEffects.Spread"
 }
-
-// Weapon special abilities
-SFRPG.weaponSpecial = {
-    "analog"     : "SFRPG.WeaponSpecial.Analog",
-    "archaic"    : "SFRPG.WeaponSpecial.Archaic",
-    "auto"       : "SFRPG.WeaponSpecial.Automatic",
-    "blast"      : "SFRPG.WeaponSpecial.Blast",
-    "block"      : "SFRPG.WeaponSpecial.Block",
-    "boost"      : "SFRPG.WeaponSpecial.Boost",
-    "bright"     : "SFRPG.WeaponSpecial.Bright",
-    "disarm"     : "SFRPG.WeaponSpecial.Disarm",
-    "entangle"   : "SFRPG.WeaponSpecial.Entangle",
-    "exploade"   : "SFRPG.WeaponSpecial.Explode",
-    "injection"  : "SFRPG.WeaponSpecial.Injection",
-    "line"       : "SFRPG.WeaponSpecial.Line",
-    "nonlethal"  : "SFRPG.WeaponSpecial.Nonlethal",
-    "operative"  : "SFRPG.WeaponSpecial.Operative",
-    "penetrating": "SFRPG.WeaponSpecial.Penetrating",
-    "powered"    : "SFRPG.WeaponSpecial.Powered",
-    "quickReload": "SFRPG.WeaponSpecial.Quick Reload",
-    "reach"      : "SFRPG.WeaponSpecial.Reach",
-    "sniper"     : "SFRPG.WeaponSpecial.Sniper",
-    "stun"       : "SFRPG.WeaponSpecial.Stun",
-    "thrown"     : "SFRPG.WeaponSpecial.Thrown",
-    "trip"       : "SFRPG.WeaponSpecial.Trip",
-    "unwieldy"   : "SFRPG.WeaponSpecial.Unwieldy"
-};
 
 // Weapon critical hit effects
 SFRPG.weaponCriticalHitEffects = {
