@@ -1014,6 +1014,15 @@ SFRPG.modifierArmorClassAffectedValues = {
     "kac": "SFRPG.KineticArmorClass"
 };
 
+SFRPG.globalAttackRollModifiers = [ //TODO Localize notes
+    {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Charge"), modifier: "-2", enabled: false}, notes: "After moving, you can make a single melee attack. You take a –2 penalty to the attack roll and a –2 penalty to your AC until the start of your next turn." },
+    {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Flanking"), modifier: "+2", enabled: false, notes: "When making a melee attack, you gain a bonus to attack rolls if your opponent is threatened by another creature on its opposite border or opposite corner."} },
+    {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.FightDefensively"), modifier: "-4", enabled: false, notes: "You take penalty to attack rolls this round to gain a +2 bonus to your AC until the start of your next turn."} },
+    {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.FullAttack"), modifier: "-4", enabled: false, notes: "You can spend a full action to make two attacks, each with a penalty to the attack rolls"} },
+    {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.HarryingFire"), modifier: "+2", enabled: false, notes: game.i18n.format("SFRPG.Rolls.Character.HarryingFireTooltip") } },
+    {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Nonlethal"), modifier: "-4", enabled: false, notes: "You can use a weapon that deals lethal damage to deal nonlethal damage instead, but you take a penalty to your attack roll."} }
+];
+
 SFRPG.CHARACTER_EXP_LEVELS = [
     0, 1300, 3300, 6000, 10000, 15000, 23000, 34000, 50000, 71000,
     105000, 145000, 210000, 295000, 425000, 600000, 850000, 1200000,
