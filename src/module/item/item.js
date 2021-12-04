@@ -737,7 +737,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         this.actor?.setupRollContexts(rollContext);
 
         /** Create additional modifiers. */
-        const additionalModifiers = SFRPG.globalAttackRollModifiers;
+        const additionalModifiers = duplicate(SFRPG.globalAttackRollModifiers);
         
         /** Apply bonus rolled mods from relevant attack roll formula modifiers. */
         for (const rolledMod of rolledMods) {

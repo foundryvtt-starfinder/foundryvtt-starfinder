@@ -218,6 +218,11 @@ Hooks.once("setup", function () {
         }, {});
     }
 
+    for (const element of SFRPG.globalAttackRollModifiers) {
+        element.bonus.name = game.i18n.localize(element.bonus.name);
+        element.bonus.notes = game.i18n.localize(element.bonus.notes);
+    }
+
     CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));
 
     console.log("Starfinder | [SETUP] Configuring rules engine");
