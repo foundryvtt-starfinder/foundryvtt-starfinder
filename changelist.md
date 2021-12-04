@@ -1,4 +1,4 @@
-# v0.x.x - Starfinder
+# v0.15.0 - Starfinder
 
 With this update we introduce a few nice features to the Starfinder system.
 
@@ -16,6 +16,7 @@ It is now possible to create modifiers for spell save DC, useful for feats like 
 
 ## Bugfixes and small improvements
 * Added gadgeteer and utility belt to the class features compendium. Thanks sturteva!
+* Added a setting to containers to ignore the value of contained items during the character wealth calculation.
 * Fixed an issue where rolls would not work if there were situational bonuses available, but none were selected.
 * Fixed a broken prone link on the goblin race. Thanks sturteva!
 * Removed attack and damage features from confused condition. We're still confused about how that happened.

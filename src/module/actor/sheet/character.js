@@ -1,6 +1,6 @@
 import { SFRPG } from "../../config.js"
 import { ActorSheetSFRPG } from "./base.js"
-import { computeCompoundBulkForItem } from "../actor-inventory-utils.js"
+import { computeCompoundBulkForItem, computeCompoundWealthForItem } from "../actor-inventory-utils.js"
 
 export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     static get defaultOptions() {
@@ -110,7 +110,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         
         const spellbook = this._prepareSpellbook(data, spells);
 
-        let totalValue = 0;
         for (const i of items) {
             i.img = i.img || DEFAULT_TOKEN;
 
@@ -150,8 +149,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
-
-            totalValue += (i.data.price * packs);
         }
 
         this.processItemContainment(items, function (itemType, itemData) {
@@ -178,19 +175,22 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         });
 
         let totalWeight = 0;
+        let totalWealth = 0;
         for (const section of Object.entries(inventory)) {
             for (const sectionItem of section[1].items) {
-                if (!(sectionItem.item.type in inventory)) {
-                    continue;
-                }
-
                 const itemBulk = computeCompoundBulkForItem(sectionItem.item, sectionItem.contents);
                 totalWeight += itemBulk;
+
+                const itemWealth = computeCompoundWealthForItem(sectionItem.item, sectionItem.contents);
+                totalWealth += itemWealth.totalWealth;
+                if (sectionItem.item.type === "container") {
+                    sectionItem.item.contentWealth = itemWealth.contentWealth;
+                }
             }
         }
         totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
         data.encumbrance = this._computeEncumbrance(totalWeight, actorData);
-        data.inventoryValue = Math.floor(totalValue);
+        data.inventoryValue = Math.floor(totalWealth);
 
         const features = {
             classes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"), items: [], hasActions: false, dataset: { type: "class" }, isClass: true },

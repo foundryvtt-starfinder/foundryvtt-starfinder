@@ -4,6 +4,14 @@
             {{/if}}
 
             {{!-- Storage capacity --}}
+            <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculation" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculationTooltip" }}">
+                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculation" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.container.includeContentsInWealthCalculation" {{checked itemData.container.includeContentsInWealthCalculation}}/>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculationCheckbox" }}
+                    </label>
+                </div>
+            </div>
             <div class="form-group">
                 <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSections" }}</label>
                 <div class="form-fields">
