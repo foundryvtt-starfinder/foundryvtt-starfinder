@@ -21,6 +21,7 @@ It is now possible to create modifiers for spell save DC, useful for feats like 
 * Added container support to the following items: augmentations, fusions, hybrid items, magic items, technological items, armor upgrades.
 * Added gadgeteer and utility belt to the class features compendium. Thanks sturteva!
 * Added nanites as an ammunition type.
+* Disabling actor resources no longer breaks the actor sheet.
 * Fixed an issue where rolls would not work if there were situational bonuses available, but none were selected.
 * Fixed a broken prone link on the goblin race. Thanks sturteva!
 * Removed attack and damage features from confused condition. We're still confused about how that happened.
