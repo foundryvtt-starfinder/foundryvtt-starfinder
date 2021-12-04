@@ -15,6 +15,7 @@ Thanks to CptTwinkie for building this.
 It is now possible to create modifiers for spell save DC, useful for feats like Spell Focus, or various diseases.
 
 ## Bugfixes and small improvements
+* Added container support to the following items: augmentations, fusions, hybrid items, magic items, technological items, armor upgrades.
 * Added gadgeteer and utility belt to the class features compendium. Thanks sturteva!
 * Added a setting to containers to ignore the value of contained items during the character wealth calculation.
 * Fixed an issue where rolls would not work if there were situational bonuses available, but none were selected.
