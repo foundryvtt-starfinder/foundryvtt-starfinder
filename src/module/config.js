@@ -202,7 +202,8 @@ SFRPG.ammunitionTypes = {
     "missile": "SFRPG.Items.Ammunition.Type.Missiles",
     "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
     "shell": "SFRPG.Items.Ammunition.Type.Shells",
-    "flare": "SFRPG.Items.Ammunition.Type.Flares"
+    "flare": "SFRPG.Items.Ammunition.Type.Flares",
+    "nanite": "SFRPG.Items.Ammunition.Type.Nanites"
 };
 
 SFRPG.distanceUnits = {
