@@ -16,6 +16,7 @@ It is now possible to create modifiers for spell save DC, useful for feats like 
 
 ## Bugfixes and small improvements
 * Added a setting to containers to ignore the value of contained items during the character wealth calculation.
+* Added charge usage setting of 10 minutes, for some Tech Revolution items.
 * Added container support to the following items: augmentations, fusions, hybrid items, magic items, technological items, armor upgrades.
 * Added gadgeteer and utility belt to the class features compendium. Thanks sturteva!
 * Added nanites as an ammunition type.
