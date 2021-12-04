@@ -334,7 +334,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         actorResourceItem.attributes = [];
         actorResourceItem.actorResourceData = null;
-        if (actorResourceItem.data.type && actorResourceItem.data.subType) {
+        if (actorResourceItem.data.enabled && actorResourceItem.data.type && actorResourceItem.data.subType) {
             actorResourceItem.attributes.push(`@resources.${actorResourceItem.data.type}.${actorResourceItem.data.subType}.base`);
             actorResourceItem.attributes.push(`@resources.${actorResourceItem.data.type}.${actorResourceItem.data.subType}.value`);
 
@@ -568,27 +568,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
 
         const target = $(event.currentTarget);
-
-        // Try find existing condition
         const conditionName = target.data('condition');
 
-        this.actor.setCondition(conditionName, target[0].checked).then(() => {
-
-            const flatfootedConditions = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
-            let shouldBeFlatfooted = (conditionName === "flat-footed" && target[0].checked);
-            for (const ffCondition of flatfootedConditions) {
-                if (this.actor.hasCondition(ffCondition)) {
-                    shouldBeFlatfooted = true;
-                    break;
-                }
-            }
-
-            if (shouldBeFlatfooted != this.actor.hasCondition("flat-footed")) {
-                // This will trigger another sheet reload as the other condition gets created or deleted a moment later.
-                const flatfooted = $('.condition.flat-footed');
-                flatfooted.prop("checked", shouldBeFlatfooted).change();
-            }
-        });
+        this.actor.setCondition(conditionName, target[0].checked);
     }
 
     _onActorResourceChanged(event) {

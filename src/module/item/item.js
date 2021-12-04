@@ -276,6 +276,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             user: game.user.id,
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             content: html,
+            flags: { level: this.data.data.level },
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
@@ -333,14 +334,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (this.data.type === "container") {
             if (this.actor) {
-                let wealth = 0;
-                const containedItems = this._getContainedItems();
-                for (const item of containedItems) {
-                    wealth += item.data.data.quantity * item.data.data.price;
-                }
-                wealth = Math.floor(wealth);
-
-                const wealthString = new Intl.NumberFormat().format(wealth);
+                const wealthString = new Intl.NumberFormat().format(Math.floor(this.data.contentWealth));
                 const wealthProperty = game.i18n.format("SFRPG.CharacterSheet.Inventory.ContainedWealth", {wealth: wealthString});
                 props.push({
                     name: wealthProperty,
@@ -743,15 +737,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         this.actor?.setupRollContexts(rollContext);
 
         /** Create additional modifiers. */
-        const additionalModifiers = [
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Charge"), modifier: "-2", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Flanking"), modifier: "+2", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.FightDefensively"), modifier: "-4", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.FullAttack"), modifier: "-4", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.HarryingFire"), modifier: "+2", enabled: false, notes: game.i18n.format("SFRPG.Rolls.Character.HarryingFireTooltip") } },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Character.Nonlethal"), modifier: "-4", enabled: false} }
-        ];
-
+        const additionalModifiers = duplicate(SFRPG.globalAttackRollModifiers);
+        
         /** Apply bonus rolled mods from relevant attack roll formula modifiers. */
         for (const rolledMod of rolledMods) {
             additionalModifiers.push({
@@ -958,7 +945,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Determine ability score modifier
         let abl = itemData.ability;
-        console.log(itemData);
         if (!abl && (this.data.type === "spell")) abl = actorData.attributes.spellcasting || "int";
         else if (!abl) abl = "str";
 
@@ -1066,7 +1052,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (additionalModifiers.length > 0) {
             rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
-            parts.push({ formula: "@additional.modifiers.bonus", explanation: game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus") });
+            parts.push({ formula: "@additional.modifiers.bonus" });
         }
 
         // Call the roll helper utility
@@ -1375,7 +1361,22 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         button.disabled = true;
 
         // Get the Item
-        const item = chatCardActor.items.get(card.dataset.itemId);
+        let item = chatCardActor.items.get(card.dataset.itemId);
+
+        // Adjust item to level, if required
+        if (typeof(message.data.flags.level) !== 'undefined' && message.data.flags.level !== item.data.data.level) {
+            const newItemData = duplicate(item.data);
+            newItemData.data.level = message.data.flags.level;
+
+            item = new ItemSFRPG(newItemData, {parent: item.parent});
+
+            // Run automation to ensure save DCs are correct.
+            item.prepareData();
+            const processContext = await item.processData();
+            if (processContext.fact.promises) {
+                await Promise.all(processContext.fact.promises);
+            }
+        }
 
         // Get the target
         const targetActor = isTargetted ? this._getChatCardTarget(card) : null;

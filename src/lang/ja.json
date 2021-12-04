@@ -202,6 +202,9 @@
                     "DetailsHeader": "Container details",
                     "EquippedBulkMultiplier": "Equipped bulk multiplier",
                     "EquippedBulkMultiplierTooltip": "This multiplier is used for altering the bulk of the current item when it is equipped.<br/>Setting this to 0 will make the current item not count its own bulk towards the actor's encumbrance when equipped.",
+                    "IncludeContentsInWealthCalculation": "Contents affect character wealth",
+                    "IncludeContentsInWealthCalculationCheckbox": "Contained items are counted towards character wealth.",
+                    "IncludeContentsInWealthCalculationTooltip": "If disabled, contained items no longer affect character wealth.",
                     "Open": "Open",
                     "OpenTooltip": "Open this container's fold-out listing.",
                     "StorageIdentifier": "Storage Identifier",
@@ -288,6 +291,7 @@
                     "SpecificSpeed": "Specific Speed",
                     "SpellAttackDamage": "呪文ダメージ",
                     "SpellAttackRolls": "呪文攻撃ロール",
+                    "SpellSaveDC": "Spell Save DC",
                     "Stamina": "ＳＰ",
                     "WeaponPropertyAttackRolls": "Weapon Property Attack Rolls",
                     "WeaponPropertyDamage": "武器属性ダメージ"
@@ -420,6 +424,9 @@
         "Canvas": {
             "Interface": {
                 "NoTargetTokenForItemDrop": "No target token, cannot drop item!"
+            },
+            "TokenHud": {
+                "RemoveAll": "Remove All"
             }
         },
         "Capacity": {
@@ -428,6 +435,7 @@
                 "Day": "１日毎",
                 "Hour": "１時間毎",
                 "Minute": "１分毎",
+                "Minute10": "10 Minutes",
                 "Round": "１戦闘ﾗｳﾝﾄﾞ毎",
                 "Shot": "１発毎"
             }
@@ -944,6 +952,7 @@
                     "HeavyRounds": "Heavy Rounds",
                     "LongarmAndSniperRounds": "Longarm and Sniper Rounds",
                     "Missiles": "Missiles",
+                    "Nanites": "Nanites",
                     "None": "None",
                     "Rockets": "Rockets",
                     "SmallArmRounds": "Small Arm Rounds",
@@ -1166,6 +1175,7 @@
                 "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
                 "Enabled": "Enabled",
                 "EnabledTooltip": "If unchecked this resource will not produce a key in the resources data format, nor will it have automation running on it.",
+                "ErrorDisabled": "Resource is currently disabled.",
                 "ErrorIncompleteData": "Resource is missing type, subType, or base value.",
                 "ErrorMissingFields": "Please fill in any of the missing fields.",
                 "ErrorNoBase": "Base value is a required field.",
@@ -1670,12 +1680,17 @@
             "AttackRollFull": "Attack Roll - {name}",
             "Character": {
                 "Charge": "Charge",
+                "ChargeTooltip": "After moving, you can make a single melee attack. You take a –2 penalty to the attack roll and a –2 penalty to your AC until the start of your next turn.",
                 "FightDefensively": "Fight Defensively",
+                "FightDefensivelyTooltip": "You take penalty to attack rolls this round to gain a +2 bonus to your AC until the start of your next turn.",
                 "Flanking": "Flanking",
+                "FlankingTooltip": "When making a melee attack, you gain a bonus to attack rolls if your opponent is threatened by another creature on its opposite border or opposite corner.",
                 "FullAttack": "Full Attack",
+                "FullAttackTooltip": "You can spend a full action to make two attacks, each with a penalty to the attack rolls.",
                 "HarryingFire": "Harrying Fire bonus",
                 "HarryingFireTooltip": "Enable this bonus when attacking a target affected by Harrying Fire.",
-                "Nonlethal": "Nonlethal"
+                "Nonlethal": "Nonlethal",
+                "NonlethalTooltip": "You can use a weapon that deals lethal damage to deal nonlethal damage instead, but you take a penalty to your attack roll."
             },
             "DamageRoll": "Damage Roll",
             "DamageRollFull": "Damage Roll - {name}",
@@ -1834,6 +1849,10 @@
             "StarshipActionsSource": {
                 "Hint": "Compendium key containing the starship action definitions.",
                 "Name": "Starship Actions Source Compendium"
+            },
+            "TokenConditionLabels": {
+                "Hint": "Adds text labels to the token conditions.",
+                "Name": "Token condition labels"
             },
             "UseCustomChatCard": {
                 "Hint": "新しいカスタムチャットカードを使用するか、元のチャットカードを使用するかを切り替えます。",
@@ -2511,6 +2530,8 @@
         "WeaponPropertiesBreakdownTooltip": "A breakdown weapon can be taken apart into multiple small pieces. While broken down, the weapon is treated as especially small or easy to hide for the purpose of Sleight of Hand’s hide object task and can fit into spaces that can typically hold only items of light bulk (including a ysoki’s cheek pouches). It takes 1 minute to take apart or reassemble a breakdown weapon.",
         "WeaponPropertiesBright": "照明 [Brt]",
         "WeaponPropertiesBrightTooltip": "Attacks with bright weapons illuminate the area within 20 feet of your target for 1 round following the attack, increasing the illumination level by one step, to a maximum of normal light.",
+        "WeaponPropertiesButtressing": "Buttressing",
+        "WeaponPropertiesButtressingTooltip": "When activated, this weapon exudes subtle static charges that tightly bind nearby objects to one another, granting them additional resilience from incoming attacks. After you make an attack with this weapon you: increase the AC bonus you gain from cover by 1, increase the hardness of objects within 5 feet of you by an amount equal to 1/4 x the weapon's item level, and gain a +1 bonus to your KAC to resist combat maneuvers. These benefits last until you move or until the beginning of your next turn, whichever comes first. Objects that are moved from their space lose this benefit immediately. The effects of multiple buttressing weapon attacks don't stack with each other.",
         "WeaponPropertiesCluster": "クラスター [Cluster]",
         "WeaponPropertiesClusterTooltip": "A cluster weapon is a form of grenade launcher that can fire a single grenade or (if loaded with appropriate grenades) can expend two identical grenades as a single attack. In the latter case, the grenades act as a single grenade of the same type (with a single attack roll, dealing damage only once, and so on), except its radius is increased by the listed amount listed and the save DC of any effects created by the grenade is calculated using the cluster weapon’s item level if it is higher than the grenade’s item level. Attempting to fire two nonidentical grenades results in an error code and the weapon does not fire.",
         "WeaponsPropertiesConceal": "秘匿 [Conceal]",
@@ -2645,6 +2666,8 @@
         "WeaponPropertiesThrottleTooltip": "A throttle weapon deals damage only when it is used to grapple a foe, automatically dealing damage with every successful grapple combat maneuver. These are considered attacks for abilities that can increase a weapon’s damage (such as trick attack). All throttle weapons are also grapple weapons. While a target is successfully being grappled with a throttle weapon, it cannot use its airways to speak or make vocalizations of any kind (though other forms of making noise work normally).",
         "WeaponPropertiesThrown": "投擲 [Thw]",
         "WeaponPropertiesThrownTooltip": "Ranged weapons that must be thrown and melee weapons that can be thrown as a ranged attack have the thrown special property and a listed range increment. You apply your Strength modifier to damage rolls for thrown attacks. After you throw a weapon, it lands near your target and you must recover it if you want to attack with it again.",
+        "WeaponPropertiesThruster": "Thruster",
+        "WeaponPropertiesThrusterTooltip": "This weapon produces controlled bursts of forceful energy, which you can direct toward enhancing your athletic exploits. As part of the action you use to fly, jump, or perform the bull rush combat maneuver, you can expend ammunition or charges equal to the weapon's usage to boost that action. When used to fly, this burst grants you a +2 enhanceent bonus to one Acrobatics check made to fly that round. When used to jump, this burst grants you an enhancement bonus to that Athletics check equal to the weapon's item level. When used to perform a bull rush, this burst grants you a +2 bonus to your attack roll.",
         "WeaponPropertiesTrip": "転倒 [Trp]",
         "WeaponPropertiesTripTooltip": "When you attempt a trip combat maneuver while wielding a weapon with this property, you gain a +2 bonus to your attack roll.",
         "WeaponPropertiesTwoHanded": "両手持ち",
@@ -2659,31 +2682,6 @@
         "WeaponPropertiesVariantBoostTooltip": "A weapon with the variant boost special property acts as a weapon with the boost special property, except boosting the weapon does not expend additional charges and the weapon can be boosted only the listed number of times per day.",
         "WeaponPropertiesWideLine": "幅広 [Wide Line]",
         "WeaponPropertiesWideLineTooltip": "A wide line weapon functions as a weapon with the line weapon special property, except the line is 10 feet wide. When determining the squares that are in the path of a line, note which squares that line would normally pass through, and extend the area to one side of the line (your choice) so that the line is 2 squares wide. For an obstacle to block the path of a line, it must block the line’s full width; otherwise, the line continues (at full width) beyond the obstacle.",
-        "WeaponSpecial": {
-            "Analog": "Analog",
-            "Archaic": "Archaic",
-            "Auto": "Automatic",
-            "Blast": "Blast",
-            "Block": "Block",
-            "Boost": "Boost",
-            "Bright": "Bright",
-            "Disarm": "Disarm",
-            "Entangle": "Entangle",
-            "Exploade": "Explode",
-            "Injection": "Injection",
-            "Line": "Line",
-            "Nonlethal": "Nonlethal",
-            "Operative": "Operative",
-            "Penetrating": "Penetrating",
-            "Powered": "Powered",
-            "Quickreload": "Quick Reload",
-            "Reach": "Reach",
-            "Sniper": "Sniper",
-            "Stun": "Stun",
-            "Thrown": "Thrown",
-            "Trip": "Trip",
-            "Unwieldy": "Unwieldy"
-        },
         "WeaponTypesAdvMelee": "上級近接武器",
         "WeaponTypesBasicMelee": "一般近接武器",
         "WeaponTypesGrenades": "グレネード",

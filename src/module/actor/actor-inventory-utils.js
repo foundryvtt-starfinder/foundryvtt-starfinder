@@ -437,6 +437,66 @@ export function computeCompoundBulkForItem(item, contents) {
 }
 
 /**
+ * Returns the wealth of the item, along with its contents.
+ * 
+ * Item container properties such as include content wealth are taking into account.
+ * 
+ * @param {Object} item The item whose total wealth is to be calculated.
+ * @param {Array} contents An array of items who are considered children of the item.
+ * @returns {Number} The sum total wealth of the item and its contents.
+ */
+export function computeCompoundWealthForItem(item, contents) {
+    let contentWealth = 0;
+    if (item?.data?.container?.includeContentsInWealthCalculation) {
+        if (item?.data?.container?.storage && item.data.container.storage.length > 0) {
+            for (const storage of item.data.container.storage) {
+                const storageIndex = item.data.container.storage.indexOf(storage);
+                let storageWealth = 0;
+
+                const storedItems = contents.filter(x => item.data.container.contents.find(y => y.id === x.item._id && y.index === storageIndex));
+                for (const child of storedItems) {
+                    const childWealth = computeCompoundWealthForItem(child.item, child.contents);
+                    storageWealth += childWealth.totalWealth;
+                }
+
+                contentWealth += storageWealth;
+            }
+        } else if (contents?.length > 0) {
+            for (const child of contents) {
+                const childWealth = computeCompoundWealthForItem(child.item, child.contents);
+                contentWealth += childWealth.totalWealth;
+            }
+        }
+    }
+
+    let personalWealth = item.data.price || 0;
+    if (personalWealth > 0) {
+        if (!Number.isNaN(Number.parseInt(item.data.quantity))) {
+            // Compute number of packs based on quantityPerPack, provided quantityPerPack is set to a value.
+            let packs = 1;
+            if (item.data.quantityPerPack === null || item.data.quantityPerPack === undefined) {
+                packs = item.data.quantity;
+            } else {
+                if (item.data.quantityPerPack <= 0) {
+                    packs = 0;
+                } else {
+                    packs = Math.floor(item.data.quantity / item.data.quantityPerPack);
+                }
+            }
+
+            personalWealth *= packs;
+        }
+    }
+
+    //console.log(`${item?.name || "null"} has a content wealth of ${contentWealth}, and personal wealth of ${personalWealth}`);
+    return {
+        totalWealth: personalWealth + contentWealth,
+        personalWealth: personalWealth,
+        contentWealth: contentWealth
+    };
+}
+
+/**
  * Tests if a given item contains any items.
  * 
  * @param {Item} item Item to test.
