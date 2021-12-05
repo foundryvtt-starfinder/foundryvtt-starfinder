@@ -2,6 +2,9 @@
 
 The things go here ;)
 
+## Bugfixes and small improvements
+* Updated Mind Thrust compendium entry to use proper spell level scaling in the formula. Thanks Sputt!
+
 # v0.15.0 - Starfinder
 
 With this update we introduce a few nice features to the Starfinder system.
