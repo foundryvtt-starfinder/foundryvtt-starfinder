@@ -3,7 +3,7 @@
 The things go here ;)
 
 ## Bugfixes and small improvements
-* Updated Mind Thrust compendium entry to use proper spell level scaling in the formula. Thanks Sputt!
+* Updated Mind Thrust compendium entry to use proper spell level scaling in the formula, enabled variable spell, and updated the description.
 
 # v0.15.0 - Starfinder
 
