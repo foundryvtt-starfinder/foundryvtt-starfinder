@@ -3,6 +3,7 @@
 The things go here ;)
 
 ## Bugfixes and small improvements
+* Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
 * Updated Mind Thrust compendium entry to use proper spell level scaling in the formula, enabled variable spell, and updated the description.
 
 # v0.15.0 - Starfinder

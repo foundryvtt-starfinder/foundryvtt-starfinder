@@ -1,10 +1,7 @@
 {
   "name": "Neutralizer lobe",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
   "type": "augmentation",
+  "img": "icons/svg/mystery-man.svg",
   "data": {
     "description": {
       "chat": "",
@@ -13,11 +10,12 @@
       "value": "<p>A lobe grafted onto your throat processes toxins your body would normally struggle to remove. Whenever you attempt a saving throw against a drug or poison, your neutralizer lobe automatically attempts a Medicine check to treat drugs or poison, using a modifier equal to your level + 2. If this Medicine check is successful, the neutralizer lobe grants you a +4 bonus to your subsequent saving throw.</p>",
       "unidentified": ""
     },
-    "source": "AP#29, p. 51",
-    "type": "cybernetic",
+    "source": "TR pg. 56, AP #29 pg. 51",
+    "type": "biotech",
     "quantity": 1,
-    "bulk": "-",
+    "bulk": "0",
     "price": 9900,
+    "quantityPerPack": 1,
     "level": 8,
     "attuned": false,
     "equipped": false,
@@ -31,7 +29,7 @@
         "mod": ""
       },
       "hp": {
-        "value": 6,
+        "value": 13,
         "max": ""
       },
       "hardness": {
@@ -41,8 +39,24 @@
         "value": ""
       }
     },
-    "modifiers": [],
-    "system": "none",
+    "modifiers": [
+      {
+        "name": "Neutralizer lobe, drugs/poison",
+        "modifier": "+4",
+        "type": "untyped",
+        "effectType": "saves",
+        "valueAffected": "",
+        "enabled": false,
+        "source": "",
+        "notes": "",
+        "modifierType": "formula",
+        "condition": "",
+        "subtab": "misc",
+        "max": 4,
+        "_id": "1b06ec20-6520-4d65-8a71-33ee8a8821ca"
+      }
+    ],
+    "system": "throat",
     "damage": {
       "parts": []
     },
@@ -53,8 +67,5 @@
       "parts": []
     }
   },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "effects": [],
   "_id": "rogacxdwcL0MEHNC"
 }
