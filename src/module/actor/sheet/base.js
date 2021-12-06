@@ -334,7 +334,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         actorResourceItem.attributes = [];
         actorResourceItem.actorResourceData = null;
-        if (actorResourceItem.data.type && actorResourceItem.data.subType) {
+        if (actorResourceItem.data.enabled && actorResourceItem.data.type && actorResourceItem.data.subType) {
             actorResourceItem.attributes.push(`@resources.${actorResourceItem.data.type}.${actorResourceItem.data.subType}.base`);
             actorResourceItem.attributes.push(`@resources.${actorResourceItem.data.type}.${actorResourceItem.data.subType}.value`);
 

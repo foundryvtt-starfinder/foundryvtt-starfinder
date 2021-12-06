@@ -204,7 +204,7 @@ Hooks.once("setup", function () {
         "weaponProperties", "weaponPropertiesTooltips", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
         "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
         "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
-        "weaponSpecial", "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
+        "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
         "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
         "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds",
         "damageTypeOperators", "flightManeuverability", "mechSizes"
@@ -216,6 +216,11 @@ Hooks.once("setup", function () {
 
             return obj;
         }, {});
+    }
+
+    for (const element of SFRPG.globalAttackRollModifiers) {
+        element.bonus.name = game.i18n.localize(element.bonus.name);
+        element.bonus.notes = game.i18n.localize(element.bonus.notes);
     }
 
     CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));

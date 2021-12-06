@@ -143,7 +143,7 @@ export default class RollNode {
                 }
 
                 valueString = valueString.trim();
-                if (valueString.endsWith("+")) {
+                while (valueString.endsWith("+")) {
                     valueString = valueString.substring(0, valueString.length - 1).trim();
                 }
 
@@ -159,7 +159,7 @@ export default class RollNode {
                 }
 
                 formulaString = formulaString.trim();
-                if (formulaString.endsWith("+")) {
+                while (formulaString.endsWith("+")) {
                     formulaString = formulaString.substring(0, formulaString.length - 1).trim();
                 }
 

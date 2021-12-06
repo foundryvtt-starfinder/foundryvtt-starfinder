@@ -17,7 +17,11 @@
                             {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
                             <label class="value-label">@resources.{{item.data.type}}.{{item.data.subType}}.value</label>
                             {{else}}
-                            <label class="error">{{localize "SFRPG.ItemSheet.ActorResource.ErrorIncompleteData"}}</label>
+                                {{#if item.data.enabled}}
+                                <label class="error">{{localize "SFRPG.ItemSheet.ActorResource.ErrorIncompleteData"}}</label>
+                                {{else}}
+                                <label class="value-label">{{localize "SFRPG.ItemSheet.ActorResource.ErrorDisabled"}}</label>
+                                {{/if}}
                             {{/if}}
                         </div>
                     </div>

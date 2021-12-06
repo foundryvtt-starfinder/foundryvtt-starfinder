@@ -202,7 +202,8 @@ SFRPG.ammunitionTypes = {
     "missile": "SFRPG.Items.Ammunition.Type.Missiles",
     "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
     "shell": "SFRPG.Items.Ammunition.Type.Shells",
-    "flare": "SFRPG.Items.Ammunition.Type.Flares"
+    "flare": "SFRPG.Items.Ammunition.Type.Flares",
+    "nanite": "SFRPG.Items.Ammunition.Type.Nanites"
 };
 
 SFRPG.distanceUnits = {
@@ -319,6 +320,7 @@ SFRPG.weaponProperties = {
     "breach": "SFRPG.WeaponPropertiesBreach",
     "breakdown": "SFRPG.WeaponPropertiesBreakdown",
     "bright": "SFRPG.WeaponPropertiesBright",
+    "buttressing": "SFRPG.WeaponPropertiesButtressing",
     "cluster": "SFRPG.WeaponPropertiesCluster",
     "conceal": "SFRPG.WeaponsPropertiesConceal",
     "deconstruct": "SFRPG.WeaponPropertiesDeconstruct",
@@ -385,6 +387,7 @@ SFRPG.weaponProperties = {
     "thought": "SFRPG.WeaponPropertiesThought",
     "throttle": "SFRPG.WeaponPropertiesThrottle",
     "thrown": "SFRPG.WeaponPropertiesThrown",
+    "thruster": "SFRPG.WeaponPropertiesThruster",
     "trip": "SFRPG.WeaponPropertiesTrip",
     "unbalancing": "SFRPG.WeaponPropertiesUnbalancing",
     "underwater": "SFRPG.WeaponPropertiesUnderwater",
@@ -408,6 +411,7 @@ SFRPG.weaponPropertiesTooltips = {
     "breach": "SFRPG.WeaponPropertiesBreachTooltip",
     "breakdown": "SFRPG.WeaponPropertiesBreakdownTooltip",
     "bright": "SFRPG.WeaponPropertiesBrightTooltip",
+    "buttressing": "SFRPG.WeaponPropertiesButtressingTooltip",
     "conceal": "SFRPG.WeaponsPropertiesConcealTooltip",
     "cluster": "SFRPG.WeaponPropertiesClusterTooltip",
     "deconstruct": "SFRPG.WeaponPropertiesDeconstructTooltip",
@@ -474,6 +478,7 @@ SFRPG.weaponPropertiesTooltips = {
     "thought": "SFRPG.WeaponPropertiesThoughtTooltip",
     "throttle": "SFRPG.WeaponPropertiesThrottleTooltip",
     "thrown": "SFRPG.WeaponPropertiesThrownTooltip",
+    "thruster": "SFRPG.WeaponPropertiesThrusterTooltip",
     "trip": "SFRPG.WeaponPropertiesTripTooltip",
     "unbalancing": "SFRPG.WeaponPropertiesUnbalancingTooltip",
     "underwater": "SFRPG.WeaponPropertiesUnderwaterTooltip",
@@ -498,33 +503,6 @@ SFRPG.spellAreaEffects = {
     "emanation": "SFRPG.SpellAreaEffects.Emanation",
     "spread"   : "SFRPG.SpellAreaEffects.Spread"
 }
-
-// Weapon special abilities
-SFRPG.weaponSpecial = {
-    "analog"     : "SFRPG.WeaponSpecial.Analog",
-    "archaic"    : "SFRPG.WeaponSpecial.Archaic",
-    "auto"       : "SFRPG.WeaponSpecial.Automatic",
-    "blast"      : "SFRPG.WeaponSpecial.Blast",
-    "block"      : "SFRPG.WeaponSpecial.Block",
-    "boost"      : "SFRPG.WeaponSpecial.Boost",
-    "bright"     : "SFRPG.WeaponSpecial.Bright",
-    "disarm"     : "SFRPG.WeaponSpecial.Disarm",
-    "entangle"   : "SFRPG.WeaponSpecial.Entangle",
-    "exploade"   : "SFRPG.WeaponSpecial.Explode",
-    "injection"  : "SFRPG.WeaponSpecial.Injection",
-    "line"       : "SFRPG.WeaponSpecial.Line",
-    "nonlethal"  : "SFRPG.WeaponSpecial.Nonlethal",
-    "operative"  : "SFRPG.WeaponSpecial.Operative",
-    "penetrating": "SFRPG.WeaponSpecial.Penetrating",
-    "powered"    : "SFRPG.WeaponSpecial.Powered",
-    "quickReload": "SFRPG.WeaponSpecial.Quick Reload",
-    "reach"      : "SFRPG.WeaponSpecial.Reach",
-    "sniper"     : "SFRPG.WeaponSpecial.Sniper",
-    "stun"       : "SFRPG.WeaponSpecial.Stun",
-    "thrown"     : "SFRPG.WeaponSpecial.Thrown",
-    "trip"       : "SFRPG.WeaponSpecial.Trip",
-    "unwieldy"   : "SFRPG.WeaponSpecial.Unwieldy"
-};
 
 // Weapon critical hit effects
 SFRPG.weaponCriticalHitEffects = {
@@ -1036,6 +1014,15 @@ SFRPG.modifierArmorClassAffectedValues = {
     "kac": "SFRPG.KineticArmorClass"
 };
 
+SFRPG.globalAttackRollModifiers = [
+    {bonus: { name: "SFRPG.Rolls.Character.Charge", modifier: "-2", enabled: false, notes: "SFRPG.Rolls.Character.ChargeTooltip" } },
+    {bonus: { name: "SFRPG.Rolls.Character.Flanking", modifier: "+2", enabled: false, notes: "SFRPG.Rolls.Character.FlankingTooltip" } },
+    {bonus: { name: "SFRPG.Rolls.Character.FightDefensively", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.FightDefensivelyTooltip" } },
+    {bonus: { name: "SFRPG.Rolls.Character.FullAttack", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.FullAttackTooltip" } },
+    {bonus: { name: "SFRPG.Rolls.Character.HarryingFire", modifier: "+2", enabled: false, notes: "SFRPG.Rolls.Character.HarryingFireTooltip" } },
+    {bonus: { name: "SFRPG.Rolls.Character.Nonlethal", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.NonlethalTooltip" } }
+];
+
 SFRPG.CHARACTER_EXP_LEVELS = [
     0, 1300, 3300, 6000, 10000, 15000, 23000, 34000, 50000, 71000,
     105000, 145000, 210000, 295000, 425000, 600000, 850000, 1200000,
@@ -1418,6 +1405,7 @@ SFRPG.capacityUsagePer = {
     "shot": "SFRPG.Capacity.UsagePer.Shot",
     "round": "SFRPG.Capacity.UsagePer.Round",
     "minute": "SFRPG.Capacity.UsagePer.Minute",
+    "minute10": "SFRPG.Capacity.UsagePer.Minute10",
     "hour": "SFRPG.Capacity.UsagePer.Hour",
     "day": "SFRPG.Capacity.UsagePer.Day"
 };

@@ -1,4 +1,11 @@
-# v0.x.x - Starfinder
+# v0.16.0 - Starfinder
+
+The things go here ;)
+
+## Bugfixes and small improvements
+* Updated Mind Thrust compendium entry to use proper spell level scaling in the formula, enabled variable spell, and updated the description.
+
+# v0.15.0 - Starfinder
 
 With this update we introduce a few nice features to the Starfinder system.
 
@@ -15,8 +22,20 @@ Thanks to CptTwinkie for building this.
 It is now possible to create modifiers for spell save DC, useful for feats like Spell Focus, or various diseases.
 
 ## Bugfixes and small improvements
-* Updated Spell Focus feat to include spell save DC modifier.
+* Added a setting to containers to ignore the value of contained items during the character wealth calculation.
+* Added buttressing and thruster weapon special properties to the list of weapon properties.
+* Added charge usage setting of 10 minutes, for some Tech Revolution items.
+* Added container support to the following items: augmentations, fusions, hybrid items, magic items, technological items, armor upgrades.
+* Added gadgeteer and utility belt to the class features compendium. Thanks sturteva!
+* Added nanites as an ammunition type.
+* Converted the global attack roll modifiers field into a configuration array so modules can make custom global attack roll modifiers. Thanks Sputt!
+* Disabling actor resources no longer breaks the actor sheet.
+* Fixed an issue where rolls would not work if there were situational bonuses available, but none were selected.
+* Fixed a broken prone link on the goblin race. Thanks sturteva!
 * Removed attack and damage features from confused condition. We're still confused about how that happened.
+* Removing critical damage formulas from weapons no longer deletes their normal damage instead.
+* Updated Spell Focus feat to include spell save DC modifier.
+* Spells now adjust their item level also for damage calculations. Please note that this will only count for spell chat cards that aren't already in the chat.
 
 # v0.14.3 - Starfinder
 

@@ -1,5 +1,6 @@
 import { ActorSheetSFRPG } from "./base.js"
 import { SFRPG } from "../../config.js";
+import { computeCompoundBulkForItem, computeCompoundWealthForItem } from "../actor-inventory-utils.js"
 
 export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
     static get defaultOptions() {
@@ -100,8 +101,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             return arr;
         }, [[], [], [], [], [], []]);
         
-        let totalWeight = 0;
-        let totalValue = 0;
         for (const i of items) {
             i.img = i.img || DEFAULT_TOKEN;
 
@@ -109,39 +108,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             i.data.price = i.data.price || 0;
             i.data.bulk = i.data.bulk || "-";
             i.isOpen = i.data.container?.isOpen === undefined ? true : i.data.container.isOpen;
-
-            let weight = 0;
-            if (i.data.bulk === "L") {
-                weight = 0.1;
-            } else if (i.data.bulk === "-") {
-                weight = 0;
-            } else {
-                weight = parseFloat(i.data.bulk);
-            }
-
-            // Compute number of packs based on quantityPerPack, provided quantityPerPack is set to a value.
-            let packs = 1;
-            if (i.data.quantityPerPack === null || i.data.quantityPerPack === undefined) {
-                packs = i.data.quantity;
-            } else {
-                if (i.data.quantityPerPack <= 0) {
-                    packs = 0;
-                } else {
-                    packs = Math.floor(i.data.quantity / i.data.quantityPerPack);
-                }
-            }
-
-            i.totalWeight = packs * weight;
-
-            totalWeight += i.totalWeight;
-            i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
-                            i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
-
-            totalValue += (i.data.price * packs);
         }
-        totalWeight = Math.floor(totalWeight);
-        data.encumbrance = this._computeEncumbrance(totalWeight, actorData);
-        data.inventoryValue = Math.floor(totalValue);
 
         this.processItemContainment(items, function (itemType, itemData) {
             if (itemType === "weapon") {
@@ -156,6 +123,24 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                 inventory["cargo"].items.push(itemData);
             }
         });
+
+        let totalWeight = 0;
+        let totalWealth = 0;
+        for (const section of Object.entries(inventory)) {
+            for (const sectionItem of section[1].items) {
+                const itemBulk = computeCompoundBulkForItem(sectionItem.item, sectionItem.contents);
+                totalWeight += itemBulk;
+
+                const itemWealth = computeCompoundWealthForItem(sectionItem.item, sectionItem.contents);
+                totalWealth += itemWealth.totalWealth;
+                if (sectionItem.item.type === "container") {
+                    sectionItem.item.contentWealth = itemWealth.contentWealth;
+                }
+            }
+        }
+        totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
+        data.encumbrance = this._computeEncumbrance(totalWeight, actorData);
+        data.inventoryValue = Math.floor(totalWealth);
 
         let droneLevelIndex = data.data.details.level.value - 1;
         let maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];
