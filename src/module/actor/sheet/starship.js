@@ -8,7 +8,7 @@ import { computeCompoundWealthForItem } from "../actor-inventory-utils.js"
  * @type {ActorSheetSFRPG}
  */
 export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
-    static AcceptedEquipment = "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory,actorResource";
+    static AcceptedEquipment = "ammunition,augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory,actorResource";
 
     static StarshipActionsCache = null;
 
