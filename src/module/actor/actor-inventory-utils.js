@@ -665,7 +665,7 @@ function acceptsItem(containerItem, itemToAdd, actor) {
 function wouldCreateParentCycle(item, container, actor) {
     if (!item) throw "Inventory::wouldCreateParentCycle: No item specified.";
     if (!container) throw "Inventory::wouldCreateParentCycle: No container specified.";
-    if (!actor) throw "Inventory::wouldCreateParentCycle: No actor specified.";
+    if (!actor || !actor.actor) throw "Inventory::wouldCreateParentCycle: No actor specified.";
     if (item === container) return true;
 
     // If the item has no children it cannot create cycles.
@@ -675,8 +675,8 @@ function wouldCreateParentCycle(item, container, actor) {
 
     let itemsToTest = duplicate(item.data.data.container.contents || []);
     while (itemsToTest.length > 0) {
-        let content = itemsToTest.shift();
-        let child = actor.items.get(content.id);
+        const content = itemsToTest.shift();
+        const child = actor.actor.items.get(content.id);
         if (!child) continue;
 
         if (!containsItems(child)) continue;
