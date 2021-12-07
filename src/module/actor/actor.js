@@ -181,6 +181,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         let consumeSpellSlot = true;
         let selectedSlot = null;
+        let processContext = null;
         if (configureDialog) {
             try {
                 const dialogResponse = await SpellCastDialog.create(this, item);
@@ -194,13 +195,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     newItemData.data.level = spellLevel;
 
                     item = new ItemSFRPG(newItemData, {parent: this});
-                    
-                    // Run automation to ensure save DCs are correct.
-                    item.prepareData();
-                    const processContext = await item.processData();
-                    if (processContext.fact.promises) {
-                        await Promise.all(processContext.fact.promises);
-                    }
+                }
+
+                // Run automation to ensure save DCs are correct.
+                item.prepareData();
+                processContext = await item.processData();
+                if (processContext) {
+                    processContext = Promise.all(processContext.fact.promises);
                 }
             } catch (error) {
                 console.error(error);
@@ -208,22 +209,44 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         }
 
-        if (consumeSpellSlot && (spellLevel > 0)) {
-
-            if (selectedSlot) {
-                if (selectedSlot.source === "general") {
-                    await this.update({
-                        [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(this.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+        if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
+            const actor = this;
+            if (selectedSlot.source === "general") {
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+                        });
                     });
                 } else {
-                    const selectedLevel = selectedSlot.level;
-                    const selectedClass = selectedSlot.source;
+                    processContext = actor.update({
+                        [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+                    });
+                }
+            } else {
+                const selectedLevel = selectedSlot.level;
+                const selectedClass = selectedSlot.source;
 
-                    await this.update({
-                        [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(this.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                        });
+                    });
+                } else {
+                    processContext = actor.update({
+                        [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
                     });
                 }
             }
+        }
+
+        if (processContext) {
+            processContext.then(function(result) {
+                return item.roll();
+            });
+            
+            return processContext;
         }
 
         return item.roll();
