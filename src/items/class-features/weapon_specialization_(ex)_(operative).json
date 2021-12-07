@@ -1,15 +1,13 @@
 {
-  "_id": "seLibYiTN2eBls2s",
   "name": "Weapon Specialization (Ex) (Operative)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
+  "img": "systems/sfrpg/images/cup/gameplay/operative.png",
   "data": {
     "description": {
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"uf8ADOAeBrtUkPVl\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Operative</a></p>\n        <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You gain the <a class=\"entity-link\" data-pack=\"sfrpg.feats\" data-id=\"9Us7Eg9cAoq3BcS5\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Weapon Specialization (Combat)</a>&nbsp;feat as a bonus feat for each weapon type with which this class grants you proficiency.</span></p>",
       "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"uf8ADOAeBrtUkPVl\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Operative</a></p>\n        <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You gain the <a class=\"entity-link\" data-pack=\"sfrpg.feats\" data-id=\"9Us7Eg9cAoq3BcS5\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Weapon Specialization (Combat)</a>&nbsp;feat as a bonus feat for each weapon type with which this class grants you proficiency.</span></p>",
       "unidentified": ""
     },
     "source": "Operative",
@@ -44,6 +42,7 @@
       "max": 0,
       "per": null
     },
+    "isActive": null,
     "ability": null,
     "actionType": "",
     "attackBonus": 0,
@@ -62,7 +61,65 @@
       "descriptor": ""
     },
     "descriptors": [],
-    "modifiers": [],
+    "modifiers": [
+      {
+        "name": "Weapon Specialization Operative",
+        "modifier": "floor(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "smallA",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "1f5aa774-bf32-40cc-8621-c685b4ed5b30"
+      },
+      {
+        "name": "Weapon Specialization Operative",
+        "modifier": "@details.level.value",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "basicM",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "c8df914d-9f1f-4c48-95a7-44629c4c9b48"
+      },
+      {
+        "name": "Weapon Specialization Operative",
+        "modifier": "-ceil(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-property-damage",
+        "valueAffected": "operative",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "beeef42f-ad98-483f-a4a0-cdf714f68a77"
+      },
+      {
+        "name": "Weapon Specialization Operative",
+        "modifier": "@details.level.value",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "sniper",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "max": 0,
+        "_id": "2cc1f298-b481-4f2b-aa42-ce280f0192b1"
+      }
+    ],
     "requirements": "3rd Level",
     "recharge": {
       "value": null,
@@ -72,6 +129,5 @@
       "parts": []
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/operative.png"
+  "_id": "D95AjN55xf3BTnbH"
 }

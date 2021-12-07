@@ -1,15 +1,13 @@
 {
-  "_id": "fE6MHaMJWNki4TP6",
   "name": "Weapon Specialization (Ex) (Technomancer)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
+  "img": "systems/sfrpg/images/cup/gameplay/technomancer.png",
   "data": {
     "description": {
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"IvLuq2pxKkHJJpae\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Technomancer</a></p>\n        <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You gain the <a class=\"entity-link\" data-pack=\"sfrpg.feats\" data-id=\"9Us7Eg9cAoq3BcS5\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Weapon Specialization (Combat)</a>&nbsp;feat as a bonus feat for each weapon type this class grants you proficiency with.</span></p>",
       "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"IvLuq2pxKkHJJpae\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Technomancer</a></p>\n        <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You gain the <a class=\"entity-link\" data-pack=\"sfrpg.feats\" data-id=\"9Us7Eg9cAoq3BcS5\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Weapon Specialization (Combat)</a>&nbsp;feat as a bonus feat for each weapon type this class grants you proficiency with.</span></p>",
       "unidentified": ""
     },
     "source": "Technomancer",
@@ -44,6 +42,7 @@
       "max": 0,
       "per": null
     },
+    "isActive": null,
     "ability": null,
     "actionType": "",
     "attackBonus": 0,
@@ -62,7 +61,50 @@
       "descriptor": ""
     },
     "descriptors": [],
-    "modifiers": [],
+    "modifiers": [
+      {
+        "name": "Weapon Specialization Technomancer",
+        "modifier": "floor(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "smallA",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "02ae5b7c-492f-4f98-94d9-ae15d6656084"
+      },
+      {
+        "name": "Weapon Specialization Technomancer",
+        "modifier": "@details.level.value",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "basicM",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "4100ca86-eef1-4d66-a8f5-56a1deebd8ce"
+      },
+      {
+        "name": "Weapon Specialization Technomancer",
+        "modifier": "-ceil(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-property-damage",
+        "valueAffected": "operative",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "3ae5b0a0-a7ab-425a-b2f7-5f55740c069c"
+      }
+    ],
     "requirements": "3rd Level",
     "recharge": {
       "value": null,
@@ -72,6 +114,5 @@
       "parts": []
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/technomancer.png"
+  "_id": "IUqnVApg1dKRxTm1"
 }
