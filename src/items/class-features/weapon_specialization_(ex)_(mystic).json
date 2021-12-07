@@ -1,15 +1,13 @@
 {
-  "_id": "rTaxnu0ObdXF13Sk",
   "name": "Weapon Specialization (Ex) (Mystic)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
+  "img": "systems/sfrpg/images/cup/gameplay/mystic.png",
   "data": {
     "description": {
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"bItuvukGHbObTApr\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Mystic</a></p>\n        <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You gain <a class=\"entity-link\" data-pack=\"sfrpg.feats\" data-id=\"9Us7Eg9cAoq3BcS5\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Weapon Specialization (Combat)</a>&nbsp;as a bonus feat for each weapon type this class grants you proficiency with.</span></p>",
       "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"bItuvukGHbObTApr\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Mystic</a></p>\n        <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You gain <a class=\"entity-link\" data-pack=\"sfrpg.feats\" data-id=\"9Us7Eg9cAoq3BcS5\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Weapon Specialization (Combat)</a>&nbsp;as a bonus feat for each weapon type this class grants you proficiency with.</span></p>",
       "unidentified": ""
     },
     "source": "Mystic",
@@ -44,6 +42,7 @@
       "max": 0,
       "per": null
     },
+    "isActive": null,
     "ability": null,
     "actionType": "",
     "attackBonus": 0,
@@ -62,7 +61,50 @@
       "descriptor": ""
     },
     "descriptors": [],
-    "modifiers": [],
+    "modifiers": [
+      {
+        "name": "Weapon Specialization Mystic",
+        "modifier": "floor(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "smallA",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "dd64fe1e-bccd-4645-b30c-0e1451040f73"
+      },
+      {
+        "name": "Weapon Specialization Mystic",
+        "modifier": "@details.level.value",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "basicM",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "3729eb8b-fa2e-4e8a-a919-0d95b7ec5ded"
+      },
+      {
+        "name": "Weapon Specialization Mystic",
+        "modifier": "-ceil(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-property-damage",
+        "valueAffected": "operative",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "424cf9ea-7baf-4831-82ba-ee54edb9ad73"
+      }
+    ],
     "requirements": "3rd Level",
     "recharge": {
       "value": null,
@@ -72,6 +114,5 @@
       "parts": []
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/mystic.png"
+  "_id": "BcVMnGfAN5rkPHSC"
 }
