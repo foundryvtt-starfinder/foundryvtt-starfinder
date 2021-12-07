@@ -7,6 +7,7 @@ The things go here ;)
 * Fixed an issue preventing you from dragging a container into another container.
 * Fixed an issue preventing you from dragging ammunition items into the starship inventory.
 * Fixed inconsistencies in the spell save DC calculation when casting at different levels with consume slot enabled and disabled.
+* Updated class specific Weapon Specialization feats to have modifiers. Thanks Iankid!
 * Updated Mind Thrust compendium entry to use proper spell level scaling in the formula, enabled variable spell, and updated the description.
 
 # v0.15.0 - Starfinder
