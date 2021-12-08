@@ -5,6 +5,7 @@ The things go here ;)
 ## Bugfixes and small improvements
 * Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
 * Augmentations now have to be equipped specifically before the modifiers apply. This way you can now carry augmentations in your inventory without them automatically functioning.
+* Fixed an issue preventing you from casting spells from a character sheet without any spellslots.
 * Fixed an issue preventing you from dragging a container into another container.
 * Fixed an issue preventing you from dragging ammunition items into the starship inventory.
 * Fixed inconsistencies in the spell save DC calculation when casting at different levels with consume slot enabled and disabled.

@@ -188,7 +188,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 const slotIndex = parseInt(dialogResponse.formData.get("level"));
                 consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
                 selectedSlot = dialogResponse.spellLevels[slotIndex];
-                spellLevel = parseInt(selectedSlot.level);
+                spellLevel = parseInt(selectedSlot?.level || item.data.data.level);
 
                 if (spellLevel !== item.data.data.level && item.data.data.level > spellLevel) {
                     const newItemData = duplicate(item.data);
