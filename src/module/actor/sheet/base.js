@@ -64,7 +64,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             isShip: this.document.data.type === 'starship',
             isVehicle: this.document.data.type === 'vehicle',
             isDrone: this.document.data.type === 'drone',
-            isNPC: this.document.data.type === 'npc',
+            isNPC: this.document.data.type === 'npc' || this.document.data.type === 'npc2',
             isHazard: this.document.data.type === 'hazard',
             config: CONFIG.SFRPG
         };

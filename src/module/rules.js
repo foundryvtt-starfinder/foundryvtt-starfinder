@@ -253,6 +253,18 @@ export default function (engine) {
                 ]
             },
             {
+                when: { closure: "isActorType", type: "npc2" },
+                then: [
+                    "clearTooltips",
+                    "calculateNpcXp",
+                    "calculateClasses",
+                    { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
+                    "calculateNpcAbilityValue",
+                    { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
+                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" }
+                ]
+            },
+            {
                 when: { closure: "isActorType", type: "starship" },
                 then: [
                     "calculateStarshipFrame",
