@@ -1,6 +1,7 @@
 # v0.16.0 - Starfinder
 
-The things go here ;)
+## NPC Conditions
+A new NPC actor is introduced which properly supports modifiers for NPCs. You can easily convert your existing NPCs into the new format by opening the NPC sheet, scrolling down, and clicking the "Duplicate as new style NPC" button. This will generate a new NPC actor sheet, so you can check for yourself if everything is still correct. Once you are happy, you can manually remove the old style NPC and replace the tokens derived from, or linked to, it.
 
 ## Bugfixes and small improvements
 * Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
