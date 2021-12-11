@@ -286,10 +286,10 @@ export default function (engine) {
                     {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 ]
             },
             {
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 when: { closure: "isActorType", type: "starship" },
                 then: [
                     "calculateStarshipFrame",
