@@ -254,10 +254,10 @@ export default function (engine) {
                     "calculateNpcAbilityValue",
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 ]
             },
             {
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 when: { closure: "isActorType", type: "starship" },
                 then: [
                     "calculateStarshipFrame",
