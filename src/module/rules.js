@@ -65,7 +65,9 @@ import calculateNpcXp                   from './rules/actions/actor/npc/calculat
 // NPC2 rules
 import calculateNpc2Abilities           from './rules/actions/actor/npc2/calculate-npc2-abilities.js';
 import calculateNpc2ArmorClass          from './rules/actions/actor/npc2/calculate-npc2-armor-class.js';
+import calculateNpc2BaseSaves           from './rules/actions/actor/npc2/calculate-npc2-saves.js';
 import calculateNpc2Initiative          from './rules/actions/actor/npc2/calculate-npc2-initiative.js';
+import calculateNpc2BaseSkills          from './rules/actions/actor/npc2/calculate-npc2-skills.js';
 // Starship rules
 import calculateStarshipFrame           from './rules/actions/actor/starship/calculate-starship-frame.js'
 import calculateStarshipComputer        from './rules/actions/actor/starship/calculate-starship-computer.js'
@@ -141,7 +143,9 @@ export default function (engine) {
     // NPC2 actions
     calculateNpc2Abilities(engine);
     calculateNpc2ArmorClass(engine);
+    calculateNpc2BaseSaves(engine);
     calculateNpc2Initiative(engine);
+    calculateNpc2BaseSkills(engine);
     // Starship actions
     calculateStarshipArmorClass(engine);
     calculateStarshipCrew(engine);
@@ -267,13 +271,17 @@ export default function (engine) {
                     "calculateNpcXp",
                     "calculateClasses",
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
-                    "calculateNPC2Abilities",
-                    { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
+                    { closure: "calculateNPC2Abilities", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     "calculateNPC2ArmorClass",
-                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     "calculateNPC2Initiative",
-                    {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" }
+                    "calculateNPC2BaseSaves",
+                    "calculateNPC2BaseSkills",
+                    { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
+                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
+                    {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
+                    { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
+                    { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
                 ]
             },
             {

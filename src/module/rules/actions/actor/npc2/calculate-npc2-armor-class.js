@@ -13,6 +13,15 @@ export default function (engine) {
         kac.tooltip = [];
         kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipBase", { base: kac.base }));
 
+        const dexBonus = (data.abilities.dex.mod - data.abilities.dex.base);
+        if (dexBonus) {
+            eac.value += dexBonus;
+            eac.tooltip.push(game.i18n.format("SFRPG.SaveAbilityModTooltip", {mod: dexBonus.signedString(), ability: "Dex"}));
+
+            kac.value += dexBonus;
+            kac.tooltip.push(game.i18n.format("SFRPG.SaveAbilityModTooltip", {mod: dexBonus.signedString(), ability: "Dex"}));
+        }
+
         return fact;
     });
 }
