@@ -1,9 +1,9 @@
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../../modifiers/types.js";
 
 export default function (engine) {
-    engine.closures.add('calculateActorResources', (fact, context) => {
+    engine.closures.add('calculateActorResourcesLate', (fact, context) => {
         const data = fact.data;
-        const actorResources = fact.actorResources;
+        const actorResources = fact.actorResources.filter(x => x.data.data.stage === "late");
         const modifiers = fact.modifiers;
 
         const addModifier = (bonus, data, item, localizationKey) => {
