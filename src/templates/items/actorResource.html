@@ -98,6 +98,18 @@
                     </select>
                 </div>
             </div>
+            
+            <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Stage" subtitle="SFRPG.ItemSheet.ActorResource.StageTooltip"}}>
+                <label>{{ localize "SFRPG.ItemSheet.ActorResource.Stage" }}</label>
+                <div class="form-fields">
+                    <select name="data.stage">
+                        {{#select itemData.stage}}
+                        <option value="early">{{ localize "SFRPG.ItemSheet.ActorResource.StageEarly" }}</option>
+                        <option value="late">{{ localize "SFRPG.ItemSheet.ActorResource.StageLate" }}</option>
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
 
             <h4 class="section-header first">{{localize "SFRPG.ItemSheet.ActorResource.CombatTracker"}}</h4>
 

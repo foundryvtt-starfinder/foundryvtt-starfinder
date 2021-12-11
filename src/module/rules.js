@@ -22,7 +22,8 @@ import stackModifiers                   from './rules/actions/modifiers/stack-mo
 import logToConsole                     from './rules/actions/log.js';
 import clearTooltips                    from './rules/actions/actor/clear-tooltips.js';
 import calculateAbilityCheckModifiers   from './rules/actions/actor/calculate-ability-check-modifiers.js';
-import calculateActorResources          from './rules/actions/actor/calculate-actor-resources.js';
+import calculateActorResources          from './rules/actions/actor/calculate-actor-resources-early.js';
+import calculateActorResourcesLate      from './rules/actions/actor/calculate-actor-resources-late.js';
 import calculateArmorModifiers          from './rules/actions/actor/calculate-armor-modifiers.js';
 import calculateBaseAttackBonusModifier from './rules/actions/actor/calculate-bab-modifier.js';
 import calculateBaseAbilityModifier     from './rules/actions/actor/calculate-base-ability-modifier.js';
@@ -101,6 +102,7 @@ export default function (engine) {
     clearTooltips(engine);
     calculateBaseAbilityScore(engine);
     calculateActorResources(engine);
+    calculateActorResourcesLate(engine);
     calculateBaseAbilityModifier(engine);
     calculateBaseArmorClass(engine);
     calculateArmorModifiers(engine);
@@ -219,7 +221,8 @@ export default function (engine) {
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
-                    "calculateSpellsPerDay"
+                    "calculateSpellsPerDay",
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 ]
             },
             {
@@ -245,7 +248,8 @@ export default function (engine) {
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
-                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" }
+                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 ]
             },
             {
@@ -285,6 +289,7 @@ export default function (engine) {
                 ]
             },
             {
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 when: { closure: "isActorType", type: "starship" },
                 then: [
                     "calculateStarshipFrame",
@@ -300,7 +305,8 @@ export default function (engine) {
                     "calculateStarshipArmorClass",
                     "calculateStarshipTargetLock",
                     "calculateStarshipComputer",
-                    "calculateStarshipCriticalStatus"
+                    "calculateStarshipCriticalStatus",
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 ]
             },
             {
@@ -310,7 +316,8 @@ export default function (engine) {
                     "calculateVehicleControlSkill",
                     "calculateVehicleHangar",
                     "calculateVehiclePassengers",
-                    "identity"
+                    "identity",
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 ]
             }
         ]
