@@ -35,6 +35,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         
         html.find('.reload').click(this._onReloadWeapon.bind(this));
         html.find('#add-skills').click(this._toggleSkills.bind(this));
+        html.find('#duplicate-new-style-npc').click(this._duplicateAsNewStyleNPC.bind(this));
     }
 
     getData() {
@@ -198,4 +199,108 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         // Parent ActorSheet update steps
         return super._updateObject(event, formData);
     }
+
+    static async _selectActorData({yes, no, cancel, render, defaultYes=true, rejectClose=false, options={width: 600}}={}) {
+        return new Promise((resolve, reject) => {
+            const dialog = new Dialog({
+                title: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogTitle"),
+                content: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogMessage") + "<br/><br/>",
+                buttons: {
+                    yes: {
+                        icon: '<i class="fas fa-address-card"></i>',
+                        label: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogOriginalActorButton"),
+                        callback: html => {
+                            const result = yes ? yes(html) : true;
+                            resolve(result);
+                        }
+                    },
+                    no: {
+                        icon: '<i class="fas fa-exchange-alt"></i>',
+                        label: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogUnlinkedActorButton"),
+                        callback: html => {
+                            const result = no ? no(html) : false;
+                            resolve(result);
+                        }
+                    },
+                    cancel: {
+                        icon: '<i class="fas fa-times"></i>',
+                        label: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogCancelButton"),
+                        callback: html => {
+                            resolve(null);
+                        }
+                    }
+                },
+                default: defaultYes ? "yes" : "no",
+                render: render,
+                close: () => {
+                    if ( rejectClose ) reject("The confirmation Dialog was closed without a choice being made");
+                    else resolve(null);
+                },
+            }, options);
+            dialog.render(true);
+        });
+    }
+
+    async _duplicateAsNewStyleNPC(event) {
+        let actorData = duplicate(this.actor.data);
+
+        if (this.token && !this.token.data.actorLink) {
+            // If it is an unlinked actor, ask if the user wants to duplicate the original actor, or use the unlinked actor data instead
+            let useOriginalActor = null;
+            await ActorSheetSFRPGNPC._selectActorData({
+                yes: () => {
+                    useOriginalActor = true;
+                },
+                no: () => {
+                    useOriginalActor = false;
+                }
+            });
+
+            // If no choice was made, don't duplicate
+            if (useOriginalActor === null) {
+                return;
+            }
+            
+            if (useOriginalActor === true) {
+                const originalActor = game.actors.get(this.token.actor.id);
+                if (originalActor) {
+                    actorData = duplicate(originalActor.data);
+                }
+            }
+        }
+
+        // Convert the old user input into the new architecture
+        for (const [abl, ability] of Object.entries(actorData.data.abilities)) {
+            ability.base = ability.mod;
+        }
+
+        for (const [skl, skill] of Object.entries(actorData.data.skills)) {
+            if (skill.enabled) {
+                skill.ranks = skill.mod;
+            }
+        }
+        actorData.data.attributes.eac.base = actorData.data.attributes.eac.value;
+        actorData.data.attributes.kac.base = actorData.data.attributes.kac.value;
+        actorData.data.attributes.init.value = actorData.data.attributes.init.total;
+
+        actorData.data.attributes.fort.base = actorData.data.attributes.fort.bonus;
+        actorData.data.attributes.reflex.base = actorData.data.attributes.reflex.bonus;
+        actorData.data.attributes.will.base = actorData.data.attributes.will.bonus;
+
+        // Create NPC actor with name + " - New Style"
+        actorData.name += " - New Style";
+        actorData.type = "npc2";
+        delete actorData._id;
+
+        const actor = await Actor.create(actorData);
+        if (actor == null) {
+            ui.notifications.error(game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.ErrorCreateActor"), {permanent: true});
+            return;
+        }
+
+        // Open newly created NPC sheet
+        const registeredSheet = Actors.registeredSheets.find(x => x.name === "ActorSheetSFRPGNPC");
+        const sheet = new registeredSheet(actor);
+        sheet.render(true);
+}
 }
