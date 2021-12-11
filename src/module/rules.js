@@ -253,7 +253,7 @@ export default function (engine) {
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     "calculateNpcAbilityValue",
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
-                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" }
+                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 ]
             },
