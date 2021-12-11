@@ -31,6 +31,7 @@ import calculateCmd                     from './rules/actions/actor/calculate-cm
 import calculateCmdModifiers            from './rules/actions/actor/calculate-cmd-modifiers.js';
 import calculateClasses                 from './rules/actions/actor/calculate-classes.js';
 import calculateEncumbrance             from './rules/actions/actor/calculate-encumbrance.js';
+import calculateInitiativeModifiers     from './rules/actions/actor/calculate-initiative-modifiers.js';
 import calculateMovementSpeeds          from './rules/actions/actor/calculate-movement-speeds.js';
 import calculateSaveModifiers           from './rules/actions/actor/calculate-save-modifiers.js';
 import calculateSkillModifiers          from './rules/actions/actor/calculate-skill-modifiers.js';
@@ -42,7 +43,6 @@ import calculateBaseSkills              from './rules/actions/actor/character/ca
 import calculateCharacterLevel          from './rules/actions/actor/character/calculate-character-level.js';
 import calculateHitpoints               from './rules/actions/actor/character/calculate-hitpoints.js';
 import calculateInitiative              from './rules/actions/actor/character/calculate-initiative.js';
-import calculateInitiativeModifiers     from './rules/actions/actor/character/calculate-initiative-modifiers.js';
 import calculatePlayerXp                from './rules/actions/actor/character/calculate-xp.js';
 import calculateResolve                 from './rules/actions/actor/character/calculate-resolve.js';
 import calculateSkillArmorCheckPenalty  from './rules/actions/actor/character/calculate-skill-armor-check-penalty.js';
@@ -62,6 +62,10 @@ import calculateDroneSkills             from './rules/actions/actor/drone/calcul
 // NPC rules
 import calculateNpcAbilityValue         from './rules/actions/actor/npc/calculate-npc-ability-value.js';
 import calculateNpcXp                   from './rules/actions/actor/npc/calculate-npc-xp.js';
+// NPC2 rules
+import calculateNpc2Abilities           from './rules/actions/actor/npc2/calculate-npc2-abilities.js';
+import calculateNpc2ArmorClass          from './rules/actions/actor/npc2/calculate-npc2-armor-class.js';
+import calculateNpc2Initiative          from './rules/actions/actor/npc2/calculate-npc2-initiative.js';
 // Starship rules
 import calculateStarshipFrame           from './rules/actions/actor/starship/calculate-starship-frame.js'
 import calculateStarshipComputer        from './rules/actions/actor/starship/calculate-starship-computer.js'
@@ -134,6 +138,10 @@ export default function (engine) {
     // NPC actions
     calculateNpcAbilityValue(engine);
     calculateNpcXp(engine);
+    // NPC2 actions
+    calculateNpc2Abilities(engine);
+    calculateNpc2ArmorClass(engine);
+    calculateNpc2Initiative(engine);
     // Starship actions
     calculateStarshipArmorClass(engine);
     calculateStarshipCrew(engine);
@@ -259,9 +267,13 @@ export default function (engine) {
                     "calculateNpcXp",
                     "calculateClasses",
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
-                    "calculateNpcAbilityValue",
+                    "calculateNPC2Abilities",
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
-                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" }
+                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
+                    "calculateNPC2ArmorClass",
+                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
+                    "calculateNPC2Initiative",
+                    {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" }
                 ]
             },
             {
