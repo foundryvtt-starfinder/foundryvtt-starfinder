@@ -15,6 +15,7 @@ A much requested feature improvement for Actor Resources has been implemented. I
 * Fixed an issue preventing you from dragging a container into another container.
 * Fixed an issue preventing you from dragging ammunition items into the starship inventory.
 * Fixed inconsistencies in the spell save DC calculation when casting at different levels with consume slot enabled and disabled.
+* Updated all Alien Archive compendium entries for aliens starting with the letter D. Thanks ThroughlyDruxy!
 * Updated class specific Weapon Specialization feats to have modifiers. Thanks Iankid!
 * Updated Mind Thrust compendium entry to use proper spell level scaling in the formula, enabled variable spell, and updated the description.
 
