@@ -17,6 +17,7 @@ A much requested feature improvement for Actor Resources has been implemented. I
 * Added a tooltip to Pack Size in item details, explaining what it does.
 * Added roll and damage notes to item actions. This is helpful for reminders on your attacks or damage rolls, for example, in case a specific damage type ignores DR, etc.
 * Augmentations now have to be equipped specifically before the modifiers apply. This way you can now carry augmentations in your inventory without them automatically functioning.
+* Fixed a minor issue with css styling in preparation of Foundry v0.9.
 * Fixed an issue preventing you from casting spells from a character sheet without any spellslots.
 * Fixed an issue preventing you from dragging a container into another container.
 * Fixed an issue preventing you from dragging ammunition items into the starship inventory.
