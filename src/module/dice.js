@@ -251,6 +251,9 @@ export class DiceSFRPG {
             //     ChatMessage.create(chatData, { chatBubble: true });
             // }
 
+            const itemContext = rollContext.allContexts['item'];
+            const htmlData = [{ name: "rollNotes", value: itemContext?.data?.data?.rollNotes }];
+
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
             if (useCustomCard) {
@@ -260,7 +263,9 @@ export class DiceSFRPG {
                     rollContext:  rollContext,
                     speaker: speaker,
                     rollMode: rollMode,
-                    breakdown: preparedRollExplanation
+                    breakdown: preparedRollExplanation,
+                    htmlData: htmlData,
+                    rollType: "normal"
                 };
 
                 try {
@@ -272,12 +277,12 @@ export class DiceSFRPG {
             }
             
             if (!useCustomCard) {
-                const rollContent = await roll.render();
+                const content = await roll.render({ htmlData: htmlData });
 
                 ChatMessage.create({
                     flavor: flavor,
                     speaker: speaker,
-                    content: rollContent,
+                    content: content,
                     rollMode: rollMode,
                     roll: roll,
                     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
@@ -546,7 +551,7 @@ export class DiceSFRPG {
             //     }
             // }
 
-            const itemContext = rollContext.allContexts['item']; 
+            const itemContext = rollContext.allContexts['item'];
             if (itemContext) {
                 /** Regular Weapons use data.properties for their properties */
                 if (itemContext.entity.data.data.properties) {
@@ -637,6 +642,7 @@ export class DiceSFRPG {
             }
 
             htmlData.push({ name: "damage-parts", value: JSON.stringify(tempParts) });
+            htmlData.push({ name: "rollNotes", value: itemContext?.data?.damageNotes });
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
@@ -649,7 +655,8 @@ export class DiceSFRPG {
                     rollMode: rollMode,
                     breakdown: preparedRollExplanation,
                     tags: tags,
-                    htmlData: htmlData
+                    htmlData: htmlData,
+                    rollType: "damage"
                 };
 
                 try {
