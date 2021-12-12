@@ -72,7 +72,7 @@ export default class SFRPGRoll extends Roll {
             tags: this.tags,
             breakdown: this.breakdown,
             htmlData: this.htmlData,
-            rollNotes: this.htmlData.find(x => x.name === "rollNotes")?.value
+            rollNotes: this.htmlData?.find(x => x.name === "rollNotes")?.value
         };
     
         // Render the roll display template
