@@ -8,6 +8,7 @@ A much requested feature improvement for Actor Resources has been implemented. I
 
 ## Bugfixes and small improvements
 * Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
+* Added a tooltip to Pack Size in item details, explaining what it does.
 * Augmentations now have to be equipped specifically before the modifiers apply. This way you can now carry augmentations in your inventory without them automatically functioning.
 * Fixed an issue preventing you from casting spells from a character sheet without any spellslots.
 * Fixed an issue preventing you from dragging a container into another container.
