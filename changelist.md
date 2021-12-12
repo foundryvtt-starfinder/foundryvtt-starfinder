@@ -20,6 +20,7 @@ A much requested feature improvement for Actor Resources has been implemented. I
 * Fixed an issue preventing you from casting spells from a character sheet without any spellslots.
 * Fixed an issue preventing you from dragging a container into another container.
 * Fixed an issue preventing you from dragging ammunition items into the starship inventory.
+* Fixed an issue where dragging items didn't always correctly check whether or not the target container was full, allowing you to circumvent container limits by accident.
 * Fixed inconsistencies in the spell save DC calculation when casting at different levels with consume slot enabled and disabled.
 * Updated all Alien Archive compendium entries for aliens starting with the letter D. Thanks ThroughlyDruxy!
 * Updated class specific Weapon Specialization feats to have modifiers. Thanks Iankid!

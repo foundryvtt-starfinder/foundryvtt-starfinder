@@ -150,7 +150,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         if (targetItem) {
             if (acceptsItem(targetItem, itemToMove, targetActor)) {
                 desiredParent = targetItem;
-                desiredStorageIndex = targetItemStorageIndex;
+                desiredStorageIndex = getFirstAcceptableStorageIndex(desiredParent, itemToMove);
             } else if (canMerge(targetItem, itemToMove)) {
                 // Merging will destroy the old item, so we return the targetItem here.
                 const targetItemNewQuantity = Number(targetItem.data.data.quantity) + Number(quantity);
@@ -167,8 +167,10 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 let targetsParent = targetActor.findItem(x => x.data.data.container?.contents && x.data.data.container.contents.find( y => y.id === targetItem.id));
                 if (targetsParent) {
                     if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
-                        desiredParent = targetsParent;
-                        desiredStorageIndex = getFirstAcceptableStorageIndex(desiredParent, itemToMove);
+                        if (acceptsItem(targetsParent, itemToMove, targetActor)) {
+                            desiredParent = targetsParent;
+                            desiredStorageIndex = getFirstAcceptableStorageIndex(desiredParent, itemToMove);
+                        }
                     } else {
                         return itemToMove;
                     }
@@ -598,7 +600,8 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
         if (storageOption.type === "slot") {
             const storedItemLinks = container.data.data.container.contents.filter(x => x.index === index);
 
-            if (storageOption.weightProperty === "items") {
+            const itemsTypes = ["", "ammunitionSlot"];
+            if (storageOption.weightProperty === "items" || itemsTypes.includes(storageOption.subtype)) {
                 const numItemsInStorage = storedItemLinks.length;
                 if (numItemsInStorage >= storageOption.amount) {
                     //console.log(`Skipping storage ${index} because it has too many items in the slots already. (${numItemsInStorage} / ${storageOption.amount})`);
