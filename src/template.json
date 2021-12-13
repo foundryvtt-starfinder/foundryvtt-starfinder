@@ -4,9 +4,10 @@
             "character",
             "drone",
             "hazard",
-            "npc",
+            "npc2",
             "starship",
-            "vehicle"
+            "vehicle",
+            "npc"
         ],
         "templates": {
             "common": {
@@ -684,6 +685,41 @@
                 "source": ""
             }
         },
+        "npc2": {
+            "templates": [
+                "common",
+                "modifiers",
+                "conditions",
+                "counterClassesManagement"
+            ],
+            "attributes": {
+                "eac": {
+                    "base": 0
+                },
+                "kac": {
+                    "base": 0
+                },
+                "fort": {
+                    "base": 0
+                },
+                "reflex": {
+                    "base": 0
+                },
+                "will": {
+                    "base": 0
+                }
+            },
+            "details": {
+                "type": "",
+                "environment": "",
+                "organization": "",
+                "cr": 1,
+                "xp": {
+                    "value": 10
+                },
+                "source": ""
+            }
+        },
         "starship": {
             "templates": ["modifiers", "conditions"],
             "details": {
@@ -1194,6 +1230,8 @@
                 "actionType": null,
                 "attackBonus": 0,
                 "chatFlavor": "",
+                "rollNotes": "",
+                "damageNotes": "",
                 "critical": {
                     "parts": [],
                     "effect": ""
@@ -1806,6 +1844,7 @@
             "subType": null,
             "base": null,
             "range": {"min": null, "max": null, "mode": "post"},
+            "stage": "early",
             "enabled": true,
             "combatTracker": {
                 "displayAbsoluteValue": false,

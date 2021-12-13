@@ -1,7 +1,7 @@
 {
-  "_id": "bZkA4NSHPq0PcZsI",
   "name": "Detonation Ooze",
   "type": "npc",
+  "img": "icons/svg/mystery-man.svg",
   "data": {
     "abilities": {
       "str": {
@@ -121,7 +121,8 @@
           "base": 20
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "swimming": {
           "base": 0
@@ -132,7 +133,8 @@
         "climbing": {
           "base": 0
         },
-        "special": "original base: 20 ft.",
+        "value": null,
+        "special": "",
         "mainMovement": "land"
       },
       "keyability": "",
@@ -143,7 +145,7 @@
       "race": "",
       "class": "",
       "biography": {
-        "value": "",
+        "value": "<h2>Description</h2>\n<p>Factories across the galaxy pump out thousands upon thousands of tons of industrial waste every day as they seek to fuel the rapid technological consumption of spacefaring worlds. The question of what to do with that waste remains a constant concern; more unscrupulous facilities simply dump the chemical remnants resulting from industrial processing. Sometimes, complex interactions within the runoff from munitions factories lead to the formation of a detonation ooze, a highly volatile slurry of industrial waste given its own strange semblance of life.</p>\n<p>When its chemical makeup is stable, a typical detonation ooze is about 12 feet across and weighs anywhere from 800 pounds to 2 tons, depending on the amount of the trace metallic compounds in its mass. The ooze&rsquo;s weight remains the same even as it expands, leading to what some survivors have described as a runny consistency the larger the ooze gets. Accompanied by the occasional small explosion from within its amorphous body, a detonation ooze is an unmistakable danger.</p>\n<p>Detonation oozes have proven to be a deadly and consistent threat to industrial workers and waste cleanup crews near the factories where they spawn. When one is spotted, freelance hazard teams are often sent in to deal with the problem, hopefully with adequate protection.</p>",
         "public": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.png",
         "dateOfBirth": "",
@@ -161,6 +163,7 @@
       },
       "source": "AP #36 pg. 58",
       "raceAndGrafts": "",
+      "subtype": "",
       "aura": ""
     },
     "skillpoints": {
@@ -393,7 +396,7 @@
     },
     "traits": {
       "size": "large",
-      "senses": "blindsight (vibration) 60 ft., sightless",
+      "senses": "blindsight (vibration) 60 ft., sightless;",
       "languages": {
         "value": [],
         "custom": ""
@@ -427,31 +430,38 @@
     "spells": {
       "spell0": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell1": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell2": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell3": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell4": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell5": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell6": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       }
     },
     "modifiers": [],
@@ -496,43 +506,48 @@
       "values": {}
     }
   },
-  "flags": {},
   "token": {
-    "flags": {},
+    "bar2": {
+      "attribute": "attributes.rp"
+    },
+    "displayBars": 40,
+    "displayName": 40,
+    "width": 2,
+    "height": 2,
     "name": "Detonation Ooze",
-    "displayName": 0,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": null,
-    "width": 1,
-    "height": 1,
+    "actorLink": false,
     "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
+    "alpha": 1,
     "vision": false,
     "dimSight": 0,
     "brightSight": 0,
     "dimLight": 0,
     "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightAlpha": 1,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightAlpha": 0.25,
     "lightAnimation": {
       "speed": 5,
       "intensity": 5
     },
-    "actorId": "bZkA4NSHPq0PcZsI",
-    "actorLink": false,
     "disposition": -1,
-    "displayBars": 0,
-    "bar1": {},
-    "bar2": {},
-    "randomImg": false
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "flags": {},
+    "randomImg": false,
+    "img": "icons/svg/mystery-man.svg"
   },
   "items": [
     {
-      "_id": "Z1pageCdhV05USVf",
-      "name": "Pseudopod",
+      "_id": "BQ37sI7cReXEAvCc",
+      "name": "Pseudopod (plus 1d10 F)",
       "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
       "data": {
         "description": {
           "chat": "",
@@ -546,10 +561,11 @@
         "quantity": 1,
         "bulk": "L",
         "price": 0,
+        "quantityPerPack": 1,
         "level": 1,
         "attuned": false,
         "equipped": true,
-        "equippable": false,
+        "equippable": true,
         "identified": true,
         "attributes": {
           "sturdy": true,
@@ -611,18 +627,34 @@
         "damage": {
           "parts": [
             {
-              "formula": "1d10+13",
+              "formula": "1d10 +13",
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "sonic": false,
+                "bludgeoning": true,
+                "piercing": false,
+                "slashing": false,
+                "healing": false
               },
-              "operator": ""
+              "operator": "and"
             },
             {
               "formula": "1d10",
               "types": {
-                "fire": true
+                "acid": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "sonic": false,
+                "bludgeoning": false,
+                "piercing": false,
+                "slashing": false,
+                "healing": false
               },
-              "operator": ""
+              "operator": "and"
             }
           ]
         },
@@ -633,6 +665,7 @@
           "descriptor": "negate"
         },
         "descriptors": [],
+        "ammunitionType": "",
         "capacity": {
           "value": 0,
           "max": 0
@@ -644,8 +677,20 @@
         "modifiers": [],
         "container": {
           "contents": [],
-          "storage": [],
-          "isOpen": true
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 0,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            }
+          ],
+          "isOpen": true,
+          "includeContentsInWealthCalculation": 1
         },
         "weaponType": "basicM",
         "weaponCategory": "uncategorized",
@@ -736,65 +781,95 @@
           "underwater": false,
           "unwieldy": false,
           "variantBoost": false,
-          "wideLine": false
+          "wideLine": false,
+          "gearArray": false
         },
         "proficient": true,
         "abilityMods": {
           "parts": []
         }
       },
-      "sort": 100000,
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "storage": {
+        "type": "slot",
+        "subtype": "fusion",
+        "amount": 0,
+        "weightProperty": "level",
+        "affectsEncumbrance": true
+      },
+      "weapon": false,
+      "ammunition": false,
+      "equipment": false,
+      "consumable": false,
+      "goods": false,
+      "container": false,
+      "hybrid": false,
+      "magic": false,
+      "technological": false,
+      "fusion": true,
+      "upgrade": false,
+      "spell": false,
+      "augmentation": false,
+      "shield": false,
+      "weaponAccessory": false,
+      "vehicleAttack": false,
+      "vehicleSystem": false
     },
     {
-      "_id": "J7bSuRm0nV3fbuWw",
+      "_id": "dh8HkkQuzPleBI3n",
       "name": "Detonation (Ex)",
       "type": "feat",
+      "img": "icons/svg/item-bag.svg",
       "data": {
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>When the detonation ooze is reduced to 0 HP, the destabilized chemicals that make up its body trigger a violent explosion. The ooze detonates in a 20-foot burst, dealing [[/r 2d10+13]] fire damage (Reflex DC 16 half) to creatures within the radius, including those currently engulfed. The explosion can&rsquo;t be prevented entirely, but the damage can be mitigated. If at least 30 points of cold damage are dealt to the ooze over the course of the encounter, the volatile chemicals cool and partially stabilize, making the final detonation instead deal only [[/r 1d10+13]] fire damage (Reflex DC 16 half).</p>",
+          "value": "<p>When the detonation ooze is reduced to 0 HP, the destabilized chemicals that make up its body trigger a violent explosion. The ooze detonates in a 20-foot burst, dealing 2d10+13 fire damage (Reflex DC 16 half) to creatures within the radius, including those currently engulfed.</p>\n<p>The explosion can&rsquo;t be prevented entirely, but the damage can be mitigated. If at least 30 points of cold damage are dealt to the ooze over the course of the encounter, the volatile chemicals cool and partially stabilize, making the final detonation instead deal only 1d10+13 fire damage (Reflex DC 16 half).</p>",
           "unidentified": ""
         },
         "source": "",
         "type": "",
         "activation": {
-          "type": "",
+          "type": "other",
           "cost": 0,
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "target": {
-          "value": null,
+          "value": "",
           "type": ""
         },
         "area": {
-          "value": 0,
-          "units": "",
-          "shape": "",
-          "effect": ""
+          "value": 20,
+          "units": "ft",
+          "shape": "sphere",
+          "effect": "burst"
         },
         "range": {
           "value": null,
-          "units": "",
+          "units": "none",
           "additional": "",
           "per": ""
         },
         "uses": {
           "value": 0,
           "max": 0,
-          "per": null
+          "per": ""
         },
         "isActive": null,
-        "ability": null,
-        "actionType": "",
+        "ability": "",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -802,13 +877,29 @@
           "effect": ""
         },
         "damage": {
-          "parts": []
+          "parts": [
+            {
+              "formula": "2d10 + 13",
+              "types": {
+                "acid": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "sonic": false,
+                "bludgeoning": false,
+                "piercing": false,
+                "slashing": false,
+                "healing": false
+              },
+              "operator": ""
+            }
+          ]
         },
         "formula": "",
         "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
+          "type": "reflex",
+          "dc": "16",
+          "descriptor": "half"
         },
         "descriptors": [],
         "modifiers": [],
@@ -821,15 +912,20 @@
           "parts": []
         }
       },
-      "sort": 200000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
     },
     {
-      "_id": "ufoOo9VnJdXX8BDk",
-      "name": "Engulf",
+      "_id": "rlPSLmc4gPc5psLC",
+      "name": "Engulf (2d10 + 13 B, DC 16)",
       "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
       "data": {
         "description": {
           "chat": "",
@@ -841,38 +937,38 @@
         "source": "",
         "type": "",
         "activation": {
-          "type": "",
-          "cost": 0,
+          "type": "action",
+          "cost": 1,
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "target": {
-          "value": null,
+          "value": "",
           "type": ""
         },
         "area": {
           "value": null,
-          "units": "",
+          "units": "none",
           "shape": "",
           "effect": ""
         },
         "range": {
           "value": null,
-          "units": "",
+          "units": "none",
           "additional": "",
           "per": ""
         },
         "uses": {
           "value": 0,
           "max": 0,
-          "per": null
+          "per": ""
         },
         "isActive": null,
-        "ability": null,
-        "actionType": "",
+        "ability": "",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -880,13 +976,29 @@
           "effect": ""
         },
         "damage": {
-          "parts": []
+          "parts": [
+            {
+              "formula": "2d10 + 13",
+              "types": {
+                "acid": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "sonic": false,
+                "bludgeoning": true,
+                "piercing": false,
+                "slashing": false,
+                "healing": false
+              },
+              "operator": ""
+            }
+          ]
         },
         "formula": "",
         "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
+          "type": "reflex",
+          "dc": "16",
+          "descriptor": "negate"
         },
         "descriptors": [],
         "modifiers": [],
@@ -899,15 +1011,20 @@
           "parts": []
         }
       },
-      "sort": 300000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
     },
     {
-      "_id": "2eHFoliY94qBRcaT",
+      "_id": "rcsrIbtk6JgNvvr2",
       "name": "Unstable Expansion (Ex)",
       "type": "feat",
+      "img": "icons/svg/item-bag.svg",
       "data": {
         "description": {
           "chat": "",
@@ -974,89 +1091,17 @@
           "charged": false
         }
       },
-      "sort": 400000,
-      "flags": {},
-      "effects": []
-    },
-    {
-      "_id": "NTZglBApwUj7qxpv",
-      "name": "Ooze Immunities",
-      "type": "feat",
-      "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>(EX)</p>\n<p>Oozes are immune to the following effects, unless the effect specifies that it works against oozes.</p>\n<ul>\n<li>Critical hits, @Compendium[sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralysis}, @Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poison}, polymorph, @Compendium[sfrpg.conditions.3iTdt2NRgIyrychR]{Sleep}, and @Compendium[sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunning}.</li>\n<li>Gaze abilities, illusions, visual effects, and other attacks that rely on sight.</li>\n<li>Flanking—oozes are unflankable.</li>\n</ul>\n<hr>\n<p>&nbsp;</p>",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": "",
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": null,
-          "units": "",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null
-        },
-        "isActive": null,
-        "ability": null,
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [],
-          "effect": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "descriptors": [],
-        "modifiers": [],
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "abilityMods": {
-          "parts": []
-        }
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
       },
-      "sort": 500000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "flags": {}
     }
   ],
   "effects": [],
-  "img": "icons/svg/mystery-man.svg"
+  "flags": {},
+  "_id": "bZkA4NSHPq0PcZsI"
 }

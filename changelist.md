@@ -1,14 +1,29 @@
 # v0.16.0 - Starfinder
 
-The things go here ;)
+This update brings, amongst other things, some much needed GM lovin', with a new NPC type that supports conditions and modifiers, and roll notes so you can add reminders to that annoying DR circumventing NPC attack.
+
+## NPC Conditions
+A new NPC actor is introduced which properly supports modifiers for NPCs. You can easily convert your existing NPCs into the new format by opening the NPC sheet, scrolling down, and clicking the "Duplicate as new style NPC" button. This will generate a new NPC actor sheet, so you can check for yourself if everything is still correct. Once you are happy, you can make a pass on your scenes and replace the tokens derived from, or linked to it. And finally, remove the old style NPC actor sheet altogether.
+
+Please keep in mind that if you delete the old NPC sheet any tokens of it you have on various maps will be invalidated. Make sure to update your tokens before deleting the sheet!
+
+The old style NPCs will remain in existence, this way we can guarantee we do not break your worlds.
+
+## Late Actor Resources
+A much requested feature improvement for Actor Resources has been implemented. It is now possible to perform the modifier calculations for certain actor resources at the end of all the calculations, so that your actor resource can be modified by computed values such as strength modifier, etc.
 
 ## Bugfixes and small improvements
 * Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
+* Added a tooltip to Pack Size in item details, explaining what it does.
+* Added roll and damage notes to item actions. This is helpful for reminders on your attacks or damage rolls, for example, in case a specific damage type ignores DR, etc.
 * Augmentations now have to be equipped specifically before the modifiers apply. This way you can now carry augmentations in your inventory without them automatically functioning.
+* Fixed a minor issue with css styling in preparation of Foundry v0.9.
 * Fixed an issue preventing you from casting spells from a character sheet without any spellslots.
 * Fixed an issue preventing you from dragging a container into another container.
 * Fixed an issue preventing you from dragging ammunition items into the starship inventory.
+* Fixed an issue where dragging items didn't always correctly check whether or not the target container was full, allowing you to circumvent container limits by accident.
 * Fixed inconsistencies in the spell save DC calculation when casting at different levels with consume slot enabled and disabled.
+* Updated all Alien Archive compendium entries for aliens starting with the letter D. Thanks ThroughlyDruxy!
 * Updated class specific Weapon Specialization feats to have modifiers. Thanks Iankid!
 * Updated Mind Thrust compendium entry to use proper spell level scaling in the formula, enabled variable spell, and updated the description.
 

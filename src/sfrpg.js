@@ -160,12 +160,12 @@ Hooks.once('init', async function () {
 
     console.log("Starfinder | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGCharacter, { types: ["character"], makeDefault: true });
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGDrone,     { types: ["drone"],     makeDefault: true });
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGHazard,    { types: ["hazard"],    makeDefault: true });
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGNPC,       { types: ["npc"],       makeDefault: true });
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGStarship,  { types: ["starship"],  makeDefault: true });
-    Actors.registerSheet("sfrpg", ActorSheetSFRPGVehicle,   { types: ["vehicle"],   makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGCharacter, { types: ["character"],     makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGDrone,     { types: ["drone"],         makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGHazard,    { types: ["hazard"],        makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGNPC,       { types: ["npc", "npc2"],   makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGStarship,  { types: ["starship"],      makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGVehicle,   { types: ["vehicle"],       makeDefault: true });
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });

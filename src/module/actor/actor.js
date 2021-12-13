@@ -263,7 +263,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         // use this to delete any unwanted skills.
 
         const skill = duplicate(this.data.data.skills[skillId]);
-        const isNpc = this.data.type === "npc";
+        const isNpc = this.data.type === "npc" || this.data.type === "npc2";
         const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),

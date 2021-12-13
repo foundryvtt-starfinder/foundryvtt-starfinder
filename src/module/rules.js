@@ -22,7 +22,8 @@ import stackModifiers                   from './rules/actions/modifiers/stack-mo
 import logToConsole                     from './rules/actions/log.js';
 import clearTooltips                    from './rules/actions/actor/clear-tooltips.js';
 import calculateAbilityCheckModifiers   from './rules/actions/actor/calculate-ability-check-modifiers.js';
-import calculateActorResources          from './rules/actions/actor/calculate-actor-resources.js';
+import calculateActorResources          from './rules/actions/actor/calculate-actor-resources-early.js';
+import calculateActorResourcesLate      from './rules/actions/actor/calculate-actor-resources-late.js';
 import calculateArmorModifiers          from './rules/actions/actor/calculate-armor-modifiers.js';
 import calculateBaseAttackBonusModifier from './rules/actions/actor/calculate-bab-modifier.js';
 import calculateBaseAbilityModifier     from './rules/actions/actor/calculate-base-ability-modifier.js';
@@ -31,6 +32,7 @@ import calculateCmd                     from './rules/actions/actor/calculate-cm
 import calculateCmdModifiers            from './rules/actions/actor/calculate-cmd-modifiers.js';
 import calculateClasses                 from './rules/actions/actor/calculate-classes.js';
 import calculateEncumbrance             from './rules/actions/actor/calculate-encumbrance.js';
+import calculateInitiativeModifiers     from './rules/actions/actor/calculate-initiative-modifiers.js';
 import calculateMovementSpeeds          from './rules/actions/actor/calculate-movement-speeds.js';
 import calculateSaveModifiers           from './rules/actions/actor/calculate-save-modifiers.js';
 import calculateSkillModifiers          from './rules/actions/actor/calculate-skill-modifiers.js';
@@ -42,7 +44,6 @@ import calculateBaseSkills              from './rules/actions/actor/character/ca
 import calculateCharacterLevel          from './rules/actions/actor/character/calculate-character-level.js';
 import calculateHitpoints               from './rules/actions/actor/character/calculate-hitpoints.js';
 import calculateInitiative              from './rules/actions/actor/character/calculate-initiative.js';
-import calculateInitiativeModifiers     from './rules/actions/actor/character/calculate-initiative-modifiers.js';
 import calculatePlayerXp                from './rules/actions/actor/character/calculate-xp.js';
 import calculateResolve                 from './rules/actions/actor/character/calculate-resolve.js';
 import calculateSkillArmorCheckPenalty  from './rules/actions/actor/character/calculate-skill-armor-check-penalty.js';
@@ -62,6 +63,12 @@ import calculateDroneSkills             from './rules/actions/actor/drone/calcul
 // NPC rules
 import calculateNpcAbilityValue         from './rules/actions/actor/npc/calculate-npc-ability-value.js';
 import calculateNpcXp                   from './rules/actions/actor/npc/calculate-npc-xp.js';
+// NPC2 rules
+import calculateNpc2Abilities           from './rules/actions/actor/npc2/calculate-npc2-abilities.js';
+import calculateNpc2ArmorClass          from './rules/actions/actor/npc2/calculate-npc2-armor-class.js';
+import calculateNpc2BaseSaves           from './rules/actions/actor/npc2/calculate-npc2-saves.js';
+import calculateNpc2Initiative          from './rules/actions/actor/npc2/calculate-npc2-initiative.js';
+import calculateNpc2BaseSkills          from './rules/actions/actor/npc2/calculate-npc2-skills.js';
 // Starship rules
 import calculateStarshipFrame           from './rules/actions/actor/starship/calculate-starship-frame.js'
 import calculateStarshipComputer        from './rules/actions/actor/starship/calculate-starship-computer.js'
@@ -95,6 +102,7 @@ export default function (engine) {
     clearTooltips(engine);
     calculateBaseAbilityScore(engine);
     calculateActorResources(engine);
+    calculateActorResourcesLate(engine);
     calculateBaseAbilityModifier(engine);
     calculateBaseArmorClass(engine);
     calculateArmorModifiers(engine);
@@ -134,6 +142,12 @@ export default function (engine) {
     // NPC actions
     calculateNpcAbilityValue(engine);
     calculateNpcXp(engine);
+    // NPC2 actions
+    calculateNpc2Abilities(engine);
+    calculateNpc2ArmorClass(engine);
+    calculateNpc2BaseSaves(engine);
+    calculateNpc2Initiative(engine);
+    calculateNpc2BaseSkills(engine);
     // Starship actions
     calculateStarshipArmorClass(engine);
     calculateStarshipCrew(engine);
@@ -207,7 +221,8 @@ export default function (engine) {
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
-                    "calculateSpellsPerDay"
+                    "calculateSpellsPerDay",
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 ]
             },
             {
@@ -233,7 +248,8 @@ export default function (engine) {
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
-                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" }
+                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 ]
             },
             {
@@ -253,6 +269,27 @@ export default function (engine) {
                 ]
             },
             {
+                when: { closure: "isActorType", type: "npc2" },
+                then: [
+                    "clearTooltips",
+                    "calculateNpcXp",
+                    "calculateClasses",
+                    { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
+                    { closure: "calculateNPC2Abilities", stackModifiers: "stackModifiers" },
+                    { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
+                    "calculateNPC2ArmorClass",
+                    "calculateNPC2Initiative",
+                    "calculateNPC2BaseSaves",
+                    "calculateNPC2BaseSkills",
+                    { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
+                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
+                    {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
+                    { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
+                    { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                ]
+            },
+            {
                 when: { closure: "isActorType", type: "starship" },
                 then: [
                     "calculateStarshipFrame",
@@ -268,7 +305,8 @@ export default function (engine) {
                     "calculateStarshipArmorClass",
                     "calculateStarshipTargetLock",
                     "calculateStarshipComputer",
-                    "calculateStarshipCriticalStatus"
+                    "calculateStarshipCriticalStatus",
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 ]
             },
             {
@@ -278,7 +316,8 @@ export default function (engine) {
                     "calculateVehicleControlSkill",
                     "calculateVehicleHangar",
                     "calculateVehiclePassengers",
-                    "identity"
+                    "identity",
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
                 ]
             }
         ]

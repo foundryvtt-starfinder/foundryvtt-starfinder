@@ -60,13 +60,15 @@ export default class SFRPGCustomChatMessage {
         const currentCapacity = item.getCurrentCapacity();
         const options = {
             item: item,
-            hasDamage: item.hasDamage || false,
+            hasDamage: data.rollType !== "damage" && (item.hasDamage || false),
             hasSave: item.hasSave || false,
             hasCapacity: hasCapacity,
             ammoLeft: currentCapacity,
             title: data.title ? data.title : 'Roll',
             rawTitle: data.speaker.alias,
             dataRoll: roll,
+            rollType: data.rollType,
+            rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             config: CONFIG.SFRPG,
             tokenImg: actor.data.token?.img || actor.img,
@@ -83,7 +85,7 @@ export default class SFRPGCustomChatMessage {
 
     static async _render(roll, data, options) {
         const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
-        const rollContent = await roll.render();
+        const rollContent = await roll.render({htmlData: data.htmlData});
         options = foundry.utils.mergeObject(options, { rollContent });
         const cardContent = await renderTemplate(templateName, options);        
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
@@ -101,7 +103,8 @@ export default class SFRPGCustomChatMessage {
             rollMode: rollMode,
             roll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-            sound: CONFIG.sounds.dice
+            sound: CONFIG.sounds.dice,
+            rollType: data.rollType
         });
     }
 }
