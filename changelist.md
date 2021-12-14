@@ -12,6 +12,19 @@ The old style NPCs will remain in existence, this way we can guarantee we do not
 ## Late Actor Resources
 A much requested feature improvement for Actor Resources has been implemented. It is now possible to perform the modifier calculations for certain actor resources at the end of all the calculations, so that your actor resource can be modified by computed values such as strength modifier, etc.
 
+## Additional Math functions available in rolls
+Because data entry is a pain, we added two new math functions available to rolls, lookup and lookupRange. These are a little tricky to understand, but once you get them, they are quite powerful for writing lookup tables in rolls that do not require a mathematics degree to figure out. 'lookup' is great for sets with a lot of unique values, 'lookupRange' is for bigger data sets that do not have a lot of unique values.
+
+'lookup' takes a key and a series of key:value pair arguments, and will return a value for a matching key, if it finds it. If none is found, it will return 0.
+Example:
+lookup(@details.level.value, 1, 1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 4, 11, 4, 12, 4, 13, 5, 14, 5, 15, 5, 16, 6, 17, 6, 18, 6, 19, 7, 20, 7)
+
+'lookupRange' takes a key, a lowest value, and a series of key:value pair arguments which must be provided in a sorted order, and will return the value within the range.
+Example:
+lookupRange(@details.level.value, 1, 4, 2, 7, 3, 10, 4, 13, 5, 16, 6, 19, 7)
+
+This can help with data entry, especially when dealing with level tables.
+
 ## Bugfixes and small improvements
 * Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
 * Added a tooltip to Pack Size in item details, explaining what it does.

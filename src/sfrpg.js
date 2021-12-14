@@ -155,6 +155,9 @@ Hooks.once('init', async function () {
         wordWrap: false
     });
 
+    console.log("Starfinder | [INIT] Overriding Mathematics");
+    registerMathFunctions();
+
     console.log("Starfinder | [INIT] Registering system settings");
     registerSystemSettings();
 
@@ -366,6 +369,28 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
     createItemMacro(data.data, slot);
     return false;
 });
+
+function registerMathFunctions() {
+    Math.lookup = function(value) {
+        for (let i = 1; i<arguments.length - 1; i+=2) {
+            if (arguments[i] === value) {
+                return arguments[i+1];
+            }
+        }
+        return 0;
+    };
+
+    Math.lookupRange = function(value, lowestValue) {
+        let baseValue = lowestValue;
+        for (let i = 2; i<arguments.length - 1; i+=2) {
+            if (arguments[i] > value) {
+                return baseValue;
+            }
+            baseValue = arguments[i + 1];
+        }
+        return baseValue;
+    };
+}
 
 /**
  * Create a Macro form an Item drop.
