@@ -15,6 +15,7 @@ A much requested feature improvement for Actor Resources has been implemented. I
 ## Bugfixes and small improvements
 * Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
 * Added a tooltip to Pack Size in item details, explaining what it does.
+* Added a tooltip to NPC CR value.
 * Added roll and damage notes to item actions. This is helpful for reminders on your attacks or damage rolls, for example, in case a specific damage type ignores DR, etc.
 * Augmentations now have to be equipped specifically before the modifiers apply. This way you can now carry augmentations in your inventory without them automatically functioning.
 * Fixed a minor issue with css styling in preparation of Foundry v0.9.
@@ -23,7 +24,7 @@ A much requested feature improvement for Actor Resources has been implemented. I
 * Fixed an issue preventing you from dragging ammunition items into the starship inventory.
 * Fixed an issue where dragging items didn't always correctly check whether or not the target container was full, allowing you to circumvent container limits by accident.
 * Fixed inconsistencies in the spell save DC calculation when casting at different levels with consume slot enabled and disabled.
-* Updated all Alien Archive compendium entries for aliens starting with the letter D. Thanks ThroughlyDruxy!
+* Updated all Alien Archive compendium entries for aliens starting with the letters D and E. Thanks ThroughlyDruxy!
 * Updated class specific Weapon Specialization feats to have modifiers. Thanks Iankid!
 * Updated Mind Thrust compendium entry to use proper spell level scaling in the formula, enabled variable spell, and updated the description.
 
