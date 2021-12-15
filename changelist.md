@@ -37,7 +37,7 @@ This can help with data entry, especially when dealing with level tables.
 * Fixed an issue preventing you from dragging ammunition items into the starship inventory.
 * Fixed an issue where dragging items didn't always correctly check whether or not the target container was full, allowing you to circumvent container limits by accident.
 * Fixed inconsistencies in the spell save DC calculation when casting at different levels with consume slot enabled and disabled.
-* Updated all Alien Archive compendium entries for aliens starting with the letters D and E. Thanks ThroughlyDruxy!
+* Updated all Alien Archive compendium entries for aliens starting with the letters D, E, and F, completing the work on bringing in the complete collection of the Alien Archive aliens! Thanks ThroughlyDruxy!
 * Updated class specific Weapon Specialization feats to have modifiers. Thanks Iankid!
 * Updated Mind Thrust compendium entry to use proper spell level scaling in the formula, enabled variable spell, and updated the description.
 
