@@ -8,12 +8,6 @@ export default function (engine) {
         init.tooltip = [];
         init.tooltip.push(game.i18n.format("SFRPG.ACTooltipBase", { base: init.value }));
 
-        const dexBonus = (data.abilities.dex.mod - data.abilities.dex.base);
-        if (dexBonus) {
-            init.total += dexBonus;
-            init.tooltip.push(game.i18n.format("SFRPG.SaveAbilityModTooltip", {mod: dexBonus.signedString(), ability: "Dex"}));
-        }
-
         return fact;
     });
 }
