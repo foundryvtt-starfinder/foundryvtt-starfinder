@@ -194,6 +194,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     const newItemData = duplicate(item.data);
                     newItemData.data.level = spellLevel;
 
+                    if (this.type === "npc" || this.type === "npc2") {
+                        if (newItemData.data.save.dc && !Number.isNaN(newItemData.data.save.dc)) {
+                            newItemData.data.save.dc = newItemData.data.save.dc - item.data.data.level + spellLevel;
+                        }
+                    }
+
                     item = new ItemSFRPG(newItemData, {parent: this});
                 }
 

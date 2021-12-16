@@ -29,6 +29,7 @@ This can help with data entry, especially when dealing with level tables.
 * Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
 * Added a tooltip to Pack Size in item details, explaining what it does.
 * Added a tooltip to NPC CR value.
+* Added ability DC and spell save DC fields to NPC sheets, and connected them to the spells and feats.
 * Added roll and damage notes to item actions. This is helpful for reminders on your attacks or damage rolls, for example, in case a specific damage type ignores DR, etc.
 * Augmentations now have to be equipped specifically before the modifiers apply. This way you can now carry augmentations in your inventory without them automatically functioning.
 * Fixed a minor issue with css styling in preparation of Foundry v0.9.

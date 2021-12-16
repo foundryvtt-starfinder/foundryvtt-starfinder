@@ -616,15 +616,15 @@ function setupHandlebars() {
             const printabletooltips = [];
             if (tooltips instanceof Array) {
                 for(const tooltip of tooltips) {
-                    printabletooltips.push(tooltip);
+                    printabletooltips.push(game.i18n.localize(tooltip));
                 }
             } else {
-                printabletooltips.push(tooltips);
+                printabletooltips.push(game.i18n.localize(tooltips));
             }
             if (printabletooltips.length > 0) {
                 html += "<br/>";
                 for (const attrib of printabletooltips) {
-                    html += "<br/>" + attrib;
+                    html += "<br/>" + game.i18n.localize(attrib);
                 }
             }
         }
