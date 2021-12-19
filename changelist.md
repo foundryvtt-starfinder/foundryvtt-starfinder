@@ -2,6 +2,9 @@
 
 Changes for the next release go here.
 
+## Bugfixes and small improvements
+* Fixed an issue where spells without an action type could not be cast.
+
 # v0.16.0 - Starfinder
 
 This update brings, amongst other things, some much needed GM lovin', with a new NPC type that supports conditions and modifiers, and roll notes so you can add reminders to that annoying DR circumventing NPC attack.
