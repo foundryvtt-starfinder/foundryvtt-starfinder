@@ -62,6 +62,7 @@ import calculateDroneSaves              from './rules/actions/actor/drone/calcul
 import calculateDroneSkills             from './rules/actions/actor/drone/calculate-drone-skills.js';
 // NPC rules
 import calculateNpcAbilityValue         from './rules/actions/actor/npc/calculate-npc-ability-value.js';
+import calculateNpcDcs                  from './rules/actions/actor/npc/calculate-npc-dcs.js';
 import calculateNpcXp                   from './rules/actions/actor/npc/calculate-npc-xp.js';
 // NPC2 rules
 import calculateNpc2Abilities           from './rules/actions/actor/npc2/calculate-npc2-abilities.js';
@@ -141,6 +142,7 @@ export default function (engine) {
     calculateDroneSkills(engine);
     // NPC actions
     calculateNpcAbilityValue(engine);
+    calculateNpcDcs(engine);
     calculateNpcXp(engine);
     // NPC2 actions
     calculateNpc2Abilities(engine);
@@ -261,6 +263,7 @@ export default function (engine) {
                 then: [
                     "clearTooltips",
                     "calculateNpcXp",
+                    "calculateNpcDcs",
                     "calculateClasses",
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     "calculateNpcAbilityValue",
@@ -273,6 +276,7 @@ export default function (engine) {
                 then: [
                     "clearTooltips",
                     "calculateNpcXp",
+                    "calculateNpcDcs",
                     "calculateClasses",
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     { closure: "calculateNPC2Abilities", stackModifiers: "stackModifiers" },

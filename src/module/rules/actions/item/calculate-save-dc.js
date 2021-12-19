@@ -37,6 +37,12 @@ export default function (engine) {
                         } else {
                             dcFormula = `10 + floor(@item.level / 2) + @owner.abilities.${abilityKey}.mod`;
                         }
+                    } else if (actor.type === "npc" || actor.type === "npc2") {
+                        if (itemData.type === "spell") {
+                            dcFormula = `@owner.attributes.baseSpellDC.value + @item.level`;
+                        } else {
+                            dcFormula = `@owner.attributes.abilityDC.value`;
+                        }
                     }
                 }
 

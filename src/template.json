@@ -16,43 +16,37 @@
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     },
                     "dex": {
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     },
                     "con": {
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     },
                     "int": {
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     },
                     "wis": {
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     },
                     "cha": {
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     }
                 },
                 "attributes": {
@@ -450,6 +444,28 @@
                     }
                 }
             },
+            "commonBase": {
+                "abilities": {
+                    "str": {
+                        "base": 10
+                    },
+                    "dex": {
+                        "base": 10
+                    },
+                    "con": {
+                        "base": 10
+                    },
+                    "int": {
+                        "base": 10
+                    },
+                    "wis": {
+                        "base": 10
+                    },
+                    "cha": {
+                        "base": 10
+                    }
+                }
+            },
             "modifiers": {
                 "modifiers": []
             },
@@ -465,6 +481,7 @@
         "character": {
             "templates": [
                 "common",
+                "commonBase",
                 "modifiers",
                 "conditions",
                 "counterClassesManagement"
@@ -520,6 +537,7 @@
         "drone": {
             "templates": [
                 "common",
+                "commonBase",
                 "modifiers",
                 "conditions",
                 "counterClassesManagement"
@@ -668,6 +686,16 @@
             }
         },
         "npc": {
+            "attributes": {
+                "abilityDC":
+                {
+                    "base": 0
+                },
+                "baseSpellDC":
+                {
+                    "base": 0
+                }
+            },
             "templates": [
                 "common",
                 "modifiers",
@@ -692,6 +720,28 @@
                 "conditions",
                 "counterClassesManagement"
             ],
+            "common": {
+                "abilities": {
+                    "str": {
+                        "base": 0
+                    },
+                    "dex": {
+                        "base": 0
+                    },
+                    "con": {
+                        "base": 0
+                    },
+                    "int": {
+                        "base": 0
+                    },
+                    "wis": {
+                        "base": 0
+                    },
+                    "cha": {
+                        "base": 0
+                    }
+                }
+            },
             "attributes": {
                 "eac": {
                     "base": 0
@@ -706,6 +756,14 @@
                     "base": 0
                 },
                 "will": {
+                    "base": 0
+                },
+                "abilityDC":
+                {
+                    "base": 0
+                },
+                "baseSpellDC":
+                {
                     "base": 0
                 }
             },
