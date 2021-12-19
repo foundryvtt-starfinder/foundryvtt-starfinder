@@ -25,6 +25,9 @@ lookupRange(@details.level.value, 1, 4, 2, 7, 3, 10, 4, 13, 5, 16, 6, 19, 7)
 
 This can help with data entry, especially when dealing with level tables.
 
+## FoundryVTT v9 Compatibility
+This version has been marked as being compatible with FoundryVTT v9. We've tested this version in v9 and haven't noticed any major issues. Those of you still on FoundryVTT v0.8.x can still update to this version as well. Our system wasn't affected by the big changes in Foundry for version 9, and the few minor issues that cropped up were easy to fix. And, they didn't break backwards compatibility. For now, Starfinder will be backwards compatible with the v0.8.x branch of Foundry, but there are a few pieces of deprecated code that we'll need to address once we get closer to Foundry v10.
+
 ## Bugfixes and small improvements
 * Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
 * Added a tooltip to Pack Size in item details, explaining what it does.
@@ -32,7 +35,7 @@ This can help with data entry, especially when dealing with level tables.
 * Added ability DC and spell save DC fields to NPC sheets, and connected them to the spells and feats.
 * Added roll and damage notes to item actions. This is helpful for reminders on your attacks or damage rolls, for example, in case a specific damage type ignores DR, etc.
 * Augmentations now have to be equipped specifically before the modifiers apply. This way you can now carry augmentations in your inventory without them automatically functioning.
-* Fixed a minor issue with css styling in preparation of Foundry v0.9.
+* Fixed a minor issue with css styling in preparation of Foundry v9.
 * Fixed an issue preventing you from casting spells from a character sheet without any spellslots.
 * Fixed an issue preventing you from dragging a container into another container.
 * Fixed an issue preventing you from dragging ammunition items into the starship inventory.
