@@ -1,3 +1,50 @@
+# v0.16.0 - Starfinder
+
+This update brings, amongst other things, some much needed GM lovin', with a new NPC type that supports conditions and modifiers, and roll notes so you can add reminders to that annoying DR circumventing NPC attack.
+
+## NPC Conditions
+A new NPC actor is introduced which properly supports modifiers for NPCs. You can easily convert your existing NPCs into the new format by opening the NPC sheet, scrolling down, and clicking the "Duplicate as new style NPC" button. This will generate a new NPC actor sheet, so you can check for yourself if everything is still correct. Once you are happy, you can make a pass on your scenes and replace the tokens derived from, or linked to it. And finally, remove the old style NPC actor sheet altogether.
+
+Please keep in mind that if you delete the old NPC sheet any tokens of it you have on various maps will be invalidated. Make sure to update your tokens before deleting the sheet!
+
+The old style NPCs will remain in existence, this way we can guarantee we do not break your worlds.
+
+## Late Actor Resources
+A much requested feature improvement for Actor Resources has been implemented. It is now possible to perform the modifier calculations for certain actor resources at the end of all the calculations, so that your actor resource can be modified by computed values such as strength modifier, etc.
+
+## Additional Math functions available in rolls
+Because data entry is a pain, we added two new math functions available to rolls, lookup and lookupRange. These are a little tricky to understand, but once you get them, they are quite powerful for writing lookup tables in rolls that do not require a mathematics degree to figure out. 'lookup' is great for sets with a lot of unique values, 'lookupRange' is for bigger data sets that do not have a lot of unique values.
+
+'lookup' takes a key and a series of key:value pair arguments, and will return a value for a matching key, if it finds it. If none is found, it will return 0.
+Example:
+lookup(@details.level.value, 1, 1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 4, 11, 4, 12, 4, 13, 5, 14, 5, 15, 5, 16, 6, 17, 6, 18, 6, 19, 7, 20, 7)
+
+'lookupRange' takes a key, a lowest value, and a series of key:value pair arguments which must be provided in a sorted order, and will return the value within the range.
+Example:
+lookupRange(@details.level.value, 1, 4, 2, 7, 3, 10, 4, 13, 5, 16, 6, 19, 7)
+
+This can help with data entry, especially when dealing with level tables.
+
+## FoundryVTT v9 Compatibility
+This version has been marked as being compatible with FoundryVTT v9. We've tested this version in v9 and haven't noticed any major issues. Those of you still on FoundryVTT v0.8.x can still update to this version as well. Our system wasn't affected by the big changes in Foundry for version 9, and the few minor issues that cropped up were easy to fix. And, they didn't break backwards compatibility. For now, Starfinder will be backwards compatible with the v0.8.x branch of Foundry, but there are a few pieces of deprecated code that we'll need to address once we get closer to Foundry v10.
+
+## Bugfixes and small improvements
+* Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
+* Added a tooltip to Pack Size in item details, explaining what it does.
+* Added a tooltip to NPC CR value.
+* Added ability DC and spell save DC fields to NPC sheets, and connected them to the spells and feats.
+* Added roll and damage notes to item actions. This is helpful for reminders on your attacks or damage rolls, for example, in case a specific damage type ignores DR, etc.
+* Augmentations now have to be equipped specifically before the modifiers apply. This way you can now carry augmentations in your inventory without them automatically functioning.
+* Fixed a minor issue with css styling in preparation of Foundry v9.
+* Fixed an issue preventing you from casting spells from a character sheet without any spellslots.
+* Fixed an issue preventing you from dragging a container into another container.
+* Fixed an issue preventing you from dragging ammunition items into the starship inventory.
+* Fixed an issue where dragging items didn't always correctly check whether or not the target container was full, allowing you to circumvent container limits by accident.
+* Fixed inconsistencies in the spell save DC calculation when casting at different levels with consume slot enabled and disabled.
+* Updated all Alien Archive compendium entries for aliens starting with the letters D, E, and F, completing the work on bringing in the complete collection of the Alien Archive aliens! Thanks ThroughlyDruxy!
+* Updated class specific Weapon Specialization feats to have modifiers. Thanks Iankid!
+* Updated Mind Thrust compendium entry to use proper spell level scaling in the formula, enabled variable spell, and updated the description.
+
 # v0.15.0 - Starfinder
 
 With this update we introduce a few nice features to the Starfinder system.

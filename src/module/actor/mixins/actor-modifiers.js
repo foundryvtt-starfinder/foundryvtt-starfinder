@@ -144,11 +144,6 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                         break;
                     }
 
-                // Augmentations are always applied
-                case "augmentation":
-                    modifiersToConcat = itemModifiers;
-                    break;
-
                 // Feats are only active when they are passive, or activated
                 case "feat":
                     if (itemData.activation?.type === "" || itemData.isActive) {

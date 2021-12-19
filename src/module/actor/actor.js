@@ -181,26 +181,33 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         let consumeSpellSlot = true;
         let selectedSlot = null;
+        let processContext = null;
         if (configureDialog) {
             try {
                 const dialogResponse = await SpellCastDialog.create(this, item);
                 const slotIndex = parseInt(dialogResponse.formData.get("level"));
                 consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
                 selectedSlot = dialogResponse.spellLevels[slotIndex];
-                spellLevel = parseInt(selectedSlot.level);
+                spellLevel = parseInt(selectedSlot?.level || item.data.data.level);
 
                 if (spellLevel !== item.data.data.level && item.data.data.level > spellLevel) {
                     const newItemData = duplicate(item.data);
                     newItemData.data.level = spellLevel;
 
-                    item = new ItemSFRPG(newItemData, {parent: this});
-                    
-                    // Run automation to ensure save DCs are correct.
-                    item.prepareData();
-                    const processContext = await item.processData();
-                    if (processContext.fact.promises) {
-                        await Promise.all(processContext.fact.promises);
+                    if (this.type === "npc" || this.type === "npc2") {
+                        if (newItemData.data.save.dc && !Number.isNaN(newItemData.data.save.dc)) {
+                            newItemData.data.save.dc = newItemData.data.save.dc - item.data.data.level + spellLevel;
+                        }
                     }
+
+                    item = new ItemSFRPG(newItemData, {parent: this});
+                }
+
+                // Run automation to ensure save DCs are correct.
+                item.prepareData();
+                processContext = await item.processData();
+                if (processContext) {
+                    processContext = Promise.all(processContext.fact.promises);
                 }
             } catch (error) {
                 console.error(error);
@@ -208,22 +215,44 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         }
 
-        if (consumeSpellSlot && (spellLevel > 0)) {
-
-            if (selectedSlot) {
-                if (selectedSlot.source === "general") {
-                    await this.update({
-                        [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(this.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+        if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
+            const actor = this;
+            if (selectedSlot.source === "general") {
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+                        });
                     });
                 } else {
-                    const selectedLevel = selectedSlot.level;
-                    const selectedClass = selectedSlot.source;
+                    processContext = actor.update({
+                        [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+                    });
+                }
+            } else {
+                const selectedLevel = selectedSlot.level;
+                const selectedClass = selectedSlot.source;
 
-                    await this.update({
-                        [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(this.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                        });
+                    });
+                } else {
+                    processContext = actor.update({
+                        [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
                     });
                 }
             }
+        }
+
+        if (processContext) {
+            processContext.then(function(result) {
+                return item.roll();
+            });
+            
+            return processContext;
         }
 
         return item.roll();
@@ -240,7 +269,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         // use this to delete any unwanted skills.
 
         const skill = duplicate(this.data.data.skills[skillId]);
-        const isNpc = this.data.type === "npc";
+        const isNpc = this.data.type === "npc" || this.data.type === "npc2";
         const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),

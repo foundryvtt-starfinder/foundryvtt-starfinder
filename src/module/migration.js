@@ -60,7 +60,7 @@ const migrateItemData = function (item, schema) {
 const migrateActorData = function (actor, schema) {
     const updateData = {};
 
-    const speedActorTypes = ['character', 'npc', 'drone'];
+    const speedActorTypes = ['character', 'npc', 'npc2', 'drone'];
 
     if (schema < SFRPGActorMigrationSchemas.NPC_DATA_UPATE && actor.type === 'npc') _migrateNPCData(actor, updateData);
     if (schema < SFRPGActorMigrationSchemas.THE_PAINFUL_UPDATE) _resetActorFlags(actor, updateData);

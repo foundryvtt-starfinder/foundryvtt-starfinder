@@ -61,7 +61,7 @@ export default class SFRPGRoll extends Roll {
     
         // Execute the roll, if needed
         if (!this._evaluated) this.evaluate();
-    
+
         // Define chat data
         const chatData = {
             formula: isPrivate ? "???" : this._formula,
@@ -71,7 +71,8 @@ export default class SFRPGRoll extends Roll {
             total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
             tags: this.tags,
             breakdown: this.breakdown,
-            htmlData: this.htmlData
+            htmlData: this.htmlData,
+            rollNotes: this.htmlData?.find(x => x.name === "rollNotes")?.value
         };
     
         // Render the roll display template

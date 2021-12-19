@@ -171,6 +171,14 @@
         <label>{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}</label>
         <input type="text" name="data.details.aura" value="{{data.details.aura}}" />
     </div>
+    <div class="form-group" {{createTippy title="SFRPG.NPCSheet.Header.AbilityDC" subtitle="@attributes.abilityDC.value" tooltips="SFRPG.NPCSheet.Header.AbilityDCTooltip"}}>
+        <label>{{localize "SFRPG.NPCSheet.Header.AbilityDC"}}</label>
+        <input type="text" name="data.attributes.abilityDC.base" value="{{data.attributes.abilityDC.base}}" placeholder="0"/>
+    </div>
+    <div class="form-group" {{createTippy title="SFRPG.NPCSheet.Header.BaseSpellDC" subtitle="@attributes.baseSpellDC.value" tooltips="SFRPG.NPCSheet.Header.BaseSpellDCTooltip"}}>
+        <label>{{localize "SFRPG.NPCSheet.Header.BaseSpellDC"}}</label>
+        <input type="text" name="data.attributes.baseSpellDC.base" value="{{data.attributes.baseSpellDC.base}}" placeholder="0"/>
+    </div>
     {{/if}}
     
     {{#if (not isDrone)}}

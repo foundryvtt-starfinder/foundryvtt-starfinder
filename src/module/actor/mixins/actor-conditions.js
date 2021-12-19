@@ -97,7 +97,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                         const promise = this.createEmbeddedDocuments("Item", [itemData]);
                         promise.then((createdItems) => {
                             if (createdItems && createdItems.length > 0) {
-                                this._updateActor(conditionName, true).then(() => {
+                                this._updateActorCondition(conditionName, true).then(() => {
                                     Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName: conditionName, enabled: enabled});
                                 });
                             }
@@ -111,7 +111,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             if (conditionItem) {
                 const promise = this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
                 promise.then(() => {
-                    this._updateActor(conditionName, false).then(() => {
+                    this._updateActorCondition(conditionName, false).then(() => {
                         Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
                     });
                 });
@@ -128,7 +128,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @param {Boolean} enabled If this value is true it enables the condition
      * @private
      * */
-    async _updateActor(conditionName, enabled) {
+    async _updateActorCondition(conditionName, enabled) {
         const updateData = {};
         updateData[`data.conditions.${conditionName}`] = enabled;
 
@@ -158,6 +158,6 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             return this.setCondition(flatFooted, shouldBeFlatfooted);
         }
 
-        return Promise.reject();
+        return null;
     }
 }

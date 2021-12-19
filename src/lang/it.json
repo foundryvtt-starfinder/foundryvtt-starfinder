@@ -3,7 +3,8 @@
         "TypeCharacter": "PG",
         "TypeDrone": "Drone",
         "TypeHazard": "Trappola",
-        "TypeNpc": "PNG",
+        "TypeNpc": "Old Style PNG",
+        "TypeNpc2": "PNG",
         "TypeStarship": "Astronave",
         "TypeVehicle": "Veicolo"
     },
@@ -83,6 +84,7 @@
         "AbilityScoreBase": "Punteggio di caratteristica base",
         "AbilityScoreBaseTooltip": "Punteggio di caratteristica base: {mod}",
         "AbilityScoreBonusTooltip": "{type} bonus: {mod} ({source})",
+        "AbilityScoreBonusModifiedTooltip": "{type} bonus: {mod} (computed from {base}) ({source})",
         "AbilityScoreIncreaseTooltip": "Aumento dei valori di caratteristica: {mod}",
         "AbilityScoreRaceTooltip": "Razza: {mod}",
         "AbilityScoreThemeTooltip": "Tema: {mod}",
@@ -208,6 +210,7 @@
                     "Open": "Apri",
                     "OpenTooltip": "Apri la lista degli oggetti del Contenitore.",
                     "StorageIdentifier": "ID di archiviazione",
+                    "StorageIdentifierAmmunitionSlot": "Ammunition Slot",
                     "StorageIdentifierArmorUpgrade": "Posizione del Miglioramento dell'Armatura",
                     "StorageIdentifierFusion": "Fusione",
                     "StorageIdentifierItem": "Posizione dell'oggetto",
@@ -926,8 +929,12 @@
                 "CriticalEffect": "Colpo Critico",
                 "CriticalHealingFormula": "Formula della Cura Critica",
                 "DamageFormula": "Formula del Danno",
+                "DamageNotes": "Damage Notes",
+                "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "HealingFormula": "Formula della Cura",
                 "OtherFormula": "Altre Formule",
+                "RollNotes": "Roll Notes",
+                "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "SavingThrow": "Tiro Salvezza"
             },
             "Activation": {
@@ -1034,7 +1041,8 @@
                 "Level": "Livello",
                 "Price": "Prezzo",
                 "Quantity": "Quantità",
-                "QuantityPerPack": "Pack size"
+                "QuantityPerPack": "Pack size",
+                "QuantityPerPackTooltip": "Pack size is used to define how many of one item you buy for the full price. For example, you buy 30 small arm rounds at the cost of 40 credits. This helps with performing bulk and wealth calculations, as well as ammunition tracking."
             },
             "Equipment": {
                 "Action": "Azione dell'equipaggiamento",
@@ -1192,6 +1200,10 @@
                 "ShowInCombatTrackerTooltip": "If enabled, this resource will be visible in the combat tracker for quick reference.",
                 "ShowOwnerAndGMOnly": "Only shown for Owner and GM",
                 "ShowOwnerAndGMOnlyTooltip": "If enabled, this resource will only be visible in the combat tracker for the sheet owner and the GM.",
+                "Stage": "Calculation Stage",
+                "StageEarly": "Early",
+                "StageLate": "Late",
+                "StageTooltip": "The calculation stage affects when the modifiers for this resource are calculated.<br/><br/><strong>Early</strong><br/>Early actor resources are calculated before any of the other automations are run. At this point, all the computed actor values are not yet valid, such as strength modifier, fortitude save bonus, etc. Actor resources computed at this stage can be used in modifiers that affect actor attributes.<br/><br/><strong>Late</strong><br/>Late actor resources are calculated at the very end of the actor's modifiers. This means you can include the computed values of the actor into the actor resource. You will not be able to include late actor resources in a calculation that affect the actors attributes constantly. You can still use them in situational modifiers, however.",
                 "SubType": "Subtype",
                 "SubTypeTooltip": "(Required) Subtype makes up the second half of the resource identifier.<br/>For example: @resources.type.subtype.value",
                 "Type": "Type",
@@ -1594,7 +1606,11 @@
             },
             "Header": {
                 "AlignmentPlaceHolderText": "NB",
+                "AbilityDC": "Ability DC",
+                "AbilityDCTooltip": "The ability DC this NPC has. All of the NPCs abilities that have a saving throw associated with them typically use this value, unless they are spells.<br/><br/>This might not be properly integrated into every ability yet.",
                 "AuraPlaceHolderText": "Aura",
+                "BaseSpellDC": "Base Spell DC",
+                "BaseSpellDCTooltip": "The base spell DC this NPC has. All of the NPCs spells that have a saving throw associated with them typically use this value, plus the spell level.",
                 "NamePlaceHolderText": "Nome del Personaggio",
                 "RaceAndGraftsPlaceHolderText": "Genere, Razza, e Classe/Innesti",
                 "SourcePlaceHolderText": "Sorgente",
@@ -1610,6 +1626,16 @@
                     "Name": "Nuovo Oggetto",
                     "Note": "Selezionare il tipo di Oggetto che si vuole creare",
                     "Title": "Creare un nuovo Oggetto"
+                },
+                "DuplicateNewStyle": {
+                    "Button": "Duplicate as new style NPC",
+                    "ButtonTooltip": "Clicking this button will create a new style NPC actor sheet, duplicating the data and items on this actor.",
+                    "DialogTitle": "Use original actor?",
+                    "DialogMessage": "You are duplicating an unlinked token actor, do you wish to create the new style NPC using the unlinked actor data, or the original sheet data?",
+                    "DialogOriginalActorButton": "Duplicate Original Actor",
+                    "DialogUnlinkedActorButton": "Duplicate Unlinked Actor",
+                    "DialogCancelButton": "Cancel",
+                    "ErrorCreateActor": "Something went wrong converting this actor. Check your user role permissions.<br/><br/>Click to dismiss."
                 },
                 "Navigation": {
                     "Conditions": "Condizioni"
@@ -1772,6 +1798,7 @@
         },
         "Save": "Salva",
         "SaveAbilityModTooltip": "Modificatore di caratteristica: {mod} ({ability})",
+        "SaveBaseModifier": "Base Save: {base}",
         "SaveClassModTooltip": "Modificatore di Classe: {mod} ({class})",
         "SaveDescriptorDisbelieve": "ne pas croire",
         "SaveDescriptorHalf": "Dimezza",
