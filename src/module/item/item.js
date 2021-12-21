@@ -94,10 +94,17 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             // Ability Activation Label
             let act = data.activation || {};
-            if (act) labels.activation = [
-                act.cost,
-                act.type === "none" ? game.i18n.localize("SFRPG.AbilityActivationTypesNoneButton") : C.abilityActivationTypes[act.type]
-            ].filterJoin(" ");
+            if (act) {
+                if (act.type === "none"){
+                    labels.activation = game.i18n.localize("SFRPG.AbilityActivationTypesNoneButton");
+                }                 
+                else {
+                    labels.activation = [
+                        act.cost,
+                        C.abilityActivationTypes[act.type]
+                    ].filterJoin(" ");
+                }                
+            }
 
             let tgt = data.target || {};
             if (tgt.value && tgt.value === "") tgt.value = null;
