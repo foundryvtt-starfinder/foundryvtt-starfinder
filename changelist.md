@@ -5,6 +5,7 @@ Changes for the next release go here.
 ## Bugfixes and small improvements
 * Fixed an issue where old style NPC sheets would no longer open if an actor resource's calculation stage was set to late.
 * Fixed an issue where spells without an action type could not be cast.
+* Migrated all of the alien archive aliens to the new NPC type, removing the need of manual conversion.
 
 # v0.16.0 - Starfinder
 
