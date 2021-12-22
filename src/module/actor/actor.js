@@ -205,9 +205,11 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
                 // Run automation to ensure save DCs are correct.
                 item.prepareData();
-                processContext = await item.processData();
-                if (processContext) {
-                    processContext = Promise.all(processContext.fact.promises);
+                if (item.data.data.actionType) {
+                    processContext = await item.processData();
+                    if (processContext) {
+                        processContext = Promise.all(processContext.fact.promises);
+                    }
                 }
             } catch (error) {
                 console.error(error);
