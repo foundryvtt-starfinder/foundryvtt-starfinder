@@ -2,11 +2,13 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 
 export default function (engine) {
     engine.closures.add("calculateSkillArmorCheckPenalty", (fact, context) => {
-        const armorData = fact.armor?.data?.data;
+        const armors = fact.armors?.length > 0 ? fact.armors : null;
         const shields = fact.shields;
         const skills = fact.data.skills;
         const modifiers = fact.modifiers;
 
+        const worstArmor = armors?.reduce((armor, worstArmor) => (armor.data?.data?.armor?.acp || 0) < (worstArmor.data?.data?.armor?.acp || 0) ? armor : worstArmor);
+        const armorData = worstArmor?.data?.data;
         const hasLightArmor = armorData?.armor?.type === "light";
         const hasHeavyArmor = armorData?.armor?.type === "heavy";
 
@@ -87,7 +89,7 @@ export default function (engine) {
                     skill.tooltip.push(game.i18n.format("SFRPG.ACPTooltip", {
                         type: "Armor",
                         mod: acp.signedString(),
-                        source: fact.armor?.data.name
+                        source: worstArmor.name
                     }));
                 }
             }

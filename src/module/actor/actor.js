@@ -57,7 +57,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const modifiers = this.getAllModifiers();
 
         const items = this.items;
-        const armor = items.find(item => item.type === "equipment" && item.data.data.equipped);
+        const armors = items.filter(item => item.type === "equipment" && item.data.data.equipped);
         const shields = items.filter(item => item.type === "shield" && item.data.data.equipped);
         const weapons = items.filter(item => item.type === "weapon" && item.data.data.equipped);
         const races = items.filter(item => item.type === "race");
@@ -76,7 +76,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             data: this.data.data,
             flags: this.data.flags,
             items: this.items,
-            armor,
+            armors,
             shields,
             weapons,
             races,

@@ -4,6 +4,7 @@ Boo!
 
 ## Bugfixes and small improvements
 * Added Society starships to the starship compendium.
+* Added support for wearing multiple armor types, it will select the best EAC and KAC, and the worst Dex and ACP. This specifically applies to Light Armor underneath Heavy Armor.
 * Fixed a minor Foundry v0.9 compatibility warning.
 * Fixed an issue preventing the editing of power armor details.
 * The activate button for feats without an action type should now be visible.
