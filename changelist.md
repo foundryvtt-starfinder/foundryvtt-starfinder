@@ -5,6 +5,7 @@ Boo!
 ## Bugfixes and small improvements
 * Added Society starships to the starship compendium.
 * Fixed a minor Foundry v0.9 compatibility warning.
+* Fixed an issue preventing the editing of power armor details.
 * The activate button for feats without an action type should now be visible.
 * Vanguard aspects have been updated to include the appropriate skill point modifiers.
 * Various changes to the rules and UCR compendium entries.
