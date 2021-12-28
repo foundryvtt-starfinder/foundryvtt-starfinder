@@ -8,6 +8,7 @@ Boo!
 * Fixed a minor Foundry v0.9 compatibility warning.
 * Fixed an issue preventing the editing of power armor details.
 * Fixed an issue preventing the casting of certain spells. (Fixes #486)
+* Fusions, weapon accessories, and armor upgrades installed on the appropriate item are now providing modifiers.
 * The activate button for feats without an action type should now be visible.
 * The new NPC style sheet will now display all movement types at once, rather than use the main movement type style.
 * Vanguard aspects have been updated to include the appropriate skill point modifiers.
