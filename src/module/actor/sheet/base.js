@@ -96,6 +96,30 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
         }
 
+        // Calculate the expanded speed box height, only used for npc2 actors.
+        if (this.actor.type === "npc2") {
+            let numberOfMovementTypes = 0;
+            if (data.data.attributes.speed.land.value > 0) {
+                numberOfMovementTypes += 1;
+            }
+            if (data.data.attributes.speed.burrowing.value > 0) {
+                numberOfMovementTypes += 1;
+            }
+            if (data.data.attributes.speed.climbing.value > 0) {
+                numberOfMovementTypes += 1;
+            }
+            if (data.data.attributes.speed.flying.value > 0) {
+                numberOfMovementTypes += 1;
+            }
+            if (data.data.attributes.speed.swimming.value > 0) {
+                numberOfMovementTypes += 1;
+            }
+            if (data.data.attributes.speed.special) {
+                numberOfMovementTypes += 1;
+            }
+            data.expandedSpeedBoxHeight = Math.max(36 + numberOfMovementTypes * 14, 70);
+        }
+
         if (data.data.skills) {
             // Update skill labels
             for (let [s, skl] of Object.entries(data.data.skills)) {                
