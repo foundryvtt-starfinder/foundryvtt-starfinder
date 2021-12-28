@@ -3,10 +3,11 @@
 Boo!
 
 ## Bugfixes and small improvements
-* The activate button for feats without an action type should now be visible.
 * Added Society starships to the starship compendium.
-* Various changes to the rules and UCR compendium entries.
+* Fixed a minor Foundry v0.9 compatibility warning.
+* The activate button for feats without an action type should now be visible.
 * Vanguard aspects have been updated to include the appropriate skill point modifiers.
+* Various changes to the rules and UCR compendium entries.
 * Various minor compendium entry mistakes have been corrected.
 
 # v0.16.1 - Starfinder
