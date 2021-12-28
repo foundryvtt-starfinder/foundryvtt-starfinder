@@ -2,6 +2,13 @@
 
 Boo!
 
+## Bugfixes and small improvements
+* The activate button for feats without an action type should now be visible.
+* Added Society starships to the starship compendium.
+* Various changes to the rules and UCR compendium entries.
+* Vanguard aspects have been updated to include the appropriate skill point modifiers.
+* Various minor compendium entry mistakes have been corrected.
+
 # v0.16.1 - Starfinder
 
 These are some small bugfixes and improvements that have been uncovered recently.
