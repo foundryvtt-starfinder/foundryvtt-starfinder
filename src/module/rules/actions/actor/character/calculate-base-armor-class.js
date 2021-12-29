@@ -12,7 +12,7 @@ export default function (engine) {
         kac.tooltip.push(baseTooltip);
 
         if (armors || shields) {
-            const worstDexArmor = armors?.reduce((armor, worstArmor) => (armor.data?.data?.armor?.eac || 0) < (worstArmor.data?.data?.armor?.eac || 0) ? armor : worstArmor);
+            const worstDexArmor = armors?.reduce((armor, worstArmor) => (armor.data?.data?.armor?.dex || 0) < (worstArmor.data?.data?.armor?.dex || 0) ? armor : worstArmor);
             const worstDexArmorData = worstDexArmor?.data?.data;
 
             // Max dex
