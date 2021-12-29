@@ -374,7 +374,7 @@ export class ItemBrowserSFRPG extends Application {
         settings = {};
 
         for (const compendium of game.packs) {
-            if (compendium.metadata.entity == 'Item') {
+            if (compendium.documentName == 'Item') {
                 settings[compendium.collection] = {
                   load: !defaultAllowedCompendiums || defaultAllowedCompendiums.includes(compendium.metadata.name),
                   name: compendium.metadata.label
@@ -390,7 +390,7 @@ export class ItemBrowserSFRPG extends Application {
         settings = {};
 
         for (const compendium of game.packs) {
-            if (compendium.metadata.documentName === 'Item') {
+            if (compendium.documentName === 'Item') {
                 settings[compendium.collection] = {
                     // add entry for each item compendium, that is turned on if no settings for it exist already
                     load: loadedSettings[compendium.collection] == undefined ? true : loadedSettings[compendium.collection].load,
