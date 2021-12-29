@@ -109,7 +109,8 @@ export default class RollTree {
             console.log(`Resolving '${this.formula}'`);
             console.log(duplicate(this.contexts));
         }
-        this.rootNode = new RollNode(this, this.formula, null, null, false, true);
+
+        this.rootNode = new RollNode(this, this.formula, null, null, false, true, null, this.options);
         this.nodes = {};
 
         this.nodes[this.formula] = this.rootNode;

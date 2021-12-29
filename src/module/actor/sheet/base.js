@@ -283,6 +283,10 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
     }
 
+    clearTooltips() {
+        this._tooltips = null;
+    }
+
     async close(...args) {
         if (this._tooltips !== null) {
             for (const tooltip of this._tooltips) {

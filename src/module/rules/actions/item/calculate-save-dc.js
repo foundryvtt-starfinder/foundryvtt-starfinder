@@ -60,13 +60,14 @@ export default function (engine) {
                     const rollPromise = DiceSFRPG.createRoll({
                         rollContext: rollContext,
                         rollFormula: dcFormula,
-                        mainDie: 'd0',
+                        mainDie: null,
                         dialogOptions: { skipUI: true }
                     });
             
                     rollPromise.then(rollResult => {
                         const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
                         item.labels.save = returnValue;
+                        item.labels.saveFormula = rollResult.formula;
                     });
 
                     if (!fact.promises) {
@@ -75,6 +76,7 @@ export default function (engine) {
                     fact.promises.push(rollPromise);
                 } else {
                     item.labels.save = 10;
+                    item.labels.saveFormula = 10;
                 }
             }
         }

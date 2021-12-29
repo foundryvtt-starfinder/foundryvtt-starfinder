@@ -4,6 +4,7 @@ Boo!
 
 ## Bugfixes and small improvements
 * Added Society starships to the starship compendium.
+* Added spell save DCs and how it was calculated to the spells on the spellbook.
 * Added support for wearing multiple armor types, it will select the best EAC and KAC, and the worst Dex and ACP. This specifically applies to Light Armor underneath Heavy Armor.
 * Fixed a minor Foundry v0.9 compatibility warning.
 * Fixed an issue preventing the editing of power armor details.

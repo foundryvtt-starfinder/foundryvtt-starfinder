@@ -1218,10 +1218,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 }
 
-Hooks.on("afterClosureProcessed", (closureName, fact) => {
+Hooks.on("afterClosureProcessed", async (closureName, fact) => {
     if (closureName == "process-actors") {
-        for (const item of fact.actor.items) {
-            item.processData();
-        }
+        await fact.actor.processItemData();
     }
 });
