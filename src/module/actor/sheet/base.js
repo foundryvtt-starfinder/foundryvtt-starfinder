@@ -910,8 +910,6 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     async processDroppedData(event, parsedDragData) {
-        console.log(this.acceptedItemTypes);
-
         const targetActor = new ActorItemHelper(this.actor.id, this.token?.id, this.token?.parent?.id);
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
             ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
