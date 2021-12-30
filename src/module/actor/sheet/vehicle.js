@@ -1,6 +1,13 @@
 import { ActorSheetSFRPG } from "./base.js";
+import { SFRPG } from "../../config.js";
 
 export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
+    constructor(...args) {
+        super(...args);
+
+        this.acceptedItemTypes.push(...SFRPG.vehicleDefinitionItemTypes);
+        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+    }
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {

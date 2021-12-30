@@ -1,6 +1,16 @@
 // Namespace SFRPG Configuration Values
 export const SFRPG = {};
 
+SFRPG.actorTypes = {
+    "character": "ACTOR.TypeCharacter",
+    "drone": "ACTOR.TypeDrone",
+    "hazard": "ACTOR.TypeHazard",
+    "npc": "ACTOR.TypeNpc",
+    "npc2": "ACTOR.TypeNpc2",
+    "starshop": "ACTOR.TypeStarship",
+    "vehicle": "ACTOR.TypeVehicle"
+};
+
 /**
  * The set of ability scores used with the system
  * @type {Object}
@@ -1411,24 +1421,22 @@ SFRPG.capacityUsagePer = {
 };
 
 SFRPG.itemTypes = {
-    "asi": "SFRPG.Items.Categories.AbilityScoreIncrease",
     "archetypes": "SFRPG.Items.Categories.Archetypes",
-    "augmentation": "SFRPG.Items.Categories.Augmentations",
-    "chassis": "SFRPG.Items.Categories.DroneChassis",
     "class": "SFRPG.Items.Categories.Classes",
-    "consumable": "SFRPG.Items.Categories.Consumables",
-    "container": "SFRPG.Items.Categories.Containers",
-    "equipment": "SFRPG.Items.Categories.Armor",
-    "feat": "SFRPG.Items.Categories.Feats",
-    "fusion": "ITEM.TypeFusion",
-    "goods": "SFRPG.Items.Categories.Goods",
-    "hybrid": "SFRPG.Items.Categories.HybridItems",
-    "magic": "SFRPG.Items.Categories.MagicItems",
-    "mod": "SFRPG.Items.Categories.DroneMods",
     "race": "SFRPG.Items.Categories.Races",
+    "theme": "SFRPG.Items.Categories.Themes",
+
+    "actorResource": "ITEM.TypeActorresource",
+    "feat": "SFRPG.Items.Categories.Feats",
     "spell": "SFRPG.Items.Categories.Spells",
-    "starshipAction": "SFRPG.Items.Categories.StarshipActions",
+
+    "asi": "SFRPG.Items.Categories.AbilityScoreIncrease",
+
+    "chassis": "SFRPG.Items.Categories.DroneChassis",
+    "mod": "SFRPG.Items.Categories.DroneMods",
+
     "starshipAblativeArmor": "SFRPG.Items.Categories.StarshipAblativeArmors",
+    "starshipAction": "ITEM.TypeStarshipaction",
     "starshipArmor": "SFRPG.Items.Categories.StarshipArmors",
     "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
     "starshipCrewQuarter": "SFRPG.Items.Categories.StarshipCrewQuarters",
@@ -1445,16 +1453,90 @@ SFRPG.itemTypes = {
     "starshipShield": "SFRPG.Items.Categories.StarshipShields",
     "starshipThruster": "SFRPG.Items.Categories.StarshipThrusters",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
+
+    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
+    "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems",
+
+    "ammunition": "SFRPG.Items.Categories.Ammunition",
+    "augmentation": "SFRPG.Items.Categories.Augmentations",
+    "consumable": "SFRPG.Items.Categories.Consumables",
+    "container": "SFRPG.Items.Categories.Containers",
+    "equipment": "SFRPG.Items.Categories.Armor",
+    "fusion": "ITEM.TypeFusion",
+    "goods": "SFRPG.Items.Categories.Goods",
+    "hybrid": "SFRPG.Items.Categories.HybridItems",
+    "magic": "SFRPG.Items.Categories.MagicItems",
+    "shield": "SFRPG.Items.Categories.Shields",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
-    "theme": "SFRPG.Items.Categories.Themes",
     "upgrade": "ITEM.TypeUpgrade",
     "weapon": "SFRPG.Items.Categories.Weapons",
-    "shield": "SFRPG.Items.Categories.Shields",
-    "ammunition": "SFRPG.Items.Categories.Ammunition",
-    "weaponAccessory": "ITEM.TypeWeaponaccessory",
-    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
-    "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
+    "weaponAccessory": "ITEM.TypeWeaponaccessory"
 };
+
+SFRPG.characterDefinitionItemTypes = [
+    "archetypes",
+    "class",
+    "race",
+    "theme"
+];
+
+SFRPG.sharedItemTypes = [
+    "actorResource",
+    "feat",
+    "spell"
+];
+
+SFRPG.playerCharacterDefinitionItemTypes = [
+    "asi"
+];
+
+SFRPG.droneDefinitionItemTypes = [
+    "chassis",
+    "mod"
+];
+
+SFRPG.starshipDefinitionItemTypes = [
+    "starshipAction",
+    "starshipAblativeArmor",
+    "starshipArmor",
+    "starshipComputer",
+    "starshipCrewQuarter",
+    "starshipDefensiveCountermeasure",
+    "starshipDriftEngine",
+    "starshipExpansionBay",
+    "starshipFortifiedHull",
+    "starshipFrame",
+    "starshipOtherSystem",
+    "starshipPowerCore",
+    "starshipReinforcedBulkhead",
+    "starshipSecuritySystem",
+    "starshipSensor",
+    "starshipShield",
+    "starshipThruster",
+    "starshipWeapon"
+];
+
+SFRPG.vehicleDefinitionItemTypes = [
+    "vehicleAttack",
+    "vehicleSystem"
+];
+
+SFRPG.physicalItemTypes = [
+    "ammunition",
+    "augmentation",
+    "consumable",
+    "container",
+    "equipment",
+    "fusion",
+    "goods",
+    "hybrid",
+    "magic",
+    "shield",
+    "technological",
+    "upgrade",
+    "weapon",
+    "weaponAccessory"
+];
 
 SFRPG.containableTypes = {
     "weapon"       : "SFRPG.Items.Categories.Weapons",

@@ -3,6 +3,13 @@ import { SFRPG } from "../../config.js";
 import { computeCompoundBulkForItem, computeCompoundWealthForItem } from "../actor-inventory-utils.js"
 
 export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
+    constructor(...args) {
+        super(...args);
+
+        this.acceptedItemTypes.push(...SFRPG.droneDefinitionItemTypes);
+        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+    }
+
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {

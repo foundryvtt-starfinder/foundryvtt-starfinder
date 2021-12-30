@@ -20,6 +20,10 @@ export class ActorSheetSFRPG extends ActorSheet {
     constructor(...args) {
         super(...args);
 
+        this.acceptedItemTypes = [
+            ...SFRPG.sharedItemTypes,
+        ];
+
         this._filters = {
             inventory: new Set(),
             spellbook: new Set(),
@@ -906,6 +910,8 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     async processDroppedData(event, parsedDragData) {
+        console.log(this.acceptedItemTypes);
+
         const targetActor = new ActorItemHelper(this.actor.id, this.token?.id, this.token?.parent?.id);
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
             ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
@@ -939,6 +945,12 @@ export class ActorSheetSFRPG extends ActorSheet {
             const pack = game.packs.get(parsedDragData.pack);
             const itemData = await pack.getDocument(parsedDragData.id);
 
+            if (!this.acceptedItemTypes.includes(itemData.type)) {
+                // Reject item
+                ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[itemData.type], target: SFRPG.actorTypes[this.actor.type] }));
+                return;
+            }
+
             if (itemData.type === "class") {
                 const existingClass = targetActor.findItem(x => x.type === "class" && x.name === itemData.name);
                 if (existingClass) {
@@ -971,6 +983,12 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
 
             const itemToMove = await sourceActor.getItem(parsedDragData.data._id);
+
+            if (!this.acceptedItemTypes.includes(itemToMove.type)) {
+                // Reject item
+                ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[itemToMove.type], target: SFRPG.actorTypes[this.actor.type] }));
+                return;
+            }
 
             if (event.shiftKey) {
                 InputDialog.show(
