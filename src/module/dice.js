@@ -187,7 +187,8 @@ export class DiceSFRPG {
             title: title,
             skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "1d20",
-            dialogOptions: dialogOptions
+            dialogOptions: dialogOptions,
+            useRawStrings: false
         };
 
         const partMapper = (part) => {
@@ -323,7 +324,7 @@ export class DiceSFRPG {
     * @param {DialogOptions}      data.dialogOptions Modal dialog options
     * @returns {Promise<RollResult>|Promise} Returns the roll's result or an empty promise.
     */
-    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions }) {
+    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions, useRawStrings = false }) {
         
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -347,7 +348,8 @@ export class DiceSFRPG {
             title: title,
             skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: mainDie ? "1" + mainDie : null,
-            dialogOptions: dialogOptions
+            dialogOptions: dialogOptions,
+            useRawStrings: useRawStrings
         };
 
         const formula = rollFormula || parts.join(" + ");
@@ -485,7 +487,8 @@ export class DiceSFRPG {
             skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "",
             dialogOptions: dialogOptions,
-            parts
+            parts,
+            useRawStrings: false
         };
 
         const partMapper = (part) => {

@@ -1,3 +1,32 @@
+# v0.17.0 - Starfinder
+
+Boo!
+
+## Bugfixes and small improvements
+* Added Society starships to the starship compendium.
+* Added spell save DCs and how it was calculated to the spells on the spellbook.
+* Added support for wearing multiple armor types, it will select the best EAC and KAC, and the worst Dex and ACP. This specifically applies to Light Armor underneath Heavy Armor.
+* Fixed a minor Foundry v0.9 compatibility warning.
+* Fixed an issue preventing the editing of power armor details.
+* Fixed an issue preventing the casting of certain spells. (Fixes #486)
+* Fusions, weapon accessories, and armor upgrades installed on the appropriate item are now providing modifiers.
+* Preventing drag and dropping of item types onto actor sheets that do not support them, e.g. starship actions onto a player character.
+* The activate button for feats without an action type should now be visible.
+* The new NPC style sheet will now display all movement types at once, rather than use the main movement type style.
+* Vanguard aspects have been updated to include the appropriate skill point modifiers.
+* Various changes to the rules and UCR compendium entries.
+* Various minor compendium entry mistakes have been corrected.
+
+# v0.16.1 - Starfinder
+
+These are some small bugfixes and improvements that have been uncovered recently.
+
+## Bugfixes and small improvements
+* Fixed an issue where old style NPC sheets would no longer open if an actor resource's calculation stage was set to late.
+* Fixed an issue where spells without an action type could not be cast.
+* Migrated all of the alien archive aliens to the new NPC type, removing the need of manual conversion.
+* Removed the condition warning from the new NPC sheet, and updated the text on the old style NPC sheet.
+
 # v0.16.0 - Starfinder
 
 This update brings, amongst other things, some much needed GM lovin', with a new NPC type that supports conditions and modifiers, and roll notes so you can add reminders to that annoying DR circumventing NPC attack.
@@ -12,18 +41,36 @@ The old style NPCs will remain in existence, this way we can guarantee we do not
 ## Late Actor Resources
 A much requested feature improvement for Actor Resources has been implemented. It is now possible to perform the modifier calculations for certain actor resources at the end of all the calculations, so that your actor resource can be modified by computed values such as strength modifier, etc.
 
+## Additional Math functions available in rolls
+Because data entry is a pain, we added two new math functions available to rolls, lookup and lookupRange. These are a little tricky to understand, but once you get them, they are quite powerful for writing lookup tables in rolls that do not require a mathematics degree to figure out. 'lookup' is great for sets with a lot of unique values, 'lookupRange' is for bigger data sets that do not have a lot of unique values.
+
+'lookup' takes a key and a series of key:value pair arguments, and will return a value for a matching key, if it finds it. If none is found, it will return 0.
+Example:
+lookup(@details.level.value, 1, 1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 4, 11, 4, 12, 4, 13, 5, 14, 5, 15, 5, 16, 6, 17, 6, 18, 6, 19, 7, 20, 7)
+
+'lookupRange' takes a key, a lowest value, and a series of key:value pair arguments which must be provided in a sorted order, and will return the value within the range.
+Example:
+lookupRange(@details.level.value, 1, 4, 2, 7, 3, 10, 4, 13, 5, 16, 6, 19, 7)
+
+This can help with data entry, especially when dealing with level tables.
+
+## FoundryVTT v9 Compatibility
+This version has been marked as being compatible with FoundryVTT v9. We've tested this version in v9 and haven't noticed any major issues. Those of you still on FoundryVTT v0.8.x can still update to this version as well. Our system wasn't affected by the big changes in Foundry for version 9, and the few minor issues that cropped up were easy to fix. And, they didn't break backwards compatibility. For now, Starfinder will be backwards compatible with the v0.8.x branch of Foundry, but there are a few pieces of deprecated code that we'll need to address once we get closer to Foundry v10.
+
 ## Bugfixes and small improvements
 * Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
 * Added a tooltip to Pack Size in item details, explaining what it does.
+* Added a tooltip to NPC CR value.
+* Added ability DC and spell save DC fields to NPC sheets, and connected them to the spells and feats.
 * Added roll and damage notes to item actions. This is helpful for reminders on your attacks or damage rolls, for example, in case a specific damage type ignores DR, etc.
 * Augmentations now have to be equipped specifically before the modifiers apply. This way you can now carry augmentations in your inventory without them automatically functioning.
-* Fixed a minor issue with css styling in preparation of Foundry v0.9.
+* Fixed a minor issue with css styling in preparation of Foundry v9.
 * Fixed an issue preventing you from casting spells from a character sheet without any spellslots.
 * Fixed an issue preventing you from dragging a container into another container.
 * Fixed an issue preventing you from dragging ammunition items into the starship inventory.
 * Fixed an issue where dragging items didn't always correctly check whether or not the target container was full, allowing you to circumvent container limits by accident.
 * Fixed inconsistencies in the spell save DC calculation when casting at different levels with consume slot enabled and disabled.
-* Updated all Alien Archive compendium entries for aliens starting with the letter D. Thanks ThroughlyDruxy!
+* Updated all Alien Archive compendium entries for aliens starting with the letters D, E, and F, completing the work on bringing in the complete collection of the Alien Archive aliens! Thanks ThroughlyDruxy!
 * Updated class specific Weapon Specialization feats to have modifiers. Thanks Iankid!
 * Updated Mind Thrust compendium entry to use proper spell level scaling in the formula, enabled variable spell, and updated the description.
 

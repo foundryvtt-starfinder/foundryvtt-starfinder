@@ -3,6 +3,10 @@ import RollContext from "../../rolls/rollcontext.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
+    constructor(...args) {
+        super(...args);
+    }
+
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["sfrpg", "sheet", "actor", "hazard"],

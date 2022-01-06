@@ -61,6 +61,7 @@
         "AbilityActivationTypesMinute": "Minute",
         "AbilityActivationTypesMove": "Action de M.",
         "AbilityActivationTypesNone": "Aucune",
+        "AbilityActivationTypesNoneButton": "Activate",
         "AbilityActivationTypesOther": "Autres actions",
         "AbilityActivationTypesReaction": "Réaction",
         "AbilityActivationTypesSpecial": "Spécial",
@@ -85,6 +86,7 @@
         "AbilityScoreBaseTooltip": "Score de caractéristique de base: {mod}",
         "AbilityScoreBonusTooltip": "{type} bonus: {mod} ({source})",
         "AbilityScoreBonusModifiedTooltip": "{type} bonus: {mod} (computed from {base}) ({source})",
+        "AbilityScoreGenericTooltip": "{score} Ability Score: {value} ({source})",
         "AbilityScoreIncreaseTooltip": "Augmentation de valeur de caractéristique: {mod}",
         "AbilityScoreRaceTooltip": "Race: {mod}",
         "AbilityScoreThemeTooltip": "Thème: {mod}",
@@ -897,6 +899,7 @@
         "InitiativeLabel": "Initiative",
         "InitiativeModiferLabel": "Mod",
         "InitiativeModiferTooltip": "{type} Bonus: {mod} ({source})",
+        "InvalidItem": "{name} is an invalid Item for a {target}.",
         "InvalidStarshipItem": "{name} est un objet invalide pour un vaisseau.",
         "Inventory": "Inventaire",
         "InventoryAdd": "Ajouter",
@@ -1606,7 +1609,11 @@
             },
             "Header": {
                 "AlignmentPlaceHolderText": "NB",
+                "AbilityDC": "Ability DC",
+                "AbilityDCTooltip": "The ability DC this NPC has. All of the NPCs abilities that have a saving throw associated with them typically use this value, unless they are spells.<br/><br/>This might not be properly integrated into every ability yet.",
                 "AuraPlaceHolderText": "Aura",
+                "BaseSpellDC": "Base Spell DC",
+                "BaseSpellDCTooltip": "The base spell DC this NPC has. All of the NPCs spells that have a saving throw associated with them typically use this value, plus the spell level.",
                 "NamePlaceHolderText": "Nom du Personnage",
                 "RaceAndGraftsPlaceHolderText": "Genre, Race, et Classe/Greffes",
                 "SourcePlaceHolderText": "Source",
@@ -1615,7 +1622,7 @@
             },
             "Interface": {
                 "Conditions": {
-                    "Warning": "* Les PNJ ne prennent pas encore en charge les calculs automatiques des modificateurs !"
+                    "Warning": "Old Style NPCs do not support automatic modifier calculations, convert this NPC to the new style using the duplicate button on the Attributes tab."
                 },
                 "CreateItem": {
                     "Button": "Créer un élément",

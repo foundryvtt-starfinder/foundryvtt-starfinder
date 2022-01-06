@@ -8,6 +8,13 @@ import { SFRPG } from "../../config.js";
  * @type {ActorSheetSFRPG}
  */
 export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
+    constructor(...args) {
+        super(...args);
+
+        this.acceptedItemTypes.push(...SFRPG.characterDefinitionItemTypes);
+        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+    }
+
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {

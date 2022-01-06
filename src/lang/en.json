@@ -61,6 +61,7 @@
         "AbilityActivationTypesMinute": "Minute",
         "AbilityActivationTypesMove": "M. Action",
         "AbilityActivationTypesNone": "None",
+        "AbilityActivationTypesNoneButton": "Activate",
         "AbilityActivationTypesOther": "Other Actions",
         "AbilityActivationTypesReaction": "Reaction",
         "AbilityActivationTypesSpecial": "Special",
@@ -85,6 +86,7 @@
         "AbilityScoreBaseTooltip": "Base Ability Score: {mod}",
         "AbilityScoreBonusTooltip": "{type} bonus: {mod} ({source})",
         "AbilityScoreBonusModifiedTooltip": "{type} bonus: {mod} (computed from {base}) ({source})",
+        "AbilityScoreGenericTooltip": "{score} Ability Score: {value} ({source})",
         "AbilityScoreIncreaseTooltip": "Ability Score Increase: {mod}",
         "AbilityScoreRaceTooltip": "Race: {mod}",
         "AbilityScoreThemeTooltip": "Theme: {mod}",
@@ -897,6 +899,7 @@
         "InitiativeLabel": "Initiative",
         "InitiativeModiferLabel": "Mod",
         "InitiativeModiferTooltip": "{type} Bonus: {mod} ({source})",
+        "InvalidItem": "{name} is an invalid Item for a {target}.",
         "InvalidStarshipItem": "{name} is an invalid Item for a starship.",
         "Inventory": "Inventory",
         "InventoryAdd": "Add",
@@ -994,7 +997,7 @@
                 "Containers": "Containers",
                 "DroneChassis": "Drone Chassis",
                 "DroneMods": "Drone Mods",
-                "Equipment": "Equipment",
+                "Equipment": "Armor",
                 "Feats": "Feats",
                 "Goods": "Goods",
                 "HybridItems": "Hybrid Items",
@@ -1246,7 +1249,7 @@
             "Header": {
                 "ArmorClass": "Armor Class",
                 "ArmorClassTooltip": "<strong>Armor Class</strong><br/>The armor class of this item, if left unattended. Otherwise, the attendee's armor class should be used instead.<br/>An item is considered unattended if it is not currently under any influence of a character.",
-                "DetailsHeader": "Equipment details",
+                "DetailsHeader": "Armor details",
                 "Hardness": "Hardness",
                 "HardnessTooltip": "<strong>Hardness</strong><br/>When taking damage, subtract the item's hardness from the incoming damage before applying.",
                 "Hitpoints": "Hitpoints",
@@ -1606,7 +1609,11 @@
             },
             "Header": {
                 "AlignmentPlaceHolderText": "NG",
+                "AbilityDC": "Ability DC",
+                "AbilityDCTooltip": "The ability DC this NPC has. All of the NPCs abilities that have a saving throw associated with them typically use this value, unless they are spells.<br/><br/>This might not be properly integrated into every ability yet.",
                 "AuraPlaceHolderText": "Aura",
+                "BaseSpellDC": "Base Spell DC",
+                "BaseSpellDCTooltip": "The base spell DC this NPC has. All of the NPCs spells that have a saving throw associated with them typically use this value, plus the spell level.",
                 "NamePlaceHolderText": "Character Name",
                 "RaceAndGraftsPlaceHolderText": "Gender, Race, and Class/Grafts",
                 "SourcePlaceHolderText": "Source",
@@ -1615,7 +1622,7 @@
             },
             "Interface": {
                 "Conditions": {
-                    "Warning": "* NPCs do not support automatic modifier calculations yet!"
+                    "Warning": "Old Style NPCs do not support automatic modifier calculations, convert this NPC to the new style using the duplicate button on the Attributes tab."
                 },
                 "CreateItem": {
                     "Button": "Create Item",

@@ -57,7 +57,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const modifiers = this.getAllModifiers();
 
         const items = this.items;
-        const armor = items.find(item => item.type === "equipment" && item.data.data.equipped);
+        const armors = items.filter(item => item.type === "equipment" && item.data.data.equipped);
         const shields = items.filter(item => item.type === "shield" && item.data.data.equipped);
         const weapons = items.filter(item => item.type === "weapon" && item.data.data.equipped);
         const races = items.filter(item => item.type === "race");
@@ -76,7 +76,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             data: this.data.data,
             flags: this.data.flags,
             items: this.items,
-            armor,
+            armors,
             shields,
             weapons,
             races,
@@ -194,14 +194,22 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     const newItemData = duplicate(item.data);
                     newItemData.data.level = spellLevel;
 
+                    if (this.type === "npc" || this.type === "npc2") {
+                        if (newItemData.data.save.dc && !Number.isNaN(newItemData.data.save.dc)) {
+                            newItemData.data.save.dc = newItemData.data.save.dc - item.data.data.level + spellLevel;
+                        }
+                    }
+
                     item = new ItemSFRPG(newItemData, {parent: this});
                 }
 
                 // Run automation to ensure save DCs are correct.
                 item.prepareData();
-                processContext = await item.processData();
-                if (processContext) {
-                    processContext = Promise.all(processContext.fact.promises);
+                if (item.data.data.actionType && item.data.data.save.type) {
+                    processContext = await item.processData();
+                    if (processContext) {
+                        processContext = Promise.all(processContext.fact.promises);
+                    }
                 }
             } catch (error) {
                 console.error(error);
@@ -1210,10 +1218,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 }
 
-Hooks.on("afterClosureProcessed", (closureName, fact) => {
+Hooks.on("afterClosureProcessed", async (closureName, fact) => {
     if (closureName == "process-actors") {
-        for (const item of fact.actor.items) {
-            item.processData();
-        }
+        await fact.actor.processItemData();
     }
 });

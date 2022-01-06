@@ -169,7 +169,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.category = this._getItemCategory();
 
         // Armor specific details
-        data.isPowerArmor = data.item.data.hasOwnProperty("armor") && data.item.data.armor.type === 'power';
+        data.isPowerArmor = data.item.data.data.hasOwnProperty("armor") && data.item.data.data.armor.type === 'power';
 
         // Action Details
         data.hasAttackRoll = this.item.hasAttack;
