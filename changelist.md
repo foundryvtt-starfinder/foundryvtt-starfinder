@@ -1,15 +1,19 @@
 # v0.17.0 - Starfinder
 
-Boo!
+This release contains a few quality of life fixes and various small bug fixes.
 
 ## Bugfixes and small improvements
+* Added Critical Fumble / Hit tables to the tables compendium. (Thanks Iankid!)
+* Added Dynamic Hacking rules to the rules compendium. (Thanks Iankid!)
 * Added Society starships to the starship compendium.
+* Added some alternate class features, feats, and spells from Tech Revolution, Galaxy Exploration Manual, Alien Archive 3, and a few AP's. (Thanks LebombJames!)
 * Added spell save DCs and how it was calculated to the spells on the spellbook.
 * Added support for wearing multiple armor types, it will select the best EAC and KAC, and the worst Dex and ACP. This specifically applies to Light Armor underneath Heavy Armor.
 * Fixed a minor Foundry v0.9 compatibility warning.
+* Fixed an issue preventing items being dragged onto the macro hotbar. (Fixes #495)
 * Fixed an issue preventing the editing of power armor details.
 * Fixed an issue preventing the casting of certain spells. (Fixes #486)
-* Fixed an issue preventing items being dragged onto the macro hotbar. (Fixes #495)
+* Fixed some broken Weapon Specialization links in the classes compendiums. (Thanks LebombJames)
 * Fusions, weapon accessories, and armor upgrades installed on the appropriate item are now providing modifiers.
 * Preventing drag and dropping of item types onto actor sheets that do not support them, e.g. starship actions onto a player character.
 * The activate button for feats without an action type should now be visible.
@@ -17,8 +21,6 @@ Boo!
 * Vanguard aspects have been updated to include the appropriate skill point modifiers.
 * Various changes to the rules and UCR compendium entries.
 * Various minor compendium entry mistakes have been corrected.
-* Added Dynamic Hacking rules to the rules compendium. (Thanks Iankid!)
-* Added Critical Fumble / Hit tables to the tables compendium. (Thanks Iankid!)
 
 # v0.16.1 - Starfinder
 
