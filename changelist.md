@@ -1,3 +1,7 @@
+# v0.18.0 - Starfinder
+
+Changes go here.
+
 # v0.17.0 - Starfinder
 
 This release contains a few quality of life fixes and various small bug fixes.
