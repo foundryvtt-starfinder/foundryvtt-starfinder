@@ -16,6 +16,8 @@ Boo!
 * Vanguard aspects have been updated to include the appropriate skill point modifiers.
 * Various changes to the rules and UCR compendium entries.
 * Various minor compendium entry mistakes have been corrected.
+* Added Dynamic Hacking rules to the rules compendium. (Thanks Iankid!)
+* Added Critical Fumble / Hit tables to the tables compendium. (Thanks Iankid!)
 
 # v0.16.1 - Starfinder
 
