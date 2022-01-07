@@ -402,7 +402,7 @@ function registerMathFunctions() {
  */
 async function createItemMacro(item, slot) {
     const command = `game.sfrpg.rollItemMacro("${item.name}");`;
-    let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+    let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
         macro = await Macro.create({
             name: item.name,
