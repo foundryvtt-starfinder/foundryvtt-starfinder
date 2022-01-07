@@ -24,7 +24,7 @@ export class PackLoader {
                 const pack = game.packs.get(packId);
                 progress.advance(`Loading ${pack.metadata.label}`);
 
-                if (pack.metadata.entity === entityType) {
+                if (pack.documentName === entityType) {
                     const content = await pack.getDocuments();
                     data = this.loadedPacks[entityType][packId] = {
                       pack,

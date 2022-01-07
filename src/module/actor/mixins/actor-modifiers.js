@@ -124,7 +124,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                     {
                         if (!ignoreEquipment) {
                             const container = getItemContainer(this.data.items, item);
-                            if (container && container.type === "equipment" && container.data.equipped) {
+                            if (container && container.type === "equipment" && container.data.data.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
                         }
@@ -137,7 +137,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                     {
                         if (!ignoreEquipment) {
                             const container = getItemContainer(this.data.items, item);
-                            if (container && container.type === "weapon" && container.data.equipped) {
+                            if (container && container.type === "weapon" && container.data.data.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
                         }

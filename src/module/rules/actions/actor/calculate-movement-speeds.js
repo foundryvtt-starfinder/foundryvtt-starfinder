@@ -4,7 +4,7 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes} from "../../../
 export default function (engine) {
     engine.closures.add( "calculateMovementSpeeds", (fact, context) => {
         const data = fact.data;
-        const modifiers = fact.modifiers;
+        const armors = fact.armors?.length > 0 ? fact.armors : null;
 
         const addModifier = (bonus, data, item, localizationKey, speedKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -32,13 +32,14 @@ export default function (engine) {
             return computedBonus;
         };
 
-        const armorSpeed = fact.armor?.data?.data?.armor?.speedAdjust || 0;
+        const slowestArmor = armors?.reduce((armor, worstArmor) => (armor.data?.data?.armor?.speedAdjust || 0) < (worstArmor.data?.data?.armor?.speedAdjust || 0) ? armor : worstArmor);;
+        const armorSpeed = slowestArmor?.data?.data?.armor?.speedAdjust || 0;
         if (armorSpeed) {
             data.attributes.speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
                 speed: game.i18n.localize("SFRPG.ActorSheet.Attributes.Speed.Types.All"),
                 type: SFRPG.modifierTypes["armor"],
                 mod: armorSpeed.signedString(),
-                source: fact.armor.name
+                source: slowestArmor.name
             }));
         }
         

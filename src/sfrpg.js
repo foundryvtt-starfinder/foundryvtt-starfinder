@@ -199,8 +199,8 @@ Hooks.once("setup", function () {
 
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
-        "abilities", "alignments", "ammunitionTypes", "distanceUnits", "senses", "skills", "currencies", "saves",
-        "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes",
+        "abilities", "actorTypes", "alignments", "ammunitionTypes", "distanceUnits", "senses", "skills", "currencies", "saves",
+        "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes", "itemTypes",
         "vehicleSizes", "babProgression", "saveProgression", "saveDescriptors", "armorProficiencies",
         "weaponProficiencies", "abilityActivationTypes", "skillProficiencyLevels", "damageTypes",
         "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
@@ -402,7 +402,7 @@ function registerMathFunctions() {
  */
 async function createItemMacro(item, slot) {
     const command = `game.sfrpg.rollItemMacro("${item.name}");`;
-    let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+    let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
         macro = await Macro.create({
             name: item.name,
@@ -565,7 +565,7 @@ function setupHandlebars() {
         const isOwner = Boolean(options.hash['isOwner']);
         const rolls = Boolean(options.hash['rolls']);
         const rollData = options.hash['rollData'];
-        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: isOwner, entities: true, rolls: rolls, rollData: rollData});
+        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: isOwner, documents: true, rolls: rolls, rollData: rollData});
         const maxSize = Boolean(options.hash['maxSize']) ? ` style="flex: 1;"` : "";
     
         // Construct the HTML
