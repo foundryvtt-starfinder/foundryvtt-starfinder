@@ -74,8 +74,13 @@ export default class RollTree {
                     }
         
                     if (callback) {
+                        if (parts.length > 1) {
+                            const partIndex = parts.indexOf(part);
+                            const partCount = parts.length;
+                            part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
+                        }
                         await callback(button, rollMode, finalSectionFormula, part);
-                    }        
+                    }
                 }
             } else {
                 if (this.options.debug) {
@@ -105,32 +110,38 @@ export default class RollTree {
             }
 
             const finalRollFormula = this.rootNode.resolve();
-            if (parts?.length > 0) {
-                for (const part of parts) {
-                    if (part.enabled) {
-                        const finalSectionFormula = duplicate(finalRollFormula);
+            const enabledParts = parts?.filter(x => x.enabled);
+            if (enabledParts?.length > 0) {
+                for (const part of enabledParts) {
+                    const finalSectionFormula = duplicate(finalRollFormula);
 
-                        if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
-                            const damageSectionFormula = part?.formula ?? "0";
-                            finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
-                            finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                    if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
+                        const damageSectionFormula = part?.formula ?? "0";
+                        finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
+                        finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                    }
+        
+                    bonus = bonus.trim();
+                    if (bonus) {
+                        const operators = ['+', '-', '*', '/'];
+                        if (!operators.includes(bonus[0])) {
+                            finalSectionFormula.finalRoll += " +";
+                            finalSectionFormula.formula += " +";
                         }
-            
-                        bonus = bonus.trim();
-                        if (bonus) {
-                            const operators = ['+', '-', '*', '/'];
-                            if (!operators.includes(bonus[0])) {
-                                finalSectionFormula.finalRoll += " +";
-                                finalSectionFormula.formula += " +";
-                            }
-                            finalSectionFormula.finalRoll += " " + bonus;
-                            finalSectionFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
+                        finalSectionFormula.finalRoll += " " + bonus;
+                        finalSectionFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
+                    }
+        
+                    if (this.options.debug) {
+                        console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
+                    }
+
+                    if (callback) {
+                        if (enabledParts.length > 1) {
+                            const partIndex = enabledParts.indexOf(part);
+                            const partCount = enabledParts.length;
+                            part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
                         }
-            
-                        if (this.options.debug) {
-                            console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
-                        }
-            
                         await callback(button, rollMode, finalSectionFormula, part);
                     }
                 }

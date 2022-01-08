@@ -663,6 +663,9 @@ export class DiceSFRPG {
 
             if (part) {
                 finalFlavor += `: ${part.name}`;
+                if (part.partIndex) {
+                    finalFlavor += ` (${part.partIndex})`;
+                }
                 //const originalTypes = duplicate(damageTypes);
                 //damageTypes = [getDamageTypeForPart(part)];
                 //console.log([originalTypes, damageTypes]);
