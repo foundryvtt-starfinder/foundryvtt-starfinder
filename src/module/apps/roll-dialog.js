@@ -99,7 +99,6 @@ export default class RollDialog extends Dialog {
         data.contexts = this.contexts;
         
         if (this.parts?.length > 0) {
-            let replacedFormula = "";
             data.hasDamageTypes = true;
             
             data.damageSections = this.parts;
@@ -114,12 +113,6 @@ export default class RollDialog extends Dialog {
                 if (partIndex === 0 && part.enabled === undefined) {
                     part.enabled = true;
                 }
-                if (part.enabled) {
-                    if (replacedFormula) {
-                        replacedFormula += " + ";
-                    }
-                    replacedFormula += part.formula;
-                }
 
                 // Create type string out of localized parts
                 let typeString = "";
@@ -129,7 +122,7 @@ export default class RollDialog extends Dialog {
                 part.type = typeString;
             }
 
-            data.formula = this.formula;//.replace("<damageSection>", replacedFormula);
+            data.formula = this.formula;
         }
 
         return data;
