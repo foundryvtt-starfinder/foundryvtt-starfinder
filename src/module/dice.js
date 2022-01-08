@@ -728,6 +728,16 @@ export class DiceSFRPG {
             if (!useCustomCard) {
                 let rollContent = await roll.render({ htmlData: htmlData });
 
+                const messageData = {
+                    flavor: finalFlavor,
+                    speaker: speaker,
+                    content: rollContent,
+                    rollMode: rollMode,
+                    roll: roll,
+                    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                    sound: CONFIG.sounds.dice
+                };
+
                 // Insert the damage type string if possible.
                 if (damageTypeString?.length > 0) {
                     const diceRollHtml = '<h4 class="dice-roll">';
@@ -737,18 +747,17 @@ export class DiceSFRPG {
                     const closeTagIndex = splitOffFirstHalf.indexOf('</h4>');
                     const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
                     const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
-                    rollContent = firstHalf + rollResultHtml + ` ${damageTypeString}` + secondHalf;
+
+                    messageData.content = firstHalf + rollResultHtml + ` ${damageTypeString}` + secondHalf;
+                    messageData.flags = {
+                        damage: {
+                            amount: roll.total,
+                            types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
+                        }
+                    };
                 }
                 
-                ChatMessage.create({
-                    flavor: finalFlavor,
-                    speaker: speaker,
-                    content: rollContent,
-                    rollMode: rollMode,
-                    roll: roll,
-                    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-                    sound: CONFIG.sounds.dice
-                });
+                ChatMessage.create(messageData);
             }
 
             if (onClose) {

@@ -111,7 +111,7 @@ export default class SFRPGCustomChatMessage {
         //     explainedRollContent = rollContent.substring(0, insertIndex) + options.explanation + rollContent.substring(insertIndex);
         // }
 
-        ChatMessage.create({
+        const messageData = {
             flavor: data.title,
             speaker: data.speaker,
             content: cardContent, //+ explainedRollContent + (options.additionalContent || ""),
@@ -120,6 +120,17 @@ export default class SFRPGCustomChatMessage {
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             sound: CONFIG.sounds.dice,
             rollType: data.rollType
-        });
+        };
+
+        if (damageTypeString?.length > 0) {
+            messageData.flags = {
+                damage: {
+                    amount: roll.total,
+                    types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
+                }
+            };
+        }
+
+        ChatMessage.create(messageData);
     }
 }

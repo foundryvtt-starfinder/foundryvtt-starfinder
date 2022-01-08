@@ -573,20 +573,35 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @returns {Promise<any[]>} 
      */
     static async applyDamageFromContextMenu(html, multiplier) {
+        if (html?.length < 1) {
+            return null;
+        }
+
         const diceTotal = html.find('.sfrpg.dice-roll').data("sfrpgDiceTotal");
-        const totalDamageDealt = Math.floor((diceTotal ?? Math.floor(parseFloat(html.find('.dice-total').text()))) * multiplier);
-        const isHealing = (multiplier < 0);
+
+        const damage = {
+            amount: Math.floor((diceTotal ?? Math.floor(parseFloat(html.find('.dice-total').text())))),
+            isHealing: (multiplier < 0),
+            roll: null,
+            types: ""
+        };
+
+        const chatMessageId = html[0].dataset?.messageId;
+        const chatMessage = game.messages.get(chatMessageId);
+        if (chatMessage) {
+            damage.roll = chatMessage.roll;
+
+            const chatDamageData = chatMessage.data.flags.damage;
+            if (chatDamageData) {
+                damage.amount = chatDamageData.amount;
+                damage.types = chatDamageData.types;
+            }
+        }
+
         const promises = [];
         for (const controlledToken of canvas.tokens?.controlled) {
-            let promise = null;
             const actor = controlledToken.actor;
-            if (actor.data.type === "starship") {
-                promise = actor._applyStarshipDamage(html, totalDamageDealt, isHealing);
-            } else if (actor.data.type === "vehicle") {
-                promise = actor._applyVehicleDamage(html, totalDamageDealt, isHealing);
-            } else {
-                promise = actor._applyActorDamage(html, totalDamageDealt, isHealing);
-            }
+            const promise = actor.applyDamage(damage.amount, multiplier, damage.types, damage.roll ?? html)
 
             if (promise) {
                 promises.push(promise);
@@ -599,48 +614,42 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     /**
      * Applies damage to the Actor.
      * 
-     * TODO: This isn't ready for mainstream use yet. The method signiture is probably gonna
-     * need to change, and the way it functions will most definetly change as well. So, I'm 
-     * basically putting this here as a stub that has some limited functionality until I can
-     * get some other changes in place to allow this to work the way most people would expect
-     * it to work. So, don't mention that this method exists for the time being ;) Consider it
-     * an easter egg.
-     * 
-     * @param {Roll} roll The Roll object representing the roll data.
-     * @param {Number} multiplier A number that is used to change the damage value.
+     * @param {Number} amount The amount of damage dealt to the actor
+     * @param {Number} multiplier (Optional, default 1) A number that is used to change the damage value. Set to negative for healing.
+     * @param {String} types (Optional, default empty) A comma separated string of applied damage types, e.g. f,p
+     * @param {Roll} roll (Optional, default null) A number that is used to change the damage value.
      */
-    async applyDamage(roll, multiplier) {
-        const totalDamageDealt = roll.total;
-        const isHealing = (multiplier < 0);
+    async applyDamage(amount, multiplier = 1, types = "", roll = null) {
+        const damage = {
+            amount: Math.floor(amount * multiplier),
+            isHealing: (multiplier < 0),
+            roll: roll,
+            types: types
+        };
 
         switch (this.data.type) {
             case 'starship':
-                await this._applyStarshipDamage(roll, totalDamageDealt, isHealing);
-                break;
+                return this._applyStarshipDamage(damage);
             case 'vehicle':
-                await this._applyVehicleDamage(roll, totalDamageDealt, isHealing);
-                break;
+                return this._applyVehicleDamage(damage);
             default:
-                await this._applyActorDamage(roll, totalDamageDealt, isHealing);
-                break;
+                return this._applyActorDamage(damage);
         }
     }
 
     /**
      * Apply damage to an Actor.
      * 
-     * @param {JQuery|Roll} htmlOrRoll The html for the chat card or a Roll object
-     * @param {number} totalDamageDealt The total damage being dealt
-     * @param {boolean} isHealing Is this actualy a healing affect
+     * @param {object} damage A damage object, containing amount, isHealing, and types.
      * @returns A Promise that resolves to the updated Actor
      */
-    async _applyActorDamage(htmlOrRoll, totalDamageDealt, isHealing) {
-        let remainingUndealtDamage = totalDamageDealt;
+    async _applyActorDamage(damage) {
+        let remainingUndealtDamage = damage.amount;
         const actorUpdate = {};
         const actorData = foundry.utils.duplicate(this.data.data);
         
         /** Update temp hitpoints */
-        if (!isHealing) {
+        if (!damage.isHealing) {
             const originalTempHP = parseInt(actorData.attributes.hp.temp) || 0;
             let newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
             remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
@@ -654,7 +663,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         /** Update stamina points */
-        if (!isHealing) {
+        if (!damage.isHealing) {
             const originalSP = actorData.attributes.sp.value;
             const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actorData.attributes.sp.max);
             remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
@@ -759,19 +768,33 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             return Math.min(damageBeingApplied, reducedDamage);
         }
 
-        return 0;
+        return null;
     }
 
-    async _applyVehicleDamage(roll, totalDamageDealt, isHealing) {
+    /**
+     * Apply damage to a Vehicle Actor.
+     * 
+     * @param {object} damage A damage object, containing amount, isHealing, and types.
+     * @returns A Promise that resolves to the updated Vehicle
+     */
+    async _applyVehicleDamage(damage) {
         ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
         return null;
     }
 
-    async _applyStarshipDamage(roll, totalDamageDealt, isHealing) {
-        if (isHealing) {
+    /**
+     * Apply damage to a Starship Actor.
+     * 
+     * @param {object} damage A damage object, containing amount, isHealing, and types.
+     * @returns A Promise that resolves to the updated Starship
+     */
+    async _applyStarshipDamage(damage) {
+        if (damage.isHealing) {
             ui.notifications.warn("Cannot currently apply healing to starships using the context menu.");
             return null;
         }
+
+        const roll = damage.roll;
 
         /** Ask for quadrant */
         const options = [
@@ -822,7 +845,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         let actorUpdate = {};
         newData = duplicate(originalData);
 
-        let remainingUndealtDamage = totalDamageDealt;
+        let remainingUndealtDamage = damage.amount;
         const hasDeflectorShields = this.data.data.hasDeflectorShields;
         const hasAblativeArmor = this.data.data.hasAblativeArmor;
         
