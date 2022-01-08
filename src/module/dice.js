@@ -375,6 +375,7 @@ export class DiceSFRPG {
 
                 const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
                 let roll = await rollObject.evaluate({async: true});
+                roll.options.rollMode = rollMode;
     
                 // Flag critical thresholds
                 for (let d of roll.dice) {
@@ -414,6 +415,7 @@ export class DiceSFRPG {
     
                     const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
                     const roll = await rollObject.evaluate({async: true});
+                    roll.options.rollMode = rollMode;
             
                     // Flag critical thresholds
                     for (let d of roll.dice) {

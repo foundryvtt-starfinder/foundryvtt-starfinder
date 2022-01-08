@@ -2,6 +2,9 @@
 
 Changes go here.
 
+## Bugfixes and small improvements
+* Fixed initiative roll dialog's roll mode setting being ignored.
+
 # v0.17.0 - Starfinder
 
 This release contains a few quality of life fixes and various small bug fixes.
