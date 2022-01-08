@@ -42,7 +42,7 @@
         {{#each damageSections as |part i|}}
         <p class="damage-type">
             <label class="checkbox">
-                <input class="damageSection" type="checkbox" name="{{i}}" {{checked part.enabled}} />{{part.name}}: {{part.formula}} {{part.type}}
+                <input class="damageSection" type="checkbox" name="{{i}}" {{checked part.enabled}} {{#unless (gt (length ../damageSections) 1)}}disabled{{/unless}} />{{part.name}}: {{part.formula}} {{part.type}}
             </label>
         </p>
         {{/each}}

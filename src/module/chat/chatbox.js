@@ -75,7 +75,8 @@ export default class SFRPGCustomChatMessage {
             actorId: actor.id,
             tokenId: this.getToken(actor),
             breakdown: data.breakdown,
-            tags: data.tags
+            tags: data.tags,
+            damageTypeString: data.damageTypeString
         };
 
         SFRPGCustomChatMessage._render(roll, data, options);
@@ -85,7 +86,21 @@ export default class SFRPGCustomChatMessage {
 
     static async _render(roll, data, options) {
         const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
-        const rollContent = await roll.render({htmlData: data.htmlData});
+        let rollContent = await roll.render({htmlData: data.htmlData});
+
+        // Insert the damage type string if possible.
+        const damageTypeString = options?.damageTypeString;
+        if (damageTypeString?.length > 0) {
+            const diceRollHtml = '<h4 class="dice-roll">';
+            const diceRollIndex = rollContent.indexOf(diceRollHtml);
+            const firstHalf = rollContent.substring(0, diceRollIndex + diceRollHtml.length);
+            const splitOffFirstHalf = rollContent.substring(diceRollIndex + diceRollHtml.length);
+            const closeTagIndex = splitOffFirstHalf.indexOf('</h4>');
+            const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
+            const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
+            rollContent = firstHalf + rollResultHtml + ` ${damageTypeString}` + secondHalf;
+        }
+
         options = foundry.utils.mergeObject(options, { rollContent });
         const cardContent = await renderTemplate(templateName, options);        
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');

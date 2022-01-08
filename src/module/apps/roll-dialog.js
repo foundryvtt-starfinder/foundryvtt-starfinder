@@ -88,7 +88,6 @@ export default class RollDialog extends Dialog {
 
     getData() {
         const data = super.getData();
-        console.log(this);
         data.formula = this.formula;
         data.rollMode = this.rollMode;
         data.rollModes = CONFIG.Dice.rollModes;

@@ -57,15 +57,36 @@ export default class RollTree {
                 }
             }
 
+            const parts = this.options.parts?.filter(x => x.isDamageSection);
             const finalRollFormula = this.rootNode.resolve();
+            if (parts?.length > 0) {
+                for (const part of parts) {
+                    const finalSectionFormula = duplicate(finalRollFormula);
 
-            if (this.options.debug) {
-                console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
+                    if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
+                        const damageSectionFormula = part?.formula ?? "0";
+                        finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
+                        finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                    }
+        
+                    if (this.options.debug) {
+                        console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
+                    }
+        
+                    if (callback) {
+                        await callback(button, rollMode, finalSectionFormula, part);
+                    }        
+                }
+            } else {
+                if (this.options.debug) {
+                    console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
+                }
+
+                if (callback) {
+                    await callback(button, rollMode, finalRollFormula);
+                }
             }
 
-            if (callback) {
-                await callback(button, rollMode, finalRollFormula);
-            }
             return {button: button, rollMode: rollMode, finalRollFormula: finalRollFormula};
         }
 
@@ -90,8 +111,9 @@ export default class RollTree {
                         const finalSectionFormula = duplicate(finalRollFormula);
 
                         if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
-                            finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", part.formula);
-                            finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", part.formula);
+                            const damageSectionFormula = part?.formula ?? "0";
+                            finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
+                            finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
                         }
             
                         bonus = bonus.trim();
@@ -176,7 +198,7 @@ export default class RollTree {
                 defaultButton: this.options.defaultButton, 
                 title: this.options.title, 
                 dialogOptions: this.options.dialogOptions,
-                parts: this.options.parts.filter(x => x.isDamageSection)
+                parts: this.options.parts?.filter(x => x.isDamageSection)
             });
     }
 

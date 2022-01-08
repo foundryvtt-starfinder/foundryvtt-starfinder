@@ -557,6 +557,7 @@ export class DiceSFRPG {
                 part.operator = "and";
             }
 
+            let damageTypeString = "";
             const tempParts = usedParts.reduce((arr, curr) => {
                 let obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
                 if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
@@ -570,6 +571,14 @@ export class DiceSFRPG {
                 if (obj.types && obj.types.length > 0) {
                     const tag = `damage-type-${(obj.types.join(`-${obj.operator}-`))}`;
                     const text = obj.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[obj.operator]} `);
+                    const shortText = obj.types.map(type => SFRPG.damageTypes[type]?.substring(0, 1)).join(` & `);
+
+                    // In most use cases, damage rolls should never contain more parts. But because the system is complex and confusing, it is theoretically possible.
+                    // If that happens, we'll just concatenate the damage types to the roll string and pretend nothing is wrong.
+                    if (damageTypeString?.length > 0) {
+                        damageTypeString += ", ";
+                    }
+                    damageTypeString += shortText.toUpperCase();
                     
                     if (!tags.some(t => t.tag === tag && t.text === text))
                         tags.push({ tag: tag, text: text });
@@ -701,7 +710,8 @@ export class DiceSFRPG {
                     breakdown: preparedRollExplanation,
                     tags: tags,
                     htmlData: htmlData,
-                    rollType: "damage"
+                    rollType: "damage",
+                    damageTypeString: damageTypeString
                 };
 
                 try {
@@ -713,12 +723,24 @@ export class DiceSFRPG {
             }
             
             if (!useCustomCard) {
-                const content = await roll.render({ htmlData: htmlData });
+                let rollContent = await roll.render({ htmlData: htmlData });
 
+                // Insert the damage type string if possible.
+                if (damageTypeString?.length > 0) {
+                    const diceRollHtml = '<h4 class="dice-roll">';
+                    const diceRollIndex = rollContent.indexOf(diceRollHtml);
+                    const firstHalf = rollContent.substring(0, diceRollIndex + diceRollHtml.length);
+                    const splitOffFirstHalf = rollContent.substring(diceRollIndex + diceRollHtml.length);
+                    const closeTagIndex = splitOffFirstHalf.indexOf('</h4>');
+                    const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
+                    const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
+                    rollContent = firstHalf + rollResultHtml + ` ${damageTypeString}` + secondHalf;
+                }
+                
                 ChatMessage.create({
                     flavor: finalFlavor,
                     speaker: speaker,
-                    content: content,
+                    content: rollContent,
                     rollMode: rollMode,
                     roll: roll,
                     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
