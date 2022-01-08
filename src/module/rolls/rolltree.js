@@ -70,7 +70,7 @@ export default class RollTree {
         }
 
         const uiPromise = this.displayUI(formula, contexts, allRolledMods);
-        uiPromise.then(async ([button, rollMode, bonus]) => {
+        uiPromise.then(async ([button, rollMode, bonus, parts]) => {
             if (button === null) {
                 console.log('Roll was cancelled');
                 await callback('cancel', "none", null);
@@ -84,22 +84,57 @@ export default class RollTree {
             }
 
             const finalRollFormula = this.rootNode.resolve();
-            bonus = bonus.trim();
-            if (bonus) {
-                const operators = ['+', '-', '*', '/'];
-                if (!operators.includes(bonus[0])) {
-                    finalRollFormula.finalRoll += " +";
-                    finalRollFormula.formula += " +";
+            if (parts?.length > 0) {
+                for (const part of parts) {
+                    if (part.enabled) {
+                        const finalSectionFormula = duplicate(finalRollFormula);
+
+                        if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
+                            finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", part.formula);
+                            finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", part.formula);
+                        }
+            
+                        bonus = bonus.trim();
+                        if (bonus) {
+                            const operators = ['+', '-', '*', '/'];
+                            if (!operators.includes(bonus[0])) {
+                                finalSectionFormula.finalRoll += " +";
+                                finalSectionFormula.formula += " +";
+                            }
+                            finalSectionFormula.finalRoll += " " + bonus;
+                            finalSectionFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
+                        }
+            
+                        if (this.options.debug) {
+                            console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
+                        }
+            
+                        await callback(button, rollMode, finalSectionFormula, part);
+                    }
                 }
-                finalRollFormula.finalRoll += " " + bonus;
-                finalRollFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
-            }
+            } else {
+                if (finalRollFormula.finalRoll.includes("<damageSection>")) {
+                    finalRollFormula.finalRoll = finalRollFormula.finalRoll.replace("<damageSection>", "0");
+                    finalRollFormula.formula = finalRollFormula.formula.replace("<damageSection>", "0");
+                }
 
-            if (this.options.debug) {
-                console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
-            }
+                bonus = bonus.trim();
+                if (bonus) {
+                    const operators = ['+', '-', '*', '/'];
+                    if (!operators.includes(bonus[0])) {
+                        finalRollFormula.finalRoll += " +";
+                        finalRollFormula.formula += " +";
+                    }
+                    finalRollFormula.finalRoll += " " + bonus;
+                    finalRollFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
+                }
 
-            await callback(button, rollMode, finalRollFormula);
+                if (this.options.debug) {
+                    console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
+                }
+
+                await callback(button, rollMode, finalRollFormula);
+            }
         });
         return uiPromise;
     }
@@ -141,7 +176,7 @@ export default class RollTree {
                 defaultButton: this.options.defaultButton, 
                 title: this.options.title, 
                 dialogOptions: this.options.dialogOptions,
-                parts: this.options.parts
+                parts: this.options.parts.filter(x => x.isDamageSection)
             });
     }
 

@@ -958,6 +958,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Define Roll parts
         /** @type {DamageParts[]} */
         const parts = itemData.damage.parts.map(part => part);
+        for (const part of parts) {
+            part.isDamageSection = true;
+        }
         
         let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {

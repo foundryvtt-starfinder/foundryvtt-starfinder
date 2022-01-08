@@ -462,8 +462,23 @@ export class DiceSFRPG {
             Critical: { label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
         };
 
+        const getDamageTypeForPart = (part) => {
+            if (part.types && !foundry.utils.isObjectEmpty(part.types)) {
+                const filteredTypes = Object.entries(part.types).filter(type => type[1]);
+                const obj = { types: [], operator: "" };
+
+                for (const type of filteredTypes) {
+                    obj.types.push(type[0]);
+                }
+
+                obj.operator = "and";
+
+                return obj;
+            }
+        };
+
         /** @type {DamageType[]} */
-        const damageTypes = parts.reduce((acc, cur) => {
+        let damageTypes = parts.reduce((acc, cur) => {
             if (cur.types && !foundry.utils.isObjectEmpty(cur.types)) {
                 const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
@@ -493,26 +508,38 @@ export class DiceSFRPG {
             useRawStrings: false
         };
 
-        const partMapper = (part) => {
+        const finalParts = [];
+        const damageSections = [];
+        for (const part of parts) {
             if (part instanceof Object) {
+                if (part.isDamageSection) {
+                    damageSections.push(part);
+                    continue;
+                }
+
                 if (part.explanation) {
                     if (part.formula) {
-                        return `${part.formula}[${part.explanation}]`;
+                        finalParts.push(`${part.formula}[${part.explanation}]`);
                     }
-                    return `0[${part.explanation}]`;
+                    finalParts.push(`0[${part.explanation}]`);
                 } else {
                     if (part.formula) {
-                        return `${part.formula}`;
+                        finalParts.push(`${part.formula}`);
                     }
-                    return `0`;
+                    finalParts.push(`0`);
                 }
+            } else {
+                finalParts.push(formula);
             }
-            return part;
-        };
+        }
 
-        const formula = parts.map(partMapper).join(" + ");
+        if (damageSections) {
+            finalParts.splice(0, 0, "<damageSection>");
+        }
+
+        const formula = finalParts.join(" + ");
         const tree = new RollTree(options);
-        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula, part) => {
             if (button === 'cancel') {
                 if (onClose) {
                     onClose(null, null, null, false);
@@ -525,7 +552,12 @@ export class DiceSFRPG {
             /** @type {HtmlData[]} */
             const htmlData = [{ name: "is-damage", value: "true" }];
 
-            const tempParts = parts.reduce((arr, curr) => {
+            const usedParts = part ? [part] : parts;
+            if (part) {
+                part.operator = "and";
+            }
+
+            const tempParts = usedParts.reduce((arr, curr) => {
                 let obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
                 if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
                     for (const [key, isEnabled] of Object.entries(curr.types)) {
@@ -593,17 +625,18 @@ export class DiceSFRPG {
             }
 
             const isCritical = (button === "Critical");
+            let finalFlavor = duplicate(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
                 tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
                 finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                 
-                let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
+                let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
                 
                 if (criticalData !== undefined) {
                     if (criticalData?.effect?.trim().length > 0) {
-                        tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": flavor, "criticalEffect": criticalData.effect });
+                        tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": finalFlavor, "criticalEffect": criticalData.effect });
                         tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                     }
 
@@ -616,7 +649,14 @@ export class DiceSFRPG {
                     htmlData.push({ name: "critical-data", value: JSON.stringify(criticalData) });
                 }
 
-                flavor = tempFlavor;
+                finalFlavor = tempFlavor;
+            }
+
+            if (part) {
+                finalFlavor += `: ${part.name}`;
+                //const originalTypes = duplicate(damageTypes);
+                //damageTypes = [getDamageTypeForPart(part)];
+                //console.log([originalTypes, damageTypes]);
             }
             
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
@@ -654,7 +694,7 @@ export class DiceSFRPG {
             if (useCustomCard) {
                 //Push the roll to the ChatBox
                 const customData = {
-                    title: flavor,
+                    title: finalFlavor,
                     rollContext:  rollContext,
                     speaker: speaker,
                     rollMode: rollMode,
@@ -676,7 +716,7 @@ export class DiceSFRPG {
                 const content = await roll.render({ htmlData: htmlData });
 
                 ChatMessage.create({
-                    flavor: flavor,
+                    flavor: finalFlavor,
                     speaker: speaker,
                     content: content,
                     rollMode: rollMode,
