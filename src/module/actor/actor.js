@@ -617,7 +617,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @param {Number} amount The amount of damage dealt to the actor
      * @param {Number} multiplier (Optional, default 1) A number that is used to change the damage value. Set to negative for healing.
      * @param {String} types (Optional, default empty) A comma separated string of applied damage types, e.g. f,p
-     * @param {Roll} roll (Optional, default null) A number that is used to change the damage value.
+     * @param {Roll} roll (Optional, default null) The roll object that was used to generate this damage.
      */
     async applyDamage(amount, multiplier = 1, types = "", roll = null) {
         const damage = {
