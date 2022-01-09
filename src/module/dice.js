@@ -520,13 +520,15 @@ export class DiceSFRPG {
                 if (part.explanation) {
                     if (part.formula) {
                         finalParts.push(`${part.formula}[${part.explanation}]`);
+                    } else {
+                        finalParts.push(`0[${part.explanation}]`);
                     }
-                    finalParts.push(`0[${part.explanation}]`);
                 } else {
                     if (part.formula) {
                         finalParts.push(`${part.formula}`);
+                    } else {
+                        finalParts.push(`0`);
                     }
-                    finalParts.push(`0`);
                 }
             } else {
                 finalParts.push(formula);
