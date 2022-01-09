@@ -123,6 +123,9 @@ export default class RollDialog extends Dialog {
             }
 
             data.formula = this.formula;
+            if (this.parts?.length === 1) {
+                data.formula = this.formula.replace("<damageSection>", this.parts[0].formula);
+            }
         }
 
         return data;
