@@ -106,7 +106,7 @@ export default class RollDialog extends Dialog {
                 const partIndex = this.parts.indexOf(part);
 
                 // If there is no name, create the placeholder name
-                if (!part.name) {
+                if (!part.name && this.parts.length > 1) {
                     part.name = game.i18n.format("SFRPG.Items.Action.DamageSection", {section: partIndex});
                 }
 
