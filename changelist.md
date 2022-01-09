@@ -1,9 +1,12 @@
 # v0.18.0 - Starfinder
 
-Changes go here.
+## Damage System updates
+Starfinder v0.13 introduced a major damage system overhaul. A small amount of functionality was still pending, and have now been wrapped up. These changes now add the damage type to the damage roll's text, making it easier than ever to see which damage types your damage applies. Additionally, items can now support multiple damage sections, so you can either pick one, or multiple. This is particularly handy for spells like Call Cosmos which causes separate cold and fire damage rolls, or items with fusions that change a damage type to your choice. Now, the UI will allow you to check which damage type you want to roll.
 
 ## Bugfixes and small improvements
+* Added the Biohacker features from Tech Revolution.
 * Fixed initiative roll dialog's roll mode setting being ignored.
+* Fixed starship critical damage rolls doubling the damage, Starships do not double their damage, instead they should apply a critical threshold. Deflector Shields still take 1 extra damage.
 
 # v0.17.0 - Starfinder
 
