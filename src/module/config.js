@@ -67,6 +67,22 @@ SFRPG.alignments = {
 };
 
 /**
+ * NPC alignment options
+ * @type {Object}
+ */
+SFRPG.alignmentsNPC = {
+    "lg": "SFRPG.AlignmentLG",
+    "ng": "SFRPG.AlignmentNG",
+    "cg": "SFRPG.AlignmentCG",
+    "ln": "SFRPG.AlignmentLN",
+    "n": "SFRPG.AlignmentTN",
+    "cn": "SFRPG.AlignmentCN",
+    "le": "SFRPG.AlignmentLE",
+    "ne": "SFRPG.AlignmentNE",
+    "ce": "SFRPG.AlignmentCE"
+};
+
+/**
  * The set of armor proficiencies which a character may have
  * @type {Object}
  */

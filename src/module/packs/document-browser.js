@@ -159,6 +159,35 @@ export class DocumentBrowserSFRPG extends Application {
 
             this.onFiltersUpdated(html);
         });
+
+        html.on('change paste', 'input[class=valueFilter]', ev => {
+            const filterSplit = ev.target.name.split(/-/);
+            const filterType = filterSplit[0];
+            let filterValue = Number(ev.target.value);
+            if (Number.isNaN(filterValue)) {
+                filterValue = 0;
+            }
+            const originalValue = filterValue;
+
+            const filter = this.filters[filterType];
+            if (filter) {
+                if (filter.range) {
+                    filterValue = Math.max(filter.range.min, filterValue);
+                    if (filter.range.max > filter.range.min) {
+                        filterValue = Math.min(filter.range.max, filterValue);
+                    }
+                }
+                filter.content.value = filterValue;
+            }
+
+            if (filterValue != originalValue) {
+                html.find(`input[name=${filterType}-value]`).val(filterValue);
+            }
+
+            this.filterItems(html.find('li'));
+
+            this.onFiltersUpdated(html);
+        });
     }
 
     async getData() {
@@ -300,6 +329,10 @@ export class DocumentBrowserSFRPG extends Application {
                 if (!availableFilter.filter(element, availableFilter.content)) {
                     return false;
                 }
+            } else if (availableFilter.type === "value") {
+                if (!availableFilter.filter(element, availableFilter.content)) {
+                    return false;
+                }
             }
         }
 
@@ -330,6 +363,9 @@ export class DocumentBrowserSFRPG extends Application {
                 filter.reset(filter);
                 html.find(`input[name=${filterKey}-min]`).val(filter.content.min);
                 html.find(`input[name=${filterKey}-max]`).val(filter.content.max);
+            } else if (filter.type === "value") {
+                filter.reset(filter);
+                html.find(`input[name=${filterKey}-value]`).val(filter.content.value);
             } else {
                 filter.reset(filter);
             }

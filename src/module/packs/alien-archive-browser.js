@@ -125,6 +125,14 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
                 reset: (filter) => { filter.content = {min: 0, max: 0}; },
                 type: "range"
             },
+            organizationSize: {
+                label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterOrganizationSize"),
+                content: {value: 1},
+                range: {min: 1, max: null},
+                filter: (element, filters) => { return this._filterOrganizationSize(element, filters); },
+                reset: (filter) => { filter.content = {value: 1}; },
+                type: "value"
+            },
             size: {
                 label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterSize"),
                 content: SFRPG.actorSizes,
@@ -135,6 +143,12 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterType"),
                 content: SFRPG.npctypes,
                 filter: (element, filters) => { return this._filterTypes(element, filters); },
+                type: "multi-select"
+            },
+            alignment: {
+                label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterAlignment"),
+                content: SFRPG.alignmentsNPC,
+                filter: (element, filters) => { return this._filterAlignment(element, filters); },
                 type: "multi-select"
             }
         };
@@ -182,6 +196,19 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
         }
     }
 
+    _filterOrganizationSize(element, filterData) {
+        const compendium = element.dataset.entryCompendium;
+        const itemId = element.dataset.entryId;
+        const alien = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        const alienOrganizationSize = alien.data.details.organizationSize || {min: 1, max: null};
+
+        if (alienOrganizationSize.max > alienOrganizationSize.min) {
+            return alienOrganizationSize.min <= filterData.value && filterData.value <= alienOrganizationSize.max;
+        } else {
+            return alienOrganizationSize.min <= filterData.value;
+        }
+    }
+
     _filterSizes(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
@@ -206,6 +233,14 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
         }
 
         return alien && found;
+    }
+
+    _filterAlignment(element, filters) {
+        let compendium = element.dataset.entryCompendium;
+        let itemId = element.dataset.entryId;
+        let alien = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        let alienAlignment = alien?.data?.details?.alignment?.toLowerCase();
+        return alien && filters.includes(alienAlignment);
     }
 }
 
