@@ -1,4 +1,4 @@
-import { ItemBrowserSFRPG } from './item-browser.js';
+import { DocumentBrowserSFRPG } from './document-browser.js';
 import { SFRPG } from "../config.js"
 
 const equipmentTypes = {
@@ -20,7 +20,7 @@ const equipmentTypes = {
     "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories"
 };
 
-class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
+class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.title = game.i18n.format("SFRPG.Browsers.EquipmentBrowser.Title");

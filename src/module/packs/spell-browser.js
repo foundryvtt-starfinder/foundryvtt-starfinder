@@ -1,7 +1,7 @@
-import { ItemBrowserSFRPG } from './item-browser.js';
+import { DocumentBrowserSFRPG } from './document-browser.js';
 import { SFRPG } from "../config.js"
 
-class SpellBrowserSFRPG extends ItemBrowserSFRPG {
+class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.title = game.i18n.format("SFRPG.Browsers.SpellBrowser.Title");

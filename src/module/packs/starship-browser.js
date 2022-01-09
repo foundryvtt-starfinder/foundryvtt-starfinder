@@ -1,4 +1,4 @@
-import { ItemBrowserSFRPG } from './item-browser.js';
+import { DocumentBrowserSFRPG } from './document-browser.js';
 import { SFRPG } from "../config.js"
 
 const starshipComponentTypes = {
@@ -21,7 +21,7 @@ const starshipComponentTypes = {
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons"
 };
 
-class StarshipBrowserSFRPG extends ItemBrowserSFRPG {
+class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.title = game.i18n.format("SFRPG.Browsers.StarshipBrowser.Title");
