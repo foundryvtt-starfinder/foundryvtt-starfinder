@@ -145,6 +145,19 @@ export const registerSystemSettings = function () {
         type: Boolean
     });
 
+    game.settings.register("sfrpg", "damageRoundingAdvantage", {
+        name: "SFRPG.Settings.DamageRoundingAdvantage.Name",
+        hint: "SFRPG.Settings.DamageRoundingAdvantage.Hint",
+        scope: "world",
+        config: true,
+        default: "attacker",
+        type: String,
+        choices: {
+            "attacker": "SFRPG.Settings.DamageRoundingAdvantage.ValueAttacker",
+            "defender": "SFRPG.Settings.DamageRoundingAdvantage.ValueDefender"
+        }
+    });
+
     game.settings.register("sfrpg", "alwaysShowQuantity", {
         name: "SFRPG.Settings.AlwaysShowQuantity.Name",
         hint: "SFRPG.Settings.AlwaysShowQuantity.Hint",

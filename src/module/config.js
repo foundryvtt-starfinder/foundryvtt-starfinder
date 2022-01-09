@@ -168,6 +168,17 @@ SFRPG.kineticDamageTypes = {
     "slashing": "SFRPG.Damage.Types.Slashing"
 };
 
+SFRPG.damageTypeToAcronym = {
+    "acid": "A",
+    "cold": "C",
+    "electricity": "E",
+    "fire": "F",
+    "sonic": "So",
+    "bludgeoning": "B",
+    "piercing": "P",
+    "slashing": "S"
+};
+
 SFRPG.damageTypes = {
     ...SFRPG.energyDamageTypes,
     ...SFRPG.kineticDamageTypes,

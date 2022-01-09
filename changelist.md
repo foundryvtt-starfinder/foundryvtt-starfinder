@@ -4,6 +4,10 @@
 ### Damage System updates
 Starfinder v0.13 introduced a major damage system overhaul. A small amount of functionality was still pending, and have now been wrapped up. These changes now add the damage type to the damage roll's text, making it easier than ever to see which damage types your damage applies. Additionally, items can now support multiple damage sections, so you can either pick one, or multiple. This is particularly handy for spells like Call Cosmos which causes separate cold and fire damage rolls, or items with fusions that change a damage type to your choice. Now, the UI will allow you to check which damage type you want to roll.
 
+Finally, applying damage with damage types will now try to properly address vulnerabilities, resistances, and immunities. Please take care that this does not cover all edge cases of the damage, but the vast majority of damage rolls should function properly. Future work is expected with regards to how edge cases can be tackled, feel free to give feedback on the Discord channel.
+
+A new setting has been made available to do the rounding of split odd damage in the advantage of the attacker or the defender. For example, if you take 9 acid and piercing damage, you would take 4.5 acid and 4.5 piercing damage, with one rounded up and one rounded down. Now, if you had 5 acid resistance, the rounding of the split damage could mean that if acid is rounded up to 5, and piercing to 4 (advantage defender), you would take 4 damage, while if it was the other way around (advantage attacker), it would round acid to 4 and piercing to 5, and you would take 5 damage. The default setting is advantage attacker, but this can be changed in the settings screen.
+
 ### Alien Archive Browser
 To make finding aliens a little easier, we've integrated the work started by rrenna and took it from there to finally provide you with an in-engine alien archive browser. You can filter by CR, HP, Size, Type, and, of course, name.
 

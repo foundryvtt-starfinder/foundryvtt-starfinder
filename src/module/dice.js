@@ -573,14 +573,14 @@ export class DiceSFRPG {
                 if (obj.types && obj.types.length > 0) {
                     const tag = `damage-type-${(obj.types.join(`-${obj.operator}-`))}`;
                     const text = obj.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[obj.operator]} `);
-                    const shortText = obj.types.map(type => SFRPG.damageTypes[type]?.substring(0, 1)).join(` & `);
+                    const shortText = obj.types.map(type => SFRPG.damageTypeToAcronym[type]).join(` & `);
 
                     // In most use cases, damage rolls should never contain more parts. But because the system is complex and confusing, it is theoretically possible.
                     // If that happens, we'll just concatenate the damage types to the roll string and pretend nothing is wrong.
                     if (damageTypeString?.length > 0) {
                         damageTypeString += ", ";
                     }
-                    damageTypeString += shortText.toUpperCase();
+                    damageTypeString += shortText;
                     
                     if (!tags.some(t => t.tag === tag && t.text === text))
                         tags.push({ tag: tag, text: text });

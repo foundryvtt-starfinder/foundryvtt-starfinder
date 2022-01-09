@@ -655,9 +655,45 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @returns A Promise that resolves to the updated Actor
      */
     async _applyActorDamage(damage) {
-        let remainingUndealtDamage = damage.amount;
         const actorUpdate = {};
         const actorData = foundry.utils.duplicate(this.data.data);
+
+        const damagesPerType = [];
+        const damageTypes = damage.types.split(',');
+        for (const damageType of damageTypes) {
+            if (this.isImmuneToDamageType(damageType)) {
+                continue;
+            }
+
+            let totalAppliedDamage = damage.amount / damageTypes.length;
+
+            if (this.isVulnerableToDamageType(damageType)) {
+                totalAppliedDamage = totalAppliedDamage * 2;
+            }
+
+            const resistance = this.getResistanceForDamageType(damageType);
+            totalAppliedDamage -= resistance;
+
+            totalAppliedDamage = Math.max(0, totalAppliedDamage);
+
+            damagesPerType.push(totalAppliedDamage);
+        }
+
+        const damageRoundingAdvantage = game.settings.get("sfrpg", "damageRoundingAdvantage");
+        let bFloorNext = (damageRoundingAdvantage === "defender");
+        let remainingUndealtDamage = 0;
+        for (const damage of damagesPerType) {
+            if (damage % 1 === 0) {
+                remainingUndealtDamage += damage;
+            } else {
+                if (bFloorNext) {
+                    remainingUndealtDamage += Math.floor(damage);
+                } else {
+                    remainingUndealtDamage += Math.ceil(damage);
+                }
+                bFloorNext = !bFloorNext;
+            }
+        }
         
         /** Update temp hitpoints */
         if (!damage.isHealing) {
@@ -701,7 +737,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /**
-     * Checks whether an acotr is immune to a specific damage type.
+     * Checks whether an actor is immune to a specific damage type.
      * 
      * @param {string} damageType The damage type to evaluate.
      * @returns True if the actor is immune to this damage type
@@ -711,16 +747,42 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /**
-     * Apply any damage vulnerabilites to the supplied damage type.
+     * Checks whether an actor is vulnerable to a specific damage type.
      * 
-     * @param {number} damageBeingApplied The damage of the supplied type that will be increased if this actor has a vulnerability to it.
-     * @param {string} damageType The damage type being evaluated.
-     * @returns The amount of damage being added by the vulnerability.
+     * @param {string} damageType The damage type to evaluate.
+     * @returns True if the actor is immune to this damage type
      */
-    _applyVulnerabilities(damageBeingApplied, damageType) {
-        if (this.data.data.traits.dv.value.includes(damageType))
-            return Math.floor(damageBeingApplied * 0.5);
-            
+    isVulnerableToDamageType(damageType) {
+        const mappedVulnerabilities = this.data.data.traits.dv.value.map(x => SFRPG.damageTypeToAcronym[x.toLowerCase()].toLowerCase());
+        return mappedVulnerabilities.includes(damageType);
+    }
+
+    getResistanceForDamageType(damageType) {
+        const kineticDamageTypes = ['b', 'p', 's'];
+        if (kineticDamageTypes.includes(damageType)) {
+            if (this.data.data.traits.damageReduction.negatedBy == "-") {
+                const damageReduction = Number(this.data.data.traits.damageReduction.value);
+                if (!Number.isNaN(damageReduction) && damageReduction > 0) {
+                    return damageReduction;
+                }
+            }
+        }
+
+        const energyDamageTypes = ['a', 'c', 'e', 'f', 'so'];
+        if (energyDamageTypes.includes(damageType)) {
+            for (const resistanceEntry of this.data.data.traits.dr.value) {
+                for (const [resistanceKey, resistanceValue] of Object.entries(resistanceEntry)) {
+                    const resistanceLabel = SFRPG.damageTypeToAcronym[resistanceKey.toLowerCase()].toLowerCase();
+                    if (resistanceLabel === damageType) {
+                        const resistanceForType = Number(resistanceValue);
+                        if (!Number.isNaN(resistanceForType) && resistanceForType > 0) {
+                            return resistanceForType;
+                        }
+                    }
+                }
+            }
+        }
+
         return 0;
     }
 
