@@ -638,8 +638,11 @@ export class DiceSFRPG {
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
                 tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
-                finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
-                finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
+
+                if (!criticalData?.preventDoubling) {
+                    finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
+                    finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
+                }
                 
                 let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
                 

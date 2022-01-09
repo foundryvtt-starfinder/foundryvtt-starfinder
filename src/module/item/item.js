@@ -1164,6 +1164,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
+            criticalData: {preventDoubling: true},
             rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),

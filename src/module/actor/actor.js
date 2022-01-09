@@ -577,7 +577,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             return null;
         }
 
-        const diceTotal = html.find('.sfrpg.dice-roll').data("sfrpgDiceTotal");
+        const diceRollElement = html.find('.sfrpg.dice-roll');
+        const diceTotal = diceRollElement.data("sfrpgDiceTotal");
+        const isCritical = diceRollElement.data("sfrpgIsCritical") || false;
+        const starshipWeaponProperties = diceRollElement.data("sfrpgStarshipWeaponProperties");
 
         const damage = {
             amount: Math.floor((diceTotal ?? Math.floor(parseFloat(html.find('.dice-total').text())))),
@@ -585,6 +588,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             roll: null,
             types: ""
         };
+
+        if (starshipWeaponProperties) {
+            damage.starshipWeaponProperties = starshipWeaponProperties;
+        }
 
         const chatMessageId = html[0].dataset?.messageId;
         const chatMessage = game.messages.get(chatMessageId);
@@ -601,7 +608,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const promises = [];
         for (const controlledToken of canvas.tokens?.controlled) {
             const actor = controlledToken.actor;
-            const promise = actor.applyDamage(damage.amount, multiplier, damage.types, damage.roll, html)
+            const promise = actor.applyDamage(damage.amount, multiplier, isCritical, damage.types || starshipWeaponProperties, damage.roll, html)
 
             if (promise) {
                 promises.push(promise);
@@ -616,14 +623,16 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * 
      * @param {Number} amount The amount of damage dealt to the actor
      * @param {Number} multiplier (Optional, default 1) A number that is used to change the damage value. Set to negative for healing.
+     * @param {Bool} isCritical (Optional, default false) A boolean value indicating if this damage was critical damage.
      * @param {String} types (Optional, default empty) A comma separated string of applied damage types, e.g. f,p
      * @param {Roll} roll (Optional, default null) The roll object that was used to generate this damage.
      * @param {JQuery} html (Optional, default null) JQuery object of the HTML element this damage is sourced from, typically the chat card.
      */
-    async applyDamage(amount, multiplier = 1, types = "", roll = null, html = null) {
+    async applyDamage(amount, multiplier = 1, isCritical = false, types = "", roll = null, html = null) {
         const damage = {
             amount: Math.floor(amount * multiplier),
             html: html,
+            isCritical: isCritical,
             isHealing: (multiplier < 0),
             roll: roll,
             types: types
@@ -642,7 +651,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     /**
      * Apply damage to an Actor.
      * 
-     * @param {object} damage A damage object, containing amount, html, isHealing, roll, and types.
+     * @param {object} damage A damage object, containing amount, html, isCritical, isHealing, roll, and types.
      * @returns A Promise that resolves to the updated Actor
      */
     async _applyActorDamage(damage) {
@@ -796,8 +805,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             return null;
         }
 
-        const sourceHtml = damage.html;
-
         /** Ask for quadrant */
         const options = [
             game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Forward"),
@@ -854,9 +861,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (originalData.shields.value > 0) {
                 // Deflector shields are twice as effective against attacks from melee, ramming, and ripper starship weapons, so the starship ignores double the amount of damage from such attacks.
                 // TODO: Any attack that would ignore a fraction or all of a target’s shields instead reduces the amount of damage the deflector shields ignore by an equal amount, rounded in the defender’s favor (e.g., deflector shields with a defense value of 5 would reduce damage from a burrowing weapon [Pact Worlds 153] by 3)
-                const isMelee = sourceHtml.find('#melee').length > 0;
-                const isRamming = sourceHtml.find('#ramming').length > 0;
-                const isRipper = sourceHtml.find('#ripper').length > 0;
+                const isMelee = damage.types.includes('melee');
+                const isRamming = damage.types.includes('ramming');
+                const isRipper = damage.types.includes('ripper');
 
                 const shieldMultiplier = (isMelee || isRamming || isRipper) ? 2 : 1;
                 remainingUndealtDamage = Math.max(0, remainingUndealtDamage - (originalData.shields.value * shieldMultiplier));
@@ -883,23 +890,22 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 deflectorShieldDamage = 1;
 
                 // Weapons with the array or line special property that damage a starship’s Hull Points overwhelm its deflector shields, reducing their defense value in that quadrant by 2
-                if (sourceHtml.find('#array').length > 0 || sourceHtml.find('#line').length > 0) {
+                if (damage.types.includes('array') || damage.types.includes('line')) {
                     deflectorShieldDamage = 2;
                 }
 
                 // TODO: ..whereas vortex weapons that deal Hull Point damage reduce the target’s deflector shields’ defense value in each quadrant by 1d4.
-                else if (sourceHtml.find('#vortex').length > 0) {
+                else if (damage.types.includes('vortex')) {
                 }
             }
 
             // Any successful attack by a weapon with the buster special property (or another special property that deals reduced damage to Hull Points) reduces the deflector shields’ defense value in the struck quadrant by 2, whether or not the attack damaged the target’s Hull Points.
-            if (sourceHtml.find('#buster').length > 0) {
+            if (damage.types.includes('buster')) {
                 deflectorShieldDamage = 2;
             }
 
             // When a gunnery check results in a natural 20, any decrease to the target’s deflector shield’s defense value from the attack is 1 greater.
-            const isCritical = sourceHtml.find('#critical').length > 0;
-            deflectorShieldDamage += isCritical ? 1 : 0;
+            deflectorShieldDamage += damage.isCritical ? 1 : 0;
 
             newData.shields.value = Math.max(0, newData.shields.value - deflectorShieldDamage);
         }
