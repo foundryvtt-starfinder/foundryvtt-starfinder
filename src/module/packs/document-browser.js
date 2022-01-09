@@ -140,6 +140,25 @@ export class DocumentBrowserSFRPG extends Application {
 
             this.onFiltersUpdated(html);
         });
+
+        html.on('change paste', 'input[class=rangeFilter]', ev => {
+            const filterSplit = ev.target.name.split(/-/);
+            const filterType = filterSplit[0];
+            const filterTarget = filterSplit[1];
+            let filterValue = Number(ev.target.value);
+            if (Number.isNaN(filterValue)) {
+                filterValue = 0;
+            }
+
+            const filter = this.filters[filterType];
+            if (filter) {
+                filter.content[filterTarget] = filterValue;
+            }
+
+            this.filterItems(html.find('li'));
+
+            this.onFiltersUpdated(html);
+        });
     }
 
     async getData() {
@@ -270,9 +289,15 @@ export class DocumentBrowserSFRPG extends Application {
             }
         }
 
-        for (let availableFilter of Object.values(this.filters)) {
-            if (availableFilter.activeFilters && availableFilter.activeFilters.length > 0) {
-                if (!availableFilter.filter(element, availableFilter.activeFilters)) {
+        for (const availableFilter of Object.values(this.filters)) {
+            if (availableFilter.type === 'multi-select') {
+                if (availableFilter.activeFilters && availableFilter.activeFilters.length > 0) {
+                    if (!availableFilter.filter(element, availableFilter.activeFilters)) {
+                        return false;
+                    }
+                }
+            } else if (availableFilter.type === "range") {
+                if (!availableFilter.filter(element, availableFilter.content)) {
                     return false;
                 }
             }
@@ -298,8 +323,16 @@ export class DocumentBrowserSFRPG extends Application {
             text: '',
             castingtime: 'null'
         };
-        for (let filterKey of Object.keys(this.filters)) {
-            this.filters[filterKey].activeFilters = [];
+        for (const [filterKey, filter] of Object.entries(this.filters)) {
+            if (filter.type === "multi-select") {
+                filter.activeFilters = [];
+            } else if (filter.type === "range") {
+                filter.reset(filter);
+                html.find(`input[name=${filterKey}-min]`).val(filter.content.min);
+                html.find(`input[name=${filterKey}-max]`).val(filter.content.max);
+            } else {
+                filter.reset(filter);
+            }
         }
         html.find('input[name=textFilter]').val('');
         html.find('input[name=timefilter]').val('null');

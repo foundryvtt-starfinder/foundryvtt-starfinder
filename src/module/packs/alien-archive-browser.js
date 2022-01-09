@@ -36,25 +36,28 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
         for await (const {pack, content} of packLoader.loadPacks(this.entityType, this._loadedPacks)) {
             console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
-            for (let item of content) {
+            for (const item of content) {
 
-                item = item.data;
-                item.compendium = pack.collection;
-                // Used for sorting and displaying CR
-                item.data.cr = item.data.details.cr;
+                const itemData = item.data;
+                itemData.compendium = pack.collection;
+
+                // Used for sorting and displaying
+                itemData.data.cr = itemData.data.details.cr;
+                itemData.data.hp = itemData.data.attributes.hp.max;
+
                 // 1/3 and 1/2 CR aliens have special strings used to describe their CR rather than using the float value
-                if (item.data.details.cr == (1/3)) {
-                    item.data.crDisplay = "1/3";
+                if (itemData.data.details.cr == (1/3)) {
+                    itemData.data.crDisplay = "1/3";
                 }
-                else if (item.data.details.cr == (1/2)) {
-                    item.data.crDisplay = "1/2";
+                else if (itemData.data.details.cr == (1/2)) {
+                    itemData.data.crDisplay = "1/2";
                 }
                 else {
-                    item.data.crDisplay = item.data.details.cr;
+                    itemData.data.crDisplay = itemData.data.details.cr;
                 }
 
-                if (this.allowedItem(item)) {
-                    items.push(item);
+                if (this.allowedItem(itemData)) {
+                    items.push(itemData);
                 }
             }
         }
@@ -68,6 +71,10 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
         sortingMethods["cr"] = {
             name: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserSortMethodCR"),
             method: this._sortByCR
+        };
+        sortingMethods["hp"] = {
+            name: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserSortMethodHP"),
+            method: this._sortByHP
         };
         return sortingMethods;
     }
@@ -87,18 +94,48 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
         }
     }
 
-    getFilters() {
+    _sortByHP(elementA, elementB) {
+        const aVal = parseFloat($(elementA).find('input[name=hp]').val());
+        const bVal = parseFloat($(elementB).find('input[name=hp]').val());
+        if (aVal < bVal) return -1;
+        if (aVal > bVal) return 1;
 
+        if (aVal == bVal) {
+            const aName = $(elementA).find('.item-name a')[0].innerHTML;
+            const bName = $(elementB).find('.item-name a')[0].innerHTML;
+            if (aName < bName) return -1;
+            if (aName > bName) return 1;
+            return 0;
+        }
+    }
+
+    getFilters() {
         let filters = {
+            cr: {
+                label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterCR"),
+                content: {min: 0, max: 25},
+                filter: (element, filters) => { return this._filterCR(element, filters); },
+                reset: (filter) => { filter.content = {min: 0, max: 25}; },
+                type: "range"
+            },
+            hp: {
+                label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterHP"),
+                content: {min: 0, max: 0},
+                filter: (element, filters) => { return this._filterHP(element, filters); },
+                reset: (filter) => { filter.content = {min: 0, max: 0}; },
+                type: "range"
+            },
             size: {
                 label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterSize"),
                 content: SFRPG.actorSizes,
-                filter: (element, filters) => { return this._filterSizes(element, filters); }
+                filter: (element, filters) => { return this._filterSizes(element, filters); },
+                type: "multi-select"
             },
             type: {
                 label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterType"),
                 content: SFRPG.npctypes,
-                filter: (element, filters) => { return this._filterTypes(element, filters); }
+                filter: (element, filters) => { return this._filterTypes(element, filters); },
+                type: "multi-select"
             }
         };
         return filters;
@@ -110,8 +147,39 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
                 name: game.i18n.localize("SFRPG.Browsers.AlienArchiveBrowser.BrowserSortMethodCR"),
                 dataKey: "crDisplay",
                 sortValue: "cr"
+            },
+            hitpoints: {
+                name: game.i18n.localize("SFRPG.Browsers.AlienArchiveBrowser.BrowserSortMethodHP"),
+                dataKey: "hp",
+                sortValue: "hp"
             }
         };
+    }
+
+    _filterCR(element, range) {
+        const compendium = element.dataset.entryCompendium;
+        const itemId = element.dataset.entryId;
+        const alien = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        const alienCR = alien.data.cr;
+        
+        if (range.max >= range.min) {
+            return range.min <= alienCR && alienCR <= range.max;
+        } else {
+            return range.min <= alienCR;
+        }
+    }
+
+    _filterHP(element, range) {
+        const compendium = element.dataset.entryCompendium;
+        const itemId = element.dataset.entryId;
+        const alien = this.items.find(x => x.compendium === compendium && x._id === itemId);
+        const alienHP = alien.data.attributes.hp.max;
+
+        if (range.max > range.min) {
+            return range.min <= alienHP && alienHP <= range.max;
+        } else {
+            return range.min <= alienHP;
+        }
     }
 
     _filterSizes(element, filters) {

@@ -21,6 +21,7 @@
             {{#each filters as |filter filterKey|}}
             <div class="filtercontainer" id="classfilter">
                 <h3>{{filter.label}}</h3>
+                {{#if (eq filter.type "multi-select")}}
                 <dl>
                     {{#each filter.content as |content key|}}
                     <label>
@@ -33,6 +34,16 @@
                     </label>
                     {{/each}}
                 </dl>
+                {{/if}}
+                {{#if (eq filter.type "range")}}
+                <dl>
+                    <div class="flexrow">
+                    <input style="flex: 2;" class="rangeFilter" name="{{filterKey}}-min" type="text" value="{{filter.content.min}}" data-dtype="String" title="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchTitle"}}"/>
+                    <span style="flex: 1; text-align: center;">-</span>
+                    <input style="flex: 2;" class="rangeFilter" name="{{filterKey}}-max" type="text" value="{{filter.content.max}}" data-dtype="String" title="{{localize "SFRPG.Browsers.ItemBrowser.BrowserSearchTitle"}}"/>
+                    </div>
+                </dl>
+                {{/if}}
             </div>
             {{/each}}
         </div>

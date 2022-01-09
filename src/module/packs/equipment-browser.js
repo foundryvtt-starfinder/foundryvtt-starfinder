@@ -73,7 +73,8 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.ItemType"),
                 content: equipmentTypes,
                 filter: (element, filters) => { return this._filterItemType(element, filters); },
-                activeFilters: this.filters?.equipmentTypes?.activeFilters || []
+                activeFilters: this.filters?.equipmentTypes?.activeFilters || [],
+                type: "multi-select"
             }
         };
 
@@ -82,14 +83,16 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.WeaponType"),
                 content: CONFIG.SFRPG.weaponTypes,
                 filter: (element, filters) => { return this._filterWeaponType(element, filters); },
-                activeFilters: this.filters.weaponTypes?.activeFilters || []
+                activeFilters: this.filters.weaponTypes?.activeFilters || [],
+                type: "multi-select"
             }
 
             filters.weaponCategories = {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.WeaponCategories"),
                 content: CONFIG.SFRPG.weaponCategories,
                 filter: (element, filters) => { return this._filterWeaponCategory(element, filters); },
-                activeFilters: this.filters.weaponCategories?.activeFilters || []
+                activeFilters: this.filters.weaponCategories?.activeFilters || [],
+                type: "multi-select"
             }
         }
 
@@ -98,7 +101,8 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.EquipmentType"),
                 content: CONFIG.SFRPG.armorTypes,
                 filter: (element, filters) => { return this._filterArmorType(element, filters); },
-                activeFilters: this.filters.armorTypes?.activeFilters || []
+                activeFilters: this.filters.armorTypes?.activeFilters || [],
+                type: "multi-select"
             }
         }
 

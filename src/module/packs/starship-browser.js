@@ -115,7 +115,8 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.ComponentType"),
                 content: starshipComponentTypes,
                 filter: (element, filters) => { return this._filterComponentType(element, filters); },
-                activeFilters: this.filters?.starshipComponentTypes?.activeFilters || []
+                activeFilters: this.filters?.starshipComponentTypes?.activeFilters || [],
+                type: "multi-select"
             }
         };
 
@@ -124,14 +125,16 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.WeaponType"),
                 content: SFRPG.starshipWeaponTypes,
                 filter: (element, filters) => { return this._filterWeaponType(element, filters); },
-                activeFilters: this.filters.starshipWeaponTypes?.activeFilters || []
+                activeFilters: this.filters.starshipWeaponTypes?.activeFilters || [],
+                type: "multi-select"
             }
 
             filters.starshipWeaponClass = {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.WeaponClass"),
                 content: SFRPG.starshipWeaponClass,
                 filter: (element, filters) => { return this._filterWeaponClass(element, filters); },
-                activeFilters: this.filters.starshipWeaponClass?.activeFilters || []
+                activeFilters: this.filters.starshipWeaponClass?.activeFilters || [],
+                type: "multi-select"
             }
         }
 
