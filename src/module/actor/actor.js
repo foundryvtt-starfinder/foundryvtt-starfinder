@@ -760,11 +760,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     getResistanceForDamageType(damageType) {
         const kineticDamageTypes = ['b', 'p', 's'];
         if (kineticDamageTypes.includes(damageType)) {
-            if (this.data.data.traits.damageReduction.negatedBy == "-") {
-                const damageReduction = Number(this.data.data.traits.damageReduction.value);
-                if (!Number.isNaN(damageReduction) && damageReduction > 0) {
-                    return damageReduction;
-                }
+            const damageReduction = Number(this.data.data.traits.damageReduction.value);
+            if (!Number.isNaN(damageReduction) && damageReduction > 0) {
+                return damageReduction;
             }
         }
 
