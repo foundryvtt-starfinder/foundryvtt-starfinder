@@ -514,6 +514,14 @@ export class DiceSFRPG {
             if (part instanceof Object) {
                 if (part.isDamageSection) {
                     damageSections.push(part);
+
+                    const additionalOptions = duplicate(options);
+                    additionalOptions.skipUI = true;
+
+                    const tempTree = new RollTree(additionalOptions);
+                    const evaluatedPartFormula = await tempTree.buildRoll(part.formula, rollContext, async (button, rollMode, finalFormula, na) => {
+                        part.formula = finalFormula.finalRoll;
+                    });
                     continue;
                 }
 
