@@ -106,7 +106,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      */
     getAllModifiers(ignoreTemporary = false, ignoreEquipment = false) {
         let allModifiers = this.data.data.modifiers.filter(mod => {
-            return (!ignoreTemporary || mod.subtab === "permanent");
+            return mod.enabled && (!ignoreTemporary || mod.subtab === "permanent");
         });
 
         for (const actorModifier of allModifiers) {
