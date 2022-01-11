@@ -14,6 +14,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 ## Bugfixes and small improvements
 * Added the Biohacker features from Tech Revolution.
 * Fixed a bug that caused the token configuration of Starship or Vehicle containing a PC or NPC actor crew to not open.
+* Fixed a bug that prevented nested containers from listing their content wealth.
 * Fixed class' keyAbilityMod property not getting set correctly.
 * Fixed initiative roll dialog's roll mode setting being ignored.
 * Fixed starship critical damage rolls doubling the damage, Starships do not double their damage, instead they should apply a critical threshold. Deflector Shields still take 1 extra damage.

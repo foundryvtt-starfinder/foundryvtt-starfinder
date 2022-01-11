@@ -490,12 +490,18 @@ export function computeCompoundWealthForItem(item, contents) {
         }
     }
 
-    //console.log(`${item?.name || "null"} has a content wealth of ${contentWealth}, and personal wealth of ${personalWealth}`);
-    return {
+    const itemWealth = {
         totalWealth: personalWealth + contentWealth,
         personalWealth: personalWealth,
         contentWealth: contentWealth
     };
+
+    if (item.type === "container") {
+        item.contentWealth = itemWealth.contentWealth;
+    }
+
+    //console.log(`${item?.name || "null"} has a content wealth of ${contentWealth}, and personal wealth of ${personalWealth}`);
+    return itemWealth;
 }
 
 /**
