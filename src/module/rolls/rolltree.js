@@ -57,20 +57,46 @@ export default class RollTree {
                 }
             }
 
+            const parts = this.options.parts?.filter(x => x.isDamageSection);
             const finalRollFormula = this.rootNode.resolve();
+            if (parts?.length > 0) {
+                for (const part of parts) {
+                    const finalSectionFormula = duplicate(finalRollFormula);
 
-            if (this.options.debug) {
-                console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
+                    if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
+                        const damageSectionFormula = part?.formula ?? "0";
+                        finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
+                        finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                    }
+        
+                    if (this.options.debug) {
+                        console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
+                    }
+        
+                    if (callback) {
+                        if (parts.length > 1) {
+                            const partIndex = parts.indexOf(part);
+                            const partCount = parts.length;
+                            part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
+                        }
+                        await callback(button, rollMode, finalSectionFormula, part);
+                    }
+                }
+            } else {
+                if (this.options.debug) {
+                    console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
+                }
+
+                if (callback) {
+                    await callback(button, rollMode, finalRollFormula);
+                }
             }
 
-            if (callback) {
-                await callback(button, rollMode, finalRollFormula);
-            }
             return {button: button, rollMode: rollMode, finalRollFormula: finalRollFormula};
         }
 
         const uiPromise = this.displayUI(formula, contexts, allRolledMods);
-        uiPromise.then(async ([button, rollMode, bonus]) => {
+        uiPromise.then(async ([button, rollMode, bonus, parts]) => {
             if (button === null) {
                 console.log('Roll was cancelled');
                 await callback('cancel', "none", null);
@@ -84,22 +110,64 @@ export default class RollTree {
             }
 
             const finalRollFormula = this.rootNode.resolve();
-            bonus = bonus.trim();
-            if (bonus) {
-                const operators = ['+', '-', '*', '/'];
-                if (!operators.includes(bonus[0])) {
-                    finalRollFormula.finalRoll += " +";
-                    finalRollFormula.formula += " +";
+            const enabledParts = parts?.filter(x => x.enabled);
+            if (enabledParts?.length > 0) {
+                for (const part of enabledParts) {
+                    const finalSectionFormula = duplicate(finalRollFormula);
+
+                    if (finalSectionFormula.finalRoll.includes("<damageSection>")) {
+                        const damageSectionFormula = part?.formula ?? "0";
+                        finalSectionFormula.finalRoll = finalSectionFormula.finalRoll.replace("<damageSection>", damageSectionFormula);
+                        finalSectionFormula.formula = finalSectionFormula.formula.replace("<damageSection>", damageSectionFormula);
+                    }
+        
+                    bonus = bonus.trim();
+                    if (bonus) {
+                        const operators = ['+', '-', '*', '/'];
+                        if (!operators.includes(bonus[0])) {
+                            finalSectionFormula.finalRoll += " +";
+                            finalSectionFormula.formula += " +";
+                        }
+                        finalSectionFormula.finalRoll += " " + bonus;
+                        finalSectionFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
+                    }
+        
+                    if (this.options.debug) {
+                        console.log([`Final roll results outcome`, formula, allRolledMods, finalSectionFormula]);
+                    }
+
+                    if (callback) {
+                        if (enabledParts.length > 1) {
+                            const partIndex = enabledParts.indexOf(part);
+                            const partCount = enabledParts.length;
+                            part.partIndex = game.i18n.format("SFRPG.Damage.PartIndex", {partIndex: partIndex + 1, partCount: partCount});
+                        }
+                        await callback(button, rollMode, finalSectionFormula, part);
+                    }
                 }
-                finalRollFormula.finalRoll += " " + bonus;
-                finalRollFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
-            }
+            } else {
+                if (finalRollFormula.finalRoll.includes("<damageSection>")) {
+                    finalRollFormula.finalRoll = finalRollFormula.finalRoll.replace("<damageSection>", "0");
+                    finalRollFormula.formula = finalRollFormula.formula.replace("<damageSection>", "0");
+                }
 
-            if (this.options.debug) {
-                console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
-            }
+                bonus = bonus.trim();
+                if (bonus) {
+                    const operators = ['+', '-', '*', '/'];
+                    if (!operators.includes(bonus[0])) {
+                        finalRollFormula.finalRoll += " +";
+                        finalRollFormula.formula += " +";
+                    }
+                    finalRollFormula.finalRoll += " " + bonus;
+                    finalRollFormula.formula += game.i18n.format("SFRPG.Rolls.Dice.Formula.AdditionalBonus", { "bonus": bonus });
+                }
 
-            await callback(button, rollMode, finalRollFormula);
+                if (this.options.debug) {
+                    console.log([`Final roll results outcome`, formula, allRolledMods, finalRollFormula]);
+                }
+
+                await callback(button, rollMode, finalRollFormula);
+            }
         });
         return uiPromise;
     }
@@ -141,7 +209,7 @@ export default class RollTree {
                 defaultButton: this.options.defaultButton, 
                 title: this.options.title, 
                 dialogOptions: this.options.dialogOptions,
-                parts: this.options.parts
+                parts: this.options.parts?.filter(x => x.isDamageSection)
             });
     }
 

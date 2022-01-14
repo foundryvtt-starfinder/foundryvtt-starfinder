@@ -11,7 +11,10 @@ Hooks.on('afterClosureProcessed', (closure, fact) => {
                 if (role) {
                     actor.prepareData();
                     try {
-                        actor.sheet?.render(false);
+                        if (actor.sheet?.rendered) {
+                            actor.sheet?.clearTooltips();
+                            actor.sheet?.render(false);
+                        }
                     } catch {}
                 }
             }
@@ -28,7 +31,10 @@ Hooks.on('deleteActor', async (entity, options, userId) => {
                 if (actorUpdated) {
                     actor.prepareData();
                     try {
-                        actor.sheet?.render(false);
+                        if (actor.sheet?.rendered) {
+                            actor.sheet?.clearTooltips();
+                            actor.sheet?.render(false);
+                        }
                     } catch {}
                 }
             }

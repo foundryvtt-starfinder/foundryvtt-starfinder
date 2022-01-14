@@ -375,6 +375,7 @@ export class DiceSFRPG {
 
                 const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
                 let roll = await rollObject.evaluate({async: true});
+                roll.options.rollMode = rollMode;
     
                 // Flag critical thresholds
                 for (let d of roll.dice) {
@@ -414,6 +415,7 @@ export class DiceSFRPG {
     
                     const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
                     const roll = await rollObject.evaluate({async: true});
+                    roll.options.rollMode = rollMode;
             
                     // Flag critical thresholds
                     for (let d of roll.dice) {
@@ -460,8 +462,23 @@ export class DiceSFRPG {
             Critical: { label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
         };
 
+        const getDamageTypeForPart = (part) => {
+            if (part.types && !foundry.utils.isObjectEmpty(part.types)) {
+                const filteredTypes = Object.entries(part.types).filter(type => type[1]);
+                const obj = { types: [], operator: "" };
+
+                for (const type of filteredTypes) {
+                    obj.types.push(type[0]);
+                }
+
+                obj.operator = "and";
+
+                return obj;
+            }
+        };
+
         /** @type {DamageType[]} */
-        const damageTypes = parts.reduce((acc, cur) => {
+        let damageTypes = parts.reduce((acc, cur) => {
             if (cur.types && !foundry.utils.isObjectEmpty(cur.types)) {
                 const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
@@ -491,26 +508,48 @@ export class DiceSFRPG {
             useRawStrings: false
         };
 
-        const partMapper = (part) => {
+        const finalParts = [];
+        const damageSections = [];
+        for (const part of parts) {
             if (part instanceof Object) {
+                if (part.isDamageSection) {
+                    damageSections.push(part);
+
+                    const additionalOptions = duplicate(options);
+                    additionalOptions.skipUI = true;
+
+                    const tempTree = new RollTree(additionalOptions);
+                    const evaluatedPartFormula = await tempTree.buildRoll(part.formula, rollContext, async (button, rollMode, finalFormula, na) => {
+                        part.formula = finalFormula.finalRoll;
+                    });
+                    continue;
+                }
+
                 if (part.explanation) {
                     if (part.formula) {
-                        return `${part.formula}[${part.explanation}]`;
+                        finalParts.push(`${part.formula}[${part.explanation}]`);
+                    } else {
+                        finalParts.push(`0[${part.explanation}]`);
                     }
-                    return `0[${part.explanation}]`;
                 } else {
                     if (part.formula) {
-                        return `${part.formula}`;
+                        finalParts.push(`${part.formula}`);
+                    } else {
+                        finalParts.push(`0`);
                     }
-                    return `0`;
                 }
+            } else {
+                finalParts.push(formula);
             }
-            return part;
-        };
+        }
 
-        const formula = parts.map(partMapper).join(" + ");
+        if (damageSections) {
+            finalParts.splice(0, 0, "<damageSection>");
+        }
+
+        const formula = finalParts.join(" + ");
         const tree = new RollTree(options);
-        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula, part) => {
             if (button === 'cancel') {
                 if (onClose) {
                     onClose(null, null, null, false);
@@ -523,7 +562,13 @@ export class DiceSFRPG {
             /** @type {HtmlData[]} */
             const htmlData = [{ name: "is-damage", value: "true" }];
 
-            const tempParts = parts.reduce((arr, curr) => {
+            const usedParts = part ? [part] : parts;
+            if (part) {
+                part.operator = "and";
+            }
+
+            let damageTypeString = "";
+            const tempParts = usedParts.reduce((arr, curr) => {
                 let obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
                 if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
                     for (const [key, isEnabled] of Object.entries(curr.types)) {
@@ -536,6 +581,14 @@ export class DiceSFRPG {
                 if (obj.types && obj.types.length > 0) {
                     const tag = `damage-type-${(obj.types.join(`-${obj.operator}-`))}`;
                     const text = obj.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[obj.operator]} `);
+                    const shortText = obj.types.map(type => SFRPG.damageTypeToAcronym[type]).join(` & `);
+
+                    // In most use cases, damage rolls should never contain more parts. But because the system is complex and confusing, it is theoretically possible.
+                    // If that happens, we'll just concatenate the damage types to the roll string and pretend nothing is wrong.
+                    if (damageTypeString?.length > 0) {
+                        damageTypeString += ", ";
+                    }
+                    damageTypeString += shortText;
                     
                     if (!tags.some(t => t.tag === tag && t.text === text))
                         tags.push({ tag: tag, text: text });
@@ -591,17 +644,21 @@ export class DiceSFRPG {
             }
 
             const isCritical = (button === "Critical");
+            let finalFlavor = duplicate(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
                 tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
-                finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
-                finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
+
+                if (!criticalData?.preventDoubling) {
+                    finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
+                    finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
+                }
                 
-                let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
+                let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
                 
                 if (criticalData !== undefined) {
                     if (criticalData?.effect?.trim().length > 0) {
-                        tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": flavor, "criticalEffect": criticalData.effect });
+                        tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": finalFlavor, "criticalEffect": criticalData.effect });
                         tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                     }
 
@@ -614,7 +671,17 @@ export class DiceSFRPG {
                     htmlData.push({ name: "critical-data", value: JSON.stringify(criticalData) });
                 }
 
-                flavor = tempFlavor;
+                finalFlavor = tempFlavor;
+            }
+
+            if (part) {
+                finalFlavor += `: ${part.name}`;
+                if (part.partIndex) {
+                    finalFlavor += ` (${part.partIndex})`;
+                }
+                //const originalTypes = duplicate(damageTypes);
+                //damageTypes = [getDamageTypeForPart(part)];
+                //console.log([originalTypes, damageTypes]);
             }
             
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
@@ -652,14 +719,15 @@ export class DiceSFRPG {
             if (useCustomCard) {
                 //Push the roll to the ChatBox
                 const customData = {
-                    title: flavor,
+                    title: finalFlavor,
                     rollContext:  rollContext,
                     speaker: speaker,
                     rollMode: rollMode,
                     breakdown: preparedRollExplanation,
                     tags: tags,
                     htmlData: htmlData,
-                    rollType: "damage"
+                    rollType: "damage",
+                    damageTypeString: damageTypeString
                 };
 
                 try {
@@ -671,17 +739,38 @@ export class DiceSFRPG {
             }
             
             if (!useCustomCard) {
-                const content = await roll.render({ htmlData: htmlData });
+                let rollContent = await roll.render({ htmlData: htmlData });
 
-                ChatMessage.create({
-                    flavor: flavor,
+                const messageData = {
+                    flavor: finalFlavor,
                     speaker: speaker,
-                    content: content,
+                    content: rollContent,
                     rollMode: rollMode,
                     roll: roll,
                     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
                     sound: CONFIG.sounds.dice
-                });
+                };
+
+                // Insert the damage type string if possible.
+                if (damageTypeString?.length > 0) {
+                    const diceRollHtml = '<h4 class="dice-roll">';
+                    const diceRollIndex = rollContent.indexOf(diceRollHtml);
+                    const firstHalf = rollContent.substring(0, diceRollIndex + diceRollHtml.length);
+                    const splitOffFirstHalf = rollContent.substring(diceRollIndex + diceRollHtml.length);
+                    const closeTagIndex = splitOffFirstHalf.indexOf('</h4>');
+                    const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
+                    const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
+
+                    messageData.content = firstHalf + rollResultHtml + ` ${damageTypeString}` + secondHalf;
+                    messageData.flags = {
+                        damage: {
+                            amount: roll.total,
+                            types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
+                        }
+                    };
+                }
+                
+                ChatMessage.create(messageData);
             }
 
             if (onClose) {

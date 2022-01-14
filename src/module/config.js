@@ -67,6 +67,22 @@ SFRPG.alignments = {
 };
 
 /**
+ * NPC alignment options
+ * @type {Object}
+ */
+SFRPG.alignmentsNPC = {
+    "lg": "SFRPG.AlignmentLG",
+    "ng": "SFRPG.AlignmentNG",
+    "cg": "SFRPG.AlignmentCG",
+    "ln": "SFRPG.AlignmentLN",
+    "n": "SFRPG.AlignmentTN",
+    "cn": "SFRPG.AlignmentCN",
+    "le": "SFRPG.AlignmentLE",
+    "ne": "SFRPG.AlignmentNE",
+    "ce": "SFRPG.AlignmentCE"
+};
+
+/**
  * The set of armor proficiencies which a character may have
  * @type {Object}
  */
@@ -150,6 +166,17 @@ SFRPG.kineticDamageTypes = {
     "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
     "piercing": "SFRPG.Damage.Types.Piercing",
     "slashing": "SFRPG.Damage.Types.Slashing"
+};
+
+SFRPG.damageTypeToAcronym = {
+    "acid": "A",
+    "cold": "C",
+    "electricity": "E",
+    "fire": "F",
+    "sonic": "So",
+    "bludgeoning": "B",
+    "piercing": "P",
+    "slashing": "S"
 };
 
 SFRPG.damageTypes = {
@@ -775,6 +802,25 @@ SFRPG.augmentationSytems = {
 };
 
 /*--------------------------------*
+ * NPC properties and values *
+ *--------------------------------*/
+SFRPG.npctypes = {
+    "animal": "Animal",
+    "aberration": "Aberration",
+    "construct": "Construct",
+    "dragon": "Dragon",
+    "fey": "Fey",
+    "humanoid": "Humanoid",
+    "magical beast": "Magical Beast",
+    "monstrous humanoid": "Monstrous Humanoid",
+    "ooze": "Ooze",
+    "outsider": "Outsider",
+    "planet": "Plant",
+    "undead": "Undead",
+    "vermin": "Vermin"
+};
+
+/*--------------------------------*
  * Starship properties and values *
  *--------------------------------*/
 SFRPG.maneuverability = {
@@ -908,7 +954,9 @@ SFRPG.starshipSizeMod = {
     "colossal": -8
 };
 
-// End starship stuff
+/*--------------------------------*
+ * Vehicle properties and values *
+ *--------------------------------*/
 
 SFRPG.vehicleSizes = {
     "diminutive": "SFRPG.SizeDim",

@@ -958,6 +958,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Define Roll parts
         /** @type {DamageParts[]} */
         const parts = itemData.damage.parts.map(part => part);
+        for (const part of parts) {
+            part.isDamageSection = true;
+        }
         
         let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
@@ -1091,25 +1094,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"))
         }
 
-        // const [parts, damageTypes] = itemData.damage.parts.reduce((acc, cur) => {
-        //     if (cur.formula && cur.formula.trim() !== "") acc[0].push(cur.formula);
-        //     if (cur.types) {
-        //         const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
-        //         const obj = { types: [], operator: "" };
-
-        //         for (const type of filteredTypes) {
-        //             obj.types.push(type[0]);
-        //         }
-
-        //         if (cur.operator) obj.operator = cur.operator;
-
-        //         acc[1].push(obj);
-        //     }
-
-        //     return acc;
-        // }, [[], []]);
-
         const parts = itemData.damage.parts.map(part => part);
+        for (const part of parts) {
+            part.isDamageSection = true;
+        }
 
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
@@ -1153,6 +1141,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         const parts = itemData.damage.parts.map(part => part);
+        for (const part of parts) {
+            part.isDamageSection = true;
+        }
 
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
@@ -1173,6 +1164,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
+            criticalData: {preventDoubling: true},
             rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),

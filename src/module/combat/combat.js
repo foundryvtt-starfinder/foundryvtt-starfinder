@@ -627,6 +627,8 @@ export class CombatSFRPG extends Combat {
         const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
         const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
 
+        rollMode = roll.options?.rollMode ?? rollMode;
+
         const chatData = {
             flavor: messageData.flavor,
             speaker: messageData.speaker,
