@@ -373,7 +373,7 @@ export class DiceSFRPG {
                     finalFormula.formula = dieRoll + " + " + finalFormula.formula;
                 }
 
-                const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
+                const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags, skipUI: true });
                 let roll = await rollObject.evaluate({async: true});
                 roll.options.rollMode = rollMode;
     
