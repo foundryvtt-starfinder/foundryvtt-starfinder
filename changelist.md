@@ -12,8 +12,9 @@ A new setting has been made available to do the rounding of split odd damage in 
 To make finding aliens a little easier, we've integrated the work started by rrenna and took it from there to finally provide you with an in-engine alien archive browser. You can filter by CR, HP, Size, Type, and, of course, name.
 
 ## Bugfixes and small improvements
-* Added the Biohacker features from Tech Revolution.
 * Added a field to items that can make attack rolls what the roll targets, currently provided settings are Nothing, KAC, KAC +8, EAC, and Other.
+* Added Mountain Eel from AA1 to Alien Archives.
+* Added the class features from Tech Revolution.
 * Fixed a bug that allowed disabled modifiers to affect an actor.
 * Fixed a bug that caused the token configuration of Starship or Vehicle containing a PC or NPC actor crew to not open.
 * Fixed a bug that prevented nested containers from listing their content wealth.
