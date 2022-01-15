@@ -60,9 +60,21 @@
         <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
-                <h4>{{item.name}}</h4>
-                {{#if item.data.uses.max }}
-                <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.data.uses.value}} / {{item.data.uses.max}}</div>
+                {{#if labels.save}}
+                    <div class="flexcol">
+                        <div class="flexrow" style="flex: 1; line-height: 20px;">
+                            <h4>{{item.name}}</h4>
+                            {{#if item.data.uses.max }}
+                                <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.data.uses.value}} / {{item.data.uses.max}}</div>
+                            {{/if}}
+                        </div>
+                        <div style="flex: 1; line-height: 15px;" data-tippy-content="<strong>{{labels.save}}</strong><br/><br/>{{labels.saveFormula.formula}}">{{labels.save}}</div>
+                    </div>
+                {{else}}
+                    <h4>{{item.name}}</h4>
+                    {{#if item.data.uses.max }}
+                        <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.data.uses.value}} / {{item.data.uses.max}}</div>
+                    {{/if}}
                 {{/if}}
             </div>
 

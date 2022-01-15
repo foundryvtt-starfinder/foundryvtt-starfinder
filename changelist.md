@@ -1,9 +1,110 @@
+# v0.18.0 - Starfinder
+
+## New Features
+### Damage System updates
+Starfinder v0.13 introduced a major damage system overhaul. A small amount of functionality was still pending, and have now been wrapped up. These changes now add the damage type to the damage roll's text, making it easier than ever to see which damage types your damage applies. Additionally, items can now support multiple damage sections, so you can either pick one, or multiple. This is particularly handy for spells like Call Cosmos which causes separate cold and fire damage rolls, or items with fusions that change a damage type to your choice. Now, the UI will allow you to check which damage type you want to roll.
+
+Finally, applying damage with damage types will now try to properly address vulnerabilities, resistances, and immunities. Please take care that this does not cover all edge cases of the damage, but the vast majority of damage rolls should function properly. Future work is expected with regards to how edge cases can be tackled, feel free to give feedback on the Discord channel.
+
+A new setting has been made available to do the rounding of split odd damage in the advantage of the attacker or the defender. For example, if you take 9 acid and piercing damage, you would take 4.5 acid and 4.5 piercing damage, with one rounded up and one rounded down. Now, if you had 5 acid resistance, the rounding of the split damage could mean that if acid is rounded up to 5, and piercing to 4 (advantage defender), you would take 4 damage, while if it was the other way around (advantage attacker), it would round acid to 4 and piercing to 5, and you would take 5 damage. The default setting is advantage attacker, but this can be changed in the settings screen.
+
+### Alien Archive Browser
+To make finding aliens a little easier, we've integrated the work started by rrenna and took it from there to finally provide you with an in-engine alien archive browser. You can filter by CR, HP, Size, Type, and, of course, name.
+
+## Bugfixes and small improvements
+* Added a field to items that can make attack rolls what the roll targets, currently provided settings are Nothing, KAC, KAC +8, EAC, and Other.
+* Added base int and cha to drone chassis.
+* Added Mountain Eel from AA1 to Alien Archives.
+* Added spell resistance and activation/action to drone mods.
+* Added the class features from Tech Revolution.
+* Fixed a bug that allowed disabled modifiers to affect an actor.
+* Fixed a bug that caused the token configuration of Starship or Vehicle containing a PC or NPC actor crew to not open.
+* Fixed a bug that prevented nested containers from listing their content wealth.
+* Fixed class' keyAbilityMod property not getting set correctly.
+* Fixed initiative roll dialog's roll mode setting being ignored.
+* Fixed starship critical damage rolls doubling the damage, Starships do not double their damage, instead they should apply a critical threshold. Deflector Shields still take 1 extra damage.
+* Reloading a weapon that has a short description will now roll the short description into chat instead.
+* Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.
+
+# v0.17.0 - Starfinder
+
+This release contains a few quality of life fixes and various small bug fixes.
+
+## Bugfixes and small improvements
+* Added Critical Fumble / Hit tables to the tables compendium. (Thanks Iankid!)
+* Added Dynamic Hacking rules to the rules compendium. (Thanks Iankid!)
+* Added Society starships to the starship compendium.
+* Added some alternate class features, feats, and spells from Tech Revolution, Galaxy Exploration Manual, Alien Archive 3, and a few AP's. (Thanks LebombJames!)
+* Added spell save DCs and how it was calculated to the spells on the spellbook.
+* Added support for wearing multiple armor types, it will select the best EAC and KAC, and the worst Dex and ACP. This specifically applies to Light Armor underneath Heavy Armor.
+* Fixed a minor Foundry v0.9 compatibility warning.
+* Fixed an issue preventing items being dragged onto the macro hotbar. (Fixes #495)
+* Fixed an issue preventing the editing of power armor details.
+* Fixed an issue preventing the casting of certain spells. (Fixes #486)
+* Fixed some broken Weapon Specialization links in the classes compendiums. (Thanks LebombJames)
+* Fusions, weapon accessories, and armor upgrades installed on the appropriate item are now providing modifiers.
+* Preventing drag and dropping of item types onto actor sheets that do not support them, e.g. starship actions onto a player character.
+* The activate button for feats without an action type should now be visible.
+* The new NPC style sheet will now display all movement types at once, rather than use the main movement type style.
+* Vanguard aspects have been updated to include the appropriate skill point modifiers.
+* Various changes to the rules and UCR compendium entries.
+* Various minor compendium entry mistakes have been corrected.
+
+# v0.16.1 - Starfinder
+
+These are some small bugfixes and improvements that have been uncovered recently.
+
+## Bugfixes and small improvements
+* Fixed an issue where old style NPC sheets would no longer open if an actor resource's calculation stage was set to late.
+* Fixed an issue where spells without an action type could not be cast.
+* Migrated all of the alien archive aliens to the new NPC type, removing the need of manual conversion.
+* Removed the condition warning from the new NPC sheet, and updated the text on the old style NPC sheet.
+
 # v0.16.0 - Starfinder
 
-The things go here ;)
+This update brings, amongst other things, some much needed GM lovin', with a new NPC type that supports conditions and modifiers, and roll notes so you can add reminders to that annoying DR circumventing NPC attack.
+
+## NPC Conditions
+A new NPC actor is introduced which properly supports modifiers for NPCs. You can easily convert your existing NPCs into the new format by opening the NPC sheet, scrolling down, and clicking the "Duplicate as new style NPC" button. This will generate a new NPC actor sheet, so you can check for yourself if everything is still correct. Once you are happy, you can make a pass on your scenes and replace the tokens derived from, or linked to it. And finally, remove the old style NPC actor sheet altogether.
+
+Please keep in mind that if you delete the old NPC sheet any tokens of it you have on various maps will be invalidated. Make sure to update your tokens before deleting the sheet!
+
+The old style NPCs will remain in existence, this way we can guarantee we do not break your worlds.
+
+## Late Actor Resources
+A much requested feature improvement for Actor Resources has been implemented. It is now possible to perform the modifier calculations for certain actor resources at the end of all the calculations, so that your actor resource can be modified by computed values such as strength modifier, etc.
+
+## Additional Math functions available in rolls
+Because data entry is a pain, we added two new math functions available to rolls, lookup and lookupRange. These are a little tricky to understand, but once you get them, they are quite powerful for writing lookup tables in rolls that do not require a mathematics degree to figure out. 'lookup' is great for sets with a lot of unique values, 'lookupRange' is for bigger data sets that do not have a lot of unique values.
+
+'lookup' takes a key and a series of key:value pair arguments, and will return a value for a matching key, if it finds it. If none is found, it will return 0.
+Example:
+lookup(@details.level.value, 1, 1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 4, 11, 4, 12, 4, 13, 5, 14, 5, 15, 5, 16, 6, 17, 6, 18, 6, 19, 7, 20, 7)
+
+'lookupRange' takes a key, a lowest value, and a series of key:value pair arguments which must be provided in a sorted order, and will return the value within the range.
+Example:
+lookupRange(@details.level.value, 1, 4, 2, 7, 3, 10, 4, 13, 5, 16, 6, 19, 7)
+
+This can help with data entry, especially when dealing with level tables.
+
+## FoundryVTT v9 Compatibility
+This version has been marked as being compatible with FoundryVTT v9. We've tested this version in v9 and haven't noticed any major issues. Those of you still on FoundryVTT v0.8.x can still update to this version as well. Our system wasn't affected by the big changes in Foundry for version 9, and the few minor issues that cropped up were easy to fix. And, they didn't break backwards compatibility. For now, Starfinder will be backwards compatible with the v0.8.x branch of Foundry, but there are a few pieces of deprecated code that we'll need to address once we get closer to Foundry v10.
 
 ## Bugfixes and small improvements
 * Added a lot of Tech Revolution items to the items compendium. Thanks Iankid!
+* Added a tooltip to Pack Size in item details, explaining what it does.
+* Added a tooltip to NPC CR value.
+* Added ability DC and spell save DC fields to NPC sheets, and connected them to the spells and feats.
+* Added roll and damage notes to item actions. This is helpful for reminders on your attacks or damage rolls, for example, in case a specific damage type ignores DR, etc.
+* Augmentations now have to be equipped specifically before the modifiers apply. This way you can now carry augmentations in your inventory without them automatically functioning.
+* Fixed a minor issue with css styling in preparation of Foundry v9.
+* Fixed an issue preventing you from casting spells from a character sheet without any spellslots.
+* Fixed an issue preventing you from dragging a container into another container.
+* Fixed an issue preventing you from dragging ammunition items into the starship inventory.
+* Fixed an issue where dragging items didn't always correctly check whether or not the target container was full, allowing you to circumvent container limits by accident.
+* Fixed inconsistencies in the spell save DC calculation when casting at different levels with consume slot enabled and disabled.
+* Updated all Alien Archive compendium entries for aliens starting with the letters D, E, and F, completing the work on bringing in the complete collection of the Alien Archive aliens! Thanks ThroughlyDruxy!
+* Updated class specific Weapon Specialization feats to have modifiers. Thanks Iankid!
 * Updated Mind Thrust compendium entry to use proper spell level scaling in the formula, enabled variable spell, and updated the description.
 
 # v0.15.0 - Starfinder

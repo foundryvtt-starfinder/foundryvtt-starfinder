@@ -100,6 +100,13 @@
             </div>
 
             <div class="form-group">
+               <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.SpellResistance" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.spellResistance" value="{{itemData.spellResistance}}" data-dtype="Number"/>
+                 </div>
+            </div>
+
+            <div class="form-group">
                 <label>{{ localize "SFRPG.DroneSheet.Mod.Details.OtherEffects.WeaponProficiency" }}</label>
                 <div class="form-fields">
                     <select name="data.weaponProficiency">
@@ -126,6 +133,18 @@
                     </select>
                 </div>
             </div>
+
+            <br />
+
+            <h3 class="form-header">{{ localize "SFRPG.Items.Action.TitleActivation" }}</h3>
+
+            {{!-- Item Action Template --}}
+            {{> "systems/sfrpg/templates/items/parts/item-activation.html"}}
+
+            <h3 class="form-header">{{ localize "SFRPG.Items.Action.TitleAction" }}</h3>
+
+            {{!-- Item Action Template --}}
+            {{> "systems/sfrpg/templates/items/parts/item-action.html"}}
 
         </div>
 

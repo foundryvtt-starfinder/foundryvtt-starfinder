@@ -20,6 +20,10 @@ export class ActorSheetSFRPG extends ActorSheet {
     constructor(...args) {
         super(...args);
 
+        this.acceptedItemTypes = [
+            ...SFRPG.sharedItemTypes,
+        ];
+
         this._filters = {
             inventory: new Set(),
             spellbook: new Set(),
@@ -64,7 +68,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             isShip: this.document.data.type === 'starship',
             isVehicle: this.document.data.type === 'vehicle',
             isDrone: this.document.data.type === 'drone',
-            isNPC: this.document.data.type === 'npc',
+            isNPC: this.document.data.type === 'npc' || this.document.data.type === 'npc2',
             isHazard: this.document.data.type === 'hazard',
             config: CONFIG.SFRPG
         };
@@ -94,6 +98,30 @@ export class ActorSheetSFRPG extends ActorSheet {
             for (let [a, abl] of Object.entries(data.data.abilities)) {
                 abl.label = CONFIG.SFRPG.abilities[a];
             }
+        }
+
+        // Calculate the expanded speed box height, only used for npc2 actors.
+        if (this.actor.type === "npc2") {
+            let numberOfMovementTypes = 0;
+            if (data.data.attributes.speed.land.value > 0) {
+                numberOfMovementTypes += 1;
+            }
+            if (data.data.attributes.speed.burrowing.value > 0) {
+                numberOfMovementTypes += 1;
+            }
+            if (data.data.attributes.speed.climbing.value > 0) {
+                numberOfMovementTypes += 1;
+            }
+            if (data.data.attributes.speed.flying.value > 0) {
+                numberOfMovementTypes += 1;
+            }
+            if (data.data.attributes.speed.swimming.value > 0) {
+                numberOfMovementTypes += 1;
+            }
+            if (data.data.attributes.speed.special) {
+                numberOfMovementTypes += 1;
+            }
+            data.expandedSpeedBoxHeight = Math.max(36 + numberOfMovementTypes * 14, 70);
         }
 
         if (data.data.skills) {
@@ -257,6 +285,10 @@ export class ActorSheetSFRPG extends ActorSheet {
                 maxWidth: 600
             });
         }
+    }
+
+    clearTooltips() {
+        this._tooltips = null;
     }
 
     async close(...args) {
@@ -911,6 +943,12 @@ export class ActorSheetSFRPG extends ActorSheet {
             const pack = game.packs.get(parsedDragData.pack);
             const itemData = await pack.getDocument(parsedDragData.id);
 
+            if (!this.acceptedItemTypes.includes(itemData.type)) {
+                // Reject item
+                ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[itemData.type], target: SFRPG.actorTypes[this.actor.type] }));
+                return;
+            }
+
             if (itemData.type === "class") {
                 const existingClass = targetActor.findItem(x => x.type === "class" && x.name === itemData.name);
                 if (existingClass) {
@@ -943,6 +981,12 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
 
             const itemToMove = await sourceActor.getItem(parsedDragData.data._id);
+
+            if (!this.acceptedItemTypes.includes(itemToMove.type)) {
+                // Reject item
+                ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[itemToMove.type], target: SFRPG.actorTypes[this.actor.type] }));
+                return;
+            }
 
             if (event.shiftKey) {
                 InputDialog.show(

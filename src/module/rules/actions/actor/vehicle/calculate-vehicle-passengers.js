@@ -1,6 +1,7 @@
 export default function (engine) {
     engine.closures.add("calculateVehiclePassengers", (fact, context) => {
         const data = fact.data;
+        const actor = fact.actor;
 
         data.crew = mergeObject(data.crew ?? {}, {
             complement: {
@@ -18,8 +19,19 @@ export default function (engine) {
             useNPCCrew: true
         }, {overwrite: false});
 
+        const crewActors = {
+            complement: {
+                actors: []
+            },
+            passenger: {
+                actors: []
+            },
+            pilot: {
+                actors: []
+            }
+        };
 
-        for (let [key, crew] of Object.entries(data.crew)) {
+        for (const [key, crew] of Object.entries(data.crew)) {
             if (key === "useNPCCrew") {
                 continue;
             }
@@ -28,7 +40,6 @@ export default function (engine) {
                 crew.actorIds = []
             }
 
-            crew.actors = [];
             const deadActors = [];
             for (const crewActorId of crew.actorIds) {
                 const foundCrew = game?.actors?.get(crewActorId);
@@ -37,7 +48,7 @@ export default function (engine) {
                     continue;
                 }
 
-                crew.actors.push(foundCrew);
+                crewActors[key].actors.push(foundCrew);
             }
 
             if (deadActors.length > 0) {
@@ -50,6 +61,8 @@ export default function (engine) {
                 }
             }
         }
+
+        actor.data.crew = crewActors;
 
         return fact;
     });

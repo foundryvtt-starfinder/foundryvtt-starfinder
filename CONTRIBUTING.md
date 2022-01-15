@@ -125,6 +125,6 @@ Sometimes you are only making changes to a single compendium, such as alien-arch
 This also works for other compendiums, naturally. Just replace alien-archives with another pack.
 It can only work with 1 pack at a time, adding more pack arguments will be ignored. If this is desired functionality, you can request it in discord.
 
-### Getting Foudnry Intellisense in Visual Studio Code
+### Getting Foundry Intellisense in Visual Studio Code
 
 If you would like some basic intelisense for the foundry types when using Visual Studio Code, all you have to do is copy `foundry.js` into the projects root folder. Once you do this, restart VS Code, and you should now see proper intelisense.

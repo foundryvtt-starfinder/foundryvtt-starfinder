@@ -3,8 +3,8 @@
         "TypeCharacter": "Personagem Jogador",
         "TypeDrone": "Drone",
         "TypeHazard": "Perigo",
-        "TypeNpc": "NPC",
-        "TypeMech": "Mech",
+        "TypeNpc": "Old Style NPC",
+        "TypeNpc2": "NPC",
         "TypeStarship": "Espaçonave",
         "TypeVehicle": "Veículo"
     },
@@ -61,6 +61,7 @@
         "AbilityActivationTypesMinute": "Minuto",
         "AbilityActivationTypesMove": "Ação Mv.",
         "AbilityActivationTypesNone": "Nenhuma",
+        "AbilityActivationTypesNoneButton": "Activate",
         "AbilityActivationTypesOther": "Outras Ações",
         "AbilityActivationTypesReaction": "Reação",
         "AbilityActivationTypesSpecial": "Especial",
@@ -84,6 +85,8 @@
         "AbilityScoreBase": "Valor Habilidade Base",
         "AbilityScoreBaseTooltip": "Valor Hablidade Base: {mod}",
         "AbilityScoreBonusTooltip": "{type} bonus: {mod} ({source})",
+        "AbilityScoreBonusModifiedTooltip": "{type} bonus: {mod} (computed from {base}) ({source})",
+        "AbilityScoreGenericTooltip": "{score} Ability Score: {value} ({source})",
         "AbilityScoreIncreaseTooltip": "Valor Habilidade Incremento: {mod}",
         "AbilityScoreRaceTooltip": "Raça: {mod}",
         "AbilityScoreThemeTooltip": "Tema: {mod}",
@@ -209,6 +212,7 @@
                     "Open": "Abrir",
                     "OpenTooltip": "Abra a lista deste contêiner.",
                     "StorageIdentifier": "Identificador de Armazenamento",
+                    "StorageIdentifierAmmunitionSlot": "Ammunition Slot",
                     "StorageIdentifierArmorUpgrade": "Módulo Atualização Armadura",
                     "StorageIdentifierFusion": "Fusão",
                     "StorageIdentifierItem": "Encaixe Item",
@@ -385,6 +389,18 @@
         "Biography": "Biografia",
         "Biotech": "Biotech",
         "Browsers": {
+            "AlienArchiveBrowser": {
+                "BrowserFilterAlignment": "Filter by Alignment",
+                "BrowserFilterCR": "Filter by CR",
+                "BrowserFilterHP": "Filter by HP",
+                "BrowserFilterOrganizationSize": "Filter by Organization Size",
+                "BrowserFilterSize": "Filter by Size",
+                "BrowserFilterType": "Filter by Type",
+                "BrowserSortMethodCR": "CR",
+                "BrowserSortMethodHP": "HP",
+                "Button": "Alien Archive",
+                "Title": "Browse Alien Archive"
+            },
             "EquipmentBrowser": {
                 "BrowserSortMethodLevel": "Nível",
                 "Button": "Equipamento",
@@ -641,6 +657,7 @@
         "Cybernetic": "Cybernetico",
         "Damage": {
             "Immunities": "Imudades a dano",
+            "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "Redução Dano",
             "Resistances": "Resistencia a Energia",
             "Title": "Dano",
@@ -651,13 +668,13 @@
                 "Electricity": "Eletricidade",
                 "Fire": "Fogo",
                 "Force": "Poder",
-                "Hint": "This is a list of damage types that apply to this damage roll.",
+                "Hint": "This is a list of damage sections that apply to this damage roll.",
                 "Nonlethal": "Não letal",
                 "Piercing": "Perfuração",
                 "Radiation": "Radiação",
                 "Slashing": "Cortante",
                 "Sonic": "Sonico",
-                "Title": "Damage Types",
+                "Title": "Damage Sections",
                 "Operators": {
                     "And": "and",
                     "Or": "or"
@@ -679,9 +696,11 @@
             "Chassis": {
                 "Details": {
                     "AbilityScores": {
+                        "Charisma": "Base Charisma",
                         "Dexterity": "Destreza Base",
                         "Header": "Valores Habilidade",
                         "Increases": "Incremento Valor Habilidade",
+                        "Intelligence": "Base Intelligence",
                         "Strength": "Força Base",
                         "Wisdom": "Sabedoria Base"
                     },
@@ -769,6 +788,7 @@
                         "BonusSkill": "Bônus Perícia",
                         "Header": "Outros efeitos",
                         "SpeedSpecial": "Movimento Especial",
+                        "SpellResistance": "Spell resistance",
                         "WeaponProficiency": "Proficiente em arma"
                     }
                 },
@@ -895,6 +915,7 @@
         "InitiativeLabel": "Iniciativa",
         "InitiativeModiferLabel": "Mod",
         "InitiativeModiferTooltip": "{type} Bonus: {mod} ({source})",
+        "InvalidItem": "{name} is an invalid Item for a {target}.",
         "InvalidStarshipItem": "{name} é um Item inválido para a espaçonave.",
         "Inventory": "Inventario",
         "InventoryAdd": "Adicionar",
@@ -905,6 +926,7 @@
         "InventoryUsage": "Utilização",
         "IronWillHint": "Talento do personagem que adiciona 2 aos salvamentos de vontade",
         "IronWillLabel": "Vontade de Ferro",
+        "ItemBonusTooltip": "Item bonus: {mod} ({source})",
         "ItemCollectionSheet": {
             "ItemCollectionLocked": "Este contêiner está bloqueado e não abrirá.",
             "Settings": {
@@ -920,16 +942,41 @@
             "ACP": "Penalidade check de Armadura",
             "Action": {
                 "AbilityModifier": "Modificador Habilidade",
+                "ActionTarget": {
+                    "ChatMessage": " against {actionTarget}",
+                    "EAC": "EAC",
+                    "KAC": "KAC",
+                    "KAC8": "KAC +8",
+                    "None": "No target",
+                    "Other": "Other",
+                    "Tag": "Targets: {actionTarget}",
+                    "Title": "Action Target",
+                    "Tooltip": "If this action targets a specific property, you can configure that here."
+                },
                 "ActionType": "Tipo Ação",
+                "AddDamageSection": "Add damage section",
+                "AddDamageSectionTooltip": "Add another damage section to this item.",
                 "AttackRollBonus": "Bonus Rolagem Ataque",
                 "ChatMessageFlavor": "Sabor de mensagem de bate-papo",
                 "CriticalDamageFormula": "Fórmula de dano crítico",
                 "CriticalEffect": "Efeito Critico",
+                "CriticalDamageHeader": "Critical Damage Sections",
                 "CriticalHealingFormula": "Fórmula de Cura Crítica",
                 "DamageFormula": "Formula Dano",
+                "DamageFormulaTooltip": "The damage roll for this damage section.",
+                "DamageHeader": "Damage Sections",
+                "DamageName": "Damage Name",
+                "DamageNameTooltip": "A name you can specify to easily reference this attack element.",
+                "DamageNotes": "Damage Notes",
+                "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
+                "DamageSection": "Damage Section {section}",
                 "HealingFormula": "Formula Cura",
                 "OtherFormula": "Outra Formula",
-                "SavingThrow": "Salvamento"
+                "RollNotes": "Roll Notes",
+                "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
+                "SavingThrow": "Salvamento",
+                "TitleAction": "Action",
+                "TitleActivation": "Activation"
             },
             "Activation": {
                 "ActivationCondition": "Condição de Ativação",
@@ -1035,7 +1082,8 @@
                 "Level": "Nível",
                 "Price": "Preço",
                 "Quantity": "Quantidade",
-                "QuantityPerPack": "Pack size"
+                "QuantityPerPack": "Pack size",
+                "QuantityPerPackTooltip": "Pack size is used to define how many of one item you buy for the full price. For example, you buy 30 small arm rounds at the cost of 40 credits. This helps with performing bulk and wealth calculations, as well as ammunition tracking."
             },
             "Equipment": {
                 "Action": "Ação Equipamento",
@@ -1193,6 +1241,10 @@
                 "ShowInCombatTrackerTooltip": "If enabled, this resource will be visible in the combat tracker for quick reference.",
                 "ShowOwnerAndGMOnly": "Only shown for Owner and GM",
                 "ShowOwnerAndGMOnlyTooltip": "If enabled, this resource will only be visible in the combat tracker for the sheet owner and the GM.",
+                "Stage": "Calculation Stage",
+                "StageEarly": "Early",
+                "StageLate": "Late",
+                "StageTooltip": "The calculation stage affects when the modifiers for this resource are calculated.<br/><br/><strong>Early</strong><br/>Early actor resources are calculated before any of the other automations are run. At this point, all the computed actor values are not yet valid, such as strength modifier, fortitude save bonus, etc. Actor resources computed at this stage can be used in modifiers that affect actor attributes.<br/><br/><strong>Late</strong><br/>Late actor resources are calculated at the very end of the actor's modifiers. This means you can include the computed values of the actor into the actor resource. You will not be able to include late actor resources in a calculation that affect the actors attributes constantly. You can still use them in situational modifiers, however.",
                 "SubType": "Subtype",
                 "SubTypeTooltip": "(Required) Subtype makes up the second half of the resource identifier.<br/>For example: @resources.type.subtype.value",
                 "Type": "Type",
@@ -1586,6 +1638,12 @@
         "None": "Nenhum",
         "Notes": "Notas",
         "NPCSheet": {
+            "Biography": {
+                "Organization": {
+                    "GroupSize": "Organization size",
+                    "GroupSizeTooltip": "The organization size goes from the smallest typical group (usually 1) to the largest typical group. This is used primarily by the alien browser to find creatures that match the group size filter."
+                }
+            },
             "Features": {
                 "Actions": "Ações",
                 "ActiveItems": "Talentos Ativos",
@@ -1595,7 +1653,11 @@
             },
             "Header": {
                 "AlignmentPlaceHolderText": "NB",
+                "AbilityDC": "Ability DC",
+                "AbilityDCTooltip": "The ability DC this NPC has. All of the NPCs abilities that have a saving throw associated with them typically use this value, unless they are spells.<br/><br/>This might not be properly integrated into every ability yet.",
                 "AuraPlaceHolderText": "Aura",
+                "BaseSpellDC": "Base Spell DC",
+                "BaseSpellDCTooltip": "The base spell DC this NPC has. All of the NPCs spells that have a saving throw associated with them typically use this value, plus the spell level.",
                 "NamePlaceHolderText": "Nome Personagem",
                 "RaceAndGraftsPlaceHolderText": "Gênero, Raça, and Classe/Transplante",
                 "SourcePlaceHolderText": "Fonte",
@@ -1604,13 +1666,23 @@
             },
             "Interface": {
                 "Conditions": {
-                    "Warning": "* NPCs ainda não suportam cálculos de modificadores automáticos!"
+                    "Warning": "Old Style NPCs do not support automatic modifier calculations, convert this NPC to the new style using the duplicate button on the Attributes tab."
                 },
                 "CreateItem": {
                     "Button": "Criar Item",
                     "Name": "Novo Item",
                     "Note": "Selecione o tipo de item que deseja criar.",
                     "Title": "Criar Novo Item"
+                },
+                "DuplicateNewStyle": {
+                    "Button": "Duplicate as new style NPC",
+                    "ButtonTooltip": "Clicking this button will create a new style NPC actor sheet, duplicating the data and items on this actor.",
+                    "DialogTitle": "Use original actor?",
+                    "DialogMessage": "You are duplicating an unlinked token actor, do you wish to create the new style NPC using the unlinked actor data, or the original sheet data?",
+                    "DialogOriginalActorButton": "Duplicate Original Actor",
+                    "DialogUnlinkedActorButton": "Duplicate Unlinked Actor",
+                    "DialogCancelButton": "Cancel",
+                    "ErrorCreateActor": "Something went wrong converting this actor. Check your user role permissions.<br/><br/>Click to dismiss."
                 },
                 "Navigation": {
                     "Conditions": "Condições"
@@ -1773,6 +1845,7 @@
         },
         "Save": "Salvamento",
         "SaveAbilityModTooltip": "Modificador Habilidade: {mod} ({ability})",
+        "SaveBaseModifier": "Base Save: {base}",
         "SaveClassModTooltip": "Modificador Classe: {mod} ({class})",
         "SaveDescriptorDisbelieve": "desacreditado",
         "SaveDescriptorHalf": "metade",
@@ -1817,6 +1890,12 @@
                 },
                 "VehicleChaseHint": "Alterar quais cartões de bate-papo de combate devem ser exibidos durante as perseguições de veículos.",
                 "VehicleChaseName": "Perseguição Veículo"
+            },
+            "DamageRoundingAdvantage": {
+                "Hint": "In the case of fractional damage, alternate rounding up or down in the advantage of the attacker, or the defender.",
+                "Name": "Damage Rounding Advantage",
+                "ValueAttacker": "Attacker",
+                "ValueDefender": "Defender"
             },
             "DamageWithAttack": {
                 "Hint": "Acompanha automaticamente uma jogada de ataque com uma jogada de dano.",

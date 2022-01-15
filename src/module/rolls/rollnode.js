@@ -1,5 +1,5 @@
 export default class RollNode {
-    constructor(tree, formula, baseValue, referenceModifier, isVariable, isEnabled, parentNode = null) {
+    constructor(tree, formula, baseValue, referenceModifier, isVariable, isEnabled, parentNode = null, options = {}) {
         this.tree = tree;
         this.formula = formula;
         this.baseValue = baseValue;
@@ -11,6 +11,7 @@ export default class RollNode {
         this.parentNode = parentNode;
         this.nodeContext = null;
         this.variableTooltips = null;
+        this.options = options;
     }
         
     populate(nodes, contexts) {
@@ -26,7 +27,7 @@ export default class RollNode {
 
                 let existingNode = nodes[modKey];
                 if (!existingNode) {
-                    const childNode = new RollNode(this.tree, mod.bonus.modifier, null, mod.bonus, false, mod.bonus.enabled, this);
+                    const childNode = new RollNode(this.tree, mod.bonus.modifier, null, mod.bonus, false, mod.bonus.enabled, this, this.options);
                     nodes[modKey] = childNode;
                     existingNode = childNode;
                 }
@@ -49,7 +50,7 @@ export default class RollNode {
 
                 let existingNode = nodes[variable];
                 if (!existingNode) {
-                    const childNode = new RollNode(this.tree, variable, variableValue, null, true, true, this);
+                    const childNode = new RollNode(this.tree, variable, variableValue, null, true, true, this, this.options);
                     nodes[variable] = childNode;
                     existingNode = childNode;
                 }
@@ -92,13 +93,17 @@ export default class RollNode {
 
                     this.resolvedValue.finalRoll = this.baseValue;
                     this.resolvedValue.formula = this.baseValue + "[";
-                    this.resolvedValue.formula += "<span";
-                    if (joinedTooltips) {
-                        this.resolvedValue.formula += ` title="${joinedTooltips}"`;
+                    if (this.options.useRawStrings) {
+                        this.resolvedValue.formula += (this.referenceModifier?.name || "@" + this.formula);
+                    } else {
+                        this.resolvedValue.formula += "<span";
+                        if (joinedTooltips) {
+                            this.resolvedValue.formula += ` title="${joinedTooltips}"`;
+                        }
+                        this.resolvedValue.formula += `>`;
+                        this.resolvedValue.formula += (this.referenceModifier?.name || "@" + this.formula);
+                        this.resolvedValue.formula += `</span>`;
                     }
-                    this.resolvedValue.formula += `>`;
-                    this.resolvedValue.formula += (this.referenceModifier?.name || "@" + this.formula);
-                    this.resolvedValue.formula += `</span>`;
                     this.resolvedValue.formula += "]";
                 }
 

@@ -1,7 +1,7 @@
-import { ItemBrowserSFRPG } from './item-browser.js';
+import { DocumentBrowserSFRPG } from './document-browser.js';
 import { SFRPG } from "../config.js"
 
-class SpellBrowserSFRPG extends ItemBrowserSFRPG {
+class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.title = game.i18n.format("SFRPG.Browsers.SpellBrowser.Title");
@@ -52,17 +52,20 @@ class SpellBrowserSFRPG extends ItemBrowserSFRPG {
             levels: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterLevel"),
                 content: SFRPG.spellLevels,
-                filter: (element, filters) => { return this._filterLevels(element, filters); }
+                filter: (element, filters) => { return this._filterLevels(element, filters); },
+                type: "multi-select"
             },
             classes: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterClass"),
                 content: SFRPG.allowedClasses,
-                filter: (element, filters) => { return this._filterClasses(element, filters); }
+                filter: (element, filters) => { return this._filterClasses(element, filters); },
+                type: "multi-select"
             },
             schools: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterSchool"),
                 content: SFRPG.spellSchools,
-                filter: (element, filters) => { return this._filterSchools(element, filters); }
+                filter: (element, filters) => { return this._filterSchools(element, filters); },
+                type: "multi-select"
             }
         };
         return filters;

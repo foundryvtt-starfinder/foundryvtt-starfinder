@@ -1,6 +1,6 @@
 import { ActorSheetSFRPG } from "./base.js";
-import { AddEditSkillDialog } from "../../apps/edit-skill-dialog.js";
 import { ChoiceDialog } from "../../apps/choice-dialog.js";
+import { SFRPG } from "../../config.js";
 import { computeCompoundWealthForItem } from "../actor-inventory-utils.js"
 
 /**
@@ -8,9 +8,14 @@ import { computeCompoundWealthForItem } from "../actor-inventory-utils.js"
  * @type {ActorSheetSFRPG}
  */
 export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
-    static AcceptedEquipment = "augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory,actorResource";
-
     static StarshipActionsCache = null;
+
+    constructor(...args) {
+        super(...args);
+
+        this.acceptedItemTypes.push(...SFRPG.starshipDefinitionItemTypes);
+        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+    }
 
     static get defaultOptions() {
         const options = super.defaultOptions;
@@ -21,10 +26,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         });
 
         return options;
-    }
-
-    constructor(...args) {
-        super(...args);
     }
 
     get template() {
@@ -208,7 +209,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     _prepareItems(data) {
         const actorData = data.data;
         const inventory = {
-            inventory: { label: game.i18n.localize("SFRPG.StarshipSheet.Inventory.Inventory"), items: [], dataset: { type: ActorSheetSFRPGStarship.AcceptedEquipment }, allowAdd: true }
+            inventory: { label: game.i18n.localize("SFRPG.StarshipSheet.Inventory.Inventory"), items: [], dataset: { type: this.acceptedItemTypes }, allowAdd: true }
         };
 
         const starshipSystems = [
@@ -249,7 +250,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             else if (item.type === "starshipSecuritySystem") arr[11].push(item);
             else if (item.type === "starshipExpansionBay") arr[12].push(item);
             else if (item.type === "actorResource") arr[14].push(item);
-            else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) arr[13].push(item);
+            else if (this.acceptedItemTypes.includes(item.type)) arr[13].push(item);
 
             return arr;
         }, [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]);
@@ -442,9 +443,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         } else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
 
-            if (rawItemData.type.startsWith("starship")) {
+            if (SFRPG.starshipDefinitionItemTypes.includes(rawItemData.type)) {
                 return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
-            } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(rawItemData.type)) {
+            } else if (this.acceptedItemTypes.includes(rawItemData.type)) {
                 return this.processDroppedData(event, data);
             } else {
                 ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
@@ -455,9 +456,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             const acceptedItems = [];
             const rejectedItems = [];
             for (const item of data.items) {
-                if (item.type.startsWith("starship")) {
+                if (SFRPG.starshipDefinitionItemTypes.includes(item.type)) {
                     starshipItems.push(item);
-                } else if (ActorSheetSFRPGStarship.AcceptedEquipment.includes(item.type)) {
+                } else if (this.acceptedItemTypes.includes(item.type)) {
                     acceptedItems.push(item);
                 } else {
                     rejectedItems.push(item);
@@ -497,7 +498,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
        const actor = this.actor;
        if (data.pack) {
            const pack = game.packs.get(data.pack);
-           if (pack.metadata.entity !== "Item") return;
+           if (pack.documentName !== "Item") return;
            itemData = await pack.getDocument(data.id);
        } else if (data.data) {
            let sameActor = data.actorId === actor.id;

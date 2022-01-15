@@ -57,7 +57,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const modifiers = this.getAllModifiers();
 
         const items = this.items;
-        const armor = items.find(item => item.type === "equipment" && item.data.data.equipped);
+        const armors = items.filter(item => item.type === "equipment" && item.data.data.equipped);
         const shields = items.filter(item => item.type === "shield" && item.data.data.equipped);
         const weapons = items.filter(item => item.type === "weapon" && item.data.data.equipped);
         const races = items.filter(item => item.type === "race");
@@ -76,7 +76,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             data: this.data.data,
             flags: this.data.flags,
             items: this.items,
-            armor,
+            armors,
             shields,
             weapons,
             races,
@@ -181,25 +181,34 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         let consumeSpellSlot = true;
         let selectedSlot = null;
+        let processContext = null;
         if (configureDialog) {
             try {
                 const dialogResponse = await SpellCastDialog.create(this, item);
                 const slotIndex = parseInt(dialogResponse.formData.get("level"));
                 consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
                 selectedSlot = dialogResponse.spellLevels[slotIndex];
-                spellLevel = parseInt(selectedSlot.level);
+                spellLevel = parseInt(selectedSlot?.level || item.data.data.level);
 
                 if (spellLevel !== item.data.data.level && item.data.data.level > spellLevel) {
                     const newItemData = duplicate(item.data);
                     newItemData.data.level = spellLevel;
 
+                    if (this.type === "npc" || this.type === "npc2") {
+                        if (newItemData.data.save.dc && !Number.isNaN(newItemData.data.save.dc)) {
+                            newItemData.data.save.dc = newItemData.data.save.dc - item.data.data.level + spellLevel;
+                        }
+                    }
+
                     item = new ItemSFRPG(newItemData, {parent: this});
-                    
-                    // Run automation to ensure save DCs are correct.
-                    item.prepareData();
-                    const processContext = await item.processData();
-                    if (processContext.fact.promises) {
-                        await Promise.all(processContext.fact.promises);
+                }
+
+                // Run automation to ensure save DCs are correct.
+                item.prepareData();
+                if (item.data.data.actionType && item.data.data.save.type) {
+                    processContext = await item.processData();
+                    if (processContext) {
+                        processContext = Promise.all(processContext.fact.promises);
                     }
                 }
             } catch (error) {
@@ -208,22 +217,44 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         }
 
-        if (consumeSpellSlot && (spellLevel > 0)) {
-
-            if (selectedSlot) {
-                if (selectedSlot.source === "general") {
-                    await this.update({
-                        [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(this.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+        if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
+            const actor = this;
+            if (selectedSlot.source === "general") {
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+                        });
                     });
                 } else {
-                    const selectedLevel = selectedSlot.level;
-                    const selectedClass = selectedSlot.source;
+                    processContext = actor.update({
+                        [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+                    });
+                }
+            } else {
+                const selectedLevel = selectedSlot.level;
+                const selectedClass = selectedSlot.source;
 
-                    await this.update({
-                        [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(this.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                        });
+                    });
+                } else {
+                    processContext = actor.update({
+                        [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
                     });
                 }
             }
+        }
+
+        if (processContext) {
+            processContext.then(function(result) {
+                return item.roll();
+            });
+            
+            return processContext;
         }
 
         return item.roll();
@@ -240,7 +271,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         // use this to delete any unwanted skills.
 
         const skill = duplicate(this.data.data.skills[skillId]);
-        const isNpc = this.data.type === "npc";
+        const isNpc = this.data.type === "npc" || this.data.type === "npc2";
         const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
@@ -542,20 +573,42 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @returns {Promise<any[]>} 
      */
     static async applyDamageFromContextMenu(html, multiplier) {
-        const diceTotal = html.find('.sfrpg.dice-roll').data("sfrpgDiceTotal");
-        const totalDamageDealt = Math.floor((diceTotal ?? Math.floor(parseFloat(html.find('.dice-total').text()))) * multiplier);
-        const isHealing = (multiplier < 0);
+        if (html?.length < 1) {
+            return null;
+        }
+
+        const diceRollElement = html.find('.sfrpg.dice-roll');
+        const diceTotal = diceRollElement.data("sfrpgDiceTotal");
+        const isCritical = diceRollElement.data("sfrpgIsCritical") || false;
+        const starshipWeaponProperties = diceRollElement.data("sfrpgStarshipWeaponProperties");
+
+        const damage = {
+            amount: Math.floor((diceTotal ?? Math.floor(parseFloat(html.find('.dice-total').text())))),
+            isHealing: (multiplier < 0),
+            roll: null,
+            types: ""
+        };
+
+        if (starshipWeaponProperties) {
+            damage.starshipWeaponProperties = starshipWeaponProperties;
+        }
+
+        const chatMessageId = html[0].dataset?.messageId;
+        const chatMessage = game.messages.get(chatMessageId);
+        if (chatMessage) {
+            damage.roll = chatMessage.roll;
+
+            const chatDamageData = chatMessage.data.flags.damage;
+            if (chatDamageData) {
+                damage.amount = chatDamageData.amount;
+                damage.types = chatDamageData.types;
+            }
+        }
+
         const promises = [];
         for (const controlledToken of canvas.tokens?.controlled) {
-            let promise = null;
             const actor = controlledToken.actor;
-            if (actor.data.type === "starship") {
-                promise = actor._applyStarshipDamage(html, totalDamageDealt, isHealing);
-            } else if (actor.data.type === "vehicle") {
-                promise = actor._applyVehicleDamage(html, totalDamageDealt, isHealing);
-            } else {
-                promise = actor._applyActorDamage(html, totalDamageDealt, isHealing);
-            }
+            const promise = actor.applyDamage(damage.amount, multiplier, isCritical, damage.types || starshipWeaponProperties, damage.roll, html)
 
             if (promise) {
                 promises.push(promise);
@@ -568,48 +621,82 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     /**
      * Applies damage to the Actor.
      * 
-     * TODO: This isn't ready for mainstream use yet. The method signiture is probably gonna
-     * need to change, and the way it functions will most definetly change as well. So, I'm 
-     * basically putting this here as a stub that has some limited functionality until I can
-     * get some other changes in place to allow this to work the way most people would expect
-     * it to work. So, don't mention that this method exists for the time being ;) Consider it
-     * an easter egg.
-     * 
-     * @param {Roll} roll The Roll object representing the roll data.
-     * @param {Number} multiplier A number that is used to change the damage value.
+     * @param {Number} amount The amount of damage dealt to the actor
+     * @param {Number} multiplier (Optional, default 1) A number that is used to change the damage value. Set to negative for healing.
+     * @param {Bool} isCritical (Optional, default false) A boolean value indicating if this damage was critical damage.
+     * @param {String} types (Optional, default empty) A comma separated string of applied damage types, e.g. f,p
+     * @param {Roll} roll (Optional, default null) The roll object that was used to generate this damage.
+     * @param {JQuery} html (Optional, default null) JQuery object of the HTML element this damage is sourced from, typically the chat card.
      */
-    async applyDamage(roll, multiplier) {
-        const totalDamageDealt = roll.total;
-        const isHealing = (multiplier < 0);
+    async applyDamage(amount, multiplier = 1, isCritical = false, types = "", roll = null, html = null) {
+        const damage = {
+            amount: Math.floor(amount * multiplier),
+            html: html,
+            isCritical: isCritical,
+            isHealing: (multiplier < 0),
+            roll: roll,
+            types: types
+        };
 
         switch (this.data.type) {
             case 'starship':
-                await this._applyStarshipDamage(roll, totalDamageDealt, isHealing);
-                break;
+                return this._applyStarshipDamage(damage);
             case 'vehicle':
-                await this._applyVehicleDamage(roll, totalDamageDealt, isHealing);
-                break;
+                return this._applyVehicleDamage(damage);
             default:
-                await this._applyActorDamage(roll, totalDamageDealt, isHealing);
-                break;
+                return this._applyActorDamage(damage);
         }
     }
 
     /**
      * Apply damage to an Actor.
      * 
-     * @param {JQuery|Roll} htmlOrRoll The html for the chat card or a Roll object
-     * @param {number} totalDamageDealt The total damage being dealt
-     * @param {boolean} isHealing Is this actualy a healing affect
+     * @param {object} damage A damage object, containing amount, html, isCritical, isHealing, roll, and types.
      * @returns A Promise that resolves to the updated Actor
      */
-    async _applyActorDamage(htmlOrRoll, totalDamageDealt, isHealing) {
-        let remainingUndealtDamage = totalDamageDealt;
+    async _applyActorDamage(damage) {
         const actorUpdate = {};
         const actorData = foundry.utils.duplicate(this.data.data);
+
+        const damagesPerType = [];
+        const damageTypes = damage.types.split(',');
+        for (const damageType of damageTypes) {
+            if (this.isImmuneToDamageType(damageType)) {
+                continue;
+            }
+
+            let totalAppliedDamage = damage.amount / damageTypes.length;
+
+            if (this.isVulnerableToDamageType(damageType)) {
+                totalAppliedDamage = totalAppliedDamage * 2;
+            }
+
+            const resistance = this.getResistanceForDamageType(damageType);
+            totalAppliedDamage -= resistance;
+
+            totalAppliedDamage = Math.max(0, totalAppliedDamage);
+
+            damagesPerType.push(totalAppliedDamage);
+        }
+
+        const damageRoundingAdvantage = game.settings.get("sfrpg", "damageRoundingAdvantage");
+        let bFloorNext = (damageRoundingAdvantage === "defender");
+        let remainingUndealtDamage = 0;
+        for (const damage of damagesPerType) {
+            if (damage % 1 === 0) {
+                remainingUndealtDamage += damage;
+            } else {
+                if (bFloorNext) {
+                    remainingUndealtDamage += Math.floor(damage);
+                } else {
+                    remainingUndealtDamage += Math.ceil(damage);
+                }
+                bFloorNext = !bFloorNext;
+            }
+        }
         
         /** Update temp hitpoints */
-        if (!isHealing) {
+        if (!damage.isHealing) {
             const originalTempHP = parseInt(actorData.attributes.hp.temp) || 0;
             let newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
             remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
@@ -623,7 +710,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         /** Update stamina points */
-        if (!isHealing) {
+        if (!damage.isHealing) {
             const originalSP = actorData.attributes.sp.value;
             const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actorData.attributes.sp.max);
             remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
@@ -650,7 +737,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /**
-     * Checks whether an acotr is immune to a specific damage type.
+     * Checks whether an actor is immune to a specific damage type.
      * 
      * @param {string} damageType The damage type to evaluate.
      * @returns True if the actor is immune to this damage type
@@ -660,16 +747,40 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     /**
-     * Apply any damage vulnerabilites to the supplied damage type.
+     * Checks whether an actor is vulnerable to a specific damage type.
      * 
-     * @param {number} damageBeingApplied The damage of the supplied type that will be increased if this actor has a vulnerability to it.
-     * @param {string} damageType The damage type being evaluated.
-     * @returns The amount of damage being added by the vulnerability.
+     * @param {string} damageType The damage type to evaluate.
+     * @returns True if the actor is immune to this damage type
      */
-    _applyVulnerabilities(damageBeingApplied, damageType) {
-        if (this.data.data.traits.dv.value.includes(damageType))
-            return Math.floor(damageBeingApplied * 0.5);
-            
+    isVulnerableToDamageType(damageType) {
+        const mappedVulnerabilities = this.data.data.traits.dv.value.map(x => SFRPG.damageTypeToAcronym[x.toLowerCase()].toLowerCase());
+        return mappedVulnerabilities.includes(damageType);
+    }
+
+    getResistanceForDamageType(damageType) {
+        const kineticDamageTypes = ['b', 'p', 's'];
+        if (kineticDamageTypes.includes(damageType)) {
+            const damageReduction = Number(this.data.data.traits.damageReduction.value);
+            if (!Number.isNaN(damageReduction) && damageReduction > 0) {
+                return damageReduction;
+            }
+        }
+
+        const energyDamageTypes = ['a', 'c', 'e', 'f', 'so'];
+        if (energyDamageTypes.includes(damageType)) {
+            for (const resistanceEntry of this.data.data.traits.dr.value) {
+                for (const [resistanceKey, resistanceValue] of Object.entries(resistanceEntry)) {
+                    const resistanceLabel = SFRPG.damageTypeToAcronym[resistanceKey.toLowerCase()].toLowerCase();
+                    if (resistanceLabel === damageType) {
+                        const resistanceForType = Number(resistanceValue);
+                        if (!Number.isNaN(resistanceForType) && resistanceForType > 0) {
+                            return resistanceForType;
+                        }
+                    }
+                }
+            }
+        }
+
         return 0;
     }
 
@@ -728,16 +839,28 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             return Math.min(damageBeingApplied, reducedDamage);
         }
 
-        return 0;
+        return null;
     }
 
-    async _applyVehicleDamage(roll, totalDamageDealt, isHealing) {
+    /**
+     * Apply damage to a Vehicle Actor.
+     * 
+     * @param {object} damage A damage object, containing amount, html, isHealing, roll, and types.
+     * @returns A Promise that resolves to the updated Vehicle
+     */
+    async _applyVehicleDamage(damage) {
         ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
         return null;
     }
 
-    async _applyStarshipDamage(roll, totalDamageDealt, isHealing) {
-        if (isHealing) {
+    /**
+     * Apply damage to a Starship Actor.
+     * 
+     * @param {object} damage A damage object, containing amount, html, isHealing, roll, and types.
+     * @returns A Promise that resolves to the updated Starship
+     */
+    async _applyStarshipDamage(damage) {
+        if (damage.isHealing) {
             ui.notifications.warn("Cannot currently apply healing to starships using the context menu.");
             return null;
         }
@@ -767,7 +890,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         let targetKey = null;
         let originalData = null;
-        let newData = null;
 
         const selectedQuadrant = results.result.quadrant;
         const indexOfQuadrant = options.indexOf(selectedQuadrant);
@@ -789,9 +911,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         let actorUpdate = {};
-        newData = duplicate(originalData);
+        const newData = duplicate(originalData);
 
-        let remainingUndealtDamage = totalDamageDealt;
+        let remainingUndealtDamage = damage.amount;
         const hasDeflectorShields = this.data.data.hasDeflectorShields;
         const hasAblativeArmor = this.data.data.hasAblativeArmor;
         
@@ -799,9 +921,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (originalData.shields.value > 0) {
                 // Deflector shields are twice as effective against attacks from melee, ramming, and ripper starship weapons, so the starship ignores double the amount of damage from such attacks.
                 // TODO: Any attack that would ignore a fraction or all of a target’s shields instead reduces the amount of damage the deflector shields ignore by an equal amount, rounded in the defender’s favor (e.g., deflector shields with a defense value of 5 would reduce damage from a burrowing weapon [Pact Worlds 153] by 3)
-                const isMelee = roll.find('#melee').length > 0;
-                const isRamming = roll.find('#ramming').length > 0;
-                const isRipper = roll.find('#ripper').length > 0;
+                const isMelee = damage.types.includes('melee');
+                const isRamming = damage.types.includes('ramming');
+                const isRipper = damage.types.includes('ripper');
 
                 const shieldMultiplier = (isMelee || isRamming || isRipper) ? 2 : 1;
                 remainingUndealtDamage = Math.max(0, remainingUndealtDamage - (originalData.shields.value * shieldMultiplier));
@@ -828,23 +950,22 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 deflectorShieldDamage = 1;
 
                 // Weapons with the array or line special property that damage a starship’s Hull Points overwhelm its deflector shields, reducing their defense value in that quadrant by 2
-                if (roll.find('#array').length > 0 || roll.find('#line').length > 0) {
+                if (damage.types.includes('array') || damage.types.includes('line')) {
                     deflectorShieldDamage = 2;
                 }
 
                 // TODO: ..whereas vortex weapons that deal Hull Point damage reduce the target’s deflector shields’ defense value in each quadrant by 1d4.
-                else if (roll.find('#vortex').length > 0) {
+                else if (damage.types.includes('vortex')) {
                 }
             }
 
             // Any successful attack by a weapon with the buster special property (or another special property that deals reduced damage to Hull Points) reduces the deflector shields’ defense value in the struck quadrant by 2, whether or not the attack damaged the target’s Hull Points.
-            if (roll.find('#buster').length > 0) {
+            if (damage.types.includes('buster')) {
                 deflectorShieldDamage = 2;
             }
 
             // When a gunnery check results in a natural 20, any decrease to the target’s deflector shield’s defense value from the attack is 1 greater.
-            const isCritical = roll.find('#critical').length > 0;
-            deflectorShieldDamage += isCritical ? 1 : 0;
+            deflectorShieldDamage += damage.isCritical ? 1 : 0;
 
             newData.shields.value = Math.max(0, newData.shields.value - deflectorShieldDamage);
         }
@@ -868,7 +989,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: this.name, crossedThresholds: crossedThresholds});
             ui.notifications.warn(warningMessage);
         }
-     
+
         const promise = this.update(actorUpdate);
         return promise;
     }
@@ -1187,10 +1308,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 }
 
-Hooks.on("afterClosureProcessed", (closureName, fact) => {
+Hooks.on("afterClosureProcessed", async (closureName, fact) => {
     if (closureName == "process-actors") {
-        for (const item of fact.actor.items) {
-            item.processData();
-        }
+        await fact.actor.processItemData();
     }
 });

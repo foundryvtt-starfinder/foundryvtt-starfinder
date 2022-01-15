@@ -1,0 +1,2729 @@
+{
+  "name": "Reptoid Host",
+  "type": "npc2",
+  "img": "icons/svg/mystery-man.svg",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 2,
+        "base": 2
+      },
+      "dex": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 5,
+        "base": 5
+      },
+      "con": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 1,
+        "base": 1
+      },
+      "int": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 1,
+        "base": 1
+      },
+      "wis": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 3,
+        "base": 3
+      },
+      "cha": {
+        "value": 10,
+        "min": 3,
+        "misc": 0,
+        "mod": 2,
+        "base": 2
+      }
+    },
+    "attributes": {
+      "eac": {
+        "min": 0,
+        "value": 18,
+        "tooltip": [],
+        "base": 18
+      },
+      "kac": {
+        "min": 0,
+        "value": 19,
+        "tooltip": [],
+        "base": 19
+      },
+      "cmd": {
+        "min": 0,
+        "value": 10,
+        "tooltip": []
+      },
+      "hp": {
+        "min": 0,
+        "max": 80,
+        "value": 80,
+        "temp": null,
+        "tempmax": null,
+        "tooltip": []
+      },
+      "sp": {
+        "min": 0,
+        "max": 0,
+        "value": 0,
+        "tooltip": []
+      },
+      "rp": {
+        "min": 0,
+        "max": 0,
+        "value": 0,
+        "tooltip": []
+      },
+      "init": {
+        "value": 7,
+        "bonus": 0,
+        "total": 7,
+        "tooltip": []
+      },
+      "fort": {
+        "value": 0,
+        "bonus": 5,
+        "misc": 0,
+        "tooltip": [],
+        "base": 5
+      },
+      "reflex": {
+        "value": 0,
+        "bonus": 8,
+        "misc": 0,
+        "tooltip": [],
+        "base": 8
+      },
+      "will": {
+        "value": 0,
+        "bonus": 9,
+        "misc": 0,
+        "tooltip": [],
+        "base": 9
+      },
+      "baseAttackBonus": {
+        "value": 0,
+        "rolledMods": [],
+        "tooltip": []
+      },
+      "bab": 0,
+      "arms": "2",
+      "space": "5",
+      "reach": "5",
+      "speed": {
+        "land": {
+          "base": 40
+        },
+        "flying": {
+          "base": 0,
+          "baseManeuverability": 0
+        },
+        "swimming": {
+          "base": 0
+        },
+        "burrowing": {
+          "base": 0
+        },
+        "climbing": {
+          "base": 0
+        },
+        "value": null,
+        "special": "",
+        "mainMovement": "land"
+      },
+      "keyability": "",
+      "spellcasting": ""
+    },
+    "details": {
+      "alignment": "N",
+      "race": "",
+      "class": "",
+      "biography": {
+        "value": "<h2>Dycepskian</h2>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Dycepskians are a mysterious species of fungus that only gain sentience when they infest sapient hosts, completely overwriting their unfortunate victim&rsquo;s mind. However, the dycepskian-infested host retains the original creature&rsquo;s memories and skills, making it difficult to notice the change.</span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">An infested host can be recognized by yellowish-green veins visible around the eyes, though most dycepskians take great pains to hide such signs.</span></p>",
+        "public": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.png",
+        "dateOfBirth": "",
+        "age": 0,
+        "height": "",
+        "weight": "",
+        "otherVisuals": ""
+      },
+      "type": "Humanoid",
+      "environment": "any",
+      "organization": "solitary, pair, or circle (3-8)",
+      "cr": 6,
+      "xp": {
+        "value": 10
+      },
+      "source": "AP #28 pg. 55",
+      "subtype": "Dycepskian, Reptoid, Shapechanger",
+      "raceAndGrafts": "",
+      "aura": ""
+    },
+    "skillpoints": {
+      "used": 0,
+      "max": 0,
+      "tooltip": []
+    },
+    "skills": {
+      "acr": {
+        "ability": "dex",
+        "min": 0,
+        "ranks": 19,
+        "value": 0,
+        "misc": 0,
+        "mod": 19,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "ath": {
+        "ability": "str",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "blu": {
+        "ability": "cha",
+        "min": 0,
+        "ranks": 19,
+        "value": 0,
+        "misc": 0,
+        "mod": 19,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "com": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "cul": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 14,
+        "value": 0,
+        "misc": 0,
+        "mod": 14,
+        "enabled": true,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "dip": {
+        "ability": "cha",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "dis": {
+        "ability": "cha",
+        "min": 0,
+        "ranks": 19,
+        "value": 0,
+        "misc": 0,
+        "mod": 19,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "eng": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "int": {
+        "ability": "cha",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "lsc": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "med": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "mys": {
+        "ability": "wis",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "per": {
+        "ability": "wis",
+        "min": 0,
+        "ranks": 14,
+        "value": 0,
+        "misc": 0,
+        "mod": 14,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "phs": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false
+      },
+      "pil": {
+        "ability": "dex",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "pro": {
+        "ability": "int",
+        "min": 0,
+        "ranks": 0,
+        "value": 3,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": false,
+        "subname": ""
+      },
+      "sen": {
+        "ability": "wis",
+        "min": 0,
+        "ranks": 14,
+        "value": 0,
+        "misc": 0,
+        "mod": 14,
+        "enabled": true,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      },
+      "sle": {
+        "ability": "dex",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": true,
+        "hasArmorCheckPenalty": true
+      },
+      "ste": {
+        "ability": "dex",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": true
+      },
+      "sur": {
+        "ability": "wis",
+        "min": 0,
+        "ranks": 0,
+        "value": 0,
+        "misc": 0,
+        "mod": 0,
+        "enabled": false,
+        "isTrainedOnly": false,
+        "hasArmorCheckPenalty": false
+      }
+    },
+    "traits": {
+      "size": "medium",
+      "senses": "low-light vision",
+      "languages": {
+        "value": [
+          "common"
+        ],
+        "custom": "Reptoid"
+      },
+      "di": {
+        "value": [],
+        "custom": "Mind-Affecting Effects"
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": "Vulnerable To Remove Affliction"
+      },
+      "ci": {
+        "value": [],
+        "custom": "Mind-Affecting Effects"
+      },
+      "damageReduction": {
+        "value": 0,
+        "negatedBy": ""
+      },
+      "sr": 0
+    },
+    "currency": {
+      "credit": 0,
+      "upb": 0
+    },
+    "spells": {
+      "spell0": {
+        "value": 0,
+        "max": 0,
+        "perClass": {}
+      },
+      "spell1": {
+        "value": 0,
+        "max": 0,
+        "perClass": {}
+      },
+      "spell2": {
+        "value": 0,
+        "max": 0,
+        "perClass": {}
+      },
+      "spell3": {
+        "value": 0,
+        "max": 0,
+        "perClass": {}
+      },
+      "spell4": {
+        "value": 0,
+        "max": 0,
+        "perClass": {}
+      },
+      "spell5": {
+        "value": 0,
+        "max": 0,
+        "perClass": {}
+      },
+      "spell6": {
+        "value": 0,
+        "max": 0,
+        "perClass": {}
+      }
+    },
+    "modifiers": [],
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
+    "counterClasses": {
+      "values": {}
+    }
+  },
+  "token": {
+    "bar2": {
+      "attribute": "attributes.rp"
+    },
+    "displayBars": 40,
+    "displayName": 40,
+    "width": 1,
+    "height": 1,
+    "name": "Reptoid Host",
+    "actorLink": false,
+    "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightAlpha": 0.25,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "disposition": -1,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "flags": {},
+    "randomImg": false,
+    "img": "icons/svg/mystery-man.svg"
+  },
+  "items": [
+    {
+      "_id": "8GMTk2Jr6paEs0Nb",
+      "name": "Evasion (Ex) (Operative)",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/classes/evasion.png",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"uf8ADOAeBrtUkPVl\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Operative</a></p>\n        <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">If you succeed at a Reflex save against an effect that normally has a partial effect on a successful save, you instead suffer no effect. You gain this benefit only when unencumbered and wearing light armor or no armor, and you lose the benefit when you are helpless or otherwise unable to move.</span></p>",
+          "unidentified": ""
+        },
+        "source": "Operative",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "2nd Level",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "h4fQstF1mBuJiV1P",
+      "name": "Claw",
+      "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "quantity": 1,
+        "bulk": "L",
+        "price": 0,
+        "quantityPerPack": 1,
+        "level": 1,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 6,
+            "max": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "ac": {
+            "value": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": 0,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": 12,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d6 +8",
+              "types": {
+                "slashing": true
+              },
+              "operator": "and"
+            }
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "ammunitionType": "",
+        "capacity": {
+          "value": 0,
+          "max": 0
+        },
+        "usage": {
+          "value": 0,
+          "per": ""
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 0,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            }
+          ],
+          "isOpen": true,
+          "includeContentsInWealthCalculation": 1
+        },
+        "weaponType": "basicM",
+        "weaponCategory": "uncategorized",
+        "special": "",
+        "properties": {},
+        "proficient": true
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "FH4vrARkMPzWAxQC",
+      "name": "Knife, survival",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>These light blades can be used for both mundane tasks and combat. A typical survival knife has a fixed, single-edged, carbonsteel or ceramic blade and is treated against corrosion. Tactical knives have large, double-edged blades, often with a section of serrated blade near the haft, and they come in both fixed and folding-blade designs; users may prefer one style or the other, but the two are identical in terms of price, weight, and damage dealt.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 171",
+        "type": "",
+        "quantity": 1,
+        "bulk": "L",
+        "price": 95,
+        "quantityPerPack": 1,
+        "level": 1,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 18,
+            "max": "18"
+          },
+          "hardness": {
+            "value": "7"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 20,
+          "units": "ft",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": 14,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d4 +8",
+              "types": {
+                "slashing": true
+              },
+              "operator": "and"
+            }
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "ammunitionType": "",
+        "capacity": {
+          "value": null,
+          "max": null
+        },
+        "usage": {
+          "value": null,
+          "per": ""
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 1,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            }
+          ],
+          "isOpen": true,
+          "includeContentsInWealthCalculation": 1
+        },
+        "weaponType": "basicM",
+        "weaponCategory": "uncategorized",
+        "special": "",
+        "properties": {
+          "two": false,
+          "amm": false,
+          "one": true,
+          "analog": true,
+          "archaic": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": false,
+          "injection": false,
+          "line": false,
+          "nonlethal": false,
+          "operative": true,
+          "penetrating": false,
+          "powered": false,
+          "qreload": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "thrown": true,
+          "trip": false,
+          "unwieldy": false,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "radioactive": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false,
+          "hybrid": false,
+          "regrowth": false,
+          "unbalancing": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "IlTD2MYEqZSDljKl",
+      "name": "Laser pistol, corona",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>The laser pistol is possibly the most common small arm used by explorers, guards, mercenaries, and traders. Laser pistols are light and reliable, yet they still deal a respectable amount of damage.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 173",
+        "type": "",
+        "quantity": 1,
+        "bulk": "L",
+        "price": 4270,
+        "quantityPerPack": 1,
+        "level": 6,
+        "attuned": false,
+        "equipped": true,
+        "equippable": true,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 33,
+            "max": "33"
+          },
+          "hardness": {
+            "value": "17"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 90,
+          "units": "ft",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "",
+        "actionType": "rwak",
+        "attackBonus": 14,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": "Burn 1d4"
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2d4 +6",
+              "types": {
+                "fire": true
+              },
+              "operator": "and"
+            }
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "ammunitionType": "",
+        "capacity": {
+          "value": 20,
+          "max": 20
+        },
+        "usage": {
+          "value": 1,
+          "per": "shot"
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 6,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "subtype": "",
+              "amount": 1,
+              "acceptsType": [
+                "goods"
+              ],
+              "weightMultiplier": 1,
+              "weightProperty": "",
+              "affectsEncumbrance": true
+            },
+            {
+              "type": "slot",
+              "subtype": "ammunitionSlot",
+              "amount": 1,
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": ""
+            }
+          ],
+          "isOpen": true,
+          "includeContentsInWealthCalculation": 1
+        },
+        "weaponType": "smallA",
+        "weaponCategory": "laser",
+        "special": "",
+        "properties": {
+          "one": true,
+          "two": false,
+          "amm": false,
+          "analog": false,
+          "archaic": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": false,
+          "injection": false,
+          "line": false,
+          "nonlethal": false,
+          "operative": false,
+          "penetrating": false,
+          "powered": false,
+          "qreload": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "thrown": false,
+          "trip": false,
+          "unwieldy": false,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "radioactive": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "unbalancing": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "3nzRucUHOPAc6VaW",
+      "name": "Debilitating Trick (Ex)",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/classes/debilitating_trick.png",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>&gt;@Compendium[sfrpg.classes.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">When you hit an enemy with a trick attack, you can make the creature @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} or off-target until the beginning of your next turn. You might learn exploits that grant you additional options for your debilitating trick, but you can select only one option each time you hit with a trick attack.</span></p>",
+          "unidentified": ""
+        },
+        "source": "Operative",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "4th Level",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200000,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "RLlpVlo5mukHwU1q",
+      "name": "Change Shape",
+      "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>(SU)</p>\n<p>The creature has the ability to assume the appearance of a specific creature or type of creature, but it retains most of its own physical qualities. If the form assumed has any of the following abilities, the creature gains them while in that form: @Compendium[sfrpg.universal-creature-rules.4HvnYWLhFBiuvDxD]{Blindsight} (scent), @Compendium[sfrpg.universal-creature-rules.3Yg98sD5UymVymF9]{Darkvision}, @Compendium[sfrpg.universal-creature-rules.NRtNybzTZrVjbOYv]{Low Light Vision}, and swim 30 feet. The creature can retain its own breathing ability, or it can assume the ability to breathe in any environment the assumed shape can breathe in (including the no breath ability, which enables it to survive in the vacuum of space). If the ability does not specify what the creature can change shape into, it can assume the form of any creature of the humanoid type, but it can’t mimic a specific humanoid. Change shape grants a +10 bonus to Disguise checks to appear as a creature of the type and subtype of the new form, and the DC of the creature’s Disguise check is not modified as a result of altering major features or disguising itself as a different race or creature type.</p>\n<p>A creature can assume a form that is one size category smaller or larger than its original form; it becomes that size. Unless otherwise stated, it can remain in an alternate form indefinitely. Some creatures can transform into unique forms with special modifiers and abilities. These creatures adjust their ability scores, as noted in their description.</p>\n<hr>\n<p>&nbsp;</p>",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 400000,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "4LxU3KqZD7y02R4w",
+      "name": "Fungal Mass Mind (Ex)",
+      "type": "feat",
+      "img": "icons/svg/item-bag.svg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "A creature with the dycepskian subtype can communicate telepathically with another such creature within 100 feet, even if they don’t share a common language. In addition, if one creature with the dycepskian subtype is aware of a combatant, all members of the fungal mass mind within 100 feet are aware of it, and no member of the fungal mass mind can be surprised unless all members within range are surprised.",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": 0,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 725000,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "ncrtsTJjjdD57y7D",
+      "name": "Specialization",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/classes/specialization.png",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"uf8ADOAeBrtUkPVl\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Operative</a></p>\n        <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">Your specialization represents your primary area of expertise. Pick one specialization upon taking your 1st level of the operative class. Once made, this choice cannot be changed. Descriptions of the specializations appear on page 94 <em>(Below).</em> Your specialization grants you the Skill Focus feat (see page 161) in your specialization’s associated skills, and you gain a free skill rank in each of those skills at each operative level (this does not allow you to exceed the maximum number of skill ranks in a single skill). </span></p>\n        <h2 class=\"title\">Specialization Exploit - 5th Level</h2>\n        <p>You gain your specialization’s listed exploit as a bonus operative exploit, even if you don’t meet the prerequisites.</p>\n        <h2 class=\"title\">Specialization Skill Mastery - 7th Level</h2>\n        <p>You become so confident in certain skills that you can use them reliably even under adverse conditions. When attempting a skill check with a skill in which you have the Skill Focus feat, you can take 10 even if stress or distractions would normally prevent you from doing so.</p>\n        <h2 class=\"title\">Specialization Power - 11th Level</h2>\n        <p>&nbsp;You gain a special power depending on the specialization you chose at 1st level.</p>\n        <p>&nbsp;</p>\n        <h2>Specializations</h2>\n        <p><a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"3zkJILkaP6Ua3YWe\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Daredevil</a></p>\n        <p><a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"zKnRX8ZuVhyvC29H\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Detective</a></p>\n        <p><a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"M8fM2cZz8pTEN6wP\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Explorer</a></p>\n<p><a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"csatQ1lLr5J8lcpq\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Gadgeteer</a></p>\n                <p><a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"nJxXUlTGdZ7Lc5ms\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Ghost</a></p>\n        <p><a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"SWNQ1uqSQbAJlVng\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Hacker</a></p>\n        <p><a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"RmU5en0JokeQXJyP\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Spy</a></p>\n        <p><a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"7jvvARPoLgBv3xBA\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Thief</a></p>",
+          "unidentified": ""
+        },
+        "source": "Operative",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "1st Level",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 687500,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "n09Coz85X6zZzV9d",
+      "name": "Stationwear, elite",
+      "type": "equipment",
+      "img": "systems/sfrpg/icons/equipment/armor/stationwear-elite.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Many types of reinforced clothing afford protection without sacrificing comfort or fashion. The prevalence of this kind of light armor on @Compendium[sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station} has led to the colloquial term “stationwear.” Stationwear ranges in style from casual wear to business suits and more formal garb. The usual @Compendium[sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections} of armor are concealed in the design of these outfits. The grades of armor—business, casual, elite, and flight suit—refer to the quality of the garments, not the style.&nbsp;</span></p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 197",
+        "type": "",
+        "quantity": 1,
+        "bulk": "L",
+        "price": 4100,
+        "quantityPerPack": 1,
+        "level": 6,
+        "attuned": false,
+        "equipped": false,
+        "equippable": false,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 33,
+            "max": "33"
+          },
+          "hardness": {
+            "value": "17"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "ammunitionType": "",
+        "capacity": {
+          "value": 0,
+          "max": 0
+        },
+        "usage": {
+          "value": 0,
+          "per": ""
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "armorUpgrade",
+              "amount": 0,
+              "acceptsType": [
+                "upgrade",
+                "weapon"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "slots"
+            }
+          ],
+          "isOpen": true,
+          "includeContentsInWealthCalculation": 1
+        },
+        "armor": {
+          "type": "light",
+          "eac": 4,
+          "kac": 5,
+          "dex": 7,
+          "acp": 0,
+          "speedAdjust": 0
+        },
+        "strength": 0,
+        "speed": "",
+        "size": "",
+        "reach": "",
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "RhkublKOpAQLiP0W",
+      "name": "Laser pistol, corona",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>The laser pistol is possibly the most common small arm used by explorers, guards, mercenaries, and traders. Laser pistols are light and reliable, yet they still deal a respectable amount of damage.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 173",
+        "type": "",
+        "quantity": 1,
+        "bulk": "L",
+        "price": 4270,
+        "quantityPerPack": 1,
+        "level": 6,
+        "attuned": false,
+        "equipped": false,
+        "equippable": false,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 33,
+            "max": "33"
+          },
+          "hardness": {
+            "value": "17"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 90,
+          "units": "ft",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "dex",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": "Burn 1d4"
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2d4",
+              "types": {
+                "fire": true
+              },
+              "operator": ""
+            }
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "ammunitionType": "",
+        "capacity": {
+          "value": 20,
+          "max": 20
+        },
+        "usage": {
+          "value": 1,
+          "per": "shot"
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 6,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "subtype": "",
+              "amount": 1,
+              "acceptsType": [
+                "goods"
+              ],
+              "weightMultiplier": 1,
+              "weightProperty": "",
+              "affectsEncumbrance": true
+            },
+            {
+              "type": "slot",
+              "subtype": "ammunitionSlot",
+              "amount": 1,
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": ""
+            }
+          ],
+          "isOpen": true,
+          "includeContentsInWealthCalculation": 1
+        },
+        "weaponType": "smallA",
+        "weaponCategory": "laser",
+        "special": "",
+        "properties": {
+          "one": true,
+          "two": false,
+          "amm": false,
+          "analog": false,
+          "archaic": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": false,
+          "injection": false,
+          "line": false,
+          "nonlethal": false,
+          "operative": false,
+          "penetrating": false,
+          "powered": false,
+          "qreload": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "thrown": false,
+          "trip": false,
+          "unwieldy": false,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "radioactive": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "unbalancing": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "OzITQER71EM7Ufhn",
+      "name": "Battery",
+      "type": "ammunition",
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 20</p>",
+          "unidentified": ""
+        },
+        "source": "Core Rulebook",
+        "type": "",
+        "quantity": "2",
+        "bulk": "-",
+        "price": 60,
+        "quantityPerPack": 1,
+        "level": 1,
+        "attuned": false,
+        "equipped": false,
+        "equippable": false,
+        "identified": true,
+        "attributes": {
+          "sturdy": false,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 6,
+            "max": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "ac": {
+            "value": ""
+          }
+        },
+        "ammunitionType": "charge",
+        "useCapacity": true,
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "damage": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "r84H3hPohLQ1aq7F",
+      "name": "Knife, survival",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.jpg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>These light blades can be used for both mundane tasks and combat. A typical survival knife has a fixed, single-edged, carbonsteel or ceramic blade and is treated against corrosion. Tactical knives have large, double-edged blades, often with a section of serrated blade near the haft, and they come in both fixed and folding-blade designs; users may prefer one style or the other, but the two are identical in terms of price, weight, and damage dealt.</p>",
+          "unidentified": ""
+        },
+        "source": "CRB pg. 171",
+        "type": "",
+        "quantity": 1,
+        "bulk": "L",
+        "price": 95,
+        "quantityPerPack": 1,
+        "level": 1,
+        "attuned": false,
+        "equipped": false,
+        "equippable": false,
+        "identified": true,
+        "attributes": {
+          "sturdy": true,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 18,
+            "max": "18"
+          },
+          "hardness": {
+            "value": "7"
+          },
+          "ac": {
+            "value": "5"
+          }
+        },
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": 20,
+          "units": "ft",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d4 + @abilities.str.mod",
+              "types": {
+                "slashing": true
+              },
+              "operator": ""
+            }
+          ]
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "descriptors": [],
+        "ammunitionType": "",
+        "capacity": {
+          "value": null,
+          "max": null
+        },
+        "usage": {
+          "value": null,
+          "per": ""
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "subtype": "fusion",
+              "amount": 1,
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "level"
+            }
+          ],
+          "isOpen": true,
+          "includeContentsInWealthCalculation": 1
+        },
+        "weaponType": "basicM",
+        "weaponCategory": "uncategorized",
+        "special": "",
+        "properties": {
+          "two": false,
+          "amm": false,
+          "one": true,
+          "analog": true,
+          "archaic": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "bright": false,
+          "disarm": false,
+          "entangle": false,
+          "explode": false,
+          "injection": false,
+          "line": false,
+          "nonlethal": false,
+          "operative": true,
+          "penetrating": false,
+          "powered": false,
+          "qreload": false,
+          "reach": false,
+          "sniper": false,
+          "stun": false,
+          "thrown": true,
+          "trip": false,
+          "unwieldy": false,
+          "aeon": false,
+          "antibiological": false,
+          "aurora": false,
+          "breach": false,
+          "breakdown": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "integrated": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "polarize": false,
+          "polymorphic": false,
+          "professional": false,
+          "punchGun": false,
+          "radioactive": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "underwater": false,
+          "variantBoost": false,
+          "wideLine": false,
+          "hybrid": false,
+          "regrowth": false,
+          "unbalancing": false
+        },
+        "proficient": true,
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "ayy9g28y37HLrLXS",
+      "name": "Vulnerable to Remove Affliction (Ex)",
+      "type": "feat",
+      "img": "icons/svg/item-bag.svg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "A dycepskian host who is targeted with remove affliction is staggered for 1d4 rounds (no caster level check required).",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": 0,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 900000,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "KXxWGnx17fSPDDi6",
+      "name": "Loot",
+      "type": "container",
+      "img": "icons/svg/item-bag.svg",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "type": "",
+        "quantity": 1,
+        "bulk": "L",
+        "price": 0,
+        "quantityPerPack": 1,
+        "level": 1,
+        "attuned": false,
+        "equipped": false,
+        "equippable": false,
+        "identified": true,
+        "attributes": {
+          "sturdy": false,
+          "customBuilt": false,
+          "size": "medium",
+          "dex": {
+            "mod": ""
+          },
+          "hp": {
+            "value": 6,
+            "max": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "ac": {
+            "value": ""
+          }
+        },
+        "modifiers": [],
+        "container": {
+          "contents": [
+            {
+              "id": "n09Coz85X6zZzV9d",
+              "index": 0
+            },
+            {
+              "id": "RhkublKOpAQLiP0W",
+              "index": 0
+            },
+            {
+              "id": "OzITQER71EM7Ufhn",
+              "index": 0
+            },
+            {
+              "id": "r84H3hPohLQ1aq7F",
+              "index": 0
+            }
+          ],
+          "storage": [
+            {
+              "type": "bulk",
+              "subtype": "",
+              "amount": 1000,
+              "acceptsType": [
+                "weapon",
+                "shield",
+                "equipment",
+                "goods",
+                "consumable",
+                "container",
+                "technological",
+                "fusion",
+                "upgrade",
+                "augmentation",
+                "magic",
+                "hybrid",
+                "ammunition",
+                "weaponAccessory"
+              ],
+              "affectsEncumbrance": true,
+              "weightProperty": "bulk"
+            }
+          ],
+          "isOpen": true,
+          "includeContentsInWealthCalculation": 1
+        },
+        "equippedBulkMultiplier": 1
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "n8xR8GVwJNnMsosw",
+      "name": "Master of Disguise [2/Day, 60 Minutes Or 6 Minutes, DC 16]",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/classes/master_of_disguise.png",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"On2ZrPJTe8FURsXY\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Operative Exploit</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl52_LabelName\">You can take on the appearances of other creatures and even specific individuals. This functions as the quick disguise exploit, but the duration increases to 10 minutes per operative level. Alternatively, for 1 minute per operative level, you can take on the appearance of a specific individual that you have seen before. If you have heard the individual talk and can speak her language, you can also modulate your speech to match hers. This disguise is so convincing that creatures familiar with the individual must succeed at a Will saving throw before they can attempt a Perception check to pierce the disguise. You must have the quick disguise exploit to learn this exploit.</span></p>",
+          "unidentified": ""
+        },
+        "source": "Operative Exploit",
+        "type": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "60 minutes or 6 minutes",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "none",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 2,
+          "max": 2,
+          "per": "day"
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "10th Level",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 600000,
+      "permission": {
+        "default": 0,
+        "QqVQDajn5ZN4kl25": 3,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "iSoH2UasiwrNKFw5",
+      "name": "Uncanny Shooter (Ex)",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/classes/uncanny_shooter.png",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"On2ZrPJTe8FURsXY\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Operative Exploit</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl40_LabelName\">Your ranged attacks with small arms do not provoke attacks of opportunity.</span></p>",
+          "unidentified": ""
+        },
+        "source": "Operative Exploit",
+        "type": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [],
+        "requirements": "6th Level",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 650000,
+      "permission": {
+        "default": 0,
+        "QqVQDajn5ZN4kl25": 3,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "PhUFVc8XUUWlv7dA",
+      "name": "Trick Attack (Ex)",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/classes/trick_attack.png",
+      "data": {
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>&gt; @Compendium[sfrpg.classes.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You can trick or startle a foe and then attack when she drops her guard. As a full action, you can move up to your speed. Whether or not you moved, you can then make an attack with a melee weapon with the operative special property or with any small arm. Just before making your attack, attempt a Bluff, Intimidate, or Stealth check (or a check associated with your specialization; see page 94) with a DC equal to 20 + your target&rsquo;s CR. If you succeed at the check, you deal 1d4 additional damage and the target is @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} against your attack. This damage increases to 1d8 at 3rd level, to 3d8 at 5th level, and by an additional 1d8 every 2 levels thereafter. You can&rsquo;t use this ability with a weapon that has the unwieldy special property or that requires a full action to make a single attack.</span></p>",
+          "unidentified": ""
+        },
+        "source": "Operative",
+        "type": "",
+        "activation": {
+          "type": "full",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "type": ""
+        },
+        "area": {
+          "value": null,
+          "units": "none",
+          "shape": "",
+          "effect": ""
+        },
+        "range": {
+          "value": null,
+          "units": "none",
+          "additional": "",
+          "per": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "isActive": null,
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "parts": [],
+          "effect": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "formula": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "descriptors": [],
+        "modifiers": [
+          {
+            "name": "Trick Attack",
+            "modifier": "3d8",
+            "type": "untyped",
+            "effectType": "all-damage",
+            "valueAffected": "",
+            "enabled": true,
+            "source": "",
+            "notes": "",
+            "modifierType": "formula",
+            "condition": "",
+            "subtab": "misc",
+            "max": 24,
+            "_id": "0ede350c-c689-4c5e-9ef9-a3686bab9747"
+          }
+        ],
+        "requirements": "1st Level",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "abilityMods": {
+          "parts": []
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "QqVQDajn5ZN4kl25": 3,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
+    }
+  ],
+  "effects": [],
+  "flags": {
+    "core": {}
+  },
+  "_id": "dCU37yGF8m07Ouih"
+}

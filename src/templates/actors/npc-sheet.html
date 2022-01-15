@@ -11,7 +11,7 @@
                 </h1>
 
                 <div class="charlevel">
-                    <div class="level">
+                    <div class="level" {{createTippy title="CR" subtitle="@details.cr"}}>
                         <label>CR</label>
                         <input name="data.details.cr" type="text" value="{{labels.cr}}" placeholder="1" />
                     </div>
@@ -191,6 +191,13 @@
 
                 {{!-- Traits --}}
                 {{> "systems/sfrpg/templates/actors/parts/actor-traits.html"}}
+
+                {{!-- Conversion --}}
+                <div class="counters flexrow">
+                    <div class="form-group">
+                        <button id="duplicate-new-style-npc" data-tippy-content="{{localize "SFRPG.NPCSheet.Interface.DuplicateNewStyle.ButtonTooltip"}}"><i class="fas fa-plus"></i>{{localize "SFRPG.NPCSheet.Interface.DuplicateNewStyle.Button"}}</button>
+                    </div>
+                </div>
             </section>
         </div>
 

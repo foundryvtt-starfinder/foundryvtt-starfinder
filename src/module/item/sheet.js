@@ -169,7 +169,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.category = this._getItemCategory();
 
         // Armor specific details
-        data.isPowerArmor = data.item.data.hasOwnProperty("armor") && data.item.data.armor.type === 'power';
+        data.isPowerArmor = data.item.data.data.hasOwnProperty("armor") && data.item.data.data.armor.type === 'power';
 
         // Action Details
         data.hasAttackRoll = this.item.hasAttack;
@@ -389,14 +389,14 @@ export class ItemSheetSFRPG extends ItemSheet {
         let damage = Object.entries(formData).filter(e => e[0].startsWith("data.damage.parts"));
         formData["data.damage.parts"] = damage.reduce((arr, entry) => {
             let [i, key, type] = entry[0].split(".").slice(3);
-            if (!arr[i]) arr[i] = { formula: "", types: {}, operator: "" };
+            if (!arr[i]) arr[i] = { name: "", formula: "", types: {} };
 
             switch (key) {
+                case 'name':
+                    arr[i].name = entry[1];
+                    break;
                 case 'formula':
                     arr[i].formula = entry[1];
-                    break;
-                case 'operator':
-                    arr[i].operator = entry[1];
                     break;
                 case 'types':
                     if (type) arr[i].types[type] = entry[1];
@@ -415,9 +415,6 @@ export class ItemSheetSFRPG extends ItemSheet {
             switch (key) {
                 case 'formula':
                     arr[i].formula = entry[1];
-                    break;
-                case 'operator':
-                    arr[i].operator = entry[1];
                     break;
                 case 'types':
                     if (type) arr[i].types[type] = entry[1];
@@ -524,7 +521,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             const damage = this.item.data.data.damage;
             return this.item.update({
                 "data.damage.parts": damage.parts.concat([
-                    { formula: "", types: {}, operator: "" }
+                    { name: "", formula: "", types: {} }
                 ])
             });
         }

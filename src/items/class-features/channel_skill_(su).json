@@ -8,7 +8,7 @@
   "type": "feat",
   "data": {
     "description": {
-      "value": "<p>&gt;@Compendium[sfrpg.classes.bItuvukGHbObTApr]{Mystic}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You draw strange feelings, instincts, knowledge, and urges from your connection, augmenting your prowess in certain tasks. Each connection has two skills associated with it. You gain a +1 insight bonus to skill checks with your connection’s associated skills. This bonus increases by 1 at 5th level and every 3 levels thereafter.</span></p>",
+      "value": "<p>&gt;@Compendium[sfrpg.classes.bItuvukGHbObTApr]{Mystic}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You draw strange feelings, instincts, knowledge, and urges from your connection, augmenting your prowess in certain tasks. Each connection has two skills associated with it. You gain a +1 insight bonus to skill checks with your connection&rsquo;s associated skills. This bonus increases by 1 at 5th level and every 3 levels thereafter.</span></p>\n<p><em>Change and enable the targeted skills in the Modifiers tab for automated bonuses.</em></p>",
       "chat": "",
       "unidentified": ""
     },
@@ -62,7 +62,38 @@
       "descriptor": ""
     },
     "descriptors": [],
-    "modifiers": [],
+    "modifiers": [
+      {
+        "name": "Channel Skill (Su)",
+        "modifier": "lookupRange(@details.level.value, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
+        "type": "insight",
+        "effectType": "skill",
+        "valueAffected": "acr",
+        "enabled": false,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "max": 1,
+        "_id": "3d95111e-3c97-4999-b894-b83b7346f45b"
+      },
+      {
+        "name": "Channel Skill (Su)",
+        "modifier": "lookupRange(@details.level.value, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
+        "type": "insight",
+        "effectType": "skill",
+        "valueAffected": "acr",
+        "enabled": false,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "max": 1,
+        "_id": "f86e514d-7bd2-4c2d-8a1b-96515aa89886"
+      }
+    ],
     "requirements": "2nd Level",
     "recharge": {
       "value": null,

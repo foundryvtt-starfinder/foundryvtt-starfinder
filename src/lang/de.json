@@ -3,8 +3,8 @@
         "TypeCharacter": "Spielercharakter",
         "TypeDrone": "Drohne",
         "TypeHazard": "Hazard",
-        "TypeNpc": "Nichtspielercharakter",
-        "TypeMech": "Mech",
+        "TypeNpc": "Old Style Nichtspielercharakter",
+        "TypeNpc2": "Nichtspielercharakter",
         "TypeStarship": "Raumschiff",
         "TypeVehicle": "Fahrzeug"
     },
@@ -61,6 +61,7 @@
         "AbilityActivationTypesMinute": "Minute",
         "AbilityActivationTypesMove": "Bewegungsaktion",
         "AbilityActivationTypesNone": "Keine",
+        "AbilityActivationTypesNoneButton": "Activate",
         "AbilityActivationTypesOther": "Andere Aktionen",
         "AbilityActivationTypesReaction": "Reaktion",
         "AbilityActivationTypesSpecial": "Spezial",
@@ -84,6 +85,8 @@
         "AbilityScoreBase": "Attributswert",
         "AbilityScoreBaseTooltip": "Attributswert: {mod}",
         "AbilityScoreBonusTooltip": "{type} Bonus: {mod} ({source})",
+        "AbilityScoreBonusModifiedTooltip": "{type} bonus: {mod} (computed from {base}) ({source})",
+        "AbilityScoreGenericTooltip": "{score} Ability Score: {value} ({source})",
         "AbilityScoreIncreaseTooltip": "Attributswertsteigerung: {mod}",
         "AbilityScoreRaceTooltip": "Volk: {mod}",
         "AbilityScoreThemeTooltip": "Charaktermotiv: {mod}",
@@ -209,6 +212,7 @@
                     "Open": "Open",
                     "OpenTooltip": "Open this container's fold-out listing.",
                     "StorageIdentifier": "Lagerbezeichnung",
+                    "StorageIdentifierAmmunitionSlot": "Ammunition Slot",
                     "StorageIdentifierArmorUpgrade": "Rüstungsverbesserungsplatz",
                     "StorageIdentifierFusion": "Fusion",
                     "StorageIdentifierItem": "Gegenstandsplatz",
@@ -385,6 +389,18 @@
         "Biography": "Biografie",
         "Biotech": "Biotechnologie",
         "Browsers": {
+            "AlienArchiveBrowser": {
+                "BrowserFilterAlignment": "Filter by Alignment",
+                "BrowserFilterCR": "Filter by CR",
+                "BrowserFilterHP": "Filter by HP",
+                "BrowserFilterOrganizationSize": "Filter by Organization Size",
+                "BrowserFilterSize": "Filter by Size",
+                "BrowserFilterType": "Filter by Type",
+                "BrowserSortMethodCR": "CR",
+                "BrowserSortMethodHP": "HP",
+                "Button": "Alien Archive",
+                "Title": "Browse Alien Archive"
+            },
             "EquipmentBrowser": {
                 "BrowserSortMethodLevel": "Stufe",
                 "Button": "Ausrüstung",
@@ -641,6 +657,7 @@
         "Cybernetic": "Kybernetisch",
         "Damage": {
             "Immunities": "Immunitäten gegenüber Schaden",
+            "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "Schadensreduktion",
             "Resistances": "Energieresistenzen",
             "Title": "Schaden",
@@ -679,9 +696,11 @@
             "Chassis": {
                 "Details": {
                     "AbilityScores": {
+                        "Charisma": "Base Charisma",
                         "Dexterity": "Grundgeschicklichkeit",
                         "Header": "Attributswert",
                         "Increases": "Attributswertsteigerung",
+                        "Intelligence": "Base Intelligence",
                         "Strength": "Grundstärke",
                         "Wisdom": "Grundweisheit"
                     },
@@ -769,6 +788,7 @@
                         "BonusSkill": "Zusätzliche Fertigkeit",
                         "Header": "Andere Effekte",
                         "SpeedSpecial": "Spezielle Bewegungsrate",
+                        "SpellResistance": "Spell resistance",
                         "WeaponProficiency": "Umgang mit Waffen"
                     }
                 },
@@ -895,6 +915,7 @@
         "InitiativeLabel": "Initiative",
         "InitiativeModiferLabel": "Modifikator",
         "InitiativeModiferTooltip": "{type} Bonus: {mod} ({source})",
+        "InvalidItem": "{name} is an invalid Item for a {target}.",
         "InvalidStarshipItem": "{name} ist ein ungültiger Gegenstand für ein Raumschiff.",
         "Inventory": "Inventar",
         "InventoryAdd": "Hinzufügen",
@@ -905,6 +926,7 @@
         "InventoryUsage": "Nutzung",
         "IronWillHint": "Charaktertalent welches +2 auf Willerettungswürfe gibt",
         "IronWillLabel": "Eiserner Wille",
+        "ItemBonusTooltip": "Item bonus: {mod} ({source})",
         "ItemCollectionSheet": {
             "ItemCollectionLocked": "Dieser Behälter ist verschlossen und lässt sich nicht öffnen.",
             "Settings": {
@@ -920,16 +942,41 @@
             "ACP": "Rüstungsmalus",
             "Action": {
                 "AbilityModifier": "Attributsmodifikator",
+                "ActionTarget": {
+                    "ChatMessage": " against {actionTarget}",
+                    "EAC": "EAC",
+                    "KAC": "KAC",
+                    "KAC8": "KAC +8",
+                    "None": "No target",
+                    "Other": "Other",
+                    "Tag": "Targets: {actionTarget}",
+                    "Title": "Action Target",
+                    "Tooltip": "If this action targets a specific property, you can configure that here."
+                },
                 "ActionType": "Aktionstyp",
+                "AddDamageSection": "Add damage section",
+                "AddDamageSectionTooltip": "Add another damage section to this item.",
                 "AttackRollBonus": "Angriffswurfbonus",
                 "ChatMessageFlavor": "Text für Chatnachricht",
                 "CriticalDamageFormula": "Kritische Schadensformel",
                 "CriticalEffect": "Kritischer Effekt",
+                "CriticalDamageHeader": "Critical Damage Sections",
                 "CriticalHealingFormula": "Kritische Heilungsformel",
                 "DamageFormula": "Schadensformel",
+                "DamageFormulaTooltip": "The damage roll for this damage section.",
+                "DamageHeader": "Damage Sections",
+                "DamageName": "Damage Name",
+                "DamageNameTooltip": "A name you can specify to easily reference this attack element.",
+                "DamageNotes": "Damage Notes",
+                "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
+                "DamageSection": "Damage Section {section}",
                 "HealingFormula": "Heilungsformel",
                 "OtherFormula": "Andere Formel",
-                "SavingThrow": "Rettungswurf"
+                "RollNotes": "Roll Notes",
+                "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
+                "SavingThrow": "Rettungswurf",
+                "TitleAction": "Action",
+                "TitleActivation": "Activation"
             },
             "Activation": {
                 "ActivationCondition": "Aktivierungsvoraussetzungen",
@@ -1035,7 +1082,8 @@
                 "Level": "Stufe",
                 "Price": "Preis",
                 "Quantity": "Menge",
-                "QuantityPerPack": "Pack size"
+                "QuantityPerPack": "Pack size",
+                "QuantityPerPackTooltip": "Pack size is used to define how many of one item you buy for the full price. For example, you buy 30 small arm rounds at the cost of 40 credits. This helps with performing bulk and wealth calculations, as well as ammunition tracking."
             },
             "Equipment": {
                 "Action": "Aktion für Ausrüstung",
@@ -1193,6 +1241,10 @@
                 "ShowInCombatTrackerTooltip": "If enabled, this resource will be visible in the combat tracker for quick reference.",
                 "ShowOwnerAndGMOnly": "Only shown for Owner and GM",
                 "ShowOwnerAndGMOnlyTooltip": "If enabled, this resource will only be visible in the combat tracker for the sheet owner and the GM.",
+                "Stage": "Calculation Stage",
+                "StageEarly": "Early",
+                "StageLate": "Late",
+                "StageTooltip": "The calculation stage affects when the modifiers for this resource are calculated.<br/><br/><strong>Early</strong><br/>Early actor resources are calculated before any of the other automations are run. At this point, all the computed actor values are not yet valid, such as strength modifier, fortitude save bonus, etc. Actor resources computed at this stage can be used in modifiers that affect actor attributes.<br/><br/><strong>Late</strong><br/>Late actor resources are calculated at the very end of the actor's modifiers. This means you can include the computed values of the actor into the actor resource. You will not be able to include late actor resources in a calculation that affect the actors attributes constantly. You can still use them in situational modifiers, however.",
                 "SubType": "Subtype",
                 "SubTypeTooltip": "(Required) Subtype makes up the second half of the resource identifier.<br/>For example: @resources.type.subtype.value",
                 "Type": "Type",
@@ -1586,6 +1638,12 @@
         "None": "Keine",
         "Notes": "Notizen",
         "NPCSheet": {
+            "Biography": {
+                "Organization": {
+                    "GroupSize": "Organization size",
+                    "GroupSizeTooltip": "The organization size goes from the smallest typical group (usually 1) to the largest typical group. This is used primarily by the alien browser to find creatures that match the group size filter."
+                }
+            },
             "Features": {
                 "Actions": "Actions",
                 "ActiveItems": "Active Feats",
@@ -1595,7 +1653,11 @@
             },
             "Header": {
                 "AlignmentPlaceHolderText": "NG",
+                "AbilityDC": "Ability DC",
+                "AbilityDCTooltip": "The ability DC this NPC has. All of the NPCs abilities that have a saving throw associated with them typically use this value, unless they are spells.<br/><br/>This might not be properly integrated into every ability yet.",
                 "AuraPlaceHolderText": "Aura",
+                "BaseSpellDC": "Base Spell DC",
+                "BaseSpellDCTooltip": "The base spell DC this NPC has. All of the NPCs spells that have a saving throw associated with them typically use this value, plus the spell level.",
                 "NamePlaceHolderText": "Charaktername",
                 "RaceAndGraftsPlaceHolderText": "Geschlecht, Volk, und Klasse/Transplantate",
                 "SourcePlaceHolderText": "Quelle",
@@ -1604,13 +1666,23 @@
             },
             "Interface": {
                 "Conditions": {
-                    "Warning": "* NSCs unterstützen noch keine automatischen Berechnungen der Modifikatoren!"
+                    "Warning": "Old Style NPCs do not support automatic modifier calculations, convert this NPC to the new style using the duplicate button on the Attributes tab."
                 },
                 "CreateItem": {
                     "Button": "Objekt erstellen",
                     "Name": "Neues Objekt",
                     "Note": "Wähle die Art des Objektes, das du erstellen möchtest.",
                     "Title": "Neues Objekt erstellen"
+                },
+                "DuplicateNewStyle": {
+                    "Button": "Duplicate as new style NPC",
+                    "ButtonTooltip": "Clicking this button will create a new style NPC actor sheet, duplicating the data and items on this actor.",
+                    "DialogTitle": "Use original actor?",
+                    "DialogMessage": "You are duplicating an unlinked token actor, do you wish to create the new style NPC using the unlinked actor data, or the original sheet data?",
+                    "DialogOriginalActorButton": "Duplicate Original Actor",
+                    "DialogUnlinkedActorButton": "Duplicate Unlinked Actor",
+                    "DialogCancelButton": "Cancel",
+                    "ErrorCreateActor": "Something went wrong converting this actor. Check your user role permissions.<br/><br/>Click to dismiss."
                 },
                 "Navigation": {
                     "Conditions": "Zustände"
@@ -1773,6 +1845,7 @@
         },
         "Save": "Speichern",
         "SaveAbilityModTooltip": "Attributsmodifikator: {mod} ({ability})",
+        "SaveBaseModifier": "Base Save: {base}",
         "SaveClassModTooltip": "Klassenmodifikator: {mod} ({class})",
         "SaveDescriptorDisbelieve": "anzweifeln",
         "SaveDescriptorHalf": "halb",
@@ -1817,6 +1890,12 @@
                 },
                 "VehicleChaseHint": "Lege fest, welche Chatkarten für Kämpfe im Fahrzeugkampf angezeigt werden.",
                 "VehicleChaseName": "Fahrzeugverfolgungsjagden"
+            },
+            "DamageRoundingAdvantage": {
+                "Hint": "In the case of fractional damage, alternate rounding up or down in the advantage of the attacker, or the defender.",
+                "Name": "Damage Rounding Advantage",
+                "ValueAttacker": "Attacker",
+                "ValueDefender": "Defender"
             },
             "DamageWithAttack": {
                 "Hint": "Automatically follow up an attack roll with a damage roll.",

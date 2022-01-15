@@ -8,7 +8,11 @@
     </header>
 
     <div class="card-content">
+        {{#if item.data.data.description.short}}
+        {{{item.data.data.description.short}}}
+        {{else}}
         {{{item.data.data.description.value}}}
+        {{/if}}
     </div>
 
     <div class="card-buttons">

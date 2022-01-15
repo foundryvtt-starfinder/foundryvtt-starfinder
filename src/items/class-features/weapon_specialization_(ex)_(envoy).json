@@ -1,15 +1,13 @@
 {
-  "_id": "yyxPFcEO1wa7fRSJ",
   "name": "Weapon Specialization (Ex) (Envoy)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
+  "img": "systems/sfrpg/images/cup/gameplay/envoy.png",
   "data": {
     "description": {
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"fqYiP2f9oSfcmrwC\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Envoy</a></p>\n        <p>You gain the Weapon Specialization feat as a bonus feat for each weapon type with which this class grants you proficiency.</p>",
       "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"fqYiP2f9oSfcmrwC\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Envoy</a></p>\n        <p>You gain the Weapon Specialization feat as a bonus feat for each weapon type with which this class grants you proficiency.</p>",
       "unidentified": ""
     },
     "source": "Envoy",
@@ -44,6 +42,7 @@
       "max": 0,
       "per": null
     },
+    "isActive": null,
     "ability": null,
     "actionType": "",
     "attackBonus": 0,
@@ -62,7 +61,50 @@
       "descriptor": ""
     },
     "descriptors": [],
-    "modifiers": [],
+    "modifiers": [
+      {
+        "name": "Weapon Specialization Envoy",
+        "modifier": "floor(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "smallA",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "30931067-9189-449c-9263-b3f29ae61dfc"
+      },
+      {
+        "name": "Weapon Specialization Envoy",
+        "modifier": "@details.level.value",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "basicM",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "b737925a-61cb-45f0-bc43-85020fb6eaca"
+      },
+      {
+        "name": "Weapon Specialization Envoy",
+        "modifier": "-ceil(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-property-damage",
+        "valueAffected": "operative",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "b0ab1674-5349-4001-9e87-a20b1cdf46b1"
+      }
+    ],
     "requirements": "3rd Level",
     "recharge": {
       "value": null,
@@ -72,6 +114,5 @@
       "parts": []
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/envoy.png"
+  "_id": "7KlK63jbcKN0zJLr"
 }

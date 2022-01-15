@@ -1,15 +1,13 @@
 {
-  "_id": "hNCEVQicM9RrOv6J",
   "name": "Weapon Specialization (Ex) (Biohacker)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
+  "img": "icons/svg/mystery-man.svg",
   "data": {
     "description": {
-      "value": "<p>&gt;@Compendium[sfrpg.classes.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with. For weapons you have gained proficiency with only through the injection expert class feature, rather than the normal Weapon Specialization benefit, you instead add half your character level to damage you deal with those weapons.</p>",
       "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "value": "<p>&gt;@Compendium[sfrpg.classes.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with. For weapons you have gained proficiency with only through the injection expert class feature, rather than the normal Weapon Specialization benefit, you instead add half your character level to damage you deal with those weapons.</p>",
       "unidentified": ""
     },
     "source": "Biohacker",
@@ -44,6 +42,7 @@
       "max": 0,
       "per": null
     },
+    "isActive": null,
     "ability": null,
     "actionType": "",
     "attackBonus": 0,
@@ -62,7 +61,50 @@
       "descriptor": ""
     },
     "descriptors": [],
-    "modifiers": [],
+    "modifiers": [
+      {
+        "name": "Weapon Specialization Biohacker",
+        "modifier": "floor(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "smallA",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "cc614091-2af3-42c0-8233-6a315250158c"
+      },
+      {
+        "name": "Weapon Specialization Biohacker",
+        "modifier": "@details.level.value",
+        "type": "untyped",
+        "effectType": "weapon-damage",
+        "valueAffected": "basicM",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "ec540e20-bbf8-45b6-9e11-b7e3ab38ea99"
+      },
+      {
+        "name": "Weapon Specialization Biohacker",
+        "modifier": "-ceil(@details.level.value / 2)",
+        "type": "untyped",
+        "effectType": "weapon-property-damage",
+        "valueAffected": "operative",
+        "enabled": true,
+        "source": "",
+        "notes": "",
+        "modifierType": "constant",
+        "condition": "",
+        "subtab": "misc",
+        "_id": "410d6825-220e-4d1a-9c58-e9d22e411485"
+      }
+    ],
     "requirements": "3rd Level",
     "recharge": {
       "value": null,
@@ -72,6 +114,5 @@
       "parts": []
     }
   },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg"
+  "_id": "mgtX5UHMPwvNkUUi"
 }

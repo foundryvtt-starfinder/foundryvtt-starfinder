@@ -94,10 +94,17 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
             // Ability Activation Label
             let act = data.activation || {};
-            if (act) labels.activation = [
-                act.cost,
-                act.type === "none" ? null : C.abilityActivationTypes[act.type]
-            ].filterJoin(" ");
+            if (act) {
+                if (act.type === "none"){
+                    labels.activation = game.i18n.localize("SFRPG.AbilityActivationTypesNoneButton");
+                }                 
+                else {
+                    labels.activation = [
+                        act.cost,
+                        C.abilityActivationTypes[act.type]
+                    ].filterJoin(" ");
+                }                
+            }
 
             let tgt = data.target || {};
             if (tgt.value && tgt.value === "") tgt.value = null;
@@ -633,7 +640,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Determine ability score modifier
         let abl = itemData.data.ability;
-        if (!abl && this.actor.data.type === "npc") abl = "";
+        if (!abl && (this.actor.data.type === "npc" || this.actor.data.type === "npc2")) abl = "";
         else if (!abl && (this.data.type === "spell")) abl = actorData.attributes.spellcasting || "int";
         else if (!abl) abl = "str";        
 
@@ -709,8 +716,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }, 0);
 
         // Define Critical threshold
-        let crit = 20;
-        //if ( this.data.type === "weapon" ) crit = this.actor.getFlag("sfrpg", "weaponCriticalThreshold") || 20;
+        const critThreshold = 20;
+        //if ( this.data.type === "weapon" ) critThreshold = this.actor.getFlag("sfrpg", "weaponCriticalThreshold") || 20;
+
+        const rollOptions = {};
+
+        if (this.data.data.actionTarget) {
+            rollOptions.actionTarget = this.data.data.actionTarget;
+        }
 
         // Define Roll Data
         const rollData = duplicate(actorData);
@@ -757,7 +770,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             title: title,
             flavor: this.data?.data?.chatFlavor,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            critical: crit,
+            critical: critThreshold,
+            rollOptions: rollOptions,
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -951,6 +965,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Define Roll parts
         /** @type {DamageParts[]} */
         const parts = itemData.damage.parts.map(part => part);
+        for (const part of parts) {
+            part.isDamageSection = true;
+        }
         
         let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
@@ -1084,25 +1101,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"))
         }
 
-        // const [parts, damageTypes] = itemData.damage.parts.reduce((acc, cur) => {
-        //     if (cur.formula && cur.formula.trim() !== "") acc[0].push(cur.formula);
-        //     if (cur.types) {
-        //         const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
-        //         const obj = { types: [], operator: "" };
-
-        //         for (const type of filteredTypes) {
-        //             obj.types.push(type[0]);
-        //         }
-
-        //         if (cur.operator) obj.operator = cur.operator;
-
-        //         acc[1].push(obj);
-        //     }
-
-        //     return acc;
-        // }, [[], []]);
-
         const parts = itemData.damage.parts.map(part => part);
+        for (const part of parts) {
+            part.isDamageSection = true;
+        }
 
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
@@ -1146,6 +1148,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         const parts = itemData.damage.parts.map(part => part);
+        for (const part of parts) {
+            part.isDamageSection = true;
+        }
 
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
@@ -1166,6 +1171,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
+            criticalData: {preventDoubling: true},
             rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),

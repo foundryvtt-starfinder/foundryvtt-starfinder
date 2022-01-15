@@ -1,6 +1,7 @@
 {
   "name": "Drift Mote",
-  "type": "npc",
+  "type": "npc2",
+  "img": "icons/svg/mystery-man.svg",
   "data": {
     "abilities": {
       "str": {
@@ -8,54 +9,56 @@
         "min": 3,
         "misc": 0,
         "mod": -3,
-        "base": 10
+        "base": -3
       },
       "dex": {
         "value": 10,
         "min": 3,
         "misc": 0,
         "mod": 3,
-        "base": 10
+        "base": 3
       },
       "con": {
         "value": 10,
         "min": 3,
         "misc": 0,
         "mod": 1,
-        "base": 10
+        "base": 1
       },
       "int": {
         "value": 10,
         "min": 3,
         "misc": 0,
         "mod": -3,
-        "base": 10
+        "base": -3
       },
       "wis": {
         "value": 10,
         "min": 3,
         "misc": 0,
         "mod": 2,
-        "base": 10
+        "base": 2
       },
       "cha": {
         "value": 10,
         "min": 3,
         "misc": 0,
         "mod": 0,
-        "base": 10
+        "base": 0
       }
     },
     "attributes": {
       "eac": {
         "min": 0,
         "value": 9,
-        "tooltip": []
+        "tooltip": [],
+        "base": 9
       },
       "kac": {
         "min": 0,
         "value": 10,
-        "tooltip": []
+        "tooltip": [],
+        "base": 10
       },
       "cmd": {
         "min": 0,
@@ -83,7 +86,7 @@
         "tooltip": []
       },
       "init": {
-        "value": 0,
+        "value": 3,
         "bonus": 0,
         "total": 3,
         "tooltip": []
@@ -92,19 +95,22 @@
         "value": 0,
         "bonus": 0,
         "misc": 0,
-        "tooltip": []
+        "tooltip": [],
+        "base": 0
       },
       "reflex": {
         "value": 0,
         "bonus": 2,
         "misc": 0,
-        "tooltip": []
+        "tooltip": [],
+        "base": 2
       },
       "will": {
         "value": 0,
         "bonus": 3,
         "misc": 0,
-        "tooltip": []
+        "tooltip": [],
+        "base": 3
       },
       "baseAttackBonus": {
         "value": 0,
@@ -112,7 +118,7 @@
         "tooltip": []
       },
       "bab": 0,
-      "arms": "0",
+      "arms": "2",
       "space": "2-1/2 ft.",
       "reach": "0 ft.",
       "speed": {
@@ -120,7 +126,8 @@
           "base": 0
         },
         "flying": {
-          "base": 60
+          "base": 60,
+          "baseManeuverability": 1
         },
         "swimming": {
           "base": 0
@@ -131,7 +138,8 @@
         "climbing": {
           "base": 0
         },
-        "special": "original base: fly 60 ft.; original special: (Su, perfect)",
+        "value": null,
+        "special": "",
         "mainMovement": "flying"
       },
       "keyability": "",
@@ -142,8 +150,14 @@
       "race": "",
       "class": "",
       "biography": {
-        "value": "<p>Like the other natives of the strange hyperspace plane of @Compendium[sfrpg.setting.nb5A5e7HqTnvVjtX]{The Drift}, Drift motes aren’t well understood. Many planar scholars believe they were created when parts of the Plane of Air were pulled into @Compendium[sfrpg.setting.nb5A5e7HqTnvVjtX]{The Drift} and mutated by unknown energies. However, some religious sages proclaim that Drift motes are the stray, castoff thoughts of the goddess @Compendium[sfrpg.setting.FYV6RgTjPdg72RF0]{Triune} given some form of life by strange planar energies.<br/><br/>Whatever their origin, Drift motes are tiny balls of electrical energy that flit aimlessly through @Compendium[sfrpg.setting.nb5A5e7HqTnvVjtX]{The Drift} until they sense passing starships. Instinctively attracted to the electrical currents within most vessels, a Drift mote enters a ship through its sensors or other technological components. Once inside a ship, a Drift mote moves haphazardly through the ship’s rooms and corridors, bouncing off walls, floors, and ceilings. As it travels, its random bursts of electrical energy often damage sensitive equipment or start fires. A Drift mote can be captured within a conductive cage surrounded by plastic, but most crews settle for destroying such a pest before it causes too much havoc. However, a Drift mote defends itself if attacked, unleashing a dangerous wave of jolting energy. Those familiar with Drift motes know to ground themselves as well as possible before confronting one to protect themselves from the electrical discharge.<br/><br/>Travelers in @Compendium[sfrpg.setting.nb5A5e7HqTnvVjtX]{The Drift} have reported seeing Drift motes that are much bigger than the norm, some the size of small starships, but these stories have been dismissed as either tall tales, the consequences of drunkenness, or the result of simply spending too much time in @Compendium[sfrpg.setting.nb5A5e7HqTnvVjtX]{The Drift}.</p>",
-        "public": ""
+        "value": "<h2>Description</h2>\n<p>Like the other natives of the strange hyperspace plane of the Drift, Drift motes aren&rsquo;t well understood. Many planar scholars believe they were created when parts of the Plane of Air were pulled into the Drift and mutated by unknown energies. However, some religious sages proclaim that Drift motes are the stray, castoff thoughts of the goddess @Compendium[sfrpg.setting.FYV6RgTjPdg72RF0]{Triune} given some form of life by strange planar energies.</p>\n<p>Whatever their origin, Drift motes are tiny balls of electrical energy that flit aimlessly through the Drift until they sense passing starships. Instinctively attracted to the electrical currents within most vessels, a Drift mote enters a ship through its sensors or other technological components. Once inside a ship, a Drift mote moves haphazardly through the ship&rsquo;s rooms and corridors, bouncing off walls, floors, and ceilings. As it travels, its random bursts of electrical energy often damage sensitive equipment or start fires. A Drift mote can be captured within a conductive cage surrounded by plastic, but most crews settle for destroying such a pest before it causes too much havoc. However, a Drift mote defends itself if attacked, unleashing a dangerous wave of jolting energy. Those familiar with Drift motes know to ground themselves as well as possible before confronting one to protect themselves from the electrical discharge.</p>\n<p>Travelers in the Drift have reported seeing Drift motes that are much bigger than the norm, some the size of small starships, but these stories have been dismissed as either tall tales, the consequences of drunkenness, or the result of simply spending too much time in the Drift.</p>\n<p>&nbsp;</p>",
+        "public": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.png",
+        "dateOfBirth": "",
+        "age": 0,
+        "height": "",
+        "weight": "",
+        "otherVisuals": ""
       },
       "type": "Outsider",
       "environment": "the Drift",
@@ -166,7 +180,7 @@
       "acr": {
         "ability": "dex",
         "min": 0,
-        "ranks": 0,
+        "ranks": 9,
         "value": 0,
         "misc": 0,
         "mod": 9,
@@ -298,7 +312,7 @@
       "per": {
         "ability": "wis",
         "min": 0,
-        "ranks": 0,
+        "ranks": 4,
         "value": 0,
         "misc": 0,
         "mod": 4,
@@ -365,7 +379,7 @@
       "ste": {
         "ability": "dex",
         "min": 0,
-        "ranks": 0,
+        "ranks": 9,
         "value": 0,
         "misc": 0,
         "mod": 9,
@@ -423,31 +437,38 @@
     "spells": {
       "spell0": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell1": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell2": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell3": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell4": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell5": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       },
       "spell6": {
         "value": 0,
-        "max": 0
+        "max": 0,
+        "perClass": {}
       }
     },
     "modifiers": [],
@@ -492,48 +513,54 @@
       "values": {}
     }
   },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
   "token": {
-    "flags": {},
-    "name": "Drift Mote",
-    "displayName": 0,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": null,
+    "bar2": {
+      "attribute": "attributes.rp"
+    },
+    "displayBars": 40,
+    "displayName": 40,
     "width": 1,
     "height": 1,
+    "name": "Drift Mote",
+    "actorLink": false,
     "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
+    "alpha": 1,
     "vision": false,
     "dimSight": 0,
     "brightSight": 0,
     "dimLight": 0,
     "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightAlpha": 1,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightAlpha": 0.25,
     "lightAnimation": {
       "speed": 5,
       "intensity": 5
     },
-    "actorId": "Wsnoym64YkUhMuBc",
-    "actorLink": false,
     "disposition": -1,
-    "displayBars": 0,
-    "bar1": {},
-    "bar2": {},
-    "randomImg": false
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "flags": {},
+    "randomImg": false,
+    "img": "icons/svg/mystery-man.svg"
   },
   "items": [
     {
-      "_id": "EShyC7DYuRqFHXDn",
+      "_id": "a4NdANL464064CVm",
       "name": "Void Adaptation",
       "type": "feat",
+      "img": "icons/svg/mystery-man.svg",
       "data": {
         "description": {
-          "value": "<p>(EX OR SU)</p>\n<p>Numerous creatures are inured to the void of outer space. A creature with void adaptation has the following abilities.</p>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath (see page 152).</li>\n</ul>\n<hr>\n<p>&nbsp;</p>",
           "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p>(EX OR SU)</p>\n<p>Numerous creatures are inured to the void of outer space. A creature with void adaptation has the following abilities.</p>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath (see page 152).</li>\n</ul>\n<hr>\n<p>&nbsp;</p>",
           "unidentified": ""
         },
         "source": "",
@@ -597,19 +624,26 @@
           "parts": []
         }
       },
-      "sort": 100000,
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
     },
     {
-      "_id": "oSE7nyPvkXZllKGW",
+      "_id": "PP26TwUOlGOgfrZ2",
       "name": "Electrical Discharge (Su)",
       "type": "weapon",
+      "img": "icons/svg/item-bag.svg",
       "data": {
         "description": {
-          "value": "As a ranged attack, a Drift mote can unleash an electrical blast with a range of 30 feet at a single target. This attack has the first arc 1d3 weapon special property.",
           "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "As a ranged attack, a Drift mote can unleash an electrical blast with a range of 30 feet at a single target. This attack has the first arc 1d3 weapon special property.",
           "unidentified": ""
         },
         "source": "",
@@ -617,9 +651,11 @@
         "quantity": 1,
         "bulk": "L",
         "price": 0,
+        "quantityPerPack": 1,
         "level": 1,
         "attuned": false,
         "equipped": true,
+        "equippable": true,
         "identified": true,
         "attributes": {
           "sturdy": true,
@@ -683,9 +719,17 @@
             {
               "formula": "1d4",
               "types": {
-                "electricity": true
+                "acid": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "sonic": false,
+                "bludgeoning": false,
+                "piercing": false,
+                "slashing": false,
+                "healing": false
               },
-              "operator": ""
+              "operator": "and"
             }
           ]
         },
@@ -696,6 +740,7 @@
           "descriptor": "negate"
         },
         "descriptors": [],
+        "ammunitionType": "",
         "capacity": {
           "value": 0,
           "max": 0
@@ -719,7 +764,8 @@
               "weightProperty": "level"
             }
           ],
-          "isOpen": true
+          "isOpen": true,
+          "includeContentsInWealthCalculation": true
         },
         "weaponType": "smallA",
         "weaponCategory": "uncategorized",
@@ -740,6 +786,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -758,6 +805,7 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
@@ -792,6 +840,7 @@
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -804,6 +853,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "unbalancing": false,
           "underwater": false,
@@ -816,56 +866,87 @@
           "parts": []
         }
       },
-      "sort": 200000,
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "storage": {
+        "type": "slot",
+        "subtype": "fusion",
+        "amount": 0,
+        "weightProperty": "level",
+        "affectsEncumbrance": true
+      },
+      "weapon": false,
+      "ammunition": false,
+      "equipment": false,
+      "consumable": false,
+      "goods": false,
+      "container": false,
+      "hybrid": false,
+      "magic": false,
+      "technological": false,
+      "fusion": true,
+      "upgrade": false,
+      "spell": false,
+      "augmentation": false,
+      "shield": false,
+      "weaponAccessory": false,
+      "vehicleAttack": false,
+      "vehicleSystem": false
     },
     {
-      "_id": "cepRcq8LjxGXL9Lm",
+      "_id": "M3vYzPs6FDiPi17C",
       "name": "Jolting Cascade (Su)",
       "type": "feat",
+      "img": "icons/svg/item-bag.svg",
       "data": {
         "description": {
-          "value": "Once per day, a Drift mote can create a wave of dangerous electricity in a 15-foot cone that deals 2d8 electricity damage. Creatures in the area of effect can attempt a DC 11 Reflex save for half damage.",
           "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "Once per day, a Drift mote can create a wave of dangerous electricity in a 15-foot cone that deals 2d8 electricity damage. Creatures in the area of effect can attempt a DC 11 Reflex save for half damage.",
           "unidentified": ""
         },
         "source": "",
         "type": "",
         "activation": {
-          "type": "",
-          "cost": 0,
+          "type": "action",
+          "cost": 1,
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "target": {
-          "value": null,
+          "value": "",
           "type": ""
         },
         "area": {
-          "value": 0,
-          "units": "",
-          "shape": "",
-          "effect": ""
+          "value": 15,
+          "units": "ft",
+          "shape": "cone",
+          "effect": "burst"
         },
         "range": {
           "value": null,
-          "units": "",
+          "units": "none",
           "additional": "",
           "per": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null
+          "value": 1,
+          "max": 1,
+          "per": "day"
         },
         "isActive": null,
-        "ability": null,
-        "actionType": null,
+        "ability": "",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -873,13 +954,29 @@
           "effect": ""
         },
         "damage": {
-          "parts": []
+          "parts": [
+            {
+              "formula": "2d8",
+              "types": {
+                "acid": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "sonic": false,
+                "bludgeoning": false,
+                "piercing": false,
+                "slashing": false,
+                "healing": false
+              },
+              "operator": ""
+            }
+          ]
         },
         "formula": "",
         "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
+          "type": "reflex",
+          "dc": "11",
+          "descriptor": "negate"
         },
         "descriptors": [],
         "modifiers": [],
@@ -887,20 +984,31 @@
         "recharge": {
           "value": null,
           "charged": false
+        },
+        "abilityMods": {
+          "parts": []
         }
       },
-      "sort": 300000,
-      "flags": {},
-      "effects": []
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
     },
     {
-      "_id": "n7n3dyFTT994kA7s",
+      "_id": "kIM44VrCrhRATsm7",
       "name": "Tech Phase (Su)",
       "type": "feat",
+      "img": "icons/svg/item-bag.svg",
       "data": {
         "description": {
-          "value": "Drift motes can pass through material objects (but not corporeal creatures) that contain mostly technological components. For instance, a Drift mote can enter a starship through the controls of an airlock door, but couldn’t pass through a solid steel bulkhead. The Drift mote must begin and end its turn outside of any object.",
           "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "Drift motes can pass through material objects (but not corporeal creatures) that contain mostly technological components. For instance, a Drift mote can enter a starship through the controls of an airlock door, but couldn’t pass through a solid steel bulkhead. The Drift mote must begin and end its turn outside of any object.",
           "unidentified": ""
         },
         "source": "",
@@ -961,18 +1069,26 @@
           "charged": false
         }
       },
-      "sort": 400000,
-      "flags": {},
-      "effects": []
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
     },
     {
-      "_id": "zqc5wTQGYCmJXy2N",
+      "_id": "MWxOjD8IkqLZLhy9",
       "name": "Dancing Lights (At Will)",
       "type": "spell",
+      "img": "systems/sfrpg/icons/spells/dancing_light.png",
       "data": {
         "description": {
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You create up to four lights that resemble small headlights or flashlights. The dancing lights must stay within a 10-foot-radius area in relation to each other but otherwise move as you desire: forward or back, up or down, straight or turning corners, or the like. The lights can move up to 100 feet per round. A light winks out if the distance between you and it exceeds the spell’s range.<br></span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You can have only one <em>dancing lights</em> spell active at a time. If you cast this spell while another casting is still in effect, the previous casting is dispelled.</span></p>",
           "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You create up to four lights that resemble small headlights or flashlights. The dancing lights must stay within a 10-foot-radius area in relation to each other but otherwise move as you desire: forward or back, up or down, straight or turning corners, or the like. The lights can move up to 100 feet per round. A light winks out if the distance between you and it exceeds the spell’s range.<br></span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You can have only one <em>dancing lights</em> spell active at a time. If you cast this spell while another casting is still in effect, the previous casting is dispelled.</span></p>",
           "unidentified": ""
         },
         "source": "CRB pg. 347",
@@ -1047,23 +1163,31 @@
           "tech": true,
           "wysh": true
         },
+        "isVariableLevel": false,
         "abilityMods": {
           "parts": []
         }
       },
-      "sort": 500000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/spells/dancing_light.png",
-      "effects": []
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
     },
     {
-      "_id": "0DnfbL4kiUhP3yOh",
+      "_id": "kjYDtvozKtK3AaJE",
       "name": "Daze (DC 13) (At Will)",
       "type": "spell",
+      "img": "systems/sfrpg/icons/spells/daze.png",
       "data": {
         "description": {
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">This spell short-circuits the mind of a humanoid creature with a CR of 3 or lower so that it is dazed (unable to take actions, but taking no penalty to AC). Humanoids of CR 4 or higher are not affected. After a creature has been dazed by this spell, it is immune to it for 1 minute.&nbsp;</span></p>",
           "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">This spell short-circuits the mind of a humanoid creature with a CR of 3 or lower so that it is @Compendium[sfrpg.conditions.2XWEujYSyryB4oHm]{Dazed} (unable to take actions, but taking no penalty to AC). Humanoids of CR 4 or higher are not affected. After a creature has been @Compendium[sfrpg.conditions.2XWEujYSyryB4oHm]{Dazed} by this spell, it is immune to it for 1 minute.&nbsp;</span></p>",
           "unidentified": ""
         },
         "source": "CRB pg. 347",
@@ -1083,7 +1207,7 @@
         },
         "area": {
           "value": null,
-          "units": null,
+          "units": "none",
           "shape": "",
           "effect": ""
         },
@@ -1113,7 +1237,7 @@
         "formula": "",
         "save": {
           "type": "will",
-          "dc": "",
+          "dc": "13",
           "descriptor": "negate"
         },
         "descriptors": [],
@@ -1138,16 +1262,24 @@
           "tech": true,
           "wysh": true
         },
+        "isVariableLevel": false,
         "abilityMods": {
           "parts": []
         }
       },
-      "sort": 600000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/spells/daze.png",
-      "effects": []
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "FfLAsyMewQgw5kRw": 3
+      },
+      "flags": {}
     }
   ],
   "effects": [],
+  "flags": {
+    "core": {}
+  },
   "_id": "I0MAZmgTQ22jetq3"
 }

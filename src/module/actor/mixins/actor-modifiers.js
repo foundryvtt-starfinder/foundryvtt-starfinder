@@ -106,7 +106,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      */
     getAllModifiers(ignoreTemporary = false, ignoreEquipment = false) {
         let allModifiers = this.data.data.modifiers.filter(mod => {
-            return (!ignoreTemporary || mod.subtab === "permanent");
+            return mod.enabled && (!ignoreTemporary || mod.subtab === "permanent");
         });
 
         for (const actorModifier of allModifiers) {
@@ -124,7 +124,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                     {
                         if (!ignoreEquipment) {
                             const container = getItemContainer(this.data.items, item);
-                            if (container && container.type === "equipment" && container.data.equipped) {
+                            if (container && container.type === "equipment" && container.data.data.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
                         }
@@ -137,17 +137,12 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                     {
                         if (!ignoreEquipment) {
                             const container = getItemContainer(this.data.items, item);
-                            if (container && container.type === "weapon" && container.data.equipped) {
+                            if (container && container.type === "weapon" && container.data.data.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
                         }
                         break;
                     }
-
-                // Augmentations are always applied
-                case "augmentation":
-                    modifiersToConcat = itemModifiers;
-                    break;
 
                 // Feats are only active when they are passive, or activated
                 case "feat":

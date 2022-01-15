@@ -1,6 +1,13 @@
 import { ActorSheetSFRPG } from "./base.js";
+import { SFRPG } from "../../config.js";
 
 export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
+    constructor(...args) {
+        super(...args);
+
+        this.acceptedItemTypes.push(...SFRPG.vehicleDefinitionItemTypes);
+        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+    }
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -238,7 +245,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const actor = this.actor;
         if (data.pack) {
             const pack = game.packs.get(data.pack);
-            if (pack.metadata.entity !== "Item") return;
+            if (pack.documentName !== "Item") return;
             itemData = await pack.getEntity(data.id);
         } else if (data.data) {
             let sameActor = data.actorId === actor.id;

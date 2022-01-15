@@ -150,7 +150,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         if (targetItem) {
             if (acceptsItem(targetItem, itemToMove, targetActor)) {
                 desiredParent = targetItem;
-                desiredStorageIndex = targetItemStorageIndex;
+                desiredStorageIndex = getFirstAcceptableStorageIndex(desiredParent, itemToMove);
             } else if (canMerge(targetItem, itemToMove)) {
                 // Merging will destroy the old item, so we return the targetItem here.
                 const targetItemNewQuantity = Number(targetItem.data.data.quantity) + Number(quantity);
@@ -167,8 +167,10 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
                 let targetsParent = targetActor.findItem(x => x.data.data.container?.contents && x.data.data.container.contents.find( y => y.id === targetItem.id));
                 if (targetsParent) {
                     if (!wouldCreateParentCycle(itemToMove, targetsParent, targetActor)) {
-                        desiredParent = targetsParent;
-                        desiredStorageIndex = getFirstAcceptableStorageIndex(desiredParent, itemToMove);
+                        if (acceptsItem(targetsParent, itemToMove, targetActor)) {
+                            desiredParent = targetsParent;
+                            desiredStorageIndex = getFirstAcceptableStorageIndex(desiredParent, itemToMove);
+                        }
                     } else {
                         return itemToMove;
                     }
@@ -488,12 +490,18 @@ export function computeCompoundWealthForItem(item, contents) {
         }
     }
 
-    //console.log(`${item?.name || "null"} has a content wealth of ${contentWealth}, and personal wealth of ${personalWealth}`);
-    return {
+    const itemWealth = {
         totalWealth: personalWealth + contentWealth,
         personalWealth: personalWealth,
         contentWealth: contentWealth
     };
+
+    if (item.type === "container") {
+        item.contentWealth = itemWealth.contentWealth;
+    }
+
+    //console.log(`${item?.name || "null"} has a content wealth of ${contentWealth}, and personal wealth of ${personalWealth}`);
+    return itemWealth;
 }
 
 /**
@@ -598,7 +606,8 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
         if (storageOption.type === "slot") {
             const storedItemLinks = container.data.data.container.contents.filter(x => x.index === index);
 
-            if (storageOption.weightProperty === "items") {
+            const itemsTypes = ["", "ammunitionSlot"];
+            if (storageOption.weightProperty === "items" || itemsTypes.includes(storageOption.subtype)) {
                 const numItemsInStorage = storedItemLinks.length;
                 if (numItemsInStorage >= storageOption.amount) {
                     //console.log(`Skipping storage ${index} because it has too many items in the slots already. (${numItemsInStorage} / ${storageOption.amount})`);
@@ -665,7 +674,7 @@ function acceptsItem(containerItem, itemToAdd, actor) {
 function wouldCreateParentCycle(item, container, actor) {
     if (!item) throw "Inventory::wouldCreateParentCycle: No item specified.";
     if (!container) throw "Inventory::wouldCreateParentCycle: No container specified.";
-    if (!actor) throw "Inventory::wouldCreateParentCycle: No actor specified.";
+    if (!actor || !actor.actor) throw "Inventory::wouldCreateParentCycle: No actor specified.";
     if (item === container) return true;
 
     // If the item has no children it cannot create cycles.
@@ -675,8 +684,8 @@ function wouldCreateParentCycle(item, container, actor) {
 
     let itemsToTest = duplicate(item.data.data.container.contents || []);
     while (itemsToTest.length > 0) {
-        let content = itemsToTest.shift();
-        let child = actor.items.get(content.id);
+        const content = itemsToTest.shift();
+        const child = actor.actor.items.get(content.id);
         if (!child) continue;
 
         if (!containsItems(child)) continue;
