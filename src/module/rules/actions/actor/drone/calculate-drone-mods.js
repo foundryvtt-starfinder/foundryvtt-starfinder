@@ -9,9 +9,11 @@ export default function (engine) {
         data.attributes.armorSlots.current = 0;
         data.attributes.armorSlots.max = 0;
         data.traits.senses = "";
+        data.traits.spellResistance.value = data.traits.spellResistance.base;
+        data.traits.spellResistance.tooltip = [];
 
         // Process common mod properties
-        for (let mod of mods) {
+        for (const mod of mods) {
             const modData = mod.data.data;
 
             if (modData.arms.number > 0) {
@@ -47,6 +49,20 @@ export default function (engine) {
             if (modData.weaponProficiency) {
                 if (!data.traits.weaponProf.value.includes(modData.weaponProficiency)) {
                     data.traits.weaponProf.value.push(modData.weaponProficiency);
+                }
+            }
+
+            if (modData.spellResistance) {
+                const srValue = Number(modData.spellResistance);
+                if (!Number.isNaN(srValue)) {
+                    data.traits.spellResistance.value += srValue;
+
+                    const tooltip = game.i18n.format("SFRPG.ItemBonusTooltip", {
+                        mod: srValue.signedString(),
+                        source: mod.name
+                    });
+        
+                    data.traits.spellResistance.tooltip.push(tooltip);
                 }
             }
 
