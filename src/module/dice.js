@@ -155,12 +155,13 @@ export class DiceSFRPG {
     * @param {SpeakerData}          data.speaker       The ChatMessage speaker to pass when creating the chat
     * @param {string}               data.flavor        Any flavor text associated with this roll
     * @param {Boolean}              [data.advantage]   Allow rolling with advantage (and therefore also with disadvantage)
+    * @param {Object}               data.rollOptions   Additional options to be stored with the roll
     * @param {Number}               [data.critical]    The value of d20 result which represents a critical success
     * @param {Number}               [data.fumble]      The value of d20 result which represents a critical failure
     * @param {onD20DialogClosed}    data.onClose       Callback for actions to take when the dialog form is closed
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     */
-    static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true,
+    static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, onClose, dialogOptions }) {
 
         flavor = `${title}${(flavor ? " - " + flavor : "")}`;
@@ -231,7 +232,13 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation });
+            const tags = [];
+            if (rollOptions?.actionTarget) {
+                tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: SFRPG.actionTargets[rollOptions.actionTarget]}) });
+            }
+
+            const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
+            rollObject.options.rollOptions = rollOptions;
             let roll = await rollObject.evaluate({async: true});
 
             // Flag critical thresholds
@@ -266,7 +273,8 @@ export class DiceSFRPG {
                     rollMode: rollMode,
                     breakdown: preparedRollExplanation,
                     htmlData: htmlData,
-                    rollType: "normal"
+                    rollType: "normal",
+                    rollOptions: rollOptions
                 };
 
                 try {
@@ -278,17 +286,22 @@ export class DiceSFRPG {
             }
             
             if (!useCustomCard) {
-                const content = await roll.render({ htmlData: htmlData });
-
-                ChatMessage.create({
+                const messageData = {
                     flavor: flavor,
                     speaker: speaker,
-                    content: content,
                     rollMode: rollMode,
                     roll: roll,
                     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-                    sound: CONFIG.sounds.dice
-                });
+                    sound: CONFIG.sounds.dice,
+                    flags: {rollOptions: rollOptions}
+                };
+
+                messageData.content = await roll.render({ htmlData: htmlData });
+                if (rollOptions?.actionTarget) {
+                    messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: SFRPG.actionTargets[rollOptions.actionTarget]}));
+                }
+
+                ChatMessage.create(messageData);
             }
 
             if (onClose) {
@@ -753,15 +766,7 @@ export class DiceSFRPG {
 
                 // Insert the damage type string if possible.
                 if (damageTypeString?.length > 0) {
-                    const diceRollHtml = '<h4 class="dice-roll">';
-                    const diceRollIndex = rollContent.indexOf(diceRollHtml);
-                    const firstHalf = rollContent.substring(0, diceRollIndex + diceRollHtml.length);
-                    const splitOffFirstHalf = rollContent.substring(diceRollIndex + diceRollHtml.length);
-                    const closeTagIndex = splitOffFirstHalf.indexOf('</h4>');
-                    const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
-                    const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
-
-                    messageData.content = firstHalf + rollResultHtml + ` ${damageTypeString}` + secondHalf;
+                    messageData.content = DiceSFRPG.appendTextToRoll(rollContent, damageTypeString);
                     messageData.flags = {
                         damage: {
                             amount: roll.total,
@@ -781,6 +786,21 @@ export class DiceSFRPG {
                 throw errorToThrow;
             }
         });
+    }
+
+    static appendTextToRoll(originalRollHTML, textToAppend) {
+        const diceRollHtml = '<h4 class="dice-roll">';
+
+        const diceRollIndex = originalRollHTML.indexOf(diceRollHtml);
+        const firstHalf = originalRollHTML.substring(0, diceRollIndex + diceRollHtml.length);
+        const splitOffFirstHalf = originalRollHTML.substring(diceRollIndex + diceRollHtml.length);
+
+        const closeTagIndex = splitOffFirstHalf.indexOf('</h4>');
+        const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
+        const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
+
+        const combinedResult = firstHalf + rollResultHtml + ` ${textToAppend}` + secondHalf;
+        return combinedResult;
     }
 
     /**
