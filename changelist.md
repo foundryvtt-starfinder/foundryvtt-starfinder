@@ -17,6 +17,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Added Mountain Eel from AA1 to Alien Archives.
 * Added spell resistance and activation/action to drone mods.
 * Added some, if not most, of the class features from Tech Revolution.
+* Assigned action target to weapons in the compendium.
 * Fixed a bug that allowed disabled modifiers to affect an actor.
 * Fixed a bug that caused the token configuration of Starship or Vehicle containing a PC or NPC actor crew to not open.
 * Fixed a bug that prevented nested containers from listing their content wealth.
