@@ -23,7 +23,8 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Added some, if not most, of the class features from Tech Revolution.
 * Assigned action target to weapons in the compendium.
 * Consumables no longer use up the entire quantity when used once.
-* Disabled modifiers no longer affect their actor.
+* Disabled modifiers no longer affect their actor's spell save DC.
+* Disabling modifiers on the roll dialog are remembered for future rolls again.
 * Initiative rolls no longer ignore the roll mode setting of the roll dialog.
 * Localized roll dialogs now properly respond to the Critical damage button. (Fixes #290 and #500)
 * Nested containers now list their contained wealth correctly.

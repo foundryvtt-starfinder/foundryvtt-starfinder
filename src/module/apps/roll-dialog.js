@@ -162,6 +162,15 @@ export default class RollDialog extends Dialog {
         this.rollMode = event.target.value;
     }
 
+    _getActorForContainer(container) {
+        if (container.tokenId) {
+            const scene = game.scenes.get(container.sceneId);
+            const token = scene.tokens.get(container.tokenId);
+            return token.actor;
+        }
+        return game.actors.get(container.actorId);
+    }
+
     async _toggleModifierEnabled(event) {
         const modifierIndex = $(event.currentTarget).data('modifierIndex');
         const modifier = this.availableModifiers[modifierIndex];
@@ -172,7 +181,7 @@ export default class RollDialog extends Dialog {
         if (modifier._id) {
             // Update container
             const container = modifier.container;
-            const actor = await game.actors.get(container.actorId);
+            const actor = this._getActorForContainer(container);
             if (container.itemId) {
                 const item = container.itemId ? await actor.items.get(container.itemId) : null;
 
