@@ -16,14 +16,16 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Added base int and cha to drone chassis.
 * Added Mountain Eel from AA1 to Alien Archives.
 * Added spell resistance and activation/action to drone mods.
-* Added the class features from Tech Revolution.
+* Added some, if not most, of the class features from Tech Revolution.
 * Fixed a bug that allowed disabled modifiers to affect an actor.
 * Fixed a bug that caused the token configuration of Starship or Vehicle containing a PC or NPC actor crew to not open.
 * Fixed a bug that prevented nested containers from listing their content wealth.
+* Fixed a few links pointing to the wrong items in compendium entries.
 * Fixed class' keyAbilityMod property not getting set correctly.
 * Fixed initiative roll dialog's roll mode setting being ignored.
 * Fixed starship critical damage rolls doubling the damage, Starships do not double their damage, instead they should apply a critical threshold. Deflector Shields still take 1 extra damage.
 * Reloading a weapon that has a short description will now roll the short description into chat instead.
+* Updated a few class features with proper modifier support.
 * Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.
 
 # v0.17.0 - Starfinder
