@@ -28,6 +28,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Initiative rolls no longer ignore the roll mode setting of the roll dialog.
 * Localized roll dialogs now properly respond to the Critical damage button. (Fixes #290 and #500)
 * Nested containers now list their contained wealth correctly.
+* NPCs can now access their level as @details.level.value as well as @details.cr, to aid with modifier consistency.
 * Reloading a weapon that has a short description will now roll the short description into chat instead.
 * Several compendium links from various compendium items to various other compendium items were updated to point to the correct item.
 * Starship critical damage rolls no longer double their damage. Deflector shields still take 1 extra damage from a critical hit however.
