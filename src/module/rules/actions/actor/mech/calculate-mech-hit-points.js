@@ -15,7 +15,7 @@ export default function (engine) {
         const baseHp = (frame?.hp?.base ?? 0) + (upperLimbs?.hp?.base ?? 0) + (lowerLimbs?.hp?.base ?? 0);
         const advancement = (frame?.hp?.advancement ?? 0) + (upperLimbs?.hp?.advancement ?? 0) + (lowerLimbs?.hp?.advancement ?? 0);
 
-        data.hp.max = baseHp + (advancement * tier);
+        data.attributes.hp.max = baseHp + (advancement * tier);
 
         return fact;
         

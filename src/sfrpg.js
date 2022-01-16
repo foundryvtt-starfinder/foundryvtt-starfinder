@@ -18,6 +18,7 @@ import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
+import { ActorSheetSFRPGMech } from "./module/actor/sheet/mech.js";
 import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
 import { ItemSFRPG } from "./module/item/item.js";
 import { CombatSFRPG } from "./module/combat/combat.js";
@@ -86,6 +87,7 @@ Hooks.once('init', async function () {
             ActorSheetSFRPGNPC,
             ActorSheetSFRPGStarship,
             ActorSheetSFRPGVehicle,
+            ActorSheetSFRPGMech,
             // Item Sheets
             ItemCollectionSheet,
             ItemSheetSFRPG,            
@@ -169,6 +171,7 @@ Hooks.once('init', async function () {
     Actors.registerSheet("sfrpg", ActorSheetSFRPGNPC,       { types: ["npc", "npc2"],   makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGStarship,  { types: ["starship"],      makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGVehicle,   { types: ["vehicle"],       makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGMech,      { types: ["mech"],          makeDefault: true });
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });

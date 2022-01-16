@@ -7,7 +7,7 @@ import { SFRPG } from "../../../../config.js";
  * @param {Engine} engine The SFRPG rules engine.
  */
 export default function (engine) {
-    engine.closures.add('calculateMechStrength', (fact, context) => {
+    engine.closures.add('calculateMechStrengthMod', (fact, context) => {
         const data = fact.data;
         const frame = fact.mechFrame;
         const tier = data?.details?.tier ?? 0;

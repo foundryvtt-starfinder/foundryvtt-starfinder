@@ -70,6 +70,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             isDrone: this.document.data.type === 'drone',
             isNPC: this.document.data.type === 'npc' || this.document.data.type === 'npc2',
             isHazard: this.document.data.type === 'hazard',
+            isMech: this.document.data.type === 'mech',
             config: CONFIG.SFRPG
         };
 
@@ -125,27 +126,31 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
 
         if (data.data.skills) {
-            // Update skill labels
-            for (let [s, skl] of Object.entries(data.data.skills)) {                
-                skl.ability = data.data.abilities[skl.ability].label.substring(0, 3);
-                skl.icon = this._getClassSkillIcon(skl.value);
+            if (this.actor.type === "mech") {
+                
+            } else {
+                // Update skill labels
+                for (let [s, skl] of Object.entries(data.data.skills)) {                
+                    skl.ability = data.data.abilities[skl.ability].label.substring(0, 3);
+                    skl.icon = this._getClassSkillIcon(skl.value);
 
-                let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
-                if (skl.subname) {
-                    skillLabel += ` (${skl.subname})`;
+                    let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
+                    if (skl.subname) {
+                        skillLabel += ` (${skl.subname})`;
+                    }
+
+                    skl.label = skillLabel;
+                    skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
                 }
 
-                skl.label = skillLabel;
-                skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
+                data.data.skills = Object.keys(data.data.skills).sort().reduce((skills, key) => {
+                    skills[key] = data.data.skills[key];
+
+                    return skills;
+                }, {});
+
+                data.data.hasSkills = Object.values(data.data.skills).filter(x => x.enabled).length > 0;
             }
-
-            data.data.skills = Object.keys(data.data.skills).sort().reduce((skills, key) => {
-                skills[key] = data.data.skills[key];
-
-                return skills;
-            }, {});
-
-            data.data.hasSkills = Object.values(data.data.skills).filter(x => x.enabled).length > 0;
         }
 
         if (data.data.traits) {

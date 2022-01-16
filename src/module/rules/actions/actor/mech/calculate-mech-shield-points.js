@@ -11,7 +11,7 @@ export default function (engine) {
         const data = fact.data;
         const tier = data?.details?.tier ?? 0;
 
-        data.sp.max = SFRPG.mechStatisticsByTier[tier].sp;
+        data.attributes.sp.max = SFRPG.mechStatisticsByTier[tier].sp;
 
         return fact;
     });

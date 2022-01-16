@@ -69,6 +69,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const armorUpgrades = items.filter(item => item.type === "upgrade");
         const asis = items.filter(item => item.type === "asi");
         const actorResources = items.filter(item => item.type === "actorResource");
+        const mechFrame = items.filter(item => item.type === "mechFrame");
+        const mechUpperLimbs = items.filter(item => item.type === "mechLimb" && item.data.data.type === "upper");
+        const mechLowerLimbs = items.filter(item => item.type === "mechLimb" && item.data.data.type === "lower");
+        const mechPowerCore = items.filter(item => item.type === "mechPowerCore");
         game.sfrpg.engine.process("process-actors", {
             actorId: this.id,
             actor: this,
@@ -88,7 +92,11 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             armorUpgrades,
             asis,
             frames,
-            actorResources
+            actorResources,
+            mechFrame,
+            mechUpperLimbs,
+            mechLowerLimbs,
+            mechPowerCore
         });
     }
 
