@@ -1,188 +1,146 @@
 {
+  "_id": "2C84uCPaDpJIpymO",
   "name": "Vibrogarrote, harmonic",
   "type": "weapon",
   "data": {
-    "description": {
-      "value": "<p>The vibrogarrote is similar to an analog garrote, but the handle contains a battery pack to power the weapon, and the garrote wire produces a coherent, cutting sound. When used, the vibrogarrote makes a distinctive pitch based on how long the&nbsp;wire has been extended. Basic, harmonic, and interference vibrogarrotes produce only audible frequencies, while infrasonic and ultrasonic vibrogarrotes also generate waves outside the typical auditory spectrum for additional damage.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "AR pg. 13",
     "type": "",
-    "quantity": 1,
-    "bulk": "L",
-    "price": 7200,
-    "level": 7,
-    "attuned": false,
-    "equipped": false,
-    "identified": true,
+    "ability": "str",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "eac",
+    "actionType": "mwak",
+    "activation": {
+      "type": "none",
+      "condition": "",
+      "cost": null
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
-      "sturdy": true,
+      "ac": {
+        "value": "5"
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": 36,
-        "max": "36"
       },
       "hardness": {
         "value": "19"
       },
-      "ac": {
-        "value": "5"
-      }
+      "hp": {
+        "max": "36",
+        "value": 36
+      },
+      "size": "medium",
+      "sturdy": true
     },
-    "activation": {
-      "type": "none",
-      "cost": null,
-      "condition": ""
+    "attuned": false,
+    "bulk": "L",
+    "capacity": {
+      "max": 20,
+      "value": 20
     },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
-      "units": "touch",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "isActive": null,
-    "ability": "str",
-    "actionType": "mwak",
-    "attackBonus": 0,
     "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "isOpen": true,
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 7,
+          "subtype": "fusion",
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "goods"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightProperty": ""
+        }
+      ]
+    },
     "critical": {
-      "parts": [],
-      "effect": "Deafen"
+      "effect": "Deafen",
+      "parts": []
     },
     "damage": {
       "parts": [
         {
           "formula": "2d4 + @abilities.str.mod",
+          "operator": "",
           "types": {
             "sonic": true
-          },
-          "operator": ""
+          }
         }
       ]
     },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": "",
-      "descriptor": "negate"
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>The vibrogarrote is similar to an analog garrote, but the handle contains a battery pack to power the weapon, and the garrote wire produces a coherent, cutting sound. When used, the vibrogarrote makes a distinctive pitch based on how long the&nbsp;wire has been extended. Basic, harmonic, and interference vibrogarrotes produce only audible frequencies, while infrasonic and ultrasonic vibrogarrotes also generate waves outside the typical auditory spectrum for additional damage.</p>"
     },
     "descriptors": [],
-    "capacity": {
-      "value": 20,
-      "max": 20
+    "duration": {
+      "units": "",
+      "value": ""
     },
-    "usage": {
-      "value": 1,
-      "per": "minute"
-    },
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "level": 7,
     "modifiers": [],
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 7,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        },
-        {
-          "type": "slot",
-          "subtype": "",
-          "amount": 1,
-          "acceptsType": [
-            "goods"
-          ],
-          "weightMultiplier": 1,
-          "weightProperty": "",
-          "affectsEncumbrance": true
-        },
-        {
-          "type": "slot",
-          "subtype": "ammunitionSlot",
-          "amount": 1,
-          "acceptsType": [
-            "ammunition"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": ""
-        }
-      ],
-      "isOpen": true
-    },
-    "weaponType": "advancedM",
-    "weaponCategory": "sonic",
-    "special": "",
+    "price": 7200,
+    "proficient": false,
     "properties": {
-      "one": false,
-      "two": true,
+      "aeon": false,
       "amm": false,
       "analog": false,
+      "antibiological": false,
       "archaic": false,
+      "aurora": false,
       "automatic": false,
       "blast": false,
       "block": false,
       "boost": false,
-      "bright": false,
-      "disarm": false,
-      "entangle": false,
-      "explode": false,
-      "injection": false,
-      "line": false,
-      "living": false,
-      "mind-affecting": false,
-      "nonlethal": false,
-      "operative": true,
-      "penetrating": false,
-      "powered": true,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "thrown": false,
-      "trip": false,
-      "unwieldy": false,
-      "aeon": false,
-      "antibiological": false,
-      "aurora": false,
       "breach": false,
       "breakdown": false,
+      "bright": false,
       "cluster": false,
       "conceal": true,
       "deconstruct": false,
       "deflect": false,
+      "disarm": false,
       "double": false,
       "drainCharge": false,
       "echo": false,
+      "entangle": false,
+      "explode": false,
       "extinguish": false,
       "feint": false,
       "fiery": false,
@@ -196,45 +154,87 @@
       "guided": false,
       "harrying": false,
       "holyWater": false,
+      "hybrid": false,
       "ignite": false,
       "indirect": false,
+      "injection": false,
       "integrated": false,
+      "line": false,
+      "living": false,
       "lockdown": false,
+      "mind-affecting": false,
       "mine": false,
       "mire": false,
       "modal": false,
       "necrotic": false,
+      "nonlethal": false,
+      "one": false,
+      "operative": true,
+      "penetrating": false,
       "polarize": false,
       "polymorphic": false,
+      "powered": true,
       "professional": false,
       "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
       "shape": false,
       "shells": false,
       "shield": false,
+      "sniper": false,
+      "stun": false,
+      "subtle": false,
       "sunder": false,
       "swarm": false,
       "tail": false,
       "teleportive": false,
       "thought": false,
       "throttle": true,
+      "thrown": false,
+      "trip": false,
+      "two": true,
+      "unbalancing": false,
       "underwater": false,
+      "unwieldy": false,
       "variantBoost": false,
-      "wideLine": false,
-      "hybrid": false,
-      "regrowth": false,
-      "unbalancing": false
+      "wideLine": false
     },
-    "proficient": false,
-    "abilityMods": {
-      "parts": []
+    "quantity": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "touch",
+      "value": null
     },
-    "actionTarget": "eac"
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "AR pg. 13",
+    "special": "",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "usage": {
+      "per": "minute",
+      "value": 1
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    },
+    "weaponCategory": "sonic",
+    "weaponType": "advancedM"
   },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
   "effects": [],
-  "_id": "2C84uCPaDpJIpymO"
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg"
 }

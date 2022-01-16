@@ -184,7 +184,7 @@ function buildWatch() {
 /**
  * Sorts the keys in a JSON object, which should make it easier to find data keys.
  */
-function JSONstringifyOrder( obj, space )
+function JSONstringifyOrder( obj, space, sortingMode = "default" )
 {
     var allKeys = [];
     var seen = {};
@@ -196,6 +196,24 @@ function JSONstringifyOrder( obj, space )
         return value;
     });
     allKeys.sort();
+    
+    if (sortingMode === "item") {
+        // Ensure name is after _id, and type is after name.
+        const idIndex = allKeys.indexOf("_id");
+
+        const nameIndex = allKeys.indexOf("name");
+        if (nameIndex > -1) {
+            allKeys.splice(nameIndex, 1);
+            allKeys.splice(idIndex + 1, 0, "name");
+        }
+
+        const typeIndex = allKeys.indexOf("type");
+        if (typeIndex > -1) {
+            allKeys.splice(typeIndex, 1);
+            allKeys.splice(idIndex + 2, 0, "type");
+        }
+    }
+    
     return JSON.stringify(obj, allKeys, space);
 }
 
@@ -209,7 +227,7 @@ async function unpack(sourceDatabase, outputDirectory) {
 	let items = await db.asyncFind({});
 
 	for (let item of items) {
-		let jsonOutput = JSON.stringify(item, null, 2);
+		let jsonOutput = JSONstringifyOrder(item, 2, "item");
 		let filename = sanitize(item.name);
 		filename = filename.replace(/[\s]/g, "_");
 		filename = filename.replace(/[,;]/g, "");
