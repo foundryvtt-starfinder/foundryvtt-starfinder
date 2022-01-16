@@ -9,8 +9,8 @@
         "TypeVehicle": "Véhicule"
     },
     "ITEM": {
-        "TypeAmmunition": "Ammunition",
         "TypeActorresource": "Actor Resource",
+        "TypeAmmunition": "Ammunition",
         "TypeArchetypes": "Archétype",
         "TypeAsi": "Augmentation de valeur de Caractéristique",
         "TypeAugmentation": "Augmentation",
@@ -55,6 +55,16 @@
         "TypeWeaponaccessory": "Accessoire d'Arme"
     },
     "SFRPG": {
+        "ACPTooltip": "Pénalité d'armure: {mod} ({source})",
+        "ACTooltipArmorACMod": "Modificateur d'armure: {armor} ({name})",
+        "ACTooltipBase": "Classe d'Armure de base: {base}",
+        "ACTooltipBonus": "{type} Bonus: {mod} ({source})",
+        "ACTooltipMaxDex": "Modificateur de dextérité: {maxDex} (armure max: {armorMax}, shield max: {shieldMax})",
+        "ACTooltipNotProficientMod": "Malus de non-maîtrise d'armure : {profMod}",
+        "ACTooltipNotProficientShield": "Malus de non-maîtrise de bouclier : {profMod}",
+        "ACTooltipShieldACMod": "Modificateur de Bouclier: {shield} ({name})",
+        "ACvsCombatManeuversLabel": "CMD",
+        "ACvsCombatManeuversTitle": "AC vs Manoeuvres de combat",
         "AbilityActivationTypesDay": "Jour",
         "AbilityActivationTypesFull": "Action C.",
         "AbilityActivationTypesHour": "Heure",
@@ -84,16 +94,15 @@
         "AbilityPenaltyTooltip": "Pénalité de caractéristique: {mod}",
         "AbilityScoreBase": "Score de caractéristique de base",
         "AbilityScoreBaseTooltip": "Score de caractéristique de base: {mod}",
-        "AbilityScoreBonusTooltip": "{type} bonus: {mod} ({source})",
         "AbilityScoreBonusModifiedTooltip": "{type} bonus: {mod} (computed from {base}) ({source})",
+        "AbilityScoreBonusTooltip": "{type} bonus: {mod} ({source})",
         "AbilityScoreGenericTooltip": "{score} Ability Score: {value} ({source})",
         "AbilityScoreIncreaseTooltip": "Augmentation de valeur de caractéristique: {mod}",
         "AbilityScoreRaceTooltip": "Race: {mod}",
         "AbilityScoreThemeTooltip": "Thème: {mod}",
-        "About": "About",
         "AbilityStr": "Force",
         "AbilityWis": "Sagesse",
-        "ACPTooltip": "Pénalité d'armure: {mod} ({source})",
+        "About": "About",
         "ActionAbil": "Test de caractéristique",
         "ActionHeal": "Soin",
         "ActionMSAK": "Attaque de sort en mêlée",
@@ -103,13 +112,6 @@
         "ActionRWAK": "Attaque d'arme à Distance",
         "ActionSave": "Jet de sauvegarde",
         "ActionUtil": "Utilitaire",
-        "ACTooltipArmorACMod": "Modificateur d'armure: {armor} ({name})",
-        "ACTooltipBase": "Classe d'Armure de base: {base}",
-        "ACTooltipBonus": "{type} Bonus: {mod} ({source})",
-        "ACTooltipMaxDex": "Modificateur de dextérité: {maxDex} (armure max: {armorMax}, shield max: {shieldMax})",
-        "ACTooltipNotProficientMod": "Malus de non-maîtrise d'armure : {profMod}",
-        "ACTooltipNotProficientShield": "Malus de non-maîtrise de bouclier : {profMod}",
-        "ACTooltipShieldACMod": "Modificateur de Bouclier: {shield} ({name})",
         "ActorSheet": {
             "Attributes": {
                 "Skills": {
@@ -122,8 +124,8 @@
                         "Perfect": "Perfect"
                     },
                     "MainMovementType": "Main Movement",
-                    "MovementSpeedTitle": "Movement Speed",
                     "MovementSpeedNamedTitle": "Movement Speed: {name}",
+                    "MovementSpeedTitle": "Movement Speed",
                     "Types": {
                         "All": "All speeds",
                         "Burrowing": "Burrowing",
@@ -279,21 +281,21 @@
                     "BAB": "BBA",
                     "BaseAttackBonus": "Bonus de base à l'attaque",
                     "Encumbrance": "Encombrement",
-                    "Hitpoints": "Points de vies",
                     "HP": "PV",
+                    "Hitpoints": "Points de vies",
                     "MeleeAttackDamage": "Dégats de mêlée",
                     "MeleeAttackRolls": "Jets d'attaque de mêlée",
                     "MultiplyAllSpeeds": "All Speeds Multiplier",
+                    "RP": "PR",
                     "RangedAttackDamage": "Dégats à distance",
                     "RangedAttackRolls": "Jets d'attaque à distance",
                     "Resolve": "Persévérance",
-                    "RP": "PR",
-                    "Skillpoints": "Points de Compétences",
-                    "SkillRanks": "Rangs de Compétence",
                     "SP": "PE",
+                    "SkillRanks": "Rangs de Compétence",
+                    "Skillpoints": "Points de Compétences",
+                    "SpecificSpeed": "Specific Speed",
                     "SpecificWeaponAttackDamage": "Dégâts d'arme spécifiques",
                     "SpecificWeaponAttackRolls": "Jets d'attaque d'arme spécifiques",
-                    "SpecificSpeed": "Specific Speed",
                     "SpellAttackDamage": "Dégats de sort",
                     "SpellAttackRolls": "Jet d'attaque de sort",
                     "SpellSaveDC": "Spell Save DC",
@@ -322,8 +324,6 @@
                 "ErrorNoCharges": "{name} plus de charge disponible."
             }
         },
-        "ACvsCombatManeuversLabel": "CMD",
-        "ACvsCombatManeuversTitle": "AC vs Manoeuvres de combat",
         "AddLabel": "Ajouter",
         "AddProfessionButtonText": "Ajouter une profession",
         "AlignmentCE": "Chaotique mauvais",
@@ -437,6 +437,9 @@
                 "WeaponType": "Type d'Arme"
             }
         },
+        "CMDBaseTooltip": "Base: 8",
+        "CMDKACModTooltip": "CAC: {kac}",
+        "CMDModiferTooltip": "{type} Rebonds: {mod} ({source})",
         "CancelButtonLabel": "Annuler",
         "Canvas": {
             "Interface": {
@@ -490,23 +493,20 @@
         },
         "ClassArmorProf": "Maniements des armures",
         "ClassBABProgression": "Progression du BBA",
-        "Classes": {
-            "IsCasterClass": "S'agit-il d'une classe de lanceur de sorts ?"
-        },
         "ClassFortSaveProgression": "Progression sauvegarde de vigueur",
         "ClassHPPerLevel": "Points de vie par niveau",
         "ClassKeyAbilityScore": "Caractéristique essentielle",
         "ClassLevelLabel": "Niveaux de classe",
         "ClassReflexSaveProgression": "Progression sauvegarde de réflexe",
+        "ClassSPPerlevel": "Points d'endurance par niveau",
         "ClassSkillRanksPerlevel": "Points de compétence par niveau",
         "ClassSkills": "Compétences de classe",
-        "ClassSPPerlevel": "Points d'endurance par niveau",
         "ClassWeaponProf": "Maîtrise des armes",
         "ClassWillSaveProgression": "Progression sauvegarde de volonté",
+        "Classes": {
+            "IsCasterClass": "S'agit-il d'une classe de lanceur de sorts ?"
+        },
         "Close": "Fermer",
-        "CMDBaseTooltip": "Base: 8",
-        "CMDKACModTooltip": "CAC: {kac}",
-        "CMDModiferTooltip": "{type} Rebonds: {mod} ({source})",
         "Combat": {
             "ChatCards": {
                 "Footer": "{combatType} - {combatPhase} phase",
@@ -591,6 +591,7 @@
             }
         },
         "ComingSoon": "A venir !",
+        "ConImm": "Imm. aux conditions",
         "ConditionsAsleep": "Endormi",
         "ConditionsBleeding": "Hémorragie",
         "ConditionsBlinded": "Aveuglé",
@@ -626,7 +627,6 @@
         "ConditionsStaggered": "Chancelant",
         "ConditionsStunned": "Étourdi",
         "ConditionsUnconscious": "Inconscient",
-        "ConImm": "Imm. aux conditions",
         "ConsumableTypes": {
             "Ampoule": "Ampoules à Sort",
             "Drugs": "Drogues",
@@ -670,15 +670,15 @@
                 "Force": "Force",
                 "Hint": "This is a list of damage types that apply to this damage roll.",
                 "Nonlethal": "Non létal",
+                "Operators": {
+                    "And": "et",
+                    "Or": "ou"
+                },
                 "Piercing": "Perforant",
                 "Radiation": "Radiation",
                 "Slashing": "Tranchant",
                 "Sonic": "Sonique",
-                "Title": "Types de dommages",
-                "Operators": {
-                    "And": "et",
-                    "Or": "ou"
-                }
+                "Title": "Types de dommages"
             },
             "Vulnerabilities": "Vulnérabilités"
         },
@@ -938,277 +938,6 @@
             }
         },
         "ItemNoUses": "{name} n'a plus de munitions !",
-        "Items": {
-            "ACP": "Malus d'Armure aux Tests",
-            "Action": {
-                "AbilityModifier": "Modificateur de Capacité",
-                "ActionTarget": {
-                    "ChatMessage": " against {actionTarget}",
-                    "EAC": "EAC",
-                    "KAC": "KAC",
-                    "KAC8": "KAC +8",
-                    "None": "No target",
-                    "Other": "Other",
-                    "Tag": "Targets: {actionTarget}",
-                    "Title": "Action Target",
-                    "Tooltip": "If this action targets a specific property, you can configure that here."
-                },
-                "ActionType": "Type d'Action",
-                "AddDamageSection": "Add damage section",
-                "AddDamageSectionTooltip": "Add another damage section to this item.",
-                "AttackRollBonus": "Bonus au Jet d'Attaque",
-                "ChatMessageFlavor": "Message de Chat",
-                "CriticalDamageFormula": "Formule de Dommages Critiques",
-                "CriticalEffect": "Effet Critique",
-                "CriticalDamageHeader": "Critical Damage Sections",
-                "CriticalHealingFormula": "Formule de Soins Critiques",
-                "DamageFormula": "Formule de Dommages",
-                "DamageFormulaTooltip": "The damage roll for this damage section.",
-                "DamageHeader": "Damage Sections",
-                "DamageName": "Damage Name",
-                "DamageNameTooltip": "A name you can specify to easily reference this attack element.",
-                "DamageNotes": "Damage Notes",
-                "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
-                "DamageSection": "Damage Section {section}",
-                "HealingFormula": "Formule de Soin",
-                "OtherFormula": "Autre Formule",
-                "RollNotes": "Roll Notes",
-                "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
-                "SavingThrow": "Jet de Sauvegarde",
-                "TitleAction": "Action",
-                "TitleActivation": "Activation"
-            },
-            "Activation": {
-                "ActivationCondition": "Condition d'Activation",
-                "ActivationCost": "Coût d'Activation",
-                "Area": "Zone",
-                "Duration": "Durée",
-                "LimitedUses": "Utilisations Limitées",
-                "Range": "Portée",
-                "Target": "Cible"
-            },
-            "Ammunition": {
-                "AmmunitionType": "Ammunition Type",
-                "Capacity": "Capacity Settings",
-                "Details": "Ammunition Details",
-                "Type": {
-                    "Arrows": "Arrows",
-                    "Charges": "Charges",
-                    "Darts": "Darts",
-                    "Flares": "Flares",
-                    "Fuel": "Fuel",
-                    "HeavyRounds": "Heavy Rounds",
-                    "LongarmAndSniperRounds": "Longarm and Sniper Rounds",
-                    "Missiles": "Missiles",
-                    "Nanites": "Nanites",
-                    "None": "None",
-                    "Rockets": "Rockets",
-                    "SmallArmRounds": "Small Arm Rounds",
-                    "Shells": "Shells"
-                },
-                "UseCapacity": "Use Capacity"
-            },
-            "Attuned": "Harmonisé",
-            "Augmentation": {
-                "Details": "Détails de l'Augmentation",
-                "System": "Système",
-                "Type": "Type"
-            },
-            "Capacity": {
-                "Capacity": "Capacité",
-                "CapacityMaxTooltip": "Le nombre maximum de charges que cet élément peut supporter",
-                "CapacityValueTooltip": "Le nombre actuel de charges",
-                "HeaderTooltip": "Le nombre de rounds, de charges, etc... que peut contenir cet élément (par exemple, le nombre de charges qu'une batterie peut contenir)",
-                "Usage": "Utilisation",
-                "UsageTooltip": "Le nombre de charges, de munitions, etc. qui sont consommées lorsque cet article est utilisé.",
-                "UsageValueTooltip": "L'unité de temps utilisée pour déterminer quand la capacité de l'élément est consommée."
-            },
-            "Categories": {
-                "AbilityScoreIncrease": "Augmentations de Valeur de Caractéristique",
-                "Archetypes": "Archétypes",
-                "Armor": "Armures",
-                "Ammunition": "Ammunition",
-                "ArmorUpgrades": "Améliorations d'Armure",
-                "Augmentations": "Augmentations",
-                "Classes": "Classes",
-                "Consumables": "Consommables",
-                "Containers": "Conteneurs",
-                "DroneChassis": "Châssis de Drone",
-                "DroneMods": "Modules de Drone",
-                "Equipment": "Equipement",
-                "Feats": "Traits",
-                "Goods": "Marchandises",
-                "HybridItems": "Objets Hybrides",
-                "MagicItems": "Objets Magiques",
-                "MiscellaneousItems": "Objets Divers",
-                "Races": "Races",
-                "Shields": "Boucliers",
-                "Spells": "Sorts",
-                "StarshipAblativeArmors": "Armures Ablatives de Vaisseau Spatial",
-                "StarshipArmors": "Armures de Vaisseau Spatial",
-                "StarshipComputers": "Ordinateurs de Vaisseau",
-                "StarshipCrewQuarters": "Quartiers d'Equipage de Vaisseau Spatial",
-                "StarshipDefensiveCountermeasures": "Contre-mesures Défensives de Vaisseau Spatial",
-                "StarshipDriftEngine": "Propulseur Drift de Vaisseau Spatial",
-                "StarshipExpansionBays": "Compartiments Annexes de Vaisseau Spatial",
-                "StarshipFortifiedHulls": "Coques Renforcées de Vaisseau Spatial",
-                "StarshipFrames": "Armatures de Vaisseau",
-                "StarshipOtherSystems": "Autres Systèmes de Vaisseau Spatial",
-                "StarshipPowerCores": "Réacteurs de Vaisseau Spatial",
-                "StarshipReinforcedBulkheads": "Cloisons Renforcées de Vaisseau Spatial",
-                "StarshipSecuritySystems": "Systèmes de Sécurité de Vaisseau Spatial",
-                "StarshipSensors": "Détecteurs de Vaisseau Spatial",
-                "StarshipShields": "Boucliers de Vaisseau Spatial",
-                "StarshipThrusters": "Propulseurs de Vaisseau Spatial",
-                "StarshipWeapons": "Armes de Vaisseau",
-                "TechnologicalItems": "Objets Technologiques",
-                "Themes": "Thèmes",
-                "VehicleAttacks": "Vehicle Attacks",
-                "VehicleSystems": "Vehicle Systems",
-                "WeaponAccessories": "Accessoires d'Armes",
-                "WeaponFusions": "Fusions d'Armes",
-                "Weapons": "Armes"
-            },
-            "Consumable": {
-                "Action": "Action de Consomable",
-                "DestroyWhenEmpty": "Détruire si vide",
-                "OnUse": "Consommer à l'utilisation",
-                "Type": "Type de Consommable",
-                "Usage": "Utilisation de Consommable"
-            },
-            "Description": {
-                "Bulk": "Volume",
-                "Hands": "Mains",
-                "Level": "Niveau",
-                "Price": "Prix",
-                "Quantity": "Quantité",
-                "QuantityPerPack": "Pack size",
-                "QuantityPerPackTooltip": "Pack size is used to define how many of one item you buy for the full price. For example, you buy 30 small arm rounds at the cost of 40 credits. This helps with performing bulk and wealth calculations, as well as ammunition tracking."
-            },
-            "Equipment": {
-                "Action": "Action de l'Equipement",
-                "Category": "Type d'Armure",
-                "ContainerTooltip": "L'armure peut généralement contenir des améliorations d'armure ou d'autres éléments. Augmentez la capacité de stockage pour permettre l'ajout de contenu.",
-                "EAC": "Classe d'Armure Energétique",
-                "KAC": "Classe d'Armure Cinétique",
-                "PowerArmorDetails": "Détails de l'Armure Assistée",
-                "SpeedAdjustment": "Modificateur de Vitesse"
-            },
-            "EquipmentStatus": "Status d'Equipement",
-            "EquipmentUsage": "Utilisation d'Equipement",
-            "Equippable": "Equippable",
-            "Equipped": "Equipé",
-            "Feat": {
-                "ActionRecharge": "Recharge de l'Action",
-                "Charged": "Chargé",
-                "FeatureAttack": "Attaque du Trait",
-                "FeatureUsage": "Utilisation du Trait",
-                "RechargeOn": "Recharge",
-                "Requirements": "Prérequis"
-            },
-            "Hybrid": {
-                "Details": "Détails de l'Elément Hybride"
-            },
-            "Identified": "Identifié",
-            "Magic": {
-                "Details": "Détails de l'Elément Magique"
-            },
-            "MaxDex": "Modificateur de Dextérité Maximum",
-            "NotProficient": "Non maîtrisé",
-            "Proficient": "Maîtrise",
-            "Shield": {
-                "AcMaxDex": "Bonus de dex max : {maxDex}",
-                "ACP": "MAT: {acp}",
-                "Action": "Action de Bouclier",
-                "Aligned": "Aligné",
-                "ArmorCheck": "Malus d'armure aux tests : {acp}",
-                "Bonus": "Bonus de Bouclier",
-                "Bonuses": "Bonus d'utilisation : {wielded} / Bonus d'alignement : {aligned}",
-                "Details": "Détails du Bouclier",
-                "Dex": "Dex: {dex}",
-                "Shield": "Bouclier",
-                "ShieldBonus": "Bouclier : {wielded} / {aligned}",
-                "Wielded": "Utilisé"
-            },
-            "ShipWeapon": {
-                "Activated": "Activé",
-                "AttackBonus": "Bonus d'Attaque",
-                "BpCost": "Coût en PC",
-                "ItemType": "Arme de Vaisseau",
-                "Mounted": "Monté",
-                "NotMounted": "Non Monté",
-                "PowerCost": "Coût en Energie",
-                "Range": "Portée",
-                "ReloadCost": "10 minutes",
-                "Source": "Source",
-                "Speed": "Speed: {speed} hexes",
-                "WeaponArc": "Arc d'Arme",
-                "WeaponClass": "Classe d'Arme",
-                "WeaponStatus": "Statut de l'Arme"
-            },
-            "Spell": {
-                "AllowedClasses": "Classes Permises",
-                "Casting": "Lancement du Sort",
-                "Concentration": "Concentration",
-                "ConcentrationTooltip": "This spell requires concentration.<br/>You must use the 'Concentrate to Maintain Spell' action (CRB pg. 246) to maintain it.",
-                "Consumed": "Consommé",
-                "Cost": "Coût (Cr)",
-                "Details": "Détails du Sort",
-                "Dismissible": "Révocable",
-                "Effects": "Effets du Sort",
-                "IsVariableLevel": "Is Variable Level?",
-                "IsVariableLevelYes": "Yes",
-                "Level": "Niveau de Sort",
-                "PreparationMode": "Préparation du Sort",
-                "Prepared": "Préparé",
-                "Properties": "Propriétés du Sort",
-                "Resistance": "Résistance à la Magie",
-                "School": "Ecole de Magie",
-                "SpellcastingMaterials": "Composantes Matérielles",
-                "Supply": "Supply"
-            },
-            "Technological": {
-                "Details": "Détails de l'Elément Technologique"
-            },
-            "Theme": {
-                "AbilityAdjustment": "Modificateur de Capacité",
-                "Details": "Détails du Thème",
-                "Skill": "Compétence"
-            },
-            "Unlimited": "Illimité",
-            "Upgrade": {
-                "AllowedArmorType": "Type d'Armure Permis",
-                "Any": "Tous",
-                "ArmorUpgradeDetails": "Détails de l'Amélioration d'Armure",
-                "Slots": "Emplacements"
-            },
-            "VehicleAttack": {
-                "Type": "Vehicle Attack"
-            },
-            "VehicleSystem": {
-                "Type": "Vehicle System"
-            },
-            "Weapon": {
-                "Attack": "Attaque de l'Arme",
-                "Category": "Catégorie d'Arme",
-                "Details": "Détails de l'Arme",
-                "Properties": "Propriétés de l'Arme",
-                "Type": "Type d'Arme",
-                "Usage": "Utilisation de l'Arme"
-            },
-            "WeaponAccessory": {
-                "SupportedType": {
-                    "Any": "Tous",
-                    "HeavyWeapon": "Arme Lourde",
-                    "MeleeWeapon": "Arme de Corps à Corps",
-                    "MeleeWeaponSA": "Melee weapon & Smallarm",
-                    "Projectile": "Projectile",
-                    "RailedWeapon": "Railed weapon",
-                    "RailedWeaponSA": "Railed weapon & Smallarm",
-                    "SmallArm": "Smallarm"
-                }
-            }
-        },
         "ItemSheet": {
             "AbilityScoreIncrease": {
                 "Header": "Améliorations de Caractéristique",
@@ -1232,11 +961,11 @@
                 "ErrorNoType": "Type is a required field.",
                 "Header": "Resource Properties",
                 "Range": "Value range",
-                "RangeTooltip": "(Optional) Minimum and maximum values for this resource.<br/>The value cannot be lower than the range minimum, nor can it be higher than the range maximum.",
                 "RangeMode": "Range mode",
                 "RangeModeImmediate": "Immediate",
                 "RangeModePost": "Post",
                 "RangeModeTooltip": "(Advanced) Defines whether the range limitations are applied only after the modifiers are all processed, or for each modifier as they are being processed.<br/><br/>For example, if the range is set to maximum of 1, and the base value is 0, and you have a modifier of +2, and a modifier of -1, the different modes would work as follows:<br/><br/>Post: 0 + 2 - 1 would output 1, which does not exceed the range maximum.<br/><br/>Immediate: 0 + 2 - 1 would output 0. Because 0 + 2 is 2, which exceeds the range maximum of 1, so it gets clamped to 1. Then -1 is applied, producing 0.",
+                "RangeTooltip": "(Optional) Minimum and maximum values for this resource.<br/>The value cannot be lower than the range minimum, nor can it be higher than the range maximum.",
                 "ShowInCombatTracker": "Show in Combat Tracker",
                 "ShowInCombatTrackerTooltip": "If enabled, this resource will be visible in the combat tracker for quick reference.",
                 "ShowOwnerAndGMOnly": "Only shown for Owner and GM",
@@ -1256,11 +985,11 @@
                 "Visualizations": "Conditional Visualization",
                 "VisualizationsIntro": "If resource value is..",
                 "VisualizationsModeEqual": "equal to",
-                "VisualizationsModeNotEqual": "not equal to",
                 "VisualizationsModeGreaterThan": "greater than",
                 "VisualizationsModeGreaterThanEqual": "greather than or equal to",
                 "VisualizationsModeLesserThan": "lesser than",
                 "VisualizationsModeLesserThanEqual": "lesser than or equal to",
+                "VisualizationsModeNotEqual": "not equal to",
                 "VisualizationsThen": "Then:",
                 "VisualizationsTitle": "Title:"
             },
@@ -1273,9 +1002,9 @@
                     "SpellsKnown": "Spells Known",
                     "SpellsKnownHeader": "Spells Known (by spell level)",
                     "SpellsPerDay": "Spells Per Day",
-                    "SpellsPerDayHeader": "Spells Per Day (by spell level)",
                     "SpellsPerDayBonus": "Bonus Spells Per Day",
-                    "SpellsPerDayBonusHeader": "Bonus Spells Per Day (by spell level)"
+                    "SpellsPerDayBonusHeader": "Bonus Spells Per Day (by spell level)",
+                    "SpellsPerDayHeader": "Spells Per Day (by spell level)"
                 }
             },
             "Consumables": {
@@ -1475,6 +1204,277 @@
                 "ContainerTooltip": "Les armes peuvent généralement contenir des fusions d'armes et des améliorations d'armes. Augmenter la capacité de stockage pour permettre l'ajout de fusions et d'améliorations."
             }
         },
+        "Items": {
+            "ACP": "Malus d'Armure aux Tests",
+            "Action": {
+                "AbilityModifier": "Modificateur de Capacité",
+                "ActionTarget": {
+                    "ChatMessage": " against {actionTarget}",
+                    "EAC": "EAC",
+                    "KAC": "KAC",
+                    "KAC8": "KAC +8",
+                    "None": "No target",
+                    "Other": "Other",
+                    "Tag": "Targets: {actionTarget}",
+                    "Title": "Action Target",
+                    "Tooltip": "If this action targets a specific property, you can configure that here."
+                },
+                "ActionType": "Type d'Action",
+                "AddDamageSection": "Add damage section",
+                "AddDamageSectionTooltip": "Add another damage section to this item.",
+                "AttackRollBonus": "Bonus au Jet d'Attaque",
+                "ChatMessageFlavor": "Message de Chat",
+                "CriticalDamageFormula": "Formule de Dommages Critiques",
+                "CriticalDamageHeader": "Critical Damage Sections",
+                "CriticalEffect": "Effet Critique",
+                "CriticalHealingFormula": "Formule de Soins Critiques",
+                "DamageFormula": "Formule de Dommages",
+                "DamageFormulaTooltip": "The damage roll for this damage section.",
+                "DamageHeader": "Damage Sections",
+                "DamageName": "Damage Name",
+                "DamageNameTooltip": "A name you can specify to easily reference this attack element.",
+                "DamageNotes": "Damage Notes",
+                "DamageNotesTooltip": "The damage notes are displayed on the damage roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
+                "DamageSection": "Damage Section {section}",
+                "HealingFormula": "Formule de Soin",
+                "OtherFormula": "Autre Formule",
+                "RollNotes": "Roll Notes",
+                "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
+                "SavingThrow": "Jet de Sauvegarde",
+                "TitleAction": "Action",
+                "TitleActivation": "Activation"
+            },
+            "Activation": {
+                "ActivationCondition": "Condition d'Activation",
+                "ActivationCost": "Coût d'Activation",
+                "Area": "Zone",
+                "Duration": "Durée",
+                "LimitedUses": "Utilisations Limitées",
+                "Range": "Portée",
+                "Target": "Cible"
+            },
+            "Ammunition": {
+                "AmmunitionType": "Ammunition Type",
+                "Capacity": "Capacity Settings",
+                "Details": "Ammunition Details",
+                "Type": {
+                    "Arrows": "Arrows",
+                    "Charges": "Charges",
+                    "Darts": "Darts",
+                    "Flares": "Flares",
+                    "Fuel": "Fuel",
+                    "HeavyRounds": "Heavy Rounds",
+                    "LongarmAndSniperRounds": "Longarm and Sniper Rounds",
+                    "Missiles": "Missiles",
+                    "Nanites": "Nanites",
+                    "None": "None",
+                    "Rockets": "Rockets",
+                    "Shells": "Shells",
+                    "SmallArmRounds": "Small Arm Rounds"
+                },
+                "UseCapacity": "Use Capacity"
+            },
+            "Attuned": "Harmonisé",
+            "Augmentation": {
+                "Details": "Détails de l'Augmentation",
+                "System": "Système",
+                "Type": "Type"
+            },
+            "Capacity": {
+                "Capacity": "Capacité",
+                "CapacityMaxTooltip": "Le nombre maximum de charges que cet élément peut supporter",
+                "CapacityValueTooltip": "Le nombre actuel de charges",
+                "HeaderTooltip": "Le nombre de rounds, de charges, etc... que peut contenir cet élément (par exemple, le nombre de charges qu'une batterie peut contenir)",
+                "Usage": "Utilisation",
+                "UsageTooltip": "Le nombre de charges, de munitions, etc. qui sont consommées lorsque cet article est utilisé.",
+                "UsageValueTooltip": "L'unité de temps utilisée pour déterminer quand la capacité de l'élément est consommée."
+            },
+            "Categories": {
+                "AbilityScoreIncrease": "Augmentations de Valeur de Caractéristique",
+                "Ammunition": "Ammunition",
+                "Archetypes": "Archétypes",
+                "Armor": "Armures",
+                "ArmorUpgrades": "Améliorations d'Armure",
+                "Augmentations": "Augmentations",
+                "Classes": "Classes",
+                "Consumables": "Consommables",
+                "Containers": "Conteneurs",
+                "DroneChassis": "Châssis de Drone",
+                "DroneMods": "Modules de Drone",
+                "Equipment": "Equipement",
+                "Feats": "Traits",
+                "Goods": "Marchandises",
+                "HybridItems": "Objets Hybrides",
+                "MagicItems": "Objets Magiques",
+                "MiscellaneousItems": "Objets Divers",
+                "Races": "Races",
+                "Shields": "Boucliers",
+                "Spells": "Sorts",
+                "StarshipAblativeArmors": "Armures Ablatives de Vaisseau Spatial",
+                "StarshipArmors": "Armures de Vaisseau Spatial",
+                "StarshipComputers": "Ordinateurs de Vaisseau",
+                "StarshipCrewQuarters": "Quartiers d'Equipage de Vaisseau Spatial",
+                "StarshipDefensiveCountermeasures": "Contre-mesures Défensives de Vaisseau Spatial",
+                "StarshipDriftEngine": "Propulseur Drift de Vaisseau Spatial",
+                "StarshipExpansionBays": "Compartiments Annexes de Vaisseau Spatial",
+                "StarshipFortifiedHulls": "Coques Renforcées de Vaisseau Spatial",
+                "StarshipFrames": "Armatures de Vaisseau",
+                "StarshipOtherSystems": "Autres Systèmes de Vaisseau Spatial",
+                "StarshipPowerCores": "Réacteurs de Vaisseau Spatial",
+                "StarshipReinforcedBulkheads": "Cloisons Renforcées de Vaisseau Spatial",
+                "StarshipSecuritySystems": "Systèmes de Sécurité de Vaisseau Spatial",
+                "StarshipSensors": "Détecteurs de Vaisseau Spatial",
+                "StarshipShields": "Boucliers de Vaisseau Spatial",
+                "StarshipThrusters": "Propulseurs de Vaisseau Spatial",
+                "StarshipWeapons": "Armes de Vaisseau",
+                "TechnologicalItems": "Objets Technologiques",
+                "Themes": "Thèmes",
+                "VehicleAttacks": "Vehicle Attacks",
+                "VehicleSystems": "Vehicle Systems",
+                "WeaponAccessories": "Accessoires d'Armes",
+                "WeaponFusions": "Fusions d'Armes",
+                "Weapons": "Armes"
+            },
+            "Consumable": {
+                "Action": "Action de Consomable",
+                "DestroyWhenEmpty": "Détruire si vide",
+                "OnUse": "Consommer à l'utilisation",
+                "Type": "Type de Consommable",
+                "Usage": "Utilisation de Consommable"
+            },
+            "Description": {
+                "Bulk": "Volume",
+                "Hands": "Mains",
+                "Level": "Niveau",
+                "Price": "Prix",
+                "Quantity": "Quantité",
+                "QuantityPerPack": "Pack size",
+                "QuantityPerPackTooltip": "Pack size is used to define how many of one item you buy for the full price. For example, you buy 30 small arm rounds at the cost of 40 credits. This helps with performing bulk and wealth calculations, as well as ammunition tracking."
+            },
+            "Equipment": {
+                "Action": "Action de l'Equipement",
+                "Category": "Type d'Armure",
+                "ContainerTooltip": "L'armure peut généralement contenir des améliorations d'armure ou d'autres éléments. Augmentez la capacité de stockage pour permettre l'ajout de contenu.",
+                "EAC": "Classe d'Armure Energétique",
+                "KAC": "Classe d'Armure Cinétique",
+                "PowerArmorDetails": "Détails de l'Armure Assistée",
+                "SpeedAdjustment": "Modificateur de Vitesse"
+            },
+            "EquipmentStatus": "Status d'Equipement",
+            "EquipmentUsage": "Utilisation d'Equipement",
+            "Equippable": "Equippable",
+            "Equipped": "Equipé",
+            "Feat": {
+                "ActionRecharge": "Recharge de l'Action",
+                "Charged": "Chargé",
+                "FeatureAttack": "Attaque du Trait",
+                "FeatureUsage": "Utilisation du Trait",
+                "RechargeOn": "Recharge",
+                "Requirements": "Prérequis"
+            },
+            "Hybrid": {
+                "Details": "Détails de l'Elément Hybride"
+            },
+            "Identified": "Identifié",
+            "Magic": {
+                "Details": "Détails de l'Elément Magique"
+            },
+            "MaxDex": "Modificateur de Dextérité Maximum",
+            "NotProficient": "Non maîtrisé",
+            "Proficient": "Maîtrise",
+            "Shield": {
+                "ACP": "MAT: {acp}",
+                "AcMaxDex": "Bonus de dex max : {maxDex}",
+                "Action": "Action de Bouclier",
+                "Aligned": "Aligné",
+                "ArmorCheck": "Malus d'armure aux tests : {acp}",
+                "Bonus": "Bonus de Bouclier",
+                "Bonuses": "Bonus d'utilisation : {wielded} / Bonus d'alignement : {aligned}",
+                "Details": "Détails du Bouclier",
+                "Dex": "Dex: {dex}",
+                "Shield": "Bouclier",
+                "ShieldBonus": "Bouclier : {wielded} / {aligned}",
+                "Wielded": "Utilisé"
+            },
+            "ShipWeapon": {
+                "Activated": "Activé",
+                "AttackBonus": "Bonus d'Attaque",
+                "BpCost": "Coût en PC",
+                "ItemType": "Arme de Vaisseau",
+                "Mounted": "Monté",
+                "NotMounted": "Non Monté",
+                "PowerCost": "Coût en Energie",
+                "Range": "Portée",
+                "ReloadCost": "10 minutes",
+                "Source": "Source",
+                "Speed": "Speed: {speed} hexes",
+                "WeaponArc": "Arc d'Arme",
+                "WeaponClass": "Classe d'Arme",
+                "WeaponStatus": "Statut de l'Arme"
+            },
+            "Spell": {
+                "AllowedClasses": "Classes Permises",
+                "Casting": "Lancement du Sort",
+                "Concentration": "Concentration",
+                "ConcentrationTooltip": "This spell requires concentration.<br/>You must use the 'Concentrate to Maintain Spell' action (CRB pg. 246) to maintain it.",
+                "Consumed": "Consommé",
+                "Cost": "Coût (Cr)",
+                "Details": "Détails du Sort",
+                "Dismissible": "Révocable",
+                "Effects": "Effets du Sort",
+                "IsVariableLevel": "Is Variable Level?",
+                "IsVariableLevelYes": "Yes",
+                "Level": "Niveau de Sort",
+                "PreparationMode": "Préparation du Sort",
+                "Prepared": "Préparé",
+                "Properties": "Propriétés du Sort",
+                "Resistance": "Résistance à la Magie",
+                "School": "Ecole de Magie",
+                "SpellcastingMaterials": "Composantes Matérielles",
+                "Supply": "Supply"
+            },
+            "Technological": {
+                "Details": "Détails de l'Elément Technologique"
+            },
+            "Theme": {
+                "AbilityAdjustment": "Modificateur de Capacité",
+                "Details": "Détails du Thème",
+                "Skill": "Compétence"
+            },
+            "Unlimited": "Illimité",
+            "Upgrade": {
+                "AllowedArmorType": "Type d'Armure Permis",
+                "Any": "Tous",
+                "ArmorUpgradeDetails": "Détails de l'Amélioration d'Armure",
+                "Slots": "Emplacements"
+            },
+            "VehicleAttack": {
+                "Type": "Vehicle Attack"
+            },
+            "VehicleSystem": {
+                "Type": "Vehicle System"
+            },
+            "Weapon": {
+                "Attack": "Attaque de l'Arme",
+                "Category": "Catégorie d'Arme",
+                "Details": "Détails de l'Arme",
+                "Properties": "Propriétés de l'Arme",
+                "Type": "Type d'Arme",
+                "Usage": "Utilisation de l'Arme"
+            },
+            "WeaponAccessory": {
+                "SupportedType": {
+                    "Any": "Tous",
+                    "HeavyWeapon": "Arme Lourde",
+                    "MeleeWeapon": "Arme de Corps à Corps",
+                    "MeleeWeaponSA": "Melee weapon & Smallarm",
+                    "Projectile": "Projectile",
+                    "RailedWeapon": "Railed weapon",
+                    "RailedWeaponSA": "Railed weapon & Smallarm",
+                    "SmallArm": "Smallarm"
+                }
+            }
+        },
         "KeyAbility": "Caractérisques clés",
         "KineticArmorClass": "CAC",
         "Languages": "Languages",
@@ -1516,14 +1516,6 @@
         "Levels": {
             "0": "0",
             "1": "1st",
-            "2": "2nd",
-            "3": "3rd",
-            "4": "4th",
-            "5": "5th",
-            "6": "6th",
-            "7": "7th",
-            "8": "8th",
-            "9": "9th",
             "10": "10th",
             "11": "11th",
             "12": "12th",
@@ -1534,7 +1526,15 @@
             "17": "17th",
             "18": "18th",
             "19": "19th",
-            "20": "20th"
+            "2": "2nd",
+            "20": "20th",
+            "3": "3rd",
+            "4": "4th",
+            "5": "5th",
+            "6": "6th",
+            "7": "7th",
+            "8": "8th",
+            "9": "9th"
         },
         "LightningReflexesHint": "Ajoute 2 au jet de sauvegarde de réflexe",
         "LightningReflexesLabel": "Réflexes éclairs",
@@ -1580,12 +1580,12 @@
         "ModifierACPEffectingArmorTypePower": "Seulement Les armures assistéés",
         "ModifierAppTitle": "Editer le modificateur : {name}",
         "ModifierArmorClassBoth": "Les deux",
+        "ModifierEffectTypeAC": "Classe d'armure",
+        "ModifierEffectTypeACP": "Pénalité d'armure",
         "ModifierEffectTypeAbilityCheck": "Test de caractéristique",
         "ModifierEffectTypeAbilityChecks": "Test de caractéristiques",
         "ModifierEffectTypeAbilityScore": "Score des caractéristiques",
         "ModifierEffectTypeAbilitySkills": "Score des compétences",
-        "ModifierEffectTypeAC": "Classe d'armure",
-        "ModifierEffectTypeACP": "Pénalité d'armure",
         "ModifierEffectTypeAllSkills": "Toutes les compétences",
         "ModifierEffectTypeCMD": "CA vs Manoeuvres de combat",
         "ModifierEffectTypeHeaderLabel": "Attribut affecté",
@@ -1605,16 +1605,10 @@
         "ModifierNameTooltip": "Le nom du modificateur",
         "ModifierNotesLabel": "Notes",
         "ModifierNotesTooltip": "Toutes les notes spécifiques sur son modificateur",
-        "Modifiers": "Modificateurs",
         "ModifierSaveHighest": "Le plus haut",
         "ModifierSaveLowest": "Le plus bas",
-        "ModifiersConditionsTabLabel": "Conditions",
-        "ModifiersItemTabLabel": "Objet",
-        "ModifiersMiscTabLabel": "Divers",
         "ModifierSourceLabel": "Source",
         "ModifierSourceTooltip": "D'où vient ce modificateur ? Un élément ? Un sort ? Un autre personnage ?",
-        "ModifiersPermanentTabLabel": "Permanent",
-        "ModifiersTemporaryTabLabel": "Temporaire",
         "ModifierTitle": "Modificateur",
         "ModifierTypeAbility": "Capacité",
         "ModifierTypeArmor": "Armure",
@@ -1634,9 +1628,12 @@
         "ModifierValueAffectedHeaderLabel": "Valeur affectée",
         "ModifierValueAffectedLabel": "Valeur spécifique affectée",
         "ModifierValueAffectedTooltip": "Ceci identifie une valeur spécifique affectée si l'attribut général a plusieurs valeurs possibles",
-        "Necrograft": "Necrogreffe",
-        "None": "Aucun",
-        "Notes": "Notes",
+        "Modifiers": "Modificateurs",
+        "ModifiersConditionsTabLabel": "Conditions",
+        "ModifiersItemTabLabel": "Objet",
+        "ModifiersMiscTabLabel": "Divers",
+        "ModifiersPermanentTabLabel": "Permanent",
+        "ModifiersTemporaryTabLabel": "Temporaire",
         "NPCSheet": {
             "Biography": {
                 "Organization": {
@@ -1652,9 +1649,9 @@
                 "Features": "Spécificités"
             },
             "Header": {
-                "AlignmentPlaceHolderText": "NB",
                 "AbilityDC": "Ability DC",
                 "AbilityDCTooltip": "The ability DC this NPC has. All of the NPCs abilities that have a saving throw associated with them typically use this value, unless they are spells.<br/><br/>This might not be properly integrated into every ability yet.",
+                "AlignmentPlaceHolderText": "NB",
                 "AuraPlaceHolderText": "Aura",
                 "BaseSpellDC": "Base Spell DC",
                 "BaseSpellDCTooltip": "The base spell DC this NPC has. All of the NPCs spells that have a saving throw associated with them typically use this value, plus the spell level.",
@@ -1677,11 +1674,11 @@
                 "DuplicateNewStyle": {
                     "Button": "Duplicate as new style NPC",
                     "ButtonTooltip": "Clicking this button will create a new style NPC actor sheet, duplicating the data and items on this actor.",
-                    "DialogTitle": "Use original actor?",
+                    "DialogCancelButton": "Cancel",
                     "DialogMessage": "You are duplicating an unlinked token actor, do you wish to create the new style NPC using the unlinked actor data, or the original sheet data?",
                     "DialogOriginalActorButton": "Duplicate Original Actor",
+                    "DialogTitle": "Use original actor?",
                     "DialogUnlinkedActorButton": "Duplicate Unlinked Actor",
-                    "DialogCancelButton": "Cancel",
                     "ErrorCreateActor": "Something went wrong converting this actor. Check your user role permissions.<br/><br/>Click to dismiss."
                 },
                 "Navigation": {
@@ -1692,6 +1689,9 @@
                 "Inventory": "Inventaire"
             }
         },
+        "Necrograft": "Necrogreffe",
+        "None": "Aucun",
+        "Notes": "Notes",
         "NpcToggleSkillsDialogTitle": "Ajout de compétences aux PNJ",
         "NumberOfArms": "Nombre de bras",
         "Organization": "Organization",
@@ -1728,12 +1728,11 @@
                     "Item": "The item '{itemName}' has recharged its uses.",
                     "ResolvePoints": "{deltaRP} Resolve points",
                     "SpellSlots": "{deltaSS} Spell slots",
-                    "StaminaPoints": "{deltaSP} Stamina points",
-                    "Content": "{name} takes a night's rest and recovers {deltaHP} Hit points, {deltaSP} Stamina points, and {deltaRP} Resolve points."
+                    "StaminaPoints": "{deltaSP} Stamina points"
                 },
                 "Dialog": {
-                    "Title": "Night's Rest",
-                    "Description": "<p>Take a night's rest?</p><p>On a night's rest you will recover 1 hit point per character level, all stamina points, all resolve points, class resources, limited use item charges, and spell slots.</p>"
+                    "Description": "<p>Take a night's rest?</p><p>On a night's rest you will recover 1 hit point per character level, all stamina points, all resolve points, class resources, limited use item charges, and spell slots.</p>",
+                    "Title": "Night's Rest"
                 },
                 "Title": "Repos L"
             },
@@ -2114,13 +2113,8 @@
         "SkillProficiencyLevelClassSkill": "Compétences de classe",
         "SkillPsc": "Sciences physiques",
         "SkillSen": "Psychologie",
-        "SkillsHeaderAbility": "Abl",
-        "SkillsHeaderModifier": "Mod",
-        "SkillsHeaderName": "Nom",
-        "SkillsHeaderRanks": "Rangs",
         "SkillSle": "Escamotage",
         "SkillSte": "Discrétion",
-        "SkillsToggleHeader": "Compétences",
         "SkillSur": "Survie",
         "SkillTooltipAbilityMod": "Modificteur de caractéristique: {abilityMod} ({abilityAbbr})",
         "SkillTooltipMiscMod": "Modificateurs divers: {mod}",
@@ -2128,6 +2122,11 @@
         "SkillTooltipThemeMod": "Modificateur de thème: {mod}",
         "SkillTooltipTrainedClassSkill": "Modificateur de compétence de classe formée : {mod}",
         "SkillTrainedOnly": "Formé uniquement",
+        "SkillsHeaderAbility": "Abl",
+        "SkillsHeaderModifier": "Mod",
+        "SkillsHeaderName": "Nom",
+        "SkillsHeaderRanks": "Rangs",
+        "SkillsToggleHeader": "Compétences",
         "SortByFilterLevel": "Niveau",
         "SortByFilterName": "Nom",
         "Space": "Espace",
@@ -2156,10 +2155,10 @@
             "EditItem": "Editer un élément",
             "NoSpells": "Aucun sort trouvé pour ce set de filtres.",
             "SearchSpell": "Rechercher un Sort",
-            "Spellbook": "Livre de sorts",
             "SpellCastingAbility": "Abilité de lanceur de sort",
             "SpellSchool": "Ecole de magie",
             "SpellUsage": "Utilisation du Sort",
+            "Spellbook": "Livre de sorts",
             "Uses": "Utilisations"
         },
         "SpellBrowserSearchHint": "",
@@ -2274,6 +2273,8 @@
                 "AblativeTooHighTooltip": "Soit le total d'ablatifs installés est trop élevé, soit la somme totale des scores ablatifs actuels est trop élevée.",
                 "ShieldHighestTooHigh": "Un ou plusieurs quadrants dépassent les limites !",
                 "ShieldHighestTooHighTooltip": "A shield quadrant cannot exceed 70% of the total shield allocation, as the minimum available for each shield must be 10%. (For more information, see the Core Rulebook pg. 302)",
+                "ShieldTotalTooHigh": "Le total du bouclier dépasse le maximum !",
+                "ShieldTotalTooHighTooltip": "La somme totale des boucliers dépasse la puissance maximale du bouclier.",
                 "Shields": {
                     "Aft": "Boucliers de poupe",
                     "Conventional": "Boucliers",
@@ -2282,9 +2283,7 @@
                     "Header": "Boucliers",
                     "Port": "Boucliers bâbord",
                     "Starboard": "Boucliers tribord"
-                },
-                "ShieldTotalTooHigh": "Le total du bouclier dépasse le maximum !",
-                "ShieldTotalTooHighTooltip": "La somme totale des boucliers dépasse la puissance maximale du bouclier."
+                }
             },
             "Features": {
                 "ExpansionBays": "Compartiments annexes ({current} / {max})",
@@ -2316,10 +2315,10 @@
             },
             "Header": {
                 "BP": "PC",
-                "CriticalThreshold": "Seuil Critique",
                 "CT": "SC",
-                "DamageThreshold": "Seuil de Dommages",
+                "CriticalThreshold": "Seuil Critique",
                 "DT": "SD",
+                "DamageThreshold": "Seuil de Dommages",
                 "FrameMissing": "Armature manquante",
                 "HullPointIncrementTooltip": "C'est le nombre de points de coque qui sont ajoutés lorsque le navire atteint le niveau 4 (et tous les 4 niveaux par la suite)",
                 "Max": "Max",
@@ -2346,8 +2345,8 @@
                 "Base": "Base : 10",
                 "ComputerBonus": "Bonus d'ordinateur : {mod} ({source})",
                 "MiscModifier": "Modificateur divers : {value}",
-                "PilotingBonus": "Bonus de Pilotage : {value}",
                 "PilotSkillBonus": "Bonus de Compétence du Pilote : {value}",
+                "PilotingBonus": "Bonus de Pilotage : {value}",
                 "SizeModifier": "Modificateur de Taille : {value}",
                 "UnevenAblative": "Ablatif non uniforme: {mod}"
             },
@@ -2412,11 +2411,11 @@
         "Touch": "Toucher",
         "TraitArmorProf": "M. des armures",
         "TraitWeaponProf": "M. des armes",
+        "UPBs": "PBU",
         "Units": {
             "Speed": "m."
         },
         "Unlimited": "Illimité",
-        "UPBs": "PBU",
         "VehicleAttackSheet": {
             "Details": {
                 "IgnoresHardness": "Ignores hardness"
@@ -2427,28 +2426,6 @@
             "Header": {
                 "Save": "Save DC",
                 "SaveTooltip": "<strong>Save DC</strong><br/>This is the saving throw modifier for this attack."
-            }
-        },
-        "Vehicles": {
-            "VehicleCoverTypes": {
-                "Cover": "Couvert",
-                "None": "Aucune",
-                "Partial": "Couverture partielle",
-                "Soft": "Couverture faible",
-                "Improved": "Improved cover",
-                "Total": "Couverture totale"
-            },
-            "VehicleTypes": {
-                "Air": "Vol",
-                "Hover": "Aéroglisseur",
-                "Land": "Sol",
-                "Landa": "Sol et vol",
-                "Landatw": "Land, air, tunneling and water",
-                "Landaw": "Land, air and water",
-                "Landt": "Land and tunneling",
-                "Landtw": "Land, tunneling and water",
-                "Landw": "Sol et nage",
-                "Water": "Nage"
             }
         },
         "VehicleSheet": {
@@ -2543,8 +2520,6 @@
         "VehicleSystemSheet": {
             "CanBeActivated": "Peut être activé",
             "CanBeActivatedTooltip": "Ce système peut être activé.",
-            "isActivated": "Est activé",
-            "isActivatedTooltip": "Est actif",
             "Piloting": "Pilotage",
             "PilotingTooltip": "Le modificateur de pilotage est a utilisé lorsque ce système est actif.",
             "Senses": "Senses",
@@ -2552,7 +2527,31 @@
             "UseForSenses": "Use for Senses",
             "UseForSensesTooltip": "This system can be used to make perception checks.",
             "UseToPilot": "A utiliser pour le pilotage",
-            "UseToPilotTooltip": "Ce système eprmet de faire des jets de pilotages lorsqu'activé."
+            "UseToPilotTooltip": "Ce système eprmet de faire des jets de pilotages lorsqu'activé.",
+            "isActivated": "Est activé",
+            "isActivatedTooltip": "Est actif"
+        },
+        "Vehicles": {
+            "VehicleCoverTypes": {
+                "Cover": "Couvert",
+                "Improved": "Improved cover",
+                "None": "Aucune",
+                "Partial": "Couverture partielle",
+                "Soft": "Couverture faible",
+                "Total": "Couverture totale"
+            },
+            "VehicleTypes": {
+                "Air": "Vol",
+                "Hover": "Aéroglisseur",
+                "Land": "Sol",
+                "Landa": "Sol et vol",
+                "Landatw": "Land, air, tunneling and water",
+                "Landaw": "Land, air and water",
+                "Landt": "Land and tunneling",
+                "Landtw": "Land, tunneling and water",
+                "Landw": "Sol et nage",
+                "Water": "Nage"
+            }
         },
         "WeaponCategoriesCryo": "Armes cryogénique",
         "WeaponCategoriesDisintegrator": "Armes à désintégration",
@@ -2614,8 +2613,6 @@
         "WeaponPropertiesButtressingTooltip": "When activated, this weapon exudes subtle static charges that tightly bind nearby objects to one another, granting them additional resilience from incoming attacks. After you make an attack with this weapon you: increase the AC bonus you gain from cover by 1, increase the hardness of objects within 5 feet of you by an amount equal to 1/4 x the weapon's item level, and gain a +1 bonus to your KAC to resist combat maneuvers. These benefits last until you move or until the beginning of your next turn, whichever comes first. Objects that are moved from their space lose this benefit immediately. The effects of multiple buttressing weapon attacks don't stack with each other.",
         "WeaponPropertiesCluster": "Grappe",
         "WeaponPropertiesClusterTooltip": "A cluster weapon is a form of grenade launcher that can fire a single grenade or (if loaded with appropriate grenades) can expend two identical grenades as a single attack. In the latter case, the grenades act as a single grenade of the same type (with a single attack roll, dealing damage only once, and so on), except its radius is increased by the listed amount listed and the save DC of any effects created by the grenade is calculated using the cluster weapon’s item level if it is higher than the grenade’s item level. Attempting to fire two nonidentical grenades results in an error code and the weapon does not fire.",
-        "WeaponsPropertiesConceal": "Cacher",
-        "WeaponsPropertiesConcealTooltip": "A weapon with the conceal special property is considered especially small or easy to hide for purposes of Slight of Hand’s hide object task, granting you a +4 circumstance bonus to skill checks to hide object.",
         "WeaponPropertiesDeconstruct": "Déconstruite",
         "WeaponPropertiesDeconstructTooltip": "The target of a weapon with the deconstruct special property takes the listed amount of acid damage every round until the target succeeds at a Reflex save to end the damage. This functions as the burning condition, except as noted and that the ongoing damage is also ended if the target takes any amount of electricity damage.",
         "WeaponPropertiesDeflect": "Déflection",
@@ -2771,6 +2768,8 @@
         "WeaponTypesSniper": "Armes de précision",
         "WeaponTypesSolarian": "Cristaux de combat Solariens",
         "WeaponTypesSpecial": "Armes spéciales",
+        "WeaponsPropertiesConceal": "Cacher",
+        "WeaponsPropertiesConcealTooltip": "A weapon with the conceal special property is considered especially small or easy to hide for purposes of Slight of Hand’s hide object task, granting you a +4 circumstance bonus to skill checks to hide object.",
         "WillSave": "Volonté"
     }
 }
