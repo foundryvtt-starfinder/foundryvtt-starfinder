@@ -32,7 +32,7 @@
     "description": {
       "chat": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.classes.bItuvukGHbObTApr]{Mystic}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You draw strange feelings, instincts, knowledge, and urges from your connection, augmenting your prowess in certain tasks. Each connection has two skills associated with it. You gain a +1 insight bonus to skill checks with your connection&rsquo;s associated skills. This bonus increases by 1 at 5th level and every 3 levels thereafter.</span></p>\n<p><em>Change and enable the targeted skills in the Modifiers tab for automated bonuses.</em></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.classes.bItuvukGHbObTApr]{Mystic}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You draw strange feelings, instincts, knowledge, and urges from your connection, augmenting your prowess in certain tasks. Each connection has two skills associated with it. You gain a +1 insight bonus to skill checks with your connection&rsquo;s associated skills. This bonus increases by 1 at 5th level and every 3 levels thereafter.</span></p>\n<p><em>Within the Modifiers tab, change the two modifier's Specific Effect Value to the two associated skills</em></p>"
     },
     "descriptors": [],
     "duration": {
@@ -47,9 +47,9 @@
         "type": "insight",
         "condition": "",
         "effectType": "skill",
-        "enabled": false,
+        "enabled": true,
         "max": 0,
-        "modifier": "lookupRange(@details.level.value, 0, 3, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
+        "modifier": "lookupRange(@classes.mystic.levels, 0, 3, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -62,14 +62,14 @@
         "type": "insight",
         "condition": "",
         "effectType": "skill",
-        "enabled": false,
+        "enabled": true,
         "max": 0,
-        "modifier": "lookupRange(@details.level.value, 0, 3, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
+        "modifier": "lookupRange(@classes.mystic.levels, 0, 3, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "acr"
+        "valueAffected": "ath"
       }
     ],
     "range": {
