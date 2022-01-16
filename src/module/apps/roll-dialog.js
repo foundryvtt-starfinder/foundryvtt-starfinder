@@ -215,7 +215,7 @@ export default class RollDialog extends Dialog {
 
     submit(button) {
         try {
-            this.rolledButton = button.label;
+            this.rolledButton = button.id ?? button.label;
             this.close();
         } catch (err) {
             ui.notifications.error(err);
@@ -254,8 +254,8 @@ export default class RollDialog extends Dialog {
      */
     static async showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
         return new Promise(resolve => {
-            const buttons = options.buttons || { roll: { label: game.i18n.localize("SFRPG.Rolls.Dice.Roll") } };
-            const firstButtonLabel = options.defaultButton || Object.values(buttons)[0].label;
+            const buttons = options.buttons || { roll: { id: "roll", label: game.i18n.localize("SFRPG.Rolls.Dice.Roll") } };
+            const defaultButton = options.defaultButton || (Object.values(buttons)[0].id ?? Object.values(buttons)[0].label);
 
             const dlg = new RollDialog({
                 rollTree, 
@@ -267,7 +267,7 @@ export default class RollDialog extends Dialog {
                 dialogData: {
                     title: options.title || game.i18n.localize("SFRPG.Rolls.Dice.Roll"),
                     buttons: buttons,
-                    default: firstButtonLabel,
+                    default: defaultButton,
                     close: (button, rollMode, bonus, parts) => {
                         resolve([button, rollMode, bonus, parts]);
                     }

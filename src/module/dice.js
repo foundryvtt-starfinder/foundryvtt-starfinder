@@ -174,17 +174,17 @@ export class DiceSFRPG {
         /** New roll formula system */
         const buttons = {};
         if (game.settings.get("sfrpg", "useAdvantageDisadvantage") && advantage) {
-            buttons["Disadvantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
-            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
-            buttons["Advantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
+            buttons["Disadvantage"] = { id: "disadvantage", label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
+            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
+            buttons["Advantage"] = { id: "advantage", label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
         } else {
-            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
+            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
         }
 
         const options = {
             debug: false,
             buttons: buttons,
-            defaultButton: "Normal",
+            defaultButton: "normal",
             title: title,
             skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "1d20",
@@ -220,9 +220,9 @@ export class DiceSFRPG {
             }
 
             let dieRoll = "1d20";
-            if (button === "Disadvantage") {
+            if (button === "disadvantage") {
                 dieRoll = "2d20kl";
-            } else if (button === "Advantage") {
+            } else if (button === "advantage") {
                 dieRoll = "2d20kh";
             }
 
@@ -347,17 +347,17 @@ export class DiceSFRPG {
         /** New roll formula system */
         const buttons = {};
         if (game.settings.get("sfrpg", "useAdvantageDisadvantage") && advantage) {
-            buttons["Disadvantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
-            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
-            buttons["Advantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
+            buttons["Disadvantage"] = { id: "disadvantage", label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
+            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
+            buttons["Advantage"] = { id: "advantage", label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
         } else {
-            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
+            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
         }
 
         const options = {
             debug: false,
             buttons: buttons,
-            defaultButton: "Normal",
+            defaultButton: "normal",
             title: title,
             skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: mainDie ? "1" + mainDie : null,
@@ -375,9 +375,9 @@ export class DiceSFRPG {
                 if (mainDie) {
                     let dieRoll = "1" + mainDie;
                     if (mainDie === "d20") {
-                        if (button === "Disadvantage") {
+                        if (button === "disadvantage") {
                             dieRoll = "2d20kl";
-                        } else if (button === "Advantage") {
+                        } else if (button === "advantage") {
                             dieRoll = "2d20kh";
                         }
                     }
@@ -471,8 +471,8 @@ export class DiceSFRPG {
 
         /** New roll formula system */
         const buttons = {
-            Normal: { label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
-            Critical: { label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
+            Normal: { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
+            Critical: { id: "critical", label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
         };
 
         const getDamageTypeForPart = (part) => {
@@ -512,7 +512,7 @@ export class DiceSFRPG {
         const options = {
             debug: false,
             buttons: buttons,
-            defaultButton: "Normal",
+            defaultButton: "normal",
             title: title,
             skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "",
@@ -656,7 +656,7 @@ export class DiceSFRPG {
                 }
             }
 
-            const isCritical = (button === "Critical");
+            const isCritical = (button === "critical");
             let finalFlavor = duplicate(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
