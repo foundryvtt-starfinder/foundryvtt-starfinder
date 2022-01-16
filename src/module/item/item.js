@@ -739,7 +739,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const usage = itemData.data.usage?.value || 0;
         const availableCapacity = this.getCurrentCapacity();
         if (availableCapacity < usage) {
-            ui.notifications.warn(game.i18n.format("SFRPG.ItemNoUses", {name: this.data.name}));
+            ui.notifications.warn(game.i18n.format("SFRPG.ItemNoAmmo", {name: this.data.name}));
         }
         
         const rollContext = new RollContext();
@@ -1079,7 +1079,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
-            flavor: itemData.chatFlavor,
+            flavor: options?.flavorOverride ?? itemData.chatFlavor,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 width: 400,
@@ -1259,38 +1259,83 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async rollConsumable(options = {}) {
         const itemData = this.data.data;
-        const labels = this.labels;
-        const formula = itemData.damage ? labels.damage : itemData.formula;
 
-        // Submit the roll to chat
-        if (formula) {
-            Roll.create(formula).toMessage({
-                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                flavor: `Consumes ${this.name}`
-            });
+        if (itemData.uses.value === 0 && itemData.quantity === 0) {
+            ui.notifications.error(game.i18n.format("SFRPG.Items.Consumable.ErrorNoUses", {name: this.name}));
+            return;
+        }
+
+        if (itemData.actionType) {
+            options = options || {};
+            options.flavorOverride = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
+            
+            const result = await this.rollDamage({}, options);
+            if (!result[0]) {
+                // Roll was cancelled, don't consume.
+                return;
+            }
         } else {
-            ChatMessage.create({
+            let htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this.data };
+            htmlOptions.rollData.owner = this.actor?.data?.data;
+    
+            // Basic template rendering data
+            const token = this.actor.token;
+            const templateData = {
+                actor: this.actor,
+                tokenId: token ? `${token.parent.id}.${token.id}` : null,
+                item: this.data,
+                data: this.getChatData(htmlOptions),
+                labels: this.labels,
+                hasAttack: this.hasAttack,
+                hasDamage: this.hasDamage,
+                hasSave: this.hasSave,
+                hasOtherFormula: this.hasOtherFormula
+            };
+
+            const template = `systems/sfrpg/templates/chat/consumed-item-card.html`;
+            const html = await renderTemplate(template, templateData);
+
+            const flavor = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
+    
+            // Basic chat message data
+            const chatData = {
                 user: game.user.id,
-                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                content: `Consumes ${this.name}`
-            })
+                flavor: flavor,
+                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                content: html,
+                flags: { level: this.data.data.level },
+                speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
+            };
+    
+            // Toggle default roll mode
+            const rollMode = game.settings.get("core", "rollMode");
+            if (["gmroll", "blindroll"].includes(rollMode)) {
+                chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
+            }
+            if (rollMode === "blindroll") {
+                chatData["blind"] = true;
+            }
+    
+            // Create the chat message
+            ChatMessage.create(chatData, { displaySheet: false });
         }
 
         // Deduct consumed charges from the item
         if (itemData.uses.autoUse) {
-            const quantity = itemData.quantity;
+            let quantity = itemData.quantity;
             const remainingUses = this.getRemainingUses();
 
             // Deduct an item quantity
-            if (remainingUses <= 1 && quantity > 1) {
+            if (remainingUses <= 1 && quantity >= 1) {
+                quantity = quantity - 1;
                 this.update({
-                    'data.quantity': Math.max(remainingUses - 1, 0),
-                    'data.uses.value': this.getMaxUses()
+                    'data.quantity': Math.max(quantity, 0),
+                    'data.uses.value': (quantity === 0) ? 0 : this.getMaxUses()
                 });
             }
 
             // Optionally destroy the item
-            else if (remainingUses <= 1 && quantity <= 1 && itemData.uses.autoDestroy) {
+            else if (remainingUses <= 1 && quantity === 0 && itemData.uses.autoDestroy) {
                 this.actor.deleteEmbeddedDocuments("Item", [this.id]);
             }
 
