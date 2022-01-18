@@ -35,6 +35,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * The keyAbilityMod property on a PC sheet's class attributes is now updated correctly. (e.g. @classes.mechanic.keyAbilityMod)
 * The token configuration of Starships and Vehicles that contained a crew can now be opened again.
 * Updated a few class features with proper modifier support.
+* Updated the compendium definitions to match Foundry v9 requirements.
 
 * Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.
 
