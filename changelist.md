@@ -23,6 +23,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Added some, if not most, of the class features from Tech Revolution.
 * Assigned action target to weapons in the compendium.
 * Consumables no longer use up the entire quantity when used once.
+* Creating a new player character or drone sheet now automatically sets the token linked for that sheet. This does not apply to NPCs, Starships, and Vehicles.
 * Disabled modifiers no longer affect their actor's spell save DC.
 * Disabling modifiers on the roll dialog are remembered for future rolls again.
 * Initiative rolls no longer ignore the roll mode setting of the roll dialog.
@@ -35,6 +36,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * The keyAbilityMod property on a PC sheet's class attributes is now updated correctly. (e.g. @classes.mechanic.keyAbilityMod)
 * The token configuration of Starships and Vehicles that contained a crew can now be opened again.
 * Updated a few class features with proper modifier support.
+* Updated the compendium definitions to match Foundry v9 requirements.
 
 * Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.
 
