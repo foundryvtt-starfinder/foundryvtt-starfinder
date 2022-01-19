@@ -1,0 +1,89 @@
+{
+  "_id": "CkndBsEO0IMsYZ4m",
+  "name": "Electrical Attunement (Su)",
+  "type": "actorResource",
+  "data": {
+    "type": "solarian",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": true,
+      "show": true,
+      "showOwnerAndGMOnly": false,
+      "visualization": [
+        {
+          "image": "systems/sfrpg/icons/classes/graviton.png",
+          "mode": "lt",
+          "title": "Graviton Attuned",
+          "value": 0
+        },
+        {
+          "image": "systems/sfrpg/icons/classes/photon.png",
+          "mode": "gt",
+          "title": "Photon Attuned",
+          "value": 0
+        },
+        {
+          "image": "systems/sfrpg/icons/classes/solarianAttunement.png",
+          "mode": "eq",
+          "title": "Unattuned",
+          "value": 0
+        },
+        {
+          "image": "systems/sfrpg/icons/classes/graviton.png",
+          "mode": "eq",
+          "title": "Fully Graviton Attuned",
+          "value": -3
+        },
+        {
+          "image": "systems/sfrpg/icons/classes/photon.png",
+          "mode": "eq",
+          "title": "Fully Photon Attuned",
+          "value": 3
+        }
+      ]
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "<p>When in battle, you enter a state of metaphysical alignment with cosmic forces. At the start of your first turn in combat, if you are conscious, you must choose one of three stellar modes: graviton, photon, or unattuned (see below).</p>\n<p>Current value: [[@resources.solarian.stellarMode.value]]</p>",
+      "unidentified": "",
+      "value": "<p>Your solarian powers are tuned to the interplay of energy and resistance, not photons and gravitons. Your stellar mode class feature enables you to be in three modes: energy mode, resistance mode, or unattuned. For the purpose of empowering revelations based on your attunement and meeting prerequisites, treat energy mode as photon mode, and treat resistance mode as graviton mode. Your solarian abilities that deal fire damage or provide cold resistance&mdash;such as corona, plasma sheath, or solar flare&mdash;deal electricity damage and grant electricity resistance instead. At 1st level, you learn the destructive discharge and energy sink stellar revelations instead of black hole and supernova.</p>\n<p><strong>Electromagnetic attunement alters solar manifestation, stellar mode, and stellar revelation.</strong></p>\n<p>&nbsp;</p>\n<p>When in battle, you enter a state of metaphysical alignment with cosmic forces. At the start of your first turn in combat, if you are conscious, you must choose one of three stellar modes: resistance, energy, or unattuned (see below).</p>\n<p>&nbsp;</p>\n<p>At the start of each subsequent turn of combat, you must choose to either stay in your current stellar mode or to become unattuned. If you choose to stay in your mode, you gain another attunement point for that mode. As long as you have 1 or 2 attunement points in a mode, you are attuned to that mode. Once you reach 3 attunement points in a mode, you become fully attuned to that mode. Some of your stellar revelations are zenith Revelations, which can be used only when you&rsquo;re fully attuned to one mode or the other. When you are fully attuned, you cannot gain more points in your mode, but you stay fully attuned until combat ends, your stellar mode ends, or you become unattuned. If you choose to become unattuned, you lose all attunement points you&rsquo;ve accrued so far. At the start of your next turn, you can enter a new stellar mode or stay unattuned.</p>\n<p>&nbsp;</p>\n<p>At the end of combat, your stellar mode ends. If you fall unconscious during an encounter, you become unattuned. If you regain consciousness while still under threat, you can enter a stellar mode on your first turn after regaining consciousness, as if it were the first round of combat; if combat ends before you regain consciousness, your stellar mode ends. If you are not in a stellar mode, for any reason, you are considered unattuned for the purposes of your stellar revelations.</p>\n<p>&nbsp;</p>\n<p>When you&rsquo;re not in combat, you can&rsquo;t enter a stellar mode. This ability manifests only in high-stakes situations, when your training takes over and connects your mind to the universe. There needs to be some risk to you for your stellar mode to activate, so you must be facing a significant enemy. If there&rsquo;s any doubt about whether you&rsquo;re in combat or able to access your stellar mode, the GM decides. This also means that your stellar mode might end before what was previously a dangerous battle is over, once all that remains are dregs that don&rsquo;t pose a real threat to you.</p>\n<p>&nbsp;</p>\n<h2>Resistance Mode (Negative value)</h2>\n<p>When you enter resistance mode, you gain 1 resistance attunement point and become resistance-attuned; you&rsquo;re treated as being graviton-attuned for the purpose of determining your stellar revelations&rsquo; effects. While you&rsquo;re resistance-attuned, you gain damage reduction 1/&mdash;. This bonus increases by 1 for every 6 solarian levels you have, and this damage reduction stacks with one other source of DR.</p>\n<p><em>No current DR calculation function. DR must be calculated manually in the Attributes tab</em></p>\n<p>&nbsp;</p>\n<h2>Energy Mode (Positive value)</h2>\n<p>When you enter energy mode, you gain 1 energy attunement point and become energy-attuned; you&rsquo;re treated as being photon-attuned for the purpose of determining your stellar revelations&rsquo; effects. While energy-attuned, your speeds all increase by 5 feet. This bonus increases by 5 feet for every 3 solarian levels you have.</p>\n<h2>Unattuned (Zero value)</h2>\n<p>While unattuned, you gain no attunement points and you are neither energy-attuned nor resistance-attuned. You gain no benefits while unattuned.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "68446282-59b2-4413-8b55-377a3f704d99",
+        "name": "Energy Mode",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-speeds",
+        "enabled": true,
+        "max": 0,
+        "modifier": "(max(0, sign(@resources.solarian.stellarMode.value)) * (5 + (floor(@classes.solarian.levels / 3) * 5)))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "max": 3,
+      "min": -3,
+      "mode": "immediate"
+    },
+    "source": "",
+    "stage": "early",
+    "subType": "stellarMode"
+  },
+  "img": "icons/svg/mystery-man.svg"
+}
