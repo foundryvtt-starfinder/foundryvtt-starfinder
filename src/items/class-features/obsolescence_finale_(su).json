@@ -1,6 +1,6 @@
 {
-  "_id": "YosoB8W0fB4qYBjp",
-  "name": "Ghostly Form (Su)",
+  "_id": "Il9nru6peE5H4tF2",
+  "name": "Obsolescence Finale (Su)",
   "type": "feat",
   "data": {
     "type": "",
@@ -8,11 +8,12 @@
     "abilityMods": {
       "parts": []
     },
-    "actionType": "other",
+    "actionTarget": "",
+    "actionType": "util",
     "activation": {
-      "type": "action",
+      "type": "none",
       "condition": "",
-      "cost": null
+      "cost": 0
     },
     "area": {
       "effect": "",
@@ -35,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.IFVmYqBf5tq5e29y]{Glitchghost}</p>\n<p>As a standard action, you can move up to your speed as if you were incorporeal, provided you begin and end your movement in an unoccupied space. Construct creatures and creatures wearing armor you pass through become overburdened for 1 round (Will negates) as you cause malfunctions. Whether or not the creature succeeds at its save, it then becomes immune to your ghostly form for 24 hours. You can use this ability a number of times per day equal to your mystic level.</p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.sFhSadQYdEbvuyYx]{Obsolescence}</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\">When you use your mitigate ability to reduce damage you take from a weapon within 30 feet, you can cause that weapon to become incomprehensibly outdated until the end of the attacker&rsquo;s next turn (Fortitude negates). An outdated weapon gains the archaic weapon special property and takes a &ndash;2 penalty to attack rolls. Once affected, a weapon becomes immune to this ability for 24 hours.</span><span id=\"ctl00_MainContent_DetailedOutput\"><br /></span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -48,29 +49,29 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": 30
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "15th Level",
+    "requirements": "Aspect Insight",
     "rollNotes": "",
     "save": {
-      "type": "will",
-      "dc": "10 + floor(1.5 * @classes.mystic.levels) + @abilities.wis.mod",
+      "type": "fort",
+      "dc": "10 + floor(@classes.vanguard.levels / 2) + @abilities.con.mod",
       "descriptor": "negate"
     },
-    "source": "TR pg. 26",
+    "source": "TR pg. 36",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
-      "per": "day",
-      "value": null
+      "max": 0,
+      "per": "",
+      "value": 0
     }
   },
   "img": "icons/svg/mystery-man.svg"
