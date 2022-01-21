@@ -199,7 +199,7 @@ Hooks.once("setup", function () {
 
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
-        "abilities", "actorTypes", "alignments", "alignmentsNPC", "ammunitionTypes", "distanceUnits", "senses", "skills", "currencies", "saves",
+        "abilities", "actionTargets", "actorTypes", "alignments", "alignmentsNPC", "ammunitionTypes", "distanceUnits", "senses", "skills", "currencies", "saves",
         "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes", "itemTypes",
         "vehicleSizes", "babProgression", "saveProgression", "saveDescriptors", "armorProficiencies",
         "weaponProficiencies", "abilityActivationTypes", "skillProficiencyLevels", "damageTypes",
@@ -368,6 +368,15 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
     if (data.type !== "Item") return;
     createItemMacro(data.data, slot);
     return false;
+});
+
+Hooks.on("createActor", function(actor, options, actorId) {
+    const autoLinkedTypes = ['character', 'drone'];
+    if (autoLinkedTypes.includes(actor.data.type)) {
+        actor.update({
+            "token.actorLink": true
+        });
+    }
 });
 
 function registerMathFunctions() {

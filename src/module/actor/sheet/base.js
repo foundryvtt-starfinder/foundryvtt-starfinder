@@ -239,6 +239,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item .item-image').click(event => this._onItemRoll(event));
 
         // Roll attack from item 
+        html.find('.item-action .use').click(event => this._onItemRollUse(event));
+
+        // Roll attack from item 
         html.find('.item-action .attack').click(event => this._onItemRollAttack(event));
 
         // Roll damage for item
@@ -516,6 +519,14 @@ export class ActorSheetSFRPG extends ActorSheet {
                 });
             });
         }
+    }
+
+    _onItemRollUse(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.items.get(itemId);
+
+        return item.rollConsumable({event: event});
     }
 
     _onItemRollAttack(event) {

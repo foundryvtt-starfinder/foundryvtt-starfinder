@@ -1640,3 +1640,11 @@ SFRPG.flightManeuverability = {
     "0": "SFRPG.ActorSheet.Attributes.Speed.Flight.Average",
     "1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Perfect"
 };
+
+SFRPG.actionTargets = {
+    "": "SFRPG.Items.Action.ActionTarget.None",
+    "kac": "SFRPG.Items.Action.ActionTarget.KAC",
+    "kac8": "SFRPG.Items.Action.ActionTarget.KAC8",
+    "eac": "SFRPG.Items.Action.ActionTarget.EAC",
+    "other": "SFRPG.Items.Action.ActionTarget.Other"
+};

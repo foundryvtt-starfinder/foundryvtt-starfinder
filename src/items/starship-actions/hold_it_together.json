@@ -1,40 +1,40 @@
 {
+  "_id": "B9CsbXIcE9ZGlGv9",
   "name": "Hold It Together",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You can hold one system together by constantly patching and modifying it. If you succeed at an Engineering check (DC = 15 + 1-1/2 × your starship’s tier), you can select one system; that system is treated as if its critical damage condition were two steps less severe for the rest of the round (wrecked becomes glitching, and a malfunctioning or glitching system functions as if it had taken no critical damage). This check isn’t modified by penalties from critical damage to the power core.</p><h2>Critical effect</h2><p>Thanks to your inspired repairs, the system you worked on is treated as if its critical damage condition were two steps less severe (wrecked becomes glitching, whereas malfunctioning or glitching become undamaged) for 1d4 rounds.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "engineer",
-    "order": 10,
-    "phase": {
-      "name": "Engineering phase",
-      "tooltip": "This action can be used during the engineering phase of combat."
+    "dc": {
+      "resolve": true,
+      "value": "15 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You can hold one system together by constantly patching and modifying it. If you succeed at an Engineering check (DC = 15 + 1-1/2 × your starship’s tier), you can select one system; that system is treated as if its critical damage condition were two steps less severe for the rest of the round (wrecked becomes glitching, and a malfunctioning or glitching system functions as if it had taken no critical damage). This check isn’t modified by penalties from critical damage to the power core.</p><h2>Critical effect</h2><p>Thanks to your inspired repairs, the system you worked on is treated as if its critical damage condition were two steps less severe (wrecked becomes glitching, whereas malfunctioning or glitching become undamaged) for 1d4 rounds.</p>"
+    },
+    "effectCritical": "Thanks to your inspired repairs, the system you worked on is treated as if its critical damage condition were two steps less severe (wrecked becomes glitching, whereas malfunctioning or glitching become undamaged) for 1d4 rounds.",
+    "effectNormal": "You can hold one system together by constantly patching and modifying it. If you succeed at an Engineering check (DC = 15 + 1-1/2 × your starship’s tier), you can select one system; that system is treated as if its critical damage condition were two steps less severe for the rest of the round (wrecked becomes glitching, and a malfunctioning or glitching system functions as if it had taken no critical damage). This check isn’t modified by penalties from critical damage to the power core.",
     "formula": [
       {
         "name": "Engineering",
         "formula": "@engineer.skills.eng.mod"
       }
     ],
+    "isPush": false,
+    "order": 10,
+    "phase": {
+      "name": "Engineering phase",
+      "tooltip": "This action can be used during the engineering phase of combat."
+    },
+    "resolvePointCost": 0,
+    "role": "engineer",
+    "selectorKey": "engineer",
     "selectors": [
       "engineer"
     ],
-    "selectorKey": "engineer",
-    "dc": {
-      "value": "15 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
-    },
-    "effectNormal": "You can hold one system together by constantly patching and modifying it. If you succeed at an Engineering check (DC = 15 + 1-1/2 × your starship’s tier), you can select one system; that system is treated as if its critical damage condition were two steps less severe for the rest of the round (wrecked becomes glitching, and a malfunctioning or glitching system functions as if it had taken no critical damage). This check isn’t modified by penalties from critical damage to the power core.",
-    "effectCritical": "Thanks to your inspired repairs, the system you worked on is treated as if its critical damage condition were two steps less severe (wrecked becomes glitching, whereas malfunctioning or glitching become undamaged) for 1d4 rounds."
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "B9CsbXIcE9ZGlGv9"
+  "img": "icons/svg/mystery-man.svg"
 }

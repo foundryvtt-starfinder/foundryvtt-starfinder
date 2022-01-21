@@ -79,6 +79,11 @@
         <label>{{localize "SFRPG.SpellResistance"}}</label>
         <input type="text" name="data.traits.sr" value="{{data.traits.sr}}" data-dtype="Number" />
     </div>
+    {{else}}
+    <div class="form-group" {{createTippy title="SFRPG.SpellResistance" subtitle="@data.traits.spellResistance.value" tooltips=data.traits.spellResistance.tooltip}}>
+        <label>{{localize "SFRPG.SpellResistance"}}</label>
+        <span class="value">{{data.traits.spellResistance.value}}</span>
+    </div>
     {{/if}}
     
     <div class="form-group damage-reduction" data-tippy-content="<strong>{{localize "SFRPG.Damage.Reduction"}}</strong><br/>@data.traits.damageReduction.value<br/>@data.traits.damageReduction.negatedBy">

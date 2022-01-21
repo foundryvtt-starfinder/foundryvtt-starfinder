@@ -182,6 +182,42 @@ function buildWatch() {
 }
 
 /**
+ * Sorts the keys in a JSON object, which should make it easier to find data keys.
+ */
+function JSONstringifyOrder( obj, space, sortingMode = "default" )
+{
+    var allKeys = [];
+    var seen = {};
+    JSON.stringify(obj, function (key, value) {
+        if (!(key in seen)) {
+            allKeys.push(key);
+            seen[key] = null;
+        }
+        return value;
+    });
+    allKeys.sort();
+    
+    if (sortingMode === "item") {
+        // Ensure name is after _id, and type is after name.
+        const idIndex = allKeys.indexOf("_id");
+
+        const nameIndex = allKeys.indexOf("name");
+        if (nameIndex > -1) {
+            allKeys.splice(nameIndex, 1);
+            allKeys.splice(idIndex + 1, 0, "name");
+        }
+
+        const typeIndex = allKeys.indexOf("type");
+        if (typeIndex > -1) {
+            allKeys.splice(typeIndex, 1);
+            allKeys.splice(idIndex + 2, 0, "type");
+        }
+    }
+    
+    return JSON.stringify(obj, allKeys, space);
+}
+
+/**
  * Unpack existing db files into json files.
  */
 async function unpack(sourceDatabase, outputDirectory) {
@@ -191,7 +227,7 @@ async function unpack(sourceDatabase, outputDirectory) {
 	let items = await db.asyncFind({});
 
 	for (let item of items) {
-		let jsonOutput = JSON.stringify(item, null, 2);
+		let jsonOutput = JSONstringifyOrder(item, 2, "item");
 		let filename = sanitize(item.name);
 		filename = filename.replace(/[\s]/g, "_");
 		filename = filename.replace(/[,;]/g, "");
@@ -1086,25 +1122,48 @@ async function postCook() {
 /********************/
 async function copyLocalization() {
     console.log(`Opening localization files`);
+    
+	const itemSourceDir = "./src/lang";
+    const files = await fs.readdirSync(itemSourceDir);
+    
+    // First we sort the JSON keys alphabetically
+    console.log(`Sorting keys`);
+    for (const filePath of files) {
+		console.log(`> ${filePath}`);
+        const fileRaw = await fs.readFileSync(itemSourceDir + "/" + filePath);
+        const fileJson = JSON.parse(fileRaw);
+        
+        const outRaw = JSONstringifyOrder(fileJson, 4);
+        await fs.writeFileSync(itemSourceDir + "/" + filePath, outRaw);
+    }
+    console.log(``);
+    
+    // Get original file data
 	const englishFilePath = "./src/lang/en.json";
     const englishRaw = await fs.readFileSync(englishFilePath);
     const englishJson = JSON.parse(englishRaw);
     
-	const itemSourceDir = "./src/lang";
-    const files = await fs.readdirSync(itemSourceDir);
+	const germanFilePath = "./src/lang/de.json";
+    const germanRaw = await fs.readFileSync(germanFilePath);
+    const germanJson = JSON.parse(germanRaw);
+    
+    // Then we ensure all languages are in sync with English
+    console.log(`Ensuring language files are in sync with English`);
     for (const filePath of files) {
-        if (filePath.includes("en.json")) {
+        const isEnglish = filePath.includes("en.json");
+        if (isEnglish) {
             continue;
         }
         
-		console.log(`Processing ${filePath}`);
-        const fileRaw = await fs.readFileSync(itemSourceDir + "/" + filePath);
-        const fileJson = JSON.parse(fileRaw);
+		console.log(`> ${filePath}`);
+        
+        const languageRaw = await fs.readFileSync(itemSourceDir + "/" + filePath);
+        const languageJson = JSON.parse(languageRaw);
         
         let copiedJson = JSON.parse(JSON.stringify(englishJson));
-        mergeDeep(copiedJson, fileJson);
+        mergeDeep(copiedJson, languageJson);
         
-        const outRaw = JSON.stringify(copiedJson, null, 4);
+        const outRaw = JSONstringifyOrder(copiedJson, 4);
         await fs.writeFileSync(itemSourceDir + "/" + filePath, outRaw);
     }
 }

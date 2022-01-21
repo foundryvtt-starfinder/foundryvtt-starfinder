@@ -1,189 +1,147 @@
 {
+  "_id": "bhrJpVWluuLHOl6k",
   "name": "Ice needle, undercover",
   "type": "weapon",
   "data": {
-    "description": {
-      "value": "<p>This handheld melee weapon appears to be nothing more than a handle with a slot in one end. Once a vial of an injectable substance is inserted into this slot, the ice needle forms a slender spike of ice around that liquid core, allowing you to inject the substance into a foe with a virtually untraceable weapon. Undercover and furtive ice needles are often used primarily for their injecting capabilities, while artifice, espionage, and subterfuge ice needles deal significant damage along with the injection.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "AR pg. 9",
     "type": "",
-    "quantity": 1,
-    "bulk": "L",
-    "price": 330,
-    "level": 1,
-    "attuned": false,
-    "equipped": false,
-    "identified": true,
+    "ability": "str",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "kac",
+    "actionType": "mwak",
+    "activation": {
+      "type": "none",
+      "condition": "",
+      "cost": null
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
-      "sturdy": true,
+      "ac": {
+        "value": "5"
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": 18,
-        "max": "18"
       },
       "hardness": {
         "value": "7"
       },
-      "ac": {
-        "value": "5"
-      }
+      "hp": {
+        "max": "18",
+        "value": 18
+      },
+      "size": "medium",
+      "sturdy": true
     },
-    "activation": {
-      "type": "none",
-      "cost": null,
-      "condition": ""
+    "attuned": false,
+    "bulk": "L",
+    "capacity": {
+      "max": 20,
+      "value": 20
     },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
-      "units": "touch",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "isActive": null,
-    "ability": "str",
-    "actionType": "mwak",
-    "attackBonus": 0,
     "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "isOpen": true,
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "fusion",
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "goods"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightProperty": ""
+        }
+      ]
+    },
     "critical": {
-      "parts": [],
-      "effect": "Injection DC +2"
+      "effect": "Injection DC +2",
+      "parts": []
     },
     "damage": {
       "parts": [
         {
           "formula": "1d4 + @abilities.str.mod",
+          "operator": "and",
           "types": {
             "cold": true,
             "piercing": true
-          },
-          "operator": "and"
+          }
         }
       ]
     },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": "",
-      "descriptor": "negate"
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>This handheld melee weapon appears to be nothing more than a handle with a slot in one end. Once a vial of an injectable substance is inserted into this slot, the ice needle forms a slender spike of ice around that liquid core, allowing you to inject the substance into a foe with a virtually untraceable weapon. Undercover and furtive ice needles are often used primarily for their injecting capabilities, while artifice, espionage, and subterfuge ice needles deal significant damage along with the injection.</p>"
     },
     "descriptors": [],
-    "capacity": {
-      "value": 20,
-      "max": 20
+    "duration": {
+      "units": "",
+      "value": ""
     },
-    "usage": {
-      "value": 4,
-      "per": "minute"
-    },
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "level": 1,
     "modifiers": [],
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 1,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        },
-        {
-          "type": "slot",
-          "subtype": "",
-          "amount": 1,
-          "acceptsType": [
-            "goods"
-          ],
-          "weightMultiplier": 1,
-          "weightProperty": "",
-          "affectsEncumbrance": true
-        },
-        {
-          "type": "slot",
-          "subtype": "ammunitionSlot",
-          "amount": 1,
-          "acceptsType": [
-            "ammunition"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": ""
-        }
-      ],
-      "isOpen": true
-    },
-    "weaponType": "advancedM",
-    "weaponCategory": "cryo",
-    "special": "",
+    "price": 330,
+    "proficient": false,
     "properties": {
-      "one": true,
-      "two": false,
+      "aeon": false,
       "amm": false,
       "analog": false,
+      "antibiological": false,
       "archaic": false,
+      "aurora": false,
       "automatic": false,
       "blast": false,
       "block": false,
       "boost": false,
-      "bright": false,
-      "disarm": false,
-      "entangle": false,
-      "explode": false,
-      "injection": true,
-      "line": false,
-      "living": false,
-      "mind-affecting": false,
-      "nonlethal": false,
-      "operative": false,
-      "penetrating": false,
-      "powered": true,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "thrown": false,
-      "trip": false,
-      "unwieldy": false,
-      "aeon": false,
-      "antibiological": false,
-      "aurora": false,
       "breach": false,
       "breakdown": false,
+      "bright": false,
       "cluster": false,
       "conceal": true,
       "deconstruct": false,
       "deflect": false,
+      "disarm": false,
       "double": false,
       "drainCharge": false,
       "echo": false,
+      "entangle": false,
+      "explode": false,
       "extinguish": false,
       "feint": false,
       "fiery": false,
@@ -197,44 +155,87 @@
       "guided": false,
       "harrying": false,
       "holyWater": false,
+      "hybrid": false,
       "ignite": false,
       "indirect": false,
+      "injection": true,
       "integrated": false,
+      "line": false,
+      "living": false,
       "lockdown": false,
+      "mind-affecting": false,
       "mine": false,
       "mire": false,
       "modal": false,
       "necrotic": false,
+      "nonlethal": false,
+      "one": true,
+      "operative": false,
+      "penetrating": false,
       "polarize": false,
       "polymorphic": false,
+      "powered": true,
       "professional": false,
       "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
       "shape": false,
       "shells": false,
       "shield": false,
+      "sniper": false,
+      "stun": false,
+      "subtle": false,
       "sunder": false,
       "swarm": false,
       "tail": false,
       "teleportive": false,
       "thought": false,
       "throttle": false,
+      "thrown": false,
+      "trip": false,
+      "two": false,
+      "unbalancing": false,
       "underwater": false,
+      "unwieldy": false,
       "variantBoost": false,
-      "wideLine": false,
-      "hybrid": false,
-      "regrowth": false,
-      "unbalancing": false
+      "wideLine": false
     },
-    "proficient": false,
-    "abilityMods": {
-      "parts": []
-    }
+    "quantity": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "touch",
+      "value": null
+    },
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "AR pg. 9",
+    "special": "",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "usage": {
+      "per": "minute",
+      "value": 4
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    },
+    "weaponCategory": "cryo",
+    "weaponType": "advancedM"
   },
-  "flags": {},
-  "img": "icons/weapons/daggers/dagger-blue.webp",
   "effects": [],
-  "_id": "bhrJpVWluuLHOl6k"
+  "flags": {},
+  "img": "icons/weapons/daggers/dagger-blue.webp"
 }

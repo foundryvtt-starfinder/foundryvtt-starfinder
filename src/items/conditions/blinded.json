@@ -1,121 +1,121 @@
 {
+  "_id": "tOpF6qjnlnKc10t7",
   "name": "Blinded",
   "type": "feat",
   "data": {
-    "description": {
-      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p style=\"text-align: justify;\">You cannot see.</p>\n<p style=\"text-align: justify;\">You are @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} and take a &ndash;4 penalty to most Strength- and Dexterity-based skill checks and to opposed Perception skill checks.</p>\n<p style=\"text-align: justify;\">All checks and activities that rely on vision (such as reading and Perception checks based on sight) automatically fail.</p>\n<p style=\"text-align: justify;\">You can&rsquo;t observe other creatures, which means (among other things) that you treat all creatures as having total concealment (50% miss chance).</p>\n<p style=\"text-align: justify;\">You must succeed at a DC 10 Acrobatics skill check to move faster than half speed.</p>\n<p style=\"text-align: justify;\">If you fail this check, you fall @Compendium[sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone}.</p>\n<p style=\"text-align: justify;\">Characters who remain blinded for a long time grow accustomed to these drawbacks and can overcome some of them.</p>\n<p style=\"text-align: justify;\">Creatures that become blinded but that have a precise sense (see page 260) other than vision still automatically fail all checks and activities relying on vision, but they suffer none of the other effects.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB pg. 273",
     "type": "",
+    "ability": "int",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionType": "",
     "activation": {
       "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
+      "condition": "",
+      "cost": 0
     },
     "area": {
-      "value": null,
-      "units": null,
+      "effect": "",
       "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
       "units": null,
-      "additional": "",
-      "per": ""
+      "value": null
     },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
-    },
-    "isActive": null,
-    "ability": "int",
-    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p style=\"text-align: justify;\">&gt;@Compendium[sfrpg.rules.0yJjfyvWg5pDLcVR]{Conditions}</p>\n<hr />\n<p style=\"text-align: justify;\">You cannot see.</p>\n<p style=\"text-align: justify;\">You are @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} and take a &ndash;4 penalty to most Strength- and Dexterity-based skill checks and to opposed Perception skill checks.</p>\n<p style=\"text-align: justify;\">All checks and activities that rely on vision (such as reading and Perception checks based on sight) automatically fail.</p>\n<p style=\"text-align: justify;\">You can&rsquo;t observe other creatures, which means (among other things) that you treat all creatures as having total concealment (50% miss chance).</p>\n<p style=\"text-align: justify;\">You must succeed at a DC 10 Acrobatics skill check to move faster than half speed.</p>\n<p style=\"text-align: justify;\">If you fail this check, you fall @Compendium[sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone}.</p>\n<p style=\"text-align: justify;\">Characters who remain blinded for a long time grow accustomed to these drawbacks and can overcome some of them.</p>\n<p style=\"text-align: justify;\">Creatures that become blinded but that have a precise sense (see page 260) other than vision still automatically fail all checks and activities relying on vision, but they suffer none of the other effects.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
     "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "79b43974-53aa-4272-9e57-e0e256f438fb",
+        "name": "Strength Skill Checks",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ability-skills",
+        "enabled": true,
+        "max": -4,
+        "modifier": "-4",
+        "modifierType": "formula",
+        "notes": "Most Strength Checks.",
+        "source": "Condition",
+        "subtab": "misc",
+        "valueAffected": "str"
+      },
+      {
+        "_id": "e4b139f6-aa0b-48ff-b18f-2628f31221ce",
+        "name": "Dexterity Skill Checks",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ability-skills",
+        "enabled": true,
+        "max": -4,
+        "modifier": "-4",
+        "modifierType": "formula",
+        "notes": "Most Dexterity Checks.",
+        "source": "Condition",
+        "subtab": "misc",
+        "valueAffected": "dex"
+      },
+      {
+        "_id": "25d87dac-65aa-4aae-a698-a22ddb8f750d",
+        "name": "Perception Checks (Opposed)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": -4,
+        "modifier": "-4",
+        "modifierType": "formula",
+        "notes": "Opposed Perception Skill Checks.",
+        "source": "Condition",
+        "subtab": "misc",
+        "valueAffected": "per"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": null,
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "Condition",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": "negate"
     },
-    "descriptors": [],
-    "modifiers": [
-      {
-        "name": "Strength Skill Checks",
-        "modifier": "-4",
-        "type": "untyped",
-        "effectType": "ability-skills",
-        "valueAffected": "str",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "Most Strength Checks.",
-        "modifierType": "formula",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "79b43974-53aa-4272-9e57-e0e256f438fb",
-        "max": -4
-      },
-      {
-        "name": "Dexterity Skill Checks",
-        "modifier": "-4",
-        "type": "untyped",
-        "effectType": "ability-skills",
-        "valueAffected": "dex",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "Most Dexterity Checks.",
-        "modifierType": "formula",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "e4b139f6-aa0b-48ff-b18f-2628f31221ce",
-        "max": -4
-      },
-      {
-        "name": "Perception Checks (Opposed)",
-        "modifier": "-4",
-        "type": "untyped",
-        "effectType": "skill",
-        "valueAffected": "per",
-        "enabled": true,
-        "source": "Condition",
-        "notes": "Opposed Perception Skill Checks.",
-        "modifierType": "formula",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "25d87dac-65aa-4aae-a698-a22ddb8f750d",
-        "max": -4
-      }
-    ],
-    "requirements": "Condition",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "CRB pg. 273",
+    "target": {
+      "type": "",
+      "value": ""
     },
-    "abilityMods": {
-      "parts": []
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/conditions/blinded.png",
   "effects": [],
-  "_id": "tOpF6qjnlnKc10t7"
+  "flags": {},
+  "img": "systems/sfrpg/icons/conditions/blinded.png"
 }

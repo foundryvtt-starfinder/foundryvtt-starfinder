@@ -28,7 +28,7 @@ export default function (engine) {
                             // Get owner spell save dc modifiers and append to roll
                             const allModifiers = actor?.getAllModifiers();
                             if (allModifiers) {
-                                for (const modifier of allModifiers.filter(x => x.effectType === "spell-save-dc")) {
+                                for (const modifier of allModifiers.filter(x => x.enabled && x.effectType === "spell-save-dc")) {
                                     dcFormula += ` + ${modifier.modifier}[${modifier.name}]`;
                                 }
                             }

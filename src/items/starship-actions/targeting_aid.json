@@ -1,22 +1,20 @@
 {
+  "_id": "GO5w2bC91j0o7hh0",
   "name": "Targeting Aid",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>If you have at least 6 ranks in Acrobatics or Athletics, you can assist one specific gunner making an attack by inputting secondary sensor information, bypassing safety protocols, and even monitoring and adjusting power fluctuations in a ship’s weapon system to make the ship’s physical weapons more accurate. You must spend 1 Resolve Point and attempt either an Acrobatics or Athletics check (DC = 15 + 1-1/2 × your starship’s tier). One gunner can then take the fire at will or broadside action without the associated penalty to gunnery checks (normally –4 for fire at will and –2 for broadside). If you fail the check by 10 or more, that gunner instead takes a –2 penalty to attack rolls they make this round. This action can be taken more than once per round, but only once per gunner acting in that round.</p><h2>Critical effect</h2><p>You’re able to provide targeting information to all gunners about one specific ship. Choose an enemy starship; all gunners on your starship gain the benefits of the targeting aid crew action for attacks targeting that starship.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "COM",
     "type": "",
-    "role": "chiefMate",
-    "order": 30,
-    "phase": {
-      "name": "Engineering phase",
-      "tooltip": "This action can be used during the engineering phase of combat."
+    "dc": {
+      "resolve": true,
+      "value": "15 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": true,
-    "resolvePointCost": 1,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>If you have at least 6 ranks in Acrobatics or Athletics, you can assist one specific gunner making an attack by inputting secondary sensor information, bypassing safety protocols, and even monitoring and adjusting power fluctuations in a ship’s weapon system to make the ship’s physical weapons more accurate. You must spend 1 Resolve Point and attempt either an Acrobatics or Athletics check (DC = 15 + 1-1/2 × your starship’s tier). One gunner can then take the fire at will or broadside action without the associated penalty to gunnery checks (normally –4 for fire at will and –2 for broadside). If you fail the check by 10 or more, that gunner instead takes a –2 penalty to attack rolls they make this round. This action can be taken more than once per round, but only once per gunner acting in that round.</p><h2>Critical effect</h2><p>You’re able to provide targeting information to all gunners about one specific ship. Choose an enemy starship; all gunners on your starship gain the benefits of the targeting aid crew action for attacks targeting that starship.</p>"
+    },
+    "effectCritical": "You’re able to provide targeting information to all gunners about one specific ship. Choose an enemy starship; all gunners on your starship gain the benefits of the targeting aid crew action for attacks targeting that starship.",
+    "effectNormal": "If you have at least 6 ranks in Acrobatics or Athletics, you can assist one specific gunner making an attack by inputting secondary sensor information, bypassing safety protocols, and even monitoring and adjusting power fluctuations in a ship’s weapon system to make the ship’s physical weapons more accurate. You must spend 1 Resolve Point and attempt either an Acrobatics or Athletics check (DC = 15 + 1-1/2 × your starship’s tier). One gunner can then take the fire at will or broadside action without the associated penalty to gunnery checks (normally –4 for fire at will and –2 for broadside). If you fail the check by 10 or more, that gunner instead takes a –2 penalty to attack rolls they make this round. This action can be taken more than once per round, but only once per gunner acting in that round.",
     "formula": [
       {
         "name": "Acrobatics",
@@ -27,18 +25,20 @@
         "formula": "@chiefMate.skills.ath.mod"
       }
     ],
+    "isPush": true,
+    "order": 30,
+    "phase": {
+      "name": "Engineering phase",
+      "tooltip": "This action can be used during the engineering phase of combat."
+    },
+    "resolvePointCost": 1,
+    "role": "chiefMate",
+    "selectorKey": "chiefMate",
     "selectors": [
       "chiefMate"
     ],
-    "selectorKey": "chiefMate",
-    "dc": {
-      "value": "15 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
-    },
-    "effectNormal": "If you have at least 6 ranks in Acrobatics or Athletics, you can assist one specific gunner making an attack by inputting secondary sensor information, bypassing safety protocols, and even monitoring and adjusting power fluctuations in a ship’s weapon system to make the ship’s physical weapons more accurate. You must spend 1 Resolve Point and attempt either an Acrobatics or Athletics check (DC = 15 + 1-1/2 × your starship’s tier). One gunner can then take the fire at will or broadside action without the associated penalty to gunnery checks (normally –4 for fire at will and –2 for broadside). If you fail the check by 10 or more, that gunner instead takes a –2 penalty to attack rolls they make this round. This action can be taken more than once per round, but only once per gunner acting in that round.",
-    "effectCritical": "You’re able to provide targeting information to all gunners about one specific ship. Choose an enemy starship; all gunners on your starship gain the benefits of the targeting aid crew action for attacks targeting that starship."
+    "source": "COM"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "GO5w2bC91j0o7hh0"
+  "img": "icons/svg/mystery-man.svg"
 }

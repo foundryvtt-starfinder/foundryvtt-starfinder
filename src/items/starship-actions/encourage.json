@@ -1,22 +1,20 @@
 {
+  "_id": "gsPzG6Y9PW24YgUa",
   "name": "Encourage",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You can encourage another member of the crew to give her a bonus to her action. This works like aid another (see page 133), granting a +2 bonus to the check required by a crew action if you succeed at a DC 10 check using the same skill. Alternatively, you can grant this same bonus by succeeding at a DC 15 Diplomacy check. You can’t encourage yourself.</p><h2>Critical effect</h2><p>You’re able to select just the right motivation for your crew, increasing the bonus you grant to your crew members’ actions to +4.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "captain",
-    "order": 10,
-    "phase": {
-      "name": "Any phase",
-      "tooltip": "This action can be used during any phase of combat."
+    "dc": {
+      "resolve": false,
+      "value": "10 (Any skill) or 15 (Diplomacy)"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You can encourage another member of the crew to give her a bonus to her action. This works like aid another (see page 133), granting a +2 bonus to the check required by a crew action if you succeed at a DC 10 check using the same skill. Alternatively, you can grant this same bonus by succeeding at a DC 15 Diplomacy check. You can’t encourage yourself.</p><h2>Critical effect</h2><p>You’re able to select just the right motivation for your crew, increasing the bonus you grant to your crew members’ actions to +4.</p>"
+    },
+    "effectCritical": "You’re able to select just the right motivation for your crew, increasing the bonus you grant to your crew members’ actions to +4.",
+    "effectNormal": "You can encourage another member of the crew to give her a bonus to her action. This works like aid another (see page 133), granting a +2 bonus to the check required by a crew action if you succeed at a DC 10 check using the same skill. Alternatively, you can grant this same bonus by succeeding at a DC 15 Diplomacy check. You can’t encourage yourself.",
     "formula": [
       {
         "name": "Diplomacy",
@@ -39,16 +37,18 @@
         "formula": "@captain.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       }
     ],
-    "selectors": [],
-    "selectorKey": "captain",
-    "dc": {
-      "value": "10 (Any skill) or 15 (Diplomacy)",
-      "resolve": false
+    "isPush": false,
+    "order": 10,
+    "phase": {
+      "name": "Any phase",
+      "tooltip": "This action can be used during any phase of combat."
     },
-    "effectNormal": "You can encourage another member of the crew to give her a bonus to her action. This works like aid another (see page 133), granting a +2 bonus to the check required by a crew action if you succeed at a DC 10 check using the same skill. Alternatively, you can grant this same bonus by succeeding at a DC 15 Diplomacy check. You can’t encourage yourself.",
-    "effectCritical": "You’re able to select just the right motivation for your crew, increasing the bonus you grant to your crew members’ actions to +4."
+    "resolvePointCost": 0,
+    "role": "captain",
+    "selectorKey": "captain",
+    "selectors": [],
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "gsPzG6Y9PW24YgUa"
+  "img": "icons/svg/mystery-man.svg"
 }
