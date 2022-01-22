@@ -228,6 +228,23 @@ SFRPG.weaponDamageTypes = {
     "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic",
 };
 
+// Damage Reductions
+SFRPG.damageReductionTypes = {
+    "": "-",
+    ...SFRPG.specialMaterials,
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
+// Energy Resistances
+SFRPG.energyResistanceTypes = {
+    "acid": "SFRPG.Damage.Types.Acid",
+    "cold": "SFRPG.Damage.Types.Cold",
+    "electricity": "SFRPG.Damage.Types.Electricity",
+    "fire": "SFRPG.Damage.Types.Fire",
+    "sonic": "SFRPG.Damage.Types.Sonic",
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
 SFRPG.ammunitionTypes = {
     "charge": "SFRPG.Items.Ammunition.Type.Charges",
     "roundS": "SFRPG.Items.Ammunition.Type.SmallArmRounds",
@@ -522,6 +539,22 @@ SFRPG.weaponPropertiesTooltips = {
     "unwieldy": "SFRPG.WeaponPropertiesUnwieldyTooltip",
     "variantBoost": "SFRPG.WeaponPropertiesVariantBoostTooltip",
     "wideLine": "SFRPG.WeaponPropertiesWideLineTooltip"
+};
+
+SFRPG.specialMaterials = {
+    "abysium": "SFRPG.SpecialMaterials.Abysium",
+    "adamantine": "SFRPG.SpecialMaterials.Adamantine",
+    "coldiron": "SFRPG.SpecialMaterials.ColdIron",
+    "diatha": "SFRPG.SpecialMaterials.Diatha",
+    "djezet": "SFRPG.SpecialMaterials.Djezet",
+    "horacalcum": "SFRPG.SpecialMaterials.Horacalcum",
+    "inubrix": "SFRPG.SpecialMaterials.Inubrix",
+    "khefak": "SFRPG.SpecialMaterials.Khefak",
+    "noqual": "SFRPG.SpecialMaterials.Noqual",
+    "purplecores": "SFRPG.SpecialMaterials.PurpleCores",
+    "siccatite": "SFRPG.SpecialMaterials.Siccatite",
+    "silver": "SFRPG.SpecialMaterials.Silver",
+    "voidglass": "SFRPG.SpecialMaterials.Voidglass"
 };
 
 SFRPG.spellAreaShapes = {
@@ -1058,7 +1091,9 @@ SFRPG.modifierEffectTypes = {
     "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
     "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
     "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
-    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource"
+    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource",
+    "damage-reduction": "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction",
+    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance"
 };
 
 SFRPG.modifierType = {
@@ -1639,4 +1674,18 @@ SFRPG.flightManeuverability = {
     "-1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Clumsy",
     "0": "SFRPG.ActorSheet.Attributes.Speed.Flight.Average",
     "1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Perfect"
+};
+
+SFRPG.actionTargets = {
+    "": "SFRPG.Items.Action.ActionTarget.None",
+    "kac": "SFRPG.Items.Action.ActionTarget.KAC",
+    "kac8": "SFRPG.Items.Action.ActionTarget.KAC8",
+    "eac": "SFRPG.Items.Action.ActionTarget.EAC",
+    "other": "SFRPG.Items.Action.ActionTarget.Other"
+};
+
+SFRPG.actionTargetsStarship = {
+    "": "SFRPG.Items.Action.ActionTarget.None",
+    "ac": "SFRPG.Items.Action.ActionTarget.StarshipAC",
+    "tl": "SFRPG.Items.Action.ActionTarget.StarshipTL"
 };

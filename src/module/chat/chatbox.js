@@ -1,3 +1,6 @@
+import { DiceSFRPG } from "../dice.js";
+import { SFRPG } from "../config.js";
+
 /**
  * Helper class to handle the display of chatBox
  */
@@ -76,7 +79,9 @@ export default class SFRPGCustomChatMessage {
             tokenId: this.getToken(actor),
             breakdown: data.breakdown,
             tags: data.tags,
-            damageTypeString: data.damageTypeString
+            damageTypeString: data.damageTypeString,
+            specialMaterials: data.specialMaterials,
+            rollOptions: data.rollOptions,
         };
 
         SFRPGCustomChatMessage._render(roll, data, options);
@@ -91,14 +96,11 @@ export default class SFRPGCustomChatMessage {
         // Insert the damage type string if possible.
         const damageTypeString = options?.damageTypeString;
         if (damageTypeString?.length > 0) {
-            const diceRollHtml = '<h4 class="dice-roll">';
-            const diceRollIndex = rollContent.indexOf(diceRollHtml);
-            const firstHalf = rollContent.substring(0, diceRollIndex + diceRollHtml.length);
-            const splitOffFirstHalf = rollContent.substring(diceRollIndex + diceRollHtml.length);
-            const closeTagIndex = splitOffFirstHalf.indexOf('</h4>');
-            const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
-            const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
-            rollContent = firstHalf + rollResultHtml + ` ${damageTypeString}` + secondHalf;
+            rollContent = DiceSFRPG.appendTextToRoll(rollContent, damageTypeString);
+        }
+
+        if (options.rollOptions?.actionTarget) {
+            rollContent = DiceSFRPG.appendTextToRoll(rollContent, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: options.rollOptions.actionTargetSource[options.rollOptions.actionTarget]}));
         }
 
         options = foundry.utils.mergeObject(options, { rollContent });
@@ -119,16 +121,23 @@ export default class SFRPGCustomChatMessage {
             roll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             sound: CONFIG.sounds.dice,
-            rollType: data.rollType
+            rollType: data.rollType,
+            flags: {}
         };
 
         if (damageTypeString?.length > 0) {
-            messageData.flags = {
-                damage: {
-                    amount: roll.total,
-                    types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
-                }
+            messageData.flags.damage = {
+                amount: roll.total,
+                types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
             };
+        }
+
+        if (options?.specialMaterials) {
+            messageData.flags.specialMaterials = options.specialMaterials;
+        }
+
+        if (options.rollOptions) {
+            messageData.flags.rollOptions = options.rollOptions;
         }
 
         ChatMessage.create(messageData);

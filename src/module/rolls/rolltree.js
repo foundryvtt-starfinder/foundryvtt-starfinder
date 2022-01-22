@@ -48,7 +48,7 @@ export default class RollTree {
         const allRolledMods = this.populate();
 
         if (this.options.skipUI) {
-            const button = this.options.defaultButton || (this.options.buttons ? Object.values(this.options.buttons)[0].label : "Roll");
+            const button = this.options.defaultButton || (this.options.buttons ? (Object.values(this.options.buttons)[0].id ?? Object.values(this.options.buttons)[0].label) : "roll");
             const rollMode = game.settings.get("core", "rollMode");
 
             for (const [key, value] of Object.entries(this.nodes)) {
@@ -194,7 +194,7 @@ export default class RollTree {
             console.log(["Available modifiers", availableModifiers]);
         }
         if (this.options.skipUI) {
-            const firstButton = this.options.defaultButton || (this.options.buttons ? Object.values(this.options.buttons)[0].label : "Roll");
+            const firstButton = this.options.defaultButton || (this.options.buttons ? Object.values(this.options.buttons)[0].id ?? Object.values(this.options.buttons)[0].label : "roll");
             const defaultRollMode = game.settings.get("core", "rollMode");
             return new Promise((resolve) => { resolve([firstButton, defaultRollMode, ""]); });
         }

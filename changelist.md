@@ -1,6 +1,11 @@
 # v0.18.0 - Starfinder
 
 ## New Features
+### Attack Roll update
+It is now possible to define the action target for any item that has an action, such as weapons, feats, etc. This will then be listed in the chat as "17 against KAC", for example, when making an attack with that item. Currently supported targets are nothing, KAC, KAC +8, EAC, and Other.
+
+The action target will have to be manually updated on any items already on characters, as it is impossible for us to detect changes based on fusions, homebrew, spell effects, and other reasons for the damage types to be different. All weapons in the equipment compendium come with some target preconfigured.
+
 ### Damage System updates
 Starfinder v0.13 introduced a major damage system overhaul. A small amount of functionality was still pending, and have now been wrapped up. These changes now add the damage type to the damage roll's text, making it easier than ever to see which damage types your damage applies. Additionally, items can now support multiple damage sections, so you can either pick one, or multiple. This is particularly handy for spells like Call Cosmos which causes separate cold and fire damage rolls, or items with fusions that change a damage type to your choice. Now, the UI will allow you to check which damage type you want to roll.
 
@@ -12,13 +17,32 @@ A new setting has been made available to do the rounding of split odd damage in 
 To make finding aliens a little easier, we've integrated the work started by rrenna and took it from there to finally provide you with an in-engine alien archive browser. You can filter by CR, HP, Size, Type, and, of course, name.
 
 ## Bugfixes and small improvements
-* Added the Biohacker features from Tech Revolution.
-* Fixed a bug that allowed disabled modifiers to affect an actor.
-* Fixed a bug that caused the token configuration of Starship or Vehicle containing a PC or NPC actor crew to not open.
-* Fixed a bug that prevented nested containers from listing their content wealth.
-* Fixed class' keyAbilityMod property not getting set correctly.
-* Fixed initiative roll dialog's roll mode setting being ignored.
-* Fixed starship critical damage rolls doubling the damage, Starships do not double their damage, instead they should apply a critical threshold. Deflector Shields still take 1 extra damage.
+* Added base int and cha to drone chassis.
+* Added Mountain Eel from AA1 to Alien Archives.
+* Added spell resistance and activation/action to drone mods.
+* Added most, if not all, of the class features from Tech Revolution.
+* Assigned action target to weapons in the compendium.
+* Consumables no longer use up the entire quantity when used once.
+* Creating a new actor resource modifier no longer requires you to save, close, and re-open the modifier panel to enter the affected actor resource.
+* Creating a new player character or drone sheet now automatically sets the token linked for that sheet. This does not apply to NPCs, Starships, and Vehicles.
+* Disabled modifiers no longer affect their actor's spell save DC.
+* Disabling modifiers on the roll dialog are remembered for future rolls again.
+* Initiative rolls no longer ignore the roll mode setting of the roll dialog.
+* Localized roll dialogs now properly respond to the Critical damage button. (Fixes #290 and #500)
+* Nested containers now list their contained wealth correctly.
+* NPCs can now access their level as @details.level.value as well as @details.cr, to aid with modifier consistency.
+* Reloading a weapon that has a short description will now roll the short description into chat instead.
+* Rolls that include the -4 penalty when attacking with a weapon the owning character is not proficient with now explains the -4 is caused by the lack of proficiency.
+* Several compendium links from various compendium items to various other compendium items were updated to point to the correct item.
+* Special materials can now be selected on armor, ammunition, shields, weapons, starship armor, starship defensive countermeasures, starship sensors, starship thrusters, and starship weapons.
+* Starship critical damage rolls no longer double their damage. Deflector shields still take 1 extra damage from a critical hit however.
+* The keyAbilityMod property on a PC sheet's class attributes is now updated correctly. (e.g. @classes.mechanic.keyAbilityMod)
+* The token configuration of Starships and Vehicles that contained a crew can now be opened again.
+* Updated a few class features with proper modifier support.
+* Updated all of the spells in the compendium.
+* Updated the compendium definitions to match Foundry v9 requirements.
+
+* Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.
 
 # v0.17.0 - Starfinder
 

@@ -239,6 +239,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item .item-image').click(event => this._onItemRoll(event));
 
         // Roll attack from item 
+        html.find('.item-action .use').click(event => this._onItemRollUse(event));
+
+        // Roll attack from item 
         html.find('.item-action .attack').click(event => this._onItemRollAttack(event));
 
         // Roll damage for item
@@ -375,6 +378,65 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
         }
     }
+    
+    /**
+    * Add a modifer to this actor.
+    * 
+    * @param {Event} event The originating click event
+    */
+   _onModifierCreate(event) {
+       event.preventDefault();
+       const target = $(event.currentTarget);
+
+       this.actor.addModifier({
+           name: "New Modifier",
+           subtab: target.data('subtab')
+       });
+   }
+
+   /**
+    * Delete a modifier from the actor.
+    * 
+    * @param {Event} event The originating click event
+    */
+   async _onModifierDelete(event) {
+       event.preventDefault();
+       const target = $(event.currentTarget);
+       const modifierId = target.closest('.item.modifier').data('modifierId');
+       
+       await this.actor.deleteModifier(modifierId);
+   }
+
+   /**
+    * Edit a modifier for an actor.
+    * 
+    * @param {Event} event The orginating click event
+    */
+   _onModifierEdit(event) {
+       event.preventDefault();
+
+       const target = $(event.currentTarget);
+       const modifierId = target.closest('.item.modifier').data('modifierId');
+
+       this.actor.editModifier(modifierId);
+   }
+
+   /**
+    * Toggle a modifier to be enabled or disabled.
+    * 
+    * @param {Event} event The originating click event
+    */
+   async _onToggleModifierEnabled(event) {
+       event.preventDefault();
+       const target = $(event.currentTarget);
+       const modifierId = target.closest('.item.modifier').data('modifierId');
+
+       const modifiers = duplicate(this.actor.data.data.modifiers);
+       const modifier = modifiers.find(mod => mod._id === modifierId);
+       modifier.enabled = !modifier.enabled;
+
+       await this.actor.update({'data.modifiers': modifiers});
+   }
 
     /**
      * handle cycling whether a skill is a class skill or not
@@ -516,6 +578,14 @@ export class ActorSheetSFRPG extends ActorSheet {
                 });
             });
         }
+    }
+
+    _onItemRollUse(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const item = this.actor.items.get(itemId);
+
+        return item.rollConsumable({event: event});
     }
 
     _onItemRollAttack(event) {

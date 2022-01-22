@@ -12,6 +12,18 @@
 </div>
 {{#if itemData.actionType}}
 
+{{!-- Action Target --}}
+<div class="form-group select" {{createTippy title="SFRPG.Items.Action.ActionTarget.Title" subtitle="SFRPG.Items.Action.ActionTarget.Tooltip"}}>
+    <label>{{ localize "SFRPG.Items.Action.ActionTarget.Title" }}</label>
+    <select name="data.actionTarget">
+        {{#select itemData.actionTarget}}
+        {{#each config.actionTargets as |name type|}}
+        <option value="{{type}}">{{name}}</option>
+        {{/each}}
+        {{/select}}
+    </select>
+</div>
+
 {{!-- Ability Modifier --}}
 <div class="form-group select">
     <label>{{ localize "SFRPG.Items.Action.AbilityModifier" }}</label>

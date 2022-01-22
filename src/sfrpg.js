@@ -199,18 +199,22 @@ Hooks.once("setup", function () {
 
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
-        "abilities", "actorTypes", "alignments", "alignmentsNPC", "ammunitionTypes", "distanceUnits", "senses", "skills", "currencies", "saves",
-        "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes", "itemTypes",
-        "vehicleSizes", "babProgression", "saveProgression", "saveDescriptors", "armorProficiencies",
-        "weaponProficiencies", "abilityActivationTypes", "skillProficiencyLevels", "damageTypes",
-        "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
-        "weaponProperties", "weaponPropertiesTooltips", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
-        "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
-        "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
-        "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
-        "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
-        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds",
-        "damageTypeOperators", "flightManeuverability"
+        "abilities", "abilityActivationTypes", "acpEffectingArmorType", "actionTargets", "actionTargetsStarship", "actorSizes", "actorTypes", "alignments",
+            "alignmentsNPC", "allowedClasses", "ammunitionTypes", "armorProficiencies", "armorTypes", "augmentationSytems", "augmentationTypes",
+        "babProgression",
+        "capacityUsagePer", "conditionTypes", "consumableTypes", "containableTypes", "currencies",
+        "damageReductionTypes", "damageTypeOperators", "damageTypes", "distanceUnits",
+        "energyDamageTypes", "energyResistanceTypes",
+        "featTypes", "flightManeuverability",
+        "healingTypes",
+        "itemActionTypes", "itemTypes",
+        "kineticDamageTypes",
+        "languages", "limitedUsePeriods",
+        "maneuverability", "modifierArmorClassAffectedValues", "modifierEffectTypes", "modifierType", "modifierTypes",
+        "saveDescriptors", "saveProgression", "saves", "senses", "skillProficiencyLevels", "skills", "specialMaterials", "speeds", "spellAreaEffects", "spellAreaShapes", "spellLevels", "spellPreparationModes",
+            "starshipArcs", "starshipRoles", "starshipSizes", "starshipSystemStatus", "starshipWeaponClass", "starshipWeaponProperties", "starshipWeaponRanges", "starshipWeaponTypes",
+        "vehicleCoverTypes", "vehicleSizes", "vehicleTypes",
+        "weaponCategories", "weaponCriticalHitEffects", "weaponDamageTypes", "weaponProficiencies", "weaponProperties", "weaponPropertiesTooltips", "weaponTypes"
     ];
 
     for (let o of toLocalize) {
@@ -264,7 +268,7 @@ Hooks.once("ready", () => {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.data.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
-    
+
         if (needsMigration) {
             console.log("Starfinder | [READY] Performing world migration");
             migrateWorld()
@@ -368,6 +372,15 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
     if (data.type !== "Item") return;
     createItemMacro(data.data, slot);
     return false;
+});
+
+Hooks.on("createActor", function(actor, options, actorId) {
+    const autoLinkedTypes = ['character', 'drone'];
+    if (autoLinkedTypes.includes(actor.data.type)) {
+        actor.update({
+            "token.actorLink": true
+        });
+    }
 });
 
 function registerMathFunctions() {

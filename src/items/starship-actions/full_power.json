@@ -1,35 +1,35 @@
 {
+  "_id": "FDcymzZLqnp2K8eC",
   "name": "Full Power",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>If you have at least 6 ranks in Piloting, you can spend 1 Resolve Point to move your starship up to 1-1/2 times its speed. You can make turns during this movement, but you add 2 to your starship’s distance between turns.</p><h2>Critical effect</h2><p>You maintain steady control over your starship during its movement and add only 1 to your starship’s distance between turns.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "pilot",
-    "order": 30,
-    "phase": {
-      "name": "Helm phase",
-      "tooltip": "This action can be taken only during the helm phase."
+    "dc": null,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>If you have at least 6 ranks in Piloting, you can spend 1 Resolve Point to move your starship up to 1-1/2 times its speed. You can make turns during this movement, but you add 2 to your starship’s distance between turns.</p><h2>Critical effect</h2><p>You maintain steady control over your starship during its movement and add only 1 to your starship’s distance between turns.</p>"
     },
-    "isPush": true,
-    "resolvePointCost": 1,
+    "effectCritical": "You maintain steady control over your starship during its movement and add only 1 to your starship’s distance between turns.",
+    "effectNormal": "If you have at least 6 ranks in Piloting, you can spend 1 Resolve Point to move your starship up to 1-1/2 times its speed. You can make turns during this movement, but you add 2 to your starship’s distance between turns.",
     "formula": [
       {
         "name": "Piloting",
         "formula": "@pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       }
     ],
-    "selectors": [],
+    "isPush": true,
+    "order": 30,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "resolvePointCost": 1,
+    "role": "pilot",
     "selectorKey": "pilot",
-    "dc": null,
-    "effectNormal": "If you have at least 6 ranks in Piloting, you can spend 1 Resolve Point to move your starship up to 1-1/2 times its speed. You can make turns during this movement, but you add 2 to your starship’s distance between turns.",
-    "effectCritical": "You maintain steady control over your starship during its movement and add only 1 to your starship’s distance between turns."
+    "selectors": [],
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "FDcymzZLqnp2K8eC"
+  "img": "icons/svg/mystery-man.svg"
 }

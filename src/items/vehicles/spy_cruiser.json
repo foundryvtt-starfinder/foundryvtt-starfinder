@@ -1,50 +1,15 @@
 {
+  "_id": "lroZwBvW4KawAUl5",
   "name": "Spy Cruiser",
   "type": "vehicle",
   "data": {
-    "conditions": {},
-    "details": {
-      "level": 15,
-      "price": 316000,
-      "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Used by many planetary military forces for undersea engagements, a stealth sub features a small promenade along its dorsal surface for use when it surfaces.</span></p>",
-        "chat": "",
-        "unidentified": ""
-      },
-      "source": "AR pg. 138"
-    },
-    "crew": {
-      "useNPCCrew": false,
-      "pilot": {
-        "limit": 1,
-        "actorIds": []
-      },
-      "complement": {
-        "limit": 0,
-        "actorIds": []
-      },
-      "passenger": {
-        "limit": 5,
-        "actorIds": []
-      }
-    },
-    "hangarBay": {
-      "limit": 0,
-      "actorIds": []
-    },
     "attributes": {
-      "size": "huge",
       "type": "landAW",
+      "cover": "total",
       "dimensions": {
-        "width": "10",
+        "height": "5",
         "length": "15",
-        "height": "5"
-      },
-      "speed": {
-        "drive": "60 ft",
-        "full": "800 ft",
-        "mph": "90 mph (fly and hover)",
-        "type": ""
+        "width": "10"
       },
       "eac": {
         "value": 29
@@ -52,454 +17,417 @@
       "expansionBays": {
         "value": 0
       },
+      "hardness": 12,
+      "hp": {
+        "max": 255,
+        "threshold": 127,
+        "value": 255
+      },
       "kac": {
         "value": 30
       },
-      "cover": "total",
-      "hp": {
-        "value": 255,
-        "max": 255,
-        "threshold": 127
-      },
-      "hardness": 12,
       "modifiers": {
-        "piloting": "2",
-        "attackStopped": "0",
+        "attackFullSpeed": "-4",
         "attackMoving": "-2",
-        "attackFullSpeed": "-4"
+        "attackStopped": "0",
+        "piloting": "2"
       },
-      "systems": [],
-      "special": []
+      "size": "huge",
+      "special": [],
+      "speed": {
+        "type": "",
+        "drive": "60 ft",
+        "full": "800 ft",
+        "mph": "90 mph (fly and hover)"
+      },
+      "systems": []
+    },
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 0
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": 5
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Used by many planetary military forces for undersea engagements, a stealth sub features a small promenade along its dorsal surface for use when it surfaces.</span></p>"
+      },
+      "level": 15,
+      "price": 316000,
+      "source": "AR pg. 138"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 0
     }
   },
+  "effects": [],
   "flags": {},
-  "token": {
-    "flags": {},
-    "name": "Spy Cruiser",
-    "displayName": 0,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": null,
-    "width": 1,
-    "height": 1,
-    "scale": 1,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "mP7xoDRWWqgwoIIf",
-    "actorLink": false,
-    "disposition": -1,
-    "displayBars": 0,
-    "bar1": {},
-    "bar2": {},
-    "randomImg": false
-  },
+  "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
-          "unidentified": ""
-        },
-        "source": "",
         "type": "",
-        "modifiers": [],
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
         "damage": {
           "parts": [
             {
               "formula": "2*(16d10)",
+              "operator": "",
               "types": {
                 "bludgeoning": true
-              },
-              "operator": ""
+              }
             }
           ]
         },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>"
+        },
+        "modifiers": [],
         "save": {
           "type": "reflex",
           "dc": "19",
           "descriptor": "negate"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "img": "icons/svg/mystery-man.svg"
     },
     {
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
-          "unidentified": ""
-        },
-        "source": "",
         "type": "",
-        "modifiers": [],
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
         "damage": {
           "parts": [
             {
               "formula": "16d10",
+              "operator": "",
               "types": {
                 "bludgeoning": true
-              },
-              "operator": ""
+              }
             }
           ]
         },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>"
+        },
+        "modifiers": [],
         "save": {
           "type": "reflex",
           "dc": "19",
           "descriptor": "half"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "img": "icons/svg/mystery-man.svg"
     },
     {
       "name": "Unlimited comm unit",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>Comm units that function at system-wide and unlimited ranges aren&rsquo;t as portable; they include built-in generators that provide the necessary amount of power.&nbsp;</p>\n<p>&nbsp;</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>Comm units that function at system-wide and unlimited ranges aren&rsquo;t as portable; they include built-in generators that provide the necessary amount of power.&nbsp;</p>\n<p>&nbsp;</p>"
         },
-        "source": "CRB pg. 218",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": true,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": "0",
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": "CRB pg. 218"
       },
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg"
     },
     {
       "name": "Autopilot",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>"
         },
-        "source": "CRB pg. 280",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": true,
-          "piloting": "26"
-        },
-        "canBeActivated": true,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": "26",
+          "usedAsPilot": true
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": "CRB pg. 280"
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "img": "icons/svg/mystery-man.svg"
     },
     {
       "name": "Stealth (-2)",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>The coloration of the vehicle&rsquo;s exterior automatically changes to match its surroundings. Its pilot can always attempt Stealth checks for the vehicle as long as it is stationary, but with the listed modifier. This check is opposed by the Computers or Perception check of anyone scanning the area with sensors.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>The coloration of the vehicle&rsquo;s exterior automatically changes to match its surroundings. Its pilot can always attempt Stealth checks for the vehicle as long as it is stationary, but with the listed modifier. This check is opposed by the Computers or Perception check of anyone scanning the area with sensors.</p>"
         },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "img": "icons/svg/mystery-man.svg"
     },
     {
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>"
         },
-        "source": "",
-        "type": "",
+        "isActive": false,
         "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
+          "piloting": "0",
+          "usedAsPilot": false
         },
         "senses": {
-          "usedForSenses": true,
-          "senses": "darkvision 5 miles"
+          "senses": "darkvision 5 miles",
+          "usedForSenses": true
         },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png"
     },
     {
       "name": "Zero cannon, advanced",
       "type": "weapon",
       "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>Zero cannons project a freezing line straight out from a generator, affecting any targets within the line. A pair of tanks in the cannon&rsquo;s heavy stock contain chemical coolants that produce a violent endothermic reaction when mixed in the insulated barrel.</p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 177",
         "type": "",
-        "quantity": 1,
-        "bulk": "2",
-        "price": 81400,
-        "level": 14,
-        "attuned": false,
-        "equipped": true,
-        "equippable": true,
-        "identified": true,
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shape": "line",
+          "units": "ft",
+          "value": 60
+        },
+        "attackBonus": 0,
         "attributes": {
-          "sturdy": true,
+          "ac": {
+            "value": "5"
+          },
           "customBuilt": false,
-          "size": "medium",
           "dex": {
             "mod": ""
-          },
-          "hp": {
-            "value": 57,
-            "max": "57"
           },
           "hardness": {
             "value": "33"
           },
-          "ac": {
-            "value": "5"
-          }
+          "hp": {
+            "max": "57",
+            "value": 57
+          },
+          "size": "medium",
+          "sturdy": true
         },
-        "activation": {
-          "type": "none",
-          "cost": null,
-          "condition": ""
+        "attuned": false,
+        "bulk": "2",
+        "capacity": {
+          "max": 100,
+          "value": 100
         },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": 60,
-          "units": "ft",
-          "shape": "line",
-          "effect": ""
-        },
-        "range": {
-          "value": null,
-          "units": null,
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": null,
-          "max": null,
-          "per": ""
-        },
-        "isActive": null,
-        "ability": "dex",
-        "actionType": "rwak",
-        "attackBonus": 0,
         "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 14,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "goods"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "",
+              "weightProperty": ""
+            }
+          ]
+        },
         "critical": {
-          "parts": [],
-          "effect": "Staggered"
+          "effect": "Staggered",
+          "parts": []
         },
         "damage": {
           "parts": [
             {
               "formula": "5d8",
+              "operator": "",
               "types": {
                 "cold": true
-              },
-              "operator": ""
+              }
             }
           ]
         },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": "",
-          "descriptor": "negate"
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Zero cannons project a freezing line straight out from a generator, affecting any targets within the line. A pair of tanks in the cannon&rsquo;s heavy stock contain chemical coolants that produce a violent endothermic reaction when mixed in the insulated barrel.</p>"
         },
         "descriptors": [],
-        "capacity": {
-          "value": 100,
-          "max": 100
+        "duration": {
+          "units": "",
+          "value": ""
         },
-        "usage": {
-          "value": 5,
-          "per": "shot"
-        },
+        "equippable": true,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 14,
         "modifiers": [],
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "subtype": "fusion",
-              "amount": 14,
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "weightProperty": "level"
-            },
-            {
-              "type": "slot",
-              "subtype": "",
-              "amount": 1,
-              "acceptsType": [
-                "goods"
-              ],
-              "weightProperty": "",
-              "affectsEncumbrance": true
-            }
-          ],
-          "isOpen": true
-        },
-        "weaponType": "heavy",
-        "weaponCategory": "cryo",
-        "special": "",
+        "price": 81400,
+        "proficient": true,
         "properties": {
-          "one": false,
-          "two": true,
+          "aeon": false,
           "amm": false,
           "analog": false,
+          "antibiological": false,
           "archaic": false,
+          "aurora": false,
           "automatic": false,
           "blast": false,
           "block": false,
           "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": true,
-          "living": false,
-          "mind-affecting": false,
-          "nonlethal": false,
-          "operative": false,
-          "penetrating": false,
-          "powered": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "thrown": false,
-          "trip": false,
-          "unwieldy": true,
-          "aeon": false,
-          "antibiological": false,
-          "aurora": false,
           "breach": false,
           "breakdown": false,
+          "bright": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
           "deflect": false,
+          "disarm": false,
           "double": false,
           "drainCharge": false,
           "echo": false,
+          "entangle": false,
+          "explode": false,
           "extinguish": false,
           "feint": false,
           "fiery": false,
@@ -513,49 +441,121 @@
           "guided": false,
           "harrying": false,
           "holyWater": false,
+          "hybrid": false,
           "ignite": false,
           "indirect": false,
+          "injection": false,
           "integrated": false,
+          "line": true,
+          "living": false,
           "lockdown": false,
+          "mind-affecting": false,
           "mine": false,
           "mire": false,
           "modal": false,
           "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
           "polarize": false,
           "polymorphic": false,
+          "powered": false,
           "professional": false,
           "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
           "recall": false,
+          "regrowth": false,
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
           "sunder": false,
           "swarm": false,
           "tail": false,
           "teleportive": false,
           "thought": false,
           "throttle": false,
-          "underwater": false,
-          "variantBoost": false,
-          "wideLine": false,
-          "hybrid": false,
-          "regrowth": false,
+          "thrown": false,
+          "trip": false,
+          "two": true,
           "unbalancing": false,
-          "shatter": false
+          "underwater": false,
+          "unwieldy": true,
+          "variantBoost": false,
+          "wideLine": false
         },
-        "proficient": true,
-        "abilityMods": {
-          "parts": []
-        }
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": null,
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "CRB pg. 177",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 5
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "cryo",
+        "weaponType": "heavy"
       },
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/advanced_zero_cannon.jpg",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/weapons/advanced_zero_cannon.jpg"
     }
   ],
-  "effects": [],
-  "_id": "lroZwBvW4KawAUl5",
-  "img": "icons/svg/mystery-man.svg"
+  "token": {
+    "name": "Spy Cruiser",
+    "actorId": "mP7xoDRWWqgwoIIf",
+    "actorLink": false,
+    "bar1": {},
+    "bar2": {},
+    "brightLight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "dimSight": 0,
+    "displayBars": 0,
+    "displayName": 0,
+    "disposition": -1,
+    "flags": {},
+    "height": 1,
+    "img": "icons/svg/mystery-man.svg",
+    "lightAlpha": 1,
+    "lightAngle": 360,
+    "lightAnimation": {
+      "intensity": 5,
+      "speed": 5
+    },
+    "lockRotation": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sightAngle": 360,
+    "tint": null,
+    "vision": false,
+    "width": 1
+  }
 }

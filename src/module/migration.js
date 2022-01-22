@@ -1,9 +1,13 @@
+import { SFRPGModifierTypes, SFRPGEffectType, SFRPGModifierType } from "./modifiers/types.js";
+import SFRPGModifier from "./modifiers/modifier.js";
+
 const SFRPGActorMigrationSchemas = Object.freeze({
     NPC_DATA_UPATE: 0.001,
     THE_PAINFUL_UPDATE: 0.002, // Due to copyright concerns, all references to Starfinder were renamed to SFRPG
     THE_HAPPY_UPDATE: 0.003, // Due to Paizo clarifying their stance, most references to SFRPG were returned to Starfinder
     THE_ACTOR_SPEED_UPDATE: 0.004,
-    DAMAGE_TYPE_REFACTOR: 0.005
+    DAMAGE_TYPE_REFACTOR: 0.005,
+    DAMAGE_REDUCTION_REFACTOR: 0.006
 });
 
 export default async function migrateWorld() {
@@ -29,6 +33,33 @@ export default async function migrateWorld() {
             }
         } catch (err) {
             console.error(err);
+        }
+    }
+
+    for (const scene of game.scenes) {
+        for (const token of scene.tokens) {
+            if (token.data.actorLink || !token.actor) {
+                continue;
+            }
+
+            const actor = token.actor;
+            try {
+                const updateData = migrateActorData(actor.data, worldSchema);
+                if (!isObjectEmpty(updateData)) {
+                    console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
+                    await actor.update(updateData, { enforceTypes: false });
+                }
+                
+                for(const item of actor.items) {
+                    const itemUpdateData = migrateItemData(item.data, worldSchema);
+                    if (!foundry.utils.isObjectEmpty(itemUpdateData)) {
+                        console.log(`Starfinder | Migrating Actor item ${item.name}`);
+                        await item.update(itemUpdateData, { enforceTypes: false });
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+            }
         }
     }
 
@@ -62,10 +93,11 @@ const migrateActorData = function (actor, schema) {
 
     const speedActorTypes = ['character', 'npc', 'npc2', 'drone'];
 
-    if (schema < SFRPGActorMigrationSchemas.NPC_DATA_UPATE && actor.type === 'npc') _migrateNPCData(actor, updateData);
-    if (schema < SFRPGActorMigrationSchemas.THE_PAINFUL_UPDATE) _resetActorFlags(actor, updateData);
-    if (schema < SFRPGActorMigrationSchemas.THE_HAPPY_UPDATE && actor.type === 'character') _migrateActorAbilityScores(actor, updateData);
-    if (schema < SFRPGActorMigrationSchemas.THE_ACTOR_SPEED_UPDATE && speedActorTypes.includes(actor.type)) _migrateActorSpeed(actor, updateData);
+    if (schema < SFRPGActorMigrationSchemas.NPC_DATA_UPATE && actor.type === 'npc') { _migrateNPCData(actor, updateData); }
+    if (schema < SFRPGActorMigrationSchemas.THE_PAINFUL_UPDATE) { _resetActorFlags(actor, updateData); }
+    if (schema < SFRPGActorMigrationSchemas.THE_HAPPY_UPDATE && actor.type === 'character') { _migrateActorAbilityScores(actor, updateData); }
+    if (schema < SFRPGActorMigrationSchemas.THE_ACTOR_SPEED_UPDATE && speedActorTypes.includes(actor.type)) { _migrateActorSpeed(actor, updateData); }
+    if (schema < SFRPGActorMigrationSchemas.DAMAGE_REDUCTION_REFACTOR) { _migrateActorDamageReductions(actor, updateData); }
 
     return updateData;
 };
@@ -204,6 +236,119 @@ const _migrateActorSpeed = function (actor, migratedData) {
     }
 
     migratedData["data.attributes.speed"] = speed;
+
+    return migratedData;
+};
+
+const _migrateActorDamageReductions = function (actor, migratedData) {
+    const actorData = actor.data;
+
+    const modifiers = duplicate(migratedData.modifiers ?? actorData.modifiers ?? []);
+    let isDirty = false;
+
+    // Process old damage reduction
+    if (actorData.traits?.damageReduction) {
+        const oldDamageReduction = duplicate(actorData.traits.damageReduction);
+        const oldDamageReductionValue = Number(oldDamageReduction.value);
+        if (!Number.isNaN(oldDamageReductionValue) && oldDamageReductionValue > 0) {
+            let notes = "";
+            if (!oldDamageReduction.negatedBy || oldDamageReduction.negatedBy != "-") {
+                notes = oldDamageReduction.negatedBy;
+            }
+
+            const damageReductionModifier = new SFRPGModifier({
+                name: "Damage Reduction",
+                modifier: oldDamageReductionValue,
+                type: SFRPGModifierTypes.UNTYPED,
+                modifierType: SFRPGModifierType.CONSTANT, 
+                effectType: SFRPGEffectType.DAMAGE_REDUCTION,
+                valueAffected: "",
+                enabled: true,
+                source: "Migration",
+                notes: notes,
+                subtab: "permanent",
+                condition: "",
+                id: null // Auto-generate
+            });
+
+            modifiers.push(damageReductionModifier);
+
+            migratedData["data.traits.damageReduction"] = {value: 0, negatedBy: ""};
+            isDirty = true;
+            console.log("> Migrated damage reduction.");
+        }
+    }
+
+    // Process old energy resistances
+    const customEnergyResistances = actorData.traits?.dr?.custom;
+    const oldEnergyResistances = Object.entries(actorData.traits?.dr?.value ?? []);
+    if (oldEnergyResistances.length > 0 || customEnergyResistances) {
+        if (oldEnergyResistances.length > 0) {
+            for (const [index, entries] of oldEnergyResistances) {
+                for (const [key, value] of Object.entries(entries)) {
+                    const resistanceValue = Number(value);
+                    if (Number.isNaN(resistanceValue)) {
+                        continue;
+                    }
+
+                    const energyResistanceModifier = new SFRPGModifier({
+                        name: "Energy Resistance",
+                        modifier: resistanceValue,
+                        type: SFRPGModifierTypes.UNTYPED,
+                        modifierType: SFRPGModifierType.CONSTANT, 
+                        effectType: SFRPGEffectType.ENERGY_RESISTANCE,
+                        valueAffected: key,
+                        enabled: true,
+                        source: "Migration",
+                        notes: "",
+                        subtab: "permanent",
+                        condition: "",
+                        id: null // Auto-generate
+                    });
+                    modifiers.push(energyResistanceModifier);
+                }
+            }
+        }
+
+        if (customEnergyResistances) {
+            const customResistances = customEnergyResistances.trim().split(';');
+            for (const customResistance of customResistances) {
+                const customSplit = customResistance.trim().split(' ');
+                if (customSplit.length == 2) {
+                    const notes = customSplit[0];
+                    const resistanceValue = Number(customSplit[1]);
+
+                    if (Number.isNaN(resistanceValue)) {
+                        continue;
+                    }
+
+                    const energyResistanceModifier = new SFRPGModifier({
+                        name: "Energy Resistance",
+                        modifier: resistanceValue,
+                        type: SFRPGModifierTypes.UNTYPED,
+                        modifierType: SFRPGModifierType.CONSTANT, 
+                        effectType: SFRPGEffectType.ENERGY_RESISTANCE,
+                        valueAffected: "custom",
+                        enabled: true,
+                        source: "Migration",
+                        notes: notes,
+                        subtab: "permanent",
+                        condition: "",
+                        id: null // Auto-generate
+                    });
+                    modifiers.push(energyResistanceModifier);
+                }
+            }
+        }
+
+        migratedData["data.traits.dr"] = {value: [], custom: ""};
+        isDirty = true;
+        console.log("> Migrated energy resistances.");
+    }
+
+    if (isDirty) {
+        migratedData["data.modifiers"] = modifiers;
+    }
 
     return migratedData;
 };

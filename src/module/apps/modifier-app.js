@@ -76,6 +76,9 @@ export default class SFRPGModifierApplication extends FormApplication {
             if (oldValue === SFRPGEffectType.ACTOR_RESOURCE || effectType === SFRPGEffectType.ACTOR_RESOURCE) {
                 const modifierDialog = this;
                 modifierDialog.object.effectType = effectType;
+
+                affectedValue.prop('value', "");
+
                 this._updateModifierData(modifierDialog.object).then(() => {
                     modifierDialog.render();
                 });
@@ -156,6 +159,22 @@ export default class SFRPGModifierApplication extends FormApplication {
                         affectedValue.append(`<option value="${speeds[0]}">${speeds[1]}</option>`);
                     }
                     break;
+                case SFRPGEffectType.DAMAGE_REDUCTION:
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
+
+                    for (const [key, name] of Object.entries(CONFIG.SFRPG.damageReductionTypes)) {
+                        affectedValue.append(`<option value="${key}">${name}</option>`);
+                    }
+                    break;
+                case SFRPGEffectType.ENERGY_RESISTANCE:
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
+
+                    for (const [key, name] of Object.entries(CONFIG.SFRPG.energyResistanceTypes)) {
+                        affectedValue.append(`<option value="${key}">${name}</option>`);
+                    }
+                    break;
                 default:
                     affectedValue.prop('disabled', true);
                     affectedValue.find('option').remove();
@@ -204,6 +223,8 @@ export default class SFRPGModifierApplication extends FormApplication {
             case SFRPGEffectType.WEAPON_DAMAGE:
             case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
             case SFRPGEffectType.SPECIFIC_SPEED:
+            case SFRPGEffectType.DAMAGE_REDUCTION:
+            case SFRPGEffectType.ENERGY_RESISTANCE:
                 valueAffectedElement.prop('disabled', false);
             case SFRPGEffectType.ACTOR_RESOURCE:
                 valueAffectedElement.prop('disabled', false);
@@ -251,8 +272,13 @@ export default class SFRPGModifierApplication extends FormApplication {
         const modifiers = duplicate(this.actor.data.data.modifiers);
         const modifier = modifiers.find(mod => mod._id === this.modifier._id);
 
-        const roll = Roll.create(formData['modifier'], this.owningActor?.data?.data || this.actor.data.data);
-        modifier.max = roll.evaluate({maximize: true}).total;
+        const formula = formData['modifier'];
+        if (formula) {
+            const roll = Roll.create(formula, this.owningActor?.data?.data || this.actor.data.data);
+            modifier.max = roll.evaluate({maximize: true}).total;
+        } else {
+            modifier.max = 0;
+        }
 
         mergeObject(modifier, formData);
         

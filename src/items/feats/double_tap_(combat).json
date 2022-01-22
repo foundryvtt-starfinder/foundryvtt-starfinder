@@ -1,113 +1,113 @@
 {
   "_id": "QM1lKxJvXQpe97W4",
   "name": "Double Tap (Combat)",
-  "permission": {
-    "default": 0,
-    "umHu8DFnCrMQVZ37": 3
-  },
   "type": "feat",
   "data": {
-    "description": {
-      "value": "<p>You can make rapid small arm attacks to increase the effectiveness of your attacks.<br><strong>Prerequisites</strong>: Weapon Focus (small arms), proficiency with small arms.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: As a standard action, you can take a single attack action to make a double-tap attack with a small arm. This attack gains a +1 bonus to the attack roll, and your bonus to damage from Weapon Specialization is equal to your character level (rather than half your character level). The small arm used cannot have the blast, explode, flexible line, line, unwieldy, or wide line weapon special properties, or any other property that allows it to attack multiple targets or an area in a single attack. This attack cannot benefit from the boost, guided, or variant boost weapon special properties, or any other ability or effect that is a move action and alters the effect of your attack or damage. This expends ammunition equal to two attack rolls, and if you cannot expend that ammunition, you cannot use this ability.</span></p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "Character Operations Manual",
     "type": "",
-    "activation": {
-      "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
-      "units": "",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
-    },
     "ability": null,
     "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": null
+    },
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>You can make rapid small arm attacks to increase the effectiveness of your attacks.<br><strong>Prerequisites</strong>: Weapon Focus (small arms), proficiency with small arms.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: As a standard action, you can take a single attack action to make a double-tap attack with a small arm. This attack gains a +1 bonus to the attack roll, and your bonus to damage from Weapon Specialization is equal to your character level (rather than half your character level). The small arm used cannot have the blast, explode, flexible line, line, unwieldy, or wide line weapon special properties, or any other property that allows it to attack multiple targets or an area in a single attack. This attack cannot benefit from the boost, guided, or variant boost weapon special properties, or any other ability or effect that is a move action and alters the effect of your attack or damage. This expends ammunition equal to two attack rolls, and if you cannot expend that ammunition, you cannot use this ability.</span></p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
     "formula": "",
+    "modifiers": [
+      {
+        "_id": "67ab40d7-015a-49ad-ba9c-065c2c099ccb",
+        "name": "Double Tap",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "OBr55AMenkfdhVpb",
+          "itemId": "GpKp2x3PBA25MdLg"
+        },
+        "effectType": "weapon-attacks",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the attack roll and damage.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      },
+      {
+        "_id": "4a6ffa6c-28ac-4919-a582-ee6a26685025",
+        "name": "Double Tap",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "OBr55AMenkfdhVpb",
+          "itemId": "GpKp2x3PBA25MdLg"
+        },
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "round(@attributes.bab/2)",
+        "modifierType": "formula",
+        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the attack roll and damage.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "modifiers": [
-      {
-        "name": "Double Tap",
-        "modifier": "1",
-        "type": "untyped",
-        "effectType": "weapon-attacks",
-        "valueAffected": "smallA",
-        "enabled": true,
-        "source": "",
-        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the attack roll and damage.",
-        "modifierType": "formula",
-        "condition": "",
-        "subtab": "misc",
-        "max": 1,
-        "_id": "67ab40d7-015a-49ad-ba9c-065c2c099ccb",
-        "container": {
-          "actorId": "OBr55AMenkfdhVpb",
-          "itemId": "GpKp2x3PBA25MdLg"
-        }
-      },
-      {
-        "name": "Double Tap",
-        "modifier": "round(@attributes.bab/2)",
-        "type": "untyped",
-        "effectType": "weapon-damage",
-        "valueAffected": "smallA",
-        "enabled": true,
-        "source": "",
-        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the attack roll and damage.",
-        "modifierType": "formula",
-        "condition": "",
-        "subtab": "misc",
-        "max": 0,
-        "_id": "4a6ffa6c-28ac-4919-a582-ee6a26685025",
-        "container": {
-          "actorId": "OBr55AMenkfdhVpb",
-          "itemId": "GpKp2x3PBA25MdLg"
-        }
-      }
-    ],
-    "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "Character Operations Manual",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/feats/double_tap.png"
+  "img": "systems/sfrpg/icons/feats/double_tap.png",
+  "permission": {
+    "default": 0,
+    "umHu8DFnCrMQVZ37": 3
+  }
 }

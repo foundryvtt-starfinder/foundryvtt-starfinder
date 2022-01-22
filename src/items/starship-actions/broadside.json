@@ -1,37 +1,37 @@
 {
+  "_id": "yW30fIr6P855ynYo",
   "name": "Broadside",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>At 6th level, you can expend 1 Resolve Point to fire all of the starship weapons mounted in one arc (including turret-mounted weapons). Each weapon can target any vessel in that arc. All of these attacks are made with a –2 penalty.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "gunner",
-    "order": 20,
-    "phase": {
-      "name": "Gunnery phase",
-      "tooltip": "This action can be taken only during the gunnery phase."
+    "dc": null,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>At 6th level, you can expend 1 Resolve Point to fire all of the starship weapons mounted in one arc (including turret-mounted weapons). Each weapon can target any vessel in that arc. All of these attacks are made with a –2 penalty.</p>"
     },
-    "isPush": true,
-    "resolvePointCost": 1,
+    "effectCritical": "",
+    "effectNormal": "At 6th level, you can expend 1 Resolve Point to fire all of the starship weapons mounted in one arc (including turret-mounted weapons). Each weapon can target any vessel in that arc. All of these attacks are made with a –2 penalty.",
     "formula": [
       {
         "name": "Gunnery",
         "formula": "max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks) + @gunner.abilities.dex.mod - 2"
       }
     ],
+    "isPush": true,
+    "order": 20,
+    "phase": {
+      "name": "Gunnery phase",
+      "tooltip": "This action can be taken only during the gunnery phase."
+    },
+    "resolvePointCost": 1,
+    "role": "gunner",
+    "selectorKey": "gunner",
     "selectors": [
       "gunner"
     ],
-    "selectorKey": "gunner",
-    "dc": null,
-    "effectNormal": "At 6th level, you can expend 1 Resolve Point to fire all of the starship weapons mounted in one arc (including turret-mounted weapons). Each weapon can target any vessel in that arc. All of these attacks are made with a –2 penalty.",
-    "effectCritical": ""
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "yW30fIr6P855ynYo"
+  "img": "icons/svg/mystery-man.svg"
 }
