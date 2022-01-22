@@ -159,6 +159,23 @@ export default class SFRPGModifierApplication extends FormApplication {
                         affectedValue.append(`<option value="${speeds[0]}">${speeds[1]}</option>`);
                     }
                     break;
+                case SFRPGEffectType.DAMAGE_REDUCTION:
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
+
+                    affectedValue.append('<option value="">-</option>');
+                    for (const [key, name] of Object.entries(CONFIG.SFRPG.specialMaterials)) {
+                        affectedValue.append(`<option value="${key}">${name}</option>`);
+                    }
+                    break;
+                case SFRPGEffectType.ENERGY_RESISTANCE:
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
+
+                    for (const [key, name] of Object.entries(CONFIG.SFRPG.energyDamageTypes)) {
+                        affectedValue.append(`<option value="${key}">${name}</option>`);
+                    }
+                    break;
                 default:
                     affectedValue.prop('disabled', true);
                     affectedValue.find('option').remove();
@@ -207,6 +224,8 @@ export default class SFRPGModifierApplication extends FormApplication {
             case SFRPGEffectType.WEAPON_DAMAGE:
             case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
             case SFRPGEffectType.SPECIFIC_SPEED:
+            case SFRPGEffectType.DAMAGE_REDUCTION:
+            case SFRPGEffectType.ENERGY_RESISTANCE:
                 valueAffectedElement.prop('disabled', false);
             case SFRPGEffectType.ACTOR_RESOURCE:
                 valueAffectedElement.prop('disabled', false);

@@ -20,6 +20,10 @@ If the modifier has to have options, add them to activateListener and render() h
 
 If the modifier has to have options, make sure to reflect that in the select.
 
+## templates/actors/parts/actor-modifiers.html
+
+If the modifier has an effected value, double-check it properly represents here
+
 ## Remaining integration
 
 Any remaining steps, such as integration with the right automation scripts, can now be done manually where needed.

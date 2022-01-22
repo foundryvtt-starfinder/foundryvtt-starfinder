@@ -115,15 +115,23 @@
                             {{lookup ../../config.speeds modifier.valueAffected}}
                         {{else if (eq modifier.effectType "actor-resource")}}
                             <h4>{{~modifier.valueAffected~}}</h4>
+                        {{else if (eq modifier.effectType "damage-reduction")}}
+                            {{#if (eq modifier.valueAffected "")}}
+                                -
+                            {{else}}
+                                {{lookup ../../config.specialMaterials modifier.valueAffected}}
+                            {{/if}}
+                        {{else if (eq modifier.effectType "energy-resistance")}}
+                            {{lookup ../../config.energyDamageTypes modifier.valueAffected}}
                         {{else}}
                         {{!-- Nothing --}}
                         {{/if}}
                     </div>
                     {{#if ../../isOwner}}
                     <div class="item-controls">
-                        <a class="item-control modifier-toggle" data-tippy-content="Toggle Modifier">{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
-                        <a class="item-control modifier-edit" data-tippy-content="Edit Modifier"><i class="fas fa-edit"></i></a>
-                        <a class="item-control modifier-delete" data-tippy-content="Delete Modifier"><i class="fas fa-trash"></i></a>
+                        <a class="item-control modifier-toggle" {{createTippy title="SFRPG.ActorSheet.Modifiers.Tooltips.ToggleModifier" subtitle="SFRPG.ActorSheet.Modifiers.Tooltips.ToggleModifierTooltip"}}>{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
+                        <a class="item-control modifier-edit" {{createTippy title="SFRPG.ActorSheet.Modifiers.Tooltips.EditModifier" subtitle="SFRPG.ActorSheet.Modifiers.Tooltips.EditModifierTooltip"}}><i class="fas fa-edit"></i></a>
+                        <a class="item-control modifier-delete" {{createTippy title="SFRPG.ActorSheet.Modifiers.Tooltips.DeleteModifier" subtitle="SFRPG.ActorSheet.Modifiers.Tooltips.DeleteModifierTooltip"}}><i class="fas fa-trash"></i></a>
                     </div>
                     {{/if}}
                 </li>

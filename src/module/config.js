@@ -1074,7 +1074,9 @@ SFRPG.modifierEffectTypes = {
     "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
     "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
     "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
-    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource"
+    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource",
+    "damage-reduction": "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction",
+    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance"
 };
 
 SFRPG.modifierType = {
