@@ -116,13 +116,17 @@
                         {{else if (eq modifier.effectType "actor-resource")}}
                             <h4>{{~modifier.valueAffected~}}</h4>
                         {{else if (eq modifier.effectType "damage-reduction")}}
-                            {{#if (eq modifier.valueAffected "")}}
-                                -
+                            {{#if (eq modifier.valueAffected "custom")}}
+                                {{modifier.notes}}
                             {{else}}
-                                {{lookup ../../config.specialMaterials modifier.valueAffected}}
+                                {{lookup ../../config.damageReductionTypes modifier.valueAffected}}
                             {{/if}}
                         {{else if (eq modifier.effectType "energy-resistance")}}
-                            {{lookup ../../config.energyDamageTypes modifier.valueAffected}}
+                            {{#if (eq modifier.valueAffected "custom")}}
+                                {{modifier.notes}}
+                            {{else}}
+                                {{lookup ../../config.energyResistanceTypes modifier.valueAffected}}
+                            {{/if}}
                         {{else}}
                         {{!-- Nothing --}}
                         {{/if}}

@@ -228,6 +228,23 @@ SFRPG.weaponDamageTypes = {
     "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic",
 };
 
+// Damage Reductions
+SFRPG.damageReductionTypes = {
+    "": "-",
+    ...SFRPG.specialMaterials,
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
+// Energy Resistances
+SFRPG.energyResistanceTypes = {
+    "acid": "SFRPG.Damage.Types.Acid",
+    "cold": "SFRPG.Damage.Types.Cold",
+    "electricity": "SFRPG.Damage.Types.Electricity",
+    "fire": "SFRPG.Damage.Types.Fire",
+    "sonic": "SFRPG.Damage.Types.Sonic",
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
 SFRPG.ammunitionTypes = {
     "charge": "SFRPG.Items.Ammunition.Type.Charges",
     "roundS": "SFRPG.Items.Ammunition.Type.SmallArmRounds",

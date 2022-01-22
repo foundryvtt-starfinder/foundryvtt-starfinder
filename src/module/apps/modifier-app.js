@@ -163,8 +163,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                     affectedValue.prop('disabled', false);
                     affectedValue.find('option').remove();
 
-                    affectedValue.append('<option value="">-</option>');
-                    for (const [key, name] of Object.entries(CONFIG.SFRPG.specialMaterials)) {
+                    for (const [key, name] of Object.entries(CONFIG.SFRPG.damageReductionTypes)) {
                         affectedValue.append(`<option value="${key}">${name}</option>`);
                     }
                     break;
@@ -172,7 +171,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                     affectedValue.prop('disabled', false);
                     affectedValue.find('option').remove();
 
-                    for (const [key, name] of Object.entries(CONFIG.SFRPG.energyDamageTypes)) {
+                    for (const [key, name] of Object.entries(CONFIG.SFRPG.energyResistanceTypes)) {
                         affectedValue.append(`<option value="${key}">${name}</option>`);
                     }
                     break;

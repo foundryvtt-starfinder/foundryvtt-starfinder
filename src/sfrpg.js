@@ -203,8 +203,8 @@ Hooks.once("setup", function () {
             "alignmentsNPC", "allowedClasses", "ammunitionTypes", "armorProficiencies", "armorTypes", "augmentationSytems", "augmentationTypes",
         "babProgression",
         "capacityUsagePer", "conditionTypes", "consumableTypes", "containableTypes", "currencies",
-        "damageTypeOperators", "damageTypes", "distanceUnits",
-        "energyDamageTypes",
+        "damageReductionTypes", "damageTypeOperators", "damageTypes", "distanceUnits",
+        "energyDamageTypes", "energyResistanceTypes",
         "featTypes", "flightManeuverability",
         "healingTypes",
         "itemActionTypes", "itemTypes",
@@ -268,7 +268,7 @@ Hooks.once("ready", () => {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.data.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
-    
+
         if (needsMigration) {
             console.log("Starfinder | [READY] Performing world migration");
             migrateWorld()

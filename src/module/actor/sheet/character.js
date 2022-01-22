@@ -300,65 +300,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     }
 
     /**
-     * Add a modifer to this actor.
-     * 
-     * @param {Event} event The originating click event
-     */
-    _onModifierCreate(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-
-        this.actor.addModifier({
-            name: "New Modifier",
-            subtab: target.data('subtab')
-        });
-    }
-
-    /**
-     * Delete a modifier from the actor.
-     * 
-     * @param {Event} event The originating click event
-     */
-    async _onModifierDelete(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-        
-        await this.actor.deleteModifier(modifierId);
-    }
-
-    /**
-     * Edit a modifier for an actor.
-     * 
-     * @param {Event} event The orginating click event
-     */
-    _onModifierEdit(event) {
-        event.preventDefault();
-
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-
-        this.actor.editModifier(modifierId);
-    }
-
-    /**
-     * Toggle a modifier to be enabled or disabled.
-     * 
-     * @param {Event} event The originating click event
-     */
-    async _onToggleModifierEnabled(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-
-        const modifiers = duplicate(this.actor.data.data.modifiers);
-        const modifier = modifiers.find(mod => mod._id === modifierId);
-        modifier.enabled = !modifier.enabled;
-
-        await this.actor.update({'data.modifiers': modifiers});
-    }
-
-    /**
      * Handle toggling the prepared status of an Owned Itme within the Actor
      * 
      * @param {Event} event The triggering click event

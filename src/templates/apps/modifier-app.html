@@ -89,12 +89,11 @@
             <option value="{{key}}">{{speed}}</option>
             {{/each}}
             {{else if (eq modifier.effectType "damage-reduction")}}
-            <option value="">-</option>
-            {{#each config.specialMaterials as |name key|}}
+            {{#each config.damageReductionTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
             {{else if (eq modifier.effectType "energy-resistance")}}
-            {{#each config.energyDamageTypes as |name key|}}
+            {{#each config.energyResistanceTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
             {{else}}

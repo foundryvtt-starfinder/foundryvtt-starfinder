@@ -43,6 +43,13 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         html.find('.reload').click(this._onReloadWeapon.bind(this));
         html.find('#add-skills').click(this._toggleSkills.bind(this));
         html.find('#duplicate-new-style-npc').click(this._duplicateAsNewStyleNPC.bind(this));
+
+        if (this.actor.type === "npc2") {
+            html.find('.modifier-create').on('click', this._onModifierCreate.bind(this));
+            html.find('.modifier-edit').on('click', this._onModifierEdit.bind(this));
+            html.find('.modifier-delete').on('click', this._onModifierDelete.bind(this));
+            html.find('.modifier-toggle').on('click', this._onToggleModifierEnabled.bind(this));
+        }
     }
 
     getData() {
@@ -178,9 +185,21 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         }
 
         const modifiers = {
-            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true }
+            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true, items: conditionItems }
         };
-        modifiers.conditions.items = conditionItems;
+
+        if (this.actor.type === "npc2") {
+            let [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
+                if (modifier.subtab === "permanent") arr[0].push(modifier);
+                else if (modifier.subtab === "conditions") arr[3].push(modifier);
+                else arr[1].push(modifier); // Any unspecific categories go into temporary.
+    
+                return arr;
+            }, [[], [], [], [], []]);
+
+            modifiers.permanent = { label: "SFRPG.ModifiersPermanentTabLabel", modifiers: permanent, dataset: { subtab: "permanent" }};
+            modifiers.temporary = { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: temporary, dataset: { subtab: "temporary" }};
+        }
 
         // Assign and return
         data.inventory = inventory;
