@@ -964,7 +964,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Define Roll parts
         /** @type {DamageParts[]} */
-        const parts = itemData.damage.parts.map(part => part);
+        const parts = duplicate(itemData.damage.parts.map(part => part));
         for (const part of parts) {
             part.isDamageSection = true;
         }
