@@ -199,18 +199,22 @@ Hooks.once("setup", function () {
 
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
-        "abilities", "actionTargets", "actionTargetsStarship", "actorTypes", "alignments", "alignmentsNPC", "ammunitionTypes", "distanceUnits", "senses", "skills", "currencies", "saves",
-        "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes", "itemTypes",
-        "vehicleSizes", "babProgression", "saveProgression", "saveDescriptors", "armorProficiencies",
-        "weaponProficiencies", "abilityActivationTypes", "skillProficiencyLevels", "damageTypes",
-        "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
-        "weaponProperties", "weaponPropertiesTooltips", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
-        "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
-        "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
-        "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
-        "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
-        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds",
-        "damageTypeOperators", "flightManeuverability", "specialMaterials"
+        "abilities", "abilityActivationTypes", "acpEffectingArmorType", "actionTargets", "actionTargetsStarship", "actorSizes", "actorTypes", "alignments",
+            "alignmentsNPC", "allowedClasses", "ammunitionTypes", "armorProficiencies", "armorTypes", "augmentationSytems", "augmentationTypes",
+        "babProgression",
+        "capacityUsagePer", "conditionTypes", "consumableTypes", "containableTypes", "currencies",
+        "damageTypeOperators", "damageTypes", "distanceUnits",
+        "energyDamageTypes",
+        "featTypes", "flightManeuverability",
+        "healingTypes",
+        "itemActionTypes", "itemTypes",
+        "kineticDamageTypes",
+        "languages", "limitedUsePeriods",
+        "maneuverability", "modifierArmorClassAffectedValues", "modifierEffectTypes", "modifierType", "modifierTypes",
+        "saveDescriptors", "saveProgression", "saves", "senses", "skillProficiencyLevels", "skills", "specialMaterials", "speeds", "spellAreaEffects", "spellAreaShapes", "spellLevels", "spellPreparationModes",
+            "starshipArcs", "starshipRoles", "starshipSizes", "starshipSystemStatus", "starshipWeaponClass", "starshipWeaponProperties", "starshipWeaponRanges", "starshipWeaponTypes",
+        "vehicleCoverTypes", "vehicleSizes", "vehicleTypes",
+        "weaponCategories", "weaponCriticalHitEffects", "weaponDamageTypes", "weaponProficiencies", "weaponProperties", "weaponPropertiesTooltips", "weaponTypes"
     ];
 
     for (let o of toLocalize) {
