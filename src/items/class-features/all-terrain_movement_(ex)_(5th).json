@@ -1,111 +1,111 @@
 {
+  "_id": "2PW1GeF1SeJG1K8r",
   "name": "All-Terrain Movement (Ex) (5th)",
   "type": "feat",
-  "img": "icons/skills/movement/feet-bladed-boots-fire.webp",
   "data": {
-    "description": {
-      "chat": "",
-      "gmnotes": "",
-      "short": "",
-      "value": "<p>You gain a climb speed and a swim speed equal to your land speed. Further, when you gain a fly speed from any source, your fly speed increases by 10 feet. This effect stacks with abilities such as the @Compendium[sfrpg.feats.DZ1Z6gobHyE9flAA]{Sky Jockey} feat. As a swift action, you can spend 1 Resolve Point to inspire allies within 30 feet who can see you to match your athletic prowess; affected allies gain a +2 insight bonus to Athletics checks for a number of rounds equal to your key ability modifier.</p>",
-      "unidentified": ""
-    },
-    "source": "GEM pg. 26",
     "type": "",
-    "activation": {
-      "type": "swift",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": 30,
-      "units": "ft",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
-    },
-    "isActive": null,
     "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
     "actionTarget": "",
     "actionType": "",
+    "activation": {
+      "type": "swift",
+      "condition": "",
+      "cost": 1
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
     "attackBonus": 0,
     "chatFlavor": "",
-    "rollNotes": "",
-    "damageNotes": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>You gain a climb speed and a swim speed equal to your land speed. Further, when you gain a fly speed from any source, your fly speed increases by 10 feet. This effect stacks with abilities such as the @Compendium[sfrpg.feats.DZ1Z6gobHyE9flAA]{Sky Jockey} feat. As a swift action, you can spend 1 Resolve Point to inspire allies within 30 feet who can see you to match your athletic prowess; affected allies gain a +2 insight bonus to Athletics checks for a number of rounds equal to your key ability modifier.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
     "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "d4afcf49-9053-4afc-b555-6a4aa10e27aa",
+        "name": "All-Terrain Movement",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@attributes.speed.land.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "All-Terrain Movement",
+        "subtab": "misc",
+        "valueAffected": "climbing"
+      },
+      {
+        "_id": "737c5438-c211-4993-a10b-7b63e920bab7",
+        "name": "All-Terrain Movement",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@attributes.speed.land.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "All-Terrain Movement",
+        "subtab": "misc",
+        "valueAffected": "swimming"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 30
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "5th Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "modifiers": [
-      {
-        "name": "All-Terrain Movement",
-        "modifier": "@attributes.speed.land.value",
-        "type": "untyped",
-        "effectType": "specific-speed",
-        "valueAffected": "climbing",
-        "enabled": true,
-        "source": "All-Terrain Movement",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "max": 0,
-        "_id": "d4afcf49-9053-4afc-b555-6a4aa10e27aa"
-      },
-      {
-        "name": "All-Terrain Movement",
-        "modifier": "@attributes.speed.land.value",
-        "type": "untyped",
-        "effectType": "specific-speed",
-        "valueAffected": "swimming",
-        "enabled": true,
-        "source": "All-Terrain Movement",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "max": 0,
-        "_id": "737c5438-c211-4993-a10b-7b63e920bab7"
-      }
-    ],
-    "requirements": "5th Level",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "GEM pg. 26",
+    "target": {
+      "type": "",
+      "value": ""
     },
-    "abilityMods": {
-      "parts": []
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
     }
   },
   "effects": [],
   "flags": {},
-  "_id": "2PW1GeF1SeJG1K8r"
+  "img": "icons/skills/movement/feet-bladed-boots-fire.webp"
 }
