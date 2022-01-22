@@ -80,6 +80,7 @@ export default class SFRPGCustomChatMessage {
             breakdown: data.breakdown,
             tags: data.tags,
             damageTypeString: data.damageTypeString,
+            specialMaterials: data.specialMaterials,
             rollOptions: data.rollOptions,
         };
 
@@ -129,6 +130,10 @@ export default class SFRPGCustomChatMessage {
                 amount: roll.total,
                 types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
             };
+        }
+
+        if (options?.specialMaterials) {
+            messageData.flags.specialMaterials = options.specialMaterials;
         }
 
         if (options.rollOptions) {

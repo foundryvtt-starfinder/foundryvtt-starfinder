@@ -33,6 +33,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * NPCs can now access their level as @details.level.value as well as @details.cr, to aid with modifier consistency.
 * Reloading a weapon that has a short description will now roll the short description into chat instead.
 * Several compendium links from various compendium items to various other compendium items were updated to point to the correct item.
+* Special materials can now be selected on armor, ammunition, shields, weapons, starship armor, starship defensive countermeasures, starship sensors, starship thrusters, and starship weapons.
 * Starship critical damage rolls no longer double their damage. Deflector shields still take 1 extra damage from a critical hit however.
 * The keyAbilityMod property on a PC sheet's class attributes is now updated correctly. (e.g. @classes.mechanic.keyAbilityMod)
 * The token configuration of Starships and Vehicles that contained a crew can now be opened again.

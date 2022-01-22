@@ -654,6 +654,15 @@ export class DiceSFRPG {
                         } catch { }
                     }
                 }
+
+                const specialMaterials = itemContext.entity.data.data.specialMaterials;
+                if (specialMaterials) {
+                    for (const [material, isEnabled] of Object.entries(specialMaterials)) {
+                        if (isEnabled) {
+                            tags.push({tag: material, text: SFRPG.specialMaterials[material]});
+                        }
+                    }
+                }
             }
 
             const isCritical = (button === "critical");
@@ -743,6 +752,10 @@ export class DiceSFRPG {
                     damageTypeString: damageTypeString
                 };
 
+                if (itemContext && itemContext.entity.data.data.specialMaterials) {
+                    customData.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                }
+
                 try {
                     useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
                 } catch (error) {
@@ -773,6 +786,10 @@ export class DiceSFRPG {
                             types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
                         }
                     };
+
+                    if (itemContext && itemContext.entity.data.data.specialMaterials) {
+                        messageData.flags.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                    }
                 }
                 
                 ChatMessage.create(messageData);

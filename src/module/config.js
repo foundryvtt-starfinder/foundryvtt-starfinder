@@ -524,6 +524,22 @@ SFRPG.weaponPropertiesTooltips = {
     "wideLine": "SFRPG.WeaponPropertiesWideLineTooltip"
 };
 
+SFRPG.specialMaterials = {
+    "abysium": "SFRPG.SpecialMaterials.Abysium",
+    "adamantine": "SFRPG.SpecialMaterials.Adamantine",
+    "coldiron": "SFRPG.SpecialMaterials.ColdIron",
+    "diatha": "SFRPG.SpecialMaterials.Diatha",
+    "djezet": "SFRPG.SpecialMaterials.Djezet",
+    "horacalcum": "SFRPG.SpecialMaterials.Horacalcum",
+    "inubrix": "SFRPG.SpecialMaterials.Inubrix",
+    "khefak": "SFRPG.SpecialMaterials.Khefak",
+    "noqual": "SFRPG.SpecialMaterials.Noqual",
+    "purplecores": "SFRPG.SpecialMaterials.PurpleCores",
+    "siccatite": "SFRPG.SpecialMaterials.Siccatite",
+    "silver": "SFRPG.SpecialMaterials.Silver",
+    "voidglass": "SFRPG.SpecialMaterials.Voidglass"
+};
+
 SFRPG.spellAreaShapes = {
     "": "",
     "cone": "SFRPG.SpellAreaShapesCone",
