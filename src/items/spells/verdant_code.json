@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -22,7 +23,7 @@
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -33,12 +34,31 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "5d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": true,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p style=\"text-align: justify;\">You turn data into plant matter that either instantly explodes outward or lurks within a device.<br><strong>Instant Growth:&nbsp;</strong>You immediately incite growth from the targeted device. A creature can negate the effect on an object it holds with a successful Will save or with spell resistance. For both this and the dormant growth effect (see below), the plant matter explodes from the targeted device, filling all squares within a 20-foot-radius spread. Each creature in the area must attempt a Reflex save. On a failure, it takes 5d6 slashing damage and is @Compendium[sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled}; on a successful save, it takes half damage, isn’t @Compendium[sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled}, and is shunted to the nearest empty space available. A square of plant matter has hardness 8 and 15 Hit Points. The growth also covers the device, preventing non-remote access until the plant matter is destroyed or disintegrates at the end of the spell’s duration.<br><strong>Dormant Growth:&nbsp;</strong>You implant verdant code into an computer system or module you have root access to. The next time the device is accessed, plant matter explodes from the device (see above). A device can hold only one instance of verdant code at a time, and new instances erase the previous instance. If this spell’s duration ends before the implanted code is accessed, the code vanishes. This code can be made permanent, as&nbsp;implant data.</p>"
+      "value": "<p>You turn data into plant matter that either instantly explodes outward or lurks within a device.</p>\n<p><strong>Instant Growth:&nbsp;</strong>You immediately incite growth from the targeted device. A creature can negate the effect on an object it holds with a successful Will save or with spell resistance. For both this and the dormant growth effect (see below), the plant matter explodes from the targeted device, filling all squares within a 20-foot-radius spread. Each creature in the area must attempt a Reflex save. On a failure, it takes 5d6 slashing damage and is @Compendium[sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled}; on a successful save, it takes half damage, isn&rsquo;t @Compendium[sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled}, and is shunted to the nearest empty space available. A square of plant matter has hardness 8 and 15 Hit Points. The growth also covers the device, preventing non-remote access until the plant matter is destroyed or disintegrates at the end of the spell&rsquo;s duration.</p>\n<p><strong>Dormant Growth:&nbsp;</strong>You implant verdant code into an computer system or module you have root access to. The next time the device is accessed, plant matter explodes from the device (see above). A device can hold only one instance of verdant code at a time, and new instances erase the previous instance. If this spell&rsquo;s duration ends before the implanted code is accessed, the code vanishes. This code can be made permanent, as&nbsp;implant data.</p>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -47,6 +67,8 @@
       "value": "1 hour/level or until triggered, then 1 minute/level, see text"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 1,
     "materials": {
       "consumed": false,
@@ -65,6 +87,7 @@
       "units": "ft",
       "value": 25
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "",
@@ -84,6 +107,8 @@
     }
   },
   "effects": [],
-  "flags": {},
+  "flags": {
+    "core": {}
+  },
   "img": "systems/sfrpg/icons/spells/verdant_code.PNG"
 }

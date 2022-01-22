@@ -4,11 +4,11 @@
   "type": "spell",
   "data": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionType": "save",
     "activation": {
       "type": "action",
       "condition": "",
@@ -22,23 +22,42 @@
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
-    "chatFlavor": "",
+    "chatFlavor": "Gains Burning 1d4 on failed Reflex save",
     "concentration": false,
     "critical": {
       "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "formula": "5d6",
+          "operator": "",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p style=\"text-align: justify;\">For the duration of this spell, you leave behind a trail of faintly burning embers in any square that you move through. These embers have no effect except for providing dim light in those squares. The embers disappear at the start of your next turn. As a reaction to another creature moving into a square of embers, you can ignite that square, causing flames to leap up and burn that creature. The affected creature takes 5d6 points of fire damage (Reflex half), and gains the @Compendium[sfrpg.conditions.8LdyXZl9PeXXFE8O]{Burning} condition for 1d4 points of fire damage on a failed Reflex save. In addition, that square no longer contains embers.</p>"
+      "value": "<p>For the duration of this spell, you leave behind a trail of faintly burning embers in any square that you move through. These embers have no effect except for providing dim light in those squares. The embers disappear at the start of your next turn. As a reaction to another creature moving into a square of embers, you can ignite that square, causing flames to leap up and burn that creature. The affected creature takes 5d6 points of fire damage (Reflex half), and gains the @Compendium[sfrpg.conditions.8LdyXZl9PeXXFE8O]{Burning} condition for 1d4 points of fire damage on a failed Reflex save. In addition, that square no longer contains embers.</p>"
     },
     "descriptors": [],
     "dismissible": true,
@@ -47,6 +66,8 @@
       "value": "1 round/level (D)"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 2,
     "materials": {
       "consumed": false,
@@ -65,10 +86,11 @@
       "units": "personal",
       "value": null
     },
+    "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "reflex",
+      "dc": "",
+      "descriptor": "half"
     },
     "school": "evo",
     "source": "AP #18 pg. 53",
@@ -84,6 +106,10 @@
     }
   },
   "effects": [],
-  "flags": {},
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.sfrpg.spells.7CuJLZTI7urZTQjE"
+    }
+  },
   "img": "systems/sfrpg/icons/spells/embersteop.PNG"
 }

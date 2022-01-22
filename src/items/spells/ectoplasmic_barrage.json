@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
     "actionType": "rsak",
     "activation": {
       "type": "action",
@@ -22,7 +23,7 @@
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -35,18 +36,44 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "2d6",
-          "operator": "",
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "",
+          "formula": "2d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>You fling psychic material, called ectoplasm, at the target, making a ranged attack against its KAC and dealing bludgeoning damage. Each projectile in the barrage has the @Compendium[sfrpg.rules.O5GDQUKPCJ9Zbnfj]{Knockdown} critical hit effect. In addition, ectoplasm extends to the Ethereal Plane, so it affects ethereal and incorporeal creatures.</p>\n<p>&nbsp;</p>\n<ul>\n<li><strong>1st:</strong> When you cast ectoplasmic barrage as a 1st-level spell, each projectile deals 2d6 damage on a hit.</li>\n<li><strong>2nd:</strong> When you cast ectoplasmic barrage as a 2nd-level spell, each projectile deals 4d6 damage on a hit.</li>\n<li><strong>3rd:</strong> When you cast ectoplasmic barrage as a 3rd-level spell, each projectile deals 7d6 damage on a hit.</li>\n<li><strong>4th:</strong> When you cast ectoplasmic barrage as a 4th-level spell, each projectile deals 10d6 damage on a hit.</li>\n<li><strong>5th:</strong> When you cast ectoplasmic barrage as a 5th-level spell, each projectile deals 13d6 damage on a hit. A struck target is also @Compendium[sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled} for 1 round.</li>\n<li><strong>6th:</strong>&nbsp;When you cast&nbsp;ectoplasmic barrage&nbsp;as a 6th-level spell, each projectile deals 15d6 damage on a hit. A struck target is also @Compendium[sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled} for 1d4 rounds.</li>\n</ul>"
+      "value": "<p>You fling psychic material, called ectoplasm, at the target, making a ranged attack against its KAC and dealing bludgeoning damage. Each projectile in the barrage has the @Compendium[sfrpg.rules.O5GDQUKPCJ9Zbnfj]{Knockdown} critical hit effect. In addition, ectoplasm extends to the Ethereal Plane, so it affects ethereal and incorporeal creatures.</p>\n<p><strong>1st</strong>: When you cast ectoplasmic barrage as a 1st-level spell, each projectile deals 2d6 damage on a hit.</p>\n<p><strong>2nd</strong>: When you cast ectoplasmic barrage as a 2nd-level spell, each projectile deals 4d6 damage on a hit.</p>\n<p><strong>3rd</strong>: When you cast ectoplasmic barrage as a 3rd-level spell, each projectile deals 7d6 damage on a hit.</p>\n<p><strong>4th</strong>: When you cast ectoplasmic barrage as a 4th-level spell, each projectile deals 10d6 damage on a hit.</p>\n<p><strong>5th</strong>: When you cast ectoplasmic barrage as a 5th-level spell, each projectile deals 13d6 damage on a hit. A struck target is also @Compendium[sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled} for 1 round.</p>\n<p><strong>6th</strong>:&nbsp;When you cast&nbsp;ectoplasmic barrage&nbsp;as a 6th-level spell, each projectile deals 15d6 damage on a hit. A struck target is also @Compendium[sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled} for 1d4 rounds.</p>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -55,6 +82,8 @@
       "value": "instantaneous"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": true,
     "level": 1,
     "materials": {
       "consumed": false,
@@ -73,9 +102,10 @@
       "units": "ft",
       "value": 25
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "school": "evo",
@@ -92,6 +122,10 @@
     }
   },
   "effects": [],
-  "flags": {},
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.sfrpg.spells.3I4iNxI1qfObcKPF"
+    }
+  },
   "img": "systems/sfrpg/icons/spells/ectoplasmic_barrage.png"
 }
