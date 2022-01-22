@@ -22,8 +22,8 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Added spell resistance and activation/action to drone mods.
 * Added most, if not all, of the class features from Tech Revolution.
 * Assigned action target to weapons in the compendium.
-* Rolls that include the -4 penalty when attacking with a weapon the owning character is not proficient with now explains the -4 is caused by the lack of proficiency.
 * Consumables no longer use up the entire quantity when used once.
+* Creating a new actor resource modifier no longer requires you to save, close, and re-open the modifier panel to enter the affected actor resource.
 * Creating a new player character or drone sheet now automatically sets the token linked for that sheet. This does not apply to NPCs, Starships, and Vehicles.
 * Disabled modifiers no longer affect their actor's spell save DC.
 * Disabling modifiers on the roll dialog are remembered for future rolls again.
@@ -32,6 +32,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Nested containers now list their contained wealth correctly.
 * NPCs can now access their level as @details.level.value as well as @details.cr, to aid with modifier consistency.
 * Reloading a weapon that has a short description will now roll the short description into chat instead.
+* Rolls that include the -4 penalty when attacking with a weapon the owning character is not proficient with now explains the -4 is caused by the lack of proficiency.
 * Several compendium links from various compendium items to various other compendium items were updated to point to the correct item.
 * Special materials can now be selected on armor, ammunition, shields, weapons, starship armor, starship defensive countermeasures, starship sensors, starship thrusters, and starship weapons.
 * Starship critical damage rolls no longer double their damage. Deflector shields still take 1 extra damage from a critical hit however.
