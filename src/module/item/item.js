@@ -655,11 +655,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             const procifiencyKey = SFRPG.weaponTypeProficiency[this.data.data.weaponType];
             const proficient = itemData.data.proficient || this.actor?.data?.data?.traits?.weaponProf?.value?.includes(procifiencyKey);
             if (!proficient) {
-                parts.push("-4");
+                parts.push(`-4[${game.i18n.localize("SFRPG.Items.NotProficient")}]`);
             }
         }
 
-        let acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
+        const acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
         } else if (this.data.data.actionType === "rwak") {
@@ -969,7 +969,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             part.isDamageSection = true;
         }
         
-        let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
+        const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
         } else if (this.data.data.actionType === "rwak") {

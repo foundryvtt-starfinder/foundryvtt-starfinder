@@ -22,6 +22,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Added spell resistance and activation/action to drone mods.
 * Added most, if not all, of the class features from Tech Revolution.
 * Assigned action target to weapons in the compendium.
+* Rolls that include the -4 penalty when attacking with a weapon the owning character is not proficient with now explains the -4 is caused by the lack of proficiency.
 * Consumables no longer use up the entire quantity when used once.
 * Creating a new player character or drone sheet now automatically sets the token linked for that sheet. This does not apply to NPCs, Starships, and Vehicles.
 * Disabled modifiers no longer affect their actor's spell save DC.
