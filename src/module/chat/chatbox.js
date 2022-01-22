@@ -99,7 +99,7 @@ export default class SFRPGCustomChatMessage {
         }
 
         if (options.rollOptions?.actionTarget) {
-            rollContent = DiceSFRPG.appendTextToRoll(rollContent, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: SFRPG.actionTargets[options.rollOptions?.actionTarget]}));
+            rollContent = DiceSFRPG.appendTextToRoll(rollContent, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: options.rollOptions.actionTargetSource[options.rollOptions.actionTarget]}));
         }
 
         options = foundry.utils.mergeObject(options, { rollContent });

@@ -1648,3 +1648,9 @@ SFRPG.actionTargets = {
     "eac": "SFRPG.Items.Action.ActionTarget.EAC",
     "other": "SFRPG.Items.Action.ActionTarget.Other"
 };
+
+SFRPG.actionTargetsStarship = {
+    "": "SFRPG.Items.Action.ActionTarget.None",
+    "ac": "SFRPG.Items.Action.ActionTarget.StarshipAC",
+    "tl": "SFRPG.Items.Action.ActionTarget.StarshipTL"
+};

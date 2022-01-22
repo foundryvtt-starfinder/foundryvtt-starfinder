@@ -234,7 +234,7 @@ export class DiceSFRPG {
 
             const tags = [];
             if (rollOptions?.actionTarget) {
-                tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: SFRPG.actionTargets[rollOptions.actionTarget]}) });
+                tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}) });
             }
 
             const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
@@ -298,7 +298,7 @@ export class DiceSFRPG {
 
                 messageData.content = await roll.render({ htmlData: htmlData });
                 if (rollOptions?.actionTarget) {
-                    messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: SFRPG.actionTargets[rollOptions.actionTarget]}));
+                    messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
                 }
 
                 ChatMessage.create(messageData);

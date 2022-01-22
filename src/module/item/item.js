@@ -723,6 +723,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (this.data.data.actionTarget) {
             rollOptions.actionTarget = this.data.data.actionTarget;
+            rollOptions.actionTargetSource = SFRPG.actionTargets;
         }
 
         // Define Roll Data
@@ -864,6 +865,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
+        const rollOptions = {};
+
+        if (this.data.data.actionTarget) {
+            rollOptions.actionTarget = this.data.data.actionTarget;
+            rollOptions.actionTargetSource = SFRPG.actionTargetsStarship;
+        }
+
         return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
@@ -875,6 +883,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
+            rollOptions: rollOptions,
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
