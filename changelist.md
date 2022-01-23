@@ -28,6 +28,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Disabled modifiers no longer affect their actor's spell save DC.
 * Disabling modifiers on the roll dialog are remembered for future rolls again.
 * Initiative rolls no longer ignore the roll mode setting of the roll dialog.
+* Introducing damage reduction and energy resistance modifiers, these do exactly what's on the can; add DR and ER to an actor.
 * Localized roll dialogs now properly respond to the Critical damage button. (Fixes #290 and #500)
 * Nested containers now list their contained wealth correctly.
 * NPCs can now access their level as @details.level.value as well as @details.cr, to aid with modifier consistency.
