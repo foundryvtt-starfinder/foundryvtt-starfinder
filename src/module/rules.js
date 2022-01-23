@@ -29,6 +29,7 @@ import calculateBaseAttackBonusModifier from './rules/actions/actor/calculate-ba
 import calculateBaseAbilityModifier     from './rules/actions/actor/calculate-base-ability-modifier.js';
 import calculateBaseAbilityScore        from './rules/actions/actor/calculate-base-ability-score.js';
 import calculateCmd                     from './rules/actions/actor/calculate-cmd.js';
+import calculateDamageMitigation        from './rules/actions/actor/calculate-damage-mitigation.js';
 import calculateCmdModifiers            from './rules/actions/actor/calculate-cmd-modifiers.js';
 import calculateClasses                 from './rules/actions/actor/calculate-classes.js';
 import calculateEncumbrance             from './rules/actions/actor/calculate-encumbrance.js';
@@ -114,6 +115,7 @@ export default function (engine) {
     calculateInitiative(engine);
     calculateInitiativeModifiers(engine);
     calculateCmd(engine);
+    calculateDamageMitigation(engine);
     calculateCmdModifiers(engine);
     calculateBaseSkills(engine);
     calculateClasses(engine);
@@ -213,6 +215,7 @@ export default function (engine) {
                     "calculateInitiative",
                     {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
                     "calculateCMD",
+                    "calculateDamageMitigation",
                     { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
                     "calculateXP",
                     { closure: "calculateSkillpoints", stackModifiers: "stackModifiers" },
@@ -246,6 +249,7 @@ export default function (engine) {
                     "calculateDroneDefense",
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     "calculateCMD",
+                    "calculateDamageMitigation",
                     { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateDroneHitpoints", stackModifiers: "stackModifiers" },
                     { closure: "calculateDroneResolve", stackModifiers: "stackModifiers" },
@@ -272,7 +276,8 @@ export default function (engine) {
                     "calculateNpcAbilityValue",
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation"
                 ]
             },
             {
@@ -295,7 +300,8 @@ export default function (engine) {
                     {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation"
                 ]
             },
             {
