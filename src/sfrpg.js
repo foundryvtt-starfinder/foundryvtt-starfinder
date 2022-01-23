@@ -489,6 +489,11 @@ function setupHandlebars() {
         return false;
     });
 
+    Handlebars.registerHelper("isNaN", function (value) {
+        const valueNumber = Number(value);
+        return Number.isNaN(valueNumber);
+    });
+
     Handlebars.registerHelper('ellipsis', function (displayedValue, limit) {
         let str = displayedValue.toString();
         if (str.length <= limit) {

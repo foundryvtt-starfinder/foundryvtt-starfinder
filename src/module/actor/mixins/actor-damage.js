@@ -368,7 +368,6 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const promise = this.update(actorUpdate);
-    
         return promise;
    }
 

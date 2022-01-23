@@ -1,9 +1,40 @@
 import { SFRPG } from "../../../config.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import RollContext from "../../../rolls/rollcontext.js";
+import RollTree from "../../../rolls/rolltree.js";
+
+function tryResolveModifier(modifier, rollContext) {
+    const numberModifier = Number(modifier);
+    if (!Number.isNaN(numberModifier)) {
+        return Number(numberModifier);
+    }
+
+    let resultValue = 0;
+
+    const tree = new RollTree({skipUI: true});
+    tree.buildRoll(modifier, rollContext, async (button, rollMode, finalFormula) => {
+        resultValue = finalFormula.finalRoll;
+    });
+
+    try {
+        const finalResult = eval(resultValue);
+        const finalNumber = Number(finalResult);
+        if (!Number.isNaN(finalNumber)) {
+            return finalNumber;
+        }
+
+        console.log(['Failed to evaluate damage mitigation modifier to a number', modifier, rollContext, resultValue]);
+    } catch (error) {
+        console.log(['Error resolving damage mitigation modifier', error, modifier, rollContext]);
+    }
+
+    return 0;
+}
 
 export default function (engine) {
     engine.closures.add("calculateDamageMitigation", (fact, context) => {
         const data = fact.data;
+        const actor = fact.actor;
 
         data.traits.damageMitigation = {
             damageReduction: [],
@@ -16,13 +47,16 @@ export default function (engine) {
         const damageReductionModifiers = modifiers.filter(mod => { return mod.enabled && mod.modifierType === "constant" && [SFRPGEffectType.DAMAGE_REDUCTION].includes(mod.effectType); });
         const energyRessistanceModifiers = modifiers.filter(mod => { return mod.enabled && mod.modifierType === "constant" && [SFRPGEffectType.ENERGY_RESISTANCE].includes(mod.effectType); });
 
+        const rollContext = new RollContext();
+        if (actor && actor.data) {
+            rollContext.addContext("actor", actor);
+            rollContext.setMainContext("actor");
+            actor.setupRollContexts(rollContext);
+        }
+
         for (const drModifier of damageReductionModifiers) {
             // TODO: Resolve formula; use RollTree, as it can complete synchronously
-            let resolvedModifierValue = Number(drModifier.modifier);
-            if (Number.isNaN(resolvedModifierValue)) {
-                continue;
-            }
-
+            const resolvedModifierValue = tryResolveModifier(drModifier.modifier, rollContext);
             const modifierInfo = {
                 value: resolvedModifierValue,
                 negatedBy: drModifier.valueAffected,
@@ -56,12 +90,7 @@ export default function (engine) {
         }
 
         for (const erModifier of energyRessistanceModifiers) {
-            // TODO: Resolve formula; use RollTree, as it can complete synchronously
-            let resolvedModifierValue = Number(erModifier.modifier);
-            if (Number.isNaN(resolvedModifierValue)) {
-                continue;
-            }
-
+            const resolvedModifierValue = tryResolveModifier(erModifier.modifier, rollContext);
             const modifierInfo = {
                 value: resolvedModifierValue,
                 damageType: erModifier.valueAffected,
