@@ -215,7 +215,6 @@ export default function (engine) {
                     "calculateInitiative",
                     {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
                     "calculateCMD",
-                    "calculateDamageMitigation",
                     { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
                     "calculateXP",
                     { closure: "calculateSkillpoints", stackModifiers: "stackModifiers" },
@@ -229,7 +228,8 @@ export default function (engine) {
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     "calculateSpellsPerDay",
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation"
                 ]
             },
             {
@@ -249,7 +249,6 @@ export default function (engine) {
                     "calculateDroneDefense",
                     { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
                     "calculateCMD",
-                    "calculateDamageMitigation",
                     { closure: "calculateCMDModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateDroneHitpoints", stackModifiers: "stackModifiers" },
                     { closure: "calculateDroneResolve", stackModifiers: "stackModifiers" },
@@ -257,7 +256,8 @@ export default function (engine) {
                     { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation"
                 ]
             },
             {

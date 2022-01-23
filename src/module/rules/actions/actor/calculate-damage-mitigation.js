@@ -17,14 +17,22 @@ export default function (engine) {
         const energyRessistanceModifiers = modifiers.filter(mod => { return mod.enabled && mod.modifierType === "constant" && [SFRPGEffectType.ENERGY_RESISTANCE].includes(mod.effectType); });
 
         for (const drModifier of damageReductionModifiers) {
+            // TODO: Resolve formula; use RollTree, as it can complete synchronously
+            let resolvedModifierValue = Number(drModifier.modifier);
+            if (Number.isNaN(resolvedModifierValue)) {
+                continue;
+            }
+
             const modifierInfo = {
-                value: drModifier.modifier,
+                value: resolvedModifierValue,
                 negatedBy: drModifier.valueAffected,
                 source: drModifier
             };
+
             if (modifierInfo.negatedBy === "custom") {
                 modifierInfo.negatedBy = drModifier.notes;
             }
+
             data.traits.damageMitigation.damageReduction.push(modifierInfo);
         }
 
@@ -48,11 +56,18 @@ export default function (engine) {
         }
 
         for (const erModifier of energyRessistanceModifiers) {
+            // TODO: Resolve formula; use RollTree, as it can complete synchronously
+            let resolvedModifierValue = Number(erModifier.modifier);
+            if (Number.isNaN(resolvedModifierValue)) {
+                continue;
+            }
+
             const modifierInfo = {
-                value: erModifier.modifier,
+                value: resolvedModifierValue,
                 damageType: erModifier.valueAffected,
                 source: erModifier
             };
+
             if (modifierInfo.negatedBy === "custom") {
                 modifierInfo.damageType = erModifier.notes;
             }
