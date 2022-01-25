@@ -46,6 +46,7 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
+import { SFRPGHealingSetting, SFRPGDamage } from "./module/actor/mixins/actor-damage.js";
 
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import { } from "./module/combat/combat.js";
@@ -123,7 +124,30 @@ Hooks.once('init', async function () {
         SFRPGEffectType,
         SFRPGModifier,
         SFRPGModifierType,
-        SFRPGModifierTypes  
+        SFRPGModifierTypes,
+
+        // Namespace style
+        Actor: {
+            Damage: {
+                SFRPGHealingSetting,
+                SFRPGDamage
+            },
+            Modifiers: {
+                SFRPGEffectType,
+                SFRPGModifier,
+                SFRPGModifierType,
+                SFRPGModifierTypes
+            },
+            Sheet: {
+                Base: ActorSheetSFRPG,
+                Character: ActorSheetSFRPGCharacter,
+                Npc: ActorSheetSFRPGNPC,
+                Drone: ActorSheetSFRPGDrone,
+                Starship: ActorSheetSFRPGStarship,
+                Vehicle: ActorSheetSFRPGVehicle
+            },
+            Type: ActorSFRPG
+        }
     };
 
     CONFIG.SFRPG = SFRPG;
