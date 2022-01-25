@@ -27,6 +27,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Creating a new player character or drone sheet now automatically sets the token linked for that sheet. This does not apply to NPCs, Starships, and Vehicles.
 * Disabled modifiers no longer affect their actor's spell save DC.
 * Disabling modifiers on the roll dialog are remembered for future rolls again.
+* Dropping items as a non-GM player with create token rights no longer fails.
 * Initiative rolls no longer ignore the roll mode setting of the roll dialog.
 * Introducing damage reduction and energy resistance modifiers, these do exactly what's on the can; add DR and ER to an actor.
 * Localized roll dialogs now properly respond to the Critical damage button. (Fixes #290 and #500)
