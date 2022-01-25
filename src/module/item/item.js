@@ -277,6 +277,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const templateType = ["tool", "consumable"].includes(this.data.type) ? this.data.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.html`;
         const html = await renderTemplate(template, templateData);
+        const rollMode = game.settings.get("core", "rollMode");
 
         // Basic chat message data
         const chatData = {
@@ -284,13 +285,20 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             content: html,
             flags: { level: this.data.data.level },
+            rollMode: rollMode,
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
         // Toggle default roll mode
-        let rollMode = game.settings.get("core", "rollMode");
-        if (["gmroll", "blindroll"].includes(rollMode)) chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-        if (rollMode === "blindroll") chatData["blind"] = true;
+        if (["gmroll", "blindroll"].includes(rollMode)) {
+            chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
+        }
+        if (rollMode === "blindroll") {
+            chatData["blind"] = true;
+        }
+        if (rollMode === "selfroll") {
+            chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
+        }
 
         // Create the chat message
         return ChatMessage.create(chatData, { displaySheet: false });

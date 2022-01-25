@@ -22,6 +22,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Added spell resistance and activation/action to drone mods.
 * Added most, if not all, of the class features from Tech Revolution.
 * Assigned action target to weapons in the compendium.
+* Casting a spell now obeys the chat roll mode setting, instead of always rolling publicly.
 * Consumables no longer use up the entire quantity when used once.
 * Creating a new actor resource modifier no longer requires you to save, close, and re-open the modifier panel to enter the affected actor resource.
 * Creating a new player character or drone sheet now automatically sets the token linked for that sheet. This does not apply to NPCs, Starships, and Vehicles.
