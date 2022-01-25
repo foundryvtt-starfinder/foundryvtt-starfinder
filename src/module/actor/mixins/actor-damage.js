@@ -1,3 +1,5 @@
+import { SFRPG } from "../../config.js";
+
 export class SFRPGHealingSetting {
     constructor() {
         this.healsStamina = false;
