@@ -177,7 +177,22 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         let spellLevel = item.data.data.level;
         const usesSlots = (spellLevel > 0) && item.data.data.preparation.mode === "";
         if (!usesSlots) {
-            return item.roll();
+            if (item.data.data.uses?.max > 0) {
+                if (item.data.data.uses.value <= 0) {
+                    ui.notifications.error(game.i18n.localize("SFRPG.Items.Spell.ErrorNoUses", {permanent: true}));
+                    return;
+                }
+
+                const itemUpdatePromise = item.update({
+                    [`data.uses.value`]: Math.max(item.data.data.uses.value - 1, 0)
+                });
+                itemUpdatePromise.then(() => {
+                    item.roll();
+                });
+                return itemUpdatePromise;
+            } else {
+                return item.roll();
+            }
         }
 
         let consumeSpellSlot = true;

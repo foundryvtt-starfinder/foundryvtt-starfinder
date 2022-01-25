@@ -22,6 +22,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Added spell resistance and activation/action to drone mods.
 * Added most, if not all, of the class features from Tech Revolution.
 * Assigned action target to weapons in the compendium.
+* Casting an innate spell now consumes that spell's uses if it has any.
 * Casting a spell now obeys the chat roll mode setting, instead of always rolling publicly.
 * Consumables no longer use up the entire quantity when used once.
 * Creating a new actor resource modifier no longer requires you to save, close, and re-open the modifier panel to enter the affected actor resource.
