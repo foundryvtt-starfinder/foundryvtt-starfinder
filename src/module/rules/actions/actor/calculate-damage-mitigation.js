@@ -13,7 +13,13 @@ function tryResolveModifier(modifier, rollContext) {
 
     const tree = new RollTree({skipUI: true});
     tree.buildRoll(modifier, rollContext, async (button, rollMode, finalFormula) => {
-        resultValue = finalFormula.finalRoll;
+        try {
+            const formula = Roll.replaceFormulaData(finalFormula.finalRoll, null);
+            resultValue = Roll.safeEval(formula);
+        } catch (error) {
+            console.error(['Failed to evaluate formula, are there dice terms in there?', finalFormula.finalRoll, error, modifier]);
+            resultValue = 0;
+        }
     });
 
     try {
