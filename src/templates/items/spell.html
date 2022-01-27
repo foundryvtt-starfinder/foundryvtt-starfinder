@@ -59,7 +59,7 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Spell.AllowedClasses" }}</label>
                 <div class="form-fields">
-                    {{#each config.allowedClasses as |name key|}}
+                    {{#each config.spellcastingClasses as |name key|}}
                     <label class="checkbox">
                         <input type="checkbox" name="data.allowedClasses.{{key}}" {{checked (lookup ../itemData.allowedClasses key)}} /> {{name}}
                     </label>

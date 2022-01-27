@@ -694,8 +694,9 @@ SFRPG.tokenSizes = {
     "colossal": 6
 };
 
-SFRPG.allowedClasses = {
+SFRPG.spellcastingClasses = {
     "myst": "SFRPG.AllowedClasses.Myst",
+    "precog": "SFRPG.AllowedClasses.Precog",
     "tech": "SFRPG.AllowedClasses.Tech",
     "wysh": "SFRPG.AllowedClasses.Wysh"
 };

@@ -224,7 +224,7 @@ Hooks.once("setup", function () {
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
         "abilities", "abilityActivationTypes", "acpEffectingArmorType", "actionTargets", "actionTargetsStarship", "actorSizes", "actorTypes", "alignments",
-            "alignmentsNPC", "allowedClasses", "ammunitionTypes", "armorProficiencies", "armorTypes", "augmentationSytems", "augmentationTypes",
+            "alignmentsNPC", "ammunitionTypes", "armorProficiencies", "armorTypes", "augmentationSytems", "augmentationTypes",
         "babProgression",
         "capacityUsagePer", "conditionTypes", "consumableTypes", "containableTypes", "currencies",
         "damageReductionTypes", "damageTypeOperators", "damageTypes", "distanceUnits",
@@ -235,7 +235,7 @@ Hooks.once("setup", function () {
         "kineticDamageTypes",
         "languages", "limitedUsePeriods",
         "maneuverability", "modifierArmorClassAffectedValues", "modifierEffectTypes", "modifierType", "modifierTypes",
-        "saveDescriptors", "saveProgression", "saves", "senses", "skillProficiencyLevels", "skills", "specialMaterials", "speeds", "spellAreaEffects", "spellAreaShapes", "spellLevels", "spellPreparationModes",
+        "saveDescriptors", "saveProgression", "saves", "senses", "skillProficiencyLevels", "skills", "specialMaterials", "speeds", "spellAreaEffects", "spellAreaShapes", "spellcastingClasses", "spellLevels", "spellPreparationModes",
             "starshipArcs", "starshipRoles", "starshipSizes", "starshipSystemStatus", "starshipWeaponClass", "starshipWeaponProperties", "starshipWeaponRanges", "starshipWeaponTypes",
         "vehicleCoverTypes", "vehicleSizes", "vehicleTypes",
         "weaponCategories", "weaponCriticalHitEffects", "weaponDamageTypes", "weaponProficiencies", "weaponProperties", "weaponPropertiesTooltips", "weaponTypes"

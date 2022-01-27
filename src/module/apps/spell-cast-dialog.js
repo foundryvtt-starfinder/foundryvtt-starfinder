@@ -106,6 +106,10 @@ export class SpellCastDialog extends Dialog {
                 hasClasses = true;
                 if (classSlot.value > 0) {
                     const classEntry = casterData.spells.classes.find(x => x.key === classSlot.class);
+                    if (!classEntry) {
+                        continue;
+                    }
+                    
                     includedClasses.push(classEntry.key);
 
                     const label = game.i18n.format("SFRPG.SpellCasting.SpellLabelClass", {className: classEntry.name, spellSlot: game.i18n.format(CONFIG.SFRPG.spellLevels[slotLevel], slotLevel), remainingSlots: classSlot.value});

@@ -19,6 +19,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 ## Bugfixes and small improvements
 * Added base int and cha to drone chassis.
 * Added Mountain Eel from AA1 to Alien Archives.
+* Added precog as a spellcasting class to the spell settings. (Note: This does not mean precog is available as a compendium entry.)
 * Added spell resistance and activation/action to drone mods.
 * Added most, if not all, of the class features from Tech Revolution.
 * Assigned action target to weapons in the compendium.
