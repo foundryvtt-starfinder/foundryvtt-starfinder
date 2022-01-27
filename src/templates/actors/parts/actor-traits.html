@@ -42,6 +42,16 @@
         <label>{{localize "SFRPG.NumberOfArms"}}</label>
         <input type="text" name="data.attributes.arms" value="{{data.attributes.arms}}" placeholder="2" />
     </div>
+    
+    {{#if isCharacter}}
+    <div class="form-group" {{createTippy title="SFRPG.ActorSheet.Traits.MagicalItems" subtitle="@magicalItems.worn<br/>@magicalItems.max" tooltips=data.magicalItems.tooltip}}>
+        <label>{{localize "SFRPG.ActorSheet.Traits.MagicalItems"}}</label>
+        <span type="text" {{#if (gt data.magicalItems.worn data.magicalItems.max)}}class="error"{{/if}} style="text-align: center;">{{data.magicalItems.worn}}</span>
+        <span class="sep">/</span>
+        <span type="text" style="text-align: center;">{{data.magicalItems.max}}</span>
+    </div>
+    {{/if}}
+
     <div class="form-group" data-tippy-content="<strong>{{localize "SFRPG.Space"}}</strong><br/>@data.attributes.space">
         <label>{{localize "SFRPG.Space"}}</label>
         <input type="text" name="data.attributes.space" value="{{data.attributes.space}}" placeholder="5" />
@@ -169,27 +179,27 @@
     {{/if}}
 
     {{#if (or isCharacter isDrone)}}
-    <div class="form-group {{data.traits.weaponProf.cssClass}}">
-        <label for="data.traits.weaponProf">{{localize "SFRPG.TraitWeaponProf"}}</label>
-        <ul class="traits-list">
-        {{#each data.traits.weaponProf.selected as |v k|}}
-            <li class="tag {{k}}">{{v}}</li>
-        {{/each}}
-        </ul>
-        <a class="trait-selector" data-options="weaponProficiencies"><i class="fas fa-edit"></i></a>
-    </div>
+        <div class="form-group {{data.traits.weaponProf.cssClass}}">
+            <label for="data.traits.weaponProf">{{localize "SFRPG.TraitWeaponProf"}}</label>
+            <ul class="traits-list">
+            {{#each data.traits.weaponProf.selected as |v k|}}
+                <li class="tag {{k}}">{{v}}</li>
+            {{/each}}
+            </ul>
+            <a class="trait-selector" data-options="weaponProficiencies"><i class="fas fa-edit"></i></a>
+        </div>
 
-    {{#if isCharacter}}
-    <div class="form-group {{data.traits.armorProf.cssClass}}">
-        <label for="data.traits.armorProf">{{localize "SFRPG.TraitArmorProf"}}</label>
-        <ul class="traits-list">
-        {{#each data.traits.armorProf.selected as |v k|}}
-            <li class="tag {{k}}">{{v}}</li>
-        {{/each}}
-        </ul>
-        <a class="trait-selector" data-options="armorProficiencies"><i class="fas fa-edit"></i></a>
-    </div>
-    {{/if}}
+        {{#if isCharacter}}
+        <div class="form-group {{data.traits.armorProf.cssClass}}">
+            <label for="data.traits.armorProf">{{localize "SFRPG.TraitArmorProf"}}</label>
+            <ul class="traits-list">
+            {{#each data.traits.armorProf.selected as |v k|}}
+                <li class="tag {{k}}">{{v}}</li>
+            {{/each}}
+            </ul>
+            <a class="trait-selector" data-options="armorProficiencies"><i class="fas fa-edit"></i></a>
+        </div>
+        {{/if}}
     {{/if}}
 
     {{#if isNPC}}

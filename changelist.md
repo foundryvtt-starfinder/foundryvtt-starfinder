@@ -35,6 +35,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Localized roll dialogs now properly respond to the Critical damage button. (Fixes #290 and #500)
 * Nested containers now list their contained wealth correctly.
 * NPCs can now access their level as @details.level.value as well as @details.cr, to aid with modifier consistency.
+* Magic items now have a checkbox defining whether or not they count towards the worn magical items limit.
 * Reloading a weapon that has a short description will now roll the short description into chat instead.
 * Rolls that include the -4 penalty when attacking with a weapon the owning character is not proficient with now explains the -4 is caused by the lack of proficiency.
 * Several compendium links from various compendium items to various other compendium items were updated to point to the correct item.

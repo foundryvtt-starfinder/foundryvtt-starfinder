@@ -45,6 +45,7 @@ import calculateBaseSkills              from './rules/actions/actor/character/ca
 import calculateCharacterLevel          from './rules/actions/actor/character/calculate-character-level.js';
 import calculateHitpoints               from './rules/actions/actor/character/calculate-hitpoints.js';
 import calculateInitiative              from './rules/actions/actor/character/calculate-initiative.js';
+import calculateMagicalItemCount        from './rules/actions/actor/character/calculate-magic-item-count.js';
 import calculatePlayerXp                from './rules/actions/actor/character/calculate-xp.js';
 import calculateResolve                 from './rules/actions/actor/character/calculate-resolve.js';
 import calculateSkillArmorCheckPenalty  from './rules/actions/actor/character/calculate-skill-armor-check-penalty.js';
@@ -128,6 +129,7 @@ export default function (engine) {
     calculateBaseAttackBonus(engine);
     calculateCharacterLevel(engine);
     calculateHitpoints(engine);
+    calculateMagicalItemCount(engine);
     calculateResolve(engine);
     calculateSkillpoints(engine);
     calculateSpellsPerDay(engine);
@@ -229,7 +231,8 @@ export default function (engine) {
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     "calculateSpellsPerDay",
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
-                    "calculateDamageMitigation"
+                    "calculateDamageMitigation",
+                    "calculateMagicalItemCount"
                 ]
             },
             {
