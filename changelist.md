@@ -40,6 +40,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Several compendium links from various compendium items to various other compendium items were updated to point to the correct item.
 * Special materials can now be selected on armor, ammunition, shields, weapons, starship armor, starship defensive countermeasures, starship sensors, starship thrusters, and starship weapons.
 * Starship critical damage rolls no longer double their damage. Deflector shields still take 1 extra damage from a critical hit however.
+* The max dex allowed by armor is now available as an attribute for player characters as @attributes.eac.maxDex or @attributes.kac.maxDex.
 * The keyAbilityMod property on a PC sheet's class attributes is now updated correctly. (e.g. @classes.mechanic.keyAbilityMod)
 * The token configuration of Starships and Vehicles that contained a crew can now be opened again.
 * Updated a few class features with proper modifier support.
