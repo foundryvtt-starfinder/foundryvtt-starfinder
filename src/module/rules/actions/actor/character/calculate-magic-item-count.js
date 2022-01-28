@@ -8,7 +8,8 @@ export default function (engine) {
             tooltip: []
         };
 
-        const equippedLimitedMagicalItems = fact.items.filter(x => x.data.type === "magic" && x.data.data.limitedWear && x.data.data.equipped);
+        const magicalItemTypes = ["magic", "hybrid"];
+        const equippedLimitedMagicalItems = fact.items.filter(x => magicalItemTypes.includes(x.data.type) && x.data.data.limitedWear && x.data.data.equipped);
         data.magicalItems.worn = equippedLimitedMagicalItems.length;
 
         for (const item of equippedLimitedMagicalItems) {
