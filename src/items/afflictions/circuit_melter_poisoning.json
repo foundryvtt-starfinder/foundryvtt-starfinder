@@ -1,0 +1,146 @@
+{
+  "_id": "kT7xZqC1qa7kc1vb",
+  "name": "Circuit Melter Poisoning",
+  "type": "actorResource",
+  "data": {
+    "type": "affliction",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": false,
+      "show": false,
+      "showOwnerAndGMOnly": false,
+      "visualization": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmNotes": "<p>&lt;@Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poisons}</p>\n<p><em>Track the progress in the details tab in \"Base Value\". 0; Healthy, 5; Dead.</em></p>\n<p><em>To keep the affliction type a secret, renaming the item is suggested. This does not prevent the player from looking at the details tab to learn the affliction type.</em></p>\n<h2>@Compendium[sfrpg.equipment.d1vKcMkmnX3AJnWb]{Circuit Melter}</h2>\n<p><strong>Type&nbsp;</strong>poison (injury);&nbsp;<strong>Save&nbsp;</strong>Fortitude DC 19<br /><strong>Track&nbsp;</strong>Strength;&nbsp;<strong>Frequency&nbsp;</strong>1/round for 6 rounds<br /><strong>Effect&nbsp;</strong>This acidic poison is specifically formulated to also be effective against constructs.<br /><strong>Cure&nbsp;</strong>2 consecutive saves</p>\n<p><em>Modifiers currently do not effect Ability DCs.</em></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Strength Poison Track</h2>\n<p><strong>Healthy&mdash;Weakened&mdash;Impaired&mdash;Staggered&mdash;Immobile&mdash;Dead</strong></p>\n<h3>Weakened</h3>\n<p>The victim takes a &ndash;2 penalty to Strength-based ability checks, attack rolls, damage rolls, and skill checks, and the DCs of his spells and special abilities decrease by 2. The victim&rsquo;s total carrying capacity is reduced by two-thirds (minimum 1 bulk), and he gains the @Compendium[sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered} condition regardless of how much he is carrying.</p>\n<h3>Impaired</h3>\n<p>The victim takes an additional &ndash;2 penalty to the affected checks, rolls, and DCs, and he gains the @Compendium[sfrpg.conditions.11k3ObUIXEYFGrg9]{Overburdened} condition regardless of how much he is carrying.</p>\n<h3>Staggered</h3>\n<p>The victim is @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered}, except he can still take a purely mental full action.</p>\n<h3>Immobile</h3>\n<p>The victim is helpless and can take only purely mental actions.</p>\n<h3>Dead</h3>\n<p>The victim dies.</p>",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><em>&lt;@Compendium[sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions}</em></p>\n<p><em>The GM may find the Affliction's details in the GM Notes tab of this item.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "03ba50ff-132d-4920-a544-60ea7221f7c2",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "ability-skills",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.CircuitMelter.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "str"
+      },
+      {
+        "_id": "dce47635-d3fa-4f4d-8ae7-f9e083a2374d",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "ability-check",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.CircuitMelter.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "str"
+      },
+      {
+        "_id": "9ae6efd5-6268-49f9-ba98-21822fd94ca0",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "bulk",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.CircuitMelter.value, 0, 1, (-floor(@abilities.str.value / 3 * 2)))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "2bf717da-eeda-4ec5-b9d6-9a7e61e8d4eb",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "spell-save-dc",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.CircuitMelter.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "de7b8961-e8dd-4ab3-bf33-40a7e589b088",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "melee-attacks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.CircuitMelter.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "410cdddc-0105-4ef8-b2a9-ed91dc49cec9",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.CircuitMelter.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "max": 5,
+      "min": 0,
+      "mode": "immediate"
+    },
+    "source": "AR pg. 133",
+    "stage": "early",
+    "subType": "CircuitMelter"
+  },
+  "img": "systems/sfrpg/icons/feats/protective_fur.png"
+}

@@ -1,0 +1,112 @@
+{
+  "_id": "QdhcHjqX8C4WsXlu",
+  "name": "Wisdom Poison Track",
+  "type": "actorResource",
+  "data": {
+    "type": "affliction",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": false,
+      "show": false,
+      "showOwnerAndGMOnly": false,
+      "visualization": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmNotes": "<p>&lt;@Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poisons}</p>\n<p><em>Track the progress in the details tab in \"Base Value\". 0; Healthy, 5; Dead.</em></p>\n<p><em>To keep the affliction type a secret, renaming the item is suggested. This does not prevent the player from looking at the details tab to learn the affliction type.</em></p>\n<p>Each poison has a delivery mechanism. Page 417 explains the details of the various methods of delivery. A character who is poisoned attempts a saving throw after the listed onset and at the listed frequency thereafter. Upon initial exposure, regardless of whether she succeeds at her saving throw, the victim loses a number of Hit Points equal to the poison&rsquo;s DC &ndash; 10. If a victim is exposed to multiple doses of the same poison, she must attempt a separate save for each dose and progresses to the next state on the poison track with each failed save.</p>\n<p><em>Modifiers currently do not effect Ability DCs, as well as spellcasting limitations</em></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Wisdom Poison Track</h2>\n<p><strong>Healthy&mdash;Weakened&mdash;Impaired&mdash;Confused&mdash;Comatose&mdash;Dead</strong></p>\n<h3>Weakened</h3>\n<p>The victim takes a &ndash;2 penalty to Will saves and Wisdom-based ability checks and skill checks, and the DCs of his spells and special abilities decrease by 2. If he has 1 or more levels in a spellcasting class whose key ability score is Wisdom, he can&rsquo;t cast his highest level of spells from that class.</p>\n<h3>Impaired</h3>\n<p>The victim takes an additional &ndash;2 penalty to the affected checks, and the affected DCs decrease by an additional 2. If he has 1 or more levels in a spellcasting class whose key ability score is Wisdom, he can&rsquo;t cast his 2 highest levels of spells from that class.</p>\n<h3>Confused</h3>\n<p>The victim gains the @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused} condition.</p>\n<h3>Comatose</h3>\n<p>The victim can&rsquo;t experience reality and can&rsquo;t be woken.</p>\n<h3>Dead</h3>\n<p>The victim&rsquo;s brain stops working, and he dies.</p>",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><em>&lt;@Compendium[sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions}</em></p>\n<p><em>The GM may find the Affliction's details in the GM Notes tab of this item.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "03ba50ff-132d-4920-a544-60ea7221f7c2",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "save",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.wispoison.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "will"
+      },
+      {
+        "_id": "dce47635-d3fa-4f4d-8ae7-f9e083a2374d",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "ability-check",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.wispoison.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "wis"
+      },
+      {
+        "_id": "2bf717da-eeda-4ec5-b9d6-9a7e61e8d4eb",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "spell-save-dc",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.wispoison.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "7131ee3c-59cd-491e-a639-5ecef5b0d8fd",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ability-skills",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.wispoison.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "wis"
+      }
+    ],
+    "range": {
+      "max": 5,
+      "min": 0,
+      "mode": "immediate"
+    },
+    "source": "CRB pg. 416",
+    "stage": "early",
+    "subType": "wispoison"
+  },
+  "img": "systems/sfrpg/icons/feats/protective_fur.png"
+}

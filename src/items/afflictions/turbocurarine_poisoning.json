@@ -1,0 +1,142 @@
+{
+  "_id": "CTyOL3d02494rNkI",
+  "name": "Turbocurarine Poisoning",
+  "type": "actorResource",
+  "data": {
+    "type": "affliction",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": false,
+      "show": false,
+      "showOwnerAndGMOnly": false,
+      "visualization": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmNotes": "<p><em>&lt;@Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poisons}</em></p>\n<p><em>Track the progress in the details tab in \"Base Value\". 0; Healthy, 4;&nbsp;Immobile.</em></p>\n<p><em>To keep the affliction type a secret, renaming the item is suggested. This does not prevent the player from looking at the details tab to learn the affliction type.</em></p>\n<h2>@Compendium[sfrpg.equipment.4I0x08gWmfZrPlT4]{Turbocurarine}</h2>\n<p><strong>Type&nbsp;</strong>poison (injury);&nbsp;<strong>Save&nbsp;</strong>Fortitude DC 14<br /><strong>Track&nbsp;</strong>Dexterity (special);&nbsp;<strong>Frequency&nbsp;</strong>1/round for 4 rounds<br /><strong>Effect&nbsp;</strong>Progression track is Sluggish&mdash;Stiffened&mdash;Staggered&mdash;Immobile; no end state. Immobile victims can continue to attempt a saving throw each round as a full-round action to revert to stiffened.<br /><strong>Cure&nbsp;</strong>1 save</p>\n<p><em>Modifiers currently do not effect Ability DCs</em></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Dexterity Poison Track</h2>\n<p><strong>Healthy&mdash;Sluggish&mdash;Stiffened&mdash;Staggered&mdash;Immobile&mdash;Dead</strong></p>\n<h3>Sluggish</h3>\n<p>The victim takes a &ndash;2 penalty to Reflex saves and Dexterity-based ability checks, attack rolls, and skill checks; the DCs of her spells and special abilities decrease by 2; and she becomes @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed}.</p>\n<h3>Stiffened</h3>\n<p>The victim loses her Dexterity bonus to her Armor Class, and she can&rsquo;t take reactions.</p>\n<h3>Staggered</h3>\n<p>The victim is @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} but can take purely mental full actions.</p>\n<h3>Immobile; no end state</h3>\n<p>The victim is helpless and can take only purely mental actions.</p>",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><em>&lt;@Compendium[sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions}</em></p>\n<p><em>The GM may find the Affliction's details in the GM Notes tab of this item.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "03ba50ff-132d-4920-a544-60ea7221f7c2",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "ability-skills",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.TurbocurarinePoisoning.value, 0, 1, -2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dex"
+      },
+      {
+        "_id": "dce47635-d3fa-4f4d-8ae7-f9e083a2374d",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "ability-check",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.TurbocurarinePoisoning.value, 0, 1, -2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dex"
+      },
+      {
+        "_id": "2bf717da-eeda-4ec5-b9d6-9a7e61e8d4eb",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "spell-save-dc",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.TurbocurarinePoisoning.value, 0, 1, -2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "2fefa1a8-f506-4bb4-b9ce-4a84023badb2",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "save",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.TurbocurarinePoisoning.value, 0, 1, -2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "reflex"
+      },
+      {
+        "_id": "502f2fd5-463d-41e6-bdcd-f30a7a5ba54c",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.TurbocurarinePoisoning.value, 0, 2, -(@attributes.eac.maxDex))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "d3eb5da9-58ff-4f04-9e85-da3ae8f937f9",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ranged-attacks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.TurbocurarinePoisoning.value, 0, 1, -2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "max": 4,
+      "min": 0,
+      "mode": "immediate"
+    },
+    "source": "COM pg. 127",
+    "stage": "early",
+    "subType": "TurbocurarinePoisoning"
+  },
+  "img": "systems/sfrpg/icons/feats/protective_fur.png"
+}

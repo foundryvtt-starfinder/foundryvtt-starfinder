@@ -1,0 +1,97 @@
+{
+  "_id": "XjIKeOcgzfgbR4nD",
+  "name": "Black Lotus Extract Poisoning",
+  "type": "actorResource",
+  "data": {
+    "type": "affliction",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": false,
+      "show": false,
+      "showOwnerAndGMOnly": false,
+      "visualization": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmNotes": "<p><em>&lt;@Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poisons}</em></p>\n<p><em>Track the progress in the details tab in \"Base Value\". 0; Healthy, 4; Dead.</em></p>\n<p><em>To keep the affliction type a secret, renaming the item is suggested. This does not prevent the player from looking at the details tab to learn the affliction type.</em></p>\n<h2>@Compendium[sfrpg.equipment.FI6GVbCZ3eJ4trOy]{Black Lotus Extract}</h2>\n<p><strong>Type&nbsp;</strong>poison (contact);&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 26<br /><strong>Track&nbsp;</strong>Constitution (special);&nbsp;<strong>Onset&nbsp;</strong>1 minute;&nbsp;<strong>Frequency&nbsp;</strong>1/round for 6 rounds<br /><strong>Effect&nbsp;</strong>progression track is Healthy&mdash;Weakened&mdash;Debilitated&mdash;Dead<br /><strong>Cure&nbsp;</strong>2 consecutive saves</p>\n<p><em>Modifiers currently do not effect Con based DCs</em></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Constitution Poison Track</h2>\n<p><strong>Healthy&mdash;Weakened&mdash;Debilitated&mdash;Unconscious&mdash;Dead</strong></p>\n<h3>Weakened</h3>\n<p>The victim takes a &ndash;2 penalty to Fortitude saves, Constitution checks, and Constitution-based DCs. Every time the victim attempts a Fortitude save against the poison&mdash;whether he succeeds or fails&mdash;he loses Hit Points as per on initial exposure.</p>\n<h3>Debilitated</h3>\n<p>Strenuous actions cause the victim pain. If he takes a standard action, he immediately loses 1 Hit Point.</p>\n<h3>Unconscious</h3>\n<p>The victim is unconscious and can&rsquo;t be woken by any means.</p>\n<h3>Dead</h3>\n<p>The victim dies.</p>",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><em>&lt;@Compendium[sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions}</em></p>\n<p><em>The GM may find the Affliction's details in the GM Notes tab of this item.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "03ba50ff-132d-4920-a544-60ea7221f7c2",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "save",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.BlackLotusExtractPoisoning.value, 0, 1, -2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fort"
+      },
+      {
+        "_id": "dce47635-d3fa-4f4d-8ae7-f9e083a2374d",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "ability-check",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.BlackLotusExtractPoisoning.value, 0, 1, -2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "con"
+      },
+      {
+        "_id": "2bf717da-eeda-4ec5-b9d6-9a7e61e8d4eb",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "spell-save-dc",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.BlackLotusExtractPoisoning.value, 0, 1, -2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "max": 4,
+      "min": 0,
+      "mode": "immediate"
+    },
+    "source": "CRB pg. 419",
+    "stage": "early",
+    "subType": "BlackLotusExtractPoisoning"
+  },
+  "img": "systems/sfrpg/icons/feats/protective_fur.png"
+}

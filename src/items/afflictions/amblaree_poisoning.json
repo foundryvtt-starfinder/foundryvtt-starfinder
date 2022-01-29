@@ -1,0 +1,112 @@
+{
+  "_id": "M0IMvjUBsxdzi3wC",
+  "name": "Amblaree Poisoning",
+  "type": "actorResource",
+  "data": {
+    "type": "affliction",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": false,
+      "show": false,
+      "showOwnerAndGMOnly": false,
+      "visualization": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmNotes": "<p>&lt;@Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poisons}</p>\n<p><em>Track the progress in the details tab in \"Base Value\". 0; Healthy, 3; Blinded.</em></p>\n<p><em>To keep the affliction type a secret, renaming the item is suggested. This does not prevent the player from looking at the details tab to learn the affliction type.</em></p>\n<h2>@Compendium[sfrpg.equipment.cfOeM4RwUa1kfagc]{Amblaree}</h2>\n<p><strong>Type&nbsp;</strong>poison (injury);&nbsp;<strong>Save&nbsp;</strong>Fortitude DC 13<br /><strong>Track&nbsp;</strong>Wisdom (special);&nbsp;<strong>Frequency&nbsp;</strong>1/round for 3 rounds<br /><strong>Effect&nbsp;</strong>Progression track is Weakened&mdash;Impaired&mdash;Blinded; no end state. When at the blinded stage, the victim gains the blinded condition.<br /><strong>Cure&nbsp;</strong>1 save</p>\n<p><em>Modifiers currently do not effect Ability DCs, as well as spellcasting limitations</em></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Wisdom Poison Track</h2>\n<p><strong>Healthy&mdash;Weakened&mdash;Impaired&mdash;Blinded</strong></p>\n<h3>Weakened</h3>\n<p>The victim takes a &ndash;2 penalty to Will saves and Wisdom-based ability checks and skill checks, and the DCs of his spells and special abilities decrease by 2. If he has 1 or more levels in a spellcasting class whose key ability score is Wisdom, he can&rsquo;t cast his highest level of spells from that class.</p>\n<h3>Impaired</h3>\n<p>The victim takes an additional &ndash;2 penalty to the affected checks, and the affected DCs decrease by an additional 2. If he has 1 or more levels in a spellcasting class whose key ability score is Wisdom, he can&rsquo;t cast his 2 highest levels of spells from that class.</p>\n<h3>Blinded; no end state</h3>\n<p>When at the blinded stage, the victim gains the blinded condition.</p>",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><em>&lt;@Compendium[sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions}</em></p>\n<p><em>The GM may find the Affliction's details in the GM Notes tab of this item.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "03ba50ff-132d-4920-a544-60ea7221f7c2",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "save",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.Amblaree.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "will"
+      },
+      {
+        "_id": "dce47635-d3fa-4f4d-8ae7-f9e083a2374d",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "ability-check",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.Amblaree.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "wis"
+      },
+      {
+        "_id": "2bf717da-eeda-4ec5-b9d6-9a7e61e8d4eb",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "spell-save-dc",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.Amblaree.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "7131ee3c-59cd-491e-a639-5ecef5b0d8fd",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ability-skills",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.Amblaree.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "wis"
+      }
+    ],
+    "range": {
+      "max": 5,
+      "min": 0,
+      "mode": "immediate"
+    },
+    "source": "COM pg. 127",
+    "stage": "early",
+    "subType": "Amblaree"
+  },
+  "img": "systems/sfrpg/icons/feats/protective_fur.png"
+}

@@ -1,0 +1,59 @@
+{
+  "_id": "7v0gGNJ4mGQQHATJ",
+  "name": "Strychnine Poisoning",
+  "type": "actorResource",
+  "data": {
+    "type": "affliction",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": false,
+      "show": false,
+      "showOwnerAndGMOnly": false,
+      "visualization": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmNotes": "<p><em>&lt;@Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poisons}</em></p>\n<p><em>Track the progress in the details tab in \"Base Value\". 0; Healthy, 3; Dead.</em></p>\n<p><em>To keep the affliction type a secret, renaming the item is suggested. This does not prevent the player from looking at the details tab to learn the affliction type.</em></p>\n<h2>@Compendium[sfrpg.equipment.H2CgQu3Iq14Lf4jZ]{Strychnine}</h2>\n<p><strong>Type&nbsp;</strong>poison (injury);&nbsp;<strong>Save&nbsp;</strong>Fortitude DC 20<br /><strong>Track&nbsp;</strong>Dexterity (special);&nbsp;<strong>Frequency&nbsp;</strong>1/round for 4 rounds<br /><strong>Effect&nbsp;</strong>Progression track is Healthy&mdash;Stiffened&mdash;Immobile&mdash;Dead.<br /><strong>Cure&nbsp;</strong>2 consecutive saves</p>\n<p><em>Modifiers currently do not effect Ability DCs</em></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Dexterity Poison Track</h2>\n<p><strong>Healthy&mdash;Stiffened&mdash;Immobile&mdash;Dead</strong></p>\n<h3>Stiffened</h3>\n<p>The victim loses her Dexterity bonus to her Armor Class, and she can&rsquo;t take reactions.</p>\n<h3>Immobile</h3>\n<p>The victim is helpless and can take only purely mental actions.</p>\n<h3>Dead</h3>\n<p>The victim dies.</p>",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><em>&lt;@Compendium[sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions}</em></p>\n<p><em>The GM may find the Affliction's details in the GM Notes tab of this item.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "502f2fd5-463d-41e6-bdcd-f30a7a5ba54c",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.StrychninePoisoning.value, 0, 1, -(@attributes.eac.maxDex))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
+    "range": {
+      "max": 3,
+      "min": 0,
+      "mode": "immediate"
+    },
+    "source": "AR pg. 133",
+    "stage": "early",
+    "subType": "StrychninePoisoning"
+  },
+  "img": "systems/sfrpg/icons/feats/protective_fur.png"
+}

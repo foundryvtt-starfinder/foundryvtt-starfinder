@@ -1,0 +1,97 @@
+{
+  "_id": "pNhtrtnQHhM3qYII",
+  "name": "Constitution Poison Track",
+  "type": "actorResource",
+  "data": {
+    "type": "affliction",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": false,
+      "show": false,
+      "showOwnerAndGMOnly": false,
+      "visualization": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmNotes": "<p><em>&lt;@Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poisons}</em></p>\n<p><em>Track the progress in the details tab in \"Base Value\". 0; Healthy, 5; Dead.</em></p>\n<p><em>To keep the affliction type a secret, renaming the item is suggested. This does not prevent the player from looking at the details tab to learn the affliction type.</em></p>\n<p>Each poison has a delivery mechanism. Page 417 explains the details of the various methods of delivery. A character who is poisoned attempts a saving throw after the listed onset and at the listed frequency thereafter. Upon initial exposure, regardless of whether she succeeds at her saving throw, the victim loses a number of Hit Points equal to the poison&rsquo;s DC &ndash; 10. If a victim is exposed to multiple doses of the same poison, she must attempt a separate save for each dose and progresses to the next state on the poison track with each failed save.</p>\n<p><em>Modifiers currently do not effect Con based DCs</em></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Constitution Poison Track</h2>\n<p><strong>Healthy&mdash;Weakened&mdash;Impaired&mdash;Debilitated&mdash;Unconscious&mdash;Dead</strong></p>\n<h3>Weakened</h3>\n<p>The victim takes a &ndash;2 penalty to Fortitude saves, Constitution checks, and Constitution-based DCs. Every time the victim attempts a Fortitude save against the poison&mdash;whether he succeeds or fails&mdash;he loses Hit Points as per on initial exposure.</p>\n<h3>Impaired</h3>\n<p>The victim takes an additional &ndash;2 penalty to the affected checks, and the DCs of his spells and special abilities decrease by 2.</p>\n<h3>Debilitated</h3>\n<p>Strenuous actions cause the victim pain. If he takes a standard action, he immediately loses 1 Hit Point.</p>\n<h3>Unconscious</h3>\n<p>The victim is unconscious and can&rsquo;t be woken by any means.</p>\n<h3>Dead</h3>\n<p>The victim dies.</p>",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><em>&lt;@Compendium[sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions}</em></p>\n<p><em>The GM may find the Affliction's details in the GM Notes tab of this item.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "03ba50ff-132d-4920-a544-60ea7221f7c2",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "save",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.conpoison.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fort"
+      },
+      {
+        "_id": "dce47635-d3fa-4f4d-8ae7-f9e083a2374d",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "ability-check",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.conpoison.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "con"
+      },
+      {
+        "_id": "2bf717da-eeda-4ec5-b9d6-9a7e61e8d4eb",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "spell-save-dc",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.conpoison.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "max": 5,
+      "min": 0,
+      "mode": "immediate"
+    },
+    "source": "CRB pg. 415",
+    "stage": "early",
+    "subType": "conpoison"
+  },
+  "img": "systems/sfrpg/icons/feats/protective_fur.png"
+}

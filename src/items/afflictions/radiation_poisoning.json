@@ -1,0 +1,97 @@
+{
+  "_id": "IK7bU5GQrcpWxoi2",
+  "name": "Radiation Poisoning",
+  "type": "actorResource",
+  "data": {
+    "type": "affliction",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": false,
+      "show": false,
+      "showOwnerAndGMOnly": false,
+      "visualization": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmNotes": "<p><em>&lt;@Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poisons}</em></p>\n<p><em>Track the progress in the details tab in \"Base Value\". 0; Healthy, 5; Dead.</em></p>\n<p><em>To keep the affliction type a secret, renaming the item is suggested. This does not prevent the player from looking at the details tab to learn the affliction type.</em></p>\n<h2>Radiation</h2>\n<p><strong>Type&nbsp;</strong>poison (emanation (see below));&nbsp;<strong>Save&nbsp;</strong>&mdash;<br /><strong>Track&nbsp;</strong>Constitution;&nbsp;<strong>Frequency&nbsp;</strong>1/round<br /><strong>Effect&nbsp;</strong>Radiation is an emanation poison, meaning that a victim only needs to enter an area suffused with radiation to be affected by it. Radiation suffuses a spherical area of effect that can extend into solid objects. The closer one gets to the center of an area of radiation, the stronger the radiation effect becomes. Radiation entries list the maximum level of radiation in an area, as well as the radius out to which this radiation level applies. The radiation continues to suffuse each increment out to an equal length beyond that radius, its strength degraded by one level per increment. For example, a spherical area of high radiation with a radius of 20 feet creates a zone of medium radiation spanning 20 feet to 40 feet from the center in all directions, and a similar zone of low radiation spanning 40 to 60 feet from the center.<br /><br />A creature that leaves an area suffused with radiation is essentially cured of the poison effect. Ending the source of radiation or successfully casting @Compendium[sfrpg.spells.ANDdDHLnY7Dfnhtq]{Remove Radioactivity} has the same effect. As usual for poison effects, an affected creature requires rest to recover from radiation poisoning. Remove affliction doesn't cure a creature of the effects of radiation poisoning, but @Compendium[sfrpg.spells.ANDdDHLnY7Dfnhtq]{Remove Radioactivity} does.<br /><br />At each state of impaired and beyond, the victim must succeed at a DC 18 Fortitude saving throw or contract the radiation sickness disease<br /><br /></p>\n<h3>Table 11-8: Radiation Levels</h3>\n<table>\n<tbody>\n<tr>\n<td>Radiation Level</td>\n<td>Fort DC</td>\n</tr>\n<tr>\n<td>Low</td>\n<td>13</td>\n</tr>\n<tr>\n<td>Medium</td>\n<td>17</td>\n</tr>\n<tr>\n<td>High</td>\n<td>22</td>\n</tr>\n<tr>\n<td>Severe</td>\n<td>30</td>\n</tr>\n</tbody>\n</table>\n<p><br /><strong>Cure&nbsp;</strong>none</p>\n<p><em>Modifiers currently do not effect Con based DCs</em></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Constitution Poison Track</h2>\n<p><strong>Healthy&mdash;Weakened&mdash;Impaired&mdash;Debilitated&mdash;Unconscious&mdash;Dead</strong></p>\n<h3>Weakened</h3>\n<p>The victim takes a &ndash;2 penalty to Fortitude saves, Constitution checks, and Constitution-based DCs. Every time the victim attempts a Fortitude save against the poison&mdash;whether he succeeds or fails&mdash;he loses Hit Points as per on initial exposure.</p>\n<h3>Impaired</h3>\n<p>The victim takes an additional &ndash;2 penalty to the affected checks, and the DCs of his spells and special abilities decrease by 2.</p>\n<h3>Debilitated</h3>\n<p>Strenuous actions cause the victim pain. If he takes a standard action, he immediately loses 1 Hit Point.</p>\n<h3>Unconscious</h3>\n<p>The victim is unconscious and can&rsquo;t be woken by any means.</p>\n<h3>Dead</h3>\n<p>The victim dies.</p>",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><em>&lt;@Compendium[sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions}</em></p>\n<p><em>The GM may find the Affliction's details in the GM Notes tab of this item.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "03ba50ff-132d-4920-a544-60ea7221f7c2",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "save",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.RadiationPoisoning.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fort"
+      },
+      {
+        "_id": "dce47635-d3fa-4f4d-8ae7-f9e083a2374d",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "ability-check",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.RadiationPoisoning.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "con"
+      },
+      {
+        "_id": "2bf717da-eeda-4ec5-b9d6-9a7e61e8d4eb",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "spell-save-dc",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.RadiationPoisoning.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "max": 5,
+      "min": 0,
+      "mode": "immediate"
+    },
+    "source": "CRB pg. 404",
+    "stage": "early",
+    "subType": "RadiationPoisoning"
+  },
+  "img": "systems/sfrpg/icons/feats/protective_fur.png"
+}

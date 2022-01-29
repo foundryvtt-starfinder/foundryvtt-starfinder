@@ -1,0 +1,59 @@
+{
+  "_id": "jVoJb7EpuahxBkHa",
+  "name": "Mental Disease Track",
+  "type": "actorResource",
+  "data": {
+    "type": "affliction",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": false,
+      "show": false,
+      "showOwnerAndGMOnly": false,
+      "visualization": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmNotes": "<p><em>&lt;@Compendium[sfrpg.rules.GnEF27Oot3zqTaBQ]{Diseases}</em></p>\n<p><em>Track the progress in the details tab in \"Base Value\". 0; Healthy, 7; Dead.</em></p>\n<p><em>To keep the affliction type a secret, renaming the item is suggested. This does not prevent the player from looking at the details tab to learn the affliction type.</em></p>\n<p>Diseases are typically inhaled contagions (though these are usually filtered out by a standard space suit or suit of armor) or injury contagions. Page 417 explains the details of each method of contagion. If a disease lacks a Cure entry, its progression may be irreversible without powerful magic or technology, but a successful casting of&nbsp;remove affliction&nbsp;usually prevents further deterioration. Physical and mental diseases have separate tracks.</p>\n<p><em>Modifiers tab only effects Spell DCs currently</em></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Mental Disease Track</h2>\n<p><strong>Healthy&mdash;Latent&mdash;Weakened&mdash;Impaired&mdash;Befuddled&mdash;Disassociated&mdash;Comatose&mdash;Dead</strong></p>\n<h3>Latent</h3>\n<p>The victim can pass on contagious diseases but suffers no ill effects.</p>\n<h3>Weakened</h3>\n<p>The victim is shaken, and the DCs of his spells and special abilities decrease by 2. He can no longer cast his highest level of spells (if any).</p>\n<h3>Impaired</h3>\n<p>The victim is @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} and no longer adds his mental ability score modifiers when calculating number of uses per day of abilities dependent on those scores, including bonus spells per day. The DCs of his spells and special abilities decrease by an additional 2. He can no longer cast his 2 highest levels of spells (if any).</p>\n<h3>Befuddled</h3>\n<p>The victim begins losing his grasp on thought, reality, and self. He has a 50% chance each round to take no relevant actions, instead babbling randomly, wandering off, or talking to unseen parties.</p>\n<h3>Disassociated</h3>\n<p>The victim is almost entirely disconnected from reality. His mind filters and twists all external stimuli into strange forms. He can no longer tell friend from foe and can&rsquo;t willingly accept any aid (including healing) from another creature unless he succeeds at a Will save against the disease&rsquo;s DC.</p>\n<h3>Comatose</h3>\n<p>A victim rendered comatose by a mental disease has lost all grip on reality and entered a dream world. He can&rsquo;t be woken.</p>\n<h3>Dead</h3>\n<p>The victim is dead, and his corpse may still be contagious.</p>",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><em>&lt;@Compendium[sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions}</em></p>\n<p><em>The GM may find the Affliction's details in the GM Notes tab of this item.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "c4585593-8d9a-4be7-a5d3-b104dfbcb002",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "spell-save-dc",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.mentaldisease.value, 0, 2, -2, 3, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "max": 7,
+      "min": 0,
+      "mode": "immediate"
+    },
+    "source": "CRB pg. 415",
+    "stage": "early",
+    "subType": "mentaldisease"
+  },
+  "img": "systems/sfrpg/icons/feats/protective_fur.png"
+}

@@ -1,0 +1,93 @@
+{
+  "_id": "60bntivQ2bY59mpv",
+  "name": "Morph Inhibitor Poisoning",
+  "type": "actorResource",
+  "data": {
+    "type": "affliction",
+    "abilityMods": {
+      "parts": []
+    },
+    "base": 0,
+    "combatTracker": {
+      "displayAbsoluteValue": false,
+      "show": false,
+      "showOwnerAndGMOnly": false,
+      "visualization": []
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmNotes": "<p>&lt;@Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poisons}</p>\n<p><em>Track the progress in the details tab in \"Base Value\". 0; Healthy, 5; Dead.</em></p>\n<p><em>To keep the affliction type a secret, renaming the item is suggested. This does not prevent the player from looking at the details tab to learn the affliction type.</em></p>\n<h2>@Compendium[sfrpg.equipment.uYpFRTDohdVTOf38]{Morph Inhibitor}</h2>\n<p><strong>Type&nbsp;</strong>poison (injury);&nbsp;<strong>Save&nbsp;</strong>Fortitude DC 15<br /><strong>Track&nbsp;</strong>Charisma;&nbsp;<strong>Onset&nbsp;</strong>1 minute;&nbsp;<strong>Frequency&nbsp;</strong>1/minute for 6 minutes<br /><strong>Effect</strong>&nbsp;At the weakened state, the victim reverts to its true form and cannot change shape for 1 hour.<br /><strong>Cure&nbsp;</strong>2 consecutive saves</p>\n<p><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><em>Modifiers currently do not effect Ability DCs, as well as spellcasting limitations</em></span></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Charisma Poison Track</h2>\n<p><strong>Healthy&mdash;Weakened&mdash;Impaired&mdash;Pliable&mdash;Catatonic&mdash;Dead</strong></p>\n<h3>Weakened</h3>\n<p>The victim takes a &ndash;2 penalty to Charisma-based ability checks and skill checks, and the DCs of her spells and special abilities decrease by 2. If she has 1 or more levels in a spellcasting class whose key ability score is Charisma, she can&rsquo;t cast her highest level of spells from that class.</p>\n<h3>Impaired</h3>\n<p>The victim takes an additional &ndash;2 penalty to the affected checks and DCs. If she has 1 or more levels in a spellcasting class whose key ability score is Charisma, she can&rsquo;t cast her 2 highest levels of spells from that class.</p>\n<h3>Pliable</h3>\n<p>The victim has little sense of self and goes along with nearly any order or suggestion. Creatures attempting Bluff, Diplomacy, or Intimidate checks against her automatically succeed, though Diplomacy checks to improve her attitude still have the normal DC.</p>\n<h3>Catatonic</h3>\n<p>The victim loses agency and can&rsquo;t interact with anything.</p>\n<h3>Dead</h3>\n<p>The victim loses autonomic functions and dies.</p>",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><em>&lt;@Compendium[sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions}</em></p>\n<p><em>The GM may find the Affliction's details in the GM Notes tab of this item.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "dce47635-d3fa-4f4d-8ae7-f9e083a2374d",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "T5o8wld9HTj47Sff",
+          "itemId": "eJa8RIZH4R0LSoAi"
+        },
+        "effectType": "ability-check",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.MorphInhibitorPoisoning.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cha"
+      },
+      {
+        "_id": "2bf717da-eeda-4ec5-b9d6-9a7e61e8d4eb",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "spell-save-dc",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.MorphInhibitorPoisoning.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "7131ee3c-59cd-491e-a639-5ecef5b0d8fd",
+        "name": "Affliction",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ability-skills",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@resources.affliction.MorphInhibitorPoisoning.value, 0, 1, -2, 2, -4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cha"
+      }
+    ],
+    "range": {
+      "max": 5,
+      "min": 0,
+      "mode": "immediate"
+    },
+    "source": "AP #27 pg. 45",
+    "stage": "early",
+    "subType": "MorphInhibitorPoisoning"
+  },
+  "img": "systems/sfrpg/icons/feats/protective_fur.png"
+}
