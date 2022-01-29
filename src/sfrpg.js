@@ -676,3 +676,16 @@ function setupHandlebars() {
         return new Handlebars.SafeString(html);
     });
 }
+
+Hooks.on("renderSidebarTab", async (app, html) => {
+    if (app.options.id === "settings") {
+        const textToAdd = `<br/><a href="https://github.com/wildj79/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
+        const gameDetails = document.getElementById("game-details");
+        if (gameDetails) {
+            const systemSection = gameDetails.getElementsByClassName("system")[0];
+            if (systemSection) {
+                systemSection.innerHTML += textToAdd;
+            }
+        }
+    }
+});

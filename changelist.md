@@ -17,11 +17,12 @@ A new setting has been made available to do the rounding of split odd damage in 
 To make finding aliens a little easier, we've integrated the work started by rrenna and took it from there to finally provide you with an in-engine alien archive browser. You can filter by CR, HP, Size, Type, and, of course, name.
 
 ## Bugfixes and small improvements
+* Added a link to this changelist inside the settings tab.
 * Added base int and cha to drone chassis.
+* Added most, if not all, of the class features from Tech Revolution.
 * Added Mountain Eel from AA1 to Alien Archives.
 * Added precog as a spellcasting class to the spell settings. (Note: This does not mean precog is available as a compendium entry.)
 * Added spell resistance and activation/action to drone mods.
-* Added most, if not all, of the class features from Tech Revolution.
 * Assigned action target to weapons in the compendium.
 * Casting an innate spell now consumes that spell's uses if it has any.
 * Casting a spell now obeys the chat roll mode setting, instead of always rolling publicly.
