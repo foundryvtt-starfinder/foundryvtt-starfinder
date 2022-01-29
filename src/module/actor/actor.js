@@ -49,7 +49,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * Augment the basic actor data with additional dynamic data.
      * 
      * @param {Object} actorData The data for the actor
-     * @returns {Object} The actors data
+     * @returns {Promise} A promise for the automation process triggered at the end.
      */
     prepareData() {
         super.prepareData();
@@ -70,7 +70,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const armorUpgrades = items.filter(item => item.type === "upgrade");
         const asis = items.filter(item => item.type === "asi");
         const actorResources = items.filter(item => item.type === "actorResource");
-        game.sfrpg.engine.process("process-actors", {
+        return game.sfrpg.engine.process("process-actors", {
             actorId: this.id,
             actor: this,
             type: this.data.type,
