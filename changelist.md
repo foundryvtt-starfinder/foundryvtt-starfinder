@@ -48,6 +48,8 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Updated a few class features with proper modifier support.
 * Updated all of the spells in the compendium.
 * Updated the compendium definitions to match Foundry v9 requirements.
+* Updated several operative class features to include proper and correct modifier support.
+* Updated several vanguard class features to include proper and correct modifier support.
 
 * Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.
 
