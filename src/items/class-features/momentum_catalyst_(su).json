@@ -4,20 +4,21 @@
   "type": "feat",
   "data": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
-      "type": "",
+      "type": "reaction",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -27,24 +28,44 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "Improved Momentum Catalyst (Su)",
+          "formula": "(floor(@classes.vanguard.levels / 2))d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "Damage should only be applied if the Improved version has been acquired",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>&gt;@Compendium[sfrpg.class-features.hxGhCeOFrN0keV9A]{Momentum}</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"><span id=\"ctl00_MainContent_DetailedOutput\">Creatures you select in a 60-foot radius are pushed away from you. A targeted creature moves 30 feet directly away from you but can attempt a Fortitude saving throw to halve the distance.<br><br><strong><em>Improved</em></strong>: Targeted creatures that fail their Fortitude saves are also knocked @Compendium[sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} and take 1d6 bludgeoning damage per 2 vanguard levels you have.</span><br></span></p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
@@ -52,26 +73,22 @@
       "value": null
     },
     "requirements": "Aspect Catalyst",
+    "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "10+floor(@classes.vanguard.levels/2) + @abilities.con.mod",
+      "descriptor": "half"
     },
     "source": "Momentum",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": 1,
+      "per": "sr",
+      "value": 1
     }
   },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "img": "icons/svg/mystery-man.svg"
 }
