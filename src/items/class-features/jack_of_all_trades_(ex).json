@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -29,10 +30,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl11_LabelName\">You’ve learned how to handle any situation. You can use all skills untrained, and you double your operative’s edge bonus when using a skill in which you have no ranks.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl11_LabelName\">You&rsquo;ve learned how to handle any situation. You can use all skills untrained, and you double your operative&rsquo;s edge bonus when using a skill in which you have no ranks.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +44,24 @@
       "value": null
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "cdfdc759-7959-4caf-be43-47a62042d61b",
+        "name": "Jack of All Trades (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "all-skills",
+        "enabled": false,
+        "max": 2,
+        "modifier": "round((@classes.operative.levels + 3) / 4) * 2",
+        "modifierType": "formula",
+        "notes": "You double your operative’s edge bonus when using a skill in which you have no ranks.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +73,7 @@
       "value": null
     },
     "requirements": "2nd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -68,10 +90,5 @@
       "value": 0
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/jack_of_all_trades.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "img": "systems/sfrpg/icons/classes/jack_of_all_trades.png"
 }

@@ -1,6 +1,6 @@
 {
-  "_id": "iXNufpth6OcQ3cxp",
-  "name": "Interfering Shot (Ex)",
+  "_id": "8D3x742G1EpW8yi5",
+  "name": "Improved Quick Movement (Ex)",
   "type": "feat",
   "data": {
     "type": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl30_LabelName\">For your debilitating trick, you can prevent your target from using reactions (see page 244) until the end of your next turn.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>You can move even faster than other operatives. You gain double the benefits of your quick movement ability, up to a maximum additional increase of +20 feet. You must have quick movement to learn this exploit.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -45,7 +45,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "c8186644-f0a5-4635-84e3-e49cf29b4202",
+        "name": "Improved Quick Movement (Ex)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 10,
+        "modifier": "lookupRange(@classes.operative.levels, 10, 9, 20)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "land"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -63,7 +79,7 @@
       "dc": null,
       "descriptor": ""
     },
-    "source": "Operative Exploit",
+    "source": "Operative",
     "target": {
       "type": "",
       "value": null
@@ -74,5 +90,5 @@
       "value": 0
     }
   },
-  "img": "systems/sfrpg/icons/classes/interfering_shot.png"
+  "img": "systems/sfrpg/icons/classes/quick_movement.png"
 }

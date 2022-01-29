@@ -4,20 +4,21 @@
   "type": "feat",
   "data": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -29,22 +30,26 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl43_LabelName\">For your debilitating trick, you can attempt to temporarily suppress one magic item or deactivate one weapon, piece of equipment, or armor upgrade worn or carried by the target. Roll 1d20 + your operative level; the DC is equal to 10 + the item level. If you succeed, you deactivate the device (or suppress the item’s magical properties) until the beginning of your next turn. The device’s owner can spend a move action and attempt an Engineering check (for technological devices) or a Mysticism check (for magic items) against your operative exploit DC to try to reactivate the device.<br><br>You can instead use this debilitating trick to temporarily deactivate a construct that has either the magical subtype (such as a golem) or the technological subtype (such as a robot). You don’t need to attempt a check, but the creature can attempt a Fortitude save to negate the debilitating effect. If it fails, it’s @Compendium[sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} until the beginning of your next turn. Once you’ve used this ability to attempt to deactivate a construct, that creature is immune to your deactivating shot for 24 hours.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl43_LabelName\">For your debilitating trick, you can attempt to temporarily suppress one magic item or deactivate one weapon, piece of equipment, or armor upgrade worn or carried by the target. Roll 1d20 + your operative level; the DC is equal to 10 + the item level. If you succeed, you deactivate the device (or suppress the item&rsquo;s magical properties) until the beginning of your next turn. The device&rsquo;s owner can spend a move action and attempt an Engineering check (for technological devices) or a Mysticism check (for magic items) against your operative exploit DC to try to reactivate the device.<br /><br />You can instead use this debilitating trick to temporarily deactivate a construct that has either the magical subtype (such as a golem) or the technological subtype (such as a robot). You don&rsquo;t need to attempt a check, but the creature can attempt a Fortitude save to negate the debilitating effect. If it fails, it&rsquo;s @Compendium[sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} until the beginning of your next turn. Once you&rsquo;ve used this ability to attempt to deactivate a construct, that creature is immune to your deactivating shot for 24 hours.</span></p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
-    "formula": "",
+    "formula": "d20 + @classes.operative.levels",
+    "isActive": null,
     "modifiers": [],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
@@ -52,26 +57,22 @@
       "value": null
     },
     "requirements": "10th Level",
+    "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "10+floor(@classes.operative.levels/2) + @abilities.dex.mod",
+      "descriptor": "negate"
     },
     "source": "Operative Exploit",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
       "max": 0,
-      "per": null,
+      "per": "",
       "value": 0
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/deactivating_shot.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "img": "systems/sfrpg/icons/classes/deactivating_shot.png"
 }
