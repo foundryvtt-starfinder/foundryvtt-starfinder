@@ -1,6 +1,6 @@
 {
-  "_id": "mQc40A520HbqQ73C",
-  "name": "Directed Denial Of Strength Attack",
+  "_id": "0R98d7scrCMUSGHQ",
+  "name": "Chrono Leap",
   "type": "spell",
   "data": {
     "type": "",
@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -16,13 +17,14 @@
     },
     "allowedClasses": {
       "myst": false,
-      "tech": true,
+      "precog": true,
+      "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "spec",
       "value": null
     },
     "attackBonus": 0,
@@ -35,19 +37,24 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You flood targets’ minds with a magical effect similar to a computer virus that duplicates every sensation of lifting, carrying, and being burdened. Targets become @Compendium[sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered}, or they become @Compendium[sfrpg.conditions.11k3ObUIXEYFGrg9]{Overburdened} if already @Compendium[sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered}.&nbsp;</span></p>"
+      "value": "<p>You rocket the target forward through time, sending them careening across the battlefield. You move the target up to 60 feet in a straight line. This movement doesn&rsquo;t provoke attacks of opportunity. The target can attempt a Reflex saving throw to prevent this movement and negate the additional effect below</p>\n<p>At the end of this movement, the creature reenters the flow of time with a burst of temporal energy. Creatures adjacent to the target take 4d6 bludgeoning damage and are knocked prone. A creature in this area that succeeds at a Reflex saving throw takes only half damage and isn&rsquo;t knocked prone.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
       "units": "",
-      "value": "1 round/level"
+      "value": "instantaneous"
     },
     "formula": "",
-    "level": 2,
+    "isActive": null,
+    "isVariableLevel": false,
+    "level": 5,
     "materials": {
       "consumed": false,
       "cost": 0,
@@ -65,17 +72,18 @@
       "units": "ft",
       "value": 100
     },
+    "rollNotes": "",
     "save": {
-      "type": "will",
+      "type": "reflex",
       "dc": "",
-      "descriptor": "negate"
+      "descriptor": "half"
     },
-    "school": "enc",
-    "source": "PW pg. 205",
+    "school": "con",
+    "source": "GM pg. 70",
     "sr": true,
     "target": {
       "type": "",
-      "value": "up to one creature/level, no two of which can be more than 30 ft. apart"
+      "value": "one creature"
     },
     "uses": {
       "max": null,
@@ -85,5 +93,5 @@
   },
   "effects": [],
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/directed_denial_of_strength.PNG"
+  "img": "systems/sfrpg/icons/classes/improved_uncanny_dodge.png"
 }

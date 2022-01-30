@@ -1,15 +1,15 @@
 {
-  "_id": "oCZRtcoaUZKR1eSo",
-  "name": "Ray Of Exhaustion",
+  "_id": "fkZ0l4EtoMGeA4g2",
+  "name": "Command Icon",
   "type": "spell",
   "data": {
     "type": "",
-    "ability": "dex",
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "eac",
-    "actionType": "rsak",
+    "actionTarget": "",
+    "actionType": "save",
     "activation": {
       "type": "action",
       "condition": "",
@@ -17,8 +17,9 @@
     },
     "allowedClasses": {
       "myst": true,
-      "tech": false,
-      "wysh": true
+      "precog": false,
+      "tech": true,
+      "wysh": false
     },
     "area": {
       "effect": "",
@@ -42,18 +43,18 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You create an enervating ray of magic. You must make a ranged attack against your opponent&rsquo;s EAC. On a hit, the target is immediately @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} for the spell&rsquo;s duration. A creature that succeeds at a Fortitude saving throw is only fatigued, unless it is already fatigued, in which case it instead becomes @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} despite the saving throw.</p>\n<p>This spell has no effect on a creature that is already @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted}. Unlike normal exhaustion or fatigue, the effect ends as soon as the spell&rsquo;s duration expires.</p>"
+      "value": "<p>Hobgoblins created this spell to signify rallying points and provide commanders with better ability to organize troops. The target creature seems more imposing, granting the creature a +2 morale bonus to Charisma-based checks made to motivate troops and all Intimidate checks. A symbol of leadership, such as the seal of an organization or a deity&rsquo;s holy symbol, illuminates above the target. This symbol increases the light in a 10-foot radius by one step, up to normal. The light imposes a &ndash;20 penalty to Stealth checks and prevents the target from benefiting from concealment from darkness, invisibility, and similar effects. The target gains a +1 morale bonus to saving throws against fear and being charmed, as do allies while they remain within the symbol&rsquo;s light.</p>"
     },
     "descriptors": [],
-    "dismissible": false,
+    "dismissible": true,
     "duration": {
       "units": "",
-      "value": "1 minute/level"
+      "value": "1 minute/level (D)"
     },
     "formula": "",
     "isActive": null,
     "isVariableLevel": false,
-    "level": 3,
+    "level": 1,
     "materials": {
       "consumed": false,
       "cost": 0,
@@ -73,12 +74,12 @@
     },
     "rollNotes": "",
     "save": {
-      "type": "fort",
+      "type": "will",
       "dc": "",
-      "descriptor": "partial"
+      "descriptor": "negate"
     },
-    "school": "nec",
-    "source": "CRB pg. 371",
+    "school": "ill",
+    "source": "GM pg. 70",
     "sr": true,
     "target": {
       "type": "",
@@ -91,8 +92,6 @@
     }
   },
   "effects": [],
-  "flags": {
-    "core": {}
-  },
-  "img": "systems/sfrpg/icons/spells/ray_of_exhaustion.png"
+  "flags": {},
+  "img": "systems/sfrpg/icons/spells/see_invisibility.png"
 }

@@ -1,14 +1,15 @@
 {
-  "_id": "mQc40A520HbqQ73C",
-  "name": "Directed Denial Of Strength Attack",
+  "_id": "EblMq1LuTFJalysd",
+  "name": "Anchor",
   "type": "spell",
   "data": {
     "type": "",
-    "ability": "",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
-    "actionType": "save",
+    "actionTarget": "",
+    "actionType": "",
     "activation": {
       "type": "action",
       "condition": "",
@@ -16,13 +17,14 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
-      "wysh": false
+      "wysh": true
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -35,18 +37,23 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You flood targets’ minds with a magical effect similar to a computer virus that duplicates every sensation of lifting, carrying, and being burdened. Targets become @Compendium[sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered}, or they become @Compendium[sfrpg.conditions.11k3ObUIXEYFGrg9]{Overburdened} if already @Compendium[sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered}.&nbsp;</span></p>"
+      "value": "<p>You conjure and attach a cable to an immobile object. When the spell ends, the cable returns to where it was summoned from. The cable has hardness 8, 8 Hit Points, and a length equal to the spell&rsquo;s range. The cable can be pried free with an Athletics check equal to the spell&rsquo;s DC. If the cable becomes unanchored or destroyed, the spell ends.</p>"
     },
     "descriptors": [],
-    "dismissible": false,
+    "dismissible": true,
     "duration": {
       "units": "",
-      "value": "1 round/level"
+      "value": "10 minutes/level (D)"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 2,
     "materials": {
       "consumed": false,
@@ -65,17 +72,18 @@
       "units": "ft",
       "value": 100
     },
+    "rollNotes": "",
     "save": {
-      "type": "will",
-      "dc": "",
-      "descriptor": "negate"
+      "type": "",
+      "dc": null,
+      "descriptor": ""
     },
-    "school": "enc",
-    "source": "PW pg. 205",
-    "sr": true,
+    "school": "con",
+    "source": "GM pg. 68",
+    "sr": false,
     "target": {
       "type": "",
-      "value": "up to one creature/level, no two of which can be more than 30 ft. apart"
+      "value": "immobile object"
     },
     "uses": {
       "max": null,
@@ -85,5 +93,5 @@
   },
   "effects": [],
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/directed_denial_of_strength.PNG"
+  "img": "systems/sfrpg/icons/spells/disintegrate.png"
 }

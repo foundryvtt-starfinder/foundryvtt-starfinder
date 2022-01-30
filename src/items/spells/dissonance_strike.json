@@ -1,15 +1,15 @@
 {
-  "_id": "oCZRtcoaUZKR1eSo",
-  "name": "Ray Of Exhaustion",
+  "_id": "KnKuJofOQdBNpegp",
+  "name": "Dissonance Strike",
   "type": "spell",
   "data": {
     "type": "",
-    "ability": "dex",
+    "ability": "str",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "eac",
-    "actionType": "rsak",
+    "actionType": "msak",
     "activation": {
       "type": "action",
       "condition": "",
@@ -17,7 +17,8 @@
     },
     "allowedClasses": {
       "myst": true,
-      "tech": false,
+      "precog": false,
+      "tech": true,
       "wysh": true
     },
     "area": {
@@ -30,11 +31,27 @@
     "chatFlavor": "",
     "concentration": false,
     "critical": {
-      "effect": "",
+      "effect": "deafen [DC equals your spell save DC]",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "4d4",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": true
+          }
+        }
+      ]
     },
     "damageNotes": "",
     "description": {
@@ -42,18 +59,18 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You create an enervating ray of magic. You must make a ranged attack against your opponent&rsquo;s EAC. On a hit, the target is immediately @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} for the spell&rsquo;s duration. A creature that succeeds at a Fortitude saving throw is only fatigued, unless it is already fatigued, in which case it instead becomes @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} despite the saving throw.</p>\n<p>This spell has no effect on a creature that is already @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted}. Unlike normal exhaustion or fatigue, the effect ends as soon as the spell&rsquo;s duration expires.</p>"
+      "value": "<p>You harness the vibrations in your body and a body you strike. Attempt a melee attack against the target&rsquo;s EAC. If your attack hits, the target takes 4d4 sonic damage (critical deafen; DC equals your spell save DC) and can&rsquo;t take reactions for 1 round.</p>\n<p>Casting this spell doesn&rsquo;t provoke attacks of opportunity.</p>"
     },
     "descriptors": [],
     "dismissible": false,
     "duration": {
       "units": "",
-      "value": "1 minute/level"
+      "value": "instantaneous"
     },
     "formula": "",
     "isActive": null,
     "isVariableLevel": false,
-    "level": 3,
+    "level": 1,
     "materials": {
       "consumed": false,
       "cost": 0,
@@ -66,19 +83,19 @@
       "prepared": false
     },
     "range": {
-      "additional": "5 ft.",
-      "per": "2 levels",
-      "units": "ft",
-      "value": 25
+      "additional": "",
+      "per": "",
+      "units": "touch",
+      "value": null
     },
     "rollNotes": "",
     "save": {
-      "type": "fort",
+      "type": "",
       "dc": "",
-      "descriptor": "partial"
+      "descriptor": "negate"
     },
-    "school": "nec",
-    "source": "CRB pg. 371",
+    "school": "evo",
+    "source": "GM pg. 72",
     "sr": true,
     "target": {
       "type": "",
@@ -91,8 +108,6 @@
     }
   },
   "effects": [],
-  "flags": {
-    "core": {}
-  },
-  "img": "systems/sfrpg/icons/spells/ray_of_exhaustion.png"
+  "flags": {},
+  "img": "systems/sfrpg/icons/spells/discern-lies.jpg"
 }
