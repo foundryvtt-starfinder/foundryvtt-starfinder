@@ -1691,3 +1691,28 @@ SFRPG.actionTargetsStarship = {
     "ac": "SFRPG.Items.Action.ActionTarget.StarshipAC",
     "tl": "SFRPG.Items.Action.ActionTarget.StarshipTL"
 };
+
+// Source: CRB, page 391
+SFRPG.characterWealthByLevel = {
+    0: 0,
+    1: 1000,
+    2: 2000,
+    3: 4000,
+    4: 6000,
+    5: 9000,
+    6: 15000,
+    7: 23000,
+    8: 33000,
+    9: 45000,
+    10: 66000,
+    11: 100000,
+    12: 150000,
+    13: 255000,
+    14: 333000,
+    15: 500000,
+    16: 750000,
+    17: 1125000,
+    18: 1700000,
+    19: 2550000,
+    20: 3775000
+};

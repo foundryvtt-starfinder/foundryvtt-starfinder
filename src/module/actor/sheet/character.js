@@ -198,7 +198,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         }
         totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
         data.encumbrance = this._computeEncumbrance(totalWeight, actorData);
-        data.inventoryValue = Math.floor(totalWealth);
+        data.wealth = ActorSheetSFRPG.computeWealthForActor(this.actor, totalWealth);
 
         const features = {
             classes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"), items: [], hasActions: false, dataset: { type: "class" }, isClass: true },

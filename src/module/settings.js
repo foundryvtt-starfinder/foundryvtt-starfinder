@@ -175,4 +175,13 @@ export const registerSystemSettings = function () {
         default: true,
         type: Boolean
     });
+
+    game.settings.register("sfrpg", "currencyLocale", {
+        name: "SFRPG.Settings.CurrencyLocale.Name",
+        hint: "SFRPG.Settings.CurrencyLocale.Hint",
+        scope: "client",
+        config: true,
+        default: "en-US",
+        type: String
+    });
 };

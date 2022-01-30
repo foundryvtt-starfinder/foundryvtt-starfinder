@@ -675,6 +675,13 @@ function setupHandlebars() {
 
         return new Handlebars.SafeString(html);
     });
+
+    Handlebars.registerHelper('currencyFormat', function (value) {
+        const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
+        const moneyFormatter  = new Intl.NumberFormat(currencyLocale);
+        const formattedValue = moneyFormatter.format(value);
+        return formattedValue;
+    });
 }
 
 Hooks.on("renderSidebarTab", async (app, html) => {

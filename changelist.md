@@ -30,6 +30,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Consumables no longer use up the entire quantity when used once.
 * Creating a new actor resource modifier no longer requires you to save, close, and re-open the modifier panel to enter the affected actor resource.
 * Creating a new player character or drone sheet now automatically sets the token linked for that sheet. This does not apply to NPCs, Starships, and Vehicles.
+* Currency format is now a client-side configurable locale that can be changed in the system settings, it defaults to en-US.
 * Disabled modifiers no longer affect their actor's spell save DC.
 * Disabling modifiers on the roll dialog are remembered for future rolls again.
 * Dropping items as a non-GM player with create token rights no longer fails.
@@ -52,6 +53,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Updated the compendium definitions to match Foundry v9 requirements.
 * Updated several operative class features to include proper and correct modifier support.
 * Updated several vanguard class features to include proper and correct modifier support.
+* Wealth label on the inventory panel now displays how it was calculated, as well as the wealth by character level and estimated level by wealth values, following CRB pg. 391.
 
 * Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.
 
