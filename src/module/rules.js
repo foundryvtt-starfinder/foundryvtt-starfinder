@@ -28,6 +28,7 @@ import calculateArmorModifiers          from './rules/actions/actor/calculate-ar
 import calculateBaseAttackBonusModifier from './rules/actions/actor/calculate-bab-modifier.js';
 import calculateBaseAbilityModifier     from './rules/actions/actor/calculate-base-ability-modifier.js';
 import calculateBaseAbilityScore        from './rules/actions/actor/calculate-base-ability-score.js';
+import calculateBulkAndWealth           from './rules/actions/actor/calculate-bulk-and-wealth.js';
 import calculateCmd                     from './rules/actions/actor/calculate-cmd.js';
 import calculateDamageMitigation        from './rules/actions/actor/calculate-damage-mitigation.js';
 import calculateCmdModifiers            from './rules/actions/actor/calculate-cmd-modifiers.js';
@@ -105,6 +106,7 @@ export default function (engine) {
     // Actor actions
     clearTooltips(engine);
     calculateBaseAbilityScore(engine);
+    calculateBulkAndWealth(engine);
     calculateActorResources(engine);
     calculateActorResourcesLate(engine);
     calculateBaseAbilityModifier(engine);
@@ -227,6 +229,7 @@ export default function (engine) {
                     { closure: "calculateStamina", stackModifiers: "stackModifiers" },
                     { closure: "calculateResolve", stackModifiers: "stackModifiers" },
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
+                    "calculateBulkAndWealth",
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     "calculateSpellsPerDay",
@@ -257,6 +260,7 @@ export default function (engine) {
                     { closure: "calculateDroneResolve", stackModifiers: "stackModifiers" },
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
+                    "calculateBulkAndWealth",
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
@@ -324,7 +328,8 @@ export default function (engine) {
                     "calculateStarshipTargetLock",
                     "calculateStarshipComputer",
                     "calculateStarshipCriticalStatus",
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateBulkAndWealth"
                 ]
             },
             {
@@ -335,7 +340,8 @@ export default function (engine) {
                     "calculateVehicleHangar",
                     "calculateVehiclePassengers",
                     "identity",
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateBulkAndWealth"
                 ]
             }
         ]
