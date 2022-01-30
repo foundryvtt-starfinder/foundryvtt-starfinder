@@ -1179,11 +1179,13 @@ export class ActorSheetSFRPG extends ActorSheet {
         wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.Inventory", {amount: moneyFormatter.format(wealth.inventory)}));
 
         const actorData = actor.data.data;
-        for (const [currency, amount] of Object.entries(actorData.currency)) {
-            const currencyValue = Number(amount);
-            if (!Number.isNaN(currencyValue)) {
-                wealth.currencies += currencyValue;
-                wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.Currency", {currency: SFRPG.currencies[currency], amount: moneyFormatter.format(currencyValue)}));
+        if (actorData.currency && Object.entries(actorData.currency).length > 0) {
+            for (const [currency, amount] of Object.entries(actorData.currency)) {
+                const currencyValue = Number(amount);
+                if (!Number.isNaN(currencyValue)) {
+                    wealth.currencies += currencyValue;
+                    wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.Currency", {currency: SFRPG.currencies[currency], amount: moneyFormatter.format(currencyValue)}));
+                }
             }
         }
 
