@@ -22,6 +22,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Added most, if not all, of the class features from Tech Revolution.
 * Added Mountain Eel from AA1 to Alien Archives.
 * Added precog as a spellcasting class to the spell settings. (Note: This does not mean precog is available as a compendium entry.)
+* Added resistance as a bonus type for modifiers, such as a "+2 Resistance bonus to saving throws against..".
 * Added spell resistance and activation/action to drone mods.
 * Assigned action target to weapons in the compendium.
 * Casting an innate spell now consumes that spell's uses if it has any.

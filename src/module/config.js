@@ -1052,6 +1052,7 @@ SFRPG.modifierTypes = {
     "luck": "SFRPG.ModifierTypeLuck",
     "morale": "SFRPG.ModifierTypeMorale",
     "racial": "SFRPG.ModifierTypeRacial",
+    "resistance": "SFRPG.ModifierTypeResistance",
     "untyped": "SFRPG.ModifierTypeUntyped"
 };
 
