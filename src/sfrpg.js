@@ -11,7 +11,7 @@ import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
-import { computeCompoundBulkForItem, initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
+import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
 import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
@@ -46,6 +46,7 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
+import { SFRPGHealingSetting, SFRPGDamage } from "./module/actor/mixins/actor-damage.js";
 
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import { } from "./module/combat/combat.js";
@@ -123,7 +124,30 @@ Hooks.once('init', async function () {
         SFRPGEffectType,
         SFRPGModifier,
         SFRPGModifierType,
-        SFRPGModifierTypes  
+        SFRPGModifierTypes,
+
+        // Namespace style
+        Actor: {
+            Damage: {
+                SFRPGHealingSetting,
+                SFRPGDamage
+            },
+            Modifiers: {
+                SFRPGEffectType,
+                SFRPGModifier,
+                SFRPGModifierType,
+                SFRPGModifierTypes
+            },
+            Sheet: {
+                Base: ActorSheetSFRPG,
+                Character: ActorSheetSFRPGCharacter,
+                Npc: ActorSheetSFRPGNPC,
+                Drone: ActorSheetSFRPGDrone,
+                Starship: ActorSheetSFRPGStarship,
+                Vehicle: ActorSheetSFRPGVehicle
+            },
+            Type: ActorSFRPG
+        }
     };
 
     CONFIG.SFRPG = SFRPG;
@@ -200,7 +224,7 @@ Hooks.once("setup", function () {
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
         "abilities", "abilityActivationTypes", "acpEffectingArmorType", "actionTargets", "actionTargetsStarship", "actorSizes", "actorTypes", "alignments",
-            "alignmentsNPC", "allowedClasses", "ammunitionTypes", "armorProficiencies", "armorTypes", "augmentationSytems", "augmentationTypes",
+            "alignmentsNPC", "ammunitionTypes", "armorProficiencies", "armorTypes", "augmentationSytems", "augmentationTypes",
         "babProgression",
         "capacityUsagePer", "conditionTypes", "consumableTypes", "containableTypes", "currencies",
         "damageReductionTypes", "damageTypeOperators", "damageTypes", "distanceUnits",
@@ -211,7 +235,7 @@ Hooks.once("setup", function () {
         "kineticDamageTypes",
         "languages", "limitedUsePeriods",
         "maneuverability", "modifierArmorClassAffectedValues", "modifierEffectTypes", "modifierType", "modifierTypes",
-        "saveDescriptors", "saveProgression", "saves", "senses", "skillProficiencyLevels", "skills", "specialMaterials", "speeds", "spellAreaEffects", "spellAreaShapes", "spellLevels", "spellPreparationModes",
+        "saveDescriptors", "saveProgression", "saves", "senses", "skillProficiencyLevels", "skills", "specialMaterials", "speeds", "spellAreaEffects", "spellAreaShapes", "spellcastingClasses", "spellLevels", "spellPreparationModes",
             "starshipArcs", "starshipRoles", "starshipSizes", "starshipSystemStatus", "starshipWeaponClass", "starshipWeaponProperties", "starshipWeaponRanges", "starshipWeaponTypes",
         "vehicleCoverTypes", "vehicleSizes", "vehicleTypes",
         "weaponCategories", "weaponCriticalHitEffects", "weaponDamageTypes", "weaponProficiencies", "weaponProperties", "weaponPropertiesTooltips", "weaponTypes"
@@ -489,6 +513,11 @@ function setupHandlebars() {
         return false;
     });
 
+    Handlebars.registerHelper("isNaN", function (value) {
+        const valueNumber = Number(value);
+        return Number.isNaN(valueNumber);
+    });
+
     Handlebars.registerHelper('ellipsis', function (displayedValue, limit) {
         let str = displayedValue.toString();
         if (str.length <= limit) {
@@ -497,8 +526,7 @@ function setupHandlebars() {
         return str.substring(0, limit) + '…';
     });
 
-    Handlebars.registerHelper('getChildBulk', function (children) {
-        const bulk = computeCompoundBulkForItem(null, children);
+    Handlebars.registerHelper('formatBulk', function (bulk) {
         const reduced = bulk / 10;
         if (reduced < 0.1) {
             return "-";
@@ -646,4 +674,24 @@ function setupHandlebars() {
 
         return new Handlebars.SafeString(html);
     });
+
+    Handlebars.registerHelper('currencyFormat', function (value) {
+        const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
+        const moneyFormatter  = new Intl.NumberFormat(currencyLocale);
+        const formattedValue = moneyFormatter.format(value);
+        return formattedValue;
+    });
 }
+
+Hooks.on("renderSidebarTab", async (app, html) => {
+    if (app.options.id === "settings") {
+        const textToAdd = `<br/><a href="https://github.com/wildj79/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
+        const gameDetails = document.getElementById("game-details");
+        if (gameDetails) {
+            const systemSection = gameDetails.getElementsByClassName("system")[0];
+            if (systemSection) {
+                systemSection.innerHTML += textToAdd;
+            }
+        }
+    }
+});

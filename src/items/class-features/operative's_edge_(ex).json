@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -29,10 +30,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"uf8ADOAeBrtUkPVl\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Operative</a></p>\n                <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">Your diverse training as an operative grants you a +1 insight bonus to initiative checks and to skill checks. This bonus increases by 1 at 3rd level and every 4 levels thereafter.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.classes.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">Your diverse training as an operative grants you a +1 insight bonus to initiative checks and to skill checks. This bonus increases by 1 at 3rd level and every 4 levels thereafter.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +44,39 @@
       "value": null
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "f691e352-86a5-4a5b-bedc-08e1e5f9fc66",
+        "name": "Operative's Edge (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "all-skills",
+        "enabled": true,
+        "max": 1,
+        "modifier": "round((@classes.operative.levels + 3) / 4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "3bac934e-6fa4-4f35-908f-427af82f52df",
+        "name": "Operative's Edge (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "initiative",
+        "enabled": true,
+        "max": 1,
+        "modifier": "round((@classes.operative.levels + 3) / 4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +88,7 @@
       "value": null
     },
     "requirements": "1st Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -68,10 +105,5 @@
       "value": 0
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/operative_edge.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "img": "systems/sfrpg/icons/classes/operative_edge.png"
 }

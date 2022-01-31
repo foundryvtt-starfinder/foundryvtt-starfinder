@@ -265,6 +265,12 @@
                     "Label": "Vermögen:",
                     "Tooltip": "Diese Zahl stellt den Gesamtwert aller Gegenstände auf dieser Liste dar."
                 },
+                "Wealth": {
+                    "Currency": "{currency}: {amount}",
+                    "EstimatedLevel": "Estimated level by wealth: {estimatedLevel} (Up to {valueAtLevel})",
+                    "Expected": "Expected wealth by character level: {expectedWealth}",
+                    "Inventory": "Inventory: {amount}"
+                },
                 "Weapon": {
                     "AlreadyFullyLoaded": "The weapon {name} is already fully loaded.",
                     "NoAmmunitionAvailable": "You have no ammunition available for the weapon {name}.",
@@ -328,6 +334,9 @@
             "Skills": {
                 "RightClickHint": "Right click a skill for more properties."
             },
+            "Traits": {
+                "MagicalItems": "Worn Magical Items"
+            },
             "UI": {
                 "ErrorNoCharges": "{name} has no charges remaining."
             }
@@ -346,6 +355,7 @@
         "AlignmentTN": "Neutral",
         "AllowedClasses": {
             "Myst": "Aspirant",
+            "Precog": "Precog",
             "Tech": "Technomagier",
             "Wysh": "Hexer"
         },
@@ -1391,7 +1401,10 @@
             },
             "Identified": "Identifiziert",
             "Magic": {
-                "Details": "Magic Item Details"
+                "Details": "Magic Item Details",
+                "LimitedWear": "Magical Item Worn Limit",
+                "LimitedWearCheckbox": "This item counts towards the worn magical item limit.",
+                "LimitedWearExceeded": "You have equipped too many magical items!"
             },
             "MaxDex": "Max. Geschicklichkeitsmodifikator",
             "NotProficient": "Not Proficient",
@@ -1439,6 +1452,7 @@
                 "Details": "Zauberdetails",
                 "Dismissible": "Aufhebbar",
                 "Effects": "Zaubereffekt",
+                "ErrorNoUses": "Failed to cast this spell as it has no uses remaining. Click this message to dismiss it.",
                 "IsVariableLevel": "Is Variable Level?",
                 "IsVariableLevelYes": "Yes",
                 "Level": "Zaubergrad",
@@ -1640,6 +1654,7 @@
         "ModifierTypeLuck": "Glück",
         "ModifierTypeMorale": "Moral",
         "ModifierTypeRacial": "Volk",
+        "ModifierTypeResistance": "Resistance",
         "ModifierTypeTooltip": "Die Art des Modifikators. Wird verwendet, um herauszufinden, welcher Modifikator zu verwenden ist, wenn mehrere Modifikatoren vom gleichen Typ sind (normalerweise der höchste).",
         "ModifierTypeUntyped": "Nicht typisiert",
         "ModifierValueAffectedHeaderLabel": "Betroffener Wert",
@@ -1906,6 +1921,10 @@
                 },
                 "VehicleChaseHint": "Lege fest, welche Chatkarten für Kämpfe im Fahrzeugkampf angezeigt werden.",
                 "VehicleChaseName": "Fahrzeugverfolgungsjagden"
+            },
+            "CurrencyLocale": {
+                "Hint": "What locale to use for currency displays in inventory popups, etc.",
+                "Name": "Currency Locale"
             },
             "DamageRoundingAdvantage": {
                 "Hint": "In the case of fractional damage, alternate rounding up or down in the advantage of the attacker, or the defender.",

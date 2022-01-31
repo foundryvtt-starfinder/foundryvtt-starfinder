@@ -265,6 +265,12 @@
                     "Label": "Ricchezza:",
                     "Tooltip": "Questo numero rappresenta il valore totale degli ogggetti di questa lista."
                 },
+                "Wealth": {
+                    "Currency": "{currency}: {amount}",
+                    "EstimatedLevel": "Estimated level by wealth: {estimatedLevel} (Up to {valueAtLevel})",
+                    "Expected": "Expected wealth by character level: {expectedWealth}",
+                    "Inventory": "Inventory: {amount}"
+                },
                 "Weapon": {
                     "AlreadyFullyLoaded": "The weapon {name} is already fully loaded.",
                     "NoAmmunitionAvailable": "You have no ammunition available for the weapon {name}.",
@@ -328,6 +334,9 @@
             "Skills": {
                 "RightClickHint": "Clicca con il destro su una Abilità per ottenere altri dettagli."
             },
+            "Traits": {
+                "MagicalItems": "Worn Magical Items"
+            },
             "UI": {
                 "ErrorNoCharges": "{name} non ha cariche rimanenti!"
             }
@@ -346,6 +355,7 @@
         "AlignmentTN": "Neutrale Puro",
         "AllowedClasses": {
             "Myst": "Mistico",
+            "Precog": "Precog",
             "Tech": "Tecnomante",
             "Wysh": "Stregone del Velo"
         },
@@ -1391,7 +1401,10 @@
             },
             "Identified": "Identificato",
             "Magic": {
-                "Details": "Dettagli dell'Oggetto Magico"
+                "Details": "Dettagli dell'Oggetto Magico",
+                "LimitedWear": "Magical Item Worn Limit",
+                "LimitedWearCheckbox": "This item counts towards the worn magical item limit.",
+                "LimitedWearExceeded": "You have equipped too many magical items!"
             },
             "MaxDex": "Modificatore di Destrezza Massimo",
             "NotProficient": "Non Competente",
@@ -1439,6 +1452,7 @@
                 "Details": "Dettaglio dell' Incantesimo",
                 "Dismissible": "Revocabile",
                 "Effects": "Effetto dell' Incantesimo",
+                "ErrorNoUses": "Failed to cast this spell as it has no uses remaining. Click this message to dismiss it.",
                 "IsVariableLevel": "Is Variable Level?",
                 "IsVariableLevelYes": "Yes",
                 "Level": "Livello dell' Incantesimo",
@@ -1640,6 +1654,7 @@
         "ModifierTypeLuck": "Fortuna",
         "ModifierTypeMorale": "Morale",
         "ModifierTypeRacial": "Razza",
+        "ModifierTypeResistance": "Resistance",
         "ModifierTypeTooltip": "Il tipo di Modificatori. Permette di stabilire quale Modificatore utilizzare quando più Modificatori sono dello stesso tipo (solitamente il più alto)",
         "ModifierTypeUntyped": "Senza tipo",
         "ModifierValueAffectedHeaderLabel": "Valore interessato",
@@ -1906,6 +1921,10 @@
                 },
                 "VehicleChaseHint": "Modifica le carte della chat da combattimento che dovrebbero essere visualizzate durante gli inseguimenti tra veicoli.",
                 "VehicleChaseName": "Inseguimento tra Veicoli"
+            },
+            "CurrencyLocale": {
+                "Hint": "What locale to use for currency displays in inventory popups, etc.",
+                "Name": "Currency Locale"
             },
             "DamageRoundingAdvantage": {
                 "Hint": "In the case of fractional damage, alternate rounding up or down in the advantage of the attacker, or the defender.",

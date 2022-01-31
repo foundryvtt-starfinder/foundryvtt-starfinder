@@ -17,30 +17,44 @@ A new setting has been made available to do the rounding of split odd damage in 
 To make finding aliens a little easier, we've integrated the work started by rrenna and took it from there to finally provide you with an in-engine alien archive browser. You can filter by CR, HP, Size, Type, and, of course, name.
 
 ## Bugfixes and small improvements
+* Added a link to this changelist inside the settings tab.
 * Added base int and cha to drone chassis.
-* Added Mountain Eel from AA1 to Alien Archives.
-* Added spell resistance and activation/action to drone mods.
 * Added most, if not all, of the class features from Tech Revolution.
+* Added Mountain Eel from AA1 to Alien Archives.
+* Added precog as a spellcasting class to the spell settings. (Note: This does not mean precog is available as a compendium entry.)
+* Added resistance as a bonus type for modifiers, such as a "+2 Resistance bonus to saving throws against..".
+* Added spell resistance and activation/action to drone mods.
 * Assigned action target to weapons in the compendium.
+* Casting an innate spell now consumes that spell's uses if it has any.
+* Casting a spell now obeys the chat roll mode setting, instead of always rolling publicly.
 * Consumables no longer use up the entire quantity when used once.
 * Creating a new actor resource modifier no longer requires you to save, close, and re-open the modifier panel to enter the affected actor resource.
 * Creating a new player character or drone sheet now automatically sets the token linked for that sheet. This does not apply to NPCs, Starships, and Vehicles.
+* Currency format is now a client-side configurable locale that can be changed in the system settings, it defaults to en-US.
 * Disabled modifiers no longer affect their actor's spell save DC.
 * Disabling modifiers on the roll dialog are remembered for future rolls again.
+* Dropping items as a non-GM player with create token rights no longer fails.
 * Initiative rolls no longer ignore the roll mode setting of the roll dialog.
+* Introducing damage reduction and energy resistance modifiers, these do exactly what's on the can; add DR and ER to an actor.
 * Localized roll dialogs now properly respond to the Critical damage button. (Fixes #290 and #500)
 * Nested containers now list their contained wealth correctly.
 * NPCs can now access their level as @details.level.value as well as @details.cr, to aid with modifier consistency.
+* Magic items now have a checkbox defining whether or not they count towards the worn magical items limit.
 * Reloading a weapon that has a short description will now roll the short description into chat instead.
 * Rolls that include the -4 penalty when attacking with a weapon the owning character is not proficient with now explains the -4 is caused by the lack of proficiency.
+* Saving throws on consumables are now displayed when the consumable is used.
 * Several compendium links from various compendium items to various other compendium items were updated to point to the correct item.
 * Special materials can now be selected on armor, ammunition, shields, weapons, starship armor, starship defensive countermeasures, starship sensors, starship thrusters, and starship weapons.
 * Starship critical damage rolls no longer double their damage. Deflector shields still take 1 extra damage from a critical hit however.
+* The max dex allowed by armor is now available as an attribute for player characters as @attributes.eac.maxDex or @attributes.kac.maxDex.
 * The keyAbilityMod property on a PC sheet's class attributes is now updated correctly. (e.g. @classes.mechanic.keyAbilityMod)
 * The token configuration of Starships and Vehicles that contained a crew can now be opened again.
 * Updated a few class features with proper modifier support.
 * Updated all of the spells in the compendium.
 * Updated the compendium definitions to match Foundry v9 requirements.
+* Updated several operative class features to include proper and correct modifier support.
+* Updated several vanguard class features to include proper and correct modifier support.
+* Wealth label on the inventory panel now displays how it was calculated, as well as the wealth by character level and estimated level by wealth values, following CRB pg. 391.
 
 * Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.
 

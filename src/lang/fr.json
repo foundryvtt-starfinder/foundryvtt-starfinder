@@ -265,6 +265,12 @@
                     "Label": "Richesse:",
                     "Tooltip": "Ce nombre représente la valeur totale de la somme de tous les éléments de cette liste."
                 },
+                "Wealth": {
+                    "Currency": "{currency}: {amount}",
+                    "EstimatedLevel": "Estimated level by wealth: {estimatedLevel} (Up to {valueAtLevel})",
+                    "Expected": "Expected wealth by character level: {expectedWealth}",
+                    "Inventory": "Inventory: {amount}"
+                },
                 "Weapon": {
                     "AlreadyFullyLoaded": "The weapon {name} is already fully loaded.",
                     "NoAmmunitionAvailable": "You have no ammunition available for the weapon {name}.",
@@ -328,6 +334,9 @@
             "Skills": {
                 "RightClickHint": "Cliquez droit sur une compétence pour obtenir plus de propriétés."
             },
+            "Traits": {
+                "MagicalItems": "Worn Magical Items"
+            },
             "UI": {
                 "ErrorNoCharges": "{name} plus de charge disponible."
             }
@@ -346,6 +355,7 @@
         "AlignmentTN": "Neutre absolu",
         "AllowedClasses": {
             "Myst": "Mystique",
+            "Precog": "Precog",
             "Tech": "Technomancien",
             "Wysh": "Witchwarper"
         },
@@ -1391,7 +1401,10 @@
             },
             "Identified": "Identifié",
             "Magic": {
-                "Details": "Détails de l'Elément Magique"
+                "Details": "Détails de l'Elément Magique",
+                "LimitedWear": "Magical Item Worn Limit",
+                "LimitedWearCheckbox": "This item counts towards the worn magical item limit.",
+                "LimitedWearExceeded": "You have equipped too many magical items!"
             },
             "MaxDex": "Modificateur de Dextérité Maximum",
             "NotProficient": "Non maîtrisé",
@@ -1439,6 +1452,7 @@
                 "Details": "Détails du Sort",
                 "Dismissible": "Révocable",
                 "Effects": "Effets du Sort",
+                "ErrorNoUses": "Failed to cast this spell as it has no uses remaining. Click this message to dismiss it.",
                 "IsVariableLevel": "Is Variable Level?",
                 "IsVariableLevelYes": "Yes",
                 "Level": "Niveau de Sort",
@@ -1640,6 +1654,7 @@
         "ModifierTypeLuck": "Chance",
         "ModifierTypeMorale": "Moral",
         "ModifierTypeRacial": "Racial",
+        "ModifierTypeResistance": "Resistance",
         "ModifierTypeTooltip": "Le type des modificateurs. Utilisé pour déterminer quel modificateur utiliser lorsque plusieurs modificateurs sont du même type (généralement le plus élevé)",
         "ModifierTypeUntyped": "Sans Type",
         "ModifierValueAffectedHeaderLabel": "Valeur affectée",
@@ -1906,6 +1921,10 @@
                 },
                 "VehicleChaseHint": "Modifier les cartes de chat de combat qui doivent être affichées pendant les poursuites entre véhicules.",
                 "VehicleChaseName": "Poursuite entre véhicules"
+            },
+            "CurrencyLocale": {
+                "Hint": "What locale to use for currency displays in inventory popups, etc.",
+                "Name": "Currency Locale"
             },
             "DamageRoundingAdvantage": {
                 "Hint": "In the case of fractional damage, alternate rounding up or down in the advantage of the attacker, or the defender.",

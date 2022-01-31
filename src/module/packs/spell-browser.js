@@ -57,7 +57,7 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
             },
             classes: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterClass"),
-                content: SFRPG.allowedClasses,
+                content: SFRPG.spellcastingClasses,
                 filter: (element, filters) => { return this._filterClasses(element, filters); },
                 type: "multi-select"
             },

@@ -68,10 +68,10 @@
                     </div>
 
                     <div class="item-detail modifier-mod">
-                        {{#if (eq modifier.modifierType "constant")}}
-                        {{ellipsis (numberFormat modifier.modifier decimals=0 sign=true) 10}}
-                        {{else}}
+                        {{#if (or (ne modifier.modifierType "constant") (isNaN modifier.modifier))}}
                         {{ellipsis modifier.modifier 12}}
+                        {{else}}
+                        {{ellipsis (numberFormat modifier.modifier decimals=0 sign=true) 10}}
                         {{/if}}
                     </div>
                     <div class="item-detail modifier-type">

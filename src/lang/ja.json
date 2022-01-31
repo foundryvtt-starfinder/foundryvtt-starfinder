@@ -265,6 +265,12 @@
                     "Label": "財:",
                     "Tooltip": "この数値は､一覧にある全てのアイテムの価値を表します。"
                 },
+                "Wealth": {
+                    "Currency": "{currency}: {amount}",
+                    "EstimatedLevel": "Estimated level by wealth: {estimatedLevel} (Up to {valueAtLevel})",
+                    "Expected": "Expected wealth by character level: {expectedWealth}",
+                    "Inventory": "Inventory: {amount}"
+                },
                 "Weapon": {
                     "AlreadyFullyLoaded": "The weapon {name} is already fully loaded.",
                     "NoAmmunitionAvailable": "You have no ammunition available for the weapon {name}.",
@@ -328,6 +334,9 @@
             "Skills": {
                 "RightClickHint": "Right click a skill for more properties."
             },
+            "Traits": {
+                "MagicalItems": "Worn Magical Items"
+            },
             "UI": {
                 "ErrorNoCharges": "{name} has no charges remaining."
             }
@@ -346,6 +355,7 @@
         "AlignmentTN": "真なる中立",
         "AllowedClasses": {
             "Myst": "Mystic",
+            "Precog": "Precog",
             "Tech": "Technomancer",
             "Wysh": "Witchwarper"
         },
@@ -1391,7 +1401,10 @@
             },
             "Identified": "Identified",
             "Magic": {
-                "Details": "Magic Item Details"
+                "Details": "Magic Item Details",
+                "LimitedWear": "Magical Item Worn Limit",
+                "LimitedWearCheckbox": "This item counts towards the worn magical item limit.",
+                "LimitedWearExceeded": "You have equipped too many magical items!"
             },
             "MaxDex": "Max. Dexterity Modifier",
             "NotProficient": "Not Proficient",
@@ -1439,6 +1452,7 @@
                 "Details": "Spell Details",
                 "Dismissible": "Dismissible",
                 "Effects": "Spell Effects",
+                "ErrorNoUses": "Failed to cast this spell as it has no uses remaining. Click this message to dismiss it.",
                 "IsVariableLevel": "Is Variable Level?",
                 "IsVariableLevelYes": "Yes",
                 "Level": "Spell Level",
@@ -1640,6 +1654,7 @@
         "ModifierTypeLuck": "幸運 (Luck)",
         "ModifierTypeMorale": "士気 (Morale)",
         "ModifierTypeRacial": "種族 (Racial)",
+        "ModifierTypeResistance": "Resistance",
         "ModifierTypeTooltip": "修正値のタイプ。複数の修正値が同じタイプ(通常は最大)の場合、使用する修正値を判別するために使用されます",
         "ModifierTypeUntyped": "定形外 (Untyped)",
         "ModifierValueAffectedHeaderLabel": "影響する値",
@@ -1906,6 +1921,10 @@
                 },
                 "VehicleChaseHint": "Change which combat chat cards should be displayed during vehicle chases.",
                 "VehicleChaseName": "Vehicle chases"
+            },
+            "CurrencyLocale": {
+                "Hint": "What locale to use for currency displays in inventory popups, etc.",
+                "Name": "Currency Locale"
             },
             "DamageRoundingAdvantage": {
                 "Hint": "In the case of fractional damage, alternate rounding up or down in the advantage of the attacker, or the defender.",
