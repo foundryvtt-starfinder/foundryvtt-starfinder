@@ -19,6 +19,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 ## Bugfixes and small improvements
 * Activating a feat now obeys the chat roll mode setting, instead of always rolling publicly.
 * Added a link to this changelist inside the settings tab.
+* Added all the magic and hybrid items from Galactic Magic.
 * Added base int and cha to drone chassis.
 * Added most, if not all, of the class features from Tech Revolution.
 * Added Mountain Eel from AA1 to Alien Archives.
