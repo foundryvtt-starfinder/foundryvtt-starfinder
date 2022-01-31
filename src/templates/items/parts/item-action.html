@@ -12,8 +12,6 @@
 </div>
 {{#if itemData.actionType}}
 
-{{#if (ne itemData.actionType "save")}}
-
 {{!-- Action Target --}}
 <div class="form-group select" {{createTippy title="SFRPG.Items.Action.ActionTarget.Title" subtitle="SFRPG.Items.Action.ActionTarget.Tooltip"}}>
     <label>{{ localize "SFRPG.Items.Action.ActionTarget.Title" }}</label>
@@ -128,8 +126,6 @@
     {{/each}}
 </ol>
 
-{{#if (ne itemData.actionType "heal")}}
-
 <span>&nbsp;</span>
 
 <h4 class="form-header">{{ localize "SFRPG.Items.Action.CriticalDamageHeader" }}</h4>
@@ -196,9 +192,6 @@
         <input type="text" name="data.formula" value="{{itemData.formula}}" placeholder="Formula"/>
     </div>
 </div>
-
-{{/if}}
-{{/if}}
 
 {{!-- Saving Throw --}}
 <div class="form-group input-select">

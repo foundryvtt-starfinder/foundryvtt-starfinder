@@ -3,8 +3,6 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function (engine) {
     engine.closures.add("calculateEncumbrance", (fact, context) => {
         const data = fact.data;
-        const actor = fact.actor;
-        const actorData = actor.data.data;
 
         let tooltip = [];
         if (data.encumbrance) {
@@ -80,21 +78,6 @@ export default function (engine) {
             tooltip: encumbrance.tooltip,
             rolledMods: encumbrance.rolledMods
         };
-
-        const _computeEncumbrance = (totalWeight, actorData) => {
-            const enc = {
-                max: actorData.attributes.encumbrance.max,
-                tooltip: actorData.attributes.encumbrance.tooltip,
-                value: totalWeight
-            };
-    
-            enc.pct = Math.min(enc.value * 100 / enc.max, 99);
-            enc.encumbered = enc.pct > 50;
-            return enc;
-        };
-
-        actor.data.encumbrance = _computeEncumbrance(actor.data.bulk, actorData);
-        data.encumbrance = actor.data.encumbrance;
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

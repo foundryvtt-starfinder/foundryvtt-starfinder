@@ -11,7 +11,7 @@ import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
-import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
+import { computeCompoundBulkForItem, initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
 import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
@@ -526,7 +526,8 @@ function setupHandlebars() {
         return str.substring(0, limit) + '…';
     });
 
-    Handlebars.registerHelper('formatBulk', function (bulk) {
+    Handlebars.registerHelper('getChildBulk', function (children) {
+        const bulk = computeCompoundBulkForItem(null, children);
         const reduced = bulk / 10;
         if (reduced < 0.1) {
             return "-";
