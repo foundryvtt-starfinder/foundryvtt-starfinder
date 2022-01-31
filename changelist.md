@@ -17,6 +17,7 @@ A new setting has been made available to do the rounding of split odd damage in 
 To make finding aliens a little easier, we've integrated the work started by rrenna and took it from there to finally provide you with an in-engine alien archive browser. You can filter by CR, HP, Size, Type, and, of course, name.
 
 ## Bugfixes and small improvements
+* Activating a feat now obeys the chat roll mode setting, instead of always rolling publicly.
 * Added a link to this changelist inside the settings tab.
 * Added base int and cha to drone chassis.
 * Added most, if not all, of the class features from Tech Revolution.
