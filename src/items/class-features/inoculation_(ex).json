@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -29,10 +30,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"On2ZrPJTe8FURsXY\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Operative Exploit</a></p>\n                <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl10_LabelName\">You’ve trained to resist various chemical and biological weapons, toxins, and pathogens you come across in the course of your missions. You add your operative’s edge bonus to Fortitude saves against poison and disease.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl10_LabelName\">You&rsquo;ve trained to resist various chemical and biological weapons, toxins, and pathogens you come across in the course of your missions. You add your operative&rsquo;s edge bonus to Fortitude saves against poison and disease.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +44,24 @@
       "value": null
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "0b96de02-c73f-4785-8dcf-a50ccff3a391",
+        "name": "Inoculation (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "save",
+        "enabled": false,
+        "max": 1,
+        "modifier": "round((@classes.operative.levels + 3) / 4)",
+        "modifierType": "formula",
+        "notes": "Fortitude saves against poison and disease.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fort"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +73,7 @@
       "value": null
     },
     "requirements": "2nd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -68,10 +90,5 @@
       "value": 0
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/inoculation.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "img": "systems/sfrpg/icons/classes/inoculation.png"
 }

@@ -20,7 +20,7 @@
       "wysh": true
     },
     "area": {
-      "effect": "",
+      "effect": "burst",
       "shape": "sphere",
       "units": "ft",
       "value": 5
@@ -37,14 +37,27 @@
         {
           "formula": "1d3",
           "operator": "",
-          "types": {}
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p style=\"text-align: justify;\">When you cast this spell, choose acid, cold, electricity, fire, or sonic. The spell gains that descriptor. You summon a minor hazard from an alternate reality, creating a splash of acid rain, a blast of freezing air, a static electric discharge, a burst of fire, or a roar of thunder. Each creature in the area must succeed at a Reflex save or take 1d3 damage of the chosen type.</p>"
+      "value": "<p>When you cast this spell, choose acid, cold, electricity, fire, or sonic. The spell gains that descriptor. You summon a minor hazard from an alternate reality, creating a splash of acid rain, a blast of freezing air, a static electric discharge, a burst of fire, or a roar of thunder. Each creature in the area must succeed at a Reflex save or take 1d3 damage of the chosen type.</p>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -53,6 +66,8 @@
       "value": "1 round"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 0,
     "materials": {
       "consumed": false,
@@ -66,11 +81,12 @@
       "prepared": false
     },
     "range": {
-      "additional": "5",
+      "additional": "5 ft.",
       "per": "2 levels",
       "units": "ft",
       "value": 25
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "",
@@ -90,6 +106,10 @@
     }
   },
   "effects": [],
-  "flags": {},
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.sfrpg.spells.lop1wIJ0m6dbuN6I"
+    }
+  },
   "img": "systems/sfrpg/icons/spells/hazard.png"
 }

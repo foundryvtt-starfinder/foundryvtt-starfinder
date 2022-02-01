@@ -9,7 +9,7 @@ The action target will have to be manually updated on any items already on chara
 ### Damage System updates
 Starfinder v0.13 introduced a major damage system overhaul. A small amount of functionality was still pending, and have now been wrapped up. These changes now add the damage type to the damage roll's text, making it easier than ever to see which damage types your damage applies. Additionally, items can now support multiple damage sections, so you can either pick one, or multiple. This is particularly handy for spells like Call Cosmos which causes separate cold and fire damage rolls, or items with fusions that change a damage type to your choice. Now, the UI will allow you to check which damage type you want to roll.
 
-Finally, applying damage with damage types will now try to properly address vulnerabilities, resistances, and immunities. Please take care that this does not cover all edge cases of the damage, but the vast majority of damage rolls should function properly. Future work is expected with regards to how edge cases can be tackled, feel free to give feedback on the Discord channel.
+Finally, applying damage with damage types will now try to properly address vulnerabilities, resistances, and immunities. Please take care that this does not cover all edge cases of the damage, but the vast majority of damage rolls should function properly. Please be aware this does not work for the old style NPCs either. You will have to upgrade your NPCs to the new style to make it work. Future work is expected with regards to how edge cases can be tackled, feel free to give feedback on the Discord channel.
 
 A new setting has been made available to do the rounding of split odd damage in the advantage of the attacker or the defender. For example, if you take 9 acid and piercing damage, you would take 4.5 acid and 4.5 piercing damage, with one rounded up and one rounded down. Now, if you had 5 acid resistance, the rounding of the split damage could mean that if acid is rounded up to 5, and piercing to 4 (advantage defender), you would take 4 damage, while if it was the other way around (advantage attacker), it would round acid to 4 and piercing to 5, and you would take 5 damage. The default setting is advantage attacker, but this can be changed in the settings screen.
 
@@ -17,26 +17,45 @@ A new setting has been made available to do the rounding of split odd damage in 
 To make finding aliens a little easier, we've integrated the work started by rrenna and took it from there to finally provide you with an in-engine alien archive browser. You can filter by CR, HP, Size, Type, and, of course, name.
 
 ## Bugfixes and small improvements
+* Activating a feat now obeys the chat roll mode setting, instead of always rolling publicly.
+* Added a link to this changelist inside the settings tab.
+* Added all the magic and hybrid items from Galactic Magic.
 * Added base int and cha to drone chassis.
+* Added most, if not all, of the class features from Tech Revolution.
 * Added Mountain Eel from AA1 to Alien Archives.
+* Added precog as a spellcasting class to the spell settings. (Note: This does not mean precog is available as a compendium entry.)
+* Added resistance as a bonus type for modifiers, such as a "+2 Resistance bonus to saving throws against..".
 * Added spell resistance and activation/action to drone mods.
-* Added some, if not most, of the class features from Tech Revolution.
 * Assigned action target to weapons in the compendium.
+* Casting an innate spell now consumes that spell's uses if it has any.
+* Casting a spell now obeys the chat roll mode setting, instead of always rolling publicly.
 * Consumables no longer use up the entire quantity when used once.
+* Creating a new actor resource modifier no longer requires you to save, close, and re-open the modifier panel to enter the affected actor resource.
 * Creating a new player character or drone sheet now automatically sets the token linked for that sheet. This does not apply to NPCs, Starships, and Vehicles.
+* Currency format is now a client-side configurable locale that can be changed in the system settings, it defaults to en-US.
 * Disabled modifiers no longer affect their actor's spell save DC.
 * Disabling modifiers on the roll dialog are remembered for future rolls again.
+* Dropping items as a non-GM player with create token rights no longer fails.
 * Initiative rolls no longer ignore the roll mode setting of the roll dialog.
+* Introducing damage reduction and energy resistance modifiers, these do exactly what's on the can; add DR and ER to an actor.
 * Localized roll dialogs now properly respond to the Critical damage button. (Fixes #290 and #500)
 * Nested containers now list their contained wealth correctly.
 * NPCs can now access their level as @details.level.value as well as @details.cr, to aid with modifier consistency.
+* Magic items now have a checkbox defining whether or not they count towards the worn magical items limit.
 * Reloading a weapon that has a short description will now roll the short description into chat instead.
+* Rolls that include the -4 penalty when attacking with a weapon the owning character is not proficient with now explains the -4 is caused by the lack of proficiency.
 * Several compendium links from various compendium items to various other compendium items were updated to point to the correct item.
+* Special materials can now be selected on armor, ammunition, shields, weapons, starship armor, starship defensive countermeasures, starship sensors, starship thrusters, and starship weapons.
 * Starship critical damage rolls no longer double their damage. Deflector shields still take 1 extra damage from a critical hit however.
+* The max dex allowed by armor is now available as an attribute for player characters as @attributes.eac.maxDex or @attributes.kac.maxDex.
 * The keyAbilityMod property on a PC sheet's class attributes is now updated correctly. (e.g. @classes.mechanic.keyAbilityMod)
 * The token configuration of Starships and Vehicles that contained a crew can now be opened again.
 * Updated a few class features with proper modifier support.
+* Updated all of the spells in the compendium.
 * Updated the compendium definitions to match Foundry v9 requirements.
+* Updated several operative class features to include proper and correct modifier support.
+* Updated several vanguard class features to include proper and correct modifier support.
+* Wealth label on the inventory panel now displays how it was calculated, as well as the wealth by character level and estimated level by wealth values, following CRB pg. 391.
 
 * Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.
 

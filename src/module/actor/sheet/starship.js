@@ -275,7 +275,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
         }
-        data.inventoryValue = Math.floor(totalWealth);
+        data.wealth = ActorSheetSFRPG.computeWealthForActor(this.actor, totalWealth);
 
         const weapons = [].concat(forward, starboard, port, aft, turret);
         for (const weapon of weapons) {

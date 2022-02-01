@@ -234,7 +234,7 @@ export class DiceSFRPG {
 
             const tags = [];
             if (rollOptions?.actionTarget) {
-                tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: SFRPG.actionTargets[rollOptions.actionTarget]}) });
+                tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}) });
             }
 
             const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
@@ -298,7 +298,7 @@ export class DiceSFRPG {
 
                 messageData.content = await roll.render({ htmlData: htmlData });
                 if (rollOptions?.actionTarget) {
-                    messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: SFRPG.actionTargets[rollOptions.actionTarget]}));
+                    messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
                 }
 
                 ChatMessage.create(messageData);
@@ -654,6 +654,15 @@ export class DiceSFRPG {
                         } catch { }
                     }
                 }
+
+                const specialMaterials = itemContext.entity.data.data.specialMaterials;
+                if (specialMaterials) {
+                    for (const [material, isEnabled] of Object.entries(specialMaterials)) {
+                        if (isEnabled) {
+                            tags.push({tag: material, text: SFRPG.specialMaterials[material]});
+                        }
+                    }
+                }
             }
 
             const isCritical = (button === "critical");
@@ -743,6 +752,10 @@ export class DiceSFRPG {
                     damageTypeString: damageTypeString
                 };
 
+                if (itemContext && itemContext.entity.data.data.specialMaterials) {
+                    customData.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                }
+
                 try {
                     useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
                 } catch (error) {
@@ -773,6 +786,10 @@ export class DiceSFRPG {
                             types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
                         }
                     };
+
+                    if (itemContext && itemContext.entity.data.data.specialMaterials) {
+                        messageData.flags.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                    }
                 }
                 
                 ChatMessage.create(messageData);

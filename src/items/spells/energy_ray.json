@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "eac",
     "actionType": "rsak",
     "activation": {
       "type": "action",
@@ -22,7 +23,7 @@
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -35,21 +36,29 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d3",
-          "operator": "or",
           "types": {
             "acid": true,
+            "bludgeoning": false,
             "cold": true,
             "electricity": true,
-            "fire": true
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p style=\"text-align: justify;\">When you cast this spell, choose acid, cold, electricity, or fire; the spell gains that descriptor. You fire a ray at the target, and you must make a ranged attack against its EAC. On a hit, the ray deals 1d3 damage of the chosen energy type.</p>"
+      "value": "<p>When you cast this spell, choose acid, cold, electricity, or fire; the spell gains that descriptor. You fire a ray at the target, and you must make a ranged attack against its EAC. On a hit, the ray deals 1d3 damage of the chosen energy type.</p>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -58,6 +67,8 @@
       "value": "instantaneous"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 0,
     "materials": {
       "consumed": false,
@@ -76,9 +87,10 @@
       "units": "ft",
       "value": 25
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "school": "con",
@@ -95,6 +107,10 @@
     }
   },
   "effects": [],
-  "flags": {},
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.sfrpg.spells.xNs98gJ8XLhmVyR3"
+    }
+  },
   "img": "systems/sfrpg/icons/spells/energy_ray.png"
 }

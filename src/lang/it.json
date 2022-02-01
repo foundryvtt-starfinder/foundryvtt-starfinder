@@ -265,6 +265,12 @@
                     "Label": "Ricchezza:",
                     "Tooltip": "Questo numero rappresenta il valore totale degli ogggetti di questa lista."
                 },
+                "Wealth": {
+                    "Currency": "{currency}: {amount}",
+                    "EstimatedLevel": "Estimated level by wealth: {estimatedLevel} (Up to {valueAtLevel})",
+                    "Expected": "Expected wealth by character level: {expectedWealth}",
+                    "Inventory": "Inventory: {amount}"
+                },
                 "Weapon": {
                     "AlreadyFullyLoaded": "The weapon {name} is already fully loaded.",
                     "NoAmmunitionAvailable": "You have no ammunition available for the weapon {name}.",
@@ -280,7 +286,9 @@
                     "AllSpeeds": "All Speeds",
                     "BAB": "BAB",
                     "BaseAttackBonus": "Bonus di Attacco Base",
+                    "DamageReduction": "Damage Reduction",
                     "Encumbrance": "Capacità di Trasporto",
+                    "EnergyResistance": "Energy Resistance",
                     "HP": "PV",
                     "Hitpoints": "Punti Vita",
                     "MeleeAttackDamage": "Danni in mischia",
@@ -310,8 +318,14 @@
                 "Tooltips": {
                     "BonusSkillpoints": "{type} Bonus: {mod} ({source})",
                     "ClassSkillpoints": "{class} Bonus dell' Abilità: {total}",
+                    "DeleteModifier": "Delete modifier",
+                    "DeleteModifierTooltip": "Delete this modifier.",
+                    "EditModifier": "Edit modifier",
+                    "EditModifierTooltip": "Open the modifier editor for this modifier.",
                     "SkillRank": "{type} Gradi: {mod} ({source})",
-                    "Speed": "{speed}: {type} {mod} ({source})"
+                    "Speed": "{speed}: {type} {mod} ({source})",
+                    "ToggleModifier": "Toggle modifier",
+                    "ToggleModifierTooltip": "Toggle a modifier on and off. Disabled modifiers do not affect the character."
                 },
                 "UI": {
                     "LongFormula": "Formula lunga"
@@ -319,6 +333,9 @@
             },
             "Skills": {
                 "RightClickHint": "Clicca con il destro su una Abilità per ottenere altri dettagli."
+            },
+            "Traits": {
+                "MagicalItems": "Worn Magical Items"
             },
             "UI": {
                 "ErrorNoCharges": "{name} non ha cariche rimanenti!"
@@ -338,6 +355,7 @@
         "AlignmentTN": "Neutrale Puro",
         "AllowedClasses": {
             "Myst": "Mistico",
+            "Precog": "Precog",
             "Tech": "Tecnomante",
             "Wysh": "Stregone del Velo"
         },
@@ -665,6 +683,7 @@
                 "Acid": "Acido",
                 "Bludgeoning": "Contundente",
                 "Cold": "Freddo",
+                "Custom": "Custom",
                 "Electricity": "Elettrico",
                 "Fire": "Fuoco",
                 "Force": "Forza",
@@ -1215,6 +1234,8 @@
                     "KAC8": "KAC +8",
                     "None": "No target",
                     "Other": "Other",
+                    "StarshipAC": "AC",
+                    "StarshipTL": "TL",
                     "Tag": "Targets: {actionTarget}",
                     "Title": "Action Target",
                     "Tooltip": "If this action targets a specific property, you can configure that here."
@@ -1380,7 +1401,10 @@
             },
             "Identified": "Identificato",
             "Magic": {
-                "Details": "Dettagli dell'Oggetto Magico"
+                "Details": "Dettagli dell'Oggetto Magico",
+                "LimitedWear": "Magical Item Worn Limit",
+                "LimitedWearCheckbox": "This item counts towards the worn magical item limit.",
+                "LimitedWearExceeded": "You have equipped too many magical items!"
             },
             "MaxDex": "Modificatore di Destrezza Massimo",
             "NotProficient": "Non Competente",
@@ -1415,6 +1439,9 @@
                 "WeaponClass": "Classe dell'arma",
                 "WeaponStatus": "Status dell'arma"
             },
+            "SpecialMaterials": {
+                "Title": "Special Materials"
+            },
             "Spell": {
                 "AllowedClasses": "Classi Permesse",
                 "Casting": "Lancio dell' Incantesimo",
@@ -1425,6 +1452,7 @@
                 "Details": "Dettaglio dell' Incantesimo",
                 "Dismissible": "Revocabile",
                 "Effects": "Effetto dell' Incantesimo",
+                "ErrorNoUses": "Failed to cast this spell as it has no uses remaining. Click this message to dismiss it.",
                 "IsVariableLevel": "Is Variable Level?",
                 "IsVariableLevelYes": "Yes",
                 "Level": "Livello dell' Incantesimo",
@@ -1626,6 +1654,7 @@
         "ModifierTypeLuck": "Fortuna",
         "ModifierTypeMorale": "Morale",
         "ModifierTypeRacial": "Razza",
+        "ModifierTypeResistance": "Resistance",
         "ModifierTypeTooltip": "Il tipo di Modificatori. Permette di stabilire quale Modificatore utilizzare quando più Modificatori sono dello stesso tipo (solitamente il più alto)",
         "ModifierTypeUntyped": "Senza tipo",
         "ModifierValueAffectedHeaderLabel": "Valore interessato",
@@ -1893,6 +1922,10 @@
                 "VehicleChaseHint": "Modifica le carte della chat da combattimento che dovrebbero essere visualizzate durante gli inseguimenti tra veicoli.",
                 "VehicleChaseName": "Inseguimento tra Veicoli"
             },
+            "CurrencyLocale": {
+                "Hint": "What locale to use for currency displays in inventory popups, etc.",
+                "Name": "Currency Locale"
+            },
             "DamageRoundingAdvantage": {
                 "Hint": "In the case of fractional damage, alternate rounding up or down in the advantage of the attacker, or the defender.",
                 "Name": "Damage Rounding Advantage",
@@ -2134,6 +2167,21 @@
         "SortByFilterName": "Name",
         "Space": "Spazio",
         "Special": "Speciale",
+        "SpecialMaterials": {
+            "Abysium": "Abysium",
+            "Adamantine": "Adamantine Alloy",
+            "ColdIron": "Cold Iron",
+            "Diatha": "Diatha",
+            "Djezet": "Djezet",
+            "Horacalcum": "Horacalcum",
+            "Inubrix": "Inubrix",
+            "Khefak": "Khefak Armor",
+            "Noqual": "Noqual",
+            "PurpleCores": "Purple Cores",
+            "Siccatite": "Siccatite",
+            "Silver": "Silver",
+            "Voidglass": "Voidglass"
+        },
         "SpecialTraits": "Tratti Speciali",
         "Speed": "Velocità",
         "SpeedSpecial": "Mov. Speciale",

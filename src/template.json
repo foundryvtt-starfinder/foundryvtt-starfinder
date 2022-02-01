@@ -1332,13 +1332,16 @@
                 "costMultipliedBySize": false,
                 "pcu": null,
                 "isPowered": true
+            },
+            "specialMaterials": {
+                "specialMaterials": {}
             }
         },
         "asi": {
             "abilities": {}
         },
         "weapon": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container", "specialMaterials"],
             "attributes": {
                 "sturdy": true
             },
@@ -1364,7 +1367,7 @@
             }
         },
         "equipment": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container", "specialMaterials"],
             "attributes": {
                 "sturdy": true
             },
@@ -1556,6 +1559,7 @@
             },
             "allowedClasses": {
                 "myst": false,
+                "precog": false,
                 "tech": false,
                 "wysh": false
             },
@@ -1602,11 +1606,13 @@
         },
         "hybrid": {
             "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
-            "hands": 0
+            "hands": 0,
+            "limitedWear": false
         },
         "magic": {
             "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
-            "hands": 0
+            "hands": 0,
+            "limitedWear": false
         },
         "fusion": {
             "templates": ["itemDescription", "physicalItem", "modifiers", "container"],
@@ -1618,7 +1624,7 @@
             "armorType": "any"
         },
         "ammunition": {
-            "templates": ["itemDescription", "physicalItem"],
+            "templates": ["itemDescription", "physicalItem", "specialMaterials"],
             "ammunitionType": "",
             "useCapacity": false,
             "capacity": {
@@ -1652,7 +1658,7 @@
             "turnDistancePenalty": 0
         },
         "starshipArmor": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "armorBonus": 0,
             "targetLockPenalty": 0,
             "turnDistancePenalty": 0
@@ -1666,7 +1672,7 @@
             "templates": ["starshipComponent", "itemDescription", "modifiers"]
         },
         "starshipDefensiveCountermeasure": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "targetLockBonus": 0
         },
         "starshipDriftEngine": {
@@ -1734,7 +1740,7 @@
             "templates": ["starshipComponent", "itemDescription", "modifiers"]
         },
         "starshipPowerCore": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "supportedSizes": []
         },
         "starshipReinforcedBulkhead": {
@@ -1745,7 +1751,7 @@
             "templates": ["starshipComponent", "itemDescription", "modifiers"]
         },
         "starshipSensor": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "modifier": 0,
             "range": ""
         },
@@ -1759,7 +1765,7 @@
             "targetLockBonus": 0
         },
         "starshipThruster": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "supportedSize": "",
             "speed": 0,
             "pilotingModifier": 0,
@@ -1767,7 +1773,8 @@
             "isEnabled": true
         },
         "starshipWeapon": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
+            "actionTarget": "",
             "range": "short",
             "class": "light",
             "weaponType": "direct",
@@ -1860,7 +1867,7 @@
             "spellResistance": 0
         },
         "shield": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container", "specialMaterials"],
             "attributes": {
                 "sturdy": true
             },

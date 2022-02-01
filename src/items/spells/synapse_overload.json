@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "msak",
     "activation": {
       "type": "action",
@@ -22,7 +23,7 @@
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -35,16 +36,29 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "18d8",
-          "operator": "",
-          "types": {}
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p style=\"text-align: justify;\">To affect the target, you must hit with a melee attack against its EAC; you can add your key ability score modifier to this attack roll instead of your Strength modifier if it is higher. You then overload the target’s mind, causing the target’s synapses to violently trigger. The target takes 18d8 damage and is @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} for 1 minute. A target can negate the @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} effect with a successful Fortitude saving throw, but still takes full damage.<br><br>Casting this spell doesn’t provoke attacks of opportunity.</p>"
+      "value": "<p>To affect the target, you must hit with a melee attack against its EAC; you can add your key ability score modifier to this attack roll instead of your Strength modifier if it is higher. You then overload the target&rsquo;s mind, causing the target&rsquo;s synapses to violently trigger. The target takes 18d8 damage and is @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} for 1 minute. A target can negate the @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} effect with a successful Fortitude saving throw, but still takes full damage.</p>\n<p>Casting this spell doesn&rsquo;t provoke attacks of opportunity.</p>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -53,6 +67,8 @@
       "value": "instantaneous"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 5,
     "materials": {
       "consumed": false,
@@ -71,6 +87,7 @@
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "",
@@ -90,6 +107,8 @@
     }
   },
   "effects": [],
-  "flags": {},
+  "flags": {
+    "core": {}
+  },
   "img": "systems/sfrpg/icons/spells/synapse_overload.png"
 }

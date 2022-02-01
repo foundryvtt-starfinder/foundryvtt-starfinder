@@ -378,6 +378,65 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
         }
     }
+    
+    /**
+    * Add a modifer to this actor.
+    * 
+    * @param {Event} event The originating click event
+    */
+   _onModifierCreate(event) {
+       event.preventDefault();
+       const target = $(event.currentTarget);
+
+       this.actor.addModifier({
+           name: "New Modifier",
+           subtab: target.data('subtab')
+       });
+   }
+
+   /**
+    * Delete a modifier from the actor.
+    * 
+    * @param {Event} event The originating click event
+    */
+   async _onModifierDelete(event) {
+       event.preventDefault();
+       const target = $(event.currentTarget);
+       const modifierId = target.closest('.item.modifier').data('modifierId');
+       
+       await this.actor.deleteModifier(modifierId);
+   }
+
+   /**
+    * Edit a modifier for an actor.
+    * 
+    * @param {Event} event The orginating click event
+    */
+   _onModifierEdit(event) {
+       event.preventDefault();
+
+       const target = $(event.currentTarget);
+       const modifierId = target.closest('.item.modifier').data('modifierId');
+
+       this.actor.editModifier(modifierId);
+   }
+
+   /**
+    * Toggle a modifier to be enabled or disabled.
+    * 
+    * @param {Event} event The originating click event
+    */
+   async _onToggleModifierEnabled(event) {
+       event.preventDefault();
+       const target = $(event.currentTarget);
+       const modifierId = target.closest('.item.modifier').data('modifierId');
+
+       const modifiers = duplicate(this.actor.data.data.modifiers);
+       const modifier = modifiers.find(mod => mod._id === modifierId);
+       modifier.enabled = !modifier.enabled;
+
+       await this.actor.update({'data.modifiers': modifiers});
+   }
 
     /**
      * handle cycling whether a skill is a class skill or not
@@ -1098,5 +1157,57 @@ export class ActorSheetSFRPG extends ActorSheet {
                 parent.contents.push(item);
             }
         }
+    }
+
+    static computeWealthForActor(actor, inventoryWealth) {
+        const wealth = {
+            inventory: 0,
+            currencies: 0,
+            total: 0,
+            expectedByLevel: 0,
+            tooltip: []
+        };
+
+        if (!actor) {
+            return wealth;
+        }
+        
+        const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
+        const moneyFormatter  = new Intl.NumberFormat(currencyLocale);
+
+        wealth.inventory = Math.floor(inventoryWealth);
+        wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.Inventory", {amount: moneyFormatter.format(wealth.inventory)}));
+
+        const actorData = actor.data.data;
+        for (const [currency, amount] of Object.entries(actorData.currency)) {
+            const currencyValue = Number(amount);
+            if (!Number.isNaN(currencyValue)) {
+                wealth.currencies += currencyValue;
+                wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.Currency", {currency: SFRPG.currencies[currency], amount: moneyFormatter.format(currencyValue)}));
+            }
+        }
+
+        wealth.total = wealth.inventory + wealth.currencies;
+
+        if (actor.type === "character") {
+            const actorLevel = Math.min(Math.max(0, actorData.details?.level?.value || 0), 20);
+            wealth.expectedByLevel = SFRPG.characterWealthByLevel[actorLevel];
+
+            wealth.tooltip.push("");
+            wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.Expected", {expectedWealth: moneyFormatter.format(wealth.expectedByLevel)}));
+
+            if (wealth.expectedByLevel < wealth.total) {
+                let estimatedLevel = 1;
+                for (let i = 1; i<20; i++) {
+                    if (SFRPG.characterWealthByLevel[i] >= wealth.total) {
+                        estimatedLevel = i;
+                        break;
+                    }
+                }
+                wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.EstimatedLevel", {estimatedLevel: estimatedLevel, valueAtLevel: moneyFormatter.format(SFRPG.characterWealthByLevel[estimatedLevel])}));
+            }
+        }
+
+        return wealth;
     }
 }

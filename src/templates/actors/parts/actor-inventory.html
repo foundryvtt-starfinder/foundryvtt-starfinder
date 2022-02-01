@@ -6,7 +6,7 @@
             <i class="fas fa-coins"></i>
         </h3>
         <label class="denomination" data-tippy-content="{{localize "SFRPG.ActorSheet.Inventory.ItemValue.Tooltip"}}">{{localize "SFRPG.ActorSheet.Inventory.ItemValue.Label"}}</label>
-        <label class="denomination currency-value" data-tippy-content="{{localize "SFRPG.ActorSheet.Inventory.ItemValue.Tooltip"}}">{{inventoryValue}}</label>
+        <label class="denomination currency-value" {{createTippy title="SFRPG.ActorSheet.Inventory.ItemValue.Label" subtitle="SFRPG.ActorSheet.Inventory.ItemValue.Tooltip" tooltips=wealth.tooltip}}>{{currencyFormat wealth.total}}</label>
         {{#each data.currency as |v k|}}
         <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>
         <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>

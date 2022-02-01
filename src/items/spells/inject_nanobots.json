@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "eac",
     "actionType": "msak",
     "activation": {
       "type": "action",
@@ -22,7 +23,7 @@
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -35,16 +36,29 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "4d8",
-          "operator": "",
-          "types": {}
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p style=\"text-align: justify;\">You concentrate key particles in your blood into tiny biological nanobots that you can inject into a foe with a touch, disrupting and damaging its natural processes. Make a melee attack against the target’s EAC; if you hit, the nanobots deal 4d8 damage and swarm through the target’s biological or mechanical systems, causing the creature to be @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused}, as per&nbsp;@Compendium[sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion}, for 1 round per your caster level. If the target succeeds at a Fortitude save, it takes only half damage and negates the @Compendium[sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion} effect. A @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused} target can attempt a Will saving throw at the beginning of its turn each round to end the confusion effect.<br><br>Casting this spell doesn’t provoke attacks of opportunity.</p>"
+      "value": "<p>You concentrate key particles in your blood into tiny biological nanobots that you can inject into a foe with a touch, disrupting and damaging its natural processes. Make a melee attack against the target&rsquo;s EAC; if you hit, the nanobots deal 4d8 damage and swarm through the target&rsquo;s biological or mechanical systems, causing the creature to be @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused}, as per @Compendium[sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion}, for 1 round per your caster level. If the target succeeds at a Fortitude save, it takes only half damage and negates the @Compendium[sfrpg.spells.wSeE9HyAmM7lTdpo]{Confusion} effect. A @Compendium[sfrpg.conditions.8rIj0ewW4bL8Uph5]{Confused} target can attempt a Will saving throw at the beginning of its turn each round to end the confusion effect.</p>\n<p>Casting this spell doesn&rsquo;t provoke attacks of opportunity.</p>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -53,6 +67,8 @@
       "value": "instantaneous and 1 round/level; see text"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 2,
     "materials": {
       "consumed": false,
@@ -71,6 +87,7 @@
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "",
@@ -90,6 +107,8 @@
     }
   },
   "effects": [],
-  "flags": {},
+  "flags": {
+    "core": {}
+  },
   "img": "systems/sfrpg/icons/spells/inject_nanobot.png"
 }

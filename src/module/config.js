@@ -524,6 +524,39 @@ SFRPG.weaponPropertiesTooltips = {
     "wideLine": "SFRPG.WeaponPropertiesWideLineTooltip"
 };
 
+SFRPG.specialMaterials = {
+    "abysium": "SFRPG.SpecialMaterials.Abysium",
+    "adamantine": "SFRPG.SpecialMaterials.Adamantine",
+    "coldiron": "SFRPG.SpecialMaterials.ColdIron",
+    "diatha": "SFRPG.SpecialMaterials.Diatha",
+    "djezet": "SFRPG.SpecialMaterials.Djezet",
+    "horacalcum": "SFRPG.SpecialMaterials.Horacalcum",
+    "inubrix": "SFRPG.SpecialMaterials.Inubrix",
+    "khefak": "SFRPG.SpecialMaterials.Khefak",
+    "noqual": "SFRPG.SpecialMaterials.Noqual",
+    "purplecores": "SFRPG.SpecialMaterials.PurpleCores",
+    "siccatite": "SFRPG.SpecialMaterials.Siccatite",
+    "silver": "SFRPG.SpecialMaterials.Silver",
+    "voidglass": "SFRPG.SpecialMaterials.Voidglass"
+};
+
+// Damage Reductions
+SFRPG.damageReductionTypes = {
+    "": "-",
+    ...SFRPG.specialMaterials,
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
+// Energy Resistances
+SFRPG.energyResistanceTypes = {
+    "acid": "SFRPG.Damage.Types.Acid",
+    "cold": "SFRPG.Damage.Types.Cold",
+    "electricity": "SFRPG.Damage.Types.Electricity",
+    "fire": "SFRPG.Damage.Types.Fire",
+    "sonic": "SFRPG.Damage.Types.Sonic",
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
 SFRPG.spellAreaShapes = {
     "": "",
     "cone": "SFRPG.SpellAreaShapesCone",
@@ -661,8 +694,9 @@ SFRPG.tokenSizes = {
     "colossal": 6
 };
 
-SFRPG.allowedClasses = {
+SFRPG.spellcastingClasses = {
     "myst": "SFRPG.AllowedClasses.Myst",
+    "precog": "SFRPG.AllowedClasses.Precog",
     "tech": "SFRPG.AllowedClasses.Tech",
     "wysh": "SFRPG.AllowedClasses.Wysh"
 };
@@ -1018,6 +1052,7 @@ SFRPG.modifierTypes = {
     "luck": "SFRPG.ModifierTypeLuck",
     "morale": "SFRPG.ModifierTypeMorale",
     "racial": "SFRPG.ModifierTypeRacial",
+    "resistance": "SFRPG.ModifierTypeResistance",
     "untyped": "SFRPG.ModifierTypeUntyped"
 };
 
@@ -1058,7 +1093,9 @@ SFRPG.modifierEffectTypes = {
     "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
     "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
     "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
-    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource"
+    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource",
+    "damage-reduction": "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction",
+    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance"
 };
 
 SFRPG.modifierType = {
@@ -1647,4 +1684,35 @@ SFRPG.actionTargets = {
     "kac8": "SFRPG.Items.Action.ActionTarget.KAC8",
     "eac": "SFRPG.Items.Action.ActionTarget.EAC",
     "other": "SFRPG.Items.Action.ActionTarget.Other"
+};
+
+SFRPG.actionTargetsStarship = {
+    "": "SFRPG.Items.Action.ActionTarget.None",
+    "ac": "SFRPG.Items.Action.ActionTarget.StarshipAC",
+    "tl": "SFRPG.Items.Action.ActionTarget.StarshipTL"
+};
+
+// Source: CRB, page 391
+SFRPG.characterWealthByLevel = {
+    0: 0,
+    1: 1000,
+    2: 2000,
+    3: 4000,
+    4: 6000,
+    5: 9000,
+    6: 15000,
+    7: 23000,
+    8: 33000,
+    9: 45000,
+    10: 66000,
+    11: 100000,
+    12: 150000,
+    13: 255000,
+    14: 333000,
+    15: 500000,
+    16: 750000,
+    17: 1125000,
+    18: 1700000,
+    19: 2550000,
+    20: 3775000
 };

@@ -46,6 +46,7 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
+import { SFRPGHealingSetting, SFRPGDamage } from "./module/actor/mixins/actor-damage.js";
 
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import { } from "./module/combat/combat.js";
@@ -123,7 +124,30 @@ Hooks.once('init', async function () {
         SFRPGEffectType,
         SFRPGModifier,
         SFRPGModifierType,
-        SFRPGModifierTypes  
+        SFRPGModifierTypes,
+
+        // Namespace style
+        Actor: {
+            Damage: {
+                SFRPGHealingSetting,
+                SFRPGDamage
+            },
+            Modifiers: {
+                SFRPGEffectType,
+                SFRPGModifier,
+                SFRPGModifierType,
+                SFRPGModifierTypes
+            },
+            Sheet: {
+                Base: ActorSheetSFRPG,
+                Character: ActorSheetSFRPGCharacter,
+                Npc: ActorSheetSFRPGNPC,
+                Drone: ActorSheetSFRPGDrone,
+                Starship: ActorSheetSFRPGStarship,
+                Vehicle: ActorSheetSFRPGVehicle
+            },
+            Type: ActorSFRPG
+        }
     };
 
     CONFIG.SFRPG = SFRPG;
@@ -199,18 +223,22 @@ Hooks.once("setup", function () {
 
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
-        "abilities", "actionTargets", "actorTypes", "alignments", "alignmentsNPC", "ammunitionTypes", "distanceUnits", "senses", "skills", "currencies", "saves",
-        "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes", "itemTypes",
-        "vehicleSizes", "babProgression", "saveProgression", "saveDescriptors", "armorProficiencies",
-        "weaponProficiencies", "abilityActivationTypes", "skillProficiencyLevels", "damageTypes",
-        "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
-        "weaponProperties", "weaponPropertiesTooltips", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
-        "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
-        "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
-        "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
-        "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
-        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds",
-        "damageTypeOperators", "flightManeuverability"
+        "abilities", "abilityActivationTypes", "acpEffectingArmorType", "actionTargets", "actionTargetsStarship", "actorSizes", "actorTypes", "alignments",
+            "alignmentsNPC", "ammunitionTypes", "armorProficiencies", "armorTypes", "augmentationSytems", "augmentationTypes",
+        "babProgression",
+        "capacityUsagePer", "conditionTypes", "consumableTypes", "containableTypes", "currencies",
+        "damageReductionTypes", "damageTypeOperators", "damageTypes", "distanceUnits",
+        "energyDamageTypes", "energyResistanceTypes",
+        "featTypes", "flightManeuverability",
+        "healingTypes",
+        "itemActionTypes", "itemTypes",
+        "kineticDamageTypes",
+        "languages", "limitedUsePeriods",
+        "maneuverability", "modifierArmorClassAffectedValues", "modifierEffectTypes", "modifierType", "modifierTypes",
+        "saveDescriptors", "saveProgression", "saves", "senses", "skillProficiencyLevels", "skills", "specialMaterials", "speeds", "spellAreaEffects", "spellAreaShapes", "spellcastingClasses", "spellLevels", "spellPreparationModes",
+            "starshipArcs", "starshipRoles", "starshipSizes", "starshipSystemStatus", "starshipWeaponClass", "starshipWeaponProperties", "starshipWeaponRanges", "starshipWeaponTypes",
+        "vehicleCoverTypes", "vehicleSizes", "vehicleTypes",
+        "weaponCategories", "weaponCriticalHitEffects", "weaponDamageTypes", "weaponProficiencies", "weaponProperties", "weaponPropertiesTooltips", "weaponTypes"
     ];
 
     for (let o of toLocalize) {
@@ -264,7 +292,7 @@ Hooks.once("ready", () => {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.data.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
-    
+
         if (needsMigration) {
             console.log("Starfinder | [READY] Performing world migration");
             migrateWorld()
@@ -485,6 +513,11 @@ function setupHandlebars() {
         return false;
     });
 
+    Handlebars.registerHelper("isNaN", function (value) {
+        const valueNumber = Number(value);
+        return Number.isNaN(valueNumber);
+    });
+
     Handlebars.registerHelper('ellipsis', function (displayedValue, limit) {
         let str = displayedValue.toString();
         if (str.length <= limit) {
@@ -642,4 +675,24 @@ function setupHandlebars() {
 
         return new Handlebars.SafeString(html);
     });
+
+    Handlebars.registerHelper('currencyFormat', function (value) {
+        const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
+        const moneyFormatter  = new Intl.NumberFormat(currencyLocale);
+        const formattedValue = moneyFormatter.format(value);
+        return formattedValue;
+    });
 }
+
+Hooks.on("renderSidebarTab", async (app, html) => {
+    if (app.options.id === "settings") {
+        const textToAdd = `<br/><a href="https://github.com/wildj79/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
+        const gameDetails = document.getElementById("game-details");
+        if (gameDetails) {
+            const systemSection = gameDetails.getElementsByClassName("system")[0];
+            if (systemSection) {
+                systemSection.innerHTML += textToAdd;
+            }
+        }
+    }
+});

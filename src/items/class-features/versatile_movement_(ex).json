@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -29,10 +30,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"On2ZrPJTe8FURsXY\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Operative Exploit</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl58_LabelName\">You gain a climb speed and a swim speed equal to your land speed. This speed is not increased by the quick movement class feature or improved quick movement exploit.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl58_LabelName\">You gain a climb speed and a swim speed equal to your land speed. This speed is not increased by the quick movement class feature or improved quick movement exploit.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +44,24 @@
       "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "0f75a044-afbf-4739-9b0e-12e531dac4b8",
+        "name": "New Modifier",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@attributes.speed.land.base",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "climbing"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +73,7 @@
       "value": null
     },
     "requirements": "10th Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -68,10 +90,5 @@
       "value": 0
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/versatile_movement.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "img": "systems/sfrpg/icons/classes/versatile_movement.png"
 }

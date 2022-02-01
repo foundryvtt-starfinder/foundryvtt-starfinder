@@ -198,7 +198,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         }
         totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
         data.encumbrance = this._computeEncumbrance(totalWeight, actorData);
-        data.inventoryValue = Math.floor(totalWealth);
+        data.wealth = ActorSheetSFRPG.computeWealthForActor(this.actor, totalWealth);
 
         const features = {
             classes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"), items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
@@ -297,65 +297,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             const level = 5 + numASI * 5;
             itemData.name = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: level});
         }
-    }
-
-    /**
-     * Add a modifer to this actor.
-     * 
-     * @param {Event} event The originating click event
-     */
-    _onModifierCreate(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-
-        this.actor.addModifier({
-            name: "New Modifier",
-            subtab: target.data('subtab')
-        });
-    }
-
-    /**
-     * Delete a modifier from the actor.
-     * 
-     * @param {Event} event The originating click event
-     */
-    async _onModifierDelete(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-        
-        await this.actor.deleteModifier(modifierId);
-    }
-
-    /**
-     * Edit a modifier for an actor.
-     * 
-     * @param {Event} event The orginating click event
-     */
-    _onModifierEdit(event) {
-        event.preventDefault();
-
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-
-        this.actor.editModifier(modifierId);
-    }
-
-    /**
-     * Toggle a modifier to be enabled or disabled.
-     * 
-     * @param {Event} event The originating click event
-     */
-    async _onToggleModifierEnabled(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-
-        const modifiers = duplicate(this.actor.data.data.modifiers);
-        const modifier = modifiers.find(mod => mod._id === modifierId);
-        modifier.enabled = !modifier.enabled;
-
-        await this.actor.update({'data.modifiers': modifiers});
     }
 
     /**

@@ -277,6 +277,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const templateType = ["tool", "consumable"].includes(this.data.type) ? this.data.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.html`;
         const html = await renderTemplate(template, templateData);
+        const rollMode = game.settings.get("core", "rollMode");
 
         // Basic chat message data
         const chatData = {
@@ -284,13 +285,20 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             content: html,
             flags: { level: this.data.data.level },
+            rollMode: rollMode,
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
         // Toggle default roll mode
-        let rollMode = game.settings.get("core", "rollMode");
-        if (["gmroll", "blindroll"].includes(rollMode)) chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-        if (rollMode === "blindroll") chatData["blind"] = true;
+        if (["gmroll", "blindroll"].includes(rollMode)) {
+            chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
+        }
+        if (rollMode === "blindroll") {
+            chatData["blind"] = true;
+        }
+        if (rollMode === "selfroll") {
+            chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
+        }
 
         // Create the chat message
         return ChatMessage.create(chatData, { displaySheet: false });
@@ -341,7 +349,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (this.data.type === "container") {
             if (this.actor) {
-                const wealthString = new Intl.NumberFormat().format(Math.floor(this.data.contentWealth));
+                const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
+                const wealthString = new Intl.NumberFormat(currencyLocale).format(Math.floor(this.data.contentWealth));
                 const wealthProperty = game.i18n.format("SFRPG.CharacterSheet.Inventory.ContainedWealth", {wealth: wealthString});
                 props.push({
                     name: wealthProperty,
@@ -655,11 +664,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             const procifiencyKey = SFRPG.weaponTypeProficiency[this.data.data.weaponType];
             const proficient = itemData.data.proficient || this.actor?.data?.data?.traits?.weaponProf?.value?.includes(procifiencyKey);
             if (!proficient) {
-                parts.push("-4");
+                parts.push(`-4[${game.i18n.localize("SFRPG.Items.NotProficient")}]`);
             }
         }
 
-        let acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
+        const acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
         } else if (this.data.data.actionType === "rwak") {
@@ -723,6 +732,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (this.data.data.actionTarget) {
             rollOptions.actionTarget = this.data.data.actionTarget;
+            rollOptions.actionTargetSource = SFRPG.actionTargets;
         }
 
         // Define Roll Data
@@ -864,6 +874,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
+        const rollOptions = {};
+
+        if (this.data.data.actionTarget) {
+            rollOptions.actionTarget = this.data.data.actionTarget;
+            rollOptions.actionTargetSource = SFRPG.actionTargetsStarship;
+        }
+
         return await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
@@ -875,6 +892,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
+            rollOptions: rollOptions,
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
@@ -964,12 +982,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Define Roll parts
         /** @type {DamageParts[]} */
-        const parts = itemData.damage.parts.map(part => part);
+        const parts = duplicate(itemData.damage.parts.map(part => part));
         for (const part of parts) {
             part.isDamageSection = true;
         }
         
-        let acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
+        const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
         if (["msak", "rsak"].includes(this.data.data.actionType)) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
         } else if (this.data.data.actionType === "rwak") {

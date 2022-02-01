@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -29,10 +30,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"uf8ADOAeBrtUkPVl\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Operative</a></p>\n        <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">As long as you are unencumbered and wearing light armor or no armor, your land speed increases by 10 feet. At 9th level, your land speed instead increases by 20 feet, and at 15th level, your land speed instead increases by 30 feet.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.classes.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">As long as you are unencumbered and wearing light armor or no armor, your land speed increases by 10 feet. At 9th level, your land speed instead increases by 20 feet, and at 15th level, your land speed instead increases by 30 feet.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +44,24 @@
       "value": null
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "c8186644-f0a5-4635-84e3-e49cf29b4202",
+        "name": "Quick Movement (Ex)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 10,
+        "modifier": "lookupRange(@classes.operative.levels, 10, 9, 20, 15, 30)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "land"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +73,7 @@
       "value": null
     },
     "requirements": "3rd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -68,10 +90,5 @@
       "value": 0
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/quick_movement.png",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "img": "systems/sfrpg/icons/classes/quick_movement.png"
 }

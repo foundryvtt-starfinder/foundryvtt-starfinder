@@ -29,6 +29,7 @@ import calculateBaseAttackBonusModifier from './rules/actions/actor/calculate-ba
 import calculateBaseAbilityModifier     from './rules/actions/actor/calculate-base-ability-modifier.js';
 import calculateBaseAbilityScore        from './rules/actions/actor/calculate-base-ability-score.js';
 import calculateCmd                     from './rules/actions/actor/calculate-cmd.js';
+import calculateDamageMitigation        from './rules/actions/actor/calculate-damage-mitigation.js';
 import calculateCmdModifiers            from './rules/actions/actor/calculate-cmd-modifiers.js';
 import calculateClasses                 from './rules/actions/actor/calculate-classes.js';
 import calculateEncumbrance             from './rules/actions/actor/calculate-encumbrance.js';
@@ -44,6 +45,7 @@ import calculateBaseSkills              from './rules/actions/actor/character/ca
 import calculateCharacterLevel          from './rules/actions/actor/character/calculate-character-level.js';
 import calculateHitpoints               from './rules/actions/actor/character/calculate-hitpoints.js';
 import calculateInitiative              from './rules/actions/actor/character/calculate-initiative.js';
+import calculateMagicalItemCount        from './rules/actions/actor/character/calculate-magic-item-count.js';
 import calculatePlayerXp                from './rules/actions/actor/character/calculate-xp.js';
 import calculateResolve                 from './rules/actions/actor/character/calculate-resolve.js';
 import calculateSkillArmorCheckPenalty  from './rules/actions/actor/character/calculate-skill-armor-check-penalty.js';
@@ -114,6 +116,7 @@ export default function (engine) {
     calculateInitiative(engine);
     calculateInitiativeModifiers(engine);
     calculateCmd(engine);
+    calculateDamageMitigation(engine);
     calculateCmdModifiers(engine);
     calculateBaseSkills(engine);
     calculateClasses(engine);
@@ -126,6 +129,7 @@ export default function (engine) {
     calculateBaseAttackBonus(engine);
     calculateCharacterLevel(engine);
     calculateHitpoints(engine);
+    calculateMagicalItemCount(engine);
     calculateResolve(engine);
     calculateSkillpoints(engine);
     calculateSpellsPerDay(engine);
@@ -226,7 +230,9 @@ export default function (engine) {
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     "calculateSpellsPerDay",
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation",
+                    "calculateMagicalItemCount"
                 ]
             },
             {
@@ -253,7 +259,8 @@ export default function (engine) {
                     { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation"
                 ]
             },
             {
@@ -272,7 +279,8 @@ export default function (engine) {
                     "calculateNpcAbilityValue",
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation"
                 ]
             },
             {
@@ -295,7 +303,8 @@ export default function (engine) {
                     {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation"
                 ]
             },
             {

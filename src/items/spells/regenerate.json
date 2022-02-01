@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "heal",
     "activation": {
       "type": "full",
@@ -22,7 +23,7 @@
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -35,18 +36,29 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "12d8",
-          "operator": "",
           "types": {
-            "healing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p style=\"text-align: justify;\">The target’s severed body members (fingers, toes, hands, feet, arms, legs, tails, or even heads of multiheaded creatures), broken bones, and ruined organs (including eyes) grow back. After the spell is cast, the physical regeneration is complete in 1 round if the severed members are present and touching the creature. It takes 2d10 rounds otherwise.<br><br>Regenerate&nbsp;also restores 12d8 Hit Points, rids the target of exhaustion and fatigue, and eliminates all nonlethal damage the target has taken. It has no effect on nonliving creatures (including undead).</p>"
+      "value": "<p>The target&rsquo;s severed body members (fingers, toes, hands, feet, arms, legs, tails, or even heads of multiheaded creatures), broken bones, and ruined organs (including eyes) grow back. After the spell is cast, the physical regeneration is complete in 1 round if the severed members are present and touching the creature. It takes 2d10 rounds otherwise.</p>\n<p>Regenerate&nbsp;also restores 12d8 Hit Points, rids the target of exhaustion and fatigue, and eliminates all nonlethal damage the target has taken. It has no effect on nonliving creatures (including undead).</p>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -55,6 +67,8 @@
       "value": "instantaneous"
     },
     "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
     "level": 6,
     "materials": {
       "consumed": false,
@@ -73,6 +87,7 @@
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "",
@@ -92,6 +107,8 @@
     }
   },
   "effects": [],
-  "flags": {},
+  "flags": {
+    "core": {}
+  },
   "img": "systems/sfrpg/icons/spells/regenerate.png"
 }

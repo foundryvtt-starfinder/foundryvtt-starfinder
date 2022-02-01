@@ -147,7 +147,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         }
         totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
         data.encumbrance = this._computeEncumbrance(totalWeight, actorData);
-        data.inventoryValue = Math.floor(totalWealth);
+        data.wealth = ActorSheetSFRPG.computeWealthForActor(this.actor, totalWealth);
 
         let droneLevelIndex = data.data.details.level.value - 1;
         let maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];

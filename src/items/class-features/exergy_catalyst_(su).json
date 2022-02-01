@@ -4,20 +4,21 @@
   "type": "feat",
   "data": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
-      "type": "",
+      "type": "reaction",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -29,22 +30,26 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>&gt;@Compendium[sfrpg.class-features.NsxuKKOs4oqxwngX]{Exergy}</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\">Each foe within 30 feet must attempt a Fortitude saving throw. On a failed save, a creature takes an additional 1d6 damage per 2 vanguard levels from the next damaging attack that hits it within the next minute.<br><br><strong><em>Improved</em></strong>: The additional damage is 1d6 per vanguard level.<br></span></p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
@@ -52,26 +57,22 @@
       "value": null
     },
     "requirements": "Aspect Insight",
+    "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "10+floor(@classes.vanguard.levels/2) + @abilities.con.mod",
+      "descriptor": "negate"
     },
     "source": "Exergy",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": 1,
+      "per": "sr",
+      "value": 1
     }
   },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "img": "icons/svg/mystery-man.svg"
 }
