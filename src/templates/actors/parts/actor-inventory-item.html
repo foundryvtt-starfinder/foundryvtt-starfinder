@@ -45,7 +45,7 @@
                     {{/if}}
                 {{else if children}}
                     {{#if (eq item.type "container")}}
-                        {{getChildBulk children}} / {{getTotalStorageCapacity item}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelBulk"}}
+                        {{formatBulk item.itemBulk.contentBulk}} / {{getTotalStorageCapacity item}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelBulk"}}
                     {{else}}
                         {{children.length}} / {{getTotalStorageCapacity item}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelItems"}}
                     {{/if}}
