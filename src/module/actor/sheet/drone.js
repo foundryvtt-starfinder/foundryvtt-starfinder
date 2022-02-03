@@ -1,6 +1,5 @@
 import { ActorSheetSFRPG } from "./base.js"
 import { SFRPG } from "../../config.js";
-import { computeCompoundBulkForItem, computeCompoundWealthForItem } from "../actor-inventory-utils.js"
 
 export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
     constructor(...args) {
@@ -108,15 +107,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             return arr;
         }, [[], [], [], [], [], []]);
         
-        for (const i of items) {
-            i.img = i.img || DEFAULT_TOKEN;
-
-            i.data.quantity = i.data.quantity || 0;
-            i.data.price = i.data.price || 0;
-            i.data.bulk = i.data.bulk || "-";
-            i.isOpen = i.data.container?.isOpen === undefined ? true : i.data.container.isOpen;
-        }
-
         this.processItemContainment(items, function (itemType, itemData) {
             if (itemType === "weapon") {
                 if (itemData.item.data.equipped) {
@@ -130,24 +120,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                 inventory["cargo"].items.push(itemData);
             }
         });
-
-        let totalWeight = 0;
-        let totalWealth = 0;
-        for (const section of Object.entries(inventory)) {
-            for (const sectionItem of section[1].items) {
-                const itemBulk = computeCompoundBulkForItem(sectionItem.item, sectionItem.contents);
-                totalWeight += itemBulk;
-
-                const itemWealth = computeCompoundWealthForItem(sectionItem.item, sectionItem.contents);
-                totalWealth += itemWealth.totalWealth;
-                if (sectionItem.item.type === "container") {
-                    sectionItem.item.contentWealth = itemWealth.contentWealth;
-                }
-            }
-        }
-        totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
-        data.encumbrance = this._computeEncumbrance(totalWeight, actorData);
-        data.wealth = ActorSheetSFRPG.computeWealthForActor(this.actor, totalWealth);
 
         let droneLevelIndex = data.data.details.level.value - 1;
         let maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];
@@ -203,26 +175,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         if (chassis && chassis.length > 0) {
             data.activeChassis = chassis[0];
         }
-    }
-
-    /**
-     * Compute the level and percentage of encumbrance for an Actor.
-     * 
-     * @param {Number} totalWeight The cumulative item weight from inventory items
-     * @param {Ojbect} actorData The data object for the Actor being rendered
-     * @returns {Object} An object describing the character's encumbrance level
-     * @private
-     */
-    _computeEncumbrance(totalWeight, actorData) {
-        const enc = {
-            max: actorData.attributes.encumbrance.max,
-            tooltip: actorData.attributes.encumbrance.tooltip,
-            value: totalWeight
-        };
-
-        enc.pct = Math.min(enc.value * 100 / enc.max, 99);
-        enc.encumbered = enc.pct > 50;
-        return enc;
     }
 
     /**
