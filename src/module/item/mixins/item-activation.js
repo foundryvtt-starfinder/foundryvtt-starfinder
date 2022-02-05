@@ -60,7 +60,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         updateData['data.isActive'] = active;
 
         const updatePromise = this.update(updateData);
-
+        const rollMode = game.settings.get("core", "rollMode");
+        
         if (active) {
             updatePromise.then(() => {
                 // Render the chat card template
@@ -87,8 +88,20 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                     const chatData = {
                         type: CONST.CHAT_MESSAGE_TYPES.OTHER,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                        content: html
+                        content: html,
+                        rollMode: rollMode
                     };
+
+                    // Toggle default roll mode
+                    if (["gmroll", "blindroll"].includes(rollMode)) {
+                        chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
+                    }
+                    if (rollMode === "blindroll") {
+                        chatData["blind"] = true;
+                    }
+                    if (rollMode === "selfroll") {
+                        chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
+                    }
 
                     ChatMessage.create(chatData, { displaySheet: false });
                 });
@@ -118,8 +131,20 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                         const chatData = {
                             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            content: html
+                            content: html,
+                            rollMode: rollMode
                         };
+
+                        // Toggle default roll mode
+                        if (["gmroll", "blindroll"].includes(rollMode)) {
+                            chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
+                        }
+                        if (rollMode === "blindroll") {
+                            chatData["blind"] = true;
+                        }
+                        if (rollMode === "selfroll") {
+                            chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
+                        }
             
                         ChatMessage.create(chatData, { displaySheet: false });
                     });
