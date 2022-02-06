@@ -1283,7 +1283,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             return;
         }
 
-        if (itemData.actionType) {
+        if (itemData.actionType && itemData.actionType !== "save") {
             options = options || {};
             options.flavorOverride = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
             
