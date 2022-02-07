@@ -57,6 +57,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Magic items now have a checkbox defining whether or not they count towards the worn magical items limit.
 * Reloading a weapon that has a short description will now roll the short description into chat instead.
 * Rolls that include the -4 penalty when attacking with a weapon the owning character is not proficient with now explains the -4 is caused by the lack of proficiency.
+* Rolls using the Custom Starfinder Chat Cards made by actors with wildcard tokens no longer have a broken image.
 * Saving throws on consumables are now displayed when the consumable is used.
 * Special materials can now be selected on armor, ammunition, shields, weapons, starship armor, starship defensive countermeasures, starship sensors, starship thrusters, and starship weapons.
 * Starship critical damage rolls no longer double their damage. Deflector shields still take 1 extra damage from a critical hit however.
