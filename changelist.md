@@ -35,6 +35,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 
 ## Bugfixes and small improvements
 * Activating a feat now obeys the chat roll mode setting, instead of always rolling publicly.
+* Activating a feat with a saving throw DC no longer resets the DC after the first activation.
 * Added a link to this changelist inside the settings tab.
 * Added base int and cha to drone chassis.
 * Added resistance as a bonus type for modifiers, such as a "+2 Resistance bonus to saving throws against..".

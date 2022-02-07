@@ -911,4 +911,51 @@ export class DiceSFRPG {
         }
         return finalResult;
     }
+
+    static resolveFormulaWithoutDice(sourceFormula, rollContext, options = {logErrors: true}) {
+        const resolveResult = {
+            sourceFormula: sourceFormula,
+            evaluatedFormula: null,
+            total: 0,
+            hadError: false
+        };
+
+        let resultValue = 0;
+
+        const tree = new RollTree({skipUI: true});
+        tree.buildRoll(sourceFormula, rollContext, async (button, rollMode, finalFormula) => {
+            try {
+                const formula = Roll.replaceFormulaData(finalFormula.finalRoll, null);
+                resultValue = Roll.safeEval(formula);
+                resolveResult.evaluatedFormula = formula;
+            } catch (error) {
+                if (options?.logErrors) {
+                    console.error(['Failed to evaluate diceless formula, are there dice terms in there?', sourceFormula, rollContext, finalFormula.finalRoll, error]);
+                }
+                resolveResult.hadError = true;
+            }
+        });
+
+        if (!resolveResult.hadError) {
+            try {
+                const finalResult = eval(resultValue);
+                const finalNumber = Number(finalResult);
+                if (!Number.isNaN(finalNumber)) {
+                    resolveResult.total = finalNumber;
+                } else {
+                    if (options?.logErrors) {
+                        console.log(['Failed to evaluate diceless formula to a number', sourceFormula, rollContext, resultValue]);
+                    }
+                    resolveResult.hadError = true;
+                }
+            } catch (error) {
+                if (options?.logErrors) {
+                    console.log(['Error resolving diceless formula', sourceFormula, rollContext, error]);
+                }
+                resolveResult.hadError = true;
+            }
+        }
+
+        return resolveResult;
+    }
 }

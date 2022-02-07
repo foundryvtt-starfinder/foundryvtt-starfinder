@@ -433,14 +433,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const label = CONFIG.SFRPG.abilities[abilityId];
         const abl = this.data.data.abilities[abilityId];
         
-        let parts = [];
-        let data = this.getRollData();
+        const parts = [];
+        const data = this.getRollData();
 
-        const rollContext = new RollContext();
-        rollContext.addContext("main", this, data);
-        rollContext.setMainContext("main");
-
-        this.setupRollContexts(rollContext);
+        const rollContext = RollContext.createActorRollContext(this);
 
         //Include ability check bonus only if it's not 0
         if(abl.abilityCheckBonus) {
@@ -471,18 +467,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      */
     rollSave(saveId, options = {}) {
         const label = CONFIG.SFRPG.saves[saveId];
-        const save = this.data.data.attributes[saveId];
 
-        let parts = [];
-        let data = this.getRollData();
+        const rollContext = RollContext.createActorRollContext(this);
 
-        const rollContext = new RollContext();
-        rollContext.addContext("main", this, data);
-        rollContext.setMainContext("main");
-
-        this.setupRollContexts(rollContext);
-
-        parts.push(`@attributes.${saveId}.bonus`);
+        const parts = [`@attributes.${saveId}.bonus`];
 
         return DiceSFRPG.d20Roll({
             event: options.event,
@@ -499,17 +487,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     async rollSkillCheck(skillId, skill, options = {}) {
-        let parts = [];
-        let data = this.getRollData();
+        const rollContext = RollContext.createActorRollContext(this);
+        const parts = [`@skills.${skillId}.mod`];
 
-        const rollContext = new RollContext();
-        rollContext.addContext("main", this, data);
-        rollContext.setMainContext("main");
-
-        this.setupRollContexts(rollContext);
-
-        parts.push(`@skills.${skillId}.mod`);
-        
         return await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
