@@ -752,12 +752,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             ui.notifications.warn(game.i18n.format("SFRPG.ItemNoAmmo", {name: this.data.name}));
         }
         
-        const rollContext = new RollContext();
-        rollContext.addContext("owner", this.actor);
-        rollContext.addContext("item", this, itemData);
-        rollContext.setMainContext("owner");
-
-        this.actor?.setupRollContexts(rollContext);
+        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
         /** Create additional modifiers. */
         const additionalModifiers = duplicate(SFRPG.globalAttackRollModifiers);
@@ -1070,12 +1065,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             }
         }
         
-        const rollContext = new RollContext();
-        rollContext.addContext("owner", this.actor, rollData);
-        rollContext.addContext("item", this, itemData);
-        rollContext.setMainContext("owner");
-
-        this.actor?.setupRollContexts(rollContext);
+        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData, ownerData: rollData});
 
         /** Create additional modifiers. */
         const additionalModifiers = [];
@@ -1236,15 +1226,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         // Define Roll Data
-        const rollContext = new RollContext();
-        rollContext.addContext("item", this, itemData);
-        rollContext.setMainContext("item");
-        if (this.actor) {
-            rollContext.addContext("owner", this.actor);
-            rollContext.setMainContext("owner");
-        }
-
-        this.actor?.setupRollContexts(rollContext);
+        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
     
         const title = game.i18n.localize(`SFRPG.Items.Action.OtherFormula`);
         const rollResult = await DiceSFRPG.createRoll({
