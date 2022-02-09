@@ -83,11 +83,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         event.preventDefault();
 
         if (this.actor.data.data.attributes.damage.value) {
-            const rollContext = new RollContext();
-            rollContext.addContext("main", this.actor);
-            rollContext.setMainContext("main");
-    
-            this.actor.setupRollContexts(rollContext);
+            const rollContext = RollContext.createActorRollContext(this.actor);
     
             const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Damage", {name: this.actor.name});
             return DiceSFRPG.damageRoll({
@@ -113,11 +109,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     }
 
     _performRoll(event, rollName, rollValue, isAttack) {
-        const rollContext = new RollContext();
-        rollContext.addContext("main", this.actor);
-        rollContext.setMainContext("main");
-
-        this.actor.setupRollContexts(rollContext);
+        const rollContext = RollContext.createActorRollContext(this.actor);
 
         return DiceSFRPG.d20Roll({
             event: event,

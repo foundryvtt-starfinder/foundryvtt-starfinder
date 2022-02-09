@@ -1,7 +1,7 @@
 import { SFRPG } from "../../../config.js";
+import { DiceSFRPG } from "../../../dice.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 import RollContext from "../../../rolls/rollcontext.js";
-import RollTree from "../../../rolls/rolltree.js";
 
 function tryResolveModifier(modifier, rollContext) {
     const numberModifier = Number(modifier);
@@ -9,32 +9,11 @@ function tryResolveModifier(modifier, rollContext) {
         return Number(numberModifier);
     }
 
-    let resultValue = 0;
-
-    const tree = new RollTree({skipUI: true});
-    tree.buildRoll(modifier, rollContext, async (button, rollMode, finalFormula) => {
-        try {
-            const formula = Roll.replaceFormulaData(finalFormula.finalRoll, null);
-            resultValue = Roll.safeEval(formula);
-        } catch (error) {
-            console.error(['Failed to evaluate formula, are there dice terms in there?', finalFormula.finalRoll, error, modifier]);
-            resultValue = 0;
-        }
-    });
-
-    try {
-        const finalResult = eval(resultValue);
-        const finalNumber = Number(finalResult);
-        if (!Number.isNaN(finalNumber)) {
-            return finalNumber;
-        }
-
-        console.log(['Failed to evaluate damage mitigation modifier to a number', modifier, rollContext, resultValue]);
-    } catch (error) {
-        console.log(['Error resolving damage mitigation modifier', error, modifier, rollContext]);
+    const result = DiceSFRPG.resolveFormulaWithoutDice(modifier, rollContext);
+    if (result.hadError) {
+        return 0;
     }
-
-    return 0;
+    return result.result;
 }
 
 export default function (engine) {
@@ -53,12 +32,7 @@ export default function (engine) {
         const damageReductionModifiers = modifiers.filter(mod => { return mod.enabled && mod.modifierType === "constant" && [SFRPGEffectType.DAMAGE_REDUCTION].includes(mod.effectType); });
         const energyRessistanceModifiers = modifiers.filter(mod => { return mod.enabled && mod.modifierType === "constant" && [SFRPGEffectType.ENERGY_RESISTANCE].includes(mod.effectType); });
 
-        const rollContext = new RollContext();
-        if (actor && actor.data) {
-            rollContext.addContext("actor", actor);
-            rollContext.setMainContext("actor");
-            actor.setupRollContexts(rollContext);
-        }
+        const rollContext = RollContext.createActorRollContext(actor);
 
         for (const drModifier of damageReductionModifiers) {
             // TODO: Resolve formula; use RollTree, as it can complete synchronously

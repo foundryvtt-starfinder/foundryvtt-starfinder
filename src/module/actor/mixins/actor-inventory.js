@@ -19,8 +19,8 @@ export const ActorInventoryMixin = (superclass) => class extends superclass {
 
             const promises = [];
             for (const item of actor.items) {
-                const itemProcess = await item.processData();
-                promises.push(itemProcess.fact.promise);
+                const itemProcess = item.processData();
+                promises.push(itemProcess);
             }
 
             // Wait a moment to allow the database to update.
