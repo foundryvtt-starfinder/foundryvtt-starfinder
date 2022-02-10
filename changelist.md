@@ -62,6 +62,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Rolls using the Custom Starfinder Chat Cards made by actors with wildcard tokens no longer have a broken image.
 * Saving throws on consumables are now displayed when the consumable is used.
 * Special materials can now be selected on armor, ammunition, shields, weapons, starship armor, starship defensive countermeasures, starship sensors, starship thrusters, and starship weapons.
+* Starship actions correctly pull in crew actor data again. Fixes #539
 * Starship critical damage rolls no longer double their damage. Deflector shields still take 1 extra damage from a critical hit however.
 * The max dex allowed by armor is now available as an attribute for player characters as @attributes.eac.maxDex or @attributes.kac.maxDex.
 * The keyAbilityMod property on a PC sheet's class attributes is now updated correctly. (e.g. @classes.mechanic.keyAbilityMod)

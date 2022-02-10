@@ -770,12 +770,15 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             return;
         }
 
+        const crewData = this.data.data.crew;
+        const crewActorData = this.data.crew;
+
         const actorData = this.data;
         if (actorData.type === "vehicle") {
-            if (!actorData.data.crew.useNPCCrew) {
+            if (!crewData.useNPCCrew) {
                 /** Add player pilot if available. */
-                if (actorData.data.crew.pilot?.actors?.length > 0) {
-                    const pilotActor = actorData.data.crew.pilot.actors[0];
+                if (crewActorData.pilot?.actors?.length > 0) {
+                    const pilotActor = crewActorData.pilot.actors[0];
                     let pilotData = null;
                     if (pilotActor instanceof ActorSFRPG) {
                         pilotData = pilotActor.data.data;
@@ -787,29 +790,29 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         }
         else if (actorData.type === "starship") {
-            if (!actorData.data.crew.useNPCCrew) {
+            if (!crewData.useNPCCrew) {
                 /** Add player captain if available. */
-                if (actorData.data.crew.captain?.actors?.length > 0) {
-                    const actor = actorData.data.crew.captain.actors[0];
-                    let crewActorData = null;
+                if (crewActorData.captain?.actors?.length > 0) {
+                    const actor = crewActorData.captain.actors[0];
+                    let crewMemberActorData = null;
                     if (actor instanceof ActorSFRPG) {
-                        crewActorData = actor.data.data;
+                        crewMemberActorData = actor.data.data;
                     } else {
-                        crewActorData = actor.data;
+                        crewMemberActorData = actor.data;
                     }
-                    rollContext.addContext("captain", actor, crewActorData);
+                    rollContext.addContext("captain", actor, crewMemberActorData);
                 }
         
                 /** Add player pilot if available. */
-                if (actorData.data.crew.pilot?.actors?.length > 0) {
-                    const actor = actorData.data.crew.pilot.actors[0];
-                    let crewActorData = null;
+                if (crewActorData.pilot?.actors?.length > 0) {
+                    const actor = crewActorData.pilot.actors[0];
+                    let crewMemberActorData = null;
                     if (actor instanceof ActorSFRPG) {
-                        crewActorData = actor.data.data;
+                        crewMemberActorData = actor.data.data;
                     } else {
-                        crewActorData = actor.data;
+                        crewMemberActorData = actor.data;
                     }
-                    rollContext.addContext("pilot", actor, crewActorData);
+                    rollContext.addContext("pilot", actor, crewMemberActorData);
                 }
         
                 /** Add remaining roles if available. */
@@ -819,37 +822,37 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     let crewCount = 1;
                     const crew = [];
                     if (allCrewMates.includes(crewType)) {
-                        for (const crewEntries of Object.values(actorData.data.crew)) {
+                        for (const crewEntries of Object.values(crewActorData)) {
                             const crewList = crewEntries.actors;
                             if (crewList && crewList.length > 0) {
                                 for (const actor of crewList) {
-                                    let crewActorData = null;
+                                    let crewMemberActorData = null;
                                     if (actor instanceof ActorSFRPG) {
-                                        crewActorData = actor.data.data;
+                                        crewMemberActorData = actor.data.data;
                                     } else {
-                                        crewActorData = actor.data;
+                                        crewMemberActorData = actor.data;
                                     }
 
                                     const contextId = crewType + crewCount;
-                                    rollContext.addContext(contextId, actor, crewActorData);
+                                    rollContext.addContext(contextId, actor, crewMemberActorData);
                                     crew.push(contextId);
                                     crewCount += 1;
                                 }
                             }
                         }
                     } else {
-                        const crewList = actorData.data.crew[crewType].actors;
+                        const crewList = crewActorData[crewType].actors;
                         if (crewList && crewList.length > 0) {
                             for (const actor of crewList) {
-                                let crewActorData = null;
+                                let crewMemberActorData = null;
                                 if (actor instanceof ActorSFRPG) {
-                                    crewActorData = actor.data.data;
+                                    crewMemberActorData = actor.data.data;
                                 } else {
-                                    crewActorData = actor.data;
+                                    crewMemberActorData = actor.data;
                                 }
 
                                 const contextId = crewType + crewCount;
-                                rollContext.addContext(contextId, actor, crewActorData);
+                                rollContext.addContext(contextId, actor, crewMemberActorData);
                                 crew.push(contextId);
                                 crewCount += 1;
                             }
