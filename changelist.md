@@ -17,9 +17,10 @@ A new setting has been made available to do the rounding of split odd damage in 
 To make finding aliens a little easier, we've integrated the work started by rrenna and took it from there to finally provide you with an in-engine alien archive browser. You can filter by CR, HP, Size, Type, and, of course, name.
 
 ### Galactic Magic
-* Added all the spells.
 * Added all items, including the errata!
-* Added precog as a spellcasting class to the spell settings. (Note: This does not mean precog is available as a compendium entry.)
+* Added all the spells.
+* Added precog class and class features!
+* Added precog as a spellcasting class to the spell settings.
 
 ### Compendium
 * Added Mountain Eel from AA1 to Alien Archives.
