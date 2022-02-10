@@ -13,7 +13,7 @@ If you wish to use Starfinder with older versions of FoundryVTT, the following t
 - FoundryVTT v0.5.5 or earlier: The latest supported Starfinder system version is v0.2.2
 - FoundryVTT v0.5.6 till v0.6.6: The latest supported Starfinder system version is v0.5.1
 - FoundryVTT v0.7.0 till v0.7.10: The latest supported Starfinder system version is v0.10.0.0
-- FoundryVTT v0.8.3 and up: The latest supported Starfinder system version is v0.16.1
+- FoundryVTT v0.8.3 and up: The latest supported Starfinder system version is v0.18.0
 
 *Note* Foundry VTT version 9 didn't make a bunch of backwards compatible changes (at least, not ones that the Starfinder system cares about) unlike in previous versions of the software. You are OK to upgrade to v9 with any of the recent versions of Starfinder, but the usual caveats for making backups still remain.
 
