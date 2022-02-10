@@ -1,40 +1,40 @@
 {
+  "_id": "f7azdHY89WWjV1Ti",
   "name": "Recall Beacon",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You configure your starship’s coordinates to one of your starship’s active warp pucks. If you succeed at a Computers check (DC = 15 + 1-1/2 × your starship’s tier) before your starship’s movement for the round, your starship instantly moves to the warp puck’s hex while maintaining its facing. For every 5 by which you exceed the check, you can either increase your starship’s size modifier by 1 for the purpose of determining the maximum distance your starship can teleport to the puck, or you can turn your starship once. If you attempt to teleport your starship to a warp puck that is beyond the module’s maximum range, your starship does not move and the puck is destroyed.</p><h2>Critical effect</h2><p>You coordinate your starship’s teleportation flawlessly. Upon moving to the warp puck’s hex, your starship can turn to face any direction before starting to move.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "SOM",
     "type": "",
-    "role": "scienceOfficer",
-    "order": 21,
-    "phase": {
-      "name": "Helm phase",
-      "tooltip": "This action can be taken only during the helm phase."
+    "dc": {
+      "resolve": true,
+      "value": "15 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You configure your starship’s coordinates to one of your starship’s active warp pucks. If you succeed at a Computers check (DC = 15 + 1-1/2 × your starship’s tier) before your starship’s movement for the round, your starship instantly moves to the warp puck’s hex while maintaining its facing. For every 5 by which you exceed the check, you can either increase your starship’s size modifier by 1 for the purpose of determining the maximum distance your starship can teleport to the puck, or you can turn your starship once. If you attempt to teleport your starship to a warp puck that is beyond the module’s maximum range, your starship does not move and the puck is destroyed.</p><h2>Critical effect</h2><p>You coordinate your starship’s teleportation flawlessly. Upon moving to the warp puck’s hex, your starship can turn to face any direction before starting to move.</p>"
+    },
+    "effectCritical": "You coordinate your starship’s teleportation flawlessly. Upon moving to the warp puck’s hex, your starship can turn to face any direction before starting to move.",
+    "effectNormal": "You configure your starship’s coordinates to one of your starship’s active warp pucks. If you succeed at a Computers check (DC = 15 + 1-1/2 × your starship’s tier) before your starship’s movement for the round, your starship instantly moves to the warp puck’s hex while maintaining its facing. For every 5 by which you exceed the check, you can either increase your starship’s size modifier by 1 for the purpose of determining the maximum distance your starship can teleport to the puck, or you can turn your starship once. If you attempt to teleport your starship to a warp puck that is beyond the module’s maximum range, your starship does not move and the puck is destroyed.",
     "formula": [
       {
         "name": "Computers",
         "formula": "@scienceOfficer.skills.com.mod"
       }
     ],
+    "isPush": false,
+    "order": 21,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "resolvePointCost": 0,
+    "role": "scienceOfficer",
+    "selectorKey": "scienceOfficer",
     "selectors": [
       "scienceOfficer"
     ],
-    "selectorKey": "scienceOfficer",
-    "dc": {
-      "value": "15 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
-    },
-    "effectNormal": "You configure your starship’s coordinates to one of your starship’s active warp pucks. If you succeed at a Computers check (DC = 15 + 1-1/2 × your starship’s tier) before your starship’s movement for the round, your starship instantly moves to the warp puck’s hex while maintaining its facing. For every 5 by which you exceed the check, you can either increase your starship’s size modifier by 1 for the purpose of determining the maximum distance your starship can teleport to the puck, or you can turn your starship once. If you attempt to teleport your starship to a warp puck that is beyond the module’s maximum range, your starship does not move and the puck is destroyed.",
-    "effectCritical": "You coordinate your starship’s teleportation flawlessly. Upon moving to the warp puck’s hex, your starship can turn to face any direction before starting to move."
+    "source": "SOM"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "f7azdHY89WWjV1Ti"
+  "img": "icons/svg/mystery-man.svg"
 }

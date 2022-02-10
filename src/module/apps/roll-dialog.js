@@ -87,7 +87,7 @@ export default class RollDialog extends Dialog {
     }
 
     getData() {
-        let data = super.getData();
+        const data = super.getData();
         data.formula = this.formula;
         data.rollMode = this.rollMode;
         data.rollModes = CONFIG.Dice.rollModes;
@@ -97,19 +97,37 @@ export default class RollDialog extends Dialog {
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
         data.contexts = this.contexts;
+        
+        if (this.parts?.length > 0) {
+            data.hasDamageTypes = true;
+            
+            data.damageSections = this.parts;
+            for(const part of this.parts) {
+                const partIndex = this.parts.indexOf(part);
 
-        data.damageTypeLabels = this.parts?.reduce((arr, curr) => {
-            let typeString = "";
-            if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
-                typeString = `${(Object.entries(curr.types).filter(type => type[1]).map(type => SFRPG.damageTypes[type[0]]).join(` ${SFRPG.damageTypeOperators[curr.operator]} `))}`
-                if (!arr.some(val => val === typeString) && typeString.trim().length > 0)
-                    arr.push(typeString);
+                // If there is no name, create the placeholder name
+                if (!part.name && this.parts.length > 1) {
+                    part.name = game.i18n.format("SFRPG.Items.Action.DamageSection", {section: partIndex});
+                }
+
+                if (partIndex === 0 && part.enabled === undefined) {
+                    part.enabled = true;
+                }
+
+                // Create type string out of localized parts
+                let typeString = "";
+                if (part.types && !foundry.utils.isObjectEmpty(part.types)) {
+                    typeString = `${(Object.entries(part.types).filter(type => type[1]).map(type => SFRPG.damageTypes[type[0]]).join(` & `))}`
+                }
+                part.type = typeString;
             }
 
-            return arr;
-        }, []);
-        data.hasDamageTypes = data.damageTypeLabels.length > 0;
-        //data.config = SFRPG; Don't remove this. Will be needed later
+            data.formula = this.formula;
+            if (this.parts?.length === 1) {
+                data.formula = this.formula.replace("<damageSection>", this.parts[0].formula);
+            }
+        }
+
         return data;
     }
 
@@ -121,17 +139,19 @@ export default class RollDialog extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);
 
-        let additionalBonusTextbox = html.find('input[name=bonus]');
+        const additionalBonusTextbox = html.find('input[name=bonus]');
         additionalBonusTextbox.on('change', this._onAdditionalBonusChanged.bind(this));
 
-        let rollModeCombobox = html.find('select[name=rollMode]');
+        const rollModeCombobox = html.find('select[name=rollMode]');
         rollModeCombobox.on('change', this._onRollModeChanged.bind(this));
 
-        let modifierEnabled = html.find('.toggle-modifier');
+        const modifierEnabled = html.find('.toggle-modifier');
         modifierEnabled.on('click', this._toggleModifierEnabled.bind(this));
 
-        let selectorCombobox = html.find('.selector');
+        const selectorCombobox = html.find('.selector');
         selectorCombobox.on('change', this._onSelectorChanged.bind(this));
+
+        html.find('input[class="damageSection"]').change(this._onDamageSectionToggled.bind(this));
     }
 
     async _onAdditionalBonusChanged(event) {
@@ -140,6 +160,15 @@ export default class RollDialog extends Dialog {
 
     async _onRollModeChanged(event) {
         this.rollMode = event.target.value;
+    }
+
+    _getActorForContainer(container) {
+        if (container.tokenId) {
+            const scene = game.scenes.get(container.sceneId);
+            const token = scene.tokens.get(container.tokenId);
+            return token.actor;
+        }
+        return game.actors.get(container.actorId);
     }
 
     async _toggleModifierEnabled(event) {
@@ -152,7 +181,7 @@ export default class RollDialog extends Dialog {
         if (modifier._id) {
             // Update container
             const container = modifier.container;
-            const actor = await game.actors.get(container.actorId);
+            const actor = this._getActorForContainer(container);
             if (container.itemId) {
                 const item = container.itemId ? await actor.items.get(container.itemId) : null;
 
@@ -185,9 +214,17 @@ export default class RollDialog extends Dialog {
         this.render(false);
     }
 
+    async _onDamageSectionToggled(event) {
+        const selectorName = event.currentTarget.name;
+        const selectedValue = event.currentTarget.checked;
+
+        this.parts[selectorName].enabled = selectedValue;
+        this.render(null, false);
+    }
+
     submit(button) {
         try {
-            this.rolledButton = button.label;
+            this.rolledButton = button.id ?? button.label;
             this.close();
         } catch (err) {
             ui.notifications.error(err);
@@ -198,7 +235,7 @@ export default class RollDialog extends Dialog {
     async close(options) {
         /** Fire callback, then delete, as it would get called again by Dialog#close. */
         if (this.data.close) {
-            this.data.close(this.rolledButton, this.rollMode, this.additionalBonus);
+            this.data.close(this.rolledButton, this.rollMode, this.additionalBonus, this.parts);
             delete this.data.close;
         }
 
@@ -226,8 +263,8 @@ export default class RollDialog extends Dialog {
      */
     static async showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
         return new Promise(resolve => {
-            const buttons = options.buttons || { roll: { label: game.i18n.localize("SFRPG.Rolls.Dice.Roll") } };
-            const firstButtonLabel = options.defaultButton || Object.values(buttons)[0].label;
+            const buttons = options.buttons || { roll: { id: "roll", label: game.i18n.localize("SFRPG.Rolls.Dice.Roll") } };
+            const defaultButton = options.defaultButton || (Object.values(buttons)[0].id ?? Object.values(buttons)[0].label);
 
             const dlg = new RollDialog({
                 rollTree, 
@@ -239,9 +276,9 @@ export default class RollDialog extends Dialog {
                 dialogData: {
                     title: options.title || game.i18n.localize("SFRPG.Rolls.Dice.Roll"),
                     buttons: buttons,
-                    default: firstButtonLabel,
-                    close: (button, rollMode, bonus) => {
-                        resolve([button, rollMode, bonus]);
+                    default: defaultButton,
+                    close: (button, rollMode, bonus, parts) => {
+                        resolve([button, rollMode, bonus, parts]);
                     }
                 }, 
                 options: options.dialogOptions || {}

@@ -16,6 +16,22 @@
 
         <div class="tab details" data-tab="details" data-group="primary">
             <h3 class="form-header">{{ localize "SFRPG.Items.Magic.Details" }}</h3>
+
+            <div class="form-group">
+                <label>{{ localize "SFRPG.Items.Magic.LimitedWear" }}</label>
+                <label class="checkbox">
+                   <input type="checkbox" name="data.limitedWear" {{checked itemData.limitedWear}}/>{{ localize "SFRPG.Items.Magic.LimitedWearCheckbox" }}
+               </label>
+            </div>
+
+            {{#if (and (and itemData.limitedWear actor) (eq actor.type "character"))}}
+                {{#if (gt actor.data.data.magicalItems.worn actor.data.data.magicalItems.max)}}
+                <div class="form-group">
+                    <label></label>
+                    <span class="error"  style="text-align: right;">{{localize "SFRPG.Items.Magic.LimitedWearExceeded"}}</span>
+                </div>
+                {{/if}}
+            {{/if}}
             
             {{!-- Equipment Status --}}
             {{> "systems/sfrpg/templates/items/parts/item-status.html"}}

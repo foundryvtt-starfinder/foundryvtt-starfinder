@@ -40,7 +40,7 @@ export default function (engine) {
 
             if (classInfo.isCaster) {
                 casterData.classes.push({
-                    classItem: cls,
+                    classItemId: cls.id,
                     name: cls.name,
                     key: className
                 });

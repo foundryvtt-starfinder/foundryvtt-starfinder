@@ -177,6 +177,10 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             if (modifiersToConcat && modifiersToConcat.length > 0) {
                 for (const itemModifier of modifiersToConcat) {
                     itemModifier.container = {actorId: this.id, itemId: item.id};
+                    if (this.token) {
+                        itemModifier.container.tokenId = this.token.id;
+                        itemModifier.container.sceneId = this.token.parent.id;
+                    }
                 }
 
                 allModifiers = allModifiers.concat(modifiersToConcat);

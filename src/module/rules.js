@@ -28,7 +28,9 @@ import calculateArmorModifiers          from './rules/actions/actor/calculate-ar
 import calculateBaseAttackBonusModifier from './rules/actions/actor/calculate-bab-modifier.js';
 import calculateBaseAbilityModifier     from './rules/actions/actor/calculate-base-ability-modifier.js';
 import calculateBaseAbilityScore        from './rules/actions/actor/calculate-base-ability-score.js';
+import calculateBulkAndWealth           from './rules/actions/actor/calculate-bulk-and-wealth.js';
 import calculateCmd                     from './rules/actions/actor/calculate-cmd.js';
+import calculateDamageMitigation        from './rules/actions/actor/calculate-damage-mitigation.js';
 import calculateCmdModifiers            from './rules/actions/actor/calculate-cmd-modifiers.js';
 import calculateClasses                 from './rules/actions/actor/calculate-classes.js';
 import calculateEncumbrance             from './rules/actions/actor/calculate-encumbrance.js';
@@ -44,6 +46,7 @@ import calculateBaseSkills              from './rules/actions/actor/character/ca
 import calculateCharacterLevel          from './rules/actions/actor/character/calculate-character-level.js';
 import calculateHitpoints               from './rules/actions/actor/character/calculate-hitpoints.js';
 import calculateInitiative              from './rules/actions/actor/character/calculate-initiative.js';
+import calculateMagicalItemCount        from './rules/actions/actor/character/calculate-magic-item-count.js';
 import calculatePlayerXp                from './rules/actions/actor/character/calculate-xp.js';
 import calculateResolve                 from './rules/actions/actor/character/calculate-resolve.js';
 import calculateSkillArmorCheckPenalty  from './rules/actions/actor/character/calculate-skill-armor-check-penalty.js';
@@ -63,6 +66,7 @@ import calculateDroneSkills             from './rules/actions/actor/drone/calcul
 // NPC rules
 import calculateNpcAbilityValue         from './rules/actions/actor/npc/calculate-npc-ability-value.js';
 import calculateNpcDcs                  from './rules/actions/actor/npc/calculate-npc-dcs.js';
+import calculateNpcLevel                from './rules/actions/actor/npc/calculate-npc-level.js';
 import calculateNpcXp                   from './rules/actions/actor/npc/calculate-npc-xp.js';
 // NPC2 rules
 import calculateNpc2Abilities           from './rules/actions/actor/npc2/calculate-npc2-abilities.js';
@@ -102,6 +106,7 @@ export default function (engine) {
     // Actor actions
     clearTooltips(engine);
     calculateBaseAbilityScore(engine);
+    calculateBulkAndWealth(engine);
     calculateActorResources(engine);
     calculateActorResourcesLate(engine);
     calculateBaseAbilityModifier(engine);
@@ -113,6 +118,7 @@ export default function (engine) {
     calculateInitiative(engine);
     calculateInitiativeModifiers(engine);
     calculateCmd(engine);
+    calculateDamageMitigation(engine);
     calculateCmdModifiers(engine);
     calculateBaseSkills(engine);
     calculateClasses(engine);
@@ -125,6 +131,7 @@ export default function (engine) {
     calculateBaseAttackBonus(engine);
     calculateCharacterLevel(engine);
     calculateHitpoints(engine);
+    calculateMagicalItemCount(engine);
     calculateResolve(engine);
     calculateSkillpoints(engine);
     calculateSpellsPerDay(engine);
@@ -143,6 +150,7 @@ export default function (engine) {
     // NPC actions
     calculateNpcAbilityValue(engine);
     calculateNpcDcs(engine);
+    calculateNpcLevel(engine);
     calculateNpcXp(engine);
     // NPC2 actions
     calculateNpc2Abilities(engine);
@@ -221,10 +229,13 @@ export default function (engine) {
                     { closure: "calculateStamina", stackModifiers: "stackModifiers" },
                     { closure: "calculateResolve", stackModifiers: "stackModifiers" },
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
+                    "calculateBulkAndWealth",
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     "calculateSpellsPerDay",
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation",
+                    "calculateMagicalItemCount"
                 ]
             },
             {
@@ -249,9 +260,11 @@ export default function (engine) {
                     { closure: "calculateDroneResolve", stackModifiers: "stackModifiers" },
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
+                    "calculateBulkAndWealth",
                     { closure: "calculateEncumbrance", stackModifiers: "stackModifiers" },
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation"
                 ]
             },
             {
@@ -263,13 +276,15 @@ export default function (engine) {
                 then: [
                     "clearTooltips",
                     "calculateNpcXp",
+                    "calculateNpcLevel",
                     "calculateNpcDcs",
                     "calculateClasses",
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     "calculateNpcAbilityValue",
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation"
                 ]
             },
             {
@@ -277,6 +292,7 @@ export default function (engine) {
                 then: [
                     "clearTooltips",
                     "calculateNpcXp",
+                    "calculateNpcLevel",
                     "calculateNpcDcs",
                     "calculateClasses",
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
@@ -291,7 +307,8 @@ export default function (engine) {
                     {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateSaveModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateSkillModifiers", stackModifiers: "stackModifiers" },
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateDamageMitigation"
                 ]
             },
             {
@@ -311,7 +328,8 @@ export default function (engine) {
                     "calculateStarshipTargetLock",
                     "calculateStarshipComputer",
                     "calculateStarshipCriticalStatus",
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateBulkAndWealth"
                 ]
             },
             {
@@ -322,7 +340,8 @@ export default function (engine) {
                     "calculateVehicleHangar",
                     "calculateVehiclePassengers",
                     "identity",
-                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" }
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateBulkAndWealth"
                 ]
             }
         ]

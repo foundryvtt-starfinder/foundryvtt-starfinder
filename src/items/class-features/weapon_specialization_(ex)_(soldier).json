@@ -1,178 +1,183 @@
 {
+  "_id": "Sh3a7c9d0ru4tGj2",
   "name": "Weapon Specialization (Ex) (Soldier)",
   "type": "feat",
-  "img": "systems/sfrpg/images/cup/gameplay/soldier.png",
   "data": {
-    "description": {
-      "chat": "",
-      "gmnotes": "",
-      "short": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"cCZQpV0NmYE9qZoL\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Soldier</a></p>\n                <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You gain <a class=\"entity-link\" data-pack=\"sfrpg.feats\" data-id=\"9Us7Eg9cAoq3BcS5\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Weapon Specialization (Combat)</a>&nbsp;as a bonus feat for each weapon type this class grants you proficiency with.</span></p>",
-      "unidentified": ""
-    },
-    "source": "Soldier",
     "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "",
     "activation": {
       "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "type": ""
+      "condition": "",
+      "cost": 0
     },
     "area": {
-      "value": null,
-      "units": "",
+      "effect": "",
       "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
       "units": "",
-      "additional": "",
-      "per": ""
+      "value": null
     },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
-    },
-    "isActive": null,
-    "ability": null,
-    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"cCZQpV0NmYE9qZoL\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Soldier</a></p>\n                <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You gain <a class=\"entity-link\" data-pack=\"sfrpg.feats\" data-id=\"9Us7Eg9cAoq3BcS5\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Weapon Specialization (Combat)</a>&nbsp;as a bonus feat for each weapon type this class grants you proficiency with.</span></p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
     "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "2cad179e-76e8-4f3f-90ae-88461e031ccc",
+        "name": "Weapon Specialization Soldier",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "modifier": "floor(@details.level.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      },
+      {
+        "_id": "705ed57e-6be0-4b8d-adeb-1b73c1f684cd",
+        "name": "Weapon Specialization Soldier",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "basicM"
+      },
+      {
+        "_id": "717864d5-5780-40f5-95b4-99f94829ed78",
+        "name": "Weapon Specialization Soldier",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-damage",
+        "enabled": true,
+        "modifier": "-ceil(@details.level.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "operative"
+      },
+      {
+        "_id": "6ef80090-b369-4709-b650-d46d698a033c",
+        "name": "Weapon Specialization Soldier",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "advancedM"
+      },
+      {
+        "_id": "972cc776-68fe-424d-a3ae-6fdb077b8c61",
+        "name": "Weapon Specialization Soldier",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "longA"
+      },
+      {
+        "_id": "4de05472-c977-422d-868e-e39679512259",
+        "name": "Weapon Specialization Soldier",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "heavy"
+      },
+      {
+        "_id": "be857ef3-ca8f-42f7-ba07-7f897ec200db",
+        "name": "Weapon Specialization Soldier",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sniper"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "3rd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "modifiers": [
-      {
-        "name": "Weapon Specialization Soldier",
-        "modifier": "floor(@details.level.value / 2)",
-        "type": "untyped",
-        "effectType": "weapon-damage",
-        "valueAffected": "smallA",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "2cad179e-76e8-4f3f-90ae-88461e031ccc"
-      },
-      {
-        "name": "Weapon Specialization Soldier",
-        "modifier": "@details.level.value",
-        "type": "untyped",
-        "effectType": "weapon-damage",
-        "valueAffected": "basicM",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "705ed57e-6be0-4b8d-adeb-1b73c1f684cd"
-      },
-      {
-        "name": "Weapon Specialization Soldier",
-        "modifier": "-ceil(@details.level.value / 2)",
-        "type": "untyped",
-        "effectType": "weapon-property-damage",
-        "valueAffected": "operative",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "717864d5-5780-40f5-95b4-99f94829ed78"
-      },
-      {
-        "name": "Weapon Specialization Soldier",
-        "modifier": "@details.level.value",
-        "type": "untyped",
-        "effectType": "weapon-damage",
-        "valueAffected": "advancedM",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "max": 0,
-        "_id": "6ef80090-b369-4709-b650-d46d698a033c"
-      },
-      {
-        "name": "Weapon Specialization Soldier",
-        "modifier": "@details.level.value",
-        "type": "untyped",
-        "effectType": "weapon-attacks",
-        "valueAffected": "longA",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "max": 0,
-        "_id": "972cc776-68fe-424d-a3ae-6fdb077b8c61"
-      },
-      {
-        "name": "Weapon Specialization Soldier",
-        "modifier": "@details.level.value",
-        "type": "untyped",
-        "effectType": "weapon-attacks",
-        "valueAffected": "heavy",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "max": 0,
-        "_id": "4de05472-c977-422d-868e-e39679512259"
-      },
-      {
-        "name": "Weapon Specialization Soldier",
-        "modifier": "@details.level.value",
-        "type": "untyped",
-        "effectType": "weapon-damage",
-        "valueAffected": "sniper",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "max": 0,
-        "_id": "be857ef3-ca8f-42f7-ba07-7f897ec200db"
-      }
-    ],
-    "requirements": "3rd Level",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "Soldier",
+    "target": {
+      "type": "",
+      "value": null
     },
-    "abilityMods": {
-      "parts": []
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
     }
   },
-  "_id": "xaRnmvb5IFHmexPz"
+  "effects": [],
+  "flags": {},
+  "img": "systems/sfrpg/images/cup/gameplay/soldier.png"
 }

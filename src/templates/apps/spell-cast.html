@@ -7,7 +7,7 @@
         <div class="form-fields stacked">
             {{#each item.data.allowedClasses as |isAllowed allowedClass|}}
                 {{#if isAllowed}}
-                    <label class="checkbox"><input type="checkbox" name="" {{checked isAllowed}} disabled /> {{lookup ../config.allowedClasses allowedClass}}</label>
+                    <label class="checkbox"><input type="checkbox" name="" {{checked isAllowed}} disabled /> {{lookup ../config.spellcastingClasses allowedClass}}</label>
                 {{/if}}
             {{/each}}
         </div>

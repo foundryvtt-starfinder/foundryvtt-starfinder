@@ -1,40 +1,40 @@
 {
+  "_id": "QiXsxUPrbd44tr16",
   "name": "Quick Rescan",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You quickly check the sensors to see minor changes and updates that your starship has made available since the last time your crew scanned the your opponent’s starship. A science officer must have used the scan action in a previous round to determine information about the other starship you are looking for updates on. If you succeed at a Computers check (DC = 5 + 1-1/2 × the tier of the starship being scanned + its bonus from defensive countermeasures), you receive one piece of information, such as the ship’s current Hull Points or its current distribution of Shield Points. You can take this action only if no science officer actions have been taken during the helm phase (including visual identification and quick rescan).</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "COM",
     "type": "",
-    "role": "minorCrew",
-    "order": 30,
-    "phase": {
-      "name": "Helm phase",
-      "tooltip": "This action can be taken only during the helm phase."
+    "dc": {
+      "resolve": false,
+      "value": "5 + 1-1/2 * Target Ship Tier + it's bonus from defensive countermeasures"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You quickly check the sensors to see minor changes and updates that your starship has made available since the last time your crew scanned the your opponent’s starship. A science officer must have used the scan action in a previous round to determine information about the other starship you are looking for updates on. If you succeed at a Computers check (DC = 5 + 1-1/2 × the tier of the starship being scanned + its bonus from defensive countermeasures), you receive one piece of information, such as the ship’s current Hull Points or its current distribution of Shield Points. You can take this action only if no science officer actions have been taken during the helm phase (including visual identification and quick rescan).</p>"
+    },
+    "effectCritical": "",
+    "effectNormal": "You quickly check the sensors to see minor changes and updates that your starship has made available since the last time your crew scanned the your opponent’s starship. A science officer must have used the scan action in a previous round to determine information about the other starship you are looking for updates on. If you succeed at a Computers check (DC = 5 + 1-1/2 × the tier of the starship being scanned + its bonus from defensive countermeasures), you receive one piece of information, such as the ship’s current Hull Points or its current distribution of Shield Points. You can take this action only if no science officer actions have been taken during the helm phase (including visual identification and quick rescan).",
     "formula": [
       {
         "name": "Computers",
         "formula": "@minorCrew.skills.com.mod"
       }
     ],
+    "isPush": false,
+    "order": 30,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "resolvePointCost": 0,
+    "role": "minorCrew",
+    "selectorKey": "minorCrew",
     "selectors": [
       "minorCrew"
     ],
-    "selectorKey": "minorCrew",
-    "dc": {
-      "value": "5 + 1-1/2 * Target Ship Tier + it's bonus from defensive countermeasures",
-      "resolve": false
-    },
-    "effectNormal": "You quickly check the sensors to see minor changes and updates that your starship has made available since the last time your crew scanned the your opponent’s starship. A science officer must have used the scan action in a previous round to determine information about the other starship you are looking for updates on. If you succeed at a Computers check (DC = 5 + 1-1/2 × the tier of the starship being scanned + its bonus from defensive countermeasures), you receive one piece of information, such as the ship’s current Hull Points or its current distribution of Shield Points. You can take this action only if no science officer actions have been taken during the helm phase (including visual identification and quick rescan).",
-    "effectCritical": ""
+    "source": "COM"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "QiXsxUPrbd44tr16"
+  "img": "icons/svg/mystery-man.svg"
 }

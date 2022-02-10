@@ -1,8 +1,9 @@
 export default function (engine) {
     engine.closures.add("calculateStarshipTargetLock", (fact, context) => {
         const data = fact.data;
+        const actor = fact.actor;
 
-        const pilot = (data.crew?.pilot?.actors) ? data.crew?.pilot?.actors[0] : null;
+        const pilot = (actor.data.crew?.pilot?.actors) ? actor.data.crew?.pilot?.actors[0] : null;
         const sizeMod = CONFIG.SFRPG.starshipSizeMod[data.details.size] || 0;
 
         let pilotingRanks = pilot?.data?.data?.skills?.pil?.ranks || 0;

@@ -1,22 +1,20 @@
 {
+  "_id": "rduQ5X6UqXWduwRQ",
   "name": "Taunt",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You can use the communications system to broadcast a taunting message to the enemy vessel. You select an enemy vessel and a phase of combat (engineering, helm, or gunnery), and then attempt a Bluff or Intimidate check (DC = 15 + 1-1/2 × the enemy starship’s tier). If you are successful, each enemy character acting during the selected phase takes a –2 penalty to all checks for 1d4 rounds; the penalty increases to –4 if the enemy’s check is made as part of a push action. Once used against an enemy starship, regardless of the outcome, taunt can’t be used against that starship again during the same combat.</p><h2>Critical effect</h2><p>Your strong words push just the right buttons. The penalty your taunt action applies to an enemy ship continues through all three phases of combat instead of just one.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "captain",
-    "order": 20,
-    "phase": {
-      "name": "Any phase",
-      "tooltip": "This action can be used during any phase of combat."
+    "dc": {
+      "resolve": false,
+      "value": "15 + 1-1/2 * Target Ship Tier"
     },
-    "isPush": true,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You can use the communications system to broadcast a taunting message to the enemy vessel. You select an enemy vessel and a phase of combat (engineering, helm, or gunnery), and then attempt a Bluff or Intimidate check (DC = 15 + 1-1/2 × the enemy starship’s tier). If you are successful, each enemy character acting during the selected phase takes a –2 penalty to all checks for 1d4 rounds; the penalty increases to –4 if the enemy’s check is made as part of a push action. Once used against an enemy starship, regardless of the outcome, taunt can’t be used against that starship again during the same combat.</p><h2>Critical effect</h2><p>Your strong words push just the right buttons. The penalty your taunt action applies to an enemy ship continues through all three phases of combat instead of just one.</p>"
+    },
+    "effectCritical": "Your strong words push just the right buttons. The penalty your taunt action applies to an enemy ship continues through all three phases of combat instead of just one.",
+    "effectNormal": "You can use the communications system to broadcast a taunting message to the enemy vessel. You select an enemy vessel and a phase of combat (engineering, helm, or gunnery), and then attempt a Bluff or Intimidate check (DC = 15 + 1-1/2 × the enemy starship’s tier). If you are successful, each enemy character acting during the selected phase takes a –2 penalty to all checks for 1d4 rounds; the penalty increases to –4 if the enemy’s check is made as part of a push action. Once used against an enemy starship, regardless of the outcome, taunt can’t be used against that starship again during the same combat.",
     "formula": [
       {
         "name": "Bluff",
@@ -27,16 +25,18 @@
         "formula": "@captain.skills.int.mod"
       }
     ],
-    "selectors": [],
-    "selectorKey": "captain",
-    "dc": {
-      "value": "15 + 1-1/2 * Target Ship Tier",
-      "resolve": false
+    "isPush": true,
+    "order": 20,
+    "phase": {
+      "name": "Any phase",
+      "tooltip": "This action can be used during any phase of combat."
     },
-    "effectNormal": "You can use the communications system to broadcast a taunting message to the enemy vessel. You select an enemy vessel and a phase of combat (engineering, helm, or gunnery), and then attempt a Bluff or Intimidate check (DC = 15 + 1-1/2 × the enemy starship’s tier). If you are successful, each enemy character acting during the selected phase takes a –2 penalty to all checks for 1d4 rounds; the penalty increases to –4 if the enemy’s check is made as part of a push action. Once used against an enemy starship, regardless of the outcome, taunt can’t be used against that starship again during the same combat.",
-    "effectCritical": "Your strong words push just the right buttons. The penalty your taunt action applies to an enemy ship continues through all three phases of combat instead of just one."
+    "resolvePointCost": 0,
+    "role": "captain",
+    "selectorKey": "captain",
+    "selectors": [],
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "rduQ5X6UqXWduwRQ"
+  "img": "icons/svg/mystery-man.svg"
 }

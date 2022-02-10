@@ -155,12 +155,13 @@ export class DiceSFRPG {
     * @param {SpeakerData}          data.speaker       The ChatMessage speaker to pass when creating the chat
     * @param {string}               data.flavor        Any flavor text associated with this roll
     * @param {Boolean}              [data.advantage]   Allow rolling with advantage (and therefore also with disadvantage)
+    * @param {Object}               data.rollOptions   Additional options to be stored with the roll
     * @param {Number}               [data.critical]    The value of d20 result which represents a critical success
     * @param {Number}               [data.fumble]      The value of d20 result which represents a critical failure
     * @param {onD20DialogClosed}    data.onClose       Callback for actions to take when the dialog form is closed
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     */
-    static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true,
+    static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, onClose, dialogOptions }) {
 
         flavor = `${title}${(flavor ? " - " + flavor : "")}`;
@@ -173,17 +174,17 @@ export class DiceSFRPG {
         /** New roll formula system */
         const buttons = {};
         if (game.settings.get("sfrpg", "useAdvantageDisadvantage") && advantage) {
-            buttons["Disadvantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
-            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
-            buttons["Advantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
+            buttons["Disadvantage"] = { id: "disadvantage", label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
+            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
+            buttons["Advantage"] = { id: "advantage", label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
         } else {
-            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
+            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
         }
 
         const options = {
             debug: false,
             buttons: buttons,
-            defaultButton: "Normal",
+            defaultButton: "normal",
             title: title,
             skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "1d20",
@@ -219,9 +220,9 @@ export class DiceSFRPG {
             }
 
             let dieRoll = "1d20";
-            if (button === "Disadvantage") {
+            if (button === "disadvantage") {
                 dieRoll = "2d20kl";
-            } else if (button === "Advantage") {
+            } else if (button === "advantage") {
                 dieRoll = "2d20kh";
             }
 
@@ -231,7 +232,13 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation });
+            const tags = [];
+            if (rollOptions?.actionTarget) {
+                tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}) });
+            }
+
+            const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
+            rollObject.options.rollOptions = rollOptions;
             let roll = await rollObject.evaluate({async: true});
 
             // Flag critical thresholds
@@ -266,7 +273,8 @@ export class DiceSFRPG {
                     rollMode: rollMode,
                     breakdown: preparedRollExplanation,
                     htmlData: htmlData,
-                    rollType: "normal"
+                    rollType: "normal",
+                    rollOptions: rollOptions
                 };
 
                 try {
@@ -278,17 +286,22 @@ export class DiceSFRPG {
             }
             
             if (!useCustomCard) {
-                const content = await roll.render({ htmlData: htmlData });
-
-                ChatMessage.create({
+                const messageData = {
                     flavor: flavor,
                     speaker: speaker,
-                    content: content,
                     rollMode: rollMode,
                     roll: roll,
                     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-                    sound: CONFIG.sounds.dice
-                });
+                    sound: CONFIG.sounds.dice,
+                    flags: {rollOptions: rollOptions}
+                };
+
+                messageData.content = await roll.render({ htmlData: htmlData });
+                if (rollOptions?.actionTarget) {
+                    messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
+                }
+
+                ChatMessage.create(messageData);
             }
 
             if (onClose) {
@@ -334,17 +347,17 @@ export class DiceSFRPG {
         /** New roll formula system */
         const buttons = {};
         if (game.settings.get("sfrpg", "useAdvantageDisadvantage") && advantage) {
-            buttons["Disadvantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
-            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
-            buttons["Advantage"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
+            buttons["Disadvantage"] = { id: "disadvantage", label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
+            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
+            buttons["Advantage"] = { id: "advantage", label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
         } else {
-            buttons["Normal"] = { label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
+            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
         }
 
         const options = {
             debug: false,
             buttons: buttons,
-            defaultButton: "Normal",
+            defaultButton: "normal",
             title: title,
             skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: mainDie ? "1" + mainDie : null,
@@ -362,9 +375,9 @@ export class DiceSFRPG {
                 if (mainDie) {
                     let dieRoll = "1" + mainDie;
                     if (mainDie === "d20") {
-                        if (button === "Disadvantage") {
+                        if (button === "disadvantage") {
                             dieRoll = "2d20kl";
-                        } else if (button === "Advantage") {
+                        } else if (button === "advantage") {
                             dieRoll = "2d20kh";
                         }
                     }
@@ -373,8 +386,9 @@ export class DiceSFRPG {
                     finalFormula.formula = dieRoll + " + " + finalFormula.formula;
                 }
 
-                const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
+                const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags, skipUI: true });
                 let roll = await rollObject.evaluate({async: true});
+                roll.options.rollMode = rollMode;
     
                 // Flag critical thresholds
                 for (let d of roll.dice) {
@@ -414,6 +428,7 @@ export class DiceSFRPG {
     
                     const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
                     const roll = await rollObject.evaluate({async: true});
+                    roll.options.rollMode = rollMode;
             
                     // Flag critical thresholds
                     for (let d of roll.dice) {
@@ -456,12 +471,27 @@ export class DiceSFRPG {
 
         /** New roll formula system */
         const buttons = {
-            Normal: { label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
-            Critical: { label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
+            Normal: { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
+            Critical: { id: "critical", label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
+        };
+
+        const getDamageTypeForPart = (part) => {
+            if (part.types && !foundry.utils.isObjectEmpty(part.types)) {
+                const filteredTypes = Object.entries(part.types).filter(type => type[1]);
+                const obj = { types: [], operator: "" };
+
+                for (const type of filteredTypes) {
+                    obj.types.push(type[0]);
+                }
+
+                obj.operator = "and";
+
+                return obj;
+            }
         };
 
         /** @type {DamageType[]} */
-        const damageTypes = parts.reduce((acc, cur) => {
+        let damageTypes = parts.reduce((acc, cur) => {
             if (cur.types && !foundry.utils.isObjectEmpty(cur.types)) {
                 const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
@@ -482,7 +512,7 @@ export class DiceSFRPG {
         const options = {
             debug: false,
             buttons: buttons,
-            defaultButton: "Normal",
+            defaultButton: "normal",
             title: title,
             skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "",
@@ -491,26 +521,48 @@ export class DiceSFRPG {
             useRawStrings: false
         };
 
-        const partMapper = (part) => {
+        const finalParts = [];
+        const damageSections = [];
+        for (const part of parts) {
             if (part instanceof Object) {
+                if (part.isDamageSection) {
+                    damageSections.push(part);
+
+                    const additionalOptions = duplicate(options);
+                    additionalOptions.skipUI = true;
+
+                    const tempTree = new RollTree(additionalOptions);
+                    const evaluatedPartFormula = await tempTree.buildRoll(part.formula, rollContext, async (button, rollMode, finalFormula, na) => {
+                        part.formula = finalFormula.finalRoll;
+                    });
+                    continue;
+                }
+
                 if (part.explanation) {
                     if (part.formula) {
-                        return `${part.formula}[${part.explanation}]`;
+                        finalParts.push(`${part.formula}[${part.explanation}]`);
+                    } else {
+                        finalParts.push(`0[${part.explanation}]`);
                     }
-                    return `0[${part.explanation}]`;
                 } else {
                     if (part.formula) {
-                        return `${part.formula}`;
+                        finalParts.push(`${part.formula}`);
+                    } else {
+                        finalParts.push(`0`);
                     }
-                    return `0`;
                 }
+            } else {
+                finalParts.push(formula);
             }
-            return part;
-        };
+        }
 
-        const formula = parts.map(partMapper).join(" + ");
+        if (damageSections) {
+            finalParts.splice(0, 0, "<damageSection>");
+        }
+
+        const formula = finalParts.join(" + ");
         const tree = new RollTree(options);
-        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula) => {
+        return tree.buildRoll(formula, rollContext, async (button, rollMode, finalFormula, part) => {
             if (button === 'cancel') {
                 if (onClose) {
                     onClose(null, null, null, false);
@@ -523,7 +575,13 @@ export class DiceSFRPG {
             /** @type {HtmlData[]} */
             const htmlData = [{ name: "is-damage", value: "true" }];
 
-            const tempParts = parts.reduce((arr, curr) => {
+            const usedParts = part ? [part] : parts;
+            if (part) {
+                part.operator = "and";
+            }
+
+            let damageTypeString = "";
+            const tempParts = usedParts.reduce((arr, curr) => {
                 let obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
                 if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
                     for (const [key, isEnabled] of Object.entries(curr.types)) {
@@ -536,6 +594,14 @@ export class DiceSFRPG {
                 if (obj.types && obj.types.length > 0) {
                     const tag = `damage-type-${(obj.types.join(`-${obj.operator}-`))}`;
                     const text = obj.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[obj.operator]} `);
+                    const shortText = obj.types.map(type => SFRPG.damageTypeToAcronym[type]).join(` & `);
+
+                    // In most use cases, damage rolls should never contain more parts. But because the system is complex and confusing, it is theoretically possible.
+                    // If that happens, we'll just concatenate the damage types to the roll string and pretend nothing is wrong.
+                    if (damageTypeString?.length > 0) {
+                        damageTypeString += ", ";
+                    }
+                    damageTypeString += shortText;
                     
                     if (!tags.some(t => t.tag === tag && t.text === text))
                         tags.push({ tag: tag, text: text });
@@ -588,20 +654,33 @@ export class DiceSFRPG {
                         } catch { }
                     }
                 }
+
+                const specialMaterials = itemContext.entity.data.data.specialMaterials;
+                if (specialMaterials) {
+                    for (const [material, isEnabled] of Object.entries(specialMaterials)) {
+                        if (isEnabled) {
+                            tags.push({tag: material, text: SFRPG.specialMaterials[material]});
+                        }
+                    }
+                }
             }
 
-            const isCritical = (button === "Critical");
+            const isCritical = (button === "critical");
+            let finalFlavor = duplicate(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
                 tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
-                finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
-                finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
+
+                if (!criticalData?.preventDoubling) {
+                    finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
+                    finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
+                }
                 
-                let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
+                let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
                 
                 if (criticalData !== undefined) {
                     if (criticalData?.effect?.trim().length > 0) {
-                        tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": flavor, "criticalEffect": criticalData.effect });
+                        tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": finalFlavor, "criticalEffect": criticalData.effect });
                         tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                     }
 
@@ -614,7 +693,17 @@ export class DiceSFRPG {
                     htmlData.push({ name: "critical-data", value: JSON.stringify(criticalData) });
                 }
 
-                flavor = tempFlavor;
+                finalFlavor = tempFlavor;
+            }
+
+            if (part) {
+                finalFlavor += `: ${part.name}`;
+                if (part.partIndex) {
+                    finalFlavor += ` (${part.partIndex})`;
+                }
+                //const originalTypes = duplicate(damageTypes);
+                //damageTypes = [getDamageTypeForPart(part)];
+                //console.log([originalTypes, damageTypes]);
             }
             
             finalFormula.formula = finalFormula.formula.replace(/\+ -/gi, "- ").replace(/\+ \+/gi, "+ ").trim();
@@ -652,15 +741,20 @@ export class DiceSFRPG {
             if (useCustomCard) {
                 //Push the roll to the ChatBox
                 const customData = {
-                    title: flavor,
+                    title: finalFlavor,
                     rollContext:  rollContext,
                     speaker: speaker,
                     rollMode: rollMode,
                     breakdown: preparedRollExplanation,
                     tags: tags,
                     htmlData: htmlData,
-                    rollType: "damage"
+                    rollType: "damage",
+                    damageTypeString: damageTypeString
                 };
+
+                if (itemContext && itemContext.entity.data.data.specialMaterials) {
+                    customData.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                }
 
                 try {
                     useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
@@ -671,17 +765,34 @@ export class DiceSFRPG {
             }
             
             if (!useCustomCard) {
-                const content = await roll.render({ htmlData: htmlData });
+                let rollContent = await roll.render({ htmlData: htmlData });
 
-                ChatMessage.create({
-                    flavor: flavor,
+                const messageData = {
+                    flavor: finalFlavor,
                     speaker: speaker,
-                    content: content,
+                    content: rollContent,
                     rollMode: rollMode,
                     roll: roll,
                     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
                     sound: CONFIG.sounds.dice
-                });
+                };
+
+                // Insert the damage type string if possible.
+                if (damageTypeString?.length > 0) {
+                    messageData.content = DiceSFRPG.appendTextToRoll(rollContent, damageTypeString);
+                    messageData.flags = {
+                        damage: {
+                            amount: roll.total,
+                            types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
+                        }
+                    };
+
+                    if (itemContext && itemContext.entity.data.data.specialMaterials) {
+                        messageData.flags.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                    }
+                }
+                
+                ChatMessage.create(messageData);
             }
 
             if (onClose) {
@@ -692,6 +803,21 @@ export class DiceSFRPG {
                 throw errorToThrow;
             }
         });
+    }
+
+    static appendTextToRoll(originalRollHTML, textToAppend) {
+        const diceRollHtml = '<h4 class="dice-roll">';
+
+        const diceRollIndex = originalRollHTML.indexOf(diceRollHtml);
+        const firstHalf = originalRollHTML.substring(0, diceRollIndex + diceRollHtml.length);
+        const splitOffFirstHalf = originalRollHTML.substring(diceRollIndex + diceRollHtml.length);
+
+        const closeTagIndex = splitOffFirstHalf.indexOf('</h4>');
+        const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
+        const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
+
+        const combinedResult = firstHalf + rollResultHtml + ` ${textToAppend}` + secondHalf;
+        return combinedResult;
     }
 
     /**
@@ -784,5 +910,52 @@ export class DiceSFRPG {
             }
         }
         return finalResult;
+    }
+
+    static resolveFormulaWithoutDice(sourceFormula, rollContext, options = {logErrors: true}) {
+        const resolveResult = {
+            sourceFormula: sourceFormula,
+            evaluatedFormula: null,
+            total: 0,
+            hadError: false
+        };
+
+        let resultValue = 0;
+
+        const tree = new RollTree({skipUI: true});
+        tree.buildRoll(sourceFormula, rollContext, async (button, rollMode, finalFormula) => {
+            try {
+                const formula = Roll.replaceFormulaData(finalFormula.finalRoll, null);
+                resultValue = Roll.safeEval(formula);
+                resolveResult.evaluatedFormula = formula;
+            } catch (error) {
+                if (options?.logErrors) {
+                    console.error(['Failed to evaluate diceless formula, are there dice terms in there?', sourceFormula, rollContext, finalFormula.finalRoll, error]);
+                }
+                resolveResult.hadError = true;
+            }
+        });
+
+        if (!resolveResult.hadError) {
+            try {
+                const finalResult = eval(resultValue);
+                const finalNumber = Number(finalResult);
+                if (!Number.isNaN(finalNumber)) {
+                    resolveResult.total = finalNumber;
+                } else {
+                    if (options?.logErrors) {
+                        console.log(['Failed to evaluate diceless formula to a number', sourceFormula, rollContext, resultValue]);
+                    }
+                    resolveResult.hadError = true;
+                }
+            } catch (error) {
+                if (options?.logErrors) {
+                    console.log(['Error resolving diceless formula', sourceFormula, rollContext, error]);
+                }
+                resolveResult.hadError = true;
+            }
+        }
+
+        return resolveResult;
     }
 }

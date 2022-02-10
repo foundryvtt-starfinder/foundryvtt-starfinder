@@ -1,37 +1,37 @@
 {
+  "_id": "umc9JwD3YQmZhOyh",
   "name": "Shoot",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You can fire one of your starship’s weapons. If you use a turret weapon, you can target a ship in any arc.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "gunner",
-    "order": 10,
-    "phase": {
-      "name": "Gunnery phase",
-      "tooltip": "This action can be taken only during the gunnery phase."
+    "dc": null,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You can fire one of your starship’s weapons. If you use a turret weapon, you can target a ship in any arc.</p>"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "effectCritical": "",
+    "effectNormal": "You can fire one of your starship’s weapons. If you use a turret weapon, you can target a ship in any arc.",
     "formula": [
       {
         "name": "Gunnery",
         "formula": "max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks) + @gunner.abilities.dex.mod"
       }
     ],
+    "isPush": false,
+    "order": 10,
+    "phase": {
+      "name": "Gunnery phase",
+      "tooltip": "This action can be taken only during the gunnery phase."
+    },
+    "resolvePointCost": 0,
+    "role": "gunner",
+    "selectorKey": "gunner",
     "selectors": [
       "gunner"
     ],
-    "selectorKey": "gunner",
-    "dc": null,
-    "effectNormal": "You can fire one of your starship’s weapons. If you use a turret weapon, you can target a ship in any arc.",
-    "effectCritical": ""
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "umc9JwD3YQmZhOyh"
+  "img": "icons/svg/mystery-man.svg"
 }

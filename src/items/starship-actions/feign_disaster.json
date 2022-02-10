@@ -1,40 +1,40 @@
 {
+  "_id": "YgHwyM4ATjSmUfX9",
   "name": "Feign Disaster",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>As a ploy, you can activate fake distress calls, set off false internal alarms, artificially blow outer doors of airlocks, dump trash and other debris from your ship’s jettison tubes, and intentionally leak panicked-sounding internal communications over public communication channels to convince your opponents that your ship has suffered a catastrophic failure and may imminently explode or otherwise cease functioning in a violent, spectacular manner. Each enemy vessel’s captain (or the science officer with the highest Computers skill bonus, if the ship has no captain) must attempt a Computers check (DC = 10 + 1-1/2 × your starship’s tier) immediately after you take this action; this doesn’t take them an action. On a successful check, the enemy ship’s crew sees through your ruse and this action has no effect, but on a failed check, their crews automatically take steps to ensure that their own ship’s sensors are not blinded by the energy released by your ship’s theoretical imminent destruction. These emergency procedures impose a –2 penalty on their checks for scan and lock on actions taken against your ship, as well as on Piloting checks attempted while within 1 hex of your starship. Once used, regardless of the outcome, feign disaster can’t be used again during the same combat encounter, even against different opponents or newcomers to the battlefield.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "COM",
     "type": "",
-    "role": "openCrew",
-    "order": 10,
-    "phase": {
-      "name": "Engineering phase, Open",
-      "tooltip": "Open crew actions occur at the beginning of the engineering phase, before any other actions occur. All open crew actions occur simultaneously and can be resolved in any order the GM sees fit. Each open crew action can be performed only once per round."
+    "dc": {
+      "resolve": true,
+      "value": "10 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>As a ploy, you can activate fake distress calls, set off false internal alarms, artificially blow outer doors of airlocks, dump trash and other debris from your ship’s jettison tubes, and intentionally leak panicked-sounding internal communications over public communication channels to convince your opponents that your ship has suffered a catastrophic failure and may imminently explode or otherwise cease functioning in a violent, spectacular manner. Each enemy vessel’s captain (or the science officer with the highest Computers skill bonus, if the ship has no captain) must attempt a Computers check (DC = 10 + 1-1/2 × your starship’s tier) immediately after you take this action; this doesn’t take them an action. On a successful check, the enemy ship’s crew sees through your ruse and this action has no effect, but on a failed check, their crews automatically take steps to ensure that their own ship’s sensors are not blinded by the energy released by your ship’s theoretical imminent destruction. These emergency procedures impose a –2 penalty on their checks for scan and lock on actions taken against your ship, as well as on Piloting checks attempted while within 1 hex of your starship. Once used, regardless of the outcome, feign disaster can’t be used again during the same combat encounter, even against different opponents or newcomers to the battlefield.</p>"
+    },
+    "effectCritical": "",
+    "effectNormal": "As a ploy, you can activate fake distress calls, set off false internal alarms, artificially blow outer doors of airlocks, dump trash and other debris from your ship’s jettison tubes, and intentionally leak panicked-sounding internal communications over public communication channels to convince your opponents that your ship has suffered a catastrophic failure and may imminently explode or otherwise cease functioning in a violent, spectacular manner. Each enemy vessel’s captain (or the science officer with the highest Computers skill bonus, if the ship has no captain) must attempt a Computers check (DC = 10 + 1-1/2 × your starship’s tier) immediately after you take this action; this doesn’t take them an action. On a successful check, the enemy ship’s crew sees through your ruse and this action has no effect, but on a failed check, their crews automatically take steps to ensure that their own ship’s sensors are not blinded by the energy released by your ship’s theoretical imminent destruction. These emergency procedures impose a –2 penalty on their checks for scan and lock on actions taken against your ship, as well as on Piloting checks attempted while within 1 hex of your starship. Once used, regardless of the outcome, feign disaster can’t be used again during the same combat encounter, even against different opponents or newcomers to the battlefield.",
     "formula": [
       {
         "name": "Feign Disaster (No skill check required)",
         "formula": "0"
       }
     ],
+    "isPush": false,
+    "order": 10,
+    "phase": {
+      "name": "Engineering phase, Open",
+      "tooltip": "Open crew actions occur at the beginning of the engineering phase, before any other actions occur. All open crew actions occur simultaneously and can be resolved in any order the GM sees fit. Each open crew action can be performed only once per round."
+    },
+    "resolvePointCost": 0,
+    "role": "openCrew",
+    "selectorKey": "openCrew",
     "selectors": [
       "openCrew"
     ],
-    "selectorKey": "openCrew",
-    "dc": {
-      "value": "10 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
-    },
-    "effectNormal": "As a ploy, you can activate fake distress calls, set off false internal alarms, artificially blow outer doors of airlocks, dump trash and other debris from your ship’s jettison tubes, and intentionally leak panicked-sounding internal communications over public communication channels to convince your opponents that your ship has suffered a catastrophic failure and may imminently explode or otherwise cease functioning in a violent, spectacular manner. Each enemy vessel’s captain (or the science officer with the highest Computers skill bonus, if the ship has no captain) must attempt a Computers check (DC = 10 + 1-1/2 × your starship’s tier) immediately after you take this action; this doesn’t take them an action. On a successful check, the enemy ship’s crew sees through your ruse and this action has no effect, but on a failed check, their crews automatically take steps to ensure that their own ship’s sensors are not blinded by the energy released by your ship’s theoretical imminent destruction. These emergency procedures impose a –2 penalty on their checks for scan and lock on actions taken against your ship, as well as on Piloting checks attempted while within 1 hex of your starship. Once used, regardless of the outcome, feign disaster can’t be used again during the same combat encounter, even against different opponents or newcomers to the battlefield.",
-    "effectCritical": ""
+    "source": "COM"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "YgHwyM4ATjSmUfX9"
+  "img": "icons/svg/mystery-man.svg"
 }

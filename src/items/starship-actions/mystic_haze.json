@@ -1,40 +1,40 @@
 {
+  "_id": "OTWPk0lEeOwebAD3",
   "name": "Mystic Haze",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>If you have at least 6 ranks in Mysticism, you can spend 1 Resolve Point and attempt a Mysticism check (DC = 15 + 1-1/2 × your starship’s tier); if you succeed, you call forth a magical burst of static to block your enemy’s view. This obscuring field garbles your opponent’s sensors and hinders their ability to gain information about your ship’s defenses and positioning, providing your starship a +1 enhancement bonus to AC until the end of the next round. In addition, the increased interference means all science officers on the opposing starship taking the scan or lock on actions before the end of the next round must roll twice for their checks and use the worse result.</p><h2>Critical effect</h2><p>Your conjured haze is especially powerful. The granted enhancement bonus to AC increases to +2 and also affects your starship’s TL.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "magicOfficer",
-    "order": 30,
-    "phase": {
-      "name": "Engineering phase",
-      "tooltip": "This action can be used during the engineering phase of combat."
+    "dc": {
+      "resolve": true,
+      "value": "15 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": true,
-    "resolvePointCost": 1,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>If you have at least 6 ranks in Mysticism, you can spend 1 Resolve Point and attempt a Mysticism check (DC = 15 + 1-1/2 × your starship’s tier); if you succeed, you call forth a magical burst of static to block your enemy’s view. This obscuring field garbles your opponent’s sensors and hinders their ability to gain information about your ship’s defenses and positioning, providing your starship a +1 enhancement bonus to AC until the end of the next round. In addition, the increased interference means all science officers on the opposing starship taking the scan or lock on actions before the end of the next round must roll twice for their checks and use the worse result.</p><h2>Critical effect</h2><p>Your conjured haze is especially powerful. The granted enhancement bonus to AC increases to +2 and also affects your starship’s TL.</p>"
+    },
+    "effectCritical": "Your conjured haze is especially powerful. The granted enhancement bonus to AC increases to +2 and also affects your starship’s TL.",
+    "effectNormal": "If you have at least 6 ranks in Mysticism, you can spend 1 Resolve Point and attempt a Mysticism check (DC = 15 + 1-1/2 × your starship’s tier); if you succeed, you call forth a magical burst of static to block your enemy’s view. This obscuring field garbles your opponent’s sensors and hinders their ability to gain information about your ship’s defenses and positioning, providing your starship a +1 enhancement bonus to AC until the end of the next round. In addition, the increased interference means all science officers on the opposing starship taking the scan or lock on actions before the end of the next round must roll twice for their checks and use the worse result.",
     "formula": [
       {
         "name": "Mysticism",
         "formula": "@magicOfficer.skills.mys.mod"
       }
     ],
+    "isPush": true,
+    "order": 30,
+    "phase": {
+      "name": "Engineering phase",
+      "tooltip": "This action can be used during the engineering phase of combat."
+    },
+    "resolvePointCost": 1,
+    "role": "magicOfficer",
+    "selectorKey": "magicOfficer",
     "selectors": [
       "magicOfficer"
     ],
-    "selectorKey": "magicOfficer",
-    "dc": {
-      "value": "15 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
-    },
-    "effectNormal": "If you have at least 6 ranks in Mysticism, you can spend 1 Resolve Point and attempt a Mysticism check (DC = 15 + 1-1/2 × your starship’s tier); if you succeed, you call forth a magical burst of static to block your enemy’s view. This obscuring field garbles your opponent’s sensors and hinders their ability to gain information about your ship’s defenses and positioning, providing your starship a +1 enhancement bonus to AC until the end of the next round. In addition, the increased interference means all science officers on the opposing starship taking the scan or lock on actions before the end of the next round must roll twice for their checks and use the worse result.",
-    "effectCritical": "Your conjured haze is especially powerful. The granted enhancement bonus to AC increases to +2 and also affects your starship’s TL."
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "OTWPk0lEeOwebAD3"
+  "img": "icons/svg/mystery-man.svg"
 }

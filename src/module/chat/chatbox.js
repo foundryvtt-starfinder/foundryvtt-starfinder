@@ -1,3 +1,6 @@
+import { DiceSFRPG } from "../dice.js";
+import { SFRPG } from "../config.js";
+
 /**
  * Helper class to handle the display of chatBox
  */
@@ -11,16 +14,6 @@ export default class SFRPGCustomChatMessage {
         } else {
             return "";
         }
-    }
-
-    /**
-     * Render a custom damage roll.
-     * 
-     * @param {Roll} roll The roll data
-     * @param {object} data The data for the roll
-     */
-    static async renderDamageRoll(roll, data) {
-
     }
 
     /**
@@ -75,8 +68,30 @@ export default class SFRPGCustomChatMessage {
             actorId: actor.id,
             tokenId: this.getToken(actor),
             breakdown: data.breakdown,
-            tags: data.tags
+            tags: data.tags,
+            damageTypeString: data.damageTypeString,
+            specialMaterials: data.specialMaterials,
+            rollOptions: data.rollOptions,
         };
+
+        const speaker = data.speaker;
+        if (speaker) {
+            let setImage = false;
+            if (speaker.token) {
+                const token = game.scenes.get(speaker.scene)?.tokens?.get(speaker.token);
+                if (token) {
+                    options.tokenImg = token.data.img;
+                    setImage = true;
+                }
+            }
+
+            if (speaker.actor && !setImage) {
+                const actor = Actors.instance.get(speaker.actor);
+                if (actor) {
+                    options.tokenImg = actor.data.img;
+                }
+            }
+        }
 
         SFRPGCustomChatMessage._render(roll, data, options);
 
@@ -85,7 +100,18 @@ export default class SFRPGCustomChatMessage {
 
     static async _render(roll, data, options) {
         const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.html";
-        const rollContent = await roll.render({htmlData: data.htmlData});
+        let rollContent = await roll.render({htmlData: data.htmlData});
+
+        // Insert the damage type string if possible.
+        const damageTypeString = options?.damageTypeString;
+        if (damageTypeString?.length > 0) {
+            rollContent = DiceSFRPG.appendTextToRoll(rollContent, damageTypeString);
+        }
+
+        if (options.rollOptions?.actionTarget) {
+            rollContent = DiceSFRPG.appendTextToRoll(rollContent, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: options.rollOptions.actionTargetSource[options.rollOptions.actionTarget]}));
+        }
+
         options = foundry.utils.mergeObject(options, { rollContent });
         const cardContent = await renderTemplate(templateName, options);        
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
@@ -96,7 +122,7 @@ export default class SFRPGCustomChatMessage {
         //     explainedRollContent = rollContent.substring(0, insertIndex) + options.explanation + rollContent.substring(insertIndex);
         // }
 
-        ChatMessage.create({
+        const messageData = {
             flavor: data.title,
             speaker: data.speaker,
             content: cardContent, //+ explainedRollContent + (options.additionalContent || ""),
@@ -104,7 +130,25 @@ export default class SFRPGCustomChatMessage {
             roll: roll,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             sound: CONFIG.sounds.dice,
-            rollType: data.rollType
-        });
+            rollType: data.rollType,
+            flags: {}
+        };
+
+        if (damageTypeString?.length > 0) {
+            messageData.flags.damage = {
+                amount: roll.total,
+                types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
+            };
+        }
+
+        if (options?.specialMaterials) {
+            messageData.flags.specialMaterials = options.specialMaterials;
+        }
+
+        if (options.rollOptions) {
+            messageData.flags.rollOptions = options.rollOptions;
+        }
+
+        ChatMessage.create(messageData);
     }
 }

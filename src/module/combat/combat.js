@@ -561,11 +561,7 @@ export class CombatSFRPG extends Combat {
     }
 
     async _getInitiativeRoll(combatant, formula) {
-        const rollContext = new RollContext();
-        rollContext.addContext("combatant", combatant.actor);
-        rollContext.setMainContext("combatant");
-
-        combatant.actor.setupRollContexts(rollContext);
+        const rollContext = RollContext.createActorRollContext(combatant.actor);
 
         const parts = [];
 
@@ -626,6 +622,8 @@ export class CombatSFRPG extends Combat {
         const rollContent = await roll.render();
         const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
         const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+
+        rollMode = roll.options?.rollMode ?? rollMode;
 
         const chatData = {
             flavor: messageData.flavor,

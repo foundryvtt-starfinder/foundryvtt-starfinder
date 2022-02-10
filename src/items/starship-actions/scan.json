@@ -1,40 +1,40 @@
 {
+  "_id": "wOZ9xGH2l1S5lQ9g",
   "name": "Scan",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You can scan a starship with your sensors to learn information about it. This action requires your starship to have sensors (see page 300). You must attempt a Computers check, applying any modifiers from the starship’s sensors. You can attempt this check untrained. The DC for this check is equal to 5 + 1-1/2 × the tier of the starship being scanned + its bonus from defensive countermeasures (see page 298). If you succeed at this check, you learn the first unknown piece of information on the following list. For every 5 by which you exceed the check, you learn another unknown piece of information. Subsequent checks reveal new pieces of information, continuing down this list.<br/><br/>1. Basic Information: Living crew complement and ship classification, size, speed, and maneuverability.<br/>2. Defenses: AC, TL, total and current Hull Points, total and current Shield Points in each quadrant, and core PCU value.<br/>3. Weapon: Information about one weapon, including its firing arc and the damage it deals, starting with the weapon that uses the most PCU. Repeat this entry until all the starship’s weapons are revealed.<br/>4. Load: Information about how the starship’s expansion bays are allocated and any cargo the starship might be carrying.<br/>5. Other: Any remaining ship statistics.</p><h2>Critical effect</h2><p>Your insightful scans reveal a weakness in a random quadrant of the targeted starship. The next time one of your starship’s weapons deals damage to the targeted starship’s Hull Points, it has a 25% chance to also deal critical damage to a random system.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "scienceOfficer",
-    "order": 10,
-    "phase": {
-      "name": "Helm phase",
-      "tooltip": "This action can be taken only during the helm phase."
+    "dc": {
+      "resolve": false,
+      "value": "5 + 1-1/2 * Target Ship Tier + it's bonus from defensive countermeasures"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You can scan a starship with your sensors to learn information about it. This action requires your starship to have sensors (see page 300). You must attempt a Computers check, applying any modifiers from the starship’s sensors. You can attempt this check untrained. The DC for this check is equal to 5 + 1-1/2 × the tier of the starship being scanned + its bonus from defensive countermeasures (see page 298). If you succeed at this check, you learn the first unknown piece of information on the following list. For every 5 by which you exceed the check, you learn another unknown piece of information. Subsequent checks reveal new pieces of information, continuing down this list.<br/><br/>1. Basic Information: Living crew complement and ship classification, size, speed, and maneuverability.<br/>2. Defenses: AC, TL, total and current Hull Points, total and current Shield Points in each quadrant, and core PCU value.<br/>3. Weapon: Information about one weapon, including its firing arc and the damage it deals, starting with the weapon that uses the most PCU. Repeat this entry until all the starship’s weapons are revealed.<br/>4. Load: Information about how the starship’s expansion bays are allocated and any cargo the starship might be carrying.<br/>5. Other: Any remaining ship statistics.</p><h2>Critical effect</h2><p>Your insightful scans reveal a weakness in a random quadrant of the targeted starship. The next time one of your starship’s weapons deals damage to the targeted starship’s Hull Points, it has a 25% chance to also deal critical damage to a random system.</p>"
+    },
+    "effectCritical": "Your insightful scans reveal a weakness in a random quadrant of the targeted starship. The next time one of your starship’s weapons deals damage to the targeted starship’s Hull Points, it has a 25% chance to also deal critical damage to a random system.",
+    "effectNormal": "You can scan a starship with your sensors to learn information about it. This action requires your starship to have sensors (see page 300). You must attempt a Computers check, applying any modifiers from the starship’s sensors. You can attempt this check untrained. The DC for this check is equal to 5 + 1-1/2 × the tier of the starship being scanned + its bonus from defensive countermeasures (see page 298). If you succeed at this check, you learn the first unknown piece of information on the list found on @Compendium[sfrpg.starship-actions.wOZ9xGH2l1S5lQ9g]. For every 5 by which you exceed the check, you learn another unknown piece of information. Subsequent checks reveal new pieces of information, continuing down this list.",
     "formula": [
       {
         "name": "Computers",
         "formula": "@scienceOfficer.skills.com.mod + @ship.attributes.sensors.mod"
       }
     ],
+    "isPush": false,
+    "order": 10,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "resolvePointCost": 0,
+    "role": "scienceOfficer",
+    "selectorKey": "scienceOfficer",
     "selectors": [
       "scienceOfficer"
     ],
-    "selectorKey": "scienceOfficer",
-    "dc": {
-      "value": "5 + 1-1/2 * Target Ship Tier + it's bonus from defensive countermeasures",
-      "resolve": false
-    },
-    "effectNormal": "You can scan a starship with your sensors to learn information about it. This action requires your starship to have sensors (see page 300). You must attempt a Computers check, applying any modifiers from the starship’s sensors. You can attempt this check untrained. The DC for this check is equal to 5 + 1-1/2 × the tier of the starship being scanned + its bonus from defensive countermeasures (see page 298). If you succeed at this check, you learn the first unknown piece of information on the list found on @Compendium[sfrpg.starship-actions.wOZ9xGH2l1S5lQ9g]. For every 5 by which you exceed the check, you learn another unknown piece of information. Subsequent checks reveal new pieces of information, continuing down this list.",
-    "effectCritical": "Your insightful scans reveal a weakness in a random quadrant of the targeted starship. The next time one of your starship’s weapons deals damage to the targeted starship’s Hull Points, it has a 25% chance to also deal critical damage to a random system."
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "wOZ9xGH2l1S5lQ9g"
+  "img": "icons/svg/mystery-man.svg"
 }

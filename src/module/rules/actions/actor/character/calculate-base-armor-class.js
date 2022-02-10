@@ -120,6 +120,10 @@ export default function (engine) {
             // AC
             eac.value = 10 + eacMod;
             kac.value = 10 + kacMod;
+
+            // Max Dex
+            eac.maxDex = maxDex;
+            kac.maxDex = maxDex;
             
             if (armorEac.armor) eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorEac.value.signedString(), name: armorEac.name }));
             if (shields) shields.forEach(shield => eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.data.data.bonus.wielded || 0).signedString(), name: shield.name })));

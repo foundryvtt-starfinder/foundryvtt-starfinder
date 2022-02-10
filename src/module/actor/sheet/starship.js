@@ -1,7 +1,6 @@
 import { ActorSheetSFRPG } from "./base.js";
 import { ChoiceDialog } from "../../apps/choice-dialog.js";
 import { SFRPG } from "../../config.js";
-import { computeCompoundWealthForItem } from "../actor-inventory-utils.js"
 
 /**
  * An Actor sheet for a starship in the SFRPG system.
@@ -260,22 +259,10 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         });
         data.inventory = inventory;
 
-        let totalWealth = 0;
-        for (const section of Object.entries(inventory)) {
-            for (const sectionItem of section[1].items) {
-                const itemWealth = computeCompoundWealthForItem(sectionItem.item, sectionItem.contents);
-                totalWealth += itemWealth.totalWealth;
-                if (sectionItem.item.type === "container") {
-                    sectionItem.item.contentWealth = itemWealth.contentWealth;
-                }
-            }
-        }
-
         for (const item of cargo) {
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
         }
-        data.inventoryValue = Math.floor(totalWealth);
 
         const weapons = [].concat(forward, starboard, port, aft, turret);
         for (const weapon of weapons) {

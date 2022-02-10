@@ -67,6 +67,22 @@ SFRPG.alignments = {
 };
 
 /**
+ * NPC alignment options
+ * @type {Object}
+ */
+SFRPG.alignmentsNPC = {
+    "lg": "SFRPG.AlignmentLG",
+    "ng": "SFRPG.AlignmentNG",
+    "cg": "SFRPG.AlignmentCG",
+    "ln": "SFRPG.AlignmentLN",
+    "n": "SFRPG.AlignmentTN",
+    "cn": "SFRPG.AlignmentCN",
+    "le": "SFRPG.AlignmentLE",
+    "ne": "SFRPG.AlignmentNE",
+    "ce": "SFRPG.AlignmentCE"
+};
+
+/**
  * The set of armor proficiencies which a character may have
  * @type {Object}
  */
@@ -150,6 +166,17 @@ SFRPG.kineticDamageTypes = {
     "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
     "piercing": "SFRPG.Damage.Types.Piercing",
     "slashing": "SFRPG.Damage.Types.Slashing"
+};
+
+SFRPG.damageTypeToAcronym = {
+    "acid": "A",
+    "cold": "C",
+    "electricity": "E",
+    "fire": "F",
+    "sonic": "So",
+    "bludgeoning": "B",
+    "piercing": "P",
+    "slashing": "S"
 };
 
 SFRPG.damageTypes = {
@@ -497,6 +524,39 @@ SFRPG.weaponPropertiesTooltips = {
     "wideLine": "SFRPG.WeaponPropertiesWideLineTooltip"
 };
 
+SFRPG.specialMaterials = {
+    "abysium": "SFRPG.SpecialMaterials.Abysium",
+    "adamantine": "SFRPG.SpecialMaterials.Adamantine",
+    "coldiron": "SFRPG.SpecialMaterials.ColdIron",
+    "diatha": "SFRPG.SpecialMaterials.Diatha",
+    "djezet": "SFRPG.SpecialMaterials.Djezet",
+    "horacalcum": "SFRPG.SpecialMaterials.Horacalcum",
+    "inubrix": "SFRPG.SpecialMaterials.Inubrix",
+    "khefak": "SFRPG.SpecialMaterials.Khefak",
+    "noqual": "SFRPG.SpecialMaterials.Noqual",
+    "purplecores": "SFRPG.SpecialMaterials.PurpleCores",
+    "siccatite": "SFRPG.SpecialMaterials.Siccatite",
+    "silver": "SFRPG.SpecialMaterials.Silver",
+    "voidglass": "SFRPG.SpecialMaterials.Voidglass"
+};
+
+// Damage Reductions
+SFRPG.damageReductionTypes = {
+    "": "-",
+    ...SFRPG.specialMaterials,
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
+// Energy Resistances
+SFRPG.energyResistanceTypes = {
+    "acid": "SFRPG.Damage.Types.Acid",
+    "cold": "SFRPG.Damage.Types.Cold",
+    "electricity": "SFRPG.Damage.Types.Electricity",
+    "fire": "SFRPG.Damage.Types.Fire",
+    "sonic": "SFRPG.Damage.Types.Sonic",
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
 SFRPG.spellAreaShapes = {
     "": "",
     "cone": "SFRPG.SpellAreaShapesCone",
@@ -634,8 +694,9 @@ SFRPG.tokenSizes = {
     "colossal": 6
 };
 
-SFRPG.allowedClasses = {
+SFRPG.spellcastingClasses = {
     "myst": "SFRPG.AllowedClasses.Myst",
+    "precog": "SFRPG.AllowedClasses.Precog",
     "tech": "SFRPG.AllowedClasses.Tech",
     "wysh": "SFRPG.AllowedClasses.Wysh"
 };
@@ -775,6 +836,25 @@ SFRPG.augmentationSytems = {
 };
 
 /*--------------------------------*
+ * NPC properties and values *
+ *--------------------------------*/
+SFRPG.npctypes = {
+    "animal": "Animal",
+    "aberration": "Aberration",
+    "construct": "Construct",
+    "dragon": "Dragon",
+    "fey": "Fey",
+    "humanoid": "Humanoid",
+    "magical beast": "Magical Beast",
+    "monstrous humanoid": "Monstrous Humanoid",
+    "ooze": "Ooze",
+    "outsider": "Outsider",
+    "planet": "Plant",
+    "undead": "Undead",
+    "vermin": "Vermin"
+};
+
+/*--------------------------------*
  * Starship properties and values *
  *--------------------------------*/
 SFRPG.maneuverability = {
@@ -908,7 +988,9 @@ SFRPG.starshipSizeMod = {
     "colossal": -8
 };
 
-// End starship stuff
+/*--------------------------------*
+ * Vehicle properties and values *
+ *--------------------------------*/
 
 SFRPG.vehicleSizes = {
     "diminutive": "SFRPG.SizeDim",
@@ -970,6 +1052,7 @@ SFRPG.modifierTypes = {
     "luck": "SFRPG.ModifierTypeLuck",
     "morale": "SFRPG.ModifierTypeMorale",
     "racial": "SFRPG.ModifierTypeRacial",
+    "resistance": "SFRPG.ModifierTypeResistance",
     "untyped": "SFRPG.ModifierTypeUntyped"
 };
 
@@ -1010,7 +1093,9 @@ SFRPG.modifierEffectTypes = {
     "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
     "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
     "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
-    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource"
+    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource",
+    "damage-reduction": "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction",
+    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance"
 };
 
 SFRPG.modifierType = {
@@ -1591,4 +1676,43 @@ SFRPG.flightManeuverability = {
     "-1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Clumsy",
     "0": "SFRPG.ActorSheet.Attributes.Speed.Flight.Average",
     "1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Perfect"
+};
+
+SFRPG.actionTargets = {
+    "": "SFRPG.Items.Action.ActionTarget.None",
+    "kac": "SFRPG.Items.Action.ActionTarget.KAC",
+    "kac8": "SFRPG.Items.Action.ActionTarget.KAC8",
+    "eac": "SFRPG.Items.Action.ActionTarget.EAC",
+    "other": "SFRPG.Items.Action.ActionTarget.Other"
+};
+
+SFRPG.actionTargetsStarship = {
+    "": "SFRPG.Items.Action.ActionTarget.None",
+    "ac": "SFRPG.Items.Action.ActionTarget.StarshipAC",
+    "tl": "SFRPG.Items.Action.ActionTarget.StarshipTL"
+};
+
+// Source: CRB, page 391
+SFRPG.characterWealthByLevel = {
+    0: 0,
+    1: 1000,
+    2: 2000,
+    3: 4000,
+    4: 6000,
+    5: 9000,
+    6: 15000,
+    7: 23000,
+    8: 33000,
+    9: 45000,
+    10: 66000,
+    11: 100000,
+    12: 150000,
+    13: 255000,
+    14: 333000,
+    15: 500000,
+    16: 750000,
+    17: 1125000,
+    18: 1700000,
+    19: 2550000,
+    20: 3775000
 };

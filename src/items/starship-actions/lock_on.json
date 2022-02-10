@@ -1,40 +1,40 @@
 {
+  "_id": "ML6Dh5dRr3XItvZx",
   "name": "Lock On",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>If you have at least 6 ranks in Computers, you can lock your starship’s targeting system on to one enemy vessel. You must spend 1 Resolve Point and attempt a Computers check. The DC equals 5 + 1-1/2 × the tier of the target starship + its bonus from defensive countermeasures (see page 298). If you succeed, your starship’s gunners gain a +2 bonus to gunnery checks against the target for the rest of the round. This action can be taken only once per round.</p><h2>Critical effect</h2><p>Your weapon lock greatly improves your gunners’ accuracy. Until the start of the next round, any attacks by your starship score a critical hit on a natural roll of 19 or 20.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "scienceOfficer",
-    "order": 30,
-    "phase": {
-      "name": "Helm phase",
-      "tooltip": "This action can be taken only during the helm phase."
+    "dc": {
+      "resolve": false,
+      "value": "5 + 1-1/2 * Target Ship Tier + it's bonus from defensive countermeasures"
     },
-    "isPush": true,
-    "resolvePointCost": 1,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>If you have at least 6 ranks in Computers, you can lock your starship’s targeting system on to one enemy vessel. You must spend 1 Resolve Point and attempt a Computers check. The DC equals 5 + 1-1/2 × the tier of the target starship + its bonus from defensive countermeasures (see page 298). If you succeed, your starship’s gunners gain a +2 bonus to gunnery checks against the target for the rest of the round. This action can be taken only once per round.</p><h2>Critical effect</h2><p>Your weapon lock greatly improves your gunners’ accuracy. Until the start of the next round, any attacks by your starship score a critical hit on a natural roll of 19 or 20.</p>"
+    },
+    "effectCritical": "Your weapon lock greatly improves your gunners’ accuracy. Until the start of the next round, any attacks by your starship score a critical hit on a natural roll of 19 or 20.",
+    "effectNormal": "If you have at least 6 ranks in Computers, you can lock your starship’s targeting system on to one enemy vessel. You must spend 1 Resolve Point and attempt a Computers check. The DC equals 5 + 1-1/2 × the tier of the target starship + its bonus from defensive countermeasures (see page 298). If you succeed, your starship’s gunners gain a +2 bonus to gunnery checks against the target for the rest of the round. This action can be taken only once per round.",
     "formula": [
       {
         "name": "Computers",
         "formula": "@scienceOfficer.skills.com.mod"
       }
     ],
+    "isPush": true,
+    "order": 30,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "resolvePointCost": 1,
+    "role": "scienceOfficer",
+    "selectorKey": "scienceOfficer",
     "selectors": [
       "scienceOfficer"
     ],
-    "selectorKey": "scienceOfficer",
-    "dc": {
-      "value": "5 + 1-1/2 * Target Ship Tier + it's bonus from defensive countermeasures",
-      "resolve": false
-    },
-    "effectNormal": "If you have at least 6 ranks in Computers, you can lock your starship’s targeting system on to one enemy vessel. You must spend 1 Resolve Point and attempt a Computers check. The DC equals 5 + 1-1/2 × the tier of the target starship + its bonus from defensive countermeasures (see page 298). If you succeed, your starship’s gunners gain a +2 bonus to gunnery checks against the target for the rest of the round. This action can be taken only once per round.",
-    "effectCritical": "Your weapon lock greatly improves your gunners’ accuracy. Until the start of the next round, any attacks by your starship score a critical hit on a natural roll of 19 or 20."
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "ML6Dh5dRr3XItvZx"
+  "img": "icons/svg/mystery-man.svg"
 }

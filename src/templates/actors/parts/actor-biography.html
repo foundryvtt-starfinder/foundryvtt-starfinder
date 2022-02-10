@@ -53,17 +53,35 @@
         <div class="tab" data-group="biographyTabs" data-tab="ecology">
             <div class="flexrow">
                 <div class="flexcol">
-                    <div class="form-group ecology" data-tippy-content="<strong>{{localize 'SFRPG.Environment'}}</strong><br/>@data.details.biography.environment">
+                    <div class="form-group" data-tippy-content="<strong>{{localize 'SFRPG.Environment'}}</strong><br/>@data.details.biography.environment">
                         <label>{{localize 'SFRPG.Environment'}}</label>
-                        <input type="text" name="data.details.environment" value="{{data.details.environment}}" placeholder="{{localize "SFRPG.Any"}}"/>
+                        <div class="form-fields">
+                            <input style="border-color: #191813;" type="text" name="data.details.environment" value="{{data.details.environment}}" placeholder="{{localize "SFRPG.Any"}}"/>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="flexrow">
                 <div class="flexcol">
-                    <div class="form-group ecology" data-tippy-content="<strong>{{localize 'SFRPG.Organization'}}</strong><br/>@data.details.biography.organization">
+                    <div class="form-group" data-tippy-content="<strong>{{localize 'SFRPG.Organization'}}</strong><br/>@data.details.biography.organization">
                         <label>{{localize 'SFRPG.Organization'}}</label>
-                        <input type="text" name="data.details.organization" value="{{data.details.organization}}" placeholder="{{localize "SFRPG.Any"}}"/>
+                        <div class="form-fields">
+                            <input style="border-color: #191813;" type="text" name="data.details.organization" value="{{data.details.organization}}" placeholder="{{localize "SFRPG.Any"}}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flexrow">
+                <div class="flexcol">
+                    <div class="form-group">
+                        <label data-tippy-content="{{ localize "SFRPG.NPCSheet.Biography.Organization.GroupSizeTooltip" }}">
+                            {{ localize "SFRPG.NPCSheet.Biography.Organization.GroupSize" }}
+                        </label>
+                        <div class="form-fields">
+                            <input style="border-color: #191813;" type="text" name="data.details.organizationSize.min" value="{{data.details.organizationSize.min}}" data-dtype="Number" />
+                            <span class="sep"> - </span>
+                            <input style="border-color: #191813;" type="text" name="data.details.organizationSize.max" value="{{data.details.organizationSize.max}}" data-dtype="Number" />
+                        </div>
                     </div>
                 </div>
             </div>

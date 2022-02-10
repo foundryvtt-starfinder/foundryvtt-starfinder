@@ -212,7 +212,7 @@ function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
         itemData = [itemData];
     }
 
-    for (let item of itemData) {
+    for (const item of itemData) {
         if (item.data.equipped) {
             item.data.equipped = false;
         }
@@ -227,7 +227,7 @@ function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
         }
     }
 
-    if (game.user.can("TOKEN_CREATE")) {
+    if (game.user.isGM) {
         const messageData = {
             payload: msg
         };

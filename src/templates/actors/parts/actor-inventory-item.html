@@ -5,16 +5,20 @@
                     {{#if (and (not (eq item.type "feat")) (or item.isStack (getStarfinderBoolean "alwaysShowQuantity")))}}({{item.data.quantity}}) {{/if}}
                     {{item.name}}
                 </h4>
-                {{#if (and isOwner (and bigItem (or item.hasAttack item.hasDamage)))}}
+                {{#if (and isOwner (or (eq item.type "consumable") (and bigItem (or item.hasAttack item.hasDamage))))}}
                 <div class="item-action flexcol">
-                    {{#if item.hasAttack}}
-                    <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
-                    {{/if}}
-                    {{#if item.hasDamage}}
-                        {{#if (eq item.data.actionType "heal")}}
-                            <button class="tag healing">{{localize "SFRPG.ActionHeal"}}</button>
-                        {{else}}
-                            <button class="tag damage">{{localize "SFRPG.Damage.Title"}}</button>
+                    {{#if (eq item.type "consumable")}}
+                        <button class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
+                    {{else}}
+                        {{#if item.hasAttack}}
+                        <button class="tag attack">{{localize "SFRPG.Attack"}}</button>
+                        {{/if}}
+                        {{#if item.hasDamage}}
+                            {{#if (eq item.data.actionType "heal")}}
+                                <button class="tag healing">{{localize "SFRPG.ActionHeal"}}</button>
+                            {{else}}
+                                <button class="tag damage">{{localize "SFRPG.Damage.Title"}}</button>
+                            {{/if}}
                         {{/if}}
                     {{/if}}
                 </div>
@@ -41,7 +45,7 @@
                     {{/if}}
                 {{else if children}}
                     {{#if (eq item.type "container")}}
-                        {{getChildBulk children}} / {{getTotalStorageCapacity item}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelBulk"}}
+                        {{formatBulk item.itemBulk.contentBulk}} / {{getTotalStorageCapacity item}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelBulk"}}
                     {{else}}
                         {{children.length}} / {{getTotalStorageCapacity item}} {{localize "SFRPG.ActorSheet.Inventory.Container.CapacityLabelItems"}}
                     {{/if}}

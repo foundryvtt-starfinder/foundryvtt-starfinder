@@ -77,6 +77,13 @@ export default function (engine) {
             ability.mod = abilityModifier;
         }
 
+        // Finally, update classes, if applicable
+        if (data.classes) {
+            for (const [classId, classEntry] of Object.entries(data.classes)) {
+                classEntry.keyAbilityMod = data.abilities[classEntry.keyAbilityScore]?.mod || 0;
+            }
+        }
+
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }
