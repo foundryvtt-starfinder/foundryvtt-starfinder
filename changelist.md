@@ -71,6 +71,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * The max dex allowed by armor is now available as an attribute for player characters as @attributes.eac.maxDex or @attributes.kac.maxDex.
 * The keyAbilityMod property on a PC sheet's class attributes is now updated correctly. (e.g. @classes.mechanic.keyAbilityMod)
 * The token configuration of Starships and Vehicles that contained a crew can now be opened again.
+* The token configuration for a player character can now be opened again after opening a class item sheet for a character containing at least 1 caster class. Fixes #538
 * Wealth label on the inventory panel now displays how it was calculated, as well as the wealth by character level and estimated level by wealth values, following CRB pg. 391.
 
 * Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.
