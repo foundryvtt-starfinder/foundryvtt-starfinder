@@ -7,6 +7,7 @@ This is a bugfix update to address some issues introduced with v0.18.
 * Initiative now properly adds the character's initiative bonus again. Fixes #543
 * Spells with saving throws can be cast again. Fixes #542
 * Spells with saving throws can provide damage again. Fixes #545
+* Wall of Steam spell has a proper link to Wall of Fog. Fixes #546
 
 
 # v0.18.0 - Precog Pioneers
