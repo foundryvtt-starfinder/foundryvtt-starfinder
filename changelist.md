@@ -1,3 +1,10 @@
+# v0.18.1 - Precog Pioneers
+
+This is a bugfix update to address some issues introduced with v0.18.
+
+## Bugfixes and small improvements
+
+
 # v0.18.0 - Precog Pioneers
 
 This behemoth of an update is super packed with lots of stuff, take your time to read through the changelist! Thanks to the combined efforts of the #starfinder community we have a ton of cool new features, like the damage system integration, and so much compendium work. And as a cherry on top, the Precog class is now available in the compendium!
