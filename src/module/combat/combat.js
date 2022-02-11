@@ -561,7 +561,7 @@ export class CombatSFRPG extends Combat {
     }
 
     async _getInitiativeRoll(combatant, formula) {
-        const rollContext = RollContext.createActorRollContext(combatant.actor);
+        const rollContext = RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"});
 
         const parts = [];
 
