@@ -283,7 +283,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 let totalAppliedDamage = damage.amount / damage.damageTypes.length;
 
                 if (this.isVulnerableToDamageType(damageType)) {
-                    totalAppliedDamage = totalAppliedDamage * 2;
+                    totalAppliedDamage = totalAppliedDamage * 1.5;
                 }
 
                 const resistance = this.getDamageMitigationForDamageType(damageType, damage);
@@ -390,8 +390,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * @returns True if the actor is immune to this damage type
     */
     isVulnerableToDamageType(damageType) {
-        const mappedVulnerabilities = this.data.data.traits.dv.value.map(x => SFRPG.damageTypeToAcronym[x.toLowerCase()].toLowerCase());
-        return mappedVulnerabilities.includes(damageType);
+        return this.data.data.traits.dv.value.includes(damageType);
     }
 
     /**

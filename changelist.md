@@ -3,6 +3,7 @@
 This is a bugfix update to address some issues introduced with v0.18.
 
 ## Bugfixes and small improvements
+* Damage vulnerability is now applied at 50% extra instead of double damage. Fixes #544
 
 
 # v0.18.0 - Precog Pioneers
