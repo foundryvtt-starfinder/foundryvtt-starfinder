@@ -197,7 +197,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         let consumeSpellSlot = true;
         let selectedSlot = null;
-        let processContext = null;
         if (configureDialog) {
             try {
                 const dialogResponse = await SpellCastDialog.create(this, item);
@@ -222,10 +221,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 // Run automation to ensure save DCs are correct.
                 item.prepareData();
                 if (item.data.data.actionType && item.data.data.save.type) {
-                    processContext = await item.processData();
-                    if (processContext) {
-                        processContext = Promise.all(processContext.fact.promises);
-                    }
+                    await item.processData();
                 }
             } catch (error) {
                 console.error(error);
@@ -233,6 +229,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         }
 
+        let processContext = null;
         if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
             const actor = this;
             if (selectedSlot.source === "general") {
