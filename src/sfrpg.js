@@ -22,7 +22,7 @@ import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
 import { ItemSFRPG } from "./module/item/item.js";
 import { CombatSFRPG } from "./module/combat/combat.js";
 import { ItemSheetSFRPG } from "./module/item/sheet.js";
-import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/combat.js";
+import { addChatMessageContextOptions } from "./module/combat.js";
 import Engine from "./module/engine/engine.js";
 import registerSystemRules from "./module/rules.js";
 import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "./module/modifiers/types.js";
@@ -204,8 +204,6 @@ Hooks.once('init', async function () {
 Hooks.once("setup", function () {
     console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
     const setupTime = (new Date()).getTime();
-
-    Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
 
     /**
      * Manage counter classe feature from combat tracker

@@ -85,6 +85,15 @@ export const registerSystemSettings = function () {
         type: Boolean
     });
 
+    game.settings.register("sfrpg", "useInitiativeTiebreaker", {
+        name: "SFRPG.Settings.CombatTiebreaker.Name",
+        hint: "SFRPG.Settings.CombatTiebreaker.Hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
+
     for (let combatType of SFRPG.combatTypes) {
         const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);
         game.settings.register("sfrpg", `${combatType}ChatCards`, {
