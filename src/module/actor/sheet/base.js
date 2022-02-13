@@ -86,11 +86,11 @@ export class ActorSheetSFRPG extends ActorSheet {
             this.actor.data.data = mergeObject(this.actor.data.data, {
                 details: {
                     biography: {
-                        fullBodyImage: "systems/sfrpg/images/mystery-body.png"
+                        fullBodyImage: "systems/sfrpg/images/mystery-body.webp"
                     }
                 }
             }, {overwrite: false});
-            this.actor.data.data.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.png";
+            this.actor.data.data.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.webp";
         }
 
         if (data.data.abilities) {

@@ -264,7 +264,7 @@ Hooks.once("setup", function () {
     console.log(`Starfinder | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
 });
 
-Hooks.once("ready", () => {
+Hooks.once("ready", async () => {
     console.log(`Starfinder | [READY] Preparing system for operation`);
     const readyTime = (new Date()).getTime();
 
@@ -286,24 +286,39 @@ Hooks.once("ready", () => {
     console.log("Starfinder | [READY] Caching starship actions");
     ActorSheetSFRPGStarship.ensureStarshipActions();
 
+    console.log("Starfinder | [READY] Initializing compendium browsers");
+    initializeBrowsers();
+
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.data.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
 
+        let migrationPromise = null;
         if (needsMigration) {
             console.log("Starfinder | [READY] Performing world migration");
-            migrateWorld()
-                .then(_ => ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage")))
-                .catch(_ => ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage")));
+            migrationPromise = migrateWorld()
+                .then((refreshRequired) => {
+                    if (refreshRequired) {
+                        ui.notifications.warn(game.i18n.localize("SFRPG.MigrationSuccessfulRefreshMessage"), {permanent: true});
+                    } else {
+                        ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage"), {permanent: true});
+                    }
+                }).catch((error) => {
+                    ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage"), {permanent: true});
+                    console.error(error);
+                });
         }
     
-        console.log("Starfinder | [READY] Checking items for migration");
-        migrateOldContainers();
+        console.log("Starfinder | [READY] Checking items for container updates");
+        if (migrationPromise) {
+            migrationPromise.then(async () => {
+                migrateOldContainers();
+            });
+        } else {
+            migrateOldContainers();
+        }
     }
-
-    console.log("Starfinder | [READY] Initializing compendium browsers");
-    initializeBrowsers();
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [READY] Done (operation took ${finishTime - readyTime} ms)`);
@@ -324,16 +339,18 @@ async function migrateOldContainers() {
 
     for (const scene of game.scenes.contents) {
         for (const token of scene.data.tokens) {
-            const sheetActorHelper = new ActorItemHelper(token.actorId, token.id, scene.id);
-            const migrationProcess = sheetActorHelper.migrateItems();
-            if (migrationProcess) {
-                promises.push(migrationProcess);
+            if (!token.data.actorLink) {
+                const sheetActorHelper = new ActorItemHelper(token.actor?.id ?? token.actorId, token.id, scene.id);
+                const migrationProcess = sheetActorHelper.migrateItems();
+                if (migrationProcess) {
+                    promises.push(migrationProcess);
+                }
             }
         }
     }
 
     if (promises.length > 0) {
-        console.log(`Starfinder | [READY] Migrating ${promises.length} documents.`);
+        console.log(`Starfinder | [READY] Updating containers in ${promises.length} documents.`);
         return Promise.all(promises);
     }
 }
