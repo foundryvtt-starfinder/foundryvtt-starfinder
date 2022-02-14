@@ -1,4 +1,21 @@
-# v0.18.0 - Starfinder
+# v0.18.1 - Precog Pioneers
+
+This is a bugfix update to address some issues introduced with v0.18.
+
+## Bugfixes and small improvements
+* Added support for initiative roll tiebreakers. Fixes #547
+* Damage vulnerability is now applied at 50% extra instead of double damage. Fixes #544
+* Initiative now properly adds the character's initiative bonus again. Fixes #543
+* Spells with saving throws can be cast again. Fixes #542
+* Spells with saving throws can provide damage again. Fixes #545
+* Wall of Steam spell has a proper link to Wall of Fog. Fixes #546
+
+
+# v0.18.0 - Precog Pioneers
+
+This behemoth of an update is super packed with lots of stuff, take your time to read through the changelist! Thanks to the combined efforts of the #starfinder community we have a ton of cool new features, like the damage system integration, and so much compendium work. And as a cherry on top, the Precog class is now available in the compendium!
+
+We hope you have fun with the latest and greatest!
 
 ## New Features
 ### Attack Roll update
@@ -17,9 +34,11 @@ A new setting has been made available to do the rounding of split odd damage in 
 To make finding aliens a little easier, we've integrated the work started by rrenna and took it from there to finally provide you with an in-engine alien archive browser. You can filter by CR, HP, Size, Type, and, of course, name.
 
 ### Galactic Magic
+* Added all items, including the errata.
 * Added all the spells.
-* Added all items, including the errata!
-* Added precog as a spellcasting class to the spell settings. (Note: This does not mean precog is available as a compendium entry.)
+* Added Biohacker class features.
+* Added Precog class and class features.
+* Added Precog as a spellcasting class to the spell settings.
 
 ### Compendium
 * Added Mountain Eel from AA1 to Alien Archives.
@@ -57,12 +76,15 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * Magic items now have a checkbox defining whether or not they count towards the worn magical items limit.
 * Reloading a weapon that has a short description will now roll the short description into chat instead.
 * Rolls that include the -4 penalty when attacking with a weapon the owning character is not proficient with now explains the -4 is caused by the lack of proficiency.
+* Rolls using the Custom Starfinder Chat Cards made by actors with wildcard tokens no longer have a broken image.
 * Saving throws on consumables are now displayed when the consumable is used.
 * Special materials can now be selected on armor, ammunition, shields, weapons, starship armor, starship defensive countermeasures, starship sensors, starship thrusters, and starship weapons.
+* Starship actions correctly pull in crew actor data again. Fixes #539
 * Starship critical damage rolls no longer double their damage. Deflector shields still take 1 extra damage from a critical hit however.
 * The max dex allowed by armor is now available as an attribute for player characters as @attributes.eac.maxDex or @attributes.kac.maxDex.
 * The keyAbilityMod property on a PC sheet's class attributes is now updated correctly. (e.g. @classes.mechanic.keyAbilityMod)
 * The token configuration of Starships and Vehicles that contained a crew can now be opened again.
+* The token configuration for a player character can now be opened again after opening a class item sheet for a character containing at least 1 caster class. Fixes #538
 * Wealth label on the inventory panel now displays how it was calculated, as well as the wealth by character level and estimated level by wealth values, following CRB pg. 391.
 
 * Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.

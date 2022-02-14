@@ -17,16 +17,6 @@ export default class SFRPGCustomChatMessage {
     }
 
     /**
-     * Render a custom damage roll.
-     * 
-     * @param {Roll} roll The roll data
-     * @param {object} data The data for the roll
-     */
-    static async renderDamageRoll(roll, data) {
-
-    }
-
-    /**
      * Render a custom standard roll to chat.
      * 
      * @param {Roll}        roll             The roll data
@@ -83,6 +73,25 @@ export default class SFRPGCustomChatMessage {
             specialMaterials: data.specialMaterials,
             rollOptions: data.rollOptions,
         };
+
+        const speaker = data.speaker;
+        if (speaker) {
+            let setImage = false;
+            if (speaker.token) {
+                const token = game.scenes.get(speaker.scene)?.tokens?.get(speaker.token);
+                if (token) {
+                    options.tokenImg = token.data.img;
+                    setImage = true;
+                }
+            }
+
+            if (speaker.actor && !setImage) {
+                const actor = Actors.instance.get(speaker.actor);
+                if (actor) {
+                    options.tokenImg = actor.data.img;
+                }
+            }
+        }
 
         SFRPGCustomChatMessage._render(roll, data, options);
 
