@@ -48,8 +48,19 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": "0"
+      },
       "arms": "2",
       "bab": 0,
+      "baseAttackBonus": {
+        "rolledMods": [],
+        "tooltip": [],
+        "value": 0
+      },
+      "baseSpellDC": {
+        "base": "0"
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -118,16 +129,18 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": "0"
         },
         "land": {
           "base": 30
         },
         "mainMovement": "land",
-        "special": "original base: 30 ft.",
+        "special": "",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -136,6 +149,28 @@
         "misc": 0,
         "tooltip": [],
         "value": 0
+      }
+    },
+    "common": {
+      "abilities": {
+        "cha": {
+          "base": 0
+        },
+        "con": {
+          "base": 0
+        },
+        "dex": {
+          "base": 0
+        },
+        "int": {
+          "base": 0
+        },
+        "str": {
+          "base": 0
+        },
+        "wis": {
+          "base": 0
+        }
       }
     },
     "conditions": {
@@ -156,11 +191,14 @@
       "exhausted": false,
       "fascinated": false,
       "fatigued": false,
+      "flat-footed": false,
       "flatfooted": false,
       "frightened": false,
       "grappled": false,
       "helpless": false,
       "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
       "offkilter": false,
       "offtarget": false,
       "overburdened": false,
@@ -187,26 +225,44 @@
       "alignment": "CE",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.png",
+        "height": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>When pyric fire kills, it roasts flesh while kindling the spirit. Left unchecked, this otherworldly flame awakens a slain creature as an undead of ash, embers, and fire. Some pyric revenants smell of charred meat, which can be the first indication one is nearby.<br /><br />A pyric revenant retains negative traits, such as low cunning or the desire to seek out and torment previous adversaries. The revenant might remember unfinished business and important people, and attempt to destroy such vestiges of its former life. If undirected, however, the creature is straightforward in its malice. It carries out no long-term schemes.</p>\n<section>\n<h2>PYRIC CURSE</h2>\n<p style=\"font-size: 14px;\"><strong>Type</strong>&nbsp;curse;&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 18<br /><strong>Effect</strong>&nbsp;A creature that fails the save gains the burning 1d8 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.<br /><strong>Cure</strong> 1 save; successful saves against the burning condition are successful saves against the curse.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or horde (3-10)</p>\n<p>&nbsp;</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>When pyric fire kills, it roasts flesh while kindling the spirit. Left unchecked, this otherworldly flame awakens a slain creature as an undead of ash, embers, and fire. Some pyric revenants smell of charred meat, which can be the first indication one is nearby.<br /><br />A pyric revenant retains negative traits, such as low cunning or the desire to seek out and torment previous adversaries. The revenant might remember unfinished business and important people, and attempt to destroy such vestiges of its former life. If undirected, however, the creature is straightforward in its malice. It carries out no long-term schemes.</p>\n<section>\n<h2>PYRIC CURSE</h2>\n<p style=\"font-size: 14px;\"><strong>Type</strong>&nbsp;curse;&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 18<br /><strong>Effect</strong>&nbsp;A creature that fails the save gains the burning 1d8 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.<br /><strong>Cure</strong> 1 save; successful saves against the burning condition are successful saves against the curse.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or horde (3-10)</p>\n<p>&nbsp;</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 4,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #16 pg. 60",
+      "subtype": "",
       "xp": {
         "value": 10
       }
     },
     "modifiers": [],
+    "skillpoints": {
+      "max": 0,
+      "tooltip": [],
+      "used": 0
+    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -217,6 +273,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 15,
         "ranks": 15,
@@ -227,6 +284,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -237,6 +295,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -247,6 +306,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -257,6 +317,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -267,6 +328,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -277,6 +339,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -287,6 +350,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -297,6 +361,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -307,6 +372,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -317,6 +383,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -327,6 +394,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -337,6 +405,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -347,6 +416,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -357,6 +427,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -368,6 +439,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -378,6 +450,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -388,6 +461,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -398,6 +472,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -407,30 +482,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -465,6 +547,9 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   },
@@ -476,18 +561,24 @@
       "_id": "iAWXzYENiJYitKak",
       "name": "Slam (plus Pyric Curse)",
       "type": "weapon",
+      "ammunition": false,
+      "augmentation": false,
+      "consumable": false,
+      "container": false,
       "data": {
         "type": "",
         "ability": "",
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -522,6 +613,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": true,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -539,11 +632,18 @@
           "effect": "Burn 1d4",
           "parts": [
             {
-              "formula": "F",
-              "operator": "and",
+              "formula": "1d4",
+              "operator": "",
               "types": {
-                "bludgeoning": true,
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -551,17 +651,27 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+9",
-              "operator": "and",
               "types": {
+                "acid": false,
                 "bludgeoning": true,
-                "fire": true
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<h2>PYRIC CURSE</h2>\n<p><strong>Type</strong>&nbsp;curse;&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 18<br /><strong>Effect</strong>&nbsp;A creature that fails the save gains the burning 1d8 condition. This flame is pyric fire (see special ability). While affected, the creature succeeds at saving throws against other pyric curses of the same or weaker potency.<br /><strong>Cure</strong> 1 save; successful saves against the burning condition are successful saves against the curse.</p>"
         },
@@ -570,9 +680,11 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -591,6 +703,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -609,6 +722,7 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
@@ -644,6 +758,7 @@
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -656,6 +771,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -665,12 +781,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -678,6 +796,21 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": null
@@ -695,30 +828,61 @@
         "weaponType": "basicM"
       },
       "effects": [],
+      "equipment": false,
       "flags": {},
-      "sort": 100000
+      "folder": null,
+      "fusion": true,
+      "goods": false,
+      "hybrid": false,
+      "img": "icons/svg/item-bag.svg",
+      "magic": false,
+      "permission": {
+        "default": 0
+      },
+      "shield": false,
+      "sort": 100000,
+      "spell": false,
+      "storage": {
+        "type": "slot",
+        "affectsEncumbrance": true,
+        "amount": 0,
+        "subtype": "fusion",
+        "weightProperty": "level"
+      },
+      "technological": false,
+      "upgrade": false,
+      "vehicleAttack": false,
+      "vehicleSystem": false,
+      "weapon": false,
+      "weaponAccessory": false
     },
     {
       "_id": "FH1NEpSw36dVYLQR",
       "name": "Pyric Bolt (Su)",
       "type": "weapon",
+      "ammunition": false,
+      "augmentation": false,
+      "consumable": false,
+      "container": false,
       "data": {
         "type": "",
         "ability": "",
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
           "type": "none",
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
           "units": "none",
-          "value": 0
+          "value": null
         },
         "attackBonus": 10,
         "attributes": {
@@ -748,6 +912,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": true,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -765,10 +931,18 @@
           "effect": "Burn 1d4",
           "parts": [
             {
-              "formula": "F",
+              "formula": "1d4",
               "operator": "",
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -776,16 +950,27 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4+4",
-              "operator": "",
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "A pyric revenant can launch a bolt of pyric fire with a range increment of 20 feet and a maximum range of 100 feet."
         },
@@ -794,9 +979,11 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -815,6 +1002,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -833,6 +1021,7 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
@@ -868,6 +1057,7 @@
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -880,6 +1070,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -889,12 +1080,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 20
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -902,6 +1095,21 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": ""
@@ -919,8 +1127,33 @@
         "weaponType": "smallA"
       },
       "effects": [],
+      "equipment": false,
       "flags": {},
-      "sort": 200000
+      "folder": null,
+      "fusion": true,
+      "goods": false,
+      "hybrid": false,
+      "img": "icons/svg/item-bag.svg",
+      "magic": false,
+      "permission": {
+        "default": 0
+      },
+      "shield": false,
+      "sort": 200000,
+      "spell": false,
+      "storage": {
+        "type": "slot",
+        "affectsEncumbrance": true,
+        "amount": 0,
+        "subtype": "fusion",
+        "weightProperty": "level"
+      },
+      "technological": false,
+      "upgrade": false,
+      "vehicleAttack": false,
+      "vehicleSystem": false,
+      "weapon": false,
+      "weaponAccessory": false
     },
     {
       "_id": "ixe2FgybHRut3IFU",
@@ -929,6 +1162,7 @@
       "data": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -950,8 +1184,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "The fire damage of a pyric revenant burns body and spirit, ignoring fire resistance and dealing half damage even to creatures with fire immunity. A creature burning due to this fire can gain no bonuses to end that condition. A creature that dies due to pyric fire damage becomes a pyric revenant 1d4 hours later."
         },
@@ -961,6 +1198,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -973,6 +1211,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -991,6 +1230,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
+      "img": "icons/svg/item-bag.svg",
+      "permission": {
+        "default": 0
+      },
       "sort": 300000
     },
     {
@@ -1000,6 +1244,7 @@
       "data": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -1021,8 +1266,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "Light within 10 feet of a pyric revenant increases by one step. Magical darkness decreases this light only if it’s from a source with a CR or level higher than the revenant’s CR."
         },
@@ -1032,6 +1280,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -1044,6 +1293,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1062,6 +1312,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
+      "img": "icons/svg/item-bag.svg",
+      "permission": {
+        "default": 0
+      },
       "sort": 400000
     },
     {
@@ -1074,6 +1329,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -1095,8 +1351,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr>\n<p>&nbsp;</p>"
         },
@@ -1106,6 +1365,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -1118,6 +1378,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1136,7 +1397,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
       "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
       "sort": 500000
     },
     {
@@ -1149,6 +1414,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -1170,10 +1436,13 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
-          "value": "<p>Susceptible to Water (Su) A splash of water deals 1d4 acid damage to a pyric revenant, while a large amount, such as heavy rain, deals 2d4 acid damage. Full immersion in water deals 4d4 acid damage per round to a pyric revenant. However, water can&rsquo;t reduce a pyric revenant to fewer than one-fifth of its Hit Points (typically 10). Ice does not trigger a pyric revenant&rsquo;s water susceptibility.</p>"
+          "value": "<p>A splash of water deals 1d4 acid damage to a pyric revenant, while a large amount, such as heavy rain, deals 2d4 acid damage. Full immersion in water deals 4d4 acid damage per round to a pyric revenant. However, water can&rsquo;t reduce a pyric revenant to fewer than one-fifth of its Hit Points (typically 10). Ice does not trigger a pyric revenant&rsquo;s water susceptibility.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -1181,6 +1450,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -1193,6 +1463,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1211,6 +1482,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
+      "img": "icons/svg/item-bag.svg",
+      "permission": {
+        "default": 0
+      },
       "sort": 600000
     }
   ],
@@ -1218,11 +1494,12 @@
     "name": "Pyric Revenant",
     "actorId": "p6C0lo7LAekFn1pv",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.sp"
     },
     "brightLight": 0,
     "brightSight": 0,
@@ -1234,6 +1511,27 @@
     "flags": {},
     "height": 1,
     "img": "icons/svg/mystery-man.svg",
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "animation": {
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "bright": 0,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
     "lightAlpha": 1,
     "lightAngle": 360,
     "lightAnimation": {
@@ -1248,8 +1546,8 @@
     "randomImg": false,
     "rotation": 0,
     "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
+    "sightAngle": 0,
+    "tint": null,
     "vision": false,
     "width": 1
   }
