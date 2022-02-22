@@ -1,3 +1,9 @@
+# v0.18.2 - Precog Pioneers
+
+This is a hotfix to re enable backwards compatability to v0.8.9. 
+
+_**NOTE:** This will be the last version that will support any Foundry VTT version less than v9._
+
 # v0.18.1 - Precog Pioneers
 
 This is a bugfix update to address some issues introduced with v0.18.
