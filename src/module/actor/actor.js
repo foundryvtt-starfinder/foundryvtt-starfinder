@@ -1,22 +1,42 @@
-import { DiceSFRPG, RollContext } from "../dice.js";
+import { SFRPG } from "../config.js"
+import { DiceSFRPG } from "../dice.js";
+import RollContext from "../rolls/rollcontext.js";
+import { Mix } from "../utils/custom-mixer.js";
+import { ActorConditionsMixin } from "./mixins/actor-conditions.js";
+import { ActorCrewMixin } from "./mixins/actor-crew.js";
+import { ActorDamageMixin } from "./mixins/actor-damage.js";
+import { ActorInventoryMixin } from "./mixins/actor-inventory.js";
+import { ActorModifiersMixin } from "./mixins/actor-modifiers.js";
+import { ActorResourcesMixin } from "./mixins/actor-resources.js";
+import { ActorRestMixin } from "./mixins/actor-rest.js";
 import { ChoiceDialog } from "../apps/choice-dialog.js";
-import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
 import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
-import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
-import SFRPGModifier from "../modifiers/modifier.js";
-import SFRPGModifierApplication from "../apps/modifier-app.js";
-import { DroneRepairDialog } from "../apps/drone-repair-dialog.js";
-import { getItemContainer } from "./actor-inventory.js"
 
 import { } from "./crew-update.js"
 import { ItemSheetSFRPG } from "../item/sheet.js";
+import { ItemSFRPG } from "../item/item.js";
+import { hasDiceTerms } from "../utilities.js";
+
+/**
+ * A data structure for storing damage statistics.
+ * 
+ * @typedef {Object} DamagePart
+ * @property {string}                     formula  The roll formula to use.
+ * @property {{[key: string]: boolean}}   types    A set of key value pairs that determines the available damage types.
+ * @property {string}                     operator An operator that determines how damage is split between multiple types.
+ */
 
 /**
  * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
  */
-export class ActorSFRPG extends Actor {
+export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
+
+    constructor(data, context) {
+        super(data, context);
+        //console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
+    }
 
     /** @override */
     getRollData() {
@@ -29,24 +49,18 @@ export class ActorSFRPG extends Actor {
      * Augment the basic actor data with additional dynamic data.
      * 
      * @param {Object} actorData The data for the actor
-     * @returns {Object} The actors data
+     * @returns {Promise} A promise for the automation process triggered at the end.
      */
     prepareData() {
         super.prepareData();
-        const actor = this;
-        const actorData = this.data;
-        const data = actorData.data;
-        const flags = actorData.flags;
-        const actorType = actorData.type;
 
-        this._ensureHasModifiers(data);
+        this._ensureHasModifiers(this.data.data);
         const modifiers = this.getAllModifiers();
 
-        const actorId = this._id;
-        const items = actorData.items;
-        const armor = items.find(item => item.type === "equipment" && item.data.equipped);
-        const shields = items.filter(item => item.type === "shield" && item.data.equipped);
-        const weapons = items.filter(item => item.type === "weapon" && item.data.equipped);
+        const items = this.items;
+        const armors = items.filter(item => item.type === "equipment" && item.data.data.equipped);
+        const shields = items.filter(item => item.type === "shield" && item.data.data.equipped);
+        const weapons = items.filter(item => item.type === "weapon" && item.data.data.equipped);
         const races = items.filter(item => item.type === "race");
         const frames = items.filter(item => item.type === "starshipFrame");
         const classes = items.filter(item => item.type === "class");
@@ -55,14 +69,15 @@ export class ActorSFRPG extends Actor {
         const mods = items.filter(item => item.type === "mod");
         const armorUpgrades = items.filter(item => item.type === "upgrade");
         const asis = items.filter(item => item.type === "asi");
-        game.sfrpg.engine.process("process-actors", {
-            actorId,
-            actor,
-            type: actorType,
-            data,
-            flags,
-            items,
-            armor,
+        const actorResources = items.filter(item => item.type === "actorResource");
+        return game.sfrpg.engine.process("process-actors", {
+            actorId: this.id,
+            actor: this,
+            type: this.data.type,
+            data: this.data.data,
+            flags: this.data.flags,
+            items: this.items,
+            armors,
             shields,
             weapons,
             races,
@@ -73,7 +88,8 @@ export class ActorSFRPG extends Actor {
             mods,
             armorUpgrades,
             asis,
-            frames
+            frames,
+            actorResources
         });
     }
 
@@ -85,7 +101,7 @@ export class ActorSFRPG extends Actor {
         for (const [appId, app] of Object.entries(this.apps)) {
             if (app instanceof ItemSheetSFRPG) {
                 const item = app.object;
-                if (!this.items.find(x => x._id === item._id)) {
+                if (!this.items.find(x => x.id === item.id)) {
                     keysToDelete.push(appId);
                 }
             }
@@ -106,24 +122,6 @@ export class ActorSFRPG extends Actor {
      */
     prepareBaseData() { super.prepareBaseData(); }
     prepareDerivedData() { super.prepareDerivedData(); }
-
-    /**
-     * Check to ensure that this actor has a modifiers data object set, if not then set it. 
-     * These will always be needed from hence forth, so we'll just make sure that they always exist.
-     * 
-     * @param {Object}      data The actor data to check against.
-     * @param {String|Null} prop A specific property name to check.
-     * 
-     * @returns {Object}         The modified data object with the modifiers data object added.
-     */
-    _ensureHasModifiers(data, prop = null) {
-        if (!hasProperty(data, "modifiers")) {
-            //console.log(`SFRPG | ${this.name} does not have the modifiers data object, attempting to create them...`);
-            data.modifiers = [];
-        }
-
-        return data;
-    }
     
     /**
      * Extend the default update method to enhance data before submission.
@@ -156,44 +154,120 @@ export class ActorSFRPG extends Actor {
      * @param {Object} options Any options passed in
      * @returns {Promise}
      */
-    async createEmbeddedEntity(embeddedName, itemData, options) {
-        if (!this.hasPlayerOwner) {
-            let t = itemData.type;
-            let initial = {};           
-            if (t === "weapon") initial['data.proficient'] = true;
-            if (["weapon", "equipment"].includes(t)) initial['data.equipped'] = true;
-            if (t === "spell") initial['data.prepared'] = true;
-            mergeObject(itemData, initial);
+    async createEmbeddedDocuments(embeddedName, itemData, options) {
+        for (const item of itemData) {
+            if (!this.hasPlayerOwner) {
+                let t = item.type;
+                let initial = {};           
+                if (t === "weapon") initial['data.proficient'] = true;
+                if (["weapon", "equipment"].includes(t)) initial['data.equipped'] = true;
+                if (t === "spell") initial['data.prepared'] = true;
+                mergeObject(item, initial);
+            }
+
+            item.effects = null;
         }
 
-        return super.createEmbeddedEntity(embeddedName, itemData, options);
+        return super.createEmbeddedDocuments(embeddedName, itemData, options);
     }
 
     async useSpell(item, { configureDialog = true } = {}) {
         if (item.data.type !== "spell") throw new Error("Wrong item type");
 
-        let lvl = item.data.data.level;
-        const usesSlots = (lvl > 0) && item.data.data.preparation.mode === "";
-        if (!usesSlots) return item.roll();
+        let spellLevel = item.data.data.level;
+        const usesSlots = (spellLevel > 0) && item.data.data.preparation.mode === "";
+        if (!usesSlots) {
+            if (item.data.data.uses?.max > 0) {
+                if (item.data.data.uses.value <= 0) {
+                    ui.notifications.error(game.i18n.localize("SFRPG.Items.Spell.ErrorNoUses", {permanent: true}));
+                    return;
+                }
 
-        let consume = true;
+                const itemUpdatePromise = item.update({
+                    [`data.uses.value`]: Math.max(item.data.data.uses.value - 1, 0)
+                });
+                itemUpdatePromise.then(() => {
+                    item.roll();
+                });
+                return itemUpdatePromise;
+            } else {
+                return item.roll();
+            }
+        }
+
+        let consumeSpellSlot = true;
+        let selectedSlot = null;
         if (configureDialog) {
             try {
-                const spellFormData = await SpellCastDialog.create(this, item);
-                lvl = parseInt(spellFormData.get("level"));
-                consume = Boolean(spellFormData.get("consume"));
-                if (lvl && lvl !== item.data.data.level) {
-                    item = item.constructor.createOwned(mergeObject(item.data, { "data.level": lvl }, { inplace: false }), this);
+                const dialogResponse = await SpellCastDialog.create(this, item);
+                const slotIndex = parseInt(dialogResponse.formData.get("level"));
+                consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
+                selectedSlot = dialogResponse.spellLevels[slotIndex];
+                spellLevel = parseInt(selectedSlot?.level || item.data.data.level);
+
+                if (spellLevel !== item.data.data.level && item.data.data.level > spellLevel) {
+                    const newItemData = duplicate(item.data);
+                    newItemData.data.level = spellLevel;
+
+                    if (this.type === "npc" || this.type === "npc2") {
+                        if (newItemData.data.save.dc && !Number.isNaN(newItemData.data.save.dc)) {
+                            newItemData.data.save.dc = newItemData.data.save.dc - item.data.data.level + spellLevel;
+                        }
+                    }
+
+                    item = new ItemSFRPG(newItemData, {parent: this});
+                }
+
+                // Run automation to ensure save DCs are correct.
+                item.prepareData();
+                if (item.data.data.actionType && item.data.data.save.type) {
+                    await item.processData();
                 }
             } catch (error) {
+                console.error(error);
                 return null;
             }
         }
 
-        if (consume && (lvl > 0)) {
-            await this.update({
-                [`data.spells.spell${lvl}.value`]: Math.max(parseInt(this.data.data.spells[`spell${lvl}`].value) - 1, 0)
+        let processContext = null;
+        if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
+            const actor = this;
+            if (selectedSlot.source === "general") {
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+                        });
+                    });
+                } else {
+                    processContext = actor.update({
+                        [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+                    });
+                }
+            } else {
+                const selectedLevel = selectedSlot.level;
+                const selectedClass = selectedSlot.source;
+
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                        });
+                    });
+                } else {
+                    processContext = actor.update({
+                        [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                    });
+                }
+            }
+        }
+
+        if (processContext) {
+            processContext.then(function(result) {
+                return item.roll();
             });
+            
+            return processContext;
         }
 
         return item.roll();
@@ -210,8 +284,8 @@ export class ActorSFRPG extends Actor {
         // use this to delete any unwanted skills.
 
         const skill = duplicate(this.data.data.skills[skillId]);
-        const isNpc = this.data.type === "npc";
-        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.owner),
+        const isNpc = this.data.type === "npc" || this.data.type === "npc2";
+        const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
@@ -238,164 +312,6 @@ export class ActorSFRPG extends Actor {
         }
 
         return this.update(updateObject);
-    }
-    
-    /**
-     * Add a modifier to this actor.
-     * 
-     * @param {Object}        data               The data needed to create the modifier
-     * @param {String}        data.name          The name of this modifier. Used to identify the modfier.
-     * @param {Number|String} data.modifier      The modifier value.
-     * @param {String}        data.type          The modifiers type. Used to determine stacking.
-     * @param {String}        data.modifierType  Used to determine if this modifier is a constant value (+2) or a Roll formula (1d4).
-     * @param {String}        data.effectType    The category of things that might be effected by this modifier.
-     * @param {String}        data.subtab        What subtab should this modifier show under on the character sheet.
-     * @param {String}        data.valueAffected The specific value being modified.
-     * @param {Boolean}       data.enabled       Is this modifier activated or not.
-     * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
-     * @param {String}        data.notes         Any notes or comments about the modifier.
-     * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
-     * @param {String|null}   data.id            Override the randomly generated id with this.
-     */
-    async addModifier({
-        name = "", 
-        modifier = 0, 
-        type = SFRPGModifierTypes.UNTYPED, 
-        modifierType = SFRPGModifierType.CONSTANT, 
-        effectType = SFRPGEffectType.SKILL,
-        subtab = "misc",
-        valueAffected = "", 
-        enabled = true, 
-        source = "", 
-        notes = "",
-        condition = "",
-        id = null
-    } = {}) {
-        const data = this._ensureHasModifiers(duplicate(this.data.data));
-        const modifiers = data.modifiers;
-
-        modifiers.push(new SFRPGModifier({
-            name,
-            modifier,
-            type,
-            modifierType,
-            effectType,
-            valueAffected,
-            enabled,
-            source,
-            notes,
-            subtab,
-            condition,
-            id
-        }));
-
-        await this.update({["data.modifiers"]: modifiers});
-    }
-
-    /**
-     * Delete a modifier for this Actor.
-     * 
-     * @param {String} id The id for the modifier to delete
-     */
-    async deleteModifier(id) {
-        const modifiers = this.data.data.modifiers.filter(mod => mod._id !== id);
-        
-        await this.update({"data.modifiers": modifiers});
-    }
-
-    /**
-     * Edit a modifier for an Actor.
-     * 
-     * @param {String} id The id for the modifier to edit
-     */
-    editModifier(id) {
-        const modifiers = duplicate(this.data.data.modifiers);
-        const modifier = modifiers.find(mod => mod._id === id);
-
-        new SFRPGModifierApplication(modifier, this).render(true);
-    }
-
-    /**
-     * Returns an array of all modifiers on this actor. This will include items such as equipment, feat, classes, race, theme, etc.
-     * 
-     * @param {Boolean} ignoreTemporary Should we ignore temporary modifiers? Defaults to false.
-     * @param {Boolean} ignoreEquipment Should we ignore equipment modifiers? Defaults to false.
-     */
-    getAllModifiers(ignoreTemporary = false, ignoreEquipment = false) {
-        let allModifiers = this.data.data.modifiers.filter(mod => {
-            return (!ignoreTemporary || mod.subtab === "permanent");
-        });
-
-        for (const actorModifier of allModifiers) {
-            actorModifier.container = {actorId: this._id, itemId: null};
-        }
-
-        for (let item of this.data.items) {
-            let modifiersToConcat = [];
-            switch (item.type) {
-                // Armor upgrades are only valid if they are slotted into an equipped armor
-                case "upgrade":
-                    {
-                        if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item._id);
-                            if (container && container.type === "equipment" && container.data.equipped) {
-                                modifiersToConcat = item.data.modifiers;
-                            }
-                        }
-                        break;
-                    }
-
-                // Weapon upgrades (Fusions and accessories) are only valid if they are slotted into an equipped weapon
-                case "fusion":
-                case "weaponAccessory":
-                    {
-                        if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item._id);
-                            if (container && container.type === "weapon" && container.data.equipped) {
-                                modifiersToConcat = item.data.modifiers;
-                            }
-                        }
-                        break;
-                    }
-
-                // Augmentations are always applied
-                case "augmentation":
-                    modifiersToConcat = item.data.modifiers;
-                    break;
-
-                // Feats are only active when they are passive, or activated
-                case "feat":
-                    if (item.data.activation?.type === "" || item.data.isActive) {
-                        modifiersToConcat = item.data.modifiers;
-                    }
-                    break;
-
-                // Special handling for equipment, shield, and weapon
-                case "equipment":
-                case "shield":
-                case "weapon":
-                    if (!ignoreEquipment && item.data.equipped) {
-                        modifiersToConcat = item.data.modifiers;
-                    }
-                    break;
-
-                // Everything else
-                default:
-                    if (!item.data.equippable || item.data.equipped) {
-                        modifiersToConcat = item.data.modifiers;
-                    }
-                    break;
-            }
-
-            if (modifiersToConcat && modifiersToConcat.length > 0) {
-                for (const itemModifier of modifiersToConcat) {
-                    itemModifier.container = {actorId: this._id, itemId: item._id};
-                }
-
-                allModifiers = allModifiers.concat(modifiersToConcat);
-            }
-        }
-        return allModifiers;
     }
 
     /**
@@ -441,7 +357,7 @@ export class ActorSFRPG extends Actor {
             skillId = `pro${++counter}`;
         }
 
-        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.hasPlayerOwner, this.owner),
+        const formData = await AddEditSkillDialog.create(skillId, skill, false, this.hasPlayerOwner, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
@@ -514,8 +430,10 @@ export class ActorSFRPG extends Actor {
         const label = CONFIG.SFRPG.abilities[abilityId];
         const abl = this.data.data.abilities[abilityId];
         
-        let parts = [];
-        let data = this.getRollData();
+        const parts = [];
+        const data = this.getRollData();
+
+        const rollContext = RollContext.createActorRollContext(this);
 
         //Include ability check bonus only if it's not 0
         if(abl.abilityCheckBonus) {
@@ -524,17 +442,11 @@ export class ActorSFRPG extends Actor {
         }
         parts.push(`@abilities.${abilityId}.mod`);
 
-        const rollContext = new RollContext();
-        rollContext.addContext("main", this, data);
-        rollContext.setMainContext("main");
-
-        this.setupRollContexts(rollContext);
-
         return await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
-            title:  `Ability Check - ${label}`,
+            title:  game.i18n.format("SFRPG.Rolls.Dice.AbilityCheckTitle", {label: label}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
@@ -550,26 +462,18 @@ export class ActorSFRPG extends Actor {
      * @param {String} saveId The save id (e.g. "will")
      * @param {Object} options Options which configure how saves are rolled
      */
-    async rollSave(saveId, options = {}) {
+    rollSave(saveId, options = {}) {
         const label = CONFIG.SFRPG.saves[saveId];
-        const save = this.data.data.attributes[saveId];
 
-        let parts = [];
-        let data = this.getRollData();
+        const rollContext = RollContext.createActorRollContext(this);
 
-        parts.push(`@attributes.${saveId}.bonus`);
-        
-        const rollContext = new RollContext();
-        rollContext.addContext("main", this, data);
-        rollContext.setMainContext("main");
+        const parts = [`@attributes.${saveId}.bonus`];
 
-        this.setupRollContexts(rollContext);
-
-        return await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
-            title: `Save - ${label}`,
+            title: game.i18n.format("SFRPG.Rolls.Dice.SaveTitle", {label: label}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
@@ -580,22 +484,14 @@ export class ActorSFRPG extends Actor {
     }
 
     async rollSkillCheck(skillId, skill, options = {}) {
-        let parts = [];
-        let data = this.getRollData();
+        const rollContext = RollContext.createActorRollContext(this);
+        const parts = [`@skills.${skillId}.mod`];
 
-        parts.push(`@skills.${skillId}.mod`);
-        
-        const rollContext = new RollContext();
-        rollContext.addContext("main", this, data);
-        rollContext.setMainContext("main");
-
-        this.setupRollContexts(rollContext);
-        
         return await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
-            title: `Skill Check - ${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}`,
+            title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)]}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
@@ -651,7 +547,7 @@ export class ActorSFRPG extends Actor {
             event: options.event,
             rollContext: rollContext,
             parts: parts,
-            title: `Skill Check - ${CONFIG.SFRPG.skills["pil"]}`,
+            title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills["pil"]}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
@@ -659,424 +555,6 @@ export class ActorSFRPG extends Actor {
                 top: options.event ? options.event.clientY - 80 : null
             }
         });
-    }
-
-    static async applyDamage(roll, multiplier) {
-        const totalDamageDealt = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
-        const isHealing = (multiplier < 0);
-        const promises = [];
-        for (const controlledToken of canvas.tokens.controlled) {
-            let promise = null;
-            if (controlledToken.actor.data.type === "starship") {
-                promise = ActorSFRPG._applyStarshipDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
-            } else if (controlledToken.actor.data.type === "vehicle") {
-                promise = ActorSFRPG._applyVehicleDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
-            } else {
-                promise = ActorSFRPG._applyActorDamage(roll, controlledToken.actor, totalDamageDealt, isHealing);
-            }
-
-            if (promise) {
-                promises.push(promise);
-            }
-        }
-
-        return Promise.all(promises);
-    }
-
-    static async _applyActorDamage(roll, actor, totalDamageDealt, isHealing) {
-        let remainingUndealtDamage = totalDamageDealt;
-        const actorUpdate = {};
-
-        /** Update temp hitpoints */
-        if (!isHealing) {
-            const originalTempHP = parseInt(actor.data.data.attributes.hp.temp) | 0;
-            const newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.tempmax);
-            remainingUndealtDamage = remainingUndealtDamage - (originalTempHP - newTempHP);
-            
-            actorUpdate["data.attributes.hp.temp"] = newTempHP;
-        }
-
-        /** Update stamina points */
-        if (!isHealing) {
-            const originalSP = actor.data.data.attributes.sp.value;
-            const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actor.data.data.attributes.sp.max);
-            remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
-            
-            actorUpdate["data.attributes.sp.value"] = newSP;
-        }
-
-        /** Update hitpoints */
-        const originalHP = actor.data.data.attributes.hp.value;
-        const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actor.data.data.attributes.hp.max);
-        remainingUndealtDamage = remainingUndealtDamage - (originalHP - newHP);
-        
-        actorUpdate["data.attributes.hp.value"] = newHP;
-
-        const promise = actor.update(actorUpdate);
-
-        /** If the remaining undealt damage is equal to or greater than the max hp, the character dies of Massive Damage. */
-        if (actor.data.type === "character" && remainingUndealtDamage >= actor.data.data.attributes.hp.max) {
-            const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", {name: actor.name});
-            ui.notifications.warn(localizedDeath, {permanent: true});
-        }
-    
-        return promise;
-    }
-
-    static async _applyVehicleDamage(roll, vehicleActor, totalDamageDealt, isHealing) {
-        ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
-        return null;
-    }
-
-    static async _applyStarshipDamage(roll, starshipActor, totalDamageDealt, isHealing) {
-        if (isHealing) {
-            ui.notifications.warn("Cannot currently apply healing to starships using the context menu.");
-            return null;
-        }
-
-        /** Ask for quadrant */
-        const options = [
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Forward"),
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Port"),
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Starboard"),
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Aft")
-        ];
-        const results = await ChoiceDialog.show(
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Title", {name: starshipActor.name}),
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Message"),
-            {
-                quadrant: {
-                    name: game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Quadrant"),
-                    options: options,
-                    default: options[0]
-                }
-            }
-        );
-
-        if (results.resolution !== "ok") {
-            return null;
-        }
-
-        let targetKey = null;
-        let originalData = null;
-        let newData = null;
-
-        const selectedQuadrant = results.result.quadrant;
-        const indexOfQuadrant = options.indexOf(selectedQuadrant);
-        if (indexOfQuadrant === 0) {
-            targetKey = "data.quadrants.forward";
-            originalData = starshipActor.data.data.quadrants.forward;
-        } else if (indexOfQuadrant === 1) {
-            targetKey = "data.quadrants.port";
-            originalData = starshipActor.data.data.quadrants.port;
-        } else if (indexOfQuadrant === 2) {
-            targetKey = "data.quadrants.starboard";
-            originalData = starshipActor.data.data.quadrants.starboard;
-        } else if (indexOfQuadrant === 3) {
-            targetKey = "data.quadrants.aft";
-            originalData = starshipActor.data.data.quadrants.aft;
-        } else {
-            /** Error, unrecognized quadrant, somehow. */
-            return null;
-        }
-
-        let actorUpdate = {};
-        newData = duplicate(originalData);
-
-        let remainingUndealtDamage = totalDamageDealt;
-        const hasDeflectorShields = starshipActor.data.data.hasDeflectorShields;
-        const hasAblativeArmor = starshipActor.data.data.hasAblativeArmor;
-        
-        if (hasDeflectorShields) {
-            if (originalData.shields.value > 0) {
-                // Deflector shields are twice as effective against attacks from melee, ramming, and ripper starship weapons, so the starship ignores double the amount of damage from such attacks.
-                // TODO: Any attack that would ignore a fraction or all of a target’s shields instead reduces the amount of damage the deflector shields ignore by an equal amount, rounded in the defender’s favor (e.g., deflector shields with a defense value of 5 would reduce damage from a burrowing weapon [Pact Worlds 153] by 3)
-                const isMelee = roll.find('#melee').length > 0;
-                const isRamming = roll.find('#ramming').length > 0;
-                const isRipper = roll.find('#ripper').length > 0;
-
-                const shieldMultiplier = (isMelee || isRamming || isRipper) ? 2 : 1;
-                remainingUndealtDamage = Math.max(0, remainingUndealtDamage - (originalData.shields.value * shieldMultiplier));
-            }
-        } else {
-            newData.shields.value = Math.max(0, originalData.shields.value - remainingUndealtDamage);
-            remainingUndealtDamage = remainingUndealtDamage - (originalData.shields.value - newData.shields.value);
-        }
-
-        if (hasAblativeArmor) {
-            newData.ablative.value = Math.max(0, originalData.ablative.value - remainingUndealtDamage);
-            remainingUndealtDamage = remainingUndealtDamage - (originalData.ablative.value - newData.ablative.value);
-        }
-
-        const originalHullPoints = starshipActor.data.data.attributes.hp.value;
-        const newHullPoints = Math.clamped(originalHullPoints - remainingUndealtDamage, 0, starshipActor.data.data.attributes.hp.max);
-        remainingUndealtDamage = remainingUndealtDamage - (originalHullPoints - newHullPoints);
-
-        /** Deflector shields only drop in efficiency when the ship takes hull point damage. */
-        if (hasDeflectorShields) {
-            let deflectorShieldDamage = 0;
-
-            if (newHullPoints !== originalHullPoints) {
-                deflectorShieldDamage = 1;
-
-                // Weapons with the array or line special property that damage a starship’s Hull Points overwhelm its deflector shields, reducing their defense value in that quadrant by 2
-                if (roll.find('#array').length > 0 || roll.find('#line').length > 0) {
-                    deflectorShieldDamage = 2;
-                }
-
-                // TODO: ..whereas vortex weapons that deal Hull Point damage reduce the target’s deflector shields’ defense value in each quadrant by 1d4.
-                else if (roll.find('#vortex').length > 0) {
-                }
-            }
-
-            // Any successful attack by a weapon with the buster special property (or another special property that deals reduced damage to Hull Points) reduces the deflector shields’ defense value in the struck quadrant by 2, whether or not the attack damaged the target’s Hull Points.
-            if (roll.find('#buster').length > 0) {
-                deflectorShieldDamage = 2;
-            }
-
-            // When a gunnery check results in a natural 20, any decrease to the target’s deflector shield’s defense value from the attack is 1 greater.
-            const isCritical = roll.find('#critical').length > 0;
-            deflectorShieldDamage += isCritical ? 1 : 0;
-
-            newData.shields.value = Math.max(0, newData.shields.value - deflectorShieldDamage);
-        }
-
-        if (originalData.shields.value !== newData.shields.value) {
-            actorUpdate[targetKey + ".shields.value"] = newData.shields.value;
-        }
-
-        if (originalData.ablative.value !== newData.ablative.value) {
-            actorUpdate[targetKey + ".ablative.value"] = newData.ablative.value;
-        }
-
-        if (newHullPoints !== originalHullPoints) {
-            actorUpdate["data.attributes.hp.value"] = newHullPoints;
-        }
-
-        const originalCT = Math.floor((starshipActor.data.data.attributes.hp.max - originalHullPoints) / starshipActor.data.data.attributes.criticalThreshold.value);
-        const newCT = Math.floor((starshipActor.data.data.attributes.hp.max - newHullPoints) / starshipActor.data.data.attributes.criticalThreshold.value);
-        if (newCT > originalCT) {
-            const crossedThresholds = newCT - originalCT;
-            const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: starshipActor.name, crossedThresholds: crossedThresholds});
-            ui.notifications.warn(warningMessage);
-        }
-     
-        const promise = starshipActor.update(actorUpdate);
-        return promise;
-    }
-
-    /**
-     * Cause this Actor to take a Short 10 minute Rest
-     * During a Short Rest resources and limited item uses may be recovered
-     * @param {boolean} dialog  Present a dialog window which allows for spending Resolve Points as part of the Short Rest
-     * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
-     * @return {Promise}        A Promise which resolves once the short rest workflow has completed
-     */
-    async shortRest({ dialog = true, chat = true } = {}) {
-        const data = this.data.data;
-
-        // Ask user to confirm if they want to rest, and if they want to restore stamina points
-        let sp = data.attributes.sp;
-        let rp = data.attributes.rp;
-        let canRestoreStaminaPoints = rp.value > 0 && sp.value < sp.max;
-
-        let restoreStaminaPoints = false;
-
-        if (dialog) {
-            const restingResults = await ShortRestDialog.shortRestDialog({ actor: this, canRestoreStaminaPoints: canRestoreStaminaPoints });
-            if (!restingResults.resting) return;
-            restoreStaminaPoints = restingResults.restoreStaminaPoints;
-        }
-        
-        let drp = 0;
-        let dsp = 0;
-        if (restoreStaminaPoints && canRestoreStaminaPoints) {
-            drp = 1;
-            let updatedRP = Math.max(rp.value - drp, 0);
-            dsp = Math.min(sp.max - sp.value, sp.max);
-            
-            this.update({ "data.attributes.sp.value": sp.max, "data.attributes.rp.value": updatedRP });
-        }
-
-        // Restore resources that reset on short rests
-        const updateData = {};
-        for (let [k, r] of Object.entries(data.resources)) {
-            if (r.max && r.sr) {
-                updateData[`data.resources.${k}.value`] = r.max;
-            }
-        }
-
-        await this.update(updateData);
-
-        // Reset items that restore their uses on a short rest
-        const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
-        const updateItems = items.map(item => {
-            return {
-                _id: item._id,
-                "data.uses.value": item.data.data.uses.max
-            }
-        });
-
-        await this.updateEmbeddedEntity("OwnedItem", updateItems);
-
-        // Notify chat what happened
-        if (chat) {
-            let msg = game.i18n.format("SFRPG.RestSChatMessage", { name: this.name });
-            if (drp > 0) {
-                msg = game.i18n.format("SFRPG.RestSChatMessageRestored", { name: this.name, spentRP: drp, regainedSP: dsp });
-            }
-            
-            ChatMessage.create({
-                user: game.user._id,
-                speaker: { actor: this, alias: this.name },
-                content: msg,
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER
-            });
-        }
-
-        return {
-            drp: drp,
-            dsp: dsp,
-            updateData: updateData,
-            updateItems: updateItems
-        }
-    }
-
-    /**
-     * Cause this Actor to repair itself following drone repairing rules
-     * During a drone repair, some amount of drone HP may be recovered.
-     * @param {boolean} dialog  Present a dialog window which allows for utilizing the Repair Drone (Ex) feat while repairing.
-     * @param {boolean} chat    Summarize the results of the repair workflow as a chat message
-     * @return {Promise}        A Promise which resolves once the repair workflow has completed
-     */
-    async repairDrone({ dialog = true, chat = true } = {}) {
-        const data = this.data.data;
-
-        let hp = data.attributes.hp;
-        if (hp.value >= hp.max) {
-            let message = game.i18n.format("SFRPG.RepairDroneUnnecessary", { name: this.name });
-            ui.notifications.info(message);
-            return;
-        }
-
-        let improvedRepairFeat = false;
-        if (dialog) {
-            const dialogResults = await DroneRepairDialog.droneRepairDialog({ actor: this, improvedRepairFeat: improvedRepairFeat });
-            if (!dialogResults.repairing) return;
-            improvedRepairFeat = dialogResults.improvedRepairFeat;
-        }
-        
-        let oldHP = hp.value;
-        let maxRepairAmount = Math.floor(improvedRepairFeat ? hp.max * 0.25 : hp.max * 0.1);
-        let newHP = Math.min(hp.max, hp.value + maxRepairAmount);
-        let dhp = newHP - oldHP;
-
-        const updateData = {};
-        updateData["data.attributes.hp.value"] = newHP;
-        await this.update(updateData);
-
-        // Notify chat what happened
-        if (chat) {
-            let msg = game.i18n.format("SFRPG.RepairDroneChatMessage", { name: this.name, regainedHP: dhp });
-            
-            ChatMessage.create({
-                user: game.user._id,
-                speaker: { actor: this, alias: this.name },
-                content: msg,
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER
-            });
-        }
-
-        return {
-            dhp: dhp,
-            updateData: updateData
-        };
-    }
-
-    async removeFromCrew(actorId) {
-        const role = this.getCrewRoleForActor(actorId);
-        if (role) {
-            const crewData = duplicate(this.data.data.crew);
-            crewData[role].actorIds = crewData[role].actorIds.filter(x => x !== actorId);
-            return this.update({
-                "data.crew": crewData
-            });
-        }
-        return null;
-    }
-
-    /**
-     * Take a long nights rest, recovering HP, SP, RP, resources, and spell slots
-     * @param {boolean} dialog  Present a confirmation dialog window whether or not to take a long rest
-     * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
-     * @return {Promise}        A Promise which resolves once the long rest workflow has completed
-     */
-    async longRest({ dialog = true, chat = true } = {}) {
-        const data = duplicate(this.data.data);
-        const updateData = {};
-
-        if (dialog) {
-            try {
-                await ShortRestDialog.longRestDialog(this);
-            } catch (err) {
-                return;
-            }
-        }
-
-        // Recover HP, SP, and RP
-        let dhp = data.attributes.hp.max === data.attributes.hp.value ? 0 :
-            data.details.level.value > (data.attributes.hp.max - data.attributes.hp.value) ?
-                data.attributes.hp.max - data.attributes.hp.value : data.details.level.value;
-        let dsp = data.attributes.sp.max - data.attributes.sp.value;
-        let drp = data.attributes.rp.max - data.attributes.rp.value;
-        updateData['data.attributes.hp.value'] = Math.min(data.attributes.hp.value + data.details.level.value, data.attributes.hp.max);
-        updateData['data.attributes.sp.value'] = data.attributes.sp.max;
-        updateData['data.attributes.rp.value'] = data.attributes.rp.max;
-
-        // Heal Ability damage
-        for (let [abl, ability] of Object.entries(data.abilities)) {
-            if (ability.damage && ability.damage > 0) {
-                updateData[`data.abilities.${abl}.damage`] = --ability.damage;
-            } 
-        }
-
-        for (let [k, r] of Object.entries(data.resources)) {
-            if (r.max && (r.sr || r.lr)) {
-                updateData[`data.resources.${k}.value`] = r.max;
-            }
-        }
-
-        for (let [k, v] of Object.entries(data.spells)) {
-            if (!v.max) continue;
-            updateData[`data.spells.${k}.value`] = v.max;
-        }
-
-        const items = this.items.filter(i => i.data.data.uses && ["sr", "lr", "day"].includes(i.data.data.uses.per));
-        const updateItems = items.map(item => {
-            return {
-                _id: item._id,
-                "data.uses.value": item.data.data.uses.max
-            }
-        });
-
-        await this.update(updateData);
-        await this.updateEmbeddedEntity("OwnedItem", updateItems);
-
-        if (chat) {
-            ChatMessage.create({
-                user: game.user._id,
-                speaker: { actor: this, alias: this.name },
-                content: `${this.name} takes a night's rest and recovers ${dhp} Hit points, ${dsp} Stamina points, and ${drp} Resolve points.`
-            });
-        }
-
-        return {
-            dhp: dhp,
-            dsp: dsp,
-            drp: drp,
-            updateData: updateData,
-            updateItems: updateItems
-        }
     }
 
     /** Starship code */
@@ -1089,7 +567,8 @@ export class ActorSFRPG extends Actor {
 
         const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
         const starshipActions = game.packs.get(starshipPackKey);
-        const actionEntry = await starshipActions.getEntry(actionId);
+        const actionEntryDocument = await starshipActions.getDocument(actionId);
+        const actionEntry = actionEntryDocument.data;
 
         /** Bad entry; no action! */
         if (!actionEntry) {
@@ -1219,7 +698,7 @@ export class ActorSFRPG extends Actor {
 
             speakerActor = selectedContext?.entity || this;
 
-            const actorRole = this.getCrewRoleForActor(speakerActor._id);
+            const actorRole = this.getCrewRoleForActor(speakerActor.id);
             if (actorRole) {
                 const actorRoleKey = CONFIG.SFRPG.starshipRoleNames[actorRole];
                 roleName = game.i18n.format(actorRoleKey);
@@ -1259,7 +738,7 @@ export class ActorSFRPG extends Actor {
         if (actionEntry.data.effectCritical) {
             const critEffectDisplayState = game.settings.get("sfrpg", "starshipActionsCrit");
             if (critEffectDisplayState !== 'never') {
-                if (critEffectDisplayState === 'always' || rollResult.roll.results[0] === 20) {
+                if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
                     flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.data.effectCritical);
                     flavor += "</p>";
@@ -1269,107 +748,68 @@ export class ActorSFRPG extends Actor {
 
         const rollMode = game.settings.get("core", "rollMode");
         const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
-        rollResult.roll.render().then((rollContent) => {
-            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-            const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
-    
-            ChatMessage.create({
-                flavor: flavor,
-                speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
-                content: explainedRollContent,
-                rollMode: rollMode,
-                roll: rollResult.roll,
-                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-                sound: CONFIG.sounds.dice
-            });
+        const rollContent = await rollResult.roll.render({ breakdown: preparedRollExplanation });
+
+        ChatMessage.create({
+            flavor: flavor,
+            speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
+            content: rollContent,
+            rollMode: rollMode,
+            roll: rollResult.roll,
+            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            sound: CONFIG.sounds.dice
         });
-    }
-
-    /** Crewed actor functionality */
-    getCrewRoleForActor(actorId) {
-        const dataSource = this.data;
-        const acceptedActorTypes = ["starship", "vehicle"];
-        if (!acceptedActorTypes.includes(dataSource.type)) {
-            console.log(`getCrewRoleForActor(${actorId}) called on an actor (${dataSource._id}) of type ${dataSource.type}, which is not supported!`);
-            console.trace();
-            return null;
-        }
-
-        if (!dataSource?.data?.crew) {
-            return null;
-        }
-
-        for (const [role, entry] of Object.entries(dataSource.data.crew)) {
-            if (entry?.actorIds?.includes(actorId)) {
-                return role;
-            }
-        }
-        return null;
-    }
-
-    getActorIdsForCrewRole(role) {
-        const acceptedActorTypes = ["starship", "vehicle"];
-        if (!acceptedActorTypes.includes(this.data.type)) {
-            console.log(`getActorIdsForCrewRole(${role}) called on an actor (${this.data._id}) of type ${this.data.type}, which is not supported!`);
-            console.trace();
-            return null;
-        }
-
-        if (!this.data?.data?.crew) {
-            return null;
-        }
-
-        if (!(role in this.data.data.crew)) {
-            return null;
-        }
-
-        return duplicate(this.data.data.crew[role]);
     }
 
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
+        if (!this.data) {
+            return;
+        }
 
-        if (this.data.type === "vehicle") {
-            if (!this.data.data.crew.useNPCCrew) {
+        const crewData = this.data.data.crew;
+        const crewActorData = this.data.crew;
 
+        const actorData = this.data;
+        if (actorData.type === "vehicle") {
+            if (!crewData.useNPCCrew) {
                 /** Add player pilot if available. */
-                if (this.data.data.crew.pilot?.actors?.length > 0) {
-                    const actor = this.data.data.crew.pilot.actors[0];
-                    let actorData = null;
-                    if (actor instanceof ActorSFRPG) {
-                        actorData = actor.data.data;
+                if (crewActorData.pilot?.actors?.length > 0) {
+                    const pilotActor = crewActorData.pilot.actors[0];
+                    let pilotData = null;
+                    if (pilotActor instanceof ActorSFRPG) {
+                        pilotData = pilotActor.data.data;
                     } else {
-                        actorData = actor.data;
+                        pilotData = pilotActor.data;
                     }
-                    rollContext.addContext("pilot", actor, actorData);
+                    rollContext.addContext("pilot", pilotActor, pilotData);
                 }
             }
         }
-        else if (this.data.type === "starship") {
-
-            if (!this.data.data.crew.useNPCCrew) {
+        else if (actorData.type === "starship") {
+            if (!crewData.useNPCCrew) {
                 /** Add player captain if available. */
-                if (this.data.data.crew.captain?.actors?.length > 0) {
-                    const actor = this.data.data.crew.captain.actors[0];
-                    let actorData = null;
+                if (crewActorData.captain?.actors?.length > 0) {
+                    const actor = crewActorData.captain.actors[0];
+                    let crewMemberActorData = null;
                     if (actor instanceof ActorSFRPG) {
-                        actorData = actor.data.data;
+                        crewMemberActorData = actor.data.data;
                     } else {
-                        actorData = actor.data;
+                        crewMemberActorData = actor.data;
                     }
-                    rollContext.addContext("captain", actor, actorData);
+                    rollContext.addContext("captain", actor, crewMemberActorData);
                 }
         
                 /** Add player pilot if available. */
-                if (this.data.data.crew.pilot?.actors?.length > 0) {
-                    const actor = this.data.data.crew.pilot.actors[0];
-                    let actorData = null;
+                if (crewActorData.pilot?.actors?.length > 0) {
+                    const actor = crewActorData.pilot.actors[0];
+                    let crewMemberActorData = null;
                     if (actor instanceof ActorSFRPG) {
-                        actorData = actor.data.data;
+                        crewMemberActorData = actor.data.data;
                     } else {
-                        actorData = actor.data;
+                        crewMemberActorData = actor.data;
                     }
-                    rollContext.addContext("pilot", actor, actorData);
+                    rollContext.addContext("pilot", actor, crewMemberActorData);
                 }
         
                 /** Add remaining roles if available. */
@@ -1379,37 +819,37 @@ export class ActorSFRPG extends Actor {
                     let crewCount = 1;
                     const crew = [];
                     if (allCrewMates.includes(crewType)) {
-                        for (const crewEntries of Object.values(this.data.data.crew)) {
+                        for (const crewEntries of Object.values(crewActorData)) {
                             const crewList = crewEntries.actors;
                             if (crewList && crewList.length > 0) {
                                 for (const actor of crewList) {
-                                    let actorData = null;
+                                    let crewMemberActorData = null;
                                     if (actor instanceof ActorSFRPG) {
-                                        actorData = actor.data.data;
+                                        crewMemberActorData = actor.data.data;
                                     } else {
-                                        actorData = actor.data;
+                                        crewMemberActorData = actor.data;
                                     }
 
                                     const contextId = crewType + crewCount;
-                                    rollContext.addContext(contextId, actor, actorData);
+                                    rollContext.addContext(contextId, actor, crewMemberActorData);
                                     crew.push(contextId);
                                     crewCount += 1;
                                 }
                             }
                         }
                     } else {
-                        const crewList = this.data.data.crew[crewType].actors;
+                        const crewList = crewActorData[crewType].actors;
                         if (crewList && crewList.length > 0) {
                             for (const actor of crewList) {
-                                let actorData = null;
+                                let crewMemberActorData = null;
                                 if (actor instanceof ActorSFRPG) {
-                                    actorData = actor.data.data;
+                                    crewMemberActorData = actor.data.data;
                                 } else {
-                                    actorData = actor.data;
+                                    crewMemberActorData = actor.data;
                                 }
 
                                 const contextId = crewType + crewCount;
-                                rollContext.addContext(contextId, actor, actorData);
+                                rollContext.addContext(contextId, actor, crewMemberActorData);
                                 crew.push(contextId);
                                 crewCount += 1;
                             }
@@ -1422,14 +862,20 @@ export class ActorSFRPG extends Actor {
                 }
             } else {
                 /** Create 'fake' actors. */
-                rollContext.addContext("captain", this, this.data.data.crew.npcData.captain);
-                rollContext.addContext("pilot", this, this.data.data.crew.npcData.pilot);
-                rollContext.addContext("gunner", this, this.data.data.crew.npcData.gunner);
-                rollContext.addContext("engineer", this, this.data.data.crew.npcData.engineer);
-                rollContext.addContext("chiefMate", this, this.data.data.crew.npcData.chiefMate);
-                rollContext.addContext("magicOfficer", this, this.data.data.crew.npcData.magicOfficer);
-                rollContext.addContext("scienceOfficer", this, this.data.data.crew.npcData.scienceOfficer);
+                rollContext.addContext("captain", this, actorData.data.crew.npcData.captain);
+                rollContext.addContext("pilot", this, actorData.data.crew.npcData.pilot);
+                rollContext.addContext("gunner", this, actorData.data.crew.npcData.gunner);
+                rollContext.addContext("engineer", this, actorData.data.crew.npcData.engineer);
+                rollContext.addContext("chiefMate", this, actorData.data.crew.npcData.chiefMate);
+                rollContext.addContext("magicOfficer", this, actorData.data.crew.npcData.magicOfficer);
+                rollContext.addContext("scienceOfficer", this, actorData.data.crew.npcData.scienceOfficer);
             }
         }
     }
 }
+
+Hooks.on("afterClosureProcessed", async (closureName, fact) => {
+    if (closureName == "process-actors") {
+        await fact.actor.processItemData();
+    }
+});

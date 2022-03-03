@@ -11,3 +11,16 @@ export function degtorad(degrees) {
 export function radtodeg(radians) {
     return radians / 180 * Math.PI;
 }
+
+/**
+ * Determine if an array of terms contains a DiceTerm.
+ * 
+ * @param {RollTerm[]} terms The terms to check
+ */
+export function hasDiceTerms(terms) {
+    for (const term of terms) {
+        if (term instanceof DiceTerm) return true;
+    }
+
+    return false;
+}

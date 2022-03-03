@@ -3,45 +3,50 @@
   "name": "Tactical nuclear missile launcher",
   "type": "starshipWeapon",
   "data": {
-    "cost": 18,
-    "pcu": 10,
-    "isPowered": true,
-    "description": {
-      "value": "",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB pg. 302",
     "type": "",
-    "modifiers": [],
-    "range": "long",
-    "class": "light",
-    "weaponType": "tracking",
-    "speed": 10,
+    "abilityMods": {
+      "parts": []
+    },
     "attackBonus": "0",
+    "capacity": {
+      "max": 5,
+      "value": 5
+    },
+    "class": "light",
+    "cost": 18,
+    "costMultipliedBySize": false,
+    "critical": {
+      "parts": []
+    },
     "damage": {
       "parts": [
-        [
-          "5d8"
-        ]
+        {
+          "formula": "5d8",
+          "operator": "",
+          "types": {}
+        }
       ]
     },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": ""
+    },
+    "isPowered": true,
+    "modifiers": [],
+    "mount": {
+      "activated": false,
+      "arc": "",
+      "mounted": false
+    },
+    "pcu": 10,
+    "range": "long",
+    "source": "CRB pg. 302",
     "special": {
-      "array": false,
-      "broad": false,
-      "emp": false,
-      "irradiateL": true,
-      "irradiateM": false,
-      "irradiateH": false,
-      "limited": true,
-      "line": false,
-      "point": false,
-      "quantum": false,
-      "ripper": false,
-      "tractor": false,
-      "vortex": false,
       "anchoring": false,
+      "array": false,
       "automated": false,
+      "broad": false,
       "bugging": false,
       "burrowing": false,
       "buster": false,
@@ -49,6 +54,7 @@
       "deathField": false,
       "deployed": false,
       "drone": false,
+      "emp": false,
       "flakArea": false,
       "forceField": false,
       "gravityTether": false,
@@ -56,18 +62,26 @@
       "hacking": false,
       "immobilize": false,
       "intimidating": false,
+      "irradiateH": false,
+      "irradiateL": true,
+      "irradiateM": false,
       "jamming": false,
+      "limited": true,
+      "line": false,
       "mine": false,
       "mystical": false,
       "navScram": false,
       "numbing": false,
       "orbital": false,
       "pod": false,
+      "point": false,
+      "quantum": false,
       "radiant": false,
       "rail": false,
       "ramming": false,
       "redirect": false,
       "restricted": false,
+      "ripper": false,
       "scatterscan": false,
       "smart": false,
       "smoldering": false,
@@ -75,28 +89,16 @@
       "suspending": false,
       "sustained": false,
       "teleportation": false,
+      "tractor": false,
       "transposition": false,
       "vandalDrones": false,
-      "volatile": false
+      "volatile": false,
+      "vortex": false
     },
-    "mount": {
-      "mounted": false,
-      "arc": "",
-      "activated": false
-    },
-    "abilityMods": {
-      "parts": []
-    },
-    "costMultipliedBySize": false,
-    "critical": {
-      "parts": []
-    },
-    "capacity": {
-      "value": 5,
-      "max": 5
-    }
+    "speed": 10,
+    "weaponType": "tracking"
   },
+  "effects": [],
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "effects": []
+  "img": "icons/svg/mystery-man.svg"
 }

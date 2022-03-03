@@ -12,11 +12,13 @@ export default function (engine) {
         }
 
         if (activeChassis) {
-            data.traits.size = SFRPG.actorSizes[activeChassis.data.size];
-            data.attributes.speed.value = activeChassis.data.speed.value;
-            data.attributes.speed.special = activeChassis.data.speed.special;
+            const chassisData = activeChassis.data.data;
 
-            let droneLevel = activeChassis.data.levels;
+            data.traits.size = SFRPG.actorSizes[chassisData.size];
+            data.attributes.speed = mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});
+            data.attributes.speed.special = "";
+
+            let droneLevel = chassisData.levels;
             droneLevel = Math.max(1, Math.min(droneLevel, 20));
 
             data.details.level.value = droneLevel;
@@ -31,21 +33,21 @@ export default function (engine) {
                 })]
             };
 
-            let abilityIncreaseStats = [activeChassis.data.abilityIncreaseStats.first, activeChassis.data.abilityIncreaseStats.second];
+            let abilityIncreaseStats = [chassisData.abilityIncreaseStats.first, chassisData.abilityIncreaseStats.second];
             let abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
 
-            data.abilities.str.base = activeChassis.data.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
+            data.abilities.str.base = chassisData.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
 
-            data.abilities.dex.base = activeChassis.data.abilityScores.dex + (abilityIncreaseStats.includes("dex") ? abilityIncreases : 0);
+            data.abilities.dex.base = chassisData.abilityScores.dex + (abilityIncreaseStats.includes("dex") ? abilityIncreases : 0);
 
-            data.abilities.con.value = activeChassis.data.abilityScores.con;
+            data.abilities.con.value = chassisData.abilityScores.con;
             data.abilities.con.mod = 0;
 
-            data.abilities.int.base = activeChassis.data.abilityScores.int + (abilityIncreaseStats.includes("int") ? abilityIncreases : 0);
+            data.abilities.int.base = chassisData.abilityScores.int + (abilityIncreaseStats.includes("int") ? abilityIncreases : 0);
 
-            data.abilities.wis.base = activeChassis.data.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
+            data.abilities.wis.base = chassisData.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
             
-            data.abilities.cha.base = activeChassis.data.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
+            data.abilities.cha.base = chassisData.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
         } else {
             data.abilities.str.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
             data.abilities.dex.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));

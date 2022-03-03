@@ -16,11 +16,11 @@ export default function() {
 
         // Create the template
         const data = {
-            user: game.user._id,
+            user: game.user.id,
             t: tool,
-            x: pos.x,
-            y: pos.y,
-            distance: 0,
+            x: origin.x,
+            y: origin.y,
+            distance: 1,
             direction: 0,
             fillColor: game.user.data.color || "#FF0000"
         };
@@ -28,7 +28,8 @@ export default function() {
         if (tool === "cone") data["angle"] = 90;
         else if (tool === "ray") data["width"] = 5;
 
-        let template = new MeasuredTemplate(data);
+        const doc = new MeasuredTemplateDocument(data, {parent: canvas.scene});
+        const template = new MeasuredTemplate(doc);
         event.data.preview = this.preview.addChild(template);
         template.draw();
     };
@@ -53,11 +54,11 @@ export default function() {
             // Update the shape data
             if (["cone", "circle"].includes(template.data.t)) {
                 const direction = ray.angle;
-                template.data.direction = toDegrees(Math.floor((direction + (Math.PI * 0.125)) / (Math.PI * 0.25)) * (Math.PI * 0.25));
+                template.data.direction = Math.toDegrees(Math.floor((direction + (Math.PI * 0.125)) / (Math.PI * 0.25)) * (Math.PI * 0.25));
                 const distance = ray.distance / ratio;
                 template.data.distance = Math.floor(distance / canvas.dimensions.distance) * canvas.dimensions.distance;
             } else {
-                template.data.direction = toDegrees(ray.angle);
+                template.data.direction = Math.toDegrees(ray.angle);
                 template.data.distance = ray.distance / ratio;
             }
 

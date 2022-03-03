@@ -1,12 +1,31 @@
         <li class="item flexrow {{#unless isCharged}}uncharged{{/unless}}" data-item-id="{{item._id}}">
-            <div class="item-name flexrow rollable">
+            <div class="item-name flexrow rollable" {{createTippy title=item.name subtitle=item.data.description.short attributes=item.attributes tooltips=item.actorResourceData.tooltip}}>
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>
                     {{#if item.data.isFree}}[{{localize "SFRPG.DroneSheet.Features.ModsFree"}}] {{/if}}
-                    {{#if prefixTable}}
-                    {{ lookup prefixTable item.type }}: 
+                    {{#if (and prefixTable (lookup prefixTable item.type))}}
+                        {{ lookup prefixTable item.type }}: 
                     {{/if}}
-                    {{item.name}}
+                    {{#if (not (eq item.type "actorResource"))}}
+                        {{item.name}}
+                    {{else}}
+                    <div class="actor-resource-name">
+                        <div>
+                            <label class="name-label">{{item.name}}</label>
+                        </div>
+                        <div>
+                            {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
+                            <label class="value-label">@resources.{{item.data.type}}.{{item.data.subType}}.value</label>
+                            {{else}}
+                                {{#if item.data.enabled}}
+                                <label class="error">{{localize "SFRPG.ItemSheet.ActorResource.ErrorIncompleteData"}}</label>
+                                {{else}}
+                                <label class="value-label">{{localize "SFRPG.ItemSheet.ActorResource.ErrorDisabled"}}</label>
+                                {{/if}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/if}}
                 </h4>
                 {{#if (or item.hasAttack item.hasDamage)}}
                 <div class="item-action flexcol">
@@ -17,9 +36,21 @@
                         {{#if (eq item.data.actionType "heal")}}
                             <button class="tag healing">{{localize "SFRPG.ActionHeal"}}</button>
                         {{else}}
-                            <button class="tag damage">{{localize "SFRPG.Damage"}}</button>
+                            <button class="tag damage">{{localize "SFRPG.Damage.Title"}}</button>
                         {{/if}}
                     {{/if}}
+                </div>
+                {{/if}}
+                {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
+                <div class="actor-resource-values">
+                    <div>
+                        <label class="actor-resource-base-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue"}}:</label>
+                        <input class="actor-resource-base-input" data-resource-id="{{item._id}}" type="text" name="" value="{{item.data.base}}" data-dtype="Number"/>
+                    </div>
+                    <div>
+                        <label class="actor-resource-computed-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue"}}:</label>
+                        <span>{{item.actorResourceData.value}}</span>
+                    </div>
                 </div>
                 {{/if}}
             </div>
@@ -35,8 +66,8 @@
                         {{localize "SFRPG.Charged"}}
                     {{/if}}
                 {{else if item.hasCapacity}}
-                    {{item.data.capacity.value}} / {{item.data.capacity.max}}
-                    {{#if owner}}
+                    {{item.capacityCurrent}} / {{item.capacityMaximum}}
+                    {{#if isOwner}}
                     &nbsp;
                     <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
                     {{/if}}
@@ -68,7 +99,7 @@
             </div>
             {{/if}}
 
-            {{#if owner}}
+            {{#if isOwner}}
             <div class="item-controls">
                 {{#if (not disableEquipping)}}
                 {{#if (or (or (or (eq item.type "shield") (eq item.type "weapon")) (eq item.type "equipment")) (eq item.type "container"))}}

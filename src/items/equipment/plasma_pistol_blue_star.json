@@ -3,170 +3,145 @@
   "name": "Plasma pistol, blue star",
   "type": "weapon",
   "data": {
-    "description": {
-      "value": "<p>Plasma pistols fire a line of ionized plasma out to a relatively short range. The plasma can continue to burn after contact.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB pg. 173",
     "type": "",
-    "quantity": 1,
-    "bulk": "L",
-    "price": 565000,
-    "level": 19,
-    "attuned": false,
-    "equipped": false,
-    "identified": true,
+    "ability": "dex",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "eac",
+    "actionType": "rwak",
+    "activation": {
+      "type": "none",
+      "condition": "",
+      "cost": null
+    },
+    "area": {
+      "effect": "",
+      "shape": "line",
+      "units": "ft",
+      "value": 40
+    },
+    "attackBonus": 0,
     "attributes": {
-      "sturdy": true,
+      "ac": {
+        "value": "5"
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": 102,
-        "max": "102"
       },
       "hardness": {
         "value": "43"
       },
-      "ac": {
-        "value": "5"
-      }
+      "hp": {
+        "max": "102",
+        "value": 102
+      },
+      "size": "medium",
+      "sturdy": true
     },
-    "activation": {
-      "type": "none",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": 40,
-      "units": "ft",
-      "shape": "line",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
-      "units": "none",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "isActive": null,
-    "ability": "dex",
-    "actionType": "rwak",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [],
-      "effect": "Burn 3d8"
-    },
-    "damage": {
-      "parts": [
-        [
-          "5d8",
-          "electricity+fire"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": "",
-      "descriptor": "negate"
-    },
-    "descriptors": [],
+    "attuned": false,
+    "bulk": "L",
     "capacity": {
-      "value": 100,
-      "max": 100
+      "max": 100,
+      "value": 100
     },
-    "usage": {
-      "value": 20,
-      "per": "round"
-    },
-    "modifiers": [],
+    "chatFlavor": "",
     "container": {
       "contents": [],
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
-          "subtype": "fusion",
-          "amount": 19,
           "acceptsType": [
             "fusion"
           ],
           "affectsEncumbrance": true,
+          "amount": 19,
+          "subtype": "fusion",
           "weightProperty": "level"
         },
         {
           "type": "slot",
-          "subtype": "",
-          "amount": 1,
           "acceptsType": [
             "goods"
           ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
           "weightMultiplier": 1,
-          "weightProperty": "",
-          "affectsEncumbrance": true
+          "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightProperty": ""
         }
-      ],
-      "isOpen": true
+      ]
     },
-    "weaponType": "smallA",
-    "weaponCategory": "plasma",
-    "special": "",
+    "critical": {
+      "effect": "Burn 3d8",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "5d8",
+          "operator": "and",
+          "types": {
+            "electricity": true,
+            "fire": true
+          }
+        }
+      ]
+    },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>Plasma pistols fire a line of ionized plasma out to a relatively short range. The plasma can continue to burn after contact.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "level": 19,
+    "modifiers": [],
+    "price": 565000,
+    "proficient": false,
     "properties": {
-      "one": true,
-      "two": false,
+      "aeon": false,
       "amm": false,
       "analog": false,
+      "antibiological": false,
       "archaic": false,
+      "aurora": false,
       "automatic": false,
       "blast": false,
       "block": false,
       "boost": false,
-      "bright": false,
-      "disarm": false,
-      "entangle": false,
-      "explode": false,
-      "injection": false,
-      "line": true,
-      "nonlethal": false,
-      "operative": false,
-      "penetrating": false,
-      "powered": false,
-      "qreload": false,
-      "reach": false,
-      "sniper": false,
-      "stun": false,
-      "thrown": false,
-      "trip": false,
-      "unwieldy": true,
-      "aeon": false,
-      "antibiological": false,
-      "aurora": false,
       "breach": false,
       "breakdown": false,
+      "bright": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
       "deflect": false,
+      "disarm": false,
       "double": false,
       "drainCharge": false,
       "echo": false,
+      "entangle": false,
+      "explode": false,
       "extinguish": false,
       "feint": false,
       "fiery": false,
@@ -180,9 +155,12 @@
       "guided": false,
       "harrying": false,
       "holyWater": false,
+      "hybrid": false,
       "ignite": false,
       "indirect": false,
+      "injection": false,
       "integrated": false,
+      "line": true,
       "living": false,
       "lockdown": false,
       "mind-affecting": false,
@@ -190,17 +168,27 @@
       "mire": false,
       "modal": false,
       "necrotic": false,
+      "nonlethal": false,
+      "one": true,
+      "operative": false,
+      "penetrating": false,
       "polarize": false,
       "polymorphic": false,
+      "powered": false,
       "professional": false,
       "punchGun": false,
+      "qreload": false,
       "radioactive": false,
+      "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
       "shape": false,
       "shells": false,
       "shield": false,
+      "sniper": false,
+      "stun": false,
       "subtle": false,
       "sunder": false,
       "swarm": false,
@@ -208,19 +196,46 @@
       "teleportive": false,
       "thought": false,
       "throttle": false,
+      "thrown": false,
+      "trip": false,
+      "two": false,
+      "unbalancing": false,
       "underwater": false,
+      "unwieldy": true,
       "variantBoost": false,
-      "wideLine": false,
-      "hybrid": false,
-      "regrowth": false,
-      "unbalancing": false
+      "wideLine": false
     },
-    "proficient": false,
-    "abilityMods": {
-      "parts": []
-    }
+    "quantity": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "CRB pg. 173",
+    "special": "",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "usage": {
+      "per": "round",
+      "value": 20
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    },
+    "weaponCategory": "plasma",
+    "weaponType": "smallA"
   },
+  "effects": [],
   "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/plasma-pistol-yellow-star.jpg",
-  "effects": []
+  "img": "systems/sfrpg/icons/equipment/weapons/plasma-pistol-yellow-star.jpg"
 }

@@ -35,7 +35,11 @@ export const SFRPGEffectType = Object.freeze({
     ALL_SKILLS: "all-skills",
     SAVES: "saves",
     SAVE: "save",
+    SPELL_SAVE_DC: "spell-save-dc",
     SPEED: "speed",
+    ALL_SPEEDS: "all-speeds",
+    SPECIFIC_SPEED: "specific-speed",
+    MULTIPLY_ALL_SPEEDS: "multiply-all-speeds",
     DAMAGE: "damage",
     ABILITY_CHECKS: "ability-checks",
     ABILITY_CHECK: "ability-check",
@@ -50,7 +54,9 @@ export const SFRPGEffectType = Object.freeze({
     SPELL_RESISTANCE: "spell-resistance",
     DAMAGE_REDUCTION: "damage-reduction",
     BULK: "bulk",
-    BULK_CALCULATION: "bulk-calculation"
+    BULK_CALCULATION: "bulk-calculation",
+    ACTOR_RESOURCE: "actor-resource",
+    ENERGY_RESISTANCE: "energy-resistance"
 });
 
 export const SFRPGModifierType = Object.freeze({

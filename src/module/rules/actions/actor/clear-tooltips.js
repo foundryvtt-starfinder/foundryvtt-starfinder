@@ -59,6 +59,10 @@ export default function (engine) {
             data.attributes.will.tooltip = [];
         }
 
+        if (data.attributes.speed) {
+            data.attributes.speed.tooltip = [];
+        }
+
         if (data.skills) {
             for (let [skl, skill] of Object.entries(data.skills)) {
                 skill.tooltip = [];

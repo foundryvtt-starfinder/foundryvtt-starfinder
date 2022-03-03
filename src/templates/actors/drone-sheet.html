@@ -120,19 +120,7 @@
             {{!-- Skills --}}
             <ul class="left-side">
                 <ul class="attributes flexrow">
-                    <li class="attribute speed">
-                        <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
-                        <div class="attribute-value multiple">
-                            <span>{{data.attributes.speed.value}} {{ localize "SFRPG.Units.Speed" }}</span>
-                        </div>
-                        <footer class="attribute-footer">
-                            {{#if data.attributes.speed.special}}
-                            <span>{{data.attributes.speed.special}}</span>
-                            {{else}}
-                            <span>{{localize "SFRPG.DroneSheet.Details.Speed.SpecialPlaceholder"}}</span>
-                            {{/if}}
-                        </footer>    
-                    </li>
+                    {{> "systems/sfrpg/templates/actors/parts/actor-movement-element.html" disableEdit=true}}
                 </ul>
                 <ul class="skills-list">
                     <li class="skills-header flexrow">

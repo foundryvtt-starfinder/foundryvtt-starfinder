@@ -1,50 +1,15 @@
 {
+  "_id": "5DAVDXvatoHvoUIP",
   "name": "Recon Enercopter",
   "type": "vehicle",
   "data": {
-    "conditions": {},
-    "details": {
-      "level": 9,
-      "price": 43000,
-      "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">One side of this light aircraft is open to the elements, providing quick entry and exit. Enercopters are favored by law enforcement agencies and military groups because of their quiet antigrav rotors.</span></p>",
-        "chat": "",
-        "unidentified": ""
-      },
-      "source": "AR pg. 138"
-    },
-    "crew": {
-      "useNPCCrew": false,
-      "pilot": {
-        "limit": 1,
-        "actorIds": []
-      },
-      "complement": {
-        "limit": 0,
-        "actorIds": []
-      },
-      "passenger": {
-        "limit": 7,
-        "actorIds": []
-      }
-    },
-    "hangarBay": {
-      "limit": 0,
-      "actorIds": []
-    },
     "attributes": {
-      "size": "huge",
       "type": "air",
+      "cover": "partial",
       "dimensions": {
-        "width": "10",
+        "height": "12",
         "length": "20",
-        "height": "12"
-      },
-      "speed": {
-        "drive": "25 ft",
-        "full": "750 ft",
-        "mph": "85 mph (fly)",
-        "type": ""
+        "width": "10"
       },
       "eac": {
         "value": 22
@@ -52,375 +17,347 @@
       "expansionBays": {
         "value": 0
       },
+      "hardness": 10,
+      "hp": {
+        "max": 145,
+        "threshold": 72,
+        "value": 145
+      },
       "kac": {
         "value": 24
       },
-      "cover": "partial",
-      "hp": {
-        "value": 145,
-        "max": 145,
-        "threshold": 72
-      },
-      "hardness": 10,
       "modifiers": {
-        "piloting": "-2",
-        "attackStopped": "0",
+        "attackFullSpeed": "-5",
         "attackMoving": "-3",
-        "attackFullSpeed": "-5"
+        "attackStopped": "0",
+        "piloting": "-2"
       },
-      "systems": [],
-      "special": []
+      "size": "huge",
+      "special": [],
+      "speed": {
+        "type": "",
+        "drive": "25 ft",
+        "full": "750 ft",
+        "mph": "85 mph (fly)"
+      },
+      "systems": []
+    },
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 0
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": 7
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">One side of this light aircraft is open to the elements, providing quick entry and exit. Enercopters are favored by law enforcement agencies and military groups because of their quiet antigrav rotors.</span></p>"
+      },
+      "level": 9,
+      "price": 43000,
+      "source": "AR pg. 138"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 0
     }
   },
+  "effects": [],
   "flags": {},
-  "token": {
-    "flags": {},
-    "name": "Motorcycle",
-    "displayName": 0,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": null,
-    "width": 1,
-    "height": 1,
-    "scale": 1,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "g20SGwEddRRw7xmb",
-    "actorLink": false,
-    "disposition": -1,
-    "displayBars": 0,
-    "bar1": {},
-    "bar2": {},
-    "randomImg": false
-  },
+  "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2*(9d10)",
+              "operator": "",
+              "types": {
+                "bludgeoning": true
+              }
+            }
+          ]
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>"
         },
-        "source": "",
-        "type": "",
         "modifiers": [],
-        "damage": {
-          "parts": [
-            [
-              "2*(9d10)",
-              "bludgeoning"
-            ]
-          ]
-        },
         "save": {
           "type": "reflex",
           "dc": "14",
           "descriptor": "negate"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "img": "icons/svg/mystery-man.svg"
     },
     {
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "9d10",
+              "operator": "",
+              "types": {
+                "bludgeoning": true
+              }
+            }
+          ]
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>"
         },
-        "source": "",
-        "type": "",
         "modifiers": [],
-        "damage": {
-          "parts": [
-            [
-              "9d10",
-              "bludgeoning"
-            ]
-          ]
-        },
         "save": {
           "type": "reflex",
           "dc": "14",
           "descriptor": "half"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "img": "icons/svg/mystery-man.svg"
     },
     {
       "name": "Planetary comm unit",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>"
         },
-        "source": "CRB pg. 218",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": true,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": "0",
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": "CRB pg. 218"
       },
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg"
     },
     {
       "name": "Autopilot",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>"
         },
-        "source": "CRB pg. 280",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": true,
-          "piloting": "17"
-        },
-        "canBeActivated": true,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": "17",
+          "usedAsPilot": true
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": "CRB pg. 280"
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "img": "icons/svg/mystery-man.svg"
     },
     {
       "name": "Artillery laser, aphelion",
       "type": "weapon",
       "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Artillery lasers are heavy weapons designed to be effective against hardened targets such as vehicles and enemy bunkers.</span></p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 177",
         "type": "",
-        "quantity": 1,
-        "bulk": "3",
-        "price": 14300,
-        "level": 9,
-        "attuned": false,
-        "equipped": true,
-        "equippable": true,
-        "identified": true,
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
         "attributes": {
-          "sturdy": true,
+          "ac": {
+            "value": "5"
+          },
           "customBuilt": false,
-          "size": "medium",
           "dex": {
             "mod": ""
-          },
-          "hp": {
-            "value": 42,
-            "max": "42"
           },
           "hardness": {
             "value": "23"
           },
-          "ac": {
-            "value": "5"
-          }
+          "hp": {
+            "max": "42",
+            "value": 42
+          },
+          "size": "medium",
+          "sturdy": true
         },
-        "activation": {
-          "type": "none",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": null,
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": 120,
-          "units": "ft",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": null,
-          "max": null,
-          "per": ""
-        },
-        "isActive": null,
-        "ability": "dex",
-        "actionType": "rwak",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [],
-          "effect": "Burn 1d6"
-        },
-        "damage": {
-          "parts": [
-            [
-              "3d8",
-              "fire"
-            ]
-          ]
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": "",
-          "descriptor": "negate"
-        },
-        "descriptors": [],
+        "attuned": false,
+        "bulk": "3",
         "capacity": {
-          "value": 40,
-          "max": 40
+          "max": 40,
+          "value": 40
         },
-        "usage": {
-          "value": 4,
-          "per": "shot"
-        },
-        "modifiers": [],
+        "chatFlavor": "",
         "container": {
           "contents": [],
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
-              "subtype": "fusion",
-              "amount": 9,
               "acceptsType": [
                 "fusion"
               ],
               "affectsEncumbrance": true,
+              "amount": 9,
+              "subtype": "fusion",
               "weightProperty": "level"
             },
             {
               "type": "slot",
-              "subtype": "",
-              "amount": 1,
               "acceptsType": [
                 "goods"
               ],
-              "weightProperty": "",
-              "affectsEncumbrance": true
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "",
+              "weightProperty": ""
             }
-          ],
-          "isOpen": true
+          ]
         },
-        "weaponType": "heavy",
-        "weaponCategory": "laser",
-        "special": "",
+        "critical": {
+          "effect": "Burn 1d6",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "3d8",
+              "operator": "",
+              "types": {
+                "fire": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Artillery lasers are heavy weapons designed to be effective against hardened targets such as vehicles and enemy bunkers.</span></p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equippable": true,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 9,
+        "modifiers": [],
+        "price": 14300,
+        "proficient": true,
         "properties": {
-          "one": false,
-          "two": true,
+          "aeon": false,
           "amm": false,
           "analog": false,
+          "antibiological": false,
           "archaic": false,
+          "aurora": false,
           "automatic": false,
           "blast": false,
           "block": false,
           "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": false,
-          "nonlethal": false,
-          "operative": false,
-          "penetrating": true,
-          "powered": false,
-          "qreload": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "thrown": false,
-          "trip": false,
-          "unwieldy": false,
-          "radioactive": false,
-          "subtle": false,
-          "mind-affecting": false,
-          "living": false,
-          "aeon": false,
-          "antibiological": false,
-          "aurora": false,
           "breach": false,
           "breakdown": false,
+          "bright": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
           "deflect": false,
+          "disarm": false,
           "double": false,
           "drainCharge": false,
           "echo": false,
+          "entangle": false,
+          "explode": false,
           "extinguish": false,
           "feint": false,
           "fiery": false,
@@ -437,148 +374,221 @@
           "hybrid": false,
           "ignite": false,
           "indirect": false,
+          "injection": false,
           "integrated": false,
+          "line": false,
+          "living": false,
           "lockdown": false,
+          "mind-affecting": false,
           "mine": false,
           "mire": false,
           "modal": false,
           "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": true,
           "polarize": false,
           "polymorphic": false,
+          "powered": false,
           "professional": false,
           "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
           "recall": false,
           "regrowth": false,
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
           "sunder": false,
           "swarm": false,
           "tail": false,
           "teleportive": false,
           "thought": false,
           "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": true,
           "unbalancing": false,
           "underwater": false,
+          "unwieldy": false,
           "variantBoost": false,
-          "wideLine": false,
-          "shatter": false
+          "wideLine": false
         },
-        "proficient": true,
-        "abilityMods": {
-          "parts": []
-        }
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 120
+        },
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "CRB pg. 177",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 4
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "laser",
+        "weaponType": "heavy"
       },
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/artillery-laser-azimuth.jpg",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/weapons/artillery-laser-azimuth.jpg"
     },
     {
       "name": "Enhanced sensors)",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>"
         },
-        "source": "",
-        "type": "",
+        "isActive": false,
         "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
+          "piloting": "0",
+          "usedAsPilot": false
         },
         "senses": {
-          "usedForSenses": true,
-          "senses": "darkvision 1 mile"
+          "senses": "darkvision 1 mile",
+          "usedForSenses": true
         },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png"
     },
     {
       "name": "Planetary comm unit",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>"
         },
-        "source": "CRB pg. 218",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": true,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": "0",
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": "CRB pg. 218"
       },
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg"
     },
     {
       "name": "Stealth (-4)",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>The coloration of the vehicle&rsquo;s exterior automatically changes to match its surroundings. Its pilot can always attempt Stealth checks for the vehicle as long as it is stationary, but with the listed modifier. This check is opposed by the Computers or Perception check of anyone scanning the area with sensors.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>The coloration of the vehicle&rsquo;s exterior automatically changes to match its surroundings. Its pilot can always attempt Stealth checks for the vehicle as long as it is stationary, but with the listed modifier. This check is opposed by the Computers or Perception check of anyone scanning the area with sensors.</p>"
         },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "img": "icons/svg/mystery-man.svg"
     }
   ],
-  "effects": [],
-  "_id": "5DAVDXvatoHvoUIP"
+  "token": {
+    "name": "Recon Enercopter",
+    "actorId": "g20SGwEddRRw7xmb",
+    "actorLink": false,
+    "bar1": {},
+    "bar2": {},
+    "brightLight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "dimSight": 0,
+    "displayBars": 0,
+    "displayName": 0,
+    "disposition": -1,
+    "flags": {},
+    "height": 1,
+    "img": "icons/svg/mystery-man.svg",
+    "lightAlpha": 1,
+    "lightAngle": 360,
+    "lightAnimation": {
+      "intensity": 5,
+      "speed": 5
+    },
+    "lockRotation": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sightAngle": 360,
+    "tint": null,
+    "vision": false,
+    "width": 1
+  }
 }

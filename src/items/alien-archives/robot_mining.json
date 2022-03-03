@@ -1,419 +1,143 @@
 {
+  "_id": "fwNp7rcohFUFdfvH",
   "name": "Robot, Mining",
-  "type": "npc",
+  "type": "npc2",
   "data": {
     "abilities": {
-      "str": {
-        "value": 22,
-        "min": 3,
-        "misc": 0,
-        "mod": 6,
-        "base": 10
-      },
-      "dex": {
-        "value": 18,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "base": 10
-      },
-      "con": {
-        "value": 10,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "base": 10
-      },
-      "int": {
-        "value": 6,
-        "min": 3,
-        "misc": 0,
-        "mod": -2,
-        "base": 10
-      },
-      "wis": {
-        "value": 16,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "base": 10
-      },
       "cha": {
-        "value": 4,
+        "base": -3,
         "min": 3,
         "misc": 0,
         "mod": -3,
-        "base": 10
+        "value": 4
+      },
+      "con": {
+        "base": 0,
+        "min": 3,
+        "misc": 0,
+        "mod": 0,
+        "value": 10
+      },
+      "dex": {
+        "base": 4,
+        "min": 3,
+        "misc": 0,
+        "mod": 4,
+        "value": 18
+      },
+      "int": {
+        "base": -2,
+        "min": 3,
+        "misc": 0,
+        "mod": -2,
+        "value": 6
+      },
+      "str": {
+        "base": 6,
+        "min": 3,
+        "misc": 0,
+        "mod": 6,
+        "value": 22
+      },
+      "wis": {
+        "base": 3,
+        "min": 3,
+        "misc": 0,
+        "mod": 3,
+        "value": 16
       }
     },
     "attributes": {
-      "eac": {
-        "min": 0,
-        "value": 20,
-        "tooltip": []
-      },
-      "kac": {
-        "min": 0,
-        "value": 22,
-        "tooltip": []
-      },
+      "arms": "2",
+      "bab": 0,
       "cmd": {
         "min": 0,
-        "value": 10,
-        "tooltip": []
+        "tooltip": [],
+        "value": 10
       },
-      "hp": {
+      "eac": {
+        "base": 20,
         "min": 0,
-        "max": 145,
-        "value": 145,
-        "temp": 0,
-        "tempmax": 10,
-        "tooltip": []
-      },
-      "sp": {
-        "min": 0,
-        "max": 0,
-        "value": 0,
-        "tooltip": []
-      },
-      "rp": {
-        "min": 0,
-        "max": 0,
-        "value": 0,
-        "tooltip": []
-      },
-      "init": {
-        "value": 0,
-        "bonus": 0,
-        "total": 4,
-        "tooltip": []
+        "tooltip": [],
+        "value": 20
       },
       "fort": {
-        "value": 0,
+        "base": 10,
         "bonus": 10,
         "misc": 0,
-        "tooltip": []
+        "tooltip": [],
+        "value": 0
       },
-      "reflex": {
-        "value": 0,
-        "bonus": 8,
-        "misc": 0,
-        "tooltip": []
+      "hp": {
+        "max": 145,
+        "min": 0,
+        "temp": null,
+        "tempmax": null,
+        "tooltip": [],
+        "value": 145
       },
-      "will": {
-        "value": 0,
-        "bonus": 6,
-        "misc": 0,
-        "tooltip": []
+      "init": {
+        "bonus": 0,
+        "tooltip": [],
+        "total": 4,
+        "value": 4
       },
-      "bab": 0,
-      "arms": "2",
-      "space": "10 ft.",
-      "reach": "10 ft.",
-      "speed": {
-        "value": "30 ft.",
-        "special": " burrow 10 ft."
+      "kac": {
+        "base": 22,
+        "min": 0,
+        "tooltip": [],
+        "value": 22
       },
       "keyability": "",
-      "spellcasting": ""
-    },
-    "details": {
-      "alignment": "N",
-      "race": "",
-      "class": "",
-      "biography": {
-        "value": "<h2>Description</h2>\n<p>Mining robots are far from exotic, but neither are they common since they are expensive tools. Such automatons allow mining companies to harvest ore and minerals from dangerous locales, such as airless asteroids and planets with high tectonic activity. A mining robot has an integrated drill arm, a cutting arm, and finer manipulators that allow it to sort through the rubble it creates. A typical model also has built-in harmonic resonators to soften earth and stone, making it easier for the robot to burrow into the ground. Construction and terraforming enterprises employ similar models of these industrial robots.<br><br>The dwarven mining corporation Ulrikka Clanholdings is known to make the best mining robots the galaxy has to offer. Outfitted with sturdy magma blades, these constructs can slice through rock like a heated knife cuts through butter. Ulrikka sells the robots to other mining outfits as a profitable side operation. The company sells at a premium, and tight contracts ensure a purchaser’s intended usage doesn’t conflict with Ulrikka interests. Occasionally, warriors and gladiators with a flair for the dramatic purchase a defunct mining robot and strip off the drill for use as an exotic and deadly weapon.</p>\n<section>\n<h2>Robot</h2>\n<p>Robots serve a variety of functions. They’re often employed in situations where the risks to living beings are too great or emotional responses are a hindrance—notably murder and war.<br><br>Assassin robots are killing machines useful for stealthy slayings or gruesome public displays. A user can program targets into the robot, dispatch the unit, and rest assured. The robot relentlessly pursues its quarry, fearing nothing and using microfiber setae on its hands and feet to traverse vertical and horizontal surfaces with ease. Whether it succeeds, fails, escapes, or suffers destruction, the robot leaves little evidence behind—an assassin robot that is captured or destroyed automatically purges its memory and burns out its sensitive hardware components, making tracing the robot’s mission and origin extremely difficult.<br><br>Typical assassin robots are 6 feet tall, weigh 300 pounds, and use the weapons detailed in the stat block on page 108, but they can be outfitted with other armaments as a mission requires. In particular, assassin robots on missions where more subtlety is called for use needler pistols stocked with poisoned darts.<br><br>There is nothing subtle, however, about a siege robot. These machines serve as artificially intelligent assault vehicles, and many rightly fear these engines of war. Merciless and efficient, a siege robot is as effective at unloading massive damage against a single target as it is at mowing down enemy troops en masse, and its vehicle form makes it difficult to escape from on an open battlefield. Most siege robots are outfitted with large reserves of ammunition, enough to sustain a constant barrage for minutes at a time.</p>\n<h2>Siege Robots As Vehicles</h2>\n<p>A siege robot can be used as a vehicle in vehicle combat or vehicle chases. In such cases it acts as its own pilot and has the following additional statistics: item level equal to its CR; drive speed 60 ft., full speed 500 ft., overland speed 60 mph, (hover); hardness 8; collision damage 16d10 B (DC 19); –3 attack roll penalty (–6 at full speed). A siege robot acting as a vehicle can carry up to 4 Medium passengers but provides them no cover.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any underground</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or shift (3-5)</p>\n<p>&nbsp;</p>\n</section>",
-        "public": ""
-      },
-      "type": "Construct (technological)",
-      "environment": "",
-      "cr": 9,
-      "xp": {
-        "value": 6400
-      },
-      "source": "AP #10 pg. 58",
-      "subtype": "Technological",
-      "raceAndGrafts": "",
-      "aura": ""
-    },
-    "skills": {
-      "acr": {
-        "ability": "dex",
-        "ranks": 0,
-        "value": 0,
+      "reach": "10 ft.",
+      "reflex": {
+        "base": 8,
+        "bonus": 8,
         "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": true
+        "tooltip": [],
+        "value": 0
       },
-      "ath": {
-        "ability": "str",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": true
+      "rp": {
+        "max": 0,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
       },
-      "blu": {
-        "ability": "cha",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
+      "sp": {
+        "max": 0,
+        "min": 0,
+        "tooltip": [],
+        "value": 0
       },
-      "com": {
-        "ability": "int",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
+      "space": "10 ft.",
+      "speed": {
+        "burrowing": {
+          "base": 0
+        },
+        "climbing": {
+          "base": 0
+        },
+        "flying": {
+          "base": 0
+        },
+        "land": {
+          "base": 30
+        },
+        "mainMovement": "land",
+        "special": "original base: 30 ft.; original special: burrow 10 ft.",
+        "swimming": {
+          "base": 0
+        }
       },
-      "cul": {
-        "ability": "int",
-        "ranks": 0,
-        "value": 0,
+      "spellcasting": "",
+      "will": {
+        "base": 6,
+        "bonus": 6,
         "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "dip": {
-        "ability": "cha",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "dis": {
-        "ability": "cha",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "eng": {
-        "ability": "int",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "int": {
-        "ability": "cha",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "lsc": {
-        "ability": "int",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "med": {
-        "ability": "int",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "mys": {
-        "ability": "wis",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "per": {
-        "ability": "wis",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 17,
-        "enabled": true,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "phs": {
-        "ability": "int",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false
-      },
-      "pil": {
-        "ability": "dex",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "pro": {
-        "ability": "int",
-        "ranks": 0,
-        "value": 3,
-        "misc": 0,
-        "mod": 17,
-        "enabled": true,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": false,
-        "subname": "miner"
-      },
-      "sen": {
-        "ability": "wis",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
-      },
-      "sle": {
-        "ability": "dex",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": true,
-        "hasArmorCheckPenalty": true
-      },
-      "ste": {
-        "ability": "dex",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": true
-      },
-      "sur": {
-        "ability": "wis",
-        "ranks": 0,
-        "value": 0,
-        "misc": 0,
-        "mod": 0,
-        "enabled": false,
-        "isTrainedOnly": false,
-        "hasArmorCheckPenalty": false
+        "tooltip": [],
+        "value": 0
       }
     },
-    "traits": {
-      "size": "large",
-      "senses": "darkvision 60 ft., low-light vision",
-      "languages": {
-        "value": [
-          "common"
-        ],
-        "custom": "can't speak"
-      },
-      "di": {
-        "value": [],
-        "custom": "Construct Immunities"
-      },
-      "dr": {
-        "value": [
-          {
-            "acid": "5"
-          },
-          {
-            "fire": "10"
-          }
-        ],
-        "custom": ""
-      },
-      "dv": {
-        "value": [
-          "electricity"
-        ],
-        "custom": "Vulnerable To Critical Hits"
-      },
-      "ci": {
-        "value": [],
-        "custom": "Construct Immunities"
-      },
-      "damageReduction": {
-        "value": 0,
-        "negatedBy": ""
-      },
-      "sr": 0
-    },
-    "currency": {
-      "credit": 0,
-      "upb": 0
-    },
-    "spells": {
-      "spell0": {
-        "value": 0,
-        "max": 0
-      },
-      "spell1": {
-        "value": 0,
-        "max": 0
-      },
-      "spell2": {
-        "value": 0,
-        "max": 0
-      },
-      "spell3": {
-        "value": 0,
-        "max": 0
-      },
-      "spell4": {
-        "value": 0,
-        "max": 0
-      },
-      "spell5": {
-        "value": 0,
-        "max": 0
-      },
-      "spell6": {
-        "value": 0,
-        "max": 0
-      }
-    },
-    "modifiers": [],
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -453,316 +177,557 @@
     },
     "counterClasses": {
       "values": {}
+    },
+    "currency": {
+      "credit": 0,
+      "upb": 0
+    },
+    "details": {
+      "type": "Construct (technological)",
+      "alignment": "N",
+      "aura": "",
+      "biography": {
+        "public": "",
+        "value": "<h2>Description</h2>\n<p>Mining robots are far from exotic, but neither are they common since they are expensive tools. Such automatons allow mining companies to harvest ore and minerals from dangerous locales, such as airless asteroids and planets with high tectonic activity. A mining robot has an integrated drill arm, a cutting arm, and finer manipulators that allow it to sort through the rubble it creates. A typical model also has built-in harmonic resonators to soften earth and stone, making it easier for the robot to burrow into the ground. Construction and terraforming enterprises employ similar models of these industrial robots.<br><br>The dwarven mining corporation Ulrikka Clanholdings is known to make the best mining robots the galaxy has to offer. Outfitted with sturdy magma blades, these constructs can slice through rock like a heated knife cuts through butter. Ulrikka sells the robots to other mining outfits as a profitable side operation. The company sells at a premium, and tight contracts ensure a purchaser’s intended usage doesn’t conflict with Ulrikka interests. Occasionally, warriors and gladiators with a flair for the dramatic purchase a defunct mining robot and strip off the drill for use as an exotic and deadly weapon.</p>\n<section>\n<h2>Robot</h2>\n<p>Robots serve a variety of functions. They’re often employed in situations where the risks to living beings are too great or emotional responses are a hindrance—notably murder and war.<br><br>Assassin robots are killing machines useful for stealthy slayings or gruesome public displays. A user can program targets into the robot, dispatch the unit, and rest assured. The robot relentlessly pursues its quarry, fearing nothing and using microfiber setae on its hands and feet to traverse vertical and horizontal surfaces with ease. Whether it succeeds, fails, escapes, or suffers destruction, the robot leaves little evidence behind—an assassin robot that is captured or destroyed automatically purges its memory and burns out its sensitive hardware components, making tracing the robot’s mission and origin extremely difficult.<br><br>Typical assassin robots are 6 feet tall, weigh 300 pounds, and use the weapons detailed in the stat block on page 108, but they can be outfitted with other armaments as a mission requires. In particular, assassin robots on missions where more subtlety is called for use needler pistols stocked with poisoned darts.<br><br>There is nothing subtle, however, about a siege robot. These machines serve as artificially intelligent assault vehicles, and many rightly fear these engines of war. Merciless and efficient, a siege robot is as effective at unloading massive damage against a single target as it is at mowing down enemy troops en masse, and its vehicle form makes it difficult to escape from on an open battlefield. Most siege robots are outfitted with large reserves of ammunition, enough to sustain a constant barrage for minutes at a time.</p>\n<h2>Siege Robots As Vehicles</h2>\n<p>A siege robot can be used as a vehicle in vehicle combat or vehicle chases. In such cases it acts as its own pilot and has the following additional statistics: item level equal to its CR; drive speed 60 ft., full speed 500 ft., overland speed 60 mph, (hover); hardness 8; collision damage 16d10 B (DC 19); –3 attack roll penalty (–6 at full speed). A siege robot acting as a vehicle can carry up to 4 Medium passengers but provides them no cover.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any underground</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or shift (3-5)</p>\n<p>&nbsp;</p>\n</section>"
+      },
+      "class": "",
+      "cr": 9,
+      "environment": "",
+      "race": "",
+      "raceAndGrafts": "",
+      "source": "AP #10 pg. 58",
+      "subtype": "Technological",
+      "xp": {
+        "value": 6400
+      }
+    },
+    "modifiers": [],
+    "skills": {
+      "acr": {
+        "ability": "dex",
+        "enabled": false,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "ath": {
+        "ability": "str",
+        "enabled": false,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "blu": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "com": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "cul": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "dip": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "dis": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "eng": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "int": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "lsc": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "med": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "mys": {
+        "ability": "wis",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "per": {
+        "ability": "wis",
+        "enabled": true,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "mod": 17,
+        "ranks": 17,
+        "value": 0
+      },
+      "phs": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "pil": {
+        "ability": "dex",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "pro": {
+        "ability": "int",
+        "enabled": true,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "mod": 17,
+        "ranks": 17,
+        "subname": "miner",
+        "value": 3
+      },
+      "sen": {
+        "ability": "wis",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "sle": {
+        "ability": "dex",
+        "enabled": false,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "ste": {
+        "ability": "dex",
+        "enabled": false,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      },
+      "sur": {
+        "ability": "wis",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "mod": 0,
+        "ranks": 0,
+        "value": 0
+      }
+    },
+    "spells": {
+      "spell0": {
+        "max": 0,
+        "value": 0
+      },
+      "spell1": {
+        "max": 0,
+        "value": 0
+      },
+      "spell2": {
+        "max": 0,
+        "value": 0
+      },
+      "spell3": {
+        "max": 0,
+        "value": 0
+      },
+      "spell4": {
+        "max": 0,
+        "value": 0
+      },
+      "spell5": {
+        "max": 0,
+        "value": 0
+      },
+      "spell6": {
+        "max": 0,
+        "value": 0
+      }
+    },
+    "traits": {
+      "ci": {
+        "custom": "Construct Immunities",
+        "value": []
+      },
+      "damageReduction": {
+        "negatedBy": "",
+        "value": 0
+      },
+      "di": {
+        "custom": "Construct Immunities",
+        "value": []
+      },
+      "dr": {
+        "custom": "",
+        "value": [
+          {
+            "acid": "5"
+          },
+          {
+            "fire": "10"
+          }
+        ]
+      },
+      "dv": {
+        "custom": "Vulnerable To Critical Hits",
+        "value": [
+          "electricity"
+        ]
+      },
+      "languages": {
+        "custom": "can't speak",
+        "value": [
+          "common"
+        ]
+      },
+      "senses": "darkvision 60 ft., low-light vision",
+      "size": "large",
+      "sr": 0
     }
   },
   "flags": {},
-  "token": {
-    "flags": {},
-    "name": "Mining",
-    "displayName": 0,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": "",
-    "width": 2,
-    "height": 2,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightColor": "",
-    "lightAlpha": 1,
-    "actorId": "gvLBQpAaq0AKWaLM",
-    "actorLink": false,
-    "actorData": {},
-    "disposition": -1,
-    "displayBars": 40,
-    "bar1": {
-      "attribute": "attributes.hp"
-    },
-    "bar2": {
-      "attribute": ""
-    },
-    "randomImg": false
-  },
+  "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "eW1G6KgArZlICwEB",
-      "flags": {},
       "name": "Integrated Weapons",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
       "data": {
-        "description": {
-          "value": "<p>(EX)</p>\n<p>The creature’s weapons are manufactured weapons, not natural weapons, and they are integrated into its frame. A creature can’t be disarmed of these weapons, though they can be removed and used if the creature is @Compendium[sfrpg.conditions.nEJIWMKbPjqKuelo]{Dead}.</p>\n<p>Guidelines: A manufactured weapon is a weapon with an item level that can be purchased by characters, such as those found on the tables beginning on page 171 of the Starfinder Core Rulebook.</p>\n<hr>\n<p>&nbsp;</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
         "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
         "activation": {
           "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "type": ""
+          "condition": "",
+          "cost": 0
         },
         "area": {
-          "value": null,
-          "units": "",
+          "effect": "",
           "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": null,
           "units": "",
-          "additional": "",
-          "per": ""
+          "value": null
         },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null
-        },
-        "ability": null,
-        "actionType": "",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
-          "parts": [],
-          "effect": ""
+          "effect": "",
+          "parts": []
         },
         "damage": {
           "parts": []
         },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>(EX)</p>\n<p>The creature’s weapons are manufactured weapons, not natural weapons, and they are integrated into its frame. A creature can’t be disarmed of these weapons, though they can be removed and used if the creature is @Compendium[sfrpg.conditions.nEJIWMKbPjqKuelo]{Dead}.</p>\n<p>Guidelines: A manufactured weapon is a weapon with an item level that can be purchased by characters, such as those found on the tables beginning on page 171 of the Starfinder Core Rulebook.</p>\n<hr>\n<p>&nbsp;</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
         "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
         "save": {
           "type": "",
           "dc": null,
           "descriptor": ""
         },
-        "descriptors": [],
-        "modifiers": [],
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
         },
-        "abilityMods": {
-          "parts": []
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
         }
-      }
+      },
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg"
     },
     {
       "_id": "Ye0SFW6yxTRTyEHu",
-      "flags": {},
       "name": "Nanite Repair (Ex)",
       "type": "feat",
       "data": {
-        "description": {
-          "value": "A mining robot’s nanites heal it, restoring a number of Hit Points per hour equal to its CR (9 Hit Points per hour for most mining robots). Once per day as a full action, a mining robot can restore 4d8 Hit Points to itself or any touched construct with the technological subtype.",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
         "type": "",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": "",
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": null,
-          "units": "",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null
-        },
         "ability": null,
         "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
-          "parts": [],
-          "effect": ""
+          "effect": "",
+          "parts": []
         },
         "damage": {
           "parts": []
         },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "A mining robot’s nanites heal it, restoring a number of Hit Points per hour equal to its CR (9 Hit Points per hour for most mining robots). Once per day as a full action, a mining robot can restore 4d8 Hit Points to itself or any touched construct with the technological subtype."
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
         "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
         "save": {
           "type": "",
           "dc": null,
           "descriptor": ""
         },
-        "descriptors": [],
-        "modifiers": [],
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
         }
       },
+      "flags": {},
       "img": "icons/svg/mystery-man.svg"
     },
     {
       "_id": "3Yr6FKY2qwx8ZdRY",
-      "flags": {},
       "name": "Drill",
       "type": "weapon",
       "data": {
-        "description": {
-          "value": "",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
         "type": "",
-        "quantity": 1,
-        "bulk": "L",
-        "price": 0,
-        "level": 1,
-        "attuned": false,
-        "equipped": true,
-        "identified": true,
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "mwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 20,
         "attributes": {
-          "sturdy": true,
+          "ac": {
+            "value": ""
+          },
           "customBuilt": false,
-          "size": "medium",
           "dex": {
             "mod": ""
-          },
-          "hp": {
-            "value": 6,
-            "max": ""
           },
           "hardness": {
             "value": ""
           },
-          "ac": {
-            "value": ""
-          }
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
         },
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": "",
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": null,
-          "units": "",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null
-        },
-        "ability": "",
-        "actionType": "mwak",
-        "attackBonus": 20,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [
-            [
-              "2d4",
-              "piercing"
-            ]
-          ],
-          "effect": "Bleed"
-        },
-        "damage": {
-          "parts": [
-            [
-              "3d4+14",
-              "piercing"
-            ]
-          ]
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "descriptors": [],
+        "attuned": false,
+        "bulk": "L",
         "capacity": {
-          "value": 0,
-          "max": 0
+          "max": 0,
+          "value": 0
         },
-        "usage": {
-          "value": 0,
-          "per": ""
-        },
-        "modifiers": [],
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "storage": [
             {
               "type": "slot",
-              "subtype": "fusion",
-              "amount": 0,
               "acceptsType": [
                 "fusion"
               ],
               "affectsEncumbrance": true,
+              "amount": 0,
+              "subtype": "fusion",
               "weightProperty": "level"
             }
           ]
         },
-        "weaponType": "basicM",
-        "weaponCategory": "uncategorized",
-        "special": "",
+        "critical": {
+          "effect": "Bleed",
+          "parts": [
+            {
+              "formula": "2d4",
+              "operator": "",
+              "types": {
+                "piercing": true
+              }
+            }
+          ]
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "3d4+14",
+              "operator": "",
+              "types": {
+                "piercing": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
         "properties": {
-          "one": false,
-          "two": false,
-          "amm": false,
           "aeon": false,
+          "amm": false,
           "analog": false,
           "antibiological": false,
           "archaic": false,
@@ -811,6 +776,7 @@
           "modal": false,
           "necrotic": false,
           "nonlethal": false,
+          "one": false,
           "operative": false,
           "penetrating": false,
           "polarize": false,
@@ -839,329 +805,315 @@
           "throttle": false,
           "thrown": false,
           "trip": false,
+          "two": false,
           "unbalancing": false,
           "underwater": false,
           "unwieldy": false,
           "variantBoost": false,
           "wideLine": false
         },
-        "proficient": true,
-        "abilityMods": {
-          "parts": []
-        }
-      },
-      "img": "icons/svg/mystery-man.svg"
-    },
-    {
-      "_id": "WX3W0v5L4ns2So4L",
-      "flags": {},
-      "name": "Rock Tunneler (Ex)",
-      "type": "feat",
-      "data": {
-        "description": {
-          "value": "A mining robot can burrow through stone at half speed, and it can choose to leave tunnels when it burrows.",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": "",
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": null,
-          "units": "",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null
-        },
-        "ability": null,
-        "actionType": null,
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [],
-          "effect": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "descriptors": [],
-        "modifiers": [],
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "img": "icons/svg/mystery-man.svg"
-    },
-    {
-      "_id": "4GGLZbwky5ETRdCA",
-      "flags": {},
-      "name": "Unliving",
-      "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
-      "data": {
-        "description": {
-          "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr>\n<p>&nbsp;</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "type": "",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": "",
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": null,
-          "units": "",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [],
-          "effect": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "descriptors": [],
-        "modifiers": [],
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "abilityMods": {
-          "parts": []
-        }
-      }
-    },
-    {
-      "_id": "XDmiVY1OZgE5cx4U",
-      "flags": {},
-      "name": "Magma blade, andesite",
-      "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
-      "data": {
-        "description": {
-          "value": "",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "AR",
-        "type": "",
         "quantity": 1,
-        "bulk": "1",
-        "price": 10900,
-        "level": 8,
-        "attuned": false,
-        "equipped": true,
-        "identified": true,
-        "attributes": {
-          "sturdy": true,
-          "customBuilt": false,
-          "size": "medium",
-          "dex": {
-            "mod": ""
-          },
-          "hp": {
-            "value": 6,
-            "max": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "ac": {
-            "value": ""
-          }
-        },
-        "activation": {
-          "type": "none",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": null,
-          "shape": "",
-          "effect": ""
-        },
         "range": {
-          "value": null,
-          "units": "ft",
           "additional": "",
-          "per": ""
+          "per": "",
+          "units": "",
+          "value": null
         },
-        "uses": {
-          "value": 2,
-          "max": 0,
-          "per": ""
-        },
-        "ability": "str",
-        "actionType": "rwak",
-        "attackBonus": 0,
-        "chatFlavor": "Powered",
-        "critical": {
-          "parts": [
-            [
-              "",
-              ""
-            ]
-          ],
-          "effect": "Wound"
-        },
-        "damage": {
-          "parts": [
-            [
-              "2d8 + @mod",
-              "fire+slashing"
-            ]
-          ]
-        },
-        "formula": "",
         "save": {
           "type": "",
           "dc": null,
           "descriptor": "negate"
         },
-        "descriptors": [],
-        "capacity": {
-          "value": 40,
-          "max": 40
+        "source": "",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": null
         },
         "usage": {
-          "value": 2,
-          "per": "minute"
+          "per": "",
+          "value": 0
         },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponCategory": "uncategorized",
+        "weaponType": "basicM"
+      },
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg"
+    },
+    {
+      "_id": "WX3W0v5L4ns2So4L",
+      "name": "Rock Tunneler (Ex)",
+      "type": "feat",
+      "data": {
+        "type": "",
+        "ability": null,
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "A mining robot can burrow through stone at half speed, and it can choose to leave tunnels when it burrows."
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
         "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      },
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg"
+    },
+    {
+      "_id": "4GGLZbwky5ETRdCA",
+      "name": "Unliving",
+      "type": "feat",
+      "data": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr>\n<p>&nbsp;</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      },
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg"
+    },
+    {
+      "_id": "XDmiVY1OZgE5cx4U",
+      "name": "Magma blade, andesite",
+      "type": "weapon",
+      "data": {
+        "type": "",
+        "ability": "str",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "1",
+        "capacity": {
+          "max": 40,
+          "value": 40
+        },
+        "chatFlavor": "Powered",
         "container": {
           "contents": [],
           "storage": [
             {
               "type": "slot",
-              "subtype": "fusion",
-              "amount": 8,
               "acceptsType": [
                 "fusion"
               ],
               "affectsEncumbrance": true,
+              "amount": 8,
+              "subtype": "fusion",
               "weightProperty": "level"
             }
           ]
         },
-        "weaponType": "advancedM",
-        "weaponCategory": "uncategorized",
-        "special": "",
+        "critical": {
+          "effect": "Wound",
+          "parts": [
+            {
+              "formula": "",
+              "operator": "",
+              "types": {}
+            }
+          ]
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2d8 + @mod",
+              "operator": "and",
+              "types": {
+                "fire": true,
+                "slashing": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "level": 8,
+        "modifiers": [],
+        "price": 10900,
+        "proficient": true,
         "properties": {
-          "one": true,
-          "two": false,
+          "aeon": false,
           "amm": true,
           "analog": false,
+          "antibiological": false,
           "archaic": false,
+          "aurora": false,
           "automatic": false,
           "blast": false,
           "block": false,
           "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": false,
-          "living": false,
-          "mind-affecting": false,
-          "nonlethal": false,
-          "operative": false,
-          "penetrating": false,
-          "powered": true,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "thrown": false,
-          "trip": false,
-          "unwieldy": false,
-          "aeon": false,
-          "antibiological": false,
-          "aurora": false,
           "breach": false,
           "breakdown": false,
+          "bright": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
           "deflect": false,
+          "disarm": false,
           "double": false,
           "drainCharge": false,
           "echo": false,
+          "entangle": false,
+          "explode": false,
           "extinguish": false,
           "feint": false,
           "fiery": false,
@@ -1175,346 +1127,428 @@
           "guided": false,
           "harrying": false,
           "holyWater": false,
+          "hybrid": false,
           "ignite": false,
           "indirect": false,
+          "injection": false,
           "integrated": false,
+          "line": false,
+          "living": false,
           "lockdown": false,
+          "mind-affecting": false,
           "mine": false,
           "mire": false,
           "modal": false,
           "necrotic": false,
+          "nonlethal": false,
+          "one": true,
+          "operative": false,
+          "penetrating": false,
           "polarize": false,
           "polymorphic": false,
+          "powered": true,
           "professional": false,
           "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
           "recall": false,
+          "regrowth": false,
           "relic": false,
           "reposition": false,
           "shape": false,
           "shells": false,
           "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
           "sunder": false,
           "swarm": false,
           "tail": false,
           "teleportive": false,
           "thought": false,
           "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
           "underwater": false,
+          "unwieldy": false,
           "variantBoost": false,
-          "wideLine": false,
-          "hybrid": false,
-          "regrowth": false,
-          "unbalancing": false
+          "wideLine": false
         },
-        "proficient": true,
-        "abilityMods": {
-          "parts": []
-        }
-      }
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "source": "AR",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "minute",
+          "value": 2
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 2
+        },
+        "weaponCategory": "uncategorized",
+        "weaponType": "advancedM"
+      },
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg"
     },
     {
       "_id": "3MjBzlCLcRPiljFl",
-      "flags": {},
       "name": "Battery, High-Capacity",
       "type": "goods",
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.jpg",
       "data": {
-        "description": {
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item&rsquo;s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 40</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "Core Rulebook",
         "type": "",
-        "quantity": "3",
-        "bulk": "-",
-        "price": 330,
-        "level": 4,
-        "attuned": false,
-        "equipped": false,
-        "identified": true,
         "attributes": {
-          "sturdy": false,
+          "ac": {
+            "value": ""
+          },
           "customBuilt": false,
-          "size": "medium",
           "dex": {
             "mod": ""
-          },
-          "hp": {
-            "value": 6,
-            "max": ""
           },
           "hardness": {
             "value": ""
           },
-          "ac": {
-            "value": ""
-          }
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
         },
-        "modifiers": [],
+        "attuned": false,
+        "bulk": "-",
         "damage": {
           "parts": []
-        }
-      }
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item&rsquo;s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 40</p>"
+        },
+        "equipped": false,
+        "identified": true,
+        "level": 4,
+        "modifiers": [],
+        "price": 330,
+        "quantity": "3",
+        "source": "Core Rulebook"
+      },
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.jpg"
     },
     {
       "_id": "knrTr787mZRajr87",
-      "flags": {},
       "name": "Screamer, LFD",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
       "data": {
-        "description": {
-          "value": "<p>A screamer is a circular metal device with two handles on the back. The front of a screamer projects a cone of sonic energy that can damage and deafen anyone within the weapon&rsquo;s area of effect.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SCR",
         "type": "",
-        "quantity": 1,
-        "bulk": "2",
-        "price": 14400,
-        "level": 9,
-        "attuned": false,
-        "equipped": true,
-        "identified": true,
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
         "attributes": {
-          "sturdy": true,
+          "ac": {
+            "value": ""
+          },
           "customBuilt": false,
-          "size": "medium",
           "dex": {
             "mod": ""
-          },
-          "hp": {
-            "value": 6,
-            "max": ""
           },
           "hardness": {
             "value": ""
           },
-          "ac": {
-            "value": ""
-          }
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
         },
-        "activation": {
-          "type": "none",
-          "cost": null,
-          "condition": ""
+        "attuned": false,
+        "bulk": "2",
+        "capacity": {
+          "max": 80,
+          "value": 80
         },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": null,
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": 60,
-          "units": "ft",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "ability": "dex",
-        "actionType": "rwak",
-        "attackBonus": 0,
         "chatFlavor": "Deafen",
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 9,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
         "critical": {
-          "parts": [],
-          "effect": ""
+          "effect": "",
+          "parts": []
         },
         "damage": {
           "parts": [
-            [
-              "2d10",
-              "sonic"
-            ]
+            {
+              "formula": "2d10",
+              "operator": "",
+              "types": {
+                "sonic": true
+              }
+            }
           ]
         },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A screamer is a circular metal device with two handles on the back. The front of a screamer projects a cone of sonic energy that can damage and deafen anyone within the weapon&rsquo;s area of effect.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equipped": true,
         "formula": "",
+        "identified": true,
+        "level": 9,
+        "modifiers": [],
+        "price": 14400,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": true,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": true,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": true,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 60
+        },
         "save": {
           "type": "reflex",
           "dc": "",
           "descriptor": "half"
         },
-        "descriptors": [],
-        "capacity": {
-          "value": 80,
-          "max": 80
+        "source": "SCR",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": ""
         },
         "usage": {
-          "value": 8,
-          "per": "shot"
+          "per": "shot",
+          "value": 8
         },
-        "modifiers": [],
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "subtype": "fusion",
-              "amount": 9,
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "weightProperty": "level"
-            }
-          ]
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
         },
-        "weaponType": "heavy",
         "weaponCategory": "uncategorized",
-        "special": "",
-        "properties": {
-          "one": false,
-          "two": true,
-          "amm": false,
-          "analog": false,
-          "archaic": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": true,
-          "injection": false,
-          "line": false,
-          "living": false,
-          "mind-affecting": false,
-          "nonlethal": false,
-          "operative": false,
-          "penetrating": false,
-          "powered": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "thrown": false,
-          "trip": false,
-          "unwieldy": true,
-          "aeon": false,
-          "antibiological": false,
-          "aurora": false,
-          "breach": false,
-          "breakdown": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "ignite": false,
-          "indirect": false,
-          "integrated": false,
-          "lockdown": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "polarize": false,
-          "polymorphic": false,
-          "professional": false,
-          "punchGun": false,
-          "recall": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "underwater": false,
-          "variantBoost": false,
-          "wideLine": false,
-          "hybrid": false,
-          "regrowth": false,
-          "unbalancing": false
-        },
-        "proficient": true,
-        "abilityMods": {
-          "parts": []
-        }
-      }
+        "weaponType": "heavy"
+      },
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg"
     },
     {
       "_id": "tuuqefJkw49mOXM1",
-      "flags": {},
       "name": "Battery, Super-Capacity",
       "type": "goods",
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-super-capacity.jpg",
       "data": {
-        "description": {
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item&rsquo;s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 80</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "Core Rulebook",
         "type": "",
-        "quantity": "2",
-        "bulk": "-",
-        "price": 390,
-        "level": 4,
-        "attuned": false,
-        "equipped": false,
-        "identified": true,
         "attributes": {
-          "sturdy": false,
+          "ac": {
+            "value": ""
+          },
           "customBuilt": false,
-          "size": "medium",
           "dex": {
             "mod": ""
-          },
-          "hp": {
-            "value": 6,
-            "max": ""
           },
           "hardness": {
             "value": ""
           },
-          "ac": {
-            "value": ""
-          }
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
         },
-        "modifiers": [],
+        "attuned": false,
+        "bulk": "-",
         "damage": {
           "parts": []
-        }
-      }
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item&rsquo;s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 80</p>"
+        },
+        "equipped": false,
+        "identified": true,
+        "level": 4,
+        "modifiers": [],
+        "price": 390,
+        "quantity": "2",
+        "source": "Core Rulebook"
+      },
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-super-capacity.jpg"
     }
   ],
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "fwNp7rcohFUFdfvH"
+  "token": {
+    "name": "Robot, Mining",
+    "actorData": {},
+    "actorId": "gvLBQpAaq0AKWaLM",
+    "actorLink": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "brightLight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "dimSight": 0,
+    "displayBars": 40,
+    "displayName": 0,
+    "disposition": -1,
+    "flags": {},
+    "height": 2,
+    "img": "icons/svg/mystery-man.svg",
+    "lightAlpha": 1,
+    "lightAngle": 360,
+    "lightColor": "",
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sightAngle": 360,
+    "tint": "",
+    "vision": false,
+    "width": 2
+  }
 }

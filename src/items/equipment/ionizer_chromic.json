@@ -1,180 +1,154 @@
 {
+  "_id": "yWSVwKoE3y6ufwSP",
   "name": "Ionizer, chromic",
   "type": "weapon",
   "data": {
-    "description": {
-      "value": "<p>The ionizer&rsquo;s beam ionizes a path to its target, which serves as a route for the ensuing electric charge. There are several different elemental ions used in constructing ionizers, with the strength of the output based on the metal used. The most common are cupric, ferric, chromic, and stannic ionizers. Generally, the weapon&rsquo;s hardware is stored in two upgrade slots of a piece of armor, while a connected wand-like barrel extends from an extremity. Aballon&rsquo;s anacites designed the first ionizers, but they have long since spread throughout the Pact Worlds and beyond.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "AR pg. 15",
     "type": "",
-    "quantity": 1,
-    "bulk": "L",
-    "price": 80000,
-    "level": 14,
-    "attuned": false,
-    "equipped": false,
-    "identified": true,
+    "ability": "dex",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "eac",
+    "actionType": "rwak",
+    "activation": {
+      "type": "none",
+      "condition": "",
+      "cost": null
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
-      "sturdy": true,
+      "ac": {
+        "value": "5"
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": 57,
-        "max": "57"
       },
       "hardness": {
         "value": "33"
       },
-      "ac": {
-        "value": "5"
-      }
+      "hp": {
+        "max": "57",
+        "value": 57
+      },
+      "size": "medium",
+      "sturdy": true
     },
-    "activation": {
-      "type": "none",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": 30,
-      "units": "ft",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "isActive": null,
-    "ability": "dex",
-    "actionType": "rwak",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [
-        [
-          "3d4",
-          "electricity"
-        ]
-      ],
-      "effect": "Arc 3d4"
-    },
-    "damage": {
-      "parts": [
-        [
-          "5d4",
-          "electricity"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": "",
-      "descriptor": "negate"
-    },
-    "descriptors": [],
+    "attuned": false,
+    "bulk": "L",
     "capacity": {
-      "value": 20,
-      "max": 20
+      "max": 20,
+      "value": 20
     },
-    "usage": {
-      "value": 1,
-      "per": "shot"
-    },
-    "modifiers": [],
+    "chatFlavor": "",
     "container": {
       "contents": [],
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
-          "subtype": "fusion",
-          "amount": 14,
           "acceptsType": [
             "fusion"
           ],
           "affectsEncumbrance": true,
+          "amount": 14,
+          "subtype": "fusion",
           "weightProperty": "level"
         },
         {
           "type": "slot",
-          "subtype": "",
-          "amount": 1,
           "acceptsType": [
             "goods"
           ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
           "weightMultiplier": 1,
-          "weightProperty": "",
-          "affectsEncumbrance": true
+          "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightProperty": ""
         }
-      ],
-      "isOpen": true
+      ]
     },
-    "weaponType": "smallA",
-    "weaponCategory": "shock",
-    "special": "",
+    "critical": {
+      "effect": "Arc 3d4",
+      "parts": [
+        {
+          "formula": "3d4",
+          "operator": "",
+          "types": {
+            "electricity": true
+          }
+        }
+      ]
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "5d4",
+          "operator": "",
+          "types": {
+            "electricity": true
+          }
+        }
+      ]
+    },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>The ionizer&rsquo;s beam ionizes a path to its target, which serves as a route for the ensuing electric charge. There are several different elemental ions used in constructing ionizers, with the strength of the output based on the metal used. The most common are cupric, ferric, chromic, and stannic ionizers. Generally, the weapon&rsquo;s hardware is stored in two upgrade slots of a piece of armor, while a connected wand-like barrel extends from an extremity. Aballon&rsquo;s anacites designed the first ionizers, but they have long since spread throughout the Pact Worlds and beyond.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "level": 14,
+    "modifiers": [],
+    "price": 80000,
+    "proficient": false,
     "properties": {
-      "one": true,
-      "two": false,
+      "aeon": false,
       "amm": false,
       "analog": false,
+      "antibiological": false,
       "archaic": false,
+      "aurora": false,
       "automatic": false,
       "blast": false,
       "block": false,
       "boost": false,
-      "bright": false,
-      "disarm": false,
-      "entangle": false,
-      "explode": false,
-      "injection": false,
-      "line": false,
-      "living": false,
-      "mind-affecting": false,
-      "nonlethal": false,
-      "operative": false,
-      "penetrating": false,
-      "powered": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "thrown": false,
-      "trip": false,
-      "unwieldy": true,
-      "aeon": false,
-      "antibiological": false,
-      "aurora": false,
       "breach": false,
       "breakdown": false,
+      "bright": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
       "deflect": false,
+      "disarm": false,
       "double": false,
       "drainCharge": false,
       "echo": false,
+      "entangle": false,
+      "explode": false,
       "extinguish": false,
       "feint": false,
       "fiery": false,
@@ -188,44 +162,87 @@
       "guided": false,
       "harrying": false,
       "holyWater": false,
+      "hybrid": false,
       "ignite": false,
       "indirect": false,
+      "injection": false,
       "integrated": true,
+      "line": false,
+      "living": false,
       "lockdown": false,
+      "mind-affecting": false,
       "mine": false,
       "mire": false,
       "modal": false,
       "necrotic": false,
+      "nonlethal": false,
+      "one": true,
+      "operative": false,
+      "penetrating": false,
       "polarize": false,
       "polymorphic": false,
+      "powered": false,
       "professional": false,
       "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
       "shape": false,
       "shells": false,
       "shield": false,
+      "sniper": false,
+      "stun": false,
+      "subtle": false,
       "sunder": false,
       "swarm": false,
       "tail": false,
       "teleportive": false,
       "thought": false,
       "throttle": false,
+      "thrown": false,
+      "trip": false,
+      "two": false,
+      "unbalancing": false,
       "underwater": false,
+      "unwieldy": true,
       "variantBoost": false,
-      "wideLine": false,
-      "hybrid": false,
-      "regrowth": false,
-      "unbalancing": false
+      "wideLine": false
     },
-    "proficient": false,
-    "abilityMods": {
-      "parts": []
-    }
+    "quantity": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 30
+    },
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "AR pg. 15",
+    "special": "",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "usage": {
+      "per": "shot",
+      "value": 1
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    },
+    "weaponCategory": "shock",
+    "weaponType": "smallA"
   },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
   "effects": [],
-  "_id": "yWSVwKoE3y6ufwSP"
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg"
 }

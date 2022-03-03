@@ -21,12 +21,15 @@
             {{!-- Common component data --}}
             {{> "systems/sfrpg/templates/items/parts/starship-component.html" this}}
 
+            {{!-- Special Materials Template --}}
+            {{> "systems/sfrpg/templates/items/parts/item-special-materials.html"}}
+
             <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.Header" }}</h4>
 
             <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonusTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonus" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.targetLockBonus" value="{{data.targetLockBonus}}" data-dtype="Number" placeholder="0" />
+                    <input type="text" name="data.targetLockBonus" value="{{itemData.targetLockBonus}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
 

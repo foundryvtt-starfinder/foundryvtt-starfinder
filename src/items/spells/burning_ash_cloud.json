@@ -3,92 +3,113 @@
   "name": "Burning Ash Cloud",
   "type": "spell",
   "data": {
-    "description": {
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You conjure forth a cloud of smoke and burning embers that billows out from the point you designate. The cloud obscures all sight, including darkvision beyond 5 feet. The area counts as a smoke hazard, except a creature within the cloud has total concealment (50% miss chance, and the attacker can’t use sight to locate the target) against their attackers. In addition, the embers within the cloud deal 2d6 points of fire damage to creatures ending their turns within the cloud.<br>A moderate wind (11+ mph) disperses the cloud in 4 rounds; a strong wing (21+ mph) or stronger disperses the cloud in 1 round. This spell doesn’t function underwater or in a vacuum.&nbsp;</span></p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "AP #18 pg. 53",
     "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionType": "util",
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "1 round/level",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": 20,
-      "units": "ft",
-      "shape": "sphere",
-      "effect": "spread"
-    },
-    "range": {
-      "value": 100,
-      "units": "ft",
-      "additional": "10 ft.",
-      "per": "level"
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "ability": "",
-    "actionType": "util",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [],
-      "effect": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "2d6",
-          "fire"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": "negate"
-    },
-    "descriptors": [],
-    "modifiers": [],
-    "level": 3,
-    "school": "con",
-    "sr": true,
-    "dismissible": false,
-    "concentration": false,
-    "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
-      "supply": 0
-    },
-    "preparation": {
-      "mode": "",
-      "prepared": false
+      "condition": "",
+      "cost": 1
     },
     "allowedClasses": {
       "myst": true,
       "tech": true,
       "wysh": false
     },
-    "abilityMods": {
+    "area": {
+      "effect": "spread",
+      "shape": "sphere",
+      "units": "ft",
+      "value": 20
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": false,
+    "critical": {
+      "effect": "",
       "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "2d6",
+          "operator": "",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You conjure forth a cloud of smoke and burning embers that billows out from the point you designate. The cloud obscures all sight, including darkvision beyond 5 feet. The area counts as a smoke hazard, except a creature within the cloud has total concealment (50% miss chance, and the attacker can&rsquo;t use sight to locate the target) against their attackers. In addition, the embers within the cloud deal 2d6 points of fire damage to creatures ending their turns within the cloud.</span></p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">A moderate wind (11+ mph) disperses the cloud in 4 rounds; a strong wing (21+ mph) or stronger disperses the cloud in 1 round. This spell doesn&rsquo;t function underwater or in a vacuum.&nbsp;</span></p>"
+    },
+    "descriptors": [],
+    "dismissible": false,
+    "duration": {
+      "units": "",
+      "value": "1 round/level"
+    },
+    "formula": "",
+    "isActive": null,
+    "isVariableLevel": false,
+    "level": 3,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "range": {
+      "additional": "10 ft.",
+      "per": "level",
+      "units": "ft",
+      "value": 100
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "school": "con",
+    "source": "AP #18 pg. 53",
+    "sr": true,
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/spells/burning_ash_cloud.png",
-  "effects": []
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.sfrpg.spells.736kBaSS8R3XED1M"
+    }
+  },
+  "img": "systems/sfrpg/icons/spells/burning_ash_cloud.png"
 }

@@ -2,6 +2,13 @@ import { ActorSheetSFRPG } from "./base.js"
 import { SFRPG } from "../../config.js";
 
 export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
+    constructor(...args) {
+        super(...args);
+
+        this.acceptedItemTypes.push(...SFRPG.droneDefinitionItemTypes);
+        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+    }
+
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {
@@ -32,8 +39,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
-
-        const actorData = data.actor;
+        const actorData = data.data;
 
         let weaponLabel = "";
         if (data.data.attributes.weaponMounts.melee.max > 0 && data.data.attributes.weaponMounts.ranged.max > 0) {
@@ -61,64 +67,46 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
         const inventory = {
             weapon: { label: weaponLabel, items: [], dataset: { type: "weapon" } },
+            ammunition: { label: game.i18n.format(SFRPG.itemTypes["ammunition"]), items: [], dataset: { type: "ammunition" }, allowAdd: true },
             upgrade: { label: armorUpgradesLabel, items: [], dataset: { type: "upgrade" } },
             cargo: { label: cargoLabel, items: [], dataset: { type: "goods" } }
         };
 
-        let [items, feats, chassis, mods, conditionItems] = data.items.reduce((arr, item) => {
+        //   0      1      2        3     4               5
+        let [items, feats, chassis, mods, conditionItems, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
             item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (item.type !== "weapon" || item.data.equipped);
             item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (item.type !== "weapon" || item.data.equipped);
-            item.hasUses = item.data.uses && (item.data.uses.max > 0);
-            item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
+            item.hasUses = item.document.canBeUsed();
+            item.isCharged = !item.hasUses || item.document.getRemainingUses() <= 0 || !item.isOnCooldown;
+
+            item.hasCapacity = item.document.hasCapacity();
+            if (item.hasCapacity) {
+                item.capacityCurrent = item.document.getCurrentCapacity();
+                item.capacityMaximum = item.document.getMaxCapacity();
+            }
+
+            if (item.type === "actorResource") {
+                this._prepareActorResource(item, actorData);
+            }
+
             if (item.type === "feat") {
                 if ((item.data.requirements?.toLowerCase() || "") === "condition") {
-                    arr[4].push(item);
+                    arr[4].push(item); // conditionItems
                 } else {
-                    arr[1].push(item);
+                    arr[1].push(item); // feats
                 }
                 item.isFeat = true;
             }
-            else if (item.type === "chassis") arr[2].push(item);
-            else if (item.type === "mod") arr[3].push(item);
-            else arr[0].push(item);
+            else if (item.type === "chassis") arr[2].push(item); // chassis
+            else if (item.type === "mod") arr[3].push(item); // mods
+            else if (item.type === "actorResource") arr[5].push(item); // actorResources
+            else arr[0].push(item); // items
             return arr;
-        }, [[], [], [], [], []]);
+        }, [[], [], [], [], [], []]);
         
-        let totalWeight = 0;
-        let totalValue = 0;
-        for (let i of items) {
-            i.img = i.img || DEFAULT_TOKEN;
-
-            i.data.quantity = i.data.quantity || 0;
-            i.data.price = i.data.price || 0;
-            i.data.bulk = i.data.bulk || "-";
-            i.isOpen = i.data.container?.isOpen === undefined ? true : i.data.container.isOpen;
-
-            let weight = 0;
-            if (i.data.bulk === "L") {
-                weight = 0.1;
-            } else if (i.data.bulk === "-") {
-                weight = 0;
-            } else {
-                weight = parseFloat(i.data.bulk);
-            }
-
-            i.totalWeight = i.data.quantity * weight;
-
-            totalWeight += i.totalWeight;
-            i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
-                            i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
-
-            totalValue += (i.data.price * i.data.quantity);
-        }
-        totalWeight = Math.floor(totalWeight);
-        data.encumbrance = this._computeEncumbrance(totalWeight, data);
-        data.inventoryValue = Math.floor(totalValue);
-
         this.processItemContainment(items, function (itemType, itemData) {
             if (itemType === "weapon") {
                 if (itemData.item.data.equipped) {
@@ -156,7 +144,8 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             mods: { label: modsLabel, items: mods, hasActions: false, dataset: { type: "mod" } },
             _featsHeader: { label: featsLabel, items: [], hasActions: false, dataset: { } },
             active: { label: activeFeatsLabel, items: activeFeats, hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-            passive: { label: passiveFeatsLabel, items: passiveFeats, hasActions: false, dataset: { type: "feat" } }
+            passive: { label: passiveFeatsLabel, items: passiveFeats, hasActions: false, dataset: { type: "feat" } },
+            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         };
 
         data.inventory = Object.values(inventory);
@@ -186,38 +175,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         if (chassis && chassis.length > 0) {
             data.activeChassis = chassis[0];
         }
-    }
-
-    async _render(...args) {
-        await super._render(...args);
-
-        tippy('[data-tippy-content]', {
-            allowHTML: true,
-            arrow: false,
-            placement: 'top-start',
-            duration: [500, null],
-            delay: [800, null]
-        });
-    }
-
-    /**
-     * Compute the level and percentage of encumbrance for an Actor.
-     * 
-     * @param {Number} totalWeight The cumulative item weight from inventory items
-     * @param {Ojbect} actorData The data object for the Actor being rendered
-     * @returns {Object} An object describing the character's encumbrance level
-     * @private
-     */
-    _computeEncumbrance(totalWeight, actorData) {
-        const enc = {
-            max: actorData.data.attributes.encumbrance.max,
-            tooltip: actorData.data.attributes.encumbrance.tooltip,
-            value: totalWeight
-        };
-
-        enc.pct = Math.min(enc.value * 100 / enc.max, 99);
-        enc.encumbered = enc.pct > 50;
-        return enc;
     }
 
     /**
@@ -308,7 +265,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         event.preventDefault();
 
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         return item.update({'data.preparation.prepared': !item.data.data.preparation.prepared});
     }

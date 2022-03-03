@@ -1,50 +1,15 @@
 {
+  "_id": "yqP5U8sJWh6YoIZy",
   "name": "Torpedo Minisub",
   "type": "vehicle",
   "data": {
-    "conditions": {},
-    "details": {
-      "level": 1,
-      "price": 1500,
-      "description": {
-        "value": "",
-        "chat": "",
-        "unidentified": ""
-      },
-      "source": "CRB pg. 228"
-    },
-    "crew": {
-      "useNPCCrew": false,
-      "pilot": {
-        "limit": 1,
-        "actorIds": []
-      },
-      "complement": {
-        "limit": 0,
-        "actorIds": []
-      },
-      "passenger": {
-        "limit": 1,
-        "actorIds": []
-      }
-    },
-    "hangarBay": {
-      "limit": 0,
-      "actorIds": []
-    },
     "attributes": {
-      "size": "large",
       "type": "water",
+      "cover": "total",
       "dimensions": {
-        "width": "5",
+        "height": "3",
         "length": "10",
-        "height": "3"
-      },
-      "speed": {
-        "drive": "20 ft",
-        "full": "200 ft",
-        "mph": "22 mph (swim)",
-        "type": ""
+        "width": "5"
       },
       "eac": {
         "value": 12
@@ -52,134 +17,176 @@
       "expansionBays": {
         "value": 0
       },
+      "hardness": 5,
+      "hp": {
+        "max": 10,
+        "threshold": 5,
+        "value": 10
+      },
       "kac": {
         "value": 14
       },
-      "cover": "total",
-      "hp": {
-        "value": 10,
-        "max": 10,
-        "threshold": 5
-      },
-      "hardness": 5,
       "modifiers": {
-        "piloting": "2",
-        "attackStopped": "0",
+        "attackFullSpeed": "-3",
         "attackMoving": "-1",
-        "attackFullSpeed": "-3"
+        "attackStopped": "0",
+        "piloting": "2"
       },
-      "systems": [],
-      "special": []
+      "size": "large",
+      "special": [],
+      "speed": {
+        "type": "",
+        "drive": "20 ft",
+        "full": "200 ft",
+        "mph": "22 mph (swim)"
+      },
+      "systems": []
+    },
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 0
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": ""
+      },
+      "level": 1,
+      "price": 1500,
+      "source": "CRB pg. 228"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 0
     }
   },
+  "effects": [],
   "flags": {},
-  "token": {
-    "flags": {},
-    "name": "Goblin Junkcycle",
-    "displayName": 0,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": null,
-    "width": 1,
-    "height": 1,
-    "scale": 1,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "G0Tju4ms6eTQfrqW",
-    "actorLink": false,
-    "disposition": -1,
-    "displayBars": 0,
-    "bar1": {},
-    "bar2": {},
-    "randomImg": false
-  },
+  "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
-        "description": {
-          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
-          "chat": "",
-          "unidentified": "",
-          "gmnotes": ""
-        },
-        "source": "",
         "type": "",
-        "modifiers": [],
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
         "damage": {
           "parts": [
-            [
-              "2*(4d4)",
-              "bludgeoning"
-            ]
+            {
+              "formula": "2*(4d4)",
+              "operator": "",
+              "types": {
+                "bludgeoning": true
+              }
+            }
           ]
         },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>"
+        },
+        "modifiers": [],
         "save": {
           "type": "reflex",
           "dc": "10",
           "descriptor": "negate"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "img": "icons/svg/mystery-man.svg"
     },
     {
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
-        "description": {
-          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
-          "chat": "",
-          "unidentified": "",
-          "gmnotes": ""
-        },
-        "source": "",
         "type": "",
-        "modifiers": [],
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
         "damage": {
           "parts": [
-            [
-              "4d4",
-              "bludgeoning"
-            ]
+            {
+              "formula": "4d4",
+              "operator": "",
+              "types": {
+                "bludgeoning": true
+              }
+            }
           ]
         },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>"
+        },
+        "modifiers": [],
         "save": {
           "type": "reflex",
           "dc": "10",
           "descriptor": "half"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "img": "icons/svg/mystery-man.svg"
     }
   ],
-  "effects": [],
-  "_id": "yqP5U8sJWh6YoIZy"
+  "token": {
+    "name": "Torpedo Minisub",
+    "actorId": "G0Tju4ms6eTQfrqW",
+    "actorLink": false,
+    "bar1": {},
+    "bar2": {},
+    "brightLight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "dimSight": 0,
+    "displayBars": 0,
+    "displayName": 0,
+    "disposition": -1,
+    "flags": {},
+    "height": 1,
+    "img": "icons/svg/mystery-man.svg",
+    "lightAlpha": 1,
+    "lightAngle": 360,
+    "lightAnimation": {
+      "intensity": 5,
+      "speed": 5
+    },
+    "lockRotation": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sightAngle": 360,
+    "tint": null,
+    "vision": false,
+    "width": 1
+  }
 }

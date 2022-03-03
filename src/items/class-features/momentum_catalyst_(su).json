@@ -1,77 +1,94 @@
 {
   "_id": "7RzvMl0JCvMgIIB6",
   "name": "Momentum Catalyst (Su)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
   "data": {
-    "description": {
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.hxGhCeOFrN0keV9A]{Momentum}</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"><span id=\"ctl00_MainContent_DetailedOutput\">Creatures you select in a 60-foot radius are pushed away from you. A targeted creature moves 30 feet directly away from you but can attempt a Fortitude saving throw to halve the distance.<br><br><strong><em>Improved</em></strong>: Targeted creatures that fail their Fortitude saves are also knocked @Compendium[sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} and take 1d6 bludgeoning damage per 2 vanguard levels you have.</span><br></span></p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "Momentum",
     "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
-      "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "type": ""
+      "type": "reaction",
+      "condition": "",
+      "cost": 0
     },
     "area": {
-      "value": null,
-      "units": "",
+      "effect": "",
       "shape": "",
-      "effect": ""
+      "units": "none",
+      "value": null
     },
-    "range": {
-      "value": null,
-      "units": "",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
-    },
-    "ability": null,
-    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "Improved Momentum Catalyst (Su)",
+          "formula": "(floor(@classes.vanguard.levels / 2))d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+    "damageNotes": "Damage should only be applied if the Improved version has been acquired",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.hxGhCeOFrN0keV9A]{Momentum}</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"><span id=\"ctl00_MainContent_DetailedOutput\">Creatures you select in a 60-foot radius are pushed away from you. A targeted creature moves 30 feet directly away from you but can attempt a Fortitude saving throw to halve the distance.<br><br><strong><em>Improved</em></strong>: Targeted creatures that fail their Fortitude saves are also knocked @Compendium[sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} and take 1d6 bludgeoning damage per 2 vanguard levels you have.</span><br></span></p>"
     },
     "descriptors": [],
-    "modifiers": [],
-    "requirements": "Aspect Catalyst",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "duration": {
+      "units": "",
+      "value": ""
     },
-    "abilityMods": {
-      "parts": []
+    "formula": "",
+    "isActive": null,
+    "modifiers": [],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "Aspect Catalyst",
+    "rollNotes": "",
+    "save": {
+      "type": "fort",
+      "dc": "10+floor(@classes.vanguard.levels/2) + @abilities.con.mod",
+      "descriptor": "half"
+    },
+    "source": "Momentum",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 1,
+      "per": "sr",
+      "value": 1
     }
   },
-  "flags": {},
   "img": "icons/svg/mystery-man.svg"
 }

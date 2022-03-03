@@ -215,6 +215,11 @@
         &.multiple {
           input { max-width: 33%; }
         }
+
+        ul, li {
+          list-style-type: none;
+          line-height: 13px;
+        }
       }
 
       .attribute-footer {
@@ -652,6 +657,50 @@
             }
           }
 
+          .use {
+            width: auto;
+            background: @sfrpgYellow;
+            color: #000;
+            cursor: pointer;
+
+            &:hover, &:focus{
+              box-shadow: 0 0 5px @sfrpgYellow;
+            }
+          }
+        }
+
+        .actor-resource-name {
+          flex: 0 0 calc(100% - 282px);
+          line-height: 21px;
+
+          .name-label {
+            display: inline-block;
+            width: calc(100%);
+          }
+
+          .value-label {
+            display: inline-block;
+            width: calc(100%);
+          }
+        }
+
+        .actor-resource-values {
+          flex: 0 0 180px;
+          line-height: 21px;
+
+          .actor-resource-base-label {
+            display: inline-block;
+            width: 105px;
+          }
+
+          .actor-resource-base-input {
+            width: 70px;
+          }
+
+          .actor-resource-computed-label {
+            display: inline-block;
+            width: 109px;
+          }
         }
       }
       
@@ -725,6 +774,10 @@
         background: @sfrpgGreen;
         color: #fff;
         cursor: pointer;
+
+        &:hover, &:focus{
+          box-shadow: 0 0 5px @sfrpgGreen;
+        }
       }
     }
 
@@ -816,13 +869,47 @@
     }
   }
 
+  .spell-class {
+    line-height: 14px;
+    display: inline-block;
+    text-align: center;
+    padding: 0 5px;
+    padding-top: 1px;
+    color: @colorFaint;
+    background: rgb(21, 92, 155);
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    input {
+      color: @colorFaint;
+    }
+  }
+
   .spell-slots,
   .spell-comps {
-    flex: 0 0 60px;
+    flex: none;
+    padding: 0 5px;
     font-size: 12px;
     text-align: center;
     color: @colorTan;
     border-right: 1px solid @colorFaint;
+
+    &.fit-classes {
+      width: calc(100% - 430px);
+      text-align: right;
+    }
+  }
+  
+  .spell-component {
+    display: inline-block;
+    text-align: center;
+    padding-top: 1px;
+    width: 16px;
+    line-height: 14px;
+    color: #c9c7b8;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid transparent;
+    border-radius: 8px;
   }
 
   .spell-slots {

@@ -15,8 +15,11 @@ export default function (engine) {
                 return 0;
             }
 
-            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
-            let computedBonus = roll.total;
+            let computedBonus = 0;
+            try {
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                computedBonus = roll.total;
+            } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -42,7 +45,9 @@ export default function (engine) {
         // Class bonus
         if (fact.classes && fact.classes.length > 0) {
             for (const cls of fact.classes) {
-                let classBonus = Math.floor(cls.data.levels * cls.data.sp.value);
+                const classData = cls.data.data;
+
+                let classBonus = Math.floor(classData.levels * classData.sp.value);
                 spMax += classBonus;
 
                 data.attributes.sp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Stamina.ClassTooltip", {

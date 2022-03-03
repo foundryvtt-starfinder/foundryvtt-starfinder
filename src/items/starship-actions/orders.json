@@ -1,22 +1,20 @@
 {
+  "_id": "8qwgKhbzm77VuNgQ",
   "name": "Orders",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>At 6th level, you can grant an additional action to one member of the crew by spending 1 Resolve Point and succeeding at a difficult skill check at the beginning of the phase in which the crew member would normally act. The type of check depends on the role of the crew member targeted: a Computers check for a science officer, an Engineering check for an engineer, a gunnery check (see page 320) for a gunner, and a Piloting check for a pilot. The DC of this check is equal to 15 + 1-1/2 × your starship’s tier. If the check succeeds, the crew member can take two actions in her role this round (both when she would normally act), but she can’t take the same action twice. You can’t give yourself orders.</p><h2>Critical effect</h2><p>You orders flow so naturally that you can take one additional captain crew action this turn.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "captain",
-    "order": 30,
-    "phase": {
-      "name": "Any phase",
-      "tooltip": "This action can be used during any phase of combat."
+    "dc": {
+      "resolve": true,
+      "value": "15 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": true,
-    "resolvePointCost": 1,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>At 6th level, you can grant an additional action to one member of the crew by spending 1 Resolve Point and succeeding at a difficult skill check at the beginning of the phase in which the crew member would normally act. The type of check depends on the role of the crew member targeted: a Computers check for a science officer, an Engineering check for an engineer, a gunnery check (see page 320) for a gunner, and a Piloting check for a pilot. The DC of this check is equal to 15 + 1-1/2 × your starship’s tier. If the check succeeds, the crew member can take two actions in her role this round (both when she would normally act), but she can’t take the same action twice. You can’t give yourself orders.</p><h2>Critical effect</h2><p>You orders flow so naturally that you can take one additional captain crew action this turn.</p>"
+    },
+    "effectCritical": "You orders flow so naturally that you can take one additional captain crew action this turn.",
+    "effectNormal": "At 6th level, you can grant an additional action to one member of the crew by spending 1 Resolve Point and succeeding at a difficult skill check at the beginning of the phase in which the crew member would normally act. The type of check depends on the role of the crew member targeted: a Computers check for a science officer, an Engineering check for an engineer, a gunnery check (see page 320) for a gunner, and a Piloting check for a pilot. The DC of this check is equal to 15 + 1-1/2 × your starship’s tier. If the check succeeds, the crew member can take two actions in her role this round (both when she would normally act), but she can’t take the same action twice. You can’t give yourself orders.",
     "formula": [
       {
         "name": "Computers",
@@ -35,16 +33,18 @@
         "formula": "@captain.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       }
     ],
-    "selectors": [],
-    "selectorKey": "captain",
-    "dc": {
-      "value": "15 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
+    "isPush": true,
+    "order": 30,
+    "phase": {
+      "name": "Any phase",
+      "tooltip": "This action can be used during any phase of combat."
     },
-    "effectNormal": "At 6th level, you can grant an additional action to one member of the crew by spending 1 Resolve Point and succeeding at a difficult skill check at the beginning of the phase in which the crew member would normally act. The type of check depends on the role of the crew member targeted: a Computers check for a science officer, an Engineering check for an engineer, a gunnery check (see page 320) for a gunner, and a Piloting check for a pilot. The DC of this check is equal to 15 + 1-1/2 × your starship’s tier. If the check succeeds, the crew member can take two actions in her role this round (both when she would normally act), but she can’t take the same action twice. You can’t give yourself orders.",
-    "effectCritical": "You orders flow so naturally that you can take one additional captain crew action this turn."
+    "resolvePointCost": 1,
+    "role": "captain",
+    "selectorKey": "captain",
+    "selectors": [],
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "8qwgKhbzm77VuNgQ"
+  "img": "icons/svg/mystery-man.svg"
 }

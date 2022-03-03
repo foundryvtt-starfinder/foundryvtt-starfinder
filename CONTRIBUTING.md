@@ -4,7 +4,7 @@ If you would like to contribute to the project then I welcome any contributions.
 
 In order to setup your development environment, we need to ensure that a few things are in place:
 
-1. You'll need `node` installed on your system. You will need a version of `node` that is at least 12.x or greater. To install it, go to https://nodejs.org/en/download/ and choose an installer for your operating system. The current LTS is probably a good choice, though the current version works just as well.
+1. You'll need `node` installed on your system. You will need a version of `node` that is at least 14.x or greater. To install it, go to https://nodejs.org/en/download/ and choose an installer for your operating system. The current LTS is probably a good choice, though the current version works just as well.
 2. This system uses `gulp` to process `less` into usable `css` as well as some other utilities. You will need to install `gulp` for this purpose. To install, open up your prefered command line tool and enter the following command `npm install --global gulp-cli`. This will install the `gulp` command line utilities globally.
 3. You'll also need a `git` client installed. Whether that is the command line tool or something like Sourcetree or GitKraken is up to you.
 
@@ -14,9 +14,10 @@ Once you've cloned the repository to your local machine, follow these steps to g
 
 1. Install the development dependencies by running the following command: `npm install`
 2. Configure a `foundryconfig.json` file in the root folder of the project with a `dataPath` property. And example can be found in the `foundryconfig.example.json` file provided in the project. Just copy the file and rename it to `foundryconfig.json` and change the `dataPath`. The `dataPath` property is the file path to your Foundry installs user data. This can be found on the Configuration tab on the Setup screen.
-3. Run `npm run build`. This will compile all of the `less` and copy all of the necessary files to a `dist` folder in the project root. It will also create a symbolic link to this new folder with your Foundry installs user data path.
+3. If you already have the Starfinder RPG System installed on Foundry VTT, uninstall it from Foundry so that the next steps will properly set up your Symlink.
+4. Run `npm run build`. This will compile all of the `less` and copy all of the necessary files to a `dist` folder in the project root. It will also create a symbolic link to this new folder with your Foundry installs user data path.
 > Note for Windows users: You may need to run your commandline with administrator privileges if your dataPath folder is the default FoundryVTT setting of "C:\Users\Username\AppData\Local\FoundryVTT\Data".
-4. Run `npm run build:watch` while your developing so that changes are automatically synced with the `dist` folder. When you make changes to `html`, `css`, or `javascript` files, you'll need to do a page refresh in foundry to pick up the changes (F5). Any changes to `template.json` or `system.json` require you to return to the Setup screen and then reload the world.
+5. Run `npm run build:watch` while your developing so that changes are automatically synced with the `dist` folder. When you make changes to `html`, `css`, or `javascript` files, you'll need to do a page refresh in foundry to pick up the changes (F5). Any changes to `template.json` or `system.json` require you to return to the Setup screen and then reload the world.
 
 This should be all you need to help contribute. If you have any issues, you can reach out to me on the Foundry discord.
 
@@ -104,9 +105,26 @@ Items have a source field, and this source field should be filled in. There is a
 | Character Operations Manual | COM pg. x | COM pg. 123 |
 | Starship Operations Manual | SOM pg. x | SOM pg. 123 |
 | Near Space | NS pg. x | NS pg. 123 |
+| Galaxy Exploration Manual | GEM pg. x | GEM pg. 123 |
+| Tech Revolution | TR pg. x | TR pg. 123 |
 | Alien Archive 1 | AA1 pg. x | AA1 pg. 123 |
 | Alien Archive 2 | AA2 pg. x | AA2 pg. 123 |
 | Alien Archive 3 | AA3 pg. x | AA3 pg. 123 |
 | Alien Archive 4 | AA4 pg. x | AA4 pg. 123 |
 | Adventure path books | AP #x pg. y | AP #3 pg. 58 |
 | Starfinder Society | SFS #x-y pg. z | SFS #1-2 pg. 23 |
+| Starfinder Adventures | SA:xy pg. z | SA:JD pg. 61 |
+| Starfinder One Shot | SOS #x pg. y | SOS #1 pg. 51 |
+| Alien Card Deck | ACD | ACD |
+
+### Fast cooking
+
+Sometimes you are only making changes to a single compendium, such as alien-archives. Having to wait for the entire project to cook each time, even though nothing changed outside the alien-archives compendium data folder takes longer and just wastes electricity. You can speed up the process by only cooking the specific compendium as follows:
+`npm run cook -- --pack alien-archives`
+
+This also works for other compendiums, naturally. Just replace alien-archives with another pack.
+It can only work with 1 pack at a time, adding more pack arguments will be ignored. If this is desired functionality, you can request it in discord.
+
+### Getting Foundry Intellisense in Visual Studio Code
+
+If you would like some basic intelisense for the foundry types when using Visual Studio Code, all you have to do is copy `foundry.js` into the projects root folder. Once you do this, restart VS Code, and you should now see proper intelisense.

@@ -2,13 +2,15 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 
 export default function (engine) {
     engine.closures.add("calculateSkillArmorCheckPenalty", (fact, context) => {
-        const armor = fact.armor;
+        const armors = fact.armors?.length > 0 ? fact.armors : null;
         const shields = fact.shields;
         const skills = fact.data.skills;
         const modifiers = fact.modifiers;
 
-        const hasLightArmor = armor?.data?.armor?.type === "light";
-        const hasHeavyArmor = armor?.data?.armor?.type === "heavy";
+        const worstArmor = armors?.reduce((armor, worstArmor) => (armor.data?.data?.armor?.acp || 0) < (worstArmor.data?.data?.armor?.acp || 0) ? armor : worstArmor);
+        const armorData = worstArmor?.data?.data;
+        const hasLightArmor = armorData?.armor?.type === "light";
+        const hasHeavyArmor = armorData?.armor?.type === "heavy";
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -21,8 +23,11 @@ export default function (engine) {
                 return 0;
             }
 
-            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
-            let computedBonus = roll.total;
+            let computedBonus = 0;
+            try {
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                computedBonus = roll.total;
+            } catch {}
 
             let mod = 0;
             if (bonus.valueAffected === "acp-light" && hasLightArmor) {
@@ -76,23 +81,25 @@ export default function (engine) {
                 continue;
             }
 
-            if (armor?.data?.armor?.acp) {
-                let acp = parseInt(armor.data.armor.acp);
+            if (armorData?.armor?.acp) {
+                let acp = parseInt(armorData.armor.acp);
                 if (!Number.isNaN(acp)) {
                     skill.mod += acp;
 
                     skill.tooltip.push(game.i18n.format("SFRPG.ACPTooltip", {
                         type: "Armor",
                         mod: acp.signedString(),
-                        source: armor.name
+                        source: worstArmor.name
                     }));
                 }
             }
 
             if (shields) {
                 shields.forEach(shield => {
-                    if (shield.data?.acp) {
-                        let acp = parseInt(shield.data.acp);
+                    const shieldData = shield.data.data;
+
+                    if (shieldData?.acp) {
+                        let acp = parseInt(shieldData.acp);
                         if (!Number.isNaN(acp)) {
                             skill.mod += acp;
 

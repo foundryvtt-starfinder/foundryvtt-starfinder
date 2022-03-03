@@ -1,7 +1,8 @@
-import { ItemBrowserSFRPG } from './item-browser.js';
+import { DocumentBrowserSFRPG } from './document-browser.js';
 import { SFRPG } from "../config.js"
 
 const equipmentTypes = {
+    "ammunition"   : "SFRPG.Items.Categories.Ammunition",
     "augmentation" : "SFRPG.Items.Categories.Augmentations",
     "consumable"   : "SFRPG.Items.Categories.Consumables",
     "container"    : "SFRPG.Items.Categories.Containers",
@@ -19,7 +20,7 @@ const equipmentTypes = {
     "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories"
 };
 
-class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
+class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.title = game.i18n.format("SFRPG.Browsers.EquipmentBrowser.Title");
@@ -72,7 +73,8 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.ItemType"),
                 content: equipmentTypes,
                 filter: (element, filters) => { return this._filterItemType(element, filters); },
-                activeFilters: this.filters?.equipmentTypes?.activeFilters || []
+                activeFilters: this.filters?.equipmentTypes?.activeFilters || [],
+                type: "multi-select"
             }
         };
 
@@ -81,14 +83,16 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.WeaponType"),
                 content: CONFIG.SFRPG.weaponTypes,
                 filter: (element, filters) => { return this._filterWeaponType(element, filters); },
-                activeFilters: this.filters.weaponTypes?.activeFilters || []
+                activeFilters: this.filters.weaponTypes?.activeFilters || [],
+                type: "multi-select"
             }
 
             filters.weaponCategories = {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.WeaponCategories"),
                 content: CONFIG.SFRPG.weaponCategories,
                 filter: (element, filters) => { return this._filterWeaponCategory(element, filters); },
-                activeFilters: this.filters.weaponCategories?.activeFilters || []
+                activeFilters: this.filters.weaponCategories?.activeFilters || [],
+                type: "multi-select"
             }
         }
 
@@ -97,7 +101,8 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.EquipmentType"),
                 content: CONFIG.SFRPG.armorTypes,
                 filter: (element, filters) => { return this._filterArmorType(element, filters); },
-                activeFilters: this.filters.armorTypes?.activeFilters || []
+                activeFilters: this.filters.armorTypes?.activeFilters || [],
+                type: "multi-select"
             }
         }
 
@@ -195,10 +200,3 @@ export function getEquipmentBrowser() {
     }
     return _equipmentBrowser;
 }
-
-Hooks.on('ready', e => {
-    let browser = getEquipmentBrowser();
-
-    const defaultAllowedCompendiums = ["equipment"];
-    browser.initializeSettings(defaultAllowedCompendiums);
-});

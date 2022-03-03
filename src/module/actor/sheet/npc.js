@@ -8,6 +8,13 @@ import { SFRPG } from "../../config.js";
  * @type {ActorSheetSFRPG}
  */
 export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
+    constructor(...args) {
+        super(...args);
+
+        this.acceptedItemTypes.push(...SFRPG.characterDefinitionItemTypes);
+        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+    }
+
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {
@@ -22,7 +29,11 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     get template() {
         const path = "systems/sfrpg/templates/actors/";
         if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
-        return path + "npc-sheet.html";
+        if (this.actor.data.type === "npc") {
+            return path + "npc-sheet.html";
+        } else {
+            return path + "npc2-sheet.html";
+        }
     }
 
     /** @override */
@@ -31,6 +42,14 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         
         html.find('.reload').click(this._onReloadWeapon.bind(this));
         html.find('#add-skills').click(this._toggleSkills.bind(this));
+        html.find('#duplicate-new-style-npc').click(this._duplicateAsNewStyleNPC.bind(this));
+
+        if (this.actor.type === "npc2") {
+            html.find('.modifier-create').on('click', this._onModifierCreate.bind(this));
+            html.find('.modifier-edit').on('click', this._onModifierEdit.bind(this));
+            html.find('.modifier-delete').on('click', this._onModifierDelete.bind(this));
+            html.find('.modifier-toggle').on('click', this._onToggleModifierEnabled.bind(this));
+        }
     }
 
     getData() {
@@ -41,18 +60,6 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         data.labels["cr"] = cr >= 1 ? String(cr) : crs[cr] || 1;
 
         return data;
-    }
-
-    async _render(...args) {
-        await super._render(...args);
-
-        tippy('[data-tippy-content]', {
-            allowHTML: true,
-            arrow: false,
-            placement: 'top-start',
-            duration: [500, null],
-            delay: [800, null]
-        });
     }
 
     /**
@@ -67,6 +74,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     }
 
     _prepareItems(data) {
+        const actorData = data.data;
         const droneItemTypes = ["chassis", "mod"];
 
         const inventory = {
@@ -76,38 +84,51 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             weapons: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Attacks"), items: [], hasActions: true, dataset: { type: "weapon,shield", "weapon-type": "natural" }, allowAdd: true },
             actions: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Actions"), items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" }, allowAdd: true },
             passive: { label: game.i18n.localize("SFRPG.NPCSheet.Features.Features"), items: [], dataset: { type: "feat" }, allowAdd: true },
-            activeItems: { label: game.i18n.localize("SFRPG.NPCSheet.Features.ActiveItems"), items: [], dataset: { }, allowAdd: false }
+            activeItems: { label: game.i18n.localize("SFRPG.NPCSheet.Features.ActiveItems"), items: [], dataset: { }, allowAdd: false },
+            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: [], hasActions: false, dataset: { type: "actorResource" } }
         };
 
-        let [spells, other, conditionItems, droneItems] = data.items.reduce((arr, item) => {
+        //   0       1      2               3           4
+        let [spells, other, conditionItems, droneItems, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.hasCapacity = item.data.capacity && (item.data.capacity.max > 0);
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
             item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
-            item.hasUses = item.data.uses && (item.data.uses.max > 0);
-            item.isCharged = !item.hasUses || item.data.uses?.value <= 0 || !item.isOnCooldown;
+            item.hasUses = item.document.canBeUsed();
+            item.isCharged = !item.hasUses || item.document.getRemainingUses() <= 0 || !item.isOnCooldown;
+
+            item.hasCapacity = item.document.hasCapacity();
+            if (item.hasCapacity) {
+                item.capacityCurrent = item.document.getCurrentCapacity();
+                item.capacityMaximum = item.document.getMaxCapacity();
+            }
+
+            if (item.type === "actorResource") {
+                this._prepareActorResource(item, actorData);
+            }
+
             if (droneItemTypes.includes(item.type)) {
-                arr[3].push(item);
+                arr[3].push(item); // droneItems
             } else if (item.type === "spell") {
-                let container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
+                const container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
-                    arr[0].push(item);
+                    arr[0].push(item); // spells
                 } else {
-                    arr[1].push(item);
+                    arr[1].push(item); // other
                 }
             } else if (item.type === "feat") {
                 if ((item.data.requirements?.toLowerCase() || "") === "condition") {
-                    arr[2].push(item);
+                    arr[2].push(item); // conditionItems
                 } else {
-                    arr[1].push(item);
+                    arr[1].push(item); // other
                 }
                 item.isFeat = true;
             }
-            else arr[1].push(item);
+            else if (item.type === "actorResource") arr[4].push(item); // actorResources
+            else arr[1].push(item); // other
             return arr;
-        }, [[], [], [], []]);
+        }, [[], [], [], [], []]);
 
         // Apply item filters
         spells = this._filterItems(spells, this._filters.spellbook);
@@ -119,9 +140,11 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         // Organize Features
         const itemsToProcess = [];
         for (const item of other) {
+            const container = this.actor.items.contents.find(x => x.data.data.container?.contents?.find(y => y.id === item._id) !== undefined);
+
             if (["weapon", "shield"].includes(item.type)) {
                 item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
-                if (!item.data.containerId) {
+                if (!item.data.containerId && !container) {
                     features.weapons.items.push(item);
                 }
                 itemsToProcess.push(item);
@@ -151,6 +174,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             }
         }
 
+        features.resources.items = actorResources;
+
         this.processItemContainment(itemsToProcess, function (itemType, itemData) {
             inventory.inventory.items.push(itemData);
         });
@@ -160,9 +185,21 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         }
 
         const modifiers = {
-            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true }
+            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true, items: conditionItems }
         };
-        modifiers.conditions.items = conditionItems;
+
+        if (this.actor.type === "npc2") {
+            let [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
+                if (modifier.subtab === "permanent") arr[0].push(modifier);
+                else if (modifier.subtab === "conditions") arr[3].push(modifier);
+                else arr[1].push(modifier); // Any unspecific categories go into temporary.
+    
+                return arr;
+            }, [[], [], [], [], []]);
+
+            modifiers.permanent = { label: "SFRPG.ModifiersPermanentTabLabel", modifiers: permanent, dataset: { subtab: "permanent" }};
+            modifiers.temporary = { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: temporary, dataset: { subtab: "temporary" }};
+        }
 
         // Assign and return
         data.inventory = inventory;
@@ -186,6 +223,110 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         if (cr) formData[crv] = cr < 1 ? cr : parseInt(cr);
 
         // Parent ActorSheet update steps
-        super._updateObject(event, formData);
+        return super._updateObject(event, formData);
     }
+
+    static async _selectActorData({yes, no, cancel, render, defaultYes=true, rejectClose=false, options={width: 600}}={}) {
+        return new Promise((resolve, reject) => {
+            const dialog = new Dialog({
+                title: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogTitle"),
+                content: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogMessage") + "<br/><br/>",
+                buttons: {
+                    yes: {
+                        icon: '<i class="fas fa-address-card"></i>',
+                        label: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogOriginalActorButton"),
+                        callback: html => {
+                            const result = yes ? yes(html) : true;
+                            resolve(result);
+                        }
+                    },
+                    no: {
+                        icon: '<i class="fas fa-exchange-alt"></i>',
+                        label: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogUnlinkedActorButton"),
+                        callback: html => {
+                            const result = no ? no(html) : false;
+                            resolve(result);
+                        }
+                    },
+                    cancel: {
+                        icon: '<i class="fas fa-times"></i>',
+                        label: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogCancelButton"),
+                        callback: html => {
+                            resolve(null);
+                        }
+                    }
+                },
+                default: defaultYes ? "yes" : "no",
+                render: render,
+                close: () => {
+                    if ( rejectClose ) reject("The confirmation Dialog was closed without a choice being made");
+                    else resolve(null);
+                },
+            }, options);
+            dialog.render(true);
+        });
+    }
+
+    async _duplicateAsNewStyleNPC(event) {
+        let actorData = duplicate(this.actor.data);
+
+        if (this.token && !this.token.data.actorLink) {
+            // If it is an unlinked actor, ask if the user wants to duplicate the original actor, or use the unlinked actor data instead
+            let useOriginalActor = null;
+            await ActorSheetSFRPGNPC._selectActorData({
+                yes: () => {
+                    useOriginalActor = true;
+                },
+                no: () => {
+                    useOriginalActor = false;
+                }
+            });
+
+            // If no choice was made, don't duplicate
+            if (useOriginalActor === null) {
+                return;
+            }
+            
+            if (useOriginalActor === true) {
+                const originalActor = game.actors.get(this.token.actor.id);
+                if (originalActor) {
+                    actorData = duplicate(originalActor.data);
+                }
+            }
+        }
+
+        // Convert the old user input into the new architecture
+        for (const [abl, ability] of Object.entries(actorData.data.abilities)) {
+            ability.base = ability.mod;
+        }
+
+        for (const [skl, skill] of Object.entries(actorData.data.skills)) {
+            if (skill.enabled) {
+                skill.ranks = skill.mod;
+            }
+        }
+        actorData.data.attributes.eac.base = actorData.data.attributes.eac.value;
+        actorData.data.attributes.kac.base = actorData.data.attributes.kac.value;
+        actorData.data.attributes.init.value = actorData.data.attributes.init.total;
+
+        actorData.data.attributes.fort.base = actorData.data.attributes.fort.bonus;
+        actorData.data.attributes.reflex.base = actorData.data.attributes.reflex.bonus;
+        actorData.data.attributes.will.base = actorData.data.attributes.will.bonus;
+
+        // Create NPC actor with name + " - New Style"
+        actorData.name += " - New Style";
+        actorData.type = "npc2";
+        delete actorData._id;
+
+        const actor = await Actor.create(actorData);
+        if (actor == null) {
+            ui.notifications.error(game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.ErrorCreateActor"), {permanent: true});
+            return;
+        }
+
+        // Open newly created NPC sheet
+        const registeredSheet = Actors.registeredSheets.find(x => x.name === "ActorSheetSFRPGNPC");
+        const sheet = new registeredSheet(actor);
+        sheet.render(true);
+}
 }

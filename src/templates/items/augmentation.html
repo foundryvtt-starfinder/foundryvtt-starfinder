@@ -23,7 +23,7 @@
                 <label>{{ localize "SFRPG.Items.Augmentation.Type" }}</label>
                 <div class="form-fields">
                     <select name="data.type">
-                        {{#select data.type}}
+                        {{#select itemData.type}}
                         {{#each config.augmentationTypes as |augmentation type|}}
                         <option value="{{type}}">{{augmentation}}</option>
                         {{/each}}
@@ -36,7 +36,7 @@
                 <label>{{ localize "SFRPG.Items.Augmentation.System" }}</label>
                 <div class="form-fields">
                     <select name="data.system">
-                        {{#select data.system}}
+                        {{#select itemData.system}}
                         {{#each config.augmentationSytems as |system key|}}
                         <option value="{{key}}">{{system}}</option>
                         {{/each}}
@@ -45,9 +45,18 @@
                 </div>
             </div>
 
+            {{!-- Equipment Status --}}
+            {{> "systems/sfrpg/templates/items/parts/item-status.html"}}
+
             <br />
 
             {{> "systems/sfrpg/templates/items/parts/physical-item-details.html"}}
+            
+            <br />
+
+            {{!-- Container Template --}}
+            {{> "systems/sfrpg/templates/items/parts/container-details.html" message="SFRPG.Items.Equipment.ContainerTooltip"}}
+            
         </div>
 
         {{!-- Modifiers Tab --}}

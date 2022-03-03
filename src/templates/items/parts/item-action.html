@@ -2,7 +2,7 @@
 <div class="form-group select">
     <label>{{ localize "SFRPG.Items.Action.ActionType" }}</label>
     <select name="data.actionType">
-        {{#select data.actionType}}
+        {{#select itemData.actionType}}
         <option value=""></option>
         {{#each config.itemActionTypes as |name type|}}
         <option value="{{type}}">{{name}}</option>
@@ -10,13 +10,25 @@
         {{/select}}
     </select>
 </div>
-{{#if data.actionType}}
+{{#if itemData.actionType}}
+
+{{!-- Action Target --}}
+<div class="form-group select" {{createTippy title="SFRPG.Items.Action.ActionTarget.Title" subtitle="SFRPG.Items.Action.ActionTarget.Tooltip"}}>
+    <label>{{ localize "SFRPG.Items.Action.ActionTarget.Title" }}</label>
+    <select name="data.actionTarget">
+        {{#select itemData.actionTarget}}
+        {{#each config.actionTargets as |name type|}}
+        <option value="{{type}}">{{name}}</option>
+        {{/each}}
+        {{/select}}
+    </select>
+</div>
 
 {{!-- Ability Modifier --}}
 <div class="form-group select">
     <label>{{ localize "SFRPG.Items.Action.AbilityModifier" }}</label>
     <select name="data.ability">
-        {{#select data.ability}}
+        {{#select itemData.ability}}
         <option value=""></option>
         {{#each config.abilities as |ability a|}}
         <option value="{{a}}">{{ability}}</option>
@@ -30,39 +42,100 @@
 <div class="form-group">
     <label>{{ localize "SFRPG.Items.Action.AttackRollBonus" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.attackBonus" value="{{data.attackBonus}}" data-dtype="Number"/>
+        <input type="text" name="data.attackBonus" value="{{itemData.attackBonus}}" data-dtype="Number"/>
     </div>
 </div>
 {{/if}}
 
+<span>&nbsp;</span>
+
+<h3 class="form-header">{{ localize "SFRPG.Items.Action.DamageNotes" }}</h3>
+
+{{!-- Chat Message Flavor --}}
+<div class="form-group stacked">
+    <label>{{ localize "SFRPG.Items.Action.ChatMessageFlavor" }}</label>
+    <input type="text" name="data.chatFlavor" value="{{itemData.chatFlavor}}"/>
+</div>
+
+{{!-- Roll Notes --}}
+<div class="form-group stacked" {{createTippy title="SFRPG.Items.Action.RollNotes" subtitle="SFRPG.Items.Action.RollNotesTooltip"}}>
+    <label>{{ localize "SFRPG.Items.Action.RollNotes" }}</label>
+    <input type="text" name="data.rollNotes" value="{{itemData.rollNotes}}"/>
+</div>
+
+{{!-- Damage Notes --}}
+<div class="form-group stacked" {{createTippy title="SFRPG.Items.Action.DamageNotes" subtitle="SFRPG.Items.Action.DamageNotesTooltip"}}>
+    <label>{{ localize "SFRPG.Items.Action.DamageNotes" }}</label>
+    <input type="text" name="data.damageNotes" value="{{itemData.damageNotes}}"/>
+</div>
+
+<span>&nbsp;</span>
+
+<h3 class="form-header">{{ localize "SFRPG.Items.Action.DamageHeader" }}</h3>
+
 {{!-- Damage Formula --}}
 <h4 class="damage-header">
-    {{#unless isHealing }}{{ localize "SFRPG.Items.Action.DamageFormula" }}{{ else }}{{ localize "SFRPG.Items.Action.HealingFormula" }}{{/unless}}
+    {{ localize "SFRPG.Items.Action.AddDamageSection" }}
     <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
 </h4>
 <ol class="damage-parts form-group">
-    {{#each data.damage.parts as |part i| }}
-    <li class="damage-part flexrow" data-damage-part="{{i}}">
-        <input type="text" name="data.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
-        <select name="data.damage.parts.{{i}}.1">
-            {{#select (lookup this "1") }}
-            <option value="">None</option>
-            {{#each ../config.weaponDamageTypes as |name type|}}
-            <option value="{{type}}">{{name}}</option>
-            {{/each}}
-            {{#each ../config.healingTypes as |name type|}}
-            <option value="{{type}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-        <a class="damage-control delete-damage"><i class="fas fa-minus"></i></a>
+    {{#each itemData.damage.parts as |part i| }}
+    <li class="damage-part flexcol" style="border: 0;" data-damage-part="{{i}}">
+        <span>&nbsp;</span>
+        <h4 class="damage-header" style="border-bottom: groove 2px #fff;">
+            {{#unless (lookup this "name") }}{{ localize "SFRPG.Items.Action.DamageSection" section=i}}{{else}}{{lookup this "name"}}{{/unless}}:
+            <a class="damage-control delete-damage" {{createTippy title="SFRPG.Items.Action.DeleteDamageSection" subtitle="SFRPG.Items.Action.DeleteDamageSectionTooltip"}}><i class="fas fa-minus"></i></a>
+        </h4>
+        <div class="form-group" {{createTippy title="SFRPG.Items.Action.DamageName" subtitle="SFRPG.Items.Action.DamageNameTooltip"}}>
+            <label>{{ localize "SFRPG.Items.Action.DamageName" }}</label>
+            <div class="form-fields">
+                <input type="text" name="data.damage.parts.{{i}}.name" value="{{lookup this "name"}}" placeholder="{{ localize "SFRPG.Items.Action.DamageSection" section=i}}"/>
+            </div>
+        </div>
+        <div class="damage-part-formula form-group" {{createTippy title="SFRPG.Items.Action.DamageFormula" subtitle="SFRPG.Items.Action.DamageFormulaTooltip"}}>
+            <label>{{ localize "SFRPG.Items.Action.DamageFormula" }}</label>
+            <div class="form-fields">
+                <input type="text" name="data.damage.parts.{{i}}.formula" value="{{lookup this "formula"}}"/>
+            </div>
+        </div>
+        <div class="damage-part-type form-group stacked">
+            <div class="form-group form-group-stacked">
+                <label>{{localize "Energy Damage"}}</label>
+                {{#each ../config.energyDamageTypes as |name type|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
+                </label>
+                {{/each}}
+            </div>
+            <div class="form-group form-group-stacked">
+                <label>{{localize "Kinetic Damage"}}</label>
+                {{#each ../config.kineticDamageTypes as |name type|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
+                </label>
+                {{/each}}
+            </div>
+            <div class="form-group form-group-stacked">
+                <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.damage.parts.{{i}}.types.healing" {{checked (lookup (lookup (lookup ../itemData.damage.parts i) "types") "healing")}} />{{localize "SFRPG.HealingTypesHealing"}}
+                </label>
+            </div>
+        </div>
     </li>
     {{/each}}
 </ol>
+
+{{#if (ne itemData.actionType "heal")}}
+
+<span>&nbsp;</span>
+
+<h4 class="form-header">{{ localize "SFRPG.Items.Action.CriticalDamageHeader" }}</h4>
+
 <div class="form-group">
     <label>{{ localize "SFRPG.Items.Action.CriticalEffect" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.critical.effect" value="{{data.critical.effect}}"/>
+        <input type="text" name="data.critical.effect" value="{{itemData.critical.effect}}"/>
     </div>
 </div>
 <h4 class="damage-header">
@@ -70,21 +143,46 @@
     <a class="damage-control add-critical-damage"><i class="fas fa-plus"></i></a>
 </h4>
 <ol class="damage-parts form-group">
-    {{#each data.critical.parts as |part i| }}
-    <li class="damage-part flexrow" data-critical-part="{{i}}">
-        <input type="text" name="data.critical.parts.{{i}}.0" value="{{lookup this "0"}}"/>
-        <select name="data.critical.parts.{{i}}.1">
-            {{#select (lookup this "1") }}
-            <option value="">None</option>
-            {{#each ../config.weaponDamageTypes as |name type|}}
-            <option value="{{type}}">{{name}}</option>
-            {{/each}}
-            {{#each ../config.healingTypes as |name type|}}
-            <option value="{{type}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-        <a class="damage-control delete-critical-damage"><i class="fas fa-minus"></i></a>
+    {{#each itemData.critical.parts as |part i| }}
+    <li class="damage-part flexcol" data-critical-part="{{i}}">
+        <div class="damage-part-formula form-group flexrow">
+            <input type="text" name="data.critical.parts.{{i}}.formula" value="{{lookup this "formula"}}"/>
+            <a class="damage-control delete-critical-damage"><i class="fas fa-minus"></i></a>
+        </div>
+        <div class="damage-part-type form-group stacked">
+            <div class="form-group form-group-stacked">
+                <label>{{localize "Energy Damage"}}</label>
+                {{#each ../config.energyDamageTypes as |name type|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.critical.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") type)}} />{{name}}
+                </label>
+                {{/each}}
+            </div>
+            <div class="form-group form-group-stacked">
+                <label>{{localize "Kinetic Damage"}}</label>
+                {{#each ../config.kineticDamageTypes as |name type|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.critical.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") type)}} />{{name}}
+                </label>
+                {{/each}}
+            </div>
+            <div class="form-group form-group-stacked">
+                <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.critical.parts.{{i}}.types.healing" {{checked (lookup (lookup (lookup ../../itemData.critical.parts i) "types") "healing")}} />{{localize "SFRPG.HealingTypesHealing"}}
+                </label>
+            </div>
+        </div>
+        <div class="damage-part-operator form-group flexrow" data-tippy-content="When an item or ablity does multiple types of damage, this will determine if both damage types apply, or if only one or the other apply.">
+            <label>{{localize "Damage Operator"}}</label>
+            <select name="data.critical.parts.{{i}}.operator">
+                {{#select (lookup this "operator")}}
+                <option value=""></option>
+                <option value="and">{{localize "And"}}</option>
+                <option value="or">{{localize "Or"}}</option>
+                {{/select}}
+            </select>
+        </div>
     </li>
     {{/each}}
 </ol>
@@ -93,17 +191,19 @@
 <div class="form-group">
     <label>{{ localize "SFRPG.Items.Action.OtherFormula" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.formula" value="{{data.formula}}" placeholder="Formula"/>
+        <input type="text" name="data.formula" value="{{itemData.formula}}" placeholder="Formula"/>
     </div>
 </div>
+
+{{/if}}
 
 {{!-- Saving Throw --}}
 <div class="form-group input-select">
     <label>{{ localize "SFRPG.Items.Action.SavingThrow" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.save.dc" value="{{data.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
+        <input type="text" name="data.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
         <select name="data.save.type">
-            {{#select data.save.type}}
+            {{#select itemData.save.type}}
             <option value=""></option>
             {{#each config.saves as |save s|}}
             <option value="{{s}}">{{save}}</option>
@@ -111,7 +211,7 @@
             {{/select}}
         </select>
         <select name="data.save.descriptor">
-            {{#select data.save.descriptor}}
+            {{#select itemData.save.descriptor}}
             {{#each config.saveDescriptors as |descriptor k|}}
             <option value="{{k}}">{{descriptor}}</option>
             {{/each}}
@@ -120,9 +220,4 @@
     </div>
 </div>
 
-{{!-- Chat Message Flavor --}}
-<div class="form-group stacked">
-    <label>{{ localize "SFRPG.Items.Action.ChatMessageFlavor" }}</label>
-    <input type="text" name="data.chatFlavor" value="{{data.chatFlavor}}"/>
-</div>
 {{/if}}

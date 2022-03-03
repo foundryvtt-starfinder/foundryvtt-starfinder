@@ -1,0 +1,232 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- NPC Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <div class="header-background flexrow">
+                <h1 class="charname">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SFRPG.NPCSheet.Header.NamePlaceHolderText"}}" />
+                </h1>
+
+                <div class="charlevel">
+                    <div class="level" {{createTippy title="CR" subtitle="@details.cr<br/>@details.level.value"}}>
+                        <label>CR</label>
+                        <input name="data.details.cr" type="text" value="{{labels.cr}}" placeholder="1" />
+                    </div>
+                    <div class="experience">
+                        <span>{{data.details.xp.value}} XP</span>
+                    </div>
+                </div>
+            </div>
+            <ul class="summary-row1">
+                <li>
+                    <input type="text" name="data.details.raceAndGrafts" value="{{data.details.raceAndGrafts}}" placeholder="{{localize "SFRPG.NPCSheet.Header.RaceAndGraftsPlaceHolderText"}}" />
+                </li>
+                <li>
+                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="{{localize "SFRPG.NPCSheet.Header.SourcePlaceHolderText"}}" />
+                </li>
+            </ul>
+            <ul class="summary-row2">
+                <li>
+                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{localize "SFRPG.NPCSheet.Header.AlignmentPlaceHolderText"}}" />
+                </li>
+                <li>
+                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{localize "SFRPG.NPCSheet.Header.TypePlaceHolderText"}}" />
+                </li>
+                <li>
+                    <input type="text" name="data.details.subtype" value="{{data.details.subtype}}" placeholder="{{localize "SFRPG.NPCSheet.Header.SubtypePlaceHolderText"}}" />
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="attributes">{{ localize "SFRPG.Attributes" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "SFRPG.Inventory" }}</a>
+        <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
+        <a class="item" data-tab="spellbook">{{ localize "SFRPG.SpellBook.Spellbook" }}</a>
+        <a class="item" data-tab="modifiers">{{localize "SFRPG.NPCSheet.Interface.Navigation.Conditions"}}</a>
+        <a class="item" data-tab="biography" {{#if (and isGM data.details.biography.gmNotes)}}data-tippy-content="{{localize "SFRPG.ActorSheet.Biography.TooltipGM"}}"{{/if}}>{{ localize "SFRPG.About" }} {{#if (and isGM data.details.biography.gmNotes)}} (!){{/if}}</a>
+    </nav>
+
+    {{!-- NPC Sheet Body --}}
+    <section class="sheet-body">
+        <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
+
+            {{!-- Ability Scores --}}
+            <ul class="ability-scores flexrow">
+                {{#each data.abilities as |ability id|}}
+                <li class="ability new-ability" data-ability="{{id}}">
+                    <h4 class="ability-name new-box-title rollable" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.label}}</h4>
+                    <div class="ability-modifiers flexrow">
+                        <span class="ability-mod"></span>
+                        <div class="ability-center" data-tippy-content="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.mod}}</div>
+                        <input class="ability-base" data-tippy-content="<strong>{{localize "SFRPG.AbilityScoreBase"}}</strong><br>@abilities.{{id}}.base" name="data.abilities.{{id}}.base" type="text" value="{{ability.base}}" data-dtype="Number" placeholder="0"/>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+
+            {{!-- Skills --}}
+            <ul class="skills-list">
+                <li class="skills-header flexrow">
+                    <div class="skill-header-prof"></div>
+                    <h3 class="skill-header-name flexrow">{{localize "SFRPG.SkillsHeaderName"}}</h3>
+                    <div class="skill-header-rank">{{localize "Base"}}</div>
+                    <div class="skill-header-mod">{{localize "SFRPG.SkillsHeaderModifier"}}</div>
+                </li>
+                {{#each data.skills as |skill s|}}
+                {{#if skill.enabled}}
+                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}" data-tippy-content="<strong>{{skill.label}}</strong>{{#if (or skill.isTrainedOnly skill.hasArmorCheckPenalty)}}<br>(<em>{{#if skill.hasArmorCheckPenalty}}Armor Check Penalty{{/if}}{{#if (and skill.isTrainedOnly skill.hasArmorCheckPenalty)}}; {{/if}}{{#if skill.isTrainedOnly}}Trained Only{{/if}}</em>){{/if}}<br>Modifier: @skills.{{s}}.mod<br/><br/>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
+                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
+                    <h4 class="skill-name rollable">
+                        {{skill.label}}
+                    </h4>
+                    <input type="text" class="skill-ranks" title="{{localize "Base"}}" name="data.skills.{{s}}.ranks" value="{{skill.ranks}}" data-dtype="Number" />
+                    <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
+                </li>
+                {{/if}}
+                {{/each}}
+                <li class="flexrow">
+                    <div class="form-group">
+                        <button id="add-skills"><i class="fas fa-plus"></i> {{localize "SFRPG.ToggleSkillsButtonLabel"}}</button>
+                    </div>
+                </li>
+                <li class="flexrow">
+                    <div class="form-group">
+                        <button id="add-profession"><i class="fas fa-plus"></i> {{localize "SFRPG.AddProfessionButtonText"}}</button>
+                    </div>
+                </li>
+                <li class="flexrow">
+                    <div class="centered">
+                        <small>{{localize "SFRPG.ActorSheet.Skills.RightClickHint"}}</small>
+                    </div>
+                </li>
+            </ul>
+
+            <section class="center-pane">
+
+                {{!-- Attributes --}}
+                <ul class="attributes flexrow">
+                    <li class="attribute health">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.Health" }}</h4>
+                        <div class="attribute-value multiple">
+                            <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" data-dtype="Number" placeholder="10" />
+                            <span class="sep"> / </span>
+                            <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" data-dtype="Number" placeholder="10" />
+                        </div>
+                    </li>
+
+                    <li class="attribute health">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.Resolve"}}</h4>
+                        <div class="attribute-value multiple">
+                            <input name="data.attributes.rp.value" type="text" value="{{data.attributes.rp.value}}"
+                                data-dtype="Number" placeholder="10" />
+                            <span class="sep"> / </span>
+                            <input name="data.attributes.rp.max" type="text" value="{{data.attributes.rp.max}}"
+                                data-dtype="Number" placeholder="10" />
+                        </div>
+                    </li>
+
+                    <li class="attribute" data-tippy-content="<strong>{{ localize "SFRPG.EnergyArmorClass" }}</strong><br/>@attributes.eac.value<br/><br/>{{#each data.attributes.eac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <h4 class="attribute-name new-box-title">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
+                        <div class="attrib-modifiers flexrow">
+                            <span class="attrib-mod"></span>
+                            <div class="attrib-center">{{data.attributes.eac.value}}</div>
+                            <input class="attrib-base" name="data.attributes.eac.base" type="text" value="{{data.attributes.eac.base}}" data-dtype="Number" placeholder="10"/>
+                        </div>
+                    </li>
+
+                    <li class="attribute" data-tippy-content="<strong>{{ localize "SFRPG.KineticArmorClass" }}</strong><br/>@attributes.kac.value<br/><br/>{{#each data.attributes.kac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <h4 class="attribute-name new-box-title">{{ localize "SFRPG.KineticArmorClass" }}</h4>
+                        <div class="attrib-modifiers flexrow">
+                            <span class="attrib-mod"></span>
+                            <div class="attrib-center">{{data.attributes.kac.value}}</div>
+                            <input class="attrib-base" name="data.attributes.kac.base" type="text" value="{{data.attributes.kac.base}}" data-dtype="Number" placeholder="10"/>
+                        </div>
+                    </li>
+                    
+                </ul>
+
+                <ul class="attributes flexrow">
+                    
+                    <li class="attribute initiative" data-tippy-content="<strong>{{ localize "SFRPG.InitiativeLabel" }}</strong><br/>@attributes.init.total<br/><br/>{{#each data.attributes.init.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <h4 class="attribute-name new-box-title">{{ localize "SFRPG.InitiativeLabel" }}</h4>
+                        <div class="attrib-modifiers flexrow">
+                            <span class="attrib-mod"></span>
+                            <div class="attrib-center">{{data.attributes.init.total}}</div>
+                            <input class="attrib-base" name="data.attributes.init.value" type="text" value="{{data.attributes.init.value}}" data-dtype="Number" placeholder="10"/>
+                        </div>
+                    </li>
+                    
+                    {{> "systems/sfrpg/templates/actors/parts/actor-movement-element.html" expand=true}}
+                </ul>
+
+                <ul class="attributes flexrow">
+                    <li class="attribute new-save" data-save="fort" data-tippy-content="<strong>{{ localize "SFRPG.FortitudeSave" }}</strong><br/>@attributes.fort.bonus<br/><br/>{{#each data.attributes.fort.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.FortitudeSave"}}</h4>
+                        <div class="attrib-modifiers flexrow">
+                            <span class="attrib-mod"></span>
+                            <div class="attrib-center">{{data.attributes.fort.bonus}}</div>
+                            <input class="attrib-base" name="data.attributes.fort.base" type="text" value="{{numberFormat data.attributes.fort.base decimals=0 sign=true}}" data-dtype="Number" placeholder="0"/>
+                        </div>
+                    </li>
+
+                    <li class="attribute new-save" data-save="reflex" data-tippy-content="<strong>{{ localize "SFRPG.ReflexSave" }}</strong><br/>@attributes.reflex.bonus<br/><br/>{{#each data.attributes.reflex.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.ReflexSave"}}</h4>
+                        <div class="attrib-modifiers flexrow">
+                            <span class="attrib-mod"></span>
+                            <div class="attrib-center">{{data.attributes.reflex.bonus}}</div>
+                            <input class="attrib-base" name="data.attributes.reflex.base" type="text" value="{{numberFormat data.attributes.reflex.base decimals=0 sign=true}}" data-dtype="Number" placeholder="0"/>
+                        </div>
+                    </li>
+
+                    <li class="attribute new-save" data-save="will" data-tippy-content="<strong>{{ localize "SFRPG.WillSave" }}</strong><br/>@attributes.will.bonus<br/><br/>{{#each data.attributes.will.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <h4 class="attribute-name save-name box-title rollable">{{localize "SFRPG.WillSave"}}</h4>
+                        <div class="attrib-modifiers flexrow">
+                            <span class="attrib-mod"></span>
+                            <div class="attrib-center">{{data.attributes.will.bonus}}</div>
+                            <input class="attrib-base" name="data.attributes.will.base" type="text" value="{{numberFormat data.attributes.will.base decimals=0 sign=true}}" data-dtype="Number" placeholder="0"/>
+                        </div>
+                    </li>
+                </ul>
+
+                {{!-- Legendary Actions --}}
+                <div class="counters flexrow">
+                </div>
+
+                {{!-- Traits --}}
+                {{> "systems/sfrpg/templates/actors/parts/actor-traits.html"}}
+            </section>
+        </div>
+
+        {{!-- Inventory Tab --}}
+        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+            {{> "systems/sfrpg/templates/actors/parts/actor-inventory.html" sections=inventory}}
+        </div>
+
+        {{!-- Features Tab --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="features">
+            {{> "systems/sfrpg/templates/actors/parts/actor-features.html" sections=features}}
+        </div>
+
+        {{!-- Spellbook Tab --}}
+        <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
+            {{> "systems/sfrpg/templates/actors/parts/actor-spellbook.html"}}
+        </div>
+
+        {{!-- Conditions Tab --}}
+        <div class="tab modifers flexcol" data-group="primary" data-tab="modifiers">
+            {{> "systems/sfrpg/templates/actors/parts/actor-modifiers.html" sections=modifiers}}
+        </div>
+
+        {{!-- Biography Tab --}}
+        <div class="tab biography flexrow" data-group="primary" data-tab="biography">
+{{!-- This must be de-indented so it doesn't break text area for Other Visuals. --}}
+{{> "systems/sfrpg/templates/actors/parts/actor-biography.html" hideVitals=true}}
+        </div>
+    </section>
+</form>

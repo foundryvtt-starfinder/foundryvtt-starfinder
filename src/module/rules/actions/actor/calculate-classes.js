@@ -7,20 +7,23 @@ export default function (engine) {
         data.cl = 0;
 
         for (const cls of classes) {
+            const classData = cls.data.data;
+
             const className = cls.name.slugify({replacement: "_", strict: true});
-            const keyAbilityScore = cls.data.kas || "str";
-            const classData = {
+            const keyAbilityScore = classData.kas || "str";
+            
+            const classInfo = {
                 keyAbilityMod: data.abilities[keyAbilityScore].mod,
-                levels: cls.data.levels,
+                levels: classData.levels,
                 keyAbilityScore: keyAbilityScore,
-                skillRanksPerLevel: cls.data.skillRanks.value,
-                isCaster: cls.data.isCaster
+                skillRanksPerLevel: classData.skillRanks.value,
+                isCaster: classData.isCaster
             };
             
-            data.classes[className] = classData;
+            data.classes[className] = classInfo;
 
-            if (cls.data.isCaster) {
-                data.cl += cls.data.levels;
+            if (classInfo.isCaster) {
+                data.cl += classInfo.levels;
             }
         }
 

@@ -1,162 +1,134 @@
 {
+  "_id": "BHIXkt4IcUnLBNLT",
   "name": "Electrogel Jet, Smooth-Channel",
   "type": "weapon",
   "data": {
-    "description": {
-      "value": "<p>Lethal Innovations developed this weapon with assistance from a barathu consulting firm. An electrogel jet is a bulbous, blue creature with pulsing veins and soft tentacles that grasp the wielder’s arm to help support the weapon’s heavy weight. The creature’s bulbous sacs synthesize an electrical gel that shocks and burns targets before falling to the ground, where it forms a sticky layer. Owners who wish to refill an electrogel jet without waiting for the weapon to grow its own fuel can substitute caustrol, a synthetic acid with the same price and container size as petrol.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "AR",
     "type": "",
-    "quantity": 1,
-    "bulk": "1",
-    "price": 99900,
-    "level": 15,
-    "attuned": false,
-    "equipped": false,
-    "identified": true,
+    "ability": "dex",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "eac",
+    "actionType": "rwak",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 1
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": null,
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
-      "sturdy": false,
+      "ac": {
+        "value": ""
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": null,
-        "max": ""
       },
       "hardness": {
         "value": ""
       },
-      "ac": {
-        "value": ""
-      }
+      "hp": {
+        "max": "",
+        "value": null
+      },
+      "size": "medium",
+      "sturdy": false
     },
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "mire 1 round",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": null,
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": 60,
-      "units": "ft",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": 2,
-      "max": 0,
-      "per": ""
-    },
-    "ability": "dex",
-    "actionType": "rwak",
-    "attackBonus": 0,
-    "chatFlavor": "mire 1 round",
-    "critical": {
-      "parts": [],
-      "effect": "Staggered"
-    },
-    "damage": {
-      "parts": [
-        [
-          "6d8",
-          "acid+electricity"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": "negate"
-    },
-    "descriptors": [],
+    "attuned": false,
+    "bulk": "1",
     "capacity": {
-      "value": 40,
-      "max": 40
+      "max": 40,
+      "value": 40
     },
-    "usage": {
-      "value": 4,
-      "per": "shot"
-    },
-    "modifiers": [],
+    "chatFlavor": "mire 1 round",
     "container": {
       "contents": [],
       "storage": [
         {
           "type": "slot",
-          "subtype": "fusion",
-          "amount": 15,
           "acceptsType": [
             "fusion"
           ],
           "affectsEncumbrance": true,
+          "amount": 15,
+          "subtype": "fusion",
           "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightProperty": ""
         }
       ]
     },
-    "weaponType": "heavy",
-    "weaponCategory": "shock",
-    "special": "",
+    "critical": {
+      "effect": "Staggered",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "6d8",
+          "operator": "and",
+          "types": {
+            "acid": true,
+            "electricity": true
+          }
+        }
+      ]
+    },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>Lethal Innovations developed this weapon with assistance from a barathu consulting firm. An electrogel jet is a bulbous, blue creature with pulsing veins and soft tentacles that grasp the wielder’s arm to help support the weapon’s heavy weight. The creature’s bulbous sacs synthesize an electrical gel that shocks and burns targets before falling to the ground, where it forms a sticky layer. Owners who wish to refill an electrogel jet without waiting for the weapon to grow its own fuel can substitute caustrol, a synthetic acid with the same price and container size as petrol.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": "mire 1 round"
+    },
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "level": 15,
+    "modifiers": [],
+    "price": 99900,
+    "proficient": false,
     "properties": {
-      "one": false,
-      "two": true,
+      "aeon": false,
       "amm": true,
       "analog": false,
+      "antibiological": false,
       "archaic": false,
+      "aurora": false,
       "automatic": false,
       "blast": false,
       "block": false,
       "boost": false,
-      "bright": false,
-      "disarm": false,
-      "entangle": false,
-      "explode": false,
-      "injection": false,
-      "line": true,
-      "living": true,
-      "mind-affecting": false,
-      "nonlethal": false,
-      "operative": false,
-      "penetrating": false,
-      "powered": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "sniper": false,
-      "stun": true,
-      "subtle": false,
-      "thrown": false,
-      "trip": false,
-      "unwieldy": true,
-      "aeon": false,
-      "antibiological": false,
-      "aurora": false,
       "breach": false,
       "breakdown": false,
+      "bright": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
       "deflect": false,
+      "disarm": false,
       "double": false,
       "drainCharge": false,
       "echo": false,
+      "entangle": false,
+      "explode": false,
       "extinguish": false,
       "feint": false,
       "fiery": false,
@@ -170,43 +142,86 @@
       "guided": false,
       "harrying": false,
       "holyWater": false,
+      "hybrid": false,
       "ignite": false,
       "indirect": false,
+      "injection": false,
       "integrated": false,
+      "line": true,
+      "living": true,
       "lockdown": false,
+      "mind-affecting": false,
       "mine": false,
       "mire": true,
       "modal": false,
       "necrotic": false,
+      "nonlethal": false,
+      "one": false,
+      "operative": false,
+      "penetrating": false,
       "polarize": false,
       "polymorphic": false,
+      "powered": false,
       "professional": false,
       "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
       "recall": false,
+      "regrowth": true,
       "relic": false,
       "reposition": false,
       "shape": false,
       "shells": false,
       "shield": false,
+      "sniper": false,
+      "stun": true,
+      "subtle": false,
       "sunder": false,
       "swarm": false,
       "tail": false,
       "teleportive": false,
       "thought": false,
       "throttle": false,
+      "thrown": false,
+      "trip": false,
+      "two": true,
+      "unbalancing": false,
       "underwater": false,
+      "unwieldy": true,
       "variantBoost": false,
-      "wideLine": false,
-      "hybrid": false,
-      "regrowth": true,
-      "unbalancing": false
+      "wideLine": false
     },
-    "proficient": false,
-    "abilityMods": {
-      "parts": []
-    }
+    "quantity": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 60
+    },
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": "negate"
+    },
+    "source": "AR",
+    "special": "",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "usage": {
+      "per": "shot",
+      "value": 4
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 2
+    },
+    "weaponCategory": "shock",
+    "weaponType": "heavy"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "BHIXkt4IcUnLBNLT"
+  "img": "icons/svg/mystery-man.svg"
 }

@@ -11,7 +11,7 @@
                 </h1>
 
                 <div class="charlevel">
-                    <div class="level">
+                    <div class="level" {{createTippy title="CR" subtitle="@details.cr"}}>
                         <label>CR</label>
                         <input name="data.details.cr" type="text" value="{{labels.cr}}" placeholder="1" />
                     </div>
@@ -36,7 +36,7 @@
                     <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{localize "SFRPG.NPCSheet.Header.TypePlaceHolderText"}}" />
                 </li>
                 <li>
-                    <input type="text" name="data.details.aura" value="{{data.details.aura}}" placeholder="{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}" />
+                    <input type="text" name="data.details.subtype" value="{{data.details.subtype}}" placeholder="{{localize "SFRPG.NPCSheet.Header.SubtypePlaceHolderText"}}" />
                 </li>
             </ul>
         </div>
@@ -158,18 +158,8 @@
                             <input type="text" data-dtype="Number" name="data.attributes.init.total" value="{{numberFormat data.attributes.init.total decimals=0 sign=true}}" />
                         </div>
                     </li>
-                    <li class="attribute">
-                        <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
-                        <div class="attribute-value">
-                            <input name="data.attributes.speed.value" type="text"
-                                value="{{data.attributes.speed.value}}" placeholder="0" />
-                        </div>
-                        <footer class="attribute-footer">
-                            <input type="text" class="speed" name="data.attributes.speed.special"
-                                value="{{data.attributes.speed.special}}"
-                                placeholder="{{ localize 'SFRPG.SpeedSpecial' }}" />
-                        </footer>
-                    </li>
+                    
+                    {{> "systems/sfrpg/templates/actors/parts/actor-movement-element.html"}}
                 </ul>
 
                 <ul class="attributes flexrow">
@@ -201,6 +191,13 @@
 
                 {{!-- Traits --}}
                 {{> "systems/sfrpg/templates/actors/parts/actor-traits.html"}}
+
+                {{!-- Conversion --}}
+                <div class="counters flexrow">
+                    <div class="form-group">
+                        <button id="duplicate-new-style-npc" data-tippy-content="{{localize "SFRPG.NPCSheet.Interface.DuplicateNewStyle.ButtonTooltip"}}"><i class="fas fa-plus"></i>{{localize "SFRPG.NPCSheet.Interface.DuplicateNewStyle.Button"}}</button>
+                    </div>
+                </div>
             </section>
         </div>
 

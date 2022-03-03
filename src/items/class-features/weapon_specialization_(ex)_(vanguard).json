@@ -1,77 +1,133 @@
 {
-  "_id": "xrXIGoZhILVizIBD",
+  "_id": "WToqsamxdwAy9iTG",
   "name": "Weapon Specialization (Ex) (Vanguard)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
   "data": {
-    "description": {
-      "value": "<p>&gt;@Compendium[sfrpg.classes.WDvGdJ5mMpAD9cWQ]{Vanguard}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You gain the Weapon Specialization feat as a bonus feat for each weapon type with which this class grants you proficiency. You also gain a special form of weapon specialization for your entropic strike, allowing you to add a bonus to your damage equal to your vanguard class level plus half of any other class levels you have.</span></p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "Vanguard",
     "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionType": "",
     "activation": {
       "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "type": ""
+      "condition": "",
+      "cost": 0
     },
     "area": {
-      "value": null,
-      "units": "",
+      "effect": "",
       "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
       "units": "",
-      "additional": "",
-      "per": ""
+      "value": null
     },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
-    },
-    "ability": null,
-    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@Compendium[sfrpg.classes.WDvGdJ5mMpAD9cWQ]{Vanguard}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You gain the Weapon Specialization feat as a bonus feat for each weapon type with which this class grants you proficiency. You also gain a special form of weapon specialization for your entropic strike, allowing you to add a bonus to your damage equal to your vanguard class level plus half of any other class levels you have.</span></p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
     "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "9b5a4f11-8c9c-47e2-875b-113a8d7a971e",
+        "name": "Weapon Specialization Vanguard",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "modifier": "floor(@details.level.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      },
+      {
+        "_id": "1b19f9fd-5e8a-4e9c-8e09-fe60e784d0dc",
+        "name": "Weapon Specialization Vanguard",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "basicM"
+      },
+      {
+        "_id": "8f0c6cf7-403f-4e69-b209-2b66ee75878f",
+        "name": "Weapon Specialization Vanguard",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-damage",
+        "enabled": true,
+        "modifier": "-ceil(@details.level.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "operative"
+      },
+      {
+        "_id": "07da139b-5070-4866-b374-d409ff9b3476",
+        "name": "Weapon Specialization Vanguard",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "advancedM"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "3rd Level",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "modifiers": [],
-    "requirements": "3rd Level",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "Vanguard",
+    "target": {
+      "type": "",
+      "value": null
     },
-    "abilityMods": {
-      "parts": []
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
     }
   },
-  "flags": {},
   "img": "icons/svg/mystery-man.svg"
 }

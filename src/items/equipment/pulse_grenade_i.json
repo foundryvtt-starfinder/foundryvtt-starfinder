@@ -1,124 +1,107 @@
 {
+  "_id": "RfqCZlKKBkmL3TAz",
   "name": "Pulse Grenade I",
   "type": "weapon",
   "data": {
-    "description": {
-      "value": "<p>A pulse grenade emits a powerful EMP blast on impact whose damage and effects apply only to constructs with the technological subtype. Constructs reduced to 0 HP by a pulse grenade are not destroyed but simply nonfunctional until restored to 1 or more Hit Points. The EMP wave from a pulse grenade is not intense enough to affect augmentations, weapons, armor, or other technological gear</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "",
     "type": "",
-    "quantity": 1,
-    "bulk": "L",
-    "price": 950,
-    "level": 5,
-    "attuned": false,
-    "equipped": false,
-    "identified": true,
+    "ability": "str",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "rwak",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 1
+    },
+    "area": {
+      "effect": "burst",
+      "shape": "",
+      "units": "ft",
+      "value": 20
+    },
+    "attackBonus": 0,
     "attributes": {
-      "sturdy": false,
+      "ac": {
+        "value": ""
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": null,
-        "max": ""
       },
       "hardness": {
         "value": ""
       },
-      "ac": {
-        "value": ""
-      }
+      "hp": {
+        "max": "",
+        "value": null
+      },
+      "size": "medium",
+      "sturdy": false
     },
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "entangled 1 round",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": 20,
-      "units": "ft",
-      "shape": "",
-      "effect": "burst"
-    },
-    "range": {
-      "value": 20,
-      "units": "ft",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
-    },
-    "ability": "str",
-    "actionType": "rwak",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [],
-      "effect": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "1d10",
-          "electricity"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "reflex",
-      "dc": "12+@abilities.dex.mod",
-      "descriptor": "partial"
-    },
-    "descriptors": [],
+    "attuned": false,
+    "bulk": "L",
     "capacity": {
-      "value": 1,
-      "max": 1
+      "max": 1,
+      "value": 1
     },
-    "usage": {
-      "value": 1,
-      "per": "shot"
-    },
-    "modifiers": [],
+    "chatFlavor": "",
     "container": {
       "contents": [],
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
-          "subtype": "fusion",
-          "amount": 5,
           "acceptsType": [
             "fusion"
           ],
           "affectsEncumbrance": true,
+          "amount": 5,
+          "subtype": "fusion",
           "weightProperty": "level"
         }
       ]
     },
-    "weaponType": "grenade",
-    "weaponCategory": "",
-    "special": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "1d10",
+          "operator": "",
+          "types": {
+            "electricity": true
+          }
+        }
+      ]
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>A pulse grenade emits a powerful EMP blast on impact whose damage and effects apply only to constructs with the technological subtype. Constructs reduced to 0 HP by a pulse grenade are not destroyed but simply nonfunctional until restored to 1 or more Hit Points. The EMP wave from a pulse grenade is not intense enough to affect augmentations, weapons, armor, or other technological gear</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": "entangled 1 round"
+    },
+    "equippable": false,
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "level": 5,
+    "modifiers": [],
+    "price": 950,
+    "proficient": true,
     "properties": {
-      "one": true,
-      "two": false,
-      "amm": false,
       "aeon": false,
+      "amm": false,
       "analog": false,
       "antibiological": false,
       "archaic": false,
@@ -153,6 +136,7 @@
       "guided": false,
       "harrying": false,
       "holyWater": false,
+      "hybrid": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
@@ -166,6 +150,7 @@
       "modal": false,
       "necrotic": false,
       "nonlethal": false,
+      "one": true,
       "operative": false,
       "penetrating": false,
       "polarize": false,
@@ -177,9 +162,11 @@
       "radioactive": false,
       "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -193,20 +180,43 @@
       "throttle": false,
       "thrown": true,
       "trip": false,
+      "two": false,
+      "unbalancing": false,
       "underwater": false,
       "unwieldy": false,
       "variantBoost": false,
-      "wideLine": false,
-      "hybrid": false,
-      "regrowth": false,
-      "unbalancing": false
+      "wideLine": false
     },
-    "proficient": true,
-    "abilityMods": {
-      "parts": []
-    }
+    "quantity": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 20
+    },
+    "save": {
+      "type": "reflex",
+      "dc": "12+@abilities.dex.mod",
+      "descriptor": "partial"
+    },
+    "source": "",
+    "special": "",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "usage": {
+      "per": "shot",
+      "value": 1
+    },
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
+    },
+    "weaponCategory": "",
+    "weaponType": "grenade"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "RfqCZlKKBkmL3TAz"
+  "img": "icons/svg/mystery-man.svg"
 }

@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
                 <select name="data.weaponType">
-                    {{#select data.weaponType}}
+                    {{#select itemData.weaponType}}
                     {{#each config.weaponTypes as |name type|}}
                     <option value="{{type}}">{{name}}</option>
                     {{/each}}
@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Weapon.Category" }}</label>
                 <select name="data.weaponCategory">
-                    {{#select data.weaponCategory}}
+                    {{#select itemData.weaponCategory}}
                     <option value="">Unspecified</option>
                     {{#each config.weaponCategories as |name type|}}
                     <option value="{{type}}">{{name}}</option>
@@ -53,11 +53,14 @@
                 <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
                 {{#each config.weaponProperties as |name prop|}}
                 <!-- If there's a tooltip entry set for this weapon property we set a Tippy tooltip -->
-                <label class="checkbox" {{#if (lookup ../config.weaponPropertiesTooltips prop)}} data-tippy-content='{{lookup ../config.weaponPropertiesTooltips prop}}' {{/if}}>
-                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../data.properties prop)}} /> {{ name }}
+                <label class="checkbox" {{#if (lookup ../config.weaponPropertiesTooltips prop)}} data-tippy-content='<strong>{{ name }}</strong><br/>{{lookup ../config.weaponPropertiesTooltips prop}}' {{/if}}>
+                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../itemData.properties prop)}} /> {{ name }}
                 </label>
                 {{/each}}
             </div>
+
+            {{!-- Special Materials Template --}}
+            {{> "systems/sfrpg/templates/items/parts/item-special-materials.html"}}
 
             <br />
 
@@ -75,7 +78,6 @@
 
             <br />
 
-            <h3 class="form-header">{{ localize "SFRPG.CapacityUsage" }}</h3>
             {{> "systems/sfrpg/templates/items/parts/item-capacity.html"}}
 
             <br />

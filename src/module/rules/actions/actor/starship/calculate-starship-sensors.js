@@ -9,8 +9,12 @@ export default function (engine) {
 
         const sensors = fact.items.filter(x => x.type === "starshipSensor");
         for (const sensor of sensors) {
-            data.attributes.sensors.mod += sensor.data.modifier;
-            data.attributes.sensors.tooltip.push(`${sensor.name}: ${sensor.data.modifier.signedString()}`);
+            const sensorData = sensor.data.data;
+
+            if (sensorData.modifier) {
+                data.attributes.sensors.mod += sensorData.modifier;
+                data.attributes.sensors.tooltip.push(`${sensor.data.name}: ${sensorData.modifier.signedString()}`);
+            }
         }
 
         return fact;

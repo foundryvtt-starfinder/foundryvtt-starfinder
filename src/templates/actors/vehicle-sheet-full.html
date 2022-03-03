@@ -260,7 +260,7 @@
                 {{#each inventory as |section sid|}}
                 <li class="inventory-header flexrow">
                     <h3 class="item-name flexrow">{{section.label}}</h3>
-                    {{#if ../owner}}
+                    {{#if ../isOwner}}
                     <div class="item-controls">
                         {{#if section.allowAdd}}
                         <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
@@ -359,7 +359,7 @@
 
         {{!-- Notes Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
-            {{editorPlus content=data.details.description.value target="data.details.description.value" button=true owner=owner editable=editable rolls=false rollData=data}}
+            {{editorPlus content=data.details.description.value target="data.details.description.value" button=true isOwner=isOwner editable=editable rolls=false rollData=data}}
         </div>
     </section>
 </form>

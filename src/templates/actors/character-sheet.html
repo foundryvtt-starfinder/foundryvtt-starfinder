@@ -76,7 +76,7 @@
                         <span>{{data.attributes.eac.value}}</span>
                     </div>
                     <footer class="attribute-footer">
-                        <a class="rest short-rest">{{localize "SFRPG.RestS"}}</a>
+                        <a class="rest short-rest">{{localize "SFRPG.Rest.Short.Title"}}</a>
                     </footer>
                 </li>
 
@@ -86,22 +86,11 @@
                         <span>{{data.attributes.kac.value}}</span>
                     </div>
                     <footer class="attribute-footer">
-                        <a class="rest long-rest">{{localize "SFRPG.RestL"}}</a>
+                        <a class="rest long-rest">{{localize "SFRPG.Rest.Long.Title"}}</a>
                     </footer>
                 </li>
 
-                <li class="attribute" data-tippy-content="<strong>{{ localize "SFRPG.Speed" }}</strong><br>@attributes.speed.value<br>@attributes.speed.special">
-                    <h4 class="attribute-name box-title">{{ localize "SFRPG.Speed" }}</h4>
-                    <div class="attribute-value">
-                        <input name="data.attributes.speed.value" type="text" value="{{data.attributes.speed.value}}"
-                            placeholder="0" />
-                    </div>
-                    <footer class="attribute-footer">
-                        <input type="text" class="speed" name="data.attributes.speed.special"
-                            value="{{data.attributes.speed.special}}"
-                            placeholder="{{ localize 'SFRPG.SpeedSpecial' }}" />
-                    </footer>
-                </li>
+                {{> "systems/sfrpg/templates/actors/parts/actor-movement-element.html"}}
             </ul>
         </div>
     </header>
@@ -116,7 +105,7 @@
         <a class="item" data-tab="biography" {{#if (and isGM data.details.biography.gmNotes)}}data-tippy-content="{{localize "SFRPG.ActorSheet.Biography.TooltipGM"}}"{{/if}}>{{ localize "SFRPG.Biography" }} {{#if (and isGM data.details.biography.gmNotes)}} (!){{/if}}</a>        
     </nav>
 
-    {{!-- NPC Sheet Body --}}
+    {{!-- PC Sheet Body --}}
     <section class="sheet-body">
 
         <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
@@ -164,8 +153,7 @@
                         {{#if skill.isTrainedOnly}}<span>&dagger;</span>{{/if}}
                         {{#if skill.hasArmorCheckPenalty}}<span>*</span>{{/if}}
                     </h4>
-                    <input type="text" class="skill-ranks" title="Skill Ranks" name="data.skills.{{s}}.ranks"
-                        value="{{skill.ranks}}" data-dtype="Number" />
+                    <input type="text" class="skill-ranks" title="Skill Ranks" name="data.skills.{{s}}.ranks" value="{{skill.ranks}}" data-dtype="Number" />
                     <span class="skill-ability">{{skill.ability}}</span>
                     <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
                 </li>

@@ -1,113 +1,113 @@
 {
   "_id": "1P1O0BHojSINAbRg",
   "name": "Deadly Aim (Combat)",
-  "permission": {
-    "default": 0,
-    "QKfICymYNdnzinV1": 3
-  },
   "type": "feat",
   "data": {
-    "description": {
-      "value": "<p>Your can strike your enemies’ weak points and deal more damage.<br><strong>Prerequisites</strong>: Base attack bonus +1.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: When you take the attack or full attack action with weapons (including a solarian’s solar manifestation, but not spells or other special abilities of any kind), you can take a –2 penalty to your attack rolls. If you do, those attacks deal additional damage equal to half your base attack bonus (minimum 1).</span></p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "Core Rulebook",
     "type": "",
-    "activation": {
-      "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
-      "units": "",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
-    },
     "ability": null,
     "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": null
+    },
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>Your can strike your enemies’ weak points and deal more damage.<br><strong>Prerequisites</strong>: Base attack bonus +1.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: When you take the attack or full attack action with weapons (including a solarian’s solar manifestation, but not spells or other special abilities of any kind), you can take a –2 penalty to your attack rolls. If you do, those attacks deal additional damage equal to half your base attack bonus (minimum 1).</span></p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
     "formula": "",
+    "modifiers": [
+      {
+        "_id": "aa55be0b-608b-405b-8ec2-96088e5cbba2",
+        "name": "Deadly Aim (Combat)",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "OBr55AMenkfdhVpb",
+          "itemId": "KKLlKYgjnWs4ijRE"
+        },
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": -2,
+        "modifier": "-2",
+        "modifierType": "formula",
+        "notes": "When you take the attack or full attack action with weapons, you can take a penalty to your attack rolls. If you do, those attacks deal additional damage.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "3cb2d166-bd98-4429-92d0-463cc84576f7",
+        "name": "Deadly Aim (Combat)",
+        "type": "untyped",
+        "condition": "",
+        "container": {
+          "actorId": "OBr55AMenkfdhVpb",
+          "itemId": "KKLlKYgjnWs4ijRE"
+        },
+        "effectType": "all-damage",
+        "enabled": false,
+        "max": 1,
+        "modifier": "max(1, @attributes.bab/2)",
+        "modifierType": "formula",
+        "notes": "When you take the attack or full attack action with weapons, you can take a penalty to your attack rolls. If you do, those attacks deal additional damage.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "modifiers": [
-      {
-        "name": "Deadly Aim (Combat)",
-        "modifier": "-2",
-        "type": "untyped",
-        "effectType": "all-attacks",
-        "valueAffected": "",
-        "enabled": false,
-        "source": "",
-        "notes": "When you take the attack or full attack action with weapons, you can take a penalty to your attack rolls. If you do, those attacks deal additional damage.",
-        "modifierType": "formula",
-        "condition": "",
-        "subtab": "misc",
-        "max": -2,
-        "_id": "aa55be0b-608b-405b-8ec2-96088e5cbba2",
-        "container": {
-          "actorId": "OBr55AMenkfdhVpb",
-          "itemId": "KKLlKYgjnWs4ijRE"
-        }
-      },
-      {
-        "name": "Deadly Aim (Combat)",
-        "modifier": "max(1, @attributes.bab/2)",
-        "type": "untyped",
-        "effectType": "all-damage",
-        "valueAffected": "",
-        "enabled": false,
-        "source": "",
-        "notes": "When you take the attack or full attack action with weapons, you can take a penalty to your attack rolls. If you do, those attacks deal additional damage.",
-        "modifierType": "formula",
-        "condition": "",
-        "subtab": "misc",
-        "max": 1,
-        "_id": "3cb2d166-bd98-4429-92d0-463cc84576f7",
-        "container": {
-          "actorId": "OBr55AMenkfdhVpb",
-          "itemId": "KKLlKYgjnWs4ijRE"
-        }
-      }
-    ],
-    "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "Core Rulebook",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/feats/deadly_aim.png"
+  "img": "systems/sfrpg/icons/feats/deadly_aim.png",
+  "permission": {
+    "QKfICymYNdnzinV1": 3,
+    "default": 0
+  }
 }

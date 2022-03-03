@@ -3,92 +3,95 @@
   "name": "Heat Leech",
   "type": "spell",
   "data": {
-    "description": {
-      "value": "<p style=\"text-align: justify;\">You drain the heat from all creatures and objects in the area, dealing 13d8 cold damage. You can store the gathered heat energy in a used battery. If you do so and use that battery when casting&nbsp;explosive blast&nbsp;within 1 minute, that spell deals 2d6 additional fire damage, destroying the used battery. Otherwise, the energy dissipates normally.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB pg. 359",
     "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionType": "save",
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "instantaneous; see text",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": 60,
-      "units": "ft",
-      "shape": "cone",
-      "effect": "burst"
-    },
-    "range": {
-      "value": null,
-      "units": null,
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [],
-      "effect": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "13d8",
-          "cold"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "reflex",
-      "dc": "",
-      "descriptor": "half"
-    },
-    "descriptors": [],
-    "modifiers": [],
-    "level": 5,
-    "school": "evo",
-    "sr": true,
-    "dismissible": false,
-    "concentration": false,
-    "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
-      "supply": 0
-    },
-    "preparation": {
-      "mode": "",
-      "prepared": false
+      "condition": "",
+      "cost": 1
     },
     "allowedClasses": {
       "myst": false,
       "tech": true,
       "wysh": false
     },
-    "abilityMods": {
+    "area": {
+      "effect": "burst",
+      "shape": "cone",
+      "units": "ft",
+      "value": 60
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": false,
+    "critical": {
+      "effect": "",
       "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "13d8",
+          "operator": "",
+          "types": {
+            "cold": true
+          }
+        }
+      ]
+    },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>You drain the heat from all creatures and objects in the area, dealing 13d8 cold damage. You can store the gathered heat energy in a used battery. If you do so and use that battery when casting&nbsp;explosive blast&nbsp;within 1 minute, that spell deals 2d6 additional fire damage, destroying the used battery. Otherwise, the energy dissipates normally.</p>"
+    },
+    "descriptors": [],
+    "dismissible": false,
+    "duration": {
+      "units": "",
+      "value": "instantaneous; see text"
+    },
+    "formula": "",
+    "level": 5,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": null,
+      "value": null
+    },
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "descriptor": "half"
+    },
+    "school": "evo",
+    "source": "CRB pg. 359",
+    "sr": true,
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
     }
   },
+  "effects": [],
   "flags": {},
-  "img": "systems/sfrpg/icons/spells/heat_leech.png",
-  "effects": []
+  "img": "systems/sfrpg/icons/spells/heat_leech.png"
 }

@@ -4,6 +4,14 @@
             {{/if}}
 
             {{!-- Storage capacity --}}
+            <div class="form-group" data-tippy-content="<strong>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculation" }}</strong><br/>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculationTooltip" }}">
+                <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculation" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.container.includeContentsInWealthCalculation" {{checked itemData.container.includeContentsInWealthCalculation}}/>{{ localize "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculationCheckbox" }}
+                    </label>
+                </div>
+            </div>
             <div class="form-group">
                 <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSections" }}</label>
                 <div class="form-fields">
@@ -14,11 +22,11 @@
             </div>
 
             <ul>
-                {{#each data.container.storage as |storage|}}
+                {{#each itemData.container.storage as |storage|}}
                 <hr/>
-                <li class="storage-slot" data-slot-index="{{indexOf ../data.container.storage storage}}">
+                <li class="storage-slot" data-slot-index="{{indexOf ../itemData.container.storage storage}}">
                     <div class="form-group">
-                        <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSection" index=(indexOf ../data.container.storage storage false) }}</label>
+                        <label>{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSection" index=(indexOf ../itemData.container.storage storage false) }}</label>
                         <div class="form-fields">
                             <a class="item-control remove-storage">
                                 <i class="fas fa-minus"></i> {{ localize "SFRPG.ActorSheet.Inventory.Container.StorageSectionsRemove" }}
@@ -47,6 +55,7 @@
                                 <option value="weaponSlot">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierWeaponSlot" }}</option>
                                 <option value="fusion">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierFusion" }}</option>
                                 <option value="spellSlot">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierSpellSlot" }}</option>
+                                <option value="ammunitionSlot">{{ localize "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierAmmunitionSlot" }}</option>
                                 {{/select}}
                             </select>
                         </div>

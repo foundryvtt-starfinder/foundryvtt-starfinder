@@ -15,8 +15,11 @@ export default function (engine) {
                 return 0;
             }
 
-            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
-            let computedBonus = roll.total;
+            let computedBonus = 0;
+            try {
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                computedBonus = roll.total;
+            } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -34,10 +37,12 @@ export default function (engine) {
         // Race bonus
         if (fact.races && fact.races.length > 0) {
             for (const race of fact.races) {
-                hpMax += race.data.hp.value;
+                const raceData = race.data.data;
+
+                hpMax += raceData.hp.value;
 
                 data.attributes.hp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Hitpoints.RacialTooltip", {
-                    mod: race.data.hp.value,
+                    mod: raceData.hp.value,
                     source: race.name
                 }));
             }
@@ -46,7 +51,9 @@ export default function (engine) {
         // Class bonus
         if (fact.classes && fact.classes.length > 0) {
             for (const cls of fact.classes) {
-                let classBonus = Math.floor(cls.data.levels * cls.data.hp.value);
+                const classData = cls.data.data;
+
+                let classBonus = Math.floor(classData.levels * classData.hp.value);
                 hpMax += classBonus;
 
                 data.attributes.hp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Hitpoints.ClassTooltip", {

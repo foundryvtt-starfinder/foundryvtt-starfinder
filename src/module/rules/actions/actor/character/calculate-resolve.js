@@ -15,8 +15,11 @@ export default function (engine) {
                 return 0;
             }
 
-            let roll = new Roll(bonus.modifier.toString(), data).evaluate({maximize: true});
-            let computedBonus = roll.total;
+            let computedBonus = 0;
+            try {
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                computedBonus = roll.total;
+            } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -54,10 +57,12 @@ export default function (engine) {
             let className = "";
 
             for (const cls of fact.classes) {
-                if (!cls.data.kas) continue;
-                let classScore = fact.data.abilities[cls.data.kas].mod;
+                const classData = cls.data.data;
+
+                if (!classData.kas) continue;
+                let classScore = fact.data.abilities[classData.kas].mod;
                 if (classScore > highestKeyAbilityScoreModifier) {
-                    keyAbilityScore = cls.data.kas;
+                    keyAbilityScore = classData.kas;
                     highestKeyAbilityScoreModifier = classScore;
                     className = cls.name;
                 }

@@ -7,20 +7,20 @@ import { ItemSFRPG } from "../item/item.js";
  */
 export class SpellCastDialog extends Dialog {
     constructor(actor, item, dialogData={}, options={}) {
-      super(dialogData, options);
-      this.options.classes = ["sfrpg", "dialog"];
+        super(dialogData, options);
+        this.options.classes = ["sfrpg", "dialog"];
   
-      /**
-       * Store a reference to the Actor entity which is casting the spell
-       * @type {ActorSFRPG}
-       */
-      this.actor = actor;
-  
-      /**
-       * Store a reference to the Item entity which is the spell being cast
-       * @type {ItemSFRPG}
-       */
-      this.item = item;
+        /**
+         * Store a reference to the Actor entity which is casting the spell
+         * @type {ActorSFRPG}
+         */
+        this.actor = actor;
+    
+        /**
+         * Store a reference to the Item entity which is the spell being cast
+         * @type {ItemSFRPG}
+         */
+        this.item = item;
     }
   
     /* -------------------------------------------- */
@@ -28,7 +28,7 @@ export class SpellCastDialog extends Dialog {
     /* -------------------------------------------- */
   
     activateListeners(html) {
-      super.activateListeners(html);
+        super.activateListeners(html);
     }
   
     /* -------------------------------------------- */
@@ -41,54 +41,131 @@ export class SpellCastDialog extends Dialog {
      * @return {Promise}
      */
     static async create(actor, item) {
-      const ad = actor.data.data;
-      const id = item.data.data;
-  
-      // Determine whether the spell may be upcast
-      const lvl = id.level;
-      const canUpcast = (lvl > 0); //&& (id.preparation.mode === "prepared");
-  
-      // Determine the levels which are feasible
-      const spellLevels = Object.values(ad.spells).map((l, i) => {
-        if ( !canUpcast ) return { canCast: false }
-        const label = (lvl > 0) ? `${game.i18n.format(CONFIG.SFRPG.spellLevels[i])} (${l.value} Slots)` : game.i18n.format(CONFIG.SFRPG.spellLevels[i]);
-        return {
-          level: i,
-          label: label,
-          canCast: parseInt(l.max) > 0,
-          hasSlots: (parseInt(l.max) > 0) && (parseInt(l.value) > 0)
-        }
-      }).filter(l => l.canCast && (lvl <= l.level));
-  
-      // Determine whether the spell may be cast at all
-      const canCast = spellLevels.some(l => l.hasSlots);
-  
-      // Render the Spell casting template
-      const html = await renderTemplate("systems/sfrpg/templates/apps/spell-cast.html", {
-        item: item.data,
-        canCast,
-        canUpcast,
-        consume: canUpcast,
-        spellLevels
-      });
-  
-      // Create the Dialog and return as a Promise
-      return new Promise((resolve, reject) => {
-        const dlg = new this(actor, item, {
-          title: `${item.name}: Spell Configuration`,
-          content: html,
-          buttons: {
-            cast: {
-              icon: '<i class="fas fa-magic"></i>',
-              label: "Cast",
-              callback: html => resolve(new FormData(html[0].querySelector("#spell-config-form")))
+        const casterData = actor.data.data;
+        const spellData = item.data.data;
+    
+        const maxSpellLevel = spellData.level;
+
+        // Stupid spell slots counter
+        const availableSlots = {
+            1: {
+                general: 0,
+                perClass: {}
+            },
+            2: {
+                general: 0,
+                perClass: {}
+            },
+            3: {
+                general: 0,
+                perClass: {}
+            },
+            4: {
+                general: 0,
+                perClass: {}
+            },
+            5: {
+                general: 0,
+                perClass: {}
+            },
+            6: {
+                general: 0,
+                perClass: {}
             }
-          },
-          default: "cast",
-          close: reject
+        }
+        for (let spellLevel = 1; spellLevel <= 6; spellLevel++) {
+            const spellsPerLevel = casterData.spells[`spell${spellLevel}`];
+            if (spellsPerLevel) {
+                let hasClasses = false;
+                for (const [key, perClass] of Object.entries(spellsPerLevel.perClass)) {
+                    if (perClass.max > 0) {
+                        hasClasses = true;
+                    }
+
+                    if (perClass.value > 0) {
+                        availableSlots[spellLevel].perClass[key] = {class: key, value: perClass.value}
+                    }
+                }
+
+                if (!hasClasses) {
+                    availableSlots[spellLevel].general = parseInt(spellsPerLevel.value);
+                }
+            }
+        }
+
+        // Determine the levels which are feasible
+        const spellLevels = [];
+        const includedClasses = [];
+        for (const [slotLevel, slotAvailability] of Object.entries(availableSlots)) {
+            if (slotLevel < maxSpellLevel && !spellData.isVariableLevel) {
+                continue;
+            }
+
+            let hasClasses = false;
+            for (const classSlot of Object.values(slotAvailability.perClass)) {
+                hasClasses = true;
+                if (classSlot.value > 0) {
+                    const classEntry = casterData.spells.classes.find(x => x.key === classSlot.class);
+                    if (!classEntry) {
+                        continue;
+                    }
+                    
+                    includedClasses.push(classEntry.key);
+
+                    const label = game.i18n.format("SFRPG.SpellCasting.SpellLabelClass", {className: classEntry.name, spellSlot: game.i18n.format(CONFIG.SFRPG.spellLevels[slotLevel], slotLevel), remainingSlots: classSlot.value});
+                    spellLevels.push({
+                        source: classSlot.class,
+                        level: slotLevel,
+                        label: label,
+                        canCast: true,
+                        hasSlots: true,
+                        total: classSlot.value
+                    });
+                }
+            }
+
+            if (!hasClasses && slotAvailability.general > 0) {
+                spellLevels.push({
+                    source: "general",
+                    level: slotLevel,
+                    label: game.i18n.format("SFRPG.SpellCasting.SpellLabelGeneral", {spellSlot: game.i18n.format(CONFIG.SFRPG.spellLevels[slotLevel], slotLevel), remainingSlots: slotAvailability.general}),
+                    canCast: true,
+                    hasSlots: true,
+                    total: slotAvailability.general
+                });
+            }
+        }
+
+        // Render the Spell casting template
+        const html = await renderTemplate("systems/sfrpg/templates/apps/spell-cast.html", {
+            item: item.data,
+            hasSlots: spellLevels.length > 0,
+            consume: spellLevels.length > 0,
+            spellLevels,
+            config: CONFIG.SFRPG,
+            includedClasses: includedClasses
         });
-        dlg.render(true);
-      });
+    
+        // Create the Dialog and return as a Promise
+        return new Promise((resolve, reject) => {
+            const dlg = new this(actor, item, {
+                title: game.i18n.format("SFRPG.SpellCasting.Title", {spellName: item.name}),
+                content: html,
+                buttons: {
+                    cast: {
+                        icon: '<i class="fas fa-magic"></i>',
+                        label: game.i18n.localize("SFRPG.SpellCasting.ButtonCast"),
+                        callback: html => resolve({
+                            formData: new FormData(html[0].querySelector("#spell-config-form")),
+                            spellLevels: spellLevels
+                        })
+                    }
+                },
+                default: "cast",
+                close: reject
+            });
+            dlg.render(true);
+        });
     }
-  }
+}
   

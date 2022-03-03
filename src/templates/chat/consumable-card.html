@@ -1,4 +1,4 @@
-<div class="sfrpg chat-card weapon-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
+<div class="sfrpg chat-card weapon-card" data-actor-id="{{actor.id}}" data-item-id="{{item._id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
     <header class="card-header flexrow">
         <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
         <h3 class="item-name">{{item.name}}</h3>
@@ -12,7 +12,7 @@
         {{else}}
         <button disabled>No Charges</button>
         {{/if}}
-        {{#if hasSave}}<button data-action="save" data-type="{{data.save.type}}" disabled>{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
+        {{#if hasSave}}<button data-action="save" data-type="{{data.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">

@@ -1,6 +1,13 @@
 import { ActorSheetSFRPG } from "./base.js";
+import { SFRPG } from "../../config.js";
 
 export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
+    constructor(...args) {
+        super(...args);
+
+        this.acceptedItemTypes.push(...SFRPG.vehicleDefinitionItemTypes);
+        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+    }
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -73,27 +80,33 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
+        const actorData = data.data;
 
         const inventory = {
             inventory: { label: game.i18n.localize("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
         };
 
-        //   0        1               3
-        let [attacks, primarySystems, expansionBays] = data.items.reduce((arr, item) => {
+        //   0        1               2              3
+        let [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
+            if (item.type === "actorResource") {
+                this._prepareActorResource(item, actorData);
+            }
+
             if (item.type === "weapon" || item.type === "vehicleAttack") {
-                arr[0].push(item);
+                arr[0].push(item); // attacks
             }
             else if (item.type === "vehicleSystem") {
 
                 item.isVehicleSystem = true;
-                arr[1].push(item);
+                arr[1].push(item); // primarySystems
             }
-            else if (item.type === "starshipExpansionBay") arr[2].push(item);
+            else if (item.type === "starshipExpansionBay") arr[2].push(item); // expansionBays
+            else if (item.type === "actorResource") arr[3].push(item); // actorResources
 
             return arr;
-        }, [ [], [], [] ]);
+        }, [ [], [], [], []]);
 
         this.processItemContainment(attacks, function (itemType, itemData) {
             // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
@@ -109,6 +122,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const features = {
             primarySystems: { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.PrimarySystems"), items: primarySystems, hasActions: true, dataset: { type: "vehicleSystem" } },
             expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
+            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         };
         data.features = Object.values(features);
     }
@@ -173,7 +187,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         lvl = levels[lvl] || parseFloat(lvl);
         if (lvl) formData[v] = lvl < 1 ? lvl : parseInt(lvl);
 
-        super._updateObject(event, formData);
+        return super._updateObject(event, formData);
     }
 
     /** @override */
@@ -211,8 +225,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             if (rawItemData.type === "weapon" || rawItemData.type === "vehicleAttack") {
                 return this.processDroppedData(event, data);
             }
-            else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem") {
-                return this.actor.createEmbeddedEntity("OwnedItem", rawItemData);
+            else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem" || rawItemData.type === "actorResource") {
+                return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             }
         }
 
@@ -231,10 +245,10 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const actor = this.actor;
         if (data.pack) {
             const pack = game.packs.get(data.pack);
-            if (pack.metadata.entity !== "Item") return;
+            if (pack.documentName !== "Item") return;
             itemData = await pack.getEntity(data.id);
         } else if (data.data) {
-            let sameActor = data.actorId === actor._id;
+            let sameActor = data.actorId === actor.id;
             if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
             if (sameActor) {
                 await this._onSortItem(event, data.data);
@@ -440,7 +454,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         event.preventDefault();
 
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const system = this.actor.getOwnedItem(itemId);
+        const system = this.actor.items.get(itemId);
 
         this.actor.rollVehiclePilotingSkill(null, null, system);
     }
@@ -453,7 +467,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onDeactivateVehicleSystem(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
 
         const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : false;
         await item.update({'data.isActive': desiredOutput});
@@ -487,7 +501,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onActivateVehicleSystem(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
+        const item = this.actor.items.get(itemId);
         const updateData = {};
 
         const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : true;
@@ -519,20 +533,5 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         };
 
         await ChatMessage.create(chatData, { displaySheet: false });
-    }
-
-    /** @override */
-    async _render(...args) {
-        await super._render(...args);
-
-        if (this.rendered) {
-            tippy('[data-tippy-content]', {
-                allowHTML: true,
-                arrow: false,
-                placement: 'top-start',
-                duration: [500, null],
-                delay: [800, null]
-            });
-        }
     }
 }

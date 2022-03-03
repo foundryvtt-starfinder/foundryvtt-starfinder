@@ -12,7 +12,9 @@ export default function (engine) {
             data.quadrants.aft.ablative = { value: 0, max: 0 };
         } else {
             const ablativeItem = ablativeItems[0];
-            const evenDistributionValue = ablativeItem.data.ablativeValue / 4;
+            const ablativeData = ablativeItem.data.data;
+
+            const evenDistributionValue = ablativeData.ablativeValue / 4;
             if (data.quadrants.forward.ablative.max != evenDistributionValue
                 || data.quadrants.port.ablative.max != evenDistributionValue
                 || data.quadrants.starboard.ablative.max != evenDistributionValue
@@ -24,11 +26,11 @@ export default function (engine) {
             data.attributes.ablative = {
                 value: data.quadrants.forward.ablative.value + data.quadrants.port.ablative.value + data.quadrants.starboard.ablative.value + data.quadrants.aft.ablative.value,
                 total: data.quadrants.forward.ablative.max + data.quadrants.port.ablative.max + data.quadrants.starboard.ablative.max + data.quadrants.aft.ablative.max,
-                max: ablativeItem.data.ablativeValue,
+                max: ablativeData.ablativeValue,
                 evenDistribution: evenDistributionValue
             };
 
-            if (ablativeItem.data.ablativeValue > data.attributes.hp.max) {
+            if (ablativeData.ablativeValue > data.attributes.hp.max) {
                 data.attributes.pilotingBonus.value -= 1;
                 data.attributes.pilotingBonus.tooltip.push(game?.i18n ? game.i18n.format("SFRPG.StarshipSheet.Modifiers.AblativeOverload", {mod: -1}) : `Ablative overload: -1`);
             }

@@ -1,8 +1,9 @@
 export default function(engine) {
     engine.closures.add("calculateStarshipArmorClass", (fact, context) => {
         const data = fact.data;
+        const actor = fact.actor;
 
-        const pilot = (data.crew?.pilot?.actors) ? data.crew?.pilot?.actors[0] : null;
+        const pilot = (actor.data.crew?.pilot?.actors) ? actor.data.crew?.pilot?.actors[0] : null;
         const sizeMod = CONFIG.SFRPG.starshipSizeMod[data.details.size] || 0;
 
         let pilotingRanks = pilot?.data?.data?.skills?.pil?.ranks || 0;
@@ -42,14 +43,18 @@ export default function(engine) {
         /** Get modifying items. */
         const armorItems = fact.items.filter(x => x.type === "starshipArmor");
         let armorItem = null;
+        let armorItemData = null;
         if (armorItems && armorItems.length > 0) {
             armorItem = armorItems[0];
+            armorItemData = armorItem.data.data;
         }
 
         const shieldItems = fact.items.filter(x => x.type === "starshipShield");
         let shieldItem = null;
-        if (shieldItems && shieldItems.length > 0 && shieldItems[0].data.isDeflector) {
+        let shieldItemData = null;
+        if (shieldItems && shieldItems.length > 0 && shieldItems[0].data.data.isDeflector) {
             shieldItem = shieldItems[0];
+            shieldItemData = shieldItem.data.data;
         }
 
         /** Apply bonuses. */
@@ -77,10 +82,10 @@ export default function(engine) {
         }
 
         if (armorItem) {
-            addScore(data.quadrants.forward.ac, armorItem.name, armorItem.data.armorBonus, false);
-            addScore(data.quadrants.port.ac, armorItem.name, armorItem.data.armorBonus, false);
-            addScore(data.quadrants.starboard.ac, armorItem.name, armorItem.data.armorBonus, false);
-            addScore(data.quadrants.aft.ac, armorItem.name, armorItem.data.armorBonus, false);
+            addScore(data.quadrants.forward.ac, armorItem.name, armorItemData.armorBonus, false);
+            addScore(data.quadrants.port.ac, armorItem.name, armorItemData.armorBonus, false);
+            addScore(data.quadrants.starboard.ac, armorItem.name, armorItemData.armorBonus, false);
+            addScore(data.quadrants.aft.ac, armorItem.name, armorItemData.armorBonus, false);
         }
 
         if (forwardAC?.misc < 0 || forwardAC?.misc > 0) addScore(data.quadrants.forward.ac, "SFRPG.StarshipSheet.Modifiers.MiscModifier", forwardAC.misc);
@@ -88,12 +93,12 @@ export default function(engine) {
         if (starboardAC?.misc < 0 || starboardAC?.misc > 0) addScore(data.quadrants.starboard.ac, "SFRPG.StarshipSheet.Modifiers.MiscModifier", starboardAC.misc);
         if (aftAC?.misc < 0 || aftAC?.misc > 0) addScore(data.quadrants.aft.ac, "SFRPG.StarshipSheet.Modifiers.MiscModifier", aftAC.misc);
 
-        if (shieldItem && shieldItem.data.isDeflector) {
+        if (shieldItem && shieldItemData.isDeflector) {
 
-            if (data.quadrants.forward.shields.value > 0) addScore(data.quadrants.forward.ac, shieldItem.name, shieldItem.data.armorBonus, false);
-            if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.ac, shieldItem.name, shieldItem.data.armorBonus, false);
-            if (data.quadrants.starboard.shields.value > 0) addScore(data.quadrants.starboard.ac, shieldItem.name, shieldItem.data.armorBonus, false);
-            if (data.quadrants.aft.shields.value > 0) addScore(data.quadrants.aft.ac, shieldItem.name, shieldItem.data.armorBonus, false);
+            if (data.quadrants.forward.shields.value > 0) addScore(data.quadrants.forward.ac, shieldItem.name, shieldItemData.armorBonus, false);
+            if (data.quadrants.port.shields.value > 0) addScore(data.quadrants.port.ac, shieldItem.name, shieldItemData.armorBonus, false);
+            if (data.quadrants.starboard.shields.value > 0) addScore(data.quadrants.starboard.ac, shieldItem.name, shieldItemData.armorBonus, false);
+            if (data.quadrants.aft.shields.value > 0) addScore(data.quadrants.aft.ac, shieldItem.name, shieldItemData.armorBonus, false);
             
         }
         

@@ -10,7 +10,7 @@
             <div class="item-detail modifier-type">{{localize "SFRPG.ModifierTypeLabel"}}</div>
             <div class="item-detail modifier-effect-type">{{localize "SFRPG.ModifierEffectTypeHeaderLabel"}}</div>
             <div class="item-detail modifier-value-affected">{{localize "SFRPG.ModifierValueAffectedHeaderLabel"}}</div>
-            {{#if owner}}
+            {{#if isOwner}}
             <div class="item-controls">
                 <a class="item-control modifier-create" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}} title="Add Modifier">
                     <i class="fas fa-plus"></i> {{localize "SFRPG.AddLabel"}}
@@ -64,11 +64,15 @@
                         {{lookup ../config.weaponTypes modifier.valueAffected}}
                     {{else if (eq modifier.effectType "weapon-property-damage")}}
                         {{lookup ../config.weaponProperties modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "specific-speed")}}
+                        {{lookup ../../config.speeds modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "actor-resource")}}
+                        <h4>{{~modifier.valueAffected~}}</h4>
                     {{else}}
                     {{!-- Nothing --}}
                     {{/if}}
                 </div>
-                {{#if ../owner}}
+                {{#if ../isOwner}}
                 <div class="item-controls">
                     <a class="item-control modifier-toggle" data-tippy-content="Toggle Modifier">{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
                     <a class="item-control modifier-edit" data-tippy-content="Edit Modifier"><i class="fas fa-edit"></i></a>

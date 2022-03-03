@@ -6,14 +6,15 @@ import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "../modif
  * @param {Object} modifier The modifier being edited.
  * @param {Object} target    The actor or item that the modifier belongs to.
  * @param {Object} options  Any options that modify the rendering of the sheet.
- * @param {Object} owner    The actor that the target belongs to, if target is an item.
+ * @param {Object} owningActor    The actor that the target belongs to, if target is an item.
  */
 export default class SFRPGModifierApplication extends FormApplication {
-    constructor(modifier, target, options={}, owner = null) {
+    constructor(modifier, target, options={}, owningActor = null) {
         super(modifier, options);
 
         this.actor = target;
-        this.owner = owner;
+        this.owningActor = owningActor;
+        this._tooltips = null;
     }
 
     static get defaultOptions() {
@@ -46,12 +47,12 @@ export default class SFRPGModifierApplication extends FormApplication {
      */
     getData() {
         const data = {
-            owner: this.actor.owner,
+            isOwner: this.actor.isOwner,
             modifier: this.modifier,
             limited: this.actor.limited,
             options: this.options,
             editable: this.isEditable,
-            cssClass: this.actor.owner ? "editable": "locked",
+            cssClass: this.actor.isOwner ? "editable": "locked",
             config: CONFIG.SFRPG
         };
 
@@ -67,71 +68,119 @@ export default class SFRPGModifierApplication extends FormApplication {
 
         html.find('.modifier-effect-type select').change(event => {
             const current = $(event.currentTarget);
-            const target = $('.modifier-value-affected select');
+            const affectedValue = $('.modifier-value-affected select');
+            const modifierType = $('.modifier-modifier-type select');
             const effectType = current.val();
+            const oldValue = this.object.effectType;
+
+            if (oldValue === SFRPGEffectType.ACTOR_RESOURCE || effectType === SFRPGEffectType.ACTOR_RESOURCE) {
+                const modifierDialog = this;
+                modifierDialog.object.effectType = effectType;
+
+                affectedValue.prop('value', "");
+
+                this._updateModifierData(modifierDialog.object).then(() => {
+                    modifierDialog.render();
+                });
+                return;
+            }
 
             switch (effectType) {
                 case SFRPGEffectType.ABILITY_SKILLS:
                 case SFRPGEffectType.ABILITY_SCORE:
                 case SFRPGEffectType.ABILITY_CHECK:
-                    target.prop('disabled', false);
-                    target.find('option').remove();
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
                     for (const ability of Object.entries(CONFIG.SFRPG.abilities)) {
-                        target.append(`<option value="${ability[0]}">${ability[1]}</option>`);
+                        affectedValue.append(`<option value="${ability[0]}">${ability[1]}</option>`);
                     }
                     break;
                 case SFRPGEffectType.AC:
-                    target.prop('disabled', false);
-                    target.find('option').remove();
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
                     for (const armorClass of Object.entries(CONFIG.SFRPG.modifierArmorClassAffectedValues)) {
-                        target.append(`<option value="${armorClass[0]}">${armorClass[1]}</option>`)
+                        affectedValue.append(`<option value="${armorClass[0]}">${armorClass[1]}</option>`)
                     }
                     break;
                 case SFRPGEffectType.ACP:
-                    target.prop('disabled', false);
-                    target.find('option').remove();
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
                     for (const acp of Object.entries(CONFIG.SFRPG.acpEffectingArmorType)) {
-                        target.append(`<option value="${acp[0]}">${acp[1]}</option>`);
+                        affectedValue.append(`<option value="${acp[0]}">${acp[1]}</option>`);
                     }
                     break;
                 case SFRPGEffectType.SAVE:
-                    target.prop('disabled', false);
-                    target.find('option').remove();
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
 
-                    target.append(`<option value="highest">${game.i18n.localize("SFRPG.ModifierSaveHighest")}</option>`);
-                    target.append(`<option value="lowest">${game.i18n.localize("SFRPG.ModifierSaveLowest")}</option>`);
+                    affectedValue.append(`<option value="highest">${game.i18n.localize("SFRPG.ModifierSaveHighest")}</option>`);
+                    affectedValue.append(`<option value="lowest">${game.i18n.localize("SFRPG.ModifierSaveLowest")}</option>`);
                     for (const saves of Object.entries(CONFIG.SFRPG.saves)) {
-                        target.append(`<option value="${saves[0]}">${saves[1]}</option>`);
+                        affectedValue.append(`<option value="${saves[0]}">${saves[1]}</option>`);
                     }
                     break;
                 case SFRPGEffectType.SKILL:
                 case SFRPGEffectType.SKILL_RANKS:
-                    target.prop('disabled', false);
-                    target.find('option').remove();
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
                     for (const skills of Object.entries(CONFIG.SFRPG.skills)) {
-                        target.append(`<option value="${skills[0]}">${skills[1]}</option>`);
+                        affectedValue.append(`<option value="${skills[0]}">${skills[1]}</option>`);
                     }
+                    break;
+                case SFRPGEffectType.SPELL_SAVE_DC:
+                    affectedValue.prop('disabled', true);
+                    affectedValue.find('option').remove();
+                    affectedValue.append('<option value=""></option>');
+
+                    modifierType.prop('disabled', true);
+                    modifierType.prop('value', "constant");
                     break;
                 case SFRPGEffectType.WEAPON_ATTACKS:
                 case SFRPGEffectType.WEAPON_DAMAGE:
-                    target.prop('disabled', false);
-                    target.find('option').remove();
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
                     for (const weapons of Object.entries(CONFIG.SFRPG.weaponTypes)) {
-                        target.append(`<option value="${weapons[0]}">${weapons[1]}</option>`);
+                        affectedValue.append(`<option value="${weapons[0]}">${weapons[1]}</option>`);
                     }
                     break;
                 case SFRPGEffectType.WEAPON_PROPERTY_ATTACKS:
                 case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
-                    target.prop('disabled', false);
-                    target.find('option').remove();
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
                     for (const weapons of Object.entries(CONFIG.SFRPG.weaponProperties)) {
-                        target.append(`<option value="${weapons[0]}">${weapons[1]}</option>`);
+                        affectedValue.append(`<option value="${weapons[0]}">${weapons[1]}</option>`);
+                    }
+                    break;
+                case SFRPGEffectType.SPECIFIC_SPEED:
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
+
+                    for (const speeds of Object.entries(CONFIG.SFRPG.speeds)) {
+                        affectedValue.append(`<option value="${speeds[0]}">${speeds[1]}</option>`);
+                    }
+                    break;
+                case SFRPGEffectType.DAMAGE_REDUCTION:
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
+
+                    for (const [key, name] of Object.entries(CONFIG.SFRPG.damageReductionTypes)) {
+                        affectedValue.append(`<option value="${key}">${name}</option>`);
+                    }
+                    break;
+                case SFRPGEffectType.ENERGY_RESISTANCE:
+                    affectedValue.prop('disabled', false);
+                    affectedValue.find('option').remove();
+
+                    for (const [key, name] of Object.entries(CONFIG.SFRPG.energyResistanceTypes)) {
+                        affectedValue.append(`<option value="${key}">${name}</option>`);
                     }
                     break;
                 default:
-                    target.prop('disabled', true);
-                    target.find('option').remove();
-                    target.append('<option value=""></option>');
+                    affectedValue.prop('disabled', true);
+                    affectedValue.find('option').remove();
+                    affectedValue.append('<option value=""></option>');
+
+                    modifierType.prop('disabled', false);
                     break;
             }
         });
@@ -143,6 +192,7 @@ export default class SFRPGModifierApplication extends FormApplication {
 
         const effectType = this.element.find('.modifier-effect-type select').val();
         const valueAffectedElement = this.element.find('.modifier-value-affected select');
+        const modifierTypeElement = this.element.find('.modifier-modifier-type select');
         
         switch (effectType) {
             case SFRPGEffectType.ABILITY_SKILLS:
@@ -164,10 +214,19 @@ export default class SFRPGModifierApplication extends FormApplication {
             case SFRPGEffectType.SKILL_RANKS:
                 valueAffectedElement.prop('disabled', false);
                 break;
+            case SFRPGEffectType.SPELL_SAVE_DC:
+                modifierTypeElement.prop('disabled', true);
+                modifierTypeElement.prop('value', "constant");
+                break;
             case SFRPGEffectType.WEAPON_ATTACKS:
             case SFRPGEffectType.WEAPON_PROPERTY_ATTACKS:
             case SFRPGEffectType.WEAPON_DAMAGE:
             case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
+            case SFRPGEffectType.SPECIFIC_SPEED:
+            case SFRPGEffectType.DAMAGE_REDUCTION:
+            case SFRPGEffectType.ENERGY_RESISTANCE:
+                valueAffectedElement.prop('disabled', false);
+            case SFRPGEffectType.ACTOR_RESOURCE:
                 valueAffectedElement.prop('disabled', false);
                 break;
             default:
@@ -175,13 +234,28 @@ export default class SFRPGModifierApplication extends FormApplication {
                 break;
         }
 
-        tippy('[data-tippy-content]', {
-            allowHTML: true,
-            arrow: false,
-            placement: 'top-start',
-            duration: [500, null],
-            delay: [800, null]
-        });
+        if (this._tooltips === null) {
+            this._tooltips = tippy.delegate(`#${this.id}`, {
+                target: '[data-tippy-content]',
+                allowHTML: true,
+                arrow: false,
+                placement: 'top-start',
+                duration: [500, null],
+                delay: [800, null]
+            });
+        }
+    }
+
+    async close(...args) {
+        if (this._tooltips !== null) {
+            for (const tooltip of this._tooltips) {
+                tooltip.destroy();
+            }
+
+            this._tooltips = null;
+        }
+
+        return super.close(...args);
     }
 
     /**
@@ -191,14 +265,23 @@ export default class SFRPGModifierApplication extends FormApplication {
      * @param {Object} formData The data from the form
      */
     _updateObject(event, formData) {
+        return this._updateModifierData(formData);
+    }
+
+    async _updateModifierData(formData) {
         const modifiers = duplicate(this.actor.data.data.modifiers);
         const modifier = modifiers.find(mod => mod._id === this.modifier._id);
 
-        const roll = new Roll(formData['modifier'], this.owner?.data?.data || this.actor.data.data);
-        modifier.max = roll.evaluate({maximize: true}).total;
+        const formula = formData['modifier'];
+        if (formula) {
+            const roll = Roll.create(formula, this.owningActor?.data?.data || this.actor.data.data);
+            modifier.max = roll.evaluate({maximize: true}).total;
+        } else {
+            modifier.max = 0;
+        }
 
         mergeObject(modifier, formData);
         
-        this.actor.update({'data.modifiers': modifiers});
+        return this.actor.update({'data.modifiers': modifiers});
     }
 }

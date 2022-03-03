@@ -1,0 +1,9 @@
+            {{!-- Special Materials --}}
+            <div class="form-group stacked weapon-properties">
+                <label>{{ localize "SFRPG.Items.SpecialMaterials.Title" }}</label>
+                {{#each config.specialMaterials as |name prop|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.specialMaterials.{{prop}}" {{checked (lookup ../itemData.specialMaterials prop)}} /> {{ name }}
+                </label>
+                {{/each}}
+            </div>

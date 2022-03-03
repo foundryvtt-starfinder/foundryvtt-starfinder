@@ -4,9 +4,10 @@
             "character",
             "drone",
             "hazard",
-            "npc",
+            "npc2",
             "starship",
-            "vehicle"
+            "vehicle",
+            "npc"
         ],
         "templates": {
             "common": {
@@ -15,43 +16,37 @@
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     },
                     "dex": {
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     },
                     "con": {
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     },
                     "int": {
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     },
                     "wis": {
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     },
                     "cha": {
                         "value": 10,
                         "min": 3,
                         "misc": 0,
-                        "mod": 0,
-                        "base": 10
+                        "mod": 0
                     }
                 },
                 "attributes": {
@@ -121,11 +116,17 @@
                     },
                     "bab": 0,
                     "arms": 2,
-                    "space": "",
-                    "reach": "",
+                    "space": 5,
+                    "reach": 5,
                     "speed": {
-                        "value": "30 ft",
-                        "special": ""
+                        "land": { "base": 30 },
+                        "flying": { "base": 0, "baseManeuverability": 0 },
+                        "swimming": { "base": 0 },
+                        "burrowing": { "base": 0 },
+                        "climbing": { "base": 0 },
+                        "value": null,
+                        "special": null,
+                        "mainMovement": "land"
                     },
                     "keyability": ""
                 },
@@ -399,7 +400,10 @@
                         "value": 0,
                         "negatedBy": ""
                     },
-                    "sr": 0
+                    "sr": 0,
+                    "spellResistance": {
+                        "base": 0
+                    }
                 },
                 "currency": {
                     "credit": 0,
@@ -408,31 +412,60 @@
                 "spells": {
                     "spell0": {
                         "value": 0,
-                        "max": 0
+                        "max": 0,
+                        "perClass": {}
                     },
                     "spell1": {
                         "value": 0,
-                        "max": 0
+                        "max": 0,
+                        "perClass": {}
                     },
                     "spell2": {
                         "value": 0,
-                        "max": 0
+                        "max": 0,
+                        "perClass": {}
                     },
                     "spell3": {
                         "value": 0,
-                        "max": 0
+                        "max": 0,
+                        "perClass": {}
                     },
                     "spell4": {
                         "value": 0,
-                        "max": 0
+                        "max": 0,
+                        "perClass": {}
                     },
                     "spell5": {
                         "value": 0,
-                        "max": 0
+                        "max": 0,
+                        "perClass": {}
                     },
                     "spell6": {
                         "value": 0,
-                        "max": 0
+                        "max": 0,
+                        "perClass": {}
+                    }
+                }
+            },
+            "commonBase": {
+                "abilities": {
+                    "str": {
+                        "base": 10
+                    },
+                    "dex": {
+                        "base": 10
+                    },
+                    "con": {
+                        "base": 10
+                    },
+                    "int": {
+                        "base": 10
+                    },
+                    "wis": {
+                        "base": 10
+                    },
+                    "cha": {
+                        "base": 10
                     }
                 }
             },
@@ -451,6 +484,7 @@
         "character": {
             "templates": [
                 "common",
+                "commonBase",
                 "modifiers",
                 "conditions",
                 "counterClassesManagement"
@@ -506,6 +540,7 @@
         "drone": {
             "templates": [
                 "common",
+                "commonBase",
                 "modifiers",
                 "conditions",
                 "counterClassesManagement"
@@ -654,6 +689,16 @@
             }
         },
         "npc": {
+            "attributes": {
+                "abilityDC":
+                {
+                    "base": 0
+                },
+                "baseSpellDC":
+                {
+                    "base": 0
+                }
+            },
             "templates": [
                 "common",
                 "modifiers",
@@ -664,6 +709,75 @@
                 "type": "",
                 "environment": "",
                 "organization": "",
+                "cr": 1,
+                "xp": {
+                    "value": 10
+                },
+                "source": ""
+            }
+        },
+        "npc2": {
+            "templates": [
+                "common",
+                "modifiers",
+                "conditions",
+                "counterClassesManagement"
+            ],
+            "common": {
+                "abilities": {
+                    "str": {
+                        "base": 0
+                    },
+                    "dex": {
+                        "base": 0
+                    },
+                    "con": {
+                        "base": 0
+                    },
+                    "int": {
+                        "base": 0
+                    },
+                    "wis": {
+                        "base": 0
+                    },
+                    "cha": {
+                        "base": 0
+                    }
+                }
+            },
+            "attributes": {
+                "eac": {
+                    "base": 0
+                },
+                "kac": {
+                    "base": 0
+                },
+                "fort": {
+                    "base": 0
+                },
+                "reflex": {
+                    "base": 0
+                },
+                "will": {
+                    "base": 0
+                },
+                "abilityDC":
+                {
+                    "base": 0
+                },
+                "baseSpellDC":
+                {
+                    "base": 0
+                }
+            },
+            "details": {
+                "type": "",
+                "environment": "",
+                "organization": "",
+                "organizationSize": {
+                    "min": 1,
+                    "max": null
+                },
                 "cr": 1,
                 "xp": {
                     "value": 10
@@ -1044,17 +1158,21 @@
     "Item": {
         "types": [
             "archetypes",
-            "asi",
             "class",
             "race",
+            "theme",
 
+            "actorResource",
             "feat",
+            "spell",
+
+            "asi",
 
             "chassis",
             "mod",
 
-            "starshipAction",
             "starshipAblativeArmor",
+            "starshipAction",
             "starshipArmor",
             "starshipComputer",
             "starshipCrewQuarter",
@@ -1075,6 +1193,7 @@
             "vehicleAttack",
             "vehicleSystem",
 
+            "ammunition",
             "augmentation",
             "consumable",
             "container",
@@ -1084,9 +1203,7 @@
             "hybrid",
             "magic",
             "shield",
-            "spell",
             "technological",
-            "theme",            
             "upgrade",
             "weapon",
             "weaponAccessory"
@@ -1096,7 +1213,8 @@
                 "container": {
                     "contents": [],
                     "storage": [],
-                    "isOpen": true
+                    "isOpen": true,
+                    "includeContentsInWealthCalculation": 1
                 }
             },
             "itemDescription": {
@@ -1114,6 +1232,7 @@
                 "quantity": 1,
                 "bulk": "L",
                 "price": 0,
+                "quantityPerPack": 1,
                 "level": 1,
                 "attuned": false,
                 "equipped": false,
@@ -1173,9 +1292,12 @@
             },
             "action": {
                 "ability": null,
+                "actionTarget": "",
                 "actionType": null,
                 "attackBonus": 0,
                 "chatFlavor": "",
+                "rollNotes": "",
+                "damageNotes": "",
                 "critical": {
                     "parts": [],
                     "effect": ""
@@ -1192,6 +1314,7 @@
                 "descriptors": []
             },
             "itemUsage": {
+                "ammunitionType": "",
                 "capacity": {
                     "value": 0,
                     "max": 0
@@ -1209,13 +1332,16 @@
                 "costMultipliedBySize": false,
                 "pcu": null,
                 "isPowered": true
+            },
+            "specialMaterials": {
+                "specialMaterials": {}
             }
         },
         "asi": {
             "abilities": {}
         },
         "weapon": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container", "specialMaterials"],
             "attributes": {
                 "sturdy": true
             },
@@ -1241,7 +1367,7 @@
             }
         },
         "equipment": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container", "specialMaterials"],
             "attributes": {
                 "sturdy": true
             },
@@ -1355,7 +1481,64 @@
             "fort": "slow",
             "ref": "fast",
             "will": "slow",
-            "isCaster": false
+            "isCaster": false,
+            "spellsKnown": {
+                "1":  {"0": 4, "1": 2, "2": null, "3": null, "4": null, "5": null, "6": null},
+                "2":  {"0": 5, "1": 3, "2": null, "3": null, "4": null, "5": null, "6": null},
+                "3":  {"0": 6, "1": 4, "2": null, "3": null, "4": null, "5": null, "6": null},
+                "4":  {"0": 6, "1": 4, "2": 2,    "3": null, "4": null, "5": null, "6": null},
+                "5":  {"0": 6, "1": 4, "2": 3,    "3": null, "4": null, "5": null, "6": null},
+                "6":  {"0": 6, "1": 4, "2": 4,    "3": null, "4": null, "5": null, "6": null},
+                "7":  {"0": 6, "1": 5, "2": 4,    "3": 2,    "4": null, "5": null, "6": null},
+                "8":  {"0": 6, "1": 5, "2": 4,    "3": 3,    "4": null, "5": null, "6": null},
+                "9":  {"0": 6, "1": 5, "2": 4,    "3": 4,    "4": null, "5": null, "6": null},
+                "10": {"0": 6, "1": 5, "2": 4,    "3": 4,    "4": 2,    "5": null, "6": null},
+                "11": {"0": 6, "1": 6, "2": 5,    "3": 4,    "4": 3,    "5": null, "6": null},
+                "12": {"0": 6, "1": 6, "2": 5,    "3": 4,    "4": 4,    "5": null, "6": null},
+                "13": {"0": 6, "1": 6, "2": 5,    "3": 5,    "4": 4,    "5": 2,    "6": null},
+                "14": {"0": 6, "1": 6, "2": 6,    "3": 5,    "4": 4,    "5": 3,    "6": null},
+                "15": {"0": 6, "1": 6, "2": 6,    "3": 5,    "4": 4,    "5": 4,    "6": null},
+                "16": {"0": 6, "1": 6, "2": 6,    "3": 5,    "4": 5,    "5": 4,    "6": 2},
+                "17": {"0": 6, "1": 6, "2": 6,    "3": 6,    "4": 5,    "5": 4,    "6": 3},
+                "18": {"0": 6, "1": 6, "2": 6,    "3": 6,    "4": 5,    "5": 4,    "6": 4},
+                "19": {"0": 6, "1": 6, "2": 6,    "3": 6,    "4": 5,    "5": 5,    "6": 4},
+                "20": {"0": 6, "1": 6, "2": 6,    "3": 6,    "4": 6,    "5": 5,    "6": 5}
+            },
+            "spellsPerDay": {
+                "1":  {"1": 2, "2": null, "3": null, "4": null, "5": null, "6": null},
+                "2":  {"1": 2, "2": null, "3": null, "4": null, "5": null, "6": null},
+                "3":  {"1": 3, "2": null, "3": null, "4": null, "5": null, "6": null},
+                "4":  {"1": 3, "2": 2,    "3": null, "4": null, "5": null, "6": null},
+                "5":  {"1": 4, "2": 2,    "3": null, "4": null, "5": null, "6": null},
+                "6":  {"1": 4, "2": 3,    "3": null, "4": null, "5": null, "6": null},
+                "7":  {"1": 4, "2": 3,    "3": 2,    "4": null, "5": null, "6": null},
+                "8":  {"1": 4, "2": 4,    "3": 2,    "4": null, "5": null, "6": null},
+                "9":  {"1": 5, "2": 4,    "3": 3,    "4": null, "5": null, "6": null},
+                "10": {"1": 5, "2": 4,    "3": 3,    "4": 2,    "5": null, "6": null},
+                "11": {"1": 5, "2": 4,    "3": 4,    "4": 2,    "5": null, "6": null},
+                "12": {"1": 5, "2": 5,    "3": 4,    "4": 3,    "5": null, "6": null},
+                "13": {"1": 5, "2": 5,    "3": 4,    "4": 3,    "5": 2,    "6": null},
+                "14": {"1": 5, "2": 5,    "3": 4,    "4": 4,    "5": 2,    "6": null},
+                "15": {"1": 5, "2": 5,    "3": 5,    "4": 4,    "5": 3,    "6": null},
+                "16": {"1": 5, "2": 5,    "3": 5,    "4": 4,    "5": 3,    "6": 2},
+                "17": {"1": 5, "2": 5,    "3": 5,    "4": 4,    "5": 4,    "6": 2},
+                "18": {"1": 5, "2": 5,    "3": 5,    "4": 5,    "5": 4,    "6": 3},
+                "19": {"1": 5, "2": 5,    "3": 5,    "4": 5,    "5": 5,    "6": 4},
+                "20": {"1": 5, "2": 5,    "3": 5,    "4": 5,    "5": 5,    "6": 5}
+            },
+            "bonusSpellsPerDay": {
+                "0":  {"1": null, "2": null, "3": null, "4": null, "5": null, "6": null},
+                "1":  {"1": 1,    "2": null, "3": null, "4": null, "5": null, "6": null},
+                "2":  {"1": 1,    "2": 1,    "3": null, "4": null, "5": null, "6": null},
+                "3":  {"1": 1,    "2": 1,    "3": 1,    "4": null, "5": null, "6": null},
+                "4":  {"1": 1,    "2": 1,    "3": 1,    "4": 1,    "5": null, "6": null},
+                "5":  {"1": 2,    "2": 1,    "3": 1,    "4": 1,    "5": 1,    "6": null},
+                "6":  {"1": 2,    "2": 2,    "3": 1,    "4": 1,    "5": 1,    "6": 1},
+                "7":  {"1": 2,    "2": 2,    "3": 2,    "4": 1,    "5": 1,    "6": 1},
+                "8":  {"1": 2,    "2": 2,    "3": 2,    "4": 2,    "5": 1,    "6": 1},
+                "9":  {"1": 3,    "2": 2,    "3": 2,    "4": 2,    "5": 2,    "6": 1},
+                "10": {"1": 3,    "2": 3,    "3": 2,    "4": 2,    "5": 2,    "6": 2}
+            }
         },
         "spell": {
             "templates": ["itemDescription", "activatedEffect", "action", "modifiers"],
@@ -1376,9 +1559,11 @@
             },
             "allowedClasses": {
                 "myst": false,
+                "precog": false,
                 "tech": false,
                 "wysh": false
-            }
+            },
+            "isVariableLevel": false
         },
         "feat": {
             "templates": ["itemDescription", "activatedEffect", "action", "modifiers"],
@@ -1416,28 +1601,39 @@
             }
         },
         "technological": {
-            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers"],
+            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
             "hands": 0
         },
         "hybrid": {
-            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers"],
-            "hands": 0
+            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
+            "hands": 0,
+            "limitedWear": false
         },
         "magic": {
-            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers"],
-            "hands": 0
+            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
+            "hands": 0,
+            "limitedWear": false
         },
         "fusion": {
-            "templates": ["itemDescription", "physicalItem", "modifiers"],
+            "templates": ["itemDescription", "physicalItem", "modifiers", "container"],
             "level": 1
         },
         "upgrade": {
-            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers"],
+            "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
             "slots": 1,
             "armorType": "any"
         },
+        "ammunition": {
+            "templates": ["itemDescription", "physicalItem", "specialMaterials"],
+            "ammunitionType": "",
+            "useCapacity": false,
+            "capacity": {
+                "max": 0,
+                "value": 0
+            }
+        },
         "augmentation": {
-            "templates": ["itemDescription", "physicalItem", "modifiers"],
+            "templates": ["itemDescription", "physicalItem", "modifiers", "container"],
             "system": "",
             "type": "cybernetic"
         },
@@ -1462,7 +1658,7 @@
             "turnDistancePenalty": 0
         },
         "starshipArmor": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "armorBonus": 0,
             "targetLockPenalty": 0,
             "turnDistancePenalty": 0
@@ -1476,7 +1672,7 @@
             "templates": ["starshipComponent", "itemDescription", "modifiers"]
         },
         "starshipDefensiveCountermeasure": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "targetLockBonus": 0
         },
         "starshipDriftEngine": {
@@ -1544,7 +1740,7 @@
             "templates": ["starshipComponent", "itemDescription", "modifiers"]
         },
         "starshipPowerCore": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "supportedSizes": []
         },
         "starshipReinforcedBulkhead": {
@@ -1555,7 +1751,7 @@
             "templates": ["starshipComponent", "itemDescription", "modifiers"]
         },
         "starshipSensor": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "modifier": 0,
             "range": ""
         },
@@ -1569,7 +1765,7 @@
             "targetLockBonus": 0
         },
         "starshipThruster": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
             "supportedSize": "",
             "speed": 0,
             "pilotingModifier": 0,
@@ -1577,7 +1773,8 @@
             "isEnabled": true
         },
         "starshipWeapon": {
-            "templates": ["starshipComponent", "itemDescription", "modifiers"],
+            "templates": ["starshipComponent", "itemDescription", "modifiers", "specialMaterials"],
+            "actionTarget": "",
             "range": "short",
             "class": "light",
             "weaponType": "direct",
@@ -1601,8 +1798,14 @@
             "levels": 1,
             "size": "",
             "speed": {
-                "value": "30",
-                "special": ""
+                "land": { "base": 30 },
+                "flying": { "base": 0 },
+                "swimming": { "base": 0 },
+                "burrowing": { "base": 0 },
+                "climbing": { "base": 0 },
+                "value": null,
+                "special": null,
+                "mainMovement": "land"
             },
             "eac": 10,
             "kac": 10,
@@ -1648,7 +1851,7 @@
             "isActive" : true
         },
         "mod": {
-            "templates": ["itemDescription", "modifiers"],
+            "templates": ["itemDescription", "activatedEffect", "action", "modifiers"],
             "maxInstalls": 1,
             "isFree": false,
             "additionalMovement": "",
@@ -1660,10 +1863,11 @@
             "weaponProficiency": "",
             "shieldProficiency": "",
             "additionalSenses": "",
-            "bonusSkill": ""
+            "bonusSkill": "",
+            "spellResistance": 0
         },
         "shield": {
-            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container"],
+            "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "itemUsage", "modifiers", "container", "specialMaterials"],
             "attributes": {
                 "sturdy": true
             },
@@ -1706,6 +1910,22 @@
         "weaponAccessory": {
             "templates": ["itemDescription", "physicalItem", "itemUsage", "modifiers", "container"],
             "weaponType": "any"
+        },
+ 
+        "actorResource": {
+            "templates": ["itemDescription", "modifiers"],
+            "type": null,
+            "subType": null,
+            "base": null,
+            "range": {"min": null, "max": null, "mode": "post"},
+            "stage": "early",
+            "enabled": true,
+            "combatTracker": {
+                "displayAbsoluteValue": false,
+                "show": false,
+                "showOwnerAndGMOnly": false,
+                "visualization": []
+            }
         }
     }
 }

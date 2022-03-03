@@ -1,0 +1,27 @@
+<div class="sfrpg dice-roll"
+     data-sfrpg-dice-total="{{total}}"
+     {{#each htmlData}}
+     data-sfrpg-{{this.name}}="{{this.value}}"
+     {{/each}}>
+    {{#if flavor}}
+    <div class="dice-flavor">{{flavor}}</div>
+    {{/if}}
+    {{#if rollNotes}}
+    <div style="text-align: left;">{{rollNotes}}</div>
+    {{/if}}
+    <div class="dice-result">
+        <div class="dice-formula">{{formula}}</div>
+        <div class="dice-tooltip">
+            <div class="dice-formula-breakdown">
+                {{{breakdown}}}
+            </div>
+            {{{tooltip}}}
+        </div>
+        <h4 class="dice-total">{{total}}</h4>
+    </div>
+    <footer class="dice-footer">
+        {{#each tags as |tag|}}
+        <span class="{{tag.tag}}"> {{tag.text}}</span>
+        {{/each}}
+    </footer>
+</div>

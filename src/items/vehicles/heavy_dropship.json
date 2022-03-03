@@ -1,50 +1,16 @@
 {
+  "_id": "Z8qWErkHaWtPIo63",
   "name": "Heavy Dropship",
   "type": "vehicle",
   "data": {
-    "conditions": {},
-    "details": {
-      "level": 18,
-      "price": 1210000,
-      "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">A heavy dropship can carry an entire platoon as well as the platoon&rsquo;s support vehicles from an orbiting capital ship to a planet&rsquo;s surface (and back) in a matter of minutes.</span></p>",
-        "chat": "",
-        "unidentified": ""
-      },
-      "source": "AP #24 pg. 52"
-    },
-    "crew": {
-      "useNPCCrew": false,
-      "pilot": {
-        "limit": 1,
-        "actorIds": []
-      },
-      "complement": {
-        "limit": 5,
-        "actorIds": []
-      },
-      "passenger": {
-        "limit": 50,
-        "actorIds": []
-      }
-    },
-    "hangarBay": {
-      "limit": 3,
-      "actorIds": []
-    },
     "attributes": {
-      "size": "colossal",
       "type": "air",
+      "controlSkill": "pil",
+      "cover": "total",
       "dimensions": {
-        "width": "40",
+        "height": "30",
         "length": "80",
-        "height": "30"
-      },
-      "speed": {
-        "drive": "40 ft (fly and hover)",
-        "full": "850 ft (fly and hover)",
-        "mph": "95 mph (fly and hover)",
-        "type": ""
+        "width": "40"
       },
       "eac": {
         "value": 32
@@ -52,567 +18,550 @@
       "expansionBays": {
         "value": 3
       },
+      "hardness": 20,
+      "hp": {
+        "max": 380,
+        "threshold": 190,
+        "value": 380
+      },
       "kac": {
         "value": 34
       },
-      "controlSkill": "pil",
-      "cover": "total",
-      "hp": {
-        "value": 380,
-        "max": 380,
-        "threshold": 190
-      },
-      "hardness": 20,
       "modifiers": {
-        "piloting": "-4",
-        "survival": 0,
         "athletics": 0,
-        "attackStopped": "0",
+        "attackFullSpeed": "-5",
         "attackMoving": "-3",
-        "attackFullSpeed": "-5"
+        "attackStopped": "0",
+        "piloting": "-4",
+        "survival": 0
       },
-      "systems": [],
-      "special": []
+      "size": "colossal",
+      "special": [],
+      "speed": {
+        "type": "",
+        "drive": "40 ft (fly and hover)",
+        "full": "850 ft (fly and hover)",
+        "mph": "95 mph (fly and hover)"
+      },
+      "systems": []
+    },
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 5
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": 50
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">A heavy dropship can carry an entire platoon as well as the platoon&rsquo;s support vehicles from an orbiting capital ship to a planet&rsquo;s surface (and back) in a matter of minutes.</span></p>"
+      },
+      "level": 18,
+      "price": 1210000,
+      "source": "AP #24 pg. 52"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 3
     }
   },
+  "effects": [],
   "flags": {},
-  "token": {
-    "flags": {},
-    "name": "Battle Chariot",
-    "displayName": 0,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": null,
-    "width": 1,
-    "height": 1,
-    "scale": 1,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "Z8qWErkHaWtPIo63",
-    "actorLink": false,
-    "disposition": -1,
-    "displayBars": 0,
-    "bar1": {},
-    "bar2": {},
-    "randomImg": false
-  },
+  "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "IFQG4V1jH9iw8fZK",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "2*(23d10)",
+              "operator": "",
+              "types": {
+                "bludgeoning": true
+              }
+            }
+          ]
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>"
         },
-        "source": "",
-        "type": "",
         "modifiers": [],
-        "damage": {
-          "parts": [
-            [
-              "2*(23d10)",
-              "bludgeoning"
-            ]
-          ]
-        },
         "save": {
           "type": "reflex",
           "dc": "17",
           "descriptor": "negate"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 100000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 100000
     },
     {
       "_id": "ZNQw4yfixdMSttws",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "23d10",
+              "operator": "",
+              "types": {
+                "bludgeoning": true
+              }
+            }
+          ]
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>"
         },
-        "source": "",
-        "type": "",
         "modifiers": [],
-        "damage": {
-          "parts": [
-            [
-              "23d10",
-              "bludgeoning"
-            ]
-          ]
-        },
         "save": {
           "type": "reflex",
           "dc": "17",
           "descriptor": "half"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 0,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 0
     },
     {
       "_id": "Vaswyqa52IbJrnA7",
       "name": "Enhanced sensors (darkvision 5 miles)",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>"
         },
-        "source": "",
-        "type": "",
+        "isActive": false,
         "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
+          "piloting": "0",
+          "usedAsPilot": false
         },
         "senses": {
-          "usedForSenses": true,
-          "senses": "darkvision 5 miles"
+          "senses": "darkvision 5 miles",
+          "usedForSenses": true
         },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 500000,
+      "effects": [],
       "flags": {},
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
-      "effects": []
+      "sort": 500000
     },
     {
       "_id": "haNvVsM0YaY4KuNK",
       "name": "Microthrusters (fly)",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Small thrusters stud this vehicle&rsquo;s hull, enabling it to maneuver in space using the listed speed type.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>Small thrusters stud this vehicle&rsquo;s hull, enabling it to maneuver in space using the listed speed type.</p>"
         },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 700000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 700000
     },
     {
       "_id": "Csv3jfjhVIt8KCt9",
       "name": "Orbital Boosters",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Powerful thrusters allow this vehicle to achieve the velocities necessary to reach orbit from a planet&rsquo;s surface. Activating these boosters during normal atmospheric flight is extremely dangerous, and safety measures prevent the boosters from firing unless the vehicle is following standard orbital launch protocols. Once in space, orbital boosters are impractical for maneuvering a vehicle.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>Powerful thrusters allow this vehicle to achieve the velocities necessary to reach orbit from a planet&rsquo;s surface. Activating these boosters during normal atmospheric flight is extremely dangerous, and safety measures prevent the boosters from firing unless the vehicle is following standard orbital launch protocols. Once in space, orbital boosters are impractical for maneuvering a vehicle.</p>"
         },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": true,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 800000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 800000
     },
     {
       "_id": "PjFgc67VxcNPtfli",
       "name": "Autopilot",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>"
         },
-        "source": "CRB pg. 280",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": true,
-          "piloting": "31"
-        },
-        "canBeActivated": true,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": "31",
+          "usedAsPilot": true
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": "CRB pg. 280"
       },
-      "sort": 1200000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 1200000
     },
     {
       "_id": "kH9ERCRbpxbBUx1Q",
       "name": "Hangar Bay (Ex)",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">A heavy dropship&rsquo;s hangar bay provides a place for one Gargantuan or two Huge or smaller vehicles to dock.</span></p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">A heavy dropship&rsquo;s hangar bay provides a place for one Gargantuan or two Huge or smaller vehicles to dock.</span></p>"
         },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 1300000,
-      "flags": {},
       "effects": [],
-      "img": "icons/svg/mystery-man.svg"
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1300000
     },
     {
       "_id": "j8RNxNJSZB8i7dry",
       "name": "System-wide comm unit",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>\n<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">Comm units that function at system-wide and unlimited ranges aren&rsquo;t as portable; they include built-in generators that provide the necessary amount of power.&nbsp;</span></p>\n<p>&nbsp;</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>\n<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">Comm units that function at system-wide and unlimited ranges aren&rsquo;t as portable; they include built-in generators that provide the necessary amount of power.&nbsp;</span></p>\n<p>&nbsp;</p>"
         },
-        "source": "CRB pg. 218",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": true,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": "0",
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": "CRB pg. 218"
       },
-      "sort": 700000,
+      "effects": [],
       "flags": {},
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
-      "effects": []
+      "sort": 700000
     },
     {
       "_id": "w4slB4UfR2WIrzTc",
       "name": "Vacuum Shields",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Life support systems and shielding protect this vehicle&rsquo;s occupants from the harmful effects of space for a number of hours equal to the vehicle&rsquo;s level.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>Life support systems and shielding protect this vehicle&rsquo;s occupants from the harmful effects of space for a number of hours equal to the vehicle&rsquo;s level.</p>"
         },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 1400000,
-      "flags": {},
       "effects": [],
-      "img": "icons/svg/mystery-man.svg"
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 1400000
     },
     {
       "_id": "WT9Cpd9Px5ZHy2hd",
       "name": "Reaction cannon, elite",
       "type": "weapon",
+      "augmentation": [
+        false,
+        false
+      ],
+      "consumable": [
+        false,
+        false
+      ],
+      "container": [
+        false,
+        false
+      ],
       "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>An ancient yet still popular vesk weapon, the reaction cannon uses advanced materials and technology to redirect the recoil of a projectile back into the projectile itself, making it an extremely damaging heavy weapon.</p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 178",
         "type": "",
-        "quantity": 1,
-        "bulk": "3",
-        "price": 244000,
-        "level": 17,
-        "attuned": false,
-        "equipped": true,
-        "equippable": true,
-        "identified": true,
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
         "attributes": {
-          "sturdy": true,
+          "ac": {
+            "value": "5"
+          },
           "customBuilt": false,
-          "size": "medium",
           "dex": {
             "mod": ""
-          },
-          "hp": {
-            "value": 96,
-            "max": "96"
           },
           "hardness": {
             "value": "39"
           },
-          "ac": {
-            "value": "5"
-          }
+          "hp": {
+            "max": "96",
+            "value": 96
+          },
+          "size": "medium",
+          "sturdy": true
         },
-        "activation": {
-          "type": "none",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": "none",
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": 100,
-          "units": "ft",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": null,
-          "max": null,
-          "per": ""
-        },
-        "isActive": null,
-        "ability": "dex",
-        "actionType": "rwak",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [],
-          "effect": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "8d10",
-              "piercing"
-            ]
-          ]
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": "",
-          "descriptor": "negate"
-        },
-        "descriptors": [],
+        "attuned": false,
+        "bulk": "3",
         "capacity": {
-          "value": 6,
-          "max": 6
+          "max": 6,
+          "value": 6
         },
-        "usage": {
-          "value": 1,
-          "per": "shot"
-        },
-        "modifiers": [],
+        "chatFlavor": "",
         "container": {
           "contents": [],
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
-              "subtype": "fusion",
-              "amount": 17,
               "acceptsType": [
                 "fusion"
               ],
               "affectsEncumbrance": true,
+              "amount": 17,
+              "subtype": "fusion",
               "weightProperty": "level"
             },
             {
               "type": "slot",
-              "subtype": "",
-              "amount": 1,
               "acceptsType": [
                 "goods"
               ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "",
               "weightMultiplier": 1,
-              "weightProperty": "",
-              "affectsEncumbrance": true
+              "weightProperty": ""
             }
-          ],
-          "isOpen": true
+          ]
         },
-        "weaponType": "heavy",
-        "weaponCategory": "projectile",
-        "special": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "8d10",
+              "operator": "",
+              "types": {
+                "piercing": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>An ancient yet still popular vesk weapon, the reaction cannon uses advanced materials and technology to redirect the recoil of a projectile back into the projectile itself, making it an extremely damaging heavy weapon.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equippable": true,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 17,
+        "modifiers": [],
+        "price": 244000,
+        "proficient": true,
         "properties": {
-          "one": false,
-          "two": true,
+          "aeon": false,
           "amm": false,
           "analog": false,
+          "antibiological": false,
           "archaic": false,
+          "aurora": false,
           "automatic": false,
           "blast": false,
           "block": false,
           "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": false,
-          "living": false,
-          "mind-affecting": false,
-          "nonlethal": false,
-          "operative": false,
-          "penetrating": true,
-          "powered": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "thrown": false,
-          "trip": false,
-          "unwieldy": false,
-          "aeon": false,
-          "antibiological": false,
-          "aurora": false,
           "breach": false,
           "breakdown": false,
+          "bright": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
           "deflect": false,
+          "disarm": false,
           "double": false,
           "drainCharge": false,
           "echo": false,
+          "entangle": false,
+          "explode": false,
           "extinguish": false,
           "feint": false,
           "fiery": false,
@@ -626,114 +575,107 @@
           "guided": false,
           "harrying": false,
           "holyWater": false,
+          "hybrid": false,
           "ignite": false,
           "indirect": false,
+          "injection": false,
           "integrated": false,
+          "line": false,
+          "living": false,
           "lockdown": false,
+          "mind-affecting": false,
           "mine": false,
           "mire": false,
           "modal": false,
           "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": true,
           "polarize": false,
           "polymorphic": false,
+          "powered": false,
           "professional": false,
           "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
           "recall": false,
+          "regrowth": false,
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
           "sunder": false,
           "swarm": false,
           "tail": false,
           "teleportive": false,
           "thought": false,
           "throttle": false,
-          "underwater": false,
-          "variantBoost": false,
-          "wideLine": false,
-          "hybrid": false,
-          "regrowth": false,
+          "thrown": false,
+          "trip": false,
+          "two": true,
           "unbalancing": false,
-          "shatter": false
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
         },
-        "proficient": true,
-        "abilityMods": {
-          "parts": []
-        }
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 100
+        },
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "CRB pg. 178",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 1
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "projectile",
+        "weaponType": "heavy"
       },
-      "sort": 100000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/advanced_reaction_cannon.jpg",
       "effects": [],
-      "storage": {
-        "type": [
-          "slot",
-          "slot"
-        ],
-        "subtype": [
-          "fusion",
-          ""
-        ],
-        "amount": [
-          "17",
-          "1"
-        ],
-        "weightProperty": [
-          "level",
-          ""
-        ],
-        "affectsEncumbrance": [
-          true,
-          true
-        ]
-      },
-      "weapon": [
-        false,
-        false
-      ],
       "equipment": [
         false,
         false
       ],
-      "consumable": [
-        false,
+      "flags": {},
+      "fusion": [
+        true,
         false
       ],
       "goods": [
         false,
         true
       ],
-      "container": [
-        false,
-        false
-      ],
       "hybrid": [
         false,
         false
       ],
+      "img": "systems/sfrpg/icons/equipment/weapons/advanced_reaction_cannon.jpg",
       "magic": [
-        false,
-        false
-      ],
-      "technological": [
-        false,
-        false
-      ],
-      "fusion": [
-        true,
-        false
-      ],
-      "upgrade": [
-        false,
-        false
-      ],
-      "spell": [
-        false,
-        false
-      ],
-      "augmentation": [
         false,
         false
       ],
@@ -741,7 +683,38 @@
         false,
         false
       ],
-      "weaponAccessory": [
+      "sort": 100000,
+      "spell": [
+        false,
+        false
+      ],
+      "storage": {
+        "type": [
+          "slot",
+          "slot"
+        ],
+        "affectsEncumbrance": [
+          true,
+          true
+        ],
+        "amount": [
+          "17",
+          "1"
+        ],
+        "subtype": [
+          "fusion",
+          ""
+        ],
+        "weightProperty": [
+          "level",
+          ""
+        ]
+      },
+      "technological": [
+        false,
+        false
+      ],
+      "upgrade": [
         false,
         false
       ],
@@ -750,6 +723,14 @@
         false
       ],
       "vehicleSystem": [
+        false,
+        false
+      ],
+      "weapon": [
+        false,
+        false
+      ],
+      "weaponAccessory": [
         false,
         false
       ]
@@ -758,178 +739,149 @@
       "_id": "Km3Qh690IdDatYAn",
       "name": "Artillery laser, parallax",
       "type": "weapon",
+      "augmentation": [
+        false,
+        false
+      ],
+      "consumable": [
+        false,
+        false
+      ],
+      "container": [
+        false,
+        false
+      ],
       "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Artillery lasers are heavy weapons designed to be effective against hardened targets such as vehicles and enemy bunkers.</span></p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 177",
         "type": "",
-        "quantity": 1,
-        "bulk": "3",
-        "price": 248000,
-        "level": 17,
-        "attuned": false,
-        "equipped": true,
-        "equippable": true,
-        "identified": true,
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
         "attributes": {
-          "sturdy": true,
+          "ac": {
+            "value": "5"
+          },
           "customBuilt": false,
-          "size": "medium",
           "dex": {
             "mod": ""
-          },
-          "hp": {
-            "value": 96,
-            "max": "96"
           },
           "hardness": {
             "value": "39"
           },
-          "ac": {
-            "value": "5"
-          }
+          "hp": {
+            "max": "96",
+            "value": 96
+          },
+          "size": "medium",
+          "sturdy": true
         },
-        "activation": {
-          "type": "none",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": "none",
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": 150,
-          "units": "ft",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": null,
-          "max": null,
-          "per": ""
-        },
-        "isActive": null,
-        "ability": "dex",
-        "actionType": "rwak",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "parts": [],
-          "effect": "Burn 4d6"
-        },
-        "damage": {
-          "parts": [
-            [
-              "7d8",
-              "fire"
-            ]
-          ]
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": "",
-          "descriptor": "negate"
-        },
-        "descriptors": [],
+        "attuned": false,
+        "bulk": "3",
         "capacity": {
-          "value": 100,
-          "max": 100
+          "max": 100,
+          "value": 100
         },
-        "usage": {
-          "value": 5,
-          "per": "shot"
-        },
-        "modifiers": [],
+        "chatFlavor": "",
         "container": {
           "contents": [],
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
-              "subtype": "fusion",
-              "amount": 17,
               "acceptsType": [
                 "fusion"
               ],
               "affectsEncumbrance": true,
+              "amount": 17,
+              "subtype": "fusion",
               "weightProperty": "level"
             },
             {
               "type": "slot",
-              "subtype": "",
-              "amount": 1,
               "acceptsType": [
                 "goods"
               ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "",
               "weightMultiplier": 1,
-              "weightProperty": "",
-              "affectsEncumbrance": true
+              "weightProperty": ""
             }
-          ],
-          "isOpen": true
+          ]
         },
-        "weaponType": "heavy",
-        "weaponCategory": "laser",
-        "special": "",
+        "critical": {
+          "effect": "Burn 4d6",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "7d8",
+              "operator": "",
+              "types": {
+                "fire": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Artillery lasers are heavy weapons designed to be effective against hardened targets such as vehicles and enemy bunkers.</span></p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equippable": true,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 17,
+        "modifiers": [],
+        "price": 248000,
+        "proficient": true,
         "properties": {
-          "one": false,
-          "two": true,
+          "aeon": false,
           "amm": false,
           "analog": false,
+          "antibiological": false,
           "archaic": false,
+          "aurora": false,
           "automatic": false,
           "blast": false,
           "block": false,
           "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": false,
-          "nonlethal": false,
-          "operative": false,
-          "penetrating": true,
-          "powered": false,
-          "qreload": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "thrown": false,
-          "trip": false,
-          "unwieldy": false,
-          "radioactive": false,
-          "subtle": false,
-          "mind-affecting": false,
-          "living": false,
-          "aeon": false,
-          "antibiological": false,
-          "aurora": false,
           "breach": false,
           "breakdown": false,
+          "bright": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
           "deflect": false,
+          "disarm": false,
           "double": false,
           "drainCharge": false,
           "echo": false,
+          "entangle": false,
+          "explode": false,
           "extinguish": false,
           "feint": false,
           "fiery": false,
@@ -946,111 +898,104 @@
           "hybrid": false,
           "ignite": false,
           "indirect": false,
+          "injection": false,
           "integrated": false,
+          "line": false,
+          "living": false,
           "lockdown": false,
+          "mind-affecting": false,
           "mine": false,
           "mire": false,
           "modal": false,
           "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": true,
           "polarize": false,
           "polymorphic": false,
+          "powered": false,
           "professional": false,
           "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
           "recall": false,
           "regrowth": false,
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
           "sunder": false,
           "swarm": false,
           "tail": false,
           "teleportive": false,
           "thought": false,
           "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": true,
           "unbalancing": false,
           "underwater": false,
+          "unwieldy": false,
           "variantBoost": false,
-          "wideLine": false,
-          "shatter": false
+          "wideLine": false
         },
-        "proficient": true,
-        "abilityMods": {
-          "parts": []
-        }
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 150
+        },
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "CRB pg. 177",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 5
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "laser",
+        "weaponType": "heavy"
       },
-      "sort": 200000,
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/artillery-laser-azimuth.jpg",
       "effects": [],
-      "storage": {
-        "type": [
-          "slot",
-          "slot"
-        ],
-        "subtype": [
-          "fusion",
-          ""
-        ],
-        "amount": [
-          "17",
-          "1"
-        ],
-        "weightProperty": [
-          "level",
-          ""
-        ],
-        "affectsEncumbrance": [
-          true,
-          true
-        ]
-      },
-      "weapon": [
-        false,
-        false
-      ],
       "equipment": [
         false,
         false
       ],
-      "consumable": [
-        false,
+      "flags": {},
+      "fusion": [
+        true,
         false
       ],
       "goods": [
         false,
         true
       ],
-      "container": [
-        false,
-        false
-      ],
       "hybrid": [
         false,
         false
       ],
+      "img": "systems/sfrpg/icons/equipment/weapons/artillery-laser-azimuth.jpg",
       "magic": [
-        false,
-        false
-      ],
-      "technological": [
-        false,
-        false
-      ],
-      "fusion": [
-        true,
-        false
-      ],
-      "upgrade": [
-        false,
-        false
-      ],
-      "spell": [
-        false,
-        false
-      ],
-      "augmentation": [
         false,
         false
       ],
@@ -1058,7 +1003,38 @@
         false,
         false
       ],
-      "weaponAccessory": [
+      "sort": 200000,
+      "spell": [
+        false,
+        false
+      ],
+      "storage": {
+        "type": [
+          "slot",
+          "slot"
+        ],
+        "affectsEncumbrance": [
+          true,
+          true
+        ],
+        "amount": [
+          "17",
+          "1"
+        ],
+        "subtype": [
+          "fusion",
+          ""
+        ],
+        "weightProperty": [
+          "level",
+          ""
+        ]
+      },
+      "technological": [
+        false,
+        false
+      ],
+      "upgrade": [
         false,
         false
       ],
@@ -1069,9 +1045,46 @@
       "vehicleSystem": [
         false,
         false
+      ],
+      "weapon": [
+        false,
+        false
+      ],
+      "weaponAccessory": [
+        false,
+        false
       ]
     }
   ],
-  "effects": [],
-  "_id": "Z8qWErkHaWtPIo63"
+  "token": {
+    "name": "Heavy Dropship",
+    "actorId": "Z8qWErkHaWtPIo63",
+    "actorLink": false,
+    "bar1": {},
+    "bar2": {},
+    "brightLight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "dimSight": 0,
+    "displayBars": 0,
+    "displayName": 0,
+    "disposition": -1,
+    "flags": {},
+    "height": 1,
+    "img": "icons/svg/mystery-man.svg",
+    "lightAlpha": 1,
+    "lightAngle": 360,
+    "lightAnimation": {
+      "intensity": 5,
+      "speed": 5
+    },
+    "lockRotation": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sightAngle": 360,
+    "tint": null,
+    "vision": false,
+    "width": 1
+  }
 }

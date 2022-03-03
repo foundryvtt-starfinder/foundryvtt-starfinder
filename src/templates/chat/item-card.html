@@ -1,4 +1,4 @@
-<div class="sfrpg chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
+<div class="sfrpg chat-card item-card" data-actor-id="{{actor.id}}" data-item-id="{{item._id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
     <header class="card-header flexrow">
         <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
         <h3 class="item-name">{{item.name}}</h3>
@@ -17,14 +17,14 @@
 
     <div class="card-buttons">
         {{#if hasAttack}}<button data-action="attack">{{ localize "SFRPG.Attack" }}</button>{{/if}}
-        {{#if hasDamage}}<button data-action="damage">{{ localize "SFRPG.Damage" }}</button>{{/if}}
-        {{!-- {{#if isVersatile}}<button data-action="versatile">{{ localize "SFRPG.Versatile" }}</button>{{/if}} --}}
-        {{#if hasSave}}<button data-action="save" data-type="{{data.save.type}}" disabled>{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
+        {{#if hasDamage}}<button data-action="damage">{{ localize "SFRPG.Damage.Title" }}</button>{{/if}}
+        {{#if hasOtherFormula}}<button data-action="formula">{{ localize "SFRPG.Items.Action.OtherFormula" }}</button>{{/if}}
+        {{#if hasSave}}<button data-action="save" data-type="{{data.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">
         {{#each data.properties}}
-        <span>{{this.name}}</span>
+        <span {{#if this.tooltip}}data-tippy-content="{{this.tooltip}}{{/if}}">{{this.name}}</span>
         {{/each}}
     </footer>
 </div>

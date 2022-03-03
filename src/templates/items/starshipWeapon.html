@@ -16,13 +16,13 @@
 
             <ul class="summary">
                 <li>
-                    {{lookup config.starshipWeaponTypes data.weaponType }}
+                    {{lookup config.starshipWeaponTypes itemData.weaponType }}
                 </li>
                 <li>
-                    {{lookup config.starshipWeaponClass data.class }}
+                    {{lookup config.starshipWeaponClass itemData.class }}
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ "SFRPG.Items.ShipWeapon.Source" }}" />
+                    <input type="text" name="data.source" value="{{itemData.source}}" placeholder="{{ "SFRPG.Items.ShipWeapon.Source" }}" />
                 </li>
             </ul>
         </div>
@@ -46,13 +46,28 @@
             {{!-- Common component data --}}
             {{> "systems/sfrpg/templates/items/parts/starship-component.html" this}}
 
+            {{!-- Special Materials Template --}}
+            {{> "systems/sfrpg/templates/items/parts/item-special-materials.html"}}
+
             <h4 class="section-header">Weapon Attack</h4>
+
+            {{!-- Action Target --}}
+            <div class="form-group select" {{createTippy title="SFRPG.Items.Action.ActionTarget.Title" subtitle="SFRPG.Items.Action.ActionTarget.Tooltip"}}>
+                <label>{{ localize "SFRPG.Items.Action.ActionTarget.Title" }}</label>
+                <select name="data.actionTarget">
+                    {{#select itemData.actionTarget}}
+                    {{#each config.actionTargetsStarship as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
 
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.ShipWeapon.Range" }}</label>
                 <div class="form-fields">
                     <select name="data.range">
-                        {{#select data.range}}
+                        {{#select itemData.range}}
                         {{#each config.starshipWeaponRanges as |range r|}}
                         <option value="{{r}}">{{range}}</option>
                         {{/each}}
@@ -64,7 +79,7 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.ShipWeapon.AttackBonus" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.attackBonus" value="{{data.attackBonus}}" />
+                    <input type="text" name="data.attackBonus" value="{{itemData.attackBonus}}" />
                 </div>
             </div>
 
@@ -74,9 +89,9 @@
                 <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
             </h4>
             <ol class="damage-parts form-group">
-                {{#each data.damage.parts as |part i| }}
+                {{#each itemData.damage.parts as |part i| }}
                 <li class="damage-part flexrow" data-damage-part="{{i}}">
-                    <input type="text" name="data.damage.parts.{{i}}.0" value="{{lookup this "0"}}" />
+                    <input type="text" name="data.damage.parts.{{i}}.formula" value="{{lookup this "formula"}}" />
                     <a class="damage-control delete-damage"><i class="fas fa-minus"></i></a>
                 </li>
                 {{/each}}
@@ -89,7 +104,7 @@
                 <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
                 <div class="form-fields">
                     <select name="data.weaponType">
-                        {{#select data.weaponType}}
+                        {{#select itemData.weaponType}}
                         {{#each config.starshipWeaponTypes as |name type|}}
                         <option value="{{type}}">{{name}}</option>
                         {{/each}}
@@ -103,7 +118,7 @@
                 <label>{{ localize "SFRPG.Items.ShipWeapon.WeaponClass" }}</label>
                 <div class="form-fields">
                     <select name="data.class">
-                        {{#select data.class}}
+                        {{#select itemData.class}}
                         {{#each config.starshipWeaponClass as |name type|}}
                         <option value="{{type}}">{{name}}</option>
                         {{/each}}
@@ -117,11 +132,11 @@
                 <label>{{ localize "SFRPG.Items.ShipWeapon.WeaponStatus" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.mount.mounted" {{checked data.mount.mounted}} /> {{ localize "SFRPG.Items.ShipWeapon.Mounted" }}
+                        <input type="checkbox" name="data.mount.mounted" {{checked itemData.mount.mounted}} /> {{ localize "SFRPG.Items.ShipWeapon.Mounted" }}
                     </label>
                     <span class="sep"> </span>
                     <select name="data.mount.arc">
-                        {{#select data.mount.arc}}
+                        {{#select itemData.mount.arc}}
                         <option value="">{{localize "SFRPG.ItemSheet.StarshipWeapon.Unmounted"}}</option>
                         {{#each config.starshipArcs as |arc a|}}
                         <option value="{{a}}">{{arc}}</option>
@@ -136,7 +151,7 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Speed" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.speed" value="{{data.speed}}" data-dtype="Number" placeholder="{{localize "SFRPG.ItemSheet.StarshipWeapon.Placeholder"}}" />
+                    <input type="text" name="data.speed" value="{{itemData.speed}}" data-dtype="Number" placeholder="{{localize "SFRPG.ItemSheet.StarshipWeapon.Placeholder"}}" />
                 </div>
             </div>
             {{/if}}
@@ -147,9 +162,9 @@
                     {{ localize "SFRPG.Items.Capacity.Capacity" }}
                 </label>
                 <div class="form-fields">
-                    <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.CapacityValueTooltip" }}" name="data.capacity.value" value="{{data.capacity.value}}" data-dtype="Number" placeholder="{{localize "SFRPG.ItemSheet.StarshipWeapon.Placeholder"}}" />
+                    <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.CapacityValueTooltip" }}" name="data.capacity.value" value="{{itemData.capacity.value}}" data-dtype="Number" placeholder="{{localize "SFRPG.ItemSheet.StarshipWeapon.Placeholder"}}" />
                     <span class="sep"> / </span>
-                    <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.CapacityMaxTooltip" }}" name="data.capacity.max" value="{{data.capacity.max}}" data-dtype="Number" placeholder="{{localize "SFRPG.ItemSheet.StarshipWeapon.Placeholder"}}" />
+                    <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.CapacityMaxTooltip" }}" name="data.capacity.max" value="{{itemData.capacity.max}}" data-dtype="Number" placeholder="{{localize "SFRPG.ItemSheet.StarshipWeapon.Placeholder"}}" />
                 </div>
             </div>
             {{/if}}
@@ -159,7 +174,7 @@
                 <label>{{ localize "SFRPG.Items.Weapon.Properties" }}</label>
                 {{#each config.starshipWeaponProperties as |name prop|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="data.special.{{prop}}" {{checked (lookup ../data.special prop)}} />
+                    <input type="checkbox" name="data.special.{{prop}}" {{checked (lookup ../itemData.special prop)}} />
                     {{ name }}
                 </label>
                 {{/each}}

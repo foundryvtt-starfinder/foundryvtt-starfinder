@@ -12,7 +12,11 @@ export const registerSystemSettings = function () {
             "5105": "SFRPG.Settings.DiagonalMovementRule.Values.Core",
             "555": "SFRPG.Settings.DiagonalMovementRule.Values.Optional"
         },
-        onChange: rule => canvas.grid.diagonalRule = rule
+        onChange: rule => {
+            if (canvas.initialized) {
+                canvas.grid.diagonalRule = rule;
+            }
+        }
     });
 
     game.settings.register("sfrpg", "disableExperienceTracking", {
@@ -81,6 +85,15 @@ export const registerSystemSettings = function () {
         type: Boolean
     });
 
+    game.settings.register("sfrpg", "useInitiativeTiebreaker", {
+        name: "SFRPG.Settings.CombatTiebreaker.Name",
+        hint: "SFRPG.Settings.CombatTiebreaker.Hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
+
     for (let combatType of SFRPG.combatTypes) {
         const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);
         game.settings.register("sfrpg", `${combatType}ChatCards`, {
@@ -93,6 +106,7 @@ export const registerSystemSettings = function () {
             choices: {
                 "enabled": "SFRPG.Settings.CombatCards.Values.Enabled",
                 "roundsPhases": "SFRPG.Settings.CombatCards.Values.RoundsPhases",
+                "roundsTurns": "SFRPG.Settings.CombatCards.Values.RoundsTurns",
                 "roundsOnly": "SFRPG.Settings.CombatCards.Values.OnlyRounds",
                 "disabled": "SFRPG.Settings.CombatCards.Values.Disabled"
             }
@@ -140,6 +154,19 @@ export const registerSystemSettings = function () {
         type: Boolean
     });
 
+    game.settings.register("sfrpg", "damageRoundingAdvantage", {
+        name: "SFRPG.Settings.DamageRoundingAdvantage.Name",
+        hint: "SFRPG.Settings.DamageRoundingAdvantage.Hint",
+        scope: "world",
+        config: true,
+        default: "attacker",
+        type: String,
+        choices: {
+            "attacker": "SFRPG.Settings.DamageRoundingAdvantage.ValueAttacker",
+            "defender": "SFRPG.Settings.DamageRoundingAdvantage.ValueDefender"
+        }
+    });
+
     game.settings.register("sfrpg", "alwaysShowQuantity", {
         name: "SFRPG.Settings.AlwaysShowQuantity.Name",
         hint: "SFRPG.Settings.AlwaysShowQuantity.Hint",
@@ -147,5 +174,23 @@ export const registerSystemSettings = function () {
         config: true,
         default: false,
         type: Boolean
+    });
+
+    game.settings.register("sfrpg", "tokenConditionLabels", {
+        name: "SFRPG.Settings.TokenConditionLabels.Name",
+        hint: "SFRPG.Settings.TokenConditionLabels.Hint",
+        scope: "client",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+
+    game.settings.register("sfrpg", "currencyLocale", {
+        name: "SFRPG.Settings.CurrencyLocale.Name",
+        hint: "SFRPG.Settings.CurrencyLocale.Hint",
+        scope: "client",
+        config: true,
+        default: "en-US",
+        type: String
     });
 };

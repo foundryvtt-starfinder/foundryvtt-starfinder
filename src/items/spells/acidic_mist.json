@@ -3,92 +3,95 @@
   "name": "Acidic Mist",
   "type": "spell",
   "data": {
-    "description": {
-      "value": "<p>You call forth the corrosive atmosphere of a gas giant to damage your opponents. A creature that starts its turn in the area takes 2d6 acid damage. The corrosive mist does not obscure vision.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "NS pg. 154",
     "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionType": "save",
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "1 round/level (D)",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": 10,
-      "units": "ft",
-      "shape": "sphere",
-      "effect": "spread"
-    },
-    "range": {
-      "value": 25,
-      "units": "ft",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "parts": [],
-      "effect": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "2d6",
-          "acid"
-        ]
-      ]
-    },
-    "formula": "",
-    "save": {
-      "type": "fort",
-      "dc": "",
-      "descriptor": "half"
-    },
-    "descriptors": [],
-    "modifiers": [],
-    "level": 1,
-    "school": "con",
-    "sr": false,
-    "dismissible": true,
-    "concentration": false,
-    "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
-      "supply": 0
-    },
-    "preparation": {
-      "mode": "",
-      "prepared": false
+      "condition": "",
+      "cost": 1
     },
     "allowedClasses": {
       "myst": true,
       "tech": false,
       "wysh": true
     },
-    "abilityMods": {
+    "area": {
+      "effect": "spread",
+      "shape": "sphere",
+      "units": "ft",
+      "value": 10
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": false,
+    "critical": {
+      "effect": "",
       "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "formula": "2d6",
+          "operator": "",
+          "types": {
+            "acid": true
+          }
+        }
+      ]
+    },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>You call forth the corrosive atmosphere of a gas giant to damage your opponents. A creature that starts its turn in the area takes 2d6 acid damage. The corrosive mist does not obscure vision.</p>"
+    },
+    "descriptors": [],
+    "dismissible": true,
+    "duration": {
+      "units": "",
+      "value": "1 round/level (D)"
+    },
+    "formula": "",
+    "level": 1,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 25
+    },
+    "save": {
+      "type": "fort",
+      "dc": "",
+      "descriptor": "half"
+    },
+    "school": "con",
+    "source": "NS pg. 154",
+    "sr": false,
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
     }
   },
-  "flags": {},
   "effects": [],
+  "flags": {},
   "img": "systems/sfrpg/icons/spells/caustic_conversion.jpg"
 }

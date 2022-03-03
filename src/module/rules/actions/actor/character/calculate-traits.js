@@ -27,12 +27,14 @@ export default function (engine) {
         try {
             const classes = fact.classes;
             for (const cls of classes) {
-                for (const [key, value] of Object.entries(cls.data.proficiencies.weapon)) {
+                const classData = cls.data.data;
+
+                for (const [key, value] of Object.entries(classData.proficiencies.weapon)) {
                     if (value && !data.traits.weaponProf.value.includes(key)) {
                         data.traits.weaponProf.value.push(key);
                     }
                 }
-                for (const [key, value] of Object.entries(cls.data.proficiencies.armor)) {
+                for (const [key, value] of Object.entries(classData.proficiencies.armor)) {
                     if (value && !data.traits.armorProf.value.includes(key)) {
                         data.traits.armorProf.value.push(key);
                     }

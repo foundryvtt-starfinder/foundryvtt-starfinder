@@ -1,6 +1,16 @@
 // Namespace SFRPG Configuration Values
 export const SFRPG = {};
 
+SFRPG.actorTypes = {
+    "character": "ACTOR.TypeCharacter",
+    "drone": "ACTOR.TypeDrone",
+    "hazard": "ACTOR.TypeHazard",
+    "npc": "ACTOR.TypeNpc",
+    "npc2": "ACTOR.TypeNpc2",
+    "starshop": "ACTOR.TypeStarship",
+    "vehicle": "ACTOR.TypeVehicle"
+};
+
 /**
  * The set of ability scores used with the system
  * @type {Object}
@@ -50,6 +60,22 @@ SFRPG.alignments = {
     "cg": "SFRPG.AlignmentCG",
     "ln": "SFRPG.AlignmentLN",
     "tn": "SFRPG.AlignmentTN",
+    "cn": "SFRPG.AlignmentCN",
+    "le": "SFRPG.AlignmentLE",
+    "ne": "SFRPG.AlignmentNE",
+    "ce": "SFRPG.AlignmentCE"
+};
+
+/**
+ * NPC alignment options
+ * @type {Object}
+ */
+SFRPG.alignmentsNPC = {
+    "lg": "SFRPG.AlignmentLG",
+    "ng": "SFRPG.AlignmentNG",
+    "cg": "SFRPG.AlignmentCG",
+    "ln": "SFRPG.AlignmentLN",
+    "n": "SFRPG.AlignmentTN",
     "cn": "SFRPG.AlignmentCN",
     "le": "SFRPG.AlignmentLE",
     "ne": "SFRPG.AlignmentNE",
@@ -129,25 +155,41 @@ SFRPG.currencies = {
 
 // Damage Types
 SFRPG.energyDamageTypes = {
-    "acid": "SFRPG.DamageTypesAcid",
-    "cold": "SFRPG.DamageTypesCold",
-    "electricity": "SFRPG.DamageTypesElectricity",
-    "fire": "SFRPG.DamageTypesFire",
-    "radiation": "SFRPG.DamageTypesRadiation",
-    "sonic": "SFRPG.DamageTypesSonic"
+    "acid": "SFRPG.Damage.Types.Acid",
+    "cold": "SFRPG.Damage.Types.Cold",
+    "electricity": "SFRPG.Damage.Types.Electricity",
+    "fire": "SFRPG.Damage.Types.Fire",
+    "sonic": "SFRPG.Damage.Types.Sonic"
 };
 
 SFRPG.kineticDamageTypes = {
-    "bludgeoning": "SFRPG.DamageTypesBludgeoning",
-    "piercing": "SFRPG.DamageTypesPiercing",
-    "slashing": "SFRPG.DamageTypesSlashing"
+    "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
+    "piercing": "SFRPG.Damage.Types.Piercing",
+    "slashing": "SFRPG.Damage.Types.Slashing"
+};
+
+SFRPG.damageTypeToAcronym = {
+    "acid": "A",
+    "cold": "C",
+    "electricity": "E",
+    "fire": "F",
+    "sonic": "So",
+    "bludgeoning": "B",
+    "piercing": "P",
+    "slashing": "S"
 };
 
 SFRPG.damageTypes = {
     ...SFRPG.energyDamageTypes,
     ...SFRPG.kineticDamageTypes,
-    "nonlethal": "SFRPG.DamageTypesNonlethal"
+    "radiation": "SFRPG.Damage.Types.Radiation",
+    "nonlethal": "SFRPG.Damage.Types.Nonlethal"
 };
+
+SFRPG.damageTypeOperators = {
+    "and": "SFRPG.Damage.Types.Operators.And",
+    "or": "SFRPG.Damage.Types.Operators.Or"
+}
 
 SFRPG.weaponDamageTypes = {
     "acid": "SFRPG.DamageTypesAcid",
@@ -184,6 +226,21 @@ SFRPG.weaponDamageTypes = {
     "slashing": "SFRPG.DamageTypesSlashing",
     "slashing+piercing": "SFRPG.DamageTypesSlashingAndPiercing",
     "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic",
+};
+
+SFRPG.ammunitionTypes = {
+    "charge": "SFRPG.Items.Ammunition.Type.Charges",
+    "roundS": "SFRPG.Items.Ammunition.Type.SmallArmRounds",
+    "roundL": "SFRPG.Items.Ammunition.Type.LongarmAndSniperRounds",
+    "roundH": "SFRPG.Items.Ammunition.Type.HeavyRounds",
+    "arrow": "SFRPG.Items.Ammunition.Type.Arrows",
+    "dart": "SFRPG.Items.Ammunition.Type.Darts",
+    "fuel": "SFRPG.Items.Ammunition.Type.Fuel",
+    "missile": "SFRPG.Items.Ammunition.Type.Missiles",
+    "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
+    "shell": "SFRPG.Items.Ammunition.Type.Shells",
+    "flare": "SFRPG.Items.Ammunition.Type.Flares",
+    "nanite": "SFRPG.Items.Ammunition.Type.Nanites"
 };
 
 SFRPG.distanceUnits = {
@@ -300,6 +357,7 @@ SFRPG.weaponProperties = {
     "breach": "SFRPG.WeaponPropertiesBreach",
     "breakdown": "SFRPG.WeaponPropertiesBreakdown",
     "bright": "SFRPG.WeaponPropertiesBright",
+    "buttressing": "SFRPG.WeaponPropertiesButtressing",
     "cluster": "SFRPG.WeaponPropertiesCluster",
     "conceal": "SFRPG.WeaponsPropertiesConceal",
     "deconstruct": "SFRPG.WeaponPropertiesDeconstruct",
@@ -318,6 +376,7 @@ SFRPG.weaponProperties = {
     "force": "SFRPG.WeaponPropertiesForce",
     "freeHands": "SFRPG.WeaponPropertiesFreeHands",
     "fueled": "SFRPG.WeaponPropertiesFueled",
+    "gearArray": "SFRPG.WeaponPropertiesGearArray",
     "grapple": "SFRPG.WeaponPropertiesGrapple",
     "gravitation": "SFRPG.WeaponPropertiesGravitation",
     "guided": "SFRPG.WeaponPropertiesGuided",
@@ -365,6 +424,7 @@ SFRPG.weaponProperties = {
     "thought": "SFRPG.WeaponPropertiesThought",
     "throttle": "SFRPG.WeaponPropertiesThrottle",
     "thrown": "SFRPG.WeaponPropertiesThrown",
+    "thruster": "SFRPG.WeaponPropertiesThruster",
     "trip": "SFRPG.WeaponPropertiesTrip",
     "unbalancing": "SFRPG.WeaponPropertiesUnbalancing",
     "underwater": "SFRPG.WeaponPropertiesUnderwater",
@@ -388,6 +448,7 @@ SFRPG.weaponPropertiesTooltips = {
     "breach": "SFRPG.WeaponPropertiesBreachTooltip",
     "breakdown": "SFRPG.WeaponPropertiesBreakdownTooltip",
     "bright": "SFRPG.WeaponPropertiesBrightTooltip",
+    "buttressing": "SFRPG.WeaponPropertiesButtressingTooltip",
     "conceal": "SFRPG.WeaponsPropertiesConcealTooltip",
     "cluster": "SFRPG.WeaponPropertiesClusterTooltip",
     "deconstruct": "SFRPG.WeaponPropertiesDeconstructTooltip",
@@ -406,6 +467,7 @@ SFRPG.weaponPropertiesTooltips = {
     "force": "SFRPG.WeaponPropertiesForceTooltip",
     "freeHands": "SFRPG.WeaponPropertiesFreeHandsTooltip",
     "fueled": "SFRPG.WeaponPropertiesFueledTooltip",
+    "gearArray": "SFRPG.WeaponPropertiesGearArrayTooltip",
     "grapple": "SFRPG.WeaponPropertiesGrappleTooltip",
     "gravitation": "SFRPG.WeaponPropertiesGravitationTooltip",
     "guided": "SFRPG.WeaponPropertiesGuidedTooltip",
@@ -453,12 +515,46 @@ SFRPG.weaponPropertiesTooltips = {
     "thought": "SFRPG.WeaponPropertiesThoughtTooltip",
     "throttle": "SFRPG.WeaponPropertiesThrottleTooltip",
     "thrown": "SFRPG.WeaponPropertiesThrownTooltip",
+    "thruster": "SFRPG.WeaponPropertiesThrusterTooltip",
     "trip": "SFRPG.WeaponPropertiesTripTooltip",
     "unbalancing": "SFRPG.WeaponPropertiesUnbalancingTooltip",
     "underwater": "SFRPG.WeaponPropertiesUnderwaterTooltip",
     "unwieldy": "SFRPG.WeaponPropertiesUnwieldyTooltip",
     "variantBoost": "SFRPG.WeaponPropertiesVariantBoostTooltip",
     "wideLine": "SFRPG.WeaponPropertiesWideLineTooltip"
+};
+
+SFRPG.specialMaterials = {
+    "abysium": "SFRPG.SpecialMaterials.Abysium",
+    "adamantine": "SFRPG.SpecialMaterials.Adamantine",
+    "coldiron": "SFRPG.SpecialMaterials.ColdIron",
+    "diatha": "SFRPG.SpecialMaterials.Diatha",
+    "djezet": "SFRPG.SpecialMaterials.Djezet",
+    "horacalcum": "SFRPG.SpecialMaterials.Horacalcum",
+    "inubrix": "SFRPG.SpecialMaterials.Inubrix",
+    "khefak": "SFRPG.SpecialMaterials.Khefak",
+    "noqual": "SFRPG.SpecialMaterials.Noqual",
+    "purplecores": "SFRPG.SpecialMaterials.PurpleCores",
+    "siccatite": "SFRPG.SpecialMaterials.Siccatite",
+    "silver": "SFRPG.SpecialMaterials.Silver",
+    "voidglass": "SFRPG.SpecialMaterials.Voidglass"
+};
+
+// Damage Reductions
+SFRPG.damageReductionTypes = {
+    "": "-",
+    ...SFRPG.specialMaterials,
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
+// Energy Resistances
+SFRPG.energyResistanceTypes = {
+    "acid": "SFRPG.Damage.Types.Acid",
+    "cold": "SFRPG.Damage.Types.Cold",
+    "electricity": "SFRPG.Damage.Types.Electricity",
+    "fire": "SFRPG.Damage.Types.Fire",
+    "sonic": "SFRPG.Damage.Types.Sonic",
+    "custom": "SFRPG.Damage.Types.Custom"
 };
 
 SFRPG.spellAreaShapes = {
@@ -477,33 +573,6 @@ SFRPG.spellAreaEffects = {
     "emanation": "SFRPG.SpellAreaEffects.Emanation",
     "spread"   : "SFRPG.SpellAreaEffects.Spread"
 }
-
-// Weapon special abilities
-SFRPG.weaponSpecial = {
-    "analog"     : "SFRPG.WeaponSpecial.Analog",
-    "archaic"    : "SFRPG.WeaponSpecial.Archaic",
-    "auto"       : "SFRPG.WeaponSpecial.Automatic",
-    "blast"      : "SFRPG.WeaponSpecial.Blast",
-    "block"      : "SFRPG.WeaponSpecial.Block",
-    "boost"      : "SFRPG.WeaponSpecial.Boost",
-    "bright"     : "SFRPG.WeaponSpecial.Bright",
-    "disarm"     : "SFRPG.WeaponSpecial.Disarm",
-    "entangle"   : "SFRPG.WeaponSpecial.Entangle",
-    "exploade"   : "SFRPG.WeaponSpecial.Explode",
-    "injection"  : "SFRPG.WeaponSpecial.Injection",
-    "line"       : "SFRPG.WeaponSpecial.Line",
-    "nonlethal"  : "SFRPG.WeaponSpecial.Nonlethal",
-    "operative"  : "SFRPG.WeaponSpecial.Operative",
-    "penetrating": "SFRPG.WeaponSpecial.Penetrating",
-    "powered"    : "SFRPG.WeaponSpecial.Powered",
-    "quickReload": "SFRPG.WeaponSpecial.Quick Reload",
-    "reach"      : "SFRPG.WeaponSpecial.Reach",
-    "sniper"     : "SFRPG.WeaponSpecial.Sniper",
-    "stun"       : "SFRPG.WeaponSpecial.Stun",
-    "thrown"     : "SFRPG.WeaponSpecial.Thrown",
-    "trip"       : "SFRPG.WeaponSpecial.Trip",
-    "unwieldy"   : "SFRPG.WeaponSpecial.Unwieldy"
-};
 
 // Weapon critical hit effects
 SFRPG.weaponCriticalHitEffects = {
@@ -625,8 +694,9 @@ SFRPG.tokenSizes = {
     "colossal": 6
 };
 
-SFRPG.allowedClasses = {
+SFRPG.spellcastingClasses = {
     "myst": "SFRPG.AllowedClasses.Myst",
+    "precog": "SFRPG.AllowedClasses.Precog",
     "tech": "SFRPG.AllowedClasses.Tech",
     "wysh": "SFRPG.AllowedClasses.Wysh"
 };
@@ -766,6 +836,25 @@ SFRPG.augmentationSytems = {
 };
 
 /*--------------------------------*
+ * NPC properties and values *
+ *--------------------------------*/
+SFRPG.npctypes = {
+    "animal": "Animal",
+    "aberration": "Aberration",
+    "construct": "Construct",
+    "dragon": "Dragon",
+    "fey": "Fey",
+    "humanoid": "Humanoid",
+    "magical beast": "Magical Beast",
+    "monstrous humanoid": "Monstrous Humanoid",
+    "ooze": "Ooze",
+    "outsider": "Outsider",
+    "planet": "Plant",
+    "undead": "Undead",
+    "vermin": "Vermin"
+};
+
+/*--------------------------------*
  * Starship properties and values *
  *--------------------------------*/
 SFRPG.maneuverability = {
@@ -899,7 +988,9 @@ SFRPG.starshipSizeMod = {
     "colossal": -8
 };
 
-// End starship stuff
+/*--------------------------------*
+ * Vehicle properties and values *
+ *--------------------------------*/
 
 SFRPG.vehicleSizes = {
     "diminutive": "SFRPG.SizeDim",
@@ -961,6 +1052,7 @@ SFRPG.modifierTypes = {
     "luck": "SFRPG.ModifierTypeLuck",
     "morale": "SFRPG.ModifierTypeMorale",
     "racial": "SFRPG.ModifierTypeRacial",
+    "resistance": "SFRPG.ModifierTypeResistance",
     "untyped": "SFRPG.ModifierTypeUntyped"
 };
 
@@ -984,6 +1076,7 @@ SFRPG.modifierEffectTypes = {
     "skill-ranks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SkillRanks",
     "saves": "SFRPG.ModifierEffectTypeSaves",
     "save": "SFRPG.ModifierEffectTypeSave",
+    "spell-save-dc": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellSaveDC",
     "ranged-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackRolls",
     "melee-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackRolls",
     "spell-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackRolls",
@@ -996,7 +1089,13 @@ SFRPG.modifierEffectTypes = {
     "weapon-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackDamage",
     "all-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackDamage",
     "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage",
-    "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance"
+    "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance",
+    "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
+    "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
+    "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
+    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource",
+    "damage-reduction": "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction",
+    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance"
 };
 
 SFRPG.modifierType = {
@@ -1010,6 +1109,15 @@ SFRPG.modifierArmorClassAffectedValues = {
     "kac": "SFRPG.KineticArmorClass"
 };
 
+SFRPG.globalAttackRollModifiers = [
+    {bonus: { name: "SFRPG.Rolls.Character.Charge", modifier: "-2", enabled: false, notes: "SFRPG.Rolls.Character.ChargeTooltip" } },
+    {bonus: { name: "SFRPG.Rolls.Character.Flanking", modifier: "+2", enabled: false, notes: "SFRPG.Rolls.Character.FlankingTooltip" } },
+    {bonus: { name: "SFRPG.Rolls.Character.FightDefensively", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.FightDefensivelyTooltip" } },
+    {bonus: { name: "SFRPG.Rolls.Character.FullAttack", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.FullAttackTooltip" } },
+    {bonus: { name: "SFRPG.Rolls.Character.HarryingFire", modifier: "+2", enabled: false, notes: "SFRPG.Rolls.Character.HarryingFireTooltip" } },
+    {bonus: { name: "SFRPG.Rolls.Character.Nonlethal", modifier: "-4", enabled: false, notes: "SFRPG.Rolls.Character.NonlethalTooltip" } }
+];
+
 SFRPG.CHARACTER_EXP_LEVELS = [
     0, 1300, 3300, 6000, 10000, 15000, 23000, 34000, 50000, 71000,
     105000, 145000, 210000, 295000, 425000, 600000, 850000, 1200000,
@@ -1022,81 +1130,183 @@ SFRPG.CR_EXP_LEVELS = [
     153600, 204800, 307200, 409600, 614400, 819200, 1228800, 1638400
 ];
 
-SFRPG.statusEffectIcons = [
-    "systems/sfrpg/icons/conditions/asleep.png",
-    "systems/sfrpg/icons/conditions/bleeding.png",
-    "systems/sfrpg/icons/conditions/blinded.png",
-    "systems/sfrpg/icons/conditions/broken.png",
-    "systems/sfrpg/icons/conditions/burning.png",
-    "systems/sfrpg/icons/conditions/confused.png",
-    "systems/sfrpg/icons/conditions/cowering.png",
-    "systems/sfrpg/icons/conditions/dazed.png",
-    "systems/sfrpg/icons/conditions/dazzled.png",
-    "systems/sfrpg/icons/conditions/dead.png",
-    "systems/sfrpg/icons/conditions/deafened.png",
-    "systems/sfrpg/icons/conditions/dying.png",
-    "systems/sfrpg/icons/conditions/encumbered.png",
-    "systems/sfrpg/icons/conditions/entangled.png",
-    "systems/sfrpg/icons/conditions/exhausted.png",
-    "systems/sfrpg/icons/conditions/fascinated.png",
-    "systems/sfrpg/icons/conditions/fatigued.png",
-    "systems/sfrpg/icons/conditions/flatfooted.png",
-    "systems/sfrpg/icons/conditions/frightened.png",
-    "systems/sfrpg/icons/conditions/grappled.png",
-    "systems/sfrpg/icons/conditions/helpless.png",
-    "systems/sfrpg/icons/conditions/nauseated.png",
-    "systems/sfrpg/icons/conditions/offkilter.png",
-    "systems/sfrpg/icons/conditions/offtarget.png",
-    "systems/sfrpg/icons/conditions/overburdened.png",
-    "systems/sfrpg/icons/conditions/panicked.png",
-    "systems/sfrpg/icons/conditions/paralyzed.png",
-    "systems/sfrpg/icons/conditions/pinned.png",
-    "systems/sfrpg/icons/conditions/prone.png",
-    "systems/sfrpg/icons/conditions/shaken.png",
-    "systems/sfrpg/icons/conditions/sickened.png",
-    "systems/sfrpg/icons/conditions/staggered.png",
-    "systems/sfrpg/icons/conditions/stable.png",
-    "systems/sfrpg/icons/conditions/stunned.png",
-    "systems/sfrpg/icons/conditions/unconscious.png"
+SFRPG.statusEffects = [
+    {
+        id: "asleep",
+        label: "SFRPG.ConditionsAsleep",
+        icon: "systems/sfrpg/icons/conditions/asleep.png"
+    },
+    {
+        id: "bleeding",
+        label: "SFRPG.ConditionsBleeding",
+        icon: "systems/sfrpg/icons/conditions/bleeding.png"
+    },
+    {
+        id: "blinded",
+        label: "SFRPG.ConditionsBlinded",
+        icon: "systems/sfrpg/icons/conditions/blinded.png"
+    },
+    {
+        id: "broken",
+        label: "SFRPG.ConditionsBroken",
+        icon: "systems/sfrpg/icons/conditions/broken.png"
+    },
+    {
+        id: "burning",
+        label: "SFRPG.ConditionsBurning",
+        icon: "systems/sfrpg/icons/conditions/burning.png"
+    },
+    {
+        id: "confused",
+        label: "SFRPG.ConditionsConfused",
+        icon: "systems/sfrpg/icons/conditions/confused.png"
+    },
+    {
+        id: "cowering",
+        label: "SFRPG.ConditionsCowering",
+        icon: "systems/sfrpg/icons/conditions/cowering.png"
+    },
+    {
+        id: "dazed",
+        label: "SFRPG.ConditionsDazed",
+        icon: "systems/sfrpg/icons/conditions/dazed.png"
+    },
+    {
+        id: "dazzled",
+        label: "SFRPG.ConditionsDazzled",
+        icon: "systems/sfrpg/icons/conditions/dazzled.png"
+    },
+    {
+        id: "dead",
+        label: "SFRPG.ConditionsDead",
+        icon: "systems/sfrpg/icons/conditions/dead.png"
+    },
+    {
+        id: "deafened",
+        label: "SFRPG.ConditionsDeafened",
+        icon: "systems/sfrpg/icons/conditions/deafened.png"
+    },
+    {
+        id: "dying",
+        label: "SFRPG.ConditionsDying",
+        icon: "systems/sfrpg/icons/conditions/dying.png"
+    },
+    {
+        id: "encumbered",
+        label: "SFRPG.ConditionsEncumbered",
+        icon: "systems/sfrpg/icons/conditions/encumbered.png"
+    },
+    {
+        id: "entangled",
+        label: "SFRPG.ConditionsEntangled",
+        icon: "systems/sfrpg/icons/conditions/entangled.png"
+    },
+    {
+        id: "exhausted",
+        label: "SFRPG.ConditionsExhausted",
+        icon: "systems/sfrpg/icons/conditions/exhausted.png"
+    },
+    {
+        id: "fascinated",
+        label: "SFRPG.ConditionsFascinated",
+        icon: "systems/sfrpg/icons/conditions/fascinated.png"
+    },
+    {
+        id: "fatigued",
+        label: "SFRPG.ConditionsFatigued",
+        icon: "systems/sfrpg/icons/conditions/fatigued.png"
+    },
+    {
+        id: "flat-footed",
+        label: "SFRPG.ConditionsFlatFooted",
+        icon: "systems/sfrpg/icons/conditions/flatfooted.png"
+    },
+    {
+        id: "frightened",
+        label: "SFRPG.ConditionsFrightened",
+        icon: "systems/sfrpg/icons/conditions/frightened.png"
+    },
+    {
+        id: "grappled",
+        label: "SFRPG.ConditionsGrappled",
+        icon: "systems/sfrpg/icons/conditions/grappled.png"
+    },
+    {
+        id: "helpless",
+        label: "SFRPG.ConditionsHelpless",
+        icon: "systems/sfrpg/icons/conditions/helpless.png"
+    },
+    {
+        id: "nauseated",
+        label: "SFRPG.ConditionsNauseated",
+        icon: "systems/sfrpg/icons/conditions/nauseated.png"
+    },
+    {
+        id: "off-kilter",
+        label: "SFRPG.ConditionsOffKilter",
+        icon: "systems/sfrpg/icons/conditions/offkilter.png"
+    },
+    {
+        id: "off-target",
+        label: "SFRPG.ConditionsOffTarget",
+        icon: "systems/sfrpg/icons/conditions/offtarget.png"
+    },
+    {
+        id: "overburdened",
+        label: "SFRPG.ConditionsOverburdened",
+        icon: "systems/sfrpg/icons/conditions/overburdened.png"
+    },
+    {
+        id: "panicked",
+        label: "SFRPG.ConditionsPanicked",
+        icon: "systems/sfrpg/icons/conditions/panicked.png"
+    },
+    {
+        id: "paralyzed",
+        label: "SFRPG.ConditionsParalyzed",
+        icon: "systems/sfrpg/icons/conditions/paralyzed.png"
+    },
+    {
+        id: "pinned",
+        label: "SFRPG.ConditionsPinned",
+        icon: "systems/sfrpg/icons/conditions/pinned.png"
+    },
+    {
+        id: "prone",
+        label: "SFRPG.ConditionsProne",
+        icon: "systems/sfrpg/icons/conditions/prone.png"
+    },
+    {
+        id: "shaken",
+        label: "SFRPG.ConditionsShaken",
+        icon: "systems/sfrpg/icons/conditions/shaken.png"
+    },
+    {
+        id: "sickened",
+        label: "SFRPG.ConditionsSickened",
+        icon: "systems/sfrpg/icons/conditions/sickened.png"
+    },
+    {
+        id: "stable",
+        label: "SFRPG.ConditionsStable",
+        icon: "systems/sfrpg/icons/conditions/stable.png"
+    },
+    {
+        id: "staggered",
+        label: "SFRPG.ConditionsStaggered",
+        icon: "systems/sfrpg/icons/conditions/staggered.png"
+    },
+    {
+        id: "stunned",
+        label: "SFRPG.ConditionsStunned",
+        icon: "systems/sfrpg/icons/conditions/stunned.png"
+    },
+    {
+        id: "unconscious",
+        label: "SFRPG.ConditionsUnconscious",
+        icon: "systems/sfrpg/icons/conditions/unconscious.png"
+    }
 ];
-
-SFRPG.statusEffectIconMapping = {
-    "asleep": "systems/sfrpg/icons/conditions/asleep.png",
-    "bleeding": "systems/sfrpg/icons/conditions/bleeding.png",
-    "blinded": "systems/sfrpg/icons/conditions/blinded.png",
-    "broken": "systems/sfrpg/icons/conditions/broken.png",
-    "burning": "systems/sfrpg/icons/conditions/burning.png",
-    "confused": "systems/sfrpg/icons/conditions/confused.png",
-    "cowering": "systems/sfrpg/icons/conditions/cowering.png",
-    "dazed": "systems/sfrpg/icons/conditions/dazed.png",
-    "dazzled": "systems/sfrpg/icons/conditions/dazzled.png",
-    "dead": "systems/sfrpg/icons/conditions/dead.png",
-    "deafened": "systems/sfrpg/icons/conditions/deafened.png",
-    "dying": "systems/sfrpg/icons/conditions/dying.png",
-    "encumbered": "systems/sfrpg/icons/conditions/encumbered.png",
-    "entangled": "systems/sfrpg/icons/conditions/entangled.png",
-    "exhausted": "systems/sfrpg/icons/conditions/exhausted.png",
-    "fascinated": "systems/sfrpg/icons/conditions/fascinated.png",
-    "fatigued": "systems/sfrpg/icons/conditions/fatigued.png",
-    "flat-footed": "systems/sfrpg/icons/conditions/flatfooted.png",
-    "frightened": "systems/sfrpg/icons/conditions/frightened.png",
-    "grappled": "systems/sfrpg/icons/conditions/grappled.png",
-    "helpless": "systems/sfrpg/icons/conditions/helpless.png",
-    "nauseated": "systems/sfrpg/icons/conditions/nauseated.png",
-    "off-kilter": "systems/sfrpg/icons/conditions/offkilter.png",
-    "off-target": "systems/sfrpg/icons/conditions/offtarget.png",
-    "overburdened": "systems/sfrpg/icons/conditions/overburdened.png",
-    "panicked": "systems/sfrpg/icons/conditions/panicked.png",
-    "paralyzed": "systems/sfrpg/icons/conditions/paralyzed.png",
-    "pinned": "systems/sfrpg/icons/conditions/pinned.png",
-    "prone": "systems/sfrpg/icons/conditions/prone.png",
-    "shaken": "systems/sfrpg/icons/conditions/shaken.png",
-    "sickened": "systems/sfrpg/icons/conditions/sickened.png",
-    "stable": "systems/sfrpg/icons/conditions/stable.png",
-    "staggered": "systems/sfrpg/icons/conditions/staggered.png",
-    "stunned": "systems/sfrpg/icons/conditions/stunned.png",
-    "unconscious": "systems/sfrpg/icons/conditions/unconscious.png"
-};
 
 // TODO localize
 SFRPG.conditions = {
@@ -1218,7 +1428,7 @@ SFRPG.conditions = {
     },
     "shaken": {
         modifiers: [],
-        tooltip: "<strong>Skaken</strong><br><br>You take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks."
+        tooltip: "<strong>Shaken</strong><br><br>You take a -2 penalty to ability checks, attack rolls, saving throws, and skill checks."
     },
     "sickened": {
         modifiers: [],
@@ -1241,6 +1451,8 @@ SFRPG.conditions = {
         tooltip: "<strong>Unconscious</strong><br><br>You're knocked out and helpless."
     }
 };
+
+SFRPG.conditionsCausingFlatFooted = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
 
 // TODO localize
 SFRPG.characterFlags = {
@@ -1288,29 +1500,28 @@ SFRPG.capacityUsagePer = {
     "shot": "SFRPG.Capacity.UsagePer.Shot",
     "round": "SFRPG.Capacity.UsagePer.Round",
     "minute": "SFRPG.Capacity.UsagePer.Minute",
+    "minute10": "SFRPG.Capacity.UsagePer.Minute10",
     "hour": "SFRPG.Capacity.UsagePer.Hour",
     "day": "SFRPG.Capacity.UsagePer.Day"
 };
 
 SFRPG.itemTypes = {
-    "asi": "SFRPG.Items.Categories.AbilityScoreIncrease",
     "archetypes": "SFRPG.Items.Categories.Archetypes",
-    "augmentation": "SFRPG.Items.Categories.Augmentations",
-    "chassis": "SFRPG.Items.Categories.DroneChassis",
     "class": "SFRPG.Items.Categories.Classes",
-    "consumable": "SFRPG.Items.Categories.Consumables",
-    "container": "SFRPG.Items.Categories.Containers",
-    "equipment": "SFRPG.Items.Categories.Armor",
-    "feat": "SFRPG.Items.Categories.Feats",
-    "fusion": "ITEM.TypeFusion",
-    "goods": "SFRPG.Items.Categories.Goods",
-    "hybrid": "SFRPG.Items.Categories.HybridItems",
-    "magic": "SFRPG.Items.Categories.MagicItems",
-    "mod": "SFRPG.Items.Categories.DroneMods",
     "race": "SFRPG.Items.Categories.Races",
+    "theme": "SFRPG.Items.Categories.Themes",
+
+    "actorResource": "ITEM.TypeActorresource",
+    "feat": "SFRPG.Items.Categories.Feats",
     "spell": "SFRPG.Items.Categories.Spells",
-    "starshipAction": "SFRPG.Items.Categories.StarshipActions",
+
+    "asi": "SFRPG.Items.Categories.AbilityScoreIncrease",
+
+    "chassis": "SFRPG.Items.Categories.DroneChassis",
+    "mod": "SFRPG.Items.Categories.DroneMods",
+
     "starshipAblativeArmor": "SFRPG.Items.Categories.StarshipAblativeArmors",
+    "starshipAction": "ITEM.TypeStarshipaction",
     "starshipArmor": "SFRPG.Items.Categories.StarshipArmors",
     "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
     "starshipCrewQuarter": "SFRPG.Items.Categories.StarshipCrewQuarters",
@@ -1327,19 +1538,94 @@ SFRPG.itemTypes = {
     "starshipShield": "SFRPG.Items.Categories.StarshipShields",
     "starshipThruster": "SFRPG.Items.Categories.StarshipThrusters",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
+
+    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
+    "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems",
+
+    "ammunition": "SFRPG.Items.Categories.Ammunition",
+    "augmentation": "SFRPG.Items.Categories.Augmentations",
+    "consumable": "SFRPG.Items.Categories.Consumables",
+    "container": "SFRPG.Items.Categories.Containers",
+    "equipment": "SFRPG.Items.Categories.Armor",
+    "fusion": "ITEM.TypeFusion",
+    "goods": "SFRPG.Items.Categories.Goods",
+    "hybrid": "SFRPG.Items.Categories.HybridItems",
+    "magic": "SFRPG.Items.Categories.MagicItems",
+    "shield": "SFRPG.Items.Categories.Shields",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
-    "theme": "SFRPG.Items.Categories.Themes",
     "upgrade": "ITEM.TypeUpgrade",
     "weapon": "SFRPG.Items.Categories.Weapons",
-    "shield": "SFRPG.Items.Categories.Shields",
-    "ammunition": "SFRPG.Items.Categories.Ammunition",
-    "weaponAccessory": "ITEM.TypeWeaponaccessory",
-    "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
-    "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
+    "weaponAccessory": "ITEM.TypeWeaponaccessory"
 };
+
+SFRPG.characterDefinitionItemTypes = [
+    "archetypes",
+    "class",
+    "race",
+    "theme"
+];
+
+SFRPG.sharedItemTypes = [
+    "actorResource",
+    "feat",
+    "spell"
+];
+
+SFRPG.playerCharacterDefinitionItemTypes = [
+    "asi"
+];
+
+SFRPG.droneDefinitionItemTypes = [
+    "chassis",
+    "mod"
+];
+
+SFRPG.starshipDefinitionItemTypes = [
+    "starshipAction",
+    "starshipAblativeArmor",
+    "starshipArmor",
+    "starshipComputer",
+    "starshipCrewQuarter",
+    "starshipDefensiveCountermeasure",
+    "starshipDriftEngine",
+    "starshipExpansionBay",
+    "starshipFortifiedHull",
+    "starshipFrame",
+    "starshipOtherSystem",
+    "starshipPowerCore",
+    "starshipReinforcedBulkhead",
+    "starshipSecuritySystem",
+    "starshipSensor",
+    "starshipShield",
+    "starshipThruster",
+    "starshipWeapon"
+];
+
+SFRPG.vehicleDefinitionItemTypes = [
+    "vehicleAttack",
+    "vehicleSystem"
+];
+
+SFRPG.physicalItemTypes = [
+    "ammunition",
+    "augmentation",
+    "consumable",
+    "container",
+    "equipment",
+    "fusion",
+    "goods",
+    "hybrid",
+    "magic",
+    "shield",
+    "technological",
+    "upgrade",
+    "weapon",
+    "weaponAccessory"
+];
 
 SFRPG.containableTypes = {
     "weapon"       : "SFRPG.Items.Categories.Weapons",
+    "ammunition"   : "SFRPG.Items.Categories.Ammunition",
     "equipment"    : "SFRPG.Items.Categories.Equipment",
     "consumable"   : "SFRPG.Items.Categories.Consumables",
     "goods"        : "SFRPG.Items.Categories.Goods",
@@ -1375,4 +1661,58 @@ SFRPG.weaponAccessoriesSupportedTypes = {
     "railedWeapon": "SFRPG.Items.WeaponAccessory.SupportedType.RailedWeapon",
     "railedWeaponSA": "SFRPG.Items.WeaponAccessory.SupportedType.RailedWeaponSA",
     "smallarm": "SFRPG.Items.WeaponAccessory.SupportedType.SmallArm"
+};
+
+SFRPG.speeds = {
+    "land": "SFRPG.ActorSheet.Attributes.Speed.Types.Land",
+    "burrowing": "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing",
+    "climbing": "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing",
+    "flying": "SFRPG.ActorSheet.Attributes.Speed.Types.Flying",
+    "swimming": "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming",
+    "special": "SFRPG.ActorSheet.Attributes.Speed.Types.Special"
+};
+
+SFRPG.flightManeuverability = {
+    "-1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Clumsy",
+    "0": "SFRPG.ActorSheet.Attributes.Speed.Flight.Average",
+    "1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Perfect"
+};
+
+SFRPG.actionTargets = {
+    "": "SFRPG.Items.Action.ActionTarget.None",
+    "kac": "SFRPG.Items.Action.ActionTarget.KAC",
+    "kac8": "SFRPG.Items.Action.ActionTarget.KAC8",
+    "eac": "SFRPG.Items.Action.ActionTarget.EAC",
+    "other": "SFRPG.Items.Action.ActionTarget.Other"
+};
+
+SFRPG.actionTargetsStarship = {
+    "": "SFRPG.Items.Action.ActionTarget.None",
+    "ac": "SFRPG.Items.Action.ActionTarget.StarshipAC",
+    "tl": "SFRPG.Items.Action.ActionTarget.StarshipTL"
+};
+
+// Source: CRB, page 391
+SFRPG.characterWealthByLevel = {
+    0: 0,
+    1: 1000,
+    2: 2000,
+    3: 4000,
+    4: 6000,
+    5: 9000,
+    6: 15000,
+    7: 23000,
+    8: 33000,
+    9: 45000,
+    10: 66000,
+    11: 100000,
+    12: 150000,
+    13: 255000,
+    14: 333000,
+    15: 500000,
+    16: 750000,
+    17: 1125000,
+    18: 1700000,
+    19: 2550000,
+    20: 3775000
 };

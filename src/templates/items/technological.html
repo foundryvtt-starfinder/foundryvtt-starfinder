@@ -20,12 +20,19 @@
             {{!-- Equipment Status --}}
             {{> "systems/sfrpg/templates/items/parts/item-status.html"}}
 
-            <h3 class="form-header">{{ localize "SFRPG.CapacityUsage" }}</h3>
+            <br />
+
             {{> "systems/sfrpg/templates/items/parts/item-capacity.html"}}
 
             <br />
 
             {{> "systems/sfrpg/templates/items/parts/physical-item-details.html"}}
+            
+            <br />
+
+            {{!-- Container Template --}}
+            {{> "systems/sfrpg/templates/items/parts/container-details.html" message="SFRPG.Items.Equipment.ContainerTooltip"}}
+
         </div>
 
         {{!-- Modifiers Tab --}}
