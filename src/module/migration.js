@@ -115,7 +115,20 @@ const migrateToken = async function (token, schema) {
     const updateData = {};
     const tokenData = token.data;
 
-    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(tokenData, updateData);
+    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) {
+        _migrateDocumentIconToWebP(tokenData, updateData);
+
+        if (tokenData.flags.sfrpg?.itemCollection) {
+            try {
+                const flatCollection = JSON.stringify(tokenData.flags.sfrpg.itemCollection);
+                const convertedCollection = _migrateStringContentToWebP(flatCollection);
+                const jsonCollection = JSON.parse(convertedCollection);
+                updateData['flags.sfrpg.itemCollection'] = jsonCollection;
+            } catch {
+                console.log(`Failed to convert items for ${token.name} in scene ${token.scene.name}`);
+            }
+        }
+    }
 
     const actor = token.actor;
     if (!token.data.actorLink && actor) {
@@ -434,9 +447,7 @@ const _migrateDocumentIconToWebP = function(document, data) {
     }
 
     if (document.data?.description?.value) {
-        let description = duplicate(document.data.description.value);
-        description = description.replace(/(systems\/sfrpg\/[^"]*).png/gi, "$1.webp");
-        description = description.replace(/(systems\/sfrpg\/[^"]*).jpg/gi, "$1.webp");
+        const description = _migrateStringContentToWebP(document.data.description.value);
         if (document.data.description.value != description) {
             data["data.description.value"] = description;
         }
@@ -448,13 +459,18 @@ const _migrateDocumentIconToWebP = function(document, data) {
 const _migrateChatMessageContentToWebP = function(messageData, data) {
 
     if (messageData?.content) {
-        let content = duplicate(messageData.content);
-        content = content.replace(/(systems\/sfrpg\/[^"]*).png/gi, "$1.webp");
-        content = content.replace(/(systems\/sfrpg\/[^"]*).jpg/gi, "$1.webp");
+        const content = _migrateStringContentToWebP(messageData.content);
         if (messageData.content != content) {
             data["content"] = content;
         }
     }
 
     return data;
+}
+
+const _migrateStringContentToWebP = function(string) {
+    string = duplicate(string);
+    string = string.replace(/(systems\/sfrpg\/[^"]*).png/gi, "$1.webp");
+    string = string.replace(/(systems\/sfrpg\/[^"]*).jpg/gi, "$1.webp");
+    return string;
 }
