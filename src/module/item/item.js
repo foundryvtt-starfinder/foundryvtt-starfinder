@@ -350,7 +350,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (this.data.type === "container") {
             if (this.actor) {
                 const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
-                const wealthString = new Intl.NumberFormat(currencyLocale).format(Math.floor(this.data.contentWealth));
+                const wealthString = new Intl.NumberFormat(currencyLocale).format(Math.floor(this.data.itemWealth.contentWealth));
                 const wealthProperty = game.i18n.format("SFRPG.CharacterSheet.Inventory.ContainedWealth", {wealth: wealthString});
                 props.push({
                     name: wealthProperty,

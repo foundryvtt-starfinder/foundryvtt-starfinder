@@ -8,7 +8,7 @@ const SFRPGMigrationSchemas = Object.freeze({
     THE_ACTOR_SPEED_UPDATE: 0.004,
     DAMAGE_TYPE_REFACTOR: 0.005,
     DAMAGE_REDUCTION_REFACTOR: 0.006,
-    THE_WEBP_UPDATE: 0.007 // We changed all icons from .png to .webp
+    THE_WEBP_UPDATE: 0.008 // We changed all icons from .png to .webp
 });
 
 export default async function migrateWorld() {
@@ -55,8 +55,20 @@ export default async function migrateWorld() {
         }
     }
 
+    for (const message of game.messages) {
+        try {
+            const updateData = await migrateChatMessage(message, worldSchema);
+            if (!isObjectEmpty(updateData)) {
+                console.log(`Starfinder | Migrating Chat message entity ${message.id}`);
+                await message.update(updateData, { enforceTypes: false });
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     const systemSchema = Number(game.system.data.flags.sfrpg.schema);
-    await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
+    //await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
     ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
 
     if (worldSchema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) {
@@ -116,6 +128,15 @@ const migrateToken = async function (token, schema) {
 
     return updateData;
 };
+
+const migrateChatMessage = async function (message, schema) {
+    const updateData = {};
+    const messageData = message.data;
+
+    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateChatMessageContentToWebP(messageData, updateData);
+
+    return updateData;
+}
 
 const damageTypeMigrationCallback = function (arr, curr) {
     if (!Array.isArray(curr)) return arr;
@@ -421,5 +442,19 @@ const _migrateDocumentIconToWebP = function(document, data) {
         }
     }
     
+    return data;
+}
+
+const _migrateChatMessageContentToWebP = function(messageData, data) {
+
+    if (messageData?.content) {
+        let content = duplicate(messageData.content);
+        content = content.replace(/(systems\/sfrpg\/[^"]*).png/gi, "$1.webp");
+        content = content.replace(/(systems\/sfrpg\/[^"]*).jpg/gi, "$1.webp");
+        if (messageData.content != content) {
+            data["content"] = content;
+        }
+    }
+
     return data;
 }

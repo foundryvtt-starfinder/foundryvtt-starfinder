@@ -6,6 +6,9 @@ export default class CounterManagement {
 
             for (const combatant of combatants) {
                 const currentActor = combatant.actor;
+                if (!currentActor) {
+                    continue;
+                }
                 
                 const displayedResources = currentActor.getResourcesForCombatTracker();
                 if (displayedResources.length === 0) {
