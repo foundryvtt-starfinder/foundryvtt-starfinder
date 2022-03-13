@@ -67,6 +67,18 @@ export default async function migrateWorld() {
         }
     }
 
+    for (const macro of game.macros) {
+        try {
+            const updateData = await migrateMacro(macro, worldSchema);
+            if (!isObjectEmpty(updateData)) {
+                console.log(`Starfinder | Migrating Macro entity ${macro.name}`);
+                await macro.update(updateData, { enforceTypes: false });
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     const systemSchema = Number(game.system.data.flags.sfrpg.schema);
     //await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
     ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
@@ -147,6 +159,15 @@ const migrateChatMessage = async function (message, schema) {
     const messageData = message.data;
 
     if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateChatMessageContentToWebP(messageData, updateData);
+
+    return updateData;
+}
+
+const migrateMacro = async function (macro, schema) {
+    const updateData = {};
+    const macroData = macro.data;
+
+    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(macroData, updateData);
 
     return updateData;
 }
