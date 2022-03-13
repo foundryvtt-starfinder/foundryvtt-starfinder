@@ -79,8 +79,31 @@ export default async function migrateWorld() {
         }
     }
 
+    for (const pack of game.packs) {
+        if (pack.collection.startsWith("world")) {
+            const wasLocked = pack.locked;
+            // Unlock pack if needed
+            if (pack.locked) {
+                pack.configure({locked: false})
+            }
+
+            if (worldSchema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) {
+                if (pack.documentName === "Actor") {
+                    await pack.updateAll(migrateCompendiumActorToWebP);
+                } else if (pack.documentName === "Item") {
+                    await pack.updateAll(migrateCompendiumItemToWebP);
+                }
+            }
+
+            // Lock pack if it was locked.
+            if (wasLocked) {
+                pack.configure({locked: true})
+            }
+        }
+    }
+
     const systemSchema = Number(game.system.data.flags.sfrpg.schema);
-    //await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
+    await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
     ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
 
     if (worldSchema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) {
@@ -99,6 +122,10 @@ const migrateItem = async function (item, schema) {
     
     return updateData;
 };
+
+const migrateCompendiumItemToWebP = async function (itemDocument) {
+    return await migrateItem(itemDocument, SFRPGMigrationSchemas.THE_WEBP_UPDATE - 0.001);
+}
 
 const migrateActor = async function (actor, schema) {
     const updateData = {};
@@ -122,6 +149,10 @@ const migrateActor = async function (actor, schema) {
 
     return updateData;
 };
+
+const migrateCompendiumActorToWebP = async function (actorDocument) {
+    return await migrateActor(actorDocument, SFRPGMigrationSchemas.THE_WEBP_UPDATE - 0.001);
+}
 
 const migrateToken = async function (token, schema) {
     const updateData = {};
@@ -439,7 +470,6 @@ function _imageNeedsReplace(imagePath) {
 
 // Any reference to a .png or .jpg in systems/sfrpg/ should be replaced with a link to a .webp with the same name
 const _migrateDocumentIconToWebP = function(document, data) {
-
     const imageType = _imageNeedsReplace(document.img);
     if (imageType) {
         data["img"] = document.img.replace(imageType, ".webp");
