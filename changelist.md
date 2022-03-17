@@ -1,3 +1,9 @@
+# v0.18.2 - Precog Pioneers
+
+This is a hotfix to re enable backwards compatability to v0.8.9. 
+
+_**NOTE:** This will be the last version that will support any Foundry VTT version less than v9._
+
 # v0.18.1 - Precog Pioneers
 
 This is a bugfix update to address some issues introduced with v0.18.
@@ -86,6 +92,7 @@ To make finding aliens a little easier, we've integrated the work started by rre
 * The token configuration of Starships and Vehicles that contained a crew can now be opened again.
 * The token configuration for a player character can now be opened again after opening a class item sheet for a character containing at least 1 caster class. Fixes #538
 * Wealth label on the inventory panel now displays how it was calculated, as well as the wealth by character level and estimated level by wealth values, following CRB pg. 391.
+* Updated a few class features with proper modifier support.
 
 * Module support: Rolls that are made without involving the UI now receive a data flag called skipUI.
 
