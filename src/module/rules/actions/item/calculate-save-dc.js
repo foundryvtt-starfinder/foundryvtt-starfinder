@@ -19,8 +19,9 @@ export default function (engine) {
                 if (!dcFormula) {
                     const ownerKeyAbilityId = actorData?.attributes.keyability;
                     const itemKeyAbilityId = data.ability;
+					const spellAbility = actorData?.attributes.spellcasting
 
-                    const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
+                    const abilityKey = itemKeyAbilityId || spellAbility || ownerKeyAbilityId;
                     if (abilityKey) {
                         if (itemData.type === "spell") {
                             dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
@@ -33,7 +34,7 @@ export default function (engine) {
                                 }
                             }
                         } else if (itemData.type === "feat") {
-                            dcFormula = `10 + @owner.details.level.value + @owner.abilities.${abilityKey}.mod`;
+                            dcFormula = `10 + floor(@owner.details.level.value / 2) + @owner.abilities.${abilityKey}.mod`;
                         } else {
                             dcFormula = `10 + floor(@item.level / 2) + @owner.abilities.${abilityKey}.mod`;
                         }
