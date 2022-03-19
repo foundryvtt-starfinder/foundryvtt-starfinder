@@ -19,7 +19,7 @@ export default function (engine) {
                 if (!dcFormula) {
                     const ownerKeyAbilityId = actorData?.attributes.keyability;
                     const itemKeyAbilityId = data.ability;
-					const spellAbility = actorData?.attributes.spellcasting
+		    const spellAbility = actorData?.attributes.spellcasting
 
                     const abilityKey = itemKeyAbilityId || spellAbility || ownerKeyAbilityId;
                     if (abilityKey) {
