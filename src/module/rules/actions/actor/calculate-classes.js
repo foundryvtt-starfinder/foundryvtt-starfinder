@@ -11,13 +11,15 @@ export default function (engine) {
 
             const className = cls.name.slugify({replacement: "_", strict: true});
             const keyAbilityScore = classData.kas || "str";
+			const spellAbility = classData.spellAbility || "str";
             
             const classInfo = {
                 keyAbilityMod: data.abilities[keyAbilityScore].mod,
                 levels: classData.levels,
                 keyAbilityScore: keyAbilityScore,
                 skillRanksPerLevel: classData.skillRanks.value,
-                isCaster: classData.isCaster
+                isCaster: classData.isCaster,
+				spellAbility: spellAbility
             };
             
             data.classes[className] = classInfo;
