@@ -1,3 +1,25 @@
+# v0.19.0 - Starfinder Update
+
+## New Features
+### WebP conversion
+We have converted all of the embedded system art files from png to webp, taking the package from 80MB down by 75%! to about 20MB, this should be welcome news to anyone hosting Starfinder on a host that has limited storage space.
+
+We also perform a world migration to convert all item and actor art that uses these files to their webp variants. This is a very slow process as it has to go through all actors and their items, all items, all scenes and their tokens, all world compendia, all macros, the chat messages, etc. This takes a lot of time.
+
+Do not perform this update 5 minutes before your game goes live! Otherwise, you will have a 30 minute "just chatting" game night.
+
+### Compendium
+* A few missing class features and items from the Armory have been added.
+* Hazards have been added as their own compendium!
+* Precog ability names have had their names made consistent with the rest of the items.
+* Skills compendium received many spelling error corrections.
+* Various aliens have been updated.
+
+## Bugfixes and small improvements
+* French localization has been updated. (Thanks Aldarion!)
+* Missing icons when hovering over items in sheets have been restored. (Thanks mkahvi!)
+
+
 # v0.18.2 - Precog Pioneers
 
 This is a hotfix to re enable backwards compatability to v0.8.9. 
