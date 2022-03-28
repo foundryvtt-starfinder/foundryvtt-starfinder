@@ -21,7 +21,7 @@ export default function (engine) {
                     const ownerKeyAbilityId = actorData?.attributes.keyability;
                     const itemKeyAbilityId = data.ability;
                     const spellbookSpellAbility = actorData?.attributes.spellcasting
-                    const classSpellAbility = classes.filter(item => item.key === "technomancer" || "mystic" || "witchwarper" || "precog")[0].data.data.spellAbility;
+                    const classSpellAbility = classes.filter(item => item.key === "technomancer" || "mystic" || "witchwarper" || "precog")[0]?.data.data.spellAbility;
 
                     const abilityKey = itemKeyAbilityId || classSpellAbility || spellbookSpellAbility || ownerKeyAbilityId;
                     if (abilityKey) {
