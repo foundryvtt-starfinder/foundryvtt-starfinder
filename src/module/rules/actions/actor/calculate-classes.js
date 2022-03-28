@@ -11,7 +11,7 @@ export default function (engine) {
 
             const className = cls.name.slugify({replacement: "_", strict: true});
             const keyAbilityScore = classData.kas || "str";
-			const spellAbility = classData.spellAbility || "cha";
+            const spellAbility = classData.spellAbility || "cha";
 			// Default to cha in order for Spell-like abilities to work correctly out of the box
             
             const classInfo = {
@@ -20,7 +20,7 @@ export default function (engine) {
                 keyAbilityScore: keyAbilityScore,
                 skillRanksPerLevel: classData.skillRanks.value,
                 isCaster: classData.isCaster,
-				spellAbility: spellAbility
+                spellAbility: spellAbility
             };
             
             data.classes[className] = classInfo;

@@ -9,7 +9,7 @@ export default function (engine) {
 
         const actor = fact.owner.actor;
         const actorData = fact.owner.actorData;
-		const classes = actor.items.filter(item => item.type === "class")
+        const classes = actor.items.filter(item => item.type === "class")
 
         if (data.actionType) {
 
@@ -20,10 +20,10 @@ export default function (engine) {
                 if (!dcFormula) {
                     const ownerKeyAbilityId = actorData?.attributes.keyability;
                     const itemKeyAbilityId = data.ability;
-					const SpellbookSpellAbility = actorData?.attributes.spellcasting
-					const classSpellAbility = classes.filter(item => item.key === "technomancer" || "mystic" || "witchwarper" || "precog")[0].data.data.spellAbility;
+                    const spellbookSpellAbility = actorData?.attributes.spellcasting
+                    const classSpellAbility = classes.filter(item => item.key === "technomancer" || "mystic" || "witchwarper" || "precog")[0].data.data.spellAbility;
 
-                    const abilityKey = itemKeyAbilityId || classSpellAbility || SpellbookSpellAbility || ownerKeyAbilityId;
+                    const abilityKey = itemKeyAbilityId || classSpellAbility || spellbookSpellAbility || ownerKeyAbilityId;
                     if (abilityKey) {
                         if (itemData.type === "spell") {
                             dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
