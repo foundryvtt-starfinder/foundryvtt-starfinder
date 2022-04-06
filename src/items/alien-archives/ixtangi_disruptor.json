@@ -48,12 +48,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": "0"
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -123,7 +129,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -132,7 +139,8 @@
         "special": "original base: 30 ft.; original special: climb 20 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -144,6 +152,28 @@
       }
     },
     "classes": {},
+    "common": {
+      "abilities": {
+        "cha": {
+          "base": 0
+        },
+        "con": {
+          "base": 0
+        },
+        "dex": {
+          "base": 0
+        },
+        "int": {
+          "base": 0
+        },
+        "str": {
+          "base": 0
+        },
+        "wis": {
+          "base": 0
+        }
+      }
+    },
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -193,15 +223,27 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.png",
+        "height": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Ixtangis are a species of chameleon-like people, originating from the jungle planet of Doganga in the Vast. The ixtangis&rsquo; history on their beautiful, verdant planet is long and painful, and they&rsquo;ve only recently been saved from the brink of planetary destruction, thriving in floating island-countries that dot Doganga&rsquo;s skies.</p>\n<p>Ixtangis are tall and reptilian, and their default colorations are green, red, blue, or black. Their scales are actually mostly transparent; any colors that ixtangis display result from their manipulation of the liquid crystals beneath their layer of glass-like scales. They are able to change the structure of these crystals and the resultant colors at will and can even become functionally invisible to observers by mimicking the scenery behind them. They have two sets of eyes that are able to move independently from one another, granting them a wide range of vision. Their snouts taper in thick, wedge-like horns, and some ixtangis also have large, bony crests that they like to accessorize with jewelry and precious stones. Their mouths are filled with razor-sharp teeth, and their tongues are long and retractable. Ixtangis have long, flexible tails that end in a scorpion-like stinger. They rarely find themselves using this poisonous barb in modern times, but they may lash out if startled or if they have no other option.</p>\n<p>Before the Gap, ixtangis continually fought a planet-threatening disease called the Blighted Bark. This supernatural plague resulted from the ixtangis&rsquo; overuse of Doganga&rsquo;s natural resources. When the ixtangis&rsquo; central government finally realized how far they&rsquo;d pushed Doganga&rsquo;s ability to support the ixtangis&rsquo; continued existence, it commissioned a council of powerful ixtangi spellcasters, known as gleamscales, to push back against the civilization&rsquo;s overuse of natural resources. Performing an extremely potent, centuries-old ritual passed down through the gleamscales&rsquo; literature, the gleamscales intended to replenish the planet&rsquo;s resources, and&mdash;for a few years&mdash;it worked. Little did most ixtangis know, the gleamscales&rsquo; rituals made use of evil magic, taken from Abaddon by irresponsible gleamscale progenitors.</p>\n<p>The ixtangis, who thought themselves successful, rested on their laurels while the malevolent magic from the rituals interacted with the innate magical properties of Doganga&rsquo;s jungles. This caused the magic to conjure shadowy and sickly vegetation and animals, which then spread this plague, known as the Blighted Bark, to the surrounding regions.</p>\n<p>After a decade of the Blighted Bark taking over all of Doganga&rsquo;s jungles, the ixtangis were at a loss. Their efforts to repel the blight failed, and with no means of leaving the planet, they&nbsp;accepted their fate, resolving to die with their Doganga. Then the Gap happened.</p>\n<p>On the other side of this universal amnesia, the majority of ixtangis find themselves living lush and affluent lives in country-sized floating islands. These technological &ldquo;country ships&rdquo; levitate hundreds of feet above Doganga&rsquo;s verdant jungle canopies, and are anywhere from ten to hundreds of miles across. Each of these domed countries carries the name of a nation that was once on Doganga&rsquo;s surface. Ixtangis scientists and historians attempt (fruitlessly) to figure out how their ancestors not only avoided destruction, but rebounded with a vengeance. The Blighted Bark is all but gone, with only a few manageable outbreaks occurring once every couple of years.</p>\n<p>The only ixtangis left on Doganga&rsquo;s surface are those known as duskdwellers. These unusually pallid ixtangis live and work beneath the shadows of the island-countries hovering above. Mostly industrial workers, duskdwellers live their lives gathering resources not only for their own shadowed settlements, but for the island-countries above who depend on duskdwellers to collect water, wood, stone, and other organic resources. They&rsquo;re also the foremost breeders of moonlily, a psychotropic flower that blooms only in shadow. Moonlily brewers then grind this flower into a thick paste, which they distill into an alcoholic drink that intoxicates consumers and grants them euphoric visions. Duskdwellers exhibit keen survival skills, using their dinosaur beasts of burden to travel the jungles in search of resources&mdash;or better places to settle where the demands of the &ldquo;highscales&rdquo; above can&rsquo;t reach them.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or glimmer (3&ndash;10)</p>\n</section>"
+        "value": "<h2>Description</h2>\n<p>Ixtangis are a species of chameleon-like people, originating from the jungle planet of Doganga in the Vast. The ixtangis&rsquo; history on their beautiful, verdant planet is long and painful, and they&rsquo;ve only recently been saved from the brink of planetary destruction, thriving in floating island-countries that dot Doganga&rsquo;s skies.</p>\n<p>Ixtangis are tall and reptilian, and their default colorations are green, red, blue, or black. Their scales are actually mostly transparent; any colors that ixtangis display result from their manipulation of the liquid crystals beneath their layer of glass-like scales. They are able to change the structure of these crystals and the resultant colors at will and can even become functionally invisible to observers by mimicking the scenery behind them. They have two sets of eyes that are able to move independently from one another, granting them a wide range of vision. Their snouts taper in thick, wedge-like horns, and some ixtangis also have large, bony crests that they like to accessorize with jewelry and precious stones. Their mouths are filled with razor-sharp teeth, and their tongues are long and retractable. Ixtangis have long, flexible tails that end in a scorpion-like stinger. They rarely find themselves using this poisonous barb in modern times, but they may lash out if startled or if they have no other option.</p>\n<p>Before the Gap, ixtangis continually fought a planet-threatening disease called the Blighted Bark. This supernatural plague resulted from the ixtangis&rsquo; overuse of Doganga&rsquo;s natural resources. When the ixtangis&rsquo; central government finally realized how far they&rsquo;d pushed Doganga&rsquo;s ability to support the ixtangis&rsquo; continued existence, it commissioned a council of powerful ixtangi spellcasters, known as gleamscales, to push back against the civilization&rsquo;s overuse of natural resources. Performing an extremely potent, centuries-old ritual passed down through the gleamscales&rsquo; literature, the gleamscales intended to replenish the planet&rsquo;s resources, and&mdash;for a few years&mdash;it worked. Little did most ixtangis know, the gleamscales&rsquo; rituals made use of evil magic, taken from Abaddon by irresponsible gleamscale progenitors.</p>\n<p>The ixtangis, who thought themselves successful, rested on their laurels while the malevolent magic from the rituals interacted with the innate magical properties of Doganga&rsquo;s jungles. This caused the magic to conjure shadowy and sickly vegetation and animals, which then spread this plague, known as the Blighted Bark, to the surrounding regions.</p>\n<p>After a decade of the Blighted Bark taking over all of Doganga&rsquo;s jungles, the ixtangis were at a loss. Their efforts to repel the blight failed, and with no means of leaving the planet, they&nbsp;accepted their fate, resolving to die with their Doganga. Then the Gap happened.</p>\n<p>On the other side of this universal amnesia, the majority of ixtangis find themselves living lush and affluent lives in country-sized floating islands. These technological &ldquo;country ships&rdquo; levitate hundreds of feet above Doganga&rsquo;s verdant jungle canopies, and are anywhere from ten to hundreds of miles across. Each of these domed countries carries the name of a nation that was once on Doganga&rsquo;s surface. Ixtangis scientists and historians attempt (fruitlessly) to figure out how their ancestors not only avoided destruction, but rebounded with a vengeance. The Blighted Bark is all but gone, with only a few manageable outbreaks occurring once every couple of years.</p>\n<p>The only ixtangis left on Doganga&rsquo;s surface are those known as duskdwellers. These unusually pallid ixtangis live and work beneath the shadows of the island-countries hovering above. Mostly industrial workers, duskdwellers live their lives gathering resources not only for their own shadowed settlements, but for the island-countries above who depend on duskdwellers to collect water, wood, stone, and other organic resources. They&rsquo;re also the foremost breeders of moonlily, a psychotropic flower that blooms only in shadow. Moonlily brewers then grind this flower into a thick paste, which they distill into an alcoholic drink that intoxicates consumers and grants them euphoric visions. Duskdwellers exhibit keen survival skills, using their dinosaur beasts of burden to travel the jungles in search of resources&mdash;or better places to settle where the demands of the &ldquo;highscales&rdquo; above can&rsquo;t reach them.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or glimmer (3&ndash;10)</p>\n</section>",
+        "weight": ""
       },
       "class": "",
       "cr": 7,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
-      "source": "AA1 pg. 54",
+      "source": "AA4 pg. 54",
+      "subtype": "",
       "xp": {
         "value": 3200
       }
@@ -438,30 +480,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -494,33 +543,44 @@
       },
       "senses": "darkvision 60 ft., low-light vision;",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   },
   "effects": [],
-  "flags": {},
+  "flags": {
+    "core": {}
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "LfJikfHFFQSiqixY",
       "name": "Fangblade",
       "type": "weapon",
+      "ammunition": false,
+      "augmentation": false,
+      "consumable": false,
+      "container": false,
       "data": {
         "type": "",
         "ability": "",
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
           "type": "none",
           "condition": "",
           "cost": null
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
-          "units": "none",
+          "units": null,
           "value": null
         },
         "attackBonus": 15,
@@ -551,6 +611,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -562,6 +623,16 @@
               "amount": 7,
               "subtype": "fusion",
               "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightProperty": ""
             }
           ]
         },
@@ -572,7 +643,15 @@
               "formula": "1d8",
               "operator": "",
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": true,
+                "sonic": false
               }
             }
           ]
@@ -580,16 +659,27 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d12+9",
-              "operator": "",
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": true,
+                "sonic": false
               }
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>Cheaper and less elegant than a ripper dueling sword, a fangblade is closer to an industrial chainsaw, with a toothed, motor-driven chain wrapped around its blade.</p>"
         },
@@ -598,6 +688,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -620,6 +711,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -638,6 +730,7 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
@@ -673,6 +766,7 @@
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -685,6 +779,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -694,12 +789,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
-          "units": "none",
+          "units": null,
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -707,6 +804,21 @@
         },
         "source": "Core Rulebook, P. 172",
         "special": "",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": ""
@@ -724,26 +836,56 @@
         "weaponType": "advancedM"
       },
       "effects": [],
+      "equipment": false,
       "flags": {},
+      "folder": null,
+      "fusion": true,
+      "goods": false,
+      "hybrid": false,
       "img": "systems/sfrpg/icons/equipment/weapons/fangblade.webp",
-      "sort": 500001
+      "magic": false,
+      "permission": {
+        "default": 0
+      },
+      "shield": false,
+      "sort": 500001,
+      "spell": false,
+      "storage": {
+        "type": "slot",
+        "affectsEncumbrance": true,
+        "amount": 7,
+        "subtype": "fusion",
+        "weightProperty": "level"
+      },
+      "technological": false,
+      "upgrade": false,
+      "vehicleAttack": false,
+      "vehicleSystem": false,
+      "weapon": false,
+      "weaponAccessory": false
     },
     {
       "_id": "TDTJ2RWTEINQphdz",
       "name": "Tail",
       "type": "weapon",
+      "ammunition": false,
+      "augmentation": false,
+      "consumable": false,
+      "container": false,
       "data": {
         "type": "",
         "ability": "",
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -778,6 +920,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -799,16 +942,27 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6+9",
-              "operator": "",
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": true,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -817,6 +971,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -839,6 +994,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -857,6 +1013,7 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
@@ -892,6 +1049,7 @@
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -904,6 +1062,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -913,12 +1072,14 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -926,6 +1087,21 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": null
@@ -943,27 +1119,60 @@
         "weaponType": "basicM"
       },
       "effects": [],
+      "equipment": false,
       "flags": {},
+      "folder": null,
+      "fusion": true,
+      "goods": false,
+      "hybrid": false,
       "img": "icons/svg/mystery-man.svg",
-      "sort": 600001
+      "magic": false,
+      "permission": {
+        "default": 0
+      },
+      "shield": false,
+      "sort": 600001,
+      "spell": false,
+      "storage": {
+        "type": "slot",
+        "affectsEncumbrance": true,
+        "amount": 0,
+        "subtype": "fusion",
+        "weightProperty": "level"
+      },
+      "technological": false,
+      "upgrade": false,
+      "vehicleAttack": false,
+      "vehicleSystem": false,
+      "weapon": false,
+      "weaponAccessory": false
     },
     {
       "_id": "T3znPK6lPjCxVhhQ",
       "name": "Laser Rifle, corona",
       "type": "weapon",
+      "ammunition": false,
+      "augmentation": false,
+      "consumable": false,
+      "container": false,
       "data": {
         "type": "",
         "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
           "type": "none",
           "condition": "",
           "cost": null
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
-          "units": "none",
+          "units": null,
           "value": null
         },
         "attackBonus": 18,
@@ -994,6 +1203,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1005,23 +1215,47 @@
               "amount": 6,
               "subtype": "fusion",
               "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightProperty": ""
             }
           ]
         },
-        "critical": null,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6+7",
-              "operator": "",
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": true,
+                "sonic": false
               }
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>With its snub, squared barrel and internal reinforcements, a laser rifle is sturdy and dependable.</p>"
         },
@@ -1030,6 +1264,7 @@
           "units": "",
           "value": ""
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -1039,47 +1274,127 @@
         "price": 4650,
         "proficient": true,
         "properties": {
+          "aeon": false,
           "amm": false,
           "analog": false,
+          "antibiological": false,
           "archaic": false,
+          "aurora": false,
           "automatic": false,
           "blast": false,
           "block": false,
           "boost": false,
+          "breach": false,
+          "breakdown": false,
           "bright": false,
+          "buttressing": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
           "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
           "entangle": false,
           "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "gearArray": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
           "injection": false,
+          "integrated": false,
           "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
           "nonlethal": false,
           "one": false,
           "operative": false,
           "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
           "powered": false,
+          "professional": false,
+          "punchGun": false,
           "qreload": false,
+          "radioactive": false,
           "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shatter": false,
+          "shells": false,
+          "shield": false,
           "sniper": false,
           "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": true,
-          "unwieldy": false
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 120
         },
+        "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "source": "Core Rulebook, P. 176",
         "special": "",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "units": "",
@@ -1098,53 +1413,33 @@
         "weaponType": "longA"
       },
       "effects": [],
+      "equipment": false,
       "flags": {},
+      "folder": null,
+      "fusion": true,
+      "goods": false,
+      "hybrid": false,
       "img": "systems/sfrpg/icons/equipment/weapons/laser-rifle-corona.webp",
-      "sort": 700001
-    },
-    {
-      "_id": "ne7qXZ5zc2PioxNw",
-      "name": "Ixtangi Survivalwear (Functions As Estex Suit III)",
-      "type": "goods",
-      "data": {
-        "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "L",
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "equipped": false,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "quantity": 1,
-        "source": ""
+      "magic": false,
+      "permission": {
+        "default": 0
       },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 800001
+      "shield": false,
+      "sort": 700001,
+      "spell": false,
+      "storage": {
+        "type": "slot",
+        "affectsEncumbrance": true,
+        "amount": 6,
+        "subtype": "fusion",
+        "weightProperty": "level"
+      },
+      "technological": false,
+      "upgrade": false,
+      "vehicleAttack": false,
+      "vehicleSystem": false,
+      "weapon": false,
+      "weaponAccessory": false
     },
     {
       "_id": "0EXHoE2jxcboXHxZ",
@@ -1177,20 +1472,28 @@
         },
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item&rsquo;s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 40</p>"
         },
+        "equippable": false,
         "equipped": false,
         "identified": true,
         "level": 4,
         "modifiers": [],
         "price": 330,
         "quantity": "2",
+        "quantityPerPack": 1,
         "source": "Core Rulebook"
       },
       "effects": [],
       "flags": {},
+      "folder": null,
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
+      "permission": {
+        "default": 0
+      },
       "sort": 900001
     },
     {
@@ -1203,6 +1506,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "action",
@@ -1224,10 +1528,13 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
-          "value": "<p>An ixtangi has an innate ability to change their coloration as a standard action; this produces one of the following effects.</p>\n<p><strong>Glimmer</strong>: The ixtangi flashes their coloration in a display that distracts onlookers. Enemies within 30 feet that can see the ixtangi must succeed at a DC Will save (DC = 10 + the ixtangi's Charisma modifier + half the ixtangi's level ) or be @Compendium[sfrpg.conditions.7PPRS6krnvaTHbxh]{Fascinated} for 1d4 rounds. A creature can be affected by this ability only once per day. This is a mind-affecting effect. Stealth: The ixtangi mimics their surroundings, becoming almost invisible. They gain a +2 racial bonus to Stealth checks to hide until the beginning of their next turn.</p>"
+          "value": "<p>An ixtangi has an innate ability to change their coloration as a standard action; this produces one of the following effects.</p>\n<p><strong>Glimmer</strong>: The ixtangi flashes their coloration in a display that distracts onlookers. Enemies within 30 feet that can see the ixtangi must succeed at a DC Will save (DC = 10 + the ixtangi's Charisma modifier + half the ixtangi's level ) or be @Compendium[sfrpg.conditions.7PPRS6krnvaTHbxh]{Fascinated} for 1d4 rounds. A creature can be affected by this ability only once per day. This is a mind-affecting effect.</p>\n<p><em>Stealth: </em>The ixtangi mimics their surroundings, becoming almost invisible. They gain a +2 racial bonus to Stealth checks to hide until the beginning of their next turn.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -1236,7 +1543,23 @@
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "46dd065b-68d4-46e0-851a-f55c2f5c4571",
+            "name": "Liquid Crystal Display: Stealth",
+            "type": "racial",
+            "condition": "",
+            "effectType": "skill",
+            "enabled": true,
+            "max": 2,
+            "modifier": "2",
+            "modifierType": "formula",
+            "notes": "Stealth: The ixtangi mimics their surroundings, becoming almost invisible. They gain a +2 racial bonus to Stealth checks to hide until the beginning of their next turn.",
+            "source": "Liquid Crystal Display: Glimmer",
+            "subtab": "misc",
+            "valueAffected": "ste"
+          }
+        ],
         "range": {
           "additional": "",
           "per": "",
@@ -1248,6 +1571,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1266,7 +1590,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
       "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
       "sort": 1100001
     },
     {
@@ -1276,6 +1604,7 @@
       "data": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -1297,8 +1626,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "An ixtangi is an adept climber, using their sticky paw pads, tongue, and prehensile tail to stay stuck to surfaces. An ixtangi is not @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} while climbing and can take 10 on Athletics checks to climb even when in combat or immediate danger."
         },
@@ -1321,6 +1653,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1339,7 +1672,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
       "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
       "sort": 1200001
     },
     {
@@ -1352,12 +1689,14 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -1400,6 +1739,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -1422,8 +1762,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Estex is a thick, durable fabric most often used to make flight suits and environmental suits. Estex suits cover the wearer from the neck down and can be modified with armor upgrades as needed. Higher-quality estex suits grant a better level of protection and allow for more upgrades, though they are often bulkier than comparable suits of light armor.&nbsp;</span></p>"
         },
@@ -1432,6 +1775,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -1441,6 +1785,7 @@
         "price": 5500,
         "proficient": true,
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
@@ -1448,6 +1793,7 @@
           "value": null
         },
         "reach": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1455,6 +1801,7 @@
         },
         "size": "",
         "source": "CRB pg. 197",
+        "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
@@ -1473,7 +1820,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
       "img": "systems/sfrpg/icons/equipment/armor/estex-suit-3.webp",
+      "permission": {
+        "default": 0
+      },
       "sort": 100000
     },
     {
@@ -1507,20 +1858,28 @@
         },
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 20</p>"
         },
+        "equippable": false,
         "equipped": false,
         "identified": true,
         "level": 1,
         "modifiers": [],
         "price": 60,
         "quantity": 2,
+        "quantityPerPack": 1,
         "source": "Core Rulebook"
       },
       "effects": [],
       "flags": {},
+      "folder": null,
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
+      "permission": {
+        "default": 0
+      },
       "sort": 1000001
     },
     {
@@ -1533,6 +1892,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -1554,8 +1914,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>If an ixtangi scores a critical hit with their racial natural weapon, their target must succeed at a Fortitude save (DC = 10 + the ixtangi&rsquo;s Constitution modifier + half the ixtangi&rsquo;s level ) or gain the @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} condition until the end of its next turn. This is a @Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{poison} effect.</p>"
         },
@@ -1578,6 +1941,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1596,7 +1960,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
       "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
       "sort": 1300001
     }
   ],
@@ -1604,6 +1972,7 @@
     "name": "Ixtangi Disruptor",
     "actorId": "iLdYkefxqOVKZ47l",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -1620,6 +1989,27 @@
     "flags": {},
     "height": 1,
     "img": "icons/svg/mystery-man.svg",
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "animation": {
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "bright": 0,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
     "lightAlpha": 1,
     "lightAngle": 360,
     "lightAnimation": {
@@ -1634,8 +2024,8 @@
     "randomImg": false,
     "rotation": 0,
     "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
+    "sightAngle": 0,
+    "tint": null,
     "vision": false,
     "width": 1
   }
