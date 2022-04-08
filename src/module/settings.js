@@ -1,4 +1,5 @@
 import { SFRPG } from "./config.js";
+import { scalingCantrips ) from "./module/item/item.js";
 
 export const registerSystemSettings = function () {
     game.settings.register("sfrpg", "diagonalMovement", {
@@ -93,6 +94,18 @@ export const registerSystemSettings = function () {
         default: false,
         type: Boolean
     });
+    
+    game.settings.register("sfrpg", "scalingCantrips", {
+    name: "SFRPG.Settings.ScalingCantrips.Name",
+        hint: "SFRPG.Settings.ScalingCantrips.Hint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    onChange: () => {
+        scalingCantrips() 
+    }
+});    
 
     for (let combatType of SFRPG.combatTypes) {
         const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);

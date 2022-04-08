@@ -1599,3 +1599,74 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         new SFRPGModifierApplication(modifier, this, {}, this.actor).render(true);
     }
 }
+
+export async function scalingCantrips() {
+        let spells = ['Hazard','Energy Ray','Telekinetic Projectile','Injury Echo']
+        let pack = game.packs.get('sfrpg.spells')
+        let d3scaling = "lookupRange(@details.cl.value, 1d3, 3, 1d3+floor(@details.level.value/2), 7, 2d4+floor(@details.level.value/2), 10, 3d4+floor(@details.level.value/2), 13, 4d4+floor(@details.level.value/2), 15, 5d4+floor(@details.level.value/2), 17, 7d4+floor(@details.level.value/2), 19, 9d4+floor(@details.level.value/2))"
+        let d6scaling = "lookupRange(@details.cl.value, 1d6, 3, 1d6+floor(@details.level.value/2), 7, 2d6+floor(@details.level.value/2), 10, 3d6+floor(@details.level.value/2), 13, 4d6+floor(@details.level.value/2), 15, 5d6+floor(@details.level.value/2), 17, 7d6+floor(@details.level.value/2), 19, 9d6+floor(@details.level.value/2))"
+        let wasLocked = pack.locked
+        let setting = (game.settings.get("sfrpg", "scalingCantrips"))
+        let updated = 0
+
+        if (wasLocked) {
+            await pack.configure({ locked: false });
+        }
+
+        let compIndex = await pack.index || getIndex()
+
+
+        let spellsFull = spells.map( async (currentValue, index, arr) => {
+            let filter = await compIndex.filter(i => i.name === spells[index])
+            return await pack.getDocument(filter[0]._id)
+
+        })
+
+        spellsFull = await Promise.all(spellsFull)
+        
+        for (let x of spellsFull) {
+            let updates = duplicate(x.data.data.damage.parts)
+        
+        if (setting) {
+            switch (x.data.data.damage.parts[0].formula) {
+                
+                case "1d3":
+                    updates[0].formula = d3scaling
+                    await x.update( {"data.damage.parts": updates}, {pack: "sfrpg.spells"})
+                    updated += 1
+                break;
+
+                case "1d6":
+                    updates[0].formula = d6scaling
+                    await x.update( {"data.damage.parts": updates}, {pack: "sfrpg.spells"})
+                    updated += 1
+                break;
+            }
+        } else {
+            switch (x.data.data.damage.parts[0].formula) {
+                case d3scaling:
+                    updates[0].formula = "1d3"
+                    await x.update( {"data.damage.parts": updates}, {pack: "sfrpg.spells"})
+                    updated += 1
+                break;
+
+                case d6scaling:
+                   updates[0].formula = "1d6"
+                    await x.update( {"data.damage.parts": updates}, {pack: "sfrpg.spells"})
+                    updated += 1
+                break
+            }
+        }
+
+
+        }
+
+        if (wasLocked) {
+            await pack.configure({ locked: true });
+        }
+        
+        if (updated) {
+        console.log("Updated " + updated + " spells to", ((setting) ? "scaling formulas." : "their default formulas."))
+        }
+    }
+    
