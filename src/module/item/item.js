@@ -1666,7 +1666,7 @@ export async function scalingCantrips() {
         }
         
         if (updated) {
-        console.log("Updated " + updated + " spells to", ((setting) ? "scaling formulas." : "their default formulas."))
+        console.log("Starfinder | Updated " + updated + " spells to", ((setting) ? "scaling formulas." : "their default formulas."))
         }
     }
     
