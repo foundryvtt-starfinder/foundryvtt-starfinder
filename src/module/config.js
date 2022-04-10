@@ -131,6 +131,7 @@ SFRPG.abilityActivationTypes = {
     "swift": "SFRPG.AbilityActivationTypesSwift",
     "full": "SFRPG.AbilityActivationTypesFull",
     "reaction": "SFRPG.AbilityActivationTypesReaction",
+    "round": "SFRPG.AbilityActivationTypesRound",
     "other": "SFRPG.AbilityActivationTypesOther",
     "day": "SFRPG.AbilityActivationTypesDay",
     "hour": "SFRPG.AbilityActivationTypesHour",
