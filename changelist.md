@@ -18,7 +18,11 @@ Do not perform this update 5 minutes before your game goes live! Otherwise, you 
 ## Bugfixes and small improvements
 * French localization has been updated. (Thanks Aldarion!)
 * Missing icons when hovering over items in sheets have been restored. (Thanks mkahvi!)
+* Added missing reference to `src/module/actor/mixins/actor-damage.js` file which was causing issues with resolving damage from the chat cards.
 
+# v0.18.3 - Precog Pioneers
+
+This is a hotfix release to fix an issue where it was imposible to apply damage to a starship from the chat card.
 
 # v0.18.2 - Precog Pioneers
 
