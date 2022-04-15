@@ -1,3 +1,7 @@
+# v0.18.3 - Precog Pioneers
+
+This is a hotfix release to fix an issue where it was imposible to apply damage to a starship from the chat card.
+
 # v0.18.2 - Precog Pioneers
 
 This is a hotfix to re enable backwards compatability to v0.8.9. 
