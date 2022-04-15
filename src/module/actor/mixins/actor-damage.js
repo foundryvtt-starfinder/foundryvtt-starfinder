@@ -1,4 +1,5 @@
 import { SFRPG } from "../../config.js";
+import { ChoiceDialog } from "../../apps/choice-dialog.js";
 
 export class SFRPGHealingSetting {
     constructor() {
