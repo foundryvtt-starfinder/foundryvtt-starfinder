@@ -21,7 +21,6 @@ try {
             if (itemData.type === itemType) {
                 const isTracking = (itemData.data.weaponType === "tracking") || (itemData.data.weaponType === "ecm");
                 
-                
                 if (isTracking) {
                     itemData.data.actionTarget = "tl";
                 } else {
