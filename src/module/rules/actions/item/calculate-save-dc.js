@@ -9,6 +9,7 @@ export default function (engine) {
 
         const actor = fact.owner.actor;
         const actorData = fact.owner.actorData;
+        const classes = actor.items.filter(item => item.type === "class")
 
         if (data.actionType) {
 
@@ -19,8 +20,10 @@ export default function (engine) {
                 if (!dcFormula) {
                     const ownerKeyAbilityId = actorData?.attributes.keyability;
                     const itemKeyAbilityId = data.ability;
+                    const spellbookSpellAbility = actorData?.attributes.spellcasting
+                    const classSpellAbility = classes.filter(item => item.key === "technomancer" || "mystic" || "witchwarper" || "precog")[0]?.data.data.spellAbility;
 
-                    const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
+                    const abilityKey = itemKeyAbilityId || classSpellAbility || spellbookSpellAbility || ownerKeyAbilityId;
                     if (abilityKey) {
                         if (itemData.type === "spell") {
                             dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
@@ -28,12 +31,12 @@ export default function (engine) {
                             // Get owner spell save dc modifiers and append to roll
                             const allModifiers = actor?.getAllModifiers();
                             if (allModifiers) {
-                                for (const modifier of allModifiers.filter(x => x.effectType === "spell-save-dc")) {
+                                for (const modifier of allModifiers.filter(x => x.enabled && x.effectType === "spell-save-dc")) {
                                     dcFormula += ` + ${modifier.modifier}[${modifier.name}]`;
                                 }
                             }
                         } else if (itemData.type === "feat") {
-                            dcFormula = `10 + @owner.details.level.value + @owner.abilities.${abilityKey}.mod`;
+                            dcFormula = `10 + floor(@owner.details.level.value / 2) + @owner.abilities.${abilityKey}.mod`;
                         } else {
                             dcFormula = `10 + floor(@item.level / 2) + @owner.abilities.${abilityKey}.mod`;
                         }
@@ -46,37 +49,33 @@ export default function (engine) {
                     }
                 }
 
-                if (dcFormula) {
-                    const rollContext = new RollContext();
-                    rollContext.addContext("item", item, data);
-                    rollContext.setMainContext("item");
-                    if (actor && actor.data) {
-                        rollContext.addContext("owner", actor);
-                        rollContext.setMainContext("owner");
-                    }
-            
-                    actor?.setupRollContexts(rollContext);
-                
-                    const rollPromise = DiceSFRPG.createRoll({
-                        rollContext: rollContext,
-                        rollFormula: dcFormula,
-                        mainDie: null,
-                        dialogOptions: { skipUI: true }
-                    });
-            
-                    rollPromise.then(rollResult => {
-                        const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
-                        item.labels.save = returnValue;
-                        item.labels.saveFormula = rollResult.formula;
-                    });
+                let computedSave = false;
 
-                    if (!fact.promises) {
-                        fact.promises = [];
+                if (dcFormula) {
+                    const rollContext = RollContext.createItemRollContext(item, actor, {itemData: data});
+
+                    const rollResult = DiceSFRPG.resolveFormulaWithoutDice(dcFormula, rollContext, {logErrors: false});
+                    if (!rollResult.hadError) {
+                        item.labels.save = `DC ${rollResult.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+                        item.labels.saveFormula = dcFormula;
+                        computedSave = true;
+                    } else {
+                        console.error(
+                            `An error occurred parsing the %csave DC formula%c for %c'${item.name}'%c owned by %c'${actor?.name ?? "Unknown Actor"}'%c\n\nIs there a dice term in the formula?\nFormula: %c${dcFormula}`,
+                            "font-weight: bold; color: blue;",
+                            "",
+                            "font-weight: bold; color: black;",
+                            "",
+                            "font-weight: bold; color: green;",
+                            "",
+                            "font-weight: bold; color: black;"
+                        );
                     }
-                    fact.promises.push(rollPromise);
-                } else {
+                }
+
+                if (!computedSave) {
                     item.labels.save = 10;
-                    item.labels.saveFormula = 10;
+                    item.labels.saveFormula = 10;    
                 }
             }
         }

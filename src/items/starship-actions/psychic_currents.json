@@ -1,40 +1,40 @@
 {
+  "_id": "WBO4aqcsNAfF5ziy",
   "name": "Psychic Currents",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>If you have at least 12 ranks in Mysticism, you can spend 1 Resolve Point and attempt a Mysticism check (DC = 20 + 1-1/2 × your starship’s tier) to manipulate mysterious, invisible forces in the void of space, expanding and contracting the basic physics around your own vessel and altering how your starship can negotiate the confines of physical space-time. On a successful check, reduce your starship’s minimum distance between turns by 1 (to a minimum of 0) for that round.</p><h2>Critical effect</h2><p>You manipulate the currents to push your starship along, increasing its speed by 2 until the start of the next turn.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "magicOfficer",
-    "order": 40,
-    "phase": {
-      "name": "Engineering phase",
-      "tooltip": "This action can be used during the engineering phase of combat."
+    "dc": {
+      "resolve": true,
+      "value": "20 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": false,
-    "resolvePointCost": 1,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>If you have at least 12 ranks in Mysticism, you can spend 1 Resolve Point and attempt a Mysticism check (DC = 20 + 1-1/2 × your starship’s tier) to manipulate mysterious, invisible forces in the void of space, expanding and contracting the basic physics around your own vessel and altering how your starship can negotiate the confines of physical space-time. On a successful check, reduce your starship’s minimum distance between turns by 1 (to a minimum of 0) for that round.</p><h2>Critical effect</h2><p>You manipulate the currents to push your starship along, increasing its speed by 2 until the start of the next turn.</p>"
+    },
+    "effectCritical": "You manipulate the currents to push your starship along, increasing its speed by 2 until the start of the next turn.",
+    "effectNormal": "If you have at least 12 ranks in Mysticism, you can spend 1 Resolve Point and attempt a Mysticism check (DC = 20 + 1-1/2 × your starship’s tier) to manipulate mysterious, invisible forces in the void of space, expanding and contracting the basic physics around your own vessel and altering how your starship can negotiate the confines of physical space-time. On a successful check, reduce your starship’s minimum distance between turns by 1 (to a minimum of 0) for that round.",
     "formula": [
       {
         "name": "Mysticism",
         "formula": "@magicOfficer.skills.mys.mod"
       }
     ],
+    "isPush": false,
+    "order": 40,
+    "phase": {
+      "name": "Engineering phase",
+      "tooltip": "This action can be used during the engineering phase of combat."
+    },
+    "resolvePointCost": 1,
+    "role": "magicOfficer",
+    "selectorKey": "magicOfficer",
     "selectors": [
       "magicOfficer"
     ],
-    "selectorKey": "magicOfficer",
-    "dc": {
-      "value": "20 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
-    },
-    "effectNormal": "If you have at least 12 ranks in Mysticism, you can spend 1 Resolve Point and attempt a Mysticism check (DC = 20 + 1-1/2 × your starship’s tier) to manipulate mysterious, invisible forces in the void of space, expanding and contracting the basic physics around your own vessel and altering how your starship can negotiate the confines of physical space-time. On a successful check, reduce your starship’s minimum distance between turns by 1 (to a minimum of 0) for that round.",
-    "effectCritical": "You manipulate the currents to push your starship along, increasing its speed by 2 until the start of the next turn."
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "WBO4aqcsNAfF5ziy"
+  "img": "icons/svg/mystery-man.svg"
 }

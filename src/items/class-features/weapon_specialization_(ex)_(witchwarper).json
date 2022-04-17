@@ -1,118 +1,118 @@
 {
+  "_id": "jdzs5R6AcCflJeCK",
   "name": "Weapon Specialization (Ex) (Witchwarper)",
   "type": "feat",
-  "img": "icons/svg/mystery-man.svg",
   "data": {
-    "description": {
-      "chat": "",
-      "gmnotes": "",
-      "short": "",
-      "value": "<p>&gt;@Compendium[sfrpg.classes.kb6oH6VfAxc7irG4]{Witchwarper}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with.</p>",
-      "unidentified": ""
-    },
-    "source": "Witchwarper",
     "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionType": "",
     "activation": {
       "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
+      "condition": "",
+      "cost": null
     },
     "area": {
-      "value": null,
-      "units": null,
+      "effect": "",
       "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
       "units": null,
-      "additional": "",
-      "per": ""
+      "value": null
     },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
-    },
-    "isActive": null,
-    "ability": null,
-    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@Compendium[sfrpg.classes.kb6oH6VfAxc7irG4]{Witchwarper}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
     "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "b9d4b693-b71c-4488-94c1-0a908436ad5d",
+        "name": "Weapon Specialization Witchwarper",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "modifier": "floor(@details.level.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      },
+      {
+        "_id": "dab11b2b-b61d-433b-b134-5ed34692c756",
+        "name": "Weapon Specialization Witchwarper",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "modifier": "@details.level.value",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "basicM"
+      },
+      {
+        "_id": "53791d87-8f6c-446e-b3c6-76cad8974e43",
+        "name": "Weapon Specialization Witchwarper",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-damage",
+        "enabled": true,
+        "modifier": "-ceil(@details.level.value / 2)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "operative"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": null,
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "3rd Level",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "modifiers": [
-      {
-        "name": "Weapon Specialization Witchwarper",
-        "modifier": "floor(@details.level.value / 2)",
-        "type": "untyped",
-        "effectType": "weapon-damage",
-        "valueAffected": "smallA",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "b9d4b693-b71c-4488-94c1-0a908436ad5d"
-      },
-      {
-        "name": "Weapon Specialization Witchwarper",
-        "modifier": "@details.level.value",
-        "type": "untyped",
-        "effectType": "weapon-damage",
-        "valueAffected": "basicM",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "dab11b2b-b61d-433b-b134-5ed34692c756"
-      },
-      {
-        "name": "Weapon Specialization Witchwarper",
-        "modifier": "-ceil(@details.level.value / 2)",
-        "type": "untyped",
-        "effectType": "weapon-property-damage",
-        "valueAffected": "operative",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "53791d87-8f6c-446e-b3c6-76cad8974e43"
-      }
-    ],
-    "requirements": "3rd Level",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "Witchwarper",
+    "target": {
+      "type": "",
+      "value": ""
     },
-    "abilityMods": {
-      "parts": []
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
     }
   },
-  "_id": "jdzs5R6AcCflJeCK"
+  "img": "icons/svg/mystery-man.svg"
 }

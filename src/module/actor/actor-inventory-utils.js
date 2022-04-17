@@ -367,144 +367,6 @@ export async function setItemContainer(actorItemHelper, item, container, quantit
 }
 
 /**
- * Returns the bulk of the item, along with its contents.
- * To prevent rounding errors, all calculations are done in integer space by multiplying bulk by 10.
- * A bulk of L is considered as 1, while a bulk of 1 would be 10. Any other non-number bulk is considered 0 bulk.
- * 
- * Item container properties such as equipped bulk and content bulk multipliers are taken into account here.
- * 
- * @param {Object} item The item whose bulk is to be calculated.
- * @param {Array} contents An array of items who are considered children of the item.
- * @returns {Number} A multiplied-by-10 value of the total bulk.
- */
-export function computeCompoundBulkForItem(item, contents) {
-    let contentBulk = 0;
-    //console.log(["computeCompoundBulk", item?.name, contents]);
-    if (item?.data?.container?.storage && item.data.container.storage.length > 0) {
-        for (let storage of item.data.container.storage) {
-            let storageIndex = item.data.container.storage.indexOf(storage);
-            let storageBulk = 0;
-
-            let storedItems = contents.filter(x => item.data.container.contents.find(y => y.id === x.item._id && y.index === storageIndex));
-            if (storage.affectsEncumbrance) {
-                for (let child of storedItems) {
-                    let childBulk = computeCompoundBulkForItem(child.item, child.contents);
-                    storageBulk += childBulk;
-                }
-            }
-
-            contentBulk += storageBulk;
-            //console.log(`${item.name}, storage ${storageIndex}, contentBulk: ${contentBulk}`);
-        }
-    } else if (contents?.length > 0) {
-        for (let child of contents) {
-            let childBulk = computeCompoundBulkForItem(child.item, child.contents);
-            contentBulk += childBulk;
-        }
-    }
-
-    let personalBulk = 0;
-    if (item?.data?.bulk) {
-        if (item.data.bulk.toUpperCase() === "L") {
-            personalBulk = 1;
-        } else if (!Number.isNaN(Number.parseInt(item.data.bulk))) {
-            personalBulk = item.data.bulk * 10;
-        }
-
-        if (item.data.quantity && !Number.isNaN(Number.parseInt(item.data.quantity))) {
-            // Compute number of packs based on quantityPerPack, provided quantityPerPack is set to a value.
-            let packs = 1;
-            if (item.data.quantityPerPack === null || item.data.quantityPerPack === undefined) {
-                packs = item.data.quantity;
-            } else {
-                if (item.data.quantityPerPack <= 0) {
-                    packs = 0;
-                } else {
-                    packs = Math.floor(item.data.quantity / item.data.quantityPerPack);
-                }
-            }
-
-            personalBulk *= packs;
-        }
-
-        if (item.data.equipped) {
-            if (item.data.equippedBulkMultiplier !== undefined && !Number.isNaN(Number.parseInt(item.data.equippedBulkMultiplier))) {
-                personalBulk *= item.data.equippedBulkMultiplier;
-            }
-        }
-    }
-
-    //console.log(`${item?.name || "null"} has a content bulk of ${contentBulk}, and personal bulk of ${personalBulk}`);
-    return personalBulk + contentBulk;
-}
-
-/**
- * Returns the wealth of the item, along with its contents.
- * 
- * Item container properties such as include content wealth are taking into account.
- * 
- * @param {Object} item The item whose total wealth is to be calculated.
- * @param {Array} contents An array of items who are considered children of the item.
- * @returns {Number} The sum total wealth of the item and its contents.
- */
-export function computeCompoundWealthForItem(item, contents) {
-    let contentWealth = 0;
-    if (item?.data?.container?.includeContentsInWealthCalculation) {
-        if (item?.data?.container?.storage && item.data.container.storage.length > 0) {
-            for (const storage of item.data.container.storage) {
-                const storageIndex = item.data.container.storage.indexOf(storage);
-                let storageWealth = 0;
-
-                const storedItems = contents.filter(x => item.data.container.contents.find(y => y.id === x.item._id && y.index === storageIndex));
-                for (const child of storedItems) {
-                    const childWealth = computeCompoundWealthForItem(child.item, child.contents);
-                    storageWealth += childWealth.totalWealth;
-                }
-
-                contentWealth += storageWealth;
-            }
-        } else if (contents?.length > 0) {
-            for (const child of contents) {
-                const childWealth = computeCompoundWealthForItem(child.item, child.contents);
-                contentWealth += childWealth.totalWealth;
-            }
-        }
-    }
-
-    let personalWealth = item.data.price || 0;
-    if (personalWealth > 0) {
-        if (!Number.isNaN(Number.parseInt(item.data.quantity))) {
-            // Compute number of packs based on quantityPerPack, provided quantityPerPack is set to a value.
-            let packs = 1;
-            if (item.data.quantityPerPack === null || item.data.quantityPerPack === undefined) {
-                packs = item.data.quantity;
-            } else {
-                if (item.data.quantityPerPack <= 0) {
-                    packs = 0;
-                } else {
-                    packs = Math.floor(item.data.quantity / item.data.quantityPerPack);
-                }
-            }
-
-            personalWealth *= packs;
-        }
-    }
-
-    const itemWealth = {
-        totalWealth: personalWealth + contentWealth,
-        personalWealth: personalWealth,
-        contentWealth: contentWealth
-    };
-
-    if (item.type === "container") {
-        item.contentWealth = itemWealth.contentWealth;
-    }
-
-    //console.log(`${item?.name || "null"} has a content wealth of ${contentWealth}, and personal wealth of ${personalWealth}`);
-    return itemWealth;
-}
-
-/**
  * Tests if a given item contains any items.
  * 
  * @param {Item} item Item to test.
@@ -1156,11 +1018,12 @@ export class ActorItemHelper {
                     delete itemData.armor.upgradeSlots;
                     delete itemData.armor.upgrades;
                 }
+
+                isDirty = true;
             }
 
             // Migrate intermediate format
             if (itemData.container?.contents?.length > 0) {
-                let isDirty = false;
                 if (itemData.container.contents[0] instanceof String) {
                     for (let i = 0; i<itemData.container.contents.length; i++) {
                         itemData.container.contents[i] = {id: itemData.container.contents[0], index: 0};
@@ -1188,7 +1051,6 @@ export class ActorItemHelper {
             /** Ensure deleted items are cleaned up. */
             const newContents = itemData.container?.contents?.filter(x => this.actor.items.find(ownedItem => ownedItem.id === x.id));
             if (newContents?.length !== itemData.container?.contents?.length) {
-                //console.log([`Actor ${this.actor.name} has deleted item(s) for ${item.name}`, item, itemData.container.contents, newContents]);
                 itemData.container.contents = newContents;
                 isDirty = true;
             }
@@ -1210,14 +1072,14 @@ export class ActorItemHelper {
             }
 
             if (isDirty) {
-                console.log("> Migrating " + item.name);
+                console.log("> Updating container settings for " + item.name);
                 migrations.push({ _id: item.id, data: itemData});
             }
         }
 
         if (migrations.length > 0) {
-            console.log(`Starfinder | Executing migration of ${migrations.length} items for actor ${this.actor.name}.`);
-            return this.actor.updateEmbeddedDocuments("Item", migrations);
+            const result = this.actor.updateEmbeddedDocuments("Item", migrations);
+            return result;
         }
         
         return null;

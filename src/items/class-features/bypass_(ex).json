@@ -1,103 +1,103 @@
 {
   "_id": "tB2crolmUBN3QMOT",
   "name": "Bypass (Ex)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
   "data": {
-    "description": {
-      "value": "<p>&gt;@Compendium[sfrpg.classes.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You are skilled at getting inside computer systems and electronic devices. At 1st level, you gain a +1 insight bonus to Computers and Engineering skill checks. At 5th level, every 4 levels thereafter, and at 20th level, this bonus increases by 1.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "Mechanic",
     "type": "",
-    "activation": {
-      "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
-      "units": "",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
-    },
     "ability": null,
     "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": null
+    },
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>&gt;@Compendium[sfrpg.classes.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You are skilled at getting inside computer systems and electronic devices. At 1st level, you gain a +1 insight bonus to Computers and Engineering skill checks. At 5th level, every 4 levels thereafter, and at 20th level, this bonus increases by 1.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
     "formula": "",
+    "modifiers": [
+      {
+        "_id": "e62f45d1-6d83-4496-9177-6684e2739c5b",
+        "name": "Bypass",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "modifier": "1 + ceil(max(0, @classes.mechanic.levels - 4) / 4) + max(0, floor(@classes.mechanic.levels / 20))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "com"
+      },
+      {
+        "_id": "c9f85c64-d571-4662-9345-6874493d0285",
+        "name": "Bypass",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "modifier": "1 + ceil(max(0, @classes.mechanic.levels - 4) / 4) + max(0, floor(@classes.mechanic.levels / 20))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eng"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "1st Level",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "modifiers": [
-      {
-        "name": "Bypass",
-        "modifier": "1 + ceil(max(0, @classes.mechanic.levels - 4) / 4) + max(0, floor(@classes.mechanic.levels / 20))",
-        "type": "insight",
-        "effectType": "skill",
-        "valueAffected": "com",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "e62f45d1-6d83-4496-9177-6684e2739c5b"
-      },
-      {
-        "name": "Bypass",
-        "modifier": "1 + ceil(max(0, @classes.mechanic.levels - 4) / 4) + max(0, floor(@classes.mechanic.levels / 20))",
-        "type": "insight",
-        "effectType": "skill",
-        "valueAffected": "eng",
-        "enabled": true,
-        "source": "",
-        "notes": "",
-        "modifierType": "constant",
-        "condition": "",
-        "subtab": "misc",
-        "_id": "c9f85c64-d571-4662-9345-6874493d0285"
-      }
-    ],
-    "requirements": "1st Level",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "Mechanic",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/classes/bypass.png"
+  "img": "systems/sfrpg/icons/classes/bypass.webp",
+  "permission": {
+    "QqVQDajn5ZN4kl25": 3,
+    "default": 0
+  }
 }

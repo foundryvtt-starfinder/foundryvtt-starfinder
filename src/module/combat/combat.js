@@ -553,19 +553,15 @@ export class CombatSFRPG extends Combat {
 
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
-            return "1d20 + @skills.pil.mod"
+            return "1d20 + @pilot.skills.pil.mod"
         }
         else {
-            return "1d20 + @attributes.init.total";
+            return "1d20 + @combatant.attributes.init.total";
         }
     }
 
     async _getInitiativeRoll(combatant, formula) {
-        const rollContext = new RollContext();
-        rollContext.addContext("combatant", combatant.actor);
-        rollContext.setMainContext("combatant");
-
-        combatant.actor.setupRollContexts(rollContext);
+        const rollContext = RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"});
 
         const parts = [];
 
@@ -574,6 +570,9 @@ export class CombatSFRPG extends Combat {
             rollContext.setMainContext("pilot");
         } else {
             parts.push("@combatant.attributes.init.total");
+            if (game.settings.get("sfrpg", "useInitiativeTiebreaker")) {
+                parts.push(combatant.actor.data.data.attributes.init.total / 100);
+            }
         }
     
         const rollResult = await DiceSFRPG.createRoll({
@@ -588,80 +587,79 @@ export class CombatSFRPG extends Combat {
 
     async rollInitiative(ids, {formula=null, updateTurn=true, messageOptions={}}={}) {
   
-      // Structure input data
-      ids = typeof ids === "string" ? [ids] : ids;
-      const currentId = this.combatant?.id;
-      let rollMode = messageOptions.rollMode || game.settings.get("core", "rollMode");
-  
-      // Iterate over Combatants, performing an initiative roll for each
-      const updates = [];
-      const messages = [];
-      let isFirst = true;
-      for (const id of ids) {
-        // Get Combatant data
-        const combatant = this.combatants.get(id);
-        if ( !combatant?.isOwner ) return results;
-  
-        // Roll initiative
-        const combatantInitiativeFormula = formula || this._getInitiativeFormula(combatant);
-        const roll = await this._getInitiativeRoll(combatant, combatantInitiativeFormula);
-        if (!roll) {
-            continue;
+        // Structure input data
+        ids = typeof ids === "string" ? [ids] : ids;
+        const currentId = this.combatant?.id;
+        let rollMode = messageOptions.rollMode || game.settings.get("core", "rollMode");
+    
+        // Iterate over Combatants, performing an initiative roll for each
+        const updates = [];
+        const messages = [];
+        let isFirst = true;
+        for (const id of ids) {
+            // Get Combatant data
+            const combatant = this.combatants.get(id);
+            if ( !combatant?.isOwner ) return results;
+    
+            // Roll initiative
+            const roll = await this._getInitiativeRoll(combatant, "");
+            if (!roll) {
+                continue;
+            }
+            updates.push({_id: id, initiative: roll.total});
+    
+            // Construct chat message data
+            let messageData = mergeObject({
+            speaker: {
+                scene: game.scenes.current?.id,
+                actor: combatant.actor ? combatant.actor.id : null,
+                token: combatant.token.id,
+                alias: combatant.token.name
+            },
+            flavor: `${combatant.token.name} rolls for Initiative!`,
+            flags: {"core.initiativeRoll": true}
+            }, messageOptions);
+
+            const preparedRollExplanation = DiceSFRPG.formatFormula(roll.flags.sfrpg.finalFormula.formula);
+            const rollContent = await roll.render();
+            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+            const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+
+            rollMode = roll.options?.rollMode ?? rollMode;
+
+            const chatData = {
+                flavor: messageData.flavor,
+                speaker: messageData.speaker,
+                flags: messageData.flags,
+                content: explainedRollContent,
+                rollMode: combatant.hidden && (rollMode === "roll") ? "gmroll" : rollMode,
+                roll: roll,
+                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                sound: CONFIG.sounds.dice
+            };
+
+            if ( !isFirst ) {
+                chatData.sound = null;   // Only play 1 sound for the whole set
+            }
+            isFirst = false;
+            messages.push(chatData);
         }
-        updates.push({_id: id, initiative: roll.total});
-  
-        // Construct chat message data
-        let messageData = mergeObject({
-          speaker: {
-            scene: game.scenes.current?.id,
-            actor: combatant.actor ? combatant.actor.id : null,
-            token: combatant.token.id,
-            alias: combatant.token.name
-          },
-          flavor: `${combatant.token.name} rolls for Initiative!`,
-          flags: {"core.initiativeRoll": true}
-        }, messageOptions);
-
-        const preparedRollExplanation = DiceSFRPG.formatFormula(roll.flags.sfrpg.finalFormula.formula);
-        const rollContent = await roll.render();
-        const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-        const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
-
-        rollMode = roll.options?.rollMode ?? rollMode;
-
-        const chatData = {
-            flavor: messageData.flavor,
-            speaker: messageData.speaker,
-            flags: messageData.flags,
-            content: explainedRollContent,
-            rollMode: combatant.hidden && (rollMode === "roll") ? "gmroll" : rollMode,
-            roll: roll,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-            sound: CONFIG.sounds.dice
-        };
-
-        if ( !isFirst ) {
-            chatData.sound = null;   // Only play 1 sound for the whole set
+        
+        if ( !updates.length ) return this;
+    
+        // Update multiple combatants
+        await this.updateEmbeddedDocuments("Combatant", updates);
+    
+        // Ensure the turn order remains with the same combatant
+        if ( updateTurn && currentId ) {
+            await this.update({turn: this.turns.findIndex(t => t.id === currentId)});
         }
-        isFirst = false;
-        messages.push(chatData);
-      }
-      
-      if ( !updates.length ) return this;
-  
-      // Update multiple combatants
-      await this.updateEmbeddedDocuments("Combatant", updates);
-  
-      // Ensure the turn order remains with the same combatant
-      if ( updateTurn && currentId ) {
-        await this.update({turn: this.turns.findIndex(t => t.id === currentId)});
-      }
-  
-      // Create multiple chat messages
-      await CONFIG.ChatMessage.documentClass.create(messages);
-  
-      // Return the updated Combat
-      return this;
+    
+        // Create multiple chat messages
+        await CONFIG.ChatMessage.documentClass.create(messages);
+    
+        // Return the updated Combat
+        return this;
     }
 
     _getPilotForStarship(starshipActor) {

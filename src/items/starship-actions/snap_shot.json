@@ -1,37 +1,37 @@
 {
+  "_id": "zSdO7axt0084UMB3",
   "name": "Snap Shot",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You can fire one of your starship’s weapons with a –2 penalty to the gunnery check. You can take this action only if no other gunner actions have been taken during the gunnery phase (including snap shot).</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "minorCrew",
-    "order": 30,
-    "phase": {
-      "name": "Gunnery phase",
-      "tooltip": "This action can be taken only during the gunnery phase."
+    "dc": null,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You can fire one of your starship’s weapons with a –2 penalty to the gunnery check. You can take this action only if no other gunner actions have been taken during the gunnery phase (including snap shot).</p>"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "effectCritical": "",
+    "effectNormal": "You can fire one of your starship’s weapons with a –2 penalty to the gunnery check. You can take this action only if no other gunner actions have been taken during the gunnery phase (including snap shot).",
     "formula": [
       {
         "name": "Gunnery",
         "formula": "max(@minorCrew.attributes.baseAttackBonus.value, @minorCrew.skills.pil.ranks) + @minorCrew.abilities.dex.mod - 2"
       }
     ],
+    "isPush": false,
+    "order": 30,
+    "phase": {
+      "name": "Gunnery phase",
+      "tooltip": "This action can be taken only during the gunnery phase."
+    },
+    "resolvePointCost": 0,
+    "role": "minorCrew",
+    "selectorKey": "minorCrew",
     "selectors": [
       "minorCrew"
     ],
-    "selectorKey": "minorCrew",
-    "dc": null,
-    "effectNormal": "You can fire one of your starship’s weapons with a –2 penalty to the gunnery check. You can take this action only if no other gunner actions have been taken during the gunnery phase (including snap shot).",
-    "effectCritical": ""
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "zSdO7axt0084UMB3"
+  "img": "icons/svg/mystery-man.svg"
 }

@@ -1,6 +1,5 @@
 import { SFRPG } from "../../config.js"
 import { ActorSheetSFRPG } from "./base.js"
-import { computeCompoundBulkForItem, computeCompoundWealthForItem } from "../actor-inventory-utils.js"
 
 export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     constructor(...args) {
@@ -118,47 +117,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         
         const spellbook = this._prepareSpellbook(data, spells);
 
-        for (const i of items) {
-            i.img = i.img || DEFAULT_TOKEN;
-
-            if (!physicalInventoryItems.includes(i.type)) {
-                continue;
-            }
-
-            i.data.quantity = i.data.quantity || 0;
-            i.data.price = i.data.price || 0;
-            i.data.bulk = i.data.bulk || "-";
-            i.isOpen = i.data.container?.isOpen === undefined ? true : i.data.container.isOpen;
-
-            let weight = 0;
-            if (i.data.bulk === "L") {
-                weight = 0.1;
-            } else if (i.data.bulk === "-") {
-                weight = 0;
-            } else {
-                weight = parseFloat(i.data.bulk);
-            }
-
-            // Compute number of packs based on quantityPerPack, provided quantityPerPack is set to a value.
-            let packs = 1;
-            if (i.data.quantityPerPack === null || i.data.quantityPerPack === undefined) {
-                packs = i.data.quantity;
-            } else {
-                if (i.data.quantityPerPack <= 0) {
-                    packs = 0;
-                } else {
-                    packs = Math.floor(i.data.quantity / i.data.quantityPerPack);
-                }
-            }
-
-            i.totalWeight = packs * weight;
-            if (i.data.equippedBulkMultiplier !== undefined && i.data.equipped) {
-                i.totalWeight *= i.data.equippedBulkMultiplier;
-            }
-            i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
-                            i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
-        }
-
         this.processItemContainment(items, function (itemType, itemData) {
             let targetItemType = itemType;
             if (!(itemType in inventory)) {
@@ -181,24 +139,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
             inventory[targetItemType].items.push(itemData);
         });
-
-        let totalWeight = 0;
-        let totalWealth = 0;
-        for (const section of Object.entries(inventory)) {
-            for (const sectionItem of section[1].items) {
-                const itemBulk = computeCompoundBulkForItem(sectionItem.item, sectionItem.contents);
-                totalWeight += itemBulk;
-
-                const itemWealth = computeCompoundWealthForItem(sectionItem.item, sectionItem.contents);
-                totalWealth += itemWealth.totalWealth;
-                if (sectionItem.item.type === "container") {
-                    sectionItem.item.contentWealth = itemWealth.contentWealth;
-                }
-            }
-        }
-        totalWeight = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
-        data.encumbrance = this._computeEncumbrance(totalWeight, actorData);
-        data.inventoryValue = Math.floor(totalWealth);
 
         const features = {
             classes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"), items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
@@ -249,26 +189,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     }
 
     /**
-     * Compute the level and percentage of encumbrance for an Actor.
-     * 
-     * @param {Number} totalWeight The cumulative item weight from inventory items
-     * @param {Object} actorData The data object for the Actor being rendered
-     * @returns {Object} An object describing the character's encumbrance level
-     * @private
-     */
-    _computeEncumbrance(totalWeight, actorData) {
-        const enc = {
-            max: actorData.attributes.encumbrance.max,
-            tooltip: actorData.attributes.encumbrance.tooltip,
-            value: totalWeight
-        };
-
-        enc.pct = Math.min(enc.value * 100 / enc.max, 99);
-        enc.encumbered = enc.pct > 50;
-        return enc;
-    }
-
-    /**
      * Activate event listeners using the prepared sheet HTML
      * 
      * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
@@ -297,65 +217,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             const level = 5 + numASI * 5;
             itemData.name = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: level});
         }
-    }
-
-    /**
-     * Add a modifer to this actor.
-     * 
-     * @param {Event} event The originating click event
-     */
-    _onModifierCreate(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-
-        this.actor.addModifier({
-            name: "New Modifier",
-            subtab: target.data('subtab')
-        });
-    }
-
-    /**
-     * Delete a modifier from the actor.
-     * 
-     * @param {Event} event The originating click event
-     */
-    async _onModifierDelete(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-        
-        await this.actor.deleteModifier(modifierId);
-    }
-
-    /**
-     * Edit a modifier for an actor.
-     * 
-     * @param {Event} event The orginating click event
-     */
-    _onModifierEdit(event) {
-        event.preventDefault();
-
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-
-        this.actor.editModifier(modifierId);
-    }
-
-    /**
-     * Toggle a modifier to be enabled or disabled.
-     * 
-     * @param {Event} event The originating click event
-     */
-    async _onToggleModifierEnabled(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-
-        const modifiers = duplicate(this.actor.data.data.modifiers);
-        const modifier = modifiers.find(mod => mod._id === modifierId);
-        modifier.enabled = !modifier.enabled;
-
-        await this.actor.update({'data.modifiers': modifiers});
     }
 
     /**

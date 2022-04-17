@@ -1,77 +1,124 @@
 {
   "_id": "MBNI94tbMoqizPUk",
   "name": "Trick Attack (Ex)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
   "data": {
-    "description": {
-      "value": "<p>&gt; @Compendium[sfrpg.classes.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You can trick or startle a foe and then attack when she drops her guard. As a full action, you can move up to your speed. Whether or not you moved, you can then make an attack with a melee weapon with the operative special property or with any small arm. Just before making your attack, attempt a Bluff, Intimidate, or Stealth check (or a check associated with your specialization; see page 94) with a DC equal to 20 + your target&rsquo;s CR. If you succeed at the check, you deal 1d4 additional damage and the target is @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} against your attack. This damage increases to 1d8 at 3rd level, to 3d8 at 5th level, and by an additional 1d8 every 2 levels thereafter. You can&rsquo;t use this ability with a weapon that has the unwieldy special property or that requires a full action to make a single attack.</span></p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "Operative",
     "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "",
     "activation": {
       "type": "full",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
+      "condition": "",
+      "cost": 1
     },
     "area": {
-      "value": null,
-      "units": "none",
+      "effect": "",
       "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
       "units": "none",
-      "additional": "",
-      "per": ""
+      "value": null
     },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
-    },
-    "ability": null,
-    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt; @Compendium[sfrpg.classes.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\">You can trick or startle a foe and then attack when she drops her guard. As a full action, you can move up to your speed. Whether or not you moved, you can then make an attack with a melee weapon with the operative special property or with any small arm. Just before making your attack, attempt a Bluff, Intimidate, or Stealth check (or a check associated with your specialization; see page 94) with a DC equal to 20 + your target&rsquo;s CR. If you succeed at the check, you deal 1d4 additional damage and the target is @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-Footed} against your attack. This damage increases to 1d8 at 3rd level, to 3d8 at 5th level, and by an additional 1d8 every 2 levels thereafter. You can&rsquo;t use this ability with a weapon that has the unwieldy special property or that requires a full action to make a single attack.</span></p>\n<p>&nbsp;</p>\n<p><em>In the Modifiers tab, change the skill bonus to match your Specialization's skill check bonus.</em></p>\n<p>&nbsp;</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
     "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "be46a457-9a64-459c-bd3d-acf79ede8393",
+        "name": "Trick Attack skill bonus",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "constant",
+        "notes": "Skill Bonus for Trick Attack. Change the values to match your specialization",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      },
+      {
+        "_id": "81c0dc16-b076-48be-b097-14a63a88cfe4",
+        "name": "Trick Attack damage",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-damage",
+        "enabled": true,
+        "max": 24,
+        "modifier": "(1 - (min(1, floor(@classes.operative.levels / 3))))d4 + (1 + floor((@classes.operative.levels - 3) / 2) + min(1, floor(@classes.operative.levels / 5)))d8",
+        "modifierType": "formula",
+        "notes": "Apply if Trick Attack skill check was succesful.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "operative"
+      },
+      {
+        "_id": "f4f7a085-b5ab-4b5f-bebd-cf6ce33d7024",
+        "name": "Trick Attack damage",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-damage",
+        "enabled": true,
+        "max": 24,
+        "modifier": "(1 - (min(1, floor(@classes.operative.levels / 3))))d4 + (1 + floor((@classes.operative.levels - 3) / 2) + min(1, floor(@classes.operative.levels / 5)))d8",
+        "modifierType": "formula",
+        "notes": "Apply if Trick Attack skill check was succesful.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "1st Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "modifiers": [],
-    "requirements": "1st Level",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "Operative",
+    "target": {
+      "type": "",
+      "value": ""
     },
-    "abilityMods": {
-      "parts": []
+    "uses": {
+      "max": 0,
+      "per": "",
+      "value": 0
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/trick_attack.png"
+  "img": "systems/sfrpg/icons/classes/trick_attack.webp"
 }

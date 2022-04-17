@@ -1,40 +1,40 @@
 {
+  "_id": "nBvPpilpblioZptC",
   "name": "Balance",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You can balance the shields, redirecting power from one quadrant to protect another. With a successful Computers check (DC = 10 + 1-1/2 × your starship’s tier), you can shift Shield Points (SP) from the shield in one quadrant to the shield in another quadrant, including to depleted shields (after rebalancing, every shield must have at least 10% of the total current SP). Alternatively, you can add up the SP from all the remaining shields and evenly distribute them to all four quadrants, putting any excess SP in the forward quadrant.</p><h2>Critical effect</h2><p>While rebalancing the shields, you discover latent power in the shield systems. Before redistributing the Shield Points, you increase the total Shield Points by 5% of the starship’s PCU rating, up to the shields’ maximum value.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "scienceOfficer",
-    "order": 0,
-    "phase": {
-      "name": "Helm phase",
-      "tooltip": "This action can be taken only during the helm phase."
+    "dc": {
+      "resolve": true,
+      "value": "10 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You can balance the shields, redirecting power from one quadrant to protect another. With a successful Computers check (DC = 10 + 1-1/2 × your starship’s tier), you can shift Shield Points (SP) from the shield in one quadrant to the shield in another quadrant, including to depleted shields (after rebalancing, every shield must have at least 10% of the total current SP). Alternatively, you can add up the SP from all the remaining shields and evenly distribute them to all four quadrants, putting any excess SP in the forward quadrant.</p><h2>Critical effect</h2><p>While rebalancing the shields, you discover latent power in the shield systems. Before redistributing the Shield Points, you increase the total Shield Points by 5% of the starship’s PCU rating, up to the shields’ maximum value.</p>"
+    },
+    "effectCritical": "While rebalancing the shields, you discover latent power in the shield systems. Before redistributing the Shield Points, you increase the total Shield Points by 5% of the starship’s PCU rating, up to the shields’ maximum value.",
+    "effectNormal": "You can balance the shields, redirecting power from one quadrant to protect another. With a successful Computers check (DC = 10 + 1-1/2 × your starship’s tier), you can shift Shield Points (SP) from the shield in one quadrant to the shield in another quadrant, including to depleted shields (after rebalancing, every shield must have at least 10% of the total current SP). Alternatively, you can add up the SP from all the remaining shields and evenly distribute them to all four quadrants, putting any excess SP in the forward quadrant.",
     "formula": [
       {
         "name": "Computers",
         "formula": "@scienceOfficer.skills.com.mod"
       }
     ],
+    "isPush": false,
+    "order": 0,
+    "phase": {
+      "name": "Helm phase",
+      "tooltip": "This action can be taken only during the helm phase."
+    },
+    "resolvePointCost": 0,
+    "role": "scienceOfficer",
+    "selectorKey": "scienceOfficer",
     "selectors": [
       "scienceOfficer"
     ],
-    "selectorKey": "scienceOfficer",
-    "dc": {
-      "value": "10 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
-    },
-    "effectNormal": "You can balance the shields, redirecting power from one quadrant to protect another. With a successful Computers check (DC = 10 + 1-1/2 × your starship’s tier), you can shift Shield Points (SP) from the shield in one quadrant to the shield in another quadrant, including to depleted shields (after rebalancing, every shield must have at least 10% of the total current SP). Alternatively, you can add up the SP from all the remaining shields and evenly distribute them to all four quadrants, putting any excess SP in the forward quadrant.",
-    "effectCritical": "While rebalancing the shields, you discover latent power in the shield systems. Before redistributing the Shield Points, you increase the total Shield Points by 5% of the starship’s PCU rating, up to the shields’ maximum value."
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "nBvPpilpblioZptC"
+  "img": "icons/svg/mystery-man.svg"
 }

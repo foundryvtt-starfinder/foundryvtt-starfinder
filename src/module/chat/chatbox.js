@@ -17,16 +17,6 @@ export default class SFRPGCustomChatMessage {
     }
 
     /**
-     * Render a custom damage roll.
-     * 
-     * @param {Roll} roll The roll data
-     * @param {object} data The data for the roll
-     */
-    static async renderDamageRoll(roll, data) {
-
-    }
-
-    /**
      * Render a custom standard roll to chat.
      * 
      * @param {Roll}        roll             The roll data
@@ -80,8 +70,28 @@ export default class SFRPGCustomChatMessage {
             breakdown: data.breakdown,
             tags: data.tags,
             damageTypeString: data.damageTypeString,
+            specialMaterials: data.specialMaterials,
             rollOptions: data.rollOptions,
         };
+
+        const speaker = data.speaker;
+        if (speaker) {
+            let setImage = false;
+            if (speaker.token) {
+                const token = game.scenes.get(speaker.scene)?.tokens?.get(speaker.token);
+                if (token) {
+                    options.tokenImg = token.data.img;
+                    setImage = true;
+                }
+            }
+
+            if (speaker.actor && !setImage) {
+                const actor = Actors.instance.get(speaker.actor);
+                if (actor) {
+                    options.tokenImg = actor.data.img;
+                }
+            }
+        }
 
         SFRPGCustomChatMessage._render(roll, data, options);
 
@@ -99,7 +109,7 @@ export default class SFRPGCustomChatMessage {
         }
 
         if (options.rollOptions?.actionTarget) {
-            rollContent = DiceSFRPG.appendTextToRoll(rollContent, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: SFRPG.actionTargets[options.rollOptions?.actionTarget]}));
+            rollContent = DiceSFRPG.appendTextToRoll(rollContent, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: options.rollOptions.actionTargetSource[options.rollOptions.actionTarget]}));
         }
 
         options = foundry.utils.mergeObject(options, { rollContent });
@@ -129,6 +139,10 @@ export default class SFRPGCustomChatMessage {
                 amount: roll.total,
                 types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
             };
+        }
+
+        if (options?.specialMaterials) {
+            messageData.flags.specialMaterials = options.specialMaterials;
         }
 
         if (options.rollOptions) {

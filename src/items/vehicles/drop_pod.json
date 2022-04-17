@@ -3,49 +3,14 @@
   "name": "Drop Pod",
   "type": "vehicle",
   "data": {
-    "conditions": {},
-    "details": {
-      "level": 5,
-      "price": 7800,
-      "description": {
-        "value": "<p>Capable of deploying fire teams and supply caches from dizzying heights, drop pods offer a heart-stopping ride from lower orbit to a planet&rsquo;s surface.</p>",
-        "chat": "",
-        "unidentified": ""
-      },
-      "source": "AP #24 pg. 52"
-    },
-    "crew": {
-      "useNPCCrew": false,
-      "pilot": {
-        "limit": 1,
-        "actorIds": []
-      },
-      "complement": {
-        "limit": 0,
-        "actorIds": []
-      },
-      "passenger": {
-        "limit": 5,
-        "actorIds": []
-      }
-    },
-    "hangarBay": {
-      "limit": 0,
-      "actorIds": []
-    },
     "attributes": {
-      "size": "huge",
       "type": "air",
+      "controlSkill": "none",
+      "cover": "total",
       "dimensions": {
-        "width": "12",
+        "height": "12",
         "length": "12",
-        "height": "12"
-      },
-      "speed": {
-        "drive": "- (controlled plummet)",
-        "full": "- (controlled plummet)",
-        "mph": "- (controlled plummet)",
-        "type": ""
+        "width": "12"
       },
       "eac": {
         "value": 18
@@ -53,361 +18,396 @@
       "expansionBays": {
         "value": 1
       },
+      "hardness": 10,
+      "hp": {
+        "max": 70,
+        "threshold": 35,
+        "value": 70
+      },
       "kac": {
         "value": 20
       },
-      "cover": "total",
-      "hp": {
-        "value": 70,
-        "max": 70,
-        "threshold": 35
-      },
-      "hardness": 10,
       "modifiers": {
-        "piloting": "0",
-        "attackStopped": "-",
+        "attackFullSpeed": "-",
         "attackMoving": "-",
-        "attackFullSpeed": "-"
+        "attackStopped": "-",
+        "piloting": "0"
       },
-      "systems": [],
+      "size": "huge",
       "special": [],
-      "controlSkill": "none"
+      "speed": {
+        "type": "",
+        "drive": "- (controlled plummet)",
+        "full": "- (controlled plummet)",
+        "mph": "- (controlled plummet)"
+      },
+      "systems": []
+    },
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 0
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": 5
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": "<p>Capable of deploying fire teams and supply caches from dizzying heights, drop pods offer a heart-stopping ride from lower orbit to a planet&rsquo;s surface.</p>"
+      },
+      "level": 5,
+      "price": 7800,
+      "source": "AP #24 pg. 52"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 0
     }
   },
+  "effects": [],
   "flags": {},
-  "token": {
-    "flags": {},
-    "name": "Drop Pod",
-    "displayName": 0,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": null,
-    "width": 1,
-    "height": 1,
-    "scale": 1,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "x0klv9uWW4crarM5",
-    "actorLink": false,
-    "disposition": -1,
-    "displayBars": 0,
-    "bar1": {},
-    "bar2": {},
-    "randomImg": false
-  },
+  "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "IFQG4V1jH9iw8fZK",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
-          "unidentified": ""
-        },
-        "source": "",
         "type": "",
-        "modifiers": [],
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
         "damage": {
           "parts": [
             {
               "formula": "2*(6d8)",
+              "operator": "",
               "types": {
                 "bludgeoning": true
-              },
-              "operator": ""
+              }
             }
           ]
         },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>"
+        },
+        "modifiers": [],
         "save": {
           "type": "reflex",
           "dc": "11",
           "descriptor": "negate"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 100000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 100000
     },
     {
       "_id": "ZNQw4yfixdMSttws",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
-          "unidentified": ""
-        },
-        "source": "",
         "type": "",
-        "modifiers": [],
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
         "damage": {
           "parts": [
             {
               "formula": "6d8",
+              "operator": "",
               "types": {
                 "bludgeoning": true
-              },
-              "operator": ""
+              }
             }
           ]
         },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>"
+        },
+        "modifiers": [],
         "save": {
           "type": "reflex",
           "dc": "11",
           "descriptor": "half"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 200000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 200000
     },
     {
       "_id": "pvgJBELMsxPrtX7N",
       "name": "Planetary comm unit",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>"
         },
-        "source": "CRB pg. 218",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": true,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": "0",
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": "CRB pg. 218"
       },
-      "sort": 500000,
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
+      "sort": 500000
     },
     {
       "_id": "qLfNuS9mNyWe0ZMI",
       "name": "Autocontrol",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have autocontrol, which enables you to spend your actions on tasks other than piloting, but is far less capable than an autopilot. You can engage autocontrol as a swift action after taking a drive or race action, and it lasts until it is disengaged (also a swift action) or until the vehicle is no longer capable of moving. When you&rsquo;re using autocontrol, the vehicle becomes uncontrolled, but each round it moves in a straight line for the same distance and at the same heading and speed as the last pilot action (moving as if taking two drive actions if drive was the last action the pilot took, or as a race action if that was the last action the pilot took). The autocontrol uses the result of the pilot&rsquo;s most recent Piloting check as the result of its Piloting checks.</span></p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have autocontrol, which enables you to spend your actions on tasks other than piloting, but is far less capable than an autopilot. You can engage autocontrol as a swift action after taking a drive or race action, and it lasts until it is disengaged (also a swift action) or until the vehicle is no longer capable of moving. When you&rsquo;re using autocontrol, the vehicle becomes uncontrolled, but each round it moves in a straight line for the same distance and at the same heading and speed as the last pilot action (moving as if taking two drive actions if drive was the last action the pilot took, or as a race action if that was the last action the pilot took). The autocontrol uses the result of the pilot&rsquo;s most recent Piloting check as the result of its Piloting checks.</span></p>"
         },
-        "source": "CRB pg. 280",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": true,
         "isActive": true,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": "CRB pg. 280"
       },
-      "sort": 300000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 300000
     },
     {
       "_id": "Vaswyqa52IbJrnA7",
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>"
         },
-        "source": "",
-        "type": "",
+        "isActive": false,
         "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
+          "piloting": "0",
+          "usedAsPilot": false
         },
         "senses": {
-          "usedForSenses": true,
-          "senses": "dark vision 120 ft."
+          "senses": "dark vision 120 ft.",
+          "usedForSenses": true
         },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 500000,
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
+      "sort": 500000
     },
     {
       "_id": "mWTW8SMZEpRpehHn",
       "name": "Vacuum shields",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Life support systems and shielding protect this vehicle&rsquo;s occupants from the harmful effects of space for a number of hours equal to the vehicle&rsquo;s level.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>Life support systems and shielding protect this vehicle&rsquo;s occupants from the harmful effects of space for a number of hours equal to the vehicle&rsquo;s level.</p>"
         },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 600000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 600000
     },
     {
       "_id": "haNvVsM0YaY4KuNK",
       "name": "Enclosed (Ex)",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>In addition to having total cover, the pilot and passengers in an enclosed vehicle can&rsquo;t use their personal weapons to attack creatures and objects outside the vehicle, though they can use the vehicle&rsquo;s weapons (if any).</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>In addition to having total cover, the pilot and passengers in an enclosed vehicle can&rsquo;t use their personal weapons to attack creatures and objects outside the vehicle, though they can use the vehicle&rsquo;s weapons (if any).</p>"
         },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 700000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 700000
     },
     {
       "_id": "Csv3jfjhVIt8KCt9",
       "name": "Controlled Plummet (Ex)",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>With no piloting controls or means of self-propulsion, this vehicle&rsquo;s heading and velocity are set at the time it is launched from another airborne vehicle or starship. Each round, its autocontrol maintains its heading toward a predetermined point on the ground, using the terminal velocity of the planet&rsquo;s atmosphere (200&ndash;300 mph for world with normal gravity) as its full speed. One round before impact, antigrav rotors, parachutes, retrorockets, or other mechanisms slow the descent to 60 feet per round, allowing for safe touchdown.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>With no piloting controls or means of self-propulsion, this vehicle&rsquo;s heading and velocity are set at the time it is launched from another airborne vehicle or starship. Each round, its autocontrol maintains its heading toward a predetermined point on the ground, using the terminal velocity of the planet&rsquo;s atmosphere (200&ndash;300 mph for world with normal gravity) as its full speed. One round before impact, antigrav rotors, parachutes, retrorockets, or other mechanisms slow the descent to 60 feet per round, allowing for safe touchdown.</p>"
         },
-        "source": "",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": 0
-        },
-        "canBeActivated": false,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 800000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 800000
     }
   ],
-  "effects": [],
-  "img": "icons/svg/mystery-man.svg"
+  "token": {
+    "name": "Drop Pod",
+    "actorId": "x0klv9uWW4crarM5",
+    "actorLink": false,
+    "bar1": {},
+    "bar2": {},
+    "brightLight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "dimSight": 0,
+    "displayBars": 0,
+    "displayName": 0,
+    "disposition": -1,
+    "flags": {},
+    "height": 1,
+    "img": "icons/svg/mystery-man.svg",
+    "lightAlpha": 1,
+    "lightAngle": 360,
+    "lightAnimation": {
+      "intensity": 5,
+      "speed": 5
+    },
+    "lockRotation": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sightAngle": 360,
+    "tint": null,
+    "vision": false,
+    "width": 1
+  }
 }

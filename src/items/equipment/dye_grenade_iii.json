@@ -1,129 +1,104 @@
 {
+  "_id": "nkZYC9WUugUbDWqo",
   "name": "Dye grenade III",
   "type": "weapon",
   "data": {
-    "description": {
-      "value": "<p>Lumocantha dye can be weaponized easily. A creature that fails its Reflex saving throw against a dye grenade takes additional damage from laser weapons equal to half the dye grenade&rsquo;s item level (minimum 1). This lasts until the dye is removed, usually by changing armor or clothing or by spending 1d4 hours cleaning off the stain.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "AA4 pg. 69",
     "type": "",
-    "quantity": 1,
-    "bulk": "L",
-    "price": 1300,
-    "level": 8,
-    "attuned": false,
-    "equipped": false,
-    "identified": true,
+    "ability": "str",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "rwak",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 1
+    },
+    "area": {
+      "effect": "burst",
+      "shape": "sphere",
+      "units": "ft",
+      "value": 10
+    },
+    "attackBonus": 0,
     "attributes": {
-      "sturdy": true,
+      "ac": {
+        "value": "5"
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": 39,
-        "max": "39"
       },
       "hardness": {
         "value": "21"
       },
-      "ac": {
-        "value": "5"
-      }
+      "hp": {
+        "max": "39",
+        "value": 39
+      },
+      "size": "medium",
+      "sturdy": true
     },
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
+    "attuned": false,
+    "bulk": "L",
+    "capacity": {
+      "max": 0,
+      "value": 0
     },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": 10,
-      "units": "ft",
-      "shape": "sphere",
-      "effect": "burst"
-    },
-    "range": {
-      "value": 20,
-      "units": "ft",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": 1,
-      "max": 1,
-      "per": "charges"
-    },
-    "isActive": null,
-    "ability": "str",
-    "actionType": "rwak",
-    "attackBonus": 0,
     "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "isOpen": true,
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 0,
+          "subtype": "fusion",
+          "weightProperty": "level"
+        }
+      ]
+    },
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": [
         {
           "formula": "4d4",
+          "operator": "",
           "types": {
             "acid": true
-          },
-          "operator": ""
+          }
         }
       ]
     },
-    "formula": "",
-    "save": {
-      "type": "reflex",
-      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
-      "descriptor": "negate"
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>Lumocantha dye can be weaponized easily. A creature that fails its Reflex saving throw against a dye grenade takes additional damage from laser weapons equal to half the dye grenade&rsquo;s item level (minimum 1). This lasts until the dye is removed, usually by changing armor or clothing or by spending 1d4 hours cleaning off the stain.</p>"
     },
     "descriptors": [],
-    "capacity": {
-      "value": 0,
-      "max": 0
+    "duration": {
+      "units": "",
+      "value": ""
     },
-    "usage": {
-      "value": 0,
-      "per": ""
-    },
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "level": 8,
     "modifiers": [],
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 0,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        }
-      ],
-      "isOpen": true
-    },
-    "weaponType": "grenade",
-    "weaponCategory": "uncategorized",
-    "special": "",
+    "price": 1300,
+    "proficient": false,
     "properties": {
-      "one": false,
-      "two": false,
-      "amm": false,
       "aeon": false,
+      "amm": false,
       "analog": false,
       "antibiological": false,
       "archaic": false,
@@ -172,6 +147,7 @@
       "modal": false,
       "necrotic": false,
       "nonlethal": false,
+      "one": false,
       "operative": false,
       "penetrating": false,
       "polarize": false,
@@ -200,19 +176,44 @@
       "throttle": false,
       "thrown": true,
       "trip": false,
+      "two": false,
       "unbalancing": false,
       "underwater": false,
       "unwieldy": false,
       "variantBoost": false,
       "wideLine": false
     },
-    "proficient": false,
-    "abilityMods": {
-      "parts": []
-    }
+    "quantity": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 20
+    },
+    "save": {
+      "type": "reflex",
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
+      "descriptor": "negate"
+    },
+    "source": "AA4 pg. 69",
+    "special": "",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "usage": {
+      "per": "",
+      "value": 0
+    },
+    "uses": {
+      "max": 1,
+      "per": "charges",
+      "value": 1
+    },
+    "weaponCategory": "uncategorized",
+    "weaponType": "grenade"
   },
-  "flags": {},
-  "img": "icons/weapons/thrown/grenade-round.webp",
   "effects": [],
-  "_id": "nkZYC9WUugUbDWqo"
+  "flags": {},
+  "img": "icons/weapons/thrown/grenade-round.webp"
 }

@@ -20,7 +20,9 @@ function onTokenCreated(document, options, userId) {
     if (!canvas.initialized) { return; }
     if (getProperty(document.data, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === document.id);
-        trySetupLootToken(token);
+        if (token) {
+            trySetupLootToken(token);
+        }
     }
 }
 
@@ -28,7 +30,9 @@ function onTokenUpdated(document, options, userId) {
     if (!canvas.initialized) { return; }
     if (getProperty(document.data, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === document.id);
-        trySetupLootToken(token);
+        if (token) {
+            trySetupLootToken(token);
+        }
     }
 }
 
@@ -212,7 +216,7 @@ function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
         itemData = [itemData];
     }
 
-    for (let item of itemData) {
+    for (const item of itemData) {
         if (item.data.equipped) {
             item.data.equipped = false;
         }
@@ -227,7 +231,7 @@ function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
         }
     }
 
-    if (game.user.can("TOKEN_CREATE")) {
+    if (game.user.isGM) {
         const messageData = {
             payload: msg
         };

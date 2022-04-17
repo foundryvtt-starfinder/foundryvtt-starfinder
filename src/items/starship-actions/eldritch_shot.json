@@ -1,40 +1,40 @@
 {
+  "_id": "exvXNMIOA2BnaL39",
   "name": "Eldritch Shot",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You augment a starship weapon with a burst of your personal magic in much the same way that weapon fusions augment personal-scale weapons. Such an effort is considerable, and the magic lasts for only a single attack before it fizzles and the starship weapon returns to its normal functionality. Choose one weapon on your starship to augment and attempt a Mysticism check (DC = 10 + 1-1/2 × your starship’s tier). If you succeed, the gunner treats the range of that weapon as 5 hexes longer than normal. This does not work for weapons with the point special property.</p><h2>Critical effect</h2><p>Your magical energy also augments the damage of your selected weapon’s next attack. On that attack roll, the gunner can treat each damage die roll that results in a 1 this round as having rolled a 2 instead.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "magicOfficer",
-    "order": 0,
-    "phase": {
-      "name": "Engineering phase",
-      "tooltip": "This action can be used during the engineering phase of combat."
+    "dc": {
+      "resolve": true,
+      "value": "10 + floor(1.5 * @ship.details.tier)"
     },
-    "isPush": true,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You augment a starship weapon with a burst of your personal magic in much the same way that weapon fusions augment personal-scale weapons. Such an effort is considerable, and the magic lasts for only a single attack before it fizzles and the starship weapon returns to its normal functionality. Choose one weapon on your starship to augment and attempt a Mysticism check (DC = 10 + 1-1/2 × your starship’s tier). If you succeed, the gunner treats the range of that weapon as 5 hexes longer than normal. This does not work for weapons with the point special property.</p><h2>Critical effect</h2><p>Your magical energy also augments the damage of your selected weapon’s next attack. On that attack roll, the gunner can treat each damage die roll that results in a 1 this round as having rolled a 2 instead.</p>"
+    },
+    "effectCritical": "Your magical energy also augments the damage of your selected weapon’s next attack. On that attack roll, the gunner can treat each damage die roll that results in a 1 this round as having rolled a 2 instead.",
+    "effectNormal": "You augment a starship weapon with a burst of your personal magic in much the same way that weapon fusions augment personal-scale weapons. Such an effort is considerable, and the magic lasts for only a single attack before it fizzles and the starship weapon returns to its normal functionality. Choose one weapon on your starship to augment and attempt a Mysticism check (DC = 10 + 1-1/2 × your starship’s tier). If you succeed, the gunner treats the range of that weapon as 5 hexes longer than normal. This does not work for weapons with the point special property.",
     "formula": [
       {
         "name": "Mysticism",
         "formula": "@magicOfficer.skills.mys.mod"
       }
     ],
+    "isPush": true,
+    "order": 0,
+    "phase": {
+      "name": "Engineering phase",
+      "tooltip": "This action can be used during the engineering phase of combat."
+    },
+    "resolvePointCost": 0,
+    "role": "magicOfficer",
+    "selectorKey": "magicOfficer",
     "selectors": [
       "magicOfficer"
     ],
-    "selectorKey": "magicOfficer",
-    "dc": {
-      "value": "10 + floor(1.5 * @ship.details.tier)",
-      "resolve": true
-    },
-    "effectNormal": "You augment a starship weapon with a burst of your personal magic in much the same way that weapon fusions augment personal-scale weapons. Such an effort is considerable, and the magic lasts for only a single attack before it fizzles and the starship weapon returns to its normal functionality. Choose one weapon on your starship to augment and attempt a Mysticism check (DC = 10 + 1-1/2 × your starship’s tier). If you succeed, the gunner treats the range of that weapon as 5 hexes longer than normal. This does not work for weapons with the point special property.",
-    "effectCritical": "Your magical energy also augments the damage of your selected weapon’s next attack. On that attack roll, the gunner can treat each damage die roll that results in a 1 this round as having rolled a 2 instead."
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "exvXNMIOA2BnaL39"
+  "img": "icons/svg/mystery-man.svg"
 }

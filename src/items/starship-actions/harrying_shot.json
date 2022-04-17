@@ -1,40 +1,40 @@
 {
+  "_id": "JnvLkvtuSdTbSQJ9",
   "name": "Harrying Shot",
   "type": "starshipAction",
   "data": {
-    "description": {
-      "value": "<h2>Normal effect</h2><p>You fire at an opponent to apply pressure and create an opening for one of your allies. If you succeed at a gunnery check (DC = 10 + the enemy pilot’s ranks in Piloting), your next ally who fires a starship weapon at that foe before the end of the round rolls their gunnery check twice and uses the better result. If the target starship has no one acting in the pilot role and didn’t take the glide minor crew action during its last turn, the DC for this gunnery check is 10.<br/><br/>At 6th level, you can spend 1 Resolve Point before attempting a harrying shot. If your gunnery check exceeds the target’s AC (for direct fire weapons) or TL (for tracking weapons) by 4 or more, you also hit and deal damage to the target with the weapon.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "CRB",
     "type": "",
-    "role": "minorCrew",
-    "order": 31,
-    "phase": {
-      "name": "Gunnery phase",
-      "tooltip": "This action can be taken only during the gunnery phase."
+    "dc": {
+      "resolve": false,
+      "value": "10 + Enemy Pilot's ranks in Piloting"
     },
-    "isPush": false,
-    "resolvePointCost": 0,
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<h2>Normal effect</h2><p>You fire at an opponent to apply pressure and create an opening for one of your allies. If you succeed at a gunnery check (DC = 10 + the enemy pilot’s ranks in Piloting), your next ally who fires a starship weapon at that foe before the end of the round rolls their gunnery check twice and uses the better result. If the target starship has no one acting in the pilot role and didn’t take the glide minor crew action during its last turn, the DC for this gunnery check is 10.<br/><br/>At 6th level, you can spend 1 Resolve Point before attempting a harrying shot. If your gunnery check exceeds the target’s AC (for direct fire weapons) or TL (for tracking weapons) by 4 or more, you also hit and deal damage to the target with the weapon.</p>"
+    },
+    "effectCritical": "",
+    "effectNormal": "You fire at an opponent to apply pressure and create an opening for one of your allies. If you succeed at a gunnery check (DC = 10 + the enemy pilot’s ranks in Piloting), your next ally who fires a starship weapon at that foe before the end of the round rolls their gunnery check twice and uses the better result. If the target starship has no one acting in the pilot role and didn’t take the glide minor crew action during its last turn, the DC for this gunnery check is 10.<br/><br/>At 6th level, you can spend 1 Resolve Point before attempting a harrying shot. If your gunnery check exceeds the target’s AC (for direct fire weapons) or TL (for tracking weapons) by 4 or more, you also hit and deal damage to the target with the weapon.",
     "formula": [
       {
         "name": "Gunnery",
         "formula": "max(@minorCrew.attributes.baseAttackBonus.value, @minorCrew.skills.pil.ranks) + @minorCrew.abilities.dex.mod"
       }
     ],
+    "isPush": false,
+    "order": 31,
+    "phase": {
+      "name": "Gunnery phase",
+      "tooltip": "This action can be taken only during the gunnery phase."
+    },
+    "resolvePointCost": 0,
+    "role": "minorCrew",
+    "selectorKey": "minorCrew",
     "selectors": [
       "minorCrew"
     ],
-    "selectorKey": "minorCrew",
-    "dc": {
-      "value": "10 + Enemy Pilot's ranks in Piloting",
-      "resolve": false
-    },
-    "effectNormal": "You fire at an opponent to apply pressure and create an opening for one of your allies. If you succeed at a gunnery check (DC = 10 + the enemy pilot’s ranks in Piloting), your next ally who fires a starship weapon at that foe before the end of the round rolls their gunnery check twice and uses the better result. If the target starship has no one acting in the pilot role and didn’t take the glide minor crew action during its last turn, the DC for this gunnery check is 10.<br/><br/>At 6th level, you can spend 1 Resolve Point before attempting a harrying shot. If your gunnery check exceeds the target’s AC (for direct fire weapons) or TL (for tracking weapons) by 4 or more, you also hit and deal damage to the target with the weapon.",
-    "effectCritical": ""
+    "source": "CRB"
   },
   "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "_id": "JnvLkvtuSdTbSQJ9"
+  "img": "icons/svg/mystery-man.svg"
 }

@@ -1,77 +1,138 @@
 {
   "_id": "c84usvQez3sMyhmj",
   "name": "Alien Archive (Ex)",
-  "permission": {
-    "default": 0,
-    "QqVQDajn5ZN4kl25": 3
-  },
   "type": "feat",
   "data": {
-    "description": {
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"On2ZrPJTe8FURsXY\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Operative Exploit</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Your vast experience makes identifying new creatures easier for you. Double your operative’s edge bonus to your skill checks when identifying a creature and its abilities. If you successfully identify a creature, you gain a +2 enhancement bonus to your skill check when you make a trick attack against that creature.</span></p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "Operative Exploit",
     "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionType": "",
     "activation": {
       "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "type": ""
+      "condition": "",
+      "cost": 0
     },
     "area": {
-      "value": null,
-      "units": "",
+      "effect": "",
       "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
       "units": "",
-      "additional": "",
-      "per": ""
+      "value": null
     },
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null
-    },
-    "ability": null,
-    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
-      "parts": [],
-      "effect": ""
+      "effect": "",
+      "parts": []
     },
     "damage": {
       "parts": []
     },
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Your vast experience makes identifying new creatures easier for you. Double your operative&rsquo;s edge bonus to your skill checks when identifying a creature and its abilities. If you successfully identify a creature, you gain a +2 enhancement bonus to your skill check when you make a trick attack against that creature.</span></p>\n<p>&nbsp;</p>\n<p><em>In the modifiers tab, change the Trick Attack bonus to the used skill</em></p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
     "formula": "",
+    "modifiers": [
+      {
+        "_id": "121b74e8-3367-4b76-8499-9b5f2d990d54",
+        "name": "Alien Archive (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "round((@classes.operative.levels + 3) / 4) * 2",
+        "modifierType": "formula",
+        "notes": "Your vast experience makes identifying new creatures easier for you.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "lsc"
+      },
+      {
+        "_id": "316e94a2-3af6-4d65-bfb1-36635351ca76",
+        "name": "Alien Archive (Ex)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "round((@classes.operative.levels + 3) / 4) * 2",
+        "modifierType": "formula",
+        "notes": "Your vast experience makes identifying new creatures easier for you.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eng"
+      },
+      {
+        "_id": "17132b36-5b25-4313-b486-a87320fa7953",
+        "name": "Alien Archive (Ex)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "round((@classes.operative.levels + 3) / 4) * 2",
+        "modifierType": "formula",
+        "notes": "Your vast experience makes identifying new creatures easier for you.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "mys"
+      },
+      {
+        "_id": "f36c9f10-f1f1-4a90-a492-31026f5cd015",
+        "name": "Alien Archive (Ex) Trick Attack bonus",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "If you successfully identify a creature, you gain a +2 enhancement bonus to your skill check when you make a trick attack against that creature.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "2nd Level",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "descriptors": [],
-    "modifiers": [],
-    "requirements": "2nd Level",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "source": "Operative Exploit",
+    "target": {
+      "type": "",
+      "value": null
     },
-    "abilityMods": {
-      "parts": []
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
     }
   },
   "flags": {},
-  "img": "systems/sfrpg/icons/classes/alien_archive.png"
+  "img": "systems/sfrpg/icons/classes/alien_archive.webp",
+  "permission": {
+    "QqVQDajn5ZN4kl25": 3,
+    "default": 0
+  }
 }

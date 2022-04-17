@@ -11,7 +11,7 @@ import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
-import { computeCompoundBulkForItem, initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
+import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
 import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
@@ -23,7 +23,7 @@ import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
 import { ItemSFRPG } from "./module/item/item.js";
 import { CombatSFRPG } from "./module/combat/combat.js";
 import { ItemSheetSFRPG } from "./module/item/sheet.js";
-import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/combat.js";
+import { addChatMessageContextOptions } from "./module/combat.js";
 import Engine from "./module/engine/engine.js";
 import registerSystemRules from "./module/rules.js";
 import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "./module/modifiers/types.js";
@@ -47,6 +47,7 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
+import { SFRPGHealingSetting, SFRPGDamage } from "./module/actor/mixins/actor-damage.js";
 
 import { initializeBrowsers } from "./module/packs/browsers.js";
 import { } from "./module/combat/combat.js";
@@ -125,7 +126,30 @@ Hooks.once('init', async function () {
         SFRPGEffectType,
         SFRPGModifier,
         SFRPGModifierType,
-        SFRPGModifierTypes  
+        SFRPGModifierTypes,
+
+        // Namespace style
+        Actor: {
+            Damage: {
+                SFRPGHealingSetting,
+                SFRPGDamage
+            },
+            Modifiers: {
+                SFRPGEffectType,
+                SFRPGModifier,
+                SFRPGModifierType,
+                SFRPGModifierTypes
+            },
+            Sheet: {
+                Base: ActorSheetSFRPG,
+                Character: ActorSheetSFRPGCharacter,
+                Npc: ActorSheetSFRPGNPC,
+                Drone: ActorSheetSFRPGDrone,
+                Starship: ActorSheetSFRPGStarship,
+                Vehicle: ActorSheetSFRPGVehicle
+            },
+            Type: ActorSFRPG
+        }
     };
 
     CONFIG.SFRPG = SFRPG;
@@ -184,8 +208,6 @@ Hooks.once("setup", function () {
     console.log(`Starfinder | [SETUP] Setting up Starfinder System subsystems`);
     const setupTime = (new Date()).getTime();
 
-    Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
-
     /**
      * Manage counter classe feature from combat tracker
      * Like Solarian Attenument / Vanguard Entropic Point and Soldat Ki Point
@@ -202,18 +224,19 @@ Hooks.once("setup", function () {
 
     console.log("Starfinder | [SETUP] Localizing global arrays");
     const toLocalize = [
-        "abilities", "actionTargets", "actorTypes", "alignments", "alignmentsNPC", "ammunitionTypes", "distanceUnits", "senses", "skills", "currencies", "saves",
-        "augmentationTypes", "augmentationSytems", "itemActionTypes", "actorSizes", "starshipSizes", "itemTypes",
-        "vehicleSizes", "babProgression", "saveProgression", "saveDescriptors", "armorProficiencies",
-        "weaponProficiencies", "abilityActivationTypes", "skillProficiencyLevels", "damageTypes",
-        "healingTypes", "spellPreparationModes", "limitedUsePeriods", "weaponTypes", "weaponCategories",
-        "weaponProperties", "weaponPropertiesTooltips", "spellAreaShapes", "weaponDamageTypes", "energyDamageTypes", "kineticDamageTypes",
-        "languages", "conditionTypes", "modifierTypes", "modifierEffectTypes", "modifierType", "acpEffectingArmorType",
-        "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
-        "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability",
-        "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
-        "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds",
-        "damageTypeOperators", "flightManeuverability", "mechSizes"
+        "abilities","abilityActivationTypes", "acpEffectingArmorType","actionTargets","actionTargetsStarship", 
+        "actorSizes","actorTypes","alignments","alignmentsNPC","allowedClasses", "ammunitionTypes","armorProficiencies",
+        "armorTypes","augmentationSytems","augmentationTypes","babProgression","capacityUsagePer","conditionTypes", 
+        "consumableTypes","containableTypes","currencies","damageReductionTypes","damageTypeOperators","damageTypes",
+        "distanceUnits","energyDamageTypes","energyResistanceTypes","featTypes","flightManeuverability","healingTypes", 
+        "itemActionTypes","itemTypes","itemTypes","kineticDamageTypes","languages","limitedUsePeriods", "maneuverability",
+        "mechSizes","modifierArmorClassAffectedValues","modifierEffectTypes","modifierType","modifierTypes", 
+        "saveDescriptors","saveProgression","saves","senses","skillProficiencyLevels","skills","specialMaterials","speeds",
+        "spellAreaEffects","spellAreaShapes","spellcastingClasses","spellLevels","spellPreparationModes","starshipArcs", 
+        "starshipRoles","starshipSizes","starshipSystemStatus","starshipWeaponClass","starshipWeaponProperties", 
+        "starshipWeaponRanges","starshipWeaponTypes","vehicleCoverTypes","vehicleSizes","vehicleTypes","weaponCategories",
+        "weaponCriticalHitEffects","weaponDamageTypes","weaponProficiencies","weaponProperties","weaponPropertiesTooltips", 
+        "weaponTypes"
     ];
 
     for (let o of toLocalize) {
@@ -241,7 +264,7 @@ Hooks.once("setup", function () {
     console.log(`Starfinder | [SETUP] Done (operation took ${finishTime - setupTime} ms)`);
 });
 
-Hooks.once("ready", () => {
+Hooks.once("ready", async () => {
     console.log(`Starfinder | [READY] Preparing system for operation`);
     const readyTime = (new Date()).getTime();
 
@@ -263,24 +286,39 @@ Hooks.once("ready", () => {
     console.log("Starfinder | [READY] Caching starship actions");
     ActorSheetSFRPGStarship.ensureStarshipActions();
 
+    console.log("Starfinder | [READY] Initializing compendium browsers");
+    initializeBrowsers();
+
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.data.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
-    
+
+        let migrationPromise = null;
         if (needsMigration) {
             console.log("Starfinder | [READY] Performing world migration");
-            migrateWorld()
-                .then(_ => ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage")))
-                .catch(_ => ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage")));
+            migrationPromise = migrateWorld()
+                .then((refreshRequired) => {
+                    if (refreshRequired) {
+                        ui.notifications.warn(game.i18n.localize("SFRPG.MigrationSuccessfulRefreshMessage"), {permanent: true});
+                    } else {
+                        ui.notifications.info(game.i18n.localize("SFRPG.MigrationSuccessfulMessage"), {permanent: true});
+                    }
+                }).catch((error) => {
+                    ui.notifications.error(game.i18n.localize("SFRPG.MigrationErrorMessage"), {permanent: true});
+                    console.error(error);
+                });
         }
     
-        console.log("Starfinder | [READY] Checking items for migration");
-        migrateOldContainers();
+        console.log("Starfinder | [READY] Checking items for container updates");
+        if (migrationPromise) {
+            migrationPromise.then(async () => {
+                migrateOldContainers();
+            });
+        } else {
+            migrateOldContainers();
+        }
     }
-
-    console.log("Starfinder | [READY] Initializing compendium browsers");
-    initializeBrowsers();
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [READY] Done (operation took ${finishTime - readyTime} ms)`);
@@ -301,16 +339,18 @@ async function migrateOldContainers() {
 
     for (const scene of game.scenes.contents) {
         for (const token of scene.data.tokens) {
-            const sheetActorHelper = new ActorItemHelper(token.actorId, token.id, scene.id);
-            const migrationProcess = sheetActorHelper.migrateItems();
-            if (migrationProcess) {
-                promises.push(migrationProcess);
+            if (!token.data.actorLink) {
+                const sheetActorHelper = new ActorItemHelper(token.actor?.id ?? token.actorId, token.id, scene.id);
+                const migrationProcess = sheetActorHelper.migrateItems();
+                if (migrationProcess) {
+                    promises.push(migrationProcess);
+                }
             }
         }
     }
 
     if (promises.length > 0) {
-        console.log(`Starfinder | [READY] Migrating ${promises.length} documents.`);
+        console.log(`Starfinder | [READY] Updating containers in ${promises.length} documents.`);
         return Promise.all(promises);
     }
 }
@@ -371,6 +411,15 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
     if (data.type !== "Item") return;
     createItemMacro(data.data, slot);
     return false;
+});
+
+Hooks.on("createActor", function(actor, options, actorId) {
+    const autoLinkedTypes = ['character', 'drone'];
+    if (autoLinkedTypes.includes(actor.data.type)) {
+        actor.update({
+            "token.actorLink": true
+        });
+    }
 });
 
 function registerMathFunctions() {
@@ -479,6 +528,11 @@ function setupHandlebars() {
         return false;
     });
 
+    Handlebars.registerHelper("isNaN", function (value) {
+        const valueNumber = Number(value);
+        return Number.isNaN(valueNumber);
+    });
+
     Handlebars.registerHelper('ellipsis', function (displayedValue, limit) {
         let str = displayedValue.toString();
         if (str.length <= limit) {
@@ -487,8 +541,7 @@ function setupHandlebars() {
         return str.substring(0, limit) + '…';
     });
 
-    Handlebars.registerHelper('getChildBulk', function (children) {
-        const bulk = computeCompoundBulkForItem(null, children);
+    Handlebars.registerHelper('formatBulk', function (bulk) {
         const reduced = bulk / 10;
         if (reduced < 0.1) {
             return "-";
@@ -636,4 +689,24 @@ function setupHandlebars() {
 
         return new Handlebars.SafeString(html);
     });
+
+    Handlebars.registerHelper('currencyFormat', function (value) {
+        const currencyLocale = game.settings.get('sfrpg', 'currencyLocale');
+        const moneyFormatter  = new Intl.NumberFormat(currencyLocale);
+        const formattedValue = moneyFormatter.format(value);
+        return formattedValue;
+    });
 }
+
+Hooks.on("renderSidebarTab", async (app, html) => {
+    if (app.options.id === "settings") {
+        const textToAdd = `<br/><a href="https://github.com/wildj79/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
+        const gameDetails = document.getElementById("game-details");
+        if (gameDetails) {
+            const systemSection = gameDetails.getElementsByClassName("system")[0];
+            if (systemSection) {
+                systemSection.innerHTML += textToAdd;
+            }
+        }
+    }
+});

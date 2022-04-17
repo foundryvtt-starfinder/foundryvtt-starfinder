@@ -131,6 +131,7 @@ SFRPG.abilityActivationTypes = {
     "swift": "SFRPG.AbilityActivationTypesSwift",
     "full": "SFRPG.AbilityActivationTypesFull",
     "reaction": "SFRPG.AbilityActivationTypesReaction",
+    "round": "SFRPG.AbilityActivationTypesRound",
     "other": "SFRPG.AbilityActivationTypesOther",
     "day": "SFRPG.AbilityActivationTypesDay",
     "hour": "SFRPG.AbilityActivationTypesHour",
@@ -524,6 +525,39 @@ SFRPG.weaponPropertiesTooltips = {
     "wideLine": "SFRPG.WeaponPropertiesWideLineTooltip"
 };
 
+SFRPG.specialMaterials = {
+    "abysium": "SFRPG.SpecialMaterials.Abysium",
+    "adamantine": "SFRPG.SpecialMaterials.Adamantine",
+    "coldiron": "SFRPG.SpecialMaterials.ColdIron",
+    "diatha": "SFRPG.SpecialMaterials.Diatha",
+    "djezet": "SFRPG.SpecialMaterials.Djezet",
+    "horacalcum": "SFRPG.SpecialMaterials.Horacalcum",
+    "inubrix": "SFRPG.SpecialMaterials.Inubrix",
+    "khefak": "SFRPG.SpecialMaterials.Khefak",
+    "noqual": "SFRPG.SpecialMaterials.Noqual",
+    "purplecores": "SFRPG.SpecialMaterials.PurpleCores",
+    "siccatite": "SFRPG.SpecialMaterials.Siccatite",
+    "silver": "SFRPG.SpecialMaterials.Silver",
+    "voidglass": "SFRPG.SpecialMaterials.Voidglass"
+};
+
+// Damage Reductions
+SFRPG.damageReductionTypes = {
+    "": "-",
+    ...SFRPG.specialMaterials,
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
+// Energy Resistances
+SFRPG.energyResistanceTypes = {
+    "acid": "SFRPG.Damage.Types.Acid",
+    "cold": "SFRPG.Damage.Types.Cold",
+    "electricity": "SFRPG.Damage.Types.Electricity",
+    "fire": "SFRPG.Damage.Types.Fire",
+    "sonic": "SFRPG.Damage.Types.Sonic",
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
 SFRPG.spellAreaShapes = {
     "": "",
     "cone": "SFRPG.SpellAreaShapesCone",
@@ -661,8 +695,9 @@ SFRPG.tokenSizes = {
     "colossal": 6
 };
 
-SFRPG.allowedClasses = {
+SFRPG.spellcastingClasses = {
     "myst": "SFRPG.AllowedClasses.Myst",
+    "precog": "SFRPG.AllowedClasses.Precog",
     "tech": "SFRPG.AllowedClasses.Tech",
     "wysh": "SFRPG.AllowedClasses.Wysh"
 };
@@ -1018,6 +1053,7 @@ SFRPG.modifierTypes = {
     "luck": "SFRPG.ModifierTypeLuck",
     "morale": "SFRPG.ModifierTypeMorale",
     "racial": "SFRPG.ModifierTypeRacial",
+    "resistance": "SFRPG.ModifierTypeResistance",
     "untyped": "SFRPG.ModifierTypeUntyped"
 };
 
@@ -1058,7 +1094,9 @@ SFRPG.modifierEffectTypes = {
     "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
     "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
     "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
-    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource"
+    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource",
+    "damage-reduction": "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction",
+    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance"
 };
 
 SFRPG.modifierType = {
@@ -1097,177 +1135,177 @@ SFRPG.statusEffects = [
     {
         id: "asleep",
         label: "SFRPG.ConditionsAsleep",
-        icon: "systems/sfrpg/icons/conditions/asleep.png"
+        icon: "systems/sfrpg/icons/conditions/asleep.webp"
     },
     {
         id: "bleeding",
         label: "SFRPG.ConditionsBleeding",
-        icon: "systems/sfrpg/icons/conditions/bleeding.png"
+        icon: "systems/sfrpg/icons/conditions/bleeding.webp"
     },
     {
         id: "blinded",
         label: "SFRPG.ConditionsBlinded",
-        icon: "systems/sfrpg/icons/conditions/blinded.png"
+        icon: "systems/sfrpg/icons/conditions/blinded.webp"
     },
     {
         id: "broken",
         label: "SFRPG.ConditionsBroken",
-        icon: "systems/sfrpg/icons/conditions/broken.png"
+        icon: "systems/sfrpg/icons/conditions/broken.webp"
     },
     {
         id: "burning",
         label: "SFRPG.ConditionsBurning",
-        icon: "systems/sfrpg/icons/conditions/burning.png"
+        icon: "systems/sfrpg/icons/conditions/burning.webp"
     },
     {
         id: "confused",
         label: "SFRPG.ConditionsConfused",
-        icon: "systems/sfrpg/icons/conditions/confused.png"
+        icon: "systems/sfrpg/icons/conditions/confused.webp"
     },
     {
         id: "cowering",
         label: "SFRPG.ConditionsCowering",
-        icon: "systems/sfrpg/icons/conditions/cowering.png"
+        icon: "systems/sfrpg/icons/conditions/cowering.webp"
     },
     {
         id: "dazed",
         label: "SFRPG.ConditionsDazed",
-        icon: "systems/sfrpg/icons/conditions/dazed.png"
+        icon: "systems/sfrpg/icons/conditions/dazed.webp"
     },
     {
         id: "dazzled",
         label: "SFRPG.ConditionsDazzled",
-        icon: "systems/sfrpg/icons/conditions/dazzled.png"
+        icon: "systems/sfrpg/icons/conditions/dazzled.webp"
     },
     {
         id: "dead",
         label: "SFRPG.ConditionsDead",
-        icon: "systems/sfrpg/icons/conditions/dead.png"
+        icon: "systems/sfrpg/icons/conditions/dead.webp"
     },
     {
         id: "deafened",
         label: "SFRPG.ConditionsDeafened",
-        icon: "systems/sfrpg/icons/conditions/deafened.png"
+        icon: "systems/sfrpg/icons/conditions/deafened.webp"
     },
     {
         id: "dying",
         label: "SFRPG.ConditionsDying",
-        icon: "systems/sfrpg/icons/conditions/dying.png"
+        icon: "systems/sfrpg/icons/conditions/dying.webp"
     },
     {
         id: "encumbered",
         label: "SFRPG.ConditionsEncumbered",
-        icon: "systems/sfrpg/icons/conditions/encumbered.png"
+        icon: "systems/sfrpg/icons/conditions/encumbered.webp"
     },
     {
         id: "entangled",
         label: "SFRPG.ConditionsEntangled",
-        icon: "systems/sfrpg/icons/conditions/entangled.png"
+        icon: "systems/sfrpg/icons/conditions/entangled.webp"
     },
     {
         id: "exhausted",
         label: "SFRPG.ConditionsExhausted",
-        icon: "systems/sfrpg/icons/conditions/exhausted.png"
+        icon: "systems/sfrpg/icons/conditions/exhausted.webp"
     },
     {
         id: "fascinated",
         label: "SFRPG.ConditionsFascinated",
-        icon: "systems/sfrpg/icons/conditions/fascinated.png"
+        icon: "systems/sfrpg/icons/conditions/fascinated.webp"
     },
     {
         id: "fatigued",
         label: "SFRPG.ConditionsFatigued",
-        icon: "systems/sfrpg/icons/conditions/fatigued.png"
+        icon: "systems/sfrpg/icons/conditions/fatigued.webp"
     },
     {
         id: "flat-footed",
         label: "SFRPG.ConditionsFlatFooted",
-        icon: "systems/sfrpg/icons/conditions/flatfooted.png"
+        icon: "systems/sfrpg/icons/conditions/flatfooted.webp"
     },
     {
         id: "frightened",
         label: "SFRPG.ConditionsFrightened",
-        icon: "systems/sfrpg/icons/conditions/frightened.png"
+        icon: "systems/sfrpg/icons/conditions/frightened.webp"
     },
     {
         id: "grappled",
         label: "SFRPG.ConditionsGrappled",
-        icon: "systems/sfrpg/icons/conditions/grappled.png"
+        icon: "systems/sfrpg/icons/conditions/grappled.webp"
     },
     {
         id: "helpless",
         label: "SFRPG.ConditionsHelpless",
-        icon: "systems/sfrpg/icons/conditions/helpless.png"
+        icon: "systems/sfrpg/icons/conditions/helpless.webp"
     },
     {
         id: "nauseated",
         label: "SFRPG.ConditionsNauseated",
-        icon: "systems/sfrpg/icons/conditions/nauseated.png"
+        icon: "systems/sfrpg/icons/conditions/nauseated.webp"
     },
     {
         id: "off-kilter",
         label: "SFRPG.ConditionsOffKilter",
-        icon: "systems/sfrpg/icons/conditions/offkilter.png"
+        icon: "systems/sfrpg/icons/conditions/offkilter.webp"
     },
     {
         id: "off-target",
         label: "SFRPG.ConditionsOffTarget",
-        icon: "systems/sfrpg/icons/conditions/offtarget.png"
+        icon: "systems/sfrpg/icons/conditions/offtarget.webp"
     },
     {
         id: "overburdened",
         label: "SFRPG.ConditionsOverburdened",
-        icon: "systems/sfrpg/icons/conditions/overburdened.png"
+        icon: "systems/sfrpg/icons/conditions/overburdened.webp"
     },
     {
         id: "panicked",
         label: "SFRPG.ConditionsPanicked",
-        icon: "systems/sfrpg/icons/conditions/panicked.png"
+        icon: "systems/sfrpg/icons/conditions/panicked.webp"
     },
     {
         id: "paralyzed",
         label: "SFRPG.ConditionsParalyzed",
-        icon: "systems/sfrpg/icons/conditions/paralyzed.png"
+        icon: "systems/sfrpg/icons/conditions/paralyzed.webp"
     },
     {
         id: "pinned",
         label: "SFRPG.ConditionsPinned",
-        icon: "systems/sfrpg/icons/conditions/pinned.png"
+        icon: "systems/sfrpg/icons/conditions/pinned.webp"
     },
     {
         id: "prone",
         label: "SFRPG.ConditionsProne",
-        icon: "systems/sfrpg/icons/conditions/prone.png"
+        icon: "systems/sfrpg/icons/conditions/prone.webp"
     },
     {
         id: "shaken",
         label: "SFRPG.ConditionsShaken",
-        icon: "systems/sfrpg/icons/conditions/shaken.png"
+        icon: "systems/sfrpg/icons/conditions/shaken.webp"
     },
     {
         id: "sickened",
         label: "SFRPG.ConditionsSickened",
-        icon: "systems/sfrpg/icons/conditions/sickened.png"
+        icon: "systems/sfrpg/icons/conditions/sickened.webp"
     },
     {
         id: "stable",
         label: "SFRPG.ConditionsStable",
-        icon: "systems/sfrpg/icons/conditions/stable.png"
+        icon: "systems/sfrpg/icons/conditions/stable.webp"
     },
     {
         id: "staggered",
         label: "SFRPG.ConditionsStaggered",
-        icon: "systems/sfrpg/icons/conditions/staggered.png"
+        icon: "systems/sfrpg/icons/conditions/staggered.webp"
     },
     {
         id: "stunned",
         label: "SFRPG.ConditionsStunned",
-        icon: "systems/sfrpg/icons/conditions/stunned.png"
+        icon: "systems/sfrpg/icons/conditions/stunned.webp"
     },
     {
         id: "unconscious",
         label: "SFRPG.ConditionsUnconscious",
-        icon: "systems/sfrpg/icons/conditions/unconscious.png"
+        icon: "systems/sfrpg/icons/conditions/unconscious.webp"
     }
 ];
 
@@ -1845,4 +1883,35 @@ SFRPG.actionTargets = {
     "kac8": "SFRPG.Items.Action.ActionTarget.KAC8",
     "eac": "SFRPG.Items.Action.ActionTarget.EAC",
     "other": "SFRPG.Items.Action.ActionTarget.Other"
+};
+
+SFRPG.actionTargetsStarship = {
+    "": "SFRPG.Items.Action.ActionTarget.None",
+    "ac": "SFRPG.Items.Action.ActionTarget.StarshipAC",
+    "tl": "SFRPG.Items.Action.ActionTarget.StarshipTL"
+};
+
+// Source: CRB, page 391
+SFRPG.characterWealthByLevel = {
+    0: 0,
+    1: 1000,
+    2: 2000,
+    3: 4000,
+    4: 6000,
+    5: 9000,
+    6: 15000,
+    7: 23000,
+    8: 33000,
+    9: 45000,
+    10: 66000,
+    11: 100000,
+    12: 150000,
+    13: 255000,
+    14: 333000,
+    15: 500000,
+    16: 750000,
+    17: 1125000,
+    18: 1700000,
+    19: 2550000,
+    20: 3775000
 };

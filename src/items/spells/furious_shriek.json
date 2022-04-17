@@ -1,0 +1,128 @@
+{
+  "_id": "S9oOkiaSqwdwGec8",
+  "name": "Furious Shriek",
+  "type": "spell",
+  "data": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 1
+    },
+    "allowedClasses": {
+      "myst": true,
+      "precog": false,
+      "tech": false,
+      "wysh": false
+    },
+    "area": {
+      "effect": "spread",
+      "shape": "sphere",
+      "units": "ft",
+      "value": null
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": false,
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "If HP is greater than half your total HP",
+          "formula": "lookupRange(@item.level, 2d6, 2, 4d6, 3, 7d6, 4, 10d6, 5, 13d6, 6, 16d6)",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": true
+          }
+        },
+        {
+          "name": "If HP is fewer than half your total HP",
+          "formula": "lookupRange(@item.level, 2d8, 2, 4d8, 3, 7d8, 4, 10d8, 5, 13d8, 6, 16d8)",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": true
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>Orcs and half-orcs learned long ago to channel rage, despair, or a sense of injustice or oppression into a soul-shaking shriek. The shriek deals sonic damage to creatures and objects based on the spell slot used to cast the spell. If you cast this spell when you have fewer than half your Hit Points remaining, use d8s rather than d6s as damage dice.</p>\n<p><strong>1st</strong>: When you cast furious shriek as a 1st-level spell, it deals 2d6 sonic damage.</p>\n<p><strong>2nd</strong>: When you cast furious shriek as a 2nd-level spell, it deals 4d6 sonic damage.</p>\n<p><strong>3rd</strong>: When you cast furious shriek as a 3rd-level spell, it deals 7d6 sonic damage.</p>\n<p><strong>4th</strong>: When you cast furious shriek as a 4th-level spell, it deals 10d6 sonic damage.</p>\n<p><strong>5th</strong>: When you cast furious shriek as a 5th-level spell, it deals 13d6 sonic damage. Creatures that fail their saving throw are shaken for 1 round.</p>\n<p><strong>6th</strong>: When you cast furious shriek as a 6th-level spell, it deals 16d6 sonic damage. Creatures that fail their saving throw are staggered for 1 round and shaken for 1d4 rounds.</p>"
+    },
+    "descriptors": [],
+    "dismissible": false,
+    "duration": {
+      "units": "",
+      "value": "instantaneous"
+    },
+    "formula": "",
+    "isActive": null,
+    "isVariableLevel": true,
+    "level": 1,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "personal",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "fort",
+      "dc": "",
+      "descriptor": "half"
+    },
+    "school": "evo",
+    "source": "GM pg. 75",
+    "sr": true,
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    }
+  },
+  "effects": [],
+  "flags": {},
+  "img": "systems/sfrpg/icons/spells/incompetence.webp"
+}

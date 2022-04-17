@@ -3,49 +3,13 @@
   "name": "Hover Tank",
   "type": "vehicle",
   "data": {
-    "conditions": {},
-    "details": {
-      "level": 14,
-      "price": 227000,
-      "description": {
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">A hover tank is mostly armor, digital controls, and machinery, leaving room for only a few passengers in its center. It has small hatches above and below.</span></p>",
-        "chat": "",
-        "unidentified": ""
-      },
-      "source": "AR pg. 138"
-    },
-    "crew": {
-      "useNPCCrew": false,
-      "pilot": {
-        "limit": 1,
-        "actorIds": []
-      },
-      "complement": {
-        "limit": 1,
-        "actorIds": []
-      },
-      "passenger": {
-        "limit": 3,
-        "actorIds": []
-      }
-    },
-    "hangarBay": {
-      "limit": 0,
-      "actorIds": []
-    },
     "attributes": {
-      "size": "gargantuan",
       "type": "landW",
+      "cover": "total",
       "dimensions": {
-        "width": "20",
+        "height": "8",
         "length": "20",
-        "height": "8"
-      },
-      "speed": {
-        "drive": "40 ft",
-        "full": "550 ft",
-        "mph": "65 mph (hover)",
-        "type": ""
+        "width": "20"
       },
       "eac": {
         "value": 28
@@ -53,358 +17,321 @@
       "expansionBays": {
         "value": 0
       },
+      "hardness": 20,
+      "hp": {
+        "max": 250,
+        "threshold": 125,
+        "value": 250
+      },
       "kac": {
         "value": 30
       },
-      "cover": "total",
-      "hp": {
-        "value": 250,
-        "max": 250,
-        "threshold": 125
-      },
-      "hardness": 20,
       "modifiers": {
-        "piloting": "0",
-        "attackStopped": "0",
+        "attackFullSpeed": "-5",
         "attackMoving": "-3",
-        "attackFullSpeed": "-5"
+        "attackStopped": "0",
+        "piloting": "0"
       },
-      "systems": [],
-      "special": []
+      "size": "gargantuan",
+      "special": [],
+      "speed": {
+        "type": "",
+        "drive": "40 ft",
+        "full": "550 ft",
+        "mph": "65 mph (hover)"
+      },
+      "systems": []
+    },
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": 3
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">A hover tank is mostly armor, digital controls, and machinery, leaving room for only a few passengers in its center. It has small hatches above and below.</span></p>"
+      },
+      "level": 14,
+      "price": 227000,
+      "source": "AR pg. 138"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 0
     }
   },
+  "effects": [],
   "flags": {},
-  "token": {
-    "flags": {},
-    "name": "Hover Tank",
-    "displayName": 0,
-    "img": "icons/svg/mystery-man.svg",
-    "tint": null,
-    "width": 1,
-    "height": 1,
-    "scale": 1,
-    "lockRotation": false,
-    "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 360,
-    "lightAngle": 360,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "2LdFiFRgqZPIy8oY",
-    "actorLink": false,
-    "disposition": -1,
-    "displayBars": 0,
-    "bar1": {},
-    "bar2": {},
-    "randomImg": false
-  },
+  "img": "icons/svg/mystery-man.svg",
   "items": [
     {
       "_id": "6hYEGXGbezExRSQD",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
       "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>",
-          "unidentified": ""
-        },
-        "source": "",
         "type": "",
-        "modifiers": [],
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
         "damage": {
           "parts": [
             {
               "formula": "2*(16d10)",
+              "operator": "",
               "types": {
                 "bludgeoning": true
-              },
-              "operator": ""
+              }
             }
           ]
         },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to its full speed in a straight line at its current heading and try to ram one creature or object at the end of the movement, dealing double the vehicle&rsquo;s collision damage to the target and half the vehicle&rsquo;s collision damage to your vehicle. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see page 228).</p>\n<p>Movement during a ram action has all the same restrictions as the race action and requires the same Piloting checks. If you fail any Piloting check during the movement, you fail to ram your target.</p>\n<p>&nbsp;</p>\n<p>If the target of the ram action is a creature, it can attempt a Reflex saving throw against the vehicle&rsquo;s collision DC to avoid being hit. If the target of the ram action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to avoid being hit, with a DC equal to the result of your Piloting check. The attacker wins ties.</p>"
+        },
+        "modifiers": [],
         "save": {
           "type": "reflex",
           "dc": "16",
           "descriptor": "negate"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 100000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 100000
     },
     {
       "_id": "LS40UB61zorcVeSs",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
       "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>",
-          "unidentified": ""
-        },
-        "source": "",
         "type": "",
-        "modifiers": [],
+        "abilityMods": {
+          "parts": []
+        },
+        "critical": {
+          "parts": []
+        },
         "damage": {
           "parts": [
             {
               "formula": "16d10",
+              "operator": "",
               "types": {
                 "bludgeoning": true
-              },
-              "operator": ""
+              }
             }
           ]
         },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>As a full action, you can pilot a vehicle at up to double its drive speed and run over any creatures at least two size categories smaller than the vehicle during this movement. Those creatures take bludgeoning damage equal to the vehicle&rsquo;s collision damage, but can each attempt a Reflex save against the vehicle&rsquo;s collision DC to take half damage. Roll the damage only once and apply it to each creature, rather than rolling separately for each. A vehicle&rsquo;s collision damage and collision DC are listed in the Attack (Collision) entry of its statistics (see Vehicles on page 228).</p>\n<p>When you take a run over action, the vehicle takes damage equal to half the damage rolled for each creature it runs over. If the vehicle becomes unable to proceed due to this damage, it ceases moving. You can still set the vehicle&rsquo;s heading at the end of this movement as normal.</p>\n<p>&nbsp;</p>\n<p>A vehicle taking the run over action can damage a creature no more than once per round, no matter how many times its movement takes it over a target creature. The vehicle can run over objects of the appropriate size with the same effects, though they don&rsquo;t receive saving throws unless they are piloted or otherwise animate.</p>"
+        },
+        "modifiers": [],
         "save": {
           "type": "reflex",
           "dc": "16",
           "descriptor": "half"
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 200000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 200000
     },
     {
       "_id": "EZfTGJ7VBorBCuvm",
       "name": "Planetary comm unit",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTechItems_ctl00_LabelName\">A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device&rsquo;s price.</span></p>\n<p>&nbsp;</p>"
         },
-        "source": "CRB pg. 218",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
-        },
-        "canBeActivated": true,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": "0",
+          "usedAsPilot": false
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": "CRB pg. 218"
       },
-      "sort": 500000,
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.jpg",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
+      "sort": 500000
     },
     {
       "_id": "7UIYjaFPv8hmFWPv",
       "name": "Reaction cannon, advanced",
       "type": "weapon",
       "data": {
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "value": "<p>An ancient yet still popular vesk weapon, the reaction cannon uses advanced materials and technology to redirect the recoil of a projectile back into the projectile itself, making it an extremely damaging heavy weapon.</p>",
-          "unidentified": ""
-        },
-        "source": "CRB pg. 177",
         "type": "",
-        "quantity": 1,
-        "bulk": "3",
-        "price": 73000,
-        "level": 14,
-        "attuned": false,
-        "equipped": true,
-        "equippable": true,
-        "identified": true,
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
         "attributes": {
-          "sturdy": true,
+          "ac": {
+            "value": "5"
+          },
           "customBuilt": false,
-          "size": "medium",
           "dex": {
             "mod": ""
-          },
-          "hp": {
-            "value": 57,
-            "max": "57"
           },
           "hardness": {
             "value": "33"
           },
-          "ac": {
-            "value": "5"
-          }
+          "hp": {
+            "max": "57",
+            "value": 57
+          },
+          "size": "medium",
+          "sturdy": true
         },
-        "activation": {
-          "type": "none",
-          "cost": null,
-          "condition": ""
+        "attuned": false,
+        "bulk": "3",
+        "capacity": {
+          "max": 6,
+          "value": 6
         },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "type": ""
-        },
-        "area": {
-          "value": null,
-          "units": null,
-          "shape": "",
-          "effect": ""
-        },
-        "range": {
-          "value": 100,
-          "units": "ft",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": null,
-          "max": null,
-          "per": ""
-        },
-        "isActive": null,
-        "ability": "dex",
-        "actionType": "rwak",
-        "attackBonus": 0,
         "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 14,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "goods"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "",
+              "weightProperty": ""
+            }
+          ]
+        },
         "critical": {
-          "parts": [],
-          "effect": ""
+          "effect": "",
+          "parts": []
         },
         "damage": {
           "parts": [
             {
               "formula": "6d10",
+              "operator": "",
               "types": {
                 "piercing": true
-              },
-              "operator": ""
+              }
             }
           ]
         },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": "",
-          "descriptor": "negate"
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>An ancient yet still popular vesk weapon, the reaction cannon uses advanced materials and technology to redirect the recoil of a projectile back into the projectile itself, making it an extremely damaging heavy weapon.</p>"
         },
         "descriptors": [],
-        "capacity": {
-          "value": 6,
-          "max": 6
+        "duration": {
+          "units": "",
+          "value": ""
         },
-        "usage": {
-          "value": 1,
-          "per": "shot"
-        },
+        "equippable": true,
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "isActive": null,
+        "level": 14,
         "modifiers": [],
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "subtype": "fusion",
-              "amount": 14,
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "weightProperty": "level"
-            },
-            {
-              "type": "slot",
-              "subtype": "",
-              "amount": 1,
-              "acceptsType": [
-                "goods"
-              ],
-              "weightProperty": "",
-              "affectsEncumbrance": true
-            }
-          ],
-          "isOpen": true
-        },
-        "weaponType": "heavy",
-        "weaponCategory": "projectile",
-        "special": "",
+        "price": 73000,
+        "proficient": true,
         "properties": {
-          "one": false,
-          "two": true,
+          "aeon": false,
           "amm": false,
           "analog": false,
+          "antibiological": false,
           "archaic": false,
+          "aurora": false,
           "automatic": false,
           "blast": false,
           "block": false,
           "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": false,
-          "living": false,
-          "mind-affecting": false,
-          "nonlethal": false,
-          "operative": false,
-          "penetrating": true,
-          "powered": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "thrown": false,
-          "trip": false,
-          "unwieldy": false,
-          "aeon": false,
-          "antibiological": false,
-          "aurora": false,
           "breach": false,
           "breakdown": false,
+          "bright": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
           "deflect": false,
+          "disarm": false,
           "double": false,
           "drainCharge": false,
           "echo": false,
+          "entangle": false,
+          "explode": false,
           "extinguish": false,
           "feint": false,
           "fiery": false,
@@ -418,123 +345,196 @@
           "guided": false,
           "harrying": false,
           "holyWater": false,
+          "hybrid": false,
           "ignite": false,
           "indirect": false,
+          "injection": false,
           "integrated": false,
+          "line": false,
+          "living": false,
           "lockdown": false,
+          "mind-affecting": false,
           "mine": false,
           "mire": false,
           "modal": false,
           "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": true,
           "polarize": false,
           "polymorphic": false,
+          "powered": false,
           "professional": false,
           "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
           "recall": false,
+          "regrowth": false,
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
           "sunder": false,
           "swarm": false,
           "tail": false,
           "teleportive": false,
           "thought": false,
           "throttle": false,
-          "underwater": false,
-          "variantBoost": false,
-          "wideLine": false,
-          "hybrid": false,
-          "regrowth": false,
+          "thrown": false,
+          "trip": false,
+          "two": true,
           "unbalancing": false,
-          "shatter": false
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
         },
-        "proficient": true,
-        "abilityMods": {
-          "parts": []
-        }
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 100
+        },
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "CRB pg. 177",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "usage": {
+          "per": "shot",
+          "value": 1
+        },
+        "uses": {
+          "max": null,
+          "per": "",
+          "value": null
+        },
+        "weaponCategory": "projectile",
+        "weaponType": "heavy"
       },
-      "sort": 100000,
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/advanced_reaction_cannon.jpg",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/weapons/advanced_reaction_cannon.webp",
+      "sort": 100000
     },
     {
       "_id": "sp2oXiFPnwYoxVhY",
       "name": "Autopilot",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": true,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DetailedOutput\">Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn&rsquo;t locked by a passcode or otherwise programmed not to obey).<br /><br />A vehicle is considered controlled when the autopilot is engaged. An autopilot&rsquo;s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).<br /><br />The Systems entry in a vehicle&rsquo;s statistics (see page 228) lists the autopilot&rsquo;s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle&rsquo;s modifier (listed in the vehicle&rsquo;s Modifiers entry) to the Piloting checks.</span></p>"
         },
-        "source": "CRB pg. 280",
-        "type": "",
-        "piloting": {
-          "usedAsPilot": true,
-          "piloting": "25"
-        },
-        "canBeActivated": true,
         "isActive": false,
-        "damage": {
-          "parts": []
+        "piloting": {
+          "piloting": "25",
+          "usedAsPilot": true
         },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": "CRB pg. 280"
       },
-      "sort": 400000,
+      "effects": [],
       "flags": {},
       "img": "icons/svg/mystery-man.svg",
-      "effects": []
+      "sort": 400000
     },
     {
       "_id": "ve6b7RcXM6fw5Nm5",
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
       "data": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "canBeActivated": false,
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
-          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>",
-          "unidentified": ""
+          "unidentified": "",
+          "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>"
         },
-        "source": "",
-        "type": "",
+        "isActive": false,
         "piloting": {
-          "usedAsPilot": false,
-          "piloting": "0"
+          "piloting": "0",
+          "usedAsPilot": false
         },
         "senses": {
-          "usedForSenses": true,
-          "senses": "darkvision 1 mile"
+          "senses": "darkvision 1 mile",
+          "usedForSenses": true
         },
-        "canBeActivated": false,
-        "isActive": false,
-        "damage": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "abilityMods": {
-          "parts": []
-        }
+        "source": ""
       },
-      "sort": 500000,
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.png",
-      "effects": []
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
+      "sort": 500000
     }
   ],
-  "effects": [],
-  "img": "icons/svg/mystery-man.svg"
+  "token": {
+    "name": "Hover Tank",
+    "actorId": "2LdFiFRgqZPIy8oY",
+    "actorLink": false,
+    "bar1": {},
+    "bar2": {},
+    "brightLight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "dimSight": 0,
+    "displayBars": 0,
+    "displayName": 0,
+    "disposition": -1,
+    "flags": {},
+    "height": 1,
+    "img": "icons/svg/mystery-man.svg",
+    "lightAlpha": 1,
+    "lightAngle": 360,
+    "lightAnimation": {
+      "intensity": 5,
+      "speed": 5
+    },
+    "lockRotation": false,
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 1,
+    "sightAngle": 360,
+    "tint": null,
+    "vision": false,
+    "width": 1
+  }
 }

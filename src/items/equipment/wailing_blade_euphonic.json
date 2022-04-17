@@ -1,189 +1,147 @@
 {
+  "_id": "AHOxqHZdEHoKV8GQ",
   "name": "Wailing blade, euphonic",
   "type": "weapon",
   "data": {
-    "description": {
-      "value": "<p>While it looks like a longsword at a glance, a wailing blade is composed of a series of microtextured plates. When powered, these plates vibrate to generate an array of sonic frequencies at deafening and damaging volumes. A tymbal wailing blade produces only a single audible sound, while a euphonic wailing blade produces multiple pitches concurrently. Strident wailing blades and warbler wailing blades have pitches that vary, the former sounding like a layered chirping and the latter combining&nbsp;trilling notes.</p>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "AR pg. 11",
     "type": "",
-    "quantity": 1,
-    "bulk": "L",
-    "price": 9080,
-    "level": 8,
-    "attuned": false,
-    "equipped": false,
-    "identified": true,
+    "ability": "str",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "kac",
+    "actionType": "mwak",
+    "activation": {
+      "type": "none",
+      "condition": "",
+      "cost": null
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
-      "sturdy": true,
+      "ac": {
+        "value": "5"
+      },
       "customBuilt": false,
-      "size": "medium",
       "dex": {
         "mod": ""
-      },
-      "hp": {
-        "value": 39,
-        "max": "39"
       },
       "hardness": {
         "value": "21"
       },
-      "ac": {
-        "value": "5"
-      }
+      "hp": {
+        "max": "39",
+        "value": 39
+      },
+      "size": "medium",
+      "sturdy": true
     },
-    "activation": {
-      "type": "none",
-      "cost": null,
-      "condition": ""
+    "attuned": false,
+    "bulk": "L",
+    "capacity": {
+      "max": 40,
+      "value": 40
     },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "target": {
-      "value": "",
-      "type": ""
-    },
-    "area": {
-      "value": null,
-      "units": "none",
-      "shape": "",
-      "effect": ""
-    },
-    "range": {
-      "value": null,
-      "units": "touch",
-      "additional": "",
-      "per": ""
-    },
-    "uses": {
-      "value": null,
-      "max": null,
-      "per": ""
-    },
-    "isActive": null,
-    "ability": "str",
-    "actionType": "mwak",
-    "attackBonus": 0,
     "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "isOpen": true,
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 8,
+          "subtype": "fusion",
+          "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "goods"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "ammunitionSlot",
+          "weightProperty": ""
+        }
+      ]
+    },
     "critical": {
-      "parts": [],
-      "effect": "Deafen"
+      "effect": "Deafen",
+      "parts": []
     },
     "damage": {
       "parts": [
         {
           "formula": "2d8 + @abilities.str.mod",
+          "operator": "and",
           "types": {
             "slashing": true,
             "sonic": true
-          },
-          "operator": "and"
+          }
         }
       ]
     },
-    "formula": "",
-    "save": {
-      "type": "",
-      "dc": "",
-      "descriptor": "negate"
+    "description": {
+      "chat": "",
+      "unidentified": "",
+      "value": "<p>While it looks like a longsword at a glance, a wailing blade is composed of a series of microtextured plates. When powered, these plates vibrate to generate an array of sonic frequencies at deafening and damaging volumes. A tymbal wailing blade produces only a single audible sound, while a euphonic wailing blade produces multiple pitches concurrently. Strident wailing blades and warbler wailing blades have pitches that vary, the former sounding like a layered chirping and the latter combining&nbsp;trilling notes.</p>"
     },
     "descriptors": [],
-    "capacity": {
-      "value": 40,
-      "max": 40
+    "duration": {
+      "units": "",
+      "value": ""
     },
-    "usage": {
-      "value": 2,
-      "per": "minute"
-    },
+    "equipped": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
+    "level": 8,
     "modifiers": [],
-    "container": {
-      "contents": [],
-      "storage": [
-        {
-          "type": "slot",
-          "subtype": "fusion",
-          "amount": 8,
-          "acceptsType": [
-            "fusion"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": "level"
-        },
-        {
-          "type": "slot",
-          "subtype": "",
-          "amount": 1,
-          "acceptsType": [
-            "goods"
-          ],
-          "weightMultiplier": 1,
-          "weightProperty": "",
-          "affectsEncumbrance": true
-        },
-        {
-          "type": "slot",
-          "subtype": "ammunitionSlot",
-          "amount": 1,
-          "acceptsType": [
-            "ammunition"
-          ],
-          "affectsEncumbrance": true,
-          "weightProperty": ""
-        }
-      ],
-      "isOpen": true
-    },
-    "weaponType": "advancedM",
-    "weaponCategory": "sonic",
-    "special": "",
+    "price": 9080,
+    "proficient": false,
     "properties": {
-      "one": true,
-      "two": false,
+      "aeon": false,
       "amm": false,
       "analog": false,
+      "antibiological": false,
       "archaic": false,
+      "aurora": false,
       "automatic": false,
       "blast": false,
       "block": false,
       "boost": false,
-      "bright": false,
-      "disarm": false,
-      "entangle": false,
-      "explode": false,
-      "injection": false,
-      "line": false,
-      "living": false,
-      "mind-affecting": false,
-      "nonlethal": false,
-      "operative": false,
-      "penetrating": false,
-      "powered": true,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "thrown": false,
-      "trip": false,
-      "unwieldy": false,
-      "aeon": false,
-      "antibiological": false,
-      "aurora": false,
       "breach": false,
       "breakdown": false,
+      "bright": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
       "deflect": false,
+      "disarm": false,
       "double": false,
       "drainCharge": false,
       "echo": false,
+      "entangle": false,
+      "explode": false,
       "extinguish": false,
       "feint": false,
       "fiery": false,
@@ -197,44 +155,87 @@
       "guided": false,
       "harrying": false,
       "holyWater": false,
+      "hybrid": false,
       "ignite": false,
       "indirect": false,
+      "injection": false,
       "integrated": false,
+      "line": false,
+      "living": false,
       "lockdown": false,
+      "mind-affecting": false,
       "mine": false,
       "mire": false,
       "modal": false,
       "necrotic": false,
+      "nonlethal": false,
+      "one": true,
+      "operative": false,
+      "penetrating": false,
       "polarize": false,
       "polymorphic": false,
+      "powered": true,
       "professional": false,
       "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
       "shape": false,
       "shells": false,
       "shield": false,
+      "sniper": false,
+      "stun": false,
+      "subtle": false,
       "sunder": false,
       "swarm": false,
       "tail": false,
       "teleportive": false,
       "thought": false,
       "throttle": false,
+      "thrown": false,
+      "trip": false,
+      "two": false,
+      "unbalancing": false,
       "underwater": false,
+      "unwieldy": false,
       "variantBoost": false,
-      "wideLine": false,
-      "hybrid": false,
-      "regrowth": false,
-      "unbalancing": false
+      "wideLine": false
     },
-    "proficient": false,
-    "abilityMods": {
-      "parts": []
-    }
+    "quantity": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "touch",
+      "value": null
+    },
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "AR pg. 11",
+    "special": "",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "usage": {
+      "per": "minute",
+      "value": 2
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    },
+    "weaponCategory": "sonic",
+    "weaponType": "advancedM"
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/longsword-microserrated.jpg",
   "effects": [],
-  "_id": "AHOxqHZdEHoKV8GQ"
+  "flags": {},
+  "img": "systems/sfrpg/icons/equipment/weapons/longsword-microserrated.webp"
 }

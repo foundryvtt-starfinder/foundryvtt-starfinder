@@ -6,7 +6,7 @@ export default class RollContext {
     }
 
     addContext(name, entity, data = null) {
-        this.allContexts[name] = {entity: entity, data: data || entity.data.data};
+        this.allContexts[name] = {entity: entity, data: data ?? entity.data.data};
     }
 
     addSelector(target, options) {
@@ -107,5 +107,33 @@ export default class RollContext {
         }
 
         return object;
+    }
+
+    static createActorRollContext(actor, dataOptions = {actorData: null, actorKey: "actor"}) {
+        const rollContext = new RollContext();
+        if (actor && actor.data) {
+            rollContext.addContext(dataOptions?.actorKey ?? "actor", actor, dataOptions?.actorData);
+            rollContext.setMainContext(dataOptions?.actorKey ?? "actor");
+            actor.setupRollContexts(rollContext);
+        }
+        return rollContext;
+    }
+
+    static createItemRollContext(item, itemOwningActor, dataOptions = {itemData: null, ownerData: null, ownerKey: "owner"}) {
+        const rollContext = new RollContext();
+
+        rollContext.addContext("item", item, dataOptions?.itemData);
+        rollContext.setMainContext("item");
+
+        if (itemOwningActor) {
+            if (itemOwningActor.data) {
+                rollContext.addContext(dataOptions?.ownerKey ?? "owner", itemOwningActor, dataOptions?.ownerData);
+                rollContext.setMainContext(dataOptions?.ownerKey ?? "owner");
+            }
+
+            itemOwningActor.setupRollContexts(rollContext);
+        }
+        
+        return rollContext;
     }
 }
