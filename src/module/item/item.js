@@ -836,7 +836,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
     async _rollStarshipAttack(options = {}) {
-        const parts = (this.actor.data.data.crew.useNPCCrew) ? ["max(@gunner.skills.pil.ranks, @gunner.skills.gun.mod)"] : ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
+        const parts = (this.actor.data.data.crew.useNPCCrew) ? ["@gunner.skills.gun.mod"] : ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
 
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
         

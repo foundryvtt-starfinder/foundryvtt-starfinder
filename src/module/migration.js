@@ -8,7 +8,8 @@ const SFRPGMigrationSchemas = Object.freeze({
     THE_ACTOR_SPEED_UPDATE: 0.004,
     DAMAGE_TYPE_REFACTOR: 0.005,
     DAMAGE_REDUCTION_REFACTOR: 0.006,
-    THE_WEBP_UPDATE: 0.008 // We changed all icons from .png to .webp
+    THE_WEBP_UPDATE: 0.008, // We changed all icons from .png to .webp
+    THE_GUNNERY_UPDATE: 0.009 //Since Gunnery is now a selectable skill for NPC starships, migrate an NPC gunner's ranks in Piloting (the previous hacky solution) to their modifier in Gunnery.
 });
 
 export default async function migrateWorld() {
@@ -106,7 +107,7 @@ export default async function migrateWorld() {
     await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
     ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
 
-    if (worldSchema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) {
+    if (worldSchema < SFRPGMigrationSchemas.THE_GUNNERY_UPDATE) {
         return true;
     }
 
@@ -137,7 +138,8 @@ const migrateActor = async function (actor, schema) {
     if (schema < SFRPGMigrationSchemas.THE_HAPPY_UPDATE && actorData.type === 'character') { _migrateActorAbilityScores(actorData, updateData); }
     if (schema < SFRPGMigrationSchemas.THE_ACTOR_SPEED_UPDATE && speedActorTypes.includes(actorData.type)) { _migrateActorSpeed(actorData, updateData); }
     if (schema < SFRPGMigrationSchemas.DAMAGE_REDUCTION_REFACTOR) { _migrateActorDamageReductions(actorData, updateData); }
-    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(actorData, updateData);
+    if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) { _migrateDocumentIconToWebP(actorData, updateData); }
+    if (schema < SFRPGMigrationSchemas.THE_GUNNERY_UPDATE && actorData.type === 'starship' && actorData.data.crew.useNPCCrew) { _migrateStarshipGunnerySkill(actorData, updateData); }
 
     for(const item of actor.items) {
         const itemUpdateData = await migrateItem(item, schema);
@@ -455,7 +457,7 @@ const _migrateActorDamageReductions = function (actor, migratedData) {
     return migratedData;
 };
 
-//================== 0.007: WebP Conversion ==================
+//================== 0.008: WebP Conversion ==================
 function _imageNeedsReplace(imagePath) {
     const fileTypes = [".png", ".PNG", ".jpg", ".JPG", ".jpeg", ".JPEG"];
     for (const fileType of fileTypes) {
@@ -524,4 +526,15 @@ const _migrateStringContentToWebP = function(string) {
     string = string.replace(/(systems\/sfrpg\/[^"]*).png/gi, "$1.webp");
     string = string.replace(/(systems\/sfrpg\/[^"]*).jpg/gi, "$1.webp");
     return string;
+}
+
+//================== 0.009: Starship Gunnery Conversion ==================
+const _migrateStarshipGunnerySkill = function (actorData, updateData) {
+    const pilRanks = actorData.data.crew.npcData.gunner.skills.pil.ranks;
+    if (pilRanks) {
+        updateData['data.crew.npcData.gunner.skills.gun.mod'] = pilRanks;
+        updateData['data.crew.npcData.gunner.skills.-=pil'] = null;
+    }
+    
+    return updateData;
 }
