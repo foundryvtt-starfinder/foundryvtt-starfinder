@@ -1457,7 +1457,7 @@ SFRPG.conditionsCausingFlatFooted = ["blinded", "cowering", "off-kilter", "pinne
 
 // TODO localize
 SFRPG.characterFlags = {
-    "solarianAttunement": {
+    /*"solarianAttunement": {
         name: "Solarian Attunement",
         hint: "You can enabled the management of attenument inside the combat tracker.",
         section: "SFRPG.CharacterFlagsSectionClassFeatures",
