@@ -1665,4 +1665,16 @@ export async function scalingCantrips() {
         console.log("Starfinder | Updated " + updated + " spells to", ((setting) ? "scaling formulas." : "their default formulas."));
     }
 }
-    
+export async function _onScalingCantripDrop(addedItem) {
+    if (addedItem.data.data.scaling?.d3) { 
+        const updates = addedItem.data.data.damage.parts;
+        updates[0].formula = "lookupRange(@details.cl.value, 1, 7, 2, 10, 3, 13, 4, 15, 5, 17, 7, 19, 9)d(lookupRange(@details.cl.value, 3, 7, 4)) + lookupRange(@details.cl.value, 0, 3, floor(@details.level.value/2))";
+        await addedItem.update({"data.damage.parts": updates});
+        console.log(`Starfinder | Updated ${addedItem.name} to use the d3 scaling formula.`);
+    } else if (addedItem.data.data.scaling?.d6) {
+        const updates = addedItem.data.data.damage.parts;
+        updates[0].formula = "lookupRange(@details.cl.value, 1, 7, 2, 10, 3, 13, 4, 15, 5, 17, 7, 19, 9)d6 + lookupRange(@details.cl.value, 0, 3, floor(@details.level.value/2))";
+        await addedItem.update({"data.damage.parts": updates});
+        console.log(`Starfinder | Updated ${addedItem.name} to use the d6 scaling formula.`);
+    }  
+}

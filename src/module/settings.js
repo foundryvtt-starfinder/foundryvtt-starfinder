@@ -103,7 +103,7 @@ export const registerSystemSettings = function () {
     default: false,
     type: Boolean,
     onChange: () => {
-        scalingCantrips() 
+        //scalingCantrips() 
     }
 });    
 
