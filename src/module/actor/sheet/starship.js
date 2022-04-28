@@ -396,7 +396,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             li.addEventListener("dragleave", this._onCrewDragLeave, false);
         });
 
-        html.find('.action .action-name h4').click(event => this._onActionRoll(event));
+        html.find('.action .action-name h4').click(event => this._onActionSummary(event));
         html.find('.action .action-image').click(event => this._onActionRoll(event));
         
         html.find('.skill-create').click(ev => this._onCrewSkillCreate(ev));
@@ -617,6 +617,38 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         event.preventDefault();
         const actionId = event.currentTarget.closest('.action').dataset.actionId;
         return this.actor.useStarshipAction(actionId);
+    }
+    
+    async _onActionSummary(event) {
+        event.preventDefault();
+        
+        const pack = game.packs.get('sfrpg.starship-actions');
+        const index = await pack.index || getIndex();
+        
+        let li = $(event.currentTarget).parents('.action');   
+        
+        const filter = index.filter(i => i.name === (li.prevObject[0].innerHTML))
+        const item = await pack.getDocument(filter[0]._id);
+        const chatData = item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.data.data });
+        const critical = (!!chatData.effectCritical);
+        let content = `<p><strong>${game.i18n.localize("SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect")}:</strong> ${chatData.effectNormal}</p>`;
+        if (critical) {
+        content += `<p><strong>${game.i18n.localize("SFRPG.StarshipSheet.Actions.Tooltips.CriticalEffect")}: </strong> ${chatData.effectCritical}</p>`;
+        };
+
+        if (li.hasClass('expanded')) {
+            let summary = li.children('.item-summary');
+            summary.slideUp(200, () => summary.remove());
+        } else {
+            const desiredDescription = TextEditor.enrichHTML(content || chatData.description.value, {});
+            let div = $(`<div class="item-summary">${desiredDescription}</div>`);
+
+            li.append(div.hide());
+
+            div.slideDown(200, function() { /* noop */ });
+        }
+        li.toggleClass('expanded');
+
     }
 
     async _onCrewSkillCreate(event) {
