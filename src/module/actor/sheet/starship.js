@@ -630,10 +630,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const filter = index.filter(i => i.name === (li.prevObject[0].innerHTML));
         const item = await pack.getDocument(filter[0]._id);
         const chatData = item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.data.data });
-        const critical = (!!chatData.effectCritical);
         
         let content = `<p><strong>${game.i18n.localize("SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect")}:</strong> ${chatData.effectNormal}</p>`;
-        if (critical) {
+        if (chatData.effectCritical) {
             content += `<p><strong>${game.i18n.localize("SFRPG.StarshipSheet.Actions.Tooltips.CriticalEffect")}: </strong> ${chatData.effectCritical}</p>`;
         };
 
