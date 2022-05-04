@@ -1111,14 +1111,14 @@ export class ActorSheetSFRPG extends ActorSheet {
                         return existingClass;
                     }
                 }
-                
-                if (game.settings.get('sfrpg','scalingCantrips') && sidebarItem.type === "spell") {
-                _onScalingCantripDrop(sidebarItem);
-                }
 
                 const addedItemResult = await targetActor.createItem(duplicate(sidebarItem.data));
                 if (addedItemResult.length > 0) {
                     const addedItem = targetActor.getItem(addedItemResult[0].id);
+                    
+                    if (game.settings.get('sfrpg','scalingCantrips') && sidebarItem.type === "spell") {
+                        _onScalingCantripDrop(addedItem);
+                    }
 
                     if (targetContainer) {
                         let newContents = [];

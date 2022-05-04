@@ -1600,80 +1600,52 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 }
 
-export async function scalingCantrips() {
-    const spells = ['Hazard', 'Energy Ray', 'Telekinetic Projectile', 'Injury Echo'];
-    const pack = game.packs.get('sfrpg.spells');
+export async function _onScalingCantripsSettingChanges() {
     const d3scaling = "lookupRange(@details.cl.value, 1, 7, 2, 10, 3, 13, 4, 15, 5, 17, 7, 19, 9)d(lookupRange(@details.cl.value, 3, 7, 4)) + lookupRange(@details.cl.value, 0, 3, floor(@details.level.value/2))";
-    const d6scaling = "lookupRange(@details.cl.value, 1, 7, 2, 10, 3, 13, 4, 15, 5, 17, 7, 19, 9)d6 + lookupRange(@details.cl.value, 0, 3, floor(@details.level.value/2))"
-    const wasLocked = pack.locked;
+    const d6scaling = "lookupRange(@details.cl.value, 1, 7, 2, 10, 3, 13, 4, 15, 5, 17, 7, 19, 9)d6 + lookupRange(@details.cl.value, 0, 3, floor(@details.level.value/2))";
     const setting = (game.settings.get("sfrpg", "scalingCantrips"));
-    let updated = 0;
-
-    if (wasLocked) {
-        await pack.configure({locked: false});
-    }
-
-    const compIndex = await pack.index || getIndex();
-
-    let spellsFull = spells.map(async(currentValue, index, arr) => {
-        let filter = await compIndex.filter(i => i.name === spells[index]);
-        return await pack.getDocument(filter[0]._id);
-    })
-
-    spellsFull = await Promise.all(spellsFull);
-
-    for (let x of spellsFull) {
-        let updates = duplicate(x.data.data.damage.parts);
-
-        if (setting) {
-            switch (x.data.data.damage.parts[0].formula) {
-
-                case "1d3":
-                    updates[0].formula = d3scaling;
-                    await x.update({"data.damage.parts": updates}, {pack: "sfrpg.spells"});
-                    updated += 1;
-                    break;
-
-                case "1d6":
-                    updates[0].formula = d6scaling;
-                    await x.update({"data.damage.parts": updates}, {pack: "sfrpg.spells"});
-                    updated += 1;
-                    break;
-            }
-        } else {
-            switch (x.data.data.damage.parts[0].formula) {
-                case d3scaling:
-                    updates[0].formula = "1d3";
-                    await x.update({"data.damage.parts": updates}, {pack: "sfrpg.spells"});
-                    updated += 1;
-                    break;
-
-                case d6scaling:
-                    updates[0].formula = "1d6";
-                    await x.update({"data.damage.parts": updates}, {pack: "sfrpg.spells"});
-                    updated += 1;
-                    break;
-            }
+    let count = 0;
+    
+    for (let actor of game.actors.contents) {  
+        let updates = [];
+        let params = await (actor.items).filter(i => i.data.data.scaling?.d3 || i.data.data.scaling?.d6);
+        if (params.length > 0) {
+            updates = params.map( (currentValue) => {
+                return {_id: currentValue.id, "data.damage.parts": currentValue.data.data.damage.parts, scaling: currentValue.data.data.scaling};
+            })
+        
+            for (let currentValue of updates) {
+                if (currentValue.scaling.d3) {
+                    currentValue['data.damage.parts'][0].formula = (setting) ? d3scaling : "1d3";
+                } else if (currentValue.scaling.d6) {
+                    currentValue['data.damage.parts'][0].formula = (setting) ? d6scaling : "1d6";
+                }
+                
+                delete currentValue.scaling;
+                await actor.updateEmbeddedDocuments("Item", updates);
+                }
+        count += params.length;
         }
     }
-
-    if (wasLocked) {
-        await pack.configure({locked: true});
-    }
-
-    if (updated) {
-        console.log("Starfinder | Updated " + updated + " spells to", ((setting) ? "scaling formulas." : "their default formulas."));
-    }
+    const message = `Starfinder | Updated ${count} spells to use ${(setting) ? "scaling" : "default"} formulas.`;
+    console.log(message);
+    ui.notifications.info(message);
 }
+
 export async function _onScalingCantripDrop(addedItem) {
-    if (addedItem.data.data.scaling?.d3) { 
-        const updates = addedItem.data.data.damage.parts;
+    if (addedItem.data.data.scaling?.d3) {
+    
+        const updates = duplicate(addedItem.data.data.damage.parts);
         updates[0].formula = "lookupRange(@details.cl.value, 1, 7, 2, 10, 3, 13, 4, 15, 5, 17, 7, 19, 9)d(lookupRange(@details.cl.value, 3, 7, 4)) + lookupRange(@details.cl.value, 0, 3, floor(@details.level.value/2))";
+        
         await addedItem.update({"data.damage.parts": updates});
         console.log(`Starfinder | Updated ${addedItem.name} to use the d3 scaling formula.`);
+        
     } else if (addedItem.data.data.scaling?.d6) {
-        const updates = addedItem.data.data.damage.parts;
+        
+        const updates = duplicate(addedItem.data.data.damage.parts);
         updates[0].formula = "lookupRange(@details.cl.value, 1, 7, 2, 10, 3, 13, 4, 15, 5, 17, 7, 19, 9)d6 + lookupRange(@details.cl.value, 0, 3, floor(@details.level.value/2))";
+        
         await addedItem.update({"data.damage.parts": updates});
         console.log(`Starfinder | Updated ${addedItem.name} to use the d6 scaling formula.`);
     }  

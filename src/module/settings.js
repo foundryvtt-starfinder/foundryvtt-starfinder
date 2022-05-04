@@ -1,5 +1,5 @@
 import { SFRPG } from "./config.js";
-import { scalingCantrips } from "./item/item.js";
+import { _onScalingCantripsSettingChanges } from "./item/item.js";
 
 export const registerSystemSettings = function () {
     game.settings.register("sfrpg", "diagonalMovement", {
@@ -103,7 +103,7 @@ export const registerSystemSettings = function () {
     default: false,
     type: Boolean,
     onChange: () => {
-        //scalingCantrips() 
+        _onScalingCantripsSettingChanges() 
     }
 });    
 
