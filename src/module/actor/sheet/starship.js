@@ -622,7 +622,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     async _onActionSummary(event) {
         event.preventDefault();
         
-        const pack = game.packs.get('sfrpg.starship-actions');
+        const actionPack = game.settings.get('sfrpg', 'starshipActionsSource')
+        const pack = game.packs.get(actionPack);
         const index = pack.index || (await pack.getIndex());
         
         let li = $(event.currentTarget).parents('.action');   
