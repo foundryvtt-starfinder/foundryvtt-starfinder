@@ -1623,7 +1623,7 @@ export async function _onScalingCantripsSettingChanges() {
                 
                 delete currentValue.scaling;
             }
-        await actor.updateEmbeddedDocuments("Item", updates);             
+        await actor.updateEmbeddedDocuments("Item", updates);
         count += params.length;
         }
     }
