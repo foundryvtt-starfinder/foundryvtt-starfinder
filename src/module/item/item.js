@@ -773,7 +773,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             rollContext: rollContext,
             title: title,
-            flavor: this.data?.data?.chatFlavor,
+            flavor: TextEditor.enrichHTML(this.data?.data?.chatFlavor),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: critThreshold,
             rollOptions: rollOptions,
@@ -1087,7 +1087,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
-            flavor: options?.flavorOverride ?? itemData.chatFlavor,
+            flavor: TextEditor.enrichHTML(options?.flavorOverride) ?? TextEditor.enrichHTML(itemData.chatFlavor),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 width: 400,
