@@ -18,12 +18,12 @@ export default function (engine) {
 
                 let dcFormula = save.dc?.toString();
                 if (!dcFormula) {
-                    const ownerKeyAbilityId = actorData?.attributes.keyability;
+                    const ownerKeyAbilityId = actorData?.attributes.keyability  || classes[0]?.data.data.kas;
                     const itemKeyAbilityId = data.ability;
                     const spellbookSpellAbility = actorData?.attributes.spellcasting
-                    const classSpellAbility = classes.filter(item => item.key === "technomancer" || "mystic" || "witchwarper" || "precog")[0]?.data.data.spellAbility;
+                    const classSpellAbility = classes[0]?.data.data.spellAbility;
 
-                    const abilityKey = itemKeyAbilityId || classSpellAbility || spellbookSpellAbility || ownerKeyAbilityId;
+                    const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
                     if (abilityKey) {
                         if (itemData.type === "spell") {
                             dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
