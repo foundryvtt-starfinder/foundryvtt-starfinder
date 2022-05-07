@@ -623,6 +623,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         event.preventDefault();
 
         const roleId = $(event.currentTarget).closest('li').data('role');
+        const skills = duplicate(CONFIG.SFRPG.skills);
+        skills.gun = "Gunnery";
 
         const results = await ChoiceDialog.show(
             "Add Skill",
@@ -630,8 +632,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             {
                 skill: {
                     name: "Skill",
-                    options: Object.values(CONFIG.SFRPG.skills),
-                    default: Object.values(CONFIG.SFRPG.skills)[0]
+                    options: Object.values(skills).sort(),
+                    default: Object.values(skills)[0]
                 }
             }
         );
@@ -641,7 +643,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         }
 
         let skillId = null;
-        for(const [key, value] of Object.entries(CONFIG.SFRPG.skills)) {
+        for(const [key, value] of Object.entries(skills)) {
             if (value === results.result.skill) {
                 skillId = key;
                 break;
