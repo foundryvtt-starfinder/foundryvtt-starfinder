@@ -35,9 +35,10 @@ You can now add Gunnery as a skill to NPC starships, simplifying setting up NPC 
 * Added missing reference to `src/module/actor/mixins/actor-damage.js` file which was causing issues with resolving damage from the chat cards.
 * Clicking the name of a starship action will now expand with the action description.
 * A skill notes field has been added to all skills, allowing you to note features like Theme Knowledge on skill checks.
-* Fixed shield dex caps not working properly.
+* Fixed shield dex caps not working correctly.
 * Removed the old Solarian Attunement special trait selector.
 * Archaic weapons now automatically include a -5 penalty to damage.
+* Added ability activation cost of 1 Round.
 
 # v0.18.3 - Precog Pioneers
 
