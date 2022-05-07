@@ -1599,3 +1599,54 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         new SFRPGModifierApplication(modifier, this, {}, this.actor).render(true);
     }
 }
+
+export async function _onScalingCantripsSettingChanges() {
+    const d3scaling = "lookupRange(@details.cl.value, 1, 7, 2, 10, 3, 13, 4, 15, 5, 17, 7, 19, 9)d(lookupRange(@details.cl.value, 3, 7, 4)) + lookupRange(@details.cl.value, 0, 3, floor(@details.level.value/2))";
+    const d6scaling = "lookupRange(@details.cl.value, 1, 7, 2, 10, 3, 13, 4, 15, 5, 17, 7, 19, 9)d6 + lookupRange(@details.cl.value, 0, 3, floor(@details.level.value/2))";
+    const setting = (game.settings.get("sfrpg", "scalingCantrips"));
+    let count = 0;
+    
+    for (let actor of game.actors.contents) {  
+        let updates = [];
+        let params = await (actor.items).filter(i => i.data.data.scaling?.d3 || i.data.data.scaling?.d6);
+        if (params.length > 0) {
+            updates = params.map( (currentValue) => {
+                return {_id: currentValue.id, "data.damage.parts": currentValue.data.data.damage.parts, scaling: currentValue.data.data.scaling};
+            })
+        
+            for (let currentValue of updates) {
+                if (currentValue.scaling.d3) {
+                    currentValue['data.damage.parts'][0].formula = (setting) ? d3scaling : "1d3";
+                } else if (currentValue.scaling.d6) {
+                    currentValue['data.damage.parts'][0].formula = (setting) ? d6scaling : "1d6";
+                }
+                
+                delete currentValue.scaling;
+            }
+        await actor.updateEmbeddedDocuments("Item", updates);
+        count += params.length;
+        }
+    }
+    const message = `Starfinder | Updated ${count} spells to use ${(setting) ? "scaling" : "default"} formulas.`;
+    console.log(message);
+    ui.notifications.info(message);
+}
+
+export async function _onScalingCantripDrop(addedItem) {
+    if (addedItem.data.data.scaling?.d3) {
+    
+        const updates = duplicate(addedItem.data.data.damage.parts);
+        updates[0].formula = "lookupRange(@details.cl.value, 1, 7, 2, 10, 3, 13, 4, 15, 5, 17, 7, 19, 9)d(lookupRange(@details.cl.value, 3, 7, 4)) + lookupRange(@details.cl.value, 0, 3, floor(@details.level.value/2))";
+        
+        await addedItem.update({"data.damage.parts": updates});
+        console.log(`Starfinder | Updated ${addedItem.name} to use the d3 scaling formula.`);
+        
+    } else if (addedItem.data.data.scaling?.d6) {
+        
+        const updates = duplicate(addedItem.data.data.damage.parts);
+        updates[0].formula = "lookupRange(@details.cl.value, 1, 7, 2, 10, 3, 13, 4, 15, 5, 17, 7, 19, 9)d6 + lookupRange(@details.cl.value, 0, 3, floor(@details.level.value/2))";
+        
+        await addedItem.update({"data.damage.parts": updates});
+        console.log(`Starfinder | Updated ${addedItem.name} to use the d6 scaling formula.`);
+    }  
+}
