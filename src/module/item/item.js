@@ -1069,6 +1069,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         /** Create additional modifiers. */
         const additionalModifiers = [];
+        
+        if (itemData.properties?.archaic && isWeapon) {
+            additionalModifiers.push({bonus: { name: game.i18n.format("SFRPG.WeaponPropertiesArchaic"), modifier: "-5", enabled: true, notes: game.i18n.format("SFRPG.WeaponPropertiesArchaicTooltip") } });
+        }
+        
         for (const rolledMod of rolledMods) {
             additionalModifiers.push({
                 bonus: rolledMod
