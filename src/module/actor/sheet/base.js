@@ -1034,7 +1034,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             const addedItem = targetActor.getItem(createResult[0].id);
             
             if (game.settings.get('sfrpg','scalingCantrips') && addedItem.type === "spell") {
-                _onScalingCantripDrop(addedItem);
+                _onScalingCantripDrop(addedItem, targetActor);
             }
                 
             if (!(addedItem.type in SFRPG.containableTypes)) {
@@ -1117,7 +1117,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                     const addedItem = targetActor.getItem(addedItemResult[0].id);
                     
                     if (game.settings.get('sfrpg','scalingCantrips') && sidebarItem.type === "spell") {
-                        _onScalingCantripDrop(addedItem);
+                        _onScalingCantripDrop(addedItem, targetActor);
                     }
 
                     if (targetContainer) {
