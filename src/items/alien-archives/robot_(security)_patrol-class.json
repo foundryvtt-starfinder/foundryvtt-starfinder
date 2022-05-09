@@ -48,8 +48,19 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": "0"
+      },
       "arms": "2",
       "bab": 0,
+      "baseAttackBonus": {
+        "rolledMods": [],
+        "tooltip": [],
+        "value": 0
+      },
+      "baseSpellDC": {
+        "base": "0"
+      },
       "cmd": {
         "min": 0,
         "tooltip": [],
@@ -118,7 +129,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -127,7 +139,8 @@
         "special": "original base: 30 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -136,6 +149,28 @@
         "misc": 0,
         "tooltip": [],
         "value": 0
+      }
+    },
+    "common": {
+      "abilities": {
+        "cha": {
+          "base": 0
+        },
+        "con": {
+          "base": 0
+        },
+        "dex": {
+          "base": 0
+        },
+        "int": {
+          "base": 0
+        },
+        "str": {
+          "base": 0
+        },
+        "wis": {
+          "base": 0
+        }
       }
     },
     "conditions": {
@@ -156,11 +191,14 @@
       "exhausted": false,
       "fascinated": false,
       "fatigued": false,
+      "flat-footed": false,
       "flatfooted": false,
       "frightened": false,
       "grappled": false,
       "helpless": false,
       "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
       "offkilter": false,
       "offtarget": false,
       "overburdened": false,
@@ -187,12 +225,23 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.png",
+        "height": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any urban</p>\n<p>&nbsp;</p>\n<h3>Organization</h3>\n<p>solitary, pair, or patrol (3-7)</p>\n<p>&nbsp;</p>\n"
+        "value": "<p>Security robots come in a wide variety of makes and models, with a near-endless variety of customizations based on both the manufacturer and the aesthetics and needs of the consumer. Crafted with advanced user interfaces mimicking moderate intelligence, but without any of the emotions, unpredictability, or bias of a true AI or sentient creature, security bots are an eminently practical, reasonable solution to a wide variety of security needs. Unlike full-on military models, security robots usually come preprogrammed with certain fail-safes preventing them from engaging in violence beyond what&rsquo;s necessary for the protection of their assigned population or property, making them a go-to option for police forces, corporations, and even wealthy individuals looking for peace of mind.</p>\n<p>&nbsp;</p>\n<p>One of the cheapest and most common types of security robot is the observer. Observer-class bots are usually small, flying robots designed primarily to record and report specific unsavory activities for later review by their owners, though they are also equipped to fend off minor threats. Whether buzzing through the access ducts of secure facilities or hovering over crowded marketplaces, observers are nearly ubiquitous in some advanced settlements. On Absalom Station, the most prominent brand is AbadarCorp&rsquo;s VizAll, a flying orb with gentle contours designed to put citizens at ease, with a central eye, stubby fins, and relentlessly cheerful speech patterns. Aballon&rsquo;s Sunward Corporation produces the more disconcerting Arbitron, whose insectile form mimics those of the resident anacites, while Triaxus&rsquo;s Bluescale Industries crafts theirs to resemble tiny, mechanical drakes. Regardless of their shape, however, observers are known for their convenience, but they are infamous for their limited nuance&mdash;a problem for owners who forget their own security passphrase. Some of the cheapest models also have faulty programming that causes them to develop personality quirks, making a particular bot act especially aggressive, friendly, or even dejected.</p>\n<p>&nbsp;</p>\n<p>Patrol-class security robots are more humanoid in shape, standing about 6 feet tall with integrated armaments that keep the robots&rsquo; limbs free to apprehend offenders and engage in close combat. Given their deadlier weaponry and tougher armor plating, patrol-class security robots (sometimes simply called &ldquo;patrol bots&rdquo;) are more regulated in their sale and use. They are found mostly in large space stations and corporate facilities under government or syndicate control. As with observer-class robots, these models run the gamut from four-armed Idaran Peacekeepers to the artistic Castrovelian Linewalkers that guard against dangerous jungle beasts, yet the overwhelming industry leader is AbadarCorp&rsquo;s Town Guard series. With blank, circular faces of glass or glowing energy and cleanly contoured limbs capable of folding up for easy storage, AbadarCorp&rsquo;s patrol bot is a triumph of industrial design and defense. This model&rsquo;s reputation has been further boosted due to the fact that it&rsquo;s the only model of patrol bot currently used by Absalom Station&rsquo;s government, with many going straight into service from the corporation&rsquo;s manufactories in the Spike.</p>\n<p>&nbsp;</p>\n<p>Unfortunately, not all security bots end up working for law-abiding corporations or state governments. Various planets in the Pact Worlds system have their own rules about who is or is not licensed to own a security robot, and the Pact Worlds government generally finds it easier to look the other way than to get embroiled in the contentious issues of rights-to- weapons and planetary sovereignty. As a result, it&rsquo;s not difficult for individuals to purchase security robots entirely unregulated on the black market, albeit at a high cost. In cases where a world outlaws such sales, these models are usually formerly legal models that have been stolen and cracked by hacker gangs, while in other places corporations quietly sell to known criminal enterprises without asking questions. Such security robots are sometimes marked by their owners to show their &ldquo;allegiance&rdquo;&mdash;they might be painted with gang symbols or have their heads replaced with disturbing mannequin busts. Other groups maintain their robots&rsquo; official appearances, the better to carry out kidnappings and extortion. Because of this, passersby occasionally stumble across pitched firefights between squads of similar-looking security robots. Those who wish to get involved must be careful to identify each side&rsquo;s master, as they could find themselves unintentionally taking sides in a gang war.</p>\n<p>&nbsp;</p>\n<p>Though both observer and patrol models have safeguards to protect against it, glitches can occasionally develop in a security robot&rsquo;s firmware, often the result of massive damage sustained during a firefight or improper diagnostics after such an altercation. In such cases, the glitch can override the bot&rsquo;s usual baselevel programming regarding tiers of force and the logic of conflict escalation, or even its protocol to protect the innocent. This can result in a bloody rampage, with the robot either going berserk over perceived violation of nonexistent laws, or technically following the law but executing lethal punishment for even the smallest infraction. Even worse, an infected patrol bot&rsquo;s nanites can carry its corrupted code like a virus, turning other security robots rogue. When this occurs, manufacturers like AbadarCorp are usually quick to hire discreet &ldquo;contractors&rdquo; to deal with the menace (as maintaining their own strike-and-disassembly force would publicly acknowledge the threat).</p>",
+        "weight": ""
       },
       "class": "",
       "cr": 4,
-      "environment": "",
+      "environment": "any urban",
+      "organization": "solitary, pair, or patrol",
+      "organizationSize": {
+        "max": 7,
+        "min": 3
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 94",
@@ -202,12 +251,18 @@
       }
     },
     "modifiers": [],
+    "skillpoints": {
+      "max": 0,
+      "tooltip": [],
+      "used": 0
+    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -218,6 +273,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -228,6 +284,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -238,6 +295,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -248,6 +306,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -258,6 +317,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -268,6 +328,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -278,6 +339,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -288,6 +350,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 15,
         "ranks": 15,
@@ -298,6 +361,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -308,6 +372,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -318,6 +383,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -328,6 +394,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 10,
         "ranks": 10,
@@ -338,6 +405,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -348,6 +416,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -358,6 +427,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -369,6 +439,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -379,6 +450,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -389,6 +461,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -399,6 +472,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
+        "min": 0,
         "misc": 0,
         "mod": 0,
         "ranks": 0,
@@ -408,30 +482,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -466,10 +547,16 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   },
-  "flags": {},
+  "effects": [],
+  "flags": {
+    "core": {}
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
@@ -482,6 +569,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -503,8 +591,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "A security robot’s weapons are integrated into its frame and can’t be disarmed."
         },
@@ -514,6 +605,7 @@
           "value": null
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -526,6 +618,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -542,8 +635,14 @@
           "value": 0
         }
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg"
+      "folder": null,
+      "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
+      "sort": 0
     },
     {
       "_id": "OuRfswWEZGg5x1Dg",
@@ -555,6 +654,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "heal",
         "activation": {
           "type": "full",
@@ -584,8 +684,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "A patrol-class security robot’s nanites heal it, restoring a number of Hit Points per hour equal to its CR (4 Hit Points per hour for most security robots). Once per day as a full action, a patrol-class security robot can restore 3d8 Hit Points to itself or any touched construct with the technological subtype."
         },
@@ -595,6 +698,7 @@
           "value": ""
         },
         "formula": "",
+        "isActive": null,
         "modifiers": [],
         "range": {
           "additional": "",
@@ -607,6 +711,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -623,22 +728,37 @@
           "value": 1
         }
       },
+      "effects": [],
       "flags": {},
-      "img": "icons/svg/mystery-man.svg"
+      "folder": null,
+      "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
+      "sort": 0
     },
     {
       "_id": "ispskchIpgMCtHK3",
       "name": "Slam",
       "type": "weapon",
+      "ammunition": false,
+      "augmentation": false,
+      "consumable": false,
+      "container": false,
       "data": {
         "type": "",
         "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -673,6 +793,8 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": true,
+          "isOpen": true,
           "storage": [
             {
               "type": "slot",
@@ -693,16 +815,27 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+7",
-              "operator": "",
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -711,295 +844,14 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
-        "proficient": true,
-        "properties": {},
-        "quantity": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "special": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        },
-        "weaponCategory": "uncategorized",
-        "weaponType": "basicM"
-      },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg"
-    },
-    {
-      "_id": "feFqGt7h35tYMtDU",
-      "name": "Jolting Arc (Ex)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d8",
-              "operator": "",
-              "types": {
-                "electricity": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "Once every 1d4 rounds as a standard action, a patrol-class security robot can shoot an arc of electricity at up to four creatures within 40 feet (no two of which can be more than 30 feet apart). This arc deals 1d8 electricity damage to each target (Reflex DC 13 half)."
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "ft",
-          "value": 40
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "reflex",
-          "dc": "13",
-          "descriptor": "half"
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": "up to 4 creatures, no two of which are more than 30 ft apart"
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg"
-    },
-    {
-      "_id": "XHHQ7l1kDN11UHZ3",
-      "name": "Unliving",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr>\n<p>&nbsp;</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg"
-    },
-    {
-      "_id": "KJZKyKQSmUYjVCE8",
-      "name": "Integrated Arc Emitter, Tactical",
-      "type": "weapon",
-      "data": {
-        "type": "",
-        "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "rwak",
-        "activation": {
-          "type": "none",
-          "condition": "",
-          "cost": null
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": true
-        },
-        "attuned": false,
-        "bulk": "1",
-        "capacity": {
-          "max": 20,
-          "value": 20
-        },
-        "chatFlavor": "",
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 2,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d4",
-              "operator": "",
-              "types": {
-                "electricity": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Arc emitters discharge a cone of electrical energy that can damage and stun anyone within its area. Advanced arc emitters can be used at a longer range and are used by military forces to stun and subdue groups of enemies.</span></p>\n<h3 class=\"framing\"><strong>Shock Weapons</strong></h3>\n<hr>\n<p>Shock weapons emit powerful electrical blasts that can damage and potentially stun enemies. Ranged versions use a low-power laser to direct these weapons’ electrical arcs. Electrical blasts can also leap to adjacent targets, making the weapons well suited for stunning groups of enemies. In general, tempest shock weapons are the most powerful, followed in descending order by storm, aurora, and static shock weapons.</p>\n<p>&nbsp;</p>\n<p><strong>Integrated Weapons (Ex)</strong>&nbsp;A security robot’s weapons are integrated into its frame and can’t be disarmed.</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "equipped": true,
-        "formula": "",
-        "identified": false,
-        "level": 2,
-        "modifiers": [],
-        "price": 750,
         "proficient": true,
         "properties": {
           "aeon": false,
@@ -1009,12 +861,13 @@
           "archaic": false,
           "aurora": false,
           "automatic": false,
-          "blast": true,
+          "blast": false,
           "block": false,
           "boost": false,
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -1033,6 +886,7 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
@@ -1068,6 +922,486 @@
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "thruster": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "source": "",
+        "special": "",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponCategory": "uncategorized",
+        "weaponType": "basicM"
+      },
+      "effects": [],
+      "equipment": false,
+      "flags": {},
+      "folder": null,
+      "fusion": true,
+      "goods": false,
+      "hybrid": false,
+      "img": "icons/svg/mystery-man.svg",
+      "magic": false,
+      "permission": {
+        "default": 0
+      },
+      "shield": false,
+      "sort": 0,
+      "spell": false,
+      "storage": {
+        "type": "slot",
+        "affectsEncumbrance": true,
+        "amount": 0,
+        "subtype": "fusion",
+        "weightProperty": "level"
+      },
+      "technological": false,
+      "upgrade": false,
+      "vehicleAttack": false,
+      "vehicleSystem": false,
+      "weapon": false,
+      "weaponAccessory": false
+    },
+    {
+      "_id": "feFqGt7h35tYMtDU",
+      "name": "Jolting Arc (Ex)",
+      "type": "feat",
+      "data": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "none",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "name": "",
+              "formula": "1d8",
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ]
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "Once every 1d4 rounds as a standard action, a patrol-class security robot can shoot an arc of electricity at up to four creatures within 40 feet (no two of which can be more than 30 feet apart). This arc deals 1d8 electricity damage to each target (Reflex DC 13 half)."
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 40
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "reflex",
+          "dc": "13",
+          "descriptor": "half"
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": "up to 4 creatures, no two of which are more than 30 ft apart"
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      },
+      "effects": [],
+      "flags": {},
+      "folder": null,
+      "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
+      "sort": 0
+    },
+    {
+      "_id": "XHHQ7l1kDN11UHZ3",
+      "name": "Unliving",
+      "type": "feat",
+      "data": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr>\n<p>&nbsp;</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      },
+      "effects": [],
+      "flags": {},
+      "folder": null,
+      "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
+      "sort": 0
+    },
+    {
+      "_id": "KJZKyKQSmUYjVCE8",
+      "name": "Integrated Arc Emitter, Tactical",
+      "type": "weapon",
+      "ammunition": false,
+      "augmentation": false,
+      "consumable": false,
+      "container": false,
+      "data": {
+        "type": "",
+        "ability": "dex",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "eac",
+        "actionType": "rwak",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": null
+        },
+        "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "1",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": true,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 2,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightProperty": ""
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "name": "",
+              "formula": "1d4",
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ]
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Arc emitters discharge a cone of electrical energy that can damage and stun anyone within its area. Advanced arc emitters can be used at a longer range and are used by military forces to stun and subdue groups of enemies.</span></p>\n<h3 class=\"framing\"><strong>Shock Weapons</strong></h3>\n<hr>\n<p>Shock weapons emit powerful electrical blasts that can damage and potentially stun enemies. Ranged versions use a low-power laser to direct these weapons’ electrical arcs. Electrical blasts can also leap to adjacent targets, making the weapons well suited for stunning groups of enemies. In general, tempest shock weapons are the most powerful, followed in descending order by storm, aurora, and static shock weapons.</p>\n<p>&nbsp;</p>\n<p><strong>Integrated Weapons (Ex)</strong>&nbsp;A security robot’s weapons are integrated into its frame and can’t be disarmed.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "equippable": false,
+        "equipped": true,
+        "formula": "",
+        "identified": false,
+        "isActive": null,
+        "level": 2,
+        "modifiers": [],
+        "price": 750,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": true,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "buttressing": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "gearArray": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -1080,6 +1414,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": true,
           "unbalancing": false,
@@ -1089,19 +1424,36 @@
           "wideLine": false
         },
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 15
         },
+        "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "source": "Core Rulebook",
         "special": "",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": ""
@@ -1118,8 +1470,34 @@
         "weaponCategory": "uncategorized",
         "weaponType": "longA"
       },
+      "effects": [],
+      "equipment": false,
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/arc-emitter-tactical.jpg"
+      "folder": null,
+      "fusion": true,
+      "goods": false,
+      "hybrid": false,
+      "img": "systems/sfrpg/icons/equipment/weapons/arc-emitter-tactical.webp",
+      "magic": false,
+      "permission": {
+        "default": 0
+      },
+      "shield": false,
+      "sort": 0,
+      "spell": false,
+      "storage": {
+        "type": "slot",
+        "affectsEncumbrance": true,
+        "amount": 2,
+        "subtype": "fusion",
+        "weightProperty": "level"
+      },
+      "technological": false,
+      "upgrade": false,
+      "vehicleAttack": false,
+      "vehicleSystem": false,
+      "weapon": false,
+      "weaponAccessory": false
     },
     {
       "_id": "cxjZLlWeujOM3qSX",
@@ -1152,19 +1530,29 @@
         },
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 20</p>"
         },
+        "equippable": false,
         "equipped": false,
         "identified": true,
         "level": 1,
         "modifiers": [],
         "price": 60,
         "quantity": 2,
+        "quantityPerPack": 1,
         "source": "Core Rulebook"
       },
+      "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.jpg"
+      "folder": null,
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
+      "permission": {
+        "default": 0
+      },
+      "sort": 0
     }
   ],
   "token": {
@@ -1172,6 +1560,7 @@
     "actorData": {},
     "actorId": "hmdlLldRvf9XE181",
     "actorLink": false,
+    "alpha": 1,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -1188,6 +1577,27 @@
     "flags": {},
     "height": 1,
     "img": "icons/svg/mystery-man.svg",
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "animation": {
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "bright": 0,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
     "lightAlpha": 1,
     "lightAngle": 360,
     "lightColor": "",
@@ -1197,8 +1607,8 @@
     "randomImg": false,
     "rotation": 0,
     "scale": 1,
-    "sightAngle": 360,
-    "tint": "",
+    "sightAngle": 0,
+    "tint": null,
     "vision": false,
     "width": 1
   }

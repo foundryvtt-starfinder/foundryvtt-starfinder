@@ -48,12 +48,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": "0"
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -123,7 +129,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -132,7 +139,8 @@
         "special": "25 ft. in armor",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -141,6 +149,28 @@
         "misc": 0,
         "tooltip": [],
         "value": 0
+      }
+    },
+    "common": {
+      "abilities": {
+        "cha": {
+          "base": 0
+        },
+        "con": {
+          "base": 0
+        },
+        "dex": {
+          "base": 0
+        },
+        "int": {
+          "base": 0
+        },
+        "str": {
+          "base": 0
+        },
+        "wis": {
+          "base": 0
+        }
       }
     },
     "conditions": {
@@ -194,7 +224,7 @@
       "biography": {
         "age": 0,
         "dateOfBirth": "",
-        "fullBodyImage": "systems/sfrpg/images/mystery-body.png",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
         "height": "",
         "otherVisuals": "",
         "public": "",
@@ -204,9 +234,14 @@
       "class": "",
       "cr": 7,
       "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "Hobgoblin Soldier",
-      "source": "AA1 pg. 76",
+      "source": "AA2 pg. 76",
       "subtype": "Goblinoid",
       "xp": {
         "value": 10
@@ -444,30 +479,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -501,19 +543,26 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   },
   "effects": [],
-  "flags": {},
+  "flags": {
+    "core": {}
+  },
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
+      "_id": "1x3lty5b9afaem7z",
       "name": "Battle Hardened (Ex)",
       "type": "feat",
       "data": {
         "type": "",
         "ability": null,
+        "actionTarget": "",
         "actionType": null,
         "activation": {
           "type": "",
@@ -535,9 +584,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "Hobgoblins are trained for combat from an early age, and they quickly learn that a foe can do much more than just hurt you. Hobgoblins gain a +1 racial bonus to AC against combat maneuvers."
         },
@@ -560,6 +611,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -577,23 +629,36 @@
         }
       },
       "effects": [],
-      "flags": {}
+      "flags": {},
+      "folder": null,
+      "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
+      "sort": 100000
     },
     {
+      "_id": "iz0yq83dsg8dhq5p",
       "name": "Longsword, sintered",
       "type": "weapon",
+      "ammunition": false,
+      "augmentation": false,
+      "consumable": false,
+      "container": false,
       "data": {
         "type": "",
         "ability": "",
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
           "type": "none",
           "condition": "",
           "cost": null
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -628,6 +693,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -649,17 +715,27 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d8+13",
-              "operator": "",
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": true,
+                "sonic": false
               }
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>A sintered longsword is made of compacted ceramics, forming a durable and finely edged blade.</p>"
         },
@@ -691,6 +767,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -709,6 +786,7 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
@@ -744,6 +822,7 @@
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -756,6 +835,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -765,12 +845,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "touch",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -778,6 +860,21 @@
         },
         "source": "CRB pg. 172",
         "special": "",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": ""
@@ -795,24 +892,56 @@
         "weaponType": "advancedM"
       },
       "effects": [],
+      "equipment": false,
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/longsword-sintered.jpg"
+      "folder": null,
+      "fusion": true,
+      "goods": false,
+      "hybrid": false,
+      "img": "systems/sfrpg/icons/equipment/weapons/longsword-sintered.webp",
+      "magic": false,
+      "permission": {
+        "default": 0
+      },
+      "shield": false,
+      "sort": 0,
+      "spell": false,
+      "storage": {
+        "type": "slot",
+        "affectsEncumbrance": true,
+        "amount": 7,
+        "subtype": "fusion",
+        "weightProperty": "level"
+      },
+      "technological": false,
+      "upgrade": false,
+      "vehicleAttack": false,
+      "vehicleSystem": false,
+      "weapon": false,
+      "weaponAccessory": false
     },
     {
+      "_id": "9m9r2ruffrt0vt4p",
       "name": "Laser rifle, corona",
       "type": "weapon",
+      "ammunition": [],
+      "augmentation": [],
+      "consumable": [],
+      "container": [],
       "data": {
         "type": "",
         "ability": "",
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
           "type": "none",
           "condition": "",
           "cost": null
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -847,6 +976,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -879,7 +1009,15 @@
               "formula": "1d6",
               "operator": "",
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -887,17 +1025,27 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6+7",
-              "operator": "",
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>With its snub, squared barrel and internal reinforcements, a laser rifle is sturdy and dependable.</p>"
         },
@@ -929,6 +1077,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -947,6 +1096,7 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
@@ -982,6 +1132,7 @@
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -994,6 +1145,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": true,
           "unbalancing": false,
@@ -1003,12 +1155,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 120
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": "",
@@ -1016,6 +1170,21 @@
         },
         "source": "CRB pg. 176",
         "special": "",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "units": "",
@@ -1034,10 +1203,55 @@
         "weaponType": "longA"
       },
       "effects": [],
+      "equipment": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/laser-rifle-azimuth.jpg"
+      "folder": null,
+      "fusion": [
+        "on"
+      ],
+      "goods": [
+        "on"
+      ],
+      "hybrid": [],
+      "img": "systems/sfrpg/icons/equipment/weapons/laser-rifle-azimuth.webp",
+      "magic": [],
+      "permission": {
+        "default": 0
+      },
+      "shield": [],
+      "sort": 0,
+      "spell": [],
+      "storage": {
+        "type": [
+          "slot",
+          "slot"
+        ],
+        "affectsEncumbrance": [
+          "on",
+          "on"
+        ],
+        "amount": [
+          "6",
+          "1"
+        ],
+        "subtype": [
+          "fusion",
+          ""
+        ],
+        "weightProperty": [
+          "level",
+          ""
+        ]
+      },
+      "technological": [],
+      "upgrade": [],
+      "vehicleAttack": [],
+      "vehicleSystem": [],
+      "weapon": [],
+      "weaponAccessory": []
     },
     {
+      "_id": "r37le8m0xn0rsjz8",
       "name": "Stickybomb grenade II",
       "type": "weapon",
       "data": {
@@ -1046,12 +1260,14 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "rwak",
         "activation": {
           "type": "action",
           "condition": "",
           "cost": 1
         },
+        "ammunitionType": "",
         "area": {
           "effect": "burst",
           "shape": "sphere",
@@ -1086,6 +1302,7 @@
         "chatFlavor": "entangled [[2d4]] rounds",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -1107,9 +1324,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">A stickybomb grenade detonates with a splash of adhesive resin.</span></p>"
         },
@@ -1215,12 +1434,14 @@
           "wideLine": false
         },
         "quantity": null,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
           "value": 20
         },
+        "rollNotes": "",
         "save": {
           "type": "reflex",
           "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
@@ -1228,6 +1449,7 @@
         },
         "source": "CRB pg. 178",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
@@ -1246,25 +1468,35 @@
       },
       "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/stickybomb-grenade.jpg"
+      "folder": null,
+      "img": "systems/sfrpg/icons/equipment/weapons/stickybomb-grenade.webp",
+      "permission": {
+        "default": 0
+      },
+      "sort": 0
     },
     {
+      "_id": "0pt7oh9727vk2ki2",
       "name": "Furious Combatant (Ex)",
       "type": "feat",
       "data": {
         "type": "",
         "ability": null,
-        "actionType": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
         "activation": {
-          "type": "",
+          "type": "reaction",
           "condition": "",
-          "cost": 0
+          "cost": 1
         },
         "area": {
           "effect": "",
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "none",
+          "value": null
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1275,16 +1507,18 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "When a hobgoblin lieutenant scores a critical hit against a foe, the hobgoblin can attempt an Intimidate check to demoralize that foe as a reaction."
         },
         "descriptors": [],
         "duration": {
           "units": "",
-          "value": null
+          "value": ""
         },
         "formula": "",
         "isActive": null,
@@ -1292,7 +1526,7 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
+          "units": "none",
           "value": null
         },
         "recharge": {
@@ -1300,6 +1534,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1308,18 +1543,25 @@
         "source": "",
         "target": {
           "type": "",
-          "value": null
+          "value": ""
         },
         "uses": {
           "max": 0,
-          "per": null,
+          "per": "",
           "value": 0
         }
       },
       "effects": [],
-      "flags": {}
+      "flags": {},
+      "folder": null,
+      "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
+      "sort": 200000
     },
     {
+      "_id": "syqid979syfx0zch",
       "name": "Nimble Fusillade (Ex) (2nd)",
       "type": "feat",
       "data": {
@@ -1328,6 +1570,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -1349,9 +1592,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"Jba9qeZX5QgjZvwQ\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Hit-and-Run</a></p>\n        <p>&nbsp;</p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">When you make a full attack, you can also either take a guarded step or move up to half your speed. This movement can come before, between, or after your attacks, but it can’t be split up.</span></p>"
         },
@@ -1374,6 +1619,7 @@
           "value": null
         },
         "requirements": "2nd Technique",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1392,84 +1638,15 @@
       },
       "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/classes/nimble_fusillade.png"
-    },
-    {
-      "name": "Opening Volley (Ex) (1st)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": null
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "unidentified": "",
-          "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"Jba9qeZX5QgjZvwQ\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Hit-and-Run</a></p>\n        <p>&nbsp;</p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You gain Opening Volley as a bonus feat. If you already have this feat, choose a bonus combat feat instead. At 9th level, you can use Opening Volley on both your first and second turns in combat.</span></p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "1st Technique",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "Hit-and-Run",
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": null,
-          "per": "",
-          "value": 1
-        }
+      "folder": null,
+      "img": "systems/sfrpg/icons/classes/nimble_fusillade.webp",
+      "permission": {
+        "default": 0
       },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/classes/opening_volley.png"
+      "sort": 300000
     },
     {
+      "_id": "nxexd4ne7zo5rd9j",
       "name": "Golemforged plating III",
       "type": "equipment",
       "data": {
@@ -1478,12 +1655,14 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -1526,6 +1705,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -1548,9 +1728,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">An economical choice for many mercenaries, golemforged plating is one of the universeâ€™s most popular heavy armors. Golemforged plating consists of a close-fitting polycarbonate suit fitted with ports and sockets to fit most armor customization options. Suits of golemforged plating include flexible boots and gloves as well as a standard helmet with a clear visor.&nbsp;</span></p>"
         },
@@ -1569,6 +1751,7 @@
         "price": 5500,
         "proficient": true,
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
@@ -1576,6 +1759,7 @@
           "value": null
         },
         "reach": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1583,6 +1767,7 @@
         },
         "size": "",
         "source": "CRB pg. 198",
+        "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
@@ -1601,9 +1786,15 @@
       },
       "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/armor/golemforged-plating-3.jpg"
+      "folder": null,
+      "img": "systems/sfrpg/icons/equipment/armor/golemforged-plating-3.webp",
+      "permission": {
+        "default": 0
+      },
+      "sort": 0
     },
     {
+      "_id": "9wcz5owqg9fh573h",
       "name": "Battery, High-Capacity",
       "type": "goods",
       "data": {
@@ -1634,6 +1825,7 @@
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item&rsquo;s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.&nbsp;</span></p>\n<p><strong>Capacity:</strong> 40</p>"
         },
@@ -1644,13 +1836,20 @@
         "modifiers": [],
         "price": 330,
         "quantity": "2",
+        "quantityPerPack": 1,
         "source": "Core Rulebook"
       },
       "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.jpg"
+      "folder": null,
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
+      "permission": {
+        "default": 0
+      },
+      "sort": 0
     },
     {
+      "_id": "lfsqagbta1rlhn0q",
       "name": "Hit-and-Run",
       "type": "feat",
       "data": {
@@ -1659,6 +1858,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -1680,9 +1880,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p>&gt;@Compendium[sfrpg.class-features.oKlwvc1HcIsg7Q7a]{Fighting Style}</p>\n<p>&nbsp;</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl01_LabelName\"></span><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">The hit-and-run fighting style focuses on tactical movement as you move in and out of combat. You use ranged weapons but fight close up, and you can even mix ranged and melee attacks. Your abilities allow you to move even when you make full attacks and to avoid getting locked down by your enemies.<br /><br /></span></p>\n<h2 class=\"title\">@Compendium[sfrpg.class-features.MjdqehkkqcLHUKOb]{Opening Volley (Ex) (1st)}</h2>\n<p>You gain Opening Volley as a bonus feat. If you already have this feat, choose a bonus combat feat instead. At 9th level, you can use Opening Volley on both your first and second turns in combat.</p>\n<h2 class=\"title\">@Compendium[sfrpg.class-features.FCZRkTVJsURxIZ8f]{Nimble Fusillade (Ex) (2nd)}</h2>\n<p>When you make a full attack, you can also either take a guarded step or move up to half your speed. This movement can come before, between, or after your attacks, but it can&rsquo;t be split up.</p>\n<h2 class=\"title\">@Compendium[sfrpg.class-features.ZcGKsH2zDFkLJPeY]{Duck and Weave (Ex) (3rd)}</h2>\n<p>When you move or make a ranged attack, you can spend 1 Resolve Point to avoid provoking attacks of opportunity from that movement or ranged attack.</p>\n<h2 class=\"title\">@Compendium[sfrpg.class-features.0IXriaVqmSfrmYNb]{Elusive Target (Ex) (4th)}</h2>\n<p>On any turn in which you move, you gain a +1 insight bonus to your AC until the start of your next turn.</p>\n<h2 class=\"title\">@Compendium[sfrpg.class-features.4ZWW1sHsYvhZ06Hi]{Harrying Shot (Ex) (5th)}</h2>\n<p>As a full action, you can make one attack and give the benefit of harrying fire (see page 247) against any creature you hit with that attack. If you use a blast weapon or automatic weapon, the benefit applies against all targets hit. You can also take your nimble fusillade movement before or after this attack.</p>"
         },
@@ -1705,6 +1907,7 @@
           "value": null
         },
         "requirements": "1st level",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -1723,15 +1926,128 @@
       },
       "effects": [],
       "flags": {},
-      "img": "systems/sfrpg/icons/classes/hit_and_run.png"
+      "folder": null,
+      "img": "systems/sfrpg/icons/classes/hit_and_run.webp",
+      "permission": {
+        "default": 0
+      },
+      "sort": 600000
+    },
+    {
+      "_id": "KxCbwallz9id8xGZ",
+      "name": "Opening Volley (Combat)",
+      "type": "feat",
+      "data": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Your ranged assault leaves your foe disoriented and vulnerable to your next melee attack.</p>\n<hr>\n<p><span id=\"ctl00_MainContent_DataListTypes_ctl00_LabelName\"><strong>Benefit</strong>: Whenever you deal damage to an opponent with a ranged attack on your first turn in a combat, you gain a +2 circumstance bonus to your next melee attack roll against that opponent. This melee attack must occur before the end of your next turn.</span></p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [
+          {
+            "_id": "ad5373cb-dc36-4bfa-87de-137a04833872",
+            "name": "Opening Volley",
+            "type": "circumstance",
+            "condition": "",
+            "effectType": "melee-attacks",
+            "enabled": false,
+            "max": 2,
+            "modifier": "2",
+            "modifierType": "formula",
+            "notes": "Whenever you deal damage to an opponent with a ranged attack on your first turn in a combat, you gain a circumstance bonus to your next melee attack roll against that opponent.",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      },
+      "effects": [],
+      "flags": {},
+      "folder": null,
+      "img": "systems/sfrpg/icons/feats/opening_volley.webp",
+      "permission": {
+        "default": 0,
+        "umHu8DFnCrMQVZ37": 3,
+        "zqI3t2KnRGKDlExk": 3
+      },
+      "sort": 400000
     }
   ],
   "token": {
     "name": "Hobgoblin Lieutenant",
     "actorId": "zjaU038q6rbYqfFl",
     "actorLink": false,
-    "bar1": {},
-    "bar2": {},
+    "alpha": 1,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
     "brightLight": 0,
     "brightSight": 0,
     "dimLight": 0,
@@ -1742,6 +2058,27 @@
     "flags": {},
     "height": 1,
     "img": "icons/svg/mystery-man.svg",
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "animation": {
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "bright": 0,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
     "lightAlpha": 1,
     "lightAngle": 360,
     "lightAnimation": {
@@ -1749,10 +2086,12 @@
       "speed": 5
     },
     "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
     "scale": 1,
-    "sightAngle": 360,
+    "sightAngle": 0,
     "tint": null,
     "vision": false,
     "width": 1

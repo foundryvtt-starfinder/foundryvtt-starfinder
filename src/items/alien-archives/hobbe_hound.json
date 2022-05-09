@@ -48,12 +48,18 @@
       }
     },
     "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
       "arms": "2",
       "bab": 0,
       "baseAttackBonus": {
         "rolledMods": [],
         "tooltip": [],
         "value": 0
+      },
+      "baseSpellDC": {
+        "base": 0
       },
       "cmd": {
         "min": 0,
@@ -123,7 +129,8 @@
           "base": 0
         },
         "flying": {
-          "base": 0
+          "base": 0,
+          "baseManeuverability": 0
         },
         "land": {
           "base": 40
@@ -132,7 +139,8 @@
         "special": "original base: 40 ft.",
         "swimming": {
           "base": 0
-        }
+        },
+        "value": null
       },
       "spellcasting": "",
       "will": {
@@ -141,6 +149,28 @@
         "misc": 0,
         "tooltip": [],
         "value": 0
+      }
+    },
+    "common": {
+      "abilities": {
+        "cha": {
+          "base": 0
+        },
+        "con": {
+          "base": 0
+        },
+        "dex": {
+          "base": 0
+        },
+        "int": {
+          "base": 0
+        },
+        "str": {
+          "base": 0
+        },
+        "wis": {
+          "base": 0
+        }
       }
     },
     "conditions": {
@@ -192,13 +222,23 @@
       "alignment": "N",
       "aura": "",
       "biography": {
+        "age": 0,
+        "dateOfBirth": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "height": "",
+        "otherVisuals": "",
         "public": "",
-        "value": "<p>Though hobbe hounds vaguely resemble canines, they are actually a species of large, blunt-nosed rodents descended from creatures known as &ldquo;@Compendium[sfrpg.races.SvZm3xijwqis2qDS]{Goblin} dogs&rdquo; on lost Golarion. Long ago, hobgoblins used alchemy and selective breeding to fashion their smaller cousins&rsquo; pets into sturdier and more ferocious stock for their warbands. The modern hobbe hound stands 4 feet tall at the shoulder and is 200 pounds of solid muscle. Most hobbe hounds are bred and trained to have vicious temperaments and to be loyal to only their hobgoblin keepers.<br /><br />While many hobgoblin societies-including the Gideron Authority)-rely more on electronic means of surveillance and protection, hobbe hounds continue to be used in fighting rings and as recreational hunting animals. In addition, these fiercely loyal beasts have found roles in certain hobgoblin military units, guarding posts and tracking down deserters in places where technology is unreliable. Some hobgoblin researchers have tried to apply various cybernetic enhancements to hobbe hounds, but the creatures&rsquo; physiology often rejects such implants. This has led to a counterculture movement among fringe hobgoblins who believe that hobgoblins should return to their pure roots and reject all forms of artificial enhancements.</p>"
+        "value": "<p>Though hobbe hounds vaguely resemble canines, they are actually a species of large, blunt-nosed rodents descended from creatures known as &ldquo;@Compendium[sfrpg.races.SvZm3xijwqis2qDS]{Goblin} dogs&rdquo; on lost Golarion. Long ago, hobgoblins used alchemy and selective breeding to fashion their smaller cousins&rsquo; pets into sturdier and more ferocious stock for their warbands. The modern hobbe hound stands 4 feet tall at the shoulder and is 200 pounds of solid muscle. Most hobbe hounds are bred and trained to have vicious temperaments and to be loyal to only their hobgoblin keepers.<br /><br />While many hobgoblin societies-including the Gideron Authority)-rely more on electronic means of surveillance and protection, hobbe hounds continue to be used in fighting rings and as recreational hunting animals. In addition, these fiercely loyal beasts have found roles in certain hobgoblin military units, guarding posts and tracking down deserters in places where technology is unreliable. Some hobgoblin researchers have tried to apply various cybernetic enhancements to hobbe hounds, but the creatures&rsquo; physiology often rejects such implants. This has led to a counterculture movement among fringe hobgoblins who believe that hobgoblins should return to their pure roots and reject all forms of artificial enhancements.</p>",
+        "weight": ""
       },
       "class": "",
       "cr": 2,
       "environment": "any",
       "organization": "solitary, pair, pack (3-6), or hunting party (2-4 plus 2-12 hobgoblin troopers)",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #34 pg. 61",
@@ -438,30 +478,37 @@
     "spells": {
       "spell0": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
+        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
+        "perClass": {},
         "value": 0
       }
     },
@@ -496,11 +543,12 @@
       },
       "senses": "blindsense (scent) 30 ft., low-light vision",
       "size": "medium",
+      "spellResistance": {
+        "base": 0
+      },
       "sr": 0
     }
   },
-  "effects": [],
-  "flags": {},
   "img": "icons/svg/mystery-man.svg",
   "items": [
     {
@@ -510,12 +558,14 @@
       "data": {
         "type": "",
         "ability": "",
+        "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
         },
+        "ammunitionType": "",
         "area": {
           "effect": "",
           "shape": "",
@@ -550,6 +600,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
+          "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": [
             {
@@ -587,8 +638,11 @@
             }
           ]
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": ""
         },
@@ -597,6 +651,7 @@
           "units": "",
           "value": null
         },
+        "equippable": false,
         "equipped": true,
         "formula": "",
         "identified": true,
@@ -607,12 +662,14 @@
         "proficient": true,
         "properties": {},
         "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "",
           "value": null
         },
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -620,6 +677,7 @@
         },
         "source": "",
         "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": null
@@ -638,6 +696,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
+      "img": "icons/svg/item-bag.svg",
+      "permission": {
+        "default": 0
+      },
       "sort": 100000
     },
     {
@@ -650,6 +713,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "reaction",
@@ -671,10 +735,13 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
-          "value": "As a reaction, when a hobbe hound successfully grabs a Medium or smaller creature with its bite attack, it can violently shake the grabbed creature. A creature @Compendium[sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} in this way gains the off-target condition for 1d3+1 rounds. The creature can reduce this time to 1 round by succeeding at a DC 11 Fortitude saving throw."
+          "value": "<p>As a reaction, when a hobbe hound successfully grabs a Medium or smaller creature with its bite attack, it can violently shake the grabbed creature. A creature shaken in this way gains the @Compendium[sfrpg.conditions.yUtkoIshf4dPruNd]{Off-Target} condition for 1d3+1 rounds. The creature can reduce this time to 1 round by succeeding at a DC 11 Fortitude saving throw.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -695,6 +762,7 @@
           "value": null
         },
         "requirements": "",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -713,7 +781,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
       "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
       "sort": 200000
     },
     {
@@ -726,6 +798,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -747,8 +820,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "A hobbe hound’s skin releases an oily residue that makes it difficult to keep hold of or trap. A hobbe hound gains a +4 circumstance bonus to Acrobatics checks to escape."
         },
@@ -771,6 +847,7 @@
           "value": null
         },
         "requirements": "Acrobatics check to escape",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -789,7 +866,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
       "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
       "sort": 300000
     },
     {
@@ -802,6 +883,7 @@
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "",
@@ -823,8 +905,11 @@
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
+          "gmnotes": "",
+          "short": "",
           "unidentified": "",
           "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Due to generations of experimentation, a hobbe hound&rsquo;s blood is a cocktail of unstable chemicals that reacts unpredictably to certain pharmaceuticals. When a hobbe hound is injected with a medicinal (usually requiring a successful melee attack against its KAC by a foe), it immediately takes an amount of damage equal to 1d6 &times; the medicinal&rsquo;s tier, in addition to the medicinal&rsquo;s usual effects.</span></p>"
         },
@@ -847,6 +932,7 @@
           "value": null
         },
         "requirements": "Injected with a medicinal",
+        "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
@@ -865,7 +951,11 @@
       },
       "effects": [],
       "flags": {},
+      "folder": null,
       "img": "icons/svg/mystery-man.svg",
+      "permission": {
+        "default": 0
+      },
       "sort": 400000
     }
   ],
@@ -873,8 +963,13 @@
     "name": "Hobbe Hound",
     "actorId": "yu8IRR54ruK66dPK",
     "actorLink": false,
-    "bar1": {},
-    "bar2": {},
+    "alpha": 1,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": "attributes.sp"
+    },
     "brightLight": 0,
     "brightSight": 0,
     "dimLight": 0,
@@ -885,6 +980,27 @@
     "flags": {},
     "height": 1,
     "img": "icons/svg/mystery-man.svg",
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "animation": {
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "bright": 0,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "shadows": 0
+    },
     "lightAlpha": 1,
     "lightAngle": 360,
     "lightAnimation": {
@@ -892,10 +1008,12 @@
       "speed": 5
     },
     "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
     "randomImg": false,
     "rotation": 0,
     "scale": 1,
-    "sightAngle": 360,
+    "sightAngle": 0,
     "tint": null,
     "vision": false,
     "width": 1

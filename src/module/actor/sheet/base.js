@@ -10,6 +10,7 @@ import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js"
 import { InputDialog } from "../../apps/input-dialog.js"
 import { SFRPG } from "../../config.js";
 
+import { _onScalingCantripDrop } from "../../item/item.js";
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -86,11 +87,11 @@ export class ActorSheetSFRPG extends ActorSheet {
             this.actor.data.data = mergeObject(this.actor.data.data, {
                 details: {
                     biography: {
-                        fullBodyImage: "systems/sfrpg/images/mystery-body.png"
+                        fullBodyImage: "systems/sfrpg/images/mystery-body.webp"
                     }
                 }
             }, {overwrite: false});
-            this.actor.data.data.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.png";
+            this.actor.data.data.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.webp";
         }
 
         if (data.data.abilities) {
@@ -1031,7 +1032,11 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const createResult = await targetActor.createItem(itemData.data._source);
             const addedItem = targetActor.getItem(createResult[0].id);
-
+            
+            if (game.settings.get('sfrpg','scalingCantrips') && addedItem.type === "spell") {
+                _onScalingCantripDrop(addedItem, targetActor);
+            }
+                
             if (!(addedItem.type in SFRPG.containableTypes)) {
                 targetContainer = null;
             }
@@ -1110,6 +1115,10 @@ export class ActorSheetSFRPG extends ActorSheet {
                 const addedItemResult = await targetActor.createItem(duplicate(sidebarItem.data));
                 if (addedItemResult.length > 0) {
                     const addedItem = targetActor.getItem(addedItemResult[0].id);
+                    
+                    if (game.settings.get('sfrpg','scalingCantrips') && sidebarItem.type === "spell") {
+                        _onScalingCantripDrop(addedItem, targetActor);
+                    }
 
                     if (targetContainer) {
                         let newContents = [];

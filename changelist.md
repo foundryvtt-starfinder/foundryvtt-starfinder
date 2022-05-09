@@ -1,3 +1,55 @@
+# v0.19.0 - Starfinder Update
+
+This update includes a lot of quality of life improvements and some additions and updates to the compendiums. 
+
+## Concerning Backwards Compatibility with Foundry VTT v0.8.x
+**WARNING** This update breaks backwards compatibility with the v0.8.x branch of Foundry. We held off on this breaking change as long as we could, but with Foundry v10 on the horizon, it was time to pull the plug. 
+
+## New Features
+### WebP conversion
+We have converted all of the embedded system art files from png to webp, taking the package from 80MB down by 75%! to about 20MB, this should be welcome news to anyone hosting Starfinder on a host that has limited storage space.
+
+We also perform a world migration to convert all item and actor art that uses these files to their webp variants. This is a very slow process as it has to go through all actors and their items, all items, all scenes and their tokens, all world compendia, all macros, the chat messages, etc. This takes a lot of time.
+
+Do not perform this update 5 minutes before your game goes live! Otherwise, you will have a 30 minute "just chatting" game night.
+
+### Galactic Magic Scaling Cantrips
+You can now enable the Scaling Cantrip variant rule from Galactic Magic in the system settings, doing so will automatically change all affected spells on PCs and NPCs to use a fancy formula that scales based off of your caster level. Dragging an affected spell to your character sheet will also automatically update its formula. This also works for NPC's and uses their CR as their caster level.
+
+### Spellcasting Ability Selector
+Good news Precogs, Key Abilty Score and Spellcasting Ability Score have been seperated for all your Dex/Int needs. This will make your spell DCs and bonus spells calculate correctly without having to update each spell individually. All spellcasting classes in the compendium have been updated to reflect this change. This change also generally improves spell DC calculation logic.
+
+### Gunnery Skill for NPC Starships
+You can now add Gunnery as a skill to NPC starships, simplifying setting up NPC gunners. Firing a starship weapon on an NPC starship will use the gunner's Gunnery Modifier, rather than the old hacky method of using their Piloting Ranks. Note that a migration will be performed on all NPC starships in your item directory that will move the gunner's piloting ranks to their gunnery modifier (Yes, two migrations in one update 😛). Lastly, all NPC starships in the compendium have been updated to use the new Gunnery skill.
+
+### Skill Notes
+We've added a notes field for skills that can be used to denote special abilities or additional checks needed when rolling a skill. You can also use the inline roll syntax in this field so you can roll any additional checks with the click of a button. You can access this field by right clicking on a skill in the skill list.
+
+### Compendium
+* A few missing class features and items from the Armory have been added.
+* Hazards have been added as their own compendium!
+* Precog ability names have had their names made consistent with the rest of the items.
+* Skills compendium received many spelling error corrections.
+* Various aliens have been updated.
+* Updated various items to be inline with latest errata.
+* Added action targets to all starship weapons.
+* Updated all NPCs and NPC starships to have correct action targets on their weapons.
+* Fixed everday clothing price. (Thanks Teo-CD!)
+* Updated the levels of the Culinary Synthesizer Mark 2 and 3.
+* Added some missing Envoy class features from Galatic Magic
+
+## Bugfixes and small improvements
+* French localization has been updated. (Thanks Aldarion!)
+* Missing icons when hovering over items in sheets have been restored. (Thanks mkahvi!)
+* Added missing reference to `src/module/actor/mixins/actor-damage.js` file which was causing issues with resolving damage from the chat cards.
+* Clicking the name of a starship action will now expand with the action description.
+* A skill notes field has been added to all skills, allowing you to note features like Theme Knowledge on skill checks.
+* Fixed shield dex caps not working correctly.
+* Removed the old Solarian Attunement special trait selector.
+* Archaic weapons now automatically include a -5 penalty to damage.
+* Added ability activation cost of 1 Round.
+* Profession skill checks were not adding the name of the profession in the title on the chat card.
+
 # v0.18.3 - Precog Pioneers
 
 This is a hotfix release to fix an issue where it was imposible to apply damage to a starship from the chat card.

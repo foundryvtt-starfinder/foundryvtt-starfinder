@@ -164,7 +164,7 @@ export class DiceSFRPG {
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, onClose, dialogOptions }) {
 
-        flavor = `${title}${(flavor ? " - " + flavor : "")}`;
+        flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
         
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);

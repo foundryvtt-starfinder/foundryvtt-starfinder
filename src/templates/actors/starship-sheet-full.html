@@ -604,15 +604,25 @@
                     {{#each role.skills as |skill skillId|}}
                     <li class="crew small flexrow" data-role="{{roleId}}" data-skill="{{skillId}}">
                         <div class="crew-name flexrow">
+                        {{#unless (eq (skillId) "gun")}}
                             <h4>{{ lookup ../../config.skills skillId }}</h4>
+                        {{else}}
+                            <h4>{{ localize "SFRPG.SkillGun" }}</h4>
+                        {{/unless}}
                         </div>
                         <div class="flexrow">
                             <div class="form-fields">
                                 <input type="text" class="crew-skill-mod" value="{{skill.mod}}" data-dtype="Number" placeholder="0" />
                             </div>
+                        {{#unless (eq (skillId) "gun")}}
                             <div class="form-fields">
                                 <input type="text" class="crew-skill-ranks" value="{{skill.ranks}}" data-dtype="Number" placeholder="0" />
                             </div>
+                        {{else}}
+                        <div class="form-fields">
+                                <input type="text" class="crew-skill-ranks" value="{{skill.ranks}}" data-dtype="Number" placeholder="0" data-tippy-content="{{localize "SFRPG.StarshipSheet.Crew.NPCGunnerRanksMessage"}}" />
+                            </div>
+                        {{/unless}}
                         </div>
                         <div class="crew-controls">
                             <a class="crew-control skill-delete" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Delete"}}"><i class="fas fa-trash"></i></a>

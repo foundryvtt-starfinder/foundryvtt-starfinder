@@ -1018,11 +1018,12 @@ export class ActorItemHelper {
                     delete itemData.armor.upgradeSlots;
                     delete itemData.armor.upgrades;
                 }
+
+                isDirty = true;
             }
 
             // Migrate intermediate format
             if (itemData.container?.contents?.length > 0) {
-                let isDirty = false;
                 if (itemData.container.contents[0] instanceof String) {
                     for (let i = 0; i<itemData.container.contents.length; i++) {
                         itemData.container.contents[i] = {id: itemData.container.contents[0], index: 0};
@@ -1050,7 +1051,6 @@ export class ActorItemHelper {
             /** Ensure deleted items are cleaned up. */
             const newContents = itemData.container?.contents?.filter(x => this.actor.items.find(ownedItem => ownedItem.id === x.id));
             if (newContents?.length !== itemData.container?.contents?.length) {
-                //console.log([`Actor ${this.actor.name} has deleted item(s) for ${item.name}`, item, itemData.container.contents, newContents]);
                 itemData.container.contents = newContents;
                 isDirty = true;
             }
@@ -1072,14 +1072,14 @@ export class ActorItemHelper {
             }
 
             if (isDirty) {
-                console.log("> Migrating " + item.name);
+                console.log("> Updating container settings for " + item.name);
                 migrations.push({ _id: item.id, data: itemData});
             }
         }
 
         if (migrations.length > 0) {
-            console.log(`Starfinder | Executing migration of ${migrations.length} items for actor ${this.actor.name}.`);
-            return this.actor.updateEmbeddedDocuments("Item", migrations);
+            const result = this.actor.updateEmbeddedDocuments("Item", migrations);
+            return result;
         }
         
         return null;
