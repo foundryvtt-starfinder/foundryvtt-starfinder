@@ -51,6 +51,8 @@ The easiest workflow is to work through Foundry, and follow the following steps:
 9. Check in Foundry if the compendium is updated properly.
 10. Submit pull request if everything's great. :-)
 
+> Please don't include database files in your pull request as this can lead to merge conflicts. Obviously you can still `cook` in order to check everything is in order, but only submit your JSON files as a final `cook` is performed before every release.
+
 An alternative workflow, for the more tech-savvy people, would be to skip step 1-4, simply duplicate an existing JSON file, editing it, and then continuing from step 5.
 
 ### Updating existing items
