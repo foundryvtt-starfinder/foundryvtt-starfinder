@@ -696,7 +696,7 @@ export class DiceSFRPG {
                 finalFlavor = tempFlavor;
             }
 
-            if (part) {
+            if (part.name) {
                 finalFlavor += `: ${part.name}`;
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
