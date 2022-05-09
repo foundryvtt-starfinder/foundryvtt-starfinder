@@ -300,6 +300,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
         }
 
+        // Allow context menu popouts
+        chatData["flags.core.canPopout"] = true;
+
         // Create the chat message
         return ChatMessage.create(chatData, { displaySheet: false });
     }
