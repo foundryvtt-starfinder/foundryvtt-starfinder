@@ -489,11 +489,15 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const rollContext = RollContext.createActorRollContext(this);
         const parts = [`@skills.${skillId}.mod`];
 
+        const title = skillId.includes('pro') ? 
+            game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname }) : 
+            game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
+
         return await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
-            title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)]}),
+            title: title,
             flavor: TextEditor.enrichHTML(skill.notes),
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {

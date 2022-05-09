@@ -1,5 +1,10 @@
 # v0.19.0 - Starfinder Update
 
+This update includes a lot of quality of life improvements and some additions and updates to the compendiums. 
+
+## Concerning Backwards Compatibility with Foundry VTT v0.8.x
+**WARNING** This update breaks backwards compatibility with the v0.8.x branch of Foundry. We held off on this breaking change as long as we could, but with Foundry v10 on the horizon, it was time to pull the plug. 
+
 ## New Features
 ### WebP conversion
 We have converted all of the embedded system art files from png to webp, taking the package from 80MB down by 75%! to about 20MB, this should be welcome news to anyone hosting Starfinder on a host that has limited storage space.
