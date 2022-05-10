@@ -256,12 +256,19 @@ export class ItemSheetSFRPG extends ItemSheet {
             )
         );
         } else if (item.type === "spell") {
+            const desc = (Object.entries(itemData.descriptors)).filter(e => e[1] === true).map(e => ({
+                    name: CONFIG.SFRPG.descriptors[e[0]],
+                    tooltip: (CONFIG.SFRPG.descriptorsTooltips[e[0]]) ? CONFIG.SFRPG.descriptorsTooltips[e[0]] : null
+                })
+            )
+           
             props.push(
                 {name: labels.components, tooltip: null},
                 {name: labels.materials, tooltip: null},
                 itemData.concentration ? {name: "Concentration", tooltip: null} : null,
                 itemData.sr ? {name: "Spell Resistence", tooltip: null} : null,
-                itemData.dismissible ? {name: "Dismissible", tooltip: null} : null
+                itemData.dismissible ? {name: "Dismissible", tooltip: null} : null,
+                ...desc
             )
         } else if (item.type === "equipment") {
             props.push({
@@ -273,10 +280,16 @@ export class ItemSheetSFRPG extends ItemSheet {
                 tooltip: null
             });
         } else if (item.type === "feat") {
-            props.push({
-                name: labels.featType,
-                tooltip: null
-            });
+            const desc = (Object.entries(itemData.descriptors)).filter(e => e[1] === true).map(e => ({
+                    name: CONFIG.SFRPG.descriptors[e[0]],
+                    tooltip: (CONFIG.SFRPG.descriptorsTooltips[e[0]]) ? CONFIG.SFRPG.descriptorsTooltips[e[0]] : null
+                })
+            )
+            
+            props.push(
+            {name: labels.featType, tooltip: null},
+            ...desc
+            );
         } else if (item.type === "starshipWeapon") {
             props.push({
                 name: CONFIG.SFRPG.starshipWeaponTypes[itemData.weaponType],
