@@ -413,12 +413,20 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
     return false;
 });
 
-Hooks.on("createActor", function(actor, options, actorId) {
+Hooks.on("createActor", async function(actor, options, actorId) {
     const autoLinkedTypes = ['character', 'drone'];
     if (autoLinkedTypes.includes(actor.data.type)) {
-        actor.update({
+        await actor.update({
             "token.actorLink": true
         });
+    }
+    
+    if (actor.data.type === "character") {
+        const pack = await game.packs.get('sfrpg.equipment');
+        const index = pack.index || await pack.getIndex();
+        const filter = index.filter(k => k.name === "Unarmed strike");
+        const doc = await pack.getDocument(filter[0]._id);
+        await actor.createEmbeddedDocuments("Item", [doc.toObject()]);
     }
 });
 
