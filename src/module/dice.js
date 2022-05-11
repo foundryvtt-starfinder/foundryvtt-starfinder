@@ -712,6 +712,17 @@ export class DiceSFRPG {
 
             const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
             let roll = await rollObject.evaluate({async: true});
+            
+            //CRB pg. 240, < 1 damage returns 1 non-lethal damage.
+            if (roll._total < 1) {
+                roll._total = 1;
+                const nonlethal = tags.find(e => e.tag === "weapon-properties nonlethal");
+                if (nonlethal) {
+                    nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
+                } else {
+                    tags.push({ tag: "nonlethal", text: game.i18n.format("SFRPG.Damage.Types.Nonlethal") + ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`});
+                }
+            }
 
             // Associate the damage types for this attack to the first DiceTerm
             // for the roll. 
