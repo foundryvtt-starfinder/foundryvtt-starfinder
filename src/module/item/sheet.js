@@ -260,7 +260,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                     name: CONFIG.SFRPG.descriptors[e[0]],
                     tooltip: (CONFIG.SFRPG.descriptorsTooltips[e[0]]) ? CONFIG.SFRPG.descriptorsTooltips[e[0]] : null
                 })
-            )
+            );
            
             props.push(
                 {name: labels.components, tooltip: null},
@@ -284,7 +284,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                     name: CONFIG.SFRPG.descriptors[e[0]],
                     tooltip: (CONFIG.SFRPG.descriptorsTooltips[e[0]]) ? CONFIG.SFRPG.descriptorsTooltips[e[0]] : null
                 })
-            )
+            );
             
             props.push(
             {name: labels.featType, tooltip: null},
