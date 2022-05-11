@@ -207,6 +207,7 @@ SFRPG.descriptors = {
     "disease": "SFRPG.Descriptors.Disease",
     "earth": "SFRPG.Descriptors.Earth",
     "electricity": "SFRPG.Descriptors.Electricity",
+    "emotion": "SFRPG.Descriptors.Emotion",
     "earth": "SFRPG.Descriptors.Earth",
     "evil": "SFRPG.Descriptors.Evil",
     "fear": "SFRPG.Descriptors.Fear",
