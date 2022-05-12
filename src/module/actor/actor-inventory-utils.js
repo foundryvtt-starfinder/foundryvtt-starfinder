@@ -964,7 +964,7 @@ export class ActorItemHelper {
                 //console.log(migrate);
 
                 const container = {
-                    contents: (itemData.contents || []).map(x => { return { id: x, index: 0 }; }),
+                    contents: (itemData.container?.contents || itemData.contents || []).map(x => { return { id: x.id, index: 0 }; }),
                     storage: []
                 };
 
