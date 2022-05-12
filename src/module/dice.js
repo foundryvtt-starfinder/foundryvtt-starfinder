@@ -717,10 +717,15 @@ export class DiceSFRPG {
             if (roll._total < 1) {
                 roll._total = 1;
                 const nonlethal = tags.find(e => e.tag === "weapon-properties nonlethal");
-                if (nonlethal) {
-                    nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
+                
+                if (itemContext.data.type !== "starshipWeapon") {
+                    if (nonlethal) {
+                        nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
+                    } else {
+                        tags.push({ tag: "nonlethal", text: game.i18n.format("SFRPG.Damage.Types.Nonlethal") + ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`});
+                    }
                 } else {
-                    tags.push({ tag: "nonlethal", text: game.i18n.format("SFRPG.Damage.Types.Nonlethal") + ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`});
+                    tags.push({ tag: "minimum-damage", text: game.i18n.localize("SFRPG.Damage.MinimumDamage") });
                 }
             }
 
