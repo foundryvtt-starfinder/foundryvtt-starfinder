@@ -1,25 +1,25 @@
 {
-  "_id": "7xmrgRD2EHN4R3uq",
-  "name": "Defensive Dispersal (EX)",
+  "_id": "tHPWuT9ZryMrEn9v",
+  "name": "Arcane Turnabout (Ex)",
   "type": "feat",
   "data": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "other",
     "activation": {
-      "type": "reaction",
+      "type": "",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "",
+      "value": 0
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -36,25 +36,25 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.classes.MMyeA7kL5Vhcio05]{Nanocyte}</p>\n<p>By using a nanite surge as a reaction when you take damage, you can protect yourself with your nanites when they create a temporary barrier or cause part of your body to temporarily disperse. You reduce the damage dealt by the triggering effect by an amount equal to your nanocyte level plus your Constitution modifier, and you gain a +1 circumstance bonus to the first saving throw against the effect (such as the initial saving throw to resist a poison, but not subsequent saves against it).</p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.N5460NEe031AoP29]{Absorption}</p>\n<p>The circumstance bonus to saving throws provided by defensive dispersal increases to +2 against spells and spell-like abilities. When you use your defensive dispersal ability against a spell or spell-like ability and succeed the effect&rsquo;s initial saving throw (or if the spell fails to overcome your spell resistance, if any), you can deflect some of the magical energy to damage a creature within 30 feet. That creature takes 1d6 force damage per level of the spell (Fortitude half), and if you target the spell&rsquo;s caster with this effect, they take a &ndash;2 penalty to the saving throw.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
-      "value": ""
+      "value": null
     },
     "formula": "",
     "isActive": null,
     "modifiers": [
       {
-        "_id": "446c6dcc-e20e-4656-9e66-84d7cb98918f",
-        "name": "Defensive Dispersal (EX)",
+        "_id": "659a7083-559f-4ce5-9b93-aab0d5bdc268",
+        "name": "Arcane Turnabout (Ex)",
         "type": "circumstance",
         "condition": "",
         "effectType": "saves",
         "enabled": true,
-        "max": 1,
-        "modifier": "1",
+        "max": 2,
+        "modifier": "2",
         "modifierType": "constant",
         "notes": "When using Defensive Dispersal (EX) against an effect you gain a +1 circumstance bonus to the first saving throw against the effect.",
         "source": "",
@@ -65,28 +65,28 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
+      "units": "",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level",
+    "requirements": "13th Level",
     "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "10+floor(@classes.nanocyte.levels/2) + @abilities.con.mod",
+      "descriptor": "half"
     },
-    "source": "TR, p. 10",
+    "source": "GM pg. 26",
     "target": {
       "type": "",
-      "value": ""
+      "value": null
     },
     "uses": {
       "max": 0,
-      "per": "",
+      "per": null,
       "value": 0
     }
   },
