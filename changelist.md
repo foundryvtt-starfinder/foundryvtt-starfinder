@@ -1,3 +1,10 @@
+# v0.19.1 - Starfinder Update
+
+This update includes a quick fix for some container items in the compendiums cuasing a migration on every world start.
+
+## Bugfix
+- Removed some unused properties from several contianer items that were causing a migration to run on every world start. This is only a partial fix by updating the compenidum items. A later update should prevent the bogus migration from happening in the future.
+
 # v0.19.0 - Starfinder Update
 
 This update includes a lot of quality of life improvements and some additions and updates to the compendiums. 
