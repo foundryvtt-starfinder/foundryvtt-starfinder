@@ -969,14 +969,13 @@ export class ActorItemHelper {
                 };
 
                 if (item.type === "container") {
-                    const currentStorage = itemData?.container?.storage[0];
                     container.storage.push({
-                        type: currentStorage?.type || "bulk",
-                        subtype: currentStorage?.subtype || "",
-                        amount: currentStorage?.amount || itemData.storageCapacity || 0,
-                        acceptsType: currentStorage?.acceptsType || itemData.acceptedItemTypes ? Object.keys(itemData.acceptedItemTypes) : [],
-                        affectsEncumbrance: (currentStorage?.affectsEncumbrance !== null || undefined) ? (currentStorage?.affectsEncumbrance) : ((itemData.contentBulkMultiplier === 0) ? false : true),
-                        weightProperty: currentStorage?.weightProperty || "bulk"
+                        type: "bulk",
+                        subtype: "",
+                        amount: itemData.storageCapacity || 0,
+                        acceptsType: itemData.acceptedItemTypes ? Object.keys(itemData.acceptedItemTypes) : [],
+                        affectsEncumbrance: itemData.contentBulkMultiplier === 0 ? false : true,
+                        weightProperty: "bulk"
                     });
                 } else if (item.type === "weapon") {
                     container.storage.push({
