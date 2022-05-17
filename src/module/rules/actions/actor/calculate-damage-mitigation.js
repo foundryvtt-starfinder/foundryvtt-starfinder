@@ -36,7 +36,7 @@ export default function (engine) {
 
         for (const drModifier of damageReductionModifiers) {
             // TODO: Resolve formula; use RollTree, as it can complete synchronously
-            const resolvedModifierValue = tryResolveModifier(drModifier.modifier, rollContext);
+            const resolvedModifierValue = tryResolveModifier(drModifier.max, rollContext);
             const modifierInfo = {
                 value: resolvedModifierValue,
                 negatedBy: drModifier.valueAffected,
