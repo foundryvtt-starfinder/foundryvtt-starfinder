@@ -70,7 +70,7 @@ export default function (engine) {
         }
 
         for (const erModifier of energyRessistanceModifiers) {
-            const resolvedModifierValue = tryResolveModifier(erModifier.modifier, rollContext);
+            const resolvedModifierValue = tryResolveModifier(erModifier.max, rollContext);
             const modifierInfo = {
                 value: resolvedModifierValue,
                 damageType: erModifier.valueAffected,
