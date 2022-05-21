@@ -4,11 +4,12 @@
   "type": "feat",
   "data": {
     "type": "",
-    "ability": null,
+    "ability": "dex",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "rwak",
     "activation": {
       "type": "reaction",
       "condition": "",
@@ -29,10 +30,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.class-features\" data-id=\"G7p2YIGFTAU6uGjL\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Stellar Revelation</a></p>\n        <p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl32_LabelName\">You can reflect ranged attacks back at your enemies. If you took the total defense action on your last turn, or if you were fighting defensively and spend 1 Resolve Point, as a reaction you can redirect a ranged attack that misses you. Select a new target within 30 feet and make a ranged attack roll with a –4 penalty. If your attack hits, the new target is damaged as if it had been the intended target of the original ranged attack.<br><br>When you are attuned or fully attuned, you don’t take a –4 penalty to your redirected attack roll.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><sub style=\"font-family: var(--font-primary);\"><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/graviton.webp\" alt=\"\" width=\"20\" height=\"20\" />&nbsp;</sub>Graviton Revelation<br />You can reflect ranged attacks back at your enemies. If you took the total defense action on your last turn, or if you were fighting defensively and spend 1 Resolve Point, as a reaction you can redirect a ranged attack that misses you. Select a new target within 30 feet and make a ranged attack roll with a &ndash;4 penalty. If your attack hits, the new target is damaged as if it had been the intended target of the original ranged attack.</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl32_LabelName\">When you are attuned or fully attuned, you don&rsquo;t take a &ndash;4 penalty to your redirected attack roll.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,22 +44,40 @@
       "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "d30eed30-9af9-454f-8f44-33d362cd18cf",
+        "name": "Reflection (Su)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ranged-attacks",
+        "enabled": true,
+        "max": -4,
+        "modifier": "(lookupRange(@resources.solarian.stellarMode.value, 0, 0, -4))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": 30
     },
     "recharge": {
       "charged": false,
       "value": null
     },
     "requirements": "6th Level",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "source": "Solarian",
     "target": {
@@ -68,10 +90,5 @@
       "value": 0
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/reflection.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "img": "systems/sfrpg/icons/classes/reflection.webp"
 }

@@ -4,12 +4,12 @@
   "type": "feat",
   "data": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "other",
     "activation": {
       "type": "",
       "condition": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>When you use the energy sink stellar revelation, you draw strength from those around you. If at least one creature fails the Fortitude save against your energy sink, you gain a number of temporary Hit Points equal to your solarian level that last for 1 minute. Upon gaining these temporary Hit Points, if you have the fatigued condition, you remove that condition. If you have the exhausted condition, you become fatigued instead. You must have the energy sink stellar revelation to select this revelation.</p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl05_LabelName\" style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><sub style=\"font-family: var(--font-primary);\"><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/graviton.webp\" alt=\"\" width=\"20\" height=\"20\" />&nbsp;</sub></span><span id=\"ctl00_MainContent_DataListTalentsAll_ctl05_LabelName\">Graviton Revelation<br /></span>When you use the energy sink stellar revelation, you draw strength from those around you. If at least one creature fails the Fortitude save against your energy sink, you gain a number of temporary Hit Points equal to your solarian level that last for 1 minute. Upon gaining these temporary Hit Points, if you have the fatigued condition, you remove that condition. If you have the exhausted condition, you become fatigued instead. You must have the energy sink stellar revelation to select this revelation.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -59,9 +59,9 @@
     "requirements": "10th Level",
     "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
+      "descriptor": "negate"
     },
     "source": "TR pg. 31",
     "target": {
