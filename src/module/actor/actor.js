@@ -290,6 +290,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
             value = Boolean(formData.get('value')) ? 3 : 0,
             misc = Number(formData.get('misc')),
+            notes = String(formData.get('notes')),
             ranks = Number(formData.get('ranks')),
             ability = formData.get('ability'),
             remove = Boolean(formData.get('remove'));
@@ -301,6 +302,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             [`data.skills.${skillId}.ranks`]: ranks,
             [`data.skills.${skillId}.value`]: value,
             [`data.skills.${skillId}.misc`]: misc,
+            [`data.skills.${skillId}.notes`]: notes,
             [`data.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
             [`data.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty
         };
@@ -487,12 +489,16 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const rollContext = RollContext.createActorRollContext(this);
         const parts = [`@skills.${skillId}.mod`];
 
+        const title = skillId.includes('pro') ? 
+            game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname }) : 
+            game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
+
         return await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
-            title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)]}),
-            flavor: null,
+            title: title,
+            flavor: TextEditor.enrichHTML(skill.notes),
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
