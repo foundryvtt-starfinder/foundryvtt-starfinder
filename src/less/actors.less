@@ -602,9 +602,11 @@
 
         .item-image,
         .crew-image {
-          flex: 0 0 45px;
-          background-size: 45px;
-          margin-right: 5px;
+            flex: 0 0 45px;
+            margin-right: 5px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
 
           &.small {
             flex: 0 0 25px;
@@ -763,6 +765,7 @@
       text-align: center;
       border-right: 1px solid @colorFaint;
       &:last-child { border-right: none; }
+      white-space: nowrap;
   
       .featDeactivate, .vehicle-system-deactivate {
         background: @sfrpgRed;
