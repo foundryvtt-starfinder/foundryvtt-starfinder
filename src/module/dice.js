@@ -186,7 +186,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "normal",
             title: title,
-            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "1d20",
             dialogOptions: dialogOptions,
             useRawStrings: false
@@ -359,7 +359,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "normal",
             title: title,
-            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: mainDie ? "1" + mainDie : null,
             dialogOptions: dialogOptions,
             useRawStrings: useRawStrings
@@ -514,7 +514,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "normal",
             title: title,
-            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "",
             dialogOptions: dialogOptions,
             parts,
@@ -696,7 +696,7 @@ export class DiceSFRPG {
                 finalFlavor = tempFlavor;
             }
 
-            if (part) {
+            if (part.name) {
                 finalFlavor += `: ${part.name}`;
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;

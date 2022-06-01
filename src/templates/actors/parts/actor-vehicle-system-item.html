@@ -24,7 +24,7 @@
         </h4>
         {{#if (and item.data.piloting.usedAsPilot item.data.isActive)}}
         <div class="vehicle-system-action flexcol">
-            <button class="tag roll-piloting">{{localize "SFRPG.VehicleSheet.Systems.RollPiloting"}}</button>
+            <button type="button" class="tag roll-piloting">{{localize "SFRPG.VehicleSheet.Systems.RollPiloting"}}</button>
         </div>
         {{/if}}
         {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
@@ -45,9 +45,9 @@
     <div class="item-detail item-action">
         {{#if (and item.isVehicleSystem item.data.canBeActivated)}}
             {{#if item.data.isActive}}
-            <button class="tag vehicle-system-deactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
+            <button type="button" class="tag vehicle-system-deactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
             {{else}}
-            <button class="tag vehicle-system-activate">{{localize "SFRPG.ActorSheet.Inventory.Item.Activate"}}</button>
+            <button type="button" class="tag vehicle-system-activate">{{localize "SFRPG.ActorSheet.Inventory.Item.Activate"}}</button>
             {{/if}}
         {{/if}}
     </div>

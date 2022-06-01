@@ -8,11 +8,11 @@
 
     <div class="card-buttons">
         {{#if data.hasCharges}}
-        <button data-action="consume">Use {{data.consumableType.str}}</button>
+        <button type="button" data-action="consume">Use {{data.consumableType.str}}</button>
         {{else}}
-        <button disabled>No Charges</button>
+        <button type="button" disabled>No Charges</button>
         {{/if}}
-        {{#if hasSave}}<button data-action="save" data-type="{{data.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
+        {{#if hasSave}}<button type="button" data-action="save" data-type="{{data.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">
