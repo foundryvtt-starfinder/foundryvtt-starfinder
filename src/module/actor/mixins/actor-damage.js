@@ -583,6 +583,10 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: this.name, crossedThresholds: crossedThresholds});
             ui.notifications.warn(warningMessage);
         }
+        if (damage.isCritical && newHullPoints !== originalHullPoints) {
+            const warningMessage = (newCT > originalCT) ?  "SFRPG.StarshipSheet.Damage.Nat20WithThreshold" : "SFRPG.StarshipSheet.Damage.Nat20"
+            ui.notifications.warn(game.i18n.format(warningMessage));
+        }
 
         const promise = this.update(actorUpdate);
         return promise;
