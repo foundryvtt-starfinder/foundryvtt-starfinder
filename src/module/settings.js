@@ -96,16 +96,25 @@ export const registerSystemSettings = function () {
     });
     
     game.settings.register("sfrpg", "scalingCantrips", {
-    name: "SFRPG.Settings.ScalingCantrips.Name",
+        name: "SFRPG.Settings.ScalingCantrips.Name",
         hint: "SFRPG.Settings.ScalingCantrips.Hint",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean,
-    onChange: () => {
-        _onScalingCantripsSettingChanges() 
-    }
-});    
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => {
+            _onScalingCantripsSettingChanges() 
+        }
+    });
+
+    game.settings.register("sfrpg", "autoRollCritEffect", {
+        name: "SFRPG.Settings.AutoRollCritEffect.Name",
+        hint: "SFRPG.Settings.AutoRollCritEffect.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
 
     for (let combatType of SFRPG.combatTypes) {
         const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);
