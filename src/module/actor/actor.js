@@ -885,3 +885,217 @@ Hooks.on("afterClosureProcessed", async (closureName, fact) => {
         await fact.actor.processItemData();
     }
 });
+
+const CFG = {
+	SETTINGS: {
+		visibility: 'visibility',
+		playerOwned: 'playerOwned',
+		visibleName: 'visibleName',
+		visibleBars: 'visibleBars',
+	}
+};
+
+const signNum = (value) => (value >= 0) ? `+${value}` : `${value}`;
+
+const hpKeys = ['value', 'temp'];
+const shieldKeys = ['aft', 'starboard', 'forward', 'port'];
+
+const floaterValues = {
+	value: { //Main HP value
+		label: 'HP',
+		positive: { fill: 0x00FF00 },
+		negative: { fill: 0xFF0000 },
+	},
+	temp: { //Temp HP
+		label: 'Temp',
+		positive: { fill: 0x55FF00 },
+		negative: { fill: 0xFF3300 },
+	},
+	stamina: {
+		label: 'SP',
+		positive: { fill: 0x00fba5 },
+		negative: { fill: 0xfb3500 },
+	},
+	'shields.aft': {
+		label: 'Sh.A.',
+		positive: { fill: 0x9696ff },
+		negative: { fill: 0xd90069 },
+	},
+	'shields.port': {
+		label: 'Sh.P.',
+		positive: { fill: 0x9696ff },
+		negative: { fill: 0xd90069 },
+	},
+	'shields.forward': {
+		label: 'Sh.F.',
+		positive: { fill: 0x9696ff },
+		negative: { fill: 0xd90069 },
+	},
+	'shields.starboard': {
+		label: 'Sh.S.',
+		positive: { fill: 0x9696ff },
+		negative: { fill: 0xd90069 },
+	},
+};
+
+const visibleOptions = [CONST.TOKEN_DISPLAY_MODES.ALWAYS, CONST.TOKEN_DISPLAY_MODES.HOVER];
+
+/**
+ * @param {Token} token
+ */
+function testPermission(token, { restricted, visibleBars, visibleName, playerOwned, user }) {
+	if (!token.actor) return false; // Sanity check
+	const actor = token.actor;
+    
+	if (actor.testUserPermission(user, CONST.DOCUMENT_PERMISSION_LEVELS.LIMITED)) return true;
+	if (!restricted) return true;
+	if (playerOwned && actor.hasPlayerOwner) return true;
+	if (visibleBars && visibleOptions.includes(token.data.displayBars)) return true;
+	if (visibleName && visibleOptions.includes(token.data.displayName)) return true;
+	return false;
+}
+
+function getDelta(key, update, data) {
+	if (update?.[key] === undefined) return 0;
+	const oldValue = data[key],
+		newValue = update[key] ?? oldValue,
+		delta = newValue - oldValue;
+	return delta;
+}
+
+/**
+ * Build HP diffs.
+ */
+function diffHealth(data, old, type) {
+	if (!data) return;
+
+	const diff = {};
+
+	const newhp = data.attributes?.hp || null;
+    const stamina = data.attributes?.sp || null;
+    const shields = data.quadrants || null;
+    
+	if (newhp) {
+		const oldhp = old.attributes.hp;
+		hpKeys.forEach(k => { //Check in both standard and temp HP
+			const delta = getDelta(k, newhp, oldhp);
+			if (delta != 0) diff[k] = delta;
+		});
+	} else if (stamina) {
+        const oldStamina = old.attributes.sp;
+        const delta = getDelta('value', stamina, oldStamina);
+        if (delta != 0) diff.stamina = delta;
+    } else if (shields) {
+        const osh = old.quadrants;
+        shieldKeys.forEach(k => { //Check in all shield quadrants
+            const delta = getDelta('value', shields[k]?.shields, osh[k].shields);
+            if (delta != 0) diff[`shields.${k}`] = delta;
+        });
+    }
+        
+	return diff;
+}
+
+// Async to allow the calling functions to not care when this finishes
+async function renderFloaters(tokens, hpDiffs) {/*
+	const permissionOptions = {
+		restricted: game.settings.get(CFG.module, CFG.SETTINGS.visibility),
+		playerOwned: game.settings.get(CFG.module, CFG.SETTINGS.playerOwned),
+		visibleBars: game.settings.get(CFG.module, CFG.SETTINGS.visibleBars),
+		visibleName: game.settings.get(CFG.module, CFG.SETTINGS.visibleName),
+		user: game.user,
+	};*/
+
+	for (const t of tokens) {
+		//if (!testPermission(t, permissionOptions)) continue;
+
+		for (const [key, value] of Object.entries(hpDiffs)) {
+			if (value === 0) continue; // Skip deltas of 0
+			const sign = (value < 0) ? 'negative' : 'positive';
+			const cfg = floaterValues[key];
+            const percentMax = Math.clamped(Math.abs(value) / t.actor.data.data.attributes.hp.max, 0, 1)
+			const floaterData = {
+				anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,
+				direction: (value < 0) ? CONST.TEXT_ANCHOR_POINTS.BOTTOM : CONST.TEXT_ANCHOR_POINTS.TOP,
+				// duration: 2000,
+				fontSize: 16 + (32 * percentMax),
+				fill: cfg[sign].fill,
+				stroke: 0x000000,
+				strokeThickness: 4,
+				jitter: 0.3
+			};
+
+			t.hud.createScrollingText(`${game.i18n.localize(cfg.label)} ${signNum(value)}`, floaterData);
+		}
+	}
+}
+
+/**
+ * Handle linked actors.
+ * @param {ActorSFRPG} doc
+ * @param {Object} diff
+ * @param {Object} options
+ */
+export function preUpdateActorEvent(doc, diff, options, _userId) {
+	if (doc.isToken) return;
+	const dhp = diffHealth(diff.data, doc.data.data, doc.type);
+	if (dhp && Object.keys(dhp).length) options._hpDiffs = dhp;
+}
+
+/**
+ * Handle unlinked tokens.
+ * @param {Token} doc
+ * @param {Object} diff
+ * @param {Object} options
+ */
+export function preUpdateTokenEvent(doc, diff, options, _userId) {
+	const dhp = diffHealth(diff.actorData?.data, doc.actor.data.data, doc.type);
+	if (dhp) options._hpDiffs = dhp;
+}
+
+export function updateActorEvent(actor, _data, options, _userId) {
+	const dhp = options._hpDiffs;
+	if (!dhp) return;
+	const tokens = actor.getActiveTokens();
+	if (!tokens) return;
+
+	renderFloaters(tokens, dhp);
+}
+
+/*Hooks.once('init', function registerSettings() {
+	game.settings.register(CFG.module, CFG.SETTINGS.visibility, {
+		name: 'Restricted visibility',
+		hint: 'If enabled, one of the following criteria need to be fulfilled. Limited permission is always sufficient.',
+		type: Boolean,
+		default: false,
+		scope: 'world',
+		config: true,
+	});
+
+	game.settings.register(CFG.module, CFG.SETTINGS.playerOwned, {
+		name: 'Criteria: Player owned',
+		hint: 'Token has player owner.',
+		type: Boolean,
+		default: true,
+		scope: 'world',
+		config: true,
+	});
+
+	game.settings.register(CFG.module, CFG.SETTINGS.visibleBars, {
+		name: 'Criteria: Visible bars',
+		hint: 'Token has player visible bars.',
+		type: Boolean,
+		default: true,
+		scope: 'world',
+		config: true,
+	});
+
+	game.settings.register(CFG.module, CFG.SETTINGS.visibleName, {
+		name: 'Criteria: Visible name',
+		hint: 'Token has player visible name.',
+		type: Boolean,
+		default: false,
+		scope: 'world',
+		config: true,
+	});
+});*/
