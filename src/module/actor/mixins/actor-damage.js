@@ -507,15 +507,15 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         let actorUpdate = {};
         const newData = duplicate(originalData);
 
-        const damageRoundingAdvantage = game.settings.get("sfrpg", "damageRoundingAdvantage");
-        const isRoundingDefender = (damageRoundingAdvantage === "defender");
-
         let remainingUndealtDamage = damage.amount;
         
-        if (isRoundingDefender) {
-            remainingUndealtDamage = Math.floor(remainingUndealtDamage);
-        } else {
-            remainingUndealtDamage = Math.ceil(remainingUndealtDamage);
+        if (remainingUndealtDamage % 1 !== 0) {
+            const damageRoundingAdvantage = game.settings.get("sfrpg", "damageRoundingAdvantage");
+            if (damageRoundingAdvantage === "defender") {
+                remainingUndealtDamage = Math.floor(remainingUndealtDamage);
+            } else {
+                remainingUndealtDamage = Math.ceil(remainingUndealtDamage);
+            }
         }
         
         const hasDeflectorShields = this.data.data.hasDeflectorShields;
