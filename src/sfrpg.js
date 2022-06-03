@@ -389,9 +389,9 @@ Hooks.on("createActor", async function(actor, options, actorId) {
     
     if (actor.data.type === "character") {
         const pack = await game.packs.get('sfrpg.equipment');
-        const index = pack.index || await pack.getIndex();
-        const filter = index.filter(k => k.name === "Unarmed strike");
-        const doc = await pack.getDocument(filter[0]._id);
+        const index = pack.index ?? await pack.getIndex();
+        const obj = index.getName("Unarmed strike");
+        const doc = await pack.getDocument(obj._id);
         await actor.createEmbeddedDocuments("Item", [doc.toObject()]);
     }
 });
