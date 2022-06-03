@@ -589,8 +589,8 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         if (timesToRoll > 0 && game.settings.get("sfrpg", "autoRollCritEffect")) {
             const pack = await game.packs.get('sfrpg.tables');
             const index = pack.index ?? await pack.getIndex();
-            const filter = index.contents.filter(k => k.name === "Starship Critical Damage Effects");
-            const doc = await pack.getDocument(filter[0]._id);
+            const obj = index.getName("Starship Critical Damage Effects");
+            const doc = await pack.getDocument(obj._id)
             doc.drawMany(timesToRoll);
         }
 
