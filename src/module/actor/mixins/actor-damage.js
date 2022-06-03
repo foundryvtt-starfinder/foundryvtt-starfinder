@@ -578,7 +578,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         const originalCT = Math.floor((this.data.data.attributes.hp.max - originalHullPoints) / this.data.data.attributes.criticalThreshold.value);
         const newCT = Math.floor((this.data.data.attributes.hp.max - newHullPoints) / this.data.data.attributes.criticalThreshold.value);
-        let timesToRoll = 0
+        let timesToRoll = 0;
         if (newCT > originalCT) {
             const crossedThresholds = newCT - originalCT;
             const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: this.name, crossedThresholds: crossedThresholds});
