@@ -975,7 +975,7 @@ export class ActorItemHelper {
                         subtype: currentStorage?.subtype || "",
                         amount: currentStorage?.amount || itemData.storageCapacity || 0,
                         acceptsType: currentStorage?.acceptsType || itemData.acceptedItemTypes ? Object.keys(itemData.acceptedItemTypes) : [],
-                        affectsEncumbrance: (currentStorage?.affectsEncumbrance !== null || undefined) ? (currentStorage?.affectsEncumbrance) : ((itemData.contentBulkMultiplier === 0) ? false : true),
+                        affectsEncumbrance: currentStorage?.affectsEncumbrance ?? ((itemData.contentBulkMultiplier === 0) ? false : true),
                         weightProperty: currentStorage?.weightProperty || "bulk"
                     });
                 } else if (item.type === "weapon") {
