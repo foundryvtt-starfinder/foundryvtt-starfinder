@@ -969,7 +969,6 @@ export class ActorItemHelper {
                 };
 
                 if (item.type === "container") {
-                    const currentStorage = itemData?.container?.storage[0];
                     container.storage.push({
                         type: currentStorage?.type || "bulk",
                         subtype: currentStorage?.subtype || "",

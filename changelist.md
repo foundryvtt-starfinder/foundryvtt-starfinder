@@ -1,3 +1,17 @@
+# v0.20.0 - Starfinder Update
+
+* Fixed a long standing bug where pressing enter on a character sheet would cause the add profession skill dialog to pop open.
+* Fixed a UI bug that would cause certain images on the PC iventory and features tab to repeat vertically if they weren't perfectly square or when the name of the item was too long and caused it to wrap the text to the next line.
+* Updated the wording on the "Use Quick Rolls by Default" system setting to make it clearer on how it works and updated the logic to make it work correctly.
+* Fixed "undefined" showing in the flavor text on damage chat card if damage section has no name.
+
+# v0.19.1 - Starfinder Update
+
+This update includes a quick fix for some container items in the compendiums cuasing a migration on every world start.
+
+## Bugfix
+- Removed some unused properties from several contianer items that were causing a migration to run on every world start. This is only a partial fix by updating the compenidum items. A later update should prevent the bogus migration from happening in the future.
+
 # v0.19.0 - Starfinder Update
 
 This update includes a lot of quality of life improvements and some additions and updates to the compendiums. 
