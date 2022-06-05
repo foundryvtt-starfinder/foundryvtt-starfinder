@@ -28,6 +28,7 @@ export const preloadHandlebarsTemplates = async function () {
         "systems/sfrpg/templates/items/parts/item-modifiers.html",
         "systems/sfrpg/templates/items/parts/item-header.html",
         "systems/sfrpg/templates/items/parts/item-special-materials.html",
+        "systems/sfrpg/templates/items/parts/item-descriptors.html",
         "systems/sfrpg/templates/items/parts/item-status.html",
         "systems/sfrpg/templates/items/parts/physical-item-details.html",
         "systems/sfrpg/templates/items/parts/starship-component.html",
