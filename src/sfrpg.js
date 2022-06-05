@@ -413,23 +413,6 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
     return false;
 });
 
-Hooks.on("createActor", async function(actor, options, actorId) {
-    const autoLinkedTypes = ['character', 'drone'];
-    if (autoLinkedTypes.includes(actor.data.type)) {
-        await actor.update({
-            "token.actorLink": true
-        });
-    }
-    
-    if (actor.data.type === "character") {
-        const pack = await game.packs.get('sfrpg.equipment');
-        const index = pack.index ?? await pack.getIndex();
-        const obj = index.getName("Unarmed strike");
-        const doc = await pack.getDocument(obj._id);
-        await actor.createEmbeddedDocuments("Item", [doc.toObject()]);
-    }
-});
-
 function registerMathFunctions() {
     Math.lookup = function(value) {
         for (let i = 1; i<arguments.length - 1; i+=2) {

@@ -170,6 +170,39 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         return super.createEmbeddedDocuments(embeddedName, itemData, options);
     }
+    
+    /*
+     * Extend preCreate to automatically link PC and Drone tokens, as well as add Unarmed Strikes to PCs automatically.
+     * See the base Actor class for API documentation of this method
+     *
+     * @param {object} data           The initial data object provided to the document creation request
+     * @param {object} options        Additional options which modify the creation request
+     * @param {string} userId         The ID of the requesting user, always game.user.id
+     * @returns {boolean|void}         Explicitly return false to prevent creation of this Document
+     */
+    async _preCreate(data, options, user) {
+        const actorData = this.data;
+        const autoLinkedTypes = ['character', 'drone'];
+        let link = {};
+        let unarmed = {};
+        
+        if (autoLinkedTypes.includes(this.data.type)) {
+            link = { "token.actorLink": true };
+        };
+        
+        if (this.data.type === "character" && game.settings.get("sfrpg", "autoAddUnarmedStrike")) {
+            const ITEM_UUID = "Compendium.sfrpg.equipment.AWo4DU0s18agsFtJ"; // Unarmed strike
+            const source = (await fromUuid(ITEM_UUID)).toObject();
+            source.flags = mergeObject(source.flags ?? {}, { core: { sourceId: ITEM_UUID } });
+            
+            unarmed = { "items": [source] };
+        };
+        
+        const updates = mergeObject(link, unarmed);
+        actorData.update(updates);
+        
+        return super._preCreate(data, options, user)
+    };
 
     async useSpell(item, { configureDialog = true } = {}) {
         if (item.data.type !== "spell") throw new Error("Wrong item type");
