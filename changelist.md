@@ -1,9 +1,20 @@
 # v0.20.0 - Starfinder Update
 
+## New Items / Features
+* Added starship critical damage table as a roll table.
+* Added new weapon properties from the Drift Crisis.
+* Added the Vangaurd Rebound Aspect and the various items surrounding it.
+* Added new Mechanic abilities from Galactic Magic.
+* Added new Mystic abilities from Galactic Magic.
+* Added descriptors to spell's and feats.
+* When rolling damage, if the result is less than one, it will be set to 1 and be tagged as non-leathal damage. This conforms to the "Minimum Damage Rule" presented on p. 241 of the Core Rulebook.
+
+## Bugfixes
 * Fixed a long standing bug where pressing enter on a character sheet would cause the add profession skill dialog to pop open.
 * Fixed a UI bug that would cause certain images on the PC iventory and features tab to repeat vertically if they weren't perfectly square or when the name of the item was too long and caused it to wrap the text to the next line.
 * Updated the wording on the "Use Quick Rolls by Default" system setting to make it clearer on how it works and updated the logic to make it work correctly.
 * Fixed "undefined" showing in the flavor text on damage chat card if damage section has no name.
+* Fixed it so that popout chat cards are sytled the same as normal chat cards.
 
 # v0.19.1 - Starfinder Update
 
