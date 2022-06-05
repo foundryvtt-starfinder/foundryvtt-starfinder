@@ -76,6 +76,15 @@ export const registerSystemSettings = function () {
         default: true,
         type: Boolean
     });
+    
+    game.settings.register("sfrpg", "autoAddUnarmedStrike", {
+        name: "SFRPG.Settings.AutoAddUnarmedStrike.Name",
+        hint: "SFRPG.Settings.AutoAddUnarmedStrike.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
 
     game.settings.register("sfrpg", "useQuickRollAsDefault", {
         name: "SFRPG.Settings.UseQuickRollAsDefault.Name",
