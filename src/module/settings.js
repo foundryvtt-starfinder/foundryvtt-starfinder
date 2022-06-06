@@ -251,8 +251,8 @@ export const registerSystemSettings = function () {
 };
 
 class floatingNumberMenu extends FormApplication {
-    constructor(floatingSettings) {
-        super();
+    constructor(...args) {
+        super(...args);
     }
     
     getData() {
