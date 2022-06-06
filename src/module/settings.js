@@ -208,9 +208,9 @@ export const registerSystemSettings = function () {
     });
     
     game.settings.registerMenu("sfrpg", "floatingHP", {
-        name: "FloatingHP",
-        label: "FloatingHP",
-        hint: "FloatingHP",
+        name: "SFRPG.Settings.FloatingHP.Menu.Label",
+        label: "SFRPG.Settings.FloatingHP.Button",
+        hint: "SFRPG.Settings.FloatingHP.Hint",
         icon: "fas fa-heart",
         type: floatingHP
     });
@@ -273,7 +273,7 @@ class floatingHP extends FormApplication {
             popOut: true,
             template: `systems/sfrpg/templates/apps/floatinghp.html`,
             id: 'floating-hp',
-            title: 'Floating HP',
+            title: 'SFRPG.Settings.FloatingHP.Menu.Label',
             width: 600
         });
     }
