@@ -886,6 +886,8 @@ Hooks.on("afterClosureProcessed", async (closureName, fact) => {
     }
 });
 
+
+//Floating HP functions
 const signNum = (value) => (value >= 0) ? `+${value}` : `${value}`;
 
 const hpKeys = ['value', 'temp'];
@@ -898,12 +900,12 @@ const floaterValues = {
 		negative: { fill: 0xFF0000 },
 	},
 	temp: { //Temp HP
-		label: 'Temp',
+		label: 'temp',
 		positive: { fill: 0x55FF00 },
 		negative: { fill: 0xFF3300 },
 	},
 	stamina: {
-		label: 'SP',
+		label: 'stamina',
 		positive: { fill: 0x00fba5 },
 		negative: { fill: 0xfb3500 },
 	},
@@ -972,15 +974,7 @@ function diffHealth(data, old, type) {
 }
 
 // Async to allow the calling functions to not care when this finishes
-async function renderFloaters(tokens, hpDiffs) {/*
-	const permissionOptions = {
-		restricted: game.settings.get(CFG.module, CFG.SETTINGS.visibility),
-		playerOwned: game.settings.get(CFG.module, CFG.SETTINGS.playerOwned),
-		visibleBars: game.settings.get(CFG.module, CFG.SETTINGS.visibleBars),
-		visibleName: game.settings.get(CFG.module, CFG.SETTINGS.visibleName),
-		user: game.user,
-	};*/
-
+async function renderFloaters(tokens, hpDiffs) {
 	for (const t of tokens) {
 		if (!testPermission(t)) continue;
 
@@ -1000,12 +994,13 @@ async function renderFloaters(tokens, hpDiffs) {/*
 				jitter: 0.3
 			};
 
-			t.hud.createScrollingText(`${game.i18n.localize(cfg.label)} ${signNum(value)}`, floaterData);
+        const localized = game.i18n.localize(`SFRPG.FloatingHP.${cfg.label}`)
+        t.hud.createScrollingText(`${localized} ${signNum(value)}`, floaterData);
 		}
 	}
 }
 
-/**
+/** Hooks
  * Handle linked actors.
  * @param {ActorSFRPG} doc
  * @param {Object} diff
@@ -1042,6 +1037,7 @@ export function updateActorEvent(actor, _data, options, _userId) {
 /**
  * @param {Token} token
  */
+
 function testPermission(token) {
     if (!token.actor) return false; // Sanity check
     

@@ -713,7 +713,6 @@ Hooks.on("renderSidebarTab", async (app, html) => {
 });
 
 //Render floating HP values on damage
-
 Hooks.on('preUpdateActor', preUpdateActorEvent);
 Hooks.on('preUpdateToken', preUpdateTokenEvent);
 Hooks.on('updateActor', updateActorEvent);

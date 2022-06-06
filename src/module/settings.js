@@ -218,33 +218,35 @@ export const registerSystemSettings = function () {
     game.settings.register("sfrpg", "floatingHP", {
         scope: "world",
         config: false,
-        type: Boolean
-        })
+        type: Boolean,
+        default: true
+    });
         
     game.settings.register("sfrpg", "limitByCriteria", {
         scope: "world",
         config: false,
-        type: Boolean
-        })
+        type: Boolean,
+        default: false
+    });
         
     game.settings.register("sfrpg", "canSeeBars", {
         scope: "world",
         config: false,
         type: Boolean
-    })
+    });
     
     game.settings.register("sfrpg", "canSeeName", {
         scope: "world",
         config: false,
         type: Boolean
-        })
+    });
         
     game.settings.register("sfrpg", "minPerm", {
         scope: "world",
         config: false,
         type: String,
         default: "LIMITED"
-        })
+    });
 };
 
 class floatingHP extends FormApplication {
@@ -283,17 +285,13 @@ class floatingHP extends FormApplication {
         document.getElementById("min-perm").value = game.settings.get("sfrpg", "minPerm");
         document.getElementById("can-see-name").checked = game.settings.get("sfrpg", "canSeeName");
         document.getElementById("can-see-bars").checked = game.settings.get("sfrpg", "canSeeBars");
-        
     }
     
     async _updateObject(event, formData) {
-        console.log(event)
-        console.log(formData);
-        
-        game.settings.set("sfrpg", "floatingHP", formData["floating-toggle"])
-        game.settings.set("sfrpg", "limitByCriteria", formData["limit-by-criteria"])
-        game.settings.set("sfrpg", "minPerm", formData["min-perm"])
-        game.settings.set("sfrpg", "canSeeName", formData["can-see-name"])
-        game.settings.set("sfrpg", "canSeeBars", formData["can-see-bars"])
+        game.settings.set("sfrpg", "floatingHP", formData["floating-toggle"]);
+        game.settings.set("sfrpg", "limitByCriteria", formData["limit-by-criteria"]);
+        game.settings.set("sfrpg", "minPerm", formData["min-perm"]);
+        game.settings.set("sfrpg", "canSeeName", formData["can-see-name"]);
+        game.settings.set("sfrpg", "canSeeBars", formData["can-see-bars"]);
     }
 }
