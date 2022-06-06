@@ -886,15 +886,6 @@ Hooks.on("afterClosureProcessed", async (closureName, fact) => {
     }
 });
 
-const CFG = {
-	SETTINGS: {
-		visibility: 'visibility',
-		playerOwned: 'playerOwned',
-		visibleName: 'visibleName',
-		visibleBars: 'visibleBars',
-	}
-};
-
 const signNum = (value) => (value >= 0) ? `+${value}` : `${value}`;
 
 const hpKeys = ['value', 'temp'];
@@ -938,22 +929,6 @@ const floaterValues = {
 	},
 };
 
-const visibleOptions = [CONST.TOKEN_DISPLAY_MODES.ALWAYS, CONST.TOKEN_DISPLAY_MODES.HOVER];
-
-/**
- * @param {Token} token
- */
-function testPermission(token, { restricted, visibleBars, visibleName, playerOwned, user }) {
-	if (!token.actor) return false; // Sanity check
-	const actor = token.actor;
-    
-	if (actor.testUserPermission(user, CONST.DOCUMENT_PERMISSION_LEVELS.LIMITED)) return true;
-	if (!restricted) return true;
-	if (playerOwned && actor.hasPlayerOwner) return true;
-	if (visibleBars && visibleOptions.includes(token.data.displayBars)) return true;
-	if (visibleName && visibleOptions.includes(token.data.displayName)) return true;
-	return false;
-}
 
 function getDelta(key, update, data) {
 	if (update?.[key] === undefined) return 0;
@@ -1007,7 +982,7 @@ async function renderFloaters(tokens, hpDiffs) {/*
 	};*/
 
 	for (const t of tokens) {
-		//if (!testPermission(t, permissionOptions)) continue;
+		if (!testPermission(t)) continue;
 
 		for (const [key, value] of Object.entries(hpDiffs)) {
 			if (value === 0) continue; // Skip deltas of 0
@@ -1038,6 +1013,7 @@ async function renderFloaters(tokens, hpDiffs) {/*
  */
 export function preUpdateActorEvent(doc, diff, options, _userId) {
 	if (doc.isToken) return;
+    if (!game.settings.get("sfrpg", "floatingHP")) return;
 	const dhp = diffHealth(diff.data, doc.data.data, doc.type);
 	if (dhp && Object.keys(dhp).length) options._hpDiffs = dhp;
 }
@@ -1049,6 +1025,7 @@ export function preUpdateActorEvent(doc, diff, options, _userId) {
  * @param {Object} options
  */
 export function preUpdateTokenEvent(doc, diff, options, _userId) {
+    if (!game.settings.get("sfrpg", "floatingHP")) return;
 	const dhp = diffHealth(diff.actorData?.data, doc.actor.data.data, doc.type);
 	if (dhp) options._hpDiffs = dhp;
 }
@@ -1060,6 +1037,29 @@ export function updateActorEvent(actor, _data, options, _userId) {
 	if (!tokens) return;
 
 	renderFloaters(tokens, dhp);
+}
+
+/**
+ * @param {Token} token
+ */
+export function testPermission(token) {
+    if (!token.actor) return false; // Sanity check
+    
+    const limitByCriteria = game.settings.get("sfrpg", "limitByCriteria");
+    if (!limitByCriteria) return true;
+    
+    const minPerm = game.settings.get("sfrpg", "minPerm");
+    const user = game.users.current;
+    if (token.actor.testUserPermission(user, CONST.DOCUMENT_PERMISSION_LEVELS[`${minPerm}`])) return true;
+    
+    const visibleOptions = [CONST.TOKEN_DISPLAY_MODES.ALWAYS, CONST.TOKEN_DISPLAY_MODES.HOVER];
+    const canSeeBars = game.settings.get("sfrpg", "canSeeBars");
+    if (canSeeBars && visibleOptions.includes(token.data.displayBars)) return true;
+    
+    const canSeeName = game.settings.get("sfrpg", "canSeeName");
+    if (canSeeName && visibleOptions.includes(token.data.displayName)) return true;
+    
+	return false;
 }
 
 /*Hooks.once('init', function registerSettings() {

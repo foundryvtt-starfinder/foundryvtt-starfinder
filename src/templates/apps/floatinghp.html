@@ -1,0 +1,34 @@
+<form>
+    <div class="form-group">
+        <label for="floating-toggle">Enable floating HP?</label>
+        <input type=checkbox name="floating-toggle" id="floating-toggle">
+        <p class="notes">Enable floating HP numbers when a token's HP is changed</p>
+    </div>
+    <div class="form-group">
+        <label for="limit-by-criteria">Limit by criteria?</label>
+        <input type=checkbox name="limit-by-criteria" id="limit-by-criteria">
+        <p class="notes">When enabled, users will only be shown floating numbers if they meet at least one of the criteria below. When disabled, floating numbers will be shown to all users.</p>
+    </div>
+    <div class="form-group">
+        <label for="min-perm">Minimum Permission</label>
+        <select name="min-perm" id="min-perm">
+            {{selectOptions perms localize=true}}
+        </select>
+        <p class="notes">Users with this permission or higher over the token will be able to see floating numbers.</p>
+    </div>
+    <div class="form-group">
+        <label for="can-see-bars">Can see resource bars?</label>
+        <input type=checkbox name="can-see-bars" id="can-see-bars">
+        <p class="notes">Users that can see the token's resource bars will be able to see floating numbers.</p>
+    </div>
+    <div class="form-group">
+        <label for="can-see-name">Can see name?</label>
+        <input type=checkbox name="can-see-name" id="can-see-name">
+        <p class="notes">Users that can see the token's name will be able to see floating numbers.</p>
+    </div>
+    <footer class="sheet-footer flexrow">
+    <button type="submit" name="submit">
+        <i class="fa fa-check"></i> OK
+    </button>
+  </footer>
+</form>
