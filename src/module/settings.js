@@ -207,49 +207,50 @@ export const registerSystemSettings = function () {
         type: String
     });
     
-    game.settings.registerMenu("sfrpg", "floatingHP", {
-        name: "SFRPG.Settings.FloatingHP.Menu.Label",
-        label: "SFRPG.Settings.FloatingHP.Button",
-        hint: "SFRPG.Settings.FloatingHP.Hint",
-        icon: "fas fa-heart",
-        type: floatingHP
-    });
-    
-    game.settings.register("sfrpg", "floatingHP", {
-        scope: "world",
-        config: false,
-        type: Boolean,
-        default: true
-    });
+    //Floating Number settings
+        game.settings.registerMenu("sfrpg", "floatingHP", {
+            name: "SFRPG.Settings.FloatingHP.Menu.Label",
+            label: "SFRPG.Settings.FloatingHP.Button",
+            hint: "SFRPG.Settings.FloatingHP.Hint",
+            icon: "fas fa-heart",
+            type: floatingNumberMenu
+        });
         
-    game.settings.register("sfrpg", "limitByCriteria", {
-        scope: "world",
-        config: false,
-        type: Boolean,
-        default: false
-    });
+        game.settings.register("sfrpg", "floatingHP", {
+            scope: "world",
+            config: false,
+            type: Boolean,
+            default: true
+        });
+            
+        game.settings.register("sfrpg", "limitByCriteria", {
+            scope: "world",
+            config: false,
+            type: Boolean,
+            default: false
+        });
+            
+        game.settings.register("sfrpg", "canSeeBars", {
+            scope: "world",
+            config: false,
+            type: Boolean
+        });
         
-    game.settings.register("sfrpg", "canSeeBars", {
-        scope: "world",
-        config: false,
-        type: Boolean
-    });
-    
-    game.settings.register("sfrpg", "canSeeName", {
-        scope: "world",
-        config: false,
-        type: Boolean
-    });
-        
-    game.settings.register("sfrpg", "minPerm", {
-        scope: "world",
-        config: false,
-        type: String,
-        default: "LIMITED"
-    });
+        game.settings.register("sfrpg", "canSeeName", {
+            scope: "world",
+            config: false,
+            type: Boolean
+        });
+            
+        game.settings.register("sfrpg", "minPerm", {
+            scope: "world",
+            config: false,
+            type: String,
+            default: "LIMITED"
+        });
 };
 
-class floatingHP extends FormApplication {
+class floatingNumberMenu extends FormApplication {
     constructor(floatingSettings) {
         super();
     }
@@ -259,13 +260,13 @@ class floatingHP extends FormApplication {
             "LIMITED": "PERMISSION.LIMITED",
             "OBSERVER": "PERMISSION.OBSERVER",
             "OWNER": "PERMISSION.OWNER",
-            }
+        };
         
         return mergeObject(super.getData, {
             perms: perms
-        })
+        });
         
-    }
+    };
     
     static get defaultOptions() {
             return mergeObject(super.defaultOptions, {
@@ -276,7 +277,7 @@ class floatingHP extends FormApplication {
             title: 'SFRPG.Settings.FloatingHP.Menu.Label',
             width: 600
         });
-    }
+    };
   
     activateListeners(html) {
         super.activateListeners(html);
@@ -285,7 +286,7 @@ class floatingHP extends FormApplication {
         document.getElementById("min-perm").value = game.settings.get("sfrpg", "minPerm");
         document.getElementById("can-see-name").checked = game.settings.get("sfrpg", "canSeeName");
         document.getElementById("can-see-bars").checked = game.settings.get("sfrpg", "canSeeBars");
-    }
+    };
     
     async _updateObject(event, formData) {
         game.settings.set("sfrpg", "floatingHP", formData["floating-toggle"]);
@@ -293,5 +294,5 @@ class floatingHP extends FormApplication {
         game.settings.set("sfrpg", "minPerm", formData["min-perm"]);
         game.settings.set("sfrpg", "canSeeName", formData["can-see-name"]);
         game.settings.set("sfrpg", "canSeeBars", formData["can-see-bars"]);
-    }
-}
+    };
+};

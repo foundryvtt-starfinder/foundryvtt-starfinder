@@ -886,7 +886,6 @@ Hooks.on("afterClosureProcessed", async (closureName, fact) => {
     }
 });
 
-
 //Floating HP functions
 const signNum = (value) => (value >= 0) ? `+${value}` : `${value}`;
 
@@ -931,14 +930,13 @@ const floaterValues = {
 	},
 };
 
-
 function getDelta(key, update, data) {
 	if (update?.[key] === undefined) return 0;
 	const oldValue = data[key],
 		newValue = update[key] ?? oldValue,
 		delta = newValue - oldValue;
 	return delta;
-}
+};
 
 /**
  * Build HP diffs.
@@ -968,10 +966,10 @@ function diffHealth(data, old, type) {
             const delta = getDelta('value', shields[k]?.shields, osh[k].shields);
             if (delta != 0) diff[`shields.${k}`] = delta;
         });
-    }
+    };
         
 	return diff;
-}
+};
 
 // Async to allow the calling functions to not care when this finishes
 async function renderFloaters(tokens, hpDiffs) {
@@ -994,11 +992,11 @@ async function renderFloaters(tokens, hpDiffs) {
 				jitter: 0.3
 			};
 
-        const localized = game.i18n.localize(`SFRPG.FloatingHP.${cfg.label}`)
+        const localized = game.i18n.localize(`SFRPG.FloatingHP.${cfg.label}`);
         t.hud.createScrollingText(`${localized} ${signNum(value)}`, floaterData);
-		}
-	}
-}
+		};
+	};
+};
 
 /** Hooks
  * Handle linked actors.
