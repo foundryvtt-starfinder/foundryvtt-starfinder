@@ -1042,7 +1042,7 @@ export function updateActorEvent(actor, _data, options, _userId) {
 /**
  * @param {Token} token
  */
-export function testPermission(token) {
+function testPermission(token) {
     if (!token.actor) return false; // Sanity check
     
     const limitByCriteria = game.settings.get("sfrpg", "limitByCriteria");
@@ -1061,41 +1061,3 @@ export function testPermission(token) {
     
 	return false;
 }
-
-/*Hooks.once('init', function registerSettings() {
-	game.settings.register(CFG.module, CFG.SETTINGS.visibility, {
-		name: 'Restricted visibility',
-		hint: 'If enabled, one of the following criteria need to be fulfilled. Limited permission is always sufficient.',
-		type: Boolean,
-		default: false,
-		scope: 'world',
-		config: true,
-	});
-
-	game.settings.register(CFG.module, CFG.SETTINGS.playerOwned, {
-		name: 'Criteria: Player owned',
-		hint: 'Token has player owner.',
-		type: Boolean,
-		default: true,
-		scope: 'world',
-		config: true,
-	});
-
-	game.settings.register(CFG.module, CFG.SETTINGS.visibleBars, {
-		name: 'Criteria: Visible bars',
-		hint: 'Token has player visible bars.',
-		type: Boolean,
-		default: true,
-		scope: 'world',
-		config: true,
-	});
-
-	game.settings.register(CFG.module, CFG.SETTINGS.visibleName, {
-		name: 'Criteria: Visible name',
-		hint: 'Token has player visible name.',
-		type: Boolean,
-		default: false,
-		scope: 'world',
-		config: true,
-	});
-});*/
