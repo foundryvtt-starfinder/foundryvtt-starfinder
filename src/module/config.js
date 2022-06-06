@@ -192,6 +192,60 @@ SFRPG.damageTypeOperators = {
     "or": "SFRPG.Damage.Types.Operators.Or"
 }
 
+SFRPG.descriptors = {
+    "acid": "SFRPG.Descriptors.Acid",
+    "air": "SFRPG.Descriptors.Air",
+    "calling": "SFRPG.Descriptors.Calling",
+    "chaotic": "SFRPG.Descriptors.Chaotic",
+    "charm": "SFRPG.Descriptors.Charm",
+    "cold": "SFRPG.Descriptors.Cold",
+    "compulsion": "SFRPG.Descriptors.Compulsion",
+    "creation": "SFRPG.Descriptors.Creation",
+    "curse": "SFRPG.Descriptors.Curse",
+    "darkness": "SFRPG.Descriptors.Darkness",
+    "death": "SFRPG.Descriptors.Death",
+    "disease": "SFRPG.Descriptors.Disease",
+    "earth": "SFRPG.Descriptors.Earth",
+    "electricity": "SFRPG.Descriptors.Electricity",
+    "emotion": "SFRPG.Descriptors.Emotion",
+    "earth": "SFRPG.Descriptors.Earth",
+    "evil": "SFRPG.Descriptors.Evil",
+    "fear": "SFRPG.Descriptors.Fear",
+    "fire": "SFRPG.Descriptors.Fire",
+    "force": "SFRPG.Descriptors.Force",
+    "good": "SFRPG.Descriptors.Good",
+    "healing": "SFRPG.Descriptors.Healing",
+    "language-dependent": "SFRPG.Descriptors.LanguageDependent",
+    "lawful": "SFRPG.Descriptors.Lawful",
+    "light": "SFRPG.Descriptors.Light",
+    "mind-affecting": "SFRPG.Descriptors.MindAffecting",
+    "pain": "SFRPG.Descriptors.Pain",
+    "poison": "SFRPG.Descriptors.Poison",
+    "radiation": "SFRPG.Descriptors.Radiation",
+    "scrying": "SFRPG.Descriptors.Scrying",
+    "sense-dependent": "SFRPG.Descriptors.SenseDependent",
+    "shadow": "SFRPG.Descriptors.Shadow",
+    "summoning": "SFRPG.Descriptors.Summoning",
+    "teleportation": "SFRPG.Descriptors.Teleportation",
+    "water": "SFRPG.Descriptors.Water",
+};
+
+SFRPG.descriptorsTooltips = {
+    "calling": "SFRPG.Descriptors.CallingDescription",
+    "charm": "SFRPG.Descriptors.CharmDescription",
+    "compulsion": "SFRPG.Descriptors.CompulsionDescription",
+    "creation": "SFRPG.Descriptors.CreationDescription",
+    "force": "SFRPG.Descriptors.ForceDescription",
+    "language-dependent": "SFRPG.Descriptors.LanguageDependentDescription",
+    "mind-affecting": "SFRPG.Descriptors.MindAffectingDescription",
+    "pain": "SFRPG.Descriptors.PainDescription",
+    "scrying": "SFRPG.Descriptors.ScryingDescription",
+    "sense-dependent": "SFRPG.Descriptors.SenseDependentDescription",
+    "shadow": "SFRPG.Descriptors.ShadowDescription",
+    "summoning": "SFRPG.Descriptors.SummoningDescription",
+    "teleportation": "SFRPG.Descriptors.TeleportationDescription"
+}
+
 SFRPG.weaponDamageTypes = {
     "acid": "SFRPG.DamageTypesAcid",
     "acid+bludgeoning": "SFRPG.DamageTypesAcidAndBludgeoning",
@@ -226,7 +280,7 @@ SFRPG.weaponDamageTypes = {
     "piercing+sonic": "SFRPG.DamageTypesPiercingAndSonic",
     "slashing": "SFRPG.DamageTypesSlashing",
     "slashing+piercing": "SFRPG.DamageTypesSlashingAndPiercing",
-    "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic",
+    "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic"
 };
 
 SFRPG.ammunitionTypes = {
