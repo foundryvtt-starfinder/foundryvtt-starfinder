@@ -74,6 +74,7 @@
         "AbilityActivationTypesNoneButton": "Activate",
         "AbilityActivationTypesOther": "Autres actions",
         "AbilityActivationTypesReaction": "Réaction",
+        "AbilityActivationTypesRound": "Round",
         "AbilityActivationTypesSpecial": "Spécial",
         "AbilityActivationTypesStandard": "Action S.",
         "AbilityActivationTypesSwift": "Action R.",
@@ -334,7 +335,7 @@
             "Skills": {
                 "RightClickHint": "Cliquez droit sur une compétence pour obtenir plus de propriétés."
             },
-			"Traits": {
+            "Traits": {
                 "MagicalItems": "Objets magiques portés"
             },
             "UI": {
@@ -519,9 +520,9 @@
         "ClassSPPerlevel": "Points d'endurance par niveau",
         "ClassSkillRanksPerlevel": "Points de compétence par niveau",
         "ClassSkills": "Compétences de classe",
+        "ClassSpellcastingAbility": "Spellcasting Ability",
         "ClassWeaponProf": "Maîtrise des armes",
         "ClassWillSaveProgression": "Progression sauvegarde de volonté",
-        "ClassSpellcastingAbility": "Spellcasting Ability",
         "Classes": {
             "IsCasterClass": "S'agit-il d'une classe de lanceur de sorts ?"
         },
@@ -675,8 +676,8 @@
         },
         "Cybernetic": "Cybernétique",
         "Damage": {
-            "MinimumDamage": "Minimum Damage",
             "Immunities": "Imm. aux dégâts",
+            "MinimumDamage": "Minimum Damage",
             "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "Réduction des dégâts",
             "Resistances": "Résistances aux energies",
@@ -704,8 +705,8 @@
             "Vulnerabilities": "Vulnérabilités"
         },
         "Description": "Description",
+        "DescriptionShort": "Description courte",
         "Descriptors": {
-            "Descriptors": "Descriptors",
             "Acid": "Acid",
             "Air": "Air",
             "Calling": "Calling",
@@ -721,6 +722,7 @@
             "Curse": "Curse",
             "Darkness": "Darkness",
             "Death": "Death",
+            "Descriptors": "Descriptors",
             "Disease": "Disease",
             "Earth": "Earth",
             "Electricity": "Electricity",
@@ -754,7 +756,6 @@
             "TeleportationDescription": "A teleportation effect involves instantaneous travel through the Astral Plane (see page 471). Anything that blocks astral travel also blocks teleportation unless the specific effect notes otherwise, and teleportation effects work within the Drift.",
             "Water": "Water"
         },
-        "DescriptionShort": "Description courte",
         "Details": "Détails",
         "Dialogs": {
             "InputDialog": {
@@ -891,10 +892,19 @@
         "FeaturesFilter": "Filtrer",
         "FeaturesUsage": "Utilisation",
         "FlagDeprecationNotice": "<strong>REMARQUE:</strong> ces valeurs sont remplacées par le nouveau système de modificateurs et seront supprimées lors d'une prochaine mise à jour. Il est recommandé de décocher l'une de ces valeurs et de les ajouter en tant que modificateur dans l'onglet Modificateurs.",
-        "FlagsInstructions": "Configurez les caractéristiques et traits de caractère qui déterminent les comportements du système.",
         "FlagsEmptySolarian": "There are no special traits at the moment. If you're looking for Solarian Attunement, use the new Actor Resource system within the Stellar Mode class feature.",
+        "FlagsInstructions": "Configurez les caractéristiques et traits de caractère qui déterminent les comportements du système.",
         "FlagsSave": "Mettre à jour les traits spéciaux.",
         "FlagsTitle": "Configurer des traits spéciaux.",
+        "FloatingHP": {
+            "HP": "HP",
+            "Sh.A.": "Sh.A.",
+            "Sh.F.": "Sh.F.",
+            "Sh.P.": "Sh.P.",
+            "Sh.S.": "Sh.S.",
+            "stamina": "SP",
+            "temp": "Temp"
+        },
         "FortitudeSave": "Vigueur",
         "Ft": "Pieds",
         "GreatFortitudeHint": "Ajoute 2 au jet de sauvegarde de Vigueur",
@@ -2010,21 +2020,7 @@
             "FloatingHP": {
                 "Button": "Configure Floating Number Settings",
                 "Hint": "Configure the floating numbers tha appear on a token when their HP/SP is changed.",
-                "Name": "Floating Number Settings",
                 "Menu": {
-                    "Label": "Floating Number Settings",
-                    "Enabled": {
-                        "Hint": "Enable floating numbers when a token's HP/SP is changed.",
-                        "Name": "Enable Floating Numbers?"
-                    },
-                    "LimitByCriteria": {
-                        "Hint": "When enabled, users will only be shown floating numbers if they meet at least one of the criteria below. When disabled, floating numbers will be shown to all users.",
-                        "Name": "Limit by criteria?"
-                    },
-                    "MinPerm": {
-                        "Hint": "Users with this permission or higher over the token will be able to see floating numbers.",
-                        "Name": "Minimum Permission"
-                    },
                     "CanSeeBars": {
                         "Hint": "Users that can see the token's resource bars will be able to see floating numbers.",
                         "Name": "Can see resource bars?"
@@ -2032,8 +2028,22 @@
                     "CanSeeName": {
                         "Hint": "Users that can see the token's name will be able to see floating numbers.",
                         "Name": "Can see name?"
+                    },
+                    "Enabled": {
+                        "Hint": "Enable floating numbers when a token's HP/SP is changed.",
+                        "Name": "Enable Floating Numbers?"
+                    },
+                    "Label": "Floating Number Settings",
+                    "LimitByCriteria": {
+                        "Hint": "When enabled, users will only be shown floating numbers if they meet at least one of the criteria below. When disabled, floating numbers will be shown to all users.",
+                        "Name": "Limit by criteria?"
+                    },
+                    "MinPerm": {
+                        "Hint": "Users with this permission or higher over the token will be able to see floating numbers.",
+                        "Name": "Minimum Permission"
                     }
-                }
+                },
+                "Name": "Floating Number Settings"
             },
             "GalacticTrade": {
                 "Hint": "Active le sous-système de commerce galactique, ce qui permet d'augmenter de 5 % le nombre maximal de BP d'un navire et d'ajouter des BP à l'inventaire du navire sous forme de crédits.",
@@ -2844,10 +2854,10 @@
         "WeaponPropertiesPoweredTooltip": "A melee weapon with an internal battery that must be charged to function has the powered special property, which lists its capacity and usage. Unlike with a ranged weapon, the usage is for 1 minute of operation rather than per attack, though using a powered weapon for less than 1 full minute still expends 1 full usage. The number of charges expended is equal to the usage × the number of minutes the weapon is used, rounded up to the nearest minute. You can activate the power of the weapon as part of the action used to make an attack with it, and it automatically deactivates after 1 minute.<br><br>As with ranged weapons, you can recharge the battery of a powered melee weapon using a generator or a recharging station, or you can purchase new batteries for it. If you try to attack with a powered weapon that’s out of charges, it functions as an improvised weapon (see page 169).Une arme de corps à corps avec une batterie intégrée qui doit être chargée pour fonctionner est dotée de la propriété spéciale alimentée. Cette propriété indique la capacité de cette arme et sa consommation. Contrairement aux armes de tir, la consommation est indiquée pour 1 minute d’utilisation et non pour une seule attaque. Cependant, on consomme tout de même 1 minute de charges même si la durée d’utilisation de l’arme est inférieure à 1 minute. Le nombre de charges dépensées est égal à la consommation : le nombre de minutes pendant lesquelles on utilise l’arme arrondi à la minute supérieure. Activer votre arme fait partie de l’action d’attaque et elle se désactive automatiquement au bout d’une minute.<br><br>Comme pour les armes de tir, vous pouvez recharger la batterie d’une arme de corps à corps alimentée en utilisant un générateur ou une station de recharge. Vous pouvez également acheter de nouvelles batteries. Si vous tentez d’attaquer avec une arme de corps à corps dont la batterie est épuisée, elle est considérée comme une arme improvisée (voir page 169).",
         "WeaponPropertiesProfessional": "Professionelle",
         "WeaponPropertiesProfessionalTooltip": "Une arme professionnelle est un outil utilisé dans le cadre d’une activité professionnelle mais qui peut tout de même infliger d’énormes dégâts. Quand vous utilisez ce type d’armes, vous gagnez un bonus d’intuition de +2 aux tests effectués avec la compétence Profession indiquée (ou, à la discrétion du MJ, à des tests avec des compétences similaires qui peuvent être raisonnablement utilisées avec cet outil dans le cadre professionnel). Si vous avez un nombre de rangs dans la compétence Profession égal à celui du niveau de l’objet, on considère que vous êtes formé à l’utilisation de cette arme même si ce n’est normalement pas le cas. Cette formation ne compte jamais comme un prérequis d’aucune sorte.",
-        "WeaponPropertiesPunchGun": "Punch gun",
-        "WeaponPropertiesPunchGunTooltip": "A punch gun weapon is a small ranged weapon outfitted with a pressure-sensitive firing mechanism that is affixed to a glove or a similar item. Unlike most ranged weapons, which discharge when a trigger is pulled, a punch gun fires when sufficient pressure is placed upon its barrel. All punch gun projectile weapons have a range equal to their wielder’s natural reach. Although these are ranged attacks, they do not provoke attacks of opportunity.",
         "WeaponPropertiesPropel": "Propel",
         "WeaponPropertiesPropelTooltip": "These weapons move affected targets the listed distance away from the origin point of the effect. A target that succeeds at a Reflex save (DC = 10 + 1/2 the weapon’s item level + the wielder’s Dexterity modifier) isn’t moved. If the movement would cause the target to move through a wall, object, or another barrier, the target creature stops moving and falls prone.",
+        "WeaponPropertiesPunchGun": "Punch gun",
+        "WeaponPropertiesPunchGunTooltip": "A punch gun weapon is a small ranged weapon outfitted with a pressure-sensitive firing mechanism that is affixed to a glove or a similar item. Unlike most ranged weapons, which discharge when a trigger is pulled, a punch gun fires when sufficient pressure is placed upon its barrel. All punch gun projectile weapons have a range equal to their wielder’s natural reach. Although these are ranged attacks, they do not provoke attacks of opportunity.",
         "WeaponPropertiesQuickReload": "Rechargement rapide",
         "WeaponPropertiesQuickReloadTooltip": "Vous pouvez recharger votre arme en même temps que votre action d’attaque au lieu de devoir utiliser une action de mouvement.",
         "WeaponPropertiesRadioactive": "Radioactive",
