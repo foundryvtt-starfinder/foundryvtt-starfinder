@@ -15,6 +15,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "roundL",
     "area": {
       "effect": "",
       "shape": "",
@@ -49,6 +50,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -91,24 +93,36 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "10d10",
-          "operator": "",
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Shirren-eye rifles are named for their compound sights, which resemble the eyes of the insectile race, but are rarely manufactured by shirren companies. Shirren-eye rifles are extremely accurate and favored by snipers and sharpshooters.</span></p>"
+      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Shirren-eye rifles are named for their compound sights, which resemble the eyes of the insectile race, but are rarely manufactured by shirren companies. Shirren-eye rifles are extremely accurate and favored by snipers and sharpshooters.</span></p>\n<p>Sniper (1000 ft.)</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
@@ -131,6 +145,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -149,6 +164,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -184,9 +200,10 @@
       "relic": false,
       "reposition": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
-      "sniper": false,
+      "sniper": true,
       "stun": false,
       "subtle": false,
       "sunder": false,
@@ -196,6 +213,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
       "unbalancing": false,
@@ -205,12 +223,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 80
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -218,6 +238,21 @@
     },
     "source": "CRB pg. 178",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -235,6 +270,5 @@
     "weaponType": "sniper"
   },
   "effects": [],
-  "flags": {},
   "img": "systems/sfrpg/icons/equipment/weapons/shirren-eye-rifle-warpshot.webp"
 }
