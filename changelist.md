@@ -1,15 +1,37 @@
 # v0.20.0 - Starfinder Update
 
+This update contains a lot of data entry, particularly around Galactic Magic and Drift Crisis class features and equipment.
+
+## Drift Crisis
+* Added support for the new ammo types from Drift Crisis.
+* Added equipment from Drift Crisis.
+* Added spells from Drift Crisis.
+* Added new weapon properties from Drift Crisis.
+* Added the new Aeon stones from Drift Crisis.
+
+## Galactic Magic
+* Added Technomancer abilities from Galactic Magic.
+* Added Soldier abilities from Galactic Magic.
+* Added Solarian abilities from Galactic Magic.
+* Added Operative abilities from Galactic Magic.
+* Added Nanocyte abilities from Galactic Magic.
+* Added Witchwarper abilities from Galactic Magic.
+* Added Mechanic abilities from Galactic Magic.
+* Added Mystic abilities from Galactic Magic.
+
 ## New Items / Features
+* Added Actor Resource for Negative Character levels in the Conditions compendium.
+* Added Interstellar Starship Engines.
 * Added starship critical damage table as a roll table.
-* Added new weapon properties from the Drift Crisis.
-* Added the Vangaurd Rebound Aspect and the various items surrounding it.
-* Added new Mechanic abilities from Galactic Magic.
-* Added new Mystic abilities from Galactic Magic.
+* Added the Vanguard Rebound Aspect and the various items surrounding it.
 * Added descriptors to spell's and feats.
-* When rolling damage, if the result is less than one, it will be set to 1 and be tagged as non-leathal damage. This conforms to the "Minimum Damage Rule" presented on p. 241 of the Core Rulebook.
+* Updated many of the Aeon Stone entries.
+* When rolling damage, if the result is less than one, it will be set to 1 and be tagged as non-lethal damage. This conforms to the "Minimum Damage Rule" presented on p. 241 of the Core Rulebook.
 
 ## Bugfixes
+* Fixed an assortment of minor issues with biohacker and envoy class features.
+* Fixed an assortment of minor issues with various equipment.
+* Fixed an issue that would cause containers to migrate incorrectly in v0.19 and onwards.
 * Fixed a long standing bug where pressing enter on a character sheet would cause the add profession skill dialog to pop open.
 * Fixed a UI bug that would cause certain images on the PC iventory and features tab to repeat vertically if they weren't perfectly square or when the name of the item was too long and caused it to wrap the text to the next line.
 * Updated the wording on the "Use Quick Rolls by Default" system setting to make it clearer on how it works and updated the logic to make it work correctly.
