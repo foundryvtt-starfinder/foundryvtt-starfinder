@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -29,10 +30,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\">When you hit an enemy with a weapon with the injection weapon special property, you can cause the ammunition (whatever it may be) to lodge painfully in that creature’s body. The target takes an additional amount of damage equal to half your key ability modifier.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\">When you hit an enemy with a weapon with the injection weapon special property, you can cause the ammunition (whatever it may be) to lodge painfully in that creature&rsquo;s body. The target takes an additional amount of damage equal to half your key ability modifier.</span></p>\n<p>&nbsp;</p>\n<p><em>Enable only one of the Modifiers depending on character's key ability.</em></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +44,39 @@
       "value": null
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "88f1afd7-38aa-4316-b70d-7d90b533e551",
+        "name": "Painful Injection (Ex)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-damage",
+        "enabled": true,
+        "max": 0,
+        "modifier": "floor(@abilities.int.mod/2)",
+        "modifierType": "constant",
+        "notes": "Enable only if character's key ability is intelligence.",
+        "source": "COM pg. 46",
+        "subtab": "misc",
+        "valueAffected": "injection"
+      },
+      {
+        "_id": "1e88ee65-82c3-4656-869b-3b1ed72ce16e",
+        "name": "Painful Injection (Ex)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-property-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "floor(@abilities.wis.mod/2)",
+        "modifierType": "constant",
+        "notes": "Enable only if character's key ability is wisdom.",
+        "source": "COM pg. 46",
+        "subtab": "misc",
+        "valueAffected": "injection"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +88,7 @@
       "value": null
     },
     "requirements": "2nd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -68,10 +105,6 @@
       "value": 0
     }
   },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "effects": [],
+  "img": "icons/svg/mystery-man.svg"
 }
