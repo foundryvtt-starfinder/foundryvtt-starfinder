@@ -11,7 +11,7 @@ Running the javascript scripts is done by the following process:
 
 - `action_target/fix_xxx_actionTarget.js`: These scripts sets the action target (e.g "X Against KAC/EAC" on the chat card) of the inputted files. If you've been setting action target you don't need to run this, but you still can to see if you missed any. Note that in some cases the logic may be incorrect as there are (as always) exceptions, so be sure to double check.
 - `damage/update_xxx.js`: These scripts migrate the inputted files' damage data to the new schema. You don't need to use these unless you *know* you need to.
-- `data_entry/item_cleaner.js`: Removes the `_id` and `flags` field from the inputted files, speeding up JSON wrangling massively, and will output them to a new folder called `Clean` in the folder you ran it in. Don't use on items already cooked and in compendiums.
+- `data_entry/item_cleaner.js`: Removes the `_id`, `effects`, `sort` and `flags` field from the inputted files, speeding up JSON wrangling massively, and will output them to a new folder called `Clean` in the folder you ran it in. Don't use on items already cooked and in compendiums.
 - `equipment/fix_xxx.js`: These scripts migrate the inputted files' equipment data to the new schema. Similar to the damage scripts, you don't need to use these unless you *know* you need to.
 - `migrations/convert_all_items_to_webp.js`: Converts the inputted images from .png or .jpg to .webp. Useful if you're adding new art to the system.
 - `npcs/cleanup_crew_actors.js`: Empty NPC Starship crews. Doesn't hurt to run on any NPC starships just in case some left over data is there.
