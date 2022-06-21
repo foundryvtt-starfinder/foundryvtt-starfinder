@@ -62,7 +62,7 @@
       "parts": [
         {
           "name": "",
-          "formula": "1d3 + floor(@details.level.value / 2)",
+          "formula": "1d3 + @abilities.str.mod + lookupRange(@details.level.value, 0, 3, floor(@details.level.value / 2))",
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -238,7 +238,7 @@
       "value": 0
     },
     "weaponCategory": "uncategorized",
-    "weaponType": "basicM"
+    "weaponType": "longA"
   },
   "img": "systems/sfrpg/icons/feats/grappler_pull.webp"
 }
