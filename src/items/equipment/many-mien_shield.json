@@ -9,12 +9,14 @@
       "parts": []
     },
     "acp": -1,
+    "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
       "type": "action",
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shape": "",
@@ -53,6 +55,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -84,14 +87,23 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d3 + @abilities.str.mod",
-          "operator": "",
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
@@ -111,7 +123,23 @@
     "identified": true,
     "isActive": null,
     "level": 19,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "c4fb1e92-a682-4eeb-a45c-8549e83ee5b5",
+        "name": "Many-Mein Shield - Combat manuever",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "If you are wielding a Many-Mein Shield (as knight’s shield), you gain a +1 bonus to any bull rush combat maneuver you attempt.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      }
+    ],
     "price": 555000,
     "proficient": false,
     "properties": {
@@ -128,6 +156,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -146,6 +175,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -172,6 +202,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -180,6 +211,7 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
       "shatter": false,
       "shells": false,
@@ -194,6 +226,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -203,18 +236,36 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
     "source": "AA4 pg. 71",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -229,11 +280,5 @@
       "value": null
     }
   },
-  "effects": [],
-  "flags": {},
-  "img": "icons/commodities/stone/stone-chunk-teal.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  }
+  "img": "icons/commodities/stone/stone-chunk-teal.webp"
 }
