@@ -128,6 +128,10 @@ Sometimes you are only making changes to a single compendium, such as `alien-arc
 This also works for other compendiums, naturally. Just replace `alien-archives` with another pack.
 This also only works with 1 pack at a time; adding more pack arguments will be ignored. If this is desired functionality, you can request it in Discord.
 
+### Copy Localizations
+
+Another neat script is `npm run copyLocalization`. This automatically sorts localization files and copies any new strings from the edited file to the others. This means you only have to do localizations once (and you don't need to be too precise with where you put them), then you run the script, and the others are taken care of, ready for a kind contributor to translate them into that language into the future.
+
 ### Getting Foundry Intellisense in Visual Studio Code
 
 If you would like some basic Intellisense for the Foundry types when using Visual Studio Code, all you have to do is copy `foundry.js` into the projects root folder. Once you do this, restart VS Code, and you should now see proper Intellisense.
