@@ -1,15 +1,15 @@
 {
-  "_id": "dKV5XEqZzvL7DHk3",
-  "name": "Student Of Liavara",
+  "_id": "EbgmscOLdt2MEuoA",
+  "name": "Poor Vision",
   "type": "feat",
   "data": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "save",
     "activation": {
       "type": "",
       "condition": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Barathus respect and protect the Dreamers of @Compendium[sfrpg.setting.ac6z5Rqyx0oLzvVf]{Liavara}, but few modify themselves to follow the Dreamers&rsquo; path. Those who do gain a hint of the Dreamers&rsquo; telepathic powers but forever lose the ability to modify themselves further. A barathu who selects this alternate racial trait cannot retrain it as it can others.<br />You gain the following spell-like abilities.</p>\n<ul>\n<li><strong>At will</strong> @Compendium[sfrpg.spells.cmD9XPyg0Cud1xYO]{Daze}, @Compendium[sfrpg.spells.R6MvvYVPDf21fE8Y]{Telepathic Message}</li>\n<li><strong>1/day</strong> @Compendium[sfrpg.spells.c8FSuYsLfYviJYYF]{Mindlink}, @Compendium[sfrpg.spells.7XJ6x5BZv1k1eBBz]{Mind Thrust}(1st level)</li>\n</ul>\n<p><strong>&nbsp;This replaces early stage adaptation.</strong></p>"
+      "value": "<p>An instar takes a &ndash;2 penalty on sight-based Perception checks, and anything farther than 60 feet away has concealment from the instar.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "a8ee511a-191e-4e3c-a297-0d06f877f25b",
+        "name": "Poor Vision",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": -2,
+        "modifier": "-2",
+        "modifierType": "formula",
+        "notes": "An instar takes a –2 penalty on sight-based Perception checks, and anything farther than 60 feet away has concealment from the instar.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "per"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -91,14 +107,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Barathu, Early Stage",
+    "requirements": "Dessamar Instar",
     "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "10 + floor(@details.level.value / 2) + @abilities.con.mod",
+      "descriptor": "negate"
     },
-    "source": "AP #29 pg. 43",
+    "source": "AA3 pg. 15",
     "target": {
       "type": "",
       "value": ""
