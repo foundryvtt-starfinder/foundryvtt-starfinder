@@ -1,6 +1,6 @@
 {
-  "_id": "yciUxMKUNzW7Weku",
-  "name": "Limited Augmentation",
+  "_id": "zXmNutA5dS2Nsdbu",
+  "name": "Shielded Thoughts",
   "type": "feat",
   "data": {
     "type": "",
@@ -11,7 +11,7 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
       "cost": 0
     },
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>The only augmentations that can be installed in this creature&rsquo;s brain are datajacks and the mechanic&rsquo;s custom rig.</p>"
+      "value": "<p>Embri are immune to magical @Compendium[sfrpg.rules.PqV3OCbUTyk2upPD]{Charm effects} and receive a +2 racial bonus to saving throws against enchantment spells and effects.</p>\n<p><br /><em>While enabled, embri is considered masked.<br /></em><em>Keep enabled, or remove Activation Cost to make passive, if embri doesn't have the @Compendium[sfrpg.racial-features.VDkg3njymk69GGs5]{Masked Emotions} feature</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "74c07780-7f36-4cd1-899b-4147b1f9b439",
+        "name": "Masked Emotions",
+        "type": "racial",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "An embri loses its immunity to  Charm effects and its +2 racial bonus to saving throws against enchantment spells and effects when it isn’t wearing a mask over its face. In addition, while unmasked, it must roll twice for any Sense Motive check it attempts and take the lower result.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "ste"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -91,21 +107,21 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Embri",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "AA2 pg. 48",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
       "max": null,
-      "per": "day",
+      "per": "",
       "value": null
     }
   },

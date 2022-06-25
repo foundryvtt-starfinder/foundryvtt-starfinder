@@ -1,6 +1,6 @@
 {
-  "_id": "yciUxMKUNzW7Weku",
-  "name": "Limited Augmentation",
+  "_id": "i2kNZLmAceYBrcFc",
+  "name": "Find Weakness",
   "type": "feat",
   "data": {
     "type": "",
@@ -11,7 +11,7 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "full",
       "condition": "",
       "cost": 0
     },
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>The only augmentations that can be installed in this creature&rsquo;s brain are datajacks and the mechanic&rsquo;s custom rig.</p>"
+      "value": "<p>Elebrians can instinctively find and take advantage of other creatures&rsquo; weak points. An elebrian can make a single melee or ranged attack as a full action, and if she hits, she can add half her level to the damage dealt (minimum +1 damage). Whether successful or not, once an elebrian has used this ability on a creature, that creature is immune to it for 24 hours.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "74c07780-7f36-4cd1-899b-4147b1f9b439",
+        "name": "Find Weakness",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": true,
+        "max": 1,
+        "modifier": "max(1, floor(@details.level.value / 2))",
+        "modifierType": "constant",
+        "notes": "Elebrians can instinctively find and take advantage of other creatures’ weak points. An elebrian can make a single melee or ranged attack as a full action, and if she hits, she can add half her level to the damage dealt (minimum +1 damage). Whether successful or not, once an elebrian has used this ability on a creature, that creature is immune to it for 24 hours.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "ste"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -91,21 +107,21 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Elebrian",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "AP #3 pg. 53",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
       "max": null,
-      "per": "day",
+      "per": "",
       "value": null
     }
   },

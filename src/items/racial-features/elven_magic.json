@@ -1,6 +1,6 @@
 {
-  "_id": "yciUxMKUNzW7Weku",
-  "name": "Limited Augmentation",
+  "_id": "WPeLPyg6kjwljqtk",
+  "name": "Elven Magic",
   "type": "feat",
   "data": {
     "type": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>The only augmentations that can be installed in this creature&rsquo;s brain are datajacks and the mechanic&rsquo;s custom rig.</p>"
+      "value": "<p>Elves receive a +2 racial bonus to caster level checks to overcome spell resistance. In addition, elves receive a +2 racial bonus to Mysticism skill checks.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "74c07780-7f36-4cd1-899b-4147b1f9b439",
+        "name": "Elven Magic",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Elves receive a +2 racial bonus to Mysticism skill checks.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "mys"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -91,21 +107,21 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Elf",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "CRB pg. 507",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
       "max": null,
-      "per": "day",
+      "per": "",
       "value": null
     }
   },

@@ -1,6 +1,6 @@
 {
-  "_id": "yciUxMKUNzW7Weku",
-  "name": "Limited Augmentation",
+  "_id": "jowZ7terzBGcBK56",
+  "name": "Enveloping Grip",
   "type": "feat",
   "data": {
     "type": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>The only augmentations that can be installed in this creature&rsquo;s brain are datajacks and the mechanic&rsquo;s custom rig.</p>"
+      "value": "<p>Endiffians gain a +2 racial bonus to grapple combat maneuvers and Athletics checks to climb, and they gain a +2 racial bonus to AC against disarm combat maneuvers.</p>\n<p><br /><em>Toggle AC bonus against </em><em><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">disarm combat maneuvers in the Modifiers tab.</span></em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,53 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "74c07780-7f36-4cd1-899b-4147b1f9b439",
+        "name": "Enveloping Grip",
+        "type": "racial",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Endiffians gain a +2 racial bonus to grapple combat maneuvers.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "per"
+      },
+      {
+        "_id": "a0350d1e-d5ca-42d7-b97f-d660b676310d",
+        "name": "Enveloping Grip",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Endiffians gain a +2 racial bonus to Athletics checks to climb.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "ath"
+      },
+      {
+        "_id": "8679b594-f691-4c3f-988c-87c4d361eb23",
+        "name": "Enveloping Grip (AC against disarm combat maneuvers)",
+        "type": "racial",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Endiffians gain a +2 racial bonus to AC against disarm combat maneuvers.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -91,21 +137,21 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Endiffian",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "AP #7 pg. 56",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
       "max": null,
-      "per": "day",
+      "per": "",
       "value": null
     }
   },

@@ -1,6 +1,6 @@
 {
-  "_id": "yciUxMKUNzW7Weku",
-  "name": "Limited Augmentation",
+  "_id": "4UMzxhnjfZCRbbDw",
+  "name": "Simulacrum",
   "type": "feat",
   "data": {
     "type": "",
@@ -11,9 +11,9 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "min",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
     "area": {
       "effect": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>The only augmentations that can be installed in this creature&rsquo;s brain are datajacks and the mechanic&rsquo;s custom rig.</p>"
+      "value": "<p>An endiffian can spend 1 minute to physically alter her form to look like any Medium humanoid with two arms and two legs, as long as she has seen a similar creature before. She can attempt to either mimic a specific creature she has seen or appear as a creature of her own design of that chosen species. The endiffian gains a +10 bonus to Disguise checks to appear as that creature, and the DC of this Disguise check is not modified as a result of altering major features or being disguised as a different race of humanoid. The endiffian can remain in her altered form indefinitely.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "74c07780-7f36-4cd1-899b-4147b1f9b439",
+        "name": "Simulacrum",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "An endiffian can spend 1 minute to physically alter her form to look like any Medium humanoid with two arms and two legs, as long as she has seen a similar creature before. She can attempt to either mimic a specific creature she has seen or appear as a creature of her own design of that chosen species. The endiffian gains a +10 bonus to Disguise checks to appear as that creature, and the DC of this Disguise check is not modified as a result of altering major features or being disguised as a different race of humanoid. The endiffian can remain in her altered form indefinitely.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -91,21 +107,21 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Endiffian",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "AP #7 pg. 56",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
       "max": null,
-      "per": "day",
+      "per": "",
       "value": null
     }
   },

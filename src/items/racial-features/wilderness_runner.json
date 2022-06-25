@@ -1,6 +1,6 @@
 {
-  "_id": "yciUxMKUNzW7Weku",
-  "name": "Limited Augmentation",
+  "_id": "t4fJv5QARJb61uML",
+  "name": "Wilderness Runner",
   "type": "feat",
   "data": {
     "type": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>The only augmentations that can be installed in this creature&rsquo;s brain are datajacks and the mechanic&rsquo;s custom rig.</p>"
+      "value": "<p>Many elves enjoy spending time in unspoiled wilderness. They gain a +2 racial bonus to Survival checks.</p>\n<p><strong>This replaces keen senses.</strong></p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "74c07780-7f36-4cd1-899b-4147b1f9b439",
+        "name": "Memory Gap",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Many elves were alive when the Gap ended. They have no memory of the details of their relationships and history. This lack of context is a struggle for them, but has toughened their minds. They gain a +2 racial bonus to saving throws against mind-affecting effects.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "sur"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -91,21 +107,21 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Elf",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "COM pg. 31",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
       "max": null,
-      "per": "day",
+      "per": "",
       "value": null
     }
   },
