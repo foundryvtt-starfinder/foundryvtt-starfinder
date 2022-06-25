@@ -27,8 +27,8 @@ This update contains a lot of data entry, particularly around Galactic Magic and
 * Added descriptors to spell's and feats.
 * Updated many of the Aeon Stone entries.
 * When rolling damage, if the result is less than one, it will be set to 1 and be tagged as non-lethal damage. This conforms to the "Minimum Damage Rule" presented on p. 241 of the Core Rulebook.
-* Racial Feature items for Races A-B
-* Biomes and related rules added to SFRPG Rules
+* Added Racial Feature items for Races A-E
+* Added Biomes and related rules added to SFRPG Rules
 
 ## Bugfixes
 * Fixed an assortment of minor issues with biohacker and envoy class features.
