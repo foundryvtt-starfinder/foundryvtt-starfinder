@@ -298,7 +298,9 @@ SFRPG.ammunitionTypes = {
     "nanite": "SFRPG.Items.Ammunition.Type.Nanites",
     "moodGoo": "SFRPG.Items.Ammunition.Type.MoodGoo",
     "thasphalt": "SFRPG.Items.Ammunition.Type.Thasphalt",
-    "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets"
+    "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets",
+    "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
+    "net": "SFRPG.Items.Ammunition.Type.Nets"
 };
 
 SFRPG.distanceUnits = {
