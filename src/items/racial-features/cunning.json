@@ -1,6 +1,6 @@
 {
-  "_id": "JDHaEO5NdJgI2800",
-  "name": "Weapon Familiarity",
+  "_id": "QxYoNIXn1Chu8r5R",
+  "name": "Cunning",
   "type": "feat",
   "data": {
     "type": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Dwarves are proficient with basic and advanced melee weapons and gain specialization with those weapons at 3rd level.</p>\n<p><br /><em>Toggle on the modifiers in the Modifiers tab ONLY if your selected class does not gain <span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">advanced melee weapons specialization at 3rd level. Basic melee specialization will be handled by your selected class specialization.</span></em></p>"
+      "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Halflings have a reputation for larceny and guile, and sometimes this reputation is deserved. Halflings with this racial trait gain a +2 bonus to @Compendium[sfrpg.skills.dQBMp7qTBkl8ku3c]{Bluff} and @Compendium[sfrpg.skills.J0N6AbhOheWI1Hoi]{Sleight of Hand} checks, and Sleight of Hand is a class skill for them.</span></p>\n<p><strong>This replaces sure-footed.</strong></p>\n<p><br /><em>Add class skill in the selected class item's Details tab.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -83,18 +83,33 @@
     "modifiers": [
       {
         "_id": "74c07780-7f36-4cd1-899b-4147b1f9b439",
-        "name": "Weapon Familiarity",
+        "name": "Cunning",
         "type": "untyped",
         "condition": "",
-        "effectType": "weapon-damage",
-        "enabled": false,
-        "max": 0,
-        "modifier": "@details.level.value",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
         "modifierType": "constant",
-        "notes": "Dwarves are proficient with basic and advanced melee weapons and gain specialization with those weapons at 3rd level.",
+        "notes": "Halflings have a reputation for larceny and guile, and sometimes this reputation is deserved. Halflings with this racial trait gain a +2 bonus to Bluff and Sleight of Hand checks, and Sleight of Hand is a class skill for them.",
         "source": "Racial",
         "subtab": "misc",
-        "valueAffected": "advancedM"
+        "valueAffected": "blu"
+      },
+      {
+        "_id": "4c8d0fa5-0bb9-422b-aa63-85e7e358f947",
+        "name": "Cunning",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Halflings have a reputation for larceny and guile, and sometimes this reputation is deserved. Halflings with this racial trait gain a +2 bonus to Bluff and Sleight of Hand checks, and Sleight of Hand is a class skill for them.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "sle"
       }
     ],
     "range": {
@@ -107,14 +122,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Dwarf",
+    "requirements": "Halfling",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "CRB pg. 506",
+    "source": "COM pg. 35",
     "target": {
       "type": "",
       "value": ""
