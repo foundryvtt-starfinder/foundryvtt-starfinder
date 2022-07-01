@@ -296,7 +296,6 @@ SFRPG.ammunitionTypes = {
     "shell": "SFRPG.Items.Ammunition.Type.Shells",
     "flare": "SFRPG.Items.Ammunition.Type.Flares",
     "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
-    "net": "SFRPG.Items.Ammunition.Type.Nets",
     "nanite": "SFRPG.Items.Ammunition.Type.Nanites",
     "caustrol": "SFRPG.Items.Ammunition.Type.Caustrol",
     "sclerite": "SFRPG.Items.Ammunition.Type.Sclerites",
