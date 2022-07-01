@@ -295,12 +295,14 @@ SFRPG.ammunitionTypes = {
     "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
     "shell": "SFRPG.Items.Ammunition.Type.Shells",
     "flare": "SFRPG.Items.Ammunition.Type.Flares",
+    "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
+    "net": "SFRPG.Items.Ammunition.Type.Nets",
     "nanite": "SFRPG.Items.Ammunition.Type.Nanites",
+    "caustrol": "SFRPG.Items.Ammunition.Type.Caustrol",
+    "sclerite": "SFRPG.Items.Ammunition.Type.Sclerites",
     "moodGoo": "SFRPG.Items.Ammunition.Type.MoodGoo",
     "thasphalt": "SFRPG.Items.Ammunition.Type.Thasphalt",
-    "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets",
-    "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
-    "net": "SFRPG.Items.Ammunition.Type.Nets"
+    "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets"
 };
 
 SFRPG.distanceUnits = {
