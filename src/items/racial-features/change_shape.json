@@ -1,17 +1,17 @@
 {
-  "_id": "mf2OoveG0kVdzHum",
-  "name": "Bonus Feat",
+  "_id": "rNLLU3ENzE0yrsfn",
+  "name": "Change Shape",
   "type": "feat",
   "data": {
     "type": "",
-    "ability": "",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "action",
       "condition": "",
       "cost": 0
     },
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature selects one extra feat at 1st level.</p>"
+      "value": "<p>As a standard action, a kitsune can assume the appearance of a specific single Medium humanoid. The kitsune always takes this specific form when using this ability. The kitsune gains a +10 racial bonus to @Compendium[sfrpg.skills.EBxScSrMYOl7E2v7]{Disguise}checks to appear as that type of humanoid. This ability otherwise functions as disguise self, except that the kitsune can remain in this form indefinitely.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "15def881-7143-411d-b4c0-94ca9269f580",
+        "name": "Change Shape",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "As a standard action, a kitsune can assume the appearance of a specific single Medium humanoid. The kitsune always takes this specific form when using this ability. The kitsune gains a +10 racial bonus to  Disguisechecks to appear as that type of humanoid. This ability otherwise functions as disguise self, except that the kitsune can remain in this form indefinitely.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -91,14 +107,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Kitsune",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": "",
-      "descriptor": "negate"
+      "dc": null,
+      "descriptor": ""
     },
-    "source": "",
+    "source": "ACD",
     "target": {
       "type": "",
       "value": ""

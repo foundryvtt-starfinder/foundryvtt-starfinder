@@ -1,10 +1,10 @@
 {
-  "_id": "mf2OoveG0kVdzHum",
-  "name": "Bonus Feat",
+  "_id": "4LmDRCGTwbwuETaI",
+  "name": "Shadow Resistances",
   "type": "feat",
   "data": {
     "type": "",
-    "ability": "",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature selects one extra feat at 1st level.</p>"
+      "value": "<p>Kayals have cold resistance 5 and electricity resistance 5.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,38 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "15def881-7143-411d-b4c0-94ca9269f580",
+        "name": "Shadow Resistances - Cold",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "Kayals have cold resistance 5 and electricity resistance 5.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      },
+      {
+        "_id": "f0c8b6dd-1f72-4d1c-b0f2-92a3268063c9",
+        "name": "Shadow Resistances - Electricity",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "Kayals have cold resistance 5 and electricity resistance 5.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "electricity"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -91,14 +122,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Kayal",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": "",
-      "descriptor": "negate"
+      "dc": null,
+      "descriptor": ""
     },
-    "source": "",
+    "source": "AP #12 pg. 57",
     "target": {
       "type": "",
       "value": ""

@@ -1,10 +1,10 @@
 {
-  "_id": "mf2OoveG0kVdzHum",
-  "name": "Bonus Feat",
+  "_id": "fguJX9ktACAUyZ9l",
+  "name": "Armor Savant",
   "type": "feat",
   "data": {
     "type": "",
-    "ability": "",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature selects one extra feat at 1st level.</p>"
+      "value": "<p>Kanabo have an innate mastery of the use of armor. When wearing armor, they gain a +1 racial bonus to AC. When wearing heavy armor, their armor check penalty is 1 less severe than normal.</p>\n<p><br /><em>Toggle on/off AC and ACP bonuses in the Modifiers tab.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,38 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "b61a7e5d-3d76-4ac3-a2f8-85a0c2fd926a",
+        "name": "Armor Savant - Armor",
+        "type": "racial",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "Kanabo have an innate mastery of the use of armor. When wearing armor, they gain a +1 racial bonus to AC. When wearing heavy armor, their armor check penalty is 1 less severe than normal.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "1e50005a-c110-4279-b572-c2952599bd36",
+        "name": "Armor Savant - Heavy Armor",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "acp",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "Kanabo have an innate mastery of the use of armor. When wearing armor, they gain a +1 racial bonus to AC. When wearing heavy armor, their armor check penalty is 1 less severe than normal.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acp-heavy"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -91,14 +122,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Kanabo",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": "",
-      "descriptor": "negate"
+      "dc": null,
+      "descriptor": ""
     },
-    "source": "",
+    "source": "AA2 pg. 88",
     "target": {
       "type": "",
       "value": ""
