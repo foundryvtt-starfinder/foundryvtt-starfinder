@@ -1,17 +1,17 @@
 {
-  "_id": "tcEhoQ9kffyh10Ro",
-  "name": "Prehensile Tail",
+  "_id": "B2R1KhUV483Odin0",
+  "name": "Efficient Sabotage",
   "type": "feat",
   "data": {
     "type": "",
-    "ability": "",
+    "ability": null,
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
       "cost": 0
     },
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature's tail is as effective as a hand at manipulating objects, which allows them to wield and hold up to three hands&rsquo; worth of weapons and equipment. This doesn&rsquo;t increase the number of attacks they can make during combat.</p>"
+      "value": "<p>Once per day when attempting an @Compendium[sfrpg.skills.QpQkjVUMt7OLS1pu]{Engineering} check to disable a device, a megaloynxa can roll 1d6 and add the result of the roll as an insight bonus to the check.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -80,7 +80,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "15def881-7143-411d-b4c0-94ca9269f580",
+        "name": "Efficient Sabotage",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 6,
+        "modifier": "1d6",
+        "modifierType": "constant",
+        "notes": "Once per day when attempting an  Engineering check to disable a device, a megaloynxa can roll 1d6 and add the result of the roll as an insight bonus to the check.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "eng"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -91,22 +107,22 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Megalonyxa",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": "",
-      "descriptor": "negate"
+      "dc": null,
+      "descriptor": ""
     },
-    "source": "",
+    "source": "AP #27 pg. 57",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
-      "per": "",
-      "value": null
+      "max": 1,
+      "per": "day",
+      "value": 1
     }
   },
   "img": "icons/svg/mystery-man.svg"
