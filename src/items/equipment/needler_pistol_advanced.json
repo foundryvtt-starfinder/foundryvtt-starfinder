@@ -5,6 +5,9 @@
   "data": {
     "type": "",
     "ability": "dex",
+    "abilityMods": {
+      "parts": []
+    },
     "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
@@ -12,6 +15,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "dart",
     "area": {
       "effect": "",
       "shape": "",
@@ -19,6 +23,24 @@
       "value": null
     },
     "attackBonus": 0,
+    "attributes": {
+      "ac": {
+        "value": ""
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "hp": {
+        "max": "",
+        "value": 6
+      },
+      "size": "medium",
+      "sturdy": true
+    },
     "attuned": false,
     "bulk": "L",
     "capacity": {
@@ -28,6 +50,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -58,16 +82,27 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d6",
-          "operator": "",
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>A favorite of assassins and battlefield medics alike, the needler pistol uses magnetic fields or pressurized gas to launch darts that inject a substance into the target. This injection gun can be fitted with cartridges containing medicine or @Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poison}.</p>"
     },
@@ -76,54 +111,140 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 5,
+    "modifiers": [],
     "price": 2700,
     "proficient": false,
     "properties": {
+      "aeon": false,
       "amm": false,
       "analog": true,
+      "antibiological": false,
       "archaic": false,
+      "aurora": false,
       "automatic": false,
       "blast": false,
       "block": false,
       "boost": false,
+      "breach": false,
+      "breakdown": false,
       "bright": false,
+      "buttressing": false,
+      "cluster": false,
+      "conceal": false,
+      "deconstruct": false,
+      "deflect": false,
       "disarm": false,
+      "double": false,
+      "drainCharge": false,
+      "echo": false,
       "entangle": false,
       "explode": false,
+      "extinguish": false,
+      "feint": false,
+      "fiery": false,
+      "firstArc": false,
+      "flexibleLine": false,
+      "force": false,
+      "freeHands": false,
+      "fueled": false,
+      "gearArray": false,
+      "grapple": false,
+      "gravitation": false,
+      "guided": false,
+      "harrying": false,
+      "holyWater": false,
+      "hybrid": false,
+      "ignite": false,
+      "indirect": false,
       "injection": true,
+      "integrated": false,
       "line": false,
+      "living": false,
+      "lockdown": false,
+      "mind-affecting": false,
+      "mine": false,
+      "mire": false,
+      "modal": false,
+      "necrotic": false,
       "nonlethal": false,
       "one": true,
       "operative": false,
       "penetrating": false,
+      "polarize": false,
+      "polymorphic": false,
       "powered": false,
+      "professional": false,
+      "propel": false,
+      "punchGun": false,
       "qreload": false,
+      "radioactive": false,
       "reach": false,
+      "recall": false,
+      "regrowth": false,
+      "relic": false,
+      "reposition": false,
+      "scramble": false,
+      "shape": false,
+      "shatter": false,
+      "shells": false,
+      "shield": false,
       "sniper": false,
       "stun": false,
+      "subtle": false,
+      "sunder": false,
+      "swarm": false,
+      "tail": false,
+      "teleportive": false,
+      "thought": false,
+      "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
-      "unwieldy": false
+      "unbalancing": false,
+      "underwater": false,
+      "unwieldy": false,
+      "variantBoost": false,
+      "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 40
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
-    "source": " Character Operations Manual",
+    "source": "Character Operations Manual",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -137,12 +258,8 @@
       "per": "",
       "value": 0
     },
+    "weaponCategory": "uncategorized",
     "weaponType": "smallA"
   },
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/needler-pistol-advanced.webp",
-  "permission": {
-    "default": 0,
-    "umHu8DFnCrMQVZ37": 3
-  }
+  "img": "systems/sfrpg/icons/equipment/weapons/needler-pistol-advanced.webp"
 }

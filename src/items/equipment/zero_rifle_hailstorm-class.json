@@ -1,6 +1,6 @@
 {
-  "_id": "FOaxqrk16RLMNQz9",
-  "name": "Void rifle, crypt class",
+  "_id": "31z0GGL6EMG9ZdDe",
+  "name": "Zero rifle, hailstorm-class",
   "type": "weapon",
   "data": {
     "type": "",
@@ -15,6 +15,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shape": "",
@@ -22,15 +23,35 @@
       "value": null
     },
     "attackBonus": 0,
-    "attuned": false,
-    "bulk": "1",
-    "capacity": {
-      "max": 20,
-      "value": 20
+    "attributes": {
+      "ac": {
+        "value": "5"
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": "21"
+      },
+      "hp": {
+        "max": "39",
+        "value": 39
+      },
+      "size": "medium",
+      "sturdy": true
     },
-    "chatFlavor": "Antibiological",
+    "attuned": false,
+    "bulk": "2",
+    "capacity": {
+      "max": 40,
+      "value": 40
+    },
+    "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -38,9 +59,20 @@
             "fusion"
           ],
           "affectsEncumbrance": true,
-          "amount": 6,
+          "amount": 8,
           "subtype": "fusion",
           "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "goods"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         },
         {
           "type": "slot",
@@ -55,28 +87,33 @@
       ]
     },
     "critical": {
-      "effect": "Suffocate",
-      "parts": [
-        {
-          "formula": "",
-          "operator": "",
-          "types": {}
-        }
-      ]
+      "effect": "Staggered",
+      "parts": []
     },
     "damage": {
       "parts": [
         {
-          "formula": "1d8",
-          "operator": "",
+          "name": "",
+          "formula": "2d8",
           "types": {
-            "cryo": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": ""
     },
@@ -85,18 +122,20 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
-    "level": 6,
+    "isActive": null,
+    "level": 8,
     "modifiers": [],
-    "price": 4400,
+    "price": 10100,
     "proficient": false,
     "properties": {
       "aeon": false,
-      "amm": true,
+      "amm": false,
       "analog": false,
-      "antibiological": true,
+      "antibiological": false,
       "archaic": false,
       "aurora": false,
       "automatic": false,
@@ -106,6 +145,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -124,11 +164,13 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
       "holyWater": false,
+      "hybrid": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
@@ -149,14 +191,18 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
       "reach": false,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -169,44 +215,62 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
+      "unbalancing": false,
       "underwater": false,
       "unwieldy": false,
       "variantBoost": false,
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 60
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "AR",
+    "source": "CRB pg. 176",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
     },
     "usage": {
       "per": "shot",
-      "value": 1
+      "value": 2
     },
     "uses": {
-      "max": 0,
+      "max": null,
       "per": "",
-      "value": 1
+      "value": null
     },
     "weaponCategory": "cryo",
     "weaponType": "longA"
   },
-  "flags": {},
-  "folder": null,
-  "img": "icons/svg/mystery-man.svg"
+  "img": "systems/sfrpg/icons/equipment/weapons/scattergun-snub.webp"
 }
