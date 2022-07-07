@@ -1,6 +1,7 @@
 import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
+import { ActorSFRPG } from "../actor/actor.js"
 
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
@@ -841,6 +842,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async _rollStarshipAttack(options = {}) {
         const parts = (this.actor.data.data.crew.useNPCCrew) ? ["@gunner.skills.gun.mod"] : ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
+        
+        let quadrant = this.data.data.mount.arc;
+        quadrant = quadrant.charAt(0).toUpperCase() + quadrant.slice(1);
+        if (this.actor.data.data.attributes.systems[`weaponsArray${quadrant}`].mod !== 0) parts.push(`@ship.attributes.systems.weaponsArray${quadrant}.mod`);
+        if (this.actor.data.data.attributes.systems.powerCore.modOther !== 0) parts.push(`@ship.attributes.systems.powerCore.modOther`);
 
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
         
@@ -859,72 +865,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         rollContext.setMainContext("");
 
         this.actor?.setupRollContexts(rollContext, ["gunner"]);
-        
-        //Apply critical damage conditions to weapon arcs
-        const quadrantArray = ["forward", "port", "starboard", "aft"];
-        const quadrant = this.data.data.mount.arc;
-        
-        if (quadrantArray.includes(quadrant)) {
-            const slug = quadrant.charAt(0).toUpperCase() + quadrant.slice(1);
-            const quadrantMod = `@ship.attributes.systems.weaponsArray${slug}.mod`;
-            parts.push(quadrantMod);
-        } else if (quadrant === "turret") {
-            const options = [
-                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Forward"),
-                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Port"),
-                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Starboard"),
-                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Aft")
-            ];
-            const results = await ChoiceDialog.show(
-                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Title", {name: game.i18n.localize("SFRPG.ShipSystems.StarshipArcs.Turret")}),
-                game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Message"),
-                {
-                    quadrant: {
-                        name: game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Quadrant"),
-                        options: options,
-                        default: options[0]
-                    }
-                }
-            );
-
-            if (results.resolution === 'cancel') {
-                return;
-            };
-
-            /* Selecting an arc doesn't actually do anything at the moment, but if we ever need to, we can build off of this.
-            const selectedOption = options.indexOf(results.result.quadrant);
-            if (selectedOption === 1) {
-                slug = "Port";
-            } else if (selectedOption === 2) {
-                slug = "Starboard";
-            } else if (selectedOption === 3) {
-                slug = "Aft";
-            } else {
-                slug = "Forward";
-            }*/
-            
-            const criticalStatus = [
-                this.actor.data.data.attributes.systems.weaponsArrayForward.value,
-                this.actor.data.data.attributes.systems.weaponsArrayPort.value,
-                this.actor.data.data.attributes.systems.weaponsArrayStarboard.value,
-                this.actor.data.data.attributes.systems.weaponsArrayAft.value
-            ];
-            
-            let rollExplaination = "";
-            
-            if (criticalStatus.includes("wrecked")) {
-                rollExplaination = `-4[${game.i18n.localize("SFRPG.StarshipSheet.Critical.Status.Wrecked")}]`;
-            } else if (criticalStatus.includes("malfunctioning")) {
-                rollExplaination = `-4[${game.i18n.localize("SFRPG.StarshipSheet.Critical.Status.Malfunctioning")}]`;
-            } else if (criticalStatus.includes("glitching")) {
-                rollExplaination = `-2[${game.i18n.localize("SFRPG.StarshipSheet.Critical.Status.Glitching")}]`;
-            };
-            
-            if (rollExplaination.length > 0) parts.push(rollExplaination);
-        };
-        
-        //Apply Power Core penalties, if any.
-        if (this.actor.data.data.attributes.systems.powerCore.modOther < 0) parts.push("@ship.attributes.systems.powerCore.modOther");
 
         /** Create additional modifiers. */
         const additionalModifiers = [
