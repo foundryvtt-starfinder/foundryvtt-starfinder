@@ -1,6 +1,6 @@
 {
-  "_id": "e6Yp9OyvfiIkGTss",
-  "name": "Grappler",
+  "_id": "i2KyNm4dlPekGBH4",
+  "name": "Blunt",
   "type": "feat",
   "data": {
     "type": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature gains a +2 racial bonus to grapple combat maneuvers.</p>"
+      "value": "<p>Urogs are matter-of-fact creatures who value frankness and getting to the heart of a matter far more than protecting the feelings of others. Urogs take a &ndash;2 penalty to @Compendium[sfrpg.skills.dQBMp7qTBkl8ku3c]{Bluff} and @Compendium[sfrpg.skills.QGSqQDA9P7oYQp8z]{Diplomacy} checks</p>"
     },
     "descriptors": {
       "acid": false,
@@ -82,19 +82,34 @@
     "isActive": null,
     "modifiers": [
       {
-        "_id": "cf3b63d5-0850-450a-8d47-9f64b7487c90",
-        "name": "Grappler",
-        "type": "racial",
+        "_id": "fddae927-0a32-4a48-8007-e675dc9d8894",
+        "name": "Blunt",
+        "type": "untyped",
         "condition": "",
-        "effectType": "melee-attacks",
-        "enabled": false,
-        "max": 2,
-        "modifier": "2",
-        "modifierType": "formula",
-        "notes": "This creature gains a +2 racial bonus to grapple combat maneuvers.",
+        "effectType": "skill",
+        "enabled": true,
+        "max": -2,
+        "modifier": "-2",
+        "modifierType": "constant",
+        "notes": "Urogs are matter-of-fact creatures who value frankness and getting to the heart of a matter far more than protecting the feelings of others. Urogs take a –2 penalty to  Bluff and  Diplomacy checks",
         "source": "Racial",
         "subtab": "misc",
-        "valueAffected": "cold"
+        "valueAffected": "blu"
+      },
+      {
+        "_id": "62a24715-8a2c-4293-9773-26c41639d700",
+        "name": "Blunt",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": -2,
+        "modifier": "-2",
+        "modifierType": "constant",
+        "notes": "Urogs are matter-of-fact creatures who value frankness and getting to the heart of a matter far more than protecting the feelings of others. Urogs take a –2 penalty to  Bluff and  Diplomacy checks",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "dip"
       }
     ],
     "range": {
@@ -107,14 +122,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Urog",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "AA1 pg. 116",
     "target": {
       "type": "",
       "value": ""

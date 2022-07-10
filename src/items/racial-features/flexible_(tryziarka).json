@@ -1,6 +1,6 @@
 {
-  "_id": "e6Yp9OyvfiIkGTss",
-  "name": "Grappler",
+  "_id": "r7PRiKxA8uyx7lN9",
+  "name": "Flexible (Tryziarka)",
   "type": "feat",
   "data": {
     "type": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature gains a +2 racial bonus to grapple combat maneuvers.</p>"
+      "value": "<p>Tryziarkas are flexible, with double-jointed elbows and knees. They gain a +2 racial bonus to @Compendium[sfrpg.skills.6by4xbwlnTJWmiOG]{Acrobatics} checks; this increases to +4 when trying to escape a grapple.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -82,19 +82,34 @@
     "isActive": null,
     "modifiers": [
       {
-        "_id": "cf3b63d5-0850-450a-8d47-9f64b7487c90",
-        "name": "Grappler",
+        "_id": "fddae927-0a32-4a48-8007-e675dc9d8894",
+        "name": "Flexible",
         "type": "racial",
         "condition": "",
-        "effectType": "melee-attacks",
-        "enabled": false,
+        "effectType": "skill",
+        "enabled": true,
         "max": 2,
         "modifier": "2",
-        "modifierType": "formula",
-        "notes": "This creature gains a +2 racial bonus to grapple combat maneuvers.",
+        "modifierType": "constant",
+        "notes": "Tryziarkas are flexible, with double-jointed elbows and knees. They gain a +2 racial bonus to  Acrobatics checks; this increases to +4 when trying to escape a grapple.",
         "source": "Racial",
         "subtab": "misc",
-        "valueAffected": "cold"
+        "valueAffected": "acr"
+      },
+      {
+        "_id": "62a24715-8a2c-4293-9773-26c41639d700",
+        "name": "Flexible against grapple",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "Tryziarkas are flexible, with double-jointed elbows and knees. They gain a +2 racial bonus to  Acrobatics checks; this increases to +4 when trying to escape a grapple.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "acr"
       }
     ],
     "range": {
@@ -107,14 +122,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Tryziarka",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "AA4 pg. 126",
     "target": {
       "type": "",
       "value": ""

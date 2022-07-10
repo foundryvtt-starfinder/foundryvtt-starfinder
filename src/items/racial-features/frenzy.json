@@ -1,6 +1,6 @@
 {
-  "_id": "e6Yp9OyvfiIkGTss",
-  "name": "Grappler",
+  "_id": "xE7XXWDV5lxfEkHF",
+  "name": "Frenzy",
   "type": "feat",
   "data": {
     "type": "",
@@ -11,7 +11,7 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
       "cost": 0
     },
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature gains a +2 racial bonus to grapple combat maneuvers.</p>"
+      "value": "<p>Once per day when a significant enemy causes an ally to take Hit Point damage, a trox can fly into a frenzy, gaining a +2 racial bonus to melee attack rolls and a &ndash;2 penalty to AC for 1 minute.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -76,25 +76,40 @@
     },
     "duration": {
       "units": "",
-      "value": ""
+      "value": "1 minute"
     },
     "formula": "",
     "isActive": null,
     "modifiers": [
       {
-        "_id": "cf3b63d5-0850-450a-8d47-9f64b7487c90",
-        "name": "Grappler",
+        "_id": "fddae927-0a32-4a48-8007-e675dc9d8894",
+        "name": "Frenzy",
         "type": "racial",
         "condition": "",
         "effectType": "melee-attacks",
-        "enabled": false,
+        "enabled": true,
         "max": 2,
         "modifier": "2",
-        "modifierType": "formula",
-        "notes": "This creature gains a +2 racial bonus to grapple combat maneuvers.",
+        "modifierType": "constant",
+        "notes": "Once per day when a significant enemy causes an ally to take Hit Point damage, a trox can fly into a frenzy, gaining a +2 racial bonus to melee attack rolls and a –2 penalty to AC for 1 minute.",
         "source": "Racial",
         "subtab": "misc",
-        "valueAffected": "cold"
+        "valueAffected": "reflex"
+      },
+      {
+        "_id": "62a24715-8a2c-4293-9773-26c41639d700",
+        "name": "Frenzy",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": -2,
+        "modifier": "-2",
+        "modifierType": "constant",
+        "notes": "Once per day when a significant enemy causes an ally to take Hit Point damage, a trox can fly into a frenzy, gaining a +2 racial bonus to melee attack rolls and a –2 penalty to AC for 1 minute.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
       }
     ],
     "range": {
@@ -107,22 +122,22 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Trox",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "AA2 pg. 126",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
-      "per": "",
-      "value": null
+      "max": 1,
+      "per": "day",
+      "value": 1
     }
   },
   "img": "icons/svg/mystery-man.svg"

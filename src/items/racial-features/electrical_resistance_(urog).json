@@ -1,6 +1,6 @@
 {
-  "_id": "e6Yp9OyvfiIkGTss",
-  "name": "Grappler",
+  "_id": "1QGmBEv3ymiW301f",
+  "name": "Electrical Resistance (Urog)",
   "type": "feat",
   "data": {
     "type": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature gains a +2 racial bonus to grapple combat maneuvers.</p>"
+      "value": "<p>Urogs have electricity resistance 5, which stacks with one other source of electricity resistance.</p>\n<p><br /><em>System does not currently support stacked Energy Resistance bonuses. Emulate stacking by editing the modifiers in the Modifier tab.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -82,19 +82,19 @@
     "isActive": null,
     "modifiers": [
       {
-        "_id": "cf3b63d5-0850-450a-8d47-9f64b7487c90",
-        "name": "Grappler",
-        "type": "racial",
+        "_id": "fddae927-0a32-4a48-8007-e675dc9d8894",
+        "name": "Electrical Resistance",
+        "type": "untyped",
         "condition": "",
-        "effectType": "melee-attacks",
-        "enabled": false,
-        "max": 2,
-        "modifier": "2",
-        "modifierType": "formula",
-        "notes": "This creature gains a +2 racial bonus to grapple combat maneuvers.",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "Urogs have electricity resistance 5, which stacks with one other source of electricity resistance.",
         "source": "Racial",
         "subtab": "misc",
-        "valueAffected": "cold"
+        "valueAffected": "electricity"
       }
     ],
     "range": {
@@ -107,14 +107,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Urog",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "AA1 pg. 116",
     "target": {
       "type": "",
       "value": ""

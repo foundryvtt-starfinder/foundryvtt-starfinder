@@ -1,6 +1,6 @@
 {
-  "_id": "e6Yp9OyvfiIkGTss",
-  "name": "Grappler",
+  "_id": "ICBjLsdFY0avOwCK",
+  "name": "Fiendish Gloom",
   "type": "feat",
   "data": {
     "type": "",
@@ -11,15 +11,15 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "action",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
-      "shape": "",
-      "units": "none",
-      "value": null
+      "shape": "sphere",
+      "units": "ft",
+      "value": 20
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature gains a +2 racial bonus to grapple combat maneuvers.</p>"
+      "value": "<p>As a standard action, the tiefling causes light within 20 feet of her to decrease one step. This gloom lasts for up to 1 minute, but the tiefling can dismiss it as a swift action. Nonmagical light sources can&rsquo;t increase the light level in this area. Magical light can increase the light level in this area only if it&rsquo;s from an item or creature of a level or CR higher than that of the tiefling. A tiefling can use this ability once per day, plus a number of times equal to half her CR or level.</p>\n<p><br /><em>Update usage in the Details tab as character level allows.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -76,25 +76,40 @@
     },
     "duration": {
       "units": "",
-      "value": ""
+      "value": "1 minute"
     },
     "formula": "",
     "isActive": null,
     "modifiers": [
       {
         "_id": "cf3b63d5-0850-450a-8d47-9f64b7487c90",
-        "name": "Grappler",
+        "name": "Deceitful",
         "type": "racial",
         "condition": "",
-        "effectType": "melee-attacks",
-        "enabled": false,
+        "effectType": "skill",
+        "enabled": true,
         "max": 2,
         "modifier": "2",
-        "modifierType": "formula",
-        "notes": "This creature gains a +2 racial bonus to grapple combat maneuvers.",
+        "modifierType": "constant",
+        "notes": "Tieflings gain a +2 racial bonus to  Bluff and  Stealth checks.",
         "source": "Racial",
         "subtab": "misc",
-        "valueAffected": "cold"
+        "valueAffected": "blu"
+      },
+      {
+        "_id": "75e15cc3-f6ae-47b3-bac3-701275e3c89d",
+        "name": "Deceitful",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Tieflings gain a +2 racial bonus to  Bluff and  Stealth checks.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "ste"
       }
     ],
     "range": {
@@ -107,22 +122,22 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Tiefling",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "AA2 pg. 98",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
-      "per": "",
-      "value": null
+      "max": 1,
+      "per": "day",
+      "value": 1
     }
   },
   "img": "icons/svg/mystery-man.svg"

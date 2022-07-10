@@ -1,19 +1,19 @@
 {
-  "_id": "e6Yp9OyvfiIkGTss",
-  "name": "Grappler",
+  "_id": "C4qOwqSJbW7ZynKc",
+  "name": "Water Affinity",
   "type": "feat",
   "data": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "util",
     "activation": {
       "type": "",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -28,7 +28,23 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(@details.level.value * 2)",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
     "damageNotes": "",
     "description": {
@@ -36,10 +52,10 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature gains a +2 racial bonus to grapple combat maneuvers.</p>"
+      "value": "<p>Whenever an undine deals cold damage while either the undine or her target is swimming, or in precipitation or storms heavy enough to reduce visibility ranges, they deal an amount of additional damage equal to twice their level.</p>"
     },
     "descriptors": {
-      "acid": false,
+      "acid": true,
       "air": false,
       "calling": false,
       "chaotic": false,
@@ -80,23 +96,7 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [
-      {
-        "_id": "cf3b63d5-0850-450a-8d47-9f64b7487c90",
-        "name": "Grappler",
-        "type": "racial",
-        "condition": "",
-        "effectType": "melee-attacks",
-        "enabled": false,
-        "max": 2,
-        "modifier": "2",
-        "modifierType": "formula",
-        "notes": "This creature gains a +2 racial bonus to grapple combat maneuvers.",
-        "source": "Racial",
-        "subtab": "misc",
-        "valueAffected": "cold"
-      }
-    ],
+    "modifiers": [],
     "range": {
       "additional": "",
       "per": "",
@@ -107,14 +107,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "Undine",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "",
+    "source": "AP #18 pg. 58",
     "target": {
       "type": "",
       "value": ""

@@ -1,6 +1,6 @@
 {
-  "_id": "LZpRSdt90sDhOFSd",
-  "name": "Slow but Steady",
+  "_id": "sM8KLNy9c7lenEkC",
+  "name": "Fiendish Resistance",
   "type": "feat",
   "data": {
     "type": "",
@@ -36,7 +36,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Dwarves have a land speed of 20 feet, which is never modified when they are @Compendium[sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered} or wearing heavy armor. They also gain a +2 racial bonus to saving throws against @Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poisons}, spells, and spell-like abilities, and when standing on the ground they gain a +4 racial bonus to their KAC against bull rush and trip combat maneuvers.</p>\n<p><br /><em>Toggle on/off KAC bonus against&nbsp;<span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">bull rush and trip combat maneuvers in the Modifiers tab.</span></em></p>"
+      "value": "<p>Tieflings have resistance 5 to cold, electricity, and fire.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -82,34 +82,49 @@
     "isActive": null,
     "modifiers": [
       {
-        "_id": "74c07780-7f36-4cd1-899b-4147b1f9b439",
-        "name": "Slow but Steady",
-        "type": "racial",
-        "condition": "",
-        "effectType": "saves",
-        "enabled": false,
-        "max": 2,
-        "modifier": "2",
-        "modifierType": "formula",
-        "notes": "Dwarves gain a +2 racial bonus to saving throws against  Poisons, spells, and spell-like abilities.",
-        "source": "Racial",
-        "subtab": "misc",
-        "valueAffected": "ste"
-      },
-      {
-        "_id": "152e317b-815c-44df-8612-2d84ecd3f41d",
-        "name": "Slow but Steady - Combat Maneuvers",
+        "_id": "2b67683b-f116-44b2-b3ca-89304ea20be8",
+        "name": "Fiendish Resistance - Cold",
         "type": "untyped",
         "condition": "",
-        "effectType": "ac",
-        "enabled": false,
-        "max": 4,
-        "modifier": "4",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 5,
+        "modifier": "5",
         "modifierType": "constant",
-        "notes": "When standing on the ground a Dwarf gains a +4 racial bonus to their KAC against bull rush and trip combat maneuvers.",
+        "notes": "Tieflings have resistance 5 to cold, electricity, and fire.",
         "source": "Racial",
         "subtab": "misc",
-        "valueAffected": "kac"
+        "valueAffected": "cold"
+      },
+      {
+        "_id": "3f716504-5937-4b0f-a354-8b46bdea062d",
+        "name": "Fiendish Resistance - Electricity",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "Tieflings have resistance 5 to cold, electricity, and fire.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "electricity"
+      },
+      {
+        "_id": "0bbf53ed-94f3-49fe-9489-2489dd206d78",
+        "name": "Fiendish Resistance - Fire",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "Tieflings have resistance 5 to cold, electricity, and fire.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "fire"
       }
     ],
     "range": {
@@ -122,21 +137,21 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Dwarf",
+    "requirements": "Tiefling",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "CRB pg. 506",
+    "source": "AA2 pg. 98",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
       "max": null,
-      "per": "",
+      "per": "day",
       "value": null
     }
   },
