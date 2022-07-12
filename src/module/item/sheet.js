@@ -135,7 +135,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
                 data.placeholders.savingThrow = data.placeholders.savingThrow || {};
                 data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
-                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value || 10;
+                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value ?? 10;
                 
                 this.item.data.flags.placeholders = data.placeholders;
                 this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
@@ -154,7 +154,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
                 data.placeholders.savingThrow = data.placeholders.savingThrow || {};
                 data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
-                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value || 10;
+                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value ?? 10;
                 
                 this.item.data.flags.placeholders = data.placeholders;
                 this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)

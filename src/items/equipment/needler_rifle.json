@@ -8,7 +8,7 @@
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "eac",
+    "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
       "type": "none",
@@ -50,7 +50,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -93,10 +93,18 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d6",
-          "operator": "",
           "types": {
-            "fire": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
@@ -137,6 +145,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -155,6 +164,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -190,6 +200,7 @@
       "relic": false,
       "reposition": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -202,6 +213,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
       "unbalancing": false,
@@ -226,13 +238,27 @@
     },
     "source": "CRB pg. 177",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
     },
     "usage": {
-      "per": "round",
+      "per": "shot",
       "value": 1
     },
     "uses": {
