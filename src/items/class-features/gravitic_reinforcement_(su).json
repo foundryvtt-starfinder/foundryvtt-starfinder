@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "move",
@@ -29,10 +30,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl09_LabelName\">You can shore up your most frustrating weaknesses with balancing gravity. As a move action, you can gain a +1 enhancement bonus to your lowest saving throw for 1 minute, which persists even if you become unattuned, but not if you leave combat or a similar high-stress situation. If multiple saving throws are tied for lowest saving throw, choose one to benefit from this revelation. If you are in graviton mode while benefiting from this revelation, this bonus instead applies to all of your saving throws for as long as you are in graviton mode. This bonus increases by 1 at 8th level, and again every 6 levels thereafter.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl09_LabelName\"><sub style=\"font-family: var(--font-primary);\"><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/graviton.webp\" alt=\"\" width=\"20\" height=\"20\" />&nbsp;</sub></span><span id=\"ctl00_MainContent_DataListTalentsAll_ctl09_LabelName\">Graviton Revelation<br /></span><span id=\"ctl00_MainContent_DataListTalentsAll_ctl09_LabelName\">You can shore up your most frustrating weaknesses with balancing gravity. As a move action, you can ga</span><span id=\"ctl00_MainContent_DataListTalentsAll_ctl09_LabelName\">in a +1 enhancement bonus to your lowest saving throw for 1 minute, which persists even if you become unattuned, but not if you leave combat or a similar high-stress situation. If multiple saving throws are tied for lowest saving throw, choose one to benefit from this revelation. If you are in graviton mode while benefiting from this revelation, this bonus instead applies to all of your saving throws for as long as you are in graviton mode. This bonus increases by 1 at 8th level, and again every 6 levels thereafter.</span></p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,7 +44,28 @@
       "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": false,
+    "modifiers": [
+      {
+        "_id": "e2a86103-7cfb-4330-8df4-f79110b291b6",
+        "name": "Gravitic Reinforcement (Su)",
+        "type": "enhancement",
+        "condition": "",
+        "container": {
+          "actorId": "Qs2gOWidvlhDWFVK",
+          "itemId": "Q7qdtutQ7pjtXMzg"
+        },
+        "effectType": "saves",
+        "enabled": false,
+        "max": 2,
+        "modifier": "(lookupRange(@classes.solarian.levels, 0, 2, 1, 8, 2, 14, 3, 20, 4))",
+        "modifierType": "formula",
+        "notes": "you can gain a +1 enhancement bonus to your lowest saving throw for 1 minute, which persists even if you become unattuned, but not if you leave combat or a similar high-stress situation. If multiple saving throws are tied for lowest saving throw, choose one to benefit from this revelation. If you are in graviton mode while benefiting from this revelation, this bonus instead applies to all of your saving throws for as long as you are in graviton mode.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "lowest"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -52,6 +77,7 @@
       "value": null
     },
     "requirements": "2nd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -68,10 +94,5 @@
       "value": 0
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/graviton.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "img": "systems/sfrpg/images/cup/gameplay/graviton.webp"
 }

@@ -15,6 +15,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shape": "",
@@ -49,6 +50,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -91,24 +93,36 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "-",
-          "operator": "",
           "types": {
-            "": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>A shield projector is a heavy weapon that encases its target in a short-duration force field, akin to that produced by an armor upgrade. Such force fields are of limited strength, but higher power shield projectors can create a stronger protective barrier around the target. Shield projectors see the most use among security forces assigned to protect diplomats and high-profile celebrities. Available models&mdash;from the least to most powerful&mdash;&nbsp;include sentry, defender, guardian, and warden shield projectors.</p>"
+      "value": "<p>A shield projector is a heavy weapon that encases its target in a short-duration force field, akin to that produced by an armor upgrade. Such force fields are of limited strength, but higher power shield projectors can create a stronger protective barrier around the target. Shield projectors see the most use among security forces assigned to protect diplomats and high-profile celebrities. Available models&mdash;from the least to most powerful&mdash;&nbsp;include sentry, defender, guardian, and warden shield projectors.</p>\n<p><strong>Shield:</strong> 4d12</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
@@ -131,6 +145,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -149,6 +164,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -175,6 +191,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -183,7 +200,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": true,
       "sniper": false,
@@ -196,6 +215,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -205,12 +225,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 40
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -218,6 +240,22 @@
     },
     "source": "AR pg. 16",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -234,7 +272,5 @@
     "weaponCategory": "uncategorized",
     "weaponType": "smallA"
   },
-  "effects": [],
-  "flags": {},
   "img": "systems/sfrpg/icons/equipment/weapons/nil-grenade-launcher-merc.webp"
 }

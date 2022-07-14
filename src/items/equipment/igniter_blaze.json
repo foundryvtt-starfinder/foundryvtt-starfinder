@@ -1,6 +1,6 @@
 {
   "_id": "pt6oWh0ZTojdvEOS",
-  "name": "Igniter, Blaze",
+  "name": "Igniter, blaze",
   "type": "weapon",
   "data": {
     "type": "",
@@ -15,6 +15,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shape": "",
@@ -49,6 +50,7 @@
     "chatFlavor": "Ignite 3d6",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -70,7 +72,15 @@
           "formula": "3d6",
           "operator": "",
           "types": {
-            "fire": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
@@ -78,14 +88,23 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "-",
-          "operator": "",
           "types": {
-            "": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
@@ -121,6 +140,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -139,6 +159,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -165,6 +186,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -173,6 +195,7 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
       "shatter": false,
       "shells": false,
@@ -187,6 +210,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
       "unbalancing": false,
@@ -196,12 +220,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 80
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -209,6 +235,22 @@
     },
     "source": "ARM, p.38",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -225,11 +267,5 @@
     "weaponCategory": "flame",
     "weaponType": "longA"
   },
-  "effects": [],
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  }
+  "img": "icons/svg/mystery-man.svg"
 }

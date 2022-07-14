@@ -1,0 +1,109 @@
+{
+  "_id": "QopuFVX0mdGrmpSy",
+  "name": "Spell Siphon (Su)",
+  "type": "feat",
+  "data": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "reaction",
+      "condition": "",
+      "cost": null
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@@Compendium[sfrpg.class-features.SRkvq0GXYm3Wi6ze]{Spellbrawler}</p>\n<p>After you deal damage to a creature within 30 feet with an attack, you can spend 2 Resolve Points (or 1 Resolve Point if the attack was a critical hit) as a reaction to drain a portion of that creature&rsquo;s magical energy (Will negates) to empower your next attack. If the creature fails its saving throw, it loses one spell slot of the highest level it knows, as if it had expended it. If the creature has only spell-like abilities, it loses one daily use of the highest-level spell-like ability it can cast (determined randomly). If the creature can&rsquo;t cast spells or spell-like abilities, this ability has no effect, and you regain the Resolve Points expended.</p>\n<p>If you successfully drain a spell or spell-like ability, you gain a +1 enhancement bonus to AC until the end of your next turn. When you deal damage with a weapon attack, you can dismiss this AC bonus to increase the damage dealt to one target by 1d6 per level of the drained spell or spell-like ability.</p>"
+    },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "34eb1671-5143-46dd-adda-3426e82e9d18",
+        "name": "Spell Siphon (Su)",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "ed8794ab-c790-46ef-aee8-b9766381c2d5",
+        "name": "Spell Siphon (Su)",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "Activate only once the Arcane Armor (Su) feature has been acquired.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "ft",
+      "value": 30
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "5th Technique",
+    "rollNotes": "",
+    "save": {
+      "type": "will",
+      "dc": "10+floor(@classes.soldier.levels/2) + (@classes.soldier.keyAbilityMod)",
+      "descriptor": "negate"
+    },
+    "source": "GM pg. 32",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    }
+  },
+  "img": "icons/svg/mystery-man.svg"
+}

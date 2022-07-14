@@ -15,6 +15,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shape": "",
@@ -49,6 +50,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -91,7 +93,15 @@
           "formula": "2",
           "operator": "",
           "types": {
-            "electricity": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
@@ -99,16 +109,27 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d6",
-          "operator": "",
           "types": {
-            "electricity": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Arc pistols fire deadly, stunning blasts of electricity at ranged targets. They have a two-pronged emitter that directs the electrical blast and a bulky chamber that holds the capacitor.</p>"
     },
@@ -117,6 +138,7 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
@@ -139,6 +161,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -157,6 +180,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -183,6 +207,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -191,7 +216,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -204,6 +231,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -213,12 +241,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 50
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -226,6 +256,22 @@
     },
     "source": "CRB pg. 173",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -242,7 +288,5 @@
     "weaponCategory": "shock",
     "weaponType": "smallA"
   },
-  "effects": [],
-  "flags": {},
   "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp"
 }

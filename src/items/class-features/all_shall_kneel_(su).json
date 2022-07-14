@@ -4,11 +4,12 @@
   "type": "feat",
   "data": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
       "type": "move",
       "condition": "",
@@ -16,9 +17,9 @@
     },
     "area": {
       "effect": "",
-      "shape": "",
+      "shape": "sphere",
       "units": "ft",
-      "value": null
+      "value": 20
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -29,12 +30,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<div title=\"Page 56\">\n<div>\n<div>\n<p>Exerting your will upon the universe, you generate an aura that brings your foes to their knees (or similar joints). When you&rsquo;re fully graviton-attuned, as a move action, you can generate a 20-foot-radius aura of submission. An enemy that ends its turn within the aura must attempt a Fortitude save. On a failure, that creature gains the overburdened condition until the end of its next turn. At 17th level, a creature that fails the save instead gains the @Compendium[sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned} condition until the end of its next turn. This aura lasts for 1 round plus 1 round for every 4 solarian levels you have, or until you become photon-attuned.</p>\n<p><sub>Source AP #35 pg. 53</sub></p>\n</div>\n</div>\n</div>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p><sub style=\"font-family: var(--font-primary);\"><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/graviton.webp\" alt=\"\" width=\"20\" height=\"20\" />&nbsp;</sub>Graviton Revelation<br />Exerting your will upon the universe, you generate an aura that brings your foes to their knees (or similar joints). When you&rsquo;re fully graviton-attuned, as a move action, you can generate a 20-foot-radius aura of submission. An enemy that ends its turn within the aura must attempt a Fortitude save. On a failure, that creature gains the overburdened condition until the end of its next turn. At 17th level, a creature that fails the save instead gains the @Compendium[sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned} condition until the end of its next turn. This aura lasts for 1 round plus 1 round for every 4 solarian levels you have, or until you become photon-attuned.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -55,12 +57,13 @@
       "value": null
     },
     "requirements": "Zenith Revelation",
+    "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
+      "descriptor": "negate"
     },
-    "source": "Solarian",
+    "source": "AP #35 pg. 53",
     "target": {
       "type": "",
       "value": ""
@@ -71,7 +74,5 @@
       "value": 0
     }
   },
-  "effects": [],
-  "flags": {},
   "img": "systems/sfrpg/images/cup/gameplay/graviton.webp"
 }

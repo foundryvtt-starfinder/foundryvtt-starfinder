@@ -4,12 +4,20 @@
 /*  Chat Cards
 /* ----------------------------------------- */
 
+.app.chat-popout .chat-message,
 #chat-log .message {
   background: @sheetBackground;
   font-size: 13px;
   position: relative;
 }
-
+#chat-log .message.whisper {
+  background-color: #7076bf66;
+  border: 2px solid #7096bf;
+}
+#chat-log .message.blind {
+  background-color: #ffcafd66;
+  border: 2px solid #d87fd6;
+}
 #chat-form {
   textarea {
     background: @sheetBackground;
@@ -136,6 +144,7 @@
     font-weight: bold;
   }
 }
+
 
 .sfrpg {
   &.chat-card {

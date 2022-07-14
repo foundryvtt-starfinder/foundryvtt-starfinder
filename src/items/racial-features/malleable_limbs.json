@@ -1,0 +1,189 @@
+{
+  "_id": "6SNIQWVObbqxY03N",
+  "name": "Malleable Limbs",
+  "type": "feat",
+  "data": {
+    "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>Lacking an internal skeleton, a brakim can change her limbs easily. This adaptability grants a brakim a +4 racial bonus to @Compendium[sfrpg.skills.HsCWctv7usPI6Gvd]{Athletics} checks to climb and to swim. If a brakim loses a limb or digit, it regrows in 1d4 hours. In addition, as a full action, a brakim can change up to all four of her limbs to give herself one of the following advantages.</p>\n<ul>\n<li>A brakim can stretch her limbs. A stretched arm has 5 feet of additional reach. A stretched leg gives 5 feet of additional height. Stretched limbs are weak for combat, so a brakim takes a &ndash;2 penalty to attack rolls and gains no Strength bonus to damage with them. In addition, while her legs are stretched, a brakim can&rsquo;t run or charge.</li>\n<li>A brakim can modify her arms for locomotion, moving as a quadruped and gaining a 10-foot enhancement bonus to her speed. While a brakim&rsquo;s arms are modified this way, she can&rsquo;t wield or hold objects that require two hands.</li>\n<li>A brakim can modify her legs and feet to be manipulators like arms and hands, respectively. In this mode, a brakim can wield or hold up to four hands worth of weapons or equipment. However, while a brakim holds an object with her modified foot, she takes a 10-foot penalty to her speed. While she holds an object that requires two hands with her feet and legs, she can move only by crawling. If a brakim wants to hold an object with every hand and foot, she must be @Compendium[sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone}.</li>\n<li>As a move action, or a reaction when grabbed or otherwise held by a limb, a brakim can detach her limbs. She takes 1 damage directly to her Hit Points for each limb she sheds.</li>\n</ul>\n<p><br /><em>Toggle on/off the selected effect in the Modifiers tab. The Stretched limbs modifier assumes this creature if only giving the basic strength mod bonus to melee damage. Please account for this if other features effect the melee damage of this creature.</em></p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "2b67683b-f116-44b2-b3ca-89304ea20be8",
+        "name": "Malleable Limbs - Stretched limbs",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": -2,
+        "modifier": "-2",
+        "modifierType": "constant",
+        "notes": "A brakim can stretch her limbs. A stretched arm has 5 feet of additional reach. A stretched leg gives 5 feet of additional height. Stretched limbs are weak for combat, so a brakim takes a –2 penalty to attack rolls and gains no Strength bonus to damage with them. In addition, while her legs are stretched, a brakim can’t run or charge.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "dip"
+      },
+      {
+        "_id": "3f716504-5937-4b0f-a354-8b46bdea062d",
+        "name": "Malleable Limbs - Stretched limbs",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "-(@abilities.str.mod)",
+        "modifierType": "constant",
+        "notes": "A brakim can stretch her limbs. A stretched arm has 5 feet of additional reach. A stretched leg gives 5 feet of additional height. Stretched limbs are weak for combat, so a brakim takes a –2 penalty to attack rolls and gains no Strength bonus to damage with them. In addition, while her legs are stretched, a brakim can’t run or charge.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "2a9912f6-57e9-42d4-b071-6b6118a2d957",
+        "name": "Malleable Limbs - Quadruped",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": false,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "A brakim can modify her arms for locomotion, moving as a quadruped and gaining a 10-foot enhancement bonus to her speed. While a brakim’s arms are modified this way, she can’t wield or hold objects that require two hands.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "land"
+      },
+      {
+        "_id": "b1ff344c-4167-466f-9e4f-81d6b7099ad1",
+        "name": "Malleable Limbs - Four hands",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": false,
+        "max": -10,
+        "modifier": "-10",
+        "modifierType": "constant",
+        "notes": "A brakim can modify her legs and feet to be manipulators like arms and hands, respectively. In this mode, a brakim can wield or hold up to four hands worth of weapons or equipment. However, while a brakim holds an object with her modified foot, she takes a 10-foot penalty to her speed. While she holds an object that requires two hands with her feet and legs, she can move only by crawling. If a brakim wants to hold an object with every hand and foot, she must be prone.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "land"
+      },
+      {
+        "_id": "2dd796c6-5e79-4191-a3f2-0efaa191193f",
+        "name": "Malleable Limbs - Base",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 4,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "Lacking an internal skeleton, a brakim can change her limbs easily. This adaptability grants a brakim a +4 racial bonus to Athletics checks to climb and to swim.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "ath"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "Brakim",
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "AP #8 pg. 48",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    }
+  },
+  "img": "icons/svg/mystery-man.svg"
+}

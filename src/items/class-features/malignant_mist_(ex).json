@@ -8,7 +8,8 @@
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "util",
     "activation": {
       "type": "",
       "condition": "",
@@ -27,8 +28,25 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "1d6",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
@@ -55,9 +73,10 @@
       "value": null
     },
     "requirements": "1st Level",
+    "rollNotes": "",
     "save": {
       "type": "fort",
-      "dc": "",
+      "dc": "10+floor(@classes.nanocyte.levels/2) + @abilities.con.mod",
       "descriptor": "negate"
     },
     "source": "TR, p. 12",
