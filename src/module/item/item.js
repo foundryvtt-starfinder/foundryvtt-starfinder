@@ -842,6 +842,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async _rollStarshipAttack(options = {}) {
         let parts = [];
+        
         if (this.actor.data.data.crew.useNPCCrew) { //If NPC, use the gunnery skill bonus
             parts = ["@gunner.skills.gun.mod"]
         } else if (this.data.data.weaponType === "ecm") { //If the weapon is an ECM weapon and not an NPC, use Computers ranks + Int (NPC ECM weapons still use gunnery)
@@ -849,6 +850,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         } else { //If not an ECM weapon and not an NPC, use BAB/Piloting + Dex
             parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"]
         };
+
+        let quadrant = this.data.data.mount.arc;
+        quadrant = quadrant.charAt(0).toUpperCase() + quadrant.slice(1);
+        if (this.actor.data.data.attributes.systems[`weaponsArray${quadrant}`].mod !== 0) parts.push(`@ship.attributes.systems.weaponsArray${quadrant}.mod`);
+        if (this.actor.data.data.attributes.systems.powerCore.modOther !== 0) parts.push(`@ship.attributes.systems.powerCore.modOther`);
 
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
         
