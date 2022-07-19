@@ -74,6 +74,8 @@ Hooks.once('init', async function () {
 ==================================================`
     );
 
+    CONFIG.compatibility.mode = 0; // COMPATIBILITY_MODES.SILENT
+
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
 
@@ -161,7 +163,17 @@ Hooks.once('init', async function () {
 
     CONFIG.Token.documentClass = SFRPGTokenDocument;
 
-    CONFIG.fontFamilies.push("Exo2");
+    if (isNewerVersion(game.version, '10.0')) {
+        CONFIG.fontDefinitions["Exo2"] = {
+            editor: true,
+            fonts: [
+            {urls: ["../systems/sfrpg/fonts/Exo2-VariableFont_wght.ttf"]},
+            {urls: ["../systems/sfrpg/fonts/Exo2-Italic-VariableFont_wght.ttf"], weight: 700}
+            ]
+        };
+    } else {
+        CONFIG.fontFamilies.push("Exo2");
+    }
     CONFIG.defaultFontFamily = "Exo 2";
 
     CONFIG.canvasTextStyle = new PIXI.TextStyle({
@@ -272,9 +284,13 @@ Hooks.once("ready", async () => {
     canvas.hud.token = new SFRPGTokenHUD();
 
     console.log("Starfinder | [READY] Overriding canvas drop handler");
-    if (canvas.initialized) {
-        defaultDropHandler = canvas._dragDrop.callbacks.drop;
-        canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+    if (isNewerVersion(game.version, '10.0')) {
+        console.warn("Starfinder | [READY] Canvas drop handler not yet implemented.");
+    } else {
+        if (canvas.initialized) {
+            defaultDropHandler = canvas._dragDrop.callbacks.drop;
+            canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+        }
     }
 
     console.log("Starfinder | [READY] Setting up AOE template overrides");
