@@ -630,7 +630,7 @@ function setupHandlebars() {
         const isOwner = Boolean(options.hash['isOwner']);
         const rolls = Boolean(options.hash['rolls']);
         const rollData = options.hash['rollData'];
-        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: isOwner, documents: true, rolls: rolls, rollData: rollData});
+        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: isOwner, documents: true, rolls: rolls, rollData: rollData, async: false});
         const maxSize = Boolean(options.hash['maxSize']) ? ` style="flex: 1;"` : "";
     
         // Construct the HTML

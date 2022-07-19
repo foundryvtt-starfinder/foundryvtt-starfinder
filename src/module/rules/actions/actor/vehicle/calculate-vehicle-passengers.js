@@ -3,7 +3,7 @@ export default function (engine) {
         const data = fact.data;
         const actor = fact.actor;
 
-        data.crew = mergeObject(data.crew ?? {}, {
+        const crewData = mergeObject(data.crew ?? {}, {
             complement: {
                 limit: 0,
                 actorIds: []
@@ -31,38 +31,38 @@ export default function (engine) {
             }
         };
 
-        for (const [key, crew] of Object.entries(data.crew)) {
+        for (const [key, crewRoleData] of Object.entries(crewData)) {
             if (key === "useNPCCrew") {
                 continue;
             }
 
-            if (!crew.actorIds) {
-                crew.actorIds = []
+            if (!crewRoleData.actorIds) {
+                crewRoleData.actorIds = []
             }
 
             const deadActors = [];
-            for (const crewActorId of crew.actorIds) {
-                const foundCrew = game?.actors?.get(crewActorId);
-                if (game?.actors && !foundCrew) {
-                    deadActors.push(crewActorId);
+            for (const crewRoleMemberActorId of crewRoleData.actorIds) {
+                const foundCrewMember = game?.actors?.get(crewRoleMemberActorId);
+                if (game?.actors && !foundCrewMember) {
+                    deadActors.push(crewRoleMemberActorId);
                     continue;
                 }
 
-                crewActors[key].actors.push(foundCrew);
+                crewActors[key].actors.push(foundCrewMember);
             }
 
             if (deadActors.length > 0) {
-                console.log(`Found ${deadActors.length} non-existent actors for vehicle '${fact.actor?.data?.name || fact.actorId}', crew type: ${key}`);
+                console.log(`Found ${deadActors.length} non-existent actors for vehicle '${fact.actor?.name ?? fact.actorId}', crew type: ${key}`);
                 for (const deadActorId of deadActors) {
-                    const deadActorIndex = crew.actorIds.indexOf(deadActorId);
+                    const deadActorIndex = crewRoleData.actorIds.indexOf(deadActorId);
                     if (deadActorIndex > -1) {
-                        crew.actorIds.splice(deadActorIndex, 1);
+                        crewRoleData.actorIds.splice(deadActorIndex, 1);
                     }
                 }
             }
         }
 
-        actor.data.crew = crewActors;
+        actor.computed.crew = crewActors;
 
         return fact;
     });

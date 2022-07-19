@@ -5,8 +5,8 @@ export default class RollContext {
         this.selectors = [];
     }
 
-    addContext(name, entity, data = null) {
-        this.allContexts[name] = {entity: entity, data: data ?? entity.data.data};
+    addContext(name, entity, entityDataOverride = null) {
+        this.allContexts[name] = {entity: entity, data: entityDataOverride ?? entity.system};
     }
 
     addSelector(target, options) {
@@ -111,7 +111,7 @@ export default class RollContext {
 
     static createActorRollContext(actor, dataOptions = {actorData: null, actorKey: "actor"}) {
         const rollContext = new RollContext();
-        if (actor && actor.data) {
+        if (actor?.system) {
             rollContext.addContext(dataOptions?.actorKey ?? "actor", actor, dataOptions?.actorData);
             rollContext.setMainContext(dataOptions?.actorKey ?? "actor");
             actor.setupRollContexts(rollContext);
@@ -126,7 +126,7 @@ export default class RollContext {
         rollContext.setMainContext("item");
 
         if (itemOwningActor) {
-            if (itemOwningActor.data) {
+            if (itemOwningActor.system) {
                 rollContext.addContext(dataOptions?.ownerKey ?? "owner", itemOwningActor, dataOptions?.ownerData);
                 rollContext.setMainContext(dataOptions?.ownerKey ?? "owner");
             }

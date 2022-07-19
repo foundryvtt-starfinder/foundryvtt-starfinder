@@ -158,7 +158,7 @@ function computeWealthForActor(actor, inventoryWealth) {
     wealth.inventory = Math.floor(inventoryWealth);
     wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.Inventory", {amount: moneyFormatter.format(wealth.inventory)}));
 
-    const actorData = actor.data.data;
+    const actorData = actor.system;
     if (actorData.currency && Object.entries(actorData.currency).length > 0) {
         for (const [currency, amount] of Object.entries(actorData.currency)) {
             const currencyValue = Number(amount);
@@ -197,7 +197,6 @@ export default function (engine) {
     engine.closures.add("calculateBulkAndWealth", (fact, context) => {
         const data = fact.data;
         const actor = fact.actor;
-        const actorData = actor.data.data;
 
         //console.warn(`Starting calculateBulkAndWealth for ${actor.name}`);
 
@@ -277,11 +276,8 @@ export default function (engine) {
             //console.log(`> ${item.name} has a total weight of ${itemBulk}, bringing the sum to ${totalWeight}`);
         }
 
-        actor.data.bulk = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
-        actor.data.wealth = computeWealthForActor(actor, totalWealth);
-        
-        data.wealth = actor.data.wealth;
-        data.bulk = actor.data.bulk;
+        data.bulk = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
+        data.wealth = computeWealthForActor(actor, totalWealth);
 
         //console.warn(`Finished calculateBulkAndWealth for ${actor.name}, total wealth: ${data.wealth.total}, total weight: ${totalWeight}`);
 

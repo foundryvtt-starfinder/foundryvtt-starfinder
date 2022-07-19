@@ -4,7 +4,6 @@ export default function (engine) {
     engine.closures.add("calculateEncumbrance", (fact, context) => {
         const data = fact.data;
         const actor = fact.actor;
-        const actorData = actor.data.data;
 
         let tooltip = [];
         if (data.encumbrance) {
@@ -81,10 +80,10 @@ export default function (engine) {
             rolledMods: encumbrance.rolledMods
         };
 
-        const _computeEncumbrance = (totalWeight, actorData) => {
+        const _computeEncumbrance = (totalWeight, data) => {
             const enc = {
-                max: actorData.attributes.encumbrance.max,
-                tooltip: actorData.attributes.encumbrance.tooltip,
+                max: data.attributes.encumbrance.max,
+                tooltip: data.attributes.encumbrance.tooltip,
                 value: totalWeight
             };
     
@@ -93,8 +92,7 @@ export default function (engine) {
             return enc;
         };
 
-        actor.data.encumbrance = _computeEncumbrance(actor.data.bulk, actorData);
-        data.encumbrance = actor.data.encumbrance;
+        data.encumbrance = _computeEncumbrance(data.bulk, data);
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

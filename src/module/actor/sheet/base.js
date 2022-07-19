@@ -58,19 +58,19 @@ export class ActorSheetSFRPG extends ActorSheet {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
-            data: duplicate(this.actor.data.data),
+            data: duplicate(this.document.system),
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
             options: this.options,
             editable: this.isEditable,
             cssClass: isOwner ? "editable" : "locked",
-            isCharacter: this.document.data.type === "character",
-            isShip: this.document.data.type === 'starship',
-            isVehicle: this.document.data.type === 'vehicle',
-            isDrone: this.document.data.type === 'drone',
-            isNPC: this.document.data.type === 'npc' || this.document.data.type === 'npc2',
-            isHazard: this.document.data.type === 'hazard',
+            isCharacter: this.document.type === "character",
+            isShip: this.document.type === 'starship',
+            isVehicle: this.document.type === 'vehicle',
+            isDrone: this.document.type === 'drone',
+            isNPC: this.document.type === 'npc' || this.document.type === 'npc2',
+            isHazard: this.document.type === 'hazard',
             config: CONFIG.SFRPG
         };
 
@@ -84,14 +84,15 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         if (!data.data?.details?.biography?.fullBodyImage)
         {
-            this.actor.data.data = mergeObject(this.actor.data.data, {
+            // Ensure full body image
+            this.actor.system = mergeObject(this.actor.system, {
                 details: {
                     biography: {
                         fullBodyImage: "systems/sfrpg/images/mystery-body.webp"
                     }
                 }
             }, {overwrite: false});
-            this.actor.data.data.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.webp";
+            this.actor.system.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.webp";
         }
 
         if (data.data.abilities) {
@@ -359,7 +360,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             if (trait.custom) {
                 trait.custom.split(';').forEach((c, i) => trait.selected[`custom${i + 1}`] = c.trim());
             }
-            trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
+            trait.cssClass = !isEmpty(trait.selected) ? "" : "inactive";
         }
     }
 
@@ -828,7 +829,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     _prepareSpellbook(data, spells) {
-        const actorData = this.actor.data.data;
+        const actorData = this.actor.system;
 
         const levels = {
             "always": -30,

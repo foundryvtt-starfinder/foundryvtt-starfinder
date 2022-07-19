@@ -116,7 +116,7 @@ export default class RollDialog extends Dialog {
 
                 // Create type string out of localized parts
                 let typeString = "";
-                if (part.types && !foundry.utils.isObjectEmpty(part.types)) {
+                if (part.types && !foundry.utils.isEmpty(part.types)) {
                     typeString = `${(Object.entries(part.types).filter(type => type[1]).map(type => SFRPG.damageTypes[type[0]]).join(` & `))}`
                 }
                 part.type = typeString;

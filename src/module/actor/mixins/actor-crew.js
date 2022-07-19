@@ -2,7 +2,7 @@ export const ActorCrewMixin = (superclass) => class extends superclass {
     async removeFromCrew(actorId) {
         const role = this.getCrewRoleForActor(actorId);
         if (role) {
-            const crewData = duplicate(this.data.data.crew);
+            const crewData = duplicate(this.system.crew);
             crewData[role].actorIds = crewData[role].actorIds.filter(x => x !== actorId);
             return this.update({
                 "data.crew": crewData
@@ -10,21 +10,26 @@ export const ActorCrewMixin = (superclass) => class extends superclass {
         }
         return null;
     }
+
+    supportsCrew() {
+        const acceptedActorTypes = ["starship", "vehicle"];
+        return acceptedActorTypes.includes(this.type);
+    }
     
     getCrewRoleForActor(actorId) {
-        const dataSource = this.data;
-        const acceptedActorTypes = ["starship", "vehicle"];
-        if (!acceptedActorTypes.includes(dataSource.type)) {
-            console.log(`getCrewRoleForActor(${actorId}) called on an actor (${dataSource.id}) of type ${dataSource.type}, which is not supported!`);
+        if (!supportsCrew()) {
+            console.log(`getCrewRoleForActor(${actorId}) called on an actor (${this.id}) of type ${this.type}, which is not supported!`);
             console.trace();
             return null;
         }
 
-        if (!dataSource?.data?.crew) {
+        const actorData = this.system;
+        const crewData = actorData.crew;
+        if (!crewData) {
             return null;
         }
 
-        for (const [role, entry] of Object.entries(dataSource.data.crew)) {
+        for (const [role, entry] of Object.entries(crewData)) {
             if (entry?.actorIds?.includes(actorId)) {
                 return role;
             }
@@ -33,21 +38,22 @@ export const ActorCrewMixin = (superclass) => class extends superclass {
     }
 
     getActorIdsForCrewRole(role) {
-        const acceptedActorTypes = ["starship", "vehicle"];
-        if (!acceptedActorTypes.includes(this.data.type)) {
-            console.log(`getActorIdsForCrewRole(${role}) called on an actor (${this.data.id}) of type ${this.data.type}, which is not supported!`);
+        if (!supportsCrew()) {
+            console.log(`getActorIdsForCrewRole(${role}) called on an actor (${this.id}) of type ${this.type}, which is not supported!`);
             console.trace();
             return null;
         }
 
-        if (!this.data?.data?.crew) {
+        const actorData = this.system;
+        const crewData = actorData.crew;
+        if (!crewData) {
             return null;
         }
 
-        if (!(role in this.data.data.crew)) {
+        if (!(role in crewData.crew)) {
             return null;
         }
 
-        return duplicate(this.data.data.crew[role]);
+        return duplicate(crewData.crew[role]);
     }
 }

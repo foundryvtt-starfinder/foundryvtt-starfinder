@@ -54,8 +54,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     prepareData() {
         super.prepareData();
 
-        this._ensureHasModifiers(this.data.data);
+        this._ensureHasModifiers(this.system);
         const modifiers = this.getAllModifiers();
+
+        console.log(['actor', this]);
 
         const items = this.items;
         const armors = items.filter(item => item.type === "equipment" && item.data.data.equipped);
@@ -73,9 +75,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return game.sfrpg.engine.process("process-actors", {
             actorId: this.id,
             actor: this,
-            type: this.data.type,
-            data: this.data.data,
-            flags: this.data.flags,
+            type: this.type,
+            data: this.system,
+            flags: this.flags,
             items: this.items,
             armors,
             shields,
@@ -132,8 +134,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @return {Promise}        A Promise which resolves to the updated Entity
      */
     async update(data, options = {}) {
+        console.log(['actor update', this, data, options]);
         const newSize = data['data.traits.size'];
-        if (newSize && (newSize !== getProperty(this.data, "data.traits.size"))) {
+        if (newSize && (newSize !== getProperty(this.system, "data.traits.size"))) {
             let size = CONFIG.SFRPG.tokenSizes[data['data.traits.size']];
             if (this.isToken) this.token.update({ height: size, width: size });
             else if (!data["token.width"] && !hasProperty(data, "token.width")) {
@@ -769,14 +772,14 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
-        if (!this.data) {
+        if (!this.system) {
             return;
         }
 
-        const crewData = this.data.data.crew;
-        const crewActorData = this.data.crew;
+        const actorData = this.system;
+        const crewData = actorData.crew;
+        const crewActorData = this.computed?.crew;
 
-        const actorData = this.data;
         if (actorData.type === "vehicle") {
             if (!crewData.useNPCCrew) {
                 /** Add player pilot if available. */
@@ -784,8 +787,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     const pilotActor = crewActorData.pilot.actors[0];
                     let pilotData = null;
                     if (pilotActor instanceof ActorSFRPG) {
-                        pilotData = pilotActor.data.data;
+                        pilotData = pilotActor.system;
                     } else {
+                        console.log(['Does this code-path ever trigger? Check pilotActor data for key, this might be refactorable to pilotData = pilotActor.system across the board', pilotActor]);
                         pilotData = pilotActor.data;
                     }
                     rollContext.addContext("pilot", pilotActor, pilotData);
@@ -799,8 +803,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     const actor = crewActorData.captain.actors[0];
                     let crewMemberActorData = null;
                     if (actor instanceof ActorSFRPG) {
-                        crewMemberActorData = actor.data.data;
+                        crewMemberActorData = actor.system;
                     } else {
+                        console.log(['Does this code-path ever trigger? Check crewMemberActorData data for key, this might be refactorable to crewMemberActorData = actor.system across the board', actor]);
                         crewMemberActorData = actor.data;
                     }
                     rollContext.addContext("captain", actor, crewMemberActorData);
@@ -811,8 +816,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     const actor = crewActorData.pilot.actors[0];
                     let crewMemberActorData = null;
                     if (actor instanceof ActorSFRPG) {
-                        crewMemberActorData = actor.data.data;
+                        crewMemberActorData = actor.system;
                     } else {
+                        console.log(['Does this code-path ever trigger? Check crewMemberActorData data for key, this might be refactorable to crewMemberActorData = actor.system across the board', actor]);
                         crewMemberActorData = actor.data;
                     }
                     rollContext.addContext("pilot", actor, crewMemberActorData);
@@ -831,8 +837,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                                 for (const actor of crewList) {
                                     let crewMemberActorData = null;
                                     if (actor instanceof ActorSFRPG) {
-                                        crewMemberActorData = actor.data.data;
+                                        crewMemberActorData = actor.system;
                                     } else {
+                                        console.log(['Does this code-path ever trigger? Check crewMemberActorData data for key, this might be refactorable to crewMemberActorData = actor.system across the board', actor]);
                                         crewMemberActorData = actor.data;
                                     }
 
@@ -849,8 +856,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                             for (const actor of crewList) {
                                 let crewMemberActorData = null;
                                 if (actor instanceof ActorSFRPG) {
-                                    crewMemberActorData = actor.data.data;
+                                    crewMemberActorData = actor.system;
                                 } else {
+                                    console.log(['Does this code-path ever trigger? Check crewMemberActorData data for key, this might be refactorable to crewMemberActorData = actor.system across the board', actor]);
                                     crewMemberActorData = actor.data;
                                 }
 
@@ -868,13 +876,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 }
             } else {
                 /** Create 'fake' actors. */
-                rollContext.addContext("captain", this, actorData.data.crew.npcData.captain);
-                rollContext.addContext("pilot", this, actorData.data.crew.npcData.pilot);
-                rollContext.addContext("gunner", this, actorData.data.crew.npcData.gunner);
-                rollContext.addContext("engineer", this, actorData.data.crew.npcData.engineer);
-                rollContext.addContext("chiefMate", this, actorData.data.crew.npcData.chiefMate);
-                rollContext.addContext("magicOfficer", this, actorData.data.crew.npcData.magicOfficer);
-                rollContext.addContext("scienceOfficer", this, actorData.data.crew.npcData.scienceOfficer);
+                rollContext.addContext("captain", this, crewData.npcData.captain);
+                rollContext.addContext("pilot", this, crewData.npcData.pilot);
+                rollContext.addContext("gunner", this, crewData.npcData.gunner);
+                rollContext.addContext("engineer", this, crewData.npcData.engineer);
+                rollContext.addContext("chiefMate", this, crewData.npcData.chiefMate);
+                rollContext.addContext("magicOfficer", this, crewData.npcData.magicOfficer);
+                rollContext.addContext("scienceOfficer", this, crewData.npcData.scienceOfficer);
             }
         }
     }
