@@ -1010,137 +1010,115 @@ export class ActorSheetSFRPG extends ActorSheet {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.ItemCollectionPickupNoGMError"));
             }
             return;
-        } else if (parsedDragData.pack) {
-            const pack = game.packs.get(parsedDragData.pack);
-            const itemData = await pack.getDocument(parsedDragData.id);
+        } 
 
-            if (!this.acceptedItemTypes.includes(itemData.type)) {
-                // Reject item
-                ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[itemData.type], target: SFRPG.actorTypes[this.actor.type] }));
-                return;
-            }
+        const itemData = await Item.fromDropData(parsedDragData);
 
-            if (itemData.type === "class") {
-                const existingClass = targetActor.findItem(x => x.type === "class" && x.name === itemData.name);
-                if (existingClass) {
-                    const levelUpdate = {};
-                    levelUpdate["data.levels"] = existingClass.data.data.levels + 1;
-                    existingClass.update(levelUpdate)
-                    return existingClass;
-                }
-            }
-
-            const createResult = await targetActor.createItem(itemData.data._source);
-            const addedItem = targetActor.getItem(createResult[0].id);
-            
-            if (game.settings.get('sfrpg','scalingCantrips') && addedItem.type === "spell") {
-                _onScalingCantripDrop(addedItem, targetActor);
-            }
-                
-            if (!(addedItem.type in SFRPG.containableTypes)) {
-                targetContainer = null;
-            }
-            
-            const itemInTargetActor = await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
-            if (itemInTargetActor === addedItem) {
-                await this._onSortItem(event, itemInTargetActor.data);
-                return itemInTargetActor;
-            }
-
-            return itemInTargetActor;
-        } else if (parsedDragData.data) {
-            const sourceActor = new ActorItemHelper(parsedDragData.actorId, parsedDragData.tokenId, parsedDragData.sceneId);
-            if (!ActorItemHelper.IsValidHelper(sourceActor)) {
-                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
-                return;
-            }
-
-            const itemToMove = await sourceActor.getItem(parsedDragData.data._id);
-
-            if (!this.acceptedItemTypes.includes(itemToMove.type)) {
-                // Reject item
-                ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[itemToMove.type], target: SFRPG.actorTypes[this.actor.type] }));
-                return;
-            }
-
-            if (event.shiftKey) {
-                InputDialog.show(
-                    game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferTitle"),
-                    game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferMessage"), {
-                    amount: {
-                        name: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferLabel"),
-                        label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferInfo", { max: itemToMove.data.data.quantity }),
-                        placeholder: itemToMove.data.data.quantity,
-                        validator: (v) => {
-                            let number = Number(v);
-                            if (Number.isNaN(number)) {
-                                return false;
-                            }
-
-                            if (number < 1) {
-                                return false;
-                            }
-
-                            if (number > itemToMove.data.data.quantity) {
-                                return false;
-                            }
-                            return true;
-                        }
-                    }
-                }, (values) => {
-                    const itemInTargetActor = moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer, values.amount);
-                    if (itemInTargetActor === itemToMove) {
-                        this._onSortItem(event, itemInTargetActor.data);
-                    }
-                });
-            } else {
-                const itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
-                if (itemInTargetActor === itemToMove) {
-                    return await this._onSortItem(event, itemInTargetActor.data);
-                }
-            }
-        } else {
-            const sidebarItem = game.items.get(parsedDragData.id);
-            if (sidebarItem) {
-                if (sidebarItem.type === "class") {
-                    const existingClass = targetActor.findItem(x => x.type === "class" && x.name === sidebarItem.name);
-                    if (existingClass) {
-                        const levelUpdate = {};
-                        levelUpdate["data.levels"] = existingClass.data.data.levels + 1;
-                        existingClass.update(levelUpdate)
-                        return existingClass;
-                    }
-                }
-
-                const addedItemResult = await targetActor.createItem(duplicate(sidebarItem.data));
-                if (addedItemResult.length > 0) {
-                    const addedItem = targetActor.getItem(addedItemResult[0].id);
-                    
-                    if (game.settings.get('sfrpg','scalingCantrips') && sidebarItem.type === "spell") {
-                        _onScalingCantripDrop(addedItem, targetActor);
-                    }
-
-                    if (targetContainer) {
-                        let newContents = [];
-                        if (targetContainer.data.data.container?.contents) {
-                            newContents = duplicate(targetContainer.data.data.container?.contents || []);
-                        }
-
-                        const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
-                        newContents.push({id: addedItem.id, index: preferredStorageIndex});
-                        
-                        const update = { id: targetContainer.id, "data.container.contents": newContents };
-                        await targetActor.updateItem(update);
-                    }
-
-                    return addedItem;
-                }
-                return null;
-            }
-            
-            console.log("Unknown item source: " + JSON.stringify(parsedDragData));
+        if (!this.acceptedItemTypes.includes(itemData.type)) {
+            // Reject item
+            ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[itemData.type], target: SFRPG.actorTypes[this.actor.type] }));
+            return;
         }
+        
+        if (itemData.type === "class") {
+            const existingClass = targetActor.findItem(x => x.type === "class" && x.name === itemData.name);
+            if (existingClass) {
+                const levelUpdate = {};
+                levelUpdate["data.levels"] = existingClass.data.data.levels + 1;
+                existingClass.update(levelUpdate)
+                return existingClass;
+            }
+        }
+
+        const createResult = await targetActor.createItem(itemData.data._source);
+        const addedItem = targetActor.getItem(createResult[0].id);
+        
+        if (game.settings.get('sfrpg','scalingCantrips') && addedItem.type === "spell") {
+            _onScalingCantripDrop(addedItem, targetActor);
+        }
+            
+        if (!(addedItem.type in SFRPG.containableTypes)) {
+            targetContainer = null;
+        }
+        
+        const itemInTargetActor = await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
+        if (itemInTargetActor === addedItem) {
+            await this._onSortItem(event, itemInTargetActor.data);
+            return itemInTargetActor;
+        }
+
+        const sourceActor = new ActorItemHelper(parsedDragData.actorId, parsedDragData.tokenId, parsedDragData.sceneId);
+        if (!ActorItemHelper.IsValidHelper(sourceActor)) {
+            ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
+            return;
+        }
+
+        const itemToMove = await sourceActor.getItem(parsedDragData.data._id);
+
+        if (!this.acceptedItemTypes.includes(itemToMove.type)) {
+            // Reject item
+            ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[itemToMove.type], target: SFRPG.actorTypes[this.actor.type] }));
+            return;
+        }
+
+        if (event.shiftKey) {
+            InputDialog.show(
+                game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferTitle"),
+                game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferMessage"), {
+                amount: {
+                    name: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferLabel"),
+                    label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferInfo", { max: itemToMove.data.data.quantity }),
+                    placeholder: itemToMove.data.data.quantity,
+                    validator: (v) => {
+                        let number = Number(v);
+                        if (Number.isNaN(number)) {
+                            return false;
+                        }
+
+                        if (number < 1) {
+                            return false;
+                        }
+
+                        if (number > itemToMove.data.data.quantity) {
+                            return false;
+                        }
+                        return true;
+                    }
+                }
+            }, (values) => {
+                const itemInTargetActor = moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer, values.amount);
+                if (itemInTargetActor === itemToMove) {
+                    this._onSortItem(event, itemInTargetActor.data);
+                }
+            });
+        } else {
+            const itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
+            if (itemInTargetActor === itemToMove) {
+                return await this._onSortItem(event, itemInTargetActor.data);
+            }
+        }
+    
+        
+        if (targetContainer) {
+            let newContents = [];
+            if (targetContainer.data.data.container?.contents) {
+                newContents = duplicate(targetContainer.data.data.container?.contents || []);
+            }
+
+            const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
+            newContents.push({id: addedItem.id, index: preferredStorageIndex});
+            
+            const update = { id: targetContainer.id, "data.container.contents": newContents };
+            await targetActor.updateItem(update);
+        }
+
+        return addedItem;
+
+        
+        console.log("Unknown item source: " + JSON.stringify(parsedDragData));
+        
     }
+    
 
     processItemContainment(items, pushItemFn) {
         const preprocessedItems = [];

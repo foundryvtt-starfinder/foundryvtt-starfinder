@@ -73,6 +73,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
             item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
+            item.isOpen = item.type === "container" ? item.data.container.isOpen : false
             item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
             item.hasUses = item.document.canBeUsed();
