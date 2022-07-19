@@ -13,7 +13,7 @@ const SFRPGMigrationSchemas = Object.freeze({
 });
 
 export default async function migrateWorld() {
-    const systemVersion = game.system.version;
+    const systemVersion = game.system.data.version;
     const worldSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
 
     ui.notifications.info(game.i18n.format("SFRPG.MigrationBeginingMigration", { systemVersion }), { permanent: true });
@@ -103,7 +103,7 @@ export default async function migrateWorld() {
         }
     }
 
-    const systemSchema = Number(game.system.flags.sfrpg.schema);
+    const systemSchema = Number(game.system.data.flags.sfrpg.schema);
     await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
     ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
 
@@ -116,7 +116,7 @@ export default async function migrateWorld() {
 
 const migrateItem = async function (item, schema) {
     const updateData = {};
-    const itemData = item;
+    const itemData = item.data;
 
     if (schema < SFRPGMigrationSchemas.DAMAGE_TYPE_REFACTOR) _migrateDamageTypes(itemData, updateData);
     if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(itemData, updateData);
@@ -131,7 +131,7 @@ const migrateCompendiumItemToWebP = async function (itemDocument) {
 const migrateActor = async function (actor, schema) {
     const updateData = {};
     const speedActorTypes = ['character', 'npc', 'npc2', 'drone'];
-    const actorData = actor;
+    const actorData = actor.data;
 
     if (schema < SFRPGMigrationSchemas.NPC_DATA_UPATE && actorData.type === 'npc') { _migrateNPCData(actorData, updateData); }
     if (schema < SFRPGMigrationSchemas.THE_PAINFUL_UPDATE) { _resetActorFlags(actorData, updateData); }
@@ -139,7 +139,7 @@ const migrateActor = async function (actor, schema) {
     if (schema < SFRPGMigrationSchemas.THE_ACTOR_SPEED_UPDATE && speedActorTypes.includes(actorData.type)) { _migrateActorSpeed(actorData, updateData); }
     if (schema < SFRPGMigrationSchemas.DAMAGE_REDUCTION_REFACTOR) { _migrateActorDamageReductions(actorData, updateData); }
     if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) { _migrateDocumentIconToWebP(actorData, updateData); }
-    if (schema < SFRPGMigrationSchemas.THE_GUNNERY_UPDATE && actorData.type === 'starship' && actorData.crew.useNPCCrew) { _migrateStarshipGunnerySkill(actorData, updateData); }
+    if (schema < SFRPGMigrationSchemas.THE_GUNNERY_UPDATE && actorData.type === 'starship' && actorData.data.crew.useNPCCrew) { _migrateStarshipGunnerySkill(actorData, updateData); }
 
     for(const item of actor.items) {
         const itemUpdateData = await migrateItem(item, schema);
@@ -158,7 +158,7 @@ const migrateCompendiumActorToWebP = async function (actorDocument) {
 
 const migrateToken = async function (token, schema) {
     const updateData = {};
-    const tokenData = token;
+    const tokenData = token.data;
 
     if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) {
         _migrateDocumentIconToWebP(tokenData, updateData);
@@ -176,7 +176,7 @@ const migrateToken = async function (token, schema) {
     }
 
     const actor = token.actor;
-    if (!token.actorLink && actor) {
+    if (!token.data.actorLink && actor) {
         const actorUpdateData = await migrateActor(actor, schema);
         if (!isObjectEmpty(actorUpdateData)) {
             console.log(`Starfinder | Migrating Token Actor ${actor.name}`);
@@ -189,7 +189,7 @@ const migrateToken = async function (token, schema) {
 
 const migrateChatMessage = async function (message, schema) {
     const updateData = {};
-    const messageData = message;
+    const messageData = message.data;
 
     if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateChatMessageContentToWebP(messageData, updateData);
 
@@ -198,7 +198,7 @@ const migrateChatMessage = async function (message, schema) {
 
 const migrateMacro = async function (macro, schema) {
     const updateData = {};
-    const macroData = macro;
+    const macroData = macro.data;
 
     if (schema < SFRPGMigrationSchemas.THE_WEBP_UPDATE) _migrateDocumentIconToWebP(macroData, updateData);
 
@@ -225,7 +225,7 @@ const damageTypeMigrationCallback = function (arr, curr) {
 };
 
 const _migrateDamageTypes = function (item, data) {
-    const itemData = foundry.utils.duplicate(item);
+    const itemData = foundry.utils.duplicate(item.data);
     const damage = itemData.damage;
     const critical = itemData.critical;
 
@@ -245,7 +245,7 @@ const _migrateDamageTypes = function (item, data) {
 };
 
 const _migrateNPCData = function (actor, migratedData) {
-    const actorData = duplicate(actor);
+    const actorData = duplicate(actor.data);
     const abilities = actorData.abilities;
     const skills = actorData.skills;
 
@@ -268,7 +268,7 @@ const _migrateNPCData = function (actor, migratedData) {
 };
 
 const _resetActorFlags = function (actor, migratedData) {
-    const actorData = duplicate(actor);
+    const actorData = duplicate(actor.data);
     let sfFlags = null;
 
     if (actor.flags.starfinder) {
@@ -282,7 +282,7 @@ const _resetActorFlags = function (actor, migratedData) {
 }
 
 const _migrateActorAbilityScores = function (actor, migratedData) {
-    const actorData = duplicate(actor);
+    const actorData = duplicate(actor.data);
     const abilities = actorData.abilities;
 
     for (const ability of Object.values(abilities)) {
@@ -295,7 +295,7 @@ const _migrateActorAbilityScores = function (actor, migratedData) {
 };
 
 const _migrateActorSpeed = function (actor, migratedData) {
-    const actorData = actor;
+    const actorData = actor.data;
 
     const speedValue = actorData.attributes.speed?.value;
 
@@ -345,7 +345,7 @@ const _migrateActorSpeed = function (actor, migratedData) {
 
 //================== 0.006: Damage Mitigation ==================
 const _migrateActorDamageReductions = function (actor, migratedData) {
-    const actorData = actor;
+    const actorData = actor.data;
 
     const modifiers = duplicate(migratedData.modifiers ?? actorData.modifiers ?? []);
     let isDirty = false;
@@ -477,13 +477,13 @@ const _migrateDocumentIconToWebP = function(document, data) {
         data["img"] = document.img.replace(imageType, ".webp");
     }
 
-    const fullBodyImageType = _imageNeedsReplace(document.details?.biography?.fullBodyImage);
+    const fullBodyImageType = _imageNeedsReplace(document.data?.details?.biography?.fullBodyImage);
     if (fullBodyImageType) {
-        data["data.details.biography.fullBodyImage"] = document.details?.biography?.fullBodyImage.replace(fullBodyImageType, ".webp");
+        data["data.details.biography.fullBodyImage"] = document.data?.details?.biography?.fullBodyImage.replace(fullBodyImageType, ".webp");
     }
 
-    if (document.combatTracker?.visualization?.length > 0) {
-        const newVisualization = duplicate(document.combatTracker.visualization);
+    if (document.data?.combatTracker?.visualization?.length > 0) {
+        const newVisualization = duplicate(document.data.combatTracker.visualization);
         let isDirty = false;
 
         for (const [key, visualization] of Object.entries(newVisualization)) {
@@ -499,9 +499,9 @@ const _migrateDocumentIconToWebP = function(document, data) {
         }
     }
 
-    if (document.description?.value) {
-        const description = _migrateStringContentToWebP(document.description.value);
-        if (document.description.value != description) {
+    if (document.data?.description?.value) {
+        const description = _migrateStringContentToWebP(document.data.description.value);
+        if (document.data.description.value != description) {
             data["data.description.value"] = description;
         }
     }
@@ -530,7 +530,7 @@ const _migrateStringContentToWebP = function(string) {
 
 //================== 0.009: Starship Gunnery Conversion ==================
 const _migrateStarshipGunnerySkill = function (actorData, updateData) {
-    const pilRanks = actorData.crew.npcData.gunner.skills.pil.ranks;
+    const pilRanks = actorData.data.crew.npcData.gunner.skills.pil.ranks;
     if (pilRanks) {
         updateData['data.crew.npcData.gunner.skills.gun.mod'] = pilRanks;
         updateData['data.crew.npcData.gunner.skills.-=pil'] = null;

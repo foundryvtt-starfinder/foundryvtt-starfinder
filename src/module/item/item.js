@@ -66,9 +66,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         super.prepareData();
         const C = CONFIG.SFRPG;
         const labels = {};
-        const itemData = this;
+        const itemData = this.data;
         const actorData = this.parent ? this.parent.data : {};
-        const data = itemData;
+        const data = itemData.data;
 
         // Spell Level,  School, and Components
         if (itemData.type === "spell") {

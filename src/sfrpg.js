@@ -161,13 +161,7 @@ Hooks.once('init', async function () {
 
     CONFIG.Token.documentClass = SFRPGTokenDocument;
 
-    CONFIG.fontDefinitions["Exo2"] = {
-        editor: true,
-        fonts: [
-          {urls: ["../systems/sfrpg/fonts/Exo2-VariableFont_wght.ttf"]},
-          {urls: ["../systems/sfrpg/fonts/Exo2-Italic-VariableFont_wght.ttf"], weight: 700}
-        ]
-      };
+    CONFIG.fontFamilies.push("Exo2");
     CONFIG.defaultFontFamily = "Exo 2";
 
     CONFIG.canvasTextStyle = new PIXI.TextStyle({
@@ -278,13 +272,10 @@ Hooks.once("ready", async () => {
     canvas.hud.token = new SFRPGTokenHUD();
 
     console.log("Starfinder | [READY] Overriding canvas drop handler");
-    try {
-        // Todo, fix me
-        if (canvas.initialized) {
-            defaultDropHandler = canvas._dragDrop.callbacks.drop;
-            canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
-        }
-    } catch {}
+    if (canvas.initialized) {
+        defaultDropHandler = canvas._dragDrop.callbacks.drop;
+        canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+    }
 
     console.log("Starfinder | [READY] Setting up AOE template overrides");
     templateOverrides();
@@ -300,7 +291,7 @@ Hooks.once("ready", async () => {
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
-        const systemSchema = Number(game.system.flags.sfrpg.schema);
+        const systemSchema = Number(game.system.data.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
 
         let migrationPromise = null;
