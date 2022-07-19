@@ -57,8 +57,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         this._ensureHasModifiers(this.system);
         const modifiers = this.getAllModifiers();
 
-        console.log(['actor', this]);
-
         const items = this.items;
         const armors = items.filter(item => item.type === "equipment" && item.data.data.equipped);
         const shields = items.filter(item => item.type === "shield" && item.data.data.equipped);
@@ -134,7 +132,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @return {Promise}        A Promise which resolves to the updated Entity
      */
     async update(data, options = {}) {
-        console.log(['actor update', this, data, options]);
         const newSize = data['data.traits.size'];
         if (newSize && (newSize !== getProperty(this.system, "data.traits.size"))) {
             let size = CONFIG.SFRPG.tokenSizes[data['data.traits.size']];
