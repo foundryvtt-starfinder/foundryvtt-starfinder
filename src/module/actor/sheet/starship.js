@@ -875,7 +875,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         return starshipActions.getIndex().then(async (indices) => {
             for (const index of indices) {
                 const entry = await starshipActions.getDocument(index._id);
-                const role = entry.data.data.role;
+                const role = entry.role;
 
                 if (!tempCache[role]) {
                     tempCache[role] = {label: CONFIG.SFRPG.starshipRoleNames[role], actions: []};
@@ -886,7 +886,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
             /** Sort them by order. */
             for (const [roleKey, roleData] of Object.entries(tempCache)) {
-                roleData.actions.sort(function(a, b){return a.data.order - b.data.order});
+                roleData.actions.sort(function(a, b){return a.order - b.order});
             }
 
             const desiredOrder = ["captain", "pilot", "gunner", "engineer", "scienceOfficer", "chiefMate", "magicOfficer", "openCrew", "minorCrew"];
