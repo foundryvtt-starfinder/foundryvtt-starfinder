@@ -66,34 +66,33 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         super.prepareData();
         const C = CONFIG.SFRPG;
         const labels = {};
-        const itemData = this.data;
-        const actorData = this.parent ? this.parent.data : {};
-        const data = itemData.data;
+        const itemData = this.system;
+        const actorData = this.parent ? this.parent.system : {};
 
         // Spell Level,  School, and Components
         if (itemData.type === "spell") {
-            labels.level = C.spellLevels[data.level];
-            labels.school = C.spellSchools[data.school];
+            labels.level = C.spellLevels[itemData.level];
+            labels.school = C.spellSchools[itemData.school];
         }
 
         // Feat Items
         else if (itemData.type === "feat") {
-            const act = data.activation;
-            if (act && act.type) labels.featType = data.damage.length ? "Attack" : "Action";
+            const act = itemData.activation;
+            if (act && act.type) labels.featType = itemData.damage.length ? "Attack" : "Action";
             else labels.featType = "Passive";
         }
 
         // Equipment Items
         else if (itemData.type === "equipment") {
-            labels.eac = data.armor.eac ? `${data.armor.eac} EAC` : "";
-            labels.kac = data.armor.kac ? `${data.armor.kac} KAC` : "";
+            labels.eac = itemData.armor.eac ? `${itemData.armor.eac} EAC` : "";
+            labels.kac = itemData.armor.kac ? `${itemData.armor.kac} KAC` : "";
         }
         
         // Activated Items
-        if (data.hasOwnProperty("activation")) {
+        if (itemData.hasOwnProperty("activation")) {
 
             // Ability Activation Label
-            let act = data.activation || {};
+            let act = itemData.activation || {};
             if (act) {
                 if (act.type === "none"){
                     labels.activation = game.i18n.localize("SFRPG.AbilityActivationTypesNoneButton");
@@ -106,12 +105,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 }                
             }
 
-            let tgt = data.target || {};
+            let tgt = itemData.target || {};
             if (tgt.value && tgt.value === "") tgt.value = null;
 
             labels.target = [tgt.value].filterJoin(" ");
 
-            let area = data.area || {};
+            let area = itemData.area || {};
             if (["none", "touch", "personal"].includes(area.units)) area.value = null;
             if (typeof area.value === 'number' && area.value === 0) area.value = null;
             if (["none"].includes(area.units)) area.units = null;
@@ -119,7 +118,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             labels.area = [area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" ");
 
             // Range Label
-            let rng = data.range || {};
+            let rng = itemData.range || {};
             if (["none", "touch", "personal"].includes(rng.units) || (rng.value === 0)) {
                 rng.value = null;
             }
@@ -127,14 +126,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             labels.range = [rng.value, C.distanceUnits[rng.units] || null].filterJoin(" ");
 
             // Duration Label
-            let dur = data.duration || {};
+            let dur = itemData.duration || {};
             labels.duration = [dur.value].filterJoin(" ");
         }
 
         // Item Actions
-        if (data.hasOwnProperty("actionType")) {
+        if (itemData.hasOwnProperty("actionType")) {
             // Damage
-            let dam = data.damage || {};
+            let dam = itemData.damage || {};
             if (dam.parts) labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
         }
 

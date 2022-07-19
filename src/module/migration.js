@@ -13,7 +13,7 @@ const SFRPGMigrationSchemas = Object.freeze({
 });
 
 export default async function migrateWorld() {
-    const systemVersion = game.system.data.version;
+    const systemVersion = game.system.version;
     const worldSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
 
     ui.notifications.info(game.i18n.format("SFRPG.MigrationBeginingMigration", { systemVersion }), { permanent: true });
@@ -103,7 +103,7 @@ export default async function migrateWorld() {
         }
     }
 
-    const systemSchema = Number(game.system.data.flags.sfrpg.schema);
+    const systemSchema = Number(game.system.flags.sfrpg.schema);
     await game.settings.set('sfrpg', 'worldSchemaVersion', systemSchema);
     ui.notifications.info(game.i18n.format("SFRPG.MigrationEndMigration", { systemVersion }), { permanent: true });
 
