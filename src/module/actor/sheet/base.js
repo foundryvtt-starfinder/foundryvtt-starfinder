@@ -981,6 +981,8 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     async processDroppedData(event, parsedDragData) {
+        console.log(event)
+        console.log(parsedDragData)
         const targetActor = new ActorItemHelper(this.actor.id, this.token?.id, this.token?.parent?.id);
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
             ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
@@ -1043,6 +1045,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         
         const itemInTargetActor = await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
         if (itemInTargetActor === addedItem) {
+            console.log(this._onSortItem)
             await this._onSortItem(event, itemInTargetActor.data);
             return itemInTargetActor;
         }
@@ -1053,7 +1056,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             return;
         }
 
-        const itemToMove = await sourceActor.getItem(parsedDragData.data._id);
+        const itemToMove = await sourceActor.getItem(parsedDragData.id);
 
         if (!this.acceptedItemTypes.includes(itemToMove.type)) {
             // Reject item
