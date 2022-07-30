@@ -15,6 +15,10 @@
             <input type="text" name="data.details.biography.age" value="{{data.details.biography.age}}" data-dtype="Number" placeholder="{{localize 'SFRPG.ActorSheet.Biography.AgePlaceholder'}}" />
         </div>
     </div>
+    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>Gender/Pronouns</strong><br>@details.biography.genderPronouns">
+        <label class="singleLine">{{localize 'SFRPG.ActorSheet.Biography.GenderPronouns'}}</label>
+        <input class="singleLine" type="text" name="data.details.biography.genderPronouns" value="{{data.details.biography.genderPronouns}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.GenderPronounsPlaceholder'}}" />
+    </div>
     <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.Height'}}</strong><br>@details.biography.height">
         <label>{{localize "SFRPG.ActorSheet.Biography.Height"}}</label>
         <div class="form-fields">
@@ -25,6 +29,18 @@
         <label>{{localize "SFRPG.ActorSheet.Biography.Weight"}}</label>
         <div class="form-fields">
             <input type="text" name="data.details.biography.weight" value="{{data.details.biography.weight}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.WeightPlaceholder'}}" />
+        </div>
+    </div>
+    <div class="form-group singleFlex" data-tippy-content="<strong>Home World</strong><br>@details.biography.homeWorld">
+        <label>{{localize 'SFRPG.ActorSheet.Biography.HomeWorld'}}</label>
+        <div class="form-fields">
+            <input type="text" name="data.details.biography.homeWorld" value="{{data.details.biography.homeWorld}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.HomeWorldPlaceholder'}}" />
+        </div>
+    </div>
+    <div class="form-group singleFlex" data-tippy-content="<strong>Deity</strong><br>@details.biography.deity">
+        <label>{{localize 'SFRPG.ActorSheet.Biography.Deity'}}</label>
+        <div class="form-fields">
+            <input type="text" name="data.details.biography.deity" value="{{data.details.biography.deity}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.DeityPlaceholder'}}" />
         </div>
     </div>
     {{/unless}}
