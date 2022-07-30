@@ -553,13 +553,9 @@ export class CombatSFRPG extends Combat {
 
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
-            if (combatant.actor.data.data.crew.useNPCCrew) {
-                return "1d20 + @pilot.skills.pil.mod + @combatant.attributes.systems.engines.mod + @combatant.attributes.systems.powerCore.modOther + @additional.modifiers.bonus";
-            } else {
-                return "1d20 + @pilot.skills.pil.mod + @combatant.attributes.pilotingBonus.value + @combatant.attributes.systems.engines.mod + @combatant.attributes.systems.powerCore.modOther + @additional.modifiers.bonus";
-            }
-            
-        } else {
+            return "1d20 + @pilot.skills.pil.mod"
+        }
+        else {
             return "1d20 + @combatant.attributes.init.total";
         }
     }
@@ -570,13 +566,8 @@ export class CombatSFRPG extends Combat {
         const parts = [];
 
         if (this.getCombatType() === "starship") {
+            parts.push("@pilot.skills.pil.mod");
             rollContext.setMainContext("pilot");
-            if (combatant.actor.data.data.crew.useNPCCrew) {//If an NPC starship, don't apply the static bonus to Piloting from maneuverability/thrusters, as that's included in their piloting bonus
-                parts.push("@pilot.skills.pil.mod", "@combatant.attributes.systems.engines.mod", "@combatant.attributes.systems.powerCore.modOther", "@additional.modifiers.bonus");
-            } else {//Initiative rolls *probably* include system damage
-                parts.push("@pilot.skills.pil.mod", "@combatant.attributes.pilotingBonus.value", "@combatant.attributes.systems.engines.mod", "@combatant.attributes.systems.powerCore.modOther", "@additional.modifiers.bonus")
-            }
-                
         } else {
             parts.push("@combatant.attributes.init.total");
             if (game.settings.get("sfrpg", "useInitiativeTiebreaker")) {
