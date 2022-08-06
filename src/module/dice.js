@@ -712,6 +712,7 @@ export class DiceSFRPG {
 
             const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
             let roll = await rollObject.evaluate({async: true});
+            roll._formula = this.simplifyRollFormula(roll);
             
             //CRB pg. 240, < 1 damage returns 1 non-lethal damage.
             if (roll._total < 1) {
@@ -973,5 +974,24 @@ export class DiceSFRPG {
         }
 
         return resolveResult;
+    }
+    
+    /**
+    * Replace functions in roll terms (such as floor, max, lookupRange) with their result.
+    * @param {Roll}     roll                    The data for the roll.
+    * @returns {string} simplerRoll._formula    The cleaned up formula
+    */
+    static simplifyRollFormula(roll) {
+        console.log(roll)
+        const terms = Roll.parse(roll.formula);
+        const simpler = terms.map(t => {
+            if (t instanceof MathTerm && t.isDeterministic) {
+                return new NumericTerm({number: t.total})
+            }
+            return t;
+        });
+        const simplerRoll = Roll.fromTerms(simpler);
+        
+        return simplerRoll._formula;
     }
 }
