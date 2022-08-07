@@ -64,7 +64,7 @@ export default class SFRPGRoll extends Roll {
 
         // Define chat data
         const chatData = {
-            formula: isPrivate ? "???" : this._formula,
+            formula: isPrivate ? "???" : this.formula,
             flavor: isPrivate ? null : chatOptions.flavor,
             user: chatOptions.user,
             tooltip: isPrivate ? "" : await this.getTooltip(),
