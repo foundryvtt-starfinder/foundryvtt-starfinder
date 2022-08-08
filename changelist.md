@@ -29,7 +29,7 @@ Racial features have all been broken out into individual items, This comes with 
 * Added the Vanguard Rebound Aspect and the various items surrounding it.
 * Added descriptors to spell's and feats.
 * Updated many of the Aeon Stone entries.
-* Ammo type and capacity has been set on every weapon, so reloading should work properly on every weapon out of the box now.
+* Ammo type and capacity has been set on all weapons, so reloading should work properly on every weapon out of the box now.
 * When rolling damage, if the result is less than one, it will be set to 1 and be tagged as non-lethal damage. This conforms to the "Minimum Damage Rule" presented on p. 241 of the Core Rulebook.
 * Added Biomes and related rules added to SFRPG Rules
 * Goods can now be equipped.
@@ -40,6 +40,8 @@ Racial features have all been broken out into individual items, This comes with 
   * Painful Injection
   * Weapon Specialization
 * Added Moyishuu race
+-Add Quantum Entrapment class feature
+-Add Spell Sergeant archetype
 * Added some clarification to the Weapon Specialization feat about its implementation in the system.
 
 ## Bugfixes
