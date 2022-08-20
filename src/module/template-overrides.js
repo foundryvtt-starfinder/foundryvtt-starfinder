@@ -26,7 +26,7 @@ export default function() {
         };
 
         if (tool === "cone") data["angle"] = 90;
-        else if (tool === "ray") data["width"] = 5.1;
+        else if (tool === "ray") data["width"] = 5.5;
 
         const doc = new MeasuredTemplateDocument(data, {parent: canvas.scene});
         const template = new MeasuredTemplate(doc);
