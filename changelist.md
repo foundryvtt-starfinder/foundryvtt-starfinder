@@ -19,6 +19,9 @@ This update contains a lot of data entry, particularly around Galactic Magic and
 * Added Mechanic abilities from Galactic Magic.
 * Added Mystic abilities from Galactic Magic.
 
+## Racial Features
+Racial features have all been broken out into individual items, This comes with many advantages, like modifier support, frequency tracking, and alternate racial features being more intuitive.
+
 ## New Items / Features
 * Added Actor Resource for Negative Character levels in the Conditions compendium.
 * Added Interstellar Starship Engines.
@@ -26,19 +29,37 @@ This update contains a lot of data entry, particularly around Galactic Magic and
 * Added the Vanguard Rebound Aspect and the various items surrounding it.
 * Added descriptors to spell's and feats.
 * Updated many of the Aeon Stone entries.
+* Ammo type and capacity has been set on all weapons, so reloading should work properly on every weapon out of the box now.
 * When rolling damage, if the result is less than one, it will be set to 1 and be tagged as non-lethal damage. This conforms to the "Minimum Damage Rule" presented on p. 241 of the Core Rulebook.
-* Added Racial Feature items for Races
 * Added Biomes and related rules added to SFRPG Rules
+* Goods can now be equipped.
+* Starship ECM weapons now correctly use Int and Computers ranks to hit.
+* Modifiers for Biohacker feautres - Palmarian
+  * Injection expert
+  * Arms Expert
+  * Painful Injection
+  * Weapon Specialization
+* Added Moyishuu race
+-Add Quantum Entrapment class feature
+-Add Spell Sergeant archetype
+* Added some clarification to the Weapon Specialization feat about its implementation in the system.
 
 ## Bugfixes
+* **Formulas on chat cards should look a lot prettier now!!**
 * Fixed an assortment of minor issues with biohacker and envoy class features.
 * Fixed an assortment of minor issues with various equipment.
 * Fixed an issue that would cause containers to migrate incorrectly in v0.19 and onwards.
 * Fixed a long standing bug where pressing enter on a character sheet would cause the add profession skill dialog to pop open.
-* Fixed a UI bug that would cause certain images on the PC iventory and features tab to repeat vertically if they weren't perfectly square or when the name of the item was too long and caused it to wrap the text to the next line.
+* Fixed a UI bug that would cause certain images on the PC inventory and features tab to repeat vertically if they weren't perfectly square or when the name of the item was too long and caused it to wrap the text to the next line.
 * Updated the wording on the "Use Quick Rolls by Default" system setting to make it clearer on how it works and updated the logic to make it work correctly.
 * Fixed "undefined" showing in the flavor text on damage chat card if damage section has no name.
 * Fixed it so that popout chat cards are sytled the same as normal chat cards.
+* Fixed a bug that caused certain level 0 items to infinitely re-render, causing them to be uneditable.
+* Fixed the Needler rifle's AC target
+* Fixed mystic cure's healing formula
+* Changed Rings of Resistance to Magic items rather than goods - VonnyBaun
+* Updated Mind Thrust and Ectoplasmic Barrage formulas to lookupRange
+* Fixed Deadly Aim; had an incorrect actor data reference
 
 # v0.19.1 - Starfinder Update
 
