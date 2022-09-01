@@ -1,0 +1,10 @@
+{
+  "_id": "rv3zsqWTPofWFwe0",
+  "name": "Random Weapon Arc",
+  "type": "script",
+  "author": "eBWLT1Ze8MOMpLeF",
+  "command": "//This macro randomly selects an arc with weapons in, for use when a critical damage effect is applied to a weapon system.\nif (canvas.tokens.controlled.length <= 0) {\n    ui.notifications.error(game.i18n.localize(\"SFRPG.StarshipSheet.RandomQuadrantMacro.NoToken\"));\n    return;\n};\n\nif (canvas.tokens.controlled[0].actor.type !== \"starship\") {\n    ui.notifications.error(game.i18n.localize(\"SFRPG.StarshipSheet.RandomQuadrantMacro.NotStarship\"));\n    return;\n};\n\nconst weaponArrays = {\n    forwardWeapons: canvas.tokens.controlled[0].actor.items.filter(i => i.data.data.mount?.arc === \"forward\"),\n    portWeapons: canvas.tokens.controlled[0].actor.items.filter(i => i.data.data.mount?.arc === \"port\"),\n    starboardWeapons: canvas.tokens.controlled[0].actor.items.filter(i => i.data.data.mount?.arc === \"starboard\"),\n    aftWeapons: canvas.tokens.controlled[0].actor.items.filter(i => i.data.data.mount?.arc === \"aft\")\n};\n\nfor (const arr of Object.entries(weaponArrays)) {\n    if (arr[1].length < 1) {\n        delete weaponArrays[arr[0]];\n    }\n};\n\nconst entries = Object.entries(weaponArrays);\n\nconst results = entries.map((e, index, arr) => {\n    let arc = e[0].replace(/Weapons/g, \"\");\n    arc = arc.charAt(0).toUpperCase() + arc.slice(1);\n    const slug = `SFRPG.Rolls.StarshipActions.Quadrant.${arc}`\n\n    return {\n        text: game.i18n.format(slug),\n        type: CONST.TABLE_RESULT_TYPES.TEXT,\n        img: \"icons/svg/target.svg\",\n        weight: 1,\n        range: [index+1, index+1],\n        drawn: false\n    }\n});\n\ntable = new RollTable({\n    name: \"Random Weapon Arc\",\n    results: results,\n    formula: `1d${entries.length}`,\n    description: \"Select a random weapon arc to apply the critical damage condition to.\"\n});\n\ntable.draw();",
+  "flags": {},
+  "img": "icons/svg/target.svg",
+  "scope": "global"
+}
