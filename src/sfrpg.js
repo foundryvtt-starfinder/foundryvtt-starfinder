@@ -9,7 +9,7 @@
 import { SFRPG } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./module/canvas.js";
+import { measureDistances, handleItemDropCanvas, canvasHandlerV10 } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
 import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
@@ -285,7 +285,7 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Overriding canvas drop handler");
     if (isNewerVersion(game.version, '10.0')) {
-        console.warn("Starfinder | [READY] Canvas drop handler not yet implemented.");
+        Hooks.on("dropCanvasData", (canvas) => canvasHandlerV10(canvas));
     } else {
         if (canvas.initialized) {
             defaultDropHandler = canvas._dragDrop.callbacks.drop;
