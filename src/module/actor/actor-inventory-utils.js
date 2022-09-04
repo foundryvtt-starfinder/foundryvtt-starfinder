@@ -247,8 +247,10 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         }
 
         /** Ensure the original to-move item has the quantity correct. */
-        if (itemData[0].system?.quantity) { //Check for V10
-            itemData[0].system.quantity = quantity; //.data isn't on duplicated objects, so no easy way to do this on V9
+        if (isNewerVersion(game.version, '10.0')) {
+            itemData[0].system.quantity = quantity;
+        } else {
+            itemData[0].data.quantity
         }
 
         if (itemData.length != items.length) {
