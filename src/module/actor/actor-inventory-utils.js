@@ -215,7 +215,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
 
             const duplicatedData = duplicate(itemToCreate.item);
-            if (duplicatedData.data.equipped) {
+            if (itemToCreate.item.data.equipped) { //duplicate() doesn't duplicate .data getter
                 duplicatedData.data.equipped = false;
             }
             
@@ -247,7 +247,9 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         }
 
         /** Ensure the original to-move item has the quantity correct. */
-        itemData[0].data.quantity = quantity;
+        if (itemData[0].system?.quantity) { //Check for V10
+            itemData[0].system.quantity = quantity; //.data isn't on duplicated objects, so no easy way to do this on V9
+        }
 
         if (itemData.length != items.length) {
             console.log(['Mismatch in item count', itemData, items]);
