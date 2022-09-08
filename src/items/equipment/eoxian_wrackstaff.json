@@ -1,12 +1,28 @@
 {
   "_id": "ecCdoxwqOvfNp6Am",
   "name": "Eoxian Wrackstaff",
-  "type": "hybrid",
+  "type": "weapon",
   "data": {
     "type": "",
+    "ability": "str",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "kac",
+    "actionType": "mwak",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "ammunitionType": "",
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": 0
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -20,10 +36,10 @@
       },
       "hp": {
         "max": "",
-        "value": 18
+        "value": 54
       },
       "size": "medium",
-      "sturdy": false
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "1",
@@ -31,31 +47,209 @@
       "max": 0,
       "value": 0
     },
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "fusion"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 0,
+          "subtype": "fusion",
+          "weightProperty": "level"
+        }
+      ]
+    },
     "critical": {
+      "effect": "Inflict Pain",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "6d4 + @abilities.str.mod",
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Consisting of a long metallic shaft capped with a two-pronged head, an&nbsp;Eoxian wrackstaff&nbsp;is a two-handed basic melee weapon that deals 6d4 bludgeoning damage and has the block weapon special property. On a critical hit, the target is affected by&nbsp;inflict pain&nbsp;(CL 13th). Undead creatures are immune to this critical hit effect.</p>"
+      "value": "<h2>Hybrid item</h2>\n<p>Consisting of a long metallic shaft capped with a two-pronged head, an Eoxian wrackstaff is a two-handed basic melee weapon that deals 6d4 bludgeoning damage and has the block weapon special property. On a critical hit, the target is affected by @Compendium[sfrpg.spells.2AYPwSy7I0Ar8yAH]{Inflict Pain} (CL 13th). Undead creatures are immune to this critical hit effect.</p>"
     },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": null
+    },
+    "equippable": false,
     "equipped": false,
-    "hands": 0,
-    "identified": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
     "level": 13,
     "modifiers": [],
     "price": 48500,
+    "proficient": true,
+    "properties": {
+      "aeon": false,
+      "amm": false,
+      "analog": false,
+      "antibiological": false,
+      "archaic": false,
+      "aurora": false,
+      "automatic": false,
+      "blast": false,
+      "block": true,
+      "boost": false,
+      "breach": false,
+      "breakdown": false,
+      "bright": false,
+      "buttressing": false,
+      "cluster": false,
+      "conceal": false,
+      "deconstruct": false,
+      "deflect": false,
+      "disarm": false,
+      "double": false,
+      "drainCharge": false,
+      "echo": false,
+      "entangle": false,
+      "explode": false,
+      "extinguish": false,
+      "feint": false,
+      "fiery": false,
+      "firstArc": false,
+      "flexibleLine": false,
+      "force": false,
+      "freeHands": false,
+      "fueled": false,
+      "gearArray": false,
+      "grapple": false,
+      "gravitation": false,
+      "guided": false,
+      "harrying": false,
+      "holyWater": false,
+      "hybrid": false,
+      "ignite": false,
+      "indirect": false,
+      "injection": false,
+      "integrated": false,
+      "line": false,
+      "living": false,
+      "lockdown": false,
+      "mind-affecting": false,
+      "mine": false,
+      "mire": false,
+      "modal": false,
+      "necrotic": false,
+      "nonlethal": false,
+      "one": false,
+      "operative": false,
+      "penetrating": false,
+      "polarize": false,
+      "polymorphic": false,
+      "powered": false,
+      "professional": false,
+      "propel": false,
+      "punchGun": false,
+      "qreload": false,
+      "radioactive": false,
+      "reach": false,
+      "recall": false,
+      "regrowth": false,
+      "relic": false,
+      "reposition": false,
+      "scramble": false,
+      "shape": false,
+      "shatter": false,
+      "shells": false,
+      "shield": false,
+      "sniper": false,
+      "stun": false,
+      "subtle": false,
+      "sunder": false,
+      "swarm": false,
+      "tail": false,
+      "teleportive": false,
+      "thought": false,
+      "throttle": false,
+      "thrown": false,
+      "thruster": false,
+      "trip": false,
+      "two": true,
+      "unbalancing": false,
+      "underwater": false,
+      "unwieldy": false,
+      "variantBoost": false,
+      "wideLine": false
+    },
     "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
     "source": "AA1 pg. 81",
+    "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
+    "target": {
+      "type": "",
+      "value": null
+    },
     "usage": {
       "per": "",
       "value": 0
-    }
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
+    },
+    "weaponCategory": "uncategorized",
+    "weaponType": "basicM"
   },
-  "effects": [],
-  "flags": {},
   "img": "icons/svg/mystery-man.svg"
 }
