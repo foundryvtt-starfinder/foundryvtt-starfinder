@@ -208,7 +208,6 @@ SFRPG.descriptors = {
     "earth": "SFRPG.Descriptors.Earth",
     "electricity": "SFRPG.Descriptors.Electricity",
     "emotion": "SFRPG.Descriptors.Emotion",
-    "earth": "SFRPG.Descriptors.Earth",
     "evil": "SFRPG.Descriptors.Evil",
     "fear": "SFRPG.Descriptors.Fear",
     "fire": "SFRPG.Descriptors.Fire",
@@ -705,7 +704,7 @@ SFRPG.featTypes = {
 };
 
 /**
- * The avaialbe sizes for an Actor
+ * The available sizes for an Actor
  * @type {Object}
  */
 SFRPG.actorSizes = {
@@ -1524,19 +1523,19 @@ SFRPG.conditionsCausingFlatFooted = ["blinded", "cowering", "off-kilter", "pinne
 SFRPG.characterFlags = {
     /*"solarianAttunement": {
         name: "Solarian Attunement",
-        hint: "You can enabled the management of attenument inside the combat tracker.",
+        hint: "You can enable the management of attunement inside the combat tracker.",
         section: "SFRPG.CharacterFlagsSectionClassFeatures",
         type: Boolean
     }/*, //Disable temporary the time than Vanguard and Qi Soldier mechanical system be ready
     "vanguardEntropy": {
         name: "Vanguard's Entropy Points",
-        hint: "You can enabled the management of Entropy Points inside the combat tracker.",
+        hint: "You can enable the management of Entropy Points inside the combat tracker.",
         section: "SFRPG.CharacterFlagsSectionClassFeatures",
         type: Boolean
     },
     "soldierKi": {
         name: "Soldier Ki Points",
-        hint: "You can enabled the management of Solider Ki Point inside the combat tracker.",
+        hint: "You can enable the management of Solider Ki Point inside the combat tracker.",
         section: "SFRPG.CharacterFlagsSectionClassFeatures",
         type: Boolean
     }*/

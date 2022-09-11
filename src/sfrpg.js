@@ -161,7 +161,13 @@ Hooks.once('init', async function () {
 
     CONFIG.Token.documentClass = SFRPGTokenDocument;
 
-    CONFIG.fontFamilies.push("Exo2");
+    CONFIG.fontDefinitions["Exo2"] = {
+        editor: true,
+        fonts: [
+            {urls: ["src/fonts/Exo2-Italic-VariableFont_wght.ttf"], style: "italic"},
+            {urls: ["./src/fonts/Exo2-VariableFont_wght.ttf"]}
+        ]
+    };
     CONFIG.defaultFontFamily = "Exo 2";
 
     CONFIG.canvasTextStyle = new PIXI.TextStyle({
