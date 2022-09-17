@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# v0.20.3 - Starfinder Hotfix
+# v0.19.2 - Starfinder Update
 
 Just a quick hotfix to correct an issue with drone sheets. They can now be opened normally.
 
