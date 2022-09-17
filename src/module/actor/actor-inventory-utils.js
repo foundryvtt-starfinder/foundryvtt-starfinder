@@ -215,9 +215,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
 
             const duplicatedData = duplicate(itemToCreate.item);
-            if (itemToCreate.item.data.equipped) { //duplicate() doesn't duplicate .data getter
-                duplicatedData.data.equipped = false;
-            }
+            duplicatedData.system.equipped = false;
             
             items.push({item: duplicatedData, children: contents, parent: itemToCreate.parent});
         }
@@ -247,11 +245,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         }
 
         /** Ensure the original to-move item has the quantity correct. */
-        if (isNewerVersion(game.version, '10.0')) {
-            itemData[0].system.quantity = quantity;
-        } else {
-            itemData[0].data.quantity
-        }
+        itemData[0].system.quantity = quantity;
 
         if (itemData.length != items.length) {
             console.log(['Mismatch in item count', itemData, items]);

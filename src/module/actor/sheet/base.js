@@ -820,12 +820,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         const update = { "quantity": bigStack };
         await actorHelper.updateItem(item.id, update);
 
-        const itemData = duplicate(item.data);
-        if (isNewerVersion(game.version, '10.0')) {
-            itemData.data = item.data.data; //duplicate doesn't copy .data getter, so we have to graft it on manually.
-        }
+        const itemData = duplicate(item);
         itemData.id = null;
-        itemData.data.quantity = smallStack;
+        itemData.system.quantity = smallStack;
         itemData.effects = [];
         await actorHelper.createItem(itemData);
     }
@@ -1031,7 +1028,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.ItemCollectionPickupNoGMError"));
             }
             return;
-        } else if (parsedDragData.uuid.includes("Compendium") || parsedDragData.pack) {
+        } else if (parsedDragData.uuid.includes("Compendium")) {
 
             const createResult = await targetActor.createItem(itemData.data._source);
             const addedItem = targetActor.getItem(createResult[0].id);
@@ -1051,14 +1048,13 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
 
             return itemInTargetActor;
-        } else if (parsedDragData.uuid.includes("Actor") || parsedDragData.data) {
-            if (isNewerVersion(game.version, '10.0')) {
-                const splitUUID = parsedDragData.uuid.split(".");
-                let actorID = "";
-                if (splitUUID[0] === "Actor") {
-                    actorID = splitUUID[1];
-                }
+        } else if (parsedDragData.uuid.includes("Actor")) {
+            const splitUUID = parsedDragData.uuid.split(".");
+            let actorID = "";
+            if (splitUUID[0] === "Actor") {
+                actorID = splitUUID[1];
             }
+            
             const sourceActor = new ActorItemHelper(actorID || parsedDragData.actorId, parsedDragData.tokenId, parsedDragData.sceneId);
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
