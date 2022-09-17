@@ -1,4 +1,4 @@
-# v0.20.0 - Starfinder Update
+# v0.19.2 - Starfinder Update
 
 This update contains a lot of data entry, particularly around Galactic Magic and Drift Crisis class features and equipment.
 
