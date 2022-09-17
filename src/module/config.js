@@ -192,6 +192,60 @@ SFRPG.damageTypeOperators = {
     "or": "SFRPG.Damage.Types.Operators.Or"
 }
 
+SFRPG.descriptors = {
+    "acid": "SFRPG.Descriptors.Acid",
+    "air": "SFRPG.Descriptors.Air",
+    "calling": "SFRPG.Descriptors.Calling",
+    "chaotic": "SFRPG.Descriptors.Chaotic",
+    "charm": "SFRPG.Descriptors.Charm",
+    "cold": "SFRPG.Descriptors.Cold",
+    "compulsion": "SFRPG.Descriptors.Compulsion",
+    "creation": "SFRPG.Descriptors.Creation",
+    "curse": "SFRPG.Descriptors.Curse",
+    "darkness": "SFRPG.Descriptors.Darkness",
+    "death": "SFRPG.Descriptors.Death",
+    "disease": "SFRPG.Descriptors.Disease",
+    "earth": "SFRPG.Descriptors.Earth",
+    "electricity": "SFRPG.Descriptors.Electricity",
+    "emotion": "SFRPG.Descriptors.Emotion",
+    "earth": "SFRPG.Descriptors.Earth",
+    "evil": "SFRPG.Descriptors.Evil",
+    "fear": "SFRPG.Descriptors.Fear",
+    "fire": "SFRPG.Descriptors.Fire",
+    "force": "SFRPG.Descriptors.Force",
+    "good": "SFRPG.Descriptors.Good",
+    "healing": "SFRPG.Descriptors.Healing",
+    "language-dependent": "SFRPG.Descriptors.LanguageDependent",
+    "lawful": "SFRPG.Descriptors.Lawful",
+    "light": "SFRPG.Descriptors.Light",
+    "mind-affecting": "SFRPG.Descriptors.MindAffecting",
+    "pain": "SFRPG.Descriptors.Pain",
+    "poison": "SFRPG.Descriptors.Poison",
+    "radiation": "SFRPG.Descriptors.Radiation",
+    "scrying": "SFRPG.Descriptors.Scrying",
+    "sense-dependent": "SFRPG.Descriptors.SenseDependent",
+    "shadow": "SFRPG.Descriptors.Shadow",
+    "summoning": "SFRPG.Descriptors.Summoning",
+    "teleportation": "SFRPG.Descriptors.Teleportation",
+    "water": "SFRPG.Descriptors.Water",
+};
+
+SFRPG.descriptorsTooltips = {
+    "calling": "SFRPG.Descriptors.CallingDescription",
+    "charm": "SFRPG.Descriptors.CharmDescription",
+    "compulsion": "SFRPG.Descriptors.CompulsionDescription",
+    "creation": "SFRPG.Descriptors.CreationDescription",
+    "force": "SFRPG.Descriptors.ForceDescription",
+    "language-dependent": "SFRPG.Descriptors.LanguageDependentDescription",
+    "mind-affecting": "SFRPG.Descriptors.MindAffectingDescription",
+    "pain": "SFRPG.Descriptors.PainDescription",
+    "scrying": "SFRPG.Descriptors.ScryingDescription",
+    "sense-dependent": "SFRPG.Descriptors.SenseDependentDescription",
+    "shadow": "SFRPG.Descriptors.ShadowDescription",
+    "summoning": "SFRPG.Descriptors.SummoningDescription",
+    "teleportation": "SFRPG.Descriptors.TeleportationDescription"
+}
+
 SFRPG.weaponDamageTypes = {
     "acid": "SFRPG.DamageTypesAcid",
     "acid+bludgeoning": "SFRPG.DamageTypesAcidAndBludgeoning",
@@ -226,7 +280,7 @@ SFRPG.weaponDamageTypes = {
     "piercing+sonic": "SFRPG.DamageTypesPiercingAndSonic",
     "slashing": "SFRPG.DamageTypesSlashing",
     "slashing+piercing": "SFRPG.DamageTypesSlashingAndPiercing",
-    "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic",
+    "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic"
 };
 
 SFRPG.ammunitionTypes = {
@@ -241,7 +295,13 @@ SFRPG.ammunitionTypes = {
     "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
     "shell": "SFRPG.Items.Ammunition.Type.Shells",
     "flare": "SFRPG.Items.Ammunition.Type.Flares",
-    "nanite": "SFRPG.Items.Ammunition.Type.Nanites"
+    "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
+    "nanite": "SFRPG.Items.Ammunition.Type.Nanites",
+    "caustrol": "SFRPG.Items.Ammunition.Type.Caustrol",
+    "sclerite": "SFRPG.Items.Ammunition.Type.Sclerites",
+    "moodGoo": "SFRPG.Items.Ammunition.Type.MoodGoo",
+    "thasphalt": "SFRPG.Items.Ammunition.Type.Thasphalt",
+    "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets"
 };
 
 SFRPG.distanceUnits = {
@@ -403,6 +463,7 @@ SFRPG.weaponProperties = {
     "polymorphic": "SFRPG.WeaponPropertiesPolymorphic",
     "powered": "SFRPG.WeaponPropertiesPowered",
     "professional": "SFRPG.WeaponPropertiesProfessional",
+    "propel": "SFRPG.WeaponPropertiesPropel",
     "punchGun": "SFRPG.WeaponPropertiesPunchGun",
     "qreload": "SFRPG.WeaponPropertiesQuickReload",
     "radioactive": "SFRPG.WeaponPropertiesRadioactive",
@@ -411,6 +472,7 @@ SFRPG.weaponProperties = {
     "regrowth": "SFRPG.WeaponPropertiesRegrowth",
     "relic": "SFRPG.WeaponPropertiesRelic",
     "reposition": "SFRPG.WeaponPropertiesReposition",
+    "scramble": "SFRPG.WeaponPropertiesScramble",
     "shape": "SFRPG.WeaponPropertiesShape",
     "shatter": "SFRPG.WeaponPropertiesShatter",
     "shells": "SFRPG.WeaponPropertiesShells",
@@ -495,13 +557,15 @@ SFRPG.weaponPropertiesTooltips = {
     "powered": "SFRPG.WeaponPropertiesPoweredTooltip",
     "professional": "SFRPG.WeaponPropertiesProfessionalTooltip",
     "punchGun": "SFRPG.WeaponPropertiesPunchGunTooltip",
+    "propel": "SFRPG.WeaponPropertiesPropelTooltip",
     "qreload": "SFRPG.WeaponPropertiesQuickReloadTooltip",
     "radioactive": "SFRPG.WeaponPropertiesRadioactiveTooltip",
     "reach": "SFRPG.WeaponPropertiesReachTooltip",
     "recall": "SFRPG.WeaponPropertiesRecallTooltip",
     "regrowth": "SFRPG.WeaponPropertiesRegrowthTooltip",
     "relic": "SFRPG.WeaponPropertiesRelicTooltip",
-    "reposition": "SFRPG.WeaponPropertiesReposition",
+    "reposition": "SFRPG.WeaponPropertiesRepositionTooltip",
+    "scramble": "SFRPG.WeaponPropertiesScrambleTooltip",
     "shape": "SFRPG.WeaponPropertiesShapeTooltip",
     "shatter": "SFRPG.WeaponPropertiesShatterTooltip",
     "shells": "SFRPG.WeaponPropertiesShellsTooltip",
@@ -535,6 +599,7 @@ SFRPG.specialMaterials = {
     "inubrix": "SFRPG.SpecialMaterials.Inubrix",
     "khefak": "SFRPG.SpecialMaterials.Khefak",
     "noqual": "SFRPG.SpecialMaterials.Noqual",
+    "nyblantine": "SFRPG.SpecialMaterials.Nyblantine",
     "purplecores": "SFRPG.SpecialMaterials.PurpleCores",
     "siccatite": "SFRPG.SpecialMaterials.Siccatite",
     "silver": "SFRPG.SpecialMaterials.Silver",

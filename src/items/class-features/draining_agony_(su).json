@@ -4,11 +4,12 @@
   "type": "feat",
   "data": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "other",
     "activation": {
       "type": "reaction",
       "condition": "",
@@ -27,12 +28,31 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@resources.solarian.stellarMode.value, @classes.solarian.levels, 0, 0))",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl26_LabelName\">You can increase the suffering of those who would oppose you. As a reaction while you’re attuned or fully attuned, when a hostile creature within 30 feet of you takes damage from any source, you can add your solarian level to the total damage the creature takes. Once you use this revelation, you can’t use it again until the next time you rest for 10 minutes to regain Stamina Points.</span></p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl05_LabelName\" style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><sub style=\"font-family: var(--font-primary);\"><img style=\"border: 1px solid var(--color-border-dark);\" src=\"systems/sfrpg/images/cup/gameplay/graviton.webp\" alt=\"\" width=\"20\" height=\"20\" />&nbsp;</sub></span><span id=\"ctl00_MainContent_DataListTalentsAll_ctl05_LabelName\">Graviton Revelation<br /></span>You can increase the suffering of those who would oppose you. As a reaction while you&rsquo;re attuned or fully attuned, when a hostile creature within 30 feet of you takes damage from any source, you can add your solarian level to the total damage the creature takes. Once you use this revelation, you can&rsquo;t use it again until the next time you rest for 10 minutes to regain Stamina Points.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -40,22 +60,24 @@
       "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": 30
     },
     "recharge": {
       "charged": false,
       "value": null
     },
     "requirements": "6th Level",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
     "source": "Solarian",
     "target": {
@@ -63,15 +85,10 @@
       "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": "",
-      "value": 0
+      "max": 1,
+      "per": "sr",
+      "value": 1
     }
   },
-  "flags": {},
-  "img": "systems/sfrpg/images/cup/gameplay/graviton.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
-  }
+  "img": "systems/sfrpg/images/cup/gameplay/graviton.webp"
 }

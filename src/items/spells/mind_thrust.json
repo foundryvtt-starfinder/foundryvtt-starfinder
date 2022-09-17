@@ -8,6 +8,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -16,13 +17,14 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": null,
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -35,16 +37,29 @@
     "damage": {
       "parts": [
         {
-          "formula": "(@item.level*2+max(sign(@item.level-2), 0)+max(sign(@item.level-3), 0)+max(sign(@item.level-4), 0)*3)d10",
-          "operator": "",
-          "types": {}
+          "name": "Untyped Damage",
+          "formula": "lookupRange(@item.level, 2, 2, 4, 3, 7, 4, 10, 5, 15, 6, 17)d10",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>You divine the most vulnerable portion of your opponent&rsquo;s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.<br /><br /></p>\n<p>[level_1_only]</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n</ul>\n<p>[/level_1_only]</p>\n<p>[level_2_only]</p>\n<ul>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n</ul>\n<p>[/level_2_only]</p>\n<p>[level_3_only]</p>\n<ul>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n</ul>\n<p>[/level_3_only]</p>\n<p>[level_4_only]</p>\n<ul>\n<li><strong>4th: </strong>When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is fatigued for 1 round if it fails its saving throw.</li>\n</ul>\n<p>[/level_4_only]</p>\n<p>[level_5_only]</p>\n<ul>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>\n<p>[/level_5_only]</p>\n<p>[level_6_only]</p>\n<ul>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} and @Compendium[sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>\n<p>[/level_6_only]</p>\n<p>&nbsp;</p>"
+      "value": "<p>You divine the most vulnerable portion of your opponent&rsquo;s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li><strong>4th: </strong>When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is @Compendium[sfrpg.conditions.JGFn4MrDZ6X5vrzU]{Fatigued}for 1 round if it fails its saving throw.</li>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is @Compendium[sfrpg.conditions.33ynSbmexuxC3cAQ]{Exhausted} for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n<li><strong>6th:</strong> When you cast mind thrust as a 6th-level spell, it deals 17d10 damage to the target. The target is exhausted and @Compendium[sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li></ul>"
     },
     "descriptors": [],
     "dismissible": false,
@@ -53,6 +68,7 @@
       "value": "instantaneous"
     },
     "formula": "",
+    "isActive": null,
     "isVariableLevel": true,
     "level": 1,
     "materials": {
@@ -72,6 +88,7 @@
       "units": "ft",
       "value": 25
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",

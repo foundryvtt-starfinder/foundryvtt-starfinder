@@ -1,0 +1,234 @@
+{
+  "_id": "rLrYmkb4MFngSANY",
+  "name": "Early Stage Adaptation",
+  "type": "feat",
+  "data": {
+    "type": "",
+    "ability": null,
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>An early stage barathu&rsquo;s body is mutable and can adapt to many different situations. Once every 1d4 rounds as a swift action, an early stage barathu can reshape its body and adjust its chemistry to gain one of the following qualities. The adaptation lasts until the beginning of the early stage barathu&rsquo;s next turn. Unlike more mature barathus, early stage barathus are not generally capable of more complex adaptations.</p>\n<ul>\n<li>Upper limb refinements enable the barathu to add an additional amount of damage to melee attacks equal to its Strength modifier.</li>\n<li>A toughened dermal layer grants its a +1 racial bonus to AC.</li>\n<li>Developed lower limbs grant it a base speed of 15 feet.</li>\n<li>Molecular-level modifications grant it resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).</li>\n<li>Elongated limbs extend its reach to 10 feet.</li>\n</ul>\n<p><br /><em>Toggle on/off the selected effect in the Modifiers tab. </em><em style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">Elongated limbs option must be manually tracked.</span></em></p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "2b67683b-f116-44b2-b3ca-89304ea20be8",
+        "name": "Early Stage Adaptation - Melee Damage",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "melee-damage",
+        "enabled": false,
+        "max": 0,
+        "modifier": "@abilities.str.mod",
+        "modifierType": "constant",
+        "notes": "Upper limb refinements enable the barathu to add an additional amount of damage to melee attacks equal to its Strength modifier.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "dip"
+      },
+      {
+        "_id": "3f716504-5937-4b0f-a354-8b46bdea062d",
+        "name": "Early Stage Adaptation - AC bonus",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "A toughened dermal layer grants its a +1 racial bonus to AC.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "2a9912f6-57e9-42d4-b071-6b6118a2d957",
+        "name": "Early Stage Adaptation - Base speed",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": false,
+        "max": 15,
+        "modifier": "15",
+        "modifierType": "constant",
+        "notes": "Developed lower limbs grant it a base speed of 15 feet.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "land"
+      },
+      {
+        "_id": "b1ff344c-4167-466f-9e4f-81d6b7099ad1",
+        "name": "Early Stage Adaptation - Resistance (Acid)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Molecular-level modifications grant it resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "acid"
+      },
+      {
+        "_id": "b67940c3-4541-414b-986b-d007fe5a0b99",
+        "name": "Early Stage Adaptation - Resistance (Cold)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Molecular-level modifications grant it resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      },
+      {
+        "_id": "6ae4530e-62ae-4ac1-a9e4-1271eb9b3f31",
+        "name": "Early Stage Adaptation - Resistance (Electricity)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Molecular-level modifications grant it resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "electricity"
+      },
+      {
+        "_id": "fd97e908-2a92-4f26-9ab4-12eb43e070df",
+        "name": "Early Stage Adaptation - Resistance (Fire)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Molecular-level modifications grant it resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "fire"
+      },
+      {
+        "_id": "a9a5dbde-ebd6-4483-98f2-69b86a8645cf",
+        "name": "Early Stage Adaptation - Resistance (Sonic)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Molecular-level modifications grant it resistance 2 against a single energy type (acid, cold, electricity, fire, or sonic).",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "sonic"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "Barathu, Early Stage",
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": null,
+      "descriptor": ""
+    },
+    "source": "AA1 pg. 20",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": null,
+      "per": "",
+      "value": null
+    }
+  },
+  "img": "icons/svg/mystery-man.svg"
+}

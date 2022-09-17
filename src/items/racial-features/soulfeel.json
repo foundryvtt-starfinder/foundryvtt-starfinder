@@ -1,0 +1,129 @@
+{
+  "_id": "O4YoIsligAj8ReYF",
+  "name": "Soulfeel",
+  "type": "feat",
+  "data": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "cone",
+      "units": "ft",
+      "value": 30
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "",
+          "formula": "1d6 + lookupRange(@details.level.value, 0, 3, floor(@details.level.value * 1.5))",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>A moyishuu is connected to a single dominant emotion that not only affects their personality, but also grants them a unique ability. The moyishuu can use this ability as a standard action, and they can&rsquo;t use it again until they take a 10-minute rest to regain Stamina Points. The moyishuu chooses their soulfeel after taking a full night&rsquo;s rest. Each soulfeel ability is a mind-affecting enchantment effect with a range of 30 feet. A successful Will saving throw negates the effect. The three most common soulfeels are fury, joy and sorrow (all three are detailed below).</p>\n<ul>\n<li><em>Fury:</em>&nbsp;The moyishuu provokes intense rage in a target, causing it to lose its concentration. The target is @Compendium[sfrpg.conditions.yUtkoIshf4dPruNd]{Off-Target} for 1 round.</li>\n<li><em>Joy:</em>&nbsp;The moyishuu overwhelms the target with a sense of joy and exultation, compelling it to dance about. The target must move at least 10 feet during its next turn.</li>\n<li><em>Sorrow:</em>&nbsp;The moyishuu forces the target to dwell on its past mistakes and misfortunes. The target is unable to take a swift action during its next turn.</li>\n</ul>\n<p>The DC of the ability is equal to 10 + half the moyishuu&rsquo;s level + their Charisma modifier.</p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "none",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "Moyishuu",
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "10 + floor(@details.level.value / 2) + @abilities.cha.mod",
+      "descriptor": "half"
+    },
+    "source": "AP #37 pg. 57",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "max": 1,
+      "per": "sr",
+      "value": 1
+    }
+  },
+  "img": "icons/svg/mystery-man.svg"
+}

@@ -964,18 +964,18 @@ export class ActorItemHelper {
                 //console.log(migrate);
 
                 const container = {
-                    contents: (itemData.contents || []).map(x => { return { id: x, index: 0 }; }),
+                    contents: (itemData.container?.contents || itemData.contents || []).map(x => { return { id: x.id, index: 0 }; }),
                     storage: []
                 };
 
                 if (item.type === "container") {
                     container.storage.push({
-                        type: "bulk",
-                        subtype: "",
-                        amount: itemData.storageCapacity || 0,
-                        acceptsType: itemData.acceptedItemTypes ? Object.keys(itemData.acceptedItemTypes) : [],
-                        affectsEncumbrance: itemData.contentBulkMultiplier === 0 ? false : true,
-                        weightProperty: "bulk"
+                        type: currentStorage?.type || "bulk",
+                        subtype: currentStorage?.subtype || "",
+                        amount: currentStorage?.amount ?? itemData.storageCapacity ?? 0,
+                        acceptsType: currentStorage?.acceptsType || itemData.acceptedItemTypes ? Object.keys(itemData.acceptedItemTypes) : [],
+                        affectsEncumbrance: currentStorage?.affectsEncumbrance ?? ((itemData.contentBulkMultiplier === 0) ? false : true),
+                        weightProperty: currentStorage?.weightProperty || "bulk"
                     });
                 } else if (item.type === "weapon") {
                     container.storage.push({
@@ -990,7 +990,7 @@ export class ActorItemHelper {
                     container.storage.push({
                         type: "slot",
                         subtype: "armorUpgrade",
-                        amount: itemData.armor?.upgradeSlots || 0,
+                        amount: itemData.armor?.upgradeSlots ?? 0,
                         acceptsType: ["upgrade", "weapon"],
                         affectsEncumbrance: true,
                         weightProperty: "slots"
@@ -998,7 +998,7 @@ export class ActorItemHelper {
                     container.storage.push({
                         type: "slot",
                         subtype: "weaponSlot",
-                        amount: itemData.weaponSlots || 0,
+                        amount: itemData.weaponSlots ?? 0,
                         acceptsType: ["weapon"],
                         affectsEncumbrance: true,
                         weightProperty: "slots"

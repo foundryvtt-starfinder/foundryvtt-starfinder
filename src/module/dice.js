@@ -186,7 +186,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "normal",
             title: title,
-            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "1d20",
             dialogOptions: dialogOptions,
             useRawStrings: false
@@ -359,7 +359,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "normal",
             title: title,
-            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: mainDie ? "1" + mainDie : null,
             dialogOptions: dialogOptions,
             useRawStrings: useRawStrings
@@ -514,7 +514,7 @@ export class DiceSFRPG {
             buttons: buttons,
             defaultButton: "normal",
             title: title,
-            skipUI: (event?.shiftKey || game.settings.get('sfrpg', 'useQuickRollAsDefault') || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             mainDie: "",
             dialogOptions: dialogOptions,
             parts,
@@ -696,7 +696,7 @@ export class DiceSFRPG {
                 finalFlavor = tempFlavor;
             }
 
-            if (part) {
+            if (part.name) {
                 finalFlavor += `: ${part.name}`;
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
@@ -712,6 +712,22 @@ export class DiceSFRPG {
 
             const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
             let roll = await rollObject.evaluate({async: true});
+            
+            //CRB pg. 240, < 1 damage returns 1 non-lethal damage.
+            if (roll._total < 1) {
+                roll._total = 1;
+                const nonlethal = tags.find(e => e.tag === "weapon-properties nonlethal");
+                
+                if (itemContext.data.type !== "starshipWeapon") {
+                    if (nonlethal) {
+                        nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
+                    } else {
+                        tags.push({ tag: "nonlethal", text: game.i18n.format("SFRPG.Damage.Types.Nonlethal") + ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`});
+                    }
+                } else {
+                    tags.push({ tag: "minimum-damage", text: game.i18n.localize("SFRPG.Damage.MinimumDamage") });
+                }
+            }
 
             // Associate the damage types for this attack to the first DiceTerm
             // for the roll. 

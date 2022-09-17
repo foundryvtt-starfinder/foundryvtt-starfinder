@@ -225,7 +225,7 @@ Hooks.once("setup", function () {
             "alignmentsNPC", "ammunitionTypes", "armorProficiencies", "armorTypes", "augmentationSytems", "augmentationTypes",
         "babProgression",
         "capacityUsagePer", "conditionTypes", "consumableTypes", "containableTypes", "currencies",
-        "damageReductionTypes", "damageTypeOperators", "damageTypes", "distanceUnits",
+        "damageReductionTypes", "damageTypeOperators", "damageTypes", "distanceUnits", "descriptors", "descriptorsTooltips",
         "energyDamageTypes", "energyResistanceTypes",
         "featTypes", "flightManeuverability",
         "healingTypes",
