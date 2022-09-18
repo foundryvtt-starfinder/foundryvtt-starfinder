@@ -77,6 +77,8 @@ Hooks.once('init', async function () {
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
 
+    CONFIG.compatibility.mode = CONST.COMPATIBILITY_MODES.SILENT;
+
     game.sfrpg = {
         applications: {
             // Actor Sheets
