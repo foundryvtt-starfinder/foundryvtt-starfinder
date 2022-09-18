@@ -209,6 +209,9 @@ Hooks.once('init', async function () {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
 
+    console.log("Starfinder | [READY] Preloading handlebar templates");
+    preloadHandlebarsTemplates();
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
@@ -295,9 +298,6 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Setting up AOE template overrides");
     templateOverrides();
-
-    console.log("Starfinder | [READY] Preloading handlebar templates");
-    preloadHandlebarsTemplates();
 
     console.log("Starfinder | [READY] Caching starship actions");
     ActorSheetSFRPGStarship.ensureStarshipActions();

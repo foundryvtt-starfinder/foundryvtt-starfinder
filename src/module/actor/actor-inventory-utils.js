@@ -215,9 +215,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
 
             const duplicatedData = duplicate(itemToCreate.item);
-            if (duplicatedData.data.equipped) {
-                duplicatedData.data.equipped = false;
-            }
+            duplicatedData.system.equipped = false;
             
             items.push({item: duplicatedData, children: contents, parent: itemToCreate.parent});
         }
@@ -247,7 +245,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         }
 
         /** Ensure the original to-move item has the quantity correct. */
-        itemData[0].data.quantity = quantity;
+        itemData[0].system.quantity = quantity;
 
         if (itemData.length != items.length) {
             console.log(['Mismatch in item count', itemData, items]);
