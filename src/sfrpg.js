@@ -9,7 +9,7 @@
 import { SFRPG } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./module/canvas.js";
+import { measureDistances, handleItemDropCanvas, canvasHandlerV10 } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
 import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
@@ -73,6 +73,8 @@ Hooks.once('init', async function () {
 |____/ \\__\\__,_|_|  |_| |_|_| |_|\\__,_|\\___|_|
 ==================================================`
     );
+
+    CONFIG.compatibility.mode = 0; // COMPATIBILITY_MODES.SILENT
 
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
@@ -163,7 +165,17 @@ Hooks.once('init', async function () {
 
     CONFIG.Token.documentClass = SFRPGTokenDocument;
 
-    CONFIG.fontFamilies.push("Exo2");
+    if (isNewerVersion(game.version, '10.0')) {
+        CONFIG.fontDefinitions["Exo2"] = {
+            editor: true,
+            fonts: [
+            {urls: ["../systems/sfrpg/fonts/Exo2-VariableFont_wght.ttf"]},
+            {urls: ["../systems/sfrpg/fonts/Exo2-Italic-VariableFont_wght.ttf"], weight: 700}
+            ]
+        };
+    } else {
+        CONFIG.fontFamilies.push("Exo2");
+    }
     CONFIG.defaultFontFamily = "Exo 2";
 
     CONFIG.canvasTextStyle = new PIXI.TextStyle({
@@ -198,6 +210,9 @@ Hooks.once('init', async function () {
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
+
+    console.log("Starfinder | [READY] Preloading handlebar templates");
+    preloadHandlebarsTemplates();
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
@@ -274,16 +289,17 @@ Hooks.once("ready", async () => {
     canvas.hud.token = new SFRPGTokenHUD();
 
     console.log("Starfinder | [READY] Overriding canvas drop handler");
-    if (canvas.initialized) {
-        defaultDropHandler = canvas._dragDrop.callbacks.drop;
-        canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+    if (isNewerVersion(game.version, '10.0')) {
+        Hooks.on("dropCanvasData", (canvas) => canvasHandlerV10(canvas));
+    } else {
+        if (canvas.initialized) {
+            defaultDropHandler = canvas._dragDrop.callbacks.drop;
+            canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
+        }
     }
 
     console.log("Starfinder | [READY] Setting up AOE template overrides");
     templateOverrides();
-
-    console.log("Starfinder | [READY] Preloading handlebar templates");
-    preloadHandlebarsTemplates();
 
     console.log("Starfinder | [READY] Caching starship actions");
     ActorSheetSFRPGStarship.ensureStarshipActions();
