@@ -20,6 +20,15 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         return "systems/sfrpg/templates/actors/hazard-sheet-full.html";
     }
 
+    async getData() {
+        const data = super.getData();
+
+        // Enrich text editors
+        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.description.value, {async: true});
+
+        return data;
+    }
+
     activateListeners(html) {
         super.activateListeners(html);
 

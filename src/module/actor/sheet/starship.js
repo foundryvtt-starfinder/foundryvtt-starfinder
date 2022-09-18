@@ -32,7 +32,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         return "systems/sfrpg/templates/actors/starship-sheet-full.html";
     }
 
-    getData() {
+    async getData() {
         const data = super.getData();
 
         let tier = parseFloat(data.data.details.tier || 0);
@@ -40,6 +40,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         data.labels["tier"] = tier >= 1 ? String(tier) : tiers[tier] || 1;
 
         this._getCrewData(data);
+
+        // Encrich text editors
+        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.notes, {async: true});
 
         return data;
     }
