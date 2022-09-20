@@ -970,8 +970,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     async _onDrop(event) {
         event.preventDefault();
 
-        const dragData = event.dataTransfer.getData('text/plain');
-        const parsedDragData = JSON.parse(dragData);
+        const parsedDragData = TextEditor.getDragEventData(event);
         if (!parsedDragData) {
             console.log("Unknown item data");
             return;
@@ -987,13 +986,19 @@ export class ActorSheetSFRPG extends ActorSheet {
             return;
         }
 
-        const itemData = await Item.fromDropData(parsedDragData);
+
+        let itemData = null;
+        if (parsedDragData.type !== 'ItemCollection') {
+            itemData = await Item.fromDropData(parsedDragData);
+        } else {
+            itemData = parsedDragData.items[0];
+        }
 
         if (itemData.type === "class") {
             const existingClass = targetActor.findItem(x => x.type === "class" && x.name === itemData.name);
             if (existingClass) {
                 const levelUpdate = {};
-                levelUpdate["data.levels"] = existingClass.data.data.levels + 1;
+                levelUpdate["system.levels"] = existingClass.system.levels + 1;
                 existingClass.update(levelUpdate)
                 return existingClass;
             }
@@ -1120,7 +1125,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                     newContents.push({ id: addedItem.id, index: preferredStorageIndex });
 
                     const update = { id: targetContainer.id, "data.container.contents": newContents };
-                    await targetActor.updateItem(update);
+                    await targetActor.updateItem(targetContainer.id, update);
                 }
 
                 return addedItem;
