@@ -12,7 +12,8 @@ If you wish to use Starfinder with older versions of FoundryVTT, the following t
 - FoundryVTT v0.5.6 till v0.6.6: The latest supported Starfinder system version is v0.5.1
 - FoundryVTT v0.7.0 till v0.7.10: The latest supported Starfinder system version is v0.10.0.0
 - FoundryVTT v0.8.0 till v9.269: The latest supported Starfinder system version is v0.18.3
-- FoundryVTT v9.269 and up: The latest supported Starfinder system version is v0.19.0
+- FoundryVTT v9.269 till v9.280: The latest supported Starfinder system version is v0.19.0
+- FoundryVTT v10 and up: The latest supported Starfinder system version is v0.20.1
 
 Please keep in mind the Starfinder system identifier changed with Starfinder system version v0.3 from 'starfinder' to 'sfrpg'. If you have a world older than this version, you will have to update your world.json file to reflect this, or your world will not load.
 
