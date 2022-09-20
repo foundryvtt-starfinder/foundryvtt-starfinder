@@ -1,3 +1,12 @@
+# v0.20.1 - Starfinder Update
+
+This update focuses on getting the system compatible with FoundryVTT v10. No new features or bugfixes, just the bare minimum code needed to get the system functional
+without losing functionality.
+
+## Bugfixes
+* Fixed issue where actor sheets wouldn't open on v10.
+* Refactored how drag-n-drop is handled to be in line with the new v10 functionality.
+
 # v0.19.2 - Starfinder Update
 
 This update contains a lot of data entry, particularly around Galactic Magic and Drift Crisis class features and equipment.
