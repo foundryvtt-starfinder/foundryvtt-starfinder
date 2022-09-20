@@ -820,9 +820,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         const update = { "quantity": bigStack };
         await actorHelper.updateItem(item.id, update);
 
-        const itemData = duplicate(item.data);
+        const itemData = duplicate(item);
         itemData.id = null;
-        itemData.data.quantity = smallStack;
+        itemData.system.quantity = smallStack;
         itemData.effects = [];
         await actorHelper.createItem(itemData);
     }
@@ -970,8 +970,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     async _onDrop(event) {
         event.preventDefault();
 
-        const dragData = event.dataTransfer.getData('text/plain');
-        const parsedDragData = JSON.parse(dragData);
+        const parsedDragData = TextEditor.getDragEventData(event);
         if (!parsedDragData) {
             console.log("Unknown item data");
             return;
@@ -984,6 +983,30 @@ export class ActorSheetSFRPG extends ActorSheet {
         const targetActor = new ActorItemHelper(this.actor.id, this.token?.id, this.token?.parent?.id);
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
             ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
+            return;
+        }
+
+
+        let itemData = null;
+        if (parsedDragData.type !== 'ItemCollection') {
+            itemData = await Item.fromDropData(parsedDragData);
+        } else {
+            itemData = parsedDragData.items[0];
+        }
+
+        if (itemData.type === "class") {
+            const existingClass = targetActor.findItem(x => x.type === "class" && x.name === itemData.name);
+            if (existingClass) {
+                const levelUpdate = {};
+                levelUpdate["system.levels"] = existingClass.system.levels + 1;
+                existingClass.update(levelUpdate)
+                return existingClass;
+            }
+        }
+
+        if (!this.acceptedItemTypes.includes(itemData.type)) {
+            // Reject item
+            ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[itemData.type], target: SFRPG.actorTypes[this.actor.type] }));
             return;
         }
 
@@ -1010,37 +1033,19 @@ export class ActorSheetSFRPG extends ActorSheet {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.ItemCollectionPickupNoGMError"));
             }
             return;
-        } else if (parsedDragData.pack) {
-            const pack = game.packs.get(parsedDragData.pack);
-            const itemData = await pack.getDocument(parsedDragData.id);
-
-            if (!this.acceptedItemTypes.includes(itemData.type)) {
-                // Reject item
-                ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[itemData.type], target: SFRPG.actorTypes[this.actor.type] }));
-                return;
-            }
-
-            if (itemData.type === "class") {
-                const existingClass = targetActor.findItem(x => x.type === "class" && x.name === itemData.name);
-                if (existingClass) {
-                    const levelUpdate = {};
-                    levelUpdate["data.levels"] = existingClass.data.data.levels + 1;
-                    existingClass.update(levelUpdate)
-                    return existingClass;
-                }
-            }
+        } else if (parsedDragData.uuid.includes("Compendium")) {
 
             const createResult = await targetActor.createItem(itemData.data._source);
             const addedItem = targetActor.getItem(createResult[0].id);
-            
-            if (game.settings.get('sfrpg','scalingCantrips') && addedItem.type === "spell") {
+
+            if (game.settings.get('sfrpg', 'scalingCantrips') && addedItem.type === "spell") {
                 _onScalingCantripDrop(addedItem, targetActor);
             }
-                
+
             if (!(addedItem.type in SFRPG.containableTypes)) {
                 targetContainer = null;
             }
-            
+
             const itemInTargetActor = await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
             if (itemInTargetActor === addedItem) {
                 await this._onSortItem(event, itemInTargetActor.data);
@@ -1048,20 +1053,20 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
 
             return itemInTargetActor;
-        } else if (parsedDragData.data) {
-            const sourceActor = new ActorItemHelper(parsedDragData.actorId, parsedDragData.tokenId, parsedDragData.sceneId);
+        } else if (parsedDragData.uuid.includes("Actor")) {
+            const splitUUID = parsedDragData.uuid.split(".");
+            let actorID = "";
+            if (splitUUID[0] === "Actor") {
+                actorID = splitUUID[1];
+            }
+            
+            const sourceActor = new ActorItemHelper(actorID || parsedDragData.actorId, parsedDragData.tokenId, parsedDragData.sceneId);
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
                 return;
             }
 
-            const itemToMove = await sourceActor.getItem(parsedDragData.data._id);
-
-            if (!this.acceptedItemTypes.includes(itemToMove.type)) {
-                // Reject item
-                ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[itemToMove.type], target: SFRPG.actorTypes[this.actor.type] }));
-                return;
-            }
+            const itemToMove = await sourceActor.getItem(itemData.id);
 
             if (event.shiftKey) {
                 InputDialog.show(
@@ -1100,47 +1105,37 @@ export class ActorSheetSFRPG extends ActorSheet {
                 }
             }
         } else {
-            const sidebarItem = game.items.get(parsedDragData.id);
-            if (sidebarItem) {
-                if (sidebarItem.type === "class") {
-                    const existingClass = targetActor.findItem(x => x.type === "class" && x.name === sidebarItem.name);
-                    if (existingClass) {
-                        const levelUpdate = {};
-                        levelUpdate["data.levels"] = existingClass.data.data.levels + 1;
-                        existingClass.update(levelUpdate)
-                        return existingClass;
-                    }
+            const sidebarItem = itemData;
+
+            const addedItemResult = await targetActor.createItem(duplicate(sidebarItem.data));
+            if (addedItemResult.length > 0) {
+                const addedItem = targetActor.getItem(addedItemResult[0].id);
+
+                if (game.settings.get('sfrpg', 'scalingCantrips') && sidebarItem.type === "spell") {
+                    _onScalingCantripDrop(addedItem, targetActor);
                 }
 
-                const addedItemResult = await targetActor.createItem(duplicate(sidebarItem.data));
-                if (addedItemResult.length > 0) {
-                    const addedItem = targetActor.getItem(addedItemResult[0].id);
-                    
-                    if (game.settings.get('sfrpg','scalingCantrips') && sidebarItem.type === "spell") {
-                        _onScalingCantripDrop(addedItem, targetActor);
+                if (targetContainer) {
+                    let newContents = [];
+                    if (targetContainer.data.data.container?.contents) {
+                        newContents = duplicate(targetContainer.data.data.container?.contents || []);
                     }
 
-                    if (targetContainer) {
-                        let newContents = [];
-                        if (targetContainer.data.data.container?.contents) {
-                            newContents = duplicate(targetContainer.data.data.container?.contents || []);
-                        }
+                    const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
+                    newContents.push({ id: addedItem.id, index: preferredStorageIndex });
 
-                        const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
-                        newContents.push({id: addedItem.id, index: preferredStorageIndex});
-                        
-                        const update = { id: targetContainer.id, "data.container.contents": newContents };
-                        await targetActor.updateItem(update);
-                    }
-
-                    return addedItem;
+                    const update = { id: targetContainer.id, "data.container.contents": newContents };
+                    await targetActor.updateItem(targetContainer.id, update);
                 }
-                return null;
+
+                return addedItem;
             }
-            
-            console.log("Unknown item source: " + JSON.stringify(parsedDragData));
+            return null;
         }
+
+        console.log("Unknown item source: " + JSON.stringify(parsedDragData));
     }
+    
 
     processItemContainment(items, pushItemFn) {
         const preprocessedItems = [];

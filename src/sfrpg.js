@@ -9,7 +9,7 @@
 import { SFRPG } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./module/canvas.js";
+import { measureDistances, canvasHandlerV10 } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
 import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
@@ -58,7 +58,6 @@ import RollContext from "./module/rolls/rollcontext.js";
 import RollTree from "./module/rolls/rolltree.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 
-let defaultDropHandler = null;
 let initTime = null;
 
 Hooks.once('init', async function () {
@@ -73,6 +72,8 @@ Hooks.once('init', async function () {
 |____/ \\__\\__,_|_|  |_| |_|_| |_|\\__,_|\\___|_|
 ==================================================`
     );
+
+    CONFIG.compatibility.mode = CONST.COMPATIBILITY_MODES.SILENT;
 
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
@@ -160,8 +161,15 @@ Hooks.once('init', async function () {
     CONFIG.Dice.rolls.unshift(SFRPGRoll);
 
     CONFIG.Token.documentClass = SFRPGTokenDocument;
-
-    CONFIG.fontFamilies.push("Exo2");
+    
+    CONFIG.fontDefinitions["Exo2"] = {
+        editor: true,
+        fonts: [
+        {urls: ["../systems/sfrpg/fonts/Exo2-VariableFont_wght.ttf"]},
+        {urls: ["../systems/sfrpg/fonts/Exo2-Italic-VariableFont_wght.ttf"], weight: 700}
+        ]
+    };
+    
     CONFIG.defaultFontFamily = "Exo 2";
 
     CONFIG.canvasTextStyle = new PIXI.TextStyle({
@@ -196,6 +204,9 @@ Hooks.once('init', async function () {
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
+
+    console.log("Starfinder | [READY] Preloading handlebar templates");
+    preloadHandlebarsTemplates();
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
@@ -271,17 +282,8 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [READY] Overriding token HUD");
     canvas.hud.token = new SFRPGTokenHUD();
 
-    console.log("Starfinder | [READY] Overriding canvas drop handler");
-    if (canvas.initialized) {
-        defaultDropHandler = canvas._dragDrop.callbacks.drop;
-        canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
-    }
-
     console.log("Starfinder | [READY] Setting up AOE template overrides");
     templateOverrides();
-
-    console.log("Starfinder | [READY] Preloading handlebar templates");
-    preloadHandlebarsTemplates();
 
     console.log("Starfinder | [READY] Caching starship actions");
     ActorSheetSFRPGStarship.ensureStarshipActions();
@@ -327,6 +329,8 @@ Hooks.once("ready", async () => {
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
 
+Hooks.on("dropCanvasData", (canvas, data) => canvasHandlerV10(canvas, data));
+
 async function migrateOldContainers() {
     const promises = [];
     for (const actor of game.actors.contents) {
@@ -353,43 +357,6 @@ async function migrateOldContainers() {
         console.log(`Starfinder | [READY] Updating containers in ${promises.length} documents.`);
         return Promise.all(promises);
     }
-}
-
-export async function handleOnDrop(event) {
-    event.preventDefault();
-
-	let data = null;
-	try {
-		data = JSON.parse(event.dataTransfer.getData('text/plain'));
-	} catch (err) {
-        defaultDropHandler(event);
-		return false;
-    }
-
-    // We're only interested in overriding item drops.
-    if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
-        return await defaultDropHandler(event);
-    }
-
-    // Transform the cursor position to canvas space
-	const [x, y] = [event.clientX, event.clientY];
-	const t = this.stage.worldTransform;
-	data.x = (x - t.tx) / canvas.stage.scale.x;
-    data.y = (y - t.ty) / canvas.stage.scale.y;
-
-    data.x -= Math.floor(canvas.grid.size / 2);
-    data.y -= Math.floor(canvas.grid.size / 2);
-
-    if (!event.shiftKey) {
-        const point = canvas.grid.getSnappedPosition(data.x, data.y, canvas.activeLayer.gridPrecision);
-        data.x = point.x;
-        data.y = point.y;
-    }
-
-    if (data.type === "Item") {
-        return handleItemDropCanvas(data);
-    }
-    return false;
 }
 
 Hooks.on("canvasInit", function () {

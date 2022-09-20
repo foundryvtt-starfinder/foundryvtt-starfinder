@@ -98,107 +98,6 @@ export const getBarAttribute = function (...args) {
     return data;
 }
 
-export async function handleItemDropCanvas(data) {
-    if (!canvas.initialized) { return; }
-    //console.log("Canvas::handleItemDrop()");
-    
-    // Potential sources:
-    // Actor sheet, Token Actor sheet (May be linked to an Actor), Sidebar Item, Compendium
-    let sourceActor = null;
-    let sourceItem = null;
-    let sourceItemData = null;
-    if (data["pack"]) {
-        // Source is compendium
-        //console.log("> Dragged item from compendium: " + data.pack);
-        const pack = game.packs.get(data.pack);
-        const document = await pack.getDocument(data.id);
-        sourceItemData = duplicate(document.data);
-    } else if (data["tokenId"]) {
-        // Source is token sheet
-        //console.log(["> Dragged item from token: ", data]);
-        const sourceToken = canvas.tokens.get(data.tokenId);
-        if (!sourceToken) {
-            ui.notifications.info(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
-            return;
-        }
-        sourceActor = new ActorItemHelper(sourceToken.actor.id, sourceToken.id, sourceToken.scene.id);
-        sourceItemData = duplicate(data.data);
-        sourceItem = sourceActor.getItem(sourceItemData._id);
-    } else if (data["actorId"]) {
-        // Source is actor sheet
-        //console.log("> Dragged item from actor: " + data.actorId);
-        sourceActor = new ActorItemHelper(data.actorId, null, null);
-        sourceItemData = duplicate(data.data);
-        sourceItem = sourceActor.getItem(sourceItemData.id);
-    } else if (data["id"]) {
-        // Source is sidebar
-        //console.log("> Dragged item from sidebar: " + data.id);
-        sourceItem = game.items.get(data.id);
-        sourceItemData = duplicate(sourceItem.data);
-    } else {
-        // Source is anywhere else
-        // TODO: Check what dragging from placable menu will look like
-        console.log("> Dragged item from unknown source!");
-        console.log(event);
-        console.log(data);
-        return;
-    }
-
-    // Potential targets:
-    // Canvas (floor), Token Actor (may be linked)
-    let targetActor = null;
-	for (const placeable of canvas.tokens.placeables) {
-		if (data.x < placeable.x + placeable.width && data.x > placeable.x && data.y < placeable.y + placeable.height && data.y > placeable.y && placeable instanceof Token) {
-			targetActor = placeable.actor;
-			break;
-		}
-    }
-
-    // Create a placeable instead and do item transferral there.
-    if (targetActor === null) {
-        const transferringItems = [sourceItemData];
-        if (sourceActor !== null && sourceItemData.data.container?.contents && sourceItemData.data.container.contents.length > 0) {
-            const containersToTest = [sourceItemData];
-            while (containersToTest.length > 0)
-            {
-                const container = containersToTest.shift();
-                const children = sourceActor.filterItems(x => container.data.container.contents.find(y => y.id === x.id));
-                if (children) {
-                    for (const child of children) {
-                        transferringItems.push(child.data);
-
-                        if (child.data.data.container?.contents && child.data.data.container.contents.length > 0) {
-                            containersToTest.push(child.data);
-                        }
-                    }
-                }
-            }
-        }
-
-        const hasDropped = placeItemCollectionOnCanvas(data.x, data.y, transferringItems, true);
-        if (hasDropped) {
-            // Remove old items
-            if (sourceActor) {
-                const idsToDrop = [];
-                for (const droppedItem of transferringItems) {
-                    idsToDrop.push(droppedItem._id);
-                }
-                sourceActor.deleteItem(idsToDrop);
-            }
-        }
-
-        return true;
-    }
-
-    const target = new ActorItemHelper(targetActor.id, targetActor.token.id, targetActor.token.parent.id)
-
-    if (sourceItem) {
-        return moveItemBetweenActorsAsync(sourceActor, sourceItem, target);
-    } else {
-        return target.createItem(sourceItemData);
-    }
-}
-
 /**
  * Places an item collection on the canvas as a token for players to interact with.
  * 
@@ -272,4 +171,91 @@ function openLootCollectionSheet(event) {
     const lootCollectionSheet = new ItemCollectionSheet(relevantToken.document);
     lootCollectionSheet.options.viewPermission = -1;
     lootCollectionSheet.render(true);
+}
+
+async function handleCanvasDropAsync(canvas, data) {
+    const document = await Item.fromDropData(data);
+    let sourceActor = null;
+    const sourceItem = document;
+    const sourceItemData = foundry.utils.duplicate(document.data);
+
+    if (document?.parent?.isToken ?? false) {
+        sourceActor = new ActorItemHelper(document.parent._id, document.parent.parent._id, document.parent.parent.parent._id);
+    } else if (document?.parent ?? false) {
+        sourceActor = new ActorItemHelper(document.parent._id);
+    }
+
+    // Potential targets:
+    // Canvas (floor), Token Actor (may be linked)
+    let targetActor = null;
+    for (const placeable of canvas.tokens.placeables) {
+        if (data.x < placeable.x + placeable.width && data.x > placeable.x && data.y < placeable.y + placeable.height && data.y > placeable.y && placeable instanceof Token) {
+            targetActor = placeable.actor;
+            break;
+        }
+    }
+
+    // Create a placeable instead and do item transferral there.
+    if (targetActor === null) {
+        let transferringItems = [sourceItemData];
+        if (sourceActor !== null && sourceItemData.system.container?.contents && sourceItemData.system.container.contents.length > 0) {
+            const containersToTest = [sourceItemData];
+            while (containersToTest.length > 0)
+            {
+                const container = containersToTest.shift();
+                const children = sourceActor.filterItems(x => container.data.container.contents.find(y => y.id === x.id));
+                if (children) {
+                    for (const child of children) {
+                        transferringItems.push(child.data);
+
+                        if (child.data.data.container?.contents && child.data.data.container.contents.length > 0) {
+                            containersToTest.push(child.data);
+                        }
+                    }
+                }
+            }
+        }
+        transferringItems = transferringItems.map(x => { //"rename" .system to .data so placeItemCollectionOnCanvas reads it correctly.
+            x.data = x.system;
+            return x;
+        });
+        const hasDropped = placeItemCollectionOnCanvas(data.x, data.y, transferringItems, true);
+        if (hasDropped) {
+            // Remove old items
+            if (sourceActor) {
+                const idsToDrop = [];
+                for (const droppedItem of transferringItems) {
+                    idsToDrop.push(droppedItem._id);
+                }
+                sourceActor.deleteItem(idsToDrop);
+            }
+        }
+        
+        return;
+    }
+
+    const target = new ActorItemHelper(targetActor.id, targetActor.token.id, targetActor.token.parent.id)
+
+    if (sourceItem) {
+        moveItemBetweenActorsAsync(sourceActor, sourceItem, target);
+    } else {
+        target.createItem(sourceItemData);
+    }
+}
+
+export function canvasHandlerV10(canvas, data) {
+    // We're only interested in overriding item drops.
+    if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
+        return true;
+    }
+
+    if (data.type === "Item") {
+        if (!canvas.initialized) { return true; }
+        //console.log("Canvas::handleItemDrop()");
+        
+        handleCanvasDropAsync(canvas, data).then(_ => {});
+        return false;
+    }
+    
+    return true;
 }

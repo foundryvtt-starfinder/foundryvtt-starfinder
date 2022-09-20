@@ -215,9 +215,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             }
 
             const duplicatedData = duplicate(itemToCreate.item);
-            if (duplicatedData.data.equipped) {
-                duplicatedData.data.equipped = false;
-            }
+            duplicatedData.system.equipped = false;
             
             items.push({item: duplicatedData, children: contents, parent: itemToCreate.parent});
         }
@@ -247,7 +245,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         }
 
         /** Ensure the original to-move item has the quantity correct. */
-        itemData[0].data.quantity = quantity;
+        itemData[0].system.quantity = quantity;
 
         if (itemData.length != items.length) {
             console.log(['Mismatch in item count', itemData, items]);
@@ -448,7 +446,7 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
         return null;
     }
 
-    for (const storageOption of container.data.data.container.storage) {
+    for (const storageOption of container.system.container.storage) {
         index += 1;
         if (storageOption.amount == 0) {
             //console.log(`Skipping storage ${index} because it has a 0 amount.`);
@@ -460,13 +458,13 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
             continue;
         }
 
-        if (storageOption.weightProperty && !itemToAdd.data.data[storageOption.weightProperty]) {
+        if (storageOption.weightProperty && !itemToAdd.system[storageOption.weightProperty]) {
             //console.log(`Skipping storage ${index} because it does not match the weight settings.`);
             continue;
         }
 
         if (storageOption.type === "slot") {
-            const storedItemLinks = container.data.data.container.contents.filter(x => x.index === index);
+            const storedItemLinks = container.system.container.contents.filter(x => x.index === index);
 
             const itemsTypes = ["", "ammunitionSlot"];
             if (storageOption.weightProperty === "items" || itemsTypes.includes(storageOption.subtype)) {
@@ -478,8 +476,8 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
             } else {
                 const storedItems = storedItemLinks.map(x => container.actor?.items.get(x.id)).filter(x => x);
                 const totalStoredAmount = storedItems.reduce((accumulator, currentValue, currentIndex, array) => {
-                    return accumulator + currentValue.data.data[storageOption.weightProperty];
-                }, itemToAdd.data.data[storageOption.weightProperty]);
+                    return accumulator + currentValue.system[storageOption.weightProperty];
+                }, itemToAdd.system[storageOption.weightProperty]);
 
                 if (totalStoredAmount > storageOption.amount) {
                     //console.log(`Skipping storage ${index} because it has too many items in the slots already. (${totalStoredAmount} / ${storageOption.amount})`);
