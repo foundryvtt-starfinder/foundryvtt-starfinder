@@ -92,22 +92,22 @@ export class ItemCollectionSheet extends DocumentSheet {
         for (const item of items) {
             item.img = item.img || DEFAULT_TOKEN;
 
-            item.data.quantity = item.data.quantity || 0;
-            item.data.price = item.data.price || 0;
-            item.data.bulk = item.data.bulk || "-";
+            item.system.quantity = item.system.quantity || 0;
+            item.system.price = item.system.price || 0;
+            item.system.bulk = item.system.bulk || "-";
 
             let weight = 0;
-            if (item.data.bulk === "L") {
+            if (item.system.bulk === "L") {
                 weight = 0.1;
-            } else if (item.data.bulk === "-") {
+            } else if (item.system.bulk === "-") {
                 weight = 0;
             } else {
-                weight = parseFloat(item.data.bulk);
+                weight = parseFloat(item.system.bulk);
             }
 
-            item.totalWeight = item.data.quantity * weight;
-            if (item.data.equippedBulkMultiplier !== undefined && item.data.equipped) {
-                item.totalWeight *= item.data.equippedBulkMultiplier;
+            item.totalWeight = item.system.quantity * weight;
+            if (item.system.equippedBulkMultiplier !== undefined && item.system.equipped) {
+                item.totalWeight *= item.system.equippedBulkMultiplier;
             }
             item.totalWeight = item.totalWeight < 1 && item.totalWeight > 0 ? "L" : 
                             item.totalWeight === 0 ? "-" : Math.floor(item.totalWeight);
@@ -155,7 +155,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         for (const item of items) {
             const itemData = {
                 item: item,
-                parent: items.find(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === item._id)),
+                parent: items.find(x => x.system.container?.contents && x.system.container.contents.find(y => y.id === item._id)),
                 contents: []
             };
             preprocessedItems.push(itemData);
@@ -201,7 +201,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         let li = $(event.currentTarget).parents('.item');
         let itemId = li.attr("data-item-id");
         const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
-        let chatData = this.getChatData(item, { secrets: true, rollData: item.data.data });
+        let chatData = this.getChatData(item, { secrets: true, rollData: item.system.data });
 
         if (li.hasClass('expanded')) {
             let summary = li.children('.item-summary');
@@ -243,7 +243,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         let itemId = li.attr("data-item-id");
 
         const itemToDelete = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
-        let containsItems = (itemToDelete.data.container?.contents && itemToDelete.data.container.contents.length > 0);
+        let containsItems = (itemToDelete.system.container?.contents && itemToDelete.system.container.contents.length > 0);
         ItemDeletionDialog.show(itemToDelete.name, containsItems, (recursive) => {
             this._deleteItemById(itemId, recursive);
             li.slideUp(200, () => this.render(false));
@@ -258,8 +258,8 @@ export class ItemCollectionSheet extends DocumentSheet {
             while (itemsToTest.length > 0) {
                 let itemIdToTest = itemsToTest.shift();
                 let itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemIdToTest);
-                if (itemData.data.container?.contents) {
-                    for (let content of itemData.data.container.contents) {
+                if (itemData.system.container?.contents) {
+                    for (let content of itemData.system.container.contents) {
                         itemsToDelete.push(content.id);
                         itemsToTest.push(content.id);
                     }
@@ -417,18 +417,25 @@ export class ItemCollectionSheet extends DocumentSheet {
   
     /** @override */
     async _onDrop(event) {
-        let data;
-        try {
-            data = JSON.parse(event.dataTransfer.getData('text/plain'));
-            if (data.type !== "Item") return;
-        } catch (err) {
-            return false;
-        }
+        let data = TextEditor.getDragEventData(event);
+
+        if (data.type !== "Item") return;
+        const item = await Item.fromDropData(data);
+        console.log(item);
 
         let targetContainer = null;
         if (event) {
             const targetId = $(event.target).parents('.item').attr('data-item-id')
             targetContainer = this.findItem(targetId);
+        }
+
+        const sourceActorId = item.parent?._id;
+        let sourceTokenId = null;
+        let sourceSceneId = null;
+
+        if (item.parent?.isToken) {
+            sourceTokenId = item.parent.parent._id;
+            sourceSceneId = item.parent.parent.parent._id;
         }
 
         const msg = {
@@ -438,13 +445,13 @@ export class ItemCollectionSheet extends DocumentSheet {
                 sceneId: this.itemCollection.parent.id
             },
             source: {
-                actorId: data.actorId,
-                tokenId: data.tokenId,
-                sceneId: data.sceneId,
+                actorId: sourceActorId,
+                tokenId: sourceTokenId,
+                sceneId: sourceSceneId,
             },
-            draggedItemId: data.id,
-            draggedItemData: data.data,
-            pack: data.pack,
+            draggedItemId: item.id,
+            draggedItemData: item.data,
+            pack: item.pack,
             containerId: targetContainer ? targetContainer.id : null
         }
 
