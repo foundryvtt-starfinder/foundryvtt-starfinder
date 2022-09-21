@@ -7,6 +7,7 @@
     "abilityMods": {
       "parts": []
     },
+    "ammunitionType": "",
     "attributes": {
       "ac": {
         "value": ""
@@ -20,7 +21,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 10
       },
       "size": "medium",
       "sturdy": false
@@ -28,8 +29,14 @@
     "attuned": false,
     "bulk": "-",
     "capacity": {
-      "max": 0,
-      "value": 0
+      "max": 1,
+      "value": 1
+    },
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
     },
     "critical": {
       "parts": []
@@ -44,25 +51,52 @@
       "unidentified": "",
       "value": "<p>This long, thin scarf is usually marked with an alternating pattern of light and dark shapes. While wearing a celestial stole, you gain cold resistance 5 or fire resistance 5 (your choice when you first don the stole); you can alter the type of energy resistance (choosing between cold and fire) once per day after 8 hours of rest. If you have cold or fire resistance from the solarian&rsquo;s solar armor solar manifestation, increase that resistance by 5.</p>"
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "hands": 0,
     "identified": true,
     "level": 5,
-    "modifiers": [],
+    "limitedWear": true,
+    "modifiers": [
+      {
+        "_id": "0788e97f-0966-422b-b6a4-95f3277fd2fc",
+        "name": "Celestial stole - Cold",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "While wearing a celestial stole, you gain cold resistance 5 or fire resistance 5 (your choice when you first don the stole); you can alter the type of energy resistance (choosing between cold and fire) once per day after 8 hours of rest.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      },
+      {
+        "_id": "bc5d1de5-effc-4838-8b90-0656cafc9927",
+        "name": "Celestial stole -  Fire",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "While wearing a celestial stole, you gain cold resistance 5 or fire resistance 5 (your choice when you first don the stole); you can alter the type of energy resistance (choosing between cold and fire) once per day after 8 hours of rest.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fire"
+      }
+    ],
     "price": 3000,
     "quantity": 1,
+    "quantityPerPack": 1,
     "source": "AP#4, p. 45",
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "action",
+      "value": 1
     }
   },
-  "effects": [],
-  "flags": {},
-  "img": "icons/commodities/cloth/cloth-bolt-gold-red.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  }
+  "img": "icons/commodities/cloth/cloth-bolt-gold-red.webp"
 }

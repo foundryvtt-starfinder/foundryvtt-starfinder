@@ -15,6 +15,7 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
       "shape": "",
@@ -49,6 +50,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -70,20 +72,29 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "2d8 + @abilities.str.mod",
-          "operator": "",
           "types": {
-            "slashing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": true,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>It is thought that Thruneblades were originally created in the Golarion nation of Cheliax sometime before the Gap, but no records of their creation or what they were originally called have been found, even in pre-Gap sources. Scholars believe that these weapons were widely distributed to agents of Cheliax&rsquo;s ruling House of Thrune; Thruneblades bear the heraldry of House Thrune as well as the name &ldquo;Thrune&rdquo; etched on each blade, whence the weapons derive their modern name. Relic Thruneblades from pre-Gap Golarion are invariably bladed melee weapons, with swords being most prevalent. The common characteristic of all Thruneblades is their spellbane critical hit effect, though many such weapons have additional magic abilities, such as the unholy weapon fusion. Modern scholars have successfully reengineered the spellbane fusion for use with modern weapons. The Thruneblade presented in the table on page 50 is a sintered longsword with the spellbane fusion. This weapon is one of the most commonly available Thruneblades, and the price includes both the weapon and the fusion.</p>"
+      "value": "<p>It is thought that Thruneblades were originally created in the Golarion nation of Cheliax sometime before the Gap, but no records of their creation or what they were originally called have been found, even in pre-Gap sources. Scholars believe that these weapons were widely distributed to agents of Cheliax&rsquo;s ruling House of Thrune; Thruneblades bear the heraldry of House Thrune as well as the name &ldquo;Thrune&rdquo; etched on each blade, whence the weapons derive their modern name. Relic Thruneblades from pre-Gap Golarion are invariably bladed melee weapons, with swords being most prevalent. The common characteristic of all Thruneblades is their spellbane critical hit effect, though many such weapons have additional magic abilities, such as the unholy weapon fusion. Modern scholars have successfully reengineered the spellbane fusion for use with modern weapons. The Thruneblade presented in the table on page 50 is a @Compendium[sfrpg.equipment.9N81Lk3nY5AvVhyN]{sintered longsword} with the @Compendium[sfrpg.equipment.K7kWHmuLleAaKLQf]{Spellbane} fusion. This weapon is one of the most commonly available Thruneblades, and the price includes both the weapon and the fusion.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -113,6 +124,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -131,6 +143,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -157,6 +170,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -165,6 +179,7 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
       "shatter": false,
       "shells": false,
@@ -179,6 +194,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -188,12 +204,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "touch",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
@@ -201,6 +219,22 @@
     },
     "source": "AP#1, p. 52",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -217,11 +251,5 @@
     "weaponCategory": "uncategorized",
     "weaponType": "advancedM"
   },
-  "effects": [],
-  "flags": {},
-  "img": "systems/sfrpg/icons/equipment/weapons/longsword-sintered.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  }
+  "img": "systems/sfrpg/icons/equipment/weapons/longsword-sintered.webp"
 }
