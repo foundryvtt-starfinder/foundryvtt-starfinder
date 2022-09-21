@@ -349,7 +349,8 @@ async function cookWithOptions(options = { formattingCheck: true }) {
                 fixTokenName(jsonInput);
 
                 // Fix missing images
-                if (!jsonInput.img) {
+                if (!jsonInput.img && !jsonInput.pages) {
+					// Skip if a journal
                     jsonInput.img = "icons/svg/mystery-man.svg";
                 }
                 
