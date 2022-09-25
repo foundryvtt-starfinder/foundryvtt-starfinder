@@ -91,10 +91,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         //   0       1      2               3           4
         let [spells, other, conditionItems, droneItems, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
-            item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
-            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
-            item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
+            item.isStack = item.system.quantity ? item.system.quantity > 1 : false;
+            item.isOnCooldown = item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false);
+            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
+            item.hasDamage = item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
             item.hasUses = item.document.canBeUsed();
             item.isCharged = !item.hasUses || item.document.getRemainingUses() <= 0 || !item.isOnCooldown;
 
@@ -111,14 +111,14 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             if (droneItemTypes.includes(item.type)) {
                 arr[3].push(item); // droneItems
             } else if (item.type === "spell") {
-                const container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
+                const container = data.items.find(x => x.sysetm.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
                     arr[0].push(item); // spells
                 } else {
                     arr[1].push(item); // other
                 }
             } else if (item.type === "feat") {
-                if ((item.data.requirements?.toLowerCase() || "") === "condition") {
+                if ((item.system.requirements?.toLowerCase() || "") === "condition") {
                     arr[2].push(item); // conditionItems
                 } else {
                     arr[1].push(item); // other
@@ -140,22 +140,22 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         // Organize Features
         const itemsToProcess = [];
         for (const item of other) {
-            const container = this.actor.items.contents.find(x => x.data.data.container?.contents?.find(y => y.id === item._id) !== undefined);
+            const container = this.actor.items.contents.find(x => x.system.container?.contents?.find(y => y.id === item._id) !== undefined);
 
             if (["weapon", "shield"].includes(item.type)) {
-                item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
-                if (!item.data.containerId && !container) {
+                item.isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
+                if (!item.system.containerId && !container) {
                     features.weapons.items.push(item);
                 }
                 itemsToProcess.push(item);
             }
             else if (item.type === "feat") {
-                if (item.data.activation.type) features.actions.items.push(item);
+                if (item.system.activation.type) features.actions.items.push(item);
                 else features.passive.items.push(item);
             }
             else if (["consumable", "technological"].includes(item.type)) {
-                item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
-                if (!item.data.containerId) {
+                item.isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
+                if (!item.system.containerId) {
                     features.activeItems.items.push(item);
                 }
                 itemsToProcess.push(item);
@@ -169,7 +169,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 }
                 features[item.type].items.push(item);
             } else if (item.type in SFRPG.itemTypes) {
-                item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
+                item.isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
                 itemsToProcess.push(item);
             }
         }
@@ -268,9 +268,9 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     }
 
     async _duplicateAsNewStyleNPC(event) {
-        let actorData = duplicate(this.actor.data);
+        let actorData = duplicate(this.actor);
 
-        if (this.token && !this.token.data.actorLink) {
+        if (this.token && !this.token.actorLink) {
             // If it is an unlinked actor, ask if the user wants to duplicate the original actor, or use the unlinked actor data instead
             let useOriginalActor = null;
             await ActorSheetSFRPGNPC._selectActorData({
@@ -290,28 +290,28 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             if (useOriginalActor === true) {
                 const originalActor = game.actors.get(this.token.actor.id);
                 if (originalActor) {
-                    actorData = duplicate(originalActor.data);
+                    actorData = duplicate(originalActor);
                 }
             }
         }
 
         // Convert the old user input into the new architecture
-        for (const [abl, ability] of Object.entries(actorData.data.abilities)) {
+        for (const [abl, ability] of Object.entries(actorData.system.abilities)) {
             ability.base = ability.mod;
         }
 
-        for (const [skl, skill] of Object.entries(actorData.data.skills)) {
+        for (const [skl, skill] of Object.entries(actorData.system.skills)) {
             if (skill.enabled) {
                 skill.ranks = skill.mod;
             }
         }
-        actorData.data.attributes.eac.base = actorData.data.attributes.eac.value;
-        actorData.data.attributes.kac.base = actorData.data.attributes.kac.value;
-        actorData.data.attributes.init.value = actorData.data.attributes.init.total;
+        actorData.system.attributes.eac.base = actorData.system.attributes.eac.value;
+        actorData.system.attributes.kac.base = actorData.system.attributes.kac.value;
+        actorData.system.attributes.init.value = actorData.system.attributes.init.total;
 
-        actorData.data.attributes.fort.base = actorData.data.attributes.fort.bonus;
-        actorData.data.attributes.reflex.base = actorData.data.attributes.reflex.bonus;
-        actorData.data.attributes.will.base = actorData.data.attributes.will.bonus;
+        actorData.system.attributes.fort.base = actorData.system.attributes.fort.bonus;
+        actorData.system.attributes.reflex.base = actorData.system.attributes.reflex.bonus;
+        actorData.system.attributes.will.base = actorData.system.attributes.will.bonus;
 
         // Create NPC actor with name + " - New Style"
         actorData.name += " - New Style";
