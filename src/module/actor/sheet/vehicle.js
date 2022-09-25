@@ -44,7 +44,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * @param {Object} data The data object to update with any crew data.
      */
     async _getCrewData(data) {
-        let crewData = this.actor.data.data.crew;
+        let crewData = this.actor.system.crew;
         
         const pilotActors = crewData.pilot.actorIds.map(crewId => game.actors.get(crewId));
         const complementActors = crewData.complement.actorIds.map(crewId => game.actors.get(crewId));
@@ -67,8 +67,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * @param {Object} data The data object to update with any hangar bay data.
      */
     async _getHangarBayData(data) {
-        let hangarBayData = this.actor.data.data.hangarBay;
-        data.hasHangarBays = this.actor.data.data.hangarBay.limit > 0;
+        let hangarBayData = this.actor.system.hangarBay;
+        data.hasHangarBays = this.actor.system.hangarBay.limit > 0;
 
         const hangarBayActors = hangarBayData.actorIds.map(crewId => game.actors.get(crewId));
         const localizedNoLimit = game.i18n.localize("SFRPG.VehicleSheet.Hangar.UnlimitedMax");
@@ -116,7 +116,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             // vehicle sheet until we can assign passengers and access their dexterity modifiers.
             if (itemData.item.type === "vehicleAttack") {
 
-                itemData.item.hasDamage = itemData.item.data.damage?.parts && itemData.item.data.damage.parts.length > 0;
+                itemData.item.hasDamage = itemData.item.system.damage?.parts && itemData.item.system.damage.parts.length > 0;
             }
             inventory.inventory.items.push(itemData);
         });
@@ -185,7 +185,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      */
     _updateObject(event, formData) {
         const levels = { "1/4": 0.25, "1/3": 1/3, "1/2": 0.5 };
-        let v = "data.details.level";
+        let v = "system.details.level";
         let lvl = formData[v];
         lvl = levels[lvl] || parseFloat(lvl);
         if (lvl) formData[v] = lvl < 1 ? lvl : parseInt(lvl);
@@ -215,7 +215,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             const actor = Actor.fromDropData(data);
 
             // Other vehicles are only acceptable if this vehicle has 1 or more hangar bays
-            if (actor.data.type === "vehicle") {
+            if (actor.type === "vehicle") {
                 return this._onVehicleDrop(event, data);
             }
             // The only other actors allowed are crew
@@ -281,13 +281,13 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         if (!data.id) return false;
 
-        const hangarBay = duplicate(this.actor.data.data.hangarBay);
+        const hangarBay = duplicate(this.actor.system.hangarBay);
 
         if (hangarBay.limit === -1 || hangarBay.actorIds.length < hangarBay.limit) {
             hangarBay.actorIds.push(data.id);
 
             await this.actor.update({
-                "data.hangarBay": hangarBay
+                "system.hangarBay": hangarBay
             }).then(this.render(false));
         } else {
             ui.notifications.error(game.i18n.localize("SFRPG.VehicleSheet.Hangar.VehiclesLimitReached"));
@@ -310,7 +310,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const targetRole = event.target.dataset.role;
         if (!targetRole || !data.id) return false;
 
-        const crew = duplicate(this.actor.data.data.crew);
+        const crew = duplicate(this.actor.system.crew);
         const crewRole = crew[targetRole];
         const oldRole = this.actor.getCrewRoleForActor(data.id);
 
@@ -323,7 +323,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             }
 
             await this.actor.update({
-                "data.crew": crew
+                "system.crew": crew
             }).then(this.render(false));
         } else {
             ui.notifications.error(game.i18n.format("SFRPG.VehicleSheet.Passengers.PassengersLimitReached", {targetRole: targetRole}));
@@ -387,14 +387,14 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
 
-        if (!this.actor.data?.data?.hangarBay.actorIds) {
+        if (!this.actor.system?.hangarBay.actorIds) {
             return null;
         }
 
-        const hangarData = duplicate(this.actor.data.data.hangarBay);
+        const hangarData = duplicate(this.actor.system.hangarBay);
         hangarData.actorIds = hangarData.actorIds.filter(x => x !== actorId);
         await this.actor.update({
-            "data.hangarBay": hangarData
+            "system.hangarBay": hangarData
         });
     }
 
@@ -473,8 +473,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : false;
-        await item.update({'data.isActive': desiredOutput});
+        const desiredOutput = (item.system.isActive === true || item.system.isActive === false) ? !item.system.isActive : false;
+        await item.update({'system.isActive': desiredOutput});
 
         // Render the chat card template
         const templateData = {
@@ -508,8 +508,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const item = this.actor.items.get(itemId);
         const updateData = {};
 
-        const desiredOutput = (item.data.data.isActive === true || item.data.data.isActive === false) ? !item.data.data.isActive : true;
-        updateData['data.isActive'] = desiredOutput;
+        const desiredOutput = (item.system.isActive === true || item.system.isActive === false) ? !item.system.isActive : true;
+        updateData['system.isActive'] = desiredOutput;
 
         await item.update(updateData);
 
