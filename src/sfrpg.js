@@ -376,7 +376,7 @@ Hooks.on("renderChatLog", (app, html, data) => ItemSFRPG.chatListeners(html));
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {
     if (data.type !== "Item") return;
-    createItemMacro(data.data, slot);
+    createItemMacro(data, slot);
     return false;
 });
 
@@ -421,7 +421,6 @@ function registerMathFunctions() {
  */
 async function createItemMacro(data, slot) {
     const item = await Item.fromDropData(data);
-    console.log(item, data);
     const command = `game.sfrpg.rollItemMacro("${item.name}");`;
     let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
