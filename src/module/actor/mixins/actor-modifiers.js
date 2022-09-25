@@ -54,7 +54,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         condition = "",
         id = null
     } = {}) {
-        const data = this._ensureHasModifiers(duplicate(this.data.data));
+        const data = this._ensureHasModifiers(duplicate(this.system));
         const modifiers = data.modifiers;
 
         modifiers.push(new SFRPGModifier({
@@ -72,7 +72,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             id
         }));
 
-        await this.update({["data.modifiers"]: modifiers});
+        await this.update({["system.modifiers"]: modifiers});
     }
 
     /**
@@ -81,9 +81,9 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @param {String} id The id for the modifier to delete
      */
     async deleteModifier(id) {
-        const modifiers = this.data.data.modifiers.filter(mod => mod._id !== id);
+        const modifiers = this.system.modifiers.filter(mod => mod._id !== id);
         
-        await this.update({"data.modifiers": modifiers});
+        await this.update({"system.modifiers": modifiers});
     }
 
     /**
@@ -92,7 +92,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @param {String} id The id for the modifier to edit
      */
     editModifier(id) {
-        const modifiers = duplicate(this.data.data.modifiers);
+        const modifiers = duplicate(this.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === id);
 
         new SFRPGModifierApplication(modifier, this).render(true);
@@ -105,7 +105,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @param {Boolean} ignoreEquipment Should we ignore equipment modifiers? Defaults to false.
      */
     getAllModifiers(ignoreTemporary = false, ignoreEquipment = false) {
-        let allModifiers = this.data.data.modifiers.filter(mod => {
+        let allModifiers = this.system.modifiers.filter(mod => {
             return (!ignoreTemporary || mod.subtab === "permanent");
         });
 
@@ -113,8 +113,8 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             actorModifier.container = {actorId: this.id, itemId: null};
         }
 
-        for (const item of this.data.items) {
-            const itemData = item.data.data;
+        for (const item of this.items) {
+            const itemData = item.system;
             const itemModifiers = itemData.modifiers;
 
             let modifiersToConcat = [];
@@ -123,8 +123,8 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                 case "upgrade":
                     {
                         if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item);
-                            if (container && container.type === "equipment" && container.data.data.equipped) {
+                            const container = getItemContainer(this.items, item);
+                            if (container && container.type === "equipment" && container.system.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
                         }
@@ -137,7 +137,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                     {
                         if (!ignoreEquipment) {
                             const container = getItemContainer(this.data.items, item);
-                            if (container && container.type === "weapon" && container.data.data.equipped) {
+                            if (container && container.type === "weapon" && container.system.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }
                         }
