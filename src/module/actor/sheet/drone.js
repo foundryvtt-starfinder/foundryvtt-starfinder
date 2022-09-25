@@ -75,10 +75,10 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         //   0      1      2        3     4               5
         let [items, feats, chassis, mods, conditionItems, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
-            item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
-            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (item.type !== "weapon" || item.data.equipped);
-            item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (item.type !== "weapon" || item.data.equipped);
+            item.isStack = item.system.quantity ? item.system.quantity > 1 : false;
+            item.isOnCooldown = item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false);
+            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (item.type !== "weapon" || item.system.equipped);
+            item.hasDamage = item.system.damage?.parts && item.system.damage.parts.length > 0 && (item.type !== "weapon" || item.system.equipped);
             item.hasUses = item.document.canBeUsed();
             item.isCharged = !item.hasUses || item.document.getRemainingUses() <= 0 || !item.isOnCooldown;
 
@@ -93,7 +93,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             }
 
             if (item.type === "feat") {
-                if ((item.data.requirements?.toLowerCase() || "") === "condition") {
+                if ((item.system.requirements?.toLowerCase() || "") === "condition") {
                     arr[4].push(item); // conditionItems
                 } else {
                     arr[1].push(item); // feats
@@ -109,7 +109,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         
         this.processItemContainment(items, function (itemType, itemData) {
             if (itemType === "weapon") {
-                if (itemData.item.data.equipped) {
+                if (itemData.item.system.equipped) {
                     inventory[itemType].items.push(itemData);
                 } else {
                     inventory["cargo"].items.push(itemData);    
@@ -127,7 +127,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         let activeFeats = [];
         let passiveFeats = [];
         for (let f of feats) {
-            if (f.data.activation.type) activeFeats.push(f);
+            if (f.system.activation.type) activeFeats.push(f);
             else passiveFeats.push(f);
         }
 
@@ -249,7 +249,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = duplicate(this.actor.data.data.modifiers);
+        const modifiers = duplicate(this.actor.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
         modifier.enabled = !modifier.enabled;
 
@@ -267,7 +267,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        return item.update({'data.preparation.prepared': !item.data.data.preparation.prepared});
+        return item.update({'system.preparation.prepared': !item.system.preparation.prepared});
     }
 
     /**
