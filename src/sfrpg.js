@@ -580,27 +580,6 @@ function setupHandlebars() {
         return left || right;
     });
 
-    Handlebars.registerHelper('editorPlus', function (options) {
-        const target = options.hash['target'];
-        if ( !target ) throw new Error("You must define the name of a target field.");
-    
-        // Enrich the content
-        const isOwner = Boolean(options.hash['isOwner']);
-        const rolls = Boolean(options.hash['rolls']);
-        const rollData = options.hash['rollData'];
-        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: isOwner, documents: true, rolls: rolls, rollData: rollData});
-        const maxSize = Boolean(options.hash['maxSize']) ? ` style="flex: 1;"` : "";
-    
-        // Construct the HTML
-        let editor = $(`<div class="editor flexcol"${maxSize}><div class="editor-content"${maxSize} data-edit="${target}">${content}</div></div>`);
-    
-        // Append edit button
-        const button = Boolean(options.hash['button']);
-        const editable = Boolean(options.hash['editable']);
-        if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
-        return new Handlebars.SafeString(editor[0].outerHTML);
-    });
-
     Handlebars.registerHelper('createTippy', function (options) {
         const title = options.hash['title'];
         const subtitle = options.hash['subtitle'];

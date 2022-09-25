@@ -57,14 +57,29 @@
 
         <section class="desc-body">
             <div class="tab flexrow" data-group="descriptionTabs" data-tab="description">
-                {{editorPlus content=itemData.description.value target="data.description.value" button=true isOwner=isOwner editable=editable rolls=false rollData=itemData}}
+                {{editor
+                    enrichedDescription
+                    target="data.description.value"
+                    button=true
+                    editable=editable
+                }}
             </div>
             <div class="tab flexrow" data-group="descriptionTabs" data-tab="descriptionShort">
-                {{editorPlus content=itemData.description.short target="data.description.short" button=true isOwner=isOwner editable=editable rolls=false rollData=itemData}}
+                {{editor
+                    enrichedShortDescription
+                    target="data.description.short"
+                    button=true
+                    editable=editable
+                }}
             </div>
             {{#if isGM}}
             <div class="tab flexrow" data-group="descriptionTabs" data-tab="gmNotes">
-                {{editorPlus content=itemData.description.gmNotes target="data.description.gmNotes" button=true isOwner=isOwner editable=editable rolls=false rollData=itemData}}
+                {{editor
+                    enrichedGMNotes
+                    target="data.description.gmNotes"
+                    button=true
+                    editable=editable
+                }}
             </div>
             {{/if}}
         </section>

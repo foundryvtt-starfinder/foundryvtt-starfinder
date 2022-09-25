@@ -22,7 +22,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         return "systems/sfrpg/templates/actors/vehicle-sheet-full.html";
     }
 
-    getData() {
+    async getData() {
         const data = super.getData();
 
         let lvl = parseFloat(data.data.details.level || 0);
@@ -31,6 +31,9 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         this._getCrewData(data)
         this._getHangarBayData(data)
+
+        // Encrich text editors
+        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.description.value, {async: true});
 
         return data;
     }

@@ -10,8 +10,12 @@
     <!-- BODY -->
     <section class="sheet-body">
         <div class="tab biography">
-            {{editorPlus content=data.details.biography.value target="data.details.biography.value" button=true isOwner=isOwner editable=editable rolls=false rollData=data}}
-        </div>
+            {{editor
+                enrichedDescription
+                target="data.details.description.value"
+                button=true
+                editable=editable
+            }}
     </section>
 
     <!-- SIDEBAR -->
