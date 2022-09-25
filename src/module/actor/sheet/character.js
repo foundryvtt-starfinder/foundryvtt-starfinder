@@ -75,11 +75,11 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         //   0      1       2      3        4      5       6           7               8     9
         let [items, spells, feats, classes, races, themes, archetypes, conditionItems, asis, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
-            item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
-            item.isOpen = item.type === "container" ? item.data.container.isOpen : true;
-            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.data.actionType) && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
-            item.hasDamage = item.data.damage?.parts && item.data.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.data.equipped);
+            item.isStack = item.system.quantity ? item.system.quantity > 1 : false;
+            item.isOnCooldown = item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false);
+            item.isOpen = item.type === "container" ? item.system.container.isOpen : true;
+            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
+            item.hasDamage = item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
             item.hasUses = item.document.canBeUsed();
             item.isCharged = !item.hasUses || item.document.getRemainingUses() <= 0 || !item.isOnCooldown;
 
@@ -94,7 +94,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             }
 
             if (item.type === "spell") {
-                const container = data.items.find(x => x.data.container?.contents?.find(x => x.id === item._id) || false);
+                const container = data.items.find(x => x.system.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
                     arr[1].push(item); // spells
                 } else {
@@ -102,7 +102,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 }
             }
             else if (item.type === "feat") {
-                if ((item.data.requirements?.toLowerCase() || "") === "condition") {
+                if ((item.system.requirements?.toLowerCase() || "") === "condition") {
                     arr[7].push(item); // conditionItems
                 } else {
                     arr[2].push(item); // feats
@@ -157,7 +157,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         };
 
         for (let f of feats) {
-            if (f.data.activation.type) features.active.items.push(f);
+            if (f.system.activation.type) features.active.items.push(f);
             else features.passive.items.push(f);
         }
 
@@ -235,7 +235,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        return item.update({'data.preparation.prepared': !item.data.data.preparation.prepared});
+        return item.update({'system.preparation.prepared': !item.system.preparation.prepared});
     }
 
     /**
