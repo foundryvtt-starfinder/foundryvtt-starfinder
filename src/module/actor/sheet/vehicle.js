@@ -194,21 +194,22 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onDrop(event) {
         event.preventDefault();
 
-        let data;
-        try {
-            data = JSON.parse(event.dataTransfer.getData('text/plain'));
-            if (!data) {
-                return false;
-            }
-        } catch (err) {
-            return false;
-        }
+        // let data;
+        // try {
+        //     data = JSON.parse(event.dataTransfer.getData('text/plain'));
+        //     if (!data) {
+        //         return false;
+        //     }
+        // } catch (err) {
+        //     return false;
+        // }
+
+        const data = TextEditor.getDragEventData(event);
+        if (!data) return false;
 
         // Case - Dropped Actor
         if (data.type === "Actor") {
-
-            const actorId = data.id;
-            const actor = game.actors.get(actorId);
+            const actor = Actor.fromDropData(data);
 
             // Other vehicles are only acceptable if this vehicle has 1 or more hangar bays
             if (actor.data.type === "vehicle") {

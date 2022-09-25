@@ -414,19 +414,23 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     async _onDrop(event) {
         event.preventDefault();
 
-        let data;
-        try {
-            data = JSON.parse(event.dataTransfer.getData('text/plain'));
-            if (!data) {
-                return false;
-            }
-        } catch (err) {
-            return false;
-        }
+        // let data;
+        // try {
+        //     data = JSON.parse(event.dataTransfer.getData('text/plain'));
+        //     if (!data) {
+        //         return false;
+        //     }
+        // } catch (err) {
+        //     return false;
+        // }
+
+        const data = TextEditor.getDragEventData(event);
+        if (!data) return false;
 
         // Case - Dropped Actor
         if (data.type === "Actor") {
-            return this._onCrewDrop(event, data);
+            const actor = Actor.fromDropData(data);
+            return this._onCrewDrop(event, actor.id);
         } else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
 
@@ -483,22 +487,24 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
        let itemData = null;
 
        const actor = this.actor;
-       if (data.pack) {
-           const pack = game.packs.get(data.pack);
-           if (pack.documentName !== "Item") return;
-           itemData = await pack.getDocument(data.id);
-       } else if (data.data) {
-           let sameActor = data.actorId === actor.id;
-           if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
-           if (sameActor) {
-               await this._onSortItem(event, data.data);
-           }
-           itemData = data.data;
-       } else {
-           let item = game.items.get(data.id);
-           if (!item) return;
-           itemData = item.data;
-       }
+       const item = await Item.fromDropData(data);
+       itemData = item.data;
+    //    if (data.pack) {
+    //        const pack = game.packs.get(data.pack);
+    //        if (pack.documentName !== "Item") return;
+    //        itemData = await pack.getDocument(data.id);
+    //    } else if (data.data) {
+    //        let sameActor = data.actorId === actor.id;
+    //        if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
+    //        if (sameActor) {
+    //            await this._onSortItem(event, data.data);
+    //        }
+    //        itemData = data.data;
+    //    } else {
+    //        let item = game.items.get(data.id);
+    //        if (!item) return;
+    //        itemData = item.data;
+    //    }
 
        return duplicate(itemData);
    }
@@ -507,26 +513,26 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      * Handles drop events for the Crew list
      * 
      * @param {Event}  event The originating drop event
-     * @param {object} data  The data transfer object.
+     * @param {string} actorId  The id of the crew being dropped on the starship.
      */
-    async _onCrewDrop(event, data) {
+    async _onCrewDrop(event, actorId) {
         // event.preventDefault();
 
         $(event.target).css('background', '');
 
         const targetRole = event.target.dataset.role;
-        if (!targetRole || !data.id) return false;
+        if (!targetRole || !actorId) return false;
 
         const crew = duplicate(this.actor.data.data.crew);
         const crewRole = crew[targetRole];
-        const oldRole = this.actor.getCrewRoleForActor(data.id);
+        const oldRole = this.actor.getCrewRoleForActor(actorId);
 
         if (crewRole.limit === -1 || crewRole.actorIds.length < crewRole.limit) {
-            crewRole.actorIds.push(data.id);
+            crewRole.actorIds.push(actorId);
 
             if (oldRole) {
                 const originalRole = crew[oldRole];
-                originalRole.actorIds = originalRole.actorIds.filter(x => x != data.id);
+                originalRole.actorIds = originalRole.actorIds.filter(x => x != actorId);
             }
     
             await this.actor.update({
