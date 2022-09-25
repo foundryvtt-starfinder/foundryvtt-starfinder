@@ -203,7 +203,12 @@
         
         {{!-- Description Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
-            {{editorPlus content=data.details.description.value target="data.details.description.value" button=true isOwner=isOwner editable=editable rolls=false rollData=data}}
+            {{editor
+                enrichedDescription
+                target="data.details.description.value"
+                button=true
+                editable=editable
+            }}
         </div>
     </section>
 </form>

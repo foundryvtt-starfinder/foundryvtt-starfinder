@@ -88,7 +88,7 @@ export class ItemSheetSFRPG extends ItemSheet {
      * Prepare item sheet data
      * Start with the base item data and extending with additional properties for rendering.
      */
-    getData() {
+    async getData() {
         const data = super.getData();
 
         data.itemData = this.document.data.data;
@@ -185,6 +185,11 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         data.hasSpeed = this.item.data.data.weaponType === "tracking" || (this.item.data.data.special && this.item.data.data.special["limited"]);
         data.hasCapacity = this.item.hasCapacity();
+
+        // Enrich text editors
+        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description.value, {async: true});
+        data.enrichedShortDescription = await TextEditor.enrichHTML(this.object.system.description.short, {async: true});
+        data.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.description.gmNotes, {async: true});
 
         return data;
     }

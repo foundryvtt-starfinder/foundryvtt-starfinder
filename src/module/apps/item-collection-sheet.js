@@ -110,7 +110,7 @@ export class ItemCollectionSheet extends DocumentSheet {
                 item.totalWeight *= item.system.equippedBulkMultiplier;
             }
             item.totalWeight = item.totalWeight < 1 && item.totalWeight > 0 ? "L" : 
-                            item.totalWeight === 0 ? "-" : Math.floor(item.totalWeight);
+                item.totalWeight === 0 ? "-" : Math.floor(item.totalWeight);
         }
 
         data.items = [];
