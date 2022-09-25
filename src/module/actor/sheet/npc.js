@@ -328,5 +328,5 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         const registeredSheet = Actors.registeredSheets.find(x => x.name === "ActorSheetSFRPGNPC");
         const sheet = new registeredSheet(actor);
         sheet.render(true);
-}
+    }
 }
