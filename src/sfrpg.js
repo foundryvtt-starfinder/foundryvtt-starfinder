@@ -415,11 +415,13 @@ function registerMathFunctions() {
  * Create a Macro form an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.
  * 
- * @param {Object} item The item data
+ * @param {Object} data The item data
  * @param {number} slot The hotbar slot to use
  * @returns {Promise}
  */
-async function createItemMacro(item, slot) {
+async function createItemMacro(data, slot) {
+    const item = await Item.fromDropData(data);
+    console.log(item, data);
     const command = `game.sfrpg.rollItemMacro("${item.name}");`;
     let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
