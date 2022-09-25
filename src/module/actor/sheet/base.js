@@ -65,12 +65,12 @@ export class ActorSheetSFRPG extends ActorSheet {
             options: this.options,
             editable: this.isEditable,
             cssClass: isOwner ? "editable" : "locked",
-            isCharacter: this.document.data.type === "character",
-            isShip: this.document.data.type === 'starship',
-            isVehicle: this.document.data.type === 'vehicle',
-            isDrone: this.document.data.type === 'drone',
-            isNPC: this.document.data.type === 'npc' || this.document.data.type === 'npc2',
-            isHazard: this.document.data.type === 'hazard',
+            isCharacter: this.document.type === "character",
+            isShip: this.document.type === 'starship',
+            isVehicle: this.document.type === 'vehicle',
+            isDrone: this.document.type === 'drone',
+            isNPC: this.document.type === 'npc' || this.document.type === 'npc2',
+            isHazard: this.document.type === 'hazard',
             config: CONFIG.SFRPG
         };
 
@@ -84,14 +84,14 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         if (!data.data?.details?.biography?.fullBodyImage)
         {
-            this.actor.data.data = mergeObject(this.actor.data.data, {
+            this.actor.system = mergeObject(this.actor.system, {
                 details: {
                     biography: {
                         fullBodyImage: "systems/sfrpg/images/mystery-body.webp"
                     }
                 }
             }, {overwrite: false});
-            this.actor.data.data.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.webp";
+            this.actor.system.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.webp";
         }
 
         if (data.data.abilities) {
@@ -370,12 +370,12 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         actorResourceItem.attributes = [];
         actorResourceItem.actorResourceData = null;
-        if (actorResourceItem.data.enabled && actorResourceItem.data.type && actorResourceItem.data.subType) {
-            actorResourceItem.attributes.push(`@resources.${actorResourceItem.data.type}.${actorResourceItem.data.subType}.base`);
-            actorResourceItem.attributes.push(`@resources.${actorResourceItem.data.type}.${actorResourceItem.data.subType}.value`);
+        if (actorResourceItem.system.enabled && actorResourceItem.system.type && actorResourceItem.system.subType) {
+            actorResourceItem.attributes.push(`@resources.${actorResourceItem.system.type}.${actorResourceItem.system.subType}.base`);
+            actorResourceItem.attributes.push(`@resources.${actorResourceItem.system.type}.${actorResourceItem.system.subType}.value`);
 
-            if (actorResourceItem.data.base || actorResourceItem.data.base === 0) {
-                actorResourceItem.actorResourceData = actorData.resources[actorResourceItem.data.type][actorResourceItem.data.subType];
+            if (actorResourceItem.system.base || actorResourceItem.system.base === 0) {
+                actorResourceItem.actorResourceData = actorData.resources[actorResourceItem.system.type][actorResourceItem.system.subType];
             }
         }
     }
@@ -436,7 +436,7 @@ export class ActorSheetSFRPG extends ActorSheet {
        const modifier = modifiers.find(mod => mod._id === modifierId);
        modifier.enabled = !modifier.enabled;
 
-       await this.actor.update({'data.modifiers': modifiers});
+       await this.actor.update({'system.modifiers': modifiers});
    }
 
     /**
@@ -541,9 +541,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemData = {
             name: `New ${type.capitalize()}`,
             type: type,
-            data: duplicate(header.dataset)
+            system: duplicate(header.dataset)
         };
-        delete itemData.data['type'];
+        delete itemData.system['type'];
 
         this.onBeforeCreateNewItem(itemData);
 
@@ -572,7 +572,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 li.slideUp(200, () => this.render(false));
             });
         } else {
-            let containsItems = (item.data.data.container?.contents && item.data.data.container.contents.length > 0);
+            let containsItems = (item.system.container?.contents && item.system.container.contents.length > 0);
             ItemDeletionDialog.show(item.name, containsItems, (recursive) => {
                 actorHelper.deleteItem(itemId, recursive).then(() => {
                     li.slideUp(200, () => this.render(false));
@@ -630,7 +630,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        if (item.data.type === "spell") {
+        if (item.type === "spell") {
             return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
         }
 
@@ -658,7 +658,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const item = this.actor.items.get(itemId);
 
         item.update({
-            ["data.equipped"]: !item.data.data.equipped
+            ["system.equipped"]: !item.system.equipped
         });
     }
 
@@ -684,9 +684,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         const newBaseValue = parseInt(target[0].value);
 
         if (!Number.isNaN(newBaseValue)) {
-            resourceItem.update({"data.base": newBaseValue});
+            resourceItem.update({"system.base": newBaseValue});
         } else {
-            resourceItem.update({"data.base": 0});
+            resourceItem.update({"system.base": 0});
         }
     }
 
@@ -748,9 +748,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        const isOpen = item.data.data.container?.isOpen === undefined ? true : item.data.data.container.isOpen;
+        const isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
 
-        return item.update({'data.container.isOpen': !isOpen});
+        return item.update({'system.container.isOpen': !isOpen});
     }
 
     /**
@@ -778,7 +778,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item'),
             item = this.actor.items.get(li.data('item-id')),
-            chatData = item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.data.data });
+            chatData = item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
 
         if (li.hasClass('expanded')) {
             let summary = li.children('.item-summary');
@@ -803,7 +803,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const li = $(event.currentTarget).parents('.item'),
             item = this.actor.items.get(li.data('item-id'));
 
-        const itemQuantity = item.data.data.quantity;
+        const itemQuantity = item.system.quantity;
         if (!itemQuantity || itemQuantity <= 1) {
             return;
         }
@@ -828,7 +828,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     _prepareSpellbook(data, spells) {
-        const actorData = this.actor.data.data;
+        const actorData = this.actor.system;
 
         const levels = {
             "always": -30,
@@ -1034,8 +1034,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             }
             return;
         } else if (parsedDragData.uuid.includes("Compendium")) {
-
-            const createResult = await targetActor.createItem(itemData.data._source);
+            const createResult = await targetActor.createItem(itemData._source);
             const addedItem = targetActor.getItem(createResult[0].id);
 
             if (game.settings.get('sfrpg', 'scalingCantrips') && addedItem.type === "spell") {
@@ -1048,7 +1047,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
             const itemInTargetActor = await moveItemBetweenActorsAsync(targetActor, addedItem, targetActor, targetContainer);
             if (itemInTargetActor === addedItem) {
-                await this._onSortItem(event, itemInTargetActor.data);
+                await this._onSortItem(event, itemInTargetActor);
                 return itemInTargetActor;
             }
 
@@ -1074,8 +1073,8 @@ export class ActorSheetSFRPG extends ActorSheet {
                     game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferMessage"), {
                     amount: {
                         name: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferLabel"),
-                        label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferInfo", { max: itemToMove.data.data.quantity }),
-                        placeholder: itemToMove.data.data.quantity,
+                        label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferInfo", { max: itemToMove.system.quantity }),
+                        placeholder: itemToMove.system.quantity,
                         validator: (v) => {
                             let number = Number(v);
                             if (Number.isNaN(number)) {
@@ -1086,7 +1085,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                                 return false;
                             }
 
-                            if (number > itemToMove.data.data.quantity) {
+                            if (number > itemToMove.system.quantity) {
                                 return false;
                             }
                             return true;
@@ -1095,19 +1094,19 @@ export class ActorSheetSFRPG extends ActorSheet {
                 }, (values) => {
                     const itemInTargetActor = moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer, values.amount);
                     if (itemInTargetActor === itemToMove) {
-                        this._onSortItem(event, itemInTargetActor.data);
+                        this._onSortItem(event, itemInTargetActor);
                     }
                 });
             } else {
                 const itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
                 if (itemInTargetActor === itemToMove) {
-                    return await this._onSortItem(event, itemInTargetActor.data);
+                    return await this._onSortItem(event, itemInTargetActor);
                 }
             }
         } else {
             const sidebarItem = itemData;
 
-            const addedItemResult = await targetActor.createItem(duplicate(sidebarItem.data));
+            const addedItemResult = await targetActor.createItem(duplicate(sidebarItem));
             if (addedItemResult.length > 0) {
                 const addedItem = targetActor.getItem(addedItemResult[0].id);
 
@@ -1117,14 +1116,14 @@ export class ActorSheetSFRPG extends ActorSheet {
 
                 if (targetContainer) {
                     let newContents = [];
-                    if (targetContainer.data.data.container?.contents) {
-                        newContents = duplicate(targetContainer.data.data.container?.contents || []);
+                    if (targetContainer.system.container?.contents) {
+                        newContents = duplicate(targetContainer.system.container?.contents || []);
                     }
 
                     const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
                     newContents.push({ id: addedItem.id, index: preferredStorageIndex });
 
-                    const update = { id: targetContainer.id, "data.container.contents": newContents };
+                    const update = { id: targetContainer.id, "system.container.contents": newContents };
                     await targetActor.updateItem(targetContainer.id, update);
                 }
 
@@ -1143,7 +1142,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         for (const item of items) {
             const itemData = {
                 item: item,
-                parent: items.find(x => x.data.container?.contents && x.data.container.contents.find(y => y.id === item._id)),
+                parent: items.find(x => x.system.container?.contents && x.system.container.contents.find(y => y.id === item._id)),
                 contents: []
             };
             preprocessedItems.push(itemData);
