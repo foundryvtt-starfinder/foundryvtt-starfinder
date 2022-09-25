@@ -53,9 +53,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      * @param {Object} data The data object to update with any crew data.
      */
     async _getCrewData(data) {
-        let crewData = this.actor.data.data.crew;
+        let crewData = this.actor.system.crew;
 
-        if (!crewData || this.actor.data?.flags?.shipsCrew) {
+        if (!crewData || this.actor.flags?.shipsCrew) {
             crewData = await this._processFlags(data, data.actor.flags);
         }
 
@@ -128,7 +128,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         if (!flags?.sfrpg?.shipsCrew?.members) {
             await this.actor.update({
-                "data.crew": newCrew
+                "system.crew": newCrew
             });
             return newCrew;
         }
@@ -149,7 +149,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         }
 
         await this.actor.update({
-            "data.crew": newCrew
+            "system.crew": newCrew
         });
 
         let cleanflags = duplicate(this.actor.data.flags);
@@ -159,14 +159,14 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             "flags.sfrpg": cleanflags
         }, {recursive: false});
         
-        return this.actor.data.data.crew;
+        return this.actor.system.crew;
     }
 
     _createLabel(localizationKey, items, mounts) {
-        const numLightWeapons = items.filter(x => x.data.class === "light").length;
-        const numHeavyWeapons = items.filter(x => x.data.class === "heavy").length;
-        const numCapitalWeapons = items.filter(x => x.data.class === "capital").length;
-        const numSpinalWeapons = items.filter(x => x.data.class === "spinal").length;
+        const numLightWeapons = items.filter(x => x.system.class === "light").length;
+        const numHeavyWeapons = items.filter(x => x.system.class === "heavy").length;
+        const numCapitalWeapons = items.filter(x => x.system.class === "capital").length;
+        const numSpinalWeapons = items.filter(x => x.system.class === "spinal").length;
 
         const maxLightWeapons = (mounts?.lightSlots || 0);
         const maxHeavyWeapons = (mounts?.heavySlots || 0);
@@ -236,7 +236,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
 
             if (item.type === "starshipWeapon") {
-                const weaponArc = item?.data?.mount?.arc;
+                const weaponArc = item?.system?.mount?.arc;
                 if (weaponArc === "forward") arr[0].push(item);
                 else if (weaponArc === "starboard") arr[1].push(item);
                 else if (weaponArc === "aft") arr[2].push(item);
@@ -263,20 +263,20 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         data.inventory = inventory;
 
         for (const item of cargo) {
-            item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
-            item.isOpen = item.data.container?.isOpen === undefined ? true : item.data.container.isOpen;
+            item.isStack = item.system.quantity ? item.system.quantity > 1 : false;
+            item.isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
         }
 
         const weapons = [].concat(forward, starboard, port, aft, turret);
         for (const weapon of weapons) {
             weapon.hasCapacity = (
-                weapon.data.weaponType === "tracking"
-                || weapon.data.special["mine"]
-                || weapon.data.special["transposition"]
-                || weapon.data.special["orbital"]
-                || weapon.data.special["rail"]
-                || weapon.data.special["forcefield"]
-                || weapon.data.special["limited"]
+                weapon.system.weaponType === "tracking"
+                || weapon.system.special["mine"]
+                || weapon.system.special["transposition"]
+                || weapon.system.special["orbital"]
+                || weapon.system.special["rail"]
+                || weapon.system.special["forcefield"]
+                || weapon.system.special["limited"]
             );
 
             if (weapon.hasCapacity) {
@@ -285,7 +285,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
         }
 
-        const weaponMounts = this.actor.data.data.frame?.data?.weaponMounts;
+        const weaponMounts = this.actor.system.frame?.data?.weaponMounts;
         const hasForward = weaponMounts?.forward?.lightSlots || weaponMounts?.forward?.heavySlots || weaponMounts?.forward?.capitalSlots;
         const hasStarboard = weaponMounts?.starboard?.lightSlots || weaponMounts?.starboard?.heavySlots || weaponMounts?.starboard?.capitalSlots;
         const hasPort = weaponMounts?.port?.lightSlots || weaponMounts?.port?.heavySlots || weaponMounts?.port?.capitalSlots;
@@ -353,7 +353,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             starshipWeapon:                     game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipWeapons")
         };
 
-        if (!this.actor.data.data.crew.useNPCCrew) {
+        if (!this.actor.system.crew.useNPCCrew) {
             data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
         } else {
             data.actions = {
@@ -526,7 +526,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const targetRole = event.target.dataset.role;
         if (!targetRole || !actorId) return false;
 
-        const crew = duplicate(this.actor.data.data.crew);
+        const crew = duplicate(this.actor.system.crew);
         const crewRole = crew[targetRole];
         const oldRole = this.actor.getCrewRoleForActor(actorId);
 
@@ -539,7 +539,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
     
             await this.actor.update({
-                "data.crew": crew
+                "system.crew": crew
             }).then(this.render(false));
         } else {
             ui.notifications.error(game.i18n.format("SFRPG.StarshipSheet.Crew.CrewLimitReached", {targetRole: targetRole}));
@@ -639,7 +639,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         
         const filter = index.filter(i => i.name === (li.prevObject[0].innerHTML));
         const item = await pack.getDocument(filter[0]._id);
-        const chatData = item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.data.data });
+        const chatData = item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
         
         let content = `<p><strong>${game.i18n.localize("SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect")}:</strong> ${chatData.effectNormal}</p>`;
         if (chatData.effectCritical) {
@@ -696,7 +696,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             return;
         }
 
-        const crewData = duplicate(this.actor.data.data.crew);
+        const crewData = duplicate(this.actor.system.crew);
         crewData.npcData[roleId].skills[skillId] = {
             isTrainedOnly: false,
             hasArmorCheckPenalty: false,
@@ -709,7 +709,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             enabled: true
         };
         
-        await this.actor.update({"data.crew": crewData});
+        await this.actor.update({"system.crew": crewData});
     }
 
     async _onCrewSkillDelete(event) {
@@ -717,7 +717,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const roleId = $(event.currentTarget).closest('li').data('role');
         const skillId = $(event.currentTarget).closest('li').data('skill');
 
-        this.actor.update({ [`data.crew.npcData.${roleId}.skills.-=${skillId}`]: null });
+        this.actor.update({ [`system.crew.npcData.${roleId}.skills.-=${skillId}`]: null });
     }
 
     async _onCrewNumberOfUsesChanged(event) {
@@ -731,7 +731,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             parsedValue = 0;
         }
 
-        await this.actor.update({ [`data.crew.npcData.${roleId}.numberOfUses`]: parsedValue });
+        await this.actor.update({ [`system.crew.npcData.${roleId}.numberOfUses`]: parsedValue });
         this.render(false);
     }
 
@@ -747,7 +747,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             parsedValue = 0;
         }
 
-        await this.actor.update({ [`data.crew.npcData.${roleId}.skills.${skillId}.mod`]: parsedValue });
+        await this.actor.update({ [`system.crew.npcData.${roleId}.skills.${skillId}.mod`]: parsedValue });
         this.render(false);
     }
 
@@ -763,7 +763,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             parsedValue = 0;
         }
 
-        await this.actor.update({ [`data.crew.npcData.${roleId}.skills.${skillId}.ranks`]: parsedValue });
+        await this.actor.update({ [`system.crew.npcData.${roleId}.skills.${skillId}.ranks`]: parsedValue });
         this.render(false);
     }
 
@@ -787,52 +787,52 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 captain: {
                     name: game.i18n.format("SFRPG.StarshipSheet.Role.Captain"),
                     options: options,
-                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["captain"] ? options[1] : options[0]
+                    default: this.actor.system.attributes.systems[affectedSystem].affectedRoles["captain"] ? options[1] : options[0]
                 },
                 pilot: {
                     name: game.i18n.format("SFRPG.StarshipSheet.Role.Pilot"),
                     options: options,
-                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["pilot"] ? options[1] : options[0]
+                    default: this.actor.system.attributes.systems[affectedSystem].affectedRoles["pilot"] ? options[1] : options[0]
                 },
                 engineer: {
                     name: game.i18n.format("SFRPG.StarshipSheet.Role.Engineer"),
                     options: options,
-                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["engineer"] ? options[1] : options[0]
+                    default: this.actor.system.attributes.systems[affectedSystem].affectedRoles["engineer"] ? options[1] : options[0]
                 },
                 gunner: {
                     name: game.i18n.format("SFRPG.StarshipSheet.Role.Gunner"),
                     options: options,
-                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["gunner"] ? options[1] : options[0]
+                    default: this.actor.system.attributes.systems[affectedSystem].affectedRoles["gunner"] ? options[1] : options[0]
                 },
                 scienceOfficer: {
                     name: game.i18n.format("SFRPG.StarshipSheet.Role.ScienceOfficer"),
                     options: options,
-                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["scienceOfficer"] ? options[1] : options[0]
+                    default: this.actor.system.attributes.systems[affectedSystem].affectedRoles["scienceOfficer"] ? options[1] : options[0]
                 },
                 magicOfficer: {
                     name: game.i18n.format("SFRPG.StarshipSheet.Role.MagicOfficer"),
                     options: options,
-                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["magicOfficer"] ? options[1] : options[0]
+                    default: this.actor.system.attributes.systems[affectedSystem].affectedRoles["magicOfficer"] ? options[1] : options[0]
                 },
                 chiefMate: {
                     name: game.i18n.format("SFRPG.StarshipSheet.Role.ChiefMate"),
                     options: options,
-                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["chiefMate"] ? options[1] : options[0]
+                    default: this.actor.system.attributes.systems[affectedSystem].affectedRoles["chiefMate"] ? options[1] : options[0]
                 },
                 openCrew: {
                     name: game.i18n.format("SFRPG.StarshipSheet.Role.OpenCrew"),
                     options: options,
-                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["openCrew"] ? options[1] : options[0]
+                    default: this.actor.system.attributes.systems[affectedSystem].affectedRoles["openCrew"] ? options[1] : options[0]
                 },
                 minorCrew: {
                     name: game.i18n.format("SFRPG.StarshipSheet.Role.MinorCrew"),
                     options: options,
-                    default: this.actor.data.data.attributes.systems[affectedSystem].affectedRoles["minorCrew"] ? options[1] : options[0]
+                    default: this.actor.system.attributes.systems[affectedSystem].affectedRoles["minorCrew"] ? options[1] : options[0]
                 }
             }
         );
 
-        const currentSystem = duplicate(this.actor.data.data.attributes.systems[affectedSystem]);
+        const currentSystem = duplicate(this.actor.system.attributes.systems[affectedSystem]);
         currentSystem.affectedRoles = {
             captain: results.result.captain === options[1],
             pilot: results.result.pilot === options[1],
@@ -845,7 +845,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             minorCrew: results.result.minorCrew === options[1]
         };
 
-        await this.actor.update({[`data.attributes.systems.${affectedSystem}`]: currentSystem});
+        await this.actor.update({[`system.attributes.systems.${affectedSystem}`]: currentSystem});
     }
 
     async _onWeaponReloadClicked(event) {
@@ -866,7 +866,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      */
     _updateObject(event, formData) {
         const tiers = { "1/4": 0.25, "1/3": 1/3, "1/2": 0.5 };
-        let v = "data.details.tier";
+        let v = "system.details.tier";
         let tier = formData[v];
         tier = tiers[tier] || parseFloat(tier);
         if (tier) formData[v] = tier < 1 ? tier : parseInt(tier);
@@ -884,7 +884,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         return starshipActions.getIndex().then(async (indices) => {
             for (const index of indices) {
                 const entry = await starshipActions.getDocument(index._id);
-                const role = entry.data.data.role;
+                const role = entry.system.role;
 
                 if (!tempCache[role]) {
                     tempCache[role] = {label: CONFIG.SFRPG.starshipRoleNames[role], actions: []};
@@ -895,7 +895,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
             /** Sort them by order. */
             for (const [roleKey, roleData] of Object.entries(tempCache)) {
-                roleData.actions.sort(function(a, b){return a.data.order - b.data.order});
+                roleData.actions.sort(function(a, b){return a.order - b.order});
             }
 
             const desiredOrder = ["captain", "pilot", "gunner", "engineer", "scienceOfficer", "chiefMate", "magicOfficer", "openCrew", "minorCrew"];
