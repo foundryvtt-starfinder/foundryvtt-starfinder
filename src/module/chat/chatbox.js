@@ -64,7 +64,7 @@ export default class SFRPGCustomChatMessage {
             rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             config: CONFIG.SFRPG,
-            tokenImg: actor.data.token?.img || actor.img,
+            tokenImg: actor.token?.img || actor.img,
             actorId: actor.id,
             tokenId: this.getToken(actor),
             breakdown: data.breakdown,
@@ -80,7 +80,7 @@ export default class SFRPGCustomChatMessage {
             if (speaker.token) {
                 const token = game.scenes.get(speaker.scene)?.tokens?.get(speaker.token);
                 if (token) {
-                    options.tokenImg = token.data.img;
+                    options.tokenImg = token.img;
                     setImage = true;
                 }
             }
