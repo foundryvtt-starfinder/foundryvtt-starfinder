@@ -41,8 +41,8 @@ export class SpellCastDialog extends Dialog {
      * @return {Promise}
      */
     static async create(actor, item) {
-        const casterData = actor.data.data;
-        const spellData = item.data.data;
+        const casterData = actor.system;
+        const spellData = item.system;
     
         const maxSpellLevel = spellData.level;
 
