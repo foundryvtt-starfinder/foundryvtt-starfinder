@@ -186,16 +186,16 @@ export default class RollDialog extends Dialog {
                 const item = container.itemId ? await actor.items.get(container.itemId) : null;
 
                 // Update modifier by ID in item
-                const containerModifiers = duplicate(item.data.data.modifiers);
+                const containerModifiers = duplicate(item.system.modifiers);
                 const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
                 modifierToUpdate.enabled = modifier.enabled;
-                await item.update({ "data.modifiers": containerModifiers });
+                await item.update({ "system.modifiers": containerModifiers });
             } else {
                 // Update modifier by ID in actor
-                const containerModifiers = duplicate(actor.data.data.modifiers);
+                const containerModifiers = duplicate(actor.system.modifiers);
                 const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
                 modifierToUpdate.enabled = modifier.enabled;
-                await actor.update({ "data.modifiers": containerModifiers });
+                await actor.update({ "system.modifiers": containerModifiers });
             }
         }
     }
