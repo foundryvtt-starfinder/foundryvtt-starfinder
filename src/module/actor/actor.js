@@ -54,13 +54,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     prepareData() {
         super.prepareData();
 
-        this._ensureHasModifiers(this.data.data);
+        this._ensureHasModifiers(this.system);
         const modifiers = this.getAllModifiers();
 
         const items = this.items;
-        const armors = items.filter(item => item.type === "equipment" && item.data.data.equipped);
-        const shields = items.filter(item => item.type === "shield" && item.data.data.equipped);
-        const weapons = items.filter(item => item.type === "weapon" && item.data.data.equipped);
+        const armors = items.filter(item => item.type === "equipment" && item.system.equipped);
+        const shields = items.filter(item => item.type === "shield" && item.system.equipped);
+        const weapons = items.filter(item => item.type === "weapon" && item.system.equipped);
         const races = items.filter(item => item.type === "race");
         const frames = items.filter(item => item.type === "starshipFrame");
         const classes = items.filter(item => item.type === "class");
@@ -73,9 +73,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         return game.sfrpg.engine.process("process-actors", {
             actorId: this.id,
             actor: this,
-            type: this.data.type,
-            data: this.data.data,
-            flags: this.data.flags,
+            type: this.type,
+            data: this.system,
+            flags: this.flags,
             items: this.items,
             armors,
             shields,
@@ -132,9 +132,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @return {Promise}        A Promise which resolves to the updated Entity
      */
     async update(data, options = {}) {
-        const newSize = data['data.traits.size'];
-        if (newSize && (newSize !== getProperty(this.data, "data.traits.size"))) {
-            let size = CONFIG.SFRPG.tokenSizes[data['data.traits.size']];
+        console.log(data);
+        const newSize = data['system.traits.size'];
+        if (newSize && (newSize !== getProperty(this.system, "traits.size"))) {
+            let size = CONFIG.SFRPG.tokenSizes[data['system.traits.size']];
             if (this.isToken) this.token.update({ height: size, width: size });
             else if (!data["token.width"] && !hasProperty(data, "token.width")) {
                 setProperty(data, 'token.height', size);
@@ -159,9 +160,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (!this.hasPlayerOwner) {
                 let t = item.type;
                 let initial = {};           
-                if (t === "weapon") initial['data.proficient'] = true;
-                if (["weapon", "equipment"].includes(t)) initial['data.equipped'] = true;
-                if (t === "spell") initial['data.prepared'] = true;
+                if (t === "weapon") initial['system.proficient'] = true;
+                if (["weapon", "equipment"].includes(t)) initial['system.equipped'] = true;
+                if (t === "spell") initial['system.prepared'] = true;
                 mergeObject(item, initial);
             }
 
@@ -172,19 +173,19 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
 
     async useSpell(item, { configureDialog = true } = {}) {
-        if (item.data.type !== "spell") throw new Error("Wrong item type");
+        if (item.type !== "spell") throw new Error("Wrong item type");
 
-        let spellLevel = item.data.data.level;
-        const usesSlots = (spellLevel > 0) && item.data.data.preparation.mode === "";
+        let spellLevel = item.system.level;
+        const usesSlots = (spellLevel > 0) && item.system.preparation.mode === "";
         if (!usesSlots) {
-            if (item.data.data.uses?.max > 0) {
-                if (item.data.data.uses.value <= 0) {
+            if (item.system.uses?.max > 0) {
+                if (item.system.uses.value <= 0) {
                     ui.notifications.error(game.i18n.localize("SFRPG.Items.Spell.ErrorNoUses", {permanent: true}));
                     return;
                 }
 
                 const itemUpdatePromise = item.update({
-                    [`data.uses.value`]: Math.max(item.data.data.uses.value - 1, 0)
+                    [`system.uses.value`]: Math.max(item.system.uses.value - 1, 0)
                 });
                 itemUpdatePromise.then(() => {
                     item.roll();
@@ -203,15 +204,15 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 const slotIndex = parseInt(dialogResponse.formData.get("level"));
                 consumeSpellSlot = Boolean(dialogResponse.formData.get("consume"));
                 selectedSlot = dialogResponse.spellLevels[slotIndex];
-                spellLevel = parseInt(selectedSlot?.level || item.data.data.level);
+                spellLevel = parseInt(selectedSlot?.level || item.system.level);
 
-                if (spellLevel !== item.data.data.level && item.data.data.level > spellLevel) {
-                    const newItemData = duplicate(item.data);
-                    newItemData.data.level = spellLevel;
+                if (spellLevel !== item.system.level && item.system.level > spellLevel) {
+                    const newItemData = duplicate(item);
+                    newItemData.system.level = spellLevel;
 
                     if (this.type === "npc" || this.type === "npc2") {
-                        if (newItemData.data.save.dc && !Number.isNaN(newItemData.data.save.dc)) {
-                            newItemData.data.save.dc = newItemData.data.save.dc - item.data.data.level + spellLevel;
+                        if (newItemData.system.save.dc && !Number.isNaN(newItemData.system.save.dc)) {
+                            newItemData.system.save.dc = newItemData.system.save.dc - item.system.level + spellLevel;
                         }
                     }
 
@@ -220,7 +221,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
                 // Run automation to ensure save DCs are correct.
                 item.prepareData();
-                if (item.data.data.actionType && item.data.data.save.type) {
+                if (item.system.actionType && item.system.save.type) {
                     await item.processData();
                 }
             } catch (error) {
@@ -236,12 +237,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 if (processContext) {
                     processContext.then(function(result) {
                         return actor.update({
-                            [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+                            [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
                         });
                     });
                 } else {
                     processContext = actor.update({
-                        [`data.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].value) - 1, 0)
+                        [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
                     });
                 }
             } else {
@@ -251,12 +252,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 if (processContext) {
                     processContext.then(function(result) {
                         return actor.update({
-                            [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                            [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
                         });
                     });
                 } else {
                     processContext = actor.update({
-                        [`data.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.data.data.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                        [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
                     });
                 }
             }
@@ -283,8 +284,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         // this.update({"data.skills.-=skillId": null});
         // use this to delete any unwanted skills.
 
-        const skill = duplicate(this.data.data.skills[skillId]);
-        const isNpc = this.data.type === "npc" || this.data.type === "npc2";
+        const skill = duplicate(this.system.skills[skillId]);
+        const isNpc = this.type === "npc" || this.type === "npc2";
         const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
@@ -295,22 +296,22 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             ability = formData.get('ability'),
             remove = Boolean(formData.get('remove'));
 
-        if (remove) return this.update({ [`data.skills.-=${skillId}`]: null });
+        if (remove) return this.update({ [`system.skills.-=${skillId}`]: null });
 
         let updateObject = {
-            [`data.skills.${skillId}.ability`]: ability,
-            [`data.skills.${skillId}.ranks`]: ranks,
-            [`data.skills.${skillId}.value`]: value,
-            [`data.skills.${skillId}.misc`]: misc,
-            [`data.skills.${skillId}.notes`]: notes,
-            [`data.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
-            [`data.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty
+            [`system.skills.${skillId}.ability`]: ability,
+            [`system.skills.${skillId}.ranks`]: ranks,
+            [`system.skills.${skillId}.value`]: value,
+            [`system.skills.${skillId}.misc`]: misc,
+            [`system.skills.${skillId}.notes`]: notes,
+            [`system.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
+            [`system.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty
         };
 
-        if (isNpc) updateObject[`data.skills.${skillId}.enabled`] = Boolean(formData.get('enabled'));
+        if (isNpc) updateObject[`system.skills.${skillId}.enabled`] = Boolean(formData.get('enabled'));
 
         if ("subname" in skill) {
-            updateObject[`data.skills.${skillId}.subname`] = formData.get('subname');
+            updateObject[`system.skills.${skillId}.subname`] = formData.get('subname');
         }
 
         return this.update(updateObject);
@@ -320,16 +321,16 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * Toggles what NPC skills are shown on the sheet.
      */
     async toggleNpcSkills() {
-        const skills = duplicate(this.data.data.skills);
+        const skills = duplicate(this.system.skills);
         const formData = await NpcSkillToggleDialog.create(skills);
         let enabledSkills = {};
         const delta = Object.entries(skills).reduce((obj, curr) => {
-            if (curr[1].enabled) obj[`data.skills.${curr[0]}.enabled`] = !curr[1].enabled;
+            if (curr[1].enabled) obj[`system.skills.${curr[0]}.enabled`] = !curr[1].enabled;
             return obj;
         }, {});
 
         for (let [key, value] of formData.entries()) {
-            enabledSkills[`data.${key}`] = Boolean(value);
+            enabledSkills[`system.${key}`] = Boolean(value);
         }
         
         enabledSkills = mergeObject(enabledSkills, delta, {overwrite: false, inplace: false});
@@ -355,7 +356,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         let skillId = "pro";
         let counter = 0;
 
-        while (this.data.data.skills[skillId]) {
+        while (this.system.skills[skillId]) {
             skillId = `pro${++counter}`;
         }
 
@@ -369,16 +370,16 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             subname = formData.get('subname');
 
         let newSkillData = {
-            [`data.skills.${skillId}`]: {},
-            [`data.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
-            [`data.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty,
-            [`data.skills.${skillId}.value`]: value,
-            [`data.skills.${skillId}.misc`]: misc,
-            [`data.skills.${skillId}.ranks`]: ranks,
-            [`data.skills.${skillId}.ability`]: ability,
-            [`data.skills.${skillId}.subname`]: subname,
-            [`data.skills.${skillId}.mod`]: value + misc + ranks,
-            [`data.skills.${skillId}.enabled`]: true
+            [`system.skills.${skillId}`]: {},
+            [`system.skills.${skillId}.isTrainedOnly`]: isTrainedOnly,
+            [`system.skills.${skillId}.hasArmorCheckPenalty`]: hasArmorCheckPenalty,
+            [`system.skills.${skillId}.value`]: value,
+            [`system.skills.${skillId}.misc`]: misc,
+            [`system.skills.${skillId}.ranks`]: ranks,
+            [`system.skills.${skillId}.ability`]: ability,
+            [`system.skills.${skillId}.subname`]: subname,
+            [`system.skills.${skillId}.mod`]: value + misc + ranks,
+            [`system.skills.${skillId}.enabled`]: true
         };
 
         return this.update(newSkillData);
@@ -391,7 +392,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @param {Object} options      Options which configure how the skill check is rolled
      */
     async rollSkill(skillId, options = {}) {
-        const skl = this.data.data.skills[skillId];
+        const skl = this.system.skills[skillId];
 
         if (!this.hasPlayerOwner) {
             return await this.rollSkillCheck(skillId, skl, options);
@@ -430,7 +431,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      */
     async rollAbility(abilityId, options = {}) {
         const label = CONFIG.SFRPG.abilities[abilityId];
-        const abl = this.data.data.abilities[abilityId];
+        const abl = this.system.abilities[abilityId];
         
         const parts = [];
         const data = this.getRollData();
@@ -527,7 +528,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         // Roll a piloting check with a specific system (usually Autopilot).
         // Only takes vehicle and system piloting into account
         if (system) {
-            rollContext.addContext("system", system, system.data.data);
+            rollContext.addContext("system", system, system.system);
             parts.push(`@system.piloting.piloting`);
         }
         else if(!role || !actorId) {
@@ -535,10 +536,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             parts.push(`@pilot.skills.pil.mod`);
         }
         else {
-            let passenger = this.data.data.crew[role].actors.find(element => element._id == actorId);
+            let passenger = this.system.crew[role].actors.find(element => element._id == actorId);
             let actorData = null;
             if (passenger instanceof ActorSFRPG) {
-                actorData = passenger.data.data;
+                actorData = passenger.system;
             } else {
                 actorData = passenger.data;
             }
@@ -574,7 +575,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
         const starshipActions = game.packs.get(starshipPackKey);
         const actionEntryDocument = await starshipActions.getDocument(actionId);
-        const actionEntry = actionEntryDocument.data;
+        const actionEntry = actionEntryDocument;
 
         /** Bad entry; no action! */
         if (!actionEntry) {
@@ -589,7 +590,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         let quadrant = "";
-        if (actionEntry.data.role === "gunner") {
+        if (actionEntry.system.role === "gunner") {
             const options = [
                 game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Forward"),
                 game.i18n.format("SFRPG.Rolls.StarshipActions.Quadrant.Port"),
@@ -624,16 +625,16 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         }
 
-        let selectedFormula = actionEntry.data.formula[0];
-        if (actionEntry.data.formula.length > 1) {
+        let selectedFormula = actionEntry.system.formula[0];
+        if (actionEntry.system.formula.length > 1) {
             const results = await ChoiceDialog.show(
                 game.i18n.format("SFRPG.Rolls.StarshipActions.Choice.Title", {name: actionEntry.name}),
                 game.i18n.format("SFRPG.Rolls.StarshipActions.Choice.Message", {name: actionEntry.name}),
                 {
                     roll: {
                         name: game.i18n.format("SFRPG.Rolls.StarshipActions.Choice.AvailableRolls"),
-                        options: actionEntry.data.formula.map(x => x.name),
-                        default: actionEntry.data.formula[0].name
+                        options: actionEntry.system.formula.map(x => x.name),
+                        default: actionEntry.system.formula[0].name
                     }
                 }
             );
@@ -642,14 +643,14 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 return;
             }
 
-            selectedFormula = actionEntry.data.formula.find(x => x.name === results.result.roll);
+            selectedFormula = actionEntry.system.formula.find(x => x.name === results.result.roll);
         }
 
         const rollContext = new RollContext();
         rollContext.addContext("ship", this);
         rollContext.setMainContext("ship");
 
-        this.setupRollContexts(rollContext, actionEntry.data.selectors || []);
+        this.setupRollContexts(rollContext, actionEntry.system.selectors || []);
 
         /** Create additional modifiers. */
         const additionalModifiers = [
@@ -664,13 +665,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         // Patch and Hold It Together are not affected by critical damage.
         if (actionEntry.name !== "Patch" && actionEntry.name !== "Hold It Together") {
             // Gunners must select a quadrant.
-            if (actionEntry.data.role === "gunner") {
+            if (actionEntry.system.role === "gunner") {
                 systemBonus = ` + @ship.attributes.systems.weaponsArray${quadrant}.mod`;
                 systemBonus += ` + @ship.attributes.systems.powerCore.modOther`;
             } else {
-                for (const [key, value] of Object.entries(this.data.data.attributes.systems)) {
-                    if (value.affectedRoles && value.affectedRoles[actionEntry.data.role]) {
-                        if (key === "powerCore" && actionEntry.data.role !== "engineer") {
+                for (const [key, value] of Object.entries(this.system.attributes.systems)) {
+                    if (value.affectedRoles && value.affectedRoles[actionEntry.system.role]) {
+                        if (key === "powerCore" && actionEntry.system.role !== "engineer") {
                             systemBonus += ` + @ship.attributes.systems.${key}.modOther`;
                         } else {
                             systemBonus += ` + @ship.attributes.systems.${key}.mod`;
@@ -691,10 +692,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         let speakerActor = this;
-        const roleKey = CONFIG.SFRPG.starshipRoleNames[actionEntry.data.role];
+        const roleKey = CONFIG.SFRPG.starshipRoleNames[actionEntry.system.role];
         let roleName = game.i18n.format(roleKey);
 
-        const desiredKey = actionEntry.data.selectorKey;
+        const desiredKey = actionEntry.system.selectorKey;
         if (desiredKey) {
             const selectedContext = rollContext.allContexts[desiredKey];
             if (!selectedContext) {
@@ -714,13 +715,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         let flavor = "";
         flavor += game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.Role", {role: roleName, name: this.name});
         flavor += "<br/>";
-        if (actionEntry.data.formula.length <= 1) {
+        if (actionEntry.system.formula.length <= 1) {
             flavor += `<h2>${actionEntry.name}</h2>`;
         } else {
             flavor += `<h2>${actionEntry.name} (${selectedFormula.name})</h2>`;
         }
 
-        const dc = selectedFormula.dc || actionEntry.data.dc;
+        const dc = selectedFormula.dc || actionEntry.system.dc;
         if (dc) {
             if (dc.resolve) {
                 const dcRoll = await DiceSFRPG.createRoll({
@@ -738,15 +739,15 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.data.effectNormal);
+        flavor += TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal);
         flavor += "</p>";
 
-        if (actionEntry.data.effectCritical) {
+        if (actionEntry.system.effectCritical) {
             const critEffectDisplayState = game.settings.get("sfrpg", "starshipActionsCrit");
             if (critEffectDisplayState !== 'never') {
                 if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                    flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.data.effectCritical);
+                    flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical);
                     flavor += "</p>";
                 }
             }
@@ -769,14 +770,14 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {
-        if (!this.data) {
+        if (!this) {
             return;
         }
 
-        const crewData = this.data.data.crew;
-        const crewActorData = this.data.crew;
+        const crewData = this.system.crew;
+        const crewActorData = this.crew;
 
-        const actorData = this.data;
+        const actorData = this;
         if (actorData.type === "vehicle") {
             if (!crewData.useNPCCrew) {
                 /** Add player pilot if available. */
@@ -784,7 +785,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     const pilotActor = crewActorData.pilot.actors[0];
                     let pilotData = null;
                     if (pilotActor instanceof ActorSFRPG) {
-                        pilotData = pilotActor.data.data;
+                        pilotData = pilotActor.system;
                     } else {
                         pilotData = pilotActor.data;
                     }
@@ -799,7 +800,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     const actor = crewActorData.captain.actors[0];
                     let crewMemberActorData = null;
                     if (actor instanceof ActorSFRPG) {
-                        crewMemberActorData = actor.data.data;
+                        crewMemberActorData = actor.system;
                     } else {
                         crewMemberActorData = actor.data;
                     }
@@ -811,7 +812,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     const actor = crewActorData.pilot.actors[0];
                     let crewMemberActorData = null;
                     if (actor instanceof ActorSFRPG) {
-                        crewMemberActorData = actor.data.data;
+                        crewMemberActorData = actor.system;
                     } else {
                         crewMemberActorData = actor.data;
                     }
@@ -831,7 +832,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                                 for (const actor of crewList) {
                                     let crewMemberActorData = null;
                                     if (actor instanceof ActorSFRPG) {
-                                        crewMemberActorData = actor.data.data;
+                                        crewMemberActorData = actor.system;
                                     } else {
                                         crewMemberActorData = actor.data;
                                     }
@@ -849,7 +850,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                             for (const actor of crewList) {
                                 let crewMemberActorData = null;
                                 if (actor instanceof ActorSFRPG) {
-                                    crewMemberActorData = actor.data.data;
+                                    crewMemberActorData = actor.system;
                                 } else {
                                     crewMemberActorData = actor.data;
                                 }
@@ -868,13 +869,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 }
             } else {
                 /** Create 'fake' actors. */
-                rollContext.addContext("captain", this, actorData.data.crew.npcData.captain);
-                rollContext.addContext("pilot", this, actorData.data.crew.npcData.pilot);
-                rollContext.addContext("gunner", this, actorData.data.crew.npcData.gunner);
-                rollContext.addContext("engineer", this, actorData.data.crew.npcData.engineer);
-                rollContext.addContext("chiefMate", this, actorData.data.crew.npcData.chiefMate);
-                rollContext.addContext("magicOfficer", this, actorData.data.crew.npcData.magicOfficer);
-                rollContext.addContext("scienceOfficer", this, actorData.data.crew.npcData.scienceOfficer);
+                rollContext.addContext("captain", this, actorData.system.crew.npcData.captain);
+                rollContext.addContext("pilot", this, actorData.system.crew.npcData.pilot);
+                rollContext.addContext("gunner", this, actorData.system.crew.npcData.gunner);
+                rollContext.addContext("engineer", this, actorData.system.crew.npcData.engineer);
+                rollContext.addContext("chiefMate", this, actorData.system.crew.npcData.chiefMate);
+                rollContext.addContext("magicOfficer", this, actorData.system.crew.npcData.magicOfficer);
+                rollContext.addContext("scienceOfficer", this, actorData.system.crew.npcData.scienceOfficer);
             }
         }
     }
