@@ -12,7 +12,7 @@ export default function (engine) {
             data.quadrants.aft.ablative = { value: 0, max: 0 };
         } else {
             const ablativeItem = ablativeItems[0];
-            const ablativeData = ablativeItem.data.data;
+            const ablativeData = ablativeItem.system;
 
             const evenDistributionValue = ablativeData.ablativeValue / 4;
             if (data.quadrants.forward.ablative.max != evenDistributionValue
