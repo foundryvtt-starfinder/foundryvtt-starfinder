@@ -14,7 +14,7 @@ export default function (engine) {
 
         // Process common mod properties
         for (const mod of mods) {
-            const modData = mod.data.data;
+            const modData = mod.system;
 
             if (modData.arms.number > 0) {
                 if (modData.arms.armType === "general") {
