@@ -7,8 +7,8 @@ export default function (engine) {
         const skills = fact.data.skills;
         const modifiers = fact.modifiers;
 
-        const worstArmor = armors?.reduce((armor, worstArmor) => (armor.data?.data?.armor?.acp || 0) < (worstArmor.data?.data?.armor?.acp || 0) ? armor : worstArmor);
-        const armorData = worstArmor?.data?.data;
+        const worstArmor = armors?.reduce((armor, worstArmor) => (armor.system?.armor?.acp || 0) < (worstArmor.system?.armor?.acp || 0) ? armor : worstArmor);
+        const armorData = worstArmor?.system;
         const hasLightArmor = armorData?.armor?.type === "light";
         const hasHeavyArmor = armorData?.armor?.type === "heavy";
 
@@ -96,7 +96,7 @@ export default function (engine) {
 
             if (shields) {
                 shields.forEach(shield => {
-                    const shieldData = shield.data.data;
+                    const shieldData = shield.system;
 
                     if (shieldData?.acp) {
                         let acp = parseInt(shieldData.acp);
