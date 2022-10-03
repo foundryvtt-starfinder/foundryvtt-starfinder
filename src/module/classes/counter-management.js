@@ -17,9 +17,9 @@ export default class CounterManagement {
 
                 let additionalHtml = "";
                 for (const displayedResource of displayedResources) {
-                    const resourceValue = currentActor.getResourceComputedValue(displayedResource.data.data.type, displayedResource.data.data.subType);
+                    const resourceValue = currentActor.getResourceComputedValue(displayedResource.system.type, displayedResource.system.subType);
 
-                    if (displayedResource.data.data.combatTracker.showOwnerAndGMOnly) {
+                    if (displayedResource.system.combatTracker.showOwnerAndGMOnly) {
                         if (!game.user.isGM && !currentActor.isOwner) {
                             continue;
                         }
@@ -29,12 +29,12 @@ export default class CounterManagement {
                     let image = displayedResource.img;
                     let displayValue = resourceValue;
 
-                    if (displayedResource.data.data.combatTracker.displayAbsoluteValue) {
+                    if (displayedResource.system.combatTracker.displayAbsoluteValue) {
                         displayValue = Math.abs(displayValue);
                     }
 
-                    if (displayedResource.data.data.combatTracker.visualization) {
-                        for (const visualizationEntry of displayedResource.data.data.combatTracker.visualization) {
+                    if (displayedResource.system.combatTracker.visualization) {
+                        for (const visualizationEntry of displayedResource.system.combatTracker.visualization) {
                             switch (visualizationEntry.mode) {
                                 case 'eq':
                                     if (resourceValue === visualizationEntry.value) {
