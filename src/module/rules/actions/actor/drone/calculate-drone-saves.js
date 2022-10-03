@@ -16,7 +16,7 @@ export default function (engine) {
         data.attributes.will.bonus = 0;
         
         if (activeChassis) {
-            const chassisData = activeChassis.data.data;
+            const chassisData = activeChassis.system;
 
             let droneLevel = chassisData.levels;
             droneLevel = Math.max(1, Math.min(droneLevel, 20));
