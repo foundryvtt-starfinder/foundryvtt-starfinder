@@ -3,7 +3,7 @@ export default function(engine) {
         const data = fact.data;
         const actor = fact.actor;
 
-        const pilot = (actor.system.crew?.pilot?.actors) ? actor.system.crew?.pilot?.actors[0] : null;
+        const pilot = (actor.crew?.pilot?.actors) ? actor.crew?.pilot?.actors[0] : null;
         const sizeMod = CONFIG.SFRPG.starshipSizeMod[data.details.size] || 0;
 
         let pilotingRanks = pilot?.system?.skills?.pil?.ranks || 0;
