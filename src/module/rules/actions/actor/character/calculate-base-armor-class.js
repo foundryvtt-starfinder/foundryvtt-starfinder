@@ -12,24 +12,24 @@ export default function (engine) {
         kac.tooltip.push(baseTooltip);
 
         if (armors || shields) {
-            const worstDexArmor = armors?.reduce((armor, worstArmor) => (armor.data?.data?.armor?.dex || 0) < (worstArmor.data?.data?.armor?.dex || 0) ? armor : worstArmor);
-            const worstDexArmorData = worstDexArmor?.data?.data;
+            const worstDexArmor = armors?.reduce((armor, worstArmor) => (armor.system?.armor?.dex || 0) < (worstArmor.system?.armor?.dex || 0) ? armor : worstArmor);
+            const worstDexArmorData = worstDexArmor?.system;
 
             // Max dex
-            const shieldMinDex = shields?.sort((a, b) => a.data.data.dex <= b.data.data.dex ? -1 : 1)[0];
-            let maxShieldDex = shieldMinDex?.data.data.dex ?? Number.MAX_SAFE_INTEGER;
+            const shieldMinDex = shields?.sort((a, b) => a.system.dex <= b.system.dex ? -1 : 1)[0];
+            let maxShieldDex = shieldMinDex?.system.dex ?? Number.MAX_SAFE_INTEGER;
             let maxArmorDex = worstDexArmorData?.armor.dex ?? Number.MAX_SAFE_INTEGER;
 
             const maxDex = Math.min(data.abilities.dex.mod, maxArmorDex, maxShieldDex);
             const maxDexTooltip = game.i18n.format("SFRPG.ACTooltipMaxDex", { 
                 maxDex: maxDex.signedString(), 
                 armorMax: worstDexArmorData?.armor.dex?.signedString() ?? game.i18n.localize("SFRPG.Items.Unlimited"),
-                shieldMax: shieldMinDex?.data.data.dex?.signedString() ?? game.i18n.localize("SFRPG.Items.Unlimited")
+                shieldMax: shieldMinDex?.system.dex?.signedString() ?? game.i18n.localize("SFRPG.Items.Unlimited")
             });
 
-            const powerArmor = armors?.find(x => x?.data?.data?.armor?.type === 'power');
+            const powerArmor = armors?.find(x => x?.system?.armor?.type === 'power');
             if (powerArmor) {
-                const powerArmorData = powerArmor.data.data;
+                const powerArmorData = powerArmor.system;
                 data.abilities.str.value = powerArmorData.strength;
                 data.abilities.str.mod = Math.floor((data.abilities.str.value - 10) / 2);
                 data.abilities.str.tooltip = [
@@ -57,7 +57,7 @@ export default function (engine) {
             };
 
             const actorArmorProf = data.traits?.armorProf?.value || [];
-            const bestEACArmor = armors?.reduce((armor, bestArmor) => (armor.data?.data?.armor?.eac || 0) > (bestArmor.data?.data?.armor?.eac || 0) ? armor : bestArmor);
+            const bestEACArmor = armors?.reduce((armor, bestArmor) => (armor.system?.armor?.eac || 0) > (bestArmor.system?.armor?.eac || 0) ? armor : bestArmor);
             let armorEac = {
                 value: 0,
                 armor: bestEACArmor,
@@ -65,7 +65,7 @@ export default function (engine) {
             };
 
             if (bestEACArmor) {
-                const armorData = bestEACArmor.data?.data;
+                const armorData = bestEACArmor.system;
                 
                 armorEac.value = armorData?.armor?.eac || 0;
 
@@ -76,7 +76,7 @@ export default function (engine) {
                 }
             }
 
-            const bestKACArmor = armors?.reduce((armor, bestArmor) => (armor.data?.data?.armor?.eac || 0) > (bestArmor.data?.data?.armor?.eac || 0) ? armor : bestArmor);
+            const bestKACArmor = armors?.reduce((armor, bestArmor) => (armor.system?.armor?.eac || 0) > (bestArmor.system?.armor?.eac || 0) ? armor : bestArmor);
             let armorKac = {
                 value: 0,
                 armor: bestKACArmor,
@@ -84,7 +84,7 @@ export default function (engine) {
             };
 
             if (bestKACArmor) {
-                const armorData = bestKACArmor.data?.data;
+                const armorData = bestKACArmor.system;
 
                 armorKac.value = armorData?.armor?.kac || 0;
 
@@ -100,7 +100,7 @@ export default function (engine) {
             
             if (shields) {
                 shields.forEach(shield => {
-                    const shieldData = shield.data.data;
+                    const shieldData = shield.system;
                     const wieldBonus = shieldData.bonus.wielded || 0;
 
                     totalShieldBonus += wieldBonus;
@@ -126,11 +126,11 @@ export default function (engine) {
             kac.maxDex = maxDex;
             
             if (armorEac.armor) eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorEac.value.signedString(), name: armorEac.name }));
-            if (shields) shields.forEach(shield => eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.data.data.bonus.wielded || 0).signedString(), name: shield.name })));
+            if (shields) shields.forEach(shield => eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.system.bonus.wielded || 0).signedString(), name: shield.name })));
             eac.tooltip.push(maxDexTooltip);
 
             if (armorKac.armor) kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorKac.value.signedString(), name: armorKac.name }));
-            if (shields) shields.forEach(shield => kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.data.data.bonus.wielded || 0).signedString(), name: shield.name })));
+            if (shields) shields.forEach(shield => kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.system.bonus.wielded || 0).signedString(), name: shield.name })));
             kac.tooltip.push(maxDexTooltip);
         } else {
             eac.value = 10 + data.abilities.dex.mod;
