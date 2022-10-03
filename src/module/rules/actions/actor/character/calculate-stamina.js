@@ -45,7 +45,7 @@ export default function (engine) {
         // Class bonus
         if (fact.classes && fact.classes.length > 0) {
             for (const cls of fact.classes) {
-                const classData = cls.data.data;
+                const classData = cls.system;
 
                 let classBonus = Math.floor(classData.levels * classData.sp.value);
                 spMax += classBonus;
