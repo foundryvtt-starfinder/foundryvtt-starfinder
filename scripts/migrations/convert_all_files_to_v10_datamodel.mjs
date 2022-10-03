@@ -30,26 +30,24 @@ async function migrateItemsToV10DataModel() {
             if (err) throw err;
 
             for (const file of files) {
-                fs.readFile(path.join(folder, file), {encoding: 'utf-8', flag: 'r+'}, (err, json) => {
-                    if (err) throw err;
+                const json = fs.readFileSync(path.join(folder, file), {encoding: 'utf-8', flag: 'r+'});
 
-                    console.log(`--> Updating ${file} to use the v10 data model...`);
-                    const data = JSON.parse(json);
-                    const system = data.data;
-                    delete data.data;
-                    data.system = system;
+                console.log(`--> Updating ${file} to use the v10 data model...`);
+                const data = JSON.parse(json);
+                const system = data.data;
+                delete data.data;
+                data.system = system;
 
-                    if (data.items && data.items.length > 0) {
-                        for (const item of data.items) {
-                            const itemSystem = item.data;
-                            delete item.data;
-                            item.system = itemSystem;
-                        }
+                if (data.items && data.items.length > 0) {
+                    for (const item of data.items) {
+                        const itemSystem = item.data;
+                        delete item.data;
+                        item.system = itemSystem;
                     }
+                }
 
-                    fs.writeFileSync(path.join(folder, file), JSON.stringify(data, null, 2));
-                    console.log(`--> ${file} has been updated`);
-                });
+                fs.writeFileSync(path.join(folder, file), JSON.stringify(data, null, 2));
+                console.log(`--> ${file} has been updated`);
             }
         });
         console.log(`-> Finished updating files in ${folder}...`);
