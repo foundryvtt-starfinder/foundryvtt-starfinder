@@ -65,7 +65,7 @@ function computeCompoundBulkForItem(item, contents) {
         totalBulk: personalBulk + contentBulk
     }
 
-    item.data.itemBulk = itemBulk;
+    item.itemBulk = itemBulk;
 
     //console.log(`${item?.name || "null"} has a content bulk of ${contentBulk}, and personal bulk of ${personalBulk}`);
     return itemBulk;
@@ -133,7 +133,7 @@ function computeCompoundWealthForItem(item, contents, depth = 1) {
         item.contentWealth = itemWealth.contentWealth;
     }
     
-    item.data.itemWealth = itemWealth;
+    item.itemWealth = itemWealth;
 
     //console.log(`${arrows} ${item?.name || "null"} has a content wealth of ${itemWealth.contentWealth}, and personal wealth of ${itemWealth.personalWealth}, totalling in at ${itemWealth.totalWealth}`);
     return itemWealth;
