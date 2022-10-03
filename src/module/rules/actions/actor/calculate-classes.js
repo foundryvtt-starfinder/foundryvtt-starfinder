@@ -7,7 +7,7 @@ export default function (engine) {
         data.cl = 0;
 
         for (const cls of classes) {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
             const className = cls.name.slugify({replacement: "_", strict: true});
             const keyAbilityScore = classData.kas || "str";
