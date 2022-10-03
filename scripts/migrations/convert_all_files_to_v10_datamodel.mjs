@@ -34,15 +34,20 @@ async function migrateItemsToV10DataModel() {
 
                 console.log(`--> Updating ${file} to use the v10 data model...`);
                 const data = JSON.parse(json);
-                const system = data.data;
-                delete data.data;
-                data.system = system;
+
+                if (data.data) {
+                    const system = data.data;
+                    delete data.data;
+                    data.system = system;
+                }
 
                 if (data.items && data.items.length > 0) {
                     for (const item of data.items) {
-                        const itemSystem = item.data;
-                        delete item.data;
-                        item.system = itemSystem;
+                        if (item.data) {
+                            const itemSystem = item.data;
+                            delete item.data;
+                            item.system = itemSystem;
+                        }
                     }
                 }
 
