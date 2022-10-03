@@ -1,17 +1,17 @@
 export const ItemActivationMixin = (superclass) => class extends superclass {
 
     hasUses() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         return itemData.uses && itemData.uses.max && itemData.uses.value;
     }
 
     getRemainingUses() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         return itemData.uses?.value || 0;
     }
 
     getMaxUses() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         return itemData.uses?.max || 0;
     }
 
@@ -20,7 +20,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
     }
     
     canBeActivated() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         if (this.type === "vehicleSystem") {
             return itemData.canBeActivated;
         } else {
@@ -29,7 +29,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
     }
 
     isActive() {
-        const itemData = this.data.data;
+        const itemData = this.system;
         return itemData.isActive;
     }
     
@@ -54,10 +54,10 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 return false;
             }
 
-            updateData['data.uses.value'] = Math.max(0, remainingUses - 1);
+            updateData['system.uses.value'] = Math.max(0, remainingUses - 1);
         }
 
-        updateData['data.isActive'] = active;
+        updateData['system.isActive'] = active;
 
         const updatePromise = this.update(updateData);
         const rollMode = game.settings.get("core", "rollMode");
@@ -109,7 +109,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 Hooks.callAll("itemActivationChanged", {actor: this.actor, item: this, isActive: active});
             });
         } else {
-            if (this.data.data.duration.value || this.data.data.uses.max > 0) {
+            if (this.system.duration.value || this.system.uses.max > 0) {
                updatePromise.then(() => {
                     // Render the chat card template
                     const templateData = {
