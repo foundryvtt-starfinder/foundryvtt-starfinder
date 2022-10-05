@@ -701,7 +701,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         return;
     }
 
-    const header = html.find('#combat-round');
+    const header = html.find('.combat-tracker-header');
     const footer = html.find('.directory-footer');
 
     const roundHeader = header.find('h3');
@@ -710,12 +710,12 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     if (activeCombat.data.round) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
-            roundHeader.replaceWith(`<div>${originalHtml}<h4>${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4></div>`);
+            roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4></div>`);
         }
     } else {
         const prevCombatTypeButton = `<a class="combat-type-prev" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectPrevType")}"><i class="fas fa-caret-left"></i></a>`;
         const nextCombatTypeButton = `<a class="combat-type-next" title="${game.i18n.format("SFRPG.Combat.EncounterTracker.SelectNextType")}"><i class="fas fa-caret-right"></i></a>`;
-        roundHeader.replaceWith(`<div>${originalHtml}<h4>${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
+        roundHeader.replaceWith(`<div>${originalHtml}<h4 class="combat-type">${prevCombatTypeButton} &nbsp; ${activeCombat.getCombatName()} &nbsp; ${nextCombatTypeButton}</h4></div>`);
         
         // Handle button clicks
         const configureButtonPrev = header.find('.combat-type-prev');
