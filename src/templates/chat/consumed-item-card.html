@@ -5,23 +5,23 @@
     </header>
 
     <div class="card-content">
-        {{#if (or data.description.value data.description.short)}}
-            {{#if data.description.short}}
-                {{{data.description.short}}}
+        {{#if (or system.description.value system.description.short)}}
+            {{#if system.description.short}}
+                {{{system.description.short}}}
             {{else}}
-                {{{data.description.value}}}
+                {{{system.description.value}}}
             {{/if}}
         {{/if}}
     </div>
 
     {{#if hasSave}}
     <div class="card-buttons">
-        <button type="button" data-action="save" data-type="{{data.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>
+        <button type="button" data-action="save" data-type="{{system.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>
     </div>
     {{/if}}
 
     <footer class="card-footer">
-        {{#each data.properties}}
+        {{#each system.properties}}
         <span>{{this.name}}</span>
         {{/each}}
     </footer>
