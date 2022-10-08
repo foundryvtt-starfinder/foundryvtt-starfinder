@@ -10,7 +10,7 @@ export default class SFRPGTokenDocument extends TokenDocument {
     getBarAttribute(barName, {alternative}={}) {
         const attr = alternative || (barName ? this.data[barName].attribute : null);
         if ( !attr || !this.actor ) return null;
-        let data = foundry.utils.getProperty(this.actor.data.data, attr);
+        let data = foundry.utils.getProperty(this.actor.system, attr);
         if ( (data === null) || (data === undefined) ) return null;
         const model = game.system.model.Actor[this.actor.type];
 
