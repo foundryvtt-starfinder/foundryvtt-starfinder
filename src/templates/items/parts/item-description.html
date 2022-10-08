@@ -5,36 +5,36 @@
         {{#if isPhysical}}
         <div class="form-group">
             <label>{{ localize "SFRPG.Items.Description.Quantity" }}</label>
-            <input type="text" name="data.quantity" value="{{itemData.quantity}}" data-dtype="Number"/>
+            <input type="text" name="system.quantity" value="{{itemData.quantity}}" data-dtype="Number"/>
         </div>
 
         <div class="form-group flexrow" {{createTippy title="SFRPG.Items.Description.QuantityPerPack" subtitle="SFRPG.Items.Description.QuantityPerPackTooltip"}}>
             <label>{{ localize "SFRPG.Items.Description.QuantityPerPack" }}</label>
-            <input style="flex: 1;" type="text" name="data.quantityPerPack" value="{{itemData.quantityPerPack}}" data-dtype="Number"/>
+            <input style="flex: 1;" type="text" name="system.quantityPerPack" value="{{itemData.quantityPerPack}}" data-dtype="Number"/>
         </div>
 
         <div class="form-group">
             <label>{{ localize "SFRPG.Items.Description.Bulk" }}</label>
-            <input type="text" name="data.bulk" value="{{itemData.bulk}}" />
+            <input type="text" name="system.bulk" value="{{itemData.bulk}}" />
         </div>
 
         <div class="form-group">
             <label>{{ localize "SFRPG.Items.Description.Price" }}</label>
-            <input type="text" name="data.price" value="{{itemData.price}}" data-dtype="Number"/>
+            <input type="text" name="system.price" value="{{itemData.price}}" data-dtype="Number"/>
         </div>
         {{/if}}
 
         {{#if hasLevel}}
         <div class="form-group">
             <label>{{ localize "SFRPG.Items.Description.Level" }}</label>
-            <input type="text" name="data.level" value="{{itemData.level}}" data-dtype="Number" />
+            <input type="text" name="system.level" value="{{itemData.level}}" data-dtype="Number" />
         </div>
         {{/if}}
 
         {{#if hasHands}}
         <div class="form-group">
             <label>{{ localize "SFRPG.Items.Description.Hands" }}</label>
-            <input type="text" name="data.hands" value="{{itemData.hands}}" data-dtype="Number" />
+            <input type="text" name="system.hands" value="{{itemData.hands}}" data-dtype="Number" />
         </div>
         {{/if}}
 
@@ -59,7 +59,7 @@
             <div class="tab flexrow" data-group="descriptionTabs" data-tab="description">
                 {{editor
                     enrichedDescription
-                    target="data.description.value"
+                    target="system.description.value"
                     button=true
                     editable=editable
                 }}
@@ -67,7 +67,7 @@
             <div class="tab flexrow" data-group="descriptionTabs" data-tab="descriptionShort">
                 {{editor
                     enrichedShortDescription
-                    target="data.description.short"
+                    target="system.description.short"
                     button=true
                     editable=editable
                 }}
@@ -76,7 +76,7 @@
             <div class="tab flexrow" data-group="descriptionTabs" data-tab="gmNotes">
                 {{editor
                     enrichedGMNotes
-                    target="data.description.gmNotes"
+                    target="system.description.gmNotes"
                     button=true
                     editable=editable
                 }}
