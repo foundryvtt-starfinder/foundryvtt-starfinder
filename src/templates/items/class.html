@@ -16,7 +16,7 @@
 
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.source" value="{{itemData.source}}" placeholder="Source" />
+                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="Source" />
                 </li>
             </ul>
         </div>
@@ -42,14 +42,14 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassLevelLabel"}}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.levels" value="{{itemData.levels}}" data-dtype="Number" />
+                    <input type="text" name="system.levels" value="{{itemData.levels}}" data-dtype="Number" />
                 </div>
             </div>
 
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassBABProgression"}}</label>
                 <div class="form-fields">
-                    <select name="data.bab">
+                    <select name="system.bab">
                         {{#select itemData.bab}}
                         {{#each config.babProgression as |name val|}}
                         <option value="{{val}}">{{name}}</option>
@@ -62,7 +62,7 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassFortSaveProgression"}}</label>
                 <div class="form-fields">
-                    <select name="data.fort">
+                    <select name="system.fort">
                         {{#select itemData.fort}}
                         {{#each config.saveProgression as |name val|}}
                         <option value="{{val}}">{{name}}</option>
@@ -75,7 +75,7 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassReflexSaveProgression"}}</label>
                 <div class="form-fields">
-                    <select name="data.ref">
+                    <select name="system.ref">
                         {{#select itemData.ref}}
                         {{#each config.saveProgression as |name val|}}
                         <option value="{{val}}">{{name}}</option>
@@ -88,7 +88,7 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassWillSaveProgression"}}</label>
                 <div class="form-fields">
-                    <select name="data.will">
+                    <select name="system.will">
                         {{#select itemData.will}}
                         {{#each config.saveProgression as |name val|}}
                         <option value="{{val}}">{{name}}</option>
@@ -101,7 +101,7 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassKeyAbilityScore"}}</label>
                 <div class="form-fields">
-                    <select name="data.kas">
+                    <select name="system.kas">
                         {{#select itemData.kas}}
                         {{#each config.abilities as |name val|}}
                         <option value="{{val}}">{{name}}</option>
@@ -115,7 +115,7 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassHPPerLevel"}}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.hp.value" value="{{itemData.hp.value}}" data-dtype="Number" />
+                    <input type="text" name="system.hp.value" value="{{itemData.hp.value}}" data-dtype="Number" />
                 </div>
             </div>
 
@@ -123,7 +123,7 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassSPPerlevel"}}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.sp.value" value="{{itemData.sp.value}}" data-dtype="Number" />
+                    <input type="text" name="system.sp.value" value="{{itemData.sp.value}}" data-dtype="Number" />
                 </div>
             </div>
 
@@ -134,7 +134,7 @@
                 <label>{{localize "SFRPG.Classes.IsCasterClass"}}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.isCaster" {{checked itemData.isCaster}} /> {{localize "SFRPG.ItemSheet.Class.SpellCasting.IsCaster"}}
+                        <input type="checkbox" name="system.isCaster" {{checked itemData.isCaster}} /> {{localize "SFRPG.ItemSheet.Class.SpellCasting.IsCaster"}}
                     </label>
                 </div>
             </div>
@@ -145,7 +145,7 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassSpellcastingAbility"}}</label>
                 <div class="form-fields">
-                    <select name="data.spellAbility">
+                    <select name="system.spellAbility">
                         <option value=""></option>
                         {{#select itemData.spellAbility}}
                         {{#each config.abilities as |name val|}}
@@ -179,13 +179,13 @@
                         {{#each itemData.spellsKnown}}
                         <tr>
                             <td>{{localize (append "SFRPG.Levels." @key)}}</td>
-                            <td><input type="text" name="data.spellsKnown.{{@key}}.0" value="{{nullOrNonZero (lookup this 0)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.spellsKnown.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.spellsKnown.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.spellsKnown.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.spellsKnown.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.spellsKnown.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.spellsKnown.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsKnown.{{@key}}.0" value="{{nullOrNonZero (lookup this 0)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsKnown.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsKnown.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsKnown.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsKnown.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsKnown.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsKnown.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
                         </tr>
                         {{/each}}
                     </tbody>
@@ -213,12 +213,12 @@
                         {{#each itemData.spellsPerDay}}
                         <tr>
                             <td>{{localize (append "SFRPG.Levels." @key)}}</td>
-                            <td><input type="text" name="data.spellsPerDay.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.spellsPerDay.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.spellsPerDay.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.spellsPerDay.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.spellsPerDay.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.spellsPerDay.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsPerDay.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsPerDay.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsPerDay.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsPerDay.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsPerDay.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.spellsPerDay.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
                         </tr>
                         {{/each}}
                     </tbody>
@@ -248,12 +248,12 @@
                         <tr>
                             <td>{{modToScoreRange @key}}</td>
                             <td> - </td>
-                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
-                            <td><input type="text" name="data.bonusSpellsPerDay.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.1" value="{{nullOrNonZero (lookup this 1)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.2" value="{{nullOrNonZero (lookup this 2)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.3" value="{{nullOrNonZero (lookup this 3)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.4" value="{{nullOrNonZero (lookup this 4)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.5" value="{{nullOrNonZero (lookup this 5)}}" data-dtype="Number" /></td>
+                            <td><input type="text" name="system.bonusSpellsPerDay.{{@key}}.6" value="{{nullOrNonZero (lookup this 6)}}" data-dtype="Number" /></td>
                         </tr>
                         {{/each}}
                     </tbody>
@@ -267,7 +267,7 @@
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassSkillRanksPerlevel"}}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.skillRanks.value" value="{{itemData.skillRanks.value}}" data-dtype="Number" />
+                    <input type="text" name="system.skillRanks.value" value="{{itemData.skillRanks.value}}" data-dtype="Number" />
                 </div>
             </div>
 
@@ -275,7 +275,7 @@
                 <label>{{localize "SFRPG.ClassSkills"}}</label>
                 {{#each config.skills as |name val|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="data.csk.{{val}}" {{checked (lookup ../itemData.csk val)}}/> {{ name }}
+                    <input type="checkbox" name="system.csk.{{val}}" {{checked (lookup ../itemData.csk val)}}/> {{ name }}
                 </label>
                 {{/each}}
             </div>
@@ -285,7 +285,7 @@
                 <label>{{localize "SFRPG.ClassWeaponProf"}}</label>
                 {{#each config.weaponProficiencies as |name val|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="data.proficiencies.weapon.{{val}}" {{checked (lookup ../itemData.proficiencies.weapon val)}}/> {{ name }}
+                    <input type="checkbox" name="system.proficiencies.weapon.{{val}}" {{checked (lookup ../itemData.proficiencies.weapon val)}}/> {{ name }}
                 </label>
                 {{/each}}
             </div>
@@ -295,7 +295,7 @@
                 <label>{{localize "SFRPG.ClassArmorProf"}}</label>
                 {{#each config.armorProficiencies as |name val|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="data.proficiencies.armor.{{val}}" {{checked (lookup ../itemData.proficiencies.armor val)}}/> {{ name }}
+                    <input type="checkbox" name="system.proficiencies.armor.{{val}}" {{checked (lookup ../itemData.proficiencies.armor val)}}/> {{ name }}
                 </label>
                 {{/each}}
             </div>
