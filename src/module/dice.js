@@ -260,7 +260,7 @@ export class DiceSFRPG {
             // }
 
             const itemContext = rollContext.allContexts['item'];
-            const htmlData = [{ name: "rollNotes", value: itemContext?.data?.data?.rollNotes }];
+            const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
@@ -623,10 +623,10 @@ export class DiceSFRPG {
             const itemContext = rollContext.allContexts['item'];
             if (itemContext) {
                 /** Regular Weapons use data.properties for their properties */
-                if (itemContext.entity.data.data.properties) {
+                if (itemContext.entity.system.properties) {
                     try {
                         const props = [];
-                        for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.properties)) {
+                        for (const [key, isEnabled] of Object.entries(itemContext.entity.system.properties)) {
                             if (isEnabled) {
                                 tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
                                 props.push(key);
@@ -637,14 +637,14 @@ export class DiceSFRPG {
                 }
 
                 /** Starship Weapons use data.special for their properties */
-                if (itemContext.entity.data.type === "starshipWeapon") {
-                    tags.push({tag: `starship-weapon-type ${itemContext.entity.data.data.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.data.data.weaponType]});
-                    htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.data.data.weaponType });
+                if (itemContext.entity.type === "starshipWeapon") {
+                    tags.push({tag: `starship-weapon-type ${itemContext.entity.system.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.system.weaponType]});
+                    htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.system.weaponType });
 
-                    if (itemContext.entity.data.data.special) {
+                    if (itemContext.entity.system.special) {
                         try {
                             const props = [];
-                            for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.special)) {
+                            for (const [key, isEnabled] of Object.entries(itemContext.entity.system.special)) {
                                 if (isEnabled) {
                                     tags.push({tag: `starship-weapon-properties ${key}`, text: SFRPG.starshipWeaponProperties[key]});
                                     props.push(key);
@@ -655,7 +655,7 @@ export class DiceSFRPG {
                     }
                 }
 
-                const specialMaterials = itemContext.entity.data.data.specialMaterials;
+                const specialMaterials = itemContext.entity.system.specialMaterials;
                 if (specialMaterials) {
                     for (const [material, isEnabled] of Object.entries(specialMaterials)) {
                         if (isEnabled) {
@@ -768,8 +768,8 @@ export class DiceSFRPG {
                     damageTypeString: damageTypeString
                 };
 
-                if (itemContext && itemContext.entity.data.data.specialMaterials) {
-                    customData.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                if (itemContext && itemContext.entity.system.specialMaterials) {
+                    customData.specialMaterials = itemContext.entity.system.specialMaterials;
                 }
 
                 try {
@@ -803,8 +803,8 @@ export class DiceSFRPG {
                         }
                     };
 
-                    if (itemContext && itemContext.entity.data.data.specialMaterials) {
-                        messageData.flags.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                    if (itemContext && itemContext.entity.system.specialMaterials) {
+                        messageData.flags.specialMaterials = itemContext.entity.system.specialMaterials;
                     }
                 }
                 
