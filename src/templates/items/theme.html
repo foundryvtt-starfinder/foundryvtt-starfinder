@@ -16,7 +16,7 @@
 
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.source" value="{{itemData.source}}" placeholder="Source" />
+                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="Source" />
                 </li>
             </ul>
         </div>
@@ -42,20 +42,20 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Theme.AbilityAdjustment" }}</label>
                 <div class="form-fields">
-                    <select name="data.abilityMod.ability">
+                    <select name="system.abilityMod.ability">
                         {{#select itemData.abilityMod.ability}}
                         {{#each config.abilities as |ability key|}}
                         <option value="{{key}}">{{ability}}</option>
                         {{/each}}
                         {{/select}}
                     </select>
-                    <input type="text" name="data.abilityMod.mod" value="{{itemData.abilityMod.mod}}" data-dtype="Number" />                    
+                    <input type="text" name="system.abilityMod.mod" value="{{itemData.abilityMod.mod}}" data-dtype="Number" />                    
                 </div>
             </div>
 
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Theme.Skill" }}</label>
-                <select name="data.skill">
+                <select name="system.skill">
                     {{#select itemData.skill}}
                     {{#each config.skills as |skill skl|}}
                     <option value="{{skl}}">{{skill}}</option>
