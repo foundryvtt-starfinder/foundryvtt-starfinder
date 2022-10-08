@@ -14,7 +14,7 @@
                 </div>
                 <div>
                     {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
-                    <label class="value-label">@resources.{{item.data.type}}.{{item.data.subType}}.value</label>
+                    <label class="value-label">@resources.{{item.system.type}}.{{item.system.subType}}.value</label>
                     {{else}}
                     <label class="error">{{localize "SFRPG.ItemSheet.ActorResource.ErrorIncompleteData"}}</label>
                     {{/if}}
@@ -22,7 +22,7 @@
             </div>
             {{/if}}
         </h4>
-        {{#if (and item.data.piloting.usedAsPilot item.data.isActive)}}
+        {{#if (and item.system.piloting.usedAsPilot item.system.isActive)}}
         <div class="vehicle-system-action flexcol">
             <button type="button" class="tag roll-piloting">{{localize "SFRPG.VehicleSheet.Systems.RollPiloting"}}</button>
         </div>
@@ -31,7 +31,7 @@
         <div class="actor-resource-values">
             <div>
                 <label class="actor-resource-base-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue"}}:</label>
-                <input class="actor-resource-base-input" data-resource-id="{{item._id}}" type="text" name="" value="{{item.data.base}}" data-dtype="Number"/>
+                <input class="actor-resource-base-input" data-resource-id="{{item._id}}" type="text" name="" value="{{item.system.base}}" data-dtype="Number"/>
             </div>
             <div>
                 <label class="actor-resource-computed-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue"}}:</label>
@@ -43,8 +43,8 @@
 
     {{#if section.hasActions}}
     <div class="item-detail item-action">
-        {{#if (and item.isVehicleSystem item.data.canBeActivated)}}
-            {{#if item.data.isActive}}
+        {{#if (and item.isVehicleSystem item.system.canBeActivated)}}
+            {{#if item.system.isActive}}
             <button type="button" class="tag vehicle-system-deactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
             {{else}}
             <button type="button" class="tag vehicle-system-activate">{{localize "SFRPG.ActorSheet.Inventory.Item.Activate"}}</button>
