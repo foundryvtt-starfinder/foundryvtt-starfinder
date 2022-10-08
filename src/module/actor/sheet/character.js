@@ -30,7 +30,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     async getData() {
         const sheetData = super.getData();
 
-        let hp = sheetData.data.attributes.hp;
+        let hp = sheetData.system.attributes.hp;
         if (hp.temp === 0) delete hp.temp;
         if (hp.tempmax === 0) delete hp.tempmax;
 
@@ -50,7 +50,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
-        const actorData = data.data;
+        const actorData = data.system;
 
         const inventory = {
             weapon: { label: game.i18n.format(SFRPG.itemTypes["weapon"]), items: [], dataset: { type: "weapon" }, allowAdd: true },
