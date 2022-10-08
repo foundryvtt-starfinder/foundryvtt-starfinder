@@ -26,13 +26,13 @@
             <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.EngineRating" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.EngineRatingTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.EngineRating" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.engineRating" value="{{itemData.engineRating}}" data-dtype="Number" placeholder="0" />
+                    <input type="text" name="system.engineRating" value="{{itemData.engineRating}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
 
             <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSize" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSizeTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSize" }}</label>
-                <select name="data.maxSize">
+                <select name="system.maxSize">
                     {{#select itemData.maxSize}}
                     {{#each config.starshipSizes as |name type|}}
                     <option value="{{type}}">{{localize name}}</option>
