@@ -12,21 +12,21 @@
                 <div class="charlevel">
                     <div class="level">
                         <label>CR</label>
-                        <input name="data.details.cr.value" type="text" value="{{data.details.cr.value}}" placeholder="1" />
+                        <input name="system.details.cr.value" type="text" value="{{system.details.cr.value}}" placeholder="1" />
                     </div>
                     <div class="experience">
-                        <span>{{data.details.xp.value}} XP</span>
+                        <span>{{system.details.xp.value}} XP</span>
                     </div>
                 </div>
             </div>
             <ul class="summary-row1 flexrow">
                 <li>
-                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{localize "SFRPG.HazardSheet.Header.SourcePlaceholder"}}" />
+                    <input type="text" name="system.details.type" value="{{system.details.type}}" placeholder="{{localize "SFRPG.HazardSheet.Header.SourcePlaceholder"}}" />
                 </li>
             </ul>
             <ul class="summary-row2 flexrow">
                 <li>
-                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="{{localize "SFRPG.HazardSheet.Header.TypePlaceholder"}}" />
+                    <input type="text" name="system.details.source" value="{{system.details.source}}" placeholder="{{localize "SFRPG.HazardSheet.Header.TypePlaceholder"}}" />
                 </li>
             </ul>
         </div>
@@ -50,13 +50,13 @@
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.DCs.NoticeTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.DCs.Notice" }}</label>
                             <div class="form-fields">
-                                <input name="data.dcs.notice.value" type="text" value="{{data.dcs.notice.value}}" data-dtype="String" placeholder="e.g. Perception DC 12" />
+                                <input name="system.dcs.notice.value" type="text" value="{{system.dcs.notice.value}}" data-dtype="String" placeholder="e.g. Perception DC 12" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.DCs.DisableTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.DCs.Disable" }}</label>
                             <div class="form-fields">
-                                <textarea name="data.dcs.disable.value" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>{{data.dcs.disable.value}}</textarea>
+                                <textarea name="system.dcs.disable.value" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>{{system.dcs.disable.value}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -71,31 +71,31 @@
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Attributes.TriggerTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.Attributes.Trigger" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.trigger.value" type="text" value="{{data.attributes.trigger.value}}" data-dtype="String" placeholder="{{ localize "SFRPG.HazardSheet.Details.Attributes.TriggerPlaceholder" }}" />
+                                <input name="system.attributes.trigger.value" type="text" value="{{system.attributes.trigger.value}}" data-dtype="String" placeholder="{{ localize "SFRPG.HazardSheet.Details.Attributes.TriggerPlaceholder" }}" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Attributes.InitiativeTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.Attributes.Initiative" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.init.value" type="text" value="{{data.attributes.init.value}}" data-dtype="String" placeholder="" />
+                                <input name="system.attributes.init.value" type="text" value="{{system.attributes.init.value}}" data-dtype="String" placeholder="" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Attributes.DurationTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.Attributes.Duration" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.duration.value" type="text" value="{{data.attributes.duration.value}}" data-dtype="String" placeholder="" />
+                                <input name="system.attributes.duration.value" type="text" value="{{system.attributes.duration.value}}" data-dtype="String" placeholder="" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Attributes.ResetTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.Attributes.Reset" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.reset.value" type="text" value="{{data.attributes.reset.value}}" data-dtype="String" placeholder="{{ localize "SFRPG.HazardSheet.Details.Attributes.ResetPlaceholder" }}" />
+                                <input name="system.attributes.reset.value" type="text" value="{{system.attributes.reset.value}}" data-dtype="String" placeholder="{{ localize "SFRPG.HazardSheet.Details.Attributes.ResetPlaceholder" }}" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Attributes.BypassTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.Attributes.Bypass" }}</label>
                             <div class="form-fields">
-                                <textarea name="data.attributes.bypass.value" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>{{data.attributes.bypass.value}}</textarea>
+                                <textarea name="system.attributes.bypass.value" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>{{system.attributes.bypass.value}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Effects.EffectTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.Effects.Effect" }}</label>
                             <div class="form-fields">
-                                <textarea name="data.attributes.effect.value" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>{{data.attributes.effect.value}}</textarea>
+                                <textarea name="system.attributes.effect.value" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>{{system.attributes.effect.value}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -128,27 +128,27 @@
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Vitals.Defenses.HitpointsTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.Vitals.Defenses.Hitpoints" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" data-dtype="Number" placeholder="10" />
+                                <input name="system.attributes.hp.value" type="text" value="{{system.attributes.hp.value}}" data-dtype="Number" placeholder="10" />
                                 &nbsp;/&nbsp;
-                                <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" data-dtype="Number" placeholder="10" />
+                                <input name="system.attributes.hp.max" type="text" value="{{system.attributes.hp.max}}" data-dtype="Number" placeholder="10" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Vitals.Defenses.EACTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.Vitals.Defenses.EAC" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.eac.value" type="text" value="{{data.attributes.eac.value}}" data-dtype="String" placeholder="10" />
+                                <input name="system.attributes.eac.value" type="text" value="{{system.attributes.eac.value}}" data-dtype="String" placeholder="10" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Vitals.Defenses.KACTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.Vitals.Defenses.KAC" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.kac.value" type="text" value="{{data.attributes.kac.value}}" data-dtype="String" placeholder="10" />
+                                <input name="system.attributes.kac.value" type="text" value="{{system.attributes.kac.value}}" data-dtype="String" placeholder="10" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Vitals.Defenses.HardnessTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.Vitals.Defenses.Hardness" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.hardness.value" type="text" value="{{data.attributes.hardness.value}}" data-dtype="String" placeholder="" />
+                                <input name="system.attributes.hardness.value" type="text" value="{{system.attributes.hardness.value}}" data-dtype="String" placeholder="" />
                             </div>
                         </div>
                     </div>
@@ -161,19 +161,19 @@
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Vitals.Saves.FortitudeTooltip" }}" class="rollable" id="fortSave">{{ localize "SFRPG.HazardSheet.Details.Vitals.Saves.Fortitude" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.fort.value" type="text" value="{{data.attributes.fort.value}}" data-dtype="String" placeholder="" />
+                                <input name="system.attributes.fort.value" type="text" value="{{system.attributes.fort.value}}" data-dtype="String" placeholder="" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Vitals.Saves.ReflexTooltip" }}" class="rollable" id="reflexSave">{{ localize "SFRPG.HazardSheet.Details.Vitals.Saves.Reflex" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.reflex.value" type="text" value="{{data.attributes.reflex.value}}" data-dtype="String" placeholder="" />
+                                <input name="system.attributes.reflex.value" type="text" value="{{system.attributes.reflex.value}}" data-dtype="String" placeholder="" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Vitals.Saves.WillTooltip" }}" class="rollable" id="willSave">{{ localize "SFRPG.HazardSheet.Details.Vitals.Saves.Will" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.will.value" type="text" value="{{data.attributes.will.value}}" data-dtype="String" placeholder="" />
+                                <input name="system.attributes.will.value" type="text" value="{{system.attributes.will.value}}" data-dtype="String" placeholder="" />
                             </div>
                         </div>
                     </div>
@@ -186,13 +186,13 @@
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Vitals.Offense.AttackTooltip" }}" class="rollable" id="attack">{{ localize "SFRPG.HazardSheet.Details.Vitals.Offense.Attack" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.baseAttackBonus.value" type="text" value="{{data.attributes.baseAttackBonus.value}}" data-dtype="String" placeholder="" />
+                                <input name="system.attributes.baseAttackBonus.value" type="text" value="{{system.attributes.baseAttackBonus.value}}" data-dtype="String" placeholder="" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label title="{{ localize "SFRPG.HazardSheet.Details.Vitals.Offense.DamageTooltip" }}" class="rollable" id="damage">{{ localize "SFRPG.HazardSheet.Details.Vitals.Offense.Damage" }}</label>
                             <div class="form-fields">
-                                <input name="data.attributes.damage.value" type="text" value="{{data.attributes.damage.value}}" data-dtype="String" placeholder="" />
+                                <input name="system.attributes.damage.value" type="text" value="{{system.attributes.damage.value}}" data-dtype="String" placeholder="" />
                             </div>
                         </div>
                     </div>
@@ -205,7 +205,7 @@
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
             {{editor
                 enrichedDescription
-                target="data.details.description.value"
+                target="system.details.description.value"
                 button=true
                 editable=editable
             }}
