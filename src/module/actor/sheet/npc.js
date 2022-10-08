@@ -55,7 +55,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     getData() {
         const data = super.getData();
 
-        let cr = parseFloat(data.data.details.cr || 0);
+        let cr = parseFloat(data.system.details.cr || 0);
         let crs = { 0: "0", 0.125: "1/8", [1/6]: "1/6", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
         data.labels["cr"] = cr >= 1 ? String(cr) : crs[cr] || 1;
 
@@ -74,7 +74,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     }
 
     _prepareItems(data) {
-        const actorData = data.data;
+        const actorData = data.system;
         const droneItemTypes = ["chassis", "mod"];
 
         const inventory = {
@@ -217,7 +217,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
      */
     _updateObject(event, formData) {
         const crs = { "1/8": 0.125, "1/6": 1/6, "1/4": 0.25, "1/3": 1/3, "1/2": 0.5 };
-        let crv = "data.details.cr";
+        let crv = "system.details.cr";
         let cr = formData[crv];
         cr = crs[cr] || parseFloat(cr);
         if (cr) formData[crv] = cr < 1 ? cr : parseInt(cr);
