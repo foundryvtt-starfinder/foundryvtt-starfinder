@@ -25,7 +25,7 @@
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.Enabled" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.enabled" {{checked itemData.enabled}}/>
+                        <input type="checkbox" name="system.enabled" {{checked itemData.enabled}}/>
                     </label>
                 </div>
             </div>
@@ -33,7 +33,7 @@
             <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Type" subtitle="SFRPG.ItemSheet.ActorResource.TypeTooltip"}}>
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.Type" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.type" value="{{itemData.type}}" data-dtype="text" placeholder="" />
+                    <input type="text" name="system.type" value="{{itemData.type}}" data-dtype="text" placeholder="" />
                 </div>
             </div>
 
@@ -49,7 +49,7 @@
             <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.SubType" subtitle="SFRPG.ItemSheet.ActorResource.SubTypeTooltip"}}>
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.SubType" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.subType" value="{{itemData.subType}}" data-dtype="text" placeholder="" />
+                    <input type="text" name="system.subType" value="{{itemData.subType}}" data-dtype="text" placeholder="" />
                 </div>
             </div>
 
@@ -65,7 +65,7 @@
             <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Base" subtitle="SFRPG.ItemSheet.ActorResource.BaseTooltip"}}>
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.Base" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.base" value="{{itemData.base}}" data-dtype="Number" placeholder="" />
+                    <input type="text" name="system.base" value="{{itemData.base}}" data-dtype="Number" placeholder="" />
                 </div>
             </div>
 
@@ -81,16 +81,16 @@
             <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Range" subtitle="SFRPG.ItemSheet.ActorResource.RangeTooltip"}}>
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.Range" }}</label>
                 <div class="form-fields" {{createTippy title="SFRPG.ItemSheet.ActorResource.Range" subtitle="SFRPG.ItemSheet.ActorResource.RangeTooltip"}}>
-                    <input type="text" name="data.range.min" value="{{itemData.range.min}}" data-dtype="Number" />
+                    <input type="text" name="system.range.min" value="{{itemData.range.min}}" data-dtype="Number" />
                     <span class="sep"> - </span>
-                    <input type="text" name="data.range.max" value="{{itemData.range.max}}" data-dtype="Number" />
+                    <input type="text" name="system.range.max" value="{{itemData.range.max}}" data-dtype="Number" />
                 </div>
             </div>
             
             <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.RangeMode" subtitle="SFRPG.ItemSheet.ActorResource.RangeModeTooltip"}}>
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.RangeMode" }}</label>
                 <div class="form-fields">
-                    <select name="data.range.mode">
+                    <select name="system.range.mode">
                         {{#select itemData.range.mode}}
                         <option value="post">{{ localize "SFRPG.ItemSheet.ActorResource.RangeModePost" }}</option>
                         <option value="immediate">{{ localize "SFRPG.ItemSheet.ActorResource.RangeModeImmediate" }}</option>
@@ -102,7 +102,7 @@
             <div class="form-group" {{createTippy title="SFRPG.ItemSheet.ActorResource.Stage" subtitle="SFRPG.ItemSheet.ActorResource.StageTooltip"}}>
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.Stage" }}</label>
                 <div class="form-fields">
-                    <select name="data.stage">
+                    <select name="system.stage">
                         {{#select itemData.stage}}
                         <option value="early">{{ localize "SFRPG.ItemSheet.ActorResource.StageEarly" }}</option>
                         <option value="late">{{ localize "SFRPG.ItemSheet.ActorResource.StageLate" }}</option>
@@ -117,7 +117,7 @@
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowInCombatTracker" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.combatTracker.show" {{checked itemData.combatTracker.show}}/>
+                        <input type="checkbox" name="system.combatTracker.show" {{checked itemData.combatTracker.show}}/>
                     </label>
                 </div>
             </div>
@@ -127,7 +127,7 @@
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.ShowOwnerAndGMOnly" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.combatTracker.showOwnerAndGMOnly" {{checked itemData.combatTracker.showOwnerAndGMOnly}}/>
+                        <input type="checkbox" name="system.combatTracker.showOwnerAndGMOnly" {{checked itemData.combatTracker.showOwnerAndGMOnly}}/>
                     </label>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                 <label>{{ localize "SFRPG.ItemSheet.ActorResource.DisplayAbsoluteValue" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.combatTracker.displayAbsoluteValue" {{checked itemData.combatTracker.displayAbsoluteValue}}/>
+                        <input type="checkbox" name="system.combatTracker.displayAbsoluteValue" {{checked itemData.combatTracker.displayAbsoluteValue}}/>
                     </label>
                 </div>
             </div>
