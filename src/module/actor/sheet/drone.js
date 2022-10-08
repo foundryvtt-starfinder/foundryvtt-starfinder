@@ -39,28 +39,28 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
-        const actorData = data.data;
+        const actorData = data.system;
 
         let weaponLabel = "";
-        if (data.data.attributes.weaponMounts.melee.max > 0 && data.data.attributes.weaponMounts.ranged.max > 0) {
+        if (data.system.attributes.weaponMounts.melee.max > 0 && data.system.attributes.weaponMounts.ranged.max > 0) {
             weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.Both", {
-                meleeCurrent: data.data.attributes.weaponMounts.melee.current, meleeMax: data.data.attributes.weaponMounts.melee.max,
-                rangedCurrent: data.data.attributes.weaponMounts.ranged.current, rangedMax: data.data.attributes.weaponMounts.ranged.max
+                meleeCurrent: data.system.attributes.weaponMounts.melee.current, meleeMax: data.system.attributes.weaponMounts.melee.max,
+                rangedCurrent: data.system.attributes.weaponMounts.ranged.current, rangedMax: data.system.attributes.weaponMounts.ranged.max
             });
-        } else if (data.data.attributes.weaponMounts.melee.max > 0) {
+        } else if (data.system.attributes.weaponMounts.melee.max > 0) {
             weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.MeleeOnly", {
-                meleeCurrent: data.data.attributes.weaponMounts.melee.current, meleeMax: data.data.attributes.weaponMounts.melee.max
+                meleeCurrent: data.system.attributes.weaponMounts.melee.current, meleeMax: data.system.attributes.weaponMounts.melee.max
             });
-        } else if (data.data.attributes.weaponMounts.ranged.max > 0) {
+        } else if (data.system.attributes.weaponMounts.ranged.max > 0) {
             weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.RangedOnly", {
-                rangedCurrent: data.data.attributes.weaponMounts.ranged.current, rangedMax: data.data.attributes.weaponMounts.ranged.max
+                rangedCurrent: data.system.attributes.weaponMounts.ranged.current, rangedMax: data.system.attributes.weaponMounts.ranged.max
             });
         } else {
             weaponLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.Weapons.None");
         }
 
         let armorUpgradesLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.ArmorUpgrades",
-            { current: data.data.attributes.armorSlots.current, max: data.data.attributes.armorSlots.max }
+            { current: data.system.attributes.armorSlots.current, max: data.system.attributes.armorSlots.max }
         );
 
         let cargoLabel = game.i18n.format("SFRPG.DroneSheet.Inventory.CarriedItems");
@@ -121,7 +121,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             }
         });
 
-        let droneLevelIndex = data.data.details.level.value - 1;
+        let droneLevelIndex = data.system.details.level.value - 1;
         let maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];
 
         let activeFeats = [];
@@ -134,7 +134,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         let maxFeats = SFRPG.droneFeatsPerLevel[droneLevelIndex];
 
         let chassisLabel = game.i18n.format("SFRPG.DroneSheet.Features.Chassis");
-        let modsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Mods", {current: mods.filter(x => !x.data.isFree).length, max: maxMods});
+        let modsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Mods", {current: mods.filter(x => !x.sytem.isFree).length, max: maxMods});
         let featsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Header", {current: (activeFeats.length + passiveFeats.length), max: maxFeats});
         let activeFeatsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Active");
         let passiveFeatsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Passive");
@@ -157,7 +157,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } }
         };
 
-        let [permanent, temporary, conditions] = data.data.modifiers.reduce((arr, modifier) => {
+        let [permanent, temporary, conditions] = data.system.modifiers.reduce((arr, modifier) => {
             if (modifier.subtab === "permanent") arr[0].push(modifier);
             else if (modifier.subtab === "conditions") arr[2].push(modifier);
             else arr[1].push(modifier);
@@ -253,7 +253,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         const modifier = modifiers.find(mod => mod._id === modifierId);
         modifier.enabled = !modifier.enabled;
 
-        await this.actor.update({'data.modifiers': modifiers});
+        await this.actor.update({'system.modifiers': modifiers});
     }
 
     /**
