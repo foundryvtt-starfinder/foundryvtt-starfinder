@@ -74,7 +74,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             config: CONFIG.SFRPG
         };
 
-        data.items = [...this.actor.items];
+        data.items = [...this.actor.items.values()];
         data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
         data.labels = this.actor.labels || {};
         data.filters = this._filters;
