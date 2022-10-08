@@ -293,7 +293,7 @@ Hooks.once("ready", async () => {
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
-        const systemSchema = Number(game.system.data.flags.sfrpg.schema);
+        const systemSchema = Number(game.system.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
 
         let migrationPromise = null;
@@ -342,8 +342,8 @@ async function migrateOldContainers() {
     }
 
     for (const scene of game.scenes.contents) {
-        for (const token of scene.data.tokens) {
-            if (!token.data.actorLink) {
+        for (const token of scene.tokens) {
+            if (!token.actorLink) {
                 const sheetActorHelper = new ActorItemHelper(token.actor?.id ?? token.actorId, token.id, scene.id);
                 const migrationProcess = sheetActorHelper.migrateItems();
                 if (migrationProcess) {
@@ -362,7 +362,6 @@ async function migrateOldContainers() {
 Hooks.on("canvasInit", function () {
     canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
     SquareGrid.prototype.measureDistances = measureDistances;
-    // Token.prototype.getBarAttribute = getBarAttribute;
 });
 
 Hooks.on("renderChatMessage", (app, html, data) => {
