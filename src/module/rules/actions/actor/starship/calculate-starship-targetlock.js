@@ -61,7 +61,7 @@ export default function (engine) {
 
         const shieldItems = fact.items.filter(x => x.type === "starshipShield");
         let shieldItem = null;
-        if (shieldItems && shieldItems.length > 0 && shieldItems[0].data.isDeflector) {
+        if (shieldItems && shieldItems.length > 0 && shieldItems[0].system.isDeflector) {
             shieldItem = shieldItems[0];
         }
 
