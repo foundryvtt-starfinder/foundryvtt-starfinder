@@ -5,13 +5,13 @@
     </header>
 
     <div class="card-content">
-        {{#if data.description.short}}
-            {{{data.description.short}}}
+        {{#if system.description.short}}
+            {{{system.description.short}}}
         {{else}}
-            {{{data.description.value}}}
+            {{{system.description.value}}}
         {{/if}}
-        {{#if data.materials.value}}
-        <p><strong>{{ localize "SFRPG.ChatReqMats" }}.</strong> {{data.materials.value}}</p>
+        {{#if system.materials.value}}
+        <p><strong>{{ localize "SFRPG.ChatReqMats" }}.</strong> {{system.materials.value}}</p>
         {{/if}}
     </div>
 
@@ -19,11 +19,11 @@
         {{#if hasAttack}}<button type="button" data-action="attack">{{ localize "SFRPG.Attack" }}</button>{{/if}}
         {{#if hasDamage}}<button type="button" data-action="damage">{{ localize "SFRPG.Damage.Title" }}</button>{{/if}}
         {{#if hasOtherFormula}}<button type="button" data-action="formula">{{ localize "SFRPG.Items.Action.OtherFormula" }}</button>{{/if}}
-        {{#if hasSave}}<button type="button" data-action="save" data-type="{{data.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
+        {{#if hasSave}}<button type="button" data-action="save" data-type="{{system.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">
-        {{#each data.properties}}
+        {{#each system.properties}}
         <span {{#if this.tooltip}}data-tippy-content="{{this.tooltip}}{{/if}}">{{this.name}}</span>
         {{/each}}
     </footer>
