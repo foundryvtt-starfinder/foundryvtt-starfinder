@@ -25,7 +25,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async getData() {
         const data = super.getData();
 
-        let lvl = parseFloat(data.data.details.level || 0);
+        let lvl = parseFloat(data.system.details.level || 0);
         let levels = { 0: "0", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
         data.labels["level"] = lvl >= 1 ? String(lvl) : levels[lvl] || 1;
 
@@ -83,7 +83,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
-        const actorData = data.data;
+        const actorData = data.system;
 
         const inventory = {
             inventory: { label: game.i18n.localize("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
