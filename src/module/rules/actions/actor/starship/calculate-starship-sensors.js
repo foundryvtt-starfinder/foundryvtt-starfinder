@@ -13,7 +13,7 @@ export default function (engine) {
 
             if (sensorData.modifier) {
                 data.attributes.sensors.mod += sensorData.modifier;
-                data.attributes.sensors.tooltip.push(`${sensor.data.name}: ${sensorData.modifier.signedString()}`);
+                data.attributes.sensors.tooltip.push(`${sensor.name}: ${sensorData.modifier.signedString()}`);
             }
         }
 
