@@ -476,7 +476,7 @@ export class DiceSFRPG {
         };
 
         const getDamageTypeForPart = (part) => {
-            if (part.types && !foundry.utils.isObjectEmpty(part.types)) {
+            if (part.types && !foundry.utils.isEmpty(part.types)) {
                 const filteredTypes = Object.entries(part.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
 
@@ -492,7 +492,7 @@ export class DiceSFRPG {
 
         /** @type {DamageType[]} */
         let damageTypes = parts.reduce((acc, cur) => {
-            if (cur.types && !foundry.utils.isObjectEmpty(cur.types)) {
+            if (cur.types && !foundry.utils.isEmpty(cur.types)) {
                 const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
 
@@ -583,7 +583,7 @@ export class DiceSFRPG {
             let damageTypeString = "";
             const tempParts = usedParts.reduce((arr, curr) => {
                 let obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
-                if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
+                if (curr.types && !foundry.utils.isEmpty(curr.types)) {
                     for (const [key, isEnabled] of Object.entries(curr.types)) {
                         if (isEnabled) {
                             obj.types.push(key);

@@ -21,7 +21,7 @@ export default async function migrateWorld() {
     for (const actor of game.actors.contents) {
         try {
             const updateData = await migrateActor(actor, worldSchema);
-            if (!isObjectEmpty(updateData)) {
+            if (!foundry.utils.isEmpty(updateData)) {
                 console.log(`Starfinder | Migrating Actor entity ${actor.name}`);
                 await actor.update(updateData, { enforceTypes: false });
             }
@@ -34,7 +34,7 @@ export default async function migrateWorld() {
         for (const token of scene.tokens) {
             try {
                 const tokenUpdateData = await migrateToken(token, worldSchema);
-                if (!isObjectEmpty(tokenUpdateData)) {
+                if (!foundry.utils.isEmpty(tokenUpdateData)) {
                     console.log(`Starfinder | Migrating Token entity ${token.name}`);
                     await token.update(tokenUpdateData, { enforceTypes: false });
                 }
@@ -47,7 +47,7 @@ export default async function migrateWorld() {
     for (const item of game.items.contents) {
         try {
             const updateData = await migrateItem(item, worldSchema);
-            if (!isObjectEmpty(updateData)) {
+            if (!foundry.utils.isEmpty(updateData)) {
                 console.log(`Starfinder | Migrating Item entity ${item.name}`);
                 await item.update(updateData, { enforceTypes: false });
             }
@@ -59,7 +59,7 @@ export default async function migrateWorld() {
     for (const message of game.messages) {
         try {
             const updateData = await migrateChatMessage(message, worldSchema);
-            if (!isObjectEmpty(updateData)) {
+            if (!foundry.utils.isEmpty(updateData)) {
                 console.log(`Starfinder | Migrating Chat message entity ${message.id}`);
                 await message.update(updateData, { enforceTypes: false });
             }
@@ -71,7 +71,7 @@ export default async function migrateWorld() {
     for (const macro of game.macros) {
         try {
             const updateData = await migrateMacro(macro, worldSchema);
-            if (!isObjectEmpty(updateData)) {
+            if (!foundry.utils.isEmpty(updateData)) {
                 console.log(`Starfinder | Migrating Macro entity ${macro.name}`);
                 await macro.update(updateData, { enforceTypes: false });
             }
@@ -143,7 +143,7 @@ const migrateActor = async function (actor, schema) {
 
     for(const item of actor.items) {
         const itemUpdateData = await migrateItem(item, schema);
-        if (!foundry.utils.isObjectEmpty(itemUpdateData)) {
+        if (!foundry.utils.isEmpty(itemUpdateData)) {
             console.log(`Starfinder | Migrating Actor Item ${item.name}`);
             await item.update(itemUpdateData, { enforceTypes: false });
         }
@@ -178,7 +178,7 @@ const migrateToken = async function (token, schema) {
     const actor = token.actor;
     if (!token.data.actorLink && actor) {
         const actorUpdateData = await migrateActor(actor, schema);
-        if (!isObjectEmpty(actorUpdateData)) {
+        if (!foundry.utils.isEmpty(actorUpdateData)) {
             console.log(`Starfinder | Migrating Token Actor ${actor.name}`);
             await actor.update(actorUpdateData, { enforceTypes: false });
         }
