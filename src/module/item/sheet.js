@@ -349,7 +349,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         }
 
         // Action usage
-        if ((item.type !== "weapon") && itemData.activation && !isObjectEmpty(itemData.activation)) {
+        if ((item.type !== "weapon") && itemData.activation && !foundry.utils.isEmpty(itemData.activation)) {
             props.push(
                 {name: labels.activation, tooltip: null},
                 {name: labels.range, tooltip: null},
