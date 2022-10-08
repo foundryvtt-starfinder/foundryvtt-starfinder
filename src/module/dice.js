@@ -854,7 +854,7 @@ export class DiceSFRPG {
     static highlightCriticalSuccessFailure(message, html, data) {
         if (!message.isRoll || !message.isContentVisible) return;
     
-        let roll = message.roll;
+        let roll = message.rolls[0];
         if (!roll.dice.length) return;
         for (let d of roll.dice) {
             if (d.faces === 20 && d.results.length === 1) {
@@ -882,7 +882,7 @@ export class DiceSFRPG {
     static addDamageTypes(message, html, data) {
         if (!message.isRoll || !message.isContentVisible) return;
 
-        const roll = message.roll;
+        const roll = message.rolls[0];
         if (!(roll?.dice.length > 0)) return;
         for (const die of roll.dice) {
             if (die?.options?.isDamageRoll) {
