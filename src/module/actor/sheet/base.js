@@ -59,6 +59,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const data = {
             actor: this.actor,
             data: duplicate(this.actor.system),
+            system: duplicate(this.actor.system),
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
@@ -79,7 +80,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         data.labels = this.actor.labels || {};
         data.filters = this._filters;
 
-        if (!data.data?.details?.biography?.fullBodyImage)
+        if (!data.system?.details?.biography?.fullBodyImage)
         {
             this.actor.system = mergeObject(this.actor.system, {
                 details: {
@@ -91,9 +92,9 @@ export class ActorSheetSFRPG extends ActorSheet {
             this.actor.system.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.webp";
         }
 
-        if (data.data.abilities) {
+        if (data.system.abilities) {
             // Ability Scores
-            for (let [a, abl] of Object.entries(data.data.abilities)) {
+            for (let [a, abl] of Object.entries(data.system.abilities)) {
                 abl.label = CONFIG.SFRPG.abilities[a];
             }
         }
@@ -101,31 +102,31 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Calculate the expanded speed box height, only used for npc2 actors.
         if (this.actor.type === "npc2") {
             let numberOfMovementTypes = 0;
-            if (data.data.attributes.speed.land.value > 0) {
+            if (data.system.attributes.speed.land.value > 0) {
                 numberOfMovementTypes += 1;
             }
-            if (data.data.attributes.speed.burrowing.value > 0) {
+            if (data.system.attributes.speed.burrowing.value > 0) {
                 numberOfMovementTypes += 1;
             }
-            if (data.data.attributes.speed.climbing.value > 0) {
+            if (data.system.attributes.speed.climbing.value > 0) {
                 numberOfMovementTypes += 1;
             }
-            if (data.data.attributes.speed.flying.value > 0) {
+            if (data.system.attributes.speed.flying.value > 0) {
                 numberOfMovementTypes += 1;
             }
-            if (data.data.attributes.speed.swimming.value > 0) {
+            if (data.system.attributes.speed.swimming.value > 0) {
                 numberOfMovementTypes += 1;
             }
-            if (data.data.attributes.speed.special) {
+            if (data.system.attributes.speed.special) {
                 numberOfMovementTypes += 1;
             }
             data.expandedSpeedBoxHeight = Math.max(36 + numberOfMovementTypes * 14, 70);
         }
 
-        if (data.data.skills) {
+        if (data.system.skills) {
             // Update skill labels
-            for (let [s, skl] of Object.entries(data.data.skills)) {                
-                skl.ability = data.data.abilities[skl.ability].label.substring(0, 3);
+            for (let [s, skl] of Object.entries(data.system.skills)) {                
+                skl.ability = data.system.abilities[skl.ability].label.substring(0, 3);
                 skl.icon = this._getClassSkillIcon(skl.value);
 
                 let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
@@ -137,17 +138,17 @@ export class ActorSheetSFRPG extends ActorSheet {
                 skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
             }
 
-            data.data.skills = Object.keys(data.data.skills).sort().reduce((skills, key) => {
-                skills[key] = data.data.skills[key];
+            data.system.skills = Object.keys(data.system.skills).sort().reduce((skills, key) => {
+                skills[key] = data.system.skills[key];
 
                 return skills;
             }, {});
 
-            data.data.hasSkills = Object.values(data.data.skills).filter(x => x.enabled).length > 0;
+            data.system.hasSkills = Object.values(data.system.skills).filter(x => x.enabled).length > 0;
         }
 
-        if (data.data.traits) {
-            this._prepareTraits(data.data.traits);
+        if (data.system.traits) {
+            this._prepareTraits(data.system.traits);
         }
 
         this._prepareItems(data);
@@ -429,7 +430,7 @@ export class ActorSheetSFRPG extends ActorSheet {
        const target = $(event.currentTarget);
        const modifierId = target.closest('.item.modifier').data('modifierId');
 
-       const modifiers = duplicate(this.actor.data.data.modifiers);
+       const modifiers = duplicate(this.actor.system.modifiers);
        const modifier = modifiers.find(mod => mod._id === modifierId);
        modifier.enabled = !modifier.enabled;
 
@@ -851,7 +852,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                     level: lvl,
                     usesSlots: lvl > 0,
                     canCreate: this.actor.isOwner && (lvl >= 0),
-                    canPrepare: (this.actor.data.type === 'character') && (lvl > 0),
+                    canPrepare: (this.actor.type === 'character') && (lvl > 0),
                     label: lvl >= 0 ? CONFIG.SFRPG.spellLevels[lvl] : CONFIG.SFRPG.spellPreparationModes[mode],
                     spells: [],
                     uses: useLabels[lvl] || spellsPerDay.value || 0,
