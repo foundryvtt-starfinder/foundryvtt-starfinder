@@ -20,7 +20,7 @@
             </li>
             {{/if}}
             <li class="wide" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
-                <input type="text" name="data.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
             </li>
         </ul>
 
@@ -30,10 +30,10 @@
             <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HitpointsTooltip" }}">
                 <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Hitpoints" }}</h4>
                 <div class="attribute-value multiple">
-                    <input name="data.attributes.hp.value" type="text" value="{{itemData.attributes.hp.value}}"
+                    <input name="system.attributes.hp.value" type="text" value="{{itemData.attributes.hp.value}}"
                         data-dtype="Number" placeholder="{{placeholders.maxHitpoints}}" />
                     <span class="sep"> / </span>
-                    <input name="data.attributes.hp.max" type="text" value="{{itemData.attributes.hp.max}}"
+                    <input name="system.attributes.hp.max" type="text" value="{{itemData.attributes.hp.max}}"
                         data-dtype="String" placeholder="{{placeholders.maxHitpoints}}" />
                 </div>
             </li>
@@ -41,7 +41,7 @@
             <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.ArmorClassTooltip" }}">
                 <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.ArmorClass" }}</h4>
                 <div class="attribute-value">
-                    <input name="data.attributes.ac.value" type="text" value="{{itemData.attributes.ac.value}}"
+                    <input name="system.attributes.ac.value" type="text" value="{{itemData.attributes.ac.value}}"
                         data-dtype="String" placeholder="{{placeholders.armorClass}}" />
                 </div>
             </li>
@@ -49,7 +49,7 @@
             <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HardnessTooltip" }}">
                 <h4 class="attribute-name box-title">{{ localize "SFRPG.ItemSheet.Header.Hardness" }}</h4>
                 <div class="attribute-value">
-                    <input name="data.attributes.hardness.value" type="text" value="{{itemData.attributes.hardness.value}}"
+                    <input name="system.attributes.hardness.value" type="text" value="{{itemData.attributes.hardness.value}}"
                         data-dtype="String" placeholder="{{placeholders.hardness}}" />
                 </div>
             </li>
