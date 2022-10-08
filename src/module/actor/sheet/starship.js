@@ -35,7 +35,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     async getData() {
         const data = super.getData();
 
-        let tier = parseFloat(data.data.details.tier || 0);
+        let tier = parseFloat(data.system.details.tier || 0);
         let tiers = { 0: "0", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
         data.labels["tier"] = tier >= 1 ? String(tier) : tiers[tier] || 1;
 
@@ -209,7 +209,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
-        const actorData = data.data;
+        const actorData = data.system;
         const inventory = {
             inventory: { label: game.i18n.localize("SFRPG.StarshipSheet.Inventory.Inventory"), items: [], dataset: { type: this.acceptedItemTypes }, allowAdd: true }
         };
