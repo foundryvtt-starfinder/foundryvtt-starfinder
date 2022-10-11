@@ -507,9 +507,9 @@
                             {{/if}}
                         </div>
 
-                        {{#if item.hasCapacity}}
+                        {{#if item.config.hasCapacity}}
                         <div class="item-detail item-uses">
-                            {{item.capacityCurrent}} / {{item.capacityMaximum}}
+                            {{item.config.capacityCurrent}} / {{item.config.capacityMaximum}}
                             {{#if ../../isOwner}}
                             &nbsp;
                             <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>

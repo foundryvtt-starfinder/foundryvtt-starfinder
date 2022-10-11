@@ -2,18 +2,18 @@
             <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
                 <div class="item-image {{#if (not bigItem)}}small{{/if}}" style="background-image: url({{item.img}})"></div>
                 <h4>
-                    {{#if (and (not (eq item.type "feat")) (or item.isStack (getStarfinderBoolean "alwaysShowQuantity")))}}({{item.system.quantity}}) {{/if}}
+                    {{#if (and (not (eq item.type "feat")) (or item.config.isStack (getStarfinderBoolean "alwaysShowQuantity")))}}({{item.system.quantity}}) {{/if}}
                     {{item.name}}
                 </h4>
-                {{#if (and isOwner (or (eq item.type "consumable") (and bigItem (or item.hasAttack item.hasDamage))))}}
+                {{#if (and isOwner (or (eq item.type "consumable") (and bigItem (or item.config.hasAttack item.config.hasDamage))))}}
                 <div class="item-action flexcol">
                     {{#if (eq item.type "consumable")}}
                         <button type="button" class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
                     {{else}}
-                        {{#if item.hasAttack}}
+                        {{#if item.config.hasAttack}}
                         <button type="button" class="tag attack">{{localize "SFRPG.Attack"}}</button>
                         {{/if}}
-                        {{#if item.hasDamage}}
+                        {{#if item.config.hasDamage}}
                             {{#if (eq item.system.actionType "heal")}}
                                 <button type="button" class="tag healing">{{localize "SFRPG.ActionHeal"}}</button>
                             {{else}}
@@ -37,8 +37,8 @@
             {{/if}}
 
             <div class="item-detail item-uses">
-                {{#if item.hasCapacity}}
-                    {{item.capacityCurrent}} / {{item.capacityMaximum}}
+                {{#if item.config.hasCapacity}}
+                    {{item.config.capacityCurrent}} / {{item.config.capacityMaximum}}
                     {{#if isOwner}}
                 &nbsp;
                 <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
@@ -54,12 +54,12 @@
 
             <div class="item-detail item-action">
                 {{#if (eq item.type "container")}}
-                    {{#if item.isOpen}}
+                    {{#if item.config.isOpen}}
                         <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.CloseTooltip"}}"><i class="fas fa-arrow-up"> {{localize "SFRPG.ActorSheet.Inventory.Container.Close"}}</i></a>
                     {{else}}
                         <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down"> {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</i></a>
                     {{/if}}
-                {{else if item.hasUses}}
+                {{else if item.config.hasUses}}
                     {{item.system.usage.value}} / {{item.system.usage.per}}
                 {{/if}}
             </div>
@@ -83,7 +83,7 @@
             {{/if}}
         </li>
 
-        {{#if (and children item.isOpen)}}
+        {{#if (and children item.config.isOpen)}}
         <ol class="item-list-child">
         {{#each children as |childItem iid|}}
             {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.html" ../this bigItem=false item=childItem.item children=childItem.contents}}

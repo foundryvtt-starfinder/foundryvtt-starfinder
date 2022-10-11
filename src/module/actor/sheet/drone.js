@@ -75,17 +75,20 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         //   0      1      2        3     4               5
         let [items, feats, chassis, mods, conditionItems, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
-            item.isStack = item.system.quantity ? item.system.quantity > 1 : false;
-            item.isOnCooldown = item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false);
-            item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (item.type !== "weapon" || item.system.equipped);
-            item.hasDamage = item.system.damage?.parts && item.system.damage.parts.length > 0 && (item.type !== "weapon" || item.system.equipped);
-            item.hasUses = item.document.canBeUsed();
-            item.isCharged = !item.hasUses || item.document.getRemainingUses() <= 0 || !item.isOnCooldown;
 
-            item.hasCapacity = item.document.hasCapacity();
-            if (item.hasCapacity) {
-                item.capacityCurrent = item.document.getCurrentCapacity();
-                item.capacityMaximum = item.document.getMaxCapacity();
+            item.config = {
+                isStack: item.system.quantity ? item.system.quantity > 1 : false,
+                isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
+                hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                hasUses: item.canBeUsed(),
+                isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
+                hasCapacity: item.hasCapacity(),
+            };
+
+            if (item.config.hasCapacity) {
+                item.config.capacityCurrent = item.getCurrentCapacity();
+                item.config.capacityMaximum = item.getMaxCapacity();
             }
 
             if (item.type === "actorResource") {

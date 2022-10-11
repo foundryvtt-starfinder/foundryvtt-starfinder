@@ -740,8 +740,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Define Roll Data
         const rollData = duplicate(actorData);
         // Add hasSave to roll
-        itemData.hasSave = this.hasSave;
-        itemData.hasDamage = this.hasDamage;
+        // itemData.hasSave = this.hasSave;
+        // itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
         rollData.item = itemData;
