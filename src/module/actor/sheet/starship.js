@@ -417,16 +417,6 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     async _onDrop(event) {
         event.preventDefault();
 
-        // let data;
-        // try {
-        //     data = JSON.parse(event.dataTransfer.getData('text/plain'));
-        //     if (!data) {
-        //         return false;
-        //     }
-        // } catch (err) {
-        //     return false;
-        // }
-
         const data = TextEditor.getDragEventData(event);
         if (!data) return false;
 
@@ -491,7 +481,12 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
        const actor = this.actor;
        const item = await Item.fromDropData(data);
-       itemData = item.data;
+       itemData = item;
+
+       if (item.parent) {
+        console.log(item.parent);
+        let sameActor = item.parent.id === actor.id;
+       }
     //    if (data.pack) {
     //        const pack = game.packs.get(data.pack);
     //        if (pack.documentName !== "Item") return;
@@ -573,11 +568,13 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         const actorId = event.currentTarget.dataset.actorId;
         const actor = game.actors.get(actorId);
 
-        const dragData = {
-            type: "Actor",
-            id: actor.id,
-            data: actor.data
-        };
+        // const dragData = {
+        //     type: "Actor",
+        //     id: actor.id,
+        //     data: actor.data
+        // };
+
+        const dragData = actor.toDragData();
 
         if (this.actor.isToken) dragData.tokenId = actorId;
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
