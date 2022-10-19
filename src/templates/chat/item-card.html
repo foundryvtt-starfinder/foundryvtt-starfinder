@@ -5,13 +5,13 @@
     </header>
 
     <div class="card-content">
-        {{#if system.description.short}}
-            {{{system.description.short}}}
+        {{#if item.system.description.short}}
+            {{{item.system.description.short}}}
         {{else}}
-            {{{system.description.value}}}
+            {{{item.system.description.value}}}
         {{/if}}
-        {{#if system.materials.value}}
-        <p><strong>{{ localize "SFRPG.ChatReqMats" }}.</strong> {{system.materials.value}}</p>
+        {{#if item.system.materials.value}}
+        <p><strong>{{ localize "SFRPG.ChatReqMats" }}.</strong> {{item.system.materials.value}}</p>
         {{/if}}
     </div>
 
