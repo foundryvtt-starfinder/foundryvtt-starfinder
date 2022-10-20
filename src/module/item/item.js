@@ -638,7 +638,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
     async rollAttack(options = {}) {
-        const itemData = this;
+        const itemData = this.system;
         const isWeapon = ["weapon", "shield"].includes(this.type);
 
         const actorData = this.actor.system;
@@ -650,7 +650,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (this.type === "vehicleAttack") return this._rollVehicleAttack(options);
 
         // Determine ability score modifier
-        let abl = itemData.system.ability;
+        let abl = itemData.ability;
         if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) abl = "";
         else if (!abl && (this.type === "spell")) abl = actorData.attributes.spellcasting || "int";
         else if (!abl) abl = "str";        
@@ -658,13 +658,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Define Roll parts
         const parts = [];
         
-        if (Number.isNumeric(itemData.system.attackBonus) && itemData.system.attackBonus !== 0) parts.push("@item.system.attackBonus");
+        if (Number.isNumeric(itemData.attackBonus) && itemData.attackBonus !== 0) parts.push("@item.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
         if (isWeapon)
         {
             const procifiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
-            const proficient = itemData.system.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(procifiencyKey);
+            const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(procifiencyKey);
             if (!proficient) {
                 parts.push(`-4[${game.i18n.localize("SFRPG.Items.NotProficient")}]`);
             }
@@ -740,15 +740,15 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Define Roll Data
         const rollData = duplicate(actorData);
         // Add hasSave to roll
-        // itemData.hasSave = this.hasSave;
-        // itemData.hasDamage = this.hasDamage;
+        itemData.hasSave = this.hasSave;
+        itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
         rollData.item = itemData;
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: itemData.name});
+        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         //Warn the user if there is no ammo left
-        const usage = itemData.system.usage?.value || 0;
+        const usage = itemData.usage?.value || 0;
         const availableCapacity = this.getCurrentCapacity();
         if (availableCapacity < usage) {
             ui.notifications.warn(game.i18n.format("SFRPG.ItemNoAmmo", {name: this.name}));
