@@ -188,7 +188,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             actor: this.actor,
             tokenId: token ? `${token.parent.id}.${token.id}` : null,
             item: this,
-            data: this.getChatData(htmlOptions),
+            system: this.getChatData(htmlOptions),
             labels: this.labels,
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,
@@ -197,7 +197,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         };
 
         if (this.type === "spell") {
-            let descriptionText = duplicate(templateData.data.description.short || templateData.data.description.value);
+            let descriptionText = duplicate(templateData.system.description.short || templateData.system.description.value);
             if (descriptionText?.length > 0) {
                 // Alter description by removing non-eligble level tags.
                 const levelTags = [
@@ -264,10 +264,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     }
                 }
 
-                if (templateData.data.description.short) {
-                    templateData.data.description.short = descriptionText;
+                if (templateData.system.description.short) {
+                    templateData.system.description.short = descriptionText;
                 } else {
-                    templateData.data.description.value = descriptionText;
+                    templateData.system.description.value = descriptionText;
                 }
             }
         }
