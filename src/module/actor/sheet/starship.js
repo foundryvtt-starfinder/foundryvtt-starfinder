@@ -269,7 +269,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         const weapons = [].concat(forward, starboard, port, aft, turret);
         for (const weapon of weapons) {
-            weapon.hasCapacity = (
+            weapon.config.hasCapacity = (
                 weapon.system.weaponType === "tracking"
                 || weapon.system.special["mine"]
                 || weapon.system.special["transposition"]
@@ -279,9 +279,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
                 || weapon.system.special["limited"]
             );
 
-            if (weapon.hasCapacity) {
-                weapon.capacityCurrent = weapon.document.getCurrentCapacity();
-                weapon.capacityMaximum = weapon.document.getMaxCapacity();
+            if (weapon.config.hasCapacity) {
+                weapon.config.capacityCurrent = weapon.getCurrentCapacity();
+                weapon.config.capacityMaximum = weapon.getMaxCapacity();
             }
         }
 
