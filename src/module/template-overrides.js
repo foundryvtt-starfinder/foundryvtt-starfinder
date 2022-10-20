@@ -80,7 +80,7 @@ export default function() {
         if (!this.id || !this.shape) return;
 
         // Clear existing highlight
-        const hl = grid.getHighlightLayer(this.highlightId);
+        const hl = grid.getHighlightLayer(`MeasuredTemplate.${this.id}`);
         hl.clear();
 
         // Get number of rows and columns
