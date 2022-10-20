@@ -74,7 +74,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
         //   0      1       2      3        4      5       6           7               8     9
         let [items, spells, feats, classes, races, themes, archetypes, conditionItems, asis, actorResources] = data.items.reduce((arr, item) => {
-            console.log(item);
             item.img = item.img || DEFAULT_TOKEN;
             item.config = {
                 isStack: item.system.quantity ? item.system.quantity > 1 : false,
