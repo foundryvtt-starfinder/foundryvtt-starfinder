@@ -61,9 +61,9 @@
                     {{item.system.uses.value}} / {{item.system.uses.max}}
                 {{else if item.system.recharge.value}}
                     {{#if item.config.isOnCooldown}}
-                        <a class="item-recharge rollable">{{item.document.labels.recharge}}</a>
+                        <a class="item-recharge rollable">{{item.labels.recharge}}</a>
                     {{else}}
-                        {{localize "SFRPG.Charged"}}
+                        {{localize "SFRPG.Items.Feat.Charged"}}
                     {{/if}}
                 {{else if item.config.hasCapacity}}
                     {{item.config.capacityCurrent}} / {{item.config.capacityMaximum}}
@@ -78,7 +78,7 @@
                     {{#if item.system.isActive}}
                     <button type="button" class="tag featDeactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
                     {{else}}
-                    <button type="button" class="tag featActivate">{{item.document.labels.activation}}</button>
+                    <button type="button" class="tag featActivate">{{item.labels.activation}}</button>
                     {{/if}}
                 {{/if}}
                 {{#if item.config.hasCapacity}}
