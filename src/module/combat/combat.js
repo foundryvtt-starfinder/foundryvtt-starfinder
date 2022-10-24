@@ -696,7 +696,6 @@ async function onConfigClicked(combat, direction) {
 }
 
 Hooks.on('renderCombatTracker', (app, html, data) => {
-    console.log("In Hook.call('renderCombatTracker')", app, html, data);
     const activeCombat = data.combat;
     if (!activeCombat) {
         return;
