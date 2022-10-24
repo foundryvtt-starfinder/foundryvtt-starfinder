@@ -123,7 +123,7 @@
     <section class="sheet-body">
         <div class="tab details" data-group="primary" data-tab="details">
             <div class="flexcol">
-                <h3 class="form-header">{{ localize "SFRPG.Attributes"}}</h3>
+                <h3 class="form-header noborder">{{ localize "SFRPG.Attributes"}}</h3>
                 <ul class="attributes flexrow">
                     <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.Complement" }}<br />@attributes.complement.min<br />@attributes.complement.max">
                         <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.Complement" }}</h4>
@@ -146,7 +146,7 @@
                 </ul>
             </div>
             <div class="flexcol">
-                <h3 class="form-header">{{localize "SFRPG.StarshipSheet.Quadrants.Header"}}</h3>
+                <h3 class="form-header noborder">{{localize "SFRPG.StarshipSheet.Quadrants.Header"}}</h3>
                 <ul class="attributes flexrow">
                     <li class="attribute defenses">
                         <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Forward"}}</h4>
@@ -387,7 +387,7 @@
             {{/if}}
                         
             <div class="flexcol traits">
-                <h3 class="form-header">{{localize "SFRPG.StarshipSheet.Critical.Header"}}</h3>
+                <h3 class="form-header noborder">{{localize "SFRPG.StarshipSheet.Critical.Header"}}</h3>
                 <div class="flexrow">
                     <div class="flexcol">
                         <div class="form-group">
@@ -482,7 +482,7 @@
                 {{#each arcs as |section|}}
                 <li class="item flexrow inventory-header{{#if section.dataset.isDisabled}} disabled{{/if}}">
                     <div class="item-name flexrow">
-                        <h3>{{section.label}}</h3>
+                        <h3 class="noborder">{{section.label}}</h3>
                     </div>
                     {{#if (and ../isOwner section.dataset.allowAdd)}}
                     <div class="item-controls">
@@ -539,7 +539,7 @@
         <div class="tab crew" data-group="primary" data-tab="crew">
             <div class="crew-settings flexrow">
                 <ol class="settings flexrow">
-                    <h3>
+                    <h3 class="noborder">
                         {{localize "SFRPG.StarshipSheet.Crew.Header"}}
                         <i class="fas fa-users"></i>
                     </h3>
@@ -575,7 +575,7 @@
             <ol class="crew-list">
                 {{#each system.crew.npcData as |role roleId|}}
                 <li class="flexrow crew-header" data-role="{{roleId}}">
-                    <h3 class="crew-name flexrow">{{ localize (lookup ../config.starshipRoleNames roleId) }}</h3>
+                    <h3 class="crew-name noborder flexrow">{{ localize (lookup ../config.starshipRoleNames roleId) }}</h3>
                     <div class="flexrow">
                         <label>{{localize "SFRPG.StarshipSheet.Crew.ActionsPerRound"}}</label>
                         <input type="text" class="crew-role-numberOfUses" value="{{role.numberOfUses}}" data-dtype="Number" placeholder="0" />
