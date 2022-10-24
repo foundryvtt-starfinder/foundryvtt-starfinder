@@ -1,6 +1,7 @@
 /**
  * DocumentBrowserSFRPG forked from ItemBrowserPF2e by Felix Miller aka syl3r86
  */
+import { ItemSFRPG } from '../item/item.js';
 import { packLoader } from './pack-loader.js';
 
 export class DocumentBrowserSFRPG extends Application {
@@ -72,22 +73,7 @@ export class DocumentBrowserSFRPG extends Application {
         html.find('.draggable').each((i, li) => {
             li.setAttribute('draggable', true);
             li.addEventListener('dragstart', event => {
-                const packName = li.getAttribute('data-entry-compendium');
-                const pack = game.packs.find(p => p.collection === packName);
-
-                if (!pack) {
-                    event.preventDefault();
-                    return false;
-                }
-
-                const rawData = {
-                    type: pack.documentName,
-                    pack: pack.collection,
-                    id: li.getAttribute('data-entry-id')
-                };
-                const data = JSON.stringify(rawData);
-
-                event.dataTransfer.setData('text/plain', data);
+                this._onDragStart(event, li);
             }, false);
         }); // toggle visibility of filter containers
 
@@ -190,6 +176,29 @@ export class DocumentBrowserSFRPG extends Application {
         });
     }
 
+    async _onDragStart(event, li) {
+        const packName = li.getAttribute('data-entry-compendium');
+        const pack = game.packs.find(p => p.collection === packName);
+
+        if (!pack) {
+            event.preventDefault();
+            return false;
+        }
+
+        const document = await pack.getDocument(li.getAttribute('data-entry-id'));
+        console.log(document);
+
+        // const rawData = {
+        //     type: pack.documentName,
+        //     pack: pack.collection,
+        //     id: li.getAttribute('data-entry-id')
+        // };
+        const rawData = document.toDragData();
+        const data = JSON.stringify(rawData);
+
+        event.dataTransfer.setData('text/plain', data);
+    }
+
     async getData() {
         if (this.items == undefined || this.forceReload == true) {
             // spells will be stored locally to not require full loading each time the browser is opened
@@ -256,11 +265,17 @@ export class DocumentBrowserSFRPG extends Application {
             console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
             for (let item of content) {
-                item = item.data;
-                item.compendium = pack.collection;
+                const itemData = {
+                    _id: item._id,
+                    compendium: item.pack,
+                    img: item.img,
+                    name: item.name,
+                    system: item.system,
+                    type: item.type
+                };
 
                 if (this.allowedItem(item)) {
-                    items.push(item);
+                    items.push(itemData);
                 }
             }
         }
