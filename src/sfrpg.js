@@ -73,7 +73,7 @@ Hooks.once('init', async function () {
 ==================================================`
     );
 
-    CONFIG.compatibility.mode = CONST.COMPATIBILITY_MODES.SILENT;
+    // CONFIG.compatibility.mode = CONST.COMPATIBILITY_MODES.SILENT;
 
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
