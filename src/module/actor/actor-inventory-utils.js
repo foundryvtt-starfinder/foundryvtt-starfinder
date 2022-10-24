@@ -706,7 +706,7 @@ async function onItemCollectionItemDraggedToPlayer(message) {
             draggedItem.system.container.contents = draggedItem.system.container.contents.filter(x => x.id);
             for (const {id:contentItemId, index:contentItemIndex} of draggedItem.system.container.contents) {
                 if (contentItemId) {
-                    const contentItem = source.token.flags.sfrpg.itemCollection.items.find(x => x._id == contentItemId);
+                    const contentItem = source.token.document.flags.sfrpg.itemCollection.items.find(x => x._id == contentItemId);
                     if (contentItem) {
                         data.draggedItems.push(contentItem);
                         itemsToTest.push(contentItem);
@@ -759,11 +759,11 @@ async function onItemCollectionItemDraggedToPlayer(message) {
     }
 
     // Remove items from source token
-    let sourceItems = duplicate(source.token.flags.sfrpg.itemCollection.items);
+    let sourceItems = duplicate(source.token.document.flags.sfrpg.itemCollection.items);
     sourceItems = sourceItems.filter(x => !copiedItemIds.includes(x._id));
     await source.token.document.update({"flags.sfrpg.itemCollection.items": sourceItems});
 
-    if (sourceItems.length === 0 && source.token.flags.sfrpg.itemCollection.deleteIfEmpty) {
+    if (sourceItems.length === 0 && source.token.document.flags.sfrpg.itemCollection.deleteIfEmpty) {
         await source.token.document.delete();
     }
 
