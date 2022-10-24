@@ -421,7 +421,6 @@ export class ItemCollectionSheet extends DocumentSheet {
 
         if (data.type !== "Item") return;
         const item = await Item.fromDropData(data);
-        console.log(item);
 
         let targetContainer = null;
         if (event) {

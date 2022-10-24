@@ -132,7 +132,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @return {Promise}        A Promise which resolves to the updated Entity
      */
     async update(data, options = {}) {
-        console.log(data);
         const newSize = data['system.traits.size'];
         if (newSize && (newSize !== getProperty(this.system, "traits.size"))) {
             let size = CONFIG.SFRPG.tokenSizes[data['system.traits.size']];
@@ -536,7 +535,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             parts.push(`@pilot.skills.pil.mod`);
         }
         else {
-            let passenger = this.system.crew[role].actors.find(element => element._id == actorId);
+            const passengerId = this.system.crew[role].actorIds.find(id => id === actorId);
+            let passenger = game.actors.get(passengerId);
             let actorData = null;
             if (passenger instanceof ActorSFRPG) {
                 actorData = passenger.system;
