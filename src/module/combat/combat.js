@@ -69,7 +69,7 @@ export class CombatSFRPG extends Combat {
 
         if (eventData.isNewPhase) {
             if (this.round.resetInitiative) {
-                const updates = this.data.combatants.map(c => { return {
+                const updates = this.combatants.map(c => { return {
                     _id: c.id,
                     initiative: null
                 }});
@@ -101,12 +101,12 @@ export class CombatSFRPG extends Combat {
                 break;
         }
 
-        const combatants = this.data.combatants;
-        const scene = game.scenes.get(this.data.scene);
+        const combatants = this.combatants;
+        const scene = game.scenes.get(this.scene);
         const players = game.users.players;
         const settings = game.settings.get("core", Combat.CONFIG_SETTING);
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.data.turn = Math.clamped(this.data.turn, CombatSFRPG.HiddenTurn, turns.length-1);
+        this.turn = Math.clamped(this.turn, CombatSFRPG.HiddenTurn, turns.length-1);
 
         return this.turns = turns;
     }
@@ -117,7 +117,7 @@ export class CombatSFRPG extends Combat {
         }
         
         let nextRound = this.round;
-        let nextPhase = this.data.flags.sfrpg.phase;
+        let nextPhase = this.flags.sfrpg.phase;
         let nextTurn = this.turn - 1;
 
         const currentPhase = this.getCurrentPhase();
@@ -132,7 +132,7 @@ export class CombatSFRPG extends Combat {
                 nextTurn = -1;
                 for (let [index, combatant] of turnEntries) {
                     if (index >= this.turn) continue;
-                    if (!combatant.data.defeated) {
+                    if (!combatant.defeated) {
                         nextTurn = index;
                         break;
                     }
@@ -157,7 +157,7 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        if (nextPhase !== this.data.flags.sfrpg.phase || nextRound !== this.round) {
+        if (nextPhase !== this.flags.sfrpg.phase || nextRound !== this.round) {
             const newPhase = this.getPhases()[nextPhase];
             if (newPhase.iterateTurns) {
                 if (this.settings.skipDefeated) {
@@ -177,11 +177,11 @@ export class CombatSFRPG extends Combat {
         }
         
         let nextRound = this.round;
-        let nextPhase = this.data.flags.sfrpg.phase;
+        let nextPhase = this.flags.sfrpg.phase;
         let nextTurn = this.turn + 1;
 
         const phases = this.getPhases();
-        const currentPhase = phases[this.data.flags.sfrpg.phase];
+        const currentPhase = phases[this.flags.sfrpg.phase];
         if (currentPhase.resetInitiative && this.hasCombatantsWithoutInitiative()) {
             ui.notifications.error(game.i18n.format(CombatSFRPG.errors.missingInitiative), {permanent: false});
             return;
@@ -191,7 +191,7 @@ export class CombatSFRPG extends Combat {
             if (this.settings.skipDefeated) {
                 for (let [index, combatant] of this.turns.entries()) {
                     if (index < nextTurn) continue;
-                    if (!combatant.data.defeated) {
+                    if (!combatant.defeated) {
                         nextTurn = index;
                         break;
                     }
@@ -231,7 +231,7 @@ export class CombatSFRPG extends Combat {
             }
         }
 
-        if (nextPhase !== this.data.flags.sfrpg.phase) {
+        if (nextPhase !== this.flags.sfrpg.phase) {
             const newPhase = phases[nextPhase];
             if (newPhase.iterateTurns) {
                 if (this.settings.skipDefeated) {
@@ -256,7 +256,7 @@ export class CombatSFRPG extends Combat {
         let nextPhase = 0;
         let nextTurn = 0;
 
-        if (this.data.flags.sfrpg.phase === 0 && this.turn <= indexOfFirstUndefeatedCombatant) {
+        if (this.flags.sfrpg.phase === 0 && this.turn <= indexOfFirstUndefeatedCombatant) {
             nextRound = Math.max(1, this.round - 1);
         }
 
@@ -295,13 +295,13 @@ export class CombatSFRPG extends Combat {
 
     async _handleUpdate(nextRound, nextPhase, nextTurn) {
         const phases = this.getPhases();
-        const currentPhase = phases[this.data.flags.sfrpg.phase];
+        const currentPhase = phases[this.flags.sfrpg.phase];
         const newPhase = phases[nextPhase];
 
         const eventData = {
             combat: this,
             isNewRound: nextRound != this.round,
-            isNewPhase: nextRound != this.round || nextPhase != this.data.flags.sfrpg.phase,
+            isNewPhase: nextRound != this.round || nextPhase != this.flags.sfrpg.phase,
             isNewTurn: (nextRound != this.round && phases[nextPhase].iterateTurns) || nextTurn != this.turn,
             oldRound: this.round,
             newRound: nextRound,
@@ -332,7 +332,7 @@ export class CombatSFRPG extends Combat {
 
         if (eventData.isNewPhase) {
             if (newPhase.resetInitiative) {
-                const updates = this.data.combatants.map(c => { return {
+                const updates = this.combatants.map(c => { return {
                     _id: c.id,
                     initiative: null
                 }});
@@ -346,7 +346,7 @@ export class CombatSFRPG extends Combat {
     async _notifyBeforeUpdate(eventData) {
         //console.log(["_notifyBeforeUpdate", eventData]);
         //console.log([isNewRound, isNewPhase, isNewTurn]);
-        //console.log([this.round, this.data.flags.sfrpg.phase, this.turn]);
+        //console.log([this.round, this.flags.sfrpg.phase, this.turn]);
 
         Hooks.callAll("onBeforeUpdateCombat", eventData);
     }
@@ -354,7 +354,7 @@ export class CombatSFRPG extends Combat {
     async _notifyAfterUpdate(eventData) {
         //console.log(["_notifyAfterUpdate", eventData]);
         //console.log([isNewRound, isNewPhase, isNewTurn]);
-        //console.log([this.round, this.data.flags.sfrpg.phase, this.turn]);
+        //console.log([this.round, this.flags.sfrpg.phase, this.turn]);
 
         const combatType = this.getCombatType();
         const combatChatSetting = game.settings.get('sfrpg', `${combatType}ChatCards`);
@@ -488,7 +488,7 @@ export class CombatSFRPG extends Combat {
     }
 
     getCombatType() {
-        return this.data.flags?.sfrpg?.combatType || "normal";
+        return this.flags?.sfrpg?.combatType || "normal";
     }
 
     getCombatName() {
@@ -516,12 +516,12 @@ export class CombatSFRPG extends Combat {
     }
 
     getCurrentPhase() {
-        return this.getPhases()[this.data.flags?.sfrpg?.phase || 0];
+        return this.getPhases()[this.flags?.sfrpg?.phase || 0];
     }
 
     hasCombatantsWithoutInitiative() {
         for (let [index, combatant] of this.turns.entries()) {
-            if ((!this.settings.skipDefeated || !combatant.data.defeated) && !combatant.initiative) {
+            if ((!this.settings.skipDefeated || !combatant.defeated) && !combatant.initiative) {
                 return true;
             }
         }
@@ -530,7 +530,7 @@ export class CombatSFRPG extends Combat {
 
     getIndexOfFirstUndefeatedCombatant() {
         for (let [index, combatant] of this.turns.entries()) {
-            if (!combatant.data.defeated) {
+            if (!combatant.defeated) {
                 return index;
             }
         }
@@ -540,7 +540,7 @@ export class CombatSFRPG extends Combat {
     getIndexOfLastUndefeatedCombatant() {
         const turnEntries = Array.from(new Set(this.turns.entries())).reverse();
         for (let [index, combatant] of turnEntries) {
-            if (!combatant.data.defeated) {
+            if (!combatant.defeated) {
                 return index;
             }
         }
@@ -571,7 +571,7 @@ export class CombatSFRPG extends Combat {
         } else {
             parts.push("@combatant.attributes.init.total");
             if (game.settings.get("sfrpg", "useInitiativeTiebreaker")) {
-                parts.push(combatant.actor.data.data.attributes.init.total / 100);
+                parts.push(combatant.actor.system.attributes.init.total / 100);
             }
         }
     
@@ -684,7 +684,7 @@ export class CombatSFRPG extends Combat {
 }
 
 async function onConfigClicked(combat, direction) {
-    const combatType = combat.data.flags?.sfrpg?.combatType || "normal";
+    const combatType = combat.flags?.sfrpg?.combatType || "normal";
     const types = ["normal", "starship", "vehicleChase"];
     const indexOf = types.indexOf(combatType);
     const wrappedIndex = (types.length + indexOf + direction) % types.length;
@@ -696,6 +696,7 @@ async function onConfigClicked(combat, direction) {
 }
 
 Hooks.on('renderCombatTracker', (app, html, data) => {
+    console.log("In Hook.call('renderCombatTracker')", app, html, data);
     const activeCombat = data.combat;
     if (!activeCombat) {
         return;
@@ -707,7 +708,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     const roundHeader = header.find('h3');
     const originalHtml = roundHeader.html();
 
-    if (activeCombat.data.round) {
+    if (activeCombat.round) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
             roundHeader.replaceWith(`<div>${originalHtml}<h4>${game.i18n.format(activeCombat.getCurrentPhase().name)}</h4></div>`);
