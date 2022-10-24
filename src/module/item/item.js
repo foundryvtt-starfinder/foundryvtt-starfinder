@@ -319,7 +319,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Item type specific properties
         const props = [];
-        const fn = this[`_${this.data.type}ChatData`];
+        const fn = this[`_${this.type}ChatData`];
         if (fn) fn.bind(this)(data, labels, props);
 
         // General equipment properties
