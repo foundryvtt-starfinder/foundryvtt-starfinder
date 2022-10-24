@@ -152,7 +152,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             "system.crew": newCrew
         });
 
-        let cleanflags = duplicate(this.actor.data.flags);
+        let cleanflags = duplicate(this.actor.flags);
         delete cleanflags.sfrpg.shipsCrew;
 
         await this.actor.update({
@@ -230,6 +230,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         //   0        1          2    3     4       5          6      7           8          9               10            11               12             13     14
         let [forward, starboard, aft, port, turret, unmounted, frame, powerCores, thrusters, primarySystems, otherSystems, securitySystems, expansionBays, cargo, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
+            if (!item.config) item.config = {};
 
             if (item.type === "actorResource") {
                 this._prepareActorResource(item, actorData);
@@ -285,7 +286,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             }
         }
 
-        const weaponMounts = this.actor.system.frame?.data?.weaponMounts;
+        const weaponMounts = this.actor.system.frame?.system?.weaponMounts;
         const hasForward = weaponMounts?.forward?.lightSlots || weaponMounts?.forward?.heavySlots || weaponMounts?.forward?.capitalSlots;
         const hasStarboard = weaponMounts?.starboard?.lightSlots || weaponMounts?.starboard?.heavySlots || weaponMounts?.starboard?.capitalSlots;
         const hasPort = weaponMounts?.port?.lightSlots || weaponMounts?.port?.heavySlots || weaponMounts?.port?.capitalSlots;
@@ -331,7 +332,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         data.activeFrame = frame.length > 0 ? frame[0] : null;
         data.hasPower = powerCores.length > 0;
-        data.hasThrusters = thrusters.filter(x => !x.data.isBooster).length > 0;
+        data.hasThrusters = thrusters.filter(x => !x.system.isBooster).length > 0;
 
         data.prefixTable = {
             starshipAblativeArmor:              game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipAblativeArmors"),
@@ -422,7 +423,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
         // Case - Dropped Actor
         if (data.type === "Actor") {
-            const actor = Actor.fromDropData(data);
+            const actor = await Actor.fromDropData(data);
             return this._onCrewDrop(event, actor.id);
         } else if (data.type === "Item") {
             const rawItemData = await this._getItemDropData(event, data);
@@ -482,11 +483,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
        const actor = this.actor;
        const item = await Item.fromDropData(data);
        itemData = item;
-
-       if (item.parent) {
-        console.log(item.parent);
-        let sameActor = item.parent.id === actor.id;
-       }
+       
     //    if (data.pack) {
     //        const pack = game.packs.get(data.pack);
     //        if (pack.documentName !== "Item") return;
