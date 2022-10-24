@@ -29,7 +29,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     get template() {
         const path = "systems/sfrpg/templates/actors/";
         if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
-        if (this.actor.data.type === "npc") {
+        if (this.actor.type === "npc") {
             return path + "npc-sheet.html";
         } else {
             return path + "npc2-sheet.html";

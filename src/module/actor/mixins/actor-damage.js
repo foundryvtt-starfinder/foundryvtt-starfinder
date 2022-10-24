@@ -343,7 +343,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             actorUpdate["system.attributes.hp.value"] = newHP;
 
             /** If the remaining undealt damage is equal to or greater than the max hp, the character dies of Massive Damage. */
-            if (this.data.type === "character" && remainingUndealtDamage >= actorData.attributes.hp.max) {
+            if (this.type === "character" && remainingUndealtDamage >= actorData.attributes.hp.max) {
                 const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", {name: this.name});
                 ui.notifications.warn(localizedDeath, {permanent: true});
             }

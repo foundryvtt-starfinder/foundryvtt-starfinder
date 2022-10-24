@@ -38,7 +38,7 @@
                     <label class="checkbox">
                         <input type="checkbox" name="system.useCapacity" {{checked itemData.useCapacity}} /> {{ localize "SFRPG.Items.Ammunition.UseCapacity" }}
                     </label>
-                    {{#if data.data.useCapacity}}
+                    {{#if data.config.useCapacity}}
                     <input type="text" name="system.capacity.value" value="{{itemData.capacity.value}}" data-dtype="Number"/>
                     <span class="sep"> / </span>
                     <input type="text" name="system.capacity.max" value="{{itemData.capacity.max}}" data-dtype="Number"/>

@@ -324,7 +324,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // General equipment properties
         const equippableTypes = ["weapon", "equipment", "shield"];
-        if (data.hasOwnProperty("equipped") && equippableTypes.includes(this.data.type)) {
+        if (data.hasOwnProperty("equipped") && equippableTypes.includes(this.type)) {
             props.push(
                 {name: data.equipped ? "Equipped" : "Not Equipped", tooltip: null },
                 {name: data.proficient ? "Proficient" : "Not Proficient", tooltip: null }
@@ -728,7 +728,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Define Critical threshold
         const critThreshold = 20;
-        //if ( this.data.type === "weapon" ) critThreshold = this.actor.getFlag("sfrpg", "weaponCriticalThreshold") || 20;
+        //if ( this.type === "weapon" ) critThreshold = this.actor.getFlag("sfrpg", "weaponCriticalThreshold") || 20;
 
         const rollOptions = {};
 
@@ -967,7 +967,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async rollDamage({ event } = {}, options = {}) {
         const itemData  = this.system;
-        const actorData = this.actor.getRollData(); //this.actor.data.data;
+        const actorData = this.actor.getRollData(); //this.actor.system;
         const isWeapon  = ["weapon", "shield"].includes(this.type);
         const isHealing = this.system.actionType === "heal";
 

@@ -136,7 +136,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
                 case "weaponAccessory":
                     {
                         if (!ignoreEquipment) {
-                            const container = getItemContainer(this.data.items, item);
+                            const container = getItemContainer(this.items, item);
                             if (container && container.type === "weapon" && container.system.equipped) {
                                 modifiersToConcat = itemModifiers;
                             }

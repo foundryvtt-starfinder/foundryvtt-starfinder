@@ -718,7 +718,7 @@ export class DiceSFRPG {
                 roll._total = 1;
                 const nonlethal = tags.find(e => e.tag === "weapon-properties nonlethal");
                 
-                if (itemContext.data.type !== "starshipWeapon") {
+                if (itemContext.type !== "starshipWeapon") {
                     if (nonlethal) {
                         nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
                     } else {

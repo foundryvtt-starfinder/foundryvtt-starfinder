@@ -27,7 +27,7 @@
             </div>
 
             {{#if (and (and itemData.limitedWear actor) (eq actor.type "character"))}}
-                {{#if (gt actor.data.data.magicalItems.worn actor.data.data.magicalItems.max)}}
+                {{#if (gt actor.system.magicalItems.worn actor.system.magicalItems.max)}}
                 <div class="form-group">
                     <label></label>
                     <span class="error"  style="text-align: right;">{{localize "SFRPG.Items.Magic.LimitedWearExceeded"}}</span>
