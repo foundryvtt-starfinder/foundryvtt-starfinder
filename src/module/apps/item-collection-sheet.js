@@ -292,6 +292,8 @@ export class ItemCollectionSheet extends DocumentSheet {
         const data = duplicate(itemData);
         const labels = itemData.labels || {};
 
+        if (htmlOptions.async === undefined) htmlOptions.async = false;
+
         // Rich text description
         data.system.description.value = TextEditor.enrichHTML(data.system.description.value, htmlOptions);
 

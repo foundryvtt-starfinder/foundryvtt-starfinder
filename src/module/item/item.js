@@ -314,6 +314,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const data = duplicate(this.system);
         const labels = this.labels;
 
+        if (htmlOptions.async === undefined) htmlOptions.async = false;
+
         // Rich text description
         data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
 
@@ -775,7 +777,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             rollContext: rollContext,
             title: title,
-            flavor: TextEditor.enrichHTML(this.system?.chatFlavor),
+            flavor: TextEditor.enrichHTML(this.system?.chatFlavor, {async: false}),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: critThreshold,
             rollOptions: rollOptions,
@@ -1100,7 +1102,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
-            flavor: (TextEditor.enrichHTML(options?.flavorOverride) ?? TextEditor.enrichHTML(itemData.chatFlavor)) || null,
+            flavor: (TextEditor.enrichHTML(options?.flavorOverride, {async: false}) ?? TextEditor.enrichHTML(itemData.chatFlavor, {async: false})) || null,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 width: 400,

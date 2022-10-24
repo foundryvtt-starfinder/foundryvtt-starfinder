@@ -644,7 +644,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const desiredDescription = TextEditor.enrichHTML(content || chatData.description.value, {});
+            const desiredDescription = TextEditor.enrichHTML(content || chatData.description.value, {async: false});
             let div = $(`<div class="item-summary">${desiredDescription}</div>`);
 
             li.append(div.hide());
