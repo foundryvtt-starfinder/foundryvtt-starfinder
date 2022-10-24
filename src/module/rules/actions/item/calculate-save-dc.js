@@ -18,10 +18,10 @@ export default function (engine) {
 
                 let dcFormula = save.dc?.toString();
                 if (!dcFormula) {
-                    const ownerKeyAbilityId = actorData?.attributes.keyability  || classes[0]?.data.data.kas;
+                    const ownerKeyAbilityId = actorData?.attributes.keyability  || classes[0]?.system.kas;
                     const itemKeyAbilityId = data.ability;
                     const spellbookSpellAbility = actorData?.attributes.spellcasting
-                    const classSpellAbility = classes[0]?.data.data.spellAbility;
+                    const classSpellAbility = classes[0]?.system.spellAbility;
 
                     const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
                     if (abilityKey) {

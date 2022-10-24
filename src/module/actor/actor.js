@@ -584,7 +584,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         /** Bad entry; no formula! */
-        if (actionEntry.data.formula.length < 1) {
+        if (actionEntry.system.formula.length < 1) {
             ui.notifications.error(game.i18n.format("SFRPG.Rolls.StarshipActions.NoFormulaError", {name: actionEntry.name}));
             return;
         }
