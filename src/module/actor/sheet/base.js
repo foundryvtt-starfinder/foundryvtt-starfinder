@@ -850,7 +850,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 spellBook[lvl] = {
                     level: lvl,
                     usesSlots: lvl > 0,
-                    canCreate: this.actor.isOwner && (lvl >= 0),
+                    canCreate: this.actor.isOwner,
                     canPrepare: (this.actor.type === 'character') && (lvl > 0),
                     label: lvl >= 0 ? CONFIG.SFRPG.spellLevels[lvl] : CONFIG.SFRPG.spellPreparationModes[mode],
                     spells: [],
