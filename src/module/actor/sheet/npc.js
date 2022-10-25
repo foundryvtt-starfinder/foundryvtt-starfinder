@@ -114,7 +114,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             if (droneItemTypes.includes(item.type)) {
                 arr[3].push(item); // droneItems
             } else if (item.type === "spell") {
-                const container = data.items.find(x => x.sysetm.container?.contents?.find(x => x.id === item._id) || false);
+                const container = data.items.find(x => x.system.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
                     arr[0].push(item); // spells
                 } else {
