@@ -283,7 +283,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             user: game.user.id,
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             content: html,
-            flags: { level: this.system.level },
+            flags: { 
+                level: this.system.level, 
+                core: {
+                    canPopout: true
+                } 
+            },
             rollMode: rollMode,
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
@@ -298,9 +303,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (rollMode === "selfroll") {
             chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
         }
-
-        // Allow context menu popouts
-        chatData["flags.core.canPopout"] = true;
 
         // Create the chat message
         return ChatMessage.create(chatData, { displaySheet: false });
