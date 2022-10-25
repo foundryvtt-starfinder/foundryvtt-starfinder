@@ -936,7 +936,7 @@ export class ActorSheetSFRPG extends ActorSheet {
      */
     _filterItems(items, filters) {
         return items.filter(item => {
-            const data = item.data;
+            const data = item.system;
 
             // Action usage
             for (let f of ["action", "move", "swift", "full", "reaction"]) {
