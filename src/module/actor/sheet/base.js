@@ -840,7 +840,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         };
 
         const spellbookReduced = spells.reduce((spellBook, spell) => {
-            const spellData = spell.data;
+            const spellData = spell.system;
 
             const mode = spellData.preparation.mode || "";
             const lvl = levels[mode] || spellData.level || 0;
