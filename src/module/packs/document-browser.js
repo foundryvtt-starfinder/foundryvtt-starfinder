@@ -186,7 +186,6 @@ export class DocumentBrowserSFRPG extends Application {
         }
 
         const document = await pack.getDocument(li.getAttribute('data-entry-id'));
-        console.log(document);
 
         // const rawData = {
         //     type: pack.documentName,
