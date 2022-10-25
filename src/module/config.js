@@ -344,11 +344,11 @@ SFRPG.limitedUsePeriods = {
 };
 
 SFRPG.senses = {
-    "bs": "SFRPG.SenesBS",
-    "bl": "SFRPG.SenesBL",
-    "dark": "SFRPG.SenesDark",
-    "llv": "SFRPG.SenesLLV",
-    "st": "SFRPG.SensesST"
+    "bs": "SFRPG.SensesTypes.SensesBS",
+    "bl": "SFRPG.SensesTypes.SensesBL",
+    "dark": "SFRPG.SensesTypes.SensesDark",
+    "llv": "SFRPG.SensesTypes.SensesLLV",
+    "st": "SFRPG.SensesTypes.SensesST"
 };
 
 SFRPG.skills = {

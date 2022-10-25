@@ -57,6 +57,7 @@ import RollNode from "./module/rolls/rollnode.js";
 import RollContext from "./module/rolls/rollcontext.js";
 import RollTree from "./module/rolls/rolltree.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
+import setupVision from "./module/vision.js";
 
 let initTime = null;
 
@@ -290,6 +291,9 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();
+
+    console.log("Starfinder | [SETUP] Setting up Vision Modes");
+    setupVision();
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
