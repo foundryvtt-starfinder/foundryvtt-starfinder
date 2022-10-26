@@ -862,8 +862,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         /** Build the roll context */
         const rollContext = new RollContext();
         rollContext.addContext("ship", this.actor);
-        rollContext.addContext("item", this, this);
-        rollContext.addContext("weapon", this, this);
+        rollContext.addContext("item", this, this.system);
+        rollContext.addContext("weapon", this, this.system);
         rollContext.setMainContext("");
 
         this.actor?.setupRollContexts(rollContext, ["gunner", "scienceOfficer"]);
@@ -878,6 +878,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.FireAtWill"), modifier: "-4", enabled: false} },
             {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.Broadside"), modifier: "-2", enabled: false} }
         ];
+
+        const attackBonus = parseInt(this.system.attackBonus)
+        if (attackBonus) parts.push("@item.attackBonus");
+
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
