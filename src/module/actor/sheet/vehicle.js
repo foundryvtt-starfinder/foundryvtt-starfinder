@@ -83,7 +83,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * @private
      */
     _prepareItems(data) {
-        const actorData = data.system;
+        const actorData = data.actor.system;
 
         const inventory = {
             inventory: { label: game.i18n.localize("SFRPG.VehicleSheet.Attacks.Attacks"), items: [], dataset: { type: "vehicleAttack,weapon" }, allowAdd: true }
@@ -92,6 +92,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         //   0        1               2              3
         let [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
+            if (!item.config) item.config = {};
 
             if (item.type === "actorResource") {
                 this._prepareActorResource(item, actorData);
@@ -116,7 +117,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             // vehicle sheet until we can assign passengers and access their dexterity modifiers.
             if (itemData.item.type === "vehicleAttack") {
 
-                itemData.item.hasDamage = itemData.item.system.damage?.parts && itemData.item.system.damage.parts.length > 0;
+                itemData.item.config.hasDamage = itemData.item.system.damage?.parts && itemData.item.system.damage.parts.length > 0;
             }
             inventory.inventory.items.push(itemData);
         });
@@ -124,7 +125,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         const features = {
             primarySystems: { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.PrimarySystems"), items: primarySystems, hasActions: true, dataset: { type: "vehicleSystem" } },
-            expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
+            expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), {current: expansionBays.length, max: data.actor.system.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
             resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         };
         data.features = Object.values(features);
@@ -212,15 +213,15 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         // Case - Dropped Actor
         if (data.type === "Actor") {
-            const actor = Actor.fromDropData(data);
+            const actor = await Actor.fromDropData(data);
 
             // Other vehicles are only acceptable if this vehicle has 1 or more hangar bays
             if (actor.type === "vehicle") {
-                return this._onVehicleDrop(event, data);
+                return this._onVehicleDrop(event, actor.id);
             }
             // The only other actors allowed are crew
             else {
-                return this._onCrewDrop(event, data);
+                return this._onCrewDrop(event, actor.id);
             }
         }
         else if (data.type === "Item") {
@@ -247,22 +248,25 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         let itemData = null;
 
         const actor = this.actor;
-        if (data.pack) {
-            const pack = game.packs.get(data.pack);
-            if (pack.documentName !== "Item") return;
-            itemData = await pack.getEntity(data.id);
-        } else if (data.data) {
-            let sameActor = data.actorId === actor.id;
-            if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
-            if (sameActor) {
-                await this._onSortItem(event, data.data);
-            }
-            itemData = data.data;
-        } else {
-            let item = game.items.get(data.id);
-            if (!item) return;
-            itemData = item.data;
-        }
+        const item = await Item.fromDropData(data);
+        itemData = item;
+
+        // if (data.pack) {
+        //     const pack = game.packs.get(data.pack);
+        //     if (pack.documentName !== "Item") return;
+        //     itemData = await pack.getEntity(data.id);
+        // } else if (data.data) {
+        //     let sameActor = data.actorId === actor.id;
+        //     if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
+        //     if (sameActor) {
+        //         await this._onSortItem(event, data.data);
+        //     }
+        //     itemData = data.data;
+        // } else {
+        //     let item = game.items.get(data.id);
+        //     if (!item) return;
+        //     itemData = item.data;
+        // }
 
         return duplicate(itemData);
     }
@@ -272,19 +276,19 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * Handles drop events for the Hangar Bay list
      *
      * @param {Event}  event The originating drop event
-     * @param {object} data  The data transfer object.
+     * @param {string} actorId  The ID for the dropped vehicle.
      */
-    async _onVehicleDrop(event, data) {
+    async _onVehicleDrop(event, actorId) {
         // event.preventDefault();
 
         $(event.target).css('background', '');
 
-        if (!data.id) return false;
+        if (!actorId) return false;
 
         const hangarBay = duplicate(this.actor.system.hangarBay);
 
         if (hangarBay.limit === -1 || hangarBay.actorIds.length < hangarBay.limit) {
-            hangarBay.actorIds.push(data.id);
+            hangarBay.actorIds.push(actorId);
 
             await this.actor.update({
                 "system.hangarBay": hangarBay
@@ -300,26 +304,26 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
      * Handles drop events for the Passenger list
      *
      * @param {Event}  event The originating drop event
-     * @param {object} data  The data transfer object.
+     * @param {string} actorId  The data transfer object.
      */
-    async _onCrewDrop(event, data) {
+    async _onCrewDrop(event, actorId) {
         // event.preventDefault();
 
         $(event.target).css('background', '');
 
         const targetRole = event.target.dataset.role;
-        if (!targetRole || !data.id) return false;
+        if (!targetRole || !actorId) return false;
 
         const crew = duplicate(this.actor.system.crew);
         const crewRole = crew[targetRole];
-        const oldRole = this.actor.getCrewRoleForActor(data.id);
+        const oldRole = this.actor.getCrewRoleForActor(actorId);
 
         if (crewRole.limit === -1 || crewRole.actorIds.length < crewRole.limit) {
-            crewRole.actorIds.push(data.id);
+            crewRole.actorIds.push(actorId);
 
             if (oldRole) {
                 const originalRole = crew[oldRole];
-                originalRole.actorIds = originalRole.actorIds.filter(x => x != data.id);
+                originalRole.actorIds = originalRole.actorIds.filter(x => x != actorId);
             }
 
             await this.actor.update({
@@ -357,11 +361,13 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const actorId = event.currentTarget.dataset.actorId;
         const actor = game.actors.get(actorId);
 
-        const dragData = {
-            type: "Actor",
-            id: actor.id,
-            data: actor.data
-        };
+        // const dragData = {
+        //     type: "Actor",
+        //     id: actor.id,
+        //     data: actor.data
+        // };
+        
+        const dragData = actor.toDragData();
 
         if (this.actor.isToken) dragData.tokenId = actorId;
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));

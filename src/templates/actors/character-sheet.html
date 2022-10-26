@@ -134,12 +134,12 @@
 
             {{!-- Skills --}}
             <ul class="skills-list">
-                <h3 class="skill-ranks {{#if (greaterThan system.skillpoints.used system.skillpoints.max)}}red{{/if}}" data-tippy-content="<strong>{{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}}</strong><br>@skillpoints.used<br>@skillpoints.total<br><br>{{#each system.skillpoints.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                <h3 class="skill-ranks noborder {{#if (greaterThan system.skillpoints.used system.skillpoints.max)}}red{{/if}}" data-tippy-content="<strong>{{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}}</strong><br>@skillpoints.used<br>@skillpoints.total<br><br>{{#each system.skillpoints.tooltip as |tip|}}{{tip}}<br>{{/each}}">
                     {{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}} ({{system.skillpoints.used}} / {{system.skillpoints.max}})
                 </h3>
                 <li class="skills-header flexrow">
                     <div class="skill-header-prof"></div>
-                    <h3 class="skill-header-name flexrow">{{localize "SFRPG.SkillsHeaderName"}}</h3>
+                    <h3 class="skill-header-name noborder flexrow">{{localize "SFRPG.SkillsHeaderName"}}</h3>
                     <div class="skill-header-rank">{{localize "SFRPG.SkillsHeaderRanks"}}</div>
                     <div class="skill-header-ability">{{localize "SFRPG.SkillsHeaderAbility"}}</div>
                     <div class="skill-header-mod">{{localize "SFRPG.SkillsHeaderModifier"}}</div>

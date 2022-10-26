@@ -88,7 +88,7 @@ export default class SFRPGCustomChatMessage {
             if (speaker.actor && !setImage) {
                 const actor = Actors.instance.get(speaker.actor);
                 if (actor) {
-                    options.tokenImg = actor.data.img;
+                    options.tokenImg = actor.img;
                 }
             }
         }

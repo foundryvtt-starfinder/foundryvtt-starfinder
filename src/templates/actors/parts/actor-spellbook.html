@@ -1,6 +1,6 @@
 <div class="inventory-filters spellbook-filters">
     <div class="form-group spellcasting-ability">
-        <label><h3>{{localize "SFRPG.SpellBook.SpellCastingAbility"}} <a class="item-control spell-browse" title="{{localize "SFRPG.SpellBook.Browse"}}" data-type="spell" data-level="0" data-location="{{entry._id}}"> - <i class="fas fa-search"></i>{{localize "SFRPG.SpellBook.SearchSpell"}}</a></h3></label>
+        <label><h3 class="noborder">{{localize "SFRPG.SpellBook.SpellCastingAbility"}} <a class="item-control spell-browse" title="{{localize "SFRPG.SpellBook.Browse"}}" data-type="spell" data-level="0" data-location="{{entry._id}}"> - <i class="fas fa-search"></i>{{localize "SFRPG.SpellBook.SearchSpell"}}</a></h3></label>
         <select name="system.attributes.spellcasting" data-type="String">
             {{#select system.attributes.spellcasting}}
             <option value="">{{localize "SFRPG.SpellBook.AttributesNone"}}</option>
@@ -16,7 +16,7 @@
 {{#each spellbook as |section|}}
     <li class="item flexrow inventory-header spellbook-header">
         <div class="item-name flexrow">
-            <h3>{{localize section.label}}</h3>
+            <h3 class="noborder">{{localize section.label}}</h3>
         </div>
 
         <div class="spell-slots fit-classes">

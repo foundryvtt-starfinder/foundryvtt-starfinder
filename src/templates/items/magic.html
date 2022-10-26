@@ -15,7 +15,7 @@
         {{> "systems/sfrpg/templates/items/parts/item-description.html"}}
 
         <div class="tab details" data-tab="details" data-group="primary">
-            <h3 class="form-header">{{ localize "SFRPG.Items.Magic.Details" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Magic.Details" }}</h3>
 
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Magic.LimitedWear" }}</label>
@@ -25,7 +25,7 @@
             </div>
 
             {{#if (and (and itemData.limitedWear actor) (eq actor.type "character"))}}
-                {{#if (gt actor.data.data.magicalItems.worn actor.data.data.magicalItems.max)}}
+                {{#if (gt actor.system.magicalItems.worn actor.system.magicalItems.max)}}
                 <div class="form-group">
                     <label></label>
                     <span class="error"  style="text-align: right;">{{localize "SFRPG.Items.Magic.LimitedWearExceeded"}}</span>

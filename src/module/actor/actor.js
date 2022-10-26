@@ -132,7 +132,6 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @return {Promise}        A Promise which resolves to the updated Entity
      */
     async update(data, options = {}) {
-        console.log(data);
         const newSize = data['system.traits.size'];
         if (newSize && (newSize !== getProperty(this.system, "traits.size"))) {
             let size = CONFIG.SFRPG.tokenSizes[data['system.traits.size']];
@@ -499,7 +498,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             rollContext: rollContext,
             parts: parts,
             title: title,
-            flavor: TextEditor.enrichHTML(skill.notes),
+            flavor: TextEditor.enrichHTML(skill.notes, {async: false}),
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
@@ -536,7 +535,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             parts.push(`@pilot.skills.pil.mod`);
         }
         else {
-            let passenger = this.system.crew[role].actors.find(element => element._id == actorId);
+            const passengerId = this.system.crew[role].actorIds.find(id => id === actorId);
+            let passenger = game.actors.get(passengerId);
             let actorData = null;
             if (passenger instanceof ActorSFRPG) {
                 actorData = passenger.system;
@@ -584,7 +584,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         /** Bad entry; no formula! */
-        if (actionEntry.data.formula.length < 1) {
+        if (actionEntry.system.formula.length < 1) {
             ui.notifications.error(game.i18n.format("SFRPG.Rolls.StarshipActions.NoFormulaError", {name: actionEntry.name}));
             return;
         }
@@ -734,12 +734,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
             } else {
-                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${TextEditor.enrichHTML(dc.value)}</p>`;
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${TextEditor.enrichHTML(dc.value, {async: false})}</p>`;
             }
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal);
+        flavor += TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {async: false});
         flavor += "</p>";
 
         if (actionEntry.system.effectCritical) {
@@ -747,7 +747,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             if (critEffectDisplayState !== 'never') {
                 if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                    flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical);
+                    flavor += TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {async: false});
                     flavor += "</p>";
                 }
             }

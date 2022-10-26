@@ -1,4 +1,4 @@
-<h3 class="form-header">{{ localize "SFRPG.CapacityUsage" }}</h3>
+<h3 class="form-header noborder">{{ localize "SFRPG.CapacityUsage" }}</h3>
 
 <div class="form-group">
     <label>{{ localize "SFRPG.Items.Ammunition.AmmunitionType" }}</label>
@@ -19,7 +19,7 @@
         {{ localize "SFRPG.Items.Capacity.Capacity" }}
     </label>
     <div class="form-fields">
-        {{#unless data.data.ammunitionType}}
+        {{#unless data.system.ammunitionType}}
         <input type="text" data-tippy-content="{{ localize "SFRPG.Items.Capacity.CapacityValueTooltip" }}" name="system.capacity.value" value="{{itemData.capacity.value}}" data-dtype="Number" />
         <span class="sep"> / </span>
         {{/unless}}

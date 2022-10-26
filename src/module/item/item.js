@@ -283,7 +283,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             user: game.user.id,
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             content: html,
-            flags: { level: this.system.level },
+            flags: { 
+                level: this.system.level, 
+                core: {
+                    canPopout: true
+                } 
+            },
             rollMode: rollMode,
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
@@ -299,9 +304,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
         }
 
-        // Allow context menu popouts
-        chatData["flags.core.canPopout"] = true;
-
         // Create the chat message
         return ChatMessage.create(chatData, { displaySheet: false });
     }
@@ -314,17 +316,19 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const data = duplicate(this.system);
         const labels = this.labels;
 
+        if (htmlOptions.async === undefined) htmlOptions.async = false;
+
         // Rich text description
         data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];
-        const fn = this[`_${this.data.type}ChatData`];
+        const fn = this[`_${this.type}ChatData`];
         if (fn) fn.bind(this)(data, labels, props);
 
         // General equipment properties
         const equippableTypes = ["weapon", "equipment", "shield"];
-        if (data.hasOwnProperty("equipped") && equippableTypes.includes(this.data.type)) {
+        if (data.hasOwnProperty("equipped") && equippableTypes.includes(this.type)) {
             props.push(
                 {name: data.equipped ? "Equipped" : "Not Equipped", tooltip: null },
                 {name: data.proficient ? "Proficient" : "Not Proficient", tooltip: null }
@@ -728,7 +732,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Define Critical threshold
         const critThreshold = 20;
-        //if ( this.data.type === "weapon" ) critThreshold = this.actor.getFlag("sfrpg", "weaponCriticalThreshold") || 20;
+        //if ( this.type === "weapon" ) critThreshold = this.actor.getFlag("sfrpg", "weaponCriticalThreshold") || 20;
 
         const rollOptions = {};
 
@@ -775,7 +779,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             rollContext: rollContext,
             title: title,
-            flavor: TextEditor.enrichHTML(this.system?.chatFlavor),
+            flavor: TextEditor.enrichHTML(this.system?.chatFlavor, {async: false}),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: critThreshold,
             rollOptions: rollOptions,
@@ -967,7 +971,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async rollDamage({ event } = {}, options = {}) {
         const itemData  = this.system;
-        const actorData = this.actor.getRollData(); //this.actor.data.data;
+        const actorData = this.actor.getRollData(); //this.actor.system;
         const isWeapon  = ["weapon", "shield"].includes(this.type);
         const isHealing = this.system.actionType === "heal";
 
@@ -1100,7 +1104,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
-            flavor: (TextEditor.enrichHTML(options?.flavorOverride) ?? TextEditor.enrichHTML(itemData.chatFlavor)) || null,
+            flavor: (TextEditor.enrichHTML(options?.flavorOverride, {async: false}) ?? TextEditor.enrichHTML(itemData.chatFlavor, {async: false})) || null,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 width: 400,

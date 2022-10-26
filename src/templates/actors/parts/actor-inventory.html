@@ -1,7 +1,7 @@
 {{#if (not isNPC)}}
 <div class="inventory-filters">
     <ol class="currency flexrow">
-        <h3>
+        <h3 class="noborder">
             {{localize "SFRPG.InventoryCurrency"}}
             <i class="fas fa-coins"></i>
         </h3>
@@ -18,7 +18,7 @@
 <ol class="inventory-list">
 {{#each sections as |section sid|}}
     <li class="inventory-header flexrow">
-        <h3 class="item-name flexrow">{{section.label}}</h3>
+        <h3 class="item-name noborder flexrow">{{section.label}}</h3>
 
         {{#if ../isCharacter}}
         <div class="item-detail item-weight">{{localize "SFRPG.InventoryBulk"}}</div>

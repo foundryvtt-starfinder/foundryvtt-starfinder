@@ -38,8 +38,14 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
 
             for (const item of content) {
 
-                const itemData = item;
-                itemData.compendium = pack.collection;
+                const itemData = {
+                    _id: item._id,
+                    compendium: item.pack,
+                    img: item.img,
+                    name: item.name,
+                    system: item.system,
+                    type: item.type
+                };
 
                 // Used for sorting and displaying
                 itemData.system.cr = itemData.system.details.cr;
@@ -56,7 +62,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
                     itemData.system.crDisplay = itemData.system.details.cr;
                 }
 
-                if (this.allowedItem(itemData)) {
+                if (this.allowedItem(item)) {
                     items.push(itemData);
                 }
             }

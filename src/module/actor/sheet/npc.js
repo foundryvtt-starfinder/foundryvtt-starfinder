@@ -29,7 +29,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     get template() {
         const path = "systems/sfrpg/templates/actors/";
         if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
-        if (this.actor.data.type === "npc") {
+        if (this.actor.type === "npc") {
             return path + "npc-sheet.html";
         } else {
             return path + "npc2-sheet.html";
@@ -114,7 +114,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             if (droneItemTypes.includes(item.type)) {
                 arr[3].push(item); // droneItems
             } else if (item.type === "spell") {
-                const container = data.items.find(x => x.sysetm.container?.contents?.find(x => x.id === item._id) || false);
+                const container = data.items.find(x => x.system.container?.contents?.find(x => x.id === item._id) || false);
                 if (!container) {
                     arr[0].push(item); // spells
                 } else {

@@ -74,7 +74,7 @@ Hooks.once('init', async function () {
 ==================================================`
     );
 
-    CONFIG.compatibility.mode = CONST.COMPATIBILITY_MODES.SILENT;
+    // CONFIG.compatibility.mode = CONST.COMPATIBILITY_MODES.SILENT;
 
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
@@ -385,7 +385,7 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
 
 Hooks.on("createActor", function(actor, options, actorId) {
     const autoLinkedTypes = ['character', 'drone'];
-    if (autoLinkedTypes.includes(actor.data.type)) {
+    if (autoLinkedTypes.includes(actor.type)) {
         actor.update({
             "token.actorLink": true
         });
@@ -448,7 +448,7 @@ function rollItemMacro(itemName) {
     const item = actor ? actor.items.find(i => i.name === itemName) : null;
     if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
 
-    if (item.data.type === 'spell') return actor.useSpell(item);
+    if (item.type === 'spell') return actor.useSpell(item);
     return item.roll();
 }
 
@@ -523,8 +523,8 @@ function setupHandlebars() {
 
     Handlebars.registerHelper('getTotalStorageCapacity', function (item) {
         let totalCapacity = 0;
-        if (item?.data?.container?.storage && item.data.container.storage.length > 0) {
-            for (let storage of item.data.container.storage) {
+        if (item?.system?.container?.storage && item.system.container.storage.length > 0) {
+            for (let storage of item.system.container.storage) {
                 totalCapacity += storage.amount;
             }
         }
@@ -650,7 +650,7 @@ function setupHandlebars() {
 
 Hooks.on("renderSidebarTab", async (app, html) => {
     if (app.options.id === "settings") {
-        const textToAdd = `<br/><a href="https://github.com/wildj79/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
+        const textToAdd = `<br/><a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
         const gameDetails = document.getElementById("game-details");
         if (gameDetails) {
             const systemSection = gameDetails.getElementsByClassName("system")[0];

@@ -90,7 +90,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
         const items = duplicate(tokenData.items);
         for (const item of items) {
-            item.img = item.img || DEFAULT_TOKEN;
+            item.img = item.img || CONST.DEFAULT_TOKEN;
 
             item.system.quantity = item.system.quantity || 0;
             item.system.price = item.system.price || 0;
@@ -207,7 +207,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
+            let div = $(`<div class="item-summary">${chatData.system.description.value}</div>`);
             let props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
 
@@ -288,11 +288,14 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
     
     getChatData(itemData, htmlOptions) {
+        console.log(itemData);
         const data = duplicate(itemData);
         const labels = itemData.labels || {};
 
+        if (htmlOptions.async === undefined) htmlOptions.async = false;
+
         // Rich text description
-        data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
+        data.system.description.value = TextEditor.enrichHTML(data.system.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];
@@ -421,7 +424,6 @@ export class ItemCollectionSheet extends DocumentSheet {
 
         if (data.type !== "Item") return;
         const item = await Item.fromDropData(data);
-        console.log(item);
 
         let targetContainer = null;
         if (event) {

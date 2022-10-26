@@ -781,7 +781,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const desiredDescription = TextEditor.enrichHTML(chatData.description.short || chatData.description.value, {});
+            const desiredDescription = TextEditor.enrichHTML(chatData.description.short || chatData.description.value, {async: false});
             let div = $(`<div class="item-summary">${desiredDescription}</div>`);
             let props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
@@ -840,7 +840,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         };
 
         const spellbookReduced = spells.reduce((spellBook, spell) => {
-            const spellData = spell.data;
+            const spellData = spell.system;
 
             const mode = spellData.preparation.mode || "";
             const lvl = levels[mode] || spellData.level || 0;
@@ -850,7 +850,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 spellBook[lvl] = {
                     level: lvl,
                     usesSlots: lvl > 0,
-                    canCreate: this.actor.isOwner && (lvl >= 0),
+                    canCreate: this.actor.isOwner,
                     canPrepare: (this.actor.type === 'character') && (lvl > 0),
                     label: lvl >= 0 ? CONFIG.SFRPG.spellLevels[lvl] : CONFIG.SFRPG.spellPreparationModes[mode],
                     spells: [],
@@ -936,7 +936,7 @@ export class ActorSheetSFRPG extends ActorSheet {
      */
     _filterItems(items, filters) {
         return items.filter(item => {
-            const data = item.data;
+            const data = item.system;
 
             // Action usage
             for (let f of ["action", "move", "swift", "full", "reaction"]) {
