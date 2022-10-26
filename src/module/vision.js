@@ -2,6 +2,7 @@ export default function setupVision() {
     setupVisionModes();
     setDefaultIlluminationThreshold();
     globalIlluminationThresholdTooltip();
+    setupBlinded()
 }
 
 function setupVisionModes() {
@@ -117,3 +118,8 @@ function globalIlluminationThresholdTooltip() {
         darknessSlider.insertAdjacentHTML("afterend", tooltip);
     });
 }
+
+function setupBlinded() {
+    CONFIG.specialStatusEffects.BLIND = "blinded";
+}
+
