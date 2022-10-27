@@ -481,7 +481,7 @@ export class CombatSFRPG extends Combat {
         const chatData = {
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
-            whisper: eventData.newCombatant.hidden ? [game.user.data._id] : [],            
+            whisper: eventData.newCombatant.hidden ? [ChatMessage.getWhisperRecipients("GM")] : [],            
             content: html
         };
 
