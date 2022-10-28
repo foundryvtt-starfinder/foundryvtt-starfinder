@@ -1,3 +1,7 @@
+# vTheNextReleaseNumber
+
+Interesting stuff goes here ;)
+
 # v0.20.2 - Starfinder Update
 
 This is an update to address the many bugs that were identified from the last update. It includes a lot of big changes made to the underlying data model to be more inline with
