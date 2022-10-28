@@ -20,7 +20,7 @@
         <div class="document-browser-filters">
             {{#each filters as |filter filterKey|}}
             <div class="filtercontainer" id="classfilter">
-                <h3>{{filter.label}}</h3>
+                <h3 class="noborder">{{filter.label}}</h3>
                 {{#if (eq filter.type "multi-select")}}
                 <dl>
                     {{#each filter.content as |content key|}}
@@ -76,11 +76,11 @@
 
                 {{#each ../tags as |value key|}}
                 <div class="item-tags">
-                    <span title="item level">{{lookup item.data value.dataKey}}</span>
+                    <span title="item level">{{lookup item.system value.dataKey}}</span>
                 </div>
                 {{/each}}
 
-                {{#each item.data as |attrib id|}}
+                {{#each item.system as |attrib id|}}
                 <input type="hidden" name="{{id}}" value="{{attrib}}">
                 {{/each}}
             </li>

@@ -135,21 +135,21 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
         let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "weapon" || filters.includes(item.data.weaponType));
+        return item && (item.type !== "weapon" || filters.includes(item.system.weaponType));
     }
 
     _filterWeaponCategory(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
         let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "weapon" || filters.includes(item.data.weaponCategory || "uncategorized"));
+        return item && (item.type !== "weapon" || filters.includes(item.system.weaponCategory || "uncategorized"));
     }
 
     _filterArmorType(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
         let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "equipment" || filters.includes(item.data.armor?.type));
+        return item && (item.type !== "equipment" || filters.includes(item.system.armor?.type));
     }
 
     openSettings() {

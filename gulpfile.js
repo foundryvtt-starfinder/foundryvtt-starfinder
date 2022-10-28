@@ -349,7 +349,8 @@ async function cookWithOptions(options = { formattingCheck: true }) {
                 fixTokenName(jsonInput);
 
                 // Fix missing images
-                if (!jsonInput.img) {
+                if (!jsonInput.img && !jsonInput.pages) {
+                    // Skip if a journal
                     jsonInput.img = "icons/svg/mystery-man.svg";
                 }
                 
@@ -426,8 +427,8 @@ function fixTokenName(item) {
 }
 
 function tryMigrateActorSpeed(jsonInput) {
-    const speedValue = jsonInput.data?.attributes?.speed?.value;
-    const specialValue = jsonInput.data?.attributes?.speed?.special;
+    const speedValue = jsonInput.system?.attributes?.speed?.value;
+    const specialValue = jsonInput.system?.attributes?.speed?.special;
     if (speedValue) {
         let baseSpeed = speedValue;
         if (baseSpeed && isNaN(baseSpeed)) {
@@ -440,7 +441,7 @@ function tryMigrateActorSpeed(jsonInput) {
             baseSpeed = 30;
         }
         
-        jsonInput.data.attributes.speed = {
+        jsonInput.system.attributes.speed = {
             land: { base: 0 },
             flying: { base: 0 },
             swimming: { base: 0 },
@@ -452,20 +453,20 @@ function tryMigrateActorSpeed(jsonInput) {
         
         const lowercaseSpeedValue = speedValue.toLowerCase();
         if (lowercaseSpeedValue.includes("climb")) {
-            jsonInput.data.attributes.speed.climbing.base = baseSpeed;
-            jsonInput.data.attributes.speed.mainMovement = "climbing";
+            jsonInput.system.attributes.speed.climbing.base = baseSpeed;
+            jsonInput.system.attributes.speed.mainMovement = "climbing";
         } else if (lowercaseSpeedValue.includes("fly")) {
-            jsonInput.data.attributes.speed.flying.base = baseSpeed;
-            jsonInput.data.attributes.speed.mainMovement = "flying";
+            jsonInput.system.attributes.speed.flying.base = baseSpeed;
+            jsonInput.system.attributes.speed.mainMovement = "flying";
         } else if (lowercaseSpeedValue.includes("burrow")) {
-            jsonInput.data.attributes.speed.burrowing.base = baseSpeed;
-            jsonInput.data.attributes.speed.mainMovement = "burrowing";
+            jsonInput.system.attributes.speed.burrowing.base = baseSpeed;
+            jsonInput.system.attributes.speed.mainMovement = "burrowing";
         } else if (lowercaseSpeedValue.includes("swim")) {
-            jsonInput.data.attributes.speed.swimming.base = baseSpeed;
-            jsonInput.data.attributes.speed.mainMovement = "swimming";
+            jsonInput.system.attributes.speed.swimming.base = baseSpeed;
+            jsonInput.system.attributes.speed.mainMovement = "swimming";
         } else {
-            jsonInput.data.attributes.speed.land.base = baseSpeed;
-            jsonInput.data.attributes.speed.mainMovement = "land";
+            jsonInput.system.attributes.speed.land.base = baseSpeed;
+            jsonInput.system.attributes.speed.mainMovement = "land";
         }
         
         let finalSpecial = "";
@@ -479,7 +480,7 @@ function tryMigrateActorSpeed(jsonInput) {
             finalSpecial += specialValue.trim();
         }
         
-        jsonInput.data.attributes.speed.special = finalSpecial;
+        jsonInput.system.attributes.speed.special = finalSpecial;
     }
 }
 
@@ -499,10 +500,10 @@ var validArmorTypes = ["light", "power", "heavy", "shield"];
 var validCreatureSizes = ["fine", "diminutive", "tiny", "small", "medium", "large", "huge", "gargantuan", "colossal"];
 function formattingCheck(allItems) {
 	for (const item of allItems) {
-		const data = item.data;
+		const data = item;
 		const pack = item.pack;
 
-		if (!data || !data.data || !data.type) {
+		if (!data || !data.system || !data.type) {
 			continue; // Malformed data or journal entry - outside the scope of the formatting check
 		}
         
@@ -537,12 +538,12 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
 	}
 
 	// Validate HP values
-	if (data.data.hp.value < 0) {
+	if (data.system.hp.value < 0) {
 		addWarningForPack(`${file}: HP value not entered correctly.`, pack);
 	}
 
-	if (data.data.size) {
-		if (!validCreatureSizes.includes(data.data.size)) {
+	if (data.system.size) {
+		if (!validCreatureSizes.includes(data.system.size)) {
 			addWarningForPack(`${file}: Size value not entered correctly.`, pack);
 		}
 	}
@@ -556,7 +557,7 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
 	}
 
 	// Validate source
-	let source = data.data.source;
+	let source = data.system.source;
 	if (!source) {
 		addWarningForPack(`${file}: Missing source field.`, pack);
 		return;
@@ -567,7 +568,7 @@ function formattingCheckRace(data, pack, file, options = { checkLinks: true }) {
 
 	// Check biography for references to conditions
 	if (options.checkLinks) {
-		let description = data.data.description.value
+		let description = data.system.description.value
 		let result = searchDescriptionForUnlinkedCondition(description);
 		if (result.found) {
 			addWarningForPack(`${file}: Found reference to ${result.match} in description without link.`, pack);
@@ -583,21 +584,21 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
 	}
 	// Validate attributes
 	// Validate HP & Stamina Points
-	if (!data.data.attributes || !data.data.attributes.hp || !data.data.attributes.sp) {
+	if (!data.system.attributes || !data.system.attributes.hp || !data.system.attributes.sp) {
 		addWarningForPack(`${file}: Missing HP/SP values.`, pack);
 		return;
 	}
 	// Validate HP values
-	else if (data.data.attributes.hp.value != data.data.attributes.hp.max) {
+	else if (data.system.attributes.hp.value != data.system.attributes.hp.max) {
 		addWarningForPack(`${file}: HP value not entered correctly.`, pack);
 	}
 	// Validate SP values
-	if (data.data.attributes.sp.value != data.data.attributes.sp.max) {
+	if (data.system.attributes.sp.value != data.system.attributes.sp.max) {
 		addWarningForPack(`${file}: SP value not entered correctly.`, pack);
 	}
 
-	if (data.data.traits.size) {
-		if (!validCreatureSizes.includes(data.data.traits.size)) {
+	if (data.system.traits.size) {
+		if (!validCreatureSizes.includes(data.system.traits.size)) {
 			addWarningForPack(`${file}: Size value not entered correctly.`, pack);
 		}
 	}
@@ -616,7 +617,7 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
 	}
 
 	// Validate source
-	let source = data.data.details.source;
+	let source = data.system.details.source;
 	if (!source) {
 		addWarningForPack(`${file}: Missing source field.`, pack);
 		return;
@@ -627,8 +628,8 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
 
     if (options.checkEcology === true) {
         // Validate ecology
-        let environment = data.data.details.environment;
-        let organization = data.data.details.organization;
+        let environment = data.system.details.environment;
+        let organization = data.system.details.organization;
         if (environment === null || environment === "") {
             addWarningForPack(`${file}: Environment is missing.`, pack);
         }
@@ -638,7 +639,7 @@ function formattingCheckAlien(data, pack, file, options = { checkLinks: true, ch
     }
 
 	if (options.checkLinks === true) {
-		let description = data.data.details.biography.value
+		let description = data.system.details.biography.value
         // Check biography for references to conditions
 		let conditionResult = searchDescriptionForUnlinkedCondition(description);
 		if (conditionResult.found) {
@@ -674,7 +675,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
 	// Validate source
 	if (options.checkSource) {
-		let source = data.data.source;
+		let source = data.system.source;
 		if (!isSourceValid(source)) {
 			addWarningForPack(`${file}: Improperly formatted source field "${source}.`, pack);
 		}
@@ -682,7 +683,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
 	// Validate price
 	if (options.checkPrice) {
-		let price = data.data.price;
+		let price = data.system.price;
 		if (!price || price <= 0) {
 			addWarningForPack(`${file}: Improperly formatted armor price field "${price}.`, pack);
 		}
@@ -690,22 +691,22 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
 	// Validate level
 	if (options.checkLevel) {
-		let level = data.data.level;
+		let level = data.system.level;
 		if (!level || level <= 0) {
 			addWarningForPack(`${file}: Improperly formatted armor level field "${level}.`, pack);
 		}
 	}
 
 	// If a weapon
-	if (data.data.weaponType) {
+	if (data.system.weaponType) {
 		formattingCheckWeapons(data, pack, file);
 	}
 
 	// If armor
-	let armor = data.data.armor
+	let armor = data.system.armor
 	if (armor) {
 		// Validate armor type
-		let armorType = data.data.armor.type
+		let armorType = data.system.armor.type
 		if (!validArmorTypes.includes(armorType)) {
 			addWarningForPack(`${file}: Improperly formatted armor type field "${armorType}.`, pack);
 		}
@@ -713,7 +714,7 @@ function formattingCheckItems(data, pack, file, options = { checkImage: true, ch
 
 	// Validate links
 	if (options.checkLinks) {
-		let description = data.data.description.value
+		let description = data.system.description.value
 
 		if (description) {
 
@@ -768,7 +769,7 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
 	}
 
 	// Validate source
-	let source = data.data.details.source;
+	let source = data.system.details.source;
 	if (!source) {
 		addWarningForPack(`${file}: Missing source field.`, pack);
 		return;
@@ -778,20 +779,20 @@ function formattingCheckVehicle(data, pack, file, options = { checkLinks: true }
 	}
 
 	// Validate price
-	let price = data.data.details.price;
+	let price = data.system.details.price;
 	if (!price || price <= 0) {
 		addWarningForPack(`${file}: Improperly formatted vehicle price field "${armorType}.`, pack);
 	}
 
 	// Validate level
-	let level = data.data.details.level;
+	let level = data.system.details.level;
 	if (!level || level <= 0) {
 		addWarningForPack(`${file}: Improperly formatted vehicle level field "${armorType}.`, pack);
 	}
 
 	// Check description for references to conditions
 	if (options.checkLinks) {
-		let description = data.data.details.description.value
+		let description = data.system.details.description.value
 		if (description) {
 			let result = searchDescriptionForUnlinkedCondition(description);
 			if (result.found) {
@@ -822,7 +823,7 @@ function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) 
 	}
 
 	// Validate source
-	let source = data.data.source;
+	let source = data.system.source;
 	if (!source) {
 		addWarningForPack(`${file}: Missing source field.`, pack);
 		return;
@@ -833,7 +834,7 @@ function formattingCheckSpell(data, pack, file, options = { checkLinks: true }) 
 
 	//Check spell description for unlinked references to conditions
 	if (options.checkLinks === true) {
-		let description = data.data.description.value
+		let description = data.system.description.value
 
         // Check references to conditions
         let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
@@ -865,7 +866,7 @@ function formattingCheckFeat(data, pack, file, options = { checkLinks: true }) {
     // feat)
 
     if (options.checkLinks === true) {
-        let description = data.data.description.value
+        let description = data.system.description.value
         // Check description for references to conditions
         let conditionResult = searchDescriptionForUnlinkedReference(description, conditionsRegularExpression);
         if (conditionResult.found) {
@@ -990,10 +991,10 @@ function addWarningForPack(warning, pack) {
 
 function consistencyCheck(allItems, compendiumMap) {
 	for (let item of allItems) {
-		let data = item.data;
-		if (!data || !data.data || !data.data.description) continue;
+		let data = item;
+		if (!data || !data.system || !data.system.description) continue;
 
-		let desc = data.data.description.value;
+		let desc = data.system.description.value;
 		if (!desc) continue;
 
 		let pack = item.pack;
@@ -1082,7 +1083,7 @@ function consistencyCheck(allItems, compendiumMap) {
 				if (otherItemId in compendiumMap[otherPack]) {
 					itemExists = true;
 				} else {
-					let foundItem = allItems.find(x => x.pack === otherPack && (x.data.name == otherItemId || x.data.name == otherItemName));
+					let foundItem = allItems.find(x => x.pack === otherPack && (x.name == otherItemId || x.name == otherItemName));
 					itemExists = foundItem !== null;
 				}
 

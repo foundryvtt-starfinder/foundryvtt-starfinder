@@ -191,13 +191,13 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const chatMessageId = html[0].dataset?.messageId;
         const chatMessage = game.messages.get(chatMessageId);
         if (chatMessage) {
-            const chatDamageData = chatMessage.data.flags.damage;
+            const chatDamageData = chatMessage.flags.damage;
             if (chatDamageData) {
                 rolledAmount = chatDamageData.amount;
                 damageTypes = chatDamageData.types;
             }
 
-            const chatSpecialMaterials = chatMessage.data.flags.specialMaterials;
+            const chatSpecialMaterials = chatMessage.flags.specialMaterials;
             if (chatSpecialMaterials) {
                 for (const [material, enabled] of Object.entries(chatSpecialMaterials)) {
                     if (enabled) {
@@ -250,7 +250,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         //console.log(['Applying damage', damage.toString(), damage]);
 
-        switch (this.data.type) {
+        switch (this.type) {
             case 'starship':
                 return this._applyStarshipDamage(damage);
             case 'vehicle':
@@ -272,7 +272,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const actorUpdate = {};
-        const actorData = foundry.utils.duplicate(this.data.data);
+        const actorData = foundry.utils.duplicate(this.system);
 
         const damagesPerType = [];
         if (damage.damageTypes.length > 0) {
@@ -325,25 +325,25 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
             if (newTempHP <= 0) {
                 newTempHP = null;
-                actorUpdate['data.attributes.hp.tempmax'] = null;
+                actorUpdate['system.attributes.hp.tempmax'] = null;
             }
             
-            actorUpdate["data.attributes.hp.temp"] = newTempHP;
+            actorUpdate["system.attributes.hp.temp"] = newTempHP;
 
             /** Update stamina points */
             const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actorData.attributes.sp.max);
             remainingUndealtDamage = remainingUndealtDamage - (originalSP - newSP);
             
-            actorUpdate["data.attributes.sp.value"] = newSP;
+            actorUpdate["system.attributes.sp.value"] = newSP;
 
             /** Update hitpoints */
             const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actorData.attributes.hp.max);
             remainingUndealtDamage = remainingUndealtDamage - (originalHP - newHP);
 
-            actorUpdate["data.attributes.hp.value"] = newHP;
+            actorUpdate["system.attributes.hp.value"] = newHP;
 
             /** If the remaining undealt damage is equal to or greater than the max hp, the character dies of Massive Damage. */
-            if (this.data.type === "character" && remainingUndealtDamage >= actorData.attributes.hp.max) {
+            if (this.type === "character" && remainingUndealtDamage >= actorData.attributes.hp.max) {
                 const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", {name: this.name});
                 ui.notifications.warn(localizedDeath, {permanent: true});
             }
@@ -352,21 +352,21 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 const newHP = Math.clamped(originalHP + remainingUndealtDamage, 0, actorData.attributes.hp.max);
                 remainingUndealtDamage = remainingUndealtDamage - (newHP - originalHP);
 
-                actorUpdate["data.attributes.hp.value"] = newHP;
+                actorUpdate["system.attributes.hp.value"] = newHP;
             }
             
             if (damage.healSettings.healsStamina) {
                 const newSP = Math.clamped(originalSP + remainingUndealtDamage, 0, actorData.attributes.sp.max);
                 remainingUndealtDamage = remainingUndealtDamage - (newSP - originalSP);
 
-                actorUpdate["data.attributes.sp.value"] = newSP;
+                actorUpdate["system.attributes.sp.value"] = newSP;
             }
             
             if (damage.healSettings.healsTemporaryHitpoints) {
                 const newTempHP = Math.clamped(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
                 remainingUndealtDamage = remainingUndealtDamage - (newTempHP - originalTempHP);
                 
-                actorUpdate["data.attributes.hp.temp"] = newTempHP;
+                actorUpdate["system.attributes.hp.temp"] = newTempHP;
             }
         }
 
@@ -381,7 +381,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * @returns True if the actor is immune to this damage type
     */
     isImmuneToDamageType(damageType) {
-        return this.data.data.traits.di.value.includes(damageType);
+        return this.system.traits.di.value.includes(damageType);
     }
 
     /**
@@ -391,7 +391,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * @returns True if the actor is immune to this damage type
     */
     isVulnerableToDamageType(damageType) {
-        return this.data.data.traits.dv.value.includes(damageType);
+        return this.system.traits.dv.value.includes(damageType);
     }
 
     /**
@@ -402,7 +402,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * @returns Amount of damage mitigation applied.
     */
      getDamageMitigationForDamageType(damageType, damage = null) {
-        const damageMitigation = this.data.data.traits.damageMitigation;
+        const damageMitigation = this.system.traits.damageMitigation;
         if (!damageMitigation) {
             return 0;
         }
@@ -488,17 +488,17 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const selectedQuadrant = results.result.quadrant;
         const indexOfQuadrant = options.indexOf(selectedQuadrant);
         if (indexOfQuadrant === 0) {
-            targetKey = "data.quadrants.forward";
-            originalData = this.data.data.quadrants.forward;
+            targetKey = "system.quadrants.forward";
+            originalData = this.system.quadrants.forward;
         } else if (indexOfQuadrant === 1) {
-            targetKey = "data.quadrants.port";
-            originalData = this.data.data.quadrants.port;
+            targetKey = "system.quadrants.port";
+            originalData = this.system.quadrants.port;
         } else if (indexOfQuadrant === 2) {
-            targetKey = "data.quadrants.starboard";
-            originalData = this.data.data.quadrants.starboard;
+            targetKey = "system.quadrants.starboard";
+            originalData = this.system.quadrants.starboard;
         } else if (indexOfQuadrant === 3) {
-            targetKey = "data.quadrants.aft";
-            originalData = this.data.data.quadrants.aft;
+            targetKey = "system.quadrants.aft";
+            originalData = this.system.quadrants.aft;
         } else {
             /** Error, unrecognized quadrant, somehow. */
             return null;
@@ -518,8 +518,8 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             }
         }
         
-        const hasDeflectorShields = this.data.data.hasDeflectorShields;
-        const hasAblativeArmor = this.data.data.hasAblativeArmor;
+        const hasDeflectorShields = this.system.hasDeflectorShields;
+        const hasAblativeArmor = this.system.hasAblativeArmor;
         
         if (hasDeflectorShields) {
             if (originalData.shields.value > 0) {
@@ -542,8 +542,8 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             remainingUndealtDamage = remainingUndealtDamage - (originalData.ablative.value - newData.ablative.value);
         }
 
-        const originalHullPoints = this.data.data.attributes.hp.value;
-        const newHullPoints = Math.clamped(originalHullPoints - remainingUndealtDamage, 0, this.data.data.attributes.hp.max);
+        const originalHullPoints = this.system.attributes.hp.value;
+        const newHullPoints = Math.clamped(originalHullPoints - remainingUndealtDamage, 0, this.system.attributes.hp.max);
         remainingUndealtDamage = remainingUndealtDamage - (originalHullPoints - newHullPoints);
 
         /** Deflector shields only drop in efficiency when the ship takes hull point damage. */
@@ -583,11 +583,11 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         if (newHullPoints !== originalHullPoints) {
-            actorUpdate["data.attributes.hp.value"] = newHullPoints;
+            actorUpdate["system.attributes.hp.value"] = newHullPoints;
         }
 
-        const originalCT = Math.floor((this.data.data.attributes.hp.max - originalHullPoints) / this.data.data.attributes.criticalThreshold.value);
-        const newCT = Math.floor((this.data.data.attributes.hp.max - newHullPoints) / this.data.data.attributes.criticalThreshold.value);
+        const originalCT = Math.floor((this.system.attributes.hp.max - originalHullPoints) / this.system.attributes.criticalThreshold.value);
+        const newCT = Math.floor((this.system.attributes.hp.max - newHullPoints) / this.system.attributes.criticalThreshold.value);
         if (newCT > originalCT) {
             const crossedThresholds = newCT - originalCT;
             const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: this.name, crossedThresholds: crossedThresholds});

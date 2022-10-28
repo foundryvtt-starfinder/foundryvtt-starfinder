@@ -90,7 +90,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
         const items = duplicate(tokenData.items);
         for (const item of items) {
-            item.img = item.img || DEFAULT_TOKEN;
+            item.img = item.img || CONST.DEFAULT_TOKEN;
 
             item.system.quantity = item.system.quantity || 0;
             item.system.price = item.system.price || 0;
@@ -110,7 +110,7 @@ export class ItemCollectionSheet extends DocumentSheet {
                 item.totalWeight *= item.system.equippedBulkMultiplier;
             }
             item.totalWeight = item.totalWeight < 1 && item.totalWeight > 0 ? "L" : 
-                            item.totalWeight === 0 ? "-" : Math.floor(item.totalWeight);
+                item.totalWeight === 0 ? "-" : Math.floor(item.totalWeight);
         }
 
         data.items = [];
@@ -200,14 +200,14 @@ export class ItemCollectionSheet extends DocumentSheet {
         event.preventDefault();
         let li = $(event.currentTarget).parents('.item');
         let itemId = li.attr("data-item-id");
-        const item = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
-        let chatData = this.getChatData(item, { secrets: true, rollData: item.system.data });
+        const item = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        let chatData = this.getChatData(item, { secrets: true, rollData: item.system });
 
         if (li.hasClass('expanded')) {
             let summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
+            let div = $(`<div class="item-summary">${chatData.system.description.value}</div>`);
             let props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
 
@@ -220,7 +220,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
     _onItemEdit(event) {
         const itemId = $(event.currentTarget).parents('.item').attr("data-item-id");
-        const itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        const itemData = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
 
         const item = new ItemSFRPG(itemData);
         const sheet = new ItemSheetSFRPG(item);
@@ -242,7 +242,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         let li = $(event.currentTarget).parents(".item");
         let itemId = li.attr("data-item-id");
 
-        const itemToDelete = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        const itemToDelete = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
         let containsItems = (itemToDelete.system.container?.contents && itemToDelete.system.container.contents.length > 0);
         ItemDeletionDialog.show(itemToDelete.name, containsItems, (recursive) => {
             this._deleteItemById(itemId, recursive);
@@ -257,7 +257,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             let itemsToTest = [itemId];
             while (itemsToTest.length > 0) {
                 let itemIdToTest = itemsToTest.shift();
-                let itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemIdToTest);
+                let itemData = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemIdToTest);
                 if (itemData.system.container?.contents) {
                     for (let content of itemData.system.container.contents) {
                         itemsToDelete.push(content.id);
@@ -267,12 +267,12 @@ export class ItemCollectionSheet extends DocumentSheet {
             }
         }
 
-        const newItems = this.itemCollection.data.flags.sfrpg.itemCollection.items.filter(x => !itemsToDelete.includes(x._id));
+        const newItems = this.itemCollection.flags.sfrpg.itemCollection.items.filter(x => !itemsToDelete.includes(x._id));
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
         }
 
-        if (newItems.length === 0 && this.itemCollection.data.flags.sfrpg.itemCollection.deleteIfEmpty) {
+        if (newItems.length === 0 && this.itemCollection.flags.sfrpg.itemCollection.deleteIfEmpty) {
             this.itemCollection.delete();
         } else {
             this.itemCollection.update(update);
@@ -280,27 +280,30 @@ export class ItemCollectionSheet extends DocumentSheet {
     }
 
     findItem(itemId) {
-        return this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
+        return this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
     }
 
     getItems() {
-        return this.itemCollection.data.flags.sfrpg.itemCollection.items;
+        return this.itemCollection.flags.sfrpg.itemCollection.items;
     }
     
     getChatData(itemData, htmlOptions) {
-        const data = duplicate(itemData.data);
+        console.log(itemData);
+        const data = duplicate(itemData);
         const labels = itemData.labels || {};
 
+        if (htmlOptions.async === undefined) htmlOptions.async = false;
+
         // Rich text description
-        data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
+        data.system.description.value = TextEditor.enrichHTML(data.system.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];
-        const fn = itemData[`_${itemData.data.type}ChatData`];
+        const fn = itemData[`_${itemData.type}ChatData`];
         if (fn) fn.bind(itemData)(data, labels, props);
 
         // General equipment properties
-        if (data.hasOwnProperty("equipped") && !["goods", "augmentation", "technological", "upgrade"].includes(itemData.data.type)) {
+        if (data.hasOwnProperty("equipped") && !["goods", "augmentation", "technological", "upgrade"].includes(itemData.type)) {
             props.push(
                 data.equipped ? "Equipped" : "Not Equipped",
                 data.proficient ? "Proficient" : "Not Proficient",
@@ -337,7 +340,7 @@ export class ItemCollectionSheet extends DocumentSheet {
      */
     _onEditImage(event) {
       const attr = event.currentTarget.dataset.edit;
-      const current = getProperty(this.document.data, attr);
+      const current = getProperty(this.document, attr);
       new FilePicker({
         type: "image",
         current: current,
@@ -421,7 +424,6 @@ export class ItemCollectionSheet extends DocumentSheet {
 
         if (data.type !== "Item") return;
         const item = await Item.fromDropData(data);
-        console.log(item);
 
         let targetContainer = null;
         if (event) {
@@ -450,7 +452,7 @@ export class ItemCollectionSheet extends DocumentSheet {
                 sceneId: sourceSceneId,
             },
             draggedItemId: item.id,
-            draggedItemData: item.data,
+            draggedItemData: item,
             pack: item.pack,
             containerId: targetContainer ? targetContainer.id : null
         }

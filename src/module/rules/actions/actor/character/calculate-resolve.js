@@ -57,7 +57,7 @@ export default function (engine) {
             let className = "";
 
             for (const cls of fact.classes) {
-                const classData = cls.data.data;
+                const classData = cls.system;
 
                 if (!classData.kas) continue;
                 let classScore = fact.data.abilities[classData.kas].mod;

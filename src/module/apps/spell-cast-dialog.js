@@ -41,8 +41,8 @@ export class SpellCastDialog extends Dialog {
      * @return {Promise}
      */
     static async create(actor, item) {
-        const casterData = actor.data.data;
-        const spellData = item.data.data;
+        const casterData = actor.system;
+        const spellData = item.system;
     
         const maxSpellLevel = spellData.level;
 
@@ -138,7 +138,7 @@ export class SpellCastDialog extends Dialog {
 
         // Render the Spell casting template
         const html = await renderTemplate("systems/sfrpg/templates/apps/spell-cast.html", {
-            item: item.data,
+            item: item.system,
             hasSlots: spellLevels.length > 0,
             consume: spellLevels.length > 0,
             spellLevels,

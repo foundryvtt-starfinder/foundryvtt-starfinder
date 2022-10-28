@@ -17,7 +17,7 @@
             {{!-- Item Summary --}}
             <ul class="summary flexrow">
                 <li class="wide" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
-                <input type="text" name="data.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>
 
@@ -48,7 +48,7 @@
             <label>{{ localize "SFRPG.VehicleSystemSheet.UseForSenses" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.senses.usedForSenses" {{checked itemData.senses.usedForSenses}}/>{{ localize "SFRPG.VehicleSystemSheet.UseForSensesTooltip" }}
+                        <input type="checkbox" name="system.senses.usedForSenses" {{checked itemData.senses.usedForSenses}}/>{{ localize "SFRPG.VehicleSystemSheet.UseForSensesTooltip" }}
                     </label>
                 </div>
             </div>
@@ -57,7 +57,7 @@
             <div class="form-group" data-tippy-content="<strong>{{ localize 'SFRPG.VehicleSystemSheet.Senses' }}</strong><br/>{{ localize 'SFRPG.VehicleSystemSheet.SensesTooltip' }}">
             <label>{{ localize "SFRPG.VehicleSystemSheet.Senses" }}</label>
             <div class="form-fields">
-                <input type="text" name="data.senses.senses" value="{{itemData.senses.senses}}" data-dtype="String" />
+                <input type="text" name="system.senses.senses" value="{{itemData.senses.senses}}" data-dtype="String" />
             </div>
             </div>
             {{/if}}
@@ -69,7 +69,7 @@
             <label>{{ localize "SFRPG.VehicleSystemSheet.UseToPilot" }}</label>
             <div class="form-fields">
                 <label class="checkbox">
-                    <input type="checkbox" name="data.piloting.usedAsPilot" {{checked itemData.piloting.usedAsPilot}}/>{{ localize "SFRPG.VehicleSystemSheet.UseToPilotTooltip" }}
+                    <input type="checkbox" name="system.piloting.usedAsPilot" {{checked itemData.piloting.usedAsPilot}}/>{{ localize "SFRPG.VehicleSystemSheet.UseToPilotTooltip" }}
                 </label>
             </div>
             </div>
@@ -78,7 +78,7 @@
             <div class="form-group" data-tippy-content="<strong>{{ localize 'SFRPG.VehicleSystemSheet.Piloting' }}</strong><br/>{{ localize "SFRPG.VehicleSystemSheet.PilotingTooltip" }}">
                 <label>{{ localize "SFRPG.VehicleSystemSheet.Piloting" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.piloting.piloting" value="{{itemData.piloting.piloting}}" data-dtype="String" />
+                    <input type="text" name="system.piloting.piloting" value="{{itemData.piloting.piloting}}" data-dtype="String" />
                 </div>
             </div>
             {{/if}}
@@ -90,7 +90,7 @@
             <label>{{ localize "SFRPG.VehicleSystemSheet.CanBeActivated" }}</label>
             <div class="form-fields">
                 <label class="checkbox">
-                    <input type="checkbox" name="data.canBeActivated" {{checked itemData.canBeActivated}}/>{{ localize "SFRPG.VehicleSystemSheet.CanBeActivatedTooltip" }}
+                    <input type="checkbox" name="system.canBeActivated" {{checked itemData.canBeActivated}}/>{{ localize "SFRPG.VehicleSystemSheet.CanBeActivatedTooltip" }}
                 </label>
             </div>
             </div>
@@ -101,7 +101,7 @@
             <label>{{ localize "SFRPG.VehicleSystemSheet.isActivated" }}</label>
             <div class="form-fields">
                 <label class="checkbox">
-                    <input type="checkbox" name="data.isActive" {{checked itemData.isActive}}/>{{ localize "SFRPG.VehicleSystemSheet.isActivatedTooltip" }}
+                    <input type="checkbox" name="system.isActive" {{checked itemData.isActive}}/>{{ localize "SFRPG.VehicleSystemSheet.isActivatedTooltip" }}
                 </label>
             </div>
             </div>

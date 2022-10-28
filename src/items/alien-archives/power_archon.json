@@ -2,7 +2,1386 @@
   "_id": "q0lmF5w7wzFINbm0",
   "name": "Power Archon",
   "type": "npc2",
-  "data": {
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "items": [
+    {
+      "name": "Aura of Menace (Su)",
+      "type": "feat",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "Any creature hostile to the power archon within its aura of menace must attempt a Will saving throw. A creature that fails the save takes a -2 penalty to AC, attack rolls, and saving throws for 24 hours or until it deals damage to the archon. When the effect ends for a creature, that creature can’t be affected again by the same archon’s aura for 24 hours."
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Electric Bolt (Su)",
+      "type": "weapon",
+      "flags": {},
+      "hasAttack": true,
+      "hasCapacity": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "1d4+5",
+        "duration": "",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "eac",
+        "actionType": "mwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 13,
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "critical arc 1d4",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d4+5",
+              "operator": "",
+              "types": {
+                "electricity": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "The power archon can unleash an electric bolt as a melee attack or ranged attack. Both versions can be used to deal nonlethal damage without penalty. The ranged attack has a range increment of 30 feet."
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "source": "",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "name": "Electric Bolt (Su)",
+      "type": "weapon",
+      "flags": {},
+      "hasAttack": true,
+      "hasCapacity": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "1d4+5",
+        "duration": "",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "eac",
+        "actionType": "rwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 13,
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "critical arc 1d4",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d4+5",
+              "operator": "",
+              "types": {
+                "electricity": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "The power archon can unleash an electric bolt as a melee attack or ranged attack. Both versions can be used to deal nonlethal damage without penalty. The ranged attack has a range increment of 30 feet."
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "source": "",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponType": "smallA"
+      }
+    },
+    {
+      "name": "Remote Operations (Su)",
+      "type": "feat",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "A power archon can attempt Computers and Engineering checks at a range of 30 feet. A creature targeted by the archon or a creature attending or observing the archon’s target can discern what the archon is doing with a successful DC 15 Perception check."
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Discharge (DC 15) (1/Day)",
+      "type": "spell",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "systems/sfrpg/icons/spells/discharge.webp",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "1 S. Action",
+        "area": "",
+        "damage": "",
+        "duration": "instantaneous",
+        "level": "3rd Level",
+        "range": "100 Feet",
+        "save": "DC  Fortitude",
+        "school": "Abjuration",
+        "target": "one creature or technological object"
+      },
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": false,
+          "tech": true,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You can dissipate the charges from one technological object, temporarily depower one electrically powered technological object that does not use charges, or severely hinder a construct with the technological subtype. If the spell targets an object with charges, the object loses all of its remaining charges. If the object is powered by electrical means other than charges, its functions are suppressed for 1d4 rounds. If the spell targets a creature not of the technological subtype, it affects a random charged or electrically powered item in that creature’s possession. If the target is a construct with the technological subtype, it is @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} and cannot use any energy-based attacks for 1d4 rounds. A construct with the technological subtype that is affected by this spell can attempt a Fortitude saving throw at the end of each round to shrug off the effect.&nbsp;</span></p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "instantaneous"
+        },
+        "formula": "",
+        "level": 3,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "",
+          "prepared": false
+        },
+        "range": {
+          "additional": "10",
+          "per": "level",
+          "units": "ft",
+          "value": 100
+        },
+        "save": {
+          "type": "fort",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "school": "abj",
+        "source": "Core Rulebook",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": "one creature or technological object"
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Recharge (DC 15) (1/Day)",
+      "type": "spell",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "level": "1st Level",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "allowedClasses": {
+          "myst": false,
+          "tech": false,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "level": 1,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": false
+        },
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "",
+        "source": "",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Jolting Surge (3/Day)",
+      "type": "spell",
+      "flags": {},
+      "hasAttack": true,
+      "hasUses": false,
+      "img": "systems/sfrpg/icons/spells/jolting_surge.webp",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "1 S. Action",
+        "area": "",
+        "damage": "4d6",
+        "duration": "instantaneous",
+        "level": "1st Level",
+        "range": "Touch",
+        "save": "",
+        "school": "Evocation",
+        "target": "one creature or object"
+      },
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "msak",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": false,
+          "tech": true,
+          "wysh": true
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "EAC",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "4d6",
+              "operator": "",
+              "types": {
+                "electricity": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p style=\"text-align: justify;\">You touch a target with a device you’re holding that uses electricity, requiring a melee attack against the target’s EAC. Alternatively, you can instead touch an electrical device a target is wearing (or a target that is an electrical device, such as a robot) with your hand, gaining a +2 bonus to your attack roll. Either way, if your attack hits, the electrical device surges out of control, dealing 4d6 electricity damage to your target.<br><br>Casting this spell doesn’t provoke attacks of opportunity.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "instantaneous"
+        },
+        "formula": "",
+        "level": 1,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "",
+          "prepared": false
+        },
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "touch",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "school": "evo",
+        "source": "Starfinder Core Rulebook pg. 363",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": "one creature or object"
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Supercharge Weapon (3/Day)",
+      "type": "spell",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "level": "3rd Level",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "allowedClasses": {
+          "myst": false,
+          "tech": false,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "level": 3,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": false
+        },
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "",
+        "source": "",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Detect Tech (At Will)",
+      "type": "spell",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "level": "0 Level",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "allowedClasses": {
+          "myst": false,
+          "tech": false,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "level": 0,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": false
+        },
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "",
+        "source": "",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Teleport (Self Only) (At Will)",
+      "type": "spell",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "level": "0 Level",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "allowedClasses": {
+          "myst": false,
+          "tech": false,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "level": 0,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": false
+        },
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "",
+        "source": "",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Transfer Charge (DC 13) (At Will)",
+      "type": "spell",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "systems/sfrpg/icons/spells/transfert_charge.webp",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "1 S. Action",
+        "area": "",
+        "damage": "",
+        "duration": "instantaneous",
+        "level": "0 Level",
+        "range": "Touch",
+        "save": "DC  Fortitude",
+        "school": "Transmutation",
+        "target": "two objects of the same type; see text"
+      },
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": false,
+          "tech": true,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p style=\"text-align: justify;\">You can transfer any number of charges from one battery to another battery or from one power cell to another power cell. You can only transfer charges using two objects of the exact same type (two batteries of the same size, two identical power cells, or the like); you transfer charges from the source object to the receiving object.<br><br>You must declare how many charges you are transferring before casting this spell. If you transfer more charges from the source than the receiving item can hold, the receiving item must succeed at a Fortitude saving throw or take 1d6 electricity damage. This spell provides no knowledge of how many charges a receiving item can safely hold, but you can choose to transfer fewer charges than the maximum allowed to reduce the risk.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": "instantaneous"
+        },
+        "formula": "",
+        "level": 0,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "",
+          "prepared": false
+        },
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "touch",
+          "value": null
+        },
+        "save": {
+          "type": "fort",
+          "dc": null,
+          "descriptor": "object"
+        },
+        "school": "trs",
+        "source": "Starfinder Core Rulebook pg. 383",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": "two objects of the same type; see text"
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Electric Bolt (Su)",
+      "type": "feat",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">The power archon can unleash an electric bolt as a melee attack or ranged attack. Both versions can be used to deal nonlethal damage without penalty. The ranged attack has a range increment of 30 feet.</span></p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    }
+  ],
+  "system": {
     "abilities": {
       "cha": {
         "base": 2,
@@ -434,1385 +1813,6 @@
       "sr": 0
     }
   },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "items": [
-    {
-      "name": "Aura of Menace (Su)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "Any creature hostile to the power archon within its aura of menace must attempt a Will saving throw. A creature that fails the save takes a -2 penalty to AC, attack rolls, and saving throws for 24 hours or until it deals damage to the archon. When the effect ends for a creature, that creature can’t be affected again by the same archon’s aura for 24 hours."
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Electric Bolt (Su)",
-      "type": "weapon",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "eac",
-        "actionType": "mwak",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 13,
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 0,
-          "value": 0
-        },
-        "chatFlavor": "",
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "critical arc 1d4",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d4+5",
-              "operator": "",
-              "types": {
-                "electricity": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "The power archon can unleash an electric bolt as a melee attack or ranged attack. Both versions can be used to deal nonlethal damage without penalty. The ranged attack has a range increment of 30 feet."
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "equipped": false,
-        "formula": "",
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
-        "quantity": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "source": "",
-        "special": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        },
-        "weaponType": "basicM"
-      },
-      "flags": {},
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "1d4+5",
-        "duration": "",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Electric Bolt (Su)",
-      "type": "weapon",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "eac",
-        "actionType": "rwak",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 13,
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 0,
-          "value": 0
-        },
-        "chatFlavor": "",
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "critical arc 1d4",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d4+5",
-              "operator": "",
-              "types": {
-                "electricity": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "The power archon can unleash an electric bolt as a melee attack or ranged attack. Both versions can be used to deal nonlethal damage without penalty. The ranged attack has a range increment of 30 feet."
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "equipped": false,
-        "formula": "",
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
-        "quantity": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "source": "",
-        "special": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        },
-        "weaponType": "smallA"
-      },
-      "flags": {},
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "1d4+5",
-        "duration": "",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Remote Operations (Su)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "A power archon can attempt Computers and Engineering checks at a range of 30 feet. A creature targeted by the archon or a creature attending or observing the archon’s target can discern what the archon is doing with a successful DC 15 Perception check."
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Discharge (DC 15) (1/Day)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": true,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">You can dissipate the charges from one technological object, temporarily depower one electrically powered technological object that does not use charges, or severely hinder a construct with the technological subtype. If the spell targets an object with charges, the object loses all of its remaining charges. If the object is powered by electrical means other than charges, its functions are suppressed for 1d4 rounds. If the spell targets a creature not of the technological subtype, it affects a random charged or electrically powered item in that creature’s possession. If the target is a construct with the technological subtype, it is @Compendium[sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} and cannot use any energy-based attacks for 1d4 rounds. A construct with the technological subtype that is affected by this spell can attempt a Fortitude saving throw at the end of each round to shrug off the effect.&nbsp;</span></p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "instantaneous"
-        },
-        "formula": "",
-        "level": 3,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "",
-          "prepared": false
-        },
-        "range": {
-          "additional": "10",
-          "per": "level",
-          "units": "ft",
-          "value": 100
-        },
-        "save": {
-          "type": "fort",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "school": "abj",
-        "source": "Core Rulebook",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": "one creature or technological object"
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "systems/sfrpg/icons/spells/discharge.webp",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "1 S. Action",
-        "area": "",
-        "damage": "",
-        "duration": "instantaneous",
-        "level": "3rd Level",
-        "range": "100 Feet",
-        "save": "DC  Fortitude",
-        "school": "Abjuration",
-        "target": "one creature or technological object"
-      }
-    },
-    {
-      "name": "Recharge (DC 15) (1/Day)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": null,
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": false,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": null,
-          "prepared": false
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "school": "",
-        "source": "",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "level": "1st Level",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Jolting Surge (3/Day)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "msak",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": true,
-          "wysh": true
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "EAC",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "4d6",
-              "operator": "",
-              "types": {
-                "electricity": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p style=\"text-align: justify;\">You touch a target with a device you’re holding that uses electricity, requiring a melee attack against the target’s EAC. Alternatively, you can instead touch an electrical device a target is wearing (or a target that is an electrical device, such as a robot) with your hand, gaining a +2 bonus to your attack roll. Either way, if your attack hits, the electrical device surges out of control, dealing 4d6 electricity damage to your target.<br><br>Casting this spell doesn’t provoke attacks of opportunity.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "instantaneous"
-        },
-        "formula": "",
-        "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "",
-          "prepared": false
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "school": "evo",
-        "source": "Starfinder Core Rulebook pg. 363",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": "one creature or object"
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": true,
-      "hasUses": false,
-      "img": "systems/sfrpg/icons/spells/jolting_surge.webp",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "1 S. Action",
-        "area": "",
-        "damage": "4d6",
-        "duration": "instantaneous",
-        "level": "1st Level",
-        "range": "Touch",
-        "save": "",
-        "school": "Evocation",
-        "target": "one creature or object"
-      }
-    },
-    {
-      "name": "Supercharge Weapon (3/Day)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": null,
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": false,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "level": 3,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": null,
-          "prepared": false
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "school": "",
-        "source": "",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "level": "3rd Level",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Detect Tech (At Will)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": null,
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": false,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "level": 0,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": null,
-          "prepared": false
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "school": "",
-        "source": "",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "level": "0 Level",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Teleport (Self Only) (At Will)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": null,
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": false,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "level": 0,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": null,
-          "prepared": false
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "school": "",
-        "source": "",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "level": "0 Level",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Transfer Charge (DC 13) (At Will)",
-      "type": "spell",
-      "data": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "save",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "allowedClasses": {
-          "myst": false,
-          "tech": true,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p style=\"text-align: justify;\">You can transfer any number of charges from one battery to another battery or from one power cell to another power cell. You can only transfer charges using two objects of the exact same type (two batteries of the same size, two identical power cells, or the like); you transfer charges from the source object to the receiving object.<br><br>You must declare how many charges you are transferring before casting this spell. If you transfer more charges from the source than the receiving item can hold, the receiving item must succeed at a Fortitude saving throw or take 1d6 electricity damage. This spell provides no knowledge of how many charges a receiving item can safely hold, but you can choose to transfer fewer charges than the maximum allowed to reduce the risk.</p>"
-        },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": "instantaneous"
-        },
-        "formula": "",
-        "level": 0,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
-        "modifiers": [],
-        "preparation": {
-          "mode": "",
-          "prepared": false
-        },
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
-        },
-        "save": {
-          "type": "fort",
-          "dc": null,
-          "descriptor": "object"
-        },
-        "school": "trs",
-        "source": "Starfinder Core Rulebook pg. 383",
-        "sr": true,
-        "target": {
-          "type": "",
-          "value": "two objects of the same type; see text"
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "systems/sfrpg/icons/spells/transfert_charge.webp",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "1 S. Action",
-        "area": "",
-        "damage": "",
-        "duration": "instantaneous",
-        "level": "0 Level",
-        "range": "Touch",
-        "save": "DC  Fortitude",
-        "school": "Transmutation",
-        "target": "two objects of the same type; see text"
-      }
-    },
-    {
-      "name": "Electric Bolt (Su)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">The power archon can unleash an electric bolt as a melee attack or ranged attack. Both versions can be used to deal nonlethal damage without penalty. The ranged attack has a range increment of 30 feet.</span></p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    }
-  ],
   "token": {
     "name": "Power Archon",
     "actorData": {},

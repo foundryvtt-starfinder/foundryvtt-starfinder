@@ -18,7 +18,7 @@ function onCanvasReady(...args) {
 
 function onTokenCreated(document, options, userId) {
     if (!canvas.initialized) { return; }
-    if (getProperty(document.data, "flags.sfrpg.itemCollection")) {
+    if (getProperty(document, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === document.id);
         if (token) {
             trySetupLootToken(token);
@@ -28,7 +28,7 @@ function onTokenCreated(document, options, userId) {
 
 function onTokenUpdated(document, options, userId) {
     if (!canvas.initialized) { return; }
-    if (getProperty(document.data, "flags.sfrpg.itemCollection")) {
+    if (getProperty(document, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === document.id);
         if (token) {
             trySetupLootToken(token);
@@ -79,24 +79,9 @@ export const measureDistances = function(segments, options={}) {
             return spaces * canvas.dimensions.distance;
         }
 
-        return (ns + nd) * canvas.scene.data.gridDistance;
+        return (ns + nd) * canvas.scene.gridDistance;
     });
 };
-
-/**
- * Hijack Token health bar rendering to include temporary and temp-max health in the bar display
- * TODO: This should probably be replaced with a formal Token Class extension
- */
-const _TokenGetBarAttribute = Token.prototype.getBarAttribute;
-export const getBarAttribute = function (...args) {
-    const data = _TokenGetBarAttribute.bind(this)(...args);
-    if (data && data.attribute === "attributes.hp") {
-        data.value += parseInt(data['temp'] || 0);
-        data.max += parseInt(data['tempmax'] || 0);
-    }
-
-    return data;
-}
 
 /**
  * Places an item collection on the canvas as a token for players to interact with.
@@ -116,8 +101,8 @@ function placeItemCollectionOnCanvas(x, y, itemData, deleteIfEmpty) {
     }
 
     for (const item of itemData) {
-        if (item.data.equipped) {
-            item.data.equipped = false;
+        if (item.system.equipped) {
+            item.system.equipped = false;
         }
     }
 
@@ -159,7 +144,7 @@ function setupLootCollectionTokenInteraction(lootCollectionToken, updateApps = f
 
 function openLootCollectionSheet(event) {
     const relevantToken = this;
-    if (relevantToken.data.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
+    if (relevantToken.document.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
         ui.notifications.info(game.i18n.format("SFRPG.ItemCollectionSheet.ItemCollectionLocked"));
         return;
     }
@@ -177,7 +162,7 @@ async function handleCanvasDropAsync(canvas, data) {
     const document = await Item.fromDropData(data);
     let sourceActor = null;
     const sourceItem = document;
-    const sourceItemData = foundry.utils.duplicate(document.data);
+    const sourceItemData = foundry.utils.duplicate(document.system);
 
     if (document?.parent?.isToken ?? false) {
         sourceActor = new ActorItemHelper(document.parent._id, document.parent.parent._id, document.parent.parent.parent._id);
@@ -197,28 +182,24 @@ async function handleCanvasDropAsync(canvas, data) {
 
     // Create a placeable instead and do item transferral there.
     if (targetActor === null) {
-        let transferringItems = [sourceItemData];
-        if (sourceActor !== null && sourceItemData.system.container?.contents && sourceItemData.system.container.contents.length > 0) {
+        let transferringItems = [sourceItem];
+        if (sourceActor !== null && sourceItemData.container?.contents && sourceItemData.container.contents.length > 0) {
             const containersToTest = [sourceItemData];
             while (containersToTest.length > 0)
             {
                 const container = containersToTest.shift();
-                const children = sourceActor.filterItems(x => container.data.container.contents.find(y => y.id === x.id));
+                const children = sourceActor.filterItems(x => container.container.contents.find(y => y.id === x.id));
                 if (children) {
                     for (const child of children) {
-                        transferringItems.push(child.data);
+                        transferringItems.push(child);
 
-                        if (child.data.data.container?.contents && child.data.data.container.contents.length > 0) {
-                            containersToTest.push(child.data);
+                        if (child.system.container?.contents && child.system.container.contents.length > 0) {
+                            containersToTest.push(child);
                         }
                     }
                 }
             }
         }
-        transferringItems = transferringItems.map(x => { //"rename" .system to .data so placeItemCollectionOnCanvas reads it correctly.
-            x.data = x.system;
-            return x;
-        });
         const hasDropped = placeItemCollectionOnCanvas(data.x, data.y, transferringItems, true);
         if (hasDropped) {
             // Remove old items

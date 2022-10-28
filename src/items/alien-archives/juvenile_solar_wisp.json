@@ -2,7 +2,580 @@
   "_id": "D3QMpcrKxzwm1Cww",
   "name": "Juvenile Solar Wisp",
   "type": "npc2",
-  "data": {
+  "flags": {},
+  "img": "icons/svg/mystery-man.svg",
+  "items": [
+    {
+      "name": "Void Adaptation",
+      "type": "feat",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<h3>(EX OR SU)</h3>\n<h3>Numerous creatures are inured to the void of outer space. A creature with void adaptation has the following abilities.</h3>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath (see page 152).</li>\n</ul>\n<hr>\n<h3>&nbsp;</h3>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Slam",
+      "type": "weapon",
+      "flags": {},
+      "hasAttack": true,
+      "hasCapacity": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "1d6+8",
+        "duration": "",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": "",
+        "acceptedItemTypes": {
+          "augmentation": false,
+          "consumable": false,
+          "container": false,
+          "equipment": false,
+          "fusion": true,
+          "goods": false,
+          "technological": false,
+          "upgrade": false,
+          "weapon": false
+        },
+        "actionTarget": "eac",
+        "actionType": "mwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 15,
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "chatFlavor": "",
+        "containedItemIds": [],
+        "container": {
+          "contents": [],
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "formula": "1d6+8",
+              "operator": "",
+              "types": {
+                "fire": true
+              }
+            }
+          ]
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
+        "properties": {},
+        "quantity": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "special": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        },
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "name": "Engulf (1d6+8 F, DC 13)",
+      "type": "feat",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "1 S. Action",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Action",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<h3>(EX)</h3>\n<h3>As a standard action, the creature can move up to its speed, moving into or through the space of any creatures that are at least one size smaller than itself without penalty. Every creature in the engulfing creature’s path is automatically engulfed, with no attack roll needed. A targeted creature can attempt a Reflex saving throw to avoid being engulfed; if it attempts this save, it can’t make an attack of opportunity against the engulfing creature due to that creature’s movement. On a successful save, the target is pushed back or aside (target’s choice) as the engulfing creature continues to move. An engulfed creature gains the @Compendium[sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned} condition, takes the listed damage at the beginning of each turn it is engulfed, is in danger of suffocating if it doesn’t have @Compendium[sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections}, and is trapped within the engulfing creature’s body until it is no longer @Compendium[sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}. An engulfed creature moves with the engulfing creature; this movement does not provoke attacks of opportunity against the engulfed creature. A creature can engulf one creature that is one size smaller than itself, up to two creatures that are two sizes smaller, or up to four creatures that are three sizes smaller.</h3>\n<hr>\n<h3>&nbsp;</h3>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": ""
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": null,
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Aglow (Ex) (20 ft.)",
+      "type": "feat",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A solar wisp increases the light level by one step out to a radius of 10 feet &times; half the solar wisp&rsquo;s CR.</p>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Solar Adaptation",
+      "type": "feat",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<h3>(EX OR SU)</h3>\n<h3>The creature can survive within a star despite the luminance, pressure, radiation, and convection currents. In addition, while within a star, the creature can move as if it had a supernatural fly speed equal to its fastest speed.</h3>\n<h3>Guidelines: A creature with solar adaptation should also have the fire subtype or immunity to fire.</h3>\n<hr>\n<h3>&nbsp;</h3>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "name": "Spaceflight",
+      "type": "feat",
+      "flags": {},
+      "hasAttack": false,
+      "hasUses": false,
+      "img": "icons/svg/mystery-man.svg",
+      "isCharged": true,
+      "isOnCooldown": false,
+      "isStack": false,
+      "labels": {
+        "activation": "",
+        "area": "",
+        "damage": "",
+        "duration": "",
+        "featType": "Passive",
+        "range": "",
+        "save": "",
+        "target": ""
+      },
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "unidentified": "",
+          "value": "<h3>(SU)</h3>\n<h3>The creature can fly through space at standard navigation and astrogation speeds (Core Rulebook 290) using Piloting to navigate. If it uses a skill other than Piloting for skill checks to astrogate, that skill is listed in parentheses.</h3>\n<h3>Guidelines: Most creatures with spaceflight also have @Compendium[sfrpg.universal-creature-rules.Zo5poFuFlNvLYMwh]{Void Adaptation}.</h3>\n<hr>\n<h3>&nbsp;</h3>"
+        },
+        "descriptors": [],
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "modifiers": [],
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    }
+  ],
+  "system": {
     "abilities": {
       "cha": {
         "base": 0,
@@ -434,579 +1007,6 @@
       "sr": 0
     }
   },
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "items": [
-    {
-      "name": "Void Adaptation",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<h3>(EX OR SU)</h3>\n<h3>Numerous creatures are inured to the void of outer space. A creature with void adaptation has the following abilities.</h3>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath (see page 152).</li>\n</ul>\n<hr>\n<h3>&nbsp;</h3>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Slam",
-      "type": "weapon",
-      "data": {
-        "type": "",
-        "ability": "",
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": true,
-          "goods": false,
-          "technological": false,
-          "upgrade": false,
-          "weapon": false
-        },
-        "actionTarget": "eac",
-        "actionType": "mwak",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 15,
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 0,
-          "value": 0
-        },
-        "chatFlavor": "",
-        "containedItemIds": [],
-        "container": {
-          "contents": [],
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "1d6+8",
-              "operator": "",
-              "types": {
-                "fire": true
-              }
-            }
-          ]
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "formula": "",
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "proficient": true,
-        "properties": {},
-        "quantity": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "special": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        },
-        "weaponType": "basicM"
-      },
-      "flags": {},
-      "hasAttack": true,
-      "hasCapacity": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "1d6+8",
-        "duration": "",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Engulf (1d6+8 F, DC 13)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "action",
-          "condition": "",
-          "cost": 1
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": null,
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<h3>(EX)</h3>\n<h3>As a standard action, the creature can move up to its speed, moving into or through the space of any creatures that are at least one size smaller than itself without penalty. Every creature in the engulfing creature’s path is automatically engulfed, with no attack roll needed. A targeted creature can attempt a Reflex saving throw to avoid being engulfed; if it attempts this save, it can’t make an attack of opportunity against the engulfing creature due to that creature’s movement. On a successful save, the target is pushed back or aside (target’s choice) as the engulfing creature continues to move. An engulfed creature gains the @Compendium[sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned} condition, takes the listed damage at the beginning of each turn it is engulfed, is in danger of suffocating if it doesn’t have @Compendium[sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections}, and is trapped within the engulfing creature’s body until it is no longer @Compendium[sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}. An engulfed creature moves with the engulfing creature; this movement does not provoke attacks of opportunity against the engulfed creature. A creature can engulf one creature that is one size smaller than itself, up to two creatures that are two sizes smaller, or up to four creatures that are three sizes smaller.</h3>\n<hr>\n<h3>&nbsp;</h3>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": ""
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": ""
-        },
-        "uses": {
-          "max": 0,
-          "per": "",
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "1 S. Action",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Action",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Aglow (Ex) (20 ft.)",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<p>A solar wisp increases the light level by one step out to a radius of 10 feet &times; half the solar wisp&rsquo;s CR.</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Solar Adaptation",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<h3>(EX OR SU)</h3>\n<h3>The creature can survive within a star despite the luminance, pressure, radiation, and convection currents. In addition, while within a star, the creature can move as if it had a supernatural fly speed equal to its fastest speed.</h3>\n<h3>Guidelines: A creature with solar adaptation should also have the fire subtype or immunity to fire.</h3>\n<hr>\n<h3>&nbsp;</h3>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    },
-    {
-      "name": "Spaceflight",
-      "type": "feat",
-      "data": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "unidentified": "",
-          "value": "<h3>(SU)</h3>\n<h3>The creature can fly through space at standard navigation and astrogation speeds (Core Rulebook 290) using Piloting to navigate. If it uses a skill other than Piloting for skill checks to astrogate, that skill is listed in parentheses.</h3>\n<h3>Guidelines: Most creatures with spaceflight also have @Compendium[sfrpg.universal-creature-rules.Zo5poFuFlNvLYMwh]{Void Adaptation}.</h3>\n<hr>\n<h3>&nbsp;</h3>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      },
-      "flags": {},
-      "hasAttack": false,
-      "hasUses": false,
-      "img": "icons/svg/mystery-man.svg",
-      "isCharged": true,
-      "isOnCooldown": false,
-      "isStack": false,
-      "labels": {
-        "activation": "",
-        "area": "",
-        "damage": "",
-        "duration": "",
-        "featType": "Passive",
-        "range": "",
-        "save": "",
-        "target": ""
-      }
-    }
-  ],
   "token": {
     "name": "Juvenile Solar Wisp",
     "actorData": {},

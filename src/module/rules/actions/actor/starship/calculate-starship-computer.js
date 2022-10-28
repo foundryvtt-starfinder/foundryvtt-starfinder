@@ -9,7 +9,7 @@ export default function (engine) {
         };
 
         if (computers && computers.length > 0) {
-            const computerData = computers[0].data.data;
+            const computerData = computers[0].system;
 
             data.attributes.computer.value = computerData.modifier;
             data.attributes.computer.tooltip.push(

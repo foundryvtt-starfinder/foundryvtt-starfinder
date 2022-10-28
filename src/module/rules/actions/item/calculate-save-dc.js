@@ -4,8 +4,8 @@ import RollContext from "../../../rolls/rollcontext.js";
 export default function (engine) {
     engine.closures.add("calculateSaveDC", (fact, context) => {
         const item = fact.item;
-        const itemData = fact.itemData;
-        const data = itemData.data;
+        const itemData = item;
+        const data = itemData.system;
 
         const actor = fact.owner.actor;
         const actorData = fact.owner.actorData;
@@ -18,10 +18,10 @@ export default function (engine) {
 
                 let dcFormula = save.dc?.toString();
                 if (!dcFormula) {
-                    const ownerKeyAbilityId = actorData?.attributes.keyability  || classes[0]?.data.data.kas;
+                    const ownerKeyAbilityId = actorData?.attributes.keyability  || classes[0]?.system.kas;
                     const itemKeyAbilityId = data.ability;
                     const spellbookSpellAbility = actorData?.attributes.spellcasting
-                    const classSpellAbility = classes[0]?.data.data.spellAbility;
+                    const classSpellAbility = classes[0]?.system.spellAbility;
 
                     const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
                     if (abilityKey) {

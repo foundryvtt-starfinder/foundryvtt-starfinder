@@ -25,10 +25,10 @@ export class ActorMovementConfig extends DocumentSheet {
 
   /** @override */
   getData(options) {
-    const sourceMovement = foundry.utils.getProperty(this.document.data._source, "data.attributes.speed") || {};
+    const sourceMovement = foundry.utils.getProperty(this.document._source, "system.attributes.speed") || {};
     const data = {
       speed: foundry.utils.deepClone(sourceMovement)
     };
-    return this.document.data;
+    return this.document;
   }
 }

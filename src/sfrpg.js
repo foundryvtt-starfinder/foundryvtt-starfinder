@@ -73,7 +73,7 @@ Hooks.once('init', async function () {
 ==================================================`
     );
 
-    CONFIG.compatibility.mode = CONST.COMPATIBILITY_MODES.SILENT;
+    // CONFIG.compatibility.mode = CONST.COMPATIBILITY_MODES.SILENT;
 
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
@@ -293,7 +293,7 @@ Hooks.once("ready", async () => {
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
-        const systemSchema = Number(game.system.data.flags.sfrpg.schema);
+        const systemSchema = Number(game.system.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
 
         let migrationPromise = null;
@@ -342,8 +342,8 @@ async function migrateOldContainers() {
     }
 
     for (const scene of game.scenes.contents) {
-        for (const token of scene.data.tokens) {
-            if (!token.data.actorLink) {
+        for (const token of scene.tokens) {
+            if (!token.actorLink) {
                 const sheetActorHelper = new ActorItemHelper(token.actor?.id ?? token.actorId, token.id, scene.id);
                 const migrationProcess = sheetActorHelper.migrateItems();
                 if (migrationProcess) {
@@ -362,7 +362,6 @@ async function migrateOldContainers() {
 Hooks.on("canvasInit", function () {
     canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
     SquareGrid.prototype.measureDistances = measureDistances;
-    // Token.prototype.getBarAttribute = getBarAttribute;
 });
 
 Hooks.on("renderChatMessage", (app, html, data) => {
@@ -376,13 +375,13 @@ Hooks.on("renderChatLog", (app, html, data) => ItemSFRPG.chatListeners(html));
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {
     if (data.type !== "Item") return;
-    createItemMacro(data.data, slot);
+    createItemMacro(data, slot);
     return false;
 });
 
 Hooks.on("createActor", function(actor, options, actorId) {
     const autoLinkedTypes = ['character', 'drone'];
-    if (autoLinkedTypes.includes(actor.data.type)) {
+    if (autoLinkedTypes.includes(actor.type)) {
         actor.update({
             "token.actorLink": true
         });
@@ -415,11 +414,12 @@ function registerMathFunctions() {
  * Create a Macro form an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.
  * 
- * @param {Object} item The item data
+ * @param {Object} data The item data
  * @param {number} slot The hotbar slot to use
  * @returns {Promise}
  */
-async function createItemMacro(item, slot) {
+async function createItemMacro(data, slot) {
+    const item = await Item.fromDropData(data);
     const command = `game.sfrpg.rollItemMacro("${item.name}");`;
     let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
@@ -444,7 +444,7 @@ function rollItemMacro(itemName) {
     const item = actor ? actor.items.find(i => i.name === itemName) : null;
     if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
 
-    if (item.data.type === 'spell') return actor.useSpell(item);
+    if (item.type === 'spell') return actor.useSpell(item);
     return item.roll();
 }
 
@@ -519,8 +519,8 @@ function setupHandlebars() {
 
     Handlebars.registerHelper('getTotalStorageCapacity', function (item) {
         let totalCapacity = 0;
-        if (item?.data?.container?.storage && item.data.container.storage.length > 0) {
-            for (let storage of item.data.container.storage) {
+        if (item?.system?.container?.storage && item.system.container.storage.length > 0) {
+            for (let storage of item.system.container.storage) {
                 totalCapacity += storage.amount;
             }
         }
@@ -578,27 +578,6 @@ function setupHandlebars() {
     /** Returns the value based on whether left is null or not. */
     Handlebars.registerHelper('leftOrRight', function (left, right) {
         return left || right;
-    });
-
-    Handlebars.registerHelper('editorPlus', function (options) {
-        const target = options.hash['target'];
-        if ( !target ) throw new Error("You must define the name of a target field.");
-    
-        // Enrich the content
-        const isOwner = Boolean(options.hash['isOwner']);
-        const rolls = Boolean(options.hash['rolls']);
-        const rollData = options.hash['rollData'];
-        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: isOwner, documents: true, rolls: rolls, rollData: rollData});
-        const maxSize = Boolean(options.hash['maxSize']) ? ` style="flex: 1;"` : "";
-    
-        // Construct the HTML
-        let editor = $(`<div class="editor flexcol"${maxSize}><div class="editor-content"${maxSize} data-edit="${target}">${content}</div></div>`);
-    
-        // Append edit button
-        const button = Boolean(options.hash['button']);
-        const editable = Boolean(options.hash['editable']);
-        if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
-        return new Handlebars.SafeString(editor[0].outerHTML);
     });
 
     Handlebars.registerHelper('createTippy', function (options) {
@@ -667,7 +646,7 @@ function setupHandlebars() {
 
 Hooks.on("renderSidebarTab", async (app, html) => {
     if (app.options.id === "settings") {
-        const textToAdd = `<br/><a href="https://github.com/wildj79/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
+        const textToAdd = `<br/><a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
         const gameDetails = document.getElementById("game-details");
         if (gameDetails) {
             const systemSection = gameDetails.getElementsByClassName("system")[0];

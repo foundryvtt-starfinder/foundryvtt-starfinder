@@ -2,7 +2,7 @@ import { SFRPG } from "../../../config.js";
 
 function computeCompoundBulkForItem(item, contents) {
     let contentBulk = 0;
-    const itemData = item.data.data;
+    const itemData = item.system;
     //console.log(["computeCompoundBulk", item?.name, contents]);
     if (itemData?.container?.storage && itemData.container.storage.length > 0) {
         for (const storage of itemData.container.storage) {
@@ -65,7 +65,7 @@ function computeCompoundBulkForItem(item, contents) {
         totalBulk: personalBulk + contentBulk
     }
 
-    item.data.itemBulk = itemBulk;
+    item.itemBulk = itemBulk;
 
     //console.log(`${item?.name || "null"} has a content bulk of ${contentBulk}, and personal bulk of ${personalBulk}`);
     return itemBulk;
@@ -81,7 +81,7 @@ function computeCompoundWealthForItem(item, contents, depth = 1) {
     console.log(`${arrows} ${item?.name || "null"} start`); //*/
 
     let contentWealth = 0;
-    const itemData = item.data.data;
+    const itemData = item.system;
     if (itemData?.container?.includeContentsInWealthCalculation) {
         if (itemData?.container?.storage && itemData.container.storage.length > 0) {
             for (const storage of itemData.container.storage) {
@@ -133,7 +133,7 @@ function computeCompoundWealthForItem(item, contents, depth = 1) {
         item.contentWealth = itemWealth.contentWealth;
     }
     
-    item.data.itemWealth = itemWealth;
+    item.itemWealth = itemWealth;
 
     //console.log(`${arrows} ${item?.name || "null"} has a content wealth of ${itemWealth.contentWealth}, and personal wealth of ${itemWealth.personalWealth}, totalling in at ${itemWealth.totalWealth}`);
     return itemWealth;
@@ -158,7 +158,7 @@ function computeWealthForActor(actor, inventoryWealth) {
     wealth.inventory = Math.floor(inventoryWealth);
     wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.Inventory", {amount: moneyFormatter.format(wealth.inventory)}));
 
-    const actorData = actor.data.data;
+    const actorData = actor.system;
     if (actorData.currency && Object.entries(actorData.currency).length > 0) {
         for (const [currency, amount] of Object.entries(actorData.currency)) {
             const currencyValue = Number(amount);
@@ -197,7 +197,7 @@ export default function (engine) {
     engine.closures.add("calculateBulkAndWealth", (fact, context) => {
         const data = fact.data;
         const actor = fact.actor;
-        const actorData = actor.data.data;
+        const actorData = actor.system;
 
         //console.warn(`Starting calculateBulkAndWealth for ${actor.name}`);
 
@@ -207,9 +207,9 @@ export default function (engine) {
         // Compute ownership tree
         for (const item of physicalItems) {
             item.contents = [];
-            item.parentItem = items.find(x => x.data.data.container?.contents && x.data.data.container.contents.find(y => y.id === item.id));
-            if (item.data.data?.container?.contents?.length > 0) {
-                for (const containedItemEntry of item.data.data.container.contents) {
+            item.parentItem = items.find(x => x.system.container?.contents && x.system.container.contents.find(y => y.id === item.id));
+            if (item.system?.container?.contents?.length > 0) {
+                for (const containedItemEntry of item.system.container.contents) {
                     const containedItem = items.find(x => x.id === containedItemEntry.id);
                     if (containedItem) {
                         item.contents.push(containedItem);
@@ -219,38 +219,38 @@ export default function (engine) {
         }
 
         for (const item of physicalItems) {
-            const i = item.data;
-            i.img = i.img || DEFAULT_TOKEN;
+            const i = item.system;
+            i.img = item.img || DEFAULT_TOKEN;
 
-            i.data.quantity = i.data.quantity || 0;
-            i.data.price = i.data.price || 0;
-            i.data.bulk = i.data.bulk || "-";
-            i.isOpen = i.data.container?.isOpen === undefined ? true : i.data.container.isOpen;
+            i.quantity = i.quantity || 0;
+            i.price = i.price || 0;
+            i.bulk = i.bulk || "-";
+            i.isOpen = i.container?.isOpen === undefined ? true : i.container.isOpen;
 
             let weight = 0;
-            if (i.data.bulk === "L") {
+            if (i.bulk === "L") {
                 weight = 0.1;
-            } else if (i.data.bulk === "-") {
+            } else if (i.bulk === "-") {
                 weight = 0;
             } else {
-                weight = parseFloat(i.data.bulk);
+                weight = parseFloat(i.bulk);
             }
 
             // Compute number of packs based on quantityPerPack, provided quantityPerPack is set to a value.
             let packs = 1;
-            if (i.data.quantityPerPack === null || i.data.quantityPerPack === undefined) {
-                packs = i.data.quantity;
+            if (i.quantityPerPack === null || i.quantityPerPack === undefined) {
+                packs = i.quantity;
             } else {
-                if (i.data.quantityPerPack <= 0) {
+                if (i.quantityPerPack <= 0) {
                     packs = 0;
                 } else {
-                    packs = Math.floor(i.data.quantity / i.data.quantityPerPack);
+                    packs = Math.floor(i.quantity / i.quantityPerPack);
                 }
             }
 
             i.totalWeight = packs * weight;
-            if (i.data.equippedBulkMultiplier !== undefined && i.data.equipped) {
-                i.totalWeight *= i.data.equippedBulkMultiplier;
+            if (i.equippedBulkMultiplier !== undefined && i.equipped) {
+                i.totalWeight *= i.equippedBulkMultiplier;
             }
             i.totalWeight = i.totalWeight < 1 && i.totalWeight > 0 ? "L" : 
                             i.totalWeight === 0 ? "-" : Math.floor(i.totalWeight);
@@ -277,11 +277,11 @@ export default function (engine) {
             //console.log(`> ${item.name} has a total weight of ${itemBulk}, bringing the sum to ${totalWeight}`);
         }
 
-        actor.data.bulk = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
-        actor.data.wealth = computeWealthForActor(actor, totalWealth);
+        actorData.bulk = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
+        actorData.wealth = computeWealthForActor(actor, totalWealth);
         
-        data.wealth = actor.data.wealth;
-        data.bulk = actor.data.bulk;
+        data.wealth = actorData.wealth;
+        data.bulk = actorData.bulk;
 
         //console.warn(`Finished calculateBulkAndWealth for ${actor.name}, total wealth: ${data.wealth.total}, total weight: ${totalWeight}`);
 

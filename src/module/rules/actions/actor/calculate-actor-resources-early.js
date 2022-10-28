@@ -3,7 +3,7 @@ import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../..
 export default function (engine) {
     engine.closures.add('calculateActorResources', (fact, context) => {
         const data = fact.data;
-        const actorResources = fact.actorResources.filter(x => x.data.data.stage !== "late");
+        const actorResources = fact.actorResources.filter(x => x.system.stage !== "late");
         const modifiers = fact.modifiers;
 
         const addModifier = (bonus, data, item, localizationKey) => {
@@ -41,7 +41,7 @@ export default function (engine) {
         });
 
         for (const actorResource of actorResources) {
-            const resourceData = actorResource.data.data;
+            const resourceData = actorResource.system;
             if (resourceData.enabled && resourceData.type && resourceData.subType && (resourceData.base || resourceData.base === 0)) {
                 const modifierKey = `${resourceData.type}.${resourceData.subType}`;
                 const filteredMods = actorResourceMods.filter(mod => mod.valueAffected === modifierKey);
