@@ -1,3 +1,7 @@
+# v0.20.3 - Starfinder Hotfix
+
+Just a quick hotfix to correct an issue with drone sheets. They can now be opened normally.
+
 # v0.20.2 - Starfinder Update
 
 This is an update to address the many bugs that were identified from the last update. It includes a lot of big changes made to the underlying data model to be more inline with
