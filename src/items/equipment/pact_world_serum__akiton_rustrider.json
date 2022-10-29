@@ -2,19 +2,13 @@
   "_id": "pZDYu8OyYlvbR8Da",
   "name": "Pact World Serum,  Akiton Rustrider",
   "type": "consumable",
-  "effects": [],
-  "flags": {},
-  "img": "icons/consumables/potions/potion-tube-corked-red.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
-  "system": {
+  "data": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -30,17 +24,17 @@
     "attackBonus": 0,
     "attributes": {
       "ac": {
-        "value": ""
+        "value": "5"
       },
       "customBuilt": false,
       "dex": {
         "mod": ""
       },
       "hardness": {
-        "value": ""
+        "value": "2"
       },
       "hp": {
-        "max": "",
+        "max": "6",
         "value": 6
       },
       "size": "medium",
@@ -52,6 +46,7 @@
     "consumableType": "serum",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -73,12 +68,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Upon consumption, this bitter, rust-red fluid grants you a +2 insight bonus to Athletics and Survival checks, and you do not take a penalty to Survival checks when riding a creature bareback. This serum turns a regular drinker&rsquo;s teeth and lips rust-red in color&mdash;a side effect that Eppro Enterprises can&rsquo;t quite overcome.</p>\n<h2><strong>Serums</strong></h2>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum&rsquo;s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
+      "value": "<p>Upon consumption, this bitter, rust-red fluid grants you a +2 insight bonus to @Compendium[sfrpg.skills.HsCWctv7usPI6Gvd]{Athletics} and @Compendium[sfrpg.skills.mcAqh41q55fTj1vl]{Survival} checks, and you do not take a penalty to Survival checks when riding a creature bareback. This serum turns a regular drinker&rsquo;s teeth and lips rust-red in color&mdash;a side effect that Eppro Enterprises can&rsquo;t quite overcome.</p>\n<p>&nbsp;</p>\n<p><em>Enable/Disable modifiers in the Modifiers tab.</em></p>\n<p>&nbsp;</p>\n<h3><span class=\"fontstyle0\">Pact World Serums</span></h3>\n<p><span class=\"fontstyle2\">Nearly all cultures in the Pact Worlds use&nbsp;</span><span class=\"fontstyle3\">serums of enhancement</span><span class=\"fontstyle2\">, vials of magic liquids described on page 225 of the&nbsp;</span><span class=\"fontstyle3\">Starfinder Core Rulebook</span><span class=\"fontstyle2\">. Eppro Enterprises, a popular manufacturer of energy drinks and restoratives on Verces, has expended millions of credits in promoting its &ldquo;Pact Worlds&rdquo; line of serums, each with individual effects and flavors that capture the essence of one of the Pact Worlds. These serums are also sold mixed into drinks at bars across the system. Whether you buy into the hype of Eppro&rsquo;s products or not, its Pact Worlds serums are reliable and effective. As with all&nbsp;</span><span class=\"fontstyle3\">serums of enhancement</span><span class=\"fontstyle2\">, these serums are effective when imbibed by living creatures and last for 1 hour.</span></p>\n<h3>Serums</h3>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum&rsquo;s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -91,15 +87,48 @@
     "identified": true,
     "isActive": null,
     "level": 5,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "fb22c5e5-bbaa-4053-ab39-e873986fdbba",
+        "name": "Pact World Serum,  Akiton Rustrider",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Upon consumption, this bitter, rust-red fluid grants you a +2 insight bonus to Athletics and Survival checks, and you do not take a penalty to Survival checks when riding a creature bareback. This serum turns a regular drinker’s teeth and lips rust-red in color—a side effect that Eppro Enterprises can’t quite overcome.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "ath"
+      },
+      {
+        "_id": "68f26aae-527e-47b0-9edb-9e910b65eb13",
+        "name": "Pact World Serum,  Akiton Rustrider",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Upon consumption, this bitter, rust-red fluid grants you a +2 insight bonus to Athletics and Survival checks, and you do not take a penalty to Survival checks when riding a creature bareback. This serum turns a regular drinker’s teeth and lips rust-red in color—a side effect that Eppro Enterprises can’t quite overcome.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sur"
+      }
+    ],
     "price": 475,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -117,5 +146,6 @@
       "per": "charges",
       "value": 1
     }
-  }
+  },
+  "img": "icons/consumables/potions/potion-tube-corked-red.webp"
 }

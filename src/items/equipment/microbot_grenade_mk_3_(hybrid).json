@@ -2,9 +2,7 @@
   "_id": "kq19twr5msOFipct",
   "name": "Microbot Grenade, Mk 3 (Hybrid)",
   "type": "weapon",
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "system": {
+  "data": {
     "type": "",
     "ability": "str",
     "abilityMods": {
@@ -17,6 +15,7 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
       "shape": "",
@@ -51,6 +50,8 @@
     "chatFlavor": "see text",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -81,27 +82,40 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "3d6",
-          "operator": "",
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>When a microbot grenade detonates, the blast radius fills with microbots like those created by the microbot assault spell. The microbots consider only creatures in the blast radius to be the thrower&rsquo;s enemies, and they do not discriminate between the thrower&rsquo;s allies and enemies. The microbots last for 3 rounds. More advanced grenades create more dangerous microbots. The first time a creature leaves the area of the microbot cloud during a round, that creature takes an amount of magical piercing damage according to the grenade&rsquo;s type.</p>\n<ul>\n<li><strong>Mk 1 (Level 6):</strong>&nbsp;1d6</li>\n<li><strong>Mk 2 (Level 9):</strong>&nbsp;2d6</li>\n<li><strong>Mk 3 (Level 12):</strong>&nbsp;3d6</li>\n<li><strong>Mk 4 (Level 15):</strong>&nbsp;3d10</li>\n<li><strong>Mk 5 (Level 18):&nbsp;</strong>4d12</li>\n</ul>"
+      "value": "<p>When a microbot grenade detonates, the blast radius fills with microbots like those created by the @Compendium[sfrpg.spells.Gkz7AFZEefSmxE3R]{Microbot Assault} spell. The microbots consider only creatures in the blast radius to be the thrower&rsquo;s enemies, and they do not discriminate between the thrower&rsquo;s allies and enemies. The microbots last for 3 rounds. More advanced grenades create more dangerous microbots. The first time a creature leaves the area of the microbot cloud during a round, that creature takes an amount of magical piercing damage according to the grenade&rsquo;s type.</p>\n<ul>\n<li><strong>Mk 1 (Level 6):</strong>&nbsp;1d6</li>\n<li><strong>Mk 2 (Level 9):</strong>&nbsp;2d6</li>\n<li><strong>Mk 3 (Level 12):</strong>&nbsp;3d6</li>\n<li><strong>Mk 4 (Level 15):</strong>&nbsp;3d10</li>\n<li><strong>Mk 5 (Level 18):&nbsp;</strong>4d12</li>\n</ul>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": "3 rounds"
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 12,
     "modifiers": [],
     "price": 12500,
@@ -120,6 +134,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -138,6 +153,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -164,6 +180,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -172,7 +189,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -185,6 +204,7 @@
       "thought": false,
       "throttle": false,
       "thrown": true,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -194,19 +214,37 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "partial"
     },
-    "source": "",
+    "source": "AR pg. 126",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -216,11 +254,12 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": "",
-      "value": 0
+      "max": 1,
+      "per": "charges",
+      "value": 1
     },
     "weaponCategory": "",
     "weaponType": "grenade"
-  }
+  },
+  "img": "icons/svg/mystery-man.svg"
 }

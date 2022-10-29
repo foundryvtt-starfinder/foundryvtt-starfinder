@@ -2,19 +2,13 @@
   "_id": "kU0QoNy7PronK71I",
   "name": "Sophic philter",
   "type": "consumable",
-  "effects": [],
-  "flags": {},
-  "img": "icons/consumables/potions/bottle-conical-corked-purple.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
-  "system": {
+  "data": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -30,17 +24,17 @@
     "attackBonus": 0,
     "attributes": {
       "ac": {
-        "value": ""
+        "value": "5"
       },
       "customBuilt": false,
       "dex": {
         "mod": ""
       },
       "hardness": {
-        "value": ""
+        "value": "2"
       },
       "hp": {
-        "max": "",
+        "max": "6",
         "value": 6
       },
       "size": "medium",
@@ -52,6 +46,7 @@
     "consumableType": "serum",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -73,12 +68,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Emitted from a willing philosopher worm&rsquo;s magical cells, a sophic philter grants you a brief vision that attempts to answer whatever question is foremost in your mind when you drink it. This vision functions as if you cast a divination spell, but you spend no Resolve Point and have no chance of failure. In addition, tiny glowing runes matching the worm&rsquo;s appear on or around your sensory organs, granting you a +4 insight bonus to Diplomacy checks against insectile creatures of any creature type for 1 week.</p>"
+      "value": "<p>Emitted from a willing philosopher worm&rsquo;s magical cells, a sophic philter grants you a brief vision that attempts to answer whatever question is foremost in your mind when you drink it. This vision functions as if you cast a @Compendium[sfrpg.spells.APgLb0BS0VgtE06l]{Divination} spell, but you spend no Resolve Point and have no chance of failure. In addition, tiny glowing runes matching the worm&rsquo;s appear on or around your sensory organs, granting you a +4 insight bonus to @Compendium[sfrpg.skills.QGSqQDA9P7oYQp8z]{Diplomacy} checks against insectile creatures of any creature type for 1 week.<em><br /></em></p>\n<h3>Serums</h3>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum&rsquo;s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -100,9 +96,9 @@
         "effectType": "skill",
         "enabled": false,
         "max": 4,
-        "modifier": "+4",
+        "modifier": "4",
         "modifierType": "formula",
-        "notes": "",
+        "notes": "Tiny glowing runes matching the worm’s appear on or around your sensory organs, granting you a +4 insight bonus to  Diplomacy checks against insectile creatures of any creature type for 1 week.",
         "source": "",
         "subtab": "misc",
         "valueAffected": "dip"
@@ -110,18 +106,20 @@
     ],
     "price": 4500,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "AA#, p. 79",
+    "source": "AA3, p. 79",
     "target": {
       "type": "",
       "value": ""
@@ -133,5 +131,6 @@
       "per": "charges",
       "value": 1
     }
-  }
+  },
+  "img": "icons/consumables/potions/bottle-conical-corked-purple.webp"
 }

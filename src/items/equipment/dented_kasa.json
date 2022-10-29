@@ -2,18 +2,12 @@
   "_id": "sRJZIgbAmzTtCuYf",
   "name": "Dented kasa",
   "type": "magic",
-  "effects": [],
-  "flags": {},
-  "img": "icons/equipment/head/helm-norman-brown.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
-  "system": {
+  "data": {
     "type": "",
     "abilityMods": {
       "parts": []
     },
+    "ammunitionType": "",
     "attributes": {
       "ac": {
         "value": ""
@@ -27,7 +21,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 10
       },
       "size": "medium",
       "sturdy": false
@@ -37,6 +31,12 @@
     "capacity": {
       "max": 0,
       "value": 0
+    },
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
     },
     "critical": {
       "parts": []
@@ -51,18 +51,37 @@
       "unidentified": "",
       "value": "<p>A conical helm of battered metal, a dented kasa is a headgear with a history. Helmets of this sort belonged to veteran warriors of ages past, each dent representing a potentially mortal blow the kasa deflected. You wear the kasa by incorporating it into part of your armor&rsquo;s headwear. The helmet counts as a worn magic item unless you install it in armor, taking up one upgrade slot.</p>\n<p>While wearing the dented kasa, you gain a +2 enhancement bonus to saving throws against critical hit effects. In addition, when you take a critical hit, you can spend 2 Resolve Points as a reaction to negate the resulting extra damage and critical hit effect. When you do so, the kasa gains a new dent, scratch, or other mark.</p>"
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "hands": 0,
     "identified": true,
     "level": 5,
-    "modifiers": [],
+    "limitedWear": true,
+    "modifiers": [
+      {
+        "_id": "13e403c1-37e3-4943-9446-f50c7e89c0cb",
+        "name": "Dented kasa",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "While wearing the dented kasa, you gain a +2 enhancement bonus to saving throws against critical hit effects. In addition, when you take a critical hit, you can spend 2 Resolve Points as a reaction to negate the resulting extra damage and critical hit effect. When you do so, the kasa gains a new dent, scratch, or other mark.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 3000,
     "quantity": 1,
+    "quantityPerPack": 1,
     "source": "ARM, p. 112",
     "usage": {
       "per": "",
       "value": 0
     }
-  }
+  },
+  "img": "icons/equipment/head/helm-norman-brown.webp"
 }

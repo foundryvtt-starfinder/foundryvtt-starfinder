@@ -2,18 +2,12 @@
   "_id": "nf8nKvnZaDoOuPiE",
   "name": "Current generator, Mk 1",
   "type": "technological",
-  "effects": [],
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
-  "system": {
+  "data": {
     "type": "",
     "abilityMods": {
       "parts": []
     },
+    "ammunitionType": "",
     "attributes": {
       "ac": {
         "value": ""
@@ -27,7 +21,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 10
       },
       "size": "medium",
       "sturdy": false
@@ -35,8 +29,14 @@
     "attuned": false,
     "bulk": "2",
     "capacity": {
-      "max": 0,
-      "value": 0
+      "max": 100,
+      "value": 100
+    },
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
     },
     "critical": {
       "parts": []
@@ -49,7 +49,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This large technomagical device can create strong currents in water. It&rsquo;s often used for the short-distance transport of material in underwater excavations, but it has limitless applications. A current generator takes a full action to activate, at which point it creates a strong current in a line of a length that depends on the mark of the generator. Creatures that start their turn in or enter the area must succeed at a Fortitude saving throw (DC = 10 + item level of the generator) or be moved 10 feet in the direction of the line, away from the current generator. Swimming through the area requires an Athletics check to swim as though in stormy conditions; the DC of this check is 10 higher if moving in the opposite direction of the current, and 5 higher otherwise.</p>\n<table style=\"width: 62.4163%;\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width: 19.9343%; text-align: center;\"><strong>MODEL</strong></td>\n<td style=\"width: 23.8035%; text-align: center;\"><strong>LEVEL</strong></td>\n<td style=\"width: 28.1754%; text-align: center;\"><strong>PRICE</strong></td>\n<td style=\"width: 26.8095%; text-align: center;\"><strong>LINE</strong></td>\n</tr>\n<tr>\n<td style=\"width: 19.9343%; text-align: center;\">Mk 1</td>\n<td style=\"width: 23.8035%; text-align: center;\">5</td>\n<td style=\"width: 28.1754%; text-align: center;\">2,750</td>\n<td style=\"width: 26.8095%; text-align: center;\">50 ft.</td>\n</tr>\n<tr>\n<td style=\"width: 19.9343%; text-align: center;\">MK 2</td>\n<td style=\"width: 23.8035%; text-align: center;\">10</td>\n<td style=\"width: 28.1754%; text-align: center;\">17,000</td>\n<td style=\"width: 26.8095%; text-align: center;\">100 ft.</td>\n</tr>\n<tr>\n<td style=\"width: 19.9343%; text-align: center;\">Mk 3</td>\n<td style=\"width: 23.8035%; text-align: center;\">15</td>\n<td style=\"width: 28.1754%; text-align: center;\">95,000</td>\n<td style=\"width: 26.8095%; text-align: center;\">300 ft.</td>\n</tr>\n</tbody>\n</table>"
+      "value": "<p><span id=\"ctl00_MainContent_DataListHybridItems_ctl17_LabelName\"><strong>CAPACITY</strong> 100; <strong>USAGE</strong> 10/HOUR</span></p>\n<p>This large technomagical device can create strong currents in water. It&rsquo;s often used for the short-distance transport of material in underwater excavations, but it has limitless applications. A current generator takes a full action to activate, at which point it creates a strong current in a line of a length that depends on the mark of the generator. Creatures that start their turn in or enter the area must succeed at a Fortitude saving throw (DC = 10 + item level of the generator) or be moved 10 feet in the direction of the line, away from the current generator. Swimming through the area requires an @Compendium[sfrpg.skills.HsCWctv7usPI6Gvd]{Athletics} check to swim as though in stormy conditions; the DC of this check is 10 higher if moving in the opposite direction of the current, and 5 higher otherwise.</p>\n<table style=\"width: 62.4163%;\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width: 19.9343%; text-align: center;\"><strong>MODEL</strong></td>\n<td style=\"width: 23.8035%; text-align: center;\"><strong>LEVEL</strong></td>\n<td style=\"width: 28.1754%; text-align: center;\"><strong>PRICE</strong></td>\n<td style=\"width: 26.8095%; text-align: center;\"><strong>LINE</strong></td>\n</tr>\n<tr>\n<td style=\"width: 19.9343%; text-align: center;\">Mk 1</td>\n<td style=\"width: 23.8035%; text-align: center;\">5</td>\n<td style=\"width: 28.1754%; text-align: center;\">2,750</td>\n<td style=\"width: 26.8095%; text-align: center;\">50 ft.</td>\n</tr>\n<tr>\n<td style=\"width: 19.9343%; text-align: center;\">MK 2</td>\n<td style=\"width: 23.8035%; text-align: center;\">10</td>\n<td style=\"width: 28.1754%; text-align: center;\">17,000</td>\n<td style=\"width: 26.8095%; text-align: center;\">100 ft.</td>\n</tr>\n<tr>\n<td style=\"width: 19.9343%; text-align: center;\">Mk 3</td>\n<td style=\"width: 23.8035%; text-align: center;\">15</td>\n<td style=\"width: 28.1754%; text-align: center;\">95,000</td>\n<td style=\"width: 26.8095%; text-align: center;\">300 ft.</td>\n</tr>\n</tbody>\n</table>"
     },
     "equippable": false,
     "equipped": false,
@@ -59,10 +59,12 @@
     "modifiers": [],
     "price": 2750,
     "quantity": 1,
+    "quantityPerPack": 1,
     "source": "AP#36, p. 50",
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "hour",
+      "value": 10
     }
-  }
+  },
+  "img": "icons/svg/mystery-man.svg"
 }

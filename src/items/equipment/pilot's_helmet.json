@@ -2,18 +2,12 @@
   "_id": "f9GxVDO3bCHVLiAO",
   "name": "Pilot's helmet",
   "type": "magic",
-  "effects": [],
-  "flags": {},
-  "img": "icons/equipment/head/cap-leather-brown.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
-  "system": {
+  "data": {
     "type": "",
     "abilityMods": {
       "parts": []
     },
+    "ammunitionType": "",
     "attributes": {
       "ac": {
         "value": ""
@@ -27,7 +21,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 8
       },
       "size": "medium",
       "sturdy": false
@@ -37,6 +31,12 @@
     "capacity": {
       "max": 0,
       "value": 0
+    },
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
     },
     "critical": {
       "parts": []
@@ -49,13 +49,14 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This floppy leather helmet is equipped with large goggles that enhance a pilot&rsquo;s acuity. While you are wearing a pilot&rsquo;s helmet, if an enemy vehicle ahead of yours successfully uses the trick pilot action, you can immediately attempt a Perception check with a +4 insight bonus opposed by the result of the opposing vehicle&rsquo;s skill check to perform the trick pilot action. If you succeed, the penalty imposed by the opposing vehicle&rsquo;s trick pilot action is reduced by 1.</p>\n<p>&nbsp;</p>"
+      "value": "<p>This floppy leather helmet is equipped with large goggles that enhance a pilot&rsquo;s acuity. While you are wearing a pilot&rsquo;s helmet, if an enemy vehicle ahead of yours successfully uses the trick pilot action, you can immediately attempt a @Compendium[sfrpg.skills.CzEAY60hUMyfOC4G]{Perception} check with a +4 insight bonus opposed by the result of the opposing vehicle&rsquo;s skill check to perform the trick pilot action. If you succeed, the penalty imposed by the opposing vehicle&rsquo;s trick pilot action is reduced by 1.</p>\n<p>&nbsp;</p>"
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "hands": 0,
     "identified": true,
     "level": 3,
+    "limitedWear": true,
     "modifiers": [
       {
         "_id": "8820d67f-0a66-4ce9-a7ef-2602dbf99bfd",
@@ -67,7 +68,7 @@
         "max": 4,
         "modifier": "+4",
         "modifierType": "formula",
-        "notes": "you can immediately attempt a Perception check with a +4 insight bonus opposed by the result of the opposing vehicle’s skill check to perform the trick pilot action",
+        "notes": "While you are wearing a pilot’s helmet, if an enemy vehicle ahead of yours successfully uses the trick pilot action, you can immediately attempt a  Perception check with a +4 insight bonus opposed by the result of the opposing vehicle’s skill check to perform the trick pilot action. If you succeed, the penalty imposed by the opposing vehicle’s trick pilot action is reduced by 1.",
         "source": "",
         "subtab": "misc",
         "valueAffected": "per"
@@ -75,10 +76,12 @@
     ],
     "price": 1200,
     "quantity": 1,
+    "quantityPerPack": 1,
     "source": "AP#14, p. 40",
     "usage": {
       "per": "",
       "value": 0
     }
-  }
+  },
+  "img": "icons/equipment/head/cap-leather-brown.webp"
 }
