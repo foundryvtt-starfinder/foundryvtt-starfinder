@@ -181,25 +181,22 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @returns {boolean|void}         Explicitly return false to prevent creation of this Document
      */
     async _preCreate(data, options, user) {
-        const actorData = this.data;
         const autoLinkedTypes = ['character', 'drone'];
-        let link = {};
-        let unarmed = {};
+        let updates = {}
         
-        if (autoLinkedTypes.includes(this.data.type)) {
-            link = { "token.actorLink": true };
+        if (autoLinkedTypes.includes(this.type)) {
+            updates.prototypeToken = { actorLink:  true };
         };
         
-        if (this.data.type === "character" && game.settings.get("sfrpg", "autoAddUnarmedStrike")) {
+        if (this.type === "character" && game.settings.get("sfrpg", "autoAddUnarmedStrike")) {
             const ITEM_UUID = "Compendium.sfrpg.equipment.AWo4DU0s18agsFtJ"; // Unarmed strike
             const source = (await fromUuid(ITEM_UUID)).toObject();
             source.flags = mergeObject(source.flags ?? {}, { core: { sourceId: ITEM_UUID } });
             
-            unarmed = { "items": [source] };
+            updates.items = [source];
         };
-        
-        const updates = mergeObject(link, unarmed);
-        actorData.update(updates);
+
+        this.updateSource(updates)
         
         return super._preCreate(data, options, user)
     };
