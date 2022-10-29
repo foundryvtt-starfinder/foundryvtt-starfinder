@@ -63,6 +63,13 @@ let initTime = null;
 Hooks.once('init', async function () {
     initTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Initializing the Starfinder System`);
+
+    const logo = document.querySelector("#logo")
+    logo.src = "systems/sfrpg/images/starfinder_icon.webp";
+    logo.style.width = "92px"
+    logo.style.height = "92px"
+    logo.style.margin = "0 0 0 9px"
+
     console.log(
 `__________________________________________________
  ____  _              __ _           _
@@ -656,3 +663,9 @@ Hooks.on("renderSidebarTab", async (app, html) => {
         }
     }
 });
+
+Hooks.on("renderPause", () => {
+    const paused = document.querySelector("figure#pause");
+    const icon = paused.children[0]
+    icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
+})
