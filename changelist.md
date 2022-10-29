@@ -1,3 +1,38 @@
+# v0.20.3 - Starfinder Hotfix
+
+Just a quick hotfix to correct an issue with drone sheets. They can now be opened normally.
+
+# v0.20.2 - Starfinder Update
+
+This is an update to address the many bugs that were identified from the last update. It includes a lot of big changes made to the underlying data model to be more inline with
+changes made in the core software. And addresses many the backwards compatability breaking changes from core that weren't caught before the last release.
+
+## Bugfixes
+* Fixed all of the drag and drop issues that were discovered after last release
+    * Fixed crew drag and drop on starship sheets
+    * Fixed drag and drop functionality on vehicles (yes, this was broken. I know, no one noticed ;) )
+    * Fixed drag and drop functionality from the compendium browser
+* Fixed the issues with measured templates
+* Fixed bulk calculations so they don't display `NaN`
+* Fixed wealth calculations so they don't display `NaN` 
+* Fixed issues where various sheets wouldn't open with error messages about exceding the maximum call stack
+* Updated the description fields for the various entities to utilize new functionality provided by foundry
+* Fixed item macro creation on drag and drop
+* Various backend changes made to our build pipeline to deal with the new data model changes
+* Updated the manifest file to utilize the new fields that Foundry VTT v10 provides
+* Converted all of the compendium items to utilize the new data model
+* Various css style updates to deal with changes made in the core software's styling
+* Several buttons weren't working correctly because of side effects caused by the new data model used in Foundry v10
+* Changed the background colors used for private, self, and blind rolls (these are still a work in progress. Expect these to change again, most likely)
+* Fixed the attack bonus box on starship weapons
+* Fixed some funky styling on chat cards caused by old css properties that hadn't been properly updated
+
+This update isn't particularly glamorus. It doesn't contain huge swaths of content updates, with tons of new items or aliens, but it was a pretty grueling update
+from a development standpoint. The core Foundry v10 data model updates caused some weird issues to crop up in the last release that kind of forced our hand. I was hoping to
+do a lot of these updates over the course of a few releases through the course of a couple of months, not all at once in one massive update. I do apprecieate everyones patience
+with this one and I do hope that the wait was worth it. This release makes the system fully v10 compatible, and provides the system with a good base that we can use for future development. We can now get back to focusing on content and feature updates (until v11, at least ;) ). Enjoy the new release!
+
+
 # v0.20.1 - Starfinder Update
 
 This update focuses on getting the system compatible with FoundryVTT v10. No new features or bugfixes, just the bare minimum code needed to get the system functional
