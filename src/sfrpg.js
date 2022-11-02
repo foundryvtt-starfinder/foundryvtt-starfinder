@@ -383,15 +383,6 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
     return false;
 });
 
-Hooks.on("createActor", function(actor, options, actorId) {
-    const autoLinkedTypes = ['character', 'drone'];
-    if (autoLinkedTypes.includes(actor.type)) {
-        actor.update({
-            "token.actorLink": true
-        });
-    }
-});
-
 function registerMathFunctions() {
     Math.lookup = function(value) {
         for (let i = 1; i<arguments.length - 1; i+=2) {
