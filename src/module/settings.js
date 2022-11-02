@@ -82,7 +82,7 @@ export const registerSystemSettings = function () {
         hint: "SFRPG.Settings.AutoAddUnarmedStrike.Hint",
         scope: "world",
         config: true,
-        default: false,
+        default: true,
         type: Boolean
     });
 
