@@ -1,16 +1,24 @@
 {
-  "_id": "kWQV1DCMWpJjJLjI",
-  "name": "Augmented Form (Ex)",
+  "_id": "U2T591fYc7UyhE8g",
+  "name": "Drawback (Eldritch Niche)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1667176712266,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1667241946105,
+    "systemId": "sfrpg",
+    "systemVersion": "0.21.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "other",
     "activation": {
       "type": "",
       "condition": "",
@@ -29,7 +37,23 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(floor(@classes.evolutionist.levels / 2) + @resources.evolutionist.evolutionTrack.value)",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
     "damageNotes": "",
     "description": {
@@ -37,7 +61,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.tcQlonOTpuaKeGLs]{Evolutionist}</p>\n<p>Your body eagerly accepts new augmentations, even creating some of the components out of your own flesh. You gain one free augmentation of the type associated with your niche, with a level equal to or lower than your level. Each time you gain a level, you can replace this augmentation using the same restrictions.</p>\n<p>In addition, you reduce the cost of augmentations associated with your niche by 10%. This applies only to augmentations whose item levels are no greater than your evolutionist level.</p>\n<p>If you receive a discount on an augmentation from another source (not counting the augmentation evolutionary focus below) you instead increase that discount by 5%.</p>\n<p>Note that regardless of your niche, species grafts (Starfinder Alien Archive 4 140) qualify for the benefits of this ability, as long as they&rsquo;re of the type associated with your niche.</p>"
+      "value": "<p><span class=\"fontstyle0\">&gt;@UUID[Compendium.sfrpg.class-features.yZovkmDKDVGekc71]{Eldritch (Niche)}</span></p>\n<p><span class=\"fontstyle0\">Your body increasingly operates on a magical level, leaving you vulnerable to mundane threats. While you have at least 1 MP, the first time you take nonmagical kinetic damage each round, you take additional damage equal to half your evolutionist level plus the number of MP you have. While you have at least 3 MP, you can&rsquo;t voluntarily lower your spell resistance.</span></p>"
     },
     "descriptors": {
       "acid": false,
@@ -92,14 +116,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level (Evolutionist)",
+    "requirements": "1st Level (Evolutionist)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "IS, pg. 12",
+    "source": "IS, pg. 14",
     "target": {
       "type": "",
       "value": null

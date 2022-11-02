@@ -1,16 +1,24 @@
 {
-  "_id": "jzZlTibXepwFExbl",
-  "name": "Weapon Specialization (Ex) (Evolutionist)",
+  "_id": "F1efkfjoYPysniEG",
+  "name": "Controlled Transformation (Ex)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1667176712266,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1667339205883,
+    "systemId": "sfrpg",
+    "systemVersion": "0.21.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "other",
     "activation": {
       "type": "",
       "condition": "",
@@ -19,7 +27,7 @@
     "area": {
       "effect": "",
       "shape": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -37,7 +45,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><span class=\"fontstyle0\"><span class=\"fontstyle2\">&gt;@UUID[Compendium.sfrpg.classes.tcQlonOTpuaKeGLs]{Evolutionist}</span></span></p>\n<p><span class=\"fontstyle0\">You gain Weapon Specialization as a bonus feat for each weapon type for which this class grants you proficiency. You gain a special form of weapon specialization for your adaptive strike. If your adaptive strike targets EAC, you add a bonus to your damage equal to your evolutionist level plus half of any other class levels you have. If your adaptive strike targets KAC, you add a bonus to your damage equal to 1-1/2 &times; your evolutionist class level, plus 1 &times; any other class levels you have.</span></p>\n<p><br><em>Damage is already added in the Adaptice Strike weapon items.</em></p>"
+      "value": "<p><span class=\"fontstyle0\">&gt;@UUID[Compendium.sfrpg.class-features.qIIoypmTFypnmRer]{Evolutionist Adaption}</span></p>\n<p><span class=\"fontstyle0\">You expertly control your body&rsquo;s adaptive quirks to mitigate your transformation&rsquo;s drawbacks. If you have at least 1 MP, you treat your MP total as though it were 1 higher (to a maximum of your normal MP maximum) for the purpose of determining your instinct effects and you treat your MP total as though it were 1 lower (minimum 1 MP) for the purpose of determining your drawback effects.<br></span></p>\n<p><span class=\"fontstyle0\"><br><em>Enable/disable modifiers in the Modifiers tab, when using Instinct and Drawback features.</em></span></p>"
     },
     "descriptors": {
       "acid": false,
@@ -77,83 +85,76 @@
     },
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [
       {
-        "_id": "9b5a4f11-8c9c-47e2-875b-113a8d7a971e",
-        "name": "Weapon Specialization Evolutionist",
+        "_id": "304859af-95f3-48f0-89c6-e8834a968679",
+        "name": "Instinct - Controlled Transformation (Ex)",
         "type": "untyped",
         "condition": "",
-        "effectType": "weapon-damage",
-        "enabled": true,
-        "max": 0,
-        "modifier": "floor(@details.level.value / 2)",
+        "container": {
+          "actorId": "Ae7WsuaQwavXerQ0",
+          "itemId": "bkb0qD1ro4OgMZBm"
+        },
+        "effectType": "actor-resource",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "smallA"
+        "valueAffected": "evolutionist.evolutionTrack"
       },
       {
-        "_id": "1b19f9fd-5e8a-4e9c-8e09-fe60e784d0dc",
-        "name": "Weapon Specialization Evolutionist",
+        "_id": "b8c7dc82-84b6-4819-8546-1df60d34aac8",
+        "name": "Drawback - Controlled Transformation (Ex)",
         "type": "untyped",
         "condition": "",
-        "effectType": "weapon-damage",
-        "enabled": true,
-        "max": 0,
-        "modifier": "@details.level.value",
+        "container": {
+          "actorId": "Ae7WsuaQwavXerQ0",
+          "itemId": "bkb0qD1ro4OgMZBm"
+        },
+        "effectType": "actor-resource",
+        "enabled": false,
+        "max": -1,
+        "modifier": "-1",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "basicM"
-      },
-      {
-        "_id": "8f0c6cf7-403f-4e69-b209-2b66ee75878f",
-        "name": "Weapon Specialization Evolutionist",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "max": 0,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
+        "valueAffected": "evolutionist.evolutionTrack"
       }
     ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "3rd Level (Evolutionist)",
+    "requirements": "14th Level (Evolutionist)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "IS, pg. 13",
+    "source": "IS, pg. 17",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": null,
+      "per": "",
+      "value": null
     }
   }
 }

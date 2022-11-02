@@ -1,16 +1,24 @@
 {
-  "_id": "grM1W1vtzYyKLw9t",
-  "name": "Evolutionary Focus - Augmentation (Ex) - Advanced",
+  "_id": "PYre1EFkHDxVLMrk",
+  "name": "Instinct (Vital Niche)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1667176712266,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1667281890876,
+    "systemId": "sfrpg",
+    "systemVersion": "0.21.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "heal",
     "activation": {
       "type": "",
       "condition": "",
@@ -29,7 +37,23 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 1, ceil(@resources.evolutionist.evolutionTrack.value * (lookupRange(@classes.evolutionist.levels, 0.5, 7, 1, 10, 1.5, 13, 2, 17, 3)))))",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
     "damageNotes": "",
     "description": {
@@ -37,7 +61,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><span class=\"fontstyle0\">&gt;@UUID[Compendium.sfrpg.class-features.hmroRe0hkTITCLZQ]{Evolutionary Focus - Augmentation (Ex)}</span></p>\n<p><span class=\"fontstyle0\">The discount from your augmented form class feature increases to 30%. In addition, you can install one additional augmentation into one of your systems that already has an augmentation, so long as at least one of those augmentations is of a type associated with your niche. You can have no more than two augmentations in that system, even if you have another ability that grants you a similar benefit.</span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.gY3X6RQyqwjMVTkC]{Vital (Niche)}</p>\n<p>Once per round while you have 1 or more MP, the first time you regain Hit Points or Stamina Points from an effect, you increase the number of HP or SP you regain by an amount equal to half your MP total, rounded up. The additional HP or SP you regain increases to your MP total at 7th level, 1-1/2 &times; your MP total at 10th level, 2 &times; your MP total at 13th level, and 3 &times; your MP total at 17th level.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -92,14 +116,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "13th Level - Evolutionist",
+    "requirements": "1st Level (Evolutionist)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "IS, pg. 13",
+    "source": "IS, pg. 15",
     "target": {
       "type": "",
       "value": null

@@ -1,26 +1,34 @@
 {
-  "_id": "kWQV1DCMWpJjJLjI",
-  "name": "Augmented Form (Ex)",
+  "_id": "Agbnqww0FQfTdCQJ",
+  "name": "Forceful Outburst (Su)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1667176712266,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1667338658200,
+    "systemId": "sfrpg",
+    "systemVersion": "0.21.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "other",
     "activation": {
-      "type": "",
+      "type": "reaction",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "none",
+      "value": null
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -37,7 +45,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.tcQlonOTpuaKeGLs]{Evolutionist}</p>\n<p>Your body eagerly accepts new augmentations, even creating some of the components out of your own flesh. You gain one free augmentation of the type associated with your niche, with a level equal to or lower than your level. Each time you gain a level, you can replace this augmentation using the same restrictions.</p>\n<p>In addition, you reduce the cost of augmentations associated with your niche by 10%. This applies only to augmentations whose item levels are no greater than your evolutionist level.</p>\n<p>If you receive a discount on an augmentation from another source (not counting the augmentation evolutionary focus below) you instead increase that discount by 5%.</p>\n<p>Note that regardless of your niche, species grafts (Starfinder Alien Archive 4 140) qualify for the benefits of this ability, as long as they&rsquo;re of the type associated with your niche.</p>"
+      "value": "<p><span class=\"fontstyle0\">&gt;@UUID[Compendium.sfrpg.class-features.qIIoypmTFypnmRer]{Evolutionist Adaption}</span></p>\n<p><span class=\"fontstyle0\">Your more powerful transformations can knock back bystanders. As a reaction when you spend 2 or more MP to use an adaptation, you can push away one or more creatures adjacent to you, moving them 5 feet away as if you had succeeded at a @UUID[Compendium.sfrpg.rules.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#bull-rush]{bull rush} attempt against them (Fortitude negates). This movement doesn&rsquo;t provoke attacks of opportunity. When you activate this adaptation, if you&rsquo;ve spent 4 or more MP since the end of your last turn, you also make any pushed creature @Compendium[sfrpg.conditions.MZ8OoH1GE9qDMyCD]{flat-footed} until the end of your next turn. Once you use this adaptation, you can&rsquo;t do so again until you have rested 10 minutes to regain Stamina Points. <br></span></p>"
     },
     "descriptors": {
       "acid": false,
@@ -77,7 +85,7 @@
     },
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "formula": "",
     "isActive": null,
@@ -85,29 +93,29 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level (Evolutionist)",
+    "requirements": "10th Level (Evolutionist)",
     "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "10+floor(@classes.evolutionist.levels/2) + (@classes.evolutionist.keyAbilityMod)",
+      "descriptor": "negate"
     },
-    "source": "IS, pg. 12",
+    "source": "IS, pg. 17",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": 1,
+      "per": "sr",
+      "value": 1
     }
   }
 }

@@ -1,25 +1,33 @@
 {
-  "_id": "jzZlTibXepwFExbl",
-  "name": "Weapon Specialization (Ex) (Evolutionist)",
+  "_id": "RvobZfzfvY5Z96L5",
+  "name": "Explosive Strike (Ex)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1667176712266,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1667342217821,
+    "systemId": "sfrpg",
+    "systemVersion": "0.21.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "other",
     "activation": {
-      "type": "",
+      "type": "action",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -37,7 +45,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p><span class=\"fontstyle0\"><span class=\"fontstyle2\">&gt;@UUID[Compendium.sfrpg.classes.tcQlonOTpuaKeGLs]{Evolutionist}</span></span></p>\n<p><span class=\"fontstyle0\">You gain Weapon Specialization as a bonus feat for each weapon type for which this class grants you proficiency. You gain a special form of weapon specialization for your adaptive strike. If your adaptive strike targets EAC, you add a bonus to your damage equal to your evolutionist level plus half of any other class levels you have. If your adaptive strike targets KAC, you add a bonus to your damage equal to 1-1/2 &times; your evolutionist class level, plus 1 &times; any other class levels you have.</span></p>\n<p><br><em>Damage is already added in the Adaptice Strike weapon items.</em></p>"
+      "value": "<p><span class=\"fontstyle0\">&gt;@UUID[Compendium.sfrpg.class-features.qIIoypmTFypnmRer]{Evolutionist Adaption}</span></p>\n<p><span class=\"fontstyle0\">You can spend 2 MP as a standard action to make an attack with your ranged adaptive strike as though it had the explode (10 feet) weapon special property. For each additional MP you spend to activate this adaptation, you can increase the explosion&rsquo;s radius by 5 feet. Reduce this attack&rsquo;s damage by an amount equal to half your evolutionist level.</span></p>"
     },
     "descriptors": {
       "acid": false,
@@ -77,35 +85,24 @@
     },
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [
       {
-        "_id": "9b5a4f11-8c9c-47e2-875b-113a8d7a971e",
-        "name": "Weapon Specialization Evolutionist",
+        "_id": "304859af-95f3-48f0-89c6-e8834a968679",
+        "name": "Explosive Strike (Ex)",
         "type": "untyped",
         "condition": "",
+        "container": {
+          "actorId": "Ae7WsuaQwavXerQ0",
+          "itemId": "bkb0qD1ro4OgMZBm"
+        },
         "effectType": "weapon-damage",
         "enabled": true,
         "max": 0,
-        "modifier": "floor(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "smallA"
-      },
-      {
-        "_id": "1b19f9fd-5e8a-4e9c-8e09-fe60e784d0dc",
-        "name": "Weapon Specialization Evolutionist",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-damage",
-        "enabled": true,
-        "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "-floor(@classes.evolutionist.levels/2)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -113,47 +110,47 @@
         "valueAffected": "basicM"
       },
       {
-        "_id": "8f0c6cf7-403f-4e69-b209-2b66ee75878f",
-        "name": "Weapon Specialization Evolutionist",
+        "_id": "1a087056-4e0b-4f93-992e-d61e9fb7210b",
+        "name": "Explosive Strike (Ex)",
         "type": "untyped",
         "condition": "",
-        "effectType": "weapon-property-damage",
+        "effectType": "weapon-damage",
         "enabled": true,
         "max": 0,
-        "modifier": "-ceil(@details.level.value / 2)",
+        "modifier": "-floor(@classes.evolutionist.levels/2)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
-        "valueAffected": "operative"
+        "valueAffected": "smallA"
       }
     ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "3rd Level (Evolutionist)",
+    "requirements": "14th Level (Evolutionist)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "IS, pg. 13",
+    "source": "IS, pg. 17",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": null,
+      "per": "",
+      "value": null
     }
   }
 }

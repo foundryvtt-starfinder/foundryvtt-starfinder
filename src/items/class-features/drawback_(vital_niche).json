@@ -1,11 +1,19 @@
 {
-  "_id": "kWQV1DCMWpJjJLjI",
-  "name": "Augmented Form (Ex)",
+  "_id": "pDqFedYpqzryKzBR",
+  "name": "Drawback (Vital Niche)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1667176712266,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1667281925658,
+    "systemId": "sfrpg",
+    "systemVersion": "0.21.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
@@ -37,7 +45,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.tcQlonOTpuaKeGLs]{Evolutionist}</p>\n<p>Your body eagerly accepts new augmentations, even creating some of the components out of your own flesh. You gain one free augmentation of the type associated with your niche, with a level equal to or lower than your level. Each time you gain a level, you can replace this augmentation using the same restrictions.</p>\n<p>In addition, you reduce the cost of augmentations associated with your niche by 10%. This applies only to augmentations whose item levels are no greater than your evolutionist level.</p>\n<p>If you receive a discount on an augmentation from another source (not counting the augmentation evolutionary focus below) you instead increase that discount by 5%.</p>\n<p>Note that regardless of your niche, species grafts (Starfinder Alien Archive 4 140) qualify for the benefits of this ability, as long as they&rsquo;re of the type associated with your niche.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.gY3X6RQyqwjMVTkC]{Vital (Niche)}</p>\n<p>Your mind and body react with greater impulsiveness and less control. While you have at least 1 MP you take a penalty to Will saves equal to half your MP total, rounded up. While you have at least 3 MP, you can&rsquo;t use any ability that requires patience or concentration, such as spellcasting or any Charisma- or Intelligence-based skills except Intimidate.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -81,7 +89,23 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "f1245588-9de4-4845-9c94-b2430ae83da1",
+        "name": "Drawback (Sepulchral Niche)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "save",
+        "enabled": true,
+        "max": 0,
+        "modifier": "-(lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 1, ceil(@resources.evolutionist.evolutionTrack.value / 2)))",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "will"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -92,14 +116,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "2nd Level (Evolutionist)",
+    "requirements": "1st Level (Evolutionist)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "IS, pg. 12",
+    "source": "IS, pg. 15",
     "target": {
       "type": "",
       "value": null
