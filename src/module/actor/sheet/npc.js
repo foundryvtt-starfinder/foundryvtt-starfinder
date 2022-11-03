@@ -52,8 +52,11 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         }
     }
 
-    getData() {
+    async getData() {
         const data = super.getData();
+
+        // Enrich text editors
+        data.enrichedBiography = await TextEditor.enrichHTML(this.object.system.details.biography.value, {async: true});
 
         let cr = parseFloat(data.system.details.cr || 0);
         let crs = { 0: "0", 0.125: "1/8", [1/6]: "1/6", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };

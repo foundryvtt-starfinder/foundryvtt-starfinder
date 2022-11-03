@@ -137,7 +137,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         let maxFeats = SFRPG.droneFeatsPerLevel[droneLevelIndex];
 
         let chassisLabel = game.i18n.format("SFRPG.DroneSheet.Features.Chassis");
-        let modsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Mods", {current: mods.filter(x => !x.sytem.isFree).length, max: maxMods});
+        let modsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Mods", {current: mods.filter(x => !x.system.isFree).length, max: maxMods});
         let featsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Header", {current: (activeFeats.length + passiveFeats.length), max: maxFeats});
         let activeFeatsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Active");
         let passiveFeatsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Feats.Passive");
