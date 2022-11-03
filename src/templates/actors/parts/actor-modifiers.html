@@ -107,10 +107,14 @@
                             {{lookup ../../config.weaponTypes modifier.valueAffected}}
                         {{else if (eq modifier.effectType "weapon-property-attacks")}}
                             {{lookup ../../config.weaponProperties modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-category-attacks")}}
+                            {{lookup ../../config.weaponCategories modifier.valueAffected}}
                         {{else if (eq modifier.effectType "weapon-damage")}}
                             {{lookup ../../config.weaponTypes modifier.valueAffected}}
                         {{else if (eq modifier.effectType "weapon-property-damage")}}
                             {{lookup ../../config.weaponProperties modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-category-damage")}}
+                            {{lookup ../../config.weaponCategories modifier.valueAffected}}
                         {{else if (eq modifier.effectType "specific-speed")}}
                             {{lookup ../../config.speeds modifier.valueAffected}}
                         {{else if (eq modifier.effectType "actor-resource")}}

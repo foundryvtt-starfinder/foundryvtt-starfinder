@@ -686,6 +686,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (isWeapon) {
             acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
             acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_ATTACKS);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_ATTACKS);
         }
 
         let modifiers = this.actor.getAllModifiers();
@@ -696,6 +697,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
                 if (!this.system.properties[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
+                if (this.system.weaponCategory !== mod.valueAffected) {
                     return false;
                 }
             }
@@ -1010,6 +1015,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (isWeapon) {
             acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
             acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_DAMAGE);
         }
 
         let modifiers = this.actor.getAllModifiers();
@@ -1024,6 +1030,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
                 if (!this.system.properties[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
+                if (this.system.weaponCategory !== mod.valueAffected) {
                     return false;
                 }
             }
