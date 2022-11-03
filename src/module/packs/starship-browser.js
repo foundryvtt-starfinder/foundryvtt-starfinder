@@ -172,14 +172,14 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
         let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "starshipWeapon" || filters.includes(item.data.weaponType));
+        return item && (item.type !== "starshipWeapon" || filters.includes(item.system.weaponType));
     }
 
     _filterWeaponClass(element, filters) {
         let compendium = element.dataset.entryCompendium;
         let itemId = element.dataset.entryId;
         let item = this.items.find(x => x.compendium === compendium && x._id === itemId);
-        return item && (item.type !== "starshipWeapon" || filters.includes(item.data.class));
+        return item && (item.type !== "starshipWeapon" || filters.includes(item.system.class));
     }
 
     openSettings() {

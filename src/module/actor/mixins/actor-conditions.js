@@ -50,7 +50,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @private
      */
     _isCondition(item) {
-        return item.type === "feat" && item.data.data.requirements?.toLowerCase() === "condition";
+        return item.type === "feat" && item.system.requirements?.toLowerCase() === "condition";
     }
 
     _isStatusEffect(name) {
@@ -92,7 +92,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                     const entry = compendium.index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
                     if (entry) {
                         const entity = await compendium.getDocument(entry._id);
-                        const itemData = duplicate(entity.data);
+                        const itemData = duplicate(entity);
 
                         const promise = this.createEmbeddedDocuments("Item", [itemData]);
                         promise.then((createdItems) => {
@@ -130,7 +130,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * */
     async _updateActorCondition(conditionName, enabled) {
         const updateData = {};
-        updateData[`data.conditions.${conditionName}`] = enabled;
+        updateData[`system.conditions.${conditionName}`] = enabled;
 
         return this.update(updateData).then(() => {
             this._checkFlatFooted(conditionName, enabled);

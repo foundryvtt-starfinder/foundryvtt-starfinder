@@ -1,10 +1,10 @@
 <div class="inventory-filters spellbook-filters">
     <div class="form-group spellcasting-ability">
-        <label><h3>{{localize "SFRPG.SpellBook.SpellCastingAbility"}} <a class="item-control spell-browse" title="{{localize "SFRPG.SpellBook.Browse"}}" data-type="spell" data-level="0" data-location="{{entry._id}}"> - <i class="fas fa-search"></i>{{localize "SFRPG.SpellBook.SearchSpell"}}</a></h3></label>
-        <select name="data.attributes.spellcasting" data-type="String">
-            {{#select data.attributes.spellcasting}}
+        <label><h3 class="noborder">{{localize "SFRPG.SpellBook.SpellCastingAbility"}} <a class="item-control spell-browse" title="{{localize "SFRPG.SpellBook.Browse"}}" data-type="spell" data-level="0" data-location="{{entry._id}}"> - <i class="fas fa-search"></i>{{localize "SFRPG.SpellBook.SearchSpell"}}</a></h3></label>
+        <select name="system.attributes.spellcasting" data-type="String">
+            {{#select system.attributes.spellcasting}}
             <option value="">{{localize "SFRPG.SpellBook.AttributesNone"}}</option>
-            {{#each data.abilities as |abl a|}}
+            {{#each system.abilities as |abl a|}}
             <option value="{{a}}">{{abl.label}}</option>
             {{/each}}
             {{/select}}
@@ -16,7 +16,7 @@
 {{#each spellbook as |section|}}
     <li class="item flexrow inventory-header spellbook-header">
         <div class="item-name flexrow">
-            <h3>{{localize section.label}}</h3>
+            <h3 class="noborder">{{localize section.label}}</h3>
         </div>
 
         <div class="spell-slots fit-classes">
@@ -26,15 +26,15 @@
                         {{#each section.classes as |spellsPerClass|}}
                             <span class="spell-class">
                                 <span class="sep">{{spellsPerClass.name}}: </span>
-                                <input type="text" name="data.spells.spell{{section.level}}.perClass.{{spellsPerClass.key}}.value" value="{{spellsPerClass.value}}"/>
+                                <input type="text" name="system.spells.spell{{section.level}}.perClass.{{spellsPerClass.key}}.value" value="{{spellsPerClass.value}}"/>
                                 <span class="sep"> / {{spellsPerClass.max}}</span>
                             </span>
                         {{/each}}
                     </div>
                 {{else}}
-                    <input type="text" name="data.spells.spell{{section.level}}.value" value="{{section.uses}}" placeholder="0"/>
+                    <input type="text" name="system.spells.spell{{section.level}}.value" value="{{section.uses}}" placeholder="0"/>
                     <span class="sep"> / </span>
-                    <input type="text" name="data.spells.spell{{section.level}}.max" value="{{section.slots}}" placeholder="0"/>
+                    <input type="text" name="system.spells.spell{{section.level}}.max" value="{{section.slots}}" placeholder="0"/>
                 {{/if}}
             {{ else }}
                 <span class="spell-slots">{{{section.uses}}}</span>
@@ -64,22 +64,22 @@
                     <div class="flexcol">
                         <div class="flexrow" style="flex: 1; line-height: 20px;">
                             <h4>{{item.name}}</h4>
-                            {{#if item.data.uses.max }}
-                                <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.data.uses.value}} / {{item.data.uses.max}}</div>
+                            {{#if item.system.uses.max }}
+                                <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.system.uses.value}} / {{item.system.uses.max}}</div>
                             {{/if}}
                         </div>
                         <div style="flex: 1; line-height: 15px;" data-tippy-content="<strong>{{labels.save}}</strong><br/><br/>{{labels.saveFormula.formula}}">{{labels.save}}</div>
                     </div>
                 {{else}}
                     <h4>{{item.name}}</h4>
-                    {{#if item.data.uses.max }}
-                        <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.data.uses.value}} / {{item.data.uses.max}}</div>
+                    {{#if item.system.uses.max }}
+                        <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.system.uses.value}} / {{item.system.uses.max}}</div>
                     {{/if}}
                 {{/if}}
             </div>
 
             <div class="spell-comps">
-                {{#if item.data.concentration }}
+                {{#if item.system.concentration }}
                 <span class="spell-component" data-tippy-content="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
                 {{/if}}
             </div>

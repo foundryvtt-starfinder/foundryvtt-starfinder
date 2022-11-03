@@ -9,7 +9,7 @@
 import { SFRPG } from "./module/config.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { measureDistances, getBarAttribute, handleItemDropCanvas } from "./module/canvas.js";
+import { measureDistances, canvasHandlerV10 } from "./module/canvas.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
 import { initializeRemoteInventory, ActorItemHelper } from "./module/actor/actor-inventory-utils.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
@@ -58,7 +58,6 @@ import RollContext from "./module/rolls/rollcontext.js";
 import RollTree from "./module/rolls/rolltree.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 
-let defaultDropHandler = null;
 let initTime = null;
 
 Hooks.once('init', async function () {
@@ -73,6 +72,8 @@ Hooks.once('init', async function () {
 |____/ \\__\\__,_|_|  |_| |_|_| |_|\\__,_|\\___|_|
 ==================================================`
     );
+
+    // CONFIG.compatibility.mode = CONST.COMPATIBILITY_MODES.SILENT;
 
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
@@ -160,8 +161,15 @@ Hooks.once('init', async function () {
     CONFIG.Dice.rolls.unshift(SFRPGRoll);
 
     CONFIG.Token.documentClass = SFRPGTokenDocument;
-
-    CONFIG.fontFamilies.push("Exo2");
+    
+    CONFIG.fontDefinitions["Exo2"] = {
+        editor: true,
+        fonts: [
+        {urls: ["../systems/sfrpg/fonts/Exo2-VariableFont_wght.ttf"]},
+        {urls: ["../systems/sfrpg/fonts/Exo2-Italic-VariableFont_wght.ttf"], weight: 700}
+        ]
+    };
+    
     CONFIG.defaultFontFamily = "Exo 2";
 
     CONFIG.canvasTextStyle = new PIXI.TextStyle({
@@ -196,6 +204,9 @@ Hooks.once('init', async function () {
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
+
+    console.log("Starfinder | [READY] Preloading handlebar templates");
+    preloadHandlebarsTemplates();
 
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
@@ -271,17 +282,8 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [READY] Overriding token HUD");
     canvas.hud.token = new SFRPGTokenHUD();
 
-    console.log("Starfinder | [READY] Overriding canvas drop handler");
-    if (canvas.initialized) {
-        defaultDropHandler = canvas._dragDrop.callbacks.drop;
-        canvas._dragDrop.callbacks.drop = handleOnDrop.bind(canvas);
-    }
-
     console.log("Starfinder | [READY] Setting up AOE template overrides");
     templateOverrides();
-
-    console.log("Starfinder | [READY] Preloading handlebar templates");
-    preloadHandlebarsTemplates();
 
     console.log("Starfinder | [READY] Caching starship actions");
     ActorSheetSFRPGStarship.ensureStarshipActions();
@@ -291,7 +293,7 @@ Hooks.once("ready", async () => {
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
-        const systemSchema = Number(game.system.data.flags.sfrpg.schema);
+        const systemSchema = Number(game.system.flags.sfrpg.schema);
         const needsMigration = currentSchema < systemSchema || currentSchema === 0;
 
         let migrationPromise = null;
@@ -327,6 +329,8 @@ Hooks.once("ready", async () => {
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
 
+Hooks.on("dropCanvasData", (canvas, data) => canvasHandlerV10(canvas, data));
+
 async function migrateOldContainers() {
     const promises = [];
     for (const actor of game.actors.contents) {
@@ -338,8 +342,8 @@ async function migrateOldContainers() {
     }
 
     for (const scene of game.scenes.contents) {
-        for (const token of scene.data.tokens) {
-            if (!token.data.actorLink) {
+        for (const token of scene.tokens) {
+            if (!token.actorLink) {
                 const sheetActorHelper = new ActorItemHelper(token.actor?.id ?? token.actorId, token.id, scene.id);
                 const migrationProcess = sheetActorHelper.migrateItems();
                 if (migrationProcess) {
@@ -355,47 +359,9 @@ async function migrateOldContainers() {
     }
 }
 
-export async function handleOnDrop(event) {
-    event.preventDefault();
-
-	let data = null;
-	try {
-		data = JSON.parse(event.dataTransfer.getData('text/plain'));
-	} catch (err) {
-        defaultDropHandler(event);
-		return false;
-    }
-
-    // We're only interested in overriding item drops.
-    if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
-        return await defaultDropHandler(event);
-    }
-
-    // Transform the cursor position to canvas space
-	const [x, y] = [event.clientX, event.clientY];
-	const t = this.stage.worldTransform;
-	data.x = (x - t.tx) / canvas.stage.scale.x;
-    data.y = (y - t.ty) / canvas.stage.scale.y;
-
-    data.x -= Math.floor(canvas.grid.size / 2);
-    data.y -= Math.floor(canvas.grid.size / 2);
-
-    if (!event.shiftKey) {
-        const point = canvas.grid.getSnappedPosition(data.x, data.y, canvas.activeLayer.gridPrecision);
-        data.x = point.x;
-        data.y = point.y;
-    }
-
-    if (data.type === "Item") {
-        return handleItemDropCanvas(data);
-    }
-    return false;
-}
-
 Hooks.on("canvasInit", function () {
     canvas.grid.diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
     SquareGrid.prototype.measureDistances = measureDistances;
-    // Token.prototype.getBarAttribute = getBarAttribute;
 });
 
 Hooks.on("renderChatMessage", (app, html, data) => {
@@ -409,17 +375,8 @@ Hooks.on("renderChatLog", (app, html, data) => ItemSFRPG.chatListeners(html));
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {
     if (data.type !== "Item") return;
-    createItemMacro(data.data, slot);
+    createItemMacro(data, slot);
     return false;
-});
-
-Hooks.on("createActor", function(actor, options, actorId) {
-    const autoLinkedTypes = ['character', 'drone'];
-    if (autoLinkedTypes.includes(actor.data.type)) {
-        actor.update({
-            "token.actorLink": true
-        });
-    }
 });
 
 function registerMathFunctions() {
@@ -448,11 +405,12 @@ function registerMathFunctions() {
  * Create a Macro form an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.
  * 
- * @param {Object} item The item data
+ * @param {Object} data The item data
  * @param {number} slot The hotbar slot to use
  * @returns {Promise}
  */
-async function createItemMacro(item, slot) {
+async function createItemMacro(data, slot) {
+    const item = await Item.fromDropData(data);
     const command = `game.sfrpg.rollItemMacro("${item.name}");`;
     let macro = game.macros.contents.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
@@ -477,7 +435,7 @@ function rollItemMacro(itemName) {
     const item = actor ? actor.items.find(i => i.name === itemName) : null;
     if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
 
-    if (item.data.type === 'spell') return actor.useSpell(item);
+    if (item.type === 'spell') return actor.useSpell(item);
     return item.roll();
 }
 
@@ -552,8 +510,8 @@ function setupHandlebars() {
 
     Handlebars.registerHelper('getTotalStorageCapacity', function (item) {
         let totalCapacity = 0;
-        if (item?.data?.container?.storage && item.data.container.storage.length > 0) {
-            for (let storage of item.data.container.storage) {
+        if (item?.system?.container?.storage && item.system.container.storage.length > 0) {
+            for (let storage of item.system.container.storage) {
                 totalCapacity += storage.amount;
             }
         }
@@ -611,27 +569,6 @@ function setupHandlebars() {
     /** Returns the value based on whether left is null or not. */
     Handlebars.registerHelper('leftOrRight', function (left, right) {
         return left || right;
-    });
-
-    Handlebars.registerHelper('editorPlus', function (options) {
-        const target = options.hash['target'];
-        if ( !target ) throw new Error("You must define the name of a target field.");
-    
-        // Enrich the content
-        const isOwner = Boolean(options.hash['isOwner']);
-        const rolls = Boolean(options.hash['rolls']);
-        const rollData = options.hash['rollData'];
-        const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: isOwner, documents: true, rolls: rolls, rollData: rollData});
-        const maxSize = Boolean(options.hash['maxSize']) ? ` style="flex: 1;"` : "";
-    
-        // Construct the HTML
-        let editor = $(`<div class="editor flexcol"${maxSize}><div class="editor-content"${maxSize} data-edit="${target}">${content}</div></div>`);
-    
-        // Append edit button
-        const button = Boolean(options.hash['button']);
-        const editable = Boolean(options.hash['editable']);
-        if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
-        return new Handlebars.SafeString(editor[0].outerHTML);
     });
 
     Handlebars.registerHelper('createTippy', function (options) {
@@ -700,7 +637,7 @@ function setupHandlebars() {
 
 Hooks.on("renderSidebarTab", async (app, html) => {
     if (app.options.id === "settings") {
-        const textToAdd = `<br/><a href="https://github.com/wildj79/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
+        const textToAdd = `<br/><a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
         const gameDetails = document.getElementById("game-details");
         if (gameDetails) {
             const systemSection = gameDetails.getElementsByClassName("system")[0];

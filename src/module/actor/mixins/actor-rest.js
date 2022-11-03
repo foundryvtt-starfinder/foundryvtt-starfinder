@@ -11,7 +11,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
      * @return {Promise}        A Promise which resolves once the short rest workflow has completed
      */
      async shortRest({ dialog = true, chat = true } = {}) {
-        const data = this.data.data;
+        const data = this.system;
 
         // Ask user to confirm if they want to rest, and if they want to restore stamina points
         let sp = data.attributes.sp;
@@ -33,25 +33,25 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             let updatedRP = Math.max(rp.value - drp, 0);
             dsp = Math.min(sp.max - sp.value, sp.max);
             
-            this.update({ "data.attributes.sp.value": sp.max, "data.attributes.rp.value": updatedRP });
+            this.update({ "system.attributes.sp.value": sp.max, "system.attributes.rp.value": updatedRP });
         }
 
         // Restore resources that reset on short rests
         const updateData = {};
         for (let [k, r] of Object.entries(data.resources)) {
             if (r.max && r.sr) {
-                updateData[`data.resources.${k}.value`] = r.max;
+                updateData[`system.resources.${k}.value`] = r.max;
             }
         }
 
         await this.update(updateData);
 
         // Reset items that restore their uses on a short rest
-        const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
+        const items = this.items.filter(item => item.system.uses && (item.system.uses.per === "sr"));
         const updateItems = items.map(item => {
             return {
                 _id: item.id,
-                "data.uses.value": item.getMaxUses()
+                "system.uses.value": item.getMaxUses()
             }
         });
 
@@ -94,7 +94,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
      * @return {Promise}        A Promise which resolves once the repair workflow has completed
      */
     async repairDrone({ dialog = true, chat = true } = {}) {
-        const data = this.data.data;
+        const data = this.system;
 
         let hp = data.attributes.hp;
         if (hp.value >= hp.max) {
@@ -116,7 +116,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
         let dhp = newHP - oldHP;
 
         const updateData = {};
-        updateData["data.attributes.hp.value"] = newHP;
+        updateData["system.attributes.hp.value"] = newHP;
         await this.update(updateData);
 
         // Notify chat what happened
@@ -150,7 +150,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
      * @return {Promise}        A Promise which resolves once the long rest workflow has completed
      */
     async longRest({ dialog = true, chat = true } = {}) {
-        const data = duplicate(this.data.data);
+        const data = duplicate(this.system);
         const updateData = {};
 
         if (dialog) {
@@ -167,22 +167,22 @@ export const ActorRestMixin = (superclass) => class extends superclass {
                 data.attributes.hp.max - data.attributes.hp.value : data.details.level.value;
         let dsp = data.attributes.sp.max - data.attributes.sp.value;
         let drp = data.attributes.rp.max - data.attributes.rp.value;
-        updateData['data.attributes.hp.value'] = Math.min(data.attributes.hp.value + data.details.level.value, data.attributes.hp.max);
-        updateData['data.attributes.sp.value'] = data.attributes.sp.max;
-        updateData['data.attributes.rp.value'] = data.attributes.rp.max;
+        updateData['system.attributes.hp.value'] = Math.min(data.attributes.hp.value + data.details.level.value, data.attributes.hp.max);
+        updateData['system.attributes.sp.value'] = data.attributes.sp.max;
+        updateData['system.attributes.rp.value'] = data.attributes.rp.max;
 
         // Heal Ability damage
         const restoredAbilityDamages = [];
         for (let [abl, ability] of Object.entries(data.abilities)) {
             if (ability.damage && ability.damage > 0) {
-                updateData[`data.abilities.${abl}.damage`] = --ability.damage;
+                updateData[`system.abilities.${abl}.damage`] = --ability.damage;
                 restoredAbilityDamages.push({ability: abl, amount: 1});
             } 
         }
 
         for (let [k, r] of Object.entries(data.resources)) {
             if (r.max && (r.sr || r.lr)) {
-                updateData[`data.resources.${k}.value`] = r.max;
+                updateData[`system.resources.${k}.value`] = r.max;
             }
         }
 
@@ -190,25 +190,25 @@ export const ActorRestMixin = (superclass) => class extends superclass {
         for (let spellLevel = 1; spellLevel <= 6; spellLevel++) {
             const spellLevelData = data.spells[`spell${spellLevel}`];
             if (spellLevelData.value < spellLevelData.max) {
-                updateData[`data.spells.spell${spellLevel}.value`] = spellLevelData.max;
+                updateData[`system.spells.spell${spellLevel}.value`] = spellLevelData.max;
                 deltaSpellSlots += (spellLevelData.max - spellLevelData.value);
             }
 
             if (spellLevelData.perClass) {
                 for (const [classKey, classData] of Object.entries(spellLevelData.perClass)) {
                     if (classData.value < classData.max) {
-                        updateData[`data.spells.spell${spellLevel}.perClass.${classKey}.value`] = classData.max;
+                        updateData[`system.spells.spell${spellLevel}.perClass.${classKey}.value`] = classData.max;
                         deltaSpellSlots += (classData.max - classData.value);
                     }
                 }
             }
         }
 
-        const items = this.items.filter(i => i.data.data.uses && ["sr", "lr", "day"].includes(i.data.data.uses.per) && i.data.data.uses.value < i.getMaxUses());
+        const items = this.items.filter(i => i.system.uses && ["sr", "lr", "day"].includes(i.system.uses.per) && i.system.uses.value < i.getMaxUses());
         const updateItems = items.map(item => {
             return {
                 _id: item.id,
-                "data.uses.value": item.getMaxUses()
+                "system.uses.value": item.getMaxUses()
             }
         });
 

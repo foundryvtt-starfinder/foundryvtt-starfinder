@@ -2,77 +2,6 @@
   "_id": "2LdFiFRgqZPIy8oY",
   "name": "Hover Tank",
   "type": "vehicle",
-  "data": {
-    "attributes": {
-      "type": "landW",
-      "cover": "total",
-      "dimensions": {
-        "height": "8",
-        "length": "20",
-        "width": "20"
-      },
-      "eac": {
-        "value": 28
-      },
-      "expansionBays": {
-        "value": 0
-      },
-      "hardness": 20,
-      "hp": {
-        "max": 250,
-        "threshold": 125,
-        "value": 250
-      },
-      "kac": {
-        "value": 30
-      },
-      "modifiers": {
-        "attackFullSpeed": "-5",
-        "attackMoving": "-3",
-        "attackStopped": "0",
-        "piloting": "0"
-      },
-      "size": "gargantuan",
-      "special": [],
-      "speed": {
-        "type": "",
-        "drive": "40 ft",
-        "full": "550 ft",
-        "mph": "65 mph (hover)"
-      },
-      "systems": []
-    },
-    "conditions": {},
-    "crew": {
-      "complement": {
-        "actorIds": [],
-        "limit": 1
-      },
-      "passenger": {
-        "actorIds": [],
-        "limit": 3
-      },
-      "pilot": {
-        "actorIds": [],
-        "limit": 1
-      },
-      "useNPCCrew": false
-    },
-    "details": {
-      "description": {
-        "chat": "",
-        "unidentified": "",
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">A hover tank is mostly armor, digital controls, and machinery, leaving room for only a few passengers in its center. It has small hatches above and below.</span></p>"
-      },
-      "level": 14,
-      "price": 227000,
-      "source": "AR pg. 138"
-    },
-    "hangarBay": {
-      "actorIds": [],
-      "limit": 0
-    }
-  },
   "effects": [],
   "flags": {},
   "img": "icons/svg/mystery-man.svg",
@@ -81,7 +10,11 @@
       "_id": "6hYEGXGbezExRSQD",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 100000,
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -114,17 +47,17 @@
           "descriptor": "negate"
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 100000
+      }
     },
     {
       "_id": "LS40UB61zorcVeSs",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 200000,
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -157,17 +90,17 @@
           "descriptor": "half"
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 200000
+      }
     },
     {
       "_id": "EZfTGJ7VBorBCuvm",
       "name": "Planetary comm unit",
       "type": "vehicleSystem",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
+      "sort": 500000,
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -192,17 +125,17 @@
           "usedAsPilot": false
         },
         "source": "CRB pg. 218"
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
-      "sort": 500000
+      }
     },
     {
       "_id": "7UIYjaFPv8hmFWPv",
       "name": "Reaction cannon, advanced",
       "type": "weapon",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/weapons/advanced_reaction_cannon.webp",
+      "sort": 100000,
+      "system": {
         "type": "",
         "ability": "dex",
         "abilityMods": {
@@ -425,17 +358,17 @@
         },
         "weaponCategory": "projectile",
         "weaponType": "heavy"
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/advanced_reaction_cannon.webp",
-      "sort": 100000
+      }
     },
     {
       "_id": "sp2oXiFPnwYoxVhY",
       "name": "Autopilot",
       "type": "vehicleSystem",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "sort": 400000,
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -460,17 +393,17 @@
           "usedAsPilot": true
         },
         "source": "CRB pg. 280"
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg",
-      "sort": 400000
+      }
     },
     {
       "_id": "ve6b7RcXM6fw5Nm5",
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
+      "sort": 500000,
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -499,13 +432,80 @@
           "usedForSenses": true
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
-      "sort": 500000
+      }
     }
   ],
+  "system": {
+    "attributes": {
+      "type": "landW",
+      "cover": "total",
+      "dimensions": {
+        "height": "8",
+        "length": "20",
+        "width": "20"
+      },
+      "eac": {
+        "value": 28
+      },
+      "expansionBays": {
+        "value": 0
+      },
+      "hardness": 20,
+      "hp": {
+        "max": 250,
+        "threshold": 125,
+        "value": 250
+      },
+      "kac": {
+        "value": 30
+      },
+      "modifiers": {
+        "attackFullSpeed": "-5",
+        "attackMoving": "-3",
+        "attackStopped": "0",
+        "piloting": "0"
+      },
+      "size": "gargantuan",
+      "special": [],
+      "speed": {
+        "type": "",
+        "drive": "40 ft",
+        "full": "550 ft",
+        "mph": "65 mph (hover)"
+      },
+      "systems": []
+    },
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": 3
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">A hover tank is mostly armor, digital controls, and machinery, leaving room for only a few passengers in its center. It has small hatches above and below.</span></p>"
+      },
+      "level": 14,
+      "price": 227000,
+      "source": "AR pg. 138"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 0
+    }
+  },
   "token": {
     "name": "Hover Tank",
     "actorId": "2LdFiFRgqZPIy8oY",

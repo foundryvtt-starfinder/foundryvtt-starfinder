@@ -2,77 +2,6 @@
   "_id": "lroZwBvW4KawAUl5",
   "name": "Spy Cruiser",
   "type": "vehicle",
-  "data": {
-    "attributes": {
-      "type": "landAW",
-      "cover": "total",
-      "dimensions": {
-        "height": "5",
-        "length": "15",
-        "width": "10"
-      },
-      "eac": {
-        "value": 29
-      },
-      "expansionBays": {
-        "value": 0
-      },
-      "hardness": 12,
-      "hp": {
-        "max": 255,
-        "threshold": 127,
-        "value": 255
-      },
-      "kac": {
-        "value": 30
-      },
-      "modifiers": {
-        "attackFullSpeed": "-4",
-        "attackMoving": "-2",
-        "attackStopped": "0",
-        "piloting": "2"
-      },
-      "size": "huge",
-      "special": [],
-      "speed": {
-        "type": "",
-        "drive": "60 ft",
-        "full": "800 ft",
-        "mph": "90 mph (fly and hover)"
-      },
-      "systems": []
-    },
-    "conditions": {},
-    "crew": {
-      "complement": {
-        "actorIds": [],
-        "limit": 0
-      },
-      "passenger": {
-        "actorIds": [],
-        "limit": 5
-      },
-      "pilot": {
-        "actorIds": [],
-        "limit": 1
-      },
-      "useNPCCrew": false
-    },
-    "details": {
-      "description": {
-        "chat": "",
-        "unidentified": "",
-        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Used by many planetary military forces for undersea engagements, a stealth sub features a small promenade along its dorsal surface for use when it surfaces.</span></p>"
-      },
-      "level": 15,
-      "price": 316000,
-      "source": "AR pg. 138"
-    },
-    "hangarBay": {
-      "actorIds": [],
-      "limit": 0
-    }
-  },
   "effects": [],
   "flags": {},
   "img": "icons/svg/mystery-man.svg",
@@ -80,7 +9,10 @@
     {
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -113,15 +45,15 @@
           "descriptor": "negate"
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg"
+      }
     },
     {
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -154,15 +86,15 @@
           "descriptor": "half"
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg"
+      }
     },
     {
       "name": "Unlimited comm unit",
       "type": "vehicleSystem",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -187,15 +119,15 @@
           "usedAsPilot": false
         },
         "source": "CRB pg. 218"
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp"
+      }
     },
     {
       "name": "Autopilot",
       "type": "vehicleSystem",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -220,15 +152,15 @@
           "usedAsPilot": true
         },
         "source": "CRB pg. 280"
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg"
+      }
     },
     {
       "name": "Stealth (-2)",
       "type": "vehicleSystem",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -253,15 +185,15 @@
           "usedAsPilot": false
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "icons/svg/mystery-man.svg"
+      }
     },
     {
       "name": "Enhanced sensors",
       "type": "vehicleSystem",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
+      "system": {
         "type": "",
         "abilityMods": {
           "parts": []
@@ -290,15 +222,15 @@
           "usedForSenses": true
         },
         "source": ""
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp"
+      }
     },
     {
       "name": "Zero cannon, advanced",
       "type": "weapon",
-      "data": {
+      "effects": [],
+      "flags": {},
+      "img": "systems/sfrpg/icons/equipment/weapons/advanced_zero_cannon.webp",
+      "system": {
         "type": "",
         "ability": "dex",
         "abilityMods": {
@@ -521,12 +453,80 @@
         },
         "weaponCategory": "cryo",
         "weaponType": "heavy"
-      },
-      "effects": [],
-      "flags": {},
-      "img": "systems/sfrpg/icons/equipment/weapons/advanced_zero_cannon.webp"
+      }
     }
   ],
+  "system": {
+    "attributes": {
+      "type": "landAW",
+      "cover": "total",
+      "dimensions": {
+        "height": "5",
+        "length": "15",
+        "width": "10"
+      },
+      "eac": {
+        "value": 29
+      },
+      "expansionBays": {
+        "value": 0
+      },
+      "hardness": 12,
+      "hp": {
+        "max": 255,
+        "threshold": 127,
+        "value": 255
+      },
+      "kac": {
+        "value": 30
+      },
+      "modifiers": {
+        "attackFullSpeed": "-4",
+        "attackMoving": "-2",
+        "attackStopped": "0",
+        "piloting": "2"
+      },
+      "size": "huge",
+      "special": [],
+      "speed": {
+        "type": "",
+        "drive": "60 ft",
+        "full": "800 ft",
+        "mph": "90 mph (fly and hover)"
+      },
+      "systems": []
+    },
+    "conditions": {},
+    "crew": {
+      "complement": {
+        "actorIds": [],
+        "limit": 0
+      },
+      "passenger": {
+        "actorIds": [],
+        "limit": 5
+      },
+      "pilot": {
+        "actorIds": [],
+        "limit": 1
+      },
+      "useNPCCrew": false
+    },
+    "details": {
+      "description": {
+        "chat": "",
+        "unidentified": "",
+        "value": "<p><span id=\"ctl00_MainContent_DataListLandVehicles_ctl00_LabelName\">Used by many planetary military forces for undersea engagements, a stealth sub features a small promenade along its dorsal surface for use when it surfaces.</span></p>"
+      },
+      "level": 15,
+      "price": 316000,
+      "source": "AR pg. 138"
+    },
+    "hangarBay": {
+      "actorIds": [],
+      "limit": 0
+    }
+  },
   "token": {
     "name": "Spy Cruiser",
     "actorId": "mP7xoDRWWqgwoIIf",

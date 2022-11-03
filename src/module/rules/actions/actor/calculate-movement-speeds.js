@@ -32,8 +32,8 @@ export default function (engine) {
             return computedBonus;
         };
 
-        const slowestArmor = armors?.reduce((armor, worstArmor) => (armor.data?.data?.armor?.speedAdjust || 0) < (worstArmor.data?.data?.armor?.speedAdjust || 0) ? armor : worstArmor);;
-        const armorSpeed = slowestArmor?.data?.data?.armor?.speedAdjust || 0;
+        const slowestArmor = armors?.reduce((armor, worstArmor) => (armor.system?.armor?.speedAdjust || 0) < (worstArmor.system?.armor?.speedAdjust || 0) ? armor : worstArmor);;
+        const armorSpeed = slowestArmor?.system?.armor?.speedAdjust || 0;
         if (armorSpeed) {
             data.attributes.speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
                 speed: game.i18n.localize("SFRPG.ActorSheet.Attributes.Speed.Types.All"),

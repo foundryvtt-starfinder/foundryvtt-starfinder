@@ -14,7 +14,7 @@ export default function (engine) {
         data.attributes.baseAttackBonus.rolledMods = [];
 
         for (const cls of classes) {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
             let mod = 0;
             switch (classData.bab) {

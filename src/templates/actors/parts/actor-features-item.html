@@ -1,8 +1,8 @@
-        <li class="item flexrow {{#unless isCharged}}uncharged{{/unless}}" data-item-id="{{item._id}}">
-            <div class="item-name flexrow rollable" {{createTippy title=item.name subtitle=item.data.description.short attributes=item.attributes tooltips=item.actorResourceData.tooltip}}>
+       <li class="item flexrow {{#unless isCharged}}uncharged{{/unless}}" data-item-id="{{item._id}}">
+            <div class="item-name flexrow rollable" {{createTippy title=item.name subtitle=item.system.description.short attributes=item.attributes tooltips=item.actorResourceData.tooltip}}>
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>
-                    {{#if item.data.isFree}}[{{localize "SFRPG.DroneSheet.Features.ModsFree"}}] {{/if}}
+                    {{#if item.system.isFree}}[{{localize "SFRPG.DroneSheet.Features.ModsFree"}}] {{/if}}
                     {{#if (and prefixTable (lookup prefixTable item.type))}}
                         {{ lookup prefixTable item.type }}: 
                     {{/if}}
@@ -15,9 +15,9 @@
                         </div>
                         <div>
                             {{#if (and (eq item.type "actorResource") item.actorResourceData)}}
-                            <label class="value-label">@resources.{{item.data.type}}.{{item.data.subType}}.value</label>
+                            <label class="value-label">@resources.{{item.system.type}}.{{item.system.subType}}.value</label>
                             {{else}}
-                                {{#if item.data.enabled}}
+                                {{#if item.system.enabled}}
                                 <label class="error">{{localize "SFRPG.ItemSheet.ActorResource.ErrorIncompleteData"}}</label>
                                 {{else}}
                                 <label class="value-label">{{localize "SFRPG.ItemSheet.ActorResource.ErrorDisabled"}}</label>
@@ -27,13 +27,13 @@
                     </div>
                     {{/if}}
                 </h4>
-                {{#if (or item.hasAttack item.hasDamage)}}
+                {{#if (or item.config.hasAttack item.config.hasDamage)}}
                 <div class="item-action flexcol">
-                    {{#if item.hasAttack}}
+                    {{#if item.config.hasAttack}}
                     <button type="button" class="tag attack">{{localize "SFRPG.Attack"}}</button>
                     {{/if}}
-                    {{#if item.hasDamage}}
-                        {{#if (eq item.data.actionType "heal")}}
+                    {{#if item.config.hasDamage}}
+                        {{#if (eq item.system.actionType "heal")}}
                             <button type="button" class="tag healing">{{localize "SFRPG.ActionHeal"}}</button>
                         {{else}}
                             <button type="button" class="tag damage">{{localize "SFRPG.Damage.Title"}}</button>
@@ -45,7 +45,7 @@
                 <div class="actor-resource-values">
                     <div>
                         <label class="actor-resource-base-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageBaseValue"}}:</label>
-                        <input class="actor-resource-base-input" data-resource-id="{{item._id}}" type="text" name="" value="{{item.data.base}}" data-dtype="Number"/>
+                        <input class="actor-resource-base-input" data-resource-id="{{item._id}}" type="text" name="" value="{{item.system.base}}" data-dtype="Number"/>
                     </div>
                     <div>
                         <label class="actor-resource-computed-label">{{localize "SFRPG.ItemSheet.ActorResource.UsageComputedValue"}}:</label>
@@ -57,16 +57,16 @@
 
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
-                {{#if (or item.data.uses.value item.data.uses.max)}}
-                    {{item.data.uses.value}} / {{item.data.uses.max}}
-                {{else if item.data.recharge.value}}
-                    {{#if item.isOnCooldown}}
+                {{#if (or item.system.uses.value item.system.uses.max)}}
+                    {{item.system.uses.value}} / {{item.system.uses.max}}
+                {{else if item.system.recharge.value}}
+                    {{#if item.config.isOnCooldown}}
                         <a class="item-recharge rollable">{{item.labels.recharge}}</a>
                     {{else}}
-                        {{localize "SFRPG.Charged"}}
+                        {{localize "SFRPG.Items.Feat.Charged"}}
                     {{/if}}
-                {{else if item.hasCapacity}}
-                    {{item.capacityCurrent}} / {{item.capacityMaximum}}
+                {{else if item.config.hasCapacity}}
+                    {{item.config.capacityCurrent}} / {{item.config.capacityMaximum}}
                     {{#if isOwner}}
                     &nbsp;
                     <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
@@ -74,28 +74,28 @@
                 {{/if}}
             </div>
             <div class="item-detail item-action">
-                {{#if (and item.data.activation.type item.isFeat)}}
-                    {{#if item.data.isActive}}
+                {{#if (and item.system.activation.type item.isFeat)}}
+                    {{#if item.system.isActive}}
                     <button type="button" class="tag featDeactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
                     {{else}}
                     <button type="button" class="tag featActivate">{{item.labels.activation}}</button>
                     {{/if}}
                 {{/if}}
-                {{#if item.hasCapacity}}
-                    {{item.data.usage.value}} / {{item.data.usage.per}}
+                {{#if item.config.hasCapacity}}
+                    {{item.system.usage.value}} / {{item.system.usage.per}}
                 {{/if}}
             </div>
 
             {{else if section.isClass}}
             <div class="item-detail player-class">
-                {{item.data.subclass}}
+                {{item.system.subclass}}
             </div>
             <div class="item-detail">
-                Level {{item.data.levels}}
+                Level {{item.system.levels}}
             </div>
             {{else if section.isRace}}
             <div class="item-detail player-race">
-                {{item.data.type}}
+                {{item.system.type}}
             </div>
             {{/if}}
 
@@ -103,7 +103,7 @@
             <div class="item-controls">
                 {{#if (not disableEquipping)}}
                 {{#if (or (or (or (eq item.type "shield") (eq item.type "weapon")) (eq item.type "equipment")) (eq item.type "container"))}}
-                {{#if item.data.equipped}}
+                {{#if item.system.equipped}}
                 <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Equip"}}"><i class="fas fa-check"></i></a>
                 {{else}}
                 <a class="item-control item-equip" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Unequip"}}"><i class="far fa-square"></i></a>

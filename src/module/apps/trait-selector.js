@@ -32,7 +32,7 @@ export class TraitSelectorSFRPG extends FormApplication {
      * @returns {Object}
      */
     getData() {
-        let attr = getProperty(this.object.data, this.attribute);
+        let attr = getProperty(this.object, this.attribute);
         if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
 
         const choices = duplicate(this.options.choices);
@@ -97,7 +97,7 @@ export class TraitSelectorSFRPG extends FormApplication {
     _updateObject(event, formData) {
         let choices = [];
 
-        if (this.attribute !== "data.traits.dr") {
+        if (this.attribute !== "system.traits.dr") {
             for (let [k, v] of Object.entries(formData)) {
                 if ((k !== 'custom') && v) choices.push(k);
             }

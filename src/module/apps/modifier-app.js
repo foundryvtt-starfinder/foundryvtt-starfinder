@@ -269,19 +269,19 @@ export default class SFRPGModifierApplication extends FormApplication {
     }
 
     async _updateModifierData(formData) {
-        const modifiers = duplicate(this.actor.data.data.modifiers);
+        const modifiers = duplicate(this.actor.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === this.modifier._id);
 
         const formula = formData['modifier'];
         if (formula) {
-            const roll = Roll.create(formula, this.owningActor?.data?.data || this.actor.data.data);
-            modifier.max = roll.evaluate({maximize: true}).total;
+            const roll = Roll.create(formula, this.owningActor?.system || this.actor.system);
+            modifier.max = await roll.evaluate({maximize: true}).total;
         } else {
             modifier.max = 0;
         }
 
         mergeObject(modifier, formData);
         
-        return this.actor.update({'data.modifiers': modifiers});
+        return this.actor.update({'system.modifiers': modifiers});
     }
 }

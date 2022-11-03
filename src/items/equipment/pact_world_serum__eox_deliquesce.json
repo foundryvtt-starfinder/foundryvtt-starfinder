@@ -2,12 +2,14 @@
   "_id": "Vh1CEii0z68lBYMv",
   "name": "Pact World Serum,  Eox Deliquesce",
   "type": "consumable",
-  "data": {
+  "img": "icons/consumables/potions/bottle-bulb-empty-glass.webp",
+  "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -23,17 +25,17 @@
     "attackBonus": 0,
     "attributes": {
       "ac": {
-        "value": ""
+        "value": "5"
       },
       "customBuilt": false,
       "dex": {
         "mod": ""
       },
       "hardness": {
-        "value": ""
+        "value": "2"
       },
       "hp": {
-        "max": "",
+        "max": "6",
         "value": 6
       },
       "size": "medium",
@@ -45,6 +47,7 @@
     "consumableType": "serum",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -66,12 +69,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Eppro Enterprises doesn&rsquo;t include this serum in its public catalogs, but the serum&rsquo;s existence is an open secret. This shadowy fluid grants you a +2 insight bonus to Mysticism checks, and you can attempt checks with this skill untrained. While this serum is in effect, you can take a standard action to stop any bleed effect affecting you.</p>\n<h2><strong>Serums</strong></h2>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum&rsquo;s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
+      "value": "<p>Eppro Enterprises doesn&rsquo;t include this serum in its public catalogs, but the serum&rsquo;s existence is an open secret. This shadowy fluid grants you a +2 insight bonus to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.HXcmgteT2OegqFrB]{Mysticism} checks, and you can attempt checks with this skill untrained. While this serum is in effect, you can take a standard action to stop any bleed effect affecting you.</p>\n<p>&nbsp;</p>\n<p><em>Enable/Disable modifiers in the Modifiers tab.</em></p>\n<p>&nbsp;</p>\n<h3><span class=\"fontstyle0\">Pact World Serums</span></h3>\n<p><span class=\"fontstyle2\">Nearly all cultures in the Pact Worlds use&nbsp;</span><span class=\"fontstyle3\">serums of enhancement</span><span class=\"fontstyle2\">, vials of magic liquids described on page 225 of the&nbsp;</span><span class=\"fontstyle3\">Starfinder Core Rulebook</span><span class=\"fontstyle2\">. Eppro Enterprises, a popular manufacturer of energy drinks and restoratives on Verces, has expended millions of credits in promoting its &ldquo;Pact Worlds&rdquo; line of serums, each with individual effects and flavors that capture the essence of one of the Pact Worlds. These serums are also sold mixed into drinks at bars across the system. Whether you buy into the hype of Eppro&rsquo;s products or not, its Pact Worlds serums are reliable and effective. As with all&nbsp;</span><span class=\"fontstyle3\">serums of enhancement</span><span class=\"fontstyle2\">, these serums are effective when imbibed by living creatures and last for 1 hour.</span></p>\n<h3>Serums</h3>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum&rsquo;s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -84,15 +88,33 @@
     "identified": true,
     "isActive": null,
     "level": 5,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "9b8fc4d7-3705-442b-a55c-9a4c816b5a99",
+        "name": "Pact World Serum,  Eox Deliquesce",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Eppro Enterprises doesn’t include this serum in its public catalogs, but the serum’s existence is an open secret. This shadowy fluid grants you a +2 insight bonus to  Mysticism checks, and you can attempt checks with this skill untrained. While this serum is in effect, you can take a standard action to stop any bleed effect affecting you.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "mys"
+      }
+    ],
     "price": 475,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -110,12 +132,5 @@
       "per": "charges",
       "value": 1
     }
-  },
-  "effects": [],
-  "flags": {},
-  "img": "icons/consumables/potions/bottle-bulb-empty-glass.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
   }
 }

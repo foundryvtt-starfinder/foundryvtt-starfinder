@@ -260,7 +260,7 @@ export class DiceSFRPG {
             // }
 
             const itemContext = rollContext.allContexts['item'];
-            const htmlData = [{ name: "rollNotes", value: itemContext?.data?.data?.rollNotes }];
+            const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
 
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
@@ -476,7 +476,7 @@ export class DiceSFRPG {
         };
 
         const getDamageTypeForPart = (part) => {
-            if (part.types && !foundry.utils.isObjectEmpty(part.types)) {
+            if (part.types && !foundry.utils.isEmpty(part.types)) {
                 const filteredTypes = Object.entries(part.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
 
@@ -492,7 +492,7 @@ export class DiceSFRPG {
 
         /** @type {DamageType[]} */
         let damageTypes = parts.reduce((acc, cur) => {
-            if (cur.types && !foundry.utils.isObjectEmpty(cur.types)) {
+            if (cur.types && !foundry.utils.isEmpty(cur.types)) {
                 const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
                 const obj = { types: [], operator: "" };
 
@@ -583,7 +583,7 @@ export class DiceSFRPG {
             let damageTypeString = "";
             const tempParts = usedParts.reduce((arr, curr) => {
                 let obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
-                if (curr.types && !foundry.utils.isObjectEmpty(curr.types)) {
+                if (curr.types && !foundry.utils.isEmpty(curr.types)) {
                     for (const [key, isEnabled] of Object.entries(curr.types)) {
                         if (isEnabled) {
                             obj.types.push(key);
@@ -623,10 +623,10 @@ export class DiceSFRPG {
             const itemContext = rollContext.allContexts['item'];
             if (itemContext) {
                 /** Regular Weapons use data.properties for their properties */
-                if (itemContext.entity.data.data.properties) {
+                if (itemContext.entity.system.properties) {
                     try {
                         const props = [];
-                        for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.properties)) {
+                        for (const [key, isEnabled] of Object.entries(itemContext.entity.system.properties)) {
                             if (isEnabled) {
                                 tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
                                 props.push(key);
@@ -637,14 +637,14 @@ export class DiceSFRPG {
                 }
 
                 /** Starship Weapons use data.special for their properties */
-                if (itemContext.entity.data.type === "starshipWeapon") {
-                    tags.push({tag: `starship-weapon-type ${itemContext.entity.data.data.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.data.data.weaponType]});
-                    htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.data.data.weaponType });
+                if (itemContext.entity.type === "starshipWeapon") {
+                    tags.push({tag: `starship-weapon-type ${itemContext.entity.system.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.system.weaponType]});
+                    htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.system.weaponType });
 
-                    if (itemContext.entity.data.data.special) {
+                    if (itemContext.entity.system.special) {
                         try {
                             const props = [];
-                            for (const [key, isEnabled] of Object.entries(itemContext.entity.data.data.special)) {
+                            for (const [key, isEnabled] of Object.entries(itemContext.entity.system.special)) {
                                 if (isEnabled) {
                                     tags.push({tag: `starship-weapon-properties ${key}`, text: SFRPG.starshipWeaponProperties[key]});
                                     props.push(key);
@@ -655,7 +655,7 @@ export class DiceSFRPG {
                     }
                 }
 
-                const specialMaterials = itemContext.entity.data.data.specialMaterials;
+                const specialMaterials = itemContext.entity.system.specialMaterials;
                 if (specialMaterials) {
                     for (const [material, isEnabled] of Object.entries(specialMaterials)) {
                         if (isEnabled) {
@@ -718,7 +718,7 @@ export class DiceSFRPG {
                 roll._total = 1;
                 const nonlethal = tags.find(e => e.tag === "weapon-properties nonlethal");
                 
-                if (itemContext.data.type !== "starshipWeapon") {
+                if (itemContext.type !== "starshipWeapon") {
                     if (nonlethal) {
                         nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
                     } else {
@@ -768,8 +768,8 @@ export class DiceSFRPG {
                     damageTypeString: damageTypeString
                 };
 
-                if (itemContext && itemContext.entity.data.data.specialMaterials) {
-                    customData.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                if (itemContext && itemContext.entity.system.specialMaterials) {
+                    customData.specialMaterials = itemContext.entity.system.specialMaterials;
                 }
 
                 try {
@@ -803,8 +803,8 @@ export class DiceSFRPG {
                         }
                     };
 
-                    if (itemContext && itemContext.entity.data.data.specialMaterials) {
-                        messageData.flags.specialMaterials = itemContext.entity.data.data.specialMaterials;
+                    if (itemContext && itemContext.entity.system.specialMaterials) {
+                        messageData.flags.specialMaterials = itemContext.entity.system.specialMaterials;
                     }
                 }
                 
@@ -854,7 +854,7 @@ export class DiceSFRPG {
     static highlightCriticalSuccessFailure(message, html, data) {
         if (!message.isRoll || !message.isContentVisible) return;
     
-        let roll = message.roll;
+        let roll = message.rolls[0];
         if (!roll.dice.length) return;
         for (let d of roll.dice) {
             if (d.faces === 20 && d.results.length === 1) {
@@ -882,7 +882,7 @@ export class DiceSFRPG {
     static addDamageTypes(message, html, data) {
         if (!message.isRoll || !message.isContentVisible) return;
 
-        const roll = message.roll;
+        const roll = message.rolls[0];
         if (!(roll?.dice.length > 0)) return;
         for (const die of roll.dice) {
             if (die?.options?.isDamageRoll) {

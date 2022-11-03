@@ -101,7 +101,7 @@ export default function (engine) {
         let skillpointsMax = 0;
         let totalLevel = 0;
         for (const cls of classes) {
-            const classData = cls.data.data;
+            const classData = cls.system;
 
             const classBonus = classData.levels * (intModifier + classData.skillRanks.value);
             skillpointsMax += classBonus;

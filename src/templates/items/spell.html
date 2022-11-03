@@ -23,7 +23,7 @@
                 </li>
                 {{/if}}
                 <li class="wide" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
-                    <input type="text" name="data.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
                 </li>
             </ul>
     
@@ -53,7 +53,7 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">{{ localize "SFRPG.Items.Spell.Details" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Spell.Details" }}</h3>
 
             {{!-- Allowed Classes --}}
             <div class="form-group">
@@ -61,7 +61,7 @@
                 <div class="form-fields">
                     {{#each config.spellcastingClasses as |name key|}}
                     <label class="checkbox">
-                        <input type="checkbox" name="data.allowedClasses.{{key}}" {{checked (lookup ../itemData.allowedClasses key)}} /> {{name}}
+                        <input type="checkbox" name="system.allowedClasses.{{key}}" {{checked (lookup ../itemData.allowedClasses key)}} /> {{name}}
                     </label>
                     {{/each}}
                 </div>
@@ -71,7 +71,7 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Spell.Level" }}</label>
                 <div class="form-fields">
-                    <select name="data.level" data-dtype="Number">
+                    <select name="system.level" data-dtype="Number">
                         {{#select itemData.level}}
                         {{#each config.spellLevels as |name lvl|}}
                         <option value="{{lvl}}">{{localize name}}</option>
@@ -85,7 +85,7 @@
                 <label>{{ localize "SFRPG.Items.Spell.IsVariableLevel" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.isVariableLevel" {{checked itemData.isVariableLevel}} /> {{ localize "SFRPG.Items.Spell.IsVariableLevelYes" }}
+                        <input type="checkbox" name="system.isVariableLevel" {{checked itemData.isVariableLevel}} /> {{ localize "SFRPG.Items.Spell.IsVariableLevelYes" }}
                     </label>
                 </div>
             </div>
@@ -94,7 +94,7 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Spell.School" }}</label>
                 <div class="form-fields">
-                    <select name="data.school">
+                    <select name="system.school">
                         {{#select itemData.school}}
                         {{#each config.spellSchools as |name sch|}}
                         <option value="{{sch}}">{{localize name}}</option>
@@ -109,13 +109,13 @@
                 <label>{{ localize "SFRPG.Items.Spell.Properties" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.sr" {{checked itemData.sr}}/> {{ localize "SFRPG.Items.Spell.Resistance" }}
+                        <input type="checkbox" name="system.sr" {{checked itemData.sr}}/> {{ localize "SFRPG.Items.Spell.Resistance" }}
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" name="data.dismissible" {{checked itemData.dismissible}}/> {{ localize "SFRPG.Items.Spell.Dismissible" }}
+                        <input type="checkbox" name="system.dismissible" {{checked itemData.dismissible}}/> {{ localize "SFRPG.Items.Spell.Dismissible" }}
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" name="data.concentration" {{checked itemData.concentration}}/> {{ localize "SFRPG.Items.Spell.Concentration" }}
+                        <input type="checkbox" name="system.concentration" {{checked itemData.concentration}}/> {{ localize "SFRPG.Items.Spell.Concentration" }}
                     </label>
                 </div>
             </div>
@@ -124,15 +124,15 @@
             <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Spell.SpellcastingMaterials" }}</label>
                 <div class="form-fields">
-                    <input class="materials" type="text" name="data.materials.value" value="{{itemData.materials.value}}"/>
+                    <input class="materials" type="text" name="system.materials.value" value="{{itemData.materials.value}}"/>
                     {{#if itemData.materials.value}}
                     <div class="spell-materials flexrow">
                         <label>{{ localize "SFRPG.Items.Spell.Supply" }}</label>
-                        <input type="text" name="data.materials.supply" value="{{itemData.materials.supply}}" data-dtype="Number" Placeholder="0"/>
+                        <input type="text" name="system.materials.supply" value="{{itemData.materials.supply}}" data-dtype="Number" Placeholder="0"/>
                         <label>{{ localize "SFRPG.Items.Spell.Cost" }}</label>
-                        <input type="text" name="data.materials.cost" value="{{itemData.materials.cost}}" data-dtype="Number" Placeholder="0"/>
+                        <input type="text" name="system.materials.cost" value="{{itemData.materials.cost}}" data-dtype="Number" Placeholder="0"/>
                         <label>{{ localize "SFRPG.Items.Spell.Consumed" }}</label>
-                        <input type="checkbox" name="data.materials.consumed" {{checked itemData.materials.consumed}}/>
+                        <input type="checkbox" name="system.materials.consumed" {{checked itemData.materials.consumed}}/>
                     </div>
                     {{/if}}
                 </div>
@@ -143,10 +143,10 @@
                 <label>{{ localize "SFRPG.Items.Spell.PreparationMode" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
-                        <input type="checkbox" name="data.preparation.prepared" {{checked itemData.preparation.prepared}}/> {{ localize "SFRPG.Items.Spell.Prepared" }}
+                        <input type="checkbox" name="system.preparation.prepared" {{checked itemData.preparation.prepared}}/> {{ localize "SFRPG.Items.Spell.Prepared" }}
                     </label>
                     <span>&nbsp;</span>
-                    <select name="data.preparation.mode">
+                    <select name="system.preparation.mode">
                         {{#select itemData.preparation.mode}}
                         <option value=""></option>
                         {{#each config.spellPreparationModes as |name key|}}
@@ -162,12 +162,12 @@
             
             <br />
 
-            <h3 class="form-header">{{ localize "SFRPG.Items.Spell.Casting" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Spell.Casting" }}</h3>
 
             {{!-- Item Activation Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-activation.html"}}
 
-            <h3 class="form-header">{{ localize "SFRPG.Items.Spell.Effects" }}</h3>
+            <h3 class="form-header noborder">{{ localize "SFRPG.Items.Spell.Effects" }}</h3>
 
             {{!-- Item Action Template --}}
             {{> "systems/sfrpg/templates/items/parts/item-action.html"}}

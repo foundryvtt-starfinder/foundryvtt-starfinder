@@ -52,7 +52,7 @@ export default function (engine) {
             }
 
             if (deadActors.length > 0) {
-                console.log(`Found ${deadActors.length} non-existent actors for vehicle '${fact.actor?.data?.name || fact.actorId}', crew type: ${key}`);
+                console.log(`Found ${deadActors.length} non-existent actors for vehicle '${fact.actor?.name || fact.actorId}', crew type: ${key}`);
                 for (const deadActorId of deadActors) {
                     const deadActorIndex = crew.actorIds.indexOf(deadActorId);
                     if (deadActorIndex > -1) {
@@ -62,7 +62,7 @@ export default function (engine) {
             }
         }
 
-        actor.data.crew = crewActors;
+        actor.crew = crewActors;
 
         return fact;
     });
