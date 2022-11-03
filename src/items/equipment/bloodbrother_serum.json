@@ -2,19 +2,14 @@
   "_id": "igzMXZrMGVeXVcLl",
   "name": "Bloodbrother serum",
   "type": "consumable",
-  "effects": [],
-  "flags": {},
   "img": "icons/consumables/potions/bottle-bulb-corked-glowing-red.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
   "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -30,17 +25,17 @@
     "attackBonus": 0,
     "attributes": {
       "ac": {
-        "value": ""
+        "value": "5"
       },
       "customBuilt": false,
       "dex": {
         "mod": ""
       },
       "hardness": {
-        "value": ""
+        "value": "2"
       },
       "hp": {
-        "max": "",
+        "max": "6",
         "value": 6
       },
       "size": "medium",
@@ -52,6 +47,7 @@
     "consumableType": "serum",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -73,12 +69,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Bloodbrother serum is made from rare alchemical reagents and the vital fluids of the eponymous beast. When the serum is consumed, you gain cold resistance 5 and regain 2 Hit Points per round for 5 rounds.</p>"
+      "value": "<p>Bloodbrother serum is made from rare alchemical reagents and the vital fluids of the eponymous beast. When the serum is consumed, you gain cold resistance 5 and regain 2 Hit Points per round for 5 rounds.</p>\n<p><br /><em>Enable/Disable modifiers in the Modifiers tab.</em></p>\n<p><em>&nbsp;</em></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Serums</h2>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum&rsquo;s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -91,21 +88,39 @@
     "identified": true,
     "isActive": null,
     "level": 5,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "560cfa0c-926b-4e53-b412-16f719de35b5",
+        "name": "Bloodbrother serum",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "Bloodbrother serum is made from rare alchemical reagents and the vital fluids of the eponymous beast. When the serum is consumed, you gain cold resistance 5 and regain 2 Hit Points per round for 5 rounds.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      }
+    ],
     "price": 500,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "AA. p. 23",
+    "source": "AA1 pg. 23",
     "target": {
       "type": "",
       "value": ""

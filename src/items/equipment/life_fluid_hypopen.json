@@ -1,15 +1,28 @@
 {
   "_id": "7CbNDGIZFSVVvHwz",
   "name": "Life Fluid Hypopen",
-  "type": "hybrid",
-  "effects": [],
-  "flags": {},
+  "type": "consumable",
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
+    "actionType": "heal",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "none",
+      "value": null
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": ""
@@ -29,33 +42,95 @@
       "sturdy": false
     },
     "attuned": false,
-    "bulk": "-",
-    "capacity": {
-      "max": 0,
-      "value": 0
+    "bulk": "",
+    "chatFlavor": "",
+    "consumableType": "serum",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "spell"
+          ],
+          "affectsEncumbrance": false,
+          "amount": 0,
+          "subtype": "spellSlot",
+          "weightProperty": "bulk"
+        }
+      ]
     },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "Healing",
+          "formula": "10d8",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Sivv physicians pioneered a ghoulish medical technique which drained, transferred, and suspended the life force of enslaved species into a magical liquid known as life fluid. This fluid could then be used to flood entire medical facilities, creating a restorative environment for sivv patients whose natural healing was stimulated by the drained life force. Life fluid can be concentrated, making an excellent emergency medicine for the treatment of disease, @Compendium[sfrpg.rules.aKqRtg165rAly1Cc]{Poison}, or wounds.<br />A life fluid hypopen is a one-use device like other hypopens in size and usage, requiring a standard action to activate. A single life fluid hypopen restores 10d8 Hit Points and affects the subject with greater remove condition.</p>"
+      "value": "<p>Sivv physicians pioneered a ghoulish medical technique which drained, transferred, and suspended the life force of enslaved species into a magical liquid known as life fluid. This fluid could then be used to flood entire medical facilities, creating a restorative environment for sivv patients whose natural healing was stimulated by the drained life force. Life fluid can be concentrated, making an excellent emergency medicine for the treatment of disease, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}, or wounds.</p>\n<p>A life fluid hypopen is a one-use device like other hypopens in size and usage, requiring a standard action to activate. A single life fluid hypopen restores 10d8 Hit Points and affects the subject with @Compendium[sfrpg.spells.7BFGmL14AeT9SrA6]{greater remove condition}.</p>"
     },
+    "descriptors": [],
+    "duration": {
+      "units": "",
+      "value": ""
+    },
+    "equippable": false,
     "equipped": false,
-    "hands": 0,
-    "identified": false,
+    "formula": "",
+    "identified": true,
+    "isActive": null,
     "level": 16,
     "modifiers": [],
     "price": 25000,
     "quantity": 1,
-    "source": "AP #33 pg. 53",
-    "usage": {
+    "quantityPerPack": 1,
+    "range": {
+      "additional": "",
       "per": "",
-      "value": 0
+      "units": "none",
+      "value": null
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "source": "AP #33 pg. 53",
+    "target": {
+      "type": "",
+      "value": ""
+    },
+    "uses": {
+      "autoDestroy": true,
+      "autoUse": true,
+      "max": 1,
+      "per": "charges",
+      "value": 1
     }
   }
 }

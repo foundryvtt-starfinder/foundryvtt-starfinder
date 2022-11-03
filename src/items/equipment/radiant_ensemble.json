@@ -2,18 +2,13 @@
   "_id": "HWkD5N5N620UpE7O",
   "name": "Radiant ensemble",
   "type": "magic",
-  "effects": [],
-  "flags": {},
   "img": "icons/equipment/chest/robe-layered-purple.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
   "system": {
     "type": "",
     "abilityMods": {
       "parts": []
     },
+    "ammunitionType": "",
     "attributes": {
       "ac": {
         "value": ""
@@ -27,7 +22,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 10
       },
       "size": "medium",
       "sturdy": false
@@ -35,8 +30,14 @@
     "attuned": false,
     "bulk": "1",
     "capacity": {
-      "max": 0,
-      "value": 0
+      "max": 3,
+      "value": 3
+    },
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
     },
     "critical": {
       "parts": []
@@ -49,20 +50,38 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This fashionable set of clothing is sold as a fancy dress, a classy suit, or similar cultural garb. It appears to be crafted from shimmering crystal, and functions as a set of formal clothing. A radiant ensemble seems to simultaneously shine (increasing the light level by one step in a 10-foot radius) and cause light to bend around it (granting a +2 circumstance bonus to saving throws against spells and effects that cause the blinded or dazzled condition). Three times per day, you can cause the radiant ensemble to give off a brilliant flash of light as a standard action. When you do so, each creature within 10 feet of you is blinded for 1d4 rounds, unless they succeed at a Reflex saving throw (DC = 10 + half your level + your key ability score modifier), in which case they are merely dazzled for 1 round.</p>\n<p>&nbsp;</p>\n<h3>Formal Wear</h3>\n<p>Formal wear is designed for a specific social function, such as a wedding or funeral, and commonly differs from planet to planet and even from culture to culture. Lacking the proper formal wear at a social event can cause you to take a penalty of up to &ndash;4 to Bluff, Diplomacy, and Disguise checks at the function, as determined by the GM.</p>"
+      "value": "<p>This fashionable set of clothing is sold as a fancy dress, a classy suit, or similar cultural garb. It appears to be crafted from shimmering crystal, and functions as a set of @Compendium[sfrpg.equipment.ozUIux1kwjBz9fwz]{formal clothing}. A radiant ensemble seems to simultaneously shine (increasing the light level by one step in a 10-foot radius) and cause light to bend around it (granting a +2 circumstance bonus to saving throws against spells and effects that cause the @Compendium[sfrpg.conditions.tOpF6qjnlnKc10t7]{Blinded} or @Compendium[sfrpg.conditions.YjE6UGzwOTfO9p4g]{Dazzled} condition). Three times per day, you can cause the radiant ensemble to give off a brilliant flash of light as a standard action. When you do so, each creature within 10 feet of you is blinded for 1d4 rounds, unless they succeed at a Reflex saving throw (DC = 10 + half your level + your key ability score modifier), in which case they are merely dazzled for 1 round.</p>"
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "hands": 0,
     "identified": true,
     "level": 5,
-    "modifiers": [],
+    "limitedWear": true,
+    "modifiers": [
+      {
+        "_id": "d3e41388-2e9e-4ed1-8b4b-020050a9ee92",
+        "name": "New Modifier",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "A radiant ensemble seems to simultaneously shine (increasing the light level by one step in a 10-foot radius) and cause light to bend around it (granting a +2 circumstance bonus to saving throws against spells and effects that cause the  Blinded or  Dazzled condition).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 3200,
     "quantity": 1,
+    "quantityPerPack": 1,
     "source": "AP#14, p. 42",
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "action",
+      "value": 1
     }
   }
 }

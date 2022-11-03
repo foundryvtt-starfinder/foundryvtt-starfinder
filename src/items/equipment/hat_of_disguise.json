@@ -2,18 +2,13 @@
   "_id": "1UaClgFv4jSKPgZA",
   "name": "Hat of Disguise",
   "type": "magic",
-  "effects": [],
-  "flags": {},
   "img": "icons/equipment/head/headwrap-cloth-white.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
   "system": {
     "type": "",
     "abilityMods": {
       "parts": []
     },
+    "ammunitionType": "",
     "attributes": {
       "ac": {
         "value": ""
@@ -27,7 +22,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 11
       },
       "size": "medium",
       "sturdy": false
@@ -37,6 +32,12 @@
     "capacity": {
       "max": 0,
       "value": 0
+    },
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
     },
     "critical": {
       "parts": []
@@ -49,16 +50,34 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>A hat of disguise can be a cap of any variety, a modified armor helmet, or an upgrade to armored headwear. While wearing the hat of disguise, you can use it to cast disguise self at will (CL 6th). The hat counts as a worn magic item unless you install it in armor, taking up one upgrade slot.</p>\n<p>@Compendium[sfrpg.spells.HGg3fIQGDzUwueVa]{Disguise Self}</p>"
+      "value": "<p>A hat of disguise can be a cap of any variety, a modified armor helmet, or an upgrade to armored headwear. While wearing the hat of disguise, you can use it to cast @Compendium[sfrpg.spells.HGg3fIQGDzUwueVa]{Disguise Self}&nbsp;at will (CL 6th). The hat counts as a worn magic item unless you install it in armor, taking up one upgrade slot.</p>"
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "hands": 0,
     "identified": true,
     "level": 6,
-    "modifiers": [],
+    "limitedWear": true,
+    "modifiers": [
+      {
+        "_id": "c9c03f76-0d50-4915-a079-45c4a6babed8",
+        "name": "Hat of Disguise",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "formula",
+        "notes": "While wearing the hat of disguise, you can use it to cast  Disguise Self at will (CL 6th).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      }
+    ],
     "price": 3850,
     "quantity": 1,
+    "quantityPerPack": 1,
     "source": "ARM, p. 114",
     "usage": {
       "per": "",
