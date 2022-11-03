@@ -2,19 +2,14 @@
   "_id": "y6hyyiRD5NF2zttb",
   "name": "Pact World Serum,  Absalom Affable",
   "type": "consumable",
-  "effects": [],
-  "flags": {},
   "img": "icons/consumables/potions/bottle-round-empty-glass.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
   "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -30,17 +25,17 @@
     "attackBonus": 0,
     "attributes": {
       "ac": {
-        "value": ""
+        "value": "5"
       },
       "customBuilt": false,
       "dex": {
         "mod": ""
       },
       "hardness": {
-        "value": ""
+        "value": "2"
       },
       "hp": {
-        "max": "",
+        "max": "6",
         "value": 6
       },
       "size": "medium",
@@ -52,6 +47,7 @@
     "consumableType": "serum",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -73,12 +69,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>When you imbibe this clear, syrupy fluid, you gain a +2 insight bonus to Diplomacy and Disguise checks. If you begin an attempt to gather information while under the effects of this serum, the attempt takes only 1 hour.</p>\n<p>&nbsp;</p>\n<h2><strong>Serums</strong></h2>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum&rsquo;s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
+      "value": "<p>When you imbibe this clear, syrupy fluid, you gain a +2 insight bonus to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.1tzIBDaDAO4hmX5C]{Diplomacy} and @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.aayAhTaRzitONs5U]{Disguise} checks. If you begin an attempt to gather information while under the effects of this serum, the attempt takes only 1 hour.</p>\n<p>&nbsp;</p>\n<p><em>Enable/Disable modifiers in the Modifiers tab.</em></p>\n<p>&nbsp;</p>\n<h3><span class=\"fontstyle0\">Pact World Serums</span></h3>\n<p><span class=\"fontstyle2\">Nearly all cultures in the Pact Worlds use&nbsp;</span><span class=\"fontstyle3\">serums of enhancement</span><span class=\"fontstyle2\">, vials of magic liquids described on page 225 of the&nbsp;</span><span class=\"fontstyle3\">Starfinder Core Rulebook</span><span class=\"fontstyle2\">. Eppro Enterprises, a popular manufacturer of energy drinks and restoratives on Verces, has expended millions of credits in promoting its &ldquo;Pact Worlds&rdquo; line of serums, each with individual effects and flavors that capture the essence of one of the Pact Worlds. These serums are also sold mixed into drinks at bars across the system. Whether you buy into the hype of Eppro&rsquo;s products or not, its Pact Worlds serums are reliable and effective. As with all&nbsp;</span><span class=\"fontstyle3\">serums of enhancement</span><span class=\"fontstyle2\">, these serums are effective when imbibed by living creatures and last for 1 hour.</span></p>\n<h3>Serums</h3>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum&rsquo;s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -91,15 +88,48 @@
     "identified": true,
     "isActive": null,
     "level": 5,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "64a6ab09-9fde-48e3-a574-f72fa25dcc2d",
+        "name": "Pact World Serum,  Absalom Affable",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "When you imbibe this clear, syrupy fluid, you gain a +2 insight bonus to Diplomacy and Disguise checks. If you begin an attempt to gather information while under the effects of this serum, the attempt takes only 1 hour.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dip"
+      },
+      {
+        "_id": "180461d0-056e-4eca-a26c-7d31e4193de3",
+        "name": "Pact World Serum,  Absalom Affable",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "When you imbibe this clear, syrupy fluid, you gain a +2 insight bonus to Diplomacy and Disguise checks. If you begin an attempt to gather information while under the effects of this serum, the attempt takes only 1 hour.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      }
+    ],
     "price": 475,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
