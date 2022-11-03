@@ -1,0 +1,154 @@
+{
+  "_id": "5aeP5DuZUs4XJmOI",
+  "name": "Resonating Biohack",
+  "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1667446578107,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1667505975278,
+    "systemId": "sfrpg",
+    "systemVersion": "0.21.0"
+  },
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
+    },
+    "area": {
+      "effect": "",
+      "shape": "",
+      "units": "",
+      "value": 0
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "<p>Whereas most biohackers affect anatomy with injections, urogs&rsquo; crystalline physiology responds better to precise sonic resonances. An urog-trained biohacker can transform a living being&rsquo;s composition with a word.</p>",
+      "unidentified": "",
+      "value": "<p><span class=\"fontstyle0\">&gt;@UUID[Compendium.sfrpg.classes.PSHcGB4UFgMSiF4V]{Biohacker}</span></p>\n<p><span class=\"fontstyle0\">Whereas most biohackers affect anatomy with injections, urogs&rsquo; crystalline physiology responds better to precise sonic resonances. An urog-trained biohacker can transform a living being&rsquo;s composition with a word.</span></p>\n<p><span class=\"fontstyle0\">Choose one of the following: advanced melee weapons, longarms, or sniper weapons. You&rsquo;re proficient with weapons of the chosen type in the sonic category, and rather than the normal Weapon Specialization benefit for these weapons, you instead add half your character level to their damage. You can deliver injectable substances like poisons, serums, drugs, medicinals, and biohacks using sonic weapons as though they have the injection weapon special property and deal slashing damage. For any biohacker ability that functions with injection weapons, you can also apply that ability to a sonic weapon. At 2nd level, you gain a +1 bonus to attack rolls with these weapons. At 9th level the bonus increases to +2, and at 18th level it increases to +3. When you hit an ally with such a weapon, you can avoid dealing damage to that ally, while still affecting them with the biohack, drug, poison, serum, or other substance that was loaded into the injection weapon.</span></p>\n<p><span class=\"fontstyle0\">Rather than using a syringe from your @Compendium[sfrpg.class-features.lgdDuAM2I3s8PQsD]{custom microlab)} to deliver biohacks, you instead use a handheld sonic pad that targets the EAC of an unwilling target but otherwise functions as a syringe. At 2nd level, you can use your custom microlab to direct a sonic burst at a creature within half your custom microlab&rsquo;s range, affecting it with a biohack as if you had applied it with the sonic pad; this requires no attack roll, but an unwilling target can negate a biohack delivered this way with a successful Fortitude save (DC = 10 + half your biohacker level + your key ability score modifier). This is a sonic effect.</span></p>\n<p><strong><span class=\"fontstyle0\">This replaces the injection expert class ability and the theorem gained at 2nd level.</span></strong></p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
+    "duration": {
+      "units": "",
+      "value": null
+    },
+    "formula": "",
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "5e669daf-829f-4062-b3fd-7d161cde287c",
+        "name": "Resonating Biohack - Sonic Specialization",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-category-attacks",
+        "enabled": false,
+        "max": 0,
+        "modifier": "lookupRange(@classes.biohacker.levels, 0 , 3, floor(@classes.biohacker.levels / 2))",
+        "modifierType": "formula",
+        "notes": "Choose one of the following: advanced melee weapons, longarms, or sniper weapons. You’re proficient with weapons of the chosen type in the sonic category, and rather than the normal Weapon Specialization benefit for these weapons, you instead add half your character level to their damage.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sonic"
+      },
+      {
+        "_id": "3cd490ea-ae4a-457e-b8cf-5415f6712621",
+        "name": "Resonating Biohack - Sonic attack roll bonus",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "weapon-category-attacks",
+        "enabled": false,
+        "max": 0,
+        "modifier": "lookupRange(@classes.biohacker.levels, 0 , 2, 1, 9, 2, 18, 3)",
+        "modifierType": "formula",
+        "notes": "For any biohacker ability that functions with injection weapons, you can also apply that ability to a sonic weapon. At 2nd level, you gain a +1 bonus to attack rolls with these weapons. At 9th level the bonus increases to +2, and at 18th level it increases to +3. When you hit an ally with such a weapon, you can avoid dealing damage to that ally, while still affecting them with the biohack, drug, poison, serum, or other substance that was loaded into the injection weapon.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sonic"
+      }
+    ],
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "",
+      "value": null
+    },
+    "recharge": {
+      "charged": false,
+      "value": null
+    },
+    "requirements": "1st Level (Biohacker)",
+    "rollNotes": "",
+    "save": {
+      "type": "fort",
+      "dc": "10+floor(@classes.biohacker.levels/2) + (@classes.biohacker.keyAbilityMod)",
+      "descriptor": "negate"
+    },
+    "source": "IS, pg. 20",
+    "target": {
+      "type": "",
+      "value": null
+    },
+    "uses": {
+      "max": 0,
+      "per": null,
+      "value": 0
+    }
+  }
+}
