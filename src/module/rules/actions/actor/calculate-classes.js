@@ -9,7 +9,7 @@ export default function (engine) {
         for (const cls of classes) {
             const classData = cls.system;
 
-            const className = cls.name.slugify({replacement: "_", strict: true});
+            const className = cls.flags.sfrpg.classSlug ?? cls.name.slugify({replacement: "_", strict: true});
             const keyAbilityScore = classData.kas || "str";
             const spellAbility = classData.spellAbility || "cha";
 			// Default to cha in order for Spell-like abilities to work correctly out of the box
