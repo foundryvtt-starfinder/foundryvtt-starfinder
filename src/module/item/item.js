@@ -172,6 +172,27 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return data;
     }
 
+    /*
+     * Extend preCreate to create class name slugs.
+     * See the base Actor class for API documentation of this method
+     *
+     * @param {object} data           The initial data object provided to the document creation request
+     * @param {object} options        Additional options which modify the creation request
+     * @param {string} userId         The ID of the requesting user, always game.user.id
+     * @returns {boolean|void}        Explicitly return false to prevent creation of this Document
+     */
+    async _preCreate(data, options, user) {
+        let updates = {}
+
+        if (this.type === "class") {
+            updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
+        }
+
+        this.updateSource(updates)
+        
+        return super._preCreate(data, options, user)
+    };
+
     /* -------------------------------------------- */
 
     /**
