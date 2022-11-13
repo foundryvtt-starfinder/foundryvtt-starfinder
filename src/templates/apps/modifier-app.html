@@ -76,12 +76,20 @@
             {{#each config.weaponProperties as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
+            {{else if (eq modifier.effectType "weapon-category-attacks")}}
+            {{#each config.weaponCategories as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
             {{else if (eq modifier.effectType "weapon-damage")}}
             {{#each config.weaponTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
             {{else if (eq modifier.effectType "weapon-property-damage")}}
             {{#each config.weaponProperties as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{else if (eq modifier.effectType "weapon-category-damage")}}
+            {{#each config.weaponCategories as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
             {{else if (eq modifier.effectType "specific-speed")}}
