@@ -64,12 +64,6 @@ Hooks.once('init', async function () {
     initTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Initializing the Starfinder System`);
 
-    const logo = document.querySelector("#logo")
-    logo.src = "systems/sfrpg/images/starfinder_icon.webp";
-    logo.style.width = "92px"
-    logo.style.height = "92px"
-    logo.style.margin = "0 0 0 9px"
-
     console.log(
 `__________________________________________________
  ____  _              __ _           _
@@ -199,6 +193,22 @@ Hooks.once('init', async function () {
 
     console.log("Starfinder | [INIT] Registering system settings");
     registerSystemSettings();
+
+    if (game.settings.get("sfrpg", "sfrpgTheme")) {
+        const logo = document.querySelector("#logo")
+        logo.src = "systems/sfrpg/images/starfinder_icon.webp";
+        logo.style.width = "92px";
+        logo.style.height = "92px";
+        logo.style.margin = "0 0 0 9px";
+
+        let r = document.querySelector(':root');
+        r.style.setProperty("--color-border-highlight-alt", "#0080ff");
+        r.style.setProperty("--color-border-highlight", "#00a0ff");
+        r.style.setProperty("--color-text-hyperlink", "#38b5ff");
+        r.style.setProperty("--color-shadow-primary", "#00a0ff");
+        r.style.setProperty("--color-shadow-highlight", "#00a0ff");
+        r.style.setProperty("--sfrpg-theme-blue", "#235683");
+    }
 
     console.log("Starfinder | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
