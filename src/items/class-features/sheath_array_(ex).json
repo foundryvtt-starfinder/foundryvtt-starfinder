@@ -2,6 +2,14 @@
   "_id": "QoCQEVNtgMhsElwQ",
   "name": "Sheath Array (EX)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1668055320736,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1668056075271,
+    "systemId": "sfrpg",
+    "systemVersion": "0.21.0"
+  },
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
@@ -9,6 +17,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "move",
@@ -30,21 +39,105 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.zBDW8giNGqbolXly]{Nanite Array (EX)}</p>\n<p>The nanite array reinforces your body, granting you a +1 enhancement bonus to Reflex saving throws and a +1 insight bonus to checks with two of the following skills: Acrobatics, Athletics, Sleight of Hand, or Stealth, selected when you form this array. At 3rd level and every 4 levels thereafter, these bonuses increase by 1.<br /><br />When you form a sheath array, you can use a nanite surge to gain a number of temporary Hit Points equal to your nanocyte level; you lose any such remaining temporary Hit Points when the sheath array ends.</p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.zBDW8giNGqbolXly]{Nanite Array (EX)}</p>\n<p>The nanite array reinforces your body, granting you a +1 enhancement bonus to Reflex saving throws and a +1 insight bonus to checks with two of the following skills: @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.3QdtsfnVJsHEdrt0]{Acrobatics}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.iLlBAZBfHJMZQRQx]{Athletics}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.qVEW9HjXQN0ok879]{Sleight of Hand}, or @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.5h3iePfJaeQMc3Qr]{Stealth}, selected when you form this array. At 3rd level and every 4 levels thereafter, these bonuses increase by 1.<br><br>When you form a sheath array, you can use a nanite surge to gain a number of temporary Hit Points equal to your nanocyte level; you lose any such remaining temporary Hit Points when the sheath array ends.</p>\n<p><br><em>Change chosen skills in the Modifiers tab.</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "duration": {
       "units": "",
       "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "eaeb0843-9f69-438b-90d4-4ab5ec46a0f5",
+        "name": "Sheath Array (EX)",
+        "type": "enhancement",
+        "condition": "",
+        "effectType": "save",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.nanocyte.levels, 0, 1, 1, 3, 2, 7, 3, 11, 4, 15, 5, 19, 6)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "reflex"
+      },
+      {
+        "_id": "12696ed5-3c17-40f7-953b-b80632bb864b",
+        "name": "Sheath Array (EX)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.nanocyte.levels, 0, 1, 1, 3, 2, 7, 3, 11, 4, 15, 5, 19, 6)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      },
+      {
+        "_id": "fc05c246-2ca3-4316-880e-ba7101290ddb",
+        "name": "Sheath Array (EX)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "lookupRange(@classes.nanocyte.levels, 0, 1, 1, 3, 2, 7, 3, 11, 4, 15, 5, 19, 6)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
@@ -56,6 +149,7 @@
       "value": null
     },
     "requirements": "1st Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
