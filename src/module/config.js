@@ -346,11 +346,11 @@ SFRPG.limitedUsePeriods = {
 };
 
 SFRPG.senses = {
-    "bs": "SFRPG.SenesBS",
-    "bl": "SFRPG.SenesBL",
-    "dark": "SFRPG.SenesDark",
-    "llv": "SFRPG.SenesLLV",
-    "st": "SFRPG.SensesST"
+    "bs": "SFRPG.SensesTypes.SensesBS",
+    "bl": "SFRPG.SensesTypes.SensesBL",
+    "dark": "SFRPG.SensesTypes.SensesDark",
+    "llv": "SFRPG.SensesTypes.SensesLLV",
+    "st": "SFRPG.SensesTypes.SensesST"
 };
 
 SFRPG.skills = {
@@ -805,6 +805,7 @@ SFRPG.conditionTypes = {
     "frightened": "SFRPG.ConditionsFrightened",
     "grappled": "SFRPG.ConditionsGrappled",
     "helpless": "SFRPG.ConditionsHelpless",
+    "invisible": "SFRPG.ConditionsInvisible",
     "nauseated": "SFRPG.ConditionsNauseated",
     "off-kilter": "SFRPG.ConditionsOffKilter",
     "off-target": "SFRPG.ConditionsOffTarget",
@@ -1307,6 +1308,11 @@ SFRPG.statusEffects = [
         id: "helpless",
         label: "SFRPG.ConditionsHelpless",
         icon: "systems/sfrpg/icons/conditions/helpless.webp"
+    },
+    {
+        id: "invisible",
+        label: "SFRPG.ConditionsInvisible",
+        icon: "systems/sfrpg/icons/conditions/invisible.webp"
     },
     {
         id: "nauseated",
