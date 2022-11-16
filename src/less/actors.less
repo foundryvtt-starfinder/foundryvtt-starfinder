@@ -6,6 +6,14 @@
   /* ----------------------------------------- */
 
   .sheet-header {
+    .summary {
+      li {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    
     .header-background {
       background: #235683;
       background: @blueGradientBackground;
@@ -99,6 +107,7 @@
 
       .avatar {
         flex: 0 0 250px;
+        object-fit: contain;
       }
 
       .singleFlex {
@@ -226,7 +235,6 @@
         flex: 0 0 18px;
         margin-top: -1px;
         line-height: 18px;
-        font-family: "Signika", "Palatino Linotype", serif;
         font-size: 12px;
       }
     }
@@ -585,6 +593,7 @@
 
       &.small {
         line-height: 25px;
+        margin-left: 11px;
       }
 
       &.container {
@@ -801,9 +810,10 @@
 
     .item-list-child {
       list-style: none;
-      width: 97%;
-      margin: 0 0 0 3%;
+      width: 99%;
+      margin: 0 0 0 7px;
       padding: 0;
+      border-left: 2px dashed @sfrpgRed;
     }
 
     // Item Control Buttons
