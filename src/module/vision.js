@@ -2,7 +2,7 @@ export default function setupVision() {
     setupVisionModes();
     setDefaultIlluminationThreshold();
     globalIlluminationThresholdTooltip();
-    setupBlinded()
+    setupConditions()
 }
 
 function setupVisionModes() {
@@ -119,7 +119,8 @@ function globalIlluminationThresholdTooltip() {
     });
 }
 
-function setupBlinded() {
+function setupConditions() {
     CONFIG.specialStatusEffects.BLIND = "blinded";
+    CONFIG.specialStatusEffects.INVISIBLE = "invisible";
 }
 
