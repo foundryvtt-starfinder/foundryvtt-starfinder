@@ -172,6 +172,27 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return data;
     }
 
+    /*
+     * Extend preCreate to create class name slugs.
+     * See the base Actor class for API documentation of this method
+     *
+     * @param {object} data           The initial data object provided to the document creation request
+     * @param {object} options        Additional options which modify the creation request
+     * @param {string} userId         The ID of the requesting user, always game.user.id
+     * @returns {boolean|void}        Explicitly return false to prevent creation of this Document
+     */
+    async _preCreate(data, options, user) {
+        let updates = {}
+
+        if (this.type === "class") {
+            updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
+        }
+
+        this.updateSource(updates)
+        
+        return super._preCreate(data, options, user)
+    };
+
     /* -------------------------------------------- */
 
     /**
@@ -686,6 +707,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (isWeapon) {
             acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
             acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_ATTACKS);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_ATTACKS);
         }
 
         let modifiers = this.actor.getAllModifiers();
@@ -696,6 +718,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
                 if (!this.system.properties[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
+                if (this.system.weaponCategory !== mod.valueAffected) {
                     return false;
                 }
             }
@@ -1010,6 +1036,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (isWeapon) {
             acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
             acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
+            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_DAMAGE);
         }
 
         let modifiers = this.actor.getAllModifiers();
@@ -1024,6 +1051,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
                 if (!this.system.properties[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
+                if (this.system.weaponCategory !== mod.valueAffected) {
                     return false;
                 }
             }

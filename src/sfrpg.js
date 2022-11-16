@@ -57,12 +57,14 @@ import RollNode from "./module/rolls/rollnode.js";
 import RollContext from "./module/rolls/rollcontext.js";
 import RollTree from "./module/rolls/rolltree.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
+import setupVision from "./module/vision.js";
 
 let initTime = null;
 
 Hooks.once('init', async function () {
     initTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Initializing the Starfinder System`);
+
     console.log(
 `__________________________________________________
  ____  _              __ _           _
@@ -193,6 +195,22 @@ Hooks.once('init', async function () {
     console.log("Starfinder | [INIT] Registering system settings");
     registerSystemSettings();
 
+    if (game.settings.get("sfrpg", "sfrpgTheme")) {
+        const logo = document.querySelector("#logo")
+        logo.src = "systems/sfrpg/images/starfinder_icon.webp";
+        logo.style.width = "92px";
+        logo.style.height = "92px";
+        logo.style.margin = "0 0 0 9px";
+
+        let r = document.querySelector(':root');
+        r.style.setProperty("--color-border-highlight-alt", "#0080ff");
+        r.style.setProperty("--color-border-highlight", "#00a0ff");
+        r.style.setProperty("--color-text-hyperlink", "#38b5ff");
+        r.style.setProperty("--color-shadow-primary", "#00a0ff");
+        r.style.setProperty("--color-shadow-highlight", "#00a0ff");
+        r.style.setProperty("--sfrpg-theme-blue", "#235683");
+    }
+
     console.log("Starfinder | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("sfrpg", ActorSheetSFRPGCharacter, { types: ["character"],     makeDefault: true });
@@ -290,6 +308,9 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();
+
+    console.log("Starfinder | [SETUP] Setting up Vision Modes");
+    setupVision();
 
     if (game.user.isGM) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
@@ -647,3 +668,9 @@ Hooks.on("renderSidebarTab", async (app, html) => {
         }
     }
 });
+
+Hooks.on("renderPause", () => {
+    const paused = document.querySelector("figure#pause");
+    const icon = paused.children[0]
+    icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
+})
