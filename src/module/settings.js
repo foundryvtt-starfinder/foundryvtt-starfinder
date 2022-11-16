@@ -215,4 +215,13 @@ export const registerSystemSettings = function () {
         default: "en-US",
         type: String
     });
+
+    game.settings.register("sfrpg", "sfrpgTheme", {
+        name: "SFRPG.Settings.SFRPGTheme.Name",
+        hint: "SFRPG.Settings.SFRPGTheme.Hint",
+        scope: "client",
+        config: true,
+        default: true,
+        type: Boolean
+    });
 };
