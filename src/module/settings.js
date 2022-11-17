@@ -76,6 +76,15 @@ export const registerSystemSettings = function () {
         default: true,
         type: Boolean
     });
+    
+    game.settings.register("sfrpg", "autoAddUnarmedStrike", {
+        name: "SFRPG.Settings.AutoAddUnarmedStrike.Name",
+        hint: "SFRPG.Settings.AutoAddUnarmedStrike.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
 
     game.settings.register("sfrpg", "useQuickRollAsDefault", {
         name: "SFRPG.Settings.UseQuickRollAsDefault.Name",
@@ -205,5 +214,14 @@ export const registerSystemSettings = function () {
         config: true,
         default: "en-US",
         type: String
+    });
+
+    game.settings.register("sfrpg", "sfrpgTheme", {
+        name: "SFRPG.Settings.SFRPGTheme.Name",
+        hint: "SFRPG.Settings.SFRPGTheme.Hint",
+        scope: "client",
+        config: true,
+        default: true,
+        type: Boolean
     });
 };

@@ -79,7 +79,7 @@ export const measureDistances = function(segments, options={}) {
             return spaces * canvas.dimensions.distance;
         }
 
-        return (ns + nd) * canvas.scene.gridDistance;
+        return (ns + nd) * canvas.dimensions.distance;
     });
 };
 

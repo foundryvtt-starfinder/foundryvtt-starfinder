@@ -2,19 +2,14 @@
   "_id": "ZC2SF1K3DCnGKAMy",
   "name": "Adaptive serum, Mk 2",
   "type": "consumable",
-  "effects": [],
-  "flags": {},
   "img": "icons/consumables/potions/potion-vial-tube-yellow.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
   "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -30,17 +25,17 @@
     "attackBonus": 0,
     "attributes": {
       "ac": {
-        "value": ""
+        "value": "5"
       },
       "customBuilt": false,
       "dex": {
         "mod": ""
       },
       "hardness": {
-        "value": ""
+        "value": "2"
       },
       "hp": {
-        "max": "",
+        "max": "6",
         "value": 6
       },
       "size": "medium",
@@ -52,6 +47,7 @@
     "consumableType": "serum",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -73,12 +69,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>A handful of scientists who have spent countless hours studying the ksariks&rsquo; ingested adaptation ability have discovered a formula that provides a facsimile of that power when imbibed. This magical serum alters users at a genetic level, granting them the ability to withstand energy attacks.</p>\n<p>A dose of&nbsp;<em>adaptive serum</em>&nbsp;consists of a small piece of ksarik flesh (usually the tip of one of its tentacles) floating in a slightly alcoholic tincture. For an hour after you consume an&nbsp;<em>adaptive serum</em>, the first time you take energy damage, you gain resistance against that type of damage for that attack and for the remainder of the hour or until you rest 10 minutes to regain Stamina Points, whichever comes first. The amount of energy resistance you receive depends on the level of the serum. A&nbsp;<em>mk 1 adaptive serum</em>&nbsp;grants energy resistance 5, a&nbsp;<em>mk 2 adaptive serum</em>&nbsp;grants energy resistance 10, and a&nbsp;<em>mk 3 adaptive serum</em>&nbsp;grants energy resistance 15.</p>"
+      "value": "<p>A handful of scientists who have spent countless hours studying the ksariks&rsquo; ingested adaptation ability have discovered a formula that provides a facsimile of that power when imbibed. This magical serum alters users at a genetic level, granting them the ability to withstand energy attacks.</p>\n<p>A dose of&nbsp;<em>adaptive serum</em>&nbsp;consists of a small piece of ksarik flesh (usually the tip of one of its tentacles) floating in a slightly alcoholic tincture. For an hour after you consume an&nbsp;<em>adaptive serum</em>, the first time you take energy damage, you gain resistance against that type of damage for that attack and for the remainder of the hour or until you rest 10 minutes to regain Stamina Points, whichever comes first. The amount of energy resistance you receive depends on the level of the serum. A&nbsp;<em>mk 1 adaptive serum</em>&nbsp;grants energy resistance 5, a&nbsp;<em>mk 2 adaptive serum</em>&nbsp;grants energy resistance 10, and a&nbsp;<em>mk 3 adaptive serum</em>&nbsp;grants energy resistance 15.</p>\n<p><br /><em>Edit and Enable/Disable the resistance modifier in the Modifier tab.</em></p>\n<p><em>&nbsp;</em></p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Serums</h2>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum&rsquo;s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -91,21 +88,39 @@
     "identified": true,
     "isActive": null,
     "level": 8,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "013d6db4-f922-413a-ab70-c556477ab182",
+        "name": "Adaptive serum, Mk 2",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 10,
+        "modifier": "10",
+        "modifierType": "constant",
+        "notes": "For an hour after you consume an adaptive serum, the first time you take energy damage, you gain resistance against that type of damage for that attack and for the remainder of the hour or until you rest 10 minutes to regain Stamina Points, whichever comes first.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acid"
+      }
+    ],
     "price": 1500,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "AA, p 71",
+    "source": "AA1 pg. 71",
     "target": {
       "type": "",
       "value": ""

@@ -2,7 +2,6 @@
   "_id": "hC47EE9fRNQC67Kl",
   "name": "Junkbot Grenade (Hybrid)",
   "type": "weapon",
-  "flags": {},
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
@@ -17,6 +16,7 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
       "shape": "",
@@ -51,6 +51,8 @@
     "chatFlavor": "see text",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -81,19 +83,24 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>When you use a junkbot grenade, you set it to either handy or healing, then throw it into a pile of inert technological equipment of at least 1 bulk. When the grenade lands, it spreads magical nanites over the blast radius. Over the course of the next round, the nanites convert the junk into a handy junkbot or healing junkbot, as those spells except as detailed here. Either spell has a caster level of 9th. You must command the junkbot verbally. The junkbot created from this effect lasts for 1 minute.</p>"
+      "value": "<p>When you use a junkbot grenade, you set it to either handy or healing, then throw it into a pile of inert technological equipment of at least 1 bulk. When the grenade lands, it spreads magical nanites over the blast radius. Over the course of the next round, the nanites convert the junk into a @Compendium[sfrpg.spells.TQV8YIT3HlhSszMr]{Handy Junkbot} or @Compendium[sfrpg.spells.J9H196LxSVvMguhe]{Healing Junkbot}, as those spells except as detailed here. Either spell has a caster level of 9th. You must command the junkbot verbally. The junkbot created from this effect lasts for 1 minute.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": "1 minute"
     },
+    "equippable": false,
     "equipped": false,
     "formula": "",
     "identified": true,
+    "isActive": null,
     "level": 9,
     "modifiers": [],
     "price": 2250,
@@ -112,6 +119,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -130,6 +138,7 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
@@ -156,6 +165,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -164,7 +174,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -177,6 +189,7 @@
       "thought": false,
       "throttle": false,
       "thrown": true,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -186,19 +199,37 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "14+@abilities.dex.mod",
       "descriptor": "partial"
     },
-    "source": "",
+    "source": "AR pg. 126",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -208,9 +239,9 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": "",
-      "value": 0
+      "max": 1,
+      "per": "charges",
+      "value": 1
     },
     "weaponCategory": "",
     "weaponType": "grenade"

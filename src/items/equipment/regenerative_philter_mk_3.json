@@ -2,19 +2,14 @@
   "_id": "R3px5voigzVMHkuk",
   "name": "Regenerative philter, Mk 3",
   "type": "consumable",
-  "effects": [],
-  "flags": {},
   "img": "icons/consumables/potions/potion-vial-corked-labeled-purple.webp",
-  "permission": {
-    "default": 0,
-    "xW89szGpnlIv5gCs": 3
-  },
   "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
@@ -30,17 +25,17 @@
     "attackBonus": 0,
     "attributes": {
       "ac": {
-        "value": ""
+        "value": "5"
       },
       "customBuilt": false,
       "dex": {
         "mod": ""
       },
       "hardness": {
-        "value": ""
+        "value": "2"
       },
       "hp": {
-        "max": "",
+        "max": "6",
         "value": 6
       },
       "size": "medium",
@@ -52,6 +47,7 @@
     "consumableType": "serum",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -73,12 +69,13 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This potent violet serum accelerates the body&rsquo;s natural healing to astounding levels, though doing so expends vital energy. For 1 minute, you gain fast healing based on the philter&rsquo;s formula: fast healing 2 for mk 1, fast healing 5 for mk 2, and fast healing 10 for mk 3. After this effect ends, you become fatigued until you take a 10-minute rest to recover Stamina Points, during which you must eat a full day&rsquo;s food; this food only helps you recover from the fatigue and does not contribute to your typical food needs for the day. If you do not eat after consuming this serum, you experience starvation equivalent to going a full day without eating. You cannot benefit from a regenerative philter more than once per day.</p>"
+      "value": "<p>This potent violet serum accelerates the body&rsquo;s natural healing to astounding levels, though doing so expends vital energy. For 1 minute, you gain fast healing based on the philter&rsquo;s formula:&nbsp;fast healing 2 for mk 1, fast healing 5 for mk 2, and <strong>fast healing 10 for mk 3</strong>. After this effect ends, you become @Compendium[sfrpg.conditions.JGFn4MrDZ6X5vrzU]{Fatigued} until you take a 10-minute rest to recover Stamina Points, during which you must eat a full day&rsquo;s food; this food only helps you recover from the fatigue and does not contribute to your typical food needs for the day. If you do not eat after consuming this serum, you experience @UUID[Compendium.sfrpg.rules.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#starvation-and-thirst]{Starvation} equivalent to going a full day without eating. You cannot benefit from a regenerative philter more than once per day.</p>\n<h3>Serums</h3>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum&rsquo;s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -94,12 +91,14 @@
     "modifiers": [],
     "price": 26000,
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
       "value": null
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
