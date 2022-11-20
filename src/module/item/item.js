@@ -678,6 +678,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let abl = itemData.ability;
         if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) abl = "";
         else if (!abl && (this.type === "spell")) abl = actorData.attributes.spellcasting || "int";
+        else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) abl = "dex"
         else if (!abl) abl = "str";        
 
         // Define Roll parts
@@ -1025,7 +1026,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
         
         const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
-        if (["msak", "rsak"].includes(this.system.actionType)) {
+        
+        console.log(this.system.actionType);
+        if (["msak", "rsak"].includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
         } else if (this.system.actionType === "rwak") {
             acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
