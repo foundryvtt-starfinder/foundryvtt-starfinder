@@ -1,3 +1,20 @@
+# v0.21.1 - Interstellar Innovators
+
+This is a small hotfix release to clean up some issues from v0.21.0, and also continue our data entry of Interstellar Species
+
+## Comependium Updates
+* Add feats from IS
+* Add remaining class features from IS
+
+## Core system improvements
+* Automate operative weapon property
+
+## Bugfixes
+* Ensure `slug` generation occurs correctly, so old class items will still work,
+* Added a `slug` to Evolutionist.
+* Fixed a bug that caused battery capacity to be uneditable
+* Saving throw spells now correctly add modifiers to spell damage.
+
 # v0.21.0 - Interstellar Innovators
 
 Oh hi! I do these now. This update primarily brings the new Evolutionist class from Interstellar species, as well as a few fixes and new shinies for V10.
