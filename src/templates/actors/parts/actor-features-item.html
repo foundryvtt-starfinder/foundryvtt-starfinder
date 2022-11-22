@@ -32,7 +32,7 @@
                     {{#if item.config.hasAttack}}
                     <button type="button" class="tag attack">{{localize "SFRPG.Attack"}}</button>
                     {{/if}}
-                    {{#if item.hasDamage}}
+                    {{#if item.config.hasDamage}}
                         {{#if (eq item.system.actionType "heal")}}
                             <button type="button" class="tag healing">{{localize "SFRPG.ActionHeal"}}</button>
                         {{else}}
@@ -60,8 +60,8 @@
                 {{#if (or item.system.uses.value item.system.uses.max)}}
                     {{item.system.uses.value}} / {{item.system.uses.max}}
                 {{else if item.system.recharge.value}}
-                    {{#if item.isOnCooldown}}
-                        <a class="item-recharge rollable">{{item.document.labels.recharge}}</a>
+                    {{#if item.config.isOnCooldown}}
+                        <a class="item-recharge rollable">{{item.labels.recharge}}</a>
                     {{else}}
                         {{localize "SFRPG.Items.Feat.Charged"}}
                     {{/if}}
@@ -81,7 +81,7 @@
                     <button type="button" class="tag featActivate">{{item.document.labels.activation}}</button>
                     {{/if}}
                 {{/if}}
-                {{#if item.hasCapacity}}
+                {{#if item.config.hasCapacity}}
                     {{item.system.usage.value}} / {{item.system.usage.per}}
                 {{/if}}
             </div>
