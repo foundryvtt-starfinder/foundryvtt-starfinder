@@ -42,8 +42,6 @@ without losing functionality.
 * Fixed issue where actor sheets wouldn't open on v10.
 * Refactored how drag-n-drop is handled to be in line with the new v10 functionality.
 
-=======
->>>>>>> efdb4de81 (Preparing the system for release.)
 # v0.19.2 - Starfinder Update
 
 This update contains a lot of data entry, particularly around Galactic Magic and Drift Crisis class features and equipment.
