@@ -346,7 +346,7 @@ async function cookWithOptions(options = { formattingCheck: true }) {
 
             if (!limitToPack || directory === limitToPack) {
                 // For actors, we should double-check the token names are set correctly.
-                fixTokenName(jsonInput);
+                ensureTokenDefaults(jsonInput);
 
                 // Fix missing images
                 if (!jsonInput.img && !jsonInput.pages) {
@@ -413,17 +413,37 @@ function regularExpressionForFindingItemsInCache(cache) {
     return new RegExp("(" + regularExpressionSubstring + ")", "g");
 }
 
-// Ensures token names are the same as the actor name.
-function fixTokenName(item) {
+// Ensures tokens have some sane values.
+function ensureTokenDefaults(item) {
     if (!item) return;
+	if (!item.prototypeToken) return;
     
     // Did not add Character because iconics come in multiple levels, and we don't want to include level in the name.
-    const actorTypes = ["npc", "starship", "vehicle"];
+    const actorTypes = ["npc", "starship", "vehicle", "npc2", "hazard"];
 
     // Ensure token name is the same as the actor name, if applicable
-    if (actorTypes.includes(item.type) && item.token) {
-        item.token.name = item.name;
+    if (actorTypes.includes(item.type)) {
+        item.prototypeToken.name = item.name;
     }
+
+	item.prototypeToken.sight.enabled = false; // Sight is disabled for NPCs by default
+	item.prototypeToken.bar1.attribute = "attributes.hp"; // Most tokens have hp as their first bat
+	item.prototypeToken.bar2.attribute = ""; // The 2nd bar is set per token type
+	item.prototypeToken.disposition = -1 // Hostile by default
+	item.prototypeToken.displayBars = 20; //Show bars on hover
+	item.prototypeToken.displayName = 20; //Show name on hover
+
+	if (["npc", "npc2"].includes(item.type) && item.system.attributes.rp.max > 0) {
+		item.prototypeToken.bar2.attribute = "attributes.rp"; // If the NPC has resolve points, set them as the 2nd bar
+	} else if (item.type === "character") {
+		item.prototypeToken.disposition = 1; // Friendly
+		item.prototypeToken.bar2.attribute = "attributes.sp"; //2nd bar as stamina
+	} else if (item.type === "starship") {
+		item.prototypeToken.disposition = 0; // Neutral
+		item.prototypeToken.bar2.attribute = "attributes.shields"; //2nd bar as shields
+	} else if (item.type === "vehicle") {
+		item.prototypeToken.disposition = 0; //Neutral
+	}
 }
 
 function tryMigrateActorSpeed(jsonInput) {
@@ -508,7 +528,7 @@ function formattingCheck(allItems) {
 		}
         
 		// We only check formatting of aliens, vehicles & equipment for now
-		if (data.type === "npc") {
+		if (data.type === "npc" || data.type === "npc2") {
             // NOTE: `checkEcology` off by default as it currently produces hundreds of errors.
 			formattingCheckAlien(data, pack, item.file, { checkLinks: true, checkEcology: false })
 		}
