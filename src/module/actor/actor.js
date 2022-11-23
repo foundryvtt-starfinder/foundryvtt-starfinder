@@ -172,22 +172,24 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     }
     
     /*
-     * Extend preCreate to automatically link PC and Drone tokens, as well as add Unarmed Strikes to PCs automatically.
+     * Extend preCreate to apply some defaults to newly created characters
      * See the base Actor class for API documentation of this method
      *
-     * @param {object} data           The initial data object provided to the document creation request
-     * @param {object} options        Additional options which modify the creation request
-     * @param {string} userId         The ID of the requesting user, always game.user.id
+     * @param {object} data               The initial data object provided to the document creation request
+     * @param {object} options            Additional options which modify the creation request
+     * @param {documents.BaseUser} user   The User requesting the document creation
      * @returns {boolean|void}         Explicitly return false to prevent creation of this Document
      */
     async _preCreate(data, options, user) {
         const autoLinkedTypes = ['character', 'drone'];
         let updates = {}
         
+        // Auto link PCs and drones
         if (autoLinkedTypes.includes(this.type)) {
             updates.prototypeToken = { actorLink:  true };
         };
         
+        // Auto add unarmed strike if setting is enabled
         if (this.type === "character" && game.settings.get("sfrpg", "autoAddUnarmedStrike")) {
             const ITEM_UUID = "Compendium.sfrpg.equipment.AWo4DU0s18agsFtJ"; // Unarmed strike
             const source = (await fromUuid(ITEM_UUID)).toObject();
@@ -200,6 +202,42 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         
         return super._preCreate(data, options, user)
     };
+
+    /*
+     * Extend preUpdate to clamp certain PC changes
+     * See the base Actor class for API documentation of this method
+     *
+     * Pre-update operations only occur for the client which requested the operation.
+     * @param {object} changed            The differential data that is changed relative to the documents prior values
+     * @param {object} options            Additional options which modify the update request
+     * @param {documents.BaseUser} user   The User requesting the document update
+     */
+
+    async _preUpdate(changed, options, user) {
+
+        // Clamp HP/SP/RP values to 0 and their max
+        let changedHP = changed.system?.attributes?.hp?.value;
+        let changedSP = changed.system?.attributes?.sp?.value;
+        let changedRP = changed.system?.attributes?.rp?.value;
+
+        if (changedHP) {
+            let clampedHP = Math.clamped(changedHP, 0, this.system.attributes.hp.max);
+            changed.system.attributes.hp.value = clampedHP;
+        }
+
+        if (changedSP) {
+            let clampedSP = Math.clamped(changedSP, 0, this.system.attributes.sp.max);
+            changed.system.attributes.sp.value = clampedSP;
+        }
+
+        if (changedRP) {
+            let clampedRP = Math.clamped(changedRP, 0, this.system.attributes.rp.max);
+            changed.system.attributes.rp.value = clampedRP;
+        }
+
+        return super._preUpdate(changed, options, user);
+
+    }
 
     async useSpell(item, { configureDialog = true } = {}) {
         if (item.type !== "spell") throw new Error("Wrong item type");
