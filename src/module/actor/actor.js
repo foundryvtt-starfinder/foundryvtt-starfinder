@@ -221,21 +221,21 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         let changedRP = changed.system?.attributes?.rp?.value;
 
         if (changedHP) {
-            let clampedHP = Math.clamped(changedHP, 0, this.system.attributes.hp.max)
-            changed.system.attributes.hp.value = clampedHP
+            let clampedHP = Math.clamped(changedHP, 0, this.system.attributes.hp.max);
+            changed.system.attributes.hp.value = clampedHP;
         }
 
         if (changedSP) {
-            let clampedSP = Math.clamped(changedSP, 0, this.system.attributes.sp.max)
-            changed.system.attributes.sp.value = clampedSP
+            let clampedSP = Math.clamped(changedSP, 0, this.system.attributes.sp.max);
+            changed.system.attributes.sp.value = clampedSP;
         }
 
         if (changedRP) {
-            let clampedRP = Math.clamped(changedRP, 0, this.system.attributes.rp.max)
-            changed.system.attributes.rp.value = clampedRP
+            let clampedRP = Math.clamped(changedRP, 0, this.system.attributes.rp.max);
+            changed.system.attributes.rp.value = clampedRP;
         }
 
-        return super._preUpdate(changed, options, user)
+        return super._preUpdate(changed, options, user);
 
     }
 
