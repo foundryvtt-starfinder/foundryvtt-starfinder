@@ -20,8 +20,7 @@ export default function (engine) {
                 spellAbility: spellAbility,
                 keyAbilityScore: keyAbilityScore,
                 skillRanksPerLevel: classData.skillRanks.value,
-                isCaster: classData.isCaster,
-                classDC: 10 + Math.floor(classData.levels / 2) + data.abilities[keyAbilityScore].mod
+                isCaster: classData.isCaster
             };
 
             data.classes[className] = classInfo;
