@@ -25,8 +25,6 @@ export default function (engine) {
 
             data.classes[className] = classInfo;
 
-            console.log(data.abilities[keyAbilityScore]);
-
             if (classInfo.isCaster) {
                 data.cl += classInfo.levels;
             }
