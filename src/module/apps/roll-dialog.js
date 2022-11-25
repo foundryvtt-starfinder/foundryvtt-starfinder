@@ -3,7 +3,7 @@ import { SFRPG } from "../config.js";
 // Typedef's for documentation purposes.
 /**
  * A data structure for storing damage statistics.
- * 
+ *
  * @typedef {Object} DamagePart
  * @property {string}                     formula  The roll formula to use.
  * @property {{[key: string]: boolean}}   types    A set of key value pairs that determines the available damage types.
@@ -16,9 +16,9 @@ import { SFRPG } from "../config.js";
 export default class RollDialog extends Dialog {
     /**
      * Construct a custom RollDialog
-     * 
+     *
      * @param {object} params The parameters passed into the class.
-     * @param {RollTree} params.rollTree 
+     * @param {RollTree} params.rollTree
      * @param {string} params.formula The formula used for this roll.
      * @param {RollContext} params.contexts Contextual data for the roll.
      * @param {Modifier[]} params.availableModifiers Any conditional modifiers that can apply to this roll.
@@ -39,7 +39,17 @@ export default class RollDialog extends Dialog {
             this.formula = mainDie + " + " + formula;
         }
 
-        this.parts = parts
+        this.parts = parts;
+
+        // Sort parts by group. Parts with the same group will share a radio input.
+        if (this.parts.length > 0) {
+            this.damageGroups = this.parts.reduce((groups, item) => {
+                const group = (groups[item.group] || []);
+                group.push(item);
+                groups[item.group] = group;
+                return groups;
+            }, {});
+        }
 
         /** Prepare selectors */
         this.selectors = {};
@@ -97,11 +107,11 @@ export default class RollDialog extends Dialog {
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
         data.contexts = this.contexts;
-        
+        data.damageGroups = this.damageGroups;
+
         if (this.parts?.length > 0) {
             data.hasDamageTypes = true;
-            
-            data.damageSections = this.parts;
+
             for(const part of this.parts) {
                 const partIndex = this.parts.indexOf(part);
 
@@ -117,10 +127,11 @@ export default class RollDialog extends Dialog {
                 // Create type string out of localized parts
                 let typeString = "";
                 if (part.types && !foundry.utils.isEmpty(part.types)) {
-                    typeString = `${(Object.entries(part.types).filter(type => type[1]).map(type => SFRPG.damageTypes[type[0]]).join(` & `))}`
+                    typeString = `${(Object.entries(part.types).filter(type => type[1]).map(type => SFRPG.damageTypes[type[0]]).join(` & `))}`;
                 }
                 part.type = typeString;
             }
+
 
             data.formula = this.formula;
             if (this.parts?.length === 1) {
@@ -133,7 +144,7 @@ export default class RollDialog extends Dialog {
 
     /**
      * Activate any event listeners.
-     * 
+     *
      * @param {JQuery} html The jQuery object that represents the HTMl content.
      */
     activateListeners(html) {
@@ -151,7 +162,8 @@ export default class RollDialog extends Dialog {
         const selectorCombobox = html.find('.selector');
         selectorCombobox.on('change', this._onSelectorChanged.bind(this));
 
-        html.find('input[class="damageSection"]').change(this._onDamageSectionToggled.bind(this));
+        html.find('input[class="damageSection"][type="radio"]').on('change', this._onDamageSectionRadio.bind(this)); // Handle radios turning each other off
+        html.find('input[class="damageSection"][type="checkbox"]').on('change', this._onDamageSectionCheckbox.bind(this));
     }
 
     async _onAdditionalBonusChanged(event) {
@@ -214,12 +226,31 @@ export default class RollDialog extends Dialog {
         this.render(false);
     }
 
-    async _onDamageSectionToggled(event) {
-        const selectorName = event.currentTarget.name;
-        const selectedValue = event.currentTarget.checked;
+    _onDamageSectionRadio(event) {
+        let damageGroups = Object.entries(this.damageGroups).map(i => i[1]);
 
-        this.parts[selectorName].enabled = selectedValue;
-        this.render(null, false);
+        const selectorGroup = event.currentTarget.name;
+        const selectorId = event.currentTarget.id;
+
+        const selectedGroup = damageGroups[selectorGroup];
+
+        selectedGroup.forEach(i => i.enabled = false);
+        selectedGroup[selectorId].enabled = event.currentTarget.checked;
+
+
+        // this.render(null, false);
+    }
+
+    _onDamageSectionCheckbox(event) {
+        let damageGroups = Object.entries(this.damageGroups).map(i => i[1]);
+
+        const selectorGroup = event.currentTarget.name;
+        const selectorId = event.currentTarget.id;
+
+        const selectedGroup = damageGroups[selectorGroup];
+
+        selectedGroup[selectorId].enabled = event.currentTarget.checked;
+        console.log(damageGroups);
     }
 
     submit(button) {
@@ -252,13 +283,13 @@ export default class RollDialog extends Dialog {
 
     /**
      * Factory method used to create a RollDialog.
-     * 
-     * @param {RollTree} rollTree 
-     * @param {string} formula 
-     * @param {RollContext} contexts 
-     * @param {Modifier[]} availableModifiers 
-     * @param {string} mainDie 
-     * @param {DialogOptions} options 
+     *
+     * @param {RollTree} rollTree
+     * @param {string} formula
+     * @param {RollContext} contexts
+     * @param {Modifier[]} availableModifiers
+     * @param {string} mainDie
+     * @param {DialogOptions} options
      * @returns {RollDialog}
      */
     static async showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
@@ -267,11 +298,11 @@ export default class RollDialog extends Dialog {
             const defaultButton = options.defaultButton || (Object.values(buttons)[0].id ?? Object.values(buttons)[0].label);
 
             const dlg = new RollDialog({
-                rollTree, 
-                formula, 
-                contexts, 
-                availableModifiers, 
-                mainDie, 
+                rollTree,
+                formula,
+                contexts,
+                availableModifiers,
+                mainDie,
                 parts: options.parts,
                 dialogData: {
                     title: options.title || game.i18n.localize("SFRPG.Rolls.Dice.Roll"),
@@ -280,7 +311,7 @@ export default class RollDialog extends Dialog {
                     close: (button, rollMode, bonus, parts) => {
                         resolve([button, rollMode, bonus, parts]);
                     }
-                }, 
+                },
                 options: options.dialogOptions || {}
             });
             dlg.render(true);
