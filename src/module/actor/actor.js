@@ -1,4 +1,4 @@
-import { SFRPG } from "../config.js"
+import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
 import { Mix } from "../utils/custom-mixer.js";
@@ -14,14 +14,14 @@ import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
 import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
 
-import { } from "./crew-update.js"
+import { } from "./crew-update.js";
 import { ItemSheetSFRPG } from "../item/sheet.js";
 import { ItemSFRPG } from "../item/item.js";
 import { hasDiceTerms } from "../utilities.js";
 
 /**
  * A data structure for storing damage statistics.
- * 
+ *
  * @typedef {Object} DamagePart
  * @property {string}                     formula  The roll formula to use.
  * @property {{[key: string]: boolean}}   types    A set of key value pairs that determines the available damage types.
@@ -35,7 +35,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
     constructor(data, context) {
         super(data, context);
-        //console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
+        // console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
     }
 
     /** @override */
@@ -47,7 +47,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
     /**
      * Augment the basic actor data with additional dynamic data.
-     * 
+     *
      * @param {Object} actorData The data for the actor
      * @returns {Promise} A promise for the automation process triggered at the end.
      */
@@ -93,7 +93,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         });
     }
 
-    
+
     /** @override */
     render(force, context={}) {
         /** Clear out deleted item sheets. */
@@ -122,7 +122,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      */
     prepareBaseData() { super.prepareBaseData(); }
     prepareDerivedData() { super.prepareDerivedData(); }
-    
+
     /**
      * Extend the default update method to enhance data before submission.
      * See the parent Entity.update method for full details.
@@ -148,7 +148,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     /**
      * Extend OwnedItem creation logic for the SFRPG system to make weapons proficient by default when dropped on a NPC sheet
      * See the base Actor class for API documentation of this method
-     * 
+     *
      * @param {String} embeddedName The type of Entity being embedded.
      * @param {Object} itemData The data object of the item
      * @param {Object} options Any options passed in
@@ -158,7 +158,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         for (const item of itemData) {
             if (!this.hasPlayerOwner) {
                 let t = item.type;
-                let initial = {};           
+                let initial = {};
                 if (t === "weapon") initial['system.proficient'] = true;
                 if (["weapon", "equipment"].includes(t)) initial['system.equipped'] = true;
                 if (t === "spell") initial['system.prepared'] = true;
@@ -170,7 +170,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         return super.createEmbeddedDocuments(embeddedName, itemData, options);
     }
-    
+
     /*
      * Extend preCreate to apply some defaults to newly created characters
      * See the base Actor class for API documentation of this method
@@ -182,26 +182,26 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      */
     async _preCreate(data, options, user) {
         const autoLinkedTypes = ['character', 'drone'];
-        let updates = {}
-        
+        let updates = {};
+
         // Auto link PCs and drones
         if (autoLinkedTypes.includes(this.type)) {
             updates.prototypeToken = { actorLink:  true };
-        };
-        
+        }
+
         // Auto add unarmed strike if setting is enabled
         if (this.type === "character" && game.settings.get("sfrpg", "autoAddUnarmedStrike")) {
             const ITEM_UUID = "Compendium.sfrpg.equipment.AWo4DU0s18agsFtJ"; // Unarmed strike
             const source = (await fromUuid(ITEM_UUID)).toObject();
             source.flags = mergeObject(source.flags ?? {}, { core: { sourceId: ITEM_UUID } });
-            
-            updates.items = [source];
-        };
 
-        this.updateSource(updates)
-        
-        return super._preCreate(data, options, user)
-    };
+            updates.items = [source];
+        }
+
+        this.updateSource(updates);
+
+        return super._preCreate(data, options, user);
+    }
 
     /*
      * Extend preUpdate to clamp certain PC changes
@@ -334,7 +334,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             processContext.then(function(result) {
                 return item.roll();
             });
-            
+
             return processContext;
         }
 
@@ -356,7 +356,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const formData = await AddEditSkillDialog.create(skillId, skill, true, isNpc, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
-            value = Boolean(formData.get('value')) ? 3 : 0,
+            value = formData.get('value') ? 3 : 0,
             misc = Number(formData.get('misc')),
             notes = String(formData.get('notes')),
             ranks = Number(formData.get('ranks')),
@@ -399,7 +399,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         for (let [key, value] of formData.entries()) {
             enabledSkills[`system.${key}`] = Boolean(value);
         }
-        
+
         enabledSkills = mergeObject(enabledSkills, delta, {overwrite: false, inplace: false});
 
         return await this.update(enabledSkills);
@@ -430,7 +430,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const formData = await AddEditSkillDialog.create(skillId, skill, false, this.hasPlayerOwner, this.isOwner),
             isTrainedOnly = Boolean(formData.get('isTrainedOnly')),
             hasArmorCheckPenalty = Boolean(formData.get('hasArmorCheckPenalty')),
-            value = Boolean(formData.get('value')) ? 3 : 0,
+            value = formData.get('value') ? 3 : 0,
             misc = Number(formData.get('misc')),
             ranks = Number(formData.get('ranks')),
             ability = formData.get('ability'),
@@ -492,20 +492,20 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
     /**
      * Roll a generic ability test.
-     * 
+     *
      * @param {String} abilityId The ability id (e.g. "str")
      * @param {Object} options Options which configure how ability tests are rolled
      */
     async rollAbility(abilityId, options = {}) {
         const label = CONFIG.SFRPG.abilities[abilityId];
         const abl = this.system.abilities[abilityId];
-        
+
         const parts = [];
         const data = this.getRollData();
 
         const rollContext = RollContext.createActorRollContext(this);
 
-        //Include ability check bonus only if it's not 0
+        // Include ability check bonus only if it's not 0
         if(abl.abilityCheckBonus) {
             parts.push('@abilityCheckBonus');
             data.abilityCheckBonus = abl.abilityCheckBonus;
@@ -528,7 +528,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
     /**
      * Roll a save check
-     * 
+     *
      * @param {String} saveId The save id (e.g. "will")
      * @param {Object} options Options which configure how saves are rolled
      */
@@ -557,8 +557,8 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const rollContext = RollContext.createActorRollContext(this);
         const parts = [`@skills.${skillId}.mod`];
 
-        const title = skillId.includes('pro') ? 
-            game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname }) : 
+        const title = skillId.includes('pro') ?
+            game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname }) :
             game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
 
         return await DiceSFRPG.d20Roll({
@@ -566,7 +566,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             rollContext: rollContext,
             parts: parts,
             title: title,
-            flavor: TextEditor.enrichHTML(skill.notes, {async: false}),
+            flavor: TextEditor.enrichHTML(skill.notes, {
+                async: false,
+                rollData: this.getRollData() ?? {}
+            }),
             speaker: ChatMessage.getSpeaker({ actor: this }),
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
@@ -874,7 +877,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     }
                     rollContext.addContext("captain", actor, crewMemberActorData);
                 }
-        
+
                 /** Add player pilot if available. */
                 if (crewActorData.pilot?.actors?.length > 0) {
                     const actor = crewActorData.pilot.actors[0];
@@ -886,7 +889,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     }
                     rollContext.addContext("pilot", actor, crewMemberActorData);
                 }
-        
+
                 /** Add remaining roles if available. */
                 const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
                 const allCrewMates = ["minorCrew", "openCrew"];
@@ -930,7 +933,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                             }
                         }
                     }
-        
+
                     if (desiredSelectors.includes(crewType)) {
                         rollContext.addSelector(crewType, crew);
                     }
@@ -950,7 +953,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 }
 
 Hooks.on("afterClosureProcessed", async (closureName, fact) => {
-    if (closureName == "process-actors") {
+    if (closureName === "process-actors") {
         await fact.actor.processItemData();
     }
 });
