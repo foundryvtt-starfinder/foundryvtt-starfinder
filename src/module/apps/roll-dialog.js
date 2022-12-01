@@ -227,7 +227,7 @@ export default class RollDialog extends Dialog {
     }
 
     _onDamageSectionRadio(event) {
-        let damageGroups = Object.entries(this.damageGroups).map(i => i[1]);
+        let damageGroups = this.damageGroups;
 
         const selectorGroup = event.currentTarget.name;
         const selectorId = event.currentTarget.id;
@@ -242,7 +242,7 @@ export default class RollDialog extends Dialog {
     }
 
     _onDamageSectionCheckbox(event) {
-        let damageGroups = Object.entries(this.damageGroups).map(i => i[1]);
+        let damageGroups = this.damageGroups;
 
         const selectorGroup = event.currentTarget.name;
         const selectorId = event.currentTarget.id;
@@ -250,7 +250,6 @@ export default class RollDialog extends Dialog {
         const selectedGroup = damageGroups[selectorGroup];
 
         selectedGroup[selectorId].enabled = event.currentTarget.checked;
-        console.log(damageGroups);
     }
 
     submit(button) {
