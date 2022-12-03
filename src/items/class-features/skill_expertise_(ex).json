@@ -2,28 +2,33 @@
   "_id": "0HPp0nK0L1VawPYN",
   "name": "Skill Expertise (Ex)",
   "type": "feat",
-  "flags": {},
-  "img": "systems/sfrpg/icons/classes/skill_expertise.webp",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1670034377592,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1670040431251,
+    "systemId": "sfrpg",
+    "systemVersion": "0.22.0"
   },
+  "effects": [],
+  "img": "systems/sfrpg/icons/classes/skill_expertise.webp",
   "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -35,42 +40,205 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"fqYiP2f9oSfcmrwC\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Envoy</a></p>\n        <p>At 1st level and every 4 levels thereafter, you can use expertise with one additional class skill. You must have at least 1 rank in a skill to select it, and it must come from the following list: Bluff (Cha), Computers (Int), Culture (Int), Diplomacy (Cha), Disguise (Cha), Engineering (Int), Intimidate (Cha), and Medicine (Int).</p>"
+      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"fqYiP2f9oSfcmrwC\" draggable=\"true\"> </a>@UUID[Compendium.sfrpg.classes.fqYiP2f9oSfcmrwC]{Envoy}</p><p>At 1st level and every 4 levels thereafter, you can use expertise with one additional class skill. You must have at least 1 rank in a skill to select it, and it must come from the following list: @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.GcVVfpQ79HdcMqBt]{Bluff (Cha)}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.IqOCYDKd9NgBwowp]{Computers (Int)}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.LeZmnFwnlB89ovBB]{Culture (Int)}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.1tzIBDaDAO4hmX5C]{Diplomacy (Cha)}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.aayAhTaRzitONs5U]{Disguise (Cha)}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4]{Engineering (Int)}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i]{Intimidate (Cha)}, and @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.d4fcGwOcrsuYrwGH]{Medicine (Int)}.</p><p><br><em>Select skill expertise in the Modifiers tab.</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "d07b67b1-2c1b-4cc2-95fd-732f4e18085d",
+        "name": "Skill Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "blu"
+      },
+      {
+        "_id": "f9122022-a833-4255-b2dd-f099c9907f1a",
+        "name": "Skill Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "com"
+      },
+      {
+        "_id": "9e32331a-44c8-47b4-b03c-aa974f22e2d6",
+        "name": "Skill Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cul"
+      },
+      {
+        "_id": "1d5a7290-2d30-44f9-9241-93085f365111",
+        "name": "Skill Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dip"
+      },
+      {
+        "_id": "ee04123d-b96e-402f-a422-0bc52a49f92e",
+        "name": "Skill Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      },
+      {
+        "_id": "d144adf8-8f7f-4897-919d-37053bbe2e7d",
+        "name": "Skill Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eng"
+      },
+      {
+        "_id": "ddda1a90-8de0-44e4-ab5f-7466f3d01911",
+        "name": "Skill Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "int"
+      },
+      {
+        "_id": "de6ecf92-2702-4da2-a331-a0b823a10b0c",
+        "name": "Skill Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "med"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "1st Level",
+    "requirements": "1st Level (Envoy)",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Envoy",
+    "source": "CRB, pg. 61",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
       "max": 0,
-      "per": null,
+      "per": "",
       "value": 0
     }
   }

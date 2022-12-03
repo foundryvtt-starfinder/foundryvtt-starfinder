@@ -2,8 +2,15 @@
   "_id": "jPl2o74GP8AHH4Zx",
   "name": "Signature Clothing (Ex)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1670034377592,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1670039334172,
+    "systemId": "sfrpg",
+    "systemVersion": "0.22.0"
+  },
   "effects": [],
-  "flags": {},
   "img": "systems/sfrpg/icons/equipment/armor/lashunta-tempweave-basic.webp",
   "system": {
     "type": "",
@@ -11,17 +18,18 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "none",
+      "value": null
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -38,27 +46,200 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.class-features.rScW5xGzTF62Xhdy]{Signature Item (Ex)}</p>\n<p>Your signature item is a worn garment that doesn&rsquo;t provide an armor bonus, such as a hat or a complete outfit (Core Rulebook 230). When you gain your signature clothing, select two skills from the following to which you apply skill expertise: Bluff, Culture, Diplomacy, Disguise, or Intimidate. In addition, whenever you select an expertise talent associated with one of these skills, you also gain an expertise talent for the second skill. You can only use the skill expertise and expertise talents for one of these two skills at a time, but once per hour, as a standard action, you can adjust your signature clothing (such as by reversing your jacket or dramatically straightening your hat) to change which of the two skills&rsquo; benefits you can use. You can use this ability an additional time per hour by spending 1 Resolve Point for each additional use. Once per day, before rolling your expertise die as part of a skill check for one of these skills, you can choose to roll your expertise die twice and take the better result.</p>\n<p>Additional skills you select with skill expertise function normally, as do the expertise talents you qualify for based on these additional skills.</p>"
+      "value": "<p>&gt;@Compendium[sfrpg.class-features.rScW5xGzTF62Xhdy]{Signature Item (Ex)}</p><p>Your signature item is a worn garment that doesn’t provide an armor bonus, such as a hat or a complete outfit (Core Rulebook 230). When you gain your signature clothing, select two skills from the following to which you apply skill expertise: @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.GcVVfpQ79HdcMqBt]{Bluff}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.LeZmnFwnlB89ovBB]{Culture}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.1tzIBDaDAO4hmX5C]{Diplomacy}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.aayAhTaRzitONs5U]{Disguise}, or @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i]{Intimidate}. In addition, whenever you select an expertise talent associated with one of these skills, you also gain an expertise talent for the second skill. You can only use the skill expertise and expertise talents for one of these two skills at a time, but once per hour, as a standard action, you can adjust your signature clothing (such as by reversing your jacket or dramatically straightening your hat) to change which of the two skills’ benefits you can use. You can use this ability an additional time per hour by spending 1 Resolve Point for each additional use. Once per day, before rolling your expertise die as part of a skill check for one of these skills, you can choose to roll your expertise die twice and take the better result.</p><p>Additional skills you select with skill expertise function normally, as do the expertise talents you qualify for based on these additional skills.</p><p><em><br>Select skill expertise in the Modifiers tab.</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "d07b67b1-2c1b-4cc2-95fd-732f4e18085d",
+        "name": "Signature Clothing (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "blu"
+      },
+      {
+        "_id": "f9122022-a833-4255-b2dd-f099c9907f1a",
+        "name": "Signature Clothing (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "com"
+      },
+      {
+        "_id": "9e32331a-44c8-47b4-b03c-aa974f22e2d6",
+        "name": "Signature Clothing (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cul"
+      },
+      {
+        "_id": "1d5a7290-2d30-44f9-9241-93085f365111",
+        "name": "Signature Clothing (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dip"
+      },
+      {
+        "_id": "ee04123d-b96e-402f-a422-0bc52a49f92e",
+        "name": "Signature Clothing (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      },
+      {
+        "_id": "d144adf8-8f7f-4897-919d-37053bbe2e7d",
+        "name": "Signature Clothing (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eng"
+      },
+      {
+        "_id": "ddda1a90-8de0-44e4-ab5f-7466f3d01911",
+        "name": "Signature Clothing (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "int"
+      },
+      {
+        "_id": "de6ecf92-2702-4da2-a331-a0b823a10b0c",
+        "name": "Signature Clothing (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "med"
+      },
+      {
+        "_id": "744a7322-a3bc-4b47-a812-d17f2b7a0f83",
+        "name": "Signature Clothing (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 6,
+        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sen"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "",
+    "requirements": "1st Level (Envoy)",
     "rollNotes": "",
     "save": {
       "type": "",
@@ -68,11 +249,11 @@
     "source": "TR pg. 20",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
       "max": 0,
-      "per": null,
+      "per": "",
       "value": 0
     }
   }

@@ -2,28 +2,33 @@
   "_id": "a14dTDNr3SSInCHx",
   "name": "Motivation Expertise (Ex)",
   "type": "feat",
-  "flags": {},
-  "img": "icons/svg/mystery-man.svg",
-  "permission": {
-    "QqVQDajn5ZN4kl25": 3,
-    "default": 0
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1670034377592,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1670040389072,
+    "systemId": "sfrpg",
+    "systemVersion": "0.22.0"
   },
+  "effects": [],
+  "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "heal",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -33,44 +38,238 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "name": "",
+          "formula": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@Compendium[sfrpg.classes.fqYiP2f9oSfcmrwC]{Envoy}</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\">You’re an expert at making people happy and high-spirited, allowing them to press forward when they might otherwise quit. You gain an expertise die of the same value as that granted to an envoy of your level by the expertise class feature. At 1st level, whenever you take an action that restores a creature’s Stamina Points or Hit Points, you can restore additional Stamina Points equal to the result of the roll of your expertise die. You can still use your expertise die on Sense Motive checks, but you always add the minimum possible result. This is also true for any skills you select with skill expertise.<br><br><strong>This replaces expertise.</strong></span></p>"
+      "value": "<p>&gt;<a class=\"entity-link\" data-pack=\"sfrpg.classes\" data-id=\"fqYiP2f9oSfcmrwC\" draggable=\"true\"> </a>@UUID[Compendium.sfrpg.classes.fqYiP2f9oSfcmrwC]{Envoy}</p><p><span id=\"ctl00_MainContent_DetailedOutput\">You’re an expert at making people happy and high-spirited, allowing them to press forward when they might otherwise quit. You gain an expertise die of the same value as that granted to an envoy of your level by the expertise class feature. At 1st level, whenever you take an action that restores a creature’s Stamina Points or Hit Points, you can restore additional Stamina Points equal to the result of the roll of your expertise die. You can still use your expertise die on @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.nBrYkGfNBJAHe0xJ]{Sense Motive} checks, but you always add the minimum possible result. This is also true for any skills you select with skill expertise.<br><br><strong>This replaces expertise.</strong></span></p><p><br><em>Select skill expertise in the Modifiers tab.</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "formula": "",
-    "modifiers": [],
+    "isActive": null,
+    "modifiers": [
+      {
+        "_id": "d07b67b1-2c1b-4cc2-95fd-732f4e18085d",
+        "name": "Motivation Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "blu"
+      },
+      {
+        "_id": "f9122022-a833-4255-b2dd-f099c9907f1a",
+        "name": "Motivation Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "com"
+      },
+      {
+        "_id": "9e32331a-44c8-47b4-b03c-aa974f22e2d6",
+        "name": "Motivation Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cul"
+      },
+      {
+        "_id": "1d5a7290-2d30-44f9-9241-93085f365111",
+        "name": "Motivation Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dip"
+      },
+      {
+        "_id": "ee04123d-b96e-402f-a422-0bc52a49f92e",
+        "name": "Motivation Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "dis"
+      },
+      {
+        "_id": "d144adf8-8f7f-4897-919d-37053bbe2e7d",
+        "name": "Motivation Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "eng"
+      },
+      {
+        "_id": "ddda1a90-8de0-44e4-ab5f-7466f3d01911",
+        "name": "Motivation Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "int"
+      },
+      {
+        "_id": "de6ecf92-2702-4da2-a331-a0b823a10b0c",
+        "name": "Motivation Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "med"
+      },
+      {
+        "_id": "ea86fdd3-9673-4988-9051-a09d962934df",
+        "name": "Motivation Expertise (Ex)",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 1,
+        "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sen"
+      }
+    ],
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "1st Level",
+    "requirements": "1st Level (Envoy)",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "Envoy - Alternate Class Feature",
+    "source": "COM, pg. 68",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
       "max": 0,
-      "per": null,
+      "per": "",
       "value": 0
     }
   }

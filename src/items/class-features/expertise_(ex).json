@@ -2,7 +2,15 @@
   "_id": "OzwMoyrdE3fcNZLP",
   "name": "Expertise (Ex)",
   "type": "feat",
-  "flags": {},
+  "_stats": {
+    "coreVersion": "10.288",
+    "createdTime": 1670034625543,
+    "lastModifiedBy": "SPRszH5sDdJlGxJn",
+    "modifiedTime": 1670040279312,
+    "systemId": "sfrpg",
+    "systemVersion": "0.22.0"
+  },
+  "effects": [],
   "img": "systems/sfrpg/icons/classes/expertise.webp",
   "system": {
     "type": "",
@@ -10,16 +18,17 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
       "cost": 0
     },
     "area": {
       "effect": "",
       "shape": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "attackBonus": 0,
@@ -31,17 +40,58 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>&gt;@Compendium[sfrpg.classes.fqYiP2f9oSfcmrwC]{Envoy}</p>\n<p>You are an expert at dealing with challenges that test your skills, be the challenges social or otherwise. At 1st level, when attempting a Sense Motive check, you can roll 1d6 (your expertise die) and add the result of the roll to your check as an insight bonus. You can use this and other expertise abilities as long as you have at least 1 Resolve Point remaining. At 5th level, anytime you roll your expertise die, you gain a +1 bonus to the result. At 9th, 17th, and 20th levels, this bonus increases by 1. At 13th level, you roll 1d8 as your expertise die instead of 1d6.<br><br>Beginning at 9th level, you have even greater expertise with skills to which you can add your expertise die that you have also selected with the @Compendium[sfrpg.feats.dkDzFtHOTXLnJivf]{Skill Focus} feat. For each such skill, once per day when rolling your expertise die to add to that skill, you may roll the expertise die twice and take the better of the two results.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "duration": {
       "units": "",
-      "value": null
+      "value": ""
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [
       {
         "_id": "54a9db67-f976-49ad-bd7c-75cb89b7cd4c",
@@ -52,7 +102,7 @@
         "enabled": true,
         "max": 6,
         "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
-        "modifierType": "formula",
+        "modifierType": "constant",
         "notes": "At 1st level, when attempting a Sense Motive check, you can roll 1d6 (your expertise die) and add the result of the roll to your check as an insight bonus. You can use this and other expertise abilities as long as you have at least 1 Resolve Point remaining. At 5th level, anytime you roll your expertise die, you gain a +1 bonus to the result. At 9th, 17th, and 20th levels, this bonus increases by 1. At 13th level, you roll 1d8 as your expertise die instead of 1d6.",
         "source": "Expertise",
         "subtab": "misc",
@@ -62,27 +112,28 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "1st Level",
+    "requirements": "1st Level (Envoy)",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Envoy",
+    "source": "CRB, pg. 61",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
       "max": 0,
-      "per": null,
+      "per": "",
       "value": 0
     }
   }
