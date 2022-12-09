@@ -1582,6 +1582,7 @@ SFRPG.capacityUsagePer = {
     "minute": "SFRPG.Capacity.UsagePer.Minute",
     "minute10": "SFRPG.Capacity.UsagePer.Minute10",
     "hour": "SFRPG.Capacity.UsagePer.Hour",
+    "hour8": "SFRPG.Capacity.UsagePer.Hour8",
     "day": "SFRPG.Capacity.UsagePer.Day"
 };
 
