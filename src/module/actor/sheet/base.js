@@ -177,13 +177,16 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
         if (!this.options.editable) return;
-        
+
         html.find('.config-button').click(this._onConfigMenu.bind(this));
 
         html.find('.toggle-container').click(this._onToggleContainer.bind(this));
 
         html.find('.skill-proficiency').on("click contextmenu", this._onCycleClassSkill.bind(this));
         html.find('.trait-selector').click(this._onTraitSelector.bind(this));
+
+        // Skill Compendium
+        html.find('.compendium-link').click(this._onOpenSkillCompendium.bind(this));
 
         // Ability Checks
         html.find('.ability-name').click(this._onRollAbilityCheck.bind(this));
@@ -684,6 +687,23 @@ export class ActorSheetSFRPG extends ActorSheet {
             resourceItem.update({"system.base": newBaseValue});
         } else {
             resourceItem.update({"system.base": 0});
+        }
+    }
+
+    /**
+     * Handle Compendium Link Click
+     * @param {Event} event   The originating click event
+     */
+    async _onOpenSkillCompendium(event) {
+        event.preventDefault();
+        const uuid = CONFIG.SFRPG.skillCompendium[event.currentTarget.dataset.skillId];
+        const document = await fromUuid(uuid);
+
+        // Open document
+        if (document instanceof JournalEntryPage) {
+            document.parent.sheet.render(true, { pageId: document.id });
+        } else {
+            document.sheet.render(true);
         }
     }
 
