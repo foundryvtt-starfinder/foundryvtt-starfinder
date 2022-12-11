@@ -99,9 +99,12 @@
             </div>
         </div>
         <div class="damage-part-formula form-group">
-            <label>{{ localize "SFRPG.Damage.Types.DamageGroup" }}</label>
+            <label>{{ localize "SFRPG.Damage.Types.DamageGroup" group=""}}</label>
             <div class="form-fields">
-                <input type="number" name="system.damage.parts.{{i}}.group" value="{{lookup this "group"}}"/>
+                <input type="number" name="system.damage.parts.{{i}}.group" value="{{lookup this "group"}}" data-tooltip="
+                <strong>{{ localize 'SFRPG.Damage.Types.DamageGroup' group=''}}</strong>
+                <br>
+                <p>{{ localize 'SFRPG.Damage.Types.DamageGroupTooltip' group=''}}</p>"/>
             </div>
         </div>
         <div class="damage-part-type form-group stacked">
